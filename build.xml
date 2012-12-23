@@ -125,6 +125,17 @@
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile, compile-native">
+		<javac debug="yes" destdir="${lwjgl.bin}/Tests" source="1.5" target="1.5" taskname="Tests compilation">
+			<classpath>
+				<pathelement path="${lwjgl.bin.core}"/>
+				<pathelement path="${lwjgl.bin.util}"/>
+				<pathelement path="${lwjgl.lib}/testng.jar"/>
+			</classpath>
+
+			<src path="${lwjgl.src}/tests/"/>
+			<include name="org/lwjgl/**"/>
+		</javac>
+
 		<testng outputDir="${lwjgl.tests.output}">
 			<classpath>
 				<pathelement path="${lwjgl.lib}/jcommander.jar"/>
