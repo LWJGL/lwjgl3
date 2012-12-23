@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
+<suite name="LWJGL Core Tests">
+	<test name="LWJGL 3.0">
+		<packages>
+			<package name="org.lwjgl"/>
+			<package name="org.lwjgl.system"/>
+		</packages>
+	</test>
+</suite>
