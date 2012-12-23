@@ -13,7 +13,7 @@ Bugs/Suggestions: [https://github.com/LWJGL/lwjgl/issues](https://github.com/LWJ
 Compilation
 -----------
 
-LWJGL requires a JDK and Ant installed to compile, as well as your platforms native compiler to compile the JNI.
+LWJGL requires a JDK and Ant installed to compile, as well as your platform's native compiler to compile the JNI.
 
 * ant compile-templates
 * ant compile
