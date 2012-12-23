@@ -13,16 +13,16 @@ Module: Core
 
 Module: Utilities
 	Description: Optional LWJGL components and helper functionality.
-    Module Dependencies: Core
+	Module Dependencies: Core
 	Structure:
 		* src/util
 
 Module: Templates
 	Description: The source code Generator and the templates it uses to defined the native bindings.
-    Module Dependencies: Core
-    Library Dependencies: Kotlin runtime
-    Structure:
-        * src/templates
+	Module Dependencies: Core
+	Library Dependencies: Kotlin runtime
+	Structure:
+		* src/templates
 
 Module: Tests
 	Description: Unit tests and demo/tutorial code.
@@ -69,8 +69,8 @@ The config folder contains the LWJGL configuration.
 		- Platform-specific definitions: A folder per platform
 
 	* TestNG
-	    - config/tests.xml
-	    - a config/tests_<platform>.xml per platform
+		- config/tests.xml
+		- a config/tests_<platform>.xml per platform
 
 	* Kotlin
 		- config/Templates.kts is the build script used by the Kotlin compiler
