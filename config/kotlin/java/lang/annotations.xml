@@ -1,0 +1,12 @@
+<root>
+	<item name='java.lang.Void TYPE'>
+		<annotation name='jet.runtime.typeinfo.KotlinSignature'>
+			<val name="value" val="&quot;val TYPE : Class&lt;Void&gt;&quot;"/>
+		</annotation>
+	</item>
+	<item name='java.lang.Class java.lang.Class&lt;?&gt; forName(java.lang.String)'>
+		<annotation name='jet.runtime.typeinfo.KotlinSignature'>
+			<val name="value" val="&quot;fun forName(className : String) : Class&lt;out Any?&gt;&quot;"/>
+		</annotation>
+	</item>
+</root>

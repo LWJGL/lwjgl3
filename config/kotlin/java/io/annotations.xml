@@ -1,0 +1,7 @@
+<root>
+	<item name='java.io.FileInputStream java.nio.channels.FileChannel getChannel()'>
+		<annotation name='jet.runtime.typeinfo.KotlinSignature'>
+			<val name="value" val="&quot;fun getChannel() : FileChannel&quot;"/>
+		</annotation>
+	</item>
+</root>

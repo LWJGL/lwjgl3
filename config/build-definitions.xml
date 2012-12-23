@@ -1,0 +1,66 @@
+<project name="definitions">
+	<!-- ================================================================== -->
+	<!-- Global properties for build 																				-->
+	<!-- ================================================================== -->
+	<property name="lwjgl.src" location="src"/>
+	<property name="lwjgl.generated" location="generated"/>
+	<property name="lwjgl.bin" location="bin"/>
+	<property name="lwjgl.lib" location="libs"/>
+	<property name="lwjgl.version" value="3.0.0"/>
+
+	<property name="lwjgl.src.core" location="${lwjgl.src}/core"/>
+	<property name="lwjgl.src.util" location="${lwjgl.src}/util"/>
+	<property name="lwjgl.src.templates" location="${lwjgl.src}/templates"/>
+	<property name="lwjgl.src.tests" location="${lwjgl.src}/tests"/>
+
+	<property name="lwjgl.src.native" location="${lwjgl.src}/native"/>
+
+	<property name="lwjgl.generated.java" location="${lwjgl.generated}/java"/>
+	<property name="lwjgl.generated.native" location="${lwjgl.generated}/native"/>
+
+	<property name="lwjgl.bin.core" location="${lwjgl.bin}/Core"/>
+	<property name="lwjgl.bin.util" location="${lwjgl.bin}/Utilities"/>
+	<property name="lwjgl.bin.templates" location="${lwjgl.bin}/Templates"/>
+	<property name="lwjgl.bin.tests" location="${lwjgl.bin}/Tests"/>
+	<!-- Different location per architecture. This is intentional. -->
+	<property name="lwjgl.bin.native" location="${lwjgl.bin}/lwjgl${os.arch}"/>
+
+	<property name="lwjgl.tests.output" location="${lwjgl.generated}/tests"/>
+
+	<property name="kotlinc" location="${lwjgl.lib}/kotlinc/lib"/>
+
+	<condition property="lwjgl.platform.windows">
+		<os family="Windows"/>
+	</condition>
+	<condition property="lwjgl.platform.linux">
+		<os name="Linux"/>
+	</condition>
+	<condition property="lwjgl.platform.freebsd">
+		<os name="FreeBSD"/>
+	</condition>
+	<condition property="lwjgl.platform.solaris">
+		<os name="SunOS"/>
+	</condition>
+	<condition property="lwjgl.platform.macosx">
+		<os name="Mac OS X"/>
+	</condition>
+
+	<condition property="lwjgl.platform" value="windows">
+		<isset property="lwjgl.platform.windows"/>
+	</condition>
+	<condition property="lwjgl.platform" value="linux">
+		<isset property="lwjgl.platform.linux"/>
+	</condition>
+	<condition property="lwjgl.platform" value="freebsd">
+		<isset property="lwjgl.platform.freebsd"/>
+	</condition>
+	<condition property="lwjgl.platform" value="solaris">
+		<isset property="lwjgl.platform.solaris"/>
+	</condition>
+	<condition property="lwjgl.platform" value="macosx">
+		<isset property="lwjgl.platform.macosx"/>
+	</condition>
+
+	<property name="lwjgl.lib.bin" location="${lwjgl.lib}/${lwjgl.platform}"/>
+
+</project>

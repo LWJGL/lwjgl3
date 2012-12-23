@@ -1,0 +1,86 @@
+<project name="lwjgl native code, native code" basedir="../../bin" default="compile">
+	<property name="dest" location="lwjgl${os.arch}"/>
+
+	<property name="src" location="../src"/>
+	<property name="src.native" location="${src}/native"/>
+	<property name="src.generated" location="../generated/native"/>
+
+	<property environment="env"/>
+
+	<property name="sdkhome" location="${env.MSSDK}"/>
+	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib jawt.lib delayimp.lib winmm.lib Comctl32.lib"/>
+
+	<condition property="sdkhomelib" value="${sdkhome}\lib" else="${sdkhome}\lib\x64">
+		<equals arg1="${os.arch}" arg2="x86"/>
+	</condition>
+
+	<condition property="dllname" value="lwjgl.dll" else="lwjgl64.dll">
+		<equals arg1="${os.arch}" arg2="x86"/>
+	</condition>
+
+	<target name="compile_dir">
+		<apply dir="${dest}" failonerror="true" executable="cl" dest="${dest}" skipemptyfilesets="true">
+			<arg line="/Ox /W2 /nologo /Ox /Ob2 /Oi /Ot /Oy /FD /EHsc /MT /Gy /W2 /nologo /c"/>
+			<arg value="/I${sdkhome}\include"/>
+			<arg value="/I${java.home}\..\include"/>
+			<arg value="/I${java.home}\..\include\win32"/>
+			<!--<arg value="/I${native}\common"/>
+			<arg value="/I${native}\common\opengl"/>
+			<arg value="/I${native}\windows"/>
+			<arg value="/I${native}\windows\opengl"/>-->
+			<arg value="/I${src.native}\system"/>
+			<arg value="/I${src.native}\system\windows"/>
+			<arg value="/I${src.native}\opengl"/>
+			<arg value="/I${src.generated}\system"/>
+			<arg value="/I${src.generated}\system\windows"/>
+			<arg value="/I${src.generated}\opengl"/>
+			<srcfile/>
+<!--
+			<fileset dir="${native}/common" includes="*.c"/>
+			<fileset dir="${native}/common/opengl" includes="*.c"/>
+			<fileset dir="${native}/generated/openal" includes="*.c"/>
+			<fileset dir="${native}/generated/opencl" includes="*.c"/>
+			<fileset dir="${native}/generated/opengl" includes="*.c"/>
+			<fileset dir="${native}/windows" includes="*.c"/>
+			<fileset dir="${native}/windows/opengl" includes="*.c"/>
+-->
+			<fileset dir="${src.native}/system" includes="*.c"/>
+			<fileset dir="${src.native}/system/windows" includes="*.c"/>
+			<fileset dir="${src.generated}/system" includes="*.c"/>
+			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
+			<fileset dir="${src.generated}/opengl" includes="*.c"/>
+			<mapper type="glob" from="*.c" to="*.obj"/>
+		</apply>
+	</target>
+
+	<target name="link">
+		<apply dir="${dest}" parallel="true" executable="cl" failonerror="true">
+			<arg line="/LD /nologo"/>
+			<srcfile/>
+			<arg line="/Fe${dllname} /link"/>
+			<arg value="/LIBPATH:${java.home}\..\lib"/>
+			<arg value="/LIBPATH:${sdkhomelib}"/>
+			<arg value="/OPT:REF"/>
+			<arg value="/OPT:ICF"/>
+			<arg line="/DLL ${libs}"/>
+			<fileset dir="${dest}" includes="*.obj"/>
+		</apply>
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="." includes="*.obj"/>
+			<fileset dir="." includes="*.dll"/>
+			<fileset dir="." includes="*.exp"/>
+			<fileset dir="." includes="*.lib"/>
+		</delete>
+	</target>
+
+	<target name="compile">
+		<echo message="${sdkhomelib}"/>
+
+		<antcall target="compile_dir"/>
+		<antcall target="link"/>
+    </target>
+</project>
+
