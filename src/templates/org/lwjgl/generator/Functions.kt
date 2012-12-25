@@ -245,7 +245,7 @@ public class NativeClassFunction(
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
 		// So we need to scale the length check by the number of bytes per element.
-		fun bufferShift(var expression: String, param: String, shift: String, transform: FunctionTransform<out QualifiedType>?): String {
+		fun bufferShift(expression: String, param: String, shift: String, transform: FunctionTransform<out QualifiedType>?): String {
 			val mapping =
 				if ( transform != null && javaClass<AutoTypeTargetTransform>().isAssignableFrom(transform.javaClass) ) {
 					(transform as AutoTypeTargetTransform).autoType
@@ -255,7 +255,7 @@ public class NativeClassFunction(
 			if ( mapping.byteShift == null )
 				return expression
 
-			var builder = StringBuilder(expression.size + 8)
+			val builder = StringBuilder(expression.size + 8)
 
 			if ( expression.indexOf(' ') != -1 ) {
 				builder append '('
@@ -310,7 +310,7 @@ public class NativeClassFunction(
 
 			if ( it has Check.CLASS ) {
 				val transform = transforms?.get(it)
-				if ( transform == null || (transform != BufferOffsetTransform && transform != BufferValueParameterTransform) ) {
+				if ( transform == null || (transform != BufferOffsetTransform && transform != BufferValueParameterTransform && transform != SingleValueTransform) ) {
 					val check = it[Check.CLASS]
 
 					if ( check.bytes )
@@ -337,8 +337,13 @@ public class NativeClassFunction(
 					for ( d in autoSize.dependent )
 						checks add "${prefix}checkBuffer($d, ${bufferShift(length, d, "<<", null)});"
 				} else {
+					val expression = if ( transforms != null && transforms[parameters[autoSize.reference]] == SingleValueTransform )
+						"1"
+					else
+						"${autoSize.reference}.remaining()"
+
 					for ( d in autoSize.dependent )
-						checks add "${prefix}checkBuffer($d, ${autoSize.reference}.remaining());"
+						checks add "${prefix}checkBuffer($d, $expression);"
 				}
 			}
 		}
@@ -487,10 +492,10 @@ public class NativeClassFunction(
 			if ( it.nativeType is CharSequenceType )
 				transforms[it] = CharSequenceTransform
 			else if ( it has AutoSize.CLASS ) {
-				var autoSize = it[AutoSize.CLASS]
+				val autoSize = it[AutoSize.CLASS]
 				// Check if there's also an AutoType on the referenced parameter. Skip if so.
 				if ( getReferenceParam(AutoType.CLASS, autoSize.reference) == null )
-					transforms[it] = AutoSizeTransform
+					transforms[it] = AutoSizeTransform(parameters[autoSize.reference]!!)
 			} else if ( it has Expression.CLASS )
 				transforms[it] = ExpressionTransform
 		}
@@ -545,7 +550,7 @@ public class NativeClassFunction(
 
 				// Add the AutoSize transformation if we skipped it above
 				getParams { it has AutoSize.CLASS } forEach {
-					transforms[it] = AutoSizeTransform
+					transforms[it] = AutoSizeTransform(parameters[it[AutoSize.CLASS].reference]!!)
 				}
 
 				val autoTypes = it[AutoType.CLASS]
@@ -569,7 +574,7 @@ public class NativeClassFunction(
 					if ( unsignedType == null || !types.contains(unsignedType) )
 						continue
 
-					transforms[it] = AutoTypeParamWithSignTransform(unsignedType.name(), autoType.name())
+					transforms[it] = AutoTypeParamWithSignTransform("GL11.${unsignedType.name()}", "GL11.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(strippedName, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 
@@ -578,7 +583,7 @@ public class NativeClassFunction(
 				}
 
 				for ( autoType in types ) {
-					transforms[it] = AutoTypeParamTransform(autoType.name())
+					transforms[it] = AutoTypeParamTransform("GL11.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 				}
@@ -786,9 +791,14 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
-private val AutoSizeTransform = object : FunctionTransform<Parameter> {
+private class AutoSizeTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "${param[AutoSize.CLASS].reference}.remaining()" // Replace with expression
+	override fun transformCall(param: Parameter, original: String): String { // Replace with expression
+		return if ( bufferParam has nullable )
+			"${bufferParam.name} == null ? 0 : ${bufferParam.name}.remaining()"
+		else
+			"${bufferParam.name}.remaining()"
+	}
 }
 
 private class AutoTypeParamTransform(val autoType: String): FunctionTransform<Parameter> {

@@ -27,9 +27,11 @@ public class Checks {
 	 *
 	 * @throws IllegalStateException
 	 */
-	public static void checkFunctionAddress(long pointer) {
+	public static long checkFunctionAddress(long pointer) {
 		if ( pointer == 0 )
 			throw new IllegalStateException("Function is not supported");
+
+		return pointer;
 	}
 
 	/**
@@ -39,9 +41,11 @@ public class Checks {
 	 *
 	 * @throws NullPointerException
 	 */
-	public static void checkPointer(long pointer) {
+	public static long checkPointer(long pointer) {
 		if ( pointer == 0 )
 			throw new NullPointerException();
+
+		return pointer;
 	}
 
 	/** Ensures that the specified ByteBuffer is null-terminated (last byte equal to 0). */
@@ -87,6 +91,14 @@ public class Checks {
 	/** Ensures that the specified FloatBuffer is null-terminated. */
 	public static FloatBuffer checkNT(FloatBuffer buf) {
 		if ( buf.get(buf.limit() - 1) != 0.0f )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified PointerBuffer is null-terminated. */
+	public static PointerBuffer checkNT(PointerBuffer buf) {
+		if ( buf.get(buf.limit() - 1) != 0L )
 			throw new IllegalArgumentException("Missing null termination");
 
 		return buf;

@@ -109,6 +109,7 @@ public trait GeneratorTargetJava {
 
 	val packageName: String
 	val className: String
+	val nativeSubPath: String
 
 	protected val documentation: String?
 
@@ -130,7 +131,8 @@ val GeneratorTarget.nativeFileName: String
 
 abstract class AbstractGeneratorTarget(
 	override val packageName: String,
-	override val className: String
+	override val className: String,
+	override val nativeSubPath: String = ""
 ): GeneratorTarget {
 
 	class object {
@@ -213,10 +215,11 @@ fun generate(target: GeneratorTarget) {
 }
 
 private fun generateNative(target: GeneratorTarget, generate: (File) -> Unit) {
-	val subPackagePath = target.packageName.substring("org.lwjgl.".size).replace('.', '/')
-	val nativePath = "generated/native/$subPackagePath/${target.nativeFileName}"
+	var subPackagePath = target.packageName.substring("org.lwjgl.".size).replace('.', '/')
+	if ( !target.nativeSubPath.isEmpty() )
+		subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
-	val outputNative: File = File("${nativePath}.c")
+	val outputNative: File = File("generated/native/$subPackagePath/${target.nativeFileName}.c")
 
 	generate(outputNative)
 }

@@ -68,8 +68,9 @@ class StructMemberCharArray(
 
 public class Struct(
 	packageName: String,
-	className: String
-): AbstractGeneratorTarget(packageName, className) {
+	className: String,
+	nativeSubPath: String = ""
+): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
 
 	class object {
 		private val bufferMethodMap = hashMap(
@@ -270,7 +271,7 @@ public class Struct(
 						println("\tpublic static void ${method}Set(ByteBuffer struct, ByteBuffer $param) {")
 						if ( array is StructMemberCharArray ) {
 							val charArray: StructMemberCharArray = array
-							var charMapping = charArray.nativeType.mapping as CharMapping
+							val charMapping = charArray.nativeType.mapping as CharMapping
 							println("\t\tcheckNT${charMapping.bytes}($param);")
 						}
 						println("\t\tcheckBufferGT($param, ${array.size} * $bytesPerElement);")
@@ -359,7 +360,7 @@ public class Struct(
 
 						if ( array is StructMemberCharArray ) {
 							val charArray: StructMemberCharArray = array
-							var charMapping = charArray.nativeType.mapping as CharMapping
+							val charMapping = charArray.nativeType.mapping as CharMapping
 							println("\tpublic static String ${method}Gets(ByteBuffer struct) { return memDecode${charMapping.charset}(memByteBufferNT${charMapping.bytes}(memAddress(struct) + $field)); }")
 							println("\tpublic static String ${method}Gets(ByteBuffer struct, int size) { return memDecode${charMapping.charset}(memByteBuffer(memAddress(struct) + $field, size)); }")
 						}
@@ -414,8 +415,8 @@ public class Struct(
 
 }
 
-public fun struct(packageName: String, className: String, init: Struct.() -> Unit): Struct {
-	val struct = Struct(packageName, className)
+public fun struct(packageName: String, className: String, nativeSubPath: String = "", init: Struct.() -> Unit): Struct {
+	val struct = Struct(packageName, className, nativeSubPath)
 	struct.init()
 	StructRegistry add struct
 	return struct

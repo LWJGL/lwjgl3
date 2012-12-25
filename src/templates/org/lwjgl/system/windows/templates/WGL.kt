@@ -62,14 +62,14 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		format as the device context.
 		""",
 
-		HDC.IN("dc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
+		HDC.IN("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
 	)
 
 	HGLRC.func(
 		"CreateLayerContext",
 		"Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.",
 
-		HDC.IN("dc", "the device context for a new rendering context"),
+		HDC.IN("hdc", "the device context for a new rendering context"),
 		int.IN(
 			"layerPlane",
 		    """
@@ -135,7 +135,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
 		""",
 
-		HDC.IN("dc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
+		HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
 		HGLRC.IN(
 			"context",
 			"""
@@ -180,7 +180,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		Creates count display lists, one for each of a run of count glyphs that begins with the first glyph in the device parameter's selected fonts.
 		""",
 
-		HDC.IN("dc", "the device context whose currently selected font will be used to form the glyph bitmap display lists in the current OpenGL rendering context"),
+		HDC.IN("hdc", "the device context whose currently selected font will be used to form the glyph bitmap display lists in the current OpenGL rendering context"),
 		DWORD.IN("first", "the first glyph in the run of glyphs that will be used to form glyph bitmap display lists"),
 		DWORD.IN("count", "the number of glyphs in the run of glyphs that will be used to form glyph bitmap display lists. The function creates count display lists, one for each glyph in the run."),
 		DWORD.IN("listBase", "the starting display list")
@@ -200,7 +200,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		a character cell.
 		""",
 
-		HDC.IN("dc", "the device context with the desired outline font. The outline font of {@code dc} is used to create the display lists in the current rendering context."),
+		HDC.IN("hdc", "the device context with the desired outline font. The outline font of {@code dc} is used to create the display lists in the current rendering context."),
 		DWORD.IN("first", "the first of the set of glyphs that form the font outline display lists"),
 		DWORD.IN("count", "he number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display lists, one display list for each glyph in a set of glyphs."),
 		DWORD.IN("listBase", "the starting display list"),

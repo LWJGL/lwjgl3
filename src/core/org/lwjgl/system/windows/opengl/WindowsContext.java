@@ -2,6 +2,7 @@ package org.lwjgl.system.windows.opengl;
 
 import org.lwjgl.opengl.Context;
 import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GLContext;
 
 import static org.lwjgl.system.windows.WGL.*;
 
@@ -79,7 +80,7 @@ public class WindowsContext extends Context {
 		if ( wglGetCurrentContext() != hglrc )
 			throw new IllegalStateException("The specified OpenGL context must be current in the current thread.");
 
-		final ContextCapabilities capabilities = new ContextCapabilities();
+		final ContextCapabilities capabilities = GLContext.createCapabilities(false);
 
 		return new WindowsContext(capabilities, hdc, hglrc);
 	}

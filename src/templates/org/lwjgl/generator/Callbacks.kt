@@ -42,6 +42,7 @@ public class CallbackFunction(
 	}
 
 	override val className: String = name
+	override val nativeSubPath: String = ""
 
 	private var _nativeImports = EMPTY_NATIVE_IMPORTS;
 	protected override val nativeImports: List<String>

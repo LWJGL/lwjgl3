@@ -10,6 +10,9 @@ val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
+val VOID = NativeType("VOID", TypeMapping.VOID)
+val HANDLE = PointerType(name = "HANDLE", includesPointer = true)
+
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
 
 val BYTE = PrimitiveType("BYTE", PrimitiveMapping.BYTE)
@@ -167,6 +170,15 @@ private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 }
 val POINT = StructType(name = "POINT", definition = POINT_STRUCT)
 val LPPOINT = StructType (name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
+
+val RECT = StructType(name = "RECT", definition = struct(WINDOWS_PACKAGE, "RECT") {
+	javaDoc("Defines the coordinates of the upper-left and lower-right corners of a rectangle.")
+	nativeImport ("WindowsLWJGL.h")
+	LONG.member("left")
+	LONG.member("top")
+	LONG.member("right")
+	LONG.member("bottom")
+})
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	javaDoc("Contains message information from a thread's message queue.")

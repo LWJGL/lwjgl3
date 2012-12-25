@@ -10,11 +10,19 @@ import org.lwjgl.system.windows.*
 
 fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", "ARB") {
 	nativeImport (
-		"WindowsLWJGL.h",
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", "WGL_ARB_pixel_format")} extension.")
+	javaDoc(
+		"""
+		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", templateName)} extension.
+
+		This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
+
+        These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
+        Thus the list of attributes can be easily extended.
+		"""
+	)
 
 	val WGL_ATTRIBUTES = IntConstant.block(
 		"""
@@ -91,7 +99,7 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
 		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		const _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
+		mods(const, SingleValue("attribute")) _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
 		int_p.OUT("values", "a buffer into which the results of the query will be placed")
 	).javaDocLink
 
@@ -103,7 +111,7 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
 		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		const _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
+		mods(const, SingleValue("attribute")) _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
 		FLOAT_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 

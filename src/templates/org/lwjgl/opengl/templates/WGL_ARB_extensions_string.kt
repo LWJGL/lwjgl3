@@ -8,13 +8,19 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB_extensions_string") {
+fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB_extensions_string", "ARB") {
 	nativeImport (
-		"WindowsLWJGL.h",
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_extensions_string.txt", "WGL_ARB_extensions_string")} extension.")
+	javaDoc(
+		"""
+		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_extensions_string.txt", templateName)} extension.
+
+		This extension provides a way for applications to determine which WGL extensions are supported by a device. This is the foundation upon which other WGL
+		extensions are built.
+		"""
+	)
 
 	(const _ string).func(
 		"GetExtensionsStringARB",
@@ -24,7 +30,7 @@ fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_A
 		empty string is returned.
 		""",
 
-		HDC.IN("context", "the device context to query extensions for")
+		HDC.IN("hdc", "the device context to query extensions for")
 	)
 
 }
