@@ -24,31 +24,17 @@
 			<arg value="/I${sdkhome}\include"/>
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
-			<!--<arg value="/I${native}\common"/>
-			<arg value="/I${native}\common\opengl"/>
-			<arg value="/I${native}\windows"/>
-			<arg value="/I${native}\windows\opengl"/>-->
 			<arg value="/I${src.native}\system"/>
 			<arg value="/I${src.native}\system\windows"/>
 			<arg value="/I${src.native}\opengl"/>
-			<arg value="/I${src.generated}\system"/>
-			<arg value="/I${src.generated}\system\windows"/>
-			<arg value="/I${src.generated}\opengl"/>
+			<arg value="/I${src.native}\opengl\wgl"/>
 			<srcfile/>
-<!--
-			<fileset dir="${native}/common" includes="*.c"/>
-			<fileset dir="${native}/common/opengl" includes="*.c"/>
-			<fileset dir="${native}/generated/openal" includes="*.c"/>
-			<fileset dir="${native}/generated/opencl" includes="*.c"/>
-			<fileset dir="${native}/generated/opengl" includes="*.c"/>
-			<fileset dir="${native}/windows" includes="*.c"/>
-			<fileset dir="${native}/windows/opengl" includes="*.c"/>
--->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
+			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
 	</target>

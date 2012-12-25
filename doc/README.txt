@@ -87,3 +87,8 @@ Kotlin
 TestNG
 	* libs/testng.jar
 	* libs/jcommander.jar
+
+CODE STYLE
+----------
+Tab-size: 4 spaces
+Right margin: 160 chars

@@ -1034,7 +1034,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		""",
 
 		HWND.IN("window", "a handle to the window whose DC is to be released"),
-		HDC.IN("dc", "a handle to the DC to be released")
+		HDC.IN("hdc", "a handle to the DC to be released")
 	)
 
 	BOOL.func(

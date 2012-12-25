@@ -149,7 +149,7 @@ final class MemoryAccess {
 
 	abstract static class MemoryAccessorJava extends MemoryAccessor {
 
-		private final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0);
+		private final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
 
 		final ByteBuffer newByteBuffer(final long address, final int capacity) {
 			return setupBuffer(

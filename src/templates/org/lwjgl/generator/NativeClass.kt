@@ -14,25 +14,26 @@ public abstract class FunctionProvider {
 
 	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
 
-	protected val classes: List<NativeClass>
-		get() {
-			// Sort by className, else we depend on the Kotlin compiler generating
-			// namespace methods in consistent order (which it does not atm).
-			Collections.sort(_classes, object : Comparator<NativeClass> {
-				public override fun compare(o1: NativeClass, o2: NativeClass): Int = o1.className.compareTo(o2.className)
-				public override fun equals(obj: Any?): Boolean = false
-			})
-			return _classes
+	protected fun getClasses(
+		comparator: Comparator<NativeClass> = object : Comparator<NativeClass> {
+			public override fun compare(o1: NativeClass, o2: NativeClass): Int = o1.className.compareTo(o2.className)
+			public override fun equals(obj: Any?): Boolean = false
 		}
+	): List<NativeClass> {
+		val classes = ArrayList<NativeClass>(_classes)
+		Collections.sort(classes, comparator)
+		return classes
+	}
 
 	fun addCapabilities(clazz: NativeClass) {
 		_classes add clazz
 	}
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
-		writer.println("\t\tlong $FUNCTION_ADDRESS = Functions.getInstance().${function.name};")
+		writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance().${function.name};")
 	}
 
+	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)
 	abstract fun generateCapabilities(writer: PrintWriter)
 
 }
@@ -40,11 +41,12 @@ public abstract class FunctionProvider {
 public class NativeClass(
 	packageName: String,
 	className: String,
+	nativeSubPath: String,
 	public val templateName: String = className,
-	public val prefix: String = "",
-	public val postfix: String = "",
+	public val prefix: String,
+	public val postfix: String,
 	val functionProvider: FunctionProvider?
-): AbstractGeneratorTarget(packageName, className) {
+): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Any>>();
 	private val functions = ArrayList<NativeClassFunction>();
@@ -81,24 +83,31 @@ public class NativeClass(
 			it.generateMethods(this)
 		}
 
-		if ( functionProvider != null )
+		if ( functionProvider != null && !functions.isEmpty() ) {
+			functionProvider.generateFunctionGetters(this, this@NativeClass)
 			generateFunctionsClass()
+		}
 
 		print("}")
 	}
 
 	private fun PrintWriter.generateFunctionsClass() {
-		println("\tpublic static final class Functions {\n")
+		println("\t/** The {@link FunctionMap} class for {@code ${className}}. */")
+		println("\tpublic static final class Functions implements FunctionMap {\n")
 
-		if ( !functions.isEmpty() ) {
-			println("\t\tpublic final long")
-			for ( i in functions.indices ) {
-				print("\t\t\t${functions[i].name}")
-				if ( i == functions.lastIndex )
-					println(";")
-				else
-					println(",")
-			}
+		var funcIndent: String
+
+		print("\t\tpublic final long")
+		if ( functions.size == 1 ) {
+			funcIndent = " "
+		} else {
+			println()
+			funcIndent = "\t\t\t"
+		}
+
+		for ( i in functions.indices ) {
+			print("$funcIndent${functions[i].name}")
+			println(if ( i == functions.lastIndex ) ";" else ",")
 		}
 
 		println("\n\t\tpublic Functions(final FunctionProvider provider) {")
@@ -107,22 +116,16 @@ public class NativeClass(
 		}
 		println("\t\t}")
 
-		println("\n\t\tpublic static Functions getInstance() {")
-		println("\t\t\treturn GLContext.getCapabilities().funcs${className};")
-		println("\t\t}")
-
-		/*public fun isSupported(): Boolean {
-			return glCopyBufferSubData != 0
-		}*/
-
 		println("\n\t\tpublic boolean isSupported() {")
-		println("\t\t\treturn")
+		print("\t\t\treturn")
+		if ( 1 < functions.size ) {
+			println()
+			funcIndent = "\t\t\t\t"
+		}
+
 		for ( i in functions.indices ) {
-			print("\t\t\t\t${functions[i].name} != 0L")
-			if ( i == functions.lastIndex )
-				println(";")
-			else
-				println(" &&")
+			print("$funcIndent${functions[i].name} != 0L")
+			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 		println("\t\t}")
 
@@ -188,12 +191,13 @@ public class NativeClass(
 public fun String.nativeClass(
 	packageName: String,
 	templateName: String = this,
+	nativeSubPath: String = "",
 	prefix: String = "",
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
 	init: NativeClass.() -> Unit
 ): NativeClass {
-	val ext = NativeClass(packageName, this, templateName, prefix, postfix, functionProvider)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, postfix, functionProvider)
 	ext.init()
 	return ext
 }

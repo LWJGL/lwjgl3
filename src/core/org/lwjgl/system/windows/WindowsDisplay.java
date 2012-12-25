@@ -66,7 +66,13 @@ public class WindowsDisplay {
 	}
 
 	public WindowsDisplay(final String title) {
+		this(title, 640, 480);
+	}
+
+	public WindowsDisplay(final String title, final int width, final int height) {
 		this.id = WINDOW_ID.incrementAndGet();
+		this.width = width;
+		this.height = height;
 
 		final String className = "LWJGL" + id;
 
@@ -94,7 +100,7 @@ public class WindowsDisplay {
 			title,
 			// WS_OVERLAPPEDWINDOW == WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
 			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, // CLIP CHILDREN & SIBLINGS are required for OpenGL windows
-			0, 0, 640, 480,
+			0, 0, width, height,
 			0, 0, HINSTANCE, 0
 		);
 		windowsCheckHandle(hwnd, "Failed to create window");
@@ -154,6 +160,7 @@ public class WindowsDisplay {
 
 	public void destroy() {
 		windowsCheckResult(DestroyWindow(hwnd), "DestroyWindow");
+		windowsCheckResult(UnregisterClass("LWJGL" + id, HINSTANCE), "UnregisterClass");
 	}
 
 	public boolean isCloseRequested() {

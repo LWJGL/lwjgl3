@@ -201,7 +201,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"CancelDC",
 		"Cancels any pending operation on the specified device context (DC).",
 
-		HDC.IN("dc", "a handle to the DC")
+		HDC.IN("hdc", "a handle to the DC")
 	)
 
 	HDC.func(
@@ -209,7 +209,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"Creates a memory device context (DC) compatible with the specified device.",
 
 		// TODO: Add nullable
-		HDC.IN("dc", "a handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.")
+		HDC.IN("hdc", "a handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.")
 	)
 
 	HGDIOBJ.func(
@@ -227,7 +227,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		zero or until all of the objects have been enumerated.
 		""",
 
-		HDC.IN("dc", "a handle to the DC"),
+		HDC.IN("hdc", "a handle to the DC"),
 		int.IN("objectType", "the object type. One of:", "#OBJ_BRUSH #OBJ_PEN"),
 		GOBJENUMPROC.IN("objectFunc", "the application-defined callback function"),
 		CallbackData("objectFunc") _ LPARAM.IN("param", "the data passed to the callback function along with the object information.")
@@ -237,7 +237,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"SelectObject",
 		"Selects an object into the specified device context (DC). The new object replaces the previous object of the same type.",
 
-		HDC.IN("dc", "a handle to the DC"),
+		HDC.IN("hdc", "a handle to the DC"),
 		HGDIOBJ.IN("object", "a handle to the object to be selected")
 	)
 
@@ -245,7 +245,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"GetCurrentObject",
 		"Retrieves a handle to an object of the specified type that has been selected into the specified device context (DC).",
 
-		HDC.IN("dc", "a handle to the DC"),
+		HDC.IN("hdc", "a handle to the DC"),
 		UINT.IN("objectType", "the object type to be queried")
 	)
 
@@ -273,7 +273,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		translate device coordinates into client coordinates (for coordinates in an application's window).
 		""",
 
-		HDC.IN("dc", "a handle to the DC whose final translation origin is to be retrieved"),
+		HDC.IN("hdc", "a handle to the DC whose final translation origin is to be retrieved"),
 		LPPOINT.OUT("point", "a {@link POINT} structure that receives the final translation origin, in device coordinates")
 	)
 
@@ -281,7 +281,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"GetDeviceCaps",
 		"Retrieves device-specific information for the specified device.",
 
-		HDC.IN("dc", "a handle to the DC"),
+		HDC.IN("hdc", "a handle to the DC"),
 		int.IN("index", "the item to be returned")
 	)
 
@@ -292,7 +292,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		palette, font, pen, region, drawing mode, and mapping mode) to a context stack.
 		""",
 
-		HDC.IN("dc", "a handle to the DC whose state is to be saved")
+		HDC.IN("hdc", "a handle to the DC whose state is to be saved")
 	)
 
 	BOOL.func(
@@ -302,7 +302,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		{@link #SaveDC} function.
 		""",
 
-		HDC.IN("dc", "a handle to the DC"),
+		HDC.IN("hdc", "a handle to the DC"),
 		int.IN(
 			"savedDC",
 			"""
@@ -316,7 +316,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"ChoosePixelFormat",
 		"Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
-		HDC.IN("dc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
+		HDC.IN("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
 		const _ PIXELFORMATDESCRIPTOR.IN("pixelFormatDescriptor", "a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format")
 	)
 
@@ -328,7 +328,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		index of the device context.
 		""",
 
-		HDC.IN("dc", "the device context"),
+		HDC.IN("hdc", "the device context"),
 		int.IN("pixelFormat", "index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes."),
 		Expression("PIXELFORMATDESCRIPTOR.SIZEOF") _ UINT.IN(
 			"bytes",
@@ -351,14 +351,14 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"GetPixelFormat",
 		"Obtains the index of the currently selected pixel format of the specified device context.",
 
-		HDC.IN("dc", "the device context of the currently selected pixel format index returned by the function")
+		HDC.IN("hdc", "the device context of the currently selected pixel format index returned by the function")
 	)
 
 	BOOL.func(
 		"SetPixelFormat",
 		"Sets the pixel format of the specified device context to the format specified by the pixelFormat index.",
 
-		HDC.IN("dc", "the device context whose pixel format the function attempts to set"),
+		HDC.IN("hdc", "the device context whose pixel format the function attempts to set"),
 		int.IN("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
 		const _ PIXELFORMATDESCRIPTOR.IN(
 			"pixelFormatDescriptor",

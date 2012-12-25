@@ -35,7 +35,11 @@ public class ConstantBlock<T>(
 	vararg val constants: Constant<T>
 ) {
 
-	private fun getConstantName(name: String) = if ( nativeClass.prefix.isEmpty() ) name else "${nativeClass.prefix}_$name"
+	private var noPrefix = false
+
+	public fun noPrefix(): Unit = noPrefix = true
+
+	private fun getConstantName(name: String) = if ( noPrefix || nativeClass.prefix.isEmpty() ) name else "${nativeClass.prefix}_$name"
 
 	fun generate(writer: PrintWriter) {
 		writer.generateBlock()

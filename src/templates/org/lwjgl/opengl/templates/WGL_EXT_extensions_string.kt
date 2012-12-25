@@ -7,13 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string") {
+fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", "EXT") {
 	nativeImport (
-		"WindowsLWJGL.h",
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", "WGL_EXT_extensions_string")} extension.")
+	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", templateName)} extension.")
 
 	(const _ string).func(
 		"GetExtensionsStringEXT",
