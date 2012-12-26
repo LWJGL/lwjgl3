@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 fun WGL_ARB_robustness_application_isolation() = "WGLARBRobustnessApplicationIsolation".nativeClassWGL("WGL_ARB_robustness_application_isolation", "ARB") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_robustness_isolation.txt", templateName)} extension.

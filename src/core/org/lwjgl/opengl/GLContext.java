@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.StringTokenizer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
 import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
 import static org.lwjgl.system.Checks.*;
@@ -124,7 +125,7 @@ public class GLContext {
 			}
 		}
 
-		if ( true || majorVersion < 3 ) {
+		if ( majorVersion < 3 ) {
 			// Parse EXTENSIONS string
 			final String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nglGetString(GL_EXTENSIONS, GetString))));
 
@@ -132,25 +133,33 @@ public class GLContext {
 			while ( tokenizer.hasMoreTokens() )
 				supportedExtensions.add(tokenizer.nextToken());
 		} else {
-			final IntBuffer param = BufferUtils.createIntBuffer(1);
-
-			// TODO: Implement
-			final long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
-
 			// Use forward compatible indexed EXTENSIONS
-			nglGetIntegerv(0x821D, memAddress(param), GetIntegerv); // GL_NUM_EXTENSIONS
+
+			final IntBuffer param = BufferUtils.createIntBuffer(1);
+			nglGetIntegerv(GL_NUM_EXTENSIONS, memAddress(param), GetIntegerv);
 			final int extensionCount = param.get(0);
 
-			/*for ( int i = 0; i < extensionCount; i++ )
-				supportedExtensions.add(memDecodeUTF8(memByteBufferNT1(nglGetStringi(GL_EXTENSIONS, i, GetStringi)));*/
+			final long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
+			if ( GetStringi == 0L )
+				throw new IllegalStateException("The glGetStringi function address could not be found.");
 
-			if ( supportedExtensions.contains("OpenGL31") && !supportedExtensions.contains("GL_ARB_compatibility") ) {
-				if ( supportedExtensions.contains("OpenGL32") ) {
-					nglGetIntegerv(0x9126, memAddress(param), GetIntegerv); // GL_CONTEXT_PROFILE_MASK
-					if ( (param.get(0) & 0x2) == 0 ) // GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+			for ( int i = 0; i < extensionCount; i++ )
+				supportedExtensions.add(memDecodeUTF8(memByteBufferNT1(nglGetStringi(GL_EXTENSIONS, i, GetStringi))));
+
+			// Force forwardCompatible to true if the context is a forward-compatible context.
+			nglGetIntegerv(GL_CONTEXT_FLAGS, memAddress(param), GetIntegerv);
+			if ( (param.get(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0 )
+				forwardCompatible = true;
+			else {
+				// Force forwardCompatible to true if the context is a core profile context.
+				if ( supportedExtensions.contains("OpenGL31") && !supportedExtensions.contains("GL_ARB_compatibility") ) {
+					if ( supportedExtensions.contains("OpenGL32") ) {
+						nglGetIntegerv(0x9126, memAddress(param), GetIntegerv); // GL_CONTEXT_PROFILE_MASK
+						if ( (param.get(0) & 0x2) == 0 ) // GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+							forwardCompatible = true;
+					} else
 						forwardCompatible = true;
-				} else
-					forwardCompatible = true;
+				}
 			}
 		}
 

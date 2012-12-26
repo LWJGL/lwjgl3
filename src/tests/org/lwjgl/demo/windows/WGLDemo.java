@@ -5,10 +5,7 @@
 package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.Context;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.WGLAMDGpuAssociation;
-import org.lwjgl.opengl.WGLARBMultisample;
+import org.lwjgl.opengl.*;
 import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
@@ -25,6 +22,7 @@ import static org.lwjgl.opengl.WGLAMDGpuAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
 import static org.lwjgl.opengl.WGLARBMultisample.*;
 import static org.lwjgl.opengl.WGLARBPixelFormat.*;
+import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinBase.*;
@@ -53,7 +51,9 @@ public final class WGLDemo {
 
 		final Context context = WindowsContext.create(window.getHdc());
 
-		if ( GLContext.getCapabilities().WGL_AMD_gpu_association ) {
+		final ContextCapabilities caps = GLContext.getCapabilities();
+
+		if ( caps.WGL_AMD_gpu_association ) {
 			final int GPUs = wglGetGPUIDsAMD(null);
 
 			final IntBuffer gpuBuffer = BufferUtils.createIntBuffer(GPUs);
@@ -89,6 +89,9 @@ public final class WGLDemo {
 				System.out.println("GPU RAM: " + data.get(0));
 			}
 		}
+
+		if ( caps.WGL_EXT_swap_control )
+			wglSwapIntervalEXT(caps.WGL_EXT_swap_control_tear ? -1 : 1);
 
 		glViewport(0, 0, 640, 480);
 
@@ -147,11 +150,6 @@ public final class WGLDemo {
 			assertTrue(success != 0);
 
 			SwapBuffers(window.getHdc());
-			try {
-				Thread.sleep(16); // Don't blow up my GPU!
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 
 		wglDeleteBufferRegionARB(bufferRegion);
