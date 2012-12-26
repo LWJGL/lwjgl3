@@ -7,6 +7,7 @@ package org.lwjgl.opengl
 import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
+import org.lwjgl.generator.opengl.*
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefix) ) {
@@ -17,6 +18,11 @@ private val NativeClass.capName: String
 	} else {
 		"${prefix}_$templateName"
 	}
+
+private val List<NativeClassFunction>.hasDependencies: Boolean
+	get() = this.any { it has DependsOn.CLASS }
+private val List<NativeClassFunction>.hasDeprecated: Boolean
+	get() = this.any { it has deprecatedGL }
 
 public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
@@ -29,13 +35,53 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		println("\t\treturn GLContext.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
-		println(
-			"""
-	static Functions create(java.util.Set<String> extensions, FunctionProvider provider) {
-		return extensions.contains("${nativeClass.capName}") ? new Functions(provider) : null;
-	}
-"""
-		)
+		val functions = nativeClass.functions
+
+		val hasDependencies = functions.hasDependencies
+		val hasDeprecated = functions.hasDeprecated
+
+		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProvider provider")
+		if ( hasDeprecated ) print(", boolean fc")
+		println(") {")
+		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")
+
+		println("\n\t\tFunctions funcs = new Functions(provider);")
+
+		print("\n\t\tboolean supported = ")
+		val funcIndent: String
+		if ( functions.size == 1 )
+			funcIndent = " "
+		else {
+			println()
+			funcIndent = "\t\t\t"
+		}
+
+		for ( i in functions.indices ) {
+			print(funcIndent)
+
+			var isSpecial = false
+
+			if ( functions[i] has deprecatedGL ) {
+				isSpecial = true
+				print("(fc || ")
+			}
+
+			if ( functions[i] has DependsOn.CLASS ) {
+				if ( !isSpecial ) {
+					isSpecial = true
+					print("(")
+				}
+				print("!ext.contains(\"${functions[i].get(DependsOn.CLASS).reference}\") || ")
+			}
+
+			print("funcs.${functions[i].name} != 0L")
+
+			if ( isSpecial ) print(')')
+			println(if ( i == functions.lastIndex ) ";" else " &&")
+		}
+
+		println("\n\t\treturn supported ? funcs : null;")
+		println("\t}")
 	}
 
 	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()
@@ -80,24 +126,17 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tContextCapabilities(final Set<String> ext, final boolean forwardCompatible) {")
+		println("\n\tContextCapabilities(final Set<String> ext, final boolean fc) {")
 		println("\t\tfinal FunctionProvider provider = GLContext.getFunctionProvider();\n")
 		for ( extension in classes ) {
-			println(
-				if ( extension.hasNativeFunctions )
-					"\t\t${extension.capName} = (__${extension.className} = check(${extension.className}.create(ext, provider))) != null;"
-				else
-					"\t\t${extension.capName} = ext.contains(\"${extension.capName}\");"
-			)
+			if ( extension.hasNativeFunctions ) {
+				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")
+				if ( extension.functions.hasDeprecated ) print(", fc")
+				println(")) != null;")
+			} else
+				println("\t\t${extension.capName} = ext.contains(\"${extension.capName}\");")
 		}
 		println("\t}")
-
-		println("""
-	private static <T extends FunctionMap> T check(T functionMap) {
-		return functionMap != null && functionMap.isSupported() ? functionMap : null;
-	}
-""")
-
 		print("}")
 	}
 

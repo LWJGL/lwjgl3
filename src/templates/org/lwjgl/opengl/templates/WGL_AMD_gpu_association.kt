@@ -131,8 +131,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGpuAssociation".nativeClassWGL("WGL_AMD_g
 
     HGLRC.func("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
 
-	// TODO: Depends on EXT_framebuffer_blit
-    VOID.func(
+    DependsOn("GL_EXT_framebuffer_blit") _ VOID.func(
 	    "BlitContextFramebufferAMD",
 	    """
 	    Blits data from one context to another. This facilitates high performance data communication between multiple contexts.
