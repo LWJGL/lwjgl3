@@ -12,6 +12,7 @@ val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 
 val VOID = NativeType("VOID", TypeMapping.VOID)
 val HANDLE = PointerType(name = "HANDLE", includesPointer = true)
+val HANDLE_p = PointerType(name = "HANDLE", mapping = PointerMapping.DATA_POINTER)
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
 

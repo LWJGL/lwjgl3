@@ -8,10 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_framebuffer_sRGB", "ARB") {
+fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", "EXT") {
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.
+		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 		"""
@@ -23,7 +23,7 @@ fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB
 		{@link WGLARBPixelFormat#wglChoosePixelFormatARB}.
 		""",
 
-		"WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
 	)
 
 }

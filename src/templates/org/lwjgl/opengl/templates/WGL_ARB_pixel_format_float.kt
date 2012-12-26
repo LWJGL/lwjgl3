@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 fun WGL_ARB_pixel_format_float() = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_ARB_pixel_format_float", "ARB") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.

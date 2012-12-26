@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", "ARB") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/multisample.txt", templateName)} extension.
