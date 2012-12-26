@@ -133,7 +133,7 @@ abstract class AbstractGeneratorTarget(
 	override val packageName: String,
 	override val className: String,
 	override val nativeSubPath: String = ""
-): GeneratorTarget {
+): TemplateElement(), GeneratorTarget {
 
 	class object {
 		private val EMPTY_NATIVE_IMPORTS: MutableList<String> = ArrayList(0)

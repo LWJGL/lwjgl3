@@ -900,7 +900,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the OpenGL state to disable")
 	).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Accum",
 		"""
 		Each portion of a pixel in the accumulation buffer consists of four values: one for each of R, G, B, and A. The accumulation buffer is controlled
@@ -911,7 +911,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("value", "a floating-point value to be used in that operation. The possible operations are:", "#GL_ACCUM #GL_LOAD #GL_RETURN #GL_MULT #GL_ADD")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"AlphaFunc",
 		"""
 		The alpha test discards a fragment conditionally based on the outcome of a comparison between the incoming fragment’s alpha value and a constant value.
@@ -923,7 +923,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("ref", "a reference value clamped to the range [0, 1]. When performing the alpha test, the GL will convert the reference value to the same representation as the fragment's alpha value (floating-point or fixed-point).")
 	)
 
-	GLboolean.func(
+	deprecatedGL _ GLboolean.func(
 		"AreTexturesResident",
 		"""
 		Returns {@link #GL_TRUE} if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
@@ -943,12 +943,12 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("i", "the element to transfer")
 	)
 
-	val Begin = void.func(
+	val Begin = (deprecatedGL _ void.func(
 		"Begin",
 		"Begins the definition of vertex attributes of a sequence of primitives to be transferred to the GL.",
 
 		GLenum.IN("mode", "the primitive type being defined", PRIMITIVE_TYPES)
-	).javaDocLink
+	)).javaDocLink
 
 	val BindTexture = void.func(
 		"BindTexture",
@@ -971,7 +971,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLuint.IN("texture", "the texture object to bind")
 	).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Bitmap",
 		"""
 		Sents a bitmap to the GL. Bitmaps are rectangles of zeros and ones specifying a particular pattern of fragments to be produced. Each of these fragments
@@ -995,14 +995,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("dfactor", "the destination weighting factor")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"CallList",
 		"Executes a display list. Causes the commands saved in the display list to be executed, in order, just as if they were issued without using a display list.",
 
 		GLuint.IN("list", "the index of the display list to be called")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"CallLists",
 		"Provides an efficient means for executing a number of display lists.",
 
@@ -1029,7 +1029,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		)
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"ClearAccum",
 		"Sets the clear values for the accumulation buffer. These values are clamped to the range [-1,1] when they are specified.",
 
@@ -1087,32 +1087,32 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val colorAlpha = "the alpha component of the current color"
 	val colorBuffer = "the color buffer"
 
-	val Color3b = void.func(
+	val Color3b = (deprecatedGL _ void.func(
 		"Color3b",
 		"Sets the R, G, and B components of the current color. The alpha component is set to 1.0.",
 
 		GLbyte.IN("red", colorRed),
 		GLbyte.IN("green", colorGreen),
 		GLbyte.IN("blue", colorBlue)
-	).javaDocLink
-	val Color3s = void.func("Color3s", "Short version of $Color3b", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue)).javaDocLink
-	val Color3i = void.func("Color3i", "Integer version of $Color3b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue)).javaDocLink
-	val Color3f = void.func("Color3f", "Float version of $Color3b", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue)).javaDocLink
-	val Color3d = void.func("Color3d", "Double version of $Color3b", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue)).javaDocLink
-	val Color3ub = void.func("Color3ub", "Unsigned version of $Color3b", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue)).javaDocLink
-	val Color3us = void.func("Color3us", "Unsigned short version of $Color3b", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue)).javaDocLink
-	val Color3ui = void.func("Color3ui", "Unsigned int version of $Color3b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue)).javaDocLink
+	)).javaDocLink
+	val Color3s = (deprecatedGL _ void.func("Color3s", "Short version of $Color3b", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue))).javaDocLink
+	val Color3i = (deprecatedGL _ void.func("Color3i", "Integer version of $Color3b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))).javaDocLink
+	val Color3f = (deprecatedGL _ void.func("Color3f", "Float version of $Color3b", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue))).javaDocLink
+	val Color3d = (deprecatedGL _ void.func("Color3d", "Double version of $Color3b", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue))).javaDocLink
+	val Color3ub = (deprecatedGL _ void.func("Color3ub", "Unsigned version of $Color3b", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue))).javaDocLink
+	val Color3us = (deprecatedGL _ void.func("Color3us", "Unsigned short version of $Color3b", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))).javaDocLink
+	val Color3ui = (deprecatedGL _ void.func("Color3ui", "Unsigned int version of $Color3b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))).javaDocLink
 
-	void.func("Color3bv", "Byte pointer version of $Color3b.", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
-	void.func("Color3sv", "Pointer version of $Color3s.", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
-	void.func("Color3iv", "Pointer version of $Color3i.", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer) )
-	void.func("Color3fv", "Pointer version of $Color3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
-	void.func("Color3dv", "Pointer version of $Color3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
-	void.func("Color3ubv", "Pointer version of $Color3ub.", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
-	void.func("Color3usv", "Pointer version of $Color3us.", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
-	void.func("Color3uiv", "Pointer version of $Color3ui.", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3bv", "Byte pointer version of $Color3b.", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3sv", "Pointer version of $Color3s.", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3iv", "Pointer version of $Color3i.", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer) )
+	deprecatedGL _ void.func("Color3fv", "Pointer version of $Color3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3dv", "Pointer version of $Color3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3ubv", "Pointer version of $Color3ub.", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3usv", "Pointer version of $Color3us.", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color3uiv", "Pointer version of $Color3ui.", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
 
-	val Color4b = void.func(
+	val Color4b = (deprecatedGL _ void.func(
 		"Color4b",
 		"Sets the current color.",
 
@@ -1120,24 +1120,24 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLbyte.IN("green", colorGreen ),
 		GLbyte.IN("blue", colorBlue),
 		GLbyte.IN("alpha", colorAlpha )
-	).javaDocLink
+	)).javaDocLink
 
-	val Color4s = void.func("Color4s", "Short version of $Color4b", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue), GLshort.IN("alpha", colorAlpha)).javaDocLink
-	val Color4i = void.func("Color4i", "Integer version of $Color4b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue), GLint.IN("alpha", colorAlpha)).javaDocLink
-	val Color4f = void.func("Color4f", "Float version of $Color4b", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue), GLfloat.IN("alpha", colorAlpha)).javaDocLink
-	val Color4d = void.func("Color4d", "Double version of $Color4b", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue), GLdouble.IN("alpha", colorAlpha)).javaDocLink
-	val Color4ub = void.func("Color4ub", "Unsigned version of $Color4b", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue), GLubyte.IN("alpha", colorAlpha)).javaDocLink
-	val Color4us = void.func("Color4us", "Unsigned short version of $Color4b", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue), GLushort.IN("alpha", colorAlpha)).javaDocLink
-	val Color4ui = void.func("Color4ui", "Unsigned int version of $Color4b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue), GLint.IN("alpha", colorAlpha)).javaDocLink
+	val Color4s = (deprecatedGL _ void.func("Color4s", "Short version of $Color4b", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue), GLshort.IN("alpha", colorAlpha))).javaDocLink
+	val Color4i = (deprecatedGL _ void.func("Color4i", "Integer version of $Color4b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue), GLint.IN("alpha", colorAlpha))).javaDocLink
+	val Color4f = (deprecatedGL _ void.func("Color4f", "Float version of $Color4b", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue), GLfloat.IN("alpha", colorAlpha))).javaDocLink
+	val Color4d = (deprecatedGL _ void.func("Color4d", "Double version of $Color4b", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue), GLdouble.IN("alpha", colorAlpha))).javaDocLink
+	val Color4ub = (deprecatedGL _ void.func("Color4ub", "Unsigned version of $Color4b", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue), GLubyte.IN("alpha", colorAlpha))).javaDocLink
+	val Color4us = (deprecatedGL _ void.func("Color4us", "Unsigned short version of $Color4b", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue), GLushort.IN("alpha", colorAlpha))).javaDocLink
+	val Color4ui = (deprecatedGL _ void.func("Color4ui", "Unsigned int version of $Color4b", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue), GLint.IN("alpha", colorAlpha))).javaDocLink
 
-	void.func("Color4bv", "Pointer version of $Color4b.", mods(const, Check(4)) _ GLbyte_p.IN("v", colorBuffer))
-	void.func("Color4sv", "Pointer version of $Color4s.", mods(const, Check(4)) _ GLshort_p.IN("v", colorBuffer))
-	void.func("Color4iv", "Pointer version of $Color4i.", mods(const, Check(4)) _ GLint_p.IN("v", colorBuffer))
-	void.func("Color4fv", "Pointer version of $Color4f.", mods(const, Check(4)) _ GLfloat_p.IN("v", colorBuffer))
-	void.func("Color4dv", "Pointer version of $Color4d.", mods(const, Check(4)) _ GLdouble_p.IN("v", colorBuffer))
-	void.func("Color4ubv", "Pointer version of $Color4ub.", mods(const, Check(4)) _ GLubyte_p.IN("v", colorBuffer))
-	void.func("Color4usv", "Pointer version of $Color4us.", mods(const, Check(4)) _ GLushort_p.IN("v", colorBuffer))
-	void.func("Color4uiv", "Pointer version of $Color4ui.", mods(const, Check(4)) _ GLuint_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4bv", "Pointer version of $Color4b.", mods(const, Check(4)) _ GLbyte_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4sv", "Pointer version of $Color4s.", mods(const, Check(4)) _ GLshort_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4iv", "Pointer version of $Color4i.", mods(const, Check(4)) _ GLint_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4fv", "Pointer version of $Color4f.", mods(const, Check(4)) _ GLfloat_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4dv", "Pointer version of $Color4d.", mods(const, Check(4)) _ GLdouble_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4ubv", "Pointer version of $Color4ub.", mods(const, Check(4)) _ GLubyte_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4usv", "Pointer version of $Color4us.", mods(const, Check(4)) _ GLushort_p.IN("v", colorBuffer))
+	deprecatedGL _ void.func("Color4uiv", "Pointer version of $Color4ui.", mods(const, Check(4)) _ GLuint_p.IN("v", colorBuffer))
 
 	void.func(
 		"ColorMask",
@@ -1149,7 +1149,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLboolean.IN("alpha", "whether A values are written or not")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"ColorMaterial",
 		"""
 		It is possible to attach one or more material properties to the current color, so that they continuously track its component values. This behavior is
@@ -1161,7 +1161,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("mode", "specifies which material property or properties track the current color", "#GL_EMISSION #GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_AMBIENT_AND_DIFFUSE")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"ColorPointer",
 		"Specifies the location and organization of a color array.",
 
@@ -1198,7 +1198,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("mode", "the CullFace mode", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"DeleteLists",
 		"""
 		Deletes a contiguous group of display lists. All information about the display lists is lost, and the indices become unused. Indices to which no display
@@ -1231,7 +1231,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("zFar", "the far depth range")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"DisableClientState",
 		"Disables the specified fixed-function attribute array.",
 
@@ -1294,7 +1294,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the index values")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"DrawPixels",
 		"Draws a pixel rectangle to the active draw buffers.",
 
@@ -1310,7 +1310,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
-	val EdgeFlag = void.func(
+	val EdgeFlag = (deprecatedGL _ void.func(
 		"EdgeFlag",
 		"""
 		Each edge of each polygon primitive generated is flagged as either boundary or non-boundary. These classifications are used during polygon
@@ -1323,16 +1323,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLboolean.IN("flag", "the edge flag bit")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EdgeFlagv",
 		"Pointer version of $EdgeFlag.",
 
 		mods(const, Check(1)) _ GLboolean_p.IN("flag", "the edge flag buffer")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EdgeFlagPointer",
 		"Specifies the location and organization of an edge flag array.",
 
@@ -1340,7 +1340,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, ARRAY_BUFFER) _ GLboolean_p.IN("pointer", "the edge flag array data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EnableClientState",
 		"Enables the specified fixed-function attribute array.",
 
@@ -1351,67 +1351,67 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		)
 	)
 
-	val End = void.func("End", "Ends the definition of vertex attributes of a sequence of primitives to be transferred to the GL.").javaDocLink
+	val End = (deprecatedGL _ void.func("End", "Ends the definition of vertex attributes of a sequence of primitives to be transferred to the GL.")).javaDocLink
 
-	val EvalCoord1f = void.func(
+	val EvalCoord1f = (deprecatedGL _ void.func(
 		"EvalCoord1f",
 		"Causes evaluation of the enabled one-dimensional evaluator maps.",
 
 		GLfloat.IN("u", "the domain coordinate u")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalCoord1fv",
 		"Pointer version of $EvalCoord1f.",
 
 		const _ (GLfloat_p.IN("u", "the domain coordinate buffer"))
 	)
 
-	val EvalCoord1d = void.func(
+	val EvalCoord1d = (deprecatedGL _ void.func(
 		"EvalCoord1d",
 		"Double version of $EvalCoord1f.",
 
 		GLdouble.IN("u", "the domain coordinate u")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalCoord1dv",
 		"Pointer version of $EvalCoord1d.",
 
 		const _ (GLdouble_p.IN("u", "the domain coordinate buffer"))
 	)
 
-	val EvalCoord2f = void.func(
+	val EvalCoord2f = (deprecatedGL _ void.func(
 		"EvalCoord2f",
 		"Causes evaluation of the enabled two-dimensional evaluator maps.",
 
 		GLfloat.IN("u", "the domain coordinate u"),
 		GLfloat.IN("v", "the domain coordinate v")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalCoord2fv",
 		"Pointer version of $EvalCoord2f.",
 
 		const _ (GLfloat_p.IN("u", "the domain coordinate buffer"))
 	)
 
-	val EvalCoord2d = void.func(
+	val EvalCoord2d = (deprecatedGL _ void.func(
 		"EvalCoord2d",
 		"Double version of $EvalCoord2f.",
 
 		GLdouble.IN("u", "the domain coordinate u"),
 		GLdouble.IN("v", "the domain coordinate v")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalCoord2dv",
 		"Pointer version of $EvalCoord2d.",
 
 		const _ (GLdouble_p.IN("u", "the domain coordinate buffer"))
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalMesh1",
 		"Carries out an evaluation on a subset of the one-dimensional map grid.",
 
@@ -1420,7 +1420,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("i2", "the end index")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalMesh2",
 		"Carries out an evaluation on a rectangular subset of the two-dimensional map grid.",
 
@@ -1431,21 +1431,21 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("j2", "the v-dimension end index")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalPoint1",
 		"Carries out an evalutation of a single point on the one-dimensional map grid.",
 
 		GLint.IN("i", "the grid index")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EvalPoint2",
 		"Carries out an evalutation of a single point on the two-dimensional map grid.",
 		GLint.IN("i", "the u-dimension grid index"),
 		GLint.IN("j", "the v-dimension grid index")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"FeedbackBuffer",
 		"Returns information about primitives when the GL is in feedback mode.",
 
@@ -1467,15 +1467,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Causes all previously issued GL commands to complete in finite time (although such commands may still be executing when {@code Flush} returns)."
 	)
 
-	val Fogi = void.func(
+	val Fogi = (deprecatedGL _ void.func(
 		"Fogi",
 		"Sets the integer value of a fog parameter.",
 
 		GLenum.IN("pname", "the fog parameter", "#GL_FOG_MODE #GL_FOG_COORD_SRC"),
 		GLint.IN("param", "the fog parameter value", "#GL_EXP #GL_EXP2 #GL_LINEAR #GL_FRAGMENT_DEPTH #GL_FOG_COORD")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Fogiv",
 		"Pointer version of $Fogi.",
 
@@ -1483,15 +1483,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods (const, Check(1)) _ GLint_p.IN("params", "the fog parameter buffer")
 	)
 
-	val Fogf = void.func(
+	val Fogf = (deprecatedGL _ void.func(
 		"Fogf",
 		"Sets the float value of a fog parameter.",
 
 		GLenum.IN("pname", "the fog parameter", "#GL_FOG_DENSITY #GL_FOG_START #GL_FOG_END"),
 		GLfloat.IN("param", "the fog parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Fogfv",
 		"Pointer version of $Fogf.",
 
@@ -1510,7 +1510,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("dir", "the front face direction", "#GL_CCW #GL_CW")
 	)
 
-	GLuint.func(
+	deprecatedGL _ GLuint.func(
 		"GenLists",
 		"""
 		Returns an integer n such that the indices {@code n,..., n + s - 1} are previously unused (i.e. there are {@code s} previously unused display list
@@ -1626,7 +1626,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 	)
 
-	val GetLightiv = void.func(
+	val GetLightiv = (deprecatedGL _ void.func(
 		"GetLightiv",
 		"Returns integer information about light parameter {@code value} for {@code light} in {@code data}.",
 
@@ -1640,9 +1640,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetLightfv",
 		"Float version of $GetLightiv.",
 
@@ -1652,16 +1652,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	)
 
 
-	val GetMapiv = void.func(
+	val GetMapiv = (deprecatedGL _ void.func(
 		"GetMapiv",
 		"Returns integer information about {@code query} for evaluator map {@code target} in {@code data}.",
 		
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
 		GLenum.IN("query", "the information to query", "#GL_ORDER #GL_COEFF #GL_DOMAIN"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetMapfv",
 		"Float version of $GetMapiv.",
 
@@ -1670,7 +1670,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetMapdv",
 		"Double version of $GetMapiv.",
 
@@ -1679,16 +1679,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	val GetMaterialiv = void.func(
+	val GetMaterialiv = (deprecatedGL _ void.func(
 		"GetMaterialiv",
 		"Returns integer information about material property {@code value} for {@code face} in {@code data}.",
 
 		GLenum.IN("face", "the material face for which to return information", "#GL_FRONT #GL_BACK"),
 		GLenum.IN("value", "the information to query", "#GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_EMISSION #GL_SHININESS"),
 		GLint_p.OUT("data", "a scalar or array in which to place the returned data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetMaterialfv",
 		"Float version of $GetMaterialiv.",
 
@@ -1697,15 +1697,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	val GetPixelMapfv = void.func(
+	val GetPixelMapfv = (deprecatedGL _ void.func(
 		"GetPixelMapfv",
 		"Returns all float values in the pixel map {@code map} in {@code data}.",
 
 		GLenum.IN("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
 		mods(Check(32), PIXEL_PACK_BUFFER) _ GLfloat_p.OUT("data", "an array in which to place the returned data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetPixelMapusv",
 		"Unsigned short version of $GetPixelMapfv.",
 
@@ -1713,7 +1713,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(32), PIXEL_PACK_BUFFER) _ GLushort_p.OUT("data", "an array in which to place the returned data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetPixelMapuiv",
 		"Unsigned integer version of $GetPixelMapfv.",
 
@@ -1729,7 +1729,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "an array in which to place the returned pointer")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetPolygonStipple",
 		"Obtains the polygon stipple.",
 
@@ -1769,16 +1769,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	val GetTexGeniv = void.func(
+	val GetTexGeniv = (deprecatedGL _ void.func(
 		"GetTexGeniv",
 		"Returns integer information about {@code value} for {@code coord} in {@code data}.",
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
 		GLenum.IN("value", "the value to query", "#GL_EYE_PLANE #GL_OBJECT_PLANE #GL_TEXTURE_GEN_MODE"),
 		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetTexGenfv",
 		"Float version of $GetTexGeniv.",
 
@@ -1787,7 +1787,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"GetTexGendv",
 		"Double version of $GetTexGeniv.",
 
@@ -1904,7 +1904,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("hint", "the behavior hint", "#GL_FASTEST #GL_NICEST #GL_DONT_CARE")
 	)
 
-	void.func("InitNames", "Clears the selection name stack.")
+	deprecatedGL _ void.func("InitNames", "Clears the selection name stack.")
 
 	void.func(
 		"InterleavedArrays",
@@ -1933,7 +1933,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("cap", "the enable state to query")
 	)
 
-	GLboolean.func(
+	deprecatedGL _ GLboolean.func(
 		"IsList",
 		"Returns true if the {@code list} is the index of some display list.",
 
@@ -1947,7 +1947,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLuint.IN("texture", "the texture name to query")
 	)
 
-	val LightModeli = void.func(
+	val LightModeli = (deprecatedGL _ void.func(
 		"LightModeli",
 		"Set the integer value of a lighting model parameter.",
 
@@ -1957,17 +1957,17 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"#GL_LIGHT_MODEL_AMBIENT #GL_LIGHT_MODEL_LOCAL_VIEWER #GL_LIGHT_MODEL_TWO_SIDE #GL_LIGHT_MODEL_COLOR_CONTROL"
 		),
 		GLint.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	val LightModelf = void.func(
+	val LightModelf = (deprecatedGL _ void.func(
 		"LightModelf",
 		"Float version of $LightModeli.",
 
 		GLenum.IN("pname", "the lighting model parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"LightModeliv",
 		"Pointer version of $LightModeli.",
 
@@ -1975,7 +1975,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"LightModelfv",
 		"Pointer version of $LightModelf.",
 
@@ -1983,7 +1983,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	val Lighti = void.func(
+	val Lighti = (deprecatedGL _ void.func(
 		"Lighti",
 		"Sets the integer value of a light parameter.",
 
@@ -1997,18 +1997,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		GLint.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	val Lightf = void.func(
+	val Lightf = (deprecatedGL _ void.func(
 		"Lightf",
 		"Float version of $Lighti.",
 
 		GLenum.IN("light", "the light for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Lightiv",
 		"Pointer version of $Lighti.",
 
@@ -2017,7 +2017,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Lightfv",
 		"Pointer version of $Lightf.",
 
@@ -2026,7 +2026,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	val LineStipple = void.func(
+	val LineStipple = (deprecatedGL _ void.func(
 		"LineStipple",
 		"""
 		Defines a line stipple. It determines those fragments that are to be drawn when the line is rasterized. Line stippling may be enabled or disabled using
@@ -2041,7 +2041,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		GLushort.IN("pattern", "an unsigned short integer whose 16 bits define the stipple pattern")
-	).javaDocLink
+	)).javaDocLink
 
 	void.func(
 		"LineWidth",
@@ -2050,14 +2050,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("width", "the line width")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"ListBase",
 		"Sets the display list base.",
 
 		GLuint.IN("base", "the display list base offset")
 	)
 
-	val LoadMatrixf = void.func(
+	val LoadMatrixf = (deprecatedGL _ void.func(
 		"LoadMatrixf",
 		"""
 		Sets the current matrix to a 4 &times; 4 matrix in column-major order.
@@ -2075,16 +2075,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"LoadMatrixd",
 		"Double version of $LoadMatrixf.",
 
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"LoadIdentity",
 		"""
 	    Sets the current matrix to the identity matrix.
@@ -2099,7 +2099,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	    """
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"LoadName",
 		"Replaces the value on the top of the selection stack with {@code name}.",
 
@@ -2120,7 +2120,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		)
 	)
 
-	val Map1f = void.func(
+	val Map1f = (deprecatedGL _ void.func(
 		"Map1f",
 		"""
 		Defines a polynomial or rational polynomial mapping to produce vertex, normal, texture coordinates and colors. The values so produced are sent on to
@@ -2133,9 +2133,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("stride", "the number of values in each block of storage"),
 		GLint.IN("order", "the polynomial order"),
 		mods (const, Check("order * stride")) _ GLfloat_p.IN("points", "a set of {@code order} blocks of storage containing control points")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Map1d",
 		"Double version of $Map1f.",
 
@@ -2147,7 +2147,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods (const, Check("stride * order")) _ GLdouble_p.IN("points", "a set of {@code order} blocks of storage containing control points")
 	)
 
-	val Map2f = void.func(
+	val Map2f = (deprecatedGL _ void.func(
 		"Map2f",
 		"Bivariate version of $Map1f.",
 
@@ -2161,9 +2161,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("vstride", "the number of values in the v-dimension in each block of storage"),
 		GLint.IN("vorder", "the polynomial order in the v-dimension"),
 		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLfloat_p.IN("points", "a set of {@code uorder &times; vorder} blocks of storage containing control points")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Map2d",
 		"Double version of $Map2f.",
 
@@ -2179,16 +2179,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLdouble_p.IN("points", "a set of {@code uorder &times; vorder} blocks of storage containing control points")
 	)
 
-	val MapGrid1f = void.func(
+	val MapGrid1f = (deprecatedGL _ void.func(
 		"MapGrid1f",
 		"Defines a one-dimensional grid in the map evaluator domain.",
 
 		GLint.IN("n", "the number of partitions of the interval"),
 		GLfloat.IN("u1", "the first interval endpoint"),
 		GLfloat.IN("u2", "the second interval endpoint")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"MapGrid1d",
 		"Double version of $MapGrid1f.",
 
@@ -2197,7 +2197,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("u2", "the second interval endpoint")
 	)
 
-	val MapGrid2f = void.func(
+	val MapGrid2f = (deprecatedGL _ void.func(
 		"MapGrid2f",
 		"Defines a two-dimensional grid in the map evaluator domain.",
 
@@ -2207,9 +2207,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("vn", "the number of partitions of the interval in the v-dimension"),
 		GLfloat.IN("v1", "the first v-dimension interval endpoint"),
 		GLfloat.IN("v2", "the second v-dimension interval endpoint")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"MapGrid2d",
 		"Double version of $MapGrid2f.",
 
@@ -2221,25 +2221,25 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("v2", "the second v-dimension interval endpoint")
 	)
 
-	val Materiali = void.func(
+	val Materiali = (deprecatedGL _ void.func(
 		"Materiali",
 		"Sets the integer value of a material parameter.",
 
 		GLenum.IN("face", "the material face for which to set the parameter", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK"),
 		GLenum.IN("pname", "the parameter to set", "#GL_SHININESS"),
 		GLint.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	val Materialf = void.func(
+	val Materialf = (deprecatedGL _ void.func(
 		"Materialf",
 		"Float version of $Materiali.",
 
 		GLenum.IN("face", "the material face for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Materialiv",
 		"Pointer version of $Materiali.",
 
@@ -2248,7 +2248,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Materialfv",
 		"Pointer version of $Materialf.",
 
@@ -2257,28 +2257,28 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"MatrixMode",
 		"Set the current matrix mode.",
 		
 		GLenum.IN("mode", "the matrix mode", "#GL_MODELVIEW #GL_PROJECTION #GL_TEXTURE #GL_COLOR")
 	)
 
-	val MultMatrixf = void.func(
+	val MultMatrixf = (deprecatedGL _ void.func(
 		"MultMatrixf",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in column-major order. See $LoadMatrixf for details.",
 		
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"MultMatrixd",
 		"Double version of $MultMatrixf.",
 
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Frustum",
 		"""
 		Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates {@code (lb &ndash; n)}<sup>T</sup>
@@ -2303,15 +2303,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("f", "the far frustum plane")
 	)
 
-	val NewList = void.func(
+	val NewList = (deprecatedGL _ void.func(
 		"NewList",
 		"Begins the definition of a display list.",
 		
 		GLuint.IN("n", "a positive integer to which the display list that follows is assigned"),
 		GLenum.IN("mode", "a symbolic constant that controls the behavior of the GL during display list creation", "#GL_COMPILE #GL_COMPILE_AND_EXECUTE")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"EndList",
 		"""
 		Ends the definition of GL commands to be placed in a display list. It is only when {@code EndList} occurs that the specified display list is actually
@@ -2325,19 +2325,19 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val normalZ = "the z coordinate of the current normal"
 	val normalBuffer = "the normal buffer"
 
-	val Normal3f = void.func("Normal3f", "Sets the current normal.", GLfloat.IN("nx", normalX), GLfloat.IN("ny", normalY), GLfloat.IN("nz", normalZ)).javaDocLink
-	val Normal3b = void.func("Normal3b", "Byte version of $Normal3f.", GLbyte.IN("nx", normalX), GLbyte.IN("ny", normalY), GLbyte.IN("nz", normalZ)).javaDocLink
-	val Normal3s = void.func("Normal3s", "Short version of $Normal3f.", GLshort.IN("nx", normalX), GLshort.IN("ny", normalY), GLshort.IN("nz", normalZ)).javaDocLink
-	val Normal3i = void.func("Normal3i", "Integer version of $Normal3f.", GLint.IN("nx", normalX), GLint.IN("ny", normalY), GLint.IN("nz", normalZ)).javaDocLink
-	val Normal3d = void.func("Normal3d", "Double version of $Normal3f.", GLdouble.IN("nx", normalX), GLdouble.IN("ny", normalY), GLdouble.IN("nz", normalZ)).javaDocLink
+	val Normal3f = (deprecatedGL _ void.func("Normal3f", "Sets the current normal.", GLfloat.IN("nx", normalX), GLfloat.IN("ny", normalY), GLfloat.IN("nz", normalZ))).javaDocLink
+	val Normal3b = (deprecatedGL _ void.func("Normal3b", "Byte version of $Normal3f.", GLbyte.IN("nx", normalX), GLbyte.IN("ny", normalY), GLbyte.IN("nz", normalZ))).javaDocLink
+	val Normal3s = (deprecatedGL _ void.func("Normal3s", "Short version of $Normal3f.", GLshort.IN("nx", normalX), GLshort.IN("ny", normalY), GLshort.IN("nz", normalZ))).javaDocLink
+	val Normal3i = (deprecatedGL _ void.func("Normal3i", "Integer version of $Normal3f.", GLint.IN("nx", normalX), GLint.IN("ny", normalY), GLint.IN("nz", normalZ))).javaDocLink
+	val Normal3d = (deprecatedGL _ void.func("Normal3d", "Double version of $Normal3f.", GLdouble.IN("nx", normalX), GLdouble.IN("ny", normalY), GLdouble.IN("nz", normalZ))).javaDocLink
 
-	void.func("Normal3fv", "Pointer version of $Normal3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", normalBuffer))
-	void.func("Normal3bv", "Pointer version of $Normal3b.", mods(const, Check(3)) _ GLbyte_p.IN("v", normalBuffer))
-	void.func("Normal3sv", "Pointer version of $Normal3s.", mods(const, Check(3)) _ GLshort_p.IN("v", normalBuffer))
-	void.func("Normal3iv", "Pointer version of $Normal3i.", mods(const, Check(3)) _ GLint_p.IN("v", normalBuffer))
-	void.func("Normal3dv", "Pointer version of $Normal3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", normalBuffer))
+	deprecatedGL _ void.func("Normal3fv", "Pointer version of $Normal3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", normalBuffer))
+	deprecatedGL _ void.func("Normal3bv", "Pointer version of $Normal3b.", mods(const, Check(3)) _ GLbyte_p.IN("v", normalBuffer))
+	deprecatedGL _ void.func("Normal3sv", "Pointer version of $Normal3s.", mods(const, Check(3)) _ GLshort_p.IN("v", normalBuffer))
+	deprecatedGL _ void.func("Normal3iv", "Pointer version of $Normal3i.", mods(const, Check(3)) _ GLint_p.IN("v", normalBuffer))
+	deprecatedGL _ void.func("Normal3dv", "Pointer version of $Normal3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", normalBuffer))
 
-	void.func(
+	deprecatedGL _ void.func(
 		"NormalPointer",
 		"Specifies the location and organization of a normal array.",
 
@@ -2351,7 +2351,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the normal array data")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Ortho",
 		"""
 		Manipulates the current matrix with a matrix that produces parallel projection, in such a way that the coordinates ${code("(lb &ndash; n)<sup>T</sup>")}
@@ -2376,7 +2376,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("f", "the far frustum plane")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PassThrough",
 		"""
 		Inserts a marker when the GL is in feeback mode. {@code token} is returned as if it were a primitive; it is indicated with its own unique identifying
@@ -2387,16 +2387,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("token", "the marker value to insert")
 	)
 
-	val PixelMapfv = void.func(
+	val PixelMapfv = (deprecatedGL _ void.func(
 		"PixelMapfv",
 		"Sets a pixel map lookup table.",
 
 		GLenum.IN("map", "the map to set", PIXEL_MAP_NAMES),
 		AutoSize("values") _ GLsizei.IN("size", "the map size"),
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLfloat_p.IN("values", "the map values")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PixelMapusv",
 		"Unsigned short version of $PixelMapfv.",
 		
@@ -2405,7 +2405,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLushort_p.IN("values", "the map values")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PixelMapuiv",
 		"Unsigned integer version of $PixelMapfv.",
 
@@ -2438,7 +2438,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("param", "the parameter value")
 	)
 
-	val PixelTransferi = void.func(
+	val PixelTransferi = (deprecatedGL _ void.func(
 		"PixelTransferi",
 		"Sets the integer value of a pixel transfer parameter.",
 		
@@ -2455,9 +2455,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		    """
 		),
 		GLint.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PixelTransferf",
 		"Float version of $PixelTransferi.",
 
@@ -2465,7 +2465,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("param", "the parameter value")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PixelZoom",
 		"""
 		Controls the conversion of a group of fragments.
@@ -2518,7 +2518,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("units", "the constant scale")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PolygonStipple",
 		"""
 		Defines a polygon stipple. It works much the same way as $LineStipple, masking out certain fragments produced by rasterization so that they
@@ -2534,7 +2534,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLubyte_p.IN("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
 	)
 
-	val PushAttrib = void.func(
+	val PushAttrib = (deprecatedGL _ void.func(
 		"PushAttrib",
 		"""
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the server attribute stack. Each constant refers to a
@@ -2556,9 +2556,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			#GL_STENCIL_BUFFER_BIT #GL_TEXTURE_BIT #GL_TRANSFORM_BIT #GL_VIEWPORT_BIT #GL_ALL_ATTRIB_BITS
 			"""
 		)
-	).javaDocLink
+	)).javaDocLink
 
-	val PushClientAttrib = void.func(
+	val PushClientAttrib = (deprecatedGL _ void.func(
 		"PushClientAttrib",
 		"""
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the client attribute stack. Each constant refers to a
@@ -2572,26 +2572,26 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLbitfield.IN("mask", "the state variables to push", "#GL_CLIENT_VERTEX_ARRAY_BIT #GL_CLIENT_PIXEL_STORE_BIT #GL_CLIENT_ALL_ATTRIB_BITS")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PopAttrib",
 		"Resets the values of those state variables that were saved with the last $PushAttrib. Those not saved remain unchanged."
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PopClientAttrib",
 		"Resets the values of those state variables that were saved with the last $PushClientAttrib. Those not saved remain unchanged."
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PopMatrix",
 		"Pops the top entry off the current matrix stack, replacing the current matrix with the matrix that was the second entry in the stack."
 	)
 
-	void.func("PopName", "Pops one name off the top of the selection name stack.")
+	deprecatedGL _ void.func("PopName", "Pops one name off the top of the selection name stack.")
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PrioritizeTextures",
 		"""
 		Sets the priority of texture objects. Each priority value is clamped to the range [0, 1] before it is assigned. Zero indicates the lowest priority, with
@@ -2604,9 +2604,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	)
 
 
-	void.func("PushMatrix", "Pushes the current matrix stack down by one, duplicating the current matrix in both the top of the stack and the entry below it.")
+	deprecatedGL _ void.func("PushMatrix", "Pushes the current matrix stack down by one, duplicating the current matrix in both the top of the stack and the entry below it.")
 
-	void.func(
+	deprecatedGL _ void.func(
 		"PushName",
 		"Causes {@code name} to be pushed onto the selection name stack.",
 
@@ -2620,7 +2620,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val rasterW = "the {@code w} raster coordinate"
 	val rasterBuffer = "the raster position buffer"
 
-	val RasterPos2i = void.func(
+	val RasterPos2i = (deprecatedGL _ void.func(
 		"RasterPos2i",
 		"""
 		Sets the two-dimensional current raster position. {@code z} is implicitly set to 0 and {@code w} implicitly set to 1.
@@ -2634,36 +2634,36 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLint.IN("x", rasterX),
 		GLint.IN("y", rasterY)
-	).javaDocLink
+	)).javaDocLink
 
-	val RasterPos2s = void.func("RasterPos2s", "Short version of $RasterPos2i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY)).javaDocLink
-	val RasterPos2f = void.func("RasterPos2f", "Float version of $RasterPos2i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY)).javaDocLink
-	val RasterPos2d = void.func("RasterPos2d", "Double version of $RasterPos2i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY)).javaDocLink
+	val RasterPos2s = (deprecatedGL _ void.func("RasterPos2s", "Short version of $RasterPos2i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY))).javaDocLink
+	val RasterPos2f = (deprecatedGL _ void.func("RasterPos2f", "Float version of $RasterPos2i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY))).javaDocLink
+	val RasterPos2d = (deprecatedGL _ void.func("RasterPos2d", "Double version of $RasterPos2i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY))).javaDocLink
 
-	void.func("RasterPos2iv", "Pointer version of $RasterPos2i.", mods(const, Check(2)) _ GLint_p.IN("coords", rasterBuffer))
-	void.func("RasterPos2sv", "Pointer version of $RasterPos2s.", mods(const, Check(2)) _ GLshort_p.IN("coords", rasterBuffer))
-	void.func("RasterPos2fv", "Pointer version of $RasterPos2f.", mods(const, Check(2)) _ GLfloat_p.IN("coords", rasterBuffer))
-	void.func("RasterPos2dv", "Pointer version of $RasterPos2d.", mods(const, Check(2)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos2iv", "Pointer version of $RasterPos2i.", mods(const, Check(2)) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos2sv", "Pointer version of $RasterPos2s.", mods(const, Check(2)) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos2fv", "Pointer version of $RasterPos2f.", mods(const, Check(2)) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos2dv", "Pointer version of $RasterPos2d.", mods(const, Check(2)) _ GLdouble_p.IN("coords", rasterBuffer))
 
-	val RasterPos3i = void.func(
+	val RasterPos3i = (deprecatedGL _ void.func(
 		"RasterPos3i",
 		"Sets the three-dimensional current raster position. {@code w} is implicitly set to 1. See $RasterPos2i for more details.",
 
 		GLint.IN("x", rasterX),
 		GLint.IN("y", rasterY),
 		GLint.IN("z", rasterZ)
-	).javaDocLink
+	)).javaDocLink
 
-	val RasterPos3s = void.func("RasterPos3s", "Short version of $RasterPos3i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY), GLshort.IN("z", rasterZ)).javaDocLink
-	val RasterPos3f = void.func("RasterPos3f", "Float version of $RasterPos3i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ)).javaDocLink
-	val RasterPos3d = void.func("RasterPos3d", "Double version of $RasterPos3i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ)).javaDocLink
+	val RasterPos3s = (deprecatedGL _ void.func("RasterPos3s", "Short version of $RasterPos3i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY), GLshort.IN("z", rasterZ))).javaDocLink
+	val RasterPos3f = (deprecatedGL _ void.func("RasterPos3f", "Float version of $RasterPos3i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ))).javaDocLink
+	val RasterPos3d = (deprecatedGL _ void.func("RasterPos3d", "Double version of $RasterPos3i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ))).javaDocLink
 
-	void.func("RasterPos3iv", "Pointer version of $RasterPos3i.", mods(const, Check(3)) _ GLint_p.IN("coords", rasterBuffer))
-	void.func("RasterPos3sv", "Pointer version of $RasterPos3s.", mods(const, Check(3)) _ GLshort_p.IN("coords", rasterBuffer))
-	void.func("RasterPos3fv", "Pointer version of $RasterPos3f.", mods(const, Check(3)) _ GLfloat_p.IN("coords", rasterBuffer))
-	void.func("RasterPos3dv", "Pointer version of $RasterPos3d.", mods(const, Check(3)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos3iv", "Pointer version of $RasterPos3i.", mods(const, Check(3)) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos3sv", "Pointer version of $RasterPos3s.", mods(const, Check(3)) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos3fv", "Pointer version of $RasterPos3f.", mods(const, Check(3)) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos3dv", "Pointer version of $RasterPos3d.", mods(const, Check(3)) _ GLdouble_p.IN("coords", rasterBuffer))
 
-	val RasterPos4i = void.func(
+	val RasterPos4i = (deprecatedGL _ void.func(
 		"RasterPos4i",
 		"Sets the four-dimensional current raster position. See $RasterPos2i for more details.",
 
@@ -2671,16 +2671,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("y", rasterY),
 		GLint.IN("z", rasterZ),
 		GLint.IN("w", rasterW)
-	).javaDocLink
+	)).javaDocLink
 
-	val RasterPos4s = void.func("RasterPos4s", "Short version of $RasterPos4i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY), GLshort.IN("z", rasterZ), GLshort.IN("w", rasterW)).javaDocLink
-	val RasterPos4f = void.func("RasterPos4f", "Float version of RasterPos4i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ), GLfloat.IN("w", rasterW)).javaDocLink
-	val RasterPos4d = void.func("RasterPos4d", "Double version of $RasterPos4i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ), GLdouble.IN("w", rasterW)).javaDocLink
+	val RasterPos4s = (deprecatedGL _ void.func("RasterPos4s", "Short version of $RasterPos4i.", GLshort.IN("x", rasterX), GLshort.IN("y", rasterY), GLshort.IN("z", rasterZ), GLshort.IN("w", rasterW))).javaDocLink
+	val RasterPos4f = (deprecatedGL _ void.func("RasterPos4f", "Float version of RasterPos4i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ), GLfloat.IN("w", rasterW))).javaDocLink
+	val RasterPos4d = (deprecatedGL _ void.func("RasterPos4d", "Double version of $RasterPos4i.", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ), GLdouble.IN("w", rasterW))).javaDocLink
 
-	void.func("RasterPos4iv", "Pointer version of $RasterPos4i.", mods(const, Check(4)) _ GLint_p.IN("coords", rasterBuffer))
-	void.func("RasterPos4sv", "Pointer version of $RasterPos4s.", mods(const, Check(4)) _ GLshort_p.IN("coords", rasterBuffer))
-	void.func("RasterPos4fv", "Pointer version of $RasterPos4f.", mods(const, Check(4)) _ GLfloat_p.IN("coords", rasterBuffer))
-	void.func("RasterPos4dv", "Pointer version of $RasterPos4d.", mods(const, Check(4)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos4iv", "Pointer version of $RasterPos4i.", mods(const, Check(4)) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos4sv", "Pointer version of $RasterPos4s.", mods(const, Check(4)) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos4fv", "Pointer version of $RasterPos4f.", mods(const, Check(4)) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ void.func("RasterPos4dv", "Pointer version of $RasterPos4d.", mods(const, Check(4)) _ GLdouble_p.IN("coords", rasterBuffer))
 
 	void.func(
 		"ReadBuffer",
@@ -2725,7 +2725,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val rectBuffer1 = "the first vertex buffer"
 	val rectBuffer2 = "the second vertex buffer"
 
-	val Recti = void.func(
+	val Recti = (deprecatedGL _ void.func(
 		"Recti",
 		"""
 		Specifies a rectangle as two corner vertices. The effect of the Rect command
@@ -2748,25 +2748,25 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("y1", rectY1),
 		GLint.IN("x2", rectX2),
 		GLint.IN("y2", rectY2)
-	).javaDocLink
+	)).javaDocLink
 
-	val Rects = void.func("Rects", "Short version of $Recti.", GLshort.IN("x1", rectX1), GLshort.IN("y1", rectY1), GLshort.IN("x2", rectX2), GLshort.IN("y2", rectY2)).javaDocLink
-	val Rectf = void.func("Rectf", "Float version of $Recti.", GLfloat.IN("x1", rectX1), GLfloat.IN("y1", rectY1), GLfloat.IN("x2", rectX2), GLfloat.IN("y2", rectY2)).javaDocLink
-	val Rectd = void.func("Rectd", "Double version of $Recti.", GLdouble.IN("x1", rectX1), GLdouble.IN("y1", rectY1), GLdouble.IN("x2", rectX2), GLdouble.IN("y2", rectY2)).javaDocLink
+	val Rects = (deprecatedGL _ void.func("Rects", "Short version of $Recti.", GLshort.IN("x1", rectX1), GLshort.IN("y1", rectY1), GLshort.IN("x2", rectX2), GLshort.IN("y2", rectY2))).javaDocLink
+	val Rectf = (deprecatedGL _ void.func("Rectf", "Float version of $Recti.", GLfloat.IN("x1", rectX1), GLfloat.IN("y1", rectY1), GLfloat.IN("x2", rectX2), GLfloat.IN("y2", rectY2))).javaDocLink
+	val Rectd = (deprecatedGL _ void.func("Rectd", "Double version of $Recti.", GLdouble.IN("x1", rectX1), GLdouble.IN("y1", rectY1), GLdouble.IN("x2", rectX2), GLdouble.IN("y2", rectY2))).javaDocLink
 
-	void.func("Rectiv", "Pointer version of $Recti.", mods(const, Check(2)) _ GLint_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLint_p.IN("v2", rectBuffer2))
-	void.func("Rectsv", "Pointer version of $Rects.", mods(const, Check(2)) _ GLshort_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLshort_p.IN("v2", rectBuffer2))
-	void.func("Rectfv", "Pointer version of $Rectf.", mods(const, Check(2)) _ GLfloat_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLfloat_p.IN("v2", rectBuffer2))
-	void.func("Rectdv", "Pointer version of $Rectd.", mods(const, Check(2)) _ GLdouble_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLdouble_p.IN("v2", rectBuffer2))
+	deprecatedGL _ void.func("Rectiv", "Pointer version of $Recti.", mods(const, Check(2)) _ GLint_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLint_p.IN("v2", rectBuffer2))
+	deprecatedGL _ void.func("Rectsv", "Pointer version of $Rects.", mods(const, Check(2)) _ GLshort_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLshort_p.IN("v2", rectBuffer2))
+	deprecatedGL _ void.func("Rectfv", "Pointer version of $Rectf.", mods(const, Check(2)) _ GLfloat_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLfloat_p.IN("v2", rectBuffer2))
+	deprecatedGL _ void.func("Rectdv", "Pointer version of $Rectd.", mods(const, Check(2)) _ GLdouble_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLdouble_p.IN("v2", rectBuffer2))
 
-	GLint.func(
+	deprecatedGL _ GLint.func(
 		"RenderMode",
 		"Sets the current render mode. The default is #GL_RENDER.",
 
 		GLenum.IN("mode", "the render mode", "#GL_RENDER #GL_SELECT #GL_FEEDBACK")
 	)
 
-	val Rotatef = void.func(
+	val Rotatef = (deprecatedGL _ void.func(
 		"Rotatef",
 		"""
 		Manipulates the current matrix with a rotation matrix.
@@ -2795,9 +2795,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("x", "the x coordinate of the rotation vector"),
 		GLfloat.IN("y", "the y coordinate of the rotation vector"),
 		GLfloat.IN("z", "the z coordinate of the rotation vector")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Rotated",
 		"Double version of $Rotatef.",
 
@@ -2807,7 +2807,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("z", "the z coordinate of the rotation vector")
 	)
 
-	val Scalef = void.func(
+	val Scalef = (deprecatedGL _ void.func(
 		"Scalef",
 		"""
 		Manipulates the current matrix with a general scaling matrix along the x-, y- and z- axes.
@@ -2824,9 +2824,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("x", "the x-axis scaling factor"),
 		GLfloat.IN("y", "the y-axis scaling factor"),
 		GLfloat.IN("z", "the z-axis scaling factor")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Scaled",
 		"Double version of $Scalef.",
 
@@ -2850,7 +2850,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("height", "the scissor rectangle height")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"SelectBuffer",
 		"Sets the selection array.",
 
@@ -2858,7 +2858,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLuint_p.OUT("buffer", "an array of unsigned integers to be potentially filled names")
 	)
 
-	void.func(
+	deprecatedGL _ void.func(
 		"ShadeModel",
 		"""
 		Sets the current shade mode. The initial value of the shade mode is {@link #GL_SMOOTH}.
@@ -2925,58 +2925,58 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val texCoordQ = "the q component of the current texture coordinates"
 	val texCoordBuffer = "the texture coordinate buffer"
 
-	val TexCoord1f = void.func(
+	val TexCoord1f = (deprecatedGL _ void.func(
 		"TexCoord1f",
 		"Sets the current one-dimensional texture coordinate. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
 		GLfloat.IN("s", texCoordS)
-	).javaDocLink
+	)).javaDocLink
 
-	val TexCoord1s = void.func("TexCoord1s", "Short version of $TexCoord1f.", GLshort.IN("s", texCoordS)).javaDocLink
-	val TexCoord1i = void.func("TexCoord1i", "Integer version of $TexCoord1f.", GLint.IN("s", texCoordS)).javaDocLink
-	val TexCoord1d = void.func("TexCoord1d", "Double version of $TexCoord1f.", GLdouble.IN("s", texCoordS)).javaDocLink
+	val TexCoord1s = (deprecatedGL _ void.func("TexCoord1s", "Short version of $TexCoord1f.", GLshort.IN("s", texCoordS))).javaDocLink
+	val TexCoord1i = (deprecatedGL _ void.func("TexCoord1i", "Integer version of $TexCoord1f.", GLint.IN("s", texCoordS))).javaDocLink
+	val TexCoord1d = (deprecatedGL _ void.func("TexCoord1d", "Double version of $TexCoord1f.", GLdouble.IN("s", texCoordS))).javaDocLink
 
-	void.func("TexCoord1fv", "Pointer version of $TexCoord1f.", mods(const, Check(1)) _ GLfloat_p.IN("v", texCoordBuffer))
-	void.func("TexCoord1sv", "Pointer version of $TexCoord1s.", mods(const, Check(1)) _ GLshort_p.IN("v", texCoordBuffer))
-	void.func("TexCoord1iv", "Pointer version of $TexCoord1i.", mods(const, Check(1)) _ GLint_p.IN("v", texCoordBuffer))
-	void.func("TexCoord1dv", "Pointer version of $TexCoord1d.", mods(const, Check(1)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord1fv", "Pointer version of $TexCoord1f.", mods(const, Check(1)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord1sv", "Pointer version of $TexCoord1s.", mods(const, Check(1)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord1iv", "Pointer version of $TexCoord1i.", mods(const, Check(1)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord1dv", "Pointer version of $TexCoord1d.", mods(const, Check(1)) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	val TexCoord2f = void.func(
+	val TexCoord2f = (deprecatedGL _ void.func(
 		"TexCoord2f",
 		"Sets the current two-dimensional texture coordinate. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
 		GLfloat.IN("s", texCoordS),
 		GLfloat.IN("t", texCoordT)
-	).javaDocLink
+	)).javaDocLink
 
-	val TexCoord2s = void.func("TexCoord2s", "Short version of $TexCoord2f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT)).javaDocLink
-	val TexCoord2i = void.func("TexCoord2i", "Integer version of $TexCoord2f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT)).javaDocLink
-	val TexCoord2d = void.func("TexCoord2d", "Double version of $TexCoord2f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT)).javaDocLink
+	val TexCoord2s = (deprecatedGL _ void.func("TexCoord2s", "Short version of $TexCoord2f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT))).javaDocLink
+	val TexCoord2i = (deprecatedGL _ void.func("TexCoord2i", "Integer version of $TexCoord2f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))).javaDocLink
+	val TexCoord2d = (deprecatedGL _ void.func("TexCoord2d", "Double version of $TexCoord2f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))).javaDocLink
 
-	void.func("TexCoord2fv", "Pointer version of $TexCoord2f.", mods(const, Check(2)) _ GLfloat_p.IN("v", texCoordBuffer))
-	void.func("TexCoord2sv", "Pointer version of $TexCoord2s.", mods(const, Check(2)) _ GLshort_p.IN("v", texCoordBuffer))
-	void.func("TexCoord2iv", "Pointer version of $TexCoord2i.", mods(const, Check(2)) _ GLint_p.IN("v", texCoordBuffer))
-	void.func("TexCoord2dv", "Pointer version of $TexCoord2d.", mods(const, Check(2)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord2fv", "Pointer version of $TexCoord2f.", mods(const, Check(2)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord2sv", "Pointer version of $TexCoord2s.", mods(const, Check(2)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord2iv", "Pointer version of $TexCoord2i.", mods(const, Check(2)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord2dv", "Pointer version of $TexCoord2d.", mods(const, Check(2)) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	val TexCoord3f = void.func(
+	val TexCoord3f = (deprecatedGL _ void.func(
 		"TexCoord3f",
 		"Sets the current three-dimensional texture coordinate. {@code q} is implicitly set to 1.",
 
 		GLfloat.IN("s", texCoordS),
 		GLfloat.IN("t", texCoordT),
 		GLfloat.IN("r", texCoordR)
-	).javaDocLink
+	)).javaDocLink
 
-	val TexCoord3s = void.func("TexCoord3s", "Short version of $TexCoord3f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR)).javaDocLink
-	val TexCoord3i = void.func("TexCoord3i", "Integer version of $TexCoord3f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR)).javaDocLink
-	val TexCoord3d = void.func("TexCoord3d", "Double version of $TexCoord3f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR)).javaDocLink
+	val TexCoord3s = (deprecatedGL _ void.func("TexCoord3s", "Short version of $TexCoord3f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR))).javaDocLink
+	val TexCoord3i = (deprecatedGL _ void.func("TexCoord3i", "Integer version of $TexCoord3f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))).javaDocLink
+	val TexCoord3d = (deprecatedGL _ void.func("TexCoord3d", "Double version of $TexCoord3f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))).javaDocLink
 
-	void.func("TexCoord3fv", "Pointer version of $TexCoord3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", texCoordBuffer))
-	void.func("TexCoord3sv", "Pointer version of $TexCoord3s.", mods(const, Check(3)) _ GLshort_p.IN("v", texCoordBuffer))
-	void.func("TexCoord3iv", "Pointer version of $TexCoord3i.", mods(const, Check(3)) _ GLint_p.IN("v", texCoordBuffer))
-	void.func("TexCoord3dv", "Pointer version of $TexCoord3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord3fv", "Pointer version of $TexCoord3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord3sv", "Pointer version of $TexCoord3s.", mods(const, Check(3)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord3iv", "Pointer version of $TexCoord3i.", mods(const, Check(3)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord3dv", "Pointer version of $TexCoord3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	val TexCoord4f = void.func(
+	val TexCoord4f = (deprecatedGL _ void.func(
 		"TexCoord4f",
 		"Sets the current four-dimensional texture coordinate.",
 
@@ -2984,18 +2984,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("t", texCoordT),
 		GLfloat.IN("r", texCoordR),
 		GLfloat.IN("q", texCoordQ)
-	).javaDocLink
+	)).javaDocLink
 
-	val TexCoord4s = void.func("TexCoord4s", "Short version of $TexCoord4f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ)).javaDocLink
-	val TexCoord4i = void.func("TexCoord4i", "Integer version of $TexCoord4f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ)).javaDocLink
-	val TexCoord4d = void.func("TexCoord4d", "Double version of $TexCoord4f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ)).javaDocLink
+	val TexCoord4s = (deprecatedGL _ void.func("TexCoord4s", "Short version of $TexCoord4f.", GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ))).javaDocLink
+	val TexCoord4i = (deprecatedGL _ void.func("TexCoord4i", "Integer version of $TexCoord4f.", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))).javaDocLink
+	val TexCoord4d = (deprecatedGL _ void.func("TexCoord4d", "Double version of $TexCoord4f.", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))).javaDocLink
 
-	void.func("TexCoord4fv", "Pointer version of $TexCoord4f.", mods(const, Check(4)) _ GLfloat_p.IN("v", texCoordBuffer))
-	void.func("TexCoord4sv", "Pointer version of $TexCoord4s.", mods(const, Check(4)) _ GLshort_p.IN("v", texCoordBuffer))
-	void.func("TexCoord4iv", "Pointer version of $TexCoord4i.", mods(const, Check(4)) _ GLint_p.IN("v", texCoordBuffer))
-	void.func("TexCoord4dv", "Pointer version of $TexCoord4d.", mods(const, Check(4)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord4fv", "Pointer version of $TexCoord4f.", mods(const, Check(4)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord4sv", "Pointer version of $TexCoord4s.", mods(const, Check(4)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord4iv", "Pointer version of $TexCoord4i.", mods(const, Check(4)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void.func("TexCoord4dv", "Pointer version of $TexCoord4d.", mods(const, Check(4)) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	void.func(
+	deprecatedGL _ void.func(
 		"TexCoordPointer",
 		"Specifies the location and organization of a texture coordinate array.",
 
@@ -3066,7 +3066,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	val TexGeni = void.func(
+	val TexGeni = (deprecatedGL _ void.func(
 		"TexGeni",
 		"""
 		Sets an integer texture coordinate generation parameter.
@@ -3083,9 +3083,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("coord", "the coordinate for which to set the parameter", TEX_COORDS),
 		GLenum.IN("pname", "the parameter to set", "#GL_TEXTURE_GEN_MODE"),
 		GLint.IN("param", "the parameter value", "#GL_OBJECT_LINEAR #GL_EYE_LINEAR #GL_SPHERE_MAP #GL_REFLECTION_MAP #GL_NORMAL_MAP")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"TexGeniv",
 		"Pointer version of $TexGeni.",
 
@@ -3094,16 +3094,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check("4")) _ GLint_p.IN("params", "the parameter value")
 	)
 
-	val TexGenf = void.func(
+	val TexGenf = (deprecatedGL _ void.func(
 		"TexGenf",
 		"Float version of $TexGeni.",
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"TexGenfv",
 		"Pointer version of $TexGenf.",
 
@@ -3112,16 +3112,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	val TexGend = void.func(
+	val TexGend = (deprecatedGL _ void.func(
 		"TexGend",
 		"Double version of $TexGeni.",
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLdouble.IN("param", "the parameter value")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"TexGendv",
 		"Pointer version of $TexGend.",
 
@@ -3339,7 +3339,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
-	val Translatef = void.func(
+	val Translatef = (deprecatedGL _ void.func(
 		"Translatef",
 		"""
 		Manipulates the current matrix with a translation matrix along the x-, y- and z- axes.
@@ -3356,9 +3356,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("x", "the x-axis translation"),
 		GLfloat.IN("y", "the y-axis translation"),
 		GLfloat.IN("z", "the z-axis translation")
-	).javaDocLink
+	)).javaDocLink
 
-	void.func(
+	deprecatedGL _ void.func(
 		"Translated",
 		"Double version of $Translatef.",
 
@@ -3374,7 +3374,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val vertexW = "the vertex w coordinate"
 	val vertexBuffer = "the vertex buffer"
 
-	val Vertex2f = void.func(
+	val Vertex2f = (deprecatedGL _ void.func(
 		"Vertex2f",
 	    """
 		Specifies a single vertex between $Begin and $End by giving its coordinates in two dimensions. The z coordinate is implicitly set
@@ -3383,18 +3383,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	    GLfloat.IN("x", vertexX),
 	    GLfloat.IN("y", vertexY)
-	).javaDocLink
+	)).javaDocLink
 
-	val Vertex2s = void.func("Vertex2s", "Short version of $Vertex2f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY)).javaDocLink
-	val Vertex2i = void.func("Vertex2i", "Integer version of $Vertex2f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY)).javaDocLink
-	val Vertex2d = void.func("Vertex2d", "Double version of $Vertex2f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY)).javaDocLink
+	val Vertex2s = (deprecatedGL _ void.func("Vertex2s", "Short version of $Vertex2f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY))).javaDocLink
+	val Vertex2i = (deprecatedGL _ void.func("Vertex2i", "Integer version of $Vertex2f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY))).javaDocLink
+	val Vertex2d = (deprecatedGL _ void.func("Vertex2d", "Double version of $Vertex2f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY))).javaDocLink
 
-	void.func("Vertex2fv", "Pointer version of $Vertex2f.", mods(const, Check(2)) _ GLfloat_p.IN("coords", vertexBuffer))
-	void.func("Vertex2sv", "Pointer version of $Vertex2s.", mods(const, Check(2)) _ GLshort_p.IN("coords", vertexBuffer))
-	void.func("Vertex2iv", "Pointer version of $Vertex2i.", mods(const, Check(2)) _ GLint_p.IN("coords", vertexBuffer))
-	void.func("Vertex2dv", "Pointer version of $Vertex2d.", mods(const, Check(2)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex2fv", "Pointer version of $Vertex2f.", mods(const, Check(2)) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex2sv", "Pointer version of $Vertex2s.", mods(const, Check(2)) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex2iv", "Pointer version of $Vertex2i.", mods(const, Check(2)) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex2dv", "Pointer version of $Vertex2d.", mods(const, Check(2)) _ GLdouble_p.IN("coords", vertexBuffer))
 
-	val Vertex3f = void.func(
+	val Vertex3f = (deprecatedGL _ void.func(
 		"Vertex3f",
 		"""
 		Specifies a single vertex between $Begin and $End by giving its coordinates in three dimensions. The w coordinate is implicitly set
@@ -3404,18 +3404,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("x", vertexX),
 		GLfloat.IN("y", vertexY),
 		GLfloat.IN("z", vertexZ)
-	).javaDocLink
+	)).javaDocLink
 
-	val Vertex3s = void.func("Vertex3s", "Short version of $Vertex3f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY), GLshort.IN("z", vertexZ)).javaDocLink
-	val Vertex3i = void.func("Vertex3i", "Integer version of $Vertex3f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ)).javaDocLink
-	val Vertex3d = void.func("Vertex3d", "Double version of $Vertex3f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ)).javaDocLink
+	val Vertex3s = (deprecatedGL _ void.func("Vertex3s", "Short version of $Vertex3f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY), GLshort.IN("z", vertexZ))).javaDocLink
+	val Vertex3i = (deprecatedGL _ void.func("Vertex3i", "Integer version of $Vertex3f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ))).javaDocLink
+	val Vertex3d = (deprecatedGL _ void.func("Vertex3d", "Double version of $Vertex3f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ))).javaDocLink
 
-	void.func("Vertex3fv", "Pointer version of $Vertex3f.", mods(const, Check(3)) _ GLfloat_p.IN("coords", vertexBuffer))
-	void.func("Vertex3sv", "Pointer version of $Vertex3s.", mods(const, Check(3)) _ GLshort_p.IN("coords", vertexBuffer))
-	void.func("Vertex3iv", "Pointer version of $Vertex3i.", mods(const, Check(3)) _ GLint_p.IN("coords", vertexBuffer))
-	void.func("Vertex3dv", "Pointer version of $Vertex3d.", mods(const, Check(3)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex3fv", "Pointer version of $Vertex3f.", mods(const, Check(3)) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex3sv", "Pointer version of $Vertex3s.", mods(const, Check(3)) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex3iv", "Pointer version of $Vertex3i.", mods(const, Check(3)) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex3dv", "Pointer version of $Vertex3d.", mods(const, Check(3)) _ GLdouble_p.IN("coords", vertexBuffer))
 
-	val Vertex4f = void.func(
+	val Vertex4f = (deprecatedGL _ void.func(
 		"Vertex4f",
 		"Specifies a single vertex between $Begin and $End by giving its coordinates in four dimensions.",
 
@@ -3423,18 +3423,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("y", vertexY),
 		GLfloat.IN("z", vertexZ),
 		GLfloat.IN("w", vertexW)
-	).javaDocLink
+	)).javaDocLink
 
-	val Vertex4s = void.func("Vertex4s", "Short version of $Vertex4f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY), GLshort.IN("z", vertexZ), GLshort.IN("w", vertexW)).javaDocLink
-	val Vertex4i = void.func("Vertex4i", "Integer version of $Vertex4f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ), GLint.IN("w", vertexW)).javaDocLink
-	val Vertex4d = void.func("Vertex4d", "Double version of $Vertex4f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ), GLdouble.IN("w", vertexW)).javaDocLink
+	val Vertex4s = (deprecatedGL _ void.func("Vertex4s", "Short version of $Vertex4f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY), GLshort.IN("z", vertexZ), GLshort.IN("w", vertexW))).javaDocLink
+	val Vertex4i = (deprecatedGL _ void.func("Vertex4i", "Integer version of $Vertex4f.", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ), GLint.IN("w", vertexW))).javaDocLink
+	val Vertex4d = (deprecatedGL _ void.func("Vertex4d", "Double version of $Vertex4f.", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ), GLdouble.IN("w", vertexW))).javaDocLink
 
-	void.func("Vertex4fv", "Pointer version of $Vertex4f.", mods(const, Check(4)) _ GLfloat_p.IN("coords", vertexBuffer))
-	void.func("Vertex4sv", "Pointer version of $Vertex4s.", mods(const, Check(4)) _ GLshort_p.IN("coords", vertexBuffer))
-	void.func("Vertex4iv", "Pointer version of $Vertex4i.", mods(const, Check(4)) _ GLint_p.IN("coords", vertexBuffer))
-	void.func("Vertex4dv", "Pointer version of $Vertex4d.", mods(const, Check(4)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex4fv", "Pointer version of $Vertex4f.", mods(const, Check(4)) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex4sv", "Pointer version of $Vertex4s.", mods(const, Check(4)) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex4iv", "Pointer version of $Vertex4i.", mods(const, Check(4)) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ void.func("Vertex4dv", "Pointer version of $Vertex4d.", mods(const, Check(4)) _ GLdouble_p.IN("coords", vertexBuffer))
 
-	void.func(
+	deprecatedGL _ void.func(
 		"VertexPointer",
 		"Specifies the location and organization of a vertex array.",
 

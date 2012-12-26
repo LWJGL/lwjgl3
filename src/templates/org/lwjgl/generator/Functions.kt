@@ -22,7 +22,7 @@ import java.nio.*
 	of the native function signature to the proper Java -> JNI -> native function code.
 
 	We then try to generate additional Java methods that make the user's life easier. We
-	use the TypeModifiers on the function signature parameters and return values to figure
+	use the TemplateModifiers on the function signature parameters and return values to figure
 	out what kind of FunctionTransforms we should apply. Depending on the modifiers, we
 	may generate one or more additional methods.
 */
@@ -42,7 +42,7 @@ public abstract class Function(
 	val name: String,
     val documentation: String,
     vararg params: Parameter
-) {
+): TemplateElement() {
 
 	protected val parameters: MutableMap<String, Parameter> = LinkedHashMap<String, Parameter>(); // Maintain order
 
@@ -418,10 +418,11 @@ public class NativeClassFunction(
 		// Step 1: Method signature
 
 		print("\tpublic static ${returns.javaMethodType} $strippedName(")
-		printList(parameters.values().filter { !it.has(CallbackData.CLASS) }) {
-			// Convert multi-byte-per-element buffers to ByteBuffer
-			if ( it.isBufferPointer )
-				"ByteBuffer ${it.name}"
+		printList(parameters) {
+			if ( it has CallbackData.CLASS )
+				null
+			else if ( it.isBufferPointer )
+				"ByteBuffer ${it.name}" // Convert multi-byte-per-element buffers to ByteBuffer
 			else
 				it.asJavaMethodParam
 		}
@@ -610,11 +611,11 @@ public class NativeClassFunction(
 		val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType)
 
 		print("\tpublic static $retType $name$postFix(")
-		printList(parameters.values().filter {
-			// Skip parameters we want to hide
-			!it.has(CallbackData.CLASS)
-		}) {
-			it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
+		printList(parameters) {
+			if ( it has CallbackData.CLASS )
+				null
+			else
+				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
 		}
 		println(") {")
 
@@ -768,7 +769,20 @@ enum class GenerationMode {
 	ALTERNATIVE
 }
 
-// ALTERNATIVE FUNCTION TRANSFORMS
+// --- [ MODIFIERS ]---
+
+public class DependsOn(reference: String): ReferenceModifier(reference) {
+	class object {
+		val CLASS = javaClass<DependsOn>()
+	}
+
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is NativeClassFunction )
+			throw IllegalArgumentException("The DependsOn modifier can only be applied on functions.")
+	}
+}
+
+// --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
 
 private trait FunctionTransform<T: QualifiedType> {
 	fun transformDeclaration(param: T, original: String): String?

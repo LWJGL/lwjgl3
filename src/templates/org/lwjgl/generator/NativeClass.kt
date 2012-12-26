@@ -48,8 +48,11 @@ public class NativeClass(
 	val functionProvider: FunctionProvider?
 ): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
 
-	private val constantBlocks = ArrayList<ConstantBlock<out Any>>();
-	private val functions = ArrayList<NativeClassFunction>();
+	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
+
+	private val _functions = ArrayList<NativeClassFunction>()
+	public val functions: List<NativeClassFunction>
+		get() = _functions
 
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty() // TODO: Check for 100% alternate without native or reuse
@@ -115,20 +118,6 @@ public class NativeClass(
 			println("\t\t\t${it.name} = provider.getFunctionAddress(\"${it.name}\");")
 		}
 		println("\t\t}")
-
-		println("\n\t\tpublic boolean isSupported() {")
-		print("\t\t\treturn")
-		if ( 1 < functions.size ) {
-			println()
-			funcIndent = "\t\t\t\t"
-		}
-
-		for ( i in functions.indices ) {
-			print("$funcIndent${functions[i].name} != 0L")
-			println(if ( i == functions.lastIndex ) ";" else " &&")
-		}
-		println("\t\t}")
-
 		println("\n\t}\n")
 	}
 
@@ -180,7 +169,7 @@ public class NativeClass(
 			parameters = *parameters
 		)
 
-		functions add func
+		_functions add func
 		return func
 	}
 

@@ -6,17 +6,21 @@ package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
 
-public class BufferObject(public val binding: String) : TypeModifier {
+public class BufferObject(public val binding: String) : TemplateModifier {
 	class object {
 		val CLASS = javaClass<BufferObject>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(qtype: QualifiedType) {
-		if ( !(qtype.nativeType is PointerType) )
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is Parameter )
+			throw IllegalArgumentException("The returnValue modifier can only be applied on parameters.")
+
+		val param = ttype as Parameter
+		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on pointer types.")
 
-		if ( (qtype.nativeType : PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( (param.nativeType : PointerType).mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The BufferObject modifier cannot be applied on naked pointer types.")
 	}
 }

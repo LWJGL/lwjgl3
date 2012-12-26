@@ -75,10 +75,11 @@ public class CallbackFunction(
 		// Step 3: Generate callback method
 		//println("\tpublic abstract int invoke(long logObject);\n")
 		print("\tpublic abstract int invoke(")
-		printList(parameters.values().filter {
-			!it.has(CALLBACK_DATA)
-		}) {
-			"${it.nativeType.nativeMethodType.getSimpleName()} ${it.name}"
+		printList(parameters) {
+			if ( it has CALLBACK_DATA )
+				null
+			else
+				"${it.nativeType.nativeMethodType.getSimpleName()} ${it.name}"
 		}
 		println(");\n")
 

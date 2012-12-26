@@ -39,8 +39,11 @@ public class GLContext {
 						final ByteBuffer nameBuffer = memEncodeASCII(functionName);
 
 						long address = wglGetProcAddress(nameBuffer);
-						if ( address == 0 )
+						if ( address == 0L ) {
 							address = GetProcAddress(OPENGL.getHandle(), nameBuffer);
+							if ( LWJGLUtil.DEBUG && address == 0L )
+								System.err.println("Failed to locate address for function " + functionName);
+						}
 
 						return address;
 					}
