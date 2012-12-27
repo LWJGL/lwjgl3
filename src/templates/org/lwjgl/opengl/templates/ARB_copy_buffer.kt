@@ -23,7 +23,7 @@ fun ARB_copy_buffer() = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 		"COPY_WRITE_BUFFER" _ 0x8F37
 	)
 
-	void.func(
+	GLvoid.func(
 		"CopyBufferSubData",
 		"""
 		Copies all or part of one buffer object's data store to the data store of another buffer object.

@@ -6,6 +6,7 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.windows.WindowsLibrary;
 
@@ -196,6 +197,17 @@ public class GLContext {
 		final StringTokenizer tokenizer = new StringTokenizer(wglExtensions);
 		while ( tokenizer.hasMoreTokens() )
 			supportedExtensions.add(tokenizer.nextToken());
+	}
+
+	static <T extends FunctionMap> T checkExtension(final String extension, final T functions, final boolean supported) {
+		if ( supported )
+			return functions;
+		else {
+			if ( LWJGLUtil.DEBUG )
+				System.err.println(extension + " was reported as available but an entry point is missing.");
+
+			return null;
+		}
 	}
 
 }

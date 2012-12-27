@@ -6,7 +6,7 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 
-val void = NativeType("void", TypeMapping.VOID)
+val GLvoid = NativeType("GLvoid", TypeMapping.VOID)
 
 val GLboolean = NativeType("GLboolean", TypeMapping.BOOLEAN)
 val GLbyte = PrimitiveType("GLbyte", PrimitiveMapping.BYTE)
