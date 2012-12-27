@@ -52,8 +52,12 @@
 		<antcall target="tests"/>
 	</target>
 
-	<!-- Compiles the Templates module -->
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
+		<javac debug="yes" destdir="${lwjgl.bin}/Templates" source="1.5" target="1.5" taskname="Java dependencies compilation">
+			<src path="${lwjgl.src.templates}"/>
+			<include name="org/lwjgl/**"/>
+		</javac>
+
 		<java
 			classname="org.jetbrains.jet.cli.jvm.K2JVMCompiler"
 			fork="true"
@@ -78,14 +82,19 @@
 		<!--<kotlinc module="config/Templates.kts" jar="${lwjgl.lib}/templates.jar" />-->
 	</target>
 
-	<!-- Compiles the Templates module -->
-	<!-- Removed depends="compile-templates" until Kotlin adds support for incremental compilation -->
-	<target name="generate" description="Runs the code Generator" depends="-initialize">
-		<javac debug="yes" destdir="${lwjgl.bin}/Templates" source="1.5" target="1.5" taskname="Java dependencies compilation">
-			<src path="${lwjgl.src.templates}"/>
-			<include name="org/lwjgl/**"/>
-		</javac>
+	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+		<java
+			classname="org.lwjgl.generator.util.TemplateFormatter"
+			fork="true"
+			spawn="true"
+			>
+			<classpath>
+				<pathelement path="${lwjgl.bin.templates}"/>
+			</classpath>
+		</java>
+	</target>
 
+	<target name="generate" description="Runs the code Generator" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
 		<java
 			classname="org.lwjgl.generator.namespace"
 			fork="true"
@@ -101,7 +110,6 @@
 		</java>
 	</target>
 
-	<!-- Compiles the Java source code -->
 	<target name="compile" description="Compiles the Java source code" depends="generate">
 		<javac debug="yes" destdir="${lwjgl.bin}/Core" source="1.5" target="1.5" taskname="Core java compilation">
 			<src path="${lwjgl.src}/core/"/>
@@ -111,12 +119,10 @@
 		</javac>
 	</target>
 
-	<!-- Compiles the native source code -->
-	<target name="compile-native" depends="-initialize, compile" description="Compiles the native files">
+	<target name="compile-native" depends="-initialize, compile" description="Compiles the native source code">
 		<antcall target="-compile_native_windows"/>
 	</target>
 
-	<!-- Compiles LWJGL on Win32 platforms  -->
 	<target name="-compile_native_windows" if="lwjgl.platform.windows">
 		<ant antfile="config/windows/build.xml" inheritAll="false"/>
 		<copy todir="${lwjgl.lib}/windows">
