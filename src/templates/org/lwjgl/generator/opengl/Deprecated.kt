@@ -16,6 +16,10 @@ public class DeprecatedGL internal(): TemplateModifier {
 	override fun validate(ttype: TemplateElement) {
 		if ( ttype !is NativeClassFunction )
 			throw IllegalArgumentException("The deprecated modifier can only be applied on functions.")
+
+		val func = ttype as NativeClassFunction
+		if ( !func.nativeClass.postfix.isEmpty() )
+			throw IllegalArgumentException("The deprecated modifier can only be applied on core functionality.")
 	}
 }
 public val deprecatedGL: DeprecatedGL = DeprecatedGL()
