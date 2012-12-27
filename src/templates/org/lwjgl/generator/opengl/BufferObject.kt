@@ -22,6 +22,16 @@ public class BufferObject(public val binding: String) : TemplateModifier {
 
 		if ( (param.nativeType : PointerType).mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The BufferObject modifier cannot be applied on naked pointer types.")
+
+		when ( this ) {
+			PIXEL_PACK_BUFFER, QUERY_BUFFER_AMD -> {
+				if ( param.paramType != ParameterType.OUT )
+					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on output parameters.")
+			} else -> {
+				if ( param.paramType != ParameterType.IN )
+					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on input parameters.")
+			}
+		}
 	}
 }
 

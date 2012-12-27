@@ -5,12 +5,19 @@
 package org.lwjgl.generator.util;
 
 import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -75,6 +82,14 @@ public class TemplateFormatter {
 
 		// Config and show
 
+		try {
+			frame.setIconImages(Arrays.asList(new Image[] {
+				ImageIO.read(new File("res/lwjgl16.png")),
+				ImageIO.read(new File("res/lwjgl32.png")),
+			}));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		frame.pack();
 		frame.setLocationRelativeTo(null);
@@ -135,6 +150,10 @@ public class TemplateFormatter {
 			} else {
 				output.setBackground(Color.WHITE);
 				output.setText(outputText);
+
+				// Copy output to clipboard
+				final StringSelection copyData = new StringSelection(outputText);
+				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(copyData, copyData);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -150,7 +169,7 @@ public class TemplateFormatter {
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:[A-Z_]+\\s+[0-9xA-F]+\\s*)+)",
+		"([^:]+):\\s+((?:[0-9A-Z_]+\\s+[0-9xA-F]+\\s*)+)",
 		Pattern.MULTILINE
 	);
 
@@ -159,7 +178,7 @@ public class TemplateFormatter {
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 
 	private static final Pattern CONSTANT_PATTERN = Pattern.compile(
-		"([A-Z_]+)\\s+([0-9xA-F]+)"
+		"([0-9A-Z_]+)\\s+([0-9xA-F]+)"
 	);
 
 	private static String formatConstants(final String input) {
@@ -173,7 +192,7 @@ public class TemplateFormatter {
 			final String description =
 				CODE_CLEANUP.matcher(
 					COMMENT_CLEANUP.matcher(blockMatcher.group(1)).replaceAll(" ")
-				).replaceAll("{@code $1}");
+				).replaceAll("{@code $1}") + '.';
 
 			builder.append("\tIntConstant.block(\n");
 			if ( description.length() <= 160 - (4 + 4 + 2 + 1) ) {
@@ -227,7 +246,7 @@ public class TemplateFormatter {
 	// ---[ FUNCTION FORMATTING ]----
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
-		"(?:const\\s+)?[a-zA-Z]+\\s*(?:[*]+)?\\s*[a-zA-Z]+"
+		"(?:const\\s+)?[a-zA-Z]+\\s*(?:[*]+)?\\s*[0-9a-zA-Z]+"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
@@ -237,7 +256,7 @@ public class TemplateFormatter {
 
 	// Same as TYPE_PATTERN, with capturing groups
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
-		"(const\\s+)?([a-zA-Z]+)\\s*([*]+)?\\s*([a-zA-Z]+)",
+		"(const\\s+)?([a-zA-Z]+)\\s*([*]+)?\\s*([0-9a-zA-Z]+)",
 		Pattern.MULTILINE
 	);
 

@@ -31,7 +31,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	// EXT_texture3D
 
 	IntConstant.block(
-		"Accepted by the {@code pname} parameter of {@link GL11#glGetInteger} and by the {@code pname} parameter of GL11#glPixelStorei}.",
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev, and by the {@code pname} parameter of PixelStore.",
 
 		"PACK_SKIP_IMAGES" _ 0x806B,
 		"PACK_IMAGE_HEIGHT" _ 0x806C,
@@ -41,39 +41,41 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 
 	IntConstant.block(
 		"""
-		Accepted by the <cap> parameter of Enable, Disable, and IsEnabled, by the <pname> parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev, and
-		by the <target> parameter of TexImage3D, GetTexImage, GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv, and GetTexParameterfv.
+		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
+		GetDoublev, and by the {@code target} parameter of TexImage3D, GetTexImage, GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv, and
+		GetTexParameterfv.
 		""",
 
 		"TEXTURE_3D" _ 0x806F
 	)
 
 	IntConstant.block(
-		"Accepted by the <target> parameter of TexImage3D, GetTexLevelParameteriv, and GetTexLevelParameterfv.",
+		"Accepted by the {@code target} parameter of TexImage3D, GetTexLevelParameteriv, and GetTexLevelParameterfv.",
 
 		"PROXY_TEXTURE_3D" _ 0x8070
 	)
 
 	IntConstant.block(
-		"Accepted by the <pname> parameter of GetTexLevelParameteriv and GetTexLevelParameterfv.",
+		"Accepted by the {@code pname} parameter of GetTexLevelParameteriv and GetTexLevelParameterfv.",
 
 		"TEXTURE_DEPTH" _ 0x8071
 	)
+
 	IntConstant.block(
-		"Accepted by the <pname> parameter of TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
+		"Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
 		"TEXTURE_WRAP_R" _ 0x8072
 	)
 
 	IntConstant.block(
-		"Accepted by the <pname> parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_3D_TEXTURE_SIZE" _ 0x8073
 	)
 
 	val TEXTURE_3D_TARGETS = "#GL_TEXTURE_3D GL30#GL_TEXTURE_2D_ARRAY GL30#GL_TEXTURE_CUBE_MAP_ARRAY"
 
-	void.func(
+	GLvoid.func(
 		"TexImage3D",
 		"Specifies a three-dimensional texture image.",
 
@@ -89,12 +91,12 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * depth * GLChecks.translatePixelFormatToComponents(format) * GLChecks.translateTypeToBytes(type)", bytes = true),
+			Check(expression = "width * height * depth * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	)
 
-	void.func(
+	GLvoid.func(
 		"TexSubImage3D",
 		"""
 		Respecifies a cubic subregion of an existing 3D texel array. No change is made to the internalformat, width, height, depth, or border parameters of
@@ -114,12 +116,12 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * GLChecks.translatePixelFormatToComponents(format) * GLChecks.translateTypeToBytes(type)", bytes = true),
+			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
-	void.func(
+	GLvoid.func(
 		"CopyTexSubImage3D",
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
@@ -140,7 +142,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	// EXT_bgra
 
 	IntConstant.block(
-		"Accepted by the <format> parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
+		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
 		"BGR" _ 0x80E0,
 		"BGRA" _ 0x80E1
@@ -149,19 +151,33 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	// EXT_packed_pixels
 
 	IntConstant.block(
-		"Accepted by the <type> parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D.",
+		"""
+		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
+		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
+		SeparableFilter3D, GetSeparableFilter, ColorTable, GetColorTable, TexImage4D, and TexSubImage4D.
+		""",
 
 		"UNSIGNED_BYTE_3_3_2" _ 0x8032,
+		"UNSIGNED_BYTE_2_3_3_REV" _ 0x8362,
+		"UNSIGNED_SHORT_5_6_5" _ 0x8363,
+		"UNSIGNED_SHORT_5_6_5_REV" _ 0x8364,
 		"UNSIGNED_SHORT_4_4_4_4" _ 0x8033,
+		"UNSIGNED_SHORT_4_4_4_4_REV" _ 0x8365,
 		"UNSIGNED_SHORT_5_5_5_1" _ 0x8034,
+		"UNSIGNED_SHORT_1_5_5_5_REV" _ 0x8366,
 		"UNSIGNED_INT_8_8_8_8" _ 0x8035,
-		"UNSIGNED_INT_10_10_10_2" _ 0x8036
+		"UNSIGNED_INT_8_8_8_8_REV" _ 0x8367,
+		"UNSIGNED_INT_10_10_10_2" _ 0x8036,
+		"UNSIGNED_INT_2_10_10_10_REV" _ 0x8368
 	)
 
 	// EXT_rescale_normal
 
 	IntConstant.block(
-		"Accepted by the <cap> parameter of Enable, Disable, and IsEnabled, and by the <pname> parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+		"""
+		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
+		GetDoublev.
+		""",
 
 		"RESCALE_NORMAL" _ 0x803A
 	)
@@ -169,13 +185,15 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	// EXT_separate_specular_color
 
 	IntConstant.block(
-		"Accepted by the <pname> parameter of LightModel*, and also by the <pname> parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+		"""
+		Accepted by the {@code pname} parameter of LightModel*, and also by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
+		""",
 
 		"LIGHT_MODEL_COLOR_CONTROL" _ 0x81F8
 	)
 
 	IntConstant.block(
-		"Accepted by the <param> parameter of LightModel* when <pname> is LIGHT_MODEL_COLOR_CONTROL.",
+		"Accepted by the {@code param} parameter of LightModel* when {@code pname} is  LIGHT_MODEL_COLOR_CONTROL.",
 
 		"SINGLE_COLOR" _ 0x81F9,
 		"SEPARATE_SPECULAR_COLOR" _ 0x81FA
@@ -195,7 +213,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	// SGIS_texture_lod
 
 	IntConstant.block(
-		"Accepted by the <pname> parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
+		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
 		"TEXTURE_MIN_LOD" _ 0x813A,
 		"TEXTURE_MAX_LOD" _ 0x813B,
@@ -212,7 +230,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"MAX_ELEMENTS_INDICES" _ 0x80E9
 	)
 
-	void.func(
+	GLvoid.func(
 		"DrawRangeElements",
 		"""
 		A restricted form of {@link GL11#glDrawElements} with the additional constraint that all index values identified by {@code indices} must lie between

@@ -80,7 +80,9 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 
-		println("\n\t\treturn supported ? funcs : null;")
+		print("\n\t\treturn GLContext.checkExtension(\"")
+		print(nativeClass.capName);
+		println("\", funcs, supported);")
 		println("\t}")
 	}
 

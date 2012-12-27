@@ -83,6 +83,11 @@
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+		<javac debug="yes" destdir="${lwjgl.bin}/Templates" source="1.5" target="1.5" taskname="Java dependencies compilation">
+			<src path="${lwjgl.src.templates}"/>
+			<include name="org/lwjgl/**"/>
+		</javac>
+
 		<java
 			classname="org.lwjgl.generator.util.TemplateFormatter"
 			fork="true"

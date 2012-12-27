@@ -7,6 +7,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.LWJGLUtil;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
 
 final class GLChecks {
 
@@ -66,7 +67,7 @@ final class GLChecks {
 	}
 
 	/**
-	 * Returns the number of component required to specify the specified OpenGL pixel format.
+	 * Returns the number of components required to specify the specified OpenGL pixel format.
 	 *
 	 * @param format the OpenGL format to translate
 	 *
@@ -93,18 +94,30 @@ final class GLChecks {
 			case GL_LUMINANCE_ALPHA:
 				return 2;
 			case GL_RGB:
-				//case GL_BGR:
+			case GL_BGR:
 				//case GL_RGB_INTEGER:
 				//case GL_BGR_INTEGER:
 				return 3;
 			case GL_RGBA:
-				//case GL_BGRA:
+			case GL_BGRA:
 				//case GL_RGBA_INTEGER:
 				//case GL_BGRA_INTEGER
 				return 4;
 			default:
 				throw new IllegalArgumentException("Unsupported OpenGL format");
 		}
+	}
+
+	/**
+	 * Returns the number of bytes required to store the specified OpenGL pixel.
+	 *
+	 * @param format the pixel data format
+	 * @param type   the pixel data type
+	 *
+	 * @return the number of bytes
+	 */
+	static int getPixelBytes(final int format, final int type) {
+		return translatePixelFormatToComponents(format) * translateTypeToBytes(type);
 	}
 
 }
