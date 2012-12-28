@@ -141,7 +141,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "glGetColorTableParameteri(target, GL_COLOR_TABLE_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true),
+			Check(expression = "glGetColorTableParameteri(target, GL_COLOR_TABLE_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("table", "the color table data")
 	)
@@ -384,11 +384,11 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		mods(
-			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true),
+			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("row", "an array in which to return the filter row"),
 		mods(
-			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_HEIGHT) * GLChecks.getPixelBytes(format, type)", bytes = true),
+			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_HEIGHT) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("column", "an array in which to return the filter column"),
 		nullable _ GLvoid_p.IN("span", "unused")
@@ -571,7 +571,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
 		mods (
-			Check(expression = "glGetHistogramParameteri(GL_HISTOGRAM, GL_HISTOGRAM_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true),
+			Check(expression = "glGetHistogramParameteri(GL_HISTOGRAM, GL_HISTOGRAM_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("values", "the pixel data")
 	)

@@ -156,15 +156,12 @@ public class NativeClass(
 		return block
 	}
 
-	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter) = addFunction(ReturnValue(this), name, documentation.toJavaDoc(*parameters), *parameters)
-
-	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter) = addFunction(this, name, documentation.toJavaDoc(*parameters), *parameters)
-
-	private fun addFunction(returns: ReturnValue, name: String, documentation: String, vararg parameters: Parameter): NativeClassFunction {
+	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter) = ReturnValue(this).func(name, documentation, *parameters)
+	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter): NativeClassFunction {
 		val func = NativeClassFunction(
-			returns = returns,
+			returns = this,
 			name = if ( prefix.isEmpty() ) name else "${prefix.toLowerCase()}$name",
-			documentation = documentation,
+			documentation = documentation.toJavaDoc(*parameters),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

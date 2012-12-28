@@ -73,13 +73,11 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"MAX_3D_TEXTURE_SIZE" _ 0x8073
 	)
 
-	val TEXTURE_3D_TARGETS = "#GL_TEXTURE_3D GL30#GL_TEXTURE_2D_ARRAY GL30#GL_TEXTURE_CUBE_MAP_ARRAY"
-
 	GLvoid.func(
 		"TexImage3D",
 		"Specifies a three-dimensional texture image.",
 
-		GLenum.IN("target", "the texture target", "$TEXTURE_3D_TARGETS #GL_PROXY_TEXTURE_3D GL30#GL_PROXY_TEXTURE_2D_ARRAY GL30#GL_PROXY_TEXTURE_CUBE_MAP_ARRAY"),
+		GLenum.IN("target", "the texture target", "$TEXTURE_3D_TARGETS $PROXY_TEXTURE_3D_TARGETS"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLint.IN("internalformat", "the texture internal format", TEXTURE_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the texture width"),
@@ -203,8 +201,8 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 
 	IntConstant.block(
 		"""
-		Accepted by the <param> parameter of TexParameteri and TexParameterf, and by the <params> parameter of TexParameteriv and TexParameterfv, when their
-		<pname> parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
+		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
+		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
         """,
 
 		"CLAMP_TO_EDGE" _ 0x812F
@@ -233,27 +231,45 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	GLvoid.func(
 		"DrawRangeElements",
 		"""
-		A restricted form of {@link GL11#glDrawElements} with the additional constraint that all index values identified by {@code indices} must lie between
-		{@code start} and {@code end} inclusive.
+		A restricted form of {@link GL11#glDrawElements}. mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
+		constraint that all values in the arrays count must lie between start and end, inclusive.
+
+		Implementations denote recommended maximum amounts of vertex and index data, which may be queried by calling glGet with argument
+		{@link #GL_MAX_ELEMENTS_VERTICES} and {@link #GL_MAX_ELEMENTS_INDICES}. If end - start + 1 is greater than the value of GL_MAX_ELEMENTS_VERTICES, or if
+		count is greater than the value of GL_MAX_ELEMENTS_INDICES, then the call may operate at reduced performance. There is no requirement that all vertices
+		in the range start end be referenced. However, the implementation may partially process unused vertices, reducing performance from what could be
+		achieved with an optimal index set.
+
+		When glDrawRangeElements is called, it uses count sequential elements from an enabled array, starting at start to construct a sequence of geometric
+		primitives. mode specifies what kind of primitives are constructed, and how the array elements construct these primitives. If more than one array is
+		enabled, each is used.
+
+		Vertex attributes that are modified by glDrawRangeElements have an unspecified value after glDrawRangeElements returns. Attributes that aren't modified
+		maintain their previous values.
+		<h3>Errors</h3>
+		It is an error for indices to lie outside the range start end, but implementations may not check for this situation. Such indices cause
+		implementation-dependent behavior.
+		<ul type="-">
+		<li>GL_INVALID_ENUM is generated if mode is not an accepted value.</li>
+		<li>GL_INVALID_VALUE is generated if count is negative.</li>
+		<li>GL_INVALID_VALUE is generated if end &lt; start.</li>
+		<li>GL_INVALID_OPERATION is generated if a geometry shader is active and mode is incompatible with the input primitive type of the geometry shader in the
+		currently installed program object.</li>
+		<li>GL_INVALID_OPERATION is generated if a non-zero buffer object name is bound to an enabled array or the element array and the buffer object's data
+		store is currently mapped.</li>
+		</ul>
 		""",
 
-		GLenum.IN(
-			"mode",
-			"the kind of primitives being constructed",
-			"""
-		    #GL_POINTS #GL_LINE_STRIP #GL_LINE_LOOP #GL_LINES #GL_POLYGON #GL_TRIANGLE_STRIP #GL_TRIANGLE_FAN #GL_TRIANGLES #GL_QUAD_STRIP #GL_QUADS
-		    GL32#GL_LINES_ADJACENCY GL32#GL_LINE_STRIP_ADJACENCY GL32#GL_TRIANGLES_ADJACENCY GL32#GL_TRIANGLE_STRIP_ADJACENCY GL40#GL_PATCHES
-		    """
-		),
-		GLuint.IN("start", "the index range start"),
-		GLuint.IN("end", "the index range end"),
-		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", "the number of vertices to transfer to the GL"),
+		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
+		GLuint.IN("start", "the minimum array index contained in {@code indices}"),
+		GLuint.IN("end", "the maximum array index contained in {@code indices}"),
+		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", " the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
-			"indicates the type of index values in {@code indices}",
+			"the type of the values in {@code indices}",
 			"#GL_UNSIGNED_BYTE #GL_UNSIGNED_SHORT #GL_UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the index values")
+		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", " a pointer to the location where the indices are stored")
 	)
 
 }

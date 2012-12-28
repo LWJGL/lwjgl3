@@ -288,17 +288,17 @@ private fun ensurePath(path: File) {
 
 // File management
 
-private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("src/templates/org/lwjgl/generator")
+private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("src/templates/org/lwjgl/generator", true)
 private val packageLastModifiedMap = HashMap<String, Long>()
 
-private fun getDirectoryLastModified(path: String): Long {
-	val pck = File(path)
+private fun getDirectoryLastModified(path: String, recursive: Boolean = false): Long = getDirectoryLastModified(File(path), recursive)
+private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory() )
 		return 0
 
 	val classes = pck.listFiles(object : FileFilter {
 		public override fun accept(pathname: File): Boolean {
-			return pathname.isFile() && pathname.getName().endsWith(".kt")
+			return (pathname.isDirectory() && recursive) || (pathname.isFile() && pathname.getName().endsWith(".kt"))
 		}
 	})
 
@@ -306,7 +306,10 @@ private fun getDirectoryLastModified(path: String): Long {
 		return 0
 
 	return classes.map {
-		it.lastModified()
+		if ( it.isDirectory() )
+			getDirectoryLastModified(it, true)
+		else
+			it.lastModified()
 	}.fold(0.toLong()) {(left, right) ->
 		max(left, right)
 	}

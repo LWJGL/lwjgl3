@@ -36,7 +36,6 @@ val POINTER_POSTFIX = "Address"
 val FUNCTION_ADDRESS = "__functionAddress"
 val JNIENV = "__env"
 
-
 public abstract class Function(
 	val returns: ReturnValue,
 	val name: String,
@@ -273,7 +272,7 @@ public class NativeClassFunction(
 		}
 
 		parameters.values().forEach {
-			val prefix =
+			var prefix =
 				if ( it has nullable )
 					"if ( ${it.name} != null ) "
 				else {
@@ -312,6 +311,8 @@ public class NativeClassFunction(
 				val transform = transforms?.get(it)
 				if ( transform == null || (transform != BufferOffsetTransform && transform != BufferValueParameterTransform && transform != SingleValueTransform) ) {
 					val check = it[Check.CLASS]
+
+					if ( check.debug ) prefix = "if ( LWJGLUtil.DEBUG )\n\t\t\t\t$prefix"
 
 					if ( check.bytes )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
@@ -413,7 +414,10 @@ public class NativeClassFunction(
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
-		println(documentation)
+		if ( nativeClass.className.startsWith("GL") )
+			printOpenGLJavaDoc(documentation, stripPostfix(true), this@NativeClassFunction has deprecatedGL)
+		else
+			println(documentation)
 
 		// Step 1: Method signature
 
