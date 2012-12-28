@@ -101,8 +101,14 @@ public class Parameter(
 			if ( tokens[i].indexOf('#') == -1 ) {
 				builder append tokens[i]
 			} else {
+				val classLink = tokens[i].startsWith("##")
+				if ( classLink ) builder append "see "
+
 				builder append "{@link "
-				builder append tokens[i]
+				if ( classLink )
+					builder append tokens[i].substring(2)
+				else
+					builder append tokens[i]
 				builder append "}"
 			}
 		}
@@ -251,7 +257,16 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 }
 
 /** Adds a capacity check to a buffer parameter. */
-public class Check(val expression: String, val canBeNull: Boolean = false, val bytes: Boolean = false): TemplateModifier {
+public class Check(
+	/** An integer expression to validate against the buffer capacity. */
+	val expression: String,
+	/** If true, the target buffer may be null, in which case the check is skipped. */
+	val canBeNull: Boolean = false,
+	/** If the expression value is in bytes rather in elements (of the buffer type). */
+	val bytes: Boolean = false,
+	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
+	val debug: Boolean = false
+): TemplateModifier {
 	class object {
 		val CLASS = javaClass<Check>()
 	}

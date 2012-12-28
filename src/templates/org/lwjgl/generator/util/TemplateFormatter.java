@@ -5,7 +5,6 @@
 package org.lwjgl.generator.util;
 
 import java.awt.*;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -152,8 +150,8 @@ public class TemplateFormatter {
 				output.setText(outputText);
 
 				// Copy output to clipboard
-				final StringSelection copyData = new StringSelection(outputText);
-				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(copyData, copyData);
+				//final StringSelection copyData = new StringSelection(outputText);
+				//Toolkit.getDefaultToolkit().getSystemClipboard().setContents(copyData, copyData);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -246,15 +244,16 @@ public class TemplateFormatter {
 	// ---[ FUNCTION FORMATTING ]----
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
-		"(?:const\\s+)?[a-zA-Z]+\\s*(?:[*]+)?\\s*[0-9a-zA-Z]+"
+		// This is a little funny because we can have whitespace on either side of *
+		"(?:const\\s+)?[a-zA-Z]+(?:(?:\\s*[*]+\\s*)|\\s+)[0-9a-zA-Z]+"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
-		TYPE_PATTERN + "[(](?:,?\\s*" + TYPE_PATTERN + ")*[)]",
+		TYPE_PATTERN + "[(](?:,?\\s*" + TYPE_PATTERN + ")*\\s*[)]",
 		Pattern.MULTILINE
 	);
 
-	// Same as TYPE_PATTERN, with capturing groups
+	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
 		"(const\\s+)?([a-zA-Z]+)\\s*([*]+)?\\s*([0-9a-zA-Z]+)",
 		Pattern.MULTILINE
@@ -281,7 +280,8 @@ public class TemplateFormatter {
 					if ( paramMatcher.group(1) != null )
 						builder.append("(const _ ");
 
-					builder.append("GL");
+					if ( !paramMatcher.group(2).startsWith("GL") )
+						builder.append("GL");
 					builder.append(paramMatcher.group(2));
 					if ( paramMatcher.group(3) != null ) // pointer
 						writerPointer(builder, paramMatcher);
@@ -301,7 +301,8 @@ public class TemplateFormatter {
 					builder.append("\t\t");
 					if ( paramMatcher.group(1) != null ) // const
 						builder.append("const _ ");
-					builder.append("GL");
+					if ( !paramMatcher.group(2).startsWith("GL") )
+						builder.append("GL");
 					builder.append(paramMatcher.group(2));
 					if ( paramMatcher.group(3) != null ) // pointer
 						writerPointer(builder, paramMatcher);

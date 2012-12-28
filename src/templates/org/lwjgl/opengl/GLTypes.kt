@@ -35,6 +35,8 @@ val GLuint_p = PointerType(name = "GLuint", mapping = PointerMapping.DATA_INT)
 val GLfloat_p = PointerType(name = "GLfloat", mapping = PointerMapping.DATA_FLOAT)
 val GLdouble_p = PointerType(name = "GLdouble", mapping = PointerMapping.DATA_DOUBLE)
 
+val GLsizei_p = PointerType(name = "GLsizei", mapping = PointerMapping.DATA_INT)
+
 val GLintptr = PointerType(name = "GLintptr", includesPointer = true)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
 
