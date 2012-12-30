@@ -77,14 +77,17 @@ private fun paramMultilineAligment(alignment: Int): String {
 
 public fun code(code: String): String = "<code>$code</code>"
 
-public fun link(url: String, description: String): String = "<a href=\"$url\">$description</a>"
+public fun link(url: String, description: String): String = """<a href="$url">$description</a>"""
 
 public fun table(vararg rows: String): String {
-	val builder = StringBuilder()
-	builder append "<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">"
-	for ( row in rows )
+	val builder = StringBuilder(512)
+	builder append """<table border="1" cellspacing="0" cellpadding="2">\n"""
+	for ( row in rows ) {
+		builder append "\t\t"
 		builder append row
-	builder append "</table>"
+		builder append '\n'
+	}
+	builder append "\t</table>"
 
 	return builder.toString()
 }
