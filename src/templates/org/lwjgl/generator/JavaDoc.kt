@@ -9,7 +9,7 @@ import java.util.regex.Pattern
 private val PARAGRAPH_PATTERN = Pattern.compile("^\\s*$", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^\\s+", Pattern.MULTILINE)
 
-private fun String.replaceAll(pattern: Pattern, replacement: String): String = pattern.matcher(this).replaceAll(replacement)
+fun String.replaceAll(pattern: Pattern, replacement: String): String = pattern.matcher(this).replaceAll(replacement)
 
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
 	val clean = trim()
