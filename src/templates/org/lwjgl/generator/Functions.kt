@@ -8,8 +8,8 @@ import java.io.PrintWriter
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.LinkedHashMap
+import java.util.regex.Pattern
 import org.lwjgl.generator.opengl.*
-import java.nio.*
 
 /*
 	****
@@ -30,17 +30,19 @@ import java.nio.*
 // Global definitions
 
 val RESULT = "__result"
-val API_BUFFER = "__buffer"
 val POINTER_POSTFIX = "Address"
-
 val FUNCTION_ADDRESS = "__functionAddress"
-val JNIENV = "__env"
+
+private val API_BUFFER = "__buffer"
+private val JNIENV = "__env"
+
+private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
 
 public abstract class Function(
 	val returns: ReturnValue,
 	val name: String,
-    val documentation: String,
-    vararg params: Parameter
+	val documentation: String,
+	vararg params: Parameter
 ): TemplateElement() {
 
 	protected val parameters: MutableMap<String, Parameter> = LinkedHashMap<String, Parameter>(); // Maintain order
@@ -81,9 +83,9 @@ private fun <T> PrintWriter.printList(items: Iterable<T>, itemPrint: (item: T) -
 public class NativeClassFunction(
 	returns: ReturnValue,
 	name: String,
-    documentation: String,
-    val nativeClass: NativeClass,
-    vararg parameters: Parameter
+	documentation: String,
+	val nativeClass: NativeClass,
+	vararg parameters: Parameter
 ): Function(returns, name, documentation, *parameters) {
 
 	{
@@ -397,9 +399,14 @@ public class NativeClassFunction(
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 
 		print("\tpublic static native ${returns.nativeMethodType} ")
-		if ( !nativeOnly )
-			print('n')
-		print("$name(")
+		if ( !nativeOnly ) print('n')
+		print(
+			if ( name.indexOf('_') == -1 )
+				name
+			else
+				name.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
+		)
+		print("(")
 		printList(parameters) {
 			it.asNativeMethodParam(parameters)
 		}
@@ -811,7 +818,8 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 
 private class AutoSizeTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String { // Replace with expression
+	override fun transformCall(param: Parameter, original: String): String {
+		// Replace with expression
 		return if ( bufferParam has nullable )
 			"${bufferParam.name} == null ? 0 : ${bufferParam.name}.remaining()"
 		else
