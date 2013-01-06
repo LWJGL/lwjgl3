@@ -82,6 +82,9 @@ public class APIBuffer {
 	/** Ensures space for an additional pointer value and returns the address offset. */
 	public int pointerParam() { return param(PointerBuffer.getPointerSize()); }
 
+	/** Ensures space for an additional buffer with the given size and returns the address offset. */
+	public int bufferParam(int size) { return param(size); }
+
 	/** Returns the boolean value at the specified offset. */
 	public boolean booleanValue(final int offset) { return buffer.get(offset) != 0; }
 

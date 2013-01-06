@@ -406,7 +406,7 @@ public class PointerBuffer implements Comparable {
 	}
 
 	/**
-	 * Relative <i>get</i> method.  Reads the long at this buffer's
+	 * Relative <i>get</i> method.  Reads the pointer at this buffer's
 	 * current position, and then increments the position. </p>
 	 *
 	 * @return the long at the buffer's current position
@@ -423,7 +423,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given long into this buffer at the current
+	 * <p> Writes the given pointer into this buffer at the current
 	 * position, and then increments the position. </p>
 	 *
 	 * @param l The long to be written
@@ -457,7 +457,7 @@ public class PointerBuffer implements Comparable {
 	}
 
 	/**
-	 * Absolute <i>get</i> method.  Reads the long at the given
+	 * Absolute <i>get</i> method.  Reads the pointer at the given
 	 * index. </p>
 	 *
 	 * @param index The index from which the long will be read
@@ -488,7 +488,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given long into this buffer at the given
+	 * <p> Writes the given pointer into this buffer at the given
 	 * index. </p>
 	 *
 	 * @param index The index at which the long will be written
@@ -522,6 +522,20 @@ public class PointerBuffer implements Comparable {
 		else
 			target.putInt(index, (int)l);
 	}
+
+	// -- Buffer address operations --
+
+	/** Puts the pointer to the given buffer at the current position and the increments the position. */
+	public void putPointer(ByteBuffer buffer) { put(memAddress(buffer)); }
+
+	/** Puts the pointer to the given buffer at the given index. */
+	public void putPointer(int index, ByteBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public ByteBuffer getByteBuffer(int size) { return memByteBuffer(get(), size); }
+
+	/** Returns a ByteBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public ByteBuffer getByteBuffer(int index, int size) { return memByteBuffer(get(index), size); }
 
 	// -- Bulk get operations --
 
