@@ -1191,7 +1191,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-		    "#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
+		    "#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color array data")
@@ -3025,7 +3025,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_SHORT #GL_INT GL30#GL_HALF #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
+			"#GL_SHORT #GL_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the texture coordinate array data")
@@ -3459,7 +3459,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_SHORT #GL_INT GL30#GL_HALF #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
+			"#GL_SHORT #GL_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the vertex array data")

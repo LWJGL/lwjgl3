@@ -4,10 +4,7 @@
  */
 package org.lwjgl.generator
 
-import java.util.HashMap
-import org.lwjgl.generator.opengl.BufferObject
 import java.util.regex.Pattern
-import java.nio.Buffer
 
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
@@ -72,8 +69,8 @@ public class Parameter(
 	nativeType: NativeType,
 	val name: String,
 	val paramType: ParameterType = ParameterType.IN,
-    documentation: String,
-    links: String = ""
+	documentation: String,
+	links: String = ""
 ): QualifiedType(nativeType) {
 
 	val documentation: String = if ( links.isEmpty() ) documentation else doc(documentation, links)
@@ -131,25 +128,22 @@ public class Parameter(
 		return "$paramType $name"
 	}
 
-	val asNativeMethodCallParam: String
-		get() {
-			return when {
-			// Data pointer
-				nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER -> {
-					if ( has (nullable) )
-						"memAddressSafe($name)"
-					else
-						"memAddress($name)"
-				}
-
-			// Callback functions
-				nativeType is CallbackType -> "${nativeType.callback.name}.CALLBACK" // The function itself
-				has(CallbackData.CLASS) -> get(CallbackData.CLASS).reference // The callback parameter
-
-			// Normal parameter
-				else -> name
-			}
+	fun asNativeMethodCallParam(mode: GenerationMode) = when {
+	// Data pointer
+		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER -> {
+			if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
+				"memAddressSafe($name)"
+			else
+				"memAddress($name)"
 		}
+
+	// Callback functions
+		nativeType is CallbackType -> "${nativeType.callback.name}.CALLBACK" // The function itself
+		has(CallbackData.CLASS) -> get(CallbackData.CLASS).reference // The callback parameter
+
+	// Normal parameter
+		else -> name
+	}
 
 	val asNativeFunctionParam: String
 		get() {
@@ -231,10 +225,18 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 		val CLASS = javaClass<AutoSize>()
 	}
 
+	/** If not null, the expression will be appended to the parameter. */
 	var expression: String? = null
+	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
+	var toBytes: Boolean = false
 
 	public fun expression(expression: String): AutoSize {
 		this.expression = expression
+		return this
+	}
+
+	public fun toBytes(): AutoSize {
+		this.toBytes = true
 		return this
 	}
 
@@ -286,8 +288,7 @@ public class Check(
 }
 public fun Check(value: Int): Check = Check(Integer.toString(value))
 
-/** Marks a pointer parameter as nullable. */
-public class Nullable internal(): TemplateModifier {
+class Nullable internal(val optional: Boolean): TemplateModifier {
 	class object {
 		val CLASS = javaClass<Nullable>()
 	}
@@ -302,7 +303,10 @@ public class Nullable internal(): TemplateModifier {
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
 }
-public val nullable: Nullable = Nullable()
+/** Marks a pointer parameter as nullable. */
+public val nullable: Nullable = Nullable(false)
+/** Marks a pointer parameter as optional. Similar to nullable, but the parameter either doesn't exist or it exists and is not null. */
+public val optional: Nullable = Nullable(true)
 
 /** Marks a buffer parameter as null-terminated. */
 public class NullTerminated internal(): TemplateModifier {
@@ -372,8 +376,15 @@ public class MultiType(vararg val types: PointerMapping): TemplateModifier {
 
 }
 
-/** Marks a parameter to become the return value of an alternative method. */
-public class Return internal(): TemplateModifier {
+/** Marks a char pointer parameter to become the return value of an alternative method. */
+public class Return(
+	/** The parameter that defines the maximum string size. */
+	val maxLengthParam: String,
+	/** The parameter that returns the actual string size */
+	val lengthParam: String,
+	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
+	val maxLengthExpression: String? = null
+): TemplateModifier {
 	class object {
 		val CLASS = javaClass<Return>()
 	}
@@ -394,7 +405,8 @@ public class Return internal(): TemplateModifier {
 			throw IllegalArgumentException("The returnValue modifier can only be applied on output parameters.")
 	}
 }
-public val returnValue: Return = Return()
+/** Used for simple return values. */
+public val returnValue: Return = Return("", "")
 
 /** Marks a buffer parameter to transform to a single primitive value in an alternative method. */
 public class SingleValue(val newName: String): TemplateModifier {
@@ -416,5 +428,28 @@ public class SingleValue(val newName: String): TemplateModifier {
 
 		if ( param.paramType != ParameterType.IN )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on input parameters.")
+	}
+}
+
+/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
+public class MapPointer(
+	/** An expression that defines the ByteBuffer capacity. */
+	val sizeExpression: String
+): TemplateModifier {
+	class object {
+		val CLASS = javaClass<MapPointer>()
+	}
+
+	override val isSpecial: Boolean = true
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is ReturnValue )
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on return values.")
+
+		val returns = ttype as ReturnValue
+		if ( returns.nativeType !is PointerType )
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
+
+		if ( (returns.nativeType : PointerType).mapping != PointerMapping.DATA )
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
 	}
 }

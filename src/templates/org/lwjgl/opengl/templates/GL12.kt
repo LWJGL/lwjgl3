@@ -249,7 +249,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		<h3>Errors</h3>
 		It is an error for indices to lie outside the range start end, but implementations may not check for this situation. Such indices cause
 		implementation-dependent behavior.
-		<ul type="-">
+		<ul>
 		<li>GL_INVALID_ENUM is generated if mode is not an accepted value.</li>
 		<li>GL_INVALID_VALUE is generated if count is negative.</li>
 		<li>GL_INVALID_VALUE is generated if end &lt; start.</li>

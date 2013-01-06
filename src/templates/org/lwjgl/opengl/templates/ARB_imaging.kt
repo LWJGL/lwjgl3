@@ -419,7 +419,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	))
+	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
 		"ConvolutionParameterfv",

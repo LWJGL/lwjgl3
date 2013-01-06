@@ -199,7 +199,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"GL30#GL_HALF #GL_FLOAT #GL_DOUBLE"
+			"GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the fog coordinate array data")
@@ -249,7 +249,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 
 		GLenum.IN("pname", "the parameter to set", POINT_PARAMETERS),
 		GLfloat.IN("param", "the parameter value")
-	)
+	).javaDocLink
 
 	val PointParameteri = GLvoid.func(
 		"PointParameteri",
@@ -257,7 +257,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 
 		GLenum.IN("pname", "the parameter to set", POINT_PARAMETERS),
 		GLint.IN("param", "the parameter value")
-	)
+	).javaDocLink
 
 	GLvoid.func(
 		"PointParameterfv",
@@ -346,7 +346,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
+			"#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the secondary color array data")

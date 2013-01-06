@@ -28,7 +28,7 @@ abstract class TemplateElement {
 		}
 	}
 
-	fun has(modifier: TemplateModifier) = has(modifier.javaClass)
+	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] == modifier
 	fun has(modifier: Class<out TemplateModifier>) = modifiers.containsKey(modifier)
 	fun <T: TemplateModifier> get(modifier: Class<T>): T = modifiers[modifier] as T
 

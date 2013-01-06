@@ -36,8 +36,12 @@ val GLfloat_p = PointerType(name = "GLfloat", mapping = PointerMapping.DATA_FLOA
 val GLdouble_p = PointerType(name = "GLdouble", mapping = PointerMapping.DATA_DOUBLE)
 
 val GLsizei_p = PointerType(name = "GLsizei", mapping = PointerMapping.DATA_INT)
+val GLenum_p = PointerType(name = "GLenum", mapping = PointerMapping.DATA_INT)
 
 val GLintptr = PointerType(name = "GLintptr", includesPointer = true)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
+
+val GLchar_p = CharSequenceType("GLchar")
+val GLchar_pp = PointerType(name = "GLchar*", mapping = PointerMapping.DATA_POINTER)
 
 val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
