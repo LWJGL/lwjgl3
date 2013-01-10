@@ -26,15 +26,23 @@ public final class MemoryUtil {
 	private static final Charset UTF8;
 	//private static final Charset UTF16;
 
+	private static final MemoryAccessor ACCESSOR;
+
+	/** The memory page size, in bytes. This value is always a power-of-two. */
+	public static final int PAGE_SIZE;
+
 	static {
 		Sys.touch();
 
 		//ASCII = Charset.forName("ISO-8859-1");
 		UTF8 = Charset.forName("UTF-8");
 		//UTF16 = Charset.forName(ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN ? "UTF-16BE" : "UTF-16LE");
-	}
 
-	private static final MemoryAccessor ACCESSOR = MemoryAccess.getInstance();
+		ACCESSOR = MemoryAccess.getInstance();
+		PAGE_SIZE = ACCESSOR.getPageSize();
+
+		LWJGLUtil.log("MemoryUtil MemoryAccessor: " + ACCESSOR.getClass().getSimpleName());
+	}
 
 	private MemoryUtil() {
 	}

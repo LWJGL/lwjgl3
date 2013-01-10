@@ -51,6 +51,8 @@ public class APIBuffer {
 	}
 
 	private int param(final int bytes) {
+		// TODO: Consider padding the offset such that the parameter is memory aligned.
+
 		ensureCapacity(bytes);
 
 		final int param = offset;
@@ -82,7 +84,7 @@ public class APIBuffer {
 	/** Ensures space for an additional pointer value and returns the address offset. */
 	public int pointerParam() { return param(PointerBuffer.getPointerSize()); }
 
-	/** Ensures space for an additional buffer with the given size and returns the address offset. */
+	/** Ensures space for an additional buffer with the given size (in bytes) and returns the address offset. */
 	public int bufferParam(int size) { return param(size); }
 
 	/** Returns the boolean value at the specified offset. */
@@ -132,5 +134,10 @@ public class APIBuffer {
 
 	/** Sets a pointer value at the specified offset. */
 	public void pointerValue(final int offset, final long value) { PointerBuffer.put(buffer, offset, value); }
+
+	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
+	public void pointerValue(final int offset, final int index, final long value) {
+		PointerBuffer.put(buffer, offset + (index << PointerBuffer.getPointerSizeShift()), value);
+	}
 
 }

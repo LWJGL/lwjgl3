@@ -58,7 +58,6 @@ final class MemoryAccess {
 			}
 		}
 
-		LWJGLUtil.log("MemoryUtil MemoryAccessor: " + accessor.getClass().getSimpleName());
 		return accessor;
 	}
 
@@ -67,6 +66,16 @@ final class MemoryAccess {
 	}
 
 	abstract static class MemoryAccessor {
+
+		int getPageSize() {
+			// TODO: Can we do better?
+			return 4096;
+		}
+
+		int getCacheLineSize() {
+			// TODO: Can we do better?
+			return 64;
+		}
 
 		abstract long getAddress(Buffer buffer);
 

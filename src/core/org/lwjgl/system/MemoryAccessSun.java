@@ -67,6 +67,10 @@ final class MemoryAccessSun {
 			}
 		}
 
+		int getPageSize() {
+			return unsafe.pageSize();
+		}
+
 		public long getAddress(final Buffer buffer) {
 			return unsafe.getLong(buffer, address);
 		}
