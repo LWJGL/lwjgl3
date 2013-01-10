@@ -8,6 +8,8 @@ import org.lwjgl.LWJGLUtil;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
+import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL30.*;
 
 final class GLChecks {
 
@@ -22,17 +24,15 @@ final class GLChecks {
 	}
 
 	private static String translateBufferObjectBinding(final int binding) {
-		// TODO: Implement
-		/*switch ( binding ) {
-			case ARRAY_BUFFER_BINDING:
+		switch ( binding ) {
+			case GL_ARRAY_BUFFER_BINDING:
 				return "array";
-			case ELEMENT_ARRAY_BUFFER_BINDING:
+			case GL_ELEMENT_ARRAY_BUFFER_BINDING:
 				return "element array";
-			case ELEMENT_ARRAY_BUFFER_BINDING:
-				return "element array";
-		}*/
-
-		return "XXX";
+			default:
+				// TODO: Add more?
+				throw new IllegalArgumentException(Integer.toHexString(binding));
+		}
 	}
 
 	/**
@@ -50,7 +50,7 @@ final class GLChecks {
 			case GL_SHORT:
 			case GL_UNSIGNED_SHORT:
 			case GL_2_BYTES:
-				//case GL_HALF_FLOAT: TODO: remove comment
+			case GL_HALF_FLOAT:
 				return 2;
 			case GL_3_BYTES:
 				return 3;
@@ -62,7 +62,7 @@ final class GLChecks {
 			case GL_DOUBLE:
 				return 8;
 			default:
-				throw new IllegalArgumentException("Unsupported OpenGL type");
+				throw new IllegalArgumentException(Integer.toHexString(type));
 		}
 	}
 
@@ -74,37 +74,36 @@ final class GLChecks {
 	 * @return the number of components
 	 */
 	static int translatePixelFormatToComponents(final int format) {
-		// TODO: remove comments
 		switch ( format ) {
 			case GL_STENCIL_INDEX:
 			case GL_DEPTH_COMPONENT:
-				//case GL_DEPTH_STENCIL:
+			case GL_DEPTH_STENCIL:
 			case GL_RED:
 			case GL_GREEN:
 			case GL_BLUE:
 			case GL_ALPHA:
 			case GL_LUMINANCE:
-				//case GL_RED_INTEGER:
-				//case GL_GREEN_INTEGER:
-				//case GL_BLUE_INTEGER:
-				//case GL_ALPHA_INTEGER:
+			case GL_RED_INTEGER:
+			case GL_GREEN_INTEGER:
+			case GL_BLUE_INTEGER:
+			case GL_ALPHA_INTEGER:
 				return 1;
-			//case GL_RG:
-			//case GL_RG_INTEGER:
+			case GL_RG:
+			case GL_RG_INTEGER:
 			case GL_LUMINANCE_ALPHA:
 				return 2;
 			case GL_RGB:
 			case GL_BGR:
-				//case GL_RGB_INTEGER:
-				//case GL_BGR_INTEGER:
+			case GL_RGB_INTEGER:
+			case GL_BGR_INTEGER:
 				return 3;
 			case GL_RGBA:
 			case GL_BGRA:
-				//case GL_RGBA_INTEGER:
-				//case GL_BGRA_INTEGER
+			case GL_RGBA_INTEGER:
+			case GL_BGRA_INTEGER:
 				return 4;
 			default:
-				throw new IllegalArgumentException("Unsupported OpenGL format");
+				throw new IllegalArgumentException(Integer.toHexString(format));
 		}
 	}
 

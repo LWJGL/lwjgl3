@@ -18,7 +18,7 @@ public final class BufferUtils {
 	private static final BufferAllocator BUFFER_ALLOCATOR;
 
 	static {
-		final String alignment = System.getProperty("org.lwjgl.util.bufferAlign");
+		final String alignment = System.getProperty("org.lwjgl.util.BufferAlign");
 		if ( "page".equals(alignment) )
 			BUFFER_ALLOCATOR = new BufferAllocator() {
 				public ByteBuffer malloc(final int capacity) {
