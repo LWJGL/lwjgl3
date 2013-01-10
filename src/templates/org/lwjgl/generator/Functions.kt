@@ -106,7 +106,10 @@ public class NativeClassFunction(
 		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) )
 			name = name.substring(0, name.size - nativeClass.postfix.size)
 
-		var cutCount = if ( name.endsWith("v") ) 1 else 0
+		var cutCount = if ( name.endsWith("v") ) {
+			if ( name.endsWith("_v") ) 2 else 1
+		} else
+			0
 
 		if ( stripType ) {
 			val pointerMapping = param.nativeType.mapping as PointerMapping
@@ -439,12 +442,7 @@ public class NativeClassFunction(
 
 		print("\tpublic static native ${returns.nativeMethodType} ")
 		if ( !nativeOnly ) print('n')
-		print(
-			if ( name.indexOf('_') == -1 )
-				name
-			else
-				name.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
-		)
+		print(name)
 		print("(")
 		printList(parameters) {
 			it.asNativeMethodParam(parameters)
@@ -533,8 +531,14 @@ public class NativeClassFunction(
 
 		if ( returns.nativeType is CharSequenceType )
 			transforms[returns] = StringReturnTransform
-		else if ( returns has MapPointer.CLASS )
-			transforms[returns] = MapPointerTransform
+		else if ( returns has MapPointer.CLASS ) {
+			val mapPointer = returns[MapPointer.CLASS]
+
+			transforms[returns] = if ( parameters.containsKey(mapPointer.sizeExpression) )
+				MapPointerExplicitTransform(lengthParam = mapPointer.sizeExpression, addParam = false)
+			else
+				MapPointerTransform
+		}
 
 		getParams { it has BufferObject.CLASS } forEach {
 			transforms[it] = BufferOffsetTransform
@@ -566,8 +570,11 @@ public class NativeClassFunction(
 
 		// Step 3: Generate more complex alternatives if necessary
 		if ( returns has MapPointer.CLASS ) {
-			transforms[returns] = MapPointerExplicitTransform
-			generateAlternativeMethod(stripPostfix(true), "Explicit size alternative version of:", transforms, customChecks)
+			// The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
+			if ( !parameters.containsKey(returns[MapPointer.CLASS].sizeExpression) ) {
+				transforms[returns] = MapPointerExplicitTransform("length")
+				generateAlternativeMethod(stripPostfix(true), "Explicit size alternative version of:", transforms, customChecks)
+			}
 		}
 
 		parameters.values() forEach {
@@ -721,9 +728,11 @@ public class NativeClassFunction(
 		customChecks: List<String>,
 		postFix: String = ""
 	) {
+		val returnTransform = transforms[returns]
+
 		// Step 0: JavaDoc
 
-		if ( transforms[returns] == StringReturnTransform ) // Special-case, we skipped the normal method
+		if ( returnTransform == StringReturnTransform ) // Special-case, we skipped the normal method
 			println(documentation)
 		else
 			generateJavaDocLink(description, this@NativeClassFunction)
@@ -739,14 +748,17 @@ public class NativeClassFunction(
 			else
 				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
 		}
-		if ( transforms[returns] == MapPointerTransform ) {
+		if ( returnTransform == MapPointerTransform ) {
 			if ( !parameters.isEmpty() )
 				print(", ")
 			print("ByteBuffer old_buffer")
-		} else if ( transforms[returns] == MapPointerExplicitTransform ) {
+		} else if ( returnTransform != null && returnTransform.javaClass == javaClass<MapPointerExplicitTransform>() ) {
 			if ( !parameters.isEmpty() )
 				print(", ")
-			print("int size, ByteBuffer old_buffer")
+			val mapPointerExplicit = returnTransform as MapPointerExplicitTransform
+			if ( mapPointerExplicit.addParam )
+				print("int ${mapPointerExplicit.lengthParam}, ")
+			print("ByteBuffer old_buffer")
 		}
 		println(") {")
 
@@ -847,7 +859,13 @@ public class NativeClassFunction(
 		print("JNIEXPORT ${returns.jniFunctionType} JNICALL Java_${nativeClass.nativeFileName}_")
 		if ( !isSimpleFunction )
 			print('n')
-		print("$name(")
+		print(
+			if ( name.indexOf('_') == -1 )
+				name
+			else
+				name.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
+		)
+		print("(")
 		print("JNIEnv *$JNIENV, jclass clazz")
 		parameters.values().forEach {
 			print(", ${it.asJNIFunctionParam}")
@@ -1037,14 +1055,14 @@ private class SingleValueTransform(
 
 private val MapPointerTransform = object : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String): String = """int size = ${param.get(MapPointer.CLASS).sizeExpression};
-		return __result == memAddress0(old_buffer) && old_buffer.capacity() == size ? old_buffer : memByteBuffer(__result, size);"""
+	override fun transformCall(param: ReturnValue, original: String): String = """int length = ${param.get(MapPointer.CLASS).sizeExpression};
+		return __result == memAddress0(old_buffer) && old_buffer.capacity() == length ? old_buffer : memByteBuffer(__result, length);"""
 }
 
-private val MapPointerExplicitTransform = object : FunctionTransform<ReturnValue> {
+private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"__result == memAddress0(old_buffer) && old_buffer.capacity() == size ? old_buffer : memByteBuffer(__result, size)"
+		"__result == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer(__result, $lengthParam)"
 }
 
 private val StringLengthTransform = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
