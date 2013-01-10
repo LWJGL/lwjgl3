@@ -139,7 +139,10 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("shader", "the handle of the shader object whose source code is to be replaced"),
 		AutoSize("string", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
-		const _ GLchar_pp.IN("string", "an array of pointers to strings containing the source code to be loaded into the shader"),
+		mods(const, PointerArray(GLchar_p, "count", "length")) _ GLchar_pp.IN(
+			"string",
+			"an array of pointers to strings containing the source code to be loaded into the shader"
+		),
 		mods(const, nullable) _ GLint_p.IN("length", "an array of string lengths")
 	)
 
@@ -158,7 +161,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 	)
 
 	GLvoid.func(
-		"UseProgramObject",
+		"UseProgram",
 		"Installs a program object as part of current rendering state.",
 
 		GLuint.IN("program", "the handle of the program object whose executables are to be used as part of current rendering state")
@@ -887,7 +890,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 	)
 
 	GLvoid.func(
-		"glStencilMaskSeparate",
+		"StencilMaskSeparate",
 		"Controls the front and/or back writing of individual bits in the stencil planes.",
 
 		GLenum.IN("face", "whether front and/or back stencil writemask is updated", "GL11#GL_FRONT GL11#GL_BACK GL11#GL_FRONT_AND_BACK"),

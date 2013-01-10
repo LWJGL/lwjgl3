@@ -41,7 +41,7 @@ val GLenum_p = PointerType(name = "GLenum", mapping = PointerMapping.DATA_INT)
 val GLintptr = PointerType(name = "GLintptr", includesPointer = true)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
 
-val GLchar_p = CharSequenceType("GLchar")
+val GLchar_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
 val GLchar_pp = PointerType(name = "GLchar*", mapping = PointerMapping.DATA_POINTER)
 
 val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
