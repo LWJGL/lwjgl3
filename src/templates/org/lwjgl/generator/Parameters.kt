@@ -453,3 +453,33 @@ public class MapPointer(
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
 	}
 }
+
+/** Marks a pointer parameter as an array of pointers. */
+public class PointerArray(
+	/** The array element type. */
+	val elementType: PointerType,
+	/** The parameter that defines that number of pointers in the array */
+	val countParam: String,
+	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
+    val lengthsParam: String? = null
+): TemplateModifier {
+	class object {
+		val CLASS = javaClass<PointerArray>()
+	}
+
+	override val isSpecial: Boolean = true
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is Parameter )
+			throw IllegalArgumentException("The PointerArray modifier can only be applied on parameters.")
+
+		val param = ttype as Parameter
+		if ( param.nativeType !is PointerType )
+			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
+
+		if ( (param.nativeType : PointerType).mapping != PointerMapping.DATA_POINTER )
+			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer-to-pointer types.")
+
+		if ( param.paramType != ParameterType.IN )
+			throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
+	}
+}

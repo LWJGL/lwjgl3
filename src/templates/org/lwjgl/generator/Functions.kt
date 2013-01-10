@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
@@ -208,7 +208,7 @@ public class NativeClassFunction(
 				val bufferParam = parameters[bufferParamName]
 				when {
 					bufferParam == null -> it.error("Buffer reference does not exist: AutoType($bufferParamName)")
-					!(bufferParam!!.nativeType is PointerType) -> it.error("Buffer refence must be a pointer type: AutoType($bufferParamName)")
+					!(bufferParam!!.nativeType is PointerType) -> it.error("Buffer reference must be a pointer type: AutoType($bufferParamName)")
 					bufferParam!!.nativeType.mapping != PointerMapping.DATA -> it.error("Pointer reference must have a DATA mapping: AutoType($bufferParamName)")
 					else -> {
 					}
@@ -245,6 +245,20 @@ public class NativeClassFunction(
 						lengthParam!!.nativeType.mapping != PointerMapping.DATA_INT -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
 						else -> {
 						}
+					}
+				}
+			}
+
+			if ( it has PointerArray.CLASS ) {
+				val countParamName = it[PointerArray.CLASS].countParam
+				val countParam = parameters[countParamName]
+				val lengthsParamName = it[PointerArray.CLASS].lengthsParam
+				val lengthsParam = parameters[lengthsParamName]
+				when {
+					countParam == null -> it.error("Count reference does not exist: PointerArray($countParamName)")
+					countParam!!.nativeType.mapping != PrimitiveMapping.INT -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
+					lengthsParam != null && lengthsParam.nativeType.mapping != PointerMapping.DATA_INT -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
+					else -> {
 					}
 				}
 			}
@@ -365,8 +379,12 @@ public class NativeClassFunction(
 						"${autoSize.reference}.remaining()"
 
 					for ( d in autoSize.dependent ) {
-						prefix = if ( parameters[d]!! has Nullable.CLASS ) "if ( $d != null ) " else ""
-						checks add "${prefix}checkBuffer($d, $expression);"
+						val param = parameters[d]!!
+						val transform = transforms?.get(param)
+						if ( transform !is SkipCheckFunctionTransform ) {
+							prefix = if ( param has Nullable.CLASS ) "if ( $d != null ) " else ""
+							checks add "${prefix}checkBuffer($d, $expression);"
+						}
 					}
 				}
 			}
@@ -676,6 +694,22 @@ public class NativeClassFunction(
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 				}
+			} else if ( it has PointerArray.CLASS ) {
+				val pointerArray = it[PointerArray.CLASS]
+
+				val lengthsParam = parameters[pointerArray.lengthsParam]
+				if ( lengthsParam != null )
+					transforms[lengthsParam!!] = ExpressionTransform("0L") // TODO: !! -> Kotlin bug
+
+				val countParam = parameters[pointerArray.countParam]!!
+
+				transforms[countParam] = ExpressionTransform("1")
+				transforms[it] = PointerArrayTransformSingle
+				generateAlternativeMethod(strippedName, "Single ${it.name} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+
+				transforms[countParam] = ExpressionTransform("${it.name}.length")
+				transforms[it] = PointerArrayTransformMulti
+				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 			}
 		}
 	}
@@ -952,12 +986,12 @@ private val BufferOffsetTransform = object : FunctionTransform<Parameter>, SkipC
 	override fun transformCall(param: Parameter, original: String): String = "${param.name}Offset"
 }
 
-private open class ExpressionTransform(val expression: String, val keepParam: Boolean = false): FunctionTransform<Parameter> {
+private open class ExpressionTransform(val expression: String, val keepParam: Boolean = false): FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String): String? = if ( keepParam ) original else null
 	override fun transformCall(param: Parameter, original: String): String = expression
 }
 
-private class ExpressionLocalTransform(expression: String, keepParam: Boolean = false): ExpressionTransform(expression, keepParam), PreFunctionTransform {
+private class ExpressionLocalTransform(expression: String, keepParam: Boolean = false): ExpressionTransform(expression, keepParam), PreFunctionTransform, SkipCheckFunctionTransform {
 	override fun transformCall(param: Parameter, original: String): String = original
 	override fun preprocess(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.println("\t\t${(qualifiedType as Parameter).asJavaMethodParam} = $expression;")
 }
@@ -1034,3 +1068,43 @@ private class StringParamReturnTransform(
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "String" // Replace void with String
 	override fun transformCall(param: ReturnValue, original: String): String = "\t\treturn memDecode$encoding(memByteBuffer($API_BUFFER.address() + $paramName, $API_BUFFER.intValue($lengthParam)));" // Replace with String decode
 }
+
+private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String): String? = if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param.name}" // Replace with CharSequence
+	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}Address" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qualifiedType as Parameter)
+
+	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
+		val elementType = param[PointerArray.CLASS].elementType
+
+		if ( multi ) {
+			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << PointerBuffer.getPointerSizeShift());")
+
+			// Create a local array that will hold the encoded CharSequences. We need this to avoid premature GC of the passed buffers.
+			if ( elementType is CharSequenceType )
+				println("\t\tByteBuffer[] ${param.name}Buffers = new ByteBuffer[${param.name}.length];")
+
+			println("\t\tfor ( int i = 0; i < ${param.name}.length; i++ )")
+			print("\t\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX + (i << PointerBuffer.getPointerSizeShift()), memAddress(")
+			if ( elementType is CharSequenceType )
+				print("${param.name}Buffers[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
+			print("${param.name}[i]")
+			if ( elementType is CharSequenceType )
+				print(")")
+			println("));")
+		} else {
+			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerParam();")
+
+			// Store the encoded CharSequence buffer in a local var to avoid premature GC.
+			if ( elementType is CharSequenceType )
+				println("\t\tByteBuffer ${param.name}Buffer = memEncode${elementType.charMapping.charset}(${param.name});") // Encode and store
+
+			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${param.name}")
+			if ( elementType is CharSequenceType )
+				print("Buffer")
+			println("));")
+		}
+	}
+}
+private val PointerArrayTransformSingle = PointerArrayTransform(false)
+private val PointerArrayTransformMulti = PointerArrayTransform(true)
