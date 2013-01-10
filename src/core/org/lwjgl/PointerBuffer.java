@@ -62,7 +62,7 @@ public class PointerBuffer implements Comparable {
 			throw new IllegalArgumentException("The source buffer is not direct.");
 
 		final int alignment = is64Bit ? 8 : 4;
-		if ( (memAddress0(source) + source.position()) % alignment != 0 || source.remaining() % alignment != 0 )
+		if ( (memAddress(source) % alignment) != 0 || source.remaining() % alignment != 0 )
 			throw new IllegalArgumentException("The source buffer is not aligned to " + alignment + " bytes.");
 	}
 

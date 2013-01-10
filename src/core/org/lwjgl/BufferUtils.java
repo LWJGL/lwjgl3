@@ -11,100 +11,189 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Some often-used Buffer code for creating native buffers of the appropriate size. */
 public final class BufferUtils {
 
+	private interface BufferAllocator {
+		ByteBuffer malloc(int capacity);
+	}
+
+	private static final BufferAllocator BUFFER_ALLOCATOR;
+
+	static {
+		final String alignment = System.getProperty("org.lwjgl.util.bufferAlign");
+		if ( "page".equals(alignment) )
+			BUFFER_ALLOCATOR = new BufferAllocator() {
+				public ByteBuffer malloc(final int capacity) {
+					return createAlignedByteBufferPage(capacity);
+				}
+			};
+		else if ( "cache-line".equals(alignment) )
+			BUFFER_ALLOCATOR = new BufferAllocator() {
+				public ByteBuffer malloc(final int capacity) {
+					return createAlignedByteBufferCacheLine(capacity);
+				}
+			};
+		else
+			BUFFER_ALLOCATOR = new BufferAllocator() {
+				public ByteBuffer malloc(final int capacity) {
+					return createUnalignedByteBuffer(capacity);
+				}
+			};
+	}
+
 	/**
-	 * Construct a direct native-ordered bytebuffer with the specified size.
+	 * Construct a direct native-ordered bytebuffer with the specified capacity.
 	 *
-	 * @param size The size, in bytes
+	 * @param capacity The capacity, in bytes
 	 *
 	 * @return a ByteBuffer
 	 */
-	public static ByteBuffer createByteBuffer(int size) {
-		return ByteBuffer.allocateDirect(size).order(ByteOrder.nativeOrder());
+	public static ByteBuffer createByteBuffer(int capacity) {
+		return BUFFER_ALLOCATOR.malloc(capacity).order(ByteOrder.nativeOrder());
 	}
 
 	/**
 	 * Construct a direct native-order shortbuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in shorts
+	 * @param capacity The capacity, in shorts
 	 *
 	 * @return a ShortBuffer
 	 */
-	public static ShortBuffer createShortBuffer(int size) {
-		return createByteBuffer(size << 1).asShortBuffer();
+	public static ShortBuffer createShortBuffer(int capacity) {
+		return createByteBuffer(capacity << 1).asShortBuffer();
 	}
 
 	/**
 	 * Construct a direct native-order charbuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in chars
+	 * @param capacity The capacity, in chars
 	 *
 	 * @return an CharBuffer
 	 */
-	public static CharBuffer createCharBuffer(int size) {
-		return createByteBuffer(size << 1).asCharBuffer();
+	public static CharBuffer createCharBuffer(int capacity) {
+		return createByteBuffer(capacity << 1).asCharBuffer();
 	}
 
 	/**
 	 * Construct a direct native-order intbuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in ints
+	 * @param capacity The capacity, in ints
 	 *
 	 * @return an IntBuffer
 	 */
-	public static IntBuffer createIntBuffer(int size) {
-		return createByteBuffer(size << 2).asIntBuffer();
+	public static IntBuffer createIntBuffer(int capacity) {
+		return createByteBuffer(capacity << 2).asIntBuffer();
 	}
 
 	/**
 	 * Construct a direct native-order longbuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in longs
+	 * @param capacity The capacity, in longs
 	 *
 	 * @return an LongBuffer
 	 */
-	public static LongBuffer createLongBuffer(int size) {
-		return createByteBuffer(size << 3).asLongBuffer();
+	public static LongBuffer createLongBuffer(int capacity) {
+		return createByteBuffer(capacity << 3).asLongBuffer();
 	}
 
 	/**
 	 * Construct a direct native-order floatbuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in floats
+	 * @param capacity The capacity, in floats
 	 *
 	 * @return a FloatBuffer
 	 */
-	public static FloatBuffer createFloatBuffer(int size) {
-		return createByteBuffer(size << 2).asFloatBuffer();
+	public static FloatBuffer createFloatBuffer(int capacity) {
+		return createByteBuffer(capacity << 2).asFloatBuffer();
 	}
 
 	/**
 	 * Construct a direct native-order doublebuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in floats
+	 * @param capacity The capacity, in floats
 	 *
 	 * @return a FloatBuffer
 	 */
-	public static DoubleBuffer createDoubleBuffer(int size) {
-		return createByteBuffer(size << 3).asDoubleBuffer();
+	public static DoubleBuffer createDoubleBuffer(int capacity) {
+		return createByteBuffer(capacity << 3).asDoubleBuffer();
 	}
 
 	/**
 	 * Construct a PointerBuffer with the specified number
 	 * of elements.
 	 *
-	 * @param size The size, in memory addresses
+	 * @param capacity The capacity, in memory addresses
 	 *
 	 * @return a PointerBuffer
 	 */
-	public static PointerBuffer createPointerBuffer(int size) {
-		return PointerBuffer.allocateDirect(size);
+	public static PointerBuffer createPointerBuffer(int capacity) {
+		return PointerBuffer.allocateDirect(capacity);
 	}
+
+	// Unaligned mallocs
+
+	/**
+	 * Allocates a direct ByteBuffer in native order with the given capacity.
+	 *
+	 * @param capacity the ByteBuffer capacity
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer createUnalignedByteBuffer(int capacity) {
+		return ByteBuffer.allocateDirect(capacity).order(ByteOrder.nativeOrder());
+	}
+
+	// Aligned mallocs
+
+	/**
+	 * Allocates a direct ByteBuffer in native order with the given capacity and memory alignment.
+	 *
+	 * @param capacity  the ByteBuffer capacity
+	 * @param alignment the desired memory alignment, in bytes. Must be a power-of-two.
+	 *
+	 * @return the aligned ByteBuffer
+	 */
+	public static ByteBuffer createAlignedByteBuffer(final int capacity, final int alignment) {
+		final int mask = alignment - 1;
+		final ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
+
+		// Align
+		buffer.position(alignment - (int)(memAddress(buffer) & mask));
+		// Prepare to slice
+		buffer.limit(buffer.position() + capacity);
+
+		return buffer.slice().order(ByteOrder.nativeOrder());
+	}
+
+	/**
+	 * Allocates a direct ByteBuffer in native order with the given capacity. The returned ByteBuffer
+	 * will be page-aligned.
+	 *
+	 * @param capacity the ByteBuffer capacity
+	 *
+	 * @return the page-aligned ByteBuffer
+	 */
+	public static ByteBuffer createAlignedByteBufferPage(final int capacity) {
+		return createAlignedByteBuffer(capacity, PAGE_SIZE);
+	}
+
+	/**
+	 * Allocates a direct ByteBuffer in native order with the given capacity. The returned ByteBuffer
+	 * will be cache-line-aligned.
+	 *
+	 * @param capacity the ByteBuffer capacity
+	 *
+	 * @return the cache-line-aligned ByteBuffer
+	 */
+	public static ByteBuffer createAlignedByteBufferCacheLine(final int capacity) {
+		return createAlignedByteBuffer(capacity, 64); // TODO: Discover cache line size at runtime
+	}
+
+	// memsets
 
 	/** Fill buffer with zeros from position to remaining */
 	public static void zeroBuffer(ByteBuffer b) {
