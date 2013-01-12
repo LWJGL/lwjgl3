@@ -114,16 +114,19 @@ public class NativeClassFunction(
 		if ( stripType ) {
 			val pointerMapping = param.nativeType.mapping as PointerMapping
 			val typeChar = when ( pointerMapping ) {
-				PointerMapping.DATA_SHORT -> 's'
-				PointerMapping.DATA_INT -> 'i'
-				PointerMapping.DATA_LONG -> 'l'
-				PointerMapping.DATA_FLOAT -> 'f'
-				PointerMapping.DATA_DOUBLE -> 'd'
-				else -> 0.toChar()
+				PointerMapping.DATA_SHORT -> "s"
+				PointerMapping.DATA_INT -> "i"
+				PointerMapping.DATA_LONG -> "i64"
+				PointerMapping.DATA_FLOAT -> "f"
+				PointerMapping.DATA_DOUBLE -> "d"
+				else -> ""
 			}
 
-			if ( typeChar != 0.toChar() && name.charAt(name.size - cutCount - 1) == typeChar )
-				cutCount++
+			if ( typeChar != "" ) {
+				val offset = name.size - cutCount
+				if ( typeChar equals name.substring(offset - typeChar.size, offset) )
+					cutCount += typeChar.size
+			}
 		}
 
 		return name.substring(0, name.size - cutCount) + nativeClass.postfix
@@ -376,14 +379,18 @@ public class NativeClassFunction(
 						checks add "${prefix}checkBuffer($d, ${bufferShift(length, d, "<<", null)});"
 					}
 				} else {
-					val expression = if ( transforms?.get(parameters[autoSize.reference])?.javaClass == javaClass<SingleValueTransform>() )
-						"1"
-					else
-						"${autoSize.reference}.remaining()"
+					val referenceTransform = transforms!![parameters[autoSize.reference]!!]
+					val expression =
+						if ( referenceTransform != null && (referenceTransform.javaClass == javaClass<SingleValueTransform>() || referenceTransform == PointerArrayTransformSingle) )
+							"1"
+						else if ( referenceTransform != null && referenceTransform == PointerArrayTransformMulti )
+							"${autoSize.reference}.length"
+						else
+							"${autoSize.reference}.remaining()"
 
 					for ( d in autoSize.dependent ) {
 						val param = parameters[d]!!
-						val transform = transforms?.get(param)
+						val transform = transforms.get(param)
 						if ( transform !is SkipCheckFunctionTransform ) {
 							prefix = if ( param has Nullable.CLASS ) "if ( $d != null ) " else ""
 							checks add "${prefix}checkBuffer($d, $expression);"
@@ -458,9 +465,13 @@ public class NativeClassFunction(
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
-		if ( nativeClass.className.startsWith("GL") )
-			printOpenGLJavaDoc(documentation, stripPostfix(true), this@NativeClassFunction has deprecatedGL)
-		else
+		if ( nativeClass.className.startsWith("GL") ) {
+			val xmlName = if ( this@NativeClassFunction has ReferenceGL.CLASS )
+				this@NativeClassFunction[ReferenceGL.CLASS].function
+			else
+				stripPostfix(true)
+			printOpenGLJavaDoc(documentation, xmlName, this@NativeClassFunction has deprecatedGL)
+		} else
 			println(documentation)
 
 		// Step 1: Method signature
@@ -580,24 +591,29 @@ public class NativeClassFunction(
 		parameters.values() forEach {
 			val param = it
 
-			if ( it has Return.CLASS ) {
+			fun applyReturnValueTransforms(val param: Parameter) {
+				// Transform void to the proper type
+				transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
+
+				// Transform the AutoSize parameter, if there is one
+				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+					transforms[it] = BufferValueSizeTransform
+				}
+
+				// Transform the returnValue parameter
+				transforms[param] = BufferValueParameterTransform
+			}
+
+			if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
 
 				if ( returnMod == returnValue ) {
 					// Generate Return alternative
 
-					// Transform void to the proper type
-					transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[it.nativeType.mapping]!!, param.name)
-
-					// Transform the AutoSize parameter, if there is one
-					getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
-						transforms[it] = BufferValueSizeTransform
+					if ( !hasParam { it has SingleValue.CLASS || it has PointerArray.CLASS } ) { // Skip, we inject the Return alternative in these transforms
+						applyReturnValueTransforms(it)
+						generateAlternativeMethod(strippedName, "Single return value version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 					}
-
-					// Transform the returnValue parameter
-					transforms[it] = BufferValueParameterTransform
-
-					generateAlternativeMethod(strippedName, "Single return value version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 				} else {
 					// Generate String return alternative
 
@@ -623,6 +639,9 @@ public class NativeClassFunction(
 				}
 			} else if ( it has SingleValue.CLASS ) {
 				// Generate SingleValue alternative
+
+				// Compine SingleValueTransform with BufferValueReturnTransform
+				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
 
 				// Transform the AutoSize parameter, if there is one
 				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
@@ -710,13 +729,16 @@ public class NativeClassFunction(
 
 				val countParam = parameters[pointerArray.countParam]!!
 
-				transforms[countParam] = ExpressionTransform("1")
-				transforms[it] = PointerArrayTransformSingle
-				generateAlternativeMethod(strippedName, "Single ${it.name} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
-
 				transforms[countParam] = ExpressionTransform("${it.name}.length")
 				transforms[it] = PointerArrayTransformMulti
 				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+
+				// Compine PointerArrayTransformSingle with BufferValueReturnTransform
+				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
+
+				transforms[countParam] = ExpressionTransform("1")
+				transforms[it] = PointerArrayTransformSingle
+				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 			}
 		}
 	}
@@ -1088,7 +1110,7 @@ private class StringParamReturnTransform(
 }
 
 private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param.name}" // Replace with CharSequence
+	override fun transformDeclaration(param: Parameter, original: String): String? = if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray.CLASS].singleName}" // Replace with CharSequence
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}Address" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qualifiedType as Parameter)
 
@@ -1115,7 +1137,7 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 
 			// Store the encoded CharSequence buffer in a local var to avoid premature GC.
 			if ( elementType is CharSequenceType )
-				println("\t\tByteBuffer ${param.name}Buffer = memEncode${elementType.charMapping.charset}(${param.name});") // Encode and store
+				println("\t\tByteBuffer ${param.name}Buffer = memEncode${elementType.charMapping.charset}(${param[PointerArray.CLASS].singleName});") // Encode and store
 
 			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${param.name}")
 			if ( elementType is CharSequenceType )
