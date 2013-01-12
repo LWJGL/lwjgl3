@@ -1,7 +1,0 @@
-<root>
-	<item name='java.nio.ByteBuffer java.nio.ByteBuffer allocateDirect(int)'>
-		<annotation name='jet.runtime.typeinfo.KotlinSignature'>
-			<val name="value" val="&quot;fun allocateDirect(capacity : Int) : ByteBuffer&quot;"/>
-		</annotation>
-	</item>
-</root>
