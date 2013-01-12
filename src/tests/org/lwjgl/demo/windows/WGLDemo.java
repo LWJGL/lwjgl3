@@ -15,7 +15,9 @@ import org.lwjgl.system.windows.opengl.WindowsContext;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGpuAssociation.*;
@@ -190,9 +192,9 @@ public final class WGLDemo {
 		return pixelFormat;
 	}
 
-	private static void add(List<Integer> properties, final int key, final int value) {
-		properties.add(key);
-		properties.add(value);
+	private static void add(IntBuffer properties, final int key, final int value) {
+		properties.put(key);
+		properties.put(value);
 	}
 
 	private static int findPixelFormatARB(int pixelFormat, final ByteBuffer pfd) {
@@ -207,14 +209,15 @@ public final class WGLDemo {
 
 		final Context context = WindowsContext.create(dummy.getHdc());
 
-		final List<Integer> propList = new ArrayList<Integer>(32);
+		final IntBuffer propList = BufferUtils.createIntBuffer(32);
 
 		add(propList, WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
 		add(propList, WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB);
 		add(propList, WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
-		//add(propList, WGL_DOUBLE_BUFFER_ARB, GL_FALSE);
+		add(propList, WGL_DOUBLE_BUFFER_ARB, GL_FALSE);
 		add(propList, WGL_STEREO_ARB, GL_FALSE);
-		//add(propList, WGL_SAMPLE_BUFFERS_ARB, 0);
+		add(propList, WGL_SAMPLE_BUFFERS_ARB, 0);
+		add(propList, WGL_SAMPLES_ARB, 0);
 
 		add(propList, WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB);
 		add(propList, WGL_RED_BITS_ARB, 8);
@@ -224,27 +227,24 @@ public final class WGLDemo {
 		add(propList, WGL_DEPTH_BITS_ARB, 24);
 		add(propList, WGL_STENCIL_BITS_ARB, 8);
 
-		final IntBuffer props = BufferUtils.createIntBuffer(propList.size() + 1);
-		for ( final Integer prop : propList )
-			props.put(prop);
-		props.put(0);
+		propList.put(0);
+		propList.flip();
 
 		final IntBuffer pixelFormatNum = BufferUtils.createIntBuffer(1);
 
 		success = wglGetPixelFormatAttribiARB(dummy.getHdc(), 0, 0, WGL_NUMBER_PIXEL_FORMATS_ARB, pixelFormatNum);
 		assertTrue(success != 0);
 
-		//final IntBuffer pixelFormatRet = BufferUtils.createIntBuffer(pixelFormatNum.get(0));
-		final IntBuffer pixelFormatRet = BufferUtils.createIntBuffer(1);
-		pixelFormatNum.put(0, 0);
+		final IntBuffer pixelFormatRet = BufferUtils.createIntBuffer(pixelFormatNum.get(0));
+		//System.out.println("pixelFormatRet.capacity() = " + pixelFormatRet.capacity());
 
-		success = wglChoosePixelFormatARB(dummy.getHdc(), props, null, pixelFormatRet, pixelFormatNum);
+		success = wglChoosePixelFormatARB(dummy.getHdc(), propList, null, pixelFormatRet, pixelFormatNum);
 		assertTrue(success != 0);
 		assertTrue(1 <= pixelFormatNum.get(0));
 
 		/*System.out.println("pixelFormatNum.get(0) = " + pixelFormatNum.get(0));
 
-		final Map<String, Integer> wglMap = new LinkedHashMap<String, Integer>();
+		final Map<String, Integer> wglMap = new LinkedHashMap<String, Integer>(64);
 
 		wglMap.put("WGL_DRAW_TO_WINDOW_ARB", 0x2001);
 		wglMap.put("WGL_DRAW_TO_BITMAP_ARB", 0x2002);
@@ -286,6 +286,8 @@ public final class WGLDemo {
 		wglMap.put("WGL_DEPTH_BITS_ARB", 0x2022);
 		wglMap.put("WGL_STENCIL_BITS_ARB", 0x2023);
 		wglMap.put("WGL_AUX_BUFFERS_ARB", 0x2024);
+		wglMap.put("WGL_SAMPLE_BUFFERS_ARB", 0x2041);
+		wglMap.put("WGL_SAMPLES_ARB", 0x2042);
 
 		final IntBuffer value = BufferUtils.createIntBuffer(1);
 		for ( int i = 0; i < pixelFormatNum.get(0); i++ ) {
@@ -293,7 +295,7 @@ public final class WGLDemo {
 
 			System.out.println("\nPIXELFORMAT: " + pf);
 			System.out.println("---------------------");
-			for ( int j = 0; j < propList.size(); j += 2 ) {
+			for ( int j = 0; j < propList.remaining(); j += 2 ) {
 				final int property = propList.get(j);
 				if ( property == 0 )
 					break;
