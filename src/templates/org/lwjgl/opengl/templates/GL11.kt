@@ -874,10 +874,10 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	val TEXTURE_PARAMETERS =
 		"""
-		#GL_TEXTURE_BASE_LEVEL #GL_TEXTURE_BORDER_COLOR #GL_TEXTURE_COMPARE_MODE #GL_TEXTURE_COMPARE_FUNC #GL_TEXTURE_LOD_BIAS #GL_TEXTURE_MAG_FILTER
-		#GL_TEXTURE_MAX_LEVEL #GL_TEXTURE_MAX_LOD #GL_TEXTURE_MIN_FILTER #GL_TEXTURE_MIN_LOD #GL_TEXTURE_PRIORITY #GL_TEXTURE_SWIZZLE_R #GL_TEXTURE_SWIZZLE_G
-		#GL_TEXTURE_SWIZZLE_B #GL_TEXTURE_SWIZZLE_A #GL_TEXTURE_SWIZZLE_RGBA #GL_TEXTURE_WRAP_S #GL_TEXTURE_WRAP_T #GL_TEXTURE_WRAP_R #GL_DEPTH_TEXTURE_MODE
-		#GL_DEPTH_TEXTURE_STENCIL_MODE #GL_GENERATE_MIPMAP
+		GL12#GL_TEXTURE_BASE_LEVEL #GL_TEXTURE_BORDER_COLOR #GL_TEXTURE_COMPARE_MODE #GL_TEXTURE_COMPARE_FUNC #GL_TEXTURE_LOD_BIAS #GL_TEXTURE_MAG_FILTER
+		GL12#GL_TEXTURE_MAX_LEVEL GL12#GL_TEXTURE_MAX_LOD #GL_TEXTURE_MIN_FILTER GL12#GL_TEXTURE_MIN_LOD #GL_TEXTURE_PRIORITY #GL_TEXTURE_SWIZZLE_R
+		#GL_TEXTURE_SWIZZLE_G #GL_TEXTURE_SWIZZLE_B #GL_TEXTURE_SWIZZLE_A #GL_TEXTURE_SWIZZLE_RGBA #GL_TEXTURE_WRAP_S #GL_TEXTURE_WRAP_T #GL_TEXTURE_WRAP_R
+		#GL_DEPTH_TEXTURE_MODE #GL_DEPTH_TEXTURE_STENCIL_MODE #GL_GENERATE_MIPMAP
 		"""
 
 	// Table 17.2
@@ -917,12 +917,12 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the OpenGL state to enable")
 	).javaDocLink
 
-	val Disable = GLvoid.func(
+	val Disable = (ReferenceGL("glEnable") _ GLvoid.func(
 		"Disable",
 		"Disables the specified OpenGL state.",
 
 		GLenum.IN("target", "the OpenGL state to disable")
-	).javaDocLink
+	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
 		"Accum",
@@ -1581,7 +1581,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Check(4) _ GLdouble_p.OUT("equation", "an array in which to place the returned values")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetBooleanv",
 		"""
 		Returns the current boolean value of the specified state variable.
@@ -1595,7 +1595,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(1), returnValue) _ GLboolean_p.OUT("params", "a scalar or array in which to place the returned data")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetFloatv",
 		"""
 		Returns the current float value of the specified state variable.
@@ -1609,7 +1609,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or array in which to place the returned data")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetIntegerv",
 		"""
 		Returns the current integer value of the specified state variable.
@@ -1623,7 +1623,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or array in which to place the returned data")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetDoublev",
 		"""
 		Returns the current double value of the specified state variable.

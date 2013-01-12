@@ -41,14 +41,21 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 
 	    If {@code wglMakeContextCurrentARB} is used to associate a different device for reads than for draws, the "read" device will be used for the following
 	    OpenGL operations:
-		<ol>
-	    <li>Any pixel data that are sourced based on the value of {@link GL11#GL_READ_BUFFER}. Note, that accumulation operations use the value of READ_BUFFER, but are not
-	    allowed when a different device context is used for reads.  In this case, the accumulation operation will generate {@link GL11#GL_INVALID_OPERATION}.</li>
-	    <li>Any depth values that are retrieved by {@link GL11#glReadPixels}, {@link GL11#glCopyPixels}, or any OpenGL extension that sources depth images from
-	    the frame buffer in the manner of ReadPixels and CopyPixels.</li>
-	    <li>Any stencil values that are retrieved by ReadPixels, CopyPixels, or any OpenGL extension that sources stencil images from the framebuffer in the
-	    manner of ReadPixels and CopyPixels.</li>
-	    </ol>
+		${ol(
+	    """
+	    Any pixel data that are sourced based on the value of {@link GL11#GL_READ_BUFFER}. Note, that accumulation operations use the value of READ_BUFFER, but
+	    are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate
+	    {@link GL11#GL_INVALID_OPERATION}.
+	    """,
+	    """
+	    Any depth values that are retrieved by {@link GL11#glReadPixels}, {@link GL11#glCopyPixels}, or any OpenGL extension that sources depth images from the
+	    frame buffer in the manner of ReadPixels and CopyPixels.
+	    """,
+	    """
+	    Any stencil values that are retrieved by ReadPixels, CopyPixels, or any OpenGL extension that sources stencil images from the framebuffer in the manner
+	    of ReadPixels and CopyPixels.
+	    """
+	    )}
 
 	    These frame buffer values are taken from the surface associated with the device context specified by {@code readDC}.
 		""",

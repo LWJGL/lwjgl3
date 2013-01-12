@@ -7,6 +7,23 @@ package org.lwjgl.generator.opengl
 import java.io.PrintWriter
 import org.lwjgl.generator.*
 
+/** Specifies an alternative name for the OpenGL SDK Reference url. */
+public class ReferenceGL(val function: String): TemplateModifier {
+	class object {
+		val CLASS = javaClass<ReferenceGL>()
+	}
+
+	override val isSpecial: Boolean = false
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is NativeClassFunction )
+			throw IllegalArgumentException("The ReferenceGL modifier can only be applied on functions.")
+
+		val func = ttype as NativeClassFunction
+		if ( !func.nativeClass.postfix.isEmpty() )
+			throw IllegalArgumentException("The ReferenceGL modifier can only be applied on core functionality.")
+	}
+}
+
 public fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
 	val injectedJavaDoc =
 		if ( deprecated )

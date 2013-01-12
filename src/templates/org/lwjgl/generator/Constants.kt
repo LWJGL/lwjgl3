@@ -15,12 +15,12 @@ abstract class ConstantType<T>(
 }
 
 val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
-	override fun print(value: Int): String = "0x" + Integer.toHexString(value)!!.toUpperCase()
+	override fun print(value: Int): String = "0x" + Integer.toHexString(value).toUpperCase()
 	override fun nullValue(): Int = 0
 }
 
 val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
-	override fun print(value: Long): String = "0x" + java.lang.Long.toHexString(value)!!.toUpperCase() + "L"
+	override fun print(value: Long): String = "0x" + java.lang.Long.toHexString(value).toUpperCase() + "L"
 	override fun nullValue(): Long = 0.toLong()
 }
 

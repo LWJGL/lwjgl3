@@ -249,15 +249,19 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		<h3>Errors</h3>
 		It is an error for indices to lie outside the range start end, but implementations may not check for this situation. Such indices cause
 		implementation-dependent behavior.
-		<ul>
-		<li>GL_INVALID_ENUM is generated if mode is not an accepted value.</li>
-		<li>GL_INVALID_VALUE is generated if count is negative.</li>
-		<li>GL_INVALID_VALUE is generated if end &lt; start.</li>
-		<li>GL_INVALID_OPERATION is generated if a geometry shader is active and mode is incompatible with the input primitive type of the geometry shader in the
-		currently installed program object.</li>
-		<li>GL_INVALID_OPERATION is generated if a non-zero buffer object name is bound to an enabled array or the element array and the buffer object's data
-		store is currently mapped.</li>
-		</ul>
+		${ul(
+			"GL_INVALID_ENUM is generated if mode is not an accepted value.",
+			"GL_INVALID_VALUE is generated if count is negative.",
+			"GL_INVALID_VALUE is generated if end &lt; start.",
+			"""
+			GL_INVALID_OPERATION is generated if a geometry shader is active and mode is incompatible with the input primitive type of the geometry shader in the
+			currently installed program object.
+			""",
+			"""
+			GL_INVALID_OPERATION is generated if a non-zero buffer object name is bound to an enabled array or the element array and the buffer object's data
+			store is currently mapped.
+			"""
+		)}
 		""",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),

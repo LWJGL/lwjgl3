@@ -322,6 +322,88 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		GLenum.IN("texture", "which texture coordinate array to make active", "#GL_TEXTURE0 GL_TEXTURE[1-31]")
 	)
 
+	// MultiTexCoord functions javadoc
+	val texCoordTex = "the coordinate set to be modified"
+	val texCoordS = "the s component of the current texture coordinates"
+	val texCoordT = "the t component of the current texture coordinates"
+	val texCoordR = "the r component of the current texture coordinates"
+	val texCoordQ = "the q component of the current texture coordinates"
+	val texCoordBuffer = "the texture coordinate buffer"
+
+	val MultiTexCoord1f = (deprecatedGL _ GLvoid.func(
+		"MultiTexCoord1f",
+		"Sets the current one-dimensional texture coordinate for the given texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
+
+		GLenum.IN("texture", texCoordTex),
+		GLfloat.IN("s", texCoordS)
+	)).javaDocLink
+
+	val MultiTexCoord1s = (deprecatedGL _ GLvoid.func("MultiTexCoord1s", "Short version of $MultiTexCoord1f.", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS))).javaDocLink
+	val MultiTexCoord1i = (deprecatedGL _ GLvoid.func("MultiTexCoord1i", "Integer version of $MultiTexCoord1f.", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS))).javaDocLink
+	val MultiTexCoord1d = (deprecatedGL _ GLvoid.func("MultiTexCoord1d", "Double version of $MultiTexCoord1f.", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS))).javaDocLink
+
+	deprecatedGL _ GLvoid.func("MultiTexCoord1fv", "Pointer version of $MultiTexCoord1f.", GLenum.IN("texture", texCoordTex), mods(const, Check(1)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord1sv", "Pointer version of $MultiTexCoord1s.", GLenum.IN("texture", texCoordTex), mods(const, Check(1)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord1iv", "Pointer version of $MultiTexCoord1i.", GLenum.IN("texture", texCoordTex), mods(const, Check(1)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord1dv", "Pointer version of $MultiTexCoord1d.", GLenum.IN("texture", texCoordTex), mods(const, Check(1)) _ GLdouble_p.IN("v", texCoordBuffer))
+
+	val MultiTexCoord2f = (deprecatedGL _ GLvoid.func(
+		"MultiTexCoord2f",
+		"Sets the current two-dimensional texture coordinate for the given texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
+
+		GLenum.IN("texture", texCoordTex),
+		GLfloat.IN("s", texCoordS),
+		GLfloat.IN("t", texCoordT)
+	)).javaDocLink
+
+	val MultiTexCoord2s = (deprecatedGL _ GLvoid.func("MultiTexCoord2s", "Short version of $MultiTexCoord2f.", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT))).javaDocLink
+	val MultiTexCoord2i = (deprecatedGL _ GLvoid.func("MultiTexCoord2i", "Integer version of $MultiTexCoord2f.", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))).javaDocLink
+	val MultiTexCoord2d = (deprecatedGL _ GLvoid.func("MultiTexCoord2d", "Double version of $MultiTexCoord2f.", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))).javaDocLink
+
+	deprecatedGL _ GLvoid.func("MultiTexCoord2fv", "Pointer version of $MultiTexCoord2f.", GLenum.IN("texture", texCoordTex), mods(const, Check(2)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord2sv", "Pointer version of $MultiTexCoord2s.", GLenum.IN("texture", texCoordTex), mods(const, Check(2)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord2iv", "Pointer version of $MultiTexCoord2i.", GLenum.IN("texture", texCoordTex), mods(const, Check(2)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord2dv", "Pointer version of $MultiTexCoord2d.", GLenum.IN("texture", texCoordTex), mods(const, Check(2)) _ GLdouble_p.IN("v", texCoordBuffer))
+
+	val MultiTexCoord3f = (deprecatedGL _ GLvoid.func(
+		"MultiTexCoord3f",
+		"Sets the current three-dimensional texture coordinate for the given texture coordinate set. {@code q} is implicitly set to 1.",
+
+		GLenum.IN("texture", texCoordTex),
+		GLfloat.IN("s", texCoordS),
+		GLfloat.IN("t", texCoordT),
+		GLfloat.IN("r", texCoordR)
+	)).javaDocLink
+
+	val MultiTexCoord3s = (deprecatedGL _ GLvoid.func("MultiTexCoord3s", "Short version of $MultiTexCoord3f.", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR))).javaDocLink
+	val MultiTexCoord3i = (deprecatedGL _ GLvoid.func("MultiTexCoord3i", "Integer version of $MultiTexCoord3f.", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))).javaDocLink
+	val MultiTexCoord3d = (deprecatedGL _ GLvoid.func("MultiTexCoord3d", "Double version of $MultiTexCoord3f.", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))).javaDocLink
+
+	deprecatedGL _ GLvoid.func("MultiTexCoord3fv", "Pointer version of $MultiTexCoord3f.", GLenum.IN("texture", texCoordTex), mods(const, Check(3)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord3sv", "Pointer version of $MultiTexCoord3s.", GLenum.IN("texture", texCoordTex), mods(const, Check(3)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord3iv", "Pointer version of $MultiTexCoord3i.", GLenum.IN("texture", texCoordTex), mods(const, Check(3)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord3dv", "Pointer version of $MultiTexCoord3d.", GLenum.IN("texture", texCoordTex), mods(const, Check(3)) _ GLdouble_p.IN("v", texCoordBuffer))
+
+	val MultiTexCoord4f = (deprecatedGL _ GLvoid.func(
+		"MultiTexCoord4f",
+		"Sets the current four-dimensional texture coordinate for the given texture coordinate set.",
+
+		GLenum.IN("texture", texCoordTex),
+		GLfloat.IN("s", texCoordS),
+		GLfloat.IN("t", texCoordT),
+		GLfloat.IN("r", texCoordR),
+		GLfloat.IN("q", texCoordQ)
+	)).javaDocLink
+
+	val MultiTexCoord4s = (deprecatedGL _ GLvoid.func("MultiTexCoord4s", "Short version of $MultiTexCoord4f.", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ))).javaDocLink
+	val MultiTexCoord4i = (deprecatedGL _ GLvoid.func("MultiTexCoord4i", "Integer version of $MultiTexCoord4f.", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))).javaDocLink
+	val MultiTexCoord4d = (deprecatedGL _ GLvoid.func("MultiTexCoord4d", "Double version of $MultiTexCoord4f.", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))).javaDocLink
+
+	deprecatedGL _ GLvoid.func("MultiTexCoord4fv", "Pointer version of $MultiTexCoord4f.", GLenum.IN("texture", texCoordTex), mods(const, Check(4)) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord4sv", "Pointer version of $MultiTexCoord4s.", GLenum.IN("texture", texCoordTex), mods(const, Check(4)) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord4iv", "Pointer version of $MultiTexCoord4i.", GLenum.IN("texture", texCoordTex), mods(const, Check(4)) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid.func("MultiTexCoord4dv", "Pointer version of $MultiTexCoord4d.", GLenum.IN("texture", texCoordTex), mods(const, Check(4)) _ GLdouble_p.IN("v", texCoordBuffer))
+
 	// ARB_texture_env_combine
 
 	IntConstant.block(
