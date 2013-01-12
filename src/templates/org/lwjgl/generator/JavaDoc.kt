@@ -116,9 +116,24 @@ public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1): String 
 		builder append '\"'
 	}
 	builder append ">"
-	builder append content
+	builder append content.trim()
 	builder append "</td>"
 
 	return builder.toString()
 }
 
+private fun htmlList(val tag: String, vararg items: String): String {
+	val builder = StringBuilder(512)
+	builder append "<$tag>\n"
+	for ( li in items ) {
+		builder append "\t\t<li>"
+		builder append li.trim()
+		builder append "</li>\n"
+	}
+	builder append "\t</$tag>"
+
+	return builder.toString()
+}
+
+public fun ul(vararg items: String): String = htmlList("ul", *items)
+public fun ol(vararg items: String): String = htmlList("ol", *items)

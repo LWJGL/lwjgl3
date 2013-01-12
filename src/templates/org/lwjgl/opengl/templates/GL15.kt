@@ -159,17 +159,17 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		more intelligent decisions that may significantly impact buffer object performance. It does not, however, constrain the actual usage of the data store.
 		{@code usage} can be broken down into two parts: first, the frequency of access (modification and usage), and second, the nature of that access. The
 		frequency of access may be one of these:
-		<ul>
-			<li><em>STREAM</em> - The data store contents will be modified once and used at most a few times.</li>
-			<li><em>STATIC</em> - The data store contents will be modified once and used many times.</li>
-			<li><em>DYNAMIC</em> - The data store contents will be modified repeatedly and used many times.</li>
-		</ul>
+		${ul(
+			"<em>STREAM</em> - The data store contents will be modified once and used at most a few times.",
+			"<em>STATIC</em> - The data store contents will be modified once and used many times.",
+			"<em>DYNAMIC</em> - The data store contents will be modified repeatedly and used many times."
+		)}
 		The nature of access may be one of these:
-		<ul>
-			<li><em>DRAW</em> - The data store contents are modified by the application, and used as the source for GL drawing and image specification commands.</li>
-			<li><em>READ</em> - The data store contents are modified by reading data from the GL, and used to return that data when queried by the application.</li>
-			<li><em>COPY</em> - The data store contents are modified by reading data from the GL, and used as the source for GL drawing and image specification commands.</li>
-		</ul>
+		${ul(
+			"<em>DRAW</em> - The data store contents are modified by the application, and used as the source for GL drawing and image specification commands.",
+			"<em>READ</em> - The data store contents are modified by reading data from the GL, and used to return that data when queried by the application.",
+			"<em>COPY</em> - The data store contents are modified by reading data from the GL, and used as the source for GL drawing and image specification commands."
+		)}
 		""",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
@@ -220,11 +220,11 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		Maps a buffer object's data store.
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
-		<ol>
-			<li>{@link #glMapBuffer(int, int)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and a new ByteBuffer instance is always returned.</li>
-			<li>{@link #glMapBuffer(int, int, ByteBuffer)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.</li>
-			<li>{@link #glMapBuffer(int, int, int, ByteBuffer)} - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method.</li>
-		</ol>
+		${ol(
+			"{@link #glMapBuffer(int, int)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"{@link #glMapBuffer(int, int, ByteBuffer)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
+			"{@link #glMapBuffer(int, int, int, ByteBuffer)} - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
+		)}
 		""",
 
 		GLenum.IN("target", "the target buffer object being mapped", BUFFER_OBJECT_TARGETS),

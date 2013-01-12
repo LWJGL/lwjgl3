@@ -83,7 +83,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		print("\n\t\treturn GLContext.checkExtension(\"")
 		print(nativeClass.capName);
 		println("\", funcs, supported);")
-		println("\t}")
+		println("\t}\n")
 	}
 
 	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()

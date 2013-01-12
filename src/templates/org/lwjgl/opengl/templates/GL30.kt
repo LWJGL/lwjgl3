@@ -27,6 +27,25 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"CONTEXT_FLAGS" _ 0x821E,
 		"CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT" _ 0x0001
 	)
+	
+	IntConstant.block(
+		"Renamed tokens.",
+
+		"COMPARE_REF_TO_TEXTURE".expr<Int>("GL14.GL_COMPARE_R_TO_TEXTURE"),
+
+		"CLIP_DISTANCE0".expr<Int>("GL11.GL_CLIP_PLANE0"),
+		"CLIP_DISTANCE1".expr<Int>("GL11.GL_CLIP_PLANE1"),
+		"CLIP_DISTANCE2".expr<Int>("GL11.GL_CLIP_PLANE2"),
+		"CLIP_DISTANCE3".expr<Int>("GL11.GL_CLIP_PLANE3"),
+		"CLIP_DISTANCE4".expr<Int>("GL11.GL_CLIP_PLANE4"),
+		"CLIP_DISTANCE5".expr<Int>("GL11.GL_CLIP_PLANE5"),
+		"CLIP_DISTANCE6" _ 0x3006,
+		"CLIP_DISTANCE7" _ 0x3007,
+
+		"MAX_CLIP_DISTANCES".expr<Int>("GL11.GL_MAX_CLIP_PLANES"),
+
+		"MAX_VARYING_COMPONENTS".expr<Int>("GL20.GL_MAX_VARYING_FLOATS")
+	)
 
 	(const _ GLubyteCharSequence).func(
 		"GetStringi",
@@ -305,16 +324,24 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"MAP_UNSYNCHRONIZED_BIT" _ 0x0020
 	).toJavaDocLinks()
 
+	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
+
+		"BUFFER_ACCESS_FLAGS " _ 0x911F,
+		"BUFFER_MAP_LENGTH " _ 0x9120,
+		"BUFFER_MAP_OFFSET" _ 0x9121
+	)
+
 	(MapPointer("length") _ GLvoid_p).func(
 		"MapBufferRange",
 		"""
 		Maps a section of a buffer object's data store.
 
 		<b>LWJGL note</b>: This method comes in 2 flavors:
-		<ol>
-			<li>{@link #glMapBufferRange(int, long, long, int)} - Always returns a new ByteBuffer instance.</li>
-			<li>{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if the given length and returned pointer match the buffer capacity and address, respectively.</li>
-		</ol>
+		${ol(
+			"{@link #glMapBufferRange(int, long, long, int)} - Always returns a new ByteBuffer instance.",
+			"{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if the given length and returned pointer match the buffer capacity and address, respectively."
+		)}
 		""",
 
 		GLenum.IN("target", "a binding to which the target buffer is bound", BUFFER_OBJECT_TARGETS),
@@ -724,16 +751,6 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 	)
 
 	GLvoid.func(
-		"FramebufferTexture",
-		"Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
-
-		GLenum.IN("target", "the framebuffer target", FramebufferTargets),
-		GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-		GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
-		GLint.IN("level", "the mipmap level of {@code texture} to attach")
-	)
-
-	GLvoid.func(
 		"FramebufferTexture1D",
 		"Attaches a level of a 1D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -952,15 +969,6 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"MAX_ARRAY_TEXTURE_LAYERS" _ 0x88FF
 	)
 
-	IntConstant.block(
-		"""
-		Accepted by the {@code param} parameter of TexParameterf, TexParameteri, TexParameterfv, and TexParameteriv when the {@code pname} parameter is
-		TEXTURE_COMPARE_MODE_ARB.
-		""",
-
-		"COMPARE_REF_DEPTH_TO_TEXTURE" _ 0x884E
-	)
-
 	// EXT_draw_buffers2
 
 	GLvoid.func(
@@ -974,7 +982,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLboolean.IN("a", "whether A values are written or not")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetBooleani_v",
 		"Queries the boolean value of an indexed state variable.",
 
@@ -983,7 +991,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLboolean_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid.func(
 		"GetIntegeri_v",
 		"Queries the integer value of an indexed state variable.",
 
@@ -1177,7 +1185,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the target program object"),
 		AutoSize("varyings") _ GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-		mods(const, PointerArray(GLchar_p, "count")) _ GLchar_pp.IN(
+		mods(const, PointerArray(GLchar_p, "varying", "count")) _ GLchar_pp.IN(
 			"varyings",
 			"an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
 		),

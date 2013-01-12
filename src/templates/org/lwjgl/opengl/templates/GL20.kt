@@ -129,18 +129,18 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 	GLvoid.func(
 		"ShaderSource",
 		"""
-		Sets the source code in {@code shader} to the source code in the array of strings specified by {@code string}. Any source code previously stored in the
+		Sets the source code in {@code shader} to the source code in the array of strings specified by {@code strings}. Any source code previously stored in the
 		shader object is completely replaced. The number of strings in the array is specified by {@code count}. If {@code length} is NULL, each string is
 		assumed to be null terminated. If {@code length} is a value other than NULL, it points to an array containing a string length for each of the
-		corresponding elements of {@code string}. Each element in the length array may contain the length of the corresponding string (the null character is not
+		corresponding elements of {@code strings}. Each element in the length array may contain the length of the corresponding string (the null character is not
 		counted as part of the string length) or a value less than 0 to indicate that the string is null terminated. The source code strings are not scanned or
 		parsed at this time; they are simply copied into the specified shader object.
 		""",
 
 		GLuint.IN("shader", "the handle of the shader object whose source code is to be replaced"),
-		AutoSize("string", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
-		mods(const, PointerArray(GLchar_p, "count", "length")) _ GLchar_pp.IN(
-			"string",
+		AutoSize("strings", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
+		mods(const, PointerArray(GLchar_p, "string", "count", "length")) _ GLchar_pp.IN(
+			"strings",
 			"an array of pointers to strings containing the source code to be loaded into the shader"
 		),
 		mods(const, nullable) _ GLint_p.IN("length", "an array of string lengths")
@@ -651,7 +651,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("index", "the index of the generic vertex attribute to be enabled")
 	)
 
-	GLvoid.func(
+	ReferenceGL("glEnableVertexAttribArray") _ GLvoid.func(
 		"DisableVertexAttribArray",
 		"Disables a generic vertex attribute array.",
 
