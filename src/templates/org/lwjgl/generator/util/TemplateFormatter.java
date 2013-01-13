@@ -167,7 +167,7 @@ public class TemplateFormatter {
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:[0-9A-Z_]+\\s+[0-9xA-F]+\\s*)+)",
+		"([^:]+):\\s+((?:[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+\\s*)+)",
 		Pattern.MULTILINE
 	);
 
@@ -176,7 +176,7 @@ public class TemplateFormatter {
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 
 	private static final Pattern CONSTANT_PATTERN = Pattern.compile(
-		"([0-9A-Z_]+)\\s+([0-9xA-F]+)"
+		"([0-9A-Za-z_]+)\\s+([0-9xA-Fa-f]+)"
 	);
 
 	private static String formatConstants(final String input) {
