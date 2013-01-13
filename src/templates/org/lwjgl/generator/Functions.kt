@@ -94,7 +94,7 @@ public class NativeClassFunction(
 
 	private val strippedName = stripPostfix()
 
-	private fun stripPostfix(val stripType: Boolean = false): String {
+	private fun stripPostfix(val stripType: Boolean = false, val stripUnsigned: Boolean = false): String {
 		if ( parameters.isEmpty() )
 			return name
 
@@ -126,6 +126,9 @@ public class NativeClassFunction(
 				val offset = name.size - cutCount
 				if ( typeChar equals name.substring(offset - typeChar.size, offset) )
 					cutCount += typeChar.size
+
+				if ( stripUnsigned && name.charAt(name.size - cutCount - 1) == 'u' )
+					cutCount++
 			}
 		}
 
@@ -469,7 +472,7 @@ public class NativeClassFunction(
 			val xmlName = if ( this@NativeClassFunction has ReferenceGL.CLASS )
 				this@NativeClassFunction[ReferenceGL.CLASS].function
 			else
-				stripPostfix(true)
+				stripPostfix(stripType = true, stripUnsigned = true)
 			printOpenGLJavaDoc(documentation, xmlName, this@NativeClassFunction has deprecatedGL)
 		} else
 			println(documentation)
