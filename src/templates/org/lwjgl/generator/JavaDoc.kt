@@ -6,15 +6,22 @@ package org.lwjgl.generator
 
 import java.util.regex.Pattern
 
+/** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
+public val tab: String = "#TAB"
+
 private val PARAGRAPH_PATTERN = Pattern.compile("^\\s*$", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^\\s+", Pattern.MULTILINE)
+private val TAB_PATTERN = Pattern.compile(tab)
 
 fun String.replaceAll(pattern: Pattern, replacement: String): String = pattern.matcher(this).replaceAll(replacement)
 
+private fun String.cleanup(indentation: String = "\t"): String = trim()
+	.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
+	.replaceAll(CLEANUP_PATTERN, "$indentation * ")
+	.replaceAll(TAB_PATTERN, "\t")
+
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
-	val clean = trim()
-		.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
-		.replaceAll(CLEANUP_PATTERN, "$indentation * ")
+	val clean = cleanup(indentation)
 
 	return if ( allowSingleLine && clean.indexOf('\n') == -1 )
 		"$indentation/** $clean */"
@@ -27,10 +34,7 @@ fun String.toJavaDoc(vararg params: Parameter): String {
 	if ( params.isEmpty() )
 		return this.toJavaDoc()
 
-	val clean = trim()
-		.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
-		.replaceAll(CLEANUP_PATTERN, "\t * ")
-	val javaDoc = "\t/**\n\t * $clean\n\t"
+	val javaDoc = "\t/**\n\t * ${cleanup()}\n\t"
 
 	val builder = StringBuilder(javaDoc)
 	if ( javaDoc.indexOf('\n') == -1 )
@@ -75,19 +79,29 @@ private fun paramMultilineAligment(alignment: Int): String {
 
 // DSL extensions
 
+private val ESCAPE_TAB_PATTERN = Pattern.compile("\t|(?:^\\s*$)", Pattern.MULTILINE) // Tabs and empty-lines
+private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE)
+
+/** Useful for simple expression with embedded markup. */
 public fun code(code: String): String = "<code>$code</code>"
+
+/** Useful for raw code blocks without markup. */
+public fun codeBlock(code: String): String = "<pre>{@code\n${code
+	.trim()
+	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
+	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
+}}</pre>"
 
 public fun link(url: String, description: String): String = """<a href="$url">$description</a>"""
 
 public fun table(vararg rows: String): String {
 	val builder = StringBuilder(512)
-	builder append """<table border="1" cellspacing="0" cellpadding="2">\n"""
+	builder append """<table border="1" cellspacing="0" cellpadding="2">"""
 	for ( row in rows ) {
-		builder append "\t\t"
+		builder append "\n\t$tab"
 		builder append row
-		builder append '\n'
 	}
-	builder append "\t</table>"
+	builder append "\n\t</table>"
 
 	return builder.toString()
 }
@@ -126,7 +140,7 @@ private fun htmlList(val tag: String, vararg items: String): String {
 	val builder = StringBuilder(512)
 	builder append "<$tag>\n"
 	for ( li in items ) {
-		builder append "\t\t<li>"
+		builder append "\t$tab<li>"
 		builder append li.trim()
 		builder append "</li>\n"
 	}

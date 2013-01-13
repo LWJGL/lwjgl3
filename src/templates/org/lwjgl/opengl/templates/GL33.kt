@@ -132,7 +132,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter", "GL11#GL_TEXTURE_BORDER_COLOR $SamplerParameters"),
 		const _ GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
-	)
+	).javaDocLink
 
 	GLvoid.func(
 		"SamplerParameterfv",
