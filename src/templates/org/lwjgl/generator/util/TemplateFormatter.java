@@ -5,7 +5,6 @@
 package org.lwjgl.generator.util;
 
 import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -167,7 +166,7 @@ public class TemplateFormatter {
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+\\s*)+)",
+		"([^:]+):\\s+((?:\\s*[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+$)+)\\s*",
 		Pattern.MULTILINE
 	);
 
