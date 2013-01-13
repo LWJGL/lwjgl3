@@ -306,7 +306,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", conditionalRenderModes)
 	)
 
-	GLvoid.func(
+	ReferenceGL("glBeginConditionalRender") _ GLvoid.func(
 		"EndConditionalRender",
 		"Ends conditional rendering."
 	)
@@ -1178,6 +1178,8 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		    "GL11#GL_POINTS GL11#GL_LINES GL11#GL_TRIANGLES"
 		)
 	)
+
+	ReferenceGL("glBeginTransformFeedback") _ GLvoid.func("EndTransformFeedback", "Ends transform feedback operation.")
 
 	GLvoid.func(
 		"TransformFeedbackVaryings",
