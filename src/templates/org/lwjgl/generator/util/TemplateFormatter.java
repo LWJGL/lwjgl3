@@ -166,7 +166,7 @@ public class TemplateFormatter {
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:\\s*[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+$)+)\\s*",
+		"([^:]+):\\s+((?:\\s*[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+\\s*$)+)\\s*",
 		Pattern.MULTILINE
 	);
 
