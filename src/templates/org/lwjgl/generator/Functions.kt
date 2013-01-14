@@ -624,20 +624,27 @@ public class NativeClassFunction(
 					transforms.remove(parameters[returnMod.maxLengthParam])
 
 					// Hide length parameter and use APIBuffer
-					transforms[parameters[returnMod.lengthParam]!!] = StringLengthTransform
+					transforms[parameters[returnMod.lengthParam]!!] = BufferReturnLengthTransform
 
-					// Hide char pointer parameter and use APIBuffer
-					transforms[it] = StringParamTransform
+					// Hide target parameter and use APIBuffer
+					transforms[it] = BufferReturnParamTransform
 
-					// Transform void to String type
-					transforms[returns] = StringParamReturnTransform(param.name, returnMod.lengthParam, (it.nativeType as CharSequenceType).charMapping.charset)
+					// Transform void to the buffer type
+					val returnType: String
+					if ( it.nativeType is CharSequenceType ) {
+						transforms[returns] = BufferReturnTransform(param.name, returnMod.lengthParam, (it.nativeType as CharSequenceType).charMapping.charset)
+						returnType = "String"
+					} else {
+						transforms[returns] = BufferReturnTransform(param.name, returnMod.lengthParam)
+						returnType = "Buffer"
+					}
 
-					generateAlternativeMethod(strippedName, "String return version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+					generateAlternativeMethod(strippedName, "$returnType return version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
 						transforms[parameters[returnMod.maxLengthParam]!!] = ExpressionLocalTransform(returnMod.maxLengthExpression)
-						generateAlternativeMethod(strippedName, "String return (w/ implicit max length) version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
 					}
 				}
 			} else if ( it has SingleValue.CLASS ) {
@@ -1090,26 +1097,36 @@ private class MapPointerExplicitTransform(val lengthParam: String, val addParam:
 		"__result == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer(__result, $lengthParam)"
 }
 
-private val StringLengthTransform = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
+private val BufferReturnLengthTransform = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.println("\t\tint ${(qualifiedType as Parameter).name} = $API_BUFFER.intParam();")
 }
 
-private val StringParamTransform = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
+private val BufferReturnParamTransform = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit =
 		writer.println("\t\tint ${(qualifiedType as Parameter).name} = $API_BUFFER.bufferParam(${qualifiedType[Return.CLASS].maxLengthParam});")
 }
 
-private class StringParamReturnTransform(
+private class BufferReturnTransform(
 	val paramName: String,
     val lengthParam: String,
-    val encoding: String
+    val encoding: String? = null
 ): FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = "String" // Replace void with String
-	override fun transformCall(param: ReturnValue, original: String): String = "\t\treturn memDecode$encoding(memByteBuffer($API_BUFFER.address() + $paramName, $API_BUFFER.intValue($lengthParam)));" // Replace with String decode
+	override fun transformDeclaration(param: ReturnValue, original: String): String? = if ( encoding == null) "ByteBuffer" else "String" // Replace void with String
+	override fun transformCall(param: ReturnValue, original: String): String {
+		val builder = StringBuilder(64)
+
+		builder append "\t\treturn "
+		if ( encoding != null ) builder append "memDecode$encoding("
+		builder append "memByteBuffer($API_BUFFER.address() + $paramName, $API_BUFFER.intValue($lengthParam))"
+		if ( encoding != null ) builder append ")"
+		builder append ";"
+
+		return builder.toString()
+	}
 }
 
 private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform {
