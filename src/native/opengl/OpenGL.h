@@ -79,29 +79,7 @@
 	typedef void            GLvoid;
 #endif
 
-// GL_VERSION_2_0
-typedef char GLchar;
-
-// GL_VERSION_1_5
-typedef ptrdiff_t GLintptr;
-typedef ptrdiff_t GLsizeiptr;
-
-// GL_ARB_vertex_buffer_object
-typedef ptrdiff_t GLintptrARB;
-typedef ptrdiff_t GLsizeiptrARB;
-
-// GL_ARB_shader_objects
-typedef char GLcharARB;
-typedef unsigned int GLhandleARB;
-
-// GL_ARB_half_float_pixel
-typedef unsigned short GLhalfARB;
-
-// GL_NV_half_float
-typedef unsigned short GLhalfNV;
-
-/* Define int32_t, int64_t, and uint64_t types for UST/MSC */
-/* (as used in the GL_EXT_timer_query extension). */
+// Define int32_t, int64_t, and uint64_t types for UST/MSC
 #if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L
 	#include <inttypes.h>
 #elif defined(__sun__) || defined(__digital__)
@@ -134,18 +112,47 @@ typedef unsigned short GLhalfNV;
 	#include <inttypes.h>
 #endif
 
-// GL_EXT_timer_query
-typedef int64_t GLint64EXT;
-typedef uint64_t GLuint64EXT;
+// OpenGL 1.5
+typedef ptrdiff_t GLintptr;
+typedef ptrdiff_t GLsizeiptr;
 
-// GL_ARB_sync
+// OpenGL 2.0
+typedef char GLchar;
+
+// OpenGL 3.2
 typedef int64_t GLint64;
 typedef uint64_t GLuint64;
+
+// OpenGL 4.3
+typedef void (APIENTRY *GLDEBUGPROC)(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+
+// GL_ARB_vertex_buffer_object
+typedef ptrdiff_t GLintptrARB;
+typedef ptrdiff_t GLsizeiptrARB;
+
+// GL_ARB_shader_objects
+typedef char GLcharARB;
+typedef unsigned int GLhandleARB;
+
+// GL_ARB_half_float_pixel
+typedef unsigned short GLhalfARB;
+
+// GL_ARB_sync
 typedef struct __GLsync * GLsync;
 
 // GL_ARB_cl_event
 typedef struct _cl_context * cl_context;
 typedef struct _cl_event * cl_event;
+
+// GL_EXT_timer_query
+typedef int64_t GLint64EXT;
+typedef uint64_t GLuint64EXT;
+
+// GL_AMD_debug_output
+typedef void (APIENTRY *GLDEBUGPROCAMD)(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam);
+
+// GL_NV_half_float
+typedef unsigned short GLhalfNV;
 
 // GL_NV_vdpau_interop
 typedef GLintptr GLvdpauSurfaceNV;

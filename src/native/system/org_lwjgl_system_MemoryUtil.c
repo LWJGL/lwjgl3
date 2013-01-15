@@ -10,6 +10,20 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memPointerSize(JNIEnv *e
 	return (jint)sizeof(void *);
 }
 
+// memGlobalRefNew(Ljava/lang/Object;)J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefNew(JNIEnv *env, jclass clazz,
+	jobject object
+) {
+	return (jlong)(intptr_t)(*env)->NewGlobalRef(env, object);
+}
+
+// memGlobalRefDelete(J)V
+JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefDelete(JNIEnv *env, jclass clazz,
+	jlong globalRef
+) {
+	(*env)->DeleteGlobalRef(env, (jobject)(intptr_t)globalRef);
+}
+
 // memSet(JIJ)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_nMemSet(JNIEnv *env, jclass clazz,
 	jlong address, jint value, jlong bytes

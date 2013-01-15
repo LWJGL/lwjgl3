@@ -30,8 +30,9 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun String.toJavaDoc(vararg params: Parameter): String {
-	if ( params.isEmpty() )
+fun String.toJavaDoc(vararg params: Parameter): String = this.toJavaDoc(params.toList())
+fun String.toJavaDoc(params: Iterable<Parameter>): String {
+	if ( !params.iterator().hasNext() )
 		return this.toJavaDoc()
 
 	val javaDoc = "\t/**\n\t * ${cleanup()}\n\t"

@@ -56,7 +56,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 		""",
 
 		HDC.IN("hdc", ""),
-		HGLRC.IN("shareContext", ""),
+		nullable _ HGLRC.IN("shareContext", ""),
 		mods(const, nullTerminated, nullable) _ int_p.IN(
 			"attribList",
 			"""

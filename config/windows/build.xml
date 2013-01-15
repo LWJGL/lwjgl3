@@ -33,6 +33,7 @@
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
+			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>
 			<mapper type="glob" from="*.c" to="*.obj"/>

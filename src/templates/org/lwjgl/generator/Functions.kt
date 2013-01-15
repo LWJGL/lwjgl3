@@ -52,6 +52,35 @@ public abstract class Function(
 			parameters.put(param.name, param)
 	}
 
+	fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.values().iterator().filter(predicate)
+	fun getParam(predicate: (Parameter) -> Boolean): Parameter {
+		val params = getParams(predicate)
+		val param = params.next()
+		if ( params.hasNext() )
+			throw IllegalStateException("More than one parameter found.")
+		return param
+	}
+	fun hasParam(predicate: (Parameter) -> Boolean): Boolean = getParams(predicate).hasNext()
+
+	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
+	fun getReferenceParam(modifier: Class<out ReferenceModifier>, reference: String): Parameter? {
+		// Assumes at most 1 parameter will be found that references the specified parameter
+		val iter = getParams {
+			it.hasRef(modifier, reference)
+		}
+		return if ( iter.hasNext() )
+			iter.next()
+		else
+			null
+	}
+
+	fun hasSimpleParamsOnly(): Boolean {
+		if ( returns.isBufferPointer || returns.hasSpecialModifier() )
+			return false
+
+		return parameters.values().find { it.isBufferPointer || it.hasSpecialModifier() } == null
+	}
+
 }
 
 // DSL extensions
@@ -159,35 +188,6 @@ public class NativeClassFunction(
 
 			return builder.toString()
 		}
-
-	private fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.values().iterator().filter(predicate)
-	private fun getParam(predicate: (Parameter) -> Boolean): Parameter {
-		val params = getParams(predicate)
-		val param = params.next()
-		if ( params.hasNext() )
-			throw IllegalStateException("More than one parameter found.")
-		return param
-	}
-	private fun hasParam(predicate: (Parameter) -> Boolean): Boolean = getParams(predicate).hasNext()
-
-	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	private fun getReferenceParam(modifier: Class<out ReferenceModifier>, reference: String): Parameter? {
-		// Assumes at most 1 parameter will be found that references the specified parameter
-		val iter = getParams {
-			it.hasRef(modifier, reference)
-		}
-		return if ( iter.hasNext() )
-			iter.next()
-		else
-			null
-	}
-
-	private fun hasSimpleParamsOnly(): Boolean {
-		if ( returns.isBufferPointer || returns.hasSpecialModifier() )
-			return false
-
-		return parameters.values().find { it.isBufferPointer || it.hasSpecialModifier() } == null
-	}
 
 	val isSimpleFunction: Boolean
 		get() = nativeClass.functionProvider == null && hasSimpleParamsOnly()
@@ -311,14 +311,10 @@ public class NativeClassFunction(
 		}
 
 		parameters.values().forEach {
-			var prefix =
-				if ( it has Nullable.CLASS )
-					"if ( ${it.name} != null ) "
-				else {
-					if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && (!it.has(CallbackData.CLASS) && it.nativeType !is CallbackType) )
-						checks add "checkPointer(${it.name});"
-					""
-				}
+			var prefix = if ( it has Nullable.CLASS && it.nativeType.mapping != PointerMapping.NAKED_POINTER ) "if ( ${it.name} != null ) " else ""
+
+			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(CallbackData.CLASS) && it.nativeType !is CallbackType && !it.has(nullable) )
+				checks add "checkPointer(${it.name});"
 
 			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {
 				val charSeqType = it.nativeType as CharSequenceType
@@ -575,6 +571,8 @@ public class NativeClassFunction(
 					transforms[it] = ExpressionTransform(expression.value, expression.keepParam)
 				} else if ( it has optional )
 					transforms[it] = ExpressionTransform("0L")
+				else if ( it has Callback.CLASS )
+					transforms[it] = CallbackTransform
 			}
 		}
 
@@ -1186,3 +1184,8 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 }
 private val PointerArrayTransformSingle = PointerArrayTransform(false)
 private val PointerArrayTransformMulti = PointerArrayTransform(true)
+
+private val CallbackTransform = object : FunctionTransform<Parameter> {
+	override fun transformDeclaration(param: Parameter, original: String): String? = "${param[Callback.CLASS].procClass} ${param.name}" // Replace type with the callback class
+	override fun transformCall(param: Parameter, original: String): String = "${param.name} == null ? 0L : ${param[Callback.CLASS].procClass}.CALLBACK" // Replace with callback function address
+}

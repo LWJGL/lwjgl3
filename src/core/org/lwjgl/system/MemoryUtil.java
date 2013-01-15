@@ -420,6 +420,22 @@ public final class MemoryUtil {
 	 */
 	public static native int memPointerSize();
 
+	/**
+	 * Creates a new global reference to the specified Object.
+	 *
+	 * @param obj the Object
+	 *
+	 * @return the GlobalRef memory address.
+	 */
+	public static native long memGlobalRefNew(Object obj);
+
+	/**
+	 * Deletes a global reference.
+	 *
+	 * @param globalRef the GlobalRef memory address.
+	 */
+	public static native void memGlobalRefDelete(long globalRef);
+
 	// The standard C memset function
 	static native void nMemSet(long ptr, int value, long bytes);
 

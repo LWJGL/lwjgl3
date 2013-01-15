@@ -19,6 +19,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGpuAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
@@ -54,6 +55,9 @@ public final class WGLDemo {
 		final Context context = WindowsContext.create(window.getHdc());
 
 		final ContextCapabilities caps = GLContext.getCapabilities();
+
+		if ( caps.GL_AMD_debug_output )
+			glDebugMessageCallbackAMD(new DEBUGPROCAMD());
 
 		if ( caps.WGL_AMD_gpu_association ) {
 			final int GPUs = wglGetGPUIDsAMD(null);

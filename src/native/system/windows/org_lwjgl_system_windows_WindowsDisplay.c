@@ -15,13 +15,14 @@ static LRESULT CALLBACK lwjglWindowProc(
 	LPARAM lParam
 ) {
 	JNIEnv *env = getThreadEnv();
-	if ( env != NULL /*&& !(*env)->ExceptionOccurred(env)*/ ) // TODO: If the ExceptionOccurred check required?
-		return (*env)->CallStaticIntMethod(
-			env, windowsDisplayClass, javaWindowProc,
-			(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
-		);
+	// TODO: Can this happen?
+	//if ( env == NULL )
+		//return DefWindowProc(hWnd, msg, wParam, lParam);
 
-	return DefWindowProc(hWnd, msg, wParam, lParam);
+	return (*env)->CallStaticIntMethod(
+		env, windowsDisplayClass, javaWindowProc,
+		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
+	);
 }
 
 // setJavaWindowProc(Ljava/lang/reflect/Method;)J

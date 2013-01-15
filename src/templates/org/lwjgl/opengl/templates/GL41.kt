@@ -80,8 +80,8 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 		"DepthRangef",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates",
 
-		GLfloat.IN("near", "the mapping of the near clipping plane to window coordinates. The initial value is 0.0f."),
-		GLfloat.IN("far", "the mapping of the far clipping plane to window coordinates. The initial value is 1.0f.")
+		GLfloat.IN("zNear", "the mapping of the near clipping plane to window coordinates. The initial value is 0.0f."),
+		GLfloat.IN("zFar", "the mapping of the far clipping plane to window coordinates. The initial value is 1.0f.")
 	)
 
 	GLvoid.func(
@@ -1017,8 +1017,8 @@ if (shader) {
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified viewport.",
 
 		GLuint.IN("index", "the index of the viewport whose depth range to update"),
-		GLdouble.IN("near", "the mapping of the near clipping plane to window coordinates. The initial value is 0."),
-		GLdouble.IN("far", "the mapping of the far clipping plane to window coordinates. The initial value is 1.")
+		GLdouble.IN("zNear", "the mapping of the near clipping plane to window coordinates. The initial value is 0."),
+		GLdouble.IN("zFar", "the mapping of the far clipping plane to window coordinates. The initial value is 1.")
 	)
 
 }
