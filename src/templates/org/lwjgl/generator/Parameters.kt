@@ -262,8 +262,6 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 public class Check(
 	/** An integer expression to validate against the buffer capacity. */
 	val expression: String,
-	/** If true, the target buffer may be null, in which case the check is skipped. */
-	val canBeNull: Boolean = false,
 	/** If the expression value is in bytes rather in elements (of the buffer type). */
 	val bytes: Boolean = false,
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */

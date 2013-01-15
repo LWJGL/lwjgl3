@@ -42,7 +42,7 @@ val GLdouble_p = PointerType(name = "GLdouble", mapping = PointerMapping.DATA_DO
 val GLsizei_p = PointerType(name = "GLsizei", mapping = PointerMapping.DATA_INT)
 val GLenum_p = PointerType(name = "GLenum", mapping = PointerMapping.DATA_INT)
 
-val GLintptr = PointerType(name = "GLintptr", includesPointer = true)
+val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.LONG)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
 
 val GLchar_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
@@ -51,3 +51,7 @@ val GLchar_pp = PointerType(name = "GLchar*", mapping = PointerMapping.DATA_POIN
 val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
+
+val GLDEBUGPROC = PointerType(name = "GLDEBUGPROC", includesPointer = true)
+
+val voidptr = PointerType("void") // Naked pointer (used in GL43.glObjectPtrLabel)
