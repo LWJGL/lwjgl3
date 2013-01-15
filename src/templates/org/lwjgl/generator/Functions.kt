@@ -363,7 +363,7 @@ public class NativeClassFunction(
 			}
 
 			if ( mode == GenerationMode.NORMAL && it has BufferObject.CLASS ) {
-				checks add "GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, false);"
+				checks add "GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, ${it.nativeType.mapping == PrimitiveMapping.LONG});"
 			}
 
 			if ( it has AutoSize.CLASS ) {
@@ -554,7 +554,7 @@ public class NativeClassFunction(
 				MapPointerTransform
 		}
 
-		getParams { it has BufferObject.CLASS } forEach {
+		getParams { it has BufferObject.CLASS && it.nativeType.mapping != PrimitiveMapping.LONG } forEach {
 			transforms[it] = BufferOffsetTransform
 			customChecks add ("GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, true);")
 			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
@@ -563,19 +563,19 @@ public class NativeClassFunction(
 
 		// Step 1: Apply basic transformations
 		parameters.values() forEach {
-			if ( it.paramType == ParameterType.IN && it.nativeType is CharSequenceType )
-				transforms[it] = CharSequenceTransform
-			else if ( it has AutoSize.CLASS ) {
-				val autoSize = it[AutoSize.CLASS]
-				val param = parameters[autoSize.reference]!!
-				// Check if there's also an AutoType or MultiType on the referenced parameter. Skip if so.
-				if ( !(param has AutoSize.CLASS || param has MultiType.CLASS) )
-					transforms[it] = AutoSizeTransform(param)
-			} else if ( it has Expression.CLASS ) {
-				val expression = it[Expression.CLASS]
-				transforms[it] = ExpressionTransform(expression.value, expression.keepParam)
-			} else if ( it has optional )
-				transforms[it] = ExpressionTransform("0L")
+			if ( it.paramType == ParameterType.IN ) {
+				if ( it has AutoSize.CLASS ) {
+					val autoSize = it[AutoSize.CLASS]
+					val param = parameters[autoSize.reference]!!
+					// Check if there's also an AutoType or MultiType on the referenced parameter. Skip if so.
+					if ( !(param has AutoSize.CLASS || param has MultiType.CLASS) )
+						transforms[it] = AutoSizeTransform(param)
+				} else if ( it has Expression.CLASS ) {
+					val expression = it[Expression.CLASS]
+					transforms[it] = ExpressionTransform(expression.value, expression.keepParam)
+				} else if ( it has optional )
+					transforms[it] = ExpressionTransform("0L")
+			}
 		}
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
@@ -607,7 +607,14 @@ public class NativeClassFunction(
 				transforms[param] = BufferValueParameterTransform
 			}
 
-			if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
+			if ( it.nativeType is CharSequenceType ) {
+				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+					transforms[it] = AutoSizeCharSequenceTransform(param)
+				}
+
+				transforms[it] = CharSequenceTransform
+				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+			} else if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
 
 				if ( returnMod == returnValue ) {
@@ -1013,6 +1020,17 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: Stri
 			"(${bufferParam.name} == null ? 0 : ${bufferParam.name}.remaining()) << $byteShift"
 		else
 			"${bufferParam.name}.remaining() << $byteShift"
+	}
+}
+
+private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
+	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String): String {
+		// Replace with expression
+		return if ( bufferParam has nullable )
+			"${bufferParam.name} == null ? 0 : ${bufferParam.name}.length()"
+		else
+			"${bufferParam.name}.length()"
 	}
 }
 

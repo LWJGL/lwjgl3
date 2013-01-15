@@ -17,11 +17,8 @@ public class BufferObject(public val binding: String) : TemplateModifier {
 			throw IllegalArgumentException("The returnValue modifier can only be applied on parameters.")
 
 		val param = ttype as Parameter
-		if ( param.nativeType !is PointerType )
-			throw IllegalArgumentException("The BufferObject modifier can only be applied on pointer types.")
-
-		if ( (param.nativeType : PointerType).mapping == PointerMapping.NAKED_POINTER )
-			throw IllegalArgumentException("The BufferObject modifier cannot be applied on naked pointer types.")
+		if ( !((param.nativeType is PointerType && (param.nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER) || param.nativeType.mapping == PrimitiveMapping.LONG) )
+			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 
 		when ( this ) {
 			PIXEL_PACK_BUFFER, QUERY_BUFFER_AMD -> {
