@@ -9,7 +9,7 @@ static JavaVM *jvm;
 
 JNIEnv *getThreadEnv() {
 	JNIEnv *env;
-	(*jvm)->GetEnv(jvm, (void *)&env, JNI_VERSION_1_4);
+	(*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION_1_4);
 	return env;
 }
 

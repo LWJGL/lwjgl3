@@ -10,6 +10,8 @@ import java.util.TreeSet
 import java.util.Collections
 import java.util.Comparator
 
+public val INSTANCE: String = "__instance"
+
 public abstract class FunctionProvider {
 
 	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
@@ -30,7 +32,11 @@ public abstract class FunctionProvider {
 	}
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
-		writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance().${function.name};")
+		if ( function.hasParam { it has Callback.CLASS } ) {
+			writer.println("\t\tFunctions $INSTANCE = getInstance();")
+			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
+		} else
+			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance().${function.name};")
 	}
 
 	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)
@@ -111,6 +117,12 @@ public class NativeClass(
 		for ( i in functions.indices ) {
 			print("$funcIndent${functions[i].name}")
 			println(if ( i == functions.lastIndex ) ";" else ",")
+		}
+
+		for ( func in functions ) {
+			func.getParams { it has Callback.CLASS }.forEach {
+				println("\n\t\tlong ${it[Callback.CLASS].procClass};")
+			}
 		}
 
 		println("\n\t\tpublic Functions(final FunctionProvider provider) {")

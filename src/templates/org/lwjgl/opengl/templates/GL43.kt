@@ -250,7 +250,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
 	)
 
-	IntConstant.block(
+	val DebugSources = IntConstant.block(
 		"""
 		Tokens accepted or provided by the {@code source} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code sources} parameter
 		of GetDebugMessageLog.
@@ -262,9 +262,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SOURCE_THIRD_PARTY" _ 0x8249,
 		"DEBUG_SOURCE_APPLICATION" _ 0x824A,
 		"DEBUG_SOURCE_OTHER" _ 0x824B
-	)
+	).toJavaDocLinks()
 
-	IntConstant.block(
+	val DebugTypes = IntConstant.block(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code types} parameter of
 		GetDebugMessageLog.
@@ -277,7 +277,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_TYPE_PERFORMANCE" _ 0x8250,
 		"DEBUG_TYPE_OTHER" _ 0x8251,
 		"DEBUG_TYPE_MARKER" _ 0x8268
-	)
+	).toJavaDocLinks()
 
 	IntConstant.block(
 		"""
@@ -288,7 +288,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_TYPE_POP_GROUP" _ 0x826A
 	)
 
-	IntConstant.block(
+	val DebugSeverities = IntConstant.block(
 		"""
 		Tokens accepted or provided by the {@code severity} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC callback functions, and the
 		{@code severities} parameter of GetDebugMessageLog.
@@ -298,7 +298,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SEVERITY_MEDIUM" _ 0x9147,
 		"DEBUG_SEVERITY_LOW" _ 0x9148,
 		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
-	)
+	).toJavaDocLinks()
 
 	IntConstant.block(
 		"Returned by GetError.",
@@ -323,9 +323,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DebugMessageControl",
 		"Controls the reporting of debug messages in a debug context.",
 
-		GLenum.IN("source", "the source of debug messages to enable or disable"),
-		GLenum.IN("type", "the type of debug messages to enable or disable"),
-		GLenum.IN("severity", "the severity of debug messages to enable or disable"),
+		GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
+		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
+		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
 		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
 		mods(SingleValue("id"), const) _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
@@ -335,9 +335,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DebugMessageInsert",
 		"Injects an application-supplied message into the debug message queue.",
 
-		GLenum.IN("source", "the source of the debug message to insert"),
-		GLenum.IN("type", "the type of the debug message insert"),
-		GLuint.IN("id", "the user-supplied identifier of the message to insert"),
+		GLenum.IN("source", "the source of the debug message to insert", DebugSources),
+		GLenum.IN("type", "the type of the debug message insert", DebugTypes),
+		GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
 		GLenum.IN("severity", "the severity of the debug messages to insert"),
 		AutoSize("message") _ GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
 		const _ GLchar_p.IN("message", "a character array containing the message to insert")
@@ -347,8 +347,11 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DebugMessageCallback",
 		"Specifies a callback to receive debugging messages from the GL.",
 
-		GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		GLvoid_p.IN("userParam", "a user supplied pointer that will be passed on each invocation of {@code callback}")
+		mods(Callback("DEBUGPROC"), nullable) _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
+		mods(Expression("DEBUGPROC.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
+			"userParam",
+			"a user supplied pointer that will be passed on each invocation of {@code callback}"
+		)
 	)
 
 	GLuint.func(
@@ -369,7 +372,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"PushDebugGroup",
 		"Pushes a named debug group into the command stream.",
 
-		GLenum.IN("source", "the source of the debug message"),
+		GLenum.IN("source", "the source of the debug message", DebugSources),
 		GLuint.IN("id", "the identifier of the message"),
 		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
 		const _ GLchar_p.IN("message", "a string containing the message to be sent to the debug output stream")

@@ -12,7 +12,7 @@ fun ARB_copy_buffer() = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/copy_buffer.txt", "ARB_copy_buffer")} extension.")
+	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/copy_buffer.txt", templateName)} extension.")
 
 	IntConstant.block(
 		"""

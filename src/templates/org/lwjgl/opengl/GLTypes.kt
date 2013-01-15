@@ -53,5 +53,6 @@ val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharM
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
 
 val GLDEBUGPROC = PointerType(name = "GLDEBUGPROC", includesPointer = true)
+val GLDEBUGPROCAMD = PointerType(name = "GLDEBUGPROCAMD", includesPointer = true)
 
-val voidptr = PointerType("void") // Naked pointer (used in GL43.glObjectPtrLabel)
+val voidptr = PointerType("void") // Naked pointer (used in GL43)

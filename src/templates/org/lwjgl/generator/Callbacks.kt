@@ -57,7 +57,7 @@ public class CallbackFunction(
 
 		println("import static org.lwjgl.system.APIUtil.*;\n")
 
-		println(documentation.toJavaDoc(""))
+		println(documentation.toJavaDoc(indentation = ""))
 
 		println("public abstract class $className {\n")
 
@@ -65,7 +65,7 @@ public class CallbackFunction(
 		print("\tpublic static final long CALLBACK = setup(apiCallbackMethod($className.class")
 		parameters.values()
 			.filter { !it.has(CALLBACK_DATA) }
-			.forEach { print(", ${it.nativeType.javaMethodType}.class") }
+			.forEach { print(", ${it.nativeMethodType}.class") }
 
 		println("));\n")
 
@@ -74,6 +74,7 @@ public class CallbackFunction(
 
 		// Step 3: Generate callback method
 		//println("\tpublic abstract int invoke(long logObject);\n")
+		println("The callback method.".toJavaDoc(parameters.values().filter { !it.has(CALLBACK_DATA) }))
 		print("\tpublic abstract int invoke(")
 		printList(parameters) {
 			if ( it has CALLBACK_DATA )

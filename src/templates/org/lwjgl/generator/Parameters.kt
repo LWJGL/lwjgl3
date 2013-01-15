@@ -483,3 +483,22 @@ public class PointerArray(
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on input parameters.")
 	}
 }
+
+public class Callback(val procClass: String): TemplateModifier {
+	class object {
+		val CLASS = javaClass<Callback>()
+	}
+
+	override val isSpecial: Boolean = true
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is Parameter )
+			throw IllegalArgumentException("The Callback modifier can only be applied on parameters.")
+
+		val param = ttype as Parameter
+		if ( param.nativeType !is PointerType || (param.nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER )
+			throw IllegalArgumentException("The Callback modifier can only be applied on naked pointer types.")
+
+		if ( param.paramType != ParameterType.IN )
+			throw IllegalArgumentException("The Callback modifier can only be applied on input parameters.")
+	}
+}
