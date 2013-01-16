@@ -24,6 +24,8 @@ public class TemplateFormatter {
 	final JRadioButton radioConst;
 	final JRadioButton radioFunc;
 
+	final JTextField prefix;
+
 	private final JTextArea input;
 	private final JTextArea output;
 
@@ -36,10 +38,12 @@ public class TemplateFormatter {
 		final JFrame frame = new JFrame("Template Formatter");
 		frame.getContentPane().setLayout(new BorderLayout(4, 4));
 
-		// Radio buttons
+		// Settings
 
 		radioConst = new JRadioButton("Constants", true);
 		radioFunc = new JRadioButton("Functions");
+
+		prefix = new JTextField("GL", 4);
 
 		final ButtonGroup radioGroup = new ButtonGroup();
 
@@ -49,6 +53,8 @@ public class TemplateFormatter {
 		final JPanel radioPane = new JPanel(new FlowLayout());
 		radioPane.add(radioConst);
 		radioPane.add(radioFunc);
+		radioPane.add(new JLabel("Prefix:"));
+		radioPane.add(prefix);
 
 		frame.getContentPane().add(radioPane, BorderLayout.NORTH);
 
@@ -112,14 +118,16 @@ public class TemplateFormatter {
 			}
 		});
 
-		final ActionListener radioAction = new ActionListener() {
+		final ActionListener settingsAction = new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				format();
 			}
 		};
 
-		radioConst.addActionListener(radioAction);
-		radioFunc.addActionListener(radioAction);
+		radioConst.addActionListener(settingsAction);
+		radioFunc.addActionListener(settingsAction);
+
+		prefix.addActionListener(settingsAction);
 	}
 
 	private void format() {
@@ -131,11 +139,11 @@ public class TemplateFormatter {
 		}
 
 		try {
-			String outputText = radioConst.isSelected() ? formatConstants(inputText) : formatFunctions(inputText);
+			String outputText = radioConst.isSelected() ? formatConstants(inputText) : formatFunctions(inputText, prefix.getText());
 
 			// Try to automatically detect the input type
 			if ( outputText.isEmpty() ) {
-				outputText = radioConst.isSelected() ? formatFunctions(inputText) : formatConstants(inputText);
+				outputText = radioConst.isSelected() ? formatFunctions(inputText, prefix.getText()) : formatConstants(inputText);
 				// Got it, flip the selection
 				if ( !outputText.isEmpty() )
 					(radioConst.isSelected() ? radioFunc : radioConst).setSelected(true);
@@ -248,7 +256,7 @@ public class TemplateFormatter {
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
-		TYPE_PATTERN + "[(](?:,?\\s*" + TYPE_PATTERN + ")*\\s*[)]",
+		TYPE_PATTERN + "\\s*[(](?:,?\\s*" + TYPE_PATTERN + ")*\\s*[)]",
 		Pattern.MULTILINE
 	);
 
@@ -258,7 +266,7 @@ public class TemplateFormatter {
 		Pattern.MULTILINE
 	);
 
-	private static String formatFunctions(final String input) {
+	private static String formatFunctions(final String input, final String prefix) {
 		final StringBuilder builder = new StringBuilder(input.length());
 
 		final Matcher funcMatcher = FUNCTION_PATTERN.matcher(input);
@@ -279,8 +287,8 @@ public class TemplateFormatter {
 					if ( paramMatcher.group(1) != null )
 						builder.append("(const _ ");
 
-					if ( !paramMatcher.group(2).startsWith("GL") )
-						builder.append("GL");
+					if ( !paramMatcher.group(2).startsWith(prefix) )
+						builder.append(prefix);
 					builder.append(paramMatcher.group(2));
 					if ( paramMatcher.group(3) != null ) // pointer
 						writerPointer(builder, paramMatcher);
@@ -300,8 +308,8 @@ public class TemplateFormatter {
 					builder.append("\t\t");
 					if ( paramMatcher.group(1) != null ) // const
 						builder.append("const _ ");
-					if ( !paramMatcher.group(2).startsWith("GL") )
-						builder.append("GL");
+					if ( !paramMatcher.group(2).startsWith(prefix) )
+						builder.append(prefix);
 					builder.append(paramMatcher.group(2));
 					if ( paramMatcher.group(3) != null ) // pointer
 						writerPointer(builder, paramMatcher);

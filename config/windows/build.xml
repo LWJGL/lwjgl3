@@ -26,6 +26,7 @@
 			<arg value="/I${java.home}\..\include\win32"/>
 			<arg value="/I${src.native}\system"/>
 			<arg value="/I${src.native}\system\windows"/>
+			<arg value="/I${src.native}\openal"/>
 			<arg value="/I${src.native}\opengl"/>
 			<arg value="/I${src.native}\opengl\wgl"/>
 			<srcfile/>
@@ -33,6 +34,7 @@
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
+			<fileset dir="${src.generated}/openal" includes="*.c"/>
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>

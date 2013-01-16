@@ -175,8 +175,8 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT1(long address) {
-		if ( LWJGLUtil.DEBUG && address <= 0L )
-			throw new IllegalArgumentException();
+		if ( address == 0L )
+			return null;
 
 		final ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
@@ -201,19 +201,16 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT2(long address) {
-		if ( LWJGLUtil.DEBUG && address <= 0L )
-			throw new IllegalArgumentException();
+		if ( address == 0L )
+			return null;
 
 		final ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
 		int size = 0;
 		while ( true ) {
-			if (
-				infPointer.get(size + 0) == 0 &&
-				infPointer.get(size + 1) == 0
-				)
+			if ( infPointer.get(size + 0) == 0 && infPointer.get(size + 1) == 0 )
 				break;
-			size += 2;
+			size++;
 		}
 
 		infPointer.limit(size);

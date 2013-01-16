@@ -46,13 +46,13 @@ fun main(args: Array<String>) {
 
 	// Note: namespace is a class Kotlin generates that contains
 	// all top-level functions/properties in Kotlin package.
+	generate("org.lwjgl.openal")
 	generate("org.lwjgl.opengl")
 	generate("org.lwjgl.system.windows")
 
 	// Generate capabilities
-	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) {
-		generateCapabilities(it)
-	}
+	generateOutput(org.lwjgl.openal.FunctionProviderALC, File("generated/java/org/lwjgl/openal/ALCCapabilities.java")) { generateCapabilities(it) }
+	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) { generateCapabilities(it) }
 
 	// Generate structs and callback functions. These are auto-registered during the process above.
 	StructRegistry.generate()

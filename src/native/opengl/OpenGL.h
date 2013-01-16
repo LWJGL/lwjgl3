@@ -34,12 +34,6 @@
 #ifndef APIENTRY
 	#define APIENTRY
 #endif
-#ifndef APIENTRYP
-	#define APIENTRYP APIENTRY *
-#endif
-#ifndef GLAPI
-	#define GLAPI extern
-#endif
 
 // Base GL types
 
