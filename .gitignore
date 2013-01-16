@@ -1,5 +1,4 @@
-/.idea
-*.iml
+/config/ide/idea/.idea/workspace.xml
 /bin
 /generated
 /libs/**/lwjgl*.*

@@ -101,7 +101,7 @@
 
 	<target name="generate" description="Runs the code Generator" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
 		<java
-			classname="org.lwjgl.generator.namespace"
+			classname="org.lwjgl.generator.GeneratorPackage"
 			fork="true"
 			failonerror="true"
 			taskname="Generating code"
