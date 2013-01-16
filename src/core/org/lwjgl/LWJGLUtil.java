@@ -409,7 +409,7 @@ public class LWJGLUtil {
 	 */
 	private static String getPathFromClassLoader(final String libname, final ClassLoader classloader) {
 		try {
-			log("getPathFromClassLoader: searching for: " + libname);
+			//log("getPathFromClassLoader: searching for: " + libname);
 			Class<?> c = classloader.getClass();
 			while ( c != null ) {
 				final Class<?> clazz = c;
@@ -418,12 +418,11 @@ public class LWJGLUtil {
 						public String run() throws Exception {
 							Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
 							findLibrary.setAccessible(true);
-							String path = (String)findLibrary.invoke(classloader, libname);
-							return path;
+							return (String)findLibrary.invoke(classloader, libname);
 						}
 					});
 				} catch (PrivilegedActionException e) {
-					log("Failed to locate findLibrary method: " + e.getCause());
+					//log("Failed to locate findLibrary method: " + e.getCause());
 					c = c.getSuperclass();
 				}
 			}

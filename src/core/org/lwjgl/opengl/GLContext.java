@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
 import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
 import static org.lwjgl.system.Checks.*;
@@ -90,11 +91,10 @@ public class GLContext {
 	public static ContextCapabilities createCapabilities(boolean forwardCompatible) {
 		// We don't have a current ContextCapabilities when this method is called
 		// so we have to use the native bindings directly.
-		final long GetError = functionProvider.getFunctionAddress("glGetError");
 		final long GetString = functionProvider.getFunctionAddress("glGetString");
 		final long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
-		if ( GetError == 0L || GetString == 0L || GetIntegerv == 0L )
+		if ( GetString == 0L || GetIntegerv == 0L )
 			throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
 
 		final String version = memDecodeUTF8(memByteBufferNT1(checkPointer(nglGetString(GL_VERSION, GetString))));
@@ -158,8 +158,8 @@ public class GLContext {
 				// Force forwardCompatible to true if the context is a core profile context.
 				if ( supportedExtensions.contains("OpenGL31") && !supportedExtensions.contains("GL_ARB_compatibility") ) {
 					if ( supportedExtensions.contains("OpenGL32") ) {
-						nglGetIntegerv(0x9126, memAddress(param), GetIntegerv); // GL_CONTEXT_PROFILE_MASK
-						if ( (param.get(0) & 0x2) == 0 ) // GL_CONTEXT_COMPATIBILITY_PROFILE_BIT
+						nglGetIntegerv(GL_CONTEXT_PROFILE_MASK, memAddress(param), GetIntegerv);
+						if ( (param.get(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) == 0 )
 							forwardCompatible = true;
 					} else
 						forwardCompatible = true;
@@ -204,7 +204,7 @@ public class GLContext {
 			return functions;
 		else {
 			if ( LWJGLUtil.DEBUG )
-				System.err.println(extension + " was reported as available but an entry point is missing.");
+				System.err.println("[GL] " + extension + " was reported as available but an entry point is missing.");
 
 			return null;
 		}

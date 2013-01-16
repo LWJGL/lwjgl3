@@ -1064,7 +1064,7 @@ private class ExpressionLocalTransform(expression: String, keepParam: Boolean = 
 
 private val CharSequenceTransform = object : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = "CharSequence ${param.name}"
-	override fun transformCall(param: Parameter, original: String): String = "memAddress(memEncode${(param.nativeType as CharSequenceType).charMapping.charset}(${param.name}))"
+	override fun transformCall(param: Parameter, original: String): String = "memAddress${if ( param has nullable ) "Safe" else ""}(memEncode${(param.nativeType as CharSequenceType).charMapping.charset}(${param.name}))"
 }
 
 private val StringReturnTransform = object : FunctionTransform<ReturnValue> {
