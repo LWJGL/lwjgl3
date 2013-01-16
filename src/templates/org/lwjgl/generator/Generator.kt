@@ -63,7 +63,7 @@ private fun generate(packageName: String) {
 	val packageLastModified = getDirectoryLastModified("src/templates/${packageName.replace('.', '/')}")
 	packageLastModifiedMap[packageName] = packageLastModified
 
-	val templates = discoverTemplates("$packageName.templates")
+	val templates = discoverTemplates("$packageName.templates.TemplatesPackage")
 	if ( templates == null || templates.size == 0 ) {
 		println("*WARNING* No templates found in $packageName.templates package.")
 		return
@@ -78,15 +78,15 @@ private fun generate(packageName: String) {
 	}
 }
 
-private fun discoverTemplates(packageName: String): List<Method>? {
-	val namespace: Class<*>
+private fun discoverTemplates(packageClassPath: String): List<Method>? {
+	val packageClass: Class<*>
 	try {
-		namespace = Class.forName("$packageName.namespace")
+		packageClass = Class.forName(packageClassPath)
 	} catch (e: ClassNotFoundException) {
 		return null
 	}
 
-	val methods = namespace.getMethods()
+	val methods = packageClass.getMethods()
 
 	return methods.iterator().filterTo(ArrayList<Method>(methods.size)) {
 		// static
