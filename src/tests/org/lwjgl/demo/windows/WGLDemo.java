@@ -6,18 +6,13 @@ package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.*;
-import org.lwjgl.system.MemoryUtil;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WindowsDisplay;
-import org.lwjgl.system.windows.opengl.WindowsContext;
+import org.lwjgl.system.windows.opengl.WindowsGLContext;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
 
 import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -52,9 +47,9 @@ public final class WGLDemo {
 		int success = SetPixelFormat(window.getHdc(), pixelFormat, pfdOut);
 		assertTrue(success != 0);
 
-		final Context context = WindowsContext.create(window.getHdc());
+		final GLContext context = WindowsGLContext.create(window.getHdc());
 
-		final ContextCapabilities caps = GLContext.getCapabilities();
+		final ContextCapabilities caps = GL.getCapabilities();
 
 		if ( caps.GL_AMD_debug_output )
 			glDebugMessageCallbackAMD(new DEBUGPROCAMD());
@@ -111,6 +106,18 @@ public final class WGLDemo {
 		final long bufferRegion = wglCreateBufferRegionARB(window.getHdc(), 0, WGL_FRONT_COLOR_BUFFER_BIT_ARB);
 		assertTrue(bufferRegion != 0);
 
+		SelectObject(window.getHdc(), GetStockObject(DEFAULT_GUI_FONT));
+
+		final int fontBase = glGenLists(256);
+		success = wglUseFontBitmaps(window.getHdc(), 0, 256, fontBase);
+		assertTrue(success != 0);
+
+		final ByteBuffer stringBuffer = memEncodeASCII("Hello WGL!");
+		stringBuffer.limit(stringBuffer.limit() - 1);
+
+		// indicate start of glyph display lists
+		glListBase(fontBase);
+
 		final ByteBuffer msg = MSG.malloc();
 		float rotation = 0.0f;
 		while ( !window.isCloseRequested() ) {
@@ -154,6 +161,10 @@ public final class WGLDemo {
 
 			success = wglRestoreBufferRegionARB(bufferRegion, 640 - 200, 480 - 200, 200, 200, 0, 0);
 			assertTrue(success != 0);
+
+			glColor3f(0.0f, 1.0f, 0.0f);
+			glRasterPos2f(64.0f + 10.0f, 64.0f + 10.0f);
+			glCallLists(stringBuffer);
 
 			SwapBuffers(window.getHdc());
 		}
@@ -211,7 +222,7 @@ public final class WGLDemo {
 		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
 		assertTrue(success != 0);
 
-		final Context context = WindowsContext.create(dummy.getHdc());
+		final GLContext context = WindowsGLContext.create(dummy.getHdc());
 
 		final IntBuffer propList = BufferUtils.createIntBuffer(32);
 

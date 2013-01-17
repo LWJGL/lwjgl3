@@ -307,11 +307,7 @@ public val nullable: Nullable = Nullable(false)
 public val optional: Nullable = Nullable(true)
 
 /** Marks a buffer parameter as null-terminated. */
-public class NullTerminated internal(): TemplateModifier {
-	class object {
-		val CLASS = javaClass<NullTerminated>()
-	}
-
+public val nullTerminated: TemplateModifier = object : TemplateModifier {
 	override val isSpecial: Boolean = true
 	override fun validate(ttype: TemplateElement) {
 		if ( ttype !is Parameter )
@@ -325,7 +321,6 @@ public class NullTerminated internal(): TemplateModifier {
 			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on naked pointer types.")
 	}
 }
-public val nullTerminated: NullTerminated = NullTerminated()
 
 /** Marks a parameter to be replaced with an expression. */
 public class Expression(

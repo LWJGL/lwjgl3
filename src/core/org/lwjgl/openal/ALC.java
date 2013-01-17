@@ -13,10 +13,7 @@ import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.Checks.*;
@@ -25,15 +22,15 @@ import static org.lwjgl.system.windows.WinBase.*;
 
 public class ALC {
 
-	private static final FunctionProvider functionProvider;
+	static final FunctionProviderALC functionProvider;
 
 	static {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case LWJGLUtil.PLATFORM_WINDOWS:
-				functionProvider = new FunctionProvider() {
+				functionProvider = new FunctionProviderALC() {
 
-					// TODO: Make this available to both ALC and AL
 					private final WindowsLibrary OPENAL;
+					private final long alcGetProcAddress;
 
 					{
 						final String[] paths = LWJGLUtil.getLibraryPaths(
@@ -45,7 +42,7 @@ public class ALC {
 						WindowsLibrary lib = null;
 						for ( String path : paths ) {
 							try {
-								lib = new WindowsLibrary(path);
+								lib = new WindowsLibrary("OpenAL32.dll");
 								break;
 							} catch (Exception e) {
 								LWJGLUtil.log("Failed to load " + path + ": " + e.getMessage());
@@ -55,16 +52,33 @@ public class ALC {
 							throw new RuntimeException("Failed to locate the OpenAL library");
 
 						OPENAL = lib;
+
+						// We'll use alcGetProcAddress for both core and extension entry points.
+						// To do that, we need to first grab the alcGetProcAddress function from
+						// the OpenAL native library.
+						alcGetProcAddress = GetProcAddress(OPENAL.getHandle(), "alcGetProcAddress");
+						if ( alcGetProcAddress == 0L ) {
+							lib.destroy();
+							throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
+						}
 					}
 
 					public long getFunctionAddress(final String functionName) {
-						final long address = GetProcAddress(OPENAL.getHandle(), functionName);
-						if ( LWJGLUtil.DEBUG && address == 0L )
-							System.err.println("Failed to locate address for function " + functionName);
+						final ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = nalcGetProcAddress(OPENAL.getHandle(), memAddress(nameBuffer), alcGetProcAddress);
+						if ( address == 0L )
+							address = getLibraryFunctionAddress(functionName);
 
 						return address;
 					}
 
+					public long getLibraryFunctionAddress(final String functionName) {
+						final long address = GetProcAddress(OPENAL.getHandle(), functionName);
+						if ( LWJGLUtil.DEBUG && address == 0L )
+							System.err.println("Failed to locate address for AL function " + functionName);
+
+						return address;
+					}
 				};
 				break;
 			case LWJGLUtil.PLATFORM_LINUX:
@@ -74,7 +88,7 @@ public class ALC {
 		}
 	}
 
-	private static final ALCCapabilities capabilities = createCapabilities();
+	private static ALCContext context;
 
 	public ALC() {
 	}
@@ -83,8 +97,33 @@ public class ALC {
 		return functionProvider;
 	}
 
+	/**
+	 * Creates an ALCContext from the specified device. The device name may be null,
+	 * in which case the default device will be used.
+	 *
+	 * @param deviceName the device to open
+	 *
+	 * @return the created ALCContext on the specified device
+	 */
+	public static ALCContext createALCContextFromDevice(final String deviceName) {
+		final long alcOpenDevice = functionProvider.getFunctionAddress("alcOpenDevice");
+		if ( LWJGLUtil.CHECKS )
+			checkFunctionAddress(alcOpenDevice);
+
+		final ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName);
+		final long device = nalcOpenDevice(memAddressSafe(nameBuffer), alcOpenDevice);
+		if ( device == 0L )
+			throw new RuntimeException("Failed to open the device.");
+
+		return new ALCContext(device);
+	}
+
+	static void setCurrent(final ALCContext context) {
+		ALC.context = context;
+	}
+
 	public static ALCCapabilities getCapabilities() {
-		return capabilities;
+		return context.getCapabilities();
 	}
 
 	// We could remove the method below if we add support for it in the code generator.
@@ -94,14 +133,14 @@ public class ALC {
 	 * Obtains string values from ALC. This is a custom implementation for those tokens that return a list of strings instead of a single string.
 	 *
 	 * @param deviceHandle the device to query
-	 * @param token        the information to query. One of:<p/>{@link ALC10#ALC_DEVICE_SPECIFIER}, {@link ALC10#ALC_EXTENSIONS}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
+	 * @param token        the information to query. One of:<p/>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
 	 */
 	public static List<String> getStringList(final long deviceHandle, final int token) {
-		final long __functionAddress = ALC10.getInstance().alcGetString;
+		final long alcGetString = functionProvider.getFunctionAddress("alcGetString");
 		if ( LWJGLUtil.CHECKS )
-			checkFunctionAddress(__functionAddress);
+			checkFunctionAddress(alcGetString);
 
-		final long __result = nalcGetString(deviceHandle, token, __functionAddress);
+		final long __result = nalcGetString(deviceHandle, token, alcGetString);
 		if ( __result == 0L )
 			return null;
 
@@ -137,47 +176,52 @@ public class ALC {
 	 *
 	 * @return the ALCCapabilities instance
 	 */
-	private static ALCCapabilities createCapabilities() {
+	static ALCCapabilities createCapabilities(final long device) {
 		// We don't have an ALCCapabilities instance when this method is called
 		// so we have to use the native bindings directly.
-		final long OpenDevice = functionProvider.getFunctionAddress("alcOpenDevice");
-		final long CloseDevice = functionProvider.getFunctionAddress("alcCloseDevice");
 		final long GetIntegerv = functionProvider.getFunctionAddress("alcGetIntegerv");
+		final long GetString = functionProvider.getFunctionAddress("alcGetString");
+		final long IsExtensionPresent = functionProvider.getFunctionAddress("alcIsExtensionPresent");
 
-		if ( OpenDevice == 0L || CloseDevice == 0L || GetIntegerv == 0L )
+		if ( GetIntegerv == 0L || GetString == 0L || IsExtensionPresent == 0L )
 			throw new IllegalStateException("Core ALC functions could not be found. Make sure that OpenAL has been loaded.");
 
-		// Normally we'd call alcGetInteger with a NULL device, but some implementations return 0.0.
-		// So we open the default device and use that instead.
-		final long defaultDevice = nalcOpenDevice(0L, OpenDevice);
-		if ( defaultDevice == 0L )
-			throw new RuntimeException("Failed to open the default ALC device.");
+		final IntBuffer versionBuffer = BufferUtils.createIntBuffer(2);
 
-		final Set<String> supportedExtensions;
-		try {
-			final IntBuffer versionBuffer = BufferUtils.createIntBuffer(2);
+		nalcGetIntegerv(device, ALC_MAJOR_VERSION, 1, memAddress(versionBuffer), GetIntegerv);
+		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, memAddress(versionBuffer) + 4, GetIntegerv);
 
-			nalcGetIntegerv(defaultDevice, ALC_MAJOR_VERSION, 1, memAddress(versionBuffer), GetIntegerv);
-			nalcGetIntegerv(defaultDevice, ALC_MINOR_VERSION, 1, memAddress(versionBuffer) + 4, GetIntegerv);
+		final int majorVersion = versionBuffer.get(0);
+		final int minorVersion = versionBuffer.get(1);
 
-			final int majorVersion = versionBuffer.get(0);
-			final int minorVersion = versionBuffer.get(1);
+		final int[][] ALC_VERSIONS = {
+			{ 0, 1 },  // ALC 1
+		};
 
-			final int[][] ALC_VERSIONS = {
-				{ 0, 1 },  // ALC 1
-			};
+		final Set<String> supportedExtensions = new LinkedHashSet<String>();
 
-			supportedExtensions = new LinkedHashSet<String>();
-
-			for ( int major = 1; major <= ALC_VERSIONS.length; major++ ) {
-				int[] minors = ALC_VERSIONS[major - 1];
-				for ( int minor : minors ) {
-					if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
-						supportedExtensions.add("OpenALC" + Integer.toString(major) + Integer.toString(minor));
-				}
+		for ( int major = 1; major <= ALC_VERSIONS.length; major++ ) {
+			int[] minors = ALC_VERSIONS[major - 1];
+			for ( int minor : minors ) {
+				if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
+					supportedExtensions.add("OpenALC" + Integer.toString(major) + Integer.toString(minor));
 			}
-		} finally {
-			nalcCloseDevice(defaultDevice, CloseDevice);
+		}
+
+		// Parse EXTENSIONS string
+		final String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString))));
+
+		/*
+		OpenALSoft: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_DEDICATED ALC_EXT_disconnect ALC_EXT_EFX ALC_EXT_thread_local_context ALC_SOFT_loopback
+		Creative: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_EFX
+		 */
+
+		final StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+		while ( tokenizer.hasMoreTokens() ) {
+			final String extName = tokenizer.nextToken();
+			final ByteBuffer nameBuffer = memEncodeASCII(extName);
+			if ( nalcIsExtensionPresent(device, memAddress(nameBuffer), IsExtensionPresent) )
+				supportedExtensions.add(extName);
 		}
 
 		return new ALCCapabilities(supportedExtensions);
@@ -192,6 +236,25 @@ public class ALC {
 
 			return null;
 		}
+	}
+
+	/**
+	 * Some OpenAL implementations will crash when alcGetProcAddress is called with
+	 * an unsupported function name (instead of returning 0L). We extend FunctionProvider
+	 * so that {@link AL} can grab a function pointer without going through ALC.
+	 */
+	interface FunctionProviderALC extends FunctionProvider {
+
+		/**
+		 * Returns a function pointer from the loaded OpenAL library, without
+		 * calling alcGetProcAddress first.
+		 *
+		 * @param functionName the function name to query
+		 *
+		 * @return the function address or 0L
+		 */
+		long getLibraryFunctionAddress(String functionName);
+
 	}
 
 }

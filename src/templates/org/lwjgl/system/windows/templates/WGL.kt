@@ -135,13 +135,13 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
 		""",
 
-		HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
-		HGLRC.IN(
+		nullable _ HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
+		nullable _ HGLRC.IN(
 			"context",
 			"""
 			handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is NULL, the function
 			makes the calling thread's current rendering context no longer current, and releases the device context that is used by the rendering context. In
-			this case, {@code dc} is ignored.
+			this case, {@code hdc} is ignored.
 			"""
 		)
 	)
@@ -200,15 +200,51 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		a character cell.
 		""",
 
-		HDC.IN("hdc", "the device context with the desired outline font. The outline font of {@code dc} is used to create the display lists in the current rendering context."),
+		HDC.IN(
+			"hdc",
+			"""
+			the device context with the desired outline font. The outline font of {@code dc} is used to create the display lists in the current rendering
+			context.
+			"""
+		),
 		DWORD.IN("first", "the first of the set of glyphs that form the font outline display lists"),
-		DWORD.IN("count", "he number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display lists, one display list for each glyph in a set of glyphs."),
+		DWORD.IN(
+			"count",
+			"""
+			the number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display
+			lists, one display list for each glyph in a set of glyphs.
+			"""
+		),
 		DWORD.IN("listBase", "the starting display list"),
-		FLOAT.IN("deviation", "the maximum chordal deviation from the original outlines. When deviation is zero, the chordal deviation is equivalent to one design unit of the original font. The value of deviation must be equal to or greater than 0."),
-		FLOAT.IN("extrusion", "how much a font is extruded in the negative z direction. The value must be equal to or greater than 0. When extrusion is 0, the display lists are not extruded."),
-		int.IN("format", "the format to use in the display lists. When format is {@link #WGL_FONT_LINES}, the {@code wglUseFontOutlines} function creates fonts with line segments. When format is {@link #WGL_FONT_POLYGONS}, {@code wglUseFontOutlines} creates fonts with polygons."),
-		// TODO: Implemented OutParameter checks. Add AutoSize + nullable
-		LPGLYPHMETRICSFLOAT.OUT("glyphMetrics", "an array of {@code count} {@link GLYPHMETRICSFLOAT} structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is NULL, no glyph metrics are returned.")
+		FLOAT.IN(
+			"deviation",
+			"""
+			the maximum chordal deviation from the original outlines. When deviation is zero, the chordal deviation is equivalent to one design unit of the
+			original font. The value of deviation must be equal to or greater than 0.
+			"""
+		),
+		FLOAT.IN(
+			"extrusion",
+			"""
+			how much a font is extruded in the negative z direction. The value must be equal to or greater than 0. When extrusion is 0, the display lists are
+			not extruded.
+			"""
+		),
+		int.IN(
+			"format",
+			"""
+			the format to use in the display lists. When format is {@link #WGL_FONT_LINES}, the {@code wglUseFontOutlines} function creates fonts with line
+			segments. When format is {@link #WGL_FONT_POLYGONS}, {@code wglUseFontOutlines} creates fonts with polygons.
+			""",
+		    "#WGL_FONT_LINES #WGL_FONT_POLYGONS"
+		),
+		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
+			"glyphMetrics",
+			"""
+			an array of {@code count} {@link GLYPHMETRICSFLOAT} structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is NULL, no
+			glyph metrics are returned.
+			"""
+		)
 	)
 
 }

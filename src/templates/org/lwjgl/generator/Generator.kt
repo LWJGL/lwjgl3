@@ -52,6 +52,7 @@ fun main(args: Array<String>) {
 
 	// Generate capabilities
 	generateOutput(org.lwjgl.openal.FunctionProviderALC, File("generated/java/org/lwjgl/openal/ALCCapabilities.java")) { generateCapabilities(it) }
+	generateOutput(org.lwjgl.openal.FunctionProviderAL, File("generated/java/org/lwjgl/openal/ALCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) { generateCapabilities(it) }
 
 	// Generate structs and callback functions. These are auto-registered during the process above.

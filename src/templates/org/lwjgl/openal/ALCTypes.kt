@@ -44,7 +44,7 @@ val ALCenum_p = PointerType(name = "ALCenum", mapping = PointerMapping.DATA_INT)
 
 // strings
 
-val ALCchar_p = CharSequenceType(name = "ALCchar", charMapping = CharMapping.UTF8)
+val ALCchar_p = CharSequenceType("ALCchar")
 val ALCchar_pp = PointerType(name = "ALCchar*", mapping = PointerMapping.DATA_POINTER)
 
 // misc
@@ -52,4 +52,4 @@ val ALCchar_pp = PointerType(name = "ALCchar*", mapping = PointerMapping.DATA_PO
 val ALCdevice_p = PointerType("ALCdevice")
 val ALCcontext_p = PointerType("ALCcontext")
 
-val ALCvoidptr = PointerType(name = "ALCvoid", mapping = PointerMapping.NAKED_POINTER) // see alcGetProcAddress
+val ALCvoidptr = PointerType(name = "void", mapping = PointerMapping.NAKED_POINTER) // see alcGetProcAddress

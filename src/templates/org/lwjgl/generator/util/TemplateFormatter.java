@@ -7,7 +7,6 @@ package org.lwjgl.generator.util;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -86,9 +85,10 @@ public class TemplateFormatter {
 		// Config and show
 
 		try {
+			final ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			frame.setIconImages(Arrays.asList(new Image[] {
-				ImageIO.read(new File("res/lwjgl16.png")),
-				ImageIO.read(new File("res/lwjgl32.png")),
+				ImageIO.read(cl.getResource("lwjgl16.png")),
+				ImageIO.read(cl.getResource("lwjgl32.png")),
 			}));
 		} catch (IOException e) {
 			e.printStackTrace();

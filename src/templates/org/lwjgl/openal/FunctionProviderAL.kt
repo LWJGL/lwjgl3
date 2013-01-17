@@ -8,20 +8,7 @@ import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
 
-fun NativeClass.capName(core: String): String =
-	if ( templateName.startsWith(prefix) ) {
-		if ( prefix == core )
-			"Open$core${templateName.substring(core.size)}"
-		else
-			templateName
-	} else {
-		"${prefix}_$templateName"
-	}
-
-val List<NativeClassFunction>.hasDependencies: Boolean
-	get() = this.any { it has DependsOn.CLASS }
-
-public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
@@ -29,11 +16,11 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 
 		println("\t/** Returns the {@link Functions} instance for the current context. */")
 		println("\tpublic static Functions getInstance() {")
-		println("\t\treturn ALC.getCapabilities().__${nativeClass.className};")
+		println("\t\treturn AL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
 		val functions = nativeClass.functions
-		val capName = nativeClass.capName("ALC")
+		val capName = nativeClass.capName("AL")
 
 		val hasDependencies = functions.hasDependencies
 
@@ -70,7 +57,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 
-		print("\n\t\treturn ALC.checkExtension(\"")
+		print("\n\t\treturn AL.checkExtension(\"")
 		print(capName);
 		println("\", funcs, supported);")
 		println("\t}\n")
@@ -85,17 +72,17 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 
 		println("import java.util.Set;\n")
 
-		println("/** Defines the capabilities of the OpenAL Context API. */")
-		println("public final class ALCCapabilities {\n")
+		println("/** Defines the capabilities of an OpenAL context. */")
+		println("public final class ALCapabilities {\n")
 
 		val classes = super.getClasses(object : Comparator<NativeClass> {
 			// Core functionality first, extensions after
 			public override fun compare(o1: NativeClass, o2: NativeClass): Int {
-				val isALC1 = o1.templateName.startsWith("ALC")
-				val isALC2 = o2.templateName.startsWith("ALC")
+				val isAL1 = o1.templateName.startsWith("AL")
+				val isAL2 = o2.templateName.startsWith("AL")
 
-				return if ( isALC1 xor isALC2 )
-					(if ( isALC1 ) -1 else 1)
+				return if ( isAL1 xor isAL2 )
+					(if ( isAL1 ) -1 else 1)
 				else
 					o1.className.compareTo(o2.className)
 			}
@@ -111,17 +98,17 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			println(" __${extension.className};")
 		}
 
-		println("\n\t/** Indicates whether an ALC functionality is available or not. */")
+		println("\n\t/** Indicates whether an OpenAL functionality is available or not. */")
 		println("\tpublic final boolean")
 		for ( i in classes.indices ) {
-			print("\t\t${classes[i].capName("ALC")}")
+			print("\t\t${classes[i].capName("AL")}")
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCCapabilities(final Set<String> ext) {")
-		println("\t\tfinal FunctionProvider provider = ALC.getFunctionProvider();\n")
+		println("\n\tALCapabilities(final Set<String> ext) {")
+		println("\t\tfinal FunctionProvider provider = AL.getFunctionProvider();\n")
 		for ( extension in classes ) {
-			val capName = extension.capName("ALC")
+			val capName = extension.capName("AL")
 			if ( extension.hasNativeFunctions ) {
 				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider)) != null;")
 			} else
@@ -135,11 +122,5 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-fun String.addCapabilities(templateName: String, nativeSubPath: String, prefix: String, postfix: String, functionProvider: FunctionProvider, init: NativeClass.() -> Unit): NativeClass {
-	val extension = nativeClass("org.lwjgl.openal", templateName, nativeSubPath, prefix, postfix, functionProvider, init)
-	functionProvider.addCapabilities(extension)
-	return extension
-}
-
-public fun String.nativeClassALC(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
-	addCapabilities(templateName, "", "ALC", postfix, FunctionProviderALC, init)
+public fun String.nativeClassAL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+	addCapabilities(templateName, "", "AL", postfix, FunctionProviderAL, init)

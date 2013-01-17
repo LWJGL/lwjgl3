@@ -208,8 +208,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"CreateCompatibleDC",
 		"Creates a memory device context (DC) compatible with the specified device.",
 
-		// TODO: Add nullable
-		HDC.IN("hdc", "a handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.")
+		nullable _ HDC.IN("hdc", "a handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.")
 	)
 
 	HGDIOBJ.func(

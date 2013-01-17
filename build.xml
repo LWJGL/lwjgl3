@@ -53,7 +53,7 @@
 	</target>
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
-		<javac debug="yes" destdir="${lwjgl.bin}/Templates" source="1.5" target="1.5" taskname="Java dependencies compilation">
+		<javac debug="yes" destdir="${lwjgl.bin}/Templates" encoding="utf8" source="1.5" target="1.5" taskname="Java dependencies compilation">
 			<src path="${lwjgl.src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -83,7 +83,7 @@
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
-		<javac debug="yes" destdir="${lwjgl.bin}/Templates" source="1.5" target="1.5" taskname="Java dependencies compilation">
+		<javac debug="yes" destdir="${lwjgl.bin}/Templates" encoding="utf8" source="1.5" target="1.5" taskname="Java dependencies compilation">
 			<src path="${lwjgl.src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -95,6 +95,7 @@
 			>
 			<classpath>
 				<pathelement path="${lwjgl.bin.templates}"/>
+				<pathelement path="${lwjgl.res}"/>
 			</classpath>
 		</java>
 	</target>
@@ -116,7 +117,7 @@
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
-		<javac debug="yes" destdir="${lwjgl.bin}/Core" source="1.5" target="1.5" taskname="Core java compilation">
+		<javac debug="yes" destdir="${lwjgl.bin}/Core" encoding="utf8" source="1.5" target="1.5" taskname="Core java compilation">
 			<src path="${lwjgl.src}/core/"/>
 			<src path="${lwjgl.generated}/java"/>
 			<include name="org/lwjgl/**"/>
@@ -136,7 +137,7 @@
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile, compile-native">
-		<javac debug="yes" destdir="${lwjgl.bin}/Tests" source="1.5" target="1.5" taskname="Tests compilation">
+		<javac debug="yes" destdir="${lwjgl.bin}/Tests" encoding="utf8" source="1.5" target="1.5" taskname="Tests compilation">
 			<classpath>
 				<pathelement path="${lwjgl.bin.core}"/>
 				<pathelement path="${lwjgl.bin.util}"/>
@@ -152,6 +153,7 @@
 				<pathelement path="${lwjgl.lib}/jcommander.jar"/>
 				<pathelement path="${lwjgl.bin.core}"/>
 				<pathelement path="${lwjgl.bin.util}"/>
+				<pathelement path="${lwjgl.res}"/>
 				<pathelement path="${lwjgl.bin.tests}"/>
 			</classpath>
 			<xmlfileset dir="config" includes="tests.xml,tests_${lwjgl.platform}.xml"/>

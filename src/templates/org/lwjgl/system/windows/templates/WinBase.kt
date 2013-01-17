@@ -45,8 +45,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GetModuleHandle",
 		"Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
-		// TODO: Add nullable
-		LPCTSTR.IN(
+		nullable _ LPCTSTR.IN(
 			"moduleName",
 		    """
 		    the name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.

@@ -32,7 +32,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
 		println("\t/** Returns the {@link Functions} instance for the current context. */")
 		println("\tpublic static Functions getInstance() {")
-		println("\t\treturn GLContext.getCapabilities().__${nativeClass.className};")
+		println("\t\treturn GL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
 		val functions = nativeClass.functions
@@ -80,7 +80,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 
-		print("\n\t\treturn GLContext.checkExtension(\"")
+		print("\n\t\treturn GL.checkExtension(\"")
 		print(nativeClass.capName);
 		println("\", funcs, supported);")
 		println("\t}\n")
@@ -129,7 +129,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		}
 
 		println("\n\tContextCapabilities(final Set<String> ext, final boolean fc) {")
-		println("\t\tfinal FunctionProvider provider = GLContext.getFunctionProvider();\n")
+		println("\t\tfinal FunctionProvider provider = GL.getFunctionProvider();\n")
 		for ( extension in classes ) {
 			if ( extension.hasNativeFunctions ) {
 				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")
@@ -152,10 +152,8 @@ private fun String.addCapabilities(templateName: String, nativeSubPath: String, 
 	return extension
 }
 
-public fun String.nativeClassGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass {
-	return addCapabilities(templateName, "", "GL", postfix, init)
-}
+public fun String.nativeClassGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+	addCapabilities(templateName, "", "GL", postfix, init)
 
-public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass {
-	return addCapabilities(templateName, "wgl", "WGL", postfix, init)
-}
+public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+	addCapabilities(templateName, "wgl", "WGL", postfix, init)
