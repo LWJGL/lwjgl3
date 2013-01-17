@@ -17,7 +17,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	IntConstant.block(
 		"Window Styles",
 		"WS_OVERLAPPED" _ 0x00000000,
-		"WS_POPUP" _ 0x80000000.toInt(), // TODO: Kotlin bug, fix
+		"WS_POPUP" _ 0x80000000.toInt(),
 		"WS_CHILD" _ 0x40000000,
 		"WS_MINIMIZE" _ 0x20000000,
 		"WS_VISIBLE" _ 0x10000000,
@@ -1022,8 +1022,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
 		""",
 
-		// TODO: Add nullable
-		HWND.IN("window", "a handle to the window whose DC is to be retrieved. If this value is NULL, {@code GetDC} retrieves the DC for the entire screen.")
+		nullable _ HWND.IN("window", "a handle to the window whose DC is to be retrieved. If this value is NULL, {@code GetDC} retrieves the DC for the entire screen.")
 	)
 
 	int.func(
@@ -1067,8 +1066,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		a series of calls to this function.
 		""",
 
-		// TODO: Add nullable
-		LPCTSTR.IN(
+		nullable _ LPCTSTR.IN(
 			"deviceName",
 			"""
 			a null-terminated string that specifies the display device about whose graphics mode the function will obtain information. This parameter is either

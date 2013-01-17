@@ -121,10 +121,12 @@ public class NativeClassFunction(
 		validate();
 	}
 
-	private val strippedName = stripPostfix()
+	// Can't eval once, stripPostfix has modifier dependencies that may be added after the constructor has run.
+	val strippedName: String
+		get() = stripPostfix()
 
 	private fun stripPostfix(val stripType: Boolean = false, val stripUnsigned: Boolean = false): String {
-		if ( parameters.isEmpty() )
+		if ( parameters.isEmpty() || has(keepPostfix) )
 			return name
 
 		val param = parameters.values().last()
@@ -337,11 +339,6 @@ public class NativeClassFunction(
 					checks add "${prefix}checkNT(${it.name});"
 			}
 
-			if ( it.nativeType is StructType ) {
-				val structType = it.nativeType as StructType
-				checks add "${prefix}checkBuffer(${it.name}, ${structType.definition.className}.SIZEOF);"
-			}
-
 			if ( it has Check.CLASS ) {
 				val transform = transforms?.get(it)
 				if ( transform !is SkipCheckFunctionTransform ) {
@@ -356,6 +353,9 @@ public class NativeClassFunction(
 					else
 						checks add "${prefix}checkBuffer(${it.name}, ${check.expression});"
 				}
+			} else if ( it.nativeType is StructType ) {
+				val structType = it.nativeType as StructType
+				checks add "${prefix}checkBuffer(${it.name}, ${structType.definition.className}.SIZEOF);"
 			}
 
 			if ( mode == GenerationMode.NORMAL && it has BufferObject.CLASS ) {
@@ -427,7 +427,7 @@ public class NativeClassFunction(
 			// This the only special case where we don't generate a "normal" Java method. If we did,
 			// we'd need to add a postfix to either this or the alternative method, since we're
 			// changing the return type. It looks ugly and LWJGL didn't do it pre-3.0 either.
-			if ( !(returns.nativeType is CharSequenceType) )
+			if ( returns.nativeType !is CharSequenceType )
 				writer.generateJavaMethod()
 
 			writer.generateAlternativeMethods()
@@ -553,7 +553,7 @@ public class NativeClassFunction(
 		getParams { it has BufferObject.CLASS && it.nativeType.mapping != PrimitiveMapping.LONG } forEach {
 			transforms[it] = BufferOffsetTransform
 			customChecks add ("GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, true);")
-			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks)
 			transforms.remove(it)
 		}
 
@@ -611,7 +611,7 @@ public class NativeClassFunction(
 				}
 
 				transforms[it] = CharSequenceTransform
-				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
 			} else if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
 
@@ -620,7 +620,7 @@ public class NativeClassFunction(
 
 					if ( !hasParam { it has SingleValue.CLASS || it has PointerArray.CLASS } ) { // Skip, we inject the Return alternative in these transforms
 						applyReturnValueTransforms(it)
-						generateAlternativeMethod(strippedName, "Single return value version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+						generateAlternativeMethod(strippedName, "Single return value version of:", transforms, customChecks)
 					}
 				} else {
 					// Generate String return alternative
@@ -644,12 +644,12 @@ public class NativeClassFunction(
 						returnType = "Buffer"
 					}
 
-					generateAlternativeMethod(strippedName, "$returnType return version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+					generateAlternativeMethod(strippedName, "$returnType return version of:", transforms, customChecks)
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
 						transforms[parameters[returnMod.maxLengthParam]!!] = ExpressionLocalTransform(returnMod.maxLengthExpression)
-						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
 					}
 				}
 			} else if ( it has SingleValue.CLASS ) {
@@ -663,7 +663,7 @@ public class NativeClassFunction(
 					transforms[it] = BufferValueSizeTransform
 				}
 				transforms[it] = SingleValueTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name, param[SingleValue.CLASS].newName)
-				generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+				generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks)
 			} else if ( it has MultiType.CLASS ) {
 				// Generate MultiType alternatives
 				customChecks.clear()
@@ -690,7 +690,7 @@ public class NativeClassFunction(
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
-					generateAlternativeMethod(strippedName, "${autoType.javaMethodType.getSimpleName()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+					generateAlternativeMethod(strippedName, "${autoType.javaMethodType.getSimpleName()} version of:", transforms, customChecks)
 				}
 			} else if ( it has AutoType.CLASS ) {
 				// Generate AutoType alternatives
@@ -724,7 +724,7 @@ public class NativeClassFunction(
 
 					transforms[it] = AutoTypeParamWithSignTransform("GL11.${unsignedType.name()}", "GL11.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(strippedName, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+					generateAlternativeMethod(strippedName, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks)
 
 					types.remove(autoType)
 					types.remove(unsignedType)
@@ -733,7 +733,7 @@ public class NativeClassFunction(
 				for ( autoType in types ) {
 					transforms[it] = AutoTypeParamTransform("GL11.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks)
 				}
 			} else if ( it has PointerArray.CLASS ) {
 				val pointerArray = it[PointerArray.CLASS]
@@ -746,14 +746,14 @@ public class NativeClassFunction(
 
 				transforms[countParam] = ExpressionTransform("${it.name}.length")
 				transforms[it] = PointerArrayTransformMulti
-				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks)
 
 				// Compine PointerArrayTransformSingle with BufferValueReturnTransform
 				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
 
 				transforms[countParam] = ExpressionTransform("1")
 				transforms[it] = PointerArrayTransformSingle
-				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks, "") // TODO: "" is there because of a Kotlin bug
+				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
 			}
 		}
 	}
@@ -762,8 +762,7 @@ public class NativeClassFunction(
 		name: String,
 		description: String,
 		transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>,
-		customChecks: List<String>,
-		postFix: String = ""
+		customChecks: List<String>
 	) {
 		val returnTransform = transforms[returns]
 
@@ -778,7 +777,7 @@ public class NativeClassFunction(
 
 		val retType = returns.transformDeclarationOrElse(transforms, returns.javaMethodType)
 
-		print("\tpublic static $retType $name$postFix(")
+		print("\tpublic static $retType $name(")
 		printList(parameters) {
 			if ( it has CallbackData.CLASS )
 				null
@@ -958,6 +957,14 @@ public class DependsOn(reference: String): ReferenceModifier(reference) {
 	override fun validate(ttype: TemplateElement) {
 		if ( ttype !is NativeClassFunction )
 			throw IllegalArgumentException("The DependsOn modifier can only be applied on functions.")
+	}
+}
+
+public val keepPostfix: TemplateModifier = object : TemplateModifier {
+	override val isSpecial: Boolean = false
+	override fun validate(ttype: TemplateElement) {
+		if ( ttype !is NativeClassFunction )
+			throw IllegalArgumentException("The skipNormal modifier can only be applied on function.")
 	}
 }
 

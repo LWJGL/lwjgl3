@@ -86,6 +86,12 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"COLOR_TABLE_INTENSITY_SIZE" _ 0x80DF
 	).toJavaDocLinks()
 
+	IntConstant.block(
+        "ErrorCode",
+
+        "TABLE_TOO_LARGE" _ 0x8031
+    )
+
 	val ColorTable = (deprecatedGL _ GLvoid.func(
 		"ColorTable",
 		"Specifies a color lookup table.",

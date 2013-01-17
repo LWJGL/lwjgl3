@@ -6,6 +6,7 @@
 	<property name="lwjgl.generated" location="generated"/>
 	<property name="lwjgl.bin" location="bin"/>
 	<property name="lwjgl.lib" location="libs"/>
+	<property name="lwjgl.res" location="res"/>
 	<property name="lwjgl.version" value="3.0.0"/>
 
 	<property name="lwjgl.src.core" location="${lwjgl.src}/core"/>

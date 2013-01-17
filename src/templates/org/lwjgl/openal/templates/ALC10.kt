@@ -14,6 +14,14 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 
 	javaDoc("Native bindings to ALC 1.0 functionality.")
 
+	IntConstant.block(
+		"General tokens.",
+
+		"INVALID" _ 0xFFFFFFFF.toInt(),
+		"FALSE" _ 0x0,
+		"TRUE" _ 0x1
+	)
+
 	val ContextAttributes = IntConstant.block(
 		"Context creation attributes.",
 
@@ -210,7 +218,11 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 
 	(const _ ALCchar_p).func(
 		"GetString",
-		"Obtains string value(s) from ALC.",
+		"""
+		Obtains string value(s) from ALC.
+
+		<b>LWJGL note</b>: Use {@link ALC#getStringList} for those tokens that return multiple values.
+		""",
 
 		nullable _ ALCdevice_p.IN("deviceHandle", "the device to query"),
 		ALCenum.IN("token", "the information to query", StringQueries)

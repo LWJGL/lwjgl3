@@ -44,5 +44,7 @@ val ALenum_p = PointerType(name = "ALenum", mapping = PointerMapping.DATA_INT)
 
 // strings
 
-val ALchar_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.UTF8)
+val ALchar_p = CharSequenceType("ALchar")
 val ALchar_pp = PointerType(name = "ALchar*", mapping = PointerMapping.DATA_POINTER)
+
+val ALvoidptr = PointerType(name = "void", mapping = PointerMapping.NAKED_POINTER) // see alGetProcAddress
