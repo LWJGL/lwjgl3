@@ -45,7 +45,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGpuAffinity".nativeClassWGL("WGL_NV_gpu_affini
 	// Type definitions
 
 	val HGPUNV = PointerType(name = "HGPUNV", includesPointer = true)
-	val HGPUNV_p = PointerType(name = "HGPUNV", mapping = PointerMapping.DATA_POINTER)
+	val HGPUNV_p = PointerType(HGPUNV)
 
 	val PGPU_DEVICE = StructType(
 		name = "PGPU_DEVICE",

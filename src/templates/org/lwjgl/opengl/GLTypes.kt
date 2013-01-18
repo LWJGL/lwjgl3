@@ -10,8 +10,8 @@ import org.lwjgl.generator.*
 
 val GLvoid = NativeType("GLvoid", TypeMapping.VOID)
 
-val GLvoid_p = PointerType(name = "GLvoid", mapping = PointerMapping.DATA)
-val GLvoid_pp = PointerType(name = "GLvoid*", mapping = PointerMapping.DATA_POINTER)
+val GLvoid_p = PointerType("GLvoid", PointerMapping.DATA)
+val GLvoid_pp = PointerType(GLvoid_p)
 
 // numeric
 
@@ -27,17 +27,17 @@ val GLuint64 = PrimitiveType("GLuint64", PrimitiveMapping.LONG)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
 val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
 
-val GLboolean_p = PointerType(name = "GLboolean", mapping = PointerMapping.DATA_BOOLEAN)
-val GLbyte_p = PointerType(name = "GLbyte", mapping = PointerMapping.DATA_BYTE)
-val GLubyte_p = PointerType(name = "GLubyte", mapping = PointerMapping.DATA_BYTE)
-val GLshort_p = PointerType(name = "GLshort", mapping = PointerMapping.DATA_SHORT)
-val GLushort_p = PointerType(name = "GLushort", mapping = PointerMapping.DATA_SHORT)
-val GLint_p = PointerType(name = "GLint", mapping = PointerMapping.DATA_INT)
-val GLuint_p = PointerType(name = "GLuint", mapping = PointerMapping.DATA_INT)
-val GLint64_p = PointerType(name = "GLint64", mapping = PointerMapping.DATA_LONG)
-val GLuint64_p = PointerType(name = "GLuint64", mapping = PointerMapping.DATA_LONG)
-val GLfloat_p = PointerType(name = "GLfloat", mapping = PointerMapping.DATA_FLOAT)
-val GLdouble_p = PointerType(name = "GLdouble", mapping = PointerMapping.DATA_DOUBLE)
+val GLboolean_p = PointerType("GLboolean", PointerMapping.DATA_BOOLEAN)
+val GLbyte_p = PointerType(GLbyte)
+val GLubyte_p = PointerType(GLubyte)
+val GLshort_p = PointerType(GLshort)
+val GLushort_p = PointerType(GLushort)
+val GLint_p = PointerType(GLint)
+val GLuint_p = PointerType(GLuint)
+val GLint64_p = PointerType(GLint64)
+val GLuint64_p = PointerType(GLuint64)
+val GLfloat_p = PointerType(GLfloat)
+val GLdouble_p = PointerType(GLdouble)
 
 // custom numeric
 
@@ -45,8 +45,8 @@ val GLsizei = PrimitiveType("GLsizei", PrimitiveMapping.INT)
 val GLenum = PrimitiveType("GLenum", PrimitiveMapping.INT)
 val GLbitfield = PrimitiveType("GLbitfield", PrimitiveMapping.INT)
 
-val GLsizei_p = PointerType(name = "GLsizei", mapping = PointerMapping.DATA_INT)
-val GLenum_p = PointerType(name = "GLenum", mapping = PointerMapping.DATA_INT)
+val GLsizei_p = PointerType(GLsizei)
+val GLenum_p = PointerType(GLenum)
 
 val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.LONG)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
@@ -54,7 +54,7 @@ val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
 // strings
 
 val GLchar_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLchar_pp = PointerType(name = "GLchar*", mapping = PointerMapping.DATA_POINTER)
+val GLchar_pp = PointerType(GLchar_p)
 
 val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 

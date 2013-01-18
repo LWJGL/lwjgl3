@@ -9,8 +9,8 @@ import org.lwjgl.generator.*
 // void
 
 val ALCvoid = NativeType("ALCvoid", TypeMapping.VOID)
-val ALCvoid_p = PointerType(name = "ALCvoid", mapping = PointerMapping.DATA)
-val ALCvoid_pp = PointerType(name = "ALCvoid*", mapping = PointerMapping.DATA_POINTER)
+val ALCvoid_p = PointerType("ALCvoid", PointerMapping.DATA)
+val ALCvoid_pp = PointerType(ALCvoid_p)
 
 // numeric
 
@@ -24,32 +24,32 @@ val ALCuint = PrimitiveType("ALCuint", PrimitiveMapping.INT)
 val ALCfloat = PrimitiveType("ALCfloat", PrimitiveMapping.FLOAT)
 val ALCdouble = PrimitiveType("ALCdouble", PrimitiveMapping.DOUBLE)
 
-val ALCboolean_p = PointerType(name = "ALCboolean", mapping = PointerMapping.DATA_BOOLEAN)
-val ALCbyte_p = PointerType(name = "ALCbyte", mapping = PointerMapping.DATA_BYTE)
-val ALCubyte_p = PointerType(name = "ALCubyte", mapping = PointerMapping.DATA_BYTE)
-val ALCshort_p = PointerType(name = "ALCshort", mapping = PointerMapping.DATA_SHORT)
-val ALCushort_p = PointerType(name = "ALCushort", mapping = PointerMapping.DATA_SHORT)
-val ALCint_p = PointerType(name = "ALCint", mapping = PointerMapping.DATA_INT)
-val ALCuint_p = PointerType(name = "ALCuint", mapping = PointerMapping.DATA_INT)
-val ALCfloat_p = PointerType(name = "ALCfloat", mapping = PointerMapping.DATA_FLOAT)
-val ALCdouble_p = PointerType(name = "ALCdouble", mapping = PointerMapping.DATA_DOUBLE)
+val ALCboolean_p = PointerType("ALCboolean", PointerMapping.DATA_BOOLEAN)
+val ALCbyte_p = PointerType(ALCbyte)
+val ALCubyte_p = PointerType(ALCubyte)
+val ALCshort_p = PointerType(ALCshort)
+val ALCushort_p = PointerType(ALCushort)
+val ALCint_p = PointerType(ALCint)
+val ALCuint_p = PointerType(ALCuint)
+val ALCfloat_p = PointerType(ALCfloat)
+val ALCdouble_p = PointerType(ALCdouble)
 
 // custom numeric
 
 val ALCsizei = PrimitiveType("ALCsizei", PrimitiveMapping.INT)
 val ALCenum = PrimitiveType("ALCenum", PrimitiveMapping.INT)
 
-val ALCsizei_p = PointerType(name = "ALCsizei", mapping = PointerMapping.DATA_INT)
-val ALCenum_p = PointerType(name = "ALCenum", mapping = PointerMapping.DATA_INT)
+val ALCsizei_p = PointerType(ALCsizei)
+val ALCenum_p = PointerType(ALCenum)
 
 // strings
 
 val ALCchar_p = CharSequenceType("ALCchar")
-val ALCchar_pp = PointerType(name = "ALCchar*", mapping = PointerMapping.DATA_POINTER)
+val ALCchar_pp = PointerType(ALCchar_p)
 
 // misc
 
 val ALCdevice_p = PointerType("ALCdevice")
 val ALCcontext_p = PointerType("ALCcontext")
 
-val ALCvoidptr = PointerType(name = "void", mapping = PointerMapping.NAKED_POINTER) // see alcGetProcAddress
+val ALCvoidptr = PointerType("void", PointerMapping.NAKED_POINTER) // see alcGetProcAddress

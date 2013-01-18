@@ -125,8 +125,8 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		val classes = super.getClasses(object : Comparator<NativeClass> {
 			// Core functionality first, extensions after
 			public override fun compare(o1: NativeClass, o2: NativeClass): Int {
-				val isGL1 = o1.capName.startsWith("OpenGL")
-				val isGL2 = o2.capName.startsWith("OpenGL")
+				val isGL1 = o1.templateName.startsWith("GL")
+				val isGL2 = o2.templateName.startsWith("GL")
 
 				return if ( isGL1 xor isGL2 )
 					(if ( isGL1 ) -1 else 1)
