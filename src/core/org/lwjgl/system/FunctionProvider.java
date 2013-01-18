@@ -13,8 +13,19 @@ public interface FunctionProvider {
 	 *
 	 * @param functionName the function name to query
 	 *
-	 * @return the function address or 0L
+	 * @return the function address or 0L if the function is not supported
 	 */
 	long getFunctionAddress(String functionName);
+
+	/**
+	 * Returns the function address of the specified function. This
+	 * method should go straight to the underlying native OS library,
+	 * without using an library-specific API.
+	 *
+	 * @param functionName the function name to query
+	 *
+	 * @return the function address or 0L if the function is not supported
+	 */
+	long getLibraryFunctionAddress(String functionName);
 
 }

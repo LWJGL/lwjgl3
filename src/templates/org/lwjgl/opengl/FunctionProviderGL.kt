@@ -26,6 +26,28 @@ private val List<NativeClassFunction>.hasDeprecated: Boolean
 
 public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
+	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
+		if ( nativeClass.functions.hasDeprecated )
+			writer.print(", final boolean fc")
+	}
+
+	override fun getFunctionAddressCall(function: NativeClassFunction): String {
+		// wglGetProcAddress/glxGetProcAddress cannot be used to retrieve OpenGL 1.1 entry points.
+		val getFunctionAddress = if ( function.nativeClass.className == "GL11" )
+			"getLibraryFunctionAddress"
+		else
+			"getFunctionAddress"
+
+		// Do the fc check here, because getLibraryFunctionAddress will return an address
+		// even if the current context is forward compatible. We don't want that because
+		// we prefer to throw an exception instead of letting GL raise an error and it's
+		// also the only way to support the pseudo-fc mode.
+		return if ( function has deprecatedGL )
+			"fc ? 0L : provider.$getFunctionAddress(\"${function.name}\")"
+		else
+			"provider.$getFunctionAddress(\"${function.name}\")"
+	}
+
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -45,7 +67,9 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		println(") {")
 		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")
 
-		println("\n\t\tFunctions funcs = new Functions(provider);")
+		print("\n\t\tFunctions funcs = new Functions(provider")
+		if ( hasDeprecated ) print(", fc")
+		println(");")
 
 		print("\n\t\tboolean supported = ")
 		val funcIndent: String

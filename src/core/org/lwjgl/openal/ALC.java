@@ -4,15 +4,15 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.APIUtil;
 import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import java.util.*;
 
 import static org.lwjgl.openal.ALC10.*;
@@ -22,12 +22,12 @@ import static org.lwjgl.system.windows.WinBase.*;
 
 public class ALC {
 
-	static final FunctionProviderALC functionProvider;
+	static final FunctionProvider functionProvider;
 
 	static {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case LWJGLUtil.PLATFORM_WINDOWS:
-				functionProvider = new FunctionProviderALC() {
+				functionProvider = new FunctionProvider() {
 
 					private final WindowsLibrary OPENAL;
 					private final long alcGetProcAddress;
@@ -42,7 +42,7 @@ public class ALC {
 						WindowsLibrary lib = null;
 						for ( String path : paths ) {
 							try {
-								lib = new WindowsLibrary("OpenAL32.dll");
+								lib = new WindowsLibrary(path);
 								break;
 							} catch (Exception e) {
 								LWJGLUtil.log("Failed to load " + path + ": " + e.getMessage());
@@ -56,26 +56,28 @@ public class ALC {
 						// We'll use alcGetProcAddress for both core and extension entry points.
 						// To do that, we need to first grab the alcGetProcAddress function from
 						// the OpenAL native library.
-						alcGetProcAddress = GetProcAddress(OPENAL.getHandle(), "alcGetProcAddress");
+						alcGetProcAddress = getLibraryFunctionAddress("alcGetProcAddress");
 						if ( alcGetProcAddress == 0L ) {
 							lib.destroy();
 							throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
 						}
 					}
 
+					@Override
 					public long getFunctionAddress(final String functionName) {
 						final ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address = nalcGetProcAddress(OPENAL.getHandle(), memAddress(nameBuffer), alcGetProcAddress);
+						final long address = nalcGetProcAddress(OPENAL.getHandle(), memAddress(nameBuffer), alcGetProcAddress);
 						if ( address == 0L )
-							address = getLibraryFunctionAddress(functionName);
+							LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
 
 						return address;
 					}
 
+					@Override
 					public long getLibraryFunctionAddress(final String functionName) {
 						final long address = GetProcAddress(OPENAL.getHandle(), functionName);
-						if ( LWJGLUtil.DEBUG && address == 0L )
-							System.err.println("Failed to locate address for AL function " + functionName);
+						if ( address == 0L )
+							LWJGLUtil.log("Failed to locate address for AL function " + functionName);
 
 						return address;
 					}
@@ -186,19 +188,19 @@ public class ALC {
 		if ( GetIntegerv == 0L || GetString == 0L || IsExtensionPresent == 0L )
 			throw new IllegalStateException("Core ALC functions could not be found. Make sure that OpenAL has been loaded.");
 
-		final IntBuffer versionBuffer = BufferUtils.createIntBuffer(2);
+		final APIBuffer __buffer = APIUtil.apiBuffer();
 
-		nalcGetIntegerv(device, ALC_MAJOR_VERSION, 1, memAddress(versionBuffer), GetIntegerv);
-		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, memAddress(versionBuffer) + 4, GetIntegerv);
+		nalcGetIntegerv(device, ALC_MAJOR_VERSION, 1, __buffer.address(), GetIntegerv);
+		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, __buffer.address() + 4, GetIntegerv);
 
-		final int majorVersion = versionBuffer.get(0);
-		final int minorVersion = versionBuffer.get(1);
+		final int majorVersion = __buffer.intValue(0);
+		final int minorVersion = __buffer.intValue(4);
 
 		final int[][] ALC_VERSIONS = {
 			{ 0, 1 },  // ALC 1
 		};
 
-		final Set<String> supportedExtensions = new LinkedHashSet<String>();
+		final Set<String> supportedExtensions = new LinkedHashSet<String>(16);
 
 		for ( int major = 1; major <= ALC_VERSIONS.length; major++ ) {
 			int[] minors = ALC_VERSIONS[major - 1];
@@ -231,30 +233,9 @@ public class ALC {
 		if ( supported )
 			return functions;
 		else {
-			if ( LWJGLUtil.DEBUG )
-				System.err.println("[ALC] " + extension + " was reported as available but an entry point is missing.");
-
+			LWJGLUtil.log("[ALC] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
-	}
-
-	/**
-	 * Some OpenAL implementations will crash when alcGetProcAddress is called with
-	 * an unsupported function name (instead of returning 0L). We extend FunctionProvider
-	 * so that {@link AL} can grab a function pointer without going through ALC.
-	 */
-	interface FunctionProviderALC extends FunctionProvider {
-
-		/**
-		 * Returns a function pointer from the loaded OpenAL library, without
-		 * calling alcGetProcAddress first.
-		 *
-		 * @param functionName the function name to query
-		 *
-		 * @return the function address or 0L
-		 */
-		long getLibraryFunctionAddress(String functionName);
-
 	}
 
 }
