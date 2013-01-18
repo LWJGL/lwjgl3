@@ -31,7 +31,7 @@ final class GLChecks {
 				return "element array";
 			default:
 				// TODO: Add more?
-				throw new IllegalArgumentException(Integer.toHexString(binding));
+				throw new IllegalArgumentException(LWJGLUtil.toHexString(binding));
 		}
 	}
 
@@ -62,7 +62,7 @@ final class GLChecks {
 			case GL_DOUBLE:
 				return 8;
 			default:
-				throw new IllegalArgumentException(Integer.toHexString(type));
+				throw new IllegalArgumentException(LWJGLUtil.toHexString(type));
 		}
 	}
 
@@ -103,7 +103,7 @@ final class GLChecks {
 			case GL_BGRA_INTEGER:
 				return 4;
 			default:
-				throw new IllegalArgumentException(Integer.toHexString(format));
+				throw new IllegalArgumentException(LWJGLUtil.toHexString(format));
 		}
 	}
 

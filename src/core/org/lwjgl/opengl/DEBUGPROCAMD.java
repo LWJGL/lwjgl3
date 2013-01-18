@@ -4,6 +4,8 @@
  */
 package org.lwjgl.opengl;
 
+import org.lwjgl.LWJGLUtil;
+
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 
@@ -111,7 +113,7 @@ public class DEBUGPROCAMD {
 	}
 
 	private static String printUnknownToken(final int token) {
-		return "Unknown (0x" + Integer.toHexString(token).toUpperCase() + ")";
+		return "Unknown (0x" + LWJGLUtil.toHexString(token) + ")";
 	}
 
 }
