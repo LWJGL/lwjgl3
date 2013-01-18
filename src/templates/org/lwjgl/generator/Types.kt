@@ -34,6 +34,8 @@ public open class NativeType(
 public open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
 // Specialization for string characters.
 public class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
+// "typedef"
+public fun PrimitiveType(name: String, typedef: PrimitiveType): PrimitiveType = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
 
 // Pointers
 public open class PointerType(
@@ -44,6 +46,30 @@ public open class PointerType(
 	/** If true, the nativeType typedef includes a pointer. */
 	val includesPointer: Boolean = false
 ): NativeType(name, mapping)
+// Convert primitive to array
+public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
+	primitiveType.name,
+	when ( primitiveType.mapping as PrimitiveMapping ) {
+		PrimitiveMapping.BYTE -> PointerMapping.DATA_BYTE
+		PrimitiveMapping.SHORT -> PointerMapping.DATA_SHORT
+		PrimitiveMapping.INT -> PointerMapping.DATA_INT
+		PrimitiveMapping.LONG -> PointerMapping.DATA_LONG
+		PrimitiveMapping.FLOAT -> PointerMapping.DATA_FLOAT
+		PrimitiveMapping.DOUBLE -> PointerMapping.DATA_DOUBLE
+		else -> {
+			throw IllegalArgumentException()
+		}
+	}
+)
+// pointer to pointer
+public fun PointerType(pointerType: PointerType): PointerType =
+	PointerType(
+		if ( pointerType.includesPointer )
+			pointerType.name
+		else
+			"${pointerType.name}*",
+		PointerMapping.DATA_POINTER
+	)
 
 // Structs
 public class StructType(
@@ -74,7 +100,7 @@ public class CharSequenceType(
 // Callback functions
 public class CallbackType(
 	name: String,
-    val callback: CallbackFunction
+	val callback: CallbackFunction
 ): PointerType(name = name, includesPointer = true)
 
 // TODO: This is "too public", is there a better way?
@@ -92,7 +118,7 @@ public fun ReturnValue.func(
 	documentation: String,
 	convention: String,
 	async: Boolean,
-    vararg parameters: Parameter
+	vararg parameters: Parameter
 ): CallbackFunction {
 	val func = CallbackFunction(this, funcName, documentation, parameters, packageName, convention, async)
 	CallbackRegistry add func
@@ -120,7 +146,7 @@ public open class TypeMapping(
 public open class PrimitiveMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
-    val bytes: Int
+	val bytes: Int
 ): TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
 	class object {
@@ -140,7 +166,7 @@ public class CharMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
 	bytes: Int,
-    val charset: String
+	val charset: String
 ): PrimitiveMapping(jniFunctionType, javaMethodType, bytes) {
 
 	class object {
@@ -153,7 +179,7 @@ public class CharMapping(
 
 public open class PointerMapping(
 	javaMethodType: Class<out Any>,
-    val byteShift: String? = null
+	val byteShift: String? = null
 ): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {
 
 	class object {

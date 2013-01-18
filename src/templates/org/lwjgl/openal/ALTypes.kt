@@ -9,8 +9,8 @@ import org.lwjgl.generator.*
 // void
 
 val ALvoid = NativeType("ALvoid", TypeMapping.VOID)
-val ALvoid_p = PointerType(name = "ALvoid", mapping = PointerMapping.DATA)
-val ALvoid_pp = PointerType(name = "ALvoid*", mapping = PointerMapping.DATA_POINTER)
+val ALvoid_p = PointerType("ALvoid", PointerMapping.DATA)
+val ALvoid_pp = PointerType(ALvoid_p)
 
 // numeric
 
@@ -24,27 +24,27 @@ val ALuint = PrimitiveType("ALuint", PrimitiveMapping.INT)
 val ALfloat = PrimitiveType("ALfloat", PrimitiveMapping.FLOAT)
 val ALdouble = PrimitiveType("ALdouble", PrimitiveMapping.DOUBLE)
 
-val ALboolean_p = PointerType(name = "ALboolean", mapping = PointerMapping.DATA_BOOLEAN)
-val ALbyte_p = PointerType(name = "ALbyte", mapping = PointerMapping.DATA_BYTE)
-val ALubyte_p = PointerType(name = "ALubyte", mapping = PointerMapping.DATA_BYTE)
-val ALshort_p = PointerType(name = "ALshort", mapping = PointerMapping.DATA_SHORT)
-val ALushort_p = PointerType(name = "ALushort", mapping = PointerMapping.DATA_SHORT)
-val ALint_p = PointerType(name = "ALint", mapping = PointerMapping.DATA_INT)
-val ALuint_p = PointerType(name = "ALuint", mapping = PointerMapping.DATA_INT)
-val ALfloat_p = PointerType(name = "ALfloat", mapping = PointerMapping.DATA_FLOAT)
-val ALdouble_p = PointerType(name = "ALdouble", mapping = PointerMapping.DATA_DOUBLE)
+val ALboolean_p = PointerType("ALboolean", PointerMapping.DATA_BOOLEAN)
+val ALbyte_p = PointerType(ALbyte)
+val ALubyte_p = PointerType(ALubyte)
+val ALshort_p = PointerType(ALshort)
+val ALushort_p = PointerType(ALushort)
+val ALint_p = PointerType(ALint)
+val ALuint_p = PointerType(ALuint)
+val ALfloat_p = PointerType(ALfloat)
+val ALdouble_p = PointerType(ALdouble)
 
 // custom numeric
 
 val ALsizei = PrimitiveType("ALsizei", PrimitiveMapping.INT)
 val ALenum = PrimitiveType("ALenum", PrimitiveMapping.INT)
 
-val ALsizei_p = PointerType(name = "ALsizei", mapping = PointerMapping.DATA_INT)
-val ALenum_p = PointerType(name = "ALenum", mapping = PointerMapping.DATA_INT)
+val ALsizei_p = PointerType(ALsizei)
+val ALenum_p = PointerType(ALenum)
 
 // strings
 
 val ALchar_p = CharSequenceType("ALchar")
-val ALchar_pp = PointerType(name = "ALchar*", mapping = PointerMapping.DATA_POINTER)
+val ALchar_pp = PointerType(ALchar_p)
 
-val ALvoidptr = PointerType(name = "void", mapping = PointerMapping.NAKED_POINTER) // see alGetProcAddress
+val ALvoidptr = PointerType("void") // see alGetProcAddress
