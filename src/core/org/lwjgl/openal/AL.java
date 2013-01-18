@@ -29,8 +29,16 @@ public class AL {
 
 		public long getFunctionAddress(final String functionName) {
 			final ByteBuffer nameBuffer = memEncodeASCII(functionName);
-			return nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
+			final long address = nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
+			if ( address == 0L )
+				LWJGLUtil.log("Failed to locate address for AL function " + functionName);
+
+			return address;
 		}
+
+		@Override
+		public long getLibraryFunctionAddress(final String functionName) { throw new UnsupportedOperationException(); }
+
 	};
 
 	private static ALContext context;
@@ -69,7 +77,7 @@ public class AL {
 			{ 0, 1 }  // OpenAL 1
 		};
 
-		final Set<String> supportedExtensions = new LinkedHashSet<String>(128);
+		final Set<String> supportedExtensions = new LinkedHashSet<String>(32);
 
 		for ( int major = 1; major <= AL_VERSIONS.length; major++ ) {
 			int[] minors = AL_VERSIONS[major - 1];
@@ -107,9 +115,7 @@ public class AL {
 		if ( supported )
 			return functions;
 		else {
-			if ( LWJGLUtil.DEBUG )
-				System.err.println("[AL] " + extension + " was reported as available but an entry point is missing.");
-
+			LWJGLUtil.log("[AL] " + extension + " was reported as available but an entry point is missing.");
 			return null;
 		}
 	}

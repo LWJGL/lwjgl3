@@ -35,7 +35,7 @@ public final class Util {
 			case GL_STACK_OVERFLOW:
 				return "Command would cause a stack overflow";
 			case GL_STACK_UNDERFLOW:
-				return "Commnad would cause a stack underflow";
+				return "Command would cause a stack underflow";
 			case GL_OUT_OF_MEMORY:
 				return "Not enough memory left to execute command";
 			case GL_INVALID_FRAMEBUFFER_OPERATION:
@@ -43,7 +43,7 @@ public final class Util {
 			case GL_TABLE_TOO_LARGE:
 				return "The specified table is too large";
 			default:
-				return null;
+				return "Unknown error code";
 		}
 	}
 }

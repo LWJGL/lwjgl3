@@ -39,6 +39,9 @@ public abstract class FunctionProvider {
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance().${function.name};")
 	}
 
+	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {}
+	open fun getFunctionAddressCall(function: NativeClassFunction): String = "provider.getFunctionAddress(\"${function.name}\")"
+
 	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)
 	abstract fun generateCapabilities(writer: PrintWriter)
 
@@ -94,13 +97,13 @@ public class NativeClass(
 
 		if ( functionProvider != null && !functions.isEmpty() ) {
 			functionProvider.generateFunctionGetters(this, this@NativeClass)
-			generateFunctionsClass()
+			generateFunctionsClass(functionProvider)
 		}
 
 		print("}")
 	}
 
-	private fun PrintWriter.generateFunctionsClass() {
+	private fun PrintWriter.generateFunctionsClass(functionProvider: FunctionProvider) {
 		println("\t/** The {@link FunctionMap} class for {@code ${className}}. */")
 		println("\tpublic static final class Functions implements FunctionMap {\n")
 
@@ -125,9 +128,11 @@ public class NativeClass(
 			}
 		}
 
-		println("\n\t\tpublic Functions(final FunctionProvider provider) {")
+		print("\n\t\tpublic Functions(final FunctionProvider provider")
+		functionProvider.printFunctionsParams(this, this@NativeClass)
+		println(") {")
 		functions.forEach {
-			println("\t\t\t${it.name} = provider.getFunctionAddress(\"${it.name}\");")
+			println("\t\t\t${it.name} = ${functionProvider.getFunctionAddressCall(it)};")
 		}
 		println("\t\t}")
 		println("\n\t}\n")
