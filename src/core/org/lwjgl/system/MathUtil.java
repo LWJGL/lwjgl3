@@ -4,9 +4,11 @@
  */
 package org.lwjgl.system;
 
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 public final class MathUtil {
+
+    static Random random = new Random();
 
 	private MathUtil() {
 	}
@@ -24,7 +26,7 @@ public final class MathUtil {
 	}
 
 	public static int mathRandom(int range) {
-		return ThreadLocalRandom.current().nextInt(range + 1);
+		return random.nextInt(range + 1);
 	}
 
 }

@@ -28,6 +28,15 @@ val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
 val Int.L: Long
 	get() = this.toLong()
 
+val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
+	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
+	override fun nullValue(): Float = 0.toFloat()
+}
+
+// Extension property for float literals. This is needed due to how Kotlin handles negative literals atm.
+val Double.f: Float
+	get() = this.toFloat()
+
 public class ConstantBlock<T>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
