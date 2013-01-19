@@ -10,13 +10,13 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 
 private val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefix) ) {
+	get() = if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == "GL" )
 			"OpenGL${templateName.substring(2)}"
 		else
 			templateName
 	} else {
-		"${prefix}_$templateName"
+		"${prefixTemplate}_$templateName"
 	}
 
 private val List<NativeClassFunction>.hasDependencies: Boolean
@@ -170,14 +170,8 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-private fun String.addCapabilities(templateName: String, nativeSubPath: String, prefix: String, postfix: String, init: NativeClass.() -> Unit): NativeClass {
-	val extension = nativeClass("org.lwjgl.opengl", templateName, nativeSubPath, prefix, postfix, FunctionProviderGL, init)
-	FunctionProviderGL.addCapabilities(extension)
-	return extension
-}
-
 public fun String.nativeClassGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
-	addCapabilities(templateName, "", "GL", postfix, init)
+	nativeClass("org.lwjgl.opengl", templateName, "", "GL", "GL", postfix, FunctionProviderGL, init)
 
 public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
-	addCapabilities(templateName, "wgl", "WGL", postfix, init)
+	nativeClass("org.lwjgl.opengl", templateName, "wgl", "WGL", "WGL", postfix, FunctionProviderGL, init)

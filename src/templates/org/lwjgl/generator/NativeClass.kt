@@ -53,6 +53,7 @@ public class NativeClass(
 	nativeSubPath: String,
 	public val templateName: String = className,
 	public val prefix: String,
+	public val prefixTemplate: String,
 	public val postfix: String,
 	val functionProvider: FunctionProvider?
 ): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
@@ -196,11 +197,16 @@ public fun String.nativeClass(
 	templateName: String = this,
 	nativeSubPath: String = "",
 	prefix: String = "",
+	prefixTemplate: String = prefix,
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
 	init: NativeClass.() -> Unit
 ): NativeClass {
-	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, postfix, functionProvider)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixTemplate, postfix, functionProvider)
 	ext.init()
+
+	if ( functionProvider != null )
+		functionProvider.addCapabilities(ext)
+
 	return ext
 }

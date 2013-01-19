@@ -123,4 +123,4 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 // DSL Extensions
 
 public fun String.nativeClassAL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
-	addCapabilities(templateName, "", "AL", postfix, FunctionProviderAL, init)
+	nativeClass("org.lwjgl.openal", templateName, "", "AL", "AL", postfix, FunctionProviderAL, init)
