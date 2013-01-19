@@ -9,13 +9,13 @@ import java.util.Comparator
 import org.lwjgl.generator.*
 
 fun NativeClass.capName(core: String): String =
-	if ( templateName.startsWith(prefix) ) {
+	if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == core )
 			"Open$core${templateName.substring(core.size)}"
 		else
 			templateName
 	} else {
-		"${prefix}_$templateName"
+		"${prefixTemplate}_$templateName"
 	}
 
 val List<NativeClassFunction>.hasDependencies: Boolean
@@ -123,7 +123,11 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
 			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider)) != null;")
+				val provider = if ( extension.prefix == "AL" ) // see ALC_EXT_EFX
+					"AL.getFunctionProvider()"
+				else
+					"provider"
+				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, $provider)) != null;")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
@@ -135,11 +139,5 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-fun String.addCapabilities(templateName: String, nativeSubPath: String, prefix: String, postfix: String, functionProvider: FunctionProvider, init: NativeClass.() -> Unit): NativeClass {
-	val extension = nativeClass("org.lwjgl.openal", templateName, nativeSubPath, prefix, postfix, functionProvider, init)
-	functionProvider.addCapabilities(extension)
-	return extension
-}
-
 public fun String.nativeClassALC(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
-	addCapabilities(templateName, "", "ALC", postfix, FunctionProviderALC, init)
+	nativeClass("org.lwjgl.openal", templateName, "", "ALC", "ALC", postfix, FunctionProviderALC, init)
