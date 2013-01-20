@@ -139,11 +139,11 @@ public class TemplateFormatter {
 		}
 
 		try {
-			String outputText = radioConst.isSelected() ? formatConstants(inputText) : formatFunctions(inputText, prefix.getText());
+			String outputText = radioConst.isSelected() ? formatConstants(inputText, prefix.getText()) : formatFunctions(inputText, prefix.getText());
 
 			// Try to automatically detect the input type
 			if ( outputText.isEmpty() ) {
-				outputText = radioConst.isSelected() ? formatFunctions(inputText, prefix.getText()) : formatConstants(inputText);
+				outputText = radioConst.isSelected() ? formatFunctions(inputText, prefix.getText()) : formatConstants(inputText, prefix.getText());
 				// Got it, flip the selection
 				if ( !outputText.isEmpty() )
 					(radioConst.isSelected() ? radioFunc : radioConst).setSelected(true);
@@ -174,7 +174,7 @@ public class TemplateFormatter {
 	// ---[ CONSTANT FORMATTING ]----
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:\\s*[0-9A-Za-z_]+\\s+[0-9xA-Fa-f]+\\s*$)+)\\s*",
+		"([^:]+):\\s+((?:\\s*[0-9A-Za-z_]+\\s+[-x\\p{XDigit}]+\\s*$)+)\\s*",
 		Pattern.MULTILINE
 	);
 
@@ -183,10 +183,10 @@ public class TemplateFormatter {
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 
 	private static final Pattern CONSTANT_PATTERN = Pattern.compile(
-		"([0-9A-Za-z_]+)\\s+([0-9xA-Fa-f]+)"
+		"([0-9A-Za-z_]+)\\s+([-x\\p{XDigit}]+)"
 	);
 
-	private static String formatConstants(final String input) {
+	private static String formatConstants(final String input, final String prefix) {
 		final StringBuilder builder = new StringBuilder(input.length());
 
 		final Matcher blockMatcher = BLOCK_PATTERN.matcher(input);
@@ -236,8 +236,12 @@ public class TemplateFormatter {
 			while ( constantMatcher.find() ) {
 				if ( 0 < constCount++ ) builder.append(",\n");
 
+				String token = constantMatcher.group(1);
+				if ( token.startsWith(prefix + '_') )
+					token = token.substring(prefix.length() + 1);
+
 				builder.append("\t\t\"");
-				builder.append(constantMatcher.group(1));
+				builder.append(token);
 				builder.append("\" _ ");
 				builder.append(constantMatcher.group(2));
 			}
