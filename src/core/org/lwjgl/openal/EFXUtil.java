@@ -33,9 +33,6 @@ public final class EFXUtil {
      * @throws org.lwjgl.openal.OpenALException If OpenAL has not been created yet.
      */
     public static boolean isEfxSupported() {
-        if (!AL.isCreated()) {
-            throw new OpenALException("OpenAL has not been created.");
-        }
         return ALC.getCapabilities().ALC_EXT_EFX;
     }
 

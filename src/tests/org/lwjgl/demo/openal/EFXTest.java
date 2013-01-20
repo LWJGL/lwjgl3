@@ -47,18 +47,17 @@ public final class EFXTest {
     /**
      * Loads OpenAL and makes sure EXTEfx is supported.
      */
-    private static void setupEfx() throws Exception {
-        // Load and create OpenAL
-        if (!AL.isCreated()) {
-            AL.create();
-        }
+    private static ALContext setupEfx() throws Exception {
+        ALContext context = AL.create();
+
         // Query for Effect Extension
         if (!ALC.getCapabilities().ALC_EXT_EFX) {
+            AL.destroy(context);
             throw new Exception("No EXTEfx supported by driver.");
         } 
         System.out.println("EXTEfx found.");
 
-        AL.destroy();
+        return context;
     }
 
     /**
@@ -66,8 +65,6 @@ public final class EFXTest {
      * OpenAL SDK. Nothing is played in this method.
      */
     private static void silentTests() throws Exception {
-        setupEfx();
-
         final ALCContext deviceContext = ALC.createALCContextFromDevice(null);
 
         // Create context (only necessary if LWJGL context isn't sufficient, done as example)
@@ -196,7 +193,6 @@ public final class EFXTest {
         AL11.alSource3i(source, EXTEfx.AL_AUXILIARY_SEND_FILTER, auxEffectSlots[0], 0, EXTEfx.AL_FILTER_NULL);
         int error = AL10.alGetError();
         if (error != AL10.AL_NO_ERROR) {
-            System.out.println("error: " + AL10.alGetString(error));
             throw new Exception("Failed to configure Source Send 0");
         }
         System.out.println("Linked aux effect slot to soutce slot 0");
@@ -270,14 +266,14 @@ public final class EFXTest {
                 effects.length).put(effects).rewind();
         EXTEfx.alDeleteEffects(effectsBuf);
         EXTEfx.alDeleteFilters(filter);
-        AL.destroy();
+        AL.destroy(newContext);
     }
 
     /**
      * Plays a sound with various effects applied to it.
      */
     private static void playbackTest() throws Exception {
-        setupEfx();
+        ALContext alContext = setupEfx();
 
         // Create a source and buffer audio data
         final int source = AL10.alGenSources();
@@ -285,7 +281,7 @@ public final class EFXTest {
         WaveData waveFile = WaveData.create("Footsteps.wav");
         if (waveFile == null) {
             System.out.println("Failed to load Footsteps.wav! Skipping playback test.");
-            AL.destroy();
+            AL.destroy(alContext);
             return;
         }
         AL10.alBufferData(buffer, waveFile.format, waveFile.data, waveFile.samplerate);
@@ -348,14 +344,14 @@ public final class EFXTest {
         AL10.alSourcePlay(source);
         Thread.sleep(7500);
 
-        AL.destroy();
+        AL.destroy(alContext);
     }
 
     /**
      * Checks OpenAL for every EFX 1.0 effect and filter and prints the result to the console.
      */
     private static void efxUtilTest() throws Exception {
-        setupEfx();
+        ALContext alContext = setupEfx();
 
         System.out.println();
         System.out.println("Checking supported effects ...");
@@ -452,6 +448,8 @@ public final class EFXTest {
         } else {
             System.out.println("AL_FILTER_BANDPASS is NOT supported.");
         }
+
+        AL.destroy(alContext);
     }
 
     // TODO: Move to utils?
