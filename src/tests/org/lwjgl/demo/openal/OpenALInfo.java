@@ -28,32 +28,33 @@ public class OpenALInfo {
      * Runs the actual test, using supplied arguments
      */
     protected void execute(String[] args) {
+        ALContext alContext = null;
         try {
-            AL.create(null, 44100, 60, false);
-            checkForErrors();
+            alContext = AL.create(null, 44100, 60, false);
+            checkForErrors(alContext);
         } catch (Exception e) {
             die("Init", e.getMessage());
         }
 
-        printALCInfo();
-        printALInfo();
-        printEFXInfo();
+        printALCInfo(alContext);
+        printALInfo(alContext);
+        printEFXInfo(alContext);
 
-        checkForErrors();
+        checkForErrors(alContext);
 
-        AL.destroy();
+        AL.destroy(alContext);
     }
 
-    private void printALCInfo() {
-        ALContext alContext = AL.getCurrent();
+    private void printALCInfo(ALContext alContext) {
 
+        // we're running 1.1, so really no need to query for the 'ALC_ENUMERATION_EXT' extension
         if (ALC.getCapabilities().ALC_ENUMERATION_EXT) {
             if (ALC.getCapabilities().ALC_ENUMERATE_ALL_EXT) {
-                printDevices(0, EnumerateAllExt.ALC_ALL_DEVICES_SPECIFIER, "playback");
+                printDevices(alContext, 0, EnumerateAllExt.ALC_ALL_DEVICES_SPECIFIER, "playback");
             } else {
-                printDevices(0, ALC10.ALC_DEVICE_SPECIFIER, "playback");
+                printDevices(alContext, 0, ALC10.ALC_DEVICE_SPECIFIER, "playback");
             }
-            printDevices(0, ALC11.ALC_CAPTURE_DEVICE_SPECIFIER, "capture");
+            printDevices(alContext, 0, ALC11.ALC_CAPTURE_DEVICE_SPECIFIER, "capture");
         } else {
             System.out.println("No device enumeration available");
         }
@@ -68,7 +69,7 @@ public class OpenALInfo {
 
         int majorVersion = ALC10.alcGetInteger(0, ALC10.ALC_MAJOR_VERSION);
         int minorVersion = ALC10.alcGetInteger(0, ALC10.ALC_MINOR_VERSION);
-        checkForErrors();
+        checkForErrors(alContext);
 
         System.out.println("ALC version: " + majorVersion + "." + minorVersion);
 
@@ -80,10 +81,10 @@ public class OpenALInfo {
             }
             System.out.println("    " + extension);
         }
-        checkForErrors();
+        checkForErrors(alContext);
     }
 
-    private void printALInfo() {
+    private void printALInfo(ALContext alContext) {
         System.out.println("OpenAL vendor string: " + AL10.alGetString(AL10.AL_VENDOR));
         System.out.println("OpenAL renderer string: " + AL10.alGetString(AL10.AL_RENDERER));
         System.out.println("OpenAL version string: " + AL10.alGetString(AL10.AL_VERSION));
@@ -95,16 +96,15 @@ public class OpenALInfo {
             }
             System.out.println("    " + extension);
         }
-        checkForErrors();
+        checkForErrors(alContext);
     }
 
-    private void printEFXInfo() {
+    private void printEFXInfo(ALContext alContext) {
         if (!EFXUtil.isEfxSupported()) {
             System.out.println("EFX not available");
             return;
         }
 
-        ALContext alContext = AL.getCurrent();
         int efxMajor = ALC10.alcGetInteger(alContext.getDeviceContext().getDevice(), EXTEfx.ALC_EFX_MAJOR_VERSION);
         int efxMinor = ALC10.alcGetInteger(alContext.getDeviceContext().getDevice(), EXTEfx.ALC_EFX_MINOR_VERSION);
         if (ALC10.alcGetError(alContext.getDeviceContext().getDevice()) == ALC10.ALC_NO_ERROR) {
@@ -152,9 +152,9 @@ public class OpenALInfo {
         }
     }
 
-    private void printDevices(long contextDevice, int which, String kind) {
+    private void printDevices(ALContext alContext, long contextDevice, int which, String kind) {
         List<String> devices = ALC.getStringList(contextDevice, which);
-        checkForErrors();
+        checkForErrors(alContext);
 
         System.out.println("Available " + kind + " devices: ");
         for (String device : devices) {
@@ -166,9 +166,8 @@ public class OpenALInfo {
         System.out.println(kind + " error " + description + " occured");
     }
 
-    private void checkForErrors() {
+    private void checkForErrors(ALContext alContext) {
         {
-            ALContext alContext = AL.getCurrent();
             int error = ALC10.alcGetError(alContext.getDeviceContext().getDevice());
             if (error != ALC10.ALC_NO_ERROR) {
                 die("ALC", ALC10.alcGetString(alContext.getDeviceContext().getDevice(), error));
