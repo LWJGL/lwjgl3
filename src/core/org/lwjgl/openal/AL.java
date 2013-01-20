@@ -4,17 +4,22 @@
  */
 package org.lwjgl.openal;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.ALC10.alcCreateContext;
+import static org.lwjgl.openal.ALC11.ALC_ALL_DEVICES_SPECIFIER;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -120,4 +125,42 @@ public class AL {
 		}
 	}
 
+    public static ALContext getCurrent() {
+        return context;
+    }
+
+    public static boolean isCreated() {
+        return context != null;
+    }
+
+    public static void create() {
+        create(null, 44100, 60, false);
+    }
+
+    public static void destroy() {
+        ALCContext deviceContext = context.getDeviceContext();
+        context.destroy();
+        deviceContext.destroy();
+        context = null;
+    }
+
+    public static void create(String deviceArguments, int contextFrequency, int contextRefresh, boolean contextSynchronized) {
+        final ALCContext deviceContext = ALC.createALCContextFromDevice(deviceArguments);
+        final IntBuffer attribs = BufferUtils.createIntBuffer(16);
+
+        attribs.put(ALC_FREQUENCY);
+        attribs.put(contextFrequency);
+
+        attribs.put(ALC_REFRESH);
+        attribs.put(contextRefresh);
+
+        attribs.put(ALC_SYNC);
+        attribs.put(contextSynchronized ? ALC10.ALC_TRUE : ALC10.ALC_FALSE);
+
+        attribs.put(0);
+        attribs.flip();
+
+        final long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
+        context = new ALContext(deviceContext, contextHandle);
+    }
 }
