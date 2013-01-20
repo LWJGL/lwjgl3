@@ -184,8 +184,7 @@ public final class MemoryUtil {
 		while ( infPointer.get(size) != 0 )
 			size++;
 
-		infPointer.limit(size);
-		return infPointer.slice().order(infPointer.order());
+		return memSetupBuffer(infPointer, address, size);
 	}
 
 	/**
@@ -208,13 +207,12 @@ public final class MemoryUtil {
 
 		int size = 0;
 		while ( true ) {
-			if ( infPointer.get(size + 0) == 0 && infPointer.get(size + 1) == 0 )
+			if ( infPointer.getChar(size) == 0 )
 				break;
-			size++;
+			size += 2;
 		}
 
-		infPointer.limit(size);
-		return infPointer.slice().order(infPointer.order());
+		return memSetupBuffer(infPointer, address, size);
 	}
 
 	/**
