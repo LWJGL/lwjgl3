@@ -125,26 +125,17 @@ public class AL {
 		}
 	}
 
-    public static ALContext getCurrent() {
-        return context;
+    public static ALContext create() {
+        return create(null, 44100, 60, false);
     }
 
-    public static boolean isCreated() {
-        return context != null;
-    }
-
-    public static void create() {
-        create(null, 44100, 60, false);
-    }
-
-    public static void destroy() {
-        ALCContext deviceContext = context.getDeviceContext();
-        context.destroy();
+    public static void destroy(ALContext alContext) {
+        ALCContext deviceContext = alContext.getDeviceContext();
+        alContext.destroy();
         deviceContext.destroy();
-        context = null;
     }
 
-    public static void create(String deviceArguments, int contextFrequency, int contextRefresh, boolean contextSynchronized) {
+    public static ALContext create(String deviceArguments, int contextFrequency, int contextRefresh, boolean contextSynchronized) {
         final ALCContext deviceContext = ALC.createALCContextFromDevice(deviceArguments);
         final IntBuffer attribs = BufferUtils.createIntBuffer(16);
 
@@ -161,6 +152,6 @@ public class AL {
         attribs.flip();
 
         final long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
-        context = new ALContext(deviceContext, contextHandle);
+        return new ALContext(deviceContext, contextHandle);
     }
 }
