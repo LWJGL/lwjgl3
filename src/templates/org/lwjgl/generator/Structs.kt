@@ -134,7 +134,7 @@ public class Struct(
 			println(documentation)
 		println("public final class $className {\n")
 
-		println("\tpublic static final int SIZEOF = sizeof();")
+		println("\tpublic static final int SIZEOF;")
 
 		// Step 1: Member offset fields
 
@@ -150,7 +150,7 @@ public class Struct(
 	static {
 		final IntBuffer offsets = BufferUtils.createIntBuffer(${members.size});
 
-		offsets(memAddress(offsets));
+		SIZEOF = offsets(memAddress(offsets));
 
 """)
 		generateOffsetInit(members)
@@ -159,8 +159,7 @@ public class Struct(
 		println("\tprivate $className() {}")
 
 		print("""
-	private static native int sizeof();
-	private static native void offsets(long buffer);
+	private static native int offsets(long buffer);
 
 	public static ByteBuffer malloc() { return BufferUtils.createByteBuffer(SIZEOF); }
 
@@ -401,15 +400,12 @@ public class Struct(
 
 		println()
 
-		println("JNIEXPORT jint JNICALL Java_${nativeFileName}_sizeof(JNIEnv *env, jclass clazz) {")
-		println("\treturn sizeof($className);")
-		println("}\n")
-
-		println("JNIEXPORT void JNICALL Java_${nativeFileName}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
+		println("JNIEXPORT jint JNICALL Java_${nativeFileName}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
 		for ( i in 0..members.lastIndex ) {
 			println("\tbuffer[$i] = (jint)(offsetof($className, ${members[i].nativeName}));")
 		}
+		println("\n\treturn sizeof($className);")
 		print("}")
 	}
 
