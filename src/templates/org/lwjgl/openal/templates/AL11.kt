@@ -55,9 +55,9 @@ fun AL11() = "AL11".nativeClassAL("AL11") {
 
         ALuint.IN("source", "the source to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
-		ALfloat.IN("value1", "the first value"),
-		ALfloat.IN("value2", "the second value"),
-		ALfloat.IN("value3", "the third value")
+		ALint.IN("value1", "the first value"),
+		ALint.IN("value2", "the second value"),
+		ALint.IN("value3", "the third value")
 	)
 
 	ALvoid.func(
