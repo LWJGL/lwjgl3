@@ -11,7 +11,8 @@ import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.windows.WindowsLibrary;
 
-import java.util.LinkedHashSet;
+import java.nio.ByteBuffer;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -38,18 +39,13 @@ public class GL {
 
 					@Override
 					public long getFunctionAddress(final String functionName) {
-						final long address = wglGetProcAddress(functionName);
-						if ( address == 0L )
-							LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-
-						return address;
-					}
-
-					@Override
-					public long getLibraryFunctionAddress(final String functionName) {
-						final long address = GetProcAddress(OPENGL.getHandle(), functionName);
-						if ( address == 0L )
-							LWJGLUtil.log("Failed to locate address for GL 1.1 function " + functionName);
+						final ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = wglGetProcAddress(nameBuffer);
+						if ( address == 0L ) {
+							address = GetProcAddress(OPENGL.getHandle(), nameBuffer);
+							if ( address == 0L )
+								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+						}
 
 						return address;
 					}
@@ -94,9 +90,9 @@ public class GL {
 	public static ContextCapabilities createCapabilities(boolean forwardCompatible) {
 		// We don't have a current ContextCapabilities when this method is called
 		// so we have to use the native bindings directly.
-		final long GetError = functionProvider.getLibraryFunctionAddress("glGetError");
-		final long GetString = functionProvider.getLibraryFunctionAddress("glGetString");
-		final long GetIntegerv = functionProvider.getLibraryFunctionAddress("glGetIntegerv");
+		final long GetError = functionProvider.getFunctionAddress("glGetError");
+		final long GetString = functionProvider.getFunctionAddress("glGetString");
+		final long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
 		if ( GetError == 0L || GetString == 0L || GetIntegerv == 0L )
 			throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
@@ -141,7 +137,7 @@ public class GL {
 			{ 0, 1, 2 },        // OpenGL 4
 		};
 
-		final Set<String> supportedExtensions = new LinkedHashSet<String>(128);
+		final Set<String> supportedExtensions = new HashSet<String>(128);
 
 		for ( int major = 1; major <= GL_VERSIONS.length; major++ ) {
 			int[] minors = GL_VERSIONS[major - 1];
@@ -199,7 +195,7 @@ public class GL {
 			default:
 				throw new UnsupportedOperationException();
 		}
-		
+
 		return new ContextCapabilities(supportedExtensions, forwardCompatible);
 	}
 

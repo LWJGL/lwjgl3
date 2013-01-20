@@ -258,7 +258,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 	IntConstant.block(
 		"Returned by GetActiveUniformsiv and GetUniformBlockIndex.",
 
-		"INVALID_INDEX" _ 0xFFFFFFFF.toInt()
+		"INVALID_INDEX" _ 0xFFFFFFFF.i
 	)
 
 	GLvoid.func(
@@ -267,7 +267,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 
 		GLuint.IN("program", "the name of a program containing uniforms whose indices to query"),
 		AutoSize("uniformNames", "uniformIndices") _ GLsizei.IN("uniformCount", "the number of uniforms whose indices to query"),
-		mods(const, PointerArray(GLchar_p, "uniformName", "uniformCount")) _ GLchar_pp.IN(
+		mods(const, PointerArray(GLcharASCII_p, "uniformName", "uniformCount")) _ GLcharASCII_pp.IN(
 			"uniformNames",
 			"an array of pointers to buffers containing the names of the queried uniforms"
 		),
@@ -302,7 +302,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 			"length",
 			"the address of a variable that will receive the number of characters that were or would have been written to the buffer addressed by {@code uniformName}"
 		),
-		Return("bufSize", "length", "glGetActiveUniformsi(program, uniformIndex, GL_UNIFORM_NAME_LENGTH)") _ GLchar_p.OUT(
+		Return("bufSize", "length", "glGetActiveUniformsi(program, uniformIndex, GL_UNIFORM_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"uniformName",
 			"the address of a buffer into which the GL will place the name of the active uniform at {@code uniformIndex} within {@code program}"
 		)
@@ -313,7 +313,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		"Retrieves the index of a named uniform block.",
 
 		GLuint.IN("program", "the name of a program containing the uniform block"),
-		const _ GLchar_p.IN("uniformBlockName", "an array of characters to containing the name of the uniform block whose index to retrieve")
+		const _ GLcharASCII_p.IN("uniformBlockName", "an array of characters to containing the name of the uniform block whose index to retrieve")
 	)
 
 	GLvoid.func(
@@ -334,7 +334,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		GLuint.IN("uniformBlockIndex", " the index of the uniform block within {@code program}"),
 		AutoSize("uniformBlockName") _ GLsizei.IN("bufSize", "the size of the buffer addressed by {@code uniformBlockName}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
-		Return("bufSize", "length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)") _ GLchar_p.OUT(
+		Return("bufSize", "length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"uniformBlockName",
 			"an array of characters to receive the name of the uniform block at {@code uniformBlockIndex}"
 		)

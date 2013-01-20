@@ -47,7 +47,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"MAX_VARYING_COMPONENTS".expr<Int>("GL20.GL_MAX_VARYING_FLOATS")
 	)
 
-	(const _ GLubyteCharSequence).func(
+	(const _ GLubyteString).func(
 		"GetStringi",
 		"Queries indexed string state.",
 
@@ -276,7 +276,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the name of the program containing varying out variable whose binding to modify"),
 		GLuint.IN("colorNumber", "the color number to bind the user-defined varying out variable to"),
-		const _ GLchar_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
+		const _ GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
 	)
 
 	GLint.func(
@@ -284,7 +284,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Queries the bindings of color numbers to user-defined varying out variables.",
 
 		GLuint.IN("program", "the name of the program containing varying out variable whose binding to query"),
-		const _ GLchar_p.IN("name", "the name of the user-defined varying out variable whose binding to query")
+		const _ GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to query")
 	)
 
 	// NV_conditional_render
@@ -1187,7 +1187,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the target program object"),
 		AutoSize("varyings") _ GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-		mods(const, PointerArray(GLchar_p, "varying", "count")) _ GLchar_pp.IN(
+		mods(const, PointerArray(GLcharASCII_p, "varying", "count")) _ GLcharASCII_pp.IN(
 			"varyings",
 			"an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
 		),
@@ -1204,7 +1204,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
 		Check(1) _ GLsizei_p.OUT("size", "a variable that will receive the size of the varying"),
 		Check(1) _ GLenum_p.OUT("type", "a variable that will receive the type of the varying"),
-		Return("bufSize", "length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)") _ GLchar_p.OUT(
+		Return("bufSize", "length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)") _ GLcharASCII_p.OUT(
 			"name",
 			"a buffer into which will be written the name of the varying"
 		)

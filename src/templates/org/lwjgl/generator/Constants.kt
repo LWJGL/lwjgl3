@@ -24,16 +24,20 @@ val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
 	override fun nullValue(): Long = 0.toLong()
 }
 
-// Extension property for long literals. This is needed due to how Kotlin handles negative literals atm.
+val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
+	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
+	override fun nullValue(): Float = 0.0.f
+}
+
+// Extension property for integer literals.
+val Long.i: Int
+	get() = this.toInt()
+
+// Extension property for long literals.
 val Int.L: Long
 	get() = this.toLong()
 
-val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
-	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
-	override fun nullValue(): Float = 0.toFloat()
-}
-
-// Extension property for float literals. This is needed due to how Kotlin handles negative literals atm.
+// Extension property for float literals.
 val Double.f: Float
 	get() = this.toFloat()
 

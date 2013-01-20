@@ -17,7 +17,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 	IntConstant.block(
 		"General tokens.",
 
-		"INVALID" _ 0xFFFFFFFF.toInt(),
+		"INVALID" _ 0xFFFFFFFF.i,
 		"NONE" _ 0x0,
 		"FALSE" _ 0x0,
 		"TRUE" _ 0x1
@@ -41,14 +41,14 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 	    "DISTANCE_MODEL" _ 0xD000
 	).toJavaDocLinks() + " AL11#AL_SPEED_OF_SOUND"
 
-	IntConstant.block(
+	val StringQueries = IntConstant.block(
 		"String queries.",
 
 		"VENDOR" _ 0xB001,
 		"VERSION" _ 0xB002,
 		"RENDERER" _ 0xB003,
 		"EXTENSIONS" _ 0xB004
-	)
+	).toJavaDocLinks()
 
 	val DistanceModels = IntConstant.block(
 		"Distance attenuation models.",
@@ -245,11 +245,11 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		Check(1) _ ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
 	)
 
-	(const _ ALchar_p).func(
+	(const _ ALcharUTF8_p).func(
 		"GetString",
 		"Returns the string value of the specified parameter",
 
-		ALenum.IN("paramName", "the parameter to query")
+		ALenum.IN("paramName", "the parameter to query", StringQueries)
 	)
 
 	ALvoid.func(
@@ -695,7 +695,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF*vss)
 		"GetEnumValue",
 		"Returns the enumeration value of the specified enum.",
 
-		const _ ALchar_p.IN("enumName", "the enum name")
+		const _ ALcharASCII_p.IN("enumName", "the enum name")
 	)
 
 	ALvoidptr.func(
@@ -710,7 +710,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF*vss)
 		OpenAL DLL's as sound drivers.
 		""",
 
-		const _ ALchar_p.IN("funcName", "the function name")
+		const _ ALcharASCII_p.IN("funcName", "the function name")
 	)
 
 	ALCboolean.func(
@@ -722,7 +722,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF*vss)
 		upper-case internally (and will express extension names in upper-case).
 		""",
 
-		const _ ALCchar_p.IN("extName", "the extension name")
+		const _ ALcharASCII_p.IN("extName", "the extension name")
 	)
 
 }

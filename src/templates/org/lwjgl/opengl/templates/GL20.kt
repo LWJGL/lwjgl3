@@ -139,7 +139,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("shader", "the handle of the shader object whose source code is to be replaced"),
 		AutoSize("strings", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
-		mods(const, PointerArray(GLchar_p, "string", "count", "length")) _ GLchar_pp.IN(
+		mods(const, PointerArray(GLcharUTF8_p, "string", "count", "length")) _ GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to strings containing the source code to be loaded into the shader"
 		),
@@ -399,7 +399,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 			"maxLength",
 			"length",
 			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)"
-		) _ GLchar_p.OUT("infoLog", "an array of characters that is used to return the information log")
+		) _ GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
 	)
 
 	GLvoid.func(
@@ -413,7 +413,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_INFO_LOG_LENGTH)"
-		) _ GLchar_p.OUT("infoLog", "an array of characters that is used to return the information log")
+		) _ GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
 	)
 
 	GLvoid.func(
@@ -431,7 +431,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Returns the location of a uniform variable.",
 
 		GLuint.IN("program", "the program object to be queried"),
-		const _ GLchar_p.IN("name", "a null terminated string containing the name of the uniform variable whose location is to be queried")
+		const _ GLcharASCII_p.IN("name", "a null terminated string containing the name of the uniform variable whose location is to be queried")
 	)
 
 	GLvoid.func(
@@ -448,7 +448,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_ACTIVE_UNIFORM_MAX_LENGTH)"
-		) _ GLchar_p.OUT("name", "a null terminated string containing the name of the uniform variable")
+		) _ GLcharASCII_p.OUT("name", "a null terminated string containing the name of the uniform variable")
 	)
 
 	GLvoid.func(
@@ -476,7 +476,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("shader", "the shader object to be queried"),
 		AutoSize("source") _ GLsizei.IN("maxLength", "the size of the character buffer for storing the returned source code string"),
 		mods(Check(1), nullable) _ GLsizei_p.IN("length", "the length of the string returned in source (excluding the null terminator)"),
-		Return("maxLength", "length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)") _ GLchar_p.OUT("source", "an array of characters that is used to return the source code string")
+		Return("maxLength", "length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)") _ GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
 	)
 
 	// ARB_vertex_shader
@@ -664,7 +664,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("program", "the handle of the program object in which the association is to be made"),
 		GLuint.IN("index", "the index of the generic vertex attribute to be bound"),
-		const _ GLchar_p.IN("name", "a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound")
+		const _ GLcharASCII_p.IN("name", "a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound")
 	)
 
 	GLvoid.func(
@@ -684,7 +684,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"
-		) _ GLchar_p.OUT("name", "a null terminated string containing the name of the attribute variable")
+		) _ GLcharASCII_p.OUT("name", "a null terminated string containing the name of the attribute variable")
 	)
 
 	GLint.func(
@@ -692,7 +692,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Returns the location of an attribute variable.",
 
 		GLuint.IN("program", "the program object to be queried"),
-		const _ GLchar_p.IN("name", "a null terminated string containing the name of the attribute variable whose location is to be queried")
+		const _ GLcharASCII_p.IN("name", "a null terminated string containing the name of the attribute variable whose location is to be queried")
 	)
 
 	val GetVertexAttribiv = GLvoid.func(

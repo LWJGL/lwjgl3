@@ -62,7 +62,7 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output") {
 		GLenum.IN("severity", "the message severity", Severities),
 		GLuint.IN("id", "the message id"),
 		AutoSize("buf") _ GLsizei.IN("length", "the number of character in the message"),
-		const _ GLchar_p.IN("buf", "the message characters")
+		const _ GLcharUTF8_p.IN("buf", "the message characters")
 	)
 
 	GLvoid.func(
@@ -86,7 +86,7 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output") {
 		mods(Check("count"), nullable) _ GLuint_p.IN("severities", "an array of variables to receive the severities of the retrieved messages"),
 		mods(Check("count"), nullable) _ GLuint_p.IN("ids", "an array of variables to receive the ids of the retrieved messages"),
 		mods(Check("count"), nullable) _ GLsizei_p.IN("lengths", "an array of variables to receive the lengths of the retrieved messages"),
-		GLchar_p.IN("messageLog", "an array of characters that will receive the messages")
+		GLcharUTF8_p.IN("messageLog", "an array of characters that will receive the messages")
 	)
 
 }

@@ -181,7 +181,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		/* PIXELFORMATDESCRIPTOR flags for use in ChoosePixelFormat only */
 		"PFD_DEPTH_DONTCARE" _ 0x20000000,
 		"PFD_DOUBLEBUFFER_DONTCARE" _ 0x40000000,
-		"PFD_STEREO_DONTCARE" _ 0x80000000.toInt()
+		"PFD_STEREO_DONTCARE" _ 0x80000000.i
 	)
 
 	IntConstant.block(
