@@ -31,6 +31,8 @@ public abstract class FunctionProvider {
 		_classes add clazz
 	}
 
+	open val isLocal: Boolean = false
+
 	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
 		if ( function.hasParam { it has Callback.CLASS } ) {
 			writer.println("\t\tFunctions $INSTANCE = getInstance();")
@@ -93,7 +95,11 @@ public class NativeClass(
 
 		functions.forEach {
 			println("\t// --- [ ${it.name} ] ---\n")
-			it.generateMethods(this)
+			try {
+				it.generateMethods(this)
+			} catch (e: Exception) {
+				throw RuntimeException("Uncaught exception while generating method: $className.${it.name}", e)
+			}
 		}
 
 		if ( functionProvider != null && !functions.isEmpty() ) {
@@ -129,7 +135,7 @@ public class NativeClass(
 			}
 		}
 
-		print("\n\t\tpublic Functions(final FunctionProvider provider")
+		print("\n\t\tpublic Functions(final FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
 		functionProvider.printFunctionsParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {

@@ -440,7 +440,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
-		const _ GLchar_p.IN("name", "the name of the subroutine uniform whose index to query.")
+		const _ GLcharASCII_p.IN("name", "the name of the subroutine uniform whose index to query.")
 	)
 
 	GLuint.func(
@@ -449,7 +449,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine function index", SHADER_TYPES),
-		const _ GLchar_p.IN("name", "the name of the subroutine function whose index to query")
+		const _ GLcharASCII_p.IN("name", "the name of the subroutine function whose index to query")
 	)
 
 	GLvoid.func(
@@ -478,7 +478,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
 		mods(
 			Return("bufsize", "length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)")
-		) _ GLchar_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
+		) _ GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
 	)
 
 	GLvoid.func(
@@ -492,7 +492,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
 		mods(
 			Return("bufsize", "length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)")
-		) _ GLchar_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
+		) _ GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
 	)
 
 	GLvoid.func(

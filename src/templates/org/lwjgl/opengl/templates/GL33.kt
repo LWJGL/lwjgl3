@@ -43,7 +43,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		GLuint.IN("program", "the name of the program containing varying out variable whose binding to modify"),
 		GLuint.IN("colorNumber", "the color number to bind the user-defined varying out variable to"),
 		GLuint.IN("index", "the index of the color input to bind the user-defined varying out variable to"),
-		const _ GLchar_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
+		const _ GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
 	)
 
 	GLint.func(
@@ -51,7 +51,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		"Queries the bindings of color indices to user-defined varying out variables.",
 
 		GLuint.IN("program", "the name of the program containing varying out variable whose binding to query"),
-		const _ GLchar_p.IN("name", "the name of the user-defined varying out variable whose index to query")
+		const _ GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose index to query")
 	)
 
 	// ARB_occlusion_query2

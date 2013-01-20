@@ -514,7 +514,7 @@ public class NativeClassFunction(
 			if ( returns has MapPointer.CLASS )
 				print(", ${returns[MapPointer.CLASS].sizeExpression}")
 			else
-				throw IllegalStateException()
+				throw IllegalStateException("MapPointer modifier missing from method: $name")
 			println(");")
 		}
 

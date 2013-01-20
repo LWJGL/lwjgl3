@@ -18,10 +18,20 @@ fun NativeClass.capName(core: String): String =
 		"${prefixTemplate}_$templateName"
 	}
 
-val List<NativeClassFunction>.hasDependencies: Boolean
-	get() = this.any { it has DependsOn.CLASS }
-
 public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
+
+	override val isLocal: Boolean = true
+
+	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
+		if ( !nativeClass.templateName.startsWith("ALC") )
+			writer.print(", long device")
+	}
+
+	override fun getFunctionAddressCall(function: NativeClassFunction): String =
+		if ( function.nativeClass.templateName.startsWith("ALC") )
+			"provider.getFunctionAddress(\"${function.name}\")"
+		else
+			"provider.getFunctionAddress(device, \"${function.name}\")"
 
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
@@ -34,14 +44,14 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 
 		val functions = nativeClass.functions
 		val capName = nativeClass.capName("ALC")
+		val isExtension = !nativeClass.templateName.startsWith("ALC")
 
-		val hasDependencies = functions.hasDependencies
-
-		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProvider provider")
-		println(") {")
+		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
-		println("\n\t\tFunctions funcs = new Functions(provider);")
+		print("\n\t\tFunctions funcs = new Functions(provider")
+		if ( isExtension ) print(", device")
+		println(");")
 
 		print("\n\t\tboolean supported = ")
 		val funcIndent: String
@@ -102,7 +112,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			public override fun equals(obj: Any?): Boolean = false
 		})
 
-		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
+		val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }
 		val alignment = classesWithFunctions.map { it.className.size }.fold(0) { (left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}.Functions")
@@ -118,16 +128,12 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCCapabilities(final Set<String> ext) {")
-		println("\t\tfinal FunctionProvider provider = ALC.getFunctionProvider();\n")
+		println("\n\tALCCapabilities(final long device, final Set<String> ext) {")
+		println("\t\tfinal FunctionProviderLocal provider = ALC.getFunctionProvider();\n")
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
-			if ( extension.hasNativeFunctions ) {
-				val provider = if ( extension.prefix == "AL" ) // see ALC_EXT_EFX
-					"AL.getFunctionProvider()"
-				else
-					"provider"
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, $provider)) != null;")
+			if ( extension.hasNativeFunctions && extension.prefix == "ALC" ) {
+				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider${if ( extension.templateName.startsWith("ALC") ) "" else ", device"})) != null;")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
