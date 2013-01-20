@@ -75,13 +75,14 @@ final class MemoryAccessSun {
 			return unsafe.getLong(buffer, address);
 		}
 
-		private void setup(final Buffer buffer, final long address, final int capacity, final long parentField) {
+		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final long parentField) {
 			unsafe.putLong(buffer, this.address, address);
 			unsafe.putInt(buffer, this.capacity, capacity);
 
 			unsafe.putObject(buffer, parentField, null);
 
 			buffer.clear();
+			return buffer;
 		}
 
 		public ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
@@ -89,38 +90,31 @@ final class MemoryAccessSun {
 			if ( LWJGLUtil.DEBUG && unsafe.getObject(buffer, cleaner) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
-			setup(buffer, address, capacity, byteBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
 		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, shortBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
 		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, charBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, charBufferParent);
 		}
 
 		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, intBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, intBufferParent);
 		}
 
 		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, longBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, longBufferParent);
 		}
 
 		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, floatBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
 		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, doubleBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
 		public void memSet(final long dst, final int value, final int bytes) {
@@ -208,7 +202,7 @@ final class MemoryAccessSun {
 			return address.getLong(buffer);
 		}
 
-		private void setup(final Buffer buffer, final long address, final int capacity, final FieldAccessor parentField) {
+		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final FieldAccessor parentField) {
 			try {
 				this.address.setLong(buffer, address);
 				this.capacity.setInt(buffer, capacity);
@@ -219,6 +213,7 @@ final class MemoryAccessSun {
 			}
 
 			buffer.clear();
+			return buffer;
 		}
 
 		ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
@@ -226,38 +221,31 @@ final class MemoryAccessSun {
 			if ( LWJGLUtil.DEBUG && cleaner.get(buffer) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
-			setup(buffer, address, capacity, byteBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
 		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, shortBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
 		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, charBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, charBufferParent);
 		}
 
 		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, intBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, intBufferParent);
 		}
 
 		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, longBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, longBufferParent);
 		}
 
 		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, floatBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
 		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, doubleBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
 	}
