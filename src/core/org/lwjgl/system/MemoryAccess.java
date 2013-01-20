@@ -227,7 +227,7 @@ final class MemoryAccess {
 			}
 		}
 
-		private void setup(final Buffer buffer, final long address, final int capacity, final Field parentField) {
+		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final Field parentField) {
 			try {
 				this.address.setLong(buffer, address);
 				this.capacity.setInt(buffer, capacity);
@@ -238,6 +238,7 @@ final class MemoryAccess {
 			}
 
 			buffer.clear();
+			return buffer;
 		}
 
 		ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
@@ -251,38 +252,31 @@ final class MemoryAccess {
 				}
 			}
 
-			setup(buffer, address, capacity, byteBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
 		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, shortBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
 		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 1, charBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, charBufferParent);
 		}
 
 		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, intBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, intBufferParent);
 		}
 
 		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, longBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, longBufferParent);
 		}
 
 		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 2, floatBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
 		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
-			setup(buffer, address, capacity << 3, doubleBufferParent);
-			return buffer;
+			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
 	}

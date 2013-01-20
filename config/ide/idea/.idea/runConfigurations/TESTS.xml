@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TESTS" type="TestNG" factoryName="TestNG">
+  <configuration default="false" name="TESTS" type="TestNG" factoryName="TestNG" show_console_on_std_out="true" show_console_on_std_err="true">
     <module name="Tests" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" value="" />
