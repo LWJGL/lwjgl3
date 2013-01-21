@@ -17,7 +17,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 	IntConstant.block(
 		"General tokens.",
 
-		"INVALID" _ 0xFFFFFFFF.toInt(),
+		"INVALID" _ 0xFFFFFFFF.i,
 		"FALSE" _ 0x0,
 		"TRUE" _ 0x1
 	)
@@ -67,7 +67,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		device configuration. If NULL is specified, the implementation will provide an implementation specific default.
 		""",
 
-		mods(nullable, const) _ ALCchar_p.IN("deviceSpecifier", "the requested device or device configuration")
+		mods(nullable, const) _ ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
 	)
 
 	ALCboolean.func(
@@ -170,7 +170,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		""",
 
 		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALCchar_p.IN("extName", "the extension name")
+		const _ ALCcharASCII_p.IN("extName", "the extension name")
 	)
 
 	ALCvoidptr.func(
@@ -186,7 +186,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		""",
 
 		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALchar_p.IN("funcName", "the function name")
+		const _ ALcharASCII_p.IN("funcName", "the function name")
 	)
 
 	ALCenum.func(
@@ -199,7 +199,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		""",
 
 		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALCchar_p.IN("enumName", "the enum name")
+		const _ ALCcharASCII_p.IN("enumName", "the enum name")
 	)
 
 	ALCenum.func(
@@ -216,7 +216,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		ALCdevice_p.IN("deviceHandle", "the device to query")
 	)
 
-	(const _ ALCchar_p).func(
+	(const _ ALCcharUTF8_p).func(
 		"GetString",
 		"""
 		Obtains string value(s) from ALC.

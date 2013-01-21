@@ -12,7 +12,7 @@ fun ALC_EXT_EFX() = "EXTEfx".nativeClass(
     templateName = "EXT_EFX",
     prefix = "AL",
     prefixTemplate = "ALC",
-    functionProvider = FunctionProviderALC
+    functionProvider = FunctionProviderAL
 )   {
 
 	nativeImport (
@@ -1031,4 +1031,6 @@ fun ALC_EXT_EFX() = "EXTEfx".nativeClass(
 		ALenum.IN("param", "the parameter to query"),
 		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
 	)
+
+	FunctionProviderALC.addCapabilities(this)
 }

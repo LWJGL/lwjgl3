@@ -155,7 +155,7 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 		"GEOMETRY_SHADER_BIT" _ 0x00000004,
 		"TESS_CONTROL_SHADER_BIT" _ 0x00000008,
 		"TESS_EVALUATION_SHADER_BIT" _ 0x00000010,
-		"ALL_SHADER_BITS" _ 0xFFFFFFFF.toInt()
+		"ALL_SHADER_BITS" _ 0xFFFFFFFF.i
 	)
 
 	IntConstant.block(
@@ -227,7 +227,7 @@ if (shader) {
 
 		GLenum.IN("type", "the type of shader to create"),
 		GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-		mods(const, PointerArray(GLchar_p, "string", "count")) _ GLchar_pp.IN(
+		mods(const, PointerArray(GLcharUTF8_p, "string", "count")) _ GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to source code strings from which to create the program object"
 		)
@@ -833,7 +833,7 @@ if (shader) {
 		GLuint.IN("pipeline", "the name of a program pipeline object from which to retrieve the info log"),
 		AutoSize("infoLog") _ GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
-		Return("bufSize", "length", "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)") _ GLchar_p.OUT(
+		Return("bufSize", "length", "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)") _ GLcharUTF8_p.OUT(
 			"infoLog",
 			" an array of characters into which will be written the info log for {@code pipeline}"
 		)

@@ -14,7 +14,11 @@ class CallbackRegistry {
 
 		fun generate() {
 			INSTANCE.callbacks.forEach {
-				generate(it)
+				try {
+					generate(it)
+				} catch (e: Exception) {
+					throw RuntimeException("Uncaught exception while generating callback function: ${it.packageName}.${it.name}", e)
+				}
 			}
 		}
 

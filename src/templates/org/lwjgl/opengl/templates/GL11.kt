@@ -750,7 +750,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"ClientAttribMask",
 		"CLIENT_PIXEL_STORE_BIT" _ 0x00000001,
 		"CLIENT_VERTEX_ARRAY_BIT" _ 0x00000002,
-		"CLIENT_ALL_ATTRIB_BITS" _ 0xffffffff.toInt()
+		"CLIENT_ALL_ATTRIB_BITS" _ 0xffffffff.i
 	)
 
 	IntConstant.block(
@@ -1757,7 +1757,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(Check(128), PIXEL_PACK_BUFFER) _ GLvoid_p.OUT("pattern", "an array in which to place the returned data")
 	)
 
-	(const _ GLubyteCharSequence).func(
+	(const _ GLubyteString).func(
 		"GetString",
 		"Return strings describing properties of the current GL context.",
 
