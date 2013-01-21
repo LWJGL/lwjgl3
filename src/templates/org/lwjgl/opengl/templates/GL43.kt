@@ -340,7 +340,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
 		GLenum.IN("severity", "the severity of the debug messages to insert"),
 		AutoSize("message") _ GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-		const _ GLchar_p.IN("message", "a character array containing the message to insert")
+		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
 	GLvoid.func(
@@ -365,7 +365,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		mods(Check("count"), nullable) _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
 		mods(Check("count"), nullable) _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
 		mods(Check("count"), nullable) _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-		nullable _ GLchar_p.OUT("messageLog", "an array of characters that will receive the messages")
+		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
 	GLvoid.func(
@@ -375,7 +375,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("source", "the source of the debug message", DebugSources),
 		GLuint.IN("id", "the identifier of the message"),
 		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-		const _ GLchar_p.IN("message", "a string containing the message to be sent to the debug output stream")
+		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
 	GLvoid.func(
@@ -389,7 +389,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		),
 		GLuint.IN("name", "the name of the object to label"),
 		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLchar_p.IN("label", "a string containing the label to assign to the object")
+		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	GLvoid.func(
@@ -404,7 +404,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLchar_p.OUT("label", "a string that will receive the object label")
+		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	GLvoid.func(
@@ -413,7 +413,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		voidptr.IN("ptr", "a pointer identifying a sync object"),
 		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLchar_p.IN("label", "a string containing the label to assign to the object")
+		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	GLvoid.func(
@@ -423,7 +423,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLchar_p.OUT("label", "a string that will receive the object label")
+		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	// ARB_explicit_uniform_location
@@ -849,7 +849,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {Wcode name}", ProgramInterfaces),
-		const _ GLchar_p.IN("name", "the name of the resource to query the index of")
+		const _ GLcharUTF8_p.IN("name", "the name of the resource to query the index of")
 	)
 
 	GLvoid.func(
@@ -861,7 +861,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("index", "the index of the resource within {@code programInterface} of {@code program}"),
 		AutoSize("name") _ GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
-		Return("bufSize", "length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLchar_p.OUT(
+		Return("bufSize", "length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"name",
 			"a character array into which will be written the name of the resource"
 		)
@@ -887,7 +887,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}"),
-		const _ GLchar_p.IN("name", "the name of the resource to query the location of")
+		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
 
 	GLint.func(
@@ -900,7 +900,7 @@ for ( i = 0; i < primcount; i++ ) {
 			"a token identifying the interface within {@code program} containing the resource named {@code name}.",
 			"#GL_PROGRAM_OUTPUT"
 		),
-		const _ GLchar_p.IN("name", "the name of the resource to query the location of")
+		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
 
 	// ARB_shader_storage_buffer_object

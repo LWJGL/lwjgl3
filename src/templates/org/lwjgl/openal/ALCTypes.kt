@@ -44,8 +44,11 @@ val ALCenum_p = PointerType(ALCenum)
 
 // strings
 
-val ALCchar_p = CharSequenceType("ALCchar")
-val ALCchar_pp = PointerType(ALCchar_p)
+val ALCcharASCII_p = CharSequenceType(name = "ALCchar", charMapping = CharMapping.ASCII)
+val ALCcharASCII_pp = PointerType(ALCcharASCII_p)
+
+val ALCcharUTF8_p = CharSequenceType(name = "ALCchar", charMapping = CharMapping.UTF8)
+val ALCcharUTF8_pp = PointerType(ALCcharUTF8_p)
 
 // misc
 

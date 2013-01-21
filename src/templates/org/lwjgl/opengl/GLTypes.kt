@@ -53,10 +53,13 @@ val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
 
 // strings
 
-val GLchar_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLchar_pp = PointerType(GLchar_p)
+val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
+val GLcharASCII_pp = PointerType(GLcharASCII_p)
 
-val GLubyteCharSequence = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
+val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
+val GLcharUTF8_pp = PointerType(GLcharUTF8_p)
+
+val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
 // misc
 

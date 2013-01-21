@@ -22,8 +22,6 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		val functions = nativeClass.functions
 		val capName = nativeClass.capName("AL")
 
-		val hasDependencies = functions.hasDependencies
-
 		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProvider provider")
 		println(") {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
@@ -100,18 +98,32 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 
 		println("\n\t/** Indicates whether an OpenAL functionality is available or not. */")
 		println("\tpublic final boolean")
-		for ( i in classes.indices ) {
-			print("\t\t${classes[i].capName("AL")}")
-			println(if ( i == classes.lastIndex ) ";" else ",")
+		val capClasses = classes.filter { it.prefixTemplate == "AL" }
+		for ( i in capClasses.indices ) {
+			print("\t\t${capClasses[i].capName("AL")}")
+			println(if ( i == capClasses.lastIndex ) ";" else ",")
 		}
 
 		println("\n\tALCapabilities(final Set<String> ext) {")
 		println("\t\tfinal FunctionProvider provider = AL.getFunctionProvider();\n")
 		for ( extension in classes ) {
-			val capName = extension.capName("AL")
+			val hasCap = extension.prefixTemplate == "AL"
+			val capName = extension.capName(extension.prefixTemplate)
+
+			if ( !hasCap ) {
+				println("\t\tif ( ${extension.prefixTemplate}.getCapabilities().$capName )")
+				println("\t\t\text.add(\"$capName\");")
+			}
+
 			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider)) != null;")
-			} else
+				print("\t\t")
+				if ( hasCap )
+					print("$capName = (")
+				print("__${extension.className} = ${extension.className}.create(ext, provider)")
+				if ( hasCap )
+					print(") != null")
+				println(";")
+			} else if ( hasCap )
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")

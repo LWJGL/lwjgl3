@@ -17,7 +17,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	IntConstant.block(
 		"Window Styles",
 		"WS_OVERLAPPED" _ 0x00000000,
-		"WS_POPUP" _ 0x80000000.toInt(),
+		"WS_POPUP" _ 0x80000000.i,
 		"WS_CHILD" _ 0x40000000,
 		"WS_MINIMIZE" _ 0x20000000,
 		"WS_VISIBLE" _ 0x10000000,
@@ -520,7 +520,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	IntConstant.block(
 		"May be used in {@link #CreateWindowEx} for the x, y, width, height parameters.",
-		"CW_USEDEFAULT" _ 0x80000000.toInt()
+		"CW_USEDEFAULT" _ 0x80000000.i
 	)
 
 	IntConstant.block(

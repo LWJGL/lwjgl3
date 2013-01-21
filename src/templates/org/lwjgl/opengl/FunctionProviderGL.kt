@@ -32,20 +32,14 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 	}
 
 	override fun getFunctionAddressCall(function: NativeClassFunction): String {
-		// wglGetProcAddress/glxGetProcAddress cannot be used to retrieve OpenGL 1.1 entry points.
-		val getFunctionAddress = if ( function.nativeClass.className == "GL11" )
-			"getLibraryFunctionAddress"
-		else
-			"getFunctionAddress"
-
-		// Do the fc check here, because getLibraryFunctionAddress will return an address
+		// Do the fc check here, because getFunctionAddress will return an address
 		// even if the current context is forward compatible. We don't want that because
 		// we prefer to throw an exception instead of letting GL raise an error and it's
 		// also the only way to support the pseudo-fc mode.
 		return if ( function has deprecatedGL )
-			"fc ? 0L : provider.$getFunctionAddress(\"${function.name}\")"
+			"fc ? 0L : provider.getFunctionAddress(\"${function.name}\")"
 		else
-			"provider.$getFunctionAddress(\"${function.name}\")"
+			"provider.getFunctionAddress(\"${function.name}\")"
 	}
 
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
