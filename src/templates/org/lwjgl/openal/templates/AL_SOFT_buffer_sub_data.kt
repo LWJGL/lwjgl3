@@ -1,0 +1,70 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+package org.lwjgl.openal.templates
+
+import org.lwjgl.generator.*
+import org.lwjgl.openal.*
+
+fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClass(
+    packageName = "org.lwjgl.openal",
+    templateName = "SOFT_buffer_sub_data",
+    prefix = "AL",
+    prefixTemplate = "AL",
+    functionProvider = FunctionProviderAL
+)   {
+
+	nativeImport (
+		"OpenAL.h"
+	)
+
+	javaDoc("bindings to AL_SOFT_buffer_sub_data extension.")
+
+    val SourceParamNameParameters = IntConstant.block(
+    	"Accepted by the <paramName> parameter of alGetSourceiv and alGetSourcefv.",
+
+        "BYTE_RW_OFFSETS_SOFT" _ 0x1031,
+        "SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
+    ).toJavaDocLinks();
+
+	ALCvoid.func(
+		"BufferSubDataSOFT",
+		"""
+		To update a section of buffered sample data, use the function alBufferSubDataSOFT.
+        The named <buffer> may be attached to a source (either queued or by the
+        AL_BUFFER property), and the source does not need to be stopped, paused,
+        or in an initial state to be modified.
+
+        The <offset> value is the number of bytes from the start of the original
+        data, and <length> is the number of bytes of the original data, to modify.
+        If either <offset> or <length> are negative, or if the sum of <offset> and
+        <length> reaches beyond the end of the buffer, an AL_INVALID_VALUE error
+        is generated. For compressed formats, <length> and <offset> must be block
+        aligned. Complex compressed formats (such as those with no constant block
+        alignment), may not be modified and will result in an AL_INVALID_ENUM
+        error.
+
+        The specified <format> is the sample format of the passed <data>. The
+        passed format must exactly match the format passed to alBufferData, or an
+        AL_INVALID_ENUM error is generated.
+
+
+        When modifying a playing source's buffer, an application must take care to
+        not modify the section that is currently being played. The read-only
+        source attributes
+
+          AL_BYTE_RW_OFFSETS_SOFT
+          AL_SAMPLE_RW_OFFSETS_SOFT
+
+        may be used to retrieve the read and write cursor offsets. Behavior is
+        undefined if an attempt is made to modify buffer data between the read and
+        write offsets.
+        """,
+        ALuint.IN("buffer", "ID of the buffer to modify"),
+		ALenum.IN("format", "sample format of the passed data"),
+        const _ ALCvoid_p.IN("data", "existing buffer data to write to"),
+        ALCsizei.IN("offset", "number of bytes from the start of the original data"),
+        ALCsizei.IN("length", "number of bytes of the original data, to modify")
+	)
+}
