@@ -118,8 +118,9 @@
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
 		<javac debug="yes" destdir="${lwjgl.bin}/Core" encoding="utf8" source="1.5" target="1.5" taskname="Core java compilation">
-			<src path="${lwjgl.src}/core/"/>
-			<src path="${lwjgl.generated}/java"/>
+			<src path="${lwjgl.src.core}"/>
+            <src path="${lwjgl.src.util}/"/>
+			<src path="${lwjgl.generated.java}"/>
 			<include name="org/lwjgl/**"/>
 			<compilerarg value="-XDignore.symbol.file=true"/> <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 		</javac>
