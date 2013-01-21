@@ -74,7 +74,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClass(
         attributes. Attempting to query them will result in an ALC_INVALID_ENUM
         error.
 		""",
-		const _ ALCchar_p.IN("deviceName", "name of the device to open")
+		const _ ALCcharUTF8_p.IN("deviceName", "name of the device to open")
 	)
 
 	ALCboolean.func(
