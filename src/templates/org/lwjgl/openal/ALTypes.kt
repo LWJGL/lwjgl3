@@ -34,6 +34,9 @@ val ALuint_p = PointerType(ALuint)
 val ALfloat_p = PointerType(ALfloat)
 val ALdouble_p = PointerType(ALdouble)
 
+val ALint64SOFT = PrimitiveType("ALint64SOFT", PrimitiveMapping.LONG)
+val ALint64SOFT_p = PointerType(ALint64SOFT)
+
 // custom numeric
 
 val ALsizei = PrimitiveType("ALsizei", PrimitiveMapping.INT)
