@@ -2,6 +2,15 @@
 	<!-- ================================================================== -->
 	<!-- Global properties for build 																				-->
 	<!-- ================================================================== -->
+	<property environment="env"/>
+
+	<fail unless="env.JAVA6_HOME" message="Please set an environment variable named JAVA6_HOME that points to the Java 6 SDK."/>
+	<path id="java6.boot.classpath">
+		<fileset dir="${env.JAVA6_HOME}/jre/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
 	<property name="lwjgl.src" location="src"/>
 	<property name="lwjgl.generated" location="generated"/>
 	<property name="lwjgl.bin" location="bin"/>

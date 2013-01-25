@@ -1,9 +1,9 @@
-<project name="lwjgl native code, native code" basedir="../../bin" default="compile">
-	<property name="dest" location="lwjgl${os.arch}"/>
+<project name="lwjgl native code" basedir="../.." default="compile">
+	<property name="dest" location="bin/lwjgl${os.arch}" relative="true"/>
 
-	<property name="src" location="../src"/>
-	<property name="src.native" location="${src}/native"/>
-	<property name="src.generated" location="../generated/native"/>
+	<property name="src" location="src" relative="true"/>
+	<property name="src.native" location="${src}/native" relative="true"/>
+	<property name="src.generated" location="generated/native" relative="true"/>
 
 	<property environment="env"/>
 
@@ -19,22 +19,26 @@
 	</condition>
 
 	<target name="compile_dir">
-		<apply dir="${dest}" failonerror="true" executable="cl" dest="${dest}" skipemptyfilesets="true">
-			<arg line="/Ox /W2 /nologo /Ox /Ob2 /Oi /Ot /Oy /FD /EHsc /MT /Gy /W2 /nologo /c"/>
+		<apply dir="${dest}" failonerror="true" executable="cl" dest="${dest}" skipemptyfilesets="true" parallel="true">
+			<arg line="/c /W3 /EHsc /Ox /Gy /MT /MP /nologo"/>
 			<arg value="/I${sdkhome}\include"/>
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
-			<arg value="/I${src.native}\system"/>
-			<arg value="/I${src.native}\system\windows"/>
-			<arg value="/I${src.native}\openal"/>
-			<arg value="/I${src.native}\opengl"/>
-			<arg value="/I${src.native}\opengl\wgl"/>
+			<!-- Paths relative to ${dest} -->
+			<arg value="/I..\..\${src.native}\system"/>
+			<arg value="/I..\..\${src.native}\system\windows"/>
+			<arg value="/I..\..\${src.native}\openal"/>
+			<!--<arg value="/I..\..\${src.native}\opencl"/>-->
+			<arg value="/I..\..\${src.native}\opengl"/>
+			<arg value="/I..\..\${src.native}\opengl\wgl"/>
 			<srcfile/>
+			<!-- Paths relative to ${basedir} -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/openal" includes="*.c"/>
+			<!--<fileset dir="${src.generated}/opencl" includes="*.c"/>-->
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>
@@ -56,20 +60,11 @@
 		</apply>
 	</target>
 
-	<target name="clean">
-		<delete>
-			<fileset dir="." includes="*.obj"/>
-			<fileset dir="." includes="*.dll"/>
-			<fileset dir="." includes="*.exp"/>
-			<fileset dir="." includes="*.lib"/>
-		</delete>
-	</target>
-
 	<target name="compile">
 		<echo message="${sdkhomelib}"/>
 
 		<antcall target="compile_dir"/>
 		<antcall target="link"/>
-    </target>
+	</target>
 </project>
 

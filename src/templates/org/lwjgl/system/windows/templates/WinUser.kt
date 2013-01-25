@@ -824,16 +824,16 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPWNDCLASSEX.OUT("classEx", "a {@link WNDCLASSEX} structure that receives the information about the class.")
 	)
 
-	DWORD.func(
-		"GetClassLong",
+	ULONG_PTR.func(
+		"GetClassLongPtr",
 		"Retrieves the specified value from the WNDCLASSEX structure associated with the specified window.",
 
 		HWND.IN("window", "a handle to the window and, indirectly, the class to which the window belongs"),
 		int.IN("index", "the value to be retrieved")
 	)
 
-	DWORD.func(
-		"SetClassLong",
+	ULONG_PTR.func(
+		"SetClassLongPtr",
 		"""
 		Replaces the specified value at the specified offset into the extra class memory or the WNDCLASSEX structure for the class to which the specified window
 		belongs.
@@ -841,7 +841,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		HWND.IN("window", "a handle to the window and, indirectly, the class to which the window belongs"),
 		int.IN("index", "the value to be replaced"),
-		LONG.IN("newLong", "the replacement value")
+		LONG_PTR.IN("newLong", "the replacement value")
 	)
 
 	HICON.func(

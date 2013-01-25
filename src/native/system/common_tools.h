@@ -7,16 +7,8 @@
 
 #include <jni.h>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 extern JNIEnv *getThreadEnv();
 extern JNIEnv *attachCurrentThread();
 extern void detachCurrentThread();
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif

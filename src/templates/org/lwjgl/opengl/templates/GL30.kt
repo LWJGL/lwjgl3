@@ -187,24 +187,24 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 	val uniformZ = "the uniform z value"
 	val uniformW = "the uniform w value"
 
-	val Uniform1ui = GLvoid.func(
+	GLvoid.func(
 		"Uniform1ui",
 		"Specifies the value of a uint uniform variable for the current program object.",
 
 		GLint.IN("location", uniformLocation),
 		GLuint.IN("v0", "the uniform value")
-	).javaDocLink
+	)
 
-	val Uniform2ui = GLvoid.func(
+	GLvoid.func(
 		"Uniform2ui",
 		"Specifies the value of a uvec2 uniform variable for the current program object.",
 
 		GLint.IN("location", uniformLocation),
 		GLuint.IN("v0", uniformX),
 		GLuint.IN("v1", uniformY)
-	).javaDocLink
+	)
 
-	val Uniform3ui = GLvoid.func(
+	GLvoid.func(
 		"Uniform3ui",
 		"Specifies the value of a uvec3 uniform variable for the current program object.",
 
@@ -212,9 +212,9 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v0", uniformX),
 		GLuint.IN("v1", uniformY),
 		GLuint.IN("v2", uniformZ)
-	).javaDocLink
+	)
 
-	val Uniform4ui = GLvoid.func(
+	GLvoid.func(
 		"Uniform4ui",
 		"Specifies the value of a uvec4 uniform variable for the current program object.",
 
@@ -223,7 +223,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v1", uniformY),
 		GLuint.IN("v2", uniformZ),
 		GLuint.IN("v3", uniformW)
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"Uniform1uiv",
