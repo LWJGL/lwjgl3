@@ -4,11 +4,7 @@
  */
 package org.lwjgl.system;
 
-import java.util.Random;
-
 public final class MathUtil {
-
-    static Random random = new Random();
 
 	private MathUtil() {
 	}
@@ -23,10 +19,6 @@ public final class MathUtil {
 		v |= (v >>> 16);
 
 		return v + 1;
-	}
-
-	public static int mathRandom(int range) {
-		return random.nextInt(range + 1);
 	}
 
 }

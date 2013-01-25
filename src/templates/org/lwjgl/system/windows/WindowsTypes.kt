@@ -26,6 +26,9 @@ val short = PrimitiveType("short", PrimitiveMapping.SHORT)
 val int = PrimitiveType("int", PrimitiveMapping.INT)
 val LONG = PrimitiveType("LONG", PrimitiveMapping.INT)
 
+val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.LONG)
+val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.LONG)
+
 val int_p = PointerType("int", PointerMapping.DATA_INT)
 val UINT_p = PointerType("UINT", PointerMapping.DATA_INT)
 val FLOAT_p = PointerType("FLOAT", PointerMapping.DATA_FLOAT)
