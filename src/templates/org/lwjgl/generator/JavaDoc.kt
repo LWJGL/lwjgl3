@@ -31,7 +31,8 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 
 /** Specialized conversion for methods. */
 fun String.toJavaDoc(vararg params: Parameter): String = this.toJavaDoc(params.toList())
-fun String.toJavaDoc(params: Iterable<Parameter>): String {
+fun String.toJavaDoc(paramsIn: Iterable<Parameter>): String {
+	val params = paramsIn.filter { !(it has CallbackData.CLASS || it has autoSizeResult) }
 	if ( !params.iterator().hasNext() )
 		return this.toJavaDoc()
 

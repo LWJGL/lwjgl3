@@ -17,6 +17,7 @@ abstract class QualifiedType(
 	val javaMethodType: String
 		get() = when {
 			nativeType is CallbackType -> nativeType.callback.name
+			nativeType is ObjectType -> nativeType.className
 			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
 			else -> nativeType.javaMethodType.getSimpleName()
 		}
@@ -131,7 +132,9 @@ public class Parameter(
 	fun asNativeMethodCallParam(mode: GenerationMode) = when {
 	// Data pointer
 		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER -> {
-			if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
+			if ( has(autoSizeResult) )
+				"$API_BUFFER.address() + $name"
+			else if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"
@@ -140,6 +143,9 @@ public class Parameter(
 	// Callback functions
 		nativeType is CallbackType -> "${nativeType.callback.name}.CALLBACK" // The function itself
 		has(CallbackData.CLASS) -> get(CallbackData.CLASS).reference // The callback parameter
+
+	// Object parameter
+		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? 0L : $name.getPointer()" else "$name.getPointer()"
 
 	// Normal parameter
 		else -> name
@@ -184,14 +190,16 @@ public fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
 
 // --- [ MODIFIERS ]---
 
+// General
+
 /** Marks the function parameter or return value as const. */
 public class Const internal(): TemplateModifier {
 	override val isSpecial: Boolean = false
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is QualifiedType )
+	override fun validate(element: TemplateElement) {
+		if ( element !is QualifiedType )
 			throw IllegalArgumentException("The const modifier can only be applied on parameters or return values.")
 
-		val qtype = ttype as QualifiedType
+		val qtype = element as QualifiedType
 		if ( qtype.nativeType !is PointerType )
 			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
 
@@ -201,17 +209,19 @@ public class Const internal(): TemplateModifier {
 }
 public val const: Const = Const()
 
+// Parameter
+
 /** Marks the function parameter as a function callback user data parameter. */
 public class CallbackData(reference: String): ReferenceModifier(reference) {
 	class object {
 		val CLASS = javaClass<CallbackData>()
 	}
 
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
+	override fun validate(element: TemplateElement) {
+		if ( element !is Parameter )
 			throw IllegalArgumentException("The CallbackData modifier can only be applied on parameters.")
 
-		val param = ttype as Parameter
+		val param = element as Parameter
 		if ( param.nativeType !is PointerType || (param.nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The CallbackData modifier can only be applied on naked pointer types.")
 	}
@@ -242,17 +252,38 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 
 	public fun hasReference(reference: String): Boolean = this.reference == reference || dependent.any { it == reference }
 
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
+	override fun validate(element: TemplateElement) {
+		if ( element !is Parameter )
 			throw IllegalArgumentException("The AutoSize modifier can only be applied on parameters.")
 
-		val param = ttype as Parameter
+		val param = element as Parameter
+
+		if ( param.paramType == ParameterType.OUT )
+			throw IllegalArgumentException("The AutoSize modifier can only be applied on input parameters.")
+
 		when ( param.nativeType.mapping ) {
 			PrimitiveMapping.INT,
 			PrimitiveMapping.LONG -> {
 			}
 			else -> {
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on integer primitive types.")
+			}
+		}
+	}
+}
+
+public val autoSizeResult: TemplateModifier = object : ParameterModifier() {
+	override val isSpecial: Boolean = true
+	override protected fun validate(param: Parameter) {
+		if ( param.paramType == ParameterType.IN )
+			throw IllegalArgumentException("The autoSizeResult modifier can only be applied on output parameters.")
+
+		when ( param.nativeType.mapping ) {
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_LONG -> {
+			}
+			else -> {
+				throw IllegalArgumentException("The autoSizeResult modifier can only be applied on integer pointer types.")
 			}
 		}
 	}
@@ -266,17 +297,13 @@ public class Check(
 	val bytes: Boolean = false,
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
-): TemplateModifier {
+): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Check>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The Check modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
@@ -286,17 +313,13 @@ public class Check(
 }
 public fun Check(value: Int): Check = Check(Integer.toString(value))
 
-class Nullable internal(val optional: Boolean): TemplateModifier {
+class Nullable internal(val optional: Boolean): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Nullable>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The nullable modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
@@ -307,13 +330,9 @@ public val nullable: Nullable = Nullable(false)
 public val optional: Nullable = Nullable(true)
 
 /** Marks a buffer parameter as null-terminated. */
-public val nullTerminated: TemplateModifier = object : TemplateModifier {
+public val nullTerminated: TemplateModifier = object : ParameterModifier() {
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The nullTerminated modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
@@ -328,20 +347,16 @@ public class Expression(
 	val value: String,
 	/** If true, the parameter will not be removed from the method signature. */
 	val keepParam: Boolean = false
-): TemplateModifier {
+): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Expression>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The Expression modifier can only be applied on parameters.")
-	}
 }
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
-public class MultiType(vararg val types: PointerMapping): TemplateModifier {
+public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<MultiType>()
 	}
@@ -355,11 +370,7 @@ public class MultiType(vararg val types: PointerMapping): TemplateModifier {
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The nullTerminated modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
@@ -377,17 +388,13 @@ public class Return(
 	val lengthParam: String,
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
-): TemplateModifier {
+): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Return>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The returnValue modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
 
@@ -402,17 +409,13 @@ public class Return(
 public val returnValue: Return = Return("", "")
 
 /** Marks a buffer parameter to transform to a single primitive value in an alternative method. */
-public class SingleValue(val newName: String): TemplateModifier {
+public class SingleValue(val newName: String): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<SingleValue>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The SingleValue modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
@@ -421,29 +424,6 @@ public class SingleValue(val newName: String): TemplateModifier {
 
 		if ( param.paramType != ParameterType.IN )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on input parameters.")
-	}
-}
-
-/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
-public class MapPointer(
-	/** An expression that defines the ByteBuffer capacity. */
-	val sizeExpression: String
-): TemplateModifier {
-	class object {
-		val CLASS = javaClass<MapPointer>()
-	}
-
-	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is ReturnValue )
-			throw IllegalArgumentException("The MapPointer modifier can only be applied on return values.")
-
-		val returns = ttype as ReturnValue
-		if ( returns.nativeType !is PointerType )
-			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
-
-		if ( (returns.nativeType : PointerType).mapping != PointerMapping.DATA )
-			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
 	}
 }
 
@@ -456,18 +436,14 @@ public class PointerArray(
 	/** The parameter that defines that number of pointers in the array */
 	val countParam: String,
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
-    val lengthsParam: String? = null
-): TemplateModifier {
+	val lengthsParam: String? = null
+): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<PointerArray>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The PointerArray modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
 
@@ -479,21 +455,53 @@ public class PointerArray(
 	}
 }
 
-public class Callback(val procClass: String): TemplateModifier {
+public class Callback(val procClass: String): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Callback>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The Callback modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType || (param.nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The Callback modifier can only be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
 			throw IllegalArgumentException("The Callback modifier can only be applied on input parameters.")
+	}
+}
+
+// ReturnValue
+
+/** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
+public class MapPointer(
+	/** An expression that defines the ByteBuffer capacity. */
+	val sizeExpression: String
+): ReturnValueModifier() {
+	class object {
+		val CLASS = javaClass<MapPointer>()
+	}
+
+	override val isSpecial: Boolean = true
+	override protected fun validate(returns: ReturnValue) {
+		if ( returns.nativeType !is PointerType )
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
+
+		if ( (returns.nativeType : PointerType).mapping != PointerMapping.DATA )
+			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
+	}
+}
+
+public class Construct(
+	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
+	vararg val otherArgs: String
+): ReturnValueModifier() {
+	class object {
+		val CLASS = javaClass<Construct>()
+	}
+
+	override val isSpecial: Boolean = true
+	override protected fun validate(returns: ReturnValue) {
+		if ( returns.nativeType !is ObjectType )
+			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
 	}
 }

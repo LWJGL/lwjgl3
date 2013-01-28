@@ -39,11 +39,11 @@ public class AutoType(reference: String, vararg val types: BufferType) : Referen
 			throw IllegalArgumentException("No buffer types specified.")
 	}
 
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
+	override fun validate(element: TemplateElement) {
+		if ( element !is Parameter )
 			throw IllegalArgumentException("The AutoType modifier can only be applied on parameters.")
 
-		val param = ttype as Parameter
+		val param = element as Parameter
 		if ( param.nativeType != GLenum )
 			throw IllegalArgumentException("The AutoType modifier can only be applied on GLenum parameters.")
 	}

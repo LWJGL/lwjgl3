@@ -48,7 +48,43 @@ public trait TemplateModifier {
 	val isSpecial: Boolean
 
 	/** Implementations should check that the specified template type is valid for this modifier. */
-	fun validate(ttype: TemplateElement)
+	fun validate(element: TemplateElement)
+}
+
+public abstract class FunctionModifier: TemplateModifier {
+	override fun validate(element: TemplateElement) {
+		if ( element is NativeClassFunction )
+			validate(element)
+		else
+			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on functions.")
+	}
+
+	protected open fun validate(func: NativeClassFunction) {
+	}
+}
+
+public abstract class ParameterModifier: TemplateModifier {
+	override fun validate(element: TemplateElement) {
+		if ( element is Parameter )
+			validate(element)
+		else
+			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on parameters.")
+	}
+
+	protected open fun validate(param: Parameter) {
+	}
+}
+
+public abstract class ReturnValueModifier: TemplateModifier {
+	override fun validate(element: TemplateElement) {
+		if ( element is ReturnValue )
+			validate(element)
+		else
+			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on return values.")
+	}
+
+	protected open fun validate(returns: ReturnValue) {
+	}
 }
 
 /** A TemplateModifier with a reference to another TemplateElement. */

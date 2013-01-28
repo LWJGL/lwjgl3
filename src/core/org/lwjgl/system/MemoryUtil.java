@@ -306,6 +306,19 @@ public final class MemoryUtil {
 	}
 
 	/**
+	 * Creates a new PointerBuffer that starts at the given memory address and has the given capacity.
+	 *
+	 * @param address  the starting memory address
+	 * @param capacity the buffer capacity
+	 *
+	 * @return the new PointerBuffer
+	 */
+	public static PointerBuffer memPointerBuffer(long address, int capacity) {
+		// TODO: optimize
+		return new PointerBuffer(memByteBuffer(address, capacity << PointerBuffer.getPointerSizeShift()));
+	}
+
+	/**
 	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance.
 	 * It modifies that instance so that it starts at the given memory address and has the given capacity. The instance passed
 	 * to this method should not own native memory, i.e. it should not be an instance created using {@link ByteBuffer#allocateDirect}.

@@ -116,7 +116,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		GLint.IN("param", "the value of {@code pname}")
 	).javaDocLink
 
-	val SamplerParameterf = GLvoid.func(
+	GLvoid.func(
 		"SamplerParameterf",
 		"Float version of $SamplerParameteri.",
 

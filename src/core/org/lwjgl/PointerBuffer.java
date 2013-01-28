@@ -32,7 +32,7 @@ public class PointerBuffer implements Comparable {
 	 * @param capacity the PointerBuffer size, in number of pointers
 	 */
 	public PointerBuffer(final int capacity) {
-		this(BufferUtils.createByteBuffer(capacity * getPointerSize()));
+		this(BufferUtils.createByteBuffer(capacity * getPointerSize()), false);
 	}
 
 	/**
@@ -43,10 +43,11 @@ public class PointerBuffer implements Comparable {
 	 * @param source the source buffer
 	 */
 	public PointerBuffer(final ByteBuffer source) {
-		if ( LWJGLUtil.CHECKS )
-			checkSource(source);
+		this(checkSource(source).slice().order(source.order()), false);
+	}
 
-		pointers = source.slice().order(source.order());
+	private PointerBuffer(final ByteBuffer source, boolean dummy) {
+		pointers = source;
 
 		if ( is64Bit ) {
 			view32 = null;
@@ -57,13 +58,18 @@ public class PointerBuffer implements Comparable {
 		}
 	}
 
-	private static void checkSource(final ByteBuffer source) {
+	private static ByteBuffer checkSource(final ByteBuffer source) {
+		if ( !LWJGLUtil.CHECKS )
+			return source;
+
 		if ( !source.isDirect() )
 			throw new IllegalArgumentException("The source buffer is not direct.");
 
 		final int alignment = is64Bit ? 8 : 4;
 		if ( (memAddress(source) % alignment) != 0 || source.remaining() % alignment != 0 )
 			throw new IllegalArgumentException("The source buffer is not aligned to " + alignment + " bytes.");
+
+		return source;
 	}
 
 	/**
@@ -316,7 +322,7 @@ public class PointerBuffer implements Comparable {
 	 * @return A new PointerBuffer instance
 	 */
 	protected PointerBuffer newInstance(final ByteBuffer source) {
-		return new PointerBuffer(source);
+		return new PointerBuffer(source, false);
 	}
 
 	/**
@@ -337,14 +343,13 @@ public class PointerBuffer implements Comparable {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer slice() {
-		final int pointerSize = getPointerSize();
+		final int shift = getPointerSizeShift();
 
-		pointers.position(view.position() * pointerSize);
-		pointers.limit(view.limit() * pointerSize);
+		pointers.position(view.position() << shift);
+		pointers.limit(view.limit() << shift);
 
 		try {
-			// We're slicing in the constructor.
-			return newInstance(pointers);
+			return newInstance(pointers.slice().order(pointers.order()));
 		} finally {
 			pointers.clear();
 		}
@@ -359,9 +364,7 @@ public class PointerBuffer implements Comparable {
 	 * independent.
 	 * <p/>
 	 * <p> The new buffer's capacity, limit and position will be
-	 * identical to those of this buffer.  The new buffer will be direct if,
-	 * and only if, this buffer is direct, and it will be read-only if, and
-	 * only if, this buffer is read-only.  </p>
+	 * identical to those of this buffer. </p>
 	 *
 	 * @return the new pointer buffer
 	 */
@@ -907,7 +910,7 @@ public class PointerBuffer implements Comparable {
 	private static final class PointerBufferR extends PointerBuffer {
 
 		PointerBufferR(final ByteBuffer source) {
-			super(source);
+			super(source, false);
 		}
 
 		public boolean isReadOnly() {
