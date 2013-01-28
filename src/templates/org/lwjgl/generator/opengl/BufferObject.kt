@@ -6,17 +6,13 @@ package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
 
-public class BufferObject(public val binding: String) : TemplateModifier {
+public class BufferObject(public val binding: String) : ParameterModifier() {
 	class object {
 		val CLASS = javaClass<BufferObject>()
 	}
 
 	override val isSpecial: Boolean = true
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is Parameter )
-			throw IllegalArgumentException("The returnValue modifier can only be applied on parameters.")
-
-		val param = ttype as Parameter
+	override protected fun validate(param: Parameter) {
 		if ( !((param.nativeType is PointerType && (param.nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER) || param.nativeType.mapping == PrimitiveMapping.LONG) )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 

@@ -77,8 +77,7 @@ public class CallbackFunction(
 		println("\tprivate static native long setup(Method callback);\n")
 
 		// Step 3: Generate callback method
-		//println("\tpublic abstract int invoke(long logObject);\n")
-		println("The callback method.".toJavaDoc(parameters.values().filter { !it.has(CALLBACK_DATA) }))
+		println("The callback method.".toJavaDoc(parameters.values()))
 		print("\tpublic abstract int invoke(")
 		printList(parameters) {
 			if ( it has CALLBACK_DATA )

@@ -7,17 +7,13 @@ package org.lwjgl.generator.opengl
 import org.lwjgl.generator.*
 
 /** Marks an OpenGL function as deprecated; its function address will not be loaded in a forward-compatible context. */
-public class DeprecatedGL internal(): TemplateModifier {
+public class DeprecatedGL internal(): FunctionModifier() {
 	class object {
 		val CLASS = javaClass<DeprecatedGL>()
 	}
 
 	override val isSpecial: Boolean = false
-	override fun validate(ttype: TemplateElement) {
-		if ( ttype !is NativeClassFunction )
-			throw IllegalArgumentException("The deprecated modifier can only be applied on functions.")
-
-		val func = ttype as NativeClassFunction
+	override protected fun validate(func: NativeClassFunction) {
 		if ( !func.nativeClass.postfix.isEmpty() )
 			throw IllegalArgumentException("The deprecated modifier can only be applied on core functionality.")
 	}

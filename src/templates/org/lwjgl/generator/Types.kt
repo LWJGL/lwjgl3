@@ -71,6 +71,16 @@ public fun PointerType(pointerType: PointerType): PointerType =
 		PointerMapping.DATA_POINTER
 	)
 
+// Objects (pointer wrappers)
+public class ObjectType(
+	/** The Java wrapper class. */
+	val className: String,
+	/** The type used in the native API. */
+	name: String,
+	/** If true, the nativeType typedef includes a pointer. */
+	includesPointer: Boolean = true
+): PointerType(name, PointerMapping.NAKED_POINTER, includesPointer)
+
 // Structs
 public class StructType(
 	/** The type used in the native API. */

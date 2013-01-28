@@ -31,14 +31,38 @@ public abstract class FunctionProvider {
 		_classes add clazz
 	}
 
-	open val isLocal: Boolean = false
+	/** If true, different platforms/devices/contexts return different function addresses. */
+	open val isLocal: Boolean = false // GL is global, AL/CL are local
+
+	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
+	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is useD), CL depends on the parameters.
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
-		if ( function.hasParam { it has Callback.CLASS } ) {
-			writer.println("\t\tFunctions $INSTANCE = getInstance();")
+		val instanceParameter = if ( hasCurrentCapabilities )
+			""
+		else {
+			if ( function has Capabilities.CLASS ) {
+				val caps = function[Capabilities.CLASS]
+				if ( caps.statement != null )
+					writer.println("\t\t${caps.statement};")
+				caps.expression
+			} else {
+				try {
+					// Use the first ObjectType parameters
+					function.getParams() { it.nativeType is ObjectType }.next().name
+				} catch (e: Exception) {
+					throw IllegalStateException("Neither a Capabilities modifier nor an object parameter were found on function ${function.name}")
+				}
+			}
+		}
+
+		if ( function has Capabilities.CLASS && function[Capabilities.CLASS].override )
+			writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
+		else if ( function.hasParam { it has Callback.CLASS } ) {
+			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else
-			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance().${function.name};")
+			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.name};")
 	}
 
 	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {}
