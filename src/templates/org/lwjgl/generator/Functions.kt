@@ -520,7 +520,7 @@ public class NativeClassFunction(
 
 		if ( !returns.isVoid && returns.isBufferPointer ) {
 			val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
-			val bufferType = if ( isNullTerminated )
+			val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
 				"ByteBuffer"
 			else
 				returns.nativeType.mapping.javaMethodType.getSimpleName()
@@ -893,7 +893,7 @@ public class NativeClassFunction(
 				print("\t\t")
 
 				val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
-				val bufferType = if ( isNullTerminated )
+				val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
 					"ByteBuffer"
 				else
 					returns.nativeType.mapping.javaMethodType.getSimpleName()
