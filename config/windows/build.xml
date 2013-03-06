@@ -8,7 +8,7 @@
 	<property environment="env"/>
 
 	<property name="sdkhome" location="${env.MSSDK}"/>
-	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib jawt.lib delayimp.lib winmm.lib Comctl32.lib"/>
+	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib jawt.lib delayimp.lib winmm.lib Comctl32.lib glfw3.lib"/>
 
 	<condition property="sdkhomelib" value="${sdkhome}\lib" else="${sdkhome}\lib\x64">
 		<equals arg1="${os.arch}" arg2="x86"/>
@@ -30,6 +30,7 @@
 			<arg value="/I..\..\${src.native}\openal"/>
 			<!--<arg value="/I..\..\${src.native}\opencl"/>-->
 			<arg value="/I..\..\${src.native}\opengl"/>
+            <arg value="/I..\..\${src.native}\glfw"/>
 			<arg value="/I..\..\${src.native}\opengl\wgl"/>
 			<srcfile/>
 			<!-- Paths relative to ${basedir} -->
@@ -38,6 +39,7 @@
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/openal" includes="*.c"/>
+            <fileset dir="${src.generated}/glfw" includes="*.c"/>
 			<!--<fileset dir="${src.generated}/opencl" includes="*.c"/>-->
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
@@ -53,6 +55,7 @@
 			<arg line="/Fe${dllname} /link"/>
 			<arg value="/LIBPATH:${java.home}\..\lib"/>
 			<arg value="/LIBPATH:${sdkhomelib}"/>
+			<arg value="/LIBPATH:..\..\libs"/>
 			<arg value="/OPT:REF"/>
 			<arg value="/OPT:ICF"/>
 			<arg line="/DLL ${libs}"/>
