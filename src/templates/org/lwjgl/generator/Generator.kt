@@ -46,6 +46,7 @@ fun main(args: Array<String>) {
 
 	// Note: namespace is a class Kotlin generates that contains
 	// all top-level functions/properties in Kotlin package.
+	generate("org.lwjgl.glfw")
 	generate("org.lwjgl.openal")
 	generate("org.lwjgl.opengl")
 	generate("org.lwjgl.system.windows")
