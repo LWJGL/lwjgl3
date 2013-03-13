@@ -49,6 +49,10 @@ public class GL {
 
 						return address;
 					}
+
+					public void destroy() {
+						OPENGL.destroy();
+					}
 				};
 				break;
 			case LWJGLUtil.PLATFORM_LINUX:
@@ -72,7 +76,7 @@ public class GL {
 	}
 
 	public static ContextCapabilities getCapabilities() {
-		return contextTL.get().getCapabilities();
+		return contextTL.get().capabilities;
 	}
 
 	/**

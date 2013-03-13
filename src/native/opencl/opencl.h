@@ -26,29 +26,33 @@
 #ifndef __OPENCL_H
 #define __OPENCL_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #ifdef __APPLE__
 
 #include <OpenCL/cl.h>
 #include <OpenCL/cl_gl.h>
-#include <OpenCL/cl_gl_ext.h>
-#include <OpenCL/cl_ext.h>
 
 #else
 
 #include <CL/cl.h>
 #include <CL/cl_gl.h>
-#include <CL/cl_gl_ext.h>
-#include <CL/cl_ext.h>
 
 #endif
 
-#ifdef __cplusplus
-}
-#endif
+#define APIENTRY CL_API_CALL
+#define CALLBACK CL_CALLBACK
+
+// Custom typedefs
+
+typedef void cl_void;
+
+// Callback function typedefs
+
+typedef void (CL_CALLBACK * cl_program_callback)(cl_program program, void *user_data);
+typedef void (CL_CALLBACK * cl_create_context_callback)(const char *errinfo, const void *private_info, size_t cb, void *user_data);
+typedef void (CL_CALLBACK * cl_native_kernel_func)(void *args);
+typedef void (CL_CALLBACK * cl_mem_object_destructor_callback)(cl_mem memobj, void *user_data);
+typedef void (CL_CALLBACK * cl_event_callback)(cl_event event, cl_int event_command_exec_status, void *user_data);
+typedef void (CL_CALLBACK * cl_printf_callback)(cl_context context, cl_uint printf_data_len, char *printf_data_ptr, void *user_data);
 
 #endif  /* __OPENCL_H   */
 

@@ -5,7 +5,10 @@
 package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.DEBUGPROCAMD;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WindowsDisplay;

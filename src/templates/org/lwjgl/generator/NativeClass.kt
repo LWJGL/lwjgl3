@@ -209,7 +209,7 @@ public class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			name = if ( prefix.isEmpty() ) name else "${prefix.toLowerCase()}$name",
-			documentation = documentation.toJavaDoc(*parameters),
+			documentation = documentation.toJavaDoc(parameters.iterator()),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

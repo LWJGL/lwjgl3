@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.testng.annotations.Test;
 
@@ -42,7 +43,7 @@ public class WindowsTest {
 
 	public void testLWJGLInstance() {
 		assertEquals(
-			GetModuleHandle(memEncodeUTF16("lwjgl.dll")),
+			GetModuleHandle(memEncodeUTF16(Sys.getNativeLibrary())),
 			HINSTANCE
 		);
 	}

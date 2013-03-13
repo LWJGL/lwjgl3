@@ -17,4 +17,6 @@ public interface FunctionProvider {
 	 */
 	long getFunctionAddress(String functionName);
 
+	void destroy();
+
 }

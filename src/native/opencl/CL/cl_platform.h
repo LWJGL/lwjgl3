@@ -31,10 +31,6 @@
     #include <AvailabilityMacros.h>
 #endif
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 #if defined(_WIN32)
     #define CL_API_ENTRY
     #define CL_API_CALL     __stdcall
@@ -1247,8 +1243,4 @@ typedef union
 #define  _CL_STRINGIFY( _x )                __CL_STRINGIFY( _x )
 #define  CL_PROGRAM_STRING_DEBUG_INFO       "#line "  _CL_STRINGIFY(__LINE__) " \"" __FILE__ "\" \n\n" 
   
-#ifdef __cplusplus
-}
-#endif
-
 #endif  /* __CL_PLATFORM_H  */

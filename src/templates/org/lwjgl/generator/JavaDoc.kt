@@ -4,6 +4,7 @@
  */
 package org.lwjgl.generator
 
+import java.util.ArrayList
 import java.util.regex.Pattern
 
 /** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
@@ -30,10 +31,10 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun String.toJavaDoc(vararg params: Parameter): String = this.toJavaDoc(params.toList())
-fun String.toJavaDoc(paramsIn: Iterable<Parameter>): String {
-	val params = paramsIn.filter { !(it has CallbackData.CLASS || it has autoSizeResult) }
-	if ( !params.iterator().hasNext() )
+fun String.toJavaDoc(paramsIn: Iterator<Parameter>): String {
+	// TODO: This is shit, optimize
+	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it has CallbackData.CLASS || it has autoSizeResult) }
+	if ( params.isEmpty() )
 		return this.toJavaDoc()
 
 	val javaDoc = "\t/**\n\t * ${cleanup()}\n\t"
@@ -138,7 +139,7 @@ public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1): String 
 	return builder.toString()
 }
 
-private fun htmlList(val tag: String, vararg items: String): String {
+private fun htmlList(tag: String, vararg items: String): String {
 	val builder = StringBuilder(512)
 	builder append "<$tag>\n"
 	for ( li in items ) {

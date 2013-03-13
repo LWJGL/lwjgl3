@@ -9,10 +9,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="Core" />
-    <orderEntry type="module" module-name="Utilities" />
+    <orderEntry type="module" module-name="Core" scope="TEST" />
+    <orderEntry type="module" module-name="Utilities" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Resources" level="project" />
+    <orderEntry type="library" scope="TEST" name="Resources" level="project" />
   </component>
 </module>
 

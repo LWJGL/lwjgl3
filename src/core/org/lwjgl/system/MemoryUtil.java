@@ -437,6 +437,8 @@ public final class MemoryUtil {
 	 */
 	public static native long memGlobalRefNew(Object obj);
 
+	public static native <T> T memGlobalRefToObject(long globalRef);
+
 	/**
 	 * Deletes a global reference.
 	 *

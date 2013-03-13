@@ -5,10 +5,8 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.ALC;
-import org.lwjgl.openal.ALCCapabilities;
-import org.lwjgl.openal.ALCContext;
-import org.lwjgl.openal.ALContext;
+import org.lwjgl.openal.*;
+import org.lwjgl.system.MemoryUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -19,6 +17,7 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
+import java.util.Arrays;
 import java.util.List;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -46,6 +45,7 @@ public class ALCDemo {
 
 		System.out.println("OpenALC10: " + caps.OpenALC10);
 		System.out.println("OpenALC11: " + caps.OpenALC11);
+		System.out.println("caps.ALC_EXT_EFX = " + caps.ALC_EXT_EFX);
 
 		if ( caps.OpenALC11 ) {
 			List<String> devices = ALC.getStringList(0L, ALC_ALL_DEVICES_SPECIFIER);
@@ -61,7 +61,7 @@ public class ALCDemo {
 		IntBuffer attribs = BufferUtils.createIntBuffer(16);
 
 		attribs.put(ALC_FREQUENCY);
-		attribs.put(48000);
+		attribs.put(44100);
 
 		attribs.put(ALC_REFRESH);
 		attribs.put(60);

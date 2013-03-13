@@ -64,5 +64,6 @@
 	#define NODEFERWINDOWPOS // DeferWindowPos routines
 	#define NOMCX // Modem Configuration Extensions
 
+    #define STRICT
 	#include <windows.h>
 #endif /* _WINDOWS_LWJGL_INCLUDED */
