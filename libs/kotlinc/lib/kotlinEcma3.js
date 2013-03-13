@@ -5,8 +5,20 @@ var Kotlin = {};
       d.hasOwnProperty(a) && (c[a] = d[a])
     }
   }
-  var f = function() {
+  var g = function() {
   };
+  Function.prototype.bind || (Function.prototype.bind = function(c) {
+    if("function" !== typeof this) {
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+    var d = Array.prototype.slice.call(arguments, 1), a = this, b = function() {
+    }, f = function() {
+      return a.apply(this instanceof b && c ? this : c, d.concat(Array.prototype.slice.call(arguments)))
+    };
+    b.prototype = this.prototype;
+    f.prototype = new b;
+    return f
+  });
   Kotlin.keys = Object.keys || function(c) {
     var d = [], a = 0, b;
     for(b in c) {
@@ -21,16 +33,16 @@ var Kotlin = {};
     return a
   };
   Kotlin.isType = function(c, d) {
-    if(null === c || void 0 === c) {
-      return!1
+    if(c === null || c === void 0) {
+      return false
     }
     for(var a = c.get_class();a !== d;) {
-      if(null === a) {
-        return!1
+      if(a === null) {
+        return false
       }
       a = a.superclass
     }
-    return!0
+    return true
   };
   Kotlin.createTrait = function() {
     return function() {
@@ -41,7 +53,7 @@ var Kotlin = {};
     }
   }();
   Kotlin.definePackage = function(c) {
-    return null === c ? {} : c
+    return c === null ? {} : c
   };
   Kotlin.createClass = function() {
     function c() {
@@ -55,29 +67,41 @@ var Kotlin = {};
         this.initializing = a;
         this.initialize && this.initialize.apply(this, arguments)
       }
-      var b = null, g = Kotlin.argumentsToArrayLike(arguments);
-      "function" == typeof g[0] && (b = g.shift());
+      var b = null, f = Kotlin.argumentsToArrayLike(arguments);
+      typeof f[0] == "function" && (b = f.shift());
       a.addMethods = d;
       a.superclass = b;
       a.subclasses = [];
-      b && (c.prototype = b.prototype, a.prototype = new c, b.subclasses.push(a));
+      if(b) {
+        c.prototype = b.prototype;
+        a.prototype = new c;
+        b.subclasses.push(a)
+      }
       a.addMethods({get_class:function() {
         return a
       }});
-      null !== b && a.addMethods({super_init:function() {
+      b !== null && a.addMethods({super_init:function() {
         this.initializing = this.initializing.superclass;
         this.initializing.prototype.initialize.apply(this, arguments)
       }});
-      for(var b = 0, h = g.length;b < h;b++) {
-        a.addMethods(g[b])
+      for(var b = 0, h = f.length;b < h;b++) {
+        a.addMethods(f[b])
       }
-      a.prototype.initialize || (a.prototype.initialize = f);
+      if(!a.prototype.initialize) {
+        a.prototype.initialize = g
+      }
       return a.prototype.constructor = a
     }
   }();
   Kotlin.$createClass = Kotlin.createClass;
+  Kotlin.createObjectWithPrototype = function(c) {
+    function d() {
+    }
+    d.prototype = c;
+    return new d
+  };
   Kotlin.$new = function(c) {
-    var d = {__proto__:c.prototype};
+    var d = Kotlin.createObjectWithPrototype(c.prototype);
     return function() {
       c.apply(d, arguments);
       return d
@@ -102,8 +126,8 @@ String.prototype.endsWith = function(e) {
 String.prototype.contains = function(e) {
   return-1 !== this.indexOf(e)
 };
-var kotlin = {set:function(e, f, c) {
-  return e.put(f, c)
+var kotlin = {set:function(e, g, c) {
+  return e.put(g, c)
 }};
 (function() {
   function e(a) {
@@ -119,8 +143,8 @@ var kotlin = {set:function(e, f, c) {
       if(!(b instanceof Array) || a.length != b.length) {
         return!1
       }
-      for(var c = 0;c < a.length;c++) {
-        if(!Kotlin.equals(a[c], b[c])) {
+      for(var f = 0;f < a.length;f++) {
+        if(!Kotlin.equals(a[f], b[f])) {
           return!1
         }
       }
@@ -132,10 +156,10 @@ var kotlin = {set:function(e, f, c) {
     return null === a || void 0 === a ? [] : a.slice()
   };
   Kotlin.intUpto = function(a, b) {
-    return Kotlin.$new(Kotlin.NumberRange)(a, b - a + 1, !1)
+    return Kotlin.$new(Kotlin.NumberRange)(a, b)
   };
   Kotlin.intDownto = function(a, b) {
-    return Kotlin.$new(Kotlin.NumberRange)(a, a - b + 1, !0)
+    return Kotlin.$new(Kotlin.Progression)(a, b, -1)
   };
   Kotlin.modules = {};
   Kotlin.Exception = Kotlin.$createClass();
@@ -153,7 +177,7 @@ var kotlin = {set:function(e, f, c) {
   };
   Kotlin.Iterator = Kotlin.$createClass({initialize:function() {
   }, next:e("Iterator#next"), hasNext:e("Iterator#hasNext")});
-  var f = Kotlin.$createClass(Kotlin.Iterator, {initialize:function(a) {
+  var g = Kotlin.$createClass(Kotlin.Iterator, {initialize:function(a) {
     this.array = a;
     this.size = a.length;
     this.index = 0
@@ -163,7 +187,7 @@ var kotlin = {set:function(e, f, c) {
     return this.index < this.size
   }, hasNext:function() {
     return this.index < this.size
-  }}), c = Kotlin.$createClass(f, {initialize:function(a) {
+  }}), c = Kotlin.$createClass(g, {initialize:function(a) {
     this.list = a;
     this.size = a.size();
     this.index = 0
@@ -188,7 +212,7 @@ var kotlin = {set:function(e, f, c) {
     return-1 !== this.indexOf(a)
   }, equals:function(a) {
     if(this.$size === a.$size) {
-      for(var b = this.iterator(), a = a.iterator(), c = this.$size;0 < c--;) {
+      for(var b = this.iterator(), a = a.iterator(), f = this.$size;0 < f--;) {
         if(!Kotlin.equals(b.next(), a.next())) {
           return!1
         }
@@ -196,8 +220,8 @@ var kotlin = {set:function(e, f, c) {
     }
     return!0
   }, toString:function() {
-    for(var a = "[", b = this.iterator(), c = !0, d = this.$size;0 < d--;) {
-      c ? c = !1 : a += ", ", a += b.next()
+    for(var a = "[", b = this.iterator(), f = !0, c = this.$size;0 < c--;) {
+      f ? f = !1 : a += ", ", a += b.next()
     }
     return a + "]"
   }, toJSON:function() {
@@ -228,8 +252,8 @@ var kotlin = {set:function(e, f, c) {
     this.array.splice(a, 0, b);
     this.$size++
   }, addAll:function(a) {
-    for(var b = a.iterator(), c = this.$size, d = a.size();0 < d--;) {
-      this.array[c++] = b.next()
+    for(var b = a.iterator(), f = this.$size, c = a.size();0 < c--;) {
+      this.array[f++] = b.next()
     }
     this.$size += a.size()
   }, removeAt:function(a) {
@@ -238,7 +262,7 @@ var kotlin = {set:function(e, f, c) {
   }, clear:function() {
     this.$size = this.array.length = 0
   }, indexOf:function(a) {
-    for(var b = 0, c = this.$size;b < c;++b) {
+    for(var b = 0, f = this.$size;b < f;++b) {
       if(Kotlin.equals(this.array[b], a)) {
         return b
       }
@@ -271,12 +295,12 @@ var kotlin = {set:function(e, f, c) {
   Kotlin.System = function() {
     var a = "", b = function(b) {
       void 0 !== b && (a = null === b || "object" !== typeof b ? a + b : a + b.toString())
-    }, c = function(b) {
+    }, f = function(b) {
       this.print(b);
       a += "\n"
     };
     return{out:function() {
-      return{print:b, println:c}
+      return{print:b, println:f}
     }, output:function() {
       return a
     }, flush:function() {
@@ -289,49 +313,52 @@ var kotlin = {set:function(e, f, c) {
   Kotlin.print = function(a) {
     Kotlin.System.out().print(a)
   };
-  Kotlin.RangeIterator = Kotlin.$createClass(Kotlin.Iterator, {initialize:function(a, b, c) {
+  Kotlin.RangeIterator = Kotlin.$createClass(Kotlin.Iterator, {initialize:function(a, b, f) {
     this.$start = a;
-    this.$count = b;
-    this.$reversed = c;
-    this.$i = this.get_start()
+    this.$end = b;
+    this.$increment = f;
+    this.$i = a
   }, get_start:function() {
     return this.$start
-  }, get_count:function() {
-    return this.$count
-  }, set_count:function(a) {
-    this.$count = a
-  }, get_reversed:function() {
-    return this.$reversed
+  }, get_end:function() {
+    return this.$end
   }, get_i:function() {
     return this.$i
   }, set_i:function(a) {
     this.$i = a
   }, next:function() {
-    this.set_count(this.get_count() - 1);
-    if(this.get_reversed()) {
-      return this.set_i(this.get_i() - 1), this.get_i() + 1
-    }
-    this.set_i(this.get_i() + 1);
-    return this.get_i() - 1
+    var a = this.$i;
+    this.set_i(this.$i + this.$increment);
+    return a
   }, get_hasNext:function() {
-    return 0 < this.get_count()
+    return 0 < this.$increment ? this.$next <= this.$end : this.$next >= this.$end
   }});
-  Kotlin.NumberRange = Kotlin.$createClass({initialize:function(a, b, c) {
+  Kotlin.NumberRange = Kotlin.$createClass({initialize:function(a, b) {
     this.$start = a;
-    this.$size = b;
-    this.$reversed = c
+    this.$end = b
   }, get_start:function() {
     return this.$start
-  }, get_size:function() {
-    return this.$size
-  }, get_reversed:function() {
-    return this.$reversed
   }, get_end:function() {
-    return this.get_reversed() ? this.get_start() - this.get_size() + 1 : this.get_start() + this.get_size() - 1
+    return this.$end
+  }, get_increment:function() {
+    return 1
   }, contains:function(a) {
-    return this.get_reversed() ? a <= this.get_start() && a > this.get_start() - this.get_size() : a >= this.get_start() && a < this.get_start() + this.get_size()
+    return this.$start <= a && a <= this.$end
   }, iterator:function() {
-    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_size(), this.get_reversed())
+    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end())
+  }});
+  Kotlin.Progression = Kotlin.$createClass({initialize:function(a, b, f) {
+    this.$start = a;
+    this.$end = b;
+    this.$increment = f
+  }, get_start:function() {
+    return this.$start
+  }, get_end:function() {
+    return this.$end
+  }, get_increment:function() {
+    return this.$increment
+  }, iterator:function() {
+    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end(), this.get_increment())
   }});
   Kotlin.Comparator = Kotlin.$createClass({initialize:function() {
   }, compare:e("Comparator#compare")});
@@ -342,15 +369,28 @@ var kotlin = {set:function(e, f, c) {
     return Kotlin.$new(d)(a)
   };
   Kotlin.collectionsMax = function(a, b) {
-    var c = a.iterator();
+    var f = a.iterator();
     if(a.isEmpty()) {
       throw Kotlin.Exception();
     }
-    for(var d = c.next();c.get_hasNext();) {
-      var e = c.next();
-      0 > b.compare(d, e) && (d = e)
+    for(var c = f.next();f.get_hasNext();) {
+      var d = f.next();
+      0 > b.compare(c, d) && (c = d)
     }
-    return d
+    return c
+  };
+  Kotlin.collectionsSort = function(a, b) {
+    var c = void 0;
+    void 0 !== b && (c = b.compare.bind(b));
+    a instanceof Array && a.sort(c);
+    for(var d = [], e = a.iterator();e.hasNext();) {
+      d.push(e.next())
+    }
+    d.sort(c);
+    c = 0;
+    for(e = d.length;c < e;c++) {
+      a.set(c, d[c])
+    }
   };
   Kotlin.StringBuilder = Kotlin.$createClass({initialize:function() {
     this.string = ""
@@ -375,10 +415,10 @@ var kotlin = {set:function(e, f, c) {
     return c
   };
   Kotlin.arrayIndices = function(a) {
-    return Kotlin.$new(Kotlin.NumberRange)(0, a.length)
+    return Kotlin.$new(Kotlin.NumberRange)(0, a.length - 1)
   };
   Kotlin.arrayIterator = function(a) {
-    return Kotlin.$new(f)(a)
+    return Kotlin.$new(g)(a)
   };
   Kotlin.toString = function(a) {
     return a.toString()
@@ -408,46 +448,46 @@ var kotlin = {set:function(e, f, c) {
     for(var c = Array(a.length + b.length), d = 0, e = a.length;d < e;d++) {
       c[d] = a[d]
     }
-    for(var e = b.length, f = 0;f < e;) {
-      c[d++] = b[f++]
+    for(var e = b.length, g = 0;g < e;) {
+      c[d++] = b[g++]
     }
     return c
   }
 })();
-Kotlin.assignOwner = function(e, f) {
-  e.o = f;
+Kotlin.assignOwner = function(e, g) {
+  e.o = g;
   return e
 };
-Kotlin.b0 = function(e, f, c) {
+Kotlin.b0 = function(e, g, c) {
   return function() {
-    return e.call(null !== f ? f : this, c)
+    return e.call(null !== g ? g : this, c)
   }
 };
-Kotlin.b1 = function(e, f, c) {
+Kotlin.b1 = function(e, g, c) {
   return function() {
-    return e.apply(null !== f ? f : this, c)
+    return e.apply(null !== g ? g : this, c)
   }
 };
-Kotlin.b2 = function(e, f, c) {
+Kotlin.b2 = function(e, g, c) {
   return function() {
-    return e.apply(null !== f ? f : this, Kotlin.concat(c, arguments))
+    return e.apply(null !== g ? g : this, Kotlin.concat(c, arguments))
   }
 };
-Kotlin.b3 = function(e, f) {
+Kotlin.b3 = function(e, g) {
   return function() {
-    return e.call(f)
+    return e.call(g)
   }
 };
-Kotlin.b4 = function(e, f) {
+Kotlin.b4 = function(e, g) {
   return function() {
-    return e.apply(f, Kotlin.argumentsToArrayLike(arguments))
+    return e.apply(g, Kotlin.argumentsToArrayLike(arguments))
   }
 };
 (function() {
   function e(a) {
     return"string" == typeof a ? a : typeof a.hashCode == i ? (a = a.hashCode(), "string" == typeof a ? a : e(a)) : typeof a.toString == i ? a.toString() : "" + a
   }
-  function f(a, b) {
+  function g(a, b) {
     return a.equals(b)
   }
   function c(a, b) {
@@ -488,7 +528,7 @@ Kotlin.b4 = function(e, f) {
       return!1
     }
   }
-  function g(a) {
+  function f(a) {
     return function(b) {
       for(var c = b.length, d = 0, e = this.entries.length;d < e;++d) {
         b[c + d] = this.entries[d][a]
@@ -515,12 +555,12 @@ Kotlin.b4 = function(e, f) {
     }
   }, k = d("key"), q = d("value"), j = 0, o = 1, p = 2;
   a.prototype = {getEqualityFunction:function(a) {
-    return typeof a.equals == i ? f : c
+    return typeof a.equals == i ? g : c
   }, getEntryForKey:b(o), getEntryAndIndexForKey:b(p), removeEntryForKey:function(a) {
     return(a = this.getEntryAndIndexForKey(a)) ? (n(this.entries, a[0]), a[1]) : null
   }, addEntry:function(a, b) {
     this.entries[this.entries.length] = [a, b]
-  }, keys:g(0), values:g(1), getEntries:function(a) {
+  }, keys:f(0), values:f(1), getEntries:function(a) {
     for(var b = a.length, c = 0, d = this.entries.length;c < d;++c) {
       a[b + c] = this.entries[c].slice(0)
     }
@@ -584,7 +624,7 @@ Kotlin.b4 = function(e, f) {
     this._values = m("values");
     this._entries = m("getEntries");
     this.values = function() {
-      for(var a = this._values(), b = a.length, c = Kotlin.$new(Kotlin.ArrayList)();--b;) {
+      for(var a = this._values(), b = a.length, c = Kotlin.$new(Kotlin.ArrayList)();b--;) {
         c.add(a[b])
       }
       return c
@@ -613,12 +653,12 @@ Kotlin.b4 = function(e, f) {
       return a
     };
     this.each = function(a) {
-      for(var b = d.entries(), c = b.length, e;c--;) {
+      for(var b = d._entries(), c = b.length, e;c--;) {
         e = b[c], a(e[0], e[1])
       }
     };
     this.putAll = function(a, b) {
-      for(var c = a.entries(), e, f, g, h = c.length, j = typeof b == i;h--;) {
+      for(var c = a._entries(), e, f, g, h = c.length, j = typeof b == i;h--;) {
         e = c[h];
         f = e[0];
         e = e[1];
@@ -657,7 +697,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
     return this.map[this.keys[this.index++]]
   }, get_hasNext:function() {
     return this.index < this.size
-  }}), f = Kotlin.$createClass(Kotlin.Collection, {initialize:function(c) {
+  }}), g = Kotlin.$createClass(Kotlin.Collection, {initialize:function(c) {
     this.map = c
   }, iterator:function() {
     return Kotlin.$new(e)(this.map.map, Kotlin.keys(this.map.map))
@@ -706,14 +746,14 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
     }
     return c
   }, values:function() {
-    return Kotlin.$new(f)(this)
+    return Kotlin.$new(g)(this)
   }, toJSON:function() {
     return this.map
   }})
 })();
 (function() {
-  function e(f, c) {
-    var d = new Kotlin.HashTable(f, c);
+  function e(g, c) {
+    var d = new Kotlin.HashTable(g, c);
     this.add = function(a) {
       d.put(a, !0)
     };
@@ -744,7 +784,7 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
       return d.isEmpty()
     };
     this.clone = function() {
-      var a = new e(f, c);
+      var a = new e(g, c);
       a.addAll(d.keys());
       return a
     };
@@ -776,8 +816,8 @@ Kotlin.ComplexHashMap = Kotlin.HashMap;
       return a + "]"
     };
     this.intersection = function(a) {
-      for(var b = new e(f, c), a = a.values(), g = a.length, h;g--;) {
-        h = a[g], d.containsKey(h) && b.add(h)
+      for(var b = new e(g, c), a = a.values(), f = a.length, h;f--;) {
+        h = a[f], d.containsKey(h) && b.add(h)
       }
       return b
     };

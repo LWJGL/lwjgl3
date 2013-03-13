@@ -256,17 +256,17 @@ public class TemplateFormatter {
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
 		// This is a little funny because we can have whitespace on either side of *
-		"(?:const\\s+)?[0-9a-zA-Z]+(?:(?:\\s*[*]+\\s*)|\\s+)[0-9a-zA-Z_]+"
+		"(?:const\\s+)?(?:unsigned\\s+)?[0-9a-zA-Z]+(?:(?:\\s*[*]+\\s*)|\\s+)[0-9a-zA-Z_]+"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
-		TYPE_PATTERN + "\\s*[(](?:,?\\s*" + TYPE_PATTERN + ")*\\s*[)]",
+		TYPE_PATTERN + "\\s*[(](?:,?\\s*" + TYPE_PATTERN + ")*\\s*(?:void\\s*)?[)]",
 		Pattern.MULTILINE
 	);
 
 	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
-		"(const\\s+)?([0-9a-zA-Z]+)\\s*([*]+)?\\s*([0-9a-zA-Z_]+)",
+		"(const\\s+)?((?:unsigned\\s+)?[0-9a-zA-Z]+)\\s*([*]+)?\\s*([0-9a-zA-Z_]+)",
 		Pattern.MULTILINE
 	);
 
@@ -302,12 +302,14 @@ public class TemplateFormatter {
 					builder.append("\t\t\"");
 					builder.append(paramMatcher.group(4));
 					builder.append("\",\n");
-					builder.append("\t\t\"\",\n\n");
+					builder.append("\t\t\"\"");
 
 					paramCount = 0;
 				} else {
 					// Normal parameter
-					if ( 0 < paramCount++ ) builder.append(",\n");
+					builder.append(",\n");
+					if ( paramCount++ == 0 )
+						builder.append('\n');
 
 					builder.append("\t\t");
 					if ( paramMatcher.group(1) != null ) // const

@@ -47,12 +47,15 @@ fun main(args: Array<String>) {
 	// Note: namespace is a class Kotlin generates that contains
 	// all top-level functions/properties in Kotlin package.
 	generate("org.lwjgl.openal")
+	//generate("org.lwjgl.opencl")
 	generate("org.lwjgl.opengl")
 	generate("org.lwjgl.system.windows")
+	generate("org.lwjgl.system.glfw")
 
 	// Generate capabilities
 	generateOutput(org.lwjgl.openal.FunctionProviderALC, File("generated/java/org/lwjgl/openal/ALCCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.openal.FunctionProviderAL, File("generated/java/org/lwjgl/openal/ALCapabilities.java")) { generateCapabilities(it) }
+	//generateOutput(org.lwjgl.opencl.FunctionProviderCLPlatform, File("generated/java/org/lwjgl/opencl/CLPlatformCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) { generateCapabilities(it) }
 
 	// Generate structs and callback functions. These are auto-registered during the process above.
@@ -95,7 +98,7 @@ private fun discoverTemplates(packageClassPath: String): List<Method>? {
 		// returns NativeClass
 		it.getReturnType() == javaClass<NativeClass>() &&
 		// has no arguments
-		it.getParameterTypes().size == 0
+		it.getParameterTypes()!!.size == 0
 	}
 }
 
@@ -166,7 +169,15 @@ abstract class AbstractGeneratorTarget(
 private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 	val packagePath = nativeClass.packageName.replace('.', '/')
 
-	val input = File("src/templates/$packagePath/templates/${nativeClass.templateName}.kt")
+	var input = File("src/templates/$packagePath/templates/${nativeClass.templateName}.kt")
+	if ( !input.exists() ) {
+		if ( !nativeClass.prefixTemplate.isEmpty() )
+			input = File("src/templates/$packagePath/templates/${nativeClass.prefixTemplate}_${nativeClass.templateName}.kt")
+
+		if ( !input.exists() )
+			throw IllegalStateException("The source file for template ${nativeClass.templateName} does not exist. The source file that defines the template must be: ${input.getPath()}")
+	}
+
 	val outputJava = File("./generated/java/$packagePath/${nativeClass.className}.java")
 
 	val touchTimestamp = max(input.lastModified(), packageLastModified)
@@ -317,7 +328,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 }
 
 private fun readFile(file: File): ByteBuffer {
-	val channel: FileChannel = FileInputStream(file).getChannel()
+	val channel: FileChannel = FileInputStream(file).getChannel()!!
 	val bytesTotal = channel.size().toInt()
 	val buffer: ByteBuffer = ByteBuffer.allocateDirect(bytesTotal)
 

@@ -36,6 +36,10 @@ public class APIBuffer {
 		return address;
 	}
 
+	public ByteBuffer buffer() {
+		return buffer;
+	}
+
 	private void ensureCapacity(int bytes) {
 		final int requiredCapacity = offset + bytes;
 		if ( requiredCapacity <= buffer.capacity() )
@@ -110,6 +114,39 @@ public class APIBuffer {
 
 	/** Returns the pointer value at the specified offset. */
 	public long pointerValue(final int offset) { return PointerBuffer.get(buffer, offset); }
+
+	/** Returns the ASCII string value at the specified byte range. */
+	public String stringValueASCII(final int offset, final int limit) {
+		buffer.position(offset);
+		buffer.limit(limit);
+		try {
+			return memDecodeASCII(buffer);
+		} finally {
+			buffer.clear();
+		}
+	}
+
+	/** Returns the UTF8 string value at the specified byte range. */
+	public String stringValueUTF8(final int offset, final int limit) {
+		buffer.position(offset);
+		buffer.limit(limit);
+		try {
+			return memDecodeUTF8(buffer);
+		} finally {
+			buffer.clear();
+		}
+	}
+
+	/** Returns the UTF16 string value at the specified byte range. */
+	public String stringValueUTF16(final int offset, final int limit) {
+		buffer.position(offset);
+		buffer.limit(limit);
+		try {
+			return memDecodeUTF16(buffer);
+		} finally {
+			buffer.clear();
+		}
+	}
 
 	/** Sets a boolean value at the specified offset. */
 	public void booleanValue(final int offset, final boolean value) { buffer.put(offset, value ? (byte)1 : (byte)0); }

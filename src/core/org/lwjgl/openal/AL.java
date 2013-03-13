@@ -38,6 +38,7 @@ public class AL {
 			return address;
 		}
 
+		public void destroy() {}
 	};
 
 	private static ALContext context;

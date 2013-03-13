@@ -9,8 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Resources" level="project" />
+    <orderEntry type="library" name="KotlinRuntime" level="project" />
   </component>
 </module>
 

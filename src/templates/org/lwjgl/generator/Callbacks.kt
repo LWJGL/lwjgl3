@@ -52,6 +52,8 @@ public class CallbackFunction(
 	protected override val nativeImports: List<String>
 		get() = _nativeImports
 
+	private val hasUserData = !parameters.filter { it.has(CALLBACK_DATA) }.isEmpty()
+
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
 		print(HEADER)
@@ -77,7 +79,7 @@ public class CallbackFunction(
 		println("\tprivate static native long setup(Method callback);\n")
 
 		// Step 3: Generate callback method
-		println("The callback method.".toJavaDoc(parameters.values()))
+		println("The callback method.".toJavaDoc(parameters.values().iterator()))
 		print("\tpublic abstract int invoke(")
 		printList(parameters) {
 			if ( it has CALLBACK_DATA )

@@ -6,7 +6,7 @@ package org.lwjgl.opengl;
 
 public abstract class GLContext {
 
-	private final ContextCapabilities capabilities;
+	final ContextCapabilities capabilities;
 
 	protected GLContext(final ContextCapabilities capabilities) {
 		this.capabilities = capabilities;

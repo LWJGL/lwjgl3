@@ -14,6 +14,12 @@ public final class APIUtil {
 		}
 	};
 
+	private static final ThreadLocal<APIBuffer> INTERNAL_BUFFERS = new ThreadLocal<APIBuffer>() {
+		protected APIBuffer initialValue() {
+			return new APIBuffer();
+		}
+	};
+
 	private APIUtil() {
 	}
 
@@ -39,6 +45,11 @@ public final class APIUtil {
 	/** Returns a thread-local APIBuffer. */
 	public static APIBuffer apiBuffer() {
 		return API_BUFFERS.get().reset();
+	}
+
+	/** Do not use. */
+	public static APIBuffer internalBuffer() {
+		return INTERNAL_BUFFERS.get().reset();
 	}
 
 }

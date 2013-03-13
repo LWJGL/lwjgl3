@@ -17,6 +17,12 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefNew(JNIEnv 
 	return (jlong)(intptr_t)(*env)->NewGlobalRef(env, object);
 }
 
+JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(JNIEnv *env, jclass clazz,
+	jlong globalRef
+) {
+	return (jobject)(intptr_t)globalRef;
+}
+
 // memGlobalRefDelete(J)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefDelete(JNIEnv *env, jclass clazz,
 	jlong globalRef

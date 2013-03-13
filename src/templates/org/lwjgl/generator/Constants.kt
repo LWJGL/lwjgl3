@@ -26,7 +26,7 @@ val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
 
 val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
 	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
-	override fun nullValue(): Float = 0.0.f
+	override fun nullValue(): Float = 0.0
 }
 
 // Extension property for integer literals.
@@ -40,6 +40,9 @@ val Int.L: Long
 // Extension property for float literals.
 val Double.f: Float
 	get() = this.toFloat()
+
+public annotation class foo
+public annotation class bar
 
 public class ConstantBlock<T>(
 	val nativeClass: NativeClass,

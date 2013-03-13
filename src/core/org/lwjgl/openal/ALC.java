@@ -6,7 +6,10 @@ package org.lwjgl.openal;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.*;
+import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.APIUtil;
+import org.lwjgl.system.FunctionMap;
+import org.lwjgl.system.FunctionProviderLocal;
 import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
@@ -74,6 +77,10 @@ public class ALC {
 							LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
 
 						return address;
+					}
+
+					public void destroy() {
+						OPENAL.destroy();
 					}
 				};
 				break;

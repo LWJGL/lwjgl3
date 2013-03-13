@@ -135,10 +135,10 @@ var kotlin = {set:function(g, h, e) {
     return null === a || void 0 === a ? [] : a.slice()
   };
   Kotlin.intUpto = function(a, b) {
-    return Kotlin.$new(Kotlin.NumberRange)(a, b - a + 1, !1)
+    return Kotlin.$new(Kotlin.NumberRange)(a, b)
   };
   Kotlin.intDownto = function(a, b) {
-    return Kotlin.$new(Kotlin.NumberRange)(a, a - b + 1, !0)
+    return Kotlin.$new(Kotlin.Progression)(a, b, -1)
   };
   Kotlin.modules = {};
   Kotlin.Exception = Kotlin.$createClass();
@@ -294,47 +294,50 @@ var kotlin = {set:function(g, h, e) {
   };
   Kotlin.RangeIterator = Kotlin.$createClass(Kotlin.Iterator, {initialize:function(a, b, c) {
     this.$start = a;
-    this.$count = b;
-    this.$reversed = c;
-    this.$i = this.get_start()
+    this.$end = b;
+    this.$increment = c;
+    this.$i = a
   }, get_start:function() {
     return this.$start
-  }, get_count:function() {
-    return this.$count
-  }, set_count:function(a) {
-    this.$count = a
-  }, get_reversed:function() {
-    return this.$reversed
+  }, get_end:function() {
+    return this.$end
   }, get_i:function() {
     return this.$i
   }, set_i:function(a) {
     this.$i = a
   }, next:function() {
-    this.set_count(this.get_count() - 1);
-    if(this.get_reversed()) {
-      return this.set_i(this.get_i() - 1), this.get_i() + 1
-    }
-    this.set_i(this.get_i() + 1);
-    return this.get_i() - 1
+    var a = this.$i;
+    this.set_i(this.$i + this.$increment);
+    return a
   }, get_hasNext:function() {
-    return 0 < this.get_count()
+    return 0 < this.$increment ? this.$next <= this.$end : this.$next >= this.$end
   }});
-  Kotlin.NumberRange = Kotlin.$createClass({initialize:function(a, b, c) {
+  Kotlin.NumberRange = Kotlin.$createClass({initialize:function(a, b) {
     this.$start = a;
-    this.$size = b;
-    this.$reversed = c
+    this.$end = b
   }, get_start:function() {
     return this.$start
-  }, get_size:function() {
-    return this.$size
-  }, get_reversed:function() {
-    return this.$reversed
   }, get_end:function() {
-    return this.get_reversed() ? this.get_start() - this.get_size() + 1 : this.get_start() + this.get_size() - 1
+    return this.$end
+  }, get_increment:function() {
+    return 1
   }, contains:function(a) {
-    return this.get_reversed() ? a <= this.get_start() && a > this.get_start() - this.get_size() : a >= this.get_start() && a < this.get_start() + this.get_size()
+    return this.$start <= a && a <= this.$end
   }, iterator:function() {
-    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_size(), this.get_reversed())
+    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end())
+  }});
+  Kotlin.Progression = Kotlin.$createClass({initialize:function(a, b, c) {
+    this.$start = a;
+    this.$end = b;
+    this.$increment = c
+  }, get_start:function() {
+    return this.$start
+  }, get_end:function() {
+    return this.$end
+  }, get_increment:function() {
+    return this.$increment
+  }, iterator:function() {
+    return Kotlin.$new(Kotlin.RangeIterator)(this.get_start(), this.get_end(), this.get_increment())
   }});
   Kotlin.Comparator = Kotlin.$createClass({initialize:function() {
   }, compare:g("Comparator#compare")});
@@ -354,6 +357,19 @@ var kotlin = {set:function(g, h, e) {
       0 > b.compare(d, e) && (d = e)
     }
     return d
+  };
+  Kotlin.collectionsSort = function(a, b) {
+    var c = void 0;
+    void 0 !== b && (c = b.compare.bind(b));
+    a instanceof Array && a.sort(c);
+    for(var d = [], e = a.iterator();e.hasNext();) {
+      d.push(e.next())
+    }
+    d.sort(c);
+    c = 0;
+    for(e = d.length;c < e;c++) {
+      a.set(c, d[c])
+    }
   };
   Kotlin.StringBuilder = Kotlin.$createClass({initialize:function() {
     this.string = ""
@@ -378,7 +394,7 @@ var kotlin = {set:function(g, h, e) {
     return c
   };
   Kotlin.arrayIndices = function(a) {
-    return Kotlin.$new(Kotlin.NumberRange)(0, a.length)
+    return Kotlin.$new(Kotlin.NumberRange)(0, a.length - 1)
   };
   Kotlin.arrayIterator = function(a) {
     return Kotlin.$new(h)(a)
@@ -587,7 +603,7 @@ Kotlin.b4 = function(g, h) {
     this._values = m("values");
     this._entries = m("getEntries");
     this.values = function() {
-      for(var a = this._values(), b = a.length, c = Kotlin.$new(Kotlin.ArrayList)();--b;) {
+      for(var a = this._values(), b = a.length, c = Kotlin.$new(Kotlin.ArrayList)();b--;) {
         c.add(a[b])
       }
       return c
@@ -616,12 +632,12 @@ Kotlin.b4 = function(g, h) {
       return a
     };
     this.each = function(a) {
-      for(var b = e.entries(), c = b.length, d;c--;) {
+      for(var b = e._entries(), c = b.length, d;c--;) {
         d = b[c], a(d[0], d[1])
       }
     };
     this.putAll = function(a, b) {
-      for(var c = a.entries(), d, f, g, h = c.length, i = typeof b == j;h--;) {
+      for(var c = a._entries(), d, f, g, h = c.length, i = typeof b == j;h--;) {
         d = c[h];
         f = d[0];
         d = d[1];
