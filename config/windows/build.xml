@@ -56,7 +56,7 @@
 			<arg line="/Fe${dllname} /link"/>
 			<arg value="/LIBPATH:${sdkhomelib}"/>
 			<arg value="/LIBPATH:${java.home}\..\lib"/>
-			<arg value="/LIBPATH:C:\PROJECTS\LWJGL Project\LWJGL 3.0\libs\windows\${os.arch}"/>
+			<arg value="/LIBPATH:..\..\libs\windows\${os.arch}"/>
 			<arg value="/OPT:REF"/>
 			<arg value="/OPT:ICF"/>
 			<arg line="/DLL ${libs}"/>
