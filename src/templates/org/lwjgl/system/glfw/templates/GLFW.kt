@@ -871,4 +871,101 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		double.IN("time", "")
 	)
 
+	// [ OpenGL ]
+
+	IntConstant.block(
+		"PixelFormat hints.",
+
+		"RED_BITS" _ 0x00021000,
+		"GREEN_BITS" _ 0x00021001,
+		"BLUE_BITS" _ 0x00021002,
+		"ALPHA_BITS" _ 0x00021003,
+		"DEPTH_BITS" _ 0x00021004,
+		"STENCIL_BITS" _ 0x00021005,
+		"ACCUM_RED_BITS" _ 0x00021006,
+		"ACCUM_GREEN_BITS" _ 0x00021007,
+		"ACCUM_BLUE_BITS" _ 0x00021008,
+		"ACCUM_ALPHA_BITS" _ 0x00021009,
+		"AUX_BUFFERS" _ 0x0002100A,
+		"STEREO" _ 0x0002100B,
+		"SAMPLES" _ 0x0002100C,
+		"SRGB_CAPABLE" _ 0x0002100D
+	)
+
+	IntConstant.block(
+		"Client API hints.",
+
+		"CLIENT_API" _ 0x00022000,
+		"CONTEXT_VERSION_MAJOR" _ 0x00022001,
+		"CONTEXT_VERSION_MINOR" _ 0x00022002,
+		"CONTEXT_REVISION" _ 0x00020004,
+		"CONTEXT_ROBUSTNESS" _ 0x00022003,
+		"OPENGL_FORWARD_COMPAT" _ 0x00022004,
+		"OPENGL_DEBUG_CONTEXT" _ 0x00022005,
+		"OPENGL_PROFILE" _ 0x00022006
+	)
+
+	IntConstant.block(
+		"Client API types.",
+
+		"OPENGL_API" _ 0x00000001,
+		"OPENGL_ES_API" _ 0x00000002
+	)
+
+	IntConstant.block(
+		"// Robustness values.",
+
+		"NO_ROBUSTNESS" _ 0x00000000,
+		"NO_RESET_NOTIFICATION" _ 0x00000001,
+		"LOSE_CONTEXT_ON_RESET" _ 0x00000002
+	)
+
+	IntConstant.block(
+		"OpenGL profiles.",
+
+		"OPENGL_NO_PROFILE" _ 0x00000000,
+		"OPENGL_CORE_PROFILE" _ 0x00000001,
+		"OPENGL_COMPAT_PROFILE" _ 0x00000002
+	)
+
+	void.func(
+		"MakeContextCurrent",
+		"",
+
+		GLFWwindow.IN("window", "")
+	)
+
+	GLFWwindow.func(
+		"GetCurrentContext",
+		""
+	)
+
+	void.func(
+		"SwapBuffers",
+		"",
+
+		GLFWwindow.IN("window", "")
+	)
+
+	void.func(
+		"SwapInterval",
+		"",
+
+		int.IN("interval", "")
+	)
+
+	int.func(
+		"ExtensionSupported",
+		"",
+
+		const _ charASCII_p.IN("extension", "")
+	)
+
+	GLFWglproc.func(
+		"GetProcAddress",
+		"",
+
+		const _ charASCII_p.IN("procname", "")
+	)
+
 }
