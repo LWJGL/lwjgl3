@@ -17,6 +17,7 @@ import org.lwjgl.system.windows.opengl.WindowsGLContext;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import static java.lang.Math.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGpuAssociation.*;
@@ -97,16 +98,10 @@ public final class WGLDemo {
 		if ( caps.WGL_EXT_swap_control )
 			wglSwapIntervalEXT(caps.WGL_EXT_swap_control_tear ? -1 : 1);
 
-		glViewport(0, 0, 640, 480);
-
-		glMatrixMode(GL_PROJECTION);
-		glOrtho(0.0, 640.0, 0, 480.0, -1.0, 1.0);
-		glMatrixMode(GL_MODELVIEW);
-
 		window.setLocation(128, 128);
 		window.setVisible(true);
 
-		final long bufferRegion = wglCreateBufferRegionARB(window.getHdc(), 0, WGL_FRONT_COLOR_BUFFER_BIT_ARB);
+		final long bufferRegion = wglCreateBufferRegionARB(window.getHdc(), 0, WGL_BACK_COLOR_BUFFER_BIT_ARB);
 		assertTrue(bufferRegion != 0);
 
 		SelectObject(window.getHdc(), GetStockObject(DEFAULT_GUI_FONT));
@@ -132,41 +127,54 @@ public final class WGLDemo {
 				TranslateMessage(msg);
 				DispatchMessage(msg);
 			}
+			
+			final int w = window.getWidth();
+			final int h = window.getHeight();
+			
+			glViewport(0, 0, w, h);
+
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, w, 0, h, -1.0, 1.0);
 
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			glMatrixMode(GL_MODELVIEW);
 			glLoadIdentity();
 
-			glTranslatef(640 * 0.5f, 480 * 0.5f, 0.0f);
+			glTranslatef(w * 0.5f, h * 0.5f, 0.0f);
 			glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 			rotation += 1.0f;
+
+			final int ts = (int)ceil(min(w, h) * 0.1);
+			final int tr = ts * 3;
 
 			glColor3f(1.0f, 0.0f, 0.0f);
 			glBegin(GL_TRIANGLES);
 			{
-				glVertex2f(0.0f, 64.0f);
-				glVertex2f(64.0f, 64.0f);
-				glVertex2f(64.0f, 0.0f);
+				glVertex2f(0.0f, ts);
+				glVertex2f(ts, ts);
+				glVertex2f(ts, 0.0f);
 			}
 			glEnd();
 
-			success = wglSaveBufferRegionARB(bufferRegion, 640 / 2 - 100, 480 / 2 - 100, 200, 200);
+			success = wglSaveBufferRegionARB(bufferRegion, w / 2 - tr / 2, h / 2 - tr / 2, tr, tr);
 			assertTrue(success != 0);
 
-			success = wglRestoreBufferRegionARB(bufferRegion, 0, 0, 200, 200, 0, 0);
+			success = wglRestoreBufferRegionARB(bufferRegion, 0, 0, tr, tr, 0, 0);
 			assertTrue(success != 0);
 
-			success = wglRestoreBufferRegionARB(bufferRegion, 640 - 200, 0, 200, 200, 0, 0);
+			success = wglRestoreBufferRegionARB(bufferRegion, w - tr, 0, tr, tr, 0, 0);
 			assertTrue(success != 0);
 
-			success = wglRestoreBufferRegionARB(bufferRegion, 0, 480 - 200, 200, 200, 0, 0);
+			success = wglRestoreBufferRegionARB(bufferRegion, 0, h - tr, tr, tr, 0, 0);
 			assertTrue(success != 0);
 
-			success = wglRestoreBufferRegionARB(bufferRegion, 640 - 200, 480 - 200, 200, 200, 0, 0);
+			success = wglRestoreBufferRegionARB(bufferRegion, w - tr, h - tr, tr, tr, 0, 0);
 			assertTrue(success != 0);
 
 			glColor3f(0.0f, 1.0f, 0.0f);
-			glRasterPos2f(64.0f + 10.0f, 64.0f + 10.0f);
+			glRasterPos2f(ts + 10.0f, ts + 10.0f);
 			glCallLists(stringBuffer);
 
 			SwapBuffers(window.getHdc());
@@ -232,7 +240,7 @@ public final class WGLDemo {
 		add(propList, WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
 		add(propList, WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB);
 		add(propList, WGL_DRAW_TO_WINDOW_ARB, GL_TRUE);
-		add(propList, WGL_DOUBLE_BUFFER_ARB, GL_FALSE);
+		add(propList, WGL_DOUBLE_BUFFER_ARB, GL_TRUE);
 		add(propList, WGL_STEREO_ARB, GL_FALSE);
 		add(propList, WGL_SAMPLE_BUFFERS_ARB, 0);
 		add(propList, WGL_SAMPLES_ARB, 0);

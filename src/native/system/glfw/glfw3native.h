@@ -30,11 +30,6 @@
 #ifndef _glfw3_native_h_
 #define _glfw3_native_h_
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 /*************************************************************************
  * Doxygen documentation
  *************************************************************************/
@@ -46,19 +41,12 @@ extern "C" {
  *  shouldn't be using it.</strong>
  *
  *  Before the inclusion of @ref glfw3native.h, you must define exactly one
- *  window API macro and exactly one context API macro.  Failure to do this
- *  will cause a compile-time error.
+ *  window API macro. Failure to do this will cause a compile-time error.
  *
  *  The available window API macros are:
  *  @arg @c GLFW_EXPOSE_NATIVE_WIN32
  *  @arg @c GLFW_EXPOSE_NATIVE_COCOA
  *  @arg @c GLFW_EXPOSE_NATIVE_X11
- *
- *  The available context API macros are:
- *  @arg @c GLFW_EXPOSE_NATIVE_WGL
- *  @arg @c GLFW_EXPOSE_NATIVE_NSGL
- *  @arg @c GLFW_EXPOSE_NATIVE_GLX
- *  @arg @c GLFW_EXPOSE_NATIVE_EGL
  *
  *  These macros select which of the native access functions are declared and
  *  which platform-specific headers to include.  It is then up your (by
@@ -66,37 +54,25 @@ extern "C" {
  *  defined.
  */
 
+// LWJGL Note: Cleaned-up, only kept the stuff we need to statically link.
 
 /*************************************************************************
  * System headers and types
  *************************************************************************/
 
 #if defined(GLFW_EXPOSE_NATIVE_WIN32)
- #include <windows.h>
+	#include "WindowsLWJGL.h"
 #elif defined(GLFW_EXPOSE_NATIVE_COCOA)
- #if defined(__OBJC__)
-  #import <Cocoa/Cocoa.h>
- #else
-  typedef void* id;
- #endif
+	#if defined(__OBJC__)
+		#import <Cocoa/Cocoa.h>
+	#else
+		typedef void* id;
+	#endif
 #elif defined(GLFW_EXPOSE_NATIVE_X11)
- #include <X11/Xlib.h>
+	#include <X11/Xlib.h>
 #else
- #error "No window API specified"
+	#error "No window API specified"
 #endif
-
-#if defined(GLFW_EXPOSE_NATIVE_WGL)
- /* WGL is declared by windows.h */
-#elif defined(GLFW_EXPOSE_NATIVE_NSGL)
- /* NSGL is declared by Cocoa.h */
-#elif defined(GLFW_EXPOSE_NATIVE_GLX)
- #include <GL/glx.h>
-#elif defined(GLFW_EXPOSE_NATIVE_EGL)
- #include <EGL/egl.h>
-#else
- #error "No context API specified"
-#endif
-
 
 /*************************************************************************
  * Functions
@@ -110,28 +86,12 @@ extern "C" {
 GLFWAPI HWND glfwGetWin32Window(GLFWwindow* window);
 #endif
 
-#if defined(GLFW_EXPOSE_NATIVE_WGL)
-/*! @brief Returns the @c HGLRC of the specified window.
- *  @return The @c HGLRC of the specified window.
- *  @ingroup native
- */
-GLFWAPI HGLRC glfwGetWGLContext(GLFWwindow* window);
-#endif
-
 #if defined(GLFW_EXPOSE_NATIVE_COCOA)
 /*! @brief Returns the @c NSWindow of the specified window.
  *  @return The @c NSWindow of the specified window.
  *  @ingroup native
  */
 GLFWAPI id glfwGetCocoaWindow(GLFWwindow* window);
-#endif
-
-#if defined(GLFW_EXPOSE_NATIVE_NSGL)
-/*! @brief Returns the @c NSOpenGLContext of the specified window.
- *  @return The @c NSOpenGLContext of the specified window.
- *  @ingroup native
- */
-GLFWAPI id glfwGetNSGLContext(GLFWwindow* window);
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_X11)
@@ -147,35 +107,4 @@ GLFWAPI Display* glfwGetX11Display(void);
 GLFWAPI Window glfwGetX11Window(GLFWwindow* window);
 #endif
 
-#if defined(GLFW_EXPOSE_NATIVE_GLX)
-/*! @brief Returns the @c GLXContext of the specified window.
- *  @return The @c GLXContext of the specified window.
- *  @ingroup native
- */
-GLFWAPI GLXContext glfwGetGLXContext(GLFWwindow* window);
-#endif
-
-#if defined(GLFW_EXPOSE_NATIVE_EGL)
-/*! @brief Returns the @c EGLDisplay used by GLFW.
- *  @return The @c EGLDisplay used by GLFW.
- *  @ingroup native
- */
-GLFWAPI EGLDisplay glfwGetEGLDisplay(void);
-/*! @brief Returns the @c EGLContext of the specified window.
- *  @return The @c EGLContext of the specified window.
- *  @ingroup native
- */
-GLFWAPI EGLContext glfwGetEGLContext(GLFWwindow* window);
-/*! @brief Returns the @c EGLSurface of the specified window.
- *  @return The @c EGLSurface of the specified window.
- *  @ingroup native
- */
-GLFWAPI EGLSurface glfwGetEGLSurface(GLFWwindow* window);
-#endif
-
-#ifdef __cplusplus
-}
-#endif
-
 #endif /* _glfw3_native_h_ */
-

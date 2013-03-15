@@ -91,3 +91,7 @@ val GLFWcursorposfun = PointerType(name = "GLFWcursorposfun", includesPointer = 
 val GLFWcursorenterfun = PointerType(name = "GLFWcursorenterfun", includesPointer = true)
 
 val GLFWscrollfun = PointerType(name = "GLFWscrollfun", includesPointer = true)
+
+// OpenGL
+
+val GLFWglproc = PointerType("GLFWglproc")

@@ -29,8 +29,6 @@ public class Events {
 	}
 
 	private static void demo() {
-		System.out.println("GLFW initialized");
-
 		glfwDefaultWindowHints();
 		final long window = glfwCreateWindow(640, 480, "GLFW Event Demo", 0L, 0L);
 		if ( window == 0L )
@@ -96,7 +94,7 @@ public class Events {
 				printEvent(window, "key [%d] was %s", key, state);
 
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-					nglfwSetWindowShouldClose(window, 1);
+					glfwSetWindowShouldClose(window, 1);
 			}
 
 			@Override
