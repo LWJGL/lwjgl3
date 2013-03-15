@@ -331,7 +331,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""
 	).javaDocLink
 
-	void.func(
+	Code(
+		javaBeforeNative = "\t\tWindowCallback.clearAll();"
+	) _ void.func(
 		"Terminate",
 		""
 	)
@@ -484,12 +486,14 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindow.IN("share", "")
 	)
 
-	val DestroyWindow = void.func(
+	val DestroyWindow = (Code(
+		javaBeforeNative = "\t\tWindowCallback.set(window, null);"
+	) _ (void.func(
 		"DestroyWindow",
 		"",
 
 		GLFWwindow.IN("window", "")
-	).javaDocLink
+	))).javaDocLink
 
 	int.func(
 		"WindowShouldClose",
@@ -598,7 +602,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"",
 
 		GLFWwindow.IN("window", ""),
-		voidptr.IN("pointer", "")
+		nullable _ voidptr.IN("pointer", "")
 	)
 
 	voidptr.func(

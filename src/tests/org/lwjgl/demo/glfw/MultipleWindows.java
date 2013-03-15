@@ -5,6 +5,8 @@ import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import static org.lwjgl.system.glfw.GLFW.*;
 
 public class MultipleWindows {
@@ -31,6 +33,8 @@ public class MultipleWindows {
 
 		final long[] windows = new long[4];
 
+		final AtomicInteger latch = new AtomicInteger(windows.length);
+
 		for ( int i = 0; i < windows.length; i++ ) {
 			final int windowIndex = i + 1;
 
@@ -44,6 +48,12 @@ public class MultipleWindows {
 					if ( entered != 0 )
 						System.out.println("Mouse entered window: " + windowIndex);
 				}
+
+				@Override
+				public void key(final long window, final int key, final int action) {
+					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+						latch.set(0); // Tests WindowCallback clean-up
+				}
 			});
 
 			windows[i] = window;
@@ -52,24 +62,18 @@ public class MultipleWindows {
 			glfwShowWindow(window);
 		}
 
-		while ( true ) {
+		while ( latch.get() != 0 ) {
 			glfwPollEvents();
 
-			boolean noMoreWindowsOpen = true;
 			for ( int i = 0; i < 4; i++ ) {
 				if ( windows[i] == 0L )
 					continue;
 
 				if ( glfwWindowShouldClose(windows[i]) != 0 ) {
 					glfwDestroyWindow(windows[i]);
-					windows[i] = 0L;
+					latch.decrementAndGet();
 				}
-
-				noMoreWindowsOpen = false;
 			}
-
-			if ( noMoreWindowsOpen )
-				break;
 		}
 	}
 

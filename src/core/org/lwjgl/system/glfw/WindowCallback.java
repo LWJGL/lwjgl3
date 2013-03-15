@@ -9,6 +9,8 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL11;
 
 import java.lang.reflect.Method;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
@@ -77,6 +79,8 @@ public abstract class WindowCallback {
 		}
 	}
 
+	private static final Set<Long> windows = new HashSet<Long>();
+
 	private int eventTypes;
 
 	protected WindowCallback() {
@@ -109,18 +113,24 @@ public abstract class WindowCallback {
 	public static void set(final long window, final WindowCallback proc, final int eventTypes) {
 		final long oldRef = glfwGetWindowUserPointer(window);
 		if ( oldRef != 0L ) {
-			final WindowCallback old = memGlobalRefToObject(oldRef);
-			configEvents(window, old.eventTypes, 0L);
-
-			glfwSetWindowUserPointer(window, 0L);
-			memGlobalRefDelete(oldRef);
+			cleanup(window, oldRef);
+			windows.remove(window);
 		}
 
 		if ( proc != null ) {
-			proc.eventTypes = eventTypes;
+			windows.add(window);
 			glfwSetWindowUserPointer(window, memGlobalRefNew(proc));
-			configEvents(window, eventTypes, 1L);
+
+			configEvents(window, proc.eventTypes = eventTypes, 1L);
 		}
+	}
+
+	private static void cleanup(final long window, final long oldRef) {
+		final WindowCallback old = memGlobalRefToObject(oldRef);
+		configEvents(window, old.eventTypes, 0L);
+
+		glfwSetWindowUserPointer(window, 0L);
+		memGlobalRefDelete(oldRef);
 	}
 
 	private static boolean isEventEnabled(final int eventTypes, final int type) {
@@ -163,6 +173,18 @@ public abstract class WindowCallback {
 
 		if ( isEventEnabled(eventTypes, SCROLL) )
 			glfwSetScrollCallback(window, CALLBACKS[SCROLL_INDEX] * enable);
+	}
+
+	/**
+	 * This is called automatically on {@link GLFW#glfwTerminate()}. Iterates over all GLFW
+	 * windows and clears the associated WindowCallback. We do this to avoid a memory leak
+	 * from the global reference we create in {@link #set(long, WindowCallback, int)}.
+	 */
+	static void clearAll() {
+		for ( final Long window : windows )
+			cleanup(window, glfwGetWindowUserPointer(window));
+
+		windows.clear();
 	}
 
 	/**
