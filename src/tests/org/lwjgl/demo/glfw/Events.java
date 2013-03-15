@@ -92,7 +92,11 @@ public class Events {
 					default:
 						throw new IllegalArgumentException();
 				}
+
 				printEvent(window, "key [%d] was %s", key, state);
+
+				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+					nglfwSetWindowShouldClose(window, 1);
 			}
 
 			@Override

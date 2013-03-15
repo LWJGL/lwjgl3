@@ -39,13 +39,16 @@ import java.util.regex.Pattern
 */
 
 fun main(args: Array<String>) {
+	// Makes sure we use \n during generation, even on Windows.
+	System.setProperty("line.separator", "\n")
+
 	// We discover templates reflectively.
 	// For a package passed to the generate function, we
-	// search for a <package>.templates.namespace class file
+	// search for a <package>.templates.TemplatesPackage class file
 	// and run any public static methods that return a NativeClass object.
 
-	// Note: namespace is a class Kotlin generates that contains
-	// all top-level functions/properties in Kotlin package.
+	// Note: For a Kotlin package X, <X>Package is the class Kotlin generates that contains
+	// all top-level functions/properties in that package.
 	generate("org.lwjgl.openal")
 	//generate("org.lwjgl.opencl")
 	generate("org.lwjgl.opengl")

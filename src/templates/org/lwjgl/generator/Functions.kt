@@ -79,10 +79,10 @@ public abstract class Function(
 	}
 
 	fun hasSimpleParamsOnly(): Boolean {
-		if ( returns.isBufferPointer || returns.hasSpecialModifier() )
+		if ( hasSpecialModifier() || returns.isBufferPointer || returns.hasSpecialModifier() )
 			return false
 
-		return parameters.values().find { it.isBufferPointer || it.hasSpecialModifier() } == null
+		return parameters.values().find { it.isBufferPointer || it.hasSpecialModifier() || it.nativeType.mapping == PointerMapping.NAKED_POINTER } == null
 	}
 
 }
@@ -513,15 +513,18 @@ public class NativeClassFunction(
 
 		println(") {")
 
+		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+
 		// Step 2: Get function address
 
 		if ( nativeClass.functionProvider != null )
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
-		// Step 3: Generate checks
+		// Step 3.a: Generate checks
+		printCode(code?.javaInit)
 		generateChecks(GenerationMode.NORMAL);
 
-		// Step 3.C: Prepare APIBuffer parameters.
+		// Step 3.b: Prepare APIBuffer parameters.
 
 		var apiBufferSet = hasParam { it has autoSizeResult }
 		if ( apiBufferSet ) {
@@ -533,6 +536,7 @@ public class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
+		generateCodeBeforeNative(code)
 
 		generateNativeMethodCall() {
 			printList(parameters) {
@@ -576,7 +580,35 @@ public class NativeClassFunction(
 			println(");")
 		}
 
+		generateCodeAfterNative(code)
+
 		println("\t}\n")
+	}
+
+	private fun PrintWriter.printCode(fragment: String?) {
+		if ( fragment != null )
+			println(fragment)
+	}
+
+	private fun PrintWriter.generateCodeBeforeNative(code: Code?) {
+		printCode(code?.javaBeforeNative)
+
+		if ( code?.javaFinally != null ) {
+			println("\t\ttry {")
+			print('\t')
+		}
+	}
+
+	private fun PrintWriter.generateCodeAfterNative(code: Code?) {
+		if ( code?.javaFinally != null )
+			print('\t')
+		printCode(code?.javaAfterNative)
+
+		if ( code?.javaFinally != null ) {
+			println("\t\t} finally {")
+			printCode(code?.javaFinally)
+			println("\t\t}")
+		}
 	}
 
 	private fun PrintWriter.generateNativeMethodCall(printParams: PrintWriter.() -> Unit) {
@@ -879,13 +911,15 @@ public class NativeClassFunction(
 		}
 		println(") {")
 
+		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+
 		// Step 2: Get function address
 
 		if ( nativeClass.functionProvider != null )
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.A: Generate checks
-
+		printCode(code?.javaInit)
 		generateChecks(GenerationMode.ALTERNATIVE, customChecks, transforms);
 
 		// Step 3.B: Transform pre-processing.
@@ -916,6 +950,7 @@ public class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
+		generateCodeBeforeNative(code)
 
 		generateNativeMethodCall() {
 			printList(parameters) {
@@ -960,6 +995,8 @@ public class NativeClassFunction(
 					println(returnExpression)
 			}
 		}
+
+		generateCodeAfterNative(code)
 
 		println("\t}\n")
 	}
@@ -1075,6 +1112,22 @@ public class Capabilities(
 	override val isSpecial: Boolean = true
 }
 
+public class Code(
+	val javaInit: String? = null,
+
+	val javaBeforeNative: String? = null,
+	val javaAfterNative: String? = null,
+	val javaFinally: String? = null,
+
+	val nativeBeforeCall: String? = null,
+	val nativeAfterCall: String? = null
+): FunctionModifier() {
+	class object {
+		val CLASS = javaClass<Code>()
+	}
+
+	override val isSpecial: Boolean = true
+}
 // --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
 
 private trait FunctionTransform<T: QualifiedType> {
