@@ -48,8 +48,8 @@ val GLbitfield = PrimitiveType("GLbitfield", PrimitiveMapping.INT)
 val GLsizei_p = PointerType(GLsizei)
 val GLenum_p = PointerType(GLenum)
 
-val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.LONG)
-val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.LONG)
+val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.PTR)
+val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.PTR)
 
 // strings
 

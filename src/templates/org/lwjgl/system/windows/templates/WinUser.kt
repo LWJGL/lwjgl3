@@ -932,7 +932,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		""",
 
 		HWND.IN("window", "a handle to the window"),
-		HWND.IN("insertAfter", "a handle to the window to precede the positioned window in the Z order"),
+		nullable _ HWND.IN("insertAfter", "a handle to the window to precede the positioned window in the Z order"),
 		int.IN("x", "the new position of the left side of the window, in client coordinates"),
 		int.IN("y", "the new position of the top of the window, in client coordinates"),
 		int.IN("width", "the new width of the window, in pixels"),

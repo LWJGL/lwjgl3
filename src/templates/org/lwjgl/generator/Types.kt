@@ -54,6 +54,7 @@ public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 		PrimitiveMapping.SHORT -> PointerMapping.DATA_SHORT
 		PrimitiveMapping.INT -> PointerMapping.DATA_INT
 		PrimitiveMapping.LONG -> PointerMapping.DATA_LONG
+		PrimitiveMapping.PTR -> PointerMapping.DATA_POINTER
 		PrimitiveMapping.FLOAT -> PointerMapping.DATA_FLOAT
 		PrimitiveMapping.DOUBLE -> PointerMapping.DATA_DOUBLE
 		else -> {
@@ -165,6 +166,9 @@ public open class PrimitiveMapping(
 		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2)
 		val INT = PrimitiveMapping("jint", javaClass<Int>(), 4)
 		val LONG = PrimitiveMapping("jlong", javaClass<Long>(), 8)
+
+		// Integer type with enough precision to store a pointer
+		val PTR = PrimitiveMapping("jlong", javaClass<Long>(), 8)
 
 		val FLOAT = PrimitiveMapping("jfloat", javaClass<Float>(), 4)
 		val DOUBLE = PrimitiveMapping("jdouble", javaClass<Double>(), 8)

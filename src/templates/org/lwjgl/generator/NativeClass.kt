@@ -173,9 +173,8 @@ public class NativeClass(
 	private fun PrintWriter.generateNativeImpl() {
 		print(HEADER)
 		println("#include <jni.h>")
-		nativeImports.forEach {
-			println("#include $it")
-		}
+
+		nativePreamble.print(this)
 
 		if ( functionProvider != null ) {
 			// Generate typedefs for casting the function pointers

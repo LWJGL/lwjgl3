@@ -26,7 +26,7 @@
 
 	#define NOGDICAPMASKS // CC_*, LC_*, PC_*, CP_*, TC_*, RC_
 	#define NOVIRTUALKEYCODES // VK_*
-	#define NOWINMESSAGES // WM_*, EM_*, LB_*, CB_*
+	//#define NOWINMESSAGES // WM_*, EM_*, LB_*, CB_*
 	#define NOWINSTYLES // WS_*, CS_*, ES_*, LBS_*, SBS_*, CBS_*
 	//#define NOSYSMETRICS // SM_*
 	#define NOMENUS // MF_*

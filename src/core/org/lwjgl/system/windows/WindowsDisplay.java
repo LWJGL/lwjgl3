@@ -56,8 +56,7 @@ public class WindowsDisplay {
 	private final long hwnd;
 	private final long hdc;
 
-	private int x, y;
-	private int width, height;
+	private ByteBuffer windowPos;
 
 	private boolean closeRequested;
 
@@ -71,8 +70,10 @@ public class WindowsDisplay {
 
 	public WindowsDisplay(final String title, final int width, final int height) {
 		this.id = WINDOW_ID.incrementAndGet();
-		this.width = width;
-		this.height = height;
+
+		this.windowPos = WINDOWPOS.malloc();
+		WINDOWPOS.cxSet(windowPos, width);
+		WINDOWPOS.cySet(windowPos, height);
 
 		final String className = "LWJGL" + id;
 
@@ -120,38 +121,33 @@ public class WindowsDisplay {
 	}
 
 	public int getX() {
-		return x;
+		return WINDOWPOS.xGet(windowPos);
 	}
 
 	public int getY() {
-		return y;
+		return WINDOWPOS.yGet(windowPos);
 	}
 
 	public int getWidth() {
-		return width;
+		return WINDOWPOS.cxGet(windowPos);
 	}
 
 	public int getHeight() {
-		return height;
+		return WINDOWPOS.cyGet(windowPos);
 	}
 
 	public void setLocation(final int x, final int y) {
 		windowsCheckResult(
-			SetWindowPos(hwnd, 0, x, y, width, height, SWP_NOOWNERZORDER | SWP_NOSIZE),
+			SetWindowPos(hwnd, 0, x, y, WINDOWPOS.cxGet(windowPos), WINDOWPOS.cyGet(windowPos), SWP_NOOWNERZORDER | SWP_NOSIZE),
 			"SetWindowPos"
 		);
-		this.x = x;
-		this.y = y;
 	}
 
 	public void setSize(final int width, final int height) {
 		windowsCheckResult(
-			SetWindowPos(hwnd, 0, x, y, width, height, SWP_NOOWNERZORDER | SWP_NOMOVE),
+			SetWindowPos(hwnd, 0, WINDOWPOS.xGet(windowPos), WINDOWPOS.yGet(windowPos), width, height, SWP_NOOWNERZORDER | SWP_NOMOVE),
 			"SetWindowPos"
 		);
-
-		this.width = width;
-		this.height = height;
 	}
 
 	public void setVisible(final boolean visible) {
@@ -191,6 +187,9 @@ public class WindowsDisplay {
 					default:
 						break;
 				}
+				break;
+			case WM_WINDOWPOSCHANGED:
+				memCopy(lParam, memAddress(windowMap.get(window).windowPos), WINDOWPOS.SIZEOF);
 				break;
 		}
 		return DefWindowProc(window, msg, wParam, lParam);
