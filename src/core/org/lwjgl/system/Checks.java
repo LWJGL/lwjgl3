@@ -139,6 +139,11 @@ public class Checks {
 		}
 	}
 
+	/** @see #checkBuffer(java.nio.Buffer, int) */
+	public static void checkBuffer(Buffer buf, long size) {
+		checkBuffer(buf, (int)size);
+	}
+
 	/**
 	 * Helper method to ensure a Pointer buffer has enough capacity.
 	 *

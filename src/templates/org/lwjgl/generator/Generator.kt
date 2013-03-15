@@ -15,12 +15,10 @@ import java.io.PrintWriter
 import java.lang.Math.*
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
-import java.nio.Buffer
 import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.ArrayList
 import java.util.HashMap
-import java.util.regex.Pattern
 
 /*
 	A template will be generated in the following cases:
@@ -47,8 +45,9 @@ fun main(args: Array<String>) {
 	// search for a <package>.templates.TemplatesPackage class file
 	// and run any public static methods that return a NativeClass object.
 
-	// Note: For a Kotlin package X, <X>Package is the class Kotlin generates that contains
-	// all top-level functions/properties in that package.
+	// Note: For a Kotlin package X.Y.Z, <Z>Package is the class Kotlin generates that contains
+	// all top-level functions/properties in that package. Example:
+	// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 	generate("org.lwjgl.openal")
 	//generate("org.lwjgl.opencl")
 	generate("org.lwjgl.opengl")
@@ -70,18 +69,44 @@ private fun generate(packageName: String) {
 	val packageLastModified = getDirectoryLastModified("src/templates/${packageName.replace('.', '/')}")
 	packageLastModifiedMap[packageName] = packageLastModified
 
+	val config = discoverConfig(packageName)
+	// Run the configuration method if it exists
+	config?.invoke(null)
+
+	// Find the template methods
 	val templates = discoverTemplates("$packageName.templates.TemplatesPackage")
-	if ( templates == null || templates.size == 0 ) {
+	if ( templates == null || templates.isEmpty() ) {
 		println("*WARNING* No templates found in $packageName.templates package.")
 		return
 	}
 
+	// Generate the template code
 	for ( template in templates ) {
 		val nativeClass = template.invoke(null) as NativeClass
 		if ( !(nativeClass.packageName equals packageName) )
 			throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
 		generate(nativeClass, max(packageLastModified, GENERATOR_LAST_MODIFIED))
+	}
+}
+
+private val methodFilter = {(method: Method, javaClass: Class<*>) ->
+	// static
+	method.getModifiers() and Modifier.STATIC != 0 &&
+	// returns NativeClass
+	method.getReturnType() == javaClass &&
+	// has no arguments
+	method.getParameterTypes()!!.size == 0
+}
+
+private fun discoverConfig(packageClassPath: String): Method? {
+	val firstChar = packageClassPath.lastIndexOf('.') + 1
+	val packageClass = "$packageClassPath.${Character.toUpperCase(packageClassPath[firstChar])}${packageClassPath.substring(firstChar + 1)}Package"
+
+	try {
+		return Class.forName(packageClass).getMethods().find { methodFilter(it, Void.TYPE) }
+	} catch (e: ClassNotFoundException) {
+		return null
 	}
 }
 
@@ -95,13 +120,11 @@ private fun discoverTemplates(packageClassPath: String): List<Method>? {
 
 	val methods = packageClass.getMethods()
 
-	return methods.iterator().filterTo(ArrayList<Method>(methods.size)) {
-		// static
-		it.getModifiers() and Modifier.STATIC != 0 &&
-		// returns NativeClass
-		it.getReturnType() == javaClass<NativeClass>() &&
-		// has no arguments
-		it.getParameterTypes()!!.size == 0
+	return methods
+		.iterator()
+		.filterTo(ArrayList<Method>(methods.size))
+	{
+		methodFilter(it, javaClass<NativeClass>())
 	}
 }
 
@@ -124,9 +147,59 @@ public trait GeneratorTargetJava {
 
 }
 
+class NativePreamble {
+
+	class object {
+		data class NativeDefine(
+			val expression: String,
+			val afterIncludes: Boolean
+		)
+
+		private val EMPTY_IMPORTS = ArrayList<String>(0)
+		private val EMPTY_DEFINES = ArrayList<NativeDefine>(0)
+	}
+
+	private var imports: MutableList<String> = EMPTY_IMPORTS
+	private var defines: MutableList<NativeDefine> = EMPTY_DEFINES
+
+	fun import(vararg files: String) {
+		if ( imports identityEquals EMPTY_IMPORTS )
+			imports = ArrayList<String>(files.size)
+
+		files.forEach {
+			imports add if ( it.startsWith('<') )
+				it
+			else
+				"\"$it\""
+		}
+	}
+
+	fun define(expression: String, afterIncludes: Boolean) {
+		if ( defines identityEquals EMPTY_DEFINES )
+			defines = ArrayList<NativeDefine>()
+
+		defines.add(NativeDefine(expression, afterIncludes))
+	}
+
+	fun print(writer: PrintWriter) {
+		defines.filter { !it.afterIncludes }.forEach {
+			writer.println("#define ${it.expression}")
+		}
+
+		imports.forEach {
+			writer.println("#include $it")
+		}
+
+		defines.filter { it.afterIncludes }.forEach {
+			writer.println("#define ${it.expression}")
+		}
+	}
+
+}
+
 public trait GeneratorTarget: GeneratorTargetJava {
 
-	protected val nativeImports: List<String>
+	val nativePreamble: NativePreamble
 
 	fun generateNative(writer: PrintWriter)
 
@@ -136,32 +209,25 @@ public trait GeneratorTarget: GeneratorTargetJava {
 val GeneratorTarget.nativeFileName: String
 	get() = "${packageName.replace('.', '_')}_$className"
 
+fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
+	nativePreamble.define(expression, afterIncludes)
+	return this
+}
+
+fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
+	nativePreamble.import(*files)
+	return this
+}
+
 abstract class AbstractGeneratorTarget(
 	override val packageName: String,
 	override val className: String,
 	override val nativeSubPath: String = ""
 ): TemplateElement(), GeneratorTarget {
 
-	class object {
-		private val EMPTY_NATIVE_IMPORTS: MutableList<String> = ArrayList(0)
-	}
-
 	protected override var documentation: String? = null
 
-	private var _nativeImports = EMPTY_NATIVE_IMPORTS;
-	protected override val nativeImports: List<String>
-		get() = _nativeImports
-
-	fun nativeImport(vararg files: String) {
-		_nativeImports = ArrayList(files.size)
-
-		files.forEach {
-			if ( it.startsWith('<') )
-				_nativeImports add it
-			else
-				_nativeImports add "\"$it\""
-		}
-	}
+	override val nativePreamble: NativePreamble = NativePreamble()
 
 	fun javaDoc(documentation: String) {
 		this.documentation = documentation.toJavaDoc(indentation = "")

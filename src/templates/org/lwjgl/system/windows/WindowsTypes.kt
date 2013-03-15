@@ -26,16 +26,16 @@ val short = PrimitiveType("short", PrimitiveMapping.SHORT)
 val int = PrimitiveType("int", PrimitiveMapping.INT)
 val LONG = PrimitiveType("LONG", PrimitiveMapping.INT)
 
-val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.LONG)
-val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.LONG)
+val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
+val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
 
 val int_p = PointerType("int", PointerMapping.DATA_INT)
 val UINT_p = PointerType("UINT", PointerMapping.DATA_INT)
 val FLOAT_p = PointerType("FLOAT", PointerMapping.DATA_FLOAT)
 
 val LRESULT = PointerType(name = "LRESULT", includesPointer = true)
-val WPARAM = PointerType(name = "WPARAM", includesPointer = true)
-val LPARAM = PointerType(name = "LPARAM", includesPointer = true)
+val WPARAM = PrimitiveType("WPARAM", PrimitiveMapping.PTR)
+val LPARAM = PrimitiveType("LPARAM", PrimitiveMapping.PTR)
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
@@ -298,3 +298,16 @@ val GOBJENUMPROC = CallbackType(
 		CALLBACK_DATA _ LPARAM.IN("data", "a pointer to the application-defined data passed by the EnumObjects function.")
 	).nativeImport("WindowsLWJGL.h")
 )
+
+fun config() {
+	struct(WINDOWS_PACKAGE, "WINDOWPOS") {
+		nativeImport ("WindowsLWJGL.h")
+		HWND.member("hwnd")
+		HWND.member("hwndInsertAfter")
+		int.member("x")
+		int.member("y")
+		int.member("cx")
+		int.member("cy")
+		UINT.member("flags")
+	}
+}

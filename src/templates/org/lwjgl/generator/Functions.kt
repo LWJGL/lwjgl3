@@ -376,7 +376,7 @@ public class NativeClassFunction(
 			}
 
 			if ( mode == GenerationMode.NORMAL && it has BufferObject.CLASS ) {
-				checks add "GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, ${it.nativeType.mapping == PrimitiveMapping.LONG});"
+				checks add "GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, ${it.nativeType.mapping == PrimitiveMapping.PTR});"
 			}
 
 			if ( it has AutoSize.CLASS ) {
@@ -385,8 +385,6 @@ public class NativeClassFunction(
 					var length = it.name
 					if ( autoSize.expression != null )
 						length += autoSize.expression
-					if ( it.nativeType.mapping == PrimitiveMapping.LONG )
-						length = "(int)$length"
 
 					prefix = if ( parameters[autoSize.reference]!! has Nullable.CLASS ) "if ( ${autoSize.reference} != null ) " else ""
 					checks add "${prefix}checkBuffer(${autoSize.reference}, ${bufferShift(length, autoSize.reference, "<<", null)});"
@@ -659,7 +657,7 @@ public class NativeClassFunction(
 				MapPointerTransform
 		}
 
-		getParams { it has BufferObject.CLASS && it.nativeType.mapping != PrimitiveMapping.LONG } forEach {
+		getParams { it has BufferObject.CLASS && it.nativeType.mapping != PrimitiveMapping.PTR } forEach {
 			transforms[it] = BufferOffsetTransform
 			customChecks add ("GLChecks.ensureBufferObject(${it[BufferObject.CLASS].binding}, true);")
 			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks)
@@ -1062,7 +1060,7 @@ public class NativeClassFunction(
 		print("$name(")
 		printList(parameters) {
 			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
-			if ( it.nativeType.mapping == PrimitiveMapping.LONG )
+			if ( it.nativeType.mapping == PrimitiveMapping.PTR )
 				"(${it.nativeType.name})${it.name}"
 			else
 				it.name

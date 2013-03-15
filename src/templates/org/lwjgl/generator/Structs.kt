@@ -14,7 +14,11 @@ class StructRegistry {
 
 		fun generate() {
 			INSTANCE.structs.forEach {
-				generate(it)
+				try {
+					generate(it)
+				} catch (e: Exception) {
+					throw RuntimeException("Uncaught exception while generating struct: ${it.packageName}.${it.className}", e)
+				}
 			}
 		}
 
@@ -73,7 +77,7 @@ public class Struct(
 ): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
 
 	class object {
-		private val bufferMethodMap = hashMap(
+		private val bufferMethodMap = hashMapOf(
 			"byte" to "",
 			"char" to "Char",
 			"short" to "Short",
@@ -242,7 +246,7 @@ public class Struct(
 				when {
 					it is StructMemberArray -> {
 						println("long $param, int bytes) { memCopy($param, memAddress(struct) + $field, bytes); }")
-					} it.nativeType is PointerType -> {
+					} it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
 						println("long $param) { PointerBuffer.put(struct, struct.position() + $field, $param); }")
 					} else -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
@@ -323,7 +327,7 @@ public class Struct(
 						println("void ${method}Get(ByteBuffer struct, long $param, int bytes) {")
 						println("\t\tmemCopy(memAddress(struct) + $field, $param, bytes);")
 						println("\t}")
-					} it.nativeType is PointerType -> {
+					} it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
 						println("long ${method}Get(ByteBuffer struct) { return PointerBuffer.get(struct, struct.position() + $field); }")
 					} else -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
@@ -394,9 +398,8 @@ public class Struct(
 		print(HEADER)
 		println("#include <jni.h>")
 		println("#include <stddef.h>")
-		nativeImports.forEach {
-			println("#include $it")
-		}
+
+		nativePreamble.print(this)
 
 		println()
 

@@ -48,9 +48,7 @@ public class CallbackFunction(
 	override val className: String = name
 	override val nativeSubPath: String = ""
 
-	private var _nativeImports = EMPTY_NATIVE_IMPORTS;
-	protected override val nativeImports: List<String>
-		get() = _nativeImports
+	override val nativePreamble: NativePreamble = NativePreamble()
 
 	private val hasUserData = !parameters.filter { it.has(CALLBACK_DATA) }.isEmpty()
 
@@ -96,9 +94,8 @@ public class CallbackFunction(
 	private fun PrintWriter.generateNativeImpl() {
 		print(HEADER)
 		println("#include \"common_tools.h\"")
-		nativeImports.forEach {
-			println("#include $it")
-		}
+
+		nativePreamble.print(this)
 
 		println("\nstatic jmethodID ${className}Invoke;\n")
 
@@ -173,19 +170,6 @@ public class CallbackFunction(
 		println("\t${className}Invoke = (*env)->FromReflectedMethod(env, method);")
 		println("\treturn (jlong)(intptr_t)&$className;")
 		print("}")
-	}
-
-	fun nativeImport(vararg files: String): CallbackFunction {
-		_nativeImports = ArrayList(files.size)
-
-		files.forEach {
-			if ( it.startsWith('<') )
-				_nativeImports add it
-			else
-				_nativeImports add "\"$it\""
-		}
-
-		return this
 	}
 
 }

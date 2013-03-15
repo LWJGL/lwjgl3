@@ -234,8 +234,13 @@ public class CallbackData(reference: String): ReferenceModifier(reference) {
 			throw IllegalArgumentException("The CallbackData modifier can only be applied on parameters.")
 
 		val param = element as Parameter
-		if ( param.nativeType !is PointerType || (param.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER )
-			throw IllegalArgumentException("The CallbackData modifier can only be applied on naked pointer types.")
+		if (
+			!(
+				(param.nativeType is PointerType && (param.nativeType as PointerType).mapping identityEquals PointerMapping.NAKED_POINTER) ||
+				param.nativeType.mapping identityEquals PrimitiveMapping.PTR
+			)
+		)
+			throw IllegalArgumentException("The CallbackData modifier can only be applied on naked pointer types or pointer integers.")
 	}
 }
 /** This should only be used on the user data parameter of the CallbackFunction definition. */
@@ -275,7 +280,8 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 
 		when ( param.nativeType.mapping ) {
 			PrimitiveMapping.INT,
-			PrimitiveMapping.LONG -> {
+			//PrimitiveMapping.LONG,
+			PrimitiveMapping.PTR -> {
 			}
 			else -> {
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on integer primitive types.")
