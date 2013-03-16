@@ -94,4 +94,4 @@ val GLFWscrollfun = PointerType(name = "GLFWscrollfun", includesPointer = true)
 
 // OpenGL
 
-val GLFWglproc = PointerType("GLFWglproc")
+//val GLFWglproc = PointerType("GLFWglproc")
