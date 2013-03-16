@@ -8,7 +8,7 @@ public abstract class GLContext {
 
 	final ContextCapabilities capabilities;
 
-	protected GLContext(final ContextCapabilities capabilities) {
+	protected GLContext(ContextCapabilities capabilities) {
 		this.capabilities = capabilities;
 
 		GL.setCurrent(this);

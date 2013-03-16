@@ -31,7 +31,7 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @param capacity the PointerBuffer size, in number of pointers
 	 */
-	public PointerBuffer(final int capacity) {
+	public PointerBuffer(int capacity) {
 		this(BufferUtils.createByteBuffer(capacity * getPointerSize()), false);
 	}
 
@@ -42,11 +42,11 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @param source the source buffer
 	 */
-	public PointerBuffer(final ByteBuffer source) {
+	public PointerBuffer(ByteBuffer source) {
 		this(checkSource(source).slice().order(source.order()), false);
 	}
 
-	private PointerBuffer(final ByteBuffer source, boolean dummy) {
+	private PointerBuffer(ByteBuffer source, boolean dummy) {
 		pointers = source;
 
 		if ( is64Bit ) {
@@ -58,14 +58,14 @@ public class PointerBuffer implements Comparable {
 		}
 	}
 
-	private static ByteBuffer checkSource(final ByteBuffer source) {
+	private static ByteBuffer checkSource(ByteBuffer source) {
 		if ( !LWJGLUtil.CHECKS )
 			return source;
 
 		if ( !source.isDirect() )
 			throw new IllegalArgumentException("The source buffer is not direct.");
 
-		final int alignment = is64Bit ? 8 : 4;
+		int alignment = is64Bit ? 8 : 4;
 		if ( (memAddress(source) % alignment) != 0 || source.remaining() % alignment != 0 )
 			throw new IllegalArgumentException("The source buffer is not aligned to " + alignment + " bytes.");
 
@@ -321,7 +321,7 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return A new PointerBuffer instance
 	 */
-	protected PointerBuffer newInstance(final ByteBuffer source) {
+	protected PointerBuffer newInstance(ByteBuffer source) {
 		return new PointerBuffer(source, false);
 	}
 
@@ -343,7 +343,7 @@ public class PointerBuffer implements Comparable {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer slice() {
-		final int shift = getPointerSizeShift();
+		int shift = getPointerSizeShift();
 
 		pointers.position(view.position() << shift);
 		pointers.limit(view.limit() << shift);
@@ -369,7 +369,7 @@ public class PointerBuffer implements Comparable {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer duplicate() {
-		final PointerBuffer buffer = newInstance(pointers);
+		PointerBuffer buffer = newInstance(pointers);
 
 		buffer.position(view.position());
 		buffer.limit(view.limit());
@@ -396,7 +396,7 @@ public class PointerBuffer implements Comparable {
 	 * @return the new, read-only pointer buffer
 	 */
 	public PointerBuffer asReadOnlyBuffer() {
-		final PointerBuffer buffer = new PointerBufferR(pointers);
+		PointerBuffer buffer = new PointerBufferR(pointers);
 
 		buffer.position(view.position());
 		buffer.limit(view.limit());
@@ -452,7 +452,7 @@ public class PointerBuffer implements Comparable {
 	 * @param target the target ByteBuffer
 	 * @param l      the long value to be written
 	 */
-	public static void put(final ByteBuffer target, long l) {
+	public static void put(ByteBuffer target, long l) {
 		if ( is64Bit )
 			target.putLong(l);
 		else
@@ -482,7 +482,7 @@ public class PointerBuffer implements Comparable {
 	 * @param target the source ByteBuffer
 	 * @param index  the index at which the long will be read
 	 */
-	public static long get(final ByteBuffer target, int index) {
+	public static long get(ByteBuffer target, int index) {
 		return is64Bit
 		       ? target.getLong(index)
 		       : target.getInt(index) & 0x00000000FFFFFFFFL;
@@ -519,7 +519,7 @@ public class PointerBuffer implements Comparable {
 	 * @param index  the index at which the long will be written
 	 * @param l      the long value to be written
 	 */
-	public static void put(final ByteBuffer target, int index, long l) {
+	public static void put(ByteBuffer target, int index, long l) {
 		if ( is64Bit )
 			target.putLong(index, l);
 		else
@@ -887,7 +887,7 @@ public class PointerBuffer implements Comparable {
 	 *         is less than, equal to, or greater than the given buffer
 	 */
 	public int compareTo(Object o) {
-		final PointerBuffer that = (PointerBuffer)o;
+		PointerBuffer that = (PointerBuffer)o;
 		int n = this.position() + Math.min(this.remaining(), that.remaining());
 		for ( int i = this.position(), j = that.position(); i < n; i++, j++ ) {
 			long v1 = this.get(i);
@@ -909,7 +909,7 @@ public class PointerBuffer implements Comparable {
 	/** Read-only version of PointerBuffer. */
 	private static final class PointerBufferR extends PointerBuffer {
 
-		PointerBufferR(final ByteBuffer source) {
+		PointerBufferR(ByteBuffer source) {
 			super(source, false);
 		}
 
@@ -917,7 +917,7 @@ public class PointerBuffer implements Comparable {
 			return true;
 		}
 
-		protected PointerBuffer newInstance(final ByteBuffer source) {
+		protected PointerBuffer newInstance(ByteBuffer source) {
 			return new PointerBufferR(source);
 		}
 
@@ -925,19 +925,19 @@ public class PointerBuffer implements Comparable {
 			return duplicate();
 		}
 
-		public PointerBuffer put(final long l) {
+		public PointerBuffer put(long l) {
 			throw new ReadOnlyBufferException();
 		}
 
-		public PointerBuffer put(final int index, final long l) {
+		public PointerBuffer put(int index, long l) {
 			throw new ReadOnlyBufferException();
 		}
 
-		public PointerBuffer put(final PointerBuffer src) {
+		public PointerBuffer put(PointerBuffer src) {
 			throw new ReadOnlyBufferException();
 		}
 
-		public PointerBuffer put(final long[] src, final int offset, final int length) {
+		public PointerBuffer put(long[] src, int offset, int length) {
 			throw new ReadOnlyBufferException();
 		}
 

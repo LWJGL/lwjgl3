@@ -7,10 +7,9 @@ package org.lwjgl.system.glfw;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.system.FastLongMap;
 
 import java.lang.reflect.Method;
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
@@ -52,7 +51,7 @@ public abstract class WindowCallback {
 
 	static {
 		try {
-			final Method[] callbacks = new Method[LAST_INDEX + 1];
+			Method[] callbacks = new Method[LAST_INDEX + 1];
 
 			getMethod(callbacks, WINDOW_POS_INDEX, "windowPos", long.class, int.class, int.class);
 			getMethod(callbacks, WINDOW_SIZE_INDEX, "windowSize", long.class, int.class, int.class);
@@ -67,7 +66,7 @@ public abstract class WindowCallback {
 			getMethod(callbacks, CURSOR_ENTER_INDEX, "cursorEnter", long.class, int.class);
 			getMethod(callbacks, SCROLL_INDEX, "scroll", long.class, double.class, double.class);
 
-			final PointerBuffer procs = BufferUtils.createPointerBuffer(callbacks.length);
+			PointerBuffer procs = BufferUtils.createPointerBuffer(callbacks.length);
 
 			setCallbacks(callbacks, memAddress(procs));
 
@@ -79,14 +78,15 @@ public abstract class WindowCallback {
 		}
 	}
 
-	private static final Set<Long> windows = new HashSet<Long>();
+	// This is used like a Set.
+	private static final FastLongMap<Long> windows = new FastLongMap<Long>();
 
 	private int eventTypes;
 
 	protected WindowCallback() {
 	}
 
-	private static void getMethod(final Method[] callbacks, final int index, final String name, final Class<?>... parameterTypes) throws NoSuchMethodException {
+	private static void getMethod(Method[] callbacks, int index, String name, Class<?>... parameterTypes) throws NoSuchMethodException {
 		callbacks[index] = WindowCallback.class.getDeclaredMethod(name, parameterTypes);
 	}
 
@@ -98,7 +98,7 @@ public abstract class WindowCallback {
 	 * @param window the GLFW window
 	 * @param proc   the WindowCallback instance, or NULL to disable event callbacks.
 	 */
-	public static void set(final long window, final WindowCallback proc) {
+	public static void set(long window, WindowCallback proc) {
 		set(window, proc, 0xFFFF);
 	}
 
@@ -110,34 +110,34 @@ public abstract class WindowCallback {
 	 * @param proc       the WindowCallback instance, or NULL to disable event callbacks.
 	 * @param eventTypes the event types bit-field
 	 */
-	public static void set(final long window, final WindowCallback proc, final int eventTypes) {
-		final long oldRef = glfwGetWindowUserPointer(window);
+	public static void set(long window, WindowCallback proc, int eventTypes) {
+		long oldRef = glfwGetWindowUserPointer(window);
 		if ( oldRef != 0L ) {
 			cleanup(window, oldRef);
 			windows.remove(window);
 		}
 
 		if ( proc != null ) {
-			windows.add(window);
+			windows.put(window, window);
 			glfwSetWindowUserPointer(window, memGlobalRefNew(proc));
 
 			configEvents(window, proc.eventTypes = eventTypes, 1L);
 		}
 	}
 
-	private static void cleanup(final long window, final long oldRef) {
-		final WindowCallback old = memGlobalRefToObject(oldRef);
+	private static void cleanup(long window, long oldRef) {
+		WindowCallback old = memGlobalRefToObject(oldRef);
 		configEvents(window, old.eventTypes, 0L);
 
 		glfwSetWindowUserPointer(window, 0L);
 		memGlobalRefDelete(oldRef);
 	}
 
-	private static boolean isEventEnabled(final int eventTypes, final int type) {
+	private static boolean isEventEnabled(int eventTypes, int type) {
 		return (eventTypes & type) != 0;
 	}
 
-	private static void configEvents(final long window, final int eventTypes, final long enable) {
+	private static void configEvents(long window, int eventTypes, long enable) {
 		if ( isEventEnabled(eventTypes, WINDOW_POS) )
 			glfwSetWindowPosCallback(window, CALLBACKS[WINDOW_POS_INDEX] * enable);
 
@@ -181,8 +181,8 @@ public abstract class WindowCallback {
 	 * from the global reference we create in {@link #set(long, WindowCallback, int)}.
 	 */
 	static void clearAll() {
-		for ( final Long window : windows )
-			cleanup(window, glfwGetWindowUserPointer(window));
+		for ( FastLongMap.Entry<Long> entry : windows )
+			cleanup(entry.getKey(), glfwGetWindowUserPointer(entry.getKey()));
 
 		windows.clear();
 	}

@@ -54,7 +54,7 @@ public class WGLInterop {
 	private static void demo() {
 		glfwDefaultWindowHints();
 
-		final long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", 0L, 0L);
+		long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", 0L, 0L);
 		if ( window == 0L )
 			throw new IllegalStateException("Failed to create GLFW window.");
 
@@ -63,22 +63,22 @@ public class WGLInterop {
 
 		WindowCallback.set(window, new WindowCallbackAdapter() {
 			@Override
-			public void windowSize(final long window, final int width, final int height) {
+			public void windowSize(long window, int width, int height) {
 				windowWidth.set(width);
 				windowHeight.set(height);
 			}
 
 			@Override
-			public void key(final long window, final int key, final int action) {
+			public void key(long window, int key, int action) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, 1);
 			}
 		});
 
-		final long HWND = glfwGetWin32Window(window);
-		final long HDC = GetDC(HWND);
+		long HWND = glfwGetWin32Window(window);
+		long HDC = GetDC(HWND);
 
-		final ByteBuffer pfdOut = PIXELFORMATDESCRIPTOR.malloc();
+		ByteBuffer pfdOut = PIXELFORMATDESCRIPTOR.malloc();
 		int pixelFormat = findPixelFormatLegacy(HDC, pfdOut);
 
 		pixelFormat = findPixelFormatARB(pixelFormat, pfdOut);
@@ -86,23 +86,23 @@ public class WGLInterop {
 		int success = SetPixelFormat(HDC, pixelFormat, pfdOut);
 		assertTrue(success != 0);
 
-		final GLContext context = WindowsGLContext.create(HDC);
+		GLContext context = WindowsGLContext.create(HDC);
 
-		final ContextCapabilities caps = GL.getCapabilities();
+		ContextCapabilities caps = GL.getCapabilities();
 
 		if ( caps.GL_AMD_debug_output )
 			glDebugMessageCallbackAMD(new DEBUGPROCAMD());
 
 		if ( caps.WGL_AMD_gpu_association ) {
-			final int GPUs = wglGetGPUIDsAMD(null);
+			int GPUs = wglGetGPUIDsAMD(null);
 
-			final IntBuffer gpuBuffer = BufferUtils.createIntBuffer(GPUs);
+			IntBuffer gpuBuffer = BufferUtils.createIntBuffer(GPUs);
 			wglGetGPUIDsAMD(gpuBuffer);
 
-			final IntBuffer data = BufferUtils.createIntBuffer(1);
-			final ByteBuffer nameBuffer = BufferUtils.createByteBuffer(256);
+			IntBuffer data = BufferUtils.createIntBuffer(1);
+			ByteBuffer nameBuffer = BufferUtils.createByteBuffer(256);
 			for ( int i = 0; i < /*GPUs*/1; i++ ) { // Crashes for non-AMD GPUs, sigh...
-				final int gpuID = gpuBuffer.get(i);
+				int gpuID = gpuBuffer.get(i);
 				assertTrue(gpuID != 0);
 				System.out.println("GPU ID: " + gpuID);
 
@@ -138,16 +138,16 @@ public class WGLInterop {
 
 		glViewport(0, 0, windowWidth.get(), windowHeight.get());
 
-		final long bufferRegion = wglCreateBufferRegionARB(HDC, 0, WGL_BACK_COLOR_BUFFER_BIT_ARB);
+		long bufferRegion = wglCreateBufferRegionARB(HDC, 0, WGL_BACK_COLOR_BUFFER_BIT_ARB);
 		assertTrue(bufferRegion != 0);
 
 		SelectObject(HDC, GetStockObject(DEFAULT_GUI_FONT));
 
-		final int fontBase = glGenLists(256);
+		int fontBase = glGenLists(256);
 		success = wglUseFontBitmaps(HDC, 0, 256, fontBase);
 		assertTrue(success != 0);
 
-		final ByteBuffer stringBuffer = memEncodeASCII("Hello WGL!");
+		ByteBuffer stringBuffer = memEncodeASCII("Hello WGL!");
 		stringBuffer.limit(stringBuffer.limit() - 1);
 
 		// indicate start of glyph display lists
@@ -157,8 +157,8 @@ public class WGLInterop {
 		while ( glfwWindowShouldClose(window) == 0 ) {
 			glfwPollEvents();
 
-			final int w = windowWidth.get();
-			final int h = windowHeight.get();
+			int w = windowWidth.get();
+			int h = windowHeight.get();
 
 			glViewport(0, 0, w, h);
 
@@ -175,8 +175,8 @@ public class WGLInterop {
 			glRotatef(rotation, 0.0f, 0.0f, 1.0f);
 			rotation += 1.0f;
 
-			final int ts = (int)ceil(min(w, h) * 0.1);
-			final int tr = ts * 3;
+			int ts = (int)ceil(min(w, h) * 0.1);
+			int tr = ts * 3;
 
 			glColor3f(1.0f, 0.0f, 0.0f);
 			glBegin(GL_TRIANGLES);
@@ -215,8 +215,8 @@ public class WGLInterop {
 		glfwDestroyWindow(window);
 	}
 
-	private static int findPixelFormatLegacy(final long dc, final ByteBuffer pfdOut) {
-		final ByteBuffer pfdIn = PIXELFORMATDESCRIPTOR.malloc();
+	private static int findPixelFormatLegacy(long dc, ByteBuffer pfdOut) {
+		ByteBuffer pfdIn = PIXELFORMATDESCRIPTOR.malloc();
 
 		PIXELFORMATDESCRIPTOR.sizeSet(pfdIn, PIXELFORMATDESCRIPTOR.SIZEOF);
 		PIXELFORMATDESCRIPTOR.versionSet(pfdIn, 1);
@@ -233,7 +233,7 @@ public class WGLInterop {
 		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut);
 		assertTrue(describePF != 0);
 
-		final int flagsOut = PIXELFORMATDESCRIPTOR.flagsGet(pfdOut);
+		int flagsOut = PIXELFORMATDESCRIPTOR.flagsGet(pfdOut);
 
 		assertEquals(flagsOut & PFD_DRAW_TO_WINDOW, PFD_DRAW_TO_WINDOW);
 		assertEquals(flagsOut & PFD_SUPPORT_OPENGL, PFD_SUPPORT_OPENGL);
@@ -247,24 +247,24 @@ public class WGLInterop {
 		return pixelFormat;
 	}
 
-	private static void add(IntBuffer properties, final int key, final int value) {
+	private static void add(IntBuffer properties, int key, int value) {
 		properties.put(key);
 		properties.put(value);
 	}
 
-	private static int findPixelFormatARB(int pixelFormat, final ByteBuffer pfd) {
-		final long pushDC = wglGetCurrentDC();
-		final long pushGLRC = wglGetCurrentContext();
+	private static int findPixelFormatARB(int pixelFormat, ByteBuffer pfd) {
+		long pushDC = wglGetCurrentDC();
+		long pushGLRC = wglGetCurrentContext();
 
-		final WindowsDisplay dummy = new WindowsDisplay();
+		WindowsDisplay dummy = new WindowsDisplay();
 		dummy.setVisible(true);
 
 		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
 		assertTrue(success != 0);
 
-		final GLContext context = WindowsGLContext.create(dummy.getHdc());
+		GLContext context = WindowsGLContext.create(dummy.getHdc());
 
-		final IntBuffer propList = BufferUtils.createIntBuffer(32);
+		IntBuffer propList = BufferUtils.createIntBuffer(32);
 
 		add(propList, WGL_SUPPORT_OPENGL_ARB, GL_TRUE);
 		add(propList, WGL_ACCELERATION_ARB, WGL_FULL_ACCELERATION_ARB);
@@ -285,12 +285,12 @@ public class WGLInterop {
 		propList.put(0);
 		propList.flip();
 
-		final IntBuffer pixelFormatNum = BufferUtils.createIntBuffer(1);
+		IntBuffer pixelFormatNum = BufferUtils.createIntBuffer(1);
 
 		success = wglGetPixelFormatAttribiARB(dummy.getHdc(), 0, 0, WGL_NUMBER_PIXEL_FORMATS_ARB, pixelFormatNum);
 		assertTrue(success != 0);
 
-		final IntBuffer pixelFormatRet = BufferUtils.createIntBuffer(pixelFormatNum.get(0));
+		IntBuffer pixelFormatRet = BufferUtils.createIntBuffer(pixelFormatNum.get(0));
 		//System.out.println("pixelFormatRet.capacity() = " + pixelFormatRet.capacity());
 
 		success = wglChoosePixelFormatARB(dummy.getHdc(), propList, null, pixelFormatRet, pixelFormatNum);

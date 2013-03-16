@@ -5,8 +5,10 @@
 package org.lwjgl.demo.openal;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.openal.*;
-import org.lwjgl.system.MemoryUtil;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.ALCCapabilities;
+import org.lwjgl.openal.ALCContext;
+import org.lwjgl.openal.ALContext;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -17,7 +19,6 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
-import java.util.Arrays;
 import java.util.List;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
@@ -37,9 +38,9 @@ public class ALCDemo {
 	}
 
 	public static void main(String[] args) {
-		final ALCContext deviceContext = ALC.createALCContextFromDevice(null);
+		ALCContext deviceContext = ALC.createALCContextFromDevice(null);
 
-		final ALCCapabilities caps = ALC.getCapabilities();
+		ALCCapabilities caps = ALC.getCapabilities();
 
 		assertTrue(caps.OpenALC10);
 
@@ -54,7 +55,7 @@ public class ALCDemo {
 			}
 		}
 
-		final String defaultDeviceSpecifier = alcGetString(0L, ALC_DEFAULT_DEVICE_SPECIFIER);
+		String defaultDeviceSpecifier = alcGetString(0L, ALC_DEFAULT_DEVICE_SPECIFIER);
 		assertTrue(defaultDeviceSpecifier != null);
 		System.out.println("Default device: " + defaultDeviceSpecifier);
 
@@ -72,10 +73,10 @@ public class ALCDemo {
 		attribs.put(0);
 		attribs.flip();
 
-		final long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
+		long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
 		assertTrue(contextHandle != 0L);
 
-		final ALContext context = new ALContext(deviceContext, contextHandle);
+		ALContext context = new ALContext(deviceContext, contextHandle);
 
 		try {
 			testPlayback();
@@ -87,14 +88,14 @@ public class ALCDemo {
 
 	private static void testPlayback() {
 		// generate buffers and sources
-		final int buffer = alGenBuffers();
+		int buffer = alGenBuffers();
 		checkALError();
 
-		final int source = alGenSources();
+		int source = alGenSources();
 		checkALError();
 
 		// load wave data from buffer
-		final WaveData wavefile = WaveData.create("footsteps.wav");
+		WaveData wavefile = WaveData.create("footsteps.wav");
 
 		try {
 			//copy to buffer

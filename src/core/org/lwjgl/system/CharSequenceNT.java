@@ -9,7 +9,7 @@ final class CharSequenceNT implements CharSequence {
 
 	final CharSequence source;
 
-	CharSequenceNT(final CharSequence source) {
+	CharSequenceNT(CharSequence source) {
 		this.source = source;
 	}
 
@@ -18,12 +18,12 @@ final class CharSequenceNT implements CharSequence {
 
 	}
 
-	public char charAt(final int index) {
+	public char charAt(int index) {
 		return index == source.length() ? '\0' : source.charAt(index);
 
 	}
 
-	public CharSequence subSequence(final int start, final int end) {
+	public CharSequence subSequence(int start, int end) {
 		return new CharSequenceNT(source.subSequence(start, Math.min(end, source.length())));
 	}
 

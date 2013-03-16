@@ -16,7 +16,7 @@ import java.security.PrivilegedExceptionAction;
 import java.util.*;
 
 /** Internal library methods */
-public class LWJGLUtil {
+public final class LWJGLUtil {
 
 	public static final int    PLATFORM_LINUX        = 1;
 	public static final int    PLATFORM_MACOSX       = 2;
@@ -253,7 +253,7 @@ public class LWJGLUtil {
 	private static final int PLATFORM;
 
 	static {
-		final String osName = getPrivilegedProperty("os.name");
+		String osName = getPrivilegedProperty("os.name");
 		if ( osName.startsWith("Windows") )
 			PLATFORM = PLATFORM_WINDOWS;
 		else if ( osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix") )
@@ -263,6 +263,8 @@ public class LWJGLUtil {
 		else
 			throw new LinkageError("Unknown platform: " + osName);
 	}
+
+	private LWJGLUtil() {}
 
 	private static ByteBuffer loadIcon(String data) {
 		int len = data.length();
@@ -520,7 +522,7 @@ public class LWJGLUtil {
 	 * @return the token map
 	 */
 
-	public static Map<Integer, String> getClassTokens(final TokenFilter filter, final Map<Integer, String> target, final Class... tokenClasses) {
+	public static Map<Integer, String> getClassTokens(TokenFilter filter, Map<Integer, String> target, Class... tokenClasses) {
 		return getClassTokens(filter, target, Arrays.asList(tokenClasses));
 	}
 
@@ -537,18 +539,18 @@ public class LWJGLUtil {
 	 *
 	 * @return the token map
 	 */
-	public static Map<Integer, String> getClassTokens(final TokenFilter filter, Map<Integer, String> target, final Iterable<Class> tokenClasses) {
+	public static Map<Integer, String> getClassTokens(TokenFilter filter, Map<Integer, String> target, Iterable<Class> tokenClasses) {
 		if ( target == null )
 			target = new HashMap<Integer, String>();
 
-		final int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
+		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 
-		for ( final Class tokenClass : tokenClasses ) {
-			for ( final Field field : tokenClass.getDeclaredFields() ) {
+		for ( Class tokenClass : tokenClasses ) {
+			for ( Field field : tokenClass.getDeclaredFields() ) {
 				// Get only <public static final int> fields.
 				if ( (field.getModifiers() & TOKEN_MODIFIERS) == TOKEN_MODIFIERS && field.getType() == int.class ) {
 					try {
-						final int value = field.getInt(null);
+						int value = field.getInt(null);
 						if ( filter != null && !filter.accept(field, value) )
 							continue;
 
@@ -575,7 +577,7 @@ public class LWJGLUtil {
 	 *
 	 * @return the hex string representation
 	 */
-	public static String toHexString(final int value) {
+	public static String toHexString(int value) {
 		return "0x" + Integer.toHexString(value).toUpperCase();
 	}
 

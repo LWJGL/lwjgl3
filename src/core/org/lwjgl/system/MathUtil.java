@@ -9,7 +9,7 @@ public final class MathUtil {
 	private MathUtil() {
 	}
 
-	public static int mathNextPoT(final int value) {
+	public static int mathNextPoT(int value) {
 		int v = value - 1;
 
 		v |= (v >>> 1);

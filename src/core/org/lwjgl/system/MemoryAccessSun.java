@@ -51,7 +51,7 @@ final class MemoryAccessSun {
 				address = unsafe.objectFieldOffset(getDeclaredField(Buffer.class, "address"));
 				capacity = unsafe.objectFieldOffset(getDeclaredField(Buffer.class, "capacity"));
 
-				final ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
 
 				cleaner = unsafe.objectFieldOffset(getDeclaredField(buffer.getClass(), "cleaner"));
 
@@ -71,11 +71,11 @@ final class MemoryAccessSun {
 			return unsafe.pageSize();
 		}
 
-		public long getAddress(final Buffer buffer) {
+		public long getAddress(Buffer buffer) {
 			return unsafe.getLong(buffer, address);
 		}
 
-		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final long parentField) {
+		private <T extends Buffer> T setup(T buffer, long address, int capacity, long parentField) {
 			unsafe.putLong(buffer, this.address, address);
 			unsafe.putInt(buffer, this.capacity, capacity);
 
@@ -85,7 +85,7 @@ final class MemoryAccessSun {
 			return buffer;
 		}
 
-		public ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
+		public ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
 			if ( LWJGLUtil.DEBUG && unsafe.getObject(buffer, cleaner) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
@@ -93,40 +93,40 @@ final class MemoryAccessSun {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
-		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
+		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
-		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
+		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
-		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
+		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
-		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
+		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
-		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
+		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
-		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
+		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
-		public void memSet(final long dst, final int value, final int bytes) {
+		public void memSet(long dst, int value, int bytes) {
 			unsafe.setMemory(dst, bytes, (byte)(value & 0xFF));
 		}
 
-		public void memCopy(final long src, final long dst, final int bytes) {
+		public void memCopy(long src, long dst, int bytes) {
 			unsafe.copyMemory(src, dst, bytes);
 		}
 
 		private static Unsafe getUnsafeInstance() {
-			final Field[] fields = Unsafe.class.getDeclaredFields();
+			Field[] fields = Unsafe.class.getDeclaredFields();
 
 			/*
 			Different runtimes use different names for the Unsafe singleton,
@@ -140,7 +140,7 @@ final class MemoryAccessSun {
 				if ( !field.getType().equals(Unsafe.class) )
 					continue;
 
-				final int modifiers = field.getModifiers();
+				int modifiers = field.getModifiers();
 				if ( !(Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) )
 					continue;
 
@@ -176,13 +176,13 @@ final class MemoryAccessSun {
 
 		MemoryAccessorReflectFast() {
 			try {
-				final Method m = Field.class.getDeclaredMethod("acquireFieldAccessor", boolean.class);
+				Method m = Field.class.getDeclaredMethod("acquireFieldAccessor", boolean.class);
 				m.setAccessible(true);
 
 				address = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "address"));
 				capacity = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "capacity"));
 
-				final ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
 
 				cleaner = (FieldAccessor)m.invoke(getDeclaredField(buffer.getClass(), "cleaner"));
 
@@ -198,11 +198,11 @@ final class MemoryAccessSun {
 			}
 		}
 
-		public long getAddress(final Buffer buffer) {
+		public long getAddress(Buffer buffer) {
 			return address.getLong(buffer);
 		}
 
-		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final FieldAccessor parentField) {
+		private <T extends Buffer> T setup(T buffer, long address, int capacity, FieldAccessor parentField) {
 			try {
 				this.address.setLong(buffer, address);
 				this.capacity.setInt(buffer, capacity);
@@ -216,7 +216,7 @@ final class MemoryAccessSun {
 			return buffer;
 		}
 
-		ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
+		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
 			if ( LWJGLUtil.DEBUG && cleaner.get(buffer) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
@@ -224,27 +224,27 @@ final class MemoryAccessSun {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
-		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
+		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
-		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
+		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
-		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
+		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
-		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
+		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
-		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
+		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
-		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
+		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 

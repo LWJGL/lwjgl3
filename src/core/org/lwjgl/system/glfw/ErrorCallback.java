@@ -32,7 +32,7 @@ public class ErrorCallback {
 
 	private static native long setCallback(Method callback);
 
-	static long register(final ErrorCallback proc) {
+	static long register(ErrorCallback proc) {
 		callback = proc;
 		return CALLBACK;
 	}
@@ -48,12 +48,12 @@ public class ErrorCallback {
 	 * @param error       the error code
 	 * @param description a UTF-8 encoded string describing the error
 	 */
-	public void invoke(final int error, final long description) {
+	public void invoke(int error, long description) {
 		callback(error, memDecodeUTF8(memByteBufferNT1(description)));
 	}
 
 	/** String version of {@link #callback(int, long)}. */
-	public void callback(final int error, final String description) {
+	public void callback(int error, String description) {
 		System.err.println("[LWJGL] GLFW error");
 		System.err.println("\tCode: " + LWJGLUtil.toHexString(error));
 		System.err.println("\tDescription: " + description);

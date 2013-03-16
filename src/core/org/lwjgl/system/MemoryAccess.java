@@ -61,7 +61,7 @@ final class MemoryAccess {
 		return accessor;
 	}
 
-	private static MemoryAccessor loadAccessor(final String className) throws Exception {
+	private static MemoryAccessor loadAccessor(String className) throws Exception {
 		return (MemoryAccessor)Class.forName(className).newInstance();
 	}
 
@@ -107,11 +107,11 @@ final class MemoryAccess {
 
 		abstract DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity);
 
-		public void memSet(final long dst, final int value, final int bytes) {
+		public void memSet(long dst, int value, int bytes) {
 			nMemSet(dst, value, bytes);
 		}
 
-		public void memCopy(final long src, final long dst, final int bytes) {
+		public void memCopy(long src, long dst, int bytes) {
 			nMemCopy(dst, src, bytes); // Note the swapped src & dst
 		}
 
@@ -120,39 +120,39 @@ final class MemoryAccess {
 	/** Default implementation. */
 	private static class MemoryAccessorJNI extends MemoryAccessor {
 
-		long getAddress(final Buffer buffer) {
+		long getAddress(Buffer buffer) {
 			return nGetAddress(buffer);
 		}
 
-		ByteBuffer newByteBuffer(final long address, final int capacity) {
+		ByteBuffer newByteBuffer(long address, int capacity) {
 			return nNewBuffer(address, capacity).order(ByteOrder.nativeOrder());
 		}
 
-		ShortBuffer newShortBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
+		ShortBuffer newShortBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
 
-		CharBuffer newCharBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
+		CharBuffer newCharBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
 
-		IntBuffer newIntBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
+		IntBuffer newIntBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
 
-		LongBuffer newLongBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
+		LongBuffer newLongBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
 
-		FloatBuffer newFloatBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
+		FloatBuffer newFloatBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
 
-		DoubleBuffer newDoubleBuffer(final long address, final int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
+		DoubleBuffer newDoubleBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
-		ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) { return newByteBuffer(address, capacity); }
+		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) { return newByteBuffer(address, capacity); }
 
-		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) { return newShortBuffer(address, capacity); }
+		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) { return newShortBuffer(address, capacity); }
 
-		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) { return newCharBuffer(address, capacity); }
+		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) { return newCharBuffer(address, capacity); }
 
-		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) { return newIntBuffer(address, capacity); }
+		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) { return newIntBuffer(address, capacity); }
 
-		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) { return newLongBuffer(address, capacity); }
+		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) { return newLongBuffer(address, capacity); }
 
-		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) { return newFloatBuffer(address, capacity); }
+		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) { return newFloatBuffer(address, capacity); }
 
-		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) { return newDoubleBuffer(address, capacity); }
+		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) { return newDoubleBuffer(address, capacity); }
 
 	}
 
@@ -160,7 +160,7 @@ final class MemoryAccess {
 
 		private final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
 
-		final ByteBuffer newByteBuffer(final long address, final int capacity) {
+		final ByteBuffer newByteBuffer(long address, int capacity) {
 			return setupBuffer(
 				globalBuffer.duplicate().order(ByteOrder.nativeOrder()),
 				address,
@@ -168,17 +168,17 @@ final class MemoryAccess {
 			);
 		}
 
-		final ShortBuffer newShortBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asShortBuffer(), address, capacity); }
+		final ShortBuffer newShortBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asShortBuffer(), address, capacity); }
 
-		final CharBuffer newCharBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asCharBuffer(), address, capacity); }
+		final CharBuffer newCharBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asCharBuffer(), address, capacity); }
 
-		final IntBuffer newIntBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asIntBuffer(), address, capacity); }
+		final IntBuffer newIntBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asIntBuffer(), address, capacity); }
 
-		final LongBuffer newLongBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asLongBuffer(), address, capacity); }
+		final LongBuffer newLongBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asLongBuffer(), address, capacity); }
 
-		final FloatBuffer newFloatBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asFloatBuffer(), address, capacity); }
+		final FloatBuffer newFloatBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asFloatBuffer(), address, capacity); }
 
-		final DoubleBuffer newDoubleBuffer(final long address, final int capacity) { return setupBuffer(globalBuffer.asDoubleBuffer(), address, capacity); }
+		final DoubleBuffer newDoubleBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asDoubleBuffer(), address, capacity); }
 
 	}
 
@@ -203,7 +203,7 @@ final class MemoryAccess {
 				address = getDeclaredField(Buffer.class, "address");
 				capacity = getDeclaredField(Buffer.class, "capacity");
 
-				final ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
 
 				cleaner = getDeclaredField(buffer.getClass(), "cleaner");
 
@@ -219,7 +219,7 @@ final class MemoryAccess {
 			}
 		}
 
-		public long getAddress(final Buffer buffer) {
+		public long getAddress(Buffer buffer) {
 			try {
 				return address.getLong(buffer);
 			} catch (IllegalAccessException e) {
@@ -227,7 +227,7 @@ final class MemoryAccess {
 			}
 		}
 
-		private <T extends Buffer> T setup(final T buffer, final long address, final int capacity, final Field parentField) {
+		private <T extends Buffer> T setup(T buffer, long address, int capacity, Field parentField) {
 			try {
 				this.address.setLong(buffer, address);
 				this.capacity.setInt(buffer, capacity);
@@ -241,7 +241,7 @@ final class MemoryAccess {
 			return buffer;
 		}
 
-		ByteBuffer setupBuffer(final ByteBuffer buffer, final long address, final int capacity) {
+		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			if ( LWJGLUtil.DEBUG ) {
 				try {
 					// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
@@ -255,38 +255,38 @@ final class MemoryAccess {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
-		ShortBuffer setupBuffer(final ShortBuffer buffer, final long address, final int capacity) {
+		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
-		CharBuffer setupBuffer(final CharBuffer buffer, final long address, final int capacity) {
+		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
-		IntBuffer setupBuffer(final IntBuffer buffer, final long address, final int capacity) {
+		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
-		LongBuffer setupBuffer(final LongBuffer buffer, final long address, final int capacity) {
+		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
-		FloatBuffer setupBuffer(final FloatBuffer buffer, final long address, final int capacity) {
+		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
-		DoubleBuffer setupBuffer(final DoubleBuffer buffer, final long address, final int capacity) {
+		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
 	}
 
-	static Field getDeclaredField(final Class<?> root, final String fieldName) throws NoSuchFieldException {
+	static Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
 		Class<?> type = root;
 
 		do {
 			try {
-				final Field field = type.getDeclaredField(fieldName);
+				Field field = type.getDeclaredField(fieldName);
 				field.setAccessible(true);
 				return field;
 			} catch (NoSuchFieldException e) {
@@ -297,11 +297,11 @@ final class MemoryAccess {
 		throw new NoSuchFieldException(fieldName + " does not exist in " + root.getSimpleName() + " or any of its superclasses.");
 	}
 
-	static Field getField(final Buffer buffer, final Object value) throws NoSuchFieldException {
+	static Field getField(Buffer buffer, Object value) throws NoSuchFieldException {
 		Class<?> type = buffer.getClass();
 
 		do {
-			for ( final Field field : type.getDeclaredFields() ) {
+			for ( Field field : type.getDeclaredFields() ) {
 				if ( Modifier.isStatic(field.getModifiers()) )
 					continue;
 
@@ -310,7 +310,7 @@ final class MemoryAccess {
 
 				field.setAccessible(true);
 				try {
-					final Object fieldValue = field.get(buffer);
+					Object fieldValue = field.get(buffer);
 					if ( fieldValue == value )
 						return field;
 				} catch (IllegalAccessException e) {

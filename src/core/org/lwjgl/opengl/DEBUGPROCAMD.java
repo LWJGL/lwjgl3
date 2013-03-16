@@ -32,7 +32,7 @@ public class DEBUGPROCAMD {
 
 	private static native long setCallback(Method callback);
 
-	static long register(final Functions context, final DEBUGPROCAMD proc) {
+	static long register(Functions context, DEBUGPROCAMD proc) {
 		if ( context.DEBUGPROCAMD != 0L )
 			memGlobalRefDelete(context.DEBUGPROCAMD);
 
@@ -44,22 +44,22 @@ public class DEBUGPROCAMD {
 	 * The default implementation will print the message details on the standard error stream.
 	 *
 	 * @param id       the message ID
-	 * @param source   the message category
+	 * @param category the message category
 	 * @param severity the message severity
 	 * @param length   the message length
 	 * @param message  a pointer to the message characters
 	 */
-	public void invoke(final int id, final int category, final int severity, final int length, final long message) {
+	public void invoke(int id, int category, int severity, int length, long message) {
 		invoke(id, category, severity, memByteBuffer(message, length));
 	}
 
-	/** Alternative version of {@link #invoke(int, int, int, long, long)}. */
-	public void invoke(final int id, final int category, final int severity, final ByteBuffer message) {
+	/** Alternative version of {@link #invoke(int, int, int, int, long)}. */
+	public void invoke(int id, int category, int severity, ByteBuffer message) {
 		invoke(id, category, severity, memDecodeUTF8(message));
 	}
 
-	/** String version of {@link #invoke(int, int, int, long, long)}. */
-	public void invoke(final int id, final int category, final int severity, final String message) {
+	/** String version of {@link #invoke(int, int, int, int, long)}. */
+	public void invoke(int id, int category, int severity, String message) {
 		System.err.println("[LWJGL] AMD_debug_output message");
 		System.err.println("\tID: " + id);
 
@@ -112,7 +112,7 @@ public class DEBUGPROCAMD {
 		System.err.println("\tMessage: " + message);
 	}
 
-	private static String printUnknownToken(final int token) {
+	private static String printUnknownToken(int token) {
 		return "Unknown (0x" + LWJGLUtil.toHexString(token) + ")";
 	}
 

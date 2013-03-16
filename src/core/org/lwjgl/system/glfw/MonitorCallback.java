@@ -28,7 +28,7 @@ public abstract class MonitorCallback {
 
 	private static native long setCallback(Method callback);
 
-	static long register(final MonitorCallback proc) {
+	static long register(MonitorCallback proc) {
 		callback = proc;
 		return CALLBACK;
 	}

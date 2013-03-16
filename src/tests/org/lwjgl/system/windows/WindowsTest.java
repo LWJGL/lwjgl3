@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.testng.annotations.Test;
 
@@ -49,21 +48,21 @@ public class WindowsTest {
 	}
 
 	public void testDefWindowProc() {
-		final long user32 = GetModuleHandle(memEncodeUTF16("User32.dll"));
+		long user32 = GetModuleHandle(memEncodeUTF16("User32.dll"));
 		assertTrue(user32 != 0);
 
-		final long dwp = GetProcAddress(user32, memEncodeASCII("DefWindowProcW"));
+		long dwp = GetProcAddress(user32, memEncodeASCII("DefWindowProcW"));
 		assertTrue(dwp != 0);
 
 		assertEquals(dwp, DEF_WINDOW_PROC);
 	}
 
 	public void testOSVERSIONINFOEX() {
-		final ByteBuffer versionInfo = OSVERSIONINFOEX.malloc();
+		ByteBuffer versionInfo = OSVERSIONINFOEX.malloc();
 
 		OSVERSIONINFOEX.osVersionInfoSizeSet(versionInfo, OSVERSIONINFOEX.SIZEOF);
 
-		final int success = GetVersionEx(versionInfo);
+		int success = GetVersionEx(versionInfo);
 		assertTrue(success != 0);
 
 		// We support Windows 2000 or higher
@@ -75,10 +74,10 @@ public class WindowsTest {
 	}
 
 	public void testWNDCLASSEX() {
-		final String menuName = null;
-		final String className = "LWJGL";
+		String menuName = null;
+		String className = "LWJGL";
 
-		final ByteBuffer in = WNDCLASSEX.malloc();
+		ByteBuffer in = WNDCLASSEX.malloc();
 
 		WNDCLASSEX.sizeSet(in, WNDCLASSEX.SIZEOF);
 		WNDCLASSEX.styleSet(in, CS_OWNDC);
@@ -93,13 +92,13 @@ public class WindowsTest {
 		WNDCLASSEX.classNameSet(in, className);
 		WNDCLASSEX.iconSmSet(in, 0);
 
-		final short classAtom = RegisterClassEx(in);
+		short classAtom = RegisterClassEx(in);
 		assertTrue(classAtom != 0);
 
-		final ByteBuffer out = WNDCLASSEX.malloc();
+		ByteBuffer out = WNDCLASSEX.malloc();
 		WNDCLASSEX.sizeSet(out, WNDCLASSEX.SIZEOF);
 
-		final int success = GetClassInfoEx(HINSTANCE, className, out);
+		int success = GetClassInfoEx(HINSTANCE, className, out);
 		assertTrue(success != 0);
 
 		assertEquals(WNDCLASSEX.styleGet(out), WNDCLASSEX.styleGet(in));
@@ -119,7 +118,7 @@ public class WindowsTest {
 		dependsOnMethods = "testWNDCLASSEX" // Make sure the class is registered
 	)
 	public void testCreateWindow() {
-		final long hwnd = CreateWindowEx(
+		long hwnd = CreateWindowEx(
 			WS_EX_APPWINDOW,
 			"LWJGL",
 			"LWJGL Test",

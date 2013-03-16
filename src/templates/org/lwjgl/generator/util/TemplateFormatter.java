@@ -34,7 +34,7 @@ public class TemplateFormatter {
 		} catch (Exception e) {
 		}
 
-		final JFrame frame = new JFrame("Template Formatter");
+		JFrame frame = new JFrame("Template Formatter");
 		frame.getContentPane().setLayout(new BorderLayout(4, 4));
 
 		// Settings
@@ -44,12 +44,12 @@ public class TemplateFormatter {
 
 		prefix = new JTextField("GL", 4);
 
-		final ButtonGroup radioGroup = new ButtonGroup();
+		ButtonGroup radioGroup = new ButtonGroup();
 
 		radioGroup.add(radioConst);
 		radioGroup.add(radioFunc);
 
-		final JPanel radioPane = new JPanel(new FlowLayout());
+		JPanel radioPane = new JPanel(new FlowLayout());
 		radioPane.add(radioConst);
 		radioPane.add(radioFunc);
 		radioPane.add(new JLabel("Prefix:"));
@@ -59,7 +59,7 @@ public class TemplateFormatter {
 
 		// Text areas
 
-		final Font font = new Font(Font.MONOSPACED, Font.PLAIN, 14);
+		Font font = new Font(Font.MONOSPACED, Font.PLAIN, 14);
 
 		input = new JTextArea(32, 64);
 		input.setFont(font);
@@ -85,7 +85,7 @@ public class TemplateFormatter {
 		// Config and show
 
 		try {
-			final ClassLoader cl = Thread.currentThread().getContextClassLoader();
+			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			frame.setIconImages(Arrays.asList(new Image[] {
 				ImageIO.read(cl.getResource("lwjgl16.png")),
 				ImageIO.read(cl.getResource("lwjgl32.png")),
@@ -105,21 +105,21 @@ public class TemplateFormatter {
 
 	private void setup() {
 		input.getDocument().addDocumentListener(new DocumentListener() {
-			public void insertUpdate(final DocumentEvent e) {
+			public void insertUpdate(DocumentEvent e) {
 				format();
 			}
 
-			public void removeUpdate(final DocumentEvent e) {
+			public void removeUpdate(DocumentEvent e) {
 				format();
 			}
 
-			public void changedUpdate(final DocumentEvent e) {
+			public void changedUpdate(DocumentEvent e) {
 				format();
 			}
 		});
 
-		final ActionListener settingsAction = new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
+		ActionListener settingsAction = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				format();
 			}
 		};
@@ -131,7 +131,7 @@ public class TemplateFormatter {
 	}
 
 	private void format() {
-		final String inputText = input.getText().trim();
+		String inputText = input.getText().trim();
 		if ( inputText.isEmpty() ) {
 			output.setBackground(Color.LIGHT_GRAY);
 			output.setText("");
@@ -163,7 +163,7 @@ public class TemplateFormatter {
 		} catch (Exception e) {
 			e.printStackTrace();
 
-			final StringWriter writer = new StringWriter();
+			StringWriter writer = new StringWriter();
 			e.printStackTrace(new PrintWriter(writer));
 
 			output.setBackground(Color.ORANGE);
@@ -186,15 +186,15 @@ public class TemplateFormatter {
 		"([0-9A-Za-z_]+)\\s+([-x\\p{XDigit}]+)"
 	);
 
-	private static String formatConstants(final String input, final String prefix) {
-		final StringBuilder builder = new StringBuilder(input.length());
+	private static String formatConstants(String input, String prefix) {
+		StringBuilder builder = new StringBuilder(input.length());
 
-		final Matcher blockMatcher = BLOCK_PATTERN.matcher(input);
+		Matcher blockMatcher = BLOCK_PATTERN.matcher(input);
 		int blockCount = 0;
 		while ( blockMatcher.find() ) {
 			if ( 0 < blockCount++ ) builder.append('\n');
 
-			final String description =
+			String description =
 				CODE_CLEANUP.matcher(
 					COMMENT_CLEANUP.matcher(blockMatcher.group(1)).replaceAll(" ")
 				).replaceAll("{@code $1}") + '.';
@@ -208,11 +208,11 @@ public class TemplateFormatter {
 				builder.append("\t\t\"\"\"\n");
 				builder.append("\t\t");
 
-				final String[] tokens = TOKEN_SPLIT.split(description);
+				String[] tokens = TOKEN_SPLIT.split(description);
 				int MAX_LINE_LENGTH = 160 - (4 + 4);
 
 				int lineLength = 0;
-				for ( final String token : tokens ) {
+				for ( String token : tokens ) {
 					lineLength += token.length();
 					if ( token.length() < lineLength ) {
 						if ( MAX_LINE_LENGTH < 1 + lineLength ) {
@@ -231,7 +231,7 @@ public class TemplateFormatter {
 			}
 			builder.append(",\n\n");
 
-			final Matcher constantMatcher = CONSTANT_PATTERN.matcher(blockMatcher.group(2));
+			Matcher constantMatcher = CONSTANT_PATTERN.matcher(blockMatcher.group(2));
 			int constCount = 0;
 			while ( constantMatcher.find() ) {
 				if ( 0 < constCount++ ) builder.append(",\n");
@@ -270,18 +270,18 @@ public class TemplateFormatter {
 		Pattern.MULTILINE
 	);
 
-	private static String formatFunctions(final String input, final String prefix) {
-		final StringBuilder builder = new StringBuilder(input.length());
+	private static String formatFunctions(String input, String prefix) {
+		StringBuilder builder = new StringBuilder(input.length());
 
-		final Matcher funcMatcher = FUNCTION_PATTERN.matcher(input);
+		Matcher funcMatcher = FUNCTION_PATTERN.matcher(input);
 
 		int funcCount = 0;
 		while ( funcMatcher.find() ) {
 			if ( 0 < funcCount++ ) builder.append("\n\n");
 
-			final String function = funcMatcher.group();
+			String function = funcMatcher.group();
 
-			final Matcher paramMatcher = PARAM_PATTERN.matcher(function);
+			Matcher paramMatcher = PARAM_PATTERN.matcher(function);
 
 			int paramCount = -1;
 			while ( paramMatcher.find() ) {
@@ -331,7 +331,7 @@ public class TemplateFormatter {
 		return builder.toString();
 	}
 
-	private static void writerPointer(final StringBuilder builder, final Matcher paramMatcher) {
+	private static void writerPointer(StringBuilder builder, Matcher paramMatcher) {
 		builder.append('_');
 		for ( int i = 0; i < paramMatcher.group(3).length(); i++ )
 			builder.append('p');
