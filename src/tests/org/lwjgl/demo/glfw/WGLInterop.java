@@ -53,6 +53,7 @@ public class WGLInterop {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, 0);
 
 		long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", 0L, 0L);
 		if ( window == 0L )
@@ -257,7 +258,6 @@ public class WGLInterop {
 		long pushGLRC = wglGetCurrentContext();
 
 		WindowsDisplay dummy = new WindowsDisplay();
-		dummy.setVisible(true);
 
 		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
 		assertTrue(success != 0);

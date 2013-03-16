@@ -30,6 +30,7 @@ public class MultipleWindows {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, 0);
 
 		long[] windows = new long[4];
 
