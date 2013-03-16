@@ -8,51 +8,51 @@ package org.lwjgl.system.glfw;
 public abstract class WindowCallbackAdapter extends WindowCallback {
 
 	@Override
-	public void windowPos(final long window, final int xpos, final int ypos) {
+	public void windowPos(long window, int xpos, int ypos) {
 	}
 
 	@Override
-	public void windowSize(final long window, final int width, final int height) {
+	public void windowSize(long window, int width, int height) {
 	}
 
 	@Override
-	public void windowClose(final long window) {
+	public void windowClose(long window) {
 	}
 
 	@Override
-	public void windowRefresh(final long window) {
+	public void windowRefresh(long window) {
 	}
 
 	@Override
-	public void windowFocus(final long window, final int focused) {
+	public void windowFocus(long window, int focused) {
 	}
 
 	@Override
-	public void windowIconify(final long window, final int iconified) {
+	public void windowIconify(long window, int iconified) {
 	}
 
 	@Override
-	public void key(final long window, final int key, final int action) {
+	public void key(long window, int key, int action) {
 	}
 
 	@Override
-	public void character(final long window, final int character) {
+	public void character(long window, int character) {
 	}
 
 	@Override
-	public void mouseButton(final long window, final int button, final int action) {
+	public void mouseButton(long window, int button, int action) {
 	}
 
 	@Override
-	public void cursorPos(final long window, final int xpos, final int ypos) {
+	public void cursorPos(long window, int xpos, int ypos) {
 	}
 
 	@Override
-	public void cursorEnter(final long window, final int entered) {
+	public void cursorEnter(long window, int entered) {
 	}
 
 	@Override
-	public void scroll(final long window, final double xpos, final double ypos) {
+	public void scroll(long window, double xpos, double ypos) {
 	}
 
 }

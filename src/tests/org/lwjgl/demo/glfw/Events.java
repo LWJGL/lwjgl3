@@ -30,7 +30,7 @@ public class Events {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		final long window = glfwCreateWindow(640, 480, "GLFW Event Demo", 0L, 0L);
+		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", 0L, 0L);
 		if ( window == 0L )
 			throw new IllegalStateException("Failed to create GLFW window.");
 
@@ -38,45 +38,45 @@ public class Events {
 
 		glfwSetMonitorCallback(new MonitorCallback() {
 			@Override
-			public void invoke(final long monitor, final int event) {
+			public void invoke(long monitor, int event) {
 				System.out.println("Monitor " + monitor + " was " + (event == 0x00061000 ? "connected" : "disconnected"));
 			}
 		});
 
 		WindowCallback.set(window, new WindowCallback() {
 			@Override
-			public void windowPos(final long window, final int xpos, final int ypos) {
+			public void windowPos(long window, int xpos, int ypos) {
 				printEvent(window, "moved to %d, %d", xpos, ypos);
 			}
 
 			@Override
-			public void windowSize(final long window, final int width, final int height) {
+			public void windowSize(long window, int width, int height) {
 				printEvent(window, "resized to %d x %d", width, height);
 			}
 
 			@Override
-			public void windowClose(final long window) {
+			public void windowClose(long window) {
 				printEvent(window, "closed");
 			}
 
 			@Override
-			public void windowRefresh(final long window) {
+			public void windowRefresh(long window) {
 				printEvent(window, "refreshed");
 			}
 
 			@Override
-			public void windowFocus(final long window, final int focused) {
+			public void windowFocus(long window, int focused) {
 				printEvent(window, focused == 0 ? "lost focus" : "gained focus");
 			}
 
 			@Override
-			public void windowIconify(final long window, final int iconified) {
+			public void windowIconify(long window, int iconified) {
 				printEvent(window, iconified == 0 ? "restored" : "iconified");
 			}
 
 			@Override
-			public void key(final long window, final int key, final int action) {
-				final String state;
+			public void key(long window, int key, int action) {
+				String state;
 				switch ( action ) {
 					case GLFW_PRESS:
 						state = "pressed";
@@ -98,13 +98,13 @@ public class Events {
 			}
 
 			@Override
-			public void character(final long window, final int character) {
+			public void character(long window, int character) {
 				printEvent(window, "character %s", Character.toString((char)character));
 			}
 
 			@Override
-			public void mouseButton(final long window, final int button, final int action) {
-				final String state;
+			public void mouseButton(long window, int button, int action) {
+				String state;
 				switch ( action ) {
 					case GLFW_PRESS:
 						state = "pressed";
@@ -119,17 +119,17 @@ public class Events {
 			}
 
 			@Override
-			public void cursorPos(final long window, final int xpos, final int ypos) {
+			public void cursorPos(long window, int xpos, int ypos) {
 				printEvent(window, "cursor moved to %d, %d", xpos, ypos);
 			}
 
 			@Override
-			public void cursorEnter(final long window, final int entered) {
+			public void cursorEnter(long window, int entered) {
 				printEvent(window, "cursor %s", entered == 0 ? "left" : "entered");
 			}
 
 			@Override
-			public void scroll(final long window, final double xpos, final double ypos) {
+			public void scroll(long window, double xpos, double ypos) {
 				printEvent(window, "scroll by %f, %f", xpos, ypos);
 			}
 		});
@@ -138,8 +138,8 @@ public class Events {
 			glfwWaitEvents();
 	}
 
-	private static void printEvent(final long window, final String format, final Object... args) {
-		final Object[] formatArgs = new Object[2 + args.length];
+	private static void printEvent(long window, String format, Object... args) {
+		Object[] formatArgs = new Object[2 + args.length];
 
 		formatArgs[0] = glfwGetTime();
 		formatArgs[1] = window;

@@ -18,7 +18,7 @@ import java.nio.IntBuffer;
  * <p/>
  * Internal class, don't use.
  */
-public class Checks {
+public final class Checks {
 
 	private Checks() {
 	}

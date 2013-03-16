@@ -14,7 +14,7 @@ import static org.testng.Assert.*;
 public class StructTest {
 
 	public void testStructLayout() {
-		final ByteBuffer gmf = GLYPHMETRICSFLOAT.malloc();
+		ByteBuffer gmf = GLYPHMETRICSFLOAT.malloc();
 
 		assertEquals(GLYPHMETRICSFLOAT.SIZEOF, 24);
 		assertEquals(gmf.capacity(), GLYPHMETRICSFLOAT.SIZEOF);

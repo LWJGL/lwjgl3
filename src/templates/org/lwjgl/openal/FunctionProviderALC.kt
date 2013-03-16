@@ -128,8 +128,8 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCCapabilities(final long device, final Set<String> ext) {")
-		println("\t\tfinal FunctionProviderLocal provider = ALC.getFunctionProvider();\n")
+		println("\n\tALCCapabilities(long device, Set<String> ext) {")
+		println("\t\tFunctionProviderLocal provider = ALC.getFunctionProvider();\n")
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
 			if ( extension.hasNativeFunctions && extension.prefix == "ALC" ) {

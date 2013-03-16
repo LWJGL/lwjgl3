@@ -12,32 +12,35 @@ import static org.lwjgl.system.MemoryUtil.*;
 public final class BufferUtils {
 
 	private interface BufferAllocator {
+
 		ByteBuffer malloc(int capacity);
 	}
 
 	private static final BufferAllocator BUFFER_ALLOCATOR;
 
 	static {
-		final String alignment = System.getProperty("org.lwjgl.util.BufferAlign");
+		String alignment = System.getProperty("org.lwjgl.util.BufferAlign");
 		if ( "page".equals(alignment) )
 			BUFFER_ALLOCATOR = new BufferAllocator() {
-				public ByteBuffer malloc(final int capacity) {
+				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferPage(capacity);
 				}
 			};
 		else if ( "cache-line".equals(alignment) )
 			BUFFER_ALLOCATOR = new BufferAllocator() {
-				public ByteBuffer malloc(final int capacity) {
+				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferCacheLine(capacity);
 				}
 			};
 		else
 			BUFFER_ALLOCATOR = new BufferAllocator() {
-				public ByteBuffer malloc(final int capacity) {
+				public ByteBuffer malloc(int capacity) {
 					return createUnalignedByteBuffer(capacity);
 				}
 			};
 	}
+
+	private BufferUtils() {}
 
 	/**
 	 * Construct a direct native-ordered bytebuffer with the specified capacity.
@@ -157,9 +160,9 @@ public final class BufferUtils {
 	 *
 	 * @return the aligned ByteBuffer
 	 */
-	public static ByteBuffer createAlignedByteBuffer(final int capacity, final int alignment) {
-		final int mask = alignment - 1;
-		final ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
+	public static ByteBuffer createAlignedByteBuffer(int capacity, int alignment) {
+		int mask = alignment - 1;
+		ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
 
 		// Align
 		buffer.position(alignment - (int)(memAddress(buffer) & mask));
@@ -177,7 +180,7 @@ public final class BufferUtils {
 	 *
 	 * @return the page-aligned ByteBuffer
 	 */
-	public static ByteBuffer createAlignedByteBufferPage(final int capacity) {
+	public static ByteBuffer createAlignedByteBufferPage(int capacity) {
 		return createAlignedByteBuffer(capacity, PAGE_SIZE);
 	}
 
@@ -189,7 +192,7 @@ public final class BufferUtils {
 	 *
 	 * @return the cache-line-aligned ByteBuffer
 	 */
-	public static ByteBuffer createAlignedByteBufferCacheLine(final int capacity) {
+	public static ByteBuffer createAlignedByteBufferCacheLine(int capacity) {
 		return createAlignedByteBuffer(capacity, 64); // TODO: Discover cache line size at runtime
 	}
 

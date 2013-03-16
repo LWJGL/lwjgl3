@@ -300,6 +300,22 @@ val GOBJENUMPROC = CallbackType(
 )
 
 fun config() {
+	val COLORREF = PrimitiveType("COLORREF", PrimitiveMapping.INT)
+
+	struct(WINDOWS_PACKAGE, "LOGPEN") {
+		nativeImport ("WindowsLWJGL.h")
+		UINT.member("lopnStyle")
+		POINT.member("lopnWidth")
+		COLORREF.member("lopnColor")
+	}
+
+	struct(WINDOWS_PACKAGE, "LOGBRUSH") {
+		nativeImport ("WindowsLWJGL.h")
+		UINT.member("lbStyle");
+        COLORREF.member("lbColor");
+        ULONG_PTR.member("lbHatch");
+	}
+
 	struct(WINDOWS_PACKAGE, "WINDOWPOS") {
 		nativeImport ("WindowsLWJGL.h")
 		HWND.member("hwnd")

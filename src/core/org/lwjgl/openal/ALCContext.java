@@ -12,7 +12,7 @@ public class ALCContext {
 
 	private final ALCCapabilities capabilities;
 
-	public ALCContext(final long device) {
+	public ALCContext(long device) {
 		this.device = device;
 
 		this.capabilities = ALC.createCapabilities(device);

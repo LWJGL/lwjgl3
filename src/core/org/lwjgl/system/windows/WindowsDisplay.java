@@ -1,6 +1,7 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.Sys;
+import org.lwjgl.system.FastLongMap;
 
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
@@ -47,7 +48,7 @@ public class WindowsDisplay {
 	/** Each window created increments this integer. */
 	private static final AtomicInteger WINDOW_ID = new AtomicInteger(0);
 
-	private static final Map<Long, WindowsDisplay> windowMap = new HashMap<Long, WindowsDisplay>();
+	private static final FastLongMap<WindowsDisplay> windowMap = new FastLongMap<WindowsDisplay>();
 
 	private final int id;
 
@@ -56,7 +57,7 @@ public class WindowsDisplay {
 	private final long hwnd;
 	private final long hdc;
 
-	private ByteBuffer windowPos;
+	private final ByteBuffer windowPos;
 
 	private boolean closeRequested;
 
@@ -64,20 +65,20 @@ public class WindowsDisplay {
 		this("LWJGL");
 	}
 
-	public WindowsDisplay(final String title) {
+	public WindowsDisplay(String title) {
 		this(title, 640, 480);
 	}
 
-	public WindowsDisplay(final String title, final int width, final int height) {
+	public WindowsDisplay(String title, int width, int height) {
 		this.id = WINDOW_ID.incrementAndGet();
 
 		this.windowPos = WINDOWPOS.malloc();
 		WINDOWPOS.cxSet(windowPos, width);
 		WINDOWPOS.cySet(windowPos, height);
 
-		final String className = "LWJGL" + id;
+		String className = "LWJGL" + id;
 
-		final ByteBuffer in = WNDCLASSEX.malloc();
+		ByteBuffer in = WNDCLASSEX.malloc();
 
 		WNDCLASSEX.sizeSet(in, WNDCLASSEX.SIZEOF);
 		WNDCLASSEX.styleSet(in, CS_OWNDC); // CS_HREDRAW | CS_VREDRAW
@@ -136,21 +137,21 @@ public class WindowsDisplay {
 		return WINDOWPOS.cyGet(windowPos);
 	}
 
-	public void setLocation(final int x, final int y) {
+	public void setLocation(int x, int y) {
 		windowsCheckResult(
 			SetWindowPos(hwnd, 0, x, y, WINDOWPOS.cxGet(windowPos), WINDOWPOS.cyGet(windowPos), SWP_NOOWNERZORDER | SWP_NOSIZE),
 			"SetWindowPos"
 		);
 	}
 
-	public void setSize(final int width, final int height) {
+	public void setSize(int width, int height) {
 		windowsCheckResult(
 			SetWindowPos(hwnd, 0, WINDOWPOS.xGet(windowPos), WINDOWPOS.yGet(windowPos), width, height, SWP_NOOWNERZORDER | SWP_NOMOVE),
 			"SetWindowPos"
 		);
 	}
 
-	public void setVisible(final boolean visible) {
+	public void setVisible(boolean visible) {
 		ShowWindow(hwnd, visible ? SW_SHOW : SW_HIDE);
 	}
 
@@ -164,7 +165,7 @@ public class WindowsDisplay {
 	}
 
 	private static long windowProc(
-		final long window, final int msg, final long wParam, final long lParam
+		long window, int msg, long wParam, long lParam
 	) {
 		//System.out.println("In WINDOW PROC: " + Integer.toHexString(msg) + " - " +wParam + " - " +lParam);
 

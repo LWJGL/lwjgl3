@@ -18,7 +18,7 @@ public class OpenGLException extends RuntimeException {
 	}
 
 	private static String createErrorMessage(int gl_error_code) {
-		final String error_string = Util.translateGLErrorString(gl_error_code);
+		String error_string = Util.translateGLErrorString(gl_error_code);
 		return error_string + " (" + gl_error_code + ")";
 	}
 

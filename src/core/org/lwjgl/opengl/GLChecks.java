@@ -7,6 +7,7 @@ package org.lwjgl.opengl;
 import org.lwjgl.LWJGLUtil;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glGetInteger;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -16,14 +17,14 @@ final class GLChecks {
 	private GLChecks() {
 	}
 
-	static void ensureBufferObject(final int binding, final boolean enabled) {
+	static void ensureBufferObject(int binding, boolean enabled) {
 		if ( LWJGLUtil.DEBUG ) {
 			if ( (glGetInteger(binding) != 0) ^ enabled )
 				throw new OpenGLException("Cannot use " + (enabled ? "offsets" : "buffers") + " when " + translateBufferObjectBinding(binding) + " buffer object is " + (enabled ? "disabled" : "enabled"));
 		}
 	}
 
-	private static String translateBufferObjectBinding(final int binding) {
+	private static String translateBufferObjectBinding(int binding) {
 		switch ( binding ) {
 			case GL_ARRAY_BUFFER_BINDING:
 				return "array";
@@ -42,7 +43,7 @@ final class GLChecks {
 	 *
 	 * @return the number of bytes
 	 */
-	static int translateTypeToBytes(final int type) {
+	static int translateTypeToBytes(int type) {
 		switch ( type ) {
 			case GL_BYTE:
 			case GL_UNSIGNED_BYTE:
@@ -73,7 +74,7 @@ final class GLChecks {
 	 *
 	 * @return the number of components
 	 */
-	static int translatePixelFormatToComponents(final int format) {
+	static int translatePixelFormatToComponents(int format) {
 		switch ( format ) {
 			case GL_STENCIL_INDEX:
 			case GL_DEPTH_COMPONENT:
@@ -115,7 +116,7 @@ final class GLChecks {
 	 *
 	 * @return the number of bytes
 	 */
-	static int getPixelBytes(final int format, final int type) {
+	static int getPixelBytes(int format, int type) {
 		return translatePixelFormatToComponents(format) * translateTypeToBytes(type);
 	}
 

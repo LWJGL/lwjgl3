@@ -98,14 +98,23 @@ public class NativeClass(
 		print(HEADER)
 		println("package $packageName;\n")
 
-		println("import org.lwjgl.*;")
-		println("import org.lwjgl.system.*;\n")
+		if ( !functions.isEmpty() ) {
+			println("import org.lwjgl.*;")
+			println("import org.lwjgl.system.*;\n")
 
-		println("import java.nio.*;\n")
+			val hasNIO = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
-		println("import static org.lwjgl.system.APIUtil.*;")
-		println("import static org.lwjgl.system.Checks.*;")
-		println("import static org.lwjgl.system.MemoryUtil.*;\n")
+			if ( hasNIO )
+				println("import java.nio.*;\n")
+
+			println("import static org.lwjgl.system.Checks.*;")
+			if ( hasNIO ) {
+				println("import static org.lwjgl.system.MemoryUtil.*;")
+				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult } } )
+					println("import static org.lwjgl.system.APIUtil.*;")
+			}
+			println()
+		}
 
 		if ( documentation != null )
 			println(documentation)
@@ -138,19 +147,15 @@ public class NativeClass(
 		println("\t/** The {@link FunctionMap} class for {@code ${className}}. */")
 		println("\tpublic static final class Functions implements FunctionMap {\n")
 
-		var funcIndent: String
-
 		print("\t\tpublic final long")
 		if ( functions.size == 1 ) {
-			funcIndent = " "
+			println(" ${functions[0].name};")
 		} else {
 			println()
-			funcIndent = "\t\t\t"
-		}
-
-		for ( i in functions.indices ) {
-			print("$funcIndent${functions[i].name}")
-			println(if ( i == functions.lastIndex ) ";" else ",")
+			for ( i in functions.indices ) {
+				print("\t\t\t${functions[i].name}")
+				println(if ( i == functions.lastIndex ) ";" else ",")
+			}
 		}
 
 		for ( func in functions ) {
@@ -159,7 +164,7 @@ public class NativeClass(
 			}
 		}
 
-		print("\n\t\tpublic Functions(final FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
+		print("\n\t\tpublic Functions(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
 		functionProvider.printFunctionsParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {

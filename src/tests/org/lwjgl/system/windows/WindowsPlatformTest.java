@@ -13,7 +13,7 @@ import static org.testng.Assert.*;
 public class WindowsPlatformTest {
 
 	public void test64Bit() {
-		final WindowsPlatform platform = (WindowsPlatform)Sys.getPlatform();
+		WindowsPlatform platform = (WindowsPlatform)Sys.getPlatform();
 
 		assertTrue(platform.has64Bit());
 	}

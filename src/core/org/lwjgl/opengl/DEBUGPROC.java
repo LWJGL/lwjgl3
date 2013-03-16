@@ -32,7 +32,7 @@ public class DEBUGPROC {
 
 	private static native long setCallback(Method callback);
 
-	static long register(final GL43.Functions context, final DEBUGPROC proc) {
+	static long register(GL43.Functions context, DEBUGPROC proc) {
 		if ( context.DEBUGPROC != 0L )
 			memGlobalRefDelete(context.DEBUGPROC);
 
@@ -50,17 +50,17 @@ public class DEBUGPROC {
 	 * @param length   the message length
 	 * @param message  a pointer to the message characters
 	 */
-	public void invoke(final int source, final int type, final int id, final int severity, final int length, final long message) {
+	public void invoke(int source, int type, int id, int severity, int length, long message) {
 		invoke(source, type, id, severity, memByteBuffer(message, length));
 	}
 
-	/** Alternative version of {@link #invoke(int, int, int, int, long, long)}. */
-	public void invoke(final int source, final int type, final int id, final int severity, final ByteBuffer message) {
+	/** Alternative version of {@link #invoke(int, int, int, int, int, long)}. */
+	public void invoke(int source, int type, int id, int severity, ByteBuffer message) {
 		invoke(source, type, id, severity, memDecodeUTF8(message));
 	}
 
-	/** String version of {@link #invoke(int, int, int, int, long, long)}. */
-	public void invoke(final int source, final int type, final int id, final int severity, final String message) {
+	/** String version of {@link #invoke(int, int, int, int, int, long)}. */
+	public void invoke(int source, int type, int id, int severity, String message) {
 		System.err.println("[LWJGL] KHR_debug message");
 		System.err.println("\tID: " + id);
 
@@ -137,7 +137,7 @@ public class DEBUGPROC {
 		System.err.println("\tMessage: " + message);
 	}
 
-	private static String printUnknownToken(final int token) {
+	private static String printUnknownToken(int token) {
 		return "Unknown (" + LWJGLUtil.toHexString(token) + ")";
 	}
 

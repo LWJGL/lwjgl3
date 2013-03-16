@@ -26,7 +26,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinBase.*;
 
-public class GL {
+public final class GL {
 
 	private static final FunctionProvider functionProvider;
 
@@ -38,8 +38,8 @@ public class GL {
 					private final WindowsLibrary OPENGL = new WindowsLibrary("opengl32.dll");
 
 					@Override
-					public long getFunctionAddress(final String functionName) {
-						final ByteBuffer nameBuffer = memEncodeASCII(functionName);
+					public long getFunctionAddress(String functionName) {
+						ByteBuffer nameBuffer = memEncodeASCII(functionName);
 						long address = wglGetProcAddress(nameBuffer);
 						if ( address == 0L ) {
 							address = GetProcAddress(OPENGL.getHandle(), nameBuffer);
@@ -64,14 +64,13 @@ public class GL {
 
 	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
 
-	public GL() {
-	}
+	private GL() {}
 
 	public static FunctionProvider getFunctionProvider() {
 		return functionProvider;
 	}
 
-	static void setCurrent(final GLContext context) {
+	static void setCurrent(GLContext context) {
 		contextTL.set(context);
 	}
 
@@ -94,9 +93,9 @@ public class GL {
 	public static ContextCapabilities createCapabilities(boolean forwardCompatible) {
 		// We don't have a current ContextCapabilities when this method is called
 		// so we have to use the native bindings directly.
-		final long GetError = functionProvider.getFunctionAddress("glGetError");
-		final long GetString = functionProvider.getFunctionAddress("glGetString");
-		final long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
+		long GetError = functionProvider.getFunctionAddress("glGetError");
+		long GetString = functionProvider.getFunctionAddress("glGetString");
+		long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
 		if ( GetError == 0L || GetString == 0L || GetIntegerv == 0L )
 			throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
@@ -105,10 +104,10 @@ public class GL {
 		if ( errorCode != GL_NO_ERROR )
 			LWJGLUtil.log("A GL context was in an error state before the creation of its capabilities instance. Error: " + Util.translateGLErrorString(errorCode));
 
-		final APIBuffer __buffer = APIUtil.apiBuffer();
+		APIBuffer __buffer = APIUtil.apiBuffer();
 
-		final int majorVersion;
-		final int minorVersion;
+		int majorVersion;
+		int minorVersion;
 
 		// Try the 3.0+ version query first
 		nglGetIntegerv(GL_MAJOR_VERSION, __buffer.address(), GetIntegerv);
@@ -122,10 +121,10 @@ public class GL {
 			minorVersion = __buffer.intValue(0);
 		} else {
 			// Fallback to the string query.
-			final String version = memDecodeUTF8(memByteBufferNT1(checkPointer(nglGetString(GL_VERSION, GetString))));
+			String version = memDecodeUTF8(memByteBufferNT1(checkPointer(nglGetString(GL_VERSION, GetString))));
 
 			try {
-				final StringTokenizer versionTokenizer = new StringTokenizer(version, ". ");
+				StringTokenizer versionTokenizer = new StringTokenizer(version, ". ");
 
 				majorVersion = Integer.parseInt(versionTokenizer.nextToken());
 				minorVersion = Integer.parseInt(versionTokenizer.nextToken());
@@ -134,14 +133,14 @@ public class GL {
 			}
 		}
 
-		final int[][] GL_VERSIONS = {
+		int[][] GL_VERSIONS = {
 			{ 1, 2, 3, 4, 5 },  // OpenGL 1
 			{ 0, 1 },           // OpenGL 2
 			{ 0, 1, 2, 3 },     // OpenGL 3
 			{ 0, 1, 2 },        // OpenGL 4
 		};
 
-		final Set<String> supportedExtensions = new HashSet<String>(128);
+		Set<String> supportedExtensions = new HashSet<String>(128);
 
 		for ( int major = 1; major <= GL_VERSIONS.length; major++ ) {
 			int[] minors = GL_VERSIONS[major - 1];
@@ -153,18 +152,18 @@ public class GL {
 
 		if ( majorVersion < 3 ) {
 			// Parse EXTENSIONS string
-			final String extensionsString = memDecodeASCII(memByteBufferNT1(checkPointer(nglGetString(GL_EXTENSIONS, GetString))));
+			String extensionsString = memDecodeASCII(memByteBufferNT1(checkPointer(nglGetString(GL_EXTENSIONS, GetString))));
 
-			final StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 			while ( tokenizer.hasMoreTokens() )
 				supportedExtensions.add(tokenizer.nextToken());
 		} else {
 			// Use forward compatible indexed EXTENSIONS
 
 			nglGetIntegerv(GL_NUM_EXTENSIONS, __buffer.address(), GetIntegerv);
-			final int extensionCount = __buffer.intValue(0);
+			int extensionCount = __buffer.intValue(0);
 
-			final long GetStringi = checkPointer(checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi")));
+			long GetStringi = checkPointer(checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi")));
 			for ( int i = 0; i < extensionCount; i++ )
 				supportedExtensions.add(memDecodeASCII(memByteBufferNT1(nglGetStringi(GL_EXTENSIONS, i, GetStringi))));
 
@@ -203,8 +202,8 @@ public class GL {
 		return new ContextCapabilities(supportedExtensions, forwardCompatible);
 	}
 
-	private static void addWGLExtensions(final Set<String> supportedExtensions) {
-		final String wglExtensions;
+	private static void addWGLExtensions(Set<String> supportedExtensions) {
+		String wglExtensions;
 
 		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
 		if ( wglGetExtensionsString != 0L ) {
@@ -217,12 +216,24 @@ public class GL {
 			wglExtensions = memDecodeASCII(memByteBufferNT1(nwglGetExtensionsStringEXT(wglGetExtensionsString)));
 		}
 
-		final StringTokenizer tokenizer = new StringTokenizer(wglExtensions);
+		StringTokenizer tokenizer = new StringTokenizer(wglExtensions);
 		while ( tokenizer.hasMoreTokens() )
 			supportedExtensions.add(tokenizer.nextToken());
 	}
 
-	static <T extends FunctionMap> T checkExtension(final String extension, final T functions, final boolean supported) {
+	static long getFunctionAddress(FunctionProvider provider, String functionName, boolean fc) {
+		return fc ? 0L : provider.getFunctionAddress(functionName);
+	}
+
+	static boolean isFunctionSupported(long address) {
+		return address != 0L;
+	}
+
+	static boolean isFunctionSupported(long address, boolean fc) {
+		return fc || address != 0L;
+	}
+
+	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;
 		else {

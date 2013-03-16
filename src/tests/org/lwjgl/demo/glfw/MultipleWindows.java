@@ -31,7 +31,7 @@ public class MultipleWindows {
 	private static void demo() {
 		glfwDefaultWindowHints();
 
-		final long[] windows = new long[4];
+		long[] windows = new long[4];
 
 		final AtomicInteger latch = new AtomicInteger(windows.length);
 
@@ -44,13 +44,13 @@ public class MultipleWindows {
 
 			WindowCallback.set(window, new WindowCallbackAdapter() {
 				@Override
-				public void cursorEnter(final long window, final int entered) {
+				public void cursorEnter(long window, int entered) {
 					if ( entered != 0 )
 						System.out.println("Mouse entered window: " + windowIndex);
 				}
 
 				@Override
-				public void key(final long window, final int key, final int action) {
+				public void key(long window, int key, int action) {
 					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 						latch.set(0); // Tests WindowCallback clean-up
 				}

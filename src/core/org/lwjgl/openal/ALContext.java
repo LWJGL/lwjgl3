@@ -14,7 +14,7 @@ public class ALContext {
 
 	private final ALCapabilities capabilities;
 
-	public ALContext(final ALCContext deviceContext, final long handle) {
+	public ALContext(ALCContext deviceContext, long handle) {
 		this.deviceContext = deviceContext;
 		this.handle = handle;
 

@@ -25,7 +25,7 @@ public class WindowsLibrary implements Library {
 
 	private final long handle;
 
-	public WindowsLibrary(final String name) {
+	public WindowsLibrary(String name) {
 		this.name = name;
 
 		handle = LoadLibrary(memEncodeUTF16(name));
@@ -41,7 +41,7 @@ public class WindowsLibrary implements Library {
 		return handle;
 	}
 
-	public long getProcAddress(final String name) {
+	public long getProcAddress(String name) {
 		return GetProcAddress(handle, memEncodeASCII(name));
 	}
 

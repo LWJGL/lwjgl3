@@ -16,7 +16,7 @@ public class WindowsGLContext extends GLContext {
 	private final long hdc;
 	private final long hglrc;
 
-	public WindowsGLContext(final ContextCapabilities capabilities, final long hdc, final long hglrc) {
+	public WindowsGLContext(ContextCapabilities capabilities, long hdc, long hglrc) {
 		super(capabilities);
 
 		this.hdc = hdc;
@@ -52,8 +52,8 @@ public class WindowsGLContext extends GLContext {
 	 *
 	 * @return the new WindowsContext
 	 */
-	public static WindowsGLContext create(final long hdc) {
-		final WindowsGLContext context = createLegacy(hdc);
+	public static WindowsGLContext create(long hdc) {
+		WindowsGLContext context = createLegacy(hdc);
 		try {
 			return createARB(hdc);
 		} finally {
@@ -61,13 +61,13 @@ public class WindowsGLContext extends GLContext {
 		}
 	}
 
-	public static WindowsGLContext createLegacy(final long hdc) {
-		final long hglrc = wglCreateContext(hdc);
+	public static WindowsGLContext createLegacy(long hdc) {
+		long hglrc = wglCreateContext(hdc);
 		if ( hglrc == 0 )
 			throw new RuntimeException("Failed to create OpenGL context.");
 
 		try {
-			final int result = wglMakeCurrent(hdc, hglrc);
+			int result = wglMakeCurrent(hdc, hglrc);
 			if ( result == 0 )
 				throw new RuntimeException("Failed to make the new OpenGL context current.");
 
@@ -85,7 +85,7 @@ public class WindowsGLContext extends GLContext {
 	 *
 	 * @return the new WindowsContext
 	 */
-	public static WindowsGLContext createARB(final long hdc) {
+	public static WindowsGLContext createARB(long hdc) {
 		IntBuffer attribs = BufferUtils.createIntBuffer(16);
 
 		/*attribs.put(WGL_CONTEXT_MAJOR_VERSION_ARB);
@@ -103,12 +103,12 @@ public class WindowsGLContext extends GLContext {
 		attribs.put(0);
 		attribs.flip();
 
-		final long hglrc = wglCreateContextAttribsARB(hdc, 0L, attribs);
+		long hglrc = wglCreateContextAttribsARB(hdc, 0L, attribs);
 		if ( hglrc == 0 )
 			throw new RuntimeException("Failed to create OpenGL context.");
 
 		try {
-			final int result = wglMakeCurrent(hdc, hglrc);
+			int result = wglMakeCurrent(hdc, hglrc);
 			if ( result == 0 )
 				throw new RuntimeException("Failed to make the new OpenGL context current.");
 
@@ -128,20 +128,20 @@ public class WindowsGLContext extends GLContext {
 	 *
 	 * @return the new WindowsContext
 	 */
-	public static WindowsGLContext create(final long hdc, final long hglrc) {
+	public static WindowsGLContext create(long hdc, long hglrc) {
 		if ( hdc == 0 || hglrc == 0 )
 			throw new IllegalStateException("Invalid OpenGL context specified.");
 
 		if ( wglGetCurrentContext() != hglrc )
 			throw new IllegalStateException("The specified OpenGL context must be current in the current thread.");
 
-		final ContextCapabilities capabilities = GL.createCapabilities(false);
+		ContextCapabilities capabilities = GL.createCapabilities(false);
 
 		return new WindowsGLContext(capabilities, hdc, hglrc);
 	}
 
 	public void destroy() {
-		final int result = wglDeleteContext(hglrc);
+		int result = wglDeleteContext(hglrc);
 		if ( result == 0 )
 			throw new RuntimeException("Failed to delete OpenGL context.");
 	}

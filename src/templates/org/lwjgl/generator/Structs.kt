@@ -128,8 +128,7 @@ public class Struct(
 
 		println("import java.nio.*;\n")
 
-		println("import org.lwjgl.BufferUtils;")
-		println("import org.lwjgl.PointerBuffer;\n")
+		println("import org.lwjgl.*;")
 
 		println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;\n")
@@ -152,7 +151,7 @@ public class Struct(
 
 		print("""
 	static {
-		final IntBuffer offsets = BufferUtils.createIntBuffer(${members.size});
+		IntBuffer offsets = BufferUtils.createIntBuffer(${members.size});
 
 		SIZEOF = offsets(memAddress(offsets));
 

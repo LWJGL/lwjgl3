@@ -16,7 +16,7 @@ public final class Util {
 
 	/** Throws OpenGLException if glGetError() returns anything else than GL_NO_ERROR */
 	public static void checkGLError() throws OpenGLException {
-		final int err = glGetError();
+		int err = glGetError();
 		if ( err != GL_NO_ERROR )
 			throw new OpenGLException(err);
 	}

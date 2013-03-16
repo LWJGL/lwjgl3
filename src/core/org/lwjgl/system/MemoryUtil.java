@@ -178,7 +178,7 @@ public final class MemoryUtil {
 		if ( address == 0L )
 			return null;
 
-		final ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
+		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
 		int size = 0;
 		while ( infPointer.get(size) != 0 )
@@ -203,7 +203,7 @@ public final class MemoryUtil {
 		if ( address == 0L )
 			return null;
 
-		final ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
+		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
 		int size = 0;
 		while ( true ) {
@@ -468,7 +468,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeASCII(final CharSequence text) {
+	public static ByteBuffer memEncodeASCII(CharSequence text) {
 		return memEncodeASCII(text, true);
 	}
 
@@ -481,11 +481,11 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeASCII(final CharSequence text, final boolean nullTerminated) {
+	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
-		final ByteBuffer buffer = BufferUtils.createByteBuffer(text.length() + (nullTerminated ? 1 : 0));
+		ByteBuffer buffer = BufferUtils.createByteBuffer(text.length() + (nullTerminated ? 1 : 0));
 
 		for ( int i = 0; i < text.length(); i++ )
 			buffer.put(i, (byte)text.charAt(i));
@@ -504,7 +504,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeUTF8(final CharSequence text) {
+	public static ByteBuffer memEncodeUTF8(CharSequence text) {
 		return memEncodeUTF8(text, true);
 	}
 
@@ -517,7 +517,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text or null
 	 */
-	public static ByteBuffer memEncodeUTF8(final CharSequence text, final boolean nullTerminated) {
+	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated) {
 		return memEncode(text, UTF8, nullTerminated);
 	}
 
@@ -529,7 +529,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncodeUTF16(final CharSequence text) {
+	public static ByteBuffer memEncodeUTF16(CharSequence text) {
 		return memEncodeUTF16(text, true);
 	}
 
@@ -542,11 +542,11 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncodeUTF16(final CharSequence text, final boolean nullTerminated) {
+	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
-		final ByteBuffer buffer = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
+		ByteBuffer buffer = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
 
 		for ( int i = 0; i < text.length(); i++ )
 			buffer.putChar(i << 1, text.charAt(i));
@@ -565,7 +565,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncode(final CharSequence text, final Charset charset) {
+	public static ByteBuffer memEncode(CharSequence text, Charset charset) {
 		return memEncode(text, charset, true);
 	}
 
@@ -578,7 +578,7 @@ public final class MemoryUtil {
 	 *
 	 * @return the encoded text
 	 */
-	public static ByteBuffer memEncode(final CharSequence text, final Charset charset, final boolean nullTerminated) {
+	public static ByteBuffer memEncode(CharSequence text, Charset charset, boolean nullTerminated) {
 		if ( text == null )
 			return null;
 
@@ -591,8 +591,8 @@ public final class MemoryUtil {
 	 *
 	 * @see java.nio.charset.CharsetEncoder#encode(java.nio.CharBuffer)
 	 */
-	private static ByteBuffer encode(final CharBuffer in, final Charset charset) {
-		final CharsetEncoder encoder = charset.newEncoder(); // encoders are not thread-safe, create a new one on every call
+	private static ByteBuffer encode(CharBuffer in, Charset charset) {
+		CharsetEncoder encoder = charset.newEncoder(); // encoders are not thread-safe, create a new one on every call
 
 		int n = (int)(in.remaining() * encoder.averageBytesPerChar());
 		ByteBuffer out = BufferUtils.createByteBuffer(n);
@@ -628,45 +628,45 @@ public final class MemoryUtil {
 		return out;
 	}
 
-	public static String memDecodeASCII(final ByteBuffer buffer) {
+	public static String memDecodeASCII(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		final char[] chars = new char[buffer.remaining()];
+		char[] chars = new char[buffer.remaining()];
 
-		final int pos = buffer.position();
+		int pos = buffer.position();
 		for ( int i = 0; i < chars.length; i++ )
 			chars[i] = (char)buffer.get(pos + i);
 
 		return new String(chars);
 	}
 
-	public static String memDecodeUTF8(final ByteBuffer buffer) {
+	public static String memDecodeUTF8(ByteBuffer buffer) {
 		return memDecode(buffer, UTF8);
 	}
 
-	public static String memDecodeUTF16(final ByteBuffer buffer) {
+	public static String memDecodeUTF16(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		final char[] chars = new char[buffer.remaining() >> 1];
+		char[] chars = new char[buffer.remaining() >> 1];
 
-		final int pos = buffer.position();
+		int pos = buffer.position();
 		for ( int i = 0; i < chars.length; i++ )
 			chars[i] = buffer.getChar(pos + (i << 1));
 
 		return new String(chars);
 	}
 
-	public static String memDecode(final ByteBuffer buffer, final Charset charset) {
+	public static String memDecode(ByteBuffer buffer, Charset charset) {
 		if ( buffer == null )
 			return null;
 
 		return decodeImpl(buffer, charset);
 	}
 
-	private static String decodeImpl(final ByteBuffer in, final Charset charset) {
-		final CharsetDecoder decoder = charset.newDecoder(); // decoders are not thread-safe, create a new one on every call
+	private static String decodeImpl(ByteBuffer in, Charset charset) {
+		CharsetDecoder decoder = charset.newDecoder(); // decoders are not thread-safe, create a new one on every call
 
 		int n = (int)(in.remaining() * decoder.averageCharsPerByte());
 		CharBuffer out = BufferUtils.createCharBuffer(n);

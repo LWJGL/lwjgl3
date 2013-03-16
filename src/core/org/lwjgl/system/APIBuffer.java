@@ -41,11 +41,11 @@ public class APIBuffer {
 	}
 
 	private void ensureCapacity(int bytes) {
-		final int requiredCapacity = offset + bytes;
+		int requiredCapacity = offset + bytes;
 		if ( requiredCapacity <= buffer.capacity() )
 			return;
 
-		final ByteBuffer resized = BufferUtils.createByteBuffer(mathNextPoT(requiredCapacity));
+		ByteBuffer resized = BufferUtils.createByteBuffer(mathNextPoT(requiredCapacity));
 
 		resized.put(buffer);
 		resized.clear();
@@ -54,12 +54,12 @@ public class APIBuffer {
 		address = memAddress(resized);
 	}
 
-	private int param(final int bytes) {
+	private int param(int bytes) {
 		// TODO: Consider padding the offset such that the parameter is memory aligned.
 
 		ensureCapacity(bytes);
 
-		final int param = offset;
+		int param = offset;
 		offset = param + bytes;
 		return param;
 	}
@@ -92,31 +92,31 @@ public class APIBuffer {
 	public int bufferParam(int size) { return param(size); }
 
 	/** Returns the boolean value at the specified offset. */
-	public boolean booleanValue(final int offset) { return buffer.get(offset) != 0; }
+	public boolean booleanValue(int offset) { return buffer.get(offset) != 0; }
 
 	/** Returns the boolean value at the specified offset. */
-	public byte byteValue(final int offset) { return buffer.get(offset); }
+	public byte byteValue(int offset) { return buffer.get(offset); }
 
 	/** Returns the short value at the specified offset. */
-	public short shortValue(final int offset) { return buffer.getShort(offset); }
+	public short shortValue(int offset) { return buffer.getShort(offset); }
 
 	/** Returns the int value at the specified offset. */
-	public int intValue(final int offset) { return buffer.getInt(offset); }
+	public int intValue(int offset) { return buffer.getInt(offset); }
 
 	/** Returns the long value at the specified offset. */
-	public long longValue(final int offset) { return buffer.getLong(offset); }
+	public long longValue(int offset) { return buffer.getLong(offset); }
 
 	/** Returns the float value at the specified offset. */
-	public float floatValue(final int offset) { return buffer.getFloat(offset); }
+	public float floatValue(int offset) { return buffer.getFloat(offset); }
 
 	/** Returns the double value at the specified offset. */
-	public double doubleValue(final int offset) { return buffer.getDouble(offset); }
+	public double doubleValue(int offset) { return buffer.getDouble(offset); }
 
 	/** Returns the pointer value at the specified offset. */
-	public long pointerValue(final int offset) { return PointerBuffer.get(buffer, offset); }
+	public long pointerValue(int offset) { return PointerBuffer.get(buffer, offset); }
 
 	/** Returns the ASCII string value at the specified byte range. */
-	public String stringValueASCII(final int offset, final int limit) {
+	public String stringValueASCII(int offset, int limit) {
 		buffer.position(offset);
 		buffer.limit(limit);
 		try {
@@ -127,7 +127,7 @@ public class APIBuffer {
 	}
 
 	/** Returns the UTF8 string value at the specified byte range. */
-	public String stringValueUTF8(final int offset, final int limit) {
+	public String stringValueUTF8(int offset, int limit) {
 		buffer.position(offset);
 		buffer.limit(limit);
 		try {
@@ -138,7 +138,7 @@ public class APIBuffer {
 	}
 
 	/** Returns the UTF16 string value at the specified byte range. */
-	public String stringValueUTF16(final int offset, final int limit) {
+	public String stringValueUTF16(int offset, int limit) {
 		buffer.position(offset);
 		buffer.limit(limit);
 		try {
@@ -149,31 +149,31 @@ public class APIBuffer {
 	}
 
 	/** Sets a boolean value at the specified offset. */
-	public void booleanValue(final int offset, final boolean value) { buffer.put(offset, value ? (byte)1 : (byte)0); }
+	public void booleanValue(int offset, boolean value) { buffer.put(offset, value ? (byte)1 : (byte)0); }
 
 	/** Sets a byte value at the specified offset. */
-	public void byteValue(final int offset, final byte value) { buffer.put(offset, value); }
+	public void byteValue(int offset, byte value) { buffer.put(offset, value); }
 
 	/** Sets a short value at the specified offset. */
-	public void shortValue(final int offset, final short value) { buffer.putShort(offset, value); }
+	public void shortValue(int offset, short value) { buffer.putShort(offset, value); }
 
 	/** Sets an int value at the specified offset. */
-	public void intValue(final int offset, final int value) { buffer.putInt(offset, value); }
+	public void intValue(int offset, int value) { buffer.putInt(offset, value); }
 
 	/** Sets a long value at the specified offset. */
-	public void longValue(final int offset, final long value) { buffer.putLong(offset, value); }
+	public void longValue(int offset, long value) { buffer.putLong(offset, value); }
 
 	/** Sets a float value at the specified offset. */
-	public void floatValue(final int offset, final float value) { buffer.putFloat(offset, value); }
+	public void floatValue(int offset, float value) { buffer.putFloat(offset, value); }
 
 	/** Sets a double value at the specified offset. */
-	public void doubleValue(final int offset, final double value) { buffer.putDouble(offset, value); }
+	public void doubleValue(int offset, double value) { buffer.putDouble(offset, value); }
 
 	/** Sets a pointer value at the specified offset. */
-	public void pointerValue(final int offset, final long value) { PointerBuffer.put(buffer, offset, value); }
+	public void pointerValue(int offset, long value) { PointerBuffer.put(buffer, offset, value); }
 
 	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
-	public void pointerValue(final int offset, final int index, final long value) {
+	public void pointerValue(int offset, int index, long value) {
 		PointerBuffer.put(buffer, offset + (index << PointerBuffer.getPointerSizeShift()), value);
 	}
 

@@ -18,17 +18,17 @@ public class WindowsPlatform implements Platform {
 		return true;
 	}
 
-	static void windowsCheckHandle(final long handle, final String msg) {
+	static void windowsCheckHandle(long handle, String msg) {
 		if ( handle == 0 )
 			windowsThrowException(msg);
 	}
 
-	static void windowsCheckResult(final int result, final String action) {
+	static void windowsCheckResult(int result, String action) {
 		if ( LWJGLUtil.DEBUG && result == 0 )
 			throw new RuntimeException(action + " failed (error code = " + GetLastError() + ")");
 	}
 
-	static void windowsThrowException(final String msg) {
+	static void windowsThrowException(String msg) {
 		throw new RuntimeException(msg + " (error code = " + GetLastError() + ")");
 	}
 

@@ -15,7 +15,7 @@ import java.security.PrivilegedAction;
  * System class. The static initializers in this class must run before
  * anything else executes in LWJGL.
  */
-public class Sys {
+public final class Sys {
 
 	/** The native library name */
 	private static final String JNI_LIBRARY_NAME = "lwjgl";
@@ -50,10 +50,10 @@ public class Sys {
 		return nativeLibrary;
 	}
 
-	private static String loadLibrary(final String libraryName) {
+	private static String loadLibrary(String libraryName) {
 		// actively try to load 64bit libs on 64bit architectures first
-		final String osArch = System.getProperty("os.arch");
-		final boolean is64bit = "amd64".equals(osArch) || "x86_64".equals(osArch);
+		String osArch = System.getProperty("os.arch");
+		boolean is64bit = "amd64".equals(osArch) || "x86_64".equals(osArch);
 
 		if ( is64bit ) {
 			try {
@@ -82,7 +82,7 @@ public class Sys {
 	private static String doLoadLibrary(final String libraryName) {
 		return AccessController.doPrivileged(new PrivilegedAction<String>() {
 			public String run() {
-				final String libraryPath = System.getProperty("org.lwjgl.librarypath");
+				String libraryPath = System.getProperty("org.lwjgl.librarypath");
 
 				if ( libraryPath != null )
 					System.load(libraryPath + File.separator + System.mapLibraryName(libraryName));

@@ -198,6 +198,10 @@ public class NativeClassFunction(
 				else
 					it.javaMethodType
 			}
+			if ( returns.isStructValue ) {
+				if ( !first ) builder append ", "
+				builder append "ByteBuffer"
+			}
 			builder append ")}"
 
 			return builder.toString()

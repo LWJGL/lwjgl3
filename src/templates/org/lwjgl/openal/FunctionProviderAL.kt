@@ -104,8 +104,8 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == capClasses.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCapabilities(final Set<String> ext) {")
-		println("\t\tfinal FunctionProvider provider = AL.getFunctionProvider();\n")
+		println("\n\tALCapabilities(Set<String> ext) {")
+		println("\t\tFunctionProvider provider = AL.getFunctionProvider();\n")
 		for ( extension in classes ) {
 			val hasCap = extension.prefixTemplate == "AL"
 			val capName = extension.capName(extension.prefixTemplate)

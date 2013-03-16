@@ -9,4 +9,5 @@ package org.lwjgl.system;
  * of functionality for a platform or context.
  */
 public interface FunctionMap {
+
 }

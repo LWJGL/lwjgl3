@@ -14,9 +14,9 @@ import static org.testng.Assert.*;
 public class WinGDITest {
 
 	public void testEnumObjects() {
-		final long dc = GetDC(0);
+		long dc = GetDC(0);
 		EnumObjects(dc, OBJ_BRUSH, new EnumObjectsProc() {
-			public int invoke(final long logObject) {
+			public int invoke(long logObject) {
 				assertTrue(logObject != 0L);
 				return 1;
 			}
