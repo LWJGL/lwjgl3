@@ -30,7 +30,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGpuAssociation".nativeClassWGL("WGL_AMD_g
 	)
 
 	val properties = IntConstant.block(
-		"Accepted by the {@code property} parameter of {@link #wglGetGPUInfo}.",
+		"Accepted by the {@code property} parameter of {@link #wglGetGPUInfoAMD}.",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
 		"GPU_RENDERER_STRING_AMD" _ 0x1F01,
@@ -151,6 +151,6 @@ fun WGL_AMD_gpu_association() = "WGLAMDGpuAssociation".nativeClassWGL("WGL_AMD_g
 		    "the bitwise OR of a number of values indicating which buffers are to be copied",
 	        "GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT"
 	    ),
-	    GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#LINEAR GL11#NEAREST")
+	    GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#GL_LINEAR GL11#GL_NEAREST")
     )
 }

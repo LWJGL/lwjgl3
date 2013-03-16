@@ -32,27 +32,43 @@ fun GL43() = "GL43".nativeClassGL("GL43") {
 	// ARB_ES3_compatibility
 
 	IntConstant.block(
-		"""
-		Accepted by the {@code internalformat} parameter of CompressedTexImage2D COMPRESSED_RGB8_ETC2 0x9274 COMPRESSED_SRGB8_ETC2 0x9275
-		COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2 0x9276 COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 0x9277 COMPRESSED_RGBA8_ETC2_EAC 0x9278
-		COMPRESSED_SRGB8_ALPHA8_ETC2_EAC 0x9279 COMPRESSED_R11_EAC 0x9270 COMPRESSED_SIGNED_R11_EAC 0x9271 COMPRESSED_RG11_EAC 0x9272 COMPRESSED_SIGNED_RG11_EAC
-		0x9273 Accepted by the {@code target} parameter of Enable and Disable.
-		""",
+        "Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
 
-		"PRIMITIVE_RESTART_FIXED_INDEX" _ 0x8D69
-	)
+        "COMPRESSED_RGB8_ETC2" _ 0x9274,
+        "COMPRESSED_SRGB8_ETC2" _ 0x9275,
+        "COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2" _ 0x9276,
+        "COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2" _ 0x9277,
+        "COMPRESSED_RGBA8_ETC2_EAC" _ 0x9278,
+        "COMPRESSED_SRGB8_ALPHA8_ETC2_EAC" _ 0x9279,
+        "COMPRESSED_R11_EAC" _ 0x9270,
+        "COMPRESSED_SIGNED_R11_EAC" _ 0x9271,
+        "COMPRESSED_RG11_EAC" _ 0x9272,
+        "COMPRESSED_SIGNED_RG11_EAC" _ 0x9273
+    )
 
-	IntConstant.block(
-		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
+    IntConstant.block(
+        "Accepted by the {@code target} parameter of Enable and Disable.",
 
-		"ANY_SAMPLES_PASSED_CONSERVATIVE" _ 0x8D6A
-	)
+        "PRIMITIVE_RESTART_FIXED_INDEX" _ 0x8D69
+    )
 
-	IntConstant.block(
-		"Accepted by the {@code value} parameter of the GetInteger* functions.",
+    IntConstant.block(
+        "Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
 
-		"MAX_ELEMENT_INDEX" _ 0x8D6B
-	)
+        "ANY_SAMPLES_PASSED_CONSERVATIVE" _ 0x8D6A
+    )
+
+    IntConstant.block(
+        "Accepted by the {@code value} parameter of the GetInteger* functions.",
+
+        "MAX_ELEMENT_INDEX" _ 0x8D6B
+    )
+
+    IntConstant.block(
+        "Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
+
+        "TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
+    )
 
 	// ARB_clear_buffer_object
 
@@ -462,7 +478,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"FramebufferParameteri",
 		"Sets a named parameter of a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL20#GL_READ_FRAMEBUFFER GL20#GL_DRAW_FRAMEBUFFER GL20#GL_FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "GL30#GL_READ_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be modified", FramebufferParameters),
 		GLint.IN("param", "the new value for the parameter named {@code pname}")
 	)
@@ -471,7 +487,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"GetFramebufferParameteriv",
 		"Retrieves a named parameter from a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL20#GL_READ_FRAMEBUFFER GL20#GL_DRAW_FRAMEBUFFER GL20#GL_FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "GL30#GL_READ_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
@@ -670,7 +686,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateFramebuffer",
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL20#GL_FRAMEBUFFER GL20#GL_DRAW_FRAMEBUFFER GL20#GL_READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#GL_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
@@ -679,7 +695,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateSubFramebuffer",
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL20#GL_FRAMEBUFFER GL20#GL_DRAW_FRAMEBUFFER GL20#GL_READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#GL_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
 		GLint.IN("x", "the X offset of the region to be invalidated"),
@@ -1021,7 +1037,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexStorage3DMultisample",
 		"Specifies storage for a two-dimensional multisample array texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE_MULTISAMPLE."),
+		GLenum.IN("target", "the target of the operation", "GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the texture"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels"),
@@ -1044,8 +1060,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TEXTURE_VIEW_MIN_LEVEL" _ 0x82DB,
 		"TEXTURE_VIEW_NUM_LEVELS" _ 0x82DC,
 		"TEXTURE_VIEW_MIN_LAYER" _ 0x82DD,
-		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE,
-		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
+		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE
 	)
 
 	GLvoid.func(

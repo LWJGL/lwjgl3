@@ -624,7 +624,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 			"the data type of each component in the array. The initial value is GL_FLOAT",
 			"""
 			GL11#GL_BYTE GL11#GL_UNSIGNED_BYTE GL11#GL_SHORT GL11#GL_UNSIGNED_SHORT GL11#GL_INT GL11#GL_UNSIGNED_INT GL30#GL_HALF_FLOAT GL11#GL_FLOAT
-			GL11#GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL12#GL_INT_2_10_10_10_REV GL41#GL_FIXED
+			GL11#GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV GL41#GL_FIXED
 			"""
 		),
 		GLboolean.IN("normalized", "whether fixed-point data values should be normalized or converted directly as fixed-point values when they are accessed"),
@@ -872,7 +872,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLenum.IN(
 			"sfail",
 			"the action to take when the stencil test fails. The initial value is GL_KEEP",
-			"GL11#GL_KEEP GL11#GL_ZERO GL11#GL_REPLACE GL11#GL_INCR GL11#GL_INCR_WRAP GL11#GL_DECR GL14#GL_DECR_WRAP GL11#GL_INVERT"
+			"GL11#GL_KEEP GL11#GL_ZERO GL11#GL_REPLACE GL11#GL_INCR GL14#GL_INCR_WRAP GL11#GL_DECR GL14#GL_DECR_WRAP GL11#GL_INVERT"
 		),
 		GLenum.IN("dpfail", "the stencil action when the stencil test passes, but the depth test fails. The initial value is GL_KEEP"),
 		GLenum.IN(
