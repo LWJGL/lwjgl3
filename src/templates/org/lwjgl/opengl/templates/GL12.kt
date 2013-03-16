@@ -271,7 +271,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"#GL_UNSIGNED_BYTE #GL_UNSIGNED_SHORT #GL_UNSIGNED_INT"
+			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", " a pointer to the location where the indices are stored")
 	)

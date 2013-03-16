@@ -51,7 +51,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"GetStringi",
 		"Queries indexed string state.",
 
-		GLenum.IN("name", "the indexed state to query", "GL11#GL_EXTENSIONS GL20#SHADING_LANGUAGE_VERSION"),
+		GLenum.IN("name", "the indexed state to query", "GL11#GL_EXTENSIONS GL20#GL_SHADING_LANGUAGE_VERSION"),
 		GLuint.IN("index", "the index of the particular element being queried")
 	)
 	
@@ -1034,8 +1034,8 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		"COMPRESSED_RED_RGTC1" _ 0x8DBB,
 		"COMPRESSED_SIGNED_RED_RGTC1" _ 0x8DBC,
-		"COMPRESSED_RED_GREEN_RGTC2" _ 0x8DBD,
-		"COMPRESSED_SIGNED_RED_GREEN_RGTC2" _ 0x8DBE
+		"COMPRESSED_RG_RGTC2" _ 0x8DBD,
+		"COMPRESSED_SIGNED_RG_RGTC2" _ 0x8DBE
 	)
 
 	// ARB_texture_rg

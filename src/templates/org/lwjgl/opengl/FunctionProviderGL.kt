@@ -28,19 +28,18 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
-			writer.print(", final boolean fc")
+			writer.print(", boolean fc")
 	}
 
-	override fun getFunctionAddressCall(function: NativeClassFunction): String {
+	override fun getFunctionAddressCall(function: NativeClassFunction): String =
 		// Do the fc check here, because getFunctionAddress will return an address
 		// even if the current context is forward compatible. We don't want that because
 		// we prefer to throw an exception instead of letting GL raise an error and it's
 		// also the only way to support the pseudo-fc mode.
-		return if ( function has deprecatedGL )
-			"fc ? 0L : provider.getFunctionAddress(\"${function.name}\")"
+		if ( function has deprecatedGL )
+			"GL.getFunctionAddress(provider, \"${function.name}\", fc)"
 		else
 			"provider.getFunctionAddress(\"${function.name}\")"
-	}
 
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
@@ -77,24 +76,15 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		for ( i in functions.indices ) {
 			print(funcIndent)
 
-			var isSpecial = false
+			if ( functions[i] has DependsOn.CLASS )
+				print("(!ext.contains(\"${functions[i].get(DependsOn.CLASS).reference}\") || ")
 
-			if ( functions[i] has deprecatedGL ) {
-				isSpecial = true
-				print("(fc || ")
-			}
+			print("GL.isFunctionSupported(funcs.${functions[i].name}")
+			if ( functions[i] has deprecatedGL )
+				print(", fc")
+			print(")")
 
-			if ( functions[i] has DependsOn.CLASS ) {
-				if ( !isSpecial ) {
-					isSpecial = true
-					print("(")
-				}
-				print("!ext.contains(\"${functions[i].get(DependsOn.CLASS).reference}\") || ")
-			}
-
-			print("funcs.${functions[i].name} != 0L")
-
-			if ( isSpecial ) print(')')
+			if ( functions[i] has DependsOn.CLASS ) print(')')
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 
@@ -146,8 +136,8 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tContextCapabilities(final Set<String> ext, final boolean fc) {")
-		println("\t\tfinal FunctionProvider provider = GL.getFunctionProvider();\n")
+		println("\n\tContextCapabilities(Set<String> ext, boolean fc) {")
+		println("\t\tFunctionProvider provider = GL.getFunctionProvider();\n")
 		for ( extension in classes ) {
 			if ( extension.hasNativeFunctions ) {
 				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")

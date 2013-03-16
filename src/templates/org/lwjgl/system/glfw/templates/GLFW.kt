@@ -620,7 +620,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetWindowPosCallback",
-		"Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.",
+		"Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
@@ -628,7 +628,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetWindowSizeCallback",
-		"Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.",
+		"Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
@@ -637,7 +637,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetWindowCloseCallback",
 		"""
-		Sets the close callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the close callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		This callback is called when the user attempts to close the window, i.e. for example by clicking the window's close widget.  It is called immediately
 		after the window's close flag has been set.
@@ -654,7 +654,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetWindowRefreshCallback",
 		"""
-		Sets the refresh callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the refresh callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		This callback is called when the client area of the window needs to be redrawn, for example if the window has been exposed after having been covered by
 		another window.
@@ -670,7 +670,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetWindowFocusCallback",
 		"""
-		Sets the focus callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the focus callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		This callback is called when the window gains or loses focus.
 		""",
@@ -682,7 +682,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetWindowIconifyCallback",
 		"""
-		Sets the iconify callback for the specified window. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the iconify callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		This callback is called when the window is iconified or restored.
 		""",
@@ -755,7 +755,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetKeyCallback",
 		"""
-		Sets the key callback. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the key callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		The key callback deals with physical keys, with key tokens named after their use on the standard US keyboard layout. If you want to input text, use the
 		Unicode character callback instead.
@@ -768,7 +768,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetCharCallback",
 		"""
-		Sets the Unicode character callback. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the Unicode character callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		The Unicode character callback is for text input. If you want to know whether a specific key was pressed or released, use the key callback.
 		""",
@@ -779,7 +779,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetMouseButtonCallback",
-		"Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCall, int)}.",
+		"Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
@@ -788,7 +788,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetCursorPosCallback",
 		"""
-		Sets the cursor position callback. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the cursor position callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		The position is relative to the upper-left corner of the client area of the window.
 		""",
@@ -799,7 +799,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetCursorEnterCallback",
-		"Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCall, int)}.",
+		"Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
@@ -808,7 +808,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetScrollCallback",
 		"""
-		Sets the scroll callback. See {@link WindowCallback#set(long, WindowCall, int)}.
+		Sets the scroll callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
 		This receives all scrolling input, like that from a mouse wheel or a touchpad scrolling area.
 		""",

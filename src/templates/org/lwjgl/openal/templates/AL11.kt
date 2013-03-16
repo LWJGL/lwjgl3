@@ -17,18 +17,18 @@ fun AL11() = "AL11".nativeClassAL("AL11") {
 	IntConstant.block(
 		"General tokens.",
 
-        "AL_SEC_OFFSET" _ 0x1024,
-        "AL_SAMPLE_OFFSET" _ 0x1025,
-        "AL_BYTE_OFFSET" _ 0x1026,
-        "AL_STATIC" _ 0x1028,
-        "AL_STREAMING" _ 0x1029,
-        "AL_UNDETERMINED" _ 0x1030,
-        "AL_ILLEGAL_COMMAND" _ 0xA004,
-        "AL_SPEED_OF_SOUND" _ 0xC003,
-        "AL_LINEAR_DISTANCE" _ 0xD003,
-        "AL_LINEAR_DISTANCE_CLAMPED" _ 0xD004,
-        "AL_EXPONENT_DISTANCE" _ 0xD005,
-        "AL_EXPONENT_DISTANCE_CLAMPED" _ 0xD006
+        "SEC_OFFSET" _ 0x1024,
+        "SAMPLE_OFFSET" _ 0x1025,
+        "BYTE_OFFSET" _ 0x1026,
+        "STATIC" _ 0x1028,
+        "STREAMING" _ 0x1029,
+        "UNDETERMINED" _ 0x1030,
+        "ILLEGAL_COMMAND" _ 0xA004,
+        "SPEED_OF_SOUND" _ 0xC003,
+        "LINEAR_DISTANCE" _ 0xD003,
+        "LINEAR_DISTANCE_CLAMPED" _ 0xD004,
+        "EXPONENT_DISTANCE" _ 0xD005,
+        "EXPONENT_DISTANCE_CLAMPED" _ 0xD006
 	)
 
 	ALvoid.func(

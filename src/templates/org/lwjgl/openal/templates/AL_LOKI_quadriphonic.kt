@@ -25,6 +25,6 @@ fun AL_LOKI_quadriphonic() = "LOKIQuadriphonic".nativeClass(
     	"AL_LOKI_quadriphonic tokens.",
 
     	"FORMAT_QUAD8_LOKI" _ 0x10004,
-    	"AL_FORMAT_QUAD16_LOKI" _ 0x10005
+    	"FORMAT_QUAD16_LOKI" _ 0x10005
     )
 }
