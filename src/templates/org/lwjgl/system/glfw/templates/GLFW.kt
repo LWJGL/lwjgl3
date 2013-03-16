@@ -12,7 +12,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"glfw3.h"
 	)
 
-	javaDoc("Native bindings to the GLFW library.")
+	javaDoc(
+		"""
+		Native bindings to the GLFW library.
+
+		<b>Note</b>: All OpenGL related functionality has been stripped away.
+		"""
+	)
 
 	IntConstant.block(
 		"This is incremented when the API is changed in non-compatible ways.",
@@ -873,6 +879,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	// [ OpenGL ]
 
+	/*
 	IntConstant.block(
 		"PixelFormat hints.",
 
@@ -967,5 +974,6 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		const _ charASCII_p.IN("procname", "")
 	)
+	*/
 
 }
