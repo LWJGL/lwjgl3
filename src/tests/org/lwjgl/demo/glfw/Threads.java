@@ -4,10 +4,10 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.WGLEXTSwapControl;
 import org.lwjgl.system.glfw.ErrorCallback;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.windows.GLFWWin32.glfwGetWin32Window;
 import static org.lwjgl.system.windows.WinGDI.SwapBuffers;
@@ -61,7 +61,6 @@ public class Threads extends AbstractDemo {
             }
 
             glfwSetWindowPos(window, 200 + 250 * i, 200);
-            glfwShowWindow(window);
 
             threads[i] = that.new GLFWThread(window, rgb[i][0], rgb[i][1], rgb[i][2]);
             threads[i].start();
@@ -109,9 +108,10 @@ public class Threads extends AbstractDemo {
 
 	        GLContext context = initializeOpenGLContext(HDC);
 
-            WGLEXTSwapControl.wglSwapIntervalEXT(1);
-            while (running) {
-                context.makeCurrent();
+            wglSwapIntervalEXT(1);
+	        glfwShowWindow(window);
+
+	        while (running) {
                 float v = (float) Math.abs(Math.sin(glfwGetTime() * 2f));
                 glClearColor(r * v, g * v, b * v, 0f);
                 glClear(GL_COLOR_BUFFER_BIT);
