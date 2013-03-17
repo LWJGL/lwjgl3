@@ -63,12 +63,7 @@ public class Threads extends AbstractDemo {
             glfwSetWindowPos(window, 200 + 250 * i, 200);
             glfwShowWindow(window);
 
-            /* need to use our context */
-            long HWND = glfwGetWin32Window(window);
-            long HDC = GetDC(HWND);
-            GLContext context = initializeOpenGLContext(HDC);
-
-            threads[i] = that.new GLFWThread(window, context, HDC, rgb[i][0], rgb[i][1], rgb[i][2]);
+            threads[i] = that.new GLFWThread(window, rgb[i][0], rgb[i][1], rgb[i][2]);
             threads[i].start();
         }
 
@@ -95,16 +90,12 @@ public class Threads extends AbstractDemo {
 
     private class GLFWThread extends Thread {
         long window;
-        GLContext context;
-        long hdc;
         public volatile boolean running;
         float r, g, b;
 
-        public GLFWThread(long window, GLContext context, long hdc, float r, float g, float b) {
-            System.out.println("GLFWThread: window:" + window + ", hdc: " + hdc + ", rgb: (" + r + ", " + g + ", " + b + ")");
+        public GLFWThread(long window, float r, float g, float b) {
+            System.out.println("GLFWThread: window:" + window + ", rgb: (" + r + ", " + g + ", " + b + ")");
             this.window = window;
-            this.context = context;
-            this.hdc = hdc;
             this.r = r;
             this.g = g;
             this.b = b;
@@ -113,20 +104,26 @@ public class Threads extends AbstractDemo {
 
         @Override
         public void run() {
-            context.makeCurrent();
+	        long HWND = glfwGetWin32Window(window);
+	        long HDC = GetDC(HWND);
+
+	        GLContext context = initializeOpenGLContext(HDC);
+
             WGLEXTSwapControl.wglSwapIntervalEXT(1);
             while (running) {
                 context.makeCurrent();
                 float v = (float) Math.abs(Math.sin(glfwGetTime() * 2f));
                 glClearColor(r * v, g * v, b * v, 0f);
                 glClear(GL_COLOR_BUFFER_BIT);
-                SwapBuffers(hdc);
+                SwapBuffers(HDC);
                 try {
                     Thread.sleep(16);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
+
+	        context.destroy();
         }
     }
 }

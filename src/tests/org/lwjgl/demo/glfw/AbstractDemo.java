@@ -68,7 +68,6 @@ public class AbstractDemo {
         long pushGLRC = wglGetCurrentContext();
 
         WindowsDisplay dummy = new WindowsDisplay();
-        dummy.setVisible(true);
 
         int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
         assertTrue(success != 0);
