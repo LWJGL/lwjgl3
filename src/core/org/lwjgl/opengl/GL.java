@@ -75,7 +75,11 @@ public final class GL {
 	}
 
 	public static ContextCapabilities getCapabilities() {
-		return contextTL.get().capabilities;
+		GLContext currentContext = contextTL.get();
+		if ( currentContext == null )
+			throw new IllegalStateException("There is no OpenGL context current in the current thread.");
+
+		return currentContext.capabilities;
 	}
 
 	/**

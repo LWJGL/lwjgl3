@@ -24,7 +24,8 @@ public class WindowsGLContext extends GLContext {
 	}
 
 	protected void makeCurrentImpl() {
-		wglMakeCurrent(hdc, hglrc);
+		if ( wglMakeCurrent(hdc, hglrc) == 0 )
+			throw new RuntimeException("Failed to make the OpenGL context current.");
 	}
 
 	public boolean isCurrent() {
