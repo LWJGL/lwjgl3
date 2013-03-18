@@ -346,16 +346,25 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"GetVersion",
-		"",
+		"""
+		This function retrieves the major, minor and revision numbers of the GLFW
+        library.  It is intended for when you are using GLFW as a shared library and
+        want to ensure that you are using the minimum required version.
+        """,
 
-		Check(1) _ int_p.OUT("major", ""),
-		Check(1) _ int_p.OUT("minor", ""),
-		Check(1) _ int_p.OUT("rev", "")
+		Check(1) _ int_p.OUT("major", "major version number"),
+		Check(1) _ int_p.OUT("minor", "minor version number"),
+		Check(1) _ int_p.OUT("rev", "revision number")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetVersionString",
-		""
+		"""
+		This function returns a static string generated at compile-time according to
+        which configuration macros were defined.  This is intended for use when
+        submitting bug reports, to allow developers to see which code paths are
+        enabled in a binary.
+		"""
 	)
 
 	void.func(
@@ -383,39 +392,59 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	GLFWmonitor_p.func(
 		"GetMonitors",
-		"",
+		"""
+		This function returns an array of handles for all currently connected monitors.
+        The returned array is valid only until the monitor configuration
+        changes.
+        See glfwSetMonitorCallback to receive notifications of configuration changes.
+		""",
 
 		autoSizeResult _ int_p.OUT("count", "")
 	)
 
 	GLFWmonitor.func(
 		"GetPrimaryMonitor",
-		""
+		"""
+		This function returns the primary monitor.  This is usually the monitor
+        where elements like the Windows task bar or the OS X menu bar is located.
+		"""
 	)
 
 	void.func(
 		"GetMonitorPos",
-		"",
+		"""
+		This function returns the position, in screen coordinates, of the upper-left
+        corner of the specified monitor.
+		""",
 
-		GLFWmonitor.IN("monitor", ""),
-		Check(1) _ int_p.OUT("xpos", ""),
-		Check(1) _ int_p.OUT("ypos", "")
+		GLFWmonitor.IN("monitor", "monitor to query"),
+		Check(1) _ int_p.OUT("xpos", "The monitor x-coordinate"),
+		Check(1) _ int_p.OUT("ypos", "The monitor y-coordinate")
 	)
 
 	void.func(
 		"GetMonitorPhysicalSize",
-		"",
+		"""
+		This function returns the size, in millimetres, of the display area of the
+        specified monitor.
+        Note:  Some operating systems do not provide accurate information, either
+        because the monitor's EDID data is incorrect, or because the driver does not
+        report it accurately.
+		""",
 
-		GLFWmonitor.IN("monitor", ""),
-		Check(1) _ int_p.OUT("width", ""),
-		Check(1) _ int_p.OUT("height", "")
+		GLFWmonitor.IN("monitor", "monitor to query"),
+		Check(1) _ int_p.OUT("width", "width, in mm, of the monitor's display"),
+		Check(1) _ int_p.OUT("height", "height, in mm, of the monitor's display")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetMonitorName",
-		"",
+		"""
+		This function returns a human-readable name, encoded as UTF-8, of the
+        specified monitor.
+		""",
 
-		GLFWmonitor.IN("monitor", "")
+		GLFWmonitor.IN("monitor", "monitor to query")
 	)
 
 	void.func(
@@ -431,191 +460,402 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	(const _ GLFWvidmode_p).func(
 		"GetVideoModes",
-		"",
+		"""
+		This function returns an array of all video modes supported by the specified
+        monitor.
+		""",
 
-		GLFWmonitor.IN("monitor", ""),
-		autoSizeResult _ int_p.OUT("count", "")
+		GLFWmonitor.IN("monitor", "monitor to query"),
+		autoSizeResult _ int_p.OUT("count", "number of video modes in the returned array")
 	)
 
 	GLFWvidmode.func(
 		"GetVideoMode",
-		"",
+		"This function returns the current video mode of the specified monitor.",
 
-		GLFWmonitor.IN("monitor", "")
+		GLFWmonitor.IN("monitor", "monitor to query")
 	)
 
 	void.func(
 		"SetGamma",
-		"",
+		"""
+		This function generates a gamma ramp from the specified exponent and then
+        calls glfwSetGamma with it.
+        """,
 
-		GLFWmonitor.IN("monitor", ""),
-		float.IN("gamma", "")
+		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
+		float.IN("gamma", "desired exponent")
 	)
 
 	void.func(
 		"GetGammaRamp",
-		"",
+		"This function retrieves the current gamma ramp of the specified monitor.",
 
-		GLFWmonitor.IN("monitor", ""),
-		GLFWgammaramp.IN("ramp", "")
+		GLFWmonitor.IN("monitor", "monitor to query"),
+		GLFWgammaramp.IN("ramp", "Where to store the gamma ramp")
 	)
 
 	void.func(
 		"SetGammaRamp",
-		"",
+		"This function sets the current gamma ramp for the specified monitor.",
 
-		GLFWmonitor.IN("monitor", ""),
-		const _ GLFWgammaramp.IN("ramp", "")
+		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
+		const _ GLFWgammaramp.IN("ramp", "gamma ramp to use")
 	)
 
 	void.func(
 		"DefaultWindowHints",
-		""
+		"""
+		This function resets all window hints to their default values
+		Note: This function may only be called from the main thread.
+		"""
 	)
 
 	void.func(
 		"WindowHint",
-		"",
+		"""
+		This function sets hints for the next call to glfwCreateWindow.  The
+        hints, once set, retain their values until changed by a call to
+        glfwWindowHint or glfwDefaultWindowHints, or until the library is
+        terminated with glfwTerminate.
+        
+        Some window hints are hard constraints.  These must match the available
+        capabilities *exactly* for window and context creation to succeed.  Hints
+        that are not hard constraints are matched as closely as possible, but the
+        resulting window and context may differ from what these hints requested.  To
+        find out the actual parameters of the created window and context, use the
+        glfwGetWindowParam function.
+        
+        The following hints are hard constraints:
+         * GLFW_STEREO
+         * GLFW_CLIENT_API
+        
+        The following additional hints are hard constraints if requesting an OpenGL
+        context:
+         * GLFW_OPENGL_FORWARD_COMPAT
+         * GLFW_OPENGL_PROFILE
+        
+        Hints that do not apply to a given type of window or context are ignored.
+        Framebuffer hints
+        
+        The GLFW_RED_BITS, GLFW_GREEN_BITS, GLFW_BLUE_BITS, GLFW_ALPHA_BITS,
+        GLFW_DEPTH_BITS and GLFW_STENCIL_BITS hints specify the desired bit
+        depths of the various components of the default framebuffer.
+        
+        The GLFW_ACCUM_RED_BITS, GLFW_ACCUM_GREEN_BITS, GLFW_ACCUM_BLUE_BITS
+        and GLFW_ACCUM_ALPHA_BITS hints specify the desired bit depths of the
+        various components of the accumulation buffer.
+        
+        The GLFW_AUX_BUFFERS hint specifies the desired number of auxiliary
+        buffers.
+        
+        The GLFW_STEREO hint specifies whether to use stereoscopic rendering.
+        
+        The GLFW_SAMPLES hint specifies the desired number of samples to use for
+        multisampling.
+        
+        The GLFW_SRGB_CAPABLE hint specifies whether the framebuffer should be
+        sRGB capable.
+        
+        Context hints
+        
+        The GLFW_CLIENT_API hint specifies which client API to create the context
+        for.  Possible values are GLFW_OPENGL_API and GLFW_OPENGL_ES_API.
+        
+        The GLFW_CONTEXT_VERSION_MAJOR and GLFW_CONTEXT_VERSION_MINOR hints
+        specify the client API version that the created context must be compatible
+        with.
+        
+        For OpenGL, these hints are *not* hard constraints, as they don't have to
+        match exactly, but glfwCreateWindow will still fail if the resulting
+        OpenGL version is less than the one requested.  It is therefore perfectly
+        safe to use the default of version 1.0 for legacy code and you will still
+        get backwards-compatible contexts of version 3.0 and above when available.
+        
+        For OpenGL ES, these hints are hard constraints, as there is no backward
+        compatibility between OpenGL ES versions.
+        
+        If an OpenGL context is requested, the GLFW_OPENGL_FORWARD_COMPAT hint
+        specifies whether the OpenGL context should be forward-compatible, i.e. one
+        where all functionality deprecated in the requested version of OpenGL is
+        removed. This may only be used if the requested OpenGL version is 3.0 or
+        above. If another client API is requested, this hint is ignored.
+        
+        
+        If an OpenGL context is requested, the GLFW_OPENGL_DEBUG_CONTEXT hint
+        specifies whether to create a debug OpenGL context, which may have
+        additional error and performance issue reporting functionality.  If another
+        client API is requested, this hint is ignored.
+        
+        If an OpenGL context is requested, the GLFW_OPENGL_PROFILE hint specifies
+        which OpenGL profile to create the context for.  Possible values are one of
+        GLFW_OPENGL_CORE_PROFILE or GLFW_OPENGL_COMPAT_PROFILE, or
+        GLFW_OPENGL_NO_PROFILE to not request a specific profile.  If requesting
+        an OpenGL version below 3.2, GLFW_OPENGL_NO_PROFILE must be used.  If
+        another client API is requested, this hint is ignored.
+        
+        The GLFW_CONTEXT_ROBUSTNESS hint specifies the robustness strategy to be
+        used by the context.  This can be one of GLFW_NO_RESET_NOTIFICATION or
+        GLFW_LOSE_CONTEXT_ON_RESET, or GLFW_NO_ROBUSTNESS to not request
+        a robustness strategy.
+        
+        Window hints
+        
+        The GLFW_RESIZABLE hint specifies whether the window will be resizable by
+        the user.  The window will still be resizable using the 
+        glfwSetWindowSize function.  This hint is ignored for fullscreen windows.
+        
+        The GLFW_VISIBLE hint specifies whether the window will be initially
+        visible.  This hint is ignored for fullscreen windows.
+        
+        New in GLFW 3
+        Hints are no longer reset to their default values on window creation.  To
+        set default hint values, use  glfwDefaultWindowHints.
+        
+        Note: This function may only be called from the main thread.        
+		""",
 
-		int.IN("target", ""),
-		int.IN("hint", "")
+		int.IN("target", "The window hint to set"),
+		int.IN("hint", "new value of the window hint")
 	)
 
 	GLFWwindow.func(
 		"CreateWindow",
-		"",
+		"""
+		This function creates a window and its associated context.  Most of the
+        options controlling how the window and its context should be created are
+        specified via the glfwWindowHint function.
 
-		int.IN("width", ""),
-		int.IN("height", ""),
-		const _ charUTF8_p.IN("title", ""),
-		nullable _ GLFWmonitor.IN("monitor", ""),
-		nullable _ GLFWwindow.IN("share", "")
+        Successful creation does not change which context is current.  Before you
+        can use the newly created context, you need to make it current using
+        glfwMakeContextCurrent.
+
+        Note that the actual properties of the window and context may differ from
+        what you requested, as not all parameters and hints are hard constraints.
+		""",
+
+		int.IN("width", "desired width, in pixels, of the window"),
+		int.IN("height", "desired height, in pixels, of the window"),
+		const _ charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
+		nullable _ GLFWmonitor.IN("monitor", "monitor to use for fullscreen mode, or null to use windowed mode"),
+		nullable _ GLFWwindow.IN("share", " window whose context to share resources with, or null to not share resources")
 	)
 
 	val DestroyWindow = (Code(
 		javaBeforeNative = "\t\tWindowCallback.set(window, null);"
 	) _ (void.func(
 		"DestroyWindow",
-		"",
+		"""
+		This function destroys the specified window and its context.  On calling
+        this function, no further callbacks will be called for that window.
+        Note: This function may only be called from the main thread.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to destroy")
 	))).javaDocLink
 
 	int.func(
 		"WindowShouldClose",
-		"",
+		"This function returns the value of the close flag of the specified window.",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to query")
 	)
 
 	void.func(
 		"SetWindowShouldClose",
-		"",
+		"""
+		This function sets the value of the close flag of the specified window.
+        This can be used to override the user's attempt to close the window, or
+        to signal that it should be closed.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("value", "")
+		GLFWwindow.IN("window", "window whose flag to change"),
+		int.IN("value", "new value")
 	)
 
 	void.func(
 		"SetWindowTitle",
-		"",
+		"""
+		This function sets the window title, encoded as UTF-8, of the specified
+        window.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		const _ charUTF8_p.IN("title", "")
+		GLFWwindow.IN("window", "window whose title to change"),
+		const _ charUTF8_p.IN("title", "UTF-8 encoded window title")
 	)
 
 	void.func(
 		"GetWindowPos",
-		"",
+		"""
+		This function retrieves the position, in screen coordinates, of the
+        upper-left corner of the client area of the specified window.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		Check(1) _ int_p.OUT("xpos", ""),
-		Check(1) _ int_p.OUT("ypos", "")
+		GLFWwindow.IN("window", "window to query"),
+		Check(1) _ int_p.OUT("xpos", "x-coordinate of the upper-left corner of the client area"),
+		Check(1) _ int_p.OUT("ypos", "y-coordinate of the upper-left corner of the client area")
 	)
 
 	void.func(
 		"SetWindowPos",
-		"",
+		"""
+		This function sets the position, in screen coordinates, of the upper-left
+        corner of the client area of the window.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("xpos", ""),
-		int.IN("ypos", "")
+		GLFWwindow.IN("window", "window to query"),
+		int.IN("xpos", "x-coordinate of the upper-left corner of the client area"),
+		int.IN("ypos", "y-coordinate of the upper-left corner of the client area")
 	)
 
 	void.func(
 		"GetWindowSize",
-		"",
+		"""
+		This function retrieves the size, in pixels, of the client area of the
+        specified window.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		Check(1) _ int_p.OUT("width", ""),
-		Check(1) _ int_p.OUT("height", "")
+		GLFWwindow.IN("window", "window whose size to retrieve"),
+		Check(1) _ int_p.OUT("width", "width of the client area"),
+		Check(1) _ int_p.OUT("height", "height of the client area")
 	)
 
 	void.func(
 		"SetWindowSize",
-		"",
+		"""
+		This function sets the size, in pixels, of the client area of the specified
+        window.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("width", ""),
-		int.IN("height", "")
+		GLFWwindow.IN("window", "window to resize"),
+		int.IN("width", "desired width of the specified window"),
+		int.IN("height", "desired height of the specified window")
 	)
 
 	void.func(
 		"IconifyWindow",
-		"",
+		"""
+		This function iconifies/minimizes the specified window, if it was previously
+        restored.  If it is a fullscreen window, the original monitor resolution is
+        restored until the window is restored.  If the window is already iconified,
+        this function does nothing.
+        Note: This function may only be called from the main thread.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to iconify")
 	)
 
 	void.func(
 		"RestoreWindow",
-		"",
+		"""
+		This function restores the specified window, if it was previously
+        iconified/minimized.  If the window is already restored, this function does
+        nothing.
+        Note: This function may only be called from the main thread.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to restore")
 	)
 
 	void.func(
 		"ShowWindow",
-		"",
+		"""
+        This function makes the specified window visible, if it was previously
+        hidden.  If the window is already visible or is in fullscreen mode, this
+        function does nothing.
+        Note: This function may only be called from the main thread.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to make visible")
 	)
 
 	void.func(
 		"HideWindow",
-		"",
+		"""
+        This function hides the specified window, if it was previously visible.  If
+        the window is already hidden or is in fullscreen mode, this function does
+        nothing.
+        Note: This function may only be called from the main thread.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to hide")
 	)
 
 	GLFWmonitor.func(
 		"GetWindowMonitor",
-		"",
+		"""
+		This function returns the handle of the monitor that the specified window is
+        in fullscreen on.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window to query")
 	)
 
 	int.func(
 		"GetWindowParam",
-		"",
+		"""
+		This function returns a property of the specified window.  There are many
+        different properties, some related to the window and others to its context.
+        
+        The GLFW_FOCUSED parameter indicates whether the window is focused.
+        
+        The GLFW_ICONIFIED parameter indicates whether the window is iconified.
+        
+        The GLFW_VISIBLE parameter indicates whether the window is visible.
+        
+        The GLFW_RESIZABLE parameter indicates whether the window is resizable
+        by the user.
+        
+        Context parameters
+        
+        The GLFW_CLIENT_API parameter indicates the client API provided by the
+        window's context; either GLFW_OPENGL_API or GLFW_OPENGL_ES_API.
+        
+        The GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR and
+        GLFW_CONTEXT_REVISION parameters indicate the client API version of the
+        window's context.
+        
+        The GLFW_OPENGL_FORWARD_COMPAT parameter is GL_TRUE if the window's
+        context is an OpenGL forward-compatible one, or GL_FALSE otherwise.
+        
+        The GLFW_OPENGL_DEBUG_CONTEXT parameter is GL_TRUE if the window's
+        context is an OpenGL debug context, or GL_FALSE otherwise.
+        
+        The GLFW_OPENGL_PROFILE parameter indicates the OpenGL profile used by the
+        context.  This is GLFW_OPENGL_CORE_PROFILE or GLFW_OPENGL_COMPAT_PROFILE
+        if the context uses a known profile, or GLFW_OPENGL_NO_PROFILE if the
+        OpenGL profile is unknown or the context is for another client API.
+        
+        The GLFW_CONTEXT_ROBUSTNESS parameter indicates the robustness strategy
+        used by the context.  This is GLFW_LOSE_CONTEXT_ON_RESET or
+        GLFW_NO_RESET_NOTIFICATION if the window's context supports robustness, or
+        GLFW_NO_ROBUSTNESS otherwise.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("param", "")
+		GLFWwindow.IN("window", "window to query"),
+		int.IN("param", " parameter whose value to return")
 	)
 
 	void.func(
 		"SetWindowUserPointer",
-		"",
+		"""
+		This function sets the user-defined pointer of the specified window.  The
+        current value is retained until the window is destroyed.  The initial value
+        is null.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		nullable _ voidptr.IN("pointer", "")
+		GLFWwindow.IN("window", "window whose pointer to set"),
+		nullable _ voidptr.IN("pointer", "new value")
 	)
 
 	voidptr.func(
 		"GetWindowUserPointer",
-		"",
+		"""
+		This function returns the current value of the user-defined pointer of the
+        specified window.  The initial value is null.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window whose pointer to return")
 	)
 
 	void.func(
@@ -693,63 +933,118 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"PollEvents",
-		""
+		"""
+		This function processes only those events that have already been recevied
+        and then returns immediately.
+		"""
 	)
 
 	void.func(
 		"WaitEvents",
-		""
+		"""
+		This function blocks until at least one event has been recevied and then
+        processes all received events before returning.
+		"""
 	)
 
 	int.func(
 		"GetInputMode",
-		"",
+		"Returns the value of an input option for the specified window",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("mode", "")
+		GLFWwindow.IN("window", "window to query"),
+		int.IN("mode", "One of GLFW_CURSOR_MODE, GLFW_STICKY_KEYS or GLFW_STICKY_MOUSE_BUTTONS")
 	)
 
 	void.func(
 		"SetInputMode",
-		"",
+		"""
+		Sets an input option for the specified window
+		
+		If mode is GLFW_CURSOR_MODE, the value must be one of the supported input
+        modes:
+        * GLFW_CURSOR_NORMAL makes the cursor visible and behaving normally.
+        * GLFW_CURSOR_HIDDEN makes the cursor invisible when it is over the client
+          area of the window.
+        * GLFW_CURSOR_CAPTURED makes the cursor invisible and unable to leave the
+          window but unconstrained in terms of position.
+         
+        If mode is GLFW_STICKY_KEYS, the value must be either GL_TRUE to
+        enable sticky keys, or GL_FALSE to disable it.  If sticky keys are
+        enabled, a key press will ensure that glfwGetKey returns
+        GLFW_PRESS the next time it is called even if the key had been released
+        before the call.
+         
+        If mode is GLFW_STICKY_MOUSE_BUTTONS, the value must be either GL_TRUE
+        to enable sticky mouse buttons, or GL_FALSE to disable it.  If sticky
+        mouse buttons are enabled, a mouse button press will ensure that
+        glfwGetMouseButton returns GLFW_PRESS the next time it is called even
+        if the mouse button had been released before the call.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("mode", ""),
-		int.IN("value", "")
+		GLFWwindow.IN("window", "window whose input mode to set"),
+		int.IN("mode", "One of GLFW_CURSOR_MODE, GLFW_STICKY_KEYS or GLFW_STICKY_MOUSE_BUTTONS"),
+		int.IN("value", "new value of the specified input mode")
 	)
 
 	int.func(
 		"GetKey",
-		"",
+		"""
+		This function returns the last state reported for the specified key to the
+        specified window.  The returned state is one of GLFW_PRESS or
+        GLFW_RELEASE.  The higher-level state GLFW_REPEAT is only reported to
+        the key callback.
+        
+        If the GLFW_STICKY_KEYS input mode is enabled, this function returns
+        GLFW_PRESS the first time you call this function after a key has been
+        pressed, even if the key has already been released.
+        
+        The key functions deal with physical keys, with [key tokens](@ref keys)
+        named after their use on the standard US keyboard layout.  If you want to
+        input text, use the Unicode character callback instead.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("key", "")
+		GLFWwindow.IN("window", "desired window"),
+		int.IN("key", "desired keyboard key")
 	)
 
 	int.func(
 		"GetMouseButton",
-		"",
+		"""
+        This function returns the last state reported for the specified mouse button
+        to the specified window.
+        
+        If the GLFW_STICKY_MOUSE_BUTTONS input mode is enabled, this function
+        returns GLFW_PRESS the first time you call this function after a mouse
+        button has been pressed, even if the mouse button has already been released.		
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("button", "")
+		GLFWwindow.IN("window", "desired window"),
+		int.IN("button", "desired mouse button")
 	)
 
 	void.func(
 		"GetCursorPos",
-		"",
+		"""
+		This function returns the last reported position of the cursor to the
+        specified window.
+        """,
 
-		GLFWwindow.IN("window", ""),
-		Check(1) _ int_p.OUT("xpos", ""),
-		Check(1) _ int_p.OUT("ypos", "")
+		GLFWwindow.IN("window", "desired window"),
+		Check(1) _ int_p.OUT("xpos", "cursor x-coordinate, relative to the left edge of the client area or null"),
+		Check(1) _ int_p.OUT("ypos", "cursor y-coordinate, relative to the to top edge of the client area, or null.")
 	)
 
 	void.func(
 		"SetCursorPos",
-		"",
+		"""
+		This function sets the position of the cursor. The specified window must be
+        focused. If the window does not have focus when this function is called, it
+        fails silently.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		int.IN("xpos", ""),
-		int.IN("ypos", "")
+		GLFWwindow.IN("window", "desired window"),
+		int.IN("xpos", "desired x-coordinate, relative to the left edge of the client area, or null"),
+		int.IN("ypos", "desired y-coordinate, relative to the top edge of the client area, or null")
 	)
 
 	void.func(
@@ -819,62 +1114,84 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	int.func(
 		"GetJoystickParam",
-		"",
+		"This function returns a parameter of the specified joystick.",
 
-		int.IN("joy", ""),
-		int.IN("param", "")
+		int.IN("joy", "joystick to query"),
+		int.IN("param", "parameter whose value to return")
 	)
 
 	int.func(
 		"GetJoystickAxes",
-		"",
+		"""
+		This function returns the current positions of axes of the specified
+        joystick.
+        """,
 
-		int.IN("joy", ""),
-		Check(1) _ float_p.OUT("axes", ""),
-		int.IN("numaxes", "")
+		int.IN("joy", "joystick to query"),
+		Check(1) _ float_p.OUT("axes", "array to hold the values"),
+		int.IN("numaxes", "size of the provided array")
 	)
 
 	int.func(
 		"GetJoystickButtons",
-		"",
+		"""
+		This function returns the current state of buttons of the specified
+        joystick.
+		""",
 
-		int.IN("joy", ""),
-		charUTF8_p.IN("buttons", ""),
-		int.IN("numbuttons", "")
+		int.IN("joy", "joystick to query"),
+		charUTF8_p.IN("buttons", "array to hold the values"),
+		int.IN("numbuttons", "size of the provided array")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetJoystickName",
-		"",
+		"""
+		This function returns the name, encoded as UTF-8, of the specified joystick.
+		""",
 
-		int.IN("joy", "")
+		int.IN("joy", "joystick to query")
 	)
 
 	void.func(
 		"SetClipboardString",
-		"",
+		"""
+		This function sets the system clipboard to the specified, UTF-8 encoded
+        string.  The string is copied before returning, so you don't have to retain
+        it afterwards.
+		""",
 
-		GLFWwindow.IN("window", ""),
-		const _ charUTF8_p.IN("string", "")
+		GLFWwindow.IN("window", "window that will own the clipboard contents"),
+		const _ charUTF8_p.IN("string", "UTF-8 encoded string")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetClipboardString",
-		"",
+		"""
+		This function returns the contents of the system clipboard, if it contains
+        or is convertible to a UTF-8 encoded string.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "window that will request the clipboard contents")
 	)
 
 	double.func(
 		"GetTime",
-		""
+		"""
+		This function returns the value of the GLFW timer. Unless the timer has
+        been set using glfwSetTime, the timer measures time elapsed since GLFW
+        was initialized.
+		"""
 	)
 
 	void.func(
 		"SetTime",
-		"",
+		"""
+		This function sets the value of the GLFW timer.  It then continues to count
+        up from that value.
+        """,
 
-		double.IN("time", "")
+		double.IN("time", "new value, in seconds")
 	)
 
 	// [ OpenGL ]
