@@ -116,11 +116,7 @@ public class Threads extends AbstractDemo {
                 glClearColor(r * v, g * v, b * v, 0f);
                 glClear(GL_COLOR_BUFFER_BIT);
                 SwapBuffers(HDC);
-                try {
-                    Thread.sleep(16);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                pause(16);
             }
 
 	        context.destroy();

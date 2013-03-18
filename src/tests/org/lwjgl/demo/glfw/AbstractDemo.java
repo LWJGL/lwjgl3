@@ -125,4 +125,12 @@ public class AbstractDemo {
         System.out.println("context: " + context + " for HDC: " + HDC);
         return context;
     }
+
+    protected static void pause(long pause) {
+        try {
+            Thread.sleep(pause);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
