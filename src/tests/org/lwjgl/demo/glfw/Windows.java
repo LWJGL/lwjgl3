@@ -75,11 +75,12 @@ public class Windows extends AbstractDemo {
                 glClear(GL_COLOR_BUFFER_BIT);
                 SwapBuffers(HDC);
 
-                if (glfwWindowShouldClose(windows[i]) == 1)
+                if (glfwWindowShouldClose(windows[i]) == 1) {
                     running = false;
+                }
             }
-
             glfwPollEvents();
+            pause(16);
         }
 
         glfwTerminate();
