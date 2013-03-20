@@ -540,7 +540,7 @@ public class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code)
 
-		generateNativeMethodCall() {
+		generateNativeMethodCall(code?.javaAfterNative != null) {
 			printList(parameters) {
 				it.asNativeMethodCallParam(GenerationMode.NORMAL)
 			}
@@ -551,38 +551,41 @@ public class NativeClassFunction(
 			}
 		}
 
-		if ( !(returns.isVoid || returns.isStructValue) && returns.isBufferPointer ) { // TODO: optimize condition?
-			val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
-			val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
-				"ByteBuffer"
-			else
-				returns.nativeType.mapping.javaMethodType.getSimpleName()
-
-			print("\t\treturn mem${bufferType}")
-			if ( isNullTerminated )
-				print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
-			print("($RESULT")
-			if ( returns has MapPointer.CLASS )
-				print(", ${returns[MapPointer.CLASS].sizeExpression}")
-			else if ( !isNullTerminated ) {
-				if ( returns.nativeType is StructType ) {
-					print(", ${returns.nativeType.definition.className}.SIZEOF")
-				} else {
-					val param = try {
-						getParam { it has autoSizeResult }
-					} catch (e: IllegalStateException) {
-						throw RuntimeException("No autoSizeResult parameter could be found.")
-					}
-					if ( param.nativeType.mapping == PointerMapping.DATA_INT )
-						print(", $API_BUFFER.intValue(${param.name})")
-					else
-						print(", (int)$API_BUFFER.longValue(${param.name})")
-				}
-			}
-			println(");")
-		}
-
 		generateCodeAfterNative(code)
+
+		if ( !(returns.isVoid || returns.isStructValue) ) { // TODO: optimize condition?
+			if ( returns.isBufferPointer ) {
+				val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
+				val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
+					"ByteBuffer"
+				else
+					returns.nativeType.mapping.javaMethodType.getSimpleName()
+
+				print("\t\treturn mem${bufferType}")
+				if ( isNullTerminated )
+					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+				print("($RESULT")
+				if ( returns has MapPointer.CLASS )
+					print(", ${returns[MapPointer.CLASS].sizeExpression}")
+				else if ( !isNullTerminated ) {
+					if ( returns.nativeType is StructType ) {
+						print(", ${returns.nativeType.definition.className}.SIZEOF")
+					} else {
+						val param = try {
+							getParam { it has autoSizeResult }
+						} catch (e: IllegalStateException) {
+							throw RuntimeException("No autoSizeResult parameter could be found.")
+						}
+						if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+							print(", $API_BUFFER.intValue(${param.name})")
+						else
+							print(", (int)$API_BUFFER.longValue(${param.name})")
+					}
+				}
+				println(");")
+			} else if ( code?.javaAfterNative != null )
+				println("\t\treturn $RESULT;")
+		}
 
 		println("\t}\n")
 	}
@@ -613,15 +616,16 @@ public class NativeClassFunction(
 		}
 	}
 
-	private fun PrintWriter.generateNativeMethodCall(printParams: PrintWriter.() -> Unit) {
+	private fun PrintWriter.generateNativeMethodCall(returnLater: Boolean = false, printParams: PrintWriter.() -> Unit) {
 		print("\t\t")
 		if ( !(returns.isVoid || returns.isStructValue) ) {
-			if ( returns.isBufferPointer )
-				print("long $RESULT = ")
-			else if ( returns.nativeType is ObjectType )
-				print("return new ${returns.nativeType.className}(")
-			else
+			if ( returns.isBufferPointer || returnLater )
+				print("${returns.nativeMethodType} $RESULT = ")
+			else {
 				print("return ")
+				if ( returns.nativeType is ObjectType )
+					print("new ${returns.nativeType.className}(")
+			}
 		}
 
 		print("n$name(")
@@ -954,11 +958,13 @@ public class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code)
 
-		generateNativeMethodCall() {
+		generateNativeMethodCall(code?.javaAfterNative != null) {
 			printList(parameters) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(GenerationMode.ALTERNATIVE))
 			}
 		}
+
+		generateCodeAfterNative(code)
 
 		if ( returns.isVoid || returns.isStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
@@ -995,10 +1001,9 @@ public class NativeClassFunction(
 					println("return $returnExpression;")
 				else // Multiple statements, assumes the transformation includes the return statement.
 					println(returnExpression)
-			}
+			} else if ( code?.javaAfterNative != null )
+				println("\t\treturn $RESULT;")
 		}
-
-		generateCodeAfterNative(code)
 
 		println("\t}\n")
 	}
