@@ -1005,7 +1005,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("yOrig", "the bitmap origin y coordinate"),
 		GLfloat.IN("xInc", "the x increment added to the raster position"),
 		GLfloat.IN("yInc", "the y increment added to the raster position"),
-		mods(const, Check("w * h"), PIXEL_UNPACK_BUFFER) _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
+		mods(const, PIXEL_UNPACK_BUFFER) _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
 	)
 
 	GLvoid.func(
@@ -1326,7 +1326,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
@@ -2736,7 +2735,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("pixels", "an array in which to place the returned pixel data")
 	).javaDocLink
@@ -3169,7 +3167,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
@@ -3188,7 +3185,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 		    MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    Check(expression = "width * GLChecks.getPixelBytes(format, type)", bytes = true),
 		    PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
@@ -3331,7 +3327,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
@@ -3354,7 +3349,6 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
