@@ -1005,7 +1005,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("yOrig", "the bitmap origin y coordinate"),
 		GLfloat.IN("xInc", "the x increment added to the raster position"),
 		GLfloat.IN("yInc", "the y increment added to the raster position"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
+		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
 	)
 
 	GLvoid.func(
