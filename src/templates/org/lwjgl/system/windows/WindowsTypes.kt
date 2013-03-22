@@ -286,18 +286,7 @@ val PDISPLAY_DEVICE = StructType(
 	}
 )
 
-val GOBJENUMPROC = CallbackType(
-	name = "GOBJENUMPROC",
-	callback = int.func(
-		WINDOWS_PACKAGE,
-	    "EnumObjectsProc",
-	    "An application-defined callback function used with the {@link WinGDI#EnumObjects} function. It is used to process the object data.",
-		"CALLBACK",
-		false,
-	    LPVOID.IN("logObject", "a pointer to a {@link LOGPEN} or {@link LOGBRUSH} structure describing the attributes of the object."),
-		CALLBACK_DATA _ LPARAM.IN("data", "a pointer to the application-defined data passed by the EnumObjects function.")
-	).nativeImport("WindowsLWJGL.h")
-)
+val GOBJENUMPROC = PointerType(name = "GOBJENUMPROC", includesPointer = true)
 
 fun config() {
 	val COLORREF = PrimitiveType("COLORREF", PrimitiveMapping.INT)

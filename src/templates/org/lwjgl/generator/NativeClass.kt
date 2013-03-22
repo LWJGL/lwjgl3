@@ -58,7 +58,7 @@ public abstract class FunctionProvider {
 
 		if ( function has Capabilities.CLASS && function[Capabilities.CLASS].override )
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
-		else if ( function.hasParam { it has Callback.CLASS } ) {
+		else if ( function.hasParam { it has Callback.CLASS && it[Callback.CLASS].storeInFunctions } ) {
 			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else
@@ -160,7 +160,9 @@ public class NativeClass(
 
 		for ( func in functions ) {
 			func.getParams { it has Callback.CLASS }.forEach {
-				println("\n\t\tlong ${it[Callback.CLASS].procClass};")
+				val cb = it[Callback.CLASS]
+				if ( cb.storeInFunctions )
+					println("\n\t\tlong ${cb.procClass};")
 			}
 		}
 

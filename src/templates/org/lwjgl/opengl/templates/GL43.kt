@@ -18,13 +18,13 @@ fun GL43() = "GL43".nativeClassGL("GL43") {
 	javaDoc("The core OpenGL 4.3 functionality.")
 
 	IntConstant.block(
-		"No. of supported Shading Language Versions. Accepted by the &lt;pname&gt; parameter of GetIntegerv.",
+		"No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",
 
 		"NUM_SHADING_LANGUAGE_VERSIONS" _ 0x82E9
 	)
 
 	IntConstant.block(
-		"Vertex attrib array has unconverted doubles. Accepted by the &lt;pname&gt; parameter of GetVertexAttribiv.",
+		"Vertex attrib array has unconverted doubles. Accepted by the {@code pname} parameter of GetVertexAttribiv.",
 
 		"VERTEX_ATTRIB_ARRAY_LONG" _ 0x874E
 	)
@@ -363,7 +363,10 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DebugMessageCallback",
 		"Specifies a callback to receive debugging messages from the GL.",
 
-		mods(Callback("DEBUGPROC"), nullable) _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
+		mods(
+			Callback("DEBUGPROC", storeInFunctions = true),
+			nullable
+		) _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
 		mods(Expression("DEBUGPROC.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"

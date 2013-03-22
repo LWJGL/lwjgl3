@@ -33,7 +33,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 /** Specialized conversion for methods. */
 fun String.toJavaDoc(paramsIn: Iterator<Parameter>): String {
 	// TODO: This is shit, optimize
-	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it has CallbackData.CLASS || it has autoSizeResult) }
+	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it has autoSizeResult) }
 	if ( params.isEmpty() )
 		return this.toJavaDoc()
 
