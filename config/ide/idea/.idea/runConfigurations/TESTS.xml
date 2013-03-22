@@ -1,14 +1,14 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="TESTS" type="TestNG" factoryName="TestNG" show_console_on_std_out="true" show_console_on_std_err="true">
+  <configuration default="false" name="TESTS" type="TestNG" factoryName="TestNG" singleton="true" show_console_on_std_out="true" show_console_on_std_err="true">
     <module name="Tests" />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" value="" />
-    <option name="SUITE_NAME" value="" />
+    <option name="SUITE_NAME" value="$PROJECT_DIR$/../../tests.xml" />
     <option name="PACKAGE_NAME" value="" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
     <option name="GROUP_NAME" value="" />
-    <option name="TEST_OBJECT" value="PACKAGE" />
+    <option name="TEST_OBJECT" value="SUITE" />
     <option name="VM_PARAMETERS" value="-ea -Dorg.lwjgl.util.Debug=true -Djava.library.path=libs/windows" />
     <option name="PARAMETERS" value="" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../../.." />
