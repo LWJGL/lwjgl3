@@ -116,11 +116,6 @@ public class Struct(
 		members add StructMember(this, nativeName, name)
 	}
 
-	// We allow pointers to callback functions as members
-	public fun CallbackType.member(nativeName: String, name: String = nativeName) {
-		members add StructMember(this, nativeName, name)
-	}
-
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
 		print(HEADER)

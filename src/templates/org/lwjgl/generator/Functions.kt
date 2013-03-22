@@ -187,7 +187,7 @@ public class NativeClassFunction(
 			builder append '('
 
 			var first = true
-			parameters.values().filter { !(it has CallbackData.CLASS || it has autoSizeResult) } forEach {
+			parameters.values().filter { !(it has autoSizeResult) } forEach {
 				if ( first )
 					first = false
 				else
@@ -242,17 +242,6 @@ public class NativeClassFunction(
 					bufferParam == null -> it.error("Buffer reference does not exist: AutoType($bufferParamName)")
 					!(bufferParam!!.nativeType is PointerType) -> it.error("Buffer reference must be a pointer type: AutoType($bufferParamName)")
 					bufferParam!!.nativeType.mapping != PointerMapping.DATA -> it.error("Pointer reference must have a DATA mapping: AutoType($bufferParamName)")
-					else -> {
-					}
-				}
-			}
-
-			if ( it has CallbackData.CLASS ) {
-				val functionParamName = it[CallbackData.CLASS].reference
-				val functionParam = parameters[functionParamName]
-				when {
-					functionParam == null -> it.error("Function reference does not exist: CallbackParam($functionParamName)")
-					!(functionParam!!.nativeType is CallbackType) -> it.error("Function reference must be a callback type: CallbackParam($functionParamName)")
 					else -> {
 					}
 				}
@@ -336,7 +325,7 @@ public class NativeClassFunction(
 		parameters.values().forEach {
 			var prefix = if ( it has Nullable.CLASS && it.nativeType.mapping != PointerMapping.NAKED_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(CallbackData.CLASS) && it.nativeType !is CallbackType && it.nativeType !is ObjectType && !it.has(nullable) )
+			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback.CLASS) )
 				checks add "checkPointer(${it.name});"
 
 			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {
@@ -500,7 +489,7 @@ public class NativeClassFunction(
 
 		print("\tpublic static ${returns.javaMethodType} $strippedName(")
 		printList(parameters) {
-			if ( it has CallbackData.CLASS || it has autoSizeResult )
+			if ( it has autoSizeResult )
 				null
 			else if ( it.isBufferPointer )
 				"ByteBuffer ${it.name}" // Convert multi-byte-per-element buffers to ByteBuffer
@@ -515,7 +504,7 @@ public class NativeClassFunction(
 
 		println(") {")
 
-		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+		val code = getCode(Code.ApplyTo.NORMAL)
 
 		// Step 2: Get function address
 
@@ -590,6 +579,17 @@ public class NativeClassFunction(
 		println("\t}\n")
 	}
 
+	private fun getCode(applyTo: Code.ApplyTo): Code? {
+		if ( !has(Code.CLASS) )
+			return null
+
+		val code = this[Code.CLASS]
+		return when ( code.applyTo ) {
+			Code.ApplyTo.BOTH, applyTo -> code
+			else -> null
+		}
+	}
+
 	private fun PrintWriter.printCode(fragment: String?) {
 		if ( fragment != null )
 			println(fragment)
@@ -610,7 +610,7 @@ public class NativeClassFunction(
 		printCode(code?.javaAfterNative)
 
 		if ( code?.javaFinally != null ) {
-			println("\t\t} finally {")
+			println("\t} finally {")
 			printCode(code?.javaFinally)
 			println("\t\t}")
 		}
@@ -624,7 +624,7 @@ public class NativeClassFunction(
 			else {
 				print("return ")
 				if ( returns.nativeType is ObjectType )
-					print("new ${returns.nativeType.className}(")
+					print("${returns.nativeType.className}.create(")
 			}
 		}
 
@@ -898,7 +898,7 @@ public class NativeClassFunction(
 
 		print("\tpublic static $retType $name(")
 		printList(parameters) {
-			if ( it has CallbackData.CLASS || it has autoSizeResult )
+			if ( it has autoSizeResult )
 				null
 			else
 				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
@@ -917,7 +917,7 @@ public class NativeClassFunction(
 		}
 		println(") {")
 
-		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+		val code = getCode(Code.ApplyTo.ALTERNATIVE)
 
 		// Step 2: Get function address
 
@@ -1127,10 +1127,18 @@ public class Code(
 	val javaFinally: String? = null,
 
 	val nativeBeforeCall: String? = null,
-	val nativeAfterCall: String? = null
+	val nativeAfterCall: String? = null,
+
+    val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
 ): FunctionModifier() {
 	class object {
 		val CLASS = javaClass<Code>()
+
+		enum class ApplyTo {
+			NORMAL
+			ALTERNATIVE
+			BOTH
+		}
 	}
 
 	override val isSpecial: Boolean = true
@@ -1366,5 +1374,13 @@ private val PointerArrayTransformMulti = PointerArrayTransform(true)
 
 private val CallbackTransform = object : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = "${param[Callback.CLASS].procClass} ${param.name}" // Replace type with the callback class
-	override fun transformCall(param: Parameter, original: String): String = "${param.name} == null ? 0L : ${param[Callback.CLASS].procClass}.CALLBACK" // Replace with callback function address
+	override fun transformCall(param: Parameter, original: String): String {
+		// Replace with callback function address
+		val procClass = param[Callback.CLASS].procClass;
+
+		if ( param has nullable )
+			"${param.name} == null ? 0L : $procClass.CALLBACK"
+		else
+			"$procClass.CALLBACK"
+	}
 }

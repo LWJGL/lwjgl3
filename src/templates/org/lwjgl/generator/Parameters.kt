@@ -19,7 +19,6 @@ abstract class QualifiedType(
 
 	open val javaMethodType: String
 		get() = when {
-			nativeType is CallbackType -> nativeType.callback.name
 			nativeType is ObjectType -> nativeType.className
 			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
 			else -> nativeType.javaMethodType.getSimpleName()
@@ -132,11 +131,7 @@ public class Parameter(
 		get() = "$javaMethodType $name"
 
 	fun asNativeMethodParam(parameters: Map<String, Parameter>): String {
-		val paramType = if ( has(CallbackData.CLASS) ) {
-			val functionParam = parameters[this[CallbackData.CLASS].reference]!!
-			functionParam.javaMethodType
-		} else
-			nativeMethodType
+		val paramType = nativeMethodType
 
 		return "$paramType $name"
 	}
@@ -151,10 +146,6 @@ public class Parameter(
 			else
 				"memAddress($name)"
 		}
-
-	// Callback functions
-		nativeType is CallbackType -> "${nativeType.callback.name}.CALLBACK" // The function itself
-		has(CallbackData.CLASS) -> get(CallbackData.CLASS).reference // The callback parameter
 
 	// Object parameter
 		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? 0L : $name.getPointer()" else "$name.getPointer()"
@@ -178,10 +169,7 @@ public class Parameter(
 			else
 				name
 
-			return if ( has(CallbackData.CLASS) )
-				"jobject $name"
-			else
-				"$jniFunctionType $name"
+			return "$jniFunctionType $name"
 		}
 
 }
@@ -222,29 +210,6 @@ public class Const internal(): TemplateModifier {
 public val const: Const = Const()
 
 // Parameter
-
-/** Marks the function parameter as a function callback user data parameter. */
-public class CallbackData(reference: String): ReferenceModifier(reference) {
-	class object {
-		val CLASS = javaClass<CallbackData>()
-	}
-
-	override fun validate(element: TemplateElement) {
-		if ( element !is Parameter )
-			throw IllegalArgumentException("The CallbackData modifier can only be applied on parameters.")
-
-		val param = element as Parameter
-		if (
-			!(
-				(param.nativeType is PointerType && (param.nativeType as PointerType).mapping identityEquals PointerMapping.NAKED_POINTER) ||
-				param.nativeType.mapping identityEquals PrimitiveMapping.PTR
-			)
-		)
-			throw IllegalArgumentException("The CallbackData modifier can only be applied on naked pointer types or pointer integers.")
-	}
-}
-/** This should only be used on the user data parameter of the CallbackFunction definition. */
-public val CALLBACK_DATA: CallbackData = CallbackData("")
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 public class AutoSize(reference: String, vararg val dependent: String): ReferenceModifier(reference) {
@@ -473,7 +438,7 @@ public class PointerArray(
 	}
 }
 
-public class Callback(val procClass: String): ParameterModifier() {
+public class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Callback>()
 	}

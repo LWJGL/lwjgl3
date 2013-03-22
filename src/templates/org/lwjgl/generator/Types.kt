@@ -108,34 +108,6 @@ public class CharSequenceType(
 	val nullTerminated: Boolean = true
 ): PointerType(name, mapping, includesPointer)
 
-// Callback functions
-public class CallbackType(
-	name: String,
-	val callback: CallbackFunction
-): PointerType(name = name, includesPointer = true)
-
-// TODO: This is "too public", is there a better way?
-public fun NativeType.func(
-	packageName: String,
-	funcName: String,
-	documentation: String,
-	convention: String,
-	async: Boolean,
-	vararg parameters: Parameter
-): CallbackFunction = ReturnValue(this).func(packageName, funcName, documentation, convention, async, *parameters)
-public fun ReturnValue.func(
-	packageName: String,
-	funcName: String,
-	documentation: String,
-	convention: String,
-	async: Boolean,
-	vararg parameters: Parameter
-): CallbackFunction {
-	val func = CallbackFunction(this, funcName, documentation, parameters, packageName, convention, async)
-	CallbackRegistry add func
-	return func
-}
-
 // --- [ TYPE MAPPINGS ] ---
 
 public open class TypeMapping(
