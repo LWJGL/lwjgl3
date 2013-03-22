@@ -82,7 +82,6 @@ fun GL43() = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "GLChecks.getPixelBytes(format, type)", bytes = true),
 			const
 		) _ GLvoid_p.IN("data", "a memory location storing the data to be replicated into the buffer's data store")
 	)
@@ -99,7 +98,6 @@ fun GL43() = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "GLChecks.getPixelBytes(format, type)", bytes = true),
 			const
 		) _ GLvoid_p.IN("data", "a memory location storing the data to be replicated into the buffer's data store")
 	)
