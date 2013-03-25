@@ -9,6 +9,7 @@ import java.util.ArrayList
 import java.util.TreeSet
 import java.util.Collections
 import java.util.Comparator
+import java.util.HashMap
 
 public val INSTANCE: String = "__instance"
 
@@ -92,6 +93,13 @@ public class NativeClass(
 
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty() // TODO: Check for 100% alternate without native or reuse
+
+	private val javaDocs = HashMap<String, String>()
+
+	fun setJavaDoc(ref: String, javaDoc: String) {
+		javaDocs[ref] = javaDoc
+	}
+	fun getJavaDoc(ref: String): String = javaDocs[ref]!!
 
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
@@ -210,12 +218,12 @@ public class NativeClass(
 		return block
 	}
 
-	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter) = ReturnValue(this).func(name, documentation, *parameters)
-	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter): NativeClassFunction {
+	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "") = ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc)
+	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			name = if ( prefix.isEmpty() ) name else "${prefix.toLowerCase()}$name",
-			documentation = documentation.toJavaDoc(parameters.iterator()),
+			documentation = documentation.toJavaDoc(parameters.iterator(), returnDoc),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
