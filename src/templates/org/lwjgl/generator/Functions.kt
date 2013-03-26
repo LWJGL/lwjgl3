@@ -181,6 +181,9 @@ public class NativeClassFunction(
 	}
 
 	public val javaDocLink: String
+		get() = if ( strippedName != name ) this.javaDocLinkWithParams else "{@link #$strippedName}"
+
+	public val javaDocLinkWithParams: String
 		get() {
 			val builder = StringBuilder()
 
