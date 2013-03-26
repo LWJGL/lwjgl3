@@ -956,7 +956,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		AutoSize("textures", "residences") _ (GLsizei.IN("n", "the number of texture objects in {@code textures}")),
-		const _ GLuint_p.IN("textures", "an array of texture objects"),
+		mods(const, SingleValue("texture")) _ GLuint_p.IN("textures", "an array of texture objects"),
 		GLboolean_p.OUT("residences", "returns the residences of each texture object")
 	)
 
