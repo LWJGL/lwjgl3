@@ -202,3 +202,8 @@ public open class PointerMapping(
 	val isMultiByte = byteShift != null && byteShift != "0"
 
 }
+
+val TypeMapping.isSizeType: Boolean
+	get() = this == PrimitiveMapping.INT || this == PrimitiveMapping.PTR
+val TypeMapping.isSizePointer: Boolean
+	get() = this == PointerMapping.DATA_INT || this == PointerMapping.DATA_POINTER
