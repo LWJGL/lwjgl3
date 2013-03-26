@@ -713,6 +713,20 @@ public class NativeClassFunction(
 			}
 		}
 
+		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
+		parameters.values() forEach {
+			if ( it.nativeType is CharSequenceType && !it.has(Return.CLASS) ) {
+				val param = it
+				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+					transforms[it] = AutoSizeCharSequenceTransform(param)
+				}
+
+				transforms[it] = CharSequenceTransform
+				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
+			}
+		}
+
+		// Apply any complex transformations.
 		parameters.values() forEach {
 			val param = it
 
@@ -729,14 +743,7 @@ public class NativeClassFunction(
 				transforms[param] = BufferValueParameterTransform
 			}
 
-			if ( it.nativeType is CharSequenceType ) {
-				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
-					transforms[it] = AutoSizeCharSequenceTransform(param)
-				}
-
-				transforms[it] = CharSequenceTransform
-				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
-			} else if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
+			if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
 
 				if ( returnMod == returnValue ) {
