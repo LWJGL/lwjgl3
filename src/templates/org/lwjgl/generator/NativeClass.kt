@@ -118,7 +118,7 @@ public class NativeClass(
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( hasNIO ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult } } )
+				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } } )
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()
