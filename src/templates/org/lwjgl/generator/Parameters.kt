@@ -245,7 +245,6 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 
 		when ( param.nativeType.mapping ) {
 			PrimitiveMapping.INT,
-			//PrimitiveMapping.LONG,
 			PrimitiveMapping.PTR -> {
 			}
 			else -> {
@@ -263,7 +262,7 @@ public val autoSizeResult: TemplateModifier = object : ParameterModifier() {
 
 		when ( param.nativeType.mapping ) {
 			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG -> {
+			PointerMapping.DATA_POINTER -> {
 			}
 			else -> {
 				throw IllegalArgumentException("The autoSizeResult modifier can only be applied on integer pointer types.")

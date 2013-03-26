@@ -261,9 +261,9 @@ public class NativeClassFunction(
 					val lengthParam = parameters[returnMod.lengthParam]
 					when {
 						maxLengthParam == null -> it.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
-						maxLengthParam!!.nativeType.mapping != PrimitiveMapping.INT -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
+						!maxLengthParam!!.nativeType.mapping.isSizeType -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
 						lengthParam == null -> it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
-						lengthParam!!.nativeType.mapping != PointerMapping.DATA_INT -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+						!lengthParam!!.nativeType.mapping.isSizePointer -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
 						else -> {
 						}
 					}
@@ -277,8 +277,8 @@ public class NativeClassFunction(
 				val lengthsParam = parameters[lengthsParamName]
 				when {
 					countParam == null -> it.error("Count reference does not exist: PointerArray($countParamName)")
-					countParam!!.nativeType.mapping != PrimitiveMapping.INT -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
-					lengthsParam != null && lengthsParam.nativeType.mapping != PointerMapping.DATA_INT -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
+					!countParam!!.nativeType.mapping.isSizeType -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
+					lengthsParam != null && !lengthsParam.nativeType.mapping.isSizePointer -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 					else -> {
 					}
 				}
