@@ -459,7 +459,7 @@ public class NativeClassFunction(
 		print(name)
 		print("(")
 		printList(parameters) {
-			it.asNativeMethodParam(parameters)
+			it.asNativeMethodParam
 		}
 		if ( returns.isStructValue ) {
 			if ( !parameters.isEmpty() ) print(", ")
@@ -1333,12 +1333,19 @@ private class BufferReturnTransform(
 }
 
 private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray.CLASS].singleName}" // Replace with CharSequence
+	override fun transformDeclaration(param: Parameter, original: String): String? {
+		return if ( param[PointerArray.CLASS].elementType is CharSequenceType ) {
+			if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray.CLASS].singleName}" // Replace with CharSequence
+		} else {
+			if ( multi ) "ByteBuffer[] ${param.name}" else "ByteBuffer ${param[PointerArray.CLASS].singleName}" // Replace with ByteBuffer
+		}
+	}
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}Address" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qualifiedType as Parameter)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
-		val elementType = param[PointerArray.CLASS].elementType
+		val pointerArray = param[PointerArray.CLASS]
+		val elementType = pointerArray.elementType
 
 		if ( multi ) {
 			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << PointerBuffer.getPointerSizeShift());")
@@ -1362,7 +1369,7 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 			if ( elementType is CharSequenceType )
 				println("\t\tByteBuffer ${param.name}Buffer = memEncode${elementType.charMapping.charset}(${param[PointerArray.CLASS].singleName});") // Encode and store
 
-			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${param.name}")
+			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${pointerArray.singleName}")
 			if ( elementType is CharSequenceType )
 				print("Buffer")
 			println("));")

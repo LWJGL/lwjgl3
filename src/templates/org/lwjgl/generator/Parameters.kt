@@ -130,11 +130,8 @@ public class Parameter(
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
 
-	fun asNativeMethodParam(parameters: Map<String, Parameter>): String {
-		val paramType = nativeMethodType
-
-		return "$paramType $name"
-	}
+	val asNativeMethodParam: String
+		get() = "$nativeMethodType $name"
 
 	fun asNativeMethodCallParam(mode: GenerationMode) = when {
 	// Data pointer
