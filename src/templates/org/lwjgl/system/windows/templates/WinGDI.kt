@@ -218,7 +218,11 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("object", "the type of stock object")
 	)
 
-	int.func(
+	Code(
+		javaBeforeNative = "\t\tlong param = memGlobalRefNew(objectFunc);",
+		javaFinally = "\t\t\tmemGlobalRefDelete(param);",
+	    applyTo = Code.ApplyTo.ALTERNATIVE
+	) _ int.func(
 		"EnumObjects",
 		"""
 		Enumerates the pens or brushes available for the specified device context (DC). This function calls the application-defined callback function once for
@@ -227,9 +231,9 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		""",
 
 		HDC.IN("hdc", "a handle to the DC"),
-		int.IN("objectType", "the object type. One of:", "#OBJ_BRUSH #OBJ_PEN"),
-		GOBJENUMPROC.IN("objectFunc", "the application-defined callback function"),
-		CallbackData("objectFunc") _ LPARAM.IN("param", "the data passed to the callback function along with the object information.")
+		int.IN("objectType", "the object type", "#OBJ_BRUSH #OBJ_PEN"),
+		Callback("EnumObjectsProc") _ GOBJENUMPROC.IN("objectFunc", "the application-defined callback function"),
+		Expression("param") _ LPARAM.IN("param", "the data passed to the callback function along with the object information.")
 	)
 
 	HGDIOBJ.func(

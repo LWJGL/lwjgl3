@@ -203,10 +203,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"""
-		MOUSE_BUTTON_LAST MOUSE_BUTTON_8 MOUSE_BUTTON_LEFT MOUSE_BUTTON_1 MOUSE_BUTTON_RIGHT MOUSE_BUTTON_2
-		MOUSE_BUTTON_MIDDLE MOUSE_BUTTON_3 Joysticks.
-		""",
+		"Joysticks.",
 
 		"JOYSTICK_1" _ 0,
 		"JOYSTICK_2" _ 1,
@@ -224,12 +221,6 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"JOYSTICK_14" _ 13,
 		"JOYSTICK_15" _ 14,
 		"JOYSTICK_16" _ 15
-	)
-
-	IntConstant.block(
-		"JOYSTICK_LAST          JOYSTICK_16 No error has occurred.",
-
-		"NO_ERROR" _ 0
 	)
 
 	IntConstant.block(
@@ -334,22 +325,58 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	val Init = int.func(
 		"Init",
-		""
+		"""
+		This function initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before a program terminates GLFW
+		should be terminated in order to free any resources allocated during or after initialization.
+
+		If this function fails, it calls {@link #glfwTerminate} before returning.  If it succeeds, you should call {@link #glfwTerminate} before the program
+		exits.
+
+		Additional calls to this function after successful initialization but before termination will succeed but will do nothing.
+
+		Notes:
+		${ul(
+			"This function may only be called from the main thread.",
+		    "This function may take several seconds to complete on some systems, while on other systems it may take only a fraction of a second to complete.",
+		    """
+		    <strong>Mac OS X</strong>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the
+			application's bundle, if present.
+			"""
+		)}
+		"""
 	).javaDocLink
 
 	Code(
 		javaBeforeNative = "\t\tWindowCallback.clearAll();"
 	) _ void.func(
 		"Terminate",
-		""
+		"""
+		This function destroys all remaining windows, frees any allocated resources and sets the library to an uninitialized state. Once this is called, you
+		must again call $Init successfully before you will be able to use most GLFW functions.
+
+		If GLFW has been successfully initialized, this function should be called before the program exits. If initialization fails, there is no need to call
+        this function, as it is called by $Init before it returns failure.
+
+        Notes:
+		${ul(
+			"This function may be called before $Init.",
+			"This function may only be called from the main thread.",
+			"No window's context may be current on another thread when this function is called."
+		)}
+		"""
 	)
 
 	void.func(
 		"GetVersion",
 		"""
-		This function retrieves the major, minor and revision numbers of the GLFW
-        library.  It is intended for when you are using GLFW as a shared library and
-        want to ensure that you are using the minimum required version.
+		This function retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and
+		want to ensure that you are using the minimum required version.
+
+		Notes:
+		${ul(
+			"This function may be called before $Init.",
+			"This function may be called from any thread."
+		)}
         """,
 
 		Check(1) _ int_p.OUT("major", "major version number"),
@@ -360,27 +387,40 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	(const _ charUTF8_p).func(
 		"GetVersionString",
 		"""
-		This function returns a static string generated at compile-time according to
-        which configuration macros were defined.  This is intended for use when
-        submitting bug reports, to allow developers to see which code paths are
-        enabled in a binary.
+		This function returns a static string generated at compile-time according to which configuration macros were defined. This is intended for use when
+		submitting bug reports, to allow developers to see which code paths are enabled in a binary.
+
+		The format of the string is as follows:
+        ${ul(
+			"The version of GLFW",
+			"The name of the window system API",
+			"The name of the context creation API",
+			"Any additional options or APIs"
+		)}
+
+        For example, when compiling GLFW 3.0 with MinGW using the Win32 and WGL backends, the version string may look something like this:
+
+        3.0.0 Win32 WGL MinGW
 		"""
 	)
 
 	void.func(
 		"SetErrorCallback",
 		"""
-		Sets the error callback.
+		This function sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
 
-		This function may be called before $Init.
-
-		The error callback is called by the thread where the error was generated.  If you are using GLFW from multiple threads, your error callback needs to be
-		written accordingly.
-
-		Because the description string provided to the callback may have been
-		generated specifically for that error, it is not guaranteed to be valid
-		after the callback has returned.  If you wish to use it after that, you need
-		to make your own copy of it before returning.
+		Notes:
+		${ul(
+			"This function may be called before $Init.",
+			"""
+			The error callback is called by the thread where the error was generated. If you are using GLFW from multiple threads, your error callback needs to
+			be written accordingly.
+			""",
+			"""
+			Because the description string provided to the callback may have been generated specifically for that error, it is not guaranteed to be valid after
+			the callback has returned.  If you wish to use it after that, you need to make your own copy of it before returning.
+			"""
+		)}
 		""",
 
 		mods(
@@ -393,10 +433,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWmonitor_p.func(
 		"GetMonitors",
 		"""
-		This function returns an array of handles for all currently connected monitors.
-        The returned array is valid only until the monitor configuration
-        changes.
-        See glfwSetMonitorCallback to receive notifications of configuration changes.
+		This function returns an array of handles for all currently connected monitors. The returned array is valid only until the monitor configuration
+		changes.
+
+        See {@link #glfwSetMonitorCallback} to receive notifications of configuration changes.
 		""",
 
 		autoSizeResult _ int_p.OUT("count", "")
@@ -425,9 +465,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"GetMonitorPhysicalSize",
 		"""
-		This function returns the size, in millimetres, of the display area of the
-        specified monitor.
-        Note:  Some operating systems do not provide accurate information, either
+		This function returns the size, in millimetres, of the display area of the specified monitor.
+
+        Note: Some operating systems do not provide accurate information, either
         because the monitor's EDID data is incorrect, or because the driver does not
         report it accurately.
 		""",
@@ -480,7 +520,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"SetGamma",
 		"""
 		This function generates a gamma ramp from the specified exponent and then
-        calls glfwSetGamma with it.
+        calls {@link #glfwSetGammaRamp} with it.
         """,
 
 		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
@@ -506,7 +546,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"DefaultWindowHints",
 		"""
-		This function resets all window hints to their default values
+		This function resets all window hints to their default values.
+		
 		Note: This function may only be called from the main thread.
 		"""
 	)
@@ -514,105 +555,30 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"WindowHint",
 		"""
-		This function sets hints for the next call to glfwCreateWindow.  The
+		This function sets hints for the next call to {@link #glfwCreateWindow}. The
         hints, once set, retain their values until changed by a call to
-        glfwWindowHint or glfwDefaultWindowHints, or until the library is
-        terminated with glfwTerminate.
+        glfwWindowHint or {@link #glfwDefaultWindowHints}, or until the library is
+        terminated with {@link #glfwTerminate}.
         
-        Some window hints are hard constraints.  These must match the available
-        capabilities *exactly* for window and context creation to succeed.  Hints
+        Some window hints are hard constraints. These must match the available
+        capabilities <em>exactly</em> for window creation to succeed. Hints
         that are not hard constraints are matched as closely as possible, but the
-        resulting window and context may differ from what these hints requested.  To
-        find out the actual parameters of the created window and context, use the
-        glfwGetWindowParam function.
+        resulting window may differ from what these hints requested. To
+        find out the actual parameters of the created window, use the
+        {@link #glfwGetWindowParam} function.
         
-        The following hints are hard constraints:
-         * GLFW_STEREO
-         * GLFW_CLIENT_API
+        Hints that do not apply to a given type of window are ignored.
+
+        Window hints:
         
-        The following additional hints are hard constraints if requesting an OpenGL
-        context:
-         * GLFW_OPENGL_FORWARD_COMPAT
-         * GLFW_OPENGL_PROFILE
+        The {@link #GLFW_RESIZABLE} hint specifies whether the window will be resizable by
+        the user. The window will still be resizable using the
+        {@link #glfwSetWindowSize} function.  This hint is ignored for fullscreen windows.
         
-        Hints that do not apply to a given type of window or context are ignored.
-        Framebuffer hints
+        The {@link #GLFW_VISIBLE} hint specifies whether the window will be initially
+        visible. This hint is ignored for fullscreen windows.
         
-        The GLFW_RED_BITS, GLFW_GREEN_BITS, GLFW_BLUE_BITS, GLFW_ALPHA_BITS,
-        GLFW_DEPTH_BITS and GLFW_STENCIL_BITS hints specify the desired bit
-        depths of the various components of the default framebuffer.
-        
-        The GLFW_ACCUM_RED_BITS, GLFW_ACCUM_GREEN_BITS, GLFW_ACCUM_BLUE_BITS
-        and GLFW_ACCUM_ALPHA_BITS hints specify the desired bit depths of the
-        various components of the accumulation buffer.
-        
-        The GLFW_AUX_BUFFERS hint specifies the desired number of auxiliary
-        buffers.
-        
-        The GLFW_STEREO hint specifies whether to use stereoscopic rendering.
-        
-        The GLFW_SAMPLES hint specifies the desired number of samples to use for
-        multisampling.
-        
-        The GLFW_SRGB_CAPABLE hint specifies whether the framebuffer should be
-        sRGB capable.
-        
-        Context hints
-        
-        The GLFW_CLIENT_API hint specifies which client API to create the context
-        for.  Possible values are GLFW_OPENGL_API and GLFW_OPENGL_ES_API.
-        
-        The GLFW_CONTEXT_VERSION_MAJOR and GLFW_CONTEXT_VERSION_MINOR hints
-        specify the client API version that the created context must be compatible
-        with.
-        
-        For OpenGL, these hints are *not* hard constraints, as they don't have to
-        match exactly, but glfwCreateWindow will still fail if the resulting
-        OpenGL version is less than the one requested.  It is therefore perfectly
-        safe to use the default of version 1.0 for legacy code and you will still
-        get backwards-compatible contexts of version 3.0 and above when available.
-        
-        For OpenGL ES, these hints are hard constraints, as there is no backward
-        compatibility between OpenGL ES versions.
-        
-        If an OpenGL context is requested, the GLFW_OPENGL_FORWARD_COMPAT hint
-        specifies whether the OpenGL context should be forward-compatible, i.e. one
-        where all functionality deprecated in the requested version of OpenGL is
-        removed. This may only be used if the requested OpenGL version is 3.0 or
-        above. If another client API is requested, this hint is ignored.
-        
-        
-        If an OpenGL context is requested, the GLFW_OPENGL_DEBUG_CONTEXT hint
-        specifies whether to create a debug OpenGL context, which may have
-        additional error and performance issue reporting functionality.  If another
-        client API is requested, this hint is ignored.
-        
-        If an OpenGL context is requested, the GLFW_OPENGL_PROFILE hint specifies
-        which OpenGL profile to create the context for.  Possible values are one of
-        GLFW_OPENGL_CORE_PROFILE or GLFW_OPENGL_COMPAT_PROFILE, or
-        GLFW_OPENGL_NO_PROFILE to not request a specific profile.  If requesting
-        an OpenGL version below 3.2, GLFW_OPENGL_NO_PROFILE must be used.  If
-        another client API is requested, this hint is ignored.
-        
-        The GLFW_CONTEXT_ROBUSTNESS hint specifies the robustness strategy to be
-        used by the context.  This can be one of GLFW_NO_RESET_NOTIFICATION or
-        GLFW_LOSE_CONTEXT_ON_RESET, or GLFW_NO_ROBUSTNESS to not request
-        a robustness strategy.
-        
-        Window hints
-        
-        The GLFW_RESIZABLE hint specifies whether the window will be resizable by
-        the user.  The window will still be resizable using the 
-        glfwSetWindowSize function.  This hint is ignored for fullscreen windows.
-        
-        The GLFW_VISIBLE hint specifies whether the window will be initially
-        visible.  This hint is ignored for fullscreen windows.
-        
-        New in GLFW 3
-        Hints are no longer reset to their default values on window creation.  To
-        set default hint values, use  glfwDefaultWindowHints.
-        
-        Note: This function may only be called from the main thread.        
+        Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("target", "The window hint to set"),
@@ -622,16 +588,16 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindow.func(
 		"CreateWindow",
 		"""
-		This function creates a window and its associated context.  Most of the
-        options controlling how the window and its context should be created are
-        specified via the glfwWindowHint function.
+		This function creates a window. Most of the options controlling how the window should be created are specified via the {@link #glfwWindowHint} function.
 
-        Successful creation does not change which context is current.  Before you
-        can use the newly created context, you need to make it current using
-        glfwMakeContextCurrent.
+        Note that the actual properties of the window may differ from what you requested, as not all parameters and hints are hard constraints.
 
-        Note that the actual properties of the window and context may differ from
-        what you requested, as not all parameters and hints are hard constraints.
+        To create the window at a specific position, make it initially invisible using the {@link #GLFW_VISIBLE} window hint, set its position and then show it.
+
+        For fullscreen windows the initial cursor mode is {@link #GLFW_CURSOR_CAPTURED} and the screensaver is prohibited from starting. For regular windows the
+        initial cursor mode is {@link #GLFW_CURSOR_NORMAL} and the screensaver is allowed to start.
+
+        This function may only be called from the main thread.
 		""",
 
 		int.IN("width", "desired width, in pixels, of the window"),
@@ -646,9 +612,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	) _ (void.func(
 		"DestroyWindow",
 		"""
-		This function destroys the specified window and its context.  On calling
-        this function, no further callbacks will be called for that window.
-        Note: This function may only be called from the main thread.
+		This function destroys the specified window. On calling this function, no further callbacks will be called for that window.
+
+		Notes:
+		${ul(
+            "This function may only be called from the main thread.",
+		    "This function may not be called from a callback."
+        )}
 		""",
 
 		GLFWwindow.IN("window", "window to destroy")
@@ -701,6 +671,21 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		This function sets the position, in screen coordinates, of the upper-left
         corner of the client area of the window.
+
+        If you wish to set an initial window position you should create a hidden window (using {@link #glfwWindowHint} and {@link #GLFW_VISIBLE}, set its
+        position and then show it.
+
+        Notes:
+        ${ul(
+			"It is very rarely a good idea to move an already visible window, as it will confuse and annoy the user.",
+		    "This function may only be called from the main thread.",
+		    "The window manager may put limits on what positions are allowed.",
+		    """
+		    <strong>X11</strong>: Some window managers ignore the set position of hidden (i.e. unmapped) windows, instead placing them where it thinks is
+		    appropriate once they are shown.
+			""",
+			"<strong>Mac OS X</strong>: The screen coordinate system is inverted."
+		)}
 		""",
 
 		GLFWwindow.IN("window", "window to query"),
@@ -725,6 +710,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		This function sets the size, in pixels, of the client area of the specified
         window.
+
+		Notes:
+        ${ul(
+			"This function may only be called from the main thread.",
+			"The window manager may put limits on what window sizes are allowed.",
+            "For fullscreen windows, this function selects and switches to the resolution closest to the specified size, without destroying the window's context."
+        )}
 		""",
 
 		GLFWwindow.IN("window", "window to resize"),
@@ -739,6 +731,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         restored.  If it is a fullscreen window, the original monitor resolution is
         restored until the window is restored.  If the window is already iconified,
         this function does nothing.
+
         Note: This function may only be called from the main thread.
 		""",
 
@@ -751,6 +744,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		This function restores the specified window, if it was previously
         iconified/minimized.  If the window is already restored, this function does
         nothing.
+
         Note: This function may only be called from the main thread.
 		""",
 
@@ -763,6 +757,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         This function makes the specified window visible, if it was previously
         hidden.  If the window is already visible or is in fullscreen mode, this
         function does nothing.
+
         Note: This function may only be called from the main thread.
 		""",
 
@@ -775,6 +770,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         This function hides the specified window, if it was previously visible.  If
         the window is already hidden or is in fullscreen mode, this function does
         nothing.
+
         Note: This function may only be called from the main thread.
 		""",
 
@@ -794,42 +790,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	int.func(
 		"GetWindowParam",
 		"""
-		This function returns a property of the specified window.  There are many
-        different properties, some related to the window and others to its context.
-        
-        The GLFW_FOCUSED parameter indicates whether the window is focused.
-        
-        The GLFW_ICONIFIED parameter indicates whether the window is iconified.
-        
-        The GLFW_VISIBLE parameter indicates whether the window is visible.
-        
-        The GLFW_RESIZABLE parameter indicates whether the window is resizable
-        by the user.
-        
-        Context parameters
-        
-        The GLFW_CLIENT_API parameter indicates the client API provided by the
-        window's context; either GLFW_OPENGL_API or GLFW_OPENGL_ES_API.
-        
-        The GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR and
-        GLFW_CONTEXT_REVISION parameters indicate the client API version of the
-        window's context.
-        
-        The GLFW_OPENGL_FORWARD_COMPAT parameter is GL_TRUE if the window's
-        context is an OpenGL forward-compatible one, or GL_FALSE otherwise.
-        
-        The GLFW_OPENGL_DEBUG_CONTEXT parameter is GL_TRUE if the window's
-        context is an OpenGL debug context, or GL_FALSE otherwise.
-        
-        The GLFW_OPENGL_PROFILE parameter indicates the OpenGL profile used by the
-        context.  This is GLFW_OPENGL_CORE_PROFILE or GLFW_OPENGL_COMPAT_PROFILE
-        if the context uses a known profile, or GLFW_OPENGL_NO_PROFILE if the
-        OpenGL profile is unknown or the context is for another client API.
-        
-        The GLFW_CONTEXT_ROBUSTNESS parameter indicates the robustness strategy
-        used by the context.  This is GLFW_LOSE_CONTEXT_ON_RESET or
-        GLFW_NO_RESET_NOTIFICATION if the window's context supports robustness, or
-        GLFW_NO_ROBUSTNESS otherwise.
+		This function returns a property of the specified window.
+        ${ul(
+	        "The {@link #GLFW_FOCUSED} parameter indicates whether the window is focused.",
+            "The {@link #GLFW_ICONIFIED} parameter indicates whether the window is iconified.",
+	        "The {@link #GLFW_VISIBLE} parameter indicates whether the window is visible.",
+	        "The {@link #GLFW_RESIZABLE} parameter indicates whether the window is resizable by the user."
+		)}
 		""",
 
 		GLFWwindow.IN("window", "window to query"),
@@ -952,7 +919,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Returns the value of an input option for the specified window",
 
 		GLFWwindow.IN("window", "window to query"),
-		int.IN("mode", "One of GLFW_CURSOR_MODE, GLFW_STICKY_KEYS or GLFW_STICKY_MOUSE_BUTTONS")
+		int.IN("mode", "One of {@link #GLFW_CURSOR_MODE}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}")
 	)
 
 	void.func(
@@ -960,29 +927,29 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets an input option for the specified window
 		
-		If mode is GLFW_CURSOR_MODE, the value must be one of the supported input
+		If mode is {@link #GLFW_CURSOR_MODE}, the value must be one of the supported input
         modes:
-        * GLFW_CURSOR_NORMAL makes the cursor visible and behaving normally.
-        * GLFW_CURSOR_HIDDEN makes the cursor invisible when it is over the client
-          area of the window.
-        * GLFW_CURSOR_CAPTURED makes the cursor invisible and unable to leave the
-          window but unconstrained in terms of position.
-         
-        If mode is GLFW_STICKY_KEYS, the value must be either GL_TRUE to
+        ${ul(
+			"{@link #GLFW_CURSOR_NORMAL} makes the cursor visible and behaving normally.",
+			"{@link #GLFW_CURSOR_HIDDEN} makes the cursor invisible when it is over the client area of the window.",
+			"{@link #GLFW_CURSOR_CAPTURED} makes the cursor invisible and unable to leave the window but unconstrained in terms of position."
+		)}
+
+        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either GL_TRUE to
         enable sticky keys, or GL_FALSE to disable it.  If sticky keys are
-        enabled, a key press will ensure that glfwGetKey returns
-        GLFW_PRESS the next time it is called even if the key had been released
+        enabled, a key press will ensure that {@link #glfwGetKey} returns
+        {@link #GLFW_PRESS} the next time it is called even if the key had been released
         before the call.
          
-        If mode is GLFW_STICKY_MOUSE_BUTTONS, the value must be either GL_TRUE
+        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either GL_TRUE
         to enable sticky mouse buttons, or GL_FALSE to disable it.  If sticky
         mouse buttons are enabled, a mouse button press will ensure that
-        glfwGetMouseButton returns GLFW_PRESS the next time it is called even
+        {@link #glfwGetMouseButton} returns {@link #GLFW_PRESS} the next time it is called even
         if the mouse button had been released before the call.
 		""",
 
 		GLFWwindow.IN("window", "window whose input mode to set"),
-		int.IN("mode", "One of GLFW_CURSOR_MODE, GLFW_STICKY_KEYS or GLFW_STICKY_MOUSE_BUTTONS"),
+		int.IN("mode", "One of {@link #GLFW_CURSOR_MODE}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}"),
 		int.IN("value", "new value of the specified input mode")
 	)
 
@@ -990,17 +957,16 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"GetKey",
 		"""
 		This function returns the last state reported for the specified key to the
-        specified window.  The returned state is one of GLFW_PRESS or
-        GLFW_RELEASE.  The higher-level state GLFW_REPEAT is only reported to
+        specified window. The returned state is one of {@link #GLFW_PRESS} or
+        {@link #GLFW_RELEASE}. The higher-level state {@link #GLFW_REPEAT} is only reported to
         the key callback.
         
-        If the GLFW_STICKY_KEYS input mode is enabled, this function returns
-        GLFW_PRESS the first time you call this function after a key has been
+        If the {@link #GLFW_STICKY_KEYS} input mode is enabled, this function returns
+        {@link #GLFW_PRESS} the first time you call this function after a key has been
         pressed, even if the key has already been released.
         
-        The key functions deal with physical keys, with [key tokens](@ref keys)
-        named after their use on the standard US keyboard layout.  If you want to
-        input text, use the Unicode character callback instead.
+        The key functions deal with physical keys, with tokens named after their use on the standard US keyboard layout. If you want to input text, use the
+        Unicode character callback instead.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
@@ -1013,8 +979,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         This function returns the last state reported for the specified mouse button
         to the specified window.
         
-        If the GLFW_STICKY_MOUSE_BUTTONS input mode is enabled, this function
-        returns GLFW_PRESS the first time you call this function after a mouse
+        If the {@link #GLFW_STICKY_MOUSE_BUTTONS} input mode is enabled, this function
+        returns {@link #GLFW_PRESS} the first time you call this function after a mouse
         button has been pressed, even if the mouse button has already been released.		
 		""",
 

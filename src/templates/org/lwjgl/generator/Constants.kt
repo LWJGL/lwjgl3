@@ -95,17 +95,29 @@ public class ConstantBlock<T>(
 			print(constantType.print(value!!))
 	}
 
-	public fun toJavaDocLinks(): String {
-		val builder = StringBuilder()
+	public fun toJavaDocLinks(ref: String, global: Boolean = true): String {
+		val links = toJavaDocLinks(global)
+		nativeClass.setJavaDoc(ref, links)
+		return links
+	}
 
-		builder append '#'
-		builder append getConstantName(constants[0].name)
+	public fun toJavaDocLinks(global: Boolean = false): String {
+		val builder = StringBuilder(constants.size * 32)
+
+		printJavaDocLink(builder, constants[0], global)
 		for ( i in 1..constants.lastIndex ) {
-			builder append " #"
-			builder append getConstantName(constants[i].name)
+			builder append ' '
+			printJavaDocLink(builder, constants[i], global)
 		}
 
 		return builder.toString()
+	}
+
+	private fun <T> printJavaDocLink(builder: StringBuilder, constant: Constant<T>, global: Boolean = false) {
+		if ( global )
+			builder append nativeClass.className
+		builder append '#'
+		builder append getConstantName(constant.name)
 	}
 
 }

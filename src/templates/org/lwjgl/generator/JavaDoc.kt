@@ -16,13 +16,13 @@ private val TAB_PATTERN = Pattern.compile(tab)
 
 fun String.replaceAll(pattern: Pattern, replacement: String): String = pattern.matcher(this).replaceAll(replacement)
 
-private fun String.cleanup(indentation: String = "\t"): String = trim()
+private fun String.cleanup(linePrefix: String = "\t * "): String = trim()
 	.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
-	.replaceAll(CLEANUP_PATTERN, "$indentation * ")
+	.replaceAll(CLEANUP_PATTERN, linePrefix)
 	.replaceAll(TAB_PATTERN, "\t")
 
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
-	val clean = cleanup(indentation)
+	val clean = cleanup("$indentation * ")
 
 	return if ( allowSingleLine && clean.indexOf('\n') == -1 )
 		"$indentation/** $clean */"
@@ -31,10 +31,10 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun String.toJavaDoc(paramsIn: Iterator<Parameter>): String {
+fun String.toJavaDoc(paramsIn: Iterator<Parameter>, returnDoc: String): String {
 	// TODO: This is shit, optimize
-	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it has CallbackData.CLASS || it has autoSizeResult) }
-	if ( params.isEmpty() )
+	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it has autoSizeResult) }
+	if ( params.isEmpty() && returnDoc.isEmpty() )
 		return this.toJavaDoc()
 
 	val javaDoc = "\t/**\n\t * ${cleanup()}\n\t"
@@ -45,22 +45,27 @@ fun String.toJavaDoc(paramsIn: Iterator<Parameter>): String {
 	else
 		builder append " *"
 
-	// Find maximum param name length
-	val alignment = params.map { it.name.size }.fold(0) {(left, right) -> Math.max(left, right) }
+	if ( !params.isEmpty() ) {
+		// Find maximum param name length
+		val alignment = params.map { it.name.size }.fold(0) {(left, right) -> Math.max(left, right) }
 
-	val paramMultilineAligment = paramMultilineAligment(alignment)
+		val paramMultilineAligment = paramMultilineAligment(alignment)
 
-	params.forEach {
-		builder append "\n\t * @param ${it.name}"
+		params.forEach {
+			builder append "\n\t * @param ${it.name}"
 
-		// Align
-		for ( i in 0..(alignment - it.name.size - 1) )
-			builder append ' '
+			// Align
+			for ( i in 0..(alignment - it.name.size) )
+				builder append ' '
 
-		builder append " ${it.documentation.trim()
-			.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
-			.replaceAll(CLEANUP_PATTERN, paramMultilineAligment)
-		}"
+			builder append it.documentation.cleanup(paramMultilineAligment)
+		}
+	}
+
+	if ( !returnDoc.isEmpty() ) {
+		builder append "\n\t *"
+		builder append "\n\t * @return "
+		builder append returnDoc.cleanup("\t *         ")
 	}
 
 	builder append "\n\t */"

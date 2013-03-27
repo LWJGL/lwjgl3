@@ -464,7 +464,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the parameter of the shader subroutine uniform to query",
 		    "#GL_NUM_COMPATIBLE_SUBROUTINES #GL_COMPATIBLE_SUBROUTINES GL31#GL_UNIFORM_SIZE GL31#GL_UNIFORM_NAME_LENGTH"
 		),
-		GLint_p.IN("values", "")
+		mods(Check(1), returnValue) _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
 
 	GLvoid.func(

@@ -19,7 +19,6 @@ abstract class QualifiedType(
 
 	open val javaMethodType: String
 		get() = when {
-			nativeType is CallbackType -> nativeType.callback.name
 			nativeType is ObjectType -> nativeType.className
 			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
 			else -> nativeType.javaMethodType.getSimpleName()
@@ -131,15 +130,8 @@ public class Parameter(
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
 
-	fun asNativeMethodParam(parameters: Map<String, Parameter>): String {
-		val paramType = if ( has(CallbackData.CLASS) ) {
-			val functionParam = parameters[this[CallbackData.CLASS].reference]!!
-			functionParam.javaMethodType
-		} else
-			nativeMethodType
-
-		return "$paramType $name"
-	}
+	val asNativeMethodParam: String
+		get() = "$nativeMethodType $name"
 
 	fun asNativeMethodCallParam(mode: GenerationMode) = when {
 	// Data pointer
@@ -151,10 +143,6 @@ public class Parameter(
 			else
 				"memAddress($name)"
 		}
-
-	// Callback functions
-		nativeType is CallbackType -> "${nativeType.callback.name}.CALLBACK" // The function itself
-		has(CallbackData.CLASS) -> get(CallbackData.CLASS).reference // The callback parameter
 
 	// Object parameter
 		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? 0L : $name.getPointer()" else "$name.getPointer()"
@@ -178,10 +166,7 @@ public class Parameter(
 			else
 				name
 
-			return if ( has(CallbackData.CLASS) )
-				"jobject $name"
-			else
-				"$jniFunctionType $name"
+			return "$jniFunctionType $name"
 		}
 
 }
@@ -223,29 +208,6 @@ public val const: Const = Const()
 
 // Parameter
 
-/** Marks the function parameter as a function callback user data parameter. */
-public class CallbackData(reference: String): ReferenceModifier(reference) {
-	class object {
-		val CLASS = javaClass<CallbackData>()
-	}
-
-	override fun validate(element: TemplateElement) {
-		if ( element !is Parameter )
-			throw IllegalArgumentException("The CallbackData modifier can only be applied on parameters.")
-
-		val param = element as Parameter
-		if (
-			!(
-				(param.nativeType is PointerType && (param.nativeType as PointerType).mapping identityEquals PointerMapping.NAKED_POINTER) ||
-				param.nativeType.mapping identityEquals PrimitiveMapping.PTR
-			)
-		)
-			throw IllegalArgumentException("The CallbackData modifier can only be applied on naked pointer types or pointer integers.")
-	}
-}
-/** This should only be used on the user data parameter of the CallbackFunction definition. */
-public val CALLBACK_DATA: CallbackData = CallbackData("")
-
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 public class AutoSize(reference: String, vararg val dependent: String): ReferenceModifier(reference) {
 	class object {
@@ -280,7 +242,6 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 
 		when ( param.nativeType.mapping ) {
 			PrimitiveMapping.INT,
-			//PrimitiveMapping.LONG,
 			PrimitiveMapping.PTR -> {
 			}
 			else -> {
@@ -298,7 +259,7 @@ public val autoSizeResult: TemplateModifier = object : ParameterModifier() {
 
 		when ( param.nativeType.mapping ) {
 			PointerMapping.DATA_INT,
-			PointerMapping.DATA_LONG -> {
+			PointerMapping.DATA_POINTER -> {
 			}
 			else -> {
 				throw IllegalArgumentException("The autoSizeResult modifier can only be applied on integer pointer types.")
@@ -426,8 +387,12 @@ public class Return(
 /** Used for simple return values. */
 public val returnValue: Return = Return("", "")
 
-/** Marks a buffer parameter to transform to a single primitive value in an alternative method. */
-public class SingleValue(val newName: String): ParameterModifier() {
+/** Marks a buffer parameter to transform to a single element value in an alternative method. */
+public class SingleValue(
+	val newName: String,
+	/** If specified, it will be used as the Java parameter type. */
+	val elementType: NativeType? = null
+): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<SingleValue>()
 	}
@@ -473,7 +438,7 @@ public class PointerArray(
 	}
 }
 
-public class Callback(val procClass: String): ParameterModifier() {
+public class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<Callback>()
 	}

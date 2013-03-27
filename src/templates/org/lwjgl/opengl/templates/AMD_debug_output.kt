@@ -69,7 +69,10 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output") {
 		"DebugMessageCallbackAMD",
 		"Specifies a callback to receive debugging messages from the GL.",
 
-		mods(Callback("DEBUGPROCAMD"), nullable) _ GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
+		mods(
+			Callback("DEBUGPROCAMD", storeInFunctions = true),
+			nullable
+		) _ GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
 		mods(Expression("DEBUGPROCAMD.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"

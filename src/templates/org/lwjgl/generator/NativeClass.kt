@@ -9,6 +9,7 @@ import java.util.ArrayList
 import java.util.TreeSet
 import java.util.Collections
 import java.util.Comparator
+import java.util.HashMap
 
 public val INSTANCE: String = "__instance"
 
@@ -58,7 +59,7 @@ public abstract class FunctionProvider {
 
 		if ( function has Capabilities.CLASS && function[Capabilities.CLASS].override )
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
-		else if ( function.hasParam { it has Callback.CLASS } ) {
+		else if ( function.hasParam { it has Callback.CLASS && it[Callback.CLASS].storeInFunctions } ) {
 			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else
@@ -93,6 +94,13 @@ public class NativeClass(
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty() // TODO: Check for 100% alternate without native or reuse
 
+	private val javaDocs = HashMap<String, String>()
+
+	fun setJavaDoc(ref: String, javaDoc: String) {
+		javaDocs[ref] = javaDoc
+	}
+	fun getJavaDoc(ref: String): String = javaDocs[ref]!!
+
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
 		print(HEADER)
@@ -110,7 +118,7 @@ public class NativeClass(
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( hasNIO ) {
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult } } )
+				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } } )
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()
@@ -160,7 +168,9 @@ public class NativeClass(
 
 		for ( func in functions ) {
 			func.getParams { it has Callback.CLASS }.forEach {
-				println("\n\t\tlong ${it[Callback.CLASS].procClass};")
+				val cb = it[Callback.CLASS]
+				if ( cb.storeInFunctions )
+					println("\n\t\tlong ${cb.procClass};")
 			}
 		}
 
@@ -208,12 +218,12 @@ public class NativeClass(
 		return block
 	}
 
-	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter) = ReturnValue(this).func(name, documentation, *parameters)
-	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter): NativeClassFunction {
+	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "") = ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc)
+	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			name = if ( prefix.isEmpty() ) name else "${prefix.toLowerCase()}$name",
-			documentation = documentation.toJavaDoc(parameters.iterator()),
+			documentation = documentation.toJavaDoc(parameters.iterator(), returnDoc),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

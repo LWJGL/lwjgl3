@@ -60,9 +60,8 @@ fun main(args: Array<String>) {
 	//generateOutput(org.lwjgl.opencl.FunctionProviderCLPlatform, File("generated/java/org/lwjgl/opencl/CLPlatformCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) { generateCapabilities(it) }
 
-	// Generate structs and callback functions. These are auto-registered during the process above.
+	// Generate structs. These are auto-registered during the process above.
 	StructRegistry.generate()
-	CallbackRegistry.generate()
 }
 
 private fun generate(packageName: String) {
@@ -270,7 +269,7 @@ private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 	}
 }
 
-// Struct & CallbackFunction
+// Struct
 fun generate(target: GeneratorTarget) {
 	val packageLastModified = packageLastModifiedMap[target.packageName]!!
 

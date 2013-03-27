@@ -89,7 +89,6 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * depth * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	)
@@ -114,7 +113,6 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
