@@ -36,17 +36,17 @@
 
 /*! @defgroup native Native access
  *
- *  <strong>By using the native API, you assert that you know what you are
- *  doing and how to fix problems caused by using it.  If you don't, you
- *  shouldn't be using it.</strong>
+ *  **By using the native API, you assert that you know what you are doing and
+ *  how to fix problems caused by using it.  If you don't, you shouldn't be
+ *  using it.**
  *
  *  Before the inclusion of @ref glfw3native.h, you must define exactly one
- *  window API macro. Failure to do this will cause a compile-time error.
+ *  window API macro.  Failure to do this will cause a compile-time error.
  *
  *  The available window API macros are:
- *  @arg @c GLFW_EXPOSE_NATIVE_WIN32
- *  @arg @c GLFW_EXPOSE_NATIVE_COCOA
- *  @arg @c GLFW_EXPOSE_NATIVE_X11
+ *  * `GLFW_EXPOSE_NATIVE_WIN32`
+ *  * `GLFW_EXPOSE_NATIVE_COCOA`
+ *  * `GLFW_EXPOSE_NATIVE_X11`
  *
  *  These macros select which of the native access functions are declared and
  *  which platform-specific headers to include.  It is then up your (by
@@ -79,29 +79,29 @@
  *************************************************************************/
 
 #if defined(GLFW_EXPOSE_NATIVE_WIN32)
-/*! @brief Returns the @c HWND of the specified window.
- *  @return The @c HWND of the specified window.
+/*! @brief Returns the `HWND` of the specified window.
+ *  @return The `HWND` of the specified window.
  *  @ingroup native
  */
 GLFWAPI HWND glfwGetWin32Window(GLFWwindow* window);
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_COCOA)
-/*! @brief Returns the @c NSWindow of the specified window.
- *  @return The @c NSWindow of the specified window.
+/*! @brief Returns the `NSWindow` of the specified window.
+ *  @return The `NSWindow` of the specified window.
  *  @ingroup native
  */
 GLFWAPI id glfwGetCocoaWindow(GLFWwindow* window);
 #endif
 
 #if defined(GLFW_EXPOSE_NATIVE_X11)
-/*! @brief Returns the @c Display used by GLFW.
- *  @return The @c Display used by GLFW.
+/*! @brief Returns the `Display` used by GLFW.
+ *  @return The `Display` used by GLFW.
  *  @ingroup native
  */
 GLFWAPI Display* glfwGetX11Display(void);
-/*! @brief Returns the @c Window of the specified window.
- *  @return The @c Window of the specified window.
+/*! @brief Returns the `Window` of the specified window.
+ *  @return The `Window` of the specified window.
  *  @ingroup native
  */
 GLFWAPI Window glfwGetX11Window(GLFWwindow* window);

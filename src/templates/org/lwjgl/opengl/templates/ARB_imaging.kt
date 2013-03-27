@@ -104,7 +104,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "width * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("table", "the color table data")
 	)).javaDocLink
@@ -147,7 +146,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			Check(expression = "glGetColorTableParameteri(target, GL_COLOR_TABLE_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("table", "the color table data")
 	)
@@ -183,7 +181,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-		    Check(expression = "count * GLChecks.getPixelBytes(format, type)", bytes = true),
 		    PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the color table data")
 	)
@@ -293,7 +290,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-			Check(expression = "width * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the filter data")
 	)).javaDocLink
@@ -310,7 +306,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-			Check(expression = "width * height * GLChecks.getPixelBytes(format, type)", bytes = true),
 		    PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the filter data")
 	)
@@ -351,13 +346,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_1D #GL_CONVOLUTION_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		mods(
-			Check(
-				expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_WIDTH) * (target == GL_CONVOLUTION_1D ? 1 : glGetConvolutionParameteri(target, GL_CONVOLUTION_HEIGHT)) * GLChecks.getPixelBytes(format, type)",
-				bytes = true
-			),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("image", "the filter data")
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("image", "the filter data")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -372,12 +361,10 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-			Check(expression = "width * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("row", "the horizontal filter data"),
 		mods(
 			const,
-			Check(expression = "height * GLChecks.getPixelBytes(format, type)", bytes = true),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("column", "the vertical filter data")
 	)
@@ -389,14 +376,8 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the filter target", "#GL_SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		mods(
-			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("row", "an array in which to return the filter row"),
-		mods(
-			Check(expression = "glGetConvolutionParameteri(target, GL_CONVOLUTION_HEIGHT) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("column", "an array in which to return the filter column"),
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("row", "an array in which to return the filter row"),
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("column", "an array in which to return the filter column"),
 		nullable _ GLvoid_p.IN("span", "unused")
 	)
 
@@ -576,10 +557,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
-		mods (
-			Check(expression = "glGetHistogramParameteri(GL_HISTOGRAM, GL_HISTOGRAM_WIDTH) * GLChecks.getPixelBytes(format, type)", bytes = true, debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("values", "the pixel data")
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "the pixel data")
 	)
 
 	val GetHistogramParameteriv = (deprecatedGL _ GLvoid.func(
@@ -633,10 +611,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		mods(
-			Check(expression = "2 * GLChecks.getPixelBytes(format, type)", bytes = true),
-		    PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("values", "an array in which to place the minmax values")
+	    PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "an array in which to place the minmax values")
 	)
 
 	val GetMinmaxParameteriv = (deprecatedGL _ GLvoid.func(

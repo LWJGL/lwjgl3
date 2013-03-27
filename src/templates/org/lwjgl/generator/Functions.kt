@@ -31,6 +31,8 @@ import org.lwjgl.generator.opengl.*
 
 val RESULT = "__result"
 val POINTER_POSTFIX = "Address"
+val BUFFERS_POSTFIX = "Buffers"
+val LENGTHS_POSTFIX = "Lengths"
 val FUNCTION_ADDRESS = "__functionAddress"
 
 private val API_BUFFER = "__buffer"
@@ -179,6 +181,9 @@ public class NativeClassFunction(
 	}
 
 	public val javaDocLink: String
+		get() = if ( strippedName != name ) this.javaDocLinkWithParams else "{@link #$strippedName}"
+
+	public val javaDocLinkWithParams: String
 		get() {
 			val builder = StringBuilder()
 
@@ -187,7 +192,7 @@ public class NativeClassFunction(
 			builder append '('
 
 			var first = true
-			parameters.values().filter { !(it has CallbackData.CLASS || it has autoSizeResult) } forEach {
+			parameters.values().filter { !(it has autoSizeResult) } forEach {
 				if ( first )
 					first = false
 				else
@@ -247,17 +252,6 @@ public class NativeClassFunction(
 				}
 			}
 
-			if ( it has CallbackData.CLASS ) {
-				val functionParamName = it[CallbackData.CLASS].reference
-				val functionParam = parameters[functionParamName]
-				when {
-					functionParam == null -> it.error("Function reference does not exist: CallbackParam($functionParamName)")
-					!(functionParam!!.nativeType is CallbackType) -> it.error("Function reference must be a callback type: CallbackParam($functionParamName)")
-					else -> {
-					}
-				}
-			}
-
 			if ( it has Return.CLASS ) {
 				if ( !returns.isVoid )
 					it.error("A return value can only be specified for functions with void return type.")
@@ -272,9 +266,9 @@ public class NativeClassFunction(
 					val lengthParam = parameters[returnMod.lengthParam]
 					when {
 						maxLengthParam == null -> it.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
-						maxLengthParam!!.nativeType.mapping != PrimitiveMapping.INT -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
+						!maxLengthParam!!.nativeType.mapping.isSizeType -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
 						lengthParam == null -> it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
-						lengthParam!!.nativeType.mapping != PointerMapping.DATA_INT -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+						!lengthParam!!.nativeType.mapping.isSizePointer -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
 						else -> {
 						}
 					}
@@ -288,8 +282,8 @@ public class NativeClassFunction(
 				val lengthsParam = parameters[lengthsParamName]
 				when {
 					countParam == null -> it.error("Count reference does not exist: PointerArray($countParamName)")
-					countParam!!.nativeType.mapping != PrimitiveMapping.INT -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
-					lengthsParam != null && lengthsParam.nativeType.mapping != PointerMapping.DATA_INT -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
+					!countParam!!.nativeType.mapping.isSizeType -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
+					lengthsParam != null && !lengthsParam.nativeType.mapping.isSizePointer -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 					else -> {
 					}
 				}
@@ -336,7 +330,7 @@ public class NativeClassFunction(
 		parameters.values().forEach {
 			var prefix = if ( it has Nullable.CLASS && it.nativeType.mapping != PointerMapping.NAKED_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(CallbackData.CLASS) && it.nativeType !is CallbackType && it.nativeType !is ObjectType && !it.has(nullable) )
+			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback.CLASS) )
 				checks add "checkPointer(${it.name});"
 
 			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {
@@ -470,7 +464,7 @@ public class NativeClassFunction(
 		print(name)
 		print("(")
 		printList(parameters) {
-			it.asNativeMethodParam(parameters)
+			it.asNativeMethodParam
 		}
 		if ( returns.isStructValue ) {
 			if ( !parameters.isEmpty() ) print(", ")
@@ -500,7 +494,7 @@ public class NativeClassFunction(
 
 		print("\tpublic static ${returns.javaMethodType} $strippedName(")
 		printList(parameters) {
-			if ( it has CallbackData.CLASS || it has autoSizeResult )
+			if ( it has autoSizeResult )
 				null
 			else if ( it.isBufferPointer )
 				"ByteBuffer ${it.name}" // Convert multi-byte-per-element buffers to ByteBuffer
@@ -515,7 +509,7 @@ public class NativeClassFunction(
 
 		println(") {")
 
-		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+		val code = getCode(Code.ApplyTo.NORMAL)
 
 		// Step 2: Get function address
 
@@ -540,7 +534,7 @@ public class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code)
 
-		generateNativeMethodCall() {
+		generateNativeMethodCall(code?.javaAfterNative != null) {
 			printList(parameters) {
 				it.asNativeMethodCallParam(GenerationMode.NORMAL)
 			}
@@ -551,40 +545,54 @@ public class NativeClassFunction(
 			}
 		}
 
-		if ( !(returns.isVoid || returns.isStructValue) && returns.isBufferPointer ) { // TODO: optimize condition?
-			val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
-			val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
-				"ByteBuffer"
-			else
-				returns.nativeType.mapping.javaMethodType.getSimpleName()
-
-			print("\t\treturn mem${bufferType}")
-			if ( isNullTerminated )
-				print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
-			print("($RESULT")
-			if ( returns has MapPointer.CLASS )
-				print(", ${returns[MapPointer.CLASS].sizeExpression}")
-			else if ( !isNullTerminated ) {
-				if ( returns.nativeType is StructType ) {
-					print(", ${returns.nativeType.definition.className}.SIZEOF")
-				} else {
-					val param = try {
-						getParam { it has autoSizeResult }
-					} catch (e: IllegalStateException) {
-						throw RuntimeException("No autoSizeResult parameter could be found.")
-					}
-					if ( param.nativeType.mapping == PointerMapping.DATA_INT )
-						print(", $API_BUFFER.intValue(${param.name})")
-					else
-						print(", (int)$API_BUFFER.longValue(${param.name})")
-				}
-			}
-			println(");")
-		}
-
 		generateCodeAfterNative(code)
 
+		if ( !(returns.isVoid || returns.isStructValue) ) { // TODO: optimize condition?
+			if ( returns.isBufferPointer ) {
+				val isNullTerminated = returns.nativeType is CharSequenceType && returns.nativeType.nullTerminated
+				val bufferType = if ( isNullTerminated || returns.nativeType.mapping == PointerMapping.DATA )
+					"ByteBuffer"
+				else
+					returns.nativeType.mapping.javaMethodType.getSimpleName()
+
+				print("\t\treturn mem${bufferType}")
+				if ( isNullTerminated )
+					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
+				print("($RESULT")
+				if ( returns has MapPointer.CLASS )
+					print(", ${returns[MapPointer.CLASS].sizeExpression}")
+				else if ( !isNullTerminated ) {
+					if ( returns.nativeType is StructType ) {
+						print(", ${returns.nativeType.definition.className}.SIZEOF")
+					} else {
+						val param = try {
+							getParam { it has autoSizeResult }
+						} catch (e: IllegalStateException) {
+							throw RuntimeException("No autoSizeResult parameter could be found.")
+						}
+						if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+							print(", $API_BUFFER.intValue(${param.name})")
+						else
+							print(", (int)$API_BUFFER.longValue(${param.name})")
+					}
+				}
+				println(");")
+			} else if ( code?.javaAfterNative != null )
+				println("\t\treturn $RESULT;")
+		}
+
 		println("\t}\n")
+	}
+
+	private fun getCode(applyTo: Code.ApplyTo): Code? {
+		if ( !has(Code.CLASS) )
+			return null
+
+		val code = this[Code.CLASS]
+		return when ( code.applyTo ) {
+			Code.ApplyTo.BOTH, applyTo -> code
+			else -> null
+		}
 	}
 
 	private fun PrintWriter.printCode(fragment: String?) {
@@ -607,21 +615,22 @@ public class NativeClassFunction(
 		printCode(code?.javaAfterNative)
 
 		if ( code?.javaFinally != null ) {
-			println("\t\t} finally {")
+			println("\t} finally {")
 			printCode(code?.javaFinally)
 			println("\t\t}")
 		}
 	}
 
-	private fun PrintWriter.generateNativeMethodCall(printParams: PrintWriter.() -> Unit) {
+	private fun PrintWriter.generateNativeMethodCall(returnLater: Boolean = false, printParams: PrintWriter.() -> Unit) {
 		print("\t\t")
 		if ( !(returns.isVoid || returns.isStructValue) ) {
-			if ( returns.isBufferPointer )
-				print("long $RESULT = ")
-			else if ( returns.nativeType is ObjectType )
-				print("return new ${returns.nativeType.className}(")
-			else
+			if ( returns.isBufferPointer || returnLater )
+				print("${returns.nativeMethodType} $RESULT = ")
+			else {
 				print("return ")
+				if ( returns.nativeType is ObjectType )
+					print("${returns.nativeType.className}.create(")
+			}
 		}
 
 		print("n$name(")
@@ -704,6 +713,20 @@ public class NativeClassFunction(
 			}
 		}
 
+		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
+		parameters.values() forEach {
+			if ( it.nativeType is CharSequenceType && !it.has(Return.CLASS) ) {
+				val param = it
+				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+					transforms[it] = AutoSizeCharSequenceTransform(param)
+				}
+
+				transforms[it] = CharSequenceTransform
+				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
+			}
+		}
+
+		// Apply any complex transformations.
 		parameters.values() forEach {
 			val param = it
 
@@ -720,14 +743,7 @@ public class NativeClassFunction(
 				transforms[param] = BufferValueParameterTransform
 			}
 
-			if ( it.nativeType is CharSequenceType ) {
-				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
-					transforms[it] = AutoSizeCharSequenceTransform(param)
-				}
-
-				transforms[it] = CharSequenceTransform
-				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
-			} else if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
+			if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
 
 				if ( returnMod == returnValue ) {
@@ -777,7 +793,21 @@ public class NativeClassFunction(
 				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
 					transforms[it] = BufferValueSizeTransform
 				}
-				transforms[it] = SingleValueTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name, param[SingleValue.CLASS].newName)
+
+				val singleValue = param[SingleValue.CLASS]
+				val primitiveType = PointerMapping.primitiveMap[param.nativeType.mapping]!!
+				transforms[it] = SingleValueTransform(
+					if ( singleValue.elementType != null ) {
+						if ( singleValue.elementType is ObjectType )
+							singleValue.elementType.className
+						else
+							singleValue.elementType.javaMethodType.toString()
+					} else
+						primitiveType,
+					primitiveType,
+					param.name,
+					singleValue.newName
+				)
 				generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks)
 			} else if ( it has MultiType.CLASS ) {
 				// Generate MultiType alternatives
@@ -854,19 +884,21 @@ public class NativeClassFunction(
 				val pointerArray = it[PointerArray.CLASS]
 
 				val lengthsParam = parameters[pointerArray.lengthsParam]
-				if ( lengthsParam != null )
-					transforms[lengthsParam!!] = ExpressionTransform("0L") // TODO: !! -> Kotlin bug
 
 				val countParam = parameters[pointerArray.countParam]!!
 
 				transforms[countParam] = ExpressionTransform("${it.name}.length")
+				if ( lengthsParam != null )
+					transforms[lengthsParam!!] = PointerArrayLengthsTransformMulti(it) // TODO: !! -> Kotlin bug
 				transforms[it] = PointerArrayTransformMulti
 				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks)
 
-				// Compine PointerArrayTransformSingle with BufferValueReturnTransform
+				// Combine PointerArrayTransformSingle with BufferValueReturnTransform
 				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
 
 				transforms[countParam] = ExpressionTransform("1")
+				if ( lengthsParam != null )
+					transforms[lengthsParam!!] = PointerArrayLengthsTransformSingle(it) // TODO: !! -> Kotlin bug
 				transforms[it] = PointerArrayTransformSingle
 				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
 			}
@@ -894,7 +926,7 @@ public class NativeClassFunction(
 
 		print("\tpublic static $retType $name(")
 		printList(parameters) {
-			if ( it has CallbackData.CLASS || it has autoSizeResult )
+			if ( it has autoSizeResult )
 				null
 			else
 				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
@@ -913,7 +945,7 @@ public class NativeClassFunction(
 		}
 		println(") {")
 
-		val code = if ( this@NativeClassFunction has Code.CLASS ) this@NativeClassFunction[Code.CLASS] else null
+		val code = getCode(Code.ApplyTo.ALTERNATIVE)
 
 		// Step 2: Get function address
 
@@ -954,11 +986,13 @@ public class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code)
 
-		generateNativeMethodCall() {
+		generateNativeMethodCall(code?.javaAfterNative != null) {
 			printList(parameters) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(GenerationMode.ALTERNATIVE))
 			}
 		}
+
+		generateCodeAfterNative(code)
 
 		if ( returns.isVoid || returns.isStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
@@ -995,10 +1029,9 @@ public class NativeClassFunction(
 					println("return $returnExpression;")
 				else // Multiple statements, assumes the transformation includes the return statement.
 					println(returnExpression)
-			}
+			} else if ( code?.javaAfterNative != null )
+				println("\t\treturn $RESULT;")
 		}
-
-		generateCodeAfterNative(code)
 
 		println("\t}\n")
 	}
@@ -1122,10 +1155,18 @@ public class Code(
 	val javaFinally: String? = null,
 
 	val nativeBeforeCall: String? = null,
-	val nativeAfterCall: String? = null
+	val nativeAfterCall: String? = null,
+
+    val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
 ): FunctionModifier() {
 	class object {
 		val CLASS = javaClass<Code>()
+
+		enum class ApplyTo {
+			NORMAL
+			ALTERNATIVE
+			BOTH
+		}
 	}
 
 	override val isSpecial: Boolean = true
@@ -1263,15 +1304,16 @@ private val BufferValueSizeTransform = object : FunctionTransform<Parameter> {
 }
 
 private class SingleValueTransform(
-	val primitiveType: String,
+	val paramType: String,
+	val elementType: String,
 	val paramName: String,
 	val newName: String
 ) : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "$primitiveType $newName" // Replace with primitive type + new name
+	override fun transformDeclaration(param: Parameter, original: String): String? = "$paramType $newName" // Replace with element type + new name
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + $paramName" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter) {
-		writer.println("\t\tint $paramName = $API_BUFFER.${primitiveType}Param();")
-		writer.println("\t\t$API_BUFFER.${primitiveType}Value($paramName, $newName);")
+		writer.println("\t\tint $paramName = $API_BUFFER.${elementType}Param();")
+		writer.println("\t\t$API_BUFFER.${elementType}Value($paramName, $newName);")
 	}
 }
 
@@ -1320,38 +1362,46 @@ private class BufferReturnTransform(
 }
 
 private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray.CLASS].singleName}" // Replace with CharSequence
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}Address" // Replace with APIBuffer address + offset
+	override fun transformDeclaration(param: Parameter, original: String): String? {
+		return if ( param[PointerArray.CLASS].elementType is CharSequenceType ) {
+			if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray.CLASS].singleName}" // Replace with CharSequence
+		} else {
+			if ( multi ) "ByteBuffer[] ${param.name}" else "ByteBuffer ${param[PointerArray.CLASS].singleName}" // Replace with ByteBuffer
+		}
+	}
+	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}$POINTER_POSTFIX" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qualifiedType as Parameter)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
-		val elementType = param[PointerArray.CLASS].elementType
+		val pointerArray = param[PointerArray.CLASS]
+		val elementType = pointerArray.elementType
+		val nullTerminate = pointerArray.lengthsParam == null
 
 		if ( multi ) {
 			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << PointerBuffer.getPointerSizeShift());")
 
 			// Create a local array that will hold the encoded CharSequences. We need this to avoid premature GC of the passed buffers.
 			if ( elementType is CharSequenceType )
-				println("\t\tByteBuffer[] ${param.name}Buffers = new ByteBuffer[${param.name}.length];")
+				println("\t\tByteBuffer[] ${param.name}$BUFFERS_POSTFIX = new ByteBuffer[${param.name}.length];")
 
 			println("\t\tfor ( int i = 0; i < ${param.name}.length; i++ )")
 			print("\t\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX + (i << PointerBuffer.getPointerSizeShift()), memAddress(")
 			if ( elementType is CharSequenceType )
-				print("${param.name}Buffers[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
+				print("${param.name}$BUFFERS_POSTFIX[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
 			print("${param.name}[i]")
 			if ( elementType is CharSequenceType )
-				print(")")
+				print(", $nullTerminate)")
 			println("));")
 		} else {
 			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerParam();")
 
 			// Store the encoded CharSequence buffer in a local var to avoid premature GC.
 			if ( elementType is CharSequenceType )
-				println("\t\tByteBuffer ${param.name}Buffer = memEncode${elementType.charMapping.charset}(${param[PointerArray.CLASS].singleName});") // Encode and store
+				println("\t\tByteBuffer ${pointerArray.singleName}$BUFFERS_POSTFIX = memEncode${elementType.charMapping.charset}(${param[PointerArray.CLASS].singleName}, $nullTerminate);") // Encode and store
 
-			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${param.name}")
+			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${pointerArray.singleName}")
 			if ( elementType is CharSequenceType )
-				print("Buffer")
+				print(BUFFERS_POSTFIX)
 			println("));")
 		}
 	}
@@ -1359,7 +1409,56 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 private val PointerArrayTransformSingle = PointerArrayTransform(false)
 private val PointerArrayTransformMulti = PointerArrayTransform(true)
 
+private class PointerArrayLengthsTransform(val arrayParam: Parameter, val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${arrayParam.name}$LENGTHS_POSTFIX" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qualifiedType as Parameter)
+
+	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
+		val pointerArray = arrayParam[PointerArray.CLASS]
+		val elementType = pointerArray.elementType
+
+		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping]
+
+		if ( multi ) {
+			val byteShift = (param.nativeType.mapping as PointerMapping).byteShift
+			println("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.bufferParam(${arrayParam.name}.length << $byteShift);")
+
+			println("\t\tfor ( int i = 0; i < ${arrayParam.name}.length; i++ )")
+			print("\t\t\t$API_BUFFER.${lengthType}Value(${arrayParam.name}$LENGTHS_POSTFIX + (i << $byteShift), ${arrayParam.name}[i]")
+			print(
+				if ( elementType is CharSequenceType )
+					".length()"
+				else
+					".remaining()"
+			)
+			println(");")
+		} else {
+			println("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.${lengthType}Param();")
+
+			print("\t\t$API_BUFFER.${lengthType}Value(${arrayParam.name}$LENGTHS_POSTFIX, ${pointerArray.singleName}")
+			print(
+				if ( elementType is CharSequenceType )
+					".length()"
+				else
+					".remaining()"
+			)
+			println(");")
+		}
+	}
+}
+private fun PointerArrayLengthsTransformSingle(arrayParam: Parameter) = PointerArrayLengthsTransform(arrayParam, false)
+private fun PointerArrayLengthsTransformMulti(arrayParam: Parameter) = PointerArrayLengthsTransform(arrayParam, true)
+
 private val CallbackTransform = object : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = "${param[Callback.CLASS].procClass} ${param.name}" // Replace type with the callback class
-	override fun transformCall(param: Parameter, original: String): String = "${param.name} == null ? 0L : ${param[Callback.CLASS].procClass}.CALLBACK" // Replace with callback function address
+	override fun transformCall(param: Parameter, original: String): String {
+		// Replace with callback function address
+		val procClass = param[Callback.CLASS].procClass;
+
+		if ( param has nullable )
+			"${param.name} == null ? 0L : $procClass.CALLBACK"
+		else
+			"$procClass.CALLBACK"
+	}
 }
