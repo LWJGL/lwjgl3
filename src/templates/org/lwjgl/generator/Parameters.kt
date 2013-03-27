@@ -95,12 +95,16 @@ public class Parameter(
 	}
 
 	private fun doc(description: String, links: String): String {
-		val builder = StringBuilder(description.size + 16 + links.size * 2) // Rough estimate to reduce mallocs.
-		builder append description
-		if ( links.indexOf(' ') == -1 )
-			builder append ". Must be:"
+		val trimmed = description.trim()
+		val builder = StringBuilder(trimmed.size + 16 + links.size * 2) // Rough estimate to reduce mallocs.
+		builder append trimmed
+		if ( !trimmed.endsWith('.') )
+			builder append '.'
+
+		builder append if ( links.indexOf(' ') == -1 )
+			" Must be:"
 		else
-			builder append ". One of:"
+			" One of:"
 		builder append "<p/>"
 
 		val tokens = LINK_PATTERN.split(links.trim())
