@@ -141,7 +141,7 @@ public final class GL {
 			{ 1, 2, 3, 4, 5 },  // OpenGL 1
 			{ 0, 1 },           // OpenGL 2
 			{ 0, 1, 2, 3 },     // OpenGL 3
-			{ 0, 1, 2 },        // OpenGL 4
+			{ 0, 1, 2, 3 },     // OpenGL 4
 		};
 
 		Set<String> supportedExtensions = new HashSet<String>(128);
