@@ -106,7 +106,7 @@ public fun table(vararg rows: String): String {
 	val builder = StringBuilder(512)
 	builder append """<table border="1" cellspacing="0" cellpadding="2">"""
 	for ( row in rows ) {
-		builder append "\n\t$tab"
+		builder append "\n\t"
 		builder append row
 	}
 	builder append "\n\t</table>"
@@ -148,7 +148,7 @@ private fun htmlList(tag: String, vararg items: String): String {
 	val builder = StringBuilder(512)
 	builder append "<$tag>\n"
 	for ( li in items ) {
-		builder append "\t$tab<li>"
+		builder append "\t<li>"
 		builder append li.trim()
 		builder append "</li>\n"
 	}
