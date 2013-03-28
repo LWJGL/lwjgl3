@@ -19,6 +19,7 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.ArrayList
 import java.util.HashMap
+import java.util.regex.Pattern
 
 /*
 	A template will be generated in the following cases:
@@ -134,18 +135,6 @@ val HEADER = """/*
  */
 """
 
-public trait GeneratorTargetJava {
-
-	val packageName: String
-	val className: String
-	val nativeSubPath: String
-
-	protected val documentation: String?
-
-	fun generateJava(writer: PrintWriter)
-
-}
-
 class NativePreamble {
 
 	class object {
@@ -196,17 +185,53 @@ class NativePreamble {
 
 }
 
-public trait GeneratorTarget: GeneratorTargetJava {
+private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
 
-	val nativePreamble: NativePreamble
+val String.asJNIName: String
+	get() = if ( this.indexOf('_') == -1 )
+		this
+	else
+		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
-	fun generateNative(writer: PrintWriter)
+public abstract class GeneratorTarget(
+	val packageName: String,
+	val className: String,
+	val nativeSubPath: String = ""
+): TemplateElement() {
+
+	class object {
+		val DOT_PATTERN = Pattern.compile("[.]")
+	}
+
+	protected var documentation: String? = null
+
+	val nativePreamble: NativePreamble = NativePreamble()
+
+	val nativeFileName: String
+		get() = "${packageName.replace('.', '_')}_$className"
+
+	val nativeFileNameJNI: String
+	{
+		val fileName = StringBuilder(packageName.size + className.size + 4); // some extra room for escaping
+
+		for ( subpackage in DOT_PATTERN.split(packageName) ) {
+			fileName append subpackage.asJNIName
+			fileName append '_'
+		}
+
+		fileName append className.asJNIName
+
+		$nativeFileNameJNI = fileName.toString()
+	}
+
+	fun javaDoc(documentation: String) {
+		this.documentation = documentation.toJavaDoc(indentation = "")
+	}
+
+	abstract fun generateJava(writer: PrintWriter)
+	abstract fun generateNative(writer: PrintWriter)
 
 }
-
-// TODO: Kotlin bug: IncompatibleClassChangeError if we put this in the trait above
-val GeneratorTarget.nativeFileName: String
-	get() = "${packageName.replace('.', '_')}_$className"
 
 fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
 	nativePreamble.define(expression, afterIncludes)
@@ -216,22 +241,6 @@ fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boole
 fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
 	nativePreamble.import(*files)
 	return this
-}
-
-abstract class AbstractGeneratorTarget(
-	override val packageName: String,
-	override val className: String,
-	override val nativeSubPath: String = ""
-): TemplateElement(), GeneratorTarget {
-
-	protected override var documentation: String? = null
-
-	override val nativePreamble: NativePreamble = NativePreamble()
-
-	fun javaDoc(documentation: String) {
-		this.documentation = documentation.toJavaDoc(indentation = "")
-	}
-
 }
 
 private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
