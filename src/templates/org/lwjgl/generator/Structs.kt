@@ -74,7 +74,7 @@ public class Struct(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = ""
-): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
+): GeneratorTarget(packageName, className, nativeSubPath) {
 
 	class object {
 		private val bufferMethodMap = hashMapOf(
@@ -397,7 +397,7 @@ public class Struct(
 
 		println()
 
-		println("JNIEXPORT jint JNICALL Java_${nativeFileName}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
+		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
 		for ( i in 0..members.lastIndex ) {
 			println("\tbuffer[$i] = (jint)(offsetof($className, ${members[i].nativeName}));")

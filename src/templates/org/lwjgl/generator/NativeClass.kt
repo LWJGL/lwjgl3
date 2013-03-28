@@ -83,7 +83,7 @@ public class NativeClass(
 	public val prefixTemplate: String,
 	public val postfix: String,
 	val functionProvider: FunctionProvider?
-): AbstractGeneratorTarget(packageName, className, nativeSubPath) {
+): GeneratorTarget(packageName, className, nativeSubPath) {
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
 

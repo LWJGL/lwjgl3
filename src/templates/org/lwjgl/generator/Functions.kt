@@ -38,8 +38,6 @@ val FUNCTION_ADDRESS = "__functionAddress"
 private val API_BUFFER = "__buffer"
 private val JNIENV = "__env"
 
-private val JNI_UNDERSCORE_ESCAPE_PATTERN = Pattern.compile("_")
-
 private val GLCore_PATTERN = Pattern.compile("GL[1-9][0-9]")
 
 public abstract class Function(
@@ -1051,15 +1049,10 @@ public class NativeClassFunction(
 	private fun PrintWriter.generateFunctionImpl() {
 		// Step 0: Function signature
 
-		print("JNIEXPORT ${returns.jniFunctionType} JNICALL Java_${nativeClass.nativeFileName}_")
+		print("JNIEXPORT ${returns.jniFunctionType} JNICALL Java_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
-		print(
-			if ( name.indexOf('_') == -1 )
-				name
-			else
-				name.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
-		)
+		print(name.asJNIName)
 		print("(")
 		print("JNIEnv *$JNIENV, jclass clazz")
 		parameters.values().forEach {
