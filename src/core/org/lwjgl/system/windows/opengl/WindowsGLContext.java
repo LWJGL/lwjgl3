@@ -141,7 +141,7 @@ public class WindowsGLContext extends GLContext {
 		return new WindowsGLContext(capabilities, hdc, hglrc);
 	}
 
-	public void destroy() {
+	public void destroyImpl() {
 		int result = wglDeleteContext(hglrc);
 		if ( result == 0 )
 			throw new RuntimeException("Failed to delete OpenGL context.");
