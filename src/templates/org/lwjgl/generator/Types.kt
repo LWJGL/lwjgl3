@@ -68,7 +68,7 @@ public fun PointerType(pointerType: PointerType): PointerType =
 		if ( pointerType.includesPointer )
 			pointerType.name
 		else
-			"${pointerType.name}*",
+			"${pointerType.name} *",
 		PointerMapping.DATA_POINTER
 	)
 

@@ -1087,8 +1087,9 @@ public class NativeClassFunction(
 
 		parameters.values().iterator().filter { it.nativeType is PointerType }.forEach {
 			val pointerType = it.toNativeType
-			val ws = if ( pointerType[pointerType.size - 1] == '*' ) "" else " "
-			println("\t$pointerType$ws${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
+			print("\t$pointerType")
+			if ( !pointerType.endsWith('*') ) print(' ')
+			println("${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
 		}
 
 		// Step 2: Cast function address to pointer
