@@ -177,7 +177,13 @@ public class Parameter(
 
 // DSL extensions
 
-public fun TemplateModifier._(returnType: NativeType): ReturnValue {
+public fun ReturnValueModifier._(returnType: NativeType): ReturnValue {
+	val returns = ReturnValue(returnType)
+	returns.setModifiers(this)
+	return returns
+}
+
+public fun QualifiedTypeModifier._(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(this)
 	return returns
@@ -194,13 +200,9 @@ public fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
 // General
 
 /** Marks the function parameter or return value as const. */
-public class Const internal(): TemplateModifier {
+public class Const internal(): QualifiedTypeModifier() {
 	override val isSpecial: Boolean = false
-	override fun validate(element: TemplateElement) {
-		if ( element !is QualifiedType )
-			throw IllegalArgumentException("The const modifier can only be applied on parameters or return values.")
-
-		val qtype = element as QualifiedType
+	override fun validate(qtype: QualifiedType) {
 		if ( qtype.nativeType !is PointerType )
 			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
 
@@ -255,7 +257,7 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 	}
 }
 
-public val autoSizeResult: TemplateModifier = object : ParameterModifier() {
+public val autoSizeResult: ParameterModifier = object : ParameterModifier() {
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
 		if ( param.paramType == ParameterType.IN )

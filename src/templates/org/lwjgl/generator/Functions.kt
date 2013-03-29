@@ -90,8 +90,8 @@ public abstract class Function(
 // DSL extensions
 
 public fun NativeType.IN(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.IN, javadoc, links)
-public fun NativeType.OUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links)
-public fun NativeType.INOUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links)
+public fun PointerType.OUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links)
+public fun PointerType.INOUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links)
 
 private fun <T> PrintWriter.printList(items: Map<*, T>, itemPrint: (item: T) -> String?): Unit = printList(items.values(), itemPrint)
 private fun <T> PrintWriter.printList(items: Iterable<T>, itemPrint: (item: T) -> String?) {
@@ -622,9 +622,14 @@ public class NativeClassFunction(
 	private fun PrintWriter.generateNativeMethodCall(returnLater: Boolean = false, printParams: PrintWriter.() -> Unit) {
 		print("\t\t")
 		if ( !(returns.isVoid || returns.isStructValue) ) {
-			if ( returns.isBufferPointer || returnLater )
-				print("${returns.nativeMethodType} $RESULT = ")
-			else {
+			if ( returns.isBufferPointer || returnLater ) {
+				print(
+					if ( returns.nativeType is ObjectType )
+						"${returns.nativeType.className} $RESULT = ${returns.nativeType.className}.create("
+					else
+						"${returns.nativeMethodType} $RESULT = "
+				)
+			} else {
 				print("return ")
 				if ( returns.nativeType is ObjectType )
 					print("${returns.nativeType.className}.create(")
@@ -712,34 +717,37 @@ public class NativeClassFunction(
 		}
 
 		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
-		parameters.values() forEach {
-			if ( it.nativeType is CharSequenceType && !it.has(Return.CLASS) ) {
+		if ( parameters.values() count {
+			if ( it.nativeType !is CharSequenceType || it.has(Return.CLASS) )
+				false
+			else {
 				val param = it
 				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
 					transforms[it] = AutoSizeCharSequenceTransform(param)
 				}
 
 				transforms[it] = CharSequenceTransform
-				generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
+				true
 			}
+		} != 0 )
+			generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
+
+		fun applyReturnValueTransforms(param: Parameter) {
+			// Transform void to the proper type
+			transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
+
+			// Transform the AutoSize parameter, if there is one
+			getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+				transforms[it] = BufferValueSizeTransform
+			}
+
+			// Transform the returnValue parameter
+			transforms[param] = BufferValueParameterTransform
 		}
 
 		// Apply any complex transformations.
 		parameters.values() forEach {
 			val param = it
-
-			fun applyReturnValueTransforms(param: Parameter) {
-				// Transform void to the proper type
-				transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
-
-				// Transform the AutoSize parameter, if there is one
-				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
-					transforms[it] = BufferValueSizeTransform
-				}
-
-				// Transform the returnValue parameter
-				transforms[param] = BufferValueParameterTransform
-			}
 
 			if ( it has Return.CLASS && !hasParam { it has PointerArray.CLASS } ) {
 				val returnMod = it[Return.CLASS]
@@ -781,32 +789,6 @@ public class NativeClassFunction(
 						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
 					}
 				}
-			} else if ( it has SingleValue.CLASS ) {
-				// Generate SingleValue alternative
-
-				// Compine SingleValueTransform with BufferValueReturnTransform
-				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
-
-				// Transform the AutoSize parameter, if there is one
-				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
-					transforms[it] = BufferValueSizeTransform
-				}
-
-				val singleValue = param[SingleValue.CLASS]
-				val primitiveType = PointerMapping.primitiveMap[param.nativeType.mapping]!!
-				transforms[it] = SingleValueTransform(
-					if ( singleValue.elementType != null ) {
-						if ( singleValue.elementType is ObjectType )
-							singleValue.elementType.className
-						else
-							singleValue.elementType.javaMethodType.toString()
-					} else
-						primitiveType,
-					primitiveType,
-					param.name,
-					singleValue.newName
-				)
-				generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks)
 			} else if ( it has MultiType.CLASS ) {
 				// Generate MultiType alternatives
 				customChecks.clear()
@@ -901,6 +883,43 @@ public class NativeClassFunction(
 				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
 			}
 		}
+
+		// Apply any SingleValue transformations.
+		if ( parameters.values() count {
+			if ( !(it has SingleValue.CLASS) ) {
+				false
+			} else {
+				val param = it
+
+				// Compine SingleValueTransform with BufferValueReturnTransform
+				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
+
+				// Transform the AutoSize parameter, if there is one
+				getParams { it has AutoSize.CLASS && it.get(AutoSize.CLASS).hasReference(param.name) }.forEach {
+					transforms[it] = BufferValueSizeTransform
+				}
+
+				val singleValue = param[SingleValue.CLASS]
+				val primitiveType = PointerMapping.primitiveMap[param.nativeType.mapping]!!
+				transforms[it] = SingleValueTransform(
+					if ( singleValue.elementType != null ) {
+						if ( singleValue.elementType is ObjectType )
+							singleValue.elementType.className
+						else if ( singleValue.elementType is CharSequenceType )
+							"CharSequence"
+						else
+							singleValue.elementType.javaMethodType.toString()
+					} else
+						primitiveType,
+					primitiveType,
+					param.name,
+					singleValue.newName
+				)
+
+				true
+			}
+		} != 0 )
+			generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks)
 	}
 
 	private fun PrintWriter.generateAlternativeMethod(
@@ -1306,7 +1325,11 @@ private class SingleValueTransform(
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + $paramName" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qualifiedType: QualifiedType, writer: PrintWriter) {
 		writer.println("\t\tint $paramName = $API_BUFFER.${elementType}Param();")
-		writer.println("\t\t$API_BUFFER.${elementType}Value($paramName, $newName);")
+		if ( "CharSequence" == paramType ) {
+			writer.println("\t\tByteBuffer ${newName}Buffer = memEncodeASCII($newName);") // TODO: Support other than ASCCI
+			writer.println("\t\t$API_BUFFER.${elementType}Value($paramName, memAddress(${newName}Buffer));")
+		} else
+			writer.println("\t\t$API_BUFFER.${elementType}Value($paramName, $newName);")
 	}
 }
 
@@ -1371,14 +1394,14 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 		val nullTerminate = pointerArray.lengthsParam == null
 
 		if ( multi ) {
-			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << PointerBuffer.getPointerSizeShift());")
+			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << POINTER_SHIFT);")
 
 			// Create a local array that will hold the encoded CharSequences. We need this to avoid premature GC of the passed buffers.
 			if ( elementType is CharSequenceType )
 				println("\t\tByteBuffer[] ${param.name}$BUFFERS_POSTFIX = new ByteBuffer[${param.name}.length];")
 
 			println("\t\tfor ( int i = 0; i < ${param.name}.length; i++ )")
-			print("\t\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX + (i << PointerBuffer.getPointerSizeShift()), memAddress(")
+			print("\t\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX + (i << POINTER_SHIFT), memAddress(")
 			if ( elementType is CharSequenceType )
 				print("${param.name}$BUFFERS_POSTFIX[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
 			print("${param.name}[i]")

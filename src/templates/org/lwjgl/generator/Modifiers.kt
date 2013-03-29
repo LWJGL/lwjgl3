@@ -87,14 +87,46 @@ public abstract class ReturnValueModifier: TemplateModifier {
 	}
 }
 
+public abstract class QualifiedTypeModifier: TemplateModifier {
+	override fun validate(element: TemplateElement) {
+		if ( element is QualifiedType )
+			validate(element)
+		else
+			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on parameters or return values.")
+	}
+
+	protected open fun validate(qtype: QualifiedType) {
+	}
+}
+
 /** A TemplateModifier with a reference to another TemplateElement. */
 public abstract class ReferenceModifier(val reference: String): TemplateModifier {
 	override val isSpecial: Boolean = true
 }
 
-// DSL extensions
+// DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
 
-public fun <T: TemplateElement> TemplateModifier._(element: T): T {
+public fun FunctionModifier._(func: NativeClassFunction): NativeClassFunction {
+	func.setModifiers(this)
+	return func
+}
+
+public fun ParameterModifier._(param: Parameter): Parameter {
+	param.setModifiers(this)
+	return param
+}
+
+public fun ReturnValueModifier._(retValue: ReturnValue): ReturnValue {
+	retValue.setModifiers(this)
+	return retValue
+}
+
+public fun <T: QualifiedType> QualifiedTypeModifier._(qtype: T): T {
+	qtype.setModifiers(this)
+	return qtype
+}
+
+public fun <T: TemplateElement> ReferenceModifier._(element: T): T {
 	element.setModifiers(this)
 	return element
 }
