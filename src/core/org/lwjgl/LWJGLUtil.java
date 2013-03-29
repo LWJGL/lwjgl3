@@ -581,6 +581,19 @@ public final class LWJGLUtil {
 		return "0x" + Integer.toHexString(value).toUpperCase();
 	}
 
+	/**
+	 * Returns a string representation of the long argument as an
+	 * unsigned long in base&nbsp;16. The string will be uppercase
+	 * and will have a leading '0x'.
+	 *
+	 * @param value the long value
+	 *
+	 * @return the hex string representation
+	 */
+	public static String toHexString(long value) {
+		return "0x" + Long.toHexString(value).toUpperCase();
+	}
+
 	/** Simple interface for Field filtering. */
 	public interface TokenFilter {
 
