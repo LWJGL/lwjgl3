@@ -124,9 +124,10 @@ public fun tr(vararg columns: String): String {
 	return builder.toString()
 }
 
-public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1): String {
+public fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1): String = td(content, colspan, rowspan, "th")
+public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td"): String {
 	val builder = StringBuilder()
-	builder append "<td"
+	builder append "<$tag"
 	if ( 1 < colspan ) {
 		builder append " colspan=\""
 		builder append colspan
@@ -139,7 +140,7 @@ public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1): String 
 	}
 	builder append ">"
 	builder append content.trim()
-	builder append "</td>"
+	builder append "</$tag>"
 
 	return builder.toString()
 }
