@@ -8,6 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.glfw.*
 
 fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
+	javaImport (
+		"org.lwjgl.opengl.GL11"
+	)
+
 	nativeImport (
 		"glfw3.h"
 	)
@@ -935,14 +939,14 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"{@link #GLFW_CURSOR_CAPTURED} makes the cursor invisible and unable to leave the window but unconstrained in terms of position."
 		)}
 
-        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either GL_TRUE to
-        enable sticky keys, or GL_FALSE to disable it.  If sticky keys are
+        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either {@link GL11#GL_TRUE} to
+        enable sticky keys, or {@link GL11#GL_FALSE} to disable it.  If sticky keys are
         enabled, a key press will ensure that {@link #glfwGetKey} returns
         {@link #GLFW_PRESS} the next time it is called even if the key had been released
         before the call.
          
-        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either GL_TRUE
-        to enable sticky mouse buttons, or GL_FALSE to disable it.  If sticky
+        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either {@link GL11#GL_TRUE}
+        to enable sticky mouse buttons, or {@link GL11#GL_FALSE} to disable it.  If sticky
         mouse buttons are enabled, a mouse button press will ensure that
         {@link #glfwGetMouseButton} returns {@link #GLFW_PRESS} the next time it is called even
         if the mouse button had been released before the call.

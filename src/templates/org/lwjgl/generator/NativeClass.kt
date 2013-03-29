@@ -120,7 +120,7 @@ public class NativeClass(
 				var needsPointer = false
 				var needsAPIUtil = false
 				functions forEach {
-					if ( it.returns.nativeType.mapping == PointerMapping.DATA_POINTER || it.hasParam { it.nativeType.mapping == PointerMapping.DATA_POINTER } )
+					if ( it.hasParam { it.nativeType.mapping == PointerMapping.DATA_POINTER } )
 						needsPointer = true
 
 					if ( it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } )
@@ -134,6 +134,7 @@ public class NativeClass(
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()
+			preamble.printJava(this)
 		}
 
 		if ( documentation != null )
@@ -201,7 +202,7 @@ public class NativeClass(
 		print(HEADER)
 		println("#include <jni.h>")
 
-		nativePreamble.print(this)
+		preamble.printNative(this)
 
 		if ( functionProvider != null ) {
 			// Generate typedefs for casting the function pointers

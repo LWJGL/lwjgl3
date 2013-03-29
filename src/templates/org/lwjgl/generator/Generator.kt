@@ -90,14 +90,13 @@ private fun generate(packageName: String) {
 	}
 }
 
-private val methodFilter = {(method: Method, javaClass: Class<*>) ->
+private fun methodFilter(method: Method, javaClass: Class<*>) =
 	// static
 	method.getModifiers() and Modifier.STATIC != 0 &&
 	// returns NativeClass
 	method.getReturnType() == javaClass &&
 	// has no arguments
 	method.getParameterTypes()!!.size == 0
-}
 
 private fun discoverConfig(packageClassPath: String): Method? {
 	val firstChar = packageClassPath.lastIndexOf('.') + 1
@@ -135,7 +134,7 @@ val HEADER = """/*
  */
 """
 
-class NativePreamble {
+class Preamble {
 
 	class object {
 		data class NativeDefine(
@@ -147,38 +146,60 @@ class NativePreamble {
 		private val EMPTY_DEFINES = ArrayList<NativeDefine>(0)
 	}
 
-	private var imports: MutableList<String> = EMPTY_IMPORTS
-	private var defines: MutableList<NativeDefine> = EMPTY_DEFINES
+	private var javaImports: MutableList<String> = EMPTY_IMPORTS
 
-	fun import(vararg files: String) {
-		if ( imports identityEquals EMPTY_IMPORTS )
-			imports = ArrayList<String>(files.size)
+	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
+	private var nativeDefines: MutableList<NativeDefine> = EMPTY_DEFINES
+
+	fun javaImport(vararg classes: String) {
+		if ( javaImports identityEquals EMPTY_IMPORTS )
+			javaImports = ArrayList<String>(classes.size)
+
+		classes.forEach {
+			javaImports add it
+		}
+	}
+
+	fun nativeImport(vararg files: String) {
+		if ( nativeImports identityEquals EMPTY_IMPORTS )
+			nativeImports = ArrayList<String>(files.size)
 
 		files.forEach {
-			imports add if ( it.startsWith('<') )
+			nativeImports add if ( it.startsWith('<') )
 				it
 			else
 				"\"$it\""
 		}
 	}
 
-	fun define(expression: String, afterIncludes: Boolean) {
-		if ( defines identityEquals EMPTY_DEFINES )
-			defines = ArrayList<NativeDefine>()
+	fun nativeDefine(expression: String, afterIncludes: Boolean) {
+		if ( nativeDefines identityEquals EMPTY_DEFINES )
+			nativeDefines = ArrayList<NativeDefine>()
 
-		defines.add(NativeDefine(expression, afterIncludes))
+		nativeDefines.add(NativeDefine(expression, afterIncludes))
 	}
 
-	fun print(writer: PrintWriter) {
-		defines.filter { !it.afterIncludes }.forEach {
+	fun printJava(writer: PrintWriter) {
+		if ( javaImports.isEmpty() )
+			return
+
+		javaImports.forEach {
+			writer.println("import $it;")
+		}
+
+		writer.println()
+	}
+
+	fun printNative(writer: PrintWriter) {
+		nativeDefines.filter { !it.afterIncludes }.forEach {
 			writer.println("#define ${it.expression}")
 		}
 
-		imports.forEach {
+		nativeImports.forEach {
 			writer.println("#include $it")
 		}
 
-		defines.filter { it.afterIncludes }.forEach {
+		nativeDefines.filter { it.afterIncludes }.forEach {
 			writer.println("#define ${it.expression}")
 		}
 	}
@@ -205,7 +226,7 @@ public abstract class GeneratorTarget(
 
 	protected var documentation: String? = null
 
-	val nativePreamble: NativePreamble = NativePreamble()
+	val preamble = Preamble()
 
 	val nativeFileName: String
 		get() = "${packageName.replace('.', '_')}_$className"
@@ -233,13 +254,18 @@ public abstract class GeneratorTarget(
 
 }
 
+fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
+	preamble.javaImport(*classes)
+	return this
+}
+
 fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
-	nativePreamble.define(expression, afterIncludes)
+	preamble.nativeDefine(expression, afterIncludes)
 	return this
 }
 
 fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
-	nativePreamble.import(*files)
+	preamble.nativeImport(*files)
 	return this
 }
 
