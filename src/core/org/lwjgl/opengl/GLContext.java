@@ -29,8 +29,8 @@ public abstract class GLContext {
 
 	public void destroy() {
 		// Clean-up callbacks
-		if ( capabilities.__AMDDebugOutput.DEBUGPROCAMD != 0L ) AMDDebugOutput.glDebugMessageCallbackAMD(null);
-		if ( capabilities.__GL43.DEBUGPROC != 0L ) GL43.glDebugMessageCallback(null);
+		if ( capabilities.GL_AMD_debug_output && capabilities.__AMDDebugOutput.DEBUGPROCAMD != 0L ) AMDDebugOutput.glDebugMessageCallbackAMD(null);
+		if ( capabilities.OpenGL43 && capabilities.__GL43.DEBUGPROC != 0L ) GL43.glDebugMessageCallback(null);
 
 		destroyImpl();
 	}
