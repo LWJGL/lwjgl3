@@ -44,7 +44,9 @@ public open class PointerType(
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.NAKED_POINTER,
 	/** If true, the nativeType typedef includes a pointer. */
-	val includesPointer: Boolean = false
+	val includesPointer: Boolean = false,
+	/** Optional element type. See the secondary constructors below. */
+    val elementType: NativeType? = null
 ): NativeType(name, mapping)
 // Convert primitive to array
 public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
@@ -60,7 +62,8 @@ public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 		else -> {
 			throw IllegalArgumentException()
 		}
-	}
+	},
+    elementType = primitiveType
 )
 // pointer to pointer
 public fun PointerType(pointerType: PointerType): PointerType =
@@ -69,7 +72,8 @@ public fun PointerType(pointerType: PointerType): PointerType =
 			pointerType.name
 		else
 			"${pointerType.name} *",
-		PointerMapping.DATA_POINTER
+		PointerMapping.DATA_POINTER,
+		elementType = pointerType
 	)
 
 // Objects (pointer wrappers)

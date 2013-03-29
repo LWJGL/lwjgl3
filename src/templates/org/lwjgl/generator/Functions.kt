@@ -900,17 +900,16 @@ public class NativeClassFunction(
 				}
 
 				val singleValue = param[SingleValue.CLASS]
-				val primitiveType = PointerMapping.primitiveMap[param.nativeType.mapping]!!
+				val pointerType = param.nativeType as PointerType
+				val primitiveType = PointerMapping.primitiveMap[pointerType.mapping]!!
 				transforms[it] = SingleValueTransform(
-					if ( singleValue.elementType != null ) {
-						if ( singleValue.elementType is ObjectType )
-							singleValue.elementType.className
-						else if ( singleValue.elementType is CharSequenceType )
-							"CharSequence"
-						else
-							singleValue.elementType.javaMethodType.toString()
-					} else
-						primitiveType,
+					when ( pointerType.elementType ) {
+						null -> primitiveType
+						is CharSequenceType -> "CharSequence"
+						is ObjectType -> pointerType.elementType.className
+						is PointerType -> "long"
+						else -> pointerType.elementType.javaMethodType.toString()
+					},
 					primitiveType,
 					param.name,
 					singleValue.newName
