@@ -5,6 +5,7 @@ import org.lwjgl.PointerBuffer;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -86,7 +87,7 @@ public class APIBuffer {
 	public int doubleParam() { return param(8); }
 
 	/** Ensures space for an additional pointer value and returns the address offset. */
-	public int pointerParam() { return param(PointerBuffer.getPointerSize()); }
+	public int pointerParam() { return param(POINTER_SIZE); }
 
 	/** Ensures space for an additional buffer with the given size (in bytes) and returns the address offset. */
 	public int bufferParam(int size) { return param(size); }
@@ -172,9 +173,12 @@ public class APIBuffer {
 	/** Sets a pointer value at the specified offset. */
 	public void pointerValue(int offset, long value) { PointerBuffer.put(buffer, offset, value); }
 
+	/** Sets a pointer value at the specified offset. */
+	public void pointerValue(int offset, PointerWrapper value) { pointerValue(offset, value.getPointer()); }
+
 	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
 	public void pointerValue(int offset, int index, long value) {
-		PointerBuffer.put(buffer, offset + (index << PointerBuffer.getPointerSizeShift()), value);
+		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
 	}
 
 }

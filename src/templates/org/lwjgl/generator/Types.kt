@@ -174,7 +174,7 @@ public open class PointerMapping(
 		/** Useful for void * params that will be AutoTyped. */
 		val DATA = PointerMapping(javaClass<Buffer>())
 
-		val DATA_POINTER = PointerMapping(javaClass<PointerBuffer>(), "PointerBuffer.getPointerSizeShift()")
+		val DATA_POINTER = PointerMapping(javaClass<PointerBuffer>(), "POINTER_SHIFT")
 
 		fun PointerMapping(javaMethodType: Class<out Any>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
 

@@ -6,19 +6,17 @@ package org.lwjgl;
 
 import java.nio.*;
 
+import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/**
- * This class is a container for architecture independent pointer data.
- * The interface mirrors the NIO LongBuffer API for convenience.
- */
+/** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
 public class PointerBuffer implements Comparable {
 
 	static {
 		Sys.touch();
 	}
 
-	private static final boolean is64Bit = memPointerSize() == 8;
+	private static final boolean is64Bit = POINTER_SIZE == 8;
 
 	protected final ByteBuffer pointers;
 
@@ -32,7 +30,7 @@ public class PointerBuffer implements Comparable {
 	 * @param capacity the PointerBuffer size, in number of pointers
 	 */
 	public PointerBuffer(int capacity) {
-		this(BufferUtils.createByteBuffer(capacity * getPointerSize()), false);
+		this(BufferUtils.createByteBuffer(capacity * POINTER_SIZE), false);
 	}
 
 	/**
@@ -87,24 +85,6 @@ public class PointerBuffer implements Comparable {
 	}
 
 	/**
-	 * Returns the pointer size in bytes, based on the underlying architecture.
-	 *
-	 * @return the pointer size in bytes
-	 */
-	public static int getPointerSize() {
-		return is64Bit ? 8 : 4;
-	}
-
-	/**
-	 * Returns the power-of-two that corresponds to the pointer size, based on the underlying architecture.
-	 *
-	 * @return the pointer size power-of-two
-	 */
-	public static int getPointerSizeShift() {
-		return is64Bit ? 3 : 2;
-	}
-
-	/**
 	 * Returns this buffer's capacity. </p>
 	 *
 	 * @return the capacity of this buffer
@@ -128,7 +108,7 @@ public class PointerBuffer implements Comparable {
 	 * @return the position of this buffer in bytes.
 	 */
 	public final int positionByte() {
-		return position() * getPointerSize();
+		return position() * POINTER_SIZE;
 	}
 
 	/**
@@ -283,7 +263,7 @@ public class PointerBuffer implements Comparable {
 	 * @return the number of bytes remaining in this buffer
 	 */
 	public final int remainingByte() {
-		return remaining() * getPointerSize();
+		return remaining() * POINTER_SIZE;
 	}
 
 	/**
@@ -343,10 +323,8 @@ public class PointerBuffer implements Comparable {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer slice() {
-		int shift = getPointerSizeShift();
-
-		pointers.position(view.position() << shift);
-		pointers.limit(view.limit() << shift);
+		pointers.position(view.position() << POINTER_SIZE);
+		pointers.limit(view.limit() << POINTER_SIZE);
 
 		try {
 			return newInstance(pointers.slice().order(pointers.order()));

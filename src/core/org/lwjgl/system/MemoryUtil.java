@@ -13,6 +13,8 @@ import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 import java.nio.*;
 import java.nio.charset.*;
 
+import static org.lwjgl.Pointer.*;
+
 /**
  * This class provides functionality for managing native memory.
  * <p/>
@@ -94,7 +96,7 @@ public final class MemoryUtil {
 
 	public static long memAddress(PointerBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
-	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position * PointerBuffer.getPointerSize()); }
+	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position * POINTER_SIZE); }
 
 	// --- [ Buffer address utilities - Safe ] ---
 
@@ -315,7 +317,7 @@ public final class MemoryUtil {
 	 */
 	public static PointerBuffer memPointerBuffer(long address, int capacity) {
 		// TODO: optimize
-		return new PointerBuffer(memByteBuffer(address, capacity << PointerBuffer.getPointerSizeShift()));
+		return new PointerBuffer(memByteBuffer(address, capacity << POINTER_SHIFT));
 	}
 
 	/**
@@ -423,6 +425,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Returns the pointer size in bytes for the process that loaded LWJGL.
+	 * <p/>
+	 * This call is expensive, use {@link org.lwjgl.Pointer#POINTER_SIZE} instead.
 	 *
 	 * @return the process pointer size in bytes.
 	 */
