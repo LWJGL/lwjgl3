@@ -34,10 +34,13 @@ abstract class QualifiedType(
 		get() {
 			val builder = StringBuilder()
 			if ( has(const) )
-				builder.append("const ")
+				builder append "const "
 			builder.append(nativeType.name)
-			if ( nativeType is PointerType && !nativeType.includesPointer )
-				builder.append(" *")
+			if ( nativeType is PointerType && !nativeType.includesPointer ) {
+				if ( !nativeType.name.endsWith('*') )
+					builder append ' '
+				builder append '*'
+			}
 
 			return builder.toString()
 		}
@@ -154,14 +157,6 @@ public class Parameter(
 	// Normal parameter
 		else -> name
 	}
-
-	val asNativeFunctionParam: String
-		get() {
-			return if ( nativeType is PointerType && !nativeType.includesPointer )
-				"$toNativeType$name"
-			else
-				"$toNativeType $name"
-		}
 
 	val asJNIFunctionParam: String
 		get() {

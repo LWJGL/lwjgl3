@@ -117,9 +117,20 @@ public class NativeClass(
 
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( hasNIO ) {
-				println("import static org.lwjgl.Pointer.*;")
+				var needsPointer = false
+				var needsAPIUtil = false
+				functions forEach {
+					if ( it.returns.nativeType.mapping == PointerMapping.DATA_POINTER || it.hasParam { it.nativeType.mapping == PointerMapping.DATA_POINTER } )
+						needsPointer = true
+
+					if ( it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } )
+						needsAPIUtil = true
+				}
+
+				if ( needsPointer )
+					println("import static org.lwjgl.Pointer.*;")
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( functions.any { it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } } )
+				if ( needsAPIUtil )
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()
