@@ -433,22 +433,46 @@ public final class MemoryUtil {
 	public static native int memPointerSize();
 
 	/**
-	 * Creates a new global reference to the specified Object.
+	 * Returns the object that the given global reference points to.
 	 *
-	 * @param obj the Object
+	 * @param globalRef the global reference
+	 * @param <T>       the object type
 	 *
-	 * @return the GlobalRef memory address.
+	 * @return the object pointed to by {@code globalRef}
 	 */
-	public static native long memGlobalRefNew(Object obj);
-
 	public static native <T> T memGlobalRefToObject(long globalRef);
 
 	/**
-	 * Deletes a global reference.
+	 * Creates a new global reference to the specified object. This method is a simpler wrapper over the JNI {@code NewGlobalRef} function.
 	 *
-	 * @param globalRef the GlobalRef memory address.
+	 * @param obj the object
+	 *
+	 * @return the global reference memory address
+	 */
+	public static native long memGlobalRefNew(Object obj);
+
+	/**
+	 * Deletes a global reference. This method is a simpler wrapper over the JNI {@code DeleteGlobalRef} function.
+	 *
+	 * @param globalRef the memory address of the global reference to delete
 	 */
 	public static native void memGlobalRefDelete(long globalRef);
+
+	/**
+	 * Creates a new weak global reference to the specified object. This method is a simpler wrapper over the JNI {@code NewWeakGlobalRef} function.
+	 *
+	 * @param obj the object
+	 *
+	 * @return the weak global reference memory address
+	 */
+	public static native long memGlobalRefNewWeak(Object obj);
+
+	/**
+	 * Deletes a weak global reference. This method is a simpler wrapper over the JNI {@code DeleteWeakGlobalRef} function.
+	 *
+	 * @param globalRef the memory address of the weak global reference to delete
+	 */
+	public static native void memGlobalRefDeleteWeak(long globalRef);
 
 	// The standard C memset function
 	static native void nMemSet(long ptr, int value, long bytes);
