@@ -128,6 +128,8 @@ public class Struct(
 		println("import static org.lwjgl.system.Checks.*;")
 		println("import static org.lwjgl.system.MemoryUtil.*;\n")
 
+		preamble.printJava(this)
+
 		if ( documentation != null )
 			println(documentation)
 		println("public final class $className {\n")
@@ -393,7 +395,7 @@ public class Struct(
 		println("#include <jni.h>")
 		println("#include <stddef.h>")
 
-		nativePreamble.print(this)
+		preamble.printNative(this)
 
 		println()
 
