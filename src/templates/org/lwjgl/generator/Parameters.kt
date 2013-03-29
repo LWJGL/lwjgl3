@@ -389,11 +389,7 @@ public class Return(
 public val returnValue: Return = Return("", "")
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
-public class SingleValue(
-	val newName: String,
-	/** If specified, it will be used as the Java parameter type. */
-	val elementType: NativeType? = null
-): ParameterModifier() {
+public class SingleValue(val newName: String): ParameterModifier() {
 	class object {
 		val CLASS = javaClass<SingleValue>()
 	}
