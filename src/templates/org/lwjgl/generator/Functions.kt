@@ -54,6 +54,8 @@ public abstract class Function(
 			parameters.put(param.name, param)
 	}
 
+	protected val hasNativeParams: Boolean = getNativeParams().hasNext()
+
 	fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.values().iterator().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean): Parameter {
 		val params = getParams(predicate)
@@ -65,6 +67,8 @@ public abstract class Function(
 		return param
 	}
 	fun hasParam(predicate: (Parameter) -> Boolean): Boolean = getParams(predicate).hasNext()
+
+	fun getNativeParams(): Iterator<Parameter> = getParams { !it.has(virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
 	fun getReferenceParam(modifier: Class<out ReferenceModifier>, reference: String): Parameter? {
@@ -82,7 +86,7 @@ public abstract class Function(
 		if ( hasSpecialModifier() || returns.isBufferPointer || returns.hasSpecialModifier() )
 			return false
 
-		return parameters.values().find { it.isBufferPointer || it.hasSpecialModifier() || it.nativeType.mapping == PointerMapping.NAKED_POINTER } == null
+		return !getParams { it.isBufferPointer || it.hasSpecialModifier() || it.nativeType.mapping == PointerMapping.NAKED_POINTER }.hasNext()
 	}
 
 }
@@ -93,13 +97,11 @@ public fun NativeType.IN(name: String, javadoc: String, links: String = ""): Par
 public fun PointerType.OUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links)
 public fun PointerType.INOUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links)
 
-private fun <T> PrintWriter.printList(items: Map<*, T>, itemPrint: (item: T) -> String?): Unit = printList(items.values(), itemPrint)
-private fun <T> PrintWriter.printList(items: Iterable<T>, itemPrint: (item: T) -> String?) {
-	val iter = items.iterator()
-
+private fun <T> PrintWriter.printList(items: Map<*, T>, itemPrint: (item: T) -> String?): Unit = printList(items.values().iterator(), itemPrint)
+private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -> String?) {
 	var first = true
-	while ( iter.hasNext() ) {
-		val item = itemPrint(iter.next())
+	while ( items.hasNext() ) {
+		val item = itemPrint(items.next())
 		if ( item != null ) {
 			if ( !first )
 				print(", ")
@@ -138,7 +140,7 @@ public class NativeClassFunction(
 		get() = stripPostfix()
 
 	private fun stripPostfix(stripType: Boolean = false, stripUnsigned: Boolean = false): String {
-		if ( parameters.isEmpty() || has(keepPostfix) )
+		if ( !hasNativeParams || has(keepPostfix) )
 			return name
 
 		val param = parameters.values().last()
@@ -190,7 +192,7 @@ public class NativeClassFunction(
 			builder append '('
 
 			var first = true
-			parameters.values().filter { !(it has autoSizeResult) } forEach {
+			getParams { !(it has autoSizeResult) } forEach {
 				if ( first )
 					first = false
 				else
@@ -461,16 +463,17 @@ public class NativeClassFunction(
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
-		printList(parameters) {
+		printList(getNativeParams()) {
 			it.asNativeMethodParam
 		}
+
+		var hasNativeParams = this@NativeClassFunction.hasNativeParams
 		if ( returns.isStructValue ) {
-			if ( !parameters.isEmpty() ) print(", ")
+			if ( hasNativeParams ) print(", ") else hasNativeParams = true
 			print("long $RESULT")
 		}
 		if ( nativeClass.functionProvider != null ) {
-			if ( !parameters.isEmpty() )
-				print(", ")
+			if ( hasNativeParams ) print(", ")
 			print("long $FUNCTION_ADDRESS")
 		}
 		println(");\n")
@@ -533,12 +536,12 @@ public class NativeClassFunction(
 		generateCodeBeforeNative(code)
 
 		generateNativeMethodCall(code?.javaAfterNative != null) {
-			printList(parameters) {
+			printList(getNativeParams()) {
 				it.asNativeMethodCallParam(GenerationMode.NORMAL)
 			}
 
 			if ( returns.isStructValue ) {
-				if ( !parameters.isEmpty() ) print(", ")
+				if ( hasNativeParams ) print(", ")
 				print("memAddress($RESULT)")
 			}
 		}
@@ -639,8 +642,7 @@ public class NativeClassFunction(
 		print("n$name(")
 		printParams()
 		if ( nativeClass.functionProvider != null ) {
-			if ( !parameters.isEmpty() )
-				print(", ")
+			if ( hasNativeParams ) print(", ")
 			print("$FUNCTION_ADDRESS")
 		}
 		print(")")
@@ -1003,7 +1005,7 @@ public class NativeClassFunction(
 		generateCodeBeforeNative(code)
 
 		generateNativeMethodCall(code?.javaAfterNative != null) {
-			printList(parameters) {
+			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(GenerationMode.ALTERNATIVE))
 			}
 		}
@@ -1057,7 +1059,7 @@ public class NativeClassFunction(
 	fun generateFunctionDefinition(writer: PrintWriter): Unit = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
 		print("typedef ${returns.toNativeType} (APIENTRY *${name}PROC) (")
-		printList(parameters) {
+		printList(getNativeParams()) {
 			it.toNativeType
 		}
 		println(");")
@@ -1073,7 +1075,7 @@ public class NativeClassFunction(
 		print(name.asJNIName)
 		print("(")
 		print("JNIEnv *$JNIENV, jclass clazz")
-		parameters.values().forEach {
+		getNativeParams() forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
 		if ( nativeClass.functionProvider != null )
@@ -1084,7 +1086,7 @@ public class NativeClassFunction(
 
 		// Step 1: Cast addresses to pointers
 
-		parameters.values().iterator().filter { it.nativeType is PointerType }.forEach {
+		getNativeParams().filter { it.nativeType is PointerType }.forEach {
 			val pointerType = it.toNativeType
 			print("\t$pointerType")
 			if ( !pointerType.endsWith('*') ) print(' ')
@@ -1107,7 +1109,7 @@ public class NativeClassFunction(
 				print("(intptr_t)")
 		}
 		print("$name(")
-		printList(parameters) {
+		printList(getNativeParams()) {
 			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
 			if ( it.nativeType.mapping == PrimitiveMapping.PTR )
 				"(${it.nativeType.name})${it.name}"
