@@ -195,7 +195,7 @@ public fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
 // General
 
 /** Marks the function parameter or return value as const. */
-public class Const internal(): QualifiedTypeModifier() {
+public val const: QualifiedTypeModifier = object : QualifiedTypeModifier() {
 	override val isSpecial: Boolean = false
 	override fun validate(qtype: QualifiedType) {
 		if ( qtype.nativeType !is PointerType )
@@ -205,9 +205,12 @@ public class Const internal(): QualifiedTypeModifier() {
 			throw IllegalArgumentException("The const modifier can only be applied on input parameters.")
 	}
 }
-public val const: Const = Const()
 
 // Parameter
+
+public val virtual: ParameterModifier = object : ParameterModifier() {
+	override val isSpecial: Boolean = false
+}
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 public class AutoSize(reference: String, vararg val dependent: String): ReferenceModifier(reference) {
