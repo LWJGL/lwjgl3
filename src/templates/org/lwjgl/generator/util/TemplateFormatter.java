@@ -256,7 +256,7 @@ public class TemplateFormatter {
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
 		// This is a little funny because we can have whitespace on either side of *
-		"(?:const\\s+)?(?:unsigned\\s+)?[0-9a-zA-Z_]+(?:(?:\\s*[*]+\\s*)|\\s+)[0-9a-zA-Z_]+"
+		"(?:const\\s+)?(?:unsigned\\s+)?[0-9a-zA-Z_]+(?:(?:\\s*[*]+\\s*)|\\s+)(?:/[*]\\s*)?[0-9a-zA-Z_]+(?:\\s*[*]/)?"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
@@ -266,7 +266,7 @@ public class TemplateFormatter {
 
 	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
-		"(const\\s+)?((?:unsigned\\s+)?[0-9a-zA-Z_]+)\\s*([*]+)?\\s*([0-9a-zA-Z_]+)",
+		"(const\\s+)?((?:unsigned\\s+)?[0-9a-zA-Z_]+)\\s*([*]+)?\\s*(?:/[*]\\s*)?([0-9a-zA-Z_]+)(?:\\s*[*]/)?",
 		Pattern.MULTILINE
 	);
 
