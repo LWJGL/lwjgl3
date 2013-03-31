@@ -95,7 +95,7 @@ public class ALCDemo {
 		checkALError();
 
 		// load wave data from buffer
-		WaveData wavefile = WaveData.create("footsteps.wav");
+		WaveData wavefile = WaveData.create("demo/footsteps.wav");
 
 		try {
 			//copy to buffer

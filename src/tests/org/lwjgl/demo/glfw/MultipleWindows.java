@@ -1,13 +1,19 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.Sys;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
+import org.lwjgl.system.windows.GLFWWin32;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.glfw.GLFW.*;
+import static org.lwjgl.system.windows.GLFWWin32.*;
+import static org.lwjgl.system.windows.WinGDI.*;
+import static org.lwjgl.system.windows.WinUser.*;
 
 public class MultipleWindows {
 
@@ -33,6 +39,7 @@ public class MultipleWindows {
 		glfwWindowHint(GLFW_VISIBLE, 0);
 
 		long[] windows = new long[4];
+		GLContext[] contexts = new GLContext[4];
 
 		final AtomicInteger latch = new AtomicInteger(windows.length);
 
@@ -59,6 +66,12 @@ public class MultipleWindows {
 
 			windows[i] = window;
 
+			long HWND = glfwGetWin32Window(window);
+			long HDC = GetDC(HWND);
+			contexts[i] = DemoUtil.initializeOpenGLContext(HDC);
+
+			glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);
+
 			glfwSetWindowPos(window, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
 			glfwShowWindow(window);
 		}
@@ -70,10 +83,29 @@ public class MultipleWindows {
 				if ( windows[i] == 0L )
 					continue;
 
+				long HWND = glfwGetWin32Window(windows[i]);
+				long HDC = GetDC(HWND);
+				contexts[i].makeCurrent();
+
+				glClear(GL_COLOR_BUFFER_BIT);
+				SwapBuffers(HDC);
+
 				if ( glfwWindowShouldClose(windows[i]) != 0 ) {
+					contexts[i].destroy();
+					contexts[i] = null;
+
 					glfwDestroyWindow(windows[i]);
+					windows[i] = 0L;
+
 					latch.decrementAndGet();
 				}
+			}
+		}
+
+		for ( int i = 0; i < 4; i++ ) {
+			if ( contexts[i] != null ) {
+				contexts[i].destroy();
+				glfwDestroyWindow(windows[i]);
 			}
 		}
 	}

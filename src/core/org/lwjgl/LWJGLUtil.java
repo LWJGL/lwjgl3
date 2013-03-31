@@ -541,7 +541,7 @@ public final class LWJGLUtil {
 	 */
 	public static Map<Integer, String> getClassTokens(TokenFilter filter, Map<Integer, String> target, Iterable<Class> tokenClasses) {
 		if ( target == null )
-			target = new HashMap<Integer, String>();
+			target = new HashMap<Integer, String>(64);
 
 		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 
