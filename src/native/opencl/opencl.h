@@ -54,5 +54,17 @@ typedef void (CL_CALLBACK * cl_mem_object_destructor_callback)(cl_mem memobj, vo
 typedef void (CL_CALLBACK * cl_event_callback)(cl_event event, cl_int event_command_exec_status, void *user_data);
 typedef void (CL_CALLBACK * cl_printf_callback)(cl_context context, cl_uint printf_data_len, char *printf_data_ptr, void *user_data);
 
+// Extension struct typedefs
+
+typedef union {
+    struct { cl_uint type; cl_uint data[5]; } raw;
+    struct { cl_uint type; cl_char unused[17]; cl_char bus; cl_char device; cl_char function; } pcie;
+} cl_device_topology_amd;
+
+typedef struct {
+	cl_ulong surface_bus_address;
+	cl_ulong marker_bus_address;
+} cl_bus_address_amd;
+
 #endif  /* __OPENCL_H   */
 

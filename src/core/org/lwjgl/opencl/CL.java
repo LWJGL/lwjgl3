@@ -187,16 +187,16 @@ public final class CL {
 		// Detect OpenGL interop
 		boolean interopGL = supportedExtensions.contains("cl_khr_gl_sharing") || supportedExtensions.contains("cl_apple_gl_sharing");
 
-		supportedExtensions.add("opencl10");
+		supportedExtensions.add("OpenCL10");
 		if ( interopGL )
-			supportedExtensions.add("opencl10gl");
+			supportedExtensions.add("OpenCL10GL");
 
 		// Detect post-1.0 functionality
-		if ( 1 < majorVersion || 1 <= minorVersion ) supportedExtensions.add("opencl11");
+		if ( 1 < majorVersion || 1 <= minorVersion ) supportedExtensions.add("OpenCL11");
 		if ( 1 < majorVersion || 2 <= minorVersion ) {
-			supportedExtensions.add("opencl12");
+			supportedExtensions.add("OpenCL12");
 			if ( interopGL )
-				supportedExtensions.add("opencl12gl");
+				supportedExtensions.add("OpenCL12GL");
 		}
 	}
 

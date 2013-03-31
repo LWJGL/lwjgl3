@@ -7,12 +7,12 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_icd() = "KHRIcd".nativeClassCL("khr_icd", "KHR") {
+fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", "KHR") {
 	nativeImport (
-		"opencl.h"
+		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_khr_icd.txt", templateName)} extension.")
+	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)} extension.")
 
 	IntConstant.block(
 		"Accepted as {@code param_name} to the function clGetPlatformInfo.",

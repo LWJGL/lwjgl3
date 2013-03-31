@@ -153,12 +153,39 @@ val cl_image_desc = StructType(
 	}
 )
 
+val cl_bus_address_amd = StructType(
+	name = "cl_bus_address_amd",
+	includesPointer = false,
+	definition = struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
+		javaDoc("Used in {@link AMDBusAddressableMemory#clEnqueueMakeBuffersResidentAMD}.")
+		nativeImport("OpenCL.h")
+		cl_ulong.member("surface_bus_address")
+		cl_ulong.member("marker_bus_address")
+	}
+)
+
 fun config() {
 	struct(OPENCL_PACKAGE, "cl_buffer_region") {
 		javaDoc("Buffer region struct.")
 		nativeImport("OpenCL.h")
 		size_t.member("origin")
 		size_t.member("size")
+	}
+
+	struct(OPENCL_PACKAGE, "cl_device_topology_amd") {
+		javaDoc("The struct returned by {@link CL10#clGetDeviceInfo} with {@code param_name} set to {@link AMDDeviceTopology#CL_DEVICE_TOPOLOGY_AMD}.")
+		nativeImport("OpenCL.h")
+		struct {
+			cl_uint.member("type")
+			cl_uint.member("data", size = 5)
+		}.member("raw")
+		struct {
+			cl_uint.member("type")
+			cl_char.member("unused", size = 17)
+			cl_char.member("bus")
+			cl_char.member("device")
+			cl_char.member("function")
+		}.member("pcie")
 	}
 }
 
