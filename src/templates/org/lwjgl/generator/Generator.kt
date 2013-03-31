@@ -86,7 +86,8 @@ private fun generate(packageName: String) {
 		if ( !(nativeClass.packageName equals packageName) )
 			throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
-		generate(nativeClass, max(packageLastModified, GENERATOR_LAST_MODIFIED))
+		if ( nativeClass.hasBody )
+			generate(nativeClass, max(packageLastModified, GENERATOR_LAST_MODIFIED))
 	}
 }
 
