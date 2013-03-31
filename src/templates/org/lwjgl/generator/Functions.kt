@@ -33,6 +33,7 @@ val RESULT = "__result"
 val POINTER_POSTFIX = "Address"
 val BUFFERS_POSTFIX = "Buffers"
 val LENGTHS_POSTFIX = "Lengths"
+val MAP_LENGTH = "length"
 val FUNCTION_ADDRESS = "__functionAddress"
 
 private val API_BUFFER = "__buffer"
@@ -1337,14 +1338,14 @@ private class SingleValueTransform(
 
 private val MapPointerTransform = object : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String): String = """int length = ${param.get(MapPointer.CLASS).sizeExpression};
-		return __result == memAddress0(old_buffer) && old_buffer.capacity() == length ? old_buffer : memByteBuffer(__result, length);"""
+	override fun transformCall(param: ReturnValue, original: String): String = """int $MAP_LENGTH = ${param.get(MapPointer.CLASS).sizeExpression};
+		return old_buffer != null && __result == memAddress0(old_buffer) && old_buffer.capacity() == $MAP_LENGTH ? old_buffer : memByteBuffer(__result, $MAP_LENGTH);"""
 }
 
 private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"__result == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer(__result, $lengthParam)"
+		"old_buffer != null && __result == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer(__result, $lengthParam)"
 }
 
 private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform, SkipCheckFunctionTransform {
