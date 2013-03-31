@@ -14,9 +14,9 @@ private val NativeClass.capName: String
 		if ( prefix == "CL" )
 			"OpenCL${templateName.substring(2)}"
 		else
-			templateName
+			templateName.toLowerCase()
 	} else {
-		"${prefixTemplate}_$templateName"
+		"${prefixTemplate}_$templateName".toLowerCase()
 	}
 
 public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
@@ -45,7 +45,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		println("\t}")
 
 		val functions = nativeClass.functions
-		val capName = nativeClass.capName.toLowerCase()
+		val capName = nativeClass.capName
 		val isExtension = !nativeClass.templateName.startsWith("CL")
 
 		println("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long platform" else ""}) {")
@@ -108,9 +108,8 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 				return if ( isCL1 xor isCL2 )
 					(if ( isCL1 ) -1 else 1)
 				else
-					o1.className.compareTo(o2.className)
+					o1.templateName.compareTo(o2.templateName)
 			}
-			public override fun equals(obj: Any?): Boolean = false
 		})
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
@@ -130,7 +129,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 	public final int minorVersion;
 """)
 
-		println("\n\t/** Indicates whether an OpenCL functionality is available or not. */")
+		println("\t/** Indicates whether an OpenCL functionality is available or not. */")
 		println("\tpublic final boolean")
 		for ( i in classes.indices ) {
 			print("\t\t${classes[i].capName}")
@@ -149,7 +148,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 			if ( extension.hasNativeFunctions ) {
 				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider${if ( extension.templateName.startsWith("CL") ) "" else ", platform"})) != null;")
 			} else
-				println("\t\t$capName = ext.contains(\"${capName.toLowerCase()}\");")
+				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")
 
@@ -161,11 +160,10 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 """)
 		for ( extension in classes ) {
 			val capName = extension.capName
-			val extName = capName.toLowerCase()
 			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ext.contains(\"$extName\") ? caps.__${extension.className} : null) != null;")
+				println("\t\t$capName = (__${extension.className} = ext.contains(\"$capName\") ? caps.__${extension.className} : null) != null;")
 			} else
-				println("\t\t$capName = ext.contains(\"$extName\");")
+				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
 		println("\t}")
 
@@ -181,7 +179,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 				continue
 
 			val capName = extension.capName
-			println("\t\tif ( $capName ) buf.append(\"${capName.toLowerCase()} \");")
+			println("\t\tif ( $capName ) buf.append(\"$capName \");")
 		}
 		println("""
 		return buf.toString();
@@ -196,5 +194,5 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-public fun String.nativeClassCL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+public fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
 	nativeClass("org.lwjgl.opencl", templateName, "", "CL", "CL", postfix, FunctionProviderCL, init)

@@ -82,7 +82,7 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 				return if ( isAL1 xor isAL2 )
 					(if ( isAL1 ) -1 else 1)
 				else
-					o1.className.compareTo(o2.className)
+					o1.templateName.compareTo(o2.templateName)
 			}
 			public override fun equals(obj: Any?): Boolean = false
 		})
@@ -134,5 +134,5 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-public fun String.nativeClassAL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+public fun String.nativeClassAL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
 	nativeClass("org.lwjgl.openal", templateName, "", "AL", "AL", postfix, FunctionProviderAL, init)

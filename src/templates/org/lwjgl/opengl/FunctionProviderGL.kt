@@ -115,7 +115,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 				return if ( isGL1 xor isGL2 )
 					(if ( isGL1 ) -1 else 1)
 				else
-					o1.className.compareTo(o2.className)
+					o1.templateName.compareTo(o2.templateName)
 			}
 			public override fun equals(obj: Any?): Boolean = false
 		})
@@ -154,8 +154,8 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-public fun String.nativeClassGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+public fun String.nativeClassGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
 	nativeClass("org.lwjgl.opengl", templateName, "", "GL", "GL", postfix, FunctionProviderGL, init)
 
-public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: NativeClass.() -> Unit): NativeClass =
+public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
 	nativeClass("org.lwjgl.opengl", templateName, "wgl", "WGL", "WGL", postfix, FunctionProviderGL, init)
