@@ -36,5 +36,5 @@ typedef cl_uint     cl_gl_platform_info;
 typedef struct __GLsync *cl_GLsync;
 
 typedef cl_uint     cl_gl_context_info;
-    
+
 #endif  /* __OPENCL_CL_GL_H */
