@@ -12,6 +12,7 @@ import java.util.Comparator
 import java.util.HashMap
 
 public val INSTANCE: String = "__instance"
+public val EXT_FLAG: String = ""
 
 public abstract class FunctionProvider {
 
@@ -19,8 +20,7 @@ public abstract class FunctionProvider {
 
 	protected fun getClasses(
 		comparator: Comparator<NativeClass> = object : Comparator<NativeClass> {
-			public override fun compare(o1: NativeClass, o2: NativeClass): Int = o1.className.compareTo(o2.className)
-			public override fun equals(obj: Any?): Boolean = false
+			public override fun compare(o1: NativeClass, o2: NativeClass): Int = o1.templateName.compareTo(o2.templateName)
 		}
 	): List<NativeClass> {
 		val classes = ArrayList<NativeClass>(_classes)
@@ -90,6 +90,9 @@ public class NativeClass(
 	private val _functions = ArrayList<NativeClassFunction>()
 	public val functions: List<NativeClassFunction>
 		get() = _functions
+
+	val hasBody: Boolean
+		get() = !constantBlocks.isEmpty() || hasNativeFunctions
 
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty() // TODO: Check for 100% alternate without native or reuse
@@ -257,10 +260,11 @@ public fun String.nativeClass(
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
-	init: NativeClass.() -> Unit
+	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
 	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixTemplate, postfix, functionProvider)
-	ext.init()
+	if ( init != null )
+		ext.init()
 
 	if ( functionProvider != null )
 		functionProvider.addCapabilities(ext)
