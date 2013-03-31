@@ -70,6 +70,8 @@ class StructMemberCharArray(
 	val nullTerminated: Boolean
 ): StructMemberArray(nativeType, nativeName, name, size)
 
+private val ANONYMOUS = "*"
+
 public class Struct(
 	packageName: String,
 	className: String,
@@ -134,7 +136,7 @@ public class Struct(
 
 		if ( documentation != null )
 			println(documentation)
-		println("public final class $className {\n")
+		println("public final class $className {")
 
 		print("""
 	/** The struct size in bytes. */
@@ -222,28 +224,34 @@ public class Struct(
 	private fun PrintWriter.generateOffsetInit(
 		members: List<StructMember>,
 		indentation: String = "\t\t",
-		parentStruct: String = "",
-		parentField: String = ""
-	) {
+		parentStruct: StructMember? = null,
+		parentField: String = "",
+	    offset: Int = 0
+	): Int {
+		val parentPrefix = if ( parentStruct == null ) "" else {
+			val nested = (parentStruct.nativeType as StructType).definition
+			if ( packageName.equals(nested.packageName) && !nested.className.equals(parentField) )
+				nested.className
+			else
+				nested.packageName + "." + nested.className
+		}
+
+		var index = offset
 		for ( i in 0..members.lastIndex ) {
 			val member = members[i]
 			val field = member.offsetField(parentField)
 
-			if ( parentStruct.isEmpty() )
-				println("$indentation$field = offsets.get($i);")
-			else
-				println("$indentation$field = $parentField + $parentStruct.${member.offsetField};")
+			if ( parentStruct == null || parentStruct.nativeType.name identityEquals ANONYMOUS ) {
+				println("$indentation$field = offsets.get($index);")
+				index++
+			} else
+				println("$indentation$field = $parentField + $parentPrefix.${member.offsetField};")
 
 			// Output nested fields
-			if ( member.nativeType is StructType ) {
-				val nested = member.nativeType.definition
-				val nestedStruct = if ( packageName.equals(nested.packageName) && !nested.className.equals(field) )
-					nested.className
-				else
-					nested.packageName + "." + nested.className
-				generateOffsetInit(nested.members, "$indentation\t", nestedStruct, field)
-			}
+			if ( member.nativeType is StructType )
+				index = generateOffsetInit(member.nativeType.definition.members, "$indentation\t", member, field, index) // recursion
 		}
+		return index
 	}
 
 	enum class ConstructorMode {
@@ -282,6 +290,7 @@ public class Struct(
 
 			if ( it.nativeType is StructType ) {
 				generateConstructorArguments(it.nativeType.definition.members, method, mode, firstParam)
+				firstParam = false
 			} else {
 				if ( firstParam )
 					firstParam = false
@@ -355,7 +364,8 @@ public class Struct(
 			val method = it.method(parentMember)
 
 			if ( it.nativeType is StructType ) {
-				generateConstructorArguments(it.nativeType.definition.members, method, mode, firstParam)
+				generateAlternativeConstructorArguments(it.nativeType.definition.members, method, mode, firstParam)
+				firstParam = false
 			} else {
 				if ( firstParam )
 					firstParam = false
@@ -404,7 +414,7 @@ public class Struct(
 			val method = it.method(parentMember)
 
 			if ( it.nativeType is StructType ) {
-				generateConstructorSetters(it.nativeType.definition.members, method)
+				generateAlternativeConstructorSetters(it.nativeType.definition.members, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 				println("\t\t${method}Set(struct, $param);")
@@ -613,11 +623,28 @@ public class Struct(
 
 		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
-		for ( i in 0..members.lastIndex ) {
-			println("\tbuffer[$i] = (jint)(offsetof($className, ${members[i].nativeName}));")
-		}
+
+		generateNativeMembers(members)
+
 		println("\n\treturn sizeof($className);")
 		print("}")
+	}
+
+	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
+		var index = offset
+		for ( i in 0..members.lastIndex ) {
+			println("\tbuffer[$index] = (jint)(offsetof($className, $prefix${members[i].nativeName}));")
+			index++
+
+			if ( members[i].nativeType is StructType ) {
+				// Output anonymous inner structs
+				val structType = members[i].nativeType as StructType
+				if ( structType.name identityEquals ANONYMOUS )
+					index = generateNativeMembers(structType.definition.members, index, prefix = "${members[i].nativeName}." ) // recursion
+			}
+		}
+
+		return index
 	}
 
 }
@@ -627,4 +654,11 @@ public fun struct(packageName: String, className: String, nativeSubPath: String 
 	struct.init()
 	StructRegistry add struct
 	return struct
+}
+
+/** Anonymous member struct definition. Mostly useful for union of structs. */
+public fun Struct.struct(init: Struct.() -> Unit): StructType {
+	val struct = Struct(ANONYMOUS, ANONYMOUS)
+	struct.init()
+	return StructType(ANONYMOUS, definition = struct)
 }
