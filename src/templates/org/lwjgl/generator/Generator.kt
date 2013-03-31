@@ -50,7 +50,7 @@ fun main(args: Array<String>) {
 	// all top-level functions/properties in that package. Example:
 	// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 	generate("org.lwjgl.openal")
-	//generate("org.lwjgl.opencl")
+	generate("org.lwjgl.opencl")
 	generate("org.lwjgl.opengl")
 	generate("org.lwjgl.system.windows")
 	generate("org.lwjgl.system.glfw")
@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
 	// Generate capabilities
 	generateOutput(org.lwjgl.openal.FunctionProviderALC, File("generated/java/org/lwjgl/openal/ALCCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.openal.FunctionProviderAL, File("generated/java/org/lwjgl/openal/ALCapabilities.java")) { generateCapabilities(it) }
-	//generateOutput(org.lwjgl.opencl.FunctionProviderCLPlatform, File("generated/java/org/lwjgl/opencl/CLPlatformCapabilities.java")) { generateCapabilities(it) }
+	generateOutput(org.lwjgl.opencl.FunctionProviderCL, File("generated/java/org/lwjgl/opencl/CLCapabilities.java")) { generateCapabilities(it) }
 	generateOutput(org.lwjgl.opengl.FunctionProviderGL, File("generated/java/org/lwjgl/opengl/ContextCapabilities.java")) { generateCapabilities(it) }
 
 	// Generate structs. These are auto-registered during the process above.

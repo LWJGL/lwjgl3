@@ -18,6 +18,8 @@ public abstract class GLContext {
 		return capabilities;
 	}
 
+	public abstract long getHandle();
+
 	public void makeCurrent() {
 		makeCurrentImpl();
 		GL.setCurrent(this);

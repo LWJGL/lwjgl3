@@ -29,7 +29,7 @@
 			<arg value="/I..\..\${src.native}\system\glfw"/>
 			<arg value="/I..\..\${src.native}\system\windows"/>
 			<arg value="/I..\..\${src.native}\openal"/>
-			<!--<arg value="/I..\..\${src.native}\opencl"/>-->
+			<arg value="/I..\..\${src.native}\opencl"/>
 			<arg value="/I..\..\${src.native}\opengl"/>
 			<arg value="/I..\..\${src.native}\opengl\wgl"/>
 			<srcfile/>
@@ -37,12 +37,13 @@
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
+			<fileset dir="${src.native}/opencl" includes="*.c"/>
+			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
 			<fileset dir="${src.generated}/system/glfw" includes="*.c"/>
 			<fileset dir="${src.generated}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated}/openal" includes="*.c"/>
-			<!--<fileset dir="${src.generated}/opencl" includes="*.c"/>-->
-			<fileset dir="${src.native}/opengl" includes="*.c"/>
+			<fileset dir="${src.generated}/opencl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>
 			<mapper type="glob" from="*.c" to="*.obj"/>
