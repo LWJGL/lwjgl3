@@ -150,35 +150,63 @@ public class APIBuffer {
 	}
 
 	/** Sets a boolean value at the specified offset. */
-	public void booleanValue(int offset, boolean value) { buffer.put(offset, value ? (byte)1 : (byte)0); }
+	public APIBuffer booleanValue(int offset, boolean value) {
+		buffer.put(offset, value ? (byte)1 : (byte)0);
+		return this;
+	}
 
 	/** Sets a byte value at the specified offset. */
-	public void byteValue(int offset, byte value) { buffer.put(offset, value); }
+	public APIBuffer byteValue(int offset, byte value) {
+		buffer.put(offset, value);
+		return this;
+	}
 
 	/** Sets a short value at the specified offset. */
-	public void shortValue(int offset, short value) { buffer.putShort(offset, value); }
+	public APIBuffer shortValue(int offset, short value) {
+		buffer.putShort(offset, value);
+		return this;
+	}
 
 	/** Sets an int value at the specified offset. */
-	public void intValue(int offset, int value) { buffer.putInt(offset, value); }
+	public APIBuffer intValue(int offset, int value) {
+		buffer.putInt(offset, value);
+		return this;
+	}
 
 	/** Sets a long value at the specified offset. */
-	public void longValue(int offset, long value) { buffer.putLong(offset, value); }
+	public APIBuffer longValue(int offset, long value) {
+		buffer.putLong(offset, value);
+		return this;
+	}
 
 	/** Sets a float value at the specified offset. */
-	public void floatValue(int offset, float value) { buffer.putFloat(offset, value); }
+	public APIBuffer floatValue(int offset, float value) {
+		buffer.putFloat(offset, value);
+		return this;
+	}
 
 	/** Sets a double value at the specified offset. */
-	public void doubleValue(int offset, double value) { buffer.putDouble(offset, value); }
+	public APIBuffer doubleValue(int offset, double value) {
+		buffer.putDouble(offset, value);
+		return this;
+	}
 
 	/** Sets a pointer value at the specified offset. */
-	public void pointerValue(int offset, long value) { PointerBuffer.put(buffer, offset, value); }
+	public APIBuffer pointerValue(int offset, long value) {
+		PointerBuffer.put(buffer, offset, value);
+		return this;
+	}
 
 	/** Sets a pointer value at the specified offset. */
-	public void pointerValue(int offset, PointerWrapper value) { pointerValue(offset, value.getPointer()); }
+	public APIBuffer pointerValue(int offset, PointerWrapper value) {
+		pointerValue(offset, value.getPointer());
+		return this;
+	}
 
 	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
-	public void pointerValue(int offset, int index, long value) {
+	public APIBuffer pointerValue(int offset, int index, long value) {
 		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
+		return this;
 	}
 
 }
