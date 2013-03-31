@@ -155,7 +155,7 @@ public class Struct(
 
 		print("""
 	static {
-		IntBuffer offsets = BufferUtils.createIntBuffer(${members.size});
+		IntBuffer offsets = BufferUtils.createIntBuffer(${getMemberCount(members)});
 
 		SIZEOF = offsets(memAddress(offsets));
 
@@ -219,6 +219,15 @@ public class Struct(
 			if ( member.nativeType is StructType )
 				generateOffsetFields(member.nativeType.definition.members, "$indentation\t", field, parentLastMember && lastMember)
 		}
+	}
+
+	private fun getMemberCount(members: List<StructMember>): Int {
+		var count = members.size
+		for ( member in members ) {
+			if ( member.nativeType.name identityEquals ANONYMOUS )
+				count += getMemberCount((member.nativeType as StructType).definition.members) // recursion
+		}
+		return count
 	}
 
 	private fun PrintWriter.generateOffsetInit(
