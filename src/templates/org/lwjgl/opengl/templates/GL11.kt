@@ -3167,7 +3167,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER
+			PIXEL_UNPACK_BUFFER,
+		    nullable
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
 
@@ -3185,7 +3186,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			const,
 		    MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    PIXEL_UNPACK_BUFFER
+		    PIXEL_UNPACK_BUFFER,
+		    nullable
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
 
