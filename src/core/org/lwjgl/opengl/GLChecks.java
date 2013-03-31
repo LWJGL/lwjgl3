@@ -9,7 +9,10 @@ import org.lwjgl.LWJGLUtil;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL11.glGetInteger;
 import static org.lwjgl.opengl.GL15.*;
+import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL40.*;
+import static org.lwjgl.opengl.GL43.*;
 
 final class GLChecks {
 
@@ -29,6 +32,14 @@ final class GLChecks {
 				return "array";
 			case GL_ELEMENT_ARRAY_BUFFER_BINDING:
 				return "element array";
+			case GL_PIXEL_PACK_BUFFER_BINDING:
+				return "pixel pack";
+			case GL_PIXEL_UNPACK_BUFFER_BINDING:
+				return "pixel unpack";
+			case GL_DRAW_INDIRECT_BUFFER_BINDING:
+				return "draw indirect";
+			case GL_DISPATCH_INDIRECT_BUFFER_BINDING:
+				return "dispatch indirect";
 			default:
 				// TODO: Add more?
 				throw new IllegalArgumentException(LWJGLUtil.toHexString(binding));
