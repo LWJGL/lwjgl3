@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Template Formatter" type="Application" factoryName="Application">
+  <configuration default="false" name="Template Formatter" type="Application" factoryName="Application" singleton="true">
     <option name="MAIN_CLASS_NAME" value="org.lwjgl.generator.util.TemplateFormatter" />
     <option name="VM_PARAMETERS" value="" />
     <option name="PROGRAM_PARAMETERS" value="" />
