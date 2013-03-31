@@ -22,7 +22,7 @@ public final class CLUtil {
 		public boolean accept(Field field, int value) {
 			return value < 0; // Currently, all OpenCL errors have negative values.
 		}
-	}, null, CL10.class, CL11.class, CL12.class, KHRGLSharing.class, KHRIcd.class, APPLEGLSharing.class/*, EXTDeviceFission.class*/);
+	}, null, CL10.class, CL11.class, CL12.class, KHRGLSharing.class, KHRICD.class, APPLEGLSharing.class/*, EXTDeviceFission.class*/);
 
 	private CLUtil() {}
 

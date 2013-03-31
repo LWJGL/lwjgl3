@@ -118,12 +118,13 @@ public final class DemoUtil {
 
 	public static GLContext initializeOpenGLContext(long HDC) {
 		ByteBuffer pfdOut = PIXELFORMATDESCRIPTOR.malloc();
+
 		int pixelFormat = findPixelFormatLegacy(HDC, pfdOut);
 		pixelFormat = findPixelFormatARB(pixelFormat, pfdOut);
+
 		SetPixelFormat(HDC, pixelFormat, pfdOut);
-		GLContext context = WindowsGLContext.create(HDC);
-		System.out.println("context: " + context + " for HDC: " + HDC);
-		return context;
+
+		return WindowsGLContext.create(HDC);
 	}
 
 	public static void pause(long pause) {

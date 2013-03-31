@@ -45,7 +45,6 @@ import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.concurrent.BrokenBarrierException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
@@ -127,7 +126,8 @@ public class CLGLInteropDemo {
 
 	private final CLPlatform platform;
 
-	private final long window;
+	private final GLFWWindow window;
+
 	private final long HDC;
 
 	private final GLContext context;
@@ -173,8 +173,8 @@ public class CLGLInteropDemo {
 	private int slices;
 
 	private boolean drawSeparator;
-	private boolean doublePrecision = true;
-	private boolean buffersInitialized;
+	private boolean doublePrecision   = true;
+	private boolean shouldInitBuffers = true;
 	private boolean rebuild;
 
 	private boolean run = true;
@@ -191,12 +191,12 @@ public class CLGLInteropDemo {
 	//private GLSync  glSync;
 	private CLEvent glEvent;
 
-	public CLGLInteropDemo(CLPlatform platform, long window, boolean forceCPU) {
+	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, boolean forceCPU) {
 		this.platform = platform;
 
 		this.window = window;
 
-		long HWND = glfwGetWin32Window(window);
+		long HWND = glfwGetWin32Window(window.handle);
 		HDC = GetDC(HWND);
 
 		context = DemoUtil.initializeOpenGLContext(HDC);
@@ -224,7 +224,7 @@ public class CLGLInteropDemo {
 			Filter<CLDevice> glSharingFilter = new Filter<CLDevice>() {
 				public boolean accept(CLDevice device) {
 					CLCapabilities caps = device.getCapabilities();
-					return caps.CL_khr_gl_sharing;
+					return caps.cl_khr_gl_sharing;
 				}
 			};
 			//int device_type = params.contains("forceCPU") ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
@@ -299,8 +299,6 @@ public class CLGLInteropDemo {
 				System.out.println("OpenCL Device Type: GPU (Use -forceCPU to use CPU)");
 			else
 				System.out.println("OpenCL Device Type: CPU");
-			for ( int i = 0; i < devices.size(); i++ )
-				System.out.println("OpenCL Device #" + (i + 1) + " supports KHR_gl_event = " + devices.get(i).getCapabilities().CL_khr_gl_sharing);
 
 			System.out.println("\nMax Iterations: " + maxIterations + " (Use -iterations <count> to change)");
 			System.out.println("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
@@ -318,7 +316,6 @@ public class CLGLInteropDemo {
 				System.out.println("Rendering method: DrawPixels");
 			}
 
-			System.out.println(5);
 			buildPrograms();
 
 			// Detect GLtoCL synchronization method
@@ -393,8 +390,6 @@ public class CLGLInteropDemo {
 				glUseProgram(program);
 				glUniform1i(glGetUniformLocation(program, "mandelbrot"), 0);
 			}
-
-			System.out.println("");
 		} catch (Exception e) {
 			// TODO: cleanup
 			throw new RuntimeException(e);
@@ -429,13 +424,23 @@ public class CLGLInteropDemo {
 
 		CL.create();
 
+		// Skip Intel in case there's a platform with a discrete GPU available.
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
-				// TODO: rename to cl_khr_gl_sharing
-				return platform.getCapabilities().CL_khr_gl_sharing && !platform.getInfoString(CL_PLATFORM_NAME).startsWith("Intel");
+				return platform.getCapabilities().cl_khr_gl_sharing && !platform.getInfoString(CL_PLATFORM_VENDOR).startsWith("Intel");
 			}
 		});
+
+		if ( platforms.isEmpty() ) {
+			// Nope, try Intel.
+			platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
+				@Override
+				public boolean accept(CLPlatform platform) {
+					return platform.getCapabilities().cl_khr_gl_sharing;
+				}
+			});
+		}
 
 		if ( platforms.isEmpty() )
 			throw new IllegalStateException("No OpenCL platforms found that support KHR_gl_sharing.");
@@ -449,7 +454,7 @@ public class CLGLInteropDemo {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 
 		Thread[] threads = new Thread[platforms.size() * 2];
-		long[] windows = new long[threads.length];
+		GLFWWindow[] windows = new GLFWWindow[threads.length];
 
 		final CountDownLatch latch = new CountDownLatch(windows.length);
 		final CyclicBarrier barrier = new CyclicBarrier(windows.length + 1);
@@ -457,8 +462,11 @@ public class CLGLInteropDemo {
 		for ( int i = 0; i < threads.length; i++ ) {
 			final CLPlatform platform = platforms.get(0);
 
-			final long window = glfwCreateWindow(width, height, platform.getInfoString(CL_PLATFORM_NAME), 0L, 0L);
-			glfwSetWindowPos(window, 200 + width * i + 10 * i, 200);
+			final GLFWWindow window = new GLFWWindow(
+				glfwCreateWindow(width, height, platform.getInfoString(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU"), 0L, 0L),
+				new CountDownLatch(1)
+			);
+			glfwSetWindowPos(window.handle, 200 + width * i + 32 * i, 200);
 
 			final int index = i;
 			windows[i] = window;
@@ -493,17 +501,22 @@ public class CLGLInteropDemo {
 		}
 
 		for ( int i = 0; i < windows.length; i++ )
-			glfwShowWindow(windows[i]);
+			glfwShowWindow(windows[i].handle);
 
 		System.out.println("GAME ON!");
 
 		while ( latch.getCount() != 0 ) {
 			glfwPollEvents();
+
+			for ( int i = 0; i < windows.length; i++ ) {
+				if ( windows[i] != null && windows[i].signal.getCount() == 0 ) {
+					glfwDestroyWindow(windows[i].handle);
+					windows[i] = null;
+				}
+			}
+
 			DemoUtil.pause(16);
 		}
-
-		for ( int i = 0; i < windows.length; i++ )
-			glfwDestroyWindow(windows[i]);
 
 		CL.destroy();
 		System.out.println("GAME OVER!");
@@ -580,9 +593,9 @@ public class CLGLInteropDemo {
 				//cl_khr_fp64
 				options.append(" -D DOUBLE_FP");
 
-				//amd's verson of double precision floating point math
-				//if ( !caps.CL_KHR_fp64 && caps.CL_AMD_fp64 )
-				//options.append(" -D AMD_FP");
+				// AMD's verson of double precision floating point math
+				if ( !caps.cl_khr_fp64 && caps.cl_amd_fp64 )
+					options.append(" -D AMD_FP");
 			}
 
 			System.out.println("\nOpenCL COMPILER OPTIONS: " + options);
@@ -627,7 +640,6 @@ public class CLGLInteropDemo {
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-				System.out.println("clContext.getCapabilities() = " + clContext.getCapabilities());
 				glBuffers[i] = clCreateFromGLTexture2D(clContext, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, glIDs.get(i), errcode_ret);
 				checkCLError(errcode_ret);
 			}
@@ -645,7 +657,7 @@ public class CLGLInteropDemo {
 			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		}
 
-		buffersInitialized = true;
+		shouldInitBuffers = false;
 	}
 
 	// init kernels with constants
@@ -666,7 +678,7 @@ public class CLGLInteropDemo {
 		long startTime = System.currentTimeMillis() + 5000;
 		long fps = 0;
 
-		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+		while ( glfwWindowShouldClose(window.handle) == GL_FALSE ) {
 			handleIO();
 			display();
 
@@ -677,7 +689,7 @@ public class CLGLInteropDemo {
 			} else {
 				long timeUsed = 5000 + (startTime - System.currentTimeMillis());
 				startTime = System.currentTimeMillis() + 5000;
-				System.out.println(platform.getInfoString(CL_PLATFORM_NAME) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
+				System.out.println(platform.getInfoString(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
 				fps = 0;
 			}
 		}
@@ -694,6 +706,8 @@ public class CLGLInteropDemo {
 		}
 
 		context.destroy();
+
+		window.signal.countDown();
 	}
 
 	public void display() {
@@ -706,7 +720,7 @@ public class CLGLInteropDemo {
 		} else
 			glFinish();
 
-		if ( !buffersInitialized ) {
+		if ( shouldInitBuffers ) {
 			initGLObjects();
 			setKernelConstants();
 		}
@@ -920,9 +934,8 @@ public class CLGLInteropDemo {
 	}
 
 	private static boolean isDoubleFPAvailable(CLDevice device) {
-		/*CLDeviceCapabilities caps = CLCapabilities.getDeviceCapabilities(device);
-		return caps.CL_KHR_fp64 || caps.CL_AMD_fp64;*/
-		return false;
+		CLCapabilities caps = device.getCapabilities();
+		return caps.cl_khr_fp64 || caps.cl_amd_fp64;
 	}
 
 	private void createPrograms() throws IOException {
@@ -951,7 +964,21 @@ public class CLGLInteropDemo {
 		return sb.toString();
 	}
 
-	private enum Color {
+	private static class GLFWWindow {
+
+		final long handle;
+
+		/** Used to signal that the rendering thread has completed. */
+		final CountDownLatch signal;
+
+		private GLFWWindow(long handle, CountDownLatch signal) {
+			this.handle = handle;
+			this.signal = signal;
+		}
+
+	}
+
+	private static enum Color {
 
 		RED(255, 0, 0),
 		GREEN(0, 255, 0),

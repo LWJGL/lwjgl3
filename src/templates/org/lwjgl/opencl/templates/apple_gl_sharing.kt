@@ -9,10 +9,10 @@ import org.lwjgl.opencl.*
 
 fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("apple_gl_sharing", "APPLE") {
 	nativeImport (
-		"opencl.h"
+		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the cl_apple_gl_sharing extension.")
+	javaDoc("Native bindings to the <strong>cl_apple_gl_sharing</strong> extension.")
 
 	IntConstant.block(
 		"Error code returned by {@link #clGetGLContextInfoAPPLE} if an invalid {@code platform_gl_ctx} is provided.",
