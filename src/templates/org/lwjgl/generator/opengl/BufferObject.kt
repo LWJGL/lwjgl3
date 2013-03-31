@@ -33,16 +33,17 @@ public class BufferObject(public val binding: String) : ParameterModifier() {
 	}
 }
 
-public val ARRAY_BUFFER: BufferObject = BufferObject("0x8894")
-public val ELEMENT_ARRAY_BUFFER: BufferObject = BufferObject("0x8895")
-public val PIXEL_PACK_BUFFER: BufferObject = BufferObject("0x88ED")
-public val PIXEL_UNPACK_BUFFER: BufferObject = BufferObject("0x88EF")
-public val DRAW_INDIRECT_BUFFER: BufferObject = BufferObject("0x8F43")
-public val UNIFORM_BUFFER_BINDING: BufferObject = BufferObject("0x8A28")
-public val TRANSFORM_FEEDBACK_BUFFER: BufferObject = BufferObject("0x8C8F")
-public val SHADER_STORAGE_BUFFER: BufferObject = BufferObject("0x90D3")
-public val ATOMIC_COUNTER_BUFFER: BufferObject = BufferObject("0x92C1")
-public val DISPATCH_INDIRECT_BUFFER: BufferObject = BufferObject("0x90EF")
+public val ARRAY_BUFFER: BufferObject = BufferObject("GL15.GL_ARRAY_BUFFER_BINDING")
+public val ELEMENT_ARRAY_BUFFER: BufferObject = BufferObject("GL15.GL_ELEMENT_ARRAY_BUFFER_BINDING")
+public val PIXEL_PACK_BUFFER: BufferObject = BufferObject("GL21.GL_PIXEL_PACK_BUFFER_BINDING")
+public val PIXEL_UNPACK_BUFFER: BufferObject = BufferObject("GL21.GL_PIXEL_UNPACK_BUFFER_BINDING")
+public val DRAW_INDIRECT_BUFFER: BufferObject = BufferObject("GL40.GL_DRAW_INDIRECT_BUFFER_BINDING")
+public val UNIFORM_BUFFER_BINDING: BufferObject = BufferObject("GL31.GL_UNIFORM_BUFFER_BINDING")
+public val TRANSFORM_FEEDBACK_BUFFER: BufferObject = BufferObject("GL30.GL_TRANSFORM_FEEDBACK_BUFFER_BINDING")
+public val SHADER_STORAGE_BUFFER: BufferObject = BufferObject("GL43.GL_SHADER_STORAGE_BUFFER_BINDING")
+public val ATOMIC_COUNTER_BUFFER: BufferObject = BufferObject("GL42.GL_ATOMIC_COUNTER_BUFFER_BINDING")
+public val DISPATCH_INDIRECT_BUFFER: BufferObject = BufferObject("GL43.GL_DISPATCH_INDIRECT_BUFFER_BINDING")
 
+// TODO: Convert to tokens
 public val QUERY_BUFFER_AMD: BufferObject = BufferObject("0x9193")
 public val VIDEO_BUFFER_NV: BufferObject = BufferObject("0x9021")
