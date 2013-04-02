@@ -52,12 +52,15 @@ import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.KHRGLEvent.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
+import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
+import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.windows.GLFWWin32.*;
@@ -185,10 +188,10 @@ public class CLGLInteropDemo {
 
 	private boolean   syncGLtoCL; // true if we can make GL wait on events generated from CL queues.
 	private CLEvent[] clEvents;
-	//private GLSync[]  clSyncs;
+	private long[]    clSyncs;
 
 	private boolean syncCLtoGL; // true if we can make CL wait on sync objects generated from GL.
-	//private GLSync  glSync;
+	private long    glSync;
 	private CLEvent glEvent;
 
 	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, boolean forceCPU) {
@@ -242,12 +245,12 @@ public class CLGLInteropDemo {
 				deviceBuffer.put(i, devices.get(i).getPointer());
 
 			// Create the context
-			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(5);
-			ctxProps.put(0, CL_CONTEXT_PLATFORM);
-			ctxProps.put(1, platform.getPointer());
-			ctxProps.put(2, CL_GL_CONTEXT_KHR);
-			ctxProps.put(3, context.getHandle());
-			ctxProps.put(4, 0);
+			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(5)
+				.put(0, CL_CONTEXT_PLATFORM)
+				.put(1, platform.getPointer())
+				.put(2, CL_GL_CONTEXT_KHR)
+				.put(3, context.getHandle())
+				.put(4, 0);
 
 			clContext = clCreateContext(ctxProps, deviceBuffer, new CLContextCallback(), errcode_ret);
 			checkCLError(errcode_ret);
@@ -280,7 +283,6 @@ public class CLGLInteropDemo {
 			// if yes we can use only one program for all devices + one kernel per device.
 			// if not we will have to create (at least) one program for 32 and one for 64bit devices.
 			// since there are different vendor extensions for double FP we use one program per device.
-			// (OpenCL spec is not very clear about this usecases)
 			boolean all64bit = true;
 			for ( CLDevice device : devices ) {
 				if ( !isDoubleFPAvailable(device) ) {
@@ -303,8 +305,8 @@ public class CLGLInteropDemo {
 			System.out.println("\nMax Iterations: " + maxIterations + " (Use -iterations <count> to change)");
 			System.out.println("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
 
-			//System.out.println("\nOpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
-			//System.out.println("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
+			System.out.println("\nOpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
+			System.out.println("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
 
 			// Use PBO if we're on a CPU implementation
 			useTextures = device_type == CL_DEVICE_TYPE_GPU && (!caps.OpenGL21 || !params.contains("forcePBO"));
@@ -319,28 +321,28 @@ public class CLGLInteropDemo {
 			buildPrograms();
 
 			// Detect GLtoCL synchronization method
-		/*syncGLtoCL = caps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
-		if ( syncGLtoCL ) {
-			clEvents = new CLEvent[slices];
-			clSyncs = new GLSync[slices];
-			System.out.println("\nGL to CL sync: Using OpenCL events");
-		} else*/
-			System.out.println("\nGL to CL sync: Using clFinish");
+			syncGLtoCL = caps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
+			if ( syncGLtoCL ) {
+				clEvents = new CLEvent[slices];
+				clSyncs = new long[slices];
+				System.out.println("\nGL to CL sync: Using OpenCL events");
+			} else
+				System.out.println("\nGL to CL sync: Using clFinish");
 
 			// Detect CLtoGL synchronization method
-		/*syncCLtoGL = caps.OpenGL32 || caps.GL_ARB_sync;
-		if ( syncCLtoGL ) {
-			for ( CLDevice device : devices ) {
-				if ( !CLCapabilities.getDeviceCapabilities(device).CL_KHR_gl_event ) {
-					syncCLtoGL = false;
-					break;
+			syncCLtoGL = caps.OpenGL32 || caps.GL_ARB_sync;
+			if ( syncCLtoGL ) {
+				for ( CLDevice device : devices ) {
+					if ( !device.getCapabilities().cl_khr_gl_event ) {
+						syncCLtoGL = false;
+						break;
+					}
 				}
 			}
-		}
-		if ( syncCLtoGL ) {
-			System.out.println("CL to GL sync: Using OpenGL sync objects");
-		} else*/
-			System.out.println("CL to GL sync: Using glFinish");
+			if ( syncCLtoGL ) {
+				System.out.println("CL to GL sync: Using OpenGL sync objects");
+			} else
+				System.out.println("CL to GL sync: Using glFinish");
 
 			if ( useTextures ) {
 				dlist = glGenLists(1);
@@ -428,7 +430,7 @@ public class CLGLInteropDemo {
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
-				return platform.getCapabilities().cl_khr_gl_sharing && !platform.getInfoString(CL_PLATFORM_VENDOR).startsWith("Intel");
+				return platform.getCapabilities().cl_khr_gl_sharing && !platform.getInfoStringUTF8(CL_PLATFORM_VENDOR).startsWith("Intel");
 			}
 		});
 
@@ -463,7 +465,7 @@ public class CLGLInteropDemo {
 			final CLPlatform platform = platforms.get(0);
 
 			final GLFWWindow window = new GLFWWindow(
-				glfwCreateWindow(width, height, platform.getInfoString(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU"), 0L, 0L),
+				glfwCreateWindow(width, height, platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU"), 0L, 0L),
 				new CountDownLatch(1)
 			);
 			glfwSetWindowPos(window.handle, 200 + width * i + 32 * i, 200);
@@ -569,8 +571,7 @@ public class CLGLInteropDemo {
 		/*
 		 * workaround: The driver keeps using the old binaries for some reason.
 		 * to solve this we simple create a new program and release the old.
-		 * however rebuilding programs should be possible -> remove when drivers are fixed.
-		 * (again: the spec is not very clear about this kind of usages)
+		 * TODO: rebuilding programs should be possible -> remove when drivers are fixed.
 		 */
 		if ( programs[0] != null ) {
 			for ( CLProgram program : programs )
@@ -603,7 +604,7 @@ public class CLGLInteropDemo {
 			try {
 				clBuildProgram(programs[i], device, options, null);
 			} finally {
-				//System.out.println("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
+				System.out.println("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
 			}
 		}
 
@@ -689,7 +690,7 @@ public class CLGLInteropDemo {
 			} else {
 				long timeUsed = 5000 + (startTime - System.currentTimeMillis());
 				startTime = System.currentTimeMillis() + 5000;
-				System.out.println(platform.getInfoString(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
+				System.out.println(platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
 				fps = 0;
 			}
 		}
@@ -766,10 +767,10 @@ public class CLGLInteropDemo {
 			                       null, null);
 
 			clEnqueueReleaseGLObjects(queues[i], glBuffers[i], null, syncGLtoCL ? syncBuffer : null);
-			/*if ( syncGLtoCL ) {
-				clEvents[i] = queues[i].getCLEvent(syncBuffer.get(0));
-				clSyncs[i] = glCreateSyncFromCLeventARB(queues[i].getParent(), clEvents[i], 0);
-			}*/
+			if ( syncGLtoCL ) {
+				clEvents[i] = CLEvent.create(syncBuffer.get(0), clContext);
+				clSyncs[i] = glCreateSyncFromCLeventARB(clContext, clEvents[i], 0);
+			}
 		}
 
 		// block until done (important: finish before doing further gl work)
@@ -784,10 +785,10 @@ public class CLGLInteropDemo {
 	private void render() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		/*if ( syncGLtoCL ) {
+		if ( syncGLtoCL ) {
 			for ( int i = 0; i < slices; i++ )
 				glWaitSync(clSyncs[i], 0, 0);
-		}*/
+		}
 
 		//draw slices
 		int sliceWidth = width / slices;
@@ -811,10 +812,11 @@ public class CLGLInteropDemo {
 			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		}
 
-		/*if ( syncCLtoGL ) {
+		if ( syncCLtoGL ) {
 			glSync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-			glEvent = clCreateEventFromGLsyncKHR(clContext, glSync, null);
-		}*/
+			glEvent = clCreateEventFromGLsyncKHR(clContext, glSync, errcode_ret);
+			checkCLError(errcode_ret);
+		}
 
 		//draw info text
 		/*

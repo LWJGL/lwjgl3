@@ -319,7 +319,7 @@ public class CLTest {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				// TODO: Intel has broken reference counting atm
-				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(platform.getInfoString(CL_PLATFORM_NAME));
+				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(platform.getInfoStringUTF8(CL_PLATFORM_NAME));
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
@@ -345,7 +345,7 @@ public class CLTest {
 				assertNotNull(subbuffer);
 
 				if ( doContextCountChecks ) {
-					assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 2, platform.getInfoString(CL_PLATFORM_NAME));
+					assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 2, platform.getInfoStringUTF8(CL_PLATFORM_NAME));
 					assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 3);
 				}
 

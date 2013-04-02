@@ -179,11 +179,11 @@ public final class CLDemo {
 	}
 
 	private static void printPlatformInfo(CLPlatform platform, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + platform.getInfoString(param));
+		System.out.println("\t" + param_name + " = " + platform.getInfoStringUTF8(param));
 	}
 
 	private static void printDeviceInfo(CLDevice device, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + device.getInfoString(param));
+		System.out.println("\t" + param_name + " = " + device.getInfoStringUTF8(param));
 	}
 
 	private static String getEventStatusName(int status) {
