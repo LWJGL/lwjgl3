@@ -716,8 +716,11 @@ public class CLGLInteropDemo {
 
 		// make sure GL does not use our objects before we start computing
 		if ( syncCLtoGL && glEvent != null ) {
-			for ( CLCommandQueue queue : queues )
+			for ( CLCommandQueue queue : queues ) {
 				clEnqueueWaitForEvents(queue, glEvent);
+				clReleaseEvent(glEvent);
+				glDeleteSync(glSync);
+			}
 		} else
 			glFinish();
 
@@ -786,8 +789,11 @@ public class CLGLInteropDemo {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		if ( syncGLtoCL ) {
-			for ( int i = 0; i < slices; i++ )
+			for ( int i = 0; i < slices; i++ ) {
 				glWaitSync(clSyncs[i], 0, 0);
+				glDeleteSync(clSyncs[i]);
+				clReleaseEvent(clEvents[i]);
+			}
 		}
 
 		//draw slices
