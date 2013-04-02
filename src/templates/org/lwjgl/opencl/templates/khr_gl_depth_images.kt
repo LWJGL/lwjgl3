@@ -7,14 +7,20 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_fp16() = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
+fun khr_gl_depth_images() = "KHRGLDepthImages".nativeClassCL("khr_gl_depth_images", KHR) {
 
 	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
 
 	IntConstant.block(
-		"cl_device_info",
+		"cl_channel_order",
 
-		"DEVICE_HALF_FP_CONFIG" _ 0x1033
+		"DEPTH_STENCIL" _ 0x10BE
+	)
+
+	IntConstant.block(
+		"cl_channel_type",
+
+		"UNORM_INT24" _ 0x10DF
 	)
 
 }

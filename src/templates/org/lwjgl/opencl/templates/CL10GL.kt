@@ -80,7 +80,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		"GL_TEXTURE_TARGET" _ 0x2004,
 		"GL_MIPMAP_LEVEL" _ 0x2005
-	).toJavaDocLinks()
+	).toJavaDocLinks() + " KHRGLMSAASharing#CL_GL_NUM_SAMPLES"
 
 	(Construct("context") _ cl_mem).func(
 		"CreateFromGLBuffer",

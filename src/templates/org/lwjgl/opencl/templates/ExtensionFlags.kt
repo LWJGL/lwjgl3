@@ -28,6 +28,8 @@ fun khr_int64_extended_atomics() = EXT_FLAG.nativeClassCL("khr_int64_extended_at
 
 fun khr_select_fprounding_mode() = EXT_FLAG.nativeClassCL("khr_select_fprounding_mode", KHR)
 
+fun khr_spir() = EXT_FLAG.nativeClassCL("khr_spir", KHR)
+
 fun amd_fp64() = EXT_FLAG.nativeClassCL("amd_fp64", AMD)
 fun amd_vec3() = EXT_FLAG.nativeClassCL("amd_vec3", AMD)
 fun amd_compile_options() = EXT_FLAG.nativeClassCL("amd_compile_options", AMD)
