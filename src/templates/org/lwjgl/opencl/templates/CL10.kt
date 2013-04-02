@@ -2550,7 +2550,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
-			"{@link #CL_INVALID_VALUE} if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list is not $NULL and {@code num_devices} is 0.",
+			"{@link #CL_INVALID_VALUE} if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not $NULL and {@code num_devices} is 0.",
 			"{@link #CL_INVALID_VALUE} if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
 			"{@link #CL_INVALID_DEVICE} if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
 			"""

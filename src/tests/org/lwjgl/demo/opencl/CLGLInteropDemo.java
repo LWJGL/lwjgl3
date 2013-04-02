@@ -1,33 +1,6 @@
 /*
- * Copyright (c) 2002-2010 LWJGL Project
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are
- * met:
- *
- * * Redistributions of source code must retain the above copyright
- *   notice, this list of conditions and the following disclaimer.
- *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
- *
- * * Neither the name of 'LWJGL' nor the names of
- *   its contributors may be used to endorse or promote products derived
- *   from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
  */
 package org.lwjgl.demo.opencl;
 
@@ -37,6 +10,8 @@ import org.lwjgl.demo.glfw.DemoUtil;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.WindowCallback;
+import org.lwjgl.system.glfw.WindowCallbackAdapter;
 
 import java.io.*;
 import java.net.URL;
@@ -62,6 +37,7 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.windows.GLFWWin32.*;
 import static org.lwjgl.system.windows.WinGDI.*;
@@ -120,10 +96,13 @@ public class CLGLInteropDemo {
 	// max per pixel iterations to compute the fractal
 	private static int maxIterations = 500;
 
-	private static int width  = 512;
-	private static int height = 512;
+	private static int initWidth  = 512;
+	private static int initHeight = 512;
 
 	// ------------------
+
+	private int width;
+	private int height;
 
 	private final IntBuffer errcode_ret;
 
@@ -162,17 +141,6 @@ public class CLGLInteropDemo {
 	private double maxX = 0.6f;
 	private double maxY = 1.3f;
 
-	private boolean dragging;
-	private double  dragX;
-	private double  dragY;
-	private double  dragMinX;
-	private double  dragMinY;
-	private double  dragMaxX;
-	private double  dragMaxY;
-
-	private int mouseX;
-	private int mouseY;
-
 	private int slices;
 
 	private boolean drawSeparator;
@@ -198,6 +166,12 @@ public class CLGLInteropDemo {
 		this.platform = platform;
 
 		this.window = window;
+
+		IntBuffer windowSize = BufferUtils.createIntBuffer(2);
+		nglfwGetWindowSize(window.handle, memAddress(windowSize), memAddress(windowSize) + 4);
+
+		width = windowSize.get(0);
+		height = windowSize.get(1);
 
 		long HWND = glfwGetWin32Window(window.handle);
 		HDC = GetDC(HWND);
@@ -298,24 +272,24 @@ public class CLGLInteropDemo {
 				throw new RuntimeException("OpenGL 2.1 is required to run this demo.");
 
 			if ( device_type == CL_DEVICE_TYPE_GPU )
-				System.out.println("OpenCL Device Type: GPU (Use -forceCPU to use CPU)");
+				log("OpenCL Device Type: GPU (Use -forceCPU to use CPU)");
 			else
-				System.out.println("OpenCL Device Type: CPU");
+				log("OpenCL Device Type: CPU");
 
-			System.out.println("\nMax Iterations: " + maxIterations + " (Use -iterations <count> to change)");
-			System.out.println("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
+			log("Max Iterations: " + maxIterations + " (Use -iterations <count> to change)");
+			log("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
 
-			System.out.println("\nOpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
-			System.out.println("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
+			log("OpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
+			log("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
 
 			// Use PBO if we're on a CPU implementation
 			useTextures = device_type == CL_DEVICE_TYPE_GPU && (!caps.OpenGL21 || !params.contains("forcePBO"));
 			if ( useTextures ) {
-				System.out.println("\nCL/GL Sharing method: TEXTURES (use -forcePBO to use PBO + DrawPixels)");
-				System.out.println("Rendering method: Shader on a fullscreen quad");
+				log("CL/GL Sharing method: TEXTURES (use -forcePBO to use PBO + DrawPixels)");
+				log("Rendering method: Shader on a fullscreen quad");
 			} else {
-				System.out.println("\nCL/GL Sharing method: PIXEL BUFFER OBJECTS");
-				System.out.println("Rendering method: DrawPixels");
+				log("CL/GL Sharing method: PIXEL BUFFER OBJECTS");
+				log("Rendering method: DrawPixels");
 			}
 
 			buildPrograms();
@@ -325,9 +299,9 @@ public class CLGLInteropDemo {
 			if ( syncGLtoCL ) {
 				clEvents = new CLEvent[slices];
 				clSyncs = new long[slices];
-				System.out.println("\nGL to CL sync: Using OpenCL events");
+				log("GL to CL sync: Using OpenCL events");
 			} else
-				System.out.println("\nGL to CL sync: Using clFinish");
+				log("GL to CL sync: Using clFinish");
 
 			// Detect CLtoGL synchronization method
 			syncCLtoGL = caps.OpenGL32 || caps.GL_ARB_sync;
@@ -340,30 +314,12 @@ public class CLGLInteropDemo {
 				}
 			}
 			if ( syncCLtoGL ) {
-				System.out.println("CL to GL sync: Using OpenGL sync objects");
+				log("CL to GL sync: Using OpenGL sync objects");
 			} else
-				System.out.println("CL to GL sync: Using glFinish");
+				log("CL to GL sync: Using glFinish");
 
 			if ( useTextures ) {
 				dlist = glGenLists(1);
-
-				glNewList(dlist, GL_COMPILE);
-				glBegin(GL_QUADS);
-				{
-					glTexCoord2f(0.0f, 0.0f);
-					glVertex2f(0, 0);
-
-					glTexCoord2f(0.0f, 1.0f);
-					glVertex2i(0, height);
-
-					glTexCoord2f(1.0f, 1.0f);
-					glVertex2f(width, height);
-
-					glTexCoord2f(1.0f, 0.0f);
-					glVertex2f(width, 0);
-				}
-				glEnd();
-				glEndList();
 
 				vsh = glCreateShader(GL_VERTEX_SHADER);
 				glShaderSource(vsh, "varying vec2 texCoord;\n" +
@@ -400,25 +356,18 @@ public class CLGLInteropDemo {
 		glDisable(GL_DEPTH_TEST);
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
-		initView(width, height);
-
 		initGLObjects();
 		glFinish();
 
 		kernel2DGlobalWorkSize = BufferUtils.createPointerBuffer(2);
 
 		setKernelConstants();
+
+		setupInput();
 	}
 
-	private static void initView(int width, int height) {
-		glViewport(0, 0, width, height);
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, width, 0.0, height, 0.0, 1.0);
+	private void log(String msg) {
+		System.out.println("[" + window.ID + "] " + msg);
 	}
 
 	public static void main(String... args) {
@@ -464,15 +413,18 @@ public class CLGLInteropDemo {
 		for ( int i = 0; i < threads.length; i++ ) {
 			final CLPlatform platform = platforms.get(0);
 
+			String platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU");
+
 			final GLFWWindow window = new GLFWWindow(
-				glfwCreateWindow(width, height, platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU"), 0L, 0L),
+				glfwCreateWindow(initWidth, initHeight, platformID, 0L, 0L),
+				platformID,
 				new CountDownLatch(1)
 			);
-			glfwSetWindowPos(window.handle, 200 + width * i + 32 * i, 200);
+			glfwSetWindowPos(window.handle, 200 + initWidth * i + 32 * i, 200);
 
 			final int index = i;
 			windows[i] = window;
-			threads[i] = new Thread() {
+			threads[i] = new Thread(platformID) {
 				@Override
 				public void run() {
 					CLGLInteropDemo demo = null;
@@ -511,7 +463,10 @@ public class CLGLInteropDemo {
 			glfwPollEvents();
 
 			for ( int i = 0; i < windows.length; i++ ) {
-				if ( windows[i] != null && windows[i].signal.getCount() == 0 ) {
+				if ( windows[i] == null )
+					continue;
+
+				if ( windows[i].signal.getCount() == 0 ) {
 					glfwDestroyWindow(windows[i].handle);
 					windows[i] = null;
 				}
@@ -555,10 +510,10 @@ public class CLGLInteropDemo {
 					throw new IllegalArgumentException("Invalid res argument specified.");
 
 				try {
-					width = Integer.parseInt(args[++i]);
-					height = Integer.parseInt(args[++i]);
+					initWidth = Integer.parseInt(args[++i]);
+					initHeight = Integer.parseInt(args[++i]);
 
-					if ( width < 1 || height < 1 )
+					if ( initWidth < 1 || initHeight < 1 )
 						throw new IllegalArgumentException("Invalid res dimensions specified.");
 				} catch (NumberFormatException e) {
 					throw new IllegalArgumentException("Invalid res dimensions specified.");
@@ -568,18 +523,6 @@ public class CLGLInteropDemo {
 	}
 
 	private void buildPrograms() {
-		/*
-		 * workaround: The driver keeps using the old binaries for some reason.
-		 * to solve this we simple create a new program and release the old.
-		 * TODO: rebuilding programs should be possible -> remove when drivers are fixed.
-		 */
-		if ( programs[0] != null ) {
-			for ( CLProgram program : programs ) {
-				int errcode = clReleaseProgram(program);
-				checkCLError(errcode);
-			}
-		}
-
 		try {
 			createPrograms();
 		} catch (IOException e) {
@@ -601,13 +544,13 @@ public class CLGLInteropDemo {
 					options.append(" -D AMD_FP");
 			}
 
-			System.out.println("\nOpenCL COMPILER OPTIONS: " + options);
+			log("OpenCL COMPILER OPTIONS: " + options);
 
 			try {
 				int errcode = clBuildProgram(programs[i], device, options, null);
 				checkCLError(errcode);
 			} finally {
-				System.out.println("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
+				log("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
 			}
 		}
 
@@ -637,6 +580,24 @@ public class CLGLInteropDemo {
 		}
 
 		if ( useTextures ) {
+			glNewList(dlist, GL_COMPILE);
+			glBegin(GL_QUADS);
+			{
+				glTexCoord2f(0.0f, 0.0f);
+				glVertex2f(0, 0);
+
+				glTexCoord2f(0.0f, 1.0f);
+				glVertex2i(0, height);
+
+				glTexCoord2f(1.0f, 1.0f);
+				glVertex2f(width, height);
+
+				glTexCoord2f(1.0f, 0.0f);
+				glVertex2f(width, 0);
+			}
+			glEnd();
+			glEndList();
+
 			glGenTextures(glIDs);
 
 			// Init textures
@@ -664,6 +625,15 @@ public class CLGLInteropDemo {
 			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		}
 
+		glViewport(0, 0, width, height);
+
+		glMatrixMode(GL_PROJECTION);
+		glLoadIdentity();
+		glOrtho(0.0, width, 0.0, height, 0.0, 1.0);
+
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+
 		shouldInitBuffers = false;
 	}
 
@@ -686,7 +656,6 @@ public class CLGLInteropDemo {
 		long fps = 0;
 
 		while ( glfwWindowShouldClose(window.handle) == GL_FALSE ) {
-			handleIO();
 			display();
 
 			SwapBuffers(HDC);
@@ -696,7 +665,7 @@ public class CLGLInteropDemo {
 			} else {
 				long timeUsed = 5000 + (startTime - System.currentTimeMillis());
 				startTime = System.currentTimeMillis() + 5000;
-				System.out.println(platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
+				log(platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
 				fps = 0;
 			}
 		}
@@ -719,8 +688,6 @@ public class CLGLInteropDemo {
 	}
 
 	public void display() {
-		// TODO: Need to clean-up events, test when ARB_cl_events & KHR_gl_event are implemented.
-
 		// make sure GL does not use our objects before we start computing
 		if ( syncCLtoGL && glEvent != null ) {
 			for ( CLCommandQueue queue : queues ) {
@@ -864,52 +831,78 @@ public class CLGLInteropDemo {
 		*/
 	}
 
-	private void handleIO() {
-		/*if ( Keyboard.getNumKeyboardEvents() != 0 ) {
-			while ( Keyboard.next() ) {
-				if ( Keyboard.getEventKeyState() )
-					continue;
+	private void setupInput() {
+		WindowCallback.set(window.handle, new WindowCallbackAdapter() {
+			private boolean ctrlDown;
 
-				int key = Keyboard.getEventKey();
+			private boolean dragging;
+			private double dragX;
+			private double dragY;
+			private double dragMinX;
+			private double dragMinY;
+			private double dragMaxX;
+			private double dragMaxY;
 
-				if ( Keyboard.KEY_1 <= key && key <= Keyboard.KEY_8 ) {
-					int number = key - Keyboard.KEY_1 + 1;
+			private int mouseX;
+			private int mouseY;
+
+			@Override
+			public void windowSize(long window, int width, int height) {
+				CLGLInteropDemo.this.width = width;
+				CLGLInteropDemo.this.height = height;
+
+				shouldInitBuffers = true;
+			}
+
+			@Override
+			public void key(long window, int key, int action) {
+				switch ( key ) {
+					case GLFW_KEY_LEFT_CONTROL:
+					case GLFW_KEY_RIGHT_CONTROL:
+						ctrlDown = action == GLFW_PRESS;
+						return;
+				}
+
+				if ( action != GLFW_PRESS )
+					return;
+
+				if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_8 ) {
+					int number = key - GLFW_KEY_1 + 1;
 					slices = min(number, min(queues.length, MAX_PARALLELISM_LEVEL));
-					System.out.println("NEW PARALLELISM LEVEL: " + slices);
-					buffersInitialized = false;
+					log("NEW PARALLELISM LEVEL: " + slices);
+					shouldInitBuffers = true;
 				} else {
-					switch ( Keyboard.getEventKey() ) {
-						case Keyboard.KEY_SPACE:
+					switch ( key ) {
+						case GLFW_KEY_SPACE:
 							drawSeparator = !drawSeparator;
-							System.out.println("SEPARATOR DRAWING IS NOW: " + (drawSeparator ? "ON" : "OFF"));
+							log("SEPARATOR DRAWING IS NOW: " + (drawSeparator ? "ON" : "OFF"));
 							break;
-						case Keyboard.KEY_D:
+						case GLFW_KEY_D:
 							doublePrecision = !doublePrecision;
-							System.out.println("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
+							log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
 							rebuild = true;
 							break;
-						case Keyboard.KEY_HOME:
+						case GLFW_KEY_HOME:
 							minX = -2f;
 							minY = -1.2f;
 							maxX = 0.6f;
 							maxY = 1.3f;
 							break;
-						case Keyboard.KEY_ESCAPE:
+						case GLFW_KEY_ESCAPE:
 							run = false;
 							break;
 					}
 				}
 			}
-		}
 
-		while ( Mouse.next() ) {
-			int eventBtn = Mouse.getEventButton();
+			@Override
+			public void mouseButton(long window, int button, int action) {
+				if ( button != GLFW_MOUSE_BUTTON_LEFT )
+					return;
 
-			int x = Mouse.getX();
-			int y = Mouse.getY();
+				dragging = action == GLFW_PRESS;
 
-			if ( Mouse.isButtonDown(0) && (x != mouseX || y != mouseY) ) {
-				if ( !dragging ) {
+				if ( dragging ) {
 					dragging = true;
 
 					dragX = mouseX;
@@ -920,44 +913,49 @@ public class CLGLInteropDemo {
 					dragMaxX = maxX;
 					dragMaxY = maxY;
 				}
+			}
 
-				double offsetX = (x - dragX) * (maxX - minX) / width;
-				double offsetY = (y - dragY) * (maxY - minY) / height;
+			@Override
+			public void cursorPos(long window, int xpos, int ypos) {
+				mouseX = xpos;
+				mouseY = height - ypos;
 
-				minX = dragMinX - offsetX;
-				minY = dragMinY - offsetY;
+				if ( dragging ) {
+					double offsetX = (mouseX - dragX) * (maxX - minX) / width;
+					double offsetY = (mouseY - dragY) * (maxY - minY) / height;
 
-				maxX = dragMaxX - offsetX;
-				maxY = dragMaxY - offsetY;
-			} else {
-				if ( dragging )
-					dragging = false;
+					minX = dragMinX - offsetX;
+					minY = dragMinY - offsetY;
 
-				if ( eventBtn == -1 ) {
-					int dwheel = Mouse.getEventDWheel();
-					if ( dwheel != 0 ) {
-						double scaleFactor = Keyboard.isKeyDown(Keyboard.KEY_LCONTROL) || Keyboard.isKeyDown(Keyboard.KEY_RCONTROL) ? 0.25 : 0.05;
-						double scale = dwheel > 0 ? scaleFactor : -scaleFactor;
-
-						double deltaX = scale * (maxX - minX);
-						double deltaY = scale * (maxY - minY);
-
-						// offset for "zoom to cursor"
-						double offsetX = (x / (double)width - 0.5) * deltaX * 2.0;
-						double offsetY = (y / (double)height - 0.5) * deltaY * 2.0;
-
-						minX += deltaX + offsetX;
-						minY += deltaY - offsetY;
-
-						maxX += -deltaX + offsetX;
-						maxY += -deltaY - offsetY;
-					}
+					maxX = dragMaxX - offsetX;
+					maxY = dragMaxY - offsetY;
 				}
 			}
 
-			mouseX = x;
-			mouseY = y;
-		}*/
+			@Override
+			public void scroll(long window, double xpos, double ypos) {
+				if ( ypos != 0 ) {
+					double scaleFactor = ctrlDown ? 0.25 : 0.05;
+					double scale = ypos > 0 ? scaleFactor : -scaleFactor;
+
+					double deltaX = scale * (maxX - minX);
+					double deltaY = scale * (maxY - minY);
+
+					if ( 0 < deltaX && deltaX < 1e-10 || 0 < deltaY && deltaY < 1e-10 )
+						return;
+
+					// offset for "zoom to cursor"
+					double offsetX = (mouseX / (double)width - 0.5) * deltaX * 2.0;
+					double offsetY = (mouseY / (double)height - 0.5) * deltaY * 2.0;
+
+					minX += deltaX + offsetX;
+					minY += deltaY + offsetY;
+
+					maxX += -deltaX + offsetX;
+					maxY += -deltaY + offsetY;
+				}
+			}
+		});
 	}
 
 	private static boolean isDoubleFPAvailable(CLDevice device) {
@@ -968,6 +966,11 @@ public class CLGLInteropDemo {
 	private void createPrograms() throws IOException {
 		String source = getProgramSource("demo/Mandelbrot.cl");
 		for ( int i = 0; i < programs.length; i++ ) {
+			if ( programs[i] != null ) {
+				int errcode = clReleaseProgram(programs[i]);
+				checkCLError(errcode);
+			}
+
 			programs[i] = clCreateProgramWithSource(clContext, source, errcode_ret);
 			checkCLError(errcode_ret);
 		}
@@ -981,7 +984,7 @@ public class CLGLInteropDemo {
 		InputStream source = sourceURL.openStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(source));
 
-		StringBuilder sb = new StringBuilder();
+		StringBuilder sb = new StringBuilder(4 * 1024);
 		String line;
 		try {
 			while ( (line = reader.readLine()) != null )
@@ -997,11 +1000,14 @@ public class CLGLInteropDemo {
 
 		final long handle;
 
+		final String ID;
+
 		/** Used to signal that the rendering thread has completed. */
 		final CountDownLatch signal;
 
-		private GLFWWindow(long handle, CountDownLatch signal) {
+		private GLFWWindow(long handle, String ID, CountDownLatch signal) {
 			this.handle = handle;
+			this.ID = ID;
 			this.signal = signal;
 		}
 
