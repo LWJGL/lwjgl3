@@ -38,8 +38,12 @@
 
 #endif
 
-#define APIENTRY CL_API_CALL
-#define CALLBACK CL_CALLBACK
+#ifndef APIENTRY
+	#define APIENTRY CL_API_CALL
+#endif
+#ifndef CALLBACK
+	#define CALLBACK CL_CALLBACK
+#endif
 
 // Custom typedefs
 
