@@ -296,7 +296,7 @@ private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 		generateJava(it)
 	}
 
-	if ( nativeClass.hasNativeFunctions ) {
+	if ( nativeClass.functions.any { !it.has(Reuse) } ) {
 		generateNative(nativeClass) {
 			generateOutput(nativeClass, it) {
 				generateNative(it)

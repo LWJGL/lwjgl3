@@ -106,8 +106,8 @@ public abstract class QualifiedTypeModifier: TemplateModifier {
 }
 
 /** A TemplateModifier with a reference to another TemplateElement. */
-public abstract class ReferenceModifier(val reference: String): TemplateModifier {
-	override val isSpecial: Boolean = true
+public trait ReferenceModifier {
+	val reference: String
 }
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
@@ -130,11 +130,6 @@ public fun ReturnValueModifier._(retValue: ReturnValue): ReturnValue {
 public fun <T: QualifiedType> QualifiedTypeModifier._(qtype: T): T {
 	qtype.setModifiers(this)
 	return qtype
-}
-
-public fun <T: TemplateElement> ReferenceModifier._(element: T): T {
-	element.setModifiers(this)
-	return element
 }
 
 public fun mods(vararg modifiers: TemplateModifier): Array<TemplateModifier> = modifiers

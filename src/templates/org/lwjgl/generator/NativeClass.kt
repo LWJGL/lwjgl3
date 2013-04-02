@@ -95,7 +95,7 @@ public class NativeClass(
 		get() = !constantBlocks.isEmpty() || hasNativeFunctions
 
 	val hasNativeFunctions: Boolean
-		get() = !functions.isEmpty() // TODO: Check for 100% alternate without native or reuse
+		get() = !functions.isEmpty()
 
 	private val javaDocs = HashMap<String, String>()
 

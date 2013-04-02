@@ -428,7 +428,8 @@ public class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		writer.generateNativeMethod(simpleFunction)
+		if ( !has(Reuse) )
+			writer.generateNativeMethod(simpleFunction)
 
 		if ( !simpleFunction ) {
 			// This the only special case where we don't generate a "normal" Java method. If we did,
@@ -633,6 +634,7 @@ public class NativeClassFunction(
 			}
 		}
 
+		if ( has(Reuse) ) print("${get(Reuse).reference}.")
 		print("n$name(")
 		printParams()
 		if ( nativeClass.functionProvider != null ) {
@@ -1124,15 +1126,20 @@ enum class GenerationMode {
 
 // --- [ MODIFIERS ]---
 
-public class DependsOn(reference: String): ReferenceModifier(reference) {
+public class DependsOn(override val reference: String): FunctionModifier(), ReferenceModifier {
 	class object: ModifierObject<DependsOn> {
 		override val key = javaClass<DependsOn>()
 	}
 
-	override fun validate(element: TemplateElement) {
-		if ( element !is NativeClassFunction )
-			throw IllegalArgumentException("The DependsOn modifier can only be applied on functions.")
+	override val isSpecial: Boolean = false
+}
+
+public class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
+	class object: ModifierObject<Reuse> {
+		override val key = javaClass<Reuse>()
 	}
+
+	override val isSpecial: Boolean = true
 }
 
 public val keepPostfix: FunctionModifier = object : FunctionModifier() {
