@@ -29,6 +29,7 @@ import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.KHRGLEvent.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
+import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -413,7 +414,12 @@ public class CLGLInteropDemo {
 		for ( int i = 0; i < threads.length; i++ ) {
 			final CLPlatform platform = platforms.get(0);
 
-			String platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + " - " + ((i & 1) == 1 ? "CPU" : "GPU");
+			String platformID;
+			if ( platform.getCapabilities().cl_khr_icd )
+				platformID = platform.getInfoStringASCII(CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
+			else
+				platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR);
+			platformID += " - " + ((i & 1) == 1 ? "CPU" : "GPU");
 
 			final GLFWWindow window = new GLFWWindow(
 				glfwCreateWindow(initWidth, initHeight, platformID, 0L, 0L),

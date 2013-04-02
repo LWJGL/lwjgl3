@@ -20,6 +20,7 @@ import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.KHRICD.*;
 
 public final class CLDemo {
 
@@ -46,6 +47,8 @@ public final class CLDemo {
 			printPlatformInfo(platform, "CL_PLATFORM_NAME", CL_PLATFORM_NAME);
 			printPlatformInfo(platform, "CL_PLATFORM_VENDOR", CL_PLATFORM_VENDOR);
 			printPlatformInfo(platform, "CL_PLATFORM_EXTENSIONS", CL_PLATFORM_EXTENSIONS);
+			if ( platform.getCapabilities().cl_khr_icd )
+				printPlatformInfo(platform, "CL_PLATFORM_ICD_SUFFIX_KHR", CL_PLATFORM_ICD_SUFFIX_KHR);
 			System.out.println("");
 
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(3);
