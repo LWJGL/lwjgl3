@@ -66,12 +66,12 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			print(funcIndent)
 
 			var isSpecial = false
-			if ( functions[i] has DependsOn.CLASS ) {
+			if ( functions[i] has DependsOn ) {
 				if ( !isSpecial ) {
 					isSpecial = true
 					print("(")
 				}
-				print("!ext.contains(\"${functions[i].get(DependsOn.CLASS).reference}\") || ")
+				print("!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
 			}
 
 			print("funcs.${functions[i].name} != 0L")

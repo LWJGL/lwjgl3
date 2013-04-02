@@ -9,8 +9,8 @@ import org.lwjgl.generator.*
 
 /** Specifies an alternative name for the OpenGL SDK Reference url. */
 public class ReferenceGL(val function: String): FunctionModifier() {
-	class object {
-		val CLASS = javaClass<ReferenceGL>()
+	class object: ModifierObject<ReferenceGL> {
+		override val key = javaClass<ReferenceGL>()
 	}
 
 	override val isSpecial: Boolean = false

@@ -42,8 +42,8 @@ public abstract class FunctionProvider {
 		val instanceParameter = if ( hasCurrentCapabilities )
 			""
 		else {
-			if ( function has Capabilities.CLASS ) {
-				val caps = function[Capabilities.CLASS]
+			if ( function has Capabilities ) {
+				val caps = function[Capabilities]
 				if ( caps.statement != null )
 					writer.println("\t\t${caps.statement};")
 				caps.expression
@@ -57,9 +57,9 @@ public abstract class FunctionProvider {
 			}
 		}
 
-		if ( function has Capabilities.CLASS && function[Capabilities.CLASS].override )
+		if ( function has Capabilities && function[Capabilities].override )
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
-		else if ( function.hasParam { it has Callback.CLASS && it[Callback.CLASS].storeInFunctions } ) {
+		else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
 			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else
@@ -126,7 +126,7 @@ public class NativeClass(
 					if ( it.hasParam { it.nativeType.mapping == PointerMapping.DATA_POINTER } )
 						needsPointer = true
 
-					if ( it.hasParam { it has returnValue || it has SingleValue.CLASS || it has autoSizeResult || it has PointerArray.CLASS } )
+					if ( it.hasParam { it has returnValue || it has SingleValue || it has autoSizeResult || it has PointerArray } )
 						needsAPIUtil = true
 				}
 
@@ -183,8 +183,8 @@ public class NativeClass(
 		}
 
 		for ( func in functions ) {
-			func.getParams { it has Callback.CLASS }.forEach {
-				val cb = it[Callback.CLASS]
+			func.getParams { it has Callback }.forEach {
+				val cb = it[Callback]
 				if ( cb.storeInFunctions )
 					println("\n\t\tlong ${cb.procClass};")
 			}

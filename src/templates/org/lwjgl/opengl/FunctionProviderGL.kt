@@ -20,7 +20,7 @@ private val NativeClass.capName: String
 	}
 
 private val List<NativeClassFunction>.hasDependencies: Boolean
-	get() = this.any { it has DependsOn.CLASS }
+	get() = this.any { it has DependsOn }
 private val List<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
@@ -76,15 +76,15 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		for ( i in functions.indices ) {
 			print(funcIndent)
 
-			if ( functions[i] has DependsOn.CLASS )
-				print("(!ext.contains(\"${functions[i].get(DependsOn.CLASS).reference}\") || ")
+			if ( functions[i] has DependsOn )
+				print("(!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
 
 			print("GL.isFunctionSupported(funcs.${functions[i].name}")
 			if ( functions[i] has deprecatedGL )
 				print(", fc")
 			print(")")
 
-			if ( functions[i] has DependsOn.CLASS ) print(')')
+			if ( functions[i] has DependsOn ) print(')')
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 
