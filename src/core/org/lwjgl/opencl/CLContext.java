@@ -4,15 +4,11 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.APIUtil;
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_context pointer. */
@@ -50,12 +46,9 @@ public class CLContext extends CLObjectChild<CLPlatform> {
 		return new CLContext(cl_context, platform, user_data);
 	}
 
-	public int getInfoInt(int param_name) {
-		APIBuffer __buffer = APIUtil.apiBuffer();
-		int errcode = clGetContextInfo(this, param_name, 4, __buffer.buffer(), (ByteBuffer)null);
-		if ( LWJGLUtil.DEBUG )
-			checkCLError(errcode);
-		return __buffer.intValue(0);
+	@Override
+	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetContextInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetContextInfo);
 	}
 
 	@Override
