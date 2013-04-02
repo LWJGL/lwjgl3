@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_IMA4() = "EXTIma4".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_IMA4",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_EXT_IMA4() = "EXTIma4".nativeClassAL("EXT_IMA4") {
 	nativeImport (
 		"OpenAL.h"
 	)

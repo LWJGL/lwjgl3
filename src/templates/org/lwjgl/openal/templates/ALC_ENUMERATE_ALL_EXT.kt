@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_ENUMERATE_ALL_EXT() = "EnumerateAllExt".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "ENUMERATE_ALL_EXT",
-    prefix = "ALC",
-    prefixTemplate = "ALC",
-    functionProvider = FunctionProviderALC
-)   {
-
+fun ALC_ENUMERATE_ALL_EXT() = "EnumerateAllExt".nativeClassALC("ENUMERATE_ALL_EXT") {
 	nativeImport (
 		"OpenAL.h"
 	)

@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_LOKI_quadriphonic() = "LOKIQuadriphonic".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "LOKI_quadriphonic",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_LOKI_quadriphonic() = "LOKIQuadriphonic".nativeClassAL("LOKI_quadriphonic") {
 	nativeImport (
 		"OpenAL.h"
 	)

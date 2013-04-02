@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_fp16() = "KHRFP16".nativeClassCL("khr_fp16", AMD) {
+fun khr_fp16() = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
 
 	javaDoc("Native bindings to the <strong>$templateName</strong>  extension.")
 

@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_FLOAT32() = "EXTFloat32".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_FLOAT32",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_EXT_FLOAT32() = "EXTFloat32".nativeClassAL("EXT_FLOAT32") {
 	nativeImport (
 		"OpenAL.h"
 	)

@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_LINEAR_DISTANCE() = "EXTLinearDistance".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_LINEAR_DISTANCE",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_EXT_LINEAR_DISTANCE() = "EXTLinearDistance".nativeClassAL("EXT_LINEAR_DISTANCE") {
 	nativeImport (
 		"OpenAL.h"
 	)
