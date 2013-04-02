@@ -37,13 +37,9 @@ fun String.toJavaDoc(paramsIn: Iterator<Parameter>, returnDoc: String): String {
 	if ( params.isEmpty() && returnDoc.isEmpty() )
 		return this.toJavaDoc()
 
-	val javaDoc = "\t/**\n\t * ${cleanup()}\n\t"
+	val javaDoc = "\t/**\n\t * ${cleanup()}"
 
 	val builder = StringBuilder(javaDoc)
-	if ( javaDoc.indexOf('\n') == -1 )
-		builder append "\n\t *"
-	else
-		builder append " *"
 
 	if ( !params.isEmpty() ) {
 		// Find maximum param name length
@@ -51,6 +47,7 @@ fun String.toJavaDoc(paramsIn: Iterator<Parameter>, returnDoc: String): String {
 
 		val paramMultilineAligment = paramMultilineAligment(alignment)
 
+		builder append "\n\t *"
 		params.forEach {
 			builder append "\n\t * @param ${it.name}"
 
