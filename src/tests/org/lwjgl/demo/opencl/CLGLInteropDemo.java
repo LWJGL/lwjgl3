@@ -574,8 +574,10 @@ public class CLGLInteropDemo {
 		 * TODO: rebuilding programs should be possible -> remove when drivers are fixed.
 		 */
 		if ( programs[0] != null ) {
-			for ( CLProgram program : programs )
-				clReleaseProgram(program);
+			for ( CLProgram program : programs ) {
+				int errcode = clReleaseProgram(program);
+				checkCLError(errcode);
+			}
 		}
 
 		try {
@@ -602,7 +604,8 @@ public class CLGLInteropDemo {
 			System.out.println("\nOpenCL COMPILER OPTIONS: " + options);
 
 			try {
-				clBuildProgram(programs[i], device, options, null);
+				int errcode = clBuildProgram(programs[i], device, options, null);
+				checkCLError(errcode);
 			} finally {
 				System.out.println("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
 			}
@@ -611,8 +614,10 @@ public class CLGLInteropDemo {
 		rebuild = false;
 
 		// init kernel with constants
-		for ( int i = 0; i < kernels.length; i++ )
-			kernels[i] = clCreateKernel(programs[min(i, programs.length)], "mandelbrot", null);
+		for ( int i = 0; i < kernels.length; i++ ) {
+			kernels[i] = clCreateKernel(programs[min(i, programs.length)], "mandelbrot", errcode_ret);
+			checkCLError(errcode_ret);
+		}
 	}
 
 	private void initGLObjects() {
@@ -653,7 +658,8 @@ public class CLGLInteropDemo {
 				glBindBuffer(GL_PIXEL_UNPACK_BUFFER, glIDs.get(i));
 				glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4 / slices, GL_STREAM_DRAW);
 
-				glBuffers[i] = clCreateFromGLBuffer(clContext, CL_MEM_WRITE_ONLY, glIDs.get(i), (IntBuffer)null);
+				glBuffers[i] = clCreateFromGLBuffer(clContext, CL_MEM_WRITE_ONLY, glIDs.get(i), errcode_ret);
+				checkCLError(errcode_ret);
 			}
 			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		}
@@ -696,7 +702,8 @@ public class CLGLInteropDemo {
 		}
 
 		// TODO: more CL cleanup
-		clReleaseContext(clContext);
+		int errcode = clReleaseContext(clContext);
+		checkCLError(errcode);
 
 		if ( useTextures ) {
 			glDeleteProgram(program);
@@ -717,8 +724,12 @@ public class CLGLInteropDemo {
 		// make sure GL does not use our objects before we start computing
 		if ( syncCLtoGL && glEvent != null ) {
 			for ( CLCommandQueue queue : queues ) {
-				clEnqueueWaitForEvents(queue, glEvent);
-				clReleaseEvent(glEvent);
+				int errcode = clEnqueueWaitForEvents(queue, glEvent);
+				checkCLError(errcode);
+
+				errcode = clReleaseEvent(glEvent);
+				checkCLError(errcode);
+
 				glDeleteSync(glSync);
 			}
 		} else
@@ -761,15 +772,19 @@ public class CLGLInteropDemo {
 			}
 
 			// acquire GL objects, and enqueue a kernel with a probe from the list
-			clEnqueueAcquireGLObjects(queues[i], glBuffers[i], null, null);
+			int errcode = clEnqueueAcquireGLObjects(queues[i], glBuffers[i], null, null);
+			checkCLError(errcode);
 
-			clEnqueueNDRangeKernel(queues[i], kernels[i], 2,
-			                       null,
-			                       kernel2DGlobalWorkSize,
-			                       null,
-			                       null, null);
+			errcode = clEnqueueNDRangeKernel(queues[i], kernels[i], 2,
+			                                 null,
+			                                 kernel2DGlobalWorkSize,
+			                                 null,
+			                                 null, null);
+			checkCLError(errcode);
 
-			clEnqueueReleaseGLObjects(queues[i], glBuffers[i], null, syncGLtoCL ? syncBuffer : null);
+			errcode = clEnqueueReleaseGLObjects(queues[i], glBuffers[i], null, syncGLtoCL ? syncBuffer : null);
+			checkCLError(errcode);
+
 			if ( syncGLtoCL ) {
 				clEvents[i] = CLEvent.create(syncBuffer.get(0), clContext);
 				clSyncs[i] = glCreateSyncFromCLeventARB(clContext, clEvents[i], 0);
@@ -778,8 +793,10 @@ public class CLGLInteropDemo {
 
 		// block until done (important: finish before doing further gl work)
 		if ( !syncGLtoCL ) {
-			for ( int i = 0; i < slices; i++ )
-				clFinish(queues[i]);
+			for ( int i = 0; i < slices; i++ ) {
+				int errcode = clFinish(queues[i]);
+				checkCLError(errcode);
+			}
 		}
 	}
 
@@ -792,7 +809,9 @@ public class CLGLInteropDemo {
 			for ( int i = 0; i < slices; i++ ) {
 				glWaitSync(clSyncs[i], 0, 0);
 				glDeleteSync(clSyncs[i]);
-				clReleaseEvent(clEvents[i]);
+
+				int errcode = clReleaseEvent(clEvents[i]);
+				checkCLError(errcode);
 			}
 		}
 
@@ -948,8 +967,10 @@ public class CLGLInteropDemo {
 
 	private void createPrograms() throws IOException {
 		String source = getProgramSource("demo/Mandelbrot.cl");
-		for ( int i = 0; i < programs.length; i++ )
-			programs[i] = clCreateProgramWithSource(clContext, source, null);
+		for ( int i = 0; i < programs.length; i++ ) {
+			programs[i] = clCreateProgramWithSource(clContext, source, errcode_ret);
+			checkCLError(errcode_ret);
+		}
 	}
 
 	private static String getProgramSource(String file) throws IOException {
