@@ -4,6 +4,8 @@
  */
 package org.lwjgl.opencl;
 
+import static org.lwjgl.opencl.CL10.*;
+
 /** This class is a wrapper around a cl_sampler pointer. */
 public class CLSampler extends CLObjectChild<CLContext> {
 
@@ -16,6 +18,11 @@ public class CLSampler extends CLObjectChild<CLContext> {
 			return null;
 
 		return new CLSampler(cl_sampler, context);
+	}
+
+	@Override
+	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetSamplerInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetSamplerInfo);
 	}
 
 }

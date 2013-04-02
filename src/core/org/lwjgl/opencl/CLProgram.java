@@ -4,6 +4,13 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.APIBuffer;
+
+import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.system.APIUtil.*;
+
 /** This class is a wrapper around a cl_program pointer. */
 public class CLProgram extends CLObjectChild<CLContext> {
 
@@ -16,6 +23,42 @@ public class CLProgram extends CLObjectChild<CLContext> {
 			return null;
 
 		return new CLProgram(cl_program, context);
+	}
+
+	@Override
+	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetProgramInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetProgramInfo);
+	}
+
+	private int getBuildInfo(CLDevice device, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetProgramBuildInfo(getPointer(), device.getPointer(), param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetProgramBuildInfo);
+	}
+
+	public int getBuildInfoInt(CLDevice device, int param_name) {
+		APIBuffer __buffer = apiBuffer();
+		int errcode = getBuildInfo(device, param_name, 4L, __buffer.address(), 0L);
+		if ( LWJGLUtil.DEBUG )
+			checkCLError(errcode);
+		return __buffer.intValue(0);
+	}
+
+	public String getBuildInfoString(CLDevice device, int param_name) {
+		APIBuffer __buffer = apiBuffer();
+
+		// Get string length
+		int errcode = getBuildInfo(device, param_name, 0L, 0L, __buffer.address());
+		if ( LWJGLUtil.DEBUG )
+			checkCLError(errcode);
+
+		int bytes = __buffer.intValue(0);
+		__buffer.bufferParam(bytes);
+
+		// Get string
+		errcode = getBuildInfo(device, param_name, bytes, __buffer.address(), 0L);
+		if ( LWJGLUtil.DEBUG )
+			checkCLError(errcode);
+
+		return __buffer.stringValueUTF8(0, bytes - 1); // all OpenCL char[] parameters are null-terminated
 	}
 
 }

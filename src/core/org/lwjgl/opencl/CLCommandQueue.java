@@ -4,11 +4,6 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.APIUtil;
-
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.opencl.CL10.*;
 
 /** This class is a wrapper around a cl_command_queue pointer. */
@@ -33,10 +28,9 @@ public class CLCommandQueue extends CLObjectChild<CLDevice> {
 		return context;
 	}
 
-	public int getInfoInt(int param_name) {
-		APIBuffer __buffer = APIUtil.apiBuffer();
-		clGetCommandQueueInfo(this, param_name, 4, __buffer.buffer(), (ByteBuffer)null);
-		return __buffer.intValue(0);
+	@Override
+	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetCommandQueueInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetCommandQueueInfo);
 	}
 
 }

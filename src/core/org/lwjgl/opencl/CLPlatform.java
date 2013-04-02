@@ -4,13 +4,11 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.opencl.CLUtil.*;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.APIUtil;
 import org.lwjgl.system.FastLongMap;
 import org.lwjgl.system.FunctionProvider;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,21 +98,9 @@ public class CLPlatform extends CLObject {
 		return platforms;
 	}
 
-	private static final StringInfoProvider<CLPlatform> stringInfoProvider = new StringInfoProvider<CLPlatform>() {
-		public int getInfo(CLPlatform platform, int param_name, long param_value_size, ByteBuffer param_value, ByteBuffer param_value_size_ret) {
-			return clGetPlatformInfo(platform, param_name, param_value_size, param_value, param_value_size_ret);
-		}
-	};
-
-	/**
-	 * Returns the String value of the specified parameter.
-	 *
-	 * @param param_name the parameter
-	 *
-	 * @return the parameter value
-	 */
-	public String getInfoString(int param_name) {
-		return CLUtil.getInfoStringUTF8(this, param_name, stringInfoProvider);
+	@Override
+	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
+		return nclGetPlatformInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetPlatformInfo);
 	}
 
 	/**
