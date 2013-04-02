@@ -30,8 +30,8 @@ public enum class BufferType(val mapping: PointerMapping) {
 }
 
 public class AutoType(reference: String, vararg val types: BufferType) : ReferenceModifier(reference) {
-	class object {
-		val CLASS = javaClass<AutoType>()
+	class object: ModifierObject<AutoType> {
+		override val key = javaClass<AutoType>()
 	}
 
 	{

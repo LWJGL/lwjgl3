@@ -29,8 +29,9 @@ abstract class TemplateElement {
 	}
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] == modifier
-	fun has(modifier: Class<out TemplateModifier>) = modifiers.containsKey(modifier)
+	fun has(modifierObject: ModifierObject<*>) = modifiers.containsKey(modifierObject.key)
 	fun <T: TemplateModifier> get(modifier: Class<T>): T = modifiers[modifier] as T
+	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>): T = modifiers[modifierObject.key] as T
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modifier: Class<out ReferenceModifier>, reference: String): Boolean {
@@ -38,7 +39,8 @@ abstract class TemplateElement {
 		return mod != null && (mod as ReferenceModifier).reference equals reference
 	}
 
-	fun hasSpecialModifier() = modifiers.values().find { it.isSpecial } != null
+	open val isSpecial: Boolean
+		get() = modifiers.values().any { it.isSpecial }
 
 }
 
@@ -49,6 +51,10 @@ public trait TemplateModifier {
 
 	/** Implementations should check that the specified template type is valid for this modifier. */
 	fun validate(element: TemplateElement)
+}
+
+public trait ModifierObject<T: TemplateModifier> {
+	val key: Class<T>
 }
 
 public abstract class FunctionModifier: TemplateModifier {

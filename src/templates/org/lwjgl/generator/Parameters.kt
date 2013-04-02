@@ -11,6 +11,9 @@ abstract class QualifiedType(
 	val nativeType: NativeType
 ): TemplateElement() {
 
+	override val isSpecial: Boolean
+		get() = isBufferPointer || super.isSpecial
+
 	val isBufferPointer: Boolean
 		get() = nativeType is PointerType && (nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER
 
@@ -134,6 +137,9 @@ public class Parameter(
 
 	// --- [ Helper functions & properties ] ----
 
+	override val isSpecial: Boolean
+		get() = nativeType.mapping == PointerMapping.NAKED_POINTER || super.isSpecial
+
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
 
@@ -214,8 +220,8 @@ public val virtual: ParameterModifier = object : ParameterModifier() {
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 public class AutoSize(reference: String, vararg val dependent: String): ReferenceModifier(reference) {
-	class object {
-		val CLASS = javaClass<AutoSize>()
+	class object: ModifierObject<AutoSize> {
+		override val key = javaClass<AutoSize>()
 	}
 
 	/** If not null, the expression will be appended to the parameter. */
@@ -281,8 +287,8 @@ public class Check(
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
 ): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<Check>()
+	class object: ModifierObject<Check> {
+		override val key = javaClass<Check>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -297,8 +303,8 @@ public class Check(
 public fun Check(value: Int): Check = Check(Integer.toString(value))
 
 class Nullable internal(val optional: Boolean): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<Nullable>()
+	class object: ModifierObject<Nullable> {
+		override val key = javaClass<Nullable>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -331,8 +337,8 @@ public class Expression(
 	/** If true, the parameter will not be removed from the method signature. */
 	val keepParam: Boolean = false
 ): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<Expression>()
+	class object: ModifierObject<Expression> {
+		override val key = javaClass<Expression>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -340,8 +346,8 @@ public class Expression(
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
 public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<MultiType>()
+	class object: ModifierObject<MultiType> {
+		override val key = javaClass<MultiType>()
 	}
 
 	{
@@ -372,8 +378,8 @@ public class Return(
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
 ): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<Return>()
+	class object: ModifierObject<Return> {
+		override val key = javaClass<Return>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -393,8 +399,8 @@ public val returnValue: Return = Return("", "")
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
 public class SingleValue(val newName: String): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<SingleValue>()
+	class object: ModifierObject<SingleValue> {
+		override val key = javaClass<SingleValue>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -421,8 +427,8 @@ public class PointerArray(
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
 	val lengthsParam: String? = null
 ): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<PointerArray>()
+	class object: ModifierObject<PointerArray> {
+		override val key = javaClass<PointerArray>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -439,8 +445,8 @@ public class PointerArray(
 }
 
 public class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
-	class object {
-		val CLASS = javaClass<Callback>()
+	class object: ModifierObject<Callback> {
+		override val key = javaClass<Callback>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -460,8 +466,8 @@ public class MapPointer(
 	/** An expression that defines the ByteBuffer capacity. */
 	val sizeExpression: String
 ): ReturnValueModifier() {
-	class object {
-		val CLASS = javaClass<MapPointer>()
+	class object: ModifierObject<MapPointer> {
+		override val key = javaClass<MapPointer>()
 	}
 
 	override val isSpecial: Boolean = true
@@ -478,8 +484,8 @@ public class Construct(
 	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
 	vararg val otherArgs: String
 ): ReturnValueModifier() {
-	class object {
-		val CLASS = javaClass<Construct>()
+	class object: ModifierObject<Construct> {
+		override val key = javaClass<Construct>()
 	}
 
 	override val isSpecial: Boolean = true
