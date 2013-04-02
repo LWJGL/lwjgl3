@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output") {
+fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output", AMD) {
 	nativeImport (
 		"OpenGL.h"
 	)

@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", "KHR") {
+fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", KHR) {
 	nativeImport (
 		"OpenCL.h"
 	)

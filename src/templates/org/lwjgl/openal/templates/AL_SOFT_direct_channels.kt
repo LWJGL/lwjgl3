@@ -7,13 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_SOFT_direct_channels() = "SOFTDirectChannels".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "SOFT_direct_channels",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
+fun AL_SOFT_direct_channels() = "SOFTDirectChannels".nativeClassAL("SOFT_direct_channels") {
 
 	nativeImport (
 		"OpenAL.h"

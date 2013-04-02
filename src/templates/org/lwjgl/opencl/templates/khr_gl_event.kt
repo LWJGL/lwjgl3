@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", "KHR") {
+fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 	nativeImport (
 		"OpenCL.h",
 		"opengl_types.h"

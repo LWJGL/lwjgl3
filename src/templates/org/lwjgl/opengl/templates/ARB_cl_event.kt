@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.opencl.*
 
-fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event") {
+fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", ARB) {
 	javaImport(
 		"org.lwjgl.opencl.*"
 	)

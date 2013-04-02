@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_EXT_DEDICATED() = "EXTDedicated".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_DEDICATED",
-    prefix = "AL",
-    prefixTemplate = "ALC",
-    functionProvider = FunctionProviderALC
-)   {
-
+fun ALC_EXT_DEDICATED() = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix = AL) {
 	nativeImport (
 		"OpenAL.h"
 	)

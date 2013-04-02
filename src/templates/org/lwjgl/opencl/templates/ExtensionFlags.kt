@@ -10,6 +10,7 @@ import org.lwjgl.opencl.*
 val KHR = "KHR"
 
 val AMD = "AMD"
+val APPLE = "APPLE"
 val INTEL = "INTEL"
 val NV = "NV"
 

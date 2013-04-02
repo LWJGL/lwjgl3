@@ -7,13 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_MULAW() = "EXTMulaw".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_MULAW",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
+fun AL_EXT_MULAW() = "EXTMulaw".nativeClassAL("EXT_MULAW") {
 
 	nativeImport (
 		"OpenAL.h"

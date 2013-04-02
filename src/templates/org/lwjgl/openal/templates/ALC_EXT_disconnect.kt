@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_EXT_disconnect() = "EXTDisconnect".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_disconnect",
-    prefix = "ALC",
-    prefixTemplate = "ALC",
-    functionProvider = FunctionProviderALC
-)   {
-
+fun ALC_EXT_disconnect() = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 	nativeImport (
 		"OpenAL.h"
 	)

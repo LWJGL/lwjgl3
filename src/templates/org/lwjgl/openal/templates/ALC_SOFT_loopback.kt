@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "SOFT_loopback",
-    prefix = "ALC",
-    prefixTemplate = "ALC",
-    functionProvider = FunctionProviderALC
-)   {
-
+fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	nativeImport (
 		"OpenAL.h"
 	)
@@ -45,7 +38,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClass(
     ).toJavaDocLinks();
 
     val CreateContextParameters = IntConstant.block(
-    	" Accepted as part of the @{code attrList} parameter of alcCreateContext.",
+    	"Accepted as part of the @{code attrList} parameter of alcCreateContext.",
 
         "FORMAT_CHANNELS_SOFT" _ 0x1990,
         "FORMAT_TYPE_SOFT" _ 0x1991

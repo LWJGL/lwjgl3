@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_SOFT_loop_points() = "SOFTLoopPoints".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "SOFT_loop_points",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_SOFT_loop_points() = "SOFTLoopPoints".nativeClassAL("SOFT_loop_points") {
 	nativeImport (
 		"OpenAL.h"
 	)

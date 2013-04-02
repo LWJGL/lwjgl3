@@ -7,14 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_OFFSET() = "EXTOffset".nativeClass(
-    packageName = "org.lwjgl.openal",
-    templateName = "EXT_OFFSET",
-    prefix = "AL",
-    prefixTemplate = "AL",
-    functionProvider = FunctionProviderAL
-)   {
-
+fun AL_EXT_OFFSET() = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 	nativeImport (
 		"OpenAL.h"
 	)
