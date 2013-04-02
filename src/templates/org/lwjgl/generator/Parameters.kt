@@ -219,10 +219,12 @@ public val virtual: ParameterModifier = object : ParameterModifier() {
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
-public class AutoSize(reference: String, vararg val dependent: String): ReferenceModifier(reference) {
+public class AutoSize(override val reference: String, vararg val dependent: String): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoSize> {
 		override val key = javaClass<AutoSize>()
 	}
+
+	override val isSpecial: Boolean = true
 
 	/** If not null, the expression will be appended to the parameter. */
 	var expression: String? = null
@@ -241,12 +243,7 @@ public class AutoSize(reference: String, vararg val dependent: String): Referenc
 
 	public fun hasReference(reference: String): Boolean = this.reference == reference || dependent.any { it == reference }
 
-	override fun validate(element: TemplateElement) {
-		if ( element !is Parameter )
-			throw IllegalArgumentException("The AutoSize modifier can only be applied on parameters.")
-
-		val param = element as Parameter
-
+	override fun validate(param: Parameter) {
 		if ( param.paramType == ParameterType.OUT )
 			throw IllegalArgumentException("The AutoSize modifier can only be applied on input parameters.")
 

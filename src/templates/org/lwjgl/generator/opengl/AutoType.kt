@@ -29,21 +29,19 @@ public enum class BufferType(val mapping: PointerMapping) {
 
 }
 
-public class AutoType(reference: String, vararg val types: BufferType) : ReferenceModifier(reference) {
+public class AutoType(override val reference: String, vararg val types: BufferType) : ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoType> {
 		override val key = javaClass<AutoType>()
 	}
+
+	override val isSpecial: Boolean = false
 
 	{
 		if ( types.isEmpty() )
 			throw IllegalArgumentException("No buffer types specified.")
 	}
 
-	override fun validate(element: TemplateElement) {
-		if ( element !is Parameter )
-			throw IllegalArgumentException("The AutoType modifier can only be applied on parameters.")
-
-		val param = element as Parameter
+	override fun validate(param: Parameter) {
 		if ( param.nativeType != GLenum )
 			throw IllegalArgumentException("The AutoType modifier can only be applied on GLenum parameters.")
 	}
