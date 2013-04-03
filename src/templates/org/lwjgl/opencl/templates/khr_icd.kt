@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", KHR) {
-	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)} extension.")
+	javaDoc("Native bindings to the $extensionLink extension.")
 
 	IntConstant.block(
 		"Accepted as {@code param_name} to the function {@link CL10#clGetPlatformInfo}.",

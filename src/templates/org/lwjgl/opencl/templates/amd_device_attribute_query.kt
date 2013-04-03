@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun amd_device_attribute_query() = "AMDDeviceAttributeQuery".nativeClassCL("amd_device_attribute_query", AMD) {
 
-	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)} extension.")
+	javaDoc("Native bindings to the $extensionLink extension.")
 
 	IntConstant.block(
 		"Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo}.",

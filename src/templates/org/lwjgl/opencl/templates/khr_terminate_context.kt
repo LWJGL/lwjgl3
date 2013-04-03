@@ -14,7 +14,7 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 
 	javaDoc(
 		"""
-		Native bindings to the <strong>$templateName</strong> extension.
+		Native bindings to the $extensionName extension.
 
 		OpenCL provides an API to release a context. This operation is done only after all queues, memory object, programs and kernels are released, which in
 		turn might wait for all ongoing operations to complete. However, there are cases in which a fast release is required, or release operation cannot be

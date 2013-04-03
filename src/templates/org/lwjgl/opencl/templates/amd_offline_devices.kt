@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun amd_offline_devices() = "AMDOfflineDevices".nativeClassCL("amd_offline_devices", AMD) {
 
-	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"""

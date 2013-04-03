@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_gl_msaa_sharing() = "KHRGLMSAASharing".nativeClassCL("khr_gl_msaa_sharing", KHR) {
 
-	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"cl_gl_texture_info",

@@ -12,7 +12,7 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("apple_gl_sharing", APPL
 		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the <strong>cl_apple_gl_sharing</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"Error code returned by {@link #clGetGLContextInfoAPPLE} if an invalid {@code platform_gl_ctx} is provided.",

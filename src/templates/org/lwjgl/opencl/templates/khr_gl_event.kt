@@ -16,7 +16,7 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 
 	javaDoc(
 		"""
-		Native bindings to the <strong>$templateName</strong> extension.
+		Native bindings to the $extensionName extension.
 
 		This extension allows creating OpenCL event objects linked to OpenGL fence sync objects, potentially improving efficiency of sharing images and buffers
 		between the two APIs. The companion {@link org.lwjgl.opengl.ARBCLEvent} extension provides the complementary functionality of creating an OpenGL sync

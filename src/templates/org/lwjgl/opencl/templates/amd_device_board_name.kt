@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun amd_device_board_name() = "AMDDeviceBoardName".nativeClassCL("amd_device_board_name", AMD) {
 
-	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"""

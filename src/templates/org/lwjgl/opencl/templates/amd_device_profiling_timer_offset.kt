@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun amd_device_profiling_timer_offset() = "AMDDeviceProfilingTimerOffset".nativeClassCL("amd_device_profiling_timer_offset", AMD) {
 
-	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo}. Returns the offset in nanoseconds between event timestamps.",
