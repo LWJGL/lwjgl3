@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", KHR) {
-	nativeImport (
-		"OpenCL.h"
-	)
-
 	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)} extension.")
 
 	IntConstant.block(
@@ -25,5 +21,7 @@ fun khr_icd() = "KHRICD".nativeClassCL("khr_icd", KHR) {
 
 		"PLATFORM_NOT_FOUND_KHR" _ -1001
 	)
+
+	// clIcdGetPlatformIDsKHR is not exposed through the ICD.
 
 }

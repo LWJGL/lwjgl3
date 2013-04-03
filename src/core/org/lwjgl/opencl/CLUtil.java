@@ -24,24 +24,55 @@ public final class CLUtil {
 
 	private CLUtil() {}
 
+	/**
+	 * Checks the {@code errcode} present in the current position of the given {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
+	 * equal to {@link CL10#CL_SUCCESS}.
+	 *
+	 * @param errcode_ret the {@code errcode} buffer
+	 *
+	 * @throws OpenCLException
+	 */
 	public static void checkCLError(ByteBuffer errcode_ret) {
 		checkCLError(errcode_ret.getInt(errcode_ret.position()));
 	}
 
+	/**
+	 * Checks the {@code errcode} present in the current position of the given {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
+	 * equal to {@link CL10#CL_SUCCESS}.
+	 *
+	 * @param errcode_ret the {@code errcode} buffer
+	 *
+	 * @throws OpenCLException
+	 */
 	public static void checkCLError(IntBuffer errcode_ret) {
 		checkCLError(errcode_ret.get(errcode_ret.position()));
 	}
 
+	/**
+	 * Checks the given {@code errcode} and throws an {@link OpenCLException} if it's not equal to {@link CL10#CL_SUCCESS}.
+	 *
+	 * @param errcode the {@code errcode} to check
+	 *
+	 * @throws OpenCLException
+	 */
 	public static void checkCLError(int errcode) {
 		if ( errcode != CL_SUCCESS )
-			throwCLError(errcode);
+			throw new OpenCLException("Error Code: " + getErrcodeName(errcode));
 	}
 
-	private static void throwCLError(int errcode) {
+	/**
+	 * Returns the token name of the given {@code errcode}.
+	 *
+	 * @param errcode the {@code errcode}
+	 *
+	 * @return the {@code errcode} token name
+	 */
+	public static String getErrcodeName(int errcode) {
 		String errname = CL_ERROR_TOKENS.get(errcode);
 		if ( errname == null )
-			errname = "UNKNOWN";
-		throw new OpenCLException("Error Code: " + errname);
+			errname = "UNKNOWN [" + LWJGLUtil.toHexString(errcode) + "]";
+
+		return errname;
 	}
 
 }
