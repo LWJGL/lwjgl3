@@ -12,7 +12,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)} extension.")
+	javaDoc("Native bindings to the $extensionLink extension.")
 
 	IntConstant.block(
 		"""

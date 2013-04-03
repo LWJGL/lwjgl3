@@ -196,3 +196,9 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 
 public fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
 	nativeClass("org.lwjgl.opencl", templateName, "", "CL", "CL", postfix, FunctionProviderCL, init)
+
+public val NativeClass.extensionLink: String
+	get() = link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)
+
+public val NativeClass.extensionName: String
+	get() = "<strong>$templateName</strong>"

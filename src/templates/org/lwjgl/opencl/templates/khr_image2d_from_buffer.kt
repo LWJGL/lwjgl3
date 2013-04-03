@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_image2d_from_buffer() = "KHRImage2DFromBuffer".nativeClassCL("khr_image2d_from_buffer", KHR) {
 
-	javaDoc("Native bindings to the <strong>$templateName</strong> extension.")
+	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
 		"""

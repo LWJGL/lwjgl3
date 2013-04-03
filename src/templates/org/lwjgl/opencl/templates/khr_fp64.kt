@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_fp64() = "KHRFP64".nativeClassCL("khr_fp64", KHR) {
 
-	javaDoc("Native bindings to the ${link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)}  extension.")
+	javaDoc("Native bindings to the $extensionLink  extension.")
 
 	IntConstant.block(
 		"cl_device_info",

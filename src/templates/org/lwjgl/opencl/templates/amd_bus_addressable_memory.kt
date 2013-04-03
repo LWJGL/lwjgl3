@@ -14,7 +14,7 @@ fun amd_bus_addressable_memory() = "AMDBusAddressableMemory".nativeClassCL("amd_
 
 	javaDoc(
 		"""
-		Native bindings to the <strong>$templateName</strong> extension.
+		Native bindings to the $extensionName extension.
 
 		This extension defines an API for peer-to-peer transfers between AMD GPUs and other PCIe device, such as third-party SDI I/O devices. Peer-to-peer
 		transfers have extremely low latencies by not having to use the host's main memory or the CPU. This extension allows sharing a memory allocated by the
