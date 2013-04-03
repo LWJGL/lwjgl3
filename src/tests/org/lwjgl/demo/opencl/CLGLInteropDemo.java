@@ -19,7 +19,9 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
@@ -102,6 +104,9 @@ public class CLGLInteropDemo {
 
 	// ------------------
 
+	/** The event callbacks run on the main thread. We use this queue to apply any changes in the rendering thread. */
+	private final Queue<Runnable> events = new ConcurrentLinkedQueue<Runnable>();
+
 	private int width;
 	private int height;
 
@@ -148,8 +153,6 @@ public class CLGLInteropDemo {
 	private boolean doublePrecision   = true;
 	private boolean shouldInitBuffers = true;
 	private boolean rebuild;
-
-	private boolean run = true;
 
 	// EVENT SYNCING
 
@@ -662,6 +665,10 @@ public class CLGLInteropDemo {
 		long fps = 0;
 
 		while ( glfwWindowShouldClose(window.handle) == GL_FALSE ) {
+			Runnable event;
+			while ( (event = events.poll()) != null )
+				event.run();
+
 			display();
 
 			SwapBuffers(HDC);
@@ -853,11 +860,16 @@ public class CLGLInteropDemo {
 			private int mouseY;
 
 			@Override
-			public void windowSize(long window, int width, int height) {
-				CLGLInteropDemo.this.width = width;
-				CLGLInteropDemo.this.height = height;
+			public void windowSize(long window, final int width, final int height) {
+				events.add(new Runnable() {
+					@Override
+					public void run() {
+						CLGLInteropDemo.this.width = width;
+						CLGLInteropDemo.this.height = height;
 
-				shouldInitBuffers = true;
+						shouldInitBuffers = true;
+					}
+				});
 			}
 
 			@Override
@@ -873,29 +885,46 @@ public class CLGLInteropDemo {
 					return;
 
 				if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_8 ) {
-					int number = key - GLFW_KEY_1 + 1;
-					slices = min(number, min(queues.length, MAX_PARALLELISM_LEVEL));
-					log("NEW PARALLELISM LEVEL: " + slices);
-					shouldInitBuffers = true;
+					final int number = key - GLFW_KEY_1 + 1;
+					events.offer(new Runnable() {
+						@Override
+						public void run() {
+							slices = min(number, min(queues.length, MAX_PARALLELISM_LEVEL));
+							log("NEW PARALLELISM LEVEL: " + slices);
+							shouldInitBuffers = true;
+						}
+					});
 				} else {
 					switch ( key ) {
 						case GLFW_KEY_SPACE:
-							drawSeparator = !drawSeparator;
-							log("SEPARATOR DRAWING IS NOW: " + (drawSeparator ? "ON" : "OFF"));
+							events.offer(new Runnable() {
+								@Override
+								public void run() {
+									drawSeparator = !drawSeparator;
+									log("SEPARATOR DRAWING IS NOW: " + (drawSeparator ? "ON" : "OFF"));
+								}
+							});
 							break;
 						case GLFW_KEY_D:
-							doublePrecision = !doublePrecision;
-							log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
-							rebuild = true;
+							events.offer(new Runnable() {
+								@Override
+								public void run() {
+									doublePrecision = !doublePrecision;
+									log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
+									rebuild = true;
+								}
+							});
 							break;
 						case GLFW_KEY_HOME:
-							minX = -2f;
-							minY = -1.2f;
-							maxX = 0.6f;
-							maxY = 1.3f;
-							break;
-						case GLFW_KEY_ESCAPE:
-							run = false;
+							events.offer(new Runnable() {
+								@Override
+								public void run() {
+									minX = -2f;
+									minY = -1.2f;
+									maxX = 0.6f;
+									maxY = 1.3f;
+								}
+							});
 							break;
 					}
 				}
