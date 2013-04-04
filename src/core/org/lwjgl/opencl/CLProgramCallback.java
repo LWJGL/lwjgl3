@@ -30,7 +30,7 @@ abstract class CLProgramCallback {
 
 	static long register(CLProgramCallback proc) {
 		if ( proc == null )
-			return 0L;
+			return NULL;
 
 		return memGlobalRefNew(proc); // this global reference is deleted in native code (after invoke)
 	}

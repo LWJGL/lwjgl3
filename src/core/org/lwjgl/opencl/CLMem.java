@@ -5,6 +5,7 @@
 package org.lwjgl.opencl;
 
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class CLMem extends CLObjectChild<CLContext> {
 
@@ -23,14 +24,14 @@ public class CLMem extends CLObjectChild<CLContext> {
 	}
 
 	public static CLMem create(long cl_mem, CLContext context) {
-		if ( cl_mem == 0L )
+		if ( cl_mem == NULL )
 			return null;
 
 		return new CLMem(cl_mem, context);
 	}
 
 	public static CLMem create(long pointer, CLMem parent) {
-		if ( pointer == 0L )
+		if ( pointer == NULL )
 			return null;
 
 		return new CLMem(pointer, parent.getParent());

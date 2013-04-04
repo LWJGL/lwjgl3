@@ -6,13 +6,15 @@ package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
 
+import static org.lwjgl.system.MemoryUtil.*;
+
 /** An object wrapper around a native pointer address. */
 public abstract class PointerWrapper {
 
 	protected final long pointer;
 
 	protected PointerWrapper(long pointer) {
-		if ( LWJGLUtil.DEBUG && pointer == 0L )
+		if ( LWJGLUtil.DEBUG && pointer == NULL )
 			throw new NullPointerException();
 
 		this.pointer = pointer;

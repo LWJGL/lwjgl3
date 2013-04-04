@@ -41,9 +41,9 @@ public final class GL {
 					public long getFunctionAddress(String functionName) {
 						ByteBuffer nameBuffer = memEncodeASCII(functionName);
 						long address = wglGetProcAddress(nameBuffer);
-						if ( address == 0L ) {
+						if ( address == NULL ) {
 							address = GetProcAddress(OPENGL.getHandle(), nameBuffer);
-							if ( address == 0L )
+							if ( address == NULL )
 								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
 						}
 
@@ -101,7 +101,7 @@ public final class GL {
 		long GetString = functionProvider.getFunctionAddress("glGetString");
 		long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
-		if ( GetError == 0L || GetString == 0L || GetIntegerv == 0L )
+		if ( GetError == NULL || GetString == NULL || GetIntegerv == NULL )
 			throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
 
 		int errorCode = nglGetError(GetError);
@@ -210,11 +210,11 @@ public final class GL {
 		String wglExtensions;
 
 		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
-		if ( wglGetExtensionsString != 0L ) {
+		if ( wglGetExtensionsString != NULL ) {
 			wglExtensions = memDecodeASCII(memByteBufferNT1(nwglGetExtensionsStringARB(wglGetCurrentDC(), wglGetExtensionsString)));
 		} else {
 			wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringEXT");
-			if ( wglGetExtensionsString == 0L )
+			if ( wglGetExtensionsString == NULL )
 				return;
 
 			wglExtensions = memDecodeASCII(memByteBufferNT1(nwglGetExtensionsStringEXT(wglGetExtensionsString)));
@@ -226,15 +226,15 @@ public final class GL {
 	}
 
 	static long getFunctionAddress(FunctionProvider provider, String functionName, boolean fc) {
-		return fc ? 0L : provider.getFunctionAddress(functionName);
+		return fc ? NULL : provider.getFunctionAddress(functionName);
 	}
 
 	static boolean isFunctionSupported(long address) {
-		return address != 0L;
+		return address != NULL;
 	}
 
 	static boolean isFunctionSupported(long address, boolean fc) {
-		return fc || address != 0L;
+		return fc || address != NULL;
 	}
 
 	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {

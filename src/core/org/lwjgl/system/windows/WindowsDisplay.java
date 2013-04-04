@@ -1,14 +1,11 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.Sys;
-import org.lwjgl.system.FastLongMap;
 
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinUser.*;
@@ -28,29 +25,18 @@ public class WindowsDisplay {
 			memEncodeASCII("DefWindowProcW")
 		);
 
-	/** Handle to the LWJGL global window proc. */
-	public static final long LWJGL_WINDOW_PROC;
-
 	static {
-		try {
-			LWJGL_WINDOW_PROC = setJavaWindowProc(WindowsDisplay.class.getDeclaredMethod("windowProc", long.class, int.class, long.class, long.class));
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		}
-
 		if ( DEF_WINDOW_PROC == 0 )
 			throw new RuntimeException("Failed to retrieve the default window proc.");
-
-		if ( LWJGL_WINDOW_PROC == 0 )
-			throw new RuntimeException("Failed to retrieve the LWJGL window proc.");
 	}
 
 	/** Each window created increments this integer. */
 	private static final AtomicInteger WINDOW_ID = new AtomicInteger(0);
 
-	private static final FastLongMap<WindowsDisplay> windowMap = new FastLongMap<WindowsDisplay>();
-
 	private final int id;
+
+	private final WindowProc wndProc;
+	private final long       wndProcRef;
 
 	private final short classAtom;
 
@@ -72,26 +58,29 @@ public class WindowsDisplay {
 	public WindowsDisplay(String title, int width, int height) {
 		this.id = WINDOW_ID.incrementAndGet();
 
+		this.wndProc = new WindowProcImpl();
+		this.wndProcRef = memGlobalRefNew(wndProc);
+
 		this.windowPos = WINDOWPOS.malloc();
 		WINDOWPOS.cxSet(windowPos, width);
 		WINDOWPOS.cySet(windowPos, height);
 
 		String className = "LWJGL" + id;
 
-		ByteBuffer in = WNDCLASSEX.malloc();
-
-		WNDCLASSEX.sizeSet(in, WNDCLASSEX.SIZEOF);
-		WNDCLASSEX.styleSet(in, CS_OWNDC); // CS_HREDRAW | CS_VREDRAW
-		WNDCLASSEX.wndProcSet(in, LWJGL_WINDOW_PROC);
-		WNDCLASSEX.clsExtraSet(in, 0);
-		WNDCLASSEX.wndExtraSet(in, 0);
-		WNDCLASSEX.instanceSet(in, HINSTANCE);
-		WNDCLASSEX.iconSet(in, nLoadIcon(0, IDI_APPLICATION));
-		WNDCLASSEX.cursorSet(in, nLoadCursor(0, IDC_ARROW));
-		WNDCLASSEX.backgroundSet(in, 0);
-		WNDCLASSEX.menuNameSet(in, 0);
-		WNDCLASSEX.classNameSet(in, className);
-		WNDCLASSEX.iconSmSet(in, 0);
+		ByteBuffer in = WNDCLASSEX.malloc(
+			WNDCLASSEX.SIZEOF,
+			CS_OWNDC /*| CS_HREDRAW | CS_VREDRAW*/,
+			WindowProc.CALLBACK,
+			0,
+			POINTER_SIZE + 4, // WNDPROC reference + reserved int
+			HINSTANCE,
+			nLoadIcon(0, IDI_APPLICATION),
+			nLoadCursor(0, IDC_ARROW),
+			NULL,
+			null,
+			className,
+			NULL
+		);
 
 		this.classAtom = RegisterClassEx(in);
 		windowsCheckHandle(classAtom, "Failed to register window class");
@@ -103,11 +92,9 @@ public class WindowsDisplay {
 			// WS_OVERLAPPEDWINDOW == WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
 			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, // CLIP CHILDREN & SIBLINGS are required for OpenGL windows
 			0, 0, width, height,
-			0, 0, HINSTANCE, 0
+			NULL, NULL, HINSTANCE, wndProcRef
 		);
 		windowsCheckHandle(hwnd, "Failed to create window");
-
-		windowMap.put(hwnd, this);
 
 		hdc = GetDC(hwnd);
 		windowsCheckHandle(hdc, "Failed to get device context handle.");
@@ -158,44 +145,46 @@ public class WindowsDisplay {
 	public void destroy() {
 		windowsCheckResult(DestroyWindow(hwnd), "DestroyWindow");
 		windowsCheckResult(UnregisterClass("LWJGL" + id, HINSTANCE), "UnregisterClass");
+
+		memGlobalRefDelete(wndProcRef);
 	}
 
 	public boolean isCloseRequested() {
 		return closeRequested;
 	}
 
-	private static long windowProc(
-		long window, int msg, long wParam, long lParam
-	) {
-		//System.out.println("In WINDOW PROC: " + Integer.toHexString(msg) + " - " +wParam + " - " +lParam);
+	private class WindowProcImpl extends WindowProc {
 
-		switch ( msg ) {
-			case WM_QUIT:
-				System.out.println("\tQUIT!");
-				windowMap.get(window).closeRequested = true;
-				return 0;
-			case WM_SYSCOMMAND:
-				switch ( (int)(wParam & 0xfff0) ) {
-					case SC_KEYMENU:
-					case SC_MOUSEMENU:
-					case SC_SCREENSAVE:
-					case SC_MONITORPOWER:
-						return 0;
-					case SC_CLOSE:
-						System.out.println("\tSC_CLOSE!");
-						windowMap.get(window).closeRequested = true;
-						return 0;
-					default:
-						break;
-				}
-				break;
-			case WM_WINDOWPOSCHANGED:
-				memCopy(lParam, memAddress(windowMap.get(window).windowPos), WINDOWPOS.SIZEOF);
-				break;
+		public long invoke(long hWnd, int msg, long wParam, long lParam) {
+			//System.out.println("In WINDOW PROC: " + Integer.toHexString(msg) + " - " +wParam + " - " +lParam);
+
+			switch ( msg ) {
+				case WM_QUIT:
+					System.out.println("\tQUIT!");
+					closeRequested = true;
+					return 0;
+				case WM_SYSCOMMAND:
+					switch ( (int)(wParam & 0xfff0) ) {
+						case SC_KEYMENU:
+						case SC_MOUSEMENU:
+						case SC_SCREENSAVE:
+						case SC_MONITORPOWER:
+							return 0;
+						case SC_CLOSE:
+							System.out.println("\tSC_CLOSE!");
+							closeRequested = true;
+							return 0;
+						default:
+							break;
+					}
+					break;
+				case WM_WINDOWPOSCHANGED:
+					memCopy(lParam, memAddress(windowPos), WINDOWPOS.SIZEOF);
+					break;
+			}
+
+			return DefWindowProc(hwnd, msg, wParam, lParam);
 		}
-		return DefWindowProc(window, msg, wParam, lParam);
 	}
-
-	private static native long setJavaWindowProc(Method method);
 
 }

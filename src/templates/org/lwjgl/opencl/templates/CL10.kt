@@ -9,8 +9,6 @@ import org.lwjgl.opencl.*
 
 // -- [ Reusable definitions ] --
 
-val NULL = "{@code NULL}"
-
 val CL_SUCCESS = "{@link CL10#CL_SUCCESS}"
 val CL_TRUE = "{@link CL10#CL_TRUE}"
 val CL_FALSE = "{@link CL10#CL_FALSE}"

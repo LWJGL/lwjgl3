@@ -7,6 +7,7 @@ package org.lwjgl.opencl;
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_kernel pointer. */
 public class CLKernel extends CLObjectChild<CLProgram> {
@@ -16,7 +17,7 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	}
 
 	public static CLKernel create(long cl_kernel, CLProgram program) {
-		if ( cl_kernel == 0L )
+		if ( cl_kernel == NULL )
 			return null;
 
 		return new CLKernel(cl_kernel, program);

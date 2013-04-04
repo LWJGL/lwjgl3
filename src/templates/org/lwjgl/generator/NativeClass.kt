@@ -14,6 +14,8 @@ import java.util.HashMap
 public val INSTANCE: String = "__instance"
 public val EXT_FLAG: String = ""
 
+public val NULL: String = "{@code NULL}"
+
 public abstract class FunctionProvider {
 
 	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
@@ -36,30 +38,29 @@ public abstract class FunctionProvider {
 	open val isLocal: Boolean = false // GL is global, AL/CL are local
 
 	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
-	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is useD), CL depends on the parameters.
+	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL depends on the parameters.
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
 		val instanceParameter = if ( hasCurrentCapabilities )
 			""
-		else {
-			if ( function has Capabilities ) {
-				val caps = function[Capabilities]
-				if ( caps.statement != null )
-					writer.println("\t\t${caps.statement};")
-				caps.expression
-			} else {
-				try {
-					// Use the first ObjectType parameters
-					function.getParams() { it.nativeType is ObjectType }.next().name
-				} catch (e: Exception) {
-					throw IllegalStateException("Neither a Capabilities modifier nor an object parameter were found on function ${function.name}")
-				}
+		else if ( function has Capabilities ) {
+			val caps = function[Capabilities]
+			if ( caps.statement != null )
+				writer.println("\t\t${caps.statement};")
+			caps.expression
+		} else {
+			try {
+				// Use the first ObjectType parameters
+				function.getParams() { it.nativeType is ObjectType }.next().name
+			} catch (e: Exception) {
+				throw IllegalStateException("Neither a Capabilities modifier nor an object parameter were found on function ${function.name}")
 			}
 		}
 
-		if ( function has Capabilities && function[Capabilities].override )
-			writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
-		else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
+		if ( function has Capabilities && function[Capabilities].override ) {
+			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
+				writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
+		} else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
 			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else

@@ -5,6 +5,7 @@
 package org.lwjgl.opencl;
 
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_sampler pointer. */
 public class CLSampler extends CLObjectChild<CLContext> {
@@ -14,7 +15,7 @@ public class CLSampler extends CLObjectChild<CLContext> {
 	}
 
 	public static CLSampler create(long cl_sampler, CLContext context) {
-		if ( cl_sampler == 0L )
+		if ( cl_sampler == NULL )
 			return null;
 
 		return new CLSampler(cl_sampler, context);

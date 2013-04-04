@@ -5,6 +5,7 @@
 package org.lwjgl.openal;
 
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public class ALContext {
 
@@ -51,7 +52,7 @@ public class ALContext {
 
 	public void destroy() {
 		if ( isCurrent() )
-			alcMakeContextCurrent(0L);
+			alcMakeContextCurrent(NULL);
 
 		alcDestroyContext(handle);
 	}

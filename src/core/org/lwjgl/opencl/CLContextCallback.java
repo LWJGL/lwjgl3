@@ -36,7 +36,7 @@ public class CLContextCallback {
 	private static native long setCallback(Method callback);
 
 	static long register(CLContextCallback proc) {
-		return proc == null ? 0L : memGlobalRefNewWeak(proc);
+		return proc == null ? NULL : memGlobalRefNewWeak(proc);
 	}
 
 	/**

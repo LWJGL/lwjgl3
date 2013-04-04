@@ -112,7 +112,7 @@ public abstract class WindowCallback {
 	 */
 	public static void set(long window, WindowCallback proc, int eventTypes) {
 		long oldRef = glfwGetWindowUserPointer(window);
-		if ( oldRef != 0L ) {
+		if ( oldRef != NULL ) {
 			cleanup(window, oldRef);
 			windows.remove(window);
 		}
@@ -129,7 +129,7 @@ public abstract class WindowCallback {
 		WindowCallback old = memGlobalRefToObject(oldRef);
 		configEvents(window, old.eventTypes, 0L);
 
-		glfwSetWindowUserPointer(window, 0L);
+		glfwSetWindowUserPointer(window, NULL);
 		memGlobalRefDelete(oldRef);
 	}
 

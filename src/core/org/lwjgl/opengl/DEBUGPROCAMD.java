@@ -33,10 +33,10 @@ public class DEBUGPROCAMD {
 	private static native long setCallback(Method callback);
 
 	static long register(Functions context, DEBUGPROCAMD proc) {
-		if ( context.DEBUGPROCAMD != 0L )
+		if ( context.DEBUGPROCAMD != NULL )
 			memGlobalRefDelete(context.DEBUGPROCAMD);
 
-		return context.DEBUGPROCAMD = proc == null ? 0L : memGlobalRefNew(proc);
+		return context.DEBUGPROCAMD = proc == null ? NULL : memGlobalRefNew(proc);
 	}
 
 	/**
