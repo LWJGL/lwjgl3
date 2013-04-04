@@ -164,7 +164,6 @@ var kotlin = {set:function(e, g, c) {
   Kotlin.modules = {};
   Kotlin.Exception = Kotlin.$createClass();
   Kotlin.RuntimeException = Kotlin.$createClass(Kotlin.Exception);
-  Kotlin.IndexOutOfBounds = Kotlin.$createClass(Kotlin.Exception);
   Kotlin.NullPointerException = Kotlin.$createClass(Kotlin.Exception);
   Kotlin.NoSuchElementException = Kotlin.$createClass(Kotlin.Exception);
   Kotlin.IllegalArgumentException = Kotlin.$createClass(Kotlin.Exception);
@@ -231,14 +230,10 @@ var kotlin = {set:function(e, g, c) {
     this.array = [];
     this.$size = 0
   }, get:function(a) {
-    if(0 > a || a >= this.$size) {
-      throw Kotlin.IndexOutOfBounds;
-    }
+    this.checkRange(a);
     return this.array[a]
   }, set:function(a, b) {
-    if(0 > a || a >= this.$size) {
-      throw Kotlin.IndexOutOfBounds;
-    }
+    this.checkRange(a);
     this.array[a] = b
   }, toArray:function() {
     return this.array.slice(0, this.$size)
@@ -257,8 +252,9 @@ var kotlin = {set:function(e, g, c) {
     }
     this.$size += a.size()
   }, removeAt:function(a) {
-    this.array.splice(a, 1);
-    this.$size--
+    this.checkRange(a);
+    this.$size--;
+    return this.array.splice(a, 1)[0]
   }, clear:function() {
     this.$size = this.array.length = 0
   }, indexOf:function(a) {
@@ -272,6 +268,10 @@ var kotlin = {set:function(e, g, c) {
     return"[" + this.array.join(", ") + "]"
   }, toJSON:function() {
     return this.array
+  }, checkRange:function(a) {
+    if(0 > a || a >= this.$size) {
+      throw new Kotlin.IndexOutOfBoundsException;
+    }
   }});
   Kotlin.Runnable = Kotlin.$createClass({initialize:function() {
   }, run:e("Runnable#run")});
@@ -408,6 +408,21 @@ var kotlin = {set:function(e, g, c) {
     }
     return b
   };
+  Kotlin.numberArrayOfSize = function(a) {
+    return Kotlin.arrayFromFun(a, function() {
+      return 0
+    })
+  };
+  Kotlin.charArrayOfSize = function(a) {
+    return Kotlin.arrayFromFun(a, function() {
+      return"\x00"
+    })
+  };
+  Kotlin.booleanArrayOfSize = function(a) {
+    return Kotlin.arrayFromFun(a, function() {
+      return!1
+    })
+  };
   Kotlin.arrayFromFun = function(a, b) {
     for(var c = Array(a), d = 0;d < a;d++) {
       c[d] = b(d)
@@ -423,7 +438,7 @@ var kotlin = {set:function(e, g, c) {
   Kotlin.toString = function(a) {
     return a.toString()
   };
-  Kotlin.jsonFromTuples = function(a) {
+  Kotlin.jsonFromPairs = function(a) {
     for(var b = a.length, c = {};0 < b;) {
       --b, c[a[b][0]] = a[b][1]
     }
