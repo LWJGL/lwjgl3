@@ -182,11 +182,7 @@ public final class MemoryUtil {
 
 		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
-		int size = 0;
-		while ( infPointer.get(size) != 0 )
-			size++;
-
-		return memSetupBuffer(infPointer, address, size);
+		return memSetupBuffer(infPointer, address, memStrLen1(infPointer, 0));
 	}
 
 	/**
@@ -207,14 +203,7 @@ public final class MemoryUtil {
 
 		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
 
-		int size = 0;
-		while ( true ) {
-			if ( infPointer.getChar(size) == 0 )
-				break;
-			size += 2;
-		}
-
-		return memSetupBuffer(infPointer, address, size);
+		return memSetupBuffer(infPointer, address, memStrLen2(infPointer, 0));
 	}
 
 	/**
@@ -656,41 +645,267 @@ public final class MemoryUtil {
 		return out;
 	}
 
+	/**
+	 * Calculates the length of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is assumed
+	 * to be a single {@code \0} character.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 *
+	 * @return the string length, <strong>in bytes</strong>
+	 */
+	public static int memStrLen1(ByteBuffer buffer) {
+		return memStrLen1(buffer, buffer.position());
+	}
+
+	/**
+	 * Calculates the length of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a single
+	 * {@code \0} character.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 * @param from   the index at which to start the search
+	 *
+	 * @return the string length, <strong>in bytes</strong>
+	 */
+	public static int memStrLen1(ByteBuffer buffer, int from) {
+		int to = from;
+		while ( to < buffer.remaining() ) {
+			if ( buffer.get(to) == 0 )
+				break;
+			to++;
+		}
+		return to - from;
+	}
+
+	/**
+	 * Calculates the length of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is assumed
+	 * to be 2 consecutive {@code \0} characters.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 *
+	 * @return the string length, <strong>in bytes</strong>
+	 */
+	public static int memStrLen2(ByteBuffer buffer) {
+		return memStrLen2(buffer, buffer.position());
+	}
+
+	/**
+	 * Calculates the length of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be 2
+	 * consecutive {@code \0} characters.
+	 *
+	 * @param buffer the {@link ByteBuffer} that contains the string
+	 * @param from   the index at which to start the search
+	 *
+	 * @return the string length, <strong>in bytes</strong>
+	 */
+	public static int memStrLen2(ByteBuffer buffer, int from) {
+		int to = from;
+		while ( to < buffer.remaining() ) {
+			if ( buffer.getChar(to) == 0 )
+				break;
+			to += 2;
+		}
+		return to - from;
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as an ASCII string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode, or null
+	 *
+	 * @return the decoded {@link String} or null if the given {@code } is null
+	 */
 	public static String memDecodeASCII(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		char[] chars = new char[buffer.remaining()];
+		return memDecodeASCII(buffer, buffer.remaining());
+	}
 
-		int pos = buffer.position();
-		for ( int i = 0; i < chars.length; i++ )
-			chars[i] = (char)buffer.get(pos + i);
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as an ASCII string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeASCII(ByteBuffer buffer, int length) {
+		return memDecodeASCII(buffer, length, buffer.position());
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as an ASCII string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 * @param offset the offset at which to start decoding.
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeASCII(ByteBuffer buffer, int length, int offset) {
+		char[] chars = new char[length];
+
+		for ( int i = 0; i < length; i++ )
+			chars[i] = (char)buffer.get(offset + i);
 
 		return new String(chars);
 	}
 
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-8 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode, or null
+	 *
+	 * @return the decoded {@link String} or null if the given {@code } is null
+	 */
 	public static String memDecodeUTF8(ByteBuffer buffer) {
 		return memDecode(buffer, UTF8);
 	}
 
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-8 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeUTF8(ByteBuffer buffer, int length) {
+		return memDecode(buffer, UTF8, length);
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-8 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 * @param offset the offset at which to start decoding.
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeUTF8(ByteBuffer buffer, int length, int offset) {
+		return memDecode(buffer, UTF8, length, offset);
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-16 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode, or null
+	 *
+	 * @return the decoded {@link String} or null if the given {@code } is null
+	 */
 	public static String memDecodeUTF16(ByteBuffer buffer) {
 		if ( buffer == null )
 			return null;
 
-		char[] chars = new char[buffer.remaining() >> 1];
+		return memDecodeUTF16(buffer, buffer.remaining());
+	}
 
-		int pos = buffer.position();
-		for ( int i = 0; i < chars.length; i++ )
-			chars[i] = buffer.getChar(pos + (i << 1));
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-16 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeUTF16(ByteBuffer buffer, int length) {
+		return memDecodeUTF16(buffer, length, buffer.position());
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-16 string.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer the {@link ByteBuffer} to decode
+	 * @param length the number of bytes to decode
+	 * @param offset the offset at which to start decoding.
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecodeUTF16(ByteBuffer buffer, int length, int offset) {
+		char[] chars = new char[length >> 1];
+
+		for ( int i = 0; i < chars.length; i++ ) {
+			chars[i] = buffer.getChar(offset + (i << 1));
+		}
 
 		return new String(chars);
 	}
 
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, using the given {@code charset}.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer  the {@link ByteBuffer} to decode, or null
+	 * @param charset the {@link Charset} to use for decoding
+	 *
+	 * @return the decoded {@link String} or null if the given {@code buffer} is null
+	 */
 	public static String memDecode(ByteBuffer buffer, Charset charset) {
 		if ( buffer == null )
 			return null;
 
-		return decodeImpl(buffer, charset);
+		return memDecode(buffer, charset, buffer.remaining());
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, using the given {@code charset}.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer  the {@link ByteBuffer} to decode
+	 * @param length  the number of bytes to decode
+	 * @param charset the {@link Charset} to use for decoding
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecode(ByteBuffer buffer, Charset charset, int length) {
+		return memDecode(buffer, charset, length, buffer.position());
+	}
+
+	/**
+	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, using the given {@code charset}.
+	 * <p/>
+	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 *
+	 * @param buffer  the {@link ByteBuffer} to decode
+	 * @param length  the number of bytes to decode
+	 * @param offset  the offset at which to start decoding. It must be &#x2264; the current limit of {@code buffer}.
+	 * @param charset the {@link Charset} to use for decoding
+	 *
+	 * @return the decoded {@link String}
+	 */
+	public static String memDecode(ByteBuffer buffer, Charset charset, int length, int offset) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+		try {
+			buffer.position(offset);
+			buffer.limit(offset + length);
+
+			return decodeImpl(buffer, charset);
+		} finally {
+			buffer.limit(limit);
+			buffer.position(position);
+		}
 	}
 
 	private static String decodeImpl(ByteBuffer in, Charset charset) {
