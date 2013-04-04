@@ -53,7 +53,7 @@ public abstract class CLObject extends PointerWrapper {
 	 */
 	public int getInfoInt(int param_name) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = getInfo(getPointer(), param_name, 4L, __buffer.address(), 0L);
+		int errcode = getInfo(getPointer(), param_name, 4L, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 		return __buffer.intValue(0);
@@ -68,7 +68,7 @@ public abstract class CLObject extends PointerWrapper {
 	 */
 	public long getInfoLong(int param_name) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = getInfo(getPointer(), param_name, 8L, __buffer.address(), 0L);
+		int errcode = getInfo(getPointer(), param_name, 8L, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 		return __buffer.longValue(0);
@@ -94,7 +94,7 @@ public abstract class CLObject extends PointerWrapper {
 	 */
 	public long getInfoPointer(int param_name) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = getInfo(getPointer(), param_name, POINTER_SIZE, __buffer.address(), 0L);
+		int errcode = getInfo(getPointer(), param_name, POINTER_SIZE, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 		return __buffer.pointerValue(0);
@@ -139,7 +139,7 @@ public abstract class CLObject extends PointerWrapper {
 	 */
 	public String getInfoStringASCII(int param_name, int param_value_size) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = getInfo(getPointer(), param_name, param_value_size, __buffer.address(), 0L);
+		int errcode = getInfo(getPointer(), param_name, param_value_size, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 		return __buffer.stringValueASCII(0, param_value_size);
@@ -168,7 +168,7 @@ public abstract class CLObject extends PointerWrapper {
 	 */
 	public String getInfoStringUTF8(int param_name, int param_value_size) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = getInfo(getPointer(), param_name, param_value_size, __buffer.address(), 0L);
+		int errcode = getInfo(getPointer(), param_name, param_value_size, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 		return __buffer.stringValueUTF8(0, param_value_size);
@@ -176,7 +176,7 @@ public abstract class CLObject extends PointerWrapper {
 
 	private int getInfoString(int param_name, APIBuffer __buffer) {
 		// Get string length
-		int errcode = getInfo(getPointer(), param_name, 0, 0L, __buffer.address());
+		int errcode = getInfo(getPointer(), param_name, 0, NULL, __buffer.address());
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 
@@ -184,7 +184,7 @@ public abstract class CLObject extends PointerWrapper {
 		__buffer.bufferParam(bytes);
 
 		// Get string
-		errcode = getInfo(getPointer(), param_name, bytes, __buffer.address(), 0L);
+		errcode = getInfo(getPointer(), param_name, bytes, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG )
 			checkCLError(errcode);
 

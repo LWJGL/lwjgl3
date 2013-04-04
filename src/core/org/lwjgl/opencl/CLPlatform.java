@@ -15,6 +15,7 @@ import java.util.List;
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_platform_id pointer. */
 public class CLPlatform extends CLObject {
@@ -68,11 +69,11 @@ public class CLPlatform extends CLObject {
 		FunctionProvider functionProvider = CL.getFunctionProvider();
 
 		long clGetPlatformIDs = functionProvider.getFunctionAddress("clGetPlatformIDs");
-		if ( clGetPlatformIDs == 0L )
+		if ( clGetPlatformIDs == NULL )
 			throw new OpenCLException("A core OpenCL function could not be found. Make sure that OpenCL has been loaded.");
 
 		APIBuffer __buffer = APIUtil.apiBuffer();
-		int errcode = nclGetPlatformIDs(0, 0L, __buffer.address(), clGetPlatformIDs);
+		int errcode = nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
 		checkCLError(errcode);
 
 		int num_platforms = __buffer.intValue(0);
@@ -81,7 +82,7 @@ public class CLPlatform extends CLObject {
 
 		__buffer.bufferParam(num_platforms << POINTER_SHIFT);
 
-		errcode = nclGetPlatformIDs(num_platforms, __buffer.address(), 0L, clGetPlatformIDs);
+		errcode = nclGetPlatformIDs(num_platforms, __buffer.address(), NULL, clGetPlatformIDs);
 		checkCLError(errcode);
 
 		long[] platformIDs = new long[num_platforms];

@@ -11,6 +11,8 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import static org.lwjgl.system.MemoryUtil.*;
+
 /**
  * A class to check buffer boundaries in general. If there is insufficient space
  * in the buffer when the call is made then a buffer overflow would otherwise
@@ -31,7 +33,7 @@ public final class Checks {
 	 * @throws IllegalStateException
 	 */
 	public static long checkFunctionAddress(long pointer) {
-		if ( pointer == 0 )
+		if ( pointer == NULL )
 			throw new IllegalStateException("Function is not supported");
 
 		return pointer;
@@ -45,7 +47,7 @@ public final class Checks {
 	 * @throws NullPointerException
 	 */
 	public static long checkPointer(long pointer) {
-		if ( pointer == 0 )
+		if ( pointer == NULL )
 			throw new NullPointerException();
 
 		return pointer;
@@ -108,7 +110,7 @@ public final class Checks {
 	/** Ensures that the specified PointerBuffer is null-terminated. */
 	public static PointerBuffer checkNT(PointerBuffer buf) {
 		checkBuffer(buf, 1);
-		if ( buf.get(buf.limit() - 1) != 0L )
+		if ( buf.get(buf.limit() - 1) != NULL )
 			throw new IllegalArgumentException("Missing null termination");
 
 		return buf;

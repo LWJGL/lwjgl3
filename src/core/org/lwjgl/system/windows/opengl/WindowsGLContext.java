@@ -9,6 +9,7 @@ import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.WGLARBCreateContext.*;
 import static org.lwjgl.opengl.WGLARBCreateContextProfile.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WGL.*;
 
 public class WindowsGLContext extends GLContext {
@@ -109,7 +110,7 @@ public class WindowsGLContext extends GLContext {
 		attribs.put(0);
 		attribs.flip();
 
-		long hglrc = wglCreateContextAttribsARB(hdc, 0L, attribs);
+		long hglrc = wglCreateContextAttribsARB(hdc, NULL, attribs);
 		if ( hglrc == 0 )
 			throw new RuntimeException("Failed to create OpenGL context.");
 

@@ -33,10 +33,10 @@ public class DEBUGPROC {
 	private static native long setCallback(Method callback);
 
 	static long register(GL43.Functions context, DEBUGPROC proc) {
-		if ( context.DEBUGPROC != 0L )
+		if ( context.DEBUGPROC != NULL )
 			memGlobalRefDelete(context.DEBUGPROC);
 
-		return context.DEBUGPROC = proc == null ? 0L : memGlobalRefNew(proc);
+		return context.DEBUGPROC = proc == null ? NULL : memGlobalRefNew(proc);
 	}
 
 	/**

@@ -10,6 +10,7 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_device_id pointer. */
 public class CLDevice extends CLObjectChild<CLPlatform> {
@@ -23,7 +24,7 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 	}
 
 	public static CLDevice create(long cl_device_id, CLPlatform platform) {
-		if ( cl_device_id == 0L )
+		if ( cl_device_id == NULL )
 			return null;
 
 		return new CLDevice(cl_device_id, platform);

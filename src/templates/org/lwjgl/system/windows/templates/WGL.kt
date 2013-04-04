@@ -139,7 +139,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		nullable _ HGLRC.IN(
 			"context",
 			"""
-			handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is NULL, the function
+			handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is $NULL, the function
 			makes the calling thread's current rendering context no longer current, and releases the device context that is used by the rendering context. In
 			this case, {@code hdc} is ignored.
 			"""
@@ -241,7 +241,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
-			an array of {@code count} {@link GLYPHMETRICSFLOAT} structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is NULL, no
+			an array of {@code count} {@link GLYPHMETRICSFLOAT} structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no
 			glyph metrics are returned.
 			"""
 		)

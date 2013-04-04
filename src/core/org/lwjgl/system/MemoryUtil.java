@@ -24,6 +24,9 @@ import static org.lwjgl.Pointer.*;
  */
 public final class MemoryUtil {
 
+	/** Alias for the null pointer address. */
+	public static final long NULL = 0L;
+
 	//private static final Charset ASCII;
 	private static final Charset UTF8;
 	//private static final Charset UTF16;
@@ -58,11 +61,11 @@ public final class MemoryUtil {
 	 */
 	public static long memAddress0(Buffer buffer) { return ACCESSOR.getAddress(buffer); }
 
-	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? 0L : ACCESSOR.getAddress(buffer); }
+	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer); }
 
 	public static long memAddress0(PointerBuffer buffer) { return ACCESSOR.getAddress(buffer.getBuffer()); }
 
-	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? 0L : ACCESSOR.getAddress(buffer.getBuffer()); }
+	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer.getBuffer()); }
 
 	// --- [ Buffer address utilities ] ---
 
@@ -100,37 +103,37 @@ public final class MemoryUtil {
 
 	// --- [ Buffer address utilities - Safe ] ---
 
-	public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(ByteBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(ByteBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(ShortBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(ShortBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(ShortBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(ShortBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(CharBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(CharBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(CharBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(CharBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(IntBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(IntBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(IntBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(IntBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(FloatBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(FloatBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(FloatBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(FloatBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(LongBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(LongBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(LongBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(LongBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(DoubleBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(DoubleBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(DoubleBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(DoubleBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	public static long memAddressSafe(PointerBuffer buffer) { return buffer == null ? 0L : memAddress(buffer); }
+	public static long memAddressSafe(PointerBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? 0L : memAddress(buffer, position); }
+	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
 	// --- [ Buffer allocation utilities ] ---
 
@@ -145,7 +148,7 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address <= NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newByteBuffer(address, capacity);
@@ -177,7 +180,7 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT1(long address) {
-		if ( address == 0L )
+		if ( address == NULL )
 			return null;
 
 		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
@@ -198,7 +201,7 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT2(long address) {
-		if ( address == 0L )
+		if ( address == NULL )
 			return null;
 
 		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
@@ -215,7 +218,7 @@ public final class MemoryUtil {
 	 * @return the new ShortBuffer
 	 */
 	public static ShortBuffer memShortBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newShortBuffer(address, capacity);
@@ -230,7 +233,7 @@ public final class MemoryUtil {
 	 * @return the new CharBuffer
 	 */
 	public static CharBuffer memCharBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newCharBuffer(address, capacity);
@@ -245,7 +248,7 @@ public final class MemoryUtil {
 	 * @return the new IntBuffer
 	 */
 	public static IntBuffer memIntBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newIntBuffer(address, capacity);
@@ -260,7 +263,7 @@ public final class MemoryUtil {
 	 * @return the new LongBuffer
 	 */
 	public static LongBuffer memLongBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newLongBuffer(address, capacity);
@@ -275,7 +278,7 @@ public final class MemoryUtil {
 	 * @return the new FloatBuffer
 	 */
 	public static FloatBuffer memFloatBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newFloatBuffer(address, capacity);
@@ -290,7 +293,7 @@ public final class MemoryUtil {
 	 * @return the new DoubleBuffer
 	 */
 	public static DoubleBuffer memDoubleBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newDoubleBuffer(address, capacity);
@@ -326,7 +329,7 @@ public final class MemoryUtil {
 	 * @return the modified ByteBuffer
 	 */
 	public static ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -334,7 +337,7 @@ public final class MemoryUtil {
 
 	/** ShortBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -342,7 +345,7 @@ public final class MemoryUtil {
 
 	/** CharBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -350,7 +353,7 @@ public final class MemoryUtil {
 
 	/** IntBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -358,7 +361,7 @@ public final class MemoryUtil {
 
 	/** LongBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -366,7 +369,7 @@ public final class MemoryUtil {
 
 	/** FloatBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -374,7 +377,7 @@ public final class MemoryUtil {
 
 	/** DoubleBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= 0L || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
@@ -390,7 +393,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to set
 	 */
 	public static void memSet(long ptr, int value, int bytes) {
-		if ( LWJGLUtil.DEBUG && ptr <= 0L )
+		if ( LWJGLUtil.DEBUG && ptr == NULL )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memSet(ptr, value, bytes);
@@ -404,7 +407,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to copy
 	 */
 	public static void memCopy(long src, long dst, int bytes) {
-		if ( LWJGLUtil.DEBUG && (src <= 0L || dst <= 0L || bytes < 0) )
+		if ( LWJGLUtil.DEBUG && (src == NULL || dst == NULL || bytes < 0) )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memCopy(src, dst, bytes);

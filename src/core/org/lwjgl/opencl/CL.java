@@ -58,7 +58,7 @@ public final class CL {
 					{
 						clGetExtensionFunctionAddress = GetProcAddress(OPENCL.getHandle(), "clGetExtensionFunctionAddress");
 						clGetExtensionFunctionAddressForPlatform = GetProcAddress(OPENCL.getHandle(), "clGetExtensionFunctionAddressForPlatform");
-						if ( clGetExtensionFunctionAddress == 0L && clGetExtensionFunctionAddressForPlatform == 0L ) {
+						if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
 							OPENCL.destroy();
 							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 						}
@@ -70,7 +70,7 @@ public final class CL {
 					@Override
 					public long getFunctionAddress(String functionName) {
 						long address = GetProcAddress(OPENCL.getHandle(), functionName);
-						if ( address == 0L )
+						if ( address == NULL )
 							LWJGLUtil.log("Failed to locate address for CL platform function " + functionName);
 
 						return address;
@@ -80,11 +80,11 @@ public final class CL {
 					public long getFunctionAddress(long handle, String functionName) {
 						ByteBuffer nameBuffer = memEncodeASCII(functionName);
 						long address =
-							clGetExtensionFunctionAddressForPlatform != 0L ?
+							clGetExtensionFunctionAddressForPlatform != NULL ?
 							nclGetExtensionFunctionAddressForPlatform(handle, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform) :
 							nclGetExtensionFunctionAddress(memAddress(nameBuffer), clGetExtensionFunctionAddress);
 
-						if ( address == 0L )
+						if ( address == NULL )
 							LWJGLUtil.log("Failed to locate address for CL extension function " + functionName);
 
 						return address;
@@ -122,7 +122,7 @@ public final class CL {
 		long clGetPlatformInfo = functionProvider.getFunctionAddress("clGetPlatformInfo");
 		long clGetDeviceIDs = functionProvider.getFunctionAddress("clGetDeviceIDs");
 		long clGetDeviceInfo = functionProvider.getFunctionAddress("clGetDeviceInfo");
-		if ( LWJGLUtil.DEBUG && (clGetPlatformInfo == 0L || clGetDeviceIDs == 0L || clGetDeviceInfo == 0L) )
+		if ( LWJGLUtil.DEBUG && (clGetPlatformInfo == NULL || clGetDeviceIDs == NULL || clGetDeviceInfo == NULL) )
 			throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 		Set<String> supportedExtensions = new HashSet<String>(32);
@@ -134,7 +134,7 @@ public final class CL {
 		// Enumerate devices
 		{
 			APIBuffer __buffer = apiBuffer();
-			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, 0L, __buffer.address(), clGetDeviceIDs);
+			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address(), clGetDeviceIDs);
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query number of OpenCL platform devices.");
 
@@ -144,7 +144,7 @@ public final class CL {
 
 			__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
-			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), 0L, clGetDeviceIDs);
+			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL, clGetDeviceIDs);
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query OpenCL platform devices.");
 
@@ -204,14 +204,14 @@ public final class CL {
 		APIBuffer __buffer = apiBuffer();
 
 		__buffer.intValue(0, 0);
-		int errcode = nclGetPlatformInfo(platform, param_name, 0L, 0L, __buffer.address(), clGetPlatformInfo);
+		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address(), clGetPlatformInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL platform information.");
 
 		int bytes = __buffer.intValue(0);
 
 		__buffer.bufferParam(bytes);
-		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), 0L, clGetPlatformInfo);
+		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), NULL, clGetPlatformInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query OpenCL platform information.");
 
@@ -222,14 +222,14 @@ public final class CL {
 		APIBuffer __buffer = apiBuffer();
 
 		__buffer.intValue(0, 0);
-		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, 0L, __buffer.address(), clGetDeviceInfo);
+		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address(), clGetDeviceInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL device information.");
 
 		int bytes = __buffer.intValue(0);
 
 		__buffer.bufferParam(bytes);
-		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), 0L, clGetDeviceInfo);
+		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), NULL, clGetDeviceInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query OpenCL device information.");
 

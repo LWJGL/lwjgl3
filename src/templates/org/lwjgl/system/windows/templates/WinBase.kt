@@ -53,7 +53,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		    specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/). The name is compared (case independently) to the
 		    names of modules currently mapped into the address space of the calling process.
 
-			If this parameter is NULL, {@code GetModuleHandle} returns a handle to the file used to create the calling process (.exe file).
+			If this parameter is $NULL, {@code GetModuleHandle} returns a handle to the file used to create the calling process (.exe file).
 		    """
 		)
 	)

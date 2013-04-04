@@ -32,7 +32,7 @@ public final class AL {
 		public long getFunctionAddress(String functionName) {
 			ByteBuffer nameBuffer = memEncodeASCII(functionName);
 			long address = nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
-			if ( address == 0L )
+			if ( address == NULL )
 				LWJGLUtil.log("Failed to locate address for AL function " + functionName);
 
 			return address;
@@ -89,7 +89,7 @@ public final class AL {
 
 		long GetString = functionProvider.getFunctionAddress("alGetString");
 		long IsExtensionPresent = functionProvider.getFunctionAddress("alIsExtensionPresent");
-		if ( GetString == 0L || IsExtensionPresent == 0L )
+		if ( GetString == NULL || IsExtensionPresent == NULL )
 			throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that OpenAL has been loaded.");
 
 		// Parse EXTENSIONS string

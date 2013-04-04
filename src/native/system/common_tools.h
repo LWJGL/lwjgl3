@@ -11,4 +11,8 @@ extern JNIEnv *getThreadEnv();
 extern JNIEnv *attachCurrentThread();
 extern void detachCurrentThread();
 
+#ifdef _MSC_VER
+	#define inline __inline
+#endif
+
 #endif

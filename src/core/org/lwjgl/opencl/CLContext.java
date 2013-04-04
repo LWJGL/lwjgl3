@@ -23,21 +23,21 @@ public class CLContext extends CLObjectChild<CLPlatform> {
 	}
 
 	public static CLContext create(long cl_context, CLPlatform platform) {
-		return create(cl_context, platform, 0L, 0L);
+		return create(cl_context, platform, NULL, NULL);
 	}
 
 	/** Used internally only. */
 	static CLContext create(long cl_context, CLPlatform platform, long pfn_notify, long user_data) {
-		if ( cl_context == 0L )
+		if ( cl_context == NULL )
 			return null;
 
-		return new CLContext(cl_context, platform, 0L);
+		return new CLContext(cl_context, platform, NULL);
 	}
 
 	/** Used internally only. */
 	static CLContext create(long cl_context, CLPlatform platform, CLContextCallback pfn_notify, long user_data) {
-		if ( cl_context == 0L ) {
-			if ( user_data != 0L )
+		if ( cl_context == NULL ) {
+			if ( user_data != NULL )
 				memGlobalRefDeleteWeak(user_data);
 
 			return null;
@@ -53,7 +53,7 @@ public class CLContext extends CLObjectChild<CLPlatform> {
 
 	@Override
 	protected void finalize() throws Throwable {
-		if ( contextCallback != 0L )
+		if ( contextCallback != NULL )
 			memGlobalRefDeleteWeak(contextCallback);
 	}
 

@@ -5,6 +5,7 @@
 package org.lwjgl.opencl;
 
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_event pointer. */
 public class CLEvent extends CLObjectChild<CLContext> {
@@ -14,7 +15,7 @@ public class CLEvent extends CLObjectChild<CLContext> {
 	}
 
 	public static CLEvent create(long cl_event, CLContext context) {
-		if ( cl_event == 0L )
+		if ( cl_event == NULL )
 			return null;
 
 		return new CLEvent(cl_event, context);

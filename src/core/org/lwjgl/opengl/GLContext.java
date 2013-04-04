@@ -4,6 +4,8 @@
  */
 package org.lwjgl.opengl;
 
+import static org.lwjgl.system.MemoryUtil.*;
+
 public abstract class GLContext {
 
 	final ContextCapabilities capabilities;
@@ -31,8 +33,8 @@ public abstract class GLContext {
 
 	public void destroy() {
 		// Clean-up callbacks
-		if ( capabilities.GL_AMD_debug_output && capabilities.__AMDDebugOutput.DEBUGPROCAMD != 0L ) AMDDebugOutput.glDebugMessageCallbackAMD(null);
-		if ( capabilities.OpenGL43 && capabilities.__GL43.DEBUGPROC != 0L ) GL43.glDebugMessageCallback(null);
+		if ( capabilities.GL_AMD_debug_output && capabilities.__AMDDebugOutput.DEBUGPROCAMD != NULL ) AMDDebugOutput.glDebugMessageCallbackAMD(null);
+		if ( capabilities.OpenGL43 && capabilities.__GL43.DEBUGPROC != NULL ) GL43.glDebugMessageCallback(null);
 
 		destroyImpl();
 	}

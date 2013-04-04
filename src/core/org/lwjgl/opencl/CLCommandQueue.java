@@ -5,6 +5,7 @@
 package org.lwjgl.opencl;
 
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_command_queue pointer. */
 public class CLCommandQueue extends CLObjectChild<CLDevice> {
@@ -18,7 +19,7 @@ public class CLCommandQueue extends CLObjectChild<CLDevice> {
 	}
 
 	public static CLCommandQueue create(long cl_command_queue, CLContext context, CLDevice device) {
-		if ( cl_command_queue == 0L )
+		if ( cl_command_queue == NULL )
 			return null;
 
 		return new CLCommandQueue(cl_command_queue, context, device);

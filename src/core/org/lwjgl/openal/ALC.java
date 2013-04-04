@@ -54,7 +54,7 @@ public final class ALC {
 						OPENAL = lib;
 
 						alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
-						if ( alcGetProcAddress == 0L ) {
+						if ( alcGetProcAddress == NULL ) {
 							lib.destroy();
 							throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
 						}
@@ -63,7 +63,7 @@ public final class ALC {
 					@Override
 					public long getFunctionAddress(String functionName) {
 						long address = GetProcAddress(OPENAL.getHandle(), functionName);
-						if ( address == 0L )
+						if ( address == NULL )
 							LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
 
 						return address;
@@ -73,7 +73,7 @@ public final class ALC {
 					public long getFunctionAddress(long handle, String functionName) {
 						ByteBuffer nameBuffer = memEncodeASCII(functionName);
 						long address = nalcGetProcAddress(handle, memAddress(nameBuffer), alcGetProcAddress);
-						if ( address == 0L )
+						if ( address == NULL )
 							LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
 
 						return address;
@@ -114,7 +114,7 @@ public final class ALC {
 
 		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName);
 		long device = nalcOpenDevice(memAddressSafe(nameBuffer), alcOpenDevice);
-		if ( device == 0L )
+		if ( device == NULL )
 			throw new RuntimeException("Failed to open the device.");
 
 		return new ALCContext(device);
@@ -143,7 +143,7 @@ public final class ALC {
 			checkFunctionAddress(alcGetString);
 
 		long __result = nalcGetString(deviceHandle, token, alcGetString);
-		if ( __result == 0L )
+		if ( __result == NULL )
 			return null;
 
 		ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE);
@@ -185,7 +185,7 @@ public final class ALC {
 		long GetString = functionProvider.getFunctionAddress("alcGetString");
 		long IsExtensionPresent = functionProvider.getFunctionAddress("alcIsExtensionPresent");
 
-		if ( GetIntegerv == 0L || GetString == 0L || IsExtensionPresent == 0L )
+		if ( GetIntegerv == NULL || GetString == NULL || IsExtensionPresent == NULL )
 			throw new IllegalStateException("Core ALC functions could not be found. Make sure that OpenAL has been loaded.");
 
 		APIBuffer __buffer = APIUtil.apiBuffer();
