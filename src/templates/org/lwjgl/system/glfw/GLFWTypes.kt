@@ -55,7 +55,6 @@ val GLFWvidmode = StructType(
 		int.member("greenBits")
 	}
 )
-val GLFWvidmode_p = PointerType(GLFWvidmode)
 
 val GLFW_GAMMA_RAMP_SIZE = 256
 val GLFWgammaramp = StructType(
