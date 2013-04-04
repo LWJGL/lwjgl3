@@ -17,20 +17,17 @@ abstract class QualifiedType(
 	val isBufferPointer: Boolean
 		get() = nativeType is PointerType && (nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER
 
-	val isStructValue: Boolean
-		get() = nativeType is StructType && !(nativeType as StructType).includesPointer
-
-	open val javaMethodType: String
+	val javaMethodType: String
 		get() = when {
 			nativeType is ObjectType -> nativeType.className
 			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
 			else -> nativeType.javaMethodType.getSimpleName()
 		}
 
-	open val nativeMethodType: String
+	val nativeMethodType: String
 		get() = nativeType.nativeMethodType.getSimpleName()
 
-	open val jniFunctionType: String
+	val jniFunctionType: String
 		get() = nativeType.jniFunctionType
 
 	val toNativeType: String
@@ -63,15 +60,6 @@ public class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
 	val isVoid: Boolean
 		get() = nativeType.mapping == TypeMapping.VOID
-
-	override val javaMethodType: String
-		get() = if ( isStructValue ) "void" else super.javaMethodType
-
-	override val nativeMethodType: String
-		get() = if ( isStructValue ) "void" else super.nativeMethodType
-
-	override val jniFunctionType: String
-		get() = if ( isStructValue ) "void" else super.jniFunctionType
 
 }
 
@@ -146,10 +134,10 @@ public class Parameter(
 	val asNativeMethodParam: String
 		get() = "$nativeMethodType $name"
 
-	fun asNativeMethodCallParam(mode: GenerationMode) = when {
+	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 	// Data pointer
 		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER -> {
-			if ( has(autoSizeResult) )
+			if ( has(autoSizeResult) && (func.returns.nativeType !is StructType || func.returnsStructValue) )
 				"$API_BUFFER.address() + $name"
 			else if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
 				"memAddressSafe($name)"

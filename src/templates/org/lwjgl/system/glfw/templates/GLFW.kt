@@ -443,7 +443,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         See {@link #glfwSetMonitorCallback} to receive notifications of configuration changes.
 		""",
 
-		autoSizeResult _ int_p.OUT("count", "")
+		autoSizeResult _ int_p.OUT("count", "the size of the returned array")
 	)
 
 	GLFWmonitor.func(
@@ -502,7 +502,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		) _ GLFWmonitorfun.IN("cbfun", "the new callback, or NULL to remove the currently set callback")
 	)
 
-	(const _ GLFWvidmode_p).func(
+	(const _ GLFWvidmode).func(
 		"GetVideoModes",
 		"""
 		This function returns an array of all video modes supported by the specified
@@ -1166,7 +1166,6 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	// [ OpenGL ]
 
-	/*
 	IntConstant.block(
 		"PixelFormat hints.",
 
@@ -1222,6 +1221,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"OPENGL_COMPAT_PROFILE" _ 0x00000002
 	)
 
+	/*
 	void.func(
 		"MakeContextCurrent",
 		"",
