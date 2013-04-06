@@ -23,30 +23,31 @@ val BOOL_p = PointerType(BOOL)
 
 val BYTE = PrimitiveType("BYTE", PrimitiveMapping.BYTE)
 val WORD = PrimitiveType("WORD", PrimitiveMapping.SHORT)
-val DWORD = PrimitiveType("DWORD", PrimitiveMapping.INT)
-val UINT = PrimitiveType("UINT", PrimitiveMapping.INT)
-val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
-
 val short = PrimitiveType("short", PrimitiveMapping.SHORT)
 val SHORT = PrimitiveType("SHORT", PrimitiveMapping.SHORT)
-val int = PrimitiveType("int", PrimitiveMapping.INT)
+val DWORD = PrimitiveType("DWORD", PrimitiveMapping.INT)
+val UINT = PrimitiveType("UINT", PrimitiveMapping.INT)
 val LONG = PrimitiveType("LONG", PrimitiveMapping.INT)
+val int = PrimitiveType("int", PrimitiveMapping.INT)
+val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only LARGE_INTEGER uses this
 
+val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.PTR)
 val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
 val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
 val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
 val SIZE_T = PrimitiveType("SIZE_T", ULONG_PTR)
 
-val int_p = PointerType("int", PointerMapping.DATA_INT)
-val UINT_p = PointerType("UINT", PointerMapping.DATA_INT)
-val FLOAT_p = PointerType("FLOAT", PointerMapping.DATA_FLOAT)
+val int_p = PointerType(int)
+val UINT_p = PointerType(UINT)
+val FLOAT_p = PointerType(FLOAT)
 
-val LRESULT = PointerType("LRESULT", includesPointer = true)
-val WPARAM = PrimitiveType("WPARAM", PrimitiveMapping.PTR)
-val LPARAM = PrimitiveType("LPARAM", PrimitiveMapping.PTR)
+val LRESULT = PrimitiveType("LRESULT", LONG_PTR)
+val WPARAM = PrimitiveType("WPARAM", UINT_PTR)
+val LPARAM = PrimitiveType("LPARAM", LONG_PTR)
 
-val HRESULT = PrimitiveType("HRESULT", PrimitiveMapping.INT)
+val HRESULT = PrimitiveType("HRESULT", LONG)
+val MMRESULT = PrimitiveType("MMRESULT", UINT)
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
@@ -126,11 +127,11 @@ val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
 val PIXELFORMATDESCRIPTOR_p = PointerType(PIXELFORMATDESCRIPTOR)
 
-val WNDPROC = PointerType(name = "WNDPROC", includesPointer = true)
+val WNDPROC = PointerType("WNDPROC", includesPointer = true)
 
-val HICON = PointerType(name = "HICON", includesPointer = true)
-val HCURSOR = PointerType(name = "HCURSOR", includesPointer = true)
-val HBRUSH = PointerType(name = "HBRUSH", includesPointer = true)
+val HICON = PointerType("HICON", includesPointer = true)
+val HCURSOR = PointerType("HCURSOR", includesPointer = true)
+val HBRUSH = PointerType("HBRUSH", includesPointer = true)
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 
@@ -331,6 +332,79 @@ val LARGE_INTEGER = StructType(
 	}
 )
 val LARGE_INTEGER_p = PointerType(LARGE_INTEGER)
+
+val LPJOYCAPS = StructType(
+	name = "LPJOYCAPS",
+    includesPointer = true,
+    definition = struct(WINDOWS_PACKAGE, "JOYCAPS") {
+	    javaDoc("Contains information about the joystick capabilities.")
+	    nativeImport("WindowsLWJGL.h")
+
+	    val MAXPNAMELEN = 32
+	    val MAX_JOYSTICKOEMVXDNAME = 260
+
+	    WORD.member("wMid", "mid")
+		WORD.member("wPid", "pid")
+		TCHAR.member("szPname", "pname", size = MAXPNAMELEN, nullTerminated = true)
+		UINT.member("wXmin", "xmin")
+		UINT.member("wXmax", "xmax")
+		UINT.member("wYmin", "ymin")
+		UINT.member("wYmax", "ymax")
+		UINT.member("wZmin", "zmin")
+		UINT.member("wZmax", "zmax")
+		UINT.member("wNumButtons", "numButtons")
+		UINT.member("wPeriodMin", "periodMin")
+		UINT.member("wPeriodMax", "periodMax")
+		UINT.member("wRmin", "rmin")
+		UINT.member("wRmax", "rmax")
+		UINT.member("wUmin", "umin")
+		UINT.member("wUmax", "umax")
+		UINT.member("wVmin", "vmin")
+		UINT.member("wVmax", "vmax")
+		UINT.member("wCaps", "caps")
+		UINT.member("wMaxAxes", "maxAxes")
+		UINT.member("wNumAxes", "numAxes")
+		UINT.member("wMaxButtons", "maxButtons")
+		TCHAR.member("szRegKey", "regKey", size = MAXPNAMELEN, nullTerminated = true)
+		TCHAR.member("szOEMVxD", "OEMVxD", size = MAX_JOYSTICKOEMVXDNAME, nullTerminated = true)
+    }
+)
+
+val LPJOYINFO = StructType(
+	name = "LPJOYINFO",
+	includesPointer = true,
+	definition = struct(WINDOWS_PACKAGE, "JOYINFO") {
+		javaDoc("Contains information about the joystick position and button state.")
+		nativeImport("WindowsLWJGL.h")
+		UINT.member("wXpos", "xPos")
+		UINT.member("wYpos", "yPos")
+		UINT.member("wZpos", "zPos")
+		UINT.member("wButtons", "buttons")
+	}
+)
+
+val LPJOYINFOEX = StructType(
+	name = "LPJOYINFOEX",
+	includesPointer = true,
+	definition = struct(WINDOWS_PACKAGE, "JOYINFOEX") {
+		javaDoc("Contains extended information about the joystick position, point-of-view position, and button state.")
+		nativeImport("WindowsLWJGL.h")
+
+		DWORD.member("dwSize", "size")
+		DWORD.member("dwFlags", "flags")
+		DWORD.member("dwXpos", "xPos")
+		DWORD.member("dwYpos", "yPos")
+		DWORD.member("dwZpos", "zPos")
+		DWORD.member("dwRpos", "rPos")
+		DWORD.member("dwUpos", "uPos")
+		DWORD.member("dwVpos", "vPos")
+		DWORD.member("dwButtons", "buttons")
+		DWORD.member("dwButtonNumber", "buttonNumber")
+		DWORD.member("dwPOV", "POV")
+		DWORD.member("dwReserved1", "reserved1")
+		DWORD.member("dwReserved2", "reserved2")
+	}
+)
 
 fun config() {
 	val COLORREF = PrimitiveType("COLORREF", PrimitiveMapping.INT)

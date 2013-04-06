@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class APIBuffer {
 
-	private static final int DEFAULT_CAPACITY = 64;
+	private static final int DEFAULT_CAPACITY = 1024;
 
 	private ByteBuffer buffer;
 	private long       address;
