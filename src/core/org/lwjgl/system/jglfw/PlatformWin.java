@@ -33,6 +33,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jglfw.InputUtil.*;
+import static org.lwjgl.system.jglfw.JGLFW.*;
 import static org.lwjgl.system.jglfw.JGLFWUtil.*;
 import static org.lwjgl.system.jglfw.WindowUtil.*;
 import static org.lwjgl.system.windows.Dwmapi.*;
@@ -123,7 +124,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			adapter.clear();
 			zeroBuffer(adapter);
 			DISPLAY_DEVICE.cbSet(adapter, DISPLAY_DEVICE.SIZEOF);
-			if ( EnumDisplayDevices((ByteBuffer)null, devNum, adapter, 0) == 0 )
+			if ( EnumDisplayDevices((ByteBuffer)null, devNum, adapter, 0) == FALSE )
 				break;
 
 			devNum++;
@@ -193,7 +194,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			ByteBuffer dm = DEVMODE.malloc();
 			DEVMODE.sizeSet(dm, DEVMODE.SIZEOF);
 
-			if ( EnumDisplaySettings(monitorName, modeIndex, dm) == 0 )
+			if ( EnumDisplaySettings(monitorName, modeIndex, dm) == FALSE )
 				break;
 
 			modeIndex++;
@@ -234,7 +235,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	public void getGammaRamp(GLFWmonitor monitor, ByteBuffer ramp) {
 		long dc = CreateDC(DISPLAY, memEncodeUTF16(monitor.getName()), null, null);
 
-		if ( GetDeviceGammaRamp(dc, memAddress(ramp)) == 0 )
+		if ( GetDeviceGammaRamp(dc, memAddress(ramp)) == FALSE )
 			System.err.println("GetDeviceGammaRamp failed.");
 
 		DeleteDC(dc);
@@ -244,7 +245,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	public void setGammaRamp(GLFWmonitor monitor, ByteBuffer ramp) {
 		long dc = CreateDC(DISPLAY, memEncodeUTF16(monitor.getName()), null, null);
 
-		if ( SetDeviceGammaRamp(dc, memAddress(ramp)) == 0 )
+		if ( SetDeviceGammaRamp(dc, memAddress(ramp)) == FALSE )
 			System.err.println("SetDeviceGammaRamp failed.");
 
 		DeleteDC(dc);
@@ -458,7 +459,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			if ( MSG.messageGet(msg) == WM_QUIT ) {
 				// Treat WM_QUIT as a close on all windows
 
-				for ( GLFWwindow w : JGLFW.windows )
+				for ( GLFWwindow w : windows )
 					inputWindowCloseRequest(w);
 			} else {
 				TranslateMessage(msg);
@@ -557,12 +558,55 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	@Override
 	public void setClipboardString(GLFWwindowWin window, CharSequence string) {
+		int bytes = string.length() * 2 + 2;
+
+		long stringHandle = GlobalAlloc(GMEM_MOVEABLE, bytes);
+		if ( stringHandle == NULL ) {
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to allocate global handle for clipboard");
+			return;
+		}
+
+		ByteBuffer handleBuffer = memByteBuffer(GlobalLock(stringHandle), bytes);
+		memEncodeUTF16(string, true, handleBuffer);
+		GlobalUnlock(stringHandle);
+
+		if ( OpenClipboard(window.handle) == FALSE ) {
+			GlobalFree(stringHandle);
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to open clipboard");
+			return;
+		}
+
+		EmptyClipboard();
+		SetClipboardData(CF_UNICODETEXT, stringHandle);
+		CloseClipboard();
 	}
 
 	@Override
 	public String getClipboardString(GLFWwindowWin window) {
-		return null;
+		if ( IsClipboardFormatAvailable(CF_UNICODETEXT) == FALSE ) {
+			inputError(GLFW_FORMAT_UNAVAILABLE, null);
+			return null;
+		}
 
+		if ( OpenClipboard(window.handle) == FALSE ) {
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to open clipboard");
+			return null;
+		}
+
+		long stringHandle = GetClipboardData(CF_UNICODETEXT);
+		if ( stringHandle == NULL ) {
+			CloseClipboard();
+
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve clipboard data");
+			return null;
+		}
+
+		String string = memDecodeUTF16(memByteBufferNT2(GlobalLock(stringHandle)));
+
+		GlobalUnlock(stringHandle);
+		CloseClipboard();
+
+		return string;
 	}
 
 	@Override
@@ -659,7 +703,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( window.handle == NULL ) {
 			memGlobalRefDelete(window.wndprocRef);
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to create window");
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to create window");
 			return false;
 		}
 
@@ -698,13 +742,13 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		long classAtom = RegisterClassEx(in);
 		if ( classAtom == NULL )
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to register window class");
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to register window class");
 
 		return classAtom;
 	}
 
 	boolean setVideoMode(GLFWmonitor monitor, GLFWvidmode mode) {
-		GLFWvidmode best = JGLFW.chooseVideoMode(monitor, mode);
+		GLFWvidmode best = chooseVideoMode(monitor, mode);
 		GLFWvidmode current = getVideoMode(monitor);
 
 		if ( current.equals(best) )
@@ -721,7 +765,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		DEVMODE.bitsPerPelSet(dm, bpp < 15 || 24 <= bpp ? 32 : bpp);
 
 		if ( ChangeDisplaySettingsEx(monitor.getName(), dm, NULL, CDS_FULLSCREEN, NULL) != DISP_CHANGE_SUCCESSFUL ) {
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set video mode");
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set video mode");
 			return false;
 		}
 
@@ -749,7 +793,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		window.dc = GetDC(window.handle);
 		if ( window.dc == NULL ) {
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve DC for window");
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve DC for window");
 			return false;
 		}
 
@@ -812,8 +856,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			setWGLattrib(attribs, index, 0, 0);
 
 			IntBuffer pixelFormatOut = BufferUtils.createIntBuffer(1);
-			if ( wglChoosePixelFormatARB(window.dc, attribs, null, pixelFormatOut, count) == 0 ) {
-				JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
+			if ( wglChoosePixelFormatARB(window.dc, attribs, null, pixelFormatOut, count) == FALSE ) {
+				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
 				return false;
 			}
 
@@ -841,24 +885,24 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			pixelFormat = ChoosePixelFormat(window.dc, pfd);
 			if ( pixelFormat == 0 ) {
-				JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
+				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
 				return false;
 			}
 		}
 
-		if ( DescribePixelFormat(window.dc, pixelFormat, pfd) == 0 ) {
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve PFD for selected pixel format");
+		if ( DescribePixelFormat(window.dc, pixelFormat, pfd) == FALSE ) {
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve PFD for selected pixel format");
 			return false;
 		}
 
 		int flags = PIXELFORMATDESCRIPTOR.flagsGet(pfd);
 		if ( (flags & PFD_GENERIC_ACCELERATED) == 0 && (flags & PFD_GENERIC_FORMAT) != 0 ) {
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to find an accelerated pixel format");
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to find an accelerated pixel format");
 			return false;
 		}
 
-		if ( SetPixelFormat(window.dc, pixelFormat, pfd) == 0 ) {
-			JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set selected pixel format");
+		if ( SetPixelFormat(window.dc, pixelFormat, pfd) == FALSE ) {
+			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set selected pixel format");
 			return false;
 		}
 
@@ -909,19 +953,19 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			context = wglCreateContextAttribsARB(window.dc, share, attribs);
 			if ( context == NULL ) {
-				JGLFW.inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: Failed to create OpenGL context");
+				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: Failed to create OpenGL context");
 				return false;
 			}
 		} else {
 			context = wglCreateContext(window.dc);
 			if ( context == NULL ) {
-				JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to create OpenGL context");
+				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to create OpenGL context");
 				return false;
 			}
 
 			if ( share != NULL ) {
-				if ( wglShareLists(share, context) == 0 ) {
-					JGLFW.inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to enable sharing with specified OpenGL context");
+				if ( wglShareLists(share, context) == FALSE ) {
+					inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to enable sharing with specified OpenGL context");
 					return false;
 				}
 			}
@@ -963,7 +1007,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( wndconfig.glForward ) {
 			if ( !window.ARB_create_context ) {
-				JGLFW.inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: A forward compatible OpenGL context requested but WGL_ARB_create_context is unavailable");
+				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: A forward compatible OpenGL context requested but WGL_ARB_create_context is unavailable");
 				return _GLFW_RECREATION_IMPOSSIBLE;
 			}
 
@@ -972,7 +1016,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( wndconfig.glProfile != 0 ) {
 			if ( !window.ARB_create_context_profile ) {
-				JGLFW.inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: OpenGL profile requested but WGL_ARB_create_context_profile is unavailable");
+				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: OpenGL profile requested but WGL_ARB_create_context_profile is unavailable");
 				return _GLFW_RECREATION_IMPOSSIBLE;
 			}
 
