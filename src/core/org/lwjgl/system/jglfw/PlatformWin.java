@@ -9,6 +9,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.Pointer;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
 import org.lwjgl.system.glfw.GLFW;
@@ -35,8 +36,10 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jglfw.InputUtil.*;
 import static org.lwjgl.system.jglfw.JGLFW.*;
 import static org.lwjgl.system.jglfw.JGLFWUtil.*;
+import static org.lwjgl.system.jglfw.JoystickWin.*;
 import static org.lwjgl.system.jglfw.WindowUtil.*;
 import static org.lwjgl.system.windows.Dwmapi.*;
+import static org.lwjgl.system.windows.Mmsystem.*;
 import static org.lwjgl.system.windows.User32.*;
 import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinBase.*;
@@ -83,15 +86,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		timer.init();
 
-		initJoysticks();
-
 		return true;
 	}
 
 	@Override
 	public void terminate() {
-		terminateJoysticks();
-
 		freeLibraries();
 
 		// Restore previous FOREGROUNDLOCKTIMEOUT system setting
@@ -236,7 +235,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		long dc = CreateDC(DISPLAY, memEncodeUTF16(monitor.getName()), null, null);
 
 		if ( GetDeviceGammaRamp(dc, memAddress(ramp)) == FALSE )
-			System.err.println("GetDeviceGammaRamp failed.");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: failed to retrieve device gamma ramp.");
 
 		DeleteDC(dc);
 	}
@@ -246,7 +245,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		long dc = CreateDC(DISPLAY, memEncodeUTF16(monitor.getName()), null, null);
 
 		if ( SetDeviceGammaRamp(dc, memAddress(ramp)) == FALSE )
-			System.err.println("SetDeviceGammaRamp failed.");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: failed to set device gamma ramp.");
 
 		DeleteDC(dc);
 	}
@@ -534,26 +533,146 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	@Override
 	public int getJoystickParam(int joy, int param) {
-		// TODO: implement
-		return -1;
+		if ( !isJoystickPresent(joy) )
+			return 0;
+
+		// We got this far, the joystick is present
+		if ( param == GLFW_PRESENT )
+			return GL11.GL_TRUE;
+
+		// Get joystick capabilities
+		ByteBuffer jc = apiBuffer().buffer();
+		joyGetDevCaps(joy - GLFW_JOYSTICK_1, jc, JOYCAPS.SIZEOF);
+
+		int caps = JOYCAPS.capsGet(jc);
+		int hats = (caps & JOYCAPS_HASPOV) != 0 && (caps & JOYCAPS_POV4DIR) != 0 ? 1 : 0;
+
+		switch ( param ) {
+			case GLFW_AXES:
+				// Return number of joystick axes
+				return JOYCAPS.numAxesGet(jc);
+
+			case GLFW_BUTTONS:
+				// Return number of joystick buttons
+				return JOYCAPS.numButtonsGet(jc) + hats * 4;
+
+			default:
+				break;
+		}
+
+		return 0;
 	}
 
 	@Override
 	public int getJoystickAxes(int joy, FloatBuffer axes) {
-		// TODO: implement
-		return -1;
+		int axis;
+
+		if ( !isJoystickPresent(joy) )
+			return 0;
+
+		// This is a big awkward, but we avoid allocations.
+		APIBuffer __buffer = apiBuffer();
+		__buffer.bufferParam(JOYCAPS.SIZEOF); // Make sure we have enough
+		int info = __buffer.bufferParam(JOYINFOEX.SIZEOF); // space for both structs
+
+		// We'll store both struct in the same buffer and do accesses for the 2nd buffer manually.
+		ByteBuffer jci = apiBuffer().buffer();
+
+		// Get joystick capabilities
+		joyGetDevCaps(joy - GLFW_JOYSTICK_1, jci, JOYCAPS.SIZEOF);
+
+		// Get joystick state
+		jci.putInt(info + JOYINFOEX.SIZE, JOYINFOEX.SIZEOF);
+		jci.putInt(info + JOYINFOEX.FLAGS, JOY_RETURNX | JOY_RETURNY | JOY_RETURNZ | JOY_RETURNR | JOY_RETURNU | JOY_RETURNV);
+		njoyGetPosEx(joy - GLFW_JOYSTICK_1, __buffer.address() + info);
+
+		// Get position values for all axes
+		axis = 0;
+		if ( axis < axes.remaining() )
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.XPOS), JOYCAPS.xminGet(jci), JOYCAPS.xmaxGet(jci)));
+
+		if ( axis < axes.remaining() )
+			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.YPOS), JOYCAPS.yminGet(jci), JOYCAPS.ymaxGet(jci)));
+
+		int caps = JOYCAPS.capsGet(jci);
+		if ( axis < axes.remaining() && (caps & JOYCAPS_HASZ) != 0 )
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.ZPOS), JOYCAPS.zminGet(jci), JOYCAPS.zmaxGet(jci)));
+
+		if ( axis < axes.remaining() && (caps & JOYCAPS_HASR) != 0 )
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.RPOS), JOYCAPS.rminGet(jci), JOYCAPS.rmaxGet(jci)));
+
+		if ( axis < axes.remaining() && (caps & JOYCAPS_HASU) != 0 )
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.UPOS), JOYCAPS.uminGet(jci), JOYCAPS.umaxGet(jci)));
+
+		if ( axis < axes.remaining() && (caps & JOYCAPS_HASV) != 0 )
+			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.VPOS), JOYCAPS.vminGet(jci), JOYCAPS.vmaxGet(jci)));
+
+		return axis;
 	}
+
+	// Bit fields of button presses for each direction, including nil
+	private static final int[] directions = { 1, 3, 2, 6, 4, 12, 8, 9, 0 };
 
 	@Override
 	public int getJoystickButtons(int joy, ByteBuffer buttons) {
-		// TODO: implement
-		return -1;
+		if ( !isJoystickPresent(joy) )
+			return 0;
+
+		// This is a big awkward, but we avoid allocations.
+		APIBuffer __buffer = apiBuffer();
+		__buffer.bufferParam(JOYCAPS.SIZEOF); // Make sure we have enough
+		int info = __buffer.bufferParam(JOYINFOEX.SIZEOF); // space for both structs
+
+		// We'll store both struct in the same buffer and do accesses for the 2nd buffer manually.
+		ByteBuffer jci = apiBuffer().buffer();
+
+		// Get joystick capabilities
+		joyGetDevCaps(joy - GLFW_JOYSTICK_1, jci, JOYCAPS.SIZEOF);
+
+		// Get joystick state
+		jci.putInt(info + JOYINFOEX.SIZE, JOYINFOEX.SIZEOF);
+		jci.putInt(info + JOYINFOEX.FLAGS, JOY_RETURNBUTTONS | JOY_RETURNPOV);
+		njoyGetPosEx(joy - GLFW_JOYSTICK_1, __buffer.address() + info);
+
+		// Get states of all requested buttons
+		int button;
+		for ( button = 0; button < buttons.remaining() && button < JOYCAPS.numButtonsGet(jci); button++ ) {
+			buttons.put(buttons.position() + button, (byte)((jci.getInt(info + JOYINFOEX.BUTTONS) & (1 << button)) != 0 ? GLFW_PRESS : GLFW_RELEASE));
+		}
+
+		// Virtual buttons - Inject data from hats
+		// Each hat is exposed as 4 buttons which exposes 8 directions with
+		// concurrent button presses
+		// NOTE: this API exposes only one hat
+
+		int caps = JOYCAPS.capsGet(jci);
+		int hats = (caps & JOYCAPS_HASPOV) != 0 && (caps & JOYCAPS_POV4DIR) != 0 ? 1 : 0;
+
+		if ( hats > 0 ) {
+			int value = jci.getInt(info + JOYINFOEX.POV) / 100 / 45;
+			if ( value < 0 || value > 8 )
+				value = 8;
+
+			for ( int j = 0; j < 4 && button < buttons.limit(); j++ ) {
+				buttons.put(buttons.position() + button, (byte)((directions[value] & (1 << j)) != 0 ? GLFW_PRESS : GLFW_RELEASE));
+				button++;
+			}
+		}
+
+		return button;
 	}
 
 	@Override
 	public String getJoystickName(int joy) {
-		// TODO: implement
-		return "";
+		ByteBuffer jc = apiBuffer().buffer();
+		int i = joy - GLFW_JOYSTICK_1;
+
+		if ( !isJoystickPresent(joy) )
+			return null;
+
+		joyGetDevCaps(i, jc, JOYCAPS.SIZEOF);
+
+		return JOYCAPS.pnameGets(jc);
 	}
 
 	@Override
@@ -642,12 +761,6 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		return true;
 	}
 
-	private void initJoysticks() {
-	}
-
-	private void terminateJoysticks() {
-	}
-
 	private boolean createWindowImpl(GLFWwindowWin window, GLFWwndconfig wndconfig, GLFWfbconfig fbconfig) {
 		window.dwStyle = WS_CLIPSIBLINGS | WS_CLIPCHILDREN;
 		window.dwExStyle = WS_EX_APPWINDOW;
@@ -713,10 +826,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		window.cursorPosX = window.oldCursorX = POINT.xGet(cursorPos);
 		window.cursorPosY = window.oldCursorY = POINT.yGet(cursorPos);
 
-		if ( !createContext(window, wndconfig, fbconfig) )
-			return false;
-
-		return true;
+		return createContext(window, wndconfig, fbconfig);
 	}
 
 	private static long registerWindowClass() {

@@ -66,4 +66,5 @@
 
     #define STRICT
 	#include <windows.h>
+	#include <mmsystem.h>
 #endif /* _WINDOWS_LWJGL_INCLUDED */

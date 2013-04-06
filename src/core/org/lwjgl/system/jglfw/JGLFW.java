@@ -1912,20 +1912,6 @@ public final class JGLFW {
 		platform.swapInterval(interval);
 	}
 
-	public static boolean glfwExtensionSupported(String extension) {
-		if ( notInitialized() )
-			return false;
-
-		GLFWwindow window = platform.getCurrentContext();
-		if ( window == null ) {
-			inputError(GLFW_NO_CURRENT_CONTEXT, "There is no context current");
-			return false;
-		}
-
-		// TODO: implement?
-		return false;
-	}
-
 	// ------------------ IMPLEMENTATION STUFF -----------------------
 
 	static void inputMonitorChange() {
