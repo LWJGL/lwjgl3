@@ -37,7 +37,7 @@
 	#define NOSHOWWINDOW // SW_*
 	#define OEMRESOURCE // OEM Resource values
 	#define NOATOM // Atom Manager routines
-	#define NOCLIPBOARD // Clipboard routines
+	//#define NOCLIPBOARD // Clipboard routines
 	#define NOCOLOR // Screen colors
 	#define NOCTLMGR // Control and Dialog routines
 	#define NODRAWTEXT // DrawText() and DT_*

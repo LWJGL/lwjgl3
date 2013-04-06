@@ -173,6 +173,10 @@ public final class JGLFWTest {
 			}
 		});
 
+		glfwSetClipboardString(window, "LWJGL - JGLFW");
+		if ( !"LWJGL - JGLFW".equals(glfwGetClipboardString(window)) )
+			System.err.println("CLIPBOARD FAILED!");
+
 		while ( true ) {
 			glfwPollEvents();
 			if ( glfwWindowShouldClose(window) )

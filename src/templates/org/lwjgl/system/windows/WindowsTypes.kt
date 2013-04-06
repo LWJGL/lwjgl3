@@ -15,7 +15,7 @@ val voidptr = PointerType("void") // Naked pointer, used for DLL function pointe
 val VOID = NativeType("VOID", TypeMapping.VOID)
 val PVOID = PointerType("PVOID", includesPointer = true) // A pointer to any type
 
-val HANDLE = PointerType(name = "HANDLE", includesPointer = true)
+val HANDLE = PointerType("HANDLE", includesPointer = true)
 val HANDLE_p = PointerType(HANDLE)
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
@@ -36,12 +36,13 @@ private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only 
 val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
 val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
 val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
+val SIZE_T = PrimitiveType("SIZE_T", ULONG_PTR)
 
 val int_p = PointerType("int", PointerMapping.DATA_INT)
 val UINT_p = PointerType("UINT", PointerMapping.DATA_INT)
 val FLOAT_p = PointerType("FLOAT", PointerMapping.DATA_FLOAT)
 
-val LRESULT = PointerType(name = "LRESULT", includesPointer = true)
+val LRESULT = PointerType("LRESULT", includesPointer = true)
 val WPARAM = PrimitiveType("WPARAM", PrimitiveMapping.PTR)
 val LPARAM = PrimitiveType("LPARAM", PrimitiveMapping.PTR)
 
@@ -56,17 +57,18 @@ val LPCTSTR = CharSequenceType(
 	nullTerminated = true
 )
 
-val LPCSTR = CharSequenceType(name = "LPCSTR", includesPointer = true)
-val HMODULE = PointerType(name = "HMODULE", includesPointer = true)
-val FARPROC = PointerType(name = "FARPROC", includesPointer = true)
-val HWND = PointerType(name = "HWND", includesPointer = true)
-val HMENU = PointerType(name = "HMENU", includesPointer = true)
-val HINSTANCE = PointerType(name = "HINSTANCE", includesPointer = true)
-val LPVOID = PointerType(name = "LPVOID", includesPointer = true)
-val HDC = PointerType(name = "HDC", includesPointer = true)
-val HGLRC = PointerType(name = "HGLRC", includesPointer = true)
-val HGDIOBJ = PointerType(name = "HGDIOBJ", includesPointer = true)
-val PROC = PointerType(name = "PROC", includesPointer = true)
+val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
+val HMODULE = PointerType("HMODULE", includesPointer = true)
+val FARPROC = PointerType("FARPROC", includesPointer = true)
+val HWND = PointerType("HWND", includesPointer = true)
+val HMENU = PointerType("HMENU", includesPointer = true)
+val HINSTANCE = PointerType("HINSTANCE", includesPointer = true)
+val LPVOID = PointerType("LPVOID", includesPointer = true)
+val HDC = PointerType("HDC", includesPointer = true)
+val HGLRC = PointerType("HGLRC", includesPointer = true)
+val HGDIOBJ = PointerType("HGDIOBJ", includesPointer = true)
+val PROC = PointerType("PROC", includesPointer = true)
+val HGLOBAL = PointerType("HGLOBAL", includesPointer = true)
 
 val POINTFLOAT = StructType(
 	struct(WINDOWS_PACKAGE, "POINTFLOAT") {

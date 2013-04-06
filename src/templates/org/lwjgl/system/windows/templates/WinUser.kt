@@ -1232,6 +1232,29 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"TME_CANCEL" _ 0x80000000.i
 	)
 
+	IntConstant.block(
+		"Predefined Clipboard formats.",
+
+		"CF_TEXT" _ 1,
+		"CF_BITMAP" _ 2,
+		"CF_METAFILEPICT" _ 3,
+		"CF_SYLK" _ 4,
+		"CF_DIF" _ 5,
+		"CF_TIFF" _ 6,
+		"CF_OEMTEXT" _ 7,
+		"CF_DIB" _ 8,
+		"CF_PALETTE" _ 9,
+		"CF_PENDATA" _ 10,
+		"CF_RIFF" _ 11,
+		"CF_WAVE" _ 12,
+		"CF_UNICODETEXT" _ 13,
+		"CF_ENHMETAFILE" _ 14,
+		"CF_HDROP" _ 15,
+		"CF_LOCALE" _ 16,
+		"CF_DIBV5" _ 17,
+		"CF_MAX" _ 18
+	)
+
 	// ------------------------------------------------------------------------------
 
 	ATOM.func(
@@ -1899,5 +1922,67 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	    thread that creates the foreground window than it does to other threads.
 	    """
 	)
+
+	BOOL.func(
+		"OpenClipboard",
+		"Opens the clipboard for examination and prevents other applications from modifying the clipboard content.",
+
+		nullable _ HWND.IN(
+			"hWndNewOwner",
+			"a handle to the window to be associated with the open clipboard. If this parameter is $NULL, the open clipboard is associated with the current task."
+		)
+	)
+
+	BOOL.func(
+		"EmptyClipboard",
+		"""
+	    Empties the clipboard and frees handles to data in the clipboard. The function then assigns ownership of the clipboard to the window that currently has
+	    the clipboard open.
+	    """
+	)
+
+	HANDLE.func(
+		"SetClipboardData",
+		"""
+	    Places data on the clipboard in a specified clipboard format. The window must be the current clipboard owner, and the application must have called the
+	    {@link #OpenClipboard} function. (When responding to the {@link #WM_RENDERFORMAT} and {@link #WM_RENDERALLFORMATS} messages, the clipboard owner must
+	    not call {@link #OpenClipboard} before calling {@link #SetClipboardData}.)
+	    """,
+
+		UINT.IN("format", "the clipboard format. This parameter can be a registered format or any of the standard clipboard formats."),
+		HANDLE.IN(
+			"hMem",
+			"""
+			a handle to the data in the specified format. This parameter can be $NULL, indicating that the window provides data in the specified clipboard
+			format (renders the format) upon request. If a window delays rendering, it must process the {@link #WM_RENDERFORMAT} and {@link #WM_RENDERALLFORMATS}
+			messages.
+
+			If {@code SetClipboardData} succeeds, the system owns the object identified by the {@code hMem} parameter. The application may not write to or free
+			the data once ownership has been transferred to the system, but it can lock and read from the data until the {@link #CloseClipboard} function is
+			called. (The memory must be unlocked before the {@link #Clipboard} is closed.) If the {@code hMem} parameter identifies a memory object, the object
+			must have been allocated using the function with the {@link #GMEM_MOVEABLE} flag.
+			"""
+		),
+
+	    returnDoc = "the handle to the data if the function succeeds. If the function fails, the return value is $NULL."
+	)
+
+	BOOL.func(
+		"IsClipboardFormatAvailable",
+		"Determines whether the clipboard contains data in the specified format.",
+
+		UINT.IN("format", "a standard or registered clipboard format")
+	)
+
+	HANDLE.func(
+		"GetClipboardData",
+		"Retrieves data from the clipboard in a specified format. The clipboard must have been opened previously.",
+
+		UINT.IN("format", "a clipboard format"),
+
+	    returnDoc = "the handle to a clipboard object in the specified format if the function succeeds. If the function fails, the return value is $NULL."
+	)
+
+	BOOL.func("CloseClipboard", "Closes the clipboard.")
 
 }
