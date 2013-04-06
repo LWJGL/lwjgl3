@@ -428,11 +428,11 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	        #CL_MEM_HOST_WRITE_ONLY #CL_MEM_HOST_READ_ONLY #CL_MEM_HOST_NO_ACCESS
 			"""
 	    ),
-	    const _ cl_image_format.IN(
+	    const _ cl_image_format_p.IN(
 		    "image_format",
 		    "a pointer to a {@link cl_image_format} structure that describes format properties of the image to be allocated"
 	    ),
-	    const _ cl_image_desc.IN(
+	    const _ cl_image_desc_p.IN(
 		    "image_desc",
 		    "a pointer to a {@link cl_image_desc} structure that describes type and dimensions of the image to be allocated"
 	    ),

@@ -18,11 +18,13 @@ val voidptr = PointerType("void") // Naked pointer
 
 // numeric
 
-val unsigned_short = PrimitiveType("unsigned_short", PrimitiveMapping.SHORT)
+val unsigned_char = PrimitiveType("unsigned char", PrimitiveMapping.BYTE)
+val unsigned_short = PrimitiveType("unsigned short", PrimitiveMapping.SHORT)
 val int = PrimitiveType("int", PrimitiveMapping.INT)
 val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
 val double = PrimitiveType("double", PrimitiveMapping.DOUBLE)
 
+val unsigned_char_p = PointerType(unsigned_char)
 val int_p = PointerType(int)
 val float_p = PointerType(float)
 val double_p = PointerType(double)
@@ -43,9 +45,7 @@ val GLFWmonitor_p = PointerType(GLFWmonitor)
 val GLFWwindow = PointerType("GLFWwindow")
 
 val GLFWvidmode = StructType(
-	name = "GLFWvidmode",
-	includesPointer = false,
-	definition = struct(GLFW_PACKAGE, "GLFWvidmode") {
+	struct(GLFW_PACKAGE, "GLFWvidmode") {
 		javaDoc("Video mode.")
 		nativeImport("glfw3.h")
 		int.member("width")
@@ -58,9 +58,7 @@ val GLFWvidmode = StructType(
 
 val GLFW_GAMMA_RAMP_SIZE = 256
 val GLFWgammaramp = StructType(
-	name = "GLFWgammaramp",
-	includesPointer = false,
-	definition = struct(GLFW_PACKAGE, "GLFWgammaramp") {
+	struct(GLFW_PACKAGE, "GLFWgammaramp") {
 		javaDoc("Gamma ramp.")
 		nativeImport("glfw3.h")
 		unsigned_short.member("red", size = GLFW_GAMMA_RAMP_SIZE)
@@ -68,6 +66,7 @@ val GLFWgammaramp = StructType(
 		unsigned_short.member("blue", size = GLFW_GAMMA_RAMP_SIZE)
 	}
 )
+val GLFWgammaramp_p = PointerType(GLFWgammaramp)
 
 // callback functions
 

@@ -88,15 +88,22 @@ public class ObjectType(
 
 // Structs
 public class StructType(
+	/** The struct size in bytes. */
+	val definition: Struct,
 	/** The type used in the native API. */
-	name: String,
+	name: String = definition.className,
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
-	/** If true, the nativeType typedef includes a pointer. */
-	includesPointer: Boolean = false,
-	/** The struct size in bytes. */
-	val definition: Struct
+	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
+	includesPointer: Boolean = false
 ): PointerType(name, mapping, includesPointer)
+/** Converts a struct value to a pointer to a struct value. */
+public fun PointerType(structType: StructType): StructType =
+	StructType(
+		name = "${structType.name} *",
+	    includesPointer = true,
+	    definition = structType.definition
+	)
 
 // Strings
 public class CharSequenceType(

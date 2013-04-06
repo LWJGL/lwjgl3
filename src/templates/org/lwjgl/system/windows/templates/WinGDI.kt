@@ -105,36 +105,36 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 
 	IntConstant.block(
 		"Used by the index parameter of {@link #GetDeviceCaps}.",
-		"DRIVERVERSION" _ 0,     // Device driver version
-		"TECHNOLOGY" _ 2,     // Device classification
-		"HORZSIZE" _ 4,     // Horizontal size in millimeters
-		"VERTSIZE" _ 6,     // Vertical size in millimeters
-		"HORZRES" _ 8,     // Horizontal width in pixels
-		"VERTRES" _ 10,    // Vertical height in pixels
-		"BITSPIXEL" _ 12,    // Number of bits per pixel
-		"PLANES" _ 14,    // Number of planes
-		"NUMBRUSHES" _ 16,    // Number of brushes the device has
-		"NUMPENS" _ 18,    // Number of pens the device has
-		"NUMMARKERS" _ 20,    // Number of markers the device has
-		"NUMFONTS" _ 22,    // Number of fonts the device has
-		"NUMCOLORS" _ 24,    // Number of colors the device supports
-		"PDEVICESIZE" _ 26,    // Size required for device descriptor
-		"CURVECAPS" _ 28,    // Curve capabilities
-		"LINECAPS" _ 30,    // Line capabilities
-		"POLYGONALCAPS" _ 32,    // Polygonal capabilities
-		"TEXTCAPS" _ 34,    // Text capabilities
-		"CLIPCAPS" _ 36,    // Clipping capabilities
-		"RASTERCAPS" _ 38,    // Bitblt capabilities
-		"ASPECTX" _ 40,    // Length of the X leg
-		"ASPECTY" _ 42,    // Length of the Y leg
-		"ASPECTXY" _ 44,    // Length of the hypotenuse
+		"DRIVERVERSION" _ 0, // Device driver version
+		"TECHNOLOGY" _ 2, // Device classification
+		"HORZSIZE" _ 4, // Horizontal size in millimeters
+		"VERTSIZE" _ 6, // Vertical size in millimeters
+		"HORZRES" _ 8, // Horizontal width in pixels
+		"VERTRES" _ 10, // Vertical height in pixels
+		"BITSPIXEL" _ 12, // Number of bits per pixel
+		"PLANES" _ 14, // Number of planes
+		"NUMBRUSHES" _ 16, // Number of brushes the device has
+		"NUMPENS" _ 18, // Number of pens the device has
+		"NUMMARKERS" _ 20, // Number of markers the device has
+		"NUMFONTS" _ 22, // Number of fonts the device has
+		"NUMCOLORS" _ 24, // Number of colors the device supports
+		"PDEVICESIZE" _ 26, // Size required for device descriptor
+		"CURVECAPS" _ 28, // Curve capabilities
+		"LINECAPS" _ 30, // Line capabilities
+		"POLYGONALCAPS" _ 32, // Polygonal capabilities
+		"TEXTCAPS" _ 34, // Text capabilities
+		"CLIPCAPS" _ 36, // Clipping capabilities
+		"RASTERCAPS" _ 38, // Bitblt capabilities
+		"ASPECTX" _ 40, // Length of the X leg
+		"ASPECTY" _ 42, // Length of the Y leg
+		"ASPECTXY" _ 44, // Length of the hypotenuse
 
-		"LOGPIXELSX" _ 88,    // Logical pixels/inch in X
-		"LOGPIXELSY" _ 90,    // Logical pixels/inch in Y
+		"LOGPIXELSX" _ 88, // Logical pixels/inch in X
+		"LOGPIXELSY" _ 90, // Logical pixels/inch in Y
 
-		"SIZEPALETTE" _ 104,    // Number of entries in physical palette
-		"NUMRESERVED" _ 106,    // Number of reserved entries in palette
-		"COLORRES" _ 108,    // Actual color resolution
+		"SIZEPALETTE" _ 104, // Number of entries in physical palette
+		"NUMRESERVED" _ 106, // Number of reserved entries in palette
+		"COLORRES" _ 108, // Actual color resolution
 
 		/*
 		// Printing related DeviceCaps. These replace the appropriate Escapes
@@ -147,18 +147,18 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		*/
 
 		// Display driver specific
-		"VREFRESH" _ 116,  // Current vertical refresh rate of the
+		"VREFRESH" _ 116, // Current vertical refresh rate of the
 		// display device (for displays only) in Hz
-		"DESKTOPVERTRES" _ 117,  // Horizontal width of entire desktop in
+		"DESKTOPVERTRES" _ 117, // Horizontal width of entire desktop in
 		// pixels                                  
-		"DESKTOPHORZRES" _ 118,  // Vertical height of entire desktop in
+		"DESKTOPHORZRES" _ 118, // Vertical height of entire desktop in
 		// pixels                                  
-		"BLTALIGNMENT" _ 119,  // Preferred blt alignment
+		"BLTALIGNMENT" _ 119, // Preferred blt alignment
 
-		"SHADEBLENDCAPS" _ 120,  // Shading and blending caps
+		"SHADEBLENDCAPS" _ 120, // Shading and blending caps
 		"COLORMGMTCAPS" _ 121  // Color Management caps
 	)
-	
+
 	IntConstant.block(
 		"{@link PIXELFORMATDESCRIPTOR} flags.",
 		"PFD_DOUBLEBUFFER" _ 0x00000001,
@@ -177,7 +177,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"PFD_SUPPORT_DIRECTDRAW" _ 0x00002000,
 		"PFD_DIRECT3D_ACCELERATED" _ 0x00004000,
 		"PFD_SUPPORT_COMPOSITION" _ 0x00008000,
-		
+
 		/* PIXELFORMATDESCRIPTOR flags for use in ChoosePixelFormat only */
 		"PFD_DEPTH_DONTCARE" _ 0x20000000,
 		"PFD_DOUBLEBUFFER_DONTCARE" _ 0x40000000,
@@ -197,20 +197,6 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"PFD_UNDERLAY_PLANE" _ -1
 	)
 
-	BOOL.func(
-		"CancelDC",
-		"Cancels any pending operation on the specified device context (DC).",
-
-		HDC.IN("hdc", "a handle to the DC")
-	)
-
-	HDC.func(
-		"CreateCompatibleDC",
-		"Creates a memory device context (DC) compatible with the specified device.",
-
-		nullable _ HDC.IN("hdc", "a handle to an existing DC. If this handle is NULL, the function creates a memory DC compatible with the application's current screen.")
-	)
-
 	HGDIOBJ.func(
 		"GetStockObject",
 		"Retrieves a handle to one of the stock pens, brushes, fonts, or palettes.",
@@ -221,7 +207,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	Code(
 		javaBeforeNative = "\t\tlong param = memGlobalRefNew(objectFunc);",
 		javaFinally = "\t\t\tmemGlobalRefDelete(param);",
-	    applyTo = Code.ApplyTo.ALTERNATIVE
+		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ int.func(
 		"EnumObjects",
 		"""
@@ -269,23 +255,63 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		HGDIOBJ.IN("object", "a handle to a logical pen, brush, font, bitmap, region, or palette")
 	)
 
-	BOOL.func(
-		"GetDCOrgEx",
-		"""
-		Retrieves the final translation origin for a specified device context (DC). The final translation origin specifies an offset that the system uses to
-		translate device coordinates into client coordinates (for coordinates in an application's window).
-		""",
+	HDC.func(
+		"CreateDC",
+		"Creates a device context (DC) for a device using the specified name.",
 
-		HDC.IN("hdc", "a handle to the DC whose final translation origin is to be retrieved"),
-		LPPOINT.OUT("point", "a {@link POINT} structure that receives the final translation origin, in device coordinates")
+		nullable _ LPCTSTR.IN(
+			"lpszDriver",
+			"""
+			A pointer to a null-terminated character string that specifies either DISPLAY or the name of a specific display device. For printing, we recommend
+			that you pass $NULL to {@code lpszDriver} because GDI ignores {@code lpszDriver} for printer devices.
+			"""
+		),
+		nullable _ LPCTSTR.IN(
+			"lpszDevice",
+			"""
+			A pointer to a null-terminated character string that specifies the name of the specific output device being used, as shown by the Print Manager (for
+			example, Epson FX-80). It is not the printer model name. The {@code lpszDevice} parameter must be used.
+
+			To obtain valid names for displays, call {@link #EnumDisplayDevices}.
+
+			If {@code lpszDriver} is DISPLAY or the device name of a specific display device, then {@code lpszDevice} must be $NULL or that same device name. If
+			{@code lpszDevice} is $NULL, then a DC is created for the primary display device.
+
+			If there are multiple monitors on the system, calling {@code CreateDC(TEXT("DISPLAY"),NULL,NULL,NULL)} will create a DC covering all the monitors.
+			"""
+		),
+		nullable _ LPCTSTR.OUT("lpszOutput", "this parameter is ignored and should be set to $NULL"),
+		mods(const, nullable) _ DEVMODE_p.IN(
+			"lpInitData",
+			"""
+			A pointer to a {@link #DEVMODE} structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}
+			function retrieves this structure filled in for a specified device. The {@code lpInitData} parameter must be $NULL if the device driver is to use
+			the default initialization (if any) specified by the user.
+
+			If {@code lpszDriver} is DISPLAY, {@code lpInitData} must be $NULL; GDI then uses the display device's current {@link DEVMODE}.
+			"""
+		)
 	)
 
-	int.func(
-		"GetDeviceCaps",
-		"Retrieves device-specific information for the specified device.",
+	HDC.func(
+		"CreateCompatibleDC",
+		"Creates a memory device context (DC) compatible with the specified device.",
 
-		HDC.IN("hdc", "a handle to the DC"),
-		int.IN("index", "the item to be returned")
+		nullable _ HDC.IN("hdc", "a handle to an existing DC. If this handle is $NULL, the function creates a memory DC compatible with the application's current screen.")
+	)
+
+	BOOL.func(
+		"DeleteDC",
+		"Deletes the specified device context (DC).",
+
+		HDC.IN("hdc", "a handle to the device context")
+	)
+
+	BOOL.func(
+		"CancelDC",
+		"Cancels any pending operation on the specified device context (DC).",
+
+		HDC.IN("hdc", "a handle to the DC")
 	)
 
 	int.func(
@@ -315,12 +341,61 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
+	BOOL.func(
+		"GetDCOrgEx",
+		"""
+		Retrieves the final translation origin for a specified device context (DC). The final translation origin specifies an offset that the system uses to
+		translate device coordinates into client coordinates (for coordinates in an application's window).
+		""",
+
+		HDC.IN("hdc", "a handle to the DC whose final translation origin is to be retrieved"),
+		LPPOINT.OUT("point", "a {@link POINT} structure that receives the final translation origin, in device coordinates")
+	)
+
+	int.func(
+		"GetDeviceCaps",
+		"Retrieves device-specific information for the specified device.",
+
+		HDC.IN("hdc", "a handle to the DC"),
+		int.IN("index", "the item to be returned")
+	)
+
+	BOOL.func(
+		"GetDeviceGammaRamp",
+		"Sets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
+
+		HDC.IN("hdc", "the device context of the direct color display board in question"),
+		LPVOID.IN(
+			"lpRamp",
+			"""
+			pointer to a buffer containing the gamma ramp to be set. The gamma ramp is specified in three arrays of 256 WORD elements each, which contain the
+			mapping between RGB values in the frame buffer and digital-analog-converter (DAC ) values. The sequence of the arrays is red, green, blue. The RGB
+			values must be stored in the most significant bits of each WORD to increase DAC independence.
+			"""
+		)
+	)
+
+	BOOL.func(
+		"SetDeviceGammaRamp",
+		"Gets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
+
+		HDC.IN("hdc", "the device context of the direct color display board in question"),
+		LPVOID.IN(
+			"lpRamp",
+			"""
+			points to a buffer where the function can place the current gamma ramp of the color display board. The gamma ramp is specified in three arrays of
+			256 WORD elements each, which contain the mapping between RGB values in the frame buffer and digital-analog-converter (DAC) values. The sequence of
+			the arrays is red, green, blue.
+			"""
+		)
+	)
+
 	int.func(
 		"ChoosePixelFormat",
 		"Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
 		HDC.IN("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
-		const _ PIXELFORMATDESCRIPTOR.IN("pixelFormatDescriptor", "a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format")
+		const _ PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format")
 	)
 
 	int.func(
@@ -335,18 +410,18 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("pixelFormat", "index that specifies the pixel format. The pixel formats that a device context supports are identified by positive one-based integer indexes."),
 		Expression("PIXELFORMATDESCRIPTOR.SIZEOF") _ UINT.IN(
 			"bytes",
-		    """
+			"""
 		    the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
 		    {@code bytes} bytes of data to that structure. Set this value to {@link PIXELFORMATDESCRIPTOR#SIZEOF}.
 		    """
 		),
-		LPPIXELFORMATDESCRIPTOR.OUT(
+		nullable _ LPPIXELFORMATDESCRIPTOR.OUT(
 			"pixelFormatDescriptor",
-		    """
-		    a {@link PIXELFORMATDESCRIPTOR} structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
-		    the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is NULL, the function writes no data to the
-		    structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
-		    """
+			"""
+			a {@link PIXELFORMATDESCRIPTOR} structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
+			the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is $NULL, the function writes no data to the
+			structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
+			"""
 		)
 	)
 
@@ -363,9 +438,9 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 
 		HDC.IN("hdc", "the device context whose pixel format the function attempts to set"),
 		int.IN("pixelFormat", "index that identifies the pixel format to set. The various pixel formats supported by a device context are identified by one-based indexes."),
-		const _ PIXELFORMATDESCRIPTOR.IN(
+		const _ PIXELFORMATDESCRIPTOR_p.IN(
 			"pixelFormatDescriptor",
-		    """
+			"""
 		    a {@link PIXELFORMATDESCRIPTOR} structure that contains the logical pixel format specification. The system's metafile component uses this structure
 		    to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
 		    """
