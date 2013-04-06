@@ -89,9 +89,9 @@ public class Struct(
 			"float" to "Float",
 			"double" to "Double"
 		)
-
-		val struct = "struct"
 	}
+
+	private val struct = className.toLowerCase()
 
 	private val members = ArrayList<StructMember>()
 
@@ -671,5 +671,5 @@ public fun struct(packageName: String, className: String, nativeSubPath: String 
 public fun Struct.struct(init: Struct.() -> Unit): StructType {
 	val struct = Struct(ANONYMOUS, ANONYMOUS)
 	struct.init()
-	return StructType(ANONYMOUS, definition = struct)
+	return StructType(struct)
 }

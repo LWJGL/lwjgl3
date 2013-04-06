@@ -24,7 +24,7 @@ fun WGL_ARB_robustness_share_group_isolation() = "WGLARBRobustnessShareGroupIsol
 		{@link WGLARBCreateContext#wglCreateContextAttribsARB}.
 		""",
 	
-		"WGL_CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008
+		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008
 	)
 
 }

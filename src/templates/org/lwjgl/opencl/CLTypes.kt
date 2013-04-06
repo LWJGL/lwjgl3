@@ -124,20 +124,17 @@ val cl_charUTF8_pp = PointerType(cl_charUTF8_p)
 // structs
 
 val cl_image_format = StructType(
-	name = "cl_image_format",
-	includesPointer = false,
-	definition = struct(OPENCL_PACKAGE, "cl_image_format") {
+	struct(OPENCL_PACKAGE, "cl_image_format") {
 		javaDoc("Image format struct.")
 		nativeImport("OpenCL.h")
 		cl_channel_order.member("image_channel_order")
 		cl_channel_type.member("image_channel_data_type")
 	}
 )
+val cl_image_format_p = PointerType(cl_image_format)
 
 val cl_image_desc = StructType(
-	name = "cl_image_desc",
-	includesPointer = false,
-	definition = struct(OPENCL_PACKAGE, "cl_image_desc") {
+	struct(OPENCL_PACKAGE, "cl_image_desc") {
 		javaDoc("Image description struct.")
 		nativeImport("OpenCL.h")
 		cl_mem_object_type.member("image_type")
@@ -152,17 +149,17 @@ val cl_image_desc = StructType(
 		cl_mem.member("buffer")
 	}
 )
+val cl_image_desc_p = PointerType(cl_image_desc)
 
 val cl_bus_address_amd = StructType(
-	name = "cl_bus_address_amd",
-	includesPointer = false,
-	definition = struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
+	struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
 		javaDoc("Used in {@link AMDBusAddressableMemory#clEnqueueMakeBuffersResidentAMD}.")
 		nativeImport("OpenCL.h")
 		cl_ulong.member("surface_bus_address")
 		cl_ulong.member("marker_bus_address")
 	}
 )
+val cl_bus_address_amd_p = PointerType(cl_bus_address_amd)
 
 fun config() {
 	struct(OPENCL_PACKAGE, "cl_buffer_region") {

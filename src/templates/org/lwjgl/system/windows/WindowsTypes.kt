@@ -10,11 +10,16 @@ val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
+val voidptr = PointerType("void") // Naked pointer, used for DLL function pointers.
+
 val VOID = NativeType("VOID", TypeMapping.VOID)
+val PVOID = PointerType("PVOID", includesPointer = true) // A pointer to any type
+
 val HANDLE = PointerType(name = "HANDLE", includesPointer = true)
 val HANDLE_p = PointerType(HANDLE)
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
+val BOOL_p = PointerType(BOOL)
 
 val BYTE = PrimitiveType("BYTE", PrimitiveMapping.BYTE)
 val WORD = PrimitiveType("WORD", PrimitiveMapping.SHORT)
@@ -23,11 +28,14 @@ val UINT = PrimitiveType("UINT", PrimitiveMapping.INT)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 
 val short = PrimitiveType("short", PrimitiveMapping.SHORT)
+val SHORT = PrimitiveType("SHORT", PrimitiveMapping.SHORT)
 val int = PrimitiveType("int", PrimitiveMapping.INT)
 val LONG = PrimitiveType("LONG", PrimitiveMapping.INT)
+private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only LARGE_INTEGER uses this
 
 val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
 val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
+val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
 
 val int_p = PointerType("int", PointerMapping.DATA_INT)
 val UINT_p = PointerType("UINT", PointerMapping.DATA_INT)
@@ -36,6 +44,8 @@ val FLOAT_p = PointerType("FLOAT", PointerMapping.DATA_FLOAT)
 val LRESULT = PointerType(name = "LRESULT", includesPointer = true)
 val WPARAM = PrimitiveType("WPARAM", PrimitiveMapping.PTR)
 val LPARAM = PrimitiveType("LPARAM", PrimitiveMapping.PTR)
+
+val HRESULT = PrimitiveType("HRESULT", PrimitiveMapping.INT)
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 
@@ -59,8 +69,7 @@ val HGDIOBJ = PointerType(name = "HGDIOBJ", includesPointer = true)
 val PROC = PointerType(name = "PROC", includesPointer = true)
 
 val POINTFLOAT = StructType(
-	name = "POINTFLOAT",
-	definition = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
+	struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 		nativeImport ("WindowsLWJGL.h")
 		FLOAT.member("x")
 		FLOAT.member("y")
@@ -111,8 +120,9 @@ val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTO
 	DWORD.member("dwVisibleMask", "visibleMask")
 	DWORD.member("dwDamageMask", "damageMask")
 }
-val PIXELFORMATDESCRIPTOR = StructType(name = "PIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT)
+val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
+val PIXELFORMATDESCRIPTOR_p = PointerType(PIXELFORMATDESCRIPTOR)
 
 val WNDPROC = PointerType(name = "WNDPROC", includesPointer = true)
 
@@ -139,8 +149,9 @@ private val WNDCLASSEX_STRUCT = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	HICON.member("hIconSm", "iconSm")
 }
 
-val WNDCLASSEX = StructType(name = "WNDCLASSEX", definition = WNDCLASSEX_STRUCT)
+val WNDCLASSEX = StructType(WNDCLASSEX_STRUCT)
 val LPWNDCLASSEX = StructType(name = "LPWNDCLASSEX", definition = WNDCLASSEX_STRUCT, includesPointer = true)
+val WNDCLASSEX_p = PointerType(WNDCLASSEX)
 
 val LPOSVERSIONINFO = StructType(
 	name = "LPOSVERSIONINFO",
@@ -172,17 +183,20 @@ private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	LONG.member("x")
 	LONG.member("y")
 }
-val POINT = StructType(name = "POINT", definition = POINT_STRUCT)
+val POINT = StructType(POINT_STRUCT)
 val LPPOINT = StructType (name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
 
-val RECT = StructType(name = "RECT", definition = struct(WINDOWS_PACKAGE, "RECT") {
+private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	javaDoc("Defines the coordinates of the upper-left and lower-right corners of a rectangle.")
 	nativeImport ("WindowsLWJGL.h")
 	LONG.member("left")
 	LONG.member("top")
 	LONG.member("right")
 	LONG.member("bottom")
-})
+}
+val RECT = StructType(RECT_STRUCT)
+val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPointer = true)
+val RECT_p = PointerType(RECT)
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	javaDoc("Contains message information from a thread's message queue.")
@@ -194,8 +208,9 @@ private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	DWORD.member("time")
 	POINT.member("pt", "point")
 }
-val MSG = StructType (name = "MSG", definition = MSG_STRUCT)
-val LPMSG = StructType (name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
+val MSG = StructType(MSG_STRUCT)
+val LPMSG = StructType(name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
+val MSG_p = PointerType(MSG)
 
 val POINTL = StructType (
 	name = "POINTL",
@@ -208,8 +223,7 @@ val POINTL = StructType (
 )
 
 val DEVMODE = StructType(
-	name = "DEVMODE",
-	definition = struct(WINDOWS_PACKAGE, "DEVMODE") {
+	struct(WINDOWS_PACKAGE, "DEVMODE") {
 		javaDoc("Contains information about the initialization and environment of a printer or a display device.")
 		nativeImport("WindowsLWJGL.h")
 		TCHAR.member("dmDeviceName", "deviceName", 32, true)
@@ -270,6 +284,7 @@ val DEVMODE = StructType(
 		*/
 	}
 )
+val DEVMODE_p = PointerType(DEVMODE)
 
 val PDISPLAY_DEVICE = StructType(
 	name = "PDISPLAY_DEVICE",
@@ -287,6 +302,33 @@ val PDISPLAY_DEVICE = StructType(
 )
 
 val GOBJENUMPROC = PointerType(name = "GOBJENUMPROC", includesPointer = true)
+
+val LPTRACKMOUSEEVENT = StructType(
+	name = "LPTRACKMOUSEEVENT",
+	includesPointer = true,
+	definition = struct(WINDOWS_PACKAGE, "TRACKMOUSEEVENT") {
+		javaDoc(
+			"""
+			Used by the {@link WinUser#TrackMouseEvent} function to track when the mouse pointer leaves a window or hovers over a window for a specified amount
+			of time.
+			"""
+		)
+		nativeImport("WindowsLWJGL.h")
+		DWORD.member("cbSize", "size")
+		DWORD.member("dwFlags", "flags")
+		HWND.member("hwndTrack")
+		DWORD.member("dwHoverTime", "hoverTime")
+	}
+)
+
+val LARGE_INTEGER = StructType(
+	struct(WINDOWS_PACKAGE, "LARGE_INTEGER") {
+		nativeImport ("WindowsLWJGL.h")
+		// LARGE_INTEGER is a union really, but we don't care about the other stuff.
+		LONGLONG.member("QuadPart")
+	}
+)
+val LARGE_INTEGER_p = PointerType(LARGE_INTEGER)
 
 fun config() {
 	val COLORREF = PrimitiveType("COLORREF", PrimitiveMapping.INT)

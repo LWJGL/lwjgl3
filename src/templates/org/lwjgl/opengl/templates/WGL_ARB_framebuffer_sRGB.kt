@@ -23,7 +23,7 @@ fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB
 		{@link WGLARBPixelFormat#wglChoosePixelFormatARB}.
 		""",
 
-		"WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
 	)
 
 }

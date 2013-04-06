@@ -1134,6 +1134,8 @@ public class NativeClassFunction(
 			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
 			if ( it.nativeType.mapping == PrimitiveMapping.PTR )
 				"(${it.nativeType.name})${it.name}"
+			else if ( it.nativeType is StructType && !(it.nativeType as StructType).includesPointer )
+				"*${it.name}"
 			else
 				it.name
 		}

@@ -75,7 +75,7 @@ fun amd_bus_addressable_memory() = "AMDBusAddressableMemory".nativeClassCL("amd_
 		cl_mem_p.IN("mem_objects", "a pointer to a list of memory objects"),
 		cl_bool.IN("blocking_make_resident", "indicates if read operation is <em>blocking</em> or <em>non-blocking</em>"),
 		// TODO: This is OUT right?
-		cl_bus_address_amd.OUT("bus_addresses", "a {@link cl_bus_address_amd} structure"),
+		cl_bus_address_amd_p.OUT("bus_addresses", "a {@link cl_bus_address_amd} structure"),
 		NEWL,
 		EWL,
 		EVENT

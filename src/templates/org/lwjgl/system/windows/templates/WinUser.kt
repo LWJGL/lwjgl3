@@ -325,19 +325,31 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"WM_ACTIVATE message wParam values.",
+		"WM_ACTIVATE message {@code wParam} values.",
 		"WA_ACTIVE" _ 1,
 		"WA_CLICKACTIVE" _ 2,
 		"WA_INACTIVE" _ 0
 	)
 
 	IntConstant.block(
-		"WM_SIZE message wParam values.",
+		"WM_SIZE message {@code wParam} values.",
 		"SIZE_RESTORED" _ 0,
 		"SIZE_MINIMIZED" _ 1,
 		"SIZE_MAXIMIZED" _ 2,
 		"SIZE_MAXSHOW" _ 3,
 		"SIZE_MAXHIDE" _ 4
+	)
+
+	IntConstant.block(
+		"WM_DEVICECHANGE message {@code wParam} params.",
+
+		"DBT_APPYBEGIN" _ 0x0000,
+		"DBT_APPYEND" _ 0x0001,
+		"DBT_DEVNODES_CHANGED" _ 0x0007,
+		"DBT_QUERYCHANGECONFIG" _ 0x0017,
+		"DBT_CONFIGCHANGED" _ 0x0018,
+		"DBT_CONFIGCHANGECANCELED" _ 0x0019,
+		"DBT_MONITORCHANGE" _ 0x001B
 	)
 
 	IntConstant.block(
@@ -585,7 +597,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"CS_DROPSHADOW" _ 0x00020000 // _WIN32_WINNT >=" _ 0x0501,
 	)
 
-	IntConstant.block(
+	val WindowLongOffsets = IntConstant.block(
 		"Window field offsets for {@link #GetWindowLong}.",
 		"GWL_WNDPROC" _ -4,
 		"GWL_HINSTANCE" _ -6,
@@ -594,7 +606,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GWL_EXSTYLE" _ -20,
 		"GWL_USERDATA" _ -21,
 		"GWL_ID" _ -12
-	)
+	).toJavaDocLinks()
 
 	IntConstant.block(
 		"{@link #ShowWindow} commands.",
@@ -722,6 +734,13 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"PM_QS_SENDMESSAGE".expr<Int>("QS_SENDMESSAGE << 16")
 	)
 
+	val EnumMode = IntConstant.block(
+		"EnumDisplaySettings mode.",
+
+		"ENUM_CURRENT_SETTINGS".expr<Int>("-1"),
+		"ENUM_REGISTRY_SETTINGS".expr<Int>("-2")
+	).toJavaDocLinks()
+
 	IntConstant.block(
 		"Flags for {@link #ChangeDisplaySettings}.",
 		"CDS_UPDATEREGISTRY" _ 0x00000001,
@@ -777,11 +796,449 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"EDS_ROTATEDMODE" _ 0x00000004
 	)
 
+	IntConstant.block(
+		"{@link #SystemParametersInfo} parameters.",
+
+		"SPI_GETBEEP" _ 0x0001,
+		"SPI_SETBEEP" _ 0x0002,
+		"SPI_GETMOUSE" _ 0x0003,
+		"SPI_SETMOUSE" _ 0x0004,
+		"SPI_GETBORDER" _ 0x0005,
+		"SPI_SETBORDER" _ 0x0006,
+		"SPI_GETKEYBOARDSPEED" _ 0x000A,
+		"SPI_SETKEYBOARDSPEED" _ 0x000B,
+		"SPI_LANGDRIVER" _ 0x000C,
+		"SPI_ICONHORIZONTALSPACING" _ 0x000D,
+		"SPI_GETSCREENSAVETIMEOUT" _ 0x000E,
+		"SPI_SETSCREENSAVETIMEOUT" _ 0x000F,
+		"SPI_GETSCREENSAVEACTIVE" _ 0x0010,
+		"SPI_SETSCREENSAVEACTIVE" _ 0x0011,
+		"SPI_GETGRIDGRANULARITY" _ 0x0012,
+		"SPI_SETGRIDGRANULARITY" _ 0x0013,
+		"SPI_SETDESKWALLPAPER" _ 0x0014,
+		"SPI_SETDESKPATTERN" _ 0x0015,
+		"SPI_GETKEYBOARDDELAY" _ 0x0016,
+		"SPI_SETKEYBOARDDELAY" _ 0x0017,
+		"SPI_ICONVERTICALSPACING" _ 0x0018,
+		"SPI_GETICONTITLEWRAP" _ 0x0019,
+		"SPI_SETICONTITLEWRAP" _ 0x001A,
+		"SPI_GETMENUDROPALIGNMENT" _ 0x001B,
+		"SPI_SETMENUDROPALIGNMENT" _ 0x001C,
+		"SPI_SETDOUBLECLKWIDTH" _ 0x001D,
+		"SPI_SETDOUBLECLKHEIGHT" _ 0x001E,
+		"SPI_GETICONTITLELOGFONT" _ 0x001F,
+		"SPI_SETDOUBLECLICKTIME" _ 0x0020,
+		"SPI_SETMOUSEBUTTONSWAP" _ 0x0021,
+		"SPI_SETICONTITLELOGFONT" _ 0x0022,
+		"SPI_GETFASTTASKSWITCH" _ 0x0023,
+		"SPI_SETFASTTASKSWITCH" _ 0x0024,
+		"SPI_SETDRAGFULLWINDOWS" _ 0x0025,
+		"SPI_GETDRAGFULLWINDOWS" _ 0x0026,
+		"SPI_GETNONCLIENTMETRICS" _ 0x0029,
+		"SPI_SETNONCLIENTMETRICS" _ 0x002A,
+		"SPI_GETMINIMIZEDMETRICS" _ 0x002B,
+		"SPI_SETMINIMIZEDMETRICS" _ 0x002C,
+		"SPI_GETICONMETRICS" _ 0x002D,
+		"SPI_SETICONMETRICS" _ 0x002E,
+		"SPI_SETWORKAREA" _ 0x002F,
+		"SPI_GETWORKAREA" _ 0x0030,
+		"SPI_SETPENWINDOWS" _ 0x0031,
+		"SPI_GETHIGHCONTRAST" _ 0x0042,
+		"SPI_SETHIGHCONTRAST" _ 0x0043,
+		"SPI_GETKEYBOARDPREF" _ 0x0044,
+		"SPI_SETKEYBOARDPREF" _ 0x0045,
+		"SPI_GETSCREENREADER" _ 0x0046,
+		"SPI_SETSCREENREADER" _ 0x0047,
+		"SPI_GETANIMATION" _ 0x0048,
+		"SPI_SETANIMATION" _ 0x0049,
+		"SPI_GETFONTSMOOTHING" _ 0x004A,
+		"SPI_SETFONTSMOOTHING" _ 0x004B,
+		"SPI_SETDRAGWIDTH" _ 0x004C,
+		"SPI_SETDRAGHEIGHT" _ 0x004D,
+		"SPI_SETHANDHELD" _ 0x004E,
+		"SPI_GETLOWPOWERTIMEOUT" _ 0x004F,
+		"SPI_GETPOWEROFFTIMEOUT" _ 0x0050,
+		"SPI_SETLOWPOWERTIMEOUT" _ 0x0051,
+		"SPI_SETPOWEROFFTIMEOUT" _ 0x0052,
+		"SPI_GETLOWPOWERACTIVE" _ 0x0053,
+		"SPI_GETPOWEROFFACTIVE" _ 0x0054,
+		"SPI_SETLOWPOWERACTIVE" _ 0x0055,
+		"SPI_SETPOWEROFFACTIVE" _ 0x0056,
+		"SPI_SETCURSORS" _ 0x0057,
+		"SPI_SETICONS" _ 0x0058,
+		"SPI_GETDEFAULTINPUTLANG" _ 0x0059,
+		"SPI_SETDEFAULTINPUTLANG" _ 0x005A,
+		"SPI_SETLANGTOGGLE" _ 0x005B,
+		"SPI_GETWINDOWSEXTENSION" _ 0x005C,
+		"SPI_SETMOUSETRAILS" _ 0x005D,
+		"SPI_GETMOUSETRAILS" _ 0x005E,
+		"SPI_SETSCREENSAVERRUNNING" _ 0x0061,
+		"SPI_SCREENSAVERRUNNING".expr<Int>("SPI_SETSCREENSAVERRUNNING"),
+		"SPI_GETFILTERKEYS" _ 0x0032,
+		"SPI_SETFILTERKEYS" _ 0x0033,
+		"SPI_GETTOGGLEKEYS" _ 0x0034,
+		"SPI_SETTOGGLEKEYS" _ 0x0035,
+		"SPI_GETMOUSEKEYS" _ 0x0036,
+		"SPI_SETMOUSEKEYS" _ 0x0037,
+		"SPI_GETSHOWSOUNDS" _ 0x0038,
+		"SPI_SETSHOWSOUNDS" _ 0x0039,
+		"SPI_GETSTICKYKEYS" _ 0x003A,
+		"SPI_SETSTICKYKEYS" _ 0x003B,
+		"SPI_GETACCESSTIMEOUT" _ 0x003C,
+		"SPI_SETACCESSTIMEOUT" _ 0x003D,
+		"SPI_GETSERIALKEYS" _ 0x003E,
+		"SPI_SETSERIALKEYS" _ 0x003F,
+		"SPI_GETSOUNDSENTRY" _ 0x0040,
+		"SPI_SETSOUNDSENTRY" _ 0x0041,
+		"SPI_GETSNAPTODEFBUTTON" _ 0x005F,
+		"SPI_SETSNAPTODEFBUTTON" _ 0x0060,
+		"SPI_GETMOUSEHOVERWIDTH" _ 0x0062,
+		"SPI_SETMOUSEHOVERWIDTH" _ 0x0063,
+		"SPI_GETMOUSEHOVERHEIGHT" _ 0x0064,
+		"SPI_SETMOUSEHOVERHEIGHT" _ 0x0065,
+		"SPI_GETMOUSEHOVERTIME" _ 0x0066,
+		"SPI_SETMOUSEHOVERTIME" _ 0x0067,
+		"SPI_GETWHEELSCROLLLINES" _ 0x0068,
+		"SPI_SETWHEELSCROLLLINES" _ 0x0069,
+		"SPI_GETMENUSHOWDELAY" _ 0x006A,
+		"SPI_SETMENUSHOWDELAY" _ 0x006B,
+		"SPI_GETWHEELSCROLLCHARS" _ 0x006C,
+		"SPI_SETWHEELSCROLLCHARS" _ 0x006D,
+		"SPI_GETSHOWIMEUI" _ 0x006E,
+		"SPI_SETSHOWIMEUI" _ 0x006F,
+		"SPI_GETMOUSESPEED" _ 0x0070,
+		"SPI_SETMOUSESPEED" _ 0x0071,
+		"SPI_GETSCREENSAVERRUNNING" _ 0x0072,
+		"SPI_GETDESKWALLPAPER" _ 0x0073,
+		"SPI_GETAUDIODESCRIPTION" _ 0x0074,
+		"SPI_SETAUDIODESCRIPTION" _ 0x0075,
+		"SPI_GETSCREENSAVESECURE" _ 0x0076,
+		"SPI_SETSCREENSAVESECURE" _ 0x0077,
+		"SPI_GETHUNGAPPTIMEOUT" _ 0x0078,
+		"SPI_SETHUNGAPPTIMEOUT" _ 0x0079,
+		"SPI_GETWAITTOKILLTIMEOUT" _ 0x007A,
+		"SPI_SETWAITTOKILLTIMEOUT" _ 0x007B,
+		"SPI_GETWAITTOKILLSERVICETIMEOUT" _ 0x007C,
+		"SPI_SETWAITTOKILLSERVICETIMEOUT" _ 0x007D,
+		"SPI_GETMOUSEDOCKTHRESHOLD" _ 0x007E,
+		"SPI_SETMOUSEDOCKTHRESHOLD" _ 0x007F,
+		"SPI_GETPENDOCKTHRESHOLD" _ 0x0080,
+		"SPI_SETPENDOCKTHRESHOLD" _ 0x0081,
+		"SPI_GETWINARRANGING" _ 0x0082,
+		"SPI_SETWINARRANGING" _ 0x0083,
+		"SPI_GETMOUSEDRAGOUTTHRESHOLD" _ 0x0084,
+		"SPI_SETMOUSEDRAGOUTTHRESHOLD" _ 0x0085,
+		"SPI_GETPENDRAGOUTTHRESHOLD" _ 0x0086,
+		"SPI_SETPENDRAGOUTTHRESHOLD" _ 0x0087,
+		"SPI_GETMOUSESIDEMOVETHRESHOLD" _ 0x0088,
+		"SPI_SETMOUSESIDEMOVETHRESHOLD" _ 0x0089,
+		"SPI_GETPENSIDEMOVETHRESHOLD" _ 0x008A,
+		"SPI_SETPENSIDEMOVETHRESHOLD" _ 0x008B,
+		"SPI_GETDRAGFROMMAXIMIZE" _ 0x008C,
+		"SPI_SETDRAGFROMMAXIMIZE" _ 0x008D,
+		"SPI_GETSNAPSIZING" _ 0x008E,
+		"SPI_SETSNAPSIZING" _ 0x008F,
+		"SPI_GETDOCKMOVING" _ 0x0090,
+		"SPI_SETDOCKMOVING" _ 0x0091,
+		"SPI_GETTOUCHPREDICTIONPARAMETERS" _ 0x009C,
+		"SPI_SETTOUCHPREDICTIONPARAMETERS" _ 0x009D,
+		"MAX_LOGICALDPIOVERRIDE" _ 2,
+		"MIN_LOGICALDPIOVERRIDE" _ -2,
+		"SPI_GETLOGICALDPIOVERRIDE" _ 0x009E,
+		"SPI_SETLOGICALDPIOVERRIDE" _ 0x009F,
+		"SPI_GETMOUSECORNERCLIPLENGTH" _ 0x00A0,
+		"SPI_SETMOUSECORNERCLIPLENGTH" _ 0x00A1,
+		"SPI_GETMENURECT" _ 0x00A2,
+		"SPI_SETMENURECT" _ 0x00A3,
+		"SPI_GETACTIVEWINDOWTRACKING" _ 0x1000,
+		"SPI_SETACTIVEWINDOWTRACKING" _ 0x1001,
+		"SPI_GETMENUANIMATION" _ 0x1002,
+		"SPI_SETMENUANIMATION" _ 0x1003,
+		"SPI_GETCOMBOBOXANIMATION" _ 0x1004,
+		"SPI_SETCOMBOBOXANIMATION" _ 0x1005,
+		"SPI_GETLISTBOXSMOOTHSCROLLING" _ 0x1006,
+		"SPI_SETLISTBOXSMOOTHSCROLLING" _ 0x1007,
+		"SPI_GETGRADIENTCAPTIONS" _ 0x1008,
+		"SPI_SETGRADIENTCAPTIONS" _ 0x1009,
+		"SPI_GETKEYBOARDCUES" _ 0x100A,
+		"SPI_SETKEYBOARDCUES" _ 0x100B,
+		"SPI_GETMENUUNDERLINES".expr<Int>("SPI_GETKEYBOARDCUES"),
+		"SPI_SETMENUUNDERLINES".expr<Int>("SPI_SETKEYBOARDCUES"),
+		"SPI_GETACTIVEWNDTRKZORDER" _ 0x100C,
+		"SPI_SETACTIVEWNDTRKZORDER" _ 0x100D,
+		"SPI_GETHOTTRACKING" _ 0x100E,
+		"SPI_SETHOTTRACKING" _ 0x100F,
+		"SPI_GETMENUFADE" _ 0x1012,
+		"SPI_SETMENUFADE" _ 0x1013,
+		"SPI_GETSELECTIONFADE" _ 0x1014,
+		"SPI_SETSELECTIONFADE" _ 0x1015,
+		"SPI_GETTOOLTIPANIMATION" _ 0x1016,
+		"SPI_SETTOOLTIPANIMATION" _ 0x1017,
+		"SPI_GETTOOLTIPFADE" _ 0x1018,
+		"SPI_SETTOOLTIPFADE" _ 0x1019,
+		"SPI_GETCURSORSHADOW" _ 0x101A,
+		"SPI_SETCURSORSHADOW" _ 0x101B,
+		"SPI_GETMOUSESONAR" _ 0x101C,
+		"SPI_SETMOUSESONAR" _ 0x101D,
+		"SPI_GETMOUSECLICKLOCK" _ 0x101E,
+		"SPI_SETMOUSECLICKLOCK" _ 0x101F,
+		"SPI_GETMOUSEVANISH" _ 0x1020,
+		"SPI_SETMOUSEVANISH" _ 0x1021,
+		"SPI_GETFLATMENU" _ 0x1022,
+		"SPI_SETFLATMENU" _ 0x1023,
+		"SPI_GETDROPSHADOW" _ 0x1024,
+		"SPI_SETDROPSHADOW" _ 0x1025,
+		"SPI_GETBLOCKSENDINPUTRESETS" _ 0x1026,
+		"SPI_SETBLOCKSENDINPUTRESETS" _ 0x1027,
+		"SPI_GETUIEFFECTS" _ 0x103E,
+		"SPI_SETUIEFFECTS" _ 0x103F,
+		"SPI_GETDISABLEOVERLAPPEDCONTENT" _ 0x1040,
+		"SPI_SETDISABLEOVERLAPPEDCONTENT" _ 0x1041,
+		"SPI_GETCLIENTAREAANIMATION" _ 0x1042,
+		"SPI_SETCLIENTAREAANIMATION" _ 0x1043,
+		"SPI_GETCLEARTYPE" _ 0x1048,
+		"SPI_SETCLEARTYPE" _ 0x1049,
+		"SPI_GETSPEECHRECOGNITION" _ 0x104A,
+		"SPI_SETSPEECHRECOGNITION" _ 0x104B,
+		"SPI_GETCARETBROWSING" _ 0x104C,
+		"SPI_SETCARETBROWSING" _ 0x104D,
+		"SPI_GETTHREADLOCALINPUTSETTINGS" _ 0x104E,
+		"SPI_SETTHREADLOCALINPUTSETTINGS" _ 0x104F,
+		"SPI_GETSYSTEMLANGUAGEBAR" _ 0x1050,
+		"SPI_SETSYSTEMLANGUAGEBAR" _ 0x1051,
+		"SPI_GETFOREGROUNDLOCKTIMEOUT" _ 0x2000,
+		"SPI_SETFOREGROUNDLOCKTIMEOUT" _ 0x2001,
+		"SPI_GETACTIVEWNDTRKTIMEOUT" _ 0x2002,
+		"SPI_SETACTIVEWNDTRKTIMEOUT" _ 0x2003,
+		"SPI_GETFOREGROUNDFLASHCOUNT" _ 0x2004,
+		"SPI_SETFOREGROUNDFLASHCOUNT" _ 0x2005,
+		"SPI_GETCARETWIDTH" _ 0x2006,
+		"SPI_SETCARETWIDTH" _ 0x2007,
+		"SPI_GETMOUSECLICKLOCKTIME" _ 0x2008,
+		"SPI_SETMOUSECLICKLOCKTIME" _ 0x2009,
+		"SPI_GETFONTSMOOTHINGTYPE" _ 0x200A,
+		"SPI_SETFONTSMOOTHINGTYPE" _ 0x200B,
+		"SPI_GETFONTSMOOTHINGCONTRAST" _ 0x200C,
+		"SPI_SETFONTSMOOTHINGCONTRAST" _ 0x200D,
+		"SPI_GETFOCUSBORDERWIDTH" _ 0x200E,
+		"SPI_SETFOCUSBORDERWIDTH" _ 0x200F,
+		"SPI_GETFOCUSBORDERHEIGHT" _ 0x2010,
+		"SPI_SETFOCUSBORDERHEIGHT" _ 0x2011,
+		"SPI_GETFONTSMOOTHINGORIENTATION" _ 0x2012,
+		"SPI_SETFONTSMOOTHINGORIENTATION" _ 0x2013,
+		"SPI_GETMINIMUMHITRADIUS" _ 0x2014,
+		"SPI_SETMINIMUMHITRADIUS" _ 0x2015,
+		"SPI_GETMESSAGEDURATION" _ 0x2016,
+		"SPI_SETMESSAGEDURATION" _ 0x2017,
+		"SPI_GETCONTACTVISUALIZATION" _ 0x2018,
+		"SPI_SETCONTACTVISUALIZATION" _ 0x2019,
+		"SPI_GETGESTUREVISUALIZATION" _ 0x201A,
+		"SPI_SETGESTUREVISUALIZATION" _ 0x201B
+	)
+
+	IntConstant.block(
+		"{@link #SystemParametersInfo} flags.",
+
+		"SPIF_UPDATEINIFILE" _ 0x0001,
+		"SPIF_SENDWININICHANGE" _ 0x0002,
+		"SPIF_SENDCHANGE".expr<Int>("SPIF_SENDWININICHANGE")
+	)
+
+	IntConstant.block(
+		"Virtual Keys.",
+
+		"VK_LBUTTON" _ 0x01,
+		"VK_RBUTTON" _ 0x02,
+		"VK_CANCEL" _ 0x03,
+		"VK_MBUTTON" _ 0x04,
+		"VK_XBUTTON1" _ 0x05,
+		"VK_XBUTTON2" _ 0x06,
+		"VK_BACK" _ 0x08,
+		"VK_TAB" _ 0x09,
+		"VK_CLEAR" _ 0x0C,
+		"VK_RETURN" _ 0x0D,
+		"VK_SHIFT" _ 0x10,
+		"VK_CONTROL" _ 0x11,
+		"VK_MENU" _ 0x12,
+		"VK_PAUSE" _ 0x13,
+		"VK_CAPITAL" _ 0x14,
+		"VK_KANA" _ 0x15,
+		"VK_HANGEUL" _ 0x15,
+		"VK_HANGUL" _ 0x15,
+		"VK_JUNJA" _ 0x17,
+		"VK_FINAL" _ 0x18,
+		"VK_HANJA" _ 0x19,
+		"VK_KANJI" _ 0x19,
+		"VK_ESCAPE" _ 0x1B,
+		"VK_CONVERT" _ 0x1C,
+		"VK_NONCONVERT" _ 0x1D,
+		"VK_ACCEPT" _ 0x1E,
+		"VK_MODECHANGE" _ 0x1F,
+		"VK_SPACE" _ 0x20,
+		"VK_PRIOR" _ 0x21,
+		"VK_NEXT" _ 0x22,
+		"VK_END" _ 0x23,
+		"VK_HOME" _ 0x24,
+		"VK_LEFT" _ 0x25,
+		"VK_UP" _ 0x26,
+		"VK_RIGHT" _ 0x27,
+		"VK_DOWN" _ 0x28,
+		"VK_SELECT" _ 0x29,
+		"VK_PRINT" _ 0x2A,
+		"VK_EXECUTE" _ 0x2B,
+		"VK_SNAPSHOT" _ 0x2C,
+		"VK_INSERT" _ 0x2D,
+		"VK_DELETE" _ 0x2E,
+		"VK_HELP" _ 0x2F,
+		"VK_LWIN" _ 0x5B,
+		"VK_RWIN" _ 0x5C,
+		"VK_APPS" _ 0x5D,
+		"VK_SLEEP" _ 0x5F,
+		"VK_NUMPAD0" _ 0x60,
+		"VK_NUMPAD1" _ 0x61,
+		"VK_NUMPAD2" _ 0x62,
+		"VK_NUMPAD3" _ 0x63,
+		"VK_NUMPAD4" _ 0x64,
+		"VK_NUMPAD5" _ 0x65,
+		"VK_NUMPAD6" _ 0x66,
+		"VK_NUMPAD7" _ 0x67,
+		"VK_NUMPAD8" _ 0x68,
+		"VK_NUMPAD9" _ 0x69,
+		"VK_MULTIPLY" _ 0x6A,
+		"VK_ADD" _ 0x6B,
+		"VK_SEPARATOR" _ 0x6C,
+		"VK_SUBTRACT" _ 0x6D,
+		"VK_DECIMAL" _ 0x6E,
+		"VK_DIVIDE" _ 0x6F,
+		"VK_F1" _ 0x70,
+		"VK_F2" _ 0x71,
+		"VK_F3" _ 0x72,
+		"VK_F4" _ 0x73,
+		"VK_F5" _ 0x74,
+		"VK_F6" _ 0x75,
+		"VK_F7" _ 0x76,
+		"VK_F8" _ 0x77,
+		"VK_F9" _ 0x78,
+		"VK_F10" _ 0x79,
+		"VK_F11" _ 0x7A,
+		"VK_F12" _ 0x7B,
+		"VK_F13" _ 0x7C,
+		"VK_F14" _ 0x7D,
+		"VK_F15" _ 0x7E,
+		"VK_F16" _ 0x7F,
+		"VK_F17" _ 0x80,
+		"VK_F18" _ 0x81,
+		"VK_F19" _ 0x82,
+		"VK_F20" _ 0x83,
+		"VK_F21" _ 0x84,
+		"VK_F22" _ 0x85,
+		"VK_F23" _ 0x86,
+		"VK_F24" _ 0x87,
+		"VK_NUMLOCK" _ 0x90,
+		"VK_SCROLL" _ 0x91,
+		"VK_OEM_NEC_EQUAL" _ 0x92,
+		"VK_OEM_FJ_JISHO" _ 0x92,
+		"VK_OEM_FJ_MASSHOU" _ 0x93,
+		"VK_OEM_FJ_TOUROKU" _ 0x94,
+		"VK_OEM_FJ_LOYA" _ 0x95,
+		"VK_OEM_FJ_ROYA" _ 0x96,
+		"VK_LSHIFT" _ 0xA0,
+		"VK_RSHIFT" _ 0xA1,
+		"VK_LCONTROL" _ 0xA2,
+		"VK_RCONTROL" _ 0xA3,
+		"VK_LMENU" _ 0xA4,
+		"VK_RMENU" _ 0xA5,
+		"VK_BROWSER_BACK" _ 0xA6,
+		"VK_BROWSER_FORWARD" _ 0xA7,
+		"VK_BROWSER_REFRESH" _ 0xA8,
+		"VK_BROWSER_STOP" _ 0xA9,
+		"VK_BROWSER_SEARCH" _ 0xAA,
+		"VK_BROWSER_FAVORITES" _ 0xAB,
+		"VK_BROWSER_HOME" _ 0xAC,
+		"VK_VOLUME_MUTE" _ 0xAD,
+		"VK_VOLUME_DOWN" _ 0xAE,
+		"VK_VOLUME_UP" _ 0xAF,
+		"VK_MEDIA_NEXT_TRACK" _ 0xB0,
+		"VK_MEDIA_PREV_TRACK" _ 0xB1,
+		"VK_MEDIA_STOP" _ 0xB2,
+		"VK_MEDIA_PLAY_PAUSE" _ 0xB3,
+		"VK_LAUNCH_MAIL" _ 0xB4,
+		"VK_LAUNCH_MEDIA_SELECT" _ 0xB5,
+		"VK_LAUNCH_APP1" _ 0xB6,
+		"VK_LAUNCH_APP2" _ 0xB7,
+		"VK_OEM_1" _ 0xBA,
+		"VK_OEM_PLUS" _ 0xBB,
+		"VK_OEM_COMMA" _ 0xBC,
+		"VK_OEM_MINUS" _ 0xBD,
+		"VK_OEM_PERIOD" _ 0xBE,
+		"VK_OEM_2" _ 0xBF,
+		"VK_OEM_3" _ 0xC0,
+		"VK_OEM_4" _ 0xDB,
+		"VK_OEM_5" _ 0xDC,
+		"VK_OEM_6" _ 0xDD,
+		"VK_OEM_7" _ 0xDE,
+		"VK_OEM_8" _ 0xDF,
+		"VK_OEM_AX" _ 0xE1,
+		"VK_OEM_102" _ 0xE2,
+		"VK_ICO_HELP" _ 0xE3,
+		"VK_ICO_00" _ 0xE4,
+		"VK_PROCESSKEY" _ 0xE5,
+		"VK_ICO_CLEAR" _ 0xE6,
+		"VK_PACKET" _ 0xE7,
+		"VK_OEM_RESET" _ 0xE9,
+		"VK_OEM_JUMP" _ 0xEA,
+		"VK_OEM_PA1" _ 0xEB,
+		"VK_OEM_PA2" _ 0xEC,
+		"VK_OEM_PA3" _ 0xED,
+		"VK_OEM_WSCTRL" _ 0xEE,
+		"VK_OEM_CUSEL" _ 0xEF,
+		"VK_OEM_ATTN" _ 0xF0,
+		"VK_OEM_FINISH" _ 0xF1,
+		"VK_OEM_COPY" _ 0xF2,
+		"VK_OEM_AUTO" _ 0xF3,
+		"VK_OEM_ENLW" _ 0xF4,
+		"VK_OEM_BACKTAB" _ 0xF5,
+		"VK_ATTN" _ 0xF6,
+		"VK_CRSEL" _ 0xF7,
+		"VK_EXSEL" _ 0xF8,
+		"VK_EREOF" _ 0xF9,
+		"VK_PLAY" _ 0xFA,
+		"VK_ZOOM" _ 0xFB,
+		"VK_NONAME" _ 0xFC,
+		"VK_PA1" _ 0xFD,
+		"VK_OEM_CLEAR" _ 0xFE
+	)
+
+	IntConstant.block(
+		"XButton values.",
+
+	    "XBUTTON1" _ 0x0001,
+		"XBUTTON2" _ 0x0002
+	)
+
+	IntConstant.block(
+		"Value for rolling one detent.",
+
+	    "WHEEL_DELTA" _ 120
+	)
+
+	IntConstant.block(
+		"{@link TRACKMOUSEEVENT} flags.",
+
+		"TME_HOVER" _ 0x00000001,
+		"TME_LEAVE" _ 0x00000002,
+		"TME_NONCLIENT" _ 0x00000010,
+		"TME_QUERY" _ 0x40000000,
+		"TME_CANCEL" _ 0x80000000.i
+	)
+
+	// ------------------------------------------------------------------------------
+
 	ATOM.func(
 		"RegisterClassEx",
 		"Registers a window class for subsequent use in calls to the {@link #CreateWindowEx} function.",
 
-		const _ WNDCLASSEX.IN(
+		const _ WNDCLASSEX_p.IN(
 			"wndClassEx",
 			"a {@link WNDCLASSEX} structure. You must fill the structure with the appropriate class attributes before passing it to the function."
 		)
@@ -807,10 +1264,11 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GetClassInfoEx",
 		"Retrieves information about a window class, including a handle to the small icon associated with the window class.",
 
-		HINSTANCE.IN(
+		nullable _ HINSTANCE.IN(
 			"instance",
-			"""a handle to the instance of the application that created the class. To retrieve information about classes defined by the system (such as buttons
-			or list boxes), set this parameter to NULL.
+			"""
+			a handle to the instance of the application that created the class. To retrieve information about classes defined by the system (such as buttons or
+			list boxes), set this parameter to $NULL.
 			"""
 		),
 		LPCTSTR.IN(
@@ -848,10 +1306,10 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"LoadIcon",
 		"Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
-		HINSTANCE.IN(
+		nullable _ HINSTANCE.IN(
 			"instance",
 			"""
-			a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be NULL when a standard icon is
+			a handle to an instance of the module whose executable file contains the icon to be loaded. This parameter must be $NULL when a standard icon is
 			being loaded.
 			"""
 		),
@@ -941,6 +1399,17 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	BOOL.func(
+		"SetWindowText",
+		"""
+		Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed. However,
+		{@code SetWindowText} cannot change the text of a control in another application.
+		""",
+
+		HWND.IN("window", "a handle to the window or control whose text is to be changed"),
+		LPCTSTR.IN("string", "the new title or control text")
+	)
+
+	BOOL.func(
 		"GetMessage",
 		"""
 		Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
@@ -971,7 +1440,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		time the thread calls the {@link #GetMessage} or @{link #PeekMessage} function.
 		""",
 
-		const _ MSG.IN(
+		const _ MSG_p.IN(
 			"msg",
 			"""
 			an {@link MSG} structure that contains message information retrieved from the calling thread's message queue by using the
@@ -980,11 +1449,19 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
+	BOOL.func(
+		"WaitMessage",
+	    """
+	    Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
+	    return until a new message is placed in the thread's message queue.
+	    """
+	)
+
 	LRESULT.func(
 		"DispatchMessage",
 		"Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the {@link #GetMessage} function.",
 
-		const _ MSG.IN("msg", "a structure that contains the message")
+		const _ MSG_p.IN("msg", "a structure that contains the message")
 	)
 
 	DWORD.func(
@@ -1022,7 +1499,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		subsequent GDI functions to draw in the DC. The device context is an opaque data structure, whose values are used internally by GDI.
 		""",
 
-		nullable _ HWND.IN("window", "a handle to the window whose DC is to be retrieved. If this value is NULL, {@code GetDC} retrieves the DC for the entire screen.")
+		nullable _ HWND.IN("window", "a handle to the window whose DC is to be retrieved. If this value is $NULL, {@code GetDC} retrieves the DC for the entire screen.")
 	)
 
 	int.func(
@@ -1032,7 +1509,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		common and window DCs. It has no effect on class or private DCs.
 		""",
 
-		HWND.IN("window", "a handle to the window whose DC is to be released"),
+		nullable _ HWND.IN("window", "a handle to the window whose DC is to be released"),
 		HDC.IN("hdc", "a handle to the DC to be released")
 	)
 
@@ -1040,7 +1517,10 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"EnumDisplayDevices",
 		"Obtains information about the display devices in the current session.",
 
-		LPCTSTR.IN("device", "the device name. If NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."),
+		nullable _ LPCTSTR.IN(
+			"device",
+			"the device name. If $NULL, function returns information for the display adapter(s) on the machine, based on {@code devNum}."
+		),
 		DWORD.IN(
 			"devNum",
 		    """
@@ -1070,12 +1550,12 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"deviceName",
 			"""
 			a null-terminated string that specifies the display device about whose graphics mode the function will obtain information. This parameter is either
-			NULL or a DISPLAY_DEVICE.DeviceName returned from {@link #EnumDisplayDevices}. A NULL value specifies the current display device on the computer on
+			$NULL or a DISPLAY_DEVICE.DeviceName returned from {@link #EnumDisplayDevices}. A $NULL value specifies the current display device on the computer on
 			which the calling thread is running.
 			"""
 		),
-		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or one of:", "#ENUM_CURRENT_SETTINGS #ENUM_REGISTRY_SETTINGS"),
-		DEVMODE.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode")
+		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or one of:", EnumMode),
+		DEVMODE_p.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode")
 	)
 
 	BOOL.func(
@@ -1087,7 +1567,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		LPCTSTR.IN("deviceName", "a null-terminated string that specifies the display device about which graphics mode the function will obtain information"),
 		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or one of:", "#ENUM_CURRENT_SETTINGS #ENUM_REGISTRY_SETTINGS"),
-		DEVMODE.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode"),
+		DEVMODE_p.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode"),
 		DWORD.IN("flags", "One of:", "#EDS_RAWMODE #EDS_ROTATEDMODE")
 	)
 
@@ -1095,11 +1575,11 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"ChangeDisplaySettings",
 		"Changes the settings of the default display device to the specified graphics mode.",
 
-		DEVMODE.IN(
+		nullable _ DEVMODE_p.IN(
 			"devMode",
 		    """
-		    a {@link DEVMODE} structure that describes the new graphics mode. If {@code devMode} is NULL, all the values currently in the registry will be used
-		    for the display setting. Passing NULL for the {@code devMode} parameter and 0 for the {@code flagS} parameter is the easiest way to return to the
+		    a {@link DEVMODE} structure that describes the new graphics mode. If {@code devMode} is $NULL, all the values currently in the registry will be used
+		    for the display setting. Passing $NULL for the {@code devMode} parameter and 0 for the {@code flagS} parameter is the easiest way to return to the
 		    default mode after a dynamic mode change.
 		    """
 		),
@@ -1111,17 +1591,313 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"Changes the settings of the specified display device to the specified graphics mode.",
 
 		LPCTSTR.IN("deviceName", "a null-terminated string that specifies the display device whose graphics mode will change"),
-		DEVMODE.IN(
+		nullable _ DEVMODE_p.IN(
 			"devMode",
 			"""
-		    a {@link DEVMODE} structure that describes the new graphics mode. If {@code devMode} is NULL, all the values currently in the registry will be used
-		    for the display setting. Passing NULL for the {@code devMode} parameter and 0 for the {@code flagS} parameter is the easiest way to return to the
+		    a {@link DEVMODE} structure that describes the new graphics mode. If {@code devMode} is $NULL, all the values currently in the registry will be used
+		    for the display setting. Passing $NULL for the {@code devMode} parameter and 0 for the {@code flagS} parameter is the easiest way to return to the
 		    default mode after a dynamic mode change.
 		    """
 		),
-		HWND.IN("window", "reserved; must be NULL"),
+		nullable _ HWND.IN("window", "reserved; must be $NULL"),
 		DWORD.IN("flags", "indicates how the graphics mode should be changed"),
-		LPVOID.IN("param", "if {@code flags} is {@link #CDS_VIDEOPARAMETERS}, {@code param} is a pointer to a {@link VIDEOPARAMETERS} structure. Otherwise {@code param} must be NULL.")
+		nullable _ LPVOID.IN(
+			"param",
+			"if {@code flags} is {@link #CDS_VIDEOPARAMETERS}, {@code param} is a pointer to a {@link VIDEOPARAMETERS} structure. Otherwise {@code param} must be $NULL."
+		)
+	)
+
+	BOOL.func(
+		"SystemParametersInfo",
+	    "Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter.",
+
+	    UINT.IN("uiAction", "the system-wide parameter to be retrieved or set"),
+	    UINT.IN(
+		    "uiParam",
+		    """
+		    a parameter whose usage and format depends on the system parameter being queried or set. If not otherwise indicated, you must specify zero for this
+		    parameter.
+		    """
+	    ),
+	    nullable _ PVOID.OUT(
+		    "pvParam",
+		    """
+		    a parameter whose usage and format depends on the system parameter being queried or set. If not otherwise indicated, you must specify $NULL for this
+		    parameter.
+		    """
+	    ),
+	    UINT.IN(
+		    "fWinIni",
+		    """
+		    if a system parameter is being set, specifies whether the user profile is to be updated, and if so, whether the {@link #WM_SETTINGCHANGE} message is
+		    to be broadcast to all top-level windows to notify them of the change.
+
+		    This parameter can be zero if you do not want to update the user profile or broadcast the {@link #WM_SETTINGCHANGE} message.
+		    """
+	    )
+	)
+
+	BOOL.func(
+		"AdjustWindowRectEx",
+	    """
+	    Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
+	    {@link #CreateWindowEx} function to create a window whose client area is the desired size.
+	    """,
+
+	    LPRECT.IN(
+		    "rect",
+		    """
+		    a pointer to a {@link RECT} structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
+		    function returns, the structure contains the coordinates of the top-left and bottom-right corners of the window to accommodate the desired client
+		    area.
+		    """
+	    ),
+	    DWORD.IN("style", "the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style."),
+	    BOOL.IN("menu", "indicates whether the window has a menu"),
+	    DWORD.IN("exStyle", "the extended window style of the window whose required size is to be calculated")
+	)
+
+	BOOL.func(
+		"GetCursorPos",
+	    "Retrieves the position of the mouse cursor, in screen coordinates.",
+
+	    LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+	)
+
+	BOOL.func(
+		"ScreenToClient",
+	    "Converts the screen coordinates of a specified point on the screen to client-area coordinates.",
+
+	    HWND.IN("hWnd", "a handle to the window whose client area will be used for the conversion"),
+	    LPPOINT.IN("point", "a pointer to a {@link POINT} structure that specifies the screen coordinates to be converted")
+	)
+
+	BOOL.func(
+		"ClientToScreen",
+		"Converts the client-area coordinates of a specified point to screen coordinates.",
+
+		HWND.IN("hWnd", "a handle to the window whose client area will be used for the conversion"),
+		LPPOINT.IN(
+			"point",
+			"""
+			a pointer to a {@link POINT} structure that contains the client coordinates to be converted. The new screen coordinates are copied into this
+			structure if the function succeeds.
+			"""
+		)
+	)
+
+	BOOL.func(
+		"GetClientRect",
+	    """
+	    Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because
+	    client coordinates are relative to the upper-left corner of a window's client area, the coordinates of the upper-left corner are (0,0).
+	    """,
+
+	    HWND.IN("hWnd", "a handle to the window whose client coordinates are to be retrieved."),
+	    LPRECT.OUT(
+		    "rect",
+		    """
+		    a pointer to a {@link RECT} structure that receives the client coordinates. The left and top members are zero. The right and bottom members contain
+		    the width and height of the window.
+		    """
+	    )
+	)
+
+	HWND.func(
+		"WindowFromPoint",
+	    "Retrieves a handle to the window that contains the specified point.",
+
+	    POINT.IN("point", "the point to be checked")
+	)
+
+	BOOL.func(
+		"BringWindowToTop",
+	    """
+	    Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the
+	    top-level parent window associated with the child window is activated.
+	    """,
+
+	    HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
+	)
+
+	BOOL.func(
+		"SetForegroundWindow",
+		"""
+	    Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various
+	    visual cues are changed for the user. The system assigns a slightly higher priority to the thread that created the foreground window than it does to
+	    other threads.
+	    """,
+
+		HWND.IN("hWnd", "a handle to the window that should be activated and brought to the foreground")
+	)
+
+	BOOL.func(
+		"SetFocus",
+		"Sets the keyboard focus to the specified window. The window must be attached to the calling thread's message queue.",
+
+		nullable _ HWND.IN("hWnd", "a handle to the window that will receive the keyboard input. If this parameter is $NULL, keystrokes are ignored.")
+	)
+
+	LONG_PTR.func(
+		"SetWindowLongPtr",
+	    "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
+
+	    HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+	    int.IN(
+		    "index",
+		    """
+		    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
+		    of an integer. To set any other value, specify one of the following values
+		    """,
+		    WindowLongOffsets
+	    ),
+	    LONG_PTR.IN("newLong", "the replacement value"),
+
+	    returnDoc = "the previous value at the given {@code index}"
+	)
+
+	LONG_PTR.func(
+		"GetWindowLongPtr",
+		"Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
+
+		HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+		int.IN(
+			"index",
+			"""
+			    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
+			    of an integer. To set any other value, specify one of the following values
+			    """,
+			WindowLongOffsets
+		)
+	)
+
+	SHORT.func(
+		"GetAsyncKeyState",
+		"Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to {@code GetAsyncKeyState}.",
+
+	    int.IN("key", "the virtual-key code")
+	)
+
+	BOOL.func(
+		"SetCursorPos",
+	    """
+	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent {@link #ClipCursor}
+	    function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
+	    """,
+
+	    int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
+	    int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+	)
+
+	HWND.func(
+		"SetCapture",
+		"""
+	    Sets the mouse capture to the specified window belonging to the current thread. {@code SetCapture} captures mouse input either when the mouse is over
+	    the capturing window, or when the mouse button was pressed while the mouse was over the capturing window and the button is still down. Only one window
+	    at a time can capture the mouse.
+
+	    If the mouse cursor is over a window created by another thread, the system will direct mouse input to the specified window only if a mouse button is
+	    down.
+	    """,
+
+		HWND.IN("hWnd", "a handle to the window in the current thread that is to capture the mouse"),
+
+	    returnDoc = "a handle to the window that had previously captured the mouse. If there is no such window, the return value is $NULL."
+	)
+
+	BOOL.func(
+		"ReleaseCapture",
+	    """
+	    Releases the mouse capture from a window in the current thread and restores normal mouse input processing. A window that has captured the mouse receives
+	    all mouse input, regardless of the position of the cursor, except when a mouse button is clicked while the cursor hot spot is in the window of another
+	    thread.
+	    """
+	)
+
+	BOOL.func(
+		"ClipCursor",
+	    """
+	    "Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the {@code SetCursorPos} function or the mouse) lies
+	    outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
+	    """,
+
+	    mods(const, nullable) _ RECT_p.IN(
+		    "rect",
+		    """
+		    a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
+		    parameter is $NULL, the cursor is free to move anywhere on the screen.
+		    """
+	    )
+	)
+
+	int.func(
+		"ShowCursor",
+		"""
+		Displays or hides the cursor.
+
+		This function sets an internal display counter that determines whether the cursor should be displayed. The cursor is displayed only if the display count
+		is greater than or equal to 0. If a mouse is installed, the initial display count is 0. If no mouse is installed, the display count is –1.
+		""",
+
+		BOOL.IN(
+			"show",
+			"""
+			If {@code show} is {@link WinBase#TRUE}, the display count is incremented by one. If {@code show} is {@link WinBase#FALSE}, the display count is
+			decremented by one.
+			"""
+		)
+	)
+
+	HCURSOR.func(
+		"SetCursor",
+		"""
+		Sets the cursor shape.
+
+		The cursor is set only if the new cursor is different from the previous cursor; otherwise, the function returns immediately.
+
+		The cursor is a shared resource. A window should set the cursor shape only when the cursor is in its client area or when the window is capturing mouse
+		input. In systems without a mouse, the window should restore the previous cursor before the cursor leaves the client area or before it relinquishes
+		control to another window.
+
+		If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to $NULL. If the
+		class cursor is not NULL, the system restores the class cursor each time the mouse is moved.
+
+		The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the {@link #ShowCursor}
+		function to hide the cursor more times than to show the cursor.
+		""",
+
+		nullable _ HCURSOR.IN(
+			"hCursor",
+			"""
+			a handle to the cursor. The cursor must have been created by the {@link #CreateCursor} function or loaded by the {@link #LoadCursor} or
+			{@link #LoadImage} function. If this parameter is $NULL, the cursor is removed from the screen.
+			"""
+		),
+
+	    returnDoc = "the handle to the previous cursor, if there was one"
+	)
+
+	UINT.func(
+		"MapVirtualKey",
+	    "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code.",
+
+	    UINT.IN("code", "the virtual key code or scan code for a key. How this value is interpreted depends on the value of the {@code mapType} parameter."),
+	    UINT.IN("mapType", "the translation to be performed. The value of this parameter depends on the value of the {@code code} parameter.")
+	)
+
+	BOOL.func(
+		"TrackMouseEvent",
+		"Posts messages when the mouse pointer leaves a window or hovers over a window for a specified amount of time.",
+
+	    LPTRACKMOUSEEVENT.IN("eventTrack", "a pointer to a {@code TRACKMOUSEEVENT} structure that contains tracking information.")
+	)
+
+	HWND.func(
+		"GetForegroundWindow",
+	    """
+	    Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the
+	    thread that creates the foreground window than it does to other threads.
+	    """
 	)
 
 }
