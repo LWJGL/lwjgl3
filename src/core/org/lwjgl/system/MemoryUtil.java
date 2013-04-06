@@ -568,13 +568,25 @@ public final class MemoryUtil {
 
 		ByteBuffer buffer = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
 
-		for ( int i = 0; i < text.length(); i++ )
-			buffer.putChar(i << 1, text.charAt(i));
-
-		if ( nullTerminated )
-			buffer.putChar(buffer.capacity() - 2, '\0');
+		memEncodeUTF16(text, nullTerminated, buffer);
 
 		return buffer;
+	}
+
+	/**
+	 * Encodes and optionally null-terminates the given text using UTF-16 encoding. The encoded text is stored in the given {@link ByteBuffer}. The
+	 * {@code target} buffer is assumed to have enough remaining space to store the encoded text.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param target         the buffer in which to store the encoded text
+	 */
+	public static void memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		for ( int i = 0; i < text.length(); i++ )
+			target.putChar(i << 1, text.charAt(i));
+
+		if ( nullTerminated )
+			target.putChar(target.capacity() - 2, '\0');
 	}
 
 	/**
