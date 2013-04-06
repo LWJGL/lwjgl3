@@ -21,4 +21,8 @@ public final class MathUtil {
 		return v + 1;
 	}
 
+	public static long mathUIntToPtr(int value) {
+		return value & 0xFFFFFFFFL;
+	}
+
 }
