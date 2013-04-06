@@ -187,7 +187,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"KEY_RIGHT_CONTROL" _ 345,
 		"KEY_RIGHT_ALT" _ 346,
 		"KEY_RIGHT_SUPER" _ 347,
-		"KEY_MENU" _ 348
+		"KEY_MENU" _ 348,
+		"KEY_LAST".expr<Int>("GLFW_KEY_MENU")
 	)
 
 	IntConstant.block(
@@ -201,6 +202,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"MOUSE_BUTTON_6" _ 5,
 		"MOUSE_BUTTON_7" _ 6,
 		"MOUSE_BUTTON_8" _ 7,
+		"MOUSE_BUTTON_LAST".expr<Int>("GLFW_MOUSE_BUTTON_8"),
 		"MOUSE_BUTTON_LEFT".expr<Int>("GLFW_MOUSE_BUTTON_1"),
 		"MOUSE_BUTTON_RIGHT".expr<Int>("GLFW_MOUSE_BUTTON_2"),
 		"MOUSE_BUTTON_MIDDLE".expr<Int>("GLFW_MOUSE_BUTTON_3")
@@ -224,7 +226,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"JOYSTICK_13" _ 12,
 		"JOYSTICK_14" _ 13,
 		"JOYSTICK_15" _ 14,
-		"JOYSTICK_16" _ 15
+		"JOYSTICK_16" _ 15,
+	    "JOYSTICK_LAST".expr<Int>("GLFW_JOYSTICK_16")
 	)
 
 	IntConstant.block(
@@ -510,7 +513,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
-		autoSizeResult _ int_p.OUT("count", "number of video modes in the returned array")
+		mods(Check(1), autoSizeResult) _ int_p.OUT("count", "number of video modes in the returned array")
 	)
 
 	GLFWvidmode.func(
@@ -536,7 +539,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"This function retrieves the current gamma ramp of the specified monitor.",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
-		GLFWgammaramp.IN("ramp", "Where to store the gamma ramp")
+		GLFWgammaramp_p.IN("ramp", "Where to store the gamma ramp")
 	)
 
 	void.func(
@@ -544,7 +547,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"This function sets the current gamma ramp for the specified monitor.",
 
 		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
-		const _ GLFWgammaramp.IN("ramp", "gamma ramp to use")
+		const _ GLFWgammaramp_p.IN("ramp", "gamma ramp to use")
 	)
 
 	void.func(
@@ -1000,8 +1003,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         """,
 
 		GLFWwindow.IN("window", "desired window"),
-		Check(1) _ int_p.OUT("xpos", "cursor x-coordinate, relative to the left edge of the client area or null"),
-		Check(1) _ int_p.OUT("ypos", "cursor y-coordinate, relative to the to top edge of the client area, or null.")
+		Check(1) _ double_p.OUT("xpos", "cursor x-coordinate, relative to the left edge of the client area or null"),
+		Check(1) _ double_p.OUT("ypos", "cursor y-coordinate, relative to the to top edge of the client area, or null.")
 	)
 
 	void.func(
@@ -1013,8 +1016,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
-		int.IN("xpos", "desired x-coordinate, relative to the left edge of the client area, or null"),
-		int.IN("ypos", "desired y-coordinate, relative to the top edge of the client area, or null")
+		double.IN("xpos", "desired x-coordinate, relative to the left edge of the client area, or null"),
+		double.IN("ypos", "desired y-coordinate, relative to the top edge of the client area, or null")
 	)
 
 	void.func(
@@ -1098,8 +1101,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         """,
 
 		int.IN("joy", "joystick to query"),
-		Check(1) _ float_p.OUT("axes", "array to hold the values"),
-		int.IN("numaxes", "size of the provided array")
+		float_p.OUT("axes", "array to hold the values"),
+		AutoSize("axes") _ int.IN("numaxes", "size of the provided array")
 	)
 
 	int.func(
@@ -1110,8 +1113,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		int.IN("joy", "joystick to query"),
-		charUTF8_p.IN("buttons", "array to hold the values"),
-		int.IN("numbuttons", "size of the provided array")
+		unsigned_char_p.IN("buttons", "array to hold the values"),
+		AutoSize("buttons") _ int.IN("numbuttons", "size of the provided array")
 	)
 
 	(const _ charUTF8_p).func(
