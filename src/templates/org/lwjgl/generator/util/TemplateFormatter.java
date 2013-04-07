@@ -177,7 +177,7 @@ public class TemplateFormatter {
 
 	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+:)))";
 	private static final String DEFINE         = "(?:#define\\s+)?";
-	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+)|(?:\\([^)]+\\))";
+	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+L?)|(?:\\([^)]+\\))";
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
 		DESCRIPTION + "\\s+((?:\\s*" + DEFINE + "[0-9A-Za-z_]+\\s+(?:" + CONSTANT_VALUE + ")[ \t]*" + BLOCK_COMMENT + "\\s*$)+)\\s*",
@@ -253,9 +253,11 @@ public class TemplateFormatter {
 				String value = constantMatcher.group(2);
 
 				try {
-					Integer.decode(value);
+					String intValue = value.endsWith("L") ? value.substring(0, value.length() - 1) : value;
+
+					Integer.decode(intValue);
 					builder.append("\" _ ");
-					builder.append(value);
+					builder.append(intValue);
 				} catch (NumberFormatException e) {
 					builder.append("\".expr<Int>(\"");
 					builder.append(value.substring(1, value.length() - 1));
