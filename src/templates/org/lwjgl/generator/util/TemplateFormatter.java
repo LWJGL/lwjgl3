@@ -173,9 +173,9 @@ public class TemplateFormatter {
 
 	// ---[ CONSTANT FORMATTING ]----
 
-	private static final String BLOCK_COMMENT = "(?:/[*].+?[*]/)?";
+	private static final String BLOCK_COMMENT = "(?:/[*]+.+?[*]+/)?";
 
-	private static final String DESCRIPTION    = "(?:(?:/[*]\\s*(.+?)\\s*[*]/)|(?:([^:]+:)))";
+	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+:)))";
 	private static final String DEFINE         = "(?:#define\\s+)?";
 	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+)|(?:\\([^)]+\\))";
 
@@ -189,7 +189,8 @@ public class TemplateFormatter {
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 
 	private static final Pattern CONSTANT_PATTERN = Pattern.compile(
-		DEFINE + "([0-9A-Za-z_]+)\\s+(" + CONSTANT_VALUE + ")\\s*" + BLOCK_COMMENT
+		DEFINE + "([0-9A-Za-z_]+)\\s+(" + CONSTANT_VALUE + ")\\s*" + BLOCK_COMMENT,
+		Pattern.DOTALL
 	);
 
 	private static String formatConstants(String input, String prefix) {
