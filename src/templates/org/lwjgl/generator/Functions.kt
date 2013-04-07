@@ -573,7 +573,7 @@ public class NativeClassFunction(
 				if ( returns has MapPointer )
 					print(", ${returns[MapPointer].sizeExpression}")
 				else if ( !isNullTerminated ) {
-					if ( returns.isStructValue ) {
+					if ( returns.nativeType is StructType ) {
 						print(
 							if ( hasParam { it has autoSizeResult } ) {
 								val param = getParam { it has autoSizeResult }
@@ -581,17 +581,16 @@ public class NativeClassFunction(
 							} else
 								", ${(returns.nativeType as StructType).definition.className}.SIZEOF"
 						)
-					} else {
-						val param = try {
-							getParam { it has autoSizeResult }
-						} catch (e: IllegalStateException) {
-							throw RuntimeException("No autoSizeResult parameter could be found.")
-						}
-						if ( param.nativeType.mapping == PointerMapping.DATA_INT )
-							print(", $API_BUFFER.intValue(${param.name})")
-						else
-							print(", (int)$API_BUFFER.longValue(${param.name})")
-					}
+					} else if ( hasParam { it has autoSizeResult } ) {
+						val param = getParam { it has autoSizeResult }
+						print(
+							if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+								", $API_BUFFER.intValue(${param.name})"
+							else
+								", (int)$API_BUFFER.longValue(${param.name})"
+						)
+					} else
+						throw IllegalStateException("No autosizeResult parameter could be found.")
 				}
 				println(");")
 			} else if ( code?.javaAfterNative != null )
