@@ -173,17 +173,23 @@ public class TemplateFormatter {
 
 	// ---[ CONSTANT FORMATTING ]----
 
+	private static final String BLOCK_COMMENT = "(?:/[*].+?[*]/)?";
+
+	private static final String DESCRIPTION    = "(?:(?:/[*]\\s*(.+?)\\s*[*]/)|(?:([^:]+:)))";
+	private static final String DEFINE         = "(?:#define\\s+)?";
+	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+)|(?:\\([^)]+\\))";
+
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
-		"([^:]+):\\s+((?:\\s*(?:#define\\s+)?[0-9A-Za-z_]+\\s+[-x\\p{XDigit}]+\\s*$)+)\\s*",
-		Pattern.MULTILINE
+		DESCRIPTION + "\\s+((?:\\s*" + DEFINE + "[0-9A-Za-z_]+\\s+(?:" + CONSTANT_VALUE + ")\\s*" + BLOCK_COMMENT + "\\s*$)+)\\s*",
+		Pattern.MULTILINE | Pattern.DOTALL
 	);
 
-	private static final Pattern COMMENT_CLEANUP = Pattern.compile("$\\s+", Pattern.MULTILINE);
+	private static final Pattern COMMENT_CLEANUP = Pattern.compile("[\n\n]*(?:\\s*[*])?\\s+", Pattern.MULTILINE);
 	private static final Pattern CODE_CLEANUP    = Pattern.compile("<([^>]+)>");
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 
 	private static final Pattern CONSTANT_PATTERN = Pattern.compile(
-		"(?:#define\\s+)?([0-9A-Za-z_]+)\\s+([-x\\p{XDigit}]+)"
+		DEFINE + "([0-9A-Za-z_]+)\\s+(" + CONSTANT_VALUE + ")\\s*" + BLOCK_COMMENT
 	);
 
 	private static String formatConstants(String input, String prefix) {
@@ -196,8 +202,8 @@ public class TemplateFormatter {
 
 			String description =
 				CODE_CLEANUP.matcher(
-					COMMENT_CLEANUP.matcher(blockMatcher.group(1)).replaceAll(" ")
-				).replaceAll("{@code $1}") + '.';
+					COMMENT_CLEANUP.matcher(blockMatcher.group(1)).replaceAll(" ").trim()
+				).replaceAll("{@code $1}");
 
 			builder.append("\tIntConstant.block(\n");
 			if ( description.length() <= 160 - (4 + 4 + 2 + 1) ) {
@@ -231,7 +237,7 @@ public class TemplateFormatter {
 			}
 			builder.append(",\n\n");
 
-			Matcher constantMatcher = CONSTANT_PATTERN.matcher(blockMatcher.group(2));
+			Matcher constantMatcher = CONSTANT_PATTERN.matcher(blockMatcher.group(3));
 			int constCount = 0;
 			while ( constantMatcher.find() ) {
 				if ( 0 < constCount++ ) builder.append(",\n");
@@ -242,10 +248,19 @@ public class TemplateFormatter {
 
 				builder.append("\t\t\"");
 				builder.append(token);
-				builder.append("\" _ ");
-				builder.append(constantMatcher.group(2));
-			}
 
+				String value = constantMatcher.group(2);
+
+				try {
+					Integer.decode(value);
+					builder.append("\" _ ");
+					builder.append(value);
+				} catch (NumberFormatException e) {
+					builder.append("\".expr<Int>(\"");
+					builder.append(value.substring(1, value.length() - 1));
+					builder.append("\")");
+				}
+			}
 			builder.append("\n\t)\n");
 		}
 
