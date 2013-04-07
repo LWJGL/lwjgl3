@@ -66,7 +66,7 @@ val GLFWgammaramp = StructType(
 		unsigned_short.member("blue", size = GLFW_GAMMA_RAMP_SIZE)
 	}
 )
-val GLFWgammaramp_p = PointerType(GLFWgammaramp)
+val GLFWgammaramp_p = StructType(GLFWgammaramp)
 
 // callback functions
 
