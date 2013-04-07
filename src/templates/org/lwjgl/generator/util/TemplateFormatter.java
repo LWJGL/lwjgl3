@@ -201,9 +201,13 @@ public class TemplateFormatter {
 		while ( blockMatcher.find() ) {
 			if ( 0 < blockCount++ ) builder.append('\n');
 
-			String description =
+			String description = blockMatcher.group(1);
+			if ( description == null )
+				description = blockMatcher.group(2);
+
+			description =
 				CODE_CLEANUP.matcher(
-					COMMENT_CLEANUP.matcher(blockMatcher.group(1)).replaceAll(" ").trim()
+					COMMENT_CLEANUP.matcher(description).replaceAll(" ").trim()
 				).replaceAll("{@code $1}");
 
 			builder.append("\tIntConstant.block(\n");
