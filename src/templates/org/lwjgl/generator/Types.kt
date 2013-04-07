@@ -98,7 +98,7 @@ public class StructType(
 	includesPointer: Boolean = false
 ): PointerType(name, mapping, includesPointer)
 /** Converts a struct value to a pointer to a struct value. */
-public fun PointerType(structType: StructType): StructType =
+public fun StructType(structType: StructType): StructType =
 	StructType(
 		name = "${structType.name} *",
 	    includesPointer = true,

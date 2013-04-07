@@ -125,7 +125,7 @@ val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTO
 }
 val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
-val PIXELFORMATDESCRIPTOR_p = PointerType(PIXELFORMATDESCRIPTOR)
+val PIXELFORMATDESCRIPTOR_p = StructType(PIXELFORMATDESCRIPTOR)
 
 val WNDPROC = PointerType("WNDPROC", includesPointer = true)
 
@@ -154,7 +154,7 @@ private val WNDCLASSEX_STRUCT = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 
 val WNDCLASSEX = StructType(WNDCLASSEX_STRUCT)
 val LPWNDCLASSEX = StructType(name = "LPWNDCLASSEX", definition = WNDCLASSEX_STRUCT, includesPointer = true)
-val WNDCLASSEX_p = PointerType(WNDCLASSEX)
+val WNDCLASSEX_p = StructType(WNDCLASSEX)
 
 val LPOSVERSIONINFO = StructType(
 	name = "LPOSVERSIONINFO",
@@ -199,7 +199,7 @@ private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 }
 val RECT = StructType(RECT_STRUCT)
 val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPointer = true)
-val RECT_p = PointerType(RECT)
+val RECT_p = StructType(RECT)
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	javaDoc("Contains message information from a thread's message queue.")
@@ -213,7 +213,7 @@ private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 }
 val MSG = StructType(MSG_STRUCT)
 val LPMSG = StructType(name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
-val MSG_p = PointerType(MSG)
+val MSG_p = StructType(MSG)
 
 val POINTL = StructType (
 	name = "POINTL",
@@ -287,7 +287,7 @@ val DEVMODE = StructType(
 		*/
 	}
 )
-val DEVMODE_p = PointerType(DEVMODE)
+val DEVMODE_p = StructType(DEVMODE)
 
 val PDISPLAY_DEVICE = StructType(
 	name = "PDISPLAY_DEVICE",
@@ -331,7 +331,7 @@ val LARGE_INTEGER = StructType(
 		LONGLONG.member("QuadPart")
 	}
 )
-val LARGE_INTEGER_p = PointerType(LARGE_INTEGER)
+val LARGE_INTEGER_p = StructType(LARGE_INTEGER)
 
 val LPJOYCAPS = StructType(
 	name = "LPJOYCAPS",
