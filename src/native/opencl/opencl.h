@@ -33,8 +33,8 @@
 
 #else
 
-#include <CL/cl.h>
-#include <CL/cl_gl.h>
+#include "CL/cl.h"
+#include "CL/cl_gl.h"
 
 #endif
 

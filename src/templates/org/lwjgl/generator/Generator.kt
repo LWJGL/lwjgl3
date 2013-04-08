@@ -53,6 +53,7 @@ fun main(args: Array<String>) {
 	generate("org.lwjgl.opencl")
 	generate("org.lwjgl.opengl")
 	generate("org.lwjgl.system.windows")
+	generate("org.lwjgl.system.linux")
 	generate("org.lwjgl.system.glfw")
 
 	// Generate capabilities
