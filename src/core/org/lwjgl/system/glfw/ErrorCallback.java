@@ -52,7 +52,7 @@ public class ErrorCallback {
 		invoke(error, memDecodeUTF8(memByteBufferNT1(description)));
 	}
 
-	/** String version of {@link #callback(int, long)}. */
+	/** String version of {@link #invoke(int, long)}. */
 	public void invoke(int error, String description) {
 		System.err.println("[LWJGL] GLFW error");
 		System.err.println("\tCode: " + LWJGLUtil.toHexString(error));

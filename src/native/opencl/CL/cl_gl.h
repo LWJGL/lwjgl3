@@ -27,7 +27,7 @@
 #ifdef __APPLE__
 #include <OpenCL/cl.h>
 #else
-#include <CL/cl.h>
+#include "CL/cl.h"
 #endif	
 
 typedef cl_uint     cl_gl_object_type;
