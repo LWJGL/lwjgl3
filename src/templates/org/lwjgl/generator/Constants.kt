@@ -14,6 +14,11 @@ abstract class ConstantType<T>(
 	abstract fun nullValue(): T
 }
 
+val ShortConstant = object: ConstantType<Short>(javaClass<Short>()) {
+	override fun print(value: Short): String = "0x" + Integer.toHexString(value.toInt()).toUpperCase()
+	override fun nullValue(): Short = 0
+}
+
 val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
 	override fun print(value: Int): String = "0x" + Integer.toHexString(value).toUpperCase()
 	override fun nullValue(): Int = 0
@@ -29,6 +34,10 @@ val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
 	override fun nullValue(): Float = 0.0
 }
 
+// Extension property for short literals.
+val Int.s: Short
+	get() = this.toShort()
+
 // Extension property for integer literals.
 val Long.i: Int
 	get() = this.toInt()
@@ -40,9 +49,6 @@ val Int.L: Long
 // Extension property for float literals.
 val Double.f: Float
 	get() = this.toFloat()
-
-public annotation class foo
-public annotation class bar
 
 public class ConstantBlock<T>(
 	val nativeClass: NativeClass,
