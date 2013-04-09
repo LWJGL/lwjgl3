@@ -1086,9 +1086,13 @@ public class NativeClassFunction(
 	fun generateFunctionDefinition(writer: PrintWriter): Unit = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
 		print("typedef ${returns.toNativeType} (APIENTRY *${name}PROC) (")
-		printList(getNativeParams()) {
-			it.toNativeType
-		}
+		val nativeParams = getNativeParams()
+		if ( nativeParams.hasNext() ) {
+			printList(getNativeParams()) {
+				it.toNativeType
+			}
+		} else
+			print("void")
 		println(");")
 	}
 
