@@ -183,7 +183,7 @@ public class WindowsDisplay {
 					break;
 			}
 
-			return DefWindowProc(hwnd, msg, wParam, lParam);
+			return nDefWindowProc(hWnd, msg, wParam, lParam);
 		}
 	}
 

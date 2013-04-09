@@ -14,6 +14,7 @@ public class GLFWwindow {
 	// Window settings and state
 	boolean iconified;
 	boolean resizable;
+	boolean decorated;
 	boolean visible;
 	boolean closed;
 

@@ -14,6 +14,7 @@ class GLFWwndconfig {
 
 	final boolean resizable;
 	final boolean visible;
+	final boolean decorated;
 
 	final int glMajor;
 	final int glMinor;
@@ -27,12 +28,13 @@ class GLFWwndconfig {
 	final GLFWmonitor monitor;
 	final GLFWwindow  share;
 
-	GLFWwndconfig(int width, int height, CharSequence title, boolean resizable, boolean visible, int glMajor, int glMinor, boolean glForward, boolean glDebug, int glProfile, int glRobustness, GLFWmonitor monitor, GLFWwindow share) {
+	GLFWwndconfig(int width, int height, CharSequence title, boolean resizable, boolean visible, boolean decorated, int glMajor, int glMinor, boolean glForward, boolean glDebug, int glProfile, int glRobustness, GLFWmonitor monitor, GLFWwindow share) {
 		this.width = width;
 		this.height = height;
 		this.title = title;
 		this.resizable = resizable;
 		this.visible = visible;
+		this.decorated = decorated;
 		this.glMajor = glMajor;
 		this.glMinor = glMinor;
 		this.glForward = glForward;

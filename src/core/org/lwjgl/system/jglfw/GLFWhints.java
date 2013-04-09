@@ -26,6 +26,7 @@ class GLFWhints {
 
 	boolean resizable;
 	boolean visible;
+	boolean decorated;
 
 	int glMajor;
 	int glMinor;

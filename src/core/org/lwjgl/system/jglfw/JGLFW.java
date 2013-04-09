@@ -252,7 +252,8 @@ public final class JGLFW {
 		GLFW_FOCUSED   = 0x20001,
 		GLFW_ICONIFIED = 0x20002,
 		GLFW_RESIZABLE = 0x22007,
-		GLFW_VISIBLE   = 0x22008;
+		GLFW_VISIBLE   = 0x22008,
+		GLFW_DECORATED = 0x22009;
 
 	/** Input options. */
 	public static final int
@@ -710,6 +711,7 @@ public final class JGLFW {
 		// The default is to show the window and allow window resizing
 		hints.resizable = true;
 		hints.visible = true;
+		hints.decorated = true;
 
 		// The default is 24 bits of color, 24 bits of depth and 8 bits of stencil
 		hints.redBits = 8;
@@ -791,6 +793,9 @@ public final class JGLFW {
 				break;
 			case GLFW_RESIZABLE:
 				hints.resizable = hint == GL_TRUE;
+				break;
+			case GLFW_DECORATED:
+				hints.decorated = hint == GL_TRUE;
 				break;
 			case GLFW_VISIBLE:
 				hints.visible = hint == GL_TRUE;
@@ -877,6 +882,7 @@ public final class JGLFW {
 			title,
 			monitor != null || hints.resizable,
 			monitor != null || hints.visible,
+			hints.decorated,
 			hints.glMajor,
 			hints.glMinor,
 			hints.glForward,
@@ -906,6 +912,7 @@ public final class JGLFW {
 
 		window.monitor = monitor;
 		window.resizable = wndconfig.resizable;
+		window.decorated = wndconfig.decorated;
 		window.cursorMode = GLFW_CURSOR_NORMAL;
 
 		// Save the currently current context so it can be restored later
@@ -1290,6 +1297,8 @@ public final class JGLFW {
 				return window.iconified ? GL_TRUE : GL_FALSE;
 			case GLFW_RESIZABLE:
 				return window.resizable ? GL_TRUE : GL_FALSE;
+			case GLFW_DECORATED:
+				return window.decorated ? GL_TRUE : GL_FALSE;
 			case GLFW_VISIBLE:
 				return window.visible ? GL_TRUE : GL_FALSE;
 		/*case GLFW_CLIENT_API:

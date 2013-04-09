@@ -290,7 +290,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"FOCUSED" _ 0x00020001,
 		"ICONIFIED" _ 0x00020002,
 		"RESIZABLE" _ 0x00022007,
-		"VISIBLE" _ 0x00022008
+		"VISIBLE" _ 0x00022008,
+	    "DECORATED" _ 0x00022009
 	)
 
 	IntConstant.block(

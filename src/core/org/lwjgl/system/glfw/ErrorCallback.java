@@ -10,7 +10,7 @@ import java.lang.reflect.Method;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this class may be passed to the {@link org.lwjgl.system.glfw.GLFW#glfwSetErrorCallback(ErrorCallback)} method. */
+/** Instances of this class may be passed to the {@link GLFW#glfwSetErrorCallback(ErrorCallback)} method. */
 public class ErrorCallback {
 
 	static final long CALLBACK;

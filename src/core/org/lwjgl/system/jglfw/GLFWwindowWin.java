@@ -357,7 +357,7 @@ class GLFWwindowWin extends GLFWwindow {
 				}
 			}
 
-			return DefWindowProc(hWnd, uMsg, wParam, lParam);
+			return nDefWindowProc(hWnd, uMsg, wParam, lParam);
 		}
 	}
 

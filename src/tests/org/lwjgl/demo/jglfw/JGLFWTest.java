@@ -30,30 +30,30 @@ public final class JGLFWTest {
 
 		glfwInit();
 
-        int joystickIndex = -1;
-        float[] joystickAxesState = null;
-        int[] joystickButtonsState = null;
-        FloatBuffer joystickAxesBuffer = null;
-        ByteBuffer joystickButtonsBuffer = null;
-        for(int i=0; i<GLFW_JOYSTICK_LAST;i++) {
-            int present = glfwGetJoystickParam(i, GLFW_PRESENT);
-            if(present == 1) {
-                joystickIndex = i;
-                int joystickAxes = glfwGetJoystickParam(i, GLFW_AXES);
-                joystickAxesState = new float[joystickAxes];
-                joystickAxesBuffer = BufferUtils.createFloatBuffer(joystickAxes);
+		int joystickIndex = -1;
+		float[] joystickAxesState = null;
+		int[] joystickButtonsState = null;
+		FloatBuffer joystickAxesBuffer = null;
+		ByteBuffer joystickButtonsBuffer = null;
+		for ( int i = 0; i < GLFW_JOYSTICK_LAST; i++ ) {
+			int present = glfwGetJoystickParam(i, GLFW_PRESENT);
+			if ( present == 1 ) {
+				joystickIndex = i;
+				int joystickAxes = glfwGetJoystickParam(i, GLFW_AXES);
+				joystickAxesState = new float[joystickAxes];
+				joystickAxesBuffer = BufferUtils.createFloatBuffer(joystickAxes);
 
-                int joystickButtons = glfwGetJoystickParam(i, GLFW_BUTTONS);
-                joystickButtonsState = new int[joystickButtons];
-                joystickButtonsBuffer = BufferUtils.createByteBuffer(joystickButtons);
-                System.out.println("Joystick[" + i + "] is present: " + glfwGetJoystickName(i) + " with " + joystickAxes + " axes and " + joystickButtons + " buttons");
-                break;
-            }
-        }
+				int joystickButtons = glfwGetJoystickParam(i, GLFW_BUTTONS);
+				joystickButtonsState = new int[joystickButtons];
+				joystickButtonsBuffer = BufferUtils.createByteBuffer(joystickButtons);
+				System.out.println("Joystick[" + i + "] is present: " + glfwGetJoystickName(i) + " with " + joystickAxes + " axes and " + joystickButtons + " buttons");
+				break;
+			}
+		}
 
-        if(joystickIndex == -1) {
-            System.out.println("No joystick connected");
-        }
+		if ( joystickIndex == -1 ) {
+			System.out.println("No joystick connected");
+		}
 
 		List<GLFWmonitor> monitors = glfwGetMonitors();
 
@@ -65,10 +65,17 @@ public final class JGLFWTest {
 			}
 
 			//glfwSetGamma(monitor, monitor.getName().endsWith("1") ? 2.0f : 0.5f);
-			//glfwSetGamma(monitor, 1.0f);
+			glfwSetGamma(monitor, 1.0f);
 		}
 
+		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		//glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+
 		GLFWwindow window = glfwCreateWindow(640, 480, "JGLFW Test", null, null);
+
+		glfwSetWindowPos(window, 256, 256);
+		glfwShowWindow(window);
 
 		System.out.println("Window opened.");
 
@@ -207,7 +214,7 @@ public final class JGLFWTest {
 
 		while ( true ) {
 			glfwPollEvents();
-            readJoystickInput(joystickIndex, joystickAxesBuffer, joystickAxesState, joystickButtonsBuffer, joystickButtonsState);
+			readJoystickInput(joystickIndex, joystickAxesBuffer, joystickAxesState, joystickButtonsBuffer, joystickButtonsState);
 
 			if ( glfwWindowShouldClose(window) )
 				break;
@@ -218,31 +225,31 @@ public final class JGLFWTest {
 		glfwTerminate();
 	}
 
-    private static void readJoystickInput(int joystickIndex, FloatBuffer joystickAxesBuffer, float[] joystickAxesState, ByteBuffer joystickButtonsBuffer, int[] joystickButtonsState) {
-        if(joystickAxesBuffer != null) {
-            int numAxes = glfwGetJoystickAxes(joystickIndex, joystickAxesBuffer);
-            for(int i=0; i<numAxes; i++) {
-                float value = joystickAxesBuffer.get(i);
-                if(value != joystickAxesState[i]) {
-                    joystickAxesState[i] = value;
-                    System.out.println(String.format("axis[%d] changed value to: %f", i, value));
-                }
-            }
-        }
+	private static void readJoystickInput(int joystickIndex, FloatBuffer joystickAxesBuffer, float[] joystickAxesState, ByteBuffer joystickButtonsBuffer, int[] joystickButtonsState) {
+		if ( joystickAxesBuffer != null ) {
+			int numAxes = glfwGetJoystickAxes(joystickIndex, joystickAxesBuffer);
+			for ( int i = 0; i < numAxes; i++ ) {
+				float value = joystickAxesBuffer.get(i);
+				if ( value != joystickAxesState[i] ) {
+					joystickAxesState[i] = value;
+					System.out.println(String.format("axis[%d] changed value to: %f", i, value));
+				}
+			}
+		}
 
-        if(joystickButtonsBuffer != null) {
-            int numButtons = glfwGetJoystickButtons(joystickIndex, joystickButtonsBuffer);
-            for(int i=0; i<numButtons; i++) {
-                int state = joystickButtonsBuffer.get(i);
-                if(state != joystickButtonsState[i]) {
-                    joystickButtonsState[i] = state;
-                    System.out.println(String.format("button[%d] changed state to: %d", i, state));
-                }
-            }
-        }
-    }
+		if ( joystickButtonsBuffer != null ) {
+			int numButtons = glfwGetJoystickButtons(joystickIndex, joystickButtonsBuffer);
+			for ( int i = 0; i < numButtons; i++ ) {
+				int state = joystickButtonsBuffer.get(i);
+				if ( state != joystickButtonsState[i] ) {
+					joystickButtonsState[i] = state;
+					System.out.println(String.format("button[%d] changed state to: %d", i, state));
+				}
+			}
+		}
+	}
 
-    private static void render(GLFWwindow window) {
+	private static void render(GLFWwindow window) {
 		float v = (float)Math.abs(Math.sin(glfwGetTime() * 2.0));
 		glClearColor(1.0f * v, 0.0f * v, 0.0f * v, 0f);
 
