@@ -331,7 +331,7 @@ val XRRCrtcInfo = StructType(
 val XRRCrtcInfo_p = StructType(XRRCrtcInfo)
 
 val XRROutputInfo = StructType(
-	struct(LINUX_PACKAGE, "XRRCrtcInfo") {
+	struct(LINUX_PACKAGE, "XRROutputInfo") {
 		javaDoc("Xrandr output info struct.")
 		nativeImport ("LinuxLWJGL.h")
 
@@ -431,7 +431,7 @@ val GC = PointerType("GC") // GC is a struct, but should be treated as an opaque
  * Data structure used by color operations
  */
 val XColor = StructType(
-	struct(LINUX_PACKAGE, "XGCValues") {
+	struct(LINUX_PACKAGE, "XColor") {
 		javaDoc("Data structure used by color operations.")
 		nativeImport ("LinuxLWJGL.h")
 
