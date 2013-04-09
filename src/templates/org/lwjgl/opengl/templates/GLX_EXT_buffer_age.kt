@@ -9,7 +9,7 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_EXT_buffer_age() = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age", EXT) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

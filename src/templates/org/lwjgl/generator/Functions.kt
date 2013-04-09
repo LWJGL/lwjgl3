@@ -999,7 +999,7 @@ public class NativeClassFunction(
 
 		// Step 3.C: Prepare APIBuffer parameters.
 
-		var apiBufferSet = hasParam { it has autoSizeResult && !hasParam { it has autoSizeResult } }
+		var apiBufferSet = hasParam { it has autoSizeResult && returns.nativeType !is StructType }
 		if ( apiBufferSet ) {
 			println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
 

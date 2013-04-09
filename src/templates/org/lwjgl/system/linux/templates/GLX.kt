@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
 
-fun GLX() = "GLX".nativeClass(LINUX_PACKAGE) {
+fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX") {
 	javaImport(
 		"org.lwjgl.opengl.*"
 	)
@@ -167,7 +167,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE) {
 		Prevents X requests from executing until any outstanding OpenGL rendering is done.
 
 		OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
-		can be achieved using {@link GL11.glFinish}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
+		can be achieved using {@link GL11#glFinish}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
 		where the client and server are on separate machines.
 		"""
 	)

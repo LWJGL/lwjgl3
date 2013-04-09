@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_control", SGI) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
 		"OpenGL.h",
