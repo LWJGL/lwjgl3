@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB_extensions_string", "ARB") {
+fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB_extensions_string", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

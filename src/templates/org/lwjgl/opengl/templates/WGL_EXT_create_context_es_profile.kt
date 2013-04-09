@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_EXT_create_context_es_profile() = "WGLEXTCreateContextESProfile".nativeClassWGL("WGL_EXT_create_context_es_profile", "EXT") {
+fun WGL_EXT_create_context_es_profile() = "WGLEXTCreateContextESProfile".nativeClassWGL("WGL_EXT_create_context_es_profile", EXT) {
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.

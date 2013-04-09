@@ -7,7 +7,6 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-val DISPLAY = Display_p.IN("display", "the connection to the X server")
 val WINDOW = Window.IN("w", "the window")
 val DRAWABLE = Drawable.IN("d", "the drawable")
 
@@ -143,6 +142,22 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		int.IN("screen_number", "the appropriate screen number on the host server")
+	)
+
+	int.func(
+		"XSync",
+		"""
+		Flushes the output buffer and then waits until all requests have been received and processed by the X server. Any errors generated must be handled by
+		the error handler. For each protocol error received by Xlib, {@code XSync()} calls the client application's error handling routine. Any events generated
+		by the server are enqueued into the library's event queue.
+
+		Finally, if you passed {@link X#False}, {@code XSync()} does not discard the events in the queue. If you passed {@link X#True}, {@code XSync()} discards
+		all events in the queue, including those events that were on the queue before {@code XSync()} was called. Client applications seldom need to call
+		{@code XSync()}.
+		""",
+
+		DISPLAY,
+		Bool.IN("discard", "whether to discard events in the queue")
 	)
 
 	Window.func(

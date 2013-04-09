@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_copy_image() = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", "NV") {
+fun WGL_NV_copy_image() = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", NV) {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -18,7 +18,7 @@ fun WGL_NV_copy_image() = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", "
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.
 
 		This extension enables efficient image data transfer between image objects (i.e. textures and renderbuffers) without the need to bind the objects or
-		otherwise configure the rendering pipeline.  The WGL version allows copying between images in different contexts, even if those contexts are in
+		otherwise configure the rendering pipeline. The WGL version allows copying between images in different contexts, even if those contexts are in
 		different sharelists or even on different physical devices.
 		"""
 	)

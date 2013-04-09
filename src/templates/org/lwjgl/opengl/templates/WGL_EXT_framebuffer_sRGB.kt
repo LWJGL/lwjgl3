@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", "EXT") {
+fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", EXT) {
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.

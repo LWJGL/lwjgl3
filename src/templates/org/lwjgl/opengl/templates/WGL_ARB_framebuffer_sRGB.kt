@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_framebuffer_sRGB", "ARB") {
+fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_framebuffer_sRGB", ARB) {
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.

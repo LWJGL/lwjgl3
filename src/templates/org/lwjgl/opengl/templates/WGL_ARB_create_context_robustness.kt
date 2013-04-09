@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_create_context_robustness() = "WGLARBCreateContextRobustness".nativeClassWGL("WGL_ARB_create_context_robustness", "ARB") {
+fun WGL_ARB_create_context_robustness() = "WGLARBCreateContextRobustness".nativeClassWGL("WGL_ARB_create_context_robustness", ARB) {
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_create_context_robustness.txt", templateName)} extension.

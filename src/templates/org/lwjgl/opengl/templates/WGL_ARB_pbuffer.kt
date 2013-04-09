@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", "ARB") {
+fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 	nativeImport (
 		"OpenGL.h",
 		"WGL.h"

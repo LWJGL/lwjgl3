@@ -154,8 +154,27 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 
 // DSL Extensions
 
-public fun String.nativeClassGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
-	nativeClass("org.lwjgl.opengl", templateName, "", "GL", "GL", postfix, FunctionProviderGL, init)
+public fun String.nativeClassGL(
+	templateName: String,
+	nativeSubPath: String = "",
+	prefix: String = "GL",
+	prefixMethod: String = prefix.toLowerCase(),
+	postfix: String = "",
+	init: (NativeClass.() -> Unit)? = null
+): NativeClass =
+	nativeClass(
+		"org.lwjgl.opengl",
+		templateName,
+		nativeSubPath = nativeSubPath,
+		prefix = prefix,
+		prefixMethod = prefixMethod,
+		postfix = postfix,
+		functionProvider = FunctionProviderGL,
+		init = init
+	)
 
 public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
-	nativeClass("org.lwjgl.opengl", templateName, "wgl", "WGL", "WGL", postfix, FunctionProviderGL, init)
+	nativeClassGL(templateName, "wgl", "WGL", postfix = postfix, init = init)
+
+public fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)

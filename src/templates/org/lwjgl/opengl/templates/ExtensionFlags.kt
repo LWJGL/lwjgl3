@@ -13,7 +13,12 @@ val EXT = "EXT"
 val AMD = "AMD"
 val ATI = "ATI"
 
+val INTEL = "INTEL"
+
 val NV = "NV"
+
+val SGI = "SGI"
+val SGIX = "SGIX"
 
 fun ARB_arrays_of_arrays() = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", ARB)
 fun ARB_compatibility() = EXT_FLAG.nativeClassGL("ARB_compatibility", ARB)
@@ -66,3 +71,7 @@ fun NV_vertex_program4() = EXT_FLAG.nativeClassGL("NV_vertex_program4", NV)
 
 fun WGL_EXT_swap_control_tear() = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_tear", EXT)
 fun WGL_NV_DX_interop2() = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", NV)
+
+fun GLX_ARB_create_context_profile() = EXT_FLAG.nativeClassGLX("GLX_ARB_create_context_profile", ARB)
+fun GLX_ARB_robustness_share_group_isolation() = EXT_FLAG.nativeClassGLX("GLX_ARB_robustness_share_group_isolation", ARB)
+fun GLX_EXT_framebuffer_sRGB() = EXT_FLAG.nativeClassGLX("GLX_EXT_framebuffer_sRGB", EXT) // Alias for GLX_ARB_framebuffer_sRGB

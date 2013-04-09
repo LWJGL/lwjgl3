@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", "ARB") {
+fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

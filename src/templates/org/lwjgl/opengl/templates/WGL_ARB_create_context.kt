@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_create_context", "ARB") {
+fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_create_context", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
