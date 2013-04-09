@@ -259,10 +259,14 @@ public class TemplateFormatter {
 				try {
 					String intValue = value.endsWith("L") ? value.substring(0, value.length() - 1) : value;
 
-					Integer.decode(intValue);
+					validateInteger(intValue);
 					builder.append("\" _ ");
 					builder.append(intValue);
 				} catch (NumberFormatException e) {
+					StringWriter writer = new StringWriter();
+					e.printStackTrace(new PrintWriter(writer));
+
+					builder.append("\n" + writer.toString() + "\n");
 					builder.append("\".expr<Int>(\"");
 					builder.append(value.substring(1, value.length() - 1));
 					builder.append("\")");
@@ -272,6 +276,12 @@ public class TemplateFormatter {
 		}
 
 		return builder.toString();
+	}
+
+	private static void validateInteger(String intValue) {
+		Long l = Long.decode(intValue);
+		if ( (1L << 32) - 1 < l.longValue() )
+			throw new NumberFormatException("long value");
 	}
 
 	// ---[ FUNCTION FORMATTING ]----
