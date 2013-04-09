@@ -781,11 +781,16 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			fullWidth = wndconfig.width;
 			fullHeight = wndconfig.height;
 		} else {
-			window.dwStyle |= WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
+			if ( wndconfig.decorated ) {
+				window.dwStyle |= WS_CAPTION | WS_SYSMENU | WS_MINIMIZEBOX;
 
-			if ( wndconfig.resizable ) {
-				window.dwStyle |= WS_MAXIMIZEBOX | WS_SIZEBOX;
-				window.dwExStyle |= WS_EX_WINDOWEDGE;
+				if ( wndconfig.resizable ) {
+					window.dwStyle |= WS_MAXIMIZEBOX | WS_SIZEBOX;
+					window.dwExStyle |= WS_EX_WINDOWEDGE;
+				}
+			} else {
+				window.dwStyle = WS_POPUP;
+				window.dwExStyle = 0;
 			}
 
 			xpos = CW_USEDEFAULT;

@@ -36,7 +36,8 @@ public class MultipleWindows {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, 0);
+		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_DECORATED, GL_FALSE);
 
 		long[] windows = new long[4];
 		GLContext[] contexts = new GLContext[4];

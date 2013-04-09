@@ -67,7 +67,7 @@ public class WindowProc {
 	/**
 	 * The application-defined function that processes messages sent to a window.
 	 *
-	 * @param hwnd   a handle to the window
+	 * @param hWnd   a handle to the window
 	 * @param msg    the message
 	 * @param wParam additional message information. The contents of this parameter depend on the value of the {@code msg} parameter.
 	 * @param lParam additional message information. The contents of this parameter depend on the value of the {@code msg} parameter.
@@ -75,7 +75,7 @@ public class WindowProc {
 	 * @return the result of the message processing. Depends on the message sent.
 	 */
 	public long invoke(long hWnd, int msg, long wParam, long lParam) {
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+		return nDefWindowProc(hWnd, msg, wParam, lParam);
 	}
 
 }

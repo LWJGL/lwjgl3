@@ -7,9 +7,9 @@
 
 #include <jni.h>
 
-extern JNIEnv *getThreadEnv();
-extern JNIEnv *attachCurrentThread();
-extern void detachCurrentThread();
+extern JNIEnv *getThreadEnv(void);
+extern JNIEnv *attachCurrentThread(void);
+extern void detachCurrentThread(void);
 
 #ifdef _MSC_VER
 	#define inline __inline

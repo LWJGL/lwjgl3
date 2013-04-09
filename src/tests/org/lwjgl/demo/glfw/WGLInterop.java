@@ -17,7 +17,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.WGLAMDGpuAssociation.*;
+import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
