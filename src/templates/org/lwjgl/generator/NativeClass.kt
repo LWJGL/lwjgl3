@@ -81,6 +81,7 @@ public class NativeClass(
 	nativeSubPath: String,
 	public val templateName: String = className,
 	public val prefix: String,
+	public val prefixMethod: String,
 	public val prefixTemplate: String,
 	public val postfix: String,
 	val functionProvider: FunctionProvider?
@@ -239,7 +240,7 @@ public class NativeClass(
 	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
-			name = if ( prefix.isEmpty() ) name else "${prefix.toLowerCase()}$name",
+			name = "$prefixMethod$name",
 			documentation = documentation.toJavaDoc(parameters.iterator(), returnDoc),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
@@ -258,12 +259,13 @@ public fun String.nativeClass(
 	templateName: String = this,
 	nativeSubPath: String = "",
 	prefix: String = "",
+	prefixMethod: String = prefix.toLowerCase(),
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixTemplate, postfix, functionProvider)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixTemplate, postfix, functionProvider)
 	if ( init != null )
 		ext.init()
 
