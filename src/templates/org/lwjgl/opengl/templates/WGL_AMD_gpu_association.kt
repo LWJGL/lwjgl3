@@ -10,7 +10,7 @@ import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_AMD_gpu_association() = "WGLAMDGpuAssociation".nativeClassWGL("WGL_AMD_gpu_association", "AMD") {
+fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu_association", AMD) {
 	nativeImport (
 		"OpenGL.h",
 	    "WGL.h"

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", "NV") {
+fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV) {
 	nativeImport (
 		"OpenGL.h"
 	)

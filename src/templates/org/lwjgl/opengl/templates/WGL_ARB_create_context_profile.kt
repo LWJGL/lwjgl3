@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", "ARB") {
+fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

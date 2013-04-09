@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_region", "ARB") {
+fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_region", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

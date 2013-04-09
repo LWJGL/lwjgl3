@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_EXT_swap_control() = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", "EXT") {
+fun WGL_EXT_swap_control() = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", EXT) {
 	nativeImport (
 		"OpenGL.h"
 	)

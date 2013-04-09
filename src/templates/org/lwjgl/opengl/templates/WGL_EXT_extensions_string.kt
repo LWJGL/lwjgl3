@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", "EXT") {
+fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", EXT) {
 	nativeImport (
 		"OpenGL.h"
 	)

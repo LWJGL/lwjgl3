@@ -31,6 +31,8 @@ val Atom_p = PointerType(Atom)
 val KeySym_p = PointerType(KeySym)
 
 val Display_p = PointerType("Display") // Display is a struct, but should be treated as an opaque type by apps
+val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
+
 val Screen_p = PointerType("Screen") // Screen is a struct, but should be treated as an opaque type by apps
 val Window_p = PointerType(Window)
 

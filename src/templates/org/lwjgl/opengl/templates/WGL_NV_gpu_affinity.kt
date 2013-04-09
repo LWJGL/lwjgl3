@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_gpu_affinity() = "WGLNVGpuAffinity".nativeClassWGL("WGL_NV_gpu_affinity", "NV") {
+fun WGL_NV_gpu_affinity() = "WGLNVGpuAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
 	nativeImport (
 		"OpenGL.h",
 	    "WGL.h"

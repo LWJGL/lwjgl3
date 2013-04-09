@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", "ARB") {
+fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
