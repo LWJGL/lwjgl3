@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbconfig_float", ARB) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

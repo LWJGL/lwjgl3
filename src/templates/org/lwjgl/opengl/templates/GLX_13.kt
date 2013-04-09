@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
 
-fun GLX13() = "GLX13".nativeClassGLX("GLX13") {
+fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
@@ -85,7 +85,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX13") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
+		autoSizeResult _ int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
 	)
 
 	GLXFBConfig_p.func(
@@ -95,7 +95,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX13") {
 		DISPLAY,
 		int.IN("screen", "the screen number"),
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
+		autoSizeResult _ int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
 	)
 
 	int.func(

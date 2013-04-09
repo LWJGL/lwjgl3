@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

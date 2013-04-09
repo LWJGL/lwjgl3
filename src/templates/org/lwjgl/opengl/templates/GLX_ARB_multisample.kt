@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun GLX_ARB_multisample() = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

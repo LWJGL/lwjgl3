@@ -9,7 +9,7 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_INTEL_swap_event() = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_event", INTEL) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

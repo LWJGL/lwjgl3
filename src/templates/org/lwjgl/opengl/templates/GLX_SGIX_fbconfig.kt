@@ -9,7 +9,9 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SGIX) {
-	nativeImport (
+	javaImport("org.lwjgl.system.linux.*")
+
+	nativeImport(
 		"OpenGL.h",
 		"GLX.h"
 	)
@@ -35,7 +37,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	IntConstant.block(
 		"""
 		Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX}, the {@code attrib_list} parameter of {@link #glXChooseFBConfigSGIX},
-		by the {@code attribute} parameter of {@link #glXQueryGLXPbufferSGIX} and by the {@code attribute} parameter of
+		by the {@code attribute} parameter of {@link GLXSGIXPbuffer#glXQueryGLXPbufferSGIX} and by the {@code attribute} parameter of
 		{@link GLXEXTImportContext#glXQueryContextInfoEXT}:
 		""",
 
@@ -92,7 +94,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
 		mods(const, nullable) _ int_p.IN("attrib_list", "an optional list of attributes, terminated with {@link org.lwjgl.system.linux.X#None}"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
+		autoSizeResult _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
 	)
 
 	GLXPixmap.func(

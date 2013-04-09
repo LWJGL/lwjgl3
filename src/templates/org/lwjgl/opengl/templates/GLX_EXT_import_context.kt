@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_EXT_import_context() = "GLXEXTImportcontext".nativeClassGLX("GLX_EXT_import_context", EXT) {
+fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_import_context", EXT) {
 
 	javaDoc(
 		"""
@@ -60,7 +60,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportcontext".nativeClassGLX("GLX_EXT_imp
 
 	void.func(
 		"FreeContextEXT",
-		"Frees the client-side part of a GLXContext that was created  with {@link #glXImportContext}.",
+		"Frees the client-side part of a GLXContext that was created  with {@link #glXImportContextEXT}.",
 
 		DISPLAY,
 		GLXContext.IN("context", "the context to free")

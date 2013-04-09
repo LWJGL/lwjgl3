@@ -9,7 +9,7 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
-	javaImport("org.lwjgl.linux.system")
+	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""

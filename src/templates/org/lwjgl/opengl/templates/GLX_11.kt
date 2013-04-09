@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
 
-fun GLX11() = "GLX11".nativeClassGLX("GLX11") {
+fun GLX11() = "GLX11".nativeClassGLX("GLX_11") {
 	nativeImport (
 		"OpenGL.h",
 		"GLX.h"
