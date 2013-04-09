@@ -1050,15 +1050,22 @@ public class NativeClassFunction(
                 if ( returns has MapPointer )
                     builder append ", ${returns[MapPointer].sizeExpression}"
                 else if ( !isNullTerminated ) {
-                    val param = getParam { it has autoSizeResult }
-	                if ( returns.isStructValue ) {
-		                builder append ", ${param.name}.get(${param.name}.position()) * ${(returns.nativeType as StructType).definition.className}.SIZEOF"
-	                } else {
-		                builder append if ( param.nativeType.mapping == PointerMapping.DATA_INT )
-							", $API_BUFFER.intValue(${param.name})"
-						else
-				            ", (int)$API_BUFFER.longValue(${param.name})"
-	                }
+					if ( returns.nativeType is StructType ) {
+						builder append
+						if ( hasParam { it has autoSizeResult } ) {
+								val param = getParam { it has autoSizeResult }
+								", ${param.name}.get(${param.name}.position()) * ${(returns.nativeType as StructType).definition.className}.SIZEOF"
+							} else
+								", ${(returns.nativeType as StructType).definition.className}.SIZEOF"
+					} else if ( hasParam { it has autoSizeResult } ) {
+						val param = getParam { it has autoSizeResult }
+						builder append
+						if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+								", $API_BUFFER.intValue(${param.name})"
+							else
+								", (int)$API_BUFFER.longValue(${param.name})"
+					} else
+						throw IllegalStateException("No autosizeResult parameter could be found.")
                 }
                 builder append ")"
 
