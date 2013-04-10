@@ -10,8 +10,7 @@ import org.lwjgl.opengl.*
 
 fun GLX11() = "GLX11".nativeClassGLX("GLX_11") {
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc("Native bindings to GLX 1.1.")

@@ -263,10 +263,6 @@ public class TemplateFormatter {
 					builder.append("\" _ ");
 					builder.append(intValue);
 				} catch (NumberFormatException e) {
-					StringWriter writer = new StringWriter();
-					e.printStackTrace(new PrintWriter(writer));
-
-					builder.append("\n" + writer.toString() + "\n");
 					builder.append("\".expr<Int>(\"");
 					builder.append(value.substring(1, value.length() - 1));
 					builder.append("\")");

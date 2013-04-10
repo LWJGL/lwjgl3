@@ -11,6 +11,11 @@ import org.lwjgl.system.linux.*
 fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
 	javaImport("org.lwjgl.system.linux.*")
 
+	nativeImport (
+		"OpenGL.h",
+		"<GL/glx.h>"
+	)
+
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.

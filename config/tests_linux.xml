@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://beust.com/testng/testng-1.0.dtd" >
 <suite name="LWJGL Platform Tests">
+	<test name="Linux">
+		<packages>
+			<package name="org.lwjgl.system.linux"/>
+		</packages>
+	</test>
 </suite>

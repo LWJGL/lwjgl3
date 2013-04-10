@@ -43,9 +43,12 @@ val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figur
 val time_t = PrimitiveType("time_t", PrimitiveMapping.LONG) // TODO: time_t can be any type
 
 val timespec = StructType(
-	struct(LINUX_PACKAGE, "timespec") {
+	struct(LINUX_PACKAGE, "timespec", globalIdentifier = false) {
 		javaDoc("Time structure")
-		nativeImport ("LinuxLWJGL.h")
+		nativeImport (
+			"LinuxLWJGL.h",
+		    "<sys/time.h>"
+		)
 
 		time_t.member("tv_sec", "sec")
 		long.member("tv_nsec", "nsec")
@@ -54,9 +57,12 @@ val timespec = StructType(
 val timespec_p = StructType(timespec)
 
 val timeval = StructType(
-	struct(LINUX_PACKAGE, "timeval") {
+	struct(LINUX_PACKAGE, "timeval", globalIdentifier = false) {
 		javaDoc("Time structure")
-		nativeImport ("LinuxLWJGL.h")
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<sys/time.h>"
+		)
 
 		long.member("tv_sec", "sec")
 		long.member("tv_usec", "usec")
@@ -65,9 +71,12 @@ val timeval = StructType(
 val timeval_p = StructType(timeval)
 
 val timezone = StructType(
-	struct(LINUX_PACKAGE, "timezone") {
+	struct(LINUX_PACKAGE, "timezone", globalIdentifier = false) {
 		javaDoc("Timezone structure")
-		nativeImport ("LinuxLWJGL.h")
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<linux/time.h>"
+		)
 
 		int.member("tz_minuteswest")
 		int.member("tz_dsttime")

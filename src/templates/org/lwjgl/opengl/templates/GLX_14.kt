@@ -13,7 +13,7 @@ fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {
 
 	nativeImport (
 		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc("Native bindings to GLX 1.4.")

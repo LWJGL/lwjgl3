@@ -12,8 +12,7 @@ fun GLX_EXT_swap_control() = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_co
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(
@@ -35,6 +34,6 @@ fun GLX_EXT_swap_control() = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_co
 
 		DISPLAY,
 		GLXDrawable.IN("drawable", "the drawable"),
-		GLint.IN("interval", "the swap interval")
+		int.IN("interval", "the swap interval")
 	)
 }

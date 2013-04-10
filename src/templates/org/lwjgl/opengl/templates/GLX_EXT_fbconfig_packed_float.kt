@@ -30,7 +30,7 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 	IntConstant.block(
 		"Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext} and {@link GLX#glXCreateContext} functions:",
 
-		"GLX_RGBA_UNSIGNED_FLOAT_TYPE_EXT" _ 0x20B1
+		"RGBA_UNSIGNED_FLOAT_TYPE_EXT" _ 0x20B1
 	)
 
 	IntConstant.block(
@@ -39,7 +39,7 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 		{@link GLX13#glXChooseFBConfig} (following the GLX_RENDER_TYPE token):
 		""",
 
-		"GLX_RGBA_UNSIGNED_FLOAT_BIT_EXT" _ 0x00000008
+		"RGBA_UNSIGNED_FLOAT_BIT_EXT" _ 0x00000008
 	)
 
 }

@@ -15,7 +15,7 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 
 	nativeImport (
 		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

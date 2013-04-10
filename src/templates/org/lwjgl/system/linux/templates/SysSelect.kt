@@ -9,7 +9,8 @@ import org.lwjgl.system.linux.*
 
 fun SysSelect() = "SysSelect".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<sys/select.h>"
 	)
 
 	javaDoc("Native bindings to <sys/select.h>.")

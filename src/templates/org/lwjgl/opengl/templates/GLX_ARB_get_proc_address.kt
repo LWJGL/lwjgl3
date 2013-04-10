@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_ARB_get_proc_address() = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_get_proc_address", ARB) {
 	nativeImport (
 		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

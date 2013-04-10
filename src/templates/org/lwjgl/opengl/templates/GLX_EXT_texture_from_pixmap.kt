@@ -11,6 +11,10 @@ import org.lwjgl.system.linux.*
 fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
+	nativeImport (
+		"<GL/glx.h>"
+	)
+
 	javaDoc(
 		"""
 		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/texture_from_pixmap.txt", templateName)} extension.

@@ -12,7 +12,8 @@ val DRAWABLE = Drawable.IN("d", "the drawable")
 
 fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<X11/Xutil.h>"
 	)
 
 	javaDoc("Native bindings to Xlib.h.")
@@ -32,7 +33,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"QueuedAfterFlush" _ 2
 	)
 
-	int.func(
+	/*int.func(
 		"XErrorHandler",
 	    "Invokes an X11 error handler.",
 
@@ -44,7 +45,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    ) _ voidptr.IN(FUNCTION_ADDRESS, "the error handler function address"),
 
 	    returnDoc = "a value that is ignored"
-	)
+	)*/
 
 	XErrorHandler.func(
 		"XSetErrorHandler",
@@ -287,8 +288,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    int.IN("y", "the window y-coordinate"),
 	    unsigned_int.IN("width", "the window width"),
 	    unsigned_int.IN("height", "the window height"),
+	    unsigned_int.IN("border_width", "the border width"),
 	    int.IN("depth", "the window's depth. A depth of {@link X#CopyFromParent} means the depth is taken from the parent."),
-	    unsigned_int.IN("clazz", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
+	    unsigned_int.IN("windowClass", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
 	    Visual_p.IN("visual", "the visual type. A visual of {@link X#CopyFromParent} means the visual type is taken from the parent."),
 	    unsigned_long.IN(
 		    "valuemask",
@@ -347,7 +349,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		WINDOW,
-		XWMHints_p.IN("hints", "the {@link XSizeHints} structure to be used"),
+		XSizeHints_p.IN("hints", "the {@link XSizeHints} structure to be used"),
 	    Atom.IN("property", "the property name")
 	)
 

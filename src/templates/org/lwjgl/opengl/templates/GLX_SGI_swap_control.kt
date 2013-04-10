@@ -6,13 +6,13 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
+import org.lwjgl.system.linux.*
 
 fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_control", SGI) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(
@@ -34,6 +34,6 @@ fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_co
 		the time required to display both the even and odd fields of a frame of video data.
 		""",
 
-		GLint.IN("interval", "the swap interval")
+		int.IN("interval", "the swap interval")
 	)
 }

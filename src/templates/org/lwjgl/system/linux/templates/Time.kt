@@ -9,7 +9,9 @@ import org.lwjgl.system.linux.*
 
 fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+		"<sys/time.h>",
+		"<time.h>"
 	)
 
 	javaDoc("Native bindings to <time.h>.")

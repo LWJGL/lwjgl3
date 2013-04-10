@@ -9,10 +9,11 @@ import org.lwjgl.system.linux.*
 
 fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<X11/extensions/Xrandr.h>"
 	)
 
-	javaDoc("Native bindings to Xrandr.h.")
+	javaDoc("Native bindings to <X11/extensions/Xrandr.h>.")
 
 	IntConstant.block(
 		"Event selection bits",

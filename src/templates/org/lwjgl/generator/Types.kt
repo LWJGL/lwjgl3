@@ -91,7 +91,7 @@ public class StructType(
 	/** The struct size in bytes. */
 	val definition: Struct,
 	/** The type used in the native API. */
-	name: String = definition.className,
+	name: String = definition.nativeName,
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */

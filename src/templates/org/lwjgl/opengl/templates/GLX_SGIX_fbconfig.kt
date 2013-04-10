@@ -12,8 +12,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport(
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

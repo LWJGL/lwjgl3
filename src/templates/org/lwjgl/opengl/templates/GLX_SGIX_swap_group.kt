@@ -14,8 +14,7 @@ fun GLX_SGIX_swap_group() = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_gro
 	)
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

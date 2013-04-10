@@ -7,6 +7,7 @@
 
 	<property environment="env"/>
 
+	<fail unless="env.MSSDK" message="Please set an environment variable named MSSDK that points to a Microsoft Windows SDK."/>
 	<property name="sdkhome" location="${env.MSSDK}"/>
 	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib delayimp.lib winmm.lib Comctl32.lib jawt.lib glfw3.lib"/>
 
@@ -18,16 +19,19 @@
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
 
-	<target name="compile_dir">
-		<apply dir="${dest}" failonerror="true" executable="cl" dest="${dest}" skipemptyfilesets="true" parallel="true">
-			<arg line="/c /W3 /EHsc /Ox /Gy /MT /MP /nologo"/>
+	<target name="compile">
+		<!--<echo message="${sdkhomelib}"/>-->
+
+		<!-- COMPILE -->
+		<apply dir="${dest}" executable="cl" dest="${dest}" skipemptyfilesets="true" failonerror="true" parallel="true">
+			<arg line="/c /W3 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
 			<arg value="/I${sdkhome}\include"/>
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
 			<!-- Paths relative to ${dest} -->
 			<arg value="/I..\..\${src.native}\system"/>
-			<arg value="/I..\..\${src.native}\system\glfw"/>
 			<arg value="/I..\..\${src.native}\system\windows"/>
+			<arg value="/I..\..\${src.native}\system\glfw"/>
 			<arg value="/I..\..\${src.native}\openal"/>
 			<arg value="/I..\..\${src.native}\opencl"/>
 			<arg value="/I..\..\${src.native}\opengl"/>
@@ -35,8 +39,8 @@
 			<srcfile/>
 			<!-- Paths relative to ${basedir} -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
-			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
+			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
 			<fileset dir="${src.native}/opencl" includes="*.c"/>
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/system" includes="*.c"/>
@@ -48,10 +52,9 @@
 			<fileset dir="${src.generated}/opengl/wgl" includes="*.c"/>
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
-	</target>
 
-	<target name="link">
-		<apply dir="${dest}" parallel="true" executable="cl" failonerror="true">
+		<!-- LINK -->
+		<apply dir="${dest}" executable="cl" failonerror="true" parallel="true">
 			<arg line="/LD /nologo"/>
 			<srcfile/>
 			<arg line="/Fe${dllname} /link"/>
@@ -64,12 +67,4 @@
 			<fileset dir="${dest}" includes="*.obj"/>
 		</apply>
 	</target>
-
-	<target name="compile">
-		<echo message="${sdkhomelib}"/>
-
-		<antcall target="compile_dir"/>
-		<antcall target="link"/>
-	</target>
 </project>
-

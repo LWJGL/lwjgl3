@@ -178,4 +178,112 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 		"GXset" _ 0xf
 	)
 
+	IntConstant.block(
+		"LineStyle",
+
+		"LineSolid" _ 0,
+		"LineOnOffDash" _ 1,
+		"LineDoubleDash" _ 2
+	)
+
+	IntConstant.block(
+		"capStyle",
+
+		"CapNotLast" _ 0,
+		"CapButt" _ 1,
+		"CapRound" _ 2,
+		"CapProjecting" _ 3
+	)
+
+	IntConstant.block(
+		"joinStyle",
+
+		"JoinMiter" _ 0,
+		"JoinRound" _ 1,
+		"JoinBevel" _ 2
+	)
+
+	IntConstant.block(
+		"fillStyle",
+
+		"FillSolid" _ 0,
+		"FillTiled" _ 1,
+		"FillStippled" _ 2,
+		"FillOpaqueStippled" _ 3
+	)
+
+	IntConstant.block(
+		"fillRule",
+
+		"EvenOddRule" _ 0,
+		"WindingRule" _ 1
+	)
+
+	IntConstant.block(
+		"subwindow mode",
+
+		"ClipByChildren" _ 0,
+		"IncludeInferiors" _ 1
+	)
+
+	IntConstant.block(
+		"SetClipRectangles ordering",
+
+		"Unsorted" _ 0,
+		"YSorted" _ 1,
+		"YXSorted" _ 2,
+		"YXBanded" _ 3
+	)
+
+	IntConstant.block(
+		"CoordinateMode for drawing routines",
+
+		"CoordModeOrigin" _ 0,
+		"CoordModePrevious" _ 1
+	)
+
+	IntConstant.block(
+		"Polygon shapes",
+
+		"Complex" _ 0,
+		"Nonconvex" _ 1,
+		"Convex" _ 2
+	)
+
+	IntConstant.block(
+		"Arc modes for PolyFillArc",
+
+		"ArcChord" _ 0,
+		"ArcPieSlice" _ 1
+	)
+
+	IntConstant.block(
+		"GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges",
+
+		"GCFunction".expr<Int>("1<<0"),
+		"GCPlaneMask".expr<Int>("1<<1"),
+		"GCForeground".expr<Int>("1<<2"),
+		"GCBackground".expr<Int>("1<<3"),
+		"GCLineWidth".expr<Int>("1<<4"),
+		"GCLineStyle".expr<Int>("1<<5"),
+		"GCCapStyle".expr<Int>("1<<6"),
+		"GCJoinStyle".expr<Int>("1<<7"),
+		"GCFillStyle".expr<Int>("1<<8"),
+		"GCFillRule".expr<Int>("1<<9"),
+		"GCTile".expr<Int>("1<<10"),
+		"GCStipple".expr<Int>("1<<11"),
+		"GCTileStipXOrigin".expr<Int>("1<<12"),
+		"GCTileStipYOrigin".expr<Int>("1<<13"),
+		"GCFont".expr<Int>("1<<14"),
+		"GCSubwindowMode".expr<Int>("1<<15"),
+		"GCGraphicsExposures".expr<Int>("1<<16"),
+		"GCClipXOrigin".expr<Int>("1<<17"),
+		"GCClipYOrigin".expr<Int>("1<<18"),
+		"GCClipMask".expr<Int>("1<<19"),
+		"GCDashOffset".expr<Int>("1<<20"),
+		"GCDashList".expr<Int>("1<<21"),
+		"GCArcMode".expr<Int>("1<<22"),
+		"GCLastBit" _ 22
+	)
+
 }

@@ -9,7 +9,8 @@ import org.lwjgl.system.linux.*
 
 fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+		"<X11/extensions/XInput2.h>"
 	)
 
 	javaDoc("Native bindings to XInput2.h.")

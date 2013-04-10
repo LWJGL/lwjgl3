@@ -9,7 +9,8 @@ import org.lwjgl.system.linux.*
 
 fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<X11/XKBlib.h>"
 	)
 
 	javaDoc("Native bindings to XKBlib.h.")

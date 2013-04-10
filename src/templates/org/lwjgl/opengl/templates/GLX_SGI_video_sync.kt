@@ -6,11 +6,11 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
+import org.lwjgl.system.linux.*
 
 fun GLX_SGI_video_sync() = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync", SGI) {
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(
@@ -25,7 +25,7 @@ fun GLX_SGI_video_sync() = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync"
 		"GetVideoSyncSGI",
 		"Returns the value of the video sync counter in {@code count}. Zero is returned if the call is successful.",
 
-		Check(1) _ GLuint_p.OUT("count", "the video sync counter value")
+		Check(1) _ unsigned_int_p.OUT("count", "the video sync counter value")
 	)
 
 	GLint.func(
@@ -40,9 +40,9 @@ fun GLX_SGI_video_sync() = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync"
 		{@code count}. Zero is returned by {@code glXWaitVideoSyncSGI} if it is successful.
 		""",
 
-		GLint.IN("divisor", "the divisor value"),
-		GLint.IN("remainder", "the remainder value"),
-		Check(1) _ GLuint_p.OUT("count", "the video sync counter value")
+		int.IN("divisor", "the divisor value"),
+		int.IN("remainder", "the remainder value"),
+		Check(1) _ unsigned_int_p.OUT("count", "the video sync counter value")
 	)
 
 }
