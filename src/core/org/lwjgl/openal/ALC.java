@@ -10,6 +10,7 @@ import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.APIUtil;
 import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProviderLocal;
+import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
@@ -18,7 +19,6 @@ import java.util.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.WinBase.*;
 
 public final class ALC {
 
@@ -62,7 +62,7 @@ public final class ALC {
 
 					@Override
 					public long getFunctionAddress(String functionName) {
-						long address = GetProcAddress(OPENAL.getHandle(), functionName);
+						long address = OPENAL.getProcAddress(functionName);
 						if ( address == NULL )
 							LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
 
@@ -85,6 +85,63 @@ public final class ALC {
 				};
 				break;
 			case LWJGLUtil.PLATFORM_LINUX:
+				functionProvider = new FunctionProviderLocal() {
+
+					private final LinuxLibrary OPENAL;
+					private final long alcGetProcAddress;
+
+					{
+						String[] paths = LWJGLUtil.getLibraryPaths(
+							"openal",
+							PointerBuffer.is64Bit() ? "libopenal64.so" : "libopenal.so",
+							ALC.class.getClassLoader()
+						);
+
+						LinuxLibrary lib = null;
+						for ( String path : paths ) {
+							try {
+								lib = new LinuxLibrary(path);
+								break;
+							} catch (Exception e) {
+								LWJGLUtil.log("Failed to load " + path + ": " + e.getMessage());
+							}
+						}
+						if ( lib == null )
+							throw new RuntimeException("Failed to locate the OpenAL library");
+
+						OPENAL = lib;
+
+						alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
+						if ( alcGetProcAddress == NULL ) {
+							lib.destroy();
+							throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
+						}
+					}
+
+					@Override
+					public long getFunctionAddress(String functionName) {
+						long address = OPENAL.getProcAddress(functionName);
+						if ( address == NULL )
+							LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
+
+						return address;
+					}
+
+					@Override
+					public long getFunctionAddress(long handle, String functionName) {
+						ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = nalcGetProcAddress(handle, memAddress(nameBuffer), alcGetProcAddress);
+						if ( address == NULL )
+							LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
+
+						return address;
+					}
+
+					public void destroy() {
+						OPENAL.destroy();
+					}
+				};
+				break;
 			case LWJGLUtil.PLATFORM_MACOSX:
 			default:
 				throw new UnsupportedOperationException();
