@@ -14,8 +14,7 @@ fun GLX_SGIX_swap_barrier() = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap
 	)
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

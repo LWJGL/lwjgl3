@@ -2,7 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#include <jni.h>
+#include "common_tools.h"
+#ifdef LWJGL_LINUX
+	#include <string.h>
+#endif
 
 // memPointerSize()I
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memPointerSize(JNIEnv *env, jclass clazz)

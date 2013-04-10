@@ -9,6 +9,9 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_import_context", EXT) {
+	nativeImport (
+		"<GL/glx.h>"
+	)
 
 	javaDoc(
 		"""
@@ -23,9 +26,9 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 	IntConstant.block(
 		"Accepted by the {@code attribute} parameter of {@link #glXQueryContextInfoEXT}:",
 
-		"GLX_SHARE_CONTEXT_EXT" _ 0x800A,
-		"GLX_VISUAL_ID_EXT" _ 0x800B,
-		"GLX_SCREEN_EXT" _ 0x800C
+		"SHARE_CONTEXT_EXT" _ 0x800A,
+		"VISUAL_ID_EXT" _ 0x800B,
+		"SCREEN_EXT" _ 0x800C
 	)
 
 	Display_p.func(

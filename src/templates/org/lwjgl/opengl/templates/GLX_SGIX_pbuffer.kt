@@ -10,8 +10,7 @@ import org.lwjgl.system.linux.*
 
 fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

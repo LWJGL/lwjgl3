@@ -12,8 +12,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc("Native bindings to GLX 1.3.")

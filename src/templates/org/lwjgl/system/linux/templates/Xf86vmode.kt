@@ -9,10 +9,11 @@ import org.lwjgl.system.linux.*
 
 fun Xf86vmode() = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<X11/extensions/xf86vmode.h>"
 	)
 
-	javaDoc("Native bindings to Xf86vmode.h.")
+	javaDoc("Native bindings to &lt;X11/extensions/xf86vmode.h&gt;.")
 
 	Bool.func(
 		"XF86VidModeQueryExtension",

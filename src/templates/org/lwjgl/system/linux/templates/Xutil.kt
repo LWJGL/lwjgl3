@@ -9,7 +9,8 @@ import org.lwjgl.system.linux.*
 
 fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<X11/Xutil.h>"
 	)
 
 	javaDoc("Native bindings to Xutil.h.")

@@ -14,7 +14,8 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 	)
 
 	nativeImport (
-		"LinuxLWJGL.h"
+		"LinuxLWJGL.h",
+	    "<GL/glx.h>"
 	)
 
 	javaDoc("Native bindings to GLX.")

@@ -75,7 +75,9 @@ private val ANONYMOUS = "*"
 public class Struct(
 	packageName: String,
 	className: String,
-	nativeSubPath: String = ""
+	nativeSubPath: String = "",
+	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
+    val globalIdentifier: Boolean = true
 ): GeneratorTarget(packageName, className, nativeSubPath) {
 
 	class object {
@@ -90,6 +92,9 @@ public class Struct(
 			"double" to "Double"
 		)
 	}
+
+	val nativeName: String
+		get() = if ( globalIdentifier ) className else "struct $className"
 
 	private val struct = className.toLowerCase()
 
@@ -625,7 +630,7 @@ public class Struct(
 	override fun generateNative(writer: PrintWriter): Unit = writer.generateNativeImpl()
 	private fun PrintWriter.generateNativeImpl() {
 		print(HEADER)
-		println("#include <jni.h>")
+		println("#include \"common_tools.h\"")
 		println("#include <stddef.h>")
 
 		preamble.printNative(this)
@@ -637,14 +642,14 @@ public class Struct(
 
 		generateNativeMembers(members)
 
-		println("\n\treturn sizeof($className);")
+		println("\n\treturn sizeof($nativeName);")
 		print("}")
 	}
 
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
 		var index = offset
 		for ( i in 0..members.lastIndex ) {
-			println("\tbuffer[$index] = (jint)(offsetof($className, $prefix${members[i].nativeName}));")
+			println("\tbuffer[$index] = (jint)(offsetof($nativeName, $prefix${members[i].nativeName}));")
 			index++
 
 			if ( members[i].nativeType is StructType ) {
@@ -660,8 +665,8 @@ public class Struct(
 
 }
 
-public fun struct(packageName: String, className: String, nativeSubPath: String = "", init: Struct.() -> Unit): Struct {
-	val struct = Struct(packageName, className, nativeSubPath)
+public fun struct(packageName: String, className: String, nativeSubPath: String = "", globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
+	val struct = Struct(packageName, className, nativeSubPath, globalIdentifier)
 	struct.init()
 	StructRegistry add struct
 	return struct

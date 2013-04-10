@@ -20,7 +20,7 @@ fun GLX_EXT_create_context_es_profile() = "GLXEXTCreateContextESProfile".nativeC
 	IntConstant.block(
 		"Accepted as a bit in the attribute value for {@link GLXARBCreateContext#GLX_CONTEXT_PROFILE_MASK_ARB} in {@code attrib_list}:",
 
-		"GLX_CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004
+		"CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004
 	)
 
 }

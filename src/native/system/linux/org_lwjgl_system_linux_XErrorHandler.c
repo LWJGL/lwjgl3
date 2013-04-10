@@ -4,6 +4,7 @@
  */
 #include "common_tools.h"
 #include "LinuxLWJGL.h"
+#include <stdlib.h>
 
 static jclass XErrorHandlerClass;
 static jmethodID XErrorHandlerInvoke;
@@ -16,8 +17,11 @@ static int XErrorHandlerProc(
     jboolean async = env == NULL;
     if ( async ) {
         env = attachCurrentThread();
-        if ( env == NULL )
-            return;
+        if ( env == NULL ) {
+            fprintf (stderr, "[LWJGL] Failed to attach to JVM in XErrorHandler callback.");
+            exit(-1);
+            return 0; // ignored
+		}
     }
 
 	int __result = (*env)->CallStaticIntMethod(

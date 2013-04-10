@@ -14,8 +14,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 	)
 
 	nativeImport (
-		"OpenGL.h",
-		"GLX.h"
+		"<GL/glx.h>"
 	)
 
 	javaDoc(

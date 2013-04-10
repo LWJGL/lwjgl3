@@ -6,13 +6,18 @@
 #define __LWJGL_COMMON_TOOLS_H__
 
 #include <jni.h>
+#ifdef LWJGL_WINDOWS
+	#include "WindowsConfig.h"
+#endif
+#ifdef LWJGL_LINUX
+	#include "LinuxConfig.h"
+#endif
+#ifdef LWJGL_MACOSX
+	#include "MacOSXConfig.h"
+#endif
 
 extern JNIEnv *getThreadEnv(void);
 extern JNIEnv *attachCurrentThread(void);
 extern void detachCurrentThread(void);
-
-#ifdef _MSC_VER
-	#define inline __inline
-#endif
 
 #endif

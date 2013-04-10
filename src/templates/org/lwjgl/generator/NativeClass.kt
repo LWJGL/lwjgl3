@@ -205,7 +205,7 @@ public class NativeClass(
 	override fun generateNative(writer: PrintWriter): Unit = writer.generateNativeImpl()
 	private fun PrintWriter.generateNativeImpl() {
 		print(HEADER)
-		println("#include <jni.h>")
+		println("#include \"common_tools.h\"")
 
 		preamble.printNative(this)
 
