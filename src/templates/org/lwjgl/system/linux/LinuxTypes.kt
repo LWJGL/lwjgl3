@@ -18,10 +18,10 @@ val int = PrimitiveType("int", PrimitiveMapping.INT)
 val Bool = PrimitiveType("Bool", int)
 val long = PrimitiveType("long", PrimitiveMapping.PTR)
 
-val unsigned_char = PrimitiveType("unsigned char", PrimitiveMapping.BYTE)
-val unsigned_int = PrimitiveType("unsigned int", PrimitiveMapping.INT)
-val unsigned_short = PrimitiveType("unsigned short", PrimitiveMapping.SHORT)
-val unsigned_long = PrimitiveType("unsigned long", PrimitiveMapping.PTR)
+val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
+val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
+val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
+val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.PTR, unsigned = true)
 
 val Bool_p = PointerType(Bool)
 val char_p = PointerType(char)
@@ -33,10 +33,12 @@ val int_p = PointerType(int)
 val unsigned_int_p = PointerType(unsigned_int)
 val unsigned_long_p = PointerType(unsigned_long)
 
-val charASCII_p = CharSequenceType(name = "char", charMapping = CharMapping.ASCII)
+val charASCII = CharType("char", CharMapping.ASCII)
+val charASCII_p = CharSequenceType(charASCII)
 val charASCII_pp = PointerType(charASCII_p)
 
-val charUTF8_p = CharSequenceType(name = "char", charMapping = CharMapping.UTF8)
+val charUTF8 = CharType("char", CharMapping.UTF8)
+val charUTF8_p = CharSequenceType(charUTF8)
 val charUTF8_pp = PointerType(charUTF8_p)
 
 val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figure this out

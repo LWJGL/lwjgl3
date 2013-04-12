@@ -1,4 +1,4 @@
-<project name="lwjgl native code" basedir="../.." default="compile-native">
+<project name="lwjgl native code" basedir="../.." default="compile-native-windows">
 	<property name="dest" location="bin/lwjgl${os.arch}" relative="true"/>
 
 	<property name="src" location="src" relative="true"/>
@@ -19,7 +19,7 @@
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
 
-	<target name="compile-native">
+	<target name="compile-native-windows">
 		<!--<echo message="${sdkhomelib}"/>-->
 
 		<!-- COMPILE -->

@@ -401,6 +401,67 @@ val XRRCrtcGamma_p = StructType(XRRCrtcGamma)
 
 // --------------- XKBlib.h ---------------
 
+// TODO: are these portable?
+val XkbKeyNameLength = 4
+val XkbNumVirtualMods = 16
+val XkbNumIndicators = 32
+val XkbNumKbdGroups = 4
+
+val XkbKeyNameRec = StructType(
+	struct(LINUX_PACKAGE, "XkbKeyNameRec") {
+		javaDoc("Xkb key name record.")
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/XKBlib.h>"
+		)
+
+		charASCII.member("name", size = XkbKeyNameLength, nullTerminated = false)
+	}
+)
+val XkbKeyNamePtr = StructType(XkbKeyNameRec)
+
+val XkbKeyAliasRec = StructType(
+	struct(LINUX_PACKAGE, "XkbKeyAliasRec") {
+		javaDoc("Xkb key alias record.")
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/XKBlib.h>"
+		)
+
+		charASCII.member("real", size = XkbKeyNameLength, nullTerminated = false)
+		charASCII.member("alias", size = XkbKeyNameLength, nullTerminated = false)
+	}
+)
+val XkbKeyAliasPtr = StructType(XkbKeyAliasRec)
+
+val XkbNamesRec = StructType(
+	struct(LINUX_PACKAGE, "XkbNamesRec") {
+		javaDoc("Describes an Xkb keyboard.")
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/XKBlib.h>"
+		)
+
+        Atom.member("keycodes")
+        Atom.member("geometry")
+        Atom.member("symbols")
+        Atom.member("types")
+        Atom.member("compat")
+        Atom.member("vmods", size = XkbNumVirtualMods)
+        Atom.member("indicators", size = XkbNumIndicators)
+        Atom.member("groups", size = XkbNumKbdGroups)
+        XkbKeyNamePtr.member("keys")
+        XkbKeyAliasPtr.member("key_aliases")
+        Atom_p.member("radio_groups")
+        Atom.member("phys_symbols")
+
+        unsigned_char.member("num_keys")
+        unsigned_char.member("num_key_aliases")
+        unsigned_short.member("num_rg")
+	}
+)
+val XkbNamesPtr = StructType(XkbNamesRec)
+
 val XkbDescRec = StructType(
 	struct(LINUX_PACKAGE, "XkbDescRec") {
 		javaDoc("Describes an Xkb keyboard.")
@@ -414,15 +475,14 @@ val XkbDescRec = StructType(
 		unsigned_short.member("device_spec")
 		KeyCode.member("min_key_code")
 		KeyCode.member("max_key_code")
-		/* hidden until we need them
-		XkbControlsPtr.member("ctrls")
-		XkbServerMapPtr.member("server")
-		XkbClientMapPtr.member("map")
-		XkbIndicatorPtr.member("indicators")
+		// hidden until we need them
+		//XkbControlsPtr.member("ctrls")
+		//XkbServerMapPtr.member("server")
+		//XkbClientMapPtr.member("map")
+		//XkbIndicatorPtr.member("indicators")
 		XkbNamesPtr.member("names")
-		XkbCompatMapPtr.member("compat")
-		XkbGeometryPtr.member("geom")
-		*/
+		//XkbCompatMapPtr.member("compat")
+		//XkbGeometryPtr.member("geom")
 	}
 )
 val XkbDescPtr = StructType(XkbDescRec)

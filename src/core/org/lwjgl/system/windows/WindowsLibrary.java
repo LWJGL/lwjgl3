@@ -5,13 +5,16 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.Sys;
-import org.lwjgl.system.Library;
+import org.lwjgl.system.DynamicLinkLibrary;
+
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsPlatform.*;
 
-public class WindowsLibrary implements Library {
+/** Implements a {@link DynamicLinkLibrary} on the Windows OS. */
+public class WindowsLibrary implements DynamicLinkLibrary {
 
 	/** The LWJGL dll handle. */
 	public static final long HINSTANCE = GetModuleHandle(memEncodeUTF16(Sys.getNativeLibrary()));
@@ -33,18 +36,26 @@ public class WindowsLibrary implements Library {
 			windowsThrowException("Failed to load library: " + name);
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public long getHandle() {
 		return handle;
 	}
 
-	public long getProcAddress(String name) {
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public long getFunctionAddress(ByteBuffer name) {
+		return GetProcAddress(handle, name);
+	}
+
+	@Override
+	public long getFunctionAddress(String name) {
 		return GetProcAddress(handle, memEncodeASCII(name));
 	}
 
+	@Override
 	public void destroy() {
 		if ( FreeLibrary(handle) == 0 )
 			windowsThrowException("Failed to unload library: " + name);

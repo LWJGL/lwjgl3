@@ -16,8 +16,6 @@ public class PointerBuffer implements Comparable {
 		Sys.touch();
 	}
 
-	private static final boolean is64Bit = POINTER_SIZE == 8;
-
 	protected final ByteBuffer pointers;
 
 	protected final Buffer     view;
@@ -47,7 +45,7 @@ public class PointerBuffer implements Comparable {
 	private PointerBuffer(ByteBuffer source, boolean dummy) {
 		pointers = source;
 
-		if ( is64Bit ) {
+		if ( BITS64 ) {
 			view32 = null;
 			view = view64 = pointers.asLongBuffer();
 		} else {
@@ -63,9 +61,9 @@ public class PointerBuffer implements Comparable {
 		if ( !source.isDirect() )
 			throw new IllegalArgumentException("The source buffer is not direct.");
 
-		int alignment = is64Bit ? 8 : 4;
-		if ( (memAddress(source) % alignment) != 0 || source.remaining() % alignment != 0 )
-			throw new IllegalArgumentException("The source buffer is not aligned to " + alignment + " bytes.");
+		int mask = POINTER_SIZE - 1;
+		if ( (memAddress(source) & mask) != 0 || (source.remaining() & mask) != 0 )
+			throw new IllegalArgumentException("The source buffer is not aligned to " + POINTER_SIZE + " bytes.");
 
 		return source;
 	}
@@ -77,11 +75,6 @@ public class PointerBuffer implements Comparable {
 	 */
 	public ByteBuffer getBuffer() {
 		return pointers;
-	}
-
-	/** Returns true if LWJGL was loaded in a 64bit process. */
-	public static boolean is64Bit() {
-		return is64Bit;
 	}
 
 	/**
@@ -396,7 +389,7 @@ public class PointerBuffer implements Comparable {
 	 *          If the buffer's current position is not smaller than its limit
 	 */
 	public long get() {
-		return is64Bit
+		return BITS64
 		       ? view64.get()
 		       : view32.get() & 0x00000000FFFFFFFFL;
 	}
@@ -417,7 +410,7 @@ public class PointerBuffer implements Comparable {
 	 *          If this buffer is read-only
 	 */
 	public PointerBuffer put(long l) {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.put(l);
 		else
 			view32.put((int)l);
@@ -431,7 +424,7 @@ public class PointerBuffer implements Comparable {
 	 * @param l      the long value to be written
 	 */
 	public static void put(ByteBuffer target, long l) {
-		if ( is64Bit )
+		if ( BITS64 )
 			target.putLong(l);
 		else
 			target.putInt((int)l);
@@ -449,7 +442,7 @@ public class PointerBuffer implements Comparable {
 	 *                                   or not smaller than the buffer's limit
 	 */
 	public long get(int index) {
-		return is64Bit
+		return BITS64
 		       ? view64.get(index)
 		       : view32.get(index) & 0x00000000FFFFFFFFL;
 	}
@@ -461,7 +454,7 @@ public class PointerBuffer implements Comparable {
 	 * @param index  the index at which the long will be read
 	 */
 	public static long get(ByteBuffer target, int index) {
-		return is64Bit
+		return BITS64
 		       ? target.getLong(index)
 		       : target.getInt(index) & 0x00000000FFFFFFFFL;
 	}
@@ -483,7 +476,7 @@ public class PointerBuffer implements Comparable {
 	 *                                   If this buffer is read-only
 	 */
 	public PointerBuffer put(int index, long l) {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.put(index, l);
 		else
 			view32.put(index, (int)l);
@@ -498,7 +491,7 @@ public class PointerBuffer implements Comparable {
 	 * @param l      the long value to be written
 	 */
 	public static void put(ByteBuffer target, int index, long l) {
-		if ( is64Bit )
+		if ( BITS64 )
 			target.putLong(index, l);
 		else
 			target.putInt(index, (int)l);
@@ -563,7 +556,7 @@ public class PointerBuffer implements Comparable {
 	 *                                   parameters do not hold
 	 */
 	public PointerBuffer get(long[] dst, int offset, int length) {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.get(dst, offset, length);
 		else {
 			checkBounds(offset, length, dst.length);
@@ -635,7 +628,7 @@ public class PointerBuffer implements Comparable {
 	 *                                  If this buffer is read-only
 	 */
 	public PointerBuffer put(PointerBuffer src) {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.put(src.view64);
 		else
 			view32.put(src.view32);
@@ -685,7 +678,7 @@ public class PointerBuffer implements Comparable {
 	 *                                   If this buffer is read-only
 	 */
 	public PointerBuffer put(long[] src, int offset, int length) {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.put(src, offset, length);
 		else {
 			checkBounds(offset, length, src.length);
@@ -745,7 +738,7 @@ public class PointerBuffer implements Comparable {
 	 *          If this buffer is read-only
 	 */
 	public PointerBuffer compact() {
-		if ( is64Bit )
+		if ( BITS64 )
 			view64.compact();
 		else
 			view32.compact();
@@ -765,7 +758,7 @@ public class PointerBuffer implements Comparable {
 	 * @return This buffer's byte order
 	 */
 	public ByteOrder order() {
-		if ( is64Bit )
+		if ( BITS64 )
 			return view64.order();
 		else
 			return view32.order();

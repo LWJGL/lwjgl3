@@ -17,14 +17,14 @@ val voidptr = PointerType("void") // Naked pointer
 
 // numeric
 
-val cl_char = PrimitiveType("cl_char", PrimitiveMapping.BYTE)
-val cl_uchar = PrimitiveType("cl_uchar", PrimitiveMapping.BYTE)
-val cl_short = PrimitiveType("cl_short", PrimitiveMapping.SHORT)
-val cl_ushort = PrimitiveType("cl_ushort", PrimitiveMapping.SHORT)
-val cl_int = PrimitiveType("cl_int", PrimitiveMapping.INT)
-val cl_uint = PrimitiveType("cl_uint", PrimitiveMapping.INT)
-val cl_long = PrimitiveType("cl_long", PrimitiveMapping.LONG)
-val cl_ulong = PrimitiveType("cl_ulong", PrimitiveMapping.LONG)
+val cl_char = IntegerType("cl_char", PrimitiveMapping.BYTE)
+val cl_uchar = IntegerType("cl_uchar", PrimitiveMapping.BYTE, unsigned = true)
+val cl_short = IntegerType("cl_short", PrimitiveMapping.SHORT)
+val cl_ushort = IntegerType("cl_ushort", PrimitiveMapping.SHORT, unsigned = true)
+val cl_int = IntegerType("cl_int", PrimitiveMapping.INT)
+val cl_uint = IntegerType("cl_uint", PrimitiveMapping.INT, unsigned = true)
+val cl_long = IntegerType("cl_long", PrimitiveMapping.LONG)
+val cl_ulong = IntegerType("cl_ulong", PrimitiveMapping.LONG, unsigned = true)
 val cl_half = PrimitiveType("cl_half", PrimitiveMapping.SHORT)
 val cl_float = PrimitiveType("cl_float", PrimitiveMapping.FLOAT)
 val cl_double = PrimitiveType("cl_double", PrimitiveMapping.DOUBLE)

@@ -32,10 +32,13 @@ public open class NativeType(
 
 // Specialization for primitives.
 public open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
+// Specialization for integers.
+public open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false): PrimitiveType(name, mapping)
 // Specialization for string characters.
 public class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
 // "typedef"
 public fun PrimitiveType(name: String, typedef: PrimitiveType): PrimitiveType = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
+public fun PrimitiveType(name: String, typedef: IntegerType): IntegerType = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
 
 // Pointers
 public open class PointerType(
@@ -48,7 +51,7 @@ public open class PointerType(
 	/** Optional element type. See the secondary constructors below. */
     val elementType: NativeType? = null
 ): NativeType(name, mapping)
-// Convert primitive to array
+/** Converts primitive to array */
 public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 	primitiveType.name,
 	when ( primitiveType.mapping as PrimitiveMapping ) {
@@ -65,7 +68,7 @@ public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 	},
     elementType = primitiveType
 )
-// pointer to pointer
+/** pointer to pointer. */
 public fun PointerType(pointerType: PointerType): PointerType =
 	PointerType(
 		if ( pointerType.includesPointer )
@@ -118,6 +121,14 @@ public class CharSequenceType(
 	/** If true, the nativeType typedef includes a pointer. */
 	val nullTerminated: Boolean = true
 ): PointerType(name, mapping, includesPointer)
+/** Converts CharType to CharSequenceType. */
+public fun CharSequenceType(
+	charType: CharType,
+	/** The type we map the native type to. */
+	mapping: PointerMapping = PointerMapping.DATA_BYTE,
+	/** The CharSequence charset. */
+	nullTerminated: Boolean = true
+): CharSequenceType = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping), nullTerminated = nullTerminated)
 
 // --- [ TYPE MAPPINGS ] ---
 

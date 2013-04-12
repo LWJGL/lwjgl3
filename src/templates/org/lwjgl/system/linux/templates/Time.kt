@@ -16,7 +16,21 @@ fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
 
 	javaDoc("Native bindings to <time.h>.")
 
-	// TODO: clockid_t is an unknown type. Figure out a way to pass the correct values here
+	// TODO: Is this portable? What's the type of clockid_t?
+	IntConstant.block(
+		"The IDs of the various system clocks (for POSIX.1b interval timers):",
+
+		"CLOCK_REALTIME" _ 0,
+		"CLOCK_MONOTONIC" _ 1,
+		"CLOCK_PROCESS_CPUTIME_ID" _ 2,
+		"CLOCK_THREAD_CPUTIME_ID" _ 3,
+		"CLOCK_MONOTONIC_RAW" _ 4,
+		"CLOCK_REALTIME_COARSE" _ 5,
+		"CLOCK_MONOTONIC_COARSE" _ 6,
+		"CLOCK_BOOTTIME" _ 7,
+		"CLOCK_REALTIME_ALARM" _ 8,
+		"CLOCK_BOOTTIME_ALARM" _ 9
+	)
 
 	int.func(
 		"clock_getres",

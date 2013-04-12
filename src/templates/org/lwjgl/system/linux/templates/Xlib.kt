@@ -33,6 +33,19 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"QueuedAfterFlush" _ 2
 	)
 
+	Status.func(
+		"XInitThreads",
+	    """
+	    Initializes Xlib support for concurrent threads. This function must be the first Xlib function a multi-threaded program calls, and it must complete
+	    before any other Xlib call is made. This function returns a nonzero status if initialization was successful; otherwise, it returns zero. On systems that
+	    do not support threads, this function always returns zero.
+
+		It is only necessary to call this function if multiple threads might use Xlib concurrently. If all calls to Xlib functions are protected by some other
+		access mechanism (for example, a mutual exclusion lock in a toolkit or through explicit client programming), Xlib thread initialization is not required.
+		It is recommended that single-threaded programs not call this function.
+	    """
+	)
+
 	/*int.func(
 		"XErrorHandler",
 	    "Invokes an X11 error handler.",
@@ -83,7 +96,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		mechanisms simultaneously. A particular Xlib implementation can support many more of these transport mechanisms.
 		""",
 
-		const _ charASCII_p.IN(
+		mods(const, nullable) _ charASCII_p.IN(
 			"display_name",
 			"""
 			the hardware display name, which determines the display and communications domain to be used. On a POSIX-conformant system, if the

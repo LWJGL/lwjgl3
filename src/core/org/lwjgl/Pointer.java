@@ -29,6 +29,12 @@ public final class Pointer {
 		POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
 	}
 
+	/** Will be true on a 32bit JVM. */
+	public static final boolean BITS32 = POINTER_SIZE * 8 == 32;
+
+	/** Will be true on a 64bit JVM. */
+	public static final boolean BITS64 = POINTER_SIZE * 8 == 64;
+
 	private Pointer() {
 	}
 

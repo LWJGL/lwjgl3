@@ -16,6 +16,57 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	javaDoc("Native bindings to XKBlib.h.")
 
 	IntConstant.block(
+		"""
+		XkbUseCoreKbd is used to specify the core keyboard without having to look up its X input extension identifier.
+		XkbUseCorePtr is used to specify the core pointer without having to look up its X input extension identifier.
+		XkbDfltXIClass is used to specify "don't care" any place that the XKB protocol is looking for an X Input Extension device class.
+		XkbDfltXIId is used to specify "don't care" any place that the XKB protocol is looking for an X Input Extension feedback identifier.
+		XkbAllXIClasses is used to get information about all device indicators, whether they're part of the indicator feedback class or the keyboard feedback class.
+		XkbAllXIIds is used to get information about all device indicator feedbacks without having to list them.
+		XkbXINone is used to indicate that no class or id has been specified.
+
+		XkbLegalXILedClass(c) True if 'c' specifies a legal class with LEDs
+		XkbLegalXIBellClass(c) True if 'c' specifies a legal class with bells
+		XkbExplicitXIDevice(d) True if 'd' explicitly specifies a device
+		XkbExplicitXIClass(c) True if 'c' explicitly specifies a device class
+		XkbExplicitXIId(c) True if 'i' explicitly specifies a device id
+		XkbSingleXIClass(c) True if 'c' specifies exactly one device class, including the default.
+		XkbSingleXIId(i) True if 'i' specifies exactly one device identifier, including the default.
+		""",
+
+		"XkbUseCoreKbd" _ 0x0100,
+		"XkbUseCorePtr" _ 0x0200,
+		"XkbDfltXIClass" _ 0x0300,
+		"XkbDfltXIId" _ 0x0400,
+		"XkbAllXIClasses" _ 0x0500,
+		"XkbAllXIIds" _ 0x0600,
+		"XkbXINone" _ 0xff00
+	)
+
+	IntConstant.block(
+		"",
+
+	    "XkbNumKbdGroups" _ 4
+	)
+
+	IntConstant.block(
+		"Assorted constants and limits.",
+
+		"XkbNumModifiers" _ 8,
+		"XkbNumVirtualMods" _ 16,
+		"XkbNumIndicators" _ 32,
+		"XkbAllIndicatorsMask".expr<Int>("0xffffffff"),
+		"XkbMaxRadioGroups" _ 32,
+		"XkbAllRadioGroupsMask".expr<Int>("0xffffffff"),
+		"XkbMaxShiftLevel" _ 63,
+		"XkbMaxSymsPerKey".expr<Int>("XkbMaxShiftLevel*XkbNumKbdGroups"),
+		"XkbRGMaxMembers" _ 12,
+		"XkbActionMessageLength" _ 6,
+		"XkbKeyNameLength" _ 4,
+		"XkbMaxRedirectCount" _ 8
+	)
+
+	IntConstant.block(
 		"Mask bits for {@link XkbDescRec}.",
 
 		"XkbControlsMask".expr<Int>("1<<0"),
@@ -25,7 +76,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"XkbNamesMask".expr<Int>("1<<4"),
 		"XkbCompatMapMask".expr<Int>("1<<5"),
 		"XkbGeometryMask".expr<Int>("1<<6"),
-		"XkbAllComponentsMask".expr<Int>("1<<7")
+		"XkbAllComponentsMask" _ 0x7F
 	)
 
 	Bool.func(
@@ -54,7 +105,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"Finds the keysym bound to a particular key at a specified group and shift level.",
 
 		DISPLAY,
-		KeyCode.IN("kc", "key of interest"),
+		unsigned_int.IN("kc", "key of interest"),
 		int.IN("group", "group of interest"),
 		int.IN("level", "shift level of interest")
 	)

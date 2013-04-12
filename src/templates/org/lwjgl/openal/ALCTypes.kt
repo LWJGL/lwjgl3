@@ -15,12 +15,12 @@ val ALCvoid_pp = PointerType(ALCvoid_p)
 // numeric
 
 val ALCboolean = NativeType("ALCboolean", TypeMapping.BOOLEAN)
-val ALCbyte = PrimitiveType("ALCbyte", PrimitiveMapping.BYTE)
-val ALCubyte = PrimitiveType("ALCubyte", PrimitiveMapping.BYTE)
-val ALCshort = PrimitiveType("ALCshort", PrimitiveMapping.SHORT)
-val ALCushort = PrimitiveType("ALCushort", PrimitiveMapping.SHORT)
-val ALCint = PrimitiveType("ALCint", PrimitiveMapping.INT)
-val ALCuint = PrimitiveType("ALCuint", PrimitiveMapping.INT)
+val ALCbyte = IntegerType("ALCbyte", PrimitiveMapping.BYTE)
+val ALCubyte = IntegerType("ALCubyte", PrimitiveMapping.BYTE, unsigned = true)
+val ALCshort = IntegerType("ALCshort", PrimitiveMapping.SHORT)
+val ALCushort = IntegerType("ALCushort", PrimitiveMapping.SHORT, unsigned = true)
+val ALCint = IntegerType("ALCint", PrimitiveMapping.INT)
+val ALCuint = IntegerType("ALCuint", PrimitiveMapping.INT, unsigned = true)
 val ALCfloat = PrimitiveType("ALCfloat", PrimitiveMapping.FLOAT)
 val ALCdouble = PrimitiveType("ALCdouble", PrimitiveMapping.DOUBLE)
 
@@ -36,8 +36,8 @@ val ALCdouble_p = PointerType(ALCdouble)
 
 // custom numeric
 
-val ALCsizei = PrimitiveType("ALCsizei", PrimitiveMapping.INT)
-val ALCenum = PrimitiveType("ALCenum", PrimitiveMapping.INT)
+val ALCsizei = IntegerType("ALCsizei", PrimitiveMapping.INT)
+val ALCenum = IntegerType("ALCenum", PrimitiveMapping.INT, unsigned = true)
 
 val ALCsizei_p = PointerType(ALCsizei)
 val ALCenum_p = PointerType(ALCenum)

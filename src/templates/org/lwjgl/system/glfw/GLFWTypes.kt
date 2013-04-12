@@ -18,9 +18,9 @@ val voidptr = PointerType("void") // Naked pointer
 
 // numeric
 
-val unsigned_char = PrimitiveType("unsigned char", PrimitiveMapping.BYTE)
-val unsigned_short = PrimitiveType("unsigned short", PrimitiveMapping.SHORT)
-val int = PrimitiveType("int", PrimitiveMapping.INT)
+val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
+val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
+val int = IntegerType("int", PrimitiveMapping.INT)
 val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
 val double = PrimitiveType("double", PrimitiveMapping.DOUBLE)
 
@@ -51,8 +51,8 @@ val GLFWvidmode = StructType(
 		int.member("width")
 		int.member("height")
 		int.member("redBits")
-		int.member("blueBits")
 		int.member("greenBits")
+		int.member("blueBits")
 	}
 )
 

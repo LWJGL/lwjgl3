@@ -4,11 +4,14 @@
  */
 package org.lwjgl.system.linux;
 
-import org.lwjgl.system.Library;
+import org.lwjgl.system.DynamicLinkLibrary;
+
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
-public class LinuxLibrary implements Library {
+/** Implements a {@link DynamicLinkLibrary} on the Linux OS. */
+public class LinuxLibrary implements DynamicLinkLibrary {
 
 	private final String name;
 
@@ -22,18 +25,26 @@ public class LinuxLibrary implements Library {
 			throw new RuntimeException("Failed to dynamically load library: " + name);
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public long getHandle() {
 		return handle;
 	}
 
-	public long getProcAddress(String name) {
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public long getFunctionAddress(ByteBuffer name) {
 		return dlsym(handle, name);
 	}
 
+	@Override
+	public long getFunctionAddress(String name) {
+		return dlsym(handle, name);
+	}
+
+	@Override
 	public void destroy() {
 		dlclose(handle);
 	}

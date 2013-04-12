@@ -18,12 +18,22 @@ import java.util.*;
 /** Internal library methods */
 public final class LWJGLUtil {
 
-	public static final int    PLATFORM_LINUX        = 1;
-	public static final int    PLATFORM_MACOSX       = 2;
-	public static final int    PLATFORM_WINDOWS      = 3;
-	public static final String PLATFORM_LINUX_NAME   = "linux";
-	public static final String PLATFORM_MACOSX_NAME  = "macosx";
-	public static final String PLATFORM_WINDOWS_NAME = "windows";
+	public enum Platform {
+		LINUX("linux"),
+		MACOSX("macosx"),
+		WINDOWS("windows");
+
+		private final String name;
+
+		private Platform(String name) {
+			this.name = name;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+	}
 
 	private static final String LWJGL_ICON_DATA_16x16 =
 		"\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377" +
@@ -250,16 +260,16 @@ public final class LWJGLUtil {
 	 */
 	public static final boolean DEBUG = getPrivilegedBoolean("org.lwjgl.util.Debug");
 
-	private static final int PLATFORM;
+	private static final Platform PLATFORM;
 
 	static {
 		String osName = getPrivilegedProperty("os.name");
 		if ( osName.startsWith("Windows") )
-			PLATFORM = PLATFORM_WINDOWS;
+			PLATFORM = Platform.WINDOWS;
 		else if ( osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix") )
-			PLATFORM = PLATFORM_LINUX;
+			PLATFORM = Platform.LINUX;
 		else if ( osName.startsWith("Mac OS X") || osName.startsWith("Darwin") )
-			PLATFORM = PLATFORM_MACOSX;
+			PLATFORM = Platform.MACOSX;
 		else
 			throw new LinkageError("Unknown platform: " + osName);
 	}
@@ -278,57 +288,31 @@ public final class LWJGLUtil {
 	/**
 	 * @return the current platform type
 	 *
-	 * @see #PLATFORM_WINDOWS
-	 * @see #PLATFORM_LINUX
-	 * @see #PLATFORM_MACOSX
+	 * @see Platform
 	 */
-	public static int getPlatform() {
+	public static Platform getPlatform() {
 		return PLATFORM;
 	}
 
 	/**
 	 * @return current platform name
 	 *
-	 * @see #PLATFORM_WINDOWS_NAME
-	 * @see #PLATFORM_LINUX_NAME
-	 * @see #PLATFORM_MACOSX_NAME
+	 * @see Platform
 	 */
 	public static String getPlatformName() {
-		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_LINUX:
-				return PLATFORM_LINUX_NAME;
-			case LWJGLUtil.PLATFORM_MACOSX:
-				return PLATFORM_MACOSX_NAME;
-			case LWJGLUtil.PLATFORM_WINDOWS:
-				return PLATFORM_WINDOWS_NAME;
-			default:
-				return "unknown";
-		}
+		return PLATFORM.getName();
 	}
 
 	/**
 	 * Locates the paths required by a library.
 	 *
-	 * @param libname           Local Library Name to search the classloader with ("openal").
-	 * @param platform_lib_name The native library name ("libopenal.so")
-	 * @param classloader       The classloader to ask for library paths
+	 * @param classloader        the classloader to ask for library paths
+	 * @param libname            the local library name to search the classloader with ("openal").
+	 * @param platform_lib_names the list of possible library names ("libopenal.so")
 	 *
-	 * @return Paths to located libraries, if any
+	 * @return paths to located libraries, if any
 	 */
-	public static String[] getLibraryPaths(String libname, String platform_lib_name, ClassLoader classloader) {
-		return getLibraryPaths(libname, new String[] { platform_lib_name }, classloader);
-	}
-
-	/**
-	 * Locates the paths required by a library.
-	 *
-	 * @param libname            Local Library Name to search the classloader with ("openal").
-	 * @param platform_lib_names The list of possible library names ("libopenal.so")
-	 * @param classloader        The classloader to ask for library paths
-	 *
-	 * @return Paths to located libraries, if any
-	 */
-	public static String[] getLibraryPaths(String libname, String[] platform_lib_names, ClassLoader classloader) {
+	public static String[] getLibraryPaths(ClassLoader classloader, String libname, String... platform_lib_names) {
 		// need to pass path of possible locations of library to native side
 		List<String> possible_paths = new ArrayList<String>();
 
