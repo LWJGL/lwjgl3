@@ -112,6 +112,7 @@ public final class CL {
 				return address;
 			}
 
+			@Override
 			public void destroy() {
 				OPENCL.destroy();
 			}
@@ -119,6 +120,9 @@ public final class CL {
 	}
 
 	public static void destroy() {
+		if ( functionProvider == null )
+			return;
+
 		CLPlatform.destroy();
 		functionProvider.destroy();
 		functionProvider = null;

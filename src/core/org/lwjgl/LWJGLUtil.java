@@ -360,6 +360,7 @@ public final class LWJGLUtil {
 	static void execPrivileged(final String[] cmd_array) throws Exception {
 		try {
 			Process process = AccessController.doPrivileged(new PrivilegedExceptionAction<Process>() {
+				@Override
 				public Process run() throws Exception {
 					return Runtime.getRuntime().exec(cmd_array);
 				}
@@ -375,6 +376,7 @@ public final class LWJGLUtil {
 
 	private static String getPrivilegedProperty(final String property_name) {
 		return AccessController.doPrivileged(new PrivilegedAction<String>() {
+			@Override
 			public String run() {
 				return System.getProperty(property_name);
 			}
@@ -401,6 +403,7 @@ public final class LWJGLUtil {
 				final Class<?> clazz = c;
 				try {
 					return AccessController.doPrivileged(new PrivilegedExceptionAction<String>() {
+						@Override
 						public String run() throws Exception {
 							Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
 							findLibrary.setAccessible(true);
@@ -421,6 +424,7 @@ public final class LWJGLUtil {
 	/** Gets a boolean property as a privileged action. */
 	public static boolean getPrivilegedBoolean(final String property_name) {
 		return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
+			@Override
 			public Boolean run() {
 				return Boolean.getBoolean(property_name);
 			}
@@ -436,6 +440,7 @@ public final class LWJGLUtil {
 	 */
 	public static Integer getPrivilegedInteger(final String property_name) {
 		return AccessController.doPrivileged(new PrivilegedAction<Integer>() {
+			@Override
 			public Integer run() {
 				return Integer.getInteger(property_name);
 			}
@@ -452,6 +457,7 @@ public final class LWJGLUtil {
 	 */
 	public static Integer getPrivilegedInteger(final String property_name, final int default_val) {
 		return AccessController.doPrivileged(new PrivilegedAction<Integer>() {
+			@Override
 			public Integer run() {
 				return Integer.getInteger(property_name, default_val);
 			}

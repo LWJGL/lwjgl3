@@ -29,11 +29,13 @@ public class WindowsGLContext extends GLContext {
 		return hglrc;
 	}
 
+	@Override
 	protected void makeCurrentImpl() {
 		if ( wglMakeCurrent(hdc, hglrc) == 0 )
 			throw new RuntimeException("Failed to make the OpenGL context current.");
 	}
 
+	@Override
 	public boolean isCurrent() {
 		return wglGetCurrentContext() == hglrc;
 	}
@@ -147,6 +149,7 @@ public class WindowsGLContext extends GLContext {
 		return new WindowsGLContext(capabilities, hdc, hglrc);
 	}
 
+	@Override
 	public void destroyImpl() {
 		int result = wglDeleteContext(hglrc);
 		if ( result == 0 )

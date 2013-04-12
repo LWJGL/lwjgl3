@@ -714,6 +714,7 @@ class GLFWwindowWin extends GLFWwindow {
 
 		/** Maps WM_* token values to their String representations. */
 		static final Map<Integer, String> TOKENS = LWJGLUtil.getClassTokens(new LWJGLUtil.TokenFilter() {
+			@Override
 			public boolean accept(Field field, int value) {
 				return field.getName().startsWith("WM_");
 			}

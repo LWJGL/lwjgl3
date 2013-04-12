@@ -26,6 +26,7 @@ public class CLProgramCallbackCompile extends CLProgramCallback {
 	 *
 	 * @param cl_program the program object that was compiled
 	 */
+	@Override
 	public void invoke(long cl_program) {
 		System.out.println("[LWJGL] clCompileProgram callback [" + LWJGLUtil.toHexString(cl_program) + "]");
 	}

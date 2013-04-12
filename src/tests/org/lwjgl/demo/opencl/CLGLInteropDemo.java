@@ -203,6 +203,7 @@ public class CLGLInteropDemo {
 		try {
 			// Find devices with GL sharing support
 			Filter<CLDevice> glSharingFilter = new Filter<CLDevice>() {
+				@Override
 				public boolean accept(CLDevice device) {
 					CLCapabilities caps = device.getCapabilities();
 					return caps.cl_khr_gl_sharing;

@@ -36,6 +36,7 @@ public class CLPlatform extends CLObject {
 		return platform;
 	}
 
+	@Override
 	public CLCapabilities getCapabilities() {
 		return capabilities;
 	}

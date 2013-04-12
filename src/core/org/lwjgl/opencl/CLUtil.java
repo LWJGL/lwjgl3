@@ -17,6 +17,7 @@ public final class CLUtil {
 
 	/** Maps OpenCL error token values to their String representations. */
 	private static final Map<Integer, String> CL_ERROR_TOKENS = LWJGLUtil.getClassTokens(new LWJGLUtil.TokenFilter() {
+		@Override
 		public boolean accept(Field field, int value) {
 			return value < 0; // Currently, all OpenCL errors have negative values.
 		}

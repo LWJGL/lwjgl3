@@ -29,6 +29,7 @@ public final class AL {
 		// the OpenAL native library.
 		private final long alGetProcAddress = ALC.functionProvider.getFunctionAddress("alGetProcAddress");
 
+		@Override
 		public long getFunctionAddress(String functionName) {
 			ByteBuffer nameBuffer = memEncodeASCII(functionName);
 			long address = nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
@@ -38,6 +39,7 @@ public final class AL {
 			return address;
 		}
 
+		@Override
 		public void destroy() {}
 	};
 

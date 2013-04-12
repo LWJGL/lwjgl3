@@ -155,6 +155,7 @@ public class WindowsDisplay {
 
 	private class WindowProcImpl extends WindowProc {
 
+		@Override
 		public long invoke(long hWnd, int msg, long wParam, long lParam) {
 			//System.out.println("In WINDOW PROC: " + Integer.toHexString(msg) + " - " +wParam + " - " +lParam);
 
