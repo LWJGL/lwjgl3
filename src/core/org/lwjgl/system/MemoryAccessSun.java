@@ -67,10 +67,12 @@ final class MemoryAccessSun {
 			}
 		}
 
+		@Override
 		int getPageSize() {
 			return unsafe.pageSize();
 		}
 
+		@Override
 		public long getAddress(Buffer buffer) {
 			return unsafe.getLong(buffer, address);
 		}
@@ -85,6 +87,7 @@ final class MemoryAccessSun {
 			return buffer;
 		}
 
+		@Override
 		public ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
 			if ( LWJGLUtil.DEBUG && unsafe.getObject(buffer, cleaner) != null )
@@ -93,36 +96,114 @@ final class MemoryAccessSun {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
+		@Override
 		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
+		@Override
 		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
+		@Override
 		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
+		@Override
 		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
+		@Override
 		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
+		@Override
 		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
-		public void memSet(long dst, int value, int bytes) {
+		@Override
+		void memSet(long dst, int value, int bytes) {
 			unsafe.setMemory(dst, bytes, (byte)(value & 0xFF));
 		}
 
-		public void memCopy(long src, long dst, int bytes) {
+		@Override
+		void memCopy(long src, long dst, int bytes) {
 			unsafe.copyMemory(src, dst, bytes);
+		}
+
+		@Override
+		byte memGetByte(long ptr) {
+			return unsafe.getByte(ptr);
+		}
+
+		@Override
+		short memGetShort(long ptr) {
+			return unsafe.getShort(ptr);
+		}
+
+		@Override
+		int memGetInt(long ptr) {
+			return unsafe.getInt(ptr);
+		}
+
+		@Override
+		long memGetLong(long ptr) {
+			return unsafe.getLong(ptr);
+		}
+
+		@Override
+		float memGetFloat(long ptr) {
+			return unsafe.getFloat(ptr);
+		}
+
+		@Override
+		double memGetDouble(long ptr) {
+			return unsafe.getDouble(ptr);
+		}
+
+		@Override
+		long memGetAddress(long ptr) {
+			return unsafe.getAddress(ptr);
+		}
+
+		@Override
+		void memPutByte(long ptr, byte value) {
+			unsafe.putByte(ptr, value);
+		}
+
+		@Override
+		void memPutShort(long ptr, short value) {
+			unsafe.putShort(ptr, value);
+		}
+
+		@Override
+		void memPutInt(long ptr, int value) {
+			unsafe.putInt(ptr, value);
+		}
+
+		@Override
+		void memPutLong(long ptr, long value) {
+			unsafe.putLong(ptr, value);
+		}
+
+		@Override
+		void memPutFloat(long ptr, float value) {
+			unsafe.putFloat(ptr, value);
+		}
+
+		@Override
+		void memPutDouble(long ptr, double value) {
+			unsafe.putDouble(ptr, value);
+		}
+
+		@Override
+		void memPutAddress(long ptr, long value) {
+			unsafe.putAddress(ptr, value);
 		}
 
 		private static Unsafe getUnsafeInstance() {
@@ -179,25 +260,27 @@ final class MemoryAccessSun {
 				Method m = Field.class.getDeclaredMethod("acquireFieldAccessor", boolean.class);
 				m.setAccessible(true);
 
-				address = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "address"));
-				capacity = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "capacity"));
+				address = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "address"), false);
+				capacity = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "capacity"), false);
 
-				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				// The byte order is important; it changes the subclass created by the asXXBuffer() methods.
+				ByteBuffer buffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
 
-				cleaner = (FieldAccessor)m.invoke(getDeclaredField(buffer.getClass(), "cleaner"));
+				cleaner = (FieldAccessor)m.invoke(getDeclaredField(buffer.getClass(), "cleaner"), false);
 
-				byteBufferParent = (FieldAccessor)m.invoke(getField(buffer.slice(), buffer));
-				shortBufferParent = (FieldAccessor)m.invoke(getField(buffer.asShortBuffer(), buffer));
-				charBufferParent = (FieldAccessor)m.invoke(getField(buffer.asCharBuffer(), buffer));
-				intBufferParent = (FieldAccessor)m.invoke(getField(buffer.asIntBuffer(), buffer));
-				longBufferParent = (FieldAccessor)m.invoke(getField(buffer.asLongBuffer(), buffer));
-				floatBufferParent = (FieldAccessor)m.invoke(getField(buffer.asFloatBuffer(), buffer));
-				doubleBufferParent = (FieldAccessor)m.invoke(getField(buffer.asDoubleBuffer(), buffer));
+				byteBufferParent = (FieldAccessor)m.invoke(getField(buffer.slice(), buffer), true);
+				shortBufferParent = (FieldAccessor)m.invoke(getField(buffer.asShortBuffer(), buffer), true);
+				charBufferParent = (FieldAccessor)m.invoke(getField(buffer.asCharBuffer(), buffer), true);
+				intBufferParent = (FieldAccessor)m.invoke(getField(buffer.asIntBuffer(), buffer), true);
+				longBufferParent = (FieldAccessor)m.invoke(getField(buffer.asLongBuffer(), buffer), true);
+				floatBufferParent = (FieldAccessor)m.invoke(getField(buffer.asFloatBuffer(), buffer), true);
+				doubleBufferParent = (FieldAccessor)m.invoke(getField(buffer.asDoubleBuffer(), buffer), true);
 			} catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
 		}
 
+		@Override
 		public long getAddress(Buffer buffer) {
 			return address.getLong(buffer);
 		}
@@ -216,6 +299,7 @@ final class MemoryAccessSun {
 			return buffer;
 		}
 
+		@Override
 		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
 			if ( LWJGLUtil.DEBUG && cleaner.get(buffer) != null )
@@ -224,26 +308,32 @@ final class MemoryAccessSun {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
+		@Override
 		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
+		@Override
 		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
+		@Override
 		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
+		@Override
 		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
+		@Override
 		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
+		@Override
 		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}

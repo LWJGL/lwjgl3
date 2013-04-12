@@ -69,6 +69,39 @@ public class MemoryUtilTest {
 		assertEquals(address + 8, memAddress(floatView));
 	}
 
+	public void testDirectAccess() {
+		ByteBuffer buffer = BufferUtils.createByteBuffer(40);
+		long address = memAddress(buffer);
+
+		for ( int i = 0; i < buffer.capacity(); i++ )
+			buffer.put(i, (byte)i);
+
+		for ( int i = 0; i < buffer.capacity(); i++ )
+			assertEquals(memGetByte(address + i), buffer.get(i));
+
+		for ( int i = 0; i < buffer.capacity(); i++ )
+			memPutByte(address + i, (byte)-i);
+
+		for ( int i = 0; i < buffer.capacity(); i++ )
+			assertEquals(-i, buffer.get(i));
+
+		memPutAddress(address, address);
+		memPutDouble(address + 8, Math.PI);
+		memPutLong(address + 16, Integer.MAX_VALUE * 2L);
+		memPutFloat(address + 24, (float)Math.PI);
+		memPutInt(address + 28, Short.MAX_VALUE * 2);
+		memPutShort(address + 32, (short)(Byte.MAX_VALUE * 2));
+		memPutByte(address + 34, (byte)127);
+
+		assertEquals(memGetAddress(address), address);
+		assertEquals(memGetDouble(address + 8), Math.PI);
+		assertEquals(memGetLong(address + 16), Integer.MAX_VALUE * 2L);
+		assertEquals(memGetFloat(address + 24), (float)Math.PI);
+		assertEquals(memGetInt(address + 28), Short.MAX_VALUE * 2);
+		assertEquals(memGetShort(address + 32), (short)(Byte.MAX_VALUE * 2));
+		assertEquals(memGetByte(address + 34), (byte)127);
+	}
+
 	public void testNewBuffer() {
 		ByteBuffer buffer = BufferUtils.createByteBuffer(32);
 		for ( int i = 0; i < buffer.capacity(); i++ )

@@ -107,51 +107,92 @@ final class MemoryAccess {
 
 		abstract DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity);
 
-		public void memSet(long dst, int value, int bytes) {
-			nMemSet(dst, value, bytes);
-		}
+		void memSet(long dst, int value, int bytes) { nMemSet(dst, value, bytes); }
 
-		public void memCopy(long src, long dst, int bytes) {
+		void memCopy(long src, long dst, int bytes) {
 			nMemCopy(dst, src, bytes); // Note the swapped src & dst
 		}
+
+		byte memGetByte(long ptr) { return nMemGetByte(ptr); }
+
+		short memGetShort(long ptr) { return nMemGetShort(ptr); }
+
+		int memGetInt(long ptr) { return nMemGetInt(ptr); }
+
+		long memGetLong(long ptr) { return nMemGetLong(ptr); }
+
+		float memGetFloat(long ptr) { return nMemGetFloat(ptr); }
+
+		double memGetDouble(long ptr) { return nMemGetDouble(ptr); }
+
+		long memGetAddress(long ptr) { return nMemGetAddress(ptr); }
+
+		void memPutByte(long ptr, byte value) { nMemPutByte(ptr, value); }
+
+		void memPutShort(long ptr, short value) { nMemPutShort(ptr, value); }
+
+		void memPutInt(long ptr, int value) { nMemPutInt(ptr, value); }
+
+		void memPutLong(long ptr, long value) { nMemPutLong(ptr, value); }
+
+		void memPutFloat(long ptr, float value) { nMemPutFloat(ptr, value); }
+
+		void memPutDouble(long ptr, double value) { nMemPutDouble(ptr, value); }
+
+		void memPutAddress(long ptr, long value) { nMemPutAddress(ptr, value); }
 
 	}
 
 	/** Default implementation. */
 	private static class MemoryAccessorJNI extends MemoryAccessor {
 
+		@Override
 		long getAddress(Buffer buffer) {
 			return nGetAddress(buffer);
 		}
 
+		@Override
 		ByteBuffer newByteBuffer(long address, int capacity) {
 			return nNewBuffer(address, capacity).order(ByteOrder.nativeOrder());
 		}
 
+		@Override
 		ShortBuffer newShortBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
 
+		@Override
 		CharBuffer newCharBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
 
+		@Override
 		IntBuffer newIntBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
 
+		@Override
 		LongBuffer newLongBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
 
+		@Override
 		FloatBuffer newFloatBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
 
+		@Override
 		DoubleBuffer newDoubleBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
+		@Override
 		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) { return newByteBuffer(address, capacity); }
 
+		@Override
 		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) { return newShortBuffer(address, capacity); }
 
+		@Override
 		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) { return newCharBuffer(address, capacity); }
 
+		@Override
 		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) { return newIntBuffer(address, capacity); }
 
+		@Override
 		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) { return newLongBuffer(address, capacity); }
 
+		@Override
 		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) { return newFloatBuffer(address, capacity); }
 
+		@Override
 		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) { return newDoubleBuffer(address, capacity); }
 
 	}
@@ -160,6 +201,7 @@ final class MemoryAccess {
 
 		private final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
 
+		@Override
 		final ByteBuffer newByteBuffer(long address, int capacity) {
 			return setupBuffer(
 				globalBuffer.duplicate().order(ByteOrder.nativeOrder()),
@@ -168,16 +210,22 @@ final class MemoryAccess {
 			);
 		}
 
+		@Override
 		final ShortBuffer newShortBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asShortBuffer(), address, capacity); }
 
+		@Override
 		final CharBuffer newCharBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asCharBuffer(), address, capacity); }
 
+		@Override
 		final IntBuffer newIntBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asIntBuffer(), address, capacity); }
 
+		@Override
 		final LongBuffer newLongBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asLongBuffer(), address, capacity); }
 
+		@Override
 		final FloatBuffer newFloatBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asFloatBuffer(), address, capacity); }
 
+		@Override
 		final DoubleBuffer newDoubleBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asDoubleBuffer(), address, capacity); }
 
 	}
@@ -203,7 +251,8 @@ final class MemoryAccess {
 				address = getDeclaredField(Buffer.class, "address");
 				capacity = getDeclaredField(Buffer.class, "capacity");
 
-				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				// The byte order is important; it changes the subclass created by the asXXBuffer() methods.
+				ByteBuffer buffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
 
 				cleaner = getDeclaredField(buffer.getClass(), "cleaner");
 
@@ -219,6 +268,7 @@ final class MemoryAccess {
 			}
 		}
 
+		@Override
 		public long getAddress(Buffer buffer) {
 			try {
 				return address.getLong(buffer);
@@ -241,6 +291,7 @@ final class MemoryAccess {
 			return buffer;
 		}
 
+		@Override
 		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
 			if ( LWJGLUtil.DEBUG ) {
 				try {
@@ -255,26 +306,32 @@ final class MemoryAccess {
 			return setup(buffer, address, capacity, byteBufferParent);
 		}
 
+		@Override
 		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
+		@Override
 		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
+		@Override
 		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
+		@Override
 		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
+		@Override
 		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
+		@Override
 		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
