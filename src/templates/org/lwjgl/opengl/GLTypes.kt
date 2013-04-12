@@ -16,14 +16,14 @@ val GLvoid_pp = PointerType(GLvoid_p)
 // numeric
 
 val GLboolean = NativeType("GLboolean", TypeMapping.BOOLEAN)
-val GLbyte = PrimitiveType("GLbyte", PrimitiveMapping.BYTE)
-val GLubyte = PrimitiveType("GLubyte", PrimitiveMapping.BYTE)
-val GLshort = PrimitiveType("GLshort", PrimitiveMapping.SHORT)
-val GLushort = PrimitiveType("GLushort", PrimitiveMapping.SHORT)
-val GLint = PrimitiveType("GLint", PrimitiveMapping.INT)
-val GLuint = PrimitiveType("GLuint", PrimitiveMapping.INT)
-val GLint64 = PrimitiveType("GLint64", PrimitiveMapping.LONG)
-val GLuint64 = PrimitiveType("GLuint64", PrimitiveMapping.LONG)
+val GLbyte = IntegerType("GLbyte", PrimitiveMapping.BYTE)
+val GLubyte = IntegerType("GLubyte", PrimitiveMapping.BYTE, unsigned = true)
+val GLshort = IntegerType("GLshort", PrimitiveMapping.SHORT)
+val GLushort = IntegerType("GLushort", PrimitiveMapping.SHORT, unsigned = true)
+val GLint = IntegerType("GLint", PrimitiveMapping.INT)
+val GLuint = IntegerType("GLuint", PrimitiveMapping.INT, unsigned = true)
+val GLint64 = IntegerType("GLint64", PrimitiveMapping.LONG)
+val GLuint64 = IntegerType("GLuint64", PrimitiveMapping.LONG, unsigned = true)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
 val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
 
@@ -41,9 +41,9 @@ val GLdouble_p = PointerType(GLdouble)
 
 // custom numeric
 
-val GLsizei = PrimitiveType("GLsizei", PrimitiveMapping.INT)
-val GLenum = PrimitiveType("GLenum", PrimitiveMapping.INT)
-val GLbitfield = PrimitiveType("GLbitfield", PrimitiveMapping.INT)
+val GLsizei = IntegerType("GLsizei", PrimitiveMapping.INT)
+val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
+val GLbitfield = IntegerType("GLbitfield", PrimitiveMapping.INT, unsigned = true)
 
 val GLsizei_p = PointerType(GLsizei)
 val GLenum_p = PointerType(GLenum)

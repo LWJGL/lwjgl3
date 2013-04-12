@@ -4,6 +4,10 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.linux.LinuxLibrary;
+import org.lwjgl.system.windows.WindowsLibrary;
+
 import java.lang.reflect.Method;
 
 public final class APIUtil {
@@ -39,6 +43,19 @@ public final class APIUtil {
 	/** Returns a thread-local APIBuffer. */
 	public static APIBuffer apiBuffer() {
 		return API_BUFFERS.get().reset();
+	}
+
+	public static DynamicLinkLibrary apiCreateLibrary(String name) {
+		switch ( LWJGLUtil.getPlatform() ) {
+			case WINDOWS:
+				return new WindowsLibrary(name);
+			case LINUX:
+				return new LinuxLibrary(name);
+			case MACOSX:
+				throw new UnsupportedOperationException("not implemented yet");
+			default:
+				throw new IllegalStateException();
+		}
 	}
 
 }

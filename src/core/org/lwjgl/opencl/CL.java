@@ -6,9 +6,9 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProviderLocal;
-import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
 import java.util.HashSet;
@@ -21,7 +21,6 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL12.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.WinBase.*;
 
 /*
 	TODO:
@@ -44,67 +43,85 @@ public final class CL {
 	private CL() {}
 
 	public static void create() {
-		final String libNameOverride = System.getProperty("org.lwjgl.opencl.libname", null);
+		// TODO: document this property
+		create(System.getProperty("org.lwjgl.opencl.libname", null));
+	}
 
-		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS:
-				functionProvider = new FunctionProviderLocal() {
+	public static void create(String libNameOverride) {
+		if ( functionProvider != null )
+			throw new IllegalStateException("CL has already been created.");
 
-					private final WindowsLibrary OPENCL = new WindowsLibrary(libNameOverride == null ? "OpenCL.dll" : libNameOverride);
+		final String libName;
 
-					private final long clGetExtensionFunctionAddress;
-					private final long clGetExtensionFunctionAddressForPlatform;
+		if ( libNameOverride == null ) {
+			switch ( LWJGLUtil.getPlatform() ) {
+				case WINDOWS:
+					libName = "OpenCL.dll";
+					break;
+				case LINUX:
+					libName = BITS64 ? "libOpenCL64.so" : "libOpenCL.so";
+					break;
+				case MACOSX:
+					libName = "OpenCL.dylib";
+					break;
+				default:
+					throw new IllegalStateException();
+			}
+		} else
+			libName = libNameOverride;
 
-					{
-						clGetExtensionFunctionAddress = GetProcAddress(OPENCL.getHandle(), "clGetExtensionFunctionAddress");
-						clGetExtensionFunctionAddressForPlatform = GetProcAddress(OPENCL.getHandle(), "clGetExtensionFunctionAddressForPlatform");
-						if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
-							OPENCL.destroy();
-							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
-						}
+		functionProvider = new FunctionProviderLocal() {
 
-						//System.out.println("clGetExtensionFunctionAddress = " + clGetExtensionFunctionAddress);
-						//System.out.println("clGetExtensionFunctionAddressForPlatform = " + clGetExtensionFunctionAddressForPlatform);
-					}
+			private final DynamicLinkLibrary OPENCL = apiCreateLibrary(libName);
 
-					@Override
-					public long getFunctionAddress(String functionName) {
-						long address = GetProcAddress(OPENCL.getHandle(), functionName);
-						if ( address == NULL )
-							LWJGLUtil.log("Failed to locate address for CL platform function " + functionName);
+			private final long clGetExtensionFunctionAddress;
+			private final long clGetExtensionFunctionAddressForPlatform;
 
-						return address;
-					}
+			{
+				clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
+				clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
+				if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
+					OPENCL.destroy();
+					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+				}
 
-					@Override
-					public long getFunctionAddress(long handle, String functionName) {
-						ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address =
-							clGetExtensionFunctionAddressForPlatform != NULL ?
-							nclGetExtensionFunctionAddressForPlatform(handle, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform) :
-							nclGetExtensionFunctionAddress(memAddress(nameBuffer), clGetExtensionFunctionAddress);
+				//System.out.println("clGetExtensionFunctionAddress = " + clGetExtensionFunctionAddress);
+				//System.out.println("clGetExtensionFunctionAddressForPlatform = " + clGetExtensionFunctionAddressForPlatform);
+			}
 
-						if ( address == NULL )
-							LWJGLUtil.log("Failed to locate address for CL extension function " + functionName);
+			@Override
+			public long getFunctionAddress(String functionName) {
+				long address = OPENCL.getFunctionAddress(functionName);
+				if ( address == NULL )
+					LWJGLUtil.log("Failed to locate address for CL platform function " + functionName);
 
-						return address;
-					}
+				return address;
+			}
 
-					public void destroy() {
-						OPENCL.destroy();
-					}
-				};
-				break;
-			case LWJGLUtil.PLATFORM_LINUX:
-			case LWJGLUtil.PLATFORM_MACOSX:
-			default:
-				throw new UnsupportedOperationException();
-		}
+			@Override
+			public long getFunctionAddress(long handle, String functionName) {
+				ByteBuffer nameBuffer = memEncodeASCII(functionName);
+				long address =
+					clGetExtensionFunctionAddressForPlatform != NULL ?
+					nclGetExtensionFunctionAddressForPlatform(handle, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform) :
+					nclGetExtensionFunctionAddress(memAddress(nameBuffer), clGetExtensionFunctionAddress);
+
+				if ( address == NULL )
+					LWJGLUtil.log("Failed to locate address for CL extension function " + functionName);
+
+				return address;
+			}
+
+			public void destroy() {
+				OPENCL.destroy();
+			}
+		};
 	}
 
 	public static void destroy() {
 		CLPlatform.destroy();
 		functionProvider.destroy();
+		functionProvider = null;
 	}
 
 	public static FunctionProviderLocal getFunctionProvider() {

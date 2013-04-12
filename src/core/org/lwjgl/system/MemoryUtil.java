@@ -148,7 +148,7 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address <= NULL || capacity < 0) )
+		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
 			throw new IllegalArgumentException();
 
 		return ACCESSOR.newByteBuffer(address, capacity);

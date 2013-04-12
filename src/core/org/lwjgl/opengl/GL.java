@@ -6,10 +6,9 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.APIUtil;
+import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
-import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.nio.ByteBuffer;
 import java.util.HashSet;
@@ -21,45 +20,51 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
 import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WGL.*;
-import static org.lwjgl.system.windows.WinBase.*;
 
 public final class GL {
 
 	private static final FunctionProvider functionProvider;
 
 	static {
+		final String libName;
 		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS:
-				functionProvider = new FunctionProvider() {
-
-					private final WindowsLibrary OPENGL = new WindowsLibrary("opengl32.dll");
-
-					@Override
-					public long getFunctionAddress(String functionName) {
-						ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address = wglGetProcAddress(nameBuffer);
-						if ( address == NULL ) {
-							address = GetProcAddress(OPENGL.getHandle(), nameBuffer);
-							if ( address == NULL )
-								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-						}
-
-						return address;
-					}
-
-					public void destroy() {
-						OPENGL.destroy();
-					}
-				};
+			case WINDOWS:
+				libName = "opengl32.dll";
 				break;
-			case LWJGLUtil.PLATFORM_LINUX:
-			case LWJGLUtil.PLATFORM_MACOSX:
+			case LINUX:
+				libName = "libGL.so";
+				break;
+			case MACOSX:
+				throw new UnsupportedOperationException("not implemented yet");
 			default:
-				throw new UnsupportedOperationException();
+				throw new IllegalStateException();
 		}
+
+		functionProvider = new FunctionProvider() {
+
+			private final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
+
+			@Override
+			public long getFunctionAddress(String functionName) {
+				ByteBuffer nameBuffer = memEncodeASCII(functionName);
+				long address = wglGetProcAddress(nameBuffer);
+				if ( address == NULL ) {
+					address = OPENGL.getFunctionAddress(nameBuffer);
+					if ( address == NULL )
+						LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+				}
+
+				return address;
+			}
+
+			public void destroy() {
+				OPENGL.destroy();
+			}
+		};
 	}
 
 	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
@@ -108,7 +113,7 @@ public final class GL {
 		if ( errorCode != GL_NO_ERROR )
 			LWJGLUtil.log("A GL context was in an error state before the creation of its capabilities instance. Error: " + Util.translateGLErrorString(errorCode));
 
-		APIBuffer __buffer = APIUtil.apiBuffer();
+		APIBuffer __buffer = apiBuffer();
 
 		int majorVersion;
 		int minorVersion;
@@ -194,11 +199,11 @@ public final class GL {
 		}
 
 		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS:
+			case WINDOWS:
 				addWGLExtensions(supportedExtensions);
 				break;
-			case LWJGLUtil.PLATFORM_LINUX:
-			case LWJGLUtil.PLATFORM_MACOSX:
+			case LINUX:
+			case MACOSX:
 			default:
 				throw new UnsupportedOperationException();
 		}

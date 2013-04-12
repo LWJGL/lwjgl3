@@ -596,14 +596,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindow.func(
 		"CreateWindow",
 		"""
-		This function creates a window. Most of the options controlling how the window should be created are specified via the {@link #glfwWindowHint} function.
+		This function creates a window. Most of the options controlling how the window should be created are specified through {@link #glfwWindowHint}.
 
         Note that the actual properties of the window may differ from what you requested, as not all parameters and hints are hard constraints.
 
         To create the window at a specific position, make it initially invisible using the {@link #GLFW_VISIBLE} window hint, set its position and then show it.
 
-        For fullscreen windows the initial cursor mode is {@link #GLFW_CURSOR_CAPTURED} and the screensaver is prohibited from starting. For regular windows the
-        initial cursor mode is {@link #GLFW_CURSOR_NORMAL} and the screensaver is allowed to start.
+        If a fullscreen window is active, the screensaver is prohibited from starting.
 
         This function may only be called from the main thread.
 		""",

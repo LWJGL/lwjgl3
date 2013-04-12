@@ -127,6 +127,12 @@ public class Struct(
 		members add StructMember(this, nativeName, name)
 	}
 
+	val StructMember.isNestedStruct: Boolean
+		get() = nativeType is StructType && !(nativeType as StructType).includesPointer
+
+	val StructMember.nestedMembers: ArrayList<StructMember>
+		get() = (nativeType as StructType).definition.members
+
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
 		print(HEADER)
@@ -220,11 +226,11 @@ public class Struct(
 			val field = member.offsetField(parentField)
 			val lastMember = i == members.lastIndex
 
-			println("$indentation$field${if ( parentLastMember && lastMember && !(member.nativeType is StructType) ) ';' else ','}")
+			println("$indentation$field${if ( parentLastMember && lastMember && !member.isNestedStruct ) ';' else ','}")
 
 			// Output nested field offsets
-			if ( member.nativeType is StructType )
-				generateOffsetFields(member.nativeType.definition.members, "$indentation\t", field, parentLastMember && lastMember)
+			if ( member.isNestedStruct )
+				generateOffsetFields(member.nestedMembers, "$indentation\t", field, parentLastMember && lastMember)
 		}
 	}
 
@@ -264,8 +270,8 @@ public class Struct(
 				println("$indentation$field = $parentField + $parentPrefix.${member.offsetField};")
 
 			// Output nested fields
-			if ( member.nativeType is StructType )
-				index = generateOffsetInit(member.nativeType.definition.members, "$indentation\t", member, field, index) // recursion
+			if ( member.isNestedStruct )
+				index = generateOffsetInit(member.nestedMembers, "$indentation\t", member, field, index) // recursion
 		}
 		return index
 	}
@@ -304,8 +310,8 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.nativeType is StructType ) {
-				generateConstructorArguments(it.nativeType.definition.members, method, mode, firstParam)
+			if ( it.isNestedStruct ) {
+				generateConstructorArguments(it.nestedMembers, method, mode, firstParam)
 				firstParam = false
 			} else {
 				if ( firstParam )
@@ -346,8 +352,8 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.nativeType is StructType ) {
-				generateConstructorSetters(it.nativeType.definition.members, method)
+			if ( it.isNestedStruct ) {
+				generateConstructorSetters(it.nestedMembers, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
@@ -367,8 +373,8 @@ public class Struct(
 
 	private val generateAlternativeConstructor: (List<StructMember>) -> Boolean = { (members) ->
 		members any {
-			if ( it.nativeType is StructType )
-				generateAlternativeConstructor(it.nativeType.definition.members)
+			if ( it.isNestedStruct )
+				generateAlternativeConstructor(it.nestedMembers)
 			else
 				it is StructMemberArray || it.nativeType is CharSequenceType || (it.nativeType is PointerType && (it.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER)
 		}
@@ -379,8 +385,8 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.nativeType is StructType ) {
-				generateAlternativeConstructorArguments(it.nativeType.definition.members, method, mode, firstParam)
+			if ( it.isNestedStruct ) {
+				generateAlternativeConstructorArguments(it.nestedMembers, method, mode, firstParam)
 				firstParam = false
 			} else {
 				if ( firstParam )
@@ -429,8 +435,8 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.nativeType is StructType ) {
-				generateAlternativeConstructorSetters(it.nativeType.definition.members, method)
+			if ( it.isNestedStruct ) {
+				generateAlternativeConstructorSetters(it.nestedMembers, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 				println("\t\t${method}Set($struct, $param);")
@@ -447,8 +453,8 @@ public class Struct(
 			val method = it.method(parentMember)
 			val field = it.offsetField(parentField)
 
-			if ( it.nativeType is StructType ) {
-				generateSetters(it.nativeType.definition.members, method, field)
+			if ( it.isNestedStruct ) {
+				generateSetters(it.nestedMembers, method, field)
 			} else {
 				val param = it.name
 
@@ -537,8 +543,8 @@ public class Struct(
 			val method = it.method(parentMember)
 			val field = it.offsetField(parentField)
 
-			if ( it.nativeType is StructType ) {
-				generateGetters(it.nativeType.definition.members, method, field)
+			if ( it.isNestedStruct ) {
+				generateGetters(it.nestedMembers, method, field)
 			} else {
 				// Getter
 
@@ -561,14 +567,22 @@ public class Struct(
 							val javaType = it.nativeType.javaMethodType.getSimpleName()
 							val bufferMethod = getBufferMethod(it, javaType)
 
+							val convertToInt = javaType.equals("byte") || javaType.equals("short");
+
 							print(
-								if ( javaType.equals("byte") || javaType.equals("short") )
+								if ( convertToInt )
 									"int ${method}Get(ByteBuffer $struct) { return $struct.get$bufferMethod("
 								else
 									"$javaType ${method}Get(ByteBuffer $struct) { return $struct.get$bufferMethod("
 							)
 
-							println("$struct.position() + $field); }")
+							print("$struct.position() + $field)")
+							if ( convertToInt && it.nativeType is IntegerType && it.nativeType.unsigned ) {
+								print(" & 0x")
+								for ( i in 1..(it.nativeType.mapping as PrimitiveMapping).bytes )
+									print("FF")
+							}
+							println("; }")
 						}
 				}
 
@@ -593,8 +607,11 @@ public class Struct(
 							if ( array is StructMemberCharArray ) {
 								val charArray: StructMemberCharArray = array
 								val charMapping = charArray.nativeType.mapping as CharMapping
-								println("\tpublic static String ${method}Gets(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, memStrLen${charMapping.bytes}($struct, $field), $field); }")
-								println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { return memDecode${charMapping.charset}($struct, size, $field); }")
+								if ( charArray.nullTerminated ) {
+									println("\tpublic static String ${method}Gets(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, memStrLen${charMapping.bytes}($struct, $field), $field); }")
+									println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { return memDecode${charMapping.charset}($struct, size, $field); }")
+								} else
+									println("\tpublic static String ${method}Gets(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, ${charArray.size}, $field); }")
 							}
 						}
 					it.nativeType is CharSequenceType ->
@@ -652,7 +669,7 @@ public class Struct(
 			println("\tbuffer[$index] = (jint)(offsetof($nativeName, $prefix${members[i].nativeName}));")
 			index++
 
-			if ( members[i].nativeType is StructType ) {
+			if ( members[i].isNestedStruct ) {
 				// Output anonymous inner structs
 				val structType = members[i].nativeType as StructType
 				if ( structType.name identityEquals ANONYMOUS )

@@ -333,11 +333,16 @@ public final class JGLFW {
 
 	static {
 		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS:
+			case WINDOWS:
 				platform = new PlatformWin();
 				break;
+			case LINUX:
+				platform = new PlatformLinux();
+				break;
+			case MACOSX:
+				throw new UnsupportedOperationException("not implemented yet");
 			default:
-				throw new IllegalStateException("Unsupported platform.");
+				throw new IllegalStateException();
 		}
 	}
 
@@ -949,9 +954,7 @@ public final class JGLFW {
 		// Restore the previously current context (or NULL)
 		glfwMakeContextCurrent(previous);
 
-		if ( monitor != null )
-			glfwSetInputMode(window, GLFW_CURSOR_MODE, GLFW_CURSOR_CAPTURED);
-		else if ( wndconfig.visible )
+		if ( wndconfig.monitor == null && wndconfig.visible )
 			glfwShowWindow(window);
 
 		return window;

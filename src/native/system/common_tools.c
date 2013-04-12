@@ -7,19 +7,19 @@
 
 static JavaVM *jvm;
 
-JNIEnv *getThreadEnv() {
+JNIEnv *getThreadEnv(void) {
 	JNIEnv *env;
 	(*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION_1_4);
 	return env;
 }
 
-JNIEnv *attachCurrentThread() {
+JNIEnv *attachCurrentThread(void) {
     JNIEnv *env;
     (*jvm)->AttachCurrentThread(jvm, (void **)&env, NULL);
     return env;
 }
 
-void detachCurrentThread() {
+void detachCurrentThread(void) {
     (*jvm)->DetachCurrentThread(jvm);
 }
 

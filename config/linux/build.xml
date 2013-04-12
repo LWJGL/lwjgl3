@@ -1,4 +1,4 @@
-<project name="lwjgl native code" basedir="../.." default="compile-native">
+<project name="lwjgl native code" basedir="../.." default="compile-native-linux">
 	<property name="dest" location="bin/lwjgl${os.arch}" relative="true"/>
 
 	<property name="src" location="src" relative="true"/>
@@ -21,8 +21,9 @@
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
 
-	<target name="compile-native">
-		<apply dir="${dest}" executable="gcc" skipemptyfilesets="true" failonerror="true" parallel="true">
+	<target name="compile-native-linux">
+		<!-- COMPILE -->
+		<apply dir="${dest}" executable="gcc" skipemptyfilesets="true" failonerror="true" parallel="true" verbose="true">
 			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wunused -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
@@ -48,7 +49,9 @@
 			<fileset dir="${src.generated}/opengl" includes="*.c"/>
 			<fileset dir="${src.generated}/opengl/glx" includes="*.c"/>
 		</apply>
-		<apply dir="${dest}" executable="gcc" failonerror="true" parallel="true">
+
+		<!-- LINK -->
+		<apply dir="${dest}" executable="gcc" failonerror="true" parallel="true" verbose="true">
 			<srcfile/>
 			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
 			<!-- LWJGL objects -->

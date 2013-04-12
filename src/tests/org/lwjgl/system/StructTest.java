@@ -22,7 +22,7 @@ public class StructTest {
 
 	public void testStructLayout() {
 		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS: {
+			case WINDOWS: {
 				ByteBuffer s = GLYPHMETRICSFLOAT.malloc();
 
 				assertEquals(GLYPHMETRICSFLOAT.SIZEOF, 24);
@@ -38,7 +38,7 @@ public class StructTest {
 				break;
 			}
 
-			case LWJGLUtil.PLATFORM_LINUX: {
+			case LINUX: {
 				ByteBuffer s = XColor.malloc();
 
 				assertEquals(XColor.SIZEOF, 16);
@@ -57,7 +57,7 @@ public class StructTest {
 
 	public void testFields() {
 		switch ( LWJGLUtil.getPlatform() ) {
-			case LWJGLUtil.PLATFORM_WINDOWS: {
+			case WINDOWS: {
 				ByteBuffer s = WNDCLASSEX.malloc();
 
 				int style = 1337;
@@ -99,7 +99,7 @@ public class StructTest {
 				assertEquals(WNDCLASSEX.iconSmGet(s), iconSm);
 				break;
 			}
-			case LWJGLUtil.PLATFORM_LINUX: {
+			case LINUX: {
 				ByteBuffer s = XGCValues.malloc();
 
 				int cap_style = X.CapRound;

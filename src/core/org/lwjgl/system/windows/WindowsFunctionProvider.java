@@ -20,7 +20,7 @@ public class WindowsFunctionProvider implements FunctionProvider {
 
 	@Override
 	public long getFunctionAddress(String functionName) {
-		return library.getProcAddress(functionName);
+		return library.getFunctionAddress(functionName);
 	}
 
 	@Override

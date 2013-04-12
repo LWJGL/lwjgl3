@@ -21,14 +21,14 @@ val HANDLE_p = PointerType(HANDLE)
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
 val BOOL_p = PointerType(BOOL)
 
-val BYTE = PrimitiveType("BYTE", PrimitiveMapping.BYTE)
-val WORD = PrimitiveType("WORD", PrimitiveMapping.SHORT)
-val short = PrimitiveType("short", PrimitiveMapping.SHORT)
-val SHORT = PrimitiveType("SHORT", PrimitiveMapping.SHORT)
-val DWORD = PrimitiveType("DWORD", PrimitiveMapping.INT)
-val UINT = PrimitiveType("UINT", PrimitiveMapping.INT)
-val LONG = PrimitiveType("LONG", PrimitiveMapping.INT)
-val int = PrimitiveType("int", PrimitiveMapping.INT)
+val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
+val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
+val short = IntegerType("short", PrimitiveMapping.SHORT)
+val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
+val int = IntegerType("int", PrimitiveMapping.INT)
+val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
+val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
+val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only LARGE_INTEGER uses this
 
