@@ -61,6 +61,7 @@ public final class GL {
 				return address;
 			}
 
+			@Override
 			public void destroy() {
 				OPENGL.destroy();
 			}

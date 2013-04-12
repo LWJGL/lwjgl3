@@ -22,18 +22,21 @@ public final class BufferUtils {
 		String alignment = System.getProperty("org.lwjgl.util.BufferAlign");
 		if ( "page".equals(alignment) )
 			BUFFER_ALLOCATOR = new BufferAllocator() {
+				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferPage(capacity);
 				}
 			};
 		else if ( "cache-line".equals(alignment) )
 			BUFFER_ALLOCATOR = new BufferAllocator() {
+				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferCacheLine(capacity);
 				}
 			};
 		else
 			BUFFER_ALLOCATOR = new BufferAllocator() {
+				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createUnalignedByteBuffer(capacity);
 				}
@@ -161,11 +164,10 @@ public final class BufferUtils {
 	 * @return the aligned ByteBuffer
 	 */
 	public static ByteBuffer createAlignedByteBuffer(int capacity, int alignment) {
-		int mask = alignment - 1;
 		ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
 
 		// Align
-		buffer.position(alignment - (int)(memAddress(buffer) & mask));
+		buffer.position(alignment - (int)(memAddress(buffer) & (alignment - 1)));
 		// Prepare to slice
 		buffer.limit(buffer.position() + capacity);
 

@@ -81,6 +81,7 @@ public final class Sys {
 
 	private static String doLoadLibrary(final String libraryName) {
 		return AccessController.doPrivileged(new PrivilegedAction<String>() {
+			@Override
 			public String run() {
 				String libraryPath = System.getProperty("org.lwjgl.librarypath");
 

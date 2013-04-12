@@ -24,6 +24,7 @@ abstract class CLObjectChild<P extends CLObject> extends CLObject {
 		return parent;
 	}
 
+	@Override
 	public CLCapabilities getCapabilities() {
 		return getParent().getCapabilities();
 	}

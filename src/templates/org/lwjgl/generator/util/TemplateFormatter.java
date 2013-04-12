@@ -105,20 +105,24 @@ public class TemplateFormatter {
 
 	private void setup() {
 		input.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
 			public void insertUpdate(DocumentEvent e) {
 				format();
 			}
 
+			@Override
 			public void removeUpdate(DocumentEvent e) {
 				format();
 			}
 
+			@Override
 			public void changedUpdate(DocumentEvent e) {
 				format();
 			}
 		});
 
 		ActionListener settingsAction = new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				format();
 			}

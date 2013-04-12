@@ -167,6 +167,7 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		size = 0;
 	}
 
+	@Override
 	public EntryIterator iterator() {
 		return new EntryIterator();
 	}
@@ -190,12 +191,14 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 			nextIndex = i;
 		}
 
+		@Override
 		public boolean hasNext() {
 			if ( nextIndex >= 0 ) return true;
 			Entry e = current;
 			return e != null && e.next != null;
 		}
 
+		@Override
 		public Entry<V> next() {
 			// Next entry in current bucket.
 			Entry<V> e = current;
@@ -216,6 +219,7 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 			return e;
 		}
 
+		@Override
 		public void remove() {
 			FastLongMap.this.remove(current.key);
 		}

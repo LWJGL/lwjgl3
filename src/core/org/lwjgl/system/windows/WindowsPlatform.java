@@ -14,6 +14,7 @@ public class WindowsPlatform implements Platform {
 	public WindowsPlatform() {
 	}
 
+	@Override
 	public boolean has64Bit() {
 		return true;
 	}

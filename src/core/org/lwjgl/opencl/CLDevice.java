@@ -56,6 +56,7 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platform);
 	}
 
+	@Override
 	public CLCapabilities getCapabilities() {
 		return capabilities;
 	}

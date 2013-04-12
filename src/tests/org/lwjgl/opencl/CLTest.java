@@ -43,22 +43,22 @@ public class CLTest {
 		try {
 			CL.create();
 		} catch (Throwable t) {
-			throw new SkipException("Skipped because OpenCL is not available.");
+			throw new SkipException("Skipped because OpenCL initialization failed [" + t.getMessage() + "]");
 		}
 	}
 
 	public void testLifecycle() {
-		createCL();
+		try {
+			List<CLPlatform> platforms = CLPlatform.getPlatforms();
+			assertFalse(platforms.isEmpty());
 
-		List<CLPlatform> platforms = CLPlatform.getPlatforms();
-		assertFalse(platforms.isEmpty());
-
-		for ( CLPlatform platform : platforms ) {
-			List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
-			assertFalse(devices.isEmpty());
+			for ( CLPlatform platform : platforms ) {
+				List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
+				assertFalse(devices.isEmpty());
+			}
+		} finally {
+			CL.destroy();
 		}
-
-		CL.destroy();
 	}
 
 	private interface ContextTest {
@@ -66,13 +66,11 @@ public class CLTest {
 		void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device);
 	}
 
-	private void contextTest(ContextTest test) {
+	private static void contextTest(ContextTest test) {
 		contextTest(null, test);
 	}
 
-	private void contextTest(Filter<CLPlatform> platformFilter, ContextTest test) {
-		createCL();
-
+	private static void contextTest(Filter<CLPlatform> platformFilter, ContextTest test) {
 		try {
 			List<CLPlatform> platforms = CLPlatform.getPlatforms(platformFilter);
 			if ( platforms.isEmpty() ) {
