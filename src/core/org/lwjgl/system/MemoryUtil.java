@@ -413,6 +413,62 @@ public final class MemoryUtil {
 		ACCESSOR.memCopy(src, dst, bytes);
 	}
 
+	public static byte memGetByte(long ptr) {
+		return ACCESSOR.memGetByte(ptr);
+	}
+
+	public static short memGetShort(long ptr) {
+		return ACCESSOR.memGetShort(ptr);
+	}
+
+	public static int memGetInt(long ptr) {
+		return ACCESSOR.memGetInt(ptr);
+	}
+
+	public static long memGetLong(long ptr) {
+		return ACCESSOR.memGetLong(ptr);
+	}
+
+	public static float memGetFloat(long ptr) {
+		return ACCESSOR.memGetFloat(ptr);
+	}
+
+	public static double memGetDouble(long ptr) {
+		return ACCESSOR.memGetDouble(ptr);
+	}
+
+	public static long memGetAddress(long ptr) {
+		return ACCESSOR.memGetAddress(ptr);
+	}
+
+	public static void memPutByte(long ptr, byte value) {
+		ACCESSOR.memPutByte(ptr, value);
+	}
+
+	public static void memPutShort(long ptr, short value) {
+		ACCESSOR.memPutShort(ptr, value);
+	}
+
+	public static void memPutInt(long ptr, int value) {
+		ACCESSOR.memPutInt(ptr, value);
+	}
+
+	public static void memPutLong(long ptr, long value) {
+		ACCESSOR.memPutLong(ptr, value);
+	}
+
+	public static void memPutFloat(long ptr, float value) {
+		ACCESSOR.memPutFloat(ptr, value);
+	}
+
+	public static void memPutDouble(long ptr, double value) {
+		ACCESSOR.memPutDouble(ptr, value);
+	}
+
+	public static void memPutAddress(long ptr, long value) {
+		ACCESSOR.memPutAddress(ptr, value);
+	}
+
 	// --- [ JNI utilities ] ---
 
 	/**
@@ -471,6 +527,38 @@ public final class MemoryUtil {
 
 	// The standard C memcpy function
 	static native void nMemCopy(long dst, long src, long bytes);
+
+	// Primitive getters
+
+	static native byte nMemGetByte(long ptr);
+
+	static native short nMemGetShort(long ptr);
+
+	static native int nMemGetInt(long ptr);
+
+	static native long nMemGetLong(long ptr);
+
+	static native float nMemGetFloat(long ptr);
+
+	static native double nMemGetDouble(long ptr);
+
+	static native long nMemGetAddress(long ptr);
+
+	// Primitive setters
+	
+	static native void nMemPutByte(long ptr, byte value);
+
+	static native void nMemPutShort(long ptr, short value);
+
+	static native void nMemPutInt(long ptr, int value);
+
+	static native void nMemPutLong(long ptr, long value);
+
+	static native void nMemPutFloat(long ptr, float value);
+
+	static native void nMemPutDouble(long ptr, double value);
+
+	static native void nMemPutAddress(long ptr, long value);
 
 	// Returns the buffer memory address
 	static native long nGetAddress(Buffer buffer);
