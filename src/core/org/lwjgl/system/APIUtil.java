@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 public final class APIUtil {
 
 	private static final ThreadLocal<APIBuffer> API_BUFFERS = new ThreadLocal<APIBuffer>() {
+		@Override
 		protected APIBuffer initialValue() {
 			return new APIBuffer();
 		}
@@ -40,9 +41,19 @@ public final class APIUtil {
 		}
 	}
 
-	/** Returns a thread-local APIBuffer. */
+	/** Returns a resetted thread-local {@link APIBuffer}. */
 	public static APIBuffer apiBuffer() {
 		return API_BUFFERS.get().reset();
+	}
+
+	/**
+	 * Returns a thread-local {@link APIBuffer}, without resetting it. This makes the APIBuffer work like a stack when used in nested API calls. The user is
+	 * responsible for resetting the {@link APIBuffer} to an appropriate state before the nested call returns.
+	 *
+	 * @see APIBuffer#pop(int)
+	 */
+	public static APIBuffer apiStack() {
+		return API_BUFFERS.get().push();
 	}
 
 	public static DynamicLinkLibrary apiCreateLibrary(String name) {

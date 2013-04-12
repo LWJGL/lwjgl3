@@ -23,30 +23,64 @@ public class APIBuffer {
 
 	private int offset;
 
+	private int stackDepth;
+	private int[] stack = new int[4];
+
 	public APIBuffer() {
-		buffer = BufferUtils.createByteBuffer(DEFAULT_CAPACITY);
+		buffer = BufferUtils.createAlignedByteBufferPage(DEFAULT_CAPACITY);
 		address = memAddress(buffer);
 	}
 
+	/** Resets the parameter offset to 0. */
 	public APIBuffer reset() {
 		offset = 0;
 		return this;
 	}
 
+	/** Pushes the current parameter offset to a stack. */
+	public APIBuffer push() {
+		if ( stackDepth == stack.length )
+			stack = new int[stack.length << 1];
+
+		stack[stackDepth++] = offset;
+
+		// Upward align the current offset to the pointer size.
+		offset = (offset + (POINTER_SIZE - 1)) & -POINTER_SIZE;
+
+		return this;
+	}
+
+	/** Restores the last pushed parameter offset. */
+	public APIBuffer pop() {
+		offset = stack[--stackDepth];
+		return this;
+	}
+
+	/** Returns the current parameter offset. */
+	public int getOffset() {
+		return offset;
+	}
+
+	/** Sets the current parameter offset. */
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+	/** Returns the memory address of the internal {@link ByteBuffer}. This address may change after a call to one of the {@code <type>Param()} methods. */
 	public long address() {
 		return address;
 	}
 
+	/** Returns the {@link ByteBuffer} that backs this {@link APIBuffer}. */
 	public ByteBuffer buffer() {
 		return buffer;
 	}
 
-	private void ensureCapacity(int bytes) {
-		int requiredCapacity = offset + bytes;
-		if ( requiredCapacity <= buffer.capacity() )
+	private void ensureCapacity(int capacity) {
+		if ( capacity <= buffer.capacity() )
 			return;
 
-		ByteBuffer resized = BufferUtils.createByteBuffer(mathNextPoT(requiredCapacity));
+		ByteBuffer resized = BufferUtils.createAlignedByteBufferPage(mathNextPoT(capacity));
 
 		resized.put(buffer);
 		resized.clear();
@@ -56,12 +90,13 @@ public class APIBuffer {
 	}
 
 	private int param(int bytes) {
-		// TODO: Consider padding the offset such that the parameter is memory aligned.
+		return param(bytes, bytes);
+	}
 
-		ensureCapacity(bytes);
-
-		int param = offset;
-		offset = param + bytes;
+	private int param(int bytes, int alignment) {
+		// Upward align the current offset to the given alignment
+		int param = (offset + (alignment - 1)) & -alignment;
+		ensureCapacity(offset = param + bytes);
 		return param;
 	}
 
@@ -90,7 +125,7 @@ public class APIBuffer {
 	public int pointerParam() { return param(POINTER_SIZE); }
 
 	/** Ensures space for an additional buffer with the given size (in bytes) and returns the address offset. */
-	public int bufferParam(int size) { return param(size); }
+	public int bufferParam(int size) { return param(size, POINTER_SIZE); }
 
 	/** Returns the boolean value at the specified offset. */
 	public boolean booleanValue(int offset) { return buffer.get(offset) != 0; }
