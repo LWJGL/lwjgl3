@@ -15,12 +15,14 @@ final class InputUtil {
 
 	static final int _GLFW_STICK = 3;
 
+	static double cursorPosX;
+	static double cursorPosY;
+
 	private InputUtil() {
 	}
 
 	public static void setCursorMode(GLFWwindow window, int newMode) {
-		int width, height, oldMode;
-		double centerPosX, centerPosY;
+		int oldMode;
 
 		if ( newMode != GLFW_CURSOR_NORMAL &&
 		     newMode != GLFW_CURSOR_HIDDEN &&
@@ -33,25 +35,26 @@ final class InputUtil {
 		if ( oldMode == newMode )
 			return;
 
-		IntBuffer widthOut = BufferUtils.createIntBuffer(1);
-		IntBuffer heightOut = BufferUtils.createIntBuffer(1);
+		if ( oldMode == GLFW_CURSOR_CAPTURED )
+			platform.setCursorPos(window, cursorPosX, cursorPosY);
+		else if ( newMode == GLFW_CURSOR_CAPTURED ) {
+			cursorPosX = window.cursorPosX;
+			cursorPosY = window.cursorPosY;
 
-		platform.getWindowSize(window, widthOut, heightOut);
+			// TODO: optimize
+			IntBuffer widthOut = BufferUtils.createIntBuffer(1);
+			IntBuffer heightOut = BufferUtils.createIntBuffer(1);
 
-		width = widthOut.get(0);
-		height = heightOut.get(0);
+			platform.getWindowSize(window, widthOut, heightOut);
 
-		centerPosX = width / 2.0;
-		centerPosY = height / 2.0;
+			int width = widthOut.get(0);
+			int height = heightOut.get(0);
 
-		if ( oldMode == GLFW_CURSOR_CAPTURED || newMode == GLFW_CURSOR_CAPTURED )
-			platform.setCursorPos(window, centerPosX, centerPosY);
+			platform.setCursorPos(window, width / 2.0, height / 2.0);
+		}
 
 		platform.setCursorMode(window, newMode);
 		window.cursorMode = newMode;
-
-		if ( oldMode == GLFW_CURSOR_CAPTURED )
-			inputCursorMotion(window, window.cursorPosX, window.cursorPosY);
 	}
 
 	public static void setStickyKeys(GLFWwindow window, boolean enabled) {

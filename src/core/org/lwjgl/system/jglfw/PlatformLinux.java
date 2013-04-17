@@ -459,6 +459,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		destroyContext(window);
 
 		if ( window.handle != NULL ) {
+			XDeleteContext(x11.display, window.handle, x11.context);
 			XUnmapWindow(x11.display, window.handle);
 			XDestroyWindow(x11.display, window.handle);
 			window.handle = NULL;
@@ -827,10 +828,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			return false;
 		}
 
-		// As the API currently doesn't understand multiple display devices, we hard-code
-		// this choice and hope for the best
 		x11.screen = XDefaultScreen(x11.display);
 		x11.root = XRootWindow(x11.display, x11.screen);
+		x11.context = XUniqueContext();
 
 		// Find or create window manager atoms
 		x11.WM_STATE = XInternAtom(x11.display, "WM_STATE", False);
@@ -855,12 +855,12 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			}
 		}
 
-		if ( XQueryExtension(x11.display, "XInputExtension", x11.XI2.majorOpcode, x11.XI2.eventBase, x11.XI2.errorBase) != 0 ) {
-			x11.XI2.versionMajor.put(0, 2);
-			x11.XI2.versionMinor.put(0, 0);
+		if ( XQueryExtension(x11.display, "XInputExtension", x11.xi.majorOpcode, x11.xi.eventBase, x11.xi.errorBase) != 0 ) {
+			x11.xi.versionMajor.put(0, 2);
+			x11.xi.versionMinor.put(0, 0);
 
-			if ( XIQueryVersion(x11.display, x11.XI2.versionMajor, x11.XI2.versionMinor) != BadRequest ) {
-				x11.XI2.available = true;
+			if ( XIQueryVersion(x11.display, x11.xi.versionMajor, x11.xi.versionMinor) != BadRequest ) {
+				x11.xi.available = true;
 			}
 		}
 
@@ -1589,6 +1589,8 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 				XChangeProperty(x11.display, window.handle, x11.MOTIF_WM_HINTS, x11.MOTIF_WM_HINTS, 32, PropModeReplace, hints, 5);
 			}
+
+			nXSaveContext(x11.display, window.handle, x11.context, memGlobalRefNew(window));
 		}
 
 		if ( window.monitor != null && !x11.hasEWMH ) {
@@ -1664,7 +1666,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			XFree(hints);
 		}
 
-		if ( x11.XI2.available ) {
+		if ( x11.xi.available ) {
 			// Select for XInput2 events
 
 			ByteBuffer eventmask = XIEventMask.malloc();
@@ -2262,39 +2264,38 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		int  screen;
 		long root;
 
+		long cursor;
+		int  context;
+
 		long WM_STATE;
 		long WM_DELETE_WINDOW;
-		long MOTIF_WM_HINTS;
-
-		long UTF8_STRING;
-		long COMPOUND_STRING;
-
-		long TARGETS;
-		long CLIPBOARD;
-
-		boolean hasEWMH;
-
 		long NET_WM_STATE;
 		long NET_WM_STATE_FULLSCREEN;
 		long NET_WM_NAME;
 		long NET_WM_ICON_NAME;
 		long NET_WM_PING;
 		long NET_ACTIVE_WINDOW;
+		long MOTIF_WM_HINTS;
 
-		Xf86vidmode vidmode = new Xf86vidmode();
-		Xrandr      randr   = new Xrandr();
-		XI2         XI2     = new XI2();
-		Xkb         xkb     = new Xkb();
+		long TARGETS;
+		long CLIPBOARD;
+		long UTF8_STRING;
+		long COMPOUND_STRING;
 
-		Saver saver = new Saver();
+		boolean hasEWMH;
 
-		Selection selection = new Selection();
+		final Xf86vidmode vidmode = new Xf86vidmode();
+		final Xrandr      randr   = new Xrandr();
+		final XI2         xi      = new XI2();
+		final Xkb         xkb     = new Xkb();
 
-		Joystick[] joystick = new Joystick[GLFW_JOYSTICK_LAST + 1];
+		final Saver saver = new Saver();
 
-		int[] keyCodeLUT = new int[256];
+		final Selection selection = new Selection();
 
-		long cursor;
+		final Joystick[] joystick = new Joystick[GLFW_JOYSTICK_LAST + 1];
+
+		final int[] keyCodeLUT = new int[256];
 
 		X11() {
 			for ( int i = 0; i < joystick.length; i++ )

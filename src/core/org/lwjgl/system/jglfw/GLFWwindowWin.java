@@ -8,7 +8,6 @@ package org.lwjgl.system.jglfw;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.glfw.GLFW;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.TRACKMOUSEEVENT;
 import org.lwjgl.system.windows.WinUser;
@@ -37,7 +36,9 @@ class GLFWwindowWin extends GLFWwindow {
 
 	boolean cursorCentered;
 	boolean cursorInside;
-	int     oldCursorX, oldCursorY;
+	boolean cursorHidden;
+
+	int oldCursorX, oldCursorY;
 
 	// Context state
 
@@ -104,7 +105,7 @@ class GLFWwindowWin extends GLFWwindow {
 					if ( !focused && focusedWindow == window ) {
 						// The window was defocused (or iconified, see above)
 
-						if ( cursorMode == GLFW_CURSOR_CAPTURED )
+						if ( cursorMode != GLFW_CURSOR_NORMAL )
 							PlatformWin.showCursor(window);
 
 						if ( window.monitor != null ) {
@@ -119,8 +120,10 @@ class GLFWwindowWin extends GLFWwindow {
 					} else if ( focused && focusedWindow != window ) {
 						// The window was focused
 
-						if ( window.cursorMode == GLFW.GLFW_CURSOR_CAPTURED )
+						if ( window.cursorMode == GLFW_CURSOR_CAPTURED )
 							PlatformWin.captureCursor(window);
+						else if ( window.cursorMode == GLFW_CURSOR_HIDDEN )
+							PlatformWin.hideCursor(window);
 
 						if ( window.monitor != null )
 							platform.setVideoMode(window.monitor, window.videoMode);
@@ -161,7 +164,7 @@ class GLFWwindowWin extends GLFWwindow {
 
 				case WM_KEYDOWN:
 				case WM_SYSKEYDOWN: {
-					inputKey(window, translateKey(wParam, lParam), GLFW.GLFW_PRESS);
+					inputKey(window, translateKey(wParam, lParam), GLFW_PRESS);
 					break;
 				}
 
@@ -187,76 +190,64 @@ class GLFWwindowWin extends GLFWwindow {
 				case WM_SYSKEYUP: {
 					if ( wParam == VK_SHIFT ) {
 						// Special trick: release both shift keys on SHIFT up event
-						inputKey(window, GLFW.GLFW_KEY_LEFT_SHIFT, GLFW.GLFW_RELEASE);
-						inputKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT, GLFW.GLFW_RELEASE);
+						inputKey(window, GLFW_KEY_LEFT_SHIFT, GLFW_RELEASE);
+						inputKey(window, GLFW_KEY_RIGHT_SHIFT, GLFW_RELEASE);
 					} else if ( wParam == VK_SNAPSHOT ) {
 						// Key down is not reported for the print screen key
-						inputKey(window, GLFW.GLFW_KEY_PRINT_SCREEN, GLFW.GLFW_PRESS);
-						inputKey(window, GLFW.GLFW_KEY_PRINT_SCREEN, GLFW.GLFW_RELEASE);
+						inputKey(window, GLFW_KEY_PRINT_SCREEN, GLFW_PRESS);
+						inputKey(window, GLFW_KEY_PRINT_SCREEN, GLFW_RELEASE);
 					} else
-						inputKey(window, translateKey(wParam, lParam), GLFW.GLFW_RELEASE);
+						inputKey(window, translateKey(wParam, lParam), GLFW_RELEASE);
 
 					break;
 				}
 
-				case WM_LBUTTONDOWN: {
-					SetCapture(hWnd);
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_LEFT, GLFW.GLFW_PRESS);
-					return 0;
-				}
-
-				case WM_RBUTTONDOWN: {
-					SetCapture(hWnd);
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_RIGHT, GLFW.GLFW_PRESS);
-					return 0;
-				}
-
-				case WM_MBUTTONDOWN: {
-					SetCapture(hWnd);
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_MIDDLE, GLFW.GLFW_PRESS);
-					return 0;
-				}
-
+				case WM_LBUTTONDOWN:
+				case WM_RBUTTONDOWN:
+				case WM_MBUTTONDOWN:
 				case WM_XBUTTONDOWN: {
-					if ( HIWORD(wParam) == XBUTTON1 ) {
-						SetCapture(hWnd);
-						inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_4, GLFW.GLFW_PRESS);
-					} else if ( HIWORD(wParam) == XBUTTON2 ) {
-						SetCapture(hWnd);
-						inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_5, GLFW.GLFW_PRESS);
+					SetCapture(hWnd);
+
+					if ( uMsg == WM_LBUTTONDOWN )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_LEFT, GLFW_PRESS);
+					else if ( uMsg == WM_RBUTTONDOWN )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_RIGHT, GLFW_PRESS);
+					else if ( uMsg == WM_MBUTTONDOWN )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_MIDDLE, GLFW_PRESS);
+					else {
+						if ( HIWORD(wParam) == XBUTTON1 )
+							inputMouseClick(window, GLFW_MOUSE_BUTTON_4, GLFW_PRESS);
+						else if ( HIWORD(wParam) == XBUTTON2 )
+							inputMouseClick(window, GLFW_MOUSE_BUTTON_5, GLFW_PRESS);
+
+						return TRUE;
 					}
 
-					return 1;
-				}
-
-				case WM_LBUTTONUP: {
-					ReleaseCapture();
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_LEFT, GLFW.GLFW_RELEASE);
 					return 0;
 				}
 
-				case WM_RBUTTONUP: {
-					ReleaseCapture();
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_RIGHT, GLFW.GLFW_RELEASE);
-					return 0;
-				}
-
-				case WM_MBUTTONUP: {
-					ReleaseCapture();
-					inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_MIDDLE, GLFW.GLFW_RELEASE);
-					return 0;
-				}
-
+				case WM_LBUTTONUP:
+				case WM_RBUTTONUP:
+				case WM_MBUTTONUP:
 				case WM_XBUTTONUP: {
-					if ( HIWORD(wParam) == XBUTTON1 ) {
-						ReleaseCapture();
-						inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_4, GLFW.GLFW_RELEASE);
-					} else if ( HIWORD(wParam) == XBUTTON2 ) {
-						ReleaseCapture();
-						inputMouseClick(window, GLFW.GLFW_MOUSE_BUTTON_5, GLFW.GLFW_RELEASE);
+					ReleaseCapture();
+
+					if ( uMsg == WM_LBUTTONUP )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_LEFT, GLFW_RELEASE);
+					else if ( uMsg == WM_RBUTTONUP )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_RIGHT, GLFW_RELEASE);
+					else if ( uMsg == WM_MBUTTONUP )
+						inputMouseClick(window, GLFW_MOUSE_BUTTON_MIDDLE, GLFW_RELEASE);
+					else {
+						if ( HIWORD(wParam) == XBUTTON1 )
+							inputMouseClick(window, GLFW_MOUSE_BUTTON_4, GLFW_RELEASE);
+						else if ( HIWORD(wParam) == XBUTTON2 )
+							inputMouseClick(window, GLFW_MOUSE_BUTTON_5, GLFW_RELEASE);
+
+						return TRUE;
 					}
 
-					return 1;
+					return 0;
 				}
 
 				case WM_MOUSEMOVE: {
@@ -266,7 +257,7 @@ class GLFWwindowWin extends GLFWwindow {
 					if ( newCursorX != window.oldCursorX || newCursorY != window.oldCursorY ) {
 						int x, y;
 
-						if ( window.cursorMode == GLFW.GLFW_CURSOR_CAPTURED ) {
+						if ( window.cursorMode == GLFW_CURSOR_CAPTURED ) {
 							if ( focusedWindow != window )
 								return 0;
 
@@ -319,7 +310,7 @@ class GLFWwindowWin extends GLFWwindow {
 				}
 
 				case WM_SIZE: {
-					if ( window.cursorMode == GLFW.GLFW_CURSOR_CAPTURED )
+					if ( window.cursorMode == GLFW_CURSOR_CAPTURED )
 						PlatformWin.updateClipRect(window);
 
 					inputWindowSize(window, LOWORD(lParam), HIWORD(lParam));
@@ -327,7 +318,7 @@ class GLFWwindowWin extends GLFWwindow {
 				}
 
 				case WM_MOVE: {
-					if ( window.cursorMode == GLFW.GLFW_CURSOR_CAPTURED )
+					if ( window.cursorMode == GLFW_CURSOR_CAPTURED )
 						PlatformWin.updateClipRect(window);
 
 					inputWindowPos(window, LOWORD(lParam), HIWORD(lParam));
@@ -340,7 +331,7 @@ class GLFWwindowWin extends GLFWwindow {
 				}
 
 				case WM_SETCURSOR: {
-					if ( window.cursorMode == GLFW.GLFW_CURSOR_HIDDEN &&
+					if ( window.cursorMode == GLFW_CURSOR_HIDDEN &&
 					     window.handle == GetForegroundWindow() && LOWORD(lParam) == HTCLIENT ) {
 						SetCursor(NULL);
 						return TRUE;

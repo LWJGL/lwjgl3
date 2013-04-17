@@ -28,7 +28,9 @@ val KeySym = PrimitiveType("KeySym", XID)
 
 val KeyCode = PrimitiveType("KeyCode", unsigned_char)
 
+val XContext = PrimitiveType("XContext", int)
 val XPointer = PointerType(char)
+val XPointer_p = PointerType(XPointer)
 
 val Bool_p = PointerType(Bool)
 val Atom_p = PointerType(Atom)

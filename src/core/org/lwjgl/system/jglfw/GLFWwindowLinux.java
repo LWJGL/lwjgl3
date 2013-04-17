@@ -305,7 +305,7 @@ class GLFWwindowLinux extends GLFWwindow {
 				return;
 
 			case GenericEvent: {
-				if ( XGenericEventCookie.extensionGet(event) == x11.XI2.majorOpcode.get(0) && XGetEventData(x11.display, event) != 0 ) {
+				if ( XGenericEventCookie.extensionGet(event) == x11.xi.majorOpcode.get(0) && XGetEventData(x11.display, event) != 0 ) {
 					if ( XGenericEventCookie.evtypeGet(event) == XI_Motion ) {
 						ByteBuffer data = XGenericEventCookie.dataGet(event, XIDeviceEvent.SIZEOF);
 
@@ -358,13 +358,18 @@ class GLFWwindowLinux extends GLFWwindow {
 	}
 
 	static GLFWwindowLinux findWindowByHandle(long handle) {
-		for ( GLFWwindow window : windows ) {
+		/*for ( GLFWwindow window : windows ) {
 			GLFWwindowLinux linuxWindow = (GLFWwindowLinux)window;
 			if ( linuxWindow.handle == handle )
 				return linuxWindow;
-		}
+		}*/
 
-		return null;
+		// LWJGL TODO: this is horrible in Java, keep the above loop or use a map?
+		APIBuffer __buffer = apiBuffer();
+		if ( nXFindContext(x11.display, handle, x11.context, __buffer.address()) != 0 )
+			return null;
+
+		return memGlobalRefToObject(__buffer.pointerValue(0));
 	}
 
 	// Translates an X Window key to internal coding
