@@ -25,24 +25,22 @@ final class WindowUtil {
 			}
 		} else {
 			if ( focusedWindow == window ) {
-				int i;
+				focusedWindow = null;
+
+				if ( window.focusCallback != null )
+					window.focusCallback.invoke(window, focused);
 
 				// Release all pressed keyboard keys
-				for ( i = 0; i <= GLFW_KEY_LAST; i++ ) {
+				for ( int i = 0; i <= GLFW_KEY_LAST; i++ ) {
 					if ( window.keys[i] == GLFW_PRESS )
 						inputKey(window, i, GLFW_RELEASE);
 				}
 
 				// Release all pressed mouse buttons
-				for ( i = 0; i <= GLFW_MOUSE_BUTTON_LAST; i++ ) {
+				for ( int i = 0; i <= GLFW_MOUSE_BUTTON_LAST; i++ ) {
 					if ( window.mouseButtons[i] == GLFW_PRESS )
 						inputMouseClick(window, i, GLFW_RELEASE);
 				}
-
-				focusedWindow = null;
-
-				if ( window.focusCallback != null )
-					window.focusCallback.invoke(window, focused);
 			}
 		}
 	}

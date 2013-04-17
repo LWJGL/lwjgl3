@@ -5,7 +5,7 @@
  */
 package org.lwjgl.system.jglfw;
 
-import org.lwjgl.system.glfw.GLFW;
+import static org.lwjgl.system.jglfw.JGLFW.*;
 
 public class GLFWwindow {
 
@@ -28,8 +28,8 @@ public class GLFWwindow {
 	boolean stickyMouseButtons;
 	double  cursorPosX, cursorPosY;
 	int cursorMode;
-	byte[] mouseButtons = new byte[GLFW.GLFW_MOUSE_BUTTON_LAST + 1];
-	byte[] keys         = new byte[GLFW.GLFW_KEY_LAST + 1];
+	byte[] mouseButtons = new byte[GLFW_MOUSE_BUTTON_LAST + 1];
+	byte[] keys         = new byte[GLFW_KEY_LAST + 1];
 
 	// OpenGL extensions and context attributes
 	int glMajor, glMinor, glRevision;

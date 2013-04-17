@@ -6,7 +6,7 @@
 package org.lwjgl.system.jglfw;
 
 import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.glfw.GLFW.*;
+import static org.lwjgl.system.jglfw.JGLFW.*;
 import static org.lwjgl.system.windows.Mmsystem.*;
 
 final class JoystickWin {

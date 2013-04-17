@@ -10,10 +10,11 @@ import org.lwjgl.system.linux.*
 fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
+		"<X11/Xresource.h>",
 	    "<X11/Xutil.h>"
 	)
 
-	javaDoc("Native bindings to Xutil.h.")
+	javaDoc("Native bindings to &lt;X11/Xutil.h&gt;.")
 
 	IntConstant.block(
 		"Definition for flags of {@link XWMHints}",
@@ -90,6 +91,40 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	    Allocates and returns a pointer to a {@link XSizeHints} structure. Note that all fields in the {@link XSizeHints} structure are initially set to zero.
 	    If insufficient memory is available, {@code XAllocSizeHints} returns $NULL. To free the memory allocated to this structure, use {@link Xlib#XFree}.
 	    """
+	)
+
+	XContext.func(
+		"XUniqueContext",
+	    "Creates a unique context."
+	)
+
+	int.func(
+		"XSaveContext",
+		"Save a data value that corresponds to a resource ID and context type.",
+
+		DISPLAY,
+		XID.IN("rid", "the resource ID with which the data is associated"),
+		XContext.IN("context", "the context type to which the data belongs"),
+		const _ XPointer.IN("data", "the data to be associated with the window and type")
+	)
+
+	int.func(
+		"XFindContext",
+		"Returns the data associated with a resource ID and type.",
+
+		DISPLAY,
+		XID.IN("rid", "the resource ID with which the data is associated"),
+		XContext.IN("context", " the context type to which the data belongs"),
+		XPointer_p.OUT("data_return", "returns the data")
+	)
+
+	int.func(
+		"XDeleteContext",
+		"Deletes an entry for the given resource ID and type.",
+
+		DISPLAY,
+		XID.IN("rid", "the resource ID with which the data is associated"),
+		XContext.IN("context", "the context type to which the data belongs")
 	)
 
 }

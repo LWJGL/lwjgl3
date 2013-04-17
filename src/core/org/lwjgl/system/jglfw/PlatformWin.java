@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
-import org.lwjgl.system.glfw.GLFW;
 import org.lwjgl.system.windows.*;
 import org.lwjgl.system.windows.opengl.WindowsGLContext;
 
@@ -419,6 +418,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			getFullWindowSize(window, width, height, rect);
 
+			// Calculate width and height of full window
 			int fullWidth = RECT.rightGet(rect) - RECT.leftGet(rect);
 			int fullHeight = RECT.bottomGet(rect) - RECT.topGet(rect);
 
@@ -440,19 +440,6 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	public void pollEvents() {
 		APIBuffer __buffer = apiBuffer();
 
-		GLFWwindowWin window = (GLFWwindowWin)focusedWindow;
-		if ( window != null ) {
-			ByteBuffer rect = __buffer.buffer();
-			GetClientRect(window.handle, rect);
-
-			int width = RECT.rightGet(rect);
-			int height = RECT.bottomGet(rect);
-
-			window.cursorCentered = false;
-			window.oldCursorX = width / 2;
-			window.oldCursorY = height / 2;
-		}
-
 		ByteBuffer msg = __buffer.buffer();
 		while ( PeekMessage(msg, NULL, 0, 0, PM_REMOVE) != 0 ) {
 			if ( MSG.messageGet(msg) == WM_QUIT ) {
@@ -466,7 +453,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			}
 		}
 
-		window = (GLFWwindowWin)focusedWindow;
+		GLFWwindowWin window = (GLFWwindowWin)focusedWindow;
 		if ( window != null ) {
 			// LSHIFT/RSHIFT fixup (keys tend to "stick" without this fix)
 			// This is the only async event handling in GLFW, but it solves some
@@ -478,15 +465,15 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 				// See if this differs from our belief of what has happened
 				// (we only have to check for lost key up events)
-				if ( lshift_up && window.keys[GLFW.GLFW_KEY_LEFT_SHIFT] == 1 )
-					inputKey(window, GLFW.GLFW_KEY_LEFT_SHIFT, GLFW.GLFW_RELEASE);
+				if ( lshift_up && window.keys[GLFW_KEY_LEFT_SHIFT] == 1 )
+					inputKey(window, GLFW_KEY_LEFT_SHIFT, GLFW_RELEASE);
 
-				if ( rshift_up && window.keys[GLFW.GLFW_KEY_RIGHT_SHIFT] == 1 )
-					inputKey(window, GLFW.GLFW_KEY_RIGHT_SHIFT, GLFW.GLFW_RELEASE);
+				if ( rshift_up && window.keys[GLFW_KEY_RIGHT_SHIFT] == 1 )
+					inputKey(window, GLFW_KEY_RIGHT_SHIFT, GLFW_RELEASE);
 			}
 
 			// Did the cursor move in an focused window that has captured the cursor
-			if ( window.cursorMode == GLFW.GLFW_CURSOR_CAPTURED && !window.cursorCentered ) {
+			if ( window.cursorMode == GLFW_CURSOR_CAPTURED && !window.cursorCentered ) {
 				ByteBuffer rect = __buffer.buffer();
 				GetClientRect(window.handle, rect);
 
@@ -519,13 +506,13 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	@Override
 	public void setCursorMode(GLFWwindowWin window, int mode) {
 		switch ( mode ) {
-			case GLFW.GLFW_CURSOR_NORMAL:
+			case GLFW_CURSOR_NORMAL:
 				showCursor(window);
 				break;
-			case GLFW.GLFW_CURSOR_HIDDEN:
+			case GLFW_CURSOR_HIDDEN:
 				hideCursor(window);
 				break;
-			case GLFW.GLFW_CURSOR_CAPTURED:
+			case GLFW_CURSOR_CAPTURED:
 				captureCursor(window);
 				break;
 		}
@@ -801,6 +788,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			getFullWindowSize(window, wndconfig.width, wndconfig.height, rect);
 
+			// Calculate width and height of full window
 			fullWidth = RECT.rightGet(rect) - RECT.leftGet(rect);
 			fullHeight = RECT.bottomGet(rect) - RECT.topGet(rect);
 		}
@@ -821,7 +809,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( window.handle == NULL ) {
 			memGlobalRefDelete(window.wndprocRef);
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to create window");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to create window");
 			return false;
 		}
 
@@ -857,7 +845,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		long classAtom = RegisterClassEx(in);
 		if ( classAtom == NULL )
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to register window class");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to register window class");
 
 		return classAtom;
 	}
@@ -880,7 +868,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		DEVMODE.bitsPerPelSet(dm, bpp < 15 || 24 <= bpp ? 32 : bpp);
 
 		if ( ChangeDisplaySettingsEx(monitor.getName(), dm, NULL, CDS_FULLSCREEN, NULL) != DISP_CHANGE_SUCCESSFUL ) {
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set video mode");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to set video mode");
 			return false;
 		}
 
@@ -893,6 +881,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		RECT.rightSet(rect, clientWidth);
 		RECT.bottomSet(rect, clientHeight);
 
+		// Adjust according to window styles
 		AdjustWindowRectEx(rect, window.dwStyle, FALSE, window.dwExStyle);
 	}
 
@@ -906,7 +895,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		window.dc = GetDC(window.handle);
 		if ( window.dc == NULL ) {
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve DC for window");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve DC for window");
 			return false;
 		}
 
@@ -970,7 +959,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			IntBuffer pixelFormatOut = BufferUtils.createIntBuffer(1);
 			if ( wglChoosePixelFormatARB(window.dc, attribs, null, pixelFormatOut, count) == FALSE ) {
-				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
+				inputError(GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
 				return false;
 			}
 
@@ -998,24 +987,24 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			pixelFormat = ChoosePixelFormat(window.dc, pfd);
 			if ( pixelFormat == 0 ) {
-				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
+				inputError(GLFW_PLATFORM_ERROR, "WGL: Failed to find a suitable pixel format");
 				return false;
 			}
 		}
 
 		if ( DescribePixelFormat(window.dc, pixelFormat, pfd) == FALSE ) {
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve PFD for selected pixel format");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to retrieve PFD for selected pixel format");
 			return false;
 		}
 
 		int flags = PIXELFORMATDESCRIPTOR.flagsGet(pfd);
 		if ( (flags & PFD_GENERIC_ACCELERATED) == 0 && (flags & PFD_GENERIC_FORMAT) != 0 ) {
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to find an accelerated pixel format");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to find an accelerated pixel format");
 			return false;
 		}
 
 		if ( SetPixelFormat(window.dc, pixelFormat, pfd) == FALSE ) {
-			inputError(GLFW.GLFW_PLATFORM_ERROR, "Win32: Failed to set selected pixel format");
+			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to set selected pixel format");
 			return false;
 		}
 
@@ -1031,17 +1020,17 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 				flags |= WGL_CONTEXT_DEBUG_BIT_ARB;
 
 			if ( wndconfig.glProfile != 0 ) {
-				if ( wndconfig.glProfile == GLFW.GLFW_OPENGL_CORE_PROFILE )
+				if ( wndconfig.glProfile == GLFW_OPENGL_CORE_PROFILE )
 					mask |= WGL_CONTEXT_CORE_PROFILE_BIT_ARB;
-				else if ( wndconfig.glProfile == GLFW.GLFW_OPENGL_COMPAT_PROFILE )
+				else if ( wndconfig.glProfile == GLFW_OPENGL_COMPAT_PROFILE )
 					mask |= WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB;
 			}
 
 			if ( wndconfig.glRobustness != 0 ) {
 				if ( window.ARB_create_context_robustness ) {
-					if ( wndconfig.glRobustness == GLFW.GLFW_NO_RESET_NOTIFICATION )
+					if ( wndconfig.glRobustness == GLFW_NO_RESET_NOTIFICATION )
 						strategy = WGL_NO_RESET_NOTIFICATION_ARB;
-					else if ( wndconfig.glRobustness == GLFW.GLFW_LOSE_CONTEXT_ON_RESET )
+					else if ( wndconfig.glRobustness == GLFW_LOSE_CONTEXT_ON_RESET )
 						strategy = WGL_LOSE_CONTEXT_ON_RESET_ARB;
 
 					flags |= WGL_CONTEXT_ROBUST_ACCESS_BIT_ARB;
@@ -1068,19 +1057,19 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			context = wglCreateContextAttribsARB(window.dc, share, attribs);
 			if ( context == NULL ) {
-				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: Failed to create OpenGL context");
+				inputError(GLFW_VERSION_UNAVAILABLE, "WGL: Failed to create OpenGL context");
 				return false;
 			}
 		} else {
 			context = wglCreateContext(window.dc);
 			if ( context == NULL ) {
-				inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to create OpenGL context");
+				inputError(GLFW_PLATFORM_ERROR, "WGL: Failed to create OpenGL context");
 				return false;
 			}
 
 			if ( share != NULL ) {
 				if ( wglShareLists(share, context) == FALSE ) {
-					inputError(GLFW.GLFW_PLATFORM_ERROR, "WGL: Failed to enable sharing with specified OpenGL context");
+					inputError(GLFW_PLATFORM_ERROR, "WGL: Failed to enable sharing with specified OpenGL context");
 					return false;
 				}
 			}
@@ -1122,7 +1111,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( wndconfig.glForward ) {
 			if ( !window.ARB_create_context ) {
-				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: A forward compatible OpenGL context requested but WGL_ARB_create_context is unavailable");
+				inputError(GLFW_VERSION_UNAVAILABLE, "WGL: A forward compatible OpenGL context requested but WGL_ARB_create_context is unavailable");
 				return _GLFW_RECREATION_IMPOSSIBLE;
 			}
 
@@ -1131,7 +1120,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		if ( wndconfig.glProfile != 0 ) {
 			if ( !window.ARB_create_context_profile ) {
-				inputError(GLFW.GLFW_VERSION_UNAVAILABLE, "WGL: OpenGL profile requested but WGL_ARB_create_context_profile is unavailable");
+				inputError(GLFW_VERSION_UNAVAILABLE, "WGL: OpenGL profile requested but WGL_ARB_create_context_profile is unavailable");
 				return _GLFW_RECREATION_IMPOSSIBLE;
 			}
 
@@ -1213,7 +1202,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	static void hideCursor(GLFWwindowWin window) {
 		ReleaseCapture();
 		ClipCursor(null);
-		ShowCursor(TRUE);
+
+		if ( window.cursorHidden ) {
+			ShowCursor(TRUE);
+			window.cursorHidden = false;
+		}
 
 		APIBuffer __buffer = apiBuffer();
 		ByteBuffer pos = __buffer.buffer();
@@ -1225,7 +1218,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	// Capture mouse cursor
 	static void captureCursor(GLFWwindowWin window) {
-		ShowCursor(FALSE);
+		if ( !window.cursorHidden ) {
+			ShowCursor(FALSE);
+			window.cursorHidden = true;
+		}
+
 		updateClipRect(window);
 		SetCapture(window.handle);
 	}
@@ -1234,7 +1231,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	static void showCursor(GLFWwindowWin window) {
 		ReleaseCapture();
 		ClipCursor(null);
-		ShowCursor(TRUE);
+
+		if ( window.cursorHidden ) {
+			ShowCursor(TRUE);
+			window.cursorHidden = false;
+		}
 
 		APIBuffer __buffer = apiBuffer();
 		ByteBuffer pos = __buffer.buffer();

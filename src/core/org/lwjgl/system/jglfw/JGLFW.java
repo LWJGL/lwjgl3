@@ -7,7 +7,6 @@ package org.lwjgl.system.jglfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.glfw.GLFWgammaramp;
-import org.lwjgl.system.glfw.WindowCallback;
 
 import java.nio.ByteBuffer;
 import java.nio.DoubleBuffer;
