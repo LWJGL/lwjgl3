@@ -5,7 +5,6 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
-import org.lwjgl.system.windows.GLFWWin32;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -15,7 +14,7 @@ import static org.lwjgl.system.windows.GLFWWin32.*;
 import static org.lwjgl.system.windows.WinGDI.*;
 import static org.lwjgl.system.windows.WinUser.*;
 
-public class MultipleWindows {
+public final class MultipleWindows {
 
 	private MultipleWindows() {
 	}
@@ -37,7 +36,7 @@ public class MultipleWindows {
 	private static void demo() {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_DECORATED, GL_FALSE);
+		//glfwWindowHint(GLFW_DECORATED, GL_FALSE);
 
 		long[] windows = new long[4];
 		GLContext[] contexts = new GLContext[4];
@@ -86,7 +85,7 @@ public class MultipleWindows {
 
 				long HWND = glfwGetWin32Window(windows[i]);
 				long HDC = GetDC(HWND);
-				contexts[i].makeCurrent();
+				contexts[i].makeCurrent(HDC);
 
 				glClear(GL_COLOR_BUFFER_BIT);
 				SwapBuffers(HDC);

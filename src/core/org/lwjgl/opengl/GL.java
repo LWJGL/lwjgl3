@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GLX14.*;
+import static org.lwjgl.opengl.GLXARBGetProcAddress.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
 import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -30,7 +32,7 @@ public final class GL {
 	private static final FunctionProvider functionProvider;
 
 	static {
-		final String libName;
+		String libName;
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS:
 				libName = "opengl32.dll";
@@ -44,28 +46,71 @@ public final class GL {
 				throw new IllegalStateException();
 		}
 
-		functionProvider = new FunctionProvider() {
+		final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
 
-			private final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
+		switch ( LWJGLUtil.getPlatform() ) {
+			case WINDOWS:
+				functionProvider = new FunctionProvider() {
+					@Override
+					public long getFunctionAddress(String functionName) {
+						ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = wglGetProcAddress(nameBuffer);
+						if ( address == NULL ) {
+							address = OPENGL.getFunctionAddress(nameBuffer);
+							if ( address == NULL )
+								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+						}
 
-			@Override
-			public long getFunctionAddress(String functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
-				long address = wglGetProcAddress(nameBuffer);
-				if ( address == NULL ) {
-					address = OPENGL.getFunctionAddress(nameBuffer);
-					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-				}
+						return address;
+					}
 
-				return address;
-			}
+					@Override
+					public void destroy() {
+						OPENGL.destroy();
+					}
+				};
+				break;
+			case LINUX:
+				functionProvider = new FunctionProvider() {
 
-			@Override
-			public void destroy() {
-				OPENGL.destroy();
-			}
-		};
+					final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
+					final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+
+					private long getGLXFunctionAddress(ByteBuffer nameBuffer) {
+						if ( glXGetProcAddress != NULL )
+							return nglXGetProcAddress(memAddress(nameBuffer), glXGetProcAddress);
+
+						if ( glXGetProcAddressARB != NULL )
+							return nglXGetProcAddressARB(memAddress(nameBuffer), glXGetProcAddressARB);
+
+						return NULL;
+					}
+
+					@Override
+					public long getFunctionAddress(String functionName) {
+						ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = getGLXFunctionAddress(nameBuffer);
+						if ( address == NULL ) {
+							address = OPENGL.getFunctionAddress(nameBuffer);
+							if ( address == NULL )
+								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+						}
+
+						return address;
+					}
+
+					@Override
+					public void destroy() {
+						OPENGL.destroy();
+					}
+				};
+				break;
+			case MACOSX:
+				throw new UnsupportedOperationException("not implemented yet");
+			default:
+				throw new IllegalStateException();
+		}
+
 	}
 
 	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
@@ -204,6 +249,8 @@ public final class GL {
 				addWGLExtensions(supportedExtensions);
 				break;
 			case LINUX:
+				addGLXExtensions(supportedExtensions);
+				break;
 			case MACOSX:
 			default:
 				throw new UnsupportedOperationException();
@@ -229,6 +276,10 @@ public final class GL {
 		StringTokenizer tokenizer = new StringTokenizer(wglExtensions);
 		while ( tokenizer.hasMoreTokens() )
 			supportedExtensions.add(tokenizer.nextToken());
+	}
+
+	private static void addGLXExtensions(Set<String> supportedExtensions) {
+		// FIXME
 	}
 
 	static long getFunctionAddress(FunctionProvider provider, String functionName, boolean fc) {

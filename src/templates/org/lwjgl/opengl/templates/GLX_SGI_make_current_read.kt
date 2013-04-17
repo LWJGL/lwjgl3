@@ -28,9 +28,9 @@ fun GLX_SGI_make_current_read() = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SG
 		"Associates two {@code GLXDrawables} with the current rendering context.",
 
 		DISPLAY,
-		GLXDrawable.IN("draw", "the draw drawable"),
-		GLXDrawable.IN("read", "the read drawable"),
-		GLXContext.IN("ctx", "the current context")
+		nullable _ GLXDrawable.IN("draw", "the draw drawable"),
+		nullable _ GLXDrawable.IN("read", "the read drawable"),
+		nullable _ GLXContext.IN("ctx", "the current context")
 	)
 
 	GLXDrawable.func(

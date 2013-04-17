@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_gpu_affinity() = "WGLNVGpuAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
+fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
 	nativeImport (
 		"OpenGL.h",
 	    "WGL.h"
@@ -57,6 +57,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGpuAffinity".nativeClassWGL("WGL_NV_gpu_affini
 				function.
 				"""
 			)
+			javaImport("org.lwjgl.system.windows.*")
 			nativeImport("WindowsLWJGL.h", "WGL.h")
 			DWORD.member("cb")
 			TCHAR.member(nativeName = "DeviceName", size = 32, nullTerminated = true)

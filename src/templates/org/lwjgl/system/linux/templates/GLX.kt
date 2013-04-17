@@ -21,6 +21,25 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 	javaDoc("Native bindings to GLX.")
 
 	IntConstant.block(
+		"Errors.",
+
+		"GLXBadContext" _ 0,
+		"GLXBadContextState" _ 1,
+		"GLXBadDrawable" _ 2,
+		"GLXBadPixmap" _ 3,
+		"GLXBadContextTag" _ 4,
+		"GLXBadCurrentWindow" _ 5,
+		"GLXBadRenderRequest" _ 6,
+		"GLXBadLargeRequest" _ 7,
+		"GLXUnsupportedPrivateRequest" _ 8,
+		"GLXBadFBConfig" _ 9,
+		"GLXBadPbuffer" _ 10,
+		"GLXBadCurrentDrawable" _ 11,
+		"GLXBadWindow" _ 12,
+		"GLXBadProfileARB" _ 13
+	).noPrefix()
+
+	IntConstant.block(
 		"Names for attributes to {@link #glXGetConfig}.",
 
 		"USE_GL" _ 1,
@@ -105,7 +124,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 
 		DISPLAY,
 		XVisualInfo_p.IN("visual", "a pointer to an {@link XVisualInfo} structure"),
-		GLXContext.IN("share_list", "the GLXContext to share objects with"),
+		nullable _ GLXContext.IN("share_list", "the GLXContext to share objects with"),
 		Bool.IN("direct", "whether direct rendering is requested")
 	)
 
@@ -114,8 +133,8 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 		"Makes a context current in the current thread",
 
 		DISPLAY,
-		GLXDrawable.IN("draw", "the draw GLXdrawable"),
-		GLXContext.IN("ctx", "the GLXContext to make current")
+		nullable _ GLXDrawable.IN("draw", "the draw GLXdrawable"),
+		nullable _ GLXContext.IN("ctx", "the GLXContext to make current")
 	)
 
 	void.func(

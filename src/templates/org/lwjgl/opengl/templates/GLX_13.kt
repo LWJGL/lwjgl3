@@ -185,9 +185,9 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 		"Makes a GLXContext current in the current thread.",
 
 		DISPLAY,
-		GLXDrawable.IN("draw", "the draw GLXDrawable"),
-		GLXDrawable.IN("read", "the read GLXDrawable"),
-		GLXContext.IN("ctx", "the GLXContext")
+		nullable _ GLXDrawable.IN("draw", "the draw GLXDrawable"),
+		nullable _ GLXDrawable.IN("read", "the read GLXDrawable"),
+		nullable _ GLXContext.IN("ctx", "the GLXContext")
 	)
 
 	GLXDrawable.func(

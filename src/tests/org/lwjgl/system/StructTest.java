@@ -10,6 +10,7 @@ import org.lwjgl.system.linux.X;
 import org.lwjgl.system.linux.XColor;
 import org.lwjgl.system.linux.XGCValues;
 import org.lwjgl.system.windows.GLYPHMETRICSFLOAT;
+import org.lwjgl.system.windows.POINTFLOAT;
 import org.lwjgl.system.windows.WNDCLASSEX;
 import org.testng.annotations.Test;
 
@@ -31,8 +32,8 @@ public class StructTest {
 				assertEquals(GLYPHMETRICSFLOAT.BLACKBOXX, 0);
 				assertEquals(GLYPHMETRICSFLOAT.BLOCKBOXY, 4);
 				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN, 8);
-				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN_X, 8);
-				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN_Y, 12);
+				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN + POINTFLOAT.X, 8);
+				assertEquals(GLYPHMETRICSFLOAT.GLYPHORIGIN + POINTFLOAT.Y, 12);
 				assertEquals(GLYPHMETRICSFLOAT.CELLINCX, 16);
 				assertEquals(GLYPHMETRICSFLOAT.CELLINCY, 20);
 				break;

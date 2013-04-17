@@ -20,7 +20,7 @@ public class LinuxLibrary implements DynamicLinkLibrary {
 	public LinuxLibrary(String name) {
 		this.name = name;
 
-		this.handle = dlopen(name, RTLD_LAZY);
+		this.handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
 		if ( handle == 0 ) // TODO: better error handling
 			throw new RuntimeException("Failed to dynamically load library: " + name);
 	}

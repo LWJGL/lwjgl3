@@ -10,7 +10,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** Instances of this class may be passed to the {@link Xlib#XSetErrorHandler(XErrorHandler)} method. */
 public class XErrorHandler {
 
-	private static final String[] X_ERRORS = new String[] {
+	private static final String[] X_ERRORS = {
 		"Success",
 		"BadRequest",
 		"BadValue",

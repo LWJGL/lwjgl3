@@ -82,7 +82,7 @@ public final class JGLFWTest {
 		glfwSetMonitorCallback(new GLFWmonitorfun() {
 			@Override
 			public void invoke(GLFWmonitor monitor, int event) {
-				System.out.println("Monitor " + monitor.getDescription() + " was " + (event == 0x00061000 ? "connected" : "disconnected"));
+				System.out.println("Monitor " + monitor.getName() + " was " + (event == 0x00061000 ? "connected" : "disconnected"));
 			}
 		});
 

@@ -103,10 +103,148 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Window classes used by {@link Xlib#XCreateWindow}.",
+		"""
+		Event names. Used in "type" field in {@link XEvent} structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are
+		reserved in the protocol for errors and replies.
+		""",
 
-		"InputOutput" _ 1,
-		"InputOnly" _ 2
+		"KeyPress" _ 2,
+		"KeyRelease" _ 3,
+		"ButtonPress" _ 4,
+		"ButtonRelease" _ 5,
+		"MotionNotify" _ 6,
+		"EnterNotify" _ 7,
+		"LeaveNotify" _ 8,
+		"FocusIn" _ 9,
+		"FocusOut" _ 10,
+		"KeymapNotify" _ 11,
+		"Expose" _ 12,
+		"GraphicsExpose" _ 13,
+		"NoExpose" _ 14,
+		"VisibilityNotify" _ 15,
+		"CreateNotify" _ 16,
+		"DestroyNotify" _ 17,
+		"UnmapNotify" _ 18,
+		"MapNotify" _ 19,
+		"MapRequest" _ 20,
+		"ReparentNotify" _ 21,
+		"ConfigureNotify" _ 22,
+		"ConfigureRequest" _ 23,
+		"GravityNotify" _ 24,
+		"ResizeRequest" _ 25,
+		"CirculateNotify" _ 26,
+		"CirculateRequest" _ 27,
+		"PropertyNotify" _ 28,
+		"SelectionClear" _ 29,
+		"SelectionRequest" _ 30,
+		"SelectionNotify" _ 31,
+		"ColormapNotify" _ 32,
+		"ClientMessage" _ 33,
+		"MappingNotify" _ 34,
+		"GenericEvent" _ 35,
+		"LASTEvent" _ 36
+	)
+
+	IntConstant.block(
+		"Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events.",
+
+		"ShiftMask".expr<Int>("1<<0"),
+		"LockMask".expr<Int>("1<<1"),
+		"ControlMask".expr<Int>("1<<2"),
+		"Mod1Mask".expr<Int>("1<<3"),
+		"Mod2Mask".expr<Int>("1<<4"),
+		"Mod3Mask".expr<Int>("1<<5"),
+		"Mod4Mask".expr<Int>("1<<6"),
+		"Mod5Mask".expr<Int>("1<<7")
+	)
+
+	IntConstant.block(
+		"modifier names. Used to build a SetModifierMapping request or to read a GetModifierMapping request. These correspond to the masks defined above.",
+
+		"ShiftMapIndex" _ 0,
+		"LockMapIndex" _ 1,
+		"ControlMapIndex" _ 2,
+		"Mod1MapIndex" _ 3,
+		"Mod2MapIndex" _ 4,
+		"Mod3MapIndex" _ 5,
+		"Mod4MapIndex" _ 6,
+		"Mod5MapIndex" _ 7
+	)
+
+	IntConstant.block(
+		"button masks. Used in same manner as Key masks above. Not to be confused with button names below.",
+
+		"Button1Mask".expr<Int>("1<<8"),
+		"Button2Mask".expr<Int>("1<<9"),
+		"Button3Mask".expr<Int>("1<<10"),
+		"Button4Mask".expr<Int>("1<<11"),
+		"Button5Mask".expr<Int>("1<<12"),
+		"AnyModifier".expr<Int>("1<<15")
+	)
+
+	IntConstant.block(
+		"""
+		button names. Used as arguments to GrabButton and as detail in ButtonPress and ButtonRelease events. Not to be confused with button masks above. Note
+		that 0 is already defined above as "AnyButton".
+		""",
+
+		"Button1" _ 1,
+		"Button2" _ 2,
+		"Button3" _ 3,
+		"Button4" _ 4,
+		"Button5" _ 5
+	)
+
+	IntConstant.block(
+		"Notify modes",
+
+		"NotifyNormal" _ 0,
+		"NotifyGrab" _ 1,
+		"NotifyUngrab" _ 2,
+		"NotifyWhileGrabbed" _ 3,
+		"NotifyHint" _ 1
+	)
+
+	IntConstant.block(
+		"Notify detail",
+
+		"NotifyAncestor" _ 0,
+		"NotifyVirtual" _ 1,
+		"NotifyInferior" _ 2,
+		"NotifyNonlinear" _ 3,
+		"NotifyNonlinearVirtual" _ 4,
+		"NotifyPointer" _ 5,
+		"NotifyPointerRoot" _ 6,
+		"NotifyDetailNone" _ 7
+	)
+
+	IntConstant.block(
+		"Visibility notify",
+
+		"VisibilityUnobscured" _ 0,
+		"VisibilityPartiallyObscured" _ 1,
+		"VisibilityFullyObscured" _ 2
+	)
+
+	IntConstant.block(
+		"Circulation request",
+
+		"PlaceOnTop" _ 0,
+		"PlaceOnBottom" _ 1
+	)
+
+		IntConstant.block(
+		"Property notification",
+
+		"PropertyNewValue" _ 0,
+		"PropertyDelete" _ 1
+	)
+
+	IntConstant.block(
+		"Color Map notification",
+
+		"ColormapUninstalled" _ 0,
+		"ColormapInstalled" _ 1
 	)
 
 	IntConstant.block(
@@ -127,6 +265,41 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
+		"AllowEvents modes",
+
+		"AsyncPointer" _ 0,
+		"SyncPointer" _ 1,
+		"ReplayPointer" _ 2,
+		"AsyncKeyboard" _ 3,
+		"SyncKeyboard" _ 4,
+		"ReplayKeyboard" _ 5,
+		"AsyncBoth" _ 6,
+		"SyncBoth" _ 7
+	)
+
+	IntConstant.block(
+		"For {@link Xlib#XCreateColormap}.",
+
+		"AllocNone" _ 0,
+		"AllocAll" _ 1
+	)
+
+	IntConstant.block(
+		"Used in {@link Xlib#XSetInputFocus}, {@link Xlib#XGetInputFocus}.",
+
+		"RevertToNone".expr<Int>("None"),
+		"RevertToPointerRoot".expr<Int>("PointerRoot"),
+		"RevertToParent" _ 2
+	)
+
+	IntConstant.block(
+		"Window classes used by {@link Xlib#XCreateWindow}.",
+
+		"InputOutput" _ 1,
+		"InputOnly" _ 2
+	)
+
+	IntConstant.block(
 		"SCREEN SAVER STUFF",
 
 		"DontPreferBlanking" _ 0,
@@ -139,14 +312,6 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 		"DefaultExposures" _ 2,
 		"ScreenSaverReset" _ 0,
 		"ScreenSaverActive" _ 1
-	)
-
-	IntConstant.block(
-		"Used in {@link Xlib#XSetInputFocus}, {@link Xlib#XGetInputFocus}.",
-
-		"RevertToNone".expr<Int>("None"),
-		"RevertToPointerRoot".expr<Int>("PointerRoot"),
-		"RevertToParent" _ 2
 	)
 
 	IntConstant.block(

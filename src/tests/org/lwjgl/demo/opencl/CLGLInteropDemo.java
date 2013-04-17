@@ -857,8 +857,8 @@ public class CLGLInteropDemo {
 			private double dragMaxX;
 			private double dragMaxY;
 
-			private int mouseX;
-			private int mouseY;
+			private double mouseX;
+			private double mouseY;
 
 			@Override
 			public void windowSize(long window, final int width, final int height) {
@@ -952,7 +952,7 @@ public class CLGLInteropDemo {
 			}
 
 			@Override
-			public void cursorPos(long window, int xpos, int ypos) {
+			public void cursorPos(long window, double xpos, double ypos) {
 				mouseX = xpos;
 				mouseY = height - ypos;
 

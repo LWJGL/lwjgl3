@@ -11,7 +11,6 @@ import java.util.List;
 public class GLFWmonitor {
 
 	private final String name;
-	private final String description;
 
 	private final int width;
 	private final int height;
@@ -20,19 +19,14 @@ public class GLFWmonitor {
 
 	private ByteBuffer originalGammaRamp;
 
-	public GLFWmonitor(String name, String description, int width, int height) {
+	public GLFWmonitor(String name, int width, int height) {
 		this.name = name;
-		this.description = description;
 		this.width = width;
 		this.height = height;
 	}
 
 	public String getName() {
 		return name;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 	public int getWidth() {
@@ -63,7 +57,6 @@ public class GLFWmonitor {
 	public String toString() {
 		StringBuilder sb = new StringBuilder("GLFWmonitor{");
 		sb.append("name='").append(name).append('\'');
-		sb.append(", description='").append(description).append('\'');
 		sb.append(", width=").append(width);
 		sb.append(", height=").append(height);
 		sb.append('}');

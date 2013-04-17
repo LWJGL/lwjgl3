@@ -44,7 +44,7 @@ public abstract class WindowCallbackAdapter extends WindowCallback {
 	}
 
 	@Override
-	public void cursorPos(long window, int xpos, int ypos) {
+	public void cursorPos(long window, double xpos, double ypos) {
 	}
 
 	@Override

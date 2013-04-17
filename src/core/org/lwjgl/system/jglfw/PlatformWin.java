@@ -69,7 +69,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	private final TimerWin timer = new TimerWin();
 
-	private ThreadLocal<GLFWwindowWin> currentWindow = new ThreadLocal<GLFWwindowWin>();
+	private final ThreadLocal<GLFWwindowWin> currentWindow = new ThreadLocal<GLFWwindowWin>();
 
 	@Override
 	public boolean init() {
@@ -145,9 +145,9 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			long dc = CreateDC(DISPLAY, adapter, null, null);
 
-			GLFWmonitor monitor = new GLFWmonitor(
-				memDecodeUTF16(adapter, memStrLen2(adapter)), // Example: "\\.\DISPLAY1"
+			GLFWmonitor monitor = new GLFWmonitorWin(
 				memDecodeUTF16(device, memStrLen2(device)), // Example  : "Dell U2410(DP)"
+				memDecodeUTF16(adapter, memStrLen2(adapter)), // Example: "\\.\DISPLAY1"
 				GetDeviceCaps(dc, HORZSIZE),
 				GetDeviceCaps(dc, VERTSIZE)
 			);
@@ -186,7 +186,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	public List<GLFWvidmode> getVideoModes(GLFWmonitor monitor) {
 		List<GLFWvidmode> vidmodes = new ArrayList<GLFWvidmode>(64);
 
-		ByteBuffer monitorName = memEncodeUTF16(monitor.getName());
+		ByteBuffer monitorName = memEncodeUTF16(((GLFWmonitorWin)monitor).getAdapterName());
 
 		int modeIndex = 0;
 		while ( true ) {
@@ -347,7 +347,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	@Override
 	public void makeContextCurrent(GLFWwindowWin window) {
 		if ( window != null )
-			wglMakeCurrent(window.dc, window.context.getHandle());
+			window.context.makeCurrent(window.dc);
 		else
 			wglMakeCurrent(NULL, NULL);
 
@@ -850,8 +850,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			icon,
 			nLoadCursor(NULL, IDC_ARROW),
 			NULL,
-			null,
-			GLFW_WNDCLASSNAME,
+			NULL,
+			memAddress(memEncodeUTF16(GLFW_WNDCLASSNAME)),
 			NULL
 		);
 
@@ -896,11 +896,9 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		AdjustWindowRectEx(rect, window.dwStyle, FALSE, window.dwExStyle);
 	}
 
-	private static int setWGLattrib(IntBuffer attribs, int index, int attribName, int attribValue) {
-		attribs.put(index++, attribName);
-		attribs.put(index++, attribValue);
-
-		return index;
+	private static void setWGLattrib(IntBuffer attribs, int attribName, int attribValue) {
+		attribs.put(attribName);
+		attribs.put(attribValue);
 	}
 
 	private boolean createContext(GLFWwindowWin window, GLFWwndconfig wndconfig, GLFWfbconfig fbconfig) {
@@ -917,58 +915,58 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		ByteBuffer pfd = null;
 
 		if ( window.ARB_pixel_format ) {
-			int index = 0;
 			IntBuffer count = BufferUtils.createIntBuffer(1);
 
 			attribs = BufferUtils.createIntBuffer(40);
 
-			setWGLattrib(attribs, index, WGL_SUPPORT_OPENGL_ARB, TRUE);
-			setWGLattrib(attribs, index, WGL_DRAW_TO_WINDOW_ARB, TRUE);
-			setWGLattrib(attribs, index, WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB);
-			setWGLattrib(attribs, index, WGL_DOUBLE_BUFFER_ARB, TRUE);
+			setWGLattrib(attribs, WGL_SUPPORT_OPENGL_ARB, TRUE);
+			setWGLattrib(attribs, WGL_DRAW_TO_WINDOW_ARB, TRUE);
+			setWGLattrib(attribs, WGL_PIXEL_TYPE_ARB, WGL_TYPE_RGBA_ARB);
+			setWGLattrib(attribs, WGL_DOUBLE_BUFFER_ARB, TRUE);
 
 			if ( fbconfig.redBits != 0 )
-				setWGLattrib(attribs, index, WGL_RED_BITS_ARB, fbconfig.redBits);
+				setWGLattrib(attribs, WGL_RED_BITS_ARB, fbconfig.redBits);
 			if ( fbconfig.greenBits != 0 )
-				setWGLattrib(attribs, index, WGL_GREEN_BITS_ARB, fbconfig.greenBits);
+				setWGLattrib(attribs, WGL_GREEN_BITS_ARB, fbconfig.greenBits);
 			if ( fbconfig.blueBits != 0 )
-				setWGLattrib(attribs, index, WGL_BLUE_BITS_ARB, fbconfig.blueBits);
+				setWGLattrib(attribs, WGL_BLUE_BITS_ARB, fbconfig.blueBits);
 			if ( fbconfig.alphaBits != 0 )
-				setWGLattrib(attribs, index, WGL_ALPHA_BITS_ARB, fbconfig.alphaBits);
+				setWGLattrib(attribs, WGL_ALPHA_BITS_ARB, fbconfig.alphaBits);
 
 			if ( fbconfig.depthBits != 0 )
-				setWGLattrib(attribs, index, WGL_DEPTH_BITS_ARB, fbconfig.depthBits);
+				setWGLattrib(attribs, WGL_DEPTH_BITS_ARB, fbconfig.depthBits);
 			if ( fbconfig.stencilBits != 0 )
-				setWGLattrib(attribs, index, WGL_STENCIL_BITS_ARB, fbconfig.stencilBits);
+				setWGLattrib(attribs, WGL_STENCIL_BITS_ARB, fbconfig.stencilBits);
 
 			if ( fbconfig.auxBuffers != 0 )
-				setWGLattrib(attribs, index, WGL_AUX_BUFFERS_ARB, fbconfig.auxBuffers);
+				setWGLattrib(attribs, WGL_AUX_BUFFERS_ARB, fbconfig.auxBuffers);
 
 			if ( fbconfig.accumRedBits != 0 )
-				setWGLattrib(attribs, index, WGL_ACCUM_RED_BITS_ARB, fbconfig.accumRedBits);
+				setWGLattrib(attribs, WGL_ACCUM_RED_BITS_ARB, fbconfig.accumRedBits);
 			if ( fbconfig.accumGreenBits != 0 )
-				setWGLattrib(attribs, index, WGL_ACCUM_GREEN_BITS_ARB, fbconfig.accumGreenBits);
+				setWGLattrib(attribs, WGL_ACCUM_GREEN_BITS_ARB, fbconfig.accumGreenBits);
 			if ( fbconfig.accumBlueBits != 0 )
-				setWGLattrib(attribs, index, WGL_ACCUM_BLUE_BITS_ARB, fbconfig.accumBlueBits);
+				setWGLattrib(attribs, WGL_ACCUM_BLUE_BITS_ARB, fbconfig.accumBlueBits);
 			if ( fbconfig.accumAlphaBits != 0 )
-				setWGLattrib(attribs, index, WGL_ACCUM_BLUE_BITS_ARB, fbconfig.accumAlphaBits);
+				setWGLattrib(attribs, WGL_ACCUM_BLUE_BITS_ARB, fbconfig.accumAlphaBits);
 
 			if ( fbconfig.stereo != 0 )
-				setWGLattrib(attribs, index, WGL_STEREO_ARB, TRUE);
+				setWGLattrib(attribs, WGL_STEREO_ARB, TRUE);
 
 			if ( window.ARB_multisample ) {
 				if ( fbconfig.samples != 0 ) {
-					setWGLattrib(attribs, index, WGL_SAMPLE_BUFFERS_ARB, 1);
-					setWGLattrib(attribs, index, WGL_SAMPLES_ARB, fbconfig.samples);
+					setWGLattrib(attribs, WGL_SAMPLE_BUFFERS_ARB, 1);
+					setWGLattrib(attribs, WGL_SAMPLES_ARB, fbconfig.samples);
 				}
 			}
 
 			if ( window.ARB_framebuffer_sRGB ) {
 				if ( fbconfig.sRGB )
-					setWGLattrib(attribs, index, WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB, TRUE);
+					setWGLattrib(attribs, WGL_FRAMEBUFFER_SRGB_CAPABLE_ARB, TRUE);
 			}
 
-			setWGLattrib(attribs, index, 0, 0);
+			setWGLattrib(attribs, 0, 0);
+			attribs.flip();
 
 			IntBuffer pixelFormatOut = BufferUtils.createIntBuffer(1);
 			if ( wglChoosePixelFormatARB(window.dc, attribs, null, pixelFormatOut, count) == FALSE ) {
@@ -1023,7 +1021,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		long context;
 		if ( window.ARB_create_context ) {
-			int index = 0, mask = 0, strategy = 0;
+			int mask = 0, strategy = 0;
 			flags = 0;
 
 			if ( wndconfig.glForward )
@@ -1050,21 +1048,23 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 				}
 			}
 
+			attribs.clear();
 			if ( wndconfig.glMajor != 1 || wndconfig.glMinor != 0 ) {
-				setWGLattrib(attribs, index, WGL_CONTEXT_MAJOR_VERSION_ARB, wndconfig.glMajor);
-				setWGLattrib(attribs, index, WGL_CONTEXT_MINOR_VERSION_ARB, wndconfig.glMinor);
+				setWGLattrib(attribs, WGL_CONTEXT_MAJOR_VERSION_ARB, wndconfig.glMajor);
+				setWGLattrib(attribs, WGL_CONTEXT_MINOR_VERSION_ARB, wndconfig.glMinor);
 			}
 
 			if ( flags != 0 )
-				setWGLattrib(attribs, index, WGL_CONTEXT_FLAGS_ARB, flags);
+				setWGLattrib(attribs, WGL_CONTEXT_FLAGS_ARB, flags);
 
 			if ( mask != 0 )
-				setWGLattrib(attribs, index, WGL_CONTEXT_PROFILE_MASK_ARB, mask);
+				setWGLattrib(attribs, WGL_CONTEXT_PROFILE_MASK_ARB, mask);
 
 			if ( strategy != 0 )
-				setWGLattrib(attribs, index, WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB, strategy);
+				setWGLattrib(attribs, WGL_CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB, strategy);
 
-			setWGLattrib(attribs, index, 0, 0);
+			setWGLattrib(attribs, 0, 0);
+			attribs.flip();
 
 			context = wglCreateContextAttribsARB(window.dc, share, attribs);
 			if ( context == NULL ) {
@@ -1089,7 +1089,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		//makeContextCurrent(window);
 		wglMakeCurrent(window.dc, context);
 		currentWindow.set(window);
-		window.context = new WindowsGLContext(GL.createCapabilities(window.glForward), window.dc, context);
+		window.context = new WindowsGLContext(GL.createCapabilities(window.glForward), context);
 
 		initWGLExtensions(window);
 

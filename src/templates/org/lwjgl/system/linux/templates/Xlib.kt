@@ -79,10 +79,24 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	)
 
 	int.func(
+		"XGetErrorText",
+		"""
+		Copies a null-terminated string describing the specified error code into the specified buffer. The returned text is in the encoding of the current
+		locale. It is recommended that you use this function to obtain an error description because extensions to Xlib may define their own error codes and
+		error strings.
+		""",
+
+		DISPLAY,
+		int.IN("code", "the error code for which you want to obtain a description"),
+		char_p.OUT("buffer_return", "returns the error description"),
+		AutoSize("buffer_return") _ int.IN("length", "the size of the buffer")
+	)
+
+	int.func(
 		"XFree",
 		"Free in-memory data that was created by an Xlib function.",
 
-		void_p.IN("data", "the data that is to be freed")
+		MultiType(PointerMapping.DATA_POINTER) _ void_p.IN("data", "the data that is to be freed")
 	)
 
 	Display_p.func(
@@ -153,6 +167,22 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XDisplayHeight",
 		"Returns an integer that describes the height of the screen in pixels.",
+
+		DISPLAY,
+		int.IN("screen_number", "the appropriate screen number on the host server")
+	)
+
+	int.func(
+		"XDisplayWidthMM",
+		"Returns an integer that describes the width of the screen in millimeters.",
+
+		DISPLAY,
+		int.IN("screen_number", "the appropriate screen number on the host server")
+	)
+
+	int.func(
+		"XDisplayHeightMM",
+		"Returns an integer that describes the height of the screen in millimeters.",
 
 		DISPLAY,
 		int.IN("screen_number", "the appropriate screen number on the host server")
@@ -698,11 +728,11 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    WINDOW,
 	    const _ charUTF8_p.IN("window_name", "the window name, which should be a null-terminated string"),
 	    const _ charUTF8_p.IN("icon_name", "the icon name, which should be a null-terminated string"),
-	    char_pp.IN("argv", "the application's argument list"),
+	    nullable _ char_pp.IN("argv", "the application's argument list"),
 	    AutoSize("argv") _ int.IN("argc", "the number of arguments"),
-	    XSizeHints_p.IN("normal_hints", "the size hints for the window in its normal state"),
-	    XWMHints_p.IN("wm_hints", "the XWMHints structure to be used"),
-	    XClassHint_p.IN("class_hints", "the {@link XClassHint} structure to be used")
+	    nullable _ XSizeHints_p.IN("normal_hints", "the size hints for the window in its normal state"),
+	    nullable _ XWMHints_p.IN("wm_hints", "the XWMHints structure to be used"),
+	    nullable _ XClassHint_p.IN("class_hints", "the {@link XClassHint} structure to be used")
 	)
 
 	int.func(

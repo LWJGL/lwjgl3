@@ -6,7 +6,10 @@ package org.lwjgl.system.linux
 
 import org.lwjgl.generator.*
 
-val Status = PrimitiveType("Bool", int)
+val Bool = PrimitiveType("Bool", int)
+val Status = PrimitiveType("Status", int)
+
+val CARD32 = PrimitiveType("CARD32", unsigned_int)
 
 val XID = PrimitiveType("XID", unsigned_long)
 val Mask = PrimitiveType("Mask", unsigned_long)
@@ -27,6 +30,7 @@ val KeyCode = PrimitiveType("KeyCode", unsigned_char)
 
 val XPointer = PointerType(char)
 
+val Bool_p = PointerType(Bool)
 val Atom_p = PointerType(Atom)
 val KeySym_p = PointerType(KeySym)
 
@@ -133,7 +137,7 @@ val XVisualInfo = StructType(
 			"<X11/Xutil.h>"
 		)
 
-		PointerType("Visual").member("visual")
+		Visual_p.member("visual")
 		VisualID.member("visualid")
 		int.member("screen")
 		int.member("depth")
@@ -230,42 +234,6 @@ val XIEventMask = StructType(
 )
 val XIEventMask_p = StructType(XIEventMask)
 
-val XSelectionRequestEvent = StructType(
-	struct(LINUX_PACKAGE, "XSelectionRequestEvent") {
-		javaDoc("SelectionRequest event structure.")
-		nativeImport ("LinuxLWJGL.h")
-
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("owner")
-		Window.member("requestor")
-		Atom.member("selection")
-		Atom.member("target")
-		Atom.member("property")
-		Time.member("time")
-	}
-)
-val XSelectionRequestEvent_p = StructType(XSelectionRequestEvent)
-
-val XGenericEventCookie = StructType(
-	struct(LINUX_PACKAGE, "XGenericEventCookie") {
-		javaDoc("Additional information for an {@code XGenericEvent}.")
-		nativeImport ("LinuxLWJGL.h")
-
-		 int.member("type")
-	    unsigned_long.member("serial")
-	    Bool.member("send_event")
-	    Display_p.member("display")
-	    int.member("extension")
-	    int.member("evtype")
-	    unsigned_int.member("cookie")
-	    void_p.member("data")
-	}
-)
-val XGenericEventCookie_p = StructType(XGenericEventCookie)
-
 // --------------- Xrandr.h ---------------
 
 val Rotation = PrimitiveType("Rotation", unsigned_short)
@@ -286,6 +254,7 @@ val XRRModeFlags_p = PointerType(XRRModeFlags)
 
 val RROutput_p = PointerType(RROutput)
 val RRCrtc_p = PointerType(RRCrtc)
+val RRMode_p = PointerType(RRMode)
 
 val XRRModeInfo = StructType(
 	struct(LINUX_PACKAGE, "XRRModeInfo") {
@@ -379,6 +348,7 @@ val XRROutputInfo = StructType(
 		RROutput_p.member("clones")
 		int.member("nmode")
 		int.member("npreferred")
+		RRMode_p.member("modes")
 	}
 )
 val XRROutputInfo_p = StructType(XRROutputInfo)
