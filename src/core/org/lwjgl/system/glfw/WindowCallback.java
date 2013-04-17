@@ -62,7 +62,7 @@ public abstract class WindowCallback {
 			getMethod(callbacks, KEY_INDEX, "key", long.class, int.class, int.class);
 			getMethod(callbacks, CHARACTER_INDEX, "character", long.class, int.class);
 			getMethod(callbacks, MOUSE_BUTTON_INDEX, "mouseButton", long.class, int.class, int.class);
-			getMethod(callbacks, CURSOR_POS_INDEX, "cursorPos", long.class, int.class, int.class);
+			getMethod(callbacks, CURSOR_POS_INDEX, "cursorPos", long.class, double.class, double.class);
 			getMethod(callbacks, CURSOR_ENTER_INDEX, "cursorEnter", long.class, int.class);
 			getMethod(callbacks, SCROLL_INDEX, "scroll", long.class, double.class, double.class);
 
@@ -288,7 +288,7 @@ public abstract class WindowCallback {
 	 *
 	 * @see GLFW#glfwSetCursorPosCallback(long, long)
 	 */
-	public abstract void cursorPos(long window, int xpos, int ypos);
+	public abstract void cursorPos(long window, double xpos, double ypos);
 
 	/**
 	 * The cursor enter callback.

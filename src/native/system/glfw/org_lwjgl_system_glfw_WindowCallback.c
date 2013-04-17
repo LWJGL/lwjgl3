@@ -153,7 +153,7 @@ static void GLFWmousebuttonfunProc(GLFWwindow* window, int button, int action) {
 	if ( async ) detachCurrentThread();
 }
 
-static void GLFWcursorposfunProc(GLFWwindow* window, int xpos, int ypos) {
+static void GLFWcursorposfunProc(GLFWwindow* window, double xpos, double ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
 	JNIEnv *env = getThreadEnv();
@@ -163,7 +163,7 @@ static void GLFWcursorposfunProc(GLFWwindow* window, int xpos, int ypos) {
         if ( env == NULL ) return;
     }
 
-	(*env)->CallVoidMethod(env, callback, GLFWcursorposfunInvoke, (jlong)(intptr_t)window, (jint)xpos, (jint)ypos);
+	(*env)->CallVoidMethod(env, callback, GLFWcursorposfunInvoke, (jlong)(intptr_t)window, (jdouble)xpos, (jdouble)ypos);
 
 	if ( async ) detachCurrentThread();
 }

@@ -134,6 +134,14 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		XRRScreenResources_p.IN("resources", "the {@link XRRScreenResources} structure to free")
 	)
 
+	RROutput.func(
+		"XRRGetOutputPrimary",
+		"Returns the primary output for the screen.",
+
+		DISPLAY,
+		WINDOW
+	)
+
 	XRRCrtcInfo_p.func(
 		"XRRGetCrtcInfo",
 		"Returns information about a screen in a {@link XRRCrtcInfo} structure.",
@@ -173,6 +181,22 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	    DISPLAY,
 	    WINDOW,
 	    int.IN("mask", "the mask")
+	)
+
+	Status.func(
+		"XRRSetCrtcConfig",
+		"",
+
+		DISPLAY,
+		XRRScreenResources_p.IN("resources", ""),
+		RRCrtc.IN("crtc", ""),
+		Time.IN("timestamp", ""),
+		int.IN("x", ""),
+		int.IN("y", ""),
+		RRMode.IN("mode", ""),
+		Rotation.IN("rotation", ""),
+		RROutput_p.IN("outputs", ""),
+		AutoSize("outputs") _ int.IN("noutputs", "")
 	)
 
 	int.func(

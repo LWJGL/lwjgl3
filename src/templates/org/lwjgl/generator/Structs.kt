@@ -38,7 +38,7 @@ open class StructMember(
 	val name: String
 ) {
 	val offsetField: String
-		get() = "${name.toUpperCase()}"
+		get() = name.toUpperCase()
 
 	fun offsetField(parentField: String): String {
 		return if ( parentField.isEmpty() )
@@ -76,6 +76,10 @@ public class Struct(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = "",
+	/** The native struct name. May be different than className. */
+	val structName: String = className,
+	/** false: the Struct has an existing declaration. true: a declaration is missing, we need to output one. */
+	val virtual: Boolean = false,
 	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
     val globalIdentifier: Boolean = true
 ): GeneratorTarget(packageName, className, nativeSubPath) {
@@ -94,9 +98,9 @@ public class Struct(
 	}
 
 	val nativeName: String
-		get() = if ( globalIdentifier ) className else "struct $className"
+		get() = if ( globalIdentifier ) structName else "struct $structName"
 
-	private val struct = className.toLowerCase()
+	private val struct = structName.toLowerCase()
 
 	private val members = ArrayList<StructMember>()
 
@@ -122,13 +126,11 @@ public class Struct(
 		members add StructMember(this, nativeName, name)
 	}
 
-	// We allow nested structs as members
-	public fun StructType.member(nativeName: String, name: String = nativeName) {
-		members add StructMember(this, nativeName, name)
-	}
-
 	val StructMember.isNestedStruct: Boolean
-		get() = nativeType is StructType && !(nativeType as StructType).includesPointer
+		get() = nativeType is StructType && !nativeType.includesPointer
+
+	val StructMember.isNestedAnonymousStruct: Boolean
+		get() = isNestedStruct && (nativeType as StructType).name identityEquals ANONYMOUS
 
 	val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
@@ -226,52 +228,38 @@ public class Struct(
 			val field = member.offsetField(parentField)
 			val lastMember = i == members.lastIndex
 
-			println("$indentation$field${if ( parentLastMember && lastMember && !member.isNestedStruct ) ';' else ','}")
+			println("$indentation$field${if ( parentLastMember && lastMember && !member.isNestedAnonymousStruct ) ';' else ','}")
 
 			// Output nested field offsets
-			if ( member.isNestedStruct )
+			if ( member.isNestedAnonymousStruct )
 				generateOffsetFields(member.nestedMembers, "$indentation\t", field, parentLastMember && lastMember)
 		}
 	}
 
 	private fun getMemberCount(members: List<StructMember>): Int {
 		var count = members.size
-		for ( member in members ) {
-			if ( member.nativeType.name identityEquals ANONYMOUS )
-				count += getMemberCount((member.nativeType as StructType).definition.members) // recursion
-		}
+		for ( member in members.iterator().filter { it.isNestedAnonymousStruct } )
+			count += getMemberCount(member.nestedMembers) // recursion
 		return count
 	}
 
 	private fun PrintWriter.generateOffsetInit(
 		members: List<StructMember>,
 		indentation: String = "\t\t",
-		parentStruct: StructMember? = null,
 		parentField: String = "",
 	    offset: Int = 0
 	): Int {
-		val parentPrefix = if ( parentStruct == null ) "" else {
-			val nested = (parentStruct.nativeType as StructType).definition
-			if ( packageName.equals(nested.packageName) && !nested.className.equals(parentField) )
-				nested.className
-			else
-				nested.packageName + "." + nested.className
-		}
-
 		var index = offset
 		for ( i in 0..members.lastIndex ) {
 			val member = members[i]
 			val field = member.offsetField(parentField)
 
-			if ( parentStruct == null || parentStruct.nativeType.name identityEquals ANONYMOUS ) {
-				println("$indentation$field = offsets.get($index);")
-				index++
-			} else
-				println("$indentation$field = $parentField + $parentPrefix.${member.offsetField};")
+			println("$indentation$field = offsets.get($index);")
+			index++
 
 			// Output nested fields
-			if ( member.isNestedStruct )
-				index = generateOffsetInit(member.nestedMembers, "$indentation\t", member, field, index) // recursion
+			if ( member.isNestedAnonymousStruct )
+				index = generateOffsetInit(member.nestedMembers, "$indentation\t", field, index) // recursion
 		}
 		return index
 	}
@@ -310,7 +298,7 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.isNestedStruct ) {
+			if ( it.isNestedAnonymousStruct ) {
 				generateConstructorArguments(it.nestedMembers, method, mode, firstParam)
 				firstParam = false
 			} else {
@@ -352,7 +340,7 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.isNestedStruct ) {
+			if ( it.isNestedAnonymousStruct ) {
 				generateConstructorSetters(it.nestedMembers, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
@@ -373,7 +361,7 @@ public class Struct(
 
 	private val generateAlternativeConstructor: (List<StructMember>) -> Boolean = { (members) ->
 		members any {
-			if ( it.isNestedStruct )
+			if ( it.isNestedAnonymousStruct )
 				generateAlternativeConstructor(it.nestedMembers)
 			else
 				it is StructMemberArray || it.nativeType is CharSequenceType || (it.nativeType is PointerType && (it.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER)
@@ -385,7 +373,7 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.isNestedStruct ) {
+			if ( it.isNestedAnonymousStruct ) {
 				generateAlternativeConstructorArguments(it.nestedMembers, method, mode, firstParam)
 				firstParam = false
 			} else {
@@ -435,7 +423,7 @@ public class Struct(
 		members.forEach {
 			val method = it.method(parentMember)
 
-			if ( it.isNestedStruct ) {
+			if ( it.isNestedAnonymousStruct ) {
 				generateAlternativeConstructorSetters(it.nestedMembers, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
@@ -444,20 +432,50 @@ public class Struct(
 		}
 	}
 
+	private fun getFieldOffset(
+		m: StructMember,
+		parentStruct: Struct?,
+		parentField: String
+	) = if ( parentStruct == null )
+		m.offsetField
+	else if ( parentStruct.className identityEquals ANONYMOUS )
+		"${parentField}_${m.offsetField}"
+	else {
+		val classPrefix = if ( parentField equals parentStruct.className ) // See org.lwjgl.system.windows.MSG, field POINT
+			"${parentStruct.packageName}.${parentStruct.className}"
+		else
+			parentStruct.className
+		"$parentField + $classPrefix.${m.offsetField}"
+	}
+
+	private fun getNestedStructSizeOf(
+		nestedStruct: Struct,
+	    field: String
+	) = if ( field equals nestedStruct.className ) // See org.lwjgl.system.windows.MSG, field POINT
+		"${nestedStruct.packageName}.${nestedStruct.className}.SIZEOF"
+	else
+		"${nestedStruct.className}.SIZEOF"
+
 	private fun PrintWriter.generateSetters(
 		members: List<StructMember>,
+		parentStruct: Struct? = null,
 		parentMember: String = "",
 		parentField: String = ""
 	) {
 		members.forEach {
 			val method = it.method(parentMember)
-			val field = it.offsetField(parentField)
+			val field = getFieldOffset(it, parentStruct, parentField)
+
+			val param = it.name
 
 			if ( it.isNestedStruct ) {
-				generateSetters(it.nestedMembers, method, field)
+				val nestedStruct = (it.nativeType as StructType).definition
+				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+					println("\tpublic static void ${method}Set(ByteBuffer $struct, long $param) { if ( $param != NULL ) memCopy($param, memAddress($struct) + $field, ${getNestedStructSizeOf(nestedStruct, field)}); }")
+					println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) { ${method}Set($struct, memAddressSafe($param)); }")
+				}
+				generateSetters(it.nestedMembers, nestedStruct, method, field)
 			} else {
-				val param = it.name
-
 				// Setter
 
 				print("\tpublic static void ${method}Set(ByteBuffer $struct, ")
@@ -536,15 +554,23 @@ public class Struct(
 
 	private fun PrintWriter.generateGetters(
 		members: List<StructMember>,
+		parentStruct: Struct? = null,
 		parentMember: String = "",
 		parentField: String = ""
 	) {
 		members.forEach {
 			val method = it.method(parentMember)
-			val field = it.offsetField(parentField)
+			val field = getFieldOffset(it, parentStruct, parentField)
 
 			if ( it.isNestedStruct ) {
-				generateGetters(it.nestedMembers, method, field)
+				val nestedStruct = (it.nativeType as StructType).definition
+				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+					val param = it.name
+					val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
+					println("\tpublic static void ${method}Get(ByteBuffer $struct, long $param) { memCopy(memAddress($struct) + $field, $param, $SIZEOF); }")
+					println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) { checkBuffer($param, $SIZEOF); ${method}Get($struct, memAddress($param)); }")
+				}
+				generateGetters(it.nestedMembers, (it.nativeType as StructType).definition, method, field)
 			} else {
 				// Getter
 
@@ -624,6 +650,10 @@ public class Struct(
 								println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { long address = ${method}Get($struct); return address == 0 ? null : memDecode${it.nativeType.charMapping.charset}(memByteBuffer(address, size)); }")
 							}
 						}
+					it.nativeType is StructType ->
+						{
+							println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct) { return memByteBuffer(${method}Get($struct), ${it.nativeType.definition.className}.SIZEOF); }")
+						}
 					it.nativeType is PointerType && (it.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER ->
 						{
 							println("\tpublic static ByteBuffer ${method}Get(ByteBuffer $struct, int size) { long address = ${method}Get($struct); return address == 0 ? null : memByteBuffer(address, size); }")
@@ -657,6 +687,21 @@ public class Struct(
 		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
 
+		if ( virtual ) {
+			// NOTE: Assumes a plain struct definition (no nested structs, no unions)
+			println("\ttypedef struct $structName {")
+			for ( m in members ) {
+				print("\t\t${m.nativeType.name}")
+				if ( m.nativeType is PointerType && !m.nativeType.includesPointer ) {
+					if ( !m.nativeType.name.endsWith('*') )
+						print(' ')
+					print('*')
+				}
+				println(" ${m.nativeName};")
+			}
+			println("\t} ${structName};\n")
+		}
+
 		generateNativeMembers(members)
 
 		println("\n\treturn sizeof($nativeName);")
@@ -682,8 +727,8 @@ public class Struct(
 
 }
 
-public fun struct(packageName: String, className: String, nativeSubPath: String = "", globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, globalIdentifier)
+public fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
+	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier)
 	struct.init()
 	StructRegistry add struct
 	return struct

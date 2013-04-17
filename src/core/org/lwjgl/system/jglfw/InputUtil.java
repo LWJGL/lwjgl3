@@ -151,9 +151,8 @@ final class InputUtil {
 			window.cursorPosY = y;
 		}
 
-		if ( window.cursorPosCallback != null ) {
+		if ( window.cursorPosCallback != null )
 			window.cursorPosCallback.invoke(window, window.cursorPosX, window.cursorPosY);
-		}
 	}
 
 	static void inputCursorEnter(GLFWwindow window, boolean entered) {

@@ -49,7 +49,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_NODELETE" _ 0x01000
 	)
 
-	void_p.func(
+	voidptr.func(
 		"dlopen",
 		"""
 		Loads the dynamic library file named by the null-terminated string {@code filename} and returns an opaque "handle" for the dynamic library. If
@@ -68,7 +68,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	void_p.func(
+	voidptr.func(
 		"dlsym",
 		"""
 		Takes a "handle" of a dynamic library returned by {@link #dlopen} and the null-terminated symbol name, returning the address where that symbol is loaded
@@ -76,7 +76,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		library was loaded, {@code dlsym()} returns $NULL.
 		""",
 
-		void_p.IN("handle", "the dynamic library handle"),
+		voidptr.IN("handle", "the dynamic library handle"),
 		const _ charASCII_p.IN("name", "the symbol name")
 	)
 
@@ -87,7 +87,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		it, then the dynamic library is unloaded.
 		""",
 
-		void_p.IN("handle", "the dynamic library to close")
+		voidptr.IN("handle", "the dynamic library to close")
 	)
 
 }

@@ -1139,7 +1139,8 @@ public class NativeClassFunction(
 			if ( returns.nativeType is PointerType )
 				print("(intptr_t)")
 		}
-		print("$name(")
+		print("$name")
+		if ( !has(macro) ) print('(')
 		printList(getNativeParams()) {
 			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
 			if ( it.nativeType.mapping == PrimitiveMapping.PTR )
@@ -1149,7 +1150,8 @@ public class NativeClassFunction(
 			else
 				it.name
 		}
-		println(");")
+		if ( !has(macro) ) print(')')
+		println(';')
 
 		print("}")
 	}
@@ -1223,6 +1225,17 @@ public class Code(
 
 	override val isSpecial: Boolean = true
 }
+
+/** Marks a function without arguments as a macro. */
+public val macro: FunctionModifier = object : FunctionModifier() {
+	override val isSpecial: Boolean = false
+
+	protected override fun validate(func: NativeClassFunction) {
+		if ( func.getNativeParams().hasNext() )
+			throw IllegalArgumentException("The macro modifier can only be applied on functions with no arguments.")
+	}
+}
+
 // --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
 
 private trait FunctionTransform<T: QualifiedType> {

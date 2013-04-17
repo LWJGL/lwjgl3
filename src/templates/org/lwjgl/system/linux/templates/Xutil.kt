@@ -37,6 +37,21 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"IconicState" _ 3
 	)
 
+	IntConstant.block(
+		"flags argument in size hints",
+
+		"USPosition".expr<Int>("1 << 0"),
+		"USSize".expr<Int>("1 << 1"),
+		"PPosition".expr<Int>("1 << 2"),
+		"PSize".expr<Int>("1 << 3"),
+		"PMinSize".expr<Int>("1 << 4"),
+		"PMaxSize".expr<Int>("1 << 5"),
+		"PResizeInc".expr<Int>("1 << 6"),
+		"PAspect".expr<Int>("1 << 7"),
+		"PBaseSize".expr<Int>("1 << 8"),
+		"PWinGravity".expr<Int>("1 << 9")
+	)
+
 	int.func(
 		"XLookupString",
 	    """

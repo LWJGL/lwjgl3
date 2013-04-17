@@ -119,8 +119,8 @@ public class Events {
 			}
 
 			@Override
-			public void cursorPos(long window, int xpos, int ypos) {
-				printEvent(window, "cursor moved to %d, %d", xpos, ypos);
+			public void cursorPos(long window, double xpos, double ypos) {
+				printEvent(window, "cursor moved to %f, %f", xpos, ypos);
 			}
 
 			@Override
