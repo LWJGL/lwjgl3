@@ -5,27 +5,16 @@
 	<property name="src.native" location="${src}/native" relative="true"/>
 	<property name="src.generated" location="generated/native" relative="true"/>
 
-	<property environment="env"/>
-
-	<fail unless="env.MSSDK" message="Please set an environment variable named MSSDK that points to a Microsoft Windows SDK."/>
-	<property name="sdkhome" location="${env.MSSDK}"/>
 	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib delayimp.lib winmm.lib Comctl32.lib jawt.lib glfw3.lib"/>
-
-	<condition property="sdkhomelib" value="${sdkhome}\lib" else="${sdkhome}\lib\x64">
-		<equals arg1="${os.arch}" arg2="x86"/>
-	</condition>
 
 	<condition property="dllname" value="lwjgl.dll" else="lwjgl64.dll">
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
 
 	<target name="compile-native-windows">
-		<!--<echo message="${sdkhomelib}"/>-->
-
 		<!-- COMPILE -->
 		<apply dir="${dest}" executable="cl" dest="${dest}" skipemptyfilesets="true" failonerror="true" parallel="true">
 			<arg line="/c /W3 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
-			<arg value="/I${sdkhome}\include"/>
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
 			<!-- Paths relative to ${dest} -->
@@ -58,7 +47,6 @@
 			<arg line="/LD /nologo"/>
 			<srcfile/>
 			<arg line="/Fe${dllname} /link"/>
-			<arg value="/LIBPATH:${sdkhomelib}"/>
 			<arg value="/LIBPATH:${java.home}\..\lib"/>
 			<arg value="/LIBPATH:..\..\libs\windows\${os.arch}"/>
 			<arg value="/OPT:REF"/>
