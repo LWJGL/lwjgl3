@@ -23,7 +23,7 @@
 
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
-		<apply dir="${dest}" executable="gcc" skipemptyfilesets="true" failonerror="true" parallel="true" verbose="true">
+		<apply dir="${dest}" executable="gcc" skipemptyfilesets="true" failonerror="true" parallel="true">
 			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wunused -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
@@ -35,7 +35,9 @@
 			<arg value="-I../../${src.native}/opencl"/>
 			<arg value="-I../../${src.native}/opengl"/>
 			<arg value="-I../../${src.native}/opengl/glx"/>
-			<!--<mapper type="glob" from="*.c" to="*.o"/>-->
+
+			<globmapper from="*.c" to="${dest}/*.o"/>
+
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/linux" includes="*.c"/>
 			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
