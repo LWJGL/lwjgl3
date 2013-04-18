@@ -4,6 +4,9 @@
     <output url="file://$MODULE_DIR$/../../../bin/Templates" />
     <output-test url="file://$MODULE_DIR$/../../../bin/Templates" />
     <exclude-output />
+    <annotation-paths>
+      <root url="file://$MODULE_DIR$/../../kotlin" />
+    </annotation-paths>
     <content url="file://$MODULE_DIR$/../../../src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../../src/templates" isTestSource="false" />
     </content>
