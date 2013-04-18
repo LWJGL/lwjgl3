@@ -1,7 +1,7 @@
 <root>
 	<item name='java.lang.reflect.Method java.lang.Class&lt;?&gt;[] getParameterTypes()'>
 		<annotation name='jet.runtime.typeinfo.KotlinSignature'>
-			<val name="value" val="&quot;fun getParameterTypes() : Array&lt;out Class&lt;out Any?&gt;&gt;&quot;"/>
+			<val name="value" val="&quot;fun getParameterTypes() : Array&lt;Class&lt;*&gt;&gt;&quot;"/>
 		</annotation>
 	</item>
 </root>

@@ -75,7 +75,7 @@
 			<arg value="config/Templates.kts"/>
 			<arg value="-output"/>
 			<arg value="${lwjgl.bin.templates}"/>
-			<arg value="-tags"/>
+			<!--<arg value="-tags"/>-->
 			<!--<arg value="-noStdlib"/>-->
 			<!--<arg value="-noJdkAnnotations"/>-->
 			<!--<arg value="-noJdk"/>-->
@@ -146,7 +146,7 @@
 		</copy>
 	</target>
 
-	<target name="tests" description="Runs the LWJGL test suite" depends="compile, compile-native">
+	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
 		<javac debug="yes" destdir="${lwjgl.bin}/Tests" encoding="utf8" source="1.6" target="1.6" bootclasspathref="java6.boot.classpath" taskname="Tests compilation">
 			<classpath>
 				<pathelement path="${lwjgl.bin.core}"/>
@@ -157,7 +157,9 @@
 			<src path="${lwjgl.src}/tests/"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
+	</target>
 
+	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
 		<testng outputDir="${lwjgl.tests.output}">
 			<classpath>
 				<pathelement path="${lwjgl.lib}/jcommander.jar"/>

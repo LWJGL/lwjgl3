@@ -98,7 +98,7 @@ private fun methodFilter(method: Method, javaClass: Class<*>) =
 	// returns NativeClass
 	method.getReturnType() == javaClass &&
 	// has no arguments
-	method.getParameterTypes()!!.size == 0
+	method.getParameterTypes().size == 0
 
 private fun discoverConfig(packageClassPath: String): Method? {
 	val firstChar = packageClassPath.lastIndexOf('.') + 1
@@ -395,7 +395,10 @@ private fun <T> generateOutput(
 }
 
 private fun ensurePath(path: File) {
-	val parent = path.getParentFile()!!
+	val parent = path.getParentFile()
+	if ( parent == null )
+		throw IllegalArgumentException("The given path has no parent directory.")
+
 	if ( !parent.exists() ) {
 		ensurePath(parent)
 		println("\tMKDIR: $parent")
@@ -433,7 +436,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 }
 
 private fun readFile(file: File): ByteBuffer {
-	val channel: FileChannel = FileInputStream(file).getChannel()!!
+	val channel: FileChannel = FileInputStream(file).getChannel()
 	val bytesTotal = channel.size().toInt()
 	val buffer: ByteBuffer = ByteBuffer.allocateDirect(bytesTotal)
 
