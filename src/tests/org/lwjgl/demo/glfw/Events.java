@@ -7,7 +7,8 @@ import org.lwjgl.system.glfw.WindowCallback;
 
 import static org.lwjgl.system.glfw.GLFW.*;
 
-public class Events {
+/** GLFW events demo. */
+public final class Events {
 
 	private Events() {
 	}

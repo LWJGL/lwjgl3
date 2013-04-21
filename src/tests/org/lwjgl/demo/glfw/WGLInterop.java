@@ -28,7 +28,10 @@ import static org.lwjgl.system.windows.WinGDI.*;
 import static org.lwjgl.system.windows.WinUser.*;
 import static org.testng.Assert.*;
 
-public class WGLInterop {
+/** GLFW/WGL interop demo. */
+public final class WGLInterop {
+	private WGLInterop() {
+	}
 
 	public static void main(String[] args) {
 		Sys.touch();
@@ -48,7 +51,8 @@ public class WGLInterop {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, 0);
+		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
 		long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", 0L, 0L);
 		if ( window == 0L )
@@ -74,8 +78,11 @@ public class WGLInterop {
 		long HWND = glfwGetWin32Window(window);
 		long HDC = GetDC(HWND);
 
-		GLContext context = DemoUtil.initializeOpenGLContext(HDC);
-
+		// Make the GLFW context current in the current thread
+		glfwMakeContextCurrent(window);
+		// Creates an LWJGL GLContext from the GLFW context.
+		GLContext.createFromCurrent();
+		// Now we can retrieve the GLFW context's capabilities
 		ContextCapabilities caps = GL.getCapabilities();
 
 		if ( caps.GL_AMD_debug_output )
@@ -201,8 +208,6 @@ public class WGLInterop {
 
 		wglDeleteBufferRegionARB(bufferRegion);
 
-		context.destroy();
 		glfwDestroyWindow(window);
 	}
-
 }

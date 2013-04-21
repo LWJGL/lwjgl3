@@ -8,18 +8,16 @@ import org.lwjgl.system.glfw.ErrorCallback;
 import java.util.concurrent.CountDownLatch;
 
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.glfw.GLFW.*;
-import static org.lwjgl.system.windows.GLFWWin32.*;
-import static org.lwjgl.system.windows.WinGDI.*;
-import static org.lwjgl.system.windows.WinUser.*;
 
 /**
  * Port of https://github.com/elmindreda/glfw/blob/master/tests/threads.c
+ * <p/>
+ * GLFW demo that showcases rendering to multiple windows from multiple threads.
  *
  * @author Brian Matzon <brian@matzon.dk>
  */
-public class Threads {
+public final class Threads {
 
 	private static final String[]  titles = { "Red", "Green", "Blue" };
 	private static final float[][] rgb    = {
@@ -27,6 +25,9 @@ public class Threads {
 		{ 0f, 1f, 0f, 0 },
 		{ 0f, 0f, 1f, 0 }
 	};
+
+	private Threads() {
+	}
 
 	public static void main(String[] args) {
 		Sys.touch();
@@ -52,9 +53,7 @@ public class Threads {
 				glfwTerminate();
 			}
 
-			glfwSetWindowPos(window, 200 + 250 * i, 200);
-
-			threads[i] = new GLFWThread(window, rgb[i][0], rgb[i][1], rgb[i][2], quit);
+			threads[i] = new GLFWThread(window, i, quit);
 			threads[i].start();
 		}
 
@@ -63,7 +62,7 @@ public class Threads {
 			glfwPollEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
-				if ( glfwWindowShouldClose(threads[i].window) == 1 ) {
+				if ( glfwWindowShouldClose(threads[i].window) == 1 || !threads[i].isAlive() ) {
 					quit.countDown();
 					break out;
 				}
@@ -84,40 +83,42 @@ public class Threads {
 	private static class GLFWThread extends Thread {
 
 		long  window;
+		int   index;
 		float r, g, b;
 
 		CountDownLatch quit;
 
-		GLFWThread(long window, float r, float g, float b, CountDownLatch quit) {
-			System.out.println("GLFWThread: window:" + window + ", rgb: (" + r + ", " + g + ", " + b + ")");
-
+		GLFWThread(long window, int index, CountDownLatch quit) {
 			this.window = window;
-			this.r = r;
-			this.g = g;
-			this.b = b;
+
+			this.index = index;
+
+			this.r = rgb[index][0];
+			this.g = rgb[index][1];
+			this.b = rgb[index][2];
+
+			System.out.println("GLFWThread: window:" + window + ", rgb: (" + r + ", " + g + ", " + b + ")");
 
 			this.quit = quit;
 		}
 
 		@Override
 		public void run() {
-			long HWND = glfwGetWin32Window(window);
-			long HDC = GetDC(HWND);
+			glfwMakeContextCurrent(window);
+			GLContext.createFromCurrent();
 
-			GLContext context = DemoUtil.initializeOpenGLContext(HDC);
-
-			wglSwapIntervalEXT(1);
+			glfwSwapInterval(1);
 			glfwShowWindow(window);
+
+			glfwSetWindowPos(window, 200 + 250 * index, 200);
 
 			while ( quit.getCount() != 0 ) {
 				float v = (float)Math.abs(Math.sin(glfwGetTime() * 2f));
 				glClearColor(r * v, g * v, b * v, 0f);
 				glClear(GL_COLOR_BUFFER_BIT);
-				SwapBuffers(HDC);
-				DemoUtil.pause(16);
+				glfwSwapBuffers(window);
 			}
 
-			context.destroy();
 			glfwDestroyWindow(window);
 		}
 	}

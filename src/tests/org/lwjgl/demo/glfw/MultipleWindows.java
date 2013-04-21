@@ -1,6 +1,7 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.Sys;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
@@ -9,11 +10,10 @@ import org.lwjgl.system.glfw.WindowCallbackAdapter;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
-import static org.lwjgl.system.windows.GLFWWin32.*;
-import static org.lwjgl.system.windows.WinGDI.*;
-import static org.lwjgl.system.windows.WinUser.*;
 
+/** GLFW demo that showcases rendering to multiple windows from a single thread. */
 public final class MultipleWindows {
 
 	private MultipleWindows() {
@@ -36,7 +36,6 @@ public final class MultipleWindows {
 	private static void demo() {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		//glfwWindowHint(GLFW_DECORATED, GL_FALSE);
 
 		long[] windows = new long[4];
 		GLContext[] contexts = new GLContext[4];
@@ -66,14 +65,13 @@ public final class MultipleWindows {
 
 			windows[i] = window;
 
-			long HWND = glfwGetWin32Window(window);
-			long HDC = GetDC(HWND);
-			contexts[i] = DemoUtil.initializeOpenGLContext(HDC);
+			glfwMakeContextCurrent(window);
+			contexts[i] = GLContext.createFromCurrent();
 
 			glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);
 
-			glfwSetWindowPos(window, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
 			glfwShowWindow(window);
+			glfwSetWindowPos(window, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
 		}
 
 		while ( latch.get() != 0 ) {
@@ -83,19 +81,16 @@ public final class MultipleWindows {
 				if ( windows[i] == 0L )
 					continue;
 
-				long HWND = glfwGetWin32Window(windows[i]);
-				long HDC = GetDC(HWND);
-				contexts[i].makeCurrent(HDC);
+				glfwMakeContextCurrent(windows[i]);
+				GL.setCurrent(contexts[i]);
 
 				glClear(GL_COLOR_BUFFER_BIT);
-				SwapBuffers(HDC);
+				glfwSwapBuffers(windows[i]);
 
 				if ( glfwWindowShouldClose(windows[i]) != 0 ) {
-					contexts[i].destroy();
-					contexts[i] = null;
-
 					glfwDestroyWindow(windows[i]);
-					windows[i] = 0L;
+					windows[i] = NULL;
+					contexts[i] = null;
 
 					latch.decrementAndGet();
 				}
@@ -103,10 +98,8 @@ public final class MultipleWindows {
 		}
 
 		for ( int i = 0; i < 4; i++ ) {
-			if ( contexts[i] != null ) {
-				contexts[i].destroy();
+			if ( windows[i] != NULL )
 				glfwDestroyWindow(windows[i]);
-			}
 		}
 	}
 
