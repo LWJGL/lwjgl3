@@ -901,7 +901,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		IntBuffer attribs = null;
 		int pixelFormat;
-		ByteBuffer pfd = null;
+		ByteBuffer pfd = PIXELFORMATDESCRIPTOR.malloc();
 
 		if ( window.ARB_pixel_format ) {
 			IntBuffer count = BufferUtils.createIntBuffer(1);
@@ -965,12 +965,10 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			pixelFormat = pixelFormatOut.get(0);
 		} else {
-			pfd = PIXELFORMATDESCRIPTOR.malloc();
 			PIXELFORMATDESCRIPTOR.sizeSet(pfd, PIXELFORMATDESCRIPTOR.SIZEOF);
 			PIXELFORMATDESCRIPTOR.versionSet(pfd, 1);
 
 			int flags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
-			PIXELFORMATDESCRIPTOR.flagsSet(pfd, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
 
 			if ( fbconfig.stereo != 0 )
 				flags |= PFD_STEREO;

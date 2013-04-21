@@ -38,7 +38,7 @@ class GLFWwindowWin extends GLFWwindow {
 	boolean cursorInside;
 	boolean cursorHidden;
 
-	int oldCursorX, oldCursorY;
+	double oldCursorX, oldCursorY;
 
 	// Context state
 
@@ -251,11 +251,11 @@ class GLFWwindowWin extends GLFWwindow {
 				}
 
 				case WM_MOUSEMOVE: {
-					int newCursorX = GET_X_LPARAM(lParam);
-					int newCursorY = GET_Y_LPARAM(lParam);
+					double newCursorX = GET_X_LPARAM(lParam);
+					double newCursorY = GET_Y_LPARAM(lParam);
 
 					if ( newCursorX != window.oldCursorX || newCursorY != window.oldCursorY ) {
-						int x, y;
+						double x, y;
 
 						if ( window.cursorMode == GLFW_CURSOR_CAPTURED ) {
 							if ( focusedWindow != window )
@@ -370,9 +370,8 @@ class GLFWwindowWin extends GLFWwindow {
 		// Check for numeric keypad keys
 		// NOTE: This way we always force "NumLock = ON", which is intentional since
 		// the returned key code should correspond to a physical location.
-		int hiFlags = HIWORD(lParam);
-		if ( (hiFlags & 0x100) == 0 ) {
-			switch ( MapVirtualKey(hiFlags & 0xFF, 1) ) {
+		if ( (HIWORD(lParam) & 0x100) == 0 ) {
+			switch ( MapVirtualKey(HIWORD(lParam) & 0xFF, 1) ) {
 				case VK_INSERT:
 					return GLFW_KEY_KP_0;
 				case VK_END:
@@ -431,14 +430,14 @@ class GLFWwindowWin extends GLFWwindow {
 				// Here is a trick: "Alt Gr" sends LCTRL, then RALT. We only
 				// want the RALT message, so we try to see if the next message
 				// is a RALT message. In that case, this is a false LCTRL!
-				int msg_time = GetMessageTime();
+				int time = GetMessageTime();
 				APIBuffer __buffer = apiBuffer();
-				ByteBuffer next_msg = __buffer.buffer();
-				if ( PeekMessage(next_msg, NULL, 0, 0, PM_NOREMOVE) != 0 ) {
-					int message = MSG.messageGet(next_msg);
+				ByteBuffer next = __buffer.buffer();
+				if ( PeekMessage(next, NULL, 0, 0, PM_NOREMOVE) != 0 ) {
+					int message = MSG.messageGet(next);
 					if ( message == WM_KEYDOWN ||
 					     message == WM_SYSKEYDOWN ) {
-						if ( MSG.wParamGet(next_msg) == VK_MENU && (MSG.lParamGet(next_msg) & 0x01000000) != 0 && MSG.timeGet(next_msg) == msg_time ) {
+						if ( MSG.wParamGet(next) == VK_MENU && (MSG.lParamGet(next) & 0x01000000) != 0 && MSG.timeGet(next) == time ) {
 							// Next message is a RALT down message, which
 							// means that this is NOT a proper LCTRL message!
 							return -1;

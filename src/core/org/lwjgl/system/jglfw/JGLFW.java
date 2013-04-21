@@ -508,8 +508,10 @@ public final class JGLFW {
 	 *
 	 * @param cbfun the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetErrorCallback(GLFWerrorfun cbfun) {
+	public static GLFWerrorfun glfwSetErrorCallback(GLFWerrorfun cbfun) {
+		GLFWerrorfun previous = errorCallback;
 		errorCallback = cbfun;
+		return previous;
 	}
 
 	static void inputError(int error, String format, Object... args) {
@@ -580,11 +582,13 @@ public final class JGLFW {
 	 *
 	 * @param cbfun the new callback, or NULL to remove the currently set callback
 	 */
-	public static void glfwSetMonitorCallback(GLFWmonitorfun cbfun) {
+	public static GLFWmonitorfun glfwSetMonitorCallback(GLFWmonitorfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWmonitorfun previous = monitorCallback;
 		monitorCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1162,7 +1166,8 @@ public final class JGLFW {
 	 * <ul>
 	 * <li>This function may only be called from the main thread.</li>
 	 * <li>The window manager may put limits on what window sizes are allowed.</li>
-	 * <li>For fullscreen windows, this function selects and switches to the resolution closest to the specified size, without destroying the window's context.</li>
+	 * <li>For fullscreen windows, this function selects and switches to the resolution closest to the specified size,
+	 * without destroying the window's context.</li>
 	 * </ul>
 	 *
 	 * @param window window to resize
@@ -1360,11 +1365,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowPosCallback(GLFWwindow window, GLFWwindowposfun cbfun) {
+	public static GLFWwindowposfun glfwSetWindowPosCallback(GLFWwindow window, GLFWwindowposfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowposfun previous = window.posCallback;
 		window.posCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1373,11 +1380,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowSizeCallback(GLFWwindow window, GLFWwindowsizefun cbfun) {
+	public static GLFWwindowsizefun glfwSetWindowSizeCallback(GLFWwindow window, GLFWwindowsizefun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowsizefun previous = window.sizeCallback;
 		window.sizeCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1393,11 +1402,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowCloseCallback(GLFWwindow window, GLFWwindowclosefun cbfun) {
+	public static GLFWwindowclosefun glfwSetWindowCloseCallback(GLFWwindow window, GLFWwindowclosefun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowclosefun previous = window.closeCallback;
 		window.closeCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1412,11 +1423,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowRefreshCallback(GLFWwindow window, GLFWwindowrefreshfun cbfun) {
+	public static GLFWwindowrefreshfun glfwSetWindowRefreshCallback(GLFWwindow window, GLFWwindowrefreshfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowrefreshfun previous = window.refreshCallback;
 		window.refreshCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1427,11 +1440,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowFocusCallback(GLFWwindow window, GLFWwindowfocusfun cbfun) {
+	public static GLFWwindowfocusfun glfwSetWindowFocusCallback(GLFWwindow window, GLFWwindowfocusfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowfocusfun previous = window.focusCallback;
 		window.focusCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1442,11 +1457,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetWindowIconifyCallback(GLFWwindow window, GLFWwindowiconifyfun cbfun) {
+	public static GLFWwindowiconifyfun glfwSetWindowIconifyCallback(GLFWwindow window, GLFWwindowiconifyfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWwindowiconifyfun previous = window.iconifyCallback;
 		window.iconifyCallback = cbfun;
+		return previous;
 	}
 
 	// --- [ glfwPollEvents ] ---
@@ -1668,11 +1685,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetKeyCallback(GLFWwindow window, GLFWkeyfun cbfun) {
+	public static GLFWkeyfun glfwSetKeyCallback(GLFWwindow window, GLFWkeyfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWkeyfun previous = window.keyCallback;
 		window.keyCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1683,11 +1702,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetCharCallback(GLFWwindow window, GLFWcharfun cbfun) {
+	public static GLFWcharfun glfwSetCharCallback(GLFWwindow window, GLFWcharfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWcharfun previous = window.charCallback;
 		window.charCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1696,11 +1717,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetMouseButtonCallback(GLFWwindow window, GLFWmousebuttonfun cbfun) {
+	public static GLFWmousebuttonfun glfwSetMouseButtonCallback(GLFWwindow window, GLFWmousebuttonfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWmousebuttonfun previous = window.mouseButtonCallback;
 		window.mouseButtonCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1711,11 +1734,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetCursorPosCallback(GLFWwindow window, GLFWcursorposfun cbfun) {
+	public static GLFWcursorposfun glfwSetCursorPosCallback(GLFWwindow window, GLFWcursorposfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWcursorposfun previous = window.cursorPosCallback;
 		window.cursorPosCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1724,11 +1749,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetCursorEnterCallback(GLFWwindow window, GLFWcursorenterfun cbfun) {
+	public static GLFWcursorenterfun glfwSetCursorEnterCallback(GLFWwindow window, GLFWcursorenterfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWcursorenterfun previous = window.cursorEnterCallback;
 		window.cursorEnterCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1739,11 +1766,13 @@ public final class JGLFW {
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
 	 */
-	public static void glfwSetScrollCallback(GLFWwindow window, GLFWscrollfun cbfun) {
+	public static GLFWscrollfun glfwSetScrollCallback(GLFWwindow window, GLFWscrollfun cbfun) {
 		if ( notInitialized() )
-			return;
+			return null;
 
+		GLFWscrollfun previous = window.scrollCallback;
 		window.scrollCallback = cbfun;
+		return previous;
 	}
 
 	/**
@@ -1979,7 +2008,8 @@ public final class JGLFW {
 
 		for ( GLFWvidmode current : monitor.getVidmodes() ) {
 			int colorDiff = abs((current.redBits + current.greenBits + current.blueBits) - (desired.redBits + desired.greenBits + desired.blueBits));
-			int sizeDiff = abs((current.width - desired.width) * (current.width - desired.width) + (current.height - desired.height) * (current.height - desired.height));
+			int sizeDiff = abs((current.width - desired.width) * (current.width - desired.width) + (current.height - desired.height) * (current.height -
+			                                                                                                                            desired.height));
 
 			if ( (colorDiff < leastColorDiff) || (colorDiff == leastColorDiff && sizeDiff < leastSizeDiff) ) {
 				closest = current;

@@ -412,7 +412,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 	)
 
-	void.func(
+	GLFWerrorfun.func(
 		"SetErrorCallback",
 		"""
 		This function sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
@@ -495,7 +495,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		GLFWmonitor.IN("monitor", "monitor to query")
 	)
 
-	void.func(
+	GLFWmonitorfun.func(
 		"SetMonitorCallback",
 		"Sets the monitor configuration callback.",
 
@@ -832,7 +832,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		GLFWwindow.IN("window", "window whose pointer to return")
 	)
 
-	void.func(
+	GLFWwindowposfun.func(
 		"SetWindowPosCallback",
 		"Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
@@ -840,7 +840,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWwindowsizefun.func(
 		"SetWindowSizeCallback",
 		"Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
@@ -848,7 +848,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWwindowclosefun.func(
 		"SetWindowCloseCallback",
 		"""
 		Sets the close callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -865,7 +865,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowclosefun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWwindowrefreshfun.func(
 		"SetWindowRefreshCallback",
 		"""
 		Sets the refresh callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -881,7 +881,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowrefreshfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWwindowfocusfun.func(
 		"SetWindowFocusCallback",
 		"""
 		Sets the focus callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -893,7 +893,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowfocusfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWwindowiconifyfun.func(
 		"SetWindowIconifyCallback",
 		"""
 		Sets the iconify callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -1020,7 +1020,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		double.IN("ypos", "desired y-coordinate, relative to the top edge of the client area, or null")
 	)
 
-	void.func(
+	GLFWkeyfun.func(
 		"SetKeyCallback",
 		"""
 		Sets the key callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -1033,7 +1033,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWkeyfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWcharfun.func(
 		"SetCharCallback",
 		"""
 		Sets the Unicode character callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -1045,7 +1045,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWcharfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWmousebuttonfun.func(
 		"SetMouseButtonCallback",
 		"Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
@@ -1053,7 +1053,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWcursorposfun.func(
 		"SetCursorPosCallback",
 		"""
 		Sets the cursor position callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -1065,7 +1065,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWcursorposfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWcursorenterfun.func(
 		"SetCursorEnterCallback",
 		"Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
@@ -1073,7 +1073,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	GLFWscrollfun.func(
 		"SetScrollCallback",
 		"""
 		Sets the scroll callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
@@ -1202,14 +1202,14 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Client API types.",
+		"Values for the {@link #GLFW_CLIENT_API} hint.",
 
 		"OPENGL_API" _ 0x00000001,
 		"OPENGL_ES_API" _ 0x00000002
 	)
 
 	IntConstant.block(
-		"// Robustness values.",
+		"Values for the {@link #GLFW_CONTEXT_ROBUSTNESS} hint.",
 
 		"NO_ROBUSTNESS" _ 0x00000000,
 		"NO_RESET_NOTIFICATION" _ 0x00000001,
@@ -1217,47 +1217,72 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"OpenGL profiles.",
+		"Values for the {@link #GLFW_OPENGL_PROFILE} hint.",
 
 		"OPENGL_NO_PROFILE" _ 0x00000000,
 		"OPENGL_CORE_PROFILE" _ 0x00000001,
 		"OPENGL_COMPAT_PROFILE" _ 0x00000002
 	)
 
-	/*
 	void.func(
 		"MakeContextCurrent",
-		"",
+		"""
+		Makes the context of the specified window current on the calling thread.  A context can only be made current on a single thread at a time and each
+		thread can have only a single current context at a time.
+		""",
 
-		GLFWwindow.IN("window", "")
+		GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context")
 	)
 
 	GLFWwindow.func(
 		"GetCurrentContext",
-		""
+		"Returns the window whose context is current on the calling thread."
 	)
 
-	void.func(
+	val glfwSwapBuffers = void.func(
 		"SwapBuffers",
-		"",
+		"""
+		Swaps the front and back buffers of the specified window.  If the swap interval is greater than zero, the GPU driver waits the specified number of
+		screen updates before swapping the buffers.
+		""",
 
-		GLFWwindow.IN("window", "")
-	)
+		GLFWwindow.IN("window", "the window whose buffers to swap")
+	).javaDocLink
 
 	void.func(
 		"SwapInterval",
-		"",
+		"""
+		Sets the swap interval for the current context, i.e. the number of screen updates to wait before swapping the buffers of a window and returning from
+		$glfwSwapBuffers. This is sometimes called 'vertical synchronization', 'vertical retrace synchronization' or 'vsync'.
 
-		int.IN("interval", "")
+		This function may be called from secondary threads.
+
+		Contexts that support either of the {@code WGL_EXT_swap_control_tear} and {@code GLX_EXT_swap_control_tear} extensions also accept negative swap
+		intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions using
+		{@link #glfwExtensionSupported}. For more information about swap tearing, see the extension specifications.
+
+		Some GPU drivers do not honor the requested swap interval, either because of user settings that override the request or due to bugs in the driver.
+		""",
+
+		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by $glfwSwapBuffers")
 	)
 
 	int.func(
 		"ExtensionSupported",
-		"",
+		"""
+		Returns whether the specified OpenGL or context creation API extension is supported by the current context. For example, on Windows both the OpenGL and
+		WGL extension strings are checked.
 
-		const _ charASCII_p.IN("extension", "")
+		This function may be called from secondary threads.
+
+		As this functions searches one or more extension strings on each call, it is recommended that you cache its results if it's going to be used frequently.
+		The extension strings will not change during the lifetime of a context, so there is no danger in doing this.
+		""",
+
+		const _ charASCII_p.IN("extension", "the ASCII encoded name of the extension")
 	)
 
+	/*
 	GLFWglproc.func(
 		"GetProcAddress",
 		"",
