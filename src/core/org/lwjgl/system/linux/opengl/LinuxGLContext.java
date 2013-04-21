@@ -3,6 +3,7 @@ package org.lwjgl.system.linux.opengl;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.OpenGLException;
 
 import static org.lwjgl.opengl.GLX12.*;
 import static org.lwjgl.opengl.GLX13.*;
@@ -54,11 +55,15 @@ public class LinuxGLContext extends GLContext {
 		return glXGetCurrentContext() == ctx;
 	}
 
-	public static LinuxGLContext create() {
-		return create(glXGetCurrentDisplay());
+	public static LinuxGLContext createFromCurrent() {
+		long glXGetCurrentDisplay = GL.getFunctionProvider().getFunctionAddress("glXGetCurrentDisplay");
+		if ( glXGetCurrentDisplay == NULL )
+			throw new OpenGLException("Failed to retrieve glXGetCurrentDisplay function address.");
+
+		return createFromCurrent(nglXGetCurrentDisplay(glXGetCurrentDisplay));
 	}
 
-	public static LinuxGLContext create(long display) {
+	public static LinuxGLContext createFromCurrent(long display) {
 		if ( display == NULL )
 			throw new IllegalStateException("Invalid X server connection specified.");
 
@@ -70,62 +75,6 @@ public class LinuxGLContext extends GLContext {
 
 		return new LinuxGLContext(capabilities, display, ctx);
 	}
-
-	/**/
-
-	/*public static LinuxGLContext create(long display, long drawable) {
-		LinuxGLContext context = createLegacy(display, drawable);
-		try {
-			return createARB(display, drawable);
-		} finally {
-			context.destroy();
-		}
-	}*/
-
-	/*public static LinuxGLContext createLegacy(long display, long drawable) {
-		long hglrc = glXCreateContext(display, );
-		if ( hglrc == 0 )
-			throw new RuntimeException("Failed to create OpenGL context.");
-
-		try {
-			int result = wglMakeCurrent(hdc, hglrc);
-			if ( result == 0 )
-				throw new RuntimeException("Failed to make the new OpenGL context current.");
-
-			return create(hdc, hglrc);
-		} catch (RuntimeException e) {
-			wglDeleteContext(hglrc);
-			throw e;
-		}
-	}
-
-	public static LinuxGLContext createARB(long display, long drawable) {
-		IntBuffer attribs = BufferUtils.createIntBuffer(16);
-
-		attribs.put(WGL_CONTEXT_FLAGS_ARB);
-		attribs.put(WGL_CONTEXT_DEBUG_BIT_ARB);
-
-		attribs.put(WGL_CONTEXT_PROFILE_MASK_ARB);
-		attribs.put(WGL_CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB);
-
-		attribs.put(0);
-		attribs.flip();
-
-		long hglrc = wglCreateContextAttribsARB(hdc, NULL, attribs);
-		if ( hglrc == 0 )
-			throw new RuntimeException("Failed to create OpenGL context.");
-
-		try {
-			int result = wglMakeCurrent(hdc, hglrc);
-			if ( result == 0 )
-				throw new RuntimeException("Failed to make the new OpenGL context current.");
-
-			return create(hdc, hglrc);
-		} catch (RuntimeException e) {
-			wglDeleteContext(hglrc);
-			throw e;
-		}
-	}*/
 
 	@Override
 	public void destroyImpl() {

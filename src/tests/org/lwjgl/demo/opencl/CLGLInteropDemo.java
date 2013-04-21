@@ -6,7 +6,6 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.demo.glfw.DemoUtil;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.glfw.ErrorCallback;
@@ -39,12 +38,8 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL32.*;
-import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
-import static org.lwjgl.system.windows.GLFWWin32.*;
-import static org.lwjgl.system.windows.WinGDI.*;
-import static org.lwjgl.system.windows.WinUser.*;
 
 /*
 		THIS DEMO USES CODE PORTED FROM JogAmp.org
@@ -116,8 +111,6 @@ public class CLGLInteropDemo {
 
 	private final GLFWWindow window;
 
-	private final long HDC;
-
 	private final GLContext context;
 
 	private final CLContext        clContext;
@@ -177,10 +170,8 @@ public class CLGLInteropDemo {
 		width = windowSize.get(0);
 		height = windowSize.get(1);
 
-		long HWND = glfwGetWin32Window(window.handle);
-		HDC = GetDC(HWND);
-
-		context = DemoUtil.initializeOpenGLContext(HDC);
+		glfwMakeContextCurrent(window.handle);
+		context = GLContext.createFromCurrent();
 
 		ContextCapabilities caps = GL.getCapabilities();
 
@@ -195,7 +186,7 @@ public class CLGLInteropDemo {
 				glDebugMessageCallbackAMD(new DEBUGPROCAMD());
 		}
 
-		wglSwapIntervalEXT(0);
+		glfwSwapInterval(0);
 
 		errcode_ret = BufferUtils.createIntBuffer(1);
 		int errcode;
@@ -249,7 +240,12 @@ public class CLGLInteropDemo {
 				queues[i] = clCreateCommandQueue(clContext, devices.get(i), 0L, errcode_ret);
 				checkCLError(errcode_ret);
 
-				ByteBuffer colorMapBuffer = clEnqueueMapBuffer(queues[i], colorMap[i], CL_TRUE, CL_MAP_WRITE, 0L, COLOR_MAP_SIZE, null, null, errcode_ret, null);
+				ByteBuffer colorMapBuffer = clEnqueueMapBuffer(
+					queues[i], colorMap[i],
+					CL_TRUE, CL_MAP_WRITE,
+					0L, COLOR_MAP_SIZE,
+					null, null, errcode_ret, null
+				);
 				checkCLError(errcode_ret);
 
 				initColorMap(colorMapBuffer.asIntBuffer(), 32, Color.BLUE, Color.GREEN, Color.RED);
@@ -481,8 +477,6 @@ public class CLGLInteropDemo {
 					windows[i] = null;
 				}
 			}
-
-			DemoUtil.pause(16);
 		}
 
 		CL.destroy();
@@ -672,7 +666,7 @@ public class CLGLInteropDemo {
 
 			display();
 
-			SwapBuffers(HDC);
+			glfwSwapBuffers(window.handle);
 
 			if ( startTime > System.currentTimeMillis() ) {
 				fps++;
@@ -695,8 +689,6 @@ public class CLGLInteropDemo {
 
 			glDeleteLists(dlist, 1);
 		}
-
-		context.destroy();
 
 		window.signal.countDown();
 	}

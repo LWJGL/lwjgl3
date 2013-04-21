@@ -4,6 +4,10 @@
  */
 package org.lwjgl.opengl;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.linux.opengl.LinuxGLContext;
+import org.lwjgl.system.windows.opengl.WindowsGLContext;
+
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper over an OS-specific OpenGL context handle and provides basic functionality related to OpenGL contexts. */
@@ -15,6 +19,19 @@ public abstract class GLContext {
 		this.capabilities = capabilities;
 
 		GL.setCurrent(this);
+	}
+
+	public static GLContext createFromCurrent() {
+		switch ( LWJGLUtil.getPlatform() ) {
+			case WINDOWS:
+				return WindowsGLContext.createFromCurrent();
+			case LINUX:
+				return LinuxGLContext.createFromCurrent();
+			case MACOSX:
+				throw new UnsupportedOperationException("not implemented yet");
+			default:
+				throw new IllegalStateException();
+		}
 	}
 
 	/**
@@ -40,6 +57,8 @@ public abstract class GLContext {
 	 * The {@code target} handle is OS-specific.
 	 *
 	 * @param target the device/drawable to associate the context with
+	 *
+	 * @see GL#setCurrent(GLContext)
 	 */
 	public void makeCurrent(long target) {
 		makeCurrentImpl(target);
@@ -48,7 +67,8 @@ public abstract class GLContext {
 
 	/**
 	 * Makes the context current in the current thread and associates with the device/drawable given by the {@code targetDraw} handle for draw operations and
-	 * the device/drawable given by the {@code targetRead} handle for read operations. This functionality is optional as it may not be supported by the OpenGL
+	 * the
+	 * device/drawable given by the {@code targetRead} handle for read operations. This functionality is optional as it may not be supported by the OpenGL
 	 * implementation. The user must check the availability of the corresponding OpenGL extension before calling this method.
 	 * <p/>
 	 * The {@code targetDraw} and {@code targetRead} handles are OS-specific.

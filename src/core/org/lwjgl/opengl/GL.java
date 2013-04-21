@@ -18,6 +18,8 @@ import java.util.StringTokenizer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GLX11.*;
+import static org.lwjgl.opengl.GLX12.*;
 import static org.lwjgl.opengl.GLX14.*;
 import static org.lwjgl.opengl.GLXARBGetProcAddress.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
@@ -25,6 +27,7 @@ import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.linux.GLX.*;
 import static org.lwjgl.system.windows.WGL.*;
 
 public final class GL {
@@ -121,10 +124,17 @@ public final class GL {
 		return functionProvider;
 	}
 
-	static void setCurrent(GLContext context) {
+	/** Sets the current {@link GLContext} in the current thread. */
+	public static void setCurrent(GLContext context) {
 		contextTL.set(context);
 	}
 
+	/** Returns the current {@link GLContext} in the current thread. */
+	public static GLContext getCurrent() {
+		return contextTL.get();
+	}
+
+	/** Returns the {@link ContextCapabilities} of the {@link GLContext} that is current in the current thread. */
 	public static ContextCapabilities getCapabilities() {
 		GLContext currentContext = contextTL.get();
 		if ( currentContext == null )
@@ -157,7 +167,9 @@ public final class GL {
 
 		int errorCode = nglGetError(GetError);
 		if ( errorCode != GL_NO_ERROR )
-			LWJGLUtil.log("A GL context was in an error state before the creation of its capabilities instance. Error: " + Util.translateGLErrorString(errorCode));
+			LWJGLUtil.log(
+				"A GL context was in an error state before the creation of its capabilities instance. Error: " + Util.translateGLErrorString(errorCode)
+			);
 
 		APIBuffer __buffer = apiBuffer();
 
@@ -279,7 +291,42 @@ public final class GL {
 	}
 
 	private static void addGLXExtensions(Set<String> supportedExtensions) {
-		// FIXME
+		long glXGetCurrentDisplay = GL.getFunctionProvider().getFunctionAddress("glXGetCurrentDisplay");
+		if ( glXGetCurrentDisplay == NULL )
+			throw new OpenGLException("Failed to retrieve glXGetCurrentDisplay function address.");
+
+		long display = nglXGetCurrentDisplay(glXGetCurrentDisplay);
+
+		APIBuffer __buffer = apiBuffer();
+
+		if ( nglXQueryVersion(display, __buffer.address(), __buffer.address() + 4) == 0 )
+			throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
+
+		int majorVersion = __buffer.intValue(0);
+		int minorVersion = __buffer.intValue(4);
+		if ( majorVersion != 1 )
+			throw new OpenGLException("Invalid GLX major version: " + majorVersion);
+
+		int[][] GLX_VERSIONS = {
+			{ 1, 2, 3, 4 }
+		};
+
+		for ( int major = 1; major <= GLX_VERSIONS.length; major++ ) {
+			int[] minors = GLX_VERSIONS[major - 1];
+			for ( int minor : minors ) {
+				if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
+					supportedExtensions.add("GLX_" + Integer.toString(major) + Integer.toString(minor));
+			}
+		}
+
+		long glXQueryExtensionsString = functionProvider.getFunctionAddress("glXQueryExtensionsString");
+		if ( glXQueryExtensionsString == NULL )
+			return;
+
+		String glxExtensions = memDecodeASCII(memByteBufferNT1(nglXQueryExtensionsString(display, 0, glXQueryExtensionsString)));
+		StringTokenizer tokenizer = new StringTokenizer(glxExtensions);
+		while ( tokenizer.hasMoreTokens() )
+			supportedExtensions.add(tokenizer.nextToken());
 	}
 
 	static long getFunctionAddress(FunctionProvider provider, String functionName, boolean fc) {

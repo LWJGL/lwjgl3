@@ -48,13 +48,13 @@ public class WindowsGLContext extends GLContext {
 	}
 
 	/**
-	 * Creates a {@code WindowContext} from the current OpenGL context of the current thread.
+	 * Creates a {@link WindowsGLContext} from the current OpenGL context of the current thread.
 	 *
-	 * @return the new {@code WindowContext}
+	 * @return the new {@link WindowsGLContext}
 	 *
 	 * @throws IllegalStateException if no OpenGL context is current in the current thread.
 	 */
-	public static WindowsGLContext create() {
+	public static WindowsGLContext createFromCurrent() {
 		long hglrc = wglGetCurrentContext();
 		if ( hglrc == NULL )
 			throw new IllegalStateException("No OpenGL context is current in the current thread.");
@@ -90,7 +90,7 @@ public class WindowsGLContext extends GLContext {
 			if ( result == FALSE )
 				throw new RuntimeException("Failed to make the new OpenGL context current.");
 
-			return create();
+			return createFromCurrent();
 		} catch (RuntimeException e) {
 			wglDeleteContext(hglrc);
 			throw e;
@@ -124,7 +124,7 @@ public class WindowsGLContext extends GLContext {
 			if ( result == FALSE )
 				throw new RuntimeException("Failed to make the new OpenGL context current.");
 
-			return create();
+			return createFromCurrent();
 		} catch (RuntimeException e) {
 			wglDeleteContext(hglrc);
 			throw e;

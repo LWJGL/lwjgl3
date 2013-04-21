@@ -74,8 +74,8 @@ public final class JGLFWTest {
 
 		GLFWwindow window = glfwCreateWindow(640, 480, "JGLFW Test", null, null);
 
-		glfwSetWindowPos(window, 256, 256);
 		glfwShowWindow(window);
+		glfwSetWindowPos(window, 256, 256);
 
 		System.out.println("Window opened.");
 

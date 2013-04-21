@@ -71,6 +71,9 @@
         <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
         <option name="DOWHILE_BRACE_FORCE" value="3" />
         <option name="FIELD_ANNOTATION_WRAP" value="0" />
+        <JetCodeStyleSettings>
+          <option name="ALIGN_IN_COLUMNS_CASE_BRANCH" value="true" />
+        </JetCodeStyleSettings>
         <SqlCodeStyleSettings>
           <option name="NEW_LINE_BEFORE_FROM" value="false" />
           <option name="NEW_LINE_BEFORE_JOIN" value="false" />
@@ -138,8 +141,7 @@
           <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
           <option name="KEEP_BLANK_LINES_BEFORE_RBRACE" value="1" />
           <option name="BLANK_LINES_BEFORE_IMPORTS" value="0" />
-          <option name="BLANK_LINES_AROUND_CLASS" value="0" />
-          <option name="BLANK_LINES_AFTER_CLASS_HEADER" value="1" />
+          <option name="BLANK_LINES_AROUND_METHOD_IN_INTERFACE" value="0" />
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
           <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_ASSIGNMENT" value="true" />
@@ -157,10 +159,21 @@
           <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACES" value="true" />
           <option name="SPACE_AFTER_TYPE_CAST" value="false" />
           <option name="SPACE_BEFORE_ARRAY_INITIALIZER_LBRACE" value="true" />
+          <option name="CALL_PARAMETERS_WRAP" value="5" />
+          <option name="METHOD_PARAMETERS_WRAP" value="5" />
+          <option name="METHOD_PARAMETERS_LPAREN_ON_NEXT_LINE" value="true" />
+          <option name="METHOD_PARAMETERS_RPAREN_ON_NEXT_LINE" value="true" />
           <option name="EXTENDS_LIST_WRAP" value="5" />
+          <option name="METHOD_CALL_CHAIN_WRAP" value="5" />
+          <option name="TERNARY_OPERATION_WRAP" value="5" />
+          <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
           <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
           <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
+          <option name="ARRAY_INITIALIZER_WRAP" value="5" />
+          <option name="ARRAY_INITIALIZER_LBRACE_ON_NEXT_LINE" value="true" />
+          <option name="ARRAY_INITIALIZER_RBRACE_ON_NEXT_LINE" value="true" />
           <option name="DOWHILE_BRACE_FORCE" value="3" />
+          <option name="WRAP_LONG_LINES" value="true" />
           <option name="FIELD_ANNOTATION_WRAP" value="0" />
           <option name="PARENT_SETTINGS_INSTALLED" value="true" />
           <indentOptions>
