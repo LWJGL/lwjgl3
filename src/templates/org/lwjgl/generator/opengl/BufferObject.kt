@@ -15,7 +15,7 @@ public class BufferObject(public val binding: String) : ParameterModifier() {
 	override protected fun validate(param: Parameter) {
 		if (
 			!(
-				(param.nativeType is PointerType && (param.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER) ||
+				(param.nativeType is PointerType && param.nativeType.mapping != PointerMapping.NAKED_POINTER) ||
 				param.nativeType.mapping == PrimitiveMapping.PTR
 			)
 		)
