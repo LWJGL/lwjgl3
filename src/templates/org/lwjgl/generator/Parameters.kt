@@ -15,7 +15,7 @@ abstract class QualifiedType(
 		get() = isBufferPointer || super.isSpecial
 
 	val isBufferPointer: Boolean
-		get() = nativeType is PointerType && (nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER
+		get() = nativeType is PointerType && nativeType.mapping != PointerMapping.NAKED_POINTER
 
 	val javaMethodType: String
 		get() = when {
@@ -281,7 +281,7 @@ public class Check(
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The Check modifier cannot be applied on naked pointer types.")
 	}
 }
@@ -310,7 +310,7 @@ public val nullTerminated: TemplateModifier = object : ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on naked pointer types.")
 	}
 }
@@ -348,7 +348,7 @@ public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The MultiType modifier cannot be applied on naked pointer types.")
 	}
 
@@ -372,7 +372,7 @@ public class Return(
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The returnValue modifier cannot be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.OUT )
@@ -393,7 +393,7 @@ public class SingleValue(val newName: String): ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The SingleValue modifier cannot be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
@@ -421,7 +421,7 @@ public class PointerArray(
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
 
-		if ( (param.nativeType as PointerType).mapping != PointerMapping.DATA_POINTER )
+		if ( param.nativeType.mapping != PointerMapping.DATA_POINTER )
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer-to-pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
@@ -436,7 +436,7 @@ public class Callback(val procClass: String, val storeInFunctions: Boolean = fal
 
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType || (param.nativeType as PointerType).mapping != PointerMapping.NAKED_POINTER )
+		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.NAKED_POINTER )
 			throw IllegalArgumentException("The Callback modifier can only be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
@@ -460,7 +460,7 @@ public class MapPointer(
 		if ( returns.nativeType !is PointerType )
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
 
-		if ( (returns.nativeType as PointerType).mapping != PointerMapping.DATA )
+		if ( returns.nativeType.mapping != PointerMapping.DATA )
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on void pointer types.")
 	}
 }
