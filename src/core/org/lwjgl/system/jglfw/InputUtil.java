@@ -10,6 +10,7 @@ import org.lwjgl.BufferUtils;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.system.jglfw.JGLFW.*;
+import static org.lwjgl.system.jglfw.WindowUtil.*;
 
 final class InputUtil {
 
@@ -35,22 +36,24 @@ final class InputUtil {
 		if ( oldMode == newMode )
 			return;
 
-		if ( oldMode == GLFW_CURSOR_CAPTURED )
-			platform.setCursorPos(window, cursorPosX, cursorPosY);
-		else if ( newMode == GLFW_CURSOR_CAPTURED ) {
-			cursorPosX = window.cursorPosX;
-			cursorPosY = window.cursorPosY;
+		if ( window == focusedWindow ) {
+			if ( oldMode == GLFW_CURSOR_CAPTURED )
+				platform.setCursorPos(window, cursorPosX, cursorPosY);
+			else if ( newMode == GLFW_CURSOR_CAPTURED ) {
+				cursorPosX = window.cursorPosX;
+				cursorPosY = window.cursorPosY;
 
-			// TODO: optimize
-			IntBuffer widthOut = BufferUtils.createIntBuffer(1);
-			IntBuffer heightOut = BufferUtils.createIntBuffer(1);
+				// TODO: optimize
+				IntBuffer widthOut = BufferUtils.createIntBuffer(1);
+				IntBuffer heightOut = BufferUtils.createIntBuffer(1);
 
-			platform.getWindowSize(window, widthOut, heightOut);
+				platform.getWindowSize(window, widthOut, heightOut);
 
-			int width = widthOut.get(0);
-			int height = heightOut.get(0);
+				int width = widthOut.get(0);
+				int height = heightOut.get(0);
 
-			platform.setCursorPos(window, width / 2.0, height / 2.0);
+				platform.setCursorPos(window, width / 2.0, height / 2.0);
+			}
 		}
 
 		platform.setCursorMode(window, newMode);
