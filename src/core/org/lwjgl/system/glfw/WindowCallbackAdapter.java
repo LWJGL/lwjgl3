@@ -5,7 +5,7 @@
 package org.lwjgl.system.glfw;
 
 /** A WindowCallback adapter for convenience. */
-public abstract class WindowCallbackAdapter extends WindowCallback {
+public class WindowCallbackAdapter extends WindowCallback {
 
 	@Override
 	public void windowPos(long window, int xpos, int ypos) {

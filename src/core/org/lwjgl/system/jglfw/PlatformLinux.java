@@ -1801,7 +1801,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 	}
 
 	// Set the current video mode for the specified monitor
-	static void setVideoMode(GLFWmonitorLinux monitor, GLFWvidmode mode) {
+	static void setVideoMode(GLFWmonitorLinux monitor, GLFWvidmode desired) {
 		if ( x11.randr.available ) {
 			long bestMode = 0;
 			int leastSizeDiff = Integer.MAX_VALUE;
@@ -1834,7 +1834,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 				if ( (XRRModeInfo.modeFlagsGet(mi) & RR_Interlace) != 0 )
 					continue;
 
-				int sizeDiff = (XRRModeInfo.widthGet(mi) - mode.width) * (XRRModeInfo.widthGet(mi) - mode.width) + (XRRModeInfo.heightGet(mi) - mode.height) * (XRRModeInfo.heightGet(mi) - mode.height);
+				int sizeDiff = (XRRModeInfo.widthGet(mi) - desired.width) * (XRRModeInfo.widthGet(mi) - desired.width) + (XRRModeInfo.heightGet(mi) - desired.height) * (XRRModeInfo.heightGet(mi) - desired.height);
 
 				if ( sizeDiff < leastSizeDiff ) {
 					bestMode = XRRModeInfo.idGet(mi);

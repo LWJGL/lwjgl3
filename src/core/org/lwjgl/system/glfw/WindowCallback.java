@@ -5,6 +5,8 @@
 package org.lwjgl.system.glfw;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.system.FastLongMap;
@@ -99,7 +101,7 @@ public abstract class WindowCallback {
 	 * @param proc   the WindowCallback instance, or NULL to disable event callbacks.
 	 */
 	public static void set(long window, WindowCallback proc) {
-		set(window, proc, 0xFFFF);
+		set(window, proc, ALL);
 	}
 
 	/**
@@ -118,6 +120,13 @@ public abstract class WindowCallback {
 		}
 
 		if ( proc != null ) {
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
+				// Wrap the user-specified callback
+				proc = new WindowCallbackMacOSX(proc);
+				// Enable all event types, else glfwWaitEvents can block
+				eventTypes = ALL;
+			}
+
 			windows.put(window, window);
 			glfwSetWindowUserPointer(window, memGlobalRefNew(proc));
 

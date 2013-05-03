@@ -331,7 +331,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"DISCONNECTED" _ 0x00061001
 	)
 
-	val Init = int.func(
+	val Init = (Code(
+		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();"
+	) _ int.func(
 		"Init",
 		"""
 		This function initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before a program terminates GLFW
@@ -352,7 +354,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"""
 		)}
 		"""
-	).javaDocLink
+	)).javaDocLink
 
 	Code(
 		javaBeforeNative = "\t\tWindowCallback.clearAll();"
@@ -593,7 +595,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		int.IN("hint", "new value of the window hint")
 	)
 
-	GLFWwindow.func(
+	Code(
+		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
+		javaAfterNative = "\t\tif ( __result != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
+	) _ GLFWwindow.func(
 		"CreateWindow",
 		"""
 		This function creates a window. Most of the options controlling how the window should be created are specified through {@link #glfwWindowHint}.
@@ -905,7 +910,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		nullable _ GLFWwindowiconifyfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
 	)
 
-	void.func(
+	Code(
+		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.pollEvents(); return; }"
+	) _ void.func(
 		"PollEvents",
 		"""
 		This function processes only those events that have already been recevied
@@ -913,7 +920,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 	)
 
-	void.func(
+	Code(
+		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.waitEvents(); return; }"
+	) _ void.func(
 		"WaitEvents",
 		"""
 		This function blocks until at least one event has been recevied and then

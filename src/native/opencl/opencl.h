@@ -31,6 +31,8 @@
 #include <OpenCL/cl.h>
 #include <OpenCL/cl_gl.h>
 
+typedef cl_uint     cl_gl_context_info;
+
 #else
 
 #include "CL/cl.h"

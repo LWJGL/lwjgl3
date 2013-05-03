@@ -6,6 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.linux.LinuxLibrary;
+import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.lang.reflect.Method;
@@ -63,7 +64,7 @@ public final class APIUtil {
 			case LINUX:
 				return new LinuxLibrary(name);
 			case MACOSX:
-				throw new UnsupportedOperationException("not implemented yet");
+				return new MacOSXLibrary(name);
 			default:
 				throw new IllegalStateException();
 		}

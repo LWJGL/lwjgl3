@@ -3,8 +3,9 @@
  * License terms: http://lwjgl.org/license.php
  */
 #include "common_tools.h"
-#ifdef LWJGL_LINUX
+#ifndef LWJGL_WINDOWS
 	#include <string.h>
+	//#include <xmmintrin.h>
 #endif
 
 // memPointerSize()I
@@ -116,3 +117,10 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_nNewBuffer(JNIEnv *en
 ) {
 	return (*env)->NewDirectByteBuffer(env, (void *)(intptr_t)address, capacity);
 }
+
+// memPause()V
+/*
+JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memPause(JNIEnv *env, jclass clazz) {
+	_mm_pause();
+}
+*/
