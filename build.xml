@@ -128,21 +128,29 @@
 	</target>
 
 	<target name="compile-native" depends="-initialize, compile" description="Compiles the native source code">
-		<antcall target="-compile_native_windows"/>
 		<antcall target="-compile_native_linux"/>
-	</target>
-
-	<target name="-compile_native_windows" if="lwjgl.platform.windows">
-		<ant antfile="config/windows/build.xml" inheritAll="false"/>
-		<copy todir="${lwjgl.lib}/windows">
-			<fileset dir="${lwjgl.bin.native}" includes="lwjgl*.dll"/>
-		</copy>
+		<antcall target="-compile_native_macosx"/>
+		<antcall target="-compile_native_windows"/>
 	</target>
 
 	<target name="-compile_native_linux" if="lwjgl.platform.linux">
 		<ant antfile="config/linux/build.xml" inheritAll="false"/>
 		<copy todir="${lwjgl.lib}/linux">
 			<fileset dir="${lwjgl.bin.native}" includes="liblwjgl*.so"/>
+		</copy>
+	</target>
+
+	<target name="-compile_native_macosx" if="lwjgl.platform.macosx">
+		<ant antfile="config/macosx/build.xml" inheritAll="false"/>
+		<copy todir="${lwjgl.lib}/macosx">
+			<fileset dir="${lwjgl.bin.native}" includes="liblwjgl*.jnilib"/>
+		</copy>
+	</target>
+
+	<target name="-compile_native_windows" if="lwjgl.platform.windows">
+		<ant antfile="config/windows/build.xml" inheritAll="false"/>
+		<copy todir="${lwjgl.lib}/windows">
+			<fileset dir="${lwjgl.bin.native}" includes="lwjgl*.dll"/>
 		</copy>
 	</target>
 

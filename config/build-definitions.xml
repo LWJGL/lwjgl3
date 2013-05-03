@@ -4,13 +4,6 @@
 	<!-- ================================================================== -->
 	<property environment="env"/>
 
-	<fail unless="env.JAVA6_HOME" message="Please set an environment variable named JAVA6_HOME that points to the Java 6 SDK."/>
-	<path id="java6.boot.classpath">
-		<fileset dir="${env.JAVA6_HOME}/jre/lib">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
-
 	<property name="lwjgl.src" location="src"/>
 	<property name="lwjgl.generated" location="generated"/>
 	<property name="lwjgl.bin" location="bin"/>
@@ -70,6 +63,17 @@
 	<condition property="lwjgl.platform" value="macosx">
 		<isset property="lwjgl.platform.macosx"/>
 	</condition>
+
+	<fail unless="env.JAVA6_HOME" message="Please set an environment variable named JAVA6_HOME that points to the Java 6 SDK."/>
+	<condition property="java6.path" value="${env.JAVA6_HOME}/Contents/Classes" else="${env.JAVA6_HOME}/jre/lib">
+		<equals arg1="${lwjgl.platform}" arg2="macosx"/>
+	</condition>
+
+	<path id="java6.boot.classpath">
+		<fileset dir="${java6.path}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
 
 	<property name="lwjgl.lib.bin" location="${lwjgl.lib}/${lwjgl.platform}"/>
 

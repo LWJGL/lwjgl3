@@ -8,7 +8,7 @@ package org.lwjgl.system.jglfw;
 import java.nio.ByteBuffer;
 import java.util.List;
 
-public class GLFWmonitor {
+public class GLFWmonitor implements Comparable<GLFWmonitor> {
 
 	private final String name;
 
@@ -51,6 +51,11 @@ public class GLFWmonitor {
 
 	void setOriginalGammaRamp(ByteBuffer originalGammaRamp) {
 		this.originalGammaRamp = originalGammaRamp;
+	}
+
+	@Override
+	public int compareTo(GLFWmonitor that) {
+		return this.name.compareTo(that.name);
 	}
 
 	@Override

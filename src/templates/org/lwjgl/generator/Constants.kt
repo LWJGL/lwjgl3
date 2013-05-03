@@ -14,6 +14,11 @@ abstract class ConstantType<T>(
 	abstract fun nullValue(): T
 }
 
+val ByteConstant = object: ConstantType<Byte>(javaClass<Byte>()) {
+	override fun print(value: Byte): String = "0x" + Integer.toHexString(value.toInt()).toUpperCase()
+	override fun nullValue(): Byte = 0
+}
+
 val ShortConstant = object: ConstantType<Short>(javaClass<Short>()) {
 	override fun print(value: Short): String = "0x" + Integer.toHexString(value.toInt()).toUpperCase()
 	override fun nullValue(): Short = 0
@@ -33,6 +38,10 @@ val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
 	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
 	override fun nullValue(): Float = 0.0
 }
+
+// Extension property for byte literals.
+val Int.b: Byte
+	get() = this.toByte()
 
 // Extension property for short literals.
 val Int.s: Short

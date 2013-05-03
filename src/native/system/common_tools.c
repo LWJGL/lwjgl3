@@ -2,7 +2,6 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#include <jni.h>
 #include "common_tools.h"
 
 static JavaVM *jvm;

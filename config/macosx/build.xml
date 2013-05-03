@@ -1,0 +1,148 @@
+<project name="lwjgl native code" basedir="../.." default="compile-native-macosx">
+	<property name="dest" location="bin/lwjgl${os.arch}" relative="true"/>
+
+	<property name="src" location="src" relative="true"/>
+	<property name="src.native" location="${src}/native" relative="true"/>
+	<property name="src.generated" location="generated/native" relative="true"/>
+
+	<!--<condition property="libname" value="liblwjgl-i386.jnilib" else="liblwjgl-i86_64.jnilib">
+		<equals arg1="${os.arch}" arg2="x86"/>
+	</condition>-->
+
+	<property name="libname" value="liblwjgl.jnilib"/>
+
+	<!-- Ask Xcode for correct path to XCode tools -->
+	<!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
+	<exec executable="xcode-select" outputproperty="developer_path" errorproperty="xcode-error" failonerror="false" failifexecutionfails="false">
+		<arg value="--print-path"/>
+	</exec>
+	<!-- Default to /Developer if xcode-select fails -->
+	<condition property="developer_path" value="/Developer">
+		<isset property="xcode-error"/>
+	</condition>
+
+	<property name="sdk_path" value="Platforms/MacOSX.platform/Developer/SDKs"/>
+	<property name="jvm_headers_path" value="System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
+
+	<!-- Choose a JavaVM.framework -->
+	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
+		<and>
+			<not>
+				<isset property="javavmroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.8.sdk/${jvm_headers_path}" type="dir"/>
+		</and>
+	</condition>
+	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.7.sdk">
+		<and>
+			<not>
+				<isset property="javavmroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk/${jvm_headers_path}" type="dir"/>
+		</and>
+	</condition>
+	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.6.sdk">
+		<and>
+			<not>
+				<isset property="javavmroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.6.sdk/${jvm_headers_path}" type="dir"/>
+		</and>
+	</condition>
+	<condition property="javavmroot" value="">
+		<and>
+			<not>
+				<isset property="javavmroot"/>
+			</not>
+			<available file="/${jvm_headers_path}" type="dir"/>
+		</and>
+	</condition>
+
+	<!-- Choose a MacOSX SDK -->
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
+		<and>
+			<not>
+				<isset property="sdkroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.8.sdk" type="dir"/>
+		</and>
+	</condition>
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.7.sdk">
+		<and>
+			<not>
+				<isset property="sdkroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk" type="dir"/>
+		</and>
+	</condition>
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.6.sdk">
+		<and>
+			<not>
+				<isset property="sdkroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.6.sdk" type="dir"/>
+		</and>
+	</condition>
+	<condition property="sdkroot" value="${developer_path}/SDKs/MacOSx10.6.sdk">
+		<and>
+			<not>
+				<isset property="sdkroot"/>
+			</not>
+			<available file="${developer_path}/SDKs/MacOSx10.6.sdk" type="dir"/>
+		</and>
+	</condition>
+
+	<target name="compile-native-macosx">
+		<echo message="${sdkroot}"/>
+		<!-- COMPILE -->
+		<apply dir="${dest}" executable="gcc" dest="${dest}" skipemptyfilesets="true" failonerror="true" parallel="true">
+			<arg line="-c -ObjC -isysroot ${sdkroot} -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -DLWJGL_MACOSX"/>
+			<arg value="-I${javavmroot}/${jvm_headers_path}"/>
+			<!-- Paths relative to ${dest} -->
+			<arg value="-I../../${src.native}/system"/>
+			<arg value="-I../../${src.native}/system/macosx"/>
+			<arg value="-I../../${src.native}/system/glfw"/>
+			<arg value="-I../../${src.native}/openal"/>
+			<arg value="-I../../${src.native}/opencl"/>
+			<arg value="-I../../${src.native}/opengl"/>
+			<!--<arg value="-I../../${src.native}/opengl/glx"/>-->
+
+			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
+
+			<fileset dir="${src.native}/system" includes="*.c"/>
+			<fileset dir="${src.native}/system/macosx" includes="*.c"/>
+			<fileset dir="${src.native}/system/macosx" includes="*.m"/>
+			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
+			<fileset dir="${src.native}/opencl" includes="*.c"/>
+			<fileset dir="${src.native}/opengl" includes="*.c"/>
+			<fileset dir="${src.generated}/system" includes="*.c"/>
+			<fileset dir="${src.generated}/system/macosx" includes="*.c"/>
+			<fileset dir="${src.generated}/system/macosx" includes="*.m"/>
+			<fileset dir="${src.generated}/system/glfw" includes="*.c"/>
+			<fileset dir="${src.generated}/openal" includes="*.c"/>
+			<fileset dir="${src.generated}/opencl" includes="*.c"/>
+			<fileset dir="${src.generated}/opengl" includes="*.c"/>
+			<!--<fileset dir="${src.generated}/opengl/glx" includes="*.c"/>-->
+		</apply>
+
+		<!-- LINK -->
+		<apply dir="${dest}" executable="gcc" failonerror="true" parallel="true" verbose="true">
+			<srcfile/>
+			<arg line="-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname} -v -L../../libs/macosx/x86_64 -lglfw3"/>
+			<arg value="-framework"/><arg value="AppKit"/>
+			<arg value="-framework"/><arg value="CoreFoundation"/>
+			<arg value="-framework"/><arg value="Cocoa"/>
+			<arg value="-framework"/><arg value="IOKit"/>
+			<arg value="-framework"/><arg value="OpenGL"/>
+			<!-- LWJGL objects -->
+			<fileset dir="${dest}" includes="*.o"/>
+			<!-- Static libraries -->
+			<fileset dir="libs/macosx/${os.arch}" includes="*.a"/>
+		</apply>
+		<!--<apply dir="${dest}" executable="strip" failonerror="true">
+			<arg line="-S -X"/>
+			<fileset file="${libname}"/>
+		</apply>-->
+	</target>
+
+</project>

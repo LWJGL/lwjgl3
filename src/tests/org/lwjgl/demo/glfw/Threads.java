@@ -32,8 +32,6 @@ public final class Threads {
 	public static void main(String[] args) {
 		Sys.touch();
 
-		GLFWThread[] threads = new GLFWThread[titles.length];
-
 		if ( glfwInit() != GL11.GL_TRUE ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
@@ -45,6 +43,7 @@ public final class Threads {
 
 		CountDownLatch quit = new CountDownLatch(1);
 
+		GLFWThread[] threads = new GLFWThread[titles.length];
 		for ( int i = 0; i < titles.length; i++ ) {
 			long window = glfwCreateWindow(200, 200, titles[i], 0, 0);
 
@@ -53,13 +52,16 @@ public final class Threads {
 				glfwTerminate();
 			}
 
+			glfwSetWindowPos(window, 200 + 250 * i, 200);
+			glfwShowWindow(window);
+
 			threads[i] = new GLFWThread(window, i, quit);
 			threads[i].start();
 		}
 
 		out:
 		while ( true ) {
-			glfwPollEvents();
+			glfwWaitEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
 				if ( glfwWindowShouldClose(threads[i].window) == 1 || !threads[i].isAlive() ) {
@@ -69,12 +71,16 @@ public final class Threads {
 			}
 		}
 
-		for ( int i = 0; i < titles.length; i++ ) {
+		for ( int i = 0; i < threads.length; i++ ) {
 			try {
 				threads[i].join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}
+
+		for ( int i = 0; i < threads.length; i++ ) {
+			glfwDestroyWindow(threads[i].window);
 		}
 
 		glfwTerminate();
@@ -108,9 +114,6 @@ public final class Threads {
 			GLContext.createFromCurrent();
 
 			glfwSwapInterval(1);
-			glfwShowWindow(window);
-
-			glfwSetWindowPos(window, 200 + 250 * index, 200);
 
 			while ( quit.getCount() != 0 ) {
 				float v = (float)Math.abs(Math.sin(glfwGetTime() * 2f));
@@ -118,8 +121,6 @@ public final class Threads {
 				glClear(GL_COLOR_BUFFER_BIT);
 				glfwSwapBuffers(window);
 			}
-
-			glfwDestroyWindow(window);
 		}
 	}
 }

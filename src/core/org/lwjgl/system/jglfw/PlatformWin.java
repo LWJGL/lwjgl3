@@ -850,8 +850,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		return classAtom;
 	}
 
-	boolean setVideoMode(GLFWmonitor monitor, GLFWvidmode mode) {
-		GLFWvidmode best = chooseVideoMode(monitor, mode);
+	boolean setVideoMode(GLFWmonitor monitor, GLFWvidmode desired) {
+		GLFWvidmode best = chooseVideoMode(monitor, desired);
 		GLFWvidmode current = getVideoMode(monitor);
 
 		if ( current.equals(best) )

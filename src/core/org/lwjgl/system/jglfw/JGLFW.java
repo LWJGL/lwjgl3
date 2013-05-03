@@ -1963,7 +1963,7 @@ public final class JGLFW {
 				if ( JGLFW.monitors.get(j) == null )
 					continue;
 
-				if ( monitors.get(i).getName().equals(JGLFW.monitors.get(j).getName()) ) {
+				if ( monitors.get(i).compareTo(JGLFW.monitors.get(j)) == 0 ) {
 					// This monitor was connected before, so re-use the existing
 					// monitor object to preserve its address and user pointer
 

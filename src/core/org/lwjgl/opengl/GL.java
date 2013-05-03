@@ -44,7 +44,8 @@ public final class GL {
 				libName = "libGL.so";
 				break;
 			case MACOSX:
-				throw new UnsupportedOperationException("not implemented yet");
+				libName = "/System/Library/Frameworks/OpenGL.framework";
+				break;
 			default:
 				throw new IllegalStateException();
 		}
@@ -109,7 +110,23 @@ public final class GL {
 				};
 				break;
 			case MACOSX:
-				throw new UnsupportedOperationException("not implemented yet");
+				functionProvider = new FunctionProvider() {
+					@Override
+					public long getFunctionAddress(String functionName) {
+						ByteBuffer nameBuffer = memEncodeASCII(functionName);
+						long address = OPENGL.getFunctionAddress(nameBuffer);
+						if ( address == NULL )
+							LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+
+						return address;
+					}
+
+					@Override
+					public void destroy() {
+						OPENGL.destroy();
+					}
+				};
+				break;
 			default:
 				throw new IllegalStateException();
 		}
@@ -264,6 +281,7 @@ public final class GL {
 				addGLXExtensions(supportedExtensions);
 				break;
 			case MACOSX:
+				break;
 			default:
 				throw new UnsupportedOperationException();
 		}

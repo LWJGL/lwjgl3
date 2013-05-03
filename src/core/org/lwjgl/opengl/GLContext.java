@@ -6,6 +6,7 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.linux.opengl.LinuxGLContext;
+import org.lwjgl.system.macosx.opengl.MacOSXGLContext;
 import org.lwjgl.system.windows.opengl.WindowsGLContext;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -28,7 +29,7 @@ public abstract class GLContext {
 			case LINUX:
 				return LinuxGLContext.createFromCurrent();
 			case MACOSX:
-				throw new UnsupportedOperationException("not implemented yet");
+				return MacOSXGLContext.createFromCurrent();
 			default:
 				throw new IllegalStateException();
 		}
