@@ -38,7 +38,7 @@ if $cygwin; then
     KOTLIN_HOME=`cygpath --windows --short-name "$KOTLIN_HOME"`
 fi
 
-[ -n "$JAVA_OPTS" ] || JAVA_OPTS="-Xmx256M -Xms32M"
+[ -n "$JAVA_OPTS" ] || JAVA_OPTS="-Xmx256M -Xms32M -noverify"
 
 # break out -D and -J options and add them to JAVA_OPTS as well
 # so they reach the underlying JVM in time to do some good.  The
@@ -81,5 +81,5 @@ CPSELECT="-cp "
 "${JAVACMD:=java}" \
   $JAVA_OPTS \
   "${java_args[@]}" \
-  ${CPSELECT}"${KOTLIN_HOME}/lib/kotlin-compiler.jar" \
-   org.jetbrains.jet.cli.js.K2JSCompiler  "$@"
+  ${CPSELECT}"${KOTLIN_HOME}/lib/kotlin-preloader.jar" \
+  org.jetbrains.jet.preloading.Preloader "${KOTLIN_HOME}/lib/kotlin-compiler.jar" org.jetbrains.jet.cli.js.K2JSCompiler 4096 "$@"
