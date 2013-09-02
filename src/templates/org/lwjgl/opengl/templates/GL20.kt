@@ -60,6 +60,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"INT_VEC2" _ 0x8B53,
 		"INT_VEC3" _ 0x8B54,
 		"INT_VEC4" _ 0x8B55,
+		"BOOL" _ 0x8B56,
 		"BOOL_VEC2" _ 0x8B57,
 		"BOOL_VEC3" _ 0x8B58,
 		"BOOL_VEC4" _ 0x8B59,
