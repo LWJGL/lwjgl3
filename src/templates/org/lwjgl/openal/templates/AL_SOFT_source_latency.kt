@@ -39,113 +39,113 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
         when set through 64-bit integer functions
 	    """)
 
-    IntConstant.block(
-    	"Source tokens for which can be used to retrieve a high-precision source offset and playback latency",
+	IntConstant.block(
+		"Source tokens for which can be used to retrieve a high-precision source offset and playback latency",
 
-        "SAMPLE_OFFSET_LATENCY_SOFT" _ 0x1200,
-        "SEC_OFFSET_LATENCY_SOFT" _ 0x1201
-    )
+		"SAMPLE_OFFSET_LATENCY_SOFT" _ 0x1200,
+		"SEC_OFFSET_LATENCY_SOFT" _ 0x1201
+	)
 
-    val alSourcedSOFT = ALvoid.func(
+	val alSourcedSOFT = ALvoid.func(
 		"SourcedSOFT",
 		"Sets the double value of a source parameter.",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALdouble.IN("value", "the parameter value")
 	).javaDocLink
 
-    ALvoid.func(
+	ALvoid.func(
 		"Source3dSOFT",
 		"Sets the 3 dimensional double values of a source parameter.",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALdouble.IN("value1", "the first value"),
 		ALdouble.IN("value2", "the second value"),
 		ALdouble.IN("value3", "the third value")
 	)
 
-    ALvoid.func(
+	ALvoid.func(
 		"SourcedvSOFT",
 		"pointer version of $alSourcedSOFT",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALdouble_p.IN("value", "the parameter values")
 	)
 
-    val alGetSourcedSOFT = ALvoid.func(
+	val alGetSourcedSOFT = ALvoid.func(
 		"GetSourcedSOFT",
 		"Gets the double value of a source parameter.",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALdouble_p.IN("value", "the parameter values")
 	).javaDocLink
 
-    ALvoid.func(
+	ALvoid.func(
 		"GetSource3dSOFT",
 		"Gets the 3 dimensional double values of a source parameter.",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALdouble_p.IN("value1", "the first value"),
 		ALdouble_p.IN("value2", "the second value"),
 		ALdouble_p.IN("value3", "the third value")
 	)
 
-    ALvoid.func(
+	ALvoid.func(
 		"GetSourcedvSOFT",
 		"Pointer version of $alGetSourcedSOFT",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALdouble_p.IN("values", "the parameter values")
 	)
 
-    val alSourcei64SOFT = ALvoid.func(
+	val alSourcei64SOFT = ALvoid.func(
 		"Sourcei64SOFT",
 		"Sets the 64 bit integer value of a source parameter.",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint64SOFT.IN("value", "the parameter values")
 	).javaDocLink
 
-    ALvoid.func(
+	ALvoid.func(
 		"Source3i64SOFT",
 		"Sets the 3 dimensional 64 bit integer values of a source parameter.",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint64SOFT.IN("value1", "the first value"),
 		ALint64SOFT.IN("value2", "the second value"),
 		ALint64SOFT.IN("value3", "the third value")
 	)
 
-    ALvoid.func(
+	ALvoid.func(
 		"Sourcei64vSOFT",
 		"Pointer version of alSourcei64SOFT",
-        ALuint.IN("source", "the source to modify"),
+		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALint64SOFT_p.IN("values", "the parameter values")
 	)
 
-    val alGetSourcei64SOFT = ALvoid.func(
+	val alGetSourcei64SOFT = ALvoid.func(
 		"GetSourcei64SOFT",
 		"Gets the 64 bit integer value of a source parameter.",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALint64SOFT_p.IN("value", "the parameter values")
 	).javaDocLink
 
-    ALvoid.func(
+	ALvoid.func(
 		"GetSource3i64SOFT",
 		"Gets the 3 dimensional 64 bit integer values of a source parameter.",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALint64SOFT_p.IN("value1", "the first value"),
 		ALint64SOFT_p.IN("value2", "the second value"),
 		ALint64SOFT_p.IN("value3", "the third value")
 	)
 
-    ALvoid.func(
+	ALvoid.func(
 		"GetSourcei64vSOFT",
 		"Pointer version of alGetSourcei64SOFT",
-        ALuint.IN("source", "the source to query"),
+		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALint64SOFT_p.IN("values", "the parameter values")
 	)

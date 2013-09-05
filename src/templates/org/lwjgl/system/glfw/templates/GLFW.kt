@@ -227,7 +227,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"JOYSTICK_14" _ 13,
 		"JOYSTICK_15" _ 14,
 		"JOYSTICK_16" _ 15,
-	    "JOYSTICK_LAST".expr<Int>("GLFW_JOYSTICK_16")
+		"JOYSTICK_LAST".expr<Int>("GLFW_JOYSTICK_16")
 	)
 
 	IntConstant.block(
@@ -291,7 +291,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"ICONIFIED" _ 0x00020002,
 		"RESIZABLE" _ 0x00022007,
 		"VISIBLE" _ 0x00022008,
-	    "DECORATED" _ 0x00022009
+		"DECORATED" _ 0x00022009
 	)
 
 	IntConstant.block(
@@ -347,8 +347,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    "This function may take several seconds to complete on some systems, while on other systems it may take only a fraction of a second to complete.",
-		    """
+			"This function may take several seconds to complete on some systems, while on other systems it may take only a fraction of a second to complete.",
+			"""
 		    <strong>Mac OS X</strong>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the
 			application's bundle, if present.
 			"""
@@ -628,9 +628,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Notes:
 		${ul(
-            "This function may only be called from the main thread.",
-		    "This function may not be called from a callback."
-        )}
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback."
+		)}
 		""",
 
 		GLFWwindow.IN("window", "window to destroy")
@@ -690,9 +690,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         Notes:
         ${ul(
 			"It is very rarely a good idea to move an already visible window, as it will confuse and annoy the user.",
-		    "This function may only be called from the main thread.",
-		    "The window manager may put limits on what positions are allowed.",
-		    """
+			"This function may only be called from the main thread.",
+			"The window manager may put limits on what positions are allowed.",
+			"""
 		    <strong>X11</strong>: Some window managers ignore the set position of hidden (i.e. unmapped) windows, instead placing them where it thinks is
 		    appropriate once they are shown.
 			""",
@@ -727,8 +727,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         ${ul(
 			"This function may only be called from the main thread.",
 			"The window manager may put limits on what window sizes are allowed.",
-            "For fullscreen windows, this function selects and switches to the resolution closest to the specified size, without destroying the window's context."
-        )}
+			"For fullscreen windows, this function selects and switches to the resolution closest to the specified size, without destroying the window's context."
+		)}
 		""",
 
 		GLFWwindow.IN("window", "window to resize"),
@@ -804,10 +804,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		This function returns a property of the specified window.
         ${ul(
-	        "The {@link #GLFW_FOCUSED} parameter indicates whether the window is focused.",
-            "The {@link #GLFW_ICONIFIED} parameter indicates whether the window is iconified.",
-	        "The {@link #GLFW_VISIBLE} parameter indicates whether the window is visible.",
-	        "The {@link #GLFW_RESIZABLE} parameter indicates whether the window is resizable by the user."
+			"The {@link #GLFW_FOCUSED} parameter indicates whether the window is focused.",
+			"The {@link #GLFW_ICONIFIED} parameter indicates whether the window is iconified.",
+			"The {@link #GLFW_VISIBLE} parameter indicates whether the window is visible.",
+			"The {@link #GLFW_RESIZABLE} parameter indicates whether the window is resizable by the user."
 		)}
 		""",
 

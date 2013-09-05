@@ -134,7 +134,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XISelectEvents",
-	    """
+		"""
 	    Selects XI2 events.
 
 		{@code XISelectEvents} sets the event mask for this client on win. Further events are only reported to this client if the event type matches the
@@ -145,10 +145,10 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 		the respective device's event mask.
 	    """,
 
-	    DISPLAY,
-	    WINDOW,
-	    XIEventMask_p.IN("masks", "a pointer to an array of {@link XIEventMask} structures"),
-	    AutoSize("masks") _ int.IN("num_masks", "number of masks in {@code masks}")
+		DISPLAY,
+		WINDOW,
+		XIEventMask_p.IN("masks", "a pointer to an array of {@link XIEventMask} structures"),
+		AutoSize("masks") _ int.IN("num_masks", "number of masks in {@code masks}")
 	)
 
 }

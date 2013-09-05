@@ -49,24 +49,24 @@ public open class PointerType(
 	/** If true, the nativeType typedef includes a pointer. */
 	val includesPointer: Boolean = false,
 	/** Optional element type. See the secondary constructors below. */
-    val elementType: NativeType? = null
+	val elementType: NativeType? = null
 ): NativeType(name, mapping)
 /** Converts primitive to array */
 public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 	primitiveType.name,
 	when ( primitiveType.mapping as PrimitiveMapping ) {
-		PrimitiveMapping.BYTE -> PointerMapping.DATA_BYTE
-		PrimitiveMapping.SHORT -> PointerMapping.DATA_SHORT
-		PrimitiveMapping.INT -> PointerMapping.DATA_INT
-		PrimitiveMapping.LONG -> PointerMapping.DATA_LONG
-		PrimitiveMapping.PTR -> PointerMapping.DATA_POINTER
-		PrimitiveMapping.FLOAT -> PointerMapping.DATA_FLOAT
+		PrimitiveMapping.BYTE   -> PointerMapping.DATA_BYTE
+		PrimitiveMapping.SHORT  -> PointerMapping.DATA_SHORT
+		PrimitiveMapping.INT    -> PointerMapping.DATA_INT
+		PrimitiveMapping.LONG   -> PointerMapping.DATA_LONG
+		PrimitiveMapping.PTR    -> PointerMapping.DATA_POINTER
+		PrimitiveMapping.FLOAT  -> PointerMapping.DATA_FLOAT
 		PrimitiveMapping.DOUBLE -> PointerMapping.DATA_DOUBLE
-		else -> {
+		else                    -> {
 			throw IllegalArgumentException()
 		}
 	},
-    elementType = primitiveType
+	elementType = primitiveType
 )
 /** pointer to pointer. */
 public fun PointerType(pointerType: PointerType): PointerType =
@@ -104,8 +104,8 @@ public class StructType(
 public fun StructType(structType: StructType): StructType =
 	StructType(
 		name = "${structType.name} *",
-	    includesPointer = true,
-	    definition = structType.definition
+		includesPointer = true,
+		definition = structType.definition
 	)
 
 // Strings

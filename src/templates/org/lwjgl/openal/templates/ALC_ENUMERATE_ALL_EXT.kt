@@ -15,9 +15,9 @@ fun ALC_ENUMERATE_ALL_EXT() = "EnumerateAllExt".nativeClassALC("ENUMERATE_ALL_EX
 	javaDoc("bindings to ALC_ENUMERATE_ALL_EXT extension.")
 
 	IntConstant.block(
-    	"ENUMERATE_ALL_EXT tokens.",
+		"ENUMERATE_ALL_EXT tokens.",
 
-    	"DEFAULT_ALL_DEVICES_SPECIFIER" _ 0x1012,
-    	"ALL_DEVICES_SPECIFIER" _ 0x1013
-    )
+		"DEFAULT_ALL_DEVICES_SPECIFIER" _ 0x1012,
+		"ALL_DEVICES_SPECIFIER" _ 0x1013
+	)
 }

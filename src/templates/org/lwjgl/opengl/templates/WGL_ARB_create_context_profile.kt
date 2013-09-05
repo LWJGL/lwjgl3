@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.windows.*
 
 fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", ARB) {
 	nativeImport (
@@ -23,13 +22,13 @@ fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassW
 
 	IntConstant.block(
 		"Accepted as an attribute name in {@code attribList}.",
-	
+
 		"CONTEXT_PROFILE_MASK_ARB" _ 0x9126
 	)
 
 	IntConstant.block(
 		"Accepted as bits in the attribute value for {@link #WGL_CONTEXT_PROFILE_MASK_ARB} in {@code attribList}.",
-	
+
 		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
 	)

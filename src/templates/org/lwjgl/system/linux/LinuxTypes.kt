@@ -52,7 +52,7 @@ val timespec = StructType(
 		javaDoc("Time structure")
 		nativeImport (
 			"LinuxLWJGL.h",
-		    "<sys/time.h>"
+			"<sys/time.h>"
 		)
 
 		time_t.member("tv_sec", "sec")

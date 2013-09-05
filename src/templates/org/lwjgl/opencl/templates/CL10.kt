@@ -513,13 +513,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"GetPlatformIDs",
 		"Obtains the list of available platforms.",
 
-	    AutoSize("platforms") _ cl_uint.IN(
-		    "num_entries",
-		    """
+		AutoSize("platforms") _ cl_uint.IN(
+			"num_entries",
+			"""
 		    the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not $NULL, the {@code num_entries} must
 		    be greater than zero.
 		    """
-	    ),
+		),
 		nullable _ cl_platform_id_p.OUT(
 			"platforms",
 			"""
@@ -528,21 +528,21 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			specified by {@code num_entries} or the number of OpenCL platforms available.
 			"""
 		),
-	    mods(Check(1), nullable) _ cl_uint_p.OUT(
-	        "num_platforms",
+		mods(Check(1), nullable) _ cl_uint_p.OUT(
+			"num_platforms",
 			"returns the number of OpenCL platforms available. If {@code num_platforms} is $NULL, this argument is ignored."
-	    ),
+		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    """
+			"""
 			{@link #CL_INVALID_VALUE} if {@code num_entries} is equal to zero and {@code platforms} is not $NULL or if both {@code num_platforms} and
 			{@code platforms} are $NULL.
 			""",
-		    OOHME
-	    )}
+			OOHME
+		)}
 	    """
 	)
 
@@ -556,7 +556,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		nullable _ cl_void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
+		returnDoc =
 		"""
 		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
@@ -592,7 +592,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		nullable _ cl_device_id_p.OUT(
 			"devices",
-		    """
+			"""
 		    returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
 		    device. If {@code devices} argument is $NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified
 		    by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
@@ -603,17 +603,17 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"returns the number of OpenCL devices available that match {@code device_type}. If {@code num_devices} is $NULL, this argument is ignored."
 		),
 
-	    returnDoc =
+		returnDoc =
 		"""
 		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"{@link #CL_INVALID_PLATFORM} if {@code platform} is not a valid platform.",
-		    "{@link #CL_INVALID_DEVICE_TYPE} if {@code device_type} is not a valid value.",
-		    "{@link #CL_INVALID_VALUE} if {@code num_entries} is equal to zero and {@code devices} is not $NULL or if both {@code num_devices} and {@code devices} are $NULL.",
-		    "{@link #CL_DEVICE_NOT_FOUND} if no OpenCL devices that matched {@code device_type} were found.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link #CL_INVALID_DEVICE_TYPE} if {@code device_type} is not a valid value.",
+			"{@link #CL_INVALID_VALUE} if {@code num_entries} is equal to zero and {@code devices} is not $NULL or if both {@code num_devices} and {@code devices} are $NULL.",
+			"{@link #CL_DEVICE_NOT_FOUND} if no OpenCL devices that matched {@code device_type} were found.",
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -637,7 +637,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
+		returnDoc =
 		"""
 		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
@@ -656,14 +656,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	val CreateContext = (mods(
 		Capabilities(
 			"platform",
-	        "CLPlatform platform = CLContext.getPlatform(properties)"
+			"CLPlatform platform = CLContext.getPlatform(properties)"
 		),
-	    Code(
-		    // Create a global reference to the pfn_notify instance. We pass it to the actual
-		    // native call as well as to the CLContext constructor (for later clean-up).
-		    javaBeforeNative = "\t\tlong user_data = CLContextCallback.register(pfn_notify);",
-	        applyTo = Code.ApplyTo.ALTERNATIVE
-	    )
+		Code(
+			// Create a global reference to the pfn_notify instance. We pass it to the actual
+			// native call as well as to the CLContext constructor (for later clean-up).
+			javaBeforeNative = "\t\tlong user_data = CLContextCallback.register(pfn_notify);",
+			applyTo = Code.ApplyTo.ALTERNATIVE
+		)
 	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
 		"CreateContext",
 		"""
@@ -679,7 +679,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 			<strong>LWJGL note</strong>: The {@link #CL_CONTEXT_PLATFORM} property must be present.
 			""",
-		    ContextProperties
+			ContextProperties
 		),
 		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
 		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
@@ -705,7 +705,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET,
 
-	    returnDoc =
+		returnDoc =
 		"""
 		a valid non-zero context and $errcode_ret is set to $CL_SUCCESS if the context is created successfully. Otherwise, it returns a $NULL value with the
 		following error values returned in $errcode_ret:
@@ -777,7 +777,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "the context to retain"),
 
-	    returnDoc =
+		returnDoc =
 		"""
 		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
@@ -799,14 +799,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "the context to release"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICE,
-		    OORE,
-		    OOHME
-	    )}
+			ICE,
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -823,18 +823,18 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICE,
-		    """
+			ICE,
+			"""
 			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value.
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -862,18 +862,18 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		cl_command_queue_properties.IN("properties", "a bit-field of properties for the command-queue", CommandQueueProperties),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero command-queue and $errcode_ret is set to $CL_SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
-		    ICE,
-		    "{@link #CL_INVALID_DEVICE} if {@code device} is not a valid device or is not associated with {@code context}.",
-		    "{@link #CL_INVALID_VALUE} if values specified in {@code properties} are not valid.",
-		    "{@link #CL_INVALID_QUEUE_PROPERTIES} if values specified in {@code properties} are valid but are not supported by the device.",
-		    OORE,
-		    OOHME
-	    )}
+			ICE,
+			"{@link #CL_INVALID_DEVICE} if {@code device} is not a valid device or is not associated with {@code context}.",
+			"{@link #CL_INVALID_VALUE} if values specified in {@code properties} are not valid.",
+			"{@link #CL_INVALID_QUEUE_PROPERTIES} if values specified in {@code properties} are valid but are not supported by the device.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)).javaDocLink
 
@@ -889,14 +889,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_command_queue.IN("command_queue", "the command-queue to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    OORE,
-		    OOHME
-	    )}
+			ICQE,
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -913,14 +913,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_command_queue.IN("command_queue", "the command-queue to release"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    OORE,
-		    OOHME
-	    )}
+			ICQE,
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -937,18 +937,18 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value.
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -963,12 +963,12 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
 			how it will be used. If value specified for flags is 0, the default is used which is {@link #CL_MEM_READ_WRITE}.
 			""",
-		    MemFlags
+			MemFlags
 		),
 		AutoSize("host_ptr").toBytes() _ size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    optional
+			optional
 		) _ cl_void_p.IN(
 			"host_ptr",
 			"""
@@ -978,25 +978,25 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero buffer object and $errcode_ret is set to $CL_SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
-		    ICE,
-		    "{@link #CL_INVALID_VALUE} if values specified in flags are not valid.",
-		    """
+			ICE,
+			"{@link #CL_INVALID_VALUE} if values specified in flags are not valid.",
+			"""
 			{@link #CL_INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE} if size is greater than
 			{@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
 			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
 			""",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)).javaDocLink
 
@@ -1046,31 +1046,31 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"""
 			{@link #CL_INVALID_VALUE} if the region being read specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
 			{@code size} is 0.
 			""",
-		    IEWLE,
-		    MSBOE("buffer"),
-		    ESEFEIWLE("read"),
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
-		    """
+			IEWLE,
+			MSBOE("buffer"),
+			ESEFEIWLE("read"),
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadBuffer} is called on buffer which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -1112,37 +1112,37 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		AutoSize("ptr").toBytes() _ size_t.IN("size", "the size in bytes of data being written"),
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    const
+			const
 		) _ cl_void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"""
 			{@link #CL_INVALID_VALUE} if the region being written specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
 			{@code size} is 0.
 			""",
-		    IEWLE,
-		    MSBOE("buffer"),
-		    ESEFEIWLE("write"),
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
-		    """
+			IEWLE,
+			MSBOE("buffer"),
+			ESEFEIWLE("write"),
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteBuffer} is called on buffer which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -1166,33 +1166,33 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_buffer} are not the same or if
 			the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code src_buffer} and {@code dst_buffer} are not valid buffer objects.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code src_buffer} and {@code dst_buffer} are not valid buffer objects.",
+			"""
 			{@link #CL_INVALID_VALUE} if {@code src_offset}, {@code dst_offset}, {@code size}, {@code src_offset + size} or {@code dst_offset + size} require
 			accessing elements outside the {@code src_buffer} and {@code dst_buffer} buffer objects respectively.
 			""",
-		    "{@link #CL_INVALID_VALUE} if {@code size} is 0.",
-		    IEWLE,
-		    MSBOE("src_buffer"),
-		    MSBOE("dst_buffer"),
-		    """
+			"{@link #CL_INVALID_VALUE} if {@code size} is 0.",
+			IEWLE,
+			MSBOE("src_buffer"),
+			MSBOE("dst_buffer"),
+			"""
 			{@link #CL_MEM_COPY_OVERLAP} if {@code src_buffer} and {@code dst_buffer} are the same buffer or sub-buffer object and the source and destination
 			regions overlap or if {@code src_buffer} and {@code dst_buffer} are different sub-buffers of the same associated buffer object and they overlap. The
 			regions overlap if {@code src_offset &#x2264 dst_offset &#x2264 src_offset + size – 1} or if {@code dst_offset &#x2264 src_offset &#x2264 dst_offset + size – 1}.
 			""",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -1241,37 +1241,37 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EVENT,
 		ERROR_RET,
 
-	    returnDoc =
+		returnDoc =
 		"""
 	    a pointer to the mapped region. The $errcode_ret is set to $CL_SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
 	    returned in $errcode_ret:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"""
 			{@link #CL_INVALID_VALUE} if region being mapped given by {@code (offset, size)} is out of bounds or if {@code size} is 0 or if values specified in
 			{@code map_flags} are not valid.
 			""",
-		    IEWLE,
-		    MSBOE("buffer"),
-		    """
+			IEWLE,
+			MSBOE("buffer"),
+			"""
 			{@link #CL_MAP_FAILURE} if there is a failure to map the requested region into the host address space. This error cannot occur for buffer objects
 			created with {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_ALLOC_HOST_PTR}.
 			""",
-		    ESEFEIWLE("map"),
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code buffer}.",
-		    """
+			ESEFEIWLE("map"),
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"""
 			{@link #CL_INVALID_OPERATION} if buffer has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or {@link CL12#CL_MEM_HOST_NO_ACCESS} and
 			{@link #CL_MAP_READ} is set in {@code map_flags} or if {@code buffer} has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS} and {@link #CL_MAP_WRITE} or {@link CL12#CL_MAP_WRITE_INVALIDATE_REGION} is set in {@code map_flags}.
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	)).javaDocLink
 
@@ -1305,32 +1305,32 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
-		    ICE,
-		    "{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
-		    "{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
-		    """
+			ICE,
+			"{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
+			"{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"""
 			{@link #CL_INVALID_IMAGE_SIZE} if {@code image_width} or {@code image_height} are 0 or if they exceed values specified in
 			{@link #CL_DEVICE_IMAGE2D_MAX_WIDTH} or {@link #CL_DEVICE_IMAGE2D_MAX_HEIGHT} respectively for all devices in {@code context} or if values specified
 			by {@code image_row_pitch} do not follow rules described in the argument description.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
 			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
 			""",
-		    "{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
-		    """
+			"{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
+			"""
 			{@link #CL_INVALID_OPERATION} if there are no devices in {@code context} that support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
 			$CL_FALSE).
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -1375,33 +1375,33 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
-		    ICE,
-		    "{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
-		    "{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
-		    """
+			ICE,
+			"{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
+			"{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"""
 			{@link #CL_INVALID_IMAGE_SIZE} if {@code image_width}, {@code image_height} are 0 or if {@code image_depth} &#x2264; 1 or if they exceed values
 			specified in {@link #CL_DEVICE_IMAGE3D_MAX_WIDTH}, {@link #CL_DEVICE_IMAGE3D_MAX_HEIGHT} or {@link #CL_DEVICE_IMAGE3D_MAX_DEPTH} respectively for
 			all devices in {@code context} or if values specified by {@code image_row_pitch} and {@code image_slice_pitch} do not follow rules described in the
 			argument descriptions.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
 			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
 			""",
-		    "{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
-		    """
+			"{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
+			"""
 			{@link #CL_INVALID_OPERATION} if there are no devices in {@code context} that support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
 			$CL_FALSE).
 			""",
-		    OORE,
-		    OOHME
-	    )}
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -1424,7 +1424,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		cl_mem_object_type.IN(
 			"image_type",
 			"the image type",
-		    """
+			"""
 		    CL12#CL_MEM_OBJECT_IMAGE1D CL12#CL_MEM_OBJECT_IMAGE1D_BUFFER #CL_MEM_OBJECT_IMAGE2D #CL_MEM_OBJECT_IMAGE3D CL12#CL_MEM_OBJECT_IMAGE1D_ARRAY
 		    CL12#CL_MEM_OBJECT_IMAGE2D_ARRAY
 		    """
@@ -1448,15 +1448,15 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICE,
-		    "{@link #CL_INVALID_VALUE} if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
-		    OORE,
-		    OOHME
-	    )}
+			ICE,
+			"{@link #CL_INVALID_VALUE} if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -1537,50 +1537,50 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
+			"""
 			{@link #CL_INVALID_VALUE} if the region being read specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
 			$NULL value.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_VALUE} if values in {@code origin} and {@code region} do not follow rules described in the argument description for
 			{@code origin} and {@code region}.
 			""",
-		    IEWLE,
-		    """
+			IEWLE,
+			"""
 			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
 			supported by device associated with queue.
 			""",
-		    """
+			"""
 			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code image} are not supported by device associated
 			with queue.
 			""",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
-		    """
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"""
 			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
 			$CL_FALSE).
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    ESEFEIWLE("read"),
-		    OORE,
-		    OOHME
-	    )}
+			ESEFEIWLE("read"),
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -1656,56 +1656,56 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    const
+			const
 		) _ cl_void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
 		NEWL,
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    ICQE,
-		    """
+			ICQE,
+			"""
 			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-		    "{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
-		    """
+			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
+			"""
 			{@link #CL_INVALID_VALUE} if the region being written specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
 			$NULL value.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_VALUE} if values in {@code origin} and {@code region} do not follow rules described in the argument description for
 			{@code origin} and {@code region}.
 			""",
-		    IEWLE,
-		    """
+			IEWLE,
+			"""
 			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
 			supported by device associated with queue.
 			""",
-		    """
+			"""
 			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code image} are not supported by device associated
 			with queue.
 			""",
-		    "{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
-		    """
+			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"""
 			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
 			$CL_FALSE).
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
 			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
 			""",
-		    ESEFEIWLE("write"),
-		    OORE,
-		    OOHME
-	    )}
+			ESEFEIWLE("write"),
+			OORE,
+			OOHME
+		)}
 	    """
 	).javaDocLink
 
@@ -1771,8 +1771,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -1857,8 +1857,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -1895,7 +1895,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -1934,8 +1934,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -1973,7 +1973,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2047,8 +2047,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EVENT,
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a pointer to the mapped region. The $errcode_ret is set to $CL_SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
 	    returned in $errcode_ret:
 	    ${ul(
@@ -2139,8 +2139,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_mem.IN("memobj", "the memory object to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object (buffer or image object).",
@@ -2162,8 +2162,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_mem.IN("memobj", "the memory object to release"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object.",
@@ -2192,8 +2192,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -2206,7 +2206,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and {@code memobj} are not the same or if the context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			"""
-	    )}
+		)}
 	    """
 	)
 
@@ -2227,8 +2227,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -2238,7 +2238,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is a not a valid memory object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2258,8 +2258,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		cl_filter_mode.IN("filter_mode", "the type of filter that must be applied when reading an image", FilterModes),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero sampler object and $errcode_ret is set to $CL_SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -2284,14 +2284,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_sampler.IN("sampler", "the sample object to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_SAMPLER} if sampler is not a valid sampler object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2331,8 +2331,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -2342,7 +2342,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_SAMPLER} if {@code sampler} is a not a valid sampler object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2370,8 +2370,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero program object and $errcode_ret is set to $CL_SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
@@ -2379,7 +2379,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_VALUE} if {@code count} is zero or if {@code strings} or any entry in {@code strings} is $NULL.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -2438,8 +2438,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero program object and $errcode_ret is set to $CL_SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -2450,7 +2450,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_BINARY} if an invalid program binary was encountered for any device. {@code binary_status} will return specific status for each device.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -2460,14 +2460,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_program.IN("program", "the program object to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2543,8 +2543,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			nullable
 		) _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
@@ -2572,7 +2572,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_OPERATION} if program was not created with $CreateProgramWithSource or $CreateProgramWithBinary.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -2588,7 +2588,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Calls to $BuildProgram after {@code clUnloadCompiler} will reload the compiler, if necessary, to build the appropriate program executable.
 		""",
 
-	    returnDoc = "always $CL_SUCCESS"
+		returnDoc = "always $CL_SUCCESS"
 	)
 
 	cl_int.func(
@@ -2604,8 +2604,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -2619,7 +2619,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2637,17 +2637,17 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    "{@link #CL_INVALID_DEVICE} if {@code device} is not in the list of devices associated with program.",
-		    """
+			"{@link #CL_INVALID_DEVICE} if {@code device} is not in the list of devices associated with program.",
+			"""
 			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-		    "{@link #CL_INVALID_PROGRAM} if {@code program} is a not a valid program object.",
-		    OORE,
+			"{@link #CL_INVALID_PROGRAM} if {@code program} is a not a valid program object.",
+			OORE,
 			OOHME
 		)}
 	    """
@@ -2674,8 +2674,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		const _ cl_charASCII_p.IN("kernel_name", "a function name in the program declared with the {@code __kernel} qualifier"),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero kernel object and $errcode_ret is set to $CL_SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -2689,7 +2689,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_VALUE} if {@code kernel_name} is $NULL.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -2719,8 +2719,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"the number of kernels in {@code program}. If {@code num_kernels_ret} is $NULL, it is ignored."
 		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the kernel objects were successfully allocated. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
@@ -2728,7 +2728,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"{@link #CL_INVALID_VALUE} if {@code kernels} is not $NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -2738,14 +2738,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_kernel.IN("kernel", "the kernel to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_KERNEL} if kernel is not a valid kernel object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2890,8 +2890,8 @@ kernel void image_filter (
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -2901,7 +2901,7 @@ kernel void image_filter (
 			"{@link #CL_INVALID_KERNEL} if {@code kernel} is a not a valid kernel object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -2925,8 +2925,8 @@ kernel void image_filter (
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -2944,7 +2944,7 @@ kernel void image_filter (
 			"{@link #CL_INVALID_KERNEL} if {@code kernel} is a not a valid kernel object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3000,8 +3000,8 @@ kernel void image_filter (
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the kernel execution was successfully queued. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_PROGRAM_EXECUTABLE} if there is no successfully built program executable available for device associated with {@code command_queue}.",
@@ -3065,7 +3065,7 @@ kernel void image_filter (
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	).javaDocLink
 
@@ -3084,14 +3084,14 @@ kernel void image_filter (
 		EWL,
 		EVENT,
 
-	    returnDoc = "$CL_SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
+		returnDoc = "$CL_SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
 	)
 
 	Code(
 		// Create a global reference to the user_func instance.
 		javaBeforeNative = "\t\tlong user_data = user_func.register(args);",
 		javaAfterNative = "\t\tif ( $RESULT != CL_SUCCESS && user_data != 0L ) memGlobalRefDelete(user_data);",
-	    applyTo = Code.ApplyTo.ALTERNATIVE
+		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ cl_int.func(
 		"EnqueueNativeKernel",
 		"""
@@ -3146,8 +3146,8 @@ kernel void image_filter (
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the user function execution instance was successfully queued. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -3173,7 +3173,7 @@ kernel void image_filter (
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3191,8 +3191,8 @@ kernel void image_filter (
 		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
 		mods(const, SingleValue("event")) _ cl_event_p.IN("event_list", "the list of events"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the execution status of all events in event_list is {@link #CL_COMPLETE}. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_VALUE} if {@code num_events} is zero or {@code event_list} is $NULL.",
@@ -3201,7 +3201,7 @@ kernel void image_filter (
 			"{@link CL11#CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST} if the execution status of any of the events in {@code event_list} is a negative integer value.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -3224,8 +3224,8 @@ kernel void image_filter (
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -3236,7 +3236,7 @@ kernel void image_filter (
 			"{@link #CL_INVALID_EVENT} if {@code event} is a not a valid event object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3246,14 +3246,14 @@ kernel void image_filter (
 
 		cl_event.IN("event", "the event to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link #CL_INVALID_EVENT} if {@code event} is not a valid event object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3298,15 +3298,15 @@ kernel void image_filter (
 		cl_command_queue.IN("command_queue", "the command-queue to insert the marker to"),
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			"{@link #CL_INVALID_VALUE} if {@code event} is a $NULL value.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3338,8 +3338,8 @@ kernel void image_filter (
 		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
 		mods(const, SingleValue("event")) _ cl_event_p.IN("event_list", "the list of events"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function was successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -3365,8 +3365,8 @@ kernel void image_filter (
 		) _ cl_void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully and the profiling information has been recorded. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
@@ -3380,7 +3380,7 @@ kernel void image_filter (
 			"{@link #CL_INVALID_EVENT} if {@code event} is a not a valid event object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -3403,14 +3403,14 @@ kernel void image_filter (
 
 		cl_command_queue.IN("command_queue", "the command-queue"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function call was executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 

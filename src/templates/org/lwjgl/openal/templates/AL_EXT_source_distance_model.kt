@@ -16,8 +16,8 @@ fun AL_EXT_source_distance_model() = "EXTSourceDistanceModel".nativeClassAL("EXT
 	javaDoc("bindings to AL_EXT_source_distance_model extension.")
 
 	IntConstant.block(
-    	"AL_EXT_source_distance_model tokens.",
+		"AL_EXT_source_distance_model tokens.",
 
-    	"SOURCE_DISTANCE_MODEL" _ 0x200
-    )
+		"SOURCE_DISTANCE_MODEL" _ 0x200
+	)
 }

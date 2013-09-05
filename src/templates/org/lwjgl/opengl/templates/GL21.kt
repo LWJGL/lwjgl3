@@ -5,8 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
 fun GL21() = "GL21".nativeClassGL("GL21") {
@@ -111,7 +109,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"PIXEL_PACK_BUFFER_BINDING" _ 0x88ED,
 		"PIXEL_UNPACK_BUFFER_BINDING" _ 0x88EF
 	)
-	
+
 	// EXT_texture_sRGB
 
 	IntConstant.block(

@@ -22,9 +22,9 @@ fun User32() = "User32".nativeClassWin {
 
 	DLL_FUNC _ BOOL.func(
 		"SetProcessDPIAware",
-	    "Sets the current process as dots per inch (dpi) aware.",
+		"Sets the current process as dots per inch (dpi) aware.",
 
-	    DLL_ADDRESS
+		DLL_ADDRESS
 	)
 
 }

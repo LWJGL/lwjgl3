@@ -10,7 +10,7 @@ import org.lwjgl.system.linux.*
 fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
-	    "<X11/extensions/Xrandr.h>"
+		"<X11/extensions/Xrandr.h>"
 	)
 
 	javaDoc("Native bindings to <X11/extensions/Xrandr.h>.")
@@ -176,11 +176,11 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	void.func(
 		"XRRSelectInput",
-	    "TODO: document",
+		"TODO: document",
 
-	    DISPLAY,
-	    WINDOW,
-	    int.IN("mask", "the mask")
+		DISPLAY,
+		WINDOW,
+		int.IN("mask", "the mask")
 	)
 
 	Status.func(
@@ -201,9 +201,9 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XRRUpdateConfiguration",
-	    "Intended to take RRScreenChangeNotify, or ConfigureNotify (on the root window) returns 1 if it is an event type it understands, 0 if not.",
+		"Intended to take RRScreenChangeNotify, or ConfigureNotify (on the root window) returns 1 if it is an event type it understands, 0 if not.",
 
-	    XEvent_p.IN("event", "the event")
+		XEvent_p.IN("event", "the event")
 	)
 
 	int.func(

@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_ALAW() = "EXTAlaw".nativeClassAL("EXT_ALAW")  {
+fun AL_EXT_ALAW() = "EXTAlaw".nativeClassAL("EXT_ALAW") {
 	nativeImport (
 		"OpenAL.h"
 	)
@@ -15,9 +15,9 @@ fun AL_EXT_ALAW() = "EXTAlaw".nativeClassAL("EXT_ALAW")  {
 	javaDoc("bindings to AL_EXT_ALAW extension.")
 
 	IntConstant.block(
-    	"AL_EXT_ALAW tokens.",
+		"AL_EXT_ALAW tokens.",
 
-    	"FORMAT_MONO_ALAW_EXT" _ 0x10016,
-        "FORMAT_STEREO_ALAW_EXT" _ 0x10017
-    )
+		"FORMAT_MONO_ALAW_EXT" _ 0x10016,
+		"FORMAT_STEREO_ALAW_EXT" _ 0x10017
+	)
 }

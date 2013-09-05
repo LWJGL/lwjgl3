@@ -6,9 +6,7 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 import java.util.ArrayList
-import java.util.TreeSet
 import java.util.Collections
-import java.util.Comparator
 import java.util.HashMap
 
 public val INSTANCE: String = "__instance"
@@ -21,9 +19,7 @@ public abstract class FunctionProvider {
 	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
 
 	protected fun getClasses(
-		comparator: Comparator<NativeClass> = object : Comparator<NativeClass> {
-			public override fun compare(o1: NativeClass, o2: NativeClass): Int = o1.templateName.compareTo(o2.templateName)
-		}
+		comparator: (NativeClass, NativeClass) -> Int = {(o1, o2) -> o1.templateName compareTo o2.templateName }
 	): List<NativeClass> {
 		val classes = ArrayList<NativeClass>(_classes)
 		Collections.sort(classes, comparator)
@@ -67,7 +63,8 @@ public abstract class FunctionProvider {
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.name};")
 	}
 
-	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {}
+	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
+	}
 	open fun getFunctionAddressCall(function: NativeClassFunction): String = "provider.getFunctionAddress(\"${function.name}\")"
 
 	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)

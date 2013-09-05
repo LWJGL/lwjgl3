@@ -10,7 +10,7 @@ import org.lwjgl.system.linux.*
 fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
-	    "<X11/XKBlib.h>"
+		"<X11/XKBlib.h>"
 	)
 
 	javaDoc("Native bindings to XKBlib.h.")
@@ -46,7 +46,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"",
 
-	    "XkbNumKbdGroups" _ 4
+		"XkbNumKbdGroups" _ 4
 	)
 
 	IntConstant.block(

@@ -47,7 +47,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 	IntConstant.block(
 		"joystick error return values.",
 
-	    "JOYERR_NOERROR" _ 0,
+		"JOYERR_NOERROR" _ 0,
 		"JOYERR_PARMS".expr<Int>("$JOYERR_BASE + 5"),
 		"JOYERR_NOCANDO".expr<Int>("$JOYERR_BASE + 6"),
 		"JOYERR_UNPLUGGED".expr<Int>("$JOYERR_BASE + 7")
@@ -157,25 +157,25 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 
 	MMRESULT.func(
 		"joyGetDevCaps",
-	    "Queries a joystick to determine its capabilities.",
+		"Queries a joystick to determine its capabilities.",
 
-	    UINT_PTR.IN(
-		    "joyID",
-		    """
+		UINT_PTR.IN(
+			"joyID",
+			"""
 		    Identifier of the joystick to be queried. Valid values for {@code joyID} range from -1 to 15. A value of -1 enables retrieval of the
 		    {@code szRegKey} member of the {@link JOYCAPS} structure whether a device is present or not.
 		    """
-	    ),
-	    LPJOYCAPS.OUT("jc", "pointer to a {@code JOYCAPS} structure to contain the capabilities of the joystick."),
-	    UINT.IN("bjc", "size, in bytes, of the {@code JOYCAPS} structure.")
+		),
+		LPJOYCAPS.OUT("jc", "pointer to a {@code JOYCAPS} structure to contain the capabilities of the joystick."),
+		UINT.IN("bjc", "size, in bytes, of the {@code JOYCAPS} structure.")
 	)
 
 	MMRESULT.func(
 		"joyGetPos",
-	    "Queries a joystick for its position and button status.",
+		"Queries a joystick for its position and button status.",
 
-	    UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero ({@link #JOYSTICKID1}) to 15"),
-	    LPJOYINFO.IN("ji", "pointer to a {@link JOYINFO} structure that contains the position and button status of the joystick")
+		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero ({@link #JOYSTICKID1}) to 15"),
+		LPJOYINFO.IN("ji", "pointer to a {@link JOYINFO} structure that contains the position and button status of the joystick")
 	)
 
 	MMRESULT.func(
@@ -195,7 +195,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 
 	DWORD.func(
 		"timeGetTime",
-	    """
+		"""
 	    retrieves the system time, in milliseconds. The system time is the time elapsed since Windows was started.
 
 	    Note that the value returned by the {@code timeGetTime} function is a {@code DWORD} value. The return value wraps around to 0 every 2^32 milliseconds,

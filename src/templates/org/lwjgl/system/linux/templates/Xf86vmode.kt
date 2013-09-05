@@ -10,7 +10,7 @@ import org.lwjgl.system.linux.*
 fun Xf86vmode() = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
-	    "<X11/extensions/xf86vmode.h>"
+		"<X11/extensions/xf86vmode.h>"
 	)
 
 	javaDoc("Native bindings to &lt;X11/extensions/xf86vmode.h&gt;.")

@@ -18,7 +18,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 
 	IntConstant.block(
 		"Aliases for smooth points and lines.",
-		
+
 		"ALIASED_POINT_SIZE_RANGE" _ 0x846D,
 		"ALIASED_LINE_WIDTH_RANGE" _ 0x846E,
 
@@ -90,7 +90,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			PIXEL_UNPACK_BUFFER,
-		    nullable
+			nullable
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	)
 

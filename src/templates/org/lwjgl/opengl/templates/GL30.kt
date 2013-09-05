@@ -6,9 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL30() = "GL30".nativeClassGL("GL30") {
 	nativeImport (
@@ -27,7 +25,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"CONTEXT_FLAGS" _ 0x821E,
 		"CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT" _ 0x0001
 	)
-	
+
 	IntConstant.block(
 		"Renamed tokens.",
 
@@ -54,7 +52,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("name", "the indexed state to query", "GL11#GL_EXTENSIONS GL20#GL_SHADING_LANGUAGE_VERSION"),
 		GLuint.IN("index", "the index of the particular element being queried")
 	)
-	
+
 	// EXT_gpu_shader4
 
 	IntConstant.block(
@@ -149,7 +147,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		),
 		GLsizei.IN(
 			"stride",
-		    """
+			"""
 			the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
 			the array. The initial value is 0.
 			"""),
@@ -358,7 +356,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLintptr.IN("offset", "the start of the buffer subrange, in basic machine units"),
 		GLsizeiptr.IN("length", "the length of the buffer subrange, in basic machine units")
 	)
-	
+
 	// ARB_color_buffer_float
 
 	IntConstant.block(
@@ -388,7 +386,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "target for color clamping", "#GL_CLAMP_READ_COLOR"),
 		GLenum.IN("clamp", "whether to apply color clamping", "GL11#GL_TRUE GL11#GL_FALSE")
 	)
-	
+
 	// ARB_depth_buffer_float
 
 	IntConstant.block(
@@ -409,7 +407,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		"FLOAT_32_UNSIGNED_INT_24_8_REV" _ 0x8DAD
 	)
-	
+
 	// ARB_texture_float
 
 	IntConstant.block(
@@ -842,7 +840,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"target",
 			"the target to which the texture whose mimaps to generate is bound",
-		    "GL11#GL_TEXTURE_1D GL11#GL_TEXTURE_2D GL12#GL_TEXTURE_3D #GL_TEXTURE_1D_ARRAY #GL_TEXTURE_2D_ARRAY GL13#GL_TEXTURE_CUBE_MAP"
+			"GL11#GL_TEXTURE_1D GL11#GL_TEXTURE_2D GL12#GL_TEXTURE_3D #GL_TEXTURE_1D_ARRAY #GL_TEXTURE_2D_ARRAY GL13#GL_TEXTURE_CUBE_MAP"
 		)
 	)
 
@@ -860,7 +858,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		"HALF_FLOAT" _ 0x140B
 	)
-	
+
 	// EXT_texture_integer
 
 	IntConstant.block(
@@ -936,7 +934,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("pname", "the symbolic name of a texture parameter"),
 		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "returns the texture parameter value")
 	)
-	
+
 	// EXT_texture_array
 
 	IntConstant.block(
@@ -1023,7 +1021,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "the indexed capability to query"),
 		GLuint.IN("index", "the index to query")
 	)
-	
+
 	// EXT_texture_compression_rgtc
 
 	IntConstant.block(
@@ -1175,7 +1173,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"primitiveMode",
 			"the output type of the primitives that will be recorded into the buffer objects that are bound for transform feedback",
-		    "GL11#GL_POINTS GL11#GL_LINES GL11#GL_TRIANGLES"
+			"GL11#GL_POINTS GL11#GL_LINES GL11#GL_TRIANGLES"
 		)
 	)
 

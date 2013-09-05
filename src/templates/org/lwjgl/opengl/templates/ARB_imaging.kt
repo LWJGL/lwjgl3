@@ -87,10 +87,10 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 	).toJavaDocLinks()
 
 	IntConstant.block(
-        "ErrorCode",
+		"ErrorCode",
 
-        "TABLE_TOO_LARGE" _ 0x8031
-    )
+		"TABLE_TOO_LARGE" _ 0x8031
+	)
 
 	val ColorTable = (deprecatedGL _ GLvoid.func(
 		"ColorTable",
@@ -181,7 +181,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-		    PIXEL_UNPACK_BUFFER
+			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the color table data")
 	)
 
@@ -195,7 +195,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLint.IN("y", "the lower framebuffer pixel coordinate"),
 		GLsizei.IN("width", "the number of colors in the subregion to respecify")
 	)
-	
+
 	// EXT_convolution
 
 	IntConstant.block(
@@ -306,7 +306,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		mods(
 			const,
-		    PIXEL_UNPACK_BUFFER
+			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the filter data")
 	)
 
@@ -453,7 +453,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		"CONVOLUTION_BORDER_COLOR" _ 0x8154
 	)
-	
+
 	// SGI_color_matrix
 
 	IntConstant.block(
@@ -476,7 +476,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"POST_COLOR_MATRIX_BLUE_BIAS" _ 0x80BA,
 		"POST_COLOR_MATRIX_ALPHA_BIAS" _ 0x80BB
 	)
-	
+
 	// EXT_histogram
 
 	IntConstant.block(
@@ -611,7 +611,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-	    PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "an array in which to place the minmax values")
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "an array in which to place the minmax values")
 	)
 
 	val GetMinmaxParameteriv = (deprecatedGL _ GLvoid.func(
@@ -631,7 +631,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("pname", "the parameter to query"),
 		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "an array in which to place the returned value")
 	)
-	
+
 	// EXT_blend_color
 
 	IntConstant.block(
@@ -658,7 +658,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLfloat.IN("blue", "the blue color component"),
 		GLfloat.IN("alpha", "the alpha color component")
 	)
-	
+
 	// EXT_blend_minmax
 
 	IntConstant.block(
@@ -681,7 +681,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("mode", "the blend equation", "#GL_FUNC_ADD #GL_FUNC_SUBTRACT #GL_FUNC_REVERSE_SUBTRACT #GL_MIN #GL_MAX")
 	)
-	
+
 	// EXT_blend_subtract
 
 	IntConstant.block(

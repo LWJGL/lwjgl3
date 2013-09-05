@@ -15,9 +15,9 @@ fun AL_EXT_DOUBLE() = "EXTDouble".nativeClassAL("EXT_DOUBLE") {
 	javaDoc("bindings to AL_EXT_DOUBLE extension.")
 
 	IntConstant.block(
-    	"AL_EXT_DOUBLE tokens.",
+		"AL_EXT_DOUBLE tokens.",
 
-    	"FORMAT_MONO_DOUBLE_EXT" _ 0x10012,
-        "FORMAT_STEREO_DOUBLE_EXT" _ 0x10013
-    )
+		"FORMAT_MONO_DOUBLE_EXT" _ 0x10012,
+		"FORMAT_STEREO_DOUBLE_EXT" _ 0x10013
+	)
 }

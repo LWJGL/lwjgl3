@@ -20,7 +20,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 	nativeImport (
 		"OpenCL.h",
-	    "opengl_types.h"
+		"opengl_types.h"
 	)
 
 	javaDoc(
@@ -98,7 +98,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		cl_mem_flags.IN(
 			"flags",
 			"a bit-field that is used to specify usage information",
-		    "CL10#CL_MEM_READ_ONLY CL10#CL_MEM_WRITE_ONLY CL10#CL_MEM_READ_WRITE"
+			"CL10#CL_MEM_READ_ONLY CL10#CL_MEM_WRITE_ONLY CL10#CL_MEM_READ_WRITE"
 		),
 		GLuint.IN(
 			"bufobj",
@@ -109,8 +109,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero OpenCL buffer object and $errcode_ret is set to $CL_SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -122,7 +122,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -147,7 +147,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		GLenum.IN(
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
-		    """
+			"""
 		    GL11#GL_TEXTURE_2D GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
 		    GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL31#GL_TEXTURE_RECTANGLE
 		    """
@@ -164,8 +164,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero OpenCL image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -190,7 +190,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			"{@link CL10#CL_INVALID_OPERATION} if {@code texture} is a GL texture object created with a border width value greater than zero.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -228,33 +228,33 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 		with one of the following error values returned in $errcode_ret:
 		 ${ul(
-		    "{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid context or was not created from a GL context.",
-		    """
+			"{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid context or was not created from a GL context.",
+			"""
 			{@link CL10#CL_INVALID_VALUE} if values specified in {@code flags} are not valid or if value specified in {@code texture_target} is not one of the
 			values specified in the description of {@code texture_target}.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_MIP_LEVEL} if {@code miplevel} is less than the value of {@code level}<sub>base</sub> (for OpenGL implementations) or zero (for
 			OpenGL ES implementations); or greater than the value of {@code q} (for both OpenGL and OpenGL ES).
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_MIP_LEVEL} if {@code miplevel} is greather than zero and the OpenGL implementation does not support creating from non-zero mipmap
 			levels.
 			""",
-		    """
+			"""
 			{@link #CL_INVALID_GL_OBJECT} if {@code texture} is not a GL texture object whose type matches {@code texture_target}, if the specified {@code miplevel}
 			of texture is not defined, or if the width or height of the specified {@code miplevel} is zero.
 			""",
-		    "{@link CL10#CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if the OpenGL texture internal format does not map to a supported OpenCL image format.",
-		    "{@link CL10#CL_INVALID_OPERATION} if {@code texture} is a GL texture object created with a border width value greater than zero.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link CL10#CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if the OpenGL texture internal format does not map to a supported OpenCL image format.",
+			"{@link CL10#CL_INVALID_OPERATION} if {@code texture} is a GL texture object created with a border width value greater than zero.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -286,8 +286,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero OpenCL image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -298,7 +298,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			"{@link CL10#CL_INVALID_OPERATION} if {@code renderbuffer} is a multi-sample GL renderbuffer object.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -313,19 +313,19 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		nullable _ cl_gl_object_type_p.OUT(
 			"gl_object_type",
 			"returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is $NULL, it is ignored.",
-		    GLObjectTypes
+			GLObjectTypes
 		),
 		nullable _ GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the call was executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid OpenCL memory object.",
 			"{@link #CL_INVALID_GL_OBJECT} if there is no GL object associated with {@code memobj}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -342,12 +342,12 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		PARAM_VALUE_SIZE,
 		mods(
 			MultiType(PointerMapping.DATA_INT),
-		    nullable
+			nullable
 		) _ cl_void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid OpenCL memory object.",
@@ -358,7 +358,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -406,7 +406,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -429,8 +429,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
 	    $CL_SUCCESS. Otherwise, it returns one of the following errors:
 	    ${ul(
@@ -445,7 +445,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 

@@ -19,9 +19,9 @@ abstract class QualifiedType(
 
 	val javaMethodType: String
 		get() = when {
-			nativeType is ObjectType -> nativeType.className
+			nativeType is ObjectType                  -> nativeType.className
 			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
-			else -> nativeType.javaMethodType.getSimpleName()
+			else                                      -> nativeType.javaMethodType.getSimpleName()
 		}
 
 	val nativeMethodType: String
@@ -136,7 +136,8 @@ public class Parameter(
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 	// Data pointer
-		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER -> {
+		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER
+		                         -> {
 			if ( has(autoSizeResult) && (func.returns.nativeType !is StructType || func.returnsStructValue) )
 				"$API_BUFFER.address() + $name"
 			else if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
@@ -149,7 +150,7 @@ public class Parameter(
 		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? 0L : $name.getPointer()" else "$name.getPointer()"
 
 	// Normal parameter
-		else -> name
+		else                     -> name
 	}
 
 	val asJNIFunctionParam: String
@@ -239,7 +240,7 @@ public class AutoSize(override val reference: String, vararg val dependent: Stri
 			PrimitiveMapping.INT,
 			PrimitiveMapping.PTR -> {
 			}
-			else -> {
+			else                 -> {
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on integer primitive types.")
 			}
 		}
@@ -256,7 +257,7 @@ public val autoSizeResult: ParameterModifier = object : ParameterModifier() {
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_POINTER -> {
 			}
-			else -> {
+			else                        -> {
 				throw IllegalArgumentException("The autoSizeResult modifier can only be applied on integer pointer types.")
 			}
 		}

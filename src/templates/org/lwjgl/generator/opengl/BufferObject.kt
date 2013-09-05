@@ -6,26 +6,21 @@ package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
 
-public class BufferObject(public val binding: String) : ParameterModifier() {
+public class BufferObject(public val binding: String): ParameterModifier() {
 	class object: ModifierObject<BufferObject> {
 		override val key = javaClass<BufferObject>()
 	}
 
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
-		if (
-			!(
-				(param.nativeType is PointerType && param.nativeType.mapping != PointerMapping.NAKED_POINTER) ||
-				param.nativeType.mapping == PrimitiveMapping.PTR
-			)
-		)
+		if ( !((param.nativeType is PointerType && param.nativeType.mapping != PointerMapping.NAKED_POINTER) || param.nativeType.mapping == PrimitiveMapping.PTR) )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 
 		when ( this ) {
 			PIXEL_PACK_BUFFER, QUERY_BUFFER_AMD -> {
 				if ( param.paramType != ParameterType.OUT )
 					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on output parameters.")
-			} else -> {
+			} else                              -> {
 				if ( param.paramType != ParameterType.IN )
 					throw IllegalArgumentException("The specified BufferObject modifier can only be applied on input parameters.")
 			}

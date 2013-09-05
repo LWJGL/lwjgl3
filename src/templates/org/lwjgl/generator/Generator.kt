@@ -417,11 +417,9 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory() )
 		return 0
 
-	val classes = pck.listFiles(object : FileFilter {
-		public override fun accept(pathname: File): Boolean {
-			return (pathname.isDirectory() && recursive) || (pathname.isFile() && pathname.getName().endsWith(".kt"))
-		}
-	})
+	val classes = pck.listFiles {
+		(it.isDirectory() && recursive) || (it.isFile() && it.getName().endsWith(".kt"))
+	}
 
 	if ( classes == null || classes.size == 0 )
 		return 0

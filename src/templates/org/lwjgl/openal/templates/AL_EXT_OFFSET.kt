@@ -15,10 +15,10 @@ fun AL_EXT_OFFSET() = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 	javaDoc("bindings to AL_EXT_OFFSET extension.")
 
 	IntConstant.block(
-    	"AL_EXT_OFFSET tokens.",
+		"AL_EXT_OFFSET tokens.",
 
-    	"SEC_OFFSET" _ 0x1024,
-        "SAMPLE_OFFSET" _ 0x1025,
-        "BYTE_OFFSET" _ 0x1026
-    )
+		"SEC_OFFSET" _ 0x1024,
+		"SAMPLE_OFFSET" _ 0x1025,
+		"BYTE_OFFSET" _ 0x1026
+	)
 }

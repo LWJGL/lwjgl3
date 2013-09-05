@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.windows.*
 
 fun WGL_ARB_robustness_application_isolation() = "WGLARBRobustnessApplicationIsolation".nativeClassWGL("WGL_ARB_robustness_application_isolation", ARB) {
 	javaDoc(
@@ -23,7 +22,7 @@ fun WGL_ARB_robustness_application_isolation() = "WGLARBRobustnessApplicationIso
 		Accepted as a bit in the attribute value for {@link WGLARBCreateContext#WGL_CONTEXT_FLAGS_ARB} in the {@code attribList} argument to
 		{@link WGLARBCreateContext#wglCreateContextAttribsARB}.
 		""",
-	
+
 		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008
 	)
 

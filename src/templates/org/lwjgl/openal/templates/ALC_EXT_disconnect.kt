@@ -15,8 +15,8 @@ fun ALC_EXT_disconnect() = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 	javaDoc("bindings to ALC_EXT_disconnect extension.")
 
 	IntConstant.block(
-    	"ALC_EXT_disconnect tokens.",
+		"ALC_EXT_disconnect tokens.",
 
-    	"CONNECTED " _ 0x313
-    )
+		"CONNECTED " _ 0x313
+	)
 }

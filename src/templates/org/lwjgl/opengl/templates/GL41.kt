@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL41() = "GL41".nativeClassGL("GL41") {
 	nativeImport (
@@ -16,7 +15,7 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 	)
 
 	javaDoc("The core OpenGL 4.1 functionality.")
-	
+
 	// ARB_ES2_compatibility
 
 	IntConstant.block(
@@ -271,11 +270,11 @@ if (shader) {
 		GLenum.IN(
 			"pname",
 			"the name of the parameter to retrieve",
-		    "#GL_ACTIVE_PROGRAM GL20#GL_INFO_LOG_LENGTH $SHADER_TYPES"
+			"#GL_ACTIVE_PROGRAM GL20#GL_INFO_LOG_LENGTH $SHADER_TYPES"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
 	)
-	
+
 	// ProgramUniform JavaDoc
 	val uniProgram = "the handle of the program containing the uniform variable to be modified"
 	val uniLocation = "the location of the uniform variable to be modified"
@@ -283,7 +282,7 @@ if (shader) {
 	val uniY = "the uniform y value"
 	val uniZ = "the uniform z value"
 	val uniW = "the uniform w value"
-	
+
 	val uniArrayCount = "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."
 	val uniArrayValue = "an array of {@code count} values that will be used to update the specified uniform variable"
 
@@ -838,7 +837,7 @@ if (shader) {
 			" an array of characters into which will be written the info log for {@code pipeline}"
 		)
 	)
-	
+
 	// ARB_vertex_attrib_64bit
 
 	// Vertex attrib functions javadoc

@@ -145,8 +145,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors in $errcode_ret:
 	    ${ul(
 			"{@link CL10#CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object or is a sub-buffer object.",
@@ -202,15 +202,15 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			nullable
 		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object.",
 			"{@link CL10#CL_INVALID_VALUE} if {@code pfn_notify} is NULL.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -315,11 +315,11 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-	        ICQE,
+			ICQE,
 			"""
 			{@link CL10#CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
@@ -339,7 +339,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			"{@link CL10#CL_INVALID_OPERATION} if {@code clEnqueueReadBufferRect} is called on buffer which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or {@link CL12#CL_MEM_HOST_NO_ACCESS}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -387,7 +387,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		BufferRectHostSlicePitch,
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    const
+			const
 		) _ cl_void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
@@ -496,8 +496,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -551,15 +551,15 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		cl_context.IN("context", "a valid OpenCL context"),
 		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero event object and $errcode_ret is set to $CL_SUCCESS if the user event object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
 			ICE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)).javaDocLink
 
@@ -600,8 +600,8 @@ clReleaseMemObject(buf2);
 			"""
 		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_EVENT} if {@code event} is not a valid user event object.",
@@ -609,7 +609,7 @@ clReleaseMemObject(buf2);
 			"{@link CL10#CL_INVALID_OPERATION} if the {@code execution_status} for event has already been changed by a previous call to {@code clSetUserEventStatus}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -655,7 +655,7 @@ clReleaseMemObject(buf2);
 			execution model as defined by the OpenCL specification has changed. For example, it is not valid to assume that a corresponding memory transfer has
 			completed unless the event is in a state {@link CL10#CL_COMPLETE}.
 			""",
-		    "CL10#CL_SUBMITTED CL10#CL_RUNNING CL10#CL_COMPLETE"
+			"CL10#CL_SUBMITTED CL10#CL_RUNNING CL10#CL_COMPLETE"
 		),
 		Callback("CLEventCallback") _ cl_event_callback.IN(
 			"pfn_notify",
@@ -669,8 +669,8 @@ clReleaseMemObject(buf2);
 			nullable
 		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_EVENT} if {@code event} is not a valid event object.",
@@ -681,7 +681,7 @@ clReleaseMemObject(buf2);
 			"{@link CL10#CL_INVALID_VALUE} if {@code event} is a user event object and {@code command_exec_callback_type} is not {@link CL10#CL_COMPLETE}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 

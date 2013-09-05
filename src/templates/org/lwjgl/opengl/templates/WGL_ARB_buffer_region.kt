@@ -30,30 +30,30 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 		"Creates a buffer region and returns a handle associated with it.",
 
 		HDC.IN("hdc", "the device context for the device on which the buffer region is created"),
-        int.IN(
-	        "layerPlane",
-	        "the layer plane. Positive values identify overlay planes, negative values identify underlay planes. A value of 0 identifies the main plane."
-        ),
-        UINT.IN(
-	        "type",
-	        """
+		int.IN(
+			"layerPlane",
+			"the layer plane. Positive values identify overlay planes, negative values identify underlay planes. A value of 0 identifies the main plane."
+		),
+		UINT.IN(
+			"type",
+			"""
 	        a bitwise OR of any of the following values indicating which buffers can be saved or restored.  Multiple bits can be set and may result in better
 	        performance if multiple buffers are saved or restored.
 	        """,
-            "#WGL_FRONT_COLOR_BUFFER_BIT_ARB #WGL_BACK_COLOR_BUFFER_BIT_ARB #WGL_DEPTH_BUFFER_BIT_ARB #WGL_STENCIL_BUFFER_BIT_ARB"
-        )
+			"#WGL_FRONT_COLOR_BUFFER_BIT_ARB #WGL_BACK_COLOR_BUFFER_BIT_ARB #WGL_DEPTH_BUFFER_BIT_ARB #WGL_STENCIL_BUFFER_BIT_ARB"
+		)
 	).javaDocLink
 
 	VOID.func(
-	    "DeleteBufferRegionARB",
-	    "Deletes a buffer region.",
+		"DeleteBufferRegionARB",
+		"Deletes a buffer region.",
 
-	    HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB.")
-    )
+		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB.")
+	)
 
-    BOOL.func(
-	    "SaveBufferRegionARB",
-	    """
+	BOOL.func(
+		"SaveBufferRegionARB",
+		"""
 	    Saves image, depth, and stencil data into the buffer region.
 
 	    Data outside the window for the specified rectangle is undefined. The OpenGL coordinate system is used for specifying the rectangle ({@code x} and
@@ -64,25 +64,25 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 		The saved buffer region area can be freed by calling {@code wglSaveBufferRegionARB} with {@code width} or {@code height} set to a value of 0.
 	    """,
 
-	    HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
-        int.IN("x", "the window x-coordinate for the source rectangle"),
-        int.IN("y", "the window y-coordinate for the source rectangle"),
-        int.IN("width", "the source rectangle width"),
-        int.IN("height", "the source rectangle height")
-    )
+		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
+		int.IN("x", "the window x-coordinate for the source rectangle"),
+		int.IN("y", "the window y-coordinate for the source rectangle"),
+		int.IN("width", "the source rectangle width"),
+		int.IN("height", "the source rectangle height")
+	)
 
-    BOOL.func(
-	    "RestoreBufferRegionARB",
-	    "Restores a previously saved buffer region.",
+	BOOL.func(
+		"RestoreBufferRegionARB",
+		"Restores a previously saved buffer region.",
 
-	    HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
+		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
 		int.IN("x", "the window x-coordinate for the destination rectangle"),
 		int.IN("y", "the window y-coordinate for the destination rectangle"),
 		int.IN("width", "the destination rectangle width"),
 		int.IN("height", "the destination rectangle height"),
 		int.IN("xSrc", "the buffer region x-coordinate for the source of the data"),
 		int.IN("ySrc", "the buffer region y-coordinate for the source of the data")
-    )
+	)
 
 	IntConstant.block(
 		"Accepted by the {@code type} parameter of $CreateBufferRegionARB.",

@@ -6,9 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL33() = "GL33".nativeClassGL("GL33") {
 	nativeImport (
@@ -319,7 +317,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 	GLvoid.func("TexCoordP4uiv", "Pointer version of $TexCoordP4ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 
 	val texCoordTex = "the coordinate set to be modified"
-	
+
 	val MultiTexCoordP1ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP1ui", "Packed component version of {@link GL13#glMultiTexCoord1f}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
 	val MultiTexCoordP2ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP2ui", "Packed component version of {@link GL13#glMultiTexCoord2f}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
 	val MultiTexCoordP3ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP3ui", "Packed component version of {@link GL13#glMultiTexCoord3f}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink

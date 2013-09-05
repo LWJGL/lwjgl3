@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL42() = "GL42".nativeClassGL("GL42") {
 	nativeImport (
@@ -26,7 +25,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		"TRANSFORM_FEEDBACK_ACTIVE".expr<Int>("GL40.GL_TRANSFORM_FEEDBACK_BUFFER_ACTIVE"),
 		"TRANSFORM_FEEDBACK_PAUSED".expr<Int>("GL40.GL_TRANSFORM_FEEDBACK_BUFFER_PAUSED")
 	)
-	
+
 	// ARB_texture_compression_bptc
 
 	IntConstant.block(

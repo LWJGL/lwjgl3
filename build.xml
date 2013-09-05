@@ -75,9 +75,17 @@
 			<arg value="config/Templates.kts"/>
 			<arg value="-output"/>
 			<arg value="${lwjgl.bin.templates}"/>
-			<!--<arg value="-tags"/>-->
-			<!--<arg value="-noStdlib"/>-->
-			<!--<arg value="-noJdkAnnotations"/>-->
+			<!--
+			<arg value="-tags"/>
+			<arg value="-verbose"/>
+			<arg value="-version"/>
+			-->
+			<!--
+			<arg value="-notNullAssertions"/>
+			<arg value="-notNullParamAssertions"/>
+			-->
+			<arg value="-noStdlib"/>
+			<arg value="-noJdkAnnotations"/>
 			<!--<arg value="-noJdk"/>-->
 		</java>
 		<!--<kotlinc module="config/Templates.kts" jar="${lwjgl.lib}/templates.jar" />-->

@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
 val BUFFER_OBJECT_TARGETS =
@@ -266,7 +265,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("pname", "the pointer to be returned", "#GL_BUFFER_MAP_POINTER"),
 		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
-	
+
 	// ARB_occlusion_query
 
 	IntConstant.block(

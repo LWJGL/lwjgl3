@@ -15,9 +15,9 @@ fun AL_EXT_LINEAR_DISTANCE() = "EXTLinearDistance".nativeClassAL("EXT_LINEAR_DIS
 	javaDoc("bindings to AL_EXT_LINEAR_DISTANCE extension.")
 
 	IntConstant.block(
-    	"AL_EXT_EXPONENT_DISTANCE tokens.",
+		"AL_EXT_EXPONENT_DISTANCE tokens.",
 
-    	"LINEAR_DISTANCE" _ 0xd003,
-        "LINEAR_DISTANCE_CLAMPED" _ 0xd004
-    )
+		"LINEAR_DISTANCE" _ 0xd003,
+		"LINEAR_DISTANCE_CLAMPED" _ 0xd004
+	)
 }

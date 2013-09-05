@@ -72,7 +72,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		HDC.IN("hdc", "the device context for a new rendering context"),
 		int.IN(
 			"layerPlane",
-		    """
+			"""
 		    the layer plane to which you want to bind a rendering context. The value 0 identifies the main plane. Positive values of {@code layerPlace} identify
 		    overlay planes, where 1 is the first overlay plane over the main plane, 2 is the second overlay plane over the first overlay plane, and so on.
 		    Negative values identify underlay planes, where 1 is the first underlay plane under the main plane, 2 is the second underlay plane under the first
@@ -236,7 +236,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 			the format to use in the display lists. When format is {@link #WGL_FONT_LINES}, the {@code wglUseFontOutlines} function creates fonts with line
 			segments. When format is {@link #WGL_FONT_POLYGONS}, {@code wglUseFontOutlines} creates fonts with polygons.
 			""",
-		    "#WGL_FONT_LINES #WGL_FONT_POLYGONS"
+			"#WGL_FONT_LINES #WGL_FONT_POLYGONS"
 		),
 		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",

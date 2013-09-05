@@ -13,7 +13,7 @@ val DRAWABLE = Drawable.IN("d", "the drawable")
 fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
-	    "<X11/Xutil.h>"
+		"<X11/Xutil.h>"
 	)
 
 	javaDoc("Native bindings to Xlib.h.")
@@ -35,7 +35,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Status.func(
 		"XInitThreads",
-	    """
+		"""
 	    Initializes Xlib support for concurrent threads. This function must be the first Xlib function a multi-threaded program calls, and it must complete
 	    before any other Xlib call is made. This function returns a nonzero status if initialization was successful; otherwise, it returns zero. On systems that
 	    do not support threads, this function always returns zero.
@@ -62,20 +62,20 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	XErrorHandler.func(
 		"XSetErrorHandler",
-	    """
+		"""
 	    Sets the error handler that will be invoked when a X11 protocol error occurs. If {@code handler} is $NULL, the default error handler is used. The action
 	    of the default handlers is to print an explanatory message and exit.
 
 	    If the returned value is non-$NULL, the new error handler must pass the error down to the previous error handler. Use {@link #XErrorHandler} to do that.
 	    """,
 
-	    mods(
-		    Callback("XErrorHandler"),
-		    Expression("XErrorHandler.register(handler)", keepParam = true),
-		    nullable
-	    ) _ XErrorHandler.IN("handler", "the program's supplied error handler."),
+		mods(
+			Callback("XErrorHandler"),
+			Expression("XErrorHandler.register(handler)", keepParam = true),
+			nullable
+		) _ XErrorHandler.IN("handler", "the program's supplied error handler."),
 
-	    returnDoc = "the previous error handler"
+		returnDoc = "the previous error handler"
 	)
 
 	int.func(
@@ -270,8 +270,8 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		WINDOW,
-        Visual_p.IN("visual", "a visual type supported on the screen. If the visual type is not one supported by the screen, a {@code BadMatch} error results."),
-        int.IN("alloc", "the colormap entries to be allocated. You can pass AllocNone or AllocAll.")
+		Visual_p.IN("visual", "a visual type supported on the screen. If the visual type is not one supported by the screen, a {@code BadMatch} error results."),
+		int.IN("alloc", "the colormap entries to be allocated. You can pass AllocNone or AllocAll.")
 	)
 
 	int.func(
@@ -289,18 +289,18 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Screen_p.func(
 		"XScreenOfDisplay",
-	    "Return a pointer to the indicated screen.",
+		"Return a pointer to the indicated screen.",
 
-	    DISPLAY,
-	    int.IN("screen_number", "the appropriate screen number on the host server")
+		DISPLAY,
+		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
 	unsigned_long.func(
 		"XBlackPixel",
-	    "Return the black pixel value for the specified screen.",
+		"Return the black pixel value for the specified screen.",
 
-	    DISPLAY,
-	    int.IN("screen_number", "the appropriate screen number on the host server")
+		DISPLAY,
+		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
 	int.func(
@@ -312,7 +312,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Window.func(
 		"XCreateWindow",
-	    """
+		"""
 		Creates an unmapped subwindow for a specified parent window, returns the window ID of the created window, and causes the X server to generate a
 		{@code CreateNotify }event. The created window is placed on top in the stacking order with respect to siblings.
 
@@ -325,65 +325,65 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    The width and height are the created window's inside dimensions and do not include the created window's borders.
 	    """,
 
-	    DISPLAY,
-	    Window.IN("parent", "the parent window"),
-	    int.IN("x", "the window x-coordinate"),
-	    int.IN("y", "the window y-coordinate"),
-	    unsigned_int.IN("width", "the window width"),
-	    unsigned_int.IN("height", "the window height"),
-	    unsigned_int.IN("border_width", "the border width"),
-	    int.IN("depth", "the window's depth. A depth of {@link X#CopyFromParent} means the depth is taken from the parent."),
-	    unsigned_int.IN("windowClass", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
-	    Visual_p.IN("visual", "the visual type. A visual of {@link X#CopyFromParent} means the visual type is taken from the parent."),
-	    unsigned_long.IN(
-		    "valuemask",
-		    """
+		DISPLAY,
+		Window.IN("parent", "the parent window"),
+		int.IN("x", "the window x-coordinate"),
+		int.IN("y", "the window y-coordinate"),
+		unsigned_int.IN("width", "the window width"),
+		unsigned_int.IN("height", "the window height"),
+		unsigned_int.IN("border_width", "the border width"),
+		int.IN("depth", "the window's depth. A depth of {@link X#CopyFromParent} means the depth is taken from the parent."),
+		unsigned_int.IN("windowClass", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
+		Visual_p.IN("visual", "the visual type. A visual of {@link X#CopyFromParent} means the visual type is taken from the parent."),
+		unsigned_long.IN(
+			"valuemask",
+			"""
 		    which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
 		    {@code valuemask} is zero, the attributes are ignored and are not referenced.
 		    """
-	    ),
-	    XSetWindowAttributes_p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
+		),
+		XSetWindowAttributes_p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
 	)
 
 	int.func(
 		"XChangeWindowAttributes",
-	    "Depending on the {@code valuemask}, uses the window attributes in the {@link XSetWindowAttributes} structure to change the specified window attributes.",
+		"Depending on the {@code valuemask}, uses the window attributes in the {@link XSetWindowAttributes} structure to change the specified window attributes.",
 
-	    DISPLAY,
-	    WINDOW,
-	    unsigned_long.IN(
-		    "valuemask",
-		    """
+		DISPLAY,
+		WINDOW,
+		unsigned_long.IN(
+			"valuemask",
+			"""
 		    specifies which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
 		    valuemask is zero, the attributes are ignored and are not referenced. The values and restrictions are the same as for {@link #XCreateWindow}.
 		    """
-	    ),
-	    XSetWindowAttributes_p.IN(
-		    "attributes",
-		    "the {@link XSetWindowAttributes} structure from which the values (as specified by the value mask) are to be taken."
-	    )
+		),
+		XSetWindowAttributes_p.IN(
+			"attributes",
+			"the {@link XSetWindowAttributes} structure from which the values (as specified by the value mask) are to be taken."
+		)
 	)
 
 	Status.func(
 		"XSetWMProtocols",
-	    "Replaces the {@code WM_PROTOCOLS} property on the specified window with the list of atoms specified by the protocols argument.",
+		"Replaces the {@code WM_PROTOCOLS} property on the specified window with the list of atoms specified by the protocols argument.",
 
-	    DISPLAY,
-	    WINDOW,
-	    Atom_p.IN("protocols", "the list of protocols"),
-	    AutoSize("protocols") _ int.IN("count", "the number of protocols in the list")
+		DISPLAY,
+		WINDOW,
+		Atom_p.IN("protocols", "the list of protocols"),
+		AutoSize("protocols") _ int.IN("count", "the number of protocols in the list")
 	)
 
 	int.func(
 		"XSetWMHints",
-	    """
+		"""
 	    Sets the window manager hints that include icon information and location, the initial state of the window, and whether the application relies on the
 	    window manager to get keyboard input.
 	    """,
 
-	    DISPLAY,
-	    WINDOW,
-	    XWMHints_p.IN("hints", "the {@link XWMHints} structure to be used")
+		DISPLAY,
+		WINDOW,
+		XWMHints_p.IN("hints", "the {@link XWMHints} structure to be used")
 	)
 
 	int.func(
@@ -393,7 +393,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		DISPLAY,
 		WINDOW,
 		XSizeHints_p.IN("hints", "the {@link XSizeHints} structure to be used"),
-	    Atom.IN("property", "the property name")
+		Atom.IN("property", "the property name")
 	)
 
 	void.func(
@@ -420,24 +420,24 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		Window.IN("grab_window", "the grab window"),
-	    Bool.IN(
-		    "owner_events",
-		    """
+		Bool.IN(
+			"owner_events",
+			"""
 		    a Boolean value that indicates whether the pointer events are to be reported as usual or reported with respect to the grab window if selected by the
 		    event mask
 		    """
-	    ),
-	    unsigned_int.IN("event_mask", "which pointer events are reported to the client. The mask is the bitwise inclusive OR of the valid pointer event mask bits."),
-	    int.IN("pointer_mode", "further processing of pointer events", "X#GrabModeSync X#GrabModeAsync"),
-	    int.IN("keyboard_mode", "further processing of keyboard events", "X#GrabModeSync X#GrabModeAsync"),
-	    Window.IN("confine_to", "the window to confine the pointer in or {@link X#None}"),
-	    Cursor.IN("cursor", "the cursor that is to be displayed during the grab or {@link X#None}"),
+		),
+		unsigned_int.IN("event_mask", "which pointer events are reported to the client. The mask is the bitwise inclusive OR of the valid pointer event mask bits."),
+		int.IN("pointer_mode", "further processing of pointer events", "X#GrabModeSync X#GrabModeAsync"),
+		int.IN("keyboard_mode", "further processing of keyboard events", "X#GrabModeSync X#GrabModeAsync"),
+		Window.IN("confine_to", "the window to confine the pointer in or {@link X#None}"),
+		Cursor.IN("cursor", "the cursor that is to be displayed during the grab or {@link X#None}"),
 		Time.IN("time", "the time. You can pass either a timestamp or {@link X#CurrentTime}")
 	)
 
 	int.func(
 		"XUngrabPointer",
-	    """
+		"""
 	    Releases the pointer and any queued events if this client has actively grabbed the pointer from {@link #XGrabPointer}, {@link #XGrabButton}, or from
 	    a normal button press. {@code XUngrabPointer} does not release the pointer if the specified time is earlier than the last-pointer-grab time or is later
 	    than the current X server time. It also generates {@code EnterNotify} and {@code LeaveNotify} events. The X server performs an {@code UngrabPointer}
@@ -445,17 +445,17 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    causes the {@code confine_to} window to lie completely outside the boundaries of the root window.
 	    """,
 
-	    DISPLAY,
-	    Time.IN("time", "specifies the time. You can pass either a timestamp or {@link X#CurrentTime}.")
+		DISPLAY,
+		Time.IN("time", "specifies the time. You can pass either a timestamp or {@link X#CurrentTime}.")
 	)
 
 	int.func(
 		"XDefineCursor",
-	    "If a cursor is set, it will be used when the pointer is in the window. If the cursor is {@link X#None}, it is equivalent to {@link #XUndefineCursor}.",
+		"If a cursor is set, it will be used when the pointer is in the window. If the cursor is {@link X#None}, it is equivalent to {@link #XUndefineCursor}.",
 
-	    DISPLAY,
-	    WINDOW,
-	    Cursor.IN("cursor", "the cursor that is to be displayed or {@link X#None}")
+		DISPLAY,
+		WINDOW,
+		Cursor.IN("cursor", "the cursor that is to be displayed or {@link X#None}")
 	)
 
 	int.func(
@@ -482,13 +482,13 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XGetScreenSaver",
-	    "Gets the current screen saver values.",
+		"Gets the current screen saver values.",
 
-	    DISPLAY,
-	    Check(1) _ int_p.OUT("timeout_return", "the timeout, in seconds, until the screen saver turns on"),
-	    Check(1) _ int_p.OUT("interval_return", "the interval between screen saver invocations"),
-	    Check(1) _ int_p.OUT("prefer_blanking_return", "the current screen blanking preference"),
-	    Check(1) _ int_p.OUT("allow_exposures_return", "the current screen save control value")
+		DISPLAY,
+		Check(1) _ int_p.OUT("timeout_return", "the timeout, in seconds, until the screen saver turns on"),
+		Check(1) _ int_p.OUT("interval_return", "the interval between screen saver invocations"),
+		Check(1) _ int_p.OUT("prefer_blanking_return", "the current screen blanking preference"),
+		Check(1) _ int_p.OUT("allow_exposures_return", "the current screen save control value")
 	)
 
 	int.func(
@@ -504,7 +504,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Status.func(
 		"XSendEvent",
-	    """
+		"""
 		Identifies the destination window, determines which clients should receive the specified events, and ignores any active grabs. This function requires
 		you to pass an event mask. This function uses the {@code w} argument to identify the destination window as follows:
 		${ul(
@@ -513,7 +513,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			If {@code w} is {@link X#InputFocus} and if the focus window contains the pointer, the destination window is the window that contains the pointer;
 			otherwise, the destination window is the focus window.
 			"""
-	    )}
+		)}
 
 		To determine which clients should receive the specified events, XSendEvent() uses the propagate argument as follows:
 		${ul(
@@ -529,33 +529,33 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			specified as the destination, the event is not sent to any clients. Otherwise, the event is reported to every client selecting on the final
 			destination any of the types specified in {@code event_mask}.
 			"""
-	    )}
+		)}
 
 		The event in the XEvent structure must be one of the core events or one of the events defined by an extension (or a BadValue error results) so that the X server can correctly byte-swap the contents as necessary. The contents of the event are otherwise unaltered and unchecked by the X server except to force send_event to True in the forwarded event and to set the serial number in the event correctly; therefore these fields and the display field are ignored by XSendEvent().
 	    """,
 
-	    DISPLAY,
-	    Window.IN("w", "the window the event is to be sent to, or {@link X#PointerWindow}, or {@link X#InputFocus}"),
-	    Bool.IN("propagate", "a Boolean value"),
-	    long.IN("event_mask", "the event mask"),
-	    XEvent_p.IN("event_send", "the event that is to be sent")
+		DISPLAY,
+		Window.IN("w", "the window the event is to be sent to, or {@link X#PointerWindow}, or {@link X#InputFocus}"),
+		Bool.IN("propagate", "a Boolean value"),
+		long.IN("event_mask", "the event mask"),
+		XEvent_p.IN("event_send", "the event that is to be sent")
 	)
 
 	int.func(
 		"XRaiseWindow",
-	    """
+		"""
 		Raises the specified window to the top of the stack so that no sibling window obscures it. If the windows are regarded as overlapping sheets of paper
 		stacked on a desk, then raising a window is analogous to moving the sheet to the top of the stack but leaving its x and y location on the desk constant.
 		Raising a mapped window may generate Expose events for the window and any mapped subwindows that were formerly obscured.
 	    """,
 
-	    DISPLAY,
-	    WINDOW
+		DISPLAY,
+		WINDOW
 	)
 
 	int.func(
 		"XSetInputFocus",
-	    """
+		"""
 	    Changes the input focus and the last-focus-change time. It has no effect if the specified time is earlier than the current last-focus-change time or is
 	    later than the current X server time. Otherwise, the last-focus-change time is set to the specified time ({@link X#CurrentTime} is replaced by the
 	    current X server time). {@code XSetInputFocus} causes the X server to generate {@code FocusIn} and {@code FocusOut} events.
@@ -585,15 +585,15 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		)}
 	    """,
 
-	    DISPLAY,
-	    Window.IN("focus", "the window, {@link X#PointerRoot} or {@link X#None}"),
-	    int.IN("revert_to", "where the input focus reverts to if the window becomes not viewable", "X#RevertToParent X#RevertToPointerRoot X#RevertToNone"),
-	    Time.IN("time", " the time. You can pass either a timestamp or {@link X#CurrentTime}.")
+		DISPLAY,
+		Window.IN("focus", "the window, {@link X#PointerRoot} or {@link X#None}"),
+		int.IN("revert_to", "where the input focus reverts to if the window becomes not viewable", "X#RevertToParent X#RevertToPointerRoot X#RevertToNone"),
+		Time.IN("time", " the time. You can pass either a timestamp or {@link X#CurrentTime}.")
 	)
 
 	int.func(
 		"XMoveWindow",
-	    """
+		"""
 		Moves the specified window to the specified {@code x} and {@code y} coordinates, but it does not change the window's size, raise the window, or change
 		the mapping state of the window. Moving a mapped window may or may not lose the window's contents depending on if the window is obscured by nonchildren
 		and if no backing store exists. If the contents of the window are lost, the X server generates Expose events. Moving a mapped window generates
@@ -602,10 +602,10 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    The {@code x} and {@code y} coordinates define the new location of the top-left pixel of the window's border or the window itself if it has no border.
 	    """,
 
-	    DISPLAY,
-	    WINDOW,
-	    int.IN("x", "the window x-coordinate"),
-	    int.IN("y", "the window y-coordinate")
+		DISPLAY,
+		WINDOW,
+		int.IN("x", "the window x-coordinate"),
+		int.IN("y", "the window y-coordinate")
 	)
 
 	int.func(
@@ -624,10 +624,10 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Bool.func(
 		"XGetEventData",
-	    "Retrieves extra data from the given cookie.",
+		"Retrieves extra data from the given cookie.",
 
-	    DISPLAY,
-	    XGenericEventCookie_p.OUT("cookie", "a pointer to a {@link XGenericEventCookie} structure.")
+		DISPLAY,
+		XGenericEventCookie_p.OUT("cookie", "a pointer to a {@link XGenericEventCookie} structure.")
 	)
 
 	void.func(
@@ -640,20 +640,20 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XGetWindowProperty",
-	    "Retrieves a window property.",
+		"Retrieves a window property.",
 
-	    DISPLAY,
-	    WINDOW,
-	    Atom.IN("property", "the property name"),
-	    long.IN("long_offset", "the offset in the specified property (in 32-bit quantities) where the data is to be retrieved"),
-	    long.IN("long_length", "the length in 32-bit multiples of the data to be retrieved"),
+		DISPLAY,
+		WINDOW,
+		Atom.IN("property", "the property name"),
+		long.IN("long_offset", "the offset in the specified property (in 32-bit quantities) where the data is to be retrieved"),
+		long.IN("long_length", "the length in 32-bit multiples of the data to be retrieved"),
 		Bool.IN("delete", "a Boolean value that determines whether the property is deleted"),
-	    Atom.IN("req_type", "the atom identifier associated with the property type or {@link X#AnyPropertyType}."),
-	    Atom_p.OUT("actual_type_return", "the atom identifier that defines the actual type of the property"),
-	    int_p.OUT("actual_format_return", "the actual format of the property"),
-	    unsigned_long_p.OUT("nitems_return", "the actual number of 8-bit, 16-bit, or 32-bit items stored in the {@code prop_return} data"),
-	    unsigned_long_p.OUT("bytes_after_return", "the number of bytes remaining to be read in the property if a partial read was performed"),
-	    unsigned_char_pp.OUT("prop_return", "the data in the specified format")
+		Atom.IN("req_type", "the atom identifier associated with the property type or {@link X#AnyPropertyType}."),
+		Atom_p.OUT("actual_type_return", "the atom identifier that defines the actual type of the property"),
+		int_p.OUT("actual_format_return", "the actual format of the property"),
+		unsigned_long_p.OUT("nitems_return", "the actual number of 8-bit, 16-bit, or 32-bit items stored in the {@code prop_return} data"),
+		unsigned_long_p.OUT("bytes_after_return", "the number of bytes remaining to be read in the property if a partial read was performed"),
+		unsigned_char_pp.OUT("prop_return", "the data in the specified format")
 	)
 
 	int.func(
@@ -670,7 +670,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XQueryPointer",
-	    """
+		"""
 	    Returns the root window the pointer is logically on and the pointer coordinates relative to the root window's origin. If {@code XQueryPointer} returns
 	    {@link #False}, the pointer is not on the same screen as the specified window, and {@code XQueryPointer} returns {@link X#None} to {@code child_return}
 	    and zero to {@code win_x_return} and {@code win_y_return}. If {@code XQueryPointer} returns {@link #True}, the pointer coordinates returned to
@@ -681,15 +681,15 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		inclusive OR of one or more of the button or modifier key bitmasks to match the current state of the mouse buttons and the modifier keys.
 	    """,
 
-	    DISPLAY,
-	    WINDOW,
-	    Window_p.OUT("root_return", "the root window that the pointer is in"),
-	    Window_p.OUT("child_return", "the child window that the pointer is located in, if any"),
-	    int_p.OUT("root_x_return", "the pointer x-coordinate relative to the root window's origin"),
-	    int_p.OUT("root_y_return", "the pointer y-coordinate relative to the root window's origin"),
-	    int_p.OUT("win_x_return", "the pointer x-coordinate relative to the specified window"),
-	    int_p.OUT("win_y_return", "the pointer y-coordinate relative to the specified window"),
-	    unsigned_int_p.OUT("mask_return", "the current state of the modifier keys and pointer buttons")
+		DISPLAY,
+		WINDOW,
+		Window_p.OUT("root_return", "the root window that the pointer is in"),
+		Window_p.OUT("child_return", "the child window that the pointer is located in, if any"),
+		int_p.OUT("root_x_return", "the pointer x-coordinate relative to the root window's origin"),
+		int_p.OUT("root_y_return", "the pointer y-coordinate relative to the root window's origin"),
+		int_p.OUT("win_x_return", "the pointer x-coordinate relative to the specified window"),
+		int_p.OUT("win_y_return", "the pointer y-coordinate relative to the specified window"),
+		unsigned_int_p.OUT("mask_return", "the current state of the modifier keys and pointer buttons")
 	)
 
 	int.func(
@@ -701,8 +701,8 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		a window will generate {@code Expose} events on windows that were formerly obscured by it.
 		""",
 
-	    DISPLAY,
-	    WINDOW
+		DISPLAY,
+		WINDOW
 	)
 
 	int.func(
@@ -722,34 +722,34 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	void.func(
 		"Xutf8SetWMProperties",
-	    "Sets window properties.",
+		"Sets window properties.",
 
-	    DISPLAY,
-	    WINDOW,
-	    const _ charUTF8_p.IN("window_name", "the window name, which should be a null-terminated string"),
-	    const _ charUTF8_p.IN("icon_name", "the icon name, which should be a null-terminated string"),
-	    nullable _ char_pp.IN("argv", "the application's argument list"),
-	    AutoSize("argv") _ int.IN("argc", "the number of arguments"),
-	    nullable _ XSizeHints_p.IN("normal_hints", "the size hints for the window in its normal state"),
-	    nullable _ XWMHints_p.IN("wm_hints", "the XWMHints structure to be used"),
-	    nullable _ XClassHint_p.IN("class_hints", "the {@link XClassHint} structure to be used")
+		DISPLAY,
+		WINDOW,
+		const _ charUTF8_p.IN("window_name", "the window name, which should be a null-terminated string"),
+		const _ charUTF8_p.IN("icon_name", "the icon name, which should be a null-terminated string"),
+		nullable _ char_pp.IN("argv", "the application's argument list"),
+		AutoSize("argv") _ int.IN("argc", "the number of arguments"),
+		nullable _ XSizeHints_p.IN("normal_hints", "the size hints for the window in its normal state"),
+		nullable _ XWMHints_p.IN("wm_hints", "the XWMHints structure to be used"),
+		nullable _ XClassHint_p.IN("class_hints", "the {@link XClassHint} structure to be used")
 	)
 
 	int.func(
 		"XChangeProperty",
-	    "Alters a property for the specified window and causes the X server to generate a {@code PropertyNotify} event on that window.",
+		"Alters a property for the specified window and causes the X server to generate a {@code PropertyNotify} event on that window.",
 
-	    DISPLAY,
-	    WINDOW,
-	    Atom.IN("property", "the property name"),
-	    Atom.IN("type", "the type of the property"),
-	    int.IN("format", "whether the data should be viewed as a list of 8-bit, 16-bit, or 32-bit quantities", "8 16 32"),
-	    int.IN("mode", "the mode of the operation", "X#PropModeReplace X#PropModePrepend X#PropModeAppend"),
-	    mods(
-		    const,
-	        MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT)
-	    ) _ unsigned_char_p.IN("data", "the property data"),
-	    AutoSize("data") _ int.IN("nelements", "the number of elements of the specified data format")
+		DISPLAY,
+		WINDOW,
+		Atom.IN("property", "the property name"),
+		Atom.IN("type", "the type of the property"),
+		int.IN("format", "whether the data should be viewed as a list of 8-bit, 16-bit, or 32-bit quantities", "8 16 32"),
+		int.IN("mode", "the mode of the operation", "X#PropModeReplace X#PropModePrepend X#PropModeAppend"),
+		mods(
+			const,
+			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT)
+		) _ unsigned_char_p.IN("data", "the property data"),
+		AutoSize("data") _ int.IN("nelements", "the number of elements of the specified data format")
 	)
 
 	Bool.func(

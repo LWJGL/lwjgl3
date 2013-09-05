@@ -15,10 +15,10 @@ fun ALC_EXT_DEDICATED() = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix 
 	javaDoc("bindings to ALC_EXT_DEDICATED extension.")
 
 	IntConstant.block(
-    	"ALC_EXT_DEDICATED tokens.",
+		"ALC_EXT_DEDICATED tokens.",
 
-    	"DEDICATED_GAIN " _ 0x1,
-    	"EFFECT_DEDICATED_DIALOGUE" _ 0x9001,
-    	"EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT" _ 0x9000
-    )
+		"DEDICATED_GAIN " _ 0x1,
+		"EFFECT_DEDICATED_DIALOGUE" _ 0x9001,
+		"EFFECT_DEDICATED_LOW_FREQUENCY_EFFECT" _ 0x9000
+	)
 }

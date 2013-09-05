@@ -15,34 +15,34 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	javaDoc("bindings to ALC_SOFT_loopback extension.")
 
 	val RenderFormatSupportedTypeParameters = IntConstant.block(
-    	"Accepted by the @{code type} parameter of alcIsRenderFormatSupportedSOFT.",
+		"Accepted by the @{code type} parameter of alcIsRenderFormatSupportedSOFT.",
 
-        "BYTE_SOFT" _ 0x1400,
-        "UNSIGNED_BYTE_SOFT" _ 0x1401,
-        "SHORT_SOFT" _ 0x1402,
-        "UNSIGNED_SHORT_SOFT" _ 0x1403,
-        "INT_SOFT" _ 0x1404,
-        "UNSIGNED_INT_SOFT" _ 0x1405,
-        "FLOAT_SOFT" _ 0x1406
-    ).toJavaDocLinks();
+		"BYTE_SOFT" _ 0x1400,
+		"UNSIGNED_BYTE_SOFT" _ 0x1401,
+		"SHORT_SOFT" _ 0x1402,
+		"UNSIGNED_SHORT_SOFT" _ 0x1403,
+		"INT_SOFT" _ 0x1404,
+		"UNSIGNED_INT_SOFT" _ 0x1405,
+		"FLOAT_SOFT" _ 0x1406
+	).toJavaDocLinks();
 
-    val RenderFormatSupportedChannelParameters = IntConstant.block(
-    	"Accepted by the @{code channels} parameter of alcIsRenderFormatSupportedSOFT.",
+	val RenderFormatSupportedChannelParameters = IntConstant.block(
+		"Accepted by the @{code channels} parameter of alcIsRenderFormatSupportedSOFT.",
 
-        "MONO_SOFT" _ 0x1500,
-        "STEREO_SOFT" _ 0x1501,
-        "QUAD_SOFT" _ 0x1503,
-        "5POINT1_SOFT" _ 0x1504,
-        "6POINT1_SOFT" _ 0x1505,
-        "7POINT1_SOFT" _ 0x1506
-    ).toJavaDocLinks();
+		"MONO_SOFT" _ 0x1500,
+		"STEREO_SOFT" _ 0x1501,
+		"QUAD_SOFT" _ 0x1503,
+		"5POINT1_SOFT" _ 0x1504,
+		"6POINT1_SOFT" _ 0x1505,
+		"7POINT1_SOFT" _ 0x1506
+	).toJavaDocLinks();
 
-    val CreateContextParameters = IntConstant.block(
-    	"Accepted as part of the @{code attrList} parameter of alcCreateContext.",
+	val CreateContextParameters = IntConstant.block(
+		"Accepted as part of the @{code attrList} parameter of alcCreateContext.",
 
-        "FORMAT_CHANNELS_SOFT" _ 0x1990,
-        "FORMAT_TYPE_SOFT" _ 0x1991
-    ).toJavaDocLinks();
+		"FORMAT_CHANNELS_SOFT" _ 0x1990,
+		"FORMAT_TYPE_SOFT" _ 0x1991
+	).toJavaDocLinks();
 
 	ALCdevice_p.func(
 		"LoopbackOpenDeviceSOFT",
@@ -79,9 +79,9 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         format of the audio subsequently rendered by the device.
 		""",
 		nullable _ ALCdevice_p.IN("device", "the loopback device to query"),
-        ALCsizei.IN("frequency", "positive sample rate of the rendered audio"),
-        ALCenum.IN("channels", "channel configuration used for rendering", RenderFormatSupportedChannelParameters),
-        ALCenum.IN("type", "sample type of the written audio", RenderFormatSupportedTypeParameters)
+		ALCsizei.IN("frequency", "positive sample rate of the rendered audio"),
+		ALCenum.IN("channels", "channel configuration used for rendering", RenderFormatSupportedChannelParameters),
+		ALCenum.IN("type", "sample type of the written audio", RenderFormatSupportedTypeParameters)
 	)
 
 	ALCvoid.func(
@@ -91,8 +91,8 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
         buffers and source offsets) is processed only when new samples are
         rendered. To render samples, use the function
         """,
-        nullable _ ALCdevice_p.IN("device", "loopback device which samples are rendered from"),
-        ALCvoid_p.IN("buffer", "buffer to write to"),
-        ALCsizei.IN("samples", "number of sample frames to render")
+		nullable _ ALCdevice_p.IN("device", "loopback device which samples are rendered from"),
+		ALCvoid_p.IN("buffer", "buffer to write to"),
+		ALCsizei.IN("samples", "number of sample frames to render")
 	)
 }

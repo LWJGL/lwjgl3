@@ -5,7 +5,6 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
-import java.util.ArrayList
 
 abstract class ConstantType<T>(
 	val javaType: Class<T>
@@ -84,8 +83,8 @@ public class ConstantBlock<T>(
 		// Find maximum constant name length
 		val alignment = constants.map {
 			it.name.size
-		}.fold(0) {
-			(left, right) -> Math.max(left, right)
+		}.fold(0) {(left, right) ->
+			Math.max(left, right)
 		}
 
 		for ( i in 0..constants.lastIndex - 1 ) {

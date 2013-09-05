@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL31() = "GL31".nativeClassGL("GL31") {
 	nativeImport (
@@ -89,7 +88,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		GLintptr.IN("writeoffset", "the offset, in basic machine units, within the data store of {@code writetarget} to which data should be written"),
 		GLsizeiptr.IN("size", "the size, in basic machine units, of the data to be copied from {@code readtarget} to {@code writetarget}")
 	)
-	
+
 	// NV_primitive_restart
 
 	IntConstant.block(
@@ -110,7 +109,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 
 		GLuint.IN("index", "the value to be interpreted as the primitive restart index")
 	)
-	
+
 	// ARB_texture_buffer_object
 
 	IntConstant.block(
@@ -140,7 +139,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		GLenum.IN("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
 		GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture")
 	)
-	
+
 	// ARB_texture_rectangle
 
 	IntConstant.block(

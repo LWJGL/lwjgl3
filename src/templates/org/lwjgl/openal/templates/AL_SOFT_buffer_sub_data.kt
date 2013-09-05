@@ -14,12 +14,12 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
 
 	javaDoc("bindings to AL_SOFT_buffer_sub_data extension.")
 
-    val SourceParamNameParameters = IntConstant.block(
-    	"Accepted by the @{code paramName} parameter of alGetSourceiv and alGetSourcefv.",
+	val SourceParamNameParameters = IntConstant.block(
+		"Accepted by the @{code paramName} parameter of alGetSourceiv and alGetSourcefv.",
 
-        "BYTE_RW_OFFSETS_SOFT" _ 0x1031,
-        "SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
-    ).toJavaDocLinks();
+		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
+		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
+	).toJavaDocLinks();
 
 	ALCvoid.func(
 		"BufferSubDataSOFT",
@@ -54,10 +54,10 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
         undefined if an attempt is made to modify buffer data between the read and
         write offsets.
         """,
-        ALuint.IN("buffer", "ID of the buffer to modify"),
+		ALuint.IN("buffer", "ID of the buffer to modify"),
 		ALenum.IN("format", "sample format of the passed data"),
-        const _ ALCvoid_p.IN("data", "existing buffer data to write to"),
-        ALCsizei.IN("offset", "number of bytes from the start of the original data"),
-        ALCsizei.IN("length", "number of bytes of the original data, to modify")
+		const _ ALCvoid_p.IN("data", "existing buffer data to write to"),
+		ALCsizei.IN("offset", "number of bytes from the start of the original data"),
+		ALCsizei.IN("length", "number of bytes of the original data, to modify")
 	)
 }

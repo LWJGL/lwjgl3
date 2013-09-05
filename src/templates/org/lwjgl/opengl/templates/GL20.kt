@@ -17,7 +17,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 	)
 
 	javaDoc("The core OpenGL 2.0 functionality.")
-	
+
 	// ARB_shading_language_100
 
 	IntConstant.block(
@@ -378,7 +378,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLenum.IN(
 			"pname",
 			"the object parameter",
-		    """
+			"""
 		    #GL_DELETE_STATUS #GL_LINK_STATUS #GL_VALIDATE_STATUS #GL_INFO_LOG_LENGTH #GL_ATTACHED_SHADERS #GL_ACTIVE_ATTRIBUTES #GL_ACTIVE_ATTRIBUTE_MAX_LENGTH
 		    #GL_ACTIVE_UNIFORMS #GL_ACTIVE_UNIFORM_MAX_LENGTH GL30#GL_TRANSFORM_FEEDBACK_BUFFER_MODE GL30#GL_TRANSFORM_FEEDBACK_VARYINGS
 		    GL30#GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH GL31#GL_ACTIVE_UNIFORM_BLOCKS GL31#GL_ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH
@@ -736,7 +736,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLenum.IN("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#GL_VERTEX_ATTRIB_ARRAY_POINTER"),
 		mods(Check(1), returnValue) _ GLvoid_pp.OUT("pointer", "the pointer value")
 	)
-	
+
 	// ARB_fragment_shader
 
 	IntConstant.block(
@@ -756,7 +756,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 
 		"FRAGMENT_SHADER_DERIVATIVE_HINT" _ 0x8B8B
 	)
-	
+
 	// ARB_draw_buffers
 
 	IntConstant.block(
@@ -789,7 +789,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		mods(const, SingleValue("buf")) _ GLenum_p.IN(
 			"bufs",
 			"an array of symbolic constants specifying the buffers into which fragment colors or data values will be written",
-		    """
+			"""
 		    GL11#GL_NONE GL11#GL_FRONT_LEFT GL11#GL_FRONT_RIGHT GL11#GL_BACK_LEFT GL11#GL_BACK_RIGHT GL11#GL_AUX0 GL11#GL_AUX1 GL11#GL_AUX2 GL11#GL_AUX3
 		    GL30#GL_COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
 		    """
@@ -849,7 +849,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		),
 		GLenum.IN("modeAlpha", " the alpha blend equation, how the alpha component of the source and destination colors are combined")
 	)
-	
+
 	// ATI_separate_stencil
 
 	IntConstant.block(
@@ -912,5 +912,5 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLenum.IN("face", "whether front and/or back stencil writemask is updated", "GL11#GL_FRONT GL11#GL_BACK GL11#GL_FRONT_AND_BACK"),
 		GLuint.IN("mask", "a bit mask to enable and disable writing of individual bits in the stencil planes. Initially, the mask is all 1's.")
 	)
-	
+
 }

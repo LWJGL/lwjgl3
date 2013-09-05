@@ -1212,14 +1212,14 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	IntConstant.block(
 		"XButton values.",
 
-	    "XBUTTON1" _ 0x0001,
+		"XBUTTON1" _ 0x0001,
 		"XBUTTON2" _ 0x0002
 	)
 
 	IntConstant.block(
 		"Value for rolling one detent.",
 
-	    "WHEEL_DELTA" _ 120
+		"WHEEL_DELTA" _ 120
 	)
 
 	IntConstant.block(
@@ -1273,7 +1273,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		LPCTSTR.IN(
 			"className",
-		    """
+			"""
 		    a null-terminated string or a class atom. If {@code className} is a string, it specifies the window class name. This class name must have been
 		    registered by a previous call to the {@link #RegisterClass} or {@link #RegisterClassEx} function. System classes, such as dialog box controls,
 		    cannot be unregistered. If this parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClass} or
@@ -1296,7 +1296,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		),
 		LPCTSTR.IN(
 			"className",
-		    """
+			"""
 		    the class name. The name must be that of a preregistered class or a class registered by a previous call to the {@link #RegisterClass} or
 		    {@link #RegisterClassEx} function. Alternatively, this parameter can be a class atom created by a previous call to {@link #RegisterClass} or
 		    {@link #RegisterClassEx}. The atom must be in the low-order word of {@code className}; the high-order word must be zero.
@@ -1474,7 +1474,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	BOOL.func(
 		"WaitMessage",
-	    """
+		"""
 	    Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
 	    return until a new message is placed in the thread's message queue.
 	    """
@@ -1546,7 +1546,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		),
 		DWORD.IN(
 			"devNum",
-		    """
+			"""
 		    an index value that specifies the display device of interest. The operating system identifies each display device in the current session with an
 		    index value. The index values are consecutive integers, starting at 0. If the current session has three display devices, for example, they are
 		    specified by the index values 0, 1, and 2.
@@ -1554,7 +1554,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		),
 		PDISPLAY_DEVICE.OUT(
 			"displayDevice",
-		    """
+			"""
 		    a {@link DISPLAY_DEVICE} structure that receives information about the display device specified by {@code devNum}. Before calling
 		    {@code EnumDisplayDevices}, you must initialize the cb member of {@code DISPLAY_DEVICE} to the size, in bytes, of {@code DISPLAY_DEVICE}.
 		    """
@@ -1600,7 +1600,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		nullable _ DEVMODE_p.IN(
 			"devMode",
-		    """
+			"""
 		    a {@link DEVMODE} structure that describes the new graphics mode. If {@code devMode} is $NULL, all the values currently in the registry will be used
 		    for the display setting. Passing $NULL for the {@code devMode} parameter and 0 for the {@code flagS} parameter is the easiest way to return to the
 		    default mode after a dynamic mode change.
@@ -1632,67 +1632,67 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	BOOL.func(
 		"SystemParametersInfo",
-	    "Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter.",
+		"Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter.",
 
-	    UINT.IN("uiAction", "the system-wide parameter to be retrieved or set"),
-	    UINT.IN(
-		    "uiParam",
-		    """
+		UINT.IN("uiAction", "the system-wide parameter to be retrieved or set"),
+		UINT.IN(
+			"uiParam",
+			"""
 		    a parameter whose usage and format depends on the system parameter being queried or set. If not otherwise indicated, you must specify zero for this
 		    parameter.
 		    """
-	    ),
-	    nullable _ PVOID.OUT(
-		    "pvParam",
-		    """
+		),
+		nullable _ PVOID.OUT(
+			"pvParam",
+			"""
 		    a parameter whose usage and format depends on the system parameter being queried or set. If not otherwise indicated, you must specify $NULL for this
 		    parameter.
 		    """
-	    ),
-	    UINT.IN(
-		    "fWinIni",
-		    """
+		),
+		UINT.IN(
+			"fWinIni",
+			"""
 		    if a system parameter is being set, specifies whether the user profile is to be updated, and if so, whether the {@link #WM_SETTINGCHANGE} message is
 		    to be broadcast to all top-level windows to notify them of the change.
 
 		    This parameter can be zero if you do not want to update the user profile or broadcast the {@link #WM_SETTINGCHANGE} message.
 		    """
-	    )
+		)
 	)
 
 	BOOL.func(
 		"AdjustWindowRectEx",
-	    """
+		"""
 	    Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
 	    {@link #CreateWindowEx} function to create a window whose client area is the desired size.
 	    """,
 
-	    LPRECT.IN(
-		    "rect",
-		    """
+		LPRECT.IN(
+			"rect",
+			"""
 		    a pointer to a {@link RECT} structure that contains the coordinates of the top-left and bottom-right corners of the desired client area. When the
 		    function returns, the structure contains the coordinates of the top-left and bottom-right corners of the window to accommodate the desired client
 		    area.
 		    """
-	    ),
-	    DWORD.IN("style", "the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style."),
-	    BOOL.IN("menu", "indicates whether the window has a menu"),
-	    DWORD.IN("exStyle", "the extended window style of the window whose required size is to be calculated")
+		),
+		DWORD.IN("style", "the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style."),
+		BOOL.IN("menu", "indicates whether the window has a menu"),
+		DWORD.IN("exStyle", "the extended window style of the window whose required size is to be calculated")
 	)
 
 	BOOL.func(
 		"GetCursorPos",
-	    "Retrieves the position of the mouse cursor, in screen coordinates.",
+		"Retrieves the position of the mouse cursor, in screen coordinates.",
 
-	    LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
+		LPPOINT.OUT("point", "a pointer to a {@link POINT} structure that receives the screen coordinates of the cursor")
 	)
 
 	BOOL.func(
 		"ScreenToClient",
-	    "Converts the screen coordinates of a specified point on the screen to client-area coordinates.",
+		"Converts the screen coordinates of a specified point on the screen to client-area coordinates.",
 
-	    HWND.IN("hWnd", "a handle to the window whose client area will be used for the conversion"),
-	    LPPOINT.IN("point", "a pointer to a {@link POINT} structure that specifies the screen coordinates to be converted")
+		HWND.IN("hWnd", "a handle to the window whose client area will be used for the conversion"),
+		LPPOINT.IN("point", "a pointer to a {@link POINT} structure that specifies the screen coordinates to be converted")
 	)
 
 	BOOL.func(
@@ -1711,36 +1711,36 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	BOOL.func(
 		"GetClientRect",
-	    """
+		"""
 	    Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because
 	    client coordinates are relative to the upper-left corner of a window's client area, the coordinates of the upper-left corner are (0,0).
 	    """,
 
-	    HWND.IN("hWnd", "a handle to the window whose client coordinates are to be retrieved."),
-	    LPRECT.OUT(
-		    "rect",
-		    """
+		HWND.IN("hWnd", "a handle to the window whose client coordinates are to be retrieved."),
+		LPRECT.OUT(
+			"rect",
+			"""
 		    a pointer to a {@link RECT} structure that receives the client coordinates. The left and top members are zero. The right and bottom members contain
 		    the width and height of the window.
 		    """
-	    )
+		)
 	)
 
 	HWND.func(
 		"WindowFromPoint",
-	    "Retrieves a handle to the window that contains the specified point.",
+		"Retrieves a handle to the window that contains the specified point.",
 
-	    POINT.IN("point", "the point to be checked")
+		POINT.IN("point", "the point to be checked")
 	)
 
 	BOOL.func(
 		"BringWindowToTop",
-	    """
+		"""
 	    Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the
 	    top-level parent window associated with the child window is activated.
 	    """,
 
-	    HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
+		HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
 	)
 
 	BOOL.func(
@@ -1763,20 +1763,20 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	LONG_PTR.func(
 		"SetWindowLongPtr",
-	    "Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
+		"Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
-	    HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
-	    int.IN(
-		    "index",
-		    """
+		HWND.IN("hWnd", "a handle to the window and, indirectly, the class to which the window belongs"),
+		int.IN(
+			"index",
+			"""
 		    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
 		    of an integer. To set any other value, specify one of the following values
 		    """,
-		    WindowLongOffsets
-	    ),
-	    LONG_PTR.IN("newLong", "the replacement value"),
+			WindowLongOffsets
+		),
+		LONG_PTR.IN("newLong", "the replacement value"),
 
-	    returnDoc = "the previous value at the given {@code index}"
+		returnDoc = "the previous value at the given {@code index}"
 	)
 
 	LONG_PTR.func(
@@ -1798,18 +1798,18 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GetAsyncKeyState",
 		"Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to {@code GetAsyncKeyState}.",
 
-	    int.IN("key", "the virtual-key code")
+		int.IN("key", "the virtual-key code")
 	)
 
 	BOOL.func(
 		"SetCursorPos",
-	    """
+		"""
 	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent {@link #ClipCursor}
 	    function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
 	    """,
 
-	    int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
-	    int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
+		int.IN("X", "the new x-coordinate of the cursor, in screen coordinates."),
+		int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
 	)
 
 	HWND.func(
@@ -1825,12 +1825,12 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		HWND.IN("hWnd", "a handle to the window in the current thread that is to capture the mouse"),
 
-	    returnDoc = "a handle to the window that had previously captured the mouse. If there is no such window, the return value is $NULL."
+		returnDoc = "a handle to the window that had previously captured the mouse. If there is no such window, the return value is $NULL."
 	)
 
 	BOOL.func(
 		"ReleaseCapture",
-	    """
+		"""
 	    Releases the mouse capture from a window in the current thread and restores normal mouse input processing. A window that has captured the mouse receives
 	    all mouse input, regardless of the position of the cursor, except when a mouse button is clicked while the cursor hot spot is in the window of another
 	    thread.
@@ -1839,18 +1839,18 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	BOOL.func(
 		"ClipCursor",
-	    """
+		"""
 	    "Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the {@code SetCursorPos} function or the mouse) lies
 	    outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
 	    """,
 
-	    mods(const, nullable) _ RECT_p.IN(
-		    "rect",
-		    """
+		mods(const, nullable) _ RECT_p.IN(
+			"rect",
+			"""
 		    a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this
 		    parameter is $NULL, the cursor is free to move anywhere on the screen.
 		    """
-	    )
+		)
 	)
 
 	int.func(
@@ -1897,27 +1897,27 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"""
 		),
 
-	    returnDoc = "the handle to the previous cursor, if there was one"
+		returnDoc = "the handle to the previous cursor, if there was one"
 	)
 
 	UINT.func(
 		"MapVirtualKey",
-	    "Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code.",
+		"Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code.",
 
-	    UINT.IN("code", "the virtual key code or scan code for a key. How this value is interpreted depends on the value of the {@code mapType} parameter."),
-	    UINT.IN("mapType", "the translation to be performed. The value of this parameter depends on the value of the {@code code} parameter.")
+		UINT.IN("code", "the virtual key code or scan code for a key. How this value is interpreted depends on the value of the {@code mapType} parameter."),
+		UINT.IN("mapType", "the translation to be performed. The value of this parameter depends on the value of the {@code code} parameter.")
 	)
 
 	BOOL.func(
 		"TrackMouseEvent",
 		"Posts messages when the mouse pointer leaves a window or hovers over a window for a specified amount of time.",
 
-	    LPTRACKMOUSEEVENT.IN("eventTrack", "a pointer to a {@code TRACKMOUSEEVENT} structure that contains tracking information.")
+		LPTRACKMOUSEEVENT.IN("eventTrack", "a pointer to a {@code TRACKMOUSEEVENT} structure that contains tracking information.")
 	)
 
 	HWND.func(
 		"GetForegroundWindow",
-	    """
+		"""
 	    Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the
 	    thread that creates the foreground window than it does to other threads.
 	    """
@@ -1964,7 +1964,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"""
 		),
 
-	    returnDoc = "the handle to the data if the function succeeds. If the function fails, the return value is $NULL."
+		returnDoc = "the handle to the data if the function succeeds. If the function fails, the return value is $NULL."
 	)
 
 	BOOL.func(
@@ -1980,7 +1980,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		UINT.IN("format", "a clipboard format"),
 
-	    returnDoc = "the handle to a clipboard object in the specified format if the function succeeds. If the function fails, the return value is $NULL."
+		returnDoc = "the handle to a clipboard object in the specified format if the function succeeds. If the function fails, the return value is $NULL."
 	)
 
 	BOOL.func("CloseClipboard", "Closes the clipboard.")

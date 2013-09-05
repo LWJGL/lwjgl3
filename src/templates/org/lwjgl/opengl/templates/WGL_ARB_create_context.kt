@@ -25,7 +25,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 
 	IntConstant.block(
 		"Accepted as an attribute name in {@code attribList}.",
-	
+
 		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
 		"CONTEXT_MINOR_VERSION_ARB" _ 0x2092,
 		"CONTEXT_LAYER_PLANE_ARB" _ 0x2093,
@@ -41,7 +41,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 
 	IntConstant.block(
 		"New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}.",
-	
+
 		"ERROR_INVALID_VERSION_ARB" _ 0x2095,
 		"ERROR_INVALID_PROFILE_ARB" _ 0x2096
 	).noPrefix()

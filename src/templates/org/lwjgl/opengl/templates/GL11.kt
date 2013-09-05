@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 val PRIMITIVE_TYPES =
 	"""
@@ -986,8 +985,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN(
 			"target",
-		    "the texture target",
-		    "#GL_TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL31#GL_TEXTURE_BUFFER GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY"
+			"the texture target",
+			"#GL_TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL31#GL_TEXTURE_BUFFER GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY"
 		),
 		GLuint.IN("texture", "the texture object to bind")
 	).javaDocLink
@@ -1065,7 +1064,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Sets the clear value for fixed-point and floating-point color buffers in RGBA mode. The specified components are stored as floating-point values.",
 
 		GLfloat.IN("red", "the value to which to clear the R channel of the color buffer"),
-		GLfloat.IN("green", "the value to which to clear the G channel of the color buffer" ),
+		GLfloat.IN("green", "the value to which to clear the G channel of the color buffer"),
 		GLfloat.IN("blue", "the value to which to clear the B channel of the color buffer"),
 		GLfloat.IN("alpha", "the value to which to clear the A channel of the color buffer")
 	)
@@ -1100,7 +1099,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("plane", "the clip plane to define"),
 		const _ GLdouble_p.IN("equation", "the clip plane coefficients")
 	)
-	
+
 	// Color functions javadoc
 	val colorRed = "the red component of the current color"
 	val colorGreen = "the green component of the current color"
@@ -1126,7 +1125,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	deprecatedGL _ GLvoid.func("Color3bv", "Byte pointer version of $Color3b.", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
 	deprecatedGL _ GLvoid.func("Color3sv", "Pointer version of $Color3s.", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("Color3iv", "Pointer version of $Color3i.", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer) )
+	deprecatedGL _ GLvoid.func("Color3iv", "Pointer version of $Color3i.", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer))
 	deprecatedGL _ GLvoid.func("Color3fv", "Pointer version of $Color3f.", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
 	deprecatedGL _ GLvoid.func("Color3dv", "Pointer version of $Color3d.", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
 	deprecatedGL _ GLvoid.func("Color3ubv", "Pointer version of $Color3ub.", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
@@ -1138,9 +1137,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Sets the current color.",
 
 		GLbyte.IN("red", colorRed),
-		GLbyte.IN("green", colorGreen ),
+		GLbyte.IN("green", colorGreen),
 		GLbyte.IN("blue", colorBlue),
-		GLbyte.IN("alpha", colorAlpha )
+		GLbyte.IN("alpha", colorAlpha)
 	)).javaDocLink
 
 	val Color4s = (deprecatedGL _ GLvoid.func("Color4s", "Short version of $Color4b", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue), GLshort.IN("alpha", colorAlpha))).javaDocLink
@@ -1191,7 +1190,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-		    "#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
+			"#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color array data")
@@ -1259,7 +1258,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"array",
 			"the attribute array to disable",
-		    "#GL_VERTEX_ARRAY #GL_NORMAL_ARRAY #GL_COLOR_ARRAY GL14#GL_SECONDARY_COLOR_ARRAY #GL_EDGE_FLAG_ARRAY GL15#GL_FOG_COORD_ARRAY #GL_TEXTURE_COORD_ARRAY"
+			"#GL_VERTEX_ARRAY #GL_NORMAL_ARRAY #GL_COLOR_ARRAY GL14#GL_SECONDARY_COLOR_ARRAY #GL_EDGE_FLAG_ARRAY GL15#GL_FOG_COORD_ARRAY #GL_TEXTURE_COORD_ARRAY"
 		)
 	)
 
@@ -1301,7 +1300,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"mode",
 			"the kind of primitives being constructed",
-		    """
+			"""
 		    #GL_POINTS #GL_LINE_STRIP #GL_LINE_LOOP #GL_LINES #GL_POLYGON #GL_TRIANGLE_STRIP #GL_TRIANGLE_FAN #GL_TRIANGLES #GL_QUAD_STRIP #GL_QUADS
 		    GL32#GL_LINES_ADJACENCY GL32#GL_LINE_STRIP_ADJACENCY GL32#GL_TRIANGLES_ADJACENCY GL32#GL_TRIANGLE_STRIP_ADJACENCY GL40#GL_PATCHES
 		    """
@@ -1667,7 +1666,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetLightiv.",
 
 		GLenum.IN("light", "the light for which to return information"),
-		GLenum.IN( "value", "the light parameter to query"),
+		GLenum.IN("value", "the light parameter to query"),
 		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
 
@@ -1675,7 +1674,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val GetMapiv = (deprecatedGL _ GLvoid.func(
 		"GetMapiv",
 		"Returns integer information about {@code query} for evaluator map {@code target} in {@code data}.",
-		
+
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
 		GLenum.IN("query", "the information to query", "#GL_ORDER #GL_COEFF #GL_DOMAIN"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
@@ -1685,7 +1684,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"GetMapfv",
 		"Float version of $GetMapiv.",
 
-		GLenum.IN( "target", "the evaluator map"),
+		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
 		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
 	)
@@ -1771,7 +1770,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"value",
 			"the value to query",
-		    """
+			"""
 		    GL20#GL_COORD_REPLACE #GL_TEXTURE_ENV_MODE #GL_TEXTURE_ENV_COLOR GL14#GL_TEXTURE_LOD_BIAS GL13#GL_COMBINE_RGB GL13#GL_COMBINE_ALPHA GL15#GL_SRC0_RGB
 		    GL15#GL_SRC1_RGB GL15#GL_SRC2_RGB GL15#GL_SRC0_ALPHA GL15#GL_SRC1_ALPHA GL15#GL_SRC2_ALPHA GL13#GL_OPERAND0_RGB GL13#GL_OPERAND1_RGB
 		    GL13#GL_OPERAND2_RGB GL13#GL_OPERAND0_ALPHA GL13#GL_OPERAND1_ALPHA GL13#GL_OPERAND2_ALPHA GL13#GL_RGB_SCALE #GL_ALPHA_SCALE
@@ -1841,7 +1840,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"target",
 			"the texture image target",
-		    """
+			"""
 		    $TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS
 		    #GL_TEXTURE_1D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_2D_ARRAY GL40#GL_TEXTURE_CUBE_MAP_ARRAY GL32#GL_TEXTURE_2D_MULTISAMPLE
 		    GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY #GL_PROXY_TEXTURE_1D GL12#GL_PROXY_TEXTURE_3D GL30#GL_PROXY_TEXTURE_2D_ARRAY GL40#GL_PROXY_TEXTURE_CUBE_MAP_ARRAY
@@ -1852,7 +1851,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"value",
 			"the value to query",
-		    """
+			"""
 		    #GL_TEXTURE_WIDTH #GL_TEXTURE_HEIGHT GL12#GL_TEXTURE_DEPTH #GL_TEXTURE_BORDER GL32#GL_TEXTURE_SAMPLES GL32#GL_TEXTURE_FIXED_SAMPLE_LOCATIONS
 		    #GL_TEXTURE_INTERNAL_FORMAT #GL_TEXTURE_RED_SIZE #GL_TEXTURE_GREEN_SIZE #GL_TEXTURE_BLUE_SIZE #GL_TEXTURE_ALPHA_SIZE
 		    #GL_TEXTURE_LUMINANCE_SIZE #GL_TEXTURE_INTENSITY_SIZE GL14#GL_TEXTURE_DEPTH_SIZE GL30#GL_TEXTURE_STENCIL_SIZE GL30#GL_TEXTURE_SHARED_SIZE
@@ -1881,7 +1880,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"target",
 			"the texture target",
-		    """
+			"""
 		    #GL_TEXTURE_1D #GL_TEXTURE_2D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_1D_ARRAY GL30#GL_TEXTURE_2D_ARRAY GL31#GL_TEXTURE_RECTANGLE GL13#GL_TEXTURE_CUBE_MAP
 		    GL40#GL_TEXTURE_CUBE_MAP_ARRAY GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY
 		    """
@@ -2281,14 +2280,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid.func(
 		"MatrixMode",
 		"Set the current matrix mode.",
-		
+
 		GLenum.IN("mode", "the matrix mode", "#GL_MODELVIEW #GL_PROJECTION #GL_TEXTURE #GL_COLOR")
 	)
 
 	val MultMatrixf = (deprecatedGL _ GLvoid.func(
 		"MultMatrixf",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in column-major order. See $LoadMatrixf for details.",
-		
+
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
 	)).javaDocLink
 
@@ -2327,7 +2326,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val NewList = (deprecatedGL _ GLvoid.func(
 		"NewList",
 		"Begins the definition of a display list.",
-		
+
 		GLuint.IN("n", "a positive integer to which the display list that follows is assigned"),
 		GLenum.IN("mode", "a symbolic constant that controls the behavior of the GL during display list creation", "#GL_COMPILE #GL_COMPILE_AND_EXECUTE")
 	)).javaDocLink
@@ -2420,7 +2419,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid.func(
 		"PixelMapusv",
 		"Unsigned short version of $PixelMapfv.",
-		
+
 		GLenum.IN("map", "the map to set"),
 		AutoSize("values") _ GLsizei.IN("size", "the map size"),
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLushort_p.IN("values", "the map values")
@@ -2438,11 +2437,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val PixelStorei = GLvoid.func(
 		"PixelStorei",
 		"Sets the integer value of a pixel store parameter.",
-		
+
 		GLenum.IN(
 			"pname",
 			"the pixel store parameter to set",
-		    """
+			"""
 		    #GL_UNPACK_SWAP_BYTES #GL_UNPACK_LSB_FIRST #GL_UNPACK_ROW_LENGTH #GL_UNPACK_SKIP_ROWS #GL_UNPACK_SKIP_PIXELS #GL_UNPACK_ALIGNMENT
 		    GL12#GL_UNPACK_IMAGE_HEIGHT GL12#GL_UNPACK_SKIP_IMAGES GL42#GL_UNPACK_COMPRESSED_BLOCK_WIDTH GL42#GL_UNPACK_COMPRESSED_BLOCK_HEIGHT
 		    GL42#GL_UNPACK_COMPRESSED_BLOCK_DEPTH GL42#GL_UNPACK_COMPRESSED_BLOCK_SIZE
@@ -2462,11 +2461,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	val PixelTransferi = (deprecatedGL _ GLvoid.func(
 		"PixelTransferi",
 		"Sets the integer value of a pixel transfer parameter.",
-		
+
 		GLenum.IN(
 			"pname",
 			"the pixel transfer parameter to set",
-		    """
+			"""
 		    #GL_MAP_COLOR #GL_MAP_STENCIL #GL_INDEX_SHIFT #GL_INDEX_OFFSET #GL_RED_SCALE #GL_GREEN_SCALE #GL_BLUE_SCALE #GL_ALPHA_SCALE #GL_DEPTH_SCALE
 		    #GL_RED_BIAS #GL_GREEN_BIAS #GL_BLUE_BIAS #GL_ALPHA_BIAS #GL_DEPTH_BIAS
 			ARBImaging#GL_POST_CONVOLUTION_RED_SCALE ARBImaging#GL_POST_CONVOLUTION_RED_BIAS ARBImaging#GL_POST_COLOR_MATRIX_RED_SCALE
@@ -2536,7 +2535,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		{@code factor} scales the maximum depth slope of the polygon, and {@code units} scales an implementation-dependent constant that relates to the usable
 		resolution of the depth buffer. The resulting values are summed to produce the polygon offset value.
 		""",
-		
+
 		GLfloat.IN("factor", "the maximum depth slope factor"),
 		GLfloat.IN("units", "the constant scale")
 	)
@@ -3038,7 +3037,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Sets parameters of the texture environment that specifies how texture values are interpreted when texturing a fragment, or sets per-texture-unit
 		filtering parameters.
 		""",
-		
+
 		GLenum.IN("target", "the texture environment target", "#GL_TEXTURE_ENV GL14#GL_TEXTURE_FILTER_CONTROL GL20#GL_POINT_SPRITE"),
 		GLenum.IN(
 			"pname",
@@ -3063,7 +3062,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	GLvoid.func(
 		"TexEnviv",
 		"Pointer version of $TexEnvi.",
-		
+
 		GLenum.IN("target", "the texture environment target", "#GL_TEXTURE_ENV"),
 		GLenum.IN("pname", "the parameter to set", "#GL_TEXTURE_ENV_COLOR"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
@@ -3168,7 +3167,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			const,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			PIXEL_UNPACK_BUFFER,
-		    nullable
+			nullable
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
 
@@ -3185,9 +3184,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("type", "the texel data type"),
 		mods(
 			const,
-		    MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-		    PIXEL_UNPACK_BUFFER,
-		    nullable
+			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
+			PIXEL_UNPACK_BUFFER,
+			nullable
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	).javaDocLink
 
@@ -3392,13 +3391,13 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	val Vertex2f = (deprecatedGL _ GLvoid.func(
 		"Vertex2f",
-	    """
+		"""
 		Specifies a single vertex between $Begin and $End by giving its coordinates in two dimensions. The z coordinate is implicitly set
 		to zero and the w coordinate to one.
 		""",
 
-	    GLfloat.IN("x", vertexX),
-	    GLfloat.IN("y", vertexY)
+		GLfloat.IN("x", vertexX),
+		GLfloat.IN("y", vertexY)
 	)).javaDocLink
 
 	val Vertex2s = (deprecatedGL _ GLvoid.func("Vertex2s", "Short version of $Vertex2f.", GLshort.IN("x", vertexX), GLshort.IN("y", vertexY))).javaDocLink

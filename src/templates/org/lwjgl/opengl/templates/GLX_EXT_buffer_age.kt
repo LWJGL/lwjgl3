@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.linux.*
 
 fun GLX_EXT_buffer_age() = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age", EXT) {
 	javaImport("org.lwjgl.system.linux.*")

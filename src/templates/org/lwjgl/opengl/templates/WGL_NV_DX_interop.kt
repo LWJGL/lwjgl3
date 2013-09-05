@@ -74,7 +74,7 @@ fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", N
 		"",
 
 		HANDLE.IN("device", ""),
-	    HANDLE.IN("object", "")
+		HANDLE.IN("object", "")
 	)
 
 	BOOL.func(

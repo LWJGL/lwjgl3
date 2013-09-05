@@ -6,7 +6,6 @@ package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.GLenum
-import java.nio.*
 
 public enum class BufferType(val mapping: PointerMapping) {
 
@@ -29,7 +28,7 @@ public enum class BufferType(val mapping: PointerMapping) {
 
 }
 
-public class AutoType(override val reference: String, vararg val types: BufferType) : ParameterModifier(), ReferenceModifier {
+public class AutoType(override val reference: String, vararg val types: BufferType): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoType> {
 		override val key = javaClass<AutoType>()
 	}

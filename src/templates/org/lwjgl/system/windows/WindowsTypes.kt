@@ -335,15 +335,15 @@ val LARGE_INTEGER_p = StructType(LARGE_INTEGER)
 
 val LPJOYCAPS = StructType(
 	name = "LPJOYCAPS",
-    includesPointer = true,
-    definition = struct(WINDOWS_PACKAGE, "JOYCAPS") {
-	    javaDoc("Contains information about the joystick capabilities.")
-	    nativeImport("WindowsLWJGL.h")
+	includesPointer = true,
+	definition = struct(WINDOWS_PACKAGE, "JOYCAPS") {
+		javaDoc("Contains information about the joystick capabilities.")
+		nativeImport("WindowsLWJGL.h")
 
-	    val MAXPNAMELEN = 32
-	    val MAX_JOYSTICKOEMVXDNAME = 260
+		val MAXPNAMELEN = 32
+		val MAX_JOYSTICKOEMVXDNAME = 260
 
-	    WORD.member("wMid", "mid")
+		WORD.member("wMid", "mid")
 		WORD.member("wPid", "pid")
 		TCHAR.member("szPname", "pname", size = MAXPNAMELEN, nullTerminated = true)
 		UINT.member("wXmin", "xmin")
@@ -367,7 +367,7 @@ val LPJOYCAPS = StructType(
 		UINT.member("wMaxButtons", "maxButtons")
 		TCHAR.member("szRegKey", "regKey", size = MAXPNAMELEN, nullTerminated = true)
 		TCHAR.member("szOEMVxD", "OEMVxD", size = MAX_JOYSTICKOEMVXDNAME, nullTerminated = true)
-    }
+	}
 )
 
 val LPJOYINFO = StructType(
@@ -419,8 +419,8 @@ fun config() {
 	struct(WINDOWS_PACKAGE, "LOGBRUSH") {
 		nativeImport ("WindowsLWJGL.h")
 		UINT.member("lbStyle");
-        COLORREF.member("lbColor");
-        ULONG_PTR.member("lbHatch");
+		COLORREF.member("lbColor");
+		ULONG_PTR.member("lbHatch");
 	}
 
 	struct(WINDOWS_PACKAGE, "WINDOWPOS") {

@@ -15,9 +15,9 @@ fun AL_EXT_FLOAT32() = "EXTFloat32".nativeClassAL("EXT_FLOAT32") {
 	javaDoc("bindings to AL_EXT_FLOAT32 extension.")
 
 	IntConstant.block(
-    	"AL_EXT_FLOAT32 tokens.",
+		"AL_EXT_FLOAT32 tokens.",
 
-    	"FORMAT_MONO_FLOAT32" _ 0x10010,
-        "FORMAT_STEREO_FLOAT32" _ 0x10011
-    )
+		"FORMAT_MONO_FLOAT32" _ 0x10010,
+		"FORMAT_STEREO_FLOAT32" _ 0x10011
+	)
 }

@@ -233,7 +233,7 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 		"PlaceOnBottom" _ 1
 	)
 
-		IntConstant.block(
+	IntConstant.block(
 		"Property notification",
 
 		"PropertyNewValue" _ 0,

@@ -5,7 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
 
 fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {

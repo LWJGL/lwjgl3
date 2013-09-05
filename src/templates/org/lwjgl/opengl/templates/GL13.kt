@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
 fun GL13() = "GL13".nativeClassGL("GL13") {
@@ -150,7 +149,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 			PIXEL_PACK_BUFFER
 		) _ GLvoid_p.OUT("img", "an array in which to return the compressed texture image")
 	)
-	
+
 	// ARB_texture_cube_map
 
 	IntConstant.block(
@@ -202,7 +201,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 
 		"MAX_CUBE_MAP_TEXTURE_SIZE" _ 0x851C
 	)
-	
+
 	// ARB_multisample
 
 	IntConstant.block(
@@ -473,7 +472,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 
 		"CLAMP_TO_BORDER" _ 0x812D
 	)
-	
+
 	// ARB_transpose_matrix
 
 	IntConstant.block(

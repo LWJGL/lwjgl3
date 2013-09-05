@@ -11,7 +11,7 @@ import org.lwjgl.system.windows.*
 fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
 	nativeImport (
 		"OpenGL.h",
-	    "WGL.h"
+		"WGL.h"
 	)
 
 	javaDoc(
@@ -85,9 +85,9 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 
 	BOOL.func(
 		"EnumGpuDevicesNV",
-	    "Retrieve information about the display devices supported by a GPU.",
+		"Retrieve information about the display devices supported by a GPU.",
 
-	    HGPUNV.IN("gpu", "a handle to the GPU to query"),
+		HGPUNV.IN("gpu", "a handle to the GPU to query"),
 		UINT.IN("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
 		PGPU_DEVICE.IN("gpuDevice", "a {@link GPU_DEVICE} structure which will receive information about the display device at index {@code deviceIndex}.")
 	)

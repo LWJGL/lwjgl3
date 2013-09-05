@@ -73,22 +73,18 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		println("/** Defines the capabilities of an OpenAL context. */")
 		println("public final class ALCapabilities {\n")
 
-		val classes = super.getClasses(object : Comparator<NativeClass> {
-			// Core functionality first, extensions after
-			public override fun compare(o1: NativeClass, o2: NativeClass): Int {
-				val isAL1 = o1.templateName.startsWith("AL")
-				val isAL2 = o2.templateName.startsWith("AL")
+		val classes = super.getClasses {(o1, o2) ->
+			val isAL1 = o1.templateName.startsWith("AL")
+			val isAL2 = o2.templateName.startsWith("AL")
 
-				return if ( isAL1 xor isAL2 )
-					(if ( isAL1 ) -1 else 1)
-				else
-					o1.templateName.compareTo(o2.templateName)
-			}
-			public override fun equals(obj: Any?): Boolean = false
-		})
+			if ( isAL1 xor isAL2 )
+				(if ( isAL1 ) -1 else 1)
+			else
+				o1.templateName compareTo o2.templateName
+		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.size }.fold(0) { (left, right) -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.size }.fold(0) {(left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}.Functions")
 			for ( i in 0..(alignment - extension.className.size - 1) )

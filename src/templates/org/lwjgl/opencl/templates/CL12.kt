@@ -269,21 +269,21 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 	cl_int.func(
 		"RetainDevice",
-	    """
+		"""
 	    Increments the device reference count if {@code device} is a valid sub-device created by a call to {@link #clCreateSubDevices}. If {@code device} is a
 	    root level device i.e. a {@code cl_device_id} returned by {@link CL10#clGetDeviceIDs}, the device reference count remains unchanged.
 	    """,
 
-	    cl_device_id.IN("device", "the device to retain"),
+		cl_device_id.IN("device", "the device to retain"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully or the device is a root-level device. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    "{@link CL10#CL_INVALID_DEVICE} if {@code device} is not a valid sub-device created by a call to {@link #clCreateSubDevices}.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link CL10#CL_INVALID_DEVICE} if {@code device} is not a valid sub-device created by a call to {@link #clCreateSubDevices}.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
@@ -299,20 +299,20 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		cl_device_id.IN("device", "the device to release"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-		    "{@link CL10#CL_INVALID_DEVICE} if {@code device} is not a valid sub-device created by a call to {@link #clCreateSubDevices}.",
-		    OORE,
-		    OOHME
-	    )}
+			"{@link CL10#CL_INVALID_DEVICE} if {@code device} is not a valid sub-device created by a call to {@link #clCreateSubDevices}.",
+			OORE,
+			OOHME
+		)}
 	    """
 	)
 
 	cl_int.func(
 		"CreateSubDevices",
-	    """
+		"""
 	    Creates an array of sub-devices that each reference a non-intersecting set of compute units within {@code in_device}, according to a partition scheme
 	    given by {@code properties}. The output sub-devices may be used in every way that the root (or parent) device can be used, including creating contexts,
 		building programs, further calls to {@code clCreateSubDevices} and creating command-queues. When a command-queue is created against a sub-device, the
@@ -336,37 +336,37 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		)}
 	    """,
 
-	    cl_device_id.IN("in_device", "the device to be partitioned"),
-	    mods(const, nullTerminated) _ cl_device_partition_property.IN(
-		    "properties",
-		    """
+		cl_device_id.IN("in_device", "the device to be partitioned"),
+		mods(const, nullTerminated) _ cl_device_partition_property.IN(
+			"properties",
+			"""
 		    specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
 		    followed by the corresponding desired value. The list is terminated with 0. Only one partitioning scheme can be specified in {@code properties}.
 		    """,
-		    "#CL_DEVICE_PARTITION_EQUALLY #CL_DEVICE_PARTITION_BY_COUNTS #CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN"
-	    ),
-	    AutoSize("out_devices") _ cl_uint.IN(
-		    "num_devices",
-		    "the size of memory pointed to by {@code out_devices} specified as the number of {@code cl_device_id} entries."
-	    ),
-	    nullable _ cl_device_id_p.OUT(
-		    "out_devices",
-		    """
+			"#CL_DEVICE_PARTITION_EQUALLY #CL_DEVICE_PARTITION_BY_COUNTS #CL_DEVICE_PARTITION_BY_AFFINITY_DOMAIN"
+		),
+		AutoSize("out_devices") _ cl_uint.IN(
+			"num_devices",
+			"the size of memory pointed to by {@code out_devices} specified as the number of {@code cl_device_id} entries."
+		),
+		nullable _ cl_device_id_p.OUT(
+			"out_devices",
+			"""
 		    the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is $NULL, this argument is ignored. If {@code out_devices} is not
 		    $NULL, {@code num_devices} must be greater than or equal to the number of sub-devices that device may be partitioned into according to the
 		    partitioning scheme specified in {@code properties}.
 		    """
-	    ),
-	    mods(Check(1), nullable) _ cl_uint_p.OUT(
-		    "num_devices_ret",
-		    """
+		),
+		mods(Check(1), nullable) _ cl_uint_p.OUT(
+			"num_devices_ret",
+			"""
 		    the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
 		    is $NULL, it is ignored.
 		    """
-	    ),
+		),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the partition is created successfully. Otherwise, it returns a $NULL value with the following error values returned in $errcode_ret:
 	    ${ul(
 			"{@link CL10#CL_INVALID_DEVICE} if {@code in_device} is not valid.",
@@ -387,13 +387,13 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			""",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
 	(Construct("context") _ cl_mem).func(
 		"CreateImage",
-	    """
+		"""
 	    Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D image array or 3D image object.
 
 	    For a 3D image or 2D image array, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent 2D image slices or 2D images
@@ -406,10 +406,10 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		1D image buffer is a single scanline which is a linear sequence of adjacent elements.
 	    """,
 
-	    cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
-	    cl_mem_flags.IN(
-		    "flags",
-		    """
+		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
+		cl_mem_flags.IN(
+			"flags",
+			"""
 		    a bit-field that is used to specify allocation and usage information about the image memory object being created.
 
 		    For all image types except {@link #CL_MEM_OBJECT_IMAGE1D_BUFFER}, if value specified for {@code flags} is 0, the default is used which is
@@ -423,63 +423,63 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		    {@link #CL_MEM_HOST_WRITE_ONLY}, {@link #CL_MEM_HOST_READ_ONLY} or {@link #CL_MEM_HOST_NO_ACCESS} values are not specified in {@code flags}, they
 		    are inherited from the corresponding memory access qualifiers associated with buffer.
 		    """,
-		    """
+			"""
 	        CL10#CL_MEM_READ_WRITE CL10#CL_MEM_WRITE_ONLY CL10#CL_MEM_READ_ONLY CL10#CL_MEM_USE_HOST_PTR CL10#CL_MEM_ALLOC_HOST_PTR CL10#CL_MEM_COPY_HOST_PTR
 	        #CL_MEM_HOST_WRITE_ONLY #CL_MEM_HOST_READ_ONLY #CL_MEM_HOST_NO_ACCESS
 			"""
-	    ),
-	    const _ cl_image_format_p.IN(
-		    "image_format",
-		    "a pointer to a {@link cl_image_format} structure that describes format properties of the image to be allocated"
-	    ),
-	    const _ cl_image_desc_p.IN(
-		    "image_desc",
-		    "a pointer to a {@link cl_image_desc} structure that describes type and dimensions of the image to be allocated"
-	    ),
-	    mods(
-		    MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-		    nullable
-	    ) _ cl_void_p.IN(
-		    "host_ptr",
-		    """
+		),
+		const _ cl_image_format_p.IN(
+			"image_format",
+			"a pointer to a {@link cl_image_format} structure that describes format properties of the image to be allocated"
+		),
+		const _ cl_image_desc_p.IN(
+			"image_desc",
+			"a pointer to a {@link cl_image_desc} structure that describes type and dimensions of the image to be allocated"
+		),
+		mods(
+			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
+			nullable
+		) _ cl_void_p.IN(
+			"host_ptr",
+			"""
 		    a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
 		    {@code host_ptr} points to must be.
 			${table(
-			    tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
+				tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
 
-		        tr(td("{@link #CL_MEM_OBJECT_IMAGE1D}"), td("&#x2265; {@code image_row_pitch}")),
-		        tr(td("{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER}"), td("&#x2265; {@code image_row_pitch}")),
-		        tr(td("{@link CL10#CL_MEM_OBJECT_IMAGE2D}"), td("&#x2265; {@code image_row_pitch * image_height}")),
-		        tr(td("{@link CL10#CL_MEM_OBJECT_IMAGE3D}"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
-		        tr(td("{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY}"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
-		        tr(td("{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY}"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
-		    )}
+				tr(td("{@link #CL_MEM_OBJECT_IMAGE1D}"), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("{@link #CL_MEM_OBJECT_IMAGE1D_BUFFER}"), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("{@link CL10#CL_MEM_OBJECT_IMAGE2D}"), td("&#x2265; {@code image_row_pitch * image_height}")),
+				tr(td("{@link CL10#CL_MEM_OBJECT_IMAGE3D}"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
+				tr(td("{@link #CL_MEM_OBJECT_IMAGE1D_ARRAY}"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
+				tr(td("{@link #CL_MEM_OBJECT_IMAGE2D_ARRAY}"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
+			)}
 		    """
-	    ),
-	    ERROR_RET
+		),
+		ERROR_RET
 	)
 
 	(Construct("context") _ cl_program).func(
 		"CreateProgramWithBuiltInKernels",
-	    "Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
+		"Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
 
-	    cl_context.IN("context", "a valid OpenCL context"),
-	    cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-	    mods(const, SingleValue("device")) _ cl_device_id_p.IN(
-		    "device_list",
-		    """
+		cl_context.IN("context", "a valid OpenCL context"),
+		cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
+			"device_list",
+			"""
 		    a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
 		    devices specified in this list.
 
 		    The devices associated with the program object will be the list of devices specified by {@code device_list}. The list of devices specified by
 		    {@code device_list} must be devices associated with {@code context}.
 		    """
-	    ),
-	    const _ cl_charASCII_p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
-	    ERROR_RET,
+		),
+		const _ cl_charASCII_p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
+		ERROR_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    a valid non-zero program object and $errcode_ret is set to $CL_SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
@@ -492,7 +492,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"{@link CL10#CL_INVALID_DEVICE} if devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -541,7 +541,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			const, nullable, SingleValue("header_include_name")
 		) _ cl_charASCII_pp.IN(
 			"header_include_names",
-		    """
+			"""
 		    an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
 		    by source in program that comes from an embedded header. The corresponding entry in {@code input_headers} identifies the program object which
 		    contains the header source to be used. The embedded headers are first searched before the headers in the list of directories specified by the –I
@@ -731,50 +731,50 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 	cl_int.func(
 		"UnloadPlatformCompiler",
-	    """
+		"""
 	    Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
 	    guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
 	    {@link CL10#clBuildProgram}, $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
 	    appropriate program executable.
 	    """,
 
-	    cl_platform_id.IN("platform", "the platform for which to unload the compiler"),
+		cl_platform_id.IN("platform", "the platform for which to unload the compiler"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_PLATFORM} if {@code platform} is not a valid platform."
-	    )}
+		)}
 	    """
 	)
 
 	cl_int.func(
 		"GetKernelArgInfo",
-	    """
+		"""
 	    Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
 	    created with {@link CL10#clCreateProgramWithSource} and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
 	    argument to {@link CL10#clBuildProgram} or $CompileProgram.
 	    """,
 
-	    cl_kernel.IN("kernel", "specifies the kernel object being queried"),
-	    cl_uint.IN(
-		    "arg_indx",
-		    """
+		cl_kernel.IN("kernel", "specifies the kernel object being queried"),
+		cl_uint.IN(
+			"arg_indx",
+			"""
 		    the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
 		    the total number of arguments declared by a kernel.
 		    """
-	    ),
-	    cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
-	    PARAM_VALUE_SIZE,
-	    mods(
-		    MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG),
-		    nullable
-	    ) _ cl_void_p.IN("param_value", param_value),
-	    PARAM_VALUE_SIZE_RET,
+		),
+		cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
+		PARAM_VALUE_SIZE,
+		mods(
+			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG),
+			nullable
+		) _ cl_void_p.IN("param_value", param_value),
+		PARAM_VALUE_SIZE_RET,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"{@link CL10#CL_INVALID_ARG_INDEX} if {@code arg_indx} is not a valid argument index.",
@@ -784,7 +784,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			""",
 			"{@link #CL_KERNEL_ARG_INFO_NOT_AVAILABLE} if the argument information is not available for {@code kernel}.",
 			"{@link CL10#CL_INVALID_KERNEL} if {@code kernel} is a not a valid kernel object."
-	    )}
+		)}
 	    """
 	)
 
@@ -818,8 +818,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -888,8 +888,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -907,7 +907,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"{@link CL10#CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -944,11 +944,11 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-		    ICQE,
+			ICQE,
 			"""
 			{@link CL10#CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and memory objects in {@code mem_objects} are not the same or
 			if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
@@ -978,8 +978,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -987,7 +987,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 
@@ -1005,8 +1005,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		EWL,
 		EVENT,
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
@@ -1014,7 +1014,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			IEWLE,
 			OORE,
 			OOHME
-	    )}
+		)}
 	    """
 	)
 

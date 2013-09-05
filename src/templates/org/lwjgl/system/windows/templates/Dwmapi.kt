@@ -22,13 +22,13 @@ fun Dwmapi() = "Dwmapi".nativeClassWin {
 
 	DLL_FUNC _ HRESULT.func(
 		"DwmIsCompositionEnabled",
-	    "Sets the current process as dots per inch (dpi) aware.",
+		"Sets the current process as dots per inch (dpi) aware.",
 
-	    BOOL_p.OUT(
-		    "enabled",
-		    "a pointer to a value that, when this function returns successfully, receives {@code TRUE} if DWM composition is enabled; otherwise, {@code FALSE}."
-	    ),
-	    DLL_ADDRESS
+		BOOL_p.OUT(
+			"enabled",
+			"a pointer to a value that, when this function returns successfully, receives {@code TRUE} if DWM composition is enabled; otherwise, {@code FALSE}."
+		),
+		DLL_ADDRESS
 	)
 
 }

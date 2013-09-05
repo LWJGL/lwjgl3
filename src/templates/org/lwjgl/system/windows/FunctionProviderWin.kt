@@ -12,8 +12,10 @@ public val FunctionProviderWin: FunctionProvider = object : FunctionProvider() {
 
 	override val hasCurrentCapabilities: Boolean = false
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit {}
-	override fun generateCapabilities(writer: PrintWriter): Unit {}
+	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit {
+	}
+	override fun generateCapabilities(writer: PrintWriter): Unit {
+	}
 
 }
 

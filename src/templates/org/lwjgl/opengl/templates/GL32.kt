@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL32() = "GL32".nativeClassGL("GL32") {
 	nativeImport (
@@ -18,12 +17,12 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 	javaDoc("The core OpenGL 3.2 functionality.")
 
 	IntConstant.block(
-        "Accepted by the {@code pname} parameter of GetIntegerv.",
+		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
-        "CONTEXT_PROFILE_MASK" _ 0x9126
-    )
+		"CONTEXT_PROFILE_MASK" _ 0x9126
+	)
 
-    IntConstant.block(
+	IntConstant.block(
 		"Context profile bits.",
 
 		"CONTEXT_CORE_PROFILE_BIT" _ 0x00000001,
@@ -31,13 +30,13 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 	)
 
 	IntConstant.block(
-        "Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-        "MAX_VERTEX_OUTPUT_COMPONENTS" _ 0x9122,
-        "MAX_GEOMETRY_INPUT_COMPONENTS" _ 0x9123,
-        "MAX_GEOMETRY_OUTPUT_COMPONENTS" _ 0x9124,
-        "MAX_FRAGMENT_INPUT_COMPONENTS" _ 0x9125
-    )
+		"MAX_VERTEX_OUTPUT_COMPONENTS" _ 0x9122,
+		"MAX_GEOMETRY_INPUT_COMPONENTS" _ 0x9123,
+		"MAX_GEOMETRY_OUTPUT_COMPONENTS" _ 0x9124,
+		"MAX_FRAGMENT_INPUT_COMPONENTS" _ 0x9125
+	)
 
 	// ARB_draw_elements_base_vertex
 
@@ -50,7 +49,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-		    "GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -67,7 +66,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-		    "GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -291,7 +290,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 
 		"DEPTH_CLAMP" _ 0x864F
 	)
-	
+
 	// ARB_geometry_shader4
 
 	IntConstant.block(

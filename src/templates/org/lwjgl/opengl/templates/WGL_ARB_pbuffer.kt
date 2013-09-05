@@ -21,10 +21,10 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		This extension defines pixel buffers (pbuffer for short). Pbuffers are additional non-visible rendering buffers for an OpenGL renderer. Pbuffers are
 		equivalent to a window that has the same pixel format descriptor with the following exceptions:
 		${ol(
-		"There is no rendering to a pbuffer by GDI.",
-		"The pixel format descriptors used for a pbuffer can only be those that are supported by the ICD.  Generic formats are not valid.",
-		"The allocation of a pbuffer can fail if there are insufficient resources (i.e., all the pbuffer memory has been allocated).",
-		"""
+			"There is no rendering to a pbuffer by GDI.",
+			"The pixel format descriptors used for a pbuffer can only be those that are supported by the ICD.  Generic formats are not valid.",
+			"The allocation of a pbuffer can fail if there are insufficient resources (i.e., all the pbuffer memory has been allocated).",
+			"""
 		The pixel buffer might be lost if a display mode change occurs. A query is provided that can be called after a display mode change to determine the
 		state of the pixel buffer.
 		"""

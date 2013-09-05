@@ -15,9 +15,9 @@ fun AL_EXT_EXPONENT_DISTANCE() = "EXTExponentDistance".nativeClassAL("EXT_EXPONE
 	javaDoc("bindings to AL_EXT_EXPONENT_DISTANCE extension.")
 
 	IntConstant.block(
-    	"AL_EXT_EXPONENT_DISTANCE tokens.",
+		"AL_EXT_EXPONENT_DISTANCE tokens.",
 
-    	"EXPONENT_DISTANCE" _ 0xd005,
-        "EXPONENT_DISTANCE_CLAMPED" _ 0xd006
-    )
+		"EXPONENT_DISTANCE" _ 0xd005,
+		"EXPONENT_DISTANCE_CLAMPED" _ 0xd006
+	)
 }

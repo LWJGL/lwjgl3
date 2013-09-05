@@ -11,7 +11,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/Xresource.h>",
-	    "<X11/Xutil.h>"
+		"<X11/Xutil.h>"
 	)
 
 	javaDoc("Native bindings to &lt;X11/Xutil.h&gt;.")
@@ -55,7 +55,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XLookupString",
-	    """
+		"""
 	    Translates a key event to a {@code KeySym} and a string. The {@code KeySym} is obtained by using the standard interpretation of the Shift, Lock, group,
 	    and numlock modifiers as defined in the X Protocol specification. If the {@code KeySym} has been rebound (see {@link Xlib#XRebindKeysym}), the bound
 	    string will be stored in the buffer. Otherwise, the {@code KeySym} is mapped, if possible, to an ISO Latin-1 character or (if the Control modifier is
@@ -70,16 +70,16 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		{@link Xlib#XRefreshKeyboardMapping} to keep this information up-to-date.
 	    """,
 
-	    XKeyEvent_p.IN("event_struct", "specifies the {@link XKeyEvent} structure to be used."),
+		XKeyEvent_p.IN("event_struct", "specifies the {@link XKeyEvent} structure to be used."),
 		char_p.OUT("buffer_return", "returns the translated characters"),
-	    AutoSize("buffer_return") _ int.IN("bytes_buffer", "specifies the length of the buffer. No more than {@code bytes_buffer} of translation are returned."),
-	    KeySym_p.OUT("keysym_return", "returns the {@code KeySym} computed from the event if this argument is not $NULL"),
-	    XComposeStatus_p.IN("status_in_out", "specifies or returns the {@link XComposeStatus} structure or $NULL.")
+		AutoSize("buffer_return") _ int.IN("bytes_buffer", "specifies the length of the buffer. No more than {@code bytes_buffer} of translation are returned."),
+		KeySym_p.OUT("keysym_return", "returns the {@code KeySym} computed from the event if this argument is not $NULL"),
+		XComposeStatus_p.IN("status_in_out", "specifies or returns the {@link XComposeStatus} structure or $NULL.")
 	)
 
 	XWMHints_p.func(
 		"XAllocWMHints",
-	    """
+		"""
 	    Allocates and returns a pointer to a {@link XWMHints} structure. Note that all fields in the {@link XWMHints} structure are initially set to zero. If
 	    insufficient memory is available, {@code XAllocWMHints} returns $NULL. To free the memory allocated to this structure, use {@link Xlib#XFree}.
 	    """
@@ -95,7 +95,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 
 	XContext.func(
 		"XUniqueContext",
-	    "Creates a unique context."
+		"Creates a unique context."
 	)
 
 	int.func(

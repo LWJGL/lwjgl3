@@ -6,9 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
-import java.nio.*
 
 fun GL40() = "GL40".nativeClassGL("GL40") {
 	nativeImport (
@@ -16,7 +14,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 	)
 
 	javaDoc("The core OpenGL 4.0 functionality.")
-	
+
 	// ARB_draw_buffers_blend
 
 	val blendEquations = "GL14#GL_FUNC_ADD GL14#GL_FUNC_SUBTRACT GL14#GL_FUNC_REVERSE_SUBTRACT GL14#GL_MIN GL14#GL_MAX"
@@ -462,7 +460,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN(
 			"pname",
 			"the parameter of the shader subroutine uniform to query",
-		    "#GL_NUM_COMPATIBLE_SUBROUTINES #GL_COMPATIBLE_SUBROUTINES GL31#GL_UNIFORM_SIZE GL31#GL_UNIFORM_NAME_LENGTH"
+			"#GL_NUM_COMPATIBLE_SUBROUTINES #GL_COMPATIBLE_SUBROUTINES GL31#GL_UNIFORM_SIZE GL31#GL_UNIFORM_NAME_LENGTH"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
@@ -620,7 +618,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			const
 		) _ GLfloat_p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
 	)
-	
+
 	// ARB_texture_cube_map_array
 
 	IntConstant.block(
@@ -649,7 +647,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900E,
 		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900F
 	)
-	
+
 	// ARB_texture_gather
 
 	IntConstant.block(

@@ -128,7 +128,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 
 		"COMPARE_R_TO_TEXTURE" _ 0x884E
 	)
-	
+
 	// EXT_fog_coord
 
 	IntConstant.block(
@@ -231,7 +231,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		const _ GLvoid_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices") _ GLsizei.IN("primcount", "the size of the {@code count} array")
 	)
-	
+
 	// ARB_point_parameters
 
 	val POINT_PARAMETERS = IntConstant.block(
@@ -274,7 +274,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		GLenum.IN("pname", "the parameter to set"),
 		mods(const, Check(1)) _ GLint_p.IN("params", "the parameter value")
 	)
-	
+
 	// EXT_secondary_color
 
 	IntConstant.block(
@@ -354,7 +354,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the secondary color array data")
 	)
-	
+
 	// EXT_blend_func_separate
 
 	IntConstant.block(
@@ -384,7 +384,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"INCR_WRAP" _ 0x8507,
 		"DECR_WRAP" _ 0x8508
 	)
-	
+
 	// EXT_texture_lod_bias
 
 	IntConstant.block(
@@ -418,7 +418,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 
 		"MIRRORED_REPEAT" _ 0x8370
 	)
-	
+
 	// ARB_window_pos
 
 	val WindowPos2i = (deprecatedGL _ GLvoid.func(

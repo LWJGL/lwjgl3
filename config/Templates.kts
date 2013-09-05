@@ -4,13 +4,9 @@ import java.util.ArrayList
 import java.io.File
 import java.io.FileFilter
 
-private val FILTER_RECURSIVE = object: FileFilter {
-	public override fun accept(pathname: File): Boolean = pathname.isDirectory() || pathname.getPath().endsWith(".kt")
-}
-
-private val FILTER_FILES_ONLY = object: FileFilter {
-	public override fun accept(pathname: File): Boolean = pathname.isFile() && pathname.getPath().endsWith(".kt")
-}
+private val FILTER_RECURSIVE: (File) -> Boolean = { it.isDirectory() || it.getPath().endsWith(".kt") }
+private val FILTER_FILES_ONLY: (File) -> Boolean = { it.isFile() && it.getPath().endsWith(".kt") }
+//private val FILTER_JAR: (File) -> Boolean = { it.isDirectory() || it.getPath().endsWith(".jar") }
 
 fun project() {
 	module("Templates") {
@@ -22,12 +18,15 @@ fun project() {
 		//for ( source in listFiles("src/templates/org/lwjgl/openal", FILTER_RECURSIVE) ) sources += source
 		//for ( source in listFiles("src/templates/org/lwjgl/opencl", FILTER_RECURSIVE) ) sources += source
 		for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_FILES_ONLY) ) sources += source
+		//for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_RECURSIVE) ) sources += source
 		for ( source in listFiles("src/templates/org/lwjgl/system/glfw", FILTER_RECURSIVE) ) sources += source
+		//for ( source in listFiles("src/templates/org/lwjgl/system/windows", FILTER_RECURSIVE) ) sources += source
+		for ( source in listFiles("src/templates/org/lwjgl/system/linux", FILTER_RECURSIVE) ) sources += source
 		*/
 
 		// Boot classpath - this is needed if -noJdk is used.
 		//val JAVA_HOME = System.getProperty("java.home")!!.replace('\\', '/')
-		//val jdkJars = listFiles("$JAVA_HOME/lib", ".jar")
+		//val jdkJars = listFiles("$JAVA_HOME/lib", FILTER_JAR)
 		//for ( jar in jdkJars )
 			//classpath += jar
 
@@ -41,7 +40,7 @@ fun project() {
 	}
 }
 
-private fun listFiles(path: String, filter: FileFilter): List<String> {
+private fun listFiles(path: String, filter: (File) -> Boolean): List<String> {
 	val root = File(path)
 	if ( !root.isDirectory() )
 		throw IllegalArgumentException("Root path is not a directory: $path")
@@ -53,7 +52,7 @@ private fun listFiles(path: String, filter: FileFilter): List<String> {
 	return files
 }
 
-private fun listFiles(dir: File, filter: FileFilter, output: MutableList<String>) {
+private fun listFiles(dir: File, filter: (File) -> Boolean, output: MutableList<String>) {
 	val files = dir.listFiles(filter)
 	if ( files == null )
 		return

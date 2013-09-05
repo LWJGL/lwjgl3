@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.windows.*
 
 fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
 	javaDoc(
@@ -28,6 +27,6 @@ fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisam
 		""",
 
 		"SAMPLE_BUFFERS_ARB" _ 0x2041,
-        "SAMPLES_ARB" _ 0x2042
+		"SAMPLES_ARB" _ 0x2042
 	)
 }

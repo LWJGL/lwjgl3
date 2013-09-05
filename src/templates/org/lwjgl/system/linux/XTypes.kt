@@ -50,7 +50,7 @@ val XComposeStatus = StructType(
 		javaDoc("Compose sequence status structure, used in calling {@link Xutil#XLookupString}.")
 		nativeImport (
 			"LinuxLWJGL.h",
-		    "<X11/Xutil.h>"
+			"<X11/Xutil.h>"
 		)
 		XPointer.member("compose_ptr")
 		int.member("chars_matched")
@@ -104,29 +104,29 @@ val XWindowAttributes = StructType(
 		javaDoc("Data structure for window attributes.")
 		nativeImport ("LinuxLWJGL.h")
 
-	    int.member("x")
-	    int.member("y")
-	    int.member("width")
-	    int.member("height")
-	    int.member("border_width")
-	    int.member("depth")
-	    Visual_p.member("visual")
-	    Window.member("root")
-	    int.member("class", "clazz")
-	    int.member("bit_gravity")
-	    int.member("win_gravity")
-	    int.member("backing_store")
-	    unsigned_long.member("backing_planes")
-	    unsigned_long.member("backing_pixel")
-	    Bool.member("save_under")
-	    Colormap.member("colormap")
-	    Bool.member("map_installed")
-	    int.member("map_state")
-	    long.member("all_event_masks")
-	    long.member("your_event_mask")
-	    long.member("do_not_propagate_mask")
-	    Bool.member("override_redirect")
-	    Screen_p.member("screen")
+		int.member("x")
+		int.member("y")
+		int.member("width")
+		int.member("height")
+		int.member("border_width")
+		int.member("depth")
+		Visual_p.member("visual")
+		Window.member("root")
+		int.member("class", "clazz")
+		int.member("bit_gravity")
+		int.member("win_gravity")
+		int.member("backing_store")
+		unsigned_long.member("backing_planes")
+		unsigned_long.member("backing_pixel")
+		Bool.member("save_under")
+		Colormap.member("colormap")
+		Bool.member("map_installed")
+		int.member("map_state")
+		long.member("all_event_masks")
+		long.member("your_event_mask")
+		long.member("do_not_propagate_mask")
+		Bool.member("override_redirect")
+		Screen_p.member("screen")
 	}
 )
 val XWindowAttributes_p = StructType(XWindowAttributes)
@@ -226,7 +226,7 @@ val XIEventMask = StructType(
 		javaDoc("XInput2 event mask.")
 		nativeImport (
 			"LinuxLWJGL.h",
-		    "<X11/extensions/XInput2.h>"
+			"<X11/extensions/XInput2.h>"
 		)
 
 		int.member("deviceid")
@@ -267,19 +267,19 @@ val XRRModeInfo = StructType(
 		)
 
 		RRMode.member("id");
-	    unsigned_int.member("width");
-	    unsigned_int.member("height");
-	    unsigned_long.member("dotClock");
-	    unsigned_int.member("hSyncStart");
-	    unsigned_int.member("hSyncEnd");
-	    unsigned_int.member("hTotal");
-	    unsigned_int.member("hSkew");
-	    unsigned_int.member("vSyncStart");
-	    unsigned_int.member("vSyncEnd");
-	    unsigned_int.member("vTotal");
-	    char_p.member("name");
-	    unsigned_int.member("nameLength");
-	    XRRModeFlags.member("modeFlags");
+		unsigned_int.member("width");
+		unsigned_int.member("height");
+		unsigned_long.member("dotClock");
+		unsigned_int.member("hSyncStart");
+		unsigned_int.member("hSyncEnd");
+		unsigned_int.member("hTotal");
+		unsigned_int.member("hSkew");
+		unsigned_int.member("vSyncStart");
+		unsigned_int.member("vSyncEnd");
+		unsigned_int.member("vTotal");
+		char_p.member("name");
+		unsigned_int.member("nameLength");
+		XRRModeFlags.member("modeFlags");
 	}
 )
 val XRRModeInfo_p = StructType(XRRModeInfo)
@@ -364,7 +364,7 @@ val XRRCrtcGamma = StructType(
 		)
 
 		int.member("size")
-	    unsigned_short_p.member("red")
+		unsigned_short_p.member("red")
 		unsigned_short_p.member("green")
 		unsigned_short_p.member("blue")
 	}
@@ -414,22 +414,22 @@ val XkbNamesRec = StructType(
 			"<X11/XKBlib.h>"
 		)
 
-        Atom.member("keycodes")
-        Atom.member("geometry")
-        Atom.member("symbols")
-        Atom.member("types")
-        Atom.member("compat")
-        Atom.member("vmods", size = XkbNumVirtualMods)
-        Atom.member("indicators", size = XkbNumIndicators)
-        Atom.member("groups", size = XkbNumKbdGroups)
-        XkbKeyNamePtr.member("keys")
-        XkbKeyAliasPtr.member("key_aliases")
-        Atom_p.member("radio_groups")
-        Atom.member("phys_symbols")
+		Atom.member("keycodes")
+		Atom.member("geometry")
+		Atom.member("symbols")
+		Atom.member("types")
+		Atom.member("compat")
+		Atom.member("vmods", size = XkbNumVirtualMods)
+		Atom.member("indicators", size = XkbNumIndicators)
+		Atom.member("groups", size = XkbNumKbdGroups)
+		XkbKeyNamePtr.member("keys")
+		XkbKeyAliasPtr.member("key_aliases")
+		Atom_p.member("radio_groups")
+		Atom.member("phys_symbols")
 
-        unsigned_char.member("num_keys")
-        unsigned_char.member("num_key_aliases")
-        unsigned_short.member("num_rg")
+		unsigned_char.member("num_keys")
+		unsigned_char.member("num_key_aliases")
+		unsigned_short.member("num_rg")
 	}
 )
 val XkbNamesPtr = StructType(XkbNamesRec)

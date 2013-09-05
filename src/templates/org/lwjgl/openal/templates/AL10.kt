@@ -37,8 +37,8 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 	val NumericalQueries = IntConstant.block(
 		"Numerical queries.",
 
-	    "DOPPLER_FACTOR" _ 0xC000,
-	    "DISTANCE_MODEL" _ 0xD000
+		"DOPPLER_FACTOR" _ 0xC000,
+		"DISTANCE_MODEL" _ 0xD000
 	).toJavaDocLinks() + " AL11#AL_SPEED_OF_SOUND"
 
 	val StringQueries = IntConstant.block(

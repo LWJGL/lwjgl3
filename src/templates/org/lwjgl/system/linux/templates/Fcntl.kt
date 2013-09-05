@@ -10,7 +10,7 @@ import org.lwjgl.system.linux.*
 fun Fcntl() = "Fcntl".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
-	    "<fcntl.h>"
+		"<fcntl.h>"
 	)
 
 	javaDoc("Native bindings to <fcntl.h>.")
@@ -40,13 +40,13 @@ fun Fcntl() = "Fcntl".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"open",
-	    """
+		"""
 		Given a pathname for a file, {@code open()} returns a file descriptor, a small, nonnegative integer for use in subsequent system calls. The file
 		descriptor returned by a successful call will be the lowest-numbered file descriptor not currently open for the process.
 	    """,
 
-	    const _ charASCII_p.IN("pathname", "the file path"),
-	    int.IN("flags", "the flags bitfield")
+		const _ charASCII_p.IN("pathname", "the file path"),
+		int.IN("flags", "the flags bitfield")
 	)
 
 }

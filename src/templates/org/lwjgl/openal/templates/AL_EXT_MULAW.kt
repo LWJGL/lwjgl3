@@ -16,9 +16,9 @@ fun AL_EXT_MULAW() = "EXTMulaw".nativeClassAL("EXT_MULAW") {
 	javaDoc("bindings to AL_EXT_MULAW extension.")
 
 	IntConstant.block(
-    	"AL_EXT_MULAW tokens.",
+		"AL_EXT_MULAW tokens.",
 
-    	"FORMAT_MONO_MULAW_EXT" _ 0x10014,
-        "FORMAT_STEREO_MULAW_EXT" _ 0x10015
-    )
+		"FORMAT_MONO_MULAW_EXT" _ 0x10014,
+		"FORMAT_STEREO_MULAW_EXT" _ 0x10015
+	)
 }

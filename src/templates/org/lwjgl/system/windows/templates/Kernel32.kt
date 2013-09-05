@@ -22,7 +22,7 @@ fun Kernel32() = "Kernel32".nativeClassWin {
 
 	DLL_FUNC _ DWORD_PTR.func(
 		"SetThreadAffinityMask",
-	    """
+		"""
 	    Sets a processor affinity mask for the specified thread.
 
 	    A thread affinity mask is a bit vector in which each bit represents a logical processor that a thread is allowed to run on. A thread affinity mask must
@@ -36,9 +36,9 @@ fun Kernel32() = "Kernel32".nativeClassWin {
 		processors.
 	    """,
 
-	    HANDLE.IN("thread", "a handle to the thread whose affinity mask is to be set"),
-	    DWORD_PTR.IN("threadAffinityMask", "the affinity mask for the thread"),
-	    DLL_ADDRESS
+		HANDLE.IN("thread", "a handle to the thread whose affinity mask is to be set"),
+		DWORD_PTR.IN("threadAffinityMask", "the affinity mask for the thread"),
+		DLL_ADDRESS
 	)
 
 }

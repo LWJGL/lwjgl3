@@ -35,7 +35,7 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 		indicates that context termination is supported.
 		""",
 
-	    "DEVICE_TERMINATE_CAPABILITY_KHR" _ 0x200F
+		"DEVICE_TERMINATE_CAPABILITY_KHR" _ 0x200F
 	)
 
 	IntConstant.block(
@@ -46,7 +46,7 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 
 	cl_int.func(
 		"TerminateContextKHR",
-	    """
+		"""
 	    Terminates all pending work associated with the context and renders all data owned by the context invalid. It is the responsibility of the application
 	    to release all objects associated with the context being terminated.
 
@@ -74,13 +74,13 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 			The behavior of callbacks will remain unchanged, and will report appropriate error, if executing after termination of context. This behavior is
 			similar to enqueued commands, after the command queue has become invalid.
 			"""
-	    )}
+		)}
 	    """,
 
-	    cl_context.IN("context", "the context to terminate"),
+		cl_context.IN("context", "the context to terminate"),
 
-	    returnDoc =
-	    """
+		returnDoc =
+		"""
 	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 			"{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid OpenCL context.",
 			"{@link #CL_CONTEXT_TERMINATED_KHR} if {@code context} has already been terminated.",

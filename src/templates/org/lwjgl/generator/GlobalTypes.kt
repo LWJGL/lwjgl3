@@ -4,8 +4,6 @@
  */
 package org.lwjgl.generator
 
-import java.nio.*
-
 val char = PrimitiveType("char", PrimitiveMapping.BYTE)
 
 val string = CharSequenceType("char")
