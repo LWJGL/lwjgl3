@@ -94,6 +94,7 @@
           <option name="NEW_LINE_AFTER_SELECT_ITEM" value="false" />
         </SqlCodeStyleSettings>
         <XML>
+          <option name="XML_ATTRIBUTE_WRAP" value="0" />
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
         <ADDITIONAL_INDENT_OPTIONS fileType="gsp">
@@ -417,6 +418,15 @@
             <option name="USE_TAB_CHARACTER" value="true" />
             <option name="SMART_TABS" value="true" />
           </indentOptions>
+          <arrangement>
+            <rules>
+              <rule>
+                <match>
+                  <NAME>xmlns:.*</NAME>
+                </match>
+              </rule>
+            </rules>
+          </arrangement>
         </codeStyleSettings>
         <codeStyleSettings language="jet">
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />

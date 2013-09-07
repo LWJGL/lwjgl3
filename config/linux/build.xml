@@ -1,9 +1,5 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-linux">
-	<property name="dest" location="bin/lwjgl${os.arch}" relative="true"/>
-
-	<property name="src" location="src" relative="true"/>
-	<property name="src.native" location="${src}/native" relative="true"/>
-	<property name="src.generated" location="generated/native" relative="true"/>
+	<import file="../build-definitions.xml"/>
 
 	<property name="system_libs" value="-lm -lpthread -lX11 -lXi -lXrandr -lXxf86vm"/>
 
@@ -23,7 +19,7 @@
 
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
-		<apply dir="${dest}" executable="gcc" dest="${dest}" skipemptyfilesets="true" failonerror="true" parallel="true">
+		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wunused -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
@@ -43,27 +39,31 @@
 			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
 			<fileset dir="${src.native}/opencl" includes="*.c"/>
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
-			<fileset dir="${src.generated}/system" includes="*.c"/>
-			<fileset dir="${src.generated}/system/glfw" includes="*.c"/>
-			<fileset dir="${src.generated}/system/linux" includes="*.c"/>
-			<fileset dir="${src.generated}/openal" includes="*.c"/>
-			<fileset dir="${src.generated}/opencl" includes="*.c"/>
-			<fileset dir="${src.generated}/opengl" includes="*.c"/>
-			<fileset dir="${src.generated}/opengl/glx" includes="*.c"/>
+			<fileset dir="${generated.native}/system" includes="*.c"/>
+			<fileset dir="${generated.native}/system/glfw" includes="*.c"/>
+			<fileset dir="${generated.native}/system/linux" includes="*.c"/>
+			<fileset dir="${generated.native}/openal" includes="*.c"/>
+			<fileset dir="${generated.native}/opencl" includes="*.c"/>
+			<fileset dir="${generated.native}/opengl" includes="*.c"/>
+			<fileset dir="${generated.native}/opengl/glx" includes="*.c"/>
 		</apply>
 
 		<!-- LINK -->
-		<apply dir="${dest}" executable="gcc" failonerror="true" parallel="true" verbose="true">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
 			<srcfile/>
 			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
 			<!-- LWJGL objects -->
-			<fileset dir="${dest}" includes="*.o"/>
+			<fileset dir="${bin.native}" includes="*.o"/>
 			<!-- Static libraries -->
 			<fileset dir="libs/linux/${os.arch}" includes="*.a"/>
 		</apply>
-		<apply dir="${dest}" executable="strip" failonerror="true">
+		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
 			<fileset file="${libname}"/>
 		</apply>
+
+		<copy todir="${lib}/linux">
+			<fileset dir="${bin.native}" includes="liblwjgl*.so"/>
+		</copy>
 	</target>
 
 </project>

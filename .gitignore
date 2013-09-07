@@ -2,3 +2,4 @@
 /bin
 /generated
 /libs/**/*lwjgl*.*
+/libs/kotlinc
