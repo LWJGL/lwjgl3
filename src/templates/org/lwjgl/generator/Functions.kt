@@ -311,8 +311,8 @@ public class NativeClassFunction(
 		// So we need to scale the length check by the number of bytes per element.
 		fun bufferShift(expression: String, param: String, shift: String, transform: FunctionTransform<out QualifiedType>?): String {
 			val mapping =
-				if ( transform != null && javaClass<AutoTypeTargetTransform>().isAssignableFrom(transform.javaClass) ) {
-					(transform as AutoTypeTargetTransform).autoType
+				if ( transform != null && transform is AutoTypeTargetTransform ) {
+					transform.autoType
 				} else
 					parameters[param]!!.nativeType.mapping as PointerMapping
 
@@ -991,7 +991,7 @@ public class NativeClassFunction(
 		// Step 3.B: Transform pre-processing.
 
 		for ( (qtype, transform) in transforms ) {
-			if ( javaClass<PreFunctionTransform<*>>().isAssignableFrom(transform.javaClass) ) {
+			if ( transform is PreFunctionTransform<*> ) {
 				when ( qtype ) {
 					is Parameter   -> (transform as PreFunctionTransform<Parameter>).preprocess(qtype, this)
 					is ReturnValue -> (transform as PreFunctionTransform<ReturnValue>).preprocess(qtype, this)
@@ -1012,7 +1012,7 @@ public class NativeClassFunction(
 			println("\t\tint ${autoSizeParam.name} = $API_BUFFER.${autoSizeType}Param();")
 		}
 		for ( (qtype, transform) in transforms ) {
-			if ( javaClass<APIBufferFunctionTransform<*>>().isAssignableFrom(transform.javaClass) ) {
+			if ( transform is APIBufferFunctionTransform<*> ) {
 				if ( !apiBufferSet ) {
 					println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
 					apiBufferSet = true
