@@ -54,7 +54,7 @@ public class WindowProc {
 	 * The given {@code callback} method must have a signature that matches {@link #invoke(long, int, long, long)} and must be a static method of the given
 	 * {@code clazz}.
 	 */
-	public static native long setCallbackStaticSync(Class clazz, Method callback);
+	public static native long setCallbackStaticSync(Class<?> clazz, Method callback);
 
 	/**
 	 * May be used to setup an alternative WNDPROC function. The WNDPROC may be invoked from any thread.
@@ -62,7 +62,7 @@ public class WindowProc {
 	 * The given {@code callback} method must have a signature that matches {@link #invoke(long, int, long, long)} and must be a static method of the given
 	 * {@code clazz}.
 	 */
-	public static native long setCallbackStaticAsync(Class clazz, Method callback);
+	public static native long setCallbackStaticAsync(Class<?> clazz, Method callback);
 
 	/**
 	 * The application-defined function that processes messages sent to a window.

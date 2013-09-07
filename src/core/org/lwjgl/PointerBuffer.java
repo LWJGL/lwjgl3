@@ -10,7 +10,7 @@ import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
-public class PointerBuffer implements Comparable {
+public class PointerBuffer implements Comparable<PointerBuffer> {
 
 	static {
 		Sys.touch();
@@ -264,7 +264,7 @@ public class PointerBuffer implements Comparable {
 	 * the limit. </p>
 	 *
 	 * @return <tt>true</tt> if, and only if, there is at least one element
-	 *         remaining in this buffer
+	 * remaining in this buffer
 	 */
 	public final boolean hasRemaining() {
 		return view.hasRemaining();
@@ -385,8 +385,7 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return the long at the buffer's current position
 	 *
-	 * @throws java.nio.BufferUnderflowException
-	 *          If the buffer's current position is not smaller than its limit
+	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
 	public long get() {
 		return BITS64
@@ -404,10 +403,8 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferOverflowException
-	 *          If this buffer's current position is not smaller than its limit
-	 * @throws java.nio.ReadOnlyBufferException
-	 *          If this buffer is read-only
+	 * @throws java.nio.BufferOverflowException If this buffer's current position is not smaller than its limit
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(long l) {
 		if ( BITS64 )
@@ -470,10 +467,9 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative
-	 *                                   or not smaller than the buffer's limit
-	 * @throws java.nio.ReadOnlyBufferException
-	 *                                   If this buffer is read-only
+	 * @throws IndexOutOfBoundsException        If <tt>index</tt> is negative
+	 *                                          or not smaller than the buffer's limit
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(int index, long l) {
 		if ( BITS64 )
@@ -549,11 +545,10 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferUnderflowException
-	 *                                   If there are fewer than <tt>length</tt> longs
-	 *                                   remaining in this buffer
-	 * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt>
-	 *                                   parameters do not hold
+	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> longs
+	 *                                           remaining in this buffer
+	 * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt>
+	 *                                           parameters do not hold
 	 */
 	public PointerBuffer get(long[] dst, int offset, int length) {
 		if ( BITS64 )
@@ -582,9 +577,8 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferUnderflowException
-	 *          If there are fewer than <tt>length</tt> longs
-	 *          remaining in this buffer
+	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> longs
+	 *                                           remaining in this buffer
 	 */
 	public PointerBuffer get(long[] dst) {
 		return get(dst, 0, dst.length);
@@ -620,12 +614,10 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferOverflowException
-	 *                                  If there is insufficient space in this buffer
-	 *                                  for the remaining longs in the source buffer
-	 * @throws IllegalArgumentException If the source buffer is this buffer
-	 * @throws java.nio.ReadOnlyBufferException
-	 *                                  If this buffer is read-only
+	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
+	 *                                          for the remaining longs in the source buffer
+	 * @throws IllegalArgumentException         If the source buffer is this buffer
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(PointerBuffer src) {
 		if ( BITS64 )
@@ -670,12 +662,10 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferOverflowException
-	 *                                   If there is insufficient space in this buffer
-	 * @throws IndexOutOfBoundsException If the preconditions on the <tt>offset</tt> and <tt>length</tt>
-	 *                                   parameters do not hold
-	 * @throws java.nio.ReadOnlyBufferException
-	 *                                   If this buffer is read-only
+	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
+	 * @throws IndexOutOfBoundsException        If the preconditions on the <tt>offset</tt> and <tt>length</tt>
+	 *                                          parameters do not hold
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(long[] src, int offset, int length) {
 		if ( BITS64 )
@@ -705,10 +695,8 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferOverflowException
-	 *          If there is insufficient space in this buffer
-	 * @throws java.nio.ReadOnlyBufferException
-	 *          If this buffer is read-only
+	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public final PointerBuffer put(long[] src) {
 		return put(src, 0, src.length);
@@ -734,8 +722,7 @@ public class PointerBuffer implements Comparable {
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.ReadOnlyBufferException
-	 *          If this buffer is read-only
+	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer compact() {
 		if ( BITS64 )
@@ -765,21 +752,12 @@ public class PointerBuffer implements Comparable {
 	}
 
 	/**
-	 * Returns a string summarizing the state of this buffer.  </p>
+	 * Returns a string summarizing the state of this buffer.
 	 *
 	 * @return A summary string
 	 */
 	public String toString() {
-		StringBuilder sb = new StringBuilder(48);
-		sb.append(getClass().getName());
-		sb.append("[pos=");
-		sb.append(position());
-		sb.append(" lim=");
-		sb.append(limit());
-		sb.append(" cap=");
-		sb.append(capacity());
-		sb.append("]");
-		return sb.toString();
+		return getClass().getName() + "[pos=" + position() + " lim=" + limit() + " cap=" + capacity() + "]";
 	}
 
 	/**
@@ -826,7 +804,7 @@ public class PointerBuffer implements Comparable {
 	 * @param ob The object to which this buffer is to be compared
 	 *
 	 * @return <tt>true</tt> if, and only if, this buffer is equal to the
-	 *         given object
+	 * given object
 	 */
 	public boolean equals(Object ob) {
 		if ( !(ob instanceof PointerBuffer) )
@@ -855,11 +833,10 @@ public class PointerBuffer implements Comparable {
 	 * <p> A pointer buffer is not comparable to any other type of object.
 	 *
 	 * @return A negative integer, zero, or a positive integer as this buffer
-	 *         is less than, equal to, or greater than the given buffer
+	 * is less than, equal to, or greater than the given buffer
 	 */
 	@Override
-	public int compareTo(Object o) {
-		PointerBuffer that = (PointerBuffer)o;
+	public int compareTo(PointerBuffer that) {
 		int n = this.position() + Math.min(this.remaining(), that.remaining());
 		for ( int i = this.position(), j = that.position(); i < n; i++, j++ ) {
 			long v1 = this.get(i);

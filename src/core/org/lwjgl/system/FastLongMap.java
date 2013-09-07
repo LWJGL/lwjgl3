@@ -39,7 +39,6 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		this(initialCapacity, 0.75f);
 	}
 
-	@SuppressWarnings("unchecked")
 	FastLongMap(int initialCapacity, float loadFactor) {
 		if ( initialCapacity > 1 << 30 ) throw new IllegalArgumentException("initialCapacity is too large.");
 		if ( initialCapacity < 0 ) throw new IllegalArgumentException("initialCapacity must be greater than zero.");
@@ -48,8 +47,13 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		this.capacity = mathNextPoT(initialCapacity);
 
 		this.threshold = (int)(capacity * loadFactor);
-		this.table = new Entry[capacity];
+		this.table = createEntryArray(capacity);
 		this.mask = capacity - 1;
+	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static <T> Entry<T>[] createEntryArray(int size) {
+		return (Entry<T>[])new Entry[size];
 	}
 
 	private int index(long key) {
@@ -81,12 +85,11 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	private void rehash(Entry<V>[] table) {
 		int newCapacity = capacity << 1;
 		int newMask = newCapacity - 1;
 
-		Entry<V>[] newTable = new Entry[newCapacity];
+		Entry<V>[] newTable = createEntryArray(newCapacity);
 
 		for ( int i = 0, index; i < table.length; i++ ) {
 			Entry<V> e = table[i];
@@ -194,7 +197,7 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		@Override
 		public boolean hasNext() {
 			if ( nextIndex >= 0 ) return true;
-			Entry e = current;
+			Entry<V> e = current;
 			return e != null && e.next != null;
 		}
 

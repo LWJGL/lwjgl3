@@ -33,8 +33,7 @@ public final class APIUtil {
 	 *
 	 * @return the callback method
 	 */
-	@SuppressWarnings("unchecked")
-	public static Method apiCallbackMethod(Class clazz, Class<?>... parameterTypes) {
+	public static Method apiCallbackMethod(Class<?> clazz, Class<?>... parameterTypes) {
 		try {
 			return clazz.getMethod("invoke", parameterTypes);
 		} catch (NoSuchMethodException e) {
