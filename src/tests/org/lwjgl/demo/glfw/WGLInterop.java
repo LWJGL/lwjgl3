@@ -69,7 +69,7 @@ public final class WGLInterop {
 			}
 
 			@Override
-			public void key(long window, int key, int action) {
+			public void key(long window, int key, int scancode, int action, int mods) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, 1);
 			}

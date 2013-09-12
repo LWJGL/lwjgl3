@@ -1,7 +1,7 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-linux">
 	<import file="../build-definitions.xml"/>
 
-	<property name="system_libs" value="-lm -lpthread -lX11 -lXi -lXrandr -lXxf86vm"/>
+	<property name="system_libs" value="-lm -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm"/>
 
 	<condition
 		property="libs"

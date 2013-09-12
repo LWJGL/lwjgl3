@@ -54,9 +54,15 @@ public class ErrorCallback {
 
 	/** String version of {@link #invoke(int, long)}. */
 	public void invoke(int error, String description) {
-		System.err.println("[LWJGL] GLFW error");
+		System.err.print("[LWJGL] GLFW error");
 		System.err.println("\tCode: " + LWJGLUtil.toHexString(error));
 		System.err.println("\tDescription: " + description);
+		System.err.println("\tStacktrace:");
+		StackTraceElement[] stack = Thread.currentThread().getStackTrace();
+		for ( int i = 4; i < stack.length; i++ ) {
+			System.err.print("\t\t");
+			System.err.println(stack[i].toString());
+		}
 	}
 
 }

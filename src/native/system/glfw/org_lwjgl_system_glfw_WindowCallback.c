@@ -11,6 +11,7 @@ static jmethodID GLFWwindowclosefunInvoke;
 static jmethodID GLFWwindowrefreshfunInvoke;
 static jmethodID GLFWwindowfocusfunInvoke;
 static jmethodID GLFWwindowiconifyfunInvoke;
+static jmethodID GLFWframebuffersizefunInvoke;
 static jmethodID GLFWkeyfunInvoke;
 static jmethodID GLFWcharfunInvoke;
 static jmethodID GLFWmousebuttonfunInvoke;
@@ -21,181 +22,92 @@ static jmethodID GLFWscrollfunInvoke;
 static void GLFWwindowposfunProc(GLFWwindow* window, int xpos, int ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowposfunInvoke, (jlong)(intptr_t)window, (jint)xpos, (jint)ypos);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWwindowsizefunProc(GLFWwindow* window, int width, int height) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowsizefunInvoke, (jlong)(intptr_t)window, (jint)width, (jint)height);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWwindowclosefunProc(GLFWwindow* window) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowclosefunInvoke, (jlong)(intptr_t)window);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWwindowrefreshfunProc(GLFWwindow* window) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowrefreshfunInvoke, (jlong)(intptr_t)window);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWwindowfocusfunProc(GLFWwindow* window, int focus) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowfocusfunInvoke, (jlong)(intptr_t)window, (jint)focus);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWwindowiconifyfunProc(GLFWwindow* window, int iconified) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWwindowiconifyfunInvoke, (jlong)(intptr_t)window, (jint)iconified);
-
-	if ( async ) detachCurrentThread();
 }
 
-static void GLFWkeyfunProc(GLFWwindow* window, int key, int action) {
+static void GLFWframebuffersizefunProc(GLFWwindow* window, int width, int height) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
+	JNIEnv* env = getEnv();
+	(*env)->CallVoidMethod(env, callback, GLFWframebuffersizefunInvoke, (jlong)(intptr_t)window, (jint)width, (jint)height);
+}
 
-	(*env)->CallVoidMethod(env, callback, GLFWkeyfunInvoke, (jlong)(intptr_t)window, (jint)key, (jint)action);
+static void GLFWkeyfunProc(GLFWwindow* window, int key, int scancode, int action, int mods) {
+	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	if ( async ) detachCurrentThread();
+	JNIEnv* env = getEnv();
+	(*env)->CallVoidMethod(env, callback, GLFWkeyfunInvoke, (jlong)(intptr_t)window, (jint)key, (jint)scancode, (jint)action, (jint)mods);
 }
 
 static void GLFWcharfunProc(GLFWwindow* window, int character) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWcharfunInvoke, (jlong)(intptr_t)window, (jint)character);
-
-	if ( async ) detachCurrentThread();
 }
 
-static void GLFWmousebuttonfunProc(GLFWwindow* window, int button, int action) {
+static void GLFWmousebuttonfunProc(GLFWwindow* window, int button, int action, int mods) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
-	(*env)->CallVoidMethod(env, callback, GLFWmousebuttonfunInvoke, (jlong)(intptr_t)window, (jint)button, (jint)action);
-
-	if ( async ) detachCurrentThread();
+	JNIEnv* env = getEnv();
+	(*env)->CallVoidMethod(env, callback, GLFWmousebuttonfunInvoke, (jlong)(intptr_t)window, (jint)button, (jint)action, (jint)mods);
 }
 
 static void GLFWcursorposfunProc(GLFWwindow* window, double xpos, double ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWcursorposfunInvoke, (jlong)(intptr_t)window, (jdouble)xpos, (jdouble)ypos);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWcursorenterfunProc(GLFWwindow* window, int entered) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWcursorenterfunInvoke, (jlong)(intptr_t)window, (jint)entered);
-
-	if ( async ) detachCurrentThread();
 }
 
 static void GLFWscrollfunProc(GLFWwindow* window, double xpos, double ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL ) return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallVoidMethod(env, callback, GLFWscrollfunInvoke, (jlong)(intptr_t)window, (jdouble)xpos, (jdouble)ypos);
-
-	if ( async ) detachCurrentThread();
 }
 
 // setCallbacks([Ljava/lang/reflect/Method;J)V
@@ -211,6 +123,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JN
 	GLFWwindowrefreshfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
     GLFWwindowfocusfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
     GLFWwindowiconifyfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
+    GLFWframebuffersizefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
 	GLFWkeyfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
    	GLFWcharfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
 	GLFWmousebuttonfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
@@ -225,6 +138,7 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JN
     procs[i++] = (intptr_t)&GLFWwindowrefreshfunProc;
     procs[i++] = (intptr_t)&GLFWwindowfocusfunProc;
 	procs[i++] = (intptr_t)&GLFWwindowiconifyfunProc;
+	procs[i++] = (intptr_t)&GLFWframebuffersizefunProc;
 	procs[i++] = (intptr_t)&GLFWkeyfunProc;
 	procs[i++] = (intptr_t)&GLFWcharfunProc;
     procs[i++] = (intptr_t)&GLFWmousebuttonfunProc;

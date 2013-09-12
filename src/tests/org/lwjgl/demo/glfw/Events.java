@@ -1,5 +1,6 @@
 package org.lwjgl.demo.glfw;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.MonitorCallback;
@@ -76,23 +77,28 @@ public final class Events {
 			}
 
 			@Override
-			public void key(long window, int key, int action) {
+			public void framebufferSize(long window, int width, int height) {
+				printEvent(window, "framebuffer resized to %d x %d", width, height);
+			}
+
+			@Override
+			public void key(long window, int key, int scancode, int action, int mods) {
 				String state;
 				switch ( action ) {
-					case GLFW_PRESS:
-						state = "pressed";
-						break;
 					case GLFW_RELEASE:
 						state = "released";
+						break;
+					case GLFW_PRESS:
+						state = "pressed";
 						break;
 					case GLFW_REPEAT:
 						state = "repeated";
 						break;
 					default:
-						throw new IllegalArgumentException();
+						throw new IllegalArgumentException(LWJGLUtil.toHexString(action));
 				}
 
-				printEvent(window, "key [%d] was %s", key, state);
+				printEvent(window, "key %s[%s - %d] was %s", getModState(mods), LWJGLUtil.toHexString(key), scancode, state);
 
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, 1);
@@ -104,19 +110,19 @@ public final class Events {
 			}
 
 			@Override
-			public void mouseButton(long window, int button, int action) {
+			public void mouseButton(long window, int button, int action, int mods) {
 				String state;
 				switch ( action ) {
-					case GLFW_PRESS:
-						state = "pressed";
-						break;
 					case GLFW_RELEASE:
 						state = "released";
 						break;
+					case GLFW_PRESS:
+						state = "pressed";
+						break;
 					default:
-						throw new IllegalArgumentException();
+						throw new IllegalArgumentException(LWJGLUtil.toHexString(action));
 				}
-				printEvent(window, "mouse button [%d] was %s", button, state);
+				printEvent(window, "mouse button %s[%s] was %s", getModState(mods), LWJGLUtil.toHexString(button), state);
 			}
 
 			@Override
@@ -130,13 +136,30 @@ public final class Events {
 			}
 
 			@Override
-			public void scroll(long window, double xpos, double ypos) {
-				printEvent(window, "scroll by %f, %f", xpos, ypos);
+			public void scroll(long window, double xoffset, double yoffset) {
+				printEvent(window, "scroll by %f, %f", xoffset, yoffset);
 			}
 		});
 
 		while ( glfwWindowShouldClose(window) == 0 )
 			glfwWaitEvents();
+	}
+
+	private static String getModState(int mods) {
+		if ( mods == 0 )
+			return "";
+
+		StringBuilder modState = new StringBuilder(16);
+		if ( (mods & GLFW_MOD_SHIFT) != 0 )
+			modState.append("SHIFT+");
+		if ( (mods & GLFW_MOD_CONTROL) != 0 )
+			modState.append("CONTROL+");
+		if ( (mods & GLFW_MOD_ALT) != 0 )
+			modState.append("ALT+");
+		if ( (mods & GLFW_MOD_SUPER) != 0 )
+			modState.append("SUPER+");
+
+		return modState.toString();
 	}
 
 	private static void printEvent(long window, String format, Object... args) {

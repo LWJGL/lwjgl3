@@ -32,7 +32,11 @@ public class WindowCallbackAdapter extends WindowCallback {
 	}
 
 	@Override
-	public void key(long window, int key, int action) {
+	public void framebufferSize(long window, int width, int height) {
+	}
+
+	@Override
+	public void key(long window, int key, int scancode, int action, int mods) {
 	}
 
 	@Override
@@ -40,7 +44,7 @@ public class WindowCallbackAdapter extends WindowCallback {
 	}
 
 	@Override
-	public void mouseButton(long window, int button, int action) {
+	public void mouseButton(long window, int button, int action, int mods) {
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class WindowCallbackAdapter extends WindowCallback {
 	}
 
 	@Override
-	public void scroll(long window, double xpos, double ypos) {
+	public void scroll(long window, double xoffset, double yoffset) {
 	}
 
 }

@@ -57,7 +57,7 @@ public final class MultipleWindows {
 				}
 
 				@Override
-				public void key(long window, int key, int action) {
+				public void key(long window, int key, int scancode, int action, int mods) {
 					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 						latch.set(0); // Tests WindowCallback clean-up
 				}

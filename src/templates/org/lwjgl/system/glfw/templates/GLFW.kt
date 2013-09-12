@@ -39,7 +39,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	IntConstant.block(
 		"This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION" _ 0
+		"VERSION_REVISION" _ 3
 	)
 
 	IntConstant.block(
@@ -58,6 +58,12 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"The key was held down until it repeated.",
 
 		"REPEAT" _ 2
+	)
+
+	IntConstant.block(
+		"The unknown key.",
+
+		"KEY_UNKNOWN" _ -1
 	)
 
 	IntConstant.block(
@@ -192,6 +198,15 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
+		"Modifier key flags.",
+
+		"MOD_SHIFT" _ 0x0001,
+		"MOD_CONTROL" _ 0x0002,
+		"MOD_ALT" _ 0x0004,
+	    "MOD_SUPER" _ 0x0008
+	)
+
+	IntConstant.block(
 		"Mouse buttons.",
 
 		"MOUSE_BUTTON_1" _ 0,
@@ -233,55 +248,55 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	IntConstant.block(
 		"GLFW has not been initialized.",
 
-		"NOT_INITIALIZED" _ 0x00070001
+		"NOT_INITIALIZED" _ 0x00010001
 	)
 
 	IntConstant.block(
 		"No context is current for this thread.",
 
-		"NO_CURRENT_CONTEXT" _ 0x00070002
+		"NO_CURRENT_CONTEXT" _ 0x00010002
 	)
 
 	IntConstant.block(
 		"One of the enum parameters for the function was given an invalid enum.",
 
-		"INVALID_ENUM" _ 0x00070003
+		"INVALID_ENUM" _ 0x00010003
 	)
 
 	IntConstant.block(
 		"One of the parameters for the function was given an invalid value.",
 
-		"INVALID_VALUE" _ 0x00070004
+		"INVALID_VALUE" _ 0x00010004
 	)
 
 	IntConstant.block(
 		"A memory allocation failed.",
 
-		"OUT_OF_MEMORY" _ 0x00070005
+		"OUT_OF_MEMORY" _ 0x00010005
 	)
 
 	IntConstant.block(
 		"GLFW could not find support for the requested client API on the system.",
 
-		"API_UNAVAILABLE" _ 0x00070006
+		"API_UNAVAILABLE" _ 0x00010006
 	)
 
 	IntConstant.block(
 		"The requested client API version is not available.",
 
-		"VERSION_UNAVAILABLE" _ 0x00070007
+		"VERSION_UNAVAILABLE" _ 0x00010007
 	)
 
 	IntConstant.block(
 		"A platform-specific error occurred that does not match any of the more specific categories.",
 
-		"PLATFORM_ERROR" _ 0x00070008
+		"PLATFORM_ERROR" _ 0x00010008
 	)
 
 	IntConstant.block(
 		"The clipboard did not contain data in the requested format.",
 
-		"FORMAT_UNAVAILABLE" _ 0x00070009
+		"FORMAT_UNAVAILABLE" _ 0x00010009
 	)
 
 	IntConstant.block(
@@ -289,25 +304,25 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		"FOCUSED" _ 0x00020001,
 		"ICONIFIED" _ 0x00020002,
-		"RESIZABLE" _ 0x00022007,
-		"VISIBLE" _ 0x00022008,
-		"DECORATED" _ 0x00022009
+		"RESIZABLE" _ 0x00020003,
+		"VISIBLE" _ 0x00020004,
+		"DECORATED" _ 0x00020005
 	)
 
 	IntConstant.block(
 		"Input options.",
 
-		"CURSOR_MODE" _ 0x00030001,
-		"STICKY_KEYS" _ 0x00030002,
-		"STICKY_MOUSE_BUTTONS" _ 0x00030003
+		"CURSOR" _ 0x00033001,
+		"STICKY_KEYS" _ 0x00033002,
+		"STICKY_MOUSE_BUTTONS" _ 0x00033003
 	)
 
 	IntConstant.block(
 		"Cursor state.",
 
-		"CURSOR_NORMAL" _ 0x00040001,
-		"CURSOR_HIDDEN" _ 0x00040002,
-		"CURSOR_CAPTURED" _ 0x00040003
+		"CURSOR_NORMAL" _ 0x00034001,
+		"CURSOR_HIDDEN" _ 0x00034002,
+		"CURSOR_DISABLED" _ 0x00034003
 	)
 
 	IntConstant.block(
@@ -319,16 +334,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Gamma ramp size.",
-
-		"GAMMA_RAMP_SIZE" _ 256
-	)
-
-	IntConstant.block(
 		"Monitor events.",
 
-		"CONNECTED" _ 0x00061000,
-		"DISCONNECTED" _ 0x00061001
+		"CONNECTED" _ 0x00040001,
+		"DISCONNECTED" _ 0x00040002
 	)
 
 	val Init = (Code(
@@ -336,10 +345,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	) _ int.func(
 		"Init",
 		"""
-		This function initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before a program terminates GLFW
-		should be terminated in order to free any resources allocated during or after initialization.
+		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before a program terminates GLFW should be
+		terminated in order to free any resources allocated during or after initialization.
 
-		If this function fails, it calls {@link #glfwTerminate} before returning.  If it succeeds, you should call {@link #glfwTerminate} before the program
+		If this function fails, it calls {@link #glfwTerminate} before returning. If it succeeds, you should call {@link #glfwTerminate} before the program
 		exits.
 
 		Additional calls to this function after successful initialization but before termination will succeed but will do nothing.
@@ -361,8 +370,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	) _ void.func(
 		"Terminate",
 		"""
-		This function destroys all remaining windows, frees any allocated resources and sets the library to an uninitialized state. Once this is called, you
-		must again call $Init successfully before you will be able to use most GLFW functions.
+		Destroys all remaining windows, frees any allocated resources and sets the library to an uninitialized state. Once this is called, you must again call
+		$Init successfully before you will be able to use most GLFW functions.
 
 		If GLFW has been successfully initialized, this function should be called before the program exits. If initialization fails, there is no need to call
         this function, as it is called by $Init before it returns failure.
@@ -379,8 +388,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"GetVersion",
 		"""
-		This function retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and
-		want to ensure that you are using the minimum required version.
+		Retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and want to ensure
+		that you are using the minimum required version.
 
 		Notes:
 		${ul(
@@ -397,8 +406,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	(const _ charUTF8_p).func(
 		"GetVersionString",
 		"""
-		This function returns a static string generated at compile-time according to which configuration macros were defined. This is intended for use when
-		submitting bug reports, to allow developers to see which code paths are enabled in a binary.
+		Returns a static string generated at compile-time according to which configuration macros were defined. This is intended for use when submitting bug
+		reports, to allow developers to see which code paths are enabled in a binary.
 
 		The format of the string is as follows:
         ${ul(
@@ -417,7 +426,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWerrorfun.func(
 		"SetErrorCallback",
 		"""
-		This function sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
+		Sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
 
 		Notes:
 		${ul(
@@ -428,7 +437,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			""",
 			"""
 			Because the description string provided to the callback may have been generated specifically for that error, it is not guaranteed to be valid after
-			the callback has returned.  If you wish to use it after that, you need to make your own copy of it before returning.
+			the callback has returned. If you wish to use it after that, you need to make your own copy of it before returning.
 			"""
 		)}
 		""",
@@ -437,163 +446,150 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			Callback("ErrorCallback"),
 			Expression("ErrorCallback.register(cbfun)", keepParam = true),
 			nullable
-		) _ GLFWerrorfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		) _ GLFWerrorfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWmonitor_p.func(
 		"GetMonitors",
 		"""
-		This function returns an array of handles for all currently connected monitors. The returned array is valid only until the monitor configuration
-		changes.
+		Returns an array of handles for all currently connected monitors. The returned array is valid only until the monitor configuration changes.
 
         See {@link #glfwSetMonitorCallback} to receive notifications of configuration changes.
 		""",
 
-		autoSizeResult _ int_p.OUT("count", "the size of the returned array")
+		autoSizeResult _ int_p.OUT("count", "where to store the size of the returned array. This is set to zero if an error occurred.")
 	)
 
 	GLFWmonitor.func(
 		"GetPrimaryMonitor",
-		"""
-		This function returns the primary monitor.  This is usually the monitor
-        where elements like the Windows task bar or the OS X menu bar is located.
-		"""
+		"Returns the primary monitor. This is usually the monitor where elements like the Windows task bar or the OS X menu bar is located."
 	)
 
 	void.func(
 		"GetMonitorPos",
-		"""
-		This function returns the position, in screen coordinates, of the upper-left
-        corner of the specified monitor.
-		""",
+		"Returns the position, in screen coordinates, of the upper-left corner of the specified monitor.",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
-		Check(1) _ int_p.OUT("xpos", "The monitor x-coordinate"),
-		Check(1) _ int_p.OUT("ypos", "The monitor y-coordinate")
+		mods(nullable, Check(1)) _ int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL")
 	)
 
 	void.func(
 		"GetMonitorPhysicalSize",
 		"""
-		This function returns the size, in millimetres, of the display area of the specified monitor.
+		Returns the size, in millimetres, of the display area of the specified monitor.
 
-        Note: Some operating systems do not provide accurate information, either
-        because the monitor's EDID data is incorrect, or because the driver does not
+        Note: Some operating systems do not provide accurate information, either because the monitor's EDID data is incorrect, or because the driver does not
         report it accurately.
 		""",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
-		Check(1) _ int_p.OUT("width", "width, in mm, of the monitor's display"),
-		Check(1) _ int_p.OUT("height", "height, in mm, of the monitor's display")
+		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in mm, of the monitor's display area, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in mm, of the monitor's display area, or $NULL")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetMonitorName",
-		"""
-		This function returns a human-readable name, encoded as UTF-8, of the
-        specified monitor.
-		""",
+		"Returns a human-readable name, encoded as UTF-8, of the specified monitor.",
 
 		GLFWmonitor.IN("monitor", "monitor to query")
 	)
 
 	GLFWmonitorfun.func(
 		"SetMonitorCallback",
-		"Sets the monitor configuration callback.",
+		"""
+		Sets the monitor configuration callback, or removes the currently set callback. This is called when a monitor is connected to or disconnected from the
+		system.
+
+		<strong>X11</strong>: This callback is not yet called on monitor configuration changes.
+		""",
 
 		mods(
 			Callback("MonitorCallback"),
 			Expression("MonitorCallback.register(cbfun)", keepParam = true),
 			nullable
-		) _ GLFWmonitorfun.IN("cbfun", "the new callback, or NULL to remove the currently set callback")
+		) _ GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL if no callback was set or an error occurred")
 	)
 
 	(const _ GLFWvidmode).func(
 		"GetVideoModes",
-		"""
-		This function returns an array of all video modes supported by the specified
-        monitor.
-		""",
+		"Returns an array of all video modes supported by the specified monitor.",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("count", "number of video modes in the returned array")
+		mods(Check(1), autoSizeResult) _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred.")
 	)
 
-	GLFWvidmode.func(
+	(const _ GLFWvidmode_p).func(
 		"GetVideoMode",
-		"This function returns the current video mode of the specified monitor.",
+		"""
+		Returns the current video mode of the specified monitor. if you are using a full screen window, the return value will therefore depend on whether it is
+		focused.
+		""",
 
 		GLFWmonitor.IN("monitor", "monitor to query")
 	)
 
 	void.func(
 		"SetGamma",
-		"""
-		This function generates a gamma ramp from the specified exponent and then
-        calls {@link #glfwSetGammaRamp} with it.
-        """,
+		"Generates a 256-element gamma ramp from the specified exponent and then calls {@link #glfwSetGammaRamp} with it.",
 
 		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
 		float.IN("gamma", "desired exponent")
 	)
 
-	void.func(
+	(const _ GLFWgammaramp_p).func(
 		"GetGammaRamp",
-		"This function retrieves the current gamma ramp of the specified monitor.",
+		"Retrieves the current gamma ramp of the specified monitor.",
 
-		GLFWmonitor.IN("monitor", "monitor to query"),
-		GLFWgammaramp_p.IN("ramp", "Where to store the gamma ramp")
+		GLFWmonitor.IN("monitor", "the monitor to query")
 	)
 
 	void.func(
 		"SetGammaRamp",
-		"This function sets the current gamma ramp for the specified monitor.",
+		"""
+		Sets the current gamma ramp for the specified monitor.
 
-		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
-		const _ GLFWgammaramp_p.IN("ramp", "gamma ramp to use")
+		Note: Gamma ramp sizes other than 256 are not supported by all hardware.
+		""",
+
+		GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
+		const _ GLFWgammaramp_p.IN("ramp", "the gamma ramp to use")
 	)
 
 	void.func(
 		"DefaultWindowHints",
 		"""
-		This function resets all window hints to their default values.
+		Resets all window hints to their default values.
 		
 		Note: This function may only be called from the main thread.
 		"""
 	)
 
-	void.func(
+	val WindowHint = void.func(
 		"WindowHint",
 		"""
-		This function sets hints for the next call to {@link #glfwCreateWindow}. The
-        hints, once set, retain their values until changed by a call to
-        glfwWindowHint or {@link #glfwDefaultWindowHints}, or until the library is
-        terminated with {@link #glfwTerminate}.
+		Sets hints for the next call to {@link #glfwCreateWindow}. The hints, once set, retain their values until changed by a call to glfwWindowHint or
+		{@link #glfwDefaultWindowHints}, or until the library is terminated with {@link #glfwTerminate}.
         
-        Some window hints are hard constraints. These must match the available
-        capabilities <em>exactly</em> for window creation to succeed. Hints
-        that are not hard constraints are matched as closely as possible, but the
-        resulting window may differ from what these hints requested. To
-        find out the actual parameters of the created window, use the
-        {@link #glfwGetWindowParam} function.
+        Some window hints are hard constraints. These must match the available capabilities <em>exactly</em> for window creation to succeed. Hints that are not
+        hard constraints are matched as closely as possible, but the resulting window may differ from what these hints requested. To find out the actual
+        parameters of the created window, use the {@link #glfwGetWindowAttrib} function.
         
         Hints that do not apply to a given type of window are ignored.
 
         Window hints:
         
-        The {@link #GLFW_RESIZABLE} hint specifies whether the window will be resizable by
-        the user. The window will still be resizable using the
-        {@link #glfwSetWindowSize} function.  This hint is ignored for fullscreen windows.
+        The {@link #GLFW_RESIZABLE} hint specifies whether the window will be resizable by the user. The window will still be resizable using the
+        {@link #glfwSetWindowSize} function. This hint is ignored for fullscreen windows.
         
-        The {@link #GLFW_VISIBLE} hint specifies whether the window will be initially
-        visible. This hint is ignored for fullscreen windows.
+        The {@link #GLFW_VISIBLE} hint specifies whether the window will be initially visible. This hint is ignored for fullscreen windows.
         
         Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("target", "The window hint to set"),
 		int.IN("hint", "new value of the window hint")
-	)
+	).javaDocLink
 
 	Code(
 		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
@@ -601,22 +597,25 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	) _ GLFWwindow.func(
 		"CreateWindow",
 		"""
-		This function creates a window. Most of the options controlling how the window should be created are specified through {@link #glfwWindowHint}.
+		Creates a window. Most of the options controlling how the window should be created are specified through $WindowHint.
 
         Note that the actual properties of the window may differ from what you requested, as not all parameters and hints are hard constraints.
 
+        To create a full screen window, you need to specify the monitor to use. If no monitor is specified, windowed mode will be used. Unless you have a way
+        for the user to choose a specific monitor, it is recommended that you pick the primary monitor.
+
         To create the window at a specific position, make it initially invisible using the {@link #GLFW_VISIBLE} window hint, set its position and then show it.
 
-        If a fullscreen window is active, the screensaver is prohibited from starting.
+        If a full screen window is active, the screensaver is prohibited from starting.
 
-        This function may only be called from the main thread.
+        Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("width", "desired width, in pixels, of the window"),
 		int.IN("height", "desired height, in pixels, of the window"),
 		const _ charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
-		nullable _ GLFWmonitor.IN("monitor", "monitor to use for fullscreen mode, or null to use windowed mode"),
-		nullable _ GLFWwindow.IN("share", " window whose context to share resources with, or null to not share resources")
+		nullable _ GLFWmonitor.IN("monitor", "monitor to use for fullscreen mode, or $NULL to use windowed mode"),
+		nullable _ GLFWwindow.IN("share", " window whose context to share resources with, or $NULL to not share resources")
 	)
 
 	val DestroyWindow = (Code(
@@ -624,7 +623,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	) _ (void.func(
 		"DestroyWindow",
 		"""
-		This function destroys the specified window. On calling this function, no further callbacks will be called for that window.
+		Destroys the specified window. On calling this function, no further callbacks will be called for that window.
 
 		Notes:
 		${ul(
@@ -638,7 +637,11 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	int.func(
 		"WindowShouldClose",
-		"This function returns the value of the close flag of the specified window.",
+		"""
+		Returns the value of the close flag of the specified window.
+
+		Note: This function may be called from secondary threads.
+		""",
 
 		GLFWwindow.IN("window", "window to query")
 	)
@@ -646,9 +649,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetWindowShouldClose",
 		"""
-		This function sets the value of the close flag of the specified window.
-        This can be used to override the user's attempt to close the window, or
-        to signal that it should be closed.
+		Sets the value of the close flag of the specified window. This can be used to override the user's attempt to close the window, or to signal that it
+		should be closed.
+
+        Note: This function may be called from secondary threads.
 		""",
 
 		GLFWwindow.IN("window", "window whose flag to change"),
@@ -657,10 +661,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetWindowTitle",
-		"""
-		This function sets the window title, encoded as UTF-8, of the specified
-        window.
-		""",
+		"Sets the window title, encoded as UTF-8, of the specified window.",
 
 		GLFWwindow.IN("window", "window whose title to change"),
 		const _ charUTF8_p.IN("title", "UTF-8 encoded window title")
@@ -668,23 +669,21 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"GetWindowPos",
-		"""
-		This function retrieves the position, in screen coordinates, of the
-        upper-left corner of the client area of the specified window.
-		""",
+		"Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.",
 
 		GLFWwindow.IN("window", "window to query"),
-		Check(1) _ int_p.OUT("xpos", "x-coordinate of the upper-left corner of the client area"),
-		Check(1) _ int_p.OUT("ypos", "y-coordinate of the upper-left corner of the client area")
+		mods(nullable, Check(1)) _ int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL")
 	)
 
 	void.func(
 		"SetWindowPos",
 		"""
-		This function sets the position, in screen coordinates, of the upper-left
-        corner of the client area of the window.
+		Sets the position, in screen coordinates, of the upper-left corner of the client area of the window.
 
-        If you wish to set an initial window position you should create a hidden window (using {@link #glfwWindowHint} and {@link #GLFW_VISIBLE}, set its
+		If the specified window is a full screen window, this function does nothing.
+
+        If you wish to set an initial window position you should create a hidden window (using $WindowHint and {@link #GLFW_VISIBLE}, set its
         position and then show it.
 
         Notes:
@@ -695,8 +694,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"""
 		    <strong>X11</strong>: Some window managers ignore the set position of hidden (i.e. unmapped) windows, instead placing them where it thinks is
 		    appropriate once they are shown.
-			""",
-			"<strong>Mac OS X</strong>: The screen coordinate system is inverted."
+			"""
 		)}
 		""",
 
@@ -707,21 +705,17 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"GetWindowSize",
-		"""
-		This function retrieves the size, in pixels, of the client area of the
-        specified window.
-		""",
+		"Retrieves the size, in screen coordinates, of the client area of the specified window.",
 
 		GLFWwindow.IN("window", "window whose size to retrieve"),
-		Check(1) _ int_p.OUT("width", "width of the client area"),
-		Check(1) _ int_p.OUT("height", "height of the client area")
+		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL")
 	)
 
 	void.func(
 		"SetWindowSize",
 		"""
-		This function sets the size, in pixels, of the client area of the specified
-        window.
+		Sets the size, in pixels, of the client area of the specified window.
 
 		Notes:
         ${ul(
@@ -737,12 +731,19 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	void.func(
+		"GetFramebufferSize",
+	    "Retrieves the size, in pixels, of the framebuffer of the specified window.",
+
+	    GLFWwindow.IN("window", "the window whose framebuffer to query"),
+	    mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
+	    mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL")
+	)
+
+	void.func(
 		"IconifyWindow",
 		"""
-		This function iconifies/minimizes the specified window, if it was previously
-        restored.  If it is a fullscreen window, the original monitor resolution is
-        restored until the window is restored.  If the window is already iconified,
-        this function does nothing.
+		Iconifies/minimizes the specified window, if it was previously restored. If it is a fullscreen window, the original monitor resolution is restored
+		until the window is restored. If the window is already iconified, this function does nothing.
 
         Note: This function may only be called from the main thread.
 		""",
@@ -753,9 +754,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"RestoreWindow",
 		"""
-		This function restores the specified window, if it was previously
-        iconified/minimized.  If the window is already restored, this function does
-        nothing.
+		Restores the specified window, if it was previously iconified/minimized. If the window is already restored, this function does nothing.
 
         Note: This function may only be called from the main thread.
 		""",
@@ -766,9 +765,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"ShowWindow",
 		"""
-        This function makes the specified window visible, if it was previously
-        hidden.  If the window is already visible or is in fullscreen mode, this
-        function does nothing.
+        Makes the specified window visible, if it was previously hidden. If the window is already visible or is in fullscreen mode, this function does nothing.
 
         Note: This function may only be called from the main thread.
 		""",
@@ -779,9 +776,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"HideWindow",
 		"""
-        This function hides the specified window, if it was previously visible.  If
-        the window is already hidden or is in fullscreen mode, this function does
-        nothing.
+        Hides the specified window, if it was previously visible. If the window is already hidden or is in fullscreen mode, this function does nothing.
 
         Note: This function may only be called from the main thread.
 		""",
@@ -791,37 +786,31 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	GLFWmonitor.func(
 		"GetWindowMonitor",
-		"""
-		This function returns the handle of the monitor that the specified window is
-        in fullscreen on.
-		""",
+		"Returns the handle of the monitor that the specified window is in fullscreen on.",
 
 		GLFWwindow.IN("window", "window to query")
 	)
 
 	int.func(
-		"GetWindowParam",
+		"GetWindowAttrib",
 		"""
-		This function returns a property of the specified window.
+		Returns an attribute of the specified window.
         ${ul(
-			"The {@link #GLFW_FOCUSED} parameter indicates whether the window is focused.",
-			"The {@link #GLFW_ICONIFIED} parameter indicates whether the window is iconified.",
-			"The {@link #GLFW_VISIBLE} parameter indicates whether the window is visible.",
-			"The {@link #GLFW_RESIZABLE} parameter indicates whether the window is resizable by the user."
+			"The {@link #GLFW_FOCUSED} attribute indicates whether the window is focused.",
+			"The {@link #GLFW_ICONIFIED} attribute indicates whether the window is iconified.",
+			"The {@link #GLFW_VISIBLE} attribute indicates whether the window is visible.",
+			"The {@link #GLFW_RESIZABLE} attribute indicates whether the window is resizable by the user.",
+			"The {@link #GLFW_DECORATED} attribute indicates whether the window is decorated."
 		)}
 		""",
 
 		GLFWwindow.IN("window", "window to query"),
-		int.IN("param", " parameter whose value to return")
+		int.IN("attrib", "parameter whose value to return")
 	)
 
 	void.func(
 		"SetWindowUserPointer",
-		"""
-		This function sets the user-defined pointer of the specified window.  The
-        current value is retained until the window is destroyed.  The initial value
-        is null.
-		""",
+		"Sets the user-defined pointer of the specified window. The current value is retained until the window is destroyed. The initial value is $NULL.",
 
 		GLFWwindow.IN("window", "window whose pointer to set"),
 		nullable _ voidptr.IN("pointer", "new value")
@@ -829,10 +818,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	voidptr.func(
 		"GetWindowUserPointer",
-		"""
-		This function returns the current value of the user-defined pointer of the
-        specified window.  The initial value is null.
-		""",
+		"Returns the current value of the user-defined pointer of the specified window. The initial value is $NULL.",
 
 		GLFWwindow.IN("window", "window whose pointer to return")
 	)
@@ -842,7 +828,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWwindowsizefun.func(
@@ -850,24 +836,24 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWwindowclosefun.func(
 		"SetWindowCloseCallback",
 		"""
-		Sets the close callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the close callback of the specified window, which is called when the user attempts to close the window, for example by clicking the close widget in
+		the title bar. See {@link WindowCallback#set(long, WindowCallback, int)}.
 
-		This callback is called when the user attempts to close the window, i.e. for example by clicking the window's close widget.  It is called immediately
-		after the window's close flag has been set.
+		The close flag is set before this callback is called, but you can modify it at any time with {@link #glfwSetWindowShouldClose}.
 
-        Calling $DestroyWindow does not cause this callback to be called.
+        The close callback is not triggered by $DestroyWindow.
 
         <b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowclosefun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowclosefun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWwindowrefreshfun.func(
@@ -883,7 +869,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowrefreshfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowrefreshfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWwindowfocusfun.func(
@@ -895,7 +881,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowfocusfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowfocusfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWwindowiconifyfun.func(
@@ -907,26 +893,58 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWwindowiconifyfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWwindowiconifyfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
-	Code(
+	GLFWframebuffersizefun.func(
+		"SetFramebufferSizeCallback",
+		"""
+		Sets the framebuffer resize callback of the specified window, which is called when the framebuffer of the specified window is resized.
+
+		See {@link WindowCallback#set(long, WindowCallback, int)}
+		""",
+
+		GLFWwindow.IN("window", "the window whose callback to set"),
+		nullable _ GLFWframebuffersizefun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
+	)
+
+	val PollEvents = (Code(
 		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.pollEvents(); return; }"
 	) _ void.func(
 		"PollEvents",
 		"""
-		This function processes only those events that have already been recevied
-        and then returns immediately.
+		Processes only those events that have already been received and then returns immediately. Processing events will cause the window and input callbacks
+		associated with those events to be called.
+
+		Notes:
+		${ul(
+			"This function is not required for joystick input to work.",
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback.",
+			"On some platforms, certain callbacks may be called outside of a call to one of the event processing functions."
+		)}
 		"""
-	)
+	)).javaDocLink
 
 	Code(
 		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.waitEvents(); return; }"
 	) _ void.func(
 		"WaitEvents",
 		"""
-		This function blocks until at least one event has been recevied and then
-        processes all received events before returning.
+		Puts the calling thread to sleep until at least one event has been received. Once one or more events have been received, it behaves as if $PollEvents
+		was called, i.e. the events are processed and the function then returns immediately. Processing events will cause the window and input callbacks
+		associated with those events to be called.
+
+		Since not all events are associated with callbacks, this function may return without a callback having been called even if you are monitoring all
+		callbacks.
+
+		Notes:
+		${ul(
+			"This function is not required for joystick input to work.",
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback.",
+			"On some platforms, certain callbacks may be called outside of a call to one of the event processing functions."
+		)}
 		"""
 	)
 
@@ -935,7 +953,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Returns the value of an input option for the specified window",
 
 		GLFWwindow.IN("window", "window to query"),
-		int.IN("mode", "One of {@link #GLFW_CURSOR_MODE}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}")
+		int.IN("mode", "One of {@link #GLFW_CURSOR}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}")
 	)
 
 	void.func(
@@ -943,46 +961,41 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets an input option for the specified window
 		
-		If mode is {@link #GLFW_CURSOR_MODE}, the value must be one of the supported input
-        modes:
+		If mode is {@link #GLFW_CURSOR}, the value must be one of the supported input modes:
         ${ul(
 			"{@link #GLFW_CURSOR_NORMAL} makes the cursor visible and behaving normally.",
 			"{@link #GLFW_CURSOR_HIDDEN} makes the cursor invisible when it is over the client area of the window.",
-			"{@link #GLFW_CURSOR_CAPTURED} makes the cursor invisible and unable to leave the window but unconstrained in terms of position."
+			"{@link #GLFW_CURSOR_DISABLED} disables the cursor and removes any limitations on cursor movement."
 		)}
 
-        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either {@link GL11#GL_TRUE} to
-        enable sticky keys, or {@link GL11#GL_FALSE} to disable it.  If sticky keys are
-        enabled, a key press will ensure that {@link #glfwGetKey} returns
-        {@link #GLFW_PRESS} the next time it is called even if the key had been released
-        before the call.
+        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either {@link GL11#GL_TRUE} to enable sticky keys, or {@link GL11#GL_FALSE} to disable it. If
+        sticky keys are enabled, a key press will ensure that {@link #glfwGetKey} returns {@link #GLFW_PRESS} the next time it is called even if the key had
+        been released before the call.
          
-        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either {@link GL11#GL_TRUE}
-        to enable sticky mouse buttons, or {@link GL11#GL_FALSE} to disable it.  If sticky
-        mouse buttons are enabled, a mouse button press will ensure that
-        {@link #glfwGetMouseButton} returns {@link #GLFW_PRESS} the next time it is called even
-        if the mouse button had been released before the call.
+        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either {@link GL11#GL_TRUE} to enable sticky mouse buttons, or {@link GL11#GL_FALSE} to
+        disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that {@link #glfwGetMouseButton} returns {@link #GLFW_PRESS} the next
+        time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
+        been pressed but not when or in which order.
 		""",
 
 		GLFWwindow.IN("window", "window whose input mode to set"),
-		int.IN("mode", "One of {@link #GLFW_CURSOR_MODE}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}"),
+		int.IN("mode", "One of {@link #GLFW_CURSOR}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}"),
 		int.IN("value", "new value of the specified input mode")
 	)
 
 	int.func(
 		"GetKey",
 		"""
-		This function returns the last state reported for the specified key to the
-        specified window. The returned state is one of {@link #GLFW_PRESS} or
-        {@link #GLFW_RELEASE}. The higher-level state {@link #GLFW_REPEAT} is only reported to
-        the key callback.
+		Returns the last state reported for the specified key to the specified window. The returned state is one of {@link #GLFW_PRESS} or
+		{@link #GLFW_RELEASE}. The higher-level state {@link #GLFW_REPEAT} is only reported to the key callback.
         
-        If the {@link #GLFW_STICKY_KEYS} input mode is enabled, this function returns
-        {@link #GLFW_PRESS} the first time you call this function after a key has been
-        pressed, even if the key has already been released.
+        If the {@link #GLFW_STICKY_KEYS} input mode is enabled, this function returns {@link #GLFW_PRESS} the first time you call this function after a key has
+        been pressed, even if the key has already been released.
         
         The key functions deal with physical keys, with tokens named after their use on the standard US keyboard layout. If you want to input text, use the
         Unicode character callback instead.
+
+        Note: {@link #GLFW_KEY_UNKNOWN} is not a valid key for this function.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
@@ -992,8 +1005,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	int.func(
 		"GetMouseButton",
 		"""
-        This function returns the last state reported for the specified mouse button
-        to the specified window.
+        Returns the last state reported for the specified mouse button to the specified window.
         
         If the {@link #GLFW_STICKY_MOUSE_BUTTONS} input mode is enabled, this function
         returns {@link #GLFW_PRESS} the first time you call this function after a mouse
@@ -1007,26 +1019,33 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"GetCursorPos",
 		"""
-		This function returns the last reported position of the cursor to the
-        specified window.
+		Returns the last reported position of the cursor to the specified window.
+
+		If the cursor is disabled (with {@link #GLFW_CURSOR_DISABLED}) then the cursor position is unbounded and limited only by the minimum and maximum values
+		of a <strong>double</strong>.
+
+        The coordinate can be converted to their integer equivalents with the {@link Math#floor} function. Casting directly to an integer type works for
+        positive coordinates, but fails for negative ones.
         """,
 
 		GLFWwindow.IN("window", "desired window"),
-		Check(1) _ double_p.OUT("xpos", "cursor x-coordinate, relative to the left edge of the client area or null"),
-		Check(1) _ double_p.OUT("ypos", "cursor y-coordinate, relative to the to top edge of the client area, or null.")
+		mods(nullable, Check(1)) _ double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
+		mods(nullable, Check(1)) _ double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL.")
 	)
 
 	void.func(
 		"SetCursorPos",
 		"""
-		This function sets the position of the cursor. The specified window must be
-        focused. If the window does not have focus when this function is called, it
-        fails silently.
+		Sets the position of the cursor. The specified window must be focused. If the window does not have focus when this function is called, it fails
+		silently.
+
+		If the cursor is disabled (with {@link #GLFW_CURSOR_DISABLED}) then the cursor position is unbounded and limited only by the minimum and maximum values
+		of a <strong>double</strong>.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
-		double.IN("xpos", "desired x-coordinate, relative to the left edge of the client area, or null"),
-		double.IN("ypos", "desired y-coordinate, relative to the top edge of the client area, or null")
+		double.IN("xpos", "desired x-coordinate, relative to the left edge of the client area"),
+		double.IN("ypos", "desired y-coordinate, relative to the top edge of the client area")
 	)
 
 	GLFWkeyfun.func(
@@ -1036,10 +1055,20 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		The key callback deals with physical keys, with key tokens named after their use on the standard US keyboard layout. If you want to input text, use the
 		Unicode character callback instead.
+
+		When a window loses focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated events by
+		the fact that the synthetic ones are generated after the window has lost focus, i.e. {@link #GLFW_FOCUSED} will be false and the focus callback will
+		have already been called.
+
+		The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
+		a GLFW key token. Such keys have {@code key} set to {@link #GLFW_KEY_UNKNOWN}, their state is not saved and so it cannot be retrieved with
+		{@link #glfwGetKey}.
+
+		Sometimes GLFW needs to generate synthetic key events, in which case the scancode may be zero.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWkeyfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWkeyfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWcharfun.func(
@@ -1051,7 +1080,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcharfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWcharfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWmousebuttonfun.func(
@@ -1059,7 +1088,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWcursorposfun.func(
@@ -1071,7 +1100,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcursorposfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWcursorposfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWcursorenterfun.func(
@@ -1079,7 +1108,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	GLFWscrollfun.func(
@@ -1091,57 +1120,50 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWscrollfun.IN("cbfun", "the new callback or NULL to remove the currently set callback")
+		nullable _ GLFWscrollfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
 
 	int.func(
-		"GetJoystickParam",
-		"This function returns a parameter of the specified joystick.",
+		"JoystickPresent",
+		"Returns whether the specified joystick is present.",
 
-		int.IN("joy", "joystick to query"),
-		int.IN("param", "parameter whose value to return")
+		int.IN("joy", "joystick to query")
 	)
 
-	int.func(
+	(const _ float_p).func(
 		"GetJoystickAxes",
 		"""
-		This function returns the current positions of axes of the specified
-        joystick.
-        """,
+		Returns the values of all axes of the specified joystick.
 
-		int.IN("joy", "joystick to query"),
-		float_p.OUT("axes", "array to hold the values"),
-		AutoSize("axes") _ int.IN("numaxes", "size of the provided array")
-	)
-
-	int.func(
-		"GetJoystickButtons",
-		"""
-		This function returns the current state of buttons of the specified
-        joystick.
+		Note: The returned array is valid only until the next call to glfwGetJoystickAxes for that joystick.
 		""",
 
 		int.IN("joy", "joystick to query"),
-		unsigned_char_p.IN("buttons", "array to hold the values"),
-		AutoSize("buttons") _ int.IN("numbuttons", "size of the provided array")
+		autoSizeResult _ int_p.OUT("count", "where to store the size of the returned array. This is set to zero if an error occurred.")
+	)
+
+	(const _ unsigned_char_p).func(
+		"GetJoystickButtons",
+		"""
+		Returns the state of all buttons of the specified joystick.
+
+		Note: The returned array is valid only until the next call to glfwGetJoystickButtons for that joystick.
+		""",
+
+		int.IN("joy", "joystick to query"),
+		autoSizeResult _ int_p.OUT("count", "where to store the size of the returned array. This is set to zero if an error occurred.")
 	)
 
 	(const _ charUTF8_p).func(
 		"GetJoystickName",
-		"""
-		This function returns the name, encoded as UTF-8, of the specified joystick.
-		""",
+		"Returns the name, encoded as UTF-8, of the specified joystick.",
 
 		int.IN("joy", "joystick to query")
 	)
 
 	void.func(
 		"SetClipboardString",
-		"""
-		This function sets the system clipboard to the specified, UTF-8 encoded
-        string.  The string is copied before returning, so you don't have to retain
-        it afterwards.
-		""",
+		"Sets the system clipboard to the specified, UTF-8 encoded string. The string is copied before returning, so you don't have to retain it afterwards.",
 
 		GLFWwindow.IN("window", "window that will own the clipboard contents"),
 		const _ charUTF8_p.IN("string", "UTF-8 encoded string")
@@ -1149,29 +1171,19 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	(const _ charUTF8_p).func(
 		"GetClipboardString",
-		"""
-		This function returns the contents of the system clipboard, if it contains
-        or is convertible to a UTF-8 encoded string.
-		""",
+		"Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string.",
 
 		GLFWwindow.IN("window", "window that will request the clipboard contents")
 	)
 
 	double.func(
 		"GetTime",
-		"""
-		This function returns the value of the GLFW timer. Unless the timer has
-        been set using glfwSetTime, the timer measures time elapsed since GLFW
-        was initialized.
-		"""
+		"Returns the value of the GLFW timer. Unless the timer has been set using glfwSetTime, the timer measures time elapsed since GLFW was initialized."
 	)
 
 	void.func(
 		"SetTime",
-		"""
-		This function sets the value of the GLFW timer.  It then continues to count
-        up from that value.
-        """,
+		"Sets the value of the GLFW timer. It then continues to count up from that value.",
 
 		double.IN("time", "new value, in seconds")
 	)
@@ -1181,62 +1193,63 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	IntConstant.block(
 		"PixelFormat hints.",
 
-		"RED_BITS" _ 0x00021000,
-		"GREEN_BITS" _ 0x00021001,
-		"BLUE_BITS" _ 0x00021002,
-		"ALPHA_BITS" _ 0x00021003,
-		"DEPTH_BITS" _ 0x00021004,
-		"STENCIL_BITS" _ 0x00021005,
-		"ACCUM_RED_BITS" _ 0x00021006,
-		"ACCUM_GREEN_BITS" _ 0x00021007,
-		"ACCUM_BLUE_BITS" _ 0x00021008,
-		"ACCUM_ALPHA_BITS" _ 0x00021009,
-		"AUX_BUFFERS" _ 0x0002100A,
-		"STEREO" _ 0x0002100B,
-		"SAMPLES" _ 0x0002100C,
-		"SRGB_CAPABLE" _ 0x0002100D
+		"RED_BITS" _ 0x00021001,
+		"GREEN_BITS" _ 0x00021002,
+		"BLUE_BITS" _ 0x00021003,
+		"ALPHA_BITS" _ 0x00021004,
+		"DEPTH_BITS" _ 0x00021005,
+		"STENCIL_BITS" _ 0x00021006,
+		"ACCUM_RED_BITS" _ 0x00021007,
+		"ACCUM_GREEN_BITS" _ 0x00021008,
+		"ACCUM_BLUE_BITS" _ 0x00021009,
+		"ACCUM_ALPHA_BITS" _ 0x0002100A,
+		"AUX_BUFFERS" _ 0x0002100B,
+		"STEREO" _ 0x0002100C,
+		"SAMPLES" _ 0x0002100D,
+		"SRGB_CAPABLE" _ 0x0002100E,
+		"REFRESH_RATE" _ 0x0002100F
 	)
 
 	IntConstant.block(
 		"Client API hints.",
 
-		"CLIENT_API" _ 0x00022000,
-		"CONTEXT_VERSION_MAJOR" _ 0x00022001,
-		"CONTEXT_VERSION_MINOR" _ 0x00022002,
-		"CONTEXT_REVISION" _ 0x00020004,
-		"CONTEXT_ROBUSTNESS" _ 0x00022003,
-		"OPENGL_FORWARD_COMPAT" _ 0x00022004,
-		"OPENGL_DEBUG_CONTEXT" _ 0x00022005,
-		"OPENGL_PROFILE" _ 0x00022006
+		"CLIENT_API" _ 0x00022001,
+		"CONTEXT_VERSION_MAJOR" _ 0x00022002,
+		"CONTEXT_VERSION_MINOR" _ 0x00022003,
+		"CONTEXT_REVISION" _ 0x00021004,
+		"CONTEXT_ROBUSTNESS" _ 0x00022005,
+		"OPENGL_FORWARD_COMPAT" _ 0x00022006,
+		"OPENGL_DEBUG_CONTEXT" _ 0x00022007,
+		"OPENGL_PROFILE" _ 0x00022008
 	)
 
 	IntConstant.block(
 		"Values for the {@link #GLFW_CLIENT_API} hint.",
 
-		"OPENGL_API" _ 0x00000001,
-		"OPENGL_ES_API" _ 0x00000002
+		"OPENGL_API" _ 0x00030001,
+		"OPENGL_ES_API" _ 0x00030002
 	)
 
 	IntConstant.block(
 		"Values for the {@link #GLFW_CONTEXT_ROBUSTNESS} hint.",
 
-		"NO_ROBUSTNESS" _ 0x00000000,
-		"NO_RESET_NOTIFICATION" _ 0x00000001,
-		"LOSE_CONTEXT_ON_RESET" _ 0x00000002
+		"NO_ROBUSTNESS" _ 0,
+		"NO_RESET_NOTIFICATION" _ 0x00031001,
+		"LOSE_CONTEXT_ON_RESET" _ 0x00031002
 	)
 
 	IntConstant.block(
 		"Values for the {@link #GLFW_OPENGL_PROFILE} hint.",
 
-		"OPENGL_NO_PROFILE" _ 0x00000000,
-		"OPENGL_CORE_PROFILE" _ 0x00000001,
-		"OPENGL_COMPAT_PROFILE" _ 0x00000002
+		"OPENGL_ANY_PROFILE" _ 0,
+		"OPENGL_CORE_PROFILE" _ 0x00032001,
+		"OPENGL_COMPAT_PROFILE" _ 0x00032002
 	)
 
 	void.func(
 		"MakeContextCurrent",
 		"""
-		Makes the context of the specified window current on the calling thread.  A context can only be made current on a single thread at a time and each
+		Makes the context of the specified window current on the calling thread. A context can only be made current on a single thread at a time and each
 		thread can have only a single current context at a time.
 		""",
 
@@ -1251,7 +1264,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	val glfwSwapBuffers = void.func(
 		"SwapBuffers",
 		"""
-		Swaps the front and back buffers of the specified window.  If the swap interval is greater than zero, the GPU driver waits the specified number of
+		Swaps the front and back buffers of the specified window. If the swap interval is greater than zero, the GPU driver waits the specified number of
 		screen updates before swapping the buffers.
 		""",
 
@@ -1264,13 +1277,13 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the swap interval for the current context, i.e. the number of screen updates to wait before swapping the buffers of a window and returning from
 		$glfwSwapBuffers. This is sometimes called 'vertical synchronization', 'vertical retrace synchronization' or 'vsync'.
 
-		This function may be called from secondary threads.
-
 		Contexts that support either of the {@code WGL_EXT_swap_control_tear} and {@code GLX_EXT_swap_control_tear} extensions also accept negative swap
 		intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions using
 		{@link #glfwExtensionSupported}. For more information about swap tearing, see the extension specifications.
 
 		Some GPU drivers do not honor the requested swap interval, either because of user settings that override the request or due to bugs in the driver.
+
+		Note: This function may be called from secondary threads.
 		""",
 
 		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by $glfwSwapBuffers")
@@ -1282,7 +1295,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Returns whether the specified OpenGL or context creation API extension is supported by the current context. For example, on Windows both the OpenGL and
 		WGL extension strings are checked.
 
-		This function may be called from secondary threads.
+		Note: This function may be called from secondary threads.
 
 		As this functions searches one or more extension strings on each call, it is recommended that you cache its results if it's going to be used frequently.
 		The extension strings will not change during the lifetime of a context, so there is no danger in doing this.

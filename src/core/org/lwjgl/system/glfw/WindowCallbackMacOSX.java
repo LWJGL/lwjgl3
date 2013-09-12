@@ -4,11 +4,12 @@
  */
 package org.lwjgl.system.glfw;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.util.concurrent.TimeUnit;
 
 import com.lmax.disruptor.*;
+
+import static java.lang.Double.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Wraps a WindowCallback to allow for asynchronous event notification. Events are queued from the NSApplication main thread and fired in the client thread that
@@ -26,12 +27,12 @@ final class WindowCallbackMacOSX extends WindowCallback {
 	private static final int BUFFER_SIZE = 32;
 
 	/** The event ring-buffer. */
-	private static final RingBuffer<Event> ringBuffer = RingBuffer.createSingleProducer(
+	private static final RingBuffer<AsyncEvent> ringBuffer = RingBuffer.createSingleProducer(
 		// Used to fill the ring-buffer with pre-allocated events.
-		new EventFactory<Event>() {
+		new EventFactory<AsyncEvent>() {
 			@Override
-			public Event newInstance() {
-				return new Event();
+			public AsyncEvent newInstance() {
+				return new AsyncEvent();
 			}
 		},
 		BUFFER_SIZE,
@@ -60,87 +61,106 @@ final class WindowCallbackMacOSX extends WindowCallback {
 	 * Publishes an event to the ring-buffer. This method is called from the main thread.
 	 *
 	 * @param target the target WindowCallback
-	 * @param type   the event type
+	 * @param event  the event type
 	 * @param window the window handle
 	 * @param x      the first parameter
 	 * @param y      the second parameter
 	 */
-	private static void offer(WindowCallback target, int type, long window, double x, double y) {
+	private static void offer(WindowCallback target, Event event, long window, long x, long y) {
 		long next = ringBuffer.next();
 
 		try {
-			Event event = ringBuffer.get(next);
+			AsyncEvent asyncEvent = ringBuffer.get(next);
 
-			event.target = target;
-			event.type = type;
-			event.window = window;
-			event.x = x;
-			event.y = y;
+			asyncEvent.target = target;
+			asyncEvent.event = event;
+			asyncEvent.window = window;
+			asyncEvent.a = x;
+			asyncEvent.b = y;
 		} finally {
 			ringBuffer.publish(next);
 		}
 	}
 
-	private static final double NULL = 0.0;
+	private static void offer(WindowCallback target, Event event, long window) {
+		offer(target, event, window, NULL, NULL);
+	}
+
+	private static void offer(WindowCallback target, Event event, long window, long x) {
+		offer(target, event, window, x, NULL);
+	}
 
 	@Override
 	public void windowPos(long window, int xpos, int ypos) {
-		offer(target, WINDOW_POS, window, xpos, ypos);
+		offer(target, Event.WINDOW_POS, window, xpos, ypos);
 	}
 
 	@Override
 	public void windowSize(long window, int width, int height) {
-		offer(target, WINDOW_SIZE, window, width, height);
+		offer(target, Event.WINDOW_SIZE, window, width, height);
 	}
 
 	@Override
 	public void windowClose(long window) {
-		offer(target, WINDOW_CLOSE, window, NULL, NULL);
+		offer(target, Event.WINDOW_CLOSE, window);
 	}
 
 	@Override
 	public void windowRefresh(long window) {
-		offer(target, WINDOW_REFRESH, window, NULL, NULL);
+		offer(target, Event.WINDOW_REFRESH, window);
 	}
 
 	@Override
 	public void windowFocus(long window, int focused) {
-		offer(target, WINDOW_FOCUS, window, focused, NULL);
+		offer(target, Event.WINDOW_FOCUS, window, focused);
 	}
 
 	@Override
 	public void windowIconify(long window, int iconified) {
-		offer(target, WINDOW_ICONIFY, window, iconified, NULL);
+		offer(target, Event.WINDOW_ICONIFY, window, iconified);
 	}
 
 	@Override
-	public void key(long window, int key, int action) {
-		offer(target, KEY, window, key, action);
+	public void framebufferSize(long window, int width, int height) {
+		offer(target, Event.FRAMEBUFFER_SIZE, window, width, height);
+	}
+
+	@Override
+	public void key(long window, int key, int scancode, int action, int mods) {
+		long x = ((long)key << 32) | scancode;
+		long y = ((long)action << 32) | mods;
+		offer(target, Event.KEY, window, x, y);
 	}
 
 	@Override
 	public void character(long window, int character) {
-		offer(target, CHARACTER, window, character, NULL);
+		offer(target, Event.CHARACTER, window, character);
 	}
 
 	@Override
-	public void mouseButton(long window, int button, int action) {
-		offer(target, MOUSE_BUTTON, window, button, action);
+	public void mouseButton(long window, int button, int action, int mods) {
+		long x = button;
+		long y = ((long)action << 32) | mods;
+		offer(target, Event.MOUSE_BUTTON, window, x, y);
 	}
 
 	@Override
 	public void cursorPos(long window, double xpos, double ypos) {
-		offer(target, CURSOR_POS, window, xpos, ypos);
+		long x = doubleToRawLongBits(xpos);
+		long y = doubleToRawLongBits(ypos);
+		offer(target, Event.CURSOR_POS, window, x, y);
 	}
 
 	@Override
 	public void cursorEnter(long window, int entered) {
-		offer(target, CURSOR_ENTER, window, entered, NULL);
+		offer(target, Event.CURSOR_ENTER, window, entered);
 	}
 
 	@Override
-	public void scroll(long window, double xpos, double ypos) {
-		offer(target, SCROLL, window, xpos, ypos);
+	public void scroll(long window, double xoffset, double yoffset) {
+		long x = doubleToRawLongBits(xoffset);
+		long y = doubleToRawLongBits(yoffset);
+		offer(target, Event.SCROLL, window, x, y);
 	}
 
 	static void pollEvents() {
@@ -176,24 +196,28 @@ final class WindowCallbackMacOSX extends WindowCallback {
 	}
 
 	/** Mutable event for use in the ring-buffer. Integer parameters are encoded as doubles. */
-	private static class Event {
+	private static class AsyncEvent {
 
 		WindowCallback target;
 
-		int type;
+		Event event;
 
 		long window;
 
-		double x;
-		double y;
+		long a;
+		long b;
+
+		static int hi(long v) { return (int)(v >>> 32); }
+
+		static int lo(long v) { return (int)v; }
 
 		void fire() {
-			switch ( type ) {
+			switch ( event ) {
 				case WINDOW_POS:
-					target.windowPos(window, (int)x, (int)y);
+					target.windowPos(window, (int)a, (int)b);
 					break;
 				case WINDOW_SIZE:
-					target.windowSize(window, (int)x, (int)y);
+					target.windowSize(window, (int)a, (int)b);
 					break;
 				case WINDOW_CLOSE:
 					target.windowClose(window);
@@ -202,33 +226,35 @@ final class WindowCallbackMacOSX extends WindowCallback {
 					target.windowRefresh(window);
 					break;
 				case WINDOW_FOCUS:
-					target.windowFocus(window, (int)x);
+					target.windowFocus(window, (int)a);
 					break;
 				case WINDOW_ICONIFY:
-					target.windowIconify(window, (int)x);
+					target.windowIconify(window, (int)a);
+					break;
+				case FRAMEBUFFER_SIZE:
+					target.framebufferSize(window, (int)a, (int)b);
 					break;
 				case KEY:
-					target.key(window, (int)x, (int)y);
+					target.key(window, hi(a), lo(a), hi(b), lo(b));
 					break;
 				case CHARACTER:
-					target.character(window, (int)x);
+					target.character(window, (int)a);
 					break;
 				case MOUSE_BUTTON:
-					target.mouseButton(window, (int)x, (int)y);
+					target.mouseButton(window, (int)a, hi(b), lo(b));
 					break;
 				case CURSOR_POS:
-					target.cursorPos(window, (int)x, (int)y);
+					target.cursorPos(window, longBitsToDouble(a), longBitsToDouble(b));
 					break;
 				case CURSOR_ENTER:
-					target.cursorEnter(window, (int)x);
+					target.cursorEnter(window, (int)a);
 					break;
 				case SCROLL:
-					target.scroll(window, (int)x, (int)y);
+					target.scroll(window, longBitsToDouble(a), longBitsToDouble(b));
 					break;
 				default:
-					throw new IllegalStateException("Invalid event type: " + LWJGLUtil.toHexString(type));
+					throw new IllegalStateException("Unsupported event type: " + event.name());
 			}
-
 		}
 	}
 

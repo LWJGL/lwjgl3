@@ -8,37 +8,6 @@ import org.lwjgl.generator.*
 
 val GLFW_PACKAGE = "org.lwjgl.system.glfw"
 
-// void
-
-val void = NativeType("void", TypeMapping.VOID)
-val void_p = PointerType("void", PointerMapping.DATA)
-val void_pp = PointerType(void_p)
-
-val voidptr = PointerType("void") // Naked pointer
-
-// numeric
-
-val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
-val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
-val int = IntegerType("int", PrimitiveMapping.INT)
-val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
-val double = PrimitiveType("double", PrimitiveMapping.DOUBLE)
-
-val unsigned_char_p = PointerType(unsigned_char)
-val int_p = PointerType(int)
-val float_p = PointerType(float)
-val double_p = PointerType(double)
-
-// strings
-
-val charASCII_p = CharSequenceType(name = "char", charMapping = CharMapping.ASCII)
-val charASCII_pp = PointerType(charASCII_p)
-
-val charUTF8_p = CharSequenceType(name = "char", charMapping = CharMapping.UTF8)
-val charUTF8_pp = PointerType(charUTF8_p)
-
-// structs
-
 val GLFWmonitor = PointerType("GLFWmonitor")
 val GLFWmonitor_p = PointerType(GLFWmonitor)
 
@@ -53,17 +22,19 @@ val GLFWvidmode = StructType(
 		int.member("redBits")
 		int.member("greenBits")
 		int.member("blueBits")
+		int.member("refreshRate")
 	}
 )
+val GLFWvidmode_p = StructType(GLFWvidmode)
 
-val GLFW_GAMMA_RAMP_SIZE = 256
 val GLFWgammaramp = StructType(
 	struct(GLFW_PACKAGE, "GLFWgammaramp") {
 		javaDoc("Gamma ramp.")
 		nativeImport("glfw3.h")
-		unsigned_short.member("red", size = GLFW_GAMMA_RAMP_SIZE)
-		unsigned_short.member("green", size = GLFW_GAMMA_RAMP_SIZE)
-		unsigned_short.member("blue", size = GLFW_GAMMA_RAMP_SIZE)
+		unsigned_short_p.member("red")
+		unsigned_short_p.member("green")
+		unsigned_short_p.member("blue")
+		unsigned_int.member("size")
 	}
 )
 val GLFWgammaramp_p = StructType(GLFWgammaramp)
@@ -79,6 +50,8 @@ val GLFWwindowclosefun = PointerType(name = "GLFWwindowclosefun", includesPointe
 val GLFWwindowrefreshfun = PointerType(name = "GLFWwindowrefreshfun", includesPointer = true)
 val GLFWwindowfocusfun = PointerType(name = "GLFWwindowfocusfun", includesPointer = true)
 val GLFWwindowiconifyfun = PointerType(name = "GLFWwindowiconifyfun", includesPointer = true)
+
+val GLFWframebuffersizefun = PointerType(name = "GLFWframebuffersizefun", includesPointer = true)
 
 val GLFWkeyfun = PointerType(name = "GLFWkeyfun", includesPointer = true)
 val GLFWcharfun = PointerType(name = "GLFWcharfun", includesPointer = true)

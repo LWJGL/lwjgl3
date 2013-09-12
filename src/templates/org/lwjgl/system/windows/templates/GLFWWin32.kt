@@ -9,9 +9,8 @@ import org.lwjgl.system.glfw.*
 import org.lwjgl.system.windows.*
 
 fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "GLFW") {
-	nativeDefine(
-		"GLFW_EXPOSE_NATIVE_WIN32"
-	)
+	nativeDefine("GLFW_EXPOSE_NATIVE_WIN32")
+	nativeDefine("GLFW_EXPOSE_NATIVE_WGL")
 
 	nativeImport(
 		"glfw3.h",
@@ -25,6 +24,13 @@ fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix 
 		"Returns the ${code("HWND")} of the given GLFW window.",
 
 		GLFWwindow.IN("window", "the GLFW window")
+	)
+
+	HGLRC.func(
+		"GetWGLContext",
+	    "Returns the ${code("HGLRC")} of the given GLFW window.",
+
+	    GLFWwindow.IN("window", "the GLFW window")
 	)
 
 }
