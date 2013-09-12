@@ -13,8 +13,6 @@ val OPENCL_PACKAGE = "org.lwjgl.opencl"
 val cl_void_p = PointerType("cl_void", PointerMapping.DATA)
 val cl_void_pp = PointerType(cl_void_p) // same as above
 
-val voidptr = PointerType("void") // Naked pointer
-
 // numeric
 
 val cl_char = IntegerType("cl_char", PrimitiveMapping.BYTE)

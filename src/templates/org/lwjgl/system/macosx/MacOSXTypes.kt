@@ -8,12 +8,9 @@ import org.lwjgl.generator.*
 
 val MACOSX_PACKAGE = "org.lwjgl.system.macosx"
 
-val voidptr = PointerType("void") // Naked pointer, used for function pointers.
-
-val void = NativeType("void", TypeMapping.VOID)
+val id = PointerType("void") // Opaque object pointer
 
 val Boolean = PrimitiveType("Boolean", PrimitiveMapping.BYTE)
-val char = IntegerType("char", PrimitiveMapping.BYTE)
 
 val UInt8 = IntegerType("UInt8", PrimitiveMapping.BYTE, unsigned = true)
 val SInt8 = IntegerType("SInt8", PrimitiveMapping.BYTE)
@@ -30,8 +27,6 @@ val Float64 = PrimitiveType("Float64", PrimitiveMapping.DOUBLE)
 val UTF32Char = PrimitiveType("UTF32Char", UInt32)
 val UTF16Char = CharType("UTF16Char", CharMapping.UTF16)
 val UTF8Char = CharType("UTF8Char", CharMapping.UTF8)
-
-val char_p = PointerType(char)
 
 val CFTypeID = IntegerType("CFTypeID", PrimitiveMapping.LONG, unsigned = true)
 val CFOptionFlags = IntegerType("CFOptionFlags", PrimitiveMapping.LONG, unsigned = true)

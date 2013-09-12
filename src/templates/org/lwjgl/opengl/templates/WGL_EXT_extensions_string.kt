@@ -14,7 +14,7 @@ fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_E
 
 	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", templateName)} extension.")
 
-	(const _ string).func(
+	(const _ charASCII_p).func(
 		"GetExtensionsStringEXT",
 		"""
 		Returns a list of supported extensions to WGL. Although the contents of the string is implementation specific, the string will be NULL terminated and

@@ -10,8 +10,6 @@ val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
-val voidptr = PointerType("void") // Naked pointer, used for DLL function pointers.
-
 val VOID = NativeType("VOID", TypeMapping.VOID)
 val PVOID = PointerType("PVOID", includesPointer = true) // A pointer to any type
 
@@ -23,9 +21,7 @@ val BOOL_p = PointerType(BOOL)
 
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
 val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
-val short = IntegerType("short", PrimitiveMapping.SHORT)
 val SHORT = IntegerType("SHORT", PrimitiveMapping.SHORT)
-val int = IntegerType("int", PrimitiveMapping.INT)
 val UINT = IntegerType("UINT", PrimitiveMapping.INT, unsigned = true)
 val DWORD = IntegerType("DWORD", PrimitiveMapping.INT)
 val LONG = IntegerType("LONG", PrimitiveMapping.INT)
@@ -38,7 +34,6 @@ val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
 val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
 val SIZE_T = PrimitiveType("SIZE_T", ULONG_PTR)
 
-val int_p = PointerType(int)
 val UINT_p = PointerType(UINT)
 val FLOAT_p = PointerType(FLOAT)
 
