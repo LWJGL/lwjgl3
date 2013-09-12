@@ -11,9 +11,9 @@ import static org.lwjgl.system.APIUtil.*;
 /** An application-defined callback function used with the {@link WinGDI#EnumObjects} function. It is used to process the object data. */
 public abstract class EnumObjectsProc {
 
-	public static final long CALLBACK = setup(apiCallbackMethod(EnumObjectsProc.class, long.class));
+	public static final long CALLBACK = setCallback(apiCallbackMethod(EnumObjectsProc.class, long.class));
 
-	private static native long setup(Method callback);
+	private static native long setCallback(Method callback);
 
 	/**
 	 * The callback method.

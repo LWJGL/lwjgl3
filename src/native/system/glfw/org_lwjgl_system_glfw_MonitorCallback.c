@@ -12,21 +12,11 @@ static void GLFWmonitorfunProc(
 	GLFWmonitor* monitor,
 	int event
 ) {
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallStaticVoidMethod(
 		env, GLFWmonitorfunClass, GLFWmonitorfunInvoke,
 		(jlong)(intptr_t)monitor, (jint)event
 	);
-
-	if ( async )
-		detachCurrentThread();
 }
 
 // setCallback(Ljava/lang/reflect/Method;)J

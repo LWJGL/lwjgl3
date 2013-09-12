@@ -5,22 +5,16 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLEventCallbackMethod;
+static jmethodID CLEventCallbackInvoke;
 
-static void CL_CALLBACK CLEventCallbackFunction(
+static void CL_CALLBACK CLEventCallbackProc(
 	cl_event event,
 	cl_int event_command_exec_status,
 	void *user_data
 ) {
-	JNIEnv *env = getThreadEnv();
-	jboolean async = env == NULL;
-	if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-	}
+	ATTACH_THREAD()
 
-    (*env)->CallVoidMethod(env, (jobject)user_data, CLEventCallbackMethod,
+    (*env)->CallVoidMethod(env, (jobject)user_data, CLEventCallbackInvoke,
         (jlong)(intptr_t)event,
         (jint)event_command_exec_status
     );
@@ -28,14 +22,7 @@ static void CL_CALLBACK CLEventCallbackFunction(
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, (jobject)user_data);
 
-	if ( async )
-        detachCurrentThread();
+	DETACH_THREAD()
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_opencl_CLEventCallback_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	CLEventCallbackMethod = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&CLEventCallbackFunction;
-}
+CALLBACK_SETUP(org_lwjgl_opencl_CLEventCallback, CLEventCallback)

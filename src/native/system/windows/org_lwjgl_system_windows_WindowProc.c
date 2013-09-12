@@ -7,16 +7,16 @@
 
 static jmethodID wndProcInvoke;
 
-static jmethodID wndProcInvokeSync;
-static jmethodID wndProcInvokeAsync;
+static jmethodID wndProcSyncInvoke;
+static jmethodID wndProcAsyncInvoke;
 
-static jclass wndProcInvokeStaticSyncClass;
-static jclass wndProcInvokeStaticAsyncClass;
+static jclass wndProcStaticSyncInvokeClass;
+static jclass wndProcStaticAsyncInvokeClass;
 
-static jmethodID wndProcInvokeStaticSync;
-static jmethodID wndProcInvokeStaticAsync;
+static jmethodID wndProcStaticSyncInvoke;
+static jmethodID wndProcStaticAsyncInvoke;
 
-static inline jobject getCallback(HWND hWnd, UINT msg, LPARAM lParam) {
+inline static jobject getCallback(HWND hWnd, UINT msg, LPARAM lParam) {
 	jobject callback;
 	if ( msg == WM_NCCREATE )
 		SetWindowLongPtr(hWnd, 0, (intptr_t)(callback = (jobject)(((LPCREATESTRUCT)lParam)->lpCreateParams)));
@@ -25,139 +25,89 @@ static inline jobject getCallback(HWND hWnd, UINT msg, LPARAM lParam) {
 	return callback;
 }
 
-static LRESULT CALLBACK wndProc(
-	HWND hWnd,
-	UINT msg,
-	WPARAM wParam,
-	LPARAM lParam
-) {
-	JNIEnv *env = getThreadEnv();
-
-	jobject callback = getCallback(hWnd, msg, lParam);
-	if ( callback == NULL ) // This happens because WM_GETMINMAXINFO is fired before WM_NCCREATE
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	return (*env)->CallIntMethod(
-		env, callback, wndProcInvoke,
-		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
-	);
+#define WND_PROC_SYNC(NAME) \
+static LRESULT CALLBACK NAME##Proc( \
+	HWND hWnd, \
+	UINT msg, \
+	WPARAM wParam, \
+	LPARAM lParam \
+) { \
+	JNIEnv *env = getEnv(); \
+\
+	jobject callback = getCallback(hWnd, msg, lParam); \
+	if ( callback == NULL ) /* This happens because WM_GETMINMAXINFO is fired before WM_NCCREATE */ \
+		return DefWindowProc(hWnd, msg, wParam, lParam); \
+\
+	return (*env)->CallIntMethod( \
+		env, callback, NAME##Invoke, \
+		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam \
+	); \
 }
 
-// Same as above
-static LRESULT CALLBACK wndProcSync(
-	HWND hWnd,
-	UINT msg,
-	WPARAM wParam,
-	LPARAM lParam
-) {
-	JNIEnv *env = getThreadEnv();
-
-	jobject callback = getCallback(hWnd, msg, lParam);
-	if ( callback == NULL ) // This happens because WM_GETMINMAXINFO is fired before WM_NCCREATE
-		return DefWindowProc(hWnd, msg, wParam, lParam);
-
-	return (*env)->CallIntMethod(
-		env, callback, wndProcInvokeSync,
-		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
-	);
-}
+WND_PROC_SYNC(wndProc)
+WND_PROC_SYNC(wndProcSync)
 
 // May be called from a non-JVM thread.
-static LRESULT CALLBACK wndProcAsync(
+static LRESULT CALLBACK wndProcAsyncProc(
 	HWND hWnd,
 	UINT msg,
 	WPARAM wParam,
 	LPARAM lParam
 ) {
-	jobject callback;
-	JNIEnv *env = attachCurrentThread();
-	if ( env == NULL )
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	jobject callback = getCallback(hWnd, msg, lParam);
+	LRESULT __result;
 
-	callback = getCallback(hWnd, msg, lParam);
+	ATTACH_THREAD()
+
    	if ( callback == NULL ) // This happens because WM_GETMINMAXINFO is fired before WM_NCCREATE
-   		return DefWindowProc(hWnd, msg, wParam, lParam);
+   		__result = DefWindowProc(hWnd, msg, wParam, lParam);
+	else
+		__result = (*env)->CallIntMethod(
+			env, callback, wndProcAsyncInvoke,
+			(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
+		);
 
-	return (*env)->CallIntMethod(
-		env, callback, wndProcInvoke,
-		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
-	);
+	DETACH_THREAD()
 
-	detachCurrentThread();
+	return __result;
 }
 
 // Static version, doesn't use extra window memory
-static LRESULT CALLBACK wndProcStaticSync(
+static LRESULT CALLBACK wndProcStaticSyncProc(
 	HWND hWnd,
 	UINT msg,
 	WPARAM wParam,
 	LPARAM lParam
 ) {
-	JNIEnv *env = getThreadEnv();
+	JNIEnv *env = getEnv();
 
 	return (*env)->CallStaticIntMethod(
-		env, wndProcInvokeStaticSyncClass, wndProcInvokeStaticSync,
+		env, wndProcStaticSyncInvokeClass, wndProcStaticSyncInvoke,
 		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
 	);
 }
 
 // Static + Async
-static LRESULT CALLBACK wndProcStaticAsync(
+static LRESULT CALLBACK wndProcStaticAsyncProc(
 	HWND hWnd,
 	UINT msg,
 	WPARAM wParam,
 	LPARAM lParam
 ) {
-	JNIEnv *env = attachCurrentThread();
-	if ( env == NULL )
-		return DefWindowProc(hWnd, msg, wParam, lParam);
+	LRESULT __result;
 
-	return (*env)->CallStaticIntMethod(
-		env, wndProcInvokeStaticAsyncClass, wndProcInvokeStaticAsync,
+	ATTACH_THREAD()
+	__result = (*env)->CallStaticIntMethod(
+		env, wndProcStaticAsyncInvokeClass, wndProcStaticAsyncInvoke,
 		(jlong)(intptr_t)hWnd, (jint)msg, (jlong)wParam, (jlong)lParam
 	);
+	DETACH_THREAD()
 
-	detachCurrentThread();
+	return __result;
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WindowProc_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	wndProcInvoke = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&wndProc;
-}
-
-// setCallbackSync(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WindowProc_setCallbackSync(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	wndProcInvokeSync = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&wndProcSync;
-}
-
-// setCallbackAsync(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WindowProc_setCallbackAsync(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	wndProcInvokeAsync = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&wndProcAsync;
-}
-
-// setCallbackStaticSync(Ljava/lang/Class;Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WindowProc_setCallbackStaticSync(JNIEnv *env, jclass clazz,
-	jclass callbackClass, jobject method
-) {
-	wndProcInvokeStaticSyncClass = callbackClass;
-	wndProcInvokeStaticSync = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&wndProcStaticSync;
-}
-
-// setCallbackStaticAsync(Ljava/lang/Class;Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_windows_WindowProc_setCallbackStaticAsync(JNIEnv *env, jclass clazz,
-	jclass callbackClass, jobject method
-) {
-	wndProcInvokeStaticAsyncClass = callbackClass;
-	wndProcInvokeStaticAsync = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&wndProcStaticAsync;
-}
+CALLBACK_SETUP(org_lwjgl_system_windows_WindowProc, wndProc)
+CALLBACK_SETUP_MULTI(org_lwjgl_system_windows_WindowProc, wndProc, Sync)
+CALLBACK_SETUP_MULTI(org_lwjgl_system_windows_WindowProc, wndProc, Async)
+CALLBACK_SETUP_MULTI(org_lwjgl_system_windows_WindowProc, wndProc, StaticSync)
+CALLBACK_SETUP_MULTI(org_lwjgl_system_windows_WindowProc, wndProc, StaticAsync)

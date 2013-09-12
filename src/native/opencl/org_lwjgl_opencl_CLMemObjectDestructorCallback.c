@@ -5,35 +5,22 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLMemObjectDestructorCallbackMethod;
+static jmethodID CLMemObjectDestructorCallbackInvoke;
 
-static void CL_CALLBACK CLMemObjectDestructorCallbackFunction(
+static void CL_CALLBACK CLMemObjectDestructorCallbackProc(
 	cl_mem memobj,
 	void *user_data
 ) {
-	JNIEnv *env = getThreadEnv();
-	jboolean async = env == NULL;
-	if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-	}
+	ATTACH_THREAD()
 
-    (*env)->CallVoidMethod(env, (jobject)user_data, CLMemObjectDestructorCallbackMethod,
+    (*env)->CallVoidMethod(env, (jobject)user_data, CLMemObjectDestructorCallbackInvoke,
         (jlong)(intptr_t)memobj
     );
 
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, (jobject)user_data);
 
-	if ( async )
-        detachCurrentThread();
+	DETACH_THREAD()
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_opencl_CLMemObjectDestructorCallback_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	CLMemObjectDestructorCallbackMethod = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&CLMemObjectDestructorCallbackFunction;
-}
+CALLBACK_SETUP(org_lwjgl_opencl_CLMemObjectDestructorCallback, CLMemObjectDestructorCallback)

@@ -5,23 +5,17 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLNativeKernelMethod;
+static jmethodID CLNativeKernelInvoke;
 
-static void CL_CALLBACK CLNativeKernelFunction(
+static void CL_CALLBACK CLNativeKernelProc(
 	void *args
 ) {
 	// Grab the native kernel object from the first args slot
 	jobject kernel = (jobject)*(intptr_t *)args;
 
-	JNIEnv *env = getThreadEnv();
-	jboolean async = env == NULL;
-	if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-	}
+	ATTACH_THREAD()
 
-    (*env)->CallVoidMethod(env, kernel, CLNativeKernelMethod,
+    (*env)->CallVoidMethod(env, kernel, CLNativeKernelInvoke,
         // Skip the native kernel object
         (jlong)((intptr_t)args + sizeof(jobject))
     );
@@ -29,14 +23,7 @@ static void CL_CALLBACK CLNativeKernelFunction(
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, kernel);
 
-	if ( async )
-        detachCurrentThread();
+	DETACH_THREAD()
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_opencl_CLNativeKernel_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	CLNativeKernelMethod = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&CLNativeKernelFunction;
-}
+CALLBACK_SETUP(org_lwjgl_opencl_CLNativeKernel, CLNativeKernel)

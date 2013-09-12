@@ -5,18 +5,12 @@
 #include "common_tools.h"
 #include "OpenGL.h"
 
-static jmethodID DEBUGPROCMethod;
+static jmethodID DEBUGPROCInvoke;
 
-static void APIENTRY DEBUGPROCFunction(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam) {
-	JNIEnv *env = getThreadEnv();
-	jboolean async = env == NULL;
-	if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-	}
+static void APIENTRY DEBUGPROCProc(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam) {
+	ENTER_ENV()
 
-    (*env)->CallVoidMethod(env, (jobject)userParam, DEBUGPROCMethod,
+    (*env)->CallVoidMethod(env, (jobject)userParam, DEBUGPROCInvoke,
         (jint)source,
         (jint)type,
         (jint)id,
@@ -25,14 +19,7 @@ static void APIENTRY DEBUGPROCFunction(GLenum source, GLenum type, GLuint id, GL
         (jlong)(intptr_t)message
     );
 
-	if ( async )
-        detachCurrentThread();
+    EXIT_ENV()
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_opengl_DEBUGPROC_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	DEBUGPROCMethod = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&DEBUGPROCFunction;
-}
+CALLBACK_SETUP(org_lwjgl_opengl_DEBUGPROC, DEBUGPROC)

@@ -6,27 +6,17 @@
 #include "glfw3.h"
 
 static jclass GLFWerrorfunClass;
-static jmethodID GLFWerrorfunInvoke;
+static jmethodID GLFWerrorInvoke;
 
-static void GLFWerrorfunProc(
+static void GLFWerror(
 	int error,
 	const char* description
 ) {
-	JNIEnv *env = getThreadEnv();
-    jboolean async = env == NULL;
-    if ( async ) {
-        env = attachCurrentThread();
-        if ( env == NULL )
-            return;
-    }
-
+	JNIEnv* env = getEnv();
 	(*env)->CallStaticVoidMethod(
-		env, GLFWerrorfunClass, GLFWerrorfunInvoke,
+		env, GLFWerrorfunClass, GLFWerrorInvoke,
 		(jint)error, (jlong)(intptr_t)description
 	);
-
-	if ( async )
-		detachCurrentThread();
 }
 
 // setCallback(Ljava/lang/reflect/Method;)J
@@ -34,6 +24,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_glfw_ErrorCallback_setCallback(JNI
 	jobject method
 ) {
 	GLFWerrorfunClass = clazz;
-	GLFWerrorfunInvoke = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&GLFWerrorfunProc;
+	GLFWerrorInvoke = (*env)->FromReflectedMethod(env, method);
+	return (jlong)(intptr_t)&GLFWerror;
 }
