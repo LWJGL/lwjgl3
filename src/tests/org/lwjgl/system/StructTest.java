@@ -62,16 +62,16 @@ public class StructTest {
 				ByteBuffer s = WNDCLASSEX.malloc();
 
 				int style = 1337;
-				long wndProc = (long)Integer.MIN_VALUE - 1;
+				long wndProc = (1L << 32) - 1;
 				int clsExtra = 12345;
 				int wndExtra = 54321;
-				long instance = (long)Integer.MAX_VALUE + 1;
-				long icon = 0x0123456789ABCDEFL;
-				long cursor = 0xFEDCBA9876543210L;
-				long background = 1234567890987654321L;
+				long instance = Integer.MAX_VALUE + 1L;
+				long icon = 0x89ABCDEFL;
+				long cursor = 0x76543210L;
+				long background = 987654321L;
 				String menuName = "menu";
 				String className = "class";
-				long iconSm = 9876543210L;
+				long iconSm = 876543210L;
 
 				WNDCLASSEX.sizeSet(s, WNDCLASSEX.SIZEOF);
 				WNDCLASSEX.styleSet(s, style);

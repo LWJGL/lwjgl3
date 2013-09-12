@@ -106,8 +106,8 @@ public class APIBufferTest {
 			int z = nestedBuffer.intParam();
 			int w = nestedBuffer.intParam();
 
-			assertEquals(z, 8);
-			assertEquals(w, 12);
+			assertEquals(z, POINTER_SIZE);
+			assertEquals(w, POINTER_SIZE + 4);
 
 			nestedBuffer.pop();
 		}
