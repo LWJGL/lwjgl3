@@ -32,23 +32,41 @@ import static org.lwjgl.system.windows.WGL.*;
 
 public final class GL {
 
-	private static final FunctionProvider functionProvider;
+	private static FunctionProvider functionProvider;
+
+	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
 
 	static {
-		String libName;
-		switch ( LWJGLUtil.getPlatform() ) {
-			case WINDOWS:
-				libName = "opengl32.dll";
-				break;
-			case LINUX:
-				libName = "libGL.so";
-				break;
-			case MACOSX:
-				libName = "/System/Library/Frameworks/OpenGL.framework";
-				break;
-			default:
-				throw new IllegalStateException();
+		create();
+	}
+
+	private GL() {}
+
+	public static void create() {
+		// TODO: document this property
+		String libName = System.getProperty("org.lwjgl.opengl.libname", null);
+		if ( libName == null ) {
+			switch ( LWJGLUtil.getPlatform() ) {
+				case WINDOWS:
+					libName = "opengl32.dll";
+					break;
+				case LINUX:
+					libName = "libGL.so";
+					break;
+				case MACOSX:
+					libName = "/System/Library/Frameworks/OpenGL.framework";
+					break;
+				default:
+					throw new IllegalStateException();
+			}
 		}
+
+		create(libName);
+	}
+
+	public static void create(String libName) {
+		if ( functionProvider != null )
+			throw new IllegalStateException("GL has already been created.");
 
 		final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
 
@@ -130,12 +148,15 @@ public final class GL {
 			default:
 				throw new IllegalStateException();
 		}
-
 	}
 
-	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
+	public static void destroy() {
+		if ( functionProvider == null )
+			return;
 
-	private GL() {}
+		functionProvider.destroy();
+		functionProvider = null;
+	}
 
 	public static FunctionProvider getFunctionProvider() {
 		return functionProvider;
@@ -216,6 +237,9 @@ public final class GL {
 				throw new IllegalStateException("The OpenGL version string is malformed: " + version, e);
 			}
 		}
+
+		if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
+			throw new IllegalStateException("OpenGL 1.1 is required.");
 
 		int[][] GL_VERSIONS = {
 			{ 1, 2, 3, 4, 5 },  // OpenGL 1

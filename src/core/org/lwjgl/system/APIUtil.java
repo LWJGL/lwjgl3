@@ -50,7 +50,7 @@ public final class APIUtil {
 	 * Returns a thread-local {@link APIBuffer}, without resetting it. This makes the APIBuffer work like a stack when used in nested API calls. The user is
 	 * responsible for resetting the {@link APIBuffer} to an appropriate state before the nested call returns.
 	 *
-	 * @see APIBuffer#pop(int)
+	 * @see APIBuffer#pop
 	 */
 	public static APIBuffer apiStack() {
 		return API_BUFFERS.get().push();
@@ -63,7 +63,7 @@ public final class APIUtil {
 			case LINUX:
 				return new LinuxLibrary(name);
 			case MACOSX:
-				return new MacOSXLibrary(name);
+				return MacOSXLibrary.create(name);
 			default:
 				throw new IllegalStateException();
 		}

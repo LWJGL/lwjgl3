@@ -89,7 +89,7 @@
 	</condition>
 
 	<target name="compile-native-macosx">
-		<echo message="${sdkroot}"/>
+		<echo message="${sdkroot}" taskname="SDK Root"/>
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -ObjC -isysroot ${sdkroot} -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -DLWJGL_MACOSX"/>
@@ -122,7 +122,7 @@
 		</apply>
 
 		<!-- LINK -->
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line="-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname} -v -L../../libs/macosx/x86_64 -lglfw3"/>
 			<arg value="-framework"/><arg value="AppKit"/>
@@ -135,7 +135,7 @@
 			<!-- Static libraries -->
 			<fileset dir="libs/macosx/${os.arch}" includes="*.a"/>
 		</apply>
-		<!--<apply dir="${dest}" executable="strip" failonerror="true">
+		<!--<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol Strip">
 			<arg line="-S -X"/>
 			<fileset file="${libname}"/>
 		</apply>-->

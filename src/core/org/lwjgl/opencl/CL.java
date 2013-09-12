@@ -5,6 +5,7 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionMap;
@@ -44,22 +45,14 @@ public final class CL {
 
 	public static void create() {
 		// TODO: document this property
-		create(System.getProperty("org.lwjgl.opencl.libname", null));
-	}
-
-	public static void create(String libNameOverride) {
-		if ( functionProvider != null )
-			throw new IllegalStateException("CL has already been created.");
-
-		final String libName;
-
-		if ( libNameOverride == null ) {
+		String libName = System.getProperty("org.lwjgl.opencl.libname", null);
+		if ( libName == null ) {
 			switch ( LWJGLUtil.getPlatform() ) {
 				case WINDOWS:
 					libName = "OpenCL.dll";
 					break;
 				case LINUX:
-					libName = BITS64 ? "libOpenCL64.so" : "libOpenCL.so";
+					libName = "libOpenCL.so";
 					break;
 				case MACOSX:
 					libName = "OpenCL.dylib";
@@ -67,12 +60,31 @@ public final class CL {
 				default:
 					throw new IllegalStateException();
 			}
-		} else
-			libName = libNameOverride;
+		}
+
+		create(libName);
+	}
+
+	public static void create(final String libName) {
+		if ( functionProvider != null )
+			throw new IllegalStateException("CL has already been created.");
 
 		functionProvider = new FunctionProviderLocal() {
 
-			private final DynamicLinkLibrary OPENCL = apiCreateLibrary(libName);
+			private final DynamicLinkLibrary OPENCL;
+
+			{
+				DynamicLinkLibrary dll;
+				try {
+					dll = apiCreateLibrary(libName);
+				} catch (Exception e) {
+					if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
+						dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
+					else
+						throw new RuntimeException(e);
+				}
+				OPENCL = dll;
+			}
 
 			private final long clGetExtensionFunctionAddress;
 			private final long clGetExtensionFunctionAddressForPlatform;
@@ -206,7 +218,7 @@ public final class CL {
 	/** Must be called after addExtensions. */
 	static void addCLVersions(int majorVersion, int minorVersion, Set<String> supportedExtensions) {
 		// Detect OpenGL interop
-		boolean interopGL = supportedExtensions.contains("cl_khr_gl_sharing") || supportedExtensions.contains("cl_apple_gl_sharing");
+		boolean interopGL = supportedExtensions.contains("cl_khr_gl_sharing") || supportedExtensions.contains("cl_APPLE_gl_sharing");
 
 		supportedExtensions.add("OpenCL10");
 		if ( interopGL )

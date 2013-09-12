@@ -37,6 +37,7 @@ public final class ALC {
 				break;
 			case MACOSX:
 				libName = "openal";
+				// TODO: Support .framework too?
 				libNamePlatform = "openal.dylib";
 				break;
 			default:

@@ -34,6 +34,7 @@ public open class NativeType(
 public open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
 // Specialization for integers.
 public open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false): PrimitiveType(name, mapping)
+public open class EnumType(name: String): IntegerType(name, PrimitiveMapping.INT, unsigned = true)
 // Specialization for string characters.
 public class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
 // "typedef"

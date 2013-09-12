@@ -4,7 +4,7 @@ import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.macosx.CGL.*;
 
 public class MacOSXGLContext extends GLContext {
 
@@ -40,7 +40,7 @@ public class MacOSXGLContext extends GLContext {
 	public static MacOSXGLContext createFromCurrent() {
 		ContextCapabilities capabilities = GL.createCapabilities(false);
 
-		return new MacOSXGLContext(capabilities, NULL);
+		return new MacOSXGLContext(capabilities, CGLGetCurrentContext());
 	}
 
 	@Override
