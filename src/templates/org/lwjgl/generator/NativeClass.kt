@@ -79,6 +79,7 @@ public class NativeClass(
 	public val templateName: String = className,
 	public val prefix: String,
 	public val prefixMethod: String,
+	public val prefixConstant: String,
 	public val prefixTemplate: String,
 	public val postfix: String,
 	val functionProvider: FunctionProvider?
@@ -257,12 +258,13 @@ public fun String.nativeClass(
 	nativeSubPath: String = "",
 	prefix: String = "",
 	prefixMethod: String = prefix.toLowerCase(),
+	prefixConstant: String = if ( prefix.isEmpty() ) prefix else "${prefix}_",
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixTemplate, postfix, functionProvider)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, functionProvider)
 	if ( init != null )
 		ext.init()
 

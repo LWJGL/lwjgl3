@@ -69,7 +69,7 @@ public class ConstantBlock<T>(
 
 	public fun noPrefix(): Unit = noPrefix = true
 
-	private fun getConstantName(name: String) = if ( noPrefix || nativeClass.prefix.isEmpty() ) name else "${nativeClass.prefix}_$name"
+	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
 	fun generate(writer: PrintWriter) {
 		writer.generateBlock()
