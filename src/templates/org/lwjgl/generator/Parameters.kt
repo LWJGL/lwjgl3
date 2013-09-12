@@ -207,6 +207,31 @@ public val virtual: ParameterModifier = object : ParameterModifier() {
 	override val isSpecial: Boolean = false
 }
 
+trait AutoSizeFactor {
+	fun expression(): String
+	fun expressionInv(): String
+}
+
+class AutoSizeFactorShift(
+	val left: Boolean,
+    val expression: String
+): AutoSizeFactor {
+	override fun expression(): String = getExpression(left)
+	override fun expressionInv(): String = getExpression(!left)
+
+	private fun getExpression(left: Boolean) = if ( left ) "<< $expression" else ">> $expression"
+}
+
+class AutoSizeFactorScale(
+	val multiply: Boolean,
+	val expression: String
+): AutoSizeFactor {
+	override fun expression(): String = getExpression(multiply)
+	override fun expressionInv(): String = getExpression(!multiply)
+
+	private fun getExpression(multiply: Boolean) = if ( multiply ) "* $expression" else "/ $expression"
+}
+
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 public class AutoSize(override val reference: String, vararg val dependent: String): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoSize> {
@@ -216,12 +241,31 @@ public class AutoSize(override val reference: String, vararg val dependent: Stri
 	override val isSpecial: Boolean = true
 
 	/** If not null, the expression will be appended to the parameter. */
-	var expression: String? = null
+	var factor: AutoSizeFactor? = null
 	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
 	var toBytes: Boolean = false
 
-	public fun expression(expression: String): AutoSize {
-		this.expression = expression
+	public fun shl(value: Int): AutoSize = shl("$value")
+	public fun shl(expression: String): AutoSize {
+		this.factor = AutoSizeFactorShift(true, expression)
+		return this
+	}
+
+	public fun shr(value: Int): AutoSize = shr("$value")
+	public fun shr(expression: String): AutoSize {
+		this.factor = AutoSizeFactorShift(false, expression)
+		return this
+	}
+
+	public fun times(value: Int): AutoSize = times("$value")
+	public fun times(expression: String): AutoSize {
+		this.factor = AutoSizeFactorScale(true, expression)
+		return this
+	}
+
+	public fun div(value: Int): AutoSize = div("$value")
+	public fun div(expression: String): AutoSize {
+		this.factor = AutoSizeFactorScale(false, expression)
 		return this
 	}
 

@@ -1429,7 +1429,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		    CL12#CL_MEM_OBJECT_IMAGE2D_ARRAY
 		    """
 		),
-		AutoSize("image_formats").expression(" / cl_image_format.SIZEOF") _ cl_uint.IN(
+		(AutoSize("image_formats") / "cl_image_format.SIZEOF") _ cl_uint.IN(
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
 		),
@@ -2495,7 +2495,6 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		// Create a global reference to the pfn_notify instance. We pass it to the actual
 		// native call as well as register it with the program object (for later clean-up).
 		javaBeforeNative = "\t\tlong user_data = CLProgramCallbackBuild.register(pfn_notify);",
-		javaAfterNative = "\t\tif ( __result != CL_SUCCESS && user_data != 0L ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ cl_int.func(
 		"BuildProgram",
@@ -3089,8 +3088,7 @@ kernel void image_filter (
 
 	Code(
 		// Create a global reference to the user_func instance.
-		javaBeforeNative = "\t\tlong user_data = user_func.register(args);",
-		javaAfterNative = "\t\tif ( $RESULT != CL_SUCCESS && user_data != 0L ) memGlobalRefDelete(user_data);",
+		javaBeforeNative = "\t\tuser_func.register(args);",
 		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ cl_int.func(
 		"EnqueueNativeKernel",

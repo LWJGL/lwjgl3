@@ -257,7 +257,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", uniformArrayCount),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniformArrayCount),
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
@@ -266,7 +266,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", uniformArrayCount),
+		(AutoSize("value") / 3) _ GLsizei.IN("count", uniformArrayCount),
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
@@ -275,7 +275,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniformArrayCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniformArrayCount),
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
@@ -284,7 +284,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
@@ -294,7 +294,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (3 * 3)") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
@@ -304,7 +304,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 4") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
@@ -314,7 +314,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (2 * 3)") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
@@ -324,7 +324,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
@@ -334,7 +334,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (3 * 2)") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 
@@ -345,7 +345,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (3 * 4)") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 
@@ -356,7 +356,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 
@@ -367,7 +367,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (4 * 3)") _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 

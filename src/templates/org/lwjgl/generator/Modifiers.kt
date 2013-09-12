@@ -34,8 +34,8 @@ abstract class TemplateElement {
 	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>): T = modifiers[modifierObject.key] as T
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
-	fun hasRef(modifier: Class<out ReferenceModifier>, reference: String): Boolean {
-		val mod = modifiers[modifier]
+	fun hasRef(modifierObject: ModifierObject<*>, reference: String): Boolean {
+		val mod = modifiers[modifierObject.key]
 		return mod != null && (mod as ReferenceModifier).reference equals reference
 	}
 

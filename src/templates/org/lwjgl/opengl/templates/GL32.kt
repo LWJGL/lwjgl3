@@ -45,7 +45,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"Renders primitives from array data with a per-element offset.",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
+		(AutoSize("indices") * "GLChecks.typeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
@@ -62,7 +62,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		GLuint.IN("start", "the minimum array index contained in {@code indices}"),
 		GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
+		(AutoSize("indices") * "GLChecks.typeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
@@ -77,7 +77,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
+		(AutoSize("indices") * "GLChecks.typeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",

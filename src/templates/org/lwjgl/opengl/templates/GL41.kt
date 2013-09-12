@@ -476,7 +476,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
@@ -486,7 +486,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
@@ -496,7 +496,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
@@ -516,7 +516,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
@@ -526,7 +526,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
@@ -536,7 +536,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
@@ -556,7 +556,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
@@ -566,7 +566,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
@@ -576,7 +576,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
@@ -596,7 +596,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
@@ -606,7 +606,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
@@ -616,7 +616,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniArrayCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
@@ -626,7 +626,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -637,7 +637,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -648,7 +648,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 4") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -659,7 +659,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -670,7 +670,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -681,7 +681,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 4") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -692,7 +692,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (2 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -703,7 +703,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 2)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -714,7 +714,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -725,7 +725,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -736,7 +736,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 4)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -747,7 +747,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (4 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
@@ -758,7 +758,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (2 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -769,7 +769,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 2)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -780,7 +780,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -791,7 +791,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -802,7 +802,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (3 * 4)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -813,7 +813,7 @@ if (shader) {
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value").expression(" / (4 * 3)") _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
@@ -951,7 +951,7 @@ if (shader) {
 		"Sets multiple viewports.",
 
 		GLuint.IN("first", "the first viewport to set"),
-		AutoSize("v").expression(" << 2") _ GLsizei.IN("count", "the number of viewports to set"),
+		(AutoSize("v") shr 2) _ GLsizei.IN("count", "the number of viewports to set"),
 		const _ GLfloat_p.IN("v", "an array containing the viewport parameters")
 	)
 
@@ -979,7 +979,7 @@ if (shader) {
 		"Defines the scissor box for multiple viewports.",
 
 		GLuint.IN("first", "the index of the first viewport whose scissor box to modify"),
-		AutoSize("v").expression(" << 2") _ GLsizei.IN("count", " the number of scissor boxes to modify"),
+		(AutoSize("v") shr 2) _ GLsizei.IN("count", " the number of scissor boxes to modify"),
 		const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
@@ -1007,7 +1007,7 @@ if (shader) {
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified set of viewports.",
 
 		GLuint.IN("first", "the index of the first viewport whose depth range to update"),
-		AutoSize("v").expression(" << 1") _ GLsizei.IN("count", "the number of viewports whose depth range to update"),
+		(AutoSize("v") shr 1) _ GLsizei.IN("count", "the number of viewports whose depth range to update"),
 		const _ GLdouble_p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
 	)
 

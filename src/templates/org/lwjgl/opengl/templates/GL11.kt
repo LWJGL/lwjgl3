@@ -1026,7 +1026,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"CallLists",
 		"Provides an efficient means for executing a number of display lists.",
 
-		AutoSize("lists").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("n", "the number of display lists to be called"),
+		(AutoSize("lists") / "GLChecks.typeToBytes(type)") _ GLsizei.IN("n", "the number of display lists to be called"),
 		AutoType("lists", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the data type of each element in {@code lists}",
@@ -1305,7 +1305,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		    GL32#GL_LINES_ADJACENCY GL32#GL_LINE_STRIP_ADJACENCY GL32#GL_TRIANGLES_ADJACENCY GL32#GL_TRIANGLE_STRIP_ADJACENCY GL40#GL_PATCHES
 		    """
 		),
-		AutoSize("indices").expression(" * GLChecks.translateTypeToBytes(type)") _ GLsizei.IN("count", "the number of vertices to transfer to the GL"),
+		(AutoSize("indices") shr "GLChecks.typeToByteShift(type)") _ GLsizei.IN("count", "the number of vertices to transfer to the GL"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"indicates the type of index values in {@code indices}",

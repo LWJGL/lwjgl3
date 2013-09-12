@@ -77,7 +77,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 			"the data type to be returned",
 			"GL11#GL_UNSIGNED_INT GL11#GL_INT GL11#GL_FLOAT GL11#GL_UNSIGNED_BYTE"
 		),
-		AutoSize("data").expression(" * GLChecks.translateTypeToBytes(dataType)") _ UINT.IN("size", "the size of the {@code data} buffer"),
+		(AutoSize("data") * "GLChecks.typeToBytes(dataType)") _ UINT.IN("size", "the size of the {@code data} buffer"),
 		GLvoid_p.IN("data", "the buffer which will be filled with the requested information")
 	)
 

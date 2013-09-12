@@ -36,7 +36,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" / (2 * 3)") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -46,7 +46,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" / (3 * 2)") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -56,7 +56,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -66,7 +66,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" >> 3") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") shr 3) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -76,7 +76,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" / (3 * 4)") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -86,7 +86,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", "the location of the uniform variable to be modified"),
-		AutoSize("value").expression(" / (4 * 3)") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)

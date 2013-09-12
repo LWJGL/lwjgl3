@@ -72,10 +72,10 @@ public abstract class Function(
 	fun getNativeParams(): Iterator<Parameter> = getParams { !it.has(virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	fun getReferenceParam(modifier: Class<out ReferenceModifier>, reference: String): Parameter? {
+	fun getReferenceParam(modifierObject: ModifierObject<*>, reference: String): Parameter? {
 		// Assumes at most 1 parameter will be found that references the specified parameter
 		val iter = getParams {
-			it.hasRef(modifier, reference)
+			it.hasRef(modifierObject, reference)
 		}
 		return if ( iter.hasNext() )
 			iter.next()
@@ -388,8 +388,8 @@ public class NativeClassFunction(
 				val autoSize = it[AutoSize]
 				if ( mode == GenerationMode.NORMAL ) {
 					var length = it.name
-					if ( autoSize.expression != null )
-						length += autoSize.expression
+					if ( autoSize.factor != null )
+						length += " ${autoSize.factor!!.expressionInv()}"
 
 					prefix = if ( parameters[autoSize.reference]!! has Nullable ) "if ( ${autoSize.reference} != null ) " else ""
 					checks add "${prefix}checkBuffer(${autoSize.reference}, ${bufferShift(length, autoSize.reference, "<<", null)});"
@@ -703,8 +703,8 @@ public class NativeClassFunction(
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
 					val param = parameters[autoSize.reference]!!
-					// Check if there's also an AutoType or MultiType on the referenced parameter. Skip if so.
-					if ( !(param has AutoSize || param has MultiType) )
+					// Check if there's also a MultiType on the referenced parameter. Skip if so.
+					if ( !(param has MultiType) )
 						transforms[it] = AutoSizeTransform(param)
 				} else if ( it has optional )
 					transforms[it] = ExpressionTransform("0L")
@@ -839,15 +839,15 @@ public class NativeClassFunction(
 				// Generate AutoType alternatives
 				customChecks.clear()
 
-				// Add the AutoSize transformation if we skipped it above
-				getParams { it has AutoSize } forEach {
-					transforms[it] = AutoSizeTransform(parameters[it[AutoSize].reference]!!)
-				}
-
 				val autoTypes = it[AutoType]
 				val bufferParam = parameters[autoTypes.reference]!!
 				if ( bufferParam has BufferObject )
 					customChecks add ("GLChecks.ensureBufferObject(${bufferParam[BufferObject].binding}, false);")
+
+				// Disable AutoSize factor
+				val autoSizeParam = getReferenceParam(AutoSize, bufferParam.name)
+				if ( autoSizeParam != null )
+					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, false)
 
 				val types = ArrayList<BufferType>(autoTypes.types.size)
 				autoTypes.types.forEach { types add it }
@@ -1282,14 +1282,19 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
-private open class AutoSizeTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
+private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor: Boolean = true): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
+		var expression = "${bufferParam.name}.remaining()"
+		val factor = param[AutoSize].factor
+		if ( applyFactor && factor != null )
+			expression += " ${factor.expression()}"
+
 		// Replace with expression
 		return if ( bufferParam has nullable )
-			"${bufferParam.name} == null ? 0 : ${bufferParam.name}.remaining()"
+			"${bufferParam.name} == null ? 0 : $expression"
 		else
-			"${bufferParam.name}.remaining()"
+			expression
 	}
 }
 
@@ -1298,11 +1303,16 @@ private fun AutoSizeTransform(bufferParam: Parameter, byteShift: String) =
 
 private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: String): AutoSizeTransform(bufferParam) {
 	override fun transformCall(param: Parameter, original: String): String {
+		var expression = "${bufferParam.name}.remaining()"
+		val factor = param[AutoSize].factor
+		if ( factor != null )
+			expression = "($expression ${factor.expression()})"
+
 		// Replace with expression
 		return if ( bufferParam has nullable )
-			"(${bufferParam.name} == null ? 0 : ${bufferParam.name}.remaining()) << $byteShift"
+			"(${bufferParam.name} == null ? 0 : $expression) << $byteShift"
 		else
-			"${bufferParam.name}.remaining() << $byteShift"
+			"$expression << $byteShift"
 	}
 }
 

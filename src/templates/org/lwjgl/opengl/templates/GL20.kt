@@ -273,7 +273,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -282,7 +282,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") / 3) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -291,7 +291,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -309,7 +309,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single ivec2 uniform variable or a ivec2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 1") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") shr 1) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -318,7 +318,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single ivec3 uniform variable or a ivec3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / 3") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") / 3) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -327,7 +327,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single ivec4 uniform variable or a ivec4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const _ GLint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -336,7 +336,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 2") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") shr 2) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -346,7 +346,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" / (3 * 3)") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -356,7 +356,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value").expression(" >> 4") _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
+		(AutoSize("value") shr 4) _ GLsizei.IN("count", "the number of matrices that are to be modified. This should be 1 if the targeted uniform variable is not an array of matrices, and 1 or more if it is an array of matrices."),
 		GLboolean.IN("transpose", "whether to transpose the matrix as the values are loaded into the uniform variable"),
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
@@ -374,7 +374,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"GetProgramiv",
 		"Returns a parameter from a program object.",
 
-		GLuint.IN("shader", "the program object to be queried"),
+		GLuint.IN("program", "the program object to be queried"),
 		GLenum.IN(
 			"pname",
 			"the object parameter",
