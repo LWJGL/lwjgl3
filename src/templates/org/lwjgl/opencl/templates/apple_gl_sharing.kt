@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("apple_gl_sharing", APPLE) {
+fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPLE) {
 	nativeImport (
 		"OpenCL.h"
 	)

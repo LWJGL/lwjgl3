@@ -114,7 +114,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			if ( isGL1 xor isGL2 )
 				(if ( isGL1 ) -1 else 1)
 			else
-				o1.templateName compareTo o2.templateName
+				o1.templateName compareToIgnoreCase o2.templateName
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }

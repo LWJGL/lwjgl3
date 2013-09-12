@@ -106,7 +106,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			if ( isALC1 xor isALC2 )
 				(if ( isALC1 ) -1 else 1)
 			else
-				o1.templateName compareTo o2.templateName
+				o1.templateName compareToIgnoreCase o2.templateName
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }

@@ -10,13 +10,13 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 
 private val NativeClass.capName: String
-	get() = if ( templateName.startsWith(prefixTemplate) ) {
+	get() = if ( templateName.startsWith(prefix) ) {
 		if ( prefix == "CL" )
 			"OpenCL${templateName.substring(2)}"
 		else
-			templateName.toLowerCase()
+			templateName
 	} else {
-		"${prefixTemplate}_$templateName".toLowerCase()
+		"${prefixTemplate}_$templateName"
 	}
 
 public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
@@ -107,7 +107,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 			if ( isCL1 xor isCL2 )
 				(if ( isCL1 ) -1 else 1)
 			else
-				o1.templateName compareTo o2.templateName
+				o1.templateName compareToIgnoreCase o2.templateName
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
@@ -193,7 +193,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 // DSL Extensions
 
 public fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
-	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, functionProvider = FunctionProviderCL, init = init)
+	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", functionProvider = FunctionProviderCL, init = init)
 
 public val NativeClass.extensionLink: String
 	get() = link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)
