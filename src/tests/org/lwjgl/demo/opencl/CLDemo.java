@@ -154,8 +154,8 @@ public final class CLDemo {
 					checkCLError(errcode);
 
 					try {
-						boolean result = latch.await(500, TimeUnit.MILLISECONDS);
-						if ( !result )
+						boolean expired = !latch.await(500, TimeUnit.MILLISECONDS);
+						if ( expired )
 							System.out.println("\t\tKERNEL EXEC FAILED!");
 					} catch (InterruptedException exc) {
 						exc.printStackTrace();

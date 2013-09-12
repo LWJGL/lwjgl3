@@ -5,6 +5,8 @@
 package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opengl.*;
@@ -15,6 +17,7 @@ import org.lwjgl.system.glfw.WindowCallbackAdapter;
 import java.io.*;
 import java.net.URL;
 import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.HashSet;
 import java.util.List;
@@ -36,10 +39,11 @@ import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
-import static org.lwjgl.opengl.GL21.*;
+import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
+import static org.lwjgl.system.macosx.CGL.*;
 
 /*
 		THIS DEMO USES CODE PORTED FROM JogAmp.org
@@ -118,20 +122,23 @@ public class CLGLInteropDemo {
 	private final CLKernel[]       kernels;
 	private final CLProgram[]      programs;
 
-	private final PointerBuffer kernel2DGlobalWorkSize;
+	private final PointerBuffer kernel2DGlobalWorkSize = BufferUtils.createPointerBuffer(2);
 
 	// ------------------
 
 	private CLMem[]   glBuffers;
 	private IntBuffer glIDs;
 
-	private boolean useTextures;
-
 	// Texture rendering
-	private int dlist;
+	private int vao;
+	private int vbo;
 	private int vsh;
 	private int fsh;
 	private int program;
+
+	private int projectionUniform;
+	private int sizeUniform;
+	private int offsetUniform;
 
 	private CLMem[] colorMap;
 
@@ -152,14 +159,14 @@ public class CLGLInteropDemo {
 	private final PointerBuffer syncBuffer = BufferUtils.createPointerBuffer(1);
 
 	private boolean   syncGLtoCL; // true if we can make GL wait on events generated from CL queues.
-	private CLEvent[] clEvents;
-	private long[]    clSyncs;
+	private CLEvent[] clEvent;
+	private long[]    fenceFromEvent;
 
 	private boolean syncCLtoGL; // true if we can make CL wait on sync objects generated from GL.
-	private long    glSync;
-	private CLEvent glEvent;
+	private long    glFence;
+	private CLEvent eventFromFence;
 
-	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, boolean forceCPU) {
+	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, int deviceType) {
 		this.platform = platform;
 
 		this.window = window;
@@ -175,8 +182,8 @@ public class CLGLInteropDemo {
 
 		ContextCapabilities caps = GL.getCapabilities();
 
-		if ( !caps.OpenGL20 )
-			throw new RuntimeException("OpenGL 2.0 is required to run this demo.");
+		if ( !caps.OpenGL32 )
+			throw new RuntimeException("OpenGL 3.2 is required to run this demo.");
 
 		if ( params.contains("debugGL") ) {
 			/*if ( caps.GL_ARB_debug_output )
@@ -197,15 +204,13 @@ public class CLGLInteropDemo {
 				@Override
 				public boolean accept(CLDevice device) {
 					CLCapabilities caps = device.getCapabilities();
-					return caps.cl_khr_gl_sharing;
+					return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
 				}
 			};
-			//int device_type = params.contains("forceCPU") ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
-			int device_type = forceCPU ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
-			List<CLDevice> devices = platform.getDevices(device_type, glSharingFilter);
+			List<CLDevice> devices = platform.getDevices(deviceType, glSharingFilter);
 			if ( devices == null ) {
-				device_type = CL_DEVICE_TYPE_CPU;
-				devices = platform.getDevices(device_type, glSharingFilter);
+				deviceType = CL_DEVICE_TYPE_CPU;
+				devices = platform.getDevices(deviceType, glSharingFilter);
 				if ( devices == null )
 					throw new RuntimeException("No OpenCL devices found with KHR_gl_sharing support.");
 			}
@@ -217,10 +222,27 @@ public class CLGLInteropDemo {
 			// Create the context
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(5)
 				.put(0, CL_CONTEXT_PLATFORM)
-				.put(1, platform.getPointer())
-				.put(2, CL_GL_CONTEXT_KHR)
-				.put(3, context.getHandle())
-				.put(4, 0);
+				.put(1, platform.getPointer());
+
+			boolean useAPPLEGLSharing = false;
+			for ( CLDevice device : devices ) {
+				if ( !device.getCapabilities().cl_khr_gl_sharing ) {
+					useAPPLEGLSharing = true;
+					break;
+				}
+			}
+
+			if ( useAPPLEGLSharing ) {
+				ctxProps
+					.put(2, APPLEGLSharing.CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE)
+					.put(3, CGLGetShareGroup(context.getHandle()));
+			} else {
+				ctxProps
+					.put(2, CL_GL_CONTEXT_KHR)
+					.put(3, context.getHandle());
+			}
+
+			ctxProps.put(4, 0);
 
 			clContext = clCreateContext(ctxProps, deviceBuffer, new CLContextCallback(), errcode_ret);
 			checkCLError(errcode_ret);
@@ -269,10 +291,7 @@ public class CLGLInteropDemo {
 			// load program(s)
 			programs = new CLProgram[all64bit ? 1 : slices];
 
-			if ( device_type == CL_DEVICE_TYPE_CPU && !caps.OpenGL21 )
-				throw new RuntimeException("OpenGL 2.1 is required to run this demo.");
-
-			if ( device_type == CL_DEVICE_TYPE_GPU )
+			if ( deviceType == CL_DEVICE_TYPE_GPU )
 				log("OpenCL Device Type: GPU (Use -forceCPU to use CPU)");
 			else
 				log("OpenCL Device Type: CPU");
@@ -283,28 +302,23 @@ public class CLGLInteropDemo {
 			log("OpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
 			log("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
 
-			// Use PBO if we're on a CPU implementation
-			useTextures = device_type == CL_DEVICE_TYPE_GPU && (!caps.OpenGL21 || !params.contains("forcePBO"));
-			if ( useTextures ) {
-				log("CL/GL Sharing method: TEXTURES (use -forcePBO to use PBO + DrawPixels)");
-				log("Rendering method: Shader on a fullscreen quad");
-			} else {
-				log("CL/GL Sharing method: PIXEL BUFFER OBJECTS");
-				log("Rendering method: DrawPixels");
-			}
-
 			buildPrograms();
 
 			// Detect GLtoCL synchronization method
 			syncGLtoCL = caps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
 			if ( syncGLtoCL ) {
-				clEvents = new CLEvent[slices];
-				clSyncs = new long[slices];
+				clEvent = new CLEvent[slices];
+				fenceFromEvent = new long[slices];
 				log("GL to CL sync: Using OpenCL events");
 			} else
 				log("GL to CL sync: Using clFinish");
 
 			// Detect CLtoGL synchronization method
+			/*
+				NOTE: We do not have to explicitly synchronize if cl_khr_gl_event is exposed, because it modifies the behavior of clEnqueueAcquireGLObjects
+				and clEnqueueReleaseGLObjects to implicitly guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
+				For this demo we do it anyway, for demostration purposes.
+			*/
 			syncCLtoGL = caps.OpenGL32 || caps.GL_ARB_sync;
 			if ( syncCLtoGL ) {
 				for ( CLDevice device : devices ) {
@@ -319,36 +333,84 @@ public class CLGLInteropDemo {
 			} else
 				log("CL to GL sync: Using glFinish");
 
-			if ( useTextures ) {
-				dlist = glGenLists(1);
+			vao = glGenVertexArrays();
+			glBindVertexArray(vao);
 
-				vsh = glCreateShader(GL_VERTEX_SHADER);
-				glShaderSource(vsh, "varying vec2 texCoord;\n" +
-				                    "\n" +
-				                    "void main(void) {\n" +
-				                    "\tgl_Position = ftransform();\n" +
-				                    "\ttexCoord = gl_MultiTexCoord0.xy;\n" +
-				                    "}");
-				glCompileShader(vsh);
+			vbo = glGenBuffers();
+			glBindBuffer(GL_ARRAY_BUFFER, vbo);
 
-				fsh = glCreateShader(GL_FRAGMENT_SHADER);
-				glShaderSource(fsh, "uniform sampler2D mandelbrot;\n" +
-				                    "\n" +
-				                    "varying vec2 texCoord;\n" +
-				                    "\n" +
-				                    "void main(void) {\n" +
-				                    "\tgl_FragColor = texture2D(mandelbrot, texCoord);" +
-				                    "}");
-				glCompileShader(fsh);
+			FloatBuffer quad = BufferUtils.createFloatBuffer(4 * 4).put(new float[] {
+				0.0f, 0.0f, 0.0f, 0.0f,
+				1.0f, 0.0f, 1.0f, 0.0f,
+				0.0f, 1.0f, 0.0f, 1.0f,
+				1.0f, 1.0f, 1.0f, 1.0f,
+			});
+			quad.flip();
+			glBufferData(GL_ARRAY_BUFFER, quad, GL_STATIC_DRAW);
 
-				program = glCreateProgram();
-				glAttachShader(program, vsh);
-				glAttachShader(program, fsh);
-				glLinkProgram(program);
+			vsh = glCreateShader(GL_VERTEX_SHADER);
+			glShaderSource(vsh, "#version 150\n" +
+			                    "\n" +
+			                    "uniform mat4 projection;\n" +
+			                    "\n" +
+			                    "uniform vec2 size;\n" +
+			                    "uniform vec2 offset;\n" +
+			                    "\n" +
+			                    "in vec2 posIN;\n" +
+			                    "in vec2 texIN;\n" +
+			                    "\n" +
+			                    "out vec2 texCoord;\n" +
+			                    "\n" +
+			                    "void main(void) {\n" +
+			                    "\tgl_Position = projection * vec4((posIN + offset) * size, 0.0, 1.0);\n" +
+			                    "\ttexCoord = texIN;\n" +
+			                    "}");
+			glCompileShader(vsh);
+			String log = glGetShaderInfoLog(vsh, glGetShaderi(vsh, GL_INFO_LOG_LENGTH));
+			if ( !log.isEmpty() )
+				System.out.println("VERTEX SHADER LOG: " + log);
 
-				glUseProgram(program);
-				glUniform1i(glGetUniformLocation(program, "mandelbrot"), 0);
-			}
+			fsh = glCreateShader(GL_FRAGMENT_SHADER);
+			glShaderSource(fsh, "#version 150\n" +
+			                    "\n" +
+			                    "uniform isampler2D mandelbrot;\n" +
+			                    "\n" +
+			                    "in vec2 texCoord;\n" +
+			                    "\n" +
+			                    "out vec4 fragColor;\n" +
+			                    "\n" +
+			                    "void main(void) {\n" +
+			                    "\tfragColor = texture(mandelbrot, texCoord) / 255.0;\n" +
+			                    "}");
+			glCompileShader(fsh);
+			log = glGetShaderInfoLog(fsh, glGetShaderi(fsh, GL_INFO_LOG_LENGTH));
+			if ( !log.isEmpty() )
+				System.out.println("FRAGMENT SHADER LOG: " + log);
+
+			program = glCreateProgram();
+			glAttachShader(program, vsh);
+			glAttachShader(program, fsh);
+			glLinkProgram(program);
+			log = glGetProgramInfoLog(program, glGetProgrami(program, GL_INFO_LOG_LENGTH));
+			if ( !log.isEmpty() )
+				System.out.println("PROGRAM LOG: " + log);
+
+			int posIN = glGetAttribLocation(program, "posIN");
+			int texIN = glGetAttribLocation(program, "texIN");
+
+			glVertexAttribPointer(posIN, 2, GL_FLOAT, false, 4 * 4, 0);
+			glVertexAttribPointer(texIN, 2, GL_FLOAT, false, 4 * 4, 2 * 4);
+
+			glEnableVertexAttribArray(posIN);
+			glEnableVertexAttribArray(texIN);
+
+			projectionUniform = glGetUniformLocation(program, "projection");
+			sizeUniform = glGetUniformLocation(program, "size");
+			offsetUniform = glGetUniformLocation(program, "offset");
+
+			glUseProgram(program);
+
+			glUniform1i(glGetUniformLocation(program, "mandelbrot"), 0);
 		} catch (Exception e) {
 			// TODO: cleanup
 			throw new RuntimeException(e);
@@ -359,8 +421,6 @@ public class CLGLInteropDemo {
 
 		initGLObjects();
 		glFinish();
-
-		kernel2DGlobalWorkSize = BufferUtils.createPointerBuffer(2);
 
 		setKernelConstants();
 
@@ -376,22 +436,25 @@ public class CLGLInteropDemo {
 
 		CL.create();
 
+		final Filter<CLPlatform> platformFilter = new Filter<CLPlatform>() {
+			@Override
+			public boolean accept(CLPlatform platform) {
+				CLCapabilities caps = platform.getCapabilities();
+				return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
+			}
+		};
+
 		// Skip Intel in case there's a platform with a discrete GPU available.
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
-				return platform.getCapabilities().cl_khr_gl_sharing && !platform.getInfoStringUTF8(CL_PLATFORM_VENDOR).startsWith("Intel");
+				return platformFilter.accept(platform) && !platform.getInfoStringUTF8(CL_PLATFORM_VENDOR).startsWith("Intel");
 			}
 		});
 
 		if ( platforms.isEmpty() ) {
 			// Nope, try Intel.
-			platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
-				@Override
-				public boolean accept(CLPlatform platform) {
-					return platform.getCapabilities().cl_khr_gl_sharing;
-				}
-			});
+			platforms = CLPlatform.getPlatforms(platformFilter);
 		}
 
 		if ( platforms.isEmpty() )
@@ -404,38 +467,51 @@ public class CLGLInteropDemo {
 
 		glfwSetErrorCallback(new ErrorCallback());
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+		if ( params.contains("debugGL") )
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-		Thread[] threads = new Thread[platforms.size() * 2];
+		final CLPlatform platform = platforms.get(0);
+
+		String platformID;
+		if ( platform.getCapabilities().cl_khr_icd )
+			platformID = platform.getInfoStringASCII(CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
+		else
+			platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR);
+
+		boolean hasCPU = false;
+		boolean hasGPU = false;
+		for ( CLDevice device : platform.getDevices(CL_DEVICE_TYPE_ALL) ) {
+			long type = device.getInfoLong(CL_DEVICE_TYPE);
+			if ( type == CL_DEVICE_TYPE_CPU )
+				hasCPU = true;
+			else if ( type == CL_DEVICE_TYPE_GPU )
+				hasGPU = true;
+		}
+
+		Thread[] threads = new Thread[platforms.size() * (hasCPU && hasGPU ? 2 : 1)];
 		GLFWWindow[] windows = new GLFWWindow[threads.length];
 
 		final CountDownLatch latch = new CountDownLatch(windows.length);
 		final CyclicBarrier barrier = new CyclicBarrier(windows.length + 1);
 
 		for ( int i = 0; i < threads.length; i++ ) {
-			final CLPlatform platform = platforms.get(0);
+			final int deviceType = i == 1 || !hasGPU ? CL_DEVICE_TYPE_CPU : CL_DEVICE_TYPE_GPU;
 
-			String platformID;
-			if ( platform.getCapabilities().cl_khr_icd )
-				platformID = platform.getInfoStringASCII(CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
-			else
-				platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR);
-			platformID += " - " + ((i & 1) == 1 ? "CPU" : "GPU");
-
-			final GLFWWindow window = new GLFWWindow(
-				glfwCreateWindow(initWidth, initHeight, platformID, 0L, 0L),
-				platformID,
-				new CountDownLatch(1)
-			);
+			String ID = platformID + " - " + (deviceType == CL_DEVICE_TYPE_CPU ? "CPU" : "GPU");
+			final GLFWWindow window = new GLFWWindow(glfwCreateWindow(initWidth, initHeight, ID, 0L, 0L), ID, new CountDownLatch(1));
 			glfwSetWindowPos(window.handle, 200 + initWidth * i + 32 * i, 200);
 
-			final int index = i;
 			windows[i] = window;
 			threads[i] = new Thread(platformID) {
 				@Override
 				public void run() {
 					CLGLInteropDemo demo = null;
 					try {
-						demo = new CLGLInteropDemo(platform, window, (index & 1) == 1);
+						demo = new CLGLInteropDemo(platform, window, deviceType);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -443,7 +519,7 @@ public class CLGLInteropDemo {
 					try {
 						barrier.await();
 						if ( demo != null )
-							demo.run();
+							demo.renderLoop();
 					} catch (Exception e) {
 						e.printStackTrace();
 					} finally {
@@ -494,9 +570,7 @@ public class CLGLInteropDemo {
 
 			String param = arg.substring(1);
 
-			if ( "forcePBO".equalsIgnoreCase(param) )
-				params.add("forcePBO");
-			else if ( "forceCPU".equalsIgnoreCase(param) )
+			if ( "forceCPU".equalsIgnoreCase(param) )
 				params.add("forceCPU");
 			else if ( "debugGL".equalsIgnoreCase(param) )
 				params.add("debugGL");
@@ -537,7 +611,7 @@ public class CLGLInteropDemo {
 		for ( int i = 0; i < programs.length; i++ ) {
 			CLDevice device = queues[i].getParent();
 
-			StringBuilder options = new StringBuilder(useTextures ? "-D USE_TEXTURE" : "");
+			StringBuilder options = new StringBuilder("-D USE_TEXTURE");
 			CLCapabilities caps = device.getCapabilities();
 			if ( doublePrecision && isDoubleFPAvailable(device) ) {
 				//cl_khr_fp64
@@ -577,68 +651,51 @@ public class CLGLInteropDemo {
 				checkCLError(errcode);
 			}
 
-			if ( useTextures )
-				glDeleteTextures(glIDs);
-			else
-				glDeleteBuffers(glIDs);
+			glDeleteTextures(glIDs);
 		}
 
-		if ( useTextures ) {
-			glNewList(dlist, GL_COMPILE);
-			glBegin(GL_QUADS);
-			{
-				glTexCoord2f(0.0f, 0.0f);
-				glVertex2f(0, 0);
+		glGenTextures(glIDs);
 
-				glTexCoord2f(0.0f, 1.0f);
-				glVertex2i(0, height);
+		// Init textures
+		for ( int i = 0; i < slices; i++ ) {
+			glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI, width / slices, height, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, (ByteBuffer)null);
 
-				glTexCoord2f(1.0f, 1.0f);
-				glVertex2f(width, height);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-				glTexCoord2f(1.0f, 0.0f);
-				glVertex2f(width, 0);
-			}
-			glEnd();
-			glEndList();
-
-			glGenTextures(glIDs);
-
-			// Init textures
-			for ( int i = 0; i < slices; i++ ) {
-				glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
-				glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width / slices, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer)null);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-				glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-				glBuffers[i] = clCreateFromGLTexture2D(clContext, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, glIDs.get(i), errcode_ret);
-				checkCLError(errcode_ret);
-			}
-			glBindTexture(GL_TEXTURE_2D, 0);
-		} else {
-			glGenBuffers(glIDs);
-
-			// setup one empty PBO per slice
-			for ( int i = 0; i < slices; i++ ) {
-				glBindBuffer(GL_PIXEL_UNPACK_BUFFER, glIDs.get(i));
-				glBufferData(GL_PIXEL_UNPACK_BUFFER, width * height * 4 / slices, GL_STREAM_DRAW);
-
-				glBuffers[i] = clCreateFromGLBuffer(clContext, CL_MEM_WRITE_ONLY, glIDs.get(i), errcode_ret);
-				checkCLError(errcode_ret);
-			}
-			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+			glBuffers[i] = clCreateFromGLTexture2D(clContext, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, glIDs.get(i), errcode_ret);
+			checkCLError(errcode_ret);
 		}
+		glBindTexture(GL_TEXTURE_2D, 0);
 
 		glViewport(0, 0, width, height);
 
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, width, 0.0, height, 0.0, 1.0);
+		glUniform2f(sizeUniform, width / slices, height);
 
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+		FloatBuffer projectionMatrix = BufferUtils.createFloatBuffer(4 * 4);
+		glOrtho(0.0f, width, 0.0f, height, 0.0f, 1.0f, projectionMatrix);
+		glUniformMatrix4(projectionUniform, false, projectionMatrix);
 
 		shouldInitBuffers = false;
+	}
+
+	public static void glOrtho(float l, float r, float b, float t, float n, float f, FloatBuffer m) {
+		m.put(new float[] {
+			1.0f, 0.0f, 0.0f, 0.0f,
+			0.0f, 1.0f, 0.0f, 0.0f,
+			0.0f, 0.0f, 1.0f, 0.0f,
+			0.0f, 0.0f, 0.0f, 1.0f,
+		});
+		m.flip();
+
+		m.put(0 * 4 + 0, 2.0f / (r - l));
+		m.put(1 * 4 + 1, 2.0f / (t - b));
+		m.put(2 * 4 + 2, -2.0f / (f - n));
+
+		m.put(3 * 4 + 0, -(r + l) / (r - l));
+		m.put(3 * 4 + 1, -(t + b) / (t - b));
+		m.put(3 * 4 + 2, -(f + n) / (f - n));
 	}
 
 	// init kernels with constants
@@ -655,7 +712,7 @@ public class CLGLInteropDemo {
 
 	// rendering cycle
 
-	private void run() {
+	private void renderLoop() {
 		long startTime = System.currentTimeMillis() + 5000;
 		long fps = 0;
 
@@ -664,7 +721,12 @@ public class CLGLInteropDemo {
 			while ( (event = events.poll()) != null )
 				event.run();
 
-			display();
+			try {
+				display();
+			} catch (Exception e) {
+				e.printStackTrace();
+				break;
+			}
 
 			glfwSwapBuffers(window.handle);
 
@@ -682,30 +744,18 @@ public class CLGLInteropDemo {
 		int errcode = clReleaseContext(clContext);
 		checkCLError(errcode);
 
-		if ( useTextures ) {
-			glDeleteProgram(program);
-			glDeleteShader(fsh);
-			glDeleteShader(vsh);
-
-			glDeleteLists(dlist, 1);
-		}
+		glDeleteProgram(program);
+		glDeleteShader(fsh);
+		glDeleteShader(vsh);
+		glDeleteBuffers(vbo);
+		glDeleteVertexArrays(vao);
 
 		window.signal.countDown();
 	}
 
 	public void display() {
 		// make sure GL does not use our objects before we start computing
-		if ( syncCLtoGL && glEvent != null ) {
-			for ( CLCommandQueue queue : queues ) {
-				int errcode = clEnqueueWaitForEvents(queue, glEvent);
-				checkCLError(errcode);
-
-				errcode = clReleaseEvent(glEvent);
-				checkCLError(errcode);
-
-				glDeleteSync(glSync);
-			}
-		} else
+		if ( eventFromFence == null || shouldInitBuffers )
 			glFinish();
 
 		if ( shouldInitBuffers ) {
@@ -717,14 +767,22 @@ public class CLGLInteropDemo {
 			buildPrograms();
 			setKernelConstants();
 		}
-		compute(doublePrecision);
+		computeCL(doublePrecision);
 
-		render();
+		try {
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
+				CGLLockContext(context.getHandle());
+
+			renderGL();
+		} finally {
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
+				CGLUnlockContext(context.getHandle());
+		}
 	}
 
 	// OpenCL
 
-	private void compute(boolean is64bit) {
+	private void computeCL(boolean is64bit) {
 		int sliceWidth = (int)(width / (float)slices);
 		double rangeX = (maxX - minX) / slices;
 		double rangeY = (maxY - minY);
@@ -744,9 +802,19 @@ public class CLGLInteropDemo {
 					.setArg(4, rangeX).setArg(5, rangeY);
 			}
 
+			if ( eventFromFence != null )
+				syncBuffer.put(0, eventFromFence.getPointer());
+
 			// acquire GL objects, and enqueue a kernel with a probe from the list
-			int errcode = clEnqueueAcquireGLObjects(queues[i], glBuffers[i], null, null);
+			int errcode = clEnqueueAcquireGLObjects(queues[i], glBuffers[i], eventFromFence != null ? syncBuffer : null, null);
 			checkCLError(errcode);
+
+			if ( eventFromFence != null ) {
+				errcode = clReleaseEvent(eventFromFence);
+				checkCLError(errcode);
+
+				glDeleteSync(glFence);
+			}
 
 			errcode = clEnqueueNDRangeKernel(queues[i], kernels[i], 2,
 			                                 null,
@@ -759,8 +827,8 @@ public class CLGLInteropDemo {
 			checkCLError(errcode);
 
 			if ( syncGLtoCL ) {
-				clEvents[i] = CLEvent.create(syncBuffer.get(0), clContext);
-				clSyncs[i] = glCreateSyncFromCLeventARB(clContext, clEvents[i], 0);
+				clEvent[i] = CLEvent.create(syncBuffer.get(0), clContext);
+				fenceFromEvent[i] = glCreateSyncFromCLeventARB(clContext, clEvent[i], 0);
 			}
 		}
 
@@ -775,66 +843,32 @@ public class CLGLInteropDemo {
 
 	// OpenGL
 
-	private void render() {
+	private void renderGL() {
 		glClear(GL_COLOR_BUFFER_BIT);
-
-		if ( syncGLtoCL ) {
-			for ( int i = 0; i < slices; i++ ) {
-				glWaitSync(clSyncs[i], 0, 0);
-				glDeleteSync(clSyncs[i]);
-
-				int errcode = clReleaseEvent(clEvents[i]);
-				checkCLError(errcode);
-			}
-		}
 
 		//draw slices
 		int sliceWidth = width / slices;
 
-		if ( useTextures ) {
-			for ( int i = 0; i < slices; i++ ) {
-				int seperatorOffset = drawSeparator ? i : 0;
+		for ( int i = 0; i < slices; i++ ) {
+			glUniform2f(offsetUniform, i * sliceWidth, 0.0f);
 
-				glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
-				glCallList(dlist);
+			if ( syncGLtoCL ) {
+				glWaitSync(fenceFromEvent[i], 0, 0);
+				glDeleteSync(fenceFromEvent[i]);
+
+				int errcode = clReleaseEvent(clEvent[i]);
+				checkCLError(errcode);
 			}
-		} else {
-			for ( int i = 0; i < slices; i++ ) {
-				int seperatorOffset = drawSeparator ? i : 0;
 
-				glBindBuffer(GL_PIXEL_UNPACK_BUFFER, glIDs.get(i));
-				glRasterPos2i(sliceWidth * i + seperatorOffset, 0);
-
-				glDrawPixels(sliceWidth, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-			}
-			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+			glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
+			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
 
 		if ( syncCLtoGL ) {
-			glSync = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-			glEvent = clCreateEventFromGLsyncKHR(clContext, glSync, errcode_ret);
+			glFence = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+			eventFromFence = clCreateEventFromGLsyncKHR(clContext, glFence, errcode_ret);
 			checkCLError(errcode_ret);
 		}
-
-		//draw info text
-		/*
-		textRenderer.beginRendering(width, height, false);
-
-		textRenderer.draw("device/time/precision", 10, height - 15);
-
-		for ( int i = 0; i < slices; i++ ) {
-			CLDevice device = queues[i].getDevice();
-			boolean doubleFP = doublePrecision && isDoubleFPAvailable(device);
-			CLEvent event = probes.getEvent(i);
-			long start = event.getProfilingInfo(START);
-			long end = event.getProfilingInfo(END);
-			textRenderer.draw(device.getType().toString() + i + " "
-			                  + (int)((end - start) / 1000000.0f) + "ms @"
-			                  + (doubleFP ? "64bit" : "32bit"), 10, height - (20 + 16 * (slices - i)));
-		}
-
-		textRenderer.endRendering();
-		*/
 	}
 
 	private void setupInput() {
@@ -854,6 +888,9 @@ public class CLGLInteropDemo {
 
 			@Override
 			public void windowSize(long window, final int width, final int height) {
+				if ( width == 0 || height == 0 )
+					return;
+
 				events.add(new Runnable() {
 					@Override
 					public void run() {
@@ -866,7 +903,7 @@ public class CLGLInteropDemo {
 			}
 
 			@Override
-			public void key(long window, int key, int action) {
+			public void key(long window, int key, int scancode, int action, int mods) {
 				switch ( key ) {
 					case GLFW_KEY_LEFT_CONTROL:
 					case GLFW_KEY_RIGHT_CONTROL:
@@ -889,6 +926,9 @@ public class CLGLInteropDemo {
 					});
 				} else {
 					switch ( key ) {
+						case GLFW_KEY_ESCAPE:
+							glfwSetWindowShouldClose(window, GL_TRUE);
+							break;
 						case GLFW_KEY_SPACE:
 							events.offer(new Runnable() {
 								@Override
@@ -924,7 +964,7 @@ public class CLGLInteropDemo {
 			}
 
 			@Override
-			public void mouseButton(long window, int button, int action) {
+			public void mouseButton(long window, int button, int action, int mods) {
 				if ( button != GLFW_MOUSE_BUTTON_LEFT )
 					return;
 
@@ -961,10 +1001,10 @@ public class CLGLInteropDemo {
 			}
 
 			@Override
-			public void scroll(long window, double xpos, double ypos) {
-				if ( ypos != 0 ) {
+			public void scroll(long window, double xoffset, double yoffset) {
+				if ( yoffset != 0 ) {
 					double scaleFactor = ctrlDown ? 0.25 : 0.05;
-					double scale = ypos > 0 ? scaleFactor : -scaleFactor;
+					double scale = yoffset > 0 ? scaleFactor : -scaleFactor;
 
 					double deltaX = scale * (maxX - minX);
 					double deltaY = scale * (maxY - minY);
