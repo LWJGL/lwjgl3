@@ -20,10 +20,13 @@ final class GLChecks {
 	}
 
 	static void ensureBufferObject(int binding, boolean enabled) {
-		if ( LWJGLUtil.DEBUG ) {
-			if ( (glGetInteger(binding) != 0) ^ enabled )
-				throw new OpenGLException("Cannot use " + (enabled ? "offsets" : "buffers") + " when " + translateBufferObjectBinding(binding) + " buffer object is " + (enabled ? "disabled" : "enabled"));
-		}
+		if ( LWJGLUtil.DEBUG && (glGetInteger(binding) != 0) ^ enabled )
+			throw new OpenGLException(
+				"Cannot use %s when %s buffer object is %s",
+				enabled ? "offsets" : "buffers",
+				translateBufferObjectBinding(binding),
+				enabled ? "disabled" : "enabled"
+			);
 	}
 
 	private static String translateBufferObjectBinding(int binding) {
@@ -53,7 +56,7 @@ final class GLChecks {
 	 *
 	 * @return the number of bytes
 	 */
-	static int translateTypeToBytes(int type) {
+	static int typeToBytes(int type) {
 		switch ( type ) {
 			case GL_BYTE:
 			case GL_UNSIGNED_BYTE:
@@ -72,6 +75,35 @@ final class GLChecks {
 				return 4;
 			case GL_DOUBLE:
 				return 8;
+			default:
+				throw new IllegalArgumentException(LWJGLUtil.toHexString(type));
+		}
+	}
+
+	/**
+	 * Returns the power-of-two of the number of bytes required to store the specified OpenGL type.
+	 *
+	 * @param type the OpenGL type to translate
+	 *
+	 * @return the number of bytes PoT value
+	 */
+	static int typeToByteShift(int type) {
+		switch ( type ) {
+			case GL_BYTE:
+			case GL_UNSIGNED_BYTE:
+				return 0;
+			case GL_SHORT:
+			case GL_UNSIGNED_SHORT:
+			case GL_2_BYTES:
+			case GL_HALF_FLOAT:
+				return 1;
+			case GL_INT:
+			case GL_UNSIGNED_INT:
+			case GL_FLOAT:
+			case GL_4_BYTES:
+				return 2;
+			case GL_DOUBLE:
+				return 3;
 			default:
 				throw new IllegalArgumentException(LWJGLUtil.toHexString(type));
 		}

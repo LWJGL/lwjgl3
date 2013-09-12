@@ -22,20 +22,12 @@ public class OpenGLException extends RuntimeException {
 		return error_string + " (" + gl_error_code + ")";
 	}
 
-	public OpenGLException() {
-		super();
-	}
-
 	public OpenGLException(String message) {
 		super(message);
 	}
 
-	public OpenGLException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public OpenGLException(Throwable cause) {
-		super(cause);
+	public OpenGLException(String format, Object... args) {
+		super(String.format(format, args));
 	}
 
 }

@@ -31,7 +31,7 @@
 	<property name="tests.output" location="${generated}/tests" relative="true"/>
 
 	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
-	<property name="kotlinc-build" value="0.6.290"/>
+	<property name="kotlinc-build" value="0.6.319"/>
 
 	<condition property="platform.windows">
 		<os family="Windows"/>

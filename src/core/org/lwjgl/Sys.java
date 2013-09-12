@@ -40,14 +40,19 @@ public final class Sys {
 		// Intentionally empty
 	}
 
-	/** The Platform implementation. */
+	/** Returns the Platform implementation. */
 	public static Platform getPlatform() {
 		return platform;
 	}
 
-	/** The native LWJGL library file that was loaded. */
+	/** Returns the native LWJGL library file that was loaded. */
 	public static String getNativeLibrary() {
 		return nativeLibrary;
+	}
+
+	/** Returns the LWJGL version. */
+	public static String getVersion() {
+		return VERSION;
 	}
 
 	private static String loadLibrary(String libraryName) {
