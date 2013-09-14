@@ -84,9 +84,9 @@ class GLFWwindowLinux extends GLFWwindow {
 	static void processEvent(ByteBuffer event) {
 		GLFWwindowLinux window = null;
 
-		int type = XEvent.typeGet(event);
+		int type = XEvent.type(event);
 		if ( type != GenericEvent ) {
-			window = findWindowByHandle(XAnyEvent.windowGet(event));
+			window = findWindowByHandle(XAnyEvent.window(event));
 			if ( window == null ) {
 				// This is either an event for a destroyed GLFW window or an event
 				// of a type not currently supported by GLFW
@@ -96,9 +96,9 @@ class GLFWwindowLinux extends GLFWwindow {
 
 		switch ( type ) {
 			case KeyPress: {
-				inputKey(window, translateKey(XKeyEvent.keycodeGet(event)), GLFW_PRESS);
+				inputKey(window, translateKey(XKeyEvent.keycode(event)), GLFW_PRESS);
 
-				if ( (XKeyEvent.stateGet(event) & ControlMask) == 0 && (XKeyEvent.stateGet(event) & Mod1Mask /*Alt*/) == 0 ) {
+				if ( (XKeyEvent.state(event) & ControlMask) == 0 && (XKeyEvent.state(event) & Mod1Mask /*Alt*/) == 0 ) {
 					inputChar(window, translateChar(event));
 				}
 
@@ -106,12 +106,12 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			case KeyRelease: {
-				inputKey(window, translateKey(XKeyEvent.keycodeGet(event)), GLFW_RELEASE);
+				inputKey(window, translateKey(XKeyEvent.keycode(event)), GLFW_RELEASE);
 				break;
 			}
 
 			case ButtonPress: {
-				int button = XButtonEvent.buttonGet(event);
+				int button = XButtonEvent.button(event);
 				if ( button == Button1 )
 					inputMouseClick(window, GLFW_MOUSE_BUTTON_LEFT, GLFW_PRESS);
 				else if ( button == Button2 )
@@ -133,7 +133,7 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			case ButtonRelease: {
-				int button = XButtonEvent.buttonGet(event);
+				int button = XButtonEvent.button(event);
 
 				if ( button == Button1 ) {
 					inputMouseClick(window, GLFW_MOUSE_BUTTON_LEFT, GLFW_RELEASE);
@@ -162,8 +162,8 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			case MotionNotify: {
-				int motionX = XMotionEvent.xGet(event);
-				int motionY = XMotionEvent.yGet(event);
+				int motionX = XMotionEvent.x(event);
+				int motionY = XMotionEvent.y(event);
 				if ( motionX != window.x11CursorPosX || motionY != window.x11CursorPosY ) {
 					// The cursor was moved by something other than GLFW
 
@@ -191,9 +191,9 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			case ConfigureNotify: {
-				inputWindowSize(window, XConfigureEvent.widthGet(event), XConfigureEvent.heightGet(event));
+				inputWindowSize(window, XConfigureEvent.width(event), XConfigureEvent.height(event));
 
-				inputWindowPos(window, XConfigureEvent.xGet(event), XConfigureEvent.yGet(event));
+				inputWindowPos(window, XConfigureEvent.x(event), XConfigureEvent.y(event));
 
 				break;
 			}
@@ -211,7 +211,7 @@ class GLFWwindowLinux extends GLFWwindow {
 					// The window manager is pinging the application to ensure it's
 					// still responding to events
 
-					XClientMessageEvent.windowSet(event, x11.root);
+					XClientMessageEvent.window(event, x11.root);
 					XSendEvent(x11.display, x11.root, False, SubstructureNotifyMask | SubstructureRedirectMask, event);
 				}
 
@@ -252,7 +252,7 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			case PropertyNotify: {
-				if ( XPropertyEvent.atomGet(event) == x11.WM_STATE && XPropertyEvent.stateGet(event) == PropertyNewValue ) {
+				if ( XPropertyEvent.atom(event) == x11.WM_STATE && XPropertyEvent.state(event) == PropertyNewValue ) {
 					APIBuffer __buffer = apiBuffer();
 					__buffer.pointerParam();
 
@@ -289,15 +289,15 @@ class GLFWwindowLinux extends GLFWwindow {
 
 				ByteBuffer response = createByteBuffer(XEvent.SIZEOF);
 
-				XSelectionRequestEvent.propertySet(response, writeSelection(request));
-				XSelectionRequestEvent.typeSet(response, SelectionNotify);
-				XSelectionRequestEvent.displaySet(response, XSelectionRequestEvent.displayGet(request));
-				XSelectionRequestEvent.requestorSet(response, XSelectionRequestEvent.requestorGet(request));
-				XSelectionRequestEvent.selectionSet(response, XSelectionRequestEvent.selectionGet(request));
-				XSelectionRequestEvent.targetSet(response, XSelectionRequestEvent.targetGet(request));
-				XSelectionRequestEvent.timeSet(response, XSelectionRequestEvent.timeGet(request));
+				XSelectionRequestEvent.property(response, writeSelection(request));
+				XSelectionRequestEvent.type(response, SelectionNotify);
+				XSelectionRequestEvent.display(response, XSelectionRequestEvent.display(request));
+				XSelectionRequestEvent.requestor(response, XSelectionRequestEvent.requestor(request));
+				XSelectionRequestEvent.selection(response, XSelectionRequestEvent.selection(request));
+				XSelectionRequestEvent.target(response, XSelectionRequestEvent.target(request));
+				XSelectionRequestEvent.time(response, XSelectionRequestEvent.time(request));
 
-				XSendEvent(x11.display, XSelectionRequestEvent.requestorGet(request), False, 0, response);
+				XSendEvent(x11.display, XSelectionRequestEvent.requestor(request), False, 0, response);
 				break;
 			}
 
@@ -305,14 +305,14 @@ class GLFWwindowLinux extends GLFWwindow {
 				return;
 
 			case GenericEvent: {
-				if ( XGenericEventCookie.extensionGet(event) == x11.xi.majorOpcode.get(0) && XGetEventData(x11.display, event) != 0 ) {
-					if ( XGenericEventCookie.evtypeGet(event) == XI_Motion ) {
-						ByteBuffer data = XGenericEventCookie.dataGet(event, XIDeviceEvent.SIZEOF);
+				if ( XGenericEventCookie.extension(event) == x11.xi.majorOpcode.get(0) && XGetEventData(x11.display, event) != 0 ) {
+					if ( XGenericEventCookie.evtype(event) == XI_Motion ) {
+						ByteBuffer data = XGenericEventCookie.data(event, XIDeviceEvent.SIZEOF);
 
-						window = findWindowByHandle(XIDeviceEvent.eventGet(data));
+						window = findWindowByHandle(XIDeviceEvent.event(data));
 						if ( window != null ) {
-							double event_x = XIDeviceEvent.event_xGet(data);
-							double event_y = XIDeviceEvent.event_yGet(data);
+							double event_x = XIDeviceEvent.event_x(data);
+							double event_y = XIDeviceEvent.event_y(data);
 
 							if ( event_x != window.x11CursorPosX || event_y != window.x11CursorPosY ) {
 								// The cursor was moved by something other than GLFW
@@ -345,7 +345,7 @@ class GLFWwindowLinux extends GLFWwindow {
 			}
 
 			default: {
-				switch ( XEvent.typeGet(event) - x11.randr.eventBase.get(0) ) {
+				switch ( XEvent.type(event) - x11.randr.eventBase.get(0) ) {
 					case RRScreenChangeNotify: {
 						XRRUpdateConfiguration(event);
 						break;
@@ -394,40 +394,40 @@ class GLFWwindowLinux extends GLFWwindow {
 
 	// Set the specified property to the contents of the requested selection
 	static long writeSelection(ByteBuffer request) {
-		if ( XSelectionRequestEvent.propertyGet(request) == None ) {
+		if ( XSelectionRequestEvent.property(request) == None ) {
 			// The requestor is a legacy client (ICCCM section 2.2)
 			return None;
 		}
 
-		if ( XSelectionRequestEvent.targetGet(request) == x11.TARGETS ) {
+		if ( XSelectionRequestEvent.target(request) == x11.TARGETS ) {
 			// The list of supported targets was requested
 
 			nXChangeProperty(x11.display,
-			                 XSelectionRequestEvent.requestorGet(request),
-			                 XSelectionRequestEvent.propertyGet(request),
+			                 XSelectionRequestEvent.requestor(request),
+			                 XSelectionRequestEvent.property(request),
 			                 XA_ATOM,
 			                 32,
 			                 PropModeReplace,
 			                 memAddress(x11.selection.formats),
 			                 _GLFW_CLIPBOARD_FORMAT_COUNT);
 
-			return XSelectionRequestEvent.propertyGet(request);
+			return XSelectionRequestEvent.property(request);
 		}
 
 		for ( int i = 0; i < _GLFW_CLIPBOARD_FORMAT_COUNT; i++ ) {
-			if ( XSelectionRequestEvent.targetGet(request) == x11.selection.formats.get(i) ) {
+			if ( XSelectionRequestEvent.target(request) == x11.selection.formats.get(i) ) {
 				// The requested target is one we support
 
 				XChangeProperty(x11.display,
-				                XSelectionRequestEvent.requestorGet(request),
-				                XSelectionRequestEvent.propertyGet(request),
-				                XSelectionRequestEvent.targetGet(request),
+				                XSelectionRequestEvent.requestor(request),
+				                XSelectionRequestEvent.property(request),
+				                XSelectionRequestEvent.target(request),
 				                8,
 				                PropModeReplace,
 				                memEncodeUTF8(x11.selection.string),
 				                x11.selection.string.length());
 
-				return XSelectionRequestEvent.propertyGet(request);
+				return XSelectionRequestEvent.property(request);
 			}
 		}
 

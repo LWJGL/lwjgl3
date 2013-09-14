@@ -73,31 +73,31 @@ public class StructTest {
 				String className = "class";
 				long iconSm = 876543210L;
 
-				WNDCLASSEX.sizeSet(s, WNDCLASSEX.SIZEOF);
-				WNDCLASSEX.styleSet(s, style);
-				WNDCLASSEX.wndProcSet(s, wndProc);
-				WNDCLASSEX.clsExtraSet(s, clsExtra);
-				WNDCLASSEX.wndExtraSet(s, wndExtra);
-				WNDCLASSEX.instanceSet(s, instance);
-				WNDCLASSEX.iconSet(s, icon);
-				WNDCLASSEX.cursorSet(s, cursor);
-				WNDCLASSEX.backgroundSet(s, background);
+				WNDCLASSEX.size(s, WNDCLASSEX.SIZEOF);
+				WNDCLASSEX.style(s, style);
+				WNDCLASSEX.wndProc(s, wndProc);
+				WNDCLASSEX.clsExtra(s, clsExtra);
+				WNDCLASSEX.wndExtra(s, wndExtra);
+				WNDCLASSEX.instance(s, instance);
+				WNDCLASSEX.icon(s, icon);
+				WNDCLASSEX.cursor(s, cursor);
+				WNDCLASSEX.background(s, background);
 				WNDCLASSEX.menuNameSet(s, menuName);
 				WNDCLASSEX.classNameSet(s, className);
-				WNDCLASSEX.iconSmSet(s, iconSm);
+				WNDCLASSEX.iconSm(s, iconSm);
 
-				assertEquals(WNDCLASSEX.sizeGet(s), WNDCLASSEX.SIZEOF);
-				assertEquals(WNDCLASSEX.styleGet(s), style);
-				assertEquals(WNDCLASSEX.wndProcGet(s), wndProc);
-				assertEquals(WNDCLASSEX.clsExtraGet(s), clsExtra);
-				assertEquals(WNDCLASSEX.wndExtraGet(s), wndExtra);
-				assertEquals(WNDCLASSEX.instanceGet(s), instance);
-				assertEquals(WNDCLASSEX.iconGet(s), icon);
-				assertEquals(WNDCLASSEX.cursorGet(s), cursor);
-				assertEquals(WNDCLASSEX.backgroundGet(s), background);
+				assertEquals(WNDCLASSEX.size(s), WNDCLASSEX.SIZEOF);
+				assertEquals(WNDCLASSEX.style(s), style);
+				assertEquals(WNDCLASSEX.wndProc(s), wndProc);
+				assertEquals(WNDCLASSEX.clsExtra(s), clsExtra);
+				assertEquals(WNDCLASSEX.wndExtra(s), wndExtra);
+				assertEquals(WNDCLASSEX.instance(s), instance);
+				assertEquals(WNDCLASSEX.icon(s), icon);
+				assertEquals(WNDCLASSEX.cursor(s), cursor);
+				assertEquals(WNDCLASSEX.background(s), background);
 				assertEquals(WNDCLASSEX.menuNameGets(s), menuName);
 				assertEquals(WNDCLASSEX.classNameGets(s), className);
-				assertEquals(WNDCLASSEX.iconSmGet(s), iconSm);
+				assertEquals(WNDCLASSEX.iconSm(s), iconSm);
 				break;
 			}
 			case LINUX: {
@@ -107,13 +107,13 @@ public class StructTest {
 				int arc_mode = X.ArcPieSlice;
 				byte dashes = 0x3;
 
-				XGCValues.cap_styleSet(s, cap_style);
-				XGCValues.arc_modeSet(s, arc_mode);
-				XGCValues.dashesSet(s, dashes);
+				XGCValues.cap_style(s, cap_style);
+				XGCValues.arc_mode(s, arc_mode);
+				XGCValues.dashes(s, dashes);
 
-				assertEquals(XGCValues.cap_styleGet(s), cap_style);
-				assertEquals(XGCValues.arc_modeGet(s), arc_mode);
-				assertEquals(XGCValues.dashesGet(s), dashes);
+				assertEquals(XGCValues.cap_style(s), cap_style);
+				assertEquals(XGCValues.arc_mode(s), arc_mode);
+				assertEquals(XGCValues.dashes(s), dashes);
 				break;
 			}
 		}
@@ -123,8 +123,8 @@ public class StructTest {
 	public void testStructConstructor() {
 		ByteBuffer s = cl_buffer_region.malloc(1337, 80085);
 
-		assertEquals(cl_buffer_region.originGet(s), 1337);
-		assertEquals(cl_buffer_region.sizeGet(s), 80085);
+		assertEquals(cl_buffer_region.origin(s), 1337);
+		assertEquals(cl_buffer_region.size(s), 80085);
 	}
 
 }

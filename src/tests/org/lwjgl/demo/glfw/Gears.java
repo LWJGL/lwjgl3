@@ -40,8 +40,8 @@ public class Gears extends AbstractGears {
 		long monitor = glfwGetPrimaryMonitor();
 		ByteBuffer vidmode = glfwGetVideoMode(monitor);
 
-		int monitorWidth = GLFWvidmode.widthGet(vidmode);
-		int monitorHeight = GLFWvidmode.heightGet(vidmode);
+		int monitorWidth = GLFWvidmode.width(vidmode);
+		int monitorHeight = GLFWvidmode.height(vidmode);
 
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);

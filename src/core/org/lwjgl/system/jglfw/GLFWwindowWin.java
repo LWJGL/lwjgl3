@@ -280,9 +280,9 @@ class GLFWwindowWin extends GLFWwindow {
 						ByteBuffer tme = __buffer.buffer();
 
 						JGLFWUtil.zeroMemory(tme, TRACKMOUSEEVENT.SIZEOF);
-						TRACKMOUSEEVENT.sizeSet(tme, TRACKMOUSEEVENT.SIZEOF);
-						TRACKMOUSEEVENT.flagsSet(tme, TME_LEAVE);
-						TRACKMOUSEEVENT.hwndTrackSet(tme, window.handle);
+						TRACKMOUSEEVENT.size(tme, TRACKMOUSEEVENT.SIZEOF);
+						TRACKMOUSEEVENT.flags(tme, TME_LEAVE);
+						TRACKMOUSEEVENT.hwndTrack(tme, window.handle);
 						TrackMouseEvent(tme);
 
 						window.cursorInside = true;
@@ -434,10 +434,10 @@ class GLFWwindowWin extends GLFWwindow {
 				APIBuffer __buffer = apiBuffer();
 				ByteBuffer next = __buffer.buffer();
 				if ( PeekMessage(next, NULL, 0, 0, PM_NOREMOVE) != 0 ) {
-					int message = MSG.messageGet(next);
+					int message = MSG.message(next);
 					if ( message == WM_KEYDOWN ||
 					     message == WM_SYSKEYDOWN ) {
-						if ( MSG.wParamGet(next) == VK_MENU && (MSG.lParamGet(next) & 0x01000000) != 0 && MSG.timeGet(next) == time ) {
+						if ( MSG.wParam(next) == VK_MENU && (MSG.lParam(next) & 0x01000000) != 0 && MSG.time(next) == time ) {
 							// Next message is a RALT down message, which
 							// means that this is NOT a proper LCTRL message!
 							return -1;

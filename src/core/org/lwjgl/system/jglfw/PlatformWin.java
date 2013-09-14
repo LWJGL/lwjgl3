@@ -121,13 +121,13 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		while ( true ) {
 			adapter.clear();
 			zeroBuffer(adapter);
-			DISPLAY_DEVICE.cbSet(adapter, DISPLAY_DEVICE.SIZEOF);
+			DISPLAY_DEVICE.cb(adapter, DISPLAY_DEVICE.SIZEOF);
 			if ( EnumDisplayDevices((ByteBuffer)null, devNum, adapter, 0) == FALSE )
 				break;
 
 			devNum++;
 
-			int adapterStateFlags = DISPLAY_DEVICE.StateFlagsGet(adapter);
+			int adapterStateFlags = DISPLAY_DEVICE.StateFlags(adapter);
 			if ( (adapterStateFlags & DISPLAY_DEVICE_MIRRORING_DRIVER) != 0 || (adapterStateFlags & DISPLAY_DEVICE_ACTIVE) == 0 )
 				continue;
 
@@ -137,7 +137,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			// Get monitor name
 			device.clear();
 			zeroBuffer(device);
-			DISPLAY_DEVICE.cbSet(device, DISPLAY_DEVICE.SIZEOF);
+			DISPLAY_DEVICE.cb(device, DISPLAY_DEVICE.SIZEOF);
 			EnumDisplayDevices(adapter, 0, device, 0);
 			// Move struct pointer to the device string
 			device.position(DISPLAY_DEVICE.DEVICESTRING);
@@ -170,15 +170,15 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	@Override
 	public void getMonitorPos(GLFWmonitor monitor, IntBuffer xpos, IntBuffer ypos) {
 		ByteBuffer settings = DEVMODE.malloc();
-		DEVMODE.sizeSet(settings, DEVMODE.SIZEOF);
+		DEVMODE.size(settings, DEVMODE.SIZEOF);
 
 		EnumDisplaySettingsEx(memEncodeUTF16(monitor.getName()), ENUM_CURRENT_SETTINGS, settings, EDS_ROTATEDMODE);
 
 		if ( xpos != null )
-			xpos.put(xpos.position(), DEVMODE.positionXGet(settings));
+			xpos.put(xpos.position(), DEVMODE.positionX(settings));
 
 		if ( ypos != null )
-			ypos.put(ypos.position(), DEVMODE.positionYGet(settings));
+			ypos.put(ypos.position(), DEVMODE.positionY(settings));
 	}
 
 	@Override
@@ -190,20 +190,20 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		int modeIndex = 0;
 		while ( true ) {
 			ByteBuffer dm = DEVMODE.malloc();
-			DEVMODE.sizeSet(dm, DEVMODE.SIZEOF);
+			DEVMODE.size(dm, DEVMODE.SIZEOF);
 
 			if ( EnumDisplaySettings(monitorName, modeIndex, dm) == FALSE )
 				break;
 
 			modeIndex++;
 
-			int bpp = DEVMODE.bitsPerPelGet(dm);
+			int bpp = DEVMODE.bitsPerPel(dm);
 			if ( bpp < 15 ) // Skip modes with less than 15 BPP
 				continue;
 
 			GLFWvidmode mode = new GLFWvidmode(
-				DEVMODE.pelsWidthGet(dm),
-				DEVMODE.pelsHeightGet(dm),
+				DEVMODE.pelsWidth(dm),
+				DEVMODE.pelsHeight(dm),
 				bpp
 			);
 
@@ -222,11 +222,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		ByteBuffer dm = __buffer.buffer();
 
 		zeroMemory(dm, DEVMODE.SIZEOF);
-		DEVMODE.sizeSet(dm, DEVMODE.SIZEOF);
+		DEVMODE.size(dm, DEVMODE.SIZEOF);
 
 		EnumDisplaySettings(monitor.getName(), ENUM_CURRENT_SETTINGS, dm);
 
-		return new GLFWvidmode(DEVMODE.pelsWidthGet(dm), DEVMODE.pelsHeightGet(dm), DEVMODE.bitsPerPelGet(dm));
+		return new GLFWvidmode(DEVMODE.pelsWidth(dm), DEVMODE.pelsHeight(dm), DEVMODE.bitsPerPel(dm));
 	}
 
 	@Override
@@ -372,10 +372,10 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		nClientToScreen(window.handle, __buffer.address());
 
 		if ( xpos != null )
-			xpos.put(xpos.position(), POINT.xGet(__buffer.buffer()));
+			xpos.put(xpos.position(), POINT.x(__buffer.buffer()));
 
 		if ( ypos != null )
-			ypos.put(ypos.position(), POINT.yGet(__buffer.buffer()));
+			ypos.put(ypos.position(), POINT.y(__buffer.buffer()));
 	}
 
 	@Override
@@ -383,14 +383,14 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		APIBuffer __buffer = apiBuffer();
 		ByteBuffer rect = __buffer.buffer();
 
-		RECT.leftSet(rect, xpos);
-		RECT.topSet(rect, ypos);
-		RECT.rightSet(rect, xpos);
-		RECT.bottomSet(rect, ypos);
+		RECT.left(rect, xpos);
+		RECT.top(rect, ypos);
+		RECT.right(rect, xpos);
+		RECT.bottom(rect, ypos);
 
 		AdjustWindowRectEx(rect, window.dwStyle, FALSE, window.dwExStyle);
 
-		SetWindowPos(window.handle, NULL, RECT.leftGet(rect), RECT.topGet(rect), 0, 0, SWP_NOACTIVATE | SWP_NOZORDER | SWP_NOSIZE);
+		SetWindowPos(window.handle, NULL, RECT.left(rect), RECT.top(rect), 0, 0, SWP_NOACTIVATE | SWP_NOZORDER | SWP_NOSIZE);
 	}
 
 	@Override
@@ -399,10 +399,10 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		nGetClientRect(window.handle, __buffer.address());
 
 		if ( width != null )
-			width.put(width.position(), RECT.rightGet(__buffer.buffer()));
+			width.put(width.position(), RECT.right(__buffer.buffer()));
 
 		if ( height != null )
-			height.put(height.position(), RECT.bottomGet(__buffer.buffer()));
+			height.put(height.position(), RECT.bottom(__buffer.buffer()));
 	}
 
 	@Override
@@ -419,8 +419,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			getFullWindowSize(window, width, height, rect);
 
 			// Calculate width and height of full window
-			int fullWidth = RECT.rightGet(rect) - RECT.leftGet(rect);
-			int fullHeight = RECT.bottomGet(rect) - RECT.topGet(rect);
+			int fullWidth = RECT.right(rect) - RECT.left(rect);
+			int fullHeight = RECT.bottom(rect) - RECT.top(rect);
 
 			SetWindowPos(window.handle, HWND_TOP, 0, 0, fullWidth, fullHeight, SWP_NOOWNERZORDER | SWP_NOMOVE | SWP_NOZORDER);
 		}
@@ -442,7 +442,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		ByteBuffer msg = __buffer.buffer();
 		while ( PeekMessage(msg, NULL, 0, 0, PM_REMOVE) != 0 ) {
-			if ( MSG.messageGet(msg) == WM_QUIT ) {
+			if ( MSG.message(msg) == WM_QUIT ) {
 				// Treat WM_QUIT as a close on all windows
 
 				for ( GLFWwindow w : windows )
@@ -477,8 +477,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 				ByteBuffer rect = __buffer.buffer();
 				GetClientRect(window.handle, rect);
 
-				int width = RECT.rightGet(rect);
-				int height = RECT.bottomGet(rect);
+				int width = RECT.right(rect);
+				int height = RECT.bottom(rect);
 
 				setCursorPos(window, width / 2, height / 2);
 				window.cursorCentered = true;
@@ -497,10 +497,10 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		APIBuffer __buffer = apiBuffer();
 		ByteBuffer pos = __buffer.buffer();
 
-		POINT.xSet(pos, (int)centerPosX);
-		POINT.ySet(pos, (int)centerPosY);
+		POINT.x(pos, (int)centerPosX);
+		POINT.y(pos, (int)centerPosY);
 		ClientToScreen(window.handle, pos);
-		SetCursorPos(POINT.xGet(pos), POINT.yGet(pos));
+		SetCursorPos(POINT.x(pos), POINT.y(pos));
 	}
 
 	@Override
@@ -531,17 +531,17 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		ByteBuffer jc = apiBuffer().buffer();
 		joyGetDevCaps(joy - GLFW_JOYSTICK_1, jc, JOYCAPS.SIZEOF);
 
-		int caps = JOYCAPS.capsGet(jc);
+		int caps = JOYCAPS.caps(jc);
 		int hats = (caps & JOYCAPS_HASPOV) != 0 && (caps & JOYCAPS_POV4DIR) != 0 ? 1 : 0;
 
 		switch ( param ) {
 			case GLFW_AXES:
 				// Return number of joystick axes
-				return JOYCAPS.numAxesGet(jc);
+				return JOYCAPS.numAxes(jc);
 
 			case GLFW_BUTTONS:
 				// Return number of joystick buttons
-				return JOYCAPS.numButtonsGet(jc) + hats * 4;
+				return JOYCAPS.numButtons(jc) + hats * 4;
 
 			default:
 				break;
@@ -576,23 +576,23 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		// Get position values for all axes
 		axis = 0;
 		if ( axis < axes.remaining() )
-			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.XPOS), JOYCAPS.xminGet(jci), JOYCAPS.xmaxGet(jci)));
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.XPOS), JOYCAPS.xmin(jci), JOYCAPS.xmax(jci)));
 
 		if ( axis < axes.remaining() )
-			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.YPOS), JOYCAPS.yminGet(jci), JOYCAPS.ymaxGet(jci)));
+			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.YPOS), JOYCAPS.ymin(jci), JOYCAPS.ymax(jci)));
 
-		int caps = JOYCAPS.capsGet(jci);
+		int caps = JOYCAPS.caps(jci);
 		if ( axis < axes.remaining() && (caps & JOYCAPS_HASZ) != 0 )
-			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.ZPOS), JOYCAPS.zminGet(jci), JOYCAPS.zmaxGet(jci)));
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.ZPOS), JOYCAPS.zmin(jci), JOYCAPS.zmax(jci)));
 
 		if ( axis < axes.remaining() && (caps & JOYCAPS_HASR) != 0 )
-			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.RPOS), JOYCAPS.rminGet(jci), JOYCAPS.rmaxGet(jci)));
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.RPOS), JOYCAPS.rmin(jci), JOYCAPS.rmax(jci)));
 
 		if ( axis < axes.remaining() && (caps & JOYCAPS_HASU) != 0 )
-			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.UPOS), JOYCAPS.uminGet(jci), JOYCAPS.umaxGet(jci)));
+			axes.put(axes.position() + axis++, calcJoystickPos(jci.getInt(info + JOYINFOEX.UPOS), JOYCAPS.umin(jci), JOYCAPS.umax(jci)));
 
 		if ( axis < axes.remaining() && (caps & JOYCAPS_HASV) != 0 )
-			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.VPOS), JOYCAPS.vminGet(jci), JOYCAPS.vmaxGet(jci)));
+			axes.put(axes.position() + axis++, -calcJoystickPos(jci.getInt(info + JOYINFOEX.VPOS), JOYCAPS.vmin(jci), JOYCAPS.vmax(jci)));
 
 		return axis;
 	}
@@ -623,7 +623,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		// Get states of all requested buttons
 		int button;
-		for ( button = 0; button < buttons.remaining() && button < JOYCAPS.numButtonsGet(jci); button++ ) {
+		for ( button = 0; button < buttons.remaining() && button < JOYCAPS.numButtons(jci); button++ ) {
 			buttons.put(buttons.position() + button, (byte)((jci.getInt(info + JOYINFOEX.BUTTONS) & (1 << button)) != 0 ? GLFW_PRESS : GLFW_RELEASE));
 		}
 
@@ -632,7 +632,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		// concurrent button presses
 		// NOTE: this API exposes only one hat
 
-		int caps = JOYCAPS.capsGet(jci);
+		int caps = JOYCAPS.caps(jci);
 		int hats = (caps & JOYCAPS_HASPOV) != 0 && (caps & JOYCAPS_POV4DIR) != 0 ? 1 : 0;
 
 		if ( hats > 0 ) {
@@ -789,8 +789,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			getFullWindowSize(window, wndconfig.width, wndconfig.height, rect);
 
 			// Calculate width and height of full window
-			fullWidth = RECT.rightGet(rect) - RECT.leftGet(rect);
-			fullHeight = RECT.bottomGet(rect) - RECT.topGet(rect);
+			fullWidth = RECT.right(rect) - RECT.left(rect);
+			fullHeight = RECT.bottom(rect) - RECT.top(rect);
 		}
 
 		window.wndprocRef = memGlobalRefNew(window.wndproc);
@@ -816,8 +816,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		ByteBuffer cursorPos = POINT.malloc();
 		GetCursorPos(cursorPos);
 		ScreenToClient(window.handle, cursorPos);
-		window.cursorPosX = window.oldCursorX = POINT.xGet(cursorPos);
-		window.cursorPosY = window.oldCursorY = POINT.yGet(cursorPos);
+		window.cursorPosX = window.oldCursorX = POINT.x(cursorPos);
+		window.cursorPosY = window.oldCursorY = POINT.y(cursorPos);
 
 		return createContext(window, wndconfig, fbconfig);
 	}
@@ -859,13 +859,13 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 		ByteBuffer dm = DEVMODE.malloc();
 
-		DEVMODE.sizeSet(dm, DEVMODE.SIZEOF);
-		DEVMODE.fieldsSet(dm, DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL);
-		DEVMODE.pelsWidthSet(dm, best.width);
-		DEVMODE.pelsHeightSet(dm, best.height);
+		DEVMODE.size(dm, DEVMODE.SIZEOF);
+		DEVMODE.fields(dm, DM_PELSWIDTH | DM_PELSHEIGHT | DM_BITSPERPEL);
+		DEVMODE.pelsWidth(dm, best.width);
+		DEVMODE.pelsHeight(dm, best.height);
 
 		int bpp = best.redBits + best.greenBits + best.blueBits;
-		DEVMODE.bitsPerPelSet(dm, bpp < 15 || 24 <= bpp ? 32 : bpp);
+		DEVMODE.bitsPerPel(dm, bpp < 15 || 24 <= bpp ? 32 : bpp);
 
 		if ( ChangeDisplaySettingsEx(monitor.getName(), dm, NULL, CDS_FULLSCREEN, NULL) != DISP_CHANGE_SUCCESSFUL ) {
 			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to set video mode");
@@ -876,10 +876,10 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	}
 
 	private static void getFullWindowSize(GLFWwindowWin window, int clientWidth, int clientHeight, ByteBuffer rect) {
-		RECT.leftSet(rect, 0);
-		RECT.topSet(rect, 0);
-		RECT.rightSet(rect, clientWidth);
-		RECT.bottomSet(rect, clientHeight);
+		RECT.left(rect, 0);
+		RECT.top(rect, 0);
+		RECT.right(rect, clientWidth);
+		RECT.bottom(rect, clientHeight);
 
 		// Adjust according to window styles
 		AdjustWindowRectEx(rect, window.dwStyle, FALSE, window.dwExStyle);
@@ -965,23 +965,23 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 			pixelFormat = pixelFormatOut.get(0);
 		} else {
-			PIXELFORMATDESCRIPTOR.sizeSet(pfd, PIXELFORMATDESCRIPTOR.SIZEOF);
-			PIXELFORMATDESCRIPTOR.versionSet(pfd, 1);
+			PIXELFORMATDESCRIPTOR.size(pfd, PIXELFORMATDESCRIPTOR.SIZEOF);
+			PIXELFORMATDESCRIPTOR.version(pfd, 1);
 
 			int flags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
 
 			if ( fbconfig.stereo != 0 )
 				flags |= PFD_STEREO;
 
-			PIXELFORMATDESCRIPTOR.flagsSet(pfd, flags);
+			PIXELFORMATDESCRIPTOR.flags(pfd, flags);
 
-			PIXELFORMATDESCRIPTOR.pixelTypeSet(pfd, PFD_TYPE_RGBA);
-			PIXELFORMATDESCRIPTOR.colorBitsSet(pfd, fbconfig.redBits + fbconfig.greenBits + fbconfig.blueBits);
-			PIXELFORMATDESCRIPTOR.alphaBitsSet(pfd, fbconfig.alphaBits);
-			PIXELFORMATDESCRIPTOR.accumBitsSet(pfd, fbconfig.accumRedBits + fbconfig.accumGreenBits + fbconfig.accumBlueBits);
-			PIXELFORMATDESCRIPTOR.depthBitsSet(pfd, fbconfig.depthBits);
-			PIXELFORMATDESCRIPTOR.stencilBitsSet(pfd, fbconfig.stencilBits);
-			PIXELFORMATDESCRIPTOR.auxBuffersSet(pfd, fbconfig.auxBuffers);
+			PIXELFORMATDESCRIPTOR.pixelType(pfd, PFD_TYPE_RGBA);
+			PIXELFORMATDESCRIPTOR.colorBits(pfd, fbconfig.redBits + fbconfig.greenBits + fbconfig.blueBits);
+			PIXELFORMATDESCRIPTOR.alphaBits(pfd, fbconfig.alphaBits);
+			PIXELFORMATDESCRIPTOR.accumBits(pfd, fbconfig.accumRedBits + fbconfig.accumGreenBits + fbconfig.accumBlueBits);
+			PIXELFORMATDESCRIPTOR.depthBits(pfd, fbconfig.depthBits);
+			PIXELFORMATDESCRIPTOR.stencilBits(pfd, fbconfig.stencilBits);
+			PIXELFORMATDESCRIPTOR.auxBuffers(pfd, fbconfig.auxBuffers);
 
 			pixelFormat = ChoosePixelFormat(window.dc, pfd);
 			if ( pixelFormat == 0 ) {
@@ -995,7 +995,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			return false;
 		}
 
-		int flags = PIXELFORMATDESCRIPTOR.flagsGet(pfd);
+		int flags = PIXELFORMATDESCRIPTOR.flags(pfd);
 		if ( (flags & PFD_GENERIC_ACCELERATED) == 0 && (flags & PFD_GENERIC_FORMAT) != 0 ) {
 			inputError(GLFW_PLATFORM_ERROR, "Win32: Failed to find an accelerated pixel format");
 			return false;

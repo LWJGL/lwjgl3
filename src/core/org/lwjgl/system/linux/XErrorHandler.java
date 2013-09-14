@@ -72,12 +72,12 @@ public class XErrorHandler {
 
 	/** Alternative version of {@link #invoke(long, long)}. */
 	public int invoke(long display, ByteBuffer error_event) {
-		System.err.println("[LWJGL] X error: " + getErrorName(XErrorEvent.error_codeGet(error_event)));
+		System.err.println("[LWJGL] X error: " + getErrorName(XErrorEvent.error_code(error_event)));
 		System.err.println("\tDisplay: " + LWJGLUtil.toHexString(display));
-		System.err.println("\tMajor opcode: " + XErrorEvent.request_codeGet(error_event));
-		System.err.println("\tMinor opcode: " + XErrorEvent.minor_codeGet(error_event));
-		System.err.println("\tSerial number: " + XErrorEvent.serialGet(error_event));
-		System.err.println("\tResource ID: " + LWJGLUtil.toHexString(XErrorEvent.resourceidGet(error_event)));
+		System.err.println("\tMajor opcode: " + XErrorEvent.request_code(error_event));
+		System.err.println("\tMinor opcode: " + XErrorEvent.minor_code(error_event));
+		System.err.println("\tSerial number: " + XErrorEvent.serial(error_event));
+		System.err.println("\tResource ID: " + LWJGLUtil.toHexString(XErrorEvent.resourceid(error_event)));
 
 		return 0;
 	}

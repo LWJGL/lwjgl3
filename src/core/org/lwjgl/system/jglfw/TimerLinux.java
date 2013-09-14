@@ -32,7 +32,7 @@ class TimerLinux {
 				@Override
 				public long getRawTime() {
 					clock_gettime(CLOCK_MONOTONIC, time);
-					return timespec.secGet(time) * 1000000000L + timespec.nsecGet(time);
+					return timespec.sec(time) * 1000000000L + timespec.nsec(time);
 				}
 			};
 		} else {
@@ -45,7 +45,7 @@ class TimerLinux {
 				@Override
 				public long getRawTime() {
 					gettimeofday(time, null);
-					return timeval.secGet(time) * 1000000L + timeval.usecGet(time);
+					return timeval.sec(time) * 1000000L + timeval.usec(time);
 				}
 			};
 		}

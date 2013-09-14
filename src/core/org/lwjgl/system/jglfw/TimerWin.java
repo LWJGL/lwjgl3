@@ -29,9 +29,9 @@ class TimerWin {
 
 		if ( QueryPerformanceFrequency(lint) != 0 ) {
 			hasPC = true;
-			resolution = 1.0 / (double)LARGE_INTEGER.QuadPartGet(lint);
+			resolution = 1.0 / (double)LARGE_INTEGER.QuadPart(lint);
 			QueryPerformanceCounter(lint);
-			t0_64 = LARGE_INTEGER.QuadPartGet(lint);
+			t0_64 = LARGE_INTEGER.QuadPart(lint);
 		} else {
 			hasPC = false;
 			resolution = 0.001; // winmm resolution is 1ms
@@ -44,7 +44,7 @@ class TimerWin {
 
 		if ( hasPC ) {
 			QueryPerformanceCounter(lint);
-			t = (double)(LARGE_INTEGER.QuadPartGet(lint) - t0_64);
+			t = (double)(LARGE_INTEGER.QuadPart(lint) - t0_64);
 		} else
 			t = (double)(timeGetTime() - t0_32);
 
@@ -54,7 +54,7 @@ class TimerWin {
 	public void setTime(double t) {
 		if ( hasPC ) {
 			QueryPerformanceCounter(lint);
-			t0_64 = LARGE_INTEGER.QuadPartGet(lint) - (long)(t / resolution);
+			t0_64 = LARGE_INTEGER.QuadPart(lint) - (long)(t / resolution);
 		} else
 			t0_32 = timeGetTime() - (int)(t * 1000.0);
 	}

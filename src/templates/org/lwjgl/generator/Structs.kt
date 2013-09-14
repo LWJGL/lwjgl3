@@ -346,14 +346,15 @@ public class Struct(
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
 				when {
-					it is StructMemberArray ->
-						{
-							println("\t\t${method}Set($struct, $param, ${param}Bytes);")
-						}
-					else                    ->
-						{
-							println("\t\t${method}Set($struct, $param);")
-						}
+					it is StructMemberArray -> {
+						println("\t\t${method}Set($struct, $param, ${param}Bytes);")
+					}
+					it.isNestedStruct       -> {
+						println("\t\t${method}Set($struct, $param);")
+					}
+					else                    -> {
+						println("\t\t${method}($struct, $param);")
+					}
 				}
 			}
 		}
@@ -427,7 +428,8 @@ public class Struct(
 				generateAlternativeConstructorSetters(it.nestedMembers, method)
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
-				println("\t\t${method}Set($struct, $param);")
+				val postfix = if ( it is StructMemberArray || it.nativeType is CharSequenceType || it.isNestedStruct ) "Set" else "";
+				println("\t\t${method}$postfix($struct, $param);")
 			}
 		}
 	}
@@ -478,7 +480,8 @@ public class Struct(
 			} else {
 				// Setter
 
-				print("\tpublic static void ${method}Set(ByteBuffer $struct, ")
+				var postfix = if ( it is StructMemberArray ) "Set" else "";
+				print("\tpublic static void ${method}$postfix(ByteBuffer $struct, ")
 				when {
 					it is StructMemberArray                                                       ->
 						{
@@ -534,12 +537,12 @@ public class Struct(
 								"checkNT${it.nativeType.charMapping.bytes}($param)"
 							else
 								param
-							println("${method}Set($struct, $param == null ? 0 : memAddress($buffer)); }")
-							println("\tpublic static void ${method}Set(ByteBuffer $struct, CharSequence $param) { ${method}Set($struct, $param == null ? 0 : memAddress(memEncode${it.nativeType.charMapping.charset}($param))); }")
+							println("${method}($struct, $param == null ? NULL : memAddress($buffer)); }")
+							println("\tpublic static void ${method}Set(ByteBuffer $struct, CharSequence $param) { ${method}($struct, $param == null ? NULL : memAddress(memEncode${it.nativeType.charMapping.charset}($param))); }")
 						}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER ->
 						{
-							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) { ${method}Set($struct, memAddress($param)); }")
+							println("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ${method}($struct, memAddress($param)); }")
 						}
 					else                                                                                  ->
 						{
@@ -583,7 +586,7 @@ public class Struct(
 						}
 					it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR ->
 						{
-							println("long ${method}Get(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
+							println("long ${method}(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
 						}
 					else                                                                          ->
 						{
@@ -594,9 +597,9 @@ public class Struct(
 
 							print(
 								if ( convertToInt )
-									"int ${method}Get(ByteBuffer $struct) { return $struct.get$bufferMethod("
+									"int ${method}(ByteBuffer $struct) { return $struct.get$bufferMethod("
 								else
-									"$javaType ${method}Get(ByteBuffer $struct) { return $struct.get$bufferMethod("
+									"$javaType ${method}(ByteBuffer $struct) { return $struct.get$bufferMethod("
 							)
 
 							print("$struct.position() + $field)")
@@ -622,7 +625,7 @@ public class Struct(
 
 							val param = array.name
 
-							println("\tpublic static void ${method}Getb(ByteBuffer $struct, ByteBuffer $param) {")
+							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) {")
 							println("\t\tcheckBufferGT($param, ${array.size} * $bytesPerElement);")
 							println("\t\t${method}Get($struct, memAddress($param), $param.remaining());")
 							println("\t}")
@@ -639,20 +642,20 @@ public class Struct(
 					it.nativeType is CharSequenceType                                                     ->
 						{
 							if ( it.nativeType.nullTerminated ) {
-								println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct) { long address = ${method}Get($struct); return address == 0 ? null : memByteBufferNT${it.nativeType.charMapping.bytes}(address); }")
-								println("\tpublic static String ${method}Gets(ByteBuffer $struct) { long address = ${method}Get($struct); return address == 0 ? null : memDecode${it.nativeType.charMapping.charset}(memByteBufferNT${it.nativeType.charMapping.bytes}(address)); }")
+								println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memByteBufferNT${it.nativeType.charMapping.bytes}(address); }")
+								println("\tpublic static String ${method}Gets(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(memByteBufferNT${it.nativeType.charMapping.bytes}(address)); }")
 							} else {
-								println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct, int size) { long address = ${method}Get($struct); return address == 0 ? null : memByteBuffer(address, size); }")
-								println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { long address = ${method}Get($struct); return address == 0 ? null : memDecode${it.nativeType.charMapping.charset}(memByteBuffer(address, size)); }")
+								println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
+								println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(memByteBuffer(address, size)); }")
 							}
 						}
 					it.nativeType is StructType                                                           ->
 						{
-							println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct) { return memByteBuffer(${method}Get($struct), ${it.nativeType.definition.className}.SIZEOF); }")
+							println("\tpublic static ByteBuffer ${method}b(ByteBuffer $struct) { return memByteBuffer(${method}($struct), ${it.nativeType.definition.className}.SIZEOF); }")
 						}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER ->
 						{
-							println("\tpublic static ByteBuffer ${method}Get(ByteBuffer $struct, int size) { long address = ${method}Get($struct); return address == 0 ? null : memByteBuffer(address, size); }")
+							println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
 						}
 					else                                                                                  ->
 						{

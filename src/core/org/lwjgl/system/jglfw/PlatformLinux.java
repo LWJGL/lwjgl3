@@ -135,12 +135,12 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			long primary = XRRGetOutputPrimary(x11.display, x11.root);
 
 			try {
-				for ( int i = 0; i < XRRScreenResources.ncrtcGet(sr); i++ ) {
-					ByteBuffer ci = XRRGetCrtcInfo(x11.display, sr, memGetAddress(XRRScreenResources.crtcsGet(sr) + i * POINTER_SIZE));
-					long output = memGetAddress(XRRCrtcInfo.outputsGet(ci));
+				for ( int i = 0; i < XRRScreenResources.ncrtc(sr); i++ ) {
+					ByteBuffer ci = XRRGetCrtcInfo(x11.display, sr, memGetAddress(XRRScreenResources.crtcs(sr) + i * POINTER_SIZE));
+					long output = memGetAddress(XRRCrtcInfo.outputs(ci));
 
-					for ( int j = 0; j < XRRCrtcInfo.noutputGet(ci); j++ ) {
-						if ( memGetAddress(XRRCrtcInfo.outputsGet(ci) + j * POINTER_SIZE) == primary ) {
+					for ( int j = 0; j < XRRCrtcInfo.noutput(ci); j++ ) {
+						if ( memGetAddress(XRRCrtcInfo.outputs(ci) + j * POINTER_SIZE) == primary ) {
 							output = primary;
 							break;
 						}
@@ -148,17 +148,17 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 					ByteBuffer oi = XRRGetOutputInfo(x11.display, sr, output);
 					try {
-						if ( XRROutputInfo.connectionGet(oi) != RR_Connected )
+						if ( XRROutputInfo.connection(oi) != RR_Connected )
 							continue;
 
-						String name = memDecodeASCII(XRROutputInfo.nameGet(oi, XRROutputInfo.nameLenGet(oi)));
+						String name = memDecodeASCII(XRROutputInfo.name(oi, XRROutputInfo.nameLen(oi)));
 
 						GLFWmonitor monitor = new GLFWmonitorLinux(
 							name,
-							(int)XRROutputInfo.mm_widthGet(oi),
-							(int)XRROutputInfo.mm_heightGet(oi),
+							(int)XRROutputInfo.mm_width(oi),
+							(int)XRROutputInfo.mm_height(oi),
 							output,
-							XRROutputInfo.crtcGet(oi)
+							XRROutputInfo.crtc(oi)
 						);
 
 						monitors.add(
@@ -233,21 +233,21 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			ByteBuffer sr = XRRGetScreenResources(x11.display, x11.root);
 			ByteBuffer oi = XRRGetOutputInfo(x11.display, sr, monitor.getOutput());
 
-			for ( int i = 0, oiModes = XRROutputInfo.nmodeGet(oi); i < oiModes; i++ ) {
-				long RRMode = memGetAddress(XRROutputInfo.modesGet(oi) + i * POINTER_SIZE);
+			for ( int i = 0, oiModes = XRROutputInfo.nmode(oi); i < oiModes; i++ ) {
+				long RRMode = memGetAddress(XRROutputInfo.modes(oi) + i * POINTER_SIZE);
 
 				int j = 0;
-				for ( int srModes = XRRScreenResources.nmodeGet(sr); j < srModes; j++ ) {
-					if ( memGetAddress(XRRScreenResources.modesGet(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.ID) == RRMode )
+				for ( int srModes = XRRScreenResources.nmode(sr); j < srModes; j++ ) {
+					if ( memGetAddress(XRRScreenResources.modes(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.ID) == RRMode )
 						break;
 				}
 
-				if ( j == XRRScreenResources.nmodeGet(sr) )
+				if ( j == XRRScreenResources.nmode(sr) )
 					continue;
 
 				GLFWvidmode mode = new GLFWvidmode(
-					memGetInt(XRRScreenResources.modesGet(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.WIDTH),
-					memGetInt(XRRScreenResources.modesGet(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.HEIGHT),
+					memGetInt(XRRScreenResources.modes(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.WIDTH),
+					memGetInt(XRRScreenResources.modes(sr) + j * XRRModeInfo.SIZEOF + XRRModeInfo.HEIGHT),
 					depth
 				);
 
@@ -278,8 +278,8 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			ByteBuffer sr = XRRGetScreenResources(x11.display, x11.root);
 			ByteBuffer ci = XRRGetCrtcInfo(x11.display, sr, ((GLFWmonitorLinux)monitor).getCrtc());
 
-			width = XRRCrtcInfo.widthGet(ci);
-			height = XRRCrtcInfo.heightGet(ci);
+			width = XRRCrtcInfo.width(ci);
+			height = XRRCrtcInfo.height(ci);
 
 			XRRFreeCrtcInfo(ci);
 			XRRFreeScreenResources(sr);
@@ -307,9 +307,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 			int size = GLFW_GAMMA_RAMP_SIZE * 2;
 			long dst = memAddress(ramp);
-			memCopy(XRRCrtcGamma.redGet(gamma), dst + GLFWgammaramp.RED, size);
-			memCopy(XRRCrtcGamma.greenGet(gamma), dst + GLFWgammaramp.GREEN, size);
-			memCopy(XRRCrtcGamma.blueGet(gamma), dst + GLFWgammaramp.BLUE, size);
+			memCopy(XRRCrtcGamma.red(gamma), dst + GLFWgammaramp.RED, size);
+			memCopy(XRRCrtcGamma.green(gamma), dst + GLFWgammaramp.GREEN, size);
+			memCopy(XRRCrtcGamma.blue(gamma), dst + GLFWgammaramp.BLUE, size);
 
 			XRRFreeGamma(gamma);
 		} else if ( x11.vidmode.available ) {
@@ -340,9 +340,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 			int size = GLFW_GAMMA_RAMP_SIZE * 2;
 			long src = memAddress(ramp);
-			memCopy(src + GLFWgammaramp.RED, XRRCrtcGamma.redGet(gamma), size);
-			memCopy(src + GLFWgammaramp.GREEN, XRRCrtcGamma.greenGet(gamma), size);
-			memCopy(src + GLFWgammaramp.BLUE, XRRCrtcGamma.blueGet(gamma), size);
+			memCopy(src + GLFWgammaramp.RED, XRRCrtcGamma.red(gamma), size);
+			memCopy(src + GLFWgammaramp.GREEN, XRRCrtcGamma.green(gamma), size);
+			memCopy(src + GLFWgammaramp.BLUE, XRRCrtcGamma.blue(gamma), size);
 
 			XRRSetCrtcGamma(x11.display, crtc, gamma);
 
@@ -532,9 +532,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		nXGetWindowAttributes(x11.display, window.handle, __buffer.address());
 
 		if ( width != null )
-			width.put(width.position(), XWindowAttributes.widthGet(__buffer.buffer()));
+			width.put(width.position(), XWindowAttributes.width(__buffer.buffer()));
 		if ( height != null )
-			height.put(height.position(), XWindowAttributes.heightGet(__buffer.buffer()));
+			height.put(height.position(), XWindowAttributes.height(__buffer.buffer()));
 	}
 
 	@Override
@@ -544,13 +544,13 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 			ByteBuffer hints = XAllocSizeHints();
 
-			XSizeHints.flagsSet(hints, XSizeHints.flagsGet(hints) | PMinSize | PMaxSize);
+			XSizeHints.flags(hints, XSizeHints.flags(hints) | PMinSize | PMaxSize);
 
-			XSizeHints.min_widthSet(hints, width);
-			XSizeHints.max_widthSet(hints, width);
+			XSizeHints.min_width(hints, width);
+			XSizeHints.max_width(hints, width);
 
-			XSizeHints.min_heightSet(hints, height);
-			XSizeHints.max_heightSet(hints, height);
+			XSizeHints.min_height(hints, height);
+			XSizeHints.max_height(hints, height);
 
 			XSetWMNormalHints(x11.display, window.handle, hints);
 			XFree(hints);
@@ -763,7 +763,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			// other threads out from the display during the entire wait period
 			while ( XCheckTypedEvent(x11.display, SelectionNotify, event) == 0 ) ;
 
-			if ( XEvent.xselectionPropertyGet(event) == None )
+			if ( XEvent.xselectionProperty(event) == None )
 				continue;
 
 			APIBuffer __buffer = apiBuffer();
@@ -776,11 +776,11 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			long a = __buffer.address();
 			nXGetWindowProperty(
 				x11.display,
-				XEvent.xselectionRequestorGet(event),
-				XEvent.xselectionPropertyGet(event),
+				XEvent.xselectionRequestor(event),
+				XEvent.xselectionProperty(event),
 				0, Long.MAX_VALUE,
 				False,
-				XEvent.xselectionTargetGet(event),
+				XEvent.xselectionTarget(event),
 				a + actualType,
 				a + actualFormat,
 				a + itemCount,
@@ -788,9 +788,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 				a + data
 			);
 
-			XDeleteProperty(x11.display, XEvent.xselectionRequestorGet(event), XEvent.xselectionPropertyGet(event));
+			XDeleteProperty(x11.display, XEvent.xselectionRequestor(event), XEvent.xselectionProperty(event));
 
-			if ( __buffer.pointerValue(actualType) == XEvent.xselectionTargetGet(event) )
+			if ( __buffer.pointerValue(actualType) == XEvent.xselectionTarget(event) )
 				x11.selection.string = memDecodeUTF8(memByteBufferNT1(__buffer.pointerValue(data)));
 
 			nXFree(__buffer.pointerValue(data));
@@ -922,11 +922,11 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		// Get keyboard description
 		ByteBuffer descr = XkbGetKeyboard(x11.display, XkbAllComponentsMask, XkbUseCoreKbd);
 
-		ByteBuffer names = XkbDescRec.namesGetb(descr);
+		ByteBuffer names = XkbDescRec.namesb(descr);
 
 		// Find the X11 key code -> GLFW key code mapping
-		for ( int keyCode = XkbDescRec.min_key_codeGet(descr), maxKeyCode = XkbDescRec.max_key_codeGet(descr); keyCode <= maxKeyCode; ++keyCode ) {
-			ByteBuffer key = memByteBuffer(XkbNamesRec.keysGet(names) + keyCode * XkbKeyNameRec.SIZEOF, XkbKeyNameRec.SIZEOF);
+		for ( int keyCode = XkbDescRec.min_key_code(descr), maxKeyCode = XkbDescRec.max_key_code(descr); keyCode <= maxKeyCode; ++keyCode ) {
+			ByteBuffer key = memByteBuffer(XkbNamesRec.keys(names) + keyCode * XkbKeyNameRec.SIZEOF, XkbKeyNameRec.SIZEOF);
 
 			// Get the key name
 			String name = XkbKeyNameRec.nameGets(key);
@@ -1406,7 +1406,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			// possible as well.
 			ByteBuffer rr = XRRGetScreenResources(x11.display, x11.root);
 
-			if ( XRRGetCrtcGammaSize(x11.display, memGetAddress(XRRScreenResources.crtcsGet(rr))) == 0 ) {
+			if ( XRRGetCrtcGammaSize(x11.display, memGetAddress(XRRScreenResources.crtcs(rr))) == 0 ) {
 				// This is probably older Nvidia RandR with broken gamma support
 				// Flag it as useless and try Xf86VidMode below, if available
 				x11.randr.gammaBroken = true;
@@ -1512,14 +1512,14 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		long cursormask = XCreatePixmap(x11.display, x11.root, 1, 1, 1);
 
 		ByteBuffer xgc = XGCValues.malloc();
-		XGCValues.functionSet(xgc, GXclear);
+		XGCValues.function(xgc, GXclear);
 		long gc = XCreateGC(x11.display, cursormask, GCFunction, xgc);
 		XFillRectangle(x11.display, cursormask, gc, 0, 0, 1, 1);
 
 		ByteBuffer col = XColor.malloc();
-		XColor.pixelSet(col, 0);
-		XColor.redSet(col, 0);
-		XColor.flagsSet(col, 4);
+		XColor.pixel(col, 0);
+		XColor.red(col, 0);
+		XColor.flags(col, 4);
 		long cursor = XCreatePixmapCursor(x11.display, cursormask, cursormask, col, col, 0, 0);
 		XFreePixmap(x11.display, cursormask);
 		XFreeGC(x11.display, gc);
@@ -1542,9 +1542,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			int wamask = CWBorderPixel | CWColormap | CWEventMask;
 
 			ByteBuffer wa = XSetWindowAttributes.malloc();
-			XSetWindowAttributes.colormapSet(wa, window.colormap);
-			XSetWindowAttributes.border_pixelSet(wa, 0);
-			XSetWindowAttributes.event_maskSet(
+			XSetWindowAttributes.colormap(wa, window.colormap);
+			XSetWindowAttributes.border_pixel(wa, 0);
+			XSetWindowAttributes.event_mask(
 				wa,
 				StructureNotifyMask | KeyPressMask | KeyReleaseMask |
 				PointerMotionMask | ButtonPressMask | ButtonReleaseMask |
@@ -1556,7 +1556,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 				// HACK: This is a workaround for windows without a background pixel
 				// not getting any decorations on certain older versions of Compiz
 				// running on Intel hardware
-				XSetWindowAttributes.background_pixelSet(wa, XBlackPixel(x11.display, x11.screen));
+				XSetWindowAttributes.background_pixel(wa, XBlackPixel(x11.display, x11.screen));
 				wamask |= CWBackPixel;
 			}
 
@@ -1603,7 +1603,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			// are tasks usually performed by the window manager
 
 			ByteBuffer attributes = XSetWindowAttributes.malloc();
-			XSetWindowAttributes.override_redirectSet(attributes, True);
+			XSetWindowAttributes.override_redirect(attributes, True);
 			XChangeWindowAttributes(x11.display, window.handle, CWOverrideRedirect, attributes);
 
 			window.overrideRedirect = true;
@@ -1637,8 +1637,8 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 				return false;
 			}
 
-			XWMHints.flagsSet(hints, StateHint);
-			XWMHints.initial_stateSet(hints, NormalState);
+			XWMHints.flags(hints, StateHint);
+			XWMHints.initial_state(hints, NormalState);
 
 			XSetWMHints(x11.display, window.handle, hints);
 			XFree(hints);
@@ -1647,19 +1647,19 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		// Set ICCCM WM_NORMAL_HINTS property (even if no parts are set)
 		{
 			ByteBuffer hints = XAllocSizeHints();
-			XSizeHints.flagsSet(hints, 0);
+			XSizeHints.flags(hints, 0);
 
 			if ( wndconfig.monitor != null ) {
-				XSizeHints.flagsSet(hints, XSizeHints.flagsGet(hints) | PPosition);
+				XSizeHints.flags(hints, XSizeHints.flags(hints) | PPosition);
 				getMonitorPos(wndconfig.monitor, memAddress(hints) + XSizeHints.X, memAddress(hints) + XSizeHints.Y);
 			}
 
 			if ( !wndconfig.resizable ) {
-				XSizeHints.flagsSet(hints, XSizeHints.flagsGet(hints) | PMinSize | PMaxSize);
-				XSizeHints.min_widthSet(hints, wndconfig.width);
-				XSizeHints.max_widthSet(hints, wndconfig.width);
-				XSizeHints.min_heightSet(hints, wndconfig.height);
-				XSizeHints.max_heightSet(hints, wndconfig.height);
+				XSizeHints.flags(hints, XSizeHints.flags(hints) | PMinSize | PMaxSize);
+				XSizeHints.min_width(hints, wndconfig.width);
+				XSizeHints.max_width(hints, wndconfig.width);
+				XSizeHints.min_height(hints, wndconfig.height);
+				XSizeHints.max_height(hints, wndconfig.height);
 			}
 
 			XSetWMNormalHints(x11.display, window.handle, hints);
@@ -1672,9 +1672,9 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			ByteBuffer eventmask = XIEventMask.malloc();
 			ByteBuffer mask = createByteBuffer(1);
 
-			XIEventMask.deviceidSet(eventmask, 2);
-			XIEventMask.mask_lenSet(eventmask, 1); // sizeof(mask)
-			XIEventMask.maskSet(eventmask, mask);
+			XIEventMask.deviceid(eventmask, 2);
+			XIEventMask.mask_len(eventmask, 1); // sizeof(mask)
+			XIEventMask.mask(eventmask, mask);
 
 			XISetMask(mask, XInput2.XI_Motion);
 
@@ -1723,10 +1723,10 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 				ByteBuffer event = XEvent.malloc();
 
-				XEvent.typeSet(event, ClientMessage);
-				XEvent.xclientWindowSet(event, window.handle);
-				XEvent.xclientFormatSet(event, 32); // Data is 32-bit longs
-				XEvent.xclientMessage_typeSet(event, x11.NET_ACTIVE_WINDOW);
+				XEvent.type(event, ClientMessage);
+				XEvent.xclientWindow(event, window.handle);
+				XEvent.xclientFormat(event, 32); // Data is 32-bit longs
+				XEvent.xclientMessage_type(event, x11.NET_ACTIVE_WINDOW);
 				long datal = memAddress(event) + XEvent.XCLIENT + XClientMessageEvent.DATA_L;
 				memPutAddress(datal + 0 * POINTER_SIZE, 1); // Sender is a normal application
 				memPutAddress(datal + 1 * POINTER_SIZE, 0); // We don't really know the timestamp
@@ -1740,10 +1740,10 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 			ByteBuffer event = XEvent.malloc();
 
-			XEvent.typeSet(event, ClientMessage);
-			XEvent.xclientWindowSet(event, window.handle);
-			XEvent.xclientFormatSet(event, 32); // Data is 32-bit longs
-			XEvent.xclientMessage_typeSet(event, x11.NET_WM_STATE);
+			XEvent.type(event, ClientMessage);
+			XEvent.xclientWindow(event, window.handle);
+			XEvent.xclientFormat(event, 32); // Data is 32-bit longs
+			XEvent.xclientMessage_type(event, x11.NET_WM_STATE);
 			long datal = memAddress(event) + XEvent.XCLIENT + XClientMessageEvent.DATA_L;
 			memPutAddress(datal + 0 * POINTER_SIZE, _NET_WM_STATE_ADD);
 			memPutAddress(datal + 1 * POINTER_SIZE, x11.NET_WM_STATE_FULLSCREEN);
@@ -1786,10 +1786,10 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 			ByteBuffer event = XEvent.malloc();
 
-			XEvent.typeSet(event, ClientMessage);
-			XEvent.xclientWindowSet(event, window.handle);
-			XEvent.xclientFormatSet(event, 32); // Data is 32-bit longs
-			XEvent.xclientMessage_typeSet(event, x11.NET_WM_STATE);
+			XEvent.type(event, ClientMessage);
+			XEvent.xclientWindow(event, window.handle);
+			XEvent.xclientFormat(event, 32); // Data is 32-bit longs
+			XEvent.xclientMessage_type(event, x11.NET_WM_STATE);
 			long datal = memAddress(event) + XEvent.XCLIENT + XClientMessageEvent.DATA_L;
 			memPutAddress(datal + 0 * POINTER_SIZE, _NET_WM_STATE_REMOVE);
 			memPutAddress(datal + 1 * POINTER_SIZE, x11.NET_WM_STATE_FULLSCREEN);
@@ -1809,20 +1809,20 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			ByteBuffer sr = XRRGetScreenResources(x11.display, x11.root);
 			ByteBuffer ci = XRRGetCrtcInfo(x11.display, sr, monitor.getCrtc());
 
-			for ( int i = 0; i < XRRScreenResources.nmodeGet(sr); i++ ) {
+			for ( int i = 0; i < XRRScreenResources.nmode(sr); i++ ) {
 				boolean usable = true;
 				ByteBuffer mi = memByteBuffer(memAddress(sr) + XRRScreenResources.MODES + i * XRRModeInfo.SIZEOF, XRRModeInfo.SIZEOF);
 
-				for ( int j = 0; j < XRRCrtcInfo.noutputGet(ci); j++ ) {
-					ByteBuffer oi = XRRGetOutputInfo(x11.display, sr, XRRCrtcInfo.outputsGet(ci) + j * POINTER_SIZE);
+				for ( int j = 0; j < XRRCrtcInfo.noutput(ci); j++ ) {
+					ByteBuffer oi = XRRGetOutputInfo(x11.display, sr, XRRCrtcInfo.outputs(ci) + j * POINTER_SIZE);
 
 					int k;
-					for ( k = 0; k < XRROutputInfo.nmodeGet(oi); k++ ) {
-						if ( memGetAddress(XRROutputInfo.modesGet(oi) + k * POINTER_SIZE) == XRRModeInfo.idGet(mi) )
+					for ( k = 0; k < XRROutputInfo.nmode(oi); k++ ) {
+						if ( memGetAddress(XRROutputInfo.modes(oi) + k * POINTER_SIZE) == XRRModeInfo.id(mi) )
 							break;
 					}
 
-					if ( k == XRROutputInfo.nmodeGet(oi) )
+					if ( k == XRROutputInfo.nmode(oi) )
 						usable = false;
 
 					XRRFreeOutputInfo(oi);
@@ -1831,27 +1831,27 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 				if ( !usable )
 					continue;
 
-				if ( (XRRModeInfo.modeFlagsGet(mi) & RR_Interlace) != 0 )
+				if ( (XRRModeInfo.modeFlags(mi) & RR_Interlace) != 0 )
 					continue;
 
-				int sizeDiff = (XRRModeInfo.widthGet(mi) - desired.width) * (XRRModeInfo.widthGet(mi) - desired.width) + (XRRModeInfo.heightGet(mi) - desired.height) * (XRRModeInfo.heightGet(mi) - desired.height);
+				int sizeDiff = (XRRModeInfo.width(mi) - desired.width) * (XRRModeInfo.width(mi) - desired.width) + (XRRModeInfo.height(mi) - desired.height) * (XRRModeInfo.height(mi) - desired.height);
 
 				if ( sizeDiff < leastSizeDiff ) {
-					bestMode = XRRModeInfo.idGet(mi);
+					bestMode = XRRModeInfo.id(mi);
 					leastSizeDiff = sizeDiff;
 				}
 			}
 
-			monitor.oldMode = XRRCrtcInfo.modeGet(ci);
+			monitor.oldMode = XRRCrtcInfo.mode(ci);
 
 			nXRRSetCrtcConfig(x11.display,
 			                  memAddress(sr), monitor.getCrtc(),
 			                  CurrentTime,
-			                  XRRCrtcInfo.xGet(ci), XRRCrtcInfo.yGet(ci),
+			                  XRRCrtcInfo.x(ci), XRRCrtcInfo.y(ci),
 			                  bestMode,
-			                  (short)XRRCrtcInfo.rotationGet(ci),
-			                  XRRCrtcInfo.outputsGet(ci),
-			                  XRRCrtcInfo.noutputGet(ci)
+			                  (short)XRRCrtcInfo.rotation(ci),
+			                  XRRCrtcInfo.outputs(ci),
+			                  XRRCrtcInfo.noutput(ci)
 			);
 
 			XRRFreeCrtcInfo(ci);
@@ -1868,11 +1868,11 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			nXRRSetCrtcConfig(x11.display,
 			                  memAddress(sr), monitor.getCrtc(),
 			                  CurrentTime,
-			                  XRRCrtcInfo.xGet(ci), XRRCrtcInfo.yGet(ci),
+			                  XRRCrtcInfo.x(ci), XRRCrtcInfo.y(ci),
 			                  monitor.oldMode,
-			                  (short)XRRCrtcInfo.rotationGet(ci),
-			                  XRRCrtcInfo.outputsGet(ci),
-			                  XRRCrtcInfo.noutputGet(ci)
+			                  (short)XRRCrtcInfo.rotation(ci),
+			                  XRRCrtcInfo.outputs(ci),
+			                  XRRCrtcInfo.noutput(ci)
 			);
 
 			XRRFreeCrtcInfo(ci);
@@ -1988,7 +1988,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		XSetErrorHandler(new XErrorHandler() {
 			@Override
 			public int invoke(long display, ByteBuffer error_event) {
-				glfwErrorCode = XErrorEvent.error_codeGet(error_event);
+				glfwErrorCode = XErrorEvent.error_code(error_event);
 				return 0;
 			}
 		});
@@ -2232,12 +2232,12 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 					break;
 
 				// We don't care if it's an init event or not
-				JSEvent.typeSet(e, JSEvent.typeGet(e) & ~JS_EVENT_INIT);
+				JSEvent.type(e, JSEvent.type(e) & ~JS_EVENT_INIT);
 
-				int number = JSEvent.numberGet(e);
-				switch ( JSEvent.typeGet(e) ) {
+				int number = JSEvent.number(e);
+				switch ( JSEvent.type(e) ) {
 					case JS_EVENT_AXIS:
-						x11.joystick[i].axis.put(number, (float)JSEvent.valueGet(e) / 32767.0f);
+						x11.joystick[i].axis.put(number, (float)JSEvent.value(e) / 32767.0f);
 
 						// We need to change the sign for the Y axes, so that
 						// positive = up/forward, according to the GLFW spec.
@@ -2248,7 +2248,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 						break;
 
 					case JS_EVENT_BUTTON:
-						x11.joystick[i].button.put(number, (byte)(JSEvent.valueGet(e) != 0 ? GLFW_PRESS : GLFW_RELEASE));
+						x11.joystick[i].button.put(number, (byte)(JSEvent.value(e) != 0 ? GLFW_PRESS : GLFW_RELEASE));
 						break;
 
 					default:
