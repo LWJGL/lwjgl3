@@ -124,7 +124,7 @@
 		<!-- LINK -->
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname} -v -L../../libs/macosx/x86_64 -lglfw3"/>
+			<arg line="-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname} -L../../libs/macosx/x86_64 -lglfw3"/>
 			<arg value="-framework"/><arg value="AppKit"/>
 			<arg value="-framework"/><arg value="CoreFoundation"/>
 			<arg value="-framework"/><arg value="Cocoa"/>
