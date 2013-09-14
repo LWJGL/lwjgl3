@@ -12,7 +12,7 @@ static void CL_CALLBACK CLEventCallbackProc(
 	cl_int event_command_exec_status,
 	void *user_data
 ) {
-	ATTACH_THREAD()
+	JNIEnv* env = getEnv();
 
     (*env)->CallVoidMethod(env, (jobject)user_data, CLEventCallbackInvoke,
         (jlong)(intptr_t)event,
@@ -21,8 +21,6 @@ static void CL_CALLBACK CLEventCallbackProc(
 
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, (jobject)user_data);
-
-	DETACH_THREAD()
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLEventCallback, CLEventCallback)

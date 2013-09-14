@@ -13,7 +13,7 @@ static void CL_CALLBACK CLContextCallbackProc(
 	size_t cb,
 	void *user_data
 ) {
-	ATTACH_THREAD()
+	JNIEnv* env = getEnv();
 
 	// user_data is a weak global reference
 	jobject callback = (*env)->NewLocalRef(env, (jweak)user_data);
@@ -25,8 +25,6 @@ static void CL_CALLBACK CLContextCallbackProc(
 	    );
 	    (*env)->DeleteLocalRef(env, callback);
     }
-
-    DETACH_THREAD()
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLContextCallback, CLContextCallback)

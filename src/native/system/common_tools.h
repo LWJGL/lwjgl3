@@ -17,38 +17,16 @@
 	#include "MacOSXConfig.h"
 #endif
 
-// getEnv and getThreadEnv should be used when a function is always called by a JVM thread.
-
-// Fastest, uses TLS.
+// Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
 extern JNIEnv *getEnv(void);
-// Fast.
-extern void getThreadEnv(JNIEnv **);
+
+// Sync
+extern JNIEnv *getThreadEnv(void);
 
 // Async
 extern JNIEnv *attachCurrentThread(void);
+extern JNIEnv *attachCurrentThreadAsDaemon(void);
 extern void detachCurrentThread(void);
-
-// ENTER_ENV / EXIT_ENV should be used when a function may be called by both JVM and non-JVM threads.
-
-#define ENTER_ENV() \
-	jboolean async = JNI_FALSE; \
-	JNIEnv *env = getEnv(); \
-	if ( env == NULL ) { \
-		async = JNI_TRUE; \
-        env = attachCurrentThread(); \
-    }
-
-#define EXIT_ENV() \
-	if ( async ) \
-		detachCurrentThread();
-
-// ATTACH_THREAD / DETACH_THREAD should be used when a function is always called by a non-JVM thread.
-
-#define ATTACH_THREAD() \
-	JNIEnv *env = attachCurrentThread();
-
-#define DETACH_THREAD() \
-	detachCurrentThread();
 
 // -----------------------------------------------------
 

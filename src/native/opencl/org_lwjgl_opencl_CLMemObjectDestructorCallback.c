@@ -11,7 +11,7 @@ static void CL_CALLBACK CLMemObjectDestructorCallbackProc(
 	cl_mem memobj,
 	void *user_data
 ) {
-	ATTACH_THREAD()
+	JNIEnv* env = getEnv();
 
     (*env)->CallVoidMethod(env, (jobject)user_data, CLMemObjectDestructorCallbackInvoke,
         (jlong)(intptr_t)memobj
@@ -19,8 +19,6 @@ static void CL_CALLBACK CLMemObjectDestructorCallbackProc(
 
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, (jobject)user_data);
-
-	DETACH_THREAD()
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLMemObjectDestructorCallback, CLMemObjectDestructorCallback)

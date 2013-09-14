@@ -16,7 +16,7 @@ static void CL_CALLBACK CLNativeKernelProc(
 	jobject kernel = (jobject)*kernel_args++;
 	jint cb_args = *(jint *)kernel_args++;
 
-	ATTACH_THREAD()
+	JNIEnv* env = getEnv();
 
     (*env)->CallVoidMethod(env, kernel, CLNativeKernelInvoke,
         (jlong)(intptr_t)kernel_args,
@@ -25,8 +25,6 @@ static void CL_CALLBACK CLNativeKernelProc(
 
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, kernel);
-
-	DETACH_THREAD()
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLNativeKernel, CLNativeKernel)

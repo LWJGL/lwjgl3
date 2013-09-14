@@ -11,18 +11,12 @@ static int XErrorHandlerProc(
 	Display* display,
 	XErrorEvent* error_event
 ) {
-	int __result;
+	JNIEnv* env = getEnv();
 
-	ENTER_ENV()
-
-	__result = (*env)->CallStaticIntMethod(
+	return (*env)->CallStaticIntMethod(
 		env, XErrorHandlerClass, XErrorHandlerInvoke,
 		(jlong)(intptr_t)display, (jlong)(intptr_t)error_event
 	);
-
-	EXIT_ENV()
-
-	return __result;
 }
 
 CALLBACK_SETUP_STATIC(org_lwjgl_system_linux_XErrorHandler, XErrorHandler)

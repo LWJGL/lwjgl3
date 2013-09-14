@@ -8,7 +8,7 @@
 DECLARE_CALLBACK(DEBUGPROC);
 
 static void APIENTRY DEBUGPROCProc(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam) {
-	ENTER_ENV()
+	JNIEnv* env = getEnv();
 
     (*env)->CallVoidMethod(env, (jobject)userParam, DEBUGPROCInvoke,
         (jint)source,
@@ -18,8 +18,6 @@ static void APIENTRY DEBUGPROCProc(GLenum source, GLenum type, GLuint id, GLenum
         (jint)length,
         (jlong)(intptr_t)message
     );
-
-    EXIT_ENV()
 }
 
 CALLBACK_SETUP(org_lwjgl_opengl_DEBUGPROC, DEBUGPROC)

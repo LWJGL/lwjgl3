@@ -21,6 +21,7 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.KHRICD.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public final class CLDemo {
 
@@ -59,6 +60,7 @@ public final class CLDemo {
 				CLCapabilities caps = device.getCapabilities();
 
 				System.out.println("\n\tNEW DEVICE: " + device.getPointer());
+				System.out.print("\t");
 				System.out.println(caps);
 				System.out.println("\t-------------------------");
 
@@ -93,7 +95,7 @@ public final class CLDemo {
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long cl_mem) {
-							System.out.println("Buffer destructed (1): " + cl_mem);
+							System.out.println("\t\tBuffer destructed (1): " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
@@ -101,7 +103,7 @@ public final class CLDemo {
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long cl_mem) {
-							System.out.println("Buffer destructed (2): " + cl_mem);
+							System.out.println("\t\tBuffer destructed (2): " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
@@ -117,7 +119,7 @@ public final class CLDemo {
 					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {
 						@Override
 						public void invoke(long cl_mem) {
-							System.out.println("Sub Buffer destructed: " + cl_mem);
+							System.out.println("\t\tSub Buffer destructed: " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
@@ -125,7 +127,7 @@ public final class CLDemo {
 
 				long exec_caps = device.getInfoLong(CL_DEVICE_EXECUTION_CAPABILITIES);
 				if ( (exec_caps & CL_EXEC_NATIVE_KERNEL) == CL_EXEC_NATIVE_KERNEL ) {
-					System.out.println("-TRYING TO EXEC NATIVE KERNEL-");
+					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
 					CLCommandQueue queue = clCreateCommandQueue(context, device, 0L, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
@@ -163,10 +165,34 @@ public final class CLDemo {
 
 					errcode = clReleaseEvent(e);
 					checkCLError(errcode);
+
+					kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2);
+
+					CLNativeKernel kernel = new CLNativeKernel() {
+						@Override
+						public void invoke(long args, int cb_args) {
+						}
+					};
+
+					long time = System.nanoTime();
+					int REPEAT = 100000;
+					for ( int i = 0; i < REPEAT; i++ )
+						clEnqueueNativeKernel(queue, kernel, kernelArgs, null, null, null, null);
+					clFinish(queue);
+					time = System.nanoTime() - time;
+
+					System.out.printf("\n\t\tEMPTY NATIVE KERNEL AVG EXEC TIME: %.4fus\n", (double)time / (REPEAT * 1000));
+
+					errcode = clReleaseCommandQueue(queue);
+					checkCLError(errcode);
 				}
 
-				errcode = clReleaseMemObject(subbuffer);
-				checkCLError(errcode);
+				System.out.println();
+
+				if ( subbuffer != null ) {
+					errcode = clReleaseMemObject(subbuffer);
+					checkCLError(errcode);
+				}
 
 				errcode = clReleaseMemObject(buffer);
 				checkCLError(errcode);

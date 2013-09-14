@@ -11,7 +11,7 @@ static void CL_CALLBACK CLProgramCallbackProc(
 	cl_program program,
 	void *user_data
 ) {
-	ATTACH_THREAD()
+	JNIEnv* env = getEnv();
 
     (*env)->CallVoidMethod(env, (jobject)user_data, CLProgramCallbackInvoke,
         (jlong)(intptr_t)program
@@ -19,8 +19,6 @@ static void CL_CALLBACK CLProgramCallbackProc(
 
 	// Delete the global reference, will not be needed anymore
 	(*env)->DeleteGlobalRef(env, (jobject)user_data);
-
-	DETACH_THREAD()
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLProgramCallback, CLProgramCallback)
