@@ -51,8 +51,8 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 		"""
 		Creates an OpenGL context.
 
-		If {@code shareContext} is not 0L, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code shareContext}, all other
-		contexts {@code shareContext} already shares with, and the newly created context. An arbitrary number of contexts can share data in this fashion.
+		If {@code shareContext} is not $NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code shareContext}, all
+		other contexts {@code shareContext} already shares with, and the newly created context. An arbitrary number of contexts can share data in this fashion.
 		""",
 
 		HDC.IN("hdc", ""),

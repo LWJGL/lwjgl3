@@ -74,7 +74,7 @@ class GLFWwindowWin extends GLFWwindow {
 		return HIWORD(param);
 	}
 
-	private class WindowProcWin extends WindowProc {
+	private class WindowProcWin implements WindowProc {
 
 		private final PlatformWin platform;
 

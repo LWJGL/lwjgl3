@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLMemObjectDestructorCallbackInvoke;
+DECLARE_CALLBACK(CLMemObjectDestructorCallback)
 
 static void CL_CALLBACK CLMemObjectDestructorCallbackProc(
 	cl_mem memobj,

@@ -4,43 +4,47 @@
  */
 package org.lwjgl.opencl;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.lang.reflect.Method;
 
-/**
- * Instances of this class may be passed to the {@link CL11#clSetMemObjectDestructorCallback(CLMem, CLMemObjectDestructorCallback)} method.
- * <p/>
- * Override the {@link #invoke(long)} method to implement any necessary actions. The default implementation prints a simple description in the standard
- * output stream.
- */
-public class CLMemObjectDestructorCallback {
+import static org.lwjgl.system.APIUtil.*;
 
-	static final long CALLBACK;
-
-	static {
-		try {
-			CALLBACK = setCallback(CLMemObjectDestructorCallback.class.getMethod(
-				"invoke", long.class
-			));
-		} catch (Exception e) {
-			throw new OpenCLException(e);
-		}
-	}
-
-	protected CLMemObjectDestructorCallback() {
-	}
-
-	private static native long setCallback(Method callback);
+/** Instances of this interface may be passed to the {@link CL11#clSetMemObjectDestructorCallback(CLMem, CLMemObjectDestructorCallback)} method. */
+/*@FunctionalInterface*/
+public interface CLMemObjectDestructorCallback {
 
 	/**
 	 * Called when a memory object is being deleted. When the user callback is called by the implementation, the memory object is not longer valid.
-	 * {@code memobj} is only provided for reference purposes.
+	 * {@code cl_mem} is only provided for reference purposes.
 	 *
-	 * @param memobj the cl_mem object being deleted
+	 * @param cl_mem the {@code cl_mem} object being deleted
 	 */
-	public void invoke(long memobj) {
-		System.out.println("[LWJGL] cl_mem object destroyed [" + LWJGLUtil.toHexString(memobj) + "]");
+	void invoke(long cl_mem);
+
+	final class Util {
+
+		static final long CALLBACK = setCallback(apiCallbackMethod(CLMemObjectDestructorCallback.class, long.class));
+
+		private static final CLMemObjectDestructorCallback DEFAULT = new CLMemObjectDestructorCallback() {
+			@Override
+			public void invoke(long cl_mem) {
+				System.out.printf("[LWJGL] cl_mem object destroyed [0x%X]\n", cl_mem);
+			}
+		};
+
+		private Util() {
+		}
+
+		private static native long setCallback(Method callback);
+
+		/**
+		 * Returns a default {@code CLMemObjectDestructorCallback} implementation that prints a simple description in the standard output stream.
+		 *
+		 * @return the default implementation
+		 */
+		public static CLMemObjectDestructorCallback getDefault() {
+			return DEFAULT;
+		}
+
 	}
 
 }

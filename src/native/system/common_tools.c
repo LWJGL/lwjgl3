@@ -7,6 +7,8 @@
 
 static JavaVM *jvm;
 
+jmethodID getDeclaringClass;
+
 inline void getThreadEnv(JNIEnv **env) {
 	(*jvm)->GetEnv(jvm, (void **)env, JNI_VERSION_1_6);
 }
@@ -67,7 +69,16 @@ inline void detachCurrentThread(void) {
 #endif
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
-    jvm = vm;
+    JNIEnv* env;
+    jclass Method;
+
+	jvm = vm;
+
+    getThreadEnv(&env);
+
+    Method = (*env)->FindClass(env, "java/lang/reflect/Method");
+    getDeclaringClass = (*env)->GetMethodID(env, Method, "getDeclaringClass", "()Ljava/lang/Class;");
+
     initEnvTLS();
     return JNI_VERSION_1_6;
 }

@@ -5,25 +5,17 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-static jclass GLFWerrorfunClass;
-static jmethodID GLFWerrorInvoke;
+DECLARE_CALLBACK_STATIC(GLFWerrorfun);
 
-static void GLFWerror(
+static void GLFWerrorfunProc(
 	int error,
 	const char* description
 ) {
 	JNIEnv* env = getEnv();
 	(*env)->CallStaticVoidMethod(
-		env, GLFWerrorfunClass, GLFWerrorInvoke,
+		env, GLFWerrorfunClass, GLFWerrorfunInvoke,
 		(jint)error, (jlong)(intptr_t)description
 	);
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_glfw_ErrorCallback_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	GLFWerrorfunClass = clazz;
-	GLFWerrorInvoke = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&GLFWerror;
-}
+CALLBACK_SETUP_STATIC(org_lwjgl_system_glfw_ErrorCallback, GLFWerrorfun)

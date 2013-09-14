@@ -1985,7 +1985,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		}
 
 		glfwErrorCode = Success;
-		XSetErrorHandler(new XErrorHandler() {
+		XSetErrorHandler(new XErrorHandler.BufAdapter() {
 			@Override
 			public int invoke(long display, ByteBuffer error_event) {
 				glfwErrorCode = XErrorEvent.error_code(error_event);

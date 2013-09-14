@@ -36,7 +36,7 @@ public final class WGLInterop {
 	public static void main(String[] args) {
 		Sys.touch();
 
-		glfwSetErrorCallback(new ErrorCallback());
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
@@ -86,7 +86,7 @@ public final class WGLInterop {
 		ContextCapabilities caps = GL.getCapabilities();
 
 		if ( caps.GL_AMD_debug_output )
-			glDebugMessageCallbackAMD(new DEBUGPROCAMD());
+			glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
 
 		int success;
 

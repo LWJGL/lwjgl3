@@ -56,7 +56,7 @@ public final class WGLDemo {
 		ContextCapabilities caps = GL.getCapabilities();
 
 		if ( caps.GL_AMD_debug_output )
-			glDebugMessageCallbackAMD(new DEBUGPROCAMD());
+			glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
 
 		if ( caps.WGL_AMD_gpu_association ) {
 			int GPUs = wglGetGPUIDsAMD(null);

@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenGL.h"
 
-static jmethodID DEBUGPROCAMDInvoke;
+DECLARE_CALLBACK(DEBUGPROCAMD);
 
 static void APIENTRY DEBUGPROCAMDProc(GLuint id, GLenum category, GLenum severity, GLsizei length, const GLchar* message, GLvoid* userParam) {
 	JNIEnv* env = getEnv();

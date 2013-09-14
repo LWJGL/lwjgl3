@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLProgramCallbackInvoke;
+DECLARE_CALLBACK(CLProgramCallback);
 
 static void CL_CALLBACK CLProgramCallbackProc(
 	cl_program program,

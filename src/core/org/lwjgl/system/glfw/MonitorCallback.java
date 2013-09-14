@@ -6,36 +6,12 @@ package org.lwjgl.system.glfw;
 
 import java.lang.reflect.Method;
 
-/** Instances of this class may be passed to the {@link GLFW#glfwSetMonitorCallback(MonitorCallback)} method. */
-public abstract class MonitorCallback {
+import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
-	static final long CALLBACK;
-
-	static {
-		try {
-			CALLBACK = setCallback(MonitorCallback.class.getDeclaredMethod(
-				"callback", long.class, int.class
-			));
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-
-	private static MonitorCallback callback;
-
-	protected MonitorCallback() {
-	}
-
-	private static native long setCallback(Method callback);
-
-	static long register(MonitorCallback proc) {
-		callback = proc;
-		return CALLBACK;
-	}
-
-	private static void callback(long monitor, int event) {
-		callback.invoke(monitor, event);
-	}
+/** Instances of this interface may be passed to the {@link GLFW#glfwSetMonitorCallback(MonitorCallback)} method. */
+/*@FunctionalInterface*/
+public interface MonitorCallback {
 
 	/**
 	 * This method will be called when a GLFW monitor event occurs.
@@ -43,6 +19,44 @@ public abstract class MonitorCallback {
 	 * @param monitor the monitor that was connected or disconnected
 	 * @param event   one of {@link GLFW#GLFW_CONNECTED} or {@link GLFW#GLFW_DISCONNECTED}
 	 */
-	public abstract void invoke(long monitor, int event);
+	void invoke(long monitor, int event);
+
+	final class Util {
+
+		static final long CALLBACK = setCallback(apiCallbackMethod(MonitorCallback.Util.class, long.class, int.class));
+
+		private static final MonitorCallback DEFAULT = new MonitorCallback() {
+			@Override
+			public void invoke(long monitor, int event) {
+				System.out.printf("[LWJGL] Monitor [0x%X] %s.\n", monitor, event == GLFW.GLFW_CONNECTED ? "connected" : "disconnected");
+			}
+		};
+
+		private static MonitorCallback callback;
+
+		private Util() {
+		}
+
+		private static native long setCallback(Method callback);
+
+		static long register(MonitorCallback proc) {
+			callback = proc;
+			return proc == null ? NULL : CALLBACK;
+		}
+
+		private static void invoke(long monitor, int event) {
+			callback.invoke(monitor, event);
+		}
+
+		/**
+		 * Returns a default {@code MonitorCallback} implementation that prints a simple description in the standard output stream.
+		 *
+		 * @return the default implementation
+		 */
+		public static MonitorCallback getDefault() {
+			return DEFAULT;
+		}
+
+	}
 
 }

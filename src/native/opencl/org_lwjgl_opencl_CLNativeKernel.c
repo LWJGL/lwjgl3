@@ -5,19 +5,22 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLNativeKernelInvoke;
+DECLARE_CALLBACK(CLNativeKernel);
 
 static void CL_CALLBACK CLNativeKernelProc(
 	void *args
 ) {
-	// Grab the native kernel object from the first args slot
-	jobject kernel = (jobject)*(intptr_t *)args;
+	intptr_t *kernel_args = (intptr_t *)args;
+
+	// Grab the native kernel object and cb_args and increment the args pointer
+	jobject kernel = (jobject)*kernel_args++;
+	jint cb_args = *(jint *)kernel_args++;
 
 	ATTACH_THREAD()
 
     (*env)->CallVoidMethod(env, kernel, CLNativeKernelInvoke,
-        // Skip the native kernel object
-        (jlong)((intptr_t)args + sizeof(jobject))
+        (jlong)(intptr_t)kernel_args,
+        cb_args
     );
 
 	// Delete the global reference, will not be needed anymore

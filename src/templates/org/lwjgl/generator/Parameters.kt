@@ -147,7 +147,7 @@ public class Parameter(
 		}
 
 	// Object parameter
-		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? 0L : $name.getPointer()" else "$name.getPointer()"
+		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? NULL : $name.getPointer()" else "$name.getPointer()"
 
 	// Normal parameter
 		else                     -> name

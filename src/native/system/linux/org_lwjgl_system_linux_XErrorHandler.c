@@ -5,8 +5,7 @@
 #include "common_tools.h"
 #include "LinuxLWJGL.h"
 
-static jclass XErrorHandlerClass;
-static jmethodID XErrorHandlerInvoke;
+DECLARE_CALLBACK_STATIC(XErrorHandler);
 
 static int XErrorHandlerProc(
 	Display* display,
@@ -26,11 +25,4 @@ static int XErrorHandlerProc(
 	return __result;
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_linux_XErrorHandler_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	XErrorHandlerClass = clazz;
-	XErrorHandlerInvoke = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&XErrorHandlerProc;
-}
+CALLBACK_SETUP_STATIC(org_lwjgl_system_linux_XErrorHandler, XErrorHandler)

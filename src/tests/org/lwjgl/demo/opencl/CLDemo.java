@@ -81,7 +81,7 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
 				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -92,16 +92,16 @@ public final class CLDemo {
 				if ( caps.OpenCL11 ) {
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long memobj) {
-							System.out.println("Buffer destructed (1): " + memobj);
+						public void invoke(long cl_mem) {
+							System.out.println("Buffer destructed (1): " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
 
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long memobj) {
-							System.out.println("Buffer destructed (2): " + memobj);
+						public void invoke(long cl_mem) {
+							System.out.println("Buffer destructed (2): " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
@@ -116,8 +116,8 @@ public final class CLDemo {
 
 					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long memobj) {
-							System.out.println("Sub Buffer destructed: " + memobj);
+						public void invoke(long cl_mem) {
+							System.out.println("Sub Buffer destructed: " + cl_mem);
 						}
 					});
 					checkCLError(errcode);
@@ -130,10 +130,10 @@ public final class CLDemo {
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
-					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE + 4);
+					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2 + 4);
 					kernelArgs.putInt(POINTER_SIZE, 1337);
 
-					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel() {
+					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel.BufAdapter() {
 						@Override
 						public void invoke(ByteBuffer args) {
 							System.out.println("\t\tKERNEL EXEC arguments: " + args.getInt(0) + ", should be 1337");

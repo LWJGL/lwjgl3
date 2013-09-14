@@ -1554,8 +1554,8 @@ private val CallbackTransform = object : FunctionTransform<Parameter> {
 		val procClass = param[Callback].procClass;
 
 		if ( param has nullable )
-			"${param.name} == null ? 0L : $procClass.CALLBACK"
+			"${param.name} == null ? NULL : $procClass.Util.CALLBACK"
 		else
-			"$procClass.CALLBACK"
+			"$procClass.Util.CALLBACK"
 	}
 }

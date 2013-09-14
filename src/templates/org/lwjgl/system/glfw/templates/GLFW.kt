@@ -444,7 +444,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		mods(
 			Callback("ErrorCallback"),
-			Expression("ErrorCallback.register(cbfun)", keepParam = true),
+			Expression("ErrorCallback.Util.register(cbfun)", keepParam = true),
 			nullable
 		) _ GLFWerrorfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
 	)
@@ -506,7 +506,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		mods(
 			Callback("MonitorCallback"),
-			Expression("MonitorCallback.register(cbfun)", keepParam = true),
+			Expression("MonitorCallback.Util.register(cbfun)", keepParam = true),
 			nullable
 		) _ GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL if no callback was set or an error occurred")
 	)

@@ -661,7 +661,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = "\t\tlong user_data = CLContextCallback.register(pfn_notify);",
+			javaBeforeNative = "\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);",
 			applyTo = Code.ApplyTo.ALTERNATIVE
 		)
 	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
@@ -737,7 +737,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = "\t\tlong user_data = CLContextCallback.register(pfn_notify);",
+			javaBeforeNative = "\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);",
 			applyTo = Code.ApplyTo.ALTERNATIVE
 		)
 	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
@@ -2494,7 +2494,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	val BuildProgram = (Code(
 		// Create a global reference to the pfn_notify instance. We pass it to the actual
 		// native call as well as register it with the program object (for later clean-up).
-		javaBeforeNative = "\t\tlong user_data = CLProgramCallbackBuild.register(pfn_notify);",
+		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
+		javaAfterNative = "\t\tif ( __result != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ cl_int.func(
 		"BuildProgram",
@@ -2523,7 +2524,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"a pointer to a null-terminated string of characters that describes the build options to be used for building the program executable"
 		),
 		mods(
-			Callback("CLProgramCallbackBuild"),
+			Callback("CLProgramCallback"),
 			nullable
 		) _ cl_program_callback.IN(
 			"pfn_notify",
@@ -3088,7 +3089,8 @@ kernel void image_filter (
 
 	Code(
 		// Create a global reference to the user_func instance.
-		javaBeforeNative = "\t\tuser_func.register(args);",
+		javaBeforeNative = "\t\tlong user_data = CLNativeKernel.Util.register(user_func, args);",
+		javaAfterNative = "\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE
 	) _ cl_int.func(
 		"EnqueueNativeKernel",
@@ -3096,9 +3098,8 @@ kernel void image_filter (
 		Enqueues a command to execute a native C/C++ function not compiled using the OpenCL compiler.
 
 		<strong>LWJGL note</strong>: For the versions of this method that accept a {@link CLNativeKernel}, the {@code args} argument must not be null and must
-		have enough extra space at the beginning to store a pointer value (i.e. {@link Pointer#POINTER_SIZE} bytes). The application must not store
-		useful information there, as it will be overwritten by <em>LWJGL</em>. The {@code args} pointer in the callback invocation will be the address after
-		that pointer value.
+		have enough extra space at the beginning to store two pointer values, i.e. 2&times;{@link Pointer#POINTER_SIZE} bytes. The application must not store
+		useful information there, as it will be overwritten by <em>LWJGL</em>.
 		""",
 
 		cl_command_queue.IN(
@@ -3109,7 +3110,7 @@ kernel void image_filter (
 			"""
 		),
 		Callback("CLNativeKernel") _ cl_native_kernel_func.IN("user_func", "a pointer to a host-callable user function"),
-		nullable _ cl_void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
+		mods(nullable, Check("POINTER_SIZE * 2")) _ cl_void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
 		AutoSize("args") _ size_t.IN(
 			"cb_args",
 			"""

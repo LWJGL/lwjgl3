@@ -7,6 +7,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -97,7 +98,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -130,7 +131,7 @@ public class CLTest {
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
 				CLCommandQueue queue = clCreateCommandQueue(context, device, 0, errcode_ret);
@@ -153,36 +154,42 @@ public class CLTest {
 
 				// Prepare enqueue arguments
 
-				ByteBuffer args = BufferUtils.createByteBuffer(POINTER_SIZE + 4 + POINTER_SIZE);
-				// a non-random number
-				args.putInt(POINTER_SIZE, 1337); // skip the pointer (reserved by LWJGL)
+				ByteBuffer enqueueArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2 + POINTER_SIZE + 4);
+
+				// Slice to skip the pointers (reserved by LWJGL)
+				enqueueArgs.position(POINTER_SIZE * 2);
+				ByteBuffer args = enqueueArgs.slice().order(ByteOrder.nativeOrder());
+				enqueueArgs.clear();
 
 				// a cl_mem object
 				PointerBuffer mem_list = BufferUtils.createPointerBuffer(1);
 				mem_list.put(0, buffer.getPointer());
 
 				PointerBuffer args_mem_loc = BufferUtils.createPointerBuffer(1);
-				args_mem_loc.put(0, memAddress(args) + POINTER_SIZE + 4); // offset to where the cl_mem object id is stored
+				args_mem_loc.put(0, memAddress(args)); // offset to where the cl_mem object id is stored
+
+				// a non-random number
+				args.putInt(POINTER_SIZE, 1337);
 
 				// A cl_event will be stored here that will let us know when the native kernel has been called.
 				PointerBuffer eventOut = BufferUtils.createPointerBuffer(1);
 
-				errcode = clEnqueueNativeKernel(queue, new CLNativeKernel() {
+				errcode = clEnqueueNativeKernel(queue, new CLNativeKernel.BufAdapter() {
 					@Override
 					public void invoke(ByteBuffer args) {
-						assertEquals(args.remaining(), 4 + POINTER_SIZE);
+						assertEquals(args.remaining(), POINTER_SIZE + 4);
 
-						assertEquals(args.getInt(0), 1337);
-
-						long memAddress = PointerBuffer.get(args, 4);
-						assertTrue(memAddress != 0);
+						long memAddress = PointerBuffer.get(args, 0);
+						assertTrue(memAddress != NULL);
 						assertTrue(memAddress != buffer.getPointer());
 
 						ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
 						for ( int i = 0; i < kernelBuffer.capacity(); i++ )
 							assertEquals(kernelBuffer.get(i), i);
+
+						assertEquals(args.getInt(POINTER_SIZE), 1337);
 					}
-				}, args, mem_list, args_mem_loc, null, eventOut);
+				}, enqueueArgs, mem_list, args_mem_loc, null, eventOut);
 				checkCLError(errcode);
 
 				CLEvent e = CLEvent.create(eventOut.get(0), context);
@@ -221,7 +228,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
 				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -232,7 +239,7 @@ public class CLTest {
 
 				clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 					@Override
-					public void invoke(long memobj) {
+					public void invoke(long cl_mem) {
 						eventLatch.countDown();
 					}
 				});
@@ -272,7 +279,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -321,7 +328,7 @@ public class CLTest {
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, new CLContextCallback(), errcode_ret);
+				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 

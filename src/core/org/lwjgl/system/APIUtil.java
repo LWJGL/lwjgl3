@@ -24,9 +24,8 @@ public final class APIUtil {
 	}
 
 	/**
-	 * Returns the callback method for the given callback class. The
-	 * callback method should be named "invoke" and the parameter types
-	 * should not contain the user data parameter.
+	 * Returns the callback method for the given callback class. The callback method should be named "invoke" and the parameter types should not contain the
+	 * user data parameter.
 	 *
 	 * @param clazz          the callback class
 	 * @param parameterTypes the callback function parameters
@@ -35,7 +34,7 @@ public final class APIUtil {
 	 */
 	public static Method apiCallbackMethod(Class<?> clazz, Class<?>... parameterTypes) {
 		try {
-			return clazz.getMethod("invoke", parameterTypes);
+			return clazz.getDeclaredMethod("invoke", parameterTypes);
 		} catch (NoSuchMethodException e) {
 			throw new RuntimeException(e);
 		}

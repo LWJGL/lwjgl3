@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLContextCallbackInvoke;
+DECLARE_CALLBACK(CLContextCallback);
 
 static void CL_CALLBACK CLContextCallbackProc(
 	const char *errinfo,

@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-static jmethodID CLEventCallbackInvoke;
+DECLARE_CALLBACK(CLEventCallback);
 
 static void CL_CALLBACK CLEventCallbackProc(
 	cl_event event,

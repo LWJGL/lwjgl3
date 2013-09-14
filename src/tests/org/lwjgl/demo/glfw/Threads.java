@@ -37,7 +37,7 @@ public final class Threads {
 			System.exit(-1);
 		}
 
-		glfwSetErrorCallback(new ErrorCallback());
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 

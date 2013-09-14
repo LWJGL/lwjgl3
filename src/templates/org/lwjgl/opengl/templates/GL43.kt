@@ -363,7 +363,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			Callback("DEBUGPROC", storeInFunctions = true),
 			nullable
 		) _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		mods(Expression("DEBUGPROC.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
+		mods(Expression("DEBUGPROC.Util.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

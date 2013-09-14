@@ -71,7 +71,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		mods(
 			Callback("XErrorHandler"),
-			Expression("XErrorHandler.register(handler)", keepParam = true),
+			Expression("XErrorHandler.Util.register(handler)", keepParam = true),
 			nullable
 		) _ XErrorHandler.IN("handler", "the program's supplied error handler."),
 

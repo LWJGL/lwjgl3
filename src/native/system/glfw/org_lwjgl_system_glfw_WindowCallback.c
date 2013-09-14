@@ -5,19 +5,19 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-static jmethodID GLFWwindowposfunInvoke;
-static jmethodID GLFWwindowsizefunInvoke;
-static jmethodID GLFWwindowclosefunInvoke;
-static jmethodID GLFWwindowrefreshfunInvoke;
-static jmethodID GLFWwindowfocusfunInvoke;
-static jmethodID GLFWwindowiconifyfunInvoke;
-static jmethodID GLFWframebuffersizefunInvoke;
-static jmethodID GLFWkeyfunInvoke;
-static jmethodID GLFWcharfunInvoke;
-static jmethodID GLFWmousebuttonfunInvoke;
-static jmethodID GLFWcursorposfunInvoke;
-static jmethodID GLFWcursorenterfunInvoke;
-static jmethodID GLFWscrollfunInvoke;
+DECLARE_CALLBACK(GLFWwindowposfun);
+DECLARE_CALLBACK(GLFWwindowsizefun);
+DECLARE_CALLBACK(GLFWwindowclosefun);
+DECLARE_CALLBACK(GLFWwindowrefreshfun);
+DECLARE_CALLBACK(GLFWwindowfocusfun);
+DECLARE_CALLBACK(GLFWwindowiconifyfun);
+DECLARE_CALLBACK(GLFWframebuffersizefun);
+DECLARE_CALLBACK(GLFWkeyfun);
+DECLARE_CALLBACK(GLFWcharfun);
+DECLARE_CALLBACK(GLFWmousebuttonfun);
+DECLARE_CALLBACK(GLFWcursorposfun);
+DECLARE_CALLBACK(GLFWcursorenterfun);
+DECLARE_CALLBACK(GLFWscrollfun);
 
 static void GLFWwindowposfunProc(GLFWwindow* window, int xpos, int ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);

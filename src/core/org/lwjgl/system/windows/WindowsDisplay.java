@@ -153,7 +153,7 @@ public class WindowsDisplay {
 		return closeRequested;
 	}
 
-	private class WindowProcImpl extends WindowProc {
+	private class WindowProcImpl implements WindowProc {
 
 		@Override
 		public long invoke(long hWnd, int msg, long wParam, long lParam) {

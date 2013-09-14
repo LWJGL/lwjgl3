@@ -190,7 +190,7 @@ public class CLGLInteropDemo {
 				glDebugMessageCallbackARB(new ARBDebugOutputCallback());
 			else */
 			if ( caps.GL_AMD_debug_output )
-				glDebugMessageCallbackAMD(new DEBUGPROCAMD());
+				glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
 		}
 
 		glfwSwapInterval(0);
@@ -244,7 +244,7 @@ public class CLGLInteropDemo {
 
 			ctxProps.put(4, 0);
 
-			clContext = clCreateContext(ctxProps, deviceBuffer, new CLContextCallback(), errcode_ret);
+			clContext = clCreateContext(ctxProps, deviceBuffer, CLContextCallback.Util.getDefault(), errcode_ret);
 			checkCLError(errcode_ret);
 
 			slices = min(devices.size(), MAX_PARALLELISM_LEVEL);
@@ -465,7 +465,7 @@ public class CLGLInteropDemo {
 			System.exit(-1);
 		}
 
-		glfwSetErrorCallback(new ErrorCallback());
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
@@ -609,7 +609,7 @@ public class CLGLInteropDemo {
 
 		// disable 64bit floating point math if not available
 		for ( int i = 0; i < programs.length; i++ ) {
-			CLDevice device = queues[i].getParent();
+			final CLDevice device = queues[i].getParent();
 
 			StringBuilder options = new StringBuilder("-D USE_TEXTURE");
 			CLCapabilities caps = device.getCapabilities();
@@ -624,13 +624,26 @@ public class CLGLInteropDemo {
 
 			log("OpenCL COMPILER OPTIONS: " + options);
 
-			try {
-				int errcode = clBuildProgram(programs[i], device, options, null);
-				checkCLError(errcode);
-			} finally {
-				log("BUILD LOG: " + programs[i].getBuildInfoString(device, CL_PROGRAM_BUILD_LOG));
-			}
+			final CLProgram program = programs[i];
+			int errcode = clBuildProgram(program, device, options, new CLProgramCallback() {
+				@Override
+				public void invoke(long cl_program) {
+					System.out.printf(
+						"The cl_program [0x%X] was built %s\n",
+						cl_program,
+						program.getBuildInfoInt(device, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
+					);
+					String log = program.getBuildInfoString(device, CL_PROGRAM_BUILD_LOG);
+					if ( !log.isEmpty() )
+						System.out.printf("\tBUILD LOG: %s\n", log);
+				}
+			});
+			checkCLError(errcode);
 		}
+
+		// Make sure the programs have been built before proceeding
+		for ( CLCommandQueue queue : queues )
+			clFinish(queue);
 
 		rebuild = false;
 

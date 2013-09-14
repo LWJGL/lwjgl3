@@ -5,8 +5,7 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-static jclass GLFWmonitorfunClass;
-static jmethodID GLFWmonitorfunInvoke;
+DECLARE_CALLBACK_STATIC(GLFWmonitorfun);
 
 static void GLFWmonitorfunProc(
 	GLFWmonitor* monitor,
@@ -19,11 +18,4 @@ static void GLFWmonitorfunProc(
 	);
 }
 
-// setCallback(Ljava/lang/reflect/Method;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_glfw_MonitorCallback_setCallback(JNIEnv *env, jclass clazz,
-	jobject method
-) {
-	GLFWmonitorfunClass = clazz;
-	GLFWmonitorfunInvoke = (*env)->FromReflectedMethod(env, method);
-	return (jlong)(intptr_t)&GLFWmonitorfunProc;
-}
+CALLBACK_SETUP_STATIC(org_lwjgl_system_glfw_MonitorCallback, GLFWmonitorfun)

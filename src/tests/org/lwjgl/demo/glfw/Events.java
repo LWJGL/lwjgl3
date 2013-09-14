@@ -17,7 +17,7 @@ public final class Events {
 	public static void main(String[] args) {
 		Sys.touch();
 
-		glfwSetErrorCallback(new ErrorCallback());
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
@@ -38,12 +38,7 @@ public final class Events {
 
 		System.out.println("Window opened.");
 
-		glfwSetMonitorCallback(new MonitorCallback() {
-			@Override
-			public void invoke(long monitor, int event) {
-				System.out.println("Monitor " + monitor + " was " + (event == 0x00061000 ? "connected" : "disconnected"));
-			}
-		});
+		glfwSetMonitorCallback(MonitorCallback.Util.getDefault());
 
 		WindowCallback.set(window, new WindowCallback() {
 			@Override

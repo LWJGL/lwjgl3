@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "WindowsLWJGL.h"
 
-static jmethodID EnumObjectsInvoke;
+DECLARE_CALLBACK(EnumObjects);
 
 static int CALLBACK EnumObjectsProc(LPVOID logObject, LPARAM data) {
 	JNIEnv *env = getEnv();
