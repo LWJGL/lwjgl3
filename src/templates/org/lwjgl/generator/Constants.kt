@@ -14,27 +14,27 @@ abstract class ConstantType<T>(
 }
 
 val ByteConstant = object: ConstantType<Byte>(javaClass<Byte>()) {
-	override fun print(value: Byte): String = "0x" + Integer.toHexString(value.toInt()).toUpperCase()
+	override fun print(value: Byte): String = "0x%X".format(value.toInt())
 	override fun nullValue(): Byte = 0
 }
 
 val ShortConstant = object: ConstantType<Short>(javaClass<Short>()) {
-	override fun print(value: Short): String = "0x" + Integer.toHexString(value.toInt()).toUpperCase()
+	override fun print(value: Short): String = "0x%X".format(value.toInt())
 	override fun nullValue(): Short = 0
 }
 
 val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
-	override fun print(value: Int): String = "0x" + Integer.toHexString(value).toUpperCase()
+	override fun print(value: Int): String = "0x%X".format(value)
 	override fun nullValue(): Int = 0
 }
 
 val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
-	override fun print(value: Long): String = "0x" + java.lang.Long.toHexString(value).toUpperCase() + "L"
+	override fun print(value: Long): String = "0x%XL".format(value)
 	override fun nullValue(): Long = 0.toLong()
 }
 
 val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
-	override fun print(value: Float): String = java.lang.Float.toString(value) + "f"
+	override fun print(value: Float): String = "%sf".format(value)
 	override fun nullValue(): Float = 0.0
 }
 

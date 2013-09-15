@@ -71,7 +71,7 @@ public final class CLUtil {
 	public static String getErrcodeName(int errcode) {
 		String errname = CL_ERROR_TOKENS.get(errcode);
 		if ( errname == null )
-			errname = "UNKNOWN [" + LWJGLUtil.toHexString(errcode) + "]";
+			errname = String.format("UNKNOWN [0x%X]", errcode);
 
 		return errname;
 	}

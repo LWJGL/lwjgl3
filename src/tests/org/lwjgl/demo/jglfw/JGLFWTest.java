@@ -24,7 +24,7 @@ public final class JGLFWTest {
 		glfwSetErrorCallback(new GLFWerrorfun() {
 			@Override
 			public void invoke(int error, String description) {
-				System.err.println("[JGLFW] " + description + " [" + LWJGLUtil.toHexString(error) + "]");
+				System.err.printf("[JGLFW] %s [0x%X]\n", description, error);
 			}
 		});
 

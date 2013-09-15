@@ -299,8 +299,8 @@ fun ALC_EXT_EFX() = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 	FloatConstant.block(
 		"Listener property value ranges and defaults.",
 
-		"MIN_METERS_PER_UNIT" _ 0x0.000002P-126.f,
-		"MAX_METERS_PER_UNIT" _ 0x1.fffffeP+127.f,
+		"MIN_METERS_PER_UNIT".expr<Float>("0x0.000002P-126f"),
+		"MAX_METERS_PER_UNIT".expr<Float>("0x1.fffffeP+127f"),
 		"DEFAULT_METERS_PER_UNIT" _ 1.0.f
 	)
 

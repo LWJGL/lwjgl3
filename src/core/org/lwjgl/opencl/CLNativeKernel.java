@@ -4,6 +4,7 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 
 import java.lang.reflect.Method;
@@ -65,6 +66,9 @@ public interface CLNativeKernel {
 		static long register(CLNativeKernel kernel, ByteBuffer args) {
 			if ( kernel == null )
 				return NULL;
+
+			if ( LWJGLUtil.DEBUG && args.remaining() < POINTER_SIZE * 2 )
+				throw new IllegalArgumentException("The arguments buffer must have enough space for 2 pointer values.");
 
 			long globalRef = memGlobalRefNew(kernel); // this global reference is deleted in native code (after invoke)
 			PointerBuffer.put(args, 0, globalRef);

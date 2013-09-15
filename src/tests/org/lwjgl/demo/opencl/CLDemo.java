@@ -5,7 +5,6 @@
 package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opencl.*;
 import org.lwjgl.system.FunctionProviderLocal;
@@ -21,7 +20,6 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.KHRICD.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 public final class CLDemo {
 
@@ -226,7 +224,7 @@ public final class CLDemo {
 			case CL_COMPLETE:
 				return "CL_COMPLETE";
 			default:
-				throw new IllegalArgumentException(LWJGLUtil.toHexString(status));
+				throw new IllegalArgumentException(String.format("Unsupported event status: 0x%X", status));
 		}
 	}
 

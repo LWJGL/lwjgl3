@@ -716,7 +716,7 @@ class GLFWwindowWin extends GLFWwindow {
 		static String getMessageName(int msg) {
 			String name = TOKENS.get(msg);
 			if ( name == null )
-				name = "UNKNOWN [" + LWJGLUtil.toHexString(msg) + ']';
+				name = String.format("UNKNOWN [0x%X]", msg);
 
 			return name;
 		}

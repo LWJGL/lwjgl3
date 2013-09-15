@@ -39,7 +39,7 @@ public abstract class PointerWrapper {
 	}
 
 	public String toString() {
-		return getClass().getSimpleName() + " pointer (" + LWJGLUtil.toHexString(pointer) + ")";
+		return String.format("%s pointer [0x%X]", getClass().getSimpleName(), pointer);
 	}
 
 }

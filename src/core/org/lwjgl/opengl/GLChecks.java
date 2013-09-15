@@ -45,7 +45,7 @@ final class GLChecks {
 				return "dispatch indirect";
 			default:
 				// TODO: Add more?
-				throw new IllegalArgumentException(LWJGLUtil.toHexString(binding));
+				throw new IllegalArgumentException(String.format("Unsupported buffer binding: 0x%X", binding));
 		}
 	}
 
@@ -76,7 +76,7 @@ final class GLChecks {
 			case GL_DOUBLE:
 				return 8;
 			default:
-				throw new IllegalArgumentException(LWJGLUtil.toHexString(type));
+				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
 		}
 	}
 
@@ -105,7 +105,7 @@ final class GLChecks {
 			case GL_DOUBLE:
 				return 3;
 			default:
-				throw new IllegalArgumentException(LWJGLUtil.toHexString(type));
+				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
 		}
 	}
 

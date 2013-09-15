@@ -90,10 +90,10 @@ public final class Events {
 						state = "repeated";
 						break;
 					default:
-						throw new IllegalArgumentException(LWJGLUtil.toHexString(action));
+						throw new IllegalArgumentException(String.format("Unsupported key action: 0x%X", action));
 				}
 
-				printEvent(window, "key %s[%s - %d] was %s", getModState(mods), LWJGLUtil.toHexString(key), scancode, state);
+				printEvent(window, "key %s[0x%X - %d] was %s", getModState(mods), key, scancode, state);
 
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, 1);
@@ -115,9 +115,9 @@ public final class Events {
 						state = "pressed";
 						break;
 					default:
-						throw new IllegalArgumentException(LWJGLUtil.toHexString(action));
+						throw new IllegalArgumentException(String.format("Unsupported mouse button action: 0x%X", action));
 				}
-				printEvent(window, "mouse button %s[%s] was %s", getModState(mods), LWJGLUtil.toHexString(button), state);
+				printEvent(window, "mouse button %s[0x%X] was %s", getModState(mods), button, state);
 			}
 
 			@Override

@@ -545,7 +545,7 @@ public final class LWJGLUtil {
 							continue;
 
 						if ( target.containsKey(value) ) // Print colliding tokens in their hex representation.
-							target.put(value, toHexString(value));
+							target.put(value, String.format("0x%X", value));
 						else
 							target.put(value, field.getName());
 					} catch (IllegalAccessException e) {
@@ -556,32 +556,6 @@ public final class LWJGLUtil {
 		}
 
 		return target;
-	}
-
-	/**
-	 * Returns a string representation of the integer argument as an
-	 * unsigned integer in base&nbsp;16. The string will be uppercase
-	 * and will have a leading '0x'.
-	 *
-	 * @param value the integer value
-	 *
-	 * @return the hex string representation
-	 */
-	public static String toHexString(int value) {
-		return "0x" + Integer.toHexString(value).toUpperCase();
-	}
-
-	/**
-	 * Returns a string representation of the long argument as an
-	 * unsigned long in base&nbsp;16. The string will be uppercase
-	 * and will have a leading '0x'.
-	 *
-	 * @param value the long value
-	 *
-	 * @return the hex string representation
-	 */
-	public static String toHexString(long value) {
-		return "0x" + Long.toHexString(value).toUpperCase();
 	}
 
 	/** Simple interface for Field filtering. */
