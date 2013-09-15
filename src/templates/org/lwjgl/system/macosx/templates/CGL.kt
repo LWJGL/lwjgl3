@@ -712,7 +712,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 
 		CGLContextObj.IN("ctx", "a rendering context"),
 		CGLContextParameter.IN("pname", "the parameter whose value you want to set", ContextParameters),
-		mods(Check(1), const) _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
+		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
 	)
 
 	CGLError.func(
@@ -781,7 +781,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"Sets the value of a global option.",
 
 		CGLGlobalOption.IN("pname", "the name of the option whose value you want to set", GlobalOptions),
-		mods(Check(1), const) _ GLint_p.IN("params", "the value to set the option to")
+		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "the value to set the option to")
 	)
 
 	CGLError.func(
