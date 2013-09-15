@@ -89,6 +89,8 @@ public class APIBuffer {
 		address = memAddress(resized);
 	}
 
+	// ---------------------------------------------------------------------------------------------------------------------
+
 	private int param(int bytes) {
 		return param(bytes, bytes);
 	}
@@ -126,6 +128,83 @@ public class APIBuffer {
 
 	/** Ensures space for an additional buffer with the given size (in bytes) and returns the address offset. */
 	public int bufferParam(int size) { return param(size, POINTER_SIZE); }
+
+	// ---------------------------------------------------------------------------------------------------------------------
+
+	/** Ensures space for an additional boolean value, sets the given value at the allocated offset and returns that offset. */
+	public int booleanParam(boolean value) {
+		int offset = booleanParam();
+		buffer.put(offset, value ? (byte)1 : (byte)0);
+		return offset;
+	}
+
+	/** Ensures space for an additional byte value, sets the given value at the allocated offset and returns that offset. */
+	public int byteParam(byte value) {
+		int offset = byteParam();
+		buffer.put(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional short value, sets the given value at the allocated offset and returns that offset. */
+	public int shortParam(short value) {
+		int offset = shortParam();
+		buffer.putShort(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional int value, sets the given value at the allocated offset and returns that offset. */
+	public int intParam(int value) {
+		int offset = intParam();
+		buffer.putInt(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional long value, sets the given value at the allocated offset and returns that offset. */
+	public int longParam(long value) {
+		int offset = longParam();
+		buffer.putLong(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional float value, sets the given value at the allocated offset and returns that offset. */
+	public int floatParam(float value) {
+		int offset = floatParam();
+		buffer.putFloat(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional double value, sets the given value at the allocated offset and returns that offset. */
+	public int doubleParam(double value) {
+		int offset = doubleParam();
+		buffer.putDouble(offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional pointer value, sets the given value at the allocated offset and returns that offset. */
+	public int pointerParam(long value) {
+		int offset = pointerParam();
+		PointerBuffer.put(buffer, offset, value);
+		return offset;
+	}
+
+	/** Ensures space for an additional pointer value, sets the given value at the allocated offset and returns that offset. */
+	public int pointerParam(PointerWrapper value) {
+		return pointerParam(value.getPointer());
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
+
+	/** Sets an int value at the given index of the int buffer that starts at the given offset. */
+	public void intParam(int offset, int index, int value) {
+		buffer.putInt(offset + (index << 2), value);
+	}
+
+	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
+	public void pointerParam(int offset, int index, long value) {
+		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
 
 	/** Returns the boolean value at the specified offset. */
 	public boolean booleanValue(int offset) { return buffer.get(offset) != 0; }
@@ -182,66 +261,6 @@ public class APIBuffer {
 		} finally {
 			buffer.clear();
 		}
-	}
-
-	/** Sets a boolean value at the specified offset. */
-	public APIBuffer booleanValue(int offset, boolean value) {
-		buffer.put(offset, value ? (byte)1 : (byte)0);
-		return this;
-	}
-
-	/** Sets a byte value at the specified offset. */
-	public APIBuffer byteValue(int offset, byte value) {
-		buffer.put(offset, value);
-		return this;
-	}
-
-	/** Sets a short value at the specified offset. */
-	public APIBuffer shortValue(int offset, short value) {
-		buffer.putShort(offset, value);
-		return this;
-	}
-
-	/** Sets an int value at the specified offset. */
-	public APIBuffer intValue(int offset, int value) {
-		buffer.putInt(offset, value);
-		return this;
-	}
-
-	/** Sets a long value at the specified offset. */
-	public APIBuffer longValue(int offset, long value) {
-		buffer.putLong(offset, value);
-		return this;
-	}
-
-	/** Sets a float value at the specified offset. */
-	public APIBuffer floatValue(int offset, float value) {
-		buffer.putFloat(offset, value);
-		return this;
-	}
-
-	/** Sets a double value at the specified offset. */
-	public APIBuffer doubleValue(int offset, double value) {
-		buffer.putDouble(offset, value);
-		return this;
-	}
-
-	/** Sets a pointer value at the specified offset. */
-	public APIBuffer pointerValue(int offset, long value) {
-		PointerBuffer.put(buffer, offset, value);
-		return this;
-	}
-
-	/** Sets a pointer value at the specified offset. */
-	public APIBuffer pointerValue(int offset, PointerWrapper value) {
-		pointerValue(offset, value.getPointer());
-		return this;
-	}
-
-	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
-	public APIBuffer pointerValue(int offset, int index, long value) {
-		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
-		return this;
 	}
 
 }

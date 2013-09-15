@@ -4,6 +4,10 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.PointerBuffer;
+
+import java.nio.ByteBuffer;
+
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -33,7 +37,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, byte value) {
-		clSetKernelArg(this, index, 1, apiBuffer().byteValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.put(0, value);
+		clSetKernelArg(this, index, 1, __buffer);
 		return this;
 	}
 
@@ -47,7 +53,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, short value) {
-		clSetKernelArg(this, index, 2, apiBuffer().shortValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.putShort(0, value);
+		clSetKernelArg(this, index, 2, __buffer);
 		return this;
 	}
 
@@ -66,7 +74,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, int value) {
-		clSetKernelArg(this, index, 4, apiBuffer().intValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.putInt(0, value);
+		clSetKernelArg(this, index, 4, __buffer);
 		return this;
 	}
 
@@ -80,7 +90,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, long value) {
-		clSetKernelArg(this, index, 8, apiBuffer().longValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.putLong(0, value);
+		clSetKernelArg(this, index, 8, __buffer);
 		return this;
 	}
 
@@ -94,7 +106,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, float value) {
-		clSetKernelArg(this, index, 4, apiBuffer().floatValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.putFloat(0, value);
+		clSetKernelArg(this, index, 4, __buffer);
 		return this;
 	}
 
@@ -108,7 +122,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, double value) {
-		clSetKernelArg(this, index, 8, apiBuffer().doubleValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		__buffer.putDouble(0, value);
+		clSetKernelArg(this, index, 8, __buffer);
 		return this;
 	}
 
@@ -122,7 +138,9 @@ public class CLKernel extends CLObjectChild<CLProgram> {
 	 * @return this CLKernel object
 	 */
 	public CLKernel setArg(int index, CLObject value) {
-		clSetKernelArg(this, index, POINTER_SIZE, apiBuffer().pointerValue(0, value).buffer());
+		ByteBuffer __buffer = apiBuffer().buffer();
+		PointerBuffer.put(__buffer, 0, value.getPointer());
+		clSetKernelArg(this, index, POINTER_SIZE, __buffer);
 		return this;
 	}
 

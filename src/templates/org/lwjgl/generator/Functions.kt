@@ -1402,12 +1402,11 @@ private class SingleValueTransform(
 	override fun transformDeclaration(param: Parameter, original: String): String? = "$paramType $newName" // Replace with element type + new name
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) {
-		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param();")
 		if ( "CharSequence" == paramType ) {
 			writer.println("\t\tByteBuffer ${newName}Buffer = memEncodeASCII($newName);") // TODO: Support other than ASCCI
-			writer.println("\t\t$API_BUFFER.${elementType}Value(${qtype.name}, memAddress(${newName}Buffer));")
+			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(memAddress(${newName}Buffer));")
 		} else
-			writer.println("\t\t$API_BUFFER.${elementType}Value(${qtype.name}, $newName);")
+			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param($newName);")
 	}
 }
 
@@ -1479,7 +1478,7 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 				println("\t\tByteBuffer[] ${param.name}$BUFFERS_POSTFIX = new ByteBuffer[${param.name}.length];")
 
 			println("\t\tfor ( int i = 0; i < ${param.name}.length; i++ )")
-			print("\t\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX + (i << POINTER_SHIFT), memAddress(")
+			print("\t\t\t$API_BUFFER.pointerParam(${param.name}$POINTER_POSTFIX, i, memAddress(")
 			if ( elementType is CharSequenceType )
 				print("${param.name}$BUFFERS_POSTFIX[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
 			print("${param.name}[i]")
@@ -1487,13 +1486,11 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 				print(", $nullTerminate)")
 			println("));")
 		} else {
-			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerParam();")
-
 			// Store the encoded CharSequence buffer in a local var to avoid premature GC.
 			if ( elementType is CharSequenceType )
 				println("\t\tByteBuffer ${pointerArray.singleName}$BUFFERS_POSTFIX = memEncode${elementType.charMapping.charset}(${param[PointerArray].singleName}, $nullTerminate);") // Encode and store
 
-			print("\t\t$API_BUFFER.pointerValue(${param.name}$POINTER_POSTFIX, memAddress(${pointerArray.singleName}")
+			print("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerParam(memAddress(${pointerArray.singleName}")
 			if ( elementType is CharSequenceType )
 				print(BUFFERS_POSTFIX)
 			println("));")
@@ -1522,7 +1519,7 @@ private class PointerArrayLengthsTransform(
 			println("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.bufferParam(${arrayParam.name}.length << $byteShift);")
 
 			println("\t\tfor ( int i = 0; i < ${arrayParam.name}.length; i++ )")
-			print("\t\t\t$API_BUFFER.${lengthType}Value(${arrayParam.name}$LENGTHS_POSTFIX + (i << $byteShift), ${arrayParam.name}[i]")
+			print("\t\t\t$API_BUFFER.${lengthType}Param(${arrayParam.name}$LENGTHS_POSTFIX, i, ${arrayParam.name}[i]")
 			print(
 				if ( elementType is CharSequenceType )
 					".length()"
@@ -1531,9 +1528,7 @@ private class PointerArrayLengthsTransform(
 			)
 			println(");")
 		} else {
-			println("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.${lengthType}Param();")
-
-			print("\t\t$API_BUFFER.${lengthType}Value(${arrayParam.name}$LENGTHS_POSTFIX, ${pointerArray.singleName}")
+			print("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.${lengthType}Param(${pointerArray.singleName}")
 			print(
 				if ( elementType is CharSequenceType )
 					".length()"

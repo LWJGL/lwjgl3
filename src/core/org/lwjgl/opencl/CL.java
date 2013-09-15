@@ -236,7 +236,7 @@ public final class CL {
 	static String getPlatformInfo(long platform, int param_name, long clGetPlatformInfo) {
 		APIBuffer __buffer = apiBuffer();
 
-		__buffer.intValue(0, 0);
+		__buffer.intParam(0);
 		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address(), clGetPlatformInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL platform information.");
@@ -254,7 +254,7 @@ public final class CL {
 	static String getDeviceInfo(long device_id, int param_name, long clGetDeviceInfo) {
 		APIBuffer __buffer = apiBuffer();
 
-		__buffer.intValue(0, 0);
+		__buffer.intParam(0);
 		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address(), clGetDeviceInfo);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL device information.");
