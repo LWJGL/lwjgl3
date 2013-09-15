@@ -101,7 +101,7 @@ public fun link(url: String, description: String): String = """<a href="$url">$d
 
 public fun table(vararg rows: String): String {
 	val builder = StringBuilder(512)
-	builder append """<table border="1" cellspacing="0" cellpadding="2">"""
+	builder append "<table border=1 cellspacing=0 cellpadding=2>"
 	for ( row in rows ) {
 		builder append "\n\t"
 		builder append row
@@ -111,9 +111,9 @@ public fun table(vararg rows: String): String {
 	return builder.toString()
 }
 
-public fun tr(vararg columns: String): String {
+public fun tr(vararg columns: String, align: String = "center"): String {
 	val builder = StringBuilder()
-	builder append "<tr align=\"center\">"
+	builder append if( align == "left") "<tr>" else "<tr align=$align>"
 	for ( column in columns )
 		builder append column
 	builder append "</tr>"
@@ -125,16 +125,10 @@ public fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1): String 
 public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td"): String {
 	val builder = StringBuilder()
 	builder append "<$tag"
-	if ( 1 < colspan ) {
-		builder append " colspan=\""
-		builder append colspan
-		builder append '\"'
-	}
-	if ( 1 < rowspan ) {
-		builder append " rowspan=\""
-		builder append rowspan
-		builder append '\"'
-	}
+	if ( 1 < colspan )
+		builder append " colspan=$colspan"
+	if ( 1 < rowspan )
+		builder append " rowspan=$rowspan"
 	builder append ">"
 	builder append content.trim()
 	builder append "</$tag>"
