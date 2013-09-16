@@ -51,10 +51,7 @@ public class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
 	public fun hashCode(): Int = RESULT.hashCode()
 
-	public fun equals(obj: Any?): Boolean {
-		if ( obj == this ) return true
-		return obj is ReturnValue && obj.nativeType == this.nativeType
-	}
+	public fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is ReturnValue && obj.nativeType == this.nativeType)
 
 	// --- [ Helper functions & properties ] ---
 
@@ -83,10 +80,7 @@ public class Parameter(
 
 	public fun hashCode(): Int = name.hashCode()
 
-	public fun equals(obj: Any?): Boolean {
-		if ( obj == this ) return true
-		return obj is Parameter && obj.name equals this.name
-	}
+	public fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is Parameter && obj.name equals this.name)
 
 	private fun doc(description: String, links: String): String {
 		val trimmed = description.trim()

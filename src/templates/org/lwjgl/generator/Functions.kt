@@ -48,16 +48,17 @@ public abstract class Function(
 	vararg params: Parameter
 ): TemplateElement() {
 
-	protected val parameters: MutableMap<String, Parameter> = LinkedHashMap<String, Parameter>(); // Maintain order
-
-	{
+	protected val parameters: Array<Parameter> = params;
+	protected val paramMap: Map<String, Parameter> = {
+		val map = HashMap<String, Parameter>()
 		for ( param in params )
-			parameters.put(param.name, param)
-	}
+			map.put(param.name, param)
+		map
+	}();
 
 	protected val hasNativeParams: Boolean = getNativeParams().hasNext()
 
-	fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.values().iterator().filter(predicate)
+	fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.iterator().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean): Parameter {
 		val params = getParams(predicate)
 		if ( !params.hasNext() )
@@ -91,7 +92,7 @@ public fun NativeType.IN(name: String, javadoc: String, links: String = ""): Par
 public fun PointerType.OUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links)
 public fun PointerType.INOUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links)
 
-private fun <T> PrintWriter.printList(items: Map<*, T>, itemPrint: (item: T) -> String?): Unit = printList(items.values().iterator(), itemPrint)
+private fun <T> PrintWriter.printList(items: Array<T>, itemPrint: (item: T) -> String?): Unit = printList(items.iterator(), itemPrint)
 private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -> String?) {
 	var first = true
 	while ( items.hasNext() ) {
@@ -108,14 +109,6 @@ private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -
 }
 
 // --- [ Native class functions ] ---
-
-fun <T: Any> Collection<T>.last(): T {
-	var last: T? = null
-	for ( t in this )
-		last = t
-
-	return last!!
-}
 
 public class NativeClassFunction(
 	returns: ReturnValue,
@@ -137,7 +130,7 @@ public class NativeClassFunction(
 		if ( !hasNativeParams || has(keepPostfix) )
 			return name
 
-		val param = parameters.values().last()
+		val param = parameters[parameters.lastIndex]
 		if ( !param.isBufferPointer )
 			return name
 
@@ -231,10 +224,10 @@ public class NativeClassFunction(
 	/** Validates parameters with modifiers that reference other parameters. */
 	private fun validate() {
 		var returnCount = 0
-		parameters.values().forEach {
+		parameters.forEach {
 			if ( it has AutoSize ) {
 				val bufferParamName = it[AutoSize].reference
-				val bufferParam = parameters[bufferParamName]
+				val bufferParam = paramMap[bufferParamName]
 				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoSize($bufferParamName)")
 				else when {
 					bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize($bufferParamName)")
@@ -251,7 +244,7 @@ public class NativeClassFunction(
 
 			if ( it has AutoType ) {
 				val bufferParamName = it[AutoType].reference
-				val bufferParam = parameters[bufferParamName]
+				val bufferParam = paramMap[bufferParamName]
 				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoType($bufferParamName)")
 				else when {
 					bufferParam.nativeType !is PointerType                -> it.error("Buffer reference must be a pointer type: AutoType($bufferParamName)")
@@ -271,8 +264,8 @@ public class NativeClassFunction(
 
 				val returnMod = it[Return]
 				if ( returnMod != returnValue ) {
-					val maxLengthParam = parameters[returnMod.maxLengthParam]
-					val lengthParam = parameters[returnMod.lengthParam]
+					val maxLengthParam = paramMap[returnMod.maxLengthParam]
+					val lengthParam = paramMap[returnMod.lengthParam]
 					if ( maxLengthParam == null ) it.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
 					else if ( lengthParam == null ) it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
 					else when {
@@ -286,9 +279,9 @@ public class NativeClassFunction(
 
 			if ( it has PointerArray ) {
 				val countParamName = it[PointerArray].countParam
-				val countParam = parameters[countParamName]
+				val countParam = paramMap[countParamName]
 				val lengthsParamName = it[PointerArray].lengthsParam
-				val lengthsParam = parameters[lengthsParamName]
+				val lengthsParam = paramMap[lengthsParamName]
 				if ( countParam == null ) it.error("Count reference does not exist: PointerArray($countParamName)")
 				else when {
 					!countParam.nativeType.mapping.isSizeType                              -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
@@ -314,7 +307,7 @@ public class NativeClassFunction(
 				if ( transform != null && transform is AutoTypeTargetTransform ) {
 					transform.autoType
 				} else
-					parameters[param]!!.nativeType.mapping as PointerMapping
+					paramMap[param]!!.nativeType.mapping as PointerMapping
 
 			if ( mapping.byteShift == null || mapping.byteShift == "0" )
 				return expression
@@ -336,7 +329,7 @@ public class NativeClassFunction(
 			return builder.toString()
 		}
 
-		parameters.values().forEach {
+		parameters.forEach {
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.NAKED_POINTER ) "if ( ${it.name} != null ) " else ""
 
 			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
@@ -391,24 +384,24 @@ public class NativeClassFunction(
 					if ( autoSize.factor != null )
 						length += " ${autoSize.factor!!.expressionInv()}"
 
-					prefix = if ( parameters[autoSize.reference]!! has Nullable ) "if ( ${autoSize.reference} != null ) " else ""
+					prefix = if ( paramMap[autoSize.reference]!! has Nullable ) "if ( ${autoSize.reference} != null ) " else ""
 					checks add "${prefix}checkBuffer(${autoSize.reference}, ${bufferShift(length, autoSize.reference, "<<", null)});"
 					for ( d in autoSize.dependent ) {
-						prefix = if ( parameters[d]!! has Nullable ) "if ( $d != null ) " else ""
+						prefix = if ( paramMap[d]!! has Nullable ) "if ( $d != null ) " else ""
 						checks add "${prefix}checkBuffer($d, ${bufferShift(length, d, "<<", null)});"
 					}
 				} else {
-					val referenceTransform = transforms!![parameters[autoSize.reference]!!]
+					val referenceTransform = transforms!![paramMap[autoSize.reference]!!]
 					val expression =
 						if ( referenceTransform != null && (referenceTransform.javaClass == javaClass<SingleValueTransform>() || referenceTransform == PointerArrayTransformSingle) )
 							"1"
-						else if ( referenceTransform != null && referenceTransform == PointerArrayTransformMulti )
+						else if ( referenceTransform != null && referenceTransform != PointerArrayTransformSingle )
 							"${autoSize.reference}.length"
 						else
 							"${autoSize.reference}.remaining()"
 
 					for ( d in autoSize.dependent ) {
-						val param = parameters[d]!!
+						val param = paramMap[d]!!
 						val transform = transforms.get(param)
 						if ( transform !is SkipCheckFunctionTransform ) {
 							prefix = if ( param has Nullable ) "if ( $d != null ) " else ""
@@ -684,7 +677,7 @@ public class NativeClassFunction(
 		else if ( returns has MapPointer ) {
 			val mapPointer = returns[MapPointer]
 
-			transforms[returns] = if ( parameters.containsKey(mapPointer.sizeExpression) )
+			transforms[returns] = if ( paramMap.containsKey(mapPointer.sizeExpression) )
 				MapPointerExplicitTransform(lengthParam = mapPointer.sizeExpression, addParam = false)
 			else
 				MapPointerTransform
@@ -698,11 +691,11 @@ public class NativeClassFunction(
 		}
 
 		// Step 1: Apply basic transformations
-		parameters.values() forEach {
+		parameters forEach {
 			if ( it.paramType == ParameterType.IN ) {
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
-					val param = parameters[autoSize.reference]!!
+					val param = paramMap[autoSize.reference]!!
 					// Check if there's also a MultiType on the referenced parameter. Skip if so.
 					if ( !(param has MultiType) )
 						transforms[it] = AutoSizeTransform(param)
@@ -721,20 +714,20 @@ public class NativeClassFunction(
 		}
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
-		if ( !transforms.isEmpty() || parameters.values().any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.has(autoSizeResult) && returns.nativeType !is StructType) } )
+		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.has(autoSizeResult) && returns.nativeType !is StructType) } )
 			generateAlternativeMethod(stripPostfix(true), "Alternative version of:", transforms, customChecks)
 
 		// Step 3: Generate more complex alternatives if necessary
 		if ( returns has MapPointer ) {
 			// The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
-			if ( !parameters.containsKey(returns[MapPointer].sizeExpression) ) {
+			if ( !paramMap.containsKey(returns[MapPointer].sizeExpression) ) {
 				transforms[returns] = MapPointerExplicitTransform("length")
 				generateAlternativeMethod(stripPostfix(true), "Explicit size alternative version of:", transforms, customChecks)
 			}
 		}
 
 		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
-		if ( parameters.values() count {
+		if ( parameters count {
 			if ( it.nativeType !is CharSequenceType || it.has(Return) )
 				false
 			else {
@@ -763,7 +756,7 @@ public class NativeClassFunction(
 		}
 
 		// Apply any complex transformations.
-		parameters.values() forEach {
+		parameters forEach {
 			val param = it
 
 			if ( it has Return && !hasParam { it has PointerArray } ) {
@@ -781,10 +774,10 @@ public class NativeClassFunction(
 					// Generate String return alternative
 
 					// Remove any transform from the maxLength parameter (e.g. AutoSize)
-					transforms.remove(parameters[returnMod.maxLengthParam])
+					transforms.remove(paramMap[returnMod.maxLengthParam])
 
 					// Hide length parameter and use APIBuffer
-					transforms[parameters[returnMod.lengthParam]!!] = BufferReturnLengthTransform
+					transforms[paramMap[returnMod.lengthParam]!!] = BufferReturnLengthTransform
 
 					// Hide target parameter and use APIBuffer
 					transforms[it] = BufferReturnParamTransform
@@ -792,10 +785,10 @@ public class NativeClassFunction(
 					// Transform void to the buffer type
 					val returnType: String
 					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = BufferReturnTransform(param.name, returnMod.lengthParam, it.nativeType.charMapping.charset)
+						transforms[returns] = BufferReturnTransform(it.name, returnMod.lengthParam, it.nativeType.charMapping.charset)
 						returnType = "String"
 					} else {
-						transforms[returns] = BufferReturnTransform(param.name, returnMod.lengthParam)
+						transforms[returns] = BufferReturnTransform(it.name, returnMod.lengthParam)
 						returnType = "Buffer"
 					}
 
@@ -803,7 +796,7 @@ public class NativeClassFunction(
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
-						transforms[parameters[returnMod.maxLengthParam]!!] = ExpressionLocalTransform(returnMod.maxLengthExpression)
+						transforms[paramMap[returnMod.maxLengthParam]!!] = ExpressionLocalTransform(returnMod.maxLengthExpression)
 						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
 					}
 				}
@@ -813,7 +806,7 @@ public class NativeClassFunction(
 
 				// Add the AutoSize transformation if we skipped it above
 				getParams { it has AutoSize } forEach {
-					transforms[it] = AutoSizeTransform(parameters[it[AutoSize].reference]!!)
+					transforms[it] = AutoSizeTransform(paramMap[it[AutoSize].reference]!!)
 				}
 
 				val multiTypes = it[MultiType]
@@ -840,7 +833,7 @@ public class NativeClassFunction(
 				customChecks.clear()
 
 				val autoTypes = it[AutoType]
-				val bufferParam = parameters[autoTypes.reference]!!
+				val bufferParam = paramMap[autoTypes.reference]!!
 				if ( bufferParam has BufferObject )
 					customChecks add ("GLChecks.ensureBufferObject(${bufferParam[BufferObject].binding}, false);")
 
@@ -880,14 +873,27 @@ public class NativeClassFunction(
 			} else if ( it has PointerArray ) {
 				val pointerArray = it[PointerArray]
 
-				val lengthsParam = parameters[pointerArray.lengthsParam]
-
-				val countParam = parameters[pointerArray.countParam]!!
-
-				transforms[countParam] = ExpressionTransform("${it.name}.length")
+				val lengthsParam = paramMap[pointerArray.lengthsParam]
 				if ( lengthsParam != null )
-					transforms[lengthsParam] = PointerArrayLengthsTransformMulti(it)
-				transforms[it] = PointerArrayTransformMulti
+					transforms[lengthsParam] = PointerArrayLengthsTransform(it, true)
+
+				val countParam = paramMap[pointerArray.countParam]!!
+				transforms[countParam] = ExpressionTransform("${it.name}.length")
+
+				val vararg = {
+					var isLast = true;
+					for ( i in parameters.indices.reversed() ) {
+						val p = parameters[i]
+						if ( p == lengthsParam || p == countParam ) // these will be hidden, ignore
+							continue;
+
+						isLast = p == it
+						break;
+					}
+					isLast
+				}()
+				transforms[it] = if ( vararg ) PointerArrayTransformVararg else PointerArrayTransformArray
+
 				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks)
 
 				// Combine PointerArrayTransformSingle with BufferValueReturnTransform
@@ -895,14 +901,14 @@ public class NativeClassFunction(
 
 				transforms[countParam] = ExpressionTransform("1")
 				if ( lengthsParam != null )
-					transforms[lengthsParam] = PointerArrayLengthsTransformSingle(it)
+					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
 				transforms[it] = PointerArrayTransformSingle
 				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
 			}
 		}
 
 		// Apply any SingleValue transformations.
-		if ( parameters.values() count {
+		if ( parameters count {
 			if ( !(it has SingleValue) ) {
 				false
 			} else {
@@ -1454,13 +1460,11 @@ private class BufferReturnTransform(
 	}
 }
 
-private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
+private class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
-		return if ( param[PointerArray].elementType is CharSequenceType ) {
-			if ( multi ) "CharSequence[] ${param.name}" else "CharSequence ${param[PointerArray].singleName}" // Replace with CharSequence
-		} else {
-			if ( multi ) "ByteBuffer[] ${param.name}" else "ByteBuffer ${param[PointerArray].singleName}" // Replace with ByteBuffer
-		}
+		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
+		val paramClass = if ( param[PointerArray].elementType is CharSequenceType ) "CharSequence" else "ByteBuffer"
+		return "$paramClass$paramType $name"
 	}
 	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}$POINTER_POSTFIX" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qtype)
@@ -1470,7 +1474,7 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 		val elementType = pointerArray.elementType
 		val nullTerminate = pointerArray.lengthsParam == null
 
-		if ( multi ) {
+		if ( !paramType.isEmpty() ) {
 			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << POINTER_SHIFT);")
 
 			// Create a local array that will hold the encoded CharSequences. We need this to avoid premature GC of the passed buffers.
@@ -1497,8 +1501,9 @@ private class PointerArrayTransform(val multi: Boolean): FunctionTransform<Param
 		}
 	}
 }
-private val PointerArrayTransformSingle = PointerArrayTransform(false)
-private val PointerArrayTransformMulti = PointerArrayTransform(true)
+private val PointerArrayTransformSingle = PointerArrayTransform("")
+private val PointerArrayTransformArray = PointerArrayTransform("[]")
+private val PointerArrayTransformVararg = PointerArrayTransform("...")
 
 private class PointerArrayLengthsTransform(
 	val arrayParam: Parameter,
@@ -1539,8 +1544,6 @@ private class PointerArrayLengthsTransform(
 		}
 	}
 }
-private fun PointerArrayLengthsTransformSingle(arrayParam: Parameter) = PointerArrayLengthsTransform(arrayParam, false)
-private fun PointerArrayLengthsTransformMulti(arrayParam: Parameter) = PointerArrayLengthsTransform(arrayParam, true)
 
 private val CallbackTransform = object : FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? = "${param[Callback].procClass} ${param.name}" // Replace type with the callback class
