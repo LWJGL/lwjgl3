@@ -471,7 +471,8 @@ public final class LWJGLUtil {
 	 */
 	public static void log(CharSequence msg) {
 		if ( DEBUG ) {
-			System.err.println("[LWJGL] " + msg);
+			System.err.print("[LWJGL] ");
+			System.err.println(msg);
 		}
 	}
 
@@ -567,7 +568,7 @@ public final class LWJGLUtil {
 		 * @param field the Field to test
 		 * @param value the integer value of the field
 		 *
-		 * @result true if the Field is accepted
+		 * @return true if the Field is accepted
 		 */
 		boolean accept(Field field, int value);
 

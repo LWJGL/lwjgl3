@@ -58,9 +58,9 @@ public final class Sys {
 	private static String loadLibrary(String libraryName) {
 		// actively try to load 64bit libs on 64bit architectures first
 		String osArch = System.getProperty("os.arch");
-		boolean is64bit = "amd64".equals(osArch) || "x86_64".equals(osArch);
+		boolean try64First = LWJGLUtil.getPlatform() != LWJGLUtil.Platform.MACOSX && ("amd64".equals(osArch) || "x86_64".equals(osArch));
 
-		if ( is64bit ) {
+		if ( try64First ) {
 			try {
 				return doLoadLibrary(libraryName + POSTFIX64BIT);
 			} catch (UnsatisfiedLinkError e) {
