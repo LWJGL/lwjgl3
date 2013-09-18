@@ -10,6 +10,8 @@ import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.regex.Pattern
 import org.lwjgl.generator.opengl.*
+import org.lwjgl.generator.ConstantBlock.Links
+import kotlin.properties.Delegates
 
 /*
 	****
@@ -88,9 +90,9 @@ public abstract class Function(
 
 // DSL extensions
 
-public fun NativeType.IN(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.IN, javadoc, links)
-public fun PointerType.OUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links)
-public fun PointerType.INOUT(name: String, javadoc: String, links: String = ""): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links)
+public fun NativeType.IN(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.IN, javadoc, links?.html ?: "")
+public fun PointerType.OUT(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links?.html ?: "")
+public fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links?.html ?: "")
 
 private fun <T> PrintWriter.printList(items: Array<T>, itemPrint: (item: T) -> String?): Unit = printList(items.iterator(), itemPrint)
 private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -> String?) {
@@ -122,9 +124,8 @@ public class NativeClassFunction(
 		validate();
 	}
 
-	// Can't eval once, stripPostfix has modifier dependencies that may be added after the constructor has run.
-	val strippedName: String
-		get() = stripPostfix()
+	// stripPostfix has modifier dependencies that may be added after the constructor has run.
+	val strippedName: String by Delegates.lazy { stripPostfix(stripType = false, stripUnsigned = false) } // TODO: Kotlin bug, fails if we omit the default values
 
 	private fun stripPostfix(stripType: Boolean = false, stripUnsigned: Boolean = false): String {
 		if ( !hasNativeParams || has(keepPostfix) )
@@ -168,7 +169,7 @@ public class NativeClassFunction(
 	}
 
 	public val javaDocLink: String
-		get() = if ( strippedName != name ) this.javaDocLinkWithParams else "{@link #$strippedName}"
+		get() = if ( strippedName != name ) this.javaDocLinkWithParams else "{@link #$strippedName $strippedName}"
 
 	public val javaDocLinkWithParams: String
 		get() {
@@ -194,7 +195,9 @@ public class NativeClassFunction(
 				if ( !first ) builder append ", "
 				builder append "ByteBuffer"
 			}
-			builder append ")}"
+			builder append ") "
+			builder append strippedName
+			builder append '}'
 
 			return builder.toString()
 		}

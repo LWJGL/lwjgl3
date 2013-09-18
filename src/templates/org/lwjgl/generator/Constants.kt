@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
+import java.util.regex.Pattern
 
 abstract class ConstantType<T>(
 	val javaType: Class<T>
@@ -109,32 +110,76 @@ public class ConstantBlock<T>(
 			print(constantType.print(value!!))
 	}
 
-	public fun toJavaDocLinks(ref: String, global: Boolean = true): String {
-		val links = toJavaDocLinks(global)
-		nativeClass.setJavaDoc(ref, links)
-		return links
-	}
-
-	public fun toJavaDocLinks(global: Boolean = false): String {
+	public fun toJavaDocLinks(global: Boolean = false): Links {
 		val builder = StringBuilder(constants.size * 32)
 
 		printJavaDocLink(builder, constants[0], global)
 		for ( i in 1..constants.lastIndex ) {
-			builder append ' '
+			builder append ", "
 			printJavaDocLink(builder, constants[i], global)
 		}
 
-		return builder.toString()
+		return Links(builder.toString())
 	}
 
 	private fun <T> printJavaDocLink(builder: StringBuilder, constant: Constant<T>, global: Boolean = false) {
+		builder append "{@link "
 		if ( global )
 			builder append nativeClass.className
 		builder append '#'
 		builder append getConstantName(constant.name)
+		if ( !noPrefix ) {
+			builder append ' '
+			builder append constant.name
+		}
+		builder append '}'
+	}
+
+	class Links(val html: String) {
+		fun plus(links: Links) = Links("$html, ${links.html}")
 	}
 
 }
+
+fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
+	val builder = StringBuilder(this.size * 2) // Rough estimate to reduce mallocs. TODO: validate
+
+	val tokens = LINK_PATTERN.split(this.trim())
+	for ( i in tokens.indices ) {
+		if ( 0 < i ) builder append ", "
+
+		val hash = tokens[i].indexOf('#')
+		when {
+			hash == -1 -> {
+				builder append tokens[i]
+			}
+			tokens[i].startsWith("##") -> {
+				builder append "see {@link "
+				builder append tokens[i].substring(2)
+				builder append '}'
+			}
+			else -> {
+				val token = tokens[i].substring(hash + 1)
+
+				builder append "{@link "
+				if ( prefix.isEmpty() )
+					builder append tokens[i]
+				else {
+					builder append tokens[i].substring(0, hash + 1)
+					builder append prefix
+					builder append token
+				}
+				builder append ' '
+				builder append token
+				builder append '}'
+			}
+		}
+	}
+
+	return ConstantBlock.Links(builder.toString())
+}
+
+private val LINK_PATTERN = Pattern.compile("\\s+", Pattern.MULTILINE)
 
 public open data class Constant<T: Any>(val name: String, val value: T?)
 public class ConstantExpression<T>(name: String, val expression: String): Constant<T>(name, null)

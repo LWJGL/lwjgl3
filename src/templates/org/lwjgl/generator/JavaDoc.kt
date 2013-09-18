@@ -97,11 +97,29 @@ public fun codeBlock(code: String): String = "<pre>{@code\n${code
 	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
 }}</pre>"
 
-public fun link(url: String, description: String): String = """<a href="$url">$description</a>"""
+public fun String.linkPlain(name: String): String = link(name, prefix = "")
+public fun String.link(name: String, prefix: String = ""): String =
+	if ( name.endsWith(')') ) {
+		// Method
+		val parentheses = name.indexOf('(')
+		if ( parentheses == -1 )
+			throw IllegalStateException("Invalid method link: $this#$prefix$name")
 
-public fun table(vararg rows: String): String {
+		val simpleName = name.substring(0, parentheses)
+		"{@link $this#$prefix${if ( parentheses == name.size - 2 ) simpleName else name} $simpleName}"
+	} else {
+		// Field
+		if ( this.isEmpty() && prefix.isEmpty() )
+			"{@link #$name}"
+		else
+			"{@link $this#$prefix$name $name}"
+	}
+
+public fun url(href: String, innerHTML: String): String = """<a href="$href">$innerHTML</a>"""
+
+public fun table(vararg rows: String, matrix: Boolean = false): String {
 	val builder = StringBuilder(512)
-	builder append "<table border=1 cellspacing=0 cellpadding=2>"
+	builder append "<table border=1 cellspacing=0 cellpadding=2 class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>"
 	for ( row in rows ) {
 		builder append "\n\t"
 		builder append row
@@ -111,9 +129,9 @@ public fun table(vararg rows: String): String {
 	return builder.toString()
 }
 
-public fun tr(vararg columns: String, align: String = "center"): String {
+public fun tr(vararg columns: String): String {
 	val builder = StringBuilder()
-	builder append if( align == "left") "<tr>" else "<tr align=$align>"
+	builder append "<tr>"
 	for ( column in columns )
 		builder append column
 	builder append "</tr>"

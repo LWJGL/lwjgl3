@@ -97,13 +97,6 @@ public class NativeClass(
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty()
 
-	private val javaDocs = HashMap<String, String>()
-
-	fun setJavaDoc(ref: String, javaDoc: String) {
-		javaDocs[ref] = javaDoc
-	}
-	fun getJavaDoc(ref: String): String = javaDocs[ref]!!
-
 	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
 	private fun PrintWriter.generateJavaImpl() {
 		print(HEADER)
@@ -137,8 +130,9 @@ public class NativeClass(
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()
-			preamble.printJava(this)
 		}
+
+		preamble.printJava(this)
 
 		if ( documentation != null )
 			println(documentation)
@@ -247,6 +241,16 @@ public class NativeClass(
 		_functions add func
 		return func
 	}
+
+	// Javadoc DSL extensions
+
+	fun String.link(name: String) = this.link(name, if ( name.endsWith(')') ) prefixMethod else prefixConstant)
+	val String.link: String
+		get() = "".link(this) // TODO: Kotlin bug, this undefined without explicit getter.
+
+	fun ConstantBlock.Links.plus(links: String) = this + links.toConstantLinks(prefixConstant)
+
+	fun NativeType.IN(name: String, javadoc: String, links: String) = IN(name, javadoc, links.toConstantLinks(prefixConstant))
 
 }
 

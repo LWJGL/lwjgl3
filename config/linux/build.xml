@@ -23,17 +23,17 @@
 			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wunused -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
-			<!-- Paths relative to ${dest} -->
-			<arg value="-I../../${src.native}/system"/>
-			<arg value="-I../../${src.native}/system/linux"/>
-			<arg value="-I../../${src.native}/system/glfw"/>
-			<arg value="-I../../${src.native}/openal"/>
-			<arg value="-I../../${src.native}/opencl"/>
-			<arg value="-I../../${src.native}/opengl"/>
-			<arg value="-I../../${src.native}/opengl/glx"/>
 
-			<globmapper from="*.c" to="*.o"/>
+			<!-- Paths relative to dir -->
+			<arg value="-I${src.native.abs}/system"/>
+			<arg value="-I${src.native.abs}/system/linux"/>
+			<arg value="-I${src.native.abs}/system/glfw"/>
+			<arg value="-I${src.native.abs}/openal"/>
+			<arg value="-I${src.native.abs}/opencl"/>
+			<arg value="-I${src.native.abs}/opengl"/>
+			<arg value="-I${src.native.abs}/opengl/glx"/>
 
+			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/linux" includes="*.c"/>
 			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
@@ -46,6 +46,8 @@
 			<fileset dir="${generated.native}/opencl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl/glx" includes="*.c"/>
+
+			<globmapper from="*.c" to="*.o"/>
 		</apply>
 
 		<!-- LINK -->
@@ -55,15 +57,11 @@
 			<!-- LWJGL objects -->
 			<fileset dir="${bin.native}" includes="*.o"/>
 			<!-- Static libraries -->
-			<fileset dir="libs/linux/${os.arch}" includes="*.a"/>
+			<fileset dir="${lib.abs}/linux/${os.arch}" includes="*.a"/>
 		</apply>
 		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
 			<fileset file="${libname}"/>
 		</apply>
-
-		<copy todir="${lib}/linux">
-			<fileset dir="${bin.native}" includes="liblwjgl*.so"/>
-		</copy>
 	</target>
 
 </project>

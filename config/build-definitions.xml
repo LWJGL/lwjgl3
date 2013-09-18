@@ -1,13 +1,14 @@
-<project name="definitions">
+<project name="definitions" basedir="../">
 	<!-- ================================================================== -->
 	<!-- Global properties for build 																				-->
 	<!-- ================================================================== -->
 	<property environment="env"/>
 
 	<property name="src" location="src" relative="true"/>
-	<property name="generated" location="generated" relative="true"/>
-	<property name="bin" location="bin" relative="true"/>
+	<property name="generated" location="generated" relative="false"/>
+	<property name="bin" location="bin" relative="false"/>
 	<property name="lib" location="libs" relative="true"/>
+	<property name="lib.abs" location="${lib}" relative="false"/>
 	<property name="res" location="res" relative="true"/>
 	<property name="version" value="3.0.0"/>
 
@@ -17,6 +18,7 @@
 	<property name="src.tests" location="${src}/tests" relative="true"/>
 
 	<property name="src.native" location="${src}/native" relative="true"/>
+	<property name="src.native.abs" location="${src.native}" relative="false"/>
 
 	<property name="generated.java" location="${generated}/java" relative="true"/>
 	<property name="generated.native" location="${generated}/native" relative="true"/>
@@ -30,8 +32,10 @@
 
 	<property name="tests.output" location="${generated}/tests" relative="true"/>
 
+	<property name="javadoc.output" location="${generated}/javadoc" relative="true"/>
+
 	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
-	<property name="kotlinc-build" value="0.6.319"/>
+	<property name="kotlinc-build" value="0.6.391"/>
 
 	<condition property="platform.windows">
 		<os family="Windows"/>
@@ -69,13 +73,5 @@
 	<condition property="java6.path" value="${env.JAVA6_HOME}/Contents/Classes" else="${env.JAVA6_HOME}/jre/lib">
 		<equals arg1="${platform}" arg2="macosx"/>
 	</condition>
-
-	<path id="java6.boot.classpath">
-		<fileset dir="${java6.path}">
-			<include name="*.jar"/>
-		</fileset>
-	</path>
-
-	<property name="lib.bin" location="${lib}/${platform}" relative="true"/>
 
 </project>

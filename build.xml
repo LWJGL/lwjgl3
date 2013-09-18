@@ -2,13 +2,35 @@
 
 	<property name="build.sysclasspath" value="ignore"/>
 
-	<import file="config/build-definitions.xml"/>
+	<property name="config" location="config" relative="true"/>
+
+	<import file="${config}/build-definitions.xml" id="defs"/>
+
+	<path id="java6.boot.classpath">
+		<fileset dir="${java6.path}">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+
+	<path id="lib.bin">
+		<pathelement path="${lib}/${platform}"/>
+		<pathelement path="${bin.native}"/>
+	</path>
+	<property name="lib.bin" refid="lib.bin"/>
+
+	<path id="runtime.classpath">
+		<pathelement path="${bin.core}"/>
+		<pathelement path="${bin.util}"/>
+		<pathelement path="${res}"/>
+		<pathelement path="${bin.tests}"/>
+	</path>
 
 	<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/kotlin-ant.jar"/>-->
 	<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 
 	<!-- Initialize build -->
 	<target name="-initialize" description="Initializes the directories required by the build process.">
+		<mkdir dir="${generated}"/>
 		<mkdir dir="${bin.core}"/>
 		<mkdir dir="${bin.util}"/>
 		<mkdir dir="${bin.templates}"/>
@@ -103,7 +125,7 @@
 			<jvmarg value="-Xverify:none"/>
 
 			<arg value="-module"/>
-			<arg value="config/Templates.kts"/>
+			<arg value="${config}/Templates.kts"/>
 			<arg value="-output"/>
 			<arg value="${bin.templates}"/>
 			<!--
@@ -119,7 +141,7 @@
 			<arg value="-noJdkAnnotations"/>
 			<!--<arg value="-noJdk"/>-->
 		</java>
-		<!--<kotlinc module="config/Templates.kts" jar="${lib}/templates.jar" />-->
+		<!--<kotlinc module="${config}/Templates.kts" jar="${lib}/templates.jar" />-->
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
@@ -154,23 +176,34 @@
 			</classpath>
 
 			<jvmarg value="-server"/>
+
+			<arg value="${src.templates}"/>
+			<arg value="${generated}"/>
 		</java>
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
 		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="java6.boot.classpath" taskname="Core">
-			<src path="${src.core}"/>
-			<src path="${src.util}/"/>
-			<src path="${generated.java}"/>
+			<src>
+				<pathelement path="${src.core}"/>
+				<pathelement path="${src.util}"/>
+				<pathelement path="${generated.java}"/>
+			</src>
+
 			<classpath path="${lib}/disruptor.jar"/>
-			<include name="org/lwjgl/**"/>
+
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
 		</javac>
 	</target>
 
 	<target name="compile-native" description="Compiles the native source code" depends="-initialize, compile">
-		<ant antfile="config/${platform}/build.xml" inheritAll="false"/>
+		<ant antfile="${config}/${platform}/build.xml" inheritAll="false"/>
+		<!-- TODO: Move this to release target
+		<copy todir="${lib}/${platform}">
+			<fileset dir="${bin.native}" includes="*lwjgl*.*"/>
+		</copy>
+		-->
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
@@ -182,25 +215,77 @@
 			</classpath>
 
 			<src path="${src.tests}/"/>
-			<include name="org/lwjgl/**"/>
 		</javac>
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
-		<testng outputDir="${tests.output}" taskname="Tests">
+		<testng outputDir="${tests.output}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
 				<pathelement path="${lib}/jcommander.jar"/>
-				<pathelement path="${bin.core}"/>
-				<pathelement path="${bin.util}"/>
-				<pathelement path="${res}"/>
-				<pathelement path="${bin.tests}"/>
 			</classpath>
-			<xmlfileset dir="config" includes="tests.xml,tests_${platform}.xml"/>
+
 			<jvmarg value="-Xcheck:jni"/>
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+
+			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
 		</testng>
+	</target>
+
+	<target name="demo" description="Runs an LWJGL demo">
+		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
+		<condition property="class" value="${class}" else="">
+			<isset property="class"/>
+		</condition>
+
+		<condition property="jvmargs" value="${jvmargs}" else="">
+			<isset property="jvmargs"/>
+		</condition>
+		<condition property="args" value="${args}" else="">
+			<isset property="args"/>
+		</condition>
+
+		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
+			<classpath>
+				<pathelement path="${lib}/disruptor.jar"/>
+			</classpath>
+
+			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+			<jvmarg line="${jvmargs}"/>
+
+			<arg line="${args}"/>
+		</java>
+	</target>
+
+	<target name="javadoc" description="Generates the LWJGL JavaDoc">
+		<javadoc
+			destdir="${javadoc.output}"
+			source="1.6"
+			bootclasspathref="java6.boot.classpath"
+			windowtitle="LWJGL ${version}"
+			encoding="utf8"
+			docencoding="utf8"
+			useexternalfile="true"
+			nohelp="true"
+			notree="true"
+		    stylesheetfile="${config}/javadoc.css"
+			>
+
+			<!-- TODO: Filter FunctionMap inner classes -->
+			<!-- TODO: Add package-info documentation -->
+
+			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
+			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
+
+			<fileset dir=".">
+				<include name="${src.core}/**/*.java"/>
+				<include name="${src.util}/**/*.java"/>
+			</fileset>
+			<fileset dir="${generated.java}" includes="**/*.java"/>
+
+			<classpath path="${lib}/disruptor.jar"/>
+		</javadoc>
 	</target>
 
 </project>

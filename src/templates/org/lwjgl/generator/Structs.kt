@@ -7,31 +7,6 @@ package org.lwjgl.generator
 import java.io.PrintWriter
 import java.util.ArrayList
 
-class StructRegistry {
-
-	class object {
-		val INSTANCE = StructRegistry()
-
-		fun generate() {
-			INSTANCE.structs.forEach {
-				try {
-					generate(it)
-				} catch (e: Exception) {
-					throw RuntimeException("Uncaught exception while generating struct: ${it.packageName}.${it.className}", e)
-				}
-			}
-		}
-
-		fun add(struct: Struct) {
-			INSTANCE.structs add struct
-		}
-
-	}
-
-	private val structs = ArrayList<Struct>()
-
-}
-
 open class StructMember(
 	val nativeType: NativeType,
 	val nativeName: String,
@@ -189,7 +164,7 @@ public class Struct(
 
 		// Step: 3: Constructors
 		generateConstructor(
-			"Virtual constructor. Calls {@link #malloc()} and initializes the returned {@link ByteBuffer} instance with the given values.",
+			"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the given values.",
 			members, generateConstructorArguments, generateConstructorSetters
 		)
 		if ( generateAlternativeConstructor(members) ) {
@@ -729,7 +704,7 @@ public class Struct(
 public fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
 	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier)
 	struct.init()
-	StructRegistry add struct
+	Generator.register(struct)
 	return struct
 }
 

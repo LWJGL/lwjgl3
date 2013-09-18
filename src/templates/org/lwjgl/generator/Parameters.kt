@@ -66,8 +66,6 @@ public enum class ParameterType {
 	INOUT
 }
 
-private val LINK_PATTERN = Pattern.compile("\\s+", Pattern.MULTILINE)
-
 public class Parameter(
 	nativeType: NativeType,
 	val name: String,
@@ -84,35 +82,17 @@ public class Parameter(
 
 	private fun doc(description: String, links: String): String {
 		val trimmed = description.trim()
-		val builder = StringBuilder(trimmed.size + 16 + links.size * 2) // Rough estimate to reduce mallocs.
+		val builder = StringBuilder(trimmed.size + 16 + links.size) // Rough estimate to reduce mallocs. TODO: validate
 		builder append trimmed
 		if ( !trimmed.endsWith('.') )
 			builder append '.'
 
-		builder append if ( links.indexOf(' ') == -1 )
+		builder append if ( links.count { it == '@' } == 1 )
 			" Must be:"
 		else
 			" One of:"
 		builder append "<p/>"
-
-		val tokens = LINK_PATTERN.split(links.trim())
-		for ( i in tokens.indices ) {
-			if ( 0 < i ) builder append ", "
-
-			if ( tokens[i].indexOf('#') == -1 ) {
-				builder append tokens[i]
-			} else {
-				val classLink = tokens[i].startsWith("##")
-				if ( classLink ) builder append "see "
-
-				builder append "{@link "
-				if ( classLink )
-					builder append tokens[i].substring(2)
-				else
-					builder append tokens[i]
-				builder append "}"
-			}
-		}
+		builder append links
 
 		return builder.toString()
 	}

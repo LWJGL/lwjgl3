@@ -94,17 +94,17 @@
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -ObjC -isysroot ${sdkroot} -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -DLWJGL_MACOSX"/>
 			<arg value="-I${javavmroot}/${jvm_headers_path}"/>
-			<!-- Paths relative to ${dest} -->
-			<arg value="-I../../${src.native}/system"/>
-			<arg value="-I../../${src.native}/system/macosx"/>
-			<arg value="-I../../${src.native}/system/glfw"/>
-			<arg value="-I../../${src.native}/openal"/>
-			<arg value="-I../../${src.native}/opencl"/>
-			<arg value="-I../../${src.native}/opengl"/>
-			<!--<arg value="-I../../${src.native}/opengl/glx"/>-->
 
-			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
+			<!-- Paths relative to dir -->
+			<arg value="-I${src.native.abs}/system"/>
+			<arg value="-I${src.native.abs}/system/macosx"/>
+			<arg value="-I${src.native.abs}/system/glfw"/>
+			<arg value="-I${src.native.abs}/openal"/>
+			<arg value="-I${src.native.abs}/opencl"/>
+			<arg value="-I${src.native.abs}/opengl"/>
+			<!--<arg value="-I${src.native.abs}/opengl/glx"/>-->
 
+			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/macosx" includes="*.c"/>
 			<fileset dir="${src.native}/system/macosx" includes="*.m"/>
@@ -119,12 +119,14 @@
 			<fileset dir="${generated.native}/opencl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
 			<!--<fileset dir="${src.generated}/opengl/glx" includes="*.c"/>-->
+
+			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>
 
 		<!-- LINK -->
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname} -L../../libs/macosx/x86_64 -lglfw3"/>
+			<arg line='-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname}'/>
 			<arg value="-framework"/><arg value="AppKit"/>
 			<arg value="-framework"/><arg value="CoreFoundation"/>
 			<arg value="-framework"/><arg value="Cocoa"/>
@@ -133,16 +135,12 @@
 			<!-- LWJGL objects -->
 			<fileset dir="${bin.native}" includes="*.o"/>
 			<!-- Static libraries -->
-			<fileset dir="libs/macosx/${os.arch}" includes="*.a"/>
+			<fileset dir="${lib.abs}/macosx/${os.arch}" includes="*.a"/>
 		</apply>
 		<!--<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol Strip">
 			<arg line="-S -X"/>
 			<fileset file="${libname}"/>
 		</apply>-->
-
-		<copy todir="${lib}/macosx">
-			<fileset dir="${bin.native}" includes="liblwjgl*.jnilib"/>
-		</copy>
 	</target>
 
 </project>

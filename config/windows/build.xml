@@ -11,18 +11,20 @@
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="/c /W3 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
+
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
-			<!-- Paths relative to ${dest} -->
-			<arg value="/I..\..\${src.native}\system"/>
-			<arg value="/I..\..\${src.native}\system\windows"/>
-			<arg value="/I..\..\${src.native}\system\glfw"/>
-			<arg value="/I..\..\${src.native}\openal"/>
-			<arg value="/I..\..\${src.native}\opencl"/>
-			<arg value="/I..\..\${src.native}\opengl"/>
-			<arg value="/I..\..\${src.native}\opengl\wgl"/>
-			<srcfile/>
-			<!-- Paths relative to ${basedir} -->
+
+			<!-- Paths relative to dir -->
+			<arg value="/I${src.native.abs}\system"/>
+			<arg value="/I${src.native.abs}\system\windows"/>
+			<arg value="/I${src.native.abs}\system\glfw"/>
+			<arg value="/I${src.native.abs}\openal"/>
+			<arg value="/I${src.native.abs}\opencl"/>
+			<arg value="/I${src.native.abs}\opengl"/>
+			<arg value="/I${src.native.abs}\opengl\wgl"/>
+
+			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
@@ -35,6 +37,7 @@
 			<fileset dir="${generated.native}/opencl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl/wgl" includes="*.c"/>
+
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
 
@@ -44,15 +47,11 @@
 			<srcfile/>
 			<arg line="/Fe${dllname} /link"/>
 			<arg value="/LIBPATH:${java.home}\..\lib"/>
-			<arg value="/LIBPATH:..\..\libs\windows\${os.arch}"/>
+			<arg value="/LIBPATH:${lib.abs}\windows\${os.arch}"/>
 			<arg value="/OPT:REF"/>
 			<arg value="/OPT:ICF"/>
 			<arg line="/DLL ${libs}"/>
 			<fileset dir="${bin.native}" includes="*.obj"/>
 		</apply>
-
-		<copy todir="${lib}/windows">
-			<fileset dir="${bin.native}" includes="lwjgl*.dll"/>
-		</copy>
 	</target>
 </project>
