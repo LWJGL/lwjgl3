@@ -18,7 +18,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
 
 		There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
 		that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most
@@ -75,7 +75,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		AutoType("data", GL_UNSIGNED_BYTE, GL_UNSIGNED_INT) _ GLenum.IN(
 			"dataType",
 			"the data type to be returned",
-			"GL11#GL_UNSIGNED_INT GL11#GL_INT GL11#GL_FLOAT GL11#GL_UNSIGNED_BYTE"
+			"GL11#GL_UNSIGNED_INT GL11#GL_INT GL11#GL_FLOAT GL11#GL_UNSIGNED_BYTE".toConstantLinks()
 		),
 		(AutoSize("data") * "GLChecks.typeToBytes(dataType)") _ UINT.IN("size", "the size of the {@code data} buffer"),
 		GLvoid_p.IN("data", "the buffer which will be filled with the requested information")
@@ -149,8 +149,8 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of a number of values indicating which buffers are to be copied",
-			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT"
+			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT".toConstantLinks()
 		),
-		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#GL_LINEAR GL11#GL_NEAREST")
+		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#GL_LINEAR GL11#GL_NEAREST".toConstantLinks())
 	)
 }

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", EXT) {
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 		"""
@@ -18,8 +18,8 @@ fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attributes} parameter of {@link WGLARBPixelFormat#wglGetPixelFormatAttribiARB} and the {@code attribIList} of
-		{@link WGLARBPixelFormat#wglChoosePixelFormatARB}.
+		Accepted by the {@code attributes} parameter of ${"WGLARBPixelFormat".link("GetPixelFormatAttribiARB()")} and the {@code attribIList} of
+		${"WGLARBPixelFormat".link("ChoosePixelFormatARB()")}.
 		""",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9

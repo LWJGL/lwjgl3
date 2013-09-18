@@ -16,7 +16,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 	javaDoc("Native bindings to <dlfcn.h>.")
 
 	val Modes = IntConstant.block(
-		"The {@code mode} argument to {@link #dlopen} contains one of the following:",
+		"The {@code mode} argument to ${"dlopen()".link} contains one of the following:",
 
 		"RTLD_LAZY" _ 0x00001,
 		"RTLD_NOW" _ 0x00002,
@@ -27,7 +27,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 
 	IntConstant.block(
 		"""
-		If the following bit is set in the {@code mode} argument to {@link #dlopen}, the symbols of the loaded object and its dependencies are made visible as
+		If the following bit is set in the {@code mode} argument to ${"dlopen()".link}, the symbols of the loaded object and its dependencies are made visible as
 		if the object were linked directly into the program.
 		""",
 
@@ -36,7 +36,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 
 	IntConstant.block(
 		"""
-		Unix98 demands the following flag which is the inverse to {@link #RTLD_GLOBAL}. The implementation does this by default and so we can define the value
+		Unix98 demands the following flag which is the inverse to ${"RTLD_GLOBAL".link}. The implementation does this by default and so we can define the value
 		to zero.
 		""",
 
@@ -63,16 +63,16 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 	charASCII_p.func(
 		"dlerror",
 		"""
-		Returns a human readable string describing the most recent error that occurred from {@link #dlopen}, {@link #dlsym} or {@link #dlclose} since the last
-		call to {@code dlerror()}. It returns $NULL if no errors have occurred since initialization or since it was last called.
+		Returns a human readable string describing the most recent error that occurred from ${"dlopen()".link}, ${"dlsym()".link} or ${"dlclose()".link} since
+		the last call to {@code dlerror()}. It returns $NULL if no errors have occurred since initialization or since it was last called.
 		"""
 	)
 
 	voidptr.func(
 		"dlsym",
 		"""
-		Takes a "handle" of a dynamic library returned by {@link #dlopen} and the null-terminated symbol name, returning the address where that symbol is loaded
-		into memory. If the symbol is not found, in the specified library or any of the libraries that were automatically loaded by {@link #dlopen} when that
+		Takes a "handle" of a dynamic library returned by ${"dlopen()".link} and the null-terminated symbol name, returning the address where that symbol is loaded
+		into memory. If the symbol is not found, in the specified library or any of the libraries that were automatically loaded by ${"dlopen()".link} when that
 		library was loaded, {@code dlsym()} returns $NULL.
 		""",
 

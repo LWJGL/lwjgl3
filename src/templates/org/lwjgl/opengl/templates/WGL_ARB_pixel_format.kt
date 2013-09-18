@@ -15,7 +15,7 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", templateName)} extension.
 
 		This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
 

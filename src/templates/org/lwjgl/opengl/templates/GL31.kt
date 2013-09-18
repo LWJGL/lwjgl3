@@ -60,7 +60,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
@@ -135,7 +135,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		"TexBuffer",
 		"Attaches the storage for a buffer object to the active buffer texture.",
 
-		GLenum.IN("target", "the target of the operation", "#GL_TEXTURE_BUFFER"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_BUFFER"),
 		GLenum.IN("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
 		GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture")
 	)

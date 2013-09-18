@@ -141,7 +141,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		"TexStorage1D",
 		"Simultaneously specifies storage for all levels of a one-dimensional texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL11#GL_TEXTURE_1D GL11#GL_PROXY_TEXTURE_1D"),
+		GLenum.IN("target", "the target of the operation", "GL11#TEXTURE_1D GL11#PROXY_TEXTURE_1D"),
 		GLsizei.IN("levels", "the number of texture levels"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels")
@@ -213,7 +213,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
@@ -229,7 +229,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
@@ -372,8 +372,8 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 			"target",
 			"the usage of the internal format",
 			"""
-			GL11#GL_TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#GL_RENDERBUFFER GL31#GL_TEXTURE_BUFFER GL32#GL_TEXTURE_2D_MULTISAMPLE
-			GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+			GL11#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#RENDERBUFFER GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE
+			GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),

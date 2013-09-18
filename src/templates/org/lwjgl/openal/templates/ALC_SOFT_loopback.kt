@@ -15,7 +15,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	javaDoc("bindings to ALC_SOFT_loopback extension.")
 
 	val RenderFormatSupportedTypeParameters = IntConstant.block(
-		"Accepted by the @{code type} parameter of alcIsRenderFormatSupportedSOFT.",
+		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"BYTE_SOFT" _ 0x1400,
 		"UNSIGNED_BYTE_SOFT" _ 0x1401,
@@ -27,7 +27,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	).toJavaDocLinks();
 
 	val RenderFormatSupportedChannelParameters = IntConstant.block(
-		"Accepted by the @{code channels} parameter of alcIsRenderFormatSupportedSOFT.",
+		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"MONO_SOFT" _ 0x1500,
 		"STEREO_SOFT" _ 0x1501,
@@ -38,7 +38,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	).toJavaDocLinks();
 
 	val CreateContextParameters = IntConstant.block(
-		"Accepted as part of the @{code attrList} parameter of alcCreateContext.",
+		"Accepted as part of the {@code attrList} parameter of alcCreateContext.",
 
 		"FORMAT_CHANNELS_SOFT" _ 0x1990,
 		"FORMAT_TYPE_SOFT" _ 0x1991

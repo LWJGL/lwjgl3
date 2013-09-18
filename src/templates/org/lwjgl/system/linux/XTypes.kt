@@ -47,7 +47,7 @@ val XErrorHandler = PointerType("XErrorHandler", includesPointer = true)
 
 val XComposeStatus = StructType(
 	struct(LINUX_PACKAGE, "XComposeStatus") {
-		javaDoc("Compose sequence status structure, used in calling {@link Xutil#XLookupString}.")
+		javaDoc("Compose sequence status structure, used in calling ${"Xutil".link("XLookupString()")}.")
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -155,7 +155,7 @@ val XVisualInfo_p = StructType(XVisualInfo)
 
 val XSizeHints = StructType(
 	struct(LINUX_PACKAGE, "XSizeHints") {
-		javaDoc("Used by {@link Xlib#XSetSizeHints}.")
+		javaDoc("Used by ${"Xlib".link("XSetSizeHints()")}.")
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -188,7 +188,7 @@ val XSizeHints_p = StructType(XSizeHints)
 
 val XWMHints = StructType(
 	struct(LINUX_PACKAGE, "XWMHints") {
-		javaDoc("Used by {@link Xlib#XSetWMHints}.")
+		javaDoc("Used by ${"Xlib".link("XSetWMHints()")}.")
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -209,7 +209,7 @@ val XWMHints_p = StructType(XWMHints)
 
 val XClassHint = StructType(
 	struct(LINUX_PACKAGE, "XClassHint") {
-		javaDoc("Used by {@link Xlib#XSetClassHint}.")
+		javaDoc("Used by ${"Xlib".link("XSetClassHint()")}.")
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"

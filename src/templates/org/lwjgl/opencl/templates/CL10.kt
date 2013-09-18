@@ -9,32 +9,67 @@ import org.lwjgl.opencl.*
 
 // -- [ Reusable definitions ] --
 
-val CL_SUCCESS = "{@link CL10#CL_SUCCESS}"
-val CL_TRUE = "{@link CL10#CL_TRUE}"
-val CL_FALSE = "{@link CL10#CL_FALSE}"
+val SUCCESS = "CL10".linkCL("SUCCESS")
+val TRUE = "CL10".linkCL("TRUE")
+val FALSE = "CL10".linkCL("FALSE")
+
+// Error codes
+
+val INVALID_VALUE = "CL10".linkCL("INVALID_VALUE")
+val INVALID_DEVICE_TYPE = "CL10".linkCL("INVALID_DEVICE_TYPE")
+val INVALID_PLATFORM = "CL10".linkCL("INVALID_PLATFORM")
+val INVALID_DEVICE = "CL10".linkCL("INVALID_DEVICE")
+val INVALID_CONTEXT = "CL10".linkCL("INVALID_CONTEXT")
+val INVALID_QUEUE_PROPERTIES = "CL10".linkCL("INVALID_QUEUE_PROPERTIES")
+val INVALID_COMMAND_QUEUE = "CL10".linkCL("INVALID_COMMAND_QUEUE")
+val INVALID_HOST_PTR = "CL10".linkCL("INVALID_HOST_PTR")
+val INVALID_MEM_OBJECT = "CL10".linkCL("INVALID_MEM_OBJECT")
+val INVALID_IMAGE_FORMAT_DESCRIPTOR = "CL10".linkCL("INVALID_IMAGE_FORMAT_DESCRIPTOR")
+val INVALID_IMAGE_SIZE = "CL10".linkCL("INVALID_IMAGE_SIZE")
+val INVALID_SAMPLER = "CL10".linkCL("INVALID_SAMPLER")
+val INVALID_BINARY = "CL10".linkCL("INVALID_BINARY")
+val INVALID_BUILD_OPTIONS = "CL10".linkCL("INVALID_BUILD_OPTIONS")
+val INVALID_PROGRAM = "CL10".linkCL("INVALID_PROGRAM")
+val INVALID_PROGRAM_EXECUTABLE = "CL10".linkCL("INVALID_PROGRAM_EXECUTABLE")
+val INVALID_KERNEL_NAME = "CL10".linkCL("INVALID_KERNEL_NAME")
+val INVALID_KERNEL_DEFINITION = "CL10".linkCL("INVALID_KERNEL_DEFINITION")
+val INVALID_KERNEL = "CL10".linkCL("INVALID_KERNEL")
+val INVALID_ARG_INDEX = "CL10".linkCL("INVALID_ARG_INDEX")
+val INVALID_ARG_VALUE = "CL10".linkCL("INVALID_ARG_VALUE")
+val INVALID_ARG_SIZE = "CL10".linkCL("INVALID_ARG_SIZE")
+val INVALID_KERNEL_ARGS = "CL10".linkCL("INVALID_KERNEL_ARGS")
+val INVALID_WORK_DIMENSION = "CL10".linkCL("INVALID_WORK_DIMENSION")
+val INVALID_WORK_GROUP_SIZE = "CL10".linkCL("INVALID_WORK_GROUP_SIZE")
+val INVALID_WORK_ITEM_SIZE = "CL10".linkCL("INVALID_WORK_ITEM_SIZE")
+val INVALID_GLOBAL_OFFSET = "CL10".linkCL("INVALID_GLOBAL_OFFSET")
+val INVALID_EVENT_WAIT_LIST = "CL10".linkCL("INVALID_EVENT_WAIT_LIST")
+val INVALID_EVENT = "CL10".linkCL("INVALID_EVENT")
+val INVALID_OPERATION = "CL10".linkCL("INVALID_OPERATION")
+val INVALID_BUFFER_SIZE = "CL10".linkCL("INVALID_BUFFER_SIZE")
+val INVALID_GLOBAL_WORK_SIZE = "CL10".linkCL("INVALID_GLOBAL_WORK_SIZE")
 
 // Errors
 
-val OORE = "{@link CL10#CL_OUT_OF_RESOURCES} if there is a failure to allocate resources required by the OpenCL implementation on the device."
-val OOHME = "{@link CL10#CL_OUT_OF_HOST_MEMORY} if there is a failure to allocate resources required by the OpenCL implementation on the host."
+val OORE = "${"CL10".linkCL("OUT_OF_RESOURCES")} if there is a failure to allocate resources required by the OpenCL implementation on the device."
+val OOHME = "${"CL10".linkCL("OUT_OF_HOST_MEMORY")} if there is a failure to allocate resources required by the OpenCL implementation on the host."
 
-val ICQE = "{@link CL10#CL_INVALID_COMMAND_QUEUE} if {@code command_queue} is not a valid command-queue."
-val ICE = "{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid context."
+val ICQE = "$INVALID_COMMAND_QUEUE if {@code command_queue} is not a valid command-queue."
+val ICE = "$INVALID_CONTEXT if {@code context} is not a valid context."
 val IEWLE =
 	"""
-	{@link CL10#CL_INVALID_EVENT_WAIT_LIST} if {@code event_wait_list} is $NULL and {@code num_events_in_wait_list} &gt; 0, or {@code event_wait_list} is not
+	$INVALID_EVENT_WAIT_LIST if {@code event_wait_list} is $NULL and {@code num_events_in_wait_list} &gt; 0, or {@code event_wait_list} is not
 	$NULL and {@code num_events_in_wait_list} is 0, or if event objects in {@code event_wait_list} are not valid events.
 	"""
 
 fun MSBOE(buffer: String) =
 	"""
-	{@link CL11#CL_MISALIGNED_SUB_BUFFER_OFFSET} if {@code $buffer} is a sub-buffer object and offset specified when the sub-buffer object is created is
-	not aligned to {@link CL10#CL_DEVICE_MEM_BASE_ADDR_ALIGN} value for device associated with queue.
+	${"CL11".linkCL("MISALIGNED_SUB_BUFFER_OFFSET")} if {@code $buffer} is a sub-buffer object and offset specified when the sub-buffer object is created is
+	not aligned to ${"CL10".linkCL("DEVICE_MEM_BASE_ADDR_ALIGN")} value for device associated with queue.
 	"""
 
 fun ESEFEIWLE(operation: String) =
 	"""
-	{@link CL11#CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST} if the $operation operation is blocking and the execution status of any of the events in
+	${"CL11".linkCL("EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST")} if the $operation operation is blocking and the execution status of any of the events in
 	{@code event_wait_list} is a negative integer value.
 	"""
 
@@ -169,7 +204,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"DEVICE_TYPE_GPU".expr<Int>("1 << 2"),
 		"DEVICE_TYPE_ACCELERATOR".expr<Int>("1 << 3"),
 		"DEVICE_TYPE_ALL" _ 0xFFFFFFFF.i
-	).toJavaDocLinks() + " CL12#CL_DEVICE_TYPE_CUSTOM"
+	).toJavaDocLinks() + " CL12#DEVICE_TYPE_CUSTOM"
 
 	val DeviceInfo = IntConstant.block(
 		"cl_device_info",
@@ -224,9 +259,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"DEVICE_VERSION" _ 0x102F,
 		"DEVICE_EXTENSIONS" _ 0x1030,
 		"DEVICE_PLATFORM" _ 0x1031
-	).toJavaDocLinks() + """ CL11#CL_DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#CL_DEVICE_HOST_UNIFIED_MEMORY CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_CHAR
-	CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_LONG
-	CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#CL_DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#CL_DEVICE_OPENCL_C_VERSION"""
+	).toJavaDocLinks() + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
+	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
+	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION"""
 
 	IntConstant.block(
 		"cl_device_fp_config - bitfield",
@@ -274,14 +309,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"CONTEXT_REFERENCE_COUNT" _ 0x1080,
 		"CONTEXT_DEVICES" _ 0x1081,
 		"CONTEXT_PROPERTIES" _ 0x1082
-	).toJavaDocLinks() + " CL11#CL_CONTEXT_NUM_DEVICES"
+	).toJavaDocLinks() + " CL11#CONTEXT_NUM_DEVICES"
 
 	val ContextProperties = IntConstant.block(
 		"cl_context_info + cl_context_properties",
 
 		"CONTEXT_PLATFORM" _ 0x1084
-	).toJavaDocLinks() + """ CL12#CL_CONTEXT_INTEROP_USER_SYNC KHRGLSharing#CL_GL_CONTEXT_KHR KHRGLSharing#CL_EGL_DISPLAY_KHR KHRGLSharing#CL_GLX_DISPLAY_KHR
-	KHRGLSharing#CL_WGL_HDC_KHR KHRGLSharing#CL_CGL_SHAREGROUP_KHR
+	).toJavaDocLinks() + """ CL12#CONTEXT_INTEROP_USER_SYNC KHRGLSharing#GL_CONTEXT_KHR KHRGLSharing#EGL_DISPLAY_KHR KHRGLSharing#GLX_DISPLAY_KHR
+	KHRGLSharing#WGL_HDC_KHR KHRGLSharing#CGL_SHAREGROUP_KHR
 	"""
 
 	val CommandQueueInfo = IntConstant.block(
@@ -302,7 +337,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"MEM_USE_HOST_PTR".expr<Int>("1 << 3"),
 		"MEM_ALLOC_HOST_PTR".expr<Int>("1 << 4"),
 		"MEM_COPY_HOST_PTR".expr<Int>("1 << 5")
-	).toJavaDocLinks() + " CL12#CL_MEM_HOST_WRITE_ONLY CL12#CL_MEM_HOST_READ_ONLY CL12#CL_MEM_HOST_NO_ACCESS"
+	).toJavaDocLinks() + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
 
 	IntConstant.block(
 		"cl_channel_order",
@@ -357,7 +392,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"MEM_MAP_COUNT" _ 0x1104,
 		"MEM_REFERENCE_COUNT" _ 0x1105,
 		"MEM_CONTEXT" _ 0x1106
-	).toJavaDocLinks() + " CL11#CL_MEM_ASSOCIATED_MEMOBJECT CL11#CL_MEM_OFFSET"
+	).toJavaDocLinks() + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
 
 	val ImageInfo = IntConstant.block(
 		"cl_image_info",
@@ -369,7 +404,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"IMAGE_WIDTH" _ 0x1114,
 		"IMAGE_HEIGHT" _ 0x1115,
 		"IMAGE_DEPTH" _ 0x1116
-	).toJavaDocLinks() + " CL12#CL_IMAGE_ARRAY_SIZE CL12#CL_IMAGE_BUFFER CL12#CL_IMAGE_NUM_MIP_LEVELS CL12#CL_IMAGE_NUM_SAMPLES"
+	).toJavaDocLinks() + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
 
 	val AddressingModes = IntConstant.block(
 		"cl_addressing_mode",
@@ -378,7 +413,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"ADDRESS_CLAMP_TO_EDGE" _ 0x1131,
 		"ADDRESS_CLAMP" _ 0x1132,
 		"ADDRESS_REPEAT" _ 0x1133
-	).toJavaDocLinks() + " CL11#CL_ADDRESS_MIRRORED_REPEAT"
+	).toJavaDocLinks() + " CL11#ADDRESS_MIRRORED_REPEAT"
 
 	val FilterModes = IntConstant.block(
 		"cl_filter_mode",
@@ -402,7 +437,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		"MAP_READ".expr<Int>("1 << 0"),
 		"MAP_WRITE".expr<Int>("1 << 1")
-	).toJavaDocLinks() + " CL12#CL_MAP_WRITE_INVALIDATE_REGION"
+	).toJavaDocLinks() + " CL12#MAP_WRITE_INVALIDATE_REGION"
 
 	val ProgramInfo = IntConstant.block(
 		"cl_program_info",
@@ -414,7 +449,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_SOURCE" _ 0x1164,
 		"PROGRAM_BINARY_SIZES" _ 0x1165,
 		"PROGRAM_BINARIES" _ 0x1166
-	).toJavaDocLinks() + " CL12#CL_PROGRAM_NUM_KERNELS CL12#CL_PROGRAM_KERNEL_NAMES"
+	).toJavaDocLinks() + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
 
 	val ProgramBuildInfo = IntConstant.block(
 		"cl_program_build_info",
@@ -422,7 +457,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BUILD_STATUS" _ 0x1181,
 		"PROGRAM_BUILD_OPTIONS" _ 0x1182,
 		"PROGRAM_BUILD_LOG" _ 0x1183
-	).toJavaDocLinks() + " CL12#CL_PROGRAM_BINARY_TYPE"
+	).toJavaDocLinks() + " CL12#PROGRAM_BINARY_TYPE"
 
 	IntConstant.block(
 		"cl_build_status",
@@ -441,7 +476,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"KERNEL_REFERENCE_COUNT" _ 0x1192,
 		"KERNEL_CONTEXT" _ 0x1193,
 		"KERNEL_PROGRAM" _ 0x1194
-	).toJavaDocLinks() + " CL12#CL_KERNEL_ATTRIBUTES"
+	).toJavaDocLinks() + " CL12#KERNEL_ATTRIBUTES"
 
 	val KernelWorkGroupInfo = IntConstant.block(
 		"cl_kernel_work_group_info",
@@ -449,7 +484,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"KERNEL_WORK_GROUP_SIZE" _ 0x11B0,
 		"KERNEL_COMPILE_WORK_GROUP_SIZE" _ 0x11B1,
 		"KERNEL_LOCAL_MEM_SIZE" _ 0x11B2
-	).toJavaDocLinks() + " CL11#CL_KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#CL_KERNEL_PRIVATE_MEM_SIZE CL12#CL_KERNEL_GLOBAL_WORK_SIZE"
+	).toJavaDocLinks() + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
 
 	val EventInfo = IntConstant.block(
 		"cl_event_info",
@@ -458,7 +493,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"EVENT_COMMAND_TYPE" _ 0x11D1,
 		"EVENT_REFERENCE_COUNT" _ 0x11D2,
 		"EVENT_COMMAND_EXECUTION_STATUS" _ 0x11D3
-	).toJavaDocLinks() + " CL11#CL_EVENT_CONTEXT"
+	).toJavaDocLinks() + " CL11#EVENT_CONTEXT"
 
 	IntConstant.block(
 		"cl_command_type",
@@ -502,9 +537,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Platform Layer ]------------------
 
-	val CL_SUCCESS = "{@link #CL_SUCCESS}"
-	val CL_TRUE = "{@link #CL_TRUE}"
-	val CL_FALSE = "{@link #CL_FALSE}"
+	val SUCCESS = "SUCCESS".link
+	val TRUE = "TRUE".link
+	val FALSE = "FALSE".link
 
 	Capabilities(
 		expression = "CL.getFunctionProvider().getFunctionAddress(\"clGetPlatformIDs\")",
@@ -535,10 +570,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code num_entries} is equal to zero and {@code platforms} is not $NULL or if both {@code num_platforms} and
+			$INVALID_VALUE if {@code num_entries} is equal to zero and {@code platforms} is not $NULL or if both {@code num_platforms} and
 			{@code platforms} are $NULL.
 			""",
 			OOHME
@@ -558,11 +593,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-			"{@link #CL_INVALID_PLATFORM} if {@code platform} is not a valid platform.",
+			"$INVALID_PLATFORM if {@code platform} is not a valid platform.",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
+			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value.
 			""",
 			OOHME
@@ -605,12 +640,12 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-			"{@link #CL_INVALID_PLATFORM} if {@code platform} is not a valid platform.",
-			"{@link #CL_INVALID_DEVICE_TYPE} if {@code device_type} is not a valid value.",
-			"{@link #CL_INVALID_VALUE} if {@code num_entries} is equal to zero and {@code devices} is not $NULL or if both {@code num_devices} and {@code devices} are $NULL.",
-			"{@link #CL_DEVICE_NOT_FOUND} if no OpenCL devices that matched {@code device_type} were found.",
+			"$INVALID_PLATFORM if {@code platform} is not a valid platform.",
+			"$INVALID_DEVICE_TYPE if {@code device_type} is not a valid value.",
+			"$INVALID_VALUE if {@code num_entries} is equal to zero and {@code devices} is not $NULL or if both {@code num_devices} and {@code devices} are $NULL.",
+			"${"DEVICE_NOT_FOUND".link} if no OpenCL devices that matched {@code device_type} were found.",
 			OORE,
 			OOHME
 		)}
@@ -621,7 +656,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"GetDeviceInfo",
 		"""
 		Returns specific information about an OpenCL device. {@code device} may be a device returned by $GetDeviceIDs or a sub-device created by
-		{@link CL12#clCreateSubDevices}. If {@code device} is a sub-device, the specific information for the sub-device will be returned.
+		${"CL12".link("CreateSubDevices()")}. If {@code device} is a sub-device, the specific information for the sub-device will be returned.
 		""",
 
 		cl_device_id.IN("device", "the device to query"),
@@ -639,11 +674,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-			"{@link #CL_INVALID_DEVICE} if {@code device} is not valid.",
+			"$INVALID_DEVICE if {@code device} is not valid.",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
+			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value or if {@code param_name} is a value that is available as an extension and the
 			corresponding extension is not supported by the device.
 			""",
@@ -677,14 +712,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
 			list is terminated with 0.
 
-			<strong>LWJGL note</strong>: The {@link #CL_CONTEXT_PLATFORM} property must be present.
+			<strong>LWJGL note</strong>: The ${"CONTEXT_PLATFORM".link} property must be present.
 			""",
 			ContextProperties
 		),
 		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
 		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
 			"devices",
-			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by {@link CL12#clCreateSubDevices} for a platform"
+			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by ${"CL12".link("CreateSubDevices()")} for a platform"
 		),
 		mods(
 			Callback("CLContextCallback"),
@@ -707,22 +742,22 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		a valid non-zero context and $errcode_ret is set to $CL_SUCCESS if the context is created successfully. Otherwise, it returns a $NULL value with the
+		a valid non-zero context and $errcode_ret is set to $SUCCESS if the context is created successfully. Otherwise, it returns a $NULL value with the
 		following error values returned in $errcode_ret:
 		${ul(
 			"""
-			{@link #CL_INVALID_PLATFORM} if {@code properties} is $NULL and no platform could be selected or if platform value specified in properties is not a
+			$INVALID_PLATFORM if {@code properties} is $NULL and no platform could be selected or if platform value specified in properties is not a
 			valid platform.
 			""",
 			"""
-			{@link CL11#CL_INVALID_PROPERTY} if context property name in {@code properties} is not a supported property name, if the value specified for a
+			$INVALID_PROPERTY if context property name in {@code properties} is not a supported property name, if the value specified for a
 			supported property name is not valid, or if the same property name is specified more than once.
 			""",
-			"{@link #CL_INVALID_VALUE} if {@code devices} is $NULL.",
-			"{@link #CL_INVALID_VALUE} if {@code num_devices} is equal to zero.",
-			"{@link #CL_INVALID_VALUE} if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
-			"{@link #CL_INVALID_DEVICE} if {@code devices} contains an invalid device.",
-			"{@link #CL_DEVICE_NOT_AVAILABLE} if a device in {@code devices} is currently not available even though the device was returned by $GetDeviceIDs.",
+			"$INVALID_VALUE if {@code devices} is $NULL.",
+			"$INVALID_VALUE if {@code num_devices} is equal to zero.",
+			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_DEVICE if {@code devices} contains an invalid device.",
+			"${"DEVICE_NOT_AVAILABLE".link} if a device in {@code devices} is currently not available even though the device was returned by $GetDeviceIDs.",
 			OORE,
 			OOHME
 		)}
@@ -750,7 +785,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
 			list is terminated with 0.
 
-			<strong>LWJGL note</strong>: The {@link #CL_CONTEXT_PLATFORM} property must be present.
+			<strong>LWJGL note</strong>: The ${"CONTEXT_PLATFORM".link} property must be present.
 			"""
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
@@ -779,7 +814,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			OORE,
@@ -801,7 +836,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			OORE,
@@ -825,11 +860,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
+			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value.
 			""",
 			OORE,
@@ -864,13 +899,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero command-queue and $errcode_ret is set to $CL_SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_DEVICE} if {@code device} is not a valid device or is not associated with {@code context}.",
-			"{@link #CL_INVALID_VALUE} if values specified in {@code properties} are not valid.",
-			"{@link #CL_INVALID_QUEUE_PROPERTIES} if values specified in {@code properties} are valid but are not supported by the device.",
+			"$INVALID_DEVICE if {@code device} is not a valid device or is not associated with {@code context}.",
+			"$INVALID_VALUE if values specified in {@code properties} are not valid.",
+			"$INVALID_QUEUE_PROPERTIES if values specified in {@code properties} are valid but are not supported by the device.",
 			OORE,
 			OOHME
 		)}
@@ -891,7 +926,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			OORE,
@@ -915,7 +950,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			OORE,
@@ -939,11 +974,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
+			$INVALID_VALUE if {@code param_name} is not one of the supported values or if size in bytes specified by {@code param_value_size} is &lt;
 			size of return type and {@code param_value} is not a $NULL value.
 			""",
 			OORE,
@@ -961,7 +996,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"flags",
 			"""
 			a bit-field that is used to specify allocation and usage information such as the memory area that should be used to allocate the buffer object and
-			how it will be used. If value specified for flags is 0, the default is used which is {@link #CL_MEM_READ_WRITE}.
+			how it will be used. If value specified for flags is 0, the default is used which is ${"MEM_READ_WRITE".link}.
 			""",
 			MemFlags
 		),
@@ -980,20 +1015,20 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero buffer object and $errcode_ret is set to $CL_SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if values specified in flags are not valid.",
+			"$INVALID_VALUE if values specified in flags are not valid.",
 			"""
-			{@link #CL_INVALID_BUFFER_SIZE} if size is 0. Implementations may return {@link #CL_INVALID_BUFFER_SIZE} if size is greater than
-			{@link #CL_DEVICE_MAX_MEM_ALLOC_SIZE} value all devices in context.
+			$INVALID_BUFFER_SIZE if size is 0. Implementations may return $INVALID_BUFFER_SIZE if size is greater than
+			${"DEVICE_MAX_MEM_ALLOC_SIZE".link} value all devices in context.
 			""",
 			"""
-			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
-			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and ${"MEM_USE_HOST_PTR".link} or ${"MEM_COPY_HOST_PTR".link} are set in flags or if
+			{@code host_ptr} is not $NULL but ${"MEM_COPY_HOST_PTR".link} or ${"MEM_USE_HOST_PTR".link} are not set in flags.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for buffer object.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for buffer object.",
 			OORE,
 			OOHME
 		)}
@@ -1006,7 +1041,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Enqueues a command to read from a buffer object to host memory.
 
 		Calling {@code clEnqueueReadBuffer} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr + offset}, where
-		{@code host_ptr} is a pointer to the memory region specified when the buffer object being read is created with {@link #CL_MEM_USE_HOST_PTR}, must meet
+		{@code host_ptr} is a pointer to the memory region specified when the buffer object being read is created with ${"MEM_USE_HOST_PTR".link}, must meet
 		the following requirements in order to avoid undefined behavior:
 		${ul(
 			"""
@@ -1028,10 +1063,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the read operation is <em>blocking</em> or <em>non-blocking</em>
 
-			If {@code blocking_read} is $CL_TRUE i.e. the read command is blocking, {@code clEnqueueReadBuffer} does not return until the buffer data has been
+			If {@code blocking_read} is $TRUE i.e. the read command is blocking, {@code clEnqueueReadBuffer} does not return until the buffer data has been
 			read and copied into memory pointed to by {@code ptr}.
 
-			If {@code blocking_read} is $CL_FALSE i.e. the read command is non-blocking, {@code clEnqueueReadBuffer} queues a non-blocking read command and
+			If {@code blocking_read} is $FALSE i.e. the read command is non-blocking, {@code clEnqueueReadBuffer} queues a non-blocking read command and
 			returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
 			returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
 			the buffer that {@code ptr} points to can be used by the application.
@@ -1048,25 +1083,25 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
+			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"""
-			{@link #CL_INVALID_VALUE} if the region being read specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
+			$INVALID_VALUE if the region being read specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
 			{@code size} is 0.
 			""",
 			IEWLE,
 			MSBOE("buffer"),
 			ESEFEIWLE("read"),
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadBuffer} is called on buffer which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueReadBuffer} is called on buffer which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			OORE,
 			OOHME
@@ -1081,7 +1116,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		Calling {@code clEnqueueWriteBuffer} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
 		{@code host_ptr + offset}, where {@code host_ptr} is a pointer to the memory region specified when the buffer object being written is created with
-		{@link #CL_MEM_USE_HOST_PTR}, must meet the following requirements in order to avoid undefined behavior:
+		${"MEM_USE_HOST_PTR".link}, must meet the following requirements in order to avoid undefined behavior:
 		${ul(
 			"The host memory region given by {@code (host_ptr + offset, cb)} contains the latest bits when the enqueued write command begins execution.",
 			"The buffer object or memory objects created from this buffer object are not mapped.",
@@ -1099,10 +1134,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the write operation is <em>blocking</em> or <em>non-blocking</em>
 
-			If {@code blocking_write} is $CL_TRUE, the OpenCL implementation copies the data referred to by {@code ptr} and enqueues the write operation in the
+			If {@code blocking_write} is $TRUE, the OpenCL implementation copies the data referred to by {@code ptr} and enqueues the write operation in the
 			command-queue. The memory pointed to by {@code ptr} can be reused by the application after the {@code clEnqueueWriteBuffer} call returns.
 
-			If {@code blocking_write} is $CL_FALSE, the OpenCL implementation will use {@code ptr} to perform a nonblocking write. As the write is non-blocking
+			If {@code blocking_write} is $FALSE, the OpenCL implementation will use {@code ptr} to perform a nonblocking write. As the write is non-blocking
 			the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
 			{@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
 			completed, the memory pointed to by {@code ptr} can then be reused by the application.
@@ -1120,25 +1155,25 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
+			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"""
-			{@link #CL_INVALID_VALUE} if the region being written specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
+			$INVALID_VALUE if the region being written specified by {@code (offset, size)} is out of bounds or if {@code ptr} is a $NULL value or if
 			{@code size} is 0.
 			""",
 			IEWLE,
 			MSBOE("buffer"),
 			ESEFEIWLE("write"),
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteBuffer} is called on buffer which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueWriteBuffer} is called on buffer which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			OORE,
 			OOHME
@@ -1168,28 +1203,29 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_buffer} are not the same or if
+			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_buffer} are not the same or if
 			the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code src_buffer} and {@code dst_buffer} are not valid buffer objects.",
+			"$INVALID_MEM_OBJECT if {@code src_buffer} and {@code dst_buffer} are not valid buffer objects.",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code src_offset}, {@code dst_offset}, {@code size}, {@code src_offset + size} or {@code dst_offset + size} require
+			$INVALID_VALUE if {@code src_offset}, {@code dst_offset}, {@code size}, {@code src_offset + size} or {@code dst_offset + size} require
 			accessing elements outside the {@code src_buffer} and {@code dst_buffer} buffer objects respectively.
 			""",
-			"{@link #CL_INVALID_VALUE} if {@code size} is 0.",
+			"$INVALID_VALUE if {@code size} is 0.",
 			IEWLE,
 			MSBOE("src_buffer"),
 			MSBOE("dst_buffer"),
 			"""
-			{@link #CL_MEM_COPY_OVERLAP} if {@code src_buffer} and {@code dst_buffer} are the same buffer or sub-buffer object and the source and destination
+			${"MEM_COPY_OVERLAP".link} if {@code src_buffer} and {@code dst_buffer} are the same buffer or sub-buffer object and the source and destination
 			regions overlap or if {@code src_buffer} and {@code dst_buffer} are different sub-buffers of the same associated buffer object and they overlap. The
-			regions overlap if {@code src_offset &#x2264 dst_offset &#x2264 src_offset + size – 1} or if {@code dst_offset &#x2264 src_offset &#x2264 dst_offset + size – 1}.
+			regions overlap if ${code("src_offset &#x2264 dst_offset &#x2264 src_offset + size – 1")} or if
+			${code("dst_offset &#x2264 src_offset &#x2264 dst_offset + size – 1")}.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
 			OORE,
 			OOHME
 		)}
@@ -1205,7 +1241,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		The pointer returned maps a region starting at {@code offset} and is at least {@code size} bytes in size. The result of a memory access outside this
 		region is undefined.
 
-		If the buffer object is created with {@link #CL_MEM_USE_HOST_PTR} set in {@code mem_flags}, the following will be true:
+		If the buffer object is created with ${"MEM_USE_HOST_PTR".link} set in {@code mem_flags}, the following will be true:
 		${ul(
 			"""
 			The {@code host_ptr} specified in $CreateBuffer is guaranteed to contain the latest bits in the region being mapped when the
@@ -1214,7 +1250,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"The pointer value returned by {@code clEnqueueMapBuffer} will be derived from the {@code host_ptr} specified when the buffer object is created."
 		)}
 
-		Mapped buffer objects are unmapped using {@link #clEnqueueUnmapMemObject}.
+		Mapped buffer objects are unmapped using ${"EnqueueUnmapMemObject()".link}.
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid command-queue"),
@@ -1224,10 +1260,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the map operation is blocking or non-blocking.
 
-			If {@code blocking_map} is $CL_TRUE, {@code clEnqueueMapBuffer} does not return until the specified region in buffer is mapped into the host address
+			If {@code blocking_map} is $TRUE, {@code clEnqueueMapBuffer} does not return until the specified region in buffer is mapped into the host address
 			space and the application can access the contents of the mapped region using the pointer returned by {@code clEnqueueMapBuffer}.
 
-			If {@code blocking_map} is $CL_FALSE i.e. map operation is non-blocking, the pointer to the mapped region returned by {@code clEnqueueMapBuffer}
+			If {@code blocking_map} is $FALSE i.e. map operation is non-blocking, the pointer to the mapped region returned by {@code clEnqueueMapBuffer}
 			cannot be used until the map command has completed. The {@code event} argument returns an event object which can be used to query the execution
 			status of the map command. When the map command is completed, the application can access the contents of the mapped region using the pointer
 			returned by {@code clEnqueueMapBuffer}.
@@ -1243,31 +1279,31 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a pointer to the mapped region. The $errcode_ret is set to $CL_SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+	    a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
 	    returned in $errcode_ret:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated with
+			$INVALID_CONTEXT if context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code buffer} is not a valid buffer object.",
+			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object.",
 			"""
-			{@link #CL_INVALID_VALUE} if region being mapped given by {@code (offset, size)} is out of bounds or if {@code size} is 0 or if values specified in
+			$INVALID_VALUE if region being mapped given by {@code (offset, size)} is out of bounds or if {@code size} is 0 or if values specified in
 			{@code map_flags} are not valid.
 			""",
 			IEWLE,
 			MSBOE("buffer"),
 			"""
-			{@link #CL_MAP_FAILURE} if there is a failure to map the requested region into the host address space. This error cannot occur for buffer objects
-			created with {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_ALLOC_HOST_PTR}.
+			${"MAP_FAILURE".link} if there is a failure to map the requested region into the host address space. This error cannot occur for buffer objects
+			created with ${"MEM_USE_HOST_PTR".link} or ${"MEM_ALLOC_HOST_PTR".link}.
 			""",
 			ESEFEIWLE("map"),
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code buffer}.",
 			"""
-			{@link #CL_INVALID_OPERATION} if buffer has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or {@link CL12#CL_MEM_HOST_NO_ACCESS} and
-			{@link #CL_MAP_READ} is set in {@code map_flags} or if {@code buffer} has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS} and {@link #CL_MAP_WRITE} or {@link CL12#CL_MAP_WRITE_INVALIDATE_REGION} is set in {@code map_flags}.
+			$INVALID_OPERATION if buffer has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")} and
+			${"MAP_READ".link} is set in {@code map_flags} or if {@code buffer} has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")} and ${"MAP_WRITE".link} or ${"CL12".link("MAP_WRITE_INVALIDATE_REGION")} is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -1307,26 +1343,26 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
-			"{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
+			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if {@code image_width} or {@code image_height} are 0 or if they exceed values specified in
-			{@link #CL_DEVICE_IMAGE2D_MAX_WIDTH} or {@link #CL_DEVICE_IMAGE2D_MAX_HEIGHT} respectively for all devices in {@code context} or if values specified
+			$INVALID_IMAGE_SIZE if {@code image_width} or {@code image_height} are 0 or if they exceed values specified in
+			${"DEVICE_IMAGE2D_MAX_WIDTH".link} or ${"DEVICE_IMAGE2D_MAX_HEIGHT".link} respectively for all devices in {@code context} or if values specified
 			by {@code image_row_pitch} do not follow rules described in the argument description.
 			""",
 			"""
-			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
-			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and ${"MEM_USE_HOST_PTR".link} or ${"MEM_COPY_HOST_PTR".link} are set in flags or if
+			{@code host_ptr} is not $NULL but ${"MEM_COPY_HOST_PTR".link} or ${"MEM_USE_HOST_PTR".link} are not set in flags.
 			""",
-			"{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
+			"${"IMAGE_FORMAT_NOT_SUPPORTED".link} if the {@code image_format} is not supported.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for image object.",
 			"""
-			{@link #CL_INVALID_OPERATION} if there are no devices in {@code context} that support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if there are no devices in {@code context} that support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			OORE,
 			OOHME
@@ -1377,27 +1413,27 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if values specified in {@code flags} are not valid.",
-			"{@link #CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
+			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if {@code image_width}, {@code image_height} are 0 or if {@code image_depth} &#x2264; 1 or if they exceed values
-			specified in {@link #CL_DEVICE_IMAGE3D_MAX_WIDTH}, {@link #CL_DEVICE_IMAGE3D_MAX_HEIGHT} or {@link #CL_DEVICE_IMAGE3D_MAX_DEPTH} respectively for
+			$INVALID_IMAGE_SIZE if {@code image_width}, {@code image_height} are 0 or if {@code image_depth} &#x2264; 1 or if they exceed values
+			specified in ${"DEVICE_IMAGE3D_MAX_WIDTH".link}, ${"DEVICE_IMAGE3D_MAX_HEIGHT".link} or ${"DEVICE_IMAGE3D_MAX_DEPTH".link} respectively for
 			all devices in {@code context} or if values specified by {@code image_row_pitch} and {@code image_slice_pitch} do not follow rules described in the
 			argument descriptions.
 			""",
 			"""
-			{@link #CL_INVALID_HOST_PTR} if {@code host_ptr} is $NULL and {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_COPY_HOST_PTR} are set in flags or if
-			{@code host_ptr} is not $NULL but {@link #CL_MEM_COPY_HOST_PTR} or {@link #CL_MEM_USE_HOST_PTR} are not set in flags.
+			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and ${"MEM_USE_HOST_PTR".link} or ${"MEM_COPY_HOST_PTR".link} are set in flags or if
+			{@code host_ptr} is not $NULL but ${"MEM_COPY_HOST_PTR".link} or ${"MEM_USE_HOST_PTR".link} are not set in flags.
 			""",
-			"{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if the {@code image_format} is not supported.",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for image object.",
+			"${"IMAGE_FORMAT_NOT_SUPPORTED".link} if the {@code image_format} is not supported.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for image object.",
 			"""
-			{@link #CL_INVALID_OPERATION} if there are no devices in {@code context} that support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if there are no devices in {@code context} that support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			OORE,
 			OOHME
@@ -1425,8 +1461,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"image_type",
 			"the image type",
 			"""
-		    CL12#CL_MEM_OBJECT_IMAGE1D CL12#CL_MEM_OBJECT_IMAGE1D_BUFFER #CL_MEM_OBJECT_IMAGE2D #CL_MEM_OBJECT_IMAGE3D CL12#CL_MEM_OBJECT_IMAGE1D_ARRAY
-		    CL12#CL_MEM_OBJECT_IMAGE2D_ARRAY
+		    CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER #MEM_OBJECT_IMAGE2D #MEM_OBJECT_IMAGE3D CL12#MEM_OBJECT_IMAGE1D_ARRAY
+		    CL12#MEM_OBJECT_IMAGE2D_ARRAY
 		    """
 		),
 		(AutoSize("image_formats") / "cl_image_format.SIZEOF") _ cl_uint.IN(
@@ -1450,10 +1486,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
+			"$INVALID_VALUE if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
 			OORE,
 			OOHME
 		)}
@@ -1467,7 +1503,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		Calling {@code clEnqueueReadImage} to read a region of the image with the {@code ptr} argument value set to
 		${code("host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)")}, where {@code host_ptr} is a pointer
-		to the memory region specified when the image being read is created with {@link #CL_MEM_USE_HOST_PTR}, must meet the following requirements in order to
+		to the memory region specified when the image being read is created with ${"MEM_USE_HOST_PTR".link}, must meet the following requirements in order to
 		avoid undefined behavior:
 		${ul(
 			"All commands that use this image object have finished execution before the read command begins execution.",
@@ -1487,10 +1523,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the read operation is blocking or non-blocking.
 
-			If {@code blocking_read} is $CL_TRUE i.e. the read command is blocking, {@code clEnqueueReadImage} does not return until the buffer data has
+			If {@code blocking_read} is $TRUE i.e. the read command is blocking, {@code clEnqueueReadImage} does not return until the buffer data has
 			been read and copied into memory pointed to by {@code ptr}.
 
-			If {@code blocking_read} is $CL_FALSE i.e. the read command is non-blocking, {@code clEnqueueReadImage} queues a non-blocking read command
+			If {@code blocking_read} is $FALSE i.e. the read command is non-blocking, {@code clEnqueueReadImage} queues a non-blocking read command
 			and returns. The contents of the buffer that {@code ptr} points to cannot be used until the read command has completed. The {@code event} argument
 			returns an event object which can be used to query the execution status of the read command. When the read command has completed, the contents of
 			the buffer that {@code ptr} points to can be used by the application.
@@ -1539,43 +1575,43 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
+			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
+			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
 			"""
-			{@link #CL_INVALID_VALUE} if the region being read specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
+			$INVALID_VALUE if the region being read specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
 			$NULL value.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if values in {@code origin} and {@code region} do not follow rules described in the argument description for
+			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for
 			{@code origin} and {@code region}.
 			""",
 			IEWLE,
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
 			supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code image} are not supported by device associated
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code image} are not supported by device associated
 			with queue.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code image}.",
 			"""
-			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			ESEFEIWLE("read"),
 			OORE,
@@ -1591,7 +1627,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		Calling {@code clEnqueueWriteImage} to update the latest bits in a region of the image with the {@code ptr} argument value set to
 		${code("host_ptr + (origin[2] * image slice pitch + origin[1] * image row pitch + origin[0] * bytes per pixel)")}, where {@code host_ptr} is a pointer
-		to the memory region specified when the image being written is created with {@link #CL_MEM_USE_HOST_PTR}, must meet the following requirements in order
+		to the memory region specified when the image being written is created with ${"MEM_USE_HOST_PTR".link}, must meet the following requirements in order
 		to avoid undefined behavior:
 		${ul(
 			"The host memory region being written contains the latest bits when the enqueued write command begins execution.",
@@ -1611,10 +1647,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the read operation is blocking or non-blocking.
 
-			If {@code blocking_write} is $CL_TRUE, the OpenCL implementation copies the data referred to by {@code ptr} and enqueues the write command in the
+			If {@code blocking_write} is $TRUE, the OpenCL implementation copies the data referred to by {@code ptr} and enqueues the write command in the
 			command-queue. The memory pointed to by {@code ptr} can be reused by the application after the {@code clEnqueueWriteImage} call returns.
 
-			If {@code blocking_write} is $CL_FALSE, the OpenCL implementation will use {@code ptr} to perform a non-blocking write. As the write is non-blocking
+			If {@code blocking_write} is $FALSE, the OpenCL implementation will use {@code ptr} to perform a non-blocking write. As the write is non-blocking
 			the implementation can return immediately. The memory pointed to by {@code ptr} cannot be reused by the application after the call returns. The
 			{@code event} argument returns an event object which can be used to query the execution status of the write command. When the write command has
 			completed, the memory pointed to by {@code ptr} can then be reused by the application.
@@ -1664,43 +1700,43 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
+			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
 			with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
+			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
 			"""
-			{@link #CL_INVALID_VALUE} if the region being written specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
+			$INVALID_VALUE if the region being written specified by {@code origin} and {@code region} is out of bounds or if {@code ptr} is a
 			$NULL value.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if values in {@code origin} and {@code region} do not follow rules described in the argument description for
+			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for
 			{@code origin} and {@code region}.
 			""",
 			IEWLE,
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
 			supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code image} are not supported by device associated
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code image} are not supported by device associated
 			with queue.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code image}.",
 			"""
-			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueReadImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code clEnqueueWriteImage} is called on image which has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS}.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")}.
 			""",
 			ESEFEIWLE("write"),
 			OORE,
@@ -1712,7 +1748,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	cl_int.func(
 		"EnqueueCopyImage",
 		"""
-		Enqueues a command to copy image objects. {@code src_image and {@code dst_image} can be 1D, 2D, 3D image or a 1D, 2D image array objects allowing us to
+		Enqueues a command to copy image objects. {@code src_image} and {@code dst_image} can be 1D, 2D, 3D image or a 1D, 2D image array objects allowing us to
 		perform the following actions:
 		${ul(
 			"Copy a 1D image object to a 1D image object.",
@@ -1773,41 +1809,41 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue}, {@code src_image} and {@code dst_image} are not the same or if the
+			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_image} and {@code dst_image} are not the same or if the
 			context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code src_image} and {@code dst_image} are not valid image objects.",
-			"{@link #CL_IMAGE_FORMAT_MISMATCH} if {@code src_image} and {@code dst_image} do not use the same image format.",
+			"$INVALID_MEM_OBJECT if {@code src_image} and {@code dst_image} are not valid image objects.",
+			"${"IMAGE_FORMAT_MISMATCH".link} if {@code src_image} and {@code dst_image} do not use the same image format.",
 			"""
-			{@link #CL_INVALID_VALUE} if the 2D or 3D rectangular region specified by {@code src_origin} and {@code src_origin + region} refers to a region
+			$INVALID_VALUE if the 2D or 3D rectangular region specified by {@code src_origin} and {@code src_origin + region} refers to a region
 			outside {@code src_image}, or if the 2D or 3D rectangular region specified by {@code dst_origin} and {@code dst_origin + region} refers to a region
 			outside {@code dst_image}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if values in {@code src_origin}, {@code dst_origin} and {@code region} do not follow rules described in the argument
+			$INVALID_VALUE if values in {@code src_origin}, {@code dst_origin} and {@code region} do not follow rules described in the argument
 			description for {@code src_origin}, {@code dst_origin} and {@code region}.
 			""",
 			IEWLE,
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code src_image} or
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code src_image} or
 			{@code dst_image} are not supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code src_image} or {@code dst_image} are not
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code src_image} or {@code dst_image} are not
 			supported by device associated with queue.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code src_image} or {@code dst_image}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code src_image} or {@code dst_image}.",
 			OORE,
 			OOHME,
 			"""
-			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
-			"{@link #CL_MEM_COPY_OVERLAP} if {@code src_image} and {@code dst_image} are the same image object and the source and destination regions overlap."
+			"${"MEM_COPY_OVERLAP".link} if {@code src_image} and {@code dst_image} are the same image object and the source and destination regions overlap."
 		)}
 	    """
 	)
@@ -1859,39 +1895,39 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue}, {@code src_image} and {@code dst_buffer} are not the same or if
+			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_image} and {@code dst_buffer} are not the same or if
 			the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
 			"""
-			{@link #CL_INVALID_MEM_OBJECT} if {@code src_image} is not a valid image object or {@code dst_buffer} is not a valid buffer object or if
+			$INVALID_MEM_OBJECT if {@code src_image} is not a valid image object or {@code dst_buffer} is not a valid buffer object or if
 			{@code src_image} is a 1D image buffer object created from {@code dst_buffer}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if the 1D, 2D or 3D rectangular region specified by {@code src_origin} and {@code src_origin + region} refers to a region
+			$INVALID_VALUE if the 1D, 2D or 3D rectangular region specified by {@code src_origin} and {@code src_origin + region} refers to a region
 			outside {@code src_image}, or if the region specified by {@code dst_offset} and {@code dst_offset + dst_cb} to a region outside {@code dst_buffer}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if values in {@code src_origin} and region do not follow rules described in the argument description for
+			$INVALID_VALUE if values in {@code src_origin} and region do not follow rules described in the argument description for
 			{@code src_origin} and {@code region}.
 			""",
 			IEWLE,
 			MSBOE("dst_buffer"),
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code src_image} are not
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code src_image} are not
 			supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code src_image} are not supported by device
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code src_image} are not supported by device
 			associated with queue.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code src_image} or {@code dst_buffer}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code src_image} or {@code dst_buffer}.",
 			"""
-			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			OORE,
 			OOHME
@@ -1936,40 +1972,40 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_image} are not the same or if
+			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_image} are not the same or if
 			the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
 			"""
-			{@link #CL_INVALID_MEM_OBJECT if {@code src_buffer} is not a valid buffer object or {@code dst_image} is not a valid image object or if
+			$INVALID_MEM_OBJECT if {@code src_buffer} is not a valid buffer object or {@code dst_image} is not a valid image object or if
 			{@code dst_image} is a 1D image buffer object created from {@code src_buffer}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE if the 1D, 2D or 3D rectangular region specified by {@code dst_origin} and {@code dst_origin + region} refer to a region
+			$INVALID_VALUE if the 1D, 2D or 3D rectangular region specified by {@code dst_origin} and {@code dst_origin + region} refer to a region
 			outside {@code dst_image}, or if the region specified by {@code src_offset} and {@code src_offset + src_cb refer} to a region outside
 			{@code src_buffer}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE if values in {@code dst_origin} and {@code region} do not follow rules described in the argument description for
+			$INVALID_VALUE if values in {@code dst_origin} and {@code region} do not follow rules described in the argument description for
 			{@code dst_origin} and {@code region}.
 			""",
 			IEWLE,
 			MSBOE("src_buffer"),
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code dst_image} are not
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code dst_image} are not
 			supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED if image format (image channel order and data type) for {@code dst_image} are not supported by device
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code dst_image} are not supported by device
 			associated with queue.
 			""",
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_image}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_image}.",
 			"""
-			{@link #CL_INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			OORE,
 			OOHME
@@ -1986,15 +2022,15 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		buffer or 1D image array, {@code (image_row_pitch * region[1])} pixels in size for a 2D image or 2D image array, and
 		{@code (image_slice_pitch * region[2])} pixels in size for a 3D image. The result of a memory access outside this region is undefined.
 
-		If the image object is created with {@link #CL_MEM_USE_HOST_PTR} set in {@code mem_flags}, the following will be true:
+		If the image object is created with ${"MEM_USE_HOST_PTR".link} set in {@code mem_flags}, the following will be true:
 		${ul(
 			"""
-			The {@code host_ptr} specified in {@link CL12#clCreateImage} is guaranteed to contain the latest bits in the region being mapped when the
+			The {@code host_ptr} specified in ${"CL12".link("CreateImage()")} is guaranteed to contain the latest bits in the region being mapped when the
 			{@code clEnqueueMapImage} command has completed.
 			""",
 			"The pointer value returned by {@code clEnqueueMapImage} will be derived from the {@code host_ptr} specified when the image object is created."
 		)}
-		Mapped image objects are unmapped using {@link #clEnqueueUnmapMemObject}.
+		Mapped image objects are unmapped using ${"EnqueueUnmapMemObject()".link}.
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid command-queue"),
@@ -2004,10 +2040,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			indicates if the map operation is blocking or non-blocking.
 
-			If {@code blocking_map} is $CL_TRUE, {@code clEnqueueMapImage} does not return until the specified region in image is mapped into the host address
+			If {@code blocking_map} is $TRUE, {@code clEnqueueMapImage} does not return until the specified region in image is mapped into the host address
 			space and the application can access the contents of the mapped region using the pointer returned by {@code clEnqueueMapImage}.
 
-			If {@code blocking_map} is $CL_FALSE i.e. map operation is non-blocking, the pointer to the mapped region returned by {@code clEnqueueMapImage}
+			If {@code blocking_map} is $FALSE i.e. map operation is non-blocking, the pointer to the mapped region returned by {@code clEnqueueMapImage}
 			cannot be used until the map command has completed. The {@code event} argument returns an event object which can be used to query the execution
 			status of the map command. When the map command is completed, the application can access the contents of the mapped region using the pointer
 			returned by {@code clEnqueueMapImage}.
@@ -2049,48 +2085,48 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a pointer to the mapped region. The $errcode_ret is set to $CL_SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+	    a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
 	    returned in $errcode_ret:
 	    ${ul(
 			ICQE,
 			"""
-			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and image are not the same or if context associated with
+			$INVALID_CONTEXT if context associated with {@code command_queue} and image are not the same or if context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is not a valid image object.",
+			"$INVALID_MEM_OBJECT if {@code image} is not a valid image object.",
 			"""
-			{@link #CL_INVALID_VALUE} if region being mapped given by {@code (origin, origin+region)} is out of bounds or if values specified in
+			$INVALID_VALUE if region being mapped given by {@code (origin, origin+region)} is out of bounds or if values specified in
 			{@code map_flags} are not valid.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin}
+			$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin}
 			and {@code region}.
 			""",
-			"{@link #CL_INVALID_VALUE} if {@code image_row_pitch} is $NULL.",
-			"{@link #CL_INVALID_VALUE} if {@code image} is a 3D image, 1D or 2D image array object and {@code image_slice_pitch} is $NULL.",
+			"$INVALID_VALUE if {@code image_row_pitch} is $NULL.",
+			"$INVALID_VALUE if {@code image} is a 3D image, 1D or 2D image array object and {@code image_slice_pitch} is $NULL.",
 			IEWLE,
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
+			$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for {@code image} are not
 			supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if image format (image channel order and data type) for {@code image} are not supported by device associated
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for {@code image} are not supported by device associated
 			with queue.
 			""",
 			"""
-			{@link #CL_MAP_FAILURE} if there is a failure to map the requested region into the host address space. This error cannot occur for image objects
-			created with {@link #CL_MEM_USE_HOST_PTR} or {@link #CL_MEM_ALLOC_HOST_PTR}.
+			${"MAP_FAILURE".link} if there is a failure to map the requested region into the host address space. This error cannot occur for image objects
+			created with ${"MEM_USE_HOST_PTR".link} or ${"MEM_ALLOC_HOST_PTR".link}.
 			""",
 			ESEFEIWLE("map"),
-			"{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code image}.",
 			"""
-			{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} does not support images (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if the device associated with {@code command_queue} does not support images (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if {@code image} has been created with {@link CL12#CL_MEM_HOST_WRITE_ONLY} or {@link CL12#CL_MEM_HOST_NO_ACCESS} and
-			{@link #CL_MAP_READ} is set in {@code map_flags} or if image has been created with {@link CL12#CL_MEM_HOST_READ_ONLY} or
-			{@link CL12#CL_MEM_HOST_NO_ACCESS} and {@link #CL_MAP_WRITE} or {@link CL12#CL_MAP_WRITE_INVALIDATE_REGION} is set in {@code map_flags}.
+			$INVALID_OPERATION if {@code image} has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")} and
+			${"MAP_READ".link} is set in {@code map_flags} or if image has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
+			${"CL12".link("MEM_HOST_NO_ACCESS")} and ${"MAP_WRITE".link} or ${"CL12".link("MAP_WRITE_INVALIDATE_REGION")} is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -2116,13 +2152,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code image} is a not a valid image object.",
+			"$INVALID_MEM_OBJECT if {@code image} is a not a valid image object.",
 			OORE,
 			OOHME
 		)}
@@ -2134,16 +2170,16 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 		Increments the {@code memobj} reference count.
 
-		$CreateBuffer, {@link CL11#clCreateSubBuffer} and {@link CL12#clCreateImage} perform an implicit retain.
+		$CreateBuffer, ${"CL11".link("CreateSubBuffer()")} and ${"CL12".link("CreateImage()")} perform an implicit retain.
 		""",
 
 		cl_mem.IN("memobj", "the memory object to retain"),
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object (buffer or image object).",
+			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object (buffer or image object).",
 			OORE,
 			OOHME
 		)}
@@ -2164,9 +2200,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object.",
+			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
 			OORE,
 			OOHME
 		)}
@@ -2194,16 +2230,16 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is not a valid memory object.",
-			"{@link #CL_INVALID_VALUE} if {@code mapped_ptr} is not a valid pointer returned by $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}.",
+			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
+			"$INVALID_VALUE if {@code mapped_ptr} is not a valid pointer returned by $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}.",
 			IEWLE,
 			OORE,
 			OOHME,
 			"""
-			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and {@code memobj} are not the same or if the context associated with
+			$INVALID_CONTEXT if context associated with {@code command_queue} and {@code memobj} are not the same or if the context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			"""
 		)}
@@ -2229,13 +2265,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_MEM_OBJECT} if {@code memobj} is a not a valid memory object.",
+			"$INVALID_MEM_OBJECT if {@code memobj} is a not a valid memory object.",
 			OORE,
 			OOHME
 		)}
@@ -2260,17 +2296,17 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero sampler object and $errcode_ret is set to $CL_SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 	    ${ul(
 			ICE,
 			"""
-			{@link #CL_INVALID_VALUE} if {@code addressing_mode}, {@code filter_mode} or {@code normalized_coords} or combination of these argument values are
+			$INVALID_VALUE if {@code addressing_mode}, {@code filter_mode} or {@code normalized_coords} or combination of these argument values are
 			not valid.
 			""",
 			"""
-			{@link #CL_INVALID_OPERATION} if images are not supported by any device associated with {@code context} (i.e. {@link #CL_DEVICE_IMAGE_SUPPORT} is
-			$CL_FALSE).
+			$INVALID_OPERATION if images are not supported by any device associated with {@code context} (i.e. ${"DEVICE_IMAGE_SUPPORT".link} is
+			$FALSE).
 			""",
 			OORE,
 			OOHME
@@ -2286,9 +2322,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_SAMPLER} if sampler is not a valid sampler object.",
+			"$INVALID_SAMPLER if sampler is not a valid sampler object.",
 			OORE,
 			OOHME
 		)}
@@ -2306,9 +2342,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_SAMPLER} if {@code sampler} is not a valid sampler object.",
+			"$INVALID_SAMPLER if {@code sampler} is not a valid sampler object.",
 			OORE,
 			OOHME
 		)}
@@ -2333,13 +2369,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_SAMPLER} if {@code sampler} is a not a valid sampler object.",
+			"$INVALID_SAMPLER if {@code sampler} is a not a valid sampler object.",
 			OORE,
 			OOHME
 		)}
@@ -2372,11 +2408,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero program object and $errcode_ret is set to $CL_SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if {@code count} is zero or if {@code strings} or any entry in {@code strings} is $NULL.",
+			"$INVALID_VALUE if {@code count} is zero or if {@code strings} or any entry in {@code strings} is $NULL.",
 			OORE,
 			OOHME
 		)}
@@ -2431,8 +2467,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"binary_status",
 			"""
 			returns whether the program binary for each device specified in device_list was loaded successfully or not. It is an array of {@code num_devices}
-			entries and returns $CL_SUCCESS in {@code binary_status[i]} if binary was successfully loaded for device specified by {@code device_list[i]};
-			otherwise returns {@link #CL_INVALID_VALUE} if {@code lengths[i]} is zero or if {@code binaries[i]} is a $NULL value or {@link #CL_INVALID_BINARY} in
+			entries and returns $SUCCESS in {@code binary_status[i]} if binary was successfully loaded for device specified by {@code device_list[i]};
+			otherwise returns $INVALID_VALUE if {@code lengths[i]} is zero or if {@code binaries[i]} is a $NULL value or $INVALID_BINARY in
 			{@code binary_status[i]} if program binary is not a valid binary for the specified device. If {@code binary_status} is $NULL, it is ignored.
 			"""
 		),
@@ -2440,14 +2476,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero program object and $errcode_ret is set to $CL_SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+	    a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
 	    value with one of the following error values returned in $errcode_ret:
 	    ${ul(
 			ICE,
-			"{@link #CL_INVALID_VALUE} if {@code device_list} is $NULL or {@code num_devices} is zero.",
-			"{@link #CL_INVALID_DEVICE} if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
-			"{@link #CL_INVALID_VALUE} if {@code lengths} or {@code binaries} are NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is $NULL.",
-			"{@link #CL_INVALID_BINARY} if an invalid program binary was encountered for any device. {@code binary_status} will return specific status for each device.",
+			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
+			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
+			"$INVALID_VALUE if {@code lengths} or {@code binaries} are NULL or if any entry in {@code lengths[i]} is zero or {@code binaries[i]} is $NULL.",
+			"$INVALID_BINARY if an invalid program binary was encountered for any device. {@code binary_status} will return specific status for each device.",
 			OORE,
 			OOHME
 		)}
@@ -2462,9 +2498,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
+			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			OORE,
 			OOHME
 		)}
@@ -2482,9 +2518,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
+			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			OORE,
 			OOHME
 		)}
@@ -2506,7 +2542,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		associated with {@code program}. If {@code program} is created with $CreateProgramWithBinary, then the program binary must be an executable binary (not
 		a compiled binary or library).
 
-		The executable binary can be queried using {@link #clGetProgramInfo} and can be specified to $CreateProgramWithBinary to create a new program object.
+		The executable binary can be queried using ${"GetProgramInfo()".link} and can be specified to $CreateProgramWithBinary to create a new program object.
 		""",
 
 		cl_program.IN("program", "the program object"),
@@ -2545,31 +2581,31 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
-			"{@link #CL_INVALID_VALUE} if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not $NULL and {@code num_devices} is 0.",
-			"{@link #CL_INVALID_VALUE} if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
-			"{@link #CL_INVALID_DEVICE} if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
+			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
+			"$INVALID_VALUE if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not $NULL and {@code num_devices} is 0.",
+			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
+			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
 			"""
-			{@link #CL_INVALID_BINARY if {@code program} is created with $CreateProgramWithBinary and devices listed in {@code device_list} do not have a valid
+			$INVALID_BINARY if {@code program} is created with $CreateProgramWithBinary and devices listed in {@code device_list} do not have a valid
 			program binary loaded.
 			""",
-			"{@link #CL_INVALID_BUILD_OPTIONS} if the build options specified by {@code options} are invalid.",
+			"$INVALID_BUILD_OPTIONS if the build options specified by {@code options} are invalid.",
 			"""
-			{@link #CL_INVALID_OPERATION} if the build of a program executable for any of the devices listed in {@code device_list} by a previous call to
+			$INVALID_OPERATION if the build of a program executable for any of the devices listed in {@code device_list} by a previous call to
 			{@code clBuildProgram} for {@code program} has not completed.
 			""",
 			"""
-			{@link #CL_COMPILER_NOT_AVAILABLE} if {@code program} is created with $CreateProgramWithSource and a compiler is not available i.e.
-			{@link #CL_DEVICE_COMPILER_AVAILABLE} is set to $CL_FALSE.
+			${"COMPILER_NOT_AVAILABLE".link} if {@code program} is created with $CreateProgramWithSource and a compiler is not available i.e.
+			${"DEVICE_COMPILER_AVAILABLE".link} is set to $FALSE.
 			""",
 			"""
-			{@link #CL_BUILD_PROGRAM_FAILURE} if there is a failure to build the program executable. This error will be returned if {@code clBuildProgram} does
+			${"BUILD_PROGRAM_FAILURE".link} if there is a failure to build the program executable. This error will be returned if {@code clBuildProgram} does
 			not return until the build has completed.
 			""",
-			"{@link #CL_INVALID_OPERATION} if there are kernel objects attached to {@code program}.",
-			"{@link #CL_INVALID_OPERATION} if program was not created with $CreateProgramWithSource or $CreateProgramWithBinary.",
+			"$INVALID_OPERATION if there are kernel objects attached to {@code program}.",
+			"$INVALID_OPERATION if program was not created with $CreateProgramWithSource or $CreateProgramWithBinary.",
 			OORE,
 			OOHME
 		)}
@@ -2588,7 +2624,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Calls to $BuildProgram after {@code clUnloadCompiler} will reload the compiler, if necessary, to build the appropriate program executable.
 		""",
 
-		returnDoc = "always $CL_SUCCESS"
+		returnDoc = "always $SUCCESS"
 	)
 
 	cl_int.func(
@@ -2606,15 +2642,15 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is a not a valid program object.",
+			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			"""
-			{@link #CL_INVALID_PROGRAM_EXECUTABLE} if {@code param_name} is {@link CL12#CL_PROGRAM_NUM_KERNELS} or {@link CL12#CL_PROGRAM_KERNEL_NAMES} and a
+			$INVALID_PROGRAM_EXECUTABLE if {@code param_name} is ${"CL12".link("PROGRAM_NUM_KERNELS")} or ${"CL12".link("PROGRAM_KERNEL_NAMES")} and a
 			successful program executable has not been built for at least one device in the list of devices associated with {@code program}.
 			""",
 			OORE,
@@ -2639,14 +2675,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_DEVICE} if {@code device} is not in the list of devices associated with program.",
+			"$INVALID_DEVICE if {@code device} is not in the list of devices associated with program.",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is a not a valid program object.",
+			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			OORE,
 			OOHME
 		)}
@@ -2664,8 +2700,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		Kernel objects can only be created once you have a program object with a valid program source or binary loaded into the program object and the program
 		executable has been successfully built for one or more devices associated with program. No changes to the program executable are allowed while there are
-		kernel objects associated with a program object. This means that calls to $BuildProgram and {@link CL12#clCompileProgram} return
-		{@link #CL_INVALID_OPERATION} if there are kernel objects attached to a program object. The OpenCL context associated with program will be the context
+		kernel objects associated with a program object. This means that calls to $BuildProgram and ${"CL12".link("CompileProgram()")} return
+		$INVALID_OPERATION if there are kernel objects attached to a program object. The OpenCL context associated with program will be the context
 		associated with kernel. The list of devices associated with program are the devices associated with kernel. Devices associated with a program object for
 		which a valid program executable has been built can be used to execute kernels declared in the program object.
 		""",
@@ -2676,17 +2712,17 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero kernel object and $errcode_ret is set to $CL_SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
+	    a valid non-zero kernel object and $errcode_ret is set to $SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
 	    with one of the following error values returned in $errcode_ret:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
-			"{@link #CL_INVALID_PROGRAM_EXECUTABLE} if there is no successfully built executable for {@code program}.",
-			"{@link #CL_INVALID_KERNEL_NAME} if {@code kernel_name} is not found in {@code program}.",
+			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
+			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built executable for {@code program}.",
+			"$INVALID_KERNEL_NAME if {@code kernel_name} is not found in {@code program}.",
 			"""
-			{@link #CL_INVALID_KERNEL_DEFINITION} if the function definition for {@code __kernel} function given by {@code kernel_name} such as the number of
+			$INVALID_KERNEL_DEFINITION if the function definition for {@code __kernel} function given by {@code kernel_name} such as the number of
 			arguments, the argument types are not the same for all devices for which the program executable has been built.
 			""",
-			"{@link #CL_INVALID_VALUE} if {@code kernel_name} is $NULL.",
+			"$INVALID_VALUE if {@code kernel_name} is $NULL.",
 			OORE,
 			OOHME
 		)}
@@ -2721,11 +2757,11 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the kernel objects were successfully allocated. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the kernel objects were successfully allocated. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM} if {@code program} is not a valid program object.",
-			"{@link #CL_INVALID_PROGRAM_EXECUTABLE} if there is no successfully built executable for any device in {@code program}.",
-			"{@link #CL_INVALID_VALUE} if {@code kernels} is not $NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
+			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
+			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built executable for any device in {@code program}.",
+			"$INVALID_VALUE if {@code kernels} is not $NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
 			OORE,
 			OOHME
 		)}
@@ -2740,9 +2776,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_KERNEL} if kernel is not a valid kernel object.",
+			"$INVALID_KERNEL if kernel is not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
@@ -2762,9 +2798,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_KERNEL} if kernel is not a valid kernel object.",
+			"$INVALID_KERNEL if kernel is not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
@@ -2826,7 +2862,7 @@ kernel void image_filter (
 			"""
 			a pointer to data that should be used as the argument value for argument specified by {@code arg_index}. The argument data pointed to by
 			{@code arg_value} is copied and the {@code arg_value} pointer can therefore be reused by the application after {@code clSetKernelArg} returns. The
-			argument value specified is the value used by all API calls that enqueue kernel ({@link #clEnqueueNDRangeKernel} and {@link #clEnqueueTask}) until
+			argument value specified is the value used by all API calls that enqueue kernel (${"EnqueueNDRangeKernel()".link} and ${"EnqueueTask()".link}) until
 			the argument value is changed by a call to {@code clSetKernelArg} for {@code kernel}.
 
 			If the argument is a memory object (buffer, image or image array), the {@code arg_value} entry will be a pointer to the appropriate buffer, image or
@@ -2838,8 +2874,8 @@ kernel void image_filter (
 
 			If the argument is declared to be a pointer of a built-in scalar or vector type, or a user defined structure type in the global or constant address
 			space, the memory object specified as argument value must be a buffer object (or $NULL). If the argument is declared with the {@code __constant}
-			qualifier, the size in bytes of the memory object cannot exceed {@link #CL_DEVICE_MAX_CONSTANT_BUFFER_SIZE} and the number of arguments declared as
-			pointers to {@code __constant} memory cannot exceed {@link #CL_DEVICE_MAX_CONSTANT_ARGS}.
+			qualifier, the size in bytes of the memory object cannot exceed ${"DEVICE_MAX_CONSTANT_BUFFER_SIZE".link} and the number of arguments declared as
+			pointers to {@code __constant} memory cannot exceed ${"DEVICE_MAX_CONSTANT_ARGS".link}.
 
 			The memory object specified as argument value must be a 2D image object if the argument is declared to be of type {@code image2d_t}. The memory
 			object specified as argument value must be a 3D image object if argument is declared to be of type {@code image3d_t}. The memory object specified as
@@ -2854,22 +2890,22 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-		$CL_SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
 		    ${ul(
-			"{@link #CL_INVALID_KERNEL} if {@code kernel} is not a valid kernel object.",
-			"{@link #CL_INVALID_ARG_INDEX} if {@code arg_index} is not a valid argument index.",
-			"{@link #CL_INVALID_ARG_VALUE} if {@code arg_value} specified is not a valid value.",
-			"{@link #CL_INVALID_MEM_OBJECT} for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.",
-			"{@link #CL_INVALID_SAMPLER} for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.",
+			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
+			"$INVALID_ARG_INDEX if {@code arg_index} is not a valid argument index.",
+			"$INVALID_ARG_VALUE if {@code arg_value} specified is not a valid value.",
+			"$INVALID_MEM_OBJECT for an argument declared to be a memory object when the specified {@code arg_value} is not a valid memory object.",
+			"$INVALID_SAMPLER for an argument declared to be of type {@code sampler_t} when the specified {@code arg_value} is not a valid sampler object.",
 			"""
-			{@link #CL_INVALID_ARG_SIZE} if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
+			$INVALID_ARG_SIZE if {@code arg_size} does not match the size of the data type for an argument that is not a memory object or if the
 			argument is a memory object and {@code arg_size != sizeof(cl_mem)} or if {@code arg_size} is zero and the argument is declared with the
 			{@code __local} qualifier or if the argument is a sampler and {@code arg_size != sizeof(cl_sampler)}.
 			""",
 			"""
-			{@link #CL_INVALID_ARG_VALUE} if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
-			object created with {@code cl_mem_flags} of {@link #CL_MEM_WRITE_ONLY} or if the image argument is declared with the {@code write_only} qualifier
-			and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of {@link #CL_MEM_READ_ONLY}.
+			$INVALID_ARG_VALUE if the argument is an image declared with the {@code read_only} qualifier and {@code arg_value} refers to an image
+			object created with {@code cl_mem_flags} of ${"MEM_WRITE_ONLY".link} or if the image argument is declared with the {@code write_only} qualifier
+			and {@code arg_value} refers to an image object created with {@code cl_mem_flags} of ${"MEM_READ_ONLY".link}.
 			""",
 			OORE,
 			OOHME
@@ -2892,13 +2928,13 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_KERNEL} if {@code kernel} is a not a valid kernel object.",
+			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
@@ -2927,21 +2963,21 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_DEVICE} if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is
+			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is
 			more than one device associated with {@code kernel}.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is {@link CL12#CL_KERNEL_GLOBAL_WORK_SIZE} and {@code device} is not a custom device or kernel is
+			$INVALID_VALUE if {@code param_name} is ${"CL12".link("KERNEL_GLOBAL_WORK_SIZE")} and {@code device} is not a custom device or kernel is
 			not a built-in kernel.
 			""",
-			"{@link #CL_INVALID_KERNEL} if {@code kernel} is a not a valid kernel object.",
+			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
@@ -2958,14 +2994,14 @@ kernel void image_filter (
 			"work_dim",
 			"""
 			the number of dimensions used to specify the global work-items and work-items in the work-group. {@code work_dim} must be greater than zero and less
-			than or equal to {@link #CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS}.
+			than or equal to ${"DEVICE_MAX_WORK_ITEM_DIMENSIONS".link}.
 			"""
 		),
 		mods(const, Check("work_dim"), nullable) _ size_t_p.IN(
 			"global_work_offset",
 			"""
 			can be used to specify an array of {@code work_dim} unsigned values that describe the offset used to calculate the global ID of a work-item. If
-			{@code global_work_offset} is $NULL, the global IDs start at offset {@code (0, 0, &hellip; 0)}.
+			{@code global_work_offset} is $NULL, the global IDs start at offset ${code("(0, 0, &hellip; 0)")}.
 			"""
 		),
 		mods(const, Check("work_dim"), nullable) _ size_t_p.IN(
@@ -2981,9 +3017,9 @@ kernel void image_filter (
 			points to an array of {@code work_dim} unsigned values that describe the number of work-items that make up a work-group (also referred to as the
 			size of the work-group) that will execute the kernel specified by {@code kernel}. The total number of work-items in a work-group is computed as
 			${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")}. The total number of work-items in the work-group must be less than or equal to
-			the {@link #CL_DEVICE_MAX_WORK_GROUP_SIZE} value and the number of work-items specified in ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
-			must be less than or equal to the corresponding values specified by {@link #CL_DEVICE_MAX_WORK_ITEM_SIZES}${code("[0]")}, &hellip;
-			{@link #CL_DEVICE_MAX_WORK_ITEM_SIZES}${code("[work_dim – 1]")}. The explicitly specified {@code local_work_size} will be used to determine how to
+			the ${"DEVICE_MAX_WORK_GROUP_SIZE".link} value and the number of work-items specified in ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
+			must be less than or equal to the corresponding values specified by ${"DEVICE_MAX_WORK_ITEM_SIZES".link}${code("[0]")}, &hellip;
+			${"DEVICE_MAX_WORK_ITEM_SIZES".link}${code("[work_dim – 1]")}. The explicitly specified {@code local_work_size} will be used to determine how to
 			break the global work-items specified by {@code global_work_size} into appropriate work-group instances. If {@code local_work_size} is specified, the
 			values specified in ${code("global_work_size[0], &hellip; global_work_size[work_dim - 1]")} must be evenly divisible by the corresponding values
 			specified in ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}.
@@ -3002,64 +3038,64 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the kernel execution was successfully queued. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the kernel execution was successfully queued. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_PROGRAM_EXECUTABLE} if there is no successfully built program executable available for device associated with {@code command_queue}.",
+			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built program executable available for device associated with {@code command_queue}.",
 			ICQE,
-			"{@link #CL_INVALID_KERNEL} if {@code kernel} is not a valid kernel object.",
+			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
 			"""
-			{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and {@code kernel} are not the same or if the context associated with
+			$INVALID_CONTEXT if context associated with {@code command_queue} and {@code kernel} are not the same or if the context associated with
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			""",
-			"{@link #CL_INVALID_KERNEL_ARGS} if the kernel argument values have not been specified.",
-			"{@link #CL_INVALID_WORK_DIMENSION} if {@code work_dim} is not a valid value (i.e. a value between 1 and 3).",
+			"$INVALID_KERNEL_ARGS if the kernel argument values have not been specified.",
+			"$INVALID_WORK_DIMENSION if {@code work_dim} is not a valid value (i.e. a value between 1 and 3).",
 			"""
-			{@link #CL_INVALID_GLOBAL_WORK_SIZE} if {@code global_work_size} is $NULL, or if any of the values specified in
+			$INVALID_GLOBAL_WORK_SIZE if {@code global_work_size} is $NULL, or if any of the values specified in
 			${code("global_work_size[0], &hellip; global_work_size[work_dim – 1]")} are 0 or exceed the range given by the {@code sizeof(size_t)} for the device
 			on which the kernel execution will be enqueued.
 			""",
 			"""
-			{@link #CL_INVALID_GLOBAL_OFFSET} if the value specified in {@code global_work_size} + the corresponding values in {@code global_work_offset} for
+			$INVALID_GLOBAL_OFFSET if the value specified in {@code global_work_size} + the corresponding values in {@code global_work_offset} for
 			any dimensions is greater than the {@code sizeof(size_t)} for the device on which the kernel execution will be enqueued.
 			""",
 			"""
-			{@link #CL_INVALID_WORK_GROUP_SIZE} if {@code local_work_size} is specified and number of work-items specified by {@code global_work_size} is not
+			$INVALID_WORK_GROUP_SIZE if {@code local_work_size} is specified and number of work-items specified by {@code global_work_size} is not
 			evenly divisible by size of work-group given by {@code local_work_size} or does not match the work-group size specified for kernel using the
 			${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier in program source.
 			""",
 			"""
-			{@link #CL_INVALID_WORK_GROUP_SIZE} if {@code local_work_size} is specified and the total number of work-items in the work-group computed as
-			${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")} is greater than the value specified by {@link #CL_DEVICE_MAX_WORK_GROUP_SIZE}
+			$INVALID_WORK_GROUP_SIZE if {@code local_work_size} is specified and the total number of work-items in the work-group computed as
+			${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")} is greater than the value specified by ${"DEVICE_MAX_WORK_GROUP_SIZE".link}
 			""",
 			"""
-			{@link #CL_INVALID_WORK_GROUP_SIZE} if {@code local_work_size} is $NULL and the ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier
+			$INVALID_WORK_GROUP_SIZE if {@code local_work_size} is $NULL and the ${code("__attribute__((reqd_work_group_size(X, Y, Z)))")} qualifier
 			is used to declare the work-group size for kernel in the program source.
 			""",
 			"""
-			{@link #CL_INVALID_WORK_ITEM_SIZE} if the number of work-items specified in any of ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
-			is greater than the corresponding values specified by {@link #CL_DEVICE_MAX_WORK_ITEM_SIZES}{@code [0]}, &hellip; {@link #CL_DEVICE_MAX_WORK_ITEM_SIZES}{@code[work_dim – 1]}.
+			$INVALID_WORK_ITEM_SIZE if the number of work-items specified in any of ${code("local_work_size[0], &hellip; local_work_size[work_dim – 1]")}
+			is greater than the corresponding values specified by ${"DEVICE_MAX_WORK_ITEM_SIZES".link}{@code [0]}, &hellip; ${"DEVICE_MAX_WORK_ITEM_SIZES".link}{@code [work_dim – 1]}.
 			""",
 			"""
-			{@link CL11#CL_MISALIGNED_SUB_BUFFER_OFFSET} if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
-			specified when the sub-buffer object is created is not aligned to {@link #CL_DEVICE_MEM_BASE_ADDR_ALIGN} value for device associated with queue.
+			${"CL11".link("MISALIGNED_SUB_BUFFER_OFFSET")} if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
+			specified when the sub-buffer object is created is not aligned to ${"DEVICE_MEM_BASE_ADDR_ALIGN".link} value for device associated with queue.
 			""",
 			"""
-			{@link #CL_INVALID_IMAGE_SIZE} if an image object is specified as an argument value and the image dimensions (image width, height, specified or
+			$INVALID_IMAGE_SIZE if an image object is specified as an argument value and the image dimensions (image width, height, specified or
 			compute row and/or slice pitch) are not supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_IMAGE_FORMAT_NOT_SUPPORTED} if an image object is specified as an argument value and the image format (image channel order and data type)
+			${"IMAGE_FORMAT_NOT_SUPPORTED".link} if an image object is specified as an argument value and the image format (image channel order and data type)
 			is not supported by device associated with queue.
 			""",
 			"""
-			{@link #CL_OUT_OF_RESOURCES} if there is a failure to queue the execution instance of kernel on the command-queue because of insufficient resources
+			${"OUT_OF_RESOURCES".link} if there is a failure to queue the execution instance of kernel on the command-queue because of insufficient resources
 			needed to execute the kernel. For example, the explicitly specified {@code local_work_size} causes a failure to execute the kernel because of
 			insufficient resources such as registers or local memory. Another example would be the number of read-only image args used in kernel exceed the
-			{@link #CL_DEVICE_MAX_READ_IMAGE_ARGS} value for device or the number of write-only image args used in kernel exceed the
-			{@link #CL_DEVICE_MAX_WRITE_IMAGE_ARGS} value for device or the number of samplers used in kernel exceed {@link #CL_DEVICE_MAX_SAMPLERS} for device.
+			${"DEVICE_MAX_READ_IMAGE_ARGS".link} value for device or the number of write-only image args used in kernel exceed the
+			${"DEVICE_MAX_WRITE_IMAGE_ARGS".link} value for device or the number of samplers used in kernel exceed ${"DEVICE_MAX_SAMPLERS".link} for device.
 			""",
 			"""
-			{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with image or buffer objects specified
+			${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with image or buffer objects specified
 			as arguments to kernel.
 			""",
 			IEWLE,
@@ -3084,7 +3120,7 @@ kernel void image_filter (
 		EWL,
 		EVENT,
 
-		returnDoc = "$CL_SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
+		returnDoc = "$SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
 	)
 
 	Code(
@@ -3105,8 +3141,8 @@ kernel void image_filter (
 		cl_command_queue.IN(
 			"command_queue",
 			"""
-			a valid command-queue. A native user function can only be executed on a command-queue created on a device that has {@link #CL_EXEC_NATIVE_KERNEL}
-			capability set in {@link #CL_DEVICE_EXECUTION_CAPABILITIES}.
+			a valid command-queue. A native user function can only be executed on a command-queue created on a device that has ${"EXEC_NATIVE_KERNEL".link}
+			capability set in ${"DEVICE_EXECUTION_CAPABILITIES".link}.
 			"""
 		),
 		Callback("CLNativeKernel") _ cl_native_kernel_func.IN("user_func", "a pointer to a host-callable user function"),
@@ -3147,26 +3183,26 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the user function execution instance was successfully queued. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the user function execution instance was successfully queued. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
-			"{@link #CL_INVALID_CONTEXT} if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-			"{@link #CL_INVALID_VALUE} if {@code user_func} is $NULL.",
+			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
+			"$INVALID_VALUE if {@code user_func} is $NULL.",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code args} is a $NULL value and {@code cb_args} &gt; 0, or if {@code args} is a $NULL value and
+			$INVALID_VALUE if {@code args} is a $NULL value and {@code cb_args} &gt; 0, or if {@code args} is a $NULL value and
 			{@code num_mem_objects} &gt; 0.
 			""",
-			"{@link #CL_INVALID_VALUE} if {@code args} is not $NULL and {@code cb_args} is 0.",
-			"{@link #CL_INVALID_VALUE} if {@code num_mem_objects} &gt; 0 and {@code mem_list} or {@code args_mem_loc} are $NULL.",
-			"{@link #CL_INVALID_VALUE} if {@code num_mem_objects} = 0 and {@code mem_list} or {@code args_mem_loc} are not $NULL.",
-			"{@link #CL_INVALID_OPERATION} if the device associated with {@code command_queue} cannot execute the native kernel.",
-			"{@link #CL_INVALID_MEM_OBJECT} if one or more memory objects specified in {@code mem_list} are not valid or are not buffer objects.",
+			"$INVALID_VALUE if {@code args} is not $NULL and {@code cb_args} is 0.",
+			"$INVALID_VALUE if {@code num_mem_objects} &gt; 0 and {@code mem_list} or {@code args_mem_loc} are $NULL.",
+			"$INVALID_VALUE if {@code num_mem_objects} = 0 and {@code mem_list} or {@code args_mem_loc} are not $NULL.",
+			"$INVALID_OPERATION if the device associated with {@code command_queue} cannot execute the native kernel.",
+			"$INVALID_MEM_OBJECT if one or more memory objects specified in {@code mem_list} are not valid or are not buffer objects.",
 			"""
-			{@link #CL_OUT_OF_RESOURCES} if there is a failure to queue the execution instance of kernel on the command-queue because of insufficient resources
+			${"OUT_OF_RESOURCES".link} if there is a failure to queue the execution instance of kernel on the command-queue because of insufficient resources
 			needed to execute the kernel.
 			""",
 			"""
-			{@link #CL_MEM_OBJECT_ALLOCATION_FAILURE} if there is a failure to allocate memory for data store associated with buffer objects specified as
+			${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with buffer objects specified as
 			arguments to kernel.
 			""",
 			IEWLE,
@@ -3184,7 +3220,7 @@ kernel void image_filter (
 		"WaitForEvents",
 		"""
 		Waits on the host thread for commands identified by event objects in {@code event_list} to complete. A command is considered complete if its execution
-		status is {@link #CL_COMPLETE} or a negative value. The events specified in {@code event_list} act as synchronization points.
+		status is ${"COMPLETE".link} or a negative value. The events specified in {@code event_list} act as synchronization points.
 		""",
 
 		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
@@ -3192,12 +3228,12 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the execution status of all events in event_list is {@link #CL_COMPLETE}. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the execution status of all events in event_list is ${"COMPLETE".link}. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_VALUE} if {@code num_events} is zero or {@code event_list} is $NULL.",
-			"{@link #CL_INVALID_CONTEXT} if events specified in {@code event_list} do not belong to the same context.",
-			"{@link #CL_INVALID_EVENT} if event objects specified in {@code event_list} are not valid event objects.",
-			"{@link CL11#CL_EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST} if the execution status of any of the events in {@code event_list} is a negative integer value.",
+			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
+			"$INVALID_CONTEXT if events specified in {@code event_list} do not belong to the same context.",
+			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid event objects.",
+			"${"CL11".link("EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST")} if the execution status of any of the events in {@code event_list} is a negative integer value.",
 			OORE,
 			OOHME
 		)}
@@ -3209,8 +3245,8 @@ kernel void image_filter (
 		"""
 		Returns information about an event object.
 
-		Using {@code clGetEventInfo} to determine if a command identified by event has finished execution (i.e. {@link #CL_EVENT_COMMAND_EXECUTION_STATUS}
-		returns {@link #CL_COMPLETE}) is not a synchronization point. There are no guarantees that the memory objects being modified by command associated with
+		Using {@code clGetEventInfo} to determine if a command identified by event has finished execution (i.e. ${"EVENT_COMMAND_EXECUTION_STATUS".link}
+		returns ${"COMPLETE".link}) is not a synchronization point. There are no guarantees that the memory objects being modified by command associated with
 		event will be visible to other enqueued commands.
 		""",
 
@@ -3225,14 +3261,14 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_VALUE} if information to query given in {@code param_name} cannot be queried for event.",
-			"{@link #CL_INVALID_EVENT} if {@code event} is a not a valid event object.",
+			"$INVALID_VALUE if information to query given in {@code param_name} cannot be queried for event.",
+			"$INVALID_EVENT if {@code event} is a not a valid event object.",
 			OORE,
 			OOHME
 		)}
@@ -3247,9 +3283,9 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_EVENT} if {@code event} is not a valid event object.",
+			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			OORE,
 			OOHME
 		)}
@@ -3264,10 +3300,10 @@ kernel void image_filter (
 		The event object is deleted once the reference count becomes zero, the specific command identified by this event has completed (or terminated) and there
 		are no commands in the command-queues of a context that require a wait for this event to complete.
 
-		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by {@link CL11#clCreateUserEvent} that
-		have not yet been set to status of {@link #CL_COMPLETE} or an error. If the user event was used in the {@code event_wait_list} argument passed to a
+		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by ${"CL11".link("CreateUserEvent()")} that
+		have not yet been set to status of ${"COMPLETE".link} or an error. If the user event was used in the {@code event_wait_list} argument passed to a
 		clEnqueue*** API or another application host thread is waiting for it in $WaitForEvents, those commands and host threads will continue to wait for the
-		event status to reach {@link #CL_COMPLETE} or error, even after the user has released the object. Since in this scenario the developer has released his
+		event status to reach ${"COMPLETE".link} or error, even after the user has released the object. Since in this scenario the developer has released his
 		last reference count to the user event, it would be in principle no longer valid for him to change the status of the event to unblock all the other
 		machinery. As a result the waiting tasks will wait forever, and associated events, cl_mem objects, command queues and contexts are likely to leak.
 		In-order command-queues caught up in this deadlock may cease to do any work.
@@ -3277,9 +3313,9 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
-			"{@link #CL_INVALID_EVENT} if {@code event} is not a valid event object.",
+			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			OORE,
 			OOHME
 		)}
@@ -3299,10 +3335,10 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
-			"{@link #CL_INVALID_VALUE} if {@code event} is a $NULL value.",
+			"$INVALID_VALUE if {@code event} is a $NULL value.",
 			OORE,
 			OOHME
 		)}
@@ -3320,7 +3356,7 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			OORE,
@@ -3339,12 +3375,12 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function was successfully executed. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function was successfully executed. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
-			"{@link #CL_INVALID_CONTEXT} if the context associated with {@code command_queue} and events in {@code event_list} are not the same.",
-			"{@link #CL_INVALID_VALUE} if {@code num_events} is zero or {@code event_list} is $NULL.",
-			"{@link #CL_INVALID_EVENT} if event objects specified in {@code event_list} are not valid events.",
+			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_list} are not the same.",
+			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
+			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid events.",
 			OORE,
 			OOHME
 		)}
@@ -3366,17 +3402,17 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully and the profiling information has been recorded. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function is executed successfully and the profiling information has been recorded. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"""
-			{@link #CL_PROFILING_INFO_NOT_AVAILABLE} if the {@link #CL_QUEUE_PROFILING_ENABLE} flag is not set for the command-queue, if the execution status of
-			the command identified by {@code event} is not {@link #CL_COMPLETE} or if {@code event} is a user event object.
+			${"PROFILING_INFO_NOT_AVAILABLE".link} if the ${"QUEUE_PROFILING_ENABLE".link} flag is not set for the command-queue, if the execution status of
+			the command identified by {@code event} is not ${"COMPLETE".link} or if {@code event} is a user event object.
 			""",
 			"""
-			{@link #CL_INVALID_VALUE} if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
+			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
 			""",
-			"{@link #CL_INVALID_EVENT} if {@code event} is a not a valid event object.",
+			"$INVALID_EVENT if {@code event} is a not a valid event object.",
 			OORE,
 			OOHME
 		)}
@@ -3391,9 +3427,9 @@ kernel void image_filter (
 		will be complete after {@code clFlush} returns.
 
 		Any blocking commands queued in a command-queue and $ReleaseCommandQueue perform an implicit flush of the command-queue. These blocking commands are
-		$EnqueueReadBuffer, {@link CL11#clEnqueueReadBufferRect}, $EnqueueReadImage, with {@code blocking_read} set to $CL_TRUE; $EnqueueWriteBuffer,
-		{@link CL11#clEnqueueWriteBufferRect}, $EnqueueWriteImage with {@code blocking_write} set to $CL_TRUE; $EnqueueMapBuffer, $EnqueueMapImage with
-		{@code blocking_map} set to $CL_TRUE; or $WaitForEvents.
+		$EnqueueReadBuffer, ${"CL11".link("EnqueueReadBufferRect()")}, $EnqueueReadImage, with {@code blocking_read} set to $TRUE; $EnqueueWriteBuffer,
+		${"CL11".link("EnqueueWriteBufferRect()")}, $EnqueueWriteImage with {@code blocking_write} set to $TRUE; $EnqueueMapBuffer, $EnqueueMapImage with
+		{@code blocking_map} set to $TRUE; or $WaitForEvents.
 
 		To use event objects that refer to commands enqueued in a command-queue as event objects to wait on by commands enqueued in a different command-queue,
 		the application must call a {@code clFlush} or any blocking commands that perform an implicit flush of the command-queue where the commands that refer
@@ -3404,7 +3440,7 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function call was executed successfully. Otherwise, it returns one of the following errors:
+	    $SUCCESS if the function call was executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			ICQE,
 			OORE,

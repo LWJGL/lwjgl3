@@ -15,7 +15,7 @@ fun WGL_ARB_extensions_string() = "WGLARBExtensionsString".nativeClassWGL("WGL_A
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_extensions_string.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_extensions_string.txt", templateName)} extension.
 
 		This extension provides a way for applications to determine which WGL extensions are supported by a device. This is the foundation upon which other WGL
 		extensions are built.

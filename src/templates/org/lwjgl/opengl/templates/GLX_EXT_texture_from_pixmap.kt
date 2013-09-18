@@ -17,14 +17,14 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/texture_from_pixmap.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/texture_from_pixmap.txt", templateName)} extension.
 
 		This extension allows a color buffer to be used for both rendering and texturing.
 		"""
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link GLX13#glXGetFBConfigAttrib} and the {@code attrib_list} parameter of {@link GLX13#glXChooseFBConfig}:",
+		"Accepted by the {@code attribute} parameter of ${"GLX13".link("GetFBConfigAttrib()")} and the {@code attrib_list} parameter of ${"GLX13".link("ChooseFBConfig()")}:",
 
 		"BIND_TO_TEXTURE_RGB_EXT" _ 0x20D0,
 		"BIND_TO_TEXTURE_RGBA_EXT" _ 0x20D1,
@@ -34,7 +34,7 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 	)
 
 	IntConstant.block(
-		"Accepted as an attribute in the {@code attrib_list} parameter of {@link GLX13#glXCreatePixmap}, and by the {@code attribute} parameter of {@link GLX13#glXQueryDrawable}:",
+		"Accepted as an attribute in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")}, and by the {@code attribute} parameter of ${"GLX13".link("QueryDrawable()")}:",
 
 		"TEXTURE_FORMAT_EXT" _ 0x20D5,
 		"TEXTURE_TARGET_EXT" _ 0x20D6,
@@ -43,8 +43,8 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of {@link GLX13#glXCreatePixmap} and returned in the {@code value} parameter of
-		{@link GLX13#glXQueryDrawable} when {@code attribute} is {@link #GLX_TEXTURE_FORMAT_EXT}:
+		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")} and returned in the {@code value} parameter of
+		${"GLX13".link("QueryDrawable()")} when {@code attribute} is ${"TEXTURE_FORMAT_EXT".link}:
 		""",
 
 		"TEXTURE_FORMAT_NONE_EXT" _ 0x20D8,
@@ -53,7 +53,7 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the {@link #GLX_BIND_TO_TEXTURE_TARGETS_EXT} variable:",
+		"Accepted as bits in the ${"BIND_TO_TEXTURE_TARGETS_EXT".link} variable:",
 
 		"TEXTURE_1D_BIT_EXT" _ 0x00000001,
 		"TEXTURE_2D_BIT_EXT" _ 0x00000002,
@@ -62,8 +62,8 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of {@link GLX13#glXCreatePixmap} and returned in the {@code value} parameter of
-		{@link GLX13#glXQueryDrawable} when {@code attribute} is {@link #GLX_TEXTURE_TARGET_EXT}:
+		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")} and returned in the {@code value} parameter of
+		${"GLX13".link("QueryDrawable()")} when {@code attribute} is ${"TEXTURE_TARGET_EXT".link}:
 		""",
 
 		"TEXTURE_1D_EXT" _ 0x20DB,
@@ -72,7 +72,7 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code buffer} parameter of {@link #glXBindTexImageEXT} and {@link #glXReleaseTexImageEXT}:",
+		"Accepted by the {@code buffer} parameter of ${"BindTexImageEXT()".link} and ${"ReleaseTexImageEXT()".link}:",
 
 		"FRONT_LEFT_EXT" _ 0x20DE,
 		"FRONT_RIGHT_EXT" _ 0x20DF,

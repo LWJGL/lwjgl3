@@ -90,10 +90,10 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		println("""/**
  * Defines the capabilities of an OpenCL platform or device.
  * <p/>
- * The instance returned by {@link CLPlatform#getCapabilities()} )} exposes the functionality present on either the platform or any of its devices. This is
- * unlike the {@link CL10#CL_PLATFORM_EXTENSIONS} string, which returns only platform functionality, supported across all platform devices.
+ * The instance returned by {@link CLPlatform#getCapabilities} )} exposes the functionality present on either the platform or any of its devices. This is
+ * unlike the ${"CL10".linkCL("PLATFORM_EXTENSIONS")} string, which returns only platform functionality, supported across all platform devices.
  * <p/>
- * The instance returned by {@link CLDevice#getCapabilities()} exposes only the functionality available on that particular device.
+ * The instance returned by {@link CLDevice#getCapabilities} exposes only the functionality available on that particular device.
  * <p/>
  * The instance returned by any other OpenCL object will be the instance of its parent object.
  */""")
@@ -196,7 +196,9 @@ public fun String.nativeClassCL(templateName: String, postfix: String = "", init
 	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", functionProvider = FunctionProviderCL, init = init)
 
 public val NativeClass.extensionLink: String
-	get() = link("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)
+	get() = url("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)
 
 public val NativeClass.extensionName: String
 	get() = "<strong>$templateName</strong>"
+
+fun String.linkCL(name: String) = this.link(name, if ( name.endsWith(')') ) "cl" else "CL_")

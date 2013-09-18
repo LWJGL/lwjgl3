@@ -7,12 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_EXT_visual_rating() = "GLX_EXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
+fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
 
 		This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
 		underlying a GLX visual.
@@ -24,7 +24,7 @@ fun GLX_EXT_visual_rating() = "GLX_EXTVisualRating".nativeClassGLX("GLX_EXT_visu
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attrib} parameter of {@link GLX#glXGetConfi}g, and by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual}:",
+		"Accepted by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}, and by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")}:",
 
 		"X_VISUAL_TYPE_EXT" _ 0x22,
 		"TRANSPARENT_TYPE_EXT" _ 0x23,
@@ -37,8 +37,8 @@ fun GLX_EXT_visual_rating() = "GLX_EXTVisualRating".nativeClassGLX("GLX_EXT_visu
 
 	IntConstant.block(
 		"""
-		Returned by {@link #glXGetConfig}, and accepted by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual} (following the
-		{@link #GLX_X_VISUAL_TYPE_EXT} token):
+		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		${"X_VISUAL_TYPE_EXT".link} token):
 		""",
 
 		"TRUE_COLOR_EXT" _ 0x8002,
@@ -51,8 +51,8 @@ fun GLX_EXT_visual_rating() = "GLX_EXTVisualRating".nativeClassGLX("GLX_EXT_visu
 
 	IntConstant.block(
 		"""
-		Returned by {@link GLX#glXGetConfig}, and accepted by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual} (following the
-		{@link #GLX_TRANSPARENT_TYPE_EXT} token):
+		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		${"TRANSPARENT_TYPE_EXT".link} token):
 		""",
 
 		"NONE_EXT" _ 0x8000,

@@ -15,7 +15,7 @@ fun GLX_SGI_make_current_read() = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SG
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/SGI/make_current_read.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGI/make_current_read.txt", templateName)} extension.
 
 		The association of the current context with a drawable is extended to allow separate write and read drawables.  This paves the way for allowing
 		preprocessing of image data in an "off screen" window which is then read into the visible window for final display.  Similarly it sets the frame-work

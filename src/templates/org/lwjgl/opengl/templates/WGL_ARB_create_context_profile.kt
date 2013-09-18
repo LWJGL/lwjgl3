@@ -14,7 +14,7 @@ fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassW
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
 
 		Add an attribute to {@link WGLARBCreateContext}, specifying the GL profile requested for a context of OpenGL 3.2 or later.
 		"""
@@ -27,7 +27,7 @@ fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassW
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for {@link #WGL_CONTEXT_PROFILE_MASK_ARB} in {@code attribList}.",
+		"Accepted as bits in the attribute value for ${"CONTEXT_PROFILE_MASK_ARB".link} in {@code attribList}.",
 
 		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002

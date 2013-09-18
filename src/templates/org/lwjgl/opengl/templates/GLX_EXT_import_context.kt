@@ -15,7 +15,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/import_context.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/import_context.txt", templateName)} extension.
 
 		This extension allows multiple X clients to share an indirect rendering context.
 
@@ -24,7 +24,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link #glXQueryContextInfoEXT}:",
+		"Accepted by the {@code attribute} parameter of ${"QueryContextInfoEXT()".link}:",
 
 		"SHARE_CONTEXT_EXT" _ 0x800A,
 		"VISUAL_ID_EXT" _ 0x800B,
@@ -63,7 +63,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 
 	void.func(
 		"FreeContextEXT",
-		"Frees the client-side part of a GLXContext that was created  with {@link #glXImportContextEXT}.",
+		"Frees the client-side part of a GLXContext that was created  with ${"ImportContextEXT()".link}.",
 
 		DISPLAY,
 		GLXContext.IN("context", "the context to free")

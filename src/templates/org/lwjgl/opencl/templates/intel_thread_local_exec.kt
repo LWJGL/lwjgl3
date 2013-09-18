@@ -14,7 +14,7 @@ fun intel_thread_local_exec() = "INTELThreadLocalExec".nativeClassCL("intel_thre
 		Native bindings to the $extensionLink extension.
 
 		This extension allows the user to execute OpenCL tasks and kernels with the user application's threads. The extension defines a token that can be passed
-		to {@link CL10#clCreateCommandQueue}, creating a queue with the "thread local exec" capability.
+		to ${"CL10".link("CreateCommandQueue()")}, creating a queue with the "thread local exec" capability.
 
 		All enqueue APIs (e.g., {@code clEnqueueRead}) submitted to such a queue never enqueue commands. An Enqueue API call is executed by the caller
 		host-thread itself without involving any of the OpenCL runtime threads, much like function calls. The queue would typically stay empty - the queue
@@ -24,11 +24,11 @@ fun intel_thread_local_exec() = "INTELThreadLocalExec".nativeClassCL("intel_thre
 		be accessible only after the return of the enqueue API call (as with regular command queues) and should always have <strong>completed</strong> status
 		(as expected). They might be useful for querying event status and profiling data. "Local" command queues behave the same regardless if they are defined
 		as in-order or out-of-order. However, with in-order queues, threads may be blocked until execution of previously enqueued commands (by other threads)
-		is completed. Given an enqueue API with a blocking flag (e.g., {@link CL10#clEnqueueReadBuffer}), both its blocking non-blocking calls behave the same
-		and have the exact same impact on the application. Calls to {@link CL10#clFinish} and {@link CL10#clFlush}, {@link CL10#clEnqueueBarrier} and
-		{@link CL10#clEnqueueMarker} are valid although meaningless for these command queues. An optimal implementation of these APIs for Immediate command
+		is completed. Given an enqueue API with a blocking flag (e.g., ${"CL10".link("EnqueueReadBuffer()")}), both its blocking non-blocking calls behave the same
+		and have the exact same impact on the application. Calls to ${"CL10".link("Finish()")} and ${"CL10".link("Flush()")}, ${"CL10".link("EnqueueBarrier()")} and
+		${"CL10".link("EnqueueMarker()")} are valid although meaningless for these command queues. An optimal implementation of these APIs for Immediate command
 		queues will incur the minimal overhead of a function call and possibly an if-then-else to distinguish between a local command queue and a regular one.
-		{@link CL10#clEnqueueNDRangeKernel} and {@link CL10#clEnqueueTask} should have optimized implementations using a single execution thread.
+		${"CL10".link("EnqueueNDRangeKernel()")} and ${"CL10".link("EnqueueTask()")} should have optimized implementations using a single execution thread.
 		"""
 	)
 

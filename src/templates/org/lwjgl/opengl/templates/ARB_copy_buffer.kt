@@ -12,7 +12,7 @@ fun ARB_copy_buffer() = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/copy_buffer.txt", templateName)} extension.")
+	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/copy_buffer.txt", templateName)} extension.")
 
 	IntConstant.block(
 		"""
@@ -43,8 +43,8 @@ fun ARB_copy_buffer() = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 			"readTarget",
 			"the source buffer object target. One of:",
 			"""
-			GL15#GL_ARRAY_BUFFER #GL_COPY_READ_BUFFER #GL_COPY_WRITE_BUFFER GL15#GL_ELEMENT_ARRAY_BUFFER GL21#GL_PIXEL_PACK_BUFFER GL21#GL_PIXEL_UNPACK_BUFFER
-			GL30#GL_TRANSFORM_FEEDBACK_BUFFER GL31#GL_TEXTURE_BUFFER GL31#GL_UNIFORM_BUFFER
+			GL15#ARRAY_BUFFER #COPY_READ_BUFFER #COPY_WRITE_BUFFER GL15#ELEMENT_ARRAY_BUFFER GL21#PIXEL_PACK_BUFFER GL21#PIXEL_UNPACK_BUFFER
+			GL30#TRANSFORM_FEEDBACK_BUFFER GL31#TEXTURE_BUFFER GL31#UNIFORM_BUFFER
 			"""
 		),
 		GLenum.IN("writeTarget", "the destination buffer object target"),

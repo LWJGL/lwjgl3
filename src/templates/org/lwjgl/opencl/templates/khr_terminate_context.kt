@@ -39,10 +39,12 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 	)
 
 	IntConstant.block(
-		"Specifies whether the context can be terminated. The default value is {@link CL10#CL_FALSE}.",
+		"Specifies whether the context can be terminated. The default value is $FALSE.",
 
 		"CONTEXT_TERMINATE_KHR" _ 0x2010
 	)
+
+	// TODO: Find CL_TERMINATED_KHR & CL_CONTEXT_TERMINATED_KHR values.
 
 	cl_int.func(
 		"TerminateContextKHR",
@@ -53,21 +55,21 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 	    When a context is terminated:
 		${ul(
 			"""
-			The execution status of enqueued commands will be {@link #CL_TERMINATED_KHR}. Event objects can be queried using {@link CL10#clGetEventInfo}. Event
-			callbacks can be registered and registered event callbacks will be called with {@code event_command_exec_status} set to {@link #CL_TERMINATED_KHR}.
-			{@link CL10#clWaitForEvents} will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
-			events can be set. Event objects can be retained and released. {@link CL10#clGetEventProfilingInfo} returns {@link CL10#CL_PROFILING_INFO_NOT_AVAILABLE}.
+			The execution status of enqueued commands will be ${"TERMINATED_KHR".link}. Event objects can be queried using ${"CL10".link("GetEventInfo()")}. Event
+			callbacks can be registered and registered event callbacks will be called with {@code event_command_exec_status} set to ${"TERMINATED_KHR".link}.
+			${"CL10".link("WaitForEvents()")} will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
+			events can be set. Event objects can be retained and released. ${"CL10".link("GetEventProfilingInfo()")} returns ${"CL10".link("PROFILING_INFO_NOT_AVAILABLE")}.
 			""",
 			"""
 			The context is considered to be terminated. A callback function registered when the context was created will be called. Only queries, retain and
-			release operations can be performed on the context. All other APIs that use a context as an argument will return {@link #CL_CONTEXT_TERMINATED_KHR}.
+			release operations can be performed on the context. All other APIs that use a context as an argument will return ${"CONTEXT_TERMINATED_KHR".link}.
 			""",
 			"""
 			The contents of the memory regions of the memory objects is undefined. Queries, registering a destructor callback, retain and release operations can
 			be performed on the memory objects.
 			""",
 			"""
-			Once a context has been terminated, all OpenCL API calls that create objects or enqueue commands will return {@link #CL_CONTEXT_TERMINATED_KHR}. APIs
+			Once a context has been terminated, all OpenCL API calls that create objects or enqueue commands will return ${"CONTEXT_TERMINATED_KHR".link}. APIs
 			that release OpenCL objects will continue to operate as though {@code clTerminateContextKHR} was not called.
 			""",
 			"""
@@ -81,10 +83,10 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 
 		returnDoc =
 		"""
-	    $CL_SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-			"{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid OpenCL context.",
-			"{@link #CL_CONTEXT_TERMINATED_KHR} if {@code context} has already been terminated.",
-			"{@link CL10#CL_INVALID_OPERATION} if {@code context} was not created with {@link #CL_CONTEXT_TERMNATE_KHR} set to {@link CL10#CL_TRUE}.",
+	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+			"$INVALID_CONTEXT if {@code context} is not a valid OpenCL context.",
+			"${"CONTEXT_TERMINATED_KHR".link} if {@code context} has already been terminated.",
+			"$INVALID_OPERATION if {@code context} was not created with ${"CONTEXT_TERMINATE_KHR".link} set to $TRUE.",
 			OORE,
 			OOHME
 	    """

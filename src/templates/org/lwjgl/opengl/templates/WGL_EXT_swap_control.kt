@@ -15,7 +15,7 @@ fun WGL_EXT_swap_control() = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_co
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/wgl_swap_control.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/wgl_swap_control.txt", templateName)} extension.
 
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
 		"""

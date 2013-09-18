@@ -17,7 +17,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 
 	// ARB_draw_buffers_blend
 
-	val blendEquations = "GL14#GL_FUNC_ADD GL14#GL_FUNC_SUBTRACT GL14#GL_FUNC_REVERSE_SUBTRACT GL14#GL_MIN GL14#GL_MAX"
+	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 
 	ReferenceGL("glBlendEquation") _ GLvoid.func(
 		"BlendEquationi",
@@ -78,7 +78,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 		"""
 		Renders primitives from array data, taking parameters from memory.
 
-		{@code glDrawArraysIndirect} behaves similarly to {@link GL42#glDrawArraysInstancedBaseInstance}, except that the parameters to
+		{@code glDrawArraysIndirect} behaves similarly to ${"GL42".link("DrawArraysInstancedBaseInstance()")}, except that the parameters to
 		glDrawArraysInstancedBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
@@ -109,7 +109,7 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		"""
 		Renders indexed primitives from array data, taking parameters from memory.
 
-		{@code glDrawElementsIndirect} behaves similarly to {@link GL42#glDrawElementsInstancedBaseVertexBaseInstance}, execpt that the parameters to
+		{@code glDrawElementsIndirect} behaves similarly to ${"GL42".link("DrawElementsInstancedBaseVertexBaseInstance()")}, execpt that the parameters to
 		glDrawElementsInstancedBaseVertexBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
@@ -143,8 +143,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN(
 			"type",
-			"the type of data in the buffer bound to the {@link GL15#GL_ELEMENT_ARRAY_BUFFER} binding",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"the type of data in the buffer bound to the ${"GL15".link("ELEMENT_ARRAY_BUFFER")} binding",
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(
 			const,
@@ -460,7 +460,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN(
 			"pname",
 			"the parameter of the shader subroutine uniform to query",
-			"#GL_NUM_COMPATIBLE_SUBROUTINES #GL_COMPATIBLE_SUBROUTINES GL31#GL_UNIFORM_SIZE GL31#GL_UNIFORM_NAME_LENGTH"
+			"#NUM_COMPATIBLE_SUBROUTINES #COMPATIBLE_SUBROUTINES GL31#UNIFORM_SIZE GL31#UNIFORM_NAME_LENGTH"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
@@ -604,7 +604,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"PatchParameteri",
 		"Specifies the integer value of the given parameter for patch primitives.",
 
-		GLenum.IN("pname", "the name of the parameter to set", "#GL_PATCH_VERTICES"),
+		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_VERTICES"),
 		GLint.IN("value", "the new value for the parameter given by {@code pname}")
 	)
 
@@ -612,7 +612,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"PatchParameterfv",
 		"Specifies an array of float values for the given parameter for patch primitives.",
 
-		GLenum.IN("pname", "the name of the parameter to set", "#GL_PATCH_DEFAULT_OUTER_LEVEL #GL_PATCH_DEFAULT_INNER_LEVEL"),
+		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
 		mods(
 			Check(expression = "GL11.glGetInteger(GL_PATCH_VERTICES)", debug = true),
 			const
@@ -678,7 +678,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"BindTransformFeedback",
 		"Binds a transform feedback object.",
 
-		GLenum.IN("target", "the target to which to bind the transform feedback object {@code id}", "#GL_TRANSFORM_FEEDBACK"),
+		GLenum.IN("target", "the target to which to bind the transform feedback object {@code id}", "#TRANSFORM_FEEDBACK"),
 		GLuint.IN("id", "the name of a transform feedback object")
 	)
 
@@ -737,7 +737,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLenum.IN(
 			"target",
-			"the target type of query object established between {@code glBeginQueryIndexed} and the subsequent {@link #glEndQueryIndexed}",
+			"the target type of query object established between {@code glBeginQueryIndexed} and the subsequent ${"EndQueryIndexed()".link}",
 			QUERY_TARGETS
 		),
 		GLuint.IN("index", "the index of the query target upon which to begin the query"),

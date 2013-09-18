@@ -22,13 +22,13 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		between the two APIs. The companion {@link org.lwjgl.opengl.ARBCLEvent} extension provides the complementary functionality of creating an OpenGL sync
 		object from an OpenCL event object.
 
-		In addition, this extension modifies the behavior of {@link CL10GL#clEnqueueAcquireGLObjects} and {@link CL10#clEnqueueReleaseGLObjects} to implicitly
+		In addition, this extension modifies the behavior of ${"CL10GL".link("EnqueueAcquireGLObjects()")} and ${"CL10GL".link("EnqueueReleaseGLObjects()")} to implicitly
 		guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
 		"""
 	)
 
 	IntConstant.block(
-		"Returned by {@link CL10#clGetEventInfo} when {@code param_name} is {@link CL10#CL_EVENT_COMMAND_TYPE}.",
+		"Returned by ${"CL10".link("GetEventInfo()")} when {@code param_name} is ${"CL10".linkCL("EVENT_COMMAND_TYPE")}.",
 
 		"COMMAND_GL_FENCE_SYNC_OBJECT_KHR" _ 0x200D
 	)

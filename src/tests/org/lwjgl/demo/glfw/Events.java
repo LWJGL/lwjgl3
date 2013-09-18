@@ -1,6 +1,5 @@
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.MonitorCallback;

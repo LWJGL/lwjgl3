@@ -12,7 +12,7 @@ fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.
 
 		Conventionally, OpenGL assumes framebuffer color components are stored in a linear color space.  In particular, framebuffer blending is a linear
 		operation.
@@ -25,7 +25,7 @@ fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribList} parameter of {@link GLX#glXChooseVisual}, and by the {@code attrib} parameter of {@link GLX#glXGetConfig}:",
+		"Accepted by the {@code attribList} parameter of ${"GLX".link("ChooseVisual()")}, and by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}:",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20B2
 	)

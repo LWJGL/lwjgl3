@@ -8,11 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
-	javaImport("org.lwjgl.system.linux.*")
+	javaImport(
+		"org.lwjgl.system.linux.*",
+		"org.lwjgl.system.linux.GLX"
+	)
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
 
 		This extension adds a new 3-component floating-point texture format that fits within a single 32-bit word.  This format stores 5 bits of biased exponent
 		per component in the same manner as 16-bit floating-point formats, but rather than 10 mantissa bits, the red, green, and blue components have 6, 6, and
@@ -28,15 +31,15 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 	)
 
 	IntConstant.block(
-		"Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext} and {@link GLX#glXCreateContext} functions:",
+		"Accepted as values of the {@code render_type} arguments in the ${"GLX13".link("CreateNewContext()")} and ${"GLX".link("CreateContext()")} functions:",
 
 		"RGBA_UNSIGNED_FLOAT_TYPE_EXT" _ 0x20B1
 	)
 
 	IntConstant.block(
 		"""
-		Returned by {@link GLX13#glXGetFBConfigAttrib} (when {@code attribute} is set to GLX_RENDER_TYPE) and accepted by the {@code attrib_list} parameter of
-		{@link GLX13#glXChooseFBConfig} (following the GLX_RENDER_TYPE token):
+		Returned by ${"GLX13".link("GetFBConfigAttrib()")} (when {@code attribute} is set to GLX_RENDER_TYPE) and accepted by the {@code attrib_list} parameter of
+		${"GLX13".link("ChooseFBConfig()")} (following the GLX_RENDER_TYPE token):
 		""",
 
 		"RGBA_UNSIGNED_FLOAT_BIT_EXT" _ 0x00000008

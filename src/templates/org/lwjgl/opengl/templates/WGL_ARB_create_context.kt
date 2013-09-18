@@ -15,7 +15,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
 
 		With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
 		to indicate at context creation which interface will be used. This extension add a new context creation routine with attributes specifying the GL
@@ -33,7 +33,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for {@link #WGL_CONTEXT_FLAGS_ARB} in {@code attribList}.",
+		"Accepted as bits in the attribute value for ${"CONTEXT_FLAGS_ARB".link} in {@code attribList}.",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002

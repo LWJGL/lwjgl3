@@ -49,7 +49,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -66,7 +66,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
@@ -81,7 +81,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
-			"GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"
+			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
@@ -98,7 +98,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		const _ GLsizei_p.IN("count", "an array of the elements counts"),
-		GLenum.IN("type", "the type of the values in {@code indices}", "GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"),
+		GLenum.IN("type", "the type of the values in {@code indices}", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
 		const _ GLvoid_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices", "basevertex") _ GLsizei.IN("primcount", "the size of the {@code count} array"),
 		GLint_p.IN("basevertex", "a pointer to the location where the base vertices are stored")
@@ -218,7 +218,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"TexImage2DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 2D multisample texture's image.",
 
-		GLenum.IN("target", "the target of the operation", "#GL_TEXTURE_2D_MULTISAMPLE #GL_PROXY_TEXTURE_2D_MULTISAMPLE"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE #PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the multisample texture's image"),
 		GLint.IN(
 			"internalformat",
@@ -242,7 +242,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"TexImage3DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 3D multisample texture's image.",
 
-		GLenum.IN("target", "the target of the operation", "#GL_TEXTURE_2D_MULTISAMPLE_ARRAY #GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"),
+		GLenum.IN("target", "the target of the operation", "#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"),
 		GLsizei.IN("samples", "the number of samples in the multisample texture's image"),
 		GLint.IN(
 			"internalformat",
@@ -267,7 +267,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"GetMultisamplefv",
 		"Retrieves the location of a sample.",
 
-		GLenum.IN("pname", " the sample parameter name", "#GL_SAMPLE_POSITION"),
+		GLenum.IN("pname", " the sample parameter name", "#SAMPLE_POSITION"),
 		GLuint.IN("index", "the index of the sample whose position to query"),
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("val", "an array to receive the position of the sample")
 	)
@@ -354,7 +354,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"FramebufferTexture",
 		"Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
 
-		GLenum.IN("target", "the framebuffer target", "GL30#GL_FRAMEBUFFER GL30#GL_READ_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER"),
+		GLenum.IN("target", "the framebuffer target", "GL30#FRAMEBUFFER GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER"),
 		GLenum.IN("attachment", "the attachment point of the framebuffer"),
 		GLuint.IN("texture", "the texture object to attach to the framebuffer attachment point named by {@code attachment}"),
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")
@@ -421,7 +421,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"FenceSync",
 		"Creates a new sync object and inserts it into the GL command stream.",
 
-		GLenum.IN("condition", "the condition that must be met to set the sync object's state to signaled", "#GL_SYNC_GPU_COMMANDS_COMPLETE"),
+		GLenum.IN("condition", "the condition that must be met to set the sync object's state to signaled", "#SYNC_GPU_COMMANDS_COMPLETE"),
 		GLbitfield.IN(
 			"flags",
 			"""
@@ -453,15 +453,15 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 
 		The return value is one of four status values:
 		${ul(
-			"{@link #GL_ALREADY_SIGNALED} indicates that sync was signaled at the time that glClientWaitSync was called.",
-			"{@link #GL_TIMEOUT_EXPIRED} indicates that at least timeout nanoseconds passed and sync did not become signaled.",
-			"{@link #GL_CONDITION_SATISFIED} indicates that sync was signaled before the timeout expired.",
-			"{@link #GL_WAIT_FAILED} indicates that an error occurred. Additionally, an OpenGL error will be generated."
+			"${"ALREADY_SIGNALED".link} indicates that sync was signaled at the time that glClientWaitSync was called.",
+			"${"TIMEOUT_EXPIRED".link} indicates that at least timeout nanoseconds passed and sync did not become signaled.",
+			"${"CONDITION_SATISFIED".link} indicates that sync was signaled before the timeout expired.",
+			"${"WAIT_FAILED".link} indicates that an error occurred. Additionally, an OpenGL error will be generated."
 		)}
 		""",
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
-		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #GL_SYNC_FLUSH_COMMANDS_BIT"),
+		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT"),
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 
@@ -471,7 +471,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		Causes the GL server to block and wait for a sync object to become signaled.
 
 		{@code glWaitSync} will always wait no longer than an implementation-dependent timeout. The duration of this timeout in nanoseconds may be queried by
-		with {@link #GL_MAX_SERVER_WAIT_TIMEOUT}. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
+		with ${"MAX_SERVER_WAIT_TIMEOUT".link}. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
 		sync object being waited on was signaled.
 
 		If an error occurs, {@code glWaitSync} does not cause the GL server to block.
@@ -479,7 +479,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
 		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0"),
-		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#GL_TIMEOUT_IGNORED")
+		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(

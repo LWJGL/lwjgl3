@@ -174,7 +174,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"joyGetPos",
 		"Queries a joystick for its position and button status.",
 
-		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero ({@link #JOYSTICKID1}) to 15"),
+		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (${"JOYSTICKID1".link}) to 15"),
 		LPJOYINFO.IN("ji", "pointer to a {@link JOYINFO} structure that contains the position and button status of the joystick")
 	)
 
@@ -182,7 +182,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"joyGetPosEx",
 		"Queries a joystick for its position and button status.",
 
-		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero ({@link #JOYSTICKID1}) to 15"),
+		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (${"JOYSTICKID1".link}) to 15"),
 		LPJOYINFOEX.IN(
 			"ji",
 			"""

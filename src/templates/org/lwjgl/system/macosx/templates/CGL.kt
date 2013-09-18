@@ -9,6 +9,8 @@ import org.lwjgl.system.macosx.*
 import org.lwjgl.opengl.*
 
 fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
+	javaImport("org.lwjgl.opengl.GL11")
+
 	nativeImport (
 		"MacOSXLWJGL.h",
 	    "<OpenGL/OpenGL.h>"
@@ -20,7 +22,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	// CGLTypes.h
 
 	val PixelFormatAttribs = IntConstant.block(
-		"Attribute names for {@link #CGLChoosePixelFormat} and {@link #CGLDescribePixelFormat}:",
+		"Attribute names for ${"ChoosePixelFormat()".link} and ${"DescribePixelFormat()".link}:",
 
 		"PFAAllRenderers" _ 1,
 		"PFATripleBuffer" _ 3,
@@ -66,7 +68,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	).toJavaDocLinks()
 
 	val RendererProperties = IntConstant.block(
-		"Property names for {@link #CGLDescribeRenderer}:",
+		"Property names for ${"DescribeRenderer()".link}:",
 
 		"RPOffScreen" _ 53,
 		"RPRendererID" _ 70,
@@ -101,7 +103,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	).toJavaDocLinks()
 
 	val ContextOptions = IntConstant.block(
-		"Enable names for {@link #CGLEnable}, {@link #CGLDisable}, and {@link #CGLIsEnabled}:",
+		"Enable names for ${"Enable()".link}, ${"Disable()".link}, and ${"IsEnabled()".link}:",
 
 		"CESwapRectangle" _ 201,
 		"CESwapLimit" _ 203,
@@ -113,7 +115,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	).toJavaDocLinks()
 
 	val ContextParameters = IntConstant.block(
-		"Parameter names for {@link #CGLSetParameter} and {@link #CGLGetParameter}:",
+		"Parameter names for ${"SetParameter()".link} and ${"GetParameter()".link}:",
 
 		"CPSwapRectangle" _ 200,
 		"CPSwapInterval" _ 222,
@@ -133,7 +135,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	).toJavaDocLinks()
 
 	val GlobalOptions = IntConstant.block(
-		"Option names for {@link #CGLSetGlobalOption} and {@link #CGLGetGlobalOption}:",
+		"Option names for ${"SetGlobalOption()".link} and ${"GetGlobalOption()".link}:",
 
 		"GOFormatCacheSize" _ 501,
 		"GOClearFormatCache" _ 502,
@@ -313,7 +315,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 
 	CGLError.func(
 		"DestroyPixelFormat",
-		"Frees the memory associated with a pixel format object. Calling this function is equivalent to calling {@link #CGLReleasePixelFormat}.",
+		"Frees the memory associated with a pixel format object. Calling this function is equivalent to calling ${"ReleasePixelFormat()".link}.",
 
 		CGLPixelFormatObj.IN("pix", "the pixel format object to destroy")
 	)
@@ -336,7 +338,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"""
 		Decrements the reference count of a pixel format object.
 
-		The system retains the pixel format object when you call the function {@link #CGLCreateContext}, so you can release a pixel format object immediately
+		The system retains the pixel format object when you call the function ${"CreateContext()".link}, so you can release a pixel format object immediately
 		after passing it to the context creation function.
 
 		Each call to CGLReleasePixelFormat decreases the reference count by 1. If the reference count reaches 0, the pixel format object is destroyed.
@@ -351,7 +353,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		Increments the receiver's reference count.
 
 		Each call to CGLRetainPixelFormat increases the reference count by 1. Each call to CGLRetainPixelFormat must be matched with a call to
-		{@link #CGLReleasePixelFormat}.
+		${"ReleasePixelFormat()".link}.
 		""",
 
 		CGLPixelFormatObj.IN("pix", "the pixel format object whose reference count should be incremented")
@@ -385,7 +387,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 			"""
 			the memory address of a renderer information object. On return, points to a renderer information object that describes all renderers that are able
 			to drive the displays specified by the {@code display_mask} parameter. If {@code display_mask} does not specify any displays, the value of
-			{@code rend} is set to $NULL. You must call {@link #CGLDestroyRendererInfo} when you no longer need this object.
+			{@code rend} is set to $NULL. You must call ${"DestroyRendererInfo()".link} when you no longer need this object.
 			"""
 		),
 		Check(1) _ GLint_p.OUT(
@@ -412,7 +414,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 			"rend",
 			"""
 			an opaque renderer information object that contains a description of the renderer capabilities you want to inspect. You can obtain a renderer
-			information object by calling the function {@link #CGLQueryRendererInfo}. You must call {@link #CGLDestroyRendererInfo} when you no longer need this
+			information object by calling the function ${"QueryRendererInfo()".link}. You must call ${"DestroyRendererInfo()".link} when you no longer need this
 			object.
 			"""
 		),
@@ -420,8 +422,8 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 			"rend_num",
 			"""
 			the index of the renderer inside the renderer information object — a value between 0 and the number of renderers minus one. The number of renderers
-			can be obtained by calling {@link #CGLDescribeRenderer}, passing in {@code rend}, renderer number 0, and the renderer property
-			{@link #kCGLRPRendererCount}.
+			can be obtained by calling ${"DescribeRenderer()".link}, passing in {@code rend}, renderer number 0, and the renderer property
+			${"RPRendererCount".link}.
 			"""
 		),
 		CGLRendererProperty.IN("prop", "the renderer property whose value you want to obtain", RendererProperties),
@@ -434,7 +436,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"CreateContext",
 		"Creates a CGL rendering context.",
 
-		CGLPixelFormatObj.IN("pix", "a pixel format object created by calling the function {@link #CGLChoosePixelFormat}"),
+		CGLPixelFormatObj.IN("pix", "a pixel format object created by calling the function ${"ChoosePixelFormat()".link}"),
 		CGLContextObj.IN(
 			"share",
 			"""
@@ -458,8 +460,8 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		Frees the resources associated with a rendering context.
 
 		Starting in Mac OS 10.5, CGL rendering contexts are reference counted. For compatibility reasons, calling CGLDestroyContext clears the drawable
-		associated with the rendering context. Calling CGLDestroyContext is the equivalent of calling both {@link #CGLClearDrawable} and
-		{@link #CGLReleaseContext}.
+		associated with the rendering context. Calling CGLDestroyContext is the equivalent of calling both ${"ClearDrawable()".link} and
+		${"ReleaseContext()".link}.
 		""",
 
 		CGLContextObj.IN("ctx", "the rendering context to destroy")
@@ -475,8 +477,8 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 			"mask",
 			"""
 			a mask that specifies the state variables to copy. Pass a bit field that contains the bitwise OR of the state variable names that you want to copy.
-			Use the symbolic mask constants that are passed to the OpenGL function {@link org.lwjgl.opengl.GL11#glPushAttrib}. To copy as many state variables
-			as possible, supply the constant {@link org.lwjgl.opengl.GL11#GL_ALL_ATTRIB_BITS}.
+			Use the symbolic mask constants that are passed to the OpenGL function ${"GL11".linkGL("PushAttrib()")}. To copy as many state variables
+			as possible, supply the constant ${"GL11".linkGL("ALL_ATTRIB_BITS")}.
 			"""
 		)
 	)
@@ -487,7 +489,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		Increments the retain count on a CGL rendering context.
 
 		Each call to CGLRetainContext increases the retain count by 1. To prevent memory leaks, each retain call must be balanced with a call to
-		{@link #CGLReleaseContext}.
+		${"ReleaseContext()".link}.
 		""",
 
 		CGLContextObj.IN("ctx", "the rendering context to be retained"),
@@ -524,7 +526,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		Retrieves the current pixel format associated with a CGL rendering context.
 
 		The pixel format object is not retained before being returned to your application. If your application needs to maintain this object, it should call
-		{@link #CGLRetainPixelFormat}.
+		${"RetainPixelFormat()".link}.
 		""",
 
 		CGLContextObj.IN("ctx", "the CGL rendering context whose format you want to receive")
@@ -666,12 +668,12 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"""
 		Copies the back buffer of a double-buffered context to the front buffer.
 
-		To create a double-buffered context, specify the {@link #kCGLPFADoubleBuffer} attribute when you create the pixel format object for the rendering
+		To create a double-buffered context, specify the ${"PFADoubleBuffer".link} attribute when you create the pixel format object for the rendering
 		context. If the backing store attribute is set to false, the buffers can be exchanged rather than copied. This is often the case in full-screen mode. If
 		the receiver is not a double-buffered context, this call does nothing.
 
-		If you set the swap interval attribute ({@link #kCGLCPSwapInterval}) appropriately, the copy takes place during the vertical retrace of the display,
-		rather than immediately after CGLFlushDrawable is called. An implicit {@link org.lwjgl.opengl.GL11#glFlush} operation is performed by CGLFlushDrawable
+		If you set the swap interval attribute (${"CPSwapInterval".link}) appropriately, the copy takes place during the vertical retrace of the display,
+		rather than immediately after CGLFlushDrawable is called. An implicit ${"GL11".linkGL("Flush()")} operation is performed by CGLFlushDrawable
 		before it returns. For optimal performance, an application should not call glFlush immediately before calling CGLFlushDrawable. Subsequent OpenGL
 		commands can be issued immediately after calling CGLFlushDrawable, but are not executed until the buffer copy is completed.
 		""",
@@ -742,8 +744,8 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 			"screen",
 			"""
 			a virtual screen number, which must be a value between 0 and the number of virtual screens minus one. The number of virtual screens available in a
-			context can be obtained by calling the function {@link #CGLDescribePixelFormat}, passing in the pixel format object used to create the rendering
-			context, 0 for the virtual screen number ({@code pix_num} parameter), and the attribute constant {@link #kCGLPFAVirtualScreenCount}.
+			context can be obtained by calling the function ${"DescribePixelFormat()".link}, passing in the pixel format object used to create the rendering
+			context, 0 for the virtual screen number ({@code pix_num} parameter), and the attribute constant ${"PFAVirtualScreenCount".link}.
 			"""
 		)
 	)
@@ -816,7 +818,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		Locks a CGL rendering context.
 
 		The function CGLLockContext blocks the thread it is on until all other threads have unlocked the same context using the function
-		{@link #CGLUnlockContext}. You can use CGLLockContext recursively. Context-specific CGL calls by themselves do not require locking, but you can
+		${"UnlockContext()".link}. You can use CGLLockContext recursively. Context-specific CGL calls by themselves do not require locking, but you can
 		guarantee serial processing for a group of calls by surrounding them with CGLLockContext and CGLUnlockContext. Keep in mind that calls from the OpenGL
 		API (the API provided by the Architecture Review Board) require locking.
 

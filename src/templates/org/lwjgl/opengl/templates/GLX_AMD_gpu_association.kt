@@ -20,7 +20,7 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/AMD/glx_gpu_association.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/glx_gpu_association.txt", templateName)} extension.
 
 		There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
 		that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most

@@ -15,7 +15,7 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
 	javaDoc("bindings to AL_SOFT_buffer_sub_data extension.")
 
 	val SourceParamNameParameters = IntConstant.block(
-		"Accepted by the @{code paramName} parameter of alGetSourceiv and alGetSourcefv.",
+		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv.",
 
 		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
@@ -25,20 +25,20 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
 		"BufferSubDataSOFT",
 		"""
 		To update a section of buffered sample data, use the function alBufferSubDataSOFT.
-        The named @{code buffer} may be attached to a source (either queued or by the
+        The named {@code buffer} may be attached to a source (either queued or by the
         AL_BUFFER property), and the source does not need to be stopped, paused,
         or in an initial state to be modified.
 
-        The @{code offset} value is the number of bytes from the start of the original
-        data, and @{code length} is the number of bytes of the original data, to modify.
-        If either @{code offset} or @{code length} are negative, or if the sum of @{code offset} and
-        @{code length} reaches beyond the end of the buffer, an AL_INVALID_VALUE error
-        is generated. For compressed formats, @{code length} and @{code offset} must be block
+        The {@code offset} value is the number of bytes from the start of the original
+        data, and {@code length} is the number of bytes of the original data, to modify.
+        If either {@code offset} or {@code length} are negative, or if the sum of {@code offset} and
+        {@code length} reaches beyond the end of the buffer, an AL_INVALID_VALUE error
+        is generated. For compressed formats, {@code length} and {@code offset} must be block
         aligned. Complex compressed formats (such as those with no constant block
         alignment), may not be modified and will result in an AL_INVALID_ENUM
         error.
 
-        The specified @{code format} is the sample format of the passed @{code data}. The
+        The specified {@code format} is the sample format of the passed {@code data}. The
         passed format must exactly match the format passed to alBufferData, or an
         AL_INVALID_ENUM error is generated.
 

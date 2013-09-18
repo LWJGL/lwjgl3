@@ -17,7 +17,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/SGIX/fbconfig.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/fbconfig.txt", templateName)} extension.
 
 		This extension introduces a new way to describe the capabilities of a GLX drawable (i.e., to describe the depth of color buffer components and the type
 		and size of ancillary buffers), removes the "similarity" requirement when making a context current to a drawable, and supports  RGBA rendering to
@@ -26,7 +26,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX}, and by the {@code attrib_list} parameter of {@link #glXChooseFBConfigSGIX}:",
+		"Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, and by the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link}:",
 
 		"DRAWABLE_TYPE_SGIX" _ 0x8010,
 		"RENDER_TYPE_SGIX" _ 0x8011,
@@ -35,24 +35,24 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX}, the {@code attrib_list} parameter of {@link #glXChooseFBConfigSGIX},
-		by the {@code attribute} parameter of {@link GLXSGIXPbuffer#glXQueryGLXPbufferSGIX} and by the {@code attribute} parameter of
-		{@link GLXEXTImportContext#glXQueryContextInfoEXT}:
+		Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link},
+		by the {@code attribute} parameter of ${"GLXSGIXPbuffer".link("QueryGLXPbufferSGIX()")} and by the {@code attribute} parameter of
+		${"GLXEXTImportContext".link("QueryContextInfoEXT()")}:
 		""",
 
 		"FBCONFIG_ID_SGIX" _ 0x8013
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link #glXGetFBConfigAttribSGIX}:",
+		"Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}:",
 
 		"SCREEN_EXT" _ 0x800C
 	)
 
 	IntConstant.block(
 		"""
-		Returned by {@link #glXGetFBConfigAttribSGIX} (when {@code attribute} is set to {@link #GLX_DRAWABLE_TYPE_SGIX}) and accepted by the {@code attrib_list}
-		parameter of {@link #glXChooseFBConfigSGIX} (following the {@link #GLX_DRAWABLE_TYPE_SGIX} token):
+		Returned by ${"GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"DRAWABLE_TYPE_SGIX".link}) and accepted by the {@code attrib_list}
+		parameter of ${"ChooseFBConfigSGIX()".link} (following the ${"DRAWABLE_TYPE_SGIX".link} token):
 		""",
 
 		"WINDOW_BIT_SGIX" _ 0x00000001,
@@ -61,8 +61,8 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 	IntConstant.block(
 		"""
-		Returned by {@link #glXGetFBConfigAttribSGIX} (when {@code attribute} is set to {@link #GLX_RENDER_TYPE_SGIX}) and accepted by the {@code attrib_list}
-		parameter of {@link #glXChooseFBConfigSGIX} (following the {@link #GLX_RENDER_TYPE_SGIX} token):
+		Returned by ${"GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"RENDER_TYPE_SGIX".link}) and accepted by the {@code attrib_list}
+		parameter of ${"ChooseFBConfigSGIX()".link} (following the ${"RENDER_TYPE_SGIX".link} token):
 		""",
 
 		"RGBA_BIT_SGIX" _ 0x00000001,
@@ -70,7 +70,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	)
 
 	val RenderTypes = IntConstant.block(
-		"Accepted by the {@code render_type} parameter of {@link #glXCreateContextWithConfigSGIX}:",
+		"Accepted by the {@code render_type} parameter of ${"CreateContextWithConfigSGIX()".link}:",
 
 		"RGBA_TYPE_SGIX" _ 0x8014,
 		"COLOR_INDEX_TYPE_SGIX" _ 0x8015

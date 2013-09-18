@@ -6,6 +6,7 @@ package org.lwjgl.system.glfw.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.system.glfw.*
+import org.lwjgl.opengl.*
 
 fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	javaImport (
@@ -348,7 +349,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before a program terminates GLFW should be
 		terminated in order to free any resources allocated during or after initialization.
 
-		If this function fails, it calls {@link #glfwTerminate} before returning. If it succeeds, you should call {@link #glfwTerminate} before the program
+		If this function fails, it calls ${"SetGammaRamp()".link} before returning. If it succeeds, you should call ${"SetGammaRamp()".link} before the program
 		exits.
 
 		Additional calls to this function after successful initialization but before termination will succeed but will do nothing.
@@ -454,7 +455,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns an array of handles for all currently connected monitors. The returned array is valid only until the monitor configuration changes.
 
-        See {@link #glfwSetMonitorCallback} to receive notifications of configuration changes.
+        See ${"SetGammaRamp()".link} to receive notifications of configuration changes.
 		""",
 
 		autoSizeResult _ int_p.OUT("count", "where to store the size of the returned array. This is set to zero if an error occurred.")
@@ -531,7 +532,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"SetGamma",
-		"Generates a 256-element gamma ramp from the specified exponent and then calls {@link #glfwSetGammaRamp} with it.",
+		"Generates a 256-element gamma ramp from the specified exponent and then calls ${"SetGammaRamp()".link} with it.",
 
 		GLFWmonitor.IN("monitor", "monitor whose gamma ramp to set"),
 		float.IN("gamma", "desired exponent")
@@ -568,21 +569,21 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	val WindowHint = void.func(
 		"WindowHint",
 		"""
-		Sets hints for the next call to {@link #glfwCreateWindow}. The hints, once set, retain their values until changed by a call to glfwWindowHint or
-		{@link #glfwDefaultWindowHints}, or until the library is terminated with {@link #glfwTerminate}.
+		Sets hints for the next call to ${"CreateWindow()".link}. The hints, once set, retain their values until changed by a call to glfwWindowHint or
+		${"DefaultWindowHints()".link}, or until the library is terminated with ${"Terminate()".link}.
         
         Some window hints are hard constraints. These must match the available capabilities <em>exactly</em> for window creation to succeed. Hints that are not
         hard constraints are matched as closely as possible, but the resulting window may differ from what these hints requested. To find out the actual
-        parameters of the created window, use the {@link #glfwGetWindowAttrib} function.
+        parameters of the created window, use the ${"GetWindowAttrib()".link} function.
         
         Hints that do not apply to a given type of window are ignored.
 
         Window hints:
         
-        The {@link #GLFW_RESIZABLE} hint specifies whether the window will be resizable by the user. The window will still be resizable using the
-        {@link #glfwSetWindowSize} function. This hint is ignored for fullscreen windows.
+        The ${"RESIZABLE".link} hint specifies whether the window will be resizable by the user. The window will still be resizable using the
+        ${"SetWindowSize()".link} function. This hint is ignored for fullscreen windows.
         
-        The {@link #GLFW_VISIBLE} hint specifies whether the window will be initially visible. This hint is ignored for fullscreen windows.
+        The ${"VISIBLE".link} hint specifies whether the window will be initially visible. This hint is ignored for fullscreen windows.
         
         Note: This function may only be called from the main thread.
 		""",
@@ -604,7 +605,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
         To create a full screen window, you need to specify the monitor to use. If no monitor is specified, windowed mode will be used. Unless you have a way
         for the user to choose a specific monitor, it is recommended that you pick the primary monitor.
 
-        To create the window at a specific position, make it initially invisible using the {@link #GLFW_VISIBLE} window hint, set its position and then show it.
+        To create the window at a specific position, make it initially invisible using the ${"VISIBLE".link} window hint, set its position and then show it.
 
         If a full screen window is active, the screensaver is prohibited from starting.
 
@@ -683,7 +684,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		If the specified window is a full screen window, this function does nothing.
 
-        If you wish to set an initial window position you should create a hidden window (using $WindowHint and {@link #GLFW_VISIBLE}, set its
+        If you wish to set an initial window position you should create a hidden window (using $WindowHint and ${"VISIBLE".link}, set its
         position and then show it.
 
         Notes:
@@ -796,11 +797,11 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns an attribute of the specified window.
         ${ul(
-			"The {@link #GLFW_FOCUSED} attribute indicates whether the window is focused.",
-			"The {@link #GLFW_ICONIFIED} attribute indicates whether the window is iconified.",
-			"The {@link #GLFW_VISIBLE} attribute indicates whether the window is visible.",
-			"The {@link #GLFW_RESIZABLE} attribute indicates whether the window is resizable by the user.",
-			"The {@link #GLFW_DECORATED} attribute indicates whether the window is decorated."
+			"The ${"FOCUSED".link} attribute indicates whether the window is focused.",
+			"The ${"ICONIFIED".link} attribute indicates whether the window is iconified.",
+			"The ${"VISIBLE".link} attribute indicates whether the window is visible.",
+			"The ${"RESIZABLE".link} attribute indicates whether the window is resizable by the user.",
+			"The ${"DECORATED".link} attribute indicates whether the window is decorated."
 		)}
 		""",
 
@@ -823,9 +824,11 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		GLFWwindow.IN("window", "window whose pointer to return")
 	)
 
+	val WindowCallbackSet = "{@link WindowCallback#set(long, WindowCallback, java.util.EnumSet) WindowCallback.set}"
+
 	GLFWwindowposfun.func(
 		"SetWindowPosCallback",
-		"Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
+		"Sets the position callback for the specified window. See $WindowCallbackSet.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
@@ -833,7 +836,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	GLFWwindowsizefun.func(
 		"SetWindowSizeCallback",
-		"Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.",
+		"Sets the size callback for the specified window. See $WindowCallbackSet.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
@@ -843,9 +846,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"SetWindowCloseCallback",
 		"""
 		Sets the close callback of the specified window, which is called when the user attempts to close the window, for example by clicking the close widget in
-		the title bar. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		the title bar. See $WindowCallbackSet.
 
-		The close flag is set before this callback is called, but you can modify it at any time with {@link #glfwSetWindowShouldClose}.
+		The close flag is set before this callback is called, but you can modify it at any time with ${"SetWindowShouldClose()".link}.
 
         The close callback is not triggered by $DestroyWindow.
 
@@ -859,7 +862,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindowrefreshfun.func(
 		"SetWindowRefreshCallback",
 		"""
-		Sets the refresh callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the refresh callback for the specified window. See $WindowCallbackSet.
 
 		This callback is called when the client area of the window needs to be redrawn, for example if the window has been exposed after having been covered by
 		another window.
@@ -875,7 +878,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindowfocusfun.func(
 		"SetWindowFocusCallback",
 		"""
-		Sets the focus callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the focus callback for the specified window. See $WindowCallbackSet.
 
 		This callback is called when the window gains or loses focus.
 		""",
@@ -887,7 +890,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindowiconifyfun.func(
 		"SetWindowIconifyCallback",
 		"""
-		Sets the iconify callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the iconify callback for the specified window. See $WindowCallbackSet.
 
 		This callback is called when the window is iconified or restored.
 		""",
@@ -901,7 +904,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets the framebuffer resize callback of the specified window, which is called when the framebuffer of the specified window is resized.
 
-		See {@link WindowCallback#set(long, WindowCallback, int)}
+		See $WindowCallbackSet
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -953,7 +956,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Returns the value of an input option for the specified window",
 
 		GLFWwindow.IN("window", "window to query"),
-		int.IN("mode", "One of {@link #GLFW_CURSOR}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}")
+		int.IN("mode", "One of ${"CURSOR".link}, ${"STICKY_KEYS".link} or ${"STICKY_MOUSE_BUTTONS".link}")
 	)
 
 	void.func(
@@ -961,41 +964,41 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets an input option for the specified window
 		
-		If mode is {@link #GLFW_CURSOR}, the value must be one of the supported input modes:
+		If mode is ${"CURSOR".link}, the value must be one of the supported input modes:
         ${ul(
-			"{@link #GLFW_CURSOR_NORMAL} makes the cursor visible and behaving normally.",
-			"{@link #GLFW_CURSOR_HIDDEN} makes the cursor invisible when it is over the client area of the window.",
-			"{@link #GLFW_CURSOR_DISABLED} disables the cursor and removes any limitations on cursor movement."
+			"${"CURSOR_NORMAL".link} makes the cursor visible and behaving normally.",
+			"${"CURSOR_HIDDEN".link} makes the cursor invisible when it is over the client area of the window.",
+			"${"CURSOR_DISABLED".link} disables the cursor and removes any limitations on cursor movement."
 		)}
 
-        If mode is {@link #GLFW_STICKY_KEYS}, the value must be either {@link GL11#GL_TRUE} to enable sticky keys, or {@link GL11#GL_FALSE} to disable it. If
-        sticky keys are enabled, a key press will ensure that {@link #glfwGetKey} returns {@link #GLFW_PRESS} the next time it is called even if the key had
+        If mode is ${"STICKY_KEYS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky keys, or ${"GL11".linkGL("FALSE")} to disable it. If
+        sticky keys are enabled, a key press will ensure that ${"GetKey()".link} returns ${"PRESS".link} the next time it is called even if the key had
         been released before the call.
          
-        If mode is {@link #GLFW_STICKY_MOUSE_BUTTONS}, the value must be either {@link GL11#GL_TRUE} to enable sticky mouse buttons, or {@link GL11#GL_FALSE} to
-        disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that {@link #glfwGetMouseButton} returns {@link #GLFW_PRESS} the next
+        If mode is ${"STICKY_MOUSE_BUTTONS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky mouse buttons, or ${"GL11".linkGL("FALSE")} to
+        disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that ${"GetMouseButton()".link} returns ${"PRESS".link} the next
         time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
         been pressed but not when or in which order.
 		""",
 
 		GLFWwindow.IN("window", "window whose input mode to set"),
-		int.IN("mode", "One of {@link #GLFW_CURSOR}, {@link #GLFW_STICKY_KEYS} or {@link #GLFW_STICKY_MOUSE_BUTTONS}"),
+		int.IN("mode", "One of ${"CURSOR".link}, ${"STICKY_KEYS".link} or ${"STICKY_MOUSE_BUTTONS".link}"),
 		int.IN("value", "new value of the specified input mode")
 	)
 
 	int.func(
 		"GetKey",
 		"""
-		Returns the last state reported for the specified key to the specified window. The returned state is one of {@link #GLFW_PRESS} or
-		{@link #GLFW_RELEASE}. The higher-level state {@link #GLFW_REPEAT} is only reported to the key callback.
+		Returns the last state reported for the specified key to the specified window. The returned state is one of ${"PRESS".link} or
+		${"RELEASE".link}. The higher-level state ${"REPEAT".link} is only reported to the key callback.
         
-        If the {@link #GLFW_STICKY_KEYS} input mode is enabled, this function returns {@link #GLFW_PRESS} the first time you call this function after a key has
+        If the ${"STICKY_KEYS".link} input mode is enabled, this function returns ${"PRESS".link} the first time you call this function after a key has
         been pressed, even if the key has already been released.
         
         The key functions deal with physical keys, with tokens named after their use on the standard US keyboard layout. If you want to input text, use the
         Unicode character callback instead.
 
-        Note: {@link #GLFW_KEY_UNKNOWN} is not a valid key for this function.
+        Note: ${"KEY_UNKNOWN".link} is not a valid key for this function.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
@@ -1007,8 +1010,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
         Returns the last state reported for the specified mouse button to the specified window.
         
-        If the {@link #GLFW_STICKY_MOUSE_BUTTONS} input mode is enabled, this function
-        returns {@link #GLFW_PRESS} the first time you call this function after a mouse
+        If the ${"STICKY_MOUSE_BUTTONS".link} input mode is enabled, this function
+        returns ${"PRESS".link} the first time you call this function after a mouse
         button has been pressed, even if the mouse button has already been released.		
 		""",
 
@@ -1021,7 +1024,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns the last reported position of the cursor to the specified window.
 
-		If the cursor is disabled (with {@link #GLFW_CURSOR_DISABLED}) then the cursor position is unbounded and limited only by the minimum and maximum values
+		If the cursor is disabled (with ${"CURSOR_DISABLED".link}) then the cursor position is unbounded and limited only by the minimum and maximum values
 		of a <strong>double</strong>.
 
         The coordinate can be converted to their integer equivalents with the {@link Math#floor} function. Casting directly to an integer type works for
@@ -1039,7 +1042,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the position of the cursor. The specified window must be focused. If the window does not have focus when this function is called, it fails
 		silently.
 
-		If the cursor is disabled (with {@link #GLFW_CURSOR_DISABLED}) then the cursor position is unbounded and limited only by the minimum and maximum values
+		If the cursor is disabled (with ${"CURSOR_DISABLED".link}) then the cursor position is unbounded and limited only by the minimum and maximum values
 		of a <strong>double</strong>.
 		""",
 
@@ -1051,18 +1054,18 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWkeyfun.func(
 		"SetKeyCallback",
 		"""
-		Sets the key callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the key callback. See $WindowCallbackSet.
 
 		The key callback deals with physical keys, with key tokens named after their use on the standard US keyboard layout. If you want to input text, use the
 		Unicode character callback instead.
 
 		When a window loses focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated events by
-		the fact that the synthetic ones are generated after the window has lost focus, i.e. {@link #GLFW_FOCUSED} will be false and the focus callback will
+		the fact that the synthetic ones are generated after the window has lost focus, i.e. ${"FOCUSED".link} will be false and the focus callback will
 		have already been called.
 
 		The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
-		a GLFW key token. Such keys have {@code key} set to {@link #GLFW_KEY_UNKNOWN}, their state is not saved and so it cannot be retrieved with
-		{@link #glfwGetKey}.
+		a GLFW key token. Such keys have {@code key} set to ${"KEY_UNKNOWN".link}, their state is not saved and so it cannot be retrieved with
+		${"GetKey()".link}.
 
 		Sometimes GLFW needs to generate synthetic key events, in which case the scancode may be zero.
 		""",
@@ -1074,7 +1077,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWcharfun.func(
 		"SetCharCallback",
 		"""
-		Sets the Unicode character callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the Unicode character callback. See $WindowCallbackSet.
 
 		The Unicode character callback is for text input. If you want to know whether a specific key was pressed or released, use the key callback.
 		""",
@@ -1085,7 +1088,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	GLFWmousebuttonfun.func(
 		"SetMouseButtonCallback",
-		"Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
+		"Sets the mouse button callback. See $WindowCallbackSet.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
@@ -1094,7 +1097,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWcursorposfun.func(
 		"SetCursorPosCallback",
 		"""
-		Sets the cursor position callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the cursor position callback. See $WindowCallbackSet.
 
 		The position is relative to the upper-left corner of the client area of the window.
 		""",
@@ -1105,7 +1108,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	GLFWcursorenterfun.func(
 		"SetCursorEnterCallback",
-		"Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCallback, int)}.",
+		"Sets the cursor enter/exit callback. See $WindowCallbackSet.",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
 		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL if no callback was set or an error occurred")
@@ -1114,7 +1117,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWscrollfun.func(
 		"SetScrollCallback",
 		"""
-		Sets the scroll callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+		Sets the scroll callback. See $WindowCallbackSet.
 
 		This receives all scrolling input, like that from a mouse wheel or a touchpad scrolling area.
 		""",
@@ -1224,14 +1227,14 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Values for the {@link #GLFW_CLIENT_API} hint.",
+		"Values for the ${"CLIENT_API".link} hint.",
 
 		"OPENGL_API" _ 0x00030001,
 		"OPENGL_ES_API" _ 0x00030002
 	)
 
 	IntConstant.block(
-		"Values for the {@link #GLFW_CONTEXT_ROBUSTNESS} hint.",
+		"Values for the ${"CONTEXT_ROBUSTNESS".link} hint.",
 
 		"NO_ROBUSTNESS" _ 0,
 		"NO_RESET_NOTIFICATION" _ 0x00031001,
@@ -1239,7 +1242,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Values for the {@link #GLFW_OPENGL_PROFILE} hint.",
+		"Values for the ${"OPENGL_PROFILE".link} hint.",
 
 		"OPENGL_ANY_PROFILE" _ 0,
 		"OPENGL_CORE_PROFILE" _ 0x00032001,
@@ -1279,7 +1282,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Contexts that support either of the {@code WGL_EXT_swap_control_tear} and {@code GLX_EXT_swap_control_tear} extensions also accept negative swap
 		intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions using
-		{@link #glfwExtensionSupported}. For more information about swap tearing, see the extension specifications.
+		${"ExtensionSupported()".link}. For more information about swap tearing, see the extension specifications.
 
 		Some GPU drivers do not honor the requested swap interval, either because of user settings that override the request or due to bugs in the driver.
 

@@ -14,7 +14,7 @@ fun amd_device_persistent_memory() = "AMDDevicePersistentMemory".nativeClassCL("
 	IntConstant.block(
 		"""
 		{@code cl_mem_flags} bit. Buffers and images allocated with this flag reside in host-visible device memory. This flag is mutually exclusive with the
-		flags {@link CL10#CL_MEM_ALLOC_HOST_PTR} and {@link Cl10#CL_MEM_USE_HOST_PTR}.
+		flags ${"CL10".link("MEM_ALLOC_HOST_PTR")} and ${"CL10".link("MEM_USE_HOST_PTR")}.
 		""",
 
 		"MEM_USE_PERSISTENT_MEM_AMD".expr<Int>("1 << 6")

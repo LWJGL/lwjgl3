@@ -15,7 +15,7 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/SGIX/pbuffer.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/pbuffer.txt", templateName)} extension.
 
 		This extension defines pixel buffers (GLXPbuffers, or pbuffer for short). GLXPbuffers are additional non-visible rendering buffers for an OpenGL
 		renderer.
@@ -23,7 +23,7 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link GLXSGIXFBConfig#glXGetFBConfigAttribSGIX}:",
+		"Accepted by the {@code attribute} parameter of ${"GLXSGIXFBConfig".link("GetFBConfigAttribSGIX()")}:",
 
 		"MAX_PBUFFER_WIDTH_SGIX" _ 0x8016,
 		"MAX_PBUFFER_HEIGHT_SGIX" _ 0x8017,
@@ -34,23 +34,23 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 
 	IntConstant.block(
 		"""
-		Returned by {@link GLXSGIXFBConfig#glXGetFBConfigAttribSGIX} (when {@code attribute} is set to {@link GLXSGIXFBConfig#GLX_DRAWABLE_TYPE_SGIX}) and
-		accepted by the {@code attrib_list} parameter of {@link GLXSGIXFBConfig#glXChooseFBConfigSGIX} (following the
-		{@link GLXSGIXFBConfig#GLX_DRAWABLE_TYPE_SGIX} token):
+		Returned by ${"GLXSGIXFBConfig".link("GetFBConfigAttribSGIX()")} (when {@code attribute} is set to ${"GLXSGIXFBConfig".link("DRAWABLE_TYPE_SGIX")}) and
+		accepted by the {@code attrib_list} parameter of ${"GLXSGIXFBConfig".link("ChooseFBConfigSGIX()")} (following the
+		${"GLXSGIXFBConfig".link("DRAWABLE_TYPE_SGIX")} token):
 		""",
 
 		"PBUFFER_BIT_SGIX" _ 0x00000004
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attrib_list} parameter of {@link #glXCreateGLXPbufferSGIX} and by the {@code attribute} parameter of {@link #glXQueryGLXPbufferSGIX}:",
+		"Accepted by the {@code attrib_list} parameter of ${"CreateGLXPbufferSGIX()".link} and by the {@code attribute} parameter of ${"QueryGLXPbufferSGIX()".link}:",
 
 		"PRESERVED_CONTENTS_SGIX" _ 0x801B,
 		"LARGEST_PBUFFER_SGIX" _ 0x801C
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of {@link #glXQueryGLXPbufferSGIX}:",
+		"Accepted by the {@code attribute} parameter of ${"QueryGLXPbufferSGIX()".link}:",
 
 		"WIDTH_SGIX" _ 0x801D,
 		"HEIGHT_SGIX" _ 0x801E,
@@ -58,7 +58,7 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code mask} parameter of {@link #glXSelectEventSGIX} and returned in the {@code mask} parameter of #glXGetSelectedEventSGIX}:",
+		"Accepted by the {@code mask} parameter of ${"SelectEventSGIX()".link} and returned in the {@code mask} parameter of ${"GetSelectedEventSGIX()".link}:",
 
 		"BUFFER_CLOBBER_MASK_SGIX" _ 0x08000000
 	)

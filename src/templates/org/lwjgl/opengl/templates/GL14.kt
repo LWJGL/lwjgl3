@@ -77,7 +77,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"BlendEquation",
 		"Controls the blend equations used for per-fragment blending.",
 
-		GLenum.IN("mode", "the blend equation", "#GL_FUNC_ADD #GL_FUNC_SUBTRACT #GL_FUNC_REVERSE_SUBTRACT #GL_MIN #GL_MAX")
+		GLenum.IN("mode", "the blend equation", "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX")
 	)
 
 	// EXT_blend_subtract
@@ -199,7 +199,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"GL30#GL_HALF_FLOAT GL11#GL_FLOAT GL11#GL_DOUBLE"
+			"GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the fog coordinate array data")
@@ -227,7 +227,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		GLsizei_p.IN("count", "an array of the elements counts"),
-		GLenum.IN("type", "the type of the values in indices", "GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"),
+		GLenum.IN("type", "the type of the values in indices", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
 		const _ GLvoid_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices") _ GLsizei.IN("primcount", "the size of the {@code count} array")
 	)
@@ -342,13 +342,13 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"SecondaryColorPointer",
 		"Specifies the location and organization of a secondary color array.",
 
-		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 GL12#BGRA"),
 		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"""
-			GL11#GL_BYTE GL11#GL_UNSIGNED_BYTE GL11#GL_SHORT GL11#GL_UNSIGNED_SHORT GL11#GL_INT GL11#GL_UNSIGNED_INT GL30#GL_HALF_FLOAT GL11#GL_FLOAT
-			GL11#GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV
+			GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT
+			GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV
 			"""
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),

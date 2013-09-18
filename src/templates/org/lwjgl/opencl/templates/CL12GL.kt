@@ -47,35 +47,35 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 			"an OpenCL 3D image object from an OpenGL 3D texture object."
 		)}
 
-		If the state of a GL texture object is modified through the GL API (e.g. {@link GL11#glTexImage2D}, {@link GL12#glTexImage3D} or the values of the
-		texture parameters {@link GL12#GL_TEXTURE_BASE_LEVEL} or {@link GL12#GL_TEXTURE_MAX_LEVEL} are modified) while there exists a corresponding CL image
+		If the state of a GL texture object is modified through the GL API (e.g. ${"GL11".linkGL("TexImage2D()")}, ${"GL12".linkGL("TexImage3D()")} or the values of the
+		texture parameters ${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image
 		object, subsequent use of the CL image object will result in undefined behavior.
 
-		The {@link CL10#clRetainMemObject} and {@link CL10#clReleaseMemObject} functions can be used to retain and release the image objects.
+		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
 		cl_mem_flags.IN(
 			"flags",
 			"a bit-field that is used to specify usage information",
-			"CL10#CL_MEM_READ_ONLY CL10#CL_MEM_WRITE_ONLY CL10#CL_MEM_READ_WRITE"
+			"CL10#MEM_READ_ONLY CL10#MEM_WRITE_ONLY CL10#MEM_READ_WRITE"
 		),
 		GLenum.IN(
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
 			"""
 			GL11#GL_TEXTURE_1D GL30#GL_TEXTURE_1D_ARRAY GL31#GL_TEXTURE_BUFFER
-		    GL11#GL_TEXTURE_2D GL30#GL_TEXTURE_2D_ARRAY, GL12#GL_TEXTURE_3D
+		    GL11#GL_TEXTURE_2D GL30#GL_TEXTURE_2D_ARRAY GL12#GL_TEXTURE_3D
 		    GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
 		    GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
 		    GL31#GL_TEXTURE_RECTANGLE
-		    """
+		    """.toConstantLinks()
 		),
 		GLint.IN(
 			"miplevel",
 			"""
-			the mipmap level to be used. Implementations may return {@link CL10#CL_INVALID_OPERATION} for {@code miplevel} values &gt; 0. If
-			{@code texture_target} is {@link GL31#GL_TEXTURE_BUFFER}, {@code miplevel} must be 0.
+			the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0. If
+			{@code texture_target} is ${"GL31".linkGL("TEXTURE_BUFFER")}, {@code miplevel} must be 0.
 			"""
 		),
 		GLuint.IN(
@@ -91,28 +91,28 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 
 		returnDoc =
 		"""
-		a valid non-zero OpenCL image object and $errcode_ret is set to $CL_SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
 		value with one of the following error values returned in $errcode_ret:
 		${ul(
-			"{@link CL10#CL_INVALID_CONTEXT} if {@code context} is not a valid context or was not created from a GL context.",
+			"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
 			"""
-			{@link CL10#CL_INVALID_VALUE} if values specified in {@code flags} are not valid or if value specified in {@code texture_target} is not one of the
+			$INVALID_VALUE if values specified in {@code flags} are not valid or if value specified in {@code texture_target} is not one of the
 			values specified in the description of {@code texture_target}.
 			""",
 			"""
-			{@link #CL_INVALID_MIP_LEVEL} if {@code miplevel} is less than the value of {@code level}<sub>base</sub> (for OpenGL implementations) or zero (for
+			$INVALID_MIP_LEVEL if {@code miplevel} is less than the value of {@code level}<sub>base</sub> (for OpenGL implementations) or zero (for
 			OpenGL ES implementations); or greater than the value of {@code q} (for both OpenGL and OpenGL ES).
 			""",
 			"""
-			{@link #CL_INVALID_MIP_LEVEL} if {@code miplevel} is greather than zero and the OpenGL implementation does not support creating from non-zero mipmap
+			$INVALID_MIP_LEVEL if {@code miplevel} is greather than zero and the OpenGL implementation does not support creating from non-zero mipmap
 			levels.
 			""",
 			"""
-			{@link #CL_INVALID_GL_OBJECT} if {@code texture} is not a GL texture object whose type matches {@code texture_target}, if the specified {@code miplevel}
+			$INVALID_GL_OBJECT if {@code texture} is not a GL texture object whose type matches {@code texture_target}, if the specified {@code miplevel}
 			of texture is not defined, or if the width or height of the specified {@code miplevel} is zero.
 			""",
-			"{@link CL10#CL_INVALID_IMAGE_FORMAT_DESCRIPTOR} if the OpenGL texture internal format does not map to a supported OpenCL image format.",
-			"{@link CL10#CL_INVALID_OPERATION} if {@code texture} is a GL texture object created with a border width value greater than zero.",
+			"$INVALID_IMAGE_FORMAT_DESCRIPTOR if the OpenGL texture internal format does not map to a supported OpenCL image format.",
+			"$INVALID_OPERATION if {@code texture} is a GL texture object created with a border width value greater than zero.",
 			OORE,
 			OOHME
 		)}

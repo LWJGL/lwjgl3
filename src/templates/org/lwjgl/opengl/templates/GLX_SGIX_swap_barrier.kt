@@ -19,7 +19,7 @@ fun GLX_SGIX_swap_barrier() = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/SGIX/swap_barrier.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/swap_barrier.txt", templateName)} extension.
 
 		This extension provides the capability to sychronize the buffer swaps of different swap groups.
 		"""

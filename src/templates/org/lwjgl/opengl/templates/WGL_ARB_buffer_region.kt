@@ -15,7 +15,7 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_buffer_region.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_buffer_region.txt", templateName)} extension.
 
 		The buffer region extension is a mechanism that allows an area of an OpenGL window to be saved in off-screen memory for quick restores. The off-screen
 		memory can either be frame buffer memory or system memory, although frame buffer memory might offer optimal performance.
@@ -40,7 +40,7 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 	        a bitwise OR of any of the following values indicating which buffers can be saved or restored.  Multiple bits can be set and may result in better
 	        performance if multiple buffers are saved or restored.
 	        """,
-			"#WGL_FRONT_COLOR_BUFFER_BIT_ARB #WGL_BACK_COLOR_BUFFER_BIT_ARB #WGL_DEPTH_BUFFER_BIT_ARB #WGL_STENCIL_BUFFER_BIT_ARB"
+			"#FRONT_COLOR_BUFFER_BIT_ARB #BACK_COLOR_BUFFER_BIT_ARB #DEPTH_BUFFER_BIT_ARB #STENCIL_BUFFER_BIT_ARB"
 		)
 	).javaDocLink
 

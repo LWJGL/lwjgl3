@@ -16,7 +16,7 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_pbuffer.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pbuffer.txt", templateName)} extension.
 
 		This extension defines pixel buffers (pbuffer for short). Pbuffers are additional non-visible rendering buffers for an OpenGL renderer. Pbuffers are
 		equivalent to a window that has the same pixel format descriptor with the following exceptions:
@@ -39,14 +39,14 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		"""
 	)
 
-	val wglGetPixelFormatAttribiARB = "{@link WGLARBPixelFormat#wglGetPixelFormatAttribiARB}"
+	val wglGetPixelFormatAttribiARB = "${"WGLARBPixelFormat".link("GetPixelFormatAttribiARB()")}"
 
 	val wglCreatePbufferARB = HPBUFFERARB.func(
 		"CreatePbufferARB",
 		"""
 	    Creates a pixel buffer (pbuffer) and returns a handle to it.
 
-		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the {@link #WGL_DRAW_TO_PBUFFER_ARB}
+		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the ${"DRAW_TO_PBUFFER_ARB".link}
 		attribute to determine which pixel formats support the creation of pbuffers.
 	    """,
 
@@ -92,13 +92,13 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		"Queries an attribute associated with a specific pbuffer.",
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-		int.IN("attribute", "the attribute to query", "#WGL_PBUFFER_WIDTH_ARB #WGL_PBUFFER_HEIGHT_ARB #WGL_PBUFFER_LOST_ARB"),
+		int.IN("attribute", "the attribute to query", "#PBUFFER_WIDTH_ARB #PBUFFER_HEIGHT_ARB #PBUFFER_LOST_ARB"),
 		Check(1) _ int_p.IN("value", "the attribute value")
 	).javaDocLink
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attribIList} parameter of {@link WGLARBPixelFormat#wglChoosePixelFormatARB} and the {@code attributes} parameter of
+		Accepted by the {@code attribIList} parameter of ${"WGLARBPixelFormat".link("ChoosePixelFormatARB()")} and the {@code attributes} parameter of
 		$wglGetPixelFormatAttribiARB.
 		""",
 

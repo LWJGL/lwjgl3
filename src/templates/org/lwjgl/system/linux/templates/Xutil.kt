@@ -57,7 +57,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"XLookupString",
 		"""
 	    Translates a key event to a {@code KeySym} and a string. The {@code KeySym} is obtained by using the standard interpretation of the Shift, Lock, group,
-	    and numlock modifiers as defined in the X Protocol specification. If the {@code KeySym} has been rebound (see {@link Xlib#XRebindKeysym}), the bound
+	    and numlock modifiers as defined in the X Protocol specification. If the {@code KeySym} has been rebound (see ${"Xlib".link("XRebindKeysym()")}), the bound
 	    string will be stored in the buffer. Otherwise, the {@code KeySym} is mapped, if possible, to an ISO Latin-1 character or (if the Control modifier is
 	    on) to an ASCII control character, and that character is stored in the buffer. {@code XLookupString} returns the number of characters that are stored
 	    in the buffer.
@@ -67,7 +67,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		program must pass $NULL for this argument.
 
 		{@code XLookupString} depends on the cached keyboard information mentioned in the previous section, so it is necessary to use
-		{@link Xlib#XRefreshKeyboardMapping} to keep this information up-to-date.
+		${"Xlib".link("XRefreshKeyboardMapping()")} to keep this information up-to-date.
 	    """,
 
 		XKeyEvent_p.IN("event_struct", "specifies the {@link XKeyEvent} structure to be used."),
@@ -81,7 +81,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"XAllocWMHints",
 		"""
 	    Allocates and returns a pointer to a {@link XWMHints} structure. Note that all fields in the {@link XWMHints} structure are initially set to zero. If
-	    insufficient memory is available, {@code XAllocWMHints} returns $NULL. To free the memory allocated to this structure, use {@link Xlib#XFree}.
+	    insufficient memory is available, {@code XAllocWMHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib".link("XFree()")}.
 	    """
 	)
 
@@ -89,7 +89,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"XAllocSizeHints",
 		"""
 	    Allocates and returns a pointer to a {@link XSizeHints} structure. Note that all fields in the {@link XSizeHints} structure are initially set to zero.
-	    If insufficient memory is available, {@code XAllocSizeHints} returns $NULL. To free the memory allocated to this structure, use {@link Xlib#XFree}.
+	    If insufficient memory is available, {@code XAllocSizeHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib".link("XFree()")}.
 	    """
 	)
 

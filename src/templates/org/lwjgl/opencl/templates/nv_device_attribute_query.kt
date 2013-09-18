@@ -39,17 +39,17 @@ fun nv_device_attribute_query() = "NVDeviceAttributeQuery".nativeClassCL("nv_dev
 	)
 
 	IntConstant.block(
-		"Returns {@link CL10#CL_TRUE} if the device can concurrently copy memory between host and device while executing a kernel, or {@link CL10#CL_FALSE} if not.",
+		"Returns $TRUE if the device can concurrently copy memory between host and device while executing a kernel, or $FALSE if not.",
 		"DEVICE_GPU_OVERLAP_NV" _ 0x4004
 	)
 
 	IntConstant.block(
-		"Returns {@link CL10#CL_TRUE} if there is a run time limit for kernels executed on the device, or {@link CL10#CL_FALSE} if not.",
+		"Returns $TRUE if there is a run time limit for kernels executed on the device, or $FALSE if not.",
 		"DEVICE_KERNEL_EXEC_TIMEOUT_NV" _ 0x4005
 	)
 
 	IntConstant.block(
-		"Returns {@link CL10#CL_TRUE} if the device is integrated with the memory subsystem, or {@link CL10#CL_FALSE} if not.",
+		"Returns $TRUE if the device is integrated with the memory subsystem, or $FALSE if not.",
 		"DEVICE_INTEGRATED_MEMORY_NV" _ 0x4006
 	)
 

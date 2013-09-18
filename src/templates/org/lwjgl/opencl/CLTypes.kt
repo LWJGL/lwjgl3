@@ -151,7 +151,7 @@ val cl_image_desc_p = StructType(cl_image_desc)
 
 val cl_bus_address_amd = StructType(
 	struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
-		javaDoc("Used in {@link AMDBusAddressableMemory#clEnqueueMakeBuffersResidentAMD}.")
+		javaDoc("Used in ${"AMDBusAddressableMemory".linkCL("EnqueueMakeBuffersResidentAMD()")}.")
 		nativeImport("OpenCL.h")
 		cl_ulong.member("surface_bus_address")
 		cl_ulong.member("marker_bus_address")
@@ -168,7 +168,7 @@ fun config() {
 	}
 
 	struct(OPENCL_PACKAGE, "cl_device_topology_amd") {
-		javaDoc("The struct returned by {@link CL10#clGetDeviceInfo} with {@code param_name} set to {@link AMDDeviceTopology#CL_DEVICE_TOPOLOGY_AMD}.")
+		javaDoc("The struct returned by ${"CL10".linkCL("GetDeviceInfo()")} with {@code param_name} set to ${"AMDDeviceTopology".linkCL("DEVICE_TOPOLOGY_AMD")}.")
 		nativeImport("OpenCL.h")
 		struct {
 			cl_uint.member("type")

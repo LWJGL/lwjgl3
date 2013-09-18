@@ -12,7 +12,7 @@ fun amd_device_profiling_timer_offset() = "AMDDeviceProfilingTimerOffset".native
 	javaDoc("Native bindings to the $extensionName extension.")
 
 	IntConstant.block(
-		"Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo}. Returns the offset in nanoseconds between event timestamps.",
+		"Accepted as the {@code param_name} parameter of ${"CL10".link("GetDeviceInfo()")}. Returns the offset in nanoseconds between event timestamps.",
 
 		"DEVICE_PROFILING_TIMER_OFFSET_AMD" _ 0x4036
 	)

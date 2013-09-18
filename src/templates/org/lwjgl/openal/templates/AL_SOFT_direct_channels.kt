@@ -16,7 +16,7 @@ fun AL_SOFT_direct_channels() = "SOFTDirectChannels".nativeClassAL("SOFT_direct_
 	javaDoc("bindings to AL_SOFT_direct_channels extension.")
 
 	IntConstant.block(
-		"Accepted by the @{code paramName} parameter of alSourcei, alSourceiv, alGetSourcei, and alGetSourceiv.",
+		"Accepted by the {@code paramName} parameter of alSourcei, alSourceiv, alGetSourcei, and alGetSourceiv.",
 
 		"DIRECT_CHANNELS_SOFT" _ 0x1033
 	)

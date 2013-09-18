@@ -12,7 +12,7 @@ fun GLX_EXT_buffer_age() = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age"
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/glx_buffer_age.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/glx_buffer_age.txt", templateName)} extension.
 
 		The aim of this extension is to expose enough information to applications about how the driver manages the set of front and back buffers associated with
 		a given surface to allow applications to re-use the contents of old frames and minimize how much must be redrawn for the next frame.
@@ -20,7 +20,7 @@ fun GLX_EXT_buffer_age() = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age"
 	)
 
 	IntConstant.block(
-		"Accepted by {@link GLX13#glXQueryDrawable}.",
+		"Accepted by ${"GLX13".link("QueryDrawable()")}.",
 
 		"BACK_BUFFER_AGE_EXT" _ 0x20F4
 	)

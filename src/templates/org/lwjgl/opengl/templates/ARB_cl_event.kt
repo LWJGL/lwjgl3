@@ -18,16 +18,16 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension.")
+	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension.")
 
 	IntConstant.block(
-		"Returned in {@code values} for {@link GL32#glGetSync} {@code pname} {@link GL32#GL_OBJECT_TYPE}.",
+		"Returned in {@code values} for ${"GL32".link("GetSync()")} {@code pname} ${"GL32".linkGL("OBJECT_TYPE")}.",
 
 		"SYNC_CL_EVENT_ARB" _ 0x8240
 	)
 
 	IntConstant.block(
-		"Returned in {@code values} for {@link GL32#glGetSync} {@code pname} {@link GL32#GL_SYNC_CONDITION}.",
+		"Returned in {@code values} for ${"GL32".link("GetSync()")} {@code pname} ${"GL32".linkGL("SYNC_CONDITION")}.",
 
 		"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
 	)
@@ -39,9 +39,9 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		respectively. {@code context} must support sharing with GL, and must have been created with respect to the current GL context, or to a share group
 		including the current GL context.
 
-		The status of such a sync object depends on {@code event}. When the status of {@code event} is {@link CL10#CL_QUEUED}, {@link CL10#CL_SUBMITTED}, or
-		{@link CL10#CL_RUNNING}, the status of the linked sync object will be {@link GL32#GL_UNSIGNALED}. When the status of {@code event} changes to
-		{@link CL1#CL_COMPLETE}, the status of the linked sync object will become {@link GL32#GL_SIGNALED}.
+		The status of such a sync object depends on {@code event}. When the status of {@code event} is ${"CL10".linkCL("QUEUED")}, ${"CL10".linkCL("SUBMITTED")}, or
+		${"CL10".linkCL("RUNNING")}, the status of the linked sync object will be ${"GL32".linkGL("UNSIGNALED")}. When the status of {@code event} changes to
+		${"CL10".linkCL("COMPLETE")}, the status of the linked sync object will become ${"GL32".linkGL("SIGNALED")}.
 
 		Creating a linked sync object places a reference on the linked OpenCL event object. When the sync object is deleted, the reference will be removed from
 		the event object.

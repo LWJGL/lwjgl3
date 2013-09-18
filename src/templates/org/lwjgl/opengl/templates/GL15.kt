@@ -10,15 +10,15 @@ import org.lwjgl.opengl.*
 
 val BUFFER_OBJECT_TARGETS =
 	"""
-	GL15#GL_ARRAY_BUFFER GL15#GL_ELEMENT_ARRAY_BUFFER GL21#GL_PIXEL_PACK_BUFFER GL21#GL_PIXEL_UNPACK_BUFFER GL30#GL_TRANSFORM_FEEDBACK_BUFFER
-	GL31#GL_UNIFORM_BUFFER GL31#GL_TEXTURE_BUFFER GL31#GL_COPY_READ_BUFFER GL31#GL_COPY_WRITE_BUFFER GL40#GL_DRAW_INDIRECT_BUFFER GL42#GL_ATOMIC_COUNTER_BUFFER
-	GL43#GL_DISPATCH_INDIRECT_BUFFER GL43#GL_SHADER_STORAGE_BUFFER
+	GL15#ARRAY_BUFFER GL15#ELEMENT_ARRAY_BUFFER GL21#PIXEL_PACK_BUFFER GL21#PIXEL_UNPACK_BUFFER GL30#TRANSFORM_FEEDBACK_BUFFER
+	GL31#UNIFORM_BUFFER GL31#TEXTURE_BUFFER GL31#COPY_READ_BUFFER GL31#COPY_WRITE_BUFFER GL40#DRAW_INDIRECT_BUFFER GL42#ATOMIC_COUNTER_BUFFER
+	GL43#DISPATCH_INDIRECT_BUFFER GL43#SHADER_STORAGE_BUFFER
 	"""
 
 val QUERY_TARGETS =
 	"""
-	GL15#GL_SAMPLES_PASSED GL30#GL_PRIMITIVES_GENERATED GL30#GL_TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN GL33#GL_TIME_ELAPSED GL33#GL_TIMESTAMP
-	GL33#GL_ANY_SAMPLES_PASSED GL43#GL_ANY_SAMPLES_PASSED_CONSERVATIVE
+	GL15#SAMPLES_PASSED GL30#PRIMITIVES_GENERATED GL30#TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN GL33#TIME_ELAPSED GL33#TIMESTAMP
+	GL33#ANY_SAMPLES_PASSED GL43#ANY_SAMPLES_PASSED_CONSERVATIVE
 	"""
 
 fun GL15() = "GL15".nativeClassGL("GL15") {
@@ -220,8 +220,8 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"{@link #glMapBuffer(int, int)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"{@link #glMapBuffer(int, int, ByteBuffer)} - Calls {@link #glGetBufferParameteri(int, int)} to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
+			"{@link #glMapBuffer(int, int)} - Calls {@link #glGetBufferParameteri(int, int) glGetBufferParameteri} to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"{@link #glMapBuffer(int, int, ByteBuffer)} - Calls {@link #glGetBufferParameteri(int, int) glGetBufferParameteri} to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
 			"{@link #glMapBuffer(int, int, int, ByteBuffer)} - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
 		)}
 		""",
@@ -262,7 +262,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		GLenum.IN("pname", "the pointer to be returned", "#GL_BUFFER_MAP_POINTER"),
+		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
 		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 

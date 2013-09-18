@@ -9,7 +9,10 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
-	javaImport("org.lwjgl.system.linux.*")
+	javaImport(
+		"org.lwjgl.system.linux.*",
+		"org.lwjgl.system.linux.GLX"
+	)
 
 	nativeImport (
 		"OpenGL.h",
@@ -18,7 +21,7 @@ fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", N
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.
 
 		This extension enables efficient image data transfer between image objects (i.e. textures and renderbuffers) without the need to bind the objects or
 		otherwise configure the rendering pipeline. The GLX version allows copying between images in different contexts, even if those contexts are in different
@@ -29,9 +32,9 @@ fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", N
 	GLvoid.func(
 		"CopyImageSubDataNV",
 		"""
-		Behaves identically to the core function {@link NVCopyImage#glCopyImageSubDataNV}, except that the {@code srcCtx} and {@code dstCtx} parameters specify
+		Behaves identically to the core function ${"NVCopyImage".link("CopyImageSubDataNV()")}, except that the {@code srcCtx} and {@code dstCtx} parameters specify
 		the contexts in which to look up the source and destination objects, respectively. A value of $NULL for either context indicates that the value which is
-		returned by {@link {@link GLX#glXGetCurrentContext}} should be used instead. Both contexts must share the same address space.
+		returned by ${"GLX".link("GetCurrentContext()")} should be used instead. Both contexts must share the same address space.
 		""",
 
 		DISPLAY,

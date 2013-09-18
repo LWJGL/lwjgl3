@@ -377,7 +377,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"{@link #GetSystemMetrics} codes.",
+		"${"GetSystemMetrics()".link} codes.",
 		"SM_CXSCREEN" _ 0,
 		"SM_CYSCREEN" _ 1,
 		"SM_CXVSCROLL" _ 2,
@@ -531,7 +531,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"May be used in {@link #CreateWindowEx} for the x, y, width, height parameters.",
+		"May be used in ${"CreateWindowEx()".link} for the x, y, width, height parameters.",
 		"CW_USEDEFAULT" _ 0x80000000.i
 	)
 
@@ -598,7 +598,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	val WindowLongOffsets = IntConstant.block(
-		"Window field offsets for {@link #GetWindowLong}.",
+		"Window field offsets for ${"GetWindowLongPtr()".link}.",
 		"GWL_WNDPROC" _ -4,
 		"GWL_HINSTANCE" _ -6,
 		"GWL_HWNDPARENT" _ -8,
@@ -609,7 +609,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	).toJavaDocLinks()
 
 	IntConstant.block(
-		"{@link #ShowWindow} commands.",
+		"${"ShowWindow()".link} commands.",
 		"SW_HIDE" _ 0,
 		"SW_SHOWNORMAL" _ 1,
 		"SW_NORMAL" _ 1,
@@ -628,7 +628,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	LongConstant.block(
-		"Virtual window handles used by the {@link #SetWindowPos} insertAfter argument.",
+		"Virtual window handles used by the ${"SetWindowPos()".link} insertAfter argument.",
 		"HWND_TOP" _ 0.L,
 		"HWND_BOTTOM" _ 1.L,
 		"HWND_TOPMOST" _ -1.L,
@@ -636,7 +636,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Window sizing and positiong flags used by the {@link #SetWindowPos} flags argument.",
+		"Window sizing and positiong flags used by the ${"SetWindowPos()".link} flags argument.",
 		"SWP_NOSIZE" _ 0x0001,
 		"SWP_NOMOVE" _ 0x0002,
 		"SWP_NOZORDER" _ 0x0004,
@@ -691,7 +691,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Class field offsets for {@link #GetClassLong}.",
+		"Class field offsets for ${"GetClassLongPtr()".link}.",
 		"GCL_MENUNAME" _ -8,
 		"GCL_HBRBACKGROUND" _ -10,
 		"GCL_HCURSOR" _ -12,
@@ -706,7 +706,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Queue status flags for {@link #GetQueueStatus} and {@link #MsgWaitForMultipleObjects}",
+		"Queue status flags for ${"GetQueueStatus()".link} and ${"MsgWaitForMultipleObjects()".link}",
 		"QS_KEY" _ 0x0001,
 		"QS_MOUSEMOVE" _ 0x0002,
 		"QS_MOUSEBUTTON" _ 0x0004,
@@ -724,7 +724,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Remove message flags for {@link #PeekMessage}.",
+		"Remove message flags for ${"PeekMessage()".link}.",
 		"PM_NOREMOVE" _ 0x0000,
 		"PM_REMOVE" _ 0x0001,
 		"PM_NOYIELD" _ 0x0002,
@@ -742,7 +742,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	).toJavaDocLinks()
 
 	IntConstant.block(
-		"Flags for {@link #ChangeDisplaySettings}.",
+		"Flags for ${"ChangeDisplaySettings()".link}.",
 		"CDS_UPDATEREGISTRY" _ 0x00000001,
 		"CDS_TEST" _ 0x00000002,
 		"CDS_FULLSCREEN" _ 0x00000004,
@@ -759,7 +759,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Return values for {@link #ChangeDisplaySettings}.",
+		"Return values for ${"ChangeDisplaySettings()".link}.",
 		"DISP_CHANGE_SUCCESSFUL" _ 0,
 		"DISP_CHANGE_RESTART" _ 1,
 		"DISP_CHANGE_FAILED" _ -1,
@@ -791,13 +791,13 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Flags for {@link #EnumDisplaySettingsEx}.",
+		"Flags for ${"EnumDisplaySettingsEx()".link}.",
 		"EDS_RAWMODE" _ 0x00000002,
 		"EDS_ROTATEDMODE" _ 0x00000004
 	)
 
 	IntConstant.block(
-		"{@link #SystemParametersInfo} parameters.",
+		"${"SystemParametersInfo()".link} parameters.",
 
 		"SPI_GETBEEP" _ 0x0001,
 		"SPI_SETBEEP" _ 0x0002,
@@ -1037,7 +1037,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"{@link #SystemParametersInfo} flags.",
+		"${"SystemParametersInfo()".link} flags.",
 
 		"SPIF_UPDATEINIFILE" _ 0x0001,
 		"SPIF_SENDWININICHANGE" _ 0x0002,
@@ -1259,7 +1259,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	ATOM.func(
 		"RegisterClassEx",
-		"Registers a window class for subsequent use in calls to the {@link #CreateWindowEx} function.",
+		"Registers a window class for subsequent use in calls to the ${"CreateWindowEx()".link} function.",
 
 		const _ WNDCLASSEX_p.IN(
 			"wndClassEx",
@@ -1275,9 +1275,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"className",
 			"""
 		    a null-terminated string or a class atom. If {@code className} is a string, it specifies the window class name. This class name must have been
-		    registered by a previous call to the {@link #RegisterClass} or {@link #RegisterClassEx} function. System classes, such as dialog box controls,
-		    cannot be unregistered. If this parameter is an atom, it must be a class atom created by a previous call to the {@link #RegisterClass} or
-		    {@link #RegisterClassEx} function. The atom must be in the low-order word of {@code className}; the high-order word must be zero.
+		    registered by a previous call to the ${"RegisterClassEx()".link} function. System classes, such as dialog box controls, cannot be unregistered. If this
+		    parameter is an atom, it must be a class atom created by a previous call to the ${"RegisterClassEx()".link} function. The atom must be in the low-order
+		    word of {@code className}; the high-order word must be zero.
 		    """
 		),
 		HINSTANCE.IN("instance", "a handle to the instance of the module that created the class")
@@ -1297,9 +1297,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPCTSTR.IN(
 			"className",
 			"""
-		    the class name. The name must be that of a preregistered class or a class registered by a previous call to the {@link #RegisterClass} or
-		    {@link #RegisterClassEx} function. Alternatively, this parameter can be a class atom created by a previous call to {@link #RegisterClass} or
-		    {@link #RegisterClassEx}. The atom must be in the low-order word of {@code className}; the high-order word must be zero.
+		    the class name. The name must be that of a preregistered class or a class registered by a previous call to the ${"RegisterClassEx()".link} function.
+		    Alternatively, this parameter can be a class atom created by a previous call to ${"RegisterClassEx()".link}. The atom must be in the low-order word of
+		    {@code className}; the high-order word must be zero.
 		    """
 		),
 		LPWNDCLASSEX.OUT("classEx", "a {@link WNDCLASSEX} structure that receives the information about the class.")
@@ -1359,7 +1359,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
 		DWORD.IN("exStyle", "the extended window style of the window being created"),
-		LPCTSTR.IN("className", "a null-terminated string or a class atom created by a previous call to the {@link #RegisterClass} or {@link #RegisterClassEx} function."),
+		LPCTSTR.IN("className", "a null-terminated string or a class atom created by a previous call to the ${"RegisterClassEx()".link} function."),
 		LPCTSTR.IN("windowName", "the window name. If the window style specifies a title bar, the window title pointed to by {@code windowName} is displayed in the title bar."),
 		DWORD.IN("style", "the style of the window being created"),
 		int.IN("x", "the initial horizontal position of the window"),
@@ -1436,7 +1436,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GetMessage",
 		"""
 		Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
-		retrieval. Unlike GetMessage, the {@link #PeekMessage} function does not wait for a message to be posted before returning.
+		retrieval. Unlike GetMessage, the ${"PeekMessage()".link} function does not wait for a message to be posted before returning.
 		""",
 
 		LPMSG.OUT("msg", "an {@link MSG} structure that receives message information from the thread's message queue"),
@@ -1460,14 +1460,14 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"TranslateMessage",
 		"""
 		Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next
-		time the thread calls the {@link #GetMessage} or @{link #PeekMessage} function.
+		time the thread calls the ${"GetMessage()".link} or ${"PeekMessage()".link} function.
 		""",
 
 		const _ MSG_p.IN(
 			"msg",
 			"""
 			an {@link MSG} structure that contains message information retrieved from the calling thread's message queue by using the
-			{@link #GetMessage} or {@link #PeekMessage} function.
+			${"GetMessage()".link} or ${"PeekMessage()".link} function.
 			"""
 		)
 	)
@@ -1482,7 +1482,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	LRESULT.func(
 		"DispatchMessage",
-		"Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the {@link #GetMessage} function.",
+		"Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the ${"GetMessage()".link} function.",
 
 		const _ MSG_p.IN("msg", "a structure that contains the message")
 	)
@@ -1573,7 +1573,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"deviceName",
 			"""
 			a null-terminated string that specifies the display device about whose graphics mode the function will obtain information. This parameter is either
-			$NULL or a DISPLAY_DEVICE.DeviceName returned from {@link #EnumDisplayDevices}. A $NULL value specifies the current display device on the computer on
+			$NULL or a DISPLAY_DEVICE.DeviceName returned from ${"EnumDisplayDevices()".link}. A $NULL value specifies the current display device on the computer on
 			which the calling thread is running.
 			"""
 		),
@@ -1585,7 +1585,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"EnumDisplaySettingsEx",
 		"""
 		Retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device,
-		make a series of calls to this function. This function differs from {@link #EnumDisplaySettings} in that there is a {@code flags} parameter.
+		make a series of calls to this function. This function differs from ${"EnumDisplaySettings()".link} in that there is a {@code flags} parameter.
 		""",
 
 		LPCTSTR.IN("deviceName", "a null-terminated string that specifies the display device about which graphics mode the function will obtain information"),
@@ -1626,7 +1626,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DWORD.IN("flags", "indicates how the graphics mode should be changed"),
 		nullable _ LPVOID.IN(
 			"param",
-			"if {@code flags} is {@link #CDS_VIDEOPARAMETERS}, {@code param} is a pointer to a {@link VIDEOPARAMETERS} structure. Otherwise {@code param} must be $NULL."
+			"if {@code flags} is ${"CDS_VIDEOPARAMETERS".link}, {@code param} is a pointer to a {@link VIDEOPARAMETERS} structure. Otherwise {@code param} must be $NULL."
 		)
 	)
 
@@ -1652,10 +1652,10 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN(
 			"fWinIni",
 			"""
-		    if a system parameter is being set, specifies whether the user profile is to be updated, and if so, whether the {@link #WM_SETTINGCHANGE} message is
+		    if a system parameter is being set, specifies whether the user profile is to be updated, and if so, whether the ${"WM_SETTINGCHANGE".link} message is
 		    to be broadcast to all top-level windows to notify them of the change.
 
-		    This parameter can be zero if you do not want to update the user profile or broadcast the {@link #WM_SETTINGCHANGE} message.
+		    This parameter can be zero if you do not want to update the user profile or broadcast the ${"WM_SETTINGCHANGE".link} message.
 		    """
 		)
 	)
@@ -1664,7 +1664,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"AdjustWindowRectEx",
 		"""
 	    Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
-	    {@link #CreateWindowEx} function to create a window whose client area is the desired size.
+	    ${"CreateWindowEx()".link} function to create a window whose client area is the desired size.
 	    """,
 
 		LPRECT.IN(
@@ -1675,7 +1675,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		    area.
 		    """
 		),
-		DWORD.IN("style", "the window style of the window whose required size is to be calculated. Note that you cannot specify the {@link #WS_OVERLAPPED} style."),
+		DWORD.IN("style", "the window style of the window whose required size is to be calculated. Note that you cannot specify the ${"WS_OVERLAPPED".link} style."),
 		BOOL.IN("menu", "indicates whether the window has a menu"),
 		DWORD.IN("exStyle", "the extended window style of the window whose required size is to be calculated")
 	)
@@ -1804,7 +1804,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 	BOOL.func(
 		"SetCursorPos",
 		"""
-	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent {@link #ClipCursor}
+	    Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent ${"ClipCursor()".link}
 	    function call, the system automatically adjusts the coordinates so that the cursor stays within the rectangle.
 	    """,
 
@@ -1865,7 +1865,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		BOOL.IN(
 			"show",
 			"""
-			If {@code show} is {@link WinBase#TRUE}, the display count is incremented by one. If {@code show} is {@link WinBase#FALSE}, the display count is
+			If {@code show} is ${"WinBase".link("TRUE")}, the display count is incremented by one. If {@code show} is ${"WinBase".link("FALSE")}, the display count is
 			decremented by one.
 			"""
 		)
@@ -1885,15 +1885,15 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		If your application must set the cursor while it is in a window, make sure the class cursor for the specified window's class is set to $NULL. If the
 		class cursor is not NULL, the system restores the class cursor each time the mouse is moved.
 
-		The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the {@link #ShowCursor}
+		The cursor is not shown on the screen if the internal cursor display count is less than zero. This occurs if the application uses the ${"ShowCursor()".link}
 		function to hide the cursor more times than to show the cursor.
 		""",
 
 		nullable _ HCURSOR.IN(
 			"hCursor",
 			"""
-			a handle to the cursor. The cursor must have been created by the {@link #CreateCursor} function or loaded by the {@link #LoadCursor} or
-			{@link #LoadImage} function. If this parameter is $NULL, the cursor is removed from the screen.
+			a handle to the cursor. The cursor must have been created by the ${"CreateCursor()".link} function or loaded by the ${"LoadCursor()".link} or
+			${"LoadImage()".link} function. If this parameter is $NULL, the cursor is removed from the screen.
 			"""
 		),
 
@@ -1945,8 +1945,8 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SetClipboardData",
 		"""
 	    Places data on the clipboard in a specified clipboard format. The window must be the current clipboard owner, and the application must have called the
-	    {@link #OpenClipboard} function. (When responding to the {@link #WM_RENDERFORMAT} and {@link #WM_RENDERALLFORMATS} messages, the clipboard owner must
-	    not call {@link #OpenClipboard} before calling {@link #SetClipboardData}.)
+	    ${"OpenClipboard()".link} function. (When responding to the ${"WM_RENDERFORMAT".link} and ${"WM_RENDERALLFORMATS".link} messages, the clipboard owner must
+	    not call ${"OpenClipboard()".link} before calling ${"SetClipboardData()".link}.)
 	    """,
 
 		UINT.IN("format", "the clipboard format. This parameter can be a registered format or any of the standard clipboard formats."),
@@ -1954,13 +1954,13 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"hMem",
 			"""
 			a handle to the data in the specified format. This parameter can be $NULL, indicating that the window provides data in the specified clipboard
-			format (renders the format) upon request. If a window delays rendering, it must process the {@link #WM_RENDERFORMAT} and {@link #WM_RENDERALLFORMATS}
+			format (renders the format) upon request. If a window delays rendering, it must process the ${"WM_RENDERFORMAT".link} and ${"WM_RENDERALLFORMATS".link}
 			messages.
 
 			If {@code SetClipboardData} succeeds, the system owns the object identified by the {@code hMem} parameter. The application may not write to or free
-			the data once ownership has been transferred to the system, but it can lock and read from the data until the {@link #CloseClipboard} function is
-			called. (The memory must be unlocked before the {@link #Clipboard} is closed.) If the {@code hMem} parameter identifies a memory object, the object
-			must have been allocated using the function with the {@link #GMEM_MOVEABLE} flag.
+			the data once ownership has been transferred to the system, but it can lock and read from the data until the ${"CloseClipboard()".link} function is
+			called. (The memory must be unlocked before the ${"Clipboard()".link} is closed.) If the {@code hMem} parameter identifies a memory object, the object
+			must have been allocated using the function with the ${"GMEM_MOVEABLE".link} flag.
 			"""
 		),
 

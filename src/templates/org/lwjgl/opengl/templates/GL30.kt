@@ -49,7 +49,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"GetStringi",
 		"Queries indexed string state.",
 
-		GLenum.IN("name", "the indexed state to query", "GL11#GL_EXTENSIONS GL20#GL_SHADING_LANGUAGE_VERSION"),
+		GLenum.IN("name", "the indexed state to query", "GL11#EXTENSIONS GL20#SHADING_LANGUAGE_VERSION"),
 		GLuint.IN("index", "the index of the particular element being queried")
 	)
 
@@ -139,11 +139,11 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Specifies the location and organization of a pure integer vertex attribute array.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
 		GLenum.IN(
 			"type",
 			"the data type of each component in the array",
-			"GL11#GL_BYTE GL11#GL_UNSIGNED_BYTE GL11#GL_SHORT GL11#GL_UNSIGNED_SHORT GL11#GL_INT GL11#GL_UNSIGNED_INT"
+			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT"
 		),
 		GLsizei.IN(
 			"stride",
@@ -155,7 +155,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-			currently bound to the GL15#GL_ARRAY_BUFFER target. The initial value is 0.
+			currently bound to the GL15#ARRAY_BUFFER target. The initial value is 0.
 			"""
 		)
 	)
@@ -165,7 +165,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Returns the value of a pure integer generic vertex attribute parameter.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#GL_CURRENT_VERTEX_ATTRIB"),
+		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("params", "returns the requested data")
 	).javaDocLink
 
@@ -174,7 +174,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Unsigned version of $GetVertexAttribIiv.",
 
 		GLuint.IN("index", vertexAttribIndex),
-		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#GL_CURRENT_VERTEX_ATTRIB"),
+		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
 		mods(Check(4), returnValue) _ GLuint_p.OUT("params", "returns the requested data")
 	)
 
@@ -381,10 +381,10 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"ClampColor",
-		"Specifies whether data read via {@link GL11#glReadPixels} should be clamped.",
+		"Specifies whether data read via ${"GL11".link("ReadPixels()")} should be clamped.",
 
-		GLenum.IN("target", "target for color clamping", "#GL_CLAMP_READ_COLOR"),
-		GLenum.IN("clamp", "whether to apply color clamping", "GL11#GL_TRUE GL11#GL_FALSE")
+		GLenum.IN("target", "target for color clamping", "#CLAMP_READ_COLOR"),
+		GLenum.IN("clamp", "whether to apply color clamping", "GL11#TRUE GL11#FALSE")
 	)
 
 	// ARB_depth_buffer_float
@@ -656,7 +656,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"BindRenderbuffer",
 		"Binds a renderbuffer to a renderbuffer target.",
 
-		GLenum.IN("target", "the renderbuffer target of the binding operation", "#GL_RENDERBUFFER"),
+		GLenum.IN("target", "the renderbuffer target of the binding operation", "#RENDERBUFFER"),
 		GLuint.IN("renderbuffer", "the name of the renderbuffer object to bind")
 	)
 
@@ -681,10 +681,10 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"""
 		Establishes data storage, format and dimensions of a renderbuffer object's image.
 
-		This method is equivalent to calling {@link #glRenderbufferStorageMultisample} with the samples set to zero.
+		This method is equivalent to calling ${"RenderbufferStorageMultisample()".link} with the samples set to zero.
 		""",
 
-		GLenum.IN("target", "the target of the allocation", "#GL_RENDERBUFFER"),
+		GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
 		GLenum.IN("internalformat", "the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format."),
 		GLsizei.IN("width", "the width of the renderbuffer, in pixels"),
 		GLsizei.IN("height", "the height of the renderbuffer, in pixels")
@@ -694,7 +694,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"RenderbufferStorageMultisample",
 		"Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.",
 
-		GLenum.IN("target", "the target of the allocation", "#GL_RENDERBUFFER"),
+		GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
 		GLsizei.IN("samples", "the number of samples to be used for the renderbuffer object's storage"),
 		GLenum.IN("internalformat", "the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format."),
 		GLsizei.IN("width", "the width of the renderbuffer, in pixels"),
@@ -705,7 +705,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"GetRenderbufferParameteriv",
 		"Retrieves information about a bound renderbuffer object.",
 
-		GLenum.IN("target", "the target of the query operation", "#GL_RENDERBUFFER"),
+		GLenum.IN("target", "the target of the query operation", "#RENDERBUFFER"),
 		GLenum.IN("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
@@ -799,7 +799,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the framebuffer target", FramebufferTargets),
 		GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-		GLenum.IN("renderbuffertarget", "the renderbuffer target", "#GL_RENDERBUFFER"),
+		GLenum.IN("renderbuffertarget", "the renderbuffer target", "#RENDERBUFFER"),
 		GLuint.IN("renderbuffer", "the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach")
 	)
 
@@ -828,9 +828,9 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of the flags indicating which buffers are to be copied",
-			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT"
+			"GL11#COLOR_BUFFER_BIT GL11#DEPTH_BUFFER_BIT GL11#STENCIL_BUFFER_BIT"
 		),
-		GLenum.IN("filter", "the interpolation to be applied if the image is stretched", "GL11#GL_NEAREST GL11#GL_LINEAR")
+		GLenum.IN("filter", "the interpolation to be applied if the image is stretched", "GL11#NEAREST GL11#LINEAR")
 	)
 
 	GLvoid.func(
@@ -840,7 +840,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"target",
 			"the target to which the texture whose mimaps to generate is bound",
-			"GL11#GL_TEXTURE_1D GL11#GL_TEXTURE_2D GL12#GL_TEXTURE_3D #GL_TEXTURE_1D_ARRAY #GL_TEXTURE_2D_ARRAY GL13#GL_TEXTURE_CUBE_MAP"
+			"GL11#TEXTURE_1D GL11#TEXTURE_2D GL12#TEXTURE_3D #TEXTURE_1D_ARRAY #TEXTURE_2D_ARRAY GL13#TEXTURE_CUBE_MAP"
 		)
 	)
 
@@ -1145,7 +1145,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"target",
 			"the target of the bind operation",
-			"#GL_TRANSFORM_FEEDBACK_BUFFER GL31#GL_UNIFORM_BUFFER GL42#GL_ATOMIC_COUNTER_BUFFER GL43#GL_SHADER_STORAGE_BUFFER"
+			"#TRANSFORM_FEEDBACK_BUFFER GL31#UNIFORM_BUFFER GL42#ATOMIC_COUNTER_BUFFER GL43#SHADER_STORAGE_BUFFER"
 		),
 		GLuint.IN("index", "the index of the binding point within the array specified by {@code target}"),
 		GLuint.IN("buffer", "a buffer object to bind to the specified binding point"),
@@ -1160,7 +1160,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"target",
 			"the target of the bind operation",
-			"#GL_TRANSFORM_FEEDBACK_BUFFER GL31#GL_UNIFORM_BUFFER GL42#GL_ATOMIC_COUNTER_BUFFER GL43#GL_SHADER_STORAGE_BUFFER"
+			"#TRANSFORM_FEEDBACK_BUFFER GL31#UNIFORM_BUFFER GL42#ATOMIC_COUNTER_BUFFER GL43#SHADER_STORAGE_BUFFER"
 		),
 		GLuint.IN("index", "the index of the binding point within the array specified by {@code target}"),
 		GLuint.IN("buffer", "a buffer object to bind to the specified binding point")
@@ -1173,7 +1173,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN(
 			"primitiveMode",
 			"the output type of the primitives that will be recorded into the buffer objects that are bound for transform feedback",
-			"GL11#GL_POINTS GL11#GL_LINES GL11#GL_TRIANGLES"
+			"GL11#POINTS GL11#LINES GL11#TRIANGLES"
 		)
 	)
 

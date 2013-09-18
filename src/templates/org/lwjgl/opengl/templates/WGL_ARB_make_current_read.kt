@@ -14,7 +14,7 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 	)
 
 	javaDoc("""
-	Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/wgl_make_current_read.txt", templateName)} extension.
+	Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_make_current_read.txt", templateName)} extension.
 
 	The association of a separate "read" and "draw" DC with the current context allows for preprocessing of image data in an "off screen" DC which is then read
 	into a visible DC for final display.
@@ -43,12 +43,12 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 	    OpenGL operations:
 		${ol(
 			"""
-	    Any pixel data that are sourced based on the value of {@link GL11#GL_READ_BUFFER}. Note, that accumulation operations use the value of READ_BUFFER, but
+	    Any pixel data that are sourced based on the value of ${"GL11".linkGL("READ_BUFFER")}. Note, that accumulation operations use the value of READ_BUFFER, but
 	    are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate
-	    {@link GL11#GL_INVALID_OPERATION}.
+	    ${"GL11".linkGL("INVALID_OPERATION")}.
 	    """,
 			"""
-	    Any depth values that are retrieved by {@link GL11#glReadPixels}, {@link GL11#glCopyPixels}, or any OpenGL extension that sources depth images from the
+	    Any depth values that are retrieved by ${"GL11".linkGL("ReadPixels()")}, ${"GL11".linkGL("CopyPixels()")}, or any OpenGL extension that sources depth images from the
 	    frame buffer in the manner of ReadPixels and CopyPixels.
 	    """,
 			"""

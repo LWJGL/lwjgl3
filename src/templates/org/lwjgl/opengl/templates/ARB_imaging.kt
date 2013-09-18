@@ -19,26 +19,26 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 	val IMAGING_INTERNAL_FORMATS =
 		"""
-		GL11#GL_RGB GL11#GL_RGBA
-		GL30#GL_RG8 GL31#GL_RG8_SNORM GL11#GL_R3_G3_B2 GL11#GL_RGB4 GL11#GL_RGB5 GL41#GL_RGB565 GL11#GL_RGB8
-		GL31#GL_RGB8_SNORM GL11#GL_RGB10 GL11#GL_RGB12 GL11#GL_RGB16 GL31#GL_RGB16_SNORM GL11#GL_RGBA2 GL11#GL_RGBA4 GL11#GL_RGB5_A1 GL11#GL_RGBA8 GL31#GL_RGBA8_SNORM GL11#GL_RGB10_A2
-		GL11#GL_RGBA12 GL11#GL_RGBA16 GL31#GL_RGBA16_SNORM GL21#GL_SRGB8 GL21#GL_SRGB8_ALPHA8 GL30#GL_RGB16F GL30#GL_RGBA16F GL30#GL_RGB32F GL30#GL_RGBA32F
-		GL30#GL_R11F_G11F_B10F
+		GL11#RGB GL11#RGBA
+		GL30#RG8 GL31#RG8_SNORM GL11#R3_G3_B2 GL11#RGB4 GL11#RGB5 GL41#RGB565 GL11#RGB8
+		GL31#RGB8_SNORM GL11#RGB10 GL11#RGB12 GL11#RGB16 GL31#RGB16_SNORM GL11#RGBA2 GL11#RGBA4 GL11#RGB5_A1 GL11#RGBA8 GL31#RGBA8_SNORM GL11#RGB10_A2
+		GL11#RGBA12 GL11#RGBA16 GL31#RGBA16_SNORM GL21#SRGB8 GL21#SRGB8_ALPHA8 GL30#RGB16F GL30#RGBA16F GL30#RGB32F GL30#RGBA32F
+		GL30#R11F_G11F_B10F
 
-		GL11#GL_ALPHA GL11#GL_LUMINANCE GL11#GL_LUMINANCE_ALPHA GL11#GL_INTENSITY GL11#GL_ALPHA4 GL11#GL_ALPHA8 GL11#GL_ALPHA12 GL11#GL_ALPHA16 GL11#GL_LUMINANCE4 GL11#GL_LUMINANCE8
-		GL11#GL_LUMINANCE12 GL11#GL_LUMINANCE16 GL11#GL_LUMINANCE4_ALPHA4 GL11#GL_LUMINANCE6_ALPHA2 GL11#GL_LUMINANCE8_ALPHA8 GL11#GL_LUMINANCE12_ALPHA4 GL11#GL_LUMINANCE12_ALPHA12
-		GL11#GL_LUMINANCE16_ALPHA16 GL11#GL_INTENSITY4 GL11#GL_INTENSITY8 GL11#GL_INTENSITY12 GL11#GL_INTENSITY16 GL21#GL_SLUMINANCE GL21#GL_SLUMINANCE8_ALPHA8
+		GL11#ALPHA GL11#LUMINANCE GL11#LUMINANCE_ALPHA GL11#INTENSITY GL11#ALPHA4 GL11#ALPHA8 GL11#ALPHA12 GL11#ALPHA16 GL11#LUMINANCE4 GL11#LUMINANCE8
+		GL11#LUMINANCE12 GL11#LUMINANCE16 GL11#LUMINANCE4_ALPHA4 GL11#LUMINANCE6_ALPHA2 GL11#LUMINANCE8_ALPHA8 GL11#LUMINANCE12_ALPHA4 GL11#LUMINANCE12_ALPHA12
+		GL11#LUMINANCE16_ALPHA16 GL11#INTENSITY4 GL11#INTENSITY8 GL11#INTENSITY12 GL11#INTENSITY16 GL21#SLUMINANCE GL21#SLUMINANCE8_ALPHA8
 		"""
 
 	val PIXEL_DATA_FORMATS =
-		"GL11#GL_RED GL11#GL_GREEN GL11#GL_BLUE GL11#GL_ALPHA GL11#GL_RGB GL11#GL_RGBA GL12#GL_BGR GL12#GL_BGRA GL11#GL_LUMINANCE GL11#GL_LUMINANCE_ALPHA"
+		"GL11#RED GL11#GREEN GL11#BLUE GL11#ALPHA GL11#RGB GL11#RGBA GL12#BGR GL12#BGRA GL11#LUMINANCE GL11#LUMINANCE_ALPHA"
 
 	val PIXEL_DATA_TYPES =
 		"""
-		GL11#GL_UNSIGNED_BYTE GL11#GL_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_SHORT GL11#GL_UNSIGNED_INT GL11#GL_INT
-		GL12#GL_UNSIGNED_BYTE_3_3_2 GL12#GL_UNSIGNED_BYTE_2_3_3_REV GL12#GL_UNSIGNED_SHORT_5_6_5 GL12#GL_UNSIGNED_SHORT_5_6_5_REV GL12#GL_UNSIGNED_SHORT_4_4_4_4
-		GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV GL12#GL_UNSIGNED_SHORT_5_5_5_1 GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV GL12#GL_UNSIGNED_INT_8_8_8_8
-		GL12#GL_UNSIGNED_INT_8_8_8_8_REV GL12#GL_UNSIGNED_INT_10_10_10_2 GL12#GL_UNSIGNED_INT_2_10_10_10_REV
+		GL11#UNSIGNED_BYTE GL11#BYTE GL11#UNSIGNED_SHORT GL11#SHORT GL11#UNSIGNED_INT GL11#INT
+		GL12#UNSIGNED_BYTE_3_3_2 GL12#UNSIGNED_BYTE_2_3_3_REV GL12#UNSIGNED_SHORT_5_6_5 GL12#UNSIGNED_SHORT_5_6_5_REV GL12#UNSIGNED_SHORT_4_4_4_4
+		GL12#UNSIGNED_SHORT_4_4_4_4_REV GL12#UNSIGNED_SHORT_5_5_5_1 GL12#UNSIGNED_SHORT_1_5_5_5_REV GL12#UNSIGNED_INT_8_8_8_8
+		GL12#UNSIGNED_INT_8_8_8_8_REV GL12#UNSIGNED_INT_10_10_10_2 GL12#UNSIGNED_INT_2_10_10_10_REV
 		"""
 
 	// SGI_color_table
@@ -283,7 +283,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ConvolutionFilter1D",
 		"Defines a one-dimensional convolution filter.",
 
-		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_1D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_1D"),
 		GLenum.IN("internalformat", "the filter internal format", IMAGING_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the filter width"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
@@ -298,7 +298,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ConvolutionFilter2D",
 		"Defines a two-dimensional convolution filter.",
 
-		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_2D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_2D"),
 		GLenum.IN("internalformat", "the filter internal format", IMAGING_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the filter width"),
 		GLsizei.IN("height", "the filter height"),
@@ -317,7 +317,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		client memory.
 		""",
 
-		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_1D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_1D"),
 		GLenum.IN("internalformat", "the filter internal format", IMAGING_INTERNAL_FORMATS),
 		GLint.IN("x", "the left framebuffer pixel coordinate"),
 		GLint.IN("y", "the lower framebuffer pixel coordinate"),
@@ -331,7 +331,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		client memory.
 		""",
 
-		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_2D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_2D"),
 		GLenum.IN("internalformat", "the filter internal format", IMAGING_INTERNAL_FORMATS),
 		GLint.IN("x", "the left framebuffer pixel coordinate"),
 		GLint.IN("y", "the lower framebuffer pixel coordinate"),
@@ -343,7 +343,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetConvolutionFilter",
 		"Returns the contents of a convolution filter.",
 
-		GLenum.IN("target", "the convolution target", "#GL_CONVOLUTION_1D #GL_CONVOLUTION_2D"),
+		GLenum.IN("target", "the convolution target", "#CONVOLUTION_1D #CONVOLUTION_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("image", "the filter data")
@@ -353,7 +353,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"SeparableFilter2D",
 		"Specifies a two-dimensional separable convolution filter.",
 
-		GLenum.IN("target", "the filter target", "#GL_SEPARABLE_2D"),
+		GLenum.IN("target", "the filter target", "#SEPARABLE_2D"),
 		GLenum.IN("internalformat", "the filter internal format", IMAGING_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the filter width"),
 		GLsizei.IN("height", "the filter height"),
@@ -373,7 +373,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetSeparableFilter",
 		"Returns the current contents of a separable convolution filter.",
 
-		GLenum.IN("target", "the filter target", "#GL_SEPARABLE_2D"),
+		GLenum.IN("target", "the filter target", "#SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("row", "an array in which to return the filter row"),
@@ -385,8 +385,8 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ConvolutionParameteri",
 		"Specifies the scale and bias of a convolution filter.",
 
-		GLenum.IN("target", "the filter target", "#GL_CONVOLUTION_1D #GL_CONVOLUTION_2D #GL_SEPARABLE_2D"),
-		GLenum.IN("pname", "the parameter to set", "#GL_CONVOLUTION_BORDER_MODE"),
+		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
+		GLenum.IN("pname", "the parameter to set", "#CONVOLUTION_BORDER_MODE"),
 		GLint.IN("param", "the parameter value")
 	)).javaDocLink
 
@@ -395,7 +395,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of $ConvolutionParameteri.",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #GL_CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
@@ -413,7 +413,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of $ConvolutionParameterf.",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #GL_CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", "$CONVOLUTION_FILTER_PARAMS #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
@@ -421,7 +421,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetConvolutionParameteriv",
 		"Returns the value of a convolution filter parameter.",
 
-		GLenum.IN("target", "the filter target", "#GL_CONVOLUTION_1D #GL_CONVOLUTION_2D #GL_SEPARABLE_2D"),
+		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
 		mods(returnValue, Check(4)) _ GLint_p.OUT("params", "an array in which to return the parameter value")
 	)).javaDocLink
@@ -528,13 +528,13 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Histogram",
 		"Specifies the histogram table.",
 
-		GLenum.IN("target", "the histogram target", "#GL_HISTOGRAM #GL_PROXY_HISTOGRAM"),
+		GLenum.IN("target", "the histogram target", "#HISTOGRAM #PROXY_HISTOGRAM"),
 		GLsizei.IN("width", "the histogram width"),
 		GLenum.IN("internalformat", "the histogram internal format", IMAGING_INTERNAL_FORMATS),
 		GLboolean.IN(
 			"sink",
 			"""
-			whether pixel groups will be consumed by the histogram operation ({@link GL11#GL_TRUE}) or passed on to the minmax operation ({@link GL11#GL_FALSE})
+			whether pixel groups will be consumed by the histogram operation (${"GL11".link("TRUE")}) or passed on to the minmax operation (${"GL11".link("FALSE")})
 			"""
 		)
 	)
@@ -543,17 +543,17 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ResetHistogram",
 		"Resets all counters of all elements of the histogram table to zero.",
 
-		GLenum.IN("target", "the histogram target", "#GL_HISTOGRAM")
+		GLenum.IN("target", "the histogram target", "#HISTOGRAM")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetHistogram",
 		"Returns the current contents of the histogram table.",
 
-		GLenum.IN("target", "the histogram target", "#GL_HISTOGRAM"),
+		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLboolean.IN(
 			"reset",
-			"if {@link GL11#GL_TRUE}, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
+			"if ${"GL11".link("TRUE")}, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
@@ -564,7 +564,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetHistogramParameteriv",
 		"Returns the integer values of the specified histogram parameter",
 
-		GLenum.IN("target", "the histogram target", "#GL_HISTOGRAM"),
+		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
 		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to return the parameter values")
 	)).javaDocLink
@@ -582,11 +582,11 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Minmax",
 		"Specifies the minmax table.",
 
-		GLenum.IN("target", "the minmax target", "#GL_MINMAX"),
+		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("internalformat", "the minmax table internal format", IMAGING_INTERNAL_FORMATS),
 		GLboolean.IN(
 			"sink",
-			"whether pixel groups will be consumed by the minmax operation ({@link GL11#GL_TRUE}) or passed on to final conversion ({@link GL11#GL_FALSE})"
+			"whether pixel groups will be consumed by the minmax operation (${"GL11".link("TRUE")}) or passed on to final conversion (${"GL11".link("FALSE")})"
 		)
 	)
 
@@ -594,18 +594,18 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ResetMinmax",
 		"Resets all minimum and maximum values of {@code target} to to their maximum and minimum representable values, respectively.",
 
-		GLenum.IN("target", "the minmax target", "#GL_MINMAX")
+		GLenum.IN("target", "the minmax target", "#MINMAX")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetMinmax",
 		"Returns the current contents of the minmax table.",
 
-		GLenum.IN("target", "the minmax target", "#GL_MINMAX"),
+		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLboolean.IN(
 			"reset",
 			"""
-			If {@link GL11#GL_TRUE}, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
+			If ${"GL11".link("TRUE")}, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
 			representable value. All values are reset, whether returned or not.
 			"""
 		),
@@ -618,7 +618,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetMinmaxParameteriv",
 		"Returns the integer value of the specified minmax parameter.",
 
-		GLenum.IN("target", "the minmax target", "#GL_MINMAX"),
+		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
 		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to place the returned value")
 	)).javaDocLink
@@ -627,7 +627,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetMinmaxParameterfv",
 		"Float version of $GetMinmaxParameteriv.",
 
-		GLenum.IN("target", "the minmax target", "#GL_MINMAX"),
+		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
 		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "an array in which to place the returned value")
 	)
@@ -679,7 +679,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"BlendEquation",
 		"Controls the blend equations used for per-fragment blending.",
 
-		GLenum.IN("mode", "the blend equation", "#GL_FUNC_ADD #GL_FUNC_SUBTRACT #GL_FUNC_REVERSE_SUBTRACT #GL_MIN #GL_MAX")
+		GLenum.IN("mode", "the blend equation", "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX")
 	)
 
 	// EXT_blend_subtract

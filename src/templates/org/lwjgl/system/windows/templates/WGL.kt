@@ -233,10 +233,10 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		int.IN(
 			"format",
 			"""
-			the format to use in the display lists. When format is {@link #WGL_FONT_LINES}, the {@code wglUseFontOutlines} function creates fonts with line
-			segments. When format is {@link #WGL_FONT_POLYGONS}, {@code wglUseFontOutlines} creates fonts with polygons.
+			the format to use in the display lists. When format is ${"FONT_LINES".link}, the {@code wglUseFontOutlines} function creates fonts with line
+			segments. When format is ${"FONT_POLYGONS".link}, {@code wglUseFontOutlines} creates fonts with polygons.
 			""",
-			"#WGL_FONT_LINES #WGL_FONT_POLYGONS"
+			"#FONT_LINES #FONT_POLYGONS"
 		),
 		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",

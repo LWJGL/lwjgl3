@@ -86,7 +86,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Object types for {@link #EnumObjects} and {@link #GetCurrentObject}.",
+		"Object types for ${"EnumObjects()".link} and ${"GetCurrentObject()".link}.",
 		"OBJ_PEN" _ 1,
 		"OBJ_BRUSH" _ 2,
 		"OBJ_DC" _ 3,
@@ -104,7 +104,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Used by the index parameter of {@link #GetDeviceCaps}.",
+		"Used by the index parameter of ${"GetDeviceCaps()".link}.",
 		"DRIVERVERSION" _ 0, // Device driver version
 		"TECHNOLOGY" _ 2, // Device classification
 		"HORZSIZE" _ 4, // Horizontal size in millimeters
@@ -272,7 +272,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 			A pointer to a null-terminated character string that specifies the name of the specific output device being used, as shown by the Print Manager (for
 			example, Epson FX-80). It is not the printer model name. The {@code lpszDevice} parameter must be used.
 
-			To obtain valid names for displays, call {@link #EnumDisplayDevices}.
+			To obtain valid names for displays, call ${"EnumDisplayDevices()".link}.
 
 			If {@code lpszDriver} is DISPLAY or the device name of a specific display device, then {@code lpszDevice} must be $NULL or that same device name. If
 			{@code lpszDevice} is $NULL, then a DC is created for the primary display device.
@@ -284,7 +284,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		mods(const, nullable) _ DEVMODE_p.IN(
 			"lpInitData",
 			"""
-			A pointer to a {@link #DEVMODE} structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}
+			A pointer to a {@link DEVMODE} structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}
 			function retrieves this structure filled in for a specified device. The {@code lpInitData} parameter must be $NULL if the device driver is to use
 			the default initialization (if any) specified by the user.
 
@@ -328,7 +328,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"RestoreDC",
 		"""
 		Restores a device context (DC) to the specified state. The DC is restored by popping state information off a stack created by earlier calls to the
-		{@link #SaveDC} function.
+		${"SaveDC()".link} function.
 		""",
 
 		HDC.IN("hdc", "a handle to the DC"),

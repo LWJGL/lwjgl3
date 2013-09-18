@@ -19,7 +19,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/glx_create_context.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/glx_create_context.txt", templateName)} extension.
 
 		With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
 		to indicate at context creation which interface will be used. These extensions add a new context creation routine with attributes specifying the GL
@@ -38,14 +38,14 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for {@link #GLX_CONTEXT_FLAGS_ARB} in {@code attrib_list}:",
+		"Accepted as bits in the attribute value for ${"CONTEXT_FLAGS_ARB".link} in {@code attrib_list}:",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for {@link #GLX_CONTEXT_PROFILE_MASK_ARB} in {@code attrib_list}:",
+		"Accepted as bits in the attribute value for ${"CONTEXT_PROFILE_MASK_ARB".link} in {@code attrib_list}:",
 
 		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
@@ -85,7 +85,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 				"{@code display} is not a local X server.",
 				"Implementation-dependent limits on the number of direct rendering contexts that can be supported simultaneously are exceeded."
 			)}
-            Use {@link glXIsDirect} to determine whether or not a request for a direct rendering context succeeded.
+            Use ${"GLX".link("IsDirect()")} to determine whether or not a request for a direct rendering context succeeded.
 			"""
 		),
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@link X#None}")

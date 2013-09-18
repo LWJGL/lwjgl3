@@ -13,7 +13,7 @@ fun amd_device_topology() = "AMDDeviceTopology".nativeClassCL("amd_device_topolo
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} parameter of {@link CL10#clGetDeviceInfo}. Returns a description of the topology used to connect the device to the
+		Accepted as the {@code param_name} parameter of ${"CL10".link("GetDeviceInfo()")}. Returns a description of the topology used to connect the device to the
 		host, using the following 32-bytes union of structures:
 		${codeBlock("""
 typedef union
@@ -25,7 +25,7 @@ typedef union
 		The type of the structure returned can be queried by reading the first unsigned int of the returned data. The developer can use this type to cast the
 		returned union into the right structure type.
 
-		Currently, the only supported type in the structure above is {@link #DEVICE_TOPOLOGY_TYPE_PCIE_AMD}. The information returned contains the PCI
+		Currently, the only supported type in the structure above is ${"DEVICE_TOPOLOGY_TYPE_PCIE_AMD".link}. The information returned contains the PCI
 		Bus/Device/Function of the device, and is similar to the result of the lspci command in Linux. It enables the developer to match between the OpenCL
 		device ID and the physical PCI connection of the card.
 		""",
@@ -34,7 +34,7 @@ typedef union
 	)
 
 	IntConstant.block(
-		"Indicates the type of the struct returned by {@link #CL_DEVICE_TOPOLOGY_AMD}.",
+		"Indicates the type of the struct returned by ${"DEVICE_TOPOLOGY_AMD".link}.",
 
 		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD" _ 1
 	)

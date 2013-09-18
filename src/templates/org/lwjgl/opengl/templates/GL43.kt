@@ -199,7 +199,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		DISPATCH_INDIRECT_BUFFER _ GLintptr.IN(
 			"indirect",
 			"""
-			the offset into the buffer object currently bound to the {@link #GL_DISPATCH_INDIRECT_BUFFER} buffer target at which the dispatch parameters are
+			the offset into the buffer object currently bound to the ${"DISPATCH_INDIRECT_BUFFER".link} buffer target at which the dispatch parameters are
 			stored.
 			"""
 		)
@@ -400,7 +400,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			"$DebugIdentifiers GL11#GL_VERTEX_ARRAY GL11#GL_TEXTURE GL30#GL_RENDERBUFFER GL30#GL_FRAMEBUFFER GL40#GL_TRANSFORM_FEEDBACK"
+			"$DebugIdentifiers GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
 		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
@@ -414,7 +414,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			"$DebugIdentifiers GL11#GL_VERTEX_ARRAY GL11#GL_TEXTURE GL30#GL_RENDERBUFFER GL30#GL_FRAMEBUFFER GL40#GL_TRANSFORM_FEEDBACK"
+			"$DebugIdentifiers GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
@@ -477,7 +477,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"FramebufferParameteri",
 		"Sets a named parameter of a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL30#GL_READ_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be modified", FramebufferParameters),
 		GLint.IN("param", "the new value for the parameter named {@code pname}")
 	)
@@ -486,7 +486,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"GetFramebufferParameteriv",
 		"Retrieves a named parameter from a framebuffer.",
 
-		GLenum.IN("target", "target of the operation", "GL30#GL_READ_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_FRAMEBUFFER"),
+		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
@@ -631,8 +631,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			"target",
 			"the usage of the internal format",
 			"""
-			GL11#GL_TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#GL_RENDERBUFFER GL31#GL_TEXTURE_BUFFER GL32#GL_TEXTURE_2D_MULTISAMPLE
-			GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+			GL11#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL30#RENDERBUFFER GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE
+			GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),
@@ -685,7 +685,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateFramebuffer",
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#GL_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
@@ -694,7 +694,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"InvalidateSubFramebuffer",
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
-		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#GL_FRAMEBUFFER GL30#GL_DRAW_FRAMEBUFFER GL30#GL_READ_FRAMEBUFFER"),
+		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
 		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
 		GLint.IN("x", "the X offset of the region to be invalidated"),
@@ -772,7 +772,7 @@ for ( i = 0; i < primcount; i++ ) {
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#GL_UNSIGNED_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_UNSIGNED_INT"),
+		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
 		mods(
 			Check(expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true),
 			const
@@ -808,7 +808,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"FRAGMENT_SUBROUTINE_UNIFORM" _ 0x92F2,
 		"COMPUTE_SUBROUTINE_UNIFORM" _ 0x92F3,
 		"TRANSFORM_FEEDBACK_VARYING" _ 0x92F4
-	).toJavaDocLinks() + " GL42#GL_ATOMIC_COUNTER_BUFFER"
+	).toJavaDocLinks() + " GL42#ATOMIC_COUNTER_BUFFER"
 
 	val ProgramInterfaceParameters = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
@@ -913,7 +913,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLenum.IN(
 			"programInterface",
 			"a token identifying the interface within {@code program} containing the resource named {@code name}.",
-			"#GL_PROGRAM_OUTPUT"
+			"#PROGRAM_OUTPUT"
 		),
 		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
@@ -1005,7 +1005,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexBufferRange",
 		"Binds a range of a buffer's data store to a buffer texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL31#GL_TEXTURE_BUFFER"),
+		GLenum.IN("target", "the target of the operation", "GL31#TEXTURE_BUFFER"),
 		GLenum.IN("internalformat", "the internal format of the data in the store belonging to {@code buffer}"),
 		GLuint.IN("buffer", "the name of the buffer object whose storage to attach to the active buffer texture"),
 		GLintptr.IN("offset", "the offset of the start of the range of the buffer's data store to attach"),
@@ -1018,7 +1018,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexStorage2DMultisample",
 		"Specifies storage for a two-dimensional multisample texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE"),
+		GLenum.IN("target", "the target of the operation", "GL32#TEXTURE_2D_MULTISAMPLE GL32#PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the texture"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels"),
@@ -1036,7 +1036,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TexStorage3DMultisample",
 		"Specifies storage for a two-dimensional multisample array texture.",
 
-		GLenum.IN("target", "the target of the operation", "GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE"),
+		GLenum.IN("target", "the target of the operation", "GL32#TEXTURE_2D_MULTISAMPLE_ARRAY GL32#PROXY_TEXTURE_2D_MULTISAMPLE"),
 		GLsizei.IN("samples", "the number of samples in the texture"),
 		GLenum.IN("internalformat", "the sized internal format to be used to store texture image data"),
 		GLsizei.IN("width", "the width of the texture, in texels"),
@@ -1115,7 +1115,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLboolean.IN(
 			"normalized",
@@ -1135,7 +1135,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of pure integer data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLuint.IN(
 			"relativeoffset",
@@ -1148,7 +1148,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"Specifies the organization of 64-bit double data in vertex arrays.",
 
 		GLuint.IN("attribindex", "the generic vertex attribute array being described"),
-		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4 GL12#BGRA"),
 		GLenum.IN("type", "the type of the data stored in the array"),
 		GLuint.IN(
 			"relativeoffset",

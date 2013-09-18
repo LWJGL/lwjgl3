@@ -40,7 +40,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 	).noPrefix()
 
 	IntConstant.block(
-		"Names for attributes to {@link #glXGetConfig}.",
+		"Names for attributes to ${"GetConfig()".link}.",
 
 		"USE_GL" _ 1,
 		"BUFFER_SIZE" _ 2,
@@ -62,7 +62,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 	)
 
 	IntConstant.block(
-		"Error return values from {@link #glXGetConfig}. Success is indicated by a value of 0.",
+		"Error return values from ${"GetConfig()".link}. Success is indicated by a value of 0.",
 
 		"BAD_SCREEN" _ 1,
 		"BAD_ATTRIBUTE" _ 2,
@@ -109,7 +109,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		mods(nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}"),
+		mods(nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with $None"),
 
 		returnDoc =
 		"""
@@ -187,7 +187,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 		Prevents X requests from executing until any outstanding OpenGL rendering is done.
 
 		OpenGL calls made prior to {@code glXWaitGL} are guaranteed to be executed before X rendering calls made after {@code glXWaitGL}. While the same result
-		can be achieved using {@link GL11#glFinish}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
+		can be achieved using ${"GL11".linkGL("Finish()")}, {@code glXWaitGL} does not require a round trip to the server, and is therefore more efficient in cases
 		where the client and server are on separate machines.
 		"""
 	)
@@ -198,7 +198,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 		Prevents the OpenGL command sequence from executing until any outstanding X requests are completed.
 
 		X rendering calls made prior to {@code glXWaitX} are guaranteed to be executed before OpenGL rendering calls made after {@code glXWaitX}. While the same
-		result can be achieved using {@link Xlib#XSync}, {@code glXWaitX} does not require a round trip to the server, and may therefore be more efficient.
+		result can be achieved using ${"Xlib".linkPlain("XSync()")}, {@code glXWaitX} does not require a round trip to the server, and may therefore be more efficient.
 		"""
 	)
 

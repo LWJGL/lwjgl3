@@ -15,7 +15,7 @@ fun GLX_SGI_video_sync() = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync"
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/SGI/video_sync.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGI/video_sync.txt", templateName)} extension.
 
 		This extension provides a means for synchronization with the video frame rate of a monitor.
 		"""

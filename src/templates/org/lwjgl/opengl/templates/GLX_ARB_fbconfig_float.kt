@@ -12,7 +12,7 @@ fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbc
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
 
 		The standard OpenGL pipeline is based on a fixed-point pipeline. While color components are nominally floating-point values in the pipeline, components
 		are frequently clamped to the range [0,1] to accomodate the fixed-point color buffer representation and allow for fixed-point computational hardware.
@@ -22,7 +22,7 @@ fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbc
 	)
 
 	IntConstant.block(
-		"Accepted as values of the {@code render_type} arguments in the {@link GLX13#glXCreateNewContext} and {@link GLX#glXCreateContext} functions:",
+		"Accepted as values of the {@code render_type} arguments in the ${"GLX13".link("CreateNewContext()")} and ${"GLX".link("CreateContext()")} functions:",
 
 		"RGBA_FLOAT_TYPE" _ 0x20B9
 	)

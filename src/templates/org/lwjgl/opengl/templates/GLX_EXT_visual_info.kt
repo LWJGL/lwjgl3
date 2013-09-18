@@ -12,11 +12,11 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/EXT/visual_rating.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_rating.txt", templateName)} extension.
 
 		This extension allows servers to identify a particular GLX visual as undesirable. A new visual attribute is introduced, providing a way for servers to
-		specify caveats (e.g., slow) for a visual. The attribute  may be queried using {@link glXGetConfig}, and can therefore be used by  application-specific visual
-		selection routines. The new attribute is also used by {@link glXChooseVisual} to discriminate against visuals with caveats.
+		specify caveats (e.g., slow) for a visual. The attribute  may be queried using ${"GLX".link("GetConfig()")}, and can therefore be used by  application-specific visual
+		selection routines. The new attribute is also used by ${"GLX".link("ChooseVisual()")} to discriminate against visuals with caveats.
 
 		This extension allows servers to export visuals with improved features or image quality, but lower performance or greater system burden, without having
 		to have these visuals selected preferentially.  It is intended to insure that most applications get the "right" visual, not that all applications do.
@@ -24,7 +24,7 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attrib} parameter of {@link GLX#glXGetConfig}, and by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual}:",
+		"Accepted by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}, and by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")}:",
 
 		"X_VISUAL_TYPE_EXT" _ 0x22,
 		"TRANSPARENT_TYPE_EXT" _ 0x23,
@@ -37,8 +37,8 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 
 	IntConstant.block(
 		"""
-		Returned by {@link GLX#glXGetConfig}, and accepted by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual} (following the
-		{@link #GLX_X_VISUAL_TYPE_EXT} token):
+		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		${"X_VISUAL_TYPE_EXT".link} token):
 		""",
 
 		"TRUE_COLOR_EXT" _ 0x8002,
@@ -51,8 +51,8 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 
 	IntConstant.block(
 		"""
-		Returned by {@link GLX#glXGetConfig}, and accepted by the {@code attrib_list} parameter of {@link GLX#glXChooseVisual} (following the
-		{@link #GLX_TRANSPARENT_TYPE_EXT} token):
+		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		${"TRANSPARENT_TYPE_EXT".link} token):
 		""",
 
 		"NONE_EXT" _ 0x8000,

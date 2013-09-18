@@ -15,7 +15,7 @@ fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", N
 
 	javaDoc(
 		"""
-		Native bindings to the ${link("http://www.opengl.org/registry/specs/NV/DX_interop.txt", templateName)} extension.
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/DX_interop.txt", templateName)} extension.
 
 		This extension allows OpenGL to directly access DirectX buffers and surfaces. A DirectX vertex buffer may be shared as an OpenGL buffer object and a
 		DirectX surface may be shared as an OpenGL texture or renderbuffer object.

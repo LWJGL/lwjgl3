@@ -1360,7 +1360,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the position callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the position callback for the specified window.
 	 *
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
@@ -1375,7 +1375,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the size callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the size callback for the specified window.
 	 *
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
@@ -1390,7 +1390,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the close callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the close callback for the specified window.
 	 * <p/>
 	 * This callback is called when the user attempts to close the window, i.e. for example by clicking the window's close widget.  It is called immediately
 	 * after the window's close flag has been set.
@@ -1412,7 +1412,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the refresh callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the refresh callback for the specified window.
 	 * <p/>
 	 * This callback is called when the client area of the window needs to be redrawn, for example if the window has been exposed after having been covered by
 	 * another window.
@@ -1433,7 +1433,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the focus callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the focus callback for the specified window.
 	 * <p/>
 	 * This callback is called when the window gains or loses focus.
 	 *
@@ -1450,7 +1450,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the iconify callback for the specified window. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the iconify callback for the specified window.
 	 * <p/>
 	 * This callback is called when the window is iconified or restored.
 	 *
@@ -1677,7 +1677,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the key callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the key callback.
 	 * <p/>
 	 * The key callback deals with physical keys, with key tokens named after their use on the standard US keyboard layout. If you want to input text, use the
 	 * Unicode character callback instead.
@@ -1695,7 +1695,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the Unicode character callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the Unicode character callback.
 	 * <p/>
 	 * The Unicode character callback is for text input. If you want to know whether a specific key was pressed or released, use the key callback.
 	 *
@@ -1712,7 +1712,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the mouse button callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the mouse button callback.
 	 *
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
@@ -1727,7 +1727,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the cursor position callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the cursor position callback.
 	 * <p/>
 	 * The position is relative to the upper-left corner of the client area of the window.
 	 *
@@ -1744,7 +1744,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the cursor enter/exit callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the cursor enter/exit callback.
 	 *
 	 * @param window the window whose callback to set
 	 * @param cbfun  the new callback or NULL to remove the currently set callback
@@ -1759,7 +1759,7 @@ public final class JGLFW {
 	}
 
 	/**
-	 * Sets the scroll callback. See {@link WindowCallback#set(long, WindowCallback, int)}.
+	 * Sets the scroll callback.
 	 * <p/>
 	 * This receives all scrolling input, like that from a mouse wheel or a touchpad scrolling area.
 	 *

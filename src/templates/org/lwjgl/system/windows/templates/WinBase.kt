@@ -146,7 +146,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 		On a multiprocessor computer, it should not matter which processor is called. However, you can get different results on different processors due to bugs
 		in the basic input/output system (BIOS) or the hardware abstraction layer (HAL). To specify processor affinity for a thread, use the
-		{@link Kernel32#SetThreadAffinityMask} function.
+		${"Kernel32".link("SetThreadAffinityMask()")} function.
 		""",
 
 		LARGE_INTEGER_p.OUT(
@@ -159,11 +159,11 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GlobalAlloc",
 		"Allocates the specified number of bytes from the heap.",
 
-		UINT.IN("flags", "the memory allocation attributes. If zero is specified, the default is {@link #GMEM_FIXED}.", GlobalMemoryFlags),
+		UINT.IN("flags", "the memory allocation attributes. If zero is specified, the default is ${"GMEM_FIXED".link}.", GlobalMemoryFlags),
 		SIZE_T.IN(
 			"bytes",
 			"""
-		    the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies {@link #GMEM_MOVEABLE}, the function returns a
+		    the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies ${"GMEM_MOVEABLE".link}, the function returns a
 		    handle to a memory object that is marked as discarded.
 		    """
 		)
@@ -179,8 +179,8 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 	BOOL.func(
 		"GlobalUnlock",
 		"""
-		Decrements the lock count associated with a memory object that was allocated with {@link #GMEM_MOVEABLE}. This function has no effect on memory objects
-		allocated with {@link #GMEM_FIXED}.
+		Decrements the lock count associated with a memory object that was allocated with ${"GMEM_MOVEABLE".link}. This function has no effect on memory objects
+		allocated with ${"GMEM_FIXED".link}.
 		""",
 
 		HGLOBAL.IN("hMem", "a handle to the global memory object")

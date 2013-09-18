@@ -361,7 +361,7 @@ public class PointerBuffer implements Comparable {
 	 * identical to those of this buffer.
 	 * <p/>
 	 * <p> If this buffer is itself read-only then this method behaves in
-	 * exactly the same way as the {@link #duplicate duplicate} method.  </p>
+	 * exactly the same way as the {@link #duplicate} method.  </p>
 	 *
 	 * @return The new, read-only pointer buffer
 	 */

@@ -84,7 +84,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		"CompressedTexImage1D",
 		"Specifies a one-dimensional texture image in a compressed format.",
 
-		GLenum.IN("target", "the target texture", "GL11#GL_TEXTURE_1D GL11#GL_PROXY_TEXTURE_1D"),
+		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D GL11#PROXY_TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
@@ -129,7 +129,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		"CompressedTexSubImage1D",
 		"Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
 
-		GLenum.IN("target", "the target texture", "GL11#GL_TEXTURE_1D"),
+		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
 		GLsizei.IN("width", "the width of the texture subimage"),
@@ -142,7 +142,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		"GetCompressedTexImage",
 		"Returns a compressed texture image.",
 
-		GLenum.IN("target", "the target texture", "GL11#GL_TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
+		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
 		GLint.IN("lod", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		mods(
 			Check(expression = "GL11.glGetTexLevelParameteri(target, lod, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true),
@@ -308,7 +308,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		dependent.
 		""",
 
-		GLenum.IN("texture", "which texture unit to make active", "#GL_TEXTURE0 GL_TEXTURE[1-31]")
+		GLenum.IN("texture", "which texture unit to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -318,7 +318,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		DisableClientState with parameter TEXTURE_COORD_ARRAY.
 		""",
 
-		GLenum.IN("texture", "which texture coordinate array to make active", "#GL_TEXTURE0 GL_TEXTURE[1-31]")
+		GLenum.IN("texture", "which texture coordinate array to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
 	)
 
 	// MultiTexCoord functions javadoc
@@ -494,7 +494,8 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 			tr(td("a1"), td("a2"), td("a3"), td("a4")),
 			tr(td("a5"), td("a6"), td("a7"), td("a8")),
 			tr(td("a9"), td("a10"), td("a11"), td("a12")),
-			tr(td("a13"), td("a14"), td("a15"), td("a16"))
+			tr(td("a13"), td("a14"), td("a15"), td("a16")),
+			matrix = true
 		)}
 		""",
 

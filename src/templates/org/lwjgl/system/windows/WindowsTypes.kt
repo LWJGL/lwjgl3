@@ -131,7 +131,7 @@ val HBRUSH = PointerType("HBRUSH", includesPointer = true)
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 
 private val WNDCLASSEX_STRUCT = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
-	javaDoc("Contains the window class attributes that are registered by the {@link WinUser#RegisterClassEx} function.")
+	javaDoc("Contains the window class attributes that are registered by the ${"WinUser".link("RegisterClassEx()")} function.")
 	nativeImport ("WindowsLWJGL.h")
 	UINT.member("cbSize", "size")
 	UINT.member("style")
@@ -288,7 +288,7 @@ val PDISPLAY_DEVICE = StructType(
 	name = "PDISPLAY_DEVICE",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE") {
-		javaDoc("Receives information about the display device specified by the devNum parameter of the {@link WinUser#EnumDisplayDevices} function.")
+		javaDoc("Receives information about the display device specified by the devNum parameter of the ${"WinUser".link("EnumDisplayDevices()")} function.")
 		nativeImport("WindowsLWJGL.h")
 		DWORD.member("cb")
 		TCHAR.member(nativeName = "DeviceName", size = 32, nullTerminated = true)
@@ -307,7 +307,7 @@ val LPTRACKMOUSEEVENT = StructType(
 	definition = struct(WINDOWS_PACKAGE, "TRACKMOUSEEVENT") {
 		javaDoc(
 			"""
-			Used by the {@link WinUser#TrackMouseEvent} function to track when the mouse pointer leaves a window or hovers over a window for a specified amount
+			Used by the ${"WinUser".link("TrackMouseEvent()")} function to track when the mouse pointer leaves a window or hovers over a window for a specified amount
 			of time.
 			"""
 		)

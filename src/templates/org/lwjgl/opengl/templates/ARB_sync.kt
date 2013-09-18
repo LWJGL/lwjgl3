@@ -13,7 +13,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${link("http://www.opengl.org/registry/specs/ARB/sync.txt", templateName)} extension.")
+	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/sync.txt", templateName)} extension.")
 
 	IntConstant.block(
 		"Accepted as the {@code pname} parameter of GetInteger64v.",
@@ -74,7 +74,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 		"FenceSync",
 		"Creates a new sync object and inserts it into the GL command stream.",
 
-		GLenum.IN("condition", "the condition that must be met to set the sync object's state to signaled", "#GL_SYNC_GPU_COMMANDS_COMPLETE"),
+		GLenum.IN("condition", "the condition that must be met to set the sync object's state to signaled", "#SYNC_GPU_COMMANDS_COMPLETE"),
 		GLbitfield.IN(
 			"flags",
 			"""
@@ -106,15 +106,15 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 
 		The return value is one of four status values:
 		${ul(
-			"{@link #GL_ALREADY_SIGNALED} indicates that sync was signaled at the time that glClientWaitSync was called.",
-			"{@link #GL_TIMEOUT_EXPIRED} indicates that at least timeout nanoseconds passed and sync did not become signaled.",
-			"{@link #GL_CONDITION_SATISFIED} indicates that sync was signaled before the timeout expired.",
-			"{@link #GL_WAIT_FAILED} indicates that an error occurred. Additionally, an OpenGL error will be generated."
+			"${"ALREADY_SIGNALED".link} indicates that sync was signaled at the time that glClientWaitSync was called.",
+			"${"TIMEOUT_EXPIRED".link} indicates that at least timeout nanoseconds passed and sync did not become signaled.",
+			"${"CONDITION_SATISFIED".link} indicates that sync was signaled before the timeout expired.",
+			"${"WAIT_FAILED".link} indicates that an error occurred. Additionally, an OpenGL error will be generated."
 		)}
 		""",
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
-		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #GL_SYNC_FLUSH_COMMANDS_BIT"),
+		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT"),
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 
@@ -124,7 +124,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 		Causes the GL server to block and wait for a sync object to become signaled.
 
 		{@code glWaitSync} will always wait no longer than an implementation-dependent timeout. The duration of this timeout in nanoseconds may be queried by
-		with {@link #GL_MAX_SERVER_WAIT_TIMEOUT}. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
+		with ${"MAX_SERVER_WAIT_TIMEOUT".link}. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
 		sync object being waited on was signaled.
 
 		If an error occurs, {@code glWaitSync} does not cause the GL server to block.
@@ -132,7 +132,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
 		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0"),
-		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#GL_TIMEOUT_IGNORED")
+		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
 	)
 
 	mods(Reuse("GL32"), ReferenceGL("glGet")) _ GLvoid.func(

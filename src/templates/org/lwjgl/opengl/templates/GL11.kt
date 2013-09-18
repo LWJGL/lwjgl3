@@ -11,62 +11,62 @@ import org.lwjgl.opengl.*
 
 val PRIMITIVE_TYPES =
 	"""
-	GL11#GL_POINTS GL11#GL_LINE_STRIP GL11#GL_LINE_LOOP GL11#GL_LINES GL11#GL_POLYGON GL11#GL_TRIANGLE_STRIP GL11#GL_TRIANGLE_FAN GL11#GL_TRIANGLES
-	GL11#GL_QUAD_STRIP GL11#GL_QUADS GL32#GL_LINES_ADJACENCY GL32#GL_LINE_STRIP_ADJACENCY GL32#GL_TRIANGLES_ADJACENCY GL32#GL_TRIANGLE_STRIP_ADJACENCY
-	GL40#GL_PATCHES
+	GL11#POINTS GL11#LINE_STRIP GL11#LINE_LOOP GL11#LINES GL11#POLYGON GL11#TRIANGLE_STRIP GL11#TRIANGLE_FAN GL11#TRIANGLES
+	GL11#QUAD_STRIP GL11#QUADS GL32#LINES_ADJACENCY GL32#LINE_STRIP_ADJACENCY GL32#TRIANGLES_ADJACENCY GL32#TRIANGLE_STRIP_ADJACENCY
+	GL40#PATCHES
 	"""
 
 // Table 8.26
 val CUBE_MAP_FACES =
 	"""
-	GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X
-	GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y
-	GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z
+	GL13#TEXTURE_CUBE_MAP_POSITIVE_X GL13#TEXTURE_CUBE_MAP_NEGATIVE_X
+	GL13#TEXTURE_CUBE_MAP_POSITIVE_Y GL13#TEXTURE_CUBE_MAP_NEGATIVE_Y
+	GL13#TEXTURE_CUBE_MAP_POSITIVE_Z GL13#TEXTURE_CUBE_MAP_NEGATIVE_Z
 	"""
 
-val TEXTURE_2D_TARGETS = "GL11#GL_TEXTURE_2D GL30#GL_TEXTURE_1D_ARRAY GL31#GL_TEXTURE_RECTANGLE GL13#GL_TEXTURE_CUBE_MAP"
-val TEXTURE_2D_FACE_TARGETS = "GL11#GL_TEXTURE_2D GL30#GL_TEXTURE_1D_ARRAY $CUBE_MAP_FACES"
-val PROXY_TEXTURE_2D_TARGETS = "GL11#GL_PROXY_TEXTURE_2D GL30#GL_PROXY_TEXTURE_1D_ARRAY GL31#GL_PROXY_TEXTURE_RECTANGLE GL13#GL_PROXY_TEXTURE_CUBE_MAP"
+val TEXTURE_2D_TARGETS = "GL11#TEXTURE_2D GL30#TEXTURE_1D_ARRAY GL31#TEXTURE_RECTANGLE GL13#TEXTURE_CUBE_MAP"
+val TEXTURE_2D_FACE_TARGETS = "GL11#TEXTURE_2D GL30#TEXTURE_1D_ARRAY $CUBE_MAP_FACES"
+val PROXY_TEXTURE_2D_TARGETS = "GL11#PROXY_TEXTURE_2D GL30#PROXY_TEXTURE_1D_ARRAY GL31#PROXY_TEXTURE_RECTANGLE GL13#PROXY_TEXTURE_CUBE_MAP"
 
-val TEXTURE_3D_TARGETS = "GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_2D_ARRAY GL40#GL_TEXTURE_CUBE_MAP_ARRAY"
-val PROXY_TEXTURE_3D_TARGETS = "GL12#GL_PROXY_TEXTURE_3D GL30#GL_PROXY_TEXTURE_2D_ARRAY GL40#GL_PROXY_TEXTURE_CUBE_MAP_ARRAY"
+val TEXTURE_3D_TARGETS = "GL12#TEXTURE_3D GL30#TEXTURE_2D_ARRAY GL40#TEXTURE_CUBE_MAP_ARRAY"
+val PROXY_TEXTURE_3D_TARGETS = "GL12#PROXY_TEXTURE_3D GL30#PROXY_TEXTURE_2D_ARRAY GL40#PROXY_TEXTURE_CUBE_MAP_ARRAY"
 
 // Table 8.7
 val CORE_PIXEL_DATA_TYPES =
 	"""
-    GL11#GL_UNSIGNED_BYTE GL11#GL_BYTE GL11#GL_UNSIGNED_SHORT GL11#GL_SHORT GL11#GL_UNSIGNED_INT GL11#GL_INT GL30#GL_HALF_FLOAT GL11#GL_FLOAT
-    GL12#GL_UNSIGNED_BYTE_3_3_2 GL12#GL_UNSIGNED_BYTE_2_3_3_REV GL12#GL_UNSIGNED_SHORT_5_6_5 GL12#GL_UNSIGNED_SHORT_5_6_5_REV GL12#GL_UNSIGNED_SHORT_4_4_4_4
-    GL12#GL_UNSIGNED_SHORT_4_4_4_4_REV GL12#GL_UNSIGNED_SHORT_5_5_5_1 GL12#GL_UNSIGNED_SHORT_1_5_5_5_REV
-    GL12#GL_UNSIGNED_INT_8_8_8_8 GL12#GL_UNSIGNED_INT_8_8_8_8_REV GL12#GL_UNSIGNED_INT_10_10_10_2 GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL30#GL_UNSIGNED_INT_24_8
-    GL30#GL_UNSIGNED_INT_10F_11F_11F_REV GL30#GL_UNSIGNED_INT_5_9_9_9_REV
-    GL30#GL_FLOAT_32_UNSIGNED_INT_24_8_REV
+    GL11#UNSIGNED_BYTE GL11#BYTE GL11#UNSIGNED_SHORT GL11#SHORT GL11#UNSIGNED_INT GL11#INT GL30#HALF_FLOAT GL11#FLOAT
+    GL12#UNSIGNED_BYTE_3_3_2 GL12#UNSIGNED_BYTE_2_3_3_REV GL12#UNSIGNED_SHORT_5_6_5 GL12#UNSIGNED_SHORT_5_6_5_REV GL12#UNSIGNED_SHORT_4_4_4_4
+    GL12#UNSIGNED_SHORT_4_4_4_4_REV GL12#UNSIGNED_SHORT_5_5_5_1 GL12#UNSIGNED_SHORT_1_5_5_5_REV
+    GL12#UNSIGNED_INT_8_8_8_8 GL12#UNSIGNED_INT_8_8_8_8_REV GL12#UNSIGNED_INT_10_10_10_2 GL12#UNSIGNED_INT_2_10_10_10_REV GL30#UNSIGNED_INT_24_8
+    GL30#UNSIGNED_INT_10F_11F_11F_REV GL30#UNSIGNED_INT_5_9_9_9_REV
+    GL30#FLOAT_32_UNSIGNED_INT_24_8_REV
     """
 
-val PIXEL_DATA_TYPES = "$CORE_PIXEL_DATA_TYPES GL11#GL_BITMAP"
+val PIXEL_DATA_TYPES = "$CORE_PIXEL_DATA_TYPES GL11#BITMAP"
 
 // Table 8.8
 val COLOR_PIXEL_DATA_FORMATS =
 	"""
-	GL11#GL_RED GL11#GL_GREEN GL11#GL_BLUE GL11#GL_ALPHA GL30#GL_RG GL11#GL_RGB GL11#GL_RGBA GL12#GL_BGR GL12#GL_BGRA
-	GL11#GL_LUMINANCE GL11#GL_LUMINANCE_ALPHA
-	GL30#GL_RED_INTEGER GL30#GL_GREEN_INTEGER GL30#GL_BLUE_INTEGER GL30#GL_ALPHA_INTEGER GL30#GL_RG_INTEGER GL30#GL_RGB_INTEGER GL30#GL_RGBA_INTEGER
-	GL30#GL_BGR_INTEGER GL30#GL_BGRA_INTEGER
+	GL11#RED GL11#GREEN GL11#BLUE GL11#ALPHA GL30#RG GL11#RGB GL11#RGBA GL12#BGR GL12#BGRA
+	GL11#LUMINANCE GL11#LUMINANCE_ALPHA
+	GL30#RED_INTEGER GL30#GREEN_INTEGER GL30#BLUE_INTEGER GL30#ALPHA_INTEGER GL30#RG_INTEGER GL30#RGB_INTEGER GL30#RGBA_INTEGER
+	GL30#BGR_INTEGER GL30#BGRA_INTEGER
 	"""
 
-val PIXEL_DATA_FORMATS = "GL11#GL_STENCIL_INDEX GL11#GL_DEPTH_COMPONENT GL30#GL_DEPTH_STENCIL $COLOR_PIXEL_DATA_FORMATS"
+val PIXEL_DATA_FORMATS = "GL11#STENCIL_INDEX GL11#DEPTH_COMPONENT GL30#DEPTH_STENCIL $COLOR_PIXEL_DATA_FORMATS"
 
 // Table 8.22
 val GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
-	"GL30#GL_COMPRESSED_RED GL30#GL_COMPRESSED_RG GL13#GL_COMPRESSED_RGB GL13#GL_COMPRESSED_RGBA GL21#GL_COMPRESSED_SRGB GL21#GL_COMPRESSED_SRGB_ALPHA"
+	"GL30#COMPRESSED_RED GL30#COMPRESSED_RG GL13#COMPRESSED_RGB GL13#COMPRESSED_RGBA GL21#COMPRESSED_SRGB GL21#COMPRESSED_SRGB_ALPHA"
 
 val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
 	"""
-	GL30#GL_COMPRESSED_RED_RGTC1 GL30#GL_COMPRESSED_SIGNED_RED_RGTC1 GL30#GL_COMPRESSED_RG_RGTC2 GL30#GL_COMPRESSED_SIGNED_RG_RGTC2
-	GL42#GL_COMPRESSED_RGBA_BPTC_UNORM GL42#GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM GL42#GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT GL42#GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
+	GL30#COMPRESSED_RED_RGTC1 GL30#COMPRESSED_SIGNED_RED_RGTC1 GL30#COMPRESSED_RG_RGTC2 GL30#COMPRESSED_SIGNED_RG_RGTC2
+	GL42#COMPRESSED_RGBA_BPTC_UNORM GL42#COMPRESSED_SRGB_ALPHA_BPTC_UNORM GL42#COMPRESSED_RGB_BPTC_SIGNED_FLOAT GL42#COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT
 
-	GL43#GL_COMPRESSED_RGB8_ETC2 GL43#GL_COMPRESSED_SRGB8_ETC2 GL43#GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2
-	GL43#GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 GL43#GL_COMPRESSED_RGBA8_ETC2_EAC GL43#GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC GL43#GL_COMPRESSED_R11_EAC
-	GL43#GL_COMPRESSED_SIGNED_R11_EAC GL43#GL_COMPRESSED_RG11_EAC GL43#GL_COMPRESSED_SIGNED_RG11_EAC
+	GL43#COMPRESSED_RGB8_ETC2 GL43#COMPRESSED_SRGB8_ETC2 GL43#COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2
+	GL43#COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 GL43#COMPRESSED_RGBA8_ETC2_EAC GL43#COMPRESSED_SRGB8_ALPHA8_ETC2_EAC GL43#COMPRESSED_R11_EAC
+	GL43#COMPRESSED_SIGNED_R11_EAC GL43#COMPRESSED_RG11_EAC GL43#COMPRESSED_SIGNED_RG11_EAC
 
 	##EXTTextureCompressionS3TC ##EXTTextureCompressionLATC ##ATITextureCompression3DC
 	"""
@@ -74,18 +74,18 @@ val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
 // Tables 8.18, 8.19, 8.20, 8.21, 8.22
 val TEXTURE_INTERNAL_FORMATS =
 	"""
-	GL11#GL_RED GL30#GL_RG GL11#GL_RGB GL11#GL_RGBA GL11#GL_DEPTH_COMPONENT GL30#GL_DEPTH_STENCIL
-	GL30#GL_R8 GL31#GL_R8_SNORM GL30#GL_R16 GL31#GL_R16_SNORM GL30#GL_RG8 GL31#GL_RG8_SNORM GL30#GL_RG16 GL31#GL_RG16_SNORM
-	GL11#GL_R3_G3_B2 GL11#GL_RGB4 GL11#GL_RGB5 GL41#GL_RGB565 GL11#GL_RGB8
+	GL11#RED GL30#RG GL11#RGB GL11#RGBA GL11#DEPTH_COMPONENT GL30#DEPTH_STENCIL
+	GL30#R8 GL31#R8_SNORM GL30#R16 GL31#R16_SNORM GL30#RG8 GL31#RG8_SNORM GL30#RG16 GL31#RG16_SNORM
+	GL11#R3_G3_B2 GL11#RGB4 GL11#RGB5 GL41#RGB565 GL11#RGB8
 
-	GL31#GL_RGB8_SNORM GL11#GL_RGB10 GL11#GL_RGB12 GL11#GL_RGB16 GL31#GL_RGB16_SNORM GL11#GL_RGBA2 GL11#GL_RGBA4 GL11#GL_RGB5_A1 GL11#GL_RGBA8
-	GL31#GL_RGBA8_SNORM GL11#GL_RGB10_A2 GL33#GL_RGB10_A2UI GL11#GL_RGBA12 GL11#GL_RGBA16 GL31#GL_RGBA16_SNORM GL21#GL_SRGB8 GL21#GL_SRGB8_ALPHA8 GL30#GL_R16F
-	GL30#GL_RG16F GL30#GL_RGB16F GL30#GL_RGBA16F GL30#GL_R32F GL30#GL_RG32F GL30#GL_RGB32F GL30#GL_RGBA32F GL30#GL_R11F_G11F_B10F GL30#GL_RGB9_E5 GL30#GL_R8I
-	GL30#GL_R8UI GL30#GL_R16I GL30#GL_R16UI GL30#GL_R32I GL30#GL_R32UI GL30#GL_RG8I GL30#GL_RG8UI GL30#GL_RG16I GL30#GL_RG16UI GL30#GL_RG32I GL30#GL_RG32UI
-	GL30#GL_RGB8I GL30#GL_RGB8UI GL30#GL_RGB16I GL30#GL_RGB16UI GL30#GL_RGB32I GL30#GL_RGB32UI GL30#GL_RGBA8I GL30#GL_RGBA8UI GL30#GL_RGBA16I GL30#GL_RGBA16UI
-	GL30#GL_RGBA32I GL30#GL_RGBA32UI
+	GL31#RGB8_SNORM GL11#RGB10 GL11#RGB12 GL11#RGB16 GL31#RGB16_SNORM GL11#RGBA2 GL11#RGBA4 GL11#RGB5_A1 GL11#RGBA8
+	GL31#RGBA8_SNORM GL11#RGB10_A2 GL33#RGB10_A2UI GL11#RGBA12 GL11#RGBA16 GL31#RGBA16_SNORM GL21#SRGB8 GL21#SRGB8_ALPHA8 GL30#R16F
+	GL30#RG16F GL30#RGB16F GL30#RGBA16F GL30#R32F GL30#RG32F GL30#RGB32F GL30#RGBA32F GL30#R11F_G11F_B10F GL30#RGB9_E5 GL30#R8I
+	GL30#R8UI GL30#R16I GL30#R16UI GL30#R32I GL30#R32UI GL30#RG8I GL30#RG8UI GL30#RG16I GL30#RG16UI GL30#RG32I GL30#RG32UI
+	GL30#RGB8I GL30#RGB8UI GL30#RGB16I GL30#RGB16UI GL30#RGB32I GL30#RGB32UI GL30#RGBA8I GL30#RGBA8UI GL30#RGBA16I GL30#RGBA16UI
+	GL30#RGBA32I GL30#RGBA32UI
 
-	GL14#GL_DEPTH_COMPONENT16 GL14#GL_DEPTH_COMPONENT24 GL14#GL_DEPTH_COMPONENT32 GL30#GL_DEPTH24_STENCIL8 GL30#GL_DEPTH_COMPONENT32F GL30#GL_DEPTH32F_STENCIL8
+	GL14#DEPTH_COMPONENT16 GL14#DEPTH_COMPONENT24 GL14#DEPTH_COMPONENT32 GL30#DEPTH24_STENCIL8 GL30#DEPTH_COMPONENT32F GL30#DEPTH32F_STENCIL8
 
 	$GENERIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS $SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS
 	"""
@@ -860,51 +860,51 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	// Some definitions to be used in the javadocs below
 
-	val COMPARISON_FUNCTIONS = "#GL_NEVER #GL_ALWAYS #GL_LESS #GL_LEQUAL #GL_EQUAL #GL_GEQUAL #GL_GREATER #GL_NOTEQUAL"
+	val COMPARISON_FUNCTIONS = "#NEVER #ALWAYS #LESS #LEQUAL #EQUAL #GEQUAL #GREATER #NOTEQUAL"
 
-	val TEX_COORDS = "#GL_S #GL_T #GL_R #GL_Q"
+	val TEX_COORDS = "#S #T #R #Q"
 
 	// Table 8.3
 	val PIXEL_MAP_NAMES =
 		"""
-		#GL_PIXEL_MAP_I_TO_I #GL_PIXEL_MAP_S_TO_S #GL_PIXEL_MAP_I_TO_R #GL_PIXEL_MAP_I_TO_G #GL_PIXEL_MAP_I_TO_B #GL_PIXEL_MAP_I_TO_A #GL_PIXEL_MAP_R_TO_R
-		#GL_PIXEL_MAP_G_TO_G #GL_PIXEL_MAP_B_TO_B #GL_PIXEL_MAP_A_TO_A
+		#PIXEL_MAP_I_TO_I #PIXEL_MAP_S_TO_S #PIXEL_MAP_I_TO_R #PIXEL_MAP_I_TO_G #PIXEL_MAP_I_TO_B #PIXEL_MAP_I_TO_A #PIXEL_MAP_R_TO_R
+		#PIXEL_MAP_G_TO_G #PIXEL_MAP_B_TO_B #PIXEL_MAP_A_TO_A
 		"""
 
 	val TEXTURE_PARAMETERS =
 		"""
-		GL12#GL_TEXTURE_BASE_LEVEL #GL_TEXTURE_BORDER_COLOR GL14#GL_TEXTURE_COMPARE_MODE GL14#GL_TEXTURE_COMPARE_FUNC GL14#GL_TEXTURE_LOD_BIAS #GL_TEXTURE_MAG_FILTER
-		GL12#GL_TEXTURE_MAX_LEVEL GL12#GL_TEXTURE_MAX_LOD #GL_TEXTURE_MIN_FILTER GL12#GL_TEXTURE_MIN_LOD #GL_TEXTURE_PRIORITY GL33#GL_TEXTURE_SWIZZLE_R
-		GL33#GL_TEXTURE_SWIZZLE_G GL33#GL_TEXTURE_SWIZZLE_B GL33#GL_TEXTURE_SWIZZLE_A GL33#GL_TEXTURE_SWIZZLE_RGBA #GL_TEXTURE_WRAP_S #GL_TEXTURE_WRAP_T
-		GL12#GL_TEXTURE_WRAP_R GL14#GL_DEPTH_TEXTURE_MODE GL14#GL_GENERATE_MIPMAP
+		GL12#TEXTURE_BASE_LEVEL #TEXTURE_BORDER_COLOR GL14#TEXTURE_COMPARE_MODE GL14#TEXTURE_COMPARE_FUNC GL14#TEXTURE_LOD_BIAS #TEXTURE_MAG_FILTER
+		GL12#TEXTURE_MAX_LEVEL GL12#TEXTURE_MAX_LOD #TEXTURE_MIN_FILTER GL12#TEXTURE_MIN_LOD #TEXTURE_PRIORITY GL33#TEXTURE_SWIZZLE_R
+		GL33#TEXTURE_SWIZZLE_G GL33#TEXTURE_SWIZZLE_B GL33#TEXTURE_SWIZZLE_A GL33#TEXTURE_SWIZZLE_RGBA #TEXTURE_WRAP_S #TEXTURE_WRAP_T
+		GL12#TEXTURE_WRAP_R GL14#DEPTH_TEXTURE_MODE GL14#GENERATE_MIPMAP
 		"""
 
 	// Table 17.2
 	val BLENDING_FUNCTIONS =
 		"""
-		#GL_ZERO #GL_ONE #GL_SRC_COLOR #GL_ONE_MINUS_SRC_COLOR #GL_DST_COLOR #GL_ONE_MINUS_DST_COLOR #GL_SRC_ALPHA #GL_ONE_MINUS_SRC_ALPHA #GL_DST_ALPHA
-		#GL_ONE_MINUS_DST_ALPHA #GL_CONSTANT_COLOR #GL_ONE_MINUS_CONSTANT_COLOR #GL_CONSTANT_ALPHA #GL_ONE_MINUS_CONSTANT_ALPHA #GL_SRC_ALPHA_SATURATE
-		GL33#GL_SRC1_COLOR GL33#GL_ONE_MINUS_SRC1_COLOR GL15#GL_SRC1_ALPHA GL33#GL_ONE_MINUS_SRC1_ALPHA
+		#ZERO #ONE #SRC_COLOR #ONE_MINUS_SRC_COLOR #DST_COLOR #ONE_MINUS_DST_COLOR #SRC_ALPHA #ONE_MINUS_SRC_ALPHA #DST_ALPHA
+		#ONE_MINUS_DST_ALPHA #CONSTANT_COLOR #ONE_MINUS_CONSTANT_COLOR #CONSTANT_ALPHA #ONE_MINUS_CONSTANT_ALPHA #SRC_ALPHA_SATURATE
+		GL33#SRC1_COLOR GL33#ONE_MINUS_SRC1_COLOR GL15#SRC1_ALPHA GL33#ONE_MINUS_SRC1_ALPHA
 		"""
 
 	// Table 17.4 and 17.5
 	val FRAMEBUFFERS =
 		"""
-		#GL_NONE #GL_FRONT_LEFT #GL_FRONT_RIGHT #GL_BACK_LEFT #GL_BACK_RIGHT #GL_FRONT #GL_BACK #GL_LEFT #GL_RIGHT #GL_FRONT_AND_BACK #GL_AUX0 #GL_AUX1 #GL_AUX2
-		#GL_AUX3 GL30#GL_COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
+		#NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #FRONT #BACK #LEFT #RIGHT #FRONT_AND_BACK #AUX0 #AUX1 #AUX2
+		#AUX3 GL30#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
 		"""
 
 	// Table 21.1
 	val MAP1_TARGETS =
 		"""
-		#GL_MAP1_VERTEX_3 #GL_MAP1_VERTEX_4 #GL_MAP1_COLOR_4 #GL_MAP1_NORMAL
-		#GL_MAP1_TEXTURE_COORD_1 #GL_MAP1_TEXTURE_COORD_2 #GL_MAP1_TEXTURE_COORD_3 #GL_MAP1_TEXTURE_COORD_4
+		#MAP1_VERTEX_3 #MAP1_VERTEX_4 #MAP1_COLOR_4 #MAP1_NORMAL
+		#MAP1_TEXTURE_COORD_1 #MAP1_TEXTURE_COORD_2 #MAP1_TEXTURE_COORD_3 #MAP1_TEXTURE_COORD_4
 		"""
 
 	val MAP2_TARGETS =
 		"""
-		#GL_MAP2_VERTEX_3 #GL_MAP2_VERTEX_4 #GL_MAP2_COLOR_4 #GL_MAP2_NORMAL
-		#GL_MAP2_TEXTURE_COORD_1 #GL_MAP2_TEXTURE_COORD_2 #GL_MAP2_TEXTURE_COORD_3 #GL_MAP2_TEXTURE_COORD_4
+		#MAP2_VERTEX_3 #MAP2_VERTEX_4 #MAP2_COLOR_4 #MAP2_NORMAL
+		#MAP2_TEXTURE_COORD_1 #MAP2_TEXTURE_COORD_2 #MAP2_TEXTURE_COORD_3 #MAP2_TEXTURE_COORD_4
 		"""
 
 	// Functions
@@ -931,14 +931,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("op", "a symbolic constant indicating an accumulation buffer operation"),
-		GLfloat.IN("value", "a floating-point value to be used in that operation. The possible operations are:", "#GL_ACCUM #GL_LOAD #GL_RETURN #GL_MULT #GL_ADD")
+		GLfloat.IN("value", "a floating-point value to be used in that operation. The possible operations are:", "#ACCUM #LOAD #RETURN #MULT #ADD")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"AlphaFunc",
 		"""
 		The alpha test discards a fragment conditionally based on the outcome of a comparison between the incoming fragment’s alpha value and a constant value.
-		The comparison is enabled or disabled with the generic $Enable and $Disable commands using the symbolic constant {@link #GL_ALPHA_TEST}.
+		The comparison is enabled or disabled with the generic $Enable and $Disable commands using the symbolic constant ${"ALPHA_TEST".link}.
 		When disabled, it is as if the comparison always passes. The test is controlled with this method.
 		""",
 
@@ -949,8 +949,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLboolean.func(
 		"AreTexturesResident",
 		"""
-		Returns {@link #GL_TRUE} if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
-		at least one of the texture objects named in textures is not resident, then {@link #GL_FALSE} is returned, and the residence of each texture object is
+		Returns ${"TRUE".link} if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
+		at least one of the texture objects named in textures is not resident, then ${"FALSE".link} is returned, and the residence of each texture object is
 		returned in residences. Otherwise the contents of residences are not changed.
 		""",
 
@@ -986,7 +986,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"target",
 			"the texture target",
-			"#GL_TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL31#GL_TEXTURE_BUFFER GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY"
+			"#TEXTURE_1D $TEXTURE_2D_TARGETS $TEXTURE_3D_TARGETS GL31#TEXTURE_BUFFER GL32#TEXTURE_2D_MULTISAMPLE GL32#TEXTURE_2D_MULTISAMPLE_ARRAY"
 		),
 		GLuint.IN("texture", "the texture object to bind")
 	).javaDocLink
@@ -1030,7 +1030,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("lists", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the data type of each element in {@code lists}",
-			"#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT #GL_FLOAT #GL_2_BYTES #GL_3_BYTES #GL_4_BYTES"
+			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT #FLOAT #2_BYTES #3_BYTES #4_BYTES"
 		),
 		const _ GLvoid_p.IN("lists", "an array of offsets. Each offset is added to the display list base to obtain the display list number.")
 	)
@@ -1045,7 +1045,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLbitfield.IN(
 			"mask",
 			"Zero or the bitwise OR of one or more values indicating which buffers are to be cleared. Valid values:",
-			"#GL_ACCUM_BUFFER_BIT #GL_COLOR_BUFFER_BIT #GL_DEPTH_BUFFER_BIT #GL_STENCIL_BUFFER_BIT"
+			"#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT"
 		)
 	)
 
@@ -1092,7 +1092,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Specifies a client-defined clip plane.
 
 		The value of the first argument, {@code plane}, is a symbolic constant, CLIP_PLANEi, where i is an integer between 0 and n &ndash; 1, indicating one of
-		n client-defined clip planes. @{code equation} is an array of four double-precision floating-point values. These are the coefficients of a plane
+		n client-defined clip planes. {@code equation} is an array of four double-precision floating-point values. These are the coefficients of a plane
 		equation in object coordinates: p1, p2, p3, and p4 (in that order).
 		""",
 
@@ -1173,24 +1173,24 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"ColorMaterial",
 		"""
 		It is possible to attach one or more material properties to the current color, so that they continuously track its component values. This behavior is
-		enabled and disabled by calling $Enable or $Disable with the symbolic value {@link #GL_COLOR_MATERIAL}. This function controls which
+		enabled and disabled by calling $Enable or $Disable with the symbolic value ${"COLOR_MATERIAL".link}. This function controls which
 		of these modes is selected.
 		""",
 
-		GLenum.IN("face", "specifies which material face is affected by the current color", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK"),
-		GLenum.IN("mode", "specifies which material property or properties track the current color", "#GL_EMISSION #GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_AMBIENT_AND_DIFFUSE")
+		GLenum.IN("face", "specifies which material face is affected by the current color", "#FRONT #BACK #FRONT_AND_BACK"),
+		GLenum.IN("mode", "specifies which material property or properties track the current color", "#EMISSION #AMBIENT #DIFFUSE #SPECULAR #AMBIENT_AND_DIFFUSE")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"ColorPointer",
 		"Specifies the location and organization of a color array.",
 
-		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 4 GL12#GL_BGRA"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 4 GL12#BGRA"),
 		// Removed GL_DOUBLE
 		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_BYTE #GL_UNSIGNED_BYTE #GL_SHORT #GL_UNSIGNED_SHORT #GL_INT #GL_UNSIGNED_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
+			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color array data")
@@ -1204,18 +1204,18 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLint.IN("y", "the lower framebuffer pixel coordinate"),
 		GLsizei.IN("width", "the rectangle width"),
 		GLsizei.IN("height", "the rectangle height"),
-		GLenum.IN("type", "Indicates the type of values to be transfered", "#GL_COLOR #GL_STENCIL #GL_DEPTH GL30#GL_DEPTH_STENCIL")
+		GLenum.IN("type", "Indicates the type of values to be transfered", "#COLOR #STENCIL #DEPTH GL30#DEPTH_STENCIL")
 	).javaDocLink
 
 	GLvoid.func(
 		"CullFace",
 		"""
-		Specifies which polygon faces are culled if {@link #GL_CULL_FACE} is enabled. Front-facing polygons are rasterized if either culling is disabled or the
-		CullFace mode is {@link #GL_BACK} while back-facing polygons are rasterized only if either culling is disabled or the CullFace mode is
-		{@link #GL_FRONT}. The initial setting of the CullFace mode is {@link #GL_BACK}. Initially, culling is disabled.
+		Specifies which polygon faces are culled if ${"CULL_FACE".link} is enabled. Front-facing polygons are rasterized if either culling is disabled or the
+		CullFace mode is ${"BACK".link} while back-facing polygons are rasterized only if either culling is disabled or the CullFace mode is
+		${"FRONT".link}. The initial setting of the CullFace mode is ${"BACK".link}. Initially, culling is disabled.
 		""",
 
-		GLenum.IN("mode", "the CullFace mode", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK")
+		GLenum.IN("mode", "the CullFace mode", "#FRONT #BACK #FRONT_AND_BACK")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -1231,9 +1231,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	GLvoid.func(
 		"DepthFunc",
-		"Specifies the comparison that takes place during the depth buffer test (when {@link #GL_DEPTH_TEST} is enabled).",
+		"Specifies the comparison that takes place during the depth buffer test (when ${"DEPTH_TEST".link} is enabled).",
 
-		GLenum.IN("func", "the depth test comparison", "#GL_NEVER #GL_ALWAYS #GL_LESS #GL_LEQUAL #GL_EQUAL #GL_GREATER #GL_GEQUAL #GL_NOTEQUAL")
+		GLenum.IN("func", "the depth test comparison", "#NEVER #ALWAYS #LESS #LEQUAL #EQUAL #GREATER #GEQUAL #NOTEQUAL")
 	)
 
 	GLvoid.func(
@@ -1258,7 +1258,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"array",
 			"the attribute array to disable",
-			"#GL_VERTEX_ARRAY #GL_NORMAL_ARRAY #GL_COLOR_ARRAY GL14#GL_SECONDARY_COLOR_ARRAY #GL_EDGE_FLAG_ARRAY GL15#GL_FOG_COORD_ARRAY #GL_TEXTURE_COORD_ARRAY"
+			"#VERTEX_ARRAY #NORMAL_ARRAY #COLOR_ARRAY GL14#SECONDARY_COLOR_ARRAY #EDGE_FLAG_ARRAY GL15#FOG_COORD_ARRAY #TEXTURE_COORD_ARRAY"
 		)
 	)
 
@@ -1266,7 +1266,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"DrawArrays",
 		"""
 		Constructs a sequence of geometric primitives by successively transferring elements for {@code count} vertices. Elements {@code first} through
-		{@code first + count &ndash; 1} of each enabled non-instanced array are transferred to the GL.
+		${code("first + count &ndash; 1")} of each enabled non-instanced array are transferred to the GL.
 
 		If an array corresponding to an attribute required by a vertex shader is not enabled, then the corresponding element is taken from the current attribute
 		state. If an array is enabled, the corresponding current vertex attribute value is unaffected by the execution of this function.
@@ -1282,8 +1282,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer to which fragment color zero is written.
 
-		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., {@link GL30#GL_DRAW_FRAMEBUFFER_BINDING} is zero), or
-		a framebuffer object (i.e., {@link GL30#GL_DRAW_FRAMEBUFFER_BINDING} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is zero), or
+		a framebuffer object (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("buf", "the color buffer to draw to", FRAMEBUFFERS)
@@ -1301,15 +1301,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"mode",
 			"the kind of primitives being constructed",
 			"""
-		    #GL_POINTS #GL_LINE_STRIP #GL_LINE_LOOP #GL_LINES #GL_POLYGON #GL_TRIANGLE_STRIP #GL_TRIANGLE_FAN #GL_TRIANGLES #GL_QUAD_STRIP #GL_QUADS
-		    GL32#GL_LINES_ADJACENCY GL32#GL_LINE_STRIP_ADJACENCY GL32#GL_TRIANGLES_ADJACENCY GL32#GL_TRIANGLE_STRIP_ADJACENCY GL40#GL_PATCHES
+		    #POINTS #LINE_STRIP #LINE_LOOP #LINES #POLYGON #TRIANGLE_STRIP #TRIANGLE_FAN #TRIANGLES #QUAD_STRIP #QUADS
+		    GL32#LINES_ADJACENCY GL32#LINE_STRIP_ADJACENCY GL32#TRIANGLES_ADJACENCY GL32#TRIANGLE_STRIP_ADJACENCY GL40#PATCHES
 		    """
 		),
 		(AutoSize("indices") shr "GLChecks.typeToByteShift(type)") _ GLsizei.IN("count", "the number of vertices to transfer to the GL"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"indicates the type of index values in {@code indices}",
-			"#GL_UNSIGNED_BYTE #GL_UNSIGNED_SHORT #GL_UNSIGNED_INT"
+			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
 		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the index values")
 	)
@@ -1336,7 +1336,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		rasterization; some modes affect the interpretation of polygon boundary edges. By default, all edges are boundary edges, but the flagging of polygons,
 		separate triangles, or separate quadrilaterals may be altered by calling this function.
 
-		When a primitive of type {@link #GL_POLYGON}, {@link #GL_TRIANGLES}, or {@link #GL_QUADS} is drawn, each vertex transferred begins an edge. If the edge
+		When a primitive of type ${"POLYGON".link}, ${"TRIANGLES".link}, or ${"QUADS".link} is drawn, each vertex transferred begins an edge. If the edge
 		flag bit is TRUE, then each specified vertex begins an edge that is flagged as boundary. If the bit is FALSE, then induced edges are flagged as
 		non-boundary.
 		""",
@@ -1366,7 +1366,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"array",
 			"the attribute array to enable",
-			"#GL_VERTEX_ARRAY #GL_NORMAL_ARRAY #GL_COLOR_ARRAY GL14#GL_SECONDARY_COLOR_ARRAY #GL_EDGE_FLAG_ARRAY GL15#GL_FOG_COORD_ARRAY #GL_TEXTURE_COORD_ARRAY"
+			"#VERTEX_ARRAY #NORMAL_ARRAY #COLOR_ARRAY GL14#SECONDARY_COLOR_ARRAY #EDGE_FLAG_ARRAY GL15#FOG_COORD_ARRAY #TEXTURE_COORD_ARRAY"
 		)
 	)
 
@@ -1434,7 +1434,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"EvalMesh1",
 		"Carries out an evaluation on a subset of the one-dimensional map grid.",
 
-		GLenum.IN("mode", "the mesh type", "#GL_POINT #GL_LINE"),
+		GLenum.IN("mode", "the mesh type", "#POINT #LINE"),
 		GLint.IN("i1", "the start index"),
 		GLint.IN("i2", "the end index")
 	)
@@ -1443,7 +1443,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"EvalMesh2",
 		"Carries out an evaluation on a rectangular subset of the two-dimensional map grid.",
 
-		GLenum.IN("mode", "the mesh type", "#GL_FILL #GL_LINE #GL_POINT"),
+		GLenum.IN("mode", "the mesh type", "#FILL #LINE #POINT"),
 		GLint.IN("i1", "the u-dimension start index"),
 		GLint.IN("i2", "the u-dimension end index"),
 		GLint.IN("j1", "the v-dimension start index"),
@@ -1469,7 +1469,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns information about primitives when the GL is in feedback mode.",
 
 		AutoSize("buffer") _ GLsizei.IN("size", "the maximum number of values that can be written to {@code buffer}"),
-		GLenum.IN("type", "the type of information to feed back for each vertex", "#GL_2D #GL_3D #GL_3D_COLOR #GL_3D_COLOR_TEXTURE #GL_4D_COLOR_TEXTURE"),
+		GLenum.IN("type", "the type of information to feed back for each vertex", "#2D #3D #3D_COLOR #3D_COLOR_TEXTURE #4D_COLOR_TEXTURE"),
 		GLfloat_p.OUT("buffer", "an array of floating-point values into which feedback information will be placed")
 	)
 
@@ -1490,15 +1490,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Fogi",
 		"Sets the integer value of a fog parameter.",
 
-		GLenum.IN("pname", "the fog parameter", "#GL_FOG_MODE GL15#GL_FOG_COORD_SRC"),
-		GLint.IN("param", "the fog parameter value", "#GL_EXP #GL_EXP2 #GL_LINEAR GL14#GL_FRAGMENT_DEPTH GL15#GL_FOG_COORD")
+		GLenum.IN("pname", "the fog parameter", "#FOG_MODE GL15#FOG_COORD_SRC"),
+		GLint.IN("param", "the fog parameter value", "#EXP #EXP2 #LINEAR GL14#FRAGMENT_DEPTH GL15#FOG_COORD")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
 		"Fogiv",
 		"Pointer version of $Fogi.",
 
-		GLenum.IN("pname", "the fog parameter", "#GL_FOG_MODE GL15#GL_FOG_COORD_SRC"),
+		GLenum.IN("pname", "the fog parameter", "#FOG_MODE GL15#FOG_COORD_SRC"),
 		mods (const, Check(1)) _ GLint_p.IN("params", "the fog parameter buffer")
 	)
 
@@ -1506,7 +1506,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Fogf",
 		"Sets the float value of a fog parameter.",
 
-		GLenum.IN("pname", "the fog parameter", "#GL_FOG_DENSITY #GL_FOG_START #GL_FOG_END"),
+		GLenum.IN("pname", "the fog parameter", "#FOG_DENSITY #FOG_START #FOG_END"),
 		GLfloat.IN("param", "the fog parameter value")
 	)).javaDocLink
 
@@ -1514,7 +1514,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Fogfv",
 		"Pointer version of $Fogf.",
 
-		GLenum.IN("pname", "the fog parameter", "#GL_FOG_DENSITY #GL_FOG_START #GL_FOG_END"),
+		GLenum.IN("pname", "the fog parameter", "#FOG_DENSITY #FOG_START #FOG_END"),
 		mods (const, Check(1)) _ GLfloat_p.IN("params", "the fog parameter buffer")
 	)
 
@@ -1523,10 +1523,10 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		The first step of polygon rasterization is to determine if the polygon is back-facing or front-facing. This determination is made based on the sign of
 		the (clipped or unclipped) polygon's area computed in window coordinates. The interpretation of the sign of this value is controlled with this function.
-		In the initial state, the front face direction is set to {@link #GL_CCW}.
+		In the initial state, the front face direction is set to ${"CCW".link}.
 		""",
 
-		GLenum.IN("dir", "the front face direction", "#GL_CCW #GL_CW")
+		GLenum.IN("dir", "the front face direction", "#CCW #CW")
 	)
 
 	deprecatedGL _ GLuint.func(
@@ -1640,7 +1640,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Returns error information. Each detectable error is assigned a numeric code. When an error is detected, a flag is set and the code is recorded. Further
 		errors, if they occur, do not affect this recorded code. When {@code GetError} is called, the code is returned and the flag is cleared, so that a
-		further error will again record its code. If a call to {@code GetError} returns {@link #GL_NO_ERROR}, then there has been no detectable error since
+		further error will again record its code. If a call to {@code GetError} returns ${"NO_ERROR".link}, then there has been no detectable error since
 		the last call to {@code GetError} (or since the GL was initialized).
 		"""
 	)
@@ -1649,13 +1649,13 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"GetLightiv",
 		"Returns integer information about light parameter {@code value} for {@code light} in {@code data}.",
 
-		GLenum.IN("light", "the light for which to return information", "#GL_LIGHT0 GL_LIGHT[1-7]"),
+		GLenum.IN("light", "the light for which to return information", "#LIGHT0 GL_LIGHT[1-7]"),
 		GLenum.IN(
 			"value",
 			"the light parameter to query",
 			"""
-			#GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_POSITION #GL_CONSTANT_ATTENUATION #GL_LINEAR_ATTENUATION #GL_QUADRATIC_ATTENUATION
-			#GL_SPOT_DIRECTION #GL_SPOT_EXPONENT #GL_SPOT_CUTOFF
+			#AMBIENT #DIFFUSE #SPECULAR #POSITION #CONSTANT_ATTENUATION #LINEAR_ATTENUATION #QUADRATIC_ATTENUATION
+			#SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
 			"""
 		),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
@@ -1676,7 +1676,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns integer information about {@code query} for evaluator map {@code target} in {@code data}.",
 
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
-		GLenum.IN("query", "the information to query", "#GL_ORDER #GL_COEFF #GL_DOMAIN"),
+		GLenum.IN("query", "the information to query", "#ORDER #COEFF #DOMAIN"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
 	)).javaDocLink
 
@@ -1702,8 +1702,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"GetMaterialiv",
 		"Returns integer information about material property {@code value} for {@code face} in {@code data}.",
 
-		GLenum.IN("face", "the material face for which to return information", "#GL_FRONT #GL_BACK"),
-		GLenum.IN("value", "the information to query", "#GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_EMISSION #GL_SHININESS"),
+		GLenum.IN("face", "the material face for which to return information", "#FRONT #BACK"),
+		GLenum.IN("value", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
 		GLint_p.OUT("data", "a scalar or array in which to place the returned data")
 	)).javaDocLink
 
@@ -1759,21 +1759,21 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"GetString",
 		"Return strings describing properties of the current GL context.",
 
-		GLenum.IN("name", "the property to query", "#GL_RENDERER #GL_VENDOR #GL_EXTENSIONS #GL_VERSION GL20#GL_SHADING_LANGUAGE_VERSION")
+		GLenum.IN("name", "the property to query", "#RENDERER #VENDOR #EXTENSIONS #VERSION GL20#SHADING_LANGUAGE_VERSION")
 	)
 
 	val GetTexEnviv = GLvoid.func(
 		"GetTexEnviv",
 		"Returns integer information about {@code value} for {@code env} in {@code data}.",
 
-		GLenum.IN("env", "the texture environment to query", "GL20#GL_POINT_SPRITE #GL_TEXTURE_ENV GL14#GL_TEXTURE_FILTER_CONTROL"),
+		GLenum.IN("env", "the texture environment to query", "GL20#POINT_SPRITE #TEXTURE_ENV GL14#TEXTURE_FILTER_CONTROL"),
 		GLenum.IN(
 			"value",
 			"the value to query",
 			"""
-		    GL20#GL_COORD_REPLACE #GL_TEXTURE_ENV_MODE #GL_TEXTURE_ENV_COLOR GL14#GL_TEXTURE_LOD_BIAS GL13#GL_COMBINE_RGB GL13#GL_COMBINE_ALPHA GL15#GL_SRC0_RGB
-		    GL15#GL_SRC1_RGB GL15#GL_SRC2_RGB GL15#GL_SRC0_ALPHA GL15#GL_SRC1_ALPHA GL15#GL_SRC2_ALPHA GL13#GL_OPERAND0_RGB GL13#GL_OPERAND1_RGB
-		    GL13#GL_OPERAND2_RGB GL13#GL_OPERAND0_ALPHA GL13#GL_OPERAND1_ALPHA GL13#GL_OPERAND2_ALPHA GL13#GL_RGB_SCALE #GL_ALPHA_SCALE
+		    GL20#COORD_REPLACE #TEXTURE_ENV_MODE #TEXTURE_ENV_COLOR GL14#TEXTURE_LOD_BIAS GL13#COMBINE_RGB GL13#COMBINE_ALPHA GL15#SRC0_RGB
+		    GL15#SRC1_RGB GL15#SRC2_RGB GL15#SRC0_ALPHA GL15#SRC1_ALPHA GL15#SRC2_ALPHA GL13#OPERAND0_RGB GL13#OPERAND1_RGB
+		    GL13#OPERAND2_RGB GL13#OPERAND0_ALPHA GL13#OPERAND1_ALPHA GL13#OPERAND2_ALPHA GL13#RGB_SCALE #ALPHA_SCALE
 		    """
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
@@ -1793,7 +1793,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns integer information about {@code value} for {@code coord} in {@code data}.",
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
-		GLenum.IN("value", "the value to query", "#GL_EYE_PLANE #GL_OBJECT_PLANE #GL_TEXTURE_GEN_MODE"),
+		GLenum.IN("value", "the value to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
 		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
 	)).javaDocLink
 
@@ -1822,7 +1822,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"tex",
 			"the texture (or texture face) to be obtained",
-			"#GL_TEXTURE_1D #GL_TEXTURE_2D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_1D_ARRAY GL30#GL_TEXTURE_2D_ARRAY GL31#GL_TEXTURE_RECTANGLE $CUBE_MAP_FACES"
+			"#TEXTURE_1D #TEXTURE_2D GL12#TEXTURE_3D GL30#TEXTURE_1D_ARRAY GL30#TEXTURE_2D_ARRAY GL31#TEXTURE_RECTANGLE $CUBE_MAP_FACES"
 		),
 		GLint.IN("lod", "the level-of-detail number"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
@@ -1842,9 +1842,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"the texture image target",
 			"""
 		    $TEXTURE_2D_TARGETS $PROXY_TEXTURE_2D_TARGETS
-		    #GL_TEXTURE_1D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_2D_ARRAY GL40#GL_TEXTURE_CUBE_MAP_ARRAY GL32#GL_TEXTURE_2D_MULTISAMPLE
-		    GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY #GL_PROXY_TEXTURE_1D GL12#GL_PROXY_TEXTURE_3D GL30#GL_PROXY_TEXTURE_2D_ARRAY GL40#GL_PROXY_TEXTURE_CUBE_MAP_ARRAY
-		    GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE GL32#GL_PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY
+		    #TEXTURE_1D GL12#TEXTURE_3D GL30#TEXTURE_2D_ARRAY GL40#TEXTURE_CUBE_MAP_ARRAY GL32#TEXTURE_2D_MULTISAMPLE
+		    GL32#TEXTURE_2D_MULTISAMPLE_ARRAY #PROXY_TEXTURE_1D GL12#PROXY_TEXTURE_3D GL30#PROXY_TEXTURE_2D_ARRAY GL40#PROXY_TEXTURE_CUBE_MAP_ARRAY
+		    GL32#PROXY_TEXTURE_2D_MULTISAMPLE GL32#PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY
 		    """
 		),
 		GLint.IN("lod", "the level-of-detail number"),
@@ -1852,12 +1852,12 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"value",
 			"the value to query",
 			"""
-		    #GL_TEXTURE_WIDTH #GL_TEXTURE_HEIGHT GL12#GL_TEXTURE_DEPTH #GL_TEXTURE_BORDER GL32#GL_TEXTURE_SAMPLES GL32#GL_TEXTURE_FIXED_SAMPLE_LOCATIONS
-		    #GL_TEXTURE_INTERNAL_FORMAT #GL_TEXTURE_RED_SIZE #GL_TEXTURE_GREEN_SIZE #GL_TEXTURE_BLUE_SIZE #GL_TEXTURE_ALPHA_SIZE
-		    #GL_TEXTURE_LUMINANCE_SIZE #GL_TEXTURE_INTENSITY_SIZE GL14#GL_TEXTURE_DEPTH_SIZE GL30#GL_TEXTURE_STENCIL_SIZE GL30#GL_TEXTURE_SHARED_SIZE
-		    GL30#GL_TEXTURE_RED_TYPE GL30#GL_TEXTURE_GREEN_TYPE GL30#GL_TEXTURE_BLUE_TYPE GL30#GL_TEXTURE_ALPHA_TYPE GL30#GL_TEXTURE_LUMINANCE_TYPE
-		    GL30#GL_TEXTURE_INTENSITY_TYPE GL30#GL_TEXTURE_DEPTH_TYPE GL13#GL_TEXTURE_COMPRESSED GL13#GL_TEXTURE_COMPRESSED_IMAGE_SIZE
-		    GL31#GL_TEXTURE_BUFFER_DATA_STORE_BINDING GL43#GL_TEXTURE_BUFFER_OFFSET GL43#GL_TEXTURE_BUFFER_SIZE
+		    #TEXTURE_WIDTH #TEXTURE_HEIGHT GL12#TEXTURE_DEPTH #TEXTURE_BORDER GL32#TEXTURE_SAMPLES GL32#TEXTURE_FIXED_SAMPLE_LOCATIONS
+		    #TEXTURE_INTERNAL_FORMAT #TEXTURE_RED_SIZE #TEXTURE_GREEN_SIZE #TEXTURE_BLUE_SIZE #TEXTURE_ALPHA_SIZE
+		    #TEXTURE_LUMINANCE_SIZE #TEXTURE_INTENSITY_SIZE GL14#TEXTURE_DEPTH_SIZE GL30#TEXTURE_STENCIL_SIZE GL30#TEXTURE_SHARED_SIZE
+		    GL30#TEXTURE_RED_TYPE GL30#TEXTURE_GREEN_TYPE GL30#TEXTURE_BLUE_TYPE GL30#TEXTURE_ALPHA_TYPE GL30#TEXTURE_LUMINANCE_TYPE
+		    GL30#TEXTURE_INTENSITY_TYPE GL30#TEXTURE_DEPTH_TYPE GL13#TEXTURE_COMPRESSED GL13#TEXTURE_COMPRESSED_IMAGE_SIZE
+		    GL31#TEXTURE_BUFFER_DATA_STORE_BINDING GL43#TEXTURE_BUFFER_OFFSET GL43#TEXTURE_BUFFER_SIZE
 		    """
 		),
 		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
@@ -1881,16 +1881,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"target",
 			"the texture target",
 			"""
-		    #GL_TEXTURE_1D #GL_TEXTURE_2D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_1D_ARRAY GL30#GL_TEXTURE_2D_ARRAY GL31#GL_TEXTURE_RECTANGLE GL13#GL_TEXTURE_CUBE_MAP
-		    GL40#GL_TEXTURE_CUBE_MAP_ARRAY GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+		    #TEXTURE_1D #TEXTURE_2D GL12#TEXTURE_3D GL30#TEXTURE_1D_ARRAY GL30#TEXTURE_2D_ARRAY GL31#TEXTURE_RECTANGLE GL13#TEXTURE_CUBE_MAP
+		    GL40#TEXTURE_CUBE_MAP_ARRAY GL32#TEXTURE_2D_MULTISAMPLE GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
 		    """
 		),
 		GLenum.IN(
 			"value",
 			"the value to query",
 			"""
-			$TEXTURE_PARAMETERS GL42#GL_IMAGE_FORMAT_COMPATIBILITY_TYPE GL42#GL_TEXTURE_IMMUTABLE_FORMAT GL43#GL_TEXTURE_IMMUTABLE_LEVELS GL43#GL_TEXTURE_VIEW_MIN_LEVEL
-			GL43#GL_TEXTURE_VIEW_NUM_LEVELS GL43#GL_TEXTURE_VIEW_MIN_LAYER GL43#GL_TEXTURE_VIEW_NUM_LAYERS #GL_TEXTURE_RESIDENT
+			$TEXTURE_PARAMETERS GL42#IMAGE_FORMAT_COMPATIBILITY_TYPE GL42#TEXTURE_IMMUTABLE_FORMAT GL43#TEXTURE_IMMUTABLE_LEVELS GL43#TEXTURE_VIEW_MIN_LEVEL
+			GL43#TEXTURE_VIEW_NUM_LEVELS GL43#TEXTURE_VIEW_MIN_LAYER GL43#TEXTURE_VIEW_NUM_LAYERS #TEXTURE_RESIDENT
 			"""
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
@@ -1909,7 +1909,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Hint",
 		"""
 		Certain aspects of GL behavior, when there is room for variation, may be controlled with this function. The initial value for all hints is
-		{@link #GL_DONT_CARE}.
+		${"DONT_CARE".link}.
 		""",
 
 		GLenum.IN(
@@ -1917,11 +1917,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"the behavior to control",
 			// Table 21.3
 			"""
-			#GL_PERSPECTIVE_CORRECTION_HINT #GL_POINT_SMOOTH_HINT #GL_LINE_SMOOTH_HINT #GL_POLYGON_SMOOTH_HINT #GL_FOG_HINT GL14#GL_GENERATE_MIPMAP_HINT
-			GL13#GL_TEXTURE_COMPRESSION_HINT GL20#GL_FRAGMENT_SHADER_DERIVATIVE_HINT
+			#PERSPECTIVE_CORRECTION_HINT #POINT_SMOOTH_HINT #LINE_SMOOTH_HINT #POLYGON_SMOOTH_HINT #FOG_HINT GL14#GENERATE_MIPMAP_HINT
+			GL13#TEXTURE_COMPRESSION_HINT GL20#FRAGMENT_SHADER_DERIVATIVE_HINT
 			"""
 		),
-		GLenum.IN("hint", "the behavior hint", "#GL_FASTEST #GL_NICEST #GL_DONT_CARE")
+		GLenum.IN("hint", "the behavior hint", "#FASTEST #NICEST #DONT_CARE")
 	)
 
 	deprecatedGL _ GLvoid.func("InitNames", "Clears the selection name stack.")
@@ -1934,8 +1934,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"format",
 			"the interleaved array format",
 			"""
-			#GL_V2F #GL_V3F #GL_C4UB_V2F #GL_C4UB_V3F #GL_C3F_V3F #GL_N3F_V3F #GL_C4F_N3F_V3F #GL_T2F_V3F #GL_T4F_V4F #GL_T2F_C4UB_V3F #GL_T2F_C3F_V3F
-			#GL_T2F_N3F_V3F #GL_T2F_C4F_N3F_V3F #GL_T4F_C4F_N3F_V4F
+			#V2F #V3F #C4UB_V2F #C4UB_V3F #C3F_V3F #N3F_V3F #C4F_N3F_V3F #T2F_V3F #T4F_V4F #T2F_C4UB_V3F #T2F_C3F_V3F
+			#T2F_N3F_V3F #T2F_C4F_N3F_V3F #T4F_C4F_N3F_V4F
 			"""
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
@@ -1974,7 +1974,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLenum.IN(
 			"pname",
 			"the lighting model parameter to set",
-			"#GL_LIGHT_MODEL_AMBIENT #GL_LIGHT_MODEL_LOCAL_VIEWER #GL_LIGHT_MODEL_TWO_SIDE GL12#GL_LIGHT_MODEL_COLOR_CONTROL"
+			"#LIGHT_MODEL_AMBIENT #LIGHT_MODEL_LOCAL_VIEWER #LIGHT_MODEL_TWO_SIDE GL12#LIGHT_MODEL_COLOR_CONTROL"
 		),
 		GLint.IN("param", "the parameter value")
 	)).javaDocLink
@@ -2007,13 +2007,13 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Lighti",
 		"Sets the integer value of a light parameter.",
 
-		GLenum.IN("light", "the light for which to set the parameter", "#GL_LIGHT0 GL_LIGHT[1-7]"),
+		GLenum.IN("light", "the light for which to set the parameter", "#LIGHT0 GL_LIGHT[1-7]"),
 		GLenum.IN(
 			"pname",
 			"the parameter to set",
 			"""
-			#GL_AMBIENT #GL_DIFFUSE #GL_SPECULAR #GL_POSITION #GL_CONSTANT_ATTENUATION #GL_LINEAR_ATTENUATION #GL_QUADRATIC_ATTENUATION
-			#GL_SPOT_DIRECTION #GL_SPOT_EXPONENT #GL_SPOT_CUTOFF
+			#AMBIENT #DIFFUSE #SPECULAR #POSITION #CONSTANT_ATTENUATION #LINEAR_ATTENUATION #QUADRATIC_ATTENUATION
+			#SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
 			"""
 		),
 		GLint.IN("param", "the parameter value")
@@ -2050,7 +2050,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"LineStipple",
 		"""
 		Defines a line stipple. It determines those fragments that are to be drawn when the line is rasterized. Line stippling may be enabled or disabled using
-		$Enable or $Disable with the constant {@link #GL_LINE_STIPPLE}. When disabled, it is as if the line stipple has its default value.
+		$Enable or $Disable with the constant ${"LINE_STIPPLE".link}. When disabled, it is as if the line stipple has its default value.
 		""",
 
 		GLint.IN(
@@ -2087,7 +2087,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("a1"), td("a5"), td("a9"), td("a13")),
 			tr(td("a2"), td("a6"), td("a10"), td("a14")),
 			tr(td("a3"), td("a7"), td("a11"), td("a15")),
-			tr(td("a4"), td("a8"), td("a12"), td("a16"))
+			tr(td("a4"), td("a8"), td("a12"), td("a16")),
+			matrix = true
 		)}
 
 		This differs from the standard row-major ordering for matrix elements. If the standard ordering is used, all of the subsequent transformation equations
@@ -2114,7 +2115,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("1"), td("0"), td("0"), td("0")),
 			tr(td("0"), td("1"), td("0"), td("0")),
 			tr(td("0"), td("0"), td("1"), td("0")),
-			tr(td("0"), td("0"), td("0"), td("1"))
+			tr(td("0"), td("0"), td("0"), td("1")),
+			matrix = true
 		)}
 	    """
 	)
@@ -2134,8 +2136,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"op",
 			"the operation to set",
 			"""
-			#GL_CLEAR #GL_AND #GL_AND_REVERSE #GL_COPY #GL_AND_INVERTED #GL_NOOP #GL_XOR #GL_OR #GL_NOR #GL_EQUIV #GL_INVERT #GL_OR_REVERSE #GL_COPY_INVERTED
-			#GL_OR_INVERTED #GL_NAND #GL_SET
+			#CLEAR #AND #AND_REVERSE #COPY #AND_INVERTED #NOOP #XOR #OR #NOR #EQUIV #INVERT #OR_REVERSE #COPY_INVERTED
+			#OR_INVERTED #NAND #SET
 			"""
 		)
 	)
@@ -2180,7 +2182,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
 		GLint.IN("vstride", "the number of values in the v-dimension in each block of storage"),
 		GLint.IN("vorder", "the polynomial order in the v-dimension"),
-		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLfloat_p.IN("points", "a set of {@code uorder &times; vorder} blocks of storage containing control points")
+		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLfloat_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -2196,7 +2198,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
 		GLint.IN("vstride", "the number of values in the v-dimension in each block of storage"),
 		GLint.IN("vorder", "the polynomial order in the v-dimension"),
-		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLdouble_p.IN("points", "a set of {@code uorder &times; vorder} blocks of storage containing control points")
+		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLdouble_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
 	)
 
 	val MapGrid1f = (deprecatedGL _ GLvoid.func(
@@ -2245,8 +2247,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Materiali",
 		"Sets the integer value of a material parameter.",
 
-		GLenum.IN("face", "the material face for which to set the parameter", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK"),
-		GLenum.IN("pname", "the parameter to set", "#GL_SHININESS"),
+		GLenum.IN("face", "the material face for which to set the parameter", "#FRONT #BACK #FRONT_AND_BACK"),
+		GLenum.IN("pname", "the parameter to set", "#SHININESS"),
 		GLint.IN("param", "the parameter value")
 	)).javaDocLink
 
@@ -2264,7 +2266,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Pointer version of $Materiali.",
 
 		GLenum.IN("face", "the material face for which to set the parameter"),
-		GLenum.IN("pname", "the parameter to set", "#GL_AMBIENT #GL_DIFFUSE #GL_AMBIENT_AND_DIFFUSE #GL_SPECULAR #GL_EMISSION"),
+		GLenum.IN("pname", "the parameter to set", "#AMBIENT #DIFFUSE #AMBIENT_AND_DIFFUSE #SPECULAR #EMISSION"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
@@ -2281,7 +2283,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"MatrixMode",
 		"Set the current matrix mode.",
 
-		GLenum.IN("mode", "the matrix mode", "#GL_MODELVIEW #GL_PROJECTION #GL_TEXTURE #GL_COLOR")
+		GLenum.IN("mode", "the matrix mode", "#MODELVIEW #PROJECTION #TEXTURE #COLOR")
 	)
 
 	val MultMatrixf = (deprecatedGL _ GLvoid.func(
@@ -2301,7 +2303,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid.func(
 		"Frustum",
 		"""
-		Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates {@code (lb &ndash; n)}<sup>T</sup>
+		Manipulates the current matrix with a matrix that produces perspective projection, in such a way that the coordinates ${code("(lb &ndash; n)<sup>T</sup>")}
 		and ${code("(rt &ndash; n)<sup>T</sup>")} specify the points on the near clipping plane that are mapped to the lower left and upper right corners of the
 		window, respectively (assuming that the eye is located at ${code("(0 0 0)<sup>T</sup>")}). {@code f} gives the distance from the eye to the far clipping
 		plane.
@@ -2311,7 +2313,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("2n / (r - l)"), td("0"), td("(r + l) / (r - l)"), td("0")),
 			tr(td("0"), td("2n / (t - b)"), td("(t + b) / (t - b)"), td("0")),
 			tr(td("0"), td("0"), td("- (f + n) / (f - n)"), td("- (2fn) / (f - n)")),
-			tr(td("0"), td("0"), td("-1"), td("0"))
+			tr(td("0"), td("0"), td("-1"), td("0")),
+		    matrix = true
 		)}
 		""",
 
@@ -2328,7 +2331,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Begins the definition of a display list.",
 
 		GLuint.IN("n", "a positive integer to which the display list that follows is assigned"),
-		GLenum.IN("mode", "a symbolic constant that controls the behavior of the GL during display list creation", "#GL_COMPILE #GL_COMPILE_AND_EXECUTE")
+		GLenum.IN("mode", "a symbolic constant that controls the behavior of the GL during display list creation", "#COMPILE #COMPILE_AND_EXECUTE")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -2365,7 +2368,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_BYTE, GL_SHORT, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_BYTE #GL_SHORT #GL_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
+			"#BYTE #SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the normal array data")
@@ -2384,7 +2387,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("2 / (r - l)"), td("0"), td("0"), td("- (r + l) / (r - l)")),
 			tr(td("0"), td("2 / (t - b)"), td("0"), td("- (t + b) / (t - b)")),
 			tr(td("0"), td("0"), td("- 2 / (f - n)"), td("- (f + n) / (f - n)")),
-			tr(td("0"), td("0"), td("0"), td("1"))
+			tr(td("0"), td("0"), td("0"), td("1")),
+			matrix = true
 		)}
 		""",
 
@@ -2442,9 +2446,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"pname",
 			"the pixel store parameter to set",
 			"""
-		    #GL_UNPACK_SWAP_BYTES #GL_UNPACK_LSB_FIRST #GL_UNPACK_ROW_LENGTH #GL_UNPACK_SKIP_ROWS #GL_UNPACK_SKIP_PIXELS #GL_UNPACK_ALIGNMENT
-		    GL12#GL_UNPACK_IMAGE_HEIGHT GL12#GL_UNPACK_SKIP_IMAGES GL42#GL_UNPACK_COMPRESSED_BLOCK_WIDTH GL42#GL_UNPACK_COMPRESSED_BLOCK_HEIGHT
-		    GL42#GL_UNPACK_COMPRESSED_BLOCK_DEPTH GL42#GL_UNPACK_COMPRESSED_BLOCK_SIZE
+		    #UNPACK_SWAP_BYTES #UNPACK_LSB_FIRST #UNPACK_ROW_LENGTH #UNPACK_SKIP_ROWS #UNPACK_SKIP_PIXELS #UNPACK_ALIGNMENT
+		    GL12#UNPACK_IMAGE_HEIGHT GL12#UNPACK_SKIP_IMAGES GL42#UNPACK_COMPRESSED_BLOCK_WIDTH GL42#UNPACK_COMPRESSED_BLOCK_HEIGHT
+		    GL42#UNPACK_COMPRESSED_BLOCK_DEPTH GL42#UNPACK_COMPRESSED_BLOCK_SIZE
 		    """
 		),
 		GLint.IN("param", "the parameter value")
@@ -2466,14 +2470,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"pname",
 			"the pixel transfer parameter to set",
 			"""
-		    #GL_MAP_COLOR #GL_MAP_STENCIL #GL_INDEX_SHIFT #GL_INDEX_OFFSET #GL_RED_SCALE #GL_GREEN_SCALE #GL_BLUE_SCALE #GL_ALPHA_SCALE #GL_DEPTH_SCALE
-		    #GL_RED_BIAS #GL_GREEN_BIAS #GL_BLUE_BIAS #GL_ALPHA_BIAS #GL_DEPTH_BIAS
-			ARBImaging#GL_POST_CONVOLUTION_RED_SCALE ARBImaging#GL_POST_CONVOLUTION_RED_BIAS ARBImaging#GL_POST_COLOR_MATRIX_RED_SCALE
-			ARBImaging#GL_POST_COLOR_MATRIX_RED_BIAS ARBImaging#GL_POST_CONVOLUTION_GREEN_SCALE ARBImaging#GL_POST_CONVOLUTION_GREEN_BIAS
-			ARBImaging#GL_POST_COLOR_MATRIX_GREEN_SCALE ARBImaging#GL_POST_COLOR_MATRIX_GREEN_BIAS ARBImaging#GL_POST_CONVOLUTION_BLUE_SCALE
-			ARBImaging#GL_POST_CONVOLUTION_BLUE_BIAS ARBImaging#GL_POST_COLOR_MATRIX_BLUE_SCALE ARBImaging#GL_POST_COLOR_MATRIX_BLUE_BIAS
-			ARBImaging#GL_POST_CONVOLUTION_ALPHA_SCALE ARBImaging#GL_POST_CONVOLUTION_ALPHA_BIAS ARBImaging#GL_POST_COLOR_MATRIX_ALPHA_SCALE
-			ARBImaging#GL_POST_COLOR_MATRIX_ALPHA_BIAS
+		    #MAP_COLOR #MAP_STENCIL #INDEX_SHIFT #INDEX_OFFSET #RED_SCALE #GREEN_SCALE #BLUE_SCALE #ALPHA_SCALE #DEPTH_SCALE
+		    #RED_BIAS #GREEN_BIAS #BLUE_BIAS #ALPHA_BIAS #DEPTH_BIAS
+			ARBImaging#POST_CONVOLUTION_RED_SCALE ARBImaging#POST_CONVOLUTION_RED_BIAS ARBImaging#POST_COLOR_MATRIX_RED_SCALE
+			ARBImaging#POST_COLOR_MATRIX_RED_BIAS ARBImaging#POST_CONVOLUTION_GREEN_SCALE ARBImaging#POST_CONVOLUTION_GREEN_BIAS
+			ARBImaging#POST_COLOR_MATRIX_GREEN_SCALE ARBImaging#POST_COLOR_MATRIX_GREEN_BIAS ARBImaging#POST_CONVOLUTION_BLUE_SCALE
+			ARBImaging#POST_CONVOLUTION_BLUE_BIAS ARBImaging#POST_COLOR_MATRIX_BLUE_SCALE ARBImaging#POST_COLOR_MATRIX_BLUE_BIAS
+			ARBImaging#POST_CONVOLUTION_ALPHA_SCALE ARBImaging#POST_CONVOLUTION_ALPHA_BIAS ARBImaging#POST_COLOR_MATRIX_ALPHA_SCALE
+			ARBImaging#POST_COLOR_MATRIX_ALPHA_BIAS
 		    """
 		),
 		GLint.IN("param", "the parameter value")
@@ -2517,13 +2521,13 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Controls the interpretation of polygons for rasterization.
 
-		{@link #GL_FILL} is the default mode of polygon rasterization. Note that these modes affect only the final rasterization of polygons: in particular, a
+		${"FILL".link} is the default mode of polygon rasterization. Note that these modes affect only the final rasterization of polygons: in particular, a
 		polygon's vertices are lit, and the polygon is clipped and possibly culled before these modes are applied. Polygon antialiasing applies only to the
-		{@link #GL_FILL} state of PolygonMode. For {@link #GL_POINT} or {@link #GL_LINE}, point antialiasing or line segment antialiasing, respectively, apply.
+		${"FILL".link} state of PolygonMode. For ${"POINT".link} or ${"LINE".link}, point antialiasing or line segment antialiasing, respectively, apply.
 		""",
 
-		GLenum.IN("face", "the face for which to set the rasterizing method", "#GL_FRONT #GL_BACK #GL_FRONT_AND_BACK"),
-		GLenum.IN("mode", "the rasterization mode", "#GL_POINT #GL_LINE #GL_FILL")
+		GLenum.IN("face", "the face for which to set the rasterizing method", "#FRONT #BACK #FRONT_AND_BACK"),
+		GLenum.IN("mode", "the rasterization mode", "#POINT #LINE #FILL")
 	)
 
 	GLvoid.func(
@@ -2549,7 +2553,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		If x<sub>w</sub> and y<sub>w</sub> are the window coordinates of a rasterized polygon fragment, then that fragment is sent to the next stage of the GL
 		if and only if the bit of the pattern (x<sub>w</sub> mod 32, y<sub>w</sub> mod 32) is 1.
 
-		Polygon stippling may be enabled or disabled with $Enable or $Disable using the constant {@link #GL_POLYGON_STIPPLE}. When disabled,
+		Polygon stippling may be enabled or disabled with $Enable or $Disable using the constant ${"POLYGON_STIPPLE".link}. When disabled,
 		it is as if the stipple pattern were all ones.
 		""",
 
@@ -2562,20 +2566,20 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the server attribute stack. Each constant refers to a
 		group of state variables.
 
-		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value {@link #GL_ALL_ATTRIB_BITS} may be used to push all
+		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value ${"ALL_ATTRIB_BITS".link} may be used to push all
 		stackable server state.
 
-		A {@link #GL_STACK_OVERFLOW} error is generated if {@code PushAttrib} is called and the attribute stack depth is equal to the value of
-		{@link #GL_MAX_ATTRIB_STACK_DEPTH}.
+		A ${"STACK_OVERFLOW".link} error is generated if {@code PushAttrib} is called and the attribute stack depth is equal to the value of
+		${"MAX_ATTRIB_STACK_DEPTH".link}.
 		""",
 
 		GLbitfield.IN(
 			"mask",
 			"the state variables to push",
 			"""
-			#GL_ACCUM_BUFFER_BIT #GL_COLOR_BUFFER_BIT #GL_CURRENT_BIT #GL_DEPTH_BUFFER_BIT #GL_ENABLE_BIT #GL_EVAL_BIT #GL_FOG_BIT #GL_HINT_BIT #GL_LIGHTING_BIT
-			#GL_LINE_BIT #GL_LIST_BIT GL13#GL_MULTISAMPLE_BIT #GL_PIXEL_MODE_BIT #GL_POINT_BIT #GL_POLYGON_BIT #GL_POLYGON_STIPPLE_BIT #GL_SCISSOR_BIT
-			#GL_STENCIL_BUFFER_BIT #GL_TEXTURE_BIT #GL_TRANSFORM_BIT #GL_VIEWPORT_BIT #GL_ALL_ATTRIB_BITS
+			#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #CURRENT_BIT #DEPTH_BUFFER_BIT #ENABLE_BIT #EVAL_BIT #FOG_BIT #HINT_BIT #LIGHTING_BIT
+			#LINE_BIT #LIST_BIT GL13#MULTISAMPLE_BIT #PIXEL_MODE_BIT #POINT_BIT #POLYGON_BIT #POLYGON_STIPPLE_BIT #SCISSOR_BIT
+			#STENCIL_BUFFER_BIT #TEXTURE_BIT #TRANSFORM_BIT #VIEWPORT_BIT #ALL_ATTRIB_BITS
 			"""
 		)
 	)).javaDocLink
@@ -2586,14 +2590,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the client attribute stack. Each constant refers to a
 		group of state variables.
 
-		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value {@link #GL_CLIENT_ALL_ATTRIB_BITS} may be used to push
+		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value ${"CLIENT_ALL_ATTRIB_BITS".link} may be used to push
 		all stackable client state.
 
-		A {@link #GL_STACK_OVERFLOW} error is generated if {@code PushAttrib} is called and the client attribute stack depth is equal to the value of
-		{@link #GL_MAX_CLIENT_ATTRIB_STACK_DEPTH}.
+		A ${"STACK_OVERFLOW".link} error is generated if {@code PushAttrib} is called and the client attribute stack depth is equal to the value of
+		${"MAX_CLIENT_ATTRIB_STACK_DEPTH".link}.
 		""",
 
-		GLbitfield.IN("mask", "the state variables to push", "#GL_CLIENT_VERTEX_ARRAY_BIT #GL_CLIENT_PIXEL_STORE_BIT #GL_CLIENT_ALL_ATTRIB_BITS")
+		GLbitfield.IN("mask", "the state variables to push", "#CLIENT_VERTEX_ARRAY_BIT #CLIENT_PIXEL_STORE_BIT #CLIENT_ALL_ATTRIB_BITS")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -2709,8 +2713,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer from which values are obtained.
 
-		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., {@link GL30#GL_DRAW_FRAMEBUFFER_BINDING} is zero), or
-		a framebuffer object (i.e., {@link GL30#GL_DRAW_FRAMEBUFFER_BINDING} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is zero), or
+		a framebuffer object (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("src", "the color buffer to read from", FRAMEBUFFERS)
@@ -2722,7 +2726,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		ReadPixels obtains values from the selected read buffer from each pixel with lower left hand corner at {@code (x + i, y + j)} for {@code 0 <= i < width}
 		and {@code 0 <= j < height}; this pixel is said to be the i<sup>th</sup> pixel in the j<sup>th</sup> row. If any of these pixels lies outside of the
 		window allocated to the current GL context, or outside of the image attached to the currently bound read framebuffer object, then the values obtained
-		for those pixels are undefined. When {@link GL30#GL_READ_FRAMEBUFFER_BINDING} is zero, values are also undefined for individual pixels that are not owned by
+		for those pixels are undefined. When ${"GL30".link("READ_FRAMEBUFFER_BINDING")} is zero, values are also undefined for individual pixels that are not owned by
 		the current context. Otherwise, {@code ReadPixels} obtains values from the selected buffer, regardless of how those values were placed there.
 		""",
 
@@ -2782,9 +2786,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	deprecatedGL _ GLint.func(
 		"RenderMode",
-		"Sets the current render mode. The default is #GL_RENDER.",
+		"Sets the current render mode. The default is #RENDER.",
 
-		GLenum.IN("mode", "the render mode", "#GL_RENDER #GL_SELECT #GL_FEEDBACK")
+		GLenum.IN("mode", "the render mode", "#RENDER #SELECT #FEEDBACK")
 	)
 
 	val Rotatef = (deprecatedGL _ GLvoid.func(
@@ -2799,14 +2803,16 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("<b>R</b>", 3, 3), td("0")),
 			tr(td("0")),
 			tr(td("0")),
-			tr(td("0"), td("0"), td("0"), td("1"))
+			tr(td("0"), td("0"), td("0"), td("1")),
+			matrix = true
 		)}
 
 		Let <code>u = v / ||v|| = (x' y' z')<sup>T</sup></code>. If <b>S</b> =
 		${table(
 			tr(td("0"), td("-z'"), td("y'")),
 			tr(td("z'"), td("0"), td("-x'")),
-			tr(td("-y'"), td("x'"), td("0"))
+			tr(td("-y'"), td("x'"), td("0")),
+			matrix = true
 		)}
 
 		then ${code("<b>R</b> = uu<sup>T</sup> + cos(angle)(I - uu<sup>T</sup>) + sin(angle)<b>S</b>")}
@@ -2838,7 +2844,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("x"), td("0"), td("0"), td("0")),
 			tr(td("0"), td("y"), td("0"), td("0")),
 			tr(td("0"), td("0"), td("z"), td("0")),
-			tr(td("0"), td("0"), td("0"), td("1"))
+			tr(td("0"), td("0"), td("0"), td("1")),
+			matrix = true
 		)}
 		""",
 
@@ -2860,7 +2867,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Scissor",
 		"""
 		Defines the scissor rectangle for all viewports. The scissor test is enabled or disabled for all viewports using $Enable or $Disable
-		with the symbolic constant {@link #GL_SCISSOR_TEST}. When disabled, it is as if the scissor test always passes. When enabled, if
+		with the symbolic constant ${"SCISSOR_TEST".link}. When disabled, it is as if the scissor test always passes. When enabled, if
 		${code("left <= x<sub>w</sub> < left + width")} and ${code("bottom <= y<sub>w</sub> < bottom + height")} for the scissor rectangle, then the scissor
 		test passes. Otherwise, the test fails and the fragment is discarded.
 		""",
@@ -2882,14 +2889,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid.func(
 		"ShadeModel",
 		"""
-		Sets the current shade mode. The initial value of the shade mode is {@link #GL_SMOOTH}.
+		Sets the current shade mode. The initial value of the shade mode is ${"SMOOTH".link}.
 
-		If mode is {@link #GL_SMOOTH}, vertex colors are treated individually. If mode is {@link #GL_FLAT}, flatshading is enabled and colors are taken from the
+		If mode is ${"SMOOTH".link}, vertex colors are treated individually. If mode is ${"FLAT".link}, flatshading is enabled and colors are taken from the
 		provoking vertex of the primitive. The colors selected are those derived from current values, generated by lighting, or generated by vertex shading, if
 		lighting is disabled, enabled, or a vertex shader is in use, respectively.
 		""",
 
-		GLenum.IN("mode", "the shade mode", "#GL_SMOOTH #GL_FLAT")
+		GLenum.IN("mode", "the shade mode", "#SMOOTH #FLAT")
 	)
 
 	GLvoid.func(
@@ -2925,8 +2932,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Indicates what happens to the stored stencil value if this or certain subsequent tests fail or pass.
 
-		The supported actions are {@link #GL_KEEP}, {@link #GL_ZERO}, {@link #GL_REPLACE}, {@link #GL_INCR}, {@link #GL_DECR}, {@link #GL_INVERT},
-		{@link GL14#GL_INCR_WRAP} and {@link GL14#GL_DECR_WRAP}. These correspond to keeping the current value, setting to zero, replacing with the reference value,
+		The supported actions are ${"KEEP".link}, ${"ZERO".link}, ${"REPLACE".link}, ${"INCR".link}, ${"DECR".link}, ${"INVERT".link},
+		${"GL14".link("INCR_WRAP")} and ${"GL14".link("DECR_WRAP")}. These correspond to keeping the current value, setting to zero, replacing with the reference value,
 		incrementing with saturation, decrementing with saturation, bitwise inverting it, incrementing without saturation, and decrementing without saturation.
 
 		For purposes of increment and decrement, the stencil bits are considered as an unsigned integer. Incrementing or decrementing with saturation clamps
@@ -3025,7 +3032,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_SHORT #GL_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
+			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the texture coordinate array data")
@@ -3038,23 +3045,23 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		filtering parameters.
 		""",
 
-		GLenum.IN("target", "the texture environment target", "#GL_TEXTURE_ENV GL14#GL_TEXTURE_FILTER_CONTROL GL20#GL_POINT_SPRITE"),
+		GLenum.IN("target", "the texture environment target", "#TEXTURE_ENV GL14#TEXTURE_FILTER_CONTROL GL20#POINT_SPRITE"),
 		GLenum.IN(
 			"pname",
 			"the parameter to set",
 			"""
-			GL20#GL_COORD_REPLACE #GL_TEXTURE_ENV_MODE GL14#GL_TEXTURE_LOD_BIAS GL13#GL_COMBINE_RGB GL13#GL_COMBINE_ALPHA GL15#GL_SRC0_RGB GL15#GL_SRC1_RGB
-		    GL15#GL_SRC2_RGB GL15#GL_SRC0_ALPHA GL15#GL_SRC1_ALPHA GL15#GL_SRC2_ALPHA GL13#GL_OPERAND0_RGB GL13#GL_OPERAND1_RGB GL13#GL_OPERAND2_RGB
-		    GL13#GL_OPERAND0_ALPHA GL13#GL_OPERAND1_ALPHA GL13#GL_OPERAND2_ALPHA GL13#GL_RGB_SCALE #GL_ALPHA_SCALE
+			GL20#COORD_REPLACE #TEXTURE_ENV_MODE GL14#TEXTURE_LOD_BIAS GL13#COMBINE_RGB GL13#COMBINE_ALPHA GL15#SRC0_RGB GL15#SRC1_RGB
+		    GL15#SRC2_RGB GL15#SRC0_ALPHA GL15#SRC1_ALPHA GL15#SRC2_ALPHA GL13#OPERAND0_RGB GL13#OPERAND1_RGB GL13#OPERAND2_RGB
+		    GL13#OPERAND0_ALPHA GL13#OPERAND1_ALPHA GL13#OPERAND2_ALPHA GL13#RGB_SCALE #ALPHA_SCALE
 			"""
 		),
 		GLint.IN(
 			"param",
 			"the parameter value. Scalar value or one of:",
 			"""
-			#GL_REPLACE #GL_MODULATE #GL_DECAL #GL_BLEND #GL_ADD GL13#GL_COMBINE
-			GL13#GL_ADD_SIGNED GL13#GL_INTERPOLATE GL13#GL_SUBTRACT GL13#GL_DOT3_RGB GL13#GL_DOT3_RGBA
-			#GL_TEXTURE GL13#GL_TEXTURE0 GL13.GL_TEXTURE[1-31] GL13#GL_CONSTANT GL13#GL_PRIMARY_COLOR GL13#GL_PREVIOUS
+			#REPLACE #MODULATE #DECAL #BLEND #ADD GL13#COMBINE
+			GL13#ADD_SIGNED GL13#INTERPOLATE GL13#SUBTRACT GL13#DOT3_RGB GL13#DOT3_RGBA
+			#TEXTURE GL13#TEXTURE0 GL13.GL_TEXTURE[1-31] GL13#CONSTANT GL13#PRIMARY_COLOR GL13#PREVIOUS
 			"""
 		)
 	).javaDocLink
@@ -3063,8 +3070,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"TexEnviv",
 		"Pointer version of $TexEnvi.",
 
-		GLenum.IN("target", "the texture environment target", "#GL_TEXTURE_ENV"),
-		GLenum.IN("pname", "the parameter to set", "#GL_TEXTURE_ENV_COLOR"),
+		GLenum.IN("target", "the texture environment target", "#TEXTURE_ENV"),
+		GLenum.IN("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
@@ -3082,8 +3089,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"TexEnvfv",
 		"Pointer version of $TexEnvf.",
 
-		GLenum.IN("target", "the texture environment target", "#GL_TEXTURE_ENV"),
-		GLenum.IN("pname", "the parameter to set", "#GL_TEXTURE_ENV_COLOR"),
+		GLenum.IN("target", "the texture environment target", "#TEXTURE_ENV"),
+		GLenum.IN("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
@@ -3093,17 +3100,17 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Sets an integer texture coordinate generation parameter.
 
 		A texture coordinate generation function is enabled or disabled using $Enable and $Disable with an argument of
-		{@link #GL_TEXTURE_GEN_S}, {@link #GL_TEXTURE_GEN_T}, {@link #GL_TEXTURE_GEN_R}, or {@link #GL_TEXTURE_GEN_Q} (each indicates the corresponding texture
-		coordinate). When enabled, the specified texture coordinate is computed according to the current {@link #GL_EYE_LINEAR}, {@link #GL_OBJECT_LINEAR} or
-		{@link #GL_SPHERE_MAP} specification, depending on the current setting of {@link #GL_TEXTURE_GEN_MODE} for that coordinate. When disabled, subsequent
+		${"TEXTURE_GEN_S".link}, ${"TEXTURE_GEN_T".link}, ${"TEXTURE_GEN_R".link}, or ${"TEXTURE_GEN_Q".link} (each indicates the corresponding texture
+		coordinate). When enabled, the specified texture coordinate is computed according to the current ${"EYE_LINEAR".link}, ${"OBJECT_LINEAR".link} or
+		${"SPHERE_MAP".link} specification, depending on the current setting of ${"TEXTURE_GEN_MODE".link} for that coordinate. When disabled, subsequent
 		vertices will take the indicated texture coordinate from the current texture coordinates.
 
 		The initial state has the texture generation function disabled for all texture coordinates. Initially all texture generation modes are EYE_LINEAR.
 		""",
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter", TEX_COORDS),
-		GLenum.IN("pname", "the parameter to set", "#GL_TEXTURE_GEN_MODE"),
-		GLint.IN("param", "the parameter value", "#GL_OBJECT_LINEAR #GL_EYE_LINEAR #GL_SPHERE_MAP GL13#GL_REFLECTION_MAP GL13#GL_NORMAL_MAP")
+		GLenum.IN("pname", "the parameter to set", "#TEXTURE_GEN_MODE"),
+		GLint.IN("param", "the parameter value", "#OBJECT_LINEAR #EYE_LINEAR #SPHERE_MAP GL13#REFLECTION_MAP GL13#NORMAL_MAP")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -3111,7 +3118,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Pointer version of $TexGeni.",
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
-		GLenum.IN("pname", "the parameter to set", "#GL_OBJECT_PLANE #GL_EYE_PLANE"),
+		GLenum.IN("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
 		mods(const, Check("4")) _ GLint_p.IN("params", "the parameter value")
 	)
 
@@ -3129,7 +3136,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Pointer version of $TexGenf.",
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
-		GLenum.IN("pname", "the parameter to set", "#GL_OBJECT_PLANE #GL_EYE_PLANE"),
+		GLenum.IN("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
@@ -3175,7 +3182,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"TexImage1D",
 		"One-dimensional version of $TexImage2D}.",
 
-		GLenum.IN("target", "the texture target", "#GL_TEXTURE_1D #GL_PROXY_TEXTURE_1D"),
+		GLenum.IN("target", "the texture target", "#TEXTURE_1D #PROXY_TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLint.IN("internalformat", "the texture internal format"),
 		GLsizei.IN("width", "the texture width"),
@@ -3199,8 +3206,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		{@code x}, {@code y}, {@code width}, and {@code height} correspond precisely to the corresponding arguments to $ReadPixels; they specify the
 		image's width and height, and the lower left (x, y) coordinates of the framebuffer region to be copied.
 
-		The image is taken from the framebuffer exactly as if these arguments were passed to $CopyPixels with argument type set to {@link #GL_COLOR},
-		{@link #GL_DEPTH}, or {@link GL30#GL_DEPTH_STENCIL}, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
+		The image is taken from the framebuffer exactly as if these arguments were passed to $CopyPixels with argument type set to ${"COLOR".link},
+		${"DEPTH".link}, or ${"GL30".link("DEPTH_STENCIL")}, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
 		component and stencil index data are taken from the depth and stencil buffers, respectively.
 
 		Subsequent processing is identical to that described for $TexImage2D, beginning with clamping of the R, G, B, A, or depth values, and masking
@@ -3230,7 +3237,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		width and border are exactly those of the corresponding arguments of $TexImage1D.
 		""",
 
-		GLenum.IN("target", "the texture target", "#GL_TEXTURE_1D"),
+		GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("internalFormat", "the texture internal format. See $TexImage2D for a list of supported formats."),
 		GLint.IN("x", "the left framebuffer pixel coordinate"),
@@ -3247,7 +3254,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		details.
 		""",
 
-		GLenum.IN("target", "the texture target", "#GL_TEXTURE_1D"),
+		GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLint.IN("xoffset", "the left texel coordinate of the texture subregion to update"),
 		GLint.IN("x", "the left framebuffer pixel coordinate"),
@@ -3280,8 +3287,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"target",
 			"the texture target",
 			"""
-			#GL_TEXTURE_1D #GL_TEXTURE_2D GL12#GL_TEXTURE_3D GL30#GL_TEXTURE_1D_ARRAY GL30#GL_TEXTURE_2D_ARRAY GL31#GL_TEXTURE_RECTANGLE GL13#GL_TEXTURE_CUBE_MAP
-			GL40#GL_TEXTURE_CUBE_MAP_ARRAY GL32#GL_TEXTURE_2D_MULTISAMPLE GL32#GL_TEXTURE_2D_MULTISAMPLE_ARRAY
+			#TEXTURE_1D #TEXTURE_2D GL12#TEXTURE_3D GL30#TEXTURE_1D_ARRAY GL30#TEXTURE_2D_ARRAY GL31#TEXTURE_RECTANGLE GL13#TEXTURE_CUBE_MAP
+			GL40#TEXTURE_CUBE_MAP_ARRAY GL32#TEXTURE_2D_MULTISAMPLE GL32#TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
 		GLenum.IN("pname", "the parameter to set", TEXTURE_PARAMETERS),
@@ -3317,9 +3324,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	GLvoid.func(
 		"TexSubImage1D",
-		"One-dimensional version of {@link #glTexSubImage2D(int, int, int, int, int, int, int, int, ByteBuffer)}.",
+		"One-dimensional version of ${"TexSubImage2D()".link}.",
 
-		GLenum.IN("target", "the texture target", "#GL_TEXTURE_1D"),
+		GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail-number"),
 		GLint.IN("xoffset", "the left coordinate of the texel subregion"),
 		GLsizei.IN("width", "the subregion width"),
@@ -3364,7 +3371,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			tr(td("1"), td("0"), td("0"), td("x")),
 			tr(td("0"), td("1"), td("0"), td("y")),
 			tr(td("0"), td("0"), td("1"), td("z")),
-			tr(td("0"), td("0"), td("0"), td("1"))
+			tr(td("0"), td("0"), td("0"), td("1")),
+			matrix = true
 		)}
 		""",
 
@@ -3457,7 +3465,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		AutoType("pointer", GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
-			"#GL_SHORT #GL_INT GL30#GL_HALF_FLOAT #GL_FLOAT #GL_DOUBLE GL12#GL_UNSIGNED_INT_2_10_10_10_REV GL33#GL_INT_2_10_10_10_REV"
+			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the vertex array data")
@@ -3469,11 +3477,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Specifies the viewport transformation parameters for all viewports.
 
 		The location of the viewport's bottom-left corner, given by {@code (x, y)}, are clamped to be within the implementation-dependent viewport bounds range.
-		The viewport bounds range {@code [min, max]} tuple may be determined by calling {@link #glGetFloat(int, FloatBuffer)} with the symbolic constant
-		{@link GL41#GL_VIEWPORT_BOUNDS_RANGE}. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum width and
-		height may be found by calling {@link #glGetFloat(int, FloatBuffer)} with the symbolic constant {@link #GL_MAX_VIEWPORT_DIMS}. The maximum viewport
-		dimensions must be greater than or equal to the larger of the visible dimensions of the display being rendered to (if a display exists), and the largest
-		renderbuffer image which can be successfully created and attached to a framebuffer object.
+		The viewport bounds range {@code [min, max]} tuple may be determined by calling ${"GetFloat()".link} with the symbolic
+		constant ${"GL41".link("VIEWPORT_BOUNDS_RANGE")}. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
+		width and height may be found by calling ${"GetFloat()".link} with the symbolic constant ${"MAX_VIEWPORT_DIMS".link}. The
+		maximum viewport dimensions must be greater than or equal to the larger of the visible dimensions of the display being rendered to (if a display
+		exists), and the largest renderbuffer image which can be successfully created and attached to a framebuffer object.
 
 		In the initial state, {@code w} and {@code h} for each viewport are set to the width and height, respectively, of the window into which the GL is to do
 		its rendering. If the default framebuffer is bound but no default framebuffer is associated with the GL context, then {@code w} and {@code h} are

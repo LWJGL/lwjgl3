@@ -15,17 +15,17 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 
 	javaDoc("Native bindings to <dlfcn.h>.")
 
-	val Modes = IntConstant.block(
-		"The {@code mode} argument to {@link #dlopen} contains one of the following:",
+	IntConstant.block(
+		"The {@code mode} argument to ${"dlopen()".link} contains one of the following:",
 
 		"RTLD_LAZY" _ 0x1,
 		"RTLD_NOW" _ 0x2,
 		"RTLD_LOCAL" _ 0x4,
 		"RTLD_GLOBAL" _ 0x8
-	).toJavaDocLinks()
+	)
 
 	LongConstant.block(
-		"Special-handle values for {@link #dlsym}:",
+		"Special-handle values for ${"dlsym()".link}:",
 
 		"RTLD_NEXT" _ -1.L,
 		"RTLD_DEFAULT" _ -2.L,
@@ -44,9 +44,9 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		process, the image is loaded and linked. If the image contains initializer functions, they are executed before this function returns.
 
 		Subsequent calls to {@code dlopen} to load the same image return the same handle, but the internal reference count for the handle is incremented.
-		Therefore, all {@code dlopen} calls must be balanced with {@link #dlclose} calls.
+		Therefore, all {@code dlopen} calls must be balanced with ${"dlclose()".link} calls.
 
-		For efficiency, the {@link #RTLD_LAZY} binding mode is preferred over {@link #RTLD_NOW}. However, using {@link #RTLD_NOW} ensures that any undefined
+		For efficiency, the ${"RTLD_LAZY".link} binding mode is preferred over ${"RTLD_NOW".link}. However, using ${"RTLD_NOW".link} ensures that any undefined
 		symbols are discovered during the call to {@code dlopen}.
 
 		The dynamic loader looks in the paths specified by a set of environment variables, and in the process's current directory, when it searches for a
@@ -82,18 +82,18 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 
 			The following values specify the binding behavior:
 			${ul(
-				"{@link #RTLD_LAZY} (default): Each external symbol reference is bound the first time it's used.",
-				"{@link #RTLD_NOW}: All external symbol references are bound immediately."
+				"${"RTLD_LAZY".link} (default): Each external symbol reference is bound the first time it's used.",
+				"${"RTLD_NOW".link}: All external symbol references are bound immediately."
 			)}
 
 			The following values specify external symbol visibility:
 			${ul(
 				"""
-				{@link #RTLD_GLOBAL} (default): The loaded image's exported symbols are available to any images that use a flat namespace or to calls to
-				dlsym when using a special handle (see {@link #dlsym} for details).
+				${"RTLD_GLOBAL".link} (default): The loaded image's exported symbols are available to any images that use a flat namespace or to calls to
+				dlsym when using a special handle (see ${"dlsym()".link} for details).
 				""",
 				"""
-				{@link #RTLD_LOCAL}: The loaded image's exported symbols are generally hidden. They are available only to {@link #dlsym} invocations that
+				${"RTLD_LOCAL".link}: The loaded image's exported symbols are generally hidden. They are available only to ${"dlsym()".link} invocations that
 				use the handle returned by this function.
 				"""
 			)}
@@ -104,13 +104,13 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 	(const _ charASCII_p).func(
 		"dlerror",
 		"""
-		Provides diagnostic information corresponding to problems with calls to {@link #dlopen}, {@link #dlsym}, and {@link #dlclose} in the same thread.
+		Provides diagnostic information corresponding to problems with calls to ${"dlopen()".link}, ${"dlsym()".link}, and ${"dlclose()".link} in the same thread.
 
 		When there's a problem to report, this function returns a pointer to a null-terminated string describing the problem. Otherwise, this function returns
 		$NULL.
 
 		Each call to {@code dlerror} resets its diagnostic buffer. If a program needs to keep a record of past error messages, it must store them itself.
-		Subsequent calls to {@code dlerror} in the same thread with no calls to {@link #dlopen}, {@link #dlsym}, or {@link #dlclose}, return $NULL.
+		Subsequent calls to {@code dlerror} in the same thread with no calls to ${"dlopen()".link}, ${"dlsym()".link}, or ${"dlclose()".link}, return $NULL.
 		"""
 	)
 
@@ -122,17 +122,15 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		The value of handle specifies what images this function searches for to locate the symbol specified by the symbol parameter. The following table
 		describes the possible values for the handle parameter:
 		${table(
-			tr(th("Handle value"), th("Search scope"), align = "left"),
-			tr(td("{@code dlopen} handle"), td("Image associated with the {@link #dlopen} handle."), align = "left"),
+			tr(th("Handle value"), th("Search scope")),
+			tr(td("{@code dlopen} handle"), td("Image associated with the ${"dlopen()".link} handle.")),
 			tr(
-				td("{@link #RTLD_DEFAULT}"),
-				td("Every dependent library or {@link #RTLD_GLOBAL}–opened library in the current process, in the order they were loaded."),
-				align = "left"
+				td("${"RTLD_DEFAULT".link}"),
+				td("Every dependent library or ${"RTLD_GLOBAL".link}–opened library in the current process, in the order they were loaded.")
 			),
 			tr(
-				td("{@link #RTLD_NEXT}"),
-				td("Dependent libraries that were loaded after the one calling this function. Libraries opened with {@link #dlopen} are not searched."),
-				align = "left"
+				td("${"RTLD_NEXT".link}"),
+				td("Dependent libraries that were loaded after the one calling this function. Libraries opened with ${"dlopen()".link} are not searched.")
 			)
 		)}
 
@@ -142,8 +140,8 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		voidptr.IN(
 			"handle",
 			"""
-			a handle obtained by a call to {@link #dlopen}, or a special handle. If the handle was obtained by a call to {@link #dlopen}, it must not have been
-			closed with a call to {@link #dlclose}. These are the possible special-handle values: {@link #RTLD_DEFAULT}, and {@link #RTLD_NEXT}.
+			a handle obtained by a call to ${"dlopen()".link}, or a special handle. If the handle was obtained by a call to ${"dlopen()".link}, it must not have been
+			closed with a call to ${"dlclose()".link}. These are the possible special-handle values: ${"RTLD_DEFAULT".link}, and ${"RTLD_NEXT".link}.
 			"""
 		),
 		const _ charASCII_p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
@@ -158,7 +156,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		in the image are called, and the image is removed from the address space of the current process. After that point, handle is rendered invalid.
 		""",
 
-		voidptr.IN("handle", "a handle obtained through a call to {@link #dlopen}.")
+		voidptr.IN("handle", "a handle obtained through a call to ${"dlopen()".link}.")
 	)
 
 }

@@ -69,7 +69,7 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 		"GetShaderPrecisionFormat",
 		"Retrieves the range and precision for numeric formats supported by the shader compiler.",
 
-		GLenum.IN("shadertype", "the type of shader whose precision to query", "GL20#GL_VERTEX_SHADER GL20#GL_FRAGMENT_SHADER"),
+		GLenum.IN("shadertype", "the type of shader whose precision to query", "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER"),
 		GLenum.IN("precisiontype", "the numeric format whose precision and range to query"),
 		Check(2) _ GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
 		mods(Check(1), returnValue) _ GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
@@ -140,7 +140,7 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 		"Specifies the integer value of a program object parameter.",
 
 		GLuint.IN("program", "the name of a program object whose parameter to modify"),
-		GLenum.IN("pname", "the name of the parameter to modify", "#GL_PROGRAM_BINARY_RETRIEVABLE_HINT #GL_PROGRAM_SEPARABLE"),
+		GLenum.IN("pname", "the name of the parameter to modify", "#PROGRAM_BINARY_RETRIEVABLE_HINT #PROGRAM_SEPARABLE"),
 		GLint.IN("value", "the new value of the parameter specified by {@code pname} for {@code program}")
 	)
 
@@ -270,7 +270,7 @@ if (shader) {
 		GLenum.IN(
 			"pname",
 			"the name of the parameter to retrieve",
-			"#GL_ACTIVE_PROGRAM GL20#GL_INFO_LOG_LENGTH $SHADER_TYPES"
+			"#ACTIVE_PROGRAM GL20#INFO_LOG_LENGTH $SHADER_TYPES"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
 	)
@@ -898,8 +898,8 @@ if (shader) {
 		"Specifies the location and organization of a 64-bit vertex attribute array.",
 
 		GLuint.IN("index", attribIndex),
-		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#GL_BGRA"),
-		AutoType("pointer", GL_DOUBLE) _ GLenum.IN("type", "the data type of each component in the array", "GL11#GL_DOUBLE"),
+		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
+		AutoType("pointer", GL_DOUBLE) _ GLenum.IN("type", "the data type of each component in the array", "GL11#DOUBLE"),
 		GLsizei.IN(
 			"stride",
 			"""
@@ -911,14 +911,14 @@ if (shader) {
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
-			currently bound to the GL15#GL_ARRAY_BUFFER target. The initial value is 0.
+			currently bound to the GL15#ARRAY_BUFFER target. The initial value is 0.
 			"""
 		)
 	)
 
 	ReferenceGL("glGetVertexAttrib") _ GLvoid.func(
 		"GetVertexAttribLdv",
-		"Double version of {@link GL20#glGetVertexAttribi}.",
+		"Double version of ${"GL20".link("GetVertexAttribi()")}.",
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
