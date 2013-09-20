@@ -1,0 +1,63 @@
+<project name="LWJGL" basedir="." default="update-dependencies">
+
+	<!-- *********************************** -->
+	<property name="disruptor" value="3.2.0"/>
+	<property name="testng" value="6.8.7"/>
+	<property name="jcommander" value="1.30"/>
+	<!-- *********************************** -->
+
+	<local name="config"/>
+	<property name="config" location="config" relative="true"/>
+
+	<import file="${config}/build-definitions.xml" id="defs"/>
+
+	<macrodef name="update">
+		<attribute name="name"/>
+		<attribute name="url"/>
+		<attribute name="dest"/>
+
+		<sequential>
+			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="update-mvn">
+		<attribute name="name"/>
+		<attribute name="group"/>
+		<attribute name="artifact"/>
+		<attribute name="version"/>
+		<attribute name="dest"/>
+
+		<sequential>
+			<update name="@{name}" url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}"/>
+		</sequential>
+	</macrodef>
+
+	<target name="update-dependencies" description="Updates LWJGL dependencies">
+		<update-mvn name="Disruptor" group="com/lmax" artifact="disruptor" version="${disruptor}" dest="${lib}/disruptor.jar"/>
+		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}/jcommander.jar"/>
+		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}/testng.jar"/>
+
+		<touch file="${lib}/touch.txt" verbose="false"/>
+	</target>
+
+	<target name="-dependencies-uptodate">
+		<uptodate property="dependencies-uptodate"
+		          srcfile="update-dependencies.xml"
+		          targetfile="${lib}/touch.txt"/>
+	</target>
+
+	<target name="check-dependencies"
+	        description="Update LWJGL dependencies if the revision has changed"
+	        depends="-dependencies-uptodate"
+	        unless="dependencies-uptodate">
+		<antcall target="update-dependencies"/>
+	</target>
+
+	<target name="clean" description="Deletes LWJGL dependencies">
+		<delete taskname="Disruptor" file="${lib}/disruptor.jar"/>
+		<delete taskname="JCommander" file="${lib}/jcommander.jar"/>
+		<delete taskname="TestNG" file="${lib}/testng.jar" />
+	</target>
+
+</project>

@@ -88,6 +88,31 @@
 		</and>
 	</condition>
 
+	<patternset id="link-objects">
+		<include name="${bin.native}/*.o"/>
+		<include name="${lib}/macosx/${os.arch}/*.a"/>
+	</patternset>
+
+	<target name="-link" unless="link-uptodate">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
+			<srcfile/>
+			<arg line='-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname}'/>
+			<arg value="-framework"/><arg value="AppKit"/>
+			<arg value="-framework"/><arg value="CoreFoundation"/>
+			<arg value="-framework"/><arg value="Cocoa"/>
+			<arg value="-framework"/><arg value="IOKit"/>
+			<arg value="-framework"/><arg value="OpenGL"/>
+
+			<fileset dir=".">
+				<patternset refid="link-objects"/>
+			</fileset>
+		</apply>
+		<!--<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol Strip">
+			<arg line="-S -X"/>
+			<fileset file="${libname}"/>
+		</apply>-->
+	</target>
+
 	<target name="compile-native-macosx">
 		<echo message="${sdkroot}" taskname="SDK Root"/>
 		<!-- COMPILE -->
@@ -124,23 +149,13 @@
 		</apply>
 
 		<!-- LINK -->
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
-			<srcfile/>
-			<arg line='-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname}'/>
-			<arg value="-framework"/><arg value="AppKit"/>
-			<arg value="-framework"/><arg value="CoreFoundation"/>
-			<arg value="-framework"/><arg value="Cocoa"/>
-			<arg value="-framework"/><arg value="IOKit"/>
-			<arg value="-framework"/><arg value="OpenGL"/>
-			<!-- LWJGL objects -->
-			<fileset dir="${bin.native}" includes="*.o"/>
-			<!-- Static libraries -->
-			<fileset dir="${lib.abs}/macosx/${os.arch}" includes="*.a"/>
-		</apply>
-		<!--<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol Strip">
-			<arg line="-S -X"/>
-			<fileset file="${libname}"/>
-		</apply>-->
+		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
+			<srcfiles dir=".">
+				<patternset refid="link-objects"/>
+			</srcfiles>
+		</uptodate>
+
+		<antcall target="-link"/>
 	</target>
 
 </project>

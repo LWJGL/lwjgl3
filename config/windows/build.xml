@@ -1,11 +1,32 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-windows">
 	<import file="../build-definitions.xml"/>
 
-	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib delayimp.lib winmm.lib Comctl32.lib jawt.lib glfw3.lib"/>
+	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib delayimp.lib winmm.lib Comctl32.lib"/>
 
 	<condition property="dllname" value="lwjgl.dll" else="lwjgl64.dll">
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
+
+	<patternset id="link-objects">
+		<include name="${bin.native}/*.obj"/>
+		<include name="${lib}/windows/${os.arch}/*.lib"/>
+	</patternset>
+
+	<target name="-link" unless="link-uptodate">
+		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
+			<arg line="/LD /nologo"/>
+			<srcfile/>
+			<arg line="/Fe${dllname} /link"/>
+			<arg value="/LIBPATH:${java.home}\..\lib"/>
+			<arg value="/OPT:REF"/>
+			<arg value="/OPT:ICF"/>
+			<arg line="/DLL ${libs}"/>
+
+			<fileset dir=".">
+				<patternset refid="link-objects"/>
+			</fileset>
+		</apply>
+	</target>
 
 	<target name="compile-native-windows">
 		<!-- COMPILE -->
@@ -42,16 +63,12 @@
 		</apply>
 
 		<!-- LINK -->
-		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line="/LD /nologo"/>
-			<srcfile/>
-			<arg line="/Fe${dllname} /link"/>
-			<arg value="/LIBPATH:${java.home}\..\lib"/>
-			<arg value="/LIBPATH:${lib.abs}\windows\${os.arch}"/>
-			<arg value="/OPT:REF"/>
-			<arg value="/OPT:ICF"/>
-			<arg line="/DLL ${libs}"/>
-			<fileset dir="${bin.native}" includes="*.obj"/>
-		</apply>
+		<uptodate property="link-uptodate" targetfile="${bin.native}/${dllname}">
+			<srcfiles dir=".">
+				<patternset refid="link-objects"/>
+			</srcfiles>
+		</uptodate>
+
+		<antcall target="-link"/>
 	</target>
 </project>

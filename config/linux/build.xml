@@ -17,6 +17,24 @@
 		<equals arg1="${os.arch}" arg2="x86"/>
 	</condition>
 
+	<patternset id="link-objects">
+		<include name="${bin.native}/*.o"/>
+		<include name="${lib}/linux/${os.arch}/*.a"/>
+	</patternset>
+
+	<target name="-link" unless="link-uptodate">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
+			<srcfile/>
+			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
+			<fileset dir=".">
+				<patternset refid="link-objects"/>
+			</fileset>
+		</apply>
+		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
+			<fileset file="${libname}"/>
+		</apply>
+	</target>
+
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
@@ -51,17 +69,13 @@
 		</apply>
 
 		<!-- LINK -->
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
-			<srcfile/>
-			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
-			<!-- LWJGL objects -->
-			<fileset dir="${bin.native}" includes="*.o"/>
-			<!-- Static libraries -->
-			<fileset dir="${lib.abs}/linux/${os.arch}" includes="*.a"/>
-		</apply>
-		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
-			<fileset file="${libname}"/>
-		</apply>
+		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
+			<srcfiles dir=".">
+				<patternset refid="link-objects"/>
+			</srcfiles>
+		</uptodate>
+
+		<antcall target="-link"/>
 	</target>
 
 </project>

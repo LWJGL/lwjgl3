@@ -29,13 +29,15 @@
 	<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 
 	<!-- Initialize build -->
-	<target name="-initialize" description="Initializes the directories required by the build process.">
+	<target name="-initialize" description="Initializes the directories required by the build process">
 		<mkdir dir="${generated}"/>
 		<mkdir dir="${bin.core}"/>
 		<mkdir dir="${bin.util}"/>
 		<mkdir dir="${bin.templates}"/>
 		<mkdir dir="${bin.tests}"/>
 		<mkdir dir="${bin.native}"/>
+
+		<ant antfile="update-dependencies.xml" target="check-dependencies"/>
 	</target>
 
 	<!-- Cleans up any files created during the execution of this script -->
@@ -70,10 +72,11 @@
 		<delete dir="${generated.native}"/>
 	</target>
 
-	<target name="all" depends="compile-templates,tests"/>
+	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
 	<!-- Checks if the Kotlin compiler must be updated -->
 	<target name="-kotlinc-update">
+		<local name="kotlinc-build-current"/>
 		<loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
 
 		<condition property="kotlinc-uptodate">
@@ -85,7 +88,7 @@
 	</target>
 
 	<!-- Downloads and extracts the Kotlin compiler. -->
-	<target name="-kotlinc-download" unless="kotlinc-uptodate">
+	<target name="-kotlinc-download" depends="-kotlinc-update" unless="kotlinc-uptodate">
 		<local name="kotlinc-archive"/>
 		<property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-build}.zip"/>
 
@@ -101,7 +104,7 @@
 		<echo message="The Kotlin compiler was updated to build: ${kotlinc-build}" taskname="kotlinc"/>
 	</target>
 
-	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize,-kotlinc-update,-kotlinc-download">
+	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize,-kotlinc-download">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="java6.boot.classpath" taskname="Java dependencies">
 			<src path="${src.templates}"/>
@@ -162,8 +165,13 @@
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the code Generator"
-	        depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+	<target name="-generated-uptodate" description="Runs the code Generator" unless="generated-uptodate">
+		<uptodate property="generated-uptodate" targetfile="${generated}/touch.txt">
+			<srcfiles dir="${bin.templates}" includes="**/*.class"/>
+		</uptodate>
+	</target>
+
+	<target name="generate" description="Runs the code Generator" depends="-initialize,-generated-uptodate" unless="generated-uptodate">
 		<java
 			classname="org.lwjgl.generator.GeneratorPackage"
 			fork="true"
@@ -180,6 +188,8 @@
 			<arg value="${src.templates}"/>
 			<arg value="${generated}"/>
 		</java>
+
+		<touch file="${generated}/touch.txt" verbose="false"/>
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
@@ -233,7 +243,7 @@
 		</testng>
 	</target>
 
-	<target name="demo" description="Runs an LWJGL demo">
+	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 		<condition property="class" value="${class}" else="">
 			<isset property="class"/>
@@ -258,7 +268,7 @@
 		</java>
 	</target>
 
-	<target name="javadoc" description="Generates the LWJGL JavaDoc">
+	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
 		<javadoc
 			destdir="${javadoc.output}"
 			source="1.6"
