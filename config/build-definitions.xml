@@ -74,4 +74,39 @@
 		<equals arg1="${platform}" arg2="macosx"/>
 	</condition>
 
+	<macrodef name="update">
+		<attribute name="name"/>
+		<attribute name="url"/>
+		<attribute name="dest"/>
+
+		<sequential>
+			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="update-mvn">
+		<attribute name="name"/>
+		<attribute name="group"/>
+		<attribute name="artifact"/>
+		<attribute name="version"/>
+		<attribute name="dest"/>
+
+		<sequential>
+			<update
+				name="@{name}"
+				url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="update-dropbox">
+		<attribute name="name"/>
+		<attribute name="artifact"/>
+		<attribute name="hash"/>
+		<attribute name="dest"/>
+
+		<sequential>
+			<update name="@{name}" url="https://dl.dropboxusercontent.com/sh/@{hash}/@{artifact}" dest="@{dest}/@{artifact}"/>
+		</sequential>
+	</macrodef>
+
 </project>

@@ -37,7 +37,7 @@
 		<mkdir dir="${bin.tests}"/>
 		<mkdir dir="${bin.native}"/>
 
-		<ant antfile="update-dependencies.xml" target="check-dependencies"/>
+		<ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 	</target>
 
 	<!-- Cleans up any files created during the execution of this script -->
@@ -74,37 +74,7 @@
 
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
-	<!-- Checks if the Kotlin compiler must be updated -->
-	<target name="-kotlinc-update">
-		<local name="kotlinc-build-current"/>
-		<loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
-
-		<condition property="kotlinc-uptodate">
-			<and>
-				<isset property="kotlinc-build-current"/>
-				<equals arg1="${kotlinc-build-current}" arg2="${kotlinc-build}"/>
-			</and>
-		</condition>
-	</target>
-
-	<!-- Downloads and extracts the Kotlin compiler. -->
-	<target name="-kotlinc-download" depends="-kotlinc-update" unless="kotlinc-uptodate">
-		<local name="kotlinc-archive"/>
-		<property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-build}.zip"/>
-
-		<!-- Delete current build -->
-		<delete dir="${kotlinc}" taskname="kotlinc"/>
-		<!-- Download new build -->
-		<get src="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true" taskname="kotlinc"/>
-		<!-- Extract build -->
-		<unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
-		<!-- Delete build archive -->
-		<delete file="${lib}/${kotlinc-archive}" taskname="kotlinc"/>
-
-		<echo message="The Kotlin compiler was updated to build: ${kotlinc-build}" taskname="kotlinc"/>
-	</target>
-
-	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize,-kotlinc-download">
+	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="java6.boot.classpath" taskname="Java dependencies">
 			<src path="${src.templates}"/>

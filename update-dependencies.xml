@@ -1,5 +1,8 @@
 <project name="LWJGL" basedir="." default="update-dependencies">
 
+	<property name="config" location="config" relative="true"/>
+	<import file="${config}/build-definitions.xml" id="defs"/>
+
 	<!-- *********************************** -->
 	<property name="disruptor" value="3.2.0"/>
 	<property name="testng" value="6.8.7"/>
@@ -11,53 +14,80 @@
 
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
-	<macrodef name="update">
-		<attribute name="name"/>
-		<attribute name="url"/>
-		<attribute name="dest"/>
+	<target name="-dependencies-uptodate">
+		<!-- Checks if the Kotlin compiler must be updated -->
+		<local name="kotlinc-build-current"/>
+		<loadfile property="kotlinc-build-current" srcfile="${kotlinc}/build.txt" quiet="true" taskname="kotlinc"/>
+		<condition property="kotlinc-uptodate">
+			<and>
+				<isset property="kotlinc-build-current"/>
+				<equals arg1="${kotlinc-build-current}" arg2="${kotlinc-build}"/>
+			</and>
+		</condition>
 
-		<sequential>
-			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
-		</sequential>
-	</macrodef>
+		<uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
+		<uptodate property="platform-uptodate" srcfile="${config}/${platform}/build.xml" targetfile="${lib}/${platform}/touch.txt"/>
 
-	<macrodef name="update-mvn">
-		<attribute name="name"/>
-		<attribute name="group"/>
-		<attribute name="artifact"/>
-		<attribute name="version"/>
-		<attribute name="dest"/>
+		<condition property="dependencies-uptodate">
+			<and>
+				<isset property="kotlinc-uptodate"/>
+				<isset property="lib-uptodate"/>
+				<isset property="platform-uptodate"/>
+			</and>
+		</condition>
+	</target>
 
-		<sequential>
-			<update name="@{name}" url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}"/>
-		</sequential>
-	</macrodef>
+	<target name="check-dependencies"
+	        description="Updates LWJGL dependencies, if required"
+	        depends="-dependencies-uptodate"
+	        unless="dependencies-uptodate"
+		>
+		<antcall target="update-dependencies"/>
+	</target>
 
 	<target name="update-dependencies" description="Updates LWJGL dependencies">
-		<update-mvn name="Disruptor" group="com/lmax" artifact="disruptor" version="${disruptor}" dest="${lib}/disruptor.jar"/>
-		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}/jcommander.jar"/>
-		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}/testng.jar"/>
+		<antcall target="-lib-download"/>
+		<antcall target="-kotlinc-download"/>
+		<antcall target="-platform-download"/>
+	</target>
+
+	<!-- Downloads and extracts the Kotlin compiler. -->
+	<target name="-kotlinc-download" unless="kotlinc-uptodate">
+		<local name="kotlinc-archive"/>
+		<property name="kotlinc-archive" value="kotlin-compiler-${kotlinc-build}.zip"/>
+
+		<!-- Delete current build -->
+		<delete dir="${kotlinc}" taskname="kotlinc"/>
+		<!-- Download new build -->
+		<get src="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true" taskname="kotlinc"/>
+		<!-- Extract build -->
+		<unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
+		<!-- Delete build archive -->
+		<delete file="${lib}/${kotlinc-archive}" taskname="kotlinc"/>
+
+		<echo message="The Kotlin compiler was updated to build: ${kotlinc-build}" taskname="kotlinc"/>
+	</target>
+
+	<!-- Downloads the Java dependencies. -->
+	<target name="-lib-download" unless="lib-uptodate">
+		<update-mvn name="Disruptor" group="com/lmax" artifact="disruptor" version="${disruptor}" dest="${lib}"/>
+		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
+		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
 
 		<touch file="${lib}/touch.txt" verbose="false"/>
 	</target>
 
-	<target name="-dependencies-uptodate">
-		<uptodate property="dependencies-uptodate"
-		          srcfile="update-dependencies.xml"
-		          targetfile="${lib}/touch.txt"/>
-	</target>
+	<!-- Downloads the platform dependencies. -->
+	<target name="-platform-download" unless="platform-uptodate">
+		<ant antfile="${config}/${platform}/build.xml" target="update-platform-dependencies" inheritAll="false"/>
 
-	<target name="check-dependencies"
-	        description="Update LWJGL dependencies if the revision has changed"
-	        depends="-dependencies-uptodate"
-	        unless="dependencies-uptodate">
-		<antcall target="update-dependencies"/>
+		<touch file="${lib}/${platform}/touch.txt" verbose="false"/>
 	</target>
 
 	<target name="clean" description="Deletes LWJGL dependencies">
 		<delete taskname="Disruptor" file="${lib}/disruptor.jar"/>
 		<delete taskname="JCommander" file="${lib}/jcommander.jar"/>
-		<delete taskname="TestNG" file="${lib}/testng.jar" />
+		<delete taskname="TestNG" file="${lib}/testng.jar"/>
 	</target>
 
 </project>

@@ -1,7 +1,4 @@
 /config/ide/idea/.idea/workspace.xml
 /bin
 /generated
-/libs/*.jar
-/libs/**/*lwjgl*.*
-/libs/kotlinc
-**/touch.txt
+/libs

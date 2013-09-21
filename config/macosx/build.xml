@@ -158,4 +158,11 @@
 		<antcall target="-link"/>
 	</target>
 
+	<!-- Bump this to force dependencies to be updated. -->
+	<property name="revision" value="1"/>
+
+	<target name="update-platform-dependencies">
+		<update-dropbox name="OpenAL" artifact="macosx/openal.dylib" hash="i4zue33q7rs4d7k/mjhxw_7sTN" dest="${lib}"/>
+		<update-dropbox name="GLFW" artifact="macosx/x86_64/libglfw3.a" hash="i4zue33q7rs4d7k/TFDrKNsK9H" dest="${lib}"/>
+	</target>
 </project>
