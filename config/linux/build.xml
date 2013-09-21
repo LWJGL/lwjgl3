@@ -82,6 +82,9 @@
 	<property name="revision" value="1"/>
 
 	<target name="update-platform-dependencies">
+		<mkdir dir="${lib}/linux"/>
+		<mkdir dir="${lib}/linux/amd64"/>
+
 		<update-dropbox name="OpenAL32" artifact="linux/libopenal.so" hash="i4zue33q7rs4d7k/s5QZB5Dz0Z" dest="${lib}"/>
 		<update-dropbox name="OpenAL64" artifact="linux/libopenal64.so" hash="i4zue33q7rs4d7k/JT9CEwZjfk" dest="${lib}"/>
 		<update-dropbox name="GLFW64" artifact="linux/amd64/libglfw3.a" hash="i4zue33q7rs4d7k/IU0VVtRN9v" dest="${lib}"/>

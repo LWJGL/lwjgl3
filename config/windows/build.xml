@@ -76,6 +76,10 @@
 	<property name="revision" value="1"/>
 
 	<target name="update-platform-dependencies">
+		<mkdir dir="${lib}/windows"/>
+		<mkdir dir="${lib}/windows/x86"/>
+		<mkdir dir="${lib}/windows/amd64"/>
+
 		<update-dropbox name="OpenAL32" artifact="windows/OpenAL32.dll" hash="i4zue33q7rs4d7k/eK66IxClph" dest="${lib}"/>
 		<update-dropbox name="OpenAL64" artifact="windows/OpenAL64.dll" hash="i4zue33q7rs4d7k/th0369so9E" dest="${lib}"/>
 		<update-dropbox name="GLFW32" artifact="windows/x86/glfw3.lib" hash="i4zue33q7rs4d7k/zb_3aaleWY" dest="${lib}"/>
