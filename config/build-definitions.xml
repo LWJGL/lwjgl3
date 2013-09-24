@@ -22,6 +22,8 @@
 
 	<property name="generated.java" location="${generated}/java" relative="true"/>
 	<property name="generated.native" location="${generated}/native" relative="true"/>
+	<property name="generated.tests" location="${generated}/tests" relative="true"/>
+	<property name="generated.javadoc" location="${generated}/javadoc" relative="true"/>
 
 	<property name="bin.core" location="${bin}/Core" relative="true"/>
 	<property name="bin.util" location="${bin}/Utilities" relative="true"/>
@@ -29,10 +31,6 @@
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 	<!-- Different location per architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/lwjgl${os.arch}" relative="true"/>
-
-	<property name="tests.output" location="${generated}/tests" relative="true"/>
-
-	<property name="javadoc.output" location="${generated}/javadoc" relative="true"/>
 
 	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
 
