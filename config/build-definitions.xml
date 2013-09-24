@@ -35,7 +35,6 @@
 	<property name="javadoc.output" location="${generated}/javadoc" relative="true"/>
 
 	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
-	<property name="kotlinc-build" value="0.6.391"/>
 
 	<condition property="platform.windows">
 		<os family="Windows"/>
