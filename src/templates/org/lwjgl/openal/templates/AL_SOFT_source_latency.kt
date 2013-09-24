@@ -46,7 +46,7 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 		"SEC_OFFSET_LATENCY_SOFT" _ 0x1201
 	)
 
-	val alSourcedSOFT = ALvoid.func(
+	val SourcedSOFT = ALvoid.func(
 		"SourcedSOFT",
 		"Sets the double value of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -66,13 +66,13 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 
 	ALvoid.func(
 		"SourcedvSOFT",
-		"pointer version of $alSourcedSOFT",
+		"pointer version of $SourcedSOFT",
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALdouble_p.IN("value", "the parameter values")
 	)
 
-	val alGetSourcedSOFT = ALvoid.func(
+	val GetSourcedSOFT = ALvoid.func(
 		"GetSourcedSOFT",
 		"Gets the double value of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -92,13 +92,13 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 
 	ALvoid.func(
 		"GetSourcedvSOFT",
-		"Pointer version of $alGetSourcedSOFT",
+		"Pointer version of $GetSourcedSOFT",
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALdouble_p.IN("values", "the parameter values")
 	)
 
-	val alSourcei64SOFT = ALvoid.func(
+	val Sourcei64SOFT = ALvoid.func(
 		"Sourcei64SOFT",
 		"Sets the 64 bit integer value of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -118,13 +118,13 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 
 	ALvoid.func(
 		"Sourcei64vSOFT",
-		"Pointer version of alSourcei64SOFT",
+		"Pointer version of $Sourcei64SOFT",
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALint64SOFT_p.IN("values", "the parameter values")
 	)
 
-	val alGetSourcei64SOFT = ALvoid.func(
+	val GetSourcei64SOFT = ALvoid.func(
 		"GetSourcei64SOFT",
 		"Gets the 64 bit integer value of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -144,7 +144,7 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 
 	ALvoid.func(
 		"GetSourcei64vSOFT",
-		"Pointer version of alGetSourcei64SOFT",
+		"Pointer version of $GetSourcei64SOFT",
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query"),
 		ALint64SOFT_p.IN("values", "the parameter values")

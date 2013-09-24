@@ -72,7 +72,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"GAIN" _ 0x100A
 	).toJavaDocLinks()
 
-	val SourceAttributes = IntConstant.block(
+	var SourceAttributes = IntConstant.block(
 		"Source attributes.",
 
 		"CONE_INNER_ANGLE" _ 0x1001,
@@ -84,7 +84,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"SOURCE_STATE" _ 0x1010,
 		"CONE_OUTER_GAIN" _ 0x1022,
 		"SOURCE_TYPE" _ 0x1027
-	).toJavaDocLinks() + " $ListenerSourceAttributes"
+	).toJavaDocLinks()
 
 	IntConstant.block(
 		"Source state.",
@@ -99,7 +99,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"Listener attributes.",
 
 		"ORIENTATION" _ 0x100F
-	).toJavaDocLinks() + " $ListenerSourceAttributes"
+	).toJavaDocLinks() + ListenerSourceAttributes
 
 	IntConstant.block(
 		"Queue state.",
@@ -122,6 +122,8 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"ROLLOFF_FACTOR" _ 0x1021,
 		"MAX_DISTANCE" _ 0x1023
 	).toJavaDocLinks()
+
+	SourceAttributes += ListenerSourceAttributes + DistanceModelAttributes
 
 	val BufferAttributes = IntConstant.block(
 		"Buffer attributes,",

@@ -14,12 +14,12 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
 
 	javaDoc("bindings to AL_SOFT_buffer_sub_data extension.")
 
-	val SourceParamNameParameters = IntConstant.block(
+	IntConstant.block(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv.",
 
 		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
-	).toJavaDocLinks();
+	)
 
 	ALCvoid.func(
 		"BufferSubDataSOFT",

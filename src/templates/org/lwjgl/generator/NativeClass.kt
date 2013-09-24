@@ -8,6 +8,7 @@ import java.io.PrintWriter
 import java.util.ArrayList
 import java.util.Collections
 import java.util.HashMap
+import java.util.Comparator
 
 public val INSTANCE: String = "__instance"
 public val EXT_FLAG: String = ""
@@ -22,7 +23,10 @@ public abstract class FunctionProvider {
 		comparator: (NativeClass, NativeClass) -> Int = {(o1, o2) -> o1.templateName compareTo o2.templateName }
 	): List<NativeClass> {
 		val classes = ArrayList<NativeClass>(_classes)
-		Collections.sort(classes, comparator)
+		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
+			suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+			override fun compare(o1: NativeClass, o2: NativeClass): Int = comparator(o1, o2)
+		})
 		return classes
 	}
 
@@ -248,9 +252,13 @@ public class NativeClass(
 	val String.link: String
 		get() = "".link(this) // TODO: Kotlin bug, this undefined without explicit getter.
 
-	fun ConstantBlock.Links.plus(links: String) = this + links.toConstantLinks(prefixConstant)
+	val String.links: ConstantBlock.Links
+		get() = this.toConstantLinks(prefixConstant)
 
-	fun NativeType.IN(name: String, javadoc: String, links: String) = IN(name, javadoc, links.toConstantLinks(prefixConstant))
+	fun ConstantBlock.Links.plus(links: String) = this + links.links
+	fun String.plus(links: ConstantBlock.Links) = this.links + links // TODO: Kotlin bug, this doesn't take priority over the native one. See GL20#glGetVertexAttribiv
+
+	fun NativeType.IN(name: String, javadoc: String, links: String) = IN(name, javadoc, links.links)
 
 }
 

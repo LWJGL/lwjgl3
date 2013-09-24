@@ -88,7 +88,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 		}
 	)
 
-	val XIDeviceEvent = StructType(
+	StructType(
 		struct(LINUX_PACKAGE, "XIDeviceEvent") {
 			javaDoc("XInput2 device event.")
 			nativeImport (

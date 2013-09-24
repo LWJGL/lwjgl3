@@ -704,7 +704,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		GLenum.IN(
 			"pname",
 			"the symbolic name of the vertex attribute parameter to be queried",
-			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
+			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING".links + VERTEX_ATTRIBUTES + "GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "returns the requested data")
 	).javaDocLink
