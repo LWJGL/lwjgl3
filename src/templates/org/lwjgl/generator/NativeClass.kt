@@ -167,6 +167,7 @@ public class NativeClass(
 
 	private fun PrintWriter.generateFunctionsClass(functionProvider: FunctionProvider) {
 		println("\t/** The {@link FunctionMap} class for {@code ${className}}. */")
+		println("\t@JavadocExclude")
 		println("\tpublic static final class Functions implements FunctionMap {\n")
 
 		print("\t\tpublic final long")

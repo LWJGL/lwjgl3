@@ -40,6 +40,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link Functions} instance for the CL platform or device that corresponds to the given {@link CLObject}. */")
+		println("\t@JavadocExclude")
 		println("\tpublic static Functions getInstance(CLObject object) {")
 		println("\t\treturn object.getCapabilities().__${nativeClass.className};")
 		println("\t}")

@@ -46,6 +46,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link Functions} instance for the current context. */")
+		println("\t@JavadocExclude")
 		println("\tpublic static Functions getInstance() {")
 		println("\t\treturn GL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
