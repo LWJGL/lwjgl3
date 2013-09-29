@@ -39,9 +39,8 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link Functions} instance for the CL platform or device that corresponds to the given {@link CLObject}. */")
-		println("\t@JavadocExclude")
-		println("\tpublic static Functions getInstance(CLObject object) {")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance for the CL platform or device that corresponds to the given {@link CLObject}. */")
+		println("\tpublic static ${nativeClass.className} getInstance(CLObject object) {")
 		println("\t\treturn object.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
@@ -49,10 +48,10 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		val capName = nativeClass.capName
 		val isExtension = !nativeClass.templateName.startsWith("CL")
 
-		println("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long platform" else ""}) {")
+		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long platform" else ""}) {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
-		print("\n\t\tFunctions funcs = new Functions(provider")
+		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
 		if ( isExtension ) print(", platform")
 		println(");")
 
@@ -114,7 +113,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.size }.fold(0) {(left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
-			print("\tfinal ${extension.className}.Functions")
+			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.size - 1) )
 				print(' ')
 			println(" __${extension.className};")

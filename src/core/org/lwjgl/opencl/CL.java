@@ -8,7 +8,6 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProviderLocal;
 
 import java.nio.ByteBuffer;
@@ -269,7 +268,7 @@ public final class CL {
 		return __buffer.stringValueASCII(0, bytes - 1);
 	}
 
-	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {
+	static <T> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;
 		else {

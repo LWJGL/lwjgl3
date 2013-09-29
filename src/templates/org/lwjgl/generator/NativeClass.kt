@@ -7,7 +7,6 @@ package org.lwjgl.generator
 import java.io.PrintWriter
 import java.util.ArrayList
 import java.util.Collections
-import java.util.HashMap
 import java.util.Comparator
 
 public val INSTANCE: String = "__instance"
@@ -40,7 +39,7 @@ public abstract class FunctionProvider {
 	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
 	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL depends on the parameters.
 
-	open fun generateFunctionAddress(writer: PrintWriter, function: Function) {
+	open fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		val instanceParameter = if ( hasCurrentCapabilities )
 			""
 		else if ( function has Capabilities ) {
@@ -61,7 +60,7 @@ public abstract class FunctionProvider {
 			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
 				writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
 		} else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
-			writer.println("\t\tFunctions $INSTANCE = getInstance($instanceParameter);")
+			writer.println("\t\t${function.nativeClass.className} $INSTANCE = getInstance($instanceParameter);")
 			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
 		} else
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.name};")
@@ -146,7 +145,11 @@ public class NativeClass(
 			it.generate(this)
 		}
 
-		println("\tprivate $className() {}\n")
+		if ( functionProvider != null && !functions.isEmpty() ) {
+			generateFunctionAddresses(functionProvider)
+			functionProvider.generateFunctionGetters(this, this@NativeClass)
+		} else
+			println("\tprivate $className() {}\n")
 
 		functions.forEach {
 			println("\t// --- [ ${it.name} ] ---\n")
@@ -157,26 +160,19 @@ public class NativeClass(
 			}
 		}
 
-		if ( functionProvider != null && !functions.isEmpty() ) {
-			functionProvider.generateFunctionGetters(this, this@NativeClass)
-			generateFunctionsClass(functionProvider)
-		}
-
 		print("}")
 	}
 
-	private fun PrintWriter.generateFunctionsClass(functionProvider: FunctionProvider) {
-		println("\t/** The {@link FunctionMap} class for {@code ${className}}. */")
+	private fun PrintWriter.generateFunctionAddresses(functionProvider: FunctionProvider) {
+		println("\t/** Function address. */")
 		println("\t@JavadocExclude")
-		println("\tpublic static final class Functions implements FunctionMap {\n")
-
-		print("\t\tpublic final long")
+		print("\tpublic final long")
 		if ( functions.size == 1 ) {
 			println(" ${functions[0].name};")
 		} else {
 			println()
 			for ( i in functions.indices ) {
-				print("\t\t\t${functions[i].name}")
+				print("\t\t${functions[i].name}")
 				println(if ( i == functions.lastIndex ) ";" else ",")
 			}
 		}
@@ -185,18 +181,18 @@ public class NativeClass(
 			func.getParams { it has Callback }.forEach {
 				val cb = it[Callback]
 				if ( cb.storeInFunctions )
-					println("\n\t\tlong ${cb.procClass};")
+					println("\n\tlong ref${cb.procClass};")
 			}
 		}
 
-		print("\n\t\tpublic Functions(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
+		println("\n\t@JavadocExclude")
+		print("\tpublic $className(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
 		functionProvider.printFunctionsParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {
-			println("\t\t\t${it.name} = ${functionProvider.getFunctionAddressCall(it)};")
+			println("\t\t${it.name} = ${functionProvider.getFunctionAddressCall(it)};")
 		}
-		println("\t\t}")
-		println("\n\t}\n")
+		println("\t}\n")
 	}
 
 	override fun generateNative(writer: PrintWriter): Unit = writer.generateNativeImpl()

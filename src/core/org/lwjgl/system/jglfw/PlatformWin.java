@@ -63,8 +63,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	private FunctionProvider user32;
 	private FunctionProvider dwmapi;
 
-	private User32.Functions user32Funcs;
-	private Dwmapi.Functions dwmapiFuncs;
+	private User32 user32Funcs;
+	private Dwmapi dwmapiFuncs;
 
 	private final TimerWin timer = new TimerWin();
 
@@ -742,8 +742,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			dwmapi = new DummyFunctionProvider();
 		}
 
-		user32Funcs = new User32.Functions(user32);
-		dwmapiFuncs = new Dwmapi.Functions(dwmapi);
+		user32Funcs = new User32(user32);
+		dwmapiFuncs = new Dwmapi(dwmapi);
 
 		return true;
 	}

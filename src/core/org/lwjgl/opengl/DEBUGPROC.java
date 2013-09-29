@@ -153,11 +153,11 @@ public interface DEBUGPROC {
 
 		private static native long setCallback(Method callback);
 
-		static long register(GL43.Functions context, DEBUGPROC proc) {
-			if ( context.DEBUGPROC != NULL )
-				memGlobalRefDelete(context.DEBUGPROC);
+		static long register(GL43 context, DEBUGPROC proc) {
+			if ( context.refDEBUGPROC != NULL )
+				memGlobalRefDelete(context.refDEBUGPROC);
 
-			return context.DEBUGPROC = proc == null ? NULL : memGlobalRefNew(proc);
+			return context.refDEBUGPROC = proc == null ? NULL : memGlobalRefNew(proc);
 		}
 
 		/**

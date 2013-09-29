@@ -37,9 +37,8 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link Functions} instance for the current context. */")
-		println("\t@JavadocExclude")
-		println("\tpublic static Functions getInstance() {")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
+		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn ALC.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
@@ -47,10 +46,10 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		val capName = nativeClass.capName("ALC")
 		val isExtension = !nativeClass.templateName.startsWith("ALC")
 
-		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
+		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
-		print("\n\t\tFunctions funcs = new Functions(provider")
+		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
 		if ( isExtension ) print(", device")
 		println(");")
 
@@ -113,7 +112,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }
 		val alignment = classesWithFunctions.map { it.className.size }.fold(0) {(left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
-			print("\tfinal ${extension.className}.Functions")
+			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.size - 1) )
 				print(' ')
 			println(" __${extension.className};")

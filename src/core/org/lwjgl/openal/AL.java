@@ -6,7 +6,6 @@ package org.lwjgl.openal;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 
 import java.nio.ByteBuffer;
@@ -113,7 +112,7 @@ public final class AL {
 		return new ALCapabilities(supportedExtensions);
 	}
 
-	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {
+	static <T> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;
 		else {

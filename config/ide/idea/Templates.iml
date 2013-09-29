@@ -14,6 +14,7 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="RUNTIME" name="Resources" level="project" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
+    <orderEntry type="library" name="JDK Tools" level="application" />
   </component>
 </module>
 

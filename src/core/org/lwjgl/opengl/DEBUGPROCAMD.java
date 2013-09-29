@@ -128,11 +128,11 @@ public interface DEBUGPROCAMD {
 
 		private static native long setCallback(Method callback);
 
-		static long register(AMDDebugOutput.Functions context, DEBUGPROCAMD proc) {
-			if ( context.DEBUGPROCAMD != NULL )
-				memGlobalRefDelete(context.DEBUGPROCAMD);
+		static long register(AMDDebugOutput context, DEBUGPROCAMD proc) {
+			if ( context.refDEBUGPROCAMD != NULL )
+				memGlobalRefDelete(context.refDEBUGPROCAMD);
 
-			return context.DEBUGPROCAMD = proc == null ? NULL : memGlobalRefNew(proc);
+			return context.refDEBUGPROCAMD = proc == null ? NULL : memGlobalRefNew(proc);
 		}
 
 		/**

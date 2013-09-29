@@ -20,6 +20,7 @@ import java.lang.annotation.Target;
 	}
 )
 @Retention(RetentionPolicy.SOURCE)
+@JavadocExclude
 public @interface JavadocExclude {
 	// TODO: Source retention, exclude from the release jars
 }

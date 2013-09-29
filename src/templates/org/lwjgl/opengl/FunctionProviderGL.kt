@@ -45,9 +45,8 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link Functions} instance for the current context. */")
-		println("\t@JavadocExclude")
-		println("\tpublic static Functions getInstance() {")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
+		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn GL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
@@ -56,12 +55,12 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		val hasDependencies = functions.hasDependencies
 		val hasDeprecated = functions.hasDeprecated
 
-		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProvider provider")
+		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider")
 		if ( hasDeprecated ) print(", boolean fc")
 		println(") {")
 		println("\t\tif ( !ext.contains(\"${nativeClass.capName}\") ) return null;")
 
-		print("\n\t\tFunctions funcs = new Functions(provider")
+		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
 		if ( hasDeprecated ) print(", fc")
 		println(");")
 
@@ -121,7 +120,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.size }.fold(0) {(left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
-			print("\tfinal ${extension.className}.Functions")
+			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.size - 1) )
 				print(' ')
 			println(" __${extension.className};")

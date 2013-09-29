@@ -463,6 +463,7 @@ public class NativeClassFunction(
 		else
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 
+		println("\t@JavadocExclude")
 		print("\tpublic static native ${returnsNativeMethodType} ")
 		if ( !nativeOnly ) print('n')
 		print(name)

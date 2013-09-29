@@ -7,7 +7,6 @@ package org.lwjgl.openal;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProviderLocal;
 
 import java.nio.ByteBuffer;
@@ -237,7 +236,7 @@ public final class ALC {
 		return new ALCCapabilities(device, supportedExtensions);
 	}
 
-	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {
+	static <T> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;
 		else {

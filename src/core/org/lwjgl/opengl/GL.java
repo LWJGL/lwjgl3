@@ -7,7 +7,6 @@ package org.lwjgl.opengl;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
-import org.lwjgl.system.FunctionMap;
 import org.lwjgl.system.FunctionProvider;
 
 import java.nio.ByteBuffer;
@@ -383,7 +382,7 @@ public final class GL {
 		return fc || address != NULL;
 	}
 
-	static <T extends FunctionMap> T checkExtension(String extension, T functions, boolean supported) {
+	static <T> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;
 		else {

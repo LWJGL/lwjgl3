@@ -14,20 +14,19 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link Functions} instance for the current context. */")
-		println("\t@JavadocExclude")
-		println("\tpublic static Functions getInstance() {")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
+		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn AL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
 		val functions = nativeClass.functions
 		val capName = nativeClass.capName("AL")
 
-		print("\n\tstatic Functions create(java.util.Set<String> ext, FunctionProvider provider")
+		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider")
 		println(") {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
-		println("\n\t\tFunctions funcs = new Functions(provider);")
+		println("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
 
 		print("\n\t\tboolean supported = ")
 		val funcIndent: String
@@ -87,7 +86,7 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
 		val alignment = classesWithFunctions.map { it.className.size }.fold(0) {(left, right) -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
-			print("\tfinal ${extension.className}.Functions")
+			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.size - 1) )
 				print(' ')
 			println(" __${extension.className};")
