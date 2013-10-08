@@ -8,12 +8,10 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.MemoryAccess.*;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.*;
 
 import sun.misc.Unsafe;
-import sun.reflect.FieldAccessor;
 
 import static org.lwjgl.system.MemoryAccess.*;
 
@@ -28,7 +26,7 @@ final class MemoryAccessSun {
 	}
 
 	/** Implementation using sun.misc.Unsafe. */
-	private static class MemoryAccessorUnsafe extends MemoryAccessorJava {
+	private static final class MemoryAccessorUnsafe extends MemoryAccessorJava {
 
 		private final Unsafe unsafe;
 
@@ -48,10 +46,11 @@ final class MemoryAccessSun {
 		MemoryAccessorUnsafe() {
 			try {
 				unsafe = getUnsafeInstance();
+
 				address = unsafe.objectFieldOffset(getDeclaredField(Buffer.class, "address"));
 				capacity = unsafe.objectFieldOffset(getDeclaredField(Buffer.class, "capacity"));
 
-				ByteBuffer buffer = ByteBuffer.allocateDirect(0);
+				ByteBuffer buffer = globalBuffer;
 
 				cleaner = unsafe.objectFieldOffset(getDeclaredField(buffer.getClass(), "cleaner"));
 
@@ -75,6 +74,21 @@ final class MemoryAccessSun {
 		@Override
 		public long getAddress(Buffer buffer) {
 			return unsafe.getLong(buffer, address);
+		}
+
+		@Override
+		ByteBuffer newByteBuffer(long address, int capacity) {
+			ByteBuffer buffer = newByteBuffer();
+
+			unsafe.putLong(buffer, this.address, address);
+			unsafe.putInt(buffer, this.capacity, capacity);
+
+			// Optimization:
+			// This method is similar to setup below, except we don't clear the parent field. This is ok because we don't need to ever release
+			// MemoryAccessorJava#globalBuffer.
+
+			buffer.clear();
+			return buffer;
 		}
 
 		private <T extends Buffer> T setup(T buffer, long address, int capacity, long parentField) {
@@ -236,108 +250,6 @@ final class MemoryAccessSun {
 
 			throw new UnsupportedOperationException();
 		}
-
-	}
-
-	/** Implementation using reflection on ByteBuffer, FieldAccessor is used directly. */
-	private static class MemoryAccessorReflectFast extends MemoryAccessorJava {
-
-		private final FieldAccessor address;
-		private final FieldAccessor capacity;
-
-		private final FieldAccessor cleaner;
-
-		private final FieldAccessor byteBufferParent;
-		private final FieldAccessor shortBufferParent;
-		private final FieldAccessor charBufferParent;
-		private final FieldAccessor intBufferParent;
-		private final FieldAccessor longBufferParent;
-		private final FieldAccessor floatBufferParent;
-		private final FieldAccessor doubleBufferParent;
-
-		MemoryAccessorReflectFast() {
-			try {
-				Method m = Field.class.getDeclaredMethod("acquireFieldAccessor", boolean.class);
-				m.setAccessible(true);
-
-				address = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "address"), false);
-				capacity = (FieldAccessor)m.invoke(getDeclaredField(Buffer.class, "capacity"), false);
-
-				// The byte order is important; it changes the subclass created by the asXXBuffer() methods.
-				ByteBuffer buffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
-
-				cleaner = (FieldAccessor)m.invoke(getDeclaredField(buffer.getClass(), "cleaner"), false);
-
-				byteBufferParent = (FieldAccessor)m.invoke(getField(buffer.slice(), buffer), true);
-				shortBufferParent = (FieldAccessor)m.invoke(getField(buffer.asShortBuffer(), buffer), true);
-				charBufferParent = (FieldAccessor)m.invoke(getField(buffer.asCharBuffer(), buffer), true);
-				intBufferParent = (FieldAccessor)m.invoke(getField(buffer.asIntBuffer(), buffer), true);
-				longBufferParent = (FieldAccessor)m.invoke(getField(buffer.asLongBuffer(), buffer), true);
-				floatBufferParent = (FieldAccessor)m.invoke(getField(buffer.asFloatBuffer(), buffer), true);
-				doubleBufferParent = (FieldAccessor)m.invoke(getField(buffer.asDoubleBuffer(), buffer), true);
-			} catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-
-		@Override
-		public long getAddress(Buffer buffer) {
-			return address.getLong(buffer);
-		}
-
-		private <T extends Buffer> T setup(T buffer, long address, int capacity, FieldAccessor parentField) {
-			try {
-				this.address.setLong(buffer, address);
-				this.capacity.setInt(buffer, capacity);
-
-				parentField.set(buffer, null);
-			} catch (IllegalAccessException e) {
-				throw new UnsupportedOperationException(e);
-			}
-
-			buffer.clear();
-			return buffer;
-		}
-
-		@Override
-		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
-			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( LWJGLUtil.DEBUG && cleaner.get(buffer) != null )
-				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
-
-			return setup(buffer, address, capacity, byteBufferParent);
-		}
-
-		@Override
-		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, shortBufferParent);
-		}
-
-		@Override
-		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, charBufferParent);
-		}
-
-		@Override
-		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, intBufferParent);
-		}
-
-		@Override
-		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, longBufferParent);
-		}
-
-		@Override
-		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, floatBufferParent);
-		}
-
-		@Override
-		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
-			return setup(buffer, address, capacity, doubleBufferParent);
-		}
-
 	}
 
 }

@@ -13,25 +13,10 @@ import java.nio.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Provides 4 MemoryAccessor implementations. The fastest available one will be used by MemoryUtil.
+ * Provides 3 MemoryAccessor implementations. The fastest available will be used by MemoryUtil.
  * <p/>
- * BENCHMARK RESULTS - Oracle Server VM:
- * <p/>
- * Unsafe: 4ns
- * ReflectFast: 8ns
- * Reflect: 10ns
- * JNI: 82ns
- * <p/>
- * BENCHMARK RESULTS - Oracle Client VM:
- * <p/>
- * Unsafe: 5ns
- * ReflectFast: 81ns
- * Reflect: 85ns
- * JNI: 87ns
- * <p/>
- * On non-Oracle VMs, Unsafe should be the fastest implementation as well. In the absence
- * of Unsafe, performance will depend on how reflection and JNI are implemented. For now
- * we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).
+ * On non-Oracle VMs, Unsafe should be the fastest implementation as well. In the absence of Unsafe, performance will depend on how reflection and JNI are
+ * implemented. For now we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).
  */
 final class MemoryAccess {
 
@@ -45,16 +30,11 @@ final class MemoryAccess {
 			accessor = loadAccessor("org.lwjgl.system.MemoryAccessSun$MemoryAccessorUnsafe");
 		} catch (Exception e0) {
 			try {
-				// Depends on java.nio.Buffer#address and sun.reflect.FieldAccessor
-				accessor = loadAccessor("org.lwjgl.system.MemoryAccessSun$MemoryAccessorReflectFast");
+				// Depends on java.nio.Buffer#address
+				accessor = new MemoryAccessorReflect();
 			} catch (Exception e1) {
-				try {
-					// Depends on java.nio.Buffer#address
-					accessor = new MemoryAccessorReflect();
-				} catch (Exception e2) {
-					LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
-					accessor = new MemoryAccessorJNI();
-				}
+				LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
+				accessor = new MemoryAccessorJNI();
 			}
 		}
 
@@ -81,17 +61,17 @@ final class MemoryAccess {
 
 		abstract ByteBuffer newByteBuffer(long address, int capacity);
 
-		abstract ShortBuffer newShortBuffer(long address, int capacity);
+		final ShortBuffer newShortBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
 
-		abstract CharBuffer newCharBuffer(long address, int capacity);
+		final CharBuffer newCharBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
 
-		abstract IntBuffer newIntBuffer(long address, int capacity);
+		final IntBuffer newIntBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
 
-		abstract LongBuffer newLongBuffer(long address, int capacity);
+		final LongBuffer newLongBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
 
-		abstract FloatBuffer newFloatBuffer(long address, int capacity);
+		final FloatBuffer newFloatBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
 
-		abstract DoubleBuffer newDoubleBuffer(long address, int capacity);
+		final DoubleBuffer newDoubleBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
 		abstract ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity);
 
@@ -144,7 +124,7 @@ final class MemoryAccess {
 	}
 
 	/** Default implementation. */
-	private static class MemoryAccessorJNI extends MemoryAccessor {
+	private static final class MemoryAccessorJNI extends MemoryAccessor {
 
 		@Override
 		long getAddress(Buffer buffer) {
@@ -155,24 +135,6 @@ final class MemoryAccess {
 		ByteBuffer newByteBuffer(long address, int capacity) {
 			return nNewBuffer(address, capacity).order(ByteOrder.nativeOrder());
 		}
-
-		@Override
-		ShortBuffer newShortBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
-
-		@Override
-		CharBuffer newCharBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
-
-		@Override
-		IntBuffer newIntBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
-
-		@Override
-		LongBuffer newLongBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
-
-		@Override
-		FloatBuffer newFloatBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
-
-		@Override
-		DoubleBuffer newDoubleBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
 		@Override
 		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) { return newByteBuffer(address, capacity); }
@@ -199,39 +161,16 @@ final class MemoryAccess {
 
 	abstract static class MemoryAccessorJava extends MemoryAccessor {
 
-		private final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0).order(ByteOrder.nativeOrder());
+		protected final ByteBuffer globalBuffer = ByteBuffer.allocateDirect(0);
 
-		@Override
-		final ByteBuffer newByteBuffer(long address, int capacity) {
-			return setupBuffer(
-				globalBuffer.duplicate().order(ByteOrder.nativeOrder()),
-				address,
-				capacity
-			);
+		protected ByteBuffer newByteBuffer() {
+			return globalBuffer.duplicate().order(ByteOrder.nativeOrder());
 		}
-
-		@Override
-		final ShortBuffer newShortBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asShortBuffer(), address, capacity); }
-
-		@Override
-		final CharBuffer newCharBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asCharBuffer(), address, capacity); }
-
-		@Override
-		final IntBuffer newIntBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asIntBuffer(), address, capacity); }
-
-		@Override
-		final LongBuffer newLongBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asLongBuffer(), address, capacity); }
-
-		@Override
-		final FloatBuffer newFloatBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asFloatBuffer(), address, capacity); }
-
-		@Override
-		final DoubleBuffer newDoubleBuffer(long address, int capacity) { return setupBuffer(globalBuffer.asDoubleBuffer(), address, capacity); }
 
 	}
 
 	/** Implementation using reflection. */
-	private static class MemoryAccessorReflect extends MemoryAccessorJava {
+	private static final class MemoryAccessorReflect extends MemoryAccessorJava {
 
 		private final Field address;
 		private final Field capacity;
@@ -275,6 +214,25 @@ final class MemoryAccess {
 			} catch (IllegalAccessException e) {
 				throw new UnsupportedOperationException(e);
 			}
+		}
+
+		@Override
+		ByteBuffer newByteBuffer(long address, int capacity) {
+			ByteBuffer buffer = newByteBuffer();
+
+			try {
+				this.address.setLong(buffer, address);
+				this.capacity.setInt(buffer, capacity);
+
+				// Optimization:
+				// This method is similar to setup below, except we don't clear the parent field. Doing so requires an expensive volatile write. This is ok
+				// because we don't need to ever release MemoryAccessorJava#globalBuffer.
+			} catch (IllegalAccessException e) {
+				throw new UnsupportedOperationException(e);
+			}
+
+			buffer.clear();
+			return buffer;
 		}
 
 		private <T extends Buffer> T setup(T buffer, long address, int capacity, Field parentField) {
@@ -378,7 +336,10 @@ final class MemoryAccess {
 			type = type.getSuperclass();
 		} while ( type != null );
 
-		throw new NoSuchFieldException("The specified value does not exist as a field in " + buffer.getClass().getSimpleName() + " or any of its superclasses.");
+		throw new NoSuchFieldException(String.format(
+			"The specified value does not exist as a field in %s or any of its superclasses.",
+			buffer.getClass().getSimpleName()
+		));
 	}
 
 }
