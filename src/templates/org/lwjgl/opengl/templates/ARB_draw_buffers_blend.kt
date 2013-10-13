@@ -37,12 +37,12 @@ fun ARB_draw_buffers_blend() = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buf
 		${"GL11".link("Begin()")} and the corresponding execution of ${"GL11".link("End()")}.
 		""",
 
-		GLuint.IN("buf", "an integer i that indicates DRAW_BUFFER<i>."),
+		GLuint.IN("buf", "an integer i that indicates the DRAW_BUFFER to modify."),
 		GLenum.IN(
 			"mode",
 			"determines both the RGB and alpha blend equations, must be one of: ",
 			"""
-			GL14#FUNC_ADD, GL14#FUNC_SUBTRACT, GL14#FUNC_REVERSE_SUBTRACT, GL14#MIN, GL14#MAX
+			GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX
 			"""
 		)
 	)
@@ -70,19 +70,19 @@ fun ARB_draw_buffers_blend() = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buf
 		${"GL11".link("Begin()")} and the corresponding execution of ${"GL11".link("End()")}.
 		""",
 
-		GLuint.IN("buf", "an integer i that indicates DRAW_BUFFER<i>."),
+		GLuint.IN("buf", "an integer i that indicates the DRAW_BUFFER to modify."),
 		GLenum.IN(
 			"modeRGB",
 			"the RGB blend equation, must be one of",
 			"""
-			GL14#FUNC_ADD, GL14#FUNC_SUBTRACT, GL14#FUNC_REVERSE_SUBTRACT, GL14#MIN, GL14#MAX
+			GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX
 			"""
 		),
 		GLenum.IN(
 			"modeAlpha",
 			"the alpha blend equation, must be one of: ",
 			"""
-			GL14#FUNC_ADD, GL14#FUNC_SUBTRACT, GL14#FUNC_REVERSE_SUBTRACT, GL14#MIN, GL14#MAX
+			GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX
 			"""
 		)
 	)
@@ -108,7 +108,7 @@ fun ARB_draw_buffers_blend() = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buf
 		${"GL11".link("Begin()")} and the corresponding execution of ${"GL11".link("End()")}.
 		""",
 
-		GLuint.IN("buf", "an integer i that indicates DRAW_BUFFER<i>."),
+		GLuint.IN("buf", "an integer i that indicates the DRAW_BUFFER to modify."),
 		GLenum.IN("src", "determines both RGB and alpha source functions"),
 		GLenum.IN("dst", "determines both RGB and alpha destination functions")
 	)
@@ -135,7 +135,7 @@ fun ARB_draw_buffers_blend() = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buf
 		${"GL11".link("Begin()")} and the corresponding execution of ${"GL11".link("End()")}.
 		""",
 
-		GLuint.IN("buf", "an integer i that indicates DRAW_BUFFER<i>."),
+		GLuint.IN("buf", "an integer i that indicates the DRAW_BUFFER to modify."),
 		GLenum.IN("srcRGB", "the source RGB blend function"),
 		GLenum.IN("dstRGB", "the destination RGB blend function"),
 		GLenum.IN("srcAlpha", "the source alpha blend function"),
