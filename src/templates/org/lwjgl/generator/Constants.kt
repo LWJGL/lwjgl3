@@ -68,7 +68,9 @@ public class ConstantBlock<T>(
 
 	private var noPrefix = false
 
-	public fun noPrefix(): Unit = noPrefix = true
+	public fun noPrefix() {
+		noPrefix = true
+	}
 
 	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
@@ -104,7 +106,7 @@ public class ConstantBlock<T>(
 			print(' ')
 
 		print(" = ")
-		if ( constant is ConstantExpression<T> )
+		if ( constant is ConstantExpression )
 			print(constant.expression)
 		else
 			print(constantType.print(value!!))

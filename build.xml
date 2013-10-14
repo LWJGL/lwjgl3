@@ -110,10 +110,10 @@
 			<jvmarg value="-Xms1024m"/>
 			<jvmarg value="-Xverify:none"/>
 
+			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
+
 			<arg value="-module"/>
 			<arg value="${config}/Templates.kts"/>
-			<arg value="-output"/>
-			<arg value="${bin.templates}"/>
 			<!--
 			<arg value="-tags"/>
 			<arg value="-verbose"/>

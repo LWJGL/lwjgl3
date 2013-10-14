@@ -9,7 +9,7 @@ private val FILTER_FILES_ONLY: (File) -> Boolean = { it.isFile() && it.getPath()
 //private val FILTER_JAR: (File) -> Boolean = { it.isDirectory() || it.getPath().endsWith(".jar") }
 
 fun project() {
-	module("Templates") {
+	module("Templates", System.getProperty("org.lwjgl.templates.output")!!) {
 		// Sources
 		for ( source in listFiles("src/templates", FILTER_RECURSIVE) ) sources += source
 
