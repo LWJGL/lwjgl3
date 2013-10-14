@@ -47,7 +47,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 
 	GLvoid.func(
 		"BlendFuncSeparatei",
-		"Specifiues pixel arithmetic for RGB and alpha components separately for the given draw buffer.",
+		"Specifies pixel arithmetic for RGB and alpha components separately for the given draw buffer.",
 
 		GLuint.IN("buf", "the index of the draw buffer for which to set the blend functions"),
 		GLenum.IN("srcRGB", "how the red, green, and blue blending factors are computed"),

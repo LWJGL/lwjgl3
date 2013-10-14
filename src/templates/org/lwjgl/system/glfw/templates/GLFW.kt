@@ -609,7 +609,10 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
         If a full screen window is active, the screensaver is prohibited from starting.
 
-        Note: This function may only be called from the main thread.
+		The swap interval is not set during window creation, but is left at the default value for that platform. For more information, see
+		${"SwapInterval()".link}.
+
+          Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("width", "desired width, in pixels, of the window"),
@@ -1264,7 +1267,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Returns the window whose context is current on the calling thread."
 	)
 
-	val glfwSwapBuffers = void.func(
+	val SwapBuffers = void.func(
 		"SwapBuffers",
 		"""
 		Swaps the front and back buffers of the specified window. If the swap interval is greater than zero, the GPU driver waits the specified number of
@@ -1278,7 +1281,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"SwapInterval",
 		"""
 		Sets the swap interval for the current context, i.e. the number of screen updates to wait before swapping the buffers of a window and returning from
-		$glfwSwapBuffers. This is sometimes called 'vertical synchronization', 'vertical retrace synchronization' or 'vsync'.
+		$SwapBuffers. This is sometimes called 'vertical synchronization', 'vertical retrace synchronization' or 'vsync'.
 
 		Contexts that support either of the {@code WGL_EXT_swap_control_tear} and {@code GLX_EXT_swap_control_tear} extensions also accept negative swap
 		intervals, which allow the driver to swap even if a frame arrives a little bit late. You can check for the presence of these extensions using
@@ -1289,7 +1292,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Note: This function may be called from secondary threads.
 		""",
 
-		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by $glfwSwapBuffers")
+		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by $SwapBuffers")
 	)
 
 	int.func(

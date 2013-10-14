@@ -31,8 +31,8 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 		"""
 	)
 
-	IntConstant.block(
-		"Accepted by the {@code property} parameter of glXGetGPUInfo:",
+	val properties = IntConstant.block(
+		"Accepted by the {@code property} parameter of ${"GetGPUInfoAMD()".link}:",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
 		"GPU_RENDERER_STRING_AMD" _ 0x1F01,
@@ -44,10 +44,10 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 		"GPU_NUM_SIMD_AMD" _ 0x21A6,
 		"GPU_NUM_RB_AMD" _ 0x21A7,
 		"GPU_NUM_SPI_AMD" _ 0x21A8
-	)
+	).toJavaDocLinks()
 
 	void.func(
-		"glXBlitContextFramebufferAMD",
+		"BlitContextFramebufferAMD",
 		"",
 
 		GLXContext.IN("dstCtx", ""),
@@ -112,7 +112,7 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 		"Queries GPU properties.",
 
 		unsigned_int.IN("id", ""),
-		int.IN("property", ""),
+		int.IN("property", "", properties),
 		GLenum.IN("dataType", ""),
 		unsigned_int.IN("size", ""),
 		void_p.IN("data", "")

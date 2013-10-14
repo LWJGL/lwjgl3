@@ -25,7 +25,7 @@ public fun String.nativeClassWin(init: (NativeClass.() -> Unit)? = null): Native
 	nativeClass(WINDOWS_PACKAGE, this, functionProvider = FunctionProviderWin, init = init)
 
 val DLL_WARNING =
-	"""Features must be detected on a function-by-function basis. The pointers in the {@link Functions} instance will have a zero (0L) value when a particular
+	"""Features must be detected on a function-by-function basis. A function pointer will have a $NULL (0L) value when the corresponding
 		function is not supported in the Windows version we're running."""
 
 val DLL_FUNC = Capabilities(expression = FUNCTION_ADDRESS, override = true)
