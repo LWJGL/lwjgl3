@@ -61,9 +61,9 @@ public abstract class FunctionProvider {
 				writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
 		} else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
 			writer.println("\t\t${function.nativeClass.className} $INSTANCE = getInstance($instanceParameter);")
-			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.name};")
+			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.addressName};")
 		} else
-			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.name};")
+			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
 	}
 
 	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
@@ -168,11 +168,11 @@ public class NativeClass(
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
 		if ( functions.size == 1 ) {
-			println(" ${functions[0].name};")
+			println(" ${functions[0].addressName};")
 		} else {
 			println()
 			for ( i in functions.indices ) {
-				print("\t\t${functions[i].name}")
+				print("\t\t${functions[i].addressName}")
 				println(if ( i == functions.lastIndex ) ";" else ",")
 			}
 		}
@@ -190,7 +190,7 @@ public class NativeClass(
 		functionProvider.printFunctionsParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {
-			println("\t\t${it.name} = ${functionProvider.getFunctionAddressCall(it)};")
+			println("\t\t${it.addressName} = ${functionProvider.getFunctionAddressCall(it)};")
 		}
 		println("\t}\n")
 	}
@@ -233,7 +233,7 @@ public class NativeClass(
 	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
-			name = "$prefixMethod$name",
+			simpleName = name,
 			documentation = documentation.toJavaDoc(parameters.iterator(), returnDoc),
 			nativeClass = this@NativeClass,
 			parameters = *parameters

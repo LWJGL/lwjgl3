@@ -45,15 +45,15 @@ private val GLCore_PATTERN = Pattern.compile("GL[1-9][0-9]")
 
 public abstract class Function(
 	val returns: ReturnValue,
-	val name: String,
+	val simpleName: String,
+	val name: String = simpleName,
 	val documentation: String,
-	vararg params: Parameter
+	protected vararg val parameters: Parameter
 ): TemplateElement() {
 
-	protected val parameters: Array<Parameter> = params;
 	protected val paramMap: Map<String, Parameter> = {
 		val map = HashMap<String, Parameter>()
-		for ( param in params )
+		for ( param in parameters )
 			map.put(param.name, param)
 		map
 	}();
@@ -114,28 +114,34 @@ private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -
 
 public class NativeClassFunction(
 	returns: ReturnValue,
-	name: String,
+	simpleName: String,
 	documentation: String,
 	val nativeClass: NativeClass,
 	vararg parameters: Parameter
-): Function(returns, name, documentation, *parameters) {
+): Function(returns, simpleName, "${nativeClass.prefixMethod}$simpleName", documentation, *parameters) {
 
 	{
 		validate();
 	}
 
 	// stripPostfix has modifier dependencies that may be added after the constructor has run.
-	val strippedName: String by Delegates.lazy { stripPostfix(stripType = false, stripUnsigned = false) } // TODO: Kotlin bug, fails if we omit the default values
+	val strippedName: String by Delegates.lazy { stripPostfix(name, false, false) } // TODO: Kotlin bug, fails if we omit the default values
 
-	private fun stripPostfix(stripType: Boolean = false, stripUnsigned: Boolean = false): String {
+	val addressName: String
+		get() = if ( nativeClass.prefixMethod.isEmpty() )
+			"${simpleName}Address"
+		else
+			simpleName
+
+	private fun stripPostfix(functionName: String = name, stripType: Boolean = false, stripUnsigned: Boolean = false): String {
 		if ( !hasNativeParams || has(keepPostfix) )
-			return name
+			return functionName
 
 		val param = parameters[parameters.lastIndex]
 		if ( !param.isBufferPointer )
-			return name
+			return functionName
 
-		var name = this.name
+		var name = functionName
 		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) )
 			name = name.substring(0, name.size - nativeClass.postfix.size)
 
@@ -169,7 +175,10 @@ public class NativeClassFunction(
 	}
 
 	public val javaDocLink: String
-		get() = if ( strippedName != name ) this.javaDocLinkWithParams else "{@link #$strippedName $strippedName}"
+		get() = if ( strippedName != name )
+			this.javaDocLinkWithParams
+		else
+			"{@link #$strippedName${if ( nativeClass.prefixMethod.isEmpty() ) "" else " ${stripPostfix(simpleName)}"}}"
 
 	public val javaDocLinkWithParams: String
 		get() {
@@ -719,14 +728,14 @@ public class NativeClassFunction(
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
 		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.has(autoSizeResult) && returns.nativeType !is StructType) } )
-			generateAlternativeMethod(stripPostfix(true), "Alternative version of:", transforms, customChecks)
+			generateAlternativeMethod(stripPostfix(stripType = true), "Alternative version of:", transforms, customChecks)
 
 		// Step 3: Generate more complex alternatives if necessary
 		if ( returns has MapPointer ) {
 			// The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
 			if ( !paramMap.containsKey(returns[MapPointer].sizeExpression) ) {
 				transforms[returns] = MapPointerExplicitTransform("length")
-				generateAlternativeMethod(stripPostfix(true), "Explicit size alternative version of:", transforms, customChecks)
+				generateAlternativeMethod(stripPostfix(stripType = true), "Explicit size alternative version of:", transforms, customChecks)
 			}
 		}
 

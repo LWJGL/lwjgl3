@@ -80,8 +80,8 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 		if ( !initLibraries() )
 			return false;
 
-		if ( user32Funcs.SetProcessDPIAware != NULL )
-			SetProcessDPIAware(user32Funcs.SetProcessDPIAware);
+		if ( user32Funcs.SetProcessDPIAwareAddress != NULL )
+			SetProcessDPIAware(user32Funcs.SetProcessDPIAwareAddress);
 
 		timer.init();
 
@@ -1178,11 +1178,11 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	}
 
 	boolean isCompositionEnabled() {
-		if ( dwmapiFuncs.DwmIsCompositionEnabled == NULL )
+		if ( dwmapiFuncs.DwmIsCompositionEnabledAddress == NULL )
 			return false;
 
 		APIBuffer __buffer = apiBuffer();
-		DwmIsCompositionEnabled(__buffer.buffer(), dwmapiFuncs.DwmIsCompositionEnabled);
+		DwmIsCompositionEnabled(__buffer.buffer(), dwmapiFuncs.DwmIsCompositionEnabledAddress);
 		return __buffer.intValue(0) == WinError.S_OK;
 	}
 

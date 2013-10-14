@@ -28,11 +28,11 @@ public class CLProgram extends CLObjectChild<CLContext> {
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetProgramInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetProgramInfo);
+		return nclGetProgramInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetProgramInfo);
 	}
 
 	private int getBuildInfo(CLDevice device, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetProgramBuildInfo(getPointer(), device.getPointer(), param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetProgramBuildInfo);
+		return nclGetProgramBuildInfo(getPointer(), device.getPointer(), param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetProgramBuildInfo);
 	}
 
 	public int getBuildInfoInt(CLDevice device, int param_name) {

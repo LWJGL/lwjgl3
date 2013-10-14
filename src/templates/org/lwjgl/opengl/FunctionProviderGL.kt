@@ -79,7 +79,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			if ( functions[i] has DependsOn )
 				print("(!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
 
-			print("GL.isFunctionSupported(funcs.${functions[i].name}")
+			print("GL.isFunctionSupported(funcs.${functions[i].simpleName}")
 			if ( functions[i] has deprecatedGL )
 				print(", fc")
 			print(")")

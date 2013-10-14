@@ -98,22 +98,27 @@ public fun codeBlock(code: String): String = "<pre>{@code\n${code
 }}</pre>"
 
 public fun String.linkPlain(name: String): String = link(name, prefix = "")
-public fun String.link(name: String, prefix: String = ""): String =
-	if ( name.endsWith(')') ) {
-		// Method
-		val parentheses = name.indexOf('(')
-		if ( parentheses == -1 )
-			throw IllegalStateException("Invalid method link: $this#$prefix$name")
+public fun String.link(name: String, prefix: String = ""): String {
+	val link =
+		if ( name.endsWith(')') ) {
+			// Method
+			val parentheses = name.indexOf('(')
+			if ( parentheses == -1 )
+				throw IllegalStateException("Invalid method link: $this#$prefix$name")
 
-		val simpleName = name.substring(0, parentheses)
-		"{@link $this#$prefix${if ( parentheses == name.size - 2 ) simpleName else name} $simpleName}"
-	} else {
-		// Field
-		if ( this.isEmpty() && prefix.isEmpty() )
-			"{@link #$name}"
-		else
-			"{@link $this#$prefix$name $name}"
-	}
+			val simpleName = name.substring(0, parentheses)
+			val hasParams = parentheses == name.size - 2
+			"$this#$prefix${if ( hasParams ) simpleName else name}${if ( prefix.isEmpty() && !hasParams ) "" else " $simpleName"}"
+		} else {
+			// Field
+			if ( this.isEmpty() && prefix.isEmpty() )
+				"#$name"
+			else
+				"$this#$prefix$name $name"
+		}
+
+	return "{@link $link}"
+}
 
 public fun url(href: String, innerHTML: String): String = """<a href="$href">$innerHTML</a>"""
 

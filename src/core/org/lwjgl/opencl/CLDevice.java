@@ -31,7 +31,7 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 	}
 
 	private static CLCapabilities createCapabilities(long cl_device_id, CLPlatform platform) {
-		long clGetDeviceInfo = CL10.getInstance(platform).clGetDeviceInfo;
+		long clGetDeviceInfo = CL10.getInstance(platform).GetDeviceInfo;
 
 		Set<String> supportedExtensions = new HashSet<String>(32);
 
@@ -63,7 +63,7 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetDeviceInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetDeviceInfo);
+		return nclGetDeviceInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetDeviceInfo);
 	}
 
 }

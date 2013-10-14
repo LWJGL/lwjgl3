@@ -67,7 +67,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		for ( i in functions.indices ) {
 			print(funcIndent)
 
-			print("funcs.${functions[i].name} != 0L")
+			print("funcs.${functions[i].simpleName} != 0L")
 			println(if ( i == functions.lastIndex ) ";" else " &&")
 		}
 

@@ -48,7 +48,7 @@ public class CLContext extends CLObjectChild<CLPlatform> {
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetContextInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.clGetContextInfo);
+		return nclGetContextInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetContextInfo);
 	}
 
 	@Override

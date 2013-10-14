@@ -74,7 +74,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 				print("!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
 			}
 
-			print("funcs.${functions[i].name} != 0L")
+			print("funcs.${functions[i].simpleName} != 0L")
 
 			if ( isSpecial ) print(')')
 			println(if ( i == functions.lastIndex ) ";" else " &&")
