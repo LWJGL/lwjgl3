@@ -28,6 +28,12 @@ final class MemoryAccessSun {
 	/** Implementation using sun.misc.Unsafe. */
 	private static final class MemoryAccessorUnsafe extends MemoryAccessorJava {
 
+		/**
+		 * Limits the number of bytes to affect per call to Unsafe's bulk memory operations (copy & set). A limit is imposed to allow for safepoint polling
+		 * during a large operation. This limit is equivalent to {@link java.nio.Bits#UNSAFE_COPY_THRESHOLD}.
+		 */
+		private static final long BULK_OP_THRESHOLD = 0x100000; // 1 MB
+
 		private final Unsafe unsafe;
 
 		private final long address;
@@ -142,12 +148,34 @@ final class MemoryAccessSun {
 
 		@Override
 		void memSet(long dst, int value, int bytes) {
-			unsafe.setMemory(dst, bytes, (byte)(value & 0xFF));
+			// Do the memset in BULK_OP_THRESHOLD sized batches to keep TTSP low.
+			while ( true ) {
+				long batchSize = BULK_OP_THRESHOLD < bytes ? BULK_OP_THRESHOLD : bytes;
+				unsafe.setMemory(dst, batchSize, (byte)(value & 0xFF));
+
+				bytes -= BULK_OP_THRESHOLD;
+				if ( bytes < 0 )
+					break;
+
+				dst += BULK_OP_THRESHOLD;
+			}
 		}
 
 		@Override
 		void memCopy(long src, long dst, int bytes) {
-			unsafe.copyMemory(src, dst, bytes);
+			// Do the memcpy in BULK_OP_THRESHOLD sized batches to keep TTSP low.
+
+			while ( true ) {
+				long batchSize = BULK_OP_THRESHOLD < bytes ? BULK_OP_THRESHOLD : bytes;
+				unsafe.copyMemory(src, dst, batchSize);
+
+				bytes -= BULK_OP_THRESHOLD;
+				if ( bytes < 0 )
+					break;
+
+				src += BULK_OP_THRESHOLD;
+				dst += BULK_OP_THRESHOLD;
+			}
 		}
 
 		@Override
