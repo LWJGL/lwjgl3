@@ -4,6 +4,8 @@
 	<!-- ================================================================== -->
 	<property environment="env"/>
 
+	<fail unless="env.JAVA7_HOME" message="Please set an environment variable named JAVA7_HOME that points to a Java 7 SDK."/>
+
 	<property name="src" location="src" relative="true"/>
 	<property name="generated" location="generated" relative="false"/>
 	<property name="bin" location="bin" relative="false"/>
@@ -64,11 +66,6 @@
 	</condition>
 	<condition property="platform" value="macosx">
 		<isset property="platform.macosx"/>
-	</condition>
-
-	<fail unless="env.JAVA6_HOME" message="Please set an environment variable named JAVA6_HOME that points to the Java 6 SDK."/>
-	<condition property="java6.path" value="${env.JAVA6_HOME}/Contents/Classes" else="${env.JAVA6_HOME}/jre/lib">
-		<equals arg1="${platform}" arg2="macosx"/>
 	</condition>
 
 	<macrodef name="update">

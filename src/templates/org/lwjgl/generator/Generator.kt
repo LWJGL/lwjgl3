@@ -12,6 +12,7 @@ import java.nio.ByteBuffer
 import java.nio.channels.FileChannel
 import java.util.ArrayList
 import java.util.HashMap
+import java.nio.charset.StandardCharsets
 
 /*
 	A template will be generated in the following cases:
@@ -307,7 +308,7 @@ private fun <T> generateOutput(
 	if ( file.exists() ) {
 		// Generate in-memory
 		val baos = ByteArrayOutputStream(4 * 1024)
-		val writer = PrintWriter(OutputStreamWriter(baos, "UTF8"))
+		val writer = PrintWriter(OutputStreamWriter(baos, StandardCharsets.UTF_8))
 		target.generate(writer)
 		writer.close()
 
@@ -340,7 +341,7 @@ private fun <T> generateOutput(
 	} else {
 		println("\tWRITING: $file")
 		// Generate to file
-		val writer = PrintWriter(file, "UTF8")
+		val writer = PrintWriter(BufferedWriter(OutputStreamWriter(FileOutputStream(file), StandardCharsets.UTF_8)))
 		target.generate(writer)
 		writer.close();
 	}

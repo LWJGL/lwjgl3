@@ -1160,7 +1160,11 @@ public class NativeClassFunction(
 		if ( nativeClass.functionProvider != null )
 			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
-		// Step 3: Call native function
+		// Step 3: Unused parameter macro
+
+		println("\tUNUSED_PARAMS($JNIENV, clazz)")
+
+		// Step 4: Call native function
 
 		print('\t')
 		if ( returnsStructValue ) {
@@ -1184,7 +1188,7 @@ public class NativeClassFunction(
 		if ( !has(macro) ) print(')')
 		println(';')
 
-		print("}")
+		println("}")
 	}
 
 }

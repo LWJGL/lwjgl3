@@ -123,8 +123,10 @@ typedef unsigned short GLhalfARB;
 typedef struct __GLsync * GLsync;
 
 // GL_ARB_cl_event
-typedef struct _cl_context * cl_context;
-typedef struct _cl_event * cl_event;
+#ifndef __OPENCL_H
+	typedef struct _cl_context * cl_context;
+	typedef struct _cl_event * cl_event;
+#endif
 
 // GL_EXT_timer_query
 typedef int64_t GLint64EXT;

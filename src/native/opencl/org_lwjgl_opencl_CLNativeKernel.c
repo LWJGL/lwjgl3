@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-DECLARE_CALLBACK(CLNativeKernel);
+DECLARE_CALLBACK(CLNativeKernel)
 
 static void CL_CALLBACK CLNativeKernelProc(
 	void *args

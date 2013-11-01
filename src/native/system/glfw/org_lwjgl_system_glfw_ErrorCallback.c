@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-DECLARE_CALLBACK_STATIC(GLFWerrorfun);
+DECLARE_CALLBACK_STATIC(GLFWerrorfun)
 
 static void GLFWerrorfunProc(
 	int error,

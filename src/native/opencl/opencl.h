@@ -26,6 +26,8 @@
 #ifndef __OPENCL_H
 #define __OPENCL_H
 
+DISABLE_WARNINGS()
+
 #ifdef __APPLE__
 
 #include <OpenCL/cl.h>
@@ -39,6 +41,8 @@ typedef cl_uint     cl_gl_context_info;
 #include "CL/cl_gl.h"
 
 #endif
+
+ENABLE_WARNINGS()
 
 #ifndef APIENTRY
 	#define APIENTRY CL_API_CALL
@@ -73,4 +77,3 @@ typedef struct {
 } cl_bus_address_amd;
 
 #endif  /* __OPENCL_H   */
-

@@ -3,13 +3,10 @@
  * License terms: http://lwjgl.org/license.php
  */
 #include "common_tools.h"
-#include <stdlib.h>
 
-static JavaVM *jvm;
+JavaVM *jvm;
 
-jmethodID getDeclaringClass;
-
-inline JNIEnv *getThreadEnv() {
+inline JNIEnv *getThreadEnv(void) {
 	JNIEnv *env;
 	(*jvm)->GetEnv(jvm, (void **)&env, JNI_VERSION_1_6);
 	return env;
@@ -50,12 +47,12 @@ inline void detachCurrentThread(void) {
 // thread-local value.
 
 #ifdef LWJGL_WINDOWS
-	static __declspec(thread) JNIEnv* envTLS = NULL;
+	__declspec(thread) JNIEnv* envTLS = NULL;
 
-	void envTLSInit() {}
-	void envTLSDestroy() {}
+	static inline void envTLSInit(void) {}
+	static inline void envTLSDestroy(void) {}
 
-	JNIEnv* envTLSGet() {
+	JNIEnv* envTLSGet(void) {
 		JNIEnv* env = getThreadEnv();
     	if ( env == NULL )
     	    env = attachCurrentThreadAsDaemon();
@@ -63,7 +60,7 @@ inline void detachCurrentThread(void) {
 		return envTLS = env;
 	}
 
-	inline JNIEnv* getEnv() {
+	inline JNIEnv* getEnv(void) {
 		JNIEnv* env = envTLS;
 		if ( env == NULL )
 			env = envTLSGet();
@@ -71,20 +68,20 @@ inline void detachCurrentThread(void) {
 	}
 #else
 	#include <pthread.h>
-	static pthread_key_t envTLS = 0;
+	pthread_key_t envTLS = 0;
 
-	void envTLSInit() {
+	static inline void envTLSInit(void) {
 		pthread_key_create(&envTLS, NULL);
 	}
 
-	void envTLSDestroy() {
+	static inline void envTLSDestroy(void) {
 		if ( envTLS ) {
 			pthread_key_delete(envTLS);
 			envTLS = 0;
 		}
 	}
 
-	JNIEnv* envTLSGet() {
+	JNIEnv* envTLSGet(void) {
 		JNIEnv* env = getThreadEnv();
     	if ( env == NULL )
             env = attachCurrentThreadAsDaemon();
@@ -93,7 +90,7 @@ inline void detachCurrentThread(void) {
     	return env;
 	}
 
-	inline JNIEnv* getEnv() {
+	inline JNIEnv* getEnv(void) {
 		JNIEnv* env = (JNIEnv*)pthread_getspecific(envTLS);
 		if ( !env )
 			env = envTLSGet();
@@ -102,20 +99,15 @@ inline void detachCurrentThread(void) {
 #endif
 
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
-    JNIEnv* env;
-    jclass Method;
+	UNUSED_PARAM(reserved)
 
 	jvm = vm;
-
-    env = getThreadEnv();
-
-    Method = (*env)->FindClass(env, "java/lang/reflect/Method");
-    getDeclaringClass = (*env)->GetMethodID(env, Method, "getDeclaringClass", "()Ljava/lang/Class;");
 
     envTLSInit();
     return JNI_VERSION_1_6;
 }
 
 JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
+	UNUSED_PARAMS(vm, reserved);
 	envTLSDestroy();
 }

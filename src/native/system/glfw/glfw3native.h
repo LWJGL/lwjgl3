@@ -70,6 +70,8 @@ extern "C" {
  * System headers and types
  *************************************************************************/
 
+DISABLE_WARNINGS()
+
 #if defined(GLFW_EXPOSE_NATIVE_WIN32)
  #include <windows.h>
 #elif defined(GLFW_EXPOSE_NATIVE_COCOA)
@@ -96,6 +98,7 @@ extern "C" {
  #error "No context API specified"
 #endif
 
+ENABLE_WARNINGS()
 
 /*************************************************************************
  * Functions

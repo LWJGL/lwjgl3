@@ -30,6 +30,7 @@
 #define _glfw3_h_
 
 // LWJGL Note: Cleaned-up, only kept stuff we need to statically link.
+DISABLE_WARNINGS()
 
 #define GLFWAPI
 
@@ -1765,5 +1766,7 @@ GLFWAPI GLFWglproc glfwGetProcAddress(const char* procname);
 #ifdef __cplusplus
 }
 #endif
+
+ENABLE_WARNINGS()
 
 #endif /* _glfw3_h_ */

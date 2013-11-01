@@ -210,13 +210,8 @@ public class NativeClass(
 			}
 		}
 
-		var first = true
 		functions.forEach {
-			if ( first ) {
-				println()
-				first = false
-			} else
-				println("\n")
+			println()
 			it.generateFunction(this)
 		}
 	}

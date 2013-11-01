@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-DECLARE_CALLBACK_STATIC(GLFWmonitorfun);
+DECLARE_CALLBACK_STATIC(GLFWmonitorfun)
 
 static void GLFWmonitorfunProc(
 	GLFWmonitor* monitor,

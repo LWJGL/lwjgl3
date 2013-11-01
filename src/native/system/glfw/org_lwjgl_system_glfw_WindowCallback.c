@@ -5,19 +5,19 @@
 #include "common_tools.h"
 #include "glfw3.h"
 
-DECLARE_CALLBACK(GLFWwindowposfun);
-DECLARE_CALLBACK(GLFWwindowsizefun);
-DECLARE_CALLBACK(GLFWwindowclosefun);
-DECLARE_CALLBACK(GLFWwindowrefreshfun);
-DECLARE_CALLBACK(GLFWwindowfocusfun);
-DECLARE_CALLBACK(GLFWwindowiconifyfun);
-DECLARE_CALLBACK(GLFWframebuffersizefun);
-DECLARE_CALLBACK(GLFWkeyfun);
-DECLARE_CALLBACK(GLFWcharfun);
-DECLARE_CALLBACK(GLFWmousebuttonfun);
-DECLARE_CALLBACK(GLFWcursorposfun);
-DECLARE_CALLBACK(GLFWcursorenterfun);
-DECLARE_CALLBACK(GLFWscrollfun);
+DECLARE_CALLBACK(GLFWwindowposfun)
+DECLARE_CALLBACK(GLFWwindowsizefun)
+DECLARE_CALLBACK(GLFWwindowclosefun)
+DECLARE_CALLBACK(GLFWwindowrefreshfun)
+DECLARE_CALLBACK(GLFWwindowfocusfun)
+DECLARE_CALLBACK(GLFWwindowiconifyfun)
+DECLARE_CALLBACK(GLFWframebuffersizefun)
+DECLARE_CALLBACK(GLFWkeyfun)
+DECLARE_CALLBACK(GLFWcharfun)
+DECLARE_CALLBACK(GLFWmousebuttonfun)
+DECLARE_CALLBACK(GLFWcursorposfun)
+DECLARE_CALLBACK(GLFWcursorenterfun)
+DECLARE_CALLBACK(GLFWscrollfun)
 
 static void GLFWwindowposfunProc(GLFWwindow* window, int xpos, int ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
@@ -117,6 +117,9 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JN
 	intptr_t *procs = (intptr_t *)procsAddress;
 
 	jint i = 0;
+
+	UNUSED_PARAM(clazz)
+
 	GLFWwindowposfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
 	GLFWwindowsizefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
    	GLFWwindowclosefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));

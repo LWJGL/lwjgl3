@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "OpenCL.h"
 
-DECLARE_CALLBACK(CLEventCallback);
+DECLARE_CALLBACK(CLEventCallback)
 
 static void CL_CALLBACK CLEventCallbackProc(
 	cl_event event,

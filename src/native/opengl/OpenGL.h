@@ -28,13 +28,13 @@
 
 #include "opengl_types.h"
 
-#if defined(_WIN32) || defined(_WIN64)
-	// This will include <windows.h> which will define APIENTRY properly for us.
-    #include "WindowsLWJGL.h"
-#endif
-
 #ifndef APIENTRY
-	#define APIENTRY
+	#if defined(_WIN32) || defined(_WIN64)
+		// This will include <windows.h> which will define APIENTRY properly for us.
+	    #include "WindowsLWJGL.h"
+	#else
+		#define APIENTRY
+	#endif
 #endif
 
 // OpenGL 4.3

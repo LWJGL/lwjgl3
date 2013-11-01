@@ -14,8 +14,8 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 	)
 
 	nativeImport (
-		"OpenGL.h",
-		"OpenCL.h"
+		"OpenCL.h",
+		"OpenGL.h"
 	)
 
 	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension.")

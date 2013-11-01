@@ -21,6 +21,14 @@
 	<property name="jvm_headers_path" value="System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
 
 	<!-- Choose a JavaVM.framework -->
+	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
+		<and>
+			<not>
+				<isset property="javavmroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.9.sdk/${jvm_headers_path}" type="dir"/>
+		</and>
+	</condition>
 	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
 		<and>
 			<not>
@@ -37,14 +45,6 @@
 			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk/${jvm_headers_path}" type="dir"/>
 		</and>
 	</condition>
-	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.6.sdk">
-		<and>
-			<not>
-				<isset property="javavmroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.6.sdk/${jvm_headers_path}" type="dir"/>
-		</and>
-	</condition>
 	<condition property="javavmroot" value="">
 		<and>
 			<not>
@@ -55,7 +55,15 @@
 	</condition>
 
 	<!-- Choose a MacOSX SDK -->
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
+		<and>
+			<not>
+				<isset property="sdkroot"/>
+			</not>
+			<available file="${developer_path}/${sdk_path}/MacOSX10.9.sdk" type="dir"/>
+		</and>
+	</condition>
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
 		<and>
 			<not>
 				<isset property="sdkroot"/>
@@ -71,22 +79,6 @@
 			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk" type="dir"/>
 		</and>
 	</condition>
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.6.sdk">
-		<and>
-			<not>
-				<isset property="sdkroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.6.sdk" type="dir"/>
-		</and>
-	</condition>
-	<condition property="sdkroot" value="${developer_path}/SDKs/MacOSx10.6.sdk">
-		<and>
-			<not>
-				<isset property="sdkroot"/>
-			</not>
-			<available file="${developer_path}/SDKs/MacOSx10.6.sdk" type="dir"/>
-		</and>
-	</condition>
 
 	<patternset id="link-objects">
 		<include name="${bin.native}/*.o"/>
@@ -96,7 +88,7 @@
 	<target name="-link" unless="link-uptodate">
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -o ${libname}'/>
+			<arg line='-dynamiclib -mmacosx-version-min=10.7 -o ${libname}'/>
 			<arg value="-framework"/><arg value="AppKit"/>
 			<arg value="-framework"/><arg value="CoreFoundation"/>
 			<arg value="-framework"/><arg value="Cocoa"/>
@@ -117,7 +109,7 @@
 		<echo message="${sdkroot}" taskname="SDK Root"/>
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="-c -ObjC -isysroot ${sdkroot} -arch x86_64 -mmacosx-version-min=10.6 -O3 -fPIC -Wall -Wunused -DLWJGL_MACOSX"/>
+			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wextra -pedantic -Werror -Wfatal-errors -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=10.7"/>
 			<arg value="-I${javavmroot}/${jvm_headers_path}"/>
 
 			<!-- Paths relative to dir -->
@@ -127,7 +119,6 @@
 			<arg value="-I${src.native.abs}/openal"/>
 			<arg value="-I${src.native.abs}/opencl"/>
 			<arg value="-I${src.native.abs}/opengl"/>
-			<!--<arg value="-I${src.native.abs}/opengl/glx"/>-->
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -143,7 +134,6 @@
 			<fileset dir="${generated.native}/openal" includes="*.c"/>
 			<fileset dir="${generated.native}/opencl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
-			<!--<fileset dir="${src.generated}/opengl/glx" includes="*.c"/>-->
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>

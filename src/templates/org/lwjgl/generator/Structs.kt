@@ -658,8 +658,10 @@ public class Struct(
 
 		println()
 
-		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *env, jclass clazz, jlong bufferAddress) {")
+		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
+
+		println("\tUNUSED_PARAMS($JNIENV, clazz)\n")
 
 		if ( virtual ) {
 			// NOTE: Assumes a plain struct definition (no nested structs, no unions)
@@ -679,7 +681,7 @@ public class Struct(
 		generateNativeMembers(members)
 
 		println("\n\treturn sizeof($nativeName);")
-		print("}")
+		println("}")
 	}
 
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {

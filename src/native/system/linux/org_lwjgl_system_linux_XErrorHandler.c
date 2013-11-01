@@ -5,7 +5,7 @@
 #include "common_tools.h"
 #include "LinuxLWJGL.h"
 
-DECLARE_CALLBACK_STATIC(XErrorHandler);
+DECLARE_CALLBACK_STATIC(XErrorHandler)
 
 static int XErrorHandlerProc(
 	Display* display,

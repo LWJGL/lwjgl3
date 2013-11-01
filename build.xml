@@ -6,21 +6,13 @@
 
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
-	<path id="java6.boot.classpath.core">
-		<fileset dir="${java6.path}">
+	<path id="jdk.boot.classpath.jars">
+		<fileset dir="${env.JAVA7_HOME}/jre/lib">
 			<include name="*.jar"/>
 		</fileset>
+		<fileset file="${env.JAVA7_HOME}/lib/tools.jar"/>
 	</path>
-	<path id="java6.boot.classpath.withtools">
-		<fileset dir="${java6.path}">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
-	</path>
-	<condition property="java6.boot.classpath" value="java6.boot.classpath.core" else="java6.boot.classpath.withtools">
-		<!-- tools.jar is included in classes.jar on OS X -->
-		<equals arg1="${platform}" arg2="macosx"/>
-	</condition>
+	<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
 
 	<path id="lib.bin">
 		<pathelement path="${lib}/${platform}"/>
@@ -89,7 +81,7 @@
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
 		<!-- Compile Java dependencies -->
-		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${java6.boot.classpath}" taskname="Java dependencies">
+		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.7" target="1.7" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -131,7 +123,7 @@
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
-		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${java6.boot.classpath}">
+		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.7" target="1.7" bootclasspathref="${jdk.boot.classpath}">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -176,7 +168,7 @@
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
-		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${java6.boot.classpath}" taskname="Core">
+		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.7" target="1.7" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.util}"/>
@@ -200,7 +192,7 @@
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
-		<javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${java6.boot.classpath}" taskname="Tests">
+		<javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.7" target="1.7" bootclasspathref="${jdk.boot.classpath}" taskname="Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
 				<pathelement path="${bin.util}"/>
@@ -254,8 +246,8 @@
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
 		<javadoc
 			destdir="${generated.javadoc}"
-			source="1.6"
-			bootclasspathref="${java6.boot.classpath}"
+			source="1.7"
+			bootclasspathref="${jdk.boot.classpath}"
 			windowtitle="LWJGL ${version}"
 			encoding="utf8"
 			docencoding="utf8"

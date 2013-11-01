@@ -65,6 +65,9 @@
 	#define NOMCX // Modem Configuration Extensions
 
     #define STRICT
+
+    DISABLE_WARNINGS()
 	#include <windows.h>
 	#include <mmsystem.h>
+	ENABLE_WARNINGS()
 #endif /* _WINDOWS_LWJGL_INCLUDED */

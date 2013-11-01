@@ -1754,11 +1754,17 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HWND.IN("hWnd", "a handle to the window that should be activated and brought to the foreground")
 	)
 
-	BOOL.func(
+	HWND.func(
 		"SetFocus",
 		"Sets the keyboard focus to the specified window. The window must be attached to the calling thread's message queue.",
 
-		nullable _ HWND.IN("hWnd", "a handle to the window that will receive the keyboard input. If this parameter is $NULL, keystrokes are ignored.")
+		nullable _ HWND.IN("hWnd", "a handle to the window that will receive the keyboard input. If this parameter is $NULL, keystrokes are ignored."),
+
+	    returnDoc =
+	    """
+	    the handle to the window that previously had the keyboard focus. If the {@code hWnd} parameter is invalid or the window is not attached to the calling
+	    thread's message queue, the return value is $NULL.
+	    """
 	)
 
 	LONG_PTR.func(
@@ -1787,9 +1793,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		int.IN(
 			"index",
 			"""
-			    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-			    of an integer. To set any other value, specify one of the following values
-			    """,
+		    the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
+		    of an integer. To set any other value, specify one of the following values
+		    """,
 			WindowLongOffsets
 		)
 	)
