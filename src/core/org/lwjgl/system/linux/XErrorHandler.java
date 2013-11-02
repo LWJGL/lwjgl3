@@ -1,7 +1,5 @@
 package org.lwjgl.system.linux;
 
-import org.lwjgl.LWJGLUtil;
-
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 

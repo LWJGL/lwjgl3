@@ -157,7 +157,7 @@ public final class CL {
 		if ( LWJGLUtil.DEBUG && (clGetPlatformInfo == NULL || clGetDeviceIDs == NULL || clGetDeviceInfo == NULL) )
 			throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
 		String extensionsString = getPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, clGetPlatformInfo);

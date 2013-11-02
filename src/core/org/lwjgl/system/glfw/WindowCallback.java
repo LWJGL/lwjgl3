@@ -73,7 +73,7 @@ public abstract class WindowCallback {
 	}
 
 	// This is used like a Set.
-	private static final FastLongMap<Long> windows = new FastLongMap<Long>();
+	private static final FastLongMap<Long> windows = new FastLongMap<>();
 
 	private EnumSet<Event> eventTypes = EnumSet.noneOf(Event.class);
 

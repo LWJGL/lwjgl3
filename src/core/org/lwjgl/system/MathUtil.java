@@ -9,6 +9,10 @@ public final class MathUtil {
 	private MathUtil() {
 	}
 
+	public static boolean mathIsPoT(int value) {
+		return value != 0 && (value & (value - 1)) == 0;
+	}
+
 	public static int mathNextPoT(int value) {
 		int v = value - 1;
 

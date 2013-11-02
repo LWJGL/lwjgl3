@@ -77,7 +77,7 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 			return oldValue;
 		}
 
-		table[index] = new Entry<V>(key, value, table[index]);
+		table[index] = new Entry<>(key, value, table[index]);
 
 		if ( size++ >= threshold )
 			rehash(table);

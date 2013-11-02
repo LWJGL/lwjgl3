@@ -354,7 +354,7 @@ public final class JGLFW {
 
 	private static List<GLFWmonitor> monitors;
 
-	static List<GLFWwindow> windows = new ArrayList<GLFWwindow>(8);
+	static List<GLFWwindow> windows = new ArrayList<>(8);
 
 	private JGLFW() {
 	}
@@ -535,7 +535,7 @@ public final class JGLFW {
 		if ( notInitialized() )
 			return null;
 
-		return new ArrayList<GLFWmonitor>(monitors);
+		return new ArrayList<>(monitors);
 	}
 
 	/**

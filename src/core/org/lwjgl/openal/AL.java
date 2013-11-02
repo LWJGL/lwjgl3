@@ -78,7 +78,7 @@ public final class AL {
 			{ 0, 1 }  // OpenAL 1
 		};
 
-		Set<String> supportedExtensions = new HashSet<String>(32);
+		Set<String> supportedExtensions = new HashSet<>(32);
 
 		for ( int major = 1; major <= AL_VERSIONS.length; major++ ) {
 			int[] minors = AL_VERSIONS[major - 1];

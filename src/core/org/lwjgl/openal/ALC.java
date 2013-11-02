@@ -155,7 +155,7 @@ public final class ALC {
 
 		ByteBuffer buffer = memByteBuffer(__result, Integer.MAX_VALUE);
 
-		List<String> strings = new ArrayList<String>();
+		List<String> strings = new ArrayList<>();
 
 		int offset = 0;
 		while ( true ) {
@@ -207,7 +207,7 @@ public final class ALC {
 			{ 0, 1 },  // ALC 1
 		};
 
-		Set<String> supportedExtensions = new HashSet<String>(16);
+		Set<String> supportedExtensions = new HashSet<>(16);
 
 		for ( int major = 1; major <= ALC_VERSIONS.length; major++ ) {
 			int[] minors = ALC_VERSIONS[major - 1];

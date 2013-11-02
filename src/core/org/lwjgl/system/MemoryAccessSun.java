@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.MemoryAccess.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

@@ -78,7 +78,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 	static final _GLX glx = new _GLX();
 
-	private final ThreadLocal<GLFWwindowLinux> currentWindow = new ThreadLocal<GLFWwindowLinux>();
+	private final ThreadLocal<GLFWwindowLinux> currentWindow = new ThreadLocal<>();
 
 	private int glfwErrorCode;
 
@@ -128,7 +128,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 	@Override
 	public List<GLFWmonitor> getMonitors() {
-		List<GLFWmonitor> monitors = new ArrayList<GLFWmonitor>(4);
+		List<GLFWmonitor> monitors = new ArrayList<>(4);
 
 		if ( x11.randr.available ) {
 			ByteBuffer sr = XRRGetScreenResources(x11.display, x11.root);
@@ -221,7 +221,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 	public List<GLFWvidmode> getVideoModes(GLFWmonitor monitorIn) {
 		GLFWmonitorLinux monitor = (GLFWmonitorLinux)monitorIn;
 
-		List<GLFWvidmode> vidmodes = new ArrayList<GLFWvidmode>(64);
+		List<GLFWvidmode> vidmodes = new ArrayList<>(64);
 
 		int depth;
 
@@ -935,57 +935,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 			// keys here, and we use the US keyboard layout. The rest of the
 			// keys (function keys) are mapped using traditional KeySym
 			// translations.
-			int keyCodeGLFW;
-
-			if ( "TLDE".equals(name) ) keyCodeGLFW = GLFW_KEY_GRAVE_ACCENT;
-			else if ( "AE01".equals(name) ) keyCodeGLFW = GLFW_KEY_1;
-			else if ( "AE02".equals(name) ) keyCodeGLFW = GLFW_KEY_2;
-			else if ( "AE03".equals(name) ) keyCodeGLFW = GLFW_KEY_3;
-			else if ( "AE04".equals(name) ) keyCodeGLFW = GLFW_KEY_4;
-			else if ( "AE05".equals(name) ) keyCodeGLFW = GLFW_KEY_5;
-			else if ( "AE06".equals(name) ) keyCodeGLFW = GLFW_KEY_6;
-			else if ( "AE07".equals(name) ) keyCodeGLFW = GLFW_KEY_7;
-			else if ( "AE08".equals(name) ) keyCodeGLFW = GLFW_KEY_8;
-			else if ( "AE09".equals(name) ) keyCodeGLFW = GLFW_KEY_9;
-			else if ( "AE10".equals(name) ) keyCodeGLFW = GLFW_KEY_0;
-			else if ( "AE11".equals(name) ) keyCodeGLFW = GLFW_KEY_MINUS;
-			else if ( "AE12".equals(name) ) keyCodeGLFW = GLFW_KEY_EQUAL;
-			else if ( "AD01".equals(name) ) keyCodeGLFW = GLFW_KEY_Q;
-			else if ( "AD02".equals(name) ) keyCodeGLFW = GLFW_KEY_W;
-			else if ( "AD03".equals(name) ) keyCodeGLFW = GLFW_KEY_E;
-			else if ( "AD04".equals(name) ) keyCodeGLFW = GLFW_KEY_R;
-			else if ( "AD05".equals(name) ) keyCodeGLFW = GLFW_KEY_T;
-			else if ( "AD06".equals(name) ) keyCodeGLFW = GLFW_KEY_Y;
-			else if ( "AD07".equals(name) ) keyCodeGLFW = GLFW_KEY_U;
-			else if ( "AD08".equals(name) ) keyCodeGLFW = GLFW_KEY_I;
-			else if ( "AD09".equals(name) ) keyCodeGLFW = GLFW_KEY_O;
-			else if ( "AD10".equals(name) ) keyCodeGLFW = GLFW_KEY_P;
-			else if ( "AD11".equals(name) ) keyCodeGLFW = GLFW_KEY_LEFT_BRACKET;
-			else if ( "AD12".equals(name) ) keyCodeGLFW = GLFW_KEY_RIGHT_BRACKET;
-			else if ( "AC01".equals(name) ) keyCodeGLFW = GLFW_KEY_A;
-			else if ( "AC02".equals(name) ) keyCodeGLFW = GLFW_KEY_S;
-			else if ( "AC03".equals(name) ) keyCodeGLFW = GLFW_KEY_D;
-			else if ( "AC04".equals(name) ) keyCodeGLFW = GLFW_KEY_F;
-			else if ( "AC05".equals(name) ) keyCodeGLFW = GLFW_KEY_G;
-			else if ( "AC06".equals(name) ) keyCodeGLFW = GLFW_KEY_H;
-			else if ( "AC07".equals(name) ) keyCodeGLFW = GLFW_KEY_J;
-			else if ( "AC08".equals(name) ) keyCodeGLFW = GLFW_KEY_K;
-			else if ( "AC09".equals(name) ) keyCodeGLFW = GLFW_KEY_L;
-			else if ( "AC10".equals(name) ) keyCodeGLFW = GLFW_KEY_SEMICOLON;
-			else if ( "AC11".equals(name) ) keyCodeGLFW = GLFW_KEY_APOSTROPHE;
-			else if ( "AB01".equals(name) ) keyCodeGLFW = GLFW_KEY_Z;
-			else if ( "AB02".equals(name) ) keyCodeGLFW = GLFW_KEY_X;
-			else if ( "AB03".equals(name) ) keyCodeGLFW = GLFW_KEY_C;
-			else if ( "AB04".equals(name) ) keyCodeGLFW = GLFW_KEY_V;
-			else if ( "AB05".equals(name) ) keyCodeGLFW = GLFW_KEY_B;
-			else if ( "AB06".equals(name) ) keyCodeGLFW = GLFW_KEY_N;
-			else if ( "AB07".equals(name) ) keyCodeGLFW = GLFW_KEY_M;
-			else if ( "AB08".equals(name) ) keyCodeGLFW = GLFW_KEY_COMMA;
-			else if ( "AB09".equals(name) ) keyCodeGLFW = GLFW_KEY_PERIOD;
-			else if ( "AB10".equals(name) ) keyCodeGLFW = GLFW_KEY_SLASH;
-			else if ( "BKSL".equals(name) ) keyCodeGLFW = GLFW_KEY_BACKSLASH;
-			else if ( "LSGT".equals(name) ) keyCodeGLFW = GLFW_KEY_WORLD_1;
-			else keyCodeGLFW = -1;
+			int keyCodeGLFW = getKeyCodeGLFW(name);
 
 			// Update the key code LUT
 			if ( (keyCode >= 0) && (keyCode < 256) )
@@ -1000,6 +950,60 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		for ( int keyCode = 0; keyCode < 256; keyCode++ ) {
 			if ( x11.keyCodeLUT[keyCode] < 0 )
 				x11.keyCodeLUT[keyCode] = keyCodeToGLFWKeyCode(keyCode);
+		}
+	}
+	
+	private static int getKeyCodeGLFW(String name) {
+		switch ( name ) {
+			case "TLDE": return GLFW_KEY_GRAVE_ACCENT;
+			case "AE01": return GLFW_KEY_1;
+			case "AE02": return GLFW_KEY_2;
+			case "AE03": return GLFW_KEY_3;
+			case "AE04": return GLFW_KEY_4;
+			case "AE05": return GLFW_KEY_5;
+			case "AE06": return GLFW_KEY_6;
+			case "AE07": return GLFW_KEY_7;
+			case "AE08": return GLFW_KEY_8;
+			case "AE09": return GLFW_KEY_9;
+			case "AE10": return GLFW_KEY_0;
+			case "AE11": return GLFW_KEY_MINUS;
+			case "AE12": return GLFW_KEY_EQUAL;
+			case "AD01": return GLFW_KEY_Q;
+			case "AD02": return GLFW_KEY_W;
+			case "AD03": return GLFW_KEY_E;
+			case "AD04": return GLFW_KEY_R;
+			case "AD05": return GLFW_KEY_T;
+			case "AD06": return GLFW_KEY_Y;
+			case "AD07": return GLFW_KEY_U;
+			case "AD08": return GLFW_KEY_I;
+			case "AD09": return GLFW_KEY_O;
+			case "AD10": return GLFW_KEY_P;
+			case "AD11": return GLFW_KEY_LEFT_BRACKET;
+			case "AD12": return GLFW_KEY_RIGHT_BRACKET;
+			case "AC01": return GLFW_KEY_A;
+			case "AC02": return GLFW_KEY_S;
+			case "AC03": return GLFW_KEY_D;
+			case "AC04": return GLFW_KEY_F;
+			case "AC05": return GLFW_KEY_G;
+			case "AC06": return GLFW_KEY_H;
+			case "AC07": return GLFW_KEY_J;
+			case "AC08": return GLFW_KEY_K;
+			case "AC09": return GLFW_KEY_L;
+			case "AC10": return GLFW_KEY_SEMICOLON;
+			case "AC11": return GLFW_KEY_APOSTROPHE;
+			case "AB01": return GLFW_KEY_Z;
+			case "AB02": return GLFW_KEY_X;
+			case "AB03": return GLFW_KEY_C;
+			case "AB04": return GLFW_KEY_V;
+			case "AB05": return GLFW_KEY_B;
+			case "AB06": return GLFW_KEY_N;
+			case "AB07": return GLFW_KEY_M;
+			case "AB08": return GLFW_KEY_COMMA;
+			case "AB09": return GLFW_KEY_PERIOD;
+			case "AB10": return GLFW_KEY_SLASH;
+			case "BKSL": return GLFW_KEY_BACKSLASH;
+			case "LSGT": return GLFW_KEY_WORLD_1;
+			default: return -1;
 		}
 	}
 
@@ -1441,7 +1445,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		glx.CreateNewContext = functionProvider.getFunctionAddress("glXCreateNewContext");
 
 		String extensionsString = memDecodeASCII(memByteBufferNT1(nglXQueryExtensionsString(x11.display, x11.screen, glx.QueryExtensionsString)));
-		Set<String> extensions = new HashSet<String>(32);
+		Set<String> extensions = new HashSet<>(32);
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() )
 			extensions.add(tokenizer.nextToken());
@@ -1764,7 +1768,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		}
 	}
 
-	private void leaveFullscreenMode(GLFWwindowLinux window) {
+	private static void leaveFullscreenMode(GLFWwindowLinux window) {
 		restoreVideoMode((GLFWmonitorLinux)window.monitor);
 
 		if ( x11.saver.changed ) {

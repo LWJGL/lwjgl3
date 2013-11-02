@@ -280,7 +280,7 @@ public class TemplateFormatter {
 
 	private static void validateInteger(String intValue) {
 		Long l = Long.decode(intValue);
-		if ( (1L << 32) - 1 < l.longValue() )
+		if ( (1L << 32) - 1 < l )
 			throw new NumberFormatException("long value");
 	}
 

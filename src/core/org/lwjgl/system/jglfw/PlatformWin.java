@@ -68,7 +68,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	private final TimerWin timer = new TimerWin();
 
-	private final ThreadLocal<GLFWwindowWin> currentWindow = new ThreadLocal<GLFWwindowWin>();
+	private final ThreadLocal<GLFWwindowWin> currentWindow = new ThreadLocal<>();
 
 	@Override
 	public boolean init() {
@@ -112,7 +112,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	@Override
 	public List<GLFWmonitor> getMonitors() {
-		List<GLFWmonitor> monitors = new ArrayList<GLFWmonitor>(4);
+		List<GLFWmonitor> monitors = new ArrayList<>(4);
 
 		ByteBuffer adapter = DISPLAY_DEVICE.malloc();
 		ByteBuffer device = DISPLAY_DEVICE.malloc();
@@ -183,7 +183,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	@Override
 	public List<GLFWvidmode> getVideoModes(GLFWmonitor monitor) {
-		List<GLFWvidmode> vidmodes = new ArrayList<GLFWvidmode>(64);
+		List<GLFWvidmode> vidmodes = new ArrayList<>(64);
 
 		ByteBuffer monitorName = memEncodeUTF16(((GLFWmonitorWin)monitor).getAdapterName());
 

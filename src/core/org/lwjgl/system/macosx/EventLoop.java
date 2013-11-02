@@ -14,15 +14,19 @@ public final class EventLoop {
 	public static void initSharedApplication() {
 		String type = System.getProperty("org.lwjgl.macosx.nsloop", "AWT");
 
-		if ( "AWT".equals(type) )
-			java.awt.Toolkit.getDefaultToolkit();
-		else if ( "JFX".equals(type) ) {
-			// TODO: Implement
-			throw new UnsupportedOperationException("not implemented yet");
-		} else if ( "NA".equals(type) ) {
-			// don't start anything
-		} else
-			throw new IllegalStateException("Invalid NS event loop setting: " + type);
+		switch ( type ) {
+			case "AWT":
+				java.awt.Toolkit.getDefaultToolkit();
+				break;
+			case "JFX":
+				// TODO: Implement
+				throw new UnsupportedOperationException("not implemented yet");
+			case "NA":
+				// don't start anything
+				break;
+			default:
+				throw new IllegalStateException("Invalid NS event loop setting: " + type);
+		}
 	}
 
 }

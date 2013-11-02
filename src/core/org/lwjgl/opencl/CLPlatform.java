@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This class is a wrapper around a cl_platform_id pointer. */
 public class CLPlatform extends CLObject {
 
-	private static final FastLongMap<CLPlatform> platforms = new FastLongMap<CLPlatform>();
+	private static final FastLongMap<CLPlatform> platforms = new FastLongMap<>();
 
 	private CLCapabilities capabilities;
 
@@ -90,7 +90,7 @@ public class CLPlatform extends CLObject {
 		for ( int i = 0; i < num_platforms; i++ )
 			platformIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
-		List<CLPlatform> platforms = new ArrayList<CLPlatform>(num_platforms);
+		List<CLPlatform> platforms = new ArrayList<>(num_platforms);
 		for ( int i = 0; i < num_platforms; i++ ) {
 			CLPlatform platform = create(platformIDs[i]);
 			if ( filter == null || filter.accept(platform) )
@@ -144,7 +144,7 @@ public class CLPlatform extends CLObject {
 		for ( int i = 0; i < num_devices; i++ )
 			deviceIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
-		List<CLDevice> devices = new ArrayList<CLDevice>(num_devices);
+		List<CLDevice> devices = new ArrayList<>(num_devices);
 		for ( int i = 0; i < num_devices; i++ ) {
 			CLDevice device = CLDevice.create(deviceIDs[i], this);
 			if ( filter == null || filter.accept(device) )

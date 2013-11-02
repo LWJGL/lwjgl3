@@ -6,6 +6,7 @@ package org.lwjgl;
 
 import java.nio.*;
 
+import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Some often-used Buffer code for creating native buffers of the appropriate size. */
@@ -16,34 +17,55 @@ public final class BufferUtils {
 		ByteBuffer malloc(int capacity);
 	}
 
-	private static final BufferAllocator BUFFER_ALLOCATOR;
-
-	static {
-		String alignment = System.getProperty("org.lwjgl.util.BufferAlign");
-		if ( "page".equals(alignment) )
-			BUFFER_ALLOCATOR = new BufferAllocator() {
-				@Override
-				public ByteBuffer malloc(int capacity) {
-					return createAlignedByteBufferPage(capacity);
-				}
-			};
-		else if ( "cache-line".equals(alignment) )
-			BUFFER_ALLOCATOR = new BufferAllocator() {
-				@Override
-				public ByteBuffer malloc(int capacity) {
-					return createAlignedByteBufferCacheLine(capacity);
-				}
-			};
-		else
-			BUFFER_ALLOCATOR = new BufferAllocator() {
-				@Override
-				public ByteBuffer malloc(int capacity) {
-					return createUnalignedByteBuffer(capacity);
-				}
-			};
-	}
+	private static final BufferAllocator BUFFER_ALLOCATOR = getDefaultAllocator();
 
 	private BufferUtils() {}
+
+	private static BufferAllocator getDefaultAllocator() {
+		String alignment = System.getProperty("org.lwjgl.util.BufferAlign", "default");
+
+		switch ( alignment ) {
+			case "page":
+				return new BufferAllocator() {
+					@Override
+					public ByteBuffer malloc(int capacity) {
+						return createAlignedByteBufferPage(capacity);
+					}
+				};
+			case "cache-line":
+				return new BufferAllocator() {
+					@Override
+					public ByteBuffer malloc(int capacity) {
+						return createAlignedByteBufferCacheLine(capacity);
+					}
+				};
+			case "default":
+				return new BufferAllocator() {
+					@Override
+					public ByteBuffer malloc(int capacity) {
+						return createUnalignedByteBuffer(capacity);
+					}
+				};
+			default:
+				try {
+					final int bytes = Integer.parseInt(alignment);
+					if ( mathIsPoT(bytes) && 8 <= bytes )
+						return new BufferAllocator() {
+							@Override
+							public ByteBuffer malloc(int capacity) {
+								return createAlignedByteBuffer(capacity, bytes);
+							}
+						};
+				} catch (NumberFormatException e) {
+					// ignore
+				}
+		}
+
+		throw new IllegalArgumentException(String.format(
+			"Invalid org.lwjgl.util.BufferAlign value: \"%s\". It must be one of {page, cache-line, default} or a power-of-two integer.",
+			alignment
+		));
+	}
 
 	/**
 	 * Construct a direct native-ordered bytebuffer with the specified capacity.
@@ -164,6 +186,9 @@ public final class BufferUtils {
 	 * @return the aligned ByteBuffer
 	 */
 	public static ByteBuffer createAlignedByteBuffer(int capacity, int alignment) {
+		if ( LWJGLUtil.DEBUG && !mathIsPoT(alignment) )
+			throw new IllegalArgumentException("The alignment value must be a power-of-two integer.");
+
 		ByteBuffer buffer = ByteBuffer.allocateDirect(capacity + alignment);
 
 		// Align
