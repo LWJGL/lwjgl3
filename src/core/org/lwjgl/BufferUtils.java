@@ -49,7 +49,7 @@ public final class BufferUtils {
 			default:
 				try {
 					final int bytes = Integer.parseInt(alignment);
-					if ( mathIsPoT(bytes) && 8 <= bytes )
+					if ( mathIsPoT(bytes) && 8 < bytes )
 						return new BufferAllocator() {
 							@Override
 							public ByteBuffer malloc(int capacity) {
@@ -62,7 +62,7 @@ public final class BufferUtils {
 		}
 
 		throw new IllegalArgumentException(String.format(
-			"Invalid org.lwjgl.util.BufferAlign value: \"%s\". It must be one of {page, cache-line, default} or a power-of-two integer.",
+			"Invalid org.lwjgl.util.BufferAlign value: \"%s\". It must be one of {page, cache-line, default} or a power-of-two integer > 8.",
 			alignment
 		));
 	}
