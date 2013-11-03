@@ -63,7 +63,7 @@
 			<available file="${developer_path}/${sdk_path}/MacOSX10.9.sdk" type="dir"/>
 		</and>
 	</condition>
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
+	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
 		<and>
 			<not>
 				<isset property="sdkroot"/>
@@ -85,10 +85,12 @@
 		<include name="${lib}/macosx/${os.arch}/*.a"/>
 	</patternset>
 
+	<property name="macosx-version-min" value="10.7"/>
+
 	<target name="-link" unless="link-uptodate">
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -mmacosx-version-min=10.7 -o ${libname}'/>
+			<arg line='-dynamiclib -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
 			<arg value="-framework"/><arg value="AppKit"/>
 			<arg value="-framework"/><arg value="CoreFoundation"/>
 			<arg value="-framework"/><arg value="Cocoa"/>
@@ -108,8 +110,10 @@
 	<target name="compile-native-macosx">
 		<echo message="${sdkroot}" taskname="SDK Root"/>
 		<!-- COMPILE -->
+		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wextra -pedantic -Werror -Wfatal-errors -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=10.7"/>
+			<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 			<arg value="-I${javavmroot}/${jvm_headers_path}"/>
 
 			<!-- Paths relative to dir -->

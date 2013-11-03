@@ -37,8 +37,10 @@
 
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
+		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="-c -std=c99 -O3 -fPIC -Wall -Wextra -pedantic -Werror -Wfatal-errors -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
+			<arg line="-c -std=c99 -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=600 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
 
