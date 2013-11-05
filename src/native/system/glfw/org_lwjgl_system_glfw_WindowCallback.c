@@ -114,7 +114,7 @@ static void GLFWscrollfunProc(GLFWwindow* window, double xpos, double ypos) {
 JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JNIEnv *env, jclass clazz,
 	jobjectArray methods, jlong procsAddress
 ) {
-	intptr_t *procs = (intptr_t *)procsAddress;
+	intptr_t *procs = (intptr_t *)(intptr_t)procsAddress;
 
 	jint i = 0;
 
