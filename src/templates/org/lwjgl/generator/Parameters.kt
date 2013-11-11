@@ -498,3 +498,12 @@ public class Construct(
 			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
 	}
 }
+
+/** Returns the address of the return value, instead of the return value itself. */
+public val address: ReturnValueModifier = object : ReturnValueModifier() {
+	override val isSpecial: Boolean = false
+	override protected fun validate(returns: ReturnValue) {
+		if ( returns.nativeType.mapping != PointerMapping.NAKED_POINTER )
+			throw IllegalArgumentException("The address modifier can only be applied on naked pointer types.")
+	}
+}
