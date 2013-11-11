@@ -262,7 +262,7 @@ public fun String.nativeClass(
 	nativeSubPath: String = "",
 	prefix: String = "",
 	prefixMethod: String = prefix.toLowerCase(),
-	prefixConstant: String = if ( prefix.isEmpty() ) prefix else "${prefix}_",
+	prefixConstant: String = if ( prefix.isEmpty() || prefix.endsWith('_') ) prefix else "${prefix}_",
 	prefixTemplate: String = prefix,
 	postfix: String = "",
 	functionProvider: FunctionProvider? = null,
