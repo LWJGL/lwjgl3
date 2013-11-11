@@ -133,6 +133,9 @@ public class NativeClassFunction(
 		else
 			simpleName
 
+	val accessModifier: String
+		get() = if ( has(private) ) "private" else if ( has(internal) ) "" else "public"
+
 	private fun stripPostfix(functionName: String = name, stripType: Boolean = false, stripUnsigned: Boolean = false): String {
 		if ( !hasNativeParams || has(keepPostfix) )
 			return functionName
@@ -469,11 +472,11 @@ public class NativeClassFunction(
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {
 		if ( nativeOnly )
 			println(documentation)
-		else
+		else {
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
-
-		println("\t@JavadocExclude")
-		print("\tpublic static native ${returnsNativeMethodType} ")
+			println("\t@JavadocExclude")
+		}
+		print("\t$accessModifier static native ${returnsNativeMethodType} ")
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
@@ -507,7 +510,7 @@ public class NativeClassFunction(
 
 		// Step 1: Method signature
 
-		print("\tpublic static ${returnsJavaMethodType} $strippedName(")
+		print("\t$accessModifier static ${returnsJavaMethodType} $strippedName(")
 		printList(parameters) {
 			if ( it has autoSizeResult && returns.nativeType !is StructType )
 				null
@@ -975,7 +978,7 @@ public class NativeClassFunction(
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
-		print("\tpublic static $retType $name(")
+		print("\t$accessModifier static $retType $name(")
 		printList(parameters) {
 			if ( it has autoSizeResult && returns.nativeType !is StructType )
 				null
@@ -1173,6 +1176,8 @@ public class NativeClassFunction(
 			print("return (${returnsJniFunctionType})")
 			if ( returns.nativeType is PointerType )
 				print("(intptr_t)")
+			if ( returns.has(address) )
+				print('&')
 		}
 		print("$name")
 		if ( !has(macro) ) print('(')
@@ -1269,6 +1274,15 @@ public val macro: FunctionModifier = object : FunctionModifier() {
 		if ( func.getNativeParams().hasNext() )
 			throw IllegalArgumentException("The macro modifier can only be applied on functions with no arguments.")
 	}
+}
+
+/** Makes the generated methods private. */
+public val private: FunctionModifier = object : FunctionModifier() {
+	override val isSpecial: Boolean = false
+}
+/** Makes the generated methods package private. */
+public val internal: FunctionModifier = object : FunctionModifier() {
+	override val isSpecial: Boolean = false
 }
 
 // --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
