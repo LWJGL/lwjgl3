@@ -235,6 +235,7 @@
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
 			<classpath>
 				<pathelement path="${lib}/disruptor.jar"/>
+				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
 			<jvmarg value="-Djava.library.path=${lib.bin}"/>
