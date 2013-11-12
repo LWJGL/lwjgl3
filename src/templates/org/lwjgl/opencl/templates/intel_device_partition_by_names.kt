@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun intel_device_partition_by_names() = "INTELDevicePartitionByNames".nativeClassCL("intel_device_partition_by_names", INTEL) {
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionLink extension.
 
@@ -31,7 +31,6 @@ fun intel_device_partition_by_names() = "INTELDevicePartitionByNames".nativeClas
 			"3 the name of the third compute unit in the sub-device"
 		)}
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted in the {@code properties} argument of ${"CL12".link("CreateSubDevices()")}.",

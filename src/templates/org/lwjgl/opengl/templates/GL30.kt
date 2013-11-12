@@ -13,7 +13,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 3.0 functionality.")
+	documentation = "The core OpenGL 3.0 functionality."
 
 	IntConstant.block(
 		"GetTarget",

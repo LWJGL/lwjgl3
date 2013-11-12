@@ -15,7 +15,7 @@ fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {
 		"<GL/glx.h>"
 	)
 
-	javaDoc("Native bindings to GLX 1.4.")
+	documentation = "Native bindings to GLX 1.4."
 
 	IntConstant.block(
 		"Added in GLX 1.4:",

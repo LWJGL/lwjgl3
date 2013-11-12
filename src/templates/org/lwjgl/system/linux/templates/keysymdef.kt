@@ -9,7 +9,7 @@ import org.lwjgl.system.linux.*
 
 fun keysymdef() = "keysymdef".nativeClass(LINUX_PACKAGE) {
 
-	javaDoc("Native bindings to keysymdef.h.")
+	documentation = "Native bindings to keysymdef.h."
 
 	IntConstant.block(
 		"""

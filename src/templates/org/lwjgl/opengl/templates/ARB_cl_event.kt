@@ -18,7 +18,7 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension.")
+	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension."
 
 	IntConstant.block(
 		"Returned in {@code values} for ${"GL32".link("GetSync()")} {@code pname} ${"GL32".linkGL("OBJECT_TYPE")}.",

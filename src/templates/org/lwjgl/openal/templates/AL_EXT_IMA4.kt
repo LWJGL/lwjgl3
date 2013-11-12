@@ -12,7 +12,7 @@ fun AL_EXT_IMA4() = "EXTIma4".nativeClassAL("EXT_IMA4") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_IMA4 extension.")
+	documentation = "bindings to AL_EXT_IMA4 extension."
 
 	IntConstant.block(
 		"AL_EXT_IMA4 tokens.",

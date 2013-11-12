@@ -14,7 +14,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 1.4 functionality.")
+	documentation = "The core OpenGL 1.4 functionality."
 
 	// SGIS_generate_mipmap
 

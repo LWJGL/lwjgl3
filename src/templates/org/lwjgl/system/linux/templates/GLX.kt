@@ -18,7 +18,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 		"<GL/glx.h>"
 	)
 
-	javaDoc("Native bindings to GLX.")
+	documentation = "Native bindings to GLX."
 
 	IntConstant.block(
 		"Errors.",

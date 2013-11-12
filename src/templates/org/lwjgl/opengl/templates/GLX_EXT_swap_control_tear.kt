@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_EXT_swap_control_tear() = "GLXEXTSwapControlTear".nativeClassGLX("GLX_EXT_swap_control_tear", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt", templateName)} extension.
 
@@ -18,7 +18,6 @@ fun GLX_EXT_swap_control_tear() = "GLXEXTSwapControlTear".nativeClassGLX("GLX_EX
 		${"GLXEXTSwapControl".link("SwapIntervalEXT()")}. The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
 		reduces the visual stutter on late frames and reduces the stall on subsequent frames.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by ${"GLX13".link("QueryDrawable()")}:",

@@ -13,7 +13,7 @@ fun Fcntl() = "Fcntl".nativeClass(LINUX_PACKAGE) {
 		"<fcntl.h>"
 	)
 
-	javaDoc("Native bindings to <fcntl.h>.")
+	documentation = "Native bindings to <fcntl.h>."
 
 	IntConstant.block(
 		"${"open()".link} flags.",

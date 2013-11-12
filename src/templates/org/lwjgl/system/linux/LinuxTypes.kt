@@ -16,7 +16,7 @@ val time_t = PrimitiveType("time_t", PrimitiveMapping.LONG) // TODO: time_t can 
 
 val timespec = StructType(
 	struct(LINUX_PACKAGE, "timespec", globalIdentifier = false) {
-		javaDoc("Time structure")
+		documentation = "Time structure"
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<sys/time.h>"
@@ -30,7 +30,7 @@ val timespec_p = StructType(timespec)
 
 val timeval = StructType(
 	struct(LINUX_PACKAGE, "timeval", globalIdentifier = false) {
-		javaDoc("Time structure")
+		documentation = "Time structure"
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<sys/time.h>"
@@ -44,7 +44,7 @@ val timeval_p = StructType(timeval)
 
 val timezone = StructType(
 	struct(LINUX_PACKAGE, "timezone", globalIdentifier = false) {
-		javaDoc("Timezone structure")
+		documentation = "Timezone structure"
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<linux/time.h>"

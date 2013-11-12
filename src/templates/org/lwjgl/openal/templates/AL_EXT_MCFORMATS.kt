@@ -12,7 +12,7 @@ fun AL_EXT_MCFORMATS() = "EXTMCFormats".nativeClassAL("EXT_MCFORMATS") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_MCFORMATS extension.")
+	documentation = "bindings to AL_EXT_MCFORMATS extension."
 
 	IntConstant.block(
 		"AL_EXT_MCFORMATS tokens.",

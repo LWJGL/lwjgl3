@@ -12,7 +12,7 @@ fun ALC_EXT_disconnect() = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to ALC_EXT_disconnect extension.")
+	documentation = "bindings to ALC_EXT_disconnect extension."
 
 	IntConstant.block(
 		"ALC_EXT_disconnect tokens.",

@@ -16,7 +16,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 	    "<OpenGL/OpenGL.h>"
 	)
 
-	javaDoc("Native bindings to CGL.")
+	documentation = "Native bindings to CGL."
 
 	// -----------------------------------------------
 	// CGLTypes.h

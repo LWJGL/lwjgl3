@@ -13,7 +13,7 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 1.3 functionality.")
+	documentation = "The core OpenGL 1.3 functionality."
 
 	// ARB_texture_compression
 

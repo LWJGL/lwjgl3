@@ -17,7 +17,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/glx_create_context.txt", templateName)} extension.
 
@@ -26,7 +26,6 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 		version and context properties requested for the context, and additionally add an attribute specifying the GL profile requested for a context of OpenGL
 		3.2 or later. It also allows making an OpenGL 3.0 or later context current without providing a default framebuffer.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted as an attribute name in {@code attrib_list}:",

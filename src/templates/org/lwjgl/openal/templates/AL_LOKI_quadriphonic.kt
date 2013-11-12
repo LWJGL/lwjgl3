@@ -12,7 +12,7 @@ fun AL_LOKI_quadriphonic() = "LOKIQuadriphonic".nativeClassAL("LOKI_quadriphonic
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_LOKI_quadriphonic extension.")
+	documentation = "bindings to AL_LOKI_quadriphonic extension."
 
 	IntConstant.block(
 		"AL_LOKI_quadriphonic tokens.",

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 		value and the value of the transparent pixel. Note that the notion of level and transparent pixels are orthogonal as both layer 1 and layer 0 visuals
 		may or may not have a transparent pixel value.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}, and by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")}:",

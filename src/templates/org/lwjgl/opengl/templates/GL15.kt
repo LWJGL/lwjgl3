@@ -26,7 +26,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 1.5 functionality.")
+	documentation = "The core OpenGL 1.5 functionality."
 
 	IntConstant.block(
 		"New token names.",

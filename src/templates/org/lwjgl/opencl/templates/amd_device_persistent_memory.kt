@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun amd_device_persistent_memory() = "AMDDevicePersistentMemory".nativeClassCL("amd_device_persistent_memory", AMD) {
 
-	javaDoc("Native bindings to the $extensionName extension.")
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
 		"""

@@ -14,7 +14,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 3.2 functionality.")
+	documentation = "The core OpenGL 3.2 functionality."
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",

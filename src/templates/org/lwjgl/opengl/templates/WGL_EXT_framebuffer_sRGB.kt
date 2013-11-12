@@ -8,13 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun WGL_EXT_framebuffer_sRGB() = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", EXT) {
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/framebuffer_sRGB.txt", templateName)} extension.
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 		"""
-	)
 
 	IntConstant.block(
 		"""

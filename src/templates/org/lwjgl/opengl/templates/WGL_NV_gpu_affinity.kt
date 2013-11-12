@@ -14,7 +14,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		"WGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
 
@@ -25,7 +25,6 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		This extension also introduces the concept called affinity-DC. An affinity-DC is a device context with a GPU affinity mask embedded in it. This
 		restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the affinity mask.
 		"""
-	)
 
 	val wglMakeCurrent = "{@link org.lwjgl.system.windows.WGL#wglMakeCurrent}"
 	val wglMakeContextCurrentARB = "${"WGLARBMakeCurrentRead".link("MakeContextCurrentARB()")}"
@@ -51,12 +50,11 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		name = "PGPU_DEVICE",
 		includesPointer = true,
 		definition = struct("org.lwjgl.opengl", "GPU_DEVICE", "wgl") {
-			javaDoc(
+			documentation =
 				"""
 				Receives information about the display device specified by the {@code deviceIndex} parameter of the ${"WGLNVGPUAffinity".link("EnumGpuDevicesNV()")}
 				function.
 				"""
-			)
 			javaImport("org.lwjgl.system.windows.*")
 			nativeImport("WindowsLWJGL.h", "WGL.h")
 			DWORD.member("cb")

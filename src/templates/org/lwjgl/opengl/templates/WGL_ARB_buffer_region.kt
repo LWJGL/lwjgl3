@@ -13,7 +13,7 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 		"OpenGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_buffer_region.txt", templateName)} extension.
 
@@ -23,7 +23,6 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
         A buffer region can be created for the front color, back color, depth, and/or stencil buffer.  Multiple buffer regions for the same buffer type can
         exist.
 		"""
-	)
 
 	val CreateBufferRegionARB = HANDLE.func(
 		"CreateBufferRegionARB",

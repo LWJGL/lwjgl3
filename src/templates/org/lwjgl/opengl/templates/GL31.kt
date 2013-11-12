@@ -14,7 +14,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 3.1 functionality.")
+	documentation = "The core OpenGL 3.1 functionality."
 
 	IntConstant.block(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",

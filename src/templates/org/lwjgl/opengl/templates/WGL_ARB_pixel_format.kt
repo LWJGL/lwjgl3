@@ -13,7 +13,7 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 		"OpenGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", templateName)} extension.
 
@@ -22,7 +22,6 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
         These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
         Thus the list of attributes can be easily extended.
 		"""
-	)
 
 	val WGL_ATTRIBUTES = IntConstant.block(
 		"""

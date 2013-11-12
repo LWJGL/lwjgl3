@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_depth_images() = "KHRDepthImages".nativeClassCL("khr_depth_images", KHR) {
 
-	javaDoc("Native bindings to the $extensionName extension.")
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
 		"cl_channel_order",

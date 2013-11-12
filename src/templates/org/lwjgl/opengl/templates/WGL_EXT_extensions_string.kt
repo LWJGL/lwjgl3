@@ -12,7 +12,7 @@ fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_E
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", templateName)} extension.")
+	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", templateName)} extension."
 
 	(const _ charASCII_p).func(
 		"GetExtensionsStringEXT",

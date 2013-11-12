@@ -12,7 +12,7 @@ fun ALC_EXT_DEDICATED() = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix 
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to ALC_EXT_DEDICATED extension.")
+	documentation = "bindings to ALC_EXT_DEDICATED extension."
 
 	IntConstant.block(
 		"ALC_EXT_DEDICATED tokens.",

@@ -13,7 +13,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"<X11/XKBlib.h>"
 	)
 
-	javaDoc("Native bindings to XKBlib.h.")
+	documentation = "Native bindings to XKBlib.h."
 
 	IntConstant.block(
 		"""

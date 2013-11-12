@@ -13,7 +13,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 		"OpenGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 		to indicate at context creation which interface will be used. This extension add a new context creation routine with attributes specifying the GL
 		version and context properties requested for the context.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted as an attribute name in {@code attribList}.",

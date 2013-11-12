@@ -12,7 +12,7 @@ fun ALC11() = "ALC11".nativeClassALC("ALC11") {
 		"OpenAL.h"
 	)
 
-	javaDoc("Native bindings to ALC 1.1 functionality.")
+	documentation = "Native bindings to ALC 1.1 functionality."
 
 	IntConstant.block(
 		"Context creation attributes.",

@@ -15,7 +15,7 @@ val GLFWwindow = PointerType("GLFWwindow")
 
 val GLFWvidmode = StructType(
 	struct(GLFW_PACKAGE, "GLFWvidmode") {
-		javaDoc("Video mode.")
+		documentation = "Video mode."
 		nativeImport("glfw3.h")
 		int.member("width")
 		int.member("height")
@@ -29,7 +29,7 @@ val GLFWvidmode_p = StructType(GLFWvidmode)
 
 val GLFWgammaramp = StructType(
 	struct(GLFW_PACKAGE, "GLFWgammaramp") {
-		javaDoc("Gamma ramp.")
+		documentation = "Gamma ramp."
 		nativeImport("glfw3.h")
 		unsigned_short_p.member("red")
 		unsigned_short_p.member("green")

@@ -17,7 +17,7 @@ fun GLFWMacOSX() = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix
 		"glfw3native.h"
 	)
 
-	javaDoc("Native bindings to the GLFW library's MacOS X native access functions.")
+	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
 
 	id.func(
 		"GetCocoaWindow",

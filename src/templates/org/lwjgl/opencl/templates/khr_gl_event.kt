@@ -14,7 +14,7 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		"opengl_types.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionName extension.
 
@@ -25,7 +25,6 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		In addition, this extension modifies the behavior of ${"CL10GL".link("EnqueueAcquireGLObjects()")} and ${"CL10GL".link("EnqueueReleaseGLObjects()")} to implicitly
 		guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
 		"""
-	)
 
 	IntConstant.block(
 		"Returned by ${"CL10".link("GetEventInfo()")} when {@code param_name} is ${"CL10".linkCL("EVENT_COMMAND_TYPE")}.",

@@ -12,7 +12,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc("Native bindings to WinBase.h.")
+	documentation = "Native bindings to WinBase.h."
 
 	IntConstant.block(
 		"BOOL return values.",

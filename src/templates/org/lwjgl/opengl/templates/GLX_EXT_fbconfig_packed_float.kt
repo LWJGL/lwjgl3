@@ -13,7 +13,7 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 		"org.lwjgl.system.linux.GLX"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
 
@@ -28,7 +28,6 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 
 		The extension also provides a pixel external format for specifying packed float values directly.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted as values of the {@code render_type} arguments in the ${"GLX13".link("CreateNewContext()")} and ${"GLX".link("CreateContext()")} functions:",

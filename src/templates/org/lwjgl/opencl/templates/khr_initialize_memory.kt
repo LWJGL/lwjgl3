@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_initialize_memory() = "KHRInitializeMemory".nativeClassCL("khr_initialize_memory", KHR) {
 
-	javaDoc("Native bindings to the $extensionName extension.")
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
 		"""

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_framebuffer_sRGB", ARB) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.
 
@@ -22,7 +22,6 @@ fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attribList} parameter of ${"GLX".link("ChooseVisual()")}, and by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}:",

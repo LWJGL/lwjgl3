@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun khr_fp16() = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
 
-	javaDoc("Native bindings to the $extensionName extension.")
+	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
 		"cl_device_info",

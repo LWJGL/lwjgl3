@@ -12,7 +12,7 @@ fun ARB_draw_buffers_blend() = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buf
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/draw_buffers_blend.txt", templateName)} extension.")
+	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/draw_buffers_blend.txt", templateName)} extension."
 
 	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 

@@ -9,13 +9,12 @@ import org.lwjgl.opengl.*
 
 fun GLX_ARB_create_context_robustness() = "GLXARBCreateContextRobustness".nativeClassGLX("GLX_ARB_create_context_robustness", ARB) {
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/glx_create_context_robustness.txt", templateName)} extension.
 
 		This extension allows creating an OpenGL context supporting robust buffer access behavior and a specified graphics reset notification behavior.
 		"""
-	)
 
 	IntConstant.block(
 		"""

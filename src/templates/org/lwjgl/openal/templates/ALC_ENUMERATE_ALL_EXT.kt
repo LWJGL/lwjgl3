@@ -12,7 +12,7 @@ fun ALC_ENUMERATE_ALL_EXT() = "EnumerateAllExt".nativeClassALC("ENUMERATE_ALL_EX
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to ALC_ENUMERATE_ALL_EXT extension.")
+	documentation = "bindings to ALC_ENUMERATE_ALL_EXT extension."
 
 	IntConstant.block(
 		"ENUMERATE_ALL_EXT tokens.",

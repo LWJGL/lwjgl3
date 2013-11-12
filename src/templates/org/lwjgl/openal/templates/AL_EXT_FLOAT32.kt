@@ -12,7 +12,7 @@ fun AL_EXT_FLOAT32() = "EXTFloat32".nativeClassAL("EXT_FLOAT32") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_FLOAT32 extension.")
+	documentation = "bindings to AL_EXT_FLOAT32 extension."
 
 	IntConstant.block(
 		"AL_EXT_FLOAT32 tokens.",

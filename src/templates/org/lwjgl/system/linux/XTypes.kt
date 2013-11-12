@@ -47,7 +47,7 @@ val XErrorHandler = PointerType("XErrorHandler", includesPointer = true)
 
 val XComposeStatus = StructType(
 	struct(LINUX_PACKAGE, "XComposeStatus") {
-		javaDoc("Compose sequence status structure, used in calling ${"Xutil".link("XLookupString()")}.")
+		documentation = "Compose sequence status structure, used in calling ${"Xutil".link("XLookupString()")}."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -60,7 +60,7 @@ val XComposeStatus_p = StructType(XComposeStatus)
 
 val XSetWindowAttributes = StructType(
 	struct(LINUX_PACKAGE, "XSetWindowAttributes") {
-		javaDoc("Data structure for setting window attributes.")
+		documentation = "Data structure for setting window attributes."
 		nativeImport ("LinuxLWJGL.h")
 
 		Pixmap.member("background_pixmap")
@@ -84,7 +84,7 @@ val XSetWindowAttributes_p = StructType(XSetWindowAttributes)
 
 val Visual = StructType(
 	struct(LINUX_PACKAGE, "Visual") {
-		javaDoc("Visual structure; contains information about colormapping possible.")
+		documentation = "Visual structure; contains information about colormapping possible."
 		nativeImport ("LinuxLWJGL.h")
 
 		// ignored: XExtData_p.member("ext_data")
@@ -101,7 +101,7 @@ val Visual_p = StructType(Visual)
 
 val XWindowAttributes = StructType(
 	struct(LINUX_PACKAGE, "XWindowAttributes") {
-		javaDoc("Data structure for window attributes.")
+		documentation = "Data structure for window attributes."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("x")
@@ -133,7 +133,7 @@ val XWindowAttributes_p = StructType(XWindowAttributes)
 
 val XVisualInfo = StructType(
 	struct(LINUX_PACKAGE, "XVisualInfo") {
-		javaDoc("Information used by the visual utility routines to find desired visual type from the many visuals a display may support.")
+		documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -155,7 +155,7 @@ val XVisualInfo_p = StructType(XVisualInfo)
 
 val XSizeHints = StructType(
 	struct(LINUX_PACKAGE, "XSizeHints") {
-		javaDoc("Used by ${"Xlib".link("XSetSizeHints()")}.")
+		documentation = "Used by ${"Xlib".link("XSetSizeHints()")}."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -188,7 +188,7 @@ val XSizeHints_p = StructType(XSizeHints)
 
 val XWMHints = StructType(
 	struct(LINUX_PACKAGE, "XWMHints") {
-		javaDoc("Used by ${"Xlib".link("XSetWMHints()")}.")
+		documentation = "Used by ${"Xlib".link("XSetWMHints()")}."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -209,7 +209,7 @@ val XWMHints_p = StructType(XWMHints)
 
 val XClassHint = StructType(
 	struct(LINUX_PACKAGE, "XClassHint") {
-		javaDoc("Used by ${"Xlib".link("XSetClassHint()")}.")
+		documentation = "Used by ${"Xlib".link("XSetClassHint()")}."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/Xutil.h>"
@@ -223,7 +223,7 @@ val XClassHint_p = StructType(XClassHint)
 
 val XIEventMask = StructType(
 	struct(LINUX_PACKAGE, "XIEventMask") {
-		javaDoc("XInput2 event mask.")
+		documentation = "XInput2 event mask."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/XInput2.h>"
@@ -260,7 +260,7 @@ val RRMode_p = PointerType(RRMode)
 
 val XRRModeInfo = StructType(
 	struct(LINUX_PACKAGE, "XRRModeInfo") {
-		javaDoc("Xrandr mode info struct.")
+		documentation = "Xrandr mode info struct."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/Xrandr.h>"
@@ -286,7 +286,7 @@ val XRRModeInfo_p = StructType(XRRModeInfo)
 
 val XRRScreenResources = StructType(
 	struct(LINUX_PACKAGE, "XRRScreenResources") {
-		javaDoc("Xrandr screen resources struct.")
+		documentation = "Xrandr screen resources struct."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/Xrandr.h>"
@@ -306,7 +306,7 @@ val XRRScreenResources_p = StructType(XRRScreenResources)
 
 val XRRCrtcInfo = StructType(
 	struct(LINUX_PACKAGE, "XRRCrtcInfo") {
-		javaDoc("Xrandr Crtc info struct.")
+		documentation = "Xrandr Crtc info struct."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/Xrandr.h>"
@@ -330,7 +330,7 @@ val XRRCrtcInfo_p = StructType(XRRCrtcInfo)
 
 val XRROutputInfo = StructType(
 	struct(LINUX_PACKAGE, "XRROutputInfo") {
-		javaDoc("Xrandr output info struct.")
+		documentation = "Xrandr output info struct."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/Xrandr.h>"
@@ -357,7 +357,7 @@ val XRROutputInfo_p = StructType(XRROutputInfo)
 
 val XRRCrtcGamma = StructType(
 	struct(LINUX_PACKAGE, "XRRCrtcGamma") {
-		javaDoc("Xrandr CrtcGamma struct.")
+		documentation = "Xrandr CrtcGamma struct."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/extensions/Xrandr.h>"
@@ -381,7 +381,7 @@ val XkbNumKbdGroups = 4
 
 val XkbKeyNameRec = StructType(
 	struct(LINUX_PACKAGE, "XkbKeyNameRec") {
-		javaDoc("Xkb key name record.")
+		documentation = "Xkb key name record."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/XKBlib.h>"
@@ -394,7 +394,7 @@ val XkbKeyNamePtr = StructType(XkbKeyNameRec)
 
 val XkbKeyAliasRec = StructType(
 	struct(LINUX_PACKAGE, "XkbKeyAliasRec") {
-		javaDoc("Xkb key alias record.")
+		documentation = "Xkb key alias record."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/XKBlib.h>"
@@ -408,7 +408,7 @@ val XkbKeyAliasPtr = StructType(XkbKeyAliasRec)
 
 val XkbNamesRec = StructType(
 	struct(LINUX_PACKAGE, "XkbNamesRec") {
-		javaDoc("Describes an Xkb keyboard.")
+		documentation = "Describes an Xkb keyboard."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/XKBlib.h>"
@@ -436,7 +436,7 @@ val XkbNamesPtr = StructType(XkbNamesRec)
 
 val XkbDescRec = StructType(
 	struct(LINUX_PACKAGE, "XkbDescRec") {
-		javaDoc("Describes an Xkb keyboard.")
+		documentation = "Describes an Xkb keyboard."
 		nativeImport (
 			"LinuxLWJGL.h",
 			"<X11/XKBlib.h>"
@@ -463,7 +463,7 @@ val XkbDescPtr = StructType(XkbDescRec)
 
 val XGCValues = StructType(
 	struct(LINUX_PACKAGE, "XGCValues") {
-		javaDoc("Data structure for setting graphics context.")
+		documentation = "Data structure for setting graphics context."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("function")
@@ -497,7 +497,7 @@ val GC = PointerType("GC", includesPointer = true) // GC is a struct, but should
 
 val XColor = StructType(
 	struct(LINUX_PACKAGE, "XColor") {
-		javaDoc("Data structure used by color operations.")
+		documentation = "Data structure used by color operations."
 		nativeImport ("LinuxLWJGL.h")
 
 		unsigned_long.member("pixel")

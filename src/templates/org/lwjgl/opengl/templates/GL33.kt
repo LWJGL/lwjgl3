@@ -13,7 +13,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 3.3 functionality.")
+	documentation = "The core OpenGL 3.3 functionality."
 
 	// ARB_blend_func_extended
 

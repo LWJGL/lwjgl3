@@ -13,7 +13,7 @@ fun AL_EXT_source_distance_model() = "EXTSourceDistanceModel".nativeClassAL("EXT
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_source_distance_model extension.")
+	documentation = "bindings to AL_EXT_source_distance_model extension."
 
 	IntConstant.block(
 		"AL_EXT_source_distance_model tokens.",

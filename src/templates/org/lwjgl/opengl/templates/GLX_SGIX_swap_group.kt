@@ -17,7 +17,7 @@ fun GLX_SGIX_swap_group() = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_gro
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/swap_group.txt", templateName)} extension.
 
@@ -26,7 +26,6 @@ fun GLX_SGIX_swap_group() = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_gro
 
 		This extension extends the set of conditions that must be met before a buffer swap can take place.
 		"""
-	)
 
 	void.func(
 		"JoinSwapGroupSGIX",

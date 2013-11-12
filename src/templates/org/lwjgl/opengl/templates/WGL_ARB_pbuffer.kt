@@ -14,7 +14,7 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		"WGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pbuffer.txt", templateName)} extension.
 
@@ -37,7 +37,6 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		The frame buffer resources that are associated with a pbuffer are also static and are deallocated when the pbuffer is destroyed or possibly when a
 		display mode change occurs.
 		"""
-	)
 
 	val wglGetPixelFormatAttribiARB = "${"WGLARBPixelFormat".link("GetPixelFormatAttribiARB()")}"
 

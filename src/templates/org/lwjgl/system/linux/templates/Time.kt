@@ -14,7 +14,7 @@ fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
 		"<time.h>"
 	)
 
-	javaDoc("Native bindings to <time.h>.")
+	documentation = "Native bindings to <time.h>."
 
 	// TODO: Is this portable? What's the type of clockid_t?
 	IntConstant.block(

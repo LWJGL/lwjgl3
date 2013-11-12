@@ -13,7 +13,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"<dlfcn.h>"
 	)
 
-	javaDoc("Native bindings to <dlfcn.h>.")
+	documentation = "Native bindings to <dlfcn.h>."
 
 	val Modes = IntConstant.block(
 		"The {@code mode} argument to ${"dlopen()".link} contains one of the following:",

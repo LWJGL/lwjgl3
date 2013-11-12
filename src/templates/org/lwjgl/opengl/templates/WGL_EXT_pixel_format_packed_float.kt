@@ -8,14 +8,13 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun WGL_EXT_pixel_format_packed_float() = "WGLEXTPixelFormatPackedFloat".nativeClassWGL("WGL_EXT_pixel_format_packed_float", EXT) {
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
 
 		This extension provides support for rendering into an unsigned floating-point rendering format with the assumption that the texture format described in
 		{@link EXTPackedFloat} could also be advertised as an unsigned floating-point format for rendering.
 		"""
-	)
 
 	IntConstant.block(
 		"""

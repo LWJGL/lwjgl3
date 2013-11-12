@@ -12,7 +12,7 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 		"OpenCL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionName extension.
 
@@ -27,7 +27,6 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 
 		This extension implements a new query to check whether a device can terminate an OpenCL context and adds an API to terminate a context.
 		"""
-	)
 
 	IntConstant.block(
 		"""

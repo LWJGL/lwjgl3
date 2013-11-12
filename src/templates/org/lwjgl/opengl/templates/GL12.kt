@@ -14,7 +14,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 1.2 functionality.")
+	documentation = "The core OpenGL 1.2 functionality."
 
 	IntConstant.block(
 		"Aliases for smooth points and lines.",

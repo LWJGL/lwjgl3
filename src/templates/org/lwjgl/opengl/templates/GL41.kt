@@ -14,7 +14,7 @@ fun GL41() = "GL41".nativeClassGL("GL41") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 4.1 functionality.")
+	documentation = "The core OpenGL 4.1 functionality."
 
 	// ARB_ES2_compatibility
 

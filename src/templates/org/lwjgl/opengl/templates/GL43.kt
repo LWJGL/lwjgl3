@@ -13,7 +13,7 @@ fun GL43() = "GL43".nativeClassGL("GL43") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 4.3 functionality.")
+	documentation = "The core OpenGL 4.3 functionality."
 
 	IntConstant.block(
 		"No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",

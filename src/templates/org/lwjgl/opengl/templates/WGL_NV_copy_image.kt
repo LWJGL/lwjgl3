@@ -13,7 +13,7 @@ fun WGL_NV_copy_image() = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", N
 		"OpenGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun WGL_NV_copy_image() = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", N
 		otherwise configure the rendering pipeline. The WGL version allows copying between images in different contexts, even if those contexts are in
 		different sharelists or even on different physical devices.
 		"""
-	)
 
 	BOOL.func(
 		"CopyImageSubDataNV",

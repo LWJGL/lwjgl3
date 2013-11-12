@@ -14,7 +14,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		"OpenCL.h"
 	)
 
-	javaDoc("The core OpenCL 1.1 functionality.")
+	documentation = "The core OpenCL 1.1 functionality."
 
 	IntConstant.block(
 		"Error Codes.",

@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 fun intel_thread_local_exec() = "INTELThreadLocalExec".nativeClassCL("intel_thread_local_exec", INTEL) {
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionLink extension.
 
@@ -30,7 +30,6 @@ fun intel_thread_local_exec() = "INTELThreadLocalExec".nativeClassCL("intel_thre
 		queues will incur the minimal overhead of a function call and possibly an if-then-else to distinguish between a local command queue and a regular one.
 		${"CL10".link("EnqueueNDRangeKernel()")} and ${"CL10".link("EnqueueTask()")} should have optimized implementations using a single execution thread.
 		"""
-	)
 
 	IntConstant.block(
 		"cl_command_queue_properties",

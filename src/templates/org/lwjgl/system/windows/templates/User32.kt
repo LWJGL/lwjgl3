@@ -12,13 +12,12 @@ fun User32() = "User32".nativeClassWin {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Optional functionality loaded dynamically from <strong>user32.dll</strong>.
 
 		$DLL_WARNING
 		"""
-	)
 
 	DLL_FUNC _ BOOL.func(
 		"SetProcessDPIAware",

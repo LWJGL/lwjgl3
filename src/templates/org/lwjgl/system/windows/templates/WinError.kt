@@ -9,7 +9,7 @@ import org.lwjgl.system.windows.*
 
 fun WinError() = "WinError".nativeClass(WINDOWS_PACKAGE) {
 
-	javaDoc("Native bindings to WinError.h.")
+	documentation = "Native bindings to WinError.h."
 
 	IntConstant.block(
 		"Success codes.",

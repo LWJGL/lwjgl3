@@ -12,13 +12,12 @@ fun Kernel32() = "Kernel32".nativeClassWin {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Optional functionality loaded dynamically from <strong>kernel32.dll</strong>.
 
 		$DLL_WARNING
 		"""
-	)
 
 	DLL_FUNC _ DWORD_PTR.func(
 		"SetThreadAffinityMask",

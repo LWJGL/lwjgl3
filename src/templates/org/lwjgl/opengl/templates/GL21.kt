@@ -12,7 +12,7 @@ fun GL21() = "GL21".nativeClassGL("GL21") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 2.1 functionality.")
+	documentation = "The core OpenGL 2.1 functionality."
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",

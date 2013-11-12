@@ -13,7 +13,7 @@ fun GLX_SGI_make_current_read() = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SG
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGI/make_current_read.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun GLX_SGI_make_current_read() = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SG
 		preprocessing of image data in an "off screen" window which is then read into the visible window for final display.  Similarly it sets the frame-work
 		for direct transfer of video to the GL, by treating the video as a special kind of read drawable (a.k.a, readable).
 		"""
-	)
 
 	Bool.func(
 		"MakeCurrentReadSGI",

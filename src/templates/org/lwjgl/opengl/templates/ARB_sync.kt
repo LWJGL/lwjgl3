@@ -13,7 +13,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/sync.txt", templateName)} extension.")
+	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/sync.txt", templateName)} extension."
 
 	IntConstant.block(
 		"Accepted as the {@code pname} parameter of GetInteger64v.",

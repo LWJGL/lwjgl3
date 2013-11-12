@@ -13,7 +13,7 @@ fun AL_SOFT_direct_channels() = "SOFTDirectChannels".nativeClassAL("SOFT_direct_
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_SOFT_direct_channels extension.")
+	documentation = "bindings to AL_SOFT_direct_channels extension."
 
 	IntConstant.block(
 		"Accepted by the {@code paramName} parameter of alSourcei, alSourceiv, alGetSourcei, and alGetSourceiv.",

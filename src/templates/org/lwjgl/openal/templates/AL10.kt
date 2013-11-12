@@ -12,7 +12,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"OpenAL.h"
 	)
 
-	javaDoc("Native bindings to AL 1.0 functionality.")
+	documentation = "Native bindings to AL 1.0 functionality."
 
 	IntConstant.block(
 		"General tokens.",

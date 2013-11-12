@@ -13,7 +13,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 		"<X11/extensions/XInput2.h>"
 	)
 
-	javaDoc("Native bindings to XInput2.h.")
+	documentation = "Native bindings to XInput2.h."
 
 	IntConstant.block(
 		"Event types",
@@ -48,7 +48,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	val XIButtonState = StructType(
 		struct(LINUX_PACKAGE, "XIButtonState") {
-			javaDoc("XInput2 button state.")
+			documentation = "XInput2 button state."
 			nativeImport (
 				"LinuxLWJGL.h",
 				"<X11/extensions/XInput2.h>"
@@ -61,7 +61,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	val XIValuatorState = StructType(
 		struct(LINUX_PACKAGE, "XIValuatorState") {
-			javaDoc("XInput2 valuator state.")
+			documentation = "XInput2 valuator state."
 			nativeImport (
 				"LinuxLWJGL.h",
 				"<X11/extensions/XInput2.h>"
@@ -75,7 +75,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	val XIModifierState = StructType(
 		struct(LINUX_PACKAGE, "XIModifierState") {
-			javaDoc("XInput2 modifier state.")
+			documentation = "XInput2 modifier state."
 			nativeImport (
 				"LinuxLWJGL.h",
 				"<X11/extensions/XInput2.h>"
@@ -90,7 +90,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	StructType(
 		struct(LINUX_PACKAGE, "XIDeviceEvent") {
-			javaDoc("XInput2 device event.")
+			documentation = "XInput2 device event."
 			nativeImport (
 				"LinuxLWJGL.h",
 				"<X11/extensions/XInput2.h>"

@@ -15,13 +15,12 @@ fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_co
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGI/swap_control.txt", templateName)} extension.
 
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
 		"""
-	)
 
 	GLint.func(
 		"SwapIntervalSGI",

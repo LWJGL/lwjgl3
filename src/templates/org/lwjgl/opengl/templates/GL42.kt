@@ -14,7 +14,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 4.2 functionality.")
+	documentation = "The core OpenGL 4.2 functionality."
 
 	IntConstant.block(
 		"Renamed tokens.",

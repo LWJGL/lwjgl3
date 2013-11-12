@@ -12,7 +12,7 @@ fun AL_EXT_OFFSET() = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_OFFSET extension.")
+	documentation = "bindings to AL_EXT_OFFSET extension."
 
 	IntConstant.block(
 		"AL_EXT_OFFSET tokens.",

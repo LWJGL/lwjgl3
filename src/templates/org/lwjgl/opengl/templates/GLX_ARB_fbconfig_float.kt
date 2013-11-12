@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbconfig_float", ARB) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
 
@@ -19,7 +19,6 @@ fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbc
 
 		This extension adds pixel formats or visuals with floating-point RGBA color components and controls for clamping of color components within the pipeline.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted as values of the {@code render_type} arguments in the ${"GLX13".link("CreateNewContext()")} and ${"GLX".link("CreateContext()")} functions:",

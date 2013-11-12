@@ -26,8 +26,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"opengl_types.h"
 	)
 
-	javaDoc(
-		"""
+	documentation =
+	"""
 		The OpenCL 1.0 OpenGL interoperability functionality.
 
 		OpenCL memory objects may be created from OpenGL objects if and only if the OpenCL context has been created from an OpenGL share group object or
@@ -60,7 +60,6 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		behavior. Similarly, attempting to access a shared CL/GL object from OpenCL before it has been acquired by the OpenCL command queue, or after it has
 		been released, will result in undefined behavior.
 		"""
-	)
 
 	IntConstant.block(
 		"Error Codes",

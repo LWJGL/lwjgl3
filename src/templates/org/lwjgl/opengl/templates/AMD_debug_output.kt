@@ -12,7 +12,7 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output", post
 		"OpenGL.h"
 	)
 
-	javaDoc("Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/debug_output.txt", templateName)} extension.")
+	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/debug_output.txt", templateName)} extension."
 
 	IntConstant.block(
 		"Tokens accepted by GetIntegerv.",

@@ -8,14 +8,13 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun WGL_ARB_robustness_share_group_isolation() = "WGLARBRobustnessShareGroupIsolation".nativeClassWGL("WGL_ARB_robustness_share_group_isolation", ARB) {
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_robustness_isolation.txt", templateName)} extension.
 
 		GL_ARB_robustness and WGL_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
 		WGL_ARB_robustness_share_group_isolation provides stronger guarantees about the possible side-effects of a graphics reset.
 		"""
-	)
 
 	IntConstant.block(
 		"""

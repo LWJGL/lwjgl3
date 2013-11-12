@@ -78,7 +78,7 @@ val LPGLYPHMETRICSFLOAT = StructType(
 	name = "LPGLYPHMETRICSFLOAT",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT") {
-		javaDoc("Contains information about the placement and orientation of a glyph in a character cell.")
+		documentation = "Contains information about the placement and orientation of a glyph in a character cell."
 		nativeImport ("WindowsLWJGL.h")
 		FLOAT.member("gmfBlackBoxX", "blackBoxX")
 		FLOAT.member("gmfBlackBoxY", "blockBoxY")
@@ -89,7 +89,7 @@ val LPGLYPHMETRICSFLOAT = StructType(
 )
 
 val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTOR") {
-	javaDoc("Describes the pixel format of a drawing surface.")
+	documentation = "Describes the pixel format of a drawing surface."
 	nativeImport ("WindowsLWJGL.h")
 	WORD.member("nSize", "size")
 	WORD.member("nVersion", "version")
@@ -131,7 +131,7 @@ val HBRUSH = PointerType("HBRUSH", includesPointer = true)
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 
 private val WNDCLASSEX_STRUCT = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
-	javaDoc("Contains the window class attributes that are registered by the ${"WinUser".link("RegisterClassEx()")} function.")
+	documentation = "Contains the window class attributes that are registered by the ${"WinUser".link("RegisterClassEx()")} function."
 	nativeImport ("WindowsLWJGL.h")
 	UINT.member("cbSize", "size")
 	UINT.member("style")
@@ -155,11 +155,11 @@ val LPOSVERSIONINFO = StructType(
 	name = "LPOSVERSIONINFO",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "OSVERSIONINFOEX") {
-		javaDoc("""
+		documentation = """
 			Contains operating system version information. The information includes major and minor
 			version numbers, a build number, a platform identifier, and information about product
 			suites and the latest Service Pack installed on the system.
-		""")
+		"""
 		nativeImport ("WindowsLWJGL.h")
 		DWORD.member("dwOSVersionInfoSize", "osVersionInfoSize")
 		DWORD.member("dwMajorVersion", "majorVersion")
@@ -176,7 +176,7 @@ val LPOSVERSIONINFO = StructType(
 )
 
 private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
-	javaDoc("Defines the x- and y- coordinates of a point.")
+	documentation = "Defines the x- and y- coordinates of a point."
 	nativeImport ("WindowsLWJGL.h")
 	LONG.member("x")
 	LONG.member("y")
@@ -185,7 +185,7 @@ val POINT = StructType(POINT_STRUCT)
 val LPPOINT = StructType (name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
 
 private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
-	javaDoc("Defines the coordinates of the upper-left and lower-right corners of a rectangle.")
+	documentation = "Defines the coordinates of the upper-left and lower-right corners of a rectangle."
 	nativeImport ("WindowsLWJGL.h")
 	LONG.member("left")
 	LONG.member("top")
@@ -197,7 +197,7 @@ val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPoint
 val RECT_p = StructType(RECT)
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
-	javaDoc("Contains message information from a thread's message queue.")
+	documentation = "Contains message information from a thread's message queue."
 	nativeImport ("WindowsLWJGL.h")
 	HWND.member("hwnd", "window");
 	UINT.member("message")
@@ -213,7 +213,7 @@ val MSG_p = StructType(MSG)
 val POINTL = StructType (
 	name = "POINTL",
 	definition = struct(WINDOWS_PACKAGE, "POINTL") {
-		javaDoc("Contains the coordinates of a point.")
+		documentation = "Contains the coordinates of a point."
 		nativeImport ("WindowsLWJGL.h")
 		LONG.member("x")
 		LONG.member("y")
@@ -222,7 +222,7 @@ val POINTL = StructType (
 
 val DEVMODE = StructType(
 	struct(WINDOWS_PACKAGE, "DEVMODE") {
-		javaDoc("Contains information about the initialization and environment of a printer or a display device.")
+		documentation = "Contains information about the initialization and environment of a printer or a display device."
 		nativeImport("WindowsLWJGL.h")
 		TCHAR.member("dmDeviceName", "deviceName", 32, true)
 		WORD.member("dmSpecVersion", "specVersion")
@@ -288,7 +288,7 @@ val PDISPLAY_DEVICE = StructType(
 	name = "PDISPLAY_DEVICE",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "DISPLAY_DEVICE") {
-		javaDoc("Receives information about the display device specified by the devNum parameter of the ${"WinUser".link("EnumDisplayDevices()")} function.")
+		documentation = "Receives information about the display device specified by the devNum parameter of the ${"WinUser".link("EnumDisplayDevices()")} function."
 		nativeImport("WindowsLWJGL.h")
 		DWORD.member("cb")
 		TCHAR.member(nativeName = "DeviceName", size = 32, nullTerminated = true)
@@ -305,12 +305,11 @@ val LPTRACKMOUSEEVENT = StructType(
 	name = "LPTRACKMOUSEEVENT",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "TRACKMOUSEEVENT") {
-		javaDoc(
+		documentation =
 			"""
 			Used by the ${"WinUser".link("TrackMouseEvent()")} function to track when the mouse pointer leaves a window or hovers over a window for a specified amount
 			of time.
 			"""
-		)
 		nativeImport("WindowsLWJGL.h")
 		DWORD.member("cbSize", "size")
 		DWORD.member("dwFlags", "flags")
@@ -332,7 +331,7 @@ val LPJOYCAPS = StructType(
 	name = "LPJOYCAPS",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "JOYCAPS") {
-		javaDoc("Contains information about the joystick capabilities.")
+		documentation = "Contains information about the joystick capabilities."
 		nativeImport("WindowsLWJGL.h")
 
 		val MAXPNAMELEN = 32
@@ -369,7 +368,7 @@ val LPJOYINFO = StructType(
 	name = "LPJOYINFO",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "JOYINFO") {
-		javaDoc("Contains information about the joystick position and button state.")
+		documentation = "Contains information about the joystick position and button state."
 		nativeImport("WindowsLWJGL.h")
 		UINT.member("wXpos", "xPos")
 		UINT.member("wYpos", "yPos")
@@ -382,7 +381,7 @@ val LPJOYINFOEX = StructType(
 	name = "LPJOYINFOEX",
 	includesPointer = true,
 	definition = struct(WINDOWS_PACKAGE, "JOYINFOEX") {
-		javaDoc("Contains extended information about the joystick position, point-of-view position, and button state.")
+		documentation = "Contains extended information about the joystick position, point-of-view position, and button state."
 		nativeImport("WindowsLWJGL.h")
 
 		DWORD.member("dwSize", "size")

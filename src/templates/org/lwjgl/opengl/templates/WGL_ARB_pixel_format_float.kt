@@ -8,13 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun WGL_ARB_pixel_format_float() = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_ARB_pixel_format_float", ARB) {
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
 
 		This extension adds pixel formats with floating-point RGBA color components.
 		"""
-	)
 
 	IntConstant.block(
 		"""

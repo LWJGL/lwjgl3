@@ -15,13 +15,12 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/texture_from_pixmap.txt", templateName)} extension.
 
 		This extension allows a color buffer to be used for both rendering and texturing.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attribute} parameter of ${"GLX13".link("GetFBConfigAttrib()")} and the {@code attrib_list} parameter of ${"GLX13".link("ChooseFBConfig()")}:",

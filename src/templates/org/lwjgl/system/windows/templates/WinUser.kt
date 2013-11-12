@@ -12,7 +12,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc("Native bindings to WinUser.h.")
+	documentation = "Native bindings to WinUser.h."
 
 	IntConstant.block(
 		"Window Styles",

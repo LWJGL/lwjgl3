@@ -15,7 +15,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/fbconfig.txt", templateName)} extension.
 
@@ -23,7 +23,6 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 		and size of ancillary buffers), removes the "similarity" requirement when making a context current to a drawable, and supports  RGBA rendering to
 		one-and two-component Windows and GLX Pixmaps.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, and by the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link}:",

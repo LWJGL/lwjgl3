@@ -12,7 +12,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc("Native bindings to WGL functionality.")
+	documentation = "Native bindings to WGL functionality."
 
 	IntConstant.block(
 		"UseFontOutlines format.",

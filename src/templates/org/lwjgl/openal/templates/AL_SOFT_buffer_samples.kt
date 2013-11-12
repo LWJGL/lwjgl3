@@ -12,7 +12,7 @@ fun AL_SOFT_buffer_samples() = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_sa
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_SOFT_buffer_samples extension.")
+	documentation = "bindings to AL_SOFT_buffer_samples extension."
 
 	val InternalFormatParameters = IntConstant.block(
 		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).",

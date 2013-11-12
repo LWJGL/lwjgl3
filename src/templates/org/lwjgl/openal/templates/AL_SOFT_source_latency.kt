@@ -12,7 +12,7 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 		"OpenAL.h"
 	)
 
-	javaDoc("""
+	documentation = """
 	    bindings to AL_SOFT_source_latency extension.
 
 	    This extension provides a method for applications to more accurately
@@ -37,7 +37,7 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
         Also note that range restrictions still apply, so for example, attributes
         that only allow up to INT_MAX will still only allow up to INT_MAX even
         when set through 64-bit integer functions
-	    """)
+	    """
 
 	IntConstant.block(
 		"Source tokens for which can be used to retrieve a high-precision source offset and playback latency",

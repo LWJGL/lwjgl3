@@ -14,7 +14,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"<X11/Xutil.h>"
 	)
 
-	javaDoc("Native bindings to &lt;X11/Xutil.h&gt;.")
+	documentation = "Native bindings to &lt;X11/Xutil.h&gt;."
 
 	IntConstant.block(
 		"Definition for flags of {@link XWMHints}",

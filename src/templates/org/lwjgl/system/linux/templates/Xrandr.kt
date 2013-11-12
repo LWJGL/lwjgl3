@@ -13,7 +13,7 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"<X11/extensions/Xrandr.h>"
 	)
 
-	javaDoc("Native bindings to <X11/extensions/Xrandr.h>.")
+	documentation = "Native bindings to <X11/extensions/Xrandr.h>."
 
 	IntConstant.block(
 		"Event selection bits",

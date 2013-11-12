@@ -17,7 +17,7 @@ fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix 
 		"glfw3native.h"
 	)
 
-	javaDoc("Native bindings to the GLFW library's Win32 native access functions.")
+	documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
 	HWND.func(
 		"GetWin32Window",

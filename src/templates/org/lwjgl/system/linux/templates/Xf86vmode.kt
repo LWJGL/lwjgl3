@@ -13,7 +13,7 @@ fun Xf86vmode() = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 		"<X11/extensions/xf86vmode.h>"
 	)
 
-	javaDoc("Native bindings to &lt;X11/extensions/xf86vmode.h&gt;.")
+	documentation = "Native bindings to &lt;X11/extensions/xf86vmode.h&gt;."
 
 	Bool.func(
 		"XF86VidModeQueryExtension",

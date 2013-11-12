@@ -126,7 +126,7 @@ public class Struct(
 
 		if ( documentation != null )
 			println(documentation)
-		println("public final class $className {")
+		println("${access.modifier}final class $className {")
 
 		print("""
 	/** The struct size in bytes. */

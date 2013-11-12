@@ -13,7 +13,7 @@ fun Joystick() = "Joystick".nativeClass(LINUX_PACKAGE) {
 		"<linux/joystick.h>"
 	)
 
-	javaDoc("Native bindings to &ltlinux/joystick.h&gt;.")
+	documentation = "Native bindings to &ltlinux/joystick.h&gt;."
 
 	IntConstant.block(
 		"Types and constants for reading from /dev/js",
@@ -25,7 +25,7 @@ fun Joystick() = "Joystick".nativeClass(LINUX_PACKAGE) {
 
 	StructType(
 		struct(LINUX_PACKAGE, "JSEvent", structName = "js_event", globalIdentifier = false) {
-			javaDoc("Joystick event.")
+			documentation = "Joystick event."
 			nativeImport (
 				"LinuxLWJGL.h",
 				"<linux/joystick.h>"

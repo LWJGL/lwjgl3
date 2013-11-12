@@ -17,7 +17,7 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"MacOSXLWJGL.h"
 	)
 
-	javaDoc("Native bindings to &lt;CoreFoundation.h&gt;.")
+	documentation = "Native bindings to &lt;CoreFoundation.h&gt;."
 
 	// -----------------------------------------------
 	// CFBase.h

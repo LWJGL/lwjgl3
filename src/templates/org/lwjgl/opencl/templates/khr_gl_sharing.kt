@@ -12,7 +12,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		"OpenCL.h"
 	)
 
-	javaDoc("Native bindings to the $extensionLink extension.")
+	documentation = "Native bindings to the $extensionLink extension."
 
 	IntConstant.block(
 		"""

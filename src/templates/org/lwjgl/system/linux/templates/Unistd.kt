@@ -13,7 +13,7 @@ fun Unistd() = "Unistd".nativeClass(LINUX_PACKAGE) {
 		"<unistd.h>"
 	)
 
-	javaDoc("Native bindings to <unistd.h>.")
+	documentation = "Native bindings to <unistd.h>."
 
 	int.func(
 		"close",

@@ -13,7 +13,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 4.0 functionality.")
+	documentation = "The core OpenGL 4.0 functionality."
 
 	// ARB_draw_buffers_blend
 

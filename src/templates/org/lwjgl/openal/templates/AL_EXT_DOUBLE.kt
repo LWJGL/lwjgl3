@@ -12,7 +12,7 @@ fun AL_EXT_DOUBLE() = "EXTDouble".nativeClassAL("EXT_DOUBLE") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_DOUBLE extension.")
+	documentation = "bindings to AL_EXT_DOUBLE extension."
 
 	IntConstant.block(
 		"AL_EXT_DOUBLE tokens.",

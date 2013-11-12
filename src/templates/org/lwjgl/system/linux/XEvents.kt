@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 
 val XAnyEvent = StructType(
 	struct(LINUX_PACKAGE, "XAnyEvent") {
-		javaDoc("Any event.")
+		documentation = "Any event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -21,7 +21,7 @@ val XAnyEvent = StructType(
 
 val XKeyEvent = StructType(
 	struct(LINUX_PACKAGE, "XKeyEvent") {
-		javaDoc("Key event.")
+		documentation = "Key event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -45,7 +45,7 @@ val XKeyEvent_p = StructType(XKeyEvent)
 
 val XButtonEvent = StructType(
 	struct(LINUX_PACKAGE, "XButtonEvent") {
-		javaDoc("Button event.")
+		documentation = "Button event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -68,7 +68,7 @@ val XButtonEvent = StructType(
 
 val XMotionEvent = StructType(
 	struct(LINUX_PACKAGE, "XMotionEvent") {
-		javaDoc("Motion event.")
+		documentation = "Motion event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -91,7 +91,7 @@ val XMotionEvent = StructType(
 
 val XConfigureEvent = StructType(
 	struct(LINUX_PACKAGE, "XConfigureEvent") {
-		javaDoc("Motion event.")
+		documentation = "Motion event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -112,7 +112,7 @@ val XConfigureEvent = StructType(
 
 val XPropertyEvent = StructType(
 	struct(LINUX_PACKAGE, "XPropertyEvent") {
-		javaDoc("Property event.")
+		documentation = "Property event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -128,7 +128,7 @@ val XPropertyEvent = StructType(
 
 val XSelectionRequestEvent = StructType(
 	struct(LINUX_PACKAGE, "XSelectionRequestEvent") {
-		javaDoc("SelectionRequest event structure.")
+		documentation = "SelectionRequest event structure."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -147,7 +147,7 @@ val XSelectionRequestEvent_p = StructType(XSelectionRequestEvent)
 
 val XSelectionEvent = StructType(
 	struct(LINUX_PACKAGE, "XSelectionEvent") {
-		javaDoc("Selection event structure.")
+		documentation = "Selection event structure."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -164,7 +164,7 @@ val XSelectionEvent = StructType(
 
 val XClientMessageEvent = StructType(
 	struct(LINUX_PACKAGE, "XClientMessageEvent") {
-		javaDoc("Client message event.")
+		documentation = "Client message event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -184,7 +184,7 @@ val XClientMessageEvent = StructType(
 
 val XErrorEvent = StructType(
 	struct(LINUX_PACKAGE, "XErrorEvent") {
-		javaDoc("Error event.")
+		documentation = "Error event."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -200,7 +200,7 @@ val XErrorEvent_p = StructType(XErrorEvent)
 
 val XGenericEventCookie = StructType(
 	struct(LINUX_PACKAGE, "XGenericEventCookie") {
-		javaDoc("Additional information for an {@code XGenericEvent}.")
+		documentation = "Additional information for an {@code XGenericEvent}."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -218,7 +218,7 @@ val XGenericEventCookie_p = StructType(XGenericEventCookie)
 val XEvent = StructType(
 	// O.o holy mother of unions
 	struct(LINUX_PACKAGE, "XEvent") {
-		javaDoc("This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation.")
+		documentation = "This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation."
 		nativeImport ("LinuxLWJGL.h")
 
 		int.member("type")
@@ -264,7 +264,7 @@ val XEvent_p = StructType(XEvent)
 
 fun config() {
 	struct(LINUX_PACKAGE, "PropertyWMState", virtual = true) {
-		javaDoc("Contents of the WM_STATE property.")
+		documentation = "Contents of the WM_STATE property."
 		nativeImport(
 			"LinuxLWJGL.h",
 			"<X11/Xmd.h>" // for the CARD32 typedef

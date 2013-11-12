@@ -13,13 +13,12 @@ fun GLX_ARB_multisample() = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisam
 		"org.lwjgl.system.linux.GLX"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/multisample.txt", templateName)} extension.
 
 		This extension provides a mechanism to antialias all GL primitives.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attribList} parameter of ${"GLX".link("ChooseVisual()")}, and by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}:",

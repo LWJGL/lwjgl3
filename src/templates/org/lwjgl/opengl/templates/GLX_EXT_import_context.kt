@@ -13,7 +13,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/import_context.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 
         Additional convenience procedures to get the current Display* bound to a context as well as other context information are also added.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attribute} parameter of ${"QueryContextInfoEXT()".link}:",

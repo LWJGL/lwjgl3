@@ -13,7 +13,7 @@ fun SysSelect() = "SysSelect".nativeClass(LINUX_PACKAGE) {
 		"<sys/select.h>"
 	)
 
-	javaDoc("Native bindings to <sys/select.h>.")
+	documentation = "Native bindings to <sys/select.h>."
 
 	void.func(
 		"FD_CLR",

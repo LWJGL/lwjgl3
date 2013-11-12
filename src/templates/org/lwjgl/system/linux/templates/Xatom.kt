@@ -9,7 +9,7 @@ import org.lwjgl.system.linux.*
 
 fun Xatom() = "Xatom".nativeClass(LINUX_PACKAGE) {
 
-	javaDoc("Native bindings to Xatom.h.")
+	documentation = "Native bindings to Xatom.h."
 
 	LongConstant.block(
 		"Predefined atoms.",

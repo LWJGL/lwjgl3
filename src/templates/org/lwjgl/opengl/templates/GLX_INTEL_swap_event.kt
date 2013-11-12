@@ -10,14 +10,13 @@ import org.lwjgl.opengl.*
 fun GLX_INTEL_swap_event() = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_event", INTEL) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/INTEL/swap_event.txt", templateName)} extension.
 
 		This extension adds a new event type, ${"BUFFER_SWAP_COMPLETE_INTEL_MASK".link}, which is sent to the client via the X11 event stream and
 		selected/consumed by the normal GLX event mask mechanisms, to indicate when a previously queued swap has completed.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code mask} parameter of ${"GLX13".link("SelectEvent()")} and returned in the {@code mask} parameter of ${"GLX13".link("GetSelectedEvent()")}:",

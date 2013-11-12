@@ -12,7 +12,7 @@ fun AL_EXT_LINEAR_DISTANCE() = "EXTLinearDistance".nativeClassAL("EXT_LINEAR_DIS
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_LINEAR_DISTANCE extension.")
+	documentation = "bindings to AL_EXT_LINEAR_DISTANCE extension."
 
 	IntConstant.block(
 		"AL_EXT_EXPONENT_DISTANCE tokens.",

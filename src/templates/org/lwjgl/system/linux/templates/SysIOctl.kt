@@ -13,7 +13,7 @@ fun SysIOctl() = "SysIOctl".nativeClass(LINUX_PACKAGE) {
 		"<sys/ioctl.h>"
 	)
 
-	javaDoc("Native bindings to <sys/ioctl.h>.")
+	documentation = "Native bindings to <sys/ioctl.h>."
 
 	int.func(
 		"ioctl",

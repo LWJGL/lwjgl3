@@ -153,7 +153,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"JOYCAPS_POVCTS" _ 0x0040
 	)
 
-	javaDoc("Native bindings to Mmsystem.h.")
+	documentation = "Native bindings to Mmsystem.h."
 
 	MMRESULT.func(
 		"joyGetDevCaps",

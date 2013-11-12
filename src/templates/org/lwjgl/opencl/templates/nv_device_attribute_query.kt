@@ -9,14 +9,13 @@ import org.lwjgl.opencl.*
 
 fun nv_device_attribute_query() = "NVDeviceAttributeQuery".nativeClassCL("nv_device_attribute_query", NV) {
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionLink extension.
 
 		This extension provides a mechanism to query device attributes specific to <strong>NVIDIA</strong> hardware. This will enable the programmer to
 		optimize OpenCL kernels based on the specifics of the hardware.
 		"""
-	)
 
 	IntConstant.block(
 		"Returns the major revision number that defines the CUDA compute capability of the device.",

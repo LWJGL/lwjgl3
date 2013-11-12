@@ -9,13 +9,12 @@ import org.lwjgl.opengl.*
 
 fun GLX_EXT_create_context_es_profile() = "GLXEXTCreateContextESProfile".nativeClassGLX("GLX_EXT_create_context_es_profile", EXT) {
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/glx_create_context_es2_profile.txt", templateName)} extension.
 
 		This extension allows creating an OpenGL ES context.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted as a bit in the attribute value for ${"GLXARBCreateContext".link("CONTEXT_PROFILE_MASK_ARB")} in {@code attrib_list}:",

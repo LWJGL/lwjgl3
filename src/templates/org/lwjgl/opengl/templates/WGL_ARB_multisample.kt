@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/multisample.txt", templateName)} extension.
 
@@ -17,7 +17,6 @@ fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisam
 		antialiasing appears to be automatic at the application level.  Because each sample includes depth and stencil information, the depth and stencil
 		functions perform equivalently to the single-sample mode.
 		"""
-	)
 
 	IntConstant.block(
 		"""

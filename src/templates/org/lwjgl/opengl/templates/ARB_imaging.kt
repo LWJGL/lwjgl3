@@ -13,9 +13,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"OpenGL.h"
 	)
 
-	javaDoc(
-		"Native bindings to the OpenGL 1.2 optional imaging subset."
-	)
+	documentation = "Native bindings to the OpenGL 1.2 optional imaging subset."
 
 	val IMAGING_INTERNAL_FORMATS =
 		"""

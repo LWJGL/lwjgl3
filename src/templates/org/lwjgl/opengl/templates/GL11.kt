@@ -104,7 +104,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 1.1 functionality.")
+	documentation = "The core OpenGL 1.1 functionality."
 
 	IntConstant.block(
 		"AccumOp",

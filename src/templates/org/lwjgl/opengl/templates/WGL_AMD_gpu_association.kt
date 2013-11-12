@@ -16,7 +16,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		"WGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
 
@@ -27,7 +27,6 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
 		functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
 		"""
-	)
 
 	val properties = IntConstant.block(
 		"Accepted by the {@code property} parameter of {@link #wglGetGPUInfoAMD}.",

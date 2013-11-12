@@ -139,7 +139,7 @@ public class NativeClass(
 
 		if ( documentation != null )
 			println(documentation)
-		println("public final class $className {\n")
+		println("${access.modifier}final class $className {\n")
 
 		constantBlocks.forEach {
 			it.generate(this)
@@ -186,7 +186,7 @@ public class NativeClass(
 		}
 
 		println("\n\t@JavadocExclude")
-		print("\tpublic $className(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
+		print("\t${access.modifier}$className(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
 		functionProvider.printFunctionsParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {

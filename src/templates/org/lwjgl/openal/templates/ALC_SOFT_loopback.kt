@@ -12,7 +12,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to ALC_SOFT_loopback extension.")
+	documentation = "bindings to ALC_SOFT_loopback extension."
 
 	val RenderFormatSupportedTypeParameters = IntConstant.block(
 		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",

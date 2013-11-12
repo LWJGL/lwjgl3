@@ -12,7 +12,7 @@ fun ALC_EXT_thread_local_context() = "EXTThreadLocalContext".nativeClassALC("EXT
 		"OpenAL.h"
 	)
 
-	javaDoc("Native bindings to the EXT_thread_local_context ALC extension.")
+	documentation = "Native bindings to the EXT_thread_local_context ALC extension."
 
 	ALCboolean.func(
 		"SetThreadContext",

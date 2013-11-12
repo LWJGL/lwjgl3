@@ -11,7 +11,7 @@ val None = "X".link("None")
 
 fun X() = "X".nativeClass(LINUX_PACKAGE) {
 
-	javaDoc("Native bindings to X.h.")
+	documentation = "Native bindings to X.h."
 
 	IntConstant.block(
 		"RESERVED RESOURCE AND CONSTANT DEFINITIONS",

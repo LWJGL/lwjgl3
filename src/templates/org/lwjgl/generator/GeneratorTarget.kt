@@ -96,6 +96,12 @@ val String.asJNIName: String
 	else
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
+public enum class Access(internal val modifier: String) {
+	PUBLIC : Access("public ")
+	INTERNAL : Access("")
+	PRIVATE : Access("private ")
+}
+
 public abstract class GeneratorTarget(
 	val packageName: String,
 	val className: String,
@@ -106,7 +112,17 @@ public abstract class GeneratorTarget(
 		val DOT_PATTERN = Pattern.compile("[.]")
 	}
 
-	protected var documentation: String? = null
+	internal var access: Access = Access.PUBLIC
+		set(access: Access) {
+			if ( access == Access.PRIVATE )
+				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
+			$access = access
+		}
+
+	internal var documentation: String? = null
+		set(documentation: String?) {
+			$documentation = documentation?.toJavaDoc(indentation = "")
+		}
 
 	val preamble = Preamble()
 
@@ -125,10 +141,6 @@ public abstract class GeneratorTarget(
 		fileName append className.asJNIName
 
 		$nativeFileNameJNI = fileName.toString()
-	}
-
-	fun javaDoc(documentation: String) {
-		this.documentation = documentation.toJavaDoc(indentation = "")
 	}
 
 	abstract fun generateJava(writer: PrintWriter)

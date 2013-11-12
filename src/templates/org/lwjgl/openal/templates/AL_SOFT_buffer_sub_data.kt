@@ -12,7 +12,7 @@ fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_s
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_SOFT_buffer_sub_data extension.")
+	documentation = "bindings to AL_SOFT_buffer_sub_data extension."
 
 	IntConstant.block(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv.",

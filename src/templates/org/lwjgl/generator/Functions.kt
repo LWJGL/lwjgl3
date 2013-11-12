@@ -134,7 +134,7 @@ public class NativeClassFunction(
 			simpleName
 
 	val accessModifier: String
-		get() = if ( has(private) ) "private" else if ( has(internal) ) "" else "public"
+		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
 	private fun stripPostfix(functionName: String = name, stripType: Boolean = false, stripUnsigned: Boolean = false): String {
 		if ( !hasNativeParams || has(keepPostfix) )
@@ -476,7 +476,7 @@ public class NativeClassFunction(
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 			println("\t@JavadocExclude")
 		}
-		print("\t$accessModifier static native ${returnsNativeMethodType} ")
+		print("\t${accessModifier}static native ${returnsNativeMethodType} ")
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
@@ -510,7 +510,7 @@ public class NativeClassFunction(
 
 		// Step 1: Method signature
 
-		print("\t$accessModifier static ${returnsJavaMethodType} $strippedName(")
+		print("\t${accessModifier}static ${returnsJavaMethodType} $strippedName(")
 		printList(parameters) {
 			if ( it has autoSizeResult && returns.nativeType !is StructType )
 				null
@@ -978,7 +978,7 @@ public class NativeClassFunction(
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
-		print("\t$accessModifier static $retType $name(")
+		print("\t${accessModifier}static $retType $name(")
 		printList(parameters) {
 			if ( it has autoSizeResult && returns.nativeType !is StructType )
 				null
@@ -1276,14 +1276,18 @@ public val macro: FunctionModifier = object : FunctionModifier() {
 	}
 }
 
+class AccessModifier(val access: Access): FunctionModifier() {
+	class object: ModifierObject<AccessModifier> {
+		override val key = javaClass<AccessModifier>()
+	}
+
+	override val isSpecial: Boolean = false
+}
+
 /** Makes the generated methods private. */
-public val private: FunctionModifier = object : FunctionModifier() {
-	override val isSpecial: Boolean = false
-}
+public val private: FunctionModifier = AccessModifier(Access.PUBLIC)
 /** Makes the generated methods package private. */
-public val internal: FunctionModifier = object : FunctionModifier() {
-	override val isSpecial: Boolean = false
-}
+public val internal: FunctionModifier = AccessModifier(Access.INTERNAL)
 
 // --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
 

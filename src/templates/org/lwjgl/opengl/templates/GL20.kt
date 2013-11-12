@@ -16,7 +16,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"OpenGL.h"
 	)
 
-	javaDoc("The core OpenGL 2.0 functionality.")
+	documentation = "The core OpenGL 2.0 functionality."
 
 	// ARB_shading_language_100
 

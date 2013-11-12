@@ -13,7 +13,7 @@ fun GLX11() = "GLX11".nativeClassGLX("GLX_11") {
 		"<GL/glx.h>"
 	)
 
-	javaDoc("Native bindings to GLX 1.1.")
+	documentation = "Native bindings to GLX 1.1."
 
 	IntConstant.block(
 		"Names for attributes to ${"GetClientString()".link}.",

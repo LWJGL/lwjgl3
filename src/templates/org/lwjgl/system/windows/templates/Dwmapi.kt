@@ -12,13 +12,12 @@ fun Dwmapi() = "Dwmapi".nativeClassWin {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Optional functionality loaded dynamically from <strong>dwmapi.dll</strong>.
 
 		$DLL_WARNING
 		"""
-	)
 
 	DLL_FUNC _ HRESULT.func(
 		"DwmIsCompositionEnabled",

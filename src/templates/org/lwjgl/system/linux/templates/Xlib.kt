@@ -16,7 +16,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"<X11/Xutil.h>"
 	)
 
-	javaDoc("Native bindings to Xlib.h.")
+	documentation = "Native bindings to Xlib.h."
 
 	IntConstant.block(
 		"Boolean values",

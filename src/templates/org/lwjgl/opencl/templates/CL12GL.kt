@@ -23,7 +23,7 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 		"opengl_types.h"
 	)
 
-	javaDoc("The OpenCL 1.2 OpenGL interoperability functionality.")
+	documentation = "The OpenCL 1.2 OpenGL interoperability functionality."
 
 	IntConstant.block(
 		"cl_gl_object_type",

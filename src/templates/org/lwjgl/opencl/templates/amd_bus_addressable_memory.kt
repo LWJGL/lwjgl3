@@ -12,7 +12,7 @@ fun amd_bus_addressable_memory() = "AMDBusAddressableMemory".nativeClassCL("amd_
 		"OpenCL.h"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the $extensionName extension.
 
@@ -22,7 +22,6 @@ fun amd_bus_addressable_memory() = "AMDBusAddressableMemory".nativeClassCL("amd_
 		allocated on other PCIe devices (non-AMD GPU) to be directly accessed by AMD GPUs. One possible use of this is for a video capture device to directly
 		write into the GPU memory using its DMA. This extension is supported only on AMD FirePro™ professional graphics cards.
 		"""
-	)
 
 	IntConstant.block(
 		"cl_mem flag - bitfield",

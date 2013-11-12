@@ -12,7 +12,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"WindowsLWJGL.h"
 	)
 
-	javaDoc("Native bindings to WinGDI.h")
+	documentation = "Native bindings to WinGDI.h"
 
 	IntConstant.block(
 		"DEVMODE field selection bits.",

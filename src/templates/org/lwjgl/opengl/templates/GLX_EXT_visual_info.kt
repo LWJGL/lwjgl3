@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_rating.txt", templateName)} extension.
 
@@ -21,7 +21,6 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 		This extension allows servers to export visuals with improved features or image quality, but lower performance or greater system burden, without having
 		to have these visuals selected preferentially.  It is intended to insure that most applications get the "right" visual, not that all applications do.
 		"""
-	)
 
 	IntConstant.block(
 		"Accepted by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}, and by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")}:",

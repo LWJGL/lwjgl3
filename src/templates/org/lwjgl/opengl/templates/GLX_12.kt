@@ -13,7 +13,7 @@ fun GLX12() = "GLX12".nativeClassGLX("GLX_12") {
 		"<GL/glx.h>"
 	)
 
-	javaDoc("Native bindings to GLX 1.2.")
+	documentation = "Native bindings to GLX 1.2."
 
 	Display_p.func(
 		"GetCurrentDisplay",

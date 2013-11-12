@@ -119,7 +119,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"OpenCL.h"
 	)
 
-	javaDoc("The core OpenCL 1.0 functionality.")
+	documentation = "The core OpenCL 1.0 functionality."
 
 	IntConstant.block(
 		"Error Codes",

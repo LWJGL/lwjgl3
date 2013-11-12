@@ -13,7 +13,7 @@ fun AL_EXT_MULAW() = "EXTMulaw".nativeClassAL("EXT_MULAW") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_MULAW extension.")
+	documentation = "bindings to AL_EXT_MULAW extension."
 
 	IntConstant.block(
 		"AL_EXT_MULAW tokens.",

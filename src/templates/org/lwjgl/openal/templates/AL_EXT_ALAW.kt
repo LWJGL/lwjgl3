@@ -12,7 +12,7 @@ fun AL_EXT_ALAW() = "EXTAlaw".nativeClassAL("EXT_ALAW") {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to AL_EXT_ALAW extension.")
+	documentation = "bindings to AL_EXT_ALAW extension."
 
 	IntConstant.block(
 		"AL_EXT_ALAW tokens.",

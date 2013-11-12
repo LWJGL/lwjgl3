@@ -15,7 +15,7 @@ fun GLX_ARB_get_proc_address() = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_
 		"<GL/glx.h>"
 	)
 
-	javaDoc(
+	documentation =
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/get_proc_address.txt", templateName)} extension.
 
@@ -23,7 +23,6 @@ fun GLX_ARB_get_proc_address() = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_
 		heterogenous implementations where hardware drivers may implement extension functions not known to the link library; a similar situation on Windows
 		implementations resulted in the {@code wglGetProcAddress} function.
 		"""
-	)
 
 	voidptr.func(
 		"GetProcAddressARB",

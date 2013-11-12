@@ -12,7 +12,7 @@ fun ALC_EXT_EFX() = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"OpenAL.h"
 	)
 
-	javaDoc("bindings to ALC_EXT_EFX extension.")
+	documentation = "bindings to ALC_EXT_EFX extension."
 
 	IntConstant.block(
 		"ALC tokens.",
