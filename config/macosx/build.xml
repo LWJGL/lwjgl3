@@ -164,5 +164,6 @@
 
 		<update-dropbox name="OpenAL" artifact="macosx/openal.dylib" hash="i4zue33q7rs4d7k/mjhxw_7sTN" dest="${lib}"/>
 		<update-dropbox name="GLFW" artifact="macosx/x86_64/libglfw3.a" hash="i4zue33q7rs4d7k/TFDrKNsK9H" dest="${lib}"/>
+		<update-dropbox name="libffi" artifact="macosx/x86_64/libffi.a" hash="i4zue33q7rs4d7k/1nhPKRljnB" dest="${lib}"/>
 	</target>
 </project>
