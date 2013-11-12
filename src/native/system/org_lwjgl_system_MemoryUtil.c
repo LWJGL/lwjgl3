@@ -9,6 +9,8 @@
 	ENABLE_WARNINGS()
 #endif
 
+EXTERN_C_ENTER
+
 // memPointerSize()I
 JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memPointerSize(JNIEnv *env, jclass clazz)
 {
@@ -170,3 +172,5 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_nNewBuffer(JNIEnv *en
 	UNUSED_PARAM(clazz)
 	return (*env)->NewDirectByteBuffer(env, (void *)(intptr_t)address, capacity);
 }
+
+EXTERN_C_EXIT

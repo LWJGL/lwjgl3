@@ -98,6 +98,8 @@ inline void detachCurrentThread(void) {
 	}
 #endif
 
+EXTERN_C_ENTER
+
 JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM *vm, void *reserved) {
 	UNUSED_PARAM(reserved)
 
@@ -111,3 +113,5 @@ JNIEXPORT void JNICALL JNI_OnUnload(JavaVM *vm, void *reserved) {
 	UNUSED_PARAMS(vm, reserved);
 	envTLSDestroy();
 }
+
+EXTERN_C_EXIT

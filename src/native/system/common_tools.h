@@ -40,6 +40,16 @@ extern void detachCurrentThread(void);
 
 // -----------------------------------------------------
 
+#ifdef __cplusplus
+	#define EXTERN_C_ENTER extern "C" {
+	#define EXTERN_C_EXIT }
+#else
+	#define EXTERN_C_ENTER
+	#define EXTERN_C_EXIT
+#endif
+
+// -----------------------------------------------------
+
 #define UNUSED_PARAM(param) \
 	(void)(param);
 
@@ -59,20 +69,25 @@ extern jmethodID getDeclaringClass;
 	DECLARE_CALLBACK(NAME)
 
 #define CALLBACK_SETUP(CLASS, NAME) \
+	EXTERN_C_ENTER \
 	JNIEXPORT jlong JNICALL Java_##CLASS##_00024Util_setCallback(JNIEnv *env, jclass clazz, jobject method) { \
 		UNUSED_PARAM(clazz) \
 		NAME##Invoke = (*env)->FromReflectedMethod(env, method); \
 		return (jlong)(intptr_t)&NAME##Proc; \
-	}
+	} \
+	EXTERN_C_EXIT
 
 #define CALLBACK_SETUP_MULTI(CLASS, NAME, POSTFIX) \
+	EXTERN_C_ENTER \
 	JNIEXPORT jlong JNICALL Java_##CLASS##_00024Util_setCallback##POSTFIX(JNIEnv *env, jclass clazz, jobject method) { \
 		UNUSED_PARAM(clazz) \
 		NAME##POSTFIX##Invoke = (*env)->FromReflectedMethod(env, method); \
 		return (jlong)(intptr_t)&NAME##POSTFIX##Proc; \
-	}
+	} \
+	EXTERN_C_EXIT
 
 #define CALLBACK_SETUP_STATIC(CLASS, NAME) \
+	EXTERN_C_ENTER \
 	JNIEXPORT jlong JNICALL Java_##CLASS##_00024Util_setCallback(JNIEnv *env, jclass clazz, jobject method) { \
 		jclass Method = (*env)->FindClass(env, "java/lang/reflect/Method"); \
 		jmethodID getDeclaringClass = (*env)->GetMethodID(env, Method, "getDeclaringClass", "()Ljava/lang/Class;"); \
@@ -80,9 +95,11 @@ extern jmethodID getDeclaringClass;
 		NAME##Class = (*env)->CallObjectMethod(env, method, getDeclaringClass); \
 		NAME##Invoke = (*env)->FromReflectedMethod(env, method); \
 		return (jlong)(intptr_t)&NAME##Proc; \
-	}
+	} \
+	EXTERN_C_EXIT
 
 #define CALLBACK_SETUP_STATIC_MULTI(CLASS, NAME, POSTFIX) \
+	EXTERN_C_ENTER \
 	JNIEXPORT jlong JNICALL Java_##CLASS##_00024Util_setCallback##POSTFIX(JNIEnv *env, jclass clazz, jobject method) { \
 		jclass Method = (*env)->FindClass(env, "java/lang/reflect/Method"); \
 		jmethodID getDeclaringClass = (*env)->GetMethodID(env, Method, "getDeclaringClass", "()Ljava/lang/Class;"); \
@@ -90,6 +107,7 @@ extern jmethodID getDeclaringClass;
 		NAME##POSTFIX##Class = (*env)->CallObjectMethod(env, method, getDeclaringClass); \
 		NAME##POSTFIX##Invoke = (*env)->FromReflectedMethod(env, method); \
 		return (jlong)(intptr_t)&NAME##POSTFIX##Proc; \
-	}
+	} \
+	EXTERN_C_EXIT
 
 #endif

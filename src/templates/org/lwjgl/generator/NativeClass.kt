@@ -210,10 +210,14 @@ public class NativeClass(
 			}
 		}
 
+		println("\nEXTERN_C_ENTER")
+
 		functions.forEach {
 			println()
 			it.generateFunction(this)
 		}
+
+		println("\nEXTERN_C_EXIT")
 	}
 
 	// DSL extensions

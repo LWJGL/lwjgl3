@@ -656,7 +656,7 @@ public class Struct(
 
 		preamble.printNative(this)
 
-		println()
+		println("\nEXTERN_C_EXIT\n")
 
 		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {")
 		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
@@ -682,6 +682,8 @@ public class Struct(
 
 		println("\n\treturn sizeof($nativeName);")
 		println("}")
+
+		println("\nEXTERN_C_EXIT")
 	}
 
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
