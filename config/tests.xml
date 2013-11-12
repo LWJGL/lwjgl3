@@ -7,6 +7,7 @@
 			<package name="org.lwjgl.openal"/>
 			<package name="org.lwjgl.opencl"/>
 			<package name="org.lwjgl.system"/>
+			<package name="org.lwjgl.system.libffi"/>
 		</packages>
 	</test>
 </suite>
