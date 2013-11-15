@@ -133,9 +133,6 @@ public class LibFFITest {
 	private static long glfwGetWindowSizeAddress() {
 		// dlopen cannot find Sys.getNativeLibrary(), so resolve the path manually.
 		String library = System.mapLibraryName(Sys.getNativeLibrary());
-		if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-			library = library.substring(0, library.length() - ".dylib".length()) + ".jnilib";
-
 		String[] libPaths = System.getProperty("org.lwjgl.librarypath", System.getProperty("java.library.path")).split(File.pathSeparator);
 		Path libPath = null;
 		for ( String path : libPaths ) {

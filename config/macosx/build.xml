@@ -1,11 +1,7 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-macosx">
 	<import file="../build-definitions.xml"/>
 
-	<!--<condition property="libname" value="liblwjgl-i386.jnilib" else="liblwjgl-i86_64.jnilib">
-		<equals arg1="${os.arch}" arg2="x86"/>
-	</condition>-->
-
-	<property name="libname" value="liblwjgl.jnilib"/>
+	<property name="libname" value="liblwjgl.dylib"/>
 
 	<!-- Ask Xcode for correct path to XCode tools -->
 	<!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
