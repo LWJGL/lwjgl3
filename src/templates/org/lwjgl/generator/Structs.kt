@@ -340,7 +340,7 @@ public class Struct(
 			if ( it.isNestedAnonymousStruct )
 				generateAlternativeConstructor(it.nestedMembers)
 			else
-				it is StructMemberArray || it.nativeType is CharSequenceType || (it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER)
+				it is StructMemberArray || it.nativeType is CharSequenceType || (it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER)
 		}
 	}
 
@@ -376,7 +376,7 @@ public class Struct(
 						{
 							print("CharSequence $param")
 						}
-					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER ->
+					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ->
 						{
 							print("ByteBuffer $param")
 						}
@@ -515,7 +515,7 @@ public class Struct(
 							println("${method}($struct, $param == null ? NULL : memAddress($buffer)); }")
 							println("\tpublic static void ${method}Set(ByteBuffer $struct, CharSequence $param) { ${method}($struct, $param == null ? NULL : memAddress(memEncode${it.nativeType.charMapping.charset}($param))); }")
 						}
-					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER ->
+					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ->
 						{
 							println("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ${method}($struct, memAddress($param)); }")
 						}
@@ -628,7 +628,7 @@ public class Struct(
 						{
 							println("\tpublic static ByteBuffer ${method}b(ByteBuffer $struct) { return memByteBuffer(${method}($struct), ${it.nativeType.definition.className}.SIZEOF); }")
 						}
-					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.NAKED_POINTER ->
+					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ->
 						{
 							println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
 						}

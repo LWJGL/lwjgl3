@@ -46,7 +46,7 @@ public open class PointerType(
 	/** The type used in the native API. */
 	name: String,
 	/** The type we map the native type to. */
-	mapping: PointerMapping = PointerMapping.NAKED_POINTER,
+	mapping: PointerMapping = PointerMapping.OPAQUE_POINTER,
 	/** If true, the nativeType typedef includes a pointer. */
 	val includesPointer: Boolean = false,
 	/** Optional element type. See the secondary constructors below. */
@@ -88,7 +88,7 @@ public class ObjectType(
 	name: String,
 	/** If true, the nativeType typedef includes a pointer. */
 	includesPointer: Boolean = true
-): PointerType(name, PointerMapping.NAKED_POINTER, includesPointer)
+): PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
 
 // Structs
 public class StructType(
@@ -192,7 +192,7 @@ public open class PointerMapping(
 ): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {
 
 	class object {
-		val NAKED_POINTER = PointerMapping(javaClass<Long>())
+		val OPAQUE_POINTER = PointerMapping(javaClass<Long>())
 
 		/** Useful for void * params that will be AutoTyped. */
 		val DATA = PointerMapping(javaClass<Buffer>())

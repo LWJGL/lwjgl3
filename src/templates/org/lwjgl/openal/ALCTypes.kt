@@ -55,4 +55,4 @@ val ALCcharUTF8_pp = PointerType(ALCcharUTF8_p)
 val ALCdevice_p = PointerType("ALCdevice")
 val ALCcontext_p = PointerType("ALCcontext")
 
-val ALCvoidptr = PointerType("void", PointerMapping.NAKED_POINTER) // see alcGetProcAddress
+val ALCvoidptr = PointerType("void", PointerMapping.OPAQUE_POINTER) // see alcGetProcAddress

@@ -253,7 +253,7 @@ public class NativeClassFunction(
 			}
 
 			if ( it has autoSizeResult ) {
-				if ( returns.nativeType !is PointerType || returns.nativeType.mapping == PointerMapping.NAKED_POINTER )
+				if ( returns.nativeType !is PointerType || returns.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 					it.error("Return type is not an array: autoSizeResult(${it.name})")
 			}
 
@@ -345,9 +345,9 @@ public class NativeClassFunction(
 		}
 
 		parameters.forEach {
-			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.NAKED_POINTER ) "if ( ${it.name} != null ) " else ""
+			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType.mapping == PointerMapping.NAKED_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
+			if ( it.nativeType.mapping == PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
 				checks add "checkPointer(${it.name});"
 
 			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {

@@ -15,7 +15,7 @@ abstract class QualifiedType(
 		get() = isBufferPointer || super.isSpecial
 
 	val isBufferPointer: Boolean
-		get() = nativeType is PointerType && nativeType.mapping != PointerMapping.NAKED_POINTER
+		get() = nativeType is PointerType && nativeType.mapping != PointerMapping.OPAQUE_POINTER
 
 	val javaMethodType: String
 		get() = when {
@@ -100,7 +100,7 @@ public class Parameter(
 	// --- [ Helper functions & properties ] ----
 
 	override val isSpecial: Boolean
-		get() = nativeType.mapping == PointerMapping.NAKED_POINTER || super.isSpecial
+		get() = nativeType.mapping == PointerMapping.OPAQUE_POINTER || super.isSpecial
 
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
@@ -110,7 +110,7 @@ public class Parameter(
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 	// Data pointer
-		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.NAKED_POINTER
+		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.OPAQUE_POINTER
 		                         -> {
 			if ( has(autoSizeResult) && (func.returns.nativeType !is StructType || func.returnsStructValue) )
 				"$API_BUFFER.address() + $name"
@@ -300,7 +300,7 @@ public class Check(
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The Check modifier cannot be applied on naked pointer types.")
 	}
 }
@@ -329,7 +329,7 @@ public val nullTerminated: TemplateModifier = object : ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on naked pointer types.")
 	}
 }
@@ -367,7 +367,7 @@ public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The MultiType modifier cannot be applied on naked pointer types.")
 	}
 
@@ -391,7 +391,7 @@ public class Return(
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The returnValue modifier cannot be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.OUT )
@@ -412,7 +412,7 @@ public class SingleValue(val newName: String): ParameterModifier() {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
-		if ( param.nativeType.mapping == PointerMapping.NAKED_POINTER )
+		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The SingleValue modifier cannot be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
@@ -455,7 +455,7 @@ public class Callback(val procClass: String, val storeInFunctions: Boolean = fal
 
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.NAKED_POINTER )
+		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The Callback modifier can only be applied on naked pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
@@ -503,7 +503,7 @@ public class Construct(
 public val address: ReturnValueModifier = object : ReturnValueModifier() {
 	override val isSpecial: Boolean = false
 	override protected fun validate(returns: ReturnValue) {
-		if ( returns.nativeType.mapping != PointerMapping.NAKED_POINTER )
+		if ( returns.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The address modifier can only be applied on naked pointer types.")
 	}
 }
