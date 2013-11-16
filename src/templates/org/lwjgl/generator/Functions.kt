@@ -1231,7 +1231,7 @@ public class Capabilities(
 	val expression: String,
 	/** If defined, is a statement that will be printed before the getInstance() call. */
 	val statement: String? = null,
-	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variables. */
+	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
 ): FunctionModifier() {
 	class object: ModifierObject<Capabilities> {
