@@ -11,6 +11,11 @@ import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.lang.reflect.Method;
 
+/**
+ * Utility class useful to API bindings.
+ * <p/>
+ * Method names in this class are prefixed with {@code api} to avoid ambiguities when used with static imports.
+ */
 public final class APIUtil {
 
 	private static final ThreadLocal<APIBuffer> API_BUFFERS = new ThreadLocal<APIBuffer>() {

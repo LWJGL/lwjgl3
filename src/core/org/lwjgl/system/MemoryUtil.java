@@ -21,6 +21,8 @@ import static org.lwjgl.Pointer.*;
  * All methods in this class will make use of {@link sun.misc.Unsafe} if it's available,
  * for performance. If Unsafe is not available, the fallback implementations make use
  * of reflection and, in the worst-case, JNI.
+ * <p/>
+ * Method names in this class are prefixed with {@code mem} to avoid ambiguities when used with static imports.
  */
 public final class MemoryUtil {
 
@@ -545,7 +547,7 @@ public final class MemoryUtil {
 	static native long nMemGetAddress(long ptr);
 
 	// Primitive setters
-	
+
 	static native void nMemPutByte(long ptr, byte value);
 
 	static native void nMemPutShort(long ptr, short value);

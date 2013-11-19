@@ -91,11 +91,11 @@ private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE)
 public fun code(code: String): String = "<code>$code</code>"
 
 /** Useful for raw code blocks without markup. */
-public fun codeBlock(code: String): String = "<pre>{@code\n${code
+public fun codeBlock(code: String): String = "<pre><code>\n${code
 	.trim()
 	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
 	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
-}}</pre>"
+}</code></pre>"
 
 public fun String.linkPlain(name: String): String = link(name, prefix = "")
 public fun String.link(name: String, prefix: String = ""): String {
