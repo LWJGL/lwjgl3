@@ -44,7 +44,7 @@ public class FastLongMap<V> implements Iterable<FastLongMap.Entry<V>> {
 		if ( initialCapacity < 0 ) throw new IllegalArgumentException("initialCapacity must be greater than zero.");
 		if ( loadFactor <= 0 ) throw new IllegalArgumentException("loadFactor must be greater than zero.");
 
-		this.capacity = mathNextPoT(initialCapacity);
+		this.capacity = mathRoundPoT(initialCapacity);
 
 		this.threshold = (int)(capacity * loadFactor);
 		this.table = createEntryArray(capacity);

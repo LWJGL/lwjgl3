@@ -80,7 +80,7 @@ public class APIBuffer {
 		if ( capacity <= buffer.capacity() )
 			return;
 
-		ByteBuffer resized = BufferUtils.createAlignedByteBufferPage(mathNextPoT(capacity));
+		ByteBuffer resized = BufferUtils.createAlignedByteBufferPage(mathRoundPoT(capacity));
 
 		resized.put(buffer);
 		resized.clear();
