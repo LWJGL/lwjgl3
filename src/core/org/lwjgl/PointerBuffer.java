@@ -493,19 +493,132 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 			target.putInt(index, (int)l);
 	}
 
+	// -- PointerWrapper operations --
+
+	/** Puts the pointer value of the given {@link Pointer} at the current position and then increments the position. */
+	public PointerBuffer put(Pointer wrapper) {
+		put(wrapper.getPointer());
+		return this;
+	}
+
+	/** Puts the pointer value of the given {@link Pointer} at the given index. */
+	public PointerBuffer put(int index, Pointer wrapper) {
+		put(index, wrapper.getPointer());
+		return this;
+	}
+
 	// -- Buffer address operations --
 
-	/** Puts the pointer to the given buffer at the current position and the increments the position. */
-	public void putPointer(ByteBuffer buffer) { put(memAddress(buffer)); }
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(ByteBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
 
-	/** Puts the pointer to the given buffer at the given index. */
-	public void putPointer(int index, ByteBuffer buffer) { put(index, memAddress(buffer)); }
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(ShortBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(IntBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(LongBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(FloatBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer put(DoubleBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	/** Puts the address of the given buffer at the current position and then increments the position. */
+	public PointerBuffer putAddressOf(PointerBuffer buffer) {
+		put(memAddress(buffer));
+		return this;
+	}
+
+	// ---
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, ByteBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, ShortBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, IntBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, LongBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, FloatBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void put(int index, DoubleBuffer buffer) { put(index, memAddress(buffer)); }
+
+	/** Puts the address of the given buffer at the given index. */
+	public void putAddressOf(int index, PointerBuffer buffer) { put(index, memAddress(buffer)); }
+
+	// ---
 
 	/** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
 	public ByteBuffer getByteBuffer(int size) { return memByteBuffer(get(), size); }
 
+	/** Returns a ShortBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public ShortBuffer getShortBuffer(int size) { return memShortBuffer(get(), size); }
+
+	/** Returns a IntBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public IntBuffer getIntBuffer(int size) { return memIntBuffer(get(), size); }
+
+	/** Returns a LongBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public LongBuffer getLongBuffer(int size) { return memLongBuffer(get(), size); }
+
+	/** Returns a FloatBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public FloatBuffer getFloatBuffer(int size) { return memFloatBuffer(get(), size); }
+
+	/** Returns a DoubleBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public DoubleBuffer getDoubleBuffer(int size) { return memDoubleBuffer(get(), size); }
+
+	/** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
+
+	// ---
+
 	/** Returns a ByteBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
 	public ByteBuffer getByteBuffer(int index, int size) { return memByteBuffer(get(index), size); }
+
+	/** Returns a ShortBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public ShortBuffer getShortBuffer(int index, int size) { return memShortBuffer(get(index), size); }
+
+	/** Returns a IntBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public IntBuffer getIntBuffer(int index, int size) { return memIntBuffer(get(index), size); }
+
+	/** Returns a LongBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public LongBuffer getLongBuffer(int index, int size) { return memLongBuffer(get(index), size); }
+
+	/** Returns a FloatBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public FloatBuffer getFloatBuffer(int index, int size) { return memFloatBuffer(get(index), size); }
+
+	/** Returns a DoubleBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public DoubleBuffer getDoubleBuffer(int index, int size) { return memDoubleBuffer(get(index), size); }
+
+	/** Returns a PointerBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
 
 	// -- Bulk get operations --
 

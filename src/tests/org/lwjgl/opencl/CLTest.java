@@ -80,7 +80,7 @@ public class CLTest {
 			} else {
 				for ( CLPlatform platform : platforms ) {
 					PointerBuffer ctxProps = BufferUtils.createPointerBuffer(3);
-					ctxProps.put(CL_CONTEXT_PLATFORM).put(platform.getPointer()).put(0).flip();
+					ctxProps.put(CL_CONTEXT_PLATFORM).put(platform).put(0).flip();
 
 					List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
 					for ( CLDevice device : devices )
@@ -163,10 +163,10 @@ public class CLTest {
 
 				// a cl_mem object
 				PointerBuffer mem_list = BufferUtils.createPointerBuffer(1);
-				mem_list.put(0, buffer.getPointer());
+				mem_list.put(0, buffer);
 
 				PointerBuffer args_mem_loc = BufferUtils.createPointerBuffer(1);
-				args_mem_loc.put(0, memAddress(args)); // offset to where the cl_mem object id is stored
+				args_mem_loc.put(0, args); // offset to where the cl_mem object id is stored
 
 				// a non-random number
 				args.putInt(POINTER_SIZE, 1337);

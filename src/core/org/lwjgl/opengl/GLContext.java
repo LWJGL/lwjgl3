@@ -5,6 +5,7 @@
 package org.lwjgl.opengl;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Pointer;
 import org.lwjgl.system.linux.opengl.LinuxGLContext;
 import org.lwjgl.system.macosx.opengl.MacOSXGLContext;
 import org.lwjgl.system.windows.opengl.WindowsGLContext;
@@ -12,7 +13,7 @@ import org.lwjgl.system.windows.opengl.WindowsGLContext;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper over an OS-specific OpenGL context handle and provides basic functionality related to OpenGL contexts. */
-public abstract class GLContext {
+public abstract class GLContext implements Pointer {
 
 	final ContextCapabilities capabilities;
 
@@ -43,13 +44,6 @@ public abstract class GLContext {
 	public ContextCapabilities getCapabilities() {
 		return capabilities;
 	}
-
-	/**
-	 * Returns the context handle. The type of this handle is OS-specific.
-	 *
-	 * @return the context handle
-	 */
-	public abstract long getHandle();
 
 	/**
 	 * Makes the context current in the current thread and associates with the device/drawable given by the {@code target} handle for both draw and read

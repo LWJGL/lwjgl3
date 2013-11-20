@@ -217,12 +217,12 @@ public class CLGLInteropDemo {
 
 			PointerBuffer deviceBuffer = BufferUtils.createPointerBuffer(devices.size());
 			for ( int i = 0; i < devices.size(); i++ )
-				deviceBuffer.put(i, devices.get(i).getPointer());
+				deviceBuffer.put(i, devices.get(i));
 
 			// Create the context
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(5)
 				.put(0, CL_CONTEXT_PLATFORM)
-				.put(1, platform.getPointer());
+				.put(1, platform);
 
 			boolean useAPPLEGLSharing = false;
 			for ( CLDevice device : devices ) {
@@ -235,11 +235,11 @@ public class CLGLInteropDemo {
 			if ( useAPPLEGLSharing ) {
 				ctxProps
 					.put(2, APPLEGLSharing.CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE)
-					.put(3, CGLGetShareGroup(context.getHandle()));
+					.put(3, CGLGetShareGroup(context.getPointer()));
 			} else {
 				ctxProps
 					.put(2, CL_GL_CONTEXT_KHR)
-					.put(3, context.getHandle());
+					.put(3, context);
 			}
 
 			ctxProps.put(4, 0);
@@ -784,12 +784,12 @@ public class CLGLInteropDemo {
 
 		try {
 			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-				CGLLockContext(context.getHandle());
+				CGLLockContext(context.getPointer());
 
 			renderGL();
 		} finally {
 			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-				CGLUnlockContext(context.getHandle());
+				CGLUnlockContext(context.getPointer());
 		}
 	}
 
@@ -816,7 +816,7 @@ public class CLGLInteropDemo {
 			}
 
 			if ( eventFromFence != null )
-				syncBuffer.put(0, eventFromFence.getPointer());
+				syncBuffer.put(0, eventFromFence);
 
 			// acquire GL objects, and enqueue a kernel with a probe from the list
 			int errcode = clEnqueueAcquireGLObjects(queues[i], glBuffers[i], eventFromFence != null ? syncBuffer : null, null);

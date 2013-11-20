@@ -34,7 +34,7 @@ public class LinuxGLContext extends GLContext {
 	}
 
 	@Override
-	public long getHandle() {
+	public long getPointer() {
 		return ctx;
 	}
 

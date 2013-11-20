@@ -51,7 +51,7 @@ public final class CLDemo {
 			System.out.println("");
 
 			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(3);
-			ctxProps.put(CL_CONTEXT_PLATFORM).put(platform.getPointer()).put(0).flip();
+			ctxProps.put(CL_CONTEXT_PLATFORM).put(platform).put(0).flip();
 
 			List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
 			for ( CLDevice device : devices ) {

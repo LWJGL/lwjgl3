@@ -7,35 +7,34 @@ package org.lwjgl;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Pointer utility class.
+ * Pointer interface.
  * <p/>
- * LWJGL can run on both 32bit and 64bit architectures. Since LWJGL applications deal with native memory directly, this class provides the necessary information
+ * LWJGL can run on both 32bit and 64bit architectures. Since LWJGL applications deal with native memory directly, this interface provides necessary information
  * about the underlying architecture of the running JVM process.
  * <p/>
- * Pointer values in client APIs are mapped to Java longs. LWJGL automatically converts the long values to the correct pointer types when passed to JNI. Some
- * client API calls require buffers of pointer data; the {@link PointerBuffer} class may be used for that purpose. It has an API similar to a {@link java.nio.LongBuffer}
- * but handles pointer conversions automatically.
+ * When interacting with native functions, pointer values are mapped to Java {@code long}. LWJGL automatically converts long values to the correct pointer
+ * addresses when used in native code. Native functions sometimes require arrays of pointer values; the {@link PointerBuffer} class may be used for that
+ * purpose. It has an API similar to a {@link java.nio.LongBuffer} but handles pointer casts automatically.
  */
-public final class Pointer {
+public interface Pointer {
 
 	/** The pointer size in bytes. Will be 4 on a 32bit JVM and 8 on a 64bit one. */
-	public static final int POINTER_SIZE;
+	int POINTER_SIZE = memPointerSize();
 
 	/** The pointer size power-of-two. Will be 2 on a 32bit JVM and 3 on a 64bit one. */
-	public static final int POINTER_SHIFT;
-
-	static {
-		POINTER_SIZE = memPointerSize();
-		POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
-	}
+	int POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
 
 	/** Will be true on a 32bit JVM. */
-	public static final boolean BITS32 = POINTER_SIZE * 8 == 32;
+	boolean BITS32 = POINTER_SIZE * 8 == 32;
 
 	/** Will be true on a 64bit JVM. */
-	public static final boolean BITS64 = POINTER_SIZE * 8 == 64;
+	boolean BITS64 = POINTER_SIZE * 8 == 64;
 
-	private Pointer() {
-	}
+	/**
+	 * Returns the raw pointer address as a {@code long} value.
+	 *
+	 * @return the pointer address
+	 */
+	long getPointer();
 
 }

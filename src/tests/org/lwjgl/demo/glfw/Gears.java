@@ -84,12 +84,12 @@ public class Gears extends AbstractGears {
 		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
 			try {
 				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-					CGLLockContext(context.getHandle());
+					CGLLockContext(context.getPointer());
 
 				renderLoop();
 			} finally {
 				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-					CGLUnlockContext(context.getHandle());
+					CGLUnlockContext(context.getPointer());
 			}
 
 			glfwPollEvents();

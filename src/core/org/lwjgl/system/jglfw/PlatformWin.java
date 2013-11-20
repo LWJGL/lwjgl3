@@ -891,7 +891,7 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 	}
 
 	private boolean createContext(GLFWwindowWin window, GLFWwndconfig wndconfig, GLFWfbconfig fbconfig) {
-		long share = wndconfig.share == null ? NULL : wndconfig.share.<GLFWwindowWin>asPlatformWindow().context.getHandle();
+		long share = wndconfig.share == null ? NULL : wndconfig.share.<GLFWwindowWin>asPlatformWindow().context.getPointer();
 
 		window.dc = GetDC(window.handle);
 		if ( window.dc == NULL ) {

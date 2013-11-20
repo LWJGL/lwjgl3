@@ -478,7 +478,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 		}
 
 		if ( window.context != null ) {
-			glXDestroyContext(x11.display, window.context.getHandle());
+			glXDestroyContext(x11.display, window.context.getPointer());
 			window.context = null;
 		}
 	}
@@ -1890,7 +1890,7 @@ class PlatformLinux implements Platform<GLFWwindowLinux> {
 
 		long share = NULL;
 		if ( wndconfig.share != null )
-			share = ((GLFWwindowLinux)wndconfig.share).context.getHandle();
+			share = ((GLFWwindowLinux)wndconfig.share).context.getPointer();
 
 		long nativeConfig;
 		// Find a suitable GLXFBConfig

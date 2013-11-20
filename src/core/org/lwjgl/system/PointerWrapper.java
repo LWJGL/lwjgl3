@@ -5,11 +5,12 @@
 package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Pointer;
 
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** An object wrapper around a native pointer address. */
-public abstract class PointerWrapper {
+public abstract class PointerWrapper implements Pointer {
 
 	protected final long pointer;
 
@@ -20,6 +21,7 @@ public abstract class PointerWrapper {
 		this.pointer = pointer;
 	}
 
+	@Override
 	public final long getPointer() {
 		return pointer;
 	}

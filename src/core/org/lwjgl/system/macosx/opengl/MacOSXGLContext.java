@@ -17,7 +17,7 @@ public class MacOSXGLContext extends GLContext {
 	}
 
 	@Override
-	public long getHandle() {
+	public long getPointer() {
 		return handle;
 	}
 
