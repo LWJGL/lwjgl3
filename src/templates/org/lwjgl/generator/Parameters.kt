@@ -102,6 +102,10 @@ public class Parameter(
 	override val isSpecial: Boolean
 		get() = nativeType.mapping == PointerMapping.OPAQUE_POINTER || super.isSpecial
 
+	/** Returns true if this is an output parameter with the autoSizeResult modifier. */
+	val isAutoSizeResultOut: Boolean
+		get() = paramType == ParameterType.OUT && has(autoSizeResult)
+
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
 
@@ -112,7 +116,7 @@ public class Parameter(
 	// Data pointer
 		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.OPAQUE_POINTER
 		                         -> {
-			if ( has(autoSizeResult) && (func.returns.nativeType !is StructType || func.returnsStructValue) )
+			if ( isAutoSizeResultOut && (func.returns.nativeType !is StructType || func.returnsStructValue) )
 				"$API_BUFFER.address() + $name"
 			else if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
 				"memAddressSafe($name)"
@@ -269,16 +273,25 @@ public val autoSizeResult: ParameterModifier = object : ParameterModifier() {
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
 		if ( param.paramType == ParameterType.IN )
-			throw IllegalArgumentException("The autoSizeResult modifier can only be applied on output parameters.")
-
-		when ( param.nativeType.mapping ) {
-			PointerMapping.DATA_INT,
-			PointerMapping.DATA_POINTER -> {
+			when ( param.nativeType.mapping ) {
+				PrimitiveMapping.INT,
+				PrimitiveMapping.PTR -> {
+				}
+				else                 -> {
+					throw IllegalArgumentException("The autoSizeResult modifier on input parameters can only be applied on integer primitive types.")
+				}
 			}
-			else                        -> {
-				throw IllegalArgumentException("The autoSizeResult modifier can only be applied on integer pointer types.")
+		else if ( param.paramType == ParameterType.OUT )
+			when ( param.nativeType.mapping ) {
+				PointerMapping.DATA_INT,
+				PointerMapping.DATA_POINTER -> {
+				}
+				else                        -> {
+					throw IllegalArgumentException("The autoSizeResult modifier on output parameters can only be applied on integer pointer types.")
+				}
 			}
-		}
+		else
+			throw IllegalArgumentException("The autoSizeResult modifier cannot be used on in/out parameters.")
 	}
 }
 

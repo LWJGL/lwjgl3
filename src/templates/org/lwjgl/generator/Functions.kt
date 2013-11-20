@@ -192,7 +192,7 @@ public class NativeClassFunction(
 			builder append '('
 
 			var first = true
-			getParams { !(it has autoSizeResult) } forEach {
+			getParams { !it.isAutoSizeResultOut } forEach {
 				if ( first )
 					first = false
 				else
@@ -512,7 +512,7 @@ public class NativeClassFunction(
 
 		print("\t${accessModifier}static ${returnsJavaMethodType} $strippedName(")
 		printList(parameters) {
-			if ( it has autoSizeResult && returns.nativeType !is StructType )
+			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else if ( it.isBufferPointer )
 				"ByteBuffer ${it.name}" // Convert multi-byte-per-element buffers to ByteBuffer
@@ -540,7 +540,7 @@ public class NativeClassFunction(
 
 		// Step 3.b: Prepare APIBuffer parameters.
 
-		var apiBufferSet = hasParam { it has autoSizeResult && returns.nativeType !is StructType }
+		var apiBufferSet = returns.nativeType !is StructType && hasParam { it.isAutoSizeResultOut }
 		if ( apiBufferSet ) {
 			println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
 
@@ -592,13 +592,15 @@ public class NativeClassFunction(
 					} else if ( hasParam { it has autoSizeResult } ) {
 						val param = getParam { it has autoSizeResult }
 						print(
-							if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+							if ( param.paramType == ParameterType.IN )
+								", ${param.name}"
+							else if ( param.nativeType.mapping == PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
 							else
 								", (int)$API_BUFFER.longValue(${param.name})"
 						)
 					} else
-						throw IllegalStateException("No autosizeResult parameter could be found.")
+						throw IllegalStateException("No autoSizeResult parameter could be found.")
 				}
 				println(");")
 			} else if ( code?.javaAfterNative != null )
@@ -730,7 +732,7 @@ public class NativeClassFunction(
 		}
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
-		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.has(autoSizeResult) && returns.nativeType !is StructType) } )
+		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.isAutoSizeResultOut && returns.nativeType !is StructType) } )
 			generateAlternativeMethod(stripPostfix(stripType = true), "Alternative version of:", transforms, customChecks)
 
 		// Step 3: Generate more complex alternatives if necessary
@@ -980,7 +982,7 @@ public class NativeClassFunction(
 
 		print("\t${accessModifier}static $retType $name(")
 		printList(parameters) {
-			if ( it has autoSizeResult && returns.nativeType !is StructType )
+			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else
 				it.transformDeclarationOrElse(transforms, it.asJavaMethodParam)
@@ -1026,7 +1028,7 @@ public class NativeClassFunction(
 
 		// Step 3.C: Prepare APIBuffer parameters.
 
-		var apiBufferSet = hasParam { it has autoSizeResult && returns.nativeType !is StructType }
+		var apiBufferSet = hasParam { it.isAutoSizeResultOut && returns.nativeType !is StructType }
 		if ( apiBufferSet ) {
 			println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
 
@@ -1093,13 +1095,16 @@ public class NativeClassFunction(
 							", ${returns.nativeType.definition.className}.SIZEOF"
 					} else if ( hasParam { it has autoSizeResult } ) {
 						val param = getParam { it has autoSizeResult }
-						builder append
-						if ( param.nativeType.mapping == PointerMapping.DATA_INT )
-							", $API_BUFFER.intValue(${param.name})"
-						else
-							", (int)$API_BUFFER.longValue(${param.name})"
+						builder.append(
+							if ( param.paramType == ParameterType.IN )
+								", ${param.name}"
+							else if ( param.nativeType.mapping == PointerMapping.DATA_INT )
+								", $API_BUFFER.intValue(${param.name})"
+							else
+								", (int)$API_BUFFER.longValue(${param.name})"
+						)
 					} else
-						throw IllegalStateException("No autosizeResult parameter could be found.")
+						throw IllegalStateException("No autoSizeResult parameter could be found.")
 				}
 				builder append ")"
 
