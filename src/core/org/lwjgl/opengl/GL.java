@@ -250,10 +250,9 @@ public final class GL {
 		Set<String> supportedExtensions = new HashSet<>(128);
 
 		for ( int major = 1; major <= GL_VERSIONS.length; major++ ) {
-			int[] minors = GL_VERSIONS[major - 1];
-			for ( int minor : minors ) {
+			for ( int minor : GL_VERSIONS[major - 1] ) {
 				if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
-					supportedExtensions.add("OpenGL" + Integer.toString(major) + Integer.toString(minor));
+					supportedExtensions.add(String.format("OpenGL%d%d", major, minor));
 			}
 		}
 

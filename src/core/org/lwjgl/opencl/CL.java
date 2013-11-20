@@ -215,20 +215,32 @@ public final class CL {
 	}
 
 	/** Must be called after addExtensions. */
-	static void addCLVersions(int majorVersion, int minorVersion, Set<String> supportedExtensions) {
+	static void addCLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions) {
+		addCLVersions(
+			MAJOR, MINOR, supportedExtensions, "",
+			new int[][] {
+				{ 0, 1, 2 },    // 10, 11, 12
+				{ 0 },          // 20
+			}
+		);
+
 		// Detect OpenGL interop
-		boolean interopGL = supportedExtensions.contains("cl_khr_gl_sharing") || supportedExtensions.contains("cl_APPLE_gl_sharing");
+		if ( supportedExtensions.contains("cl_khr_gl_sharing") || supportedExtensions.contains("cl_APPLE_gl_sharing") )
+			addCLVersions(
+				MAJOR, MINOR, supportedExtensions, "GL",
+				new int[][] {
+					{ 0, 2 },    // 10GL, 12GL
+					{ }
+				}
+			);
+	}
 
-		supportedExtensions.add("OpenCL10");
-		if ( interopGL )
-			supportedExtensions.add("OpenCL10GL");
-
-		// Detect post-1.0 functionality
-		if ( 1 < majorVersion || 1 <= minorVersion ) supportedExtensions.add("OpenCL11");
-		if ( 1 < majorVersion || 2 <= minorVersion ) {
-			supportedExtensions.add("OpenCL12");
-			if ( interopGL )
-				supportedExtensions.add("OpenCL12GL");
+	private static void addCLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions, String postfix, int[][] versions) {
+		for ( int major = 1; major <= versions.length; major++ ) {
+			for ( int minor : versions[major - 1] ) {
+				if ( major < MAJOR || (major == MAJOR && minor <= MINOR) )
+					supportedExtensions.add(String.format("OpenCL%d%d%s", major, minor, postfix));
+			}
 		}
 	}
 

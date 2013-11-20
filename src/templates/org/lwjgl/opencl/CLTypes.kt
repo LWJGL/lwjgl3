@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
@@ -111,6 +111,19 @@ val cl_profiling_info = PrimitiveType("cl_profiling_info", cl_uint)
 
 val cl_context_properties_p = PointerType(cl_context_properties)
 
+// OpenCL 2.0
+val cl_command_queue_properties_p = PointerType(cl_command_queue_properties)
+
+val cl_sampler_properties = PrimitiveType("cl_sampler_properties", cl_uint)
+val cl_sampler_properties_p = PointerType(cl_sampler_properties)
+
+val cl_pipe_properties = PrimitiveType("cl_pipe_properties", cl_uint)
+val cl_pipe_properties_p = PointerType(cl_pipe_properties)
+val cl_pipe_info = PrimitiveType("cl_pipe_info", cl_uint)
+
+val cl_kernel_exec_info = PrimitiveType("cl_kernel_exec_info", cl_uint)
+val cl_svm_mem_flags = PrimitiveType("cl_svm_mem_flags", cl_bitfield)
+
 // strings
 
 val cl_charASCII_p = CharSequenceType(name = "cl_char", charMapping = CharMapping.ASCII)
@@ -192,6 +205,7 @@ val cl_program_callback = PointerType(name = "cl_program_callback", includesPoin
 val cl_native_kernel_func = PointerType(name = "cl_native_kernel_func", includesPointer = true)
 val cl_mem_object_destructor_callback = PointerType(name = "cl_mem_object_destructor_callback", includesPointer = true)
 val cl_event_callback = PointerType(name = "cl_event_callback", includesPointer = true)
+val cl_svmfree_callback = PointerType(name = "cl_svmfree_callback", includesPointer = true)
 
 // OpenGL interop
 

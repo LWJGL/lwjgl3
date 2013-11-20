@@ -84,6 +84,13 @@ typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
 
+// OpenCL 2.0
+typedef intptr_t            cl_sampler_properties;
+typedef intptr_t            cl_pipe_properties;
+typedef cl_uint             cl_pipe_info;
+typedef cl_uint             cl_kernel_exec_info;
+typedef cl_bitfield         cl_svm_mem_flags;
+
 typedef struct _cl_image_format {
     cl_channel_order        image_channel_order;
     cl_channel_type         image_channel_data_type;
