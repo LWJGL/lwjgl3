@@ -123,7 +123,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
 		{@code height}, or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
-		${"GL11".link("CopyTexImage2D()")} for more details.
+		${"GL11#CopyTexImage2D()".link} for more details.
 		""",
 		GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
 		GLint.IN("level", "the level-of-detail number"),
@@ -230,7 +230,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	GLvoid.func(
 		"DrawRangeElements",
 		"""
-		A restricted form of ${"GL11".link("DrawElements()")}. mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
+		A restricted form of ${"GL11#DrawElements()".link}. mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
 		constraint that all values in the arrays count must lie between start and end, inclusive.
 
 		Implementations denote recommended maximum amounts of vertex and index data, which may be queried by calling glGet with argument

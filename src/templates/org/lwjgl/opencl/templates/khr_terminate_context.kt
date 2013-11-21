@@ -54,10 +54,10 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 	    When a context is terminated:
 		${ul(
 			"""
-			The execution status of enqueued commands will be ${"TERMINATED_KHR".link}. Event objects can be queried using ${"CL10".link("GetEventInfo()")}. Event
+			The execution status of enqueued commands will be ${"TERMINATED_KHR".link}. Event objects can be queried using ${"CL10#GetEventInfo()".link}. Event
 			callbacks can be registered and registered event callbacks will be called with {@code event_command_exec_status} set to ${"TERMINATED_KHR".link}.
-			${"CL10".link("WaitForEvents()")} will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
-			events can be set. Event objects can be retained and released. ${"CL10".link("GetEventProfilingInfo()")} returns ${"CL10".link("PROFILING_INFO_NOT_AVAILABLE")}.
+			${"CL10#WaitForEvents()".link} will return immediately for commands associated with event objects specified in {@code event_list}. The status of user
+			events can be set. Event objects can be retained and released. ${"CL10#GetEventProfilingInfo()".link} returns ${"CL10#PROFILING_INFO_NOT_AVAILABLE".link}.
 			""",
 			"""
 			The context is considered to be terminated. A callback function registered when the context was created will be called. Only queries, retain and

@@ -51,7 +51,7 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 		texture parameters ${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image
 		object, subsequent use of the CL image object will result in undefined behavior.
 
-		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the image objects.
+		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),

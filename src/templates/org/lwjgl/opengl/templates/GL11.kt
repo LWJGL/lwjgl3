@@ -1291,8 +1291,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer to which fragment color zero is written.
 
-		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is zero), or
-		a framebuffer object (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is zero), or
+		a framebuffer object (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("buf", "the color buffer to draw to", FRAMEBUFFERS)
@@ -2722,8 +2722,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer from which values are obtained.
 
-		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is zero), or
-		a framebuffer object (i.e., ${"GL30".link("DRAW_FRAMEBUFFER_BINDING")} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is zero), or
+		a framebuffer object (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("src", "the color buffer to read from", FRAMEBUFFERS)
@@ -2735,7 +2735,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		ReadPixels obtains values from the selected read buffer from each pixel with lower left hand corner at {@code (x + i, y + j)} for {@code 0 <= i < width}
 		and {@code 0 <= j < height}; this pixel is said to be the i<sup>th</sup> pixel in the j<sup>th</sup> row. If any of these pixels lies outside of the
 		window allocated to the current GL context, or outside of the image attached to the currently bound read framebuffer object, then the values obtained
-		for those pixels are undefined. When ${"GL30".link("READ_FRAMEBUFFER_BINDING")} is zero, values are also undefined for individual pixels that are not owned by
+		for those pixels are undefined. When ${"GL30#READ_FRAMEBUFFER_BINDING".link} is zero, values are also undefined for individual pixels that are not owned by
 		the current context. Otherwise, {@code ReadPixels} obtains values from the selected buffer, regardless of how those values were placed there.
 		""",
 
@@ -2942,7 +2942,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Indicates what happens to the stored stencil value if this or certain subsequent tests fail or pass.
 
 		The supported actions are ${"KEEP".link}, ${"ZERO".link}, ${"REPLACE".link}, ${"INCR".link}, ${"DECR".link}, ${"INVERT".link},
-		${"GL14".link("INCR_WRAP")} and ${"GL14".link("DECR_WRAP")}. These correspond to keeping the current value, setting to zero, replacing with the reference value,
+		${"GL14#INCR_WRAP".link} and ${"GL14#DECR_WRAP".link}. These correspond to keeping the current value, setting to zero, replacing with the reference value,
 		incrementing with saturation, decrementing with saturation, bitwise inverting it, incrementing without saturation, and decrementing without saturation.
 
 		For purposes of increment and decrement, the stencil bits are considered as an unsigned integer. Incrementing or decrementing with saturation clamps
@@ -3216,7 +3216,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		image's width and height, and the lower left (x, y) coordinates of the framebuffer region to be copied.
 
 		The image is taken from the framebuffer exactly as if these arguments were passed to $CopyPixels with argument type set to ${"COLOR".link},
-		${"DEPTH".link}, or ${"GL30".link("DEPTH_STENCIL")}, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
+		${"DEPTH".link}, or ${"GL30#DEPTH_STENCIL".link}, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
 		component and stencil index data are taken from the depth and stencil buffers, respectively.
 
 		Subsequent processing is identical to that described for $TexImage2D, beginning with clamping of the R, G, B, A, or depth values, and masking
@@ -3487,7 +3487,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		The location of the viewport's bottom-left corner, given by {@code (x, y)}, are clamped to be within the implementation-dependent viewport bounds range.
 		The viewport bounds range {@code [min, max]} tuple may be determined by calling ${"GetFloat()".link} with the symbolic
-		constant ${"GL41".link("VIEWPORT_BOUNDS_RANGE")}. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
+		constant ${"GL41#VIEWPORT_BOUNDS_RANGE".link}. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
 		width and height may be found by calling ${"GetFloat()".link} with the symbolic constant ${"MAX_VIEWPORT_DIMS".link}. The
 		maximum viewport dimensions must be greater than or equal to the larger of the visible dimensions of the display being rendered to (if a display
 		exists), and the largest renderbuffer image which can be successfully created and attached to a framebuffer object.

@@ -21,13 +21,13 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension."
 
 	IntConstant.block(
-		"Returned in {@code values} for ${"GL32".link("GetSync()")} {@code pname} ${"GL32".linkGL("OBJECT_TYPE")}.",
+		"Returned in {@code values} for ${"GL32#GetSync()".link} {@code pname} ${"GL32".linkGL("OBJECT_TYPE")}.",
 
 		"SYNC_CL_EVENT_ARB" _ 0x8240
 	)
 
 	IntConstant.block(
-		"Returned in {@code values} for ${"GL32".link("GetSync()")} {@code pname} ${"GL32".linkGL("SYNC_CONDITION")}.",
+		"Returned in {@code values} for ${"GL32#GetSync()".link} {@code pname} ${"GL32".linkGL("SYNC_CONDITION")}.",
 
 		"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
 	)

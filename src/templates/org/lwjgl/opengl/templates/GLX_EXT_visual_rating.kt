@@ -23,7 +23,7 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attrib} parameter of ${"GLX".link("GetConfig()")}, and by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")}:",
+		"Accepted by the {@code attrib} parameter of ${"GLX#GetConfig()".link}, and by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link}:",
 
 		"X_VISUAL_TYPE_EXT" _ 0x22,
 		"TRANSPARENT_TYPE_EXT" _ 0x23,
@@ -36,7 +36,7 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
 		${"X_VISUAL_TYPE_EXT".link} token):
 		""",
 
@@ -50,7 +50,7 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLX".link("GetConfig()")}, and accepted by the {@code attrib_list} parameter of ${"GLX".link("ChooseVisual()")} (following the
+		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
 		${"TRANSPARENT_TYPE_EXT".link} token):
 		""",
 

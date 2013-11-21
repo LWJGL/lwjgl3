@@ -33,7 +33,7 @@ fun intel_device_partition_by_names() = "INTELDevicePartitionByNames".nativeClas
 		"""
 
 	IntConstant.block(
-		"Accepted in the {@code properties} argument of ${"CL12".link("CreateSubDevices()")}.",
+		"Accepted in the {@code properties} argument of ${"CL12#CreateSubDevices()".link}.",
 
 		"DEVICE_PARTITION_BY_NAMES_INTEL" _ 0x4052
 	)

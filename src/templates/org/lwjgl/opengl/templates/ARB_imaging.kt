@@ -532,7 +532,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLboolean.IN(
 			"sink",
 			"""
-			whether pixel groups will be consumed by the histogram operation (${"GL11".link("TRUE")}) or passed on to the minmax operation (${"GL11".link("FALSE")})
+			whether pixel groups will be consumed by the histogram operation (${"GL11#TRUE".link}) or passed on to the minmax operation (${"GL11#FALSE".link})
 			"""
 		)
 	)
@@ -551,7 +551,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLboolean.IN(
 			"reset",
-			"if ${"GL11".link("TRUE")}, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
+			"if ${"GL11#TRUE".link}, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
@@ -584,7 +584,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("internalformat", "the minmax table internal format", IMAGING_INTERNAL_FORMATS),
 		GLboolean.IN(
 			"sink",
-			"whether pixel groups will be consumed by the minmax operation (${"GL11".link("TRUE")}) or passed on to final conversion (${"GL11".link("FALSE")})"
+			"whether pixel groups will be consumed by the minmax operation (${"GL11#TRUE".link}) or passed on to final conversion (${"GL11#FALSE".link})"
 		)
 	)
 
@@ -603,7 +603,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLboolean.IN(
 			"reset",
 			"""
-			If ${"GL11".link("TRUE")}, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
+			If ${"GL11#TRUE".link}, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
 			representable value. All values are reset, whether returned or not.
 			"""
 		),

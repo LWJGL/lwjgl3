@@ -195,7 +195,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		the error handler. For each protocol error received by Xlib, {@code XSync()} calls the client application's error handling routine. Any events generated
 		by the server are enqueued into the library's event queue.
 
-		Finally, if you passed ${"X".link("GrabSuccess()")}, {@code XSync()} does not discard the events in the queue. If you passed ${"X".link("GrabSuccess")}, {@code XSync()} discards
+		Finally, if you passed ${"X#GrabSuccess()".link}, {@code XSync()} does not discard the events in the queue. If you passed ${"X#GrabSuccess".link}, {@code XSync()} discards
 		all events in the queue, including those events that were on the queue before {@code XSync()} was called. Client applications seldom need to call
 		{@code XSync()}.
 		""",
@@ -280,7 +280,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Deletes the association between the {@code colormap} resource ID and the {@code colormap} and frees the {@code colormap} storage. However, this function
 		has no effect on the default colormap for a screen. If the specified {@code colormap} is an installed map for a screen, it is uninstalled. If the
 		specified {@code colormap} is defined as the {@code colormap} for a window, {@code XFreeColormap()} changes the colormap associated with the window to
-		${"X".link("GrabSuccess()")} and generates a {@code ColormapNotify} event. X does not define the colors displayed for a window with a colormap of ${"X".link("GrabSuccess")}.
+		${"X#GrabSuccess()".link} and generates a {@code ColormapNotify} event. X does not define the colors displayed for a window with a colormap of ${"X#GrabSuccess".link}.
 		""",
 
 		DISPLAY,
@@ -332,9 +332,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("width", "the window width"),
 		unsigned_int.IN("height", "the window height"),
 		unsigned_int.IN("border_width", "the border width"),
-		int.IN("depth", "the window's depth. A depth of ${"X".link("GrabSuccess()")} means the depth is taken from the parent."),
+		int.IN("depth", "the window's depth. A depth of ${"X#GrabSuccess()".link} means the depth is taken from the parent."),
 		unsigned_int.IN("windowClass", "the created window's class", "X#InputOutput X#InputOnly X#CopyFromParent"),
-		Visual_p.IN("visual", "the visual type. A visual of ${"X".link("GrabSuccess()")} means the visual type is taken from the parent."),
+		Visual_p.IN("visual", "the visual type. A visual of ${"X#GrabSuccess()".link} means the visual type is taken from the parent."),
 		unsigned_long.IN(
 			"valuemask",
 			"""
@@ -412,7 +412,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XGrabPointer",
 		"""
-		Actively grabs control of the pointer and returns ${"X".link("GrabSuccess()")} if the grab was successful. Further pointer events are reported only to the
+		Actively grabs control of the pointer and returns ${"X#GrabSuccess()".link} if the grab was successful. Further pointer events are reported only to the
 		grabbing client. {@code XGrabPointer} overrides any active pointer grab by this client. If {@code owner_events} is ${"False".link}, all generated pointer
 		events are reported with respect to {@code grab_window} and are reported only if selected by {@code event_mask}. If owner_events is True and if a generated pointer event would normally be
 		reported to this client, it is reported as usual. Otherwise, the event is reported with respect to the grab_window and is reported only if selected by event_mask. For either value of owner_events, unreported events are discarded.
@@ -432,7 +432,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("keyboard_mode", "further processing of keyboard events", "X#GrabModeSync X#GrabModeAsync"),
 		Window.IN("confine_to", "the window to confine the pointer in or $None"),
 		Cursor.IN("cursor", "the cursor that is to be displayed during the grab or $None"),
-		Time.IN("time", "the time. You can pass either a timestamp or ${"X".link("CurrentTime")}")
+		Time.IN("time", "the time. You can pass either a timestamp or ${"X#CurrentTime".link}")
 	)
 
 	int.func(
@@ -446,7 +446,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    """,
 
 		DISPLAY,
-		Time.IN("time", "specifies the time. You can pass either a timestamp or ${"X".link("CurrentTime")}.")
+		Time.IN("time", "specifies the time. You can pass either a timestamp or ${"X#CurrentTime".link}.")
 	)
 
 	int.func(
@@ -508,9 +508,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Identifies the destination window, determines which clients should receive the specified events, and ignores any active grabs. This function requires
 		you to pass an event mask. This function uses the {@code w} argument to identify the destination window as follows:
 		${ul(
-			"If {@code w} is ${"X".link("PointerWindow")}, the destination window is the window that contains the pointer.",
+			"If {@code w} is ${"X#PointerWindow".link}, the destination window is the window that contains the pointer.",
 			"""
-			If {@code w} is ${"X".link("InputFocus")} and if the focus window contains the pointer, the destination window is the window that contains the pointer;
+			If {@code w} is ${"X#InputFocus".link} and if the focus window contains the pointer, the destination window is the window that contains the pointer;
 			otherwise, the destination window is the focus window.
 			"""
 		)}
@@ -525,7 +525,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			"""
 			If propagate is ${"True".link} and no clients have selected on destination any of the event types in event-mask, the destination is replaced with the
 			closest ancestor of destination for which some client has selected a type in event-mask and for which no intervening window has that type in its
-			do-not-propagate-mask. If no such window exists or if the window is an ancestor of the focus window and ${"X".link("InputFocus")} was originally
+			do-not-propagate-mask. If no such window exists or if the window is an ancestor of the focus window and ${"X#InputFocus".link} was originally
 			specified as the destination, the event is not sent to any clients. Otherwise, the event is reported to every client selecting on the final
 			destination any of the types specified in {@code event_mask}.
 			"""
@@ -535,7 +535,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    """,
 
 		DISPLAY,
-		Window.IN("w", "the window the event is to be sent to, or ${"X".link("PointerWindow")}, or ${"X".link("InputFocus")}"),
+		Window.IN("w", "the window the event is to be sent to, or ${"X#PointerWindow".link}, or ${"X#InputFocus".link}"),
 		Bool.IN("propagate", "a Boolean value"),
 		long.IN("event_mask", "the event mask"),
 		XEvent_p.IN("event_send", "the event that is to be sent")
@@ -557,7 +557,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"XSetInputFocus",
 		"""
 	    Changes the input focus and the last-focus-change time. It has no effect if the specified time is earlier than the current last-focus-change time or is
-	    later than the current X server time. Otherwise, the last-focus-change time is set to the specified time (${"X".link("CurrentTime")} is replaced by the
+	    later than the current X server time. Otherwise, the last-focus-change time is set to the specified time (${"X#CurrentTime".link} is replaced by the
 	    current X server time). {@code XSetInputFocus} causes the X server to generate {@code FocusIn} and {@code FocusOut} events.
 
 	    Depending on the focus argument, the following occurs:
@@ -568,17 +568,17 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			inferiors, the event is reported as usual. Otherwise, the event is reported relative to the focus window.
 			""",
 			"""
-			If focus is ${"X".link("PointerRoot")}, the focus window is dynamically taken to be the root window of whatever screen the pointer is on at each keyboard
+			If focus is ${"X#PointerRoot".link}, the focus window is dynamically taken to be the root window of whatever screen the pointer is on at each keyboard
 			event. In this case, the {@code revert_to} argument is ignored. The specified focus window must be viewable at the time {@code XSetInputFocus} is
-			called, or a ${"X".link("BadMatch")} error results. If the focus window later becomes not viewable, the X server evaluates the revert_to argument to
+			called, or a ${"X#BadMatch".link} error results. If the focus window later becomes not viewable, the X server evaluates the revert_to argument to
 			determine the new focus window as follows:
 			""",
 			"""
-			If {@code revert_to} is ${"X".link("RevertToParent")}, the focus reverts to the parent (or the closest viewable ancestor), and the new {@code revert_to}
-			value is taken to be ${"X".link("RevertToNone")}.
+			If {@code revert_to} is ${"X#RevertToParent".link}, the focus reverts to the parent (or the closest viewable ancestor), and the new {@code revert_to}
+			value is taken to be ${"X#RevertToNone".link}.
 			""",
 			"""
-			If {@code revert_to} is ${"X".link("RevertToPointerRoot")} or ${"X".link("RevertToNone")}, the focus reverts to ${"X".link("PointerRoot")} or $None,
+			If {@code revert_to} is ${"X#RevertToPointerRoot".link} or ${"X#RevertToNone".link}, the focus reverts to ${"X#PointerRoot".link} or $None,
 			respectively. When the focus reverts, the X server generates {@code FocusIn} and {@code FocusOut} events, but the last-focus-change time is not
 			affected.
 			"""
@@ -586,9 +586,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	    """,
 
 		DISPLAY,
-		Window.IN("focus", "the window, ${"X".link("PointerRoot")} or $None"),
+		Window.IN("focus", "the window, ${"X#PointerRoot".link} or $None"),
 		int.IN("revert_to", "where the input focus reverts to if the window becomes not viewable", "X#RevertToParent X#RevertToPointerRoot X#RevertToNone"),
-		Time.IN("time", " the time. You can pass either a timestamp or ${"X".link("CurrentTime")}.")
+		Time.IN("time", " the time. You can pass either a timestamp or ${"X#CurrentTime".link}.")
 	)
 
 	int.func(
@@ -648,7 +648,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		long.IN("long_offset", "the offset in the specified property (in 32-bit quantities) where the data is to be retrieved"),
 		long.IN("long_length", "the length in 32-bit multiples of the data to be retrieved"),
 		Bool.IN("delete", "a Boolean value that determines whether the property is deleted"),
-		Atom.IN("req_type", "the atom identifier associated with the property type or ${"X".link("AnyPropertyType")}."),
+		Atom.IN("req_type", "the atom identifier associated with the property type or ${"X#AnyPropertyType".link}."),
 		Atom_p.OUT("actual_type_return", "the atom identifier that defines the actual type of the property"),
 		int_p.OUT("actual_format_return", "the actual format of the property"),
 		unsigned_long_p.OUT("nitems_return", "the actual number of 8-bit, 16-bit, or 32-bit items stored in the {@code prop_return} data"),
@@ -846,7 +846,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"XSetSelectionOwner",
 		"""
 		changes the owner and last-change time for the specified selection and has no effect if the specified time is earlier than the current last-change time
-		of the specified selection or is later than the current X server time. Otherwise, the last-change time is set to the specified time, with ${"X".link("CurrentTime")}
+		of the specified selection or is later than the current X server time. Otherwise, the last-change time is set to the specified time, with ${"X#CurrentTime".link}
 		replaced by the current server time. If the owner window is specified as $None, then the owner of the selection becomes $None (that
 		is, no owner). Otherwise, the owner of the selection becomes the client executing the request.
 
@@ -860,7 +860,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		DISPLAY,
 		Atom.IN("selection", "the selection atom"),
 		Window.IN("owner", "the owner of the specified selection atom. You can pass a window or $None."),
-		Time.IN("time", "the time. You can pass either a timestamp or ${"X".link("CurrentTime")}")
+		Time.IN("time", "the time. You can pass either a timestamp or ${"X#CurrentTime".link}")
 	)
 
 	Window.func(
@@ -883,7 +883,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Atom.IN("target", "the target atom"),
 		Atom.IN("property", "the property name or $None"),
 		Window.IN("requestor", "the requestor window"),
-		Time.IN("time", "the time. You can pass either a timestamp or ${"X".link("CurrentTime")}")
+		Time.IN("time", "the time. You can pass either a timestamp or ${"X#CurrentTime".link}")
 	)
 
 	Bool.func(
@@ -903,9 +903,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	Pixmap.func(
 		"XCreatePixmap",
 		"""
-		Creates a pixmap of the width, height, and depth you specified and returns a pixmap ID that identifies it. It is valid to pass an ${"X".link("InputOnly")}
-		window to the drawable argument. The width and height arguments must be nonzero, or a ${"X".link("BadValue")} error results. The depth argument must be one
-		of the depths supported by the screen of the specified drawable, or a ${"X".link("BadValue")} error results.
+		Creates a pixmap of the width, height, and depth you specified and returns a pixmap ID that identifies it. It is valid to pass an ${"X#InputOnly".link}
+		window to the drawable argument. The width and height arguments must be nonzero, or a ${"X#BadValue".link} error results. The depth argument must be one
+		of the depths supported by the screen of the specified drawable, or a ${"X#BadValue".link} error results.
 		""",
 
 		DISPLAY,
@@ -919,7 +919,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"XCreateGC",
 		"""
 		Creates a graphics context and returns a GC. The GC can be used with any destination drawable having the same root and depth as the specified drawable.
-		Use with other drawables results in a ${"X".link("BadMatch")} error.
+		Use with other drawables results in a ${"X#BadMatch".link} error.
 		""",
 
 		Display_p.IN("display", ""),

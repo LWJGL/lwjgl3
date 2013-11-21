@@ -17,8 +17,8 @@ fun WGL_ARB_framebuffer_sRGB() = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attributes} parameter of ${"WGLARBPixelFormat".link("GetPixelFormatAttribiARB()")} and the {@code attribIList} of
-		${"WGLARBPixelFormat".link("ChoosePixelFormatARB()")}.
+		Accepted by the {@code attributes} parameter of ${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link} and the {@code attribIList} of
+		${"WGLARBPixelFormat#ChoosePixelFormatARB()".link}.
 		""",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9

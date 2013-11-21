@@ -13,7 +13,7 @@ fun amd_device_topology() = "AMDDeviceTopology".nativeClassCL("amd_device_topolo
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} parameter of ${"CL10".link("GetDeviceInfo()")}. Returns a description of the topology used to connect the device to the
+		Accepted as the {@code param_name} parameter of ${"CL10#GetDeviceInfo()".link}. Returns a description of the topology used to connect the device to the
 		host, using the following 32-bytes union of structures:
 		${codeBlock("""
 typedef union

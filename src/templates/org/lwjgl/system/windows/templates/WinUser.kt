@@ -1871,7 +1871,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		BOOL.IN(
 			"show",
 			"""
-			If {@code show} is ${"WinBase".link("TRUE")}, the display count is incremented by one. If {@code show} is ${"WinBase".link("FALSE")}, the display count is
+			If {@code show} is ${"WinBase#TRUE".link}, the display count is incremented by one. If {@code show} is ${"WinBase#FALSE".link}, the display count is
 			decremented by one.
 			"""
 		)

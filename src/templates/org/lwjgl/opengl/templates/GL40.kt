@@ -78,7 +78,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 		"""
 		Renders primitives from array data, taking parameters from memory.
 
-		{@code glDrawArraysIndirect} behaves similarly to ${"GL42".link("DrawArraysInstancedBaseInstance()")}, except that the parameters to
+		{@code glDrawArraysIndirect} behaves similarly to ${"GL42#DrawArraysInstancedBaseInstance()".link}, except that the parameters to
 		glDrawArraysInstancedBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
@@ -109,7 +109,7 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		"""
 		Renders indexed primitives from array data, taking parameters from memory.
 
-		{@code glDrawElementsIndirect} behaves similarly to ${"GL42".link("DrawElementsInstancedBaseVertexBaseInstance()")}, execpt that the parameters to
+		{@code glDrawElementsIndirect} behaves similarly to ${"GL42#DrawElementsInstancedBaseVertexBaseInstance()".link}, execpt that the parameters to
 		glDrawElementsInstancedBaseVertexBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
@@ -143,7 +143,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN(
 			"type",
-			"the type of data in the buffer bound to the ${"GL15".link("ELEMENT_ARRAY_BUFFER")} binding",
+			"the type of data in the buffer bound to the ${"GL15#ELEMENT_ARRAY_BUFFER".link} binding",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		mods(

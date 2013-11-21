@@ -298,18 +298,18 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 	val packedTypes = "#INT_2_10_10_10_REV GL12#UNSIGNED_INT_2_10_10_10_REV"
 	val packedValue = "the packed value"
 
-	val VertexP2ui = (deprecatedGL _ GLvoid.func("VertexP2ui", "Packed component version of ${"GL11".link("Vertex2f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
-	val VertexP3ui = (deprecatedGL _ GLvoid.func("VertexP3ui", "Packed component version of ${"GL11".link("Vertex3f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
-	val VertexP4ui = (deprecatedGL _ GLvoid.func("VertexP4ui", "Packed component version of ${"GL11".link("Vertex4f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
+	val VertexP2ui = (deprecatedGL _ GLvoid.func("VertexP2ui", "Packed component version of ${"GL11#Vertex2f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
+	val VertexP3ui = (deprecatedGL _ GLvoid.func("VertexP3ui", "Packed component version of ${"GL11#Vertex3f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
+	val VertexP4ui = (deprecatedGL _ GLvoid.func("VertexP4ui", "Packed component version of ${"GL11#Vertex4f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("value", "the packed value"))).javaDocLink
 
 	GLvoid.func("VertexP2uiv", "Pointer version of $VertexP2ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
 	GLvoid.func("VertexP3uiv", "Pointer version of $VertexP3ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
 	GLvoid.func("VertexP4uiv", "Pointer version of $VertexP4ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
 
-	val TexCoordP1ui = (deprecatedGL _ GLvoid.func("TexCoordP1ui", "Packed component version of ${"GL11".link("TexCoord1f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
-	val TexCoordP2ui = (deprecatedGL _ GLvoid.func("TexCoordP2ui", "Packed component version of ${"GL11".link("TexCoord2f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
-	val TexCoordP3ui = (deprecatedGL _ GLvoid.func("TexCoordP3ui", "Packed component version of ${"GL11".link("TexCoord3f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
-	val TexCoordP4ui = (deprecatedGL _ GLvoid.func("TexCoordP4ui", "Packed component version of ${"GL11".link("TexCoord4f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
+	val TexCoordP1ui = (deprecatedGL _ GLvoid.func("TexCoordP1ui", "Packed component version of ${"GL11#TexCoord1f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
+	val TexCoordP2ui = (deprecatedGL _ GLvoid.func("TexCoordP2ui", "Packed component version of ${"GL11#TexCoord2f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
+	val TexCoordP3ui = (deprecatedGL _ GLvoid.func("TexCoordP3ui", "Packed component version of ${"GL11#TexCoord3f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
+	val TexCoordP4ui = (deprecatedGL _ GLvoid.func("TexCoordP4ui", "Packed component version of ${"GL11#TexCoord4f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue))).javaDocLink
 
 	GLvoid.func("TexCoordP1uiv", "Pointer version of $TexCoordP1ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 	GLvoid.func("TexCoordP2uiv", "Pointer version of $TexCoordP2ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
@@ -318,36 +318,36 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 
 	val texCoordTex = "the coordinate set to be modified"
 
-	val MultiTexCoordP1ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP1ui", "Packed component version of ${"GL13".link("MultiTexCoord1f()")}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
-	val MultiTexCoordP2ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP2ui", "Packed component version of ${"GL13".link("MultiTexCoord2f()")}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
-	val MultiTexCoordP3ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP3ui", "Packed component version of ${"GL13".link("MultiTexCoord3f()")}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
-	val MultiTexCoordP4ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP4ui", "Packed component version of ${"GL13".link("MultiTexCoord4f()")}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
+	val MultiTexCoordP1ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP1ui", "Packed component version of ${"GL13#MultiTexCoord1f()".link}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
+	val MultiTexCoordP2ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP2ui", "Packed component version of ${"GL13#MultiTexCoord2f()".link}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
+	val MultiTexCoordP3ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP3ui", "Packed component version of ${"GL13#MultiTexCoord3f()".link}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
+	val MultiTexCoordP4ui = (deprecatedGL _ GLvoid.func("MultiTexCoordP4ui", "Packed component version of ${"GL13#MultiTexCoord4f()".link}.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedType), GLuint.IN("coords", packedValue))).javaDocLink
 
 	GLvoid.func("MultiTexCoordP1uiv", "Pointer version of $MultiTexCoordP1ui.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 	GLvoid.func("MultiTexCoordP2uiv", "Pointer version of $MultiTexCoordP2ui.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 	GLvoid.func("MultiTexCoordP3uiv", "Pointer version of $MultiTexCoordP3ui.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 	GLvoid.func("MultiTexCoordP4uiv", "Pointer version of $MultiTexCoordP4ui.", GLenum.IN("texture", texCoordTex), GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 
-	val NormalP3ui = GLvoid.func("NormalP3ui", "Packed component version of ${"GL11".link("Normal3f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue)).javaDocLink
+	val NormalP3ui = GLvoid.func("NormalP3ui", "Packed component version of ${"GL11#Normal3f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("coords", packedValue)).javaDocLink
 
 	GLvoid.func("NormalP3uiv", "Pointer version $NormalP3ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("coords", packedValue))
 
-	val ColorP3ui = GLvoid.func("ColorP3ui", "Packed component version of ${"GL11".link("Color3f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
-	val ColorP4ui = GLvoid.func("ColorP4ui", "Packed component version of ${"GL11".link("Color4f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
+	val ColorP3ui = GLvoid.func("ColorP3ui", "Packed component version of ${"GL11#Color3f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
+	val ColorP4ui = GLvoid.func("ColorP4ui", "Packed component version of ${"GL11#Color4f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
 
 	GLvoid.func("ColorP3uiv", "Pointer version of $ColorP3ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("color", packedValue))
 	GLvoid.func("ColorP4uiv", "Pointer version of $ColorP4ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("color", packedValue))
 
-	val SecondaryColorP3ui = GLvoid.func("SecondaryColorP3ui", "Packed component version of ${"GL14".link("SecondaryColor3f()")}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
+	val SecondaryColorP3ui = GLvoid.func("SecondaryColorP3ui", "Packed component version of ${"GL14#SecondaryColor3f()".link}.", GLenum.IN("type", packedType, packedTypes), GLuint.IN("color", packedValue)).javaDocLink
 	GLvoid.func("SecondaryColorP3uiv", "Pointer version of $SecondaryColorP3ui.", GLenum.IN("type", packedType, packedTypes), mods(Check(1), const) _ GLuint_p.IN("color", packedValue))
 
 	val vertexAttribIndex = "the index of the generic vertex attribute to be modified"
 	val vertexAttribNormalized = "whether values should be normalized or cast directly to floating-point"
 
-	val VertexAttribP1ui = GLvoid.func("VertexAttribP1ui", "Packed component version of ${"GL20".link("VertexAttrib1f()")}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP2ui = GLvoid.func("VertexAttribP2ui", "Packed component version of ${"GL20".link("VertexAttrib2f()")}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP3ui = GLvoid.func("VertexAttribP3ui", "Packed component version of ${"GL20".link("VertexAttrib3f()")}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP4ui = GLvoid.func("VertexAttribP4ui", "Packed component version of ${"GL20".link("VertexAttrib4f()")}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
+	val VertexAttribP1ui = GLvoid.func("VertexAttribP1ui", "Packed component version of ${"GL20#VertexAttrib1f()".link}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
+	val VertexAttribP2ui = GLvoid.func("VertexAttribP2ui", "Packed component version of ${"GL20#VertexAttrib2f()".link}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
+	val VertexAttribP3ui = GLvoid.func("VertexAttribP3ui", "Packed component version of ${"GL20#VertexAttrib3f()".link}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
+	val VertexAttribP4ui = GLvoid.func("VertexAttribP4ui", "Packed component version of ${"GL20#VertexAttrib4f()".link}.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
 
 	GLvoid.func("VertexAttribP1uiv", "Pointer version of $VertexAttribP1ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
 	GLvoid.func("VertexAttribP2uiv", "Pointer version of $VertexAttribP2ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))

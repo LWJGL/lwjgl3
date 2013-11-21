@@ -146,7 +146,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 		On a multiprocessor computer, it should not matter which processor is called. However, you can get different results on different processors due to bugs
 		in the basic input/output system (BIOS) or the hardware abstraction layer (HAL). To specify processor affinity for a thread, use the
-		${"Kernel32".link("SetThreadAffinityMask()")} function.
+		${"Kernel32#SetThreadAffinityMask()".link} function.
 		""",
 
 		LARGE_INTEGER_p.OUT(

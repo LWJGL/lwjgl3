@@ -22,7 +22,7 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 
 	IntConstant.block(
 		"""
-		This enumerated value can be specified as part of the {@code properties} argument passed to ${"CL10".link("CreateContext()")} to allow OpenCL compliant
+		This enumerated value can be specified as part of the {@code properties} argument passed to ${"CL10#CreateContext()".link} to allow OpenCL compliant
 		devices in an existing CGL share group to be used as the devices in the newly created CL context. GL objects that were allocated in the given CGL share
 		group can now be shared between CL and GL.
 		""",

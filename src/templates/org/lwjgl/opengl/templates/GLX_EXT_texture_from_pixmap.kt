@@ -23,7 +23,7 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GLX13".link("GetFBConfigAttrib()")} and the {@code attrib_list} parameter of ${"GLX13".link("ChooseFBConfig()")}:",
+		"Accepted by the {@code attribute} parameter of ${"GLX13#GetFBConfigAttrib()".link} and the {@code attrib_list} parameter of ${"GLX13#ChooseFBConfig()".link}:",
 
 		"BIND_TO_TEXTURE_RGB_EXT" _ 0x20D0,
 		"BIND_TO_TEXTURE_RGBA_EXT" _ 0x20D1,
@@ -33,7 +33,7 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 	)
 
 	IntConstant.block(
-		"Accepted as an attribute in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")}, and by the {@code attribute} parameter of ${"GLX13".link("QueryDrawable()")}:",
+		"Accepted as an attribute in the {@code attrib_list} parameter of ${"GLX13#CreatePixmap()".link}, and by the {@code attribute} parameter of ${"GLX13#QueryDrawable()".link}:",
 
 		"TEXTURE_FORMAT_EXT" _ 0x20D5,
 		"TEXTURE_TARGET_EXT" _ 0x20D6,
@@ -42,8 +42,8 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")} and returned in the {@code value} parameter of
-		${"GLX13".link("QueryDrawable()")} when {@code attribute} is ${"TEXTURE_FORMAT_EXT".link}:
+		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13#CreatePixmap()".link} and returned in the {@code value} parameter of
+		${"GLX13#QueryDrawable()".link} when {@code attribute} is ${"TEXTURE_FORMAT_EXT".link}:
 		""",
 
 		"TEXTURE_FORMAT_NONE_EXT" _ 0x20D8,
@@ -61,8 +61,8 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13".link("CreatePixmap()")} and returned in the {@code value} parameter of
-		${"GLX13".link("QueryDrawable()")} when {@code attribute} is ${"TEXTURE_TARGET_EXT".link}:
+		Accepted as a value in the {@code attrib_list} parameter of ${"GLX13#CreatePixmap()".link} and returned in the {@code value} parameter of
+		${"GLX13#QueryDrawable()".link} when {@code attribute} is ${"TEXTURE_TARGET_EXT".link}:
 		""",
 
 		"TEXTURE_1D_EXT" _ 0x20DB,

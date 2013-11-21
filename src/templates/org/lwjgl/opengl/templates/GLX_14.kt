@@ -32,7 +32,7 @@ fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {
 	    implementation.
 
 		A non-$NULL return value for {@code glXGetProcAddress} does not guarantee that an extension function is actually supported at runtime. The client must
-		also query ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("EXTENSIONS")}) or ${"GLX11".link("QueryExtensionsString()")} to determine if an extension is supported
+		also query ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("EXTENSIONS")}) or ${"GLX11#QueryExtensionsString()".link} to determine if an extension is supported
         by a particular context.
 
 		GL function pointers returned by {@code glXGetProcAddress} are independent of the currently bound context and may be used by any context which
@@ -43,7 +43,7 @@ fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {
 			"All GL and GLX extension functions supported by the implementation (whether those extensions are supported by the current context or not).",
 			"""
 			All core (non-extension) functions in GL and GLX from version 1.0 up to and including the versions of those specifications supported by the
-			implementation, as determined by ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("VERSION")}) and ${"GLX".link("QueryVersion()")} queries.
+			implementation, as determined by ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("VERSION")}) and ${"GLX#QueryVersion()".link} queries.
 			"""
 		)}
 	    """,

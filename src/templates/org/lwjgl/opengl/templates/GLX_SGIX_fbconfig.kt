@@ -35,8 +35,8 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	IntConstant.block(
 		"""
 		Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link},
-		by the {@code attribute} parameter of ${"GLXSGIXPbuffer".link("QueryGLXPbufferSGIX()")} and by the {@code attribute} parameter of
-		${"GLXEXTImportContext".link("QueryContextInfoEXT()")}:
+		by the {@code attribute} parameter of ${"GLXSGIXPbuffer#QueryGLXPbufferSGIX()".link} and by the {@code attribute} parameter of
+		${"GLXEXTImportContext#QueryContextInfoEXT()".link}:
 		""",
 
 		"FBCONFIG_ID_SGIX" _ 0x8013

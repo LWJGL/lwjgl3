@@ -18,15 +18,15 @@ fun GLX_ARB_create_context_robustness() = "GLXARBCreateContextRobustness".native
 
 	IntConstant.block(
 		"""
-		Accepted as a bit in the attribute value for ${"GLXARBCreateContext".link("CONTEXT_FLAGS_ARB")} in the {@code attrib_list} argument to
-		${"GLXARBCreateContext".link("CreateContextAttribsARB()")}:
+		Accepted as a bit in the attribute value for ${"GLXARBCreateContext#CONTEXT_FLAGS_ARB".link} in the {@code attrib_list} argument to
+		${"GLXARBCreateContext#CreateContextAttribsARB()".link}:
 		""",
 
 		"CONTEXT_ROBUST_ACCESS_BIT_ARB" _ 0x00000004
 	)
 
 	IntConstant.block(
-		"Accepted as an attribute name in the {@code attrib_list} argument to ${"GLXARBCreateContext".link("CreateContextAttribsARB()")}:",
+		"Accepted as an attribute name in the {@code attrib_list} argument to ${"GLXARBCreateContext#CreateContextAttribsARB()".link}:",
 
 		"CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB" _ 0x8256
 	)
@@ -34,7 +34,7 @@ fun GLX_ARB_create_context_robustness() = "GLXARBCreateContextRobustness".native
 	IntConstant.block(
 		"""
 		Accepted as an attribute value for ${"CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB".link} in the {@code attrib_list} argument to
-		${"GLXARBCreateContext".link("CreateContextAttribsARB()")}:
+		${"GLXARBCreateContext#CreateContextAttribsARB()".link}:
 		""",
 
 		"NO_RESET_NOTIFICATION_ARB" _ 0x8261,

@@ -19,7 +19,7 @@ fun GLX_EXT_buffer_age() = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age"
 		"""
 
 	IntConstant.block(
-		"Accepted by ${"GLX13".link("QueryDrawable()")}.",
+		"Accepted by ${"GLX13#QueryDrawable()".link}.",
 
 		"BACK_BUFFER_AGE_EXT" _ 0x20F4
 	)

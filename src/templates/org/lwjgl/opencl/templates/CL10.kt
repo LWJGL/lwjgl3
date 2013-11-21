@@ -656,7 +656,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"GetDeviceInfo",
 		"""
 		Returns specific information about an OpenCL device. {@code device} may be a device returned by $GetDeviceIDs or a sub-device created by
-		${"CL12".link("CreateSubDevices()")}. If {@code device} is a sub-device, the specific information for the sub-device will be returned.
+		${"CL12#CreateSubDevices()".link}. If {@code device} is a sub-device, the specific information for the sub-device will be returned.
 		""",
 
 		cl_device_id.IN("device", "the device to query"),
@@ -719,7 +719,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
 		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
 			"devices",
-			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by ${"CL12".link("CreateSubDevices()")} for a platform"
+			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by ${"CL12#CreateSubDevices()".link} for a platform"
 		),
 		mods(
 			Callback("CLContextCallback"),
@@ -1100,8 +1100,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("read"),
 			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadBuffer} is called on buffer which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueReadBuffer} is called on buffer which has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			OORE,
 			OOHME
@@ -1172,8 +1172,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("write"),
 			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with buffer.",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteBuffer} is called on buffer which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueWriteBuffer} is called on buffer which has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			OORE,
 			OOHME
@@ -1301,9 +1301,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			ESEFEIWLE("map"),
 			"${"MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code buffer}.",
 			"""
-			$INVALID_OPERATION if buffer has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")} and
-			${"MAP_READ".link} is set in {@code map_flags} or if {@code buffer} has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")} and ${"MAP_WRITE".link} or ${"CL12".link("MAP_WRITE_INVALIDATE_REGION")} is set in {@code map_flags}.
+			$INVALID_OPERATION if buffer has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or ${"CL12#MEM_HOST_NO_ACCESS".link} and
+			${"MAP_READ".link} is set in {@code map_flags} or if {@code buffer} has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link} and ${"MAP_WRITE".link} or ${"CL12#MAP_WRITE_INVALIDATE_REGION".link} is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -1606,12 +1606,12 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			ESEFEIWLE("read"),
 			OORE,
@@ -1731,12 +1731,12 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueReadImage} is called on image which has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			"""
-			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")}.
+			$INVALID_OPERATION if {@code clEnqueueWriteImage} is called on image which has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link}.
 			""",
 			ESEFEIWLE("write"),
 			OORE,
@@ -2025,7 +2025,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		If the image object is created with ${"MEM_USE_HOST_PTR".link} set in {@code mem_flags}, the following will be true:
 		${ul(
 			"""
-			The {@code host_ptr} specified in ${"CL12".link("CreateImage()")} is guaranteed to contain the latest bits in the region being mapped when the
+			The {@code host_ptr} specified in ${"CL12#CreateImage()".link} is guaranteed to contain the latest bits in the region being mapped when the
 			{@code clEnqueueMapImage} command has completed.
 			""",
 			"The pointer value returned by {@code clEnqueueMapImage} will be derived from the {@code host_ptr} specified when the image object is created."
@@ -2124,9 +2124,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			$FALSE).
 			""",
 			"""
-			$INVALID_OPERATION if {@code image} has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")} and
-			${"MAP_READ".link} is set in {@code map_flags} or if image has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or
-			${"CL12".link("MEM_HOST_NO_ACCESS")} and ${"MAP_WRITE".link} or ${"CL12".link("MAP_WRITE_INVALIDATE_REGION")} is set in {@code map_flags}.
+			$INVALID_OPERATION if {@code image} has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or ${"CL12#MEM_HOST_NO_ACCESS".link} and
+			${"MAP_READ".link} is set in {@code map_flags} or if image has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or
+			${"CL12#MEM_HOST_NO_ACCESS".link} and ${"MAP_WRITE".link} or ${"CL12#MAP_WRITE_INVALIDATE_REGION".link} is set in {@code map_flags}.
 			""",
 			OORE,
 			OOHME
@@ -2170,7 +2170,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 		Increments the {@code memobj} reference count.
 
-		$CreateBuffer, ${"CL11".link("CreateSubBuffer()")} and ${"CL12".link("CreateImage()")} perform an implicit retain.
+		$CreateBuffer, ${"CL11#CreateSubBuffer()".link} and ${"CL12#CreateImage()".link} perform an implicit retain.
 		""",
 
 		cl_mem.IN("memobj", "the memory object to retain"),
@@ -2650,7 +2650,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			"$INVALID_PROGRAM if {@code program} is a not a valid program object.",
 			"""
-			$INVALID_PROGRAM_EXECUTABLE if {@code param_name} is ${"CL12".link("PROGRAM_NUM_KERNELS")} or ${"CL12".link("PROGRAM_KERNEL_NAMES")} and a
+			$INVALID_PROGRAM_EXECUTABLE if {@code param_name} is ${"CL12#PROGRAM_NUM_KERNELS".link} or ${"CL12#PROGRAM_KERNEL_NAMES".link} and a
 			successful program executable has not been built for at least one device in the list of devices associated with {@code program}.
 			""",
 			OORE,
@@ -2700,7 +2700,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		Kernel objects can only be created once you have a program object with a valid program source or binary loaded into the program object and the program
 		executable has been successfully built for one or more devices associated with program. No changes to the program executable are allowed while there are
-		kernel objects associated with a program object. This means that calls to $BuildProgram and ${"CL12".link("CompileProgram()")} return
+		kernel objects associated with a program object. This means that calls to $BuildProgram and ${"CL12#CompileProgram()".link} return
 		$INVALID_OPERATION if there are kernel objects attached to a program object. The OpenCL context associated with program will be the context
 		associated with kernel. The list of devices associated with program are the devices associated with kernel. Devices associated with a program object for
 		which a valid program executable has been built can be used to execute kernels declared in the program object.
@@ -2974,7 +2974,7 @@ kernel void image_filter (
 			and {@code param_value} is not $NULL.
 			""",
 			"""
-			$INVALID_VALUE if {@code param_name} is ${"CL12".link("KERNEL_GLOBAL_WORK_SIZE")} and {@code device} is not a custom device or kernel is
+			$INVALID_VALUE if {@code param_name} is ${"CL12#KERNEL_GLOBAL_WORK_SIZE".link} and {@code device} is not a custom device or kernel is
 			not a built-in kernel.
 			""",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
@@ -3076,7 +3076,7 @@ kernel void image_filter (
 			is greater than the corresponding values specified by ${"DEVICE_MAX_WORK_ITEM_SIZES".link}{@code [0]}, &hellip; ${"DEVICE_MAX_WORK_ITEM_SIZES".link}{@code [work_dim – 1]}.
 			""",
 			"""
-			${"CL11".link("MISALIGNED_SUB_BUFFER_OFFSET")} if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
+			${"CL11#MISALIGNED_SUB_BUFFER_OFFSET".link} if a sub-buffer object is specified as the value for an argument that is a buffer object and the offset
 			specified when the sub-buffer object is created is not aligned to ${"DEVICE_MEM_BASE_ADDR_ALIGN".link} value for device associated with queue.
 			""",
 			"""
@@ -3233,7 +3233,7 @@ kernel void image_filter (
 			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
 			"$INVALID_CONTEXT if events specified in {@code event_list} do not belong to the same context.",
 			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid event objects.",
-			"${"CL11".link("EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST")} if the execution status of any of the events in {@code event_list} is a negative integer value.",
+			"${"CL11#EXEC_STATUS_ERROR_FOR_EVENTS_IN_WAIT_LIST".link} if the execution status of any of the events in {@code event_list} is a negative integer value.",
 			OORE,
 			OOHME
 		)}
@@ -3300,7 +3300,7 @@ kernel void image_filter (
 		The event object is deleted once the reference count becomes zero, the specific command identified by this event has completed (or terminated) and there
 		are no commands in the command-queues of a context that require a wait for this event to complete.
 
-		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by ${"CL11".link("CreateUserEvent()")} that
+		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by ${"CL11#CreateUserEvent()".link} that
 		have not yet been set to status of ${"COMPLETE".link} or an error. If the user event was used in the {@code event_wait_list} argument passed to a
 		clEnqueue*** API or another application host thread is waiting for it in $WaitForEvents, those commands and host threads will continue to wait for the
 		event status to reach ${"COMPLETE".link} or error, even after the user has released the object. Since in this scenario the developer has released his
@@ -3427,8 +3427,8 @@ kernel void image_filter (
 		will be complete after {@code clFlush} returns.
 
 		Any blocking commands queued in a command-queue and $ReleaseCommandQueue perform an implicit flush of the command-queue. These blocking commands are
-		$EnqueueReadBuffer, ${"CL11".link("EnqueueReadBufferRect()")}, $EnqueueReadImage, with {@code blocking_read} set to $TRUE; $EnqueueWriteBuffer,
-		${"CL11".link("EnqueueWriteBufferRect()")}, $EnqueueWriteImage with {@code blocking_write} set to $TRUE; $EnqueueMapBuffer, $EnqueueMapImage with
+		$EnqueueReadBuffer, ${"CL11#EnqueueReadBufferRect()".link}, $EnqueueReadImage, with {@code blocking_read} set to $TRUE; $EnqueueWriteBuffer,
+		${"CL11#EnqueueWriteBufferRect()".link}, $EnqueueWriteImage with {@code blocking_write} set to $TRUE; $EnqueueMapBuffer, $EnqueueMapImage with
 		{@code blocking_map} set to $TRUE; or $WaitForEvents.
 
 		To use event objects that refer to commands enqueued in a command-queue as event objects to wait on by commands enqueued in a different command-queue,

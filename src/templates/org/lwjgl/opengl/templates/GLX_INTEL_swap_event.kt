@@ -19,7 +19,7 @@ fun GLX_INTEL_swap_event() = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code mask} parameter of ${"GLX13".link("SelectEvent()")} and returned in the {@code mask} parameter of ${"GLX13".link("GetSelectedEvent()")}:",
+		"Accepted by the {@code mask} parameter of ${"GLX13#SelectEvent()".link} and returned in the {@code mask} parameter of ${"GLX13#GetSelectedEvent()".link}:",
 
 		"BUFFER_SWAP_COMPLETE_INTEL_MASK" _ 0x04000000
 	)

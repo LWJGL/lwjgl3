@@ -19,7 +19,7 @@ fun WGL_ARB_robustness_share_group_isolation() = "WGLARBRobustnessShareGroupIsol
 	IntConstant.block(
 		"""
 		Accepted as a bit in the attribute value for {@link WGLARBCreateContext#WGL_CONTEXT_FLAGS_ARB} in the {@code attribList} argument to
-		${"WGLARBCreateContext".link("CreateContextAttribsARB()")}.
+		${"WGLARBCreateContext#CreateContextAttribsARB()".link}.
 		""",
 
 		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008

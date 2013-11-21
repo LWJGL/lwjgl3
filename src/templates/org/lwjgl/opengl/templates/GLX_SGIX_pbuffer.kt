@@ -22,7 +22,7 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GLXSGIXFBConfig".link("GetFBConfigAttribSGIX()")}:",
+		"Accepted by the {@code attribute} parameter of ${"GLXSGIXFBConfig#GetFBConfigAttribSGIX()".link}:",
 
 		"MAX_PBUFFER_WIDTH_SGIX" _ 0x8016,
 		"MAX_PBUFFER_HEIGHT_SGIX" _ 0x8017,
@@ -33,9 +33,9 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLXSGIXFBConfig".link("GetFBConfigAttribSGIX()")} (when {@code attribute} is set to ${"GLXSGIXFBConfig".link("DRAWABLE_TYPE_SGIX")}) and
-		accepted by the {@code attrib_list} parameter of ${"GLXSGIXFBConfig".link("ChooseFBConfigSGIX()")} (following the
-		${"GLXSGIXFBConfig".link("DRAWABLE_TYPE_SGIX")} token):
+		Returned by ${"GLXSGIXFBConfig#GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX".link}) and
+		accepted by the {@code attrib_list} parameter of ${"GLXSGIXFBConfig#ChooseFBConfigSGIX()".link} (following the
+		${"GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX".link} token):
 		""",
 
 		"PBUFFER_BIT_SGIX" _ 0x00000004

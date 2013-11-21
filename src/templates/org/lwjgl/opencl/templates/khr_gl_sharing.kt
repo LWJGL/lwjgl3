@@ -16,7 +16,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 	IntConstant.block(
 		"""
-		Returned by ${"CL10".link("CreateContext()")}, ${"CL10".link("CreateContextFromType()")}, and ${"GetGLContextInfoKHR()".link} when an invalid OpenGL context or
+		Returned by ${"CL10#CreateContext()".link}, ${"CL10#CreateContextFromType()".link}, and ${"GetGLContextInfoKHR()".link} when an invalid OpenGL context or
 		share group object handle is specified in {@code properties}.
 		""",
 
@@ -45,7 +45,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 
 	IntConstant.block(
-		"Accepted as an attribute name in the {@code properties} argument of ${"CL10".link("CreateContext()")} and ${"CL10".link("CreateContextFromType()")}.",
+		"Accepted as an attribute name in the {@code properties} argument of ${"CL10#CreateContext()".link} and ${"CL10#CreateContextFromType()".link}.",
 
 		"GL_CONTEXT_KHR" _ 0x2008,
 		"EGL_DISPLAY_KHR" _ 0x2009,
@@ -70,10 +70,10 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		mods(Check(5), const) _ cl_context_properties_p.IN(
 			"properties",
 			"""
-			points to an attribute list whose format and valid contents are identical to the {code properties} argument of ${"CL10".link("CreateContext()")}.
+			points to an attribute list whose format and valid contents are identical to the {code properties} argument of ${"CL10#CreateContext()".link}.
 			{@code properties} must identify a single valid GL context or GL share group object.
 
-			<strong>LWJGL note</strong>: The ${"CL10".link("CONTEXT_PLATFORM")} property must be present.
+			<strong>LWJGL note</strong>: The ${"CL10#CONTEXT_PLATFORM".link} property must be present.
 			"""
 		),
 		cl_gl_context_info.IN(
@@ -129,8 +129,8 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		Returns $INVALID_VALUE if an invalid attribute name is specified in {@code properties}.
 
 		Additionally, returns $INVALID_VALUE if {@code param_name} is invalid, or if the size in bytes specified by {@code param_value_size} is
-		less than the size of the return type and {@code param_value} is not a $NULL value, ${"CL10".link("OUT_OF_RESOURCES")} if there is a failure to allocate
-		resources required by the OpenCL implementation on the device, or ${"CL10".link("OUT_OF_HOST_MEMORY")} if there is a failure to allocate resources required by
+		less than the size of the return type and {@code param_value} is not a $NULL value, ${"CL10#OUT_OF_RESOURCES".link} if there is a failure to allocate
+		resources required by the OpenCL implementation on the device, or ${"CL10#OUT_OF_HOST_MEMORY".link} if there is a failure to allocate resources required by
 		the OpenCL implementation on the host.
 	    """
 	)

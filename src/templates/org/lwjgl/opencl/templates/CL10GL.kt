@@ -93,7 +93,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		{@code clCreateFromGLBuffer}. If the state of a GL buffer object is modified through the GL API (e.g. ${"GL15".linkGL("BufferData()")}) while there exists a
 		corresponding CL buffer object, subsequent use of the CL buffer object will result in undefined behavior.
 
-		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the buffer object.
+		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the buffer object.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -137,7 +137,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image object, subsequent use
 		of the CL image object will result in undefined behavior.
 
-		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the image objects.
+		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -205,7 +205,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image object, subsequent use
 		of the CL image object will result in undefined behavior.
 
-		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the image objects.
+		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -269,7 +269,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		renderbuffer using appropriate GL API calls such as ${"GL30".linkGL("RenderbufferStorage()")}) while there exists a corresponding CL image object, subsequent
 		use of the CL image object will result in undefined behavior.
 
-		The ${"CL10".link("RetainMemObject()")} and ${"CL10".link("ReleaseMemObject()")} functions can be used to retain and release the image objects.
+		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -420,7 +420,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		After calling {@code clEnqueueReleaseGLObjects}, the application is responsible for ensuring that any pending OpenCL operations which access the objects
 		specified in {@code mem_objects} have completed prior to executing subsequent GL commands which reference these objects. This may be accomplished
-		portably by calling ${"CL10".link("WaitForEvents()")} with the event object returned by {@code clEnqueueReleaseGLObjects}, or by calling ${"CL10".link("Finish()")}.
+		portably by calling ${"CL10#WaitForEvents()".link} with the event object returned by {@code clEnqueueReleaseGLObjects}, or by calling ${"CL10#Finish()".link}.
 		Some implementations may offer more efficient methods.
 		""",
 

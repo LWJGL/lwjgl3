@@ -18,8 +18,8 @@ fun WGL_EXT_pixel_format_packed_float() = "WGLEXTPixelFormatPackedFloat".nativeC
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attribIList} parameter array of ${"WGLARBPixelFormat".link("ChoosePixelFormatARB()")}, and returned in the {@code values}
-		parameter array of ${"WGLARBPixelFormat".link("GetPixelFormatAttribiARB()")}.
+		Accepted as a value in the {@code attribIList} parameter array of ${"WGLARBPixelFormat#ChoosePixelFormatARB()".link}, and returned in the {@code values}
+		parameter array of ${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link}.
 		""",
 
 		"TYPE_RGBA_UNSIGNED_FLOAT_EXT" _ 0x20A8

@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-val None = "X".link("None")
+val None = "X#None".link
 
 fun X() = "X".nativeClass(LINUX_PACKAGE) {
 
@@ -280,14 +280,14 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"For ${"Xlib".link("XCreateColormap()")}.",
+		"For ${"Xlib#XCreateColormap()".link}.",
 
 		"AllocNone" _ 0,
 		"AllocAll" _ 1
 	)
 
 	IntConstant.block(
-		"Used in ${"Xlib".link("XSetInputFocus()")}, ${"Xlib".link("XGetInputFocus()")}.",
+		"Used in ${"Xlib#XSetInputFocus()".link}, ${"Xlib#XGetInputFocus()".link}.",
 
 		"RevertToNone".expr<Int>("None"),
 		"RevertToPointerRoot".expr<Int>("PointerRoot"),
@@ -295,7 +295,7 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Window classes used by ${"Xlib".link("XCreateWindow()")}.",
+		"Window classes used by ${"Xlib#XCreateWindow()".link}.",
 
 		"InputOutput" _ 1,
 		"InputOnly" _ 2

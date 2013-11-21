@@ -122,12 +122,12 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			"""
 			a bit-field that is used to specify allocation and usage information about the sub-buffer memory object being created.
 
-			If the ${"CL10".link("MEM_READ_WRITE")}, ${"CL10".link("MEM_READ_ONLY")} or ${"CL10".link("MEM_WRITE_ONLY")} values are not specified in flags, they are
-			inherited from the corresponding memory access qualifers associated with buffer. The ${"CL10".link("MEM_USE_HOST_PTR")}, ${"CL10".link("MEM_ALLOC_HOST_PTR")}
-			and ${"CL10".link("MEM_COPY_HOST_PTR")} values cannot be specified in flags but are inherited from the corresponding memory access qualifiers
-			associated with buffer. If ${"CL10".link("MEM_COPY_HOST_PTR")} is specified in the memory access qualifier values associated with buffer it does not
-			imply any additional copies when the sub-buffer is created from buffer. If the ${"CL12".link("MEM_HOST_WRITE_ONLY")}, ${"CL12".link("MEM_HOST_READ_ONLY")}
-			or ${"CL12".link("MEM_HOST_NO_ACCESS")} values are not specified in flags, they are inherited from the corresponding memory access qualifiers
+			If the ${"CL10#MEM_READ_WRITE".link}, ${"CL10#MEM_READ_ONLY".link} or ${"CL10#MEM_WRITE_ONLY".link} values are not specified in flags, they are
+			inherited from the corresponding memory access qualifers associated with buffer. The ${"CL10#MEM_USE_HOST_PTR".link}, ${"CL10#MEM_ALLOC_HOST_PTR".link}
+			and ${"CL10#MEM_COPY_HOST_PTR".link} values cannot be specified in flags but are inherited from the corresponding memory access qualifiers
+			associated with buffer. If ${"CL10#MEM_COPY_HOST_PTR".link} is specified in the memory access qualifier values associated with buffer it does not
+			imply any additional copies when the sub-buffer is created from buffer. If the ${"CL12#MEM_HOST_WRITE_ONLY".link}, ${"CL12#MEM_HOST_READ_ONLY".link}
+			or ${"CL12#MEM_HOST_NO_ACCESS".link} values are not specified in flags, they are inherited from the corresponding memory access qualifiers
 			associated with buffer.
 			"""
 		),
@@ -153,15 +153,15 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 	    ${ul(
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object or is a sub-buffer object.",
 			"""
-			$INVALID_VALUE if {@code buffer} was created with ${"CL10".link("MEM_WRITE_ONLY")} and {@code flags} specifies ${"CL10".link("MEM_READ_WRITE")}
-			or ${"CL10".link("MEM_READ_ONLY")}, or if {@code buffer} was created with ${"CL10".link("MEM_READ_ONLY")} and {@code flags} specifies
-			${"CL10".link("MEM_READ_WRITE")} or ${"CL10".link("MEM_WRITE_ONLY")}, or if {@code flags} specifies ${"CL10".link("MEM_USE_HOST_PTR")} or
-			${"CL10".link("MEM_ALLOC_HOST_PTR")} or ${"CL10".link("MEM_COPY_HOST_PTR")}.
+			$INVALID_VALUE if {@code buffer} was created with ${"CL10#MEM_WRITE_ONLY".link} and {@code flags} specifies ${"CL10#MEM_READ_WRITE".link}
+			or ${"CL10#MEM_READ_ONLY".link}, or if {@code buffer} was created with ${"CL10#MEM_READ_ONLY".link} and {@code flags} specifies
+			${"CL10#MEM_READ_WRITE".link} or ${"CL10#MEM_WRITE_ONLY".link}, or if {@code flags} specifies ${"CL10#MEM_USE_HOST_PTR".link} or
+			${"CL10#MEM_ALLOC_HOST_PTR".link} or ${"CL10#MEM_COPY_HOST_PTR".link}.
 			""",
 			"""
-			$INVALID_VALUE if {@code buffer} was created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} and {@code flags} specify ${"CL12".link("MEM_HOST_READ_ONLY")},
-			or if {@code buffer} was created with ${"CL12".link("MEM_HOST_READ_ONLY")} and {@code flags} specify ${"CL12".link("MEM_HOST_WRITE_ONLY")}, or if
-			{@code buffer} was created with ${"CL12".link("MEM_HOST_NO_ACCESS")} and {@code flags} specify ${"CL12".link("MEM_HOST_READ_ONLY")} or ${"CL12".link("MEM_HOST_WRITE_ONLY")}.
+			$INVALID_VALUE if {@code buffer} was created with ${"CL12#MEM_HOST_WRITE_ONLY".link} and {@code flags} specify ${"CL12#MEM_HOST_READ_ONLY".link},
+			or if {@code buffer} was created with ${"CL12#MEM_HOST_READ_ONLY".link} and {@code flags} specify ${"CL12#MEM_HOST_WRITE_ONLY".link}, or if
+			{@code buffer} was created with ${"CL12#MEM_HOST_NO_ACCESS".link} and {@code flags} specify ${"CL12#MEM_HOST_READ_ONLY".link} or ${"CL12#MEM_HOST_WRITE_ONLY".link}.
 			""",
 			"$INVALID_VALUE if value specified in {@code buffer_create_type} is not valid.",
 			"""
@@ -169,7 +169,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			{@code buffer_create_info} is $NULL.
 			""",
 			"$INVALID_BUFFER_SIZE if {@code size} is 0.",
-			"${"CL10".link("MEM_OBJECT_ALLOCATION_FAILURE")} if there is a failure to allocate memory for sub-buffer object.",
+			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for sub-buffer object.",
 			OORE,
 			OOHME
 		)}
@@ -273,7 +273,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		Calling {@code clEnqueueReadBufferRect} to read a region of the buffer object with the {@code ptr} argument value set to {@code host_ptr} and
 		{@code host_origin}, {@code buffer_origin} values are the same, where {@code host_ptr} is a pointer to the memory region specified when the buffer
-		object being read is created with ${"CL10".link("MEM_USE_HOST_PTR")}, must meet the following requirements in order to avoid undefined behavior:
+		object being read is created with ${"CL10#MEM_USE_HOST_PTR".link}, must meet the following requirements in order to avoid undefined behavior:
 		${ul(
 			"""
 			All commands that use this buffer object or a memory object (buffer or image) created from this buffer object have finished execution before the
@@ -337,8 +337,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			IEWLE,
 			MSBOE("buffer"),
 			ESEFEIWLE("read"),
-			"${"CL10".link("MEM_OBJECT_ALLOCATION_FAILURE")} if there is a failure to allocate memory for data store associated with {@code buffer}.",
-			"$INVALID_OPERATION if {@code clEnqueueReadBufferRect} is called on buffer which has been created with ${"CL12".link("MEM_HOST_WRITE_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")}.",
+			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"$INVALID_OPERATION if {@code clEnqueueReadBufferRect} is called on buffer which has been created with ${"CL12#MEM_HOST_WRITE_ONLY".link} or ${"CL12#MEM_HOST_NO_ACCESS".link}.",
 			OORE,
 			OOHME
 		)}
@@ -352,7 +352,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		Calling {@code clEnqueueWriteBufferRect} to update the latest bits in a region of the buffer object with the {@code ptr} argument value set to
 		{@code host_ptr} and {@code host_origin}, {@code buffer_origin} values are the same, where {@code host_ptr} is a pointer to the memory region specified
-		when the buffer object being written is created with ${"CL10".link("MEM_USE_HOST_PTR")}, must meet the following requirements in order to avoid undefined
+		when the buffer object being written is created with ${"CL10#MEM_USE_HOST_PTR".link}, must meet the following requirements in order to avoid undefined
 		behavior:
 		${ul(
 			"The host memory region given by {@code (buffer_origin region)} contains the latest bits when the enqueued write command begins execution.",
@@ -415,8 +415,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			IEWLE,
 			MSBOE("buffer"),
 			ESEFEIWLE("write"),
-			"${"CL10".link("MEM_OBJECT_ALLOCATION_FAILURE")} if there is a failure to allocate memory for data store associated with {@code buffer}.",
-			"$INVALID_OPERATION if {@code clEnqueueWriteBufferRect} is called on buffer which has been created with ${"CL12".link("MEM_HOST_READ_ONLY")} or ${"CL12".link("MEM_HOST_NO_ACCESS")}.",
+			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"$INVALID_OPERATION if {@code clEnqueueWriteBufferRect} is called on buffer which has been created with ${"CL12#MEM_HOST_READ_ONLY".link} or ${"CL12#MEM_HOST_NO_ACCESS".link}.",
 			OORE,
 			OOHME
 		)}
@@ -529,12 +529,12 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			""",
 			IEWLE,
 			"""
-			${"CL10".link("MEM_COPY_OVERLAP")} if {@code src_buffer} and {@code dst_buffer} are the same buffer or subbuffer object and the source and destination
+			${"CL10#MEM_COPY_OVERLAP".link} if {@code src_buffer} and {@code dst_buffer} are the same buffer or subbuffer object and the source and destination
 			regions overlap or if {@code src_buffer} and {@code dst_buffer} are different sub-buffers of the same associated buffer object and they overlap.
 			""",
 			MSBOE("src_buffer"),
 			MSBOE("dst_buffer"),
-			"${"CL10".link("MEM_OBJECT_ALLOCATION_FAILURE")} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
+			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code src_buffer} or {@code dst_buffer}.",
 			OORE,
 			OOHME
 		)}
@@ -547,7 +547,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		Creates a user event object. User events allow applications to enqueue commands that wait on a user event to finish before the command is executed by
 		the device.
 
-		The execution status of the user event object created is set to ${"CL10".link("SUBMITTED")}.
+		The execution status of the user event object created is set to ${"CL10#SUBMITTED".link}.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context"),
@@ -574,7 +574,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		that the status of these user events being waited on are set using {@code clSetUserEventStatus} before any OpenCL APIs that release OpenCL objects
 		except for event objects are called; otherwise the behavior is undefined.
 
-		For example, the following code sequence will result in undefined behavior of ${"CL10".link("ReleaseMemObject()")}.
+		For example, the following code sequence will result in undefined behavior of ${"CL10#ReleaseMemObject()".link}.
 		${codeBlock("""
 ev1 = clCreateUserEvent(ctx, NULL);
 clEnqueueWriteBuffer(cq, buf1, CL_FALSE, ..., 1, &ev1, NULL);
@@ -596,7 +596,7 @@ clReleaseMemObject(buf2);
 		cl_int.IN(
 			"execution_status",
 			"""
-			the new execution status to be set and can be ${"CL10".link("COMPLETE")} or a negative integer value to indicate an error. A negative integer value
+			the new execution status to be set and can be ${"CL10#COMPLETE".link} or a negative integer value to indicate an error. A negative integer value
 			causes all enqueued commands that wait on this user event to be terminated. {@code clSetUserEventStatus} can only be called once to change the
 			execution status of event.
 			"""
@@ -607,7 +607,7 @@ clReleaseMemObject(buf2);
 	    $SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
 	    ${ul(
 			"$INVALID_EVENT if {@code event} is not a valid user event object.",
-			"$INVALID_VALUE if the {@code execution_status} is not ${"CL10".link("COMPLETE")} or a negative integer value.",
+			"$INVALID_VALUE if the {@code execution_status} is not ${"CL10#COMPLETE".link} or a negative integer value.",
 			"$INVALID_OPERATION if the {@code execution_status} for event has already been changed by a previous call to {@code clSetUserEventStatus}.",
 			OORE,
 			OOHME
@@ -633,18 +633,18 @@ clReleaseMemObject(buf2);
 		return promptly. The behavior of calling expensive system routines, OpenCL API calls to create contexts or command-queues, or blocking OpenCL operations
 		from the following list below, in a callback is undefined.
 		${ul(
-			"${"CL10".link("Finish()")},",
-			"${"CL10".link("WaitForEvents()")},",
-			"blocking calls to ${"CL10".link("EnqueueReadBuffer()")}, ${"EnqueueReadBufferRect()".link}, ${"CL10".link("EnqueueWriteBuffer()")}, ${"EnqueueWriteBufferRect()".link},",
-			"blocking calls to ${"CL10".link("EnqueueReadImage()")} and ${"CL10".link("EnqueueWriteImage()")},",
-			"blocking calls to ${"CL10".link("EnqueueMapBuffer()")} and ${"CL10".link("EnqueueMapImage()")},",
-			"blocking calls to ${"CL10".link("BuildProgram()")}, ${"CL12".link("CompileProgram()")} or ${"CL12".link("LinkProgram()")}"
+			"${"CL10#Finish()".link},",
+			"${"CL10#WaitForEvents()".link},",
+			"blocking calls to ${"CL10#EnqueueReadBuffer()".link}, ${"EnqueueReadBufferRect()".link}, ${"CL10#EnqueueWriteBuffer()".link}, ${"EnqueueWriteBufferRect()".link},",
+			"blocking calls to ${"CL10#EnqueueReadImage()".link} and ${"CL10#EnqueueWriteImage()".link},",
+			"blocking calls to ${"CL10#EnqueueMapBuffer()".link} and ${"CL10#EnqueueMapImage()".link},",
+			"blocking calls to ${"CL10#BuildProgram()".link}, ${"CL12#CompileProgram()".link} or ${"CL12#LinkProgram()".link}"
 		)}
 		If an application needs to wait for completion of a routine from the above list in a callback, please use the non-blocking form of the function, and
 		assign a completion callback to it to do the remainder of your work. Note that when a callback (or other code) enqueues commands to a command-queue, the
 		commands are not required to begin execution until the queue is flushed. In standard usage, blocking enqueue calls serve this role by implicitly
 		flushing the queue. Since blocking calls are not permitted in callbacks, those callbacks that enqueue commands on a command queue should either call
-		${"CL10".link("Flush()")} on the queue before returning or arrange for ${"CL10".link("Flush()")} to be called later on another thread.
+		${"CL10#Flush()".link} on the queue before returning or arrange for ${"CL10#Flush()".link} to be called later on another thread.
 		""",
 
 		cl_event.IN("event", "a valid event object"),
@@ -653,9 +653,9 @@ clReleaseMemObject(buf2);
 			"""
 			the command execution status for which the callback is registered. There is no guarantee that the callback functions registered for various
 			execution status values for an event will be called in the exact order that the execution status of a command changes. Furthermore, it should be
-			noted that receiving a call back for an event with a status other than ${"CL10".link("COMPLETE")}, in no way implies that the memory model or
+			noted that receiving a call back for an event with a status other than ${"CL10#COMPLETE".link}, in no way implies that the memory model or
 			execution model as defined by the OpenCL specification has changed. For example, it is not valid to assume that a corresponding memory transfer has
-			completed unless the event is in a state ${"CL10".link("COMPLETE")}.
+			completed unless the event is in a state ${"CL10#COMPLETE".link}.
 			""",
 			"CL10#SUBMITTED CL10#RUNNING CL10#COMPLETE"
 		),
@@ -677,10 +677,10 @@ clReleaseMemObject(buf2);
 	    ${ul(
 			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			"""
-			$INVALID_VALUE if {@code pfn_event_notify} is $NULL or if {@code command_exec_callback_type} is not ${"CL10".link("SUBMITTED")},
-			${"CL10".link("RUNNING")} or ${"CL10".link("COMPLETE")}.
+			$INVALID_VALUE if {@code pfn_event_notify} is $NULL or if {@code command_exec_callback_type} is not ${"CL10#SUBMITTED".link},
+			${"CL10#RUNNING".link} or ${"CL10#COMPLETE".link}.
 			""",
-			"$INVALID_VALUE if {@code event} is a user event object and {@code command_exec_callback_type} is not ${"CL10".link("COMPLETE")}.",
+			"$INVALID_VALUE if {@code event} is a user event object and {@code command_exec_callback_type} is not ${"CL10#COMPLETE".link}.",
 			OORE,
 			OOHME
 		)}

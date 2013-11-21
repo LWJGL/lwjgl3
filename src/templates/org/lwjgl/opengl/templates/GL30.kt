@@ -381,7 +381,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"ClampColor",
-		"Specifies whether data read via ${"GL11".link("ReadPixels()")} should be clamped.",
+		"Specifies whether data read via ${"GL11#ReadPixels()".link} should be clamped.",
 
 		GLenum.IN("target", "target for color clamping", "#CLAMP_READ_COLOR"),
 		GLenum.IN("clamp", "whether to apply color clamping", "GL11#TRUE GL11#FALSE")
