@@ -19,8 +19,8 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 
 		This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
 
-        These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
-        Thus the list of attributes can be easily extended.
+		These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
+		Thus the list of attributes can be easily extended.
 		"""
 
 	val WGL_ATTRIBUTES = IntConstant.block(

@@ -113,9 +113,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    a valid non-zero OpenCL buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero OpenCL buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
 			"""
@@ -125,7 +125,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
@@ -150,9 +150,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
 			"""
-		    GL11#GL_TEXTURE_2D GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
-		    GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL31#GL_TEXTURE_RECTANGLE
-		    """.toConstantLinks()
+			GL11#GL_TEXTURE_2D GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+			GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL31#GL_TEXTURE_RECTANGLE
+			""".toConstantLinks()
 		),
 		GLint.IN("miplevel", "the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0."),
 		GLuint.IN(
@@ -168,9 +168,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
 			"""
 			$INVALID_VALUE if values specified in {@code flags} are not valid or if value specified in {@code texture_target} is not one of the
@@ -193,7 +193,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
@@ -232,7 +232,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
 		with one of the following error values returned in $errcode_ret:
 		 ${ul(
 			"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
@@ -257,7 +257,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
@@ -290,9 +290,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero OpenCL image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			"$INVALID_CONTEXT if {@code context} is not a valid context or was not created from a GL context.",
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
 			"$INVALID_GL_OBJECT if {@code renderbuffer} is not a GL renderbuffer object or if the width or height of {@code renderbuffer} is zero.",
@@ -301,7 +301,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -321,14 +321,14 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the call was executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the call was executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid OpenCL memory object.",
 			"$INVALID_GL_OBJECT if there is no GL object associated with {@code memobj}.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -350,8 +350,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid OpenCL memory object.",
 			"$INVALID_GL_OBJECT if there is no GL texture object associated with {@code memobj}.",
 			"""
@@ -361,7 +361,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -394,9 +394,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
-	    $SUCCESS. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
+		$SUCCESS. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a $NULL value or if {@code num_objects} &gt; 0 and
 			{@code mem_objects} is $NULL.
@@ -409,7 +409,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -433,9 +433,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
-	    $SUCCESS. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. If {@code num_objects} is 0 and {@code mem_objects} is $NULL the function does nothing and returns
+		$SUCCESS. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code num_objects} is zero and {@code mem_objects} is not a $NULL value or if {@code num_objects} &gt; 0 and
 			{@code mem_objects} is $NULL.
@@ -448,7 +448,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 }

@@ -40,7 +40,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			"""
 			a list of properties for the command-queue and their corresponding values. Each property name is immediately followed by the corresponding desired
 			value. The list is terminated with {@code 0}. If a supported property and its value is not specified in properties, its default value will be used.
-            {@code properties} can be $NULL in which case the default values for supported command-queue properties will be used.
+			{@code properties} can be $NULL in which case the default values for supported command-queue properties will be used.
 			""",
 			"CL10#QUEUE_PROPERTIES #QUEUE_SIZE"
 		),
@@ -48,8 +48,8 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 
 		returnDoc =
 		"""
-	    a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
+		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_DEVICE if {@code device} is not a valid device or is not associated with {@code context}.",
@@ -58,7 +58,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
@@ -86,8 +86,8 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 
 		returnDoc =
 		"""
-	    a valid non-zero pipe object and $errcode_ret is set to $SUCCESS if the pipe object is created successfully. Otherwise, it returns a $NULL value with
-	    one of the following error values returned in $errcode_ret:
+		a valid non-zero pipe object and $errcode_ret is set to $SUCCESS if the pipe object is created successfully. Otherwise, it returns a $NULL value with
+		one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are invalid.",
@@ -98,9 +98,9 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			""",
 			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for the pipe object.",
 			OORE,
-            OOHME
+			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -111,14 +111,14 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		cl_pipe_info.IN("param_name", "the information to query"),
 		PARAM_VALUE_SIZE,
 		mods(
-            MultiType(PointerMapping.DATA_INT),
-            nullable
-        ) _ cl_void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_INT),
+			nullable
+		) _ cl_void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type and
@@ -126,9 +126,9 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			""",
 			"$INVALID_MEM_OBJECT if {@code pipe} is not a valid pipe object.",
 			OORE,
-            OOHME
+			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val SVMAlloc = void_p.func(
@@ -144,19 +144,19 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		rely on OpenCL's guaranteed memory consistency at synchronization points. To initialize a buffer to be shared with a kernel, the host can create the
 		buffer and use the resulting virtual memory pointer to initialize the buffer's contents.
 
-        For SVM to be used efficiently, the host and any devices sharing a buffer containing virtual memory pointers should have the same endianness. If the
-        context passed to {@code SVMAlloc} has devices with mixed endianness and the OpenCL implementation is unable to implement SVM because of that mixed
-        endianness, {@code SVMAlloc} will fail and return $NULL.
+		For SVM to be used efficiently, the host and any devices sharing a buffer containing virtual memory pointers should have the same endianness. If the
+		context passed to {@code SVMAlloc} has devices with mixed endianness and the OpenCL implementation is unable to implement SVM because of that mixed
+		endianness, {@code SVMAlloc} will fail and return $NULL.
 
-        Although SVM is generally not supported for image objects, ${"CL12#CreateImage()".link} may create an image from a buffer (a 1D image from a buffer
-        or a 2D image from buffer) if the buffer specified in its image description parameter is a SVM buffer. Such images have a linear memory representation
-        so their memory can be shared using SVM. However, fine grained sharing and atomics are not supported for image reads and writes in a kernel.
+		Although SVM is generally not supported for image objects, ${"CL12#CreateImage()".link} may create an image from a buffer (a 1D image from a buffer
+		or a 2D image from buffer) if the buffer specified in its image description parameter is a SVM buffer. Such images have a linear memory representation
+		so their memory can be shared using SVM. However, fine grained sharing and atomics are not supported for image reads and writes in a kernel.
 
-        If ${"CL10#CreateBuffer()".link} is called with a pointer returned by {@code SVMAlloc} as its {@code host_ptr} argument, and
-        $("CL10#MEM_USE_HOST_PTR".link} is set in its {@code flags} argument, {@code CreateBuffer} will succeed and return a valid non-zero buffer object as
-        long as the {@code size} argument to {@code CreateBuffer} is no larger than the {@code size} argument passed in the original {@code SVMAlloc} call. The
-        new buffer object returned has the shared memory as the underlying storage. Locations in the buffer's underlying shared memory can be operated on using,
-        e.g., atomic operations if the device supports them.
+		If ${"CL10#CreateBuffer()".link} is called with a pointer returned by {@code SVMAlloc} as its {@code host_ptr} argument, and
+		$("CL10#MEM_USE_HOST_PTR".link} is set in its {@code flags} argument, {@code CreateBuffer} will succeed and return a valid non-zero buffer object as
+		long as the {@code size} argument to {@code CreateBuffer} is no larger than the {@code size} argument passed in the original {@code SVMAlloc} call. The
+		new buffer object returned has the shared memory as the underlying storage. Locations in the buffer's underlying shared memory can be operated on using,
+		e.g., atomic operations if the device supports them.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
@@ -204,8 +204,8 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		${"CL10#EnqueueReadBuffer()".link} or by registering a callback with the events associated with enqueued commands and when the last enqueued command
 		has finished freeing {@code svm_pointer}.
 
-        The behavior of using {@code svm_pointer} after it has been freed is undefined. In addition, if a buffer object is created using
-        ${"CL10#CreateBuffer()".link} with {@code svm_pointer}, the buffer object must first be released before the {@code svm_pointer} is freed.
+		The behavior of using {@code svm_pointer} after it has been freed is undefined. In addition, if a buffer object is created using
+		${"CL10#CreateBuffer()".link} with {@code svm_pointer}, the buffer object must first be released before the {@code svm_pointer} is freed.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
@@ -247,23 +247,23 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			nullable
 		) _ void_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
 		NEWL,
-        EWL,
-        EVENT,
+		EWL,
+		EVENT,
 
-        returnDoc =
-        """
-        $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-        ${ul(
-	        ICQE,
-	        """
-	        $INVALID_VALUE if {@code num_svm_pointers} is {@code 0} or if {@code svm_pointers} is $NULL or if any of the pointers specified in
-	        {@code svm_pointers} array is $NULL.
-	        """,
-	        IEWLE,
-	        OORE,
-	        OOHME
-        )}
-        """
+		returnDoc =
+		"""
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
+			ICQE,
+			"""
+			$INVALID_VALUE if {@code num_svm_pointers} is {@code 0} or if {@code svm_pointers} is $NULL or if any of the pointers specified in
+			{@code svm_pointers} array is $NULL.
+			""",
+			IEWLE,
+			OORE,
+			OOHME
+		)}
+		"""
 	)
 
 	cl_int.func(
@@ -284,23 +284,23 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			If {@code blocking_copy} is $TRUE i.e. the copy command is blocking, {@code EnqueueSVMMemcpy} does not return until the buffer data has been copied
 			into memory pointed to by {@code dst_ptr}.
 
-            If {@code blocking_copy} is $FALSE i.e. the copy command is non-blocking, {@code EnqueueSVMMemcpy} queues a non-blocking copy command and returns.
-            The contents of the buffer that {@code dst_ptr} point to cannot be used until the copy command has completed. The event argument returns an event
-            object which can be used to query the execution status of the read command. When the copy command has completed, the contents of the buffer that
-            {@code dst_ptr} points to can be used by the application.
+			If {@code blocking_copy} is $FALSE i.e. the copy command is non-blocking, {@code EnqueueSVMMemcpy} queues a non-blocking copy command and returns.
+			The contents of the buffer that {@code dst_ptr} point to cannot be used until the copy command has completed. The event argument returns an event
+			object which can be used to query the execution status of the read command. When the copy command has completed, the contents of the buffer that
+			{@code dst_ptr} points to can be used by the application.
 			"""
 		),
 		void_p.IN("dst_ptr", "the pointer to a memory region where data is copied to"),
 		const _ void_p.IN("src_ptr", "the pointer to a memory region where data is copied from"),
 		size_t.IN("size", "the size in bytes of data being copied"),
 		NEWL,
-        EWL,
-        EVENT,
+		EWL,
+		EVENT,
 
-        returnDoc =
-        """
-        $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-        ${ul(
+		returnDoc =
+		"""
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			IEWLE,
@@ -311,7 +311,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			OORE,
 			OOHME
 		)}
-        """
+		"""
 	)
 
 	cl_int.func(
@@ -340,13 +340,13 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		AutoSize("pattern") _ size_t.IN("pattern_size", "the size of the {@code pattern} array, in bytes"),
 		size_t.IN("size", "the size in bytes of region being filled starting with {@code svm_ptr} and must be a multiple of {@code pattern_size}"),
 		NEWL,
-        EWL,
-        EVENT,
+		EWL,
+		EVENT,
 
-        returnDoc =
-        """
-        $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-        ${ul(
+		returnDoc =
+		"""
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
@@ -360,7 +360,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			OORE,
 			OOHME
 		)}
-        """
+		"""
 	)
 
 	val EnqueueSVMMap = cl_int.func(
@@ -394,23 +394,23 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		),
 		AutoSize("svm_ptr") _ size_t.IN("size", "the size of the memory region to map, in bytes"),
 		NEWL,
-        EWL,
-        EVENT,
+		EWL,
+		EVENT,
 
-        returnDoc =
-        """
-        $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-        ${ul(
-	        ICQE,
-	        "$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-	        "$INVALID_VALUE if {@code svm_ptr} is $NULL.",
-	        "$INVALID_VALUE if {@code size} is {@code 0} or if values specified in {@code map_flags} are not valid.",
-	        IEWLE,
-	        ESEFEIWLE("map"),
-	        OORE,
-	        OOHME
-        )}
-        """
+		returnDoc =
+		"""
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
+			ICQE,
+			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
+			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
+			"$INVALID_VALUE if {@code size} is {@code 0} or if values specified in {@code map_flags} are not valid.",
+			IEWLE,
+			ESEFEIWLE("map"),
+			OORE,
+			OOHME
+		)}
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -429,21 +429,21 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 			"""
 		),
 		NEWL,
-        EWL,
-        EVENT,
+		EWL,
+		EVENT,
 
-        returnDoc =
-        """
-        $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-        ${ul(
-            ICQE,
-	        "$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
-	        "$INVALID_VALUE if {@code svm_ptr} is $NULL.",
-	        IEWLE,
-	        OORE,
-	        OOHME
-        )}
-        """
+		returnDoc =
+		"""
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
+			ICQE,
+			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
+			"$INVALID_VALUE if {@code svm_ptr} is $NULL.",
+			IEWLE,
+			OORE,
+			OOHME
+		)}
+		"""
 	)
 
 	cl_int.func(
@@ -474,12 +474,12 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		"""
 		$SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-	        "$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
-	        "$INVALID_ARG_INDEX if {@code arg_index} is not a valid argument index.",
-	        "$INVALID_ARG_VALUE if {@code arg_value} specified is not a valid value.",
-	        OORE,
-	        OOHME
-        )}
+			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
+			"$INVALID_ARG_INDEX if {@code arg_index} is not a valid argument index.",
+			"$INVALID_ARG_VALUE if {@code arg_value} specified is not a valid value.",
+			OORE,
+			OOHME
+		)}
 		"""
 	)
 
@@ -495,26 +495,26 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		kernel dereferences that pointer, then a pointer to B must either be passed as an argument in the call to that kernel or it must be made available to
 		the kernel using {@code SetKernelExecInfo}. For example, we might pass extra SVM pointers as follows:
 
-        ${code("clSetKernelExecInfo(kernel, CL_KERNEL_EXEC_INFO_SVM_PTRS, num_ptrs * sizeof(void *), extra_svm_ptr_list);")}
+		${code("clSetKernelExecInfo(kernel, CL_KERNEL_EXEC_INFO_SVM_PTRS, num_ptrs * sizeof(void *), extra_svm_ptr_list);")}
 
-        Here {@code num_ptrs} specifies the number of additional SVM pointers while {@code extra_svm_ptr_list} specifies a pointer to memory containing those
-        SVM pointers. When calling {@code SetKernelExecInfo} with ${"KERNEL_EXEC_INFO_SVM_PTRS".link} to specify pointers to non-argument SVM buffers as extra
-        arguments to a kernel, each of these pointers can be the SVM pointer returned by $SVMAlloc or can be a pointer + offset into the SVM region. It is
-        sufficient to provide one pointer for each SVM buffer used.
+		Here {@code num_ptrs} specifies the number of additional SVM pointers while {@code extra_svm_ptr_list} specifies a pointer to memory containing those
+		SVM pointers. When calling {@code SetKernelExecInfo} with ${"KERNEL_EXEC_INFO_SVM_PTRS".link} to specify pointers to non-argument SVM buffers as extra
+		arguments to a kernel, each of these pointers can be the SVM pointer returned by $SVMAlloc or can be a pointer + offset into the SVM region. It is
+		sufficient to provide one pointer for each SVM buffer used.
 
-        2. ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} is used to indicate whether SVM pointers used by a kernel will refer to system allocations or not.
+		2. ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} is used to indicate whether SVM pointers used by a kernel will refer to system allocations or not.
 
-        ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} = $FALSE indicates that the OpenCL implementation may assume that system pointers are not passed as
-        kernel arguments and are not stored inside SVM allocations passed as kernel arguments.
+		${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} = $FALSE indicates that the OpenCL implementation may assume that system pointers are not passed as
+		kernel arguments and are not stored inside SVM allocations passed as kernel arguments.
 
-        ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} = $TRUE indicates that the OpenCL implementation must assume that system pointers might be passed as
-        kernel arguments and/or stored inside SVM allocations passed as kernel arguments. In this case, if the device to which the kernel is enqueued does not
-        support system SVM pointers, ${"CL10#EnqueueNDRangeKernel()".link} will return a $INVALID_OPERATION error. If none of the devices in the context
-        associated with kernel support fine-grain system SVM allocations, {@code SetKernelExecInfo} will return a $INVALID_OPERATION error.
+		${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} = $TRUE indicates that the OpenCL implementation must assume that system pointers might be passed as
+		kernel arguments and/or stored inside SVM allocations passed as kernel arguments. In this case, if the device to which the kernel is enqueued does not
+		support system SVM pointers, ${"CL10#EnqueueNDRangeKernel()".link} will return a $INVALID_OPERATION error. If none of the devices in the context
+		associated with kernel support fine-grain system SVM allocations, {@code SetKernelExecInfo} will return a $INVALID_OPERATION error.
 
-        If {@code SetKernelExecInfo} has not been called with a value for ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link}, the default value is used for this
-        kernel attribute. The default value depends on whether the device on which the kernel is enqueued supports fine-grain system SVM allocations. If so, the
-        default value used is $TRUE (system pointers might be passed); otherwise, the default is $FALSE.
+		If {@code SetKernelExecInfo} has not been called with a value for ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link}, the default value is used for this
+		kernel attribute. The default value depends on whether the device on which the kernel is enqueued supports fine-grain system SVM allocations. If so, the
+		default value used is $TRUE (system pointers might be passed); otherwise, the default is $FALSE.
 		""",
 
 		cl_kernel.IN("kernel", "the kernel object being queried"),
@@ -529,14 +529,14 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-	        "$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
-	        "$INVALID_VALUE if {@code param_name} is not valid, if {@code param_value} is $NULL or if the size specified by {@code param_value_size} is not valid.",
-	        """
-	        $INVALID_OPERATION if {@code param_name} = ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} and {@code param_value} = $TRUE but no devices in
-	        context associated with kernel support fine-grain system SVM allocations.
-	        """,
-	        OORE,
-	        OOHME
+			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object.",
+			"$INVALID_VALUE if {@code param_name} is not valid, if {@code param_value} is $NULL or if the size specified by {@code param_value_size} is not valid.",
+			"""
+			$INVALID_OPERATION if {@code param_name} = ${"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM".link} and {@code param_value} = $TRUE but no devices in
+			context associated with kernel support fine-grain system SVM allocations.
+			""",
+			OORE,
+			OOHME
 		)}
 		"""
 	)
@@ -566,14 +566,14 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
-	        """
-	        $INVALID_VALUE if the property name in {@code sampler_properties} is not a supported property name, if the value specified for a supported property
-	        name is not valid, or if the same property name is specified more than once.
-	        """,
-	        "$INVALID_OPERATION if images are not supported by any device associated with context.",
-	        OORE,
-	        OOHME
-        )}
+			"""
+			$INVALID_VALUE if the property name in {@code sampler_properties} is not a supported property name, if the value specified for a supported property
+			name is not valid, or if the same property name is specified more than once.
+			""",
+			"$INVALID_OPERATION if images are not supported by any device associated with context.",
+			OORE,
+			OOHME
+		)}
 		"""
 	)
 

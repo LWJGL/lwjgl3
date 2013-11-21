@@ -202,7 +202,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"""
 		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
-        """,
+		""",
 
 		"CLAMP_TO_EDGE" _ 0x812F
 	)

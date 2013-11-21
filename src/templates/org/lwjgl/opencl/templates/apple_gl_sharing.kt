@@ -53,9 +53,9 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 		"""
 		Provides a query mechanism to retrieve OpenGL context specific information from an OpenCL context to help identify device specific mappings and usage.
 
-        For example, one possible usage would be to allow the client to map a CGL virtual screen index to an appropriate CL device id to insure that the
-        rendering device and the compute device are the same, thus guaranteeing any shared OpenGL memory that is attached o a CL memory object remains resident
-        on the active device.
+		For example, one possible usage would be to allow the client to map a CGL virtual screen index to an appropriate CL device id to insure that the
+		rendering device and the compute device are the same, thus guaranteeing any shared OpenGL memory that is attached o a CL memory object remains resident
+		on the active device.
 		""",
 
 		cl_context.IN("context", "the context being queried"),

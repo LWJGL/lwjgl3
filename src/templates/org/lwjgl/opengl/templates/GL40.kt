@@ -82,7 +82,7 @@ fun GL40() = "GL40".nativeClassGL("GL40") {
 		glDrawArraysInstancedBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
-	    ${codeBlock("""
+		${codeBlock("""
 typedef struct {
 	uint count;
 	uint primCount;
@@ -113,7 +113,7 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		glDrawElementsInstancedBaseVertexBaseInstance are stored in memory at the address given by {@code indirect}.
 
 		The parameters addressed by {@code indirect} are packed into a structure that takes the form (in C):
-	    ${codeBlock("""
+		${codeBlock("""
 typedef struct {
 	uint count;
 	uint primCount;
@@ -124,7 +124,7 @@ typedef struct {
 		""")}
 
 		{@code glDrawElementsIndirect} is equivalent to:
-        ${codeBlock("""
+		${codeBlock("""
 void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	const DrawElementsIndirectCommand *cmd  = (const DrawElementsIndirectCommand *)indirect;
 	glDrawElementsInstancedBaseVertexBaseInstance(
@@ -137,7 +137,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		cmd->baseInstance
 	);
 }
-	    """)}
+		""")}
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),

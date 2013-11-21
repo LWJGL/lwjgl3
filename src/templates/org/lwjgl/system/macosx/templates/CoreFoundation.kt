@@ -61,11 +61,11 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	CFTypeRef.func(
 		"CFRetain",
 		"""
-	    Retains a Core Foundation object.
+		Retains a Core Foundation object.
 
-	    You should retain a Core Foundation object when you receive it from elsewhere (that is, you did not create or copy it) and you want it to persist. If
-	    you retain a Core Foundation object you are responsible for releasing it.
-	    """,
+		You should retain a Core Foundation object when you receive it from elsewhere (that is, you did not create or copy it) and you want it to persist. If
+		you retain a Core Foundation object you are responsible for releasing it.
+		""",
 
 		CFTypeRef.IN("cf", "the CFType object to retain")
 	)
@@ -73,11 +73,11 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	void.func(
 		"CFRelease",
 		"""
-	    Releases a Core Foundation object.
+		Releases a Core Foundation object.
 
-	    If the retain count of {@code cf} becomes zero the memory allocated to the object is deallocated and the object is destroyed. If you create, copy, or
-	    explicitly retain (see the ${"CFRetain()".link} function) a Core Foundation object, you are responsible for releasing it when you no longer need it.
-	    """,
+		If the retain count of {@code cf} becomes zero the memory allocated to the object is deallocated and the object is destroyed. If you create, copy, or
+		explicitly retain (see the ${"CFRetain()".link} function) a Core Foundation object, you are responsible for releasing it when you no longer need it.
+		""",
 
 		CFTypeRef.IN("cf", "the CFType object to release")
 	)
@@ -168,17 +168,17 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFStringRef.IN(
 			"filePath",
 			"""
-		    the path string to convert to a {@code CFURL} object. If {@code filePath} is not absolute, the resulting URL will be considered relative to the
-		    current working directory (evaluated when this function is being invoked).
-		    """
+			the path string to convert to a {@code CFURL} object. If {@code filePath} is not absolute, the resulting URL will be considered relative to the
+			current working directory (evaluated when this function is being invoked).
+			"""
 		),
 		CFURLPathStyle.IN("pathStyle", "the operating system path style used in {@code filePath}"),
 		Boolean.IN(
 			"isDirectory",
 			"""
-		    a Boolean value that specifies whether filePath is treated as a directory path when resolving against relative path components. Pass true if the
-		    pathname indicates a directory, false otherwise.
-		    """
+			a Boolean value that specifies whether filePath is treated as a directory path when resolving against relative path components. Pass true if the
+			pathname indicates a directory, false otherwise.
+			"""
 		)
 	)
 

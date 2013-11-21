@@ -718,19 +718,19 @@ typedef struct {
 	uint first;
 	uint baseInstance;
 } DrawArraysIndirectCommand;
-        """)}
+		""")}
 
 		A single call to {@code glMultiDrawArraysIndirect} is equivalent, assuming no errors are generated to:
 		${codeBlock("""
 const ubyte *ptr = (const ubyte *)indirect;
 for ( i = 0; i < primcount; i++ ) {
-    DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
-    if ( stride == 0 )
-        ptr += sizeof(DrawArraysIndirectCommand);
-    else
-        ptr += stride;
+	DrawArraysIndirect(mode, (DrawArraysIndirectCommand*)ptr);
+	if ( stride == 0 )
+		ptr += sizeof(DrawArraysIndirectCommand);
+	else
+		ptr += stride;
 }
-        """)}
+		""")}
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
@@ -762,13 +762,13 @@ typedef struct {
 		${codeBlock("""
 const ubyte *ptr = (const ubyte *)indirect;
 for ( i = 0; i < primcount; i++ ) {
-    DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
-    if ( stride == 0 )
-        ptr += sizeof(DrawElementsIndirectCommand);
-    else
-        ptr += stride;
+	DrawElementsIndirect(mode, type, (DrawElementsIndirectCommand *)ptr);
+	if ( stride == 0 )
+		ptr += sizeof(DrawElementsIndirectCommand);
+	else
+		ptr += stride;
 }
-    """)}
+	""")}
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),

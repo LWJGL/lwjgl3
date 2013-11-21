@@ -13,7 +13,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 
 	nativeImport (
 		"MacOSXLWJGL.h",
-	    "<OpenGL/OpenGL.h>"
+		"<OpenGL/OpenGL.h>"
 	)
 
 	documentation = "Native bindings to CGL."
@@ -249,7 +249,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 
 	CGLContextObj.func(
 		"GetCurrentContext",
-	    "Returns the current rendering context. If there is none, returns $NULL."
+		"Returns the current rendering context. If there is none, returns $NULL."
 	)
 
 	CGLError.func(
@@ -276,9 +276,9 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 
 	CGLShareGroupObj.func(
 		"GetShareGroup",
-	    "Returns the sharegroup of the specified rendering context.",
+		"Returns the sharegroup of the specified rendering context.",
 
-	    CGLContextObj.IN("ctx", "a rendering context")
+		CGLContextObj.IN("ctx", "a rendering context")
 	)
 
 	// -----------------------------------------------

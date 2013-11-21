@@ -56,11 +56,11 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XLookupString",
 		"""
-	    Translates a key event to a {@code KeySym} and a string. The {@code KeySym} is obtained by using the standard interpretation of the Shift, Lock, group,
-	    and numlock modifiers as defined in the X Protocol specification. If the {@code KeySym} has been rebound (see ${"Xlib#XRebindKeysym()".link}), the bound
-	    string will be stored in the buffer. Otherwise, the {@code KeySym} is mapped, if possible, to an ISO Latin-1 character or (if the Control modifier is
-	    on) to an ASCII control character, and that character is stored in the buffer. {@code XLookupString} returns the number of characters that are stored
-	    in the buffer.
+		Translates a key event to a {@code KeySym} and a string. The {@code KeySym} is obtained by using the standard interpretation of the Shift, Lock, group,
+		and numlock modifiers as defined in the X Protocol specification. If the {@code KeySym} has been rebound (see ${"Xlib#XRebindKeysym()".link}), the bound
+		string will be stored in the buffer. Otherwise, the {@code KeySym} is mapped, if possible, to an ISO Latin-1 character or (if the Control modifier is
+		on) to an ASCII control character, and that character is stored in the buffer. {@code XLookupString} returns the number of characters that are stored
+		in the buffer.
 
 		If present (non-$NULL), the {@link XComposeStatus} structure records the state, which is private to Xlib, that needs preservation across calls to
 		{@code XLookupString} to implement compose processing. The creation of {@link XComposeStatus} structures is implementation dependent; a portable
@@ -68,7 +68,7 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 
 		{@code XLookupString} depends on the cached keyboard information mentioned in the previous section, so it is necessary to use
 		${"Xlib#XRefreshKeyboardMapping()".link} to keep this information up-to-date.
-	    """,
+		""",
 
 		XKeyEvent_p.IN("event_struct", "specifies the {@link XKeyEvent} structure to be used."),
 		char_p.OUT("buffer_return", "returns the translated characters"),
@@ -80,17 +80,17 @@ fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
 	XWMHints_p.func(
 		"XAllocWMHints",
 		"""
-	    Allocates and returns a pointer to a {@link XWMHints} structure. Note that all fields in the {@link XWMHints} structure are initially set to zero. If
-	    insufficient memory is available, {@code XAllocWMHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib#XFree()".link}.
-	    """
+		Allocates and returns a pointer to a {@link XWMHints} structure. Note that all fields in the {@link XWMHints} structure are initially set to zero. If
+		insufficient memory is available, {@code XAllocWMHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib#XFree()".link}.
+		"""
 	)
 
 	XSizeHints_p.func(
 		"XAllocSizeHints",
 		"""
-	    Allocates and returns a pointer to a {@link XSizeHints} structure. Note that all fields in the {@link XSizeHints} structure are initially set to zero.
-	    If insufficient memory is available, {@code XAllocSizeHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib#XFree()".link}.
-	    """
+		Allocates and returns a pointer to a {@link XSizeHints} structure. Note that all fields in the {@link XSizeHints} structure are initially set to zero.
+		If insufficient memory is available, {@code XAllocSizeHints} returns $NULL. To free the memory allocated to this structure, use ${"Xlib#XFree()".link}.
+		"""
 	)
 
 	XContext.func(

@@ -48,9 +48,9 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		LPOSVERSIONINFO.INOUT(
 			"versionInfo",
 			"""
-		    an {@link OSVERSIONINFOEX} structure that receives the operating system information. Before calling the {@code GetVersionEx} function, set the
-		    {@code OSVersionInfoSize} member of the structure as appropriate to indicate which data structure is being passed to this function.
-		    """
+			an {@link OSVERSIONINFOEX} structure that receives the operating system information. Before calling the {@code GetVersionEx} function, set the
+			{@code OSVersionInfoSize} member of the structure as appropriate to indicate which data structure is being passed to this function.
+			"""
 		)
 	)
 
@@ -69,13 +69,13 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		nullable _ LPCTSTR.IN(
 			"moduleName",
 			"""
-		    the name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.
-		    The file name string can include a trailing point character (.) to indicate that the module name has no extension. The string does not have to
-		    specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/). The name is compared (case independently) to the
-		    names of modules currently mapped into the address space of the calling process.
+			the name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.
+			The file name string can include a trailing point character (.) to indicate that the module name has no extension. The string does not have to
+			specify a path. When specifying a path, be sure to use backslashes (\), not forward slashes (/). The name is compared (case independently) to the
+			names of modules currently mapped into the address space of the calling process.
 
 			If this parameter is $NULL, {@code GetModuleHandle} returns a handle to the file used to create the calling process (.exe file).
-		    """
+			"""
 		)
 	)
 
@@ -86,19 +86,19 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		LPCTSTR.IN(
 			"name",
 			"""
-		    the name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file
-		    name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition
-		    (.def) file.
+			the name of the module. This can be either a library module (a .dll file) or an executable module (an .exe file). The name specified is the file
+			name of the module and is not related to the name stored in the library module itself, as specified by the LIBRARY keyword in the module-definition
+			(.def) file.
 
-		    If the string specifies a full path, the function searches only that path for the module.
+			If the string specifies a full path, the function searches only that path for the module.
 
-		    If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module.
+			If the string specifies a relative path or a module name without a path, the function uses a standard search strategy to find the module.
 
-		    If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/).
+			If the function cannot find the module, the function fails. When specifying a path, be sure to use backslashes (\), not forward slashes (/).
 
-		    If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll
-		    to the module name. To prevent the function from appending.dll to the module name, include a trailing point character (.) in the module name string.
-		    """
+			If the string specifies a module name without a path and the file name extension is omitted, the function appends the default library extension .dll
+			to the module name. To prevent the function from appending.dll to the module name, include a trailing point character (.) in the module name string.
+			"""
 		)
 	)
 
@@ -133,9 +133,9 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		LARGE_INTEGER_p.OUT(
 			"frequency",
 			"""
-		    a pointer to a variable that receives the current performance-counter frequency, in counts per second. If the installed hardware does not support a
-		    high-resolution performance counter, this parameter can be zero.
-		    """
+			a pointer to a variable that receives the current performance-counter frequency, in counts per second. If the installed hardware does not support a
+			high-resolution performance counter, this parameter can be zero.
+			"""
 		)
 	)
 
@@ -163,9 +163,9 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		SIZE_T.IN(
 			"bytes",
 			"""
-		    the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies ${"GMEM_MOVEABLE".link}, the function returns a
-		    handle to a memory object that is marked as discarded.
-		    """
+			the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies ${"GMEM_MOVEABLE".link}, the function returns a
+			handle to a memory object that is marked as discarded.
+			"""
 		)
 	)
 

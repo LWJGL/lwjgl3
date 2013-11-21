@@ -60,14 +60,14 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 	int.func(
 		"GetGPUInfoAMD",
 		"""
-	    Each GPU in a system may have different properties, performance characteristics and different supported OpenGL versions. Use this function to determine
-	    which GPU is best suited for a specific task.
+		Each GPU in a system may have different properties, performance characteristics and different supported OpenGL versions. Use this function to determine
+		which GPU is best suited for a specific task.
 
-	    For a string, {@code size} will be the number of characters allocated and will include NULL termination. For arrays of type GL_UNSIGNED_INT, GL_INT, and
-	    GL_FLOAT {@code size} will be the array depth. If the function succeeds, the number of values written will be returned. If the number of values written
-	    is equal to {@code size}, the query should be repeated with a larger {@code data} buffer. Strings should be queried using the GL_UNSIGNED_BYTE type,
-	    are UTF-8 encoded and will be NULL terminated. If the function fails, -1 will be returned.
-	    """,
+		For a string, {@code size} will be the number of characters allocated and will include NULL termination. For arrays of type GL_UNSIGNED_INT, GL_INT, and
+		GL_FLOAT {@code size} will be the array depth. If the function succeeds, the number of values written will be returned. If the number of values written
+		is equal to {@code size}, the query should be repeated with a larger {@code data} buffer. Strings should be queried using the GL_UNSIGNED_BYTE type,
+		are UTF-8 encoded and will be NULL terminated. If the function fails, -1 will be returned.
+		""",
 
 		UINT.IN("id", "a GPU id obtained from calling $GetGPUIDsAMD"),
 		int.IN("property", "the information being queried", properties),
@@ -83,13 +83,13 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 	UINT.func(
 		"GetContextGPUIDAMD",
 		"""
-	    Determine which GPU a context is attached to.
+		Determine which GPU a context is attached to.
 
 		Unassociated contexts are created by calling {@link org.lwjgl.system.windows.WGL#wglCreateContext}. Although these contexts are unassociated, their use
 		will still be tied to a single GPU in most cases. For this reason it is advantageous to be able to query the GPU an existing unassociated context
 		resides on. If multiple GPUs are available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for
 		off-screen rendering.
-	    """,
+		""",
 
 		HGLRC.IN("hglrc", "the context for which the GPU id will be returned")
 	)
@@ -104,10 +104,10 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 	HGLRC.func(
 		"CreateAssociatedContextAttribsAMD",
 		"""
-	    Create an associated context with a specific GL version.
+		Create an associated context with a specific GL version.
 
-	    All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB} apply to {@code wglCreateAssociatedContextAttribsAMD}.
-	    """,
+		All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB} apply to {@code wglCreateAssociatedContextAttribsAMD}.
+		""",
 
 		UINT.IN("id", "a valid GPU id"),
 		nullable _ HGLRC.IN("shareContext", "must either be NULL or that of an associated context created with the the same GPU ID as {@code id}"),
@@ -133,8 +133,8 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 	DependsOn("GL_EXT_framebuffer_blit") _ VOID.func(
 		"BlitContextFramebufferAMD",
 		"""
-	    Blits data from one context to another. This facilitates high performance data communication between multiple contexts.
-	    """,
+		Blits data from one context to another. This facilitates high performance data communication between multiple contexts.
+		""",
 
 		HGLRC.IN("dstCtx", "the context handle for the write context"),
 		GLint.IN("srcX0", "the source x<sub>0</sub> coordinate"),

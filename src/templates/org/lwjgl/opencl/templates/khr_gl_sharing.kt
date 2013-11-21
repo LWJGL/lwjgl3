@@ -90,8 +90,8 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. If no device(s) exist corresponding to {@code param_name}, the call will not fail, but the value
-	    of {@code param_value_size_ret} will be zero.
+		$SUCCESS if the function is executed successfully. If no device(s) exist corresponding to {@code param_name}, the call will not fail, but the value
+		of {@code param_value_size_ret} will be zero.
 
 		Returns $INVALID_GL_SHAREGROUP_REFERENCE_KHR if a context was specified by any of the following means:
 		${ul(
@@ -132,7 +132,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		less than the size of the return type and {@code param_value} is not a $NULL value, ${"CL10#OUT_OF_RESOURCES".link} if there is a failure to allocate
 		resources required by the OpenCL implementation on the device, or ${"CL10#OUT_OF_HOST_MEMORY".link} if there is a failure to allocate resources required by
 		the OpenCL implementation on the host.
-	    """
+		"""
 	)
 
 }

@@ -19,7 +19,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 
 		This extension allows multiple X clients to share an indirect rendering context.
 
-        Additional convenience procedures to get the current Display* bound to a context as well as other context information are also added.
+		Additional convenience procedures to get the current Display* bound to a context as well as other context information are also added.
 		"""
 
 	IntConstant.block(

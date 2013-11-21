@@ -43,11 +43,11 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 	val wglCreatePbufferARB = HPBUFFERARB.func(
 		"CreatePbufferARB",
 		"""
-	    Creates a pixel buffer (pbuffer) and returns a handle to it.
+		Creates a pixel buffer (pbuffer) and returns a handle to it.
 
 		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the ${"DRAW_TO_PBUFFER_ARB".link}
 		attribute to determine which pixel formats support the creation of pbuffers.
-	    """,
+		""",
 
 		HDC.IN("hdc", "a device context for the device on which the pbuffer is created"),
 		int.IN("pixelFormat", "a non-generic pixel format descriptor index"),
@@ -77,11 +77,11 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 	BOOL.func(
 		"DestroyPbufferARB",
 		"""
-	    Destroys a pbuffer.
+		Destroys a pbuffer.
 
 		The pbuffer is destroyed once it is no longer current to any rendering context.  When a pbuffer is destroyed, any memory resources that are attached to
 		it are freed and its handle is no longer valid.
-	    """,
+		""",
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle")
 	)

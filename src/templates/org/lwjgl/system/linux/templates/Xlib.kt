@@ -36,38 +36,38 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	Status.func(
 		"XInitThreads",
 		"""
-	    Initializes Xlib support for concurrent threads. This function must be the first Xlib function a multi-threaded program calls, and it must complete
-	    before any other Xlib call is made. This function returns a nonzero status if initialization was successful; otherwise, it returns zero. On systems that
-	    do not support threads, this function always returns zero.
+		Initializes Xlib support for concurrent threads. This function must be the first Xlib function a multi-threaded program calls, and it must complete
+		before any other Xlib call is made. This function returns a nonzero status if initialization was successful; otherwise, it returns zero. On systems that
+		do not support threads, this function always returns zero.
 
 		It is only necessary to call this function if multiple threads might use Xlib concurrently. If all calls to Xlib functions are protected by some other
 		access mechanism (for example, a mutual exclusion lock in a toolkit or through explicit client programming), Xlib thread initialization is not required.
 		It is recommended that single-threaded programs not call this function.
-	    """
+		"""
 	)
 
 	/*int.func(
 		"XErrorHandler",
-	    "Invokes an X11 error handler.",
+		"Invokes an X11 error handler.",
 
-	    DISPLAY,
-	    XErrorEvent_p.IN("error_event", "a pointer to an {@link XErrorEvent} struct describing the error that occured"),
-	    mods(
-		    virtual,
-		    nullable // the generator emits checkFunctionAddress, no need to check again
-	    ) _ voidptr.IN(FUNCTION_ADDRESS, "the error handler function address"),
+		DISPLAY,
+		XErrorEvent_p.IN("error_event", "a pointer to an {@link XErrorEvent} struct describing the error that occured"),
+		mods(
+			virtual,
+			nullable // the generator emits checkFunctionAddress, no need to check again
+		) _ voidptr.IN(FUNCTION_ADDRESS, "the error handler function address"),
 
-	    returnDoc = "a value that is ignored"
+		returnDoc = "a value that is ignored"
 	)*/
 
 	XErrorHandler.func(
 		"XSetErrorHandler",
 		"""
-	    Sets the error handler that will be invoked when a X11 protocol error occurs. If {@code handler} is $NULL, the default error handler is used. The action
-	    of the default handlers is to print an explanatory message and exit.
+		Sets the error handler that will be invoked when a X11 protocol error occurs. If {@code handler} is $NULL, the default error handler is used. The action
+		of the default handlers is to print an explanatory message and exit.
 
-	    If the returned value is non-$NULL, the new error handler must pass the error down to the previous error handler. Use ${"XErrorHandler()".link} to do that.
-	    """,
+		If the returned value is non-$NULL, the new error handler must pass the error down to the previous error handler. Use ${"XErrorHandler()".link} to do that.
+		""",
 
 		mods(
 			Callback("XErrorHandler"),
@@ -322,8 +322,8 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 		The x and y coordinates are the top-left outside corner of the window's borders and are relative to the inside of the parent window's borders.
 
-	    The width and height are the created window's inside dimensions and do not include the created window's borders.
-	    """,
+		The width and height are the created window's inside dimensions and do not include the created window's borders.
+		""",
 
 		DISPLAY,
 		Window.IN("parent", "the parent window"),
@@ -338,9 +338,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_long.IN(
 			"valuemask",
 			"""
-		    which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
-		    {@code valuemask} is zero, the attributes are ignored and are not referenced.
-		    """
+			which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
+			{@code valuemask} is zero, the attributes are ignored and are not referenced.
+			"""
 		),
 		XSetWindowAttributes_p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
 	)
@@ -354,9 +354,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_long.IN(
 			"valuemask",
 			"""
-		    specifies which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
-		    valuemask is zero, the attributes are ignored and are not referenced. The values and restrictions are the same as for ${"XCreateWindow()".link}.
-		    """
+			specifies which window attributes are defined in the attributes argument. This mask is the bitwise inclusive OR of the valid attribute mask bits. If
+			valuemask is zero, the attributes are ignored and are not referenced. The values and restrictions are the same as for ${"XCreateWindow()".link}.
+			"""
 		),
 		XSetWindowAttributes_p.IN(
 			"attributes",
@@ -377,9 +377,9 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XSetWMHints",
 		"""
-	    Sets the window manager hints that include icon information and location, the initial state of the window, and whether the application relies on the
-	    window manager to get keyboard input.
-	    """,
+		Sets the window manager hints that include icon information and location, the initial state of the window, and whether the application relies on the
+		window manager to get keyboard input.
+		""",
 
 		DISPLAY,
 		WINDOW,
@@ -399,10 +399,10 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	void.func(
 		"XSetWMNormalHints",
 		"""
-	    Replaces the size hints for the {@code WM_NORMAL_HINTS} property on the specified window. If the property does not already exist,
-	    {@code XSetWMNormalHints()} sets the size hints for the {@code WM_NORMAL_HINTS} property on the specified window. The property is stored with a type of
-	    {@code WM_SIZE_HINTS} and a format of 32.
-	    """,
+		Replaces the size hints for the {@code WM_NORMAL_HINTS} property on the specified window. If the property does not already exist,
+		{@code XSetWMNormalHints()} sets the size hints for the {@code WM_NORMAL_HINTS} property on the specified window. The property is stored with a type of
+		{@code WM_SIZE_HINTS} and a format of 32.
+		""",
 
 		DISPLAY,
 		WINDOW,
@@ -416,16 +416,16 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		grabbing client. {@code XGrabPointer} overrides any active pointer grab by this client. If {@code owner_events} is ${"False".link}, all generated pointer
 		events are reported with respect to {@code grab_window} and are reported only if selected by {@code event_mask}. If owner_events is True and if a generated pointer event would normally be
 		reported to this client, it is reported as usual. Otherwise, the event is reported with respect to the grab_window and is reported only if selected by event_mask. For either value of owner_events, unreported events are discarded.
-	    """,
+		""",
 
 		DISPLAY,
 		Window.IN("grab_window", "the grab window"),
 		Bool.IN(
 			"owner_events",
 			"""
-		    a Boolean value that indicates whether the pointer events are to be reported as usual or reported with respect to the grab window if selected by the
-		    event mask
-		    """
+			a Boolean value that indicates whether the pointer events are to be reported as usual or reported with respect to the grab window if selected by the
+			event mask
+			"""
 		),
 		unsigned_int.IN("event_mask", "which pointer events are reported to the client. The mask is the bitwise inclusive OR of the valid pointer event mask bits."),
 		int.IN("pointer_mode", "further processing of pointer events", "X#GrabModeSync X#GrabModeAsync"),
@@ -438,12 +438,12 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XUngrabPointer",
 		"""
-	    Releases the pointer and any queued events if this client has actively grabbed the pointer from ${"XGrabPointer()".link}, ${"XGrabButton()".link}, or from
-	    a normal button press. {@code XUngrabPointer} does not release the pointer if the specified time is earlier than the last-pointer-grab time or is later
-	    than the current X server time. It also generates {@code EnterNotify} and {@code LeaveNotify} events. The X server performs an {@code UngrabPointer}
-	    request automatically if the event window or {@code confine_to} window for an active pointer grab becomes not viewable or if window reconfiguration
-	    causes the {@code confine_to} window to lie completely outside the boundaries of the root window.
-	    """,
+		Releases the pointer and any queued events if this client has actively grabbed the pointer from ${"XGrabPointer()".link}, ${"XGrabButton()".link}, or from
+		a normal button press. {@code XUngrabPointer} does not release the pointer if the specified time is earlier than the last-pointer-grab time or is later
+		than the current X server time. It also generates {@code EnterNotify} and {@code LeaveNotify} events. The X server performs an {@code UngrabPointer}
+		request automatically if the event window or {@code confine_to} window for an active pointer grab becomes not viewable or if window reconfiguration
+		causes the {@code confine_to} window to lie completely outside the boundaries of the root window.
+		""",
 
 		DISPLAY,
 		Time.IN("time", "specifies the time. You can pass either a timestamp or ${"X#CurrentTime".link}.")
@@ -532,7 +532,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		)}
 
 		The event in the XEvent structure must be one of the core events or one of the events defined by an extension (or a BadValue error results) so that the X server can correctly byte-swap the contents as necessary. The contents of the event are otherwise unaltered and unchecked by the X server except to force send_event to True in the forwarded event and to set the serial number in the event correctly; therefore these fields and the display field are ignored by XSendEvent().
-	    """,
+		""",
 
 		DISPLAY,
 		Window.IN("w", "the window the event is to be sent to, or ${"X#PointerWindow".link}, or ${"X#InputFocus".link}"),
@@ -547,7 +547,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Raises the specified window to the top of the stack so that no sibling window obscures it. If the windows are regarded as overlapping sheets of paper
 		stacked on a desk, then raising a window is analogous to moving the sheet to the top of the stack but leaving its x and y location on the desk constant.
 		Raising a mapped window may generate Expose events for the window and any mapped subwindows that were formerly obscured.
-	    """,
+		""",
 
 		DISPLAY,
 		WINDOW
@@ -556,12 +556,12 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XSetInputFocus",
 		"""
-	    Changes the input focus and the last-focus-change time. It has no effect if the specified time is earlier than the current last-focus-change time or is
-	    later than the current X server time. Otherwise, the last-focus-change time is set to the specified time (${"X#CurrentTime".link} is replaced by the
-	    current X server time). {@code XSetInputFocus} causes the X server to generate {@code FocusIn} and {@code FocusOut} events.
+		Changes the input focus and the last-focus-change time. It has no effect if the specified time is earlier than the current last-focus-change time or is
+		later than the current X server time. Otherwise, the last-focus-change time is set to the specified time (${"X#CurrentTime".link} is replaced by the
+		current X server time). {@code XSetInputFocus} causes the X server to generate {@code FocusIn} and {@code FocusOut} events.
 
-	    Depending on the focus argument, the following occurs:
-	    ${ul(
+		Depending on the focus argument, the following occurs:
+		${ul(
 			"If focus is $None, all keyboard events are discarded until a new focus window is set, and the {@code revert_to} argument is ignored.",
 			"""
 			If focus is a window, it becomes the keyboard's focus window. If a generated keyboard event would normally be reported to this window or one of its
@@ -583,7 +583,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			affected.
 			"""
 		)}
-	    """,
+		""",
 
 		DISPLAY,
 		Window.IN("focus", "the window, ${"X#PointerRoot".link} or $None"),
@@ -599,8 +599,8 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		and if no backing store exists. If the contents of the window are lost, the X server generates Expose events. Moving a mapped window generates
 		{@code Expose} events on any formerly obscured windows.
 
-	    The {@code x} and {@code y} coordinates define the new location of the top-left pixel of the window's border or the window itself if it has no border.
-	    """,
+		The {@code x} and {@code y} coordinates define the new location of the top-left pixel of the window's border or the window itself if it has no border.
+		""",
 
 		DISPLAY,
 		WINDOW,
@@ -614,7 +614,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Changes the inside dimensions of the specified window, not including its borders. This function does not change the window's upper-left coordinate or
 		the origin and does not restack the window. Changing the size of a mapped window may lose its contents and generate Expose events. If a mapped window is
 		made smaller, changing its size generates {@code Expose} events on windows that the mapped window formerly obscured.
-	    """,
+		""",
 
 		DISPLAY,
 		WINDOW,
@@ -671,15 +671,15 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XQueryPointer",
 		"""
-	    Returns the root window the pointer is logically on and the pointer coordinates relative to the root window's origin. If {@code XQueryPointer} returns
-	    ${"False".link}, the pointer is not on the same screen as the specified window, and {@code XQueryPointer} returns $None to {@code child_return}
-	    and zero to {@code win_x_return} and {@code win_y_return}. If {@code XQueryPointer} returns ${"True".link}, the pointer coordinates returned to
-	    {@code win_x_return} and {@code win_y_return} are relative to the origin of the specified window. In this case, {@code XQueryPointer} returns the child
-	    that contains the pointer, if any, or else $None to {@code child_return}.
+		Returns the root window the pointer is logically on and the pointer coordinates relative to the root window's origin. If {@code XQueryPointer} returns
+		${"False".link}, the pointer is not on the same screen as the specified window, and {@code XQueryPointer} returns $None to {@code child_return}
+		and zero to {@code win_x_return} and {@code win_y_return}. If {@code XQueryPointer} returns ${"True".link}, the pointer coordinates returned to
+		{@code win_x_return} and {@code win_y_return} are relative to the origin of the specified window. In this case, {@code XQueryPointer} returns the child
+		that contains the pointer, if any, or else $None to {@code child_return}.
 
 		Returns the current logical state of the keyboard buttons and the modifier keys in {@code mask_return}. It sets {@code mask_return} to the bitwise
 		inclusive OR of one or more of the button or modifier key bitmasks to match the current state of the mouse buttons and the modifier keys.
-	    """,
+		""",
 
 		DISPLAY,
 		WINDOW,

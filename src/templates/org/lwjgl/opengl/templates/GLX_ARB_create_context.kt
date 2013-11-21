@@ -84,7 +84,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 				"{@code display} is not a local X server.",
 				"Implementation-dependent limits on the number of direct rendering contexts that can be supported simultaneously are exceeded."
 			)}
-            Use ${"GLX#IsDirect()".link} to determine whether or not a request for a direct rendering context succeeded.
+			Use ${"GLX#IsDirect()".link} to determine whether or not a request for a direct rendering context succeeded.
 			"""
 		),
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@link X#None}")

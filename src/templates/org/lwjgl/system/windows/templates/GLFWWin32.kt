@@ -28,9 +28,9 @@ fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix 
 
 	HGLRC.func(
 		"GetWGLContext",
-	    "Returns the ${code("HGLRC")} of the given GLFW window.",
+		"Returns the ${code("HGLRC")} of the given GLFW window.",
 
-	    GLFWwindow.IN("window", "the GLFW window")
+		GLFWwindow.IN("window", "the GLFW window")
 	)
 
 }

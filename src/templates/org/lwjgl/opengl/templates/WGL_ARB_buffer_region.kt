@@ -20,8 +20,8 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 		The buffer region extension is a mechanism that allows an area of an OpenGL window to be saved in off-screen memory for quick restores. The off-screen
 		memory can either be frame buffer memory or system memory, although frame buffer memory might offer optimal performance.
 
-        A buffer region can be created for the front color, back color, depth, and/or stencil buffer.  Multiple buffer regions for the same buffer type can
-        exist.
+		A buffer region can be created for the front color, back color, depth, and/or stencil buffer.  Multiple buffer regions for the same buffer type can
+		exist.
 		"""
 
 	val CreateBufferRegionARB = HANDLE.func(
@@ -36,9 +36,9 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 		UINT.IN(
 			"type",
 			"""
-	        a bitwise OR of any of the following values indicating which buffers can be saved or restored.  Multiple bits can be set and may result in better
-	        performance if multiple buffers are saved or restored.
-	        """,
+			a bitwise OR of any of the following values indicating which buffers can be saved or restored.  Multiple bits can be set and may result in better
+			performance if multiple buffers are saved or restored.
+			""",
 			"#FRONT_COLOR_BUFFER_BIT_ARB #BACK_COLOR_BUFFER_BIT_ARB #DEPTH_BUFFER_BIT_ARB #STENCIL_BUFFER_BIT_ARB"
 		)
 	).javaDocLink
@@ -53,15 +53,15 @@ fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffe
 	BOOL.func(
 		"SaveBufferRegionARB",
 		"""
-	    Saves image, depth, and stencil data into the buffer region.
+		Saves image, depth, and stencil data into the buffer region.
 
-	    Data outside the window for the specified rectangle is undefined. The OpenGL coordinate system is used for specifying the rectangle ({@code x} and
-	    {@code y} specify the lower-left corner of the rectangle).
+		Data outside the window for the specified rectangle is undefined. The OpenGL coordinate system is used for specifying the rectangle ({@code x} and
+		{@code y} specify the lower-left corner of the rectangle).
 
 		If an RC is current to the calling thread, a flush will occur before the save operation.
 
 		The saved buffer region area can be freed by calling {@code wglSaveBufferRegionARB} with {@code width} or {@code height} set to a value of 0.
-	    """,
+		""",
 
 		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
 		int.IN("x", "the window x-coordinate for the source rectangle"),

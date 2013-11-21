@@ -48,24 +48,24 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"LoopbackOpenDeviceSOFT",
 		"""
 		Loopback devices provide a way for applications to "read back" rendered
-        audio without it being sent to an actual audio device. It allows
-        applications to render audio as fast or slow as it needs, making it
-        suitable for non-real-time rendering, and so it can be passed to an audio
-        codec or something for further processing.
+		audio without it being sent to an actual audio device. It allows
+		applications to render audio as fast or slow as it needs, making it
+		suitable for non-real-time rendering, and so it can be passed to an audio
+		codec or something for further processing.
 
-        The deviceName parameter is used to tell the AL which device or device
-        driver to use for subsequent rendering. This may be NULL for an
-        implementation-defined default, otherwise it must be a valid name returned
-        by enumeration (and further must be a device capable of loopback
-        rendering).
+		The deviceName parameter is used to tell the AL which device or device
+		driver to use for subsequent rendering. This may be NULL for an
+		implementation-defined default, otherwise it must be a valid name returned
+		by enumeration (and further must be a device capable of loopback
+		rendering).
 
-        A loopback device behaves largely the same as a playback device. You may
-        query playback state and error codes, and create contexts, which can then
-        be set as current to generate sources and buffers like normal.
+		A loopback device behaves largely the same as a playback device. You may
+		query playback state and error codes, and create contexts, which can then
+		be set as current to generate sources and buffers like normal.
 
-        Note that loopback devices do not have either the ALC_SYNC or ALC_REFRESH
-        attributes. Attempting to query them will result in an ALC_INVALID_ENUM
-        error.
+		Note that loopback devices do not have either the ALC_SYNC or ALC_REFRESH
+		attributes. Attempting to query them will result in an ALC_INVALID_ENUM
+		error.
 		""",
 		const _ ALCcharUTF8_p.IN("deviceName", "name of the device to open")
 	)
@@ -74,9 +74,9 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"IsRenderFormatSupportedSOFT",
 		"""
 		When creating contexts, the attribute list must specify the format used
-        for rendering. This is done with the ALC_FORMAT_CHANNELS_SOFT,
-        ALC_FORMAT_TYPE_SOFT, and ALC_FREQUENCY attributes. This controls the
-        format of the audio subsequently rendered by the device.
+		for rendering. This is done with the ALC_FORMAT_CHANNELS_SOFT,
+		ALC_FORMAT_TYPE_SOFT, and ALC_FREQUENCY attributes. This controls the
+		format of the audio subsequently rendered by the device.
 		""",
 		nullable _ ALCdevice_p.IN("device", "the loopback device to query"),
 		ALCsizei.IN("frequency", "positive sample rate of the rendered audio"),
@@ -88,9 +88,9 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"RenderSamplesSOFT",
 		"""
 		The state of various objects on loopback devices (including processed
-        buffers and source offsets) is processed only when new samples are
-        rendered. To render samples, use the function
-        """,
+		buffers and source offsets) is processed only when new samples are
+		rendered. To render samples, use the function
+		""",
 		nullable _ ALCdevice_p.IN("device", "loopback device which samples are rendered from"),
 		ALCvoid_p.IN("buffer", "buffer to write to"),
 		ALCsizei.IN("samples", "number of sample frames to render")

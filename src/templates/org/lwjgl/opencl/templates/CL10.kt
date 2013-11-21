@@ -551,9 +551,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		AutoSize("platforms") _ cl_uint.IN(
 			"num_entries",
 			"""
-		    the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not $NULL, the {@code num_entries} must
-		    be greater than zero.
-		    """
+			the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not $NULL, the {@code num_entries} must
+			be greater than zero.
+			"""
 		),
 		nullable _ cl_platform_id_p.OUT(
 			"platforms",
@@ -570,7 +570,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"""
 			$INVALID_VALUE if {@code num_entries} is equal to zero and {@code platforms} is not $NULL or if both {@code num_platforms} and
@@ -578,7 +578,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -628,10 +628,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		nullable _ cl_device_id_p.OUT(
 			"devices",
 			"""
-		    returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
-		    device. If {@code devices} argument is $NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified
-		    by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
-		    """
+			returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
+			device. If {@code devices} argument is $NULL, this argument is ignored. The number of OpenCL devices returned is the minimum of the value specified
+			by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
+			"""
 		),
 		mods(Check(1), nullable) _ cl_uint_p.OUT(
 			"num_devices",
@@ -649,7 +649,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -836,13 +836,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -860,7 +860,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			"""
@@ -870,7 +870,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	// ------------------[ OPENCL Runtime ]------------------
@@ -899,8 +899,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
+		a valid non-zero command-queue and $errcode_ret is set to $SUCCESS if the command-queue is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_DEVICE if {@code device} is not a valid device or is not associated with {@code context}.",
@@ -909,7 +909,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -926,13 +926,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val ReleaseCommandQueue = cl_int.func(
@@ -950,13 +950,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -974,7 +974,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -984,7 +984,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CreateBuffer = ((Construct("context") _ cl_mem).func(
@@ -1015,8 +1015,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
+		a valid non-zero buffer object and $errcode_ret is set to $SUCCESS if the buffer object is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in flags are not valid.",
@@ -1032,7 +1032,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	val EnqueueReadBuffer = cl_int.func(
@@ -1083,7 +1083,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -1106,7 +1106,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	val EnqueueWriteBuffer = cl_int.func(
@@ -1155,7 +1155,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -1178,7 +1178,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -1203,7 +1203,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -1229,7 +1229,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val EnqueueMapBuffer = ((MapPointer("size") _ cl_void_p).func(
@@ -1279,8 +1279,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
-	    returned in $errcode_ret:
+		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+		returned in $errcode_ret:
 		${ul(
 			ICQE,
 			"""
@@ -1308,7 +1308,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	(Construct("context") _ cl_mem).func(
@@ -1343,8 +1343,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
@@ -1367,7 +1367,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
@@ -1413,8 +1413,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
+		a valid non-zero image object and $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
@@ -1438,7 +1438,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -1461,9 +1461,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"image_type",
 			"the image type",
 			"""
-		    CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER #MEM_OBJECT_IMAGE2D #MEM_OBJECT_IMAGE3D CL12#MEM_OBJECT_IMAGE1D_ARRAY
-		    CL12#MEM_OBJECT_IMAGE2D_ARRAY
-		    """
+			CL12#MEM_OBJECT_IMAGE1D CL12#MEM_OBJECT_IMAGE1D_BUFFER #MEM_OBJECT_IMAGE2D #MEM_OBJECT_IMAGE3D CL12#MEM_OBJECT_IMAGE1D_ARRAY
+			CL12#MEM_OBJECT_IMAGE2D_ARRAY
+			"""
 		),
 		(AutoSize("image_formats") / "cl_image_format.SIZEOF") _ cl_uint.IN(
 			"num_entries",
@@ -1486,14 +1486,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICE,
 			"$INVALID_VALUE if {@code flags} or {@code image_type} are not valid, or if {@code num_entries} is 0 and {@code image_formats} is not $NULL.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val EnqueueReadImage = cl_int.func(
@@ -1575,7 +1575,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -1617,7 +1617,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	val EnqueueWriteImage = cl_int.func(
@@ -1700,7 +1700,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			ICQE,
 			"""
@@ -1742,7 +1742,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -1809,8 +1809,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_image} and {@code dst_image} are not the same or if the
@@ -1845,7 +1845,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			"${"MEM_COPY_OVERLAP".link} if {@code src_image} and {@code dst_image} are the same image object and the source and destination regions overlap."
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -1895,8 +1895,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_image} and {@code dst_buffer} are not the same or if
@@ -1932,7 +1932,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -1972,8 +1972,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_image} are not the same or if
@@ -2010,7 +2010,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val EnqueueMapImage = ((MapPointer("(int)image.getInfoLong(CL_MEM_SIZE)") _ cl_void_p).func(
@@ -2085,9 +2085,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
-	    returned in $errcode_ret:
-	    ${ul(
+		a pointer to the mapped region. The $errcode_ret is set to $SUCCESS. A $NULL pointer is returned otherwise with one of the following error values
+		returned in $errcode_ret:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if context associated with {@code command_queue} and image are not the same or if context associated with
@@ -2131,7 +2131,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -2177,13 +2177,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object (buffer or image object).",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2200,13 +2200,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2230,8 +2230,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
 			"$INVALID_VALUE if {@code mapped_ptr} is not a valid pointer returned by $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}.",
@@ -2243,7 +2243,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			{@code command_queue} and events in {@code event_wait_list} are not the same.
 			"""
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2265,8 +2265,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
@@ -2275,7 +2275,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CreateSampler = ((Construct("context") _ cl_sampler).func(
@@ -2296,9 +2296,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero sampler object and $errcode_ret is set to $SUCCESS if the sampler object is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
+		${ul(
 			ICE,
 			"""
 			$INVALID_VALUE if {@code addressing_mode}, {@code filter_mode} or {@code normalized_coords} or combination of these argument values are
@@ -2311,7 +2311,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -2322,13 +2322,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_SAMPLER if sampler is not a valid sampler object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2342,13 +2342,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_SAMPLER if {@code sampler} is not a valid sampler object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2369,8 +2369,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
@@ -2379,7 +2379,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CreateProgramWithSource = ((Construct("context") _ cl_program).func(
@@ -2408,7 +2408,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL value
 		with one of the following error values returned in $errcode_ret:
 		${ul(
 			ICE,
@@ -2416,7 +2416,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	val CreateProgramWithBinary = ((Construct("context") _ cl_program).func(
@@ -2476,9 +2476,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			ICE,
 			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with {@code context}.",
@@ -2487,7 +2487,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -2498,13 +2498,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2518,13 +2518,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val BuildProgram = (Code(
@@ -2581,8 +2581,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			"$INVALID_VALUE if {@code device_list} is $NULL and {@code num_devices} is &gt; 0, or if {@code device_list} is not $NULL and {@code num_devices} is 0.",
 			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
@@ -2609,7 +2609,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	Capabilities(
@@ -2642,8 +2642,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
@@ -2656,7 +2656,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2675,8 +2675,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_DEVICE if {@code device} is not in the list of devices associated with program.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
@@ -2686,7 +2686,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CreateKernel = ((Construct("program") _ cl_kernel).func(
@@ -2712,9 +2712,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    a valid non-zero kernel object and $errcode_ret is set to $SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
-	    with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero kernel object and $errcode_ret is set to $SUCCESS if the kernel object is created successfully. Otherwise, it returns a $NULL value
+		with one of the following error values returned in $errcode_ret:
+		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built executable for {@code program}.",
 			"$INVALID_KERNEL_NAME if {@code kernel_name} is not found in {@code program}.",
@@ -2726,7 +2726,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	// TODO: fix
@@ -2757,15 +2757,15 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the kernel objects were successfully allocated. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the kernel objects were successfully allocated. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PROGRAM if {@code program} is not a valid program object.",
 			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built executable for any device in {@code program}.",
 			"$INVALID_VALUE if {@code kernels} is not $NULL and {@code num_kernels} is less than the number of kernels in {@code program}.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -2776,13 +2776,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_KERNEL if kernel is not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2798,13 +2798,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_KERNEL if kernel is not a valid kernel object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2891,7 +2891,7 @@ kernel void image_filter (
 		returnDoc =
 		"""
 		$SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
-		    ${ul(
+			${ul(
 			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
 			"$INVALID_ARG_INDEX if {@code arg_index} is not a valid argument index.",
 			"$INVALID_ARG_VALUE if {@code arg_value} specified is not a valid value.",
@@ -2928,8 +2928,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
@@ -2938,7 +2938,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -2963,8 +2963,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_DEVICE if {@code device} is not in the list of devices associated with {@code kernel} or if {@code device} is $NULL but there is
 			more than one device associated with {@code kernel}.
@@ -2981,7 +2981,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val EnqueueNDRangeKernel = cl_int.func(
@@ -3038,8 +3038,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the kernel execution was successfully queued. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the kernel execution was successfully queued. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PROGRAM_EXECUTABLE if there is no successfully built program executable available for device associated with {@code command_queue}.",
 			ICQE,
 			"$INVALID_KERNEL if {@code kernel} is not a valid kernel object.",
@@ -3102,7 +3102,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	).javaDocLink
 
 	cl_int.func(
@@ -3183,8 +3183,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the user function execution instance was successfully queued. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the user function execution instance was successfully queued. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			"$INVALID_VALUE if {@code user_func} is $NULL.",
@@ -3209,7 +3209,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val WaitForEvents = (Capabilities(
@@ -3228,8 +3228,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the execution status of all events in event_list is ${"COMPLETE".link}. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the execution status of all events in event_list is ${"COMPLETE".link}. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
 			"$INVALID_CONTEXT if events specified in {@code event_list} do not belong to the same context.",
 			"$INVALID_EVENT if event objects specified in {@code event_list} are not valid event objects.",
@@ -3237,7 +3237,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -3261,8 +3261,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value_size} is &lt; size of return type
 			and {@code param_value} is not $NULL.
@@ -3272,7 +3272,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3283,13 +3283,13 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3313,13 +3313,13 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3335,14 +3335,14 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_VALUE if {@code event} is a $NULL value.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3356,13 +3356,13 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3375,8 +3375,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function was successfully executed. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function was successfully executed. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if the context associated with {@code command_queue} and events in {@code event_list} are not the same.",
 			"$INVALID_VALUE if {@code num_events} is zero or {@code event_list} is $NULL.",
@@ -3384,7 +3384,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3402,8 +3402,8 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully and the profiling information has been recorded. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully and the profiling information has been recorded. Otherwise, it returns one of the following errors:
+		${ul(
 			"""
 			${"PROFILING_INFO_NOT_AVAILABLE".link} if the ${"QUEUE_PROFILING_ENABLE".link} flag is not set for the command-queue, if the execution status of
 			the command identified by {@code event} is not ${"COMPLETE".link} or if {@code event} is a user event object.
@@ -3416,7 +3416,7 @@ kernel void image_filter (
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -3440,13 +3440,13 @@ kernel void image_filter (
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function call was executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function call was executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(

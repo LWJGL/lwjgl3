@@ -149,8 +149,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors in $errcode_ret:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors in $errcode_ret:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code buffer} is not a valid buffer object or is a sub-buffer object.",
 			"""
 			$INVALID_VALUE if {@code buffer} was created with ${"CL10#MEM_WRITE_ONLY".link} and {@code flags} specifies ${"CL10#MEM_READ_WRITE".link}
@@ -173,7 +173,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	Code(
@@ -206,14 +206,14 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
 			"$INVALID_VALUE if {@code pfn_notify} is NULL.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val BufferRectBufferOffset = mods(const, Check(3)) _ size_t_p.IN(
@@ -319,8 +319,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
@@ -342,7 +342,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -397,8 +397,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context associated
@@ -420,7 +420,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -500,8 +500,8 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue}, {@code src_buffer} and {@code dst_buffer} are not the same or
@@ -538,7 +538,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CreateUserEvent = ((Construct("context") _ cl_event).func(
@@ -555,14 +555,14 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 		returnDoc =
 		"""
-	    a valid non-zero event object and $errcode_ret is set to $SUCCESS if the user event object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero event object and $errcode_ret is set to $SUCCESS if the user event object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			ICE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
@@ -604,15 +604,15 @@ clReleaseMemObject(buf2);
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function was executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_EVENT if {@code event} is not a valid user event object.",
 			"$INVALID_VALUE if the {@code execution_status} is not ${"CL10#COMPLETE".link} or a negative integer value.",
 			"$INVALID_OPERATION if the {@code execution_status} for event has already been changed by a previous call to {@code clSetUserEventStatus}.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	Code(
@@ -673,8 +673,8 @@ clReleaseMemObject(buf2);
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_EVENT if {@code event} is not a valid event object.",
 			"""
 			$INVALID_VALUE if {@code pfn_event_notify} is $NULL or if {@code command_exec_callback_type} is not ${"CL10#SUBMITTED".link},
@@ -684,7 +684,7 @@ clReleaseMemObject(buf2);
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 }

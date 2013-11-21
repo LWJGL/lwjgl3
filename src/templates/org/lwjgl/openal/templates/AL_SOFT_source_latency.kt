@@ -13,31 +13,31 @@ fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_la
 	)
 
 	documentation = """
-	    bindings to AL_SOFT_source_latency extension.
+		bindings to AL_SOFT_source_latency extension.
 
-	    This extension provides a method for applications to more accurately
-        measure the playback latency of sources. Unextended OpenAL allows apps to
-        retrieve a source's playback offset in bytes, samples, or seconds, but
-        this is (typically) where the AL is processing the audio data.
+		This extension provides a method for applications to more accurately
+		measure the playback latency of sources. Unextended OpenAL allows apps to
+		retrieve a source's playback offset in bytes, samples, or seconds, but
+		this is (typically) where the AL is processing the audio data.
 
-        New 64-bit Integer and Double-Precision Floating Point Functions:
+		New 64-bit Integer and Double-Precision Floating Point Functions:
 
-        In addition to the standard 32-bit integer (i) and single-precision
-        floating point (f) types, source attributes may be changed or queried
-        using 64-bit integer (i64) and double-precision floating point (d) types.
+		In addition to the standard 32-bit integer (i) and single-precision
+		floating point (f) types, source attributes may be changed or queried
+		using 64-bit integer (i64) and double-precision floating point (d) types.
 
-        Any valid attribute for 32-bit integers will be valid for 64-bit integers,
-        and any attribute for single-precision floating point will be valid for
-        double-precision floating point. Note that the reverse is not necessarily
-        true. Specific 64-bit integer attributes may not work through the 32-bit
-        integer functions, and specific double-precision floating point attributes
-        may not work with the single-precision floating point functions, unless
-        otherwise specified.
+		Any valid attribute for 32-bit integers will be valid for 64-bit integers,
+		and any attribute for single-precision floating point will be valid for
+		double-precision floating point. Note that the reverse is not necessarily
+		true. Specific 64-bit integer attributes may not work through the 32-bit
+		integer functions, and specific double-precision floating point attributes
+		may not work with the single-precision floating point functions, unless
+		otherwise specified.
 
-        Also note that range restrictions still apply, so for example, attributes
-        that only allow up to INT_MAX will still only allow up to INT_MAX even
-        when set through 64-bit integer functions
-	    """
+		Also note that range restrictions still apply, so for example, attributes
+		that only allow up to INT_MAX will still only allow up to INT_MAX even
+		when set through 64-bit integer functions
+		"""
 
 	IntConstant.block(
 		"Source tokens for which can be used to retrieve a high-precision source offset and playback latency",

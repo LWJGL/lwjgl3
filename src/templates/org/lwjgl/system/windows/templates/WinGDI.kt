@@ -150,9 +150,9 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"VREFRESH" _ 116, // Current vertical refresh rate of the
 		// display device (for displays only) in Hz
 		"DESKTOPVERTRES" _ 117, // Horizontal width of entire desktop in
-		// pixels                                  
+		// pixels
 		"DESKTOPHORZRES" _ 118, // Vertical height of entire desktop in
-		// pixels                                  
+		// pixels
 		"BLTALIGNMENT" _ 119, // Preferred blt alignment
 
 		"SHADEBLENDCAPS" _ 120, // Shading and blending caps
@@ -411,9 +411,9 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		Expression("PIXELFORMATDESCRIPTOR.SIZEOF") _ UINT.IN(
 			"bytes",
 			"""
-		    the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
-		    {@code bytes} bytes of data to that structure. Set this value to {@link PIXELFORMATDESCRIPTOR#SIZEOF}.
-		    """
+			the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
+			{@code bytes} bytes of data to that structure. Set this value to {@link PIXELFORMATDESCRIPTOR#SIZEOF}.
+			"""
 		),
 		nullable _ LPPIXELFORMATDESCRIPTOR.OUT(
 			"pixelFormatDescriptor",
@@ -441,9 +441,9 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		const _ PIXELFORMATDESCRIPTOR_p.IN(
 			"pixelFormatDescriptor",
 			"""
-		    a {@link PIXELFORMATDESCRIPTOR} structure that contains the logical pixel format specification. The system's metafile component uses this structure
-		    to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
-		    """
+			a {@link PIXELFORMATDESCRIPTOR} structure that contains the logical pixel format specification. The system's metafile component uses this structure
+			to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
+			"""
 		)
 	)
 

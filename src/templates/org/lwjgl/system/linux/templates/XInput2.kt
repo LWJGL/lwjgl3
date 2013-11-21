@@ -135,7 +135,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"XISelectEvents",
 		"""
-	    Selects XI2 events.
+		Selects XI2 events.
 
 		{@code XISelectEvents} sets the event mask for this client on win. Further events are only reported to this client if the event type matches the
 		selected event mask. The masks overrides the previously selected event mask for the given device.
@@ -143,7 +143,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 		If deviceid is a valid device, the event mask is selected only for this device. If deviceid is XIAllDevices or XIAllMasterDevices, the event mask is
 		selected for all devices or all master devices, respectively. The effective event mask is the bit-wise OR of the XIAllDevices, XIAllMasterDevices and
 		the respective device's event mask.
-	    """,
+		""",
 
 		DISPLAY,
 		WINDOW,

@@ -22,7 +22,7 @@ fun intel_device_partition_by_names() = "INTELDevicePartitionByNames".nativeClas
 
 		Example: To create a three compute unit sub-device using compute units, [ 0, 1, 3 ], pass:
 
-        [ ${"DEVICE_PARTITION_BY_NAMES_INTEL".link}, 0, 1, 3, ${"PARTITION_BY_NAMES_LIST_END_INTEL".link}, 0 ]
+		[ ${"DEVICE_PARTITION_BY_NAMES_INTEL".link}, 0, 1, 3, ${"PARTITION_BY_NAMES_LIST_END_INTEL".link}, 0 ]
 
 		The meaning of these numbers are, in order:
 		${ul(

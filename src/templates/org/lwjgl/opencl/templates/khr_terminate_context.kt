@@ -48,10 +48,10 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 	cl_int.func(
 		"TerminateContextKHR",
 		"""
-	    Terminates all pending work associated with the context and renders all data owned by the context invalid. It is the responsibility of the application
-	    to release all objects associated with the context being terminated.
+		Terminates all pending work associated with the context and renders all data owned by the context invalid. It is the responsibility of the application
+		to release all objects associated with the context being terminated.
 
-	    When a context is terminated:
+		When a context is terminated:
 		${ul(
 			"""
 			The execution status of enqueued commands will be ${"TERMINATED_KHR".link}. Event objects can be queried using ${"CL10#GetEventInfo()".link}. Event
@@ -76,19 +76,19 @@ fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate
 			similar to enqueued commands, after the command queue has become invalid.
 			"""
 		)}
-	    """,
+		""",
 
 		cl_context.IN("context", "the context to terminate"),
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 			"$INVALID_CONTEXT if {@code context} is not a valid OpenCL context.",
 			"${"CONTEXT_TERMINATED_KHR".link} if {@code context} has already been terminated.",
 			"$INVALID_OPERATION if {@code context} was not created with ${"CONTEXT_TERMINATE_KHR".link} set to $TRUE.",
 			OORE,
 			OOHME
-	    """
+		"""
 	)
 
 }

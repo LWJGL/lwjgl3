@@ -74,10 +74,10 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 			the bitwise {@code OR} of flags describing the intended usage of the buffer object's data store by the application. Valid flags and their meanings
 			are as follows:
 			${ul(
-			    """
-			    ${"DYNAMIC_STORAGE_BIT".link} &ndash; The contents of the data store may be updated after creation through calls to
-			    ${"GL15#BufferSubData()".link}. If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
-			    argument may be used to specify the initial content of the buffer's data store regardless of the presence of the ${"DYNAMIC_STORAGE_BIT".link}.
+				"""
+				${"DYNAMIC_STORAGE_BIT".link} &ndash; The contents of the data store may be updated after creation through calls to
+				${"GL15#BufferSubData()".link}. If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
+				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the ${"DYNAMIC_STORAGE_BIT".link}.
 				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as ${"GL31#CopyBufferSubData()".link} and
 				${"GL43#ClearBufferSubData()".link}.
 				""",
@@ -86,37 +86,37 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 				obtained that may be read from.
 				""",
 				"""
-			    ${"GL30#MAP_WRITE_BIT".link} &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
-			    space obtained that may be written to.
+				${"GL30#MAP_WRITE_BIT".link} &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
+				space obtained that may be written to.
 				""",
 				"""
-			    ${"MAP_PERSISTENT_BIT".link} &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
-			    pointer to the data store remains valid so long as the data store is mapped, even during execution of drawing or dispatch commands.
+				${"MAP_PERSISTENT_BIT".link} &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
+				pointer to the data store remains valid so long as the data store is mapped, even during execution of drawing or dispatch commands.
 				""",
 				"""
-			    ${"MAP_COHERENT_BIT".link} &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
-			    coherent, so long as that mapping is performed using MapBufferRange. That is, data written to the store by either the client or server will be
-			    immediately visible to the other with no further action taken by the application. In particular:
-			    ${ul(
+				${"MAP_COHERENT_BIT".link} &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
+				coherent, so long as that mapping is performed using MapBufferRange. That is, data written to the store by either the client or server will be
+				immediately visible to the other with no further action taken by the application. In particular:
+				${ul(
 					"""
 					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the ${"GL42#MemoryBarrier()".link} command with
 					the ${"CLIENT_MAPPED_BUFFER_BARRIER_BIT".link} set, then in subsequent commands the server will see the writes.
 					""",
 					"If {@code MAP_COHERENT_BIT} is set and the client performs a write, then in subsequent commands the server will see the writes.",
 					"""
-			        If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call ${"GL42#MemoryBarrier()".link} with the
-			        ${"CLIENT_MAPPED_BUFFER_BARRIER_BIT".link} set and then call ${"GL32#FenceSync()".link} with ${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or
-			        ${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call ${"GL42#MemoryBarrier()".link} with the
+					${"CLIENT_MAPPED_BUFFER_BARRIER_BIT".link} set and then call ${"GL32#FenceSync()".link} with ${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or
+					${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
 					""",
 					"""
-			        If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call ${"GL32#FenceSync()".link} with
-			        ${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or ${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call ${"GL32#FenceSync()".link} with
+					${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or ${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
 					"""
-			    )}
+				)}
 				""",
 				"""
-			    ${"CLIENT_STORAGE_BIT".link} &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
-			    implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
+				${"CLIENT_STORAGE_BIT".link} &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
+				implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
 				"""
 			)}
 

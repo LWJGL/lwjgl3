@@ -276,21 +276,21 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	cl_int.func(
 		"RetainDevice",
 		"""
-	    Increments the device reference count if {@code device} is a valid sub-device created by a call to ${"CreateSubDevices()".link}. If {@code device} is a
-	    root level device i.e. a {@code cl_device_id} returned by ${"CL10#GetDeviceIDs()".link}, the device reference count remains unchanged.
-	    """,
+		Increments the device reference count if {@code device} is a valid sub-device created by a call to ${"CreateSubDevices()".link}. If {@code device} is a
+		root level device i.e. a {@code cl_device_id} returned by ${"CL10#GetDeviceIDs()".link}, the device reference count remains unchanged.
+		""",
 
 		cl_device_id.IN("device", "the device to retain"),
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully or the device is a root-level device. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully or the device is a root-level device. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to ${"CreateSubDevices()".link}.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -307,20 +307,20 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
 			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to ${"CreateSubDevices()".link}.",
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
 		"CreateSubDevices",
 		"""
-	    Creates an array of sub-devices that each reference a non-intersecting set of compute units within {@code in_device}, according to a partition scheme
-	    given by {@code properties}. The output sub-devices may be used in every way that the root (or parent) device can be used, including creating contexts,
+		Creates an array of sub-devices that each reference a non-intersecting set of compute units within {@code in_device}, according to a partition scheme
+		given by {@code properties}. The output sub-devices may be used in every way that the root (or parent) device can be used, including creating contexts,
 		building programs, further calls to {@code clCreateSubDevices} and creating command-queues. When a command-queue is created against a sub-device, the
 		commands enqueued on the queue are executed only on the sub-device.
 
@@ -340,15 +340,15 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			[ ${"DEVICE_PARTITION_BY_AFFINITY_DOMAIN".link}, ${"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE".link}, 0 ]
 			"""
 		)}
-	    """,
+		""",
 
 		cl_device_id.IN("in_device", "the device to be partitioned"),
 		mods(const, nullTerminated) _ cl_device_partition_property.IN(
 			"properties",
 			"""
-		    specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
-		    followed by the corresponding desired value. The list is terminated with 0. Only one partitioning scheme can be specified in {@code properties}.
-		    """,
+			specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
+			followed by the corresponding desired value. The list is terminated with 0. Only one partitioning scheme can be specified in {@code properties}.
+			""",
 			"#DEVICE_PARTITION_EQUALLY #DEVICE_PARTITION_BY_COUNTS #DEVICE_PARTITION_BY_AFFINITY_DOMAIN"
 		),
 		AutoSize("out_devices") _ cl_uint.IN(
@@ -358,23 +358,23 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		nullable _ cl_device_id_p.OUT(
 			"out_devices",
 			"""
-		    the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is $NULL, this argument is ignored. If {@code out_devices} is not
-		    $NULL, {@code num_devices} must be greater than or equal to the number of sub-devices that device may be partitioned into according to the
-		    partitioning scheme specified in {@code properties}.
-		    """
+			the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is $NULL, this argument is ignored. If {@code out_devices} is not
+			$NULL, {@code num_devices} must be greater than or equal to the number of sub-devices that device may be partitioned into according to the
+			partitioning scheme specified in {@code properties}.
+			"""
 		),
 		mods(Check(1), nullable) _ cl_uint_p.OUT(
 			"num_devices_ret",
 			"""
-		    the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
-		    is $NULL, it is ignored.
-		    """
+			the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
+			is $NULL, it is ignored.
+			"""
 		),
 
 		returnDoc =
 		"""
-	    $SUCCESS if the partition is created successfully. Otherwise, it returns a $NULL value with the following error values returned in $errcode_ret:
-	    ${ul(
+		$SUCCESS if the partition is created successfully. Otherwise, it returns a $NULL value with the following error values returned in $errcode_ret:
+		${ul(
 			"$INVALID_DEVICE if {@code in_device} is not valid.",
 			"""
 			$INVALID_VALUE if values specified in {@code properties} are not valid or if values specified in {@code properties} are valid but not
@@ -394,44 +394,44 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	(Construct("context") _ cl_mem).func(
 		"CreateImage",
 		"""
-	    Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D image array or 3D image object.
+		Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D image array or 3D image object.
 
-	    For a 3D image or 2D image array, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent 2D image slices or 2D images
-	    respectively. Each 2D image is a linear sequence of adjacent scanlines. Each scanline is a linear sequence of image elements.
+		For a 3D image or 2D image array, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent 2D image slices or 2D images
+		respectively. Each 2D image is a linear sequence of adjacent scanlines. Each scanline is a linear sequence of image elements.
 
-	    For a 2D image, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent scanlines. Each scanline is a linear sequence of
-	    image elements.
+		For a 2D image, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent scanlines. Each scanline is a linear sequence of
+		image elements.
 
 		For a 1D image array, the image data specified by {@code host_ptr} is stored as a linear sequence of adjacent 1D images respectively. Each 1D image or
 		1D image buffer is a single scanline which is a linear sequence of adjacent elements.
-	    """,
+		""",
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
 		cl_mem_flags.IN(
 			"flags",
 			"""
-		    a bit-field that is used to specify allocation and usage information about the image memory object being created.
+			a bit-field that is used to specify allocation and usage information about the image memory object being created.
 
-		    For all image types except ${"MEM_OBJECT_IMAGE1D_BUFFER".link}, if value specified for {@code flags} is 0, the default is used which is
-		    ${"CL10#MEM_READ_WRITE".link}.
+			For all image types except ${"MEM_OBJECT_IMAGE1D_BUFFER".link}, if value specified for {@code flags} is 0, the default is used which is
+			${"CL10#MEM_READ_WRITE".link}.
 
-		    For ${"CL12#MEM_OBJECT_IMAGE1D_BUFFER".link} image type, if the ${"CL10#MEM_READ_WRITE".link}, ${"CL10#MEM_READ_ONLY".link} or ${"CL10#MEM_WRITE_ONLY".link}
-		    values are not specified in {@code flags}, they are inherited from the corresponding memory access qualifers associated with buffer. The
-		    ${"CL10#MEM_USE_HOST_PTR".link}, ${"CL10#MEM_ALLOC_HOST_PTR".link} and ${"CL10#MEM_COPY_HOST_PTR".link} values cannot be specified in {@code flags}
-		    but are inherited from the corresponding memory access qualifiers associated with buffer. If ${"CL10#MEM_COPY_HOST_PTR".link} is specified in the
-		    memory access qualifier values associated with buffer it does not imply any additional copies when the sub-buffer is created from buffer. If the
-		    ${"MEM_HOST_WRITE_ONLY".link}, ${"MEM_HOST_READ_ONLY".link} or ${"MEM_HOST_NO_ACCESS".link} values are not specified in {@code flags}, they
-		    are inherited from the corresponding memory access qualifiers associated with buffer.
-		    """,
+			For ${"CL12#MEM_OBJECT_IMAGE1D_BUFFER".link} image type, if the ${"CL10#MEM_READ_WRITE".link}, ${"CL10#MEM_READ_ONLY".link} or ${"CL10#MEM_WRITE_ONLY".link}
+			values are not specified in {@code flags}, they are inherited from the corresponding memory access qualifers associated with buffer. The
+			${"CL10#MEM_USE_HOST_PTR".link}, ${"CL10#MEM_ALLOC_HOST_PTR".link} and ${"CL10#MEM_COPY_HOST_PTR".link} values cannot be specified in {@code flags}
+			but are inherited from the corresponding memory access qualifiers associated with buffer. If ${"CL10#MEM_COPY_HOST_PTR".link} is specified in the
+			memory access qualifier values associated with buffer it does not imply any additional copies when the sub-buffer is created from buffer. If the
+			${"MEM_HOST_WRITE_ONLY".link}, ${"MEM_HOST_READ_ONLY".link} or ${"MEM_HOST_NO_ACCESS".link} values are not specified in {@code flags}, they
+			are inherited from the corresponding memory access qualifiers associated with buffer.
+			""",
 			"""
-	        CL10#MEM_READ_WRITE CL10#MEM_WRITE_ONLY CL10#MEM_READ_ONLY CL10#MEM_USE_HOST_PTR CL10#MEM_ALLOC_HOST_PTR CL10#MEM_COPY_HOST_PTR #MEM_HOST_WRITE_ONLY
-	        #MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS
+			CL10#MEM_READ_WRITE CL10#MEM_WRITE_ONLY CL10#MEM_READ_ONLY CL10#MEM_USE_HOST_PTR CL10#MEM_ALLOC_HOST_PTR CL10#MEM_COPY_HOST_PTR #MEM_HOST_WRITE_ONLY
+			#MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS
 			"""
 		),
 		const _ cl_image_format_p.IN(
@@ -448,8 +448,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		) _ cl_void_p.IN(
 			"host_ptr",
 			"""
-		    a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
-		    {@code host_ptr} points to must be.
+			a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
+			{@code host_ptr} points to must be.
 			${table(
 				tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
 
@@ -460,7 +460,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 				tr(td("${"MEM_OBJECT_IMAGE1D_ARRAY".link}"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
 				tr(td("${"MEM_OBJECT_IMAGE2D_ARRAY".link}"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
 			)}
-		    """
+			"""
 		),
 		ERROR_RET
 	)
@@ -474,21 +474,21 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
 			"device_list",
 			"""
-		    a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
-		    devices specified in this list.
+			a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
+			devices specified in this list.
 
-		    The devices associated with the program object will be the list of devices specified by {@code device_list}. The list of devices specified by
-		    {@code device_list} must be devices associated with {@code context}.
-		    """
+			The devices associated with the program object will be the list of devices specified by {@code device_list}. The list of devices specified by
+			{@code device_list} must be devices associated with {@code context}.
+			"""
 		),
 		const _ cl_charASCII_p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
 		ERROR_RET,
 
 		returnDoc =
 		"""
-	    a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
-	    value with one of the following error values returned in $errcode_ret:
-	    ${ul(
+		a valid non-zero program object and $errcode_ret is set to $SUCCESS if the program object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
 			ICE,
 			"$INVALID_VALUE if {@code device_list} is $NULL or {@code num_devices} is zero.",
 			"""
@@ -499,7 +499,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	val CompileProgram = (Code(
@@ -548,11 +548,11 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		) _ cl_charASCII_pp.IN(
 			"header_include_names",
 			"""
-		    an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
-		    by source in program that comes from an embedded header. The corresponding entry in {@code input_headers} identifies the program object which
-		    contains the header source to be used. The embedded headers are first searched before the headers in the list of directories specified by the –I
-		    compile option. If multiple entries in {@code header_include_names} refer to the same header name, the first one encountered will be used.
-		    """
+			an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
+			by source in program that comes from an embedded header. The corresponding entry in {@code input_headers} identifies the program object which
+			contains the header source to be used. The embedded headers are first searched before the headers in the list of directories specified by the –I
+			compile option. If multiple entries in {@code header_include_names} refer to the same header name, the first one encountered will be used.
+			"""
 		),
 		mods(
 			Callback("CLProgramCallback"),
@@ -607,7 +607,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	val LinkProgram = (Code(
@@ -732,44 +732,44 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)).javaDocLink
 
 	cl_int.func(
 		"UnloadPlatformCompiler",
 		"""
-	    Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
-	    guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
-	    ${"CL10#BuildProgram()".link}, $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
-	    appropriate program executable.
-	    """,
+		Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
+		guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
+		${"CL10#BuildProgram()".link}, $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
+		appropriate program executable.
+		""",
 
 		cl_platform_id.IN("platform", "the platform for which to unload the compiler"),
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_PLATFORM if {@code platform} is not a valid platform."
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
 		"GetKernelArgInfo",
 		"""
-	    Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
-	    created with ${"CL10#CreateProgramWithSource()".link} and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
-	    argument to ${"CL10#BuildProgram()".link} or $CompileProgram.
-	    """,
+		Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
+		created with ${"CL10#CreateProgramWithSource()".link} and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
+		argument to ${"CL10#BuildProgram()".link} or $CompileProgram.
+		""",
 
 		cl_kernel.IN("kernel", "specifies the kernel object being queried"),
 		cl_uint.IN(
 			"arg_indx",
 			"""
-		    the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
-		    the total number of arguments declared by a kernel.
-		    """
+			the argument index. Arguments to the kernel are referred by indices that go from 0 for the leftmost argument to {@code n - 1}, where {@code n} is
+			the total number of arguments declared by a kernel.
+			"""
 		),
 		cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
 		PARAM_VALUE_SIZE,
@@ -781,8 +781,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			"$INVALID_ARG_INDEX if {@code arg_indx} is not a valid argument index.",
 			"""
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} size is &lt; size of return
@@ -791,7 +791,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"${"KERNEL_ARG_INFO_NOT_AVAILABLE".link} if the argument information is not available for {@code kernel}.",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object."
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -826,8 +826,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code buffer} are not the same or if the context
@@ -846,7 +846,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -896,8 +896,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue} and {@code image} are not the same or if the context associated
@@ -914,7 +914,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -952,8 +952,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"""
 			$INVALID_CONTEXT if the context associated with {@code command_queue} and memory objects in {@code mem_objects} are not the same or
@@ -967,7 +967,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -986,15 +986,15 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			IEWLE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 	cl_int.func(
@@ -1013,15 +1013,15 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		returnDoc =
 		"""
-	    $SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
-	    ${ul(
+		$SUCCESS if the function is successfully executed. Otherwise, it returns one of the following errors:
+		${ul(
 			ICQE,
 			"$INVALID_CONTEXT if context associated with {@code command_queue} and events in {@code event_wait_list} are not the same.",
 			IEWLE,
 			OORE,
 			OOHME
 		)}
-	    """
+		"""
 	)
 
 }

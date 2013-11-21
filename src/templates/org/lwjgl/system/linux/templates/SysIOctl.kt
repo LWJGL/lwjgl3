@@ -20,7 +20,7 @@ fun SysIOctl() = "SysIOctl".nativeClass(LINUX_PACKAGE) {
 		"""
 		Manipulates the underlying device parameters of special files.  In particular, many operating characteristics of character special files (e.g.,
 		terminals) may be controlled with {@code ioctl()} requests.
-	    """,
+		""",
 
 		int.IN("fd", "an open file descriptor"),
 		int.IN("request", "a device-dependent request code"),

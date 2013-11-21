@@ -36,8 +36,8 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	
 	IntConstant.block(
 		"Types used to create custom {@link ffi_cif}.",
-	    
-	    "TYPE_VOID" _ 0,    
+
+		"TYPE_VOID" _ 0,
 		"TYPE_INT" _ 1,
 		"TYPE_FLOAT" _ 2,
 		"TYPE_DOUBLE" _ 3,
@@ -78,15 +78,15 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	IntConstant.block(
 		"Status codes.",
 
-        "OK" _ 0,
-        "BAD_TYPEDEF" _ 1,
+		"OK" _ 0,
+		"BAD_TYPEDEF" _ 1,
 		"BAD_ABI" _ 2
 	)
 	
 	LongConstant.block(
 		"Data types. These are the addresses of libffi's predefined {@link ffi_type} structs.",
-	    
-	    "ffi_type_void".expr<Long>("ffi_type_void()"),
+
+		"ffi_type_void".expr<Long>("ffi_type_void()"),
 
 		"ffi_type_uint8".expr<Long>("ffi_type_uint8()"),
 		"ffi_type_sint8".expr<Long>("ffi_type_sint8()"),
@@ -115,19 +115,19 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	ffi_status.func(
 		"prep_cif",
-	    "Prepares an {@link ffi_cif} structure for use with ${"call()".link}.",
+		"Prepares an {@link ffi_cif} structure for use with ${"call()".link}.",
 
-	    ffi_cif_p.IN("cif", "the {@link ffi_cif} structure to prepare"),
-	    ffi_abi.IN("abi", "the calling convention to use", ABI),
-	    AutoSize("atypes") _ unsigned_int.IN("nargs", "the number of arguments"),
-	    ffi_type_p.IN("rtype", "points to an {@link ffi_type} that describes the data type, size and alignment of the return value"),
+		ffi_cif_p.IN("cif", "the {@link ffi_cif} structure to prepare"),
+		ffi_abi.IN("abi", "the calling convention to use", ABI),
+		AutoSize("atypes") _ unsigned_int.IN("nargs", "the number of arguments"),
+		ffi_type_p.IN("rtype", "points to an {@link ffi_type} that describes the data type, size and alignment of the return value"),
 		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to {@link ffi_type} structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
-	    """
-	    Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
-	    {@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
-	    """
+		"""
+		Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
+		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
+		"""
 	)
 
 	ffi_status.func(
@@ -143,9 +143,9 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 		returnDoc =
 		"""
-	    Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
-	    {@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
-	    """
+		Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
+		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
+		"""
 	)
 
 	void.func(

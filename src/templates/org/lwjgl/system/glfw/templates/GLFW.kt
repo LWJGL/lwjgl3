@@ -203,7 +203,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"MOD_SHIFT" _ 0x0001,
 		"MOD_CONTROL" _ 0x0002,
 		"MOD_ALT" _ 0x0004,
-	    "MOD_SUPER" _ 0x0008
+		"MOD_SUPER" _ 0x0008
 	)
 
 	IntConstant.block(
@@ -358,7 +358,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"This function may only be called from the main thread.",
 			"This function may take several seconds to complete on some systems, while on other systems it may take only a fraction of a second to complete.",
 			"""
-		    <strong>Mac OS X</strong>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the
+			<strong>Mac OS X</strong>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the
 			application's bundle, if present.
 			"""
 		)}
@@ -374,9 +374,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		$Init successfully before you will be able to use most GLFW functions.
 
 		If GLFW has been successfully initialized, this function should be called before the program exits. If initialization fails, there is no need to call
-        this function, as it is called by $Init before it returns failure.
+		this function, as it is called by $Init before it returns failure.
 
-        Notes:
+		Notes:
 		${ul(
 			"This function may be called before $Init.",
 			"This function may only be called from the main thread.",
@@ -396,7 +396,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"This function may be called before $Init.",
 			"This function may be called from any thread."
 		)}
-        """,
+		""",
 
 		Check(1) _ int_p.OUT("major", "major version number"),
 		Check(1) _ int_p.OUT("minor", "minor version number"),
@@ -410,16 +410,16 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		reports, to allow developers to see which code paths are enabled in a binary.
 
 		The format of the string is as follows:
-        ${ul(
+		${ul(
 			"The version of GLFW",
 			"The name of the window system API",
 			"The name of the context creation API",
 			"Any additional options or APIs"
 		)}
 
-        For example, when compiling GLFW 3.0 with MinGW using the Win32 and WGL backends, the version string may look something like this:
+		For example, when compiling GLFW 3.0 with MinGW using the Win32 and WGL backends, the version string may look something like this:
 
-        3.0.0 Win32 WGL MinGW
+		3.0.0 Win32 WGL MinGW
 		"""
 	)
 
@@ -454,7 +454,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns an array of handles for all currently connected monitors. The returned array is valid only until the monitor configuration changes.
 
-        See ${"SetGammaRamp()".link} to receive notifications of configuration changes.
+		See ${"SetGammaRamp()".link} to receive notifications of configuration changes.
 		""",
 
 		autoSizeResult _ int_p.OUT("count", "where to store the size of the returned array. This is set to zero if an error occurred.")
@@ -479,8 +479,8 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns the size, in millimetres, of the display area of the specified monitor.
 
-        Note: Some operating systems do not provide accurate information, either because the monitor's EDID data is incorrect, or because the driver does not
-        report it accurately.
+		Note: Some operating systems do not provide accurate information, either because the monitor's EDID data is incorrect, or because the driver does not
+		report it accurately.
 		""",
 
 		GLFWmonitor.IN("monitor", "monitor to query"),
@@ -570,21 +570,21 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets hints for the next call to ${"CreateWindow()".link}. The hints, once set, retain their values until changed by a call to glfwWindowHint or
 		${"DefaultWindowHints()".link}, or until the library is terminated with ${"Terminate()".link}.
-        
-        Some window hints are hard constraints. These must match the available capabilities <em>exactly</em> for window creation to succeed. Hints that are not
-        hard constraints are matched as closely as possible, but the resulting window may differ from what these hints requested. To find out the actual
-        parameters of the created window, use the ${"GetWindowAttrib()".link} function.
-        
-        Hints that do not apply to a given type of window are ignored.
 
-        Window hints:
-        
-        The ${"RESIZABLE".link} hint specifies whether the window will be resizable by the user. The window will still be resizable using the
-        ${"SetWindowSize()".link} function. This hint is ignored for fullscreen windows.
-        
-        The ${"VISIBLE".link} hint specifies whether the window will be initially visible. This hint is ignored for fullscreen windows.
-        
-        Note: This function may only be called from the main thread.
+		Some window hints are hard constraints. These must match the available capabilities <em>exactly</em> for window creation to succeed. Hints that are not
+		hard constraints are matched as closely as possible, but the resulting window may differ from what these hints requested. To find out the actual
+		parameters of the created window, use the ${"GetWindowAttrib()".link} function.
+
+		Hints that do not apply to a given type of window are ignored.
+
+		Window hints:
+
+		The ${"RESIZABLE".link} hint specifies whether the window will be resizable by the user. The window will still be resizable using the
+		${"SetWindowSize()".link} function. This hint is ignored for fullscreen windows.
+
+		The ${"VISIBLE".link} hint specifies whether the window will be initially visible. This hint is ignored for fullscreen windows.
+
+		Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("target", "The window hint to set"),
@@ -599,19 +599,19 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Creates a window. Most of the options controlling how the window should be created are specified through $WindowHint.
 
-        Note that the actual properties of the window may differ from what you requested, as not all parameters and hints are hard constraints.
+		Note that the actual properties of the window may differ from what you requested, as not all parameters and hints are hard constraints.
 
-        To create a full screen window, you need to specify the monitor to use. If no monitor is specified, windowed mode will be used. Unless you have a way
-        for the user to choose a specific monitor, it is recommended that you pick the primary monitor.
+		To create a full screen window, you need to specify the monitor to use. If no monitor is specified, windowed mode will be used. Unless you have a way
+		for the user to choose a specific monitor, it is recommended that you pick the primary monitor.
 
-        To create the window at a specific position, make it initially invisible using the ${"VISIBLE".link} window hint, set its position and then show it.
+		To create the window at a specific position, make it initially invisible using the ${"VISIBLE".link} window hint, set its position and then show it.
 
-        If a full screen window is active, the screensaver is prohibited from starting.
+		If a full screen window is active, the screensaver is prohibited from starting.
 
 		The swap interval is not set during window creation, but is left at the default value for that platform. For more information, see
 		${"SwapInterval()".link}.
 
-          Note: This function may only be called from the main thread.
+		  Note: This function may only be called from the main thread.
 		""",
 
 		int.IN("width", "desired width, in pixels, of the window"),
@@ -655,7 +655,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the value of the close flag of the specified window. This can be used to override the user's attempt to close the window, or to signal that it
 		should be closed.
 
-        Note: This function may be called from secondary threads.
+		Note: This function may be called from secondary threads.
 		""",
 
 		GLFWwindow.IN("window", "window whose flag to change"),
@@ -686,17 +686,17 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		If the specified window is a full screen window, this function does nothing.
 
-        If you wish to set an initial window position you should create a hidden window (using $WindowHint and ${"VISIBLE".link}, set its
-        position and then show it.
+		If you wish to set an initial window position you should create a hidden window (using $WindowHint and ${"VISIBLE".link}, set its
+		position and then show it.
 
-        Notes:
-        ${ul(
+		Notes:
+		${ul(
 			"It is very rarely a good idea to move an already visible window, as it will confuse and annoy the user.",
 			"This function may only be called from the main thread.",
 			"The window manager may put limits on what positions are allowed.",
 			"""
-		    <strong>X11</strong>: Some window managers ignore the set position of hidden (i.e. unmapped) windows, instead placing them where it thinks is
-		    appropriate once they are shown.
+			<strong>X11</strong>: Some window managers ignore the set position of hidden (i.e. unmapped) windows, instead placing them where it thinks is
+			appropriate once they are shown.
 			"""
 		)}
 		""",
@@ -721,7 +721,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the size, in pixels, of the client area of the specified window.
 
 		Notes:
-        ${ul(
+		${ul(
 			"This function may only be called from the main thread.",
 			"The window manager may put limits on what window sizes are allowed.",
 			"For fullscreen windows, this function selects and switches to the resolution closest to the specified size, without destroying the window's context."
@@ -735,11 +735,11 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	void.func(
 		"GetFramebufferSize",
-	    "Retrieves the size, in pixels, of the framebuffer of the specified window.",
+		"Retrieves the size, in pixels, of the framebuffer of the specified window.",
 
-	    GLFWwindow.IN("window", "the window whose framebuffer to query"),
-	    mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
-	    mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL")
+		GLFWwindow.IN("window", "the window whose framebuffer to query"),
+		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL")
 	)
 
 	void.func(
@@ -748,7 +748,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Iconifies/minimizes the specified window, if it was previously restored. If it is a fullscreen window, the original monitor resolution is restored
 		until the window is restored. If the window is already iconified, this function does nothing.
 
-        Note: This function may only be called from the main thread.
+		Note: This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "window to iconify")
@@ -759,7 +759,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Restores the specified window, if it was previously iconified/minimized. If the window is already restored, this function does nothing.
 
-        Note: This function may only be called from the main thread.
+		Note: This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "window to restore")
@@ -768,9 +768,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"ShowWindow",
 		"""
-        Makes the specified window visible, if it was previously hidden. If the window is already visible or is in fullscreen mode, this function does nothing.
+		Makes the specified window visible, if it was previously hidden. If the window is already visible or is in fullscreen mode, this function does nothing.
 
-        Note: This function may only be called from the main thread.
+		Note: This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "window to make visible")
@@ -779,9 +779,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"HideWindow",
 		"""
-        Hides the specified window, if it was previously visible. If the window is already hidden or is in fullscreen mode, this function does nothing.
+		Hides the specified window, if it was previously visible. If the window is already hidden or is in fullscreen mode, this function does nothing.
 
-        Note: This function may only be called from the main thread.
+		Note: This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "window to hide")
@@ -798,7 +798,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"GetWindowAttrib",
 		"""
 		Returns an attribute of the specified window.
-        ${ul(
+		${ul(
 			"The ${"FOCUSED".link} attribute indicates whether the window is focused.",
 			"The ${"ICONIFIED".link} attribute indicates whether the window is iconified.",
 			"The ${"VISIBLE".link} attribute indicates whether the window is visible.",
@@ -852,9 +852,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		The close flag is set before this callback is called, but you can modify it at any time with ${"SetWindowShouldClose()".link}.
 
-        The close callback is not triggered by $DestroyWindow.
+		The close callback is not triggered by $DestroyWindow.
 
-        <b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows.
+		<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -967,20 +967,20 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets an input option for the specified window
 		
 		If mode is ${"CURSOR".link}, the value must be one of the supported input modes:
-        ${ul(
+		${ul(
 			"${"CURSOR_NORMAL".link} makes the cursor visible and behaving normally.",
 			"${"CURSOR_HIDDEN".link} makes the cursor invisible when it is over the client area of the window.",
 			"${"CURSOR_DISABLED".link} disables the cursor and removes any limitations on cursor movement."
 		)}
 
-        If mode is ${"STICKY_KEYS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky keys, or ${"GL11".linkGL("FALSE")} to disable it. If
-        sticky keys are enabled, a key press will ensure that ${"GetKey()".link} returns ${"PRESS".link} the next time it is called even if the key had
-        been released before the call.
-         
-        If mode is ${"STICKY_MOUSE_BUTTONS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky mouse buttons, or ${"GL11".linkGL("FALSE")} to
-        disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that ${"GetMouseButton()".link} returns ${"PRESS".link} the next
-        time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
-        been pressed but not when or in which order.
+		If mode is ${"STICKY_KEYS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky keys, or ${"GL11".linkGL("FALSE")} to disable it. If
+		sticky keys are enabled, a key press will ensure that ${"GetKey()".link} returns ${"PRESS".link} the next time it is called even if the key had
+		been released before the call.
+
+		If mode is ${"STICKY_MOUSE_BUTTONS".link}, the value must be either ${"GL11".linkGL("TRUE")} to enable sticky mouse buttons, or ${"GL11".linkGL("FALSE")} to
+		disable it. If sticky mouse buttons are enabled, a mouse button press will ensure that ${"GetMouseButton()".link} returns ${"PRESS".link} the next
+		time it is called even if the mouse button had been released before the call. This is useful when you are only interested in whether mouse buttons have
+		been pressed but not when or in which order.
 		""",
 
 		GLFWwindow.IN("window", "window whose input mode to set"),
@@ -993,14 +993,14 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns the last state reported for the specified key to the specified window. The returned state is one of ${"PRESS".link} or
 		${"RELEASE".link}. The higher-level state ${"REPEAT".link} is only reported to the key callback.
-        
-        If the ${"STICKY_KEYS".link} input mode is enabled, this function returns ${"PRESS".link} the first time you call this function after a key has
-        been pressed, even if the key has already been released.
-        
-        The key functions deal with physical keys, with tokens named after their use on the standard US keyboard layout. If you want to input text, use the
-        Unicode character callback instead.
 
-        Note: ${"KEY_UNKNOWN".link} is not a valid key for this function.
+		If the ${"STICKY_KEYS".link} input mode is enabled, this function returns ${"PRESS".link} the first time you call this function after a key has
+		been pressed, even if the key has already been released.
+
+		The key functions deal with physical keys, with tokens named after their use on the standard US keyboard layout. If you want to input text, use the
+		Unicode character callback instead.
+
+		Note: ${"KEY_UNKNOWN".link} is not a valid key for this function.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
@@ -1010,11 +1010,11 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	int.func(
 		"GetMouseButton",
 		"""
-        Returns the last state reported for the specified mouse button to the specified window.
-        
-        If the ${"STICKY_MOUSE_BUTTONS".link} input mode is enabled, this function
-        returns ${"PRESS".link} the first time you call this function after a mouse
-        button has been pressed, even if the mouse button has already been released.		
+		Returns the last state reported for the specified mouse button to the specified window.
+
+		If the ${"STICKY_MOUSE_BUTTONS".link} input mode is enabled, this function
+		returns ${"PRESS".link} the first time you call this function after a mouse
+		button has been pressed, even if the mouse button has already been released.
 		""",
 
 		GLFWwindow.IN("window", "desired window"),
@@ -1029,9 +1029,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		If the cursor is disabled (with ${"CURSOR_DISABLED".link}) then the cursor position is unbounded and limited only by the minimum and maximum values
 		of a <strong>double</strong>.
 
-        The coordinate can be converted to their integer equivalents with the {@link Math#floor} function. Casting directly to an integer type works for
-        positive coordinates, but fails for negative ones.
-        """,
+		The coordinate can be converted to their integer equivalents with the {@link Math#floor} function. Casting directly to an integer type works for
+		positive coordinates, but fails for negative ones.
+		""",
 
 		GLFWwindow.IN("window", "desired window"),
 		mods(nullable, Check(1)) _ double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
