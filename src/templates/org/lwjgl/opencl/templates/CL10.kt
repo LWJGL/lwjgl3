@@ -588,7 +588,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		cl_platform_id.IN("platform", "the platform to query"),
 		cl_platform_info.IN("param_name", "the parameter to query", PlatformInfo),
 		PARAM_VALUE_SIZE,
-		nullable _ cl_void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
+		nullable _ void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -669,7 +669,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -855,7 +855,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -969,7 +969,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -1004,7 +1004,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			optional
-		) _ cl_void_p.IN(
+		) _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the buffer data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be
@@ -1076,7 +1076,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		AutoSize("ptr").toBytes() _ size_t.IN("size", "the size in bytes of data being read"),
 		MultiType(
 			PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ cl_void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1148,7 +1148,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			const
-		) _ cl_void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		) _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1232,7 +1232,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueMapBuffer = ((MapPointer("size") _ cl_void_p).func(
+	val EnqueueMapBuffer = ((MapPointer("size") _ void_p).func(
 		"EnqueueMapBuffer",
 		"""
 		Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
@@ -1331,7 +1331,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			nullable
-		) _ cl_void_p.IN(
+		) _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1400,7 +1400,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			nullable
-		) _ cl_void_p.IN(
+		) _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1568,7 +1568,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ cl_void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read from"),
+		) _ void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1693,7 +1693,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			const
-		) _ cl_void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
+		) _ void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -2013,7 +2013,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueMapImage = ((MapPointer("(int)image.getInfoLong(CL_MEM_SIZE)") _ cl_void_p).func(
+	val EnqueueMapImage = ((MapPointer("(int)image.getInfoLong(CL_MEM_SIZE)") _ void_p).func(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.
@@ -2147,7 +2147,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 				PointerMapping.DATA_POINTER
 			),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2223,7 +2223,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		cl_command_queue.IN("command_queue", "a valid command-queue"),
 		cl_mem.IN("memobj", "a valid memory object. The OpenCL context associated with {@code command_queue} and {@code memobj} must be the same."),
-		cl_void_p.IN("mapped_ptr", "the host address returned by a previous call to $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}"),
+		void_p.IN("mapped_ptr", "the host address returned by a previous call to $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -2260,7 +2260,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 				PointerMapping.DATA_POINTER
 			),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2364,7 +2364,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 				PointerMapping.DATA_POINTER
 			),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2637,7 +2637,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2670,7 +2670,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2857,7 +2857,7 @@ kernel void image_filter (
 				PointerMapping.DATA_POINTER
 			),
 			optional
-		) _ cl_void_p.IN(
+		) _ void_p.IN(
 			"arg_value",
 			"""
 			a pointer to data that should be used as the argument value for argument specified by {@code arg_index}. The argument data pointed to by
@@ -2923,7 +2923,7 @@ kernel void image_filter (
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2958,7 +2958,7 @@ kernel void image_filter (
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -3146,7 +3146,7 @@ kernel void image_filter (
 			"""
 		),
 		Callback("CLNativeKernel") _ cl_native_kernel_func.IN("user_func", "a pointer to a host-callable user function"),
-		mods(nullable, Check("POINTER_SIZE * 2")) _ cl_void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
+		mods(nullable, Check("POINTER_SIZE * 2")) _ void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
 		AutoSize("args") _ size_t.IN(
 			"cb_args",
 			"""
@@ -3170,7 +3170,7 @@ kernel void image_filter (
 		),
 		mods(
 			const, nullable, SingleValue("memobj_loc")
-		) _ cl_void_pp.IN(
+		) _ void_pp.IN(
 			"args_mem_loc",
 			"""
 			a pointer to appropriate locations that {@code args} points to where memory object handles (cl_mem values) are stored. Before the user function is
@@ -3256,7 +3256,7 @@ kernel void image_filter (
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -3397,7 +3397,7 @@ kernel void image_filter (
 		mods(
 			MultiType(PointerMapping.DATA_LONG),
 			nullable
-		) _ cl_void_p.OUT("param_value", param_value),
+		) _ void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =

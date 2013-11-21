@@ -445,7 +445,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			nullable
-		) _ cl_void_p.IN(
+		) _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
@@ -776,7 +776,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		mods(
 			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG),
 			nullable
-		) _ cl_void_p.IN("param_value", param_value),
+		) _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -807,7 +807,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code buffer} must be the same."
 		),
 		cl_mem.IN("buffer", "a valid buffer object"),
-		const _ cl_void_p.IN(
+		const _ void_p.IN(
 			"pattern",
 			"""
 			pointer to the data pattern of size {@code pattern_size} in bytes. {@code pattern} will be used to fill a region in buffer starting at {@code offset}
@@ -862,7 +862,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code image} must be the same."
 		),
 		cl_mem.IN("image", "a valid image object"),
-		const _ cl_void_p.IN(
+		const _ void_p.IN(
 			"fill_color",
 			"""
 			the fill color. The fill color is a four component RGBA floating-point color value if the {@code image} channel data type is not an unnormalized

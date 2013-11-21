@@ -113,7 +113,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		mods(
 			MultiType(PointerMapping.DATA_INT),
 			nullable
-		) _ cl_void_p.IN("param_value", param_value),
+		) _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =

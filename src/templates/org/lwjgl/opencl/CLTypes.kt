@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 
 val OPENCL_PACKAGE = "org.lwjgl.opencl"
 
-// void
-
-val cl_void_p = PointerType("cl_void", PointerMapping.DATA)
-val cl_void_pp = PointerType(cl_void_p) // same as above
-
 // numeric
 
 val cl_char = IntegerType("cl_char", PrimitiveMapping.BYTE)

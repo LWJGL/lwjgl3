@@ -51,10 +51,6 @@ ENABLE_WARNINGS()
 	#define CALLBACK CL_CALLBACK
 #endif
 
-// Custom typedefs
-
-typedef void cl_void;
-
 // Callback function typedefs
 
 typedef void (CL_CALLBACK * cl_program_callback)(cl_program program, void *user_data);

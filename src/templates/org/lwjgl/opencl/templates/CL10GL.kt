@@ -345,7 +345,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		mods(
 			MultiType(PointerMapping.DATA_INT),
 			nullable
-		) _ cl_void_p.IN("param_value", param_value),
+		) _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =

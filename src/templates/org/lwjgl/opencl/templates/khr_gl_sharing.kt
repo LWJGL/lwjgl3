@@ -85,7 +85,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		mods(
 			MultiType(PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.IN("param_value", param_value),
+		) _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =

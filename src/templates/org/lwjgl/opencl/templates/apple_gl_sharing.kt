@@ -69,7 +69,7 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 		mods(
 			MultiType(PointerMapping.DATA_POINTER),
 			nullable
-		) _ cl_void_p.IN("param_value", param_value),
+		) _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET
 	)
 

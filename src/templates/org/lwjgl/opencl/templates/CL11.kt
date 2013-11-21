@@ -136,7 +136,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			"the type of buffer object to be created",
 			BufferCreateType
 		),
-		const _ cl_void_p.IN(
+		const _ void_p.IN(
 			"buffer_create_info",
 			"""
 			details about the buffer object to be created.
@@ -312,7 +312,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		BufferRectHostSlicePitch,
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ cl_void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -390,7 +390,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			const
-		) _ cl_void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		) _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
