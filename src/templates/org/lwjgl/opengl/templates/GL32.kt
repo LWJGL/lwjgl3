@@ -38,6 +38,15 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		"MAX_FRAGMENT_INPUT_COMPONENTS" _ 0x9125
 	)
 
+	GLvoid.func(
+		"GetBufferParameteri64v",
+		"Returns the value of a buffer object parameter.",
+
+		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
+		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
+		returnValue _ GLint64_p.OUT("params", "the requested parameter")
+	)
+
 	// ARB_draw_elements_base_vertex
 
 	GLvoid.func(

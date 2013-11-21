@@ -15,6 +15,12 @@ val BUFFER_OBJECT_TARGETS =
 	GL43#DISPATCH_INDIRECT_BUFFER GL43#SHADER_STORAGE_BUFFER
 	"""
 
+val BUFFER_OBJECT_PARAMETERS =
+	"""
+	GL15#BUFFER_SIZE GL15#BUFFER_USAGE GL15#BUFFER_ACCESS GL15#BUFFER_MAPPED GL30#BUFFER_ACCESS_FLAGS GL30#BUFFER_MAP_LENGTH GL30#BUFFER_MAP_OFFSET
+	GL44#BUFFER_IMMUTABLE_STORAGE GL44#BUFFER_STORAGE_FLAGS
+	"""
+
 val QUERY_TARGETS =
 	"""
 	GL15#SAMPLES_PASSED GL30#PRIMITIVES_GENERATED GL30#TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN GL33#TIME_ELAPSED GL33#TIMESTAMP
@@ -103,14 +109,14 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"READ_WRITE" _ 0x88BA
 	).toJavaDocLinks()
 
-	val BUFFER_OBJECT_PARAMETERS = IntConstant.block(
+	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
 
 		"BUFFER_SIZE" _ 0x8764,
 		"BUFFER_USAGE" _ 0x8765,
 		"BUFFER_ACCESS" _ 0x88BB,
 		"BUFFER_MAPPED" _ 0x88BC
-	).toJavaDocLinks()
+	)
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBufferPointerv.",
@@ -254,7 +260,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-		returnValue _ GLint_p.OUT("params", "the request parameter")
+		returnValue _ GLint_p.OUT("params", "the requested parameter")
 	)
 
 	GLvoid.func(
