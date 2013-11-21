@@ -65,6 +65,7 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.system.glfw")
 
 		// Generate capabilities
+		// TODO: Register and generate automatically, like structs.
 		generateCapabilities(org.lwjgl.openal.FunctionProviderALC, "org.lwjgl.openal.ALCCapabilities")
 		generateCapabilities(org.lwjgl.openal.FunctionProviderAL, "org.lwjgl.openal.ALCapabilities")
 		generateCapabilities(org.lwjgl.opencl.FunctionProviderCL, "org.lwjgl.opencl.CLCapabilities")
@@ -100,14 +101,17 @@ class Generator(
 		// has no arguments
 		method.getParameterTypes().size == 0
 
-	private fun discoverConfig(packageClassPath: String): Method? {
-		val firstChar = packageClassPath.lastIndexOf('.') + 1
-		val packageClass = "$packageClassPath.${Character.toUpperCase(packageClassPath[firstChar])}${packageClassPath.substring(firstChar + 1)}Package"
+	private fun runConfiguration(cp: String) {
+		val dot = cp.lastIndexOf('.')
+		val packageClass = "$cp.${Character.toUpperCase(cp[dot + 1])}${cp.substring(dot + 2)}Package"
 
 		try {
-			return Class.forName(packageClass).getMethods().find { methodFilter(it, Void.TYPE) }
+			Class.forName(packageClass)
+				.getMethods()
+				.filter { methodFilter(it, Void.TYPE) }
+				.forEach { it.invoke(null) }
 		} catch (e: ClassNotFoundException) {
-			return null
+			// ignore
 		}
 	}
 
@@ -133,9 +137,8 @@ class Generator(
 		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}")
 		packageLastModifiedMap[packageName] = packageLastModified
 
-		val config = discoverConfig(packageName)
-		// Run the configuration method if it exists
-		config?.invoke(null)
+		// Find and run configuration methods
+		runConfiguration(packageName)
 
 		// Find the template methods
 		val templates = discoverTemplates("$packageName.templates.TemplatesPackage")
