@@ -246,10 +246,10 @@ public class NativeClass(
 
 	fun String.link(name: String) = this.link(name, if ( name.endsWith(')') ) prefixMethod else prefixConstant)
 	val String.link: String
-    	get() {
-    		val hash = this.indexOf('#')
-    		return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
-    	}
+		get() {
+			val hash = this.indexOf('#')
+			return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
+		}
 
 	val String.links: ConstantBlock.Links
 		get() = this.toConstantLinks(prefixConstant)

@@ -153,7 +153,7 @@ fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
 
 		val hash = tokens[i].indexOf('#')
 		when {
-			hash == -1 -> {
+			hash == -1                 -> {
 				builder append tokens[i]
 			}
 			tokens[i].startsWith("##") -> {
@@ -161,7 +161,7 @@ fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
 				builder append tokens[i].substring(2)
 				builder append '}'
 			}
-			else -> {
+			else                       -> {
 				val token = tokens[i].substring(hash + 1)
 
 				builder append "{@link "

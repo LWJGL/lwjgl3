@@ -192,7 +192,7 @@ trait AutoSizeFactor {
 
 class AutoSizeFactorShift(
 	val left: Boolean,
-    val expression: String
+	val expression: String
 ): AutoSizeFactor {
 	override fun expression(): String = getExpression(left)
 	override fun expressionInv(): String = getExpression(!left)

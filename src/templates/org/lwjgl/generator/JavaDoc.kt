@@ -121,10 +121,10 @@ public fun String.link(name: String, prefix: String = ""): String {
 }
 
 val String.link: String
-    get() {
-        val hash = this.indexOf('#')
-        return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
-    }
+	get() {
+		val hash = this.indexOf('#')
+		return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
+	}
 
 public fun url(href: String, innerHTML: String): String = """<a href="$href">$innerHTML</a>"""
 

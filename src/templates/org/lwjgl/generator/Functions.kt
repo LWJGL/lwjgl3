@@ -247,8 +247,6 @@ public class NativeClassFunction(
 				else when {
 					bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize($bufferParamName)")
 					!bufferParam.isBufferPointer           -> it.error("Buffer reference must not be a naked pointer: AutoSize($bufferParamName)")
-					else                                   -> {
-					}
 				}
 			}
 
@@ -264,8 +262,6 @@ public class NativeClassFunction(
 				else when {
 					bufferParam.nativeType !is PointerType                -> it.error("Buffer reference must be a pointer type: AutoType($bufferParamName)")
 					bufferParam.nativeType.mapping != PointerMapping.DATA -> it.error("Pointer reference must have a DATA mapping: AutoType($bufferParamName)")
-					else                                                  -> {
-					}
 				}
 			}
 
@@ -286,8 +282,6 @@ public class NativeClassFunction(
 					else when {
 						!maxLengthParam.nativeType.mapping.isSizeType -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
 						!lengthParam.nativeType.mapping.isSizePointer -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
-						else                                          -> {
-						}
 					}
 				}
 			}
@@ -301,8 +295,6 @@ public class NativeClassFunction(
 				else when {
 					!countParam.nativeType.mapping.isSizeType                              -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
 					lengthsParam != null && !lengthsParam.nativeType.mapping.isSizePointer -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
-					else                                                                   -> {
-					}
 				}
 			}
 		}
@@ -1020,8 +1012,6 @@ public class NativeClassFunction(
 				when ( qtype ) {
 					is Parameter   -> (transform as PreFunctionTransform<Parameter>).preprocess(qtype, this)
 					is ReturnValue -> (transform as PreFunctionTransform<ReturnValue>).preprocess(qtype, this)
-					else           -> {
-					}
 				}
 			}
 		}
@@ -1047,8 +1037,6 @@ public class NativeClassFunction(
 				when ( qtype ) {
 					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(qtype, this)
 					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(qtype, this)
-					else           -> {
-					}
 				}
 			}
 		}
