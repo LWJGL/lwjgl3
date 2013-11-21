@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this interface may be passed to the {@link GLFW#glfwSetMonitorCallback(MonitorCallback)} method. */
+/** Instances of this interface may be passed to the {@link GLFW#glfwSetMonitorCallback(MonitorCallback) SetMonitorCallback} method. */
 /*@FunctionalInterface*/
 public interface MonitorCallback {
 

@@ -2528,8 +2528,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	)
 
 	val BuildProgram = (Code(
-		// Create a global reference to the pfn_notify instance. We pass it to the actual
-		// native call as well as register it with the program object (for later clean-up).
+		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
 		javaAfterNative = "\t\tif ( __result != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE

@@ -14,8 +14,8 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of interface class may be passed to the {@link CL10#clCreateContext(PointerBuffer, PointerBuffer, CLContextCallback, IntBuffer)}
- * or {@link CL10#clCreateContextFromType(PointerBuffer, long, CLContextCallback, IntBuffer)} methods.
+ * Instances of this interface may be passed to the {@link CL10#clCreateContext(PointerBuffer, PointerBuffer, CLContextCallback, IntBuffer) CreateContext}
+ * or {@link CL10#clCreateContextFromType(PointerBuffer, long, CLContextCallback, IntBuffer) CreateContextFromType} methods.
  */
 /*@FunctionalInterface*/
 public interface CLContextCallback {

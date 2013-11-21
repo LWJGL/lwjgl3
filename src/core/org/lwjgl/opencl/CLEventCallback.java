@@ -9,10 +9,7 @@ import java.lang.reflect.Method;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
 
-/**
- * Instances of this interface may be passed to the {@link CL11#clSetEventCallback(CLEvent, int, CLEventCallback)} method. Instances may be re-used after the
- * callback function has been invoked.
- */
+/** Instances of this interface may be passed to the {@link CL11#clSetEventCallback(CLEvent, int, CLEventCallback) SetEventCallback} method. */
 /*@FunctionalInterface*/
 public interface CLEventCallback {
 

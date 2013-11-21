@@ -503,8 +503,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	)
 
 	val CompileProgram = (Code(
-		// Create a global reference to the pfn_notify instance. We pass it to the actual
-		// native call as well as register it with the program object (for later clean-up).
+		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
 		javaAfterNative = "\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE
@@ -611,8 +610,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	)).javaDocLink
 
 	val LinkProgram = (Code(
-		// Create a global reference to the pfn_notify instance. We pass it to the actual
-		// native call as well as register it with the program object (for later clean-up).
+		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
 		javaAfterNative = "\t\tif ( __result == null && user_data != NULL ) memGlobalRefDelete(user_data);",
 		applyTo = Code.ApplyTo.ALTERNATIVE

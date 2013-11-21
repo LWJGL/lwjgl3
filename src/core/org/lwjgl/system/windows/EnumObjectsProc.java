@@ -8,7 +8,10 @@ import java.lang.reflect.Method;
 
 import static org.lwjgl.system.APIUtil.*;
 
-/** An application-defined callback function used with the {@link WinGDI#EnumObjects} function. It is used to process the object data. */
+/**
+ * An application-defined callback function used with the {@link WinGDI#EnumObjects(long, int, EnumObjectsProc) EnumObjects} function. It is used to process
+ * the object data.
+ */
 public interface EnumObjectsProc {
 
 	/**

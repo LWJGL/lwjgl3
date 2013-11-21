@@ -6,7 +6,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this class may be passed to the {@link Xlib#XSetErrorHandler(XErrorHandler)} method. */
+/** Instances of this class may be passed to the {@link Xlib#XSetErrorHandler(XErrorHandler) XSetErrorHandler} method. */
 /*@FunctionalInterface*/
 public interface XErrorHandler {
 

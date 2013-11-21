@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this interface may be passed to the {@link GLFW#glfwSetErrorCallback(ErrorCallback)} method. */
+/** Instances of this interface may be passed to the {@link GLFW#glfwSetErrorCallback(ErrorCallback) SetErrorCallback} method. */
 /*@FunctionalInterface*/
 public interface ErrorCallback {
 

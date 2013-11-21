@@ -4,14 +4,18 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.PointerBuffer;
+
 import java.lang.reflect.Method;
+import java.nio.ByteBuffer;
 
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of this interface may be passed to the {@link CL10#clBuildProgram}, {@link CL12#clCompileProgram} and {@link CL12#clLinkProgram} methods.
- * Instances may be re-used after the callback function has been invoked.
+ * Instances of this interface may be passed to the {@link CL10#clBuildProgram(CLProgram, PointerBuffer, ByteBuffer, CLProgramCallback) BuildProgram},
+ * {@link CL12#clCompileProgram(CLProgram, PointerBuffer, ByteBuffer, PointerBuffer, PointerBuffer, CLProgramCallback) CompileProgram} and
+ * {@link CL12#clLinkProgram(CLContext, PointerBuffer, ByteBuffer, PointerBuffer, CLProgramCallback) LinkProgram} methods.
  */
 /*@FunctionalInterface*/
 public interface CLProgramCallback {

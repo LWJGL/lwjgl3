@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this interface may be passed to the {@link AMDDebugOutput#glDebugMessageCallbackAMD(DEBUGPROCAMD)} method. */
+/** Instances of this interface may be passed to the {@link AMDDebugOutput#glDebugMessageCallbackAMD(DEBUGPROCAMD) DebugMessageCallbackAMD} method. */
 /*@FunctionalInterface*/
 public interface DEBUGPROCAMD {
 

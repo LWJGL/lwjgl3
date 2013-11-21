@@ -11,7 +11,7 @@ import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** Instances of this interface may be passed to the {@link GL43#glDebugMessageCallback(DEBUGPROC)} method. */
+/** Instances of this interface may be passed to the {@link GL43#glDebugMessageCallback(DEBUGPROC) DebugMessageCallback} method. */
 /*@FunctionalInterface*/
 public interface DEBUGPROC {
 
