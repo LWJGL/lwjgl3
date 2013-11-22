@@ -11,7 +11,7 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
 /** Implements a {@link DynamicLinkLibrary} on the Linux OS. */
-public class LinuxLibrary implements DynamicLinkLibrary {
+public class LinuxLibrary extends DynamicLinkLibrary.Default {
 
 	private final String name;
 
@@ -25,7 +25,8 @@ public class LinuxLibrary implements DynamicLinkLibrary {
 			throw new RuntimeException("Failed to dynamically load library: " + name);
 	}
 
-	public long getHandle() {
+	@Override
+	public long getPointer() {
 		return handle;
 	}
 
@@ -40,12 +41,12 @@ public class LinuxLibrary implements DynamicLinkLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(String name) {
+	public long getFunctionAddress(CharSequence name) {
 		return dlsym(handle, name);
 	}
 
 	@Override
-	public void destroy() {
+	protected void destroy() {
 		dlclose(handle);
 	}
 

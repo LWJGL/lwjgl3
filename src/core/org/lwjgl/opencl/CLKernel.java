@@ -8,7 +8,6 @@ import org.lwjgl.PointerBuffer;
 
 import java.nio.ByteBuffer;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;

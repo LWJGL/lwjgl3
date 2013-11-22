@@ -4,8 +4,10 @@
  */
 package org.lwjgl.system;
 
+import static org.lwjgl.system.MemoryUtil.*;
+
 /** A provider of native function addresses. */
-public interface FunctionProvider {
+public interface FunctionProvider extends Retainable {
 
 	/**
 	 * Returns the function address of the specified function. If the function
@@ -15,8 +17,23 @@ public interface FunctionProvider {
 	 *
 	 * @return the function address or 0L if the function is not supported
 	 */
-	long getFunctionAddress(String functionName);
+	long getFunctionAddress(CharSequence functionName);
 
-	void destroy();
+	abstract class Default extends Retainable.Default implements FunctionProvider {
+	}
+
+	/** A {@code FunctionProvider} implementation that always returns {@code NULL}. */
+	FunctionProvider DUMMY = new Default() {
+
+		@Override
+		public long getFunctionAddress(CharSequence functionName) {
+			return NULL;
+		}
+
+		@Override
+		protected void destroy() {
+		}
+
+	};
 
 }

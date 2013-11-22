@@ -15,13 +15,13 @@ public class LibraryTest {
 	public void testLifecycle() {
 		DynamicLinkLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertEquals(lib.getName(), "opengl32.dll");
-		lib.destroy();
+		lib.release();
 	}
 
 	public void testGetProcAddress() {
 		DynamicLinkLibrary lib = new WindowsLibrary("opengl32.dll");
 		assertTrue(lib.getFunctionAddress("wglGetProcAddress") != 0L);
-		lib.destroy();
+		lib.release();
 	}
 
 }

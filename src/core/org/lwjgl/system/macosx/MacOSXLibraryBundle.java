@@ -38,7 +38,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getHandle() {
+	public long getPointer() {
 		return bundleRef;
 	}
 
@@ -56,7 +56,7 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	@Override
-	public void destroy() {
+	protected void destroy() {
 		CFRelease(bundleRef);
 	}
 

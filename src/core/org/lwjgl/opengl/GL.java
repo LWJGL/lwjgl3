@@ -69,78 +69,59 @@ public final class GL {
 
 		final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
 
+		abstract class FunctionProviderGL extends FunctionProvider.Default {
+			abstract long getExtensionAddress(ByteBuffer name);
+
+			@Override
+			public long getFunctionAddress(CharSequence functionName) {
+				ByteBuffer nameBuffer = memEncodeASCII(functionName);
+				long address = getExtensionAddress(nameBuffer);
+				if ( address == NULL ) {
+					address = OPENGL.getFunctionAddress(nameBuffer);
+					if ( address == NULL )
+						LWJGLUtil.log("Failed to locate address for GL function " + functionName);
+				}
+
+				return address;
+			}
+
+			@Override
+			protected void destroy() {
+				OPENGL.release();
+			}
+		}
+
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS:
-				functionProvider = new FunctionProvider() {
+				functionProvider = new FunctionProviderGL() {
 					@Override
-					public long getFunctionAddress(String functionName) {
-						ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address = wglGetProcAddress(nameBuffer);
-						if ( address == NULL ) {
-							address = OPENGL.getFunctionAddress(nameBuffer);
-							if ( address == NULL )
-								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-						}
-
-						return address;
-					}
-
-					@Override
-					public void destroy() {
-						OPENGL.destroy();
+					long getExtensionAddress(ByteBuffer name) {
+						return wglGetProcAddress(name);
 					}
 				};
 				break;
 			case LINUX:
-				functionProvider = new FunctionProvider() {
-
+				functionProvider = new FunctionProviderGL() {
 					final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
 					final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
 
-					private long getGLXFunctionAddress(ByteBuffer nameBuffer) {
+					@Override
+					long getExtensionAddress(ByteBuffer name) {
 						if ( glXGetProcAddress != NULL )
-							return nglXGetProcAddress(memAddress(nameBuffer), glXGetProcAddress);
+							return nglXGetProcAddress(memAddress(name), glXGetProcAddress);
 
 						if ( glXGetProcAddressARB != NULL )
-							return nglXGetProcAddressARB(memAddress(nameBuffer), glXGetProcAddressARB);
+							return nglXGetProcAddressARB(memAddress(name), glXGetProcAddressARB);
 
 						return NULL;
-					}
-
-					@Override
-					public long getFunctionAddress(String functionName) {
-						ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address = getGLXFunctionAddress(nameBuffer);
-						if ( address == NULL ) {
-							address = OPENGL.getFunctionAddress(nameBuffer);
-							if ( address == NULL )
-								LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-						}
-
-						return address;
-					}
-
-					@Override
-					public void destroy() {
-						OPENGL.destroy();
 					}
 				};
 				break;
 			case MACOSX:
-				functionProvider = new FunctionProvider() {
+				functionProvider = new FunctionProviderGL() {
 					@Override
-					public long getFunctionAddress(String functionName) {
-						ByteBuffer nameBuffer = memEncodeASCII(functionName);
-						long address = OPENGL.getFunctionAddress(nameBuffer);
-						if ( address == NULL )
-							LWJGLUtil.log("Failed to locate address for GL function " + functionName);
-
-						return address;
-					}
-
-					@Override
-					public void destroy() {
-						OPENGL.destroy();
+					long getExtensionAddress(ByteBuffer name) {
+						return NULL;
 					}
 				};
 				break;
@@ -153,7 +134,7 @@ public final class GL {
 		if ( functionProvider == null )
 			return;
 
-		functionProvider.destroy();
+		functionProvider.release();
 		functionProvider = null;
 	}
 

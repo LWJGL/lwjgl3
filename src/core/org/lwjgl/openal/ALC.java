@@ -43,7 +43,7 @@ public final class ALC {
 				throw new IllegalStateException();
 		}
 
-		functionProvider = new FunctionProviderLocal() {
+		functionProvider = new FunctionProviderLocal.Default() {
 
 			private final DynamicLinkLibrary OPENAL;
 			private final long alcGetProcAddress;
@@ -67,13 +67,13 @@ public final class ALC {
 
 				alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
 				if ( alcGetProcAddress == NULL ) {
-					lib.destroy();
+					lib.release();
 					throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
 				}
 			}
 
 			@Override
-			public long getFunctionAddress(String functionName) {
+			public long getFunctionAddress(CharSequence functionName) {
 				long address = OPENAL.getFunctionAddress(functionName);
 				if ( address == NULL )
 					LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
@@ -82,7 +82,7 @@ public final class ALC {
 			}
 
 			@Override
-			public long getFunctionAddress(long handle, String functionName) {
+			public long getFunctionAddress(long handle, CharSequence functionName) {
 				ByteBuffer nameBuffer = memEncodeASCII(functionName);
 				long address = nalcGetProcAddress(handle, memAddress(nameBuffer), alcGetProcAddress);
 				if ( address == NULL )
@@ -92,8 +92,8 @@ public final class ALC {
 			}
 
 			@Override
-			public void destroy() {
-				OPENAL.destroy();
+			protected void destroy() {
+				OPENAL.release();
 			}
 		};
 	}
@@ -221,7 +221,8 @@ public final class ALC {
 		String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString))));
 
 		/*
-		OpenALSoft: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_DEDICATED ALC_EXT_disconnect ALC_EXT_EFX ALC_EXT_thread_local_context ALC_SOFT_loopback
+		OpenALSoft: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_DEDICATED ALC_EXT_disconnect ALC_EXT_EFX ALC_EXT_thread_local_context
+		ALC_SOFT_loopback
 		Creative: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_EFX
 		 */
 

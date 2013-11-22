@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 public final class AL {
 
-	private static final FunctionProvider functionProvider = new FunctionProvider() {
+	private static final FunctionProvider functionProvider = new FunctionProvider.Default() {
 
 		// We'll use alGetProcAddress for both core and extension entry points.
 		// To do that, we need to first grab the alGetProcAddress function from
@@ -29,7 +29,7 @@ public final class AL {
 		private final long alGetProcAddress = ALC.functionProvider.getFunctionAddress("alGetProcAddress");
 
 		@Override
-		public long getFunctionAddress(String functionName) {
+		public long getFunctionAddress(CharSequence functionName) {
 			ByteBuffer nameBuffer = memEncodeASCII(functionName);
 			long address = nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
 			if ( address == NULL )
@@ -39,7 +39,7 @@ public final class AL {
 		}
 
 		@Override
-		public void destroy() {}
+		protected void destroy() {}
 	};
 
 	private static ALContext context;
@@ -97,7 +97,9 @@ public final class AL {
 		String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalGetString(AL_EXTENSIONS, GetString))));
 
 		/*
-		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW AL_EXT_MULAW_MCFORMATS AL_EXT_OFFSET AL_EXT_source_distance_model AL_LOKI_quadriphonic AL_SOFT_buffer_samples AL_SOFT_buffer_sub_data AL_SOFTX_deferred_updates AL_SOFT_direct_channels AL_SOFT_loop_points
+		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW
+		AL_EXT_MULAW_MCFORMATS AL_EXT_OFFSET AL_EXT_source_distance_model AL_LOKI_quadriphonic AL_SOFT_buffer_samples AL_SOFT_buffer_sub_data
+		AL_SOFTX_deferred_updates AL_SOFT_direct_channels AL_SOFT_loop_points
 		Creative: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX3.0EMULATED EAX4.0EMULATED AL_EXT_OFFSET AL_EXT_LINEAR_DISTANCE AL_EXT_EXPONENT_DISTANCE
 		 */
 

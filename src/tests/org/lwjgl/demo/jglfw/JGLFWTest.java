@@ -5,7 +5,6 @@
 package org.lwjgl.demo.jglfw;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.jglfw.*;
 
 import java.nio.ByteBuffer;
@@ -46,7 +45,7 @@ public final class JGLFWTest {
 				int joystickButtons = glfwGetJoystickParam(i, GLFW_BUTTONS);
 				joystickButtonsState = new int[joystickButtons];
 				joystickButtonsBuffer = BufferUtils.createByteBuffer(joystickButtons);
-				System.out.println("Joystick[" + i + "] is present: " + glfwGetJoystickName(i) + " with " + joystickAxes + " axes and " + joystickButtons + " buttons");
+				System.out.format("Joystick[%d] is present: %s with %d axes and %d buttons\n", i, glfwGetJoystickName(i), joystickAxes, joystickButtons);
 				break;
 			}
 		}
@@ -225,7 +224,13 @@ public final class JGLFWTest {
 		glfwTerminate();
 	}
 
-	private static void readJoystickInput(int joystickIndex, FloatBuffer joystickAxesBuffer, float[] joystickAxesState, ByteBuffer joystickButtonsBuffer, int[] joystickButtonsState) {
+	private static void readJoystickInput(
+		int joystickIndex,
+		FloatBuffer joystickAxesBuffer,
+		float[] joystickAxesState,
+		ByteBuffer joystickButtonsBuffer,
+		int[] joystickButtonsState
+	) {
 		if ( joystickAxesBuffer != null ) {
 			int numAxes = glfwGetJoystickAxes(joystickIndex, joystickAxesBuffer);
 			for ( int i = 0; i < numAxes; i++ ) {

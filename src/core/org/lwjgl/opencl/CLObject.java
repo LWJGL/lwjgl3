@@ -9,7 +9,6 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.PointerWrapper;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -20,7 +19,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * This classes provides <strong>getInfo&lt;Type&gt;</strong> methods that can be used to query information about the CL object. Which one of these methods
  * should be used depends on the type of the information being queried.
  * <p/>
- * The implementation calls the appropriate CL function based on the concrete {@code CLObject} class, e.g. {@link CL10#clGetPlatformInfo} for {@link CLPlatform}.
+ * The implementation calls the appropriate CL function based on the concrete {@code CLObject} class, e.g. {@link CL10#clGetPlatformInfo} for {@link
+ * CLPlatform}.
  */
 public abstract class CLObject extends PointerWrapper {
 
@@ -130,7 +130,8 @@ public abstract class CLObject extends PointerWrapper {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be ASCII encoded and have length equal to {@code param_value_size}.
+	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be ASCII encoded and have length equal to {@code
+	 * param_value_size}.
 	 *
 	 * @param param_name       the parameter to query
 	 * @param param_value_size the explicit string length
@@ -159,7 +160,8 @@ public abstract class CLObject extends PointerWrapper {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded and have length equal to {@code param_value_size}.
+	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded and have length equal to {@code
+	 * param_value_size}.
 	 *
 	 * @param param_name       the parameter to query
 	 * @param param_value_size the explicit string length

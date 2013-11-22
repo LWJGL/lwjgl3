@@ -68,7 +68,7 @@ public final class CL {
 		if ( functionProvider != null )
 			throw new IllegalStateException("CL has already been created.");
 
-		functionProvider = new FunctionProviderLocal() {
+		functionProvider = new FunctionProviderLocal.Default() {
 
 			private final DynamicLinkLibrary OPENCL;
 
@@ -92,7 +92,7 @@ public final class CL {
 				clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
 				clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
 				if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
-					OPENCL.destroy();
+					OPENCL.release();
 					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 				}
 
@@ -101,7 +101,7 @@ public final class CL {
 			}
 
 			@Override
-			public long getFunctionAddress(String functionName) {
+			public long getFunctionAddress(CharSequence functionName) {
 				long address = OPENCL.getFunctionAddress(functionName);
 				if ( address == NULL )
 					LWJGLUtil.log("Failed to locate address for CL platform function " + functionName);
@@ -110,7 +110,7 @@ public final class CL {
 			}
 
 			@Override
-			public long getFunctionAddress(long handle, String functionName) {
+			public long getFunctionAddress(long handle, CharSequence functionName) {
 				ByteBuffer nameBuffer = memEncodeASCII(functionName);
 				long address =
 					clGetExtensionFunctionAddressForPlatform != NULL ?
@@ -124,8 +124,8 @@ public final class CL {
 			}
 
 			@Override
-			public void destroy() {
-				OPENCL.destroy();
+			protected void destroy() {
+				OPENCL.release();
 			}
 		};
 	}
@@ -135,7 +135,7 @@ public final class CL {
 			return;
 
 		CLPlatform.destroy();
-		functionProvider.destroy();
+		functionProvider.release();
 		functionProvider = null;
 	}
 

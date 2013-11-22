@@ -13,7 +13,6 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 		"org.lwjgl.opengl.GL11",
 		"org.lwjgl.opengl.GL12",
 		"org.lwjgl.opengl.GL13",
-		"org.lwjgl.opengl.GL15",
 		"org.lwjgl.opengl.GL30",
 		"org.lwjgl.opengl.GL31"
 	)

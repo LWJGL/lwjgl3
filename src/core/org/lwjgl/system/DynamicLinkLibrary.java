@@ -4,9 +4,11 @@
  */
 package org.lwjgl.system;
 
+import org.lwjgl.Pointer;
+
 import java.nio.ByteBuffer;
 
-public interface DynamicLinkLibrary {
+public interface DynamicLinkLibrary extends FunctionProvider, Pointer {
 
 	/** Returns the library name. */
 	String getName();
@@ -20,10 +22,7 @@ public interface DynamicLinkLibrary {
 	 */
 	long getFunctionAddress(ByteBuffer name);
 
-	/** Alternative version of: {@link #getFunctionAddress(ByteBuffer)} */
-	long getFunctionAddress(String name);
-
-	/** Releases any resources held by the library. */
-	void destroy();
+	abstract class Default extends Retainable.Default implements DynamicLinkLibrary {
+	}
 
 }

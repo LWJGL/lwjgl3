@@ -9,7 +9,7 @@ import org.lwjgl.system.DynamicLinkLibrary;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X. */
-public abstract class MacOSXLibrary implements DynamicLinkLibrary {
+public abstract class MacOSXLibrary extends DynamicLinkLibrary.Default {
 
 	private final String name;
 
@@ -17,15 +17,13 @@ public abstract class MacOSXLibrary implements DynamicLinkLibrary {
 		this.name = name;
 	}
 
-	public abstract long getHandle();
-
 	@Override
 	public String getName() {
 		return name;
 	}
 
 	@Override
-	public long getFunctionAddress(String name) {
+	public long getFunctionAddress(CharSequence name) {
 		return getFunctionAddress(memEncodeASCII(name));
 	}
 

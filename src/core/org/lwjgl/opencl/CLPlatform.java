@@ -12,7 +12,6 @@ import org.lwjgl.system.FunctionProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;

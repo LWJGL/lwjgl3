@@ -98,13 +98,13 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	private void freeLibraries() {
 		if ( dwmapi != null ) {
-			dwmapi.destroy();
+			dwmapi.release();
 			dwmapi = null;
 			dwmapiFuncs = null;
 		}
 
 		if ( user32 != null ) {
-			user32.destroy();
+			user32.release();
 			user32 = null;
 			user32Funcs = null;
 		}
@@ -729,17 +729,17 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 
 	private boolean initLibraries() {
 		try {
-			user32 = new WindowsFunctionProvider("user32.dll");
+			user32 = new WindowsLibrary("user32.dll");
 		} catch (Exception e) {
 			// ignore silently
-			user32 = new DummyFunctionProvider();
+			user32 = FunctionProvider.DUMMY;
 		}
 
 		try {
-			dwmapi = new WindowsFunctionProvider("dwmapi.dll");
+			dwmapi = new WindowsLibrary("dwmapi.dll");
 		} catch (Exception e) {
 			// ignore silently
-			dwmapi = new DummyFunctionProvider();
+			dwmapi = FunctionProvider.DUMMY;
 		}
 
 		user32Funcs = new User32(user32);
@@ -1241,19 +1241,6 @@ class PlatformWin implements Platform<GLFWwindowWin> {
 			if ( WindowFromPoint(pos) == window.handle )
 				SetCursor(nLoadCursor(NULL, IDC_ARROW));
 		}
-	}
-
-	private static class DummyFunctionProvider implements FunctionProvider {
-
-		@Override
-		public long getFunctionAddress(String functionName) {
-			return NULL;
-		}
-
-		@Override
-		public void destroy() {
-		}
-
 	}
 
 }

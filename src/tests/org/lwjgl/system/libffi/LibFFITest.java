@@ -5,8 +5,6 @@
 package org.lwjgl.system.libffi;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;

@@ -72,8 +72,6 @@ public class Gears extends AbstractGears {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-
-		System.out.println(Thread.currentThread());
 	}
 
 	@Override

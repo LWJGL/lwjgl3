@@ -14,7 +14,7 @@ import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsPlatform.*;
 
 /** Implements a {@link DynamicLinkLibrary} on the Windows OS. */
-public class WindowsLibrary implements DynamicLinkLibrary {
+public class WindowsLibrary extends DynamicLinkLibrary.Default {
 
 	/** The LWJGL dll handle. */
 	public static final long HINSTANCE = GetModuleHandle(memEncodeUTF16(Sys.getNativeLibrary()));
@@ -36,13 +36,14 @@ public class WindowsLibrary implements DynamicLinkLibrary {
 			windowsThrowException("Failed to load library: " + name);
 	}
 
-	public long getHandle() {
-		return handle;
-	}
-
 	@Override
 	public String getName() {
 		return name;
+	}
+
+	@Override
+	public long getPointer() {
+		return handle;
 	}
 
 	@Override
@@ -51,13 +52,13 @@ public class WindowsLibrary implements DynamicLinkLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(String name) {
-		return GetProcAddress(handle, memEncodeASCII(name));
+	public long getFunctionAddress(CharSequence name) {
+		return GetProcAddress(handle, name);
 	}
 
 	@Override
-	public void destroy() {
-		if ( FreeLibrary(handle) == 0 )
+	protected void destroy() {
+		if ( FreeLibrary(handle) == FALSE )
 			windowsThrowException("Failed to unload library: " + name);
 	}
 

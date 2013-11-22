@@ -22,7 +22,7 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getHandle() {
+	public long getPointer() {
 		return handle;
 	}
 
@@ -32,12 +32,12 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(String name) {
+	public long getFunctionAddress(CharSequence name) {
 		return dlsym(handle, name);
 	}
 
 	@Override
-	public void destroy() {
+	protected void destroy() {
 		dlclose(handle);
 	}
 
