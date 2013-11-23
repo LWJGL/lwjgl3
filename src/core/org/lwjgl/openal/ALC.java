@@ -145,11 +145,7 @@ public final class ALC {
 	 * @param token        the information to query. One of:<p/>{@link ALC11#ALC_ALL_DEVICES_SPECIFIER}, {@link ALC11#ALC_CAPTURE_DEVICE_SPECIFIER}
 	 */
 	public static List<String> getStringList(long deviceHandle, int token) {
-		long alcGetString = functionProvider.getFunctionAddress("alcGetString");
-		if ( LWJGLUtil.CHECKS )
-			checkFunctionAddress(alcGetString);
-
-		long __result = nalcGetString(deviceHandle, token, alcGetString);
+		long __result = nalcGetString(deviceHandle, token);
 		if ( __result == NULL )
 			return null;
 

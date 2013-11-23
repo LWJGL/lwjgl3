@@ -214,22 +214,25 @@ public class NativeClassFunction(
 			return builder.toString()
 		}
 
-	val isSimpleFunction: Boolean
+	private val isSimpleFunction: Boolean
 		get() = nativeClass.functionProvider == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
-	val ReturnValue.isStructValue: Boolean
+	private val hasUnsafeMethod: Boolean
+		get() = nativeClass.functionProvider != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !has(Capabilities)
+
+	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
 
-	val returnsStructValue: Boolean
+	internal val returnsStructValue: Boolean
 		get() = returns.isStructValue && !hasParam { it has autoSizeResult }
 
-	val returnsJavaMethodType: String
+	private val returnsJavaMethodType: String
 		get() = if ( returnsStructValue ) "void" else returns.javaMethodType
 
-	val returnsNativeMethodType: String
+	private val returnsNativeMethodType: String
 		get() = if ( returnsStructValue ) "void" else returns.nativeMethodType
 
-	val returnsJniFunctionType: String
+	private val returnsJniFunctionType: String
 		get() = if ( returnsStructValue ) "void" else returns.jniFunctionType
 
 	private fun Parameter.error(msg: String) {
@@ -304,7 +307,7 @@ public class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if ( nativeClass.functionProvider != null )
+		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -445,6 +448,9 @@ public class NativeClassFunction(
 			writer.generateNativeMethod(simpleFunction)
 
 		if ( !simpleFunction ) {
+			if ( nativeClass.functionProvider != null && hasUnsafeMethod )
+				writer.generateUnsafeMethod()
+
 			// This the only special case where we don't generate a "normal" Java method. If we did,
 			// we'd need to add a postfix to either this or the alternative method, since we're
 			// changing the return type. It looks ugly and LWJGL didn't do it pre-3.0 either.
@@ -488,6 +494,41 @@ public class NativeClassFunction(
 		println(");\n")
 	}
 
+	private fun PrintWriter.generateUnsafeMethod() {
+		generateJavaDocLink("Unsafe version of", this@NativeClassFunction)
+		println("\t@JavadocExclude")
+		print("\t${accessModifier}static ${returnsNativeMethodType} n$name(")
+		printList(getNativeParams()) {
+			it.asNativeMethodParam
+		}
+
+		if ( returnsStructValue ) {
+			if ( this@NativeClassFunction.hasNativeParams ) print(", ")
+			print("long $RESULT")
+		}
+		println(") {")
+
+		// Get and validate function address
+		nativeClass.functionProvider!!.generateFunctionAddress(this, this@NativeClassFunction)
+		println("\t\tif ( LWJGLUtil.CHECKS )")
+		println("\t\t\tcheckFunctionAddress($FUNCTION_ADDRESS);")
+
+		generateNativeMethodCall {
+			printList(getNativeParams()) {
+				it.name
+			}
+
+			if ( returnsStructValue ) {
+				if ( hasNativeParams ) print(", ")
+				print("memAddress($RESULT)")
+			}
+
+			if ( hasNativeParams ) print(", ")
+			print("$FUNCTION_ADDRESS")
+		}
+		println("\t}\n")
+	}
+
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
@@ -523,7 +564,7 @@ public class NativeClassFunction(
 
 		// Step 2: Get function address
 
-		if ( nativeClass.functionProvider != null )
+		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.a: Generate checks
@@ -635,10 +676,16 @@ public class NativeClassFunction(
 		}
 	}
 
-	private fun PrintWriter.generateNativeMethodCall(returnLater: Boolean = false, printParams: PrintWriter.() -> Unit) {
+	private fun PrintWriter.generateNativeMethodCall(
+		// false: check return type
+		// true: force later
+		// null: force immediate
+		returnLater: Boolean? = null,
+		printParams: PrintWriter.() -> Unit
+	) {
 		print("\t\t")
 		if ( !(returns.isVoid || returnsStructValue) ) {
-			if ( returns.isBufferPointer || returnLater ) {
+			if ( returnLater != null && (returns.isBufferPointer || true.equals(returnLater)) ) {
 				print(
 					if ( returns.nativeType is ObjectType )
 						"${returns.nativeType.className} $RESULT = ${returns.nativeType.className}.create("
@@ -647,7 +694,7 @@ public class NativeClassFunction(
 				)
 			} else {
 				print("return ")
-				if ( returns.nativeType is ObjectType )
+				if ( returnLater != null && returns.nativeType is ObjectType )
 					print("${returns.nativeType.className}.create(")
 			}
 		}
@@ -655,13 +702,13 @@ public class NativeClassFunction(
 		if ( has(Reuse) ) print("${get(Reuse).reference}.")
 		print("n$name(")
 		printParams()
-		if ( nativeClass.functionProvider != null ) {
+		if ( nativeClass.functionProvider != null && !hasUnsafeMethod ) {
 			if ( hasNativeParams ) print(", ")
 			print("$FUNCTION_ADDRESS")
 		}
 		print(")")
 
-		if ( returns.nativeType is ObjectType ) {
+		if ( returnLater != null && returns.nativeType is ObjectType ) {
 			if ( returns has Construct ) {
 				val construct = returns[Construct]
 				print(", ${construct.firstArg}")
@@ -993,7 +1040,7 @@ public class NativeClassFunction(
 
 		// Step 2: Get function address
 
-		if ( nativeClass.functionProvider != null )
+		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.A: Generate checks

@@ -38,22 +38,16 @@ public class CLPlatform extends CLObject {
 	}
 
 	private static CLCapabilities createCapabilities(long platform, FunctionProvider functionProvider) {
-		long clGetPlatformInfo = functionProvider.getFunctionAddress("clGetPlatformInfo");
-		long clGetDeviceIDs = functionProvider.getFunctionAddress("clGetDeviceIDs");
-		long clGetDeviceInfo = functionProvider.getFunctionAddress("clGetDeviceInfo");
-		if ( clGetPlatformInfo == NULL || clGetDeviceIDs == NULL || clGetDeviceInfo == NULL )
-			throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
-
 		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
-		String extensionsString = getPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, clGetPlatformInfo);
+		String extensionsString = getPlatformInfo(platform, CL_PLATFORM_EXTENSIONS);
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Enumerate devices
 		{
 			APIBuffer __buffer = apiBuffer();
-			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address(), clGetDeviceIDs);
+			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address());
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query number of OpenCL platform devices.");
 
@@ -63,7 +57,7 @@ public class CLPlatform extends CLObject {
 
 			__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
-			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL, clGetDeviceIDs);
+			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL);
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query OpenCL platform devices.");
 
@@ -73,13 +67,13 @@ public class CLPlatform extends CLObject {
 
 			// Add device extensions to the set
 			for ( int i = 0; i < num_devices; i++ ) {
-				extensionsString = CLDevice.getDeviceInfo(devices[i], CL_DEVICE_EXTENSIONS, clGetDeviceInfo);
+				extensionsString = CLDevice.getDeviceInfo(devices[i], CL_DEVICE_EXTENSIONS);
 				CL.addExtensions(extensionsString, supportedExtensions);
 			}
 		}
 
 		// Parse PLATFORM_VERSION string
-		String version = getPlatformInfo(platform, CL_PLATFORM_VERSION, clGetPlatformInfo);
+		String version = getPlatformInfo(platform, CL_PLATFORM_VERSION);
 		int majorVersion;
 		int minorVersion;
 		try {
@@ -95,18 +89,18 @@ public class CLPlatform extends CLObject {
 		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, CL.getICD());
 	}
 
-	private static String getPlatformInfo(long platform, int param_name, long clGetPlatformInfo) {
+	private static String getPlatformInfo(long platform, int param_name) {
 		APIBuffer __buffer = apiBuffer();
 
 		__buffer.intParam(0);
-		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address(), clGetPlatformInfo);
+		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address());
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL platform information.");
 
 		int bytes = __buffer.intValue(0);
 
 		__buffer.bufferParam(bytes);
-		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), NULL, clGetPlatformInfo);
+		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query OpenCL platform information.");
 

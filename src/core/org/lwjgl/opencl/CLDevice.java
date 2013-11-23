@@ -35,16 +35,14 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 	}
 
 	private static CLCapabilities createCapabilities(long cl_device_id, CLPlatform platform) {
-		long clGetDeviceInfo = CL10.getInstance().GetDeviceInfo;
-
 		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse DEVICE_EXTENSIONS string
-		String extensionsString = getDeviceInfo(cl_device_id, CL_DEVICE_EXTENSIONS, clGetDeviceInfo);
+		String extensionsString = getDeviceInfo(cl_device_id, CL_DEVICE_EXTENSIONS);
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Parse DEVICE_VERSION string
-		String version = getDeviceInfo(cl_device_id, CL_DEVICE_VERSION, clGetDeviceInfo);
+		String version = getDeviceInfo(cl_device_id, CL_DEVICE_VERSION);
 		int majorVersion;
 		int minorVersion;
 		try {
@@ -60,18 +58,18 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platform.getCapabilities());
 	}
 
-	static String getDeviceInfo(long device_id, int param_name, long clGetDeviceInfo) {
+	static String getDeviceInfo(long device_id, int param_name) {
 		APIBuffer __buffer = apiBuffer();
 
 		__buffer.intParam(0);
-		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address(), clGetDeviceInfo);
+		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address());
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query size of OpenCL device information.");
 
 		int bytes = __buffer.intValue(0);
 
 		__buffer.bufferParam(bytes);
-		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), NULL, clGetDeviceInfo);
+		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), NULL);
 		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 			throw new OpenCLException("Failed to query OpenCL device information.");
 
