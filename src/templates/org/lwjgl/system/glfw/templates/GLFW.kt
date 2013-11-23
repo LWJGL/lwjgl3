@@ -341,7 +341,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	val Init = (Code(
-		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();"
+		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();")
 	) _ int.func(
 		"Init",
 		"""
@@ -366,7 +366,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)).javaDocLink
 
 	Code(
-		javaBeforeNative = "\t\tWindowCallback.clearAll();"
+		javaBeforeNative = statement("\t\tWindowCallback.clearAll();")
 	) _ void.func(
 		"Terminate",
 		"""
@@ -593,7 +593,9 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	Code(
 		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
-		javaAfterNative = "\t\tif ( __result != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
+		javaAfterNative = statement(
+			"\t\tif ( __result != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
+		)
 	) _ GLFWwindow.func(
 		"CreateWindow",
 		"""
@@ -622,7 +624,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	val DestroyWindow = (Code(
-		javaBeforeNative = "\t\tWindowCallback.set(window, null);"
+		javaBeforeNative = statement("\t\tWindowCallback.set(window, null);")
 	) _ (void.func(
 		"DestroyWindow",
 		"""
@@ -914,7 +916,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	val PollEvents = (Code(
-		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.pollEvents(); return; }"
+		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.pollEvents(); return; }")
 	) _ void.func(
 		"PollEvents",
 		"""
@@ -932,7 +934,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)).javaDocLink
 
 	Code(
-		javaInit = "\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.waitEvents(); return; }"
+		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.waitEvents(); return; }")
 	) _ void.func(
 		"WaitEvents",
 		"""

@@ -213,9 +213,8 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 	)
 
 	Code(
-		javaBeforeNative = "\t\tlong user_data = CLSVMFreeCallback.Util.register(pfn_free_func);",
-		javaAfterNative = "\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong user_data = CLSVMFreeCallback.Util.register(pfn_free_func);", Code.ApplyTo.ALTERNATIVE),
+		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"EnqueueSVMFree",
 		"Enqueues a command to free the shared virtual memory buffer allocated using $SVMAlloc or a shared system memory pointer.",

@@ -504,9 +504,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 	val CompileProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
-		javaAfterNative = "\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
+		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"CompileProgram",
 		"""
@@ -611,9 +610,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 	val LinkProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
-		javaAfterNative = "\t\tif ( __result == null && user_data != NULL ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
+		javaAfterNative = statement("\t\tif ( __result == null && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ (Construct("context") _ cl_program).func(
 		"LinkProgram",
 		"""

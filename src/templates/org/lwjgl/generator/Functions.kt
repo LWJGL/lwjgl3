@@ -519,7 +519,7 @@ public class NativeClassFunction(
 
 		println(") {")
 
-		val code = getCode(Code.ApplyTo.NORMAL)
+		val code = if ( this@NativeClassFunction.has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
 
 		// Step 2: Get function address
 
@@ -527,7 +527,7 @@ public class NativeClassFunction(
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.a: Generate checks
-		printCode(code?.javaInit)
+		printCode(code.javaInit, Code.ApplyTo.NORMAL)
 		generateChecks(GenerationMode.NORMAL);
 
 		// Step 3.b: Prepare APIBuffer parameters.
@@ -542,9 +542,9 @@ public class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
-		generateCodeBeforeNative(code)
+		generateCodeBeforeNative(code, Code.ApplyTo.NORMAL)
 
-		generateNativeMethodCall(code?.javaAfterNative != null) {
+		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.NORMAL)) {
 			printList(getNativeParams()) {
 				it.asNativeMethodCallParam(this@NativeClassFunction, GenerationMode.NORMAL)
 			}
@@ -555,7 +555,7 @@ public class NativeClassFunction(
 			}
 		}
 
-		generateCodeAfterNative(code)
+		generateCodeAfterNative(code, Code.ApplyTo.NORMAL)
 
 		if ( !(returns.isVoid || returnsStructValue) ) {
 			// TODO: optimize condition?
@@ -595,46 +595,42 @@ public class NativeClassFunction(
 						throw IllegalStateException("No autoSizeResult parameter could be found.")
 				}
 				println(");")
-			} else if ( code?.javaAfterNative != null )
+			} else if ( code.hasStatements(code.javaAfterNative, Code.ApplyTo.NORMAL) )
 				println("\t\treturn $RESULT;")
 		}
 
 		println("\t}\n")
 	}
 
-	private fun getCode(applyTo: Code.ApplyTo): Code? {
-		if ( !has(Code) )
-			return null
+	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: Code.ApplyTo) {
+		if ( statements.isEmpty() )
+			return
 
-		val code = this[Code]
-		return when ( code.applyTo ) {
-			Code.ApplyTo.BOTH, applyTo -> code
-			else                       -> null
+		statements.filter { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }.forEach {
+			println(it.code)
 		}
 	}
 
-	private fun PrintWriter.printCode(fragment: String?) {
-		if ( fragment != null )
-			println(fragment)
-	}
+	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: Code.ApplyTo) {
+		printCode(code.javaBeforeNative, applyTo)
 
-	private fun PrintWriter.generateCodeBeforeNative(code: Code?) {
-		printCode(code?.javaBeforeNative)
-
-		if ( code?.javaFinally != null ) {
+		if ( code.hasStatements(code.javaFinally, applyTo) ) {
 			println("\t\ttry {")
 			print('\t')
 		}
 	}
 
-	private fun PrintWriter.generateCodeAfterNative(code: Code?) {
-		if ( code?.javaFinally != null )
+	private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: Code.ApplyTo) {
+		val finally = code.getStatements(code.javaFinally, applyTo)
+		if ( finally.isNotEmpty() )
 			print('\t')
-		printCode(code?.javaAfterNative)
+		printCode(code.javaAfterNative, applyTo)
 
-		if ( code?.javaFinally != null ) {
+		if ( finally.isNotEmpty() ) {
 			println("\t} finally {")
-			printCode(code?.javaFinally)
+			finally.forEach {
+				println(it.code)
+			}
 			println("\t\t}")
 		}
 	}
@@ -993,7 +989,7 @@ public class NativeClassFunction(
 		}
 		println(") {")
 
-		val code = getCode(Code.ApplyTo.ALTERNATIVE)
+		val code = if ( this@NativeClassFunction.has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
 
 		// Step 2: Get function address
 
@@ -1001,7 +997,7 @@ public class NativeClassFunction(
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.A: Generate checks
-		printCode(code?.javaInit)
+		printCode(code.javaInit, Code.ApplyTo.ALTERNATIVE)
 		generateChecks(GenerationMode.ALTERNATIVE, customChecks, transforms);
 
 		// Step 3.B: Transform pre-processing.
@@ -1042,15 +1038,15 @@ public class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
-		generateCodeBeforeNative(code)
+		generateCodeBeforeNative(code, Code.ApplyTo.ALTERNATIVE)
 
-		generateNativeMethodCall(code?.javaAfterNative != null) {
+		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.ALTERNATIVE)) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, GenerationMode.ALTERNATIVE))
 			}
 		}
 
-		generateCodeAfterNative(code)
+		generateCodeAfterNative(code, Code.ApplyTo.ALTERNATIVE)
 
 		if ( returns.isVoid || returnsStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
@@ -1101,7 +1097,7 @@ public class NativeClassFunction(
 					println("return $returnExpression;")
 				else // Multiple statements, assumes the transformation includes the return statement.
 					println(returnExpression)
-			} else if ( code?.javaAfterNative != null )
+			} else if ( code.hasStatements(code.javaAfterNative, Code.ApplyTo.ALTERNATIVE) )
 				println("\t\treturn $RESULT;")
 		}
 
@@ -1235,29 +1231,44 @@ public class Capabilities(
 }
 
 public class Code(
-	val javaInit: String? = null,
+	val javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
 
-	val javaBeforeNative: String? = null,
-	val javaAfterNative: String? = null,
-	val javaFinally: String? = null,
+	val javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
+	val javaAfterNative: List<Code.Statement> = Code.NO_STATEMENTS,
+	val javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
 
 	val nativeBeforeCall: String? = null,
-	val nativeAfterCall: String? = null,
-
-	val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
+	val nativeAfterCall: String? = null
 ): FunctionModifier() {
 	class object: ModifierObject<Code> {
 		override val key = javaClass<Code>()
+
+		// Used to avoid null checks
+		private val NO_STATEMENTS: List<Statement> = ArrayList<Statement>(0)
+		val NO_CODE = Code()
 
 		enum class ApplyTo {
 			NORMAL
 			ALTERNATIVE
 			BOTH
 		}
+
+		data class Statement(
+			val code: String,
+			val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
+		)
 	}
 
 	override val isSpecial: Boolean = true
+
+	fun hasStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
+		if ( statements identityEquals NO_STATEMENTS ) false else statements.any { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
+	fun getStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
+		if ( statements identityEquals NO_STATEMENTS ) statements else statements.filter { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
+
 }
+public fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
+
 
 /** Marks a function without arguments as a macro. */
 public val macro: FunctionModifier = object : FunctionModifier() {

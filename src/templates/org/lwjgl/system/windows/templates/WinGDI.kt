@@ -205,9 +205,8 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	Code(
-		javaBeforeNative = "\t\tlong param = memGlobalRefNew(objectFunc);",
-		javaFinally = "\t\t\tmemGlobalRefDelete(param);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong param = memGlobalRefNew(objectFunc);", Code.ApplyTo.ALTERNATIVE),
+		javaFinally = statement("\t\t\tmemGlobalRefDelete(param);", Code.ApplyTo.ALTERNATIVE)
 	) _ int.func(
 		"EnumObjects",
 		"""

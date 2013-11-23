@@ -178,9 +178,11 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 
 	Code(
 		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = "\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
-		javaAfterNative = "\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement(
+			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
+			Code.ApplyTo.ALTERNATIVE
+		),
+		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"SetMemObjectDestructorCallback",
 		"""
@@ -617,9 +619,11 @@ clReleaseMemObject(buf2);
 
 	Code(
 		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = "\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
-		javaAfterNative = "\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement(
+			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
+			Code.ApplyTo.ALTERNATIVE
+		),
+		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"SetEventCallback",
 		"""
