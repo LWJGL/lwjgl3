@@ -4,16 +4,18 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.APIUtil;
 import org.lwjgl.system.FastLongMap;
 import org.lwjgl.system.FunctionProvider;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
+import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_platform_id pointer. */
@@ -26,7 +28,7 @@ public class CLPlatform extends CLObject {
 	private CLPlatform(long pointer) {
 		super(pointer);
 
-		capabilities = CL.createCapabilities(pointer);
+		capabilities = createCapabilities(pointer, CL.getFunctionProvider());
 	}
 
 	public static CLPlatform create(long id) {
@@ -35,7 +37,82 @@ public class CLPlatform extends CLObject {
 		return platform;
 	}
 
-	@Override
+	private static CLCapabilities createCapabilities(long platform, FunctionProvider functionProvider) {
+		long clGetPlatformInfo = functionProvider.getFunctionAddress("clGetPlatformInfo");
+		long clGetDeviceIDs = functionProvider.getFunctionAddress("clGetDeviceIDs");
+		long clGetDeviceInfo = functionProvider.getFunctionAddress("clGetDeviceInfo");
+		if ( clGetPlatformInfo == NULL || clGetDeviceIDs == NULL || clGetDeviceInfo == NULL )
+			throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+
+		Set<String> supportedExtensions = new HashSet<>(32);
+
+		// Parse PLATFORM_EXTENSIONS string
+		String extensionsString = getPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, clGetPlatformInfo);
+		CL.addExtensions(extensionsString, supportedExtensions);
+
+		// Enumerate devices
+		{
+			APIBuffer __buffer = apiBuffer();
+			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address(), clGetDeviceIDs);
+			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+				throw new OpenCLException("Failed to query number of OpenCL platform devices.");
+
+			int num_devices = __buffer.intValue(0);
+			if ( num_devices == 0 )
+				return null;
+
+			__buffer.bufferParam(num_devices << POINTER_SHIFT);
+
+			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL, clGetDeviceIDs);
+			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+				throw new OpenCLException("Failed to query OpenCL platform devices.");
+
+			long[] devices = new long[num_devices];
+			for ( int i = 0; i < num_devices; i++ )
+				devices[i] = __buffer.pointerValue(i << POINTER_SHIFT);
+
+			// Add device extensions to the set
+			for ( int i = 0; i < num_devices; i++ ) {
+				extensionsString = CLDevice.getDeviceInfo(devices[i], CL_DEVICE_EXTENSIONS, clGetDeviceInfo);
+				CL.addExtensions(extensionsString, supportedExtensions);
+			}
+		}
+
+		// Parse PLATFORM_VERSION string
+		String version = getPlatformInfo(platform, CL_PLATFORM_VERSION, clGetPlatformInfo);
+		int majorVersion;
+		int minorVersion;
+		try {
+			StringTokenizer tokenizer = new StringTokenizer(version.substring(7), ". ");
+
+			majorVersion = parseInt(tokenizer.nextToken());
+			minorVersion = parseInt(tokenizer.nextToken());
+		} catch (Exception e) {
+			throw new OpenCLException("The platform major and/or minor OpenCL version \"" + version + "\" is malformed: " + e.getMessage());
+		}
+		CL.addCLVersions(majorVersion, minorVersion, supportedExtensions);
+
+		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, CL.getICD());
+	}
+
+	private static String getPlatformInfo(long platform, int param_name, long clGetPlatformInfo) {
+		APIBuffer __buffer = apiBuffer();
+
+		__buffer.intParam(0);
+		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address(), clGetPlatformInfo);
+		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			throw new OpenCLException("Failed to query size of OpenCL platform information.");
+
+		int bytes = __buffer.intValue(0);
+
+		__buffer.bufferParam(bytes);
+		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), NULL, clGetPlatformInfo);
+		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			throw new OpenCLException("Failed to query OpenCL platform information.");
+
+		return __buffer.stringValueASCII(0, bytes - 1);
+	}
+
 	public CLCapabilities getCapabilities() {
 		return capabilities;
 	}
@@ -66,11 +143,7 @@ public class CLPlatform extends CLObject {
 	 * @return the available platforms
 	 */
 	public static List<CLPlatform> getPlatforms(Filter<CLPlatform> filter) {
-		FunctionProvider functionProvider = CL.getFunctionProvider();
-
-		long clGetPlatformIDs = functionProvider.getFunctionAddress("clGetPlatformIDs");
-		if ( clGetPlatformIDs == NULL )
-			throw new OpenCLException("A core OpenCL function could not be found. Make sure that OpenCL has been loaded.");
+		long clGetPlatformIDs = CL10.getInstance().GetPlatformIDs;
 
 		APIBuffer __buffer = APIUtil.apiBuffer();
 		int errcode = nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
@@ -101,7 +174,7 @@ public class CLPlatform extends CLObject {
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetPlatformInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetPlatformInfo);
+		return nclGetPlatformInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, CL10.getInstance().GetPlatformInfo);
 	}
 
 	/**

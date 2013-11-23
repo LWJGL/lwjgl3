@@ -111,7 +111,7 @@ public final class AL {
 				supportedExtensions.add(extName);
 		}
 
-		return new ALCapabilities(supportedExtensions);
+		return new ALCapabilities(getFunctionProvider(), supportedExtensions);
 	}
 
 	static <T> T checkExtension(String extension, T functions, boolean supported) {

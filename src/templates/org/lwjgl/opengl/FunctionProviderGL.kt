@@ -128,8 +128,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tContextCapabilities(Set<String> ext, boolean fc) {")
-		println("\t\tFunctionProvider provider = GL.getFunctionProvider();\n")
+		println("\n\tContextCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {")
 		for ( extension in classes ) {
 			if ( extension.hasNativeFunctions ) {
 				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")

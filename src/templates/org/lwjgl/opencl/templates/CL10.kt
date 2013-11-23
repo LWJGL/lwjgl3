@@ -541,10 +541,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	val TRUE = "TRUE".link
 	val FALSE = "FALSE".link
 
-	Capabilities(
-		expression = "CL.getFunctionProvider().getFunctionAddress(\"clGetPlatformIDs\")",
-		override = true
-	) _ cl_int.func(
+	cl_int.func(
 		"GetPlatformIDs",
 		"Obtains the list of available platforms.",
 
@@ -689,15 +686,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	)
 
 	val CreateContext = (mods(
-		Capabilities(
-			"platform",
-			"CLPlatform platform = CLContext.getPlatform(properties)"
-		),
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = "\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);",
-			applyTo = Code.ApplyTo.ALTERNATIVE
+			javaBeforeNative = arrayListOf(
+				Code.Statement("\t\tCLPlatform platform = CLContext.getPlatform(properties);", Code.ApplyTo.BOTH),
+				Code.Statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE)
+			)
 		)
 	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
 		"CreateContext",
@@ -765,15 +760,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	)).javaDocLink
 
 	val CreateContextFromType = (mods(
-		Capabilities(
-			"platform",
-			"CLPlatform platform = CLContext.getPlatform(properties)"
-		),
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = "\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);",
-			applyTo = Code.ApplyTo.ALTERNATIVE
+			javaBeforeNative = arrayListOf(
+				Code.Statement("\t\tCLPlatform platform = CLContext.getPlatform(properties);", Code.ApplyTo.BOTH),
+				Code.Statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE)
+			)
 		)
 	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
 		"CreateContextFromType",
@@ -2529,9 +2522,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 	val BuildProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = "\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);",
-		javaAfterNative = "\t\tif ( __result != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
+		javaAfterNative = statement("\t\tif ( __result != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"BuildProgram",
 		"""
@@ -2611,10 +2603,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)).javaDocLink
 
-	Capabilities(
-		expression = "CL.getFunctionProvider().getFunctionAddress(\"clUnloadCompiler\")",
-		override = true
-	) _ cl_int.func(
+	cl_int.func(
 		"UnloadCompiler",
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler. This is a hint from the application and does not guarantee that the
@@ -3124,9 +3113,8 @@ kernel void image_filter (
 
 	Code(
 		// Create a global reference to the user_func instance.
-		javaBeforeNative = "\t\tlong user_data = CLNativeKernel.Util.register(user_func, args);",
-		javaAfterNative = "\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);",
-		applyTo = Code.ApplyTo.ALTERNATIVE
+		javaBeforeNative = statement("\t\tlong user_data = CLNativeKernel.Util.register(user_func, args);", Code.ApplyTo.ALTERNATIVE),
+		javaAfterNative = statement("\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"EnqueueNativeKernel",
 		"""
@@ -3211,11 +3199,7 @@ kernel void image_filter (
 		"""
 	)
 
-	val WaitForEvents = (Capabilities(
-		// TODO: this is shit, fix
-		expression = "CL.getFunctionProvider().getFunctionAddress(\"clWaitForEvents\")",
-		override = true
-	) _ cl_int.func(
+	val WaitForEvents = cl_int.func(
 		"WaitForEvents",
 		"""
 		Waits on the host thread for commands identified by event objects in {@code event_list} to complete. A command is considered complete if its execution
@@ -3237,7 +3221,7 @@ kernel void image_filter (
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	cl_int.func(
 		"GetEventInfo",
@@ -3459,10 +3443,7 @@ kernel void image_filter (
 		cl_command_queue.IN("command_queue", "the command-queue")
 	)
 
-	Capabilities(
-		expression = "CL.getFunctionProvider().getFunctionAddress(\"clGetExtensionFunctionAddress\")",
-		override = true
-	) _ voidptr.func(
+	voidptr.func(
 		"GetExtensionFunctionAddress",
 		"""
 		Returns the address of the extension function named by {@code funcname}. The pointer returned should be cast to a function pointer type matching the

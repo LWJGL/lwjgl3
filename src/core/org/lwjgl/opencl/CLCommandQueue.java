@@ -31,7 +31,7 @@ public class CLCommandQueue extends CLObjectChild<CLDevice> {
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetCommandQueueInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetCommandQueueInfo);
+		return nclGetCommandQueueInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, CL10.getInstance().GetCommandQueueInfo);
 	}
 
 }

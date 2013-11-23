@@ -54,10 +54,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		"CGL_SHAREGROUP_KHR" _ 0x200C
 	)
 
-	Capabilities(
-		"platform",
-		"CLPlatform platform = CLContext.getPlatform(properties)"
-	) _ cl_int.func(
+	cl_int.func(
 		"GetGLContextInfoKHR",
 		"""
 		Queries the OpenCL device currently corresponding to an OpenGL context.
@@ -72,8 +69,6 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 			"""
 			points to an attribute list whose format and valid contents are identical to the {code properties} argument of ${"CL10#CreateContext()".link}.
 			{@code properties} must identify a single valid GL context or GL share group object.
-
-			<strong>LWJGL note</strong>: The ${"CL10#CONTEXT_PLATFORM".link} property must be present.
 			"""
 		),
 		cl_gl_context_info.IN(

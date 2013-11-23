@@ -42,7 +42,6 @@ public final class GL {
 	private GL() {}
 
 	public static void create() {
-		// TODO: document this property
 		String libName = System.getProperty("org.lwjgl.opengl.libname", null);
 		if ( libName == null ) {
 			switch ( LWJGLUtil.getPlatform() ) {
@@ -289,7 +288,7 @@ public final class GL {
 				throw new UnsupportedOperationException();
 		}
 
-		return new ContextCapabilities(supportedExtensions, forwardCompatible);
+		return new ContextCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
 	}
 
 	private static void addWGLExtensions(Set<String> supportedExtensions) {

@@ -28,9 +28,6 @@ public abstract class CLObject extends PointerWrapper {
 		super(pointer);
 	}
 
-	/** Returns the {@link CLCapabilities} instance associated with this {@code CLObject}. */
-	public abstract CLCapabilities getCapabilities();
-
 	protected abstract int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret);
 
 	/**

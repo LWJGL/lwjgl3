@@ -46,7 +46,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		val capName = nativeClass.capName("ALC")
 		val isExtension = !nativeClass.templateName.startsWith("ALC")
 
-		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
+		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long device" else ""}) {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
 		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
@@ -107,8 +107,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCCapabilities(long device, Set<String> ext) {")
-		println("\t\tFunctionProviderLocal provider = ALC.getFunctionProvider();\n")
+		println("\n\tALCCapabilities(FunctionProviderLocal provider, long device, Set<String> ext) {")
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
 			if ( extension.hasNativeFunctions && extension.prefix == "ALC" ) {

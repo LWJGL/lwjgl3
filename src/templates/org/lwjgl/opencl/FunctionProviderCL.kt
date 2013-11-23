@@ -21,47 +21,28 @@ private val NativeClass.capName: String
 
 public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 
-	override val isLocal: Boolean = true
-	override val hasCurrentCapabilities: Boolean = false
-
-	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
-		if ( !nativeClass.templateName.startsWith("CL") )
-			writer.print(", long platform")
-	}
-
-	override fun getFunctionAddressCall(function: NativeClassFunction): String =
-		if ( function.nativeClass.templateName.startsWith("CL") )
-			"provider.getFunctionAddress(\"${function.name}\")"
-		else
-			"provider.getFunctionAddress(platform, \"${function.name}\")"
-
 	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
 	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the CL platform or device that corresponds to the given {@link CLObject}. */")
-		println("\tpublic static ${nativeClass.className} getInstance(CLObject object) {")
-		println("\t\treturn object.getCapabilities().__${nativeClass.className};")
+		println("\tpublic static ${nativeClass.className} getInstance() {")
+		println("\t\treturn CL.getICD().__${nativeClass.className};")
 		println("\t}")
 
 		val functions = nativeClass.functions
 		val capName = nativeClass.capName
 		val isExtension = !nativeClass.templateName.startsWith("CL")
 
-		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProviderLocal provider${if ( isExtension ) ", long platform" else ""}) {")
-		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
+		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
 
-		print("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider")
-		if ( isExtension ) print(", platform")
-		println(");")
+		println("\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
 
 		print("\n\t\tboolean supported = checkFunctions(")
 		printPointers(functions)
 		println(");")
 
-		print("\n\t\treturn CL.checkExtension(\"")
-		print(capName);
-		println("\", funcs, supported);")
+		println("\n\t\treturn supported ? funcs : null;")
 		println("\t}\n")
 	}
 
@@ -74,7 +55,6 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 
 		println("import java.util.Set;\n")
 
-		println("/** Defines the capabilities of an OpenCL platform. */")
 		println("""/**
  * Defines the capabilities of an OpenCL platform or device.
  * <p/>
@@ -122,32 +102,31 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
+		// ICD constructor
 		println("""
-	CLCapabilities(long platform, int majorVersion, int minorVersion, Set<String> ext) {
-		this.majorVersion = majorVersion;
-		this.minorVersion = minorVersion;
-
-		FunctionProviderLocal provider = CL.getFunctionProvider();
+	CLCapabilities(FunctionProvider provider) {
+		this.majorVersion = 0;
+		this.minorVersion = 0;
 """)
 		for ( extension in classes ) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(ext, provider${if ( extension.templateName.startsWith("CL") ) "" else ", platform"})) != null;")
+				println("\t\t$capName = (__${extension.className} = ${extension.className}.create(provider)) != null;")
 			} else
-				println("\t\t$capName = ext.contains(\"$capName\");")
+				println("\t\t$capName = false;")
 		}
 		println("\t}")
 
+		// Platform/Device constructor
 		println("""
-	CLCapabilities(int majorVersion, int minorVersion, Set<String> ext, CLPlatform platform) {
+	CLCapabilities(int majorVersion, int minorVersion, Set<String> ext, CLCapabilities caps) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
-		CLCapabilities caps = platform.getCapabilities();
 """)
 		for ( extension in classes ) {
 			val capName = extension.capName
 			if ( extension.hasNativeFunctions ) {
-				println("\t\t$capName = (__${extension.className} = ext.contains(\"$capName\") ? caps.__${extension.className} : null) != null;")
+				println("\t\t$capName = (__${extension.className} = CL.checkExtension(ext, \"$capName\", caps.__${extension.className})) != null;")
 			} else
 				println("\t\t$capName = ext.contains(\"$capName\");")
 		}
@@ -170,7 +149,6 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		println("""
 		return buf.toString();
 	}
-
 """)
 
 		print("}")

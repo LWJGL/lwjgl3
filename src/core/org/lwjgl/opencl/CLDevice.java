@@ -4,12 +4,16 @@
  */
 package org.lwjgl.opencl;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.APIBuffer;
+
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_device_id pointer. */
@@ -31,16 +35,16 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 	}
 
 	private static CLCapabilities createCapabilities(long cl_device_id, CLPlatform platform) {
-		long clGetDeviceInfo = CL10.getInstance(platform).GetDeviceInfo;
+		long clGetDeviceInfo = CL10.getInstance().GetDeviceInfo;
 
 		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse DEVICE_EXTENSIONS string
-		String extensionsString = CL.getDeviceInfo(cl_device_id, CL_DEVICE_EXTENSIONS, clGetDeviceInfo);
+		String extensionsString = getDeviceInfo(cl_device_id, CL_DEVICE_EXTENSIONS, clGetDeviceInfo);
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Parse DEVICE_VERSION string
-		String version = CL.getDeviceInfo(cl_device_id, CL_DEVICE_VERSION, clGetDeviceInfo);
+		String version = getDeviceInfo(cl_device_id, CL_DEVICE_VERSION, clGetDeviceInfo);
 		int majorVersion;
 		int minorVersion;
 		try {
@@ -53,17 +57,34 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 		}
 		CL.addCLVersions(majorVersion, minorVersion, supportedExtensions);
 
-		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platform);
+		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platform.getCapabilities());
 	}
 
-	@Override
+	static String getDeviceInfo(long device_id, int param_name, long clGetDeviceInfo) {
+		APIBuffer __buffer = apiBuffer();
+
+		__buffer.intParam(0);
+		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address(), clGetDeviceInfo);
+		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			throw new OpenCLException("Failed to query size of OpenCL device information.");
+
+		int bytes = __buffer.intValue(0);
+
+		__buffer.bufferParam(bytes);
+		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), NULL, clGetDeviceInfo);
+		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
+			throw new OpenCLException("Failed to query OpenCL device information.");
+
+		return __buffer.stringValueASCII(0, bytes - 1);
+	}
+
 	public CLCapabilities getCapabilities() {
 		return capabilities;
 	}
 
 	@Override
 	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetDeviceInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, getCapabilities().__CL10.GetDeviceInfo);
+		return nclGetDeviceInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, CL10.getInstance().GetDeviceInfo);
 	}
 
 }

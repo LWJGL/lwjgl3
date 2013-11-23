@@ -234,7 +234,7 @@ public final class ALC {
 				supportedExtensions.add(extName);
 		}
 
-		return new ALCCapabilities(device, supportedExtensions);
+		return new ALCCapabilities(getFunctionProvider(), device, supportedExtensions);
 	}
 
 	static <T> T checkExtension(String extension, T functions, boolean supported) {

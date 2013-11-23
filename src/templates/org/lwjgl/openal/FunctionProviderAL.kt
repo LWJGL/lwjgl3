@@ -22,8 +22,7 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		val functions = nativeClass.functions
 		val capName = nativeClass.capName("AL")
 
-		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider")
-		println(") {")
+		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {")
 		println("\t\tif ( !ext.contains(\"$capName\") ) return null;")
 
 		println("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
@@ -82,8 +81,7 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 			println(if ( i == capClasses.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCapabilities(Set<String> ext) {")
-		println("\t\tFunctionProvider provider = AL.getFunctionProvider();\n")
+		println("\n\tALCapabilities(FunctionProvider provider, Set<String> ext) {")
 		for ( extension in classes ) {
 			val hasCap = extension.prefixTemplate == "AL"
 			val capName = extension.capName(extension.prefixTemplate)

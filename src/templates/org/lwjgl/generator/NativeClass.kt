@@ -34,10 +34,10 @@ public abstract class FunctionProvider {
 	}
 
 	/** If true, different platforms/devices/contexts return different function addresses. */
-	open val isLocal: Boolean = false // GL is global, AL/CL are local
+	open val isLocal: Boolean = false // GL & CL are global, AL is local
 
 	/** If false, a capabilities instance is not available in the current thread or process. A parameter must provide the instance. */
-	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL depends on the parameters.
+	open val hasCurrentCapabilities: Boolean = true // GL has thread-local capabilities, AL has process-wide capabilities (unless ALC_EXT_thread_local_context is used), CL has the ICD.
 
 	open fun generateFunctionAddress(writer: PrintWriter, function: NativeClassFunction) {
 		val instanceParameter = if ( hasCurrentCapabilities )
