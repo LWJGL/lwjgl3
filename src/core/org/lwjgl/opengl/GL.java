@@ -354,14 +354,6 @@ public final class GL {
 		return fc ? NULL : provider.getFunctionAddress(functionName);
 	}
 
-	static boolean isFunctionSupported(long address) {
-		return address != NULL;
-	}
-
-	static boolean isFunctionSupported(long address, boolean fc) {
-		return fc || address != NULL;
-	}
-
 	static <T> T checkExtension(String extension, T functions, boolean supported) {
 		if ( supported )
 			return functions;

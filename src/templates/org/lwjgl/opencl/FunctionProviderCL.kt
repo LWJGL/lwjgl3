@@ -55,21 +55,9 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		if ( isExtension ) print(", platform")
 		println(");")
 
-		print("\n\t\tboolean supported = ")
-		val funcIndent: String
-		if ( functions.size == 1 )
-			funcIndent = " "
-		else {
-			println()
-			funcIndent = "\t\t\t"
-		}
-
-		for ( i in functions.indices ) {
-			print(funcIndent)
-
-			print("funcs.${functions[i].simpleName} != 0L")
-			println(if ( i == functions.lastIndex ) ";" else " &&")
-		}
+		print("\n\t\tboolean supported = checkFunctions(")
+		printPointers(functions)
+		println(");")
 
 		print("\n\t\treturn CL.checkExtension(\"")
 		print(capName);

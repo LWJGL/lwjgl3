@@ -28,32 +28,14 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 
 		println("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
 
-		print("\n\t\tboolean supported = ")
-		val funcIndent: String
-		if ( functions.size == 1 )
-			funcIndent = " "
-		else {
-			println()
-			funcIndent = "\t\t\t"
+		print("\n\t\tboolean supported = checkFunctions(")
+		printPointers(functions) {
+			if ( it has DependsOn )
+				"ext.contains(\"${it[DependsOn].reference}\") ? funcs.${it.simpleName} : -1L"
+			else
+				"funcs.${it.simpleName}"
 		}
-
-		for ( i in functions.indices ) {
-			print(funcIndent)
-
-			var isSpecial = false
-			if ( functions[i] has DependsOn ) {
-				if ( !isSpecial ) {
-					isSpecial = true
-					print("(")
-				}
-				print("!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
-			}
-
-			print("funcs.${functions[i].simpleName} != 0L")
-
-			if ( isSpecial ) print(')')
-			println(if ( i == functions.lastIndex ) ";" else " &&")
-		}
+		println(");")
 
 		print("\n\t\treturn AL.checkExtension(\"")
 		print(capName);

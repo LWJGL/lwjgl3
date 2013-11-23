@@ -70,6 +70,32 @@ public abstract class FunctionProvider {
 	}
 	open fun getFunctionAddressCall(function: NativeClassFunction): String = "provider.getFunctionAddress(\"${function.name}\")"
 
+	protected fun PrintWriter.printPointers(
+		functions: List<NativeClassFunction>,
+		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.simpleName}" }
+	) {
+		print("\n\t\t\t")
+
+		var lineSize = 12
+		for ( (i, func) in functions.withIndices() ) {
+			val pointer = printPointer(func)
+
+			lineSize += pointer.size
+			if ( 160 <= lineSize ) {
+				print("\n\t\t\t")
+				lineSize = 12 + pointer.size
+			}
+
+			print(pointer)
+			if ( i < functions.lastIndex ) {
+				print(", ")
+				lineSize += 2
+			}
+		}
+
+		print("\n\t\t")
+	}
+
 	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)
 	abstract fun generateCapabilities(writer: PrintWriter)
 

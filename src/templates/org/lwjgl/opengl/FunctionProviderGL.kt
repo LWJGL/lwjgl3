@@ -65,28 +65,23 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		println(");")
 
 		print("\n\t\tboolean supported = ")
-		val funcIndent: String
-		if ( functions.size == 1 )
-			funcIndent = " "
-		else {
-			println()
-			funcIndent = "\t\t\t"
+
+		val printPointer = { (func: NativeClassFunction) ->
+			if ( func has DependsOn )
+				"ext.contains(\"${func[DependsOn].reference}\") ? funcs.${func.simpleName} : -1L"
+			else
+				"funcs.${func.simpleName}"
 		}
 
-		for ( i in functions.indices ) {
-			print(funcIndent)
-
-			if ( functions[i] has DependsOn )
-				print("(!ext.contains(\"${functions[i][DependsOn].reference}\") || ")
-
-			print("GL.isFunctionSupported(funcs.${functions[i].simpleName}")
-			if ( functions[i] has deprecatedGL )
-				print(", fc")
-			print(")")
-
-			if ( functions[i] has DependsOn ) print(')')
-			println(if ( i == functions.lastIndex ) ";" else " &&")
+		if ( hasDeprecated ) {
+			print("(fc || checkFunctions(")
+			printPointers(functions.filter { it has deprecatedGL }, printPointer)
+			print(")) && ")
 		}
+
+		print("checkFunctions(")
+		printPointers(if ( hasDeprecated ) functions.filterNot { it has deprecatedGL } else functions, printPointer)
+		println(");")
 
 		print("\n\t\treturn GL.checkExtension(\"")
 		print(nativeClass.capName);
