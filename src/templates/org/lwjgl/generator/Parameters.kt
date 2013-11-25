@@ -314,7 +314,7 @@ public class Check(
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The Check modifier cannot be applied on naked pointer types.")
+			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
 	}
 }
 public fun Check(value: Int): Check = Check(Integer.toString(value))
@@ -343,7 +343,7 @@ public val nullTerminated: TemplateModifier = object : ParameterModifier() {
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on naked pointer types.")
+			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on opaque pointer types.")
 	}
 }
 
@@ -381,7 +381,7 @@ public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The MultiType modifier cannot be applied on naked pointer types.")
+			throw IllegalArgumentException("The MultiType modifier cannot be applied on opaque pointer types.")
 	}
 
 }
@@ -405,7 +405,7 @@ public class Return(
 			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The returnValue modifier cannot be applied on naked pointer types.")
+			throw IllegalArgumentException("The returnValue modifier cannot be applied on opaque pointer types.")
 
 		if ( param.paramType != ParameterType.OUT )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on output parameters.")
@@ -426,7 +426,7 @@ public class SingleValue(val newName: String): ParameterModifier() {
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
 
 		if ( param.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The SingleValue modifier cannot be applied on naked pointer types.")
+			throw IllegalArgumentException("The SingleValue modifier cannot be applied on opaque pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on input parameters.")
@@ -469,7 +469,7 @@ public class Callback(val procClass: String, val storeInFunctions: Boolean = fal
 	override val isSpecial: Boolean = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The Callback modifier can only be applied on naked pointer types.")
+			throw IllegalArgumentException("The Callback modifier can only be applied on opaque pointer types.")
 
 		if ( param.paramType != ParameterType.IN )
 			throw IllegalArgumentException("The Callback modifier can only be applied on input parameters.")
@@ -517,6 +517,6 @@ public val address: ReturnValueModifier = object : ReturnValueModifier() {
 	override val isSpecial: Boolean = false
 	override protected fun validate(returns: ReturnValue) {
 		if ( returns.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The address modifier can only be applied on naked pointer types.")
+			throw IllegalArgumentException("The address modifier can only be applied on opaque pointer types.")
 	}
 }

@@ -249,7 +249,7 @@ public class NativeClassFunction(
 				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoSize($bufferParamName)")
 				else when {
 					bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize($bufferParamName)")
-					!bufferParam.isBufferPointer           -> it.error("Buffer reference must not be a naked pointer: AutoSize($bufferParamName)")
+					!bufferParam.isBufferPointer           -> it.error("Buffer reference must not be a opaque pointer: AutoSize($bufferParamName)")
 				}
 			}
 
