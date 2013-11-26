@@ -748,7 +748,7 @@ public class NativeClassFunction(
 			if ( it.paramType == ParameterType.IN ) {
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
-					val param = paramMap[autoSize.reference]!!
+					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
 					// Check if there's also a MultiType on the referenced parameter. Skip if so.
 					if ( !(param has MultiType) )
 						transforms[it] = AutoSizeTransform(param)
@@ -881,6 +881,25 @@ public class NativeClassFunction(
 					transforms[it] = AutoTypeTargetTransform(autoType)
 					generateAlternativeMethod(strippedName, "${autoType.javaMethodType.getSimpleName()} version of:", transforms, customChecks)
 				}
+
+				// Generate a SingleValue alternative for each type
+				if ( it has SingleValue ) {
+					val autoSizeParam = getParam { it has AutoSize && it.get(AutoSize).hasReference(param.name) } // required
+
+					val singleValue = param[SingleValue]
+					for ( autoType in multiTypes.types ) {
+						// Generate type1, type2, type3, type4 versions
+						// TODO: Make customizable? New modifier?
+						for ( i in 1..4 ) {
+							// Transform the AutoSize parameter
+							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
+
+							val primitiveType = PointerMapping.primitiveMap[autoType]!!
+							transforms[it] = VectorValueTransform(if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType, singleValue.newName, i)
+							generateAlternativeMethod("${strippedName}$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "${primitiveType}$i" } value version of:", transforms, customChecks)
+						}
+					}
+				}
 			} else if ( it has AutoType ) {
 				// Generate AutoType alternatives
 				customChecks.clear()
@@ -962,7 +981,7 @@ public class NativeClassFunction(
 
 		// Apply any SingleValue transformations.
 		if ( parameters count {
-			if ( !(it has SingleValue) ) {
+			if ( !it.has(SingleValue) || it.has(MultiType) ) {
 				false
 			} else {
 				val param = it
@@ -1501,6 +1520,21 @@ private class SingleValueTransform(
 			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(memAddress(${newName}Buffer));")
 		} else
 			writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param($newName);")
+	}
+}
+
+private class VectorValueTransform(
+	val paramType: String,
+	val elementType: String,
+	val newName: String,
+    val size: Int
+): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+	override fun transformDeclaration(param: Parameter, original: String): String? = size.indices.map { "$paramType ${newName}$it" }.reduce {(a, b) -> "$a, $b" } // Replace with vector elements
+	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) {
+		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")
+		for ( i in 1..(size - 1) )
+			writer.println("\t\t$API_BUFFER.${elementType}Param(${newName}$i);")
 	}
 }
 
