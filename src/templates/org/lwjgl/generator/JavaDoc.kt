@@ -106,9 +106,12 @@ public fun String.link(name: String, prefix: String = ""): String {
 			if ( parentheses == -1 )
 				throw IllegalStateException("Invalid method link: $this#$prefix$name")
 
-			val simpleName = name.substring(0, parentheses)
-			val hasParams = parentheses == name.size - 2
-			"$this#$prefix${if ( hasParams ) simpleName else name}${if ( prefix.isEmpty() && !hasParams ) "" else " $simpleName"}"
+			var simpleName = name.substring(0, parentheses)
+			if ( simpleName.endsWith('v') )
+				simpleName = simpleName.substring(0, simpleName.length - (if ( simpleName.endsWith("_v") ) 2 else 1))
+
+			val hasParams = parentheses < name.size - 2
+			"$this#$prefix$simpleName${if ( hasParams ) name.substring(parentheses) else ""}${if ( prefix.isEmpty() && !hasParams ) "" else " $simpleName"}"
 		} else {
 			// Field
 			if ( this.isEmpty() && prefix.isEmpty() )
