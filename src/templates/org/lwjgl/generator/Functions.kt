@@ -342,7 +342,7 @@ public class NativeClassFunction(
 		parameters.forEach {
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType.mapping == PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
+			if ( it.nativeType.mapping == PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && !it.has(Callback) )
 				checks add "checkPointer(${it.name});"
 
 			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {
@@ -425,19 +425,16 @@ public class NativeClassFunction(
 		if ( customChecks != null )
 			checks addAll customChecks
 
-		if ( !checks.isEmpty() ) {
-			print("\t\tif ( LWJGLUtil.CHECKS )")
-			if ( checks.size == 1 )
-				println()
-			else
-				println(" {")
-			checks.forEach {
-				print("\t\t\t")
-				println(it)
-			}
-			if ( 1 < checks.size )
-				println("\t\t}")
+		if ( checks.isEmpty() )
+			return
+
+		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
+		checks.forEach {
+			print("\t\t\t")
+			println(it)
 		}
+		if ( 1 < checks.size )
+			println("\t\t}")
 	}
 
 	/** This is where we start generating java code. */
@@ -508,11 +505,26 @@ public class NativeClassFunction(
 		}
 		println(") {")
 
-		// Get and validate function address
+		// Get function address
 		nativeClass.functionProvider!!.generateFunctionAddress(this, this@NativeClassFunction)
-		println("\t\tif ( LWJGLUtil.CHECKS )")
-		println("\t\t\tcheckFunctionAddress($FUNCTION_ADDRESS);")
 
+		// Basic checks
+		val checks = ArrayList<String>(4)
+		checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
+		parameters forEach {
+			if ( it.nativeType.mapping == PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
+				checks add "checkPointer(${it.name});"
+		}
+
+		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
+		checks.forEach {
+			print("\t\t\t")
+			println(it)
+		}
+		if ( 1 < checks.size )
+			println("\t\t}")
+
+		// Native method call
 		generateNativeMethodCall {
 			printList(getNativeParams()) {
 				it.name
