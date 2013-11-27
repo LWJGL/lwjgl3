@@ -104,13 +104,8 @@ public enum class Access(internal val modifier: String) {
 
 public abstract class GeneratorTarget(
 	val packageName: String,
-	val className: String,
-	val nativeSubPath: String = ""
+	val className: String
 ): TemplateElement() {
-
-	class object {
-		val DOT_PATTERN = Pattern.compile("[.]")
-	}
 
 	internal var access: Access = Access.PUBLIC
 		set(access: Access) {
@@ -125,6 +120,20 @@ public abstract class GeneratorTarget(
 		}
 
 	val preamble = Preamble()
+
+	abstract fun generateJava(writer: PrintWriter)
+
+}
+
+public abstract class GeneratorTargetNative(
+	packageName: String,
+	className: String,
+	val nativeSubPath: String = ""
+): GeneratorTarget(packageName, className) {
+
+	class object {
+		val DOT_PATTERN = Pattern.compile("[.]")
+	}
 
 	val nativeFileName: String
 		get() = "${packageName.replace('.', '_')}_$className"
@@ -143,7 +152,6 @@ public abstract class GeneratorTarget(
 		$nativeFileNameJNI = fileName.toString()
 	}
 
-	abstract fun generateJava(writer: PrintWriter)
 	abstract fun generateNative(writer: PrintWriter)
 
 }
@@ -161,4 +169,27 @@ fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boole
 fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
 	preamble.nativeImport(*files)
 	return this
+}
+
+// ------------------------------------
+
+public class CustomClass(
+	packageName: String,
+	className: String,
+	val printContent: PrintWriter.() -> Unit
+): GeneratorTarget(packageName, className) {
+
+	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
+	private fun PrintWriter.generateJavaImpl() {
+		print(HEADER)
+		println("package $packageName;\n")
+
+		preamble.printJava(this)
+
+		if ( documentation != null )
+			println(documentation)
+
+		printContent()
+	}
+
 }

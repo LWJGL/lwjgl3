@@ -112,7 +112,7 @@ public class NativeClass(
 	public val prefixTemplate: String,
 	public val postfix: String,
 	val functionProvider: FunctionProvider?
-): GeneratorTarget(packageName, className, nativeSubPath) {
+): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
 

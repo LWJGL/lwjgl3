@@ -57,7 +57,7 @@ public class Struct(
 	val virtual: Boolean = false,
 	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
 	val globalIdentifier: Boolean = true
-): GeneratorTarget(packageName, className, nativeSubPath) {
+): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	class object {
 		private val bufferMethodMap = hashMapOf(

@@ -55,6 +55,7 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
+		// TODO: Move these to args[2] or a file in /config to enable build customization
 		generate("org.lwjgl.openal")
 		generate("org.lwjgl.opencl")
 		generate("org.lwjgl.opengl")
@@ -70,7 +71,11 @@ fun main(args: Array<String>) {
 		generateCapabilities(org.lwjgl.openal.FunctionProviderAL, "org.lwjgl.openal.ALCapabilities")
 		generateCapabilities(org.lwjgl.opencl.FunctionProviderCL, "org.lwjgl.opencl.CLCapabilities")
 		generateCapabilities(org.lwjgl.opengl.FunctionProviderGL, "org.lwjgl.opengl.ContextCapabilities")
-	}.generateStructs() // Generate structs. These are auto-registered during the process above.
+
+		// Generate utility classes. These are auto-registered during the process above.
+		generate("struct", Generator.structs)
+		generate("custom class", Generator.customClasses)
+	}
 }
 
 class Generator(
@@ -80,10 +85,15 @@ class Generator(
 ) {
 
 	class object {
-		private val structs = ArrayList<Struct>()
+		val structs = ArrayList<Struct>()
+		val customClasses = ArrayList<CustomClass>()
 
 		fun register(struct: Struct) {
 			structs add struct
+		}
+
+		fun register(customClass: CustomClass) {
+			customClasses add customClass
 		}
 	}
 
@@ -193,6 +203,16 @@ class Generator(
 		}
 	}
 
+	fun <T: GeneratorTarget> generate(typeName: String, targets: List<T>) {
+		targets.forEach {
+			try {
+				generate(it)
+			} catch (e: Exception) {
+				throw RuntimeException("Uncaught exception while generating $typeName: ${it.packageName}.${it.className}", e)
+			}
+		}
+	}
+
 	fun generate(target: GeneratorTarget) {
 		val packageLastModified = packageLastModifiedMap[target.packageName]!!
 
@@ -210,9 +230,11 @@ class Generator(
 			generateJava(it)
 		}
 
-		generateNative(target) {
-			generateOutput(target, it) {
-				generateNative(it)
+		if ( target is GeneratorTargetNative ) {
+			generateNative(target) {
+				generateOutput(target, it) {
+					generateNative(it)
+				}
 			}
 		}
 	}
@@ -222,17 +244,7 @@ class Generator(
 			generateCapabilities(it)
 		}
 
-	fun generateStructs() {
-		structs.forEach {
-			try {
-				generate(it)
-			} catch (e: Exception) {
-				throw RuntimeException("Uncaught exception while generating struct: ${it.packageName}.${it.className}", e)
-			}
-		}
-	}
-
-	private fun generateNative(target: GeneratorTarget, generate: (File) -> Unit) {
+	private fun generateNative(target: GeneratorTargetNative, generate: (File) -> Unit) {
 		var subPackagePath = target.packageName.substring("org.lwjgl.".size).replace('.', '/')
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
