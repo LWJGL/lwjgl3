@@ -4,6 +4,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 
 import java.nio.ByteBuffer;
+import java.util.Arrays;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -40,7 +41,7 @@ public class APIBuffer {
 	/** Pushes the current parameter offset to a stack. */
 	public APIBuffer push() {
 		if ( stackDepth == stack.length )
-			stack = new int[stack.length << 1];
+			stack = Arrays.copyOf(stack, stack.length << 1);
 
 		stack[stackDepth++] = offset;
 

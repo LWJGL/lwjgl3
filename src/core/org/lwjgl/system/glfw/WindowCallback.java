@@ -9,10 +9,11 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.system.FastLongMap;
 
 import java.lang.reflect.Method;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
@@ -72,8 +73,7 @@ public abstract class WindowCallback {
 		}
 	}
 
-	// This is used like a Set.
-	private static final FastLongMap<Long> windows = new FastLongMap<>();
+	private static final Set<Long> windows = new HashSet<>();
 
 	private EnumSet<Event> eventTypes = EnumSet.noneOf(Event.class);
 
@@ -115,7 +115,7 @@ public abstract class WindowCallback {
 				eventTypes = ALL;
 			}
 
-			windows.put(window, window);
+			windows.add(window);
 			glfwSetWindowUserPointer(window, memGlobalRefNew(proc));
 
 			proc.eventTypes.clear();
@@ -188,8 +188,8 @@ public abstract class WindowCallback {
 	 * from the global reference we create in {@link #set(long, WindowCallback, java.util.EnumSet)}.
 	 */
 	static void clearAll() {
-		for ( FastLongMap.Entry<Long> entry : windows )
-			cleanup(entry.getKey(), glfwGetWindowUserPointer(entry.getKey()));
+		for ( Long window : windows )
+			cleanup(window, glfwGetWindowUserPointer(window));
 
 		windows.clear();
 	}
