@@ -8,7 +8,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.Sys;
 import org.lwjgl.opencl.*;
+import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
@@ -31,6 +33,7 @@ import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRGLEvent.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opencl.KHRICD.*;
@@ -43,7 +46,9 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
+import static org.lwjgl.system.linux.GLFWLinux.*;
 import static org.lwjgl.system.macosx.CGL.*;
+import static org.lwjgl.system.windows.WGL.*;
 
 /*
 		THIS DEMO USES CODE PORTED FROM JogAmp.org
@@ -104,7 +109,7 @@ public class CLGLInteropDemo {
 	// ------------------
 
 	/** The event callbacks run on the main thread. We use this queue to apply any changes in the rendering thread. */
-	private final Queue<Runnable> events = new ConcurrentLinkedQueue<Runnable>();
+	private final Queue<Runnable> events = new ConcurrentLinkedQueue<>();
 
 	private int width;
 	private int height;
@@ -113,21 +118,23 @@ public class CLGLInteropDemo {
 
 	private final CLPlatform platform;
 
+	private final List<CLDevice> devices;
+
 	private final GLFWWindow window;
 
 	private final GLContext context;
 
-	private final CLContext        clContext;
-	private final CLCommandQueue[] queues;
-	private final CLKernel[]       kernels;
-	private final CLProgram[]      programs;
+	private final long   clContext;
+	private final long[] queues;
+	private final long[] programs;
+	private final long[] kernels;
 
 	private final PointerBuffer kernel2DGlobalWorkSize = BufferUtils.createPointerBuffer(2);
 
 	// ------------------
 
-	private CLMem[]   glBuffers;
-	private IntBuffer glIDs;
+	private IntBuffer glTextures;
+	private long[]    clTextures;
 
 	// Texture rendering
 	private int vao;
@@ -140,7 +147,7 @@ public class CLGLInteropDemo {
 	private int sizeUniform;
 	private int offsetUniform;
 
-	private CLMem[] colorMap;
+	private long[] clColorMaps;
 
 	private double minX = -2f;
 	private double minY = -1.2f;
@@ -158,13 +165,13 @@ public class CLGLInteropDemo {
 
 	private final PointerBuffer syncBuffer = BufferUtils.createPointerBuffer(1);
 
-	private boolean   syncGLtoCL; // true if we can make GL wait on events generated from CL queues.
-	private CLEvent[] clEvent;
-	private long[]    fenceFromEvent;
+	private boolean syncGLtoCL; // true if we can make GL wait on events generated from CL queues.
+	private long[]  clEvent;
+	private long[]  fenceFromEvent;
 
 	private boolean syncCLtoGL; // true if we can make CL wait on sync objects generated from GL.
 	private long    glFence;
-	private CLEvent eventFromFence;
+	private long    eventFromFence;
 
 	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, int deviceType) {
 		this.platform = platform;
@@ -180,23 +187,22 @@ public class CLGLInteropDemo {
 		glfwMakeContextCurrent(window.handle);
 		context = GLContext.createFromCurrent();
 
-		ContextCapabilities caps = GL.getCapabilities();
+		ContextCapabilities glCaps = GL.getCapabilities();
 
-		if ( !caps.OpenGL32 )
-			throw new RuntimeException("OpenGL 3.2 is required to run this demo.");
+		if ( !glCaps.OpenGL30 )
+			throw new RuntimeException("OpenGL 3.0 is required to run this demo.");
 
 		if ( params.contains("debugGL") ) {
-			/*if ( caps.GL_ARB_debug_output )
+			/*if ( glCaps.GL_ARB_debug_output )
 				glDebugMessageCallbackARB(new ARBDebugOutputCallback());
 			else */
-			if ( caps.GL_AMD_debug_output )
+			if ( glCaps.GL_AMD_debug_output )
 				glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
 		}
 
 		glfwSwapInterval(0);
 
 		errcode_ret = BufferUtils.createIntBuffer(1);
-		int errcode;
 
 		try {
 			// Find devices with GL sharing support
@@ -214,23 +220,25 @@ public class CLGLInteropDemo {
 				if ( devices == null )
 					throw new RuntimeException("No OpenCL devices found with KHR_gl_sharing support.");
 			}
+			this.devices = devices;
 
 			PointerBuffer deviceBuffer = BufferUtils.createPointerBuffer(devices.size());
 			for ( int i = 0; i < devices.size(); i++ )
 				deviceBuffer.put(i, devices.get(i));
 
 			// Create the context
-			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(5)
-				.put(0, CL_CONTEXT_PLATFORM)
-				.put(1, platform);
-
 			boolean useAPPLEGLSharing = false;
-			for ( CLDevice device : devices ) {
-				if ( !device.getCapabilities().cl_khr_gl_sharing ) {
+			for ( int i = 0; i < devices.size(); i++ ) {
+				CLCapabilities caps = devices.get(i).getCapabilities();
+				if ( !caps.cl_khr_gl_sharing && caps.cl_APPLE_gl_sharing ) {
 					useAPPLEGLSharing = true;
 					break;
 				}
 			}
+
+			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(useAPPLEGLSharing ? 5 : 7)
+				.put(0, CL_CONTEXT_PLATFORM)
+				.put(1, platform);
 
 			if ( useAPPLEGLSharing ) {
 				ctxProps
@@ -240,9 +248,27 @@ public class CLGLInteropDemo {
 				ctxProps
 					.put(2, CL_GL_CONTEXT_KHR)
 					.put(3, context);
+
+				switch ( LWJGLUtil.getPlatform() ) {
+					case WINDOWS:
+						ctxProps
+							.put(4, CL_WGL_HDC_KHR)
+							.put(5, wglGetCurrentDC());
+						break;
+					case LINUX:
+						ctxProps
+							.put(4, CL_GLX_DISPLAY_KHR)
+							.put(5, glfwGetX11Display());
+						break;
+					case MACOSX:
+						ctxProps
+							.put(4, CL_CGL_SHAREGROUP_KHR)
+							.put(5, CGLGetShareGroup(context.getPointer()));
+						break;
+				}
 			}
 
-			ctxProps.put(4, 0);
+			ctxProps.put(useAPPLEGLSharing ? 4 : 6, 0);
 
 			clContext = clCreateContext(ctxProps, deviceBuffer, CLContextCallback.Util.getDefault(), errcode_ret);
 			checkCLError(errcode_ret);
@@ -250,30 +276,20 @@ public class CLGLInteropDemo {
 			slices = min(devices.size(), MAX_PARALLELISM_LEVEL);
 
 			// create command queues for every GPU, setup colormap and init kernels
-			queues = new CLCommandQueue[slices];
-			kernels = new CLKernel[slices];
-			colorMap = new CLMem[slices];
+			queues = new long[slices];
+			kernels = new long[slices];
+			clColorMaps = new long[slices];
 
 			for ( int i = 0; i < slices; i++ ) {
-				colorMap[i] = clCreateBuffer(clContext, CL_MEM_READ_ONLY, COLOR_MAP_SIZE, errcode_ret);
+				IntBuffer colorMapBuffer = BufferUtils.createIntBuffer(32 * 2);
+				initColorMap(colorMapBuffer, 32, Color.BLUE, Color.GREEN, Color.RED);
+
+				clColorMaps[i] = clCreateBuffer(clContext, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, colorMapBuffer, errcode_ret);
 				checkCLError(errcode_ret);
 
 				// create command queue and upload color map buffer on each used device
-				queues[i] = clCreateCommandQueue(clContext, devices.get(i), 0L, errcode_ret);
+				queues[i] = clCreateCommandQueue(clContext, devices.get(i).getPointer(), 0L, errcode_ret);
 				checkCLError(errcode_ret);
-
-				ByteBuffer colorMapBuffer = clEnqueueMapBuffer(
-					queues[i], colorMap[i],
-					CL_TRUE, CL_MAP_WRITE,
-					0L, COLOR_MAP_SIZE,
-					null, null, errcode_ret, null
-				);
-				checkCLError(errcode_ret);
-
-				initColorMap(colorMapBuffer.asIntBuffer(), 32, Color.BLUE, Color.GREEN, Color.RED);
-
-				errcode = clEnqueueUnmapMemObject(queues[i], colorMap[i], colorMapBuffer, null, null);
-				checkCLError(errcode);
 			}
 
 			// check if we have 64bit FP support on all devices
@@ -289,7 +305,7 @@ public class CLGLInteropDemo {
 			}
 
 			// load program(s)
-			programs = new CLProgram[all64bit ? 1 : slices];
+			programs = new long[all64bit ? 1 : slices];
 
 			if ( deviceType == CL_DEVICE_TYPE_GPU )
 				log("OpenCL Device Type: GPU (Use -forceCPU to use CPU)");
@@ -299,15 +315,15 @@ public class CLGLInteropDemo {
 			log("Max Iterations: " + maxIterations + " (Use -iterations <count> to change)");
 			log("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
 
-			log("OpenGL caps.GL_ARB_sync = " + caps.GL_ARB_sync);
-			log("OpenGL caps.GL_ARB_cl_event = " + caps.GL_ARB_cl_event);
+			log("OpenGL glCaps.GL_ARB_sync = " + glCaps.GL_ARB_sync);
+			log("OpenGL glCaps.GL_ARB_cl_event = " + glCaps.GL_ARB_cl_event);
 
 			buildPrograms();
 
 			// Detect GLtoCL synchronization method
-			syncGLtoCL = caps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
+			syncGLtoCL = glCaps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
 			if ( syncGLtoCL ) {
-				clEvent = new CLEvent[slices];
+				clEvent = new long[slices];
 				fenceFromEvent = new long[slices];
 				log("GL to CL sync: Using OpenCL events");
 			} else
@@ -319,7 +335,7 @@ public class CLGLInteropDemo {
 				and clEnqueueReleaseGLObjects to implicitly guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
 				For this demo we do it anyway, for demostration purposes.
 			*/
-			syncCLtoGL = caps.OpenGL32 || caps.GL_ARB_sync;
+			syncCLtoGL = glCaps.OpenGL32 || glCaps.GL_ARB_sync;
 			if ( syncCLtoGL ) {
 				for ( CLDevice device : devices ) {
 					if ( !device.getCapabilities().cl_khr_gl_event ) {
@@ -428,11 +444,24 @@ public class CLGLInteropDemo {
 	}
 
 	private void log(String msg) {
-		System.out.println("[" + window.ID + "] " + msg);
+		System.out.format("[%s] %s\n", window.ID, msg);
 	}
 
 	public static void main(String... args) {
 		parseArgs(args);
+
+		Sys.touch();
+		if ( glfwInit() != GL11.GL_TRUE ) {
+			System.out.println("Unable to initialize glfw");
+			System.exit(-1);
+		}
+
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		if ( params.contains("debugGL") )
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+
+		final String vendorGL = getOpenGLVendor();
 
 		CL.create();
 
@@ -444,55 +473,41 @@ public class CLGLInteropDemo {
 			}
 		};
 
-		// Skip Intel in case there's a platform with a discrete GPU available.
+		// Try to match GL_VENDOR and CL_PLATFORM_VENDOR
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
-				return platformFilter.accept(platform) && !platform.getInfoStringUTF8(CL_PLATFORM_VENDOR).startsWith("Intel");
+				return platformFilter.accept(platform) && clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR).contains(vendorGL);
 			}
 		});
 
 		if ( platforms.isEmpty() ) {
-			// Nope, try Intel.
+			// Nope, try again without the filter.
 			platforms = CLPlatform.getPlatforms(platformFilter);
 		}
 
 		if ( platforms.isEmpty() )
 			throw new IllegalStateException("No OpenCL platforms found that support KHR_gl_sharing.");
 
-		if ( glfwInit() != GL11.GL_TRUE ) {
-			System.out.println("Unable to initialize glfw");
-			System.exit(-1);
-		}
-
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		if ( params.contains("debugGL") )
-			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
-
 		final CLPlatform platform = platforms.get(0);
 
 		String platformID;
 		if ( platform.getCapabilities().cl_khr_icd )
-			platformID = platform.getInfoStringASCII(CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
+			platformID = clGetPlatformInfoStringASCII(platform.getPointer(), CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
 		else
-			platformID = platform.getInfoStringUTF8(CL_PLATFORM_VENDOR);
+			platformID = clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR);
 
 		boolean hasCPU = false;
 		boolean hasGPU = false;
 		for ( CLDevice device : platform.getDevices(CL_DEVICE_TYPE_ALL) ) {
-			long type = device.getInfoLong(CL_DEVICE_TYPE);
+			long type = clGetDeviceInfoLong(device.getPointer(), CL_DEVICE_TYPE);
 			if ( type == CL_DEVICE_TYPE_CPU )
 				hasCPU = true;
 			else if ( type == CL_DEVICE_TYPE_GPU )
 				hasGPU = true;
 		}
 
-		Thread[] threads = new Thread[platforms.size() * (hasCPU && hasGPU ? 2 : 1)];
+		Thread[] threads = new Thread[hasCPU && hasGPU ? 2 : 1];
 		GLFWWindow[] windows = new GLFWWindow[threads.length];
 
 		final CountDownLatch latch = new CountDownLatch(windows.length);
@@ -560,7 +575,7 @@ public class CLGLInteropDemo {
 	}
 
 	private static void parseArgs(String... args) {
-		params = new HashSet<String>(8);
+		params = new HashSet<>(8);
 
 		for ( int i = 0; i < args.length; i++ ) {
 			String arg = args[i];
@@ -600,6 +615,19 @@ public class CLGLInteropDemo {
 		}
 	}
 
+	private static String getOpenGLVendor() {
+		long window = glfwCreateWindow(100, 100, "dummy", 0L, 0L);
+
+		try {
+			glfwMakeContextCurrent(window);
+			GLContext.createFromCurrent();
+
+			return glGetString(GL_VENDOR);
+		} finally {
+			glfwDestroyWindow(window);
+		}
+	}
+
 	private void buildPrograms() {
 		try {
 			createPrograms();
@@ -607,9 +635,11 @@ public class CLGLInteropDemo {
 			throw new RuntimeException(e);
 		}
 
+		final CountDownLatch latch = new CountDownLatch(programs.length);
+
 		// disable 64bit floating point math if not available
 		for ( int i = 0; i < programs.length; i++ ) {
-			final CLDevice device = queues[i].getParent();
+			final CLDevice device = devices.get(i);
 
 			StringBuilder options = new StringBuilder("-D USE_TEXTURE");
 			CLCapabilities caps = device.getCapabilities();
@@ -624,26 +654,31 @@ public class CLGLInteropDemo {
 
 			log("OpenCL COMPILER OPTIONS: " + options);
 
-			final CLProgram program = programs[i];
-			int errcode = clBuildProgram(program, device, options, new CLProgramCallback() {
+			final long program = programs[i];
+			int errcode = clBuildProgram(program, device.getPointer(), options, new CLProgramCallback() {
 				@Override
 				public void invoke(long cl_program) {
 					System.out.printf(
 						"The cl_program [0x%X] was built %s\n",
 						cl_program,
-						program.getBuildInfoInt(device, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
+						clGetProgramBuildInfoInt(program, device.getPointer(), CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
 					);
-					String log = program.getBuildInfoString(device, CL_PROGRAM_BUILD_LOG);
+					String log = clGetProgramBuildInfoStringASCII(program, device.getPointer(), CL_PROGRAM_BUILD_LOG);
 					if ( !log.isEmpty() )
-						System.out.printf("\tBUILD LOG: %s\n", log);
+						System.out.printf("BUILD LOG:\n----\n%s\n-----\n", log);
+
+					latch.countDown();
 				}
 			});
 			checkCLError(errcode);
 		}
 
 		// Make sure the programs have been built before proceeding
-		for ( CLCommandQueue queue : queues )
-			clFinish(queue);
+		try {
+			latch.await();
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 
 		rebuild = false;
 
@@ -655,29 +690,29 @@ public class CLGLInteropDemo {
 	}
 
 	private void initGLObjects() {
-		if ( glBuffers == null ) {
-			glBuffers = new CLMem[slices];
-			glIDs = BufferUtils.createIntBuffer(slices);
+		if ( clTextures == null ) {
+			clTextures = new long[slices];
+			glTextures = BufferUtils.createIntBuffer(slices);
 		} else {
-			for ( CLMem mem : glBuffers ) {
+			for ( long mem : clTextures ) {
 				int errcode = clReleaseMemObject(mem);
 				checkCLError(errcode);
 			}
 
-			glDeleteTextures(glIDs);
+			glDeleteTextures(glTextures);
 		}
 
-		glGenTextures(glIDs);
+		glGenTextures(glTextures);
 
 		// Init textures
 		for ( int i = 0; i < slices; i++ ) {
-			glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
+			glBindTexture(GL_TEXTURE_2D, glTextures.get(i));
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI, width / slices, height, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, (ByteBuffer)null);
 
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-			glBuffers[i] = clCreateFromGLTexture2D(clContext, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, glIDs.get(i), errcode_ret);
+			clTextures[i] = clCreateFromGLTexture2D(clContext, CL_MEM_WRITE_ONLY, GL_TEXTURE_2D, 0, glTextures.get(i), errcode_ret);
 			checkCLError(errcode_ret);
 		}
 		glBindTexture(GL_TEXTURE_2D, 0);
@@ -715,11 +750,12 @@ public class CLGLInteropDemo {
 
 	private void setKernelConstants() {
 		for ( int i = 0; i < slices; i++ ) {
-			kernels[i]
-				.setArg(6, glBuffers[i])
-				.setArg(7, colorMap[i])
-				.setArg(8, COLOR_MAP_SIZE)
-				.setArg(9, maxIterations);
+			long k = kernels[i];
+
+			clSetKernelArg1p(k, 6, clTextures[i]);
+			clSetKernelArg1p(k, 7, clColorMaps[i]);
+			clSetKernelArg1i(k, 8, COLOR_MAP_SIZE);
+			clSetKernelArg1i(k, 9, maxIterations);
 		}
 	}
 
@@ -748,14 +784,66 @@ public class CLGLInteropDemo {
 			} else {
 				long timeUsed = 5000 + (startTime - System.currentTimeMillis());
 				startTime = System.currentTimeMillis() + 5000;
-				log(platform.getInfoStringUTF8(CL_PLATFORM_VENDOR) + ": " + fps + " frames in 5 seconds = " + (fps / (timeUsed / 1000f)));
+				log(String.format(
+					"%s: %d frames in 5 seconds = %.2f",
+					clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR),
+					fps,
+					fps / (timeUsed / 1000f)
+				));
 				fps = 0;
 			}
 		}
 
-		// TODO: more CL cleanup
-		int errcode = clReleaseContext(clContext);
-		checkCLError(errcode);
+		for ( long queue : queues )
+			clFinish(queue);
+
+		CLCleaner eventCleaner = new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseEvent(object);
+			}
+		};
+
+		if ( clEvent != null ) release(clEvent, eventCleaner);
+		if ( eventFromFence != NULL ) release(eventFromFence, eventCleaner);
+
+		CLCleaner memObjCleaner = new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseMemObject(object);
+			}
+		};
+
+		release(clTextures, memObjCleaner);
+		release(clColorMaps, memObjCleaner);
+
+		release(kernels, new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseKernel(object);
+			}
+		});
+
+		release(programs, new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseProgram(object);
+			}
+		});
+
+		release(queues, new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseCommandQueue(object);
+			}
+		});
+
+		release(clContext, new CLCleaner() {
+			@Override
+			public int release(long object) {
+				return clReleaseContext(object);
+			}
+		});
 
 		glDeleteProgram(program);
 		glDeleteShader(fsh);
@@ -766,9 +854,25 @@ public class CLGLInteropDemo {
 		window.signal.countDown();
 	}
 
+	private interface CLCleaner {
+		int release(long object);
+	}
+
+	private static void release(long[] objects, CLCleaner cleaner) {
+		for ( long o : objects ) {
+			if ( o != NULL )
+				release(o, cleaner);
+		}
+	}
+
+	private static void release(long object, CLCleaner cleaner) {
+		int errcode = cleaner.release(object);
+		checkCLError(errcode);
+	}
+
 	public void display() {
 		// make sure GL does not use our objects before we start computing
-		if ( eventFromFence == null || shouldInitBuffers )
+		if ( eventFromFence == NULL || shouldInitBuffers )
 			glFinish();
 
 		if ( shouldInitBuffers ) {
@@ -804,26 +908,34 @@ public class CLGLInteropDemo {
 
 		// start computation
 		for ( int i = 0; i < slices; i++ ) {
-			kernels[i].setArg(0, sliceWidth).setArg(1, height);
-			if ( !is64bit || !isDoubleFPAvailable(queues[i].getParent()) ) {
-				kernels[i]
-					.setArg(2, (float)(minX + rangeX * i)).setArg(3, (float)minY)
-					.setArg(4, (float)rangeX).setArg(5, (float)rangeY);
+			long k = kernels[i];
+
+			clSetKernelArg1i(k, 0, sliceWidth);
+			clSetKernelArg1i(k, 1, sliceWidth);
+			if ( !is64bit || !isDoubleFPAvailable(devices.get(i)) ) {
+				clSetKernelArg1f(k, 2, (float)(minX + rangeX * i));
+				clSetKernelArg1f(k, 3, (float)minY);
+
+				clSetKernelArg1f(k, 4, (float)rangeX);
+				clSetKernelArg1f(k, 5, (float)rangeY);
 			} else {
-				kernels[i]
-					.setArg(2, minX + rangeX * i).setArg(3, minY)
-					.setArg(4, rangeX).setArg(5, rangeY);
+				clSetKernelArg1d(k, 2, minX + rangeX * i);
+				clSetKernelArg1d(k, 3, minY);
+
+				clSetKernelArg1d(k, 4, rangeX);
+				clSetKernelArg1d(k, 5, rangeY);
 			}
 
-			if ( eventFromFence != null )
+			if ( eventFromFence != NULL )
 				syncBuffer.put(0, eventFromFence);
 
 			// acquire GL objects, and enqueue a kernel with a probe from the list
-			int errcode = clEnqueueAcquireGLObjects(queues[i], glBuffers[i], eventFromFence != null ? syncBuffer : null, null);
+			int errcode = clEnqueueAcquireGLObjects(queues[i], clTextures[i], eventFromFence != NULL ? syncBuffer : null, null);
 			checkCLError(errcode);
 
-			if ( eventFromFence != null ) {
+			if ( eventFromFence != NULL ) {
 				errcode = clReleaseEvent(eventFromFence);
+				eventFromFence = NULL;
 				checkCLError(errcode);
 
 				glDeleteSync(glFence);
@@ -836,11 +948,11 @@ public class CLGLInteropDemo {
 			                                 null, null);
 			checkCLError(errcode);
 
-			errcode = clEnqueueReleaseGLObjects(queues[i], glBuffers[i], null, syncGLtoCL ? syncBuffer : null);
+			errcode = clEnqueueReleaseGLObjects(queues[i], clTextures[i], null, syncGLtoCL ? syncBuffer : null);
 			checkCLError(errcode);
 
 			if ( syncGLtoCL ) {
-				clEvent[i] = CLEvent.create(syncBuffer.get(0), clContext);
+				clEvent[i] = syncBuffer.get(0);
 				fenceFromEvent[i] = glCreateSyncFromCLeventARB(clContext, clEvent[i], 0);
 			}
 		}
@@ -868,12 +980,14 @@ public class CLGLInteropDemo {
 			if ( syncGLtoCL ) {
 				glWaitSync(fenceFromEvent[i], 0, 0);
 				glDeleteSync(fenceFromEvent[i]);
+				fenceFromEvent[i] = NULL;
 
 				int errcode = clReleaseEvent(clEvent[i]);
+				clEvent[i] = NULL;
 				checkCLError(errcode);
 			}
 
-			glBindTexture(GL_TEXTURE_2D, glIDs.get(i));
+			glBindTexture(GL_TEXTURE_2D, glTextures.get(i));
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		}
 
@@ -1047,7 +1161,7 @@ public class CLGLInteropDemo {
 	private void createPrograms() throws IOException {
 		String source = getProgramSource("demo/Mandelbrot.cl");
 		for ( int i = 0; i < programs.length; i++ ) {
-			if ( programs[i] != null ) {
+			if ( programs[i] != NULL ) {
 				int errcode = clReleaseProgram(programs[i]);
 				checkCLError(errcode);
 			}
@@ -1148,6 +1262,7 @@ public class CLGLInteropDemo {
 				colorMap.put((r << 0) | (g << 8) | (b << 16));
 			}
 		}
+		colorMap.flip();
 	}
 
 }

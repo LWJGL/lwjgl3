@@ -16,7 +16,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 
 	documentation = "The core OpenCL 2.0 functionality."
 
-	(Construct("context", "device") _ cl_command_queue).func(
+	cl_command_queue.func(
 		"CreateCommandQueueWithProperties",
 		"""
 		Creates a host or device command-queue on a specific device.
@@ -61,7 +61,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreatePipe",
 		"Creates a pipe object.",
 
@@ -214,7 +214,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 
 	Code(
 		javaBeforeNative = statement("\t\tlong user_data = CLSVMFreeCallback.Util.register(pfn_free_func);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"EnqueueSVMFree",
 		"Enqueues a command to free the shared virtual memory buffer allocated using $SVMAlloc or a shared system memory pointer.",
@@ -540,7 +540,7 @@ fun CL20() = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	(Construct("context") _ cl_sampler).func(
+	cl_sampler.func(
 		"CreateSamplerWithProperties",
 		"Creates a sampler object.",
 

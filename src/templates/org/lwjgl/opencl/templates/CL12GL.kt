@@ -33,7 +33,7 @@ fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
 		"GL_OBJECT_TEXTURE_BUFFER" _ 0x2011
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateFromGLTexture",
 		"""
 		Creates one of the following:

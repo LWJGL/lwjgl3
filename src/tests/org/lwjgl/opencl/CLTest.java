@@ -2,6 +2,7 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.opencl.CLPlatform.Filter;
 import org.testng.SkipException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,6 +18,7 @@ import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
 
@@ -98,15 +100,15 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
-				CLCommandQueue queue = clCreateCommandQueue(context, device, 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device.getPointer(), 0, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(queue);
 
-				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
+				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
@@ -126,22 +128,22 @@ public class CLTest {
 		contextTest(new ContextTest() {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
-				if ( (device.getInfoLong(CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
+				if ( (clGetDeviceInfoLong(device.getPointer(), CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
 					return;
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
-				CLCommandQueue queue = clCreateCommandQueue(context, device, 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device.getPointer(), 0, errcode_ret);
 				checkCLError(errcode_ret);
 
 				// Create a buffer
-				final CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
+				final long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 
-				final int BUFFER_SIZE = (int)buffer.getInfoPointer(CL_MEM_SIZE);
+				final int BUFFER_SIZE = (int)clGetMemObjectInfoPointer(buffer, CL_MEM_SIZE);
 				assertEquals(BUFFER_SIZE, 128);
 
 				// Fill with non-random data
@@ -181,7 +183,7 @@ public class CLTest {
 
 						long memAddress = PointerBuffer.get(args, 0);
 						assertTrue(memAddress != NULL);
-						assertTrue(memAddress != buffer.getPointer());
+						assertTrue(memAddress != buffer);
 
 						ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
 						for ( int i = 0; i < kernelBuffer.capacity(); i++ )
@@ -192,7 +194,7 @@ public class CLTest {
 				}, enqueueArgs, mem_list, args_mem_loc, null, eventOut);
 				checkCLError(errcode);
 
-				CLEvent e = CLEvent.create(eventOut.get(0), context);
+				long e = eventOut.get(0);
 				assertNotNull(e);
 
 				final CountDownLatch latch = new CountDownLatch(1);
@@ -228,10 +230,10 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
-				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
+				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
@@ -244,17 +246,17 @@ public class CLTest {
 					}
 				});
 
-				assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 1);
+				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 
 				int errcode = clRetainMemObject(buffer);
 				checkCLError(errcode);
 
-				assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 2);
+				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 2);
 
 				errcode = clReleaseMemObject(buffer);
 				checkCLError(errcode);
 
-				assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 1);
+				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 				assertEquals(eventLatch.getCount(), 1L);
 
 				errcode = clReleaseMemObject(buffer);
@@ -279,11 +281,11 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
-				final CLEvent e = clCreateUserEvent(context, errcode_ret);
+				final long e = clCreateUserEvent(context, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(e);
 
@@ -292,7 +294,7 @@ public class CLTest {
 				int errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
 					@Override
 					public void invoke(long event, int command_exec_status) {
-						assertEquals(event, e.getPointer());
+						assertEquals(event, e);
 						assertEquals(command_exec_status, CL_COMPLETE);
 
 						eventLatch.countDown();
@@ -324,48 +326,52 @@ public class CLTest {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				// TODO: Intel has broken reference counting atm
-				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(platform.getInfoStringUTF8(CL_PLATFORM_NAME));
+				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME));
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
 				if ( doContextCountChecks )
-					assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 1);
+					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 1);
 
-				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
+				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
-				assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 1);
+				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 				if ( doContextCountChecks )
-					assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 2);
+					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 2);
 
 				ByteBuffer bufferRegion = cl_buffer_region.malloc(0, 64);
 
-				CLMem subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
+				long subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(subbuffer);
 
 				if ( doContextCountChecks ) {
-					assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 2, platform.getInfoStringUTF8(CL_PLATFORM_NAME));
-					assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 3);
+					assertEquals(
+						clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT),
+						2,
+						clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME)
+					);
+					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
 				}
 
 				int errcode = clReleaseMemObject(buffer);
 				checkCLError(errcode);
 
 				if ( doContextCountChecks ) {
-					assertEquals(buffer.getInfoInt(CL_MEM_REFERENCE_COUNT), 1);
-					assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 3);
+					assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
+					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
 				}
 
 				errcode = clReleaseMemObject(subbuffer);
 				checkCLError(errcode);
 
-				assertEquals(context.getInfoInt(CL_CONTEXT_REFERENCE_COUNT), 1);
+				assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 1);
 
 				errcode = clReleaseContext(context);
 				checkCLError(errcode);

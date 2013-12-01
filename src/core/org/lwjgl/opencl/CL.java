@@ -141,7 +141,6 @@ public final class CL {
 		if ( functionProvider == null )
 			return;
 
-		CLPlatform.destroy();
 		functionProvider.release();
 		functionProvider = null;
 	}

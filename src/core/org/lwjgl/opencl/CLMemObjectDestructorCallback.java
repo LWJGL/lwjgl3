@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 import static org.lwjgl.system.APIUtil.*;
 
 /**
- * Instances of this interface may be passed to the {@link CL11#clSetMemObjectDestructorCallback(CLMem,
+ * Instances of this interface may be passed to the {@link CL11#clSetMemObjectDestructorCallback(long,
  * CLMemObjectDestructorCallback) SetMemObjectDestructorCallback} method.
  */
 /*@FunctionalInterface*/

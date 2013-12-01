@@ -32,7 +32,7 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		"COMMAND_GL_FENCE_SYNC_OBJECT_KHR" _ 0x200D
 	)
 
-	(Construct("context") _ cl_event).func(
+	cl_event.func(
 		"CreateEventFromGLsyncKHR",
 		"Creates an OpenCL event object from an OpenGL fence sync object.",
 

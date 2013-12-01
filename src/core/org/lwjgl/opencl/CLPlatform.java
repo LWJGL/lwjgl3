@@ -6,48 +6,54 @@ package org.lwjgl.opencl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.APIUtil;
-import org.lwjgl.system.FastLongMap;
-import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.PointerWrapper;
 
 import java.util.*;
 
 import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_platform_id pointer. */
-public class CLPlatform extends CLObject {
+public class CLPlatform extends PointerWrapper {
 
-	private static final FastLongMap<CLPlatform> platforms = new FastLongMap<>();
+	private final CLCapabilities capabilities;
 
-	private CLCapabilities capabilities;
+	public CLPlatform(long cl_platform_id) {
+		super(cl_platform_id);
 
-	private CLPlatform(long pointer) {
-		super(pointer);
-
-		capabilities = createCapabilities(pointer, CL.getFunctionProvider());
+		this.capabilities = createCapabilities(cl_platform_id);
 	}
 
-	public static CLPlatform create(long id) {
-		CLPlatform platform = new CLPlatform(id);
-		platforms.put(id, platform);
-		return platform;
+	/** Returns the {@link CLCapabilities} instance associated with this OpenCL platform. */
+	public CLCapabilities getCapabilities() {
+		return capabilities;
 	}
 
-	private static CLCapabilities createCapabilities(long platform, FunctionProvider functionProvider) {
+	/**
+	 * Creates a {@link CLCapabilities} instance for the given OpenCL platform.
+	 * <p/>
+	 * This method call is relatively expensive. The result should be cached and reused.
+	 *
+	 * @param cl_platform_id the platform to query
+	 *
+	 * @return the {@link CLCapabilities instance}
+	 */
+	public static CLCapabilities createCapabilities(long cl_platform_id) {
 		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
-		String extensionsString = getPlatformInfo(platform, CL_PLATFORM_EXTENSIONS);
+		String extensionsString = clGetPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_EXTENSIONS);
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Enumerate devices
 		{
 			APIBuffer __buffer = apiBuffer();
-			int errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address());
+
+			int errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, 0, NULL, __buffer.address());
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query number of OpenCL platform devices.");
 
@@ -57,7 +63,7 @@ public class CLPlatform extends CLObject {
 
 			__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
-			errcode = nclGetDeviceIDs(platform, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL);
+			errcode = nclGetDeviceIDs(cl_platform_id, CL_DEVICE_TYPE_ALL, num_devices, __buffer.address(), NULL);
 			if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
 				throw new OpenCLException("Failed to query OpenCL platform devices.");
 
@@ -67,13 +73,13 @@ public class CLPlatform extends CLObject {
 
 			// Add device extensions to the set
 			for ( int i = 0; i < num_devices; i++ ) {
-				extensionsString = CLDevice.getDeviceInfo(devices[i], CL_DEVICE_EXTENSIONS);
+				extensionsString = clGetDeviceInfoStringASCII(devices[i], CL_DEVICE_EXTENSIONS);
 				CL.addExtensions(extensionsString, supportedExtensions);
 			}
 		}
 
 		// Parse PLATFORM_VERSION string
-		String version = getPlatformInfo(platform, CL_PLATFORM_VERSION);
+		String version = clGetPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION);
 		int majorVersion;
 		int minorVersion;
 		try {
@@ -88,37 +94,6 @@ public class CLPlatform extends CLObject {
 
 		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, CL.getICD());
 	}
-
-	private static String getPlatformInfo(long platform, int param_name) {
-		APIBuffer __buffer = apiBuffer();
-
-		__buffer.intParam(0);
-		int errcode = nclGetPlatformInfo(platform, param_name, 0L, NULL, __buffer.address());
-		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
-			throw new OpenCLException("Failed to query size of OpenCL platform information.");
-
-		int bytes = __buffer.intValue(0);
-
-		__buffer.bufferParam(bytes);
-		errcode = nclGetPlatformInfo(platform, param_name, bytes, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
-			throw new OpenCLException("Failed to query OpenCL platform information.");
-
-		return __buffer.stringValueASCII(0, bytes - 1);
-	}
-
-	public CLCapabilities getCapabilities() {
-		return capabilities;
-	}
-
-	/**
-	 * Returns a CLPlatform with the specified id.
-	 *
-	 * @param cl_platform_id the platform object id
-	 *
-	 * @return the CLPlatform object
-	 */
-	public static CLPlatform get(long cl_platform_id) { return platforms.get(cl_platform_id); }
 
 	/**
 	 * Returns a list of all the available platforms.
@@ -139,13 +114,13 @@ public class CLPlatform extends CLObject {
 	public static List<CLPlatform> getPlatforms(Filter<CLPlatform> filter) {
 		long clGetPlatformIDs = CL10.getInstance().GetPlatformIDs;
 
-		APIBuffer __buffer = APIUtil.apiBuffer();
+		APIBuffer __buffer = apiBuffer();
 		int errcode = nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
 		checkCLError(errcode);
 
 		int num_platforms = __buffer.intValue(0);
 		if ( num_platforms == 0 )
-			return null;
+			return Collections.emptyList();
 
 		__buffer.bufferParam(num_platforms << POINTER_SHIFT);
 
@@ -156,19 +131,12 @@ public class CLPlatform extends CLObject {
 		for ( int i = 0; i < num_platforms; i++ )
 			platformIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
-		List<CLPlatform> platforms = new ArrayList<>(num_platforms);
-		for ( int i = 0; i < num_platforms; i++ ) {
-			CLPlatform platform = create(platformIDs[i]);
-			if ( filter == null || filter.accept(platform) )
-				platforms.add(platform);
-		}
-
-		return platforms;
-	}
-
-	@Override
-	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetPlatformInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, CL10.getInstance().GetPlatformInfo);
+		return filterObjects(platformIDs, filter, new Factory<CLPlatform>() {
+			@Override
+			public CLPlatform create(long object_id) {
+				return new CLPlatform(object_id);
+			}
+		});
 	}
 
 	/**
@@ -193,37 +161,61 @@ public class CLPlatform extends CLObject {
 	 * @return the available devices
 	 */
 	public List<CLDevice> getDevices(int device_type, Filter<CLDevice> filter) {
-		APIBuffer __buffer = APIUtil.apiBuffer();
-		int errcode = clGetDeviceIDs(this, device_type, 0, null, __buffer.buffer());
+		APIBuffer __buffer = apiBuffer();
+		int errcode = clGetDeviceIDs(getPointer(), device_type, 0, null, __buffer.buffer());
 		checkCLError(errcode);
 
 		int num_devices = __buffer.intValue(0);
 		if ( num_devices == 0 )
-			return null;
+			return Collections.emptyList();
 
 		__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
-		errcode = clGetDeviceIDs(this, device_type, num_devices, __buffer.buffer(), null);
+		errcode = clGetDeviceIDs(getPointer(), device_type, num_devices, __buffer.buffer(), null);
 		checkCLError(errcode);
 
 		long[] deviceIDs = new long[num_devices];
 		for ( int i = 0; i < num_devices; i++ )
 			deviceIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
-		List<CLDevice> devices = new ArrayList<>(num_devices);
-		for ( int i = 0; i < num_devices; i++ ) {
-			CLDevice device = CLDevice.create(deviceIDs[i], this);
-			if ( filter == null || filter.accept(device) )
-				devices.add(device);
-		}
-
-		return devices.isEmpty() ? null : devices;
+		return filterObjects(deviceIDs, filter, new Factory<CLDevice>() {
+			@Override
+			public CLDevice create(long object_id) {
+				return new CLDevice(object_id, getCapabilities());
+			}
+		});
 	}
 
-	// -- [ INTERNAL ] --
+	private static <T> List<T> filterObjects(long[] objects, Filter<T> filter, Factory<T> factory) {
+		ArrayList<T> list = new ArrayList<>(objects.length);
+		for ( int i = 0; i < objects.length; i++ ) {
+			T object = factory.create(objects[i]);
+			if ( filter == null || filter.accept(object) )
+				list.add(object);
+		}
 
-	static void destroy() {
-		platforms.clear();
+		if ( list.size() < objects.length )
+			list.trimToSize();
+
+		return list;
+	}
+
+	/** Simple filter interface. */
+	public interface Filter<T> {
+
+		/**
+		 * Returns true if the specified object passes the filter.
+		 *
+		 * @param object the object to test
+		 *
+		 * @return true if the object is accepted
+		 */
+		boolean accept(T object);
+
+	}
+
+	private interface Factory<T> {
+		T create(long object_id);
 	}
 
 }

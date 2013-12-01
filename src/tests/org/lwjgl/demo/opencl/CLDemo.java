@@ -19,7 +19,9 @@ import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL11.*;
 import static org.lwjgl.opencl.CLUtil.*;
+import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRICD.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 public final class CLDemo {
 
@@ -30,23 +32,23 @@ public final class CLDemo {
 		CL.create();
 
 		List<CLPlatform> platforms = CLPlatform.getPlatforms();
-		if ( platforms == null )
+		if ( platforms.isEmpty() )
 			throw new RuntimeException("No OpenCL platforms found.");
 
 		IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
 		for ( CLPlatform platform : platforms ) {
 			System.out.println("\n-------------------------");
-			System.out.println("NEW PLATFORM: " + platform.getPointer());
+			System.out.printf("NEW PLATFORM: [0x%X]\n", platform.getPointer());
 
-			System.out.println(platform.getCapabilities());
-			System.out.println("-------------------------");
+			CLCapabilities platformCaps = platform.getCapabilities();
+
 			printPlatformInfo(platform, "CL_PLATFORM_PROFILE", CL_PLATFORM_PROFILE);
 			printPlatformInfo(platform, "CL_PLATFORM_VERSION", CL_PLATFORM_VERSION);
 			printPlatformInfo(platform, "CL_PLATFORM_NAME", CL_PLATFORM_NAME);
 			printPlatformInfo(platform, "CL_PLATFORM_VENDOR", CL_PLATFORM_VENDOR);
 			printPlatformInfo(platform, "CL_PLATFORM_EXTENSIONS", CL_PLATFORM_EXTENSIONS);
-			if ( platform.getCapabilities().cl_khr_icd )
+			if ( platformCaps.cl_khr_icd )
 				printPlatformInfo(platform, "CL_PLATFORM_ICD_SUFFIX_KHR", CL_PLATFORM_ICD_SUFFIX_KHR);
 			System.out.println("");
 
@@ -55,22 +57,23 @@ public final class CLDemo {
 
 			List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
 			for ( CLDevice device : devices ) {
+				long cl_device_id = device.getPointer();
 				CLCapabilities caps = device.getCapabilities();
 
-				System.out.println("\n\tNEW DEVICE: " + device.getPointer());
+				System.out.printf("\n\t** NEW DEVICE: [0x%X]\n", cl_device_id);
 				System.out.print("\t");
 				System.out.println(caps);
-				System.out.println("\t-------------------------");
 
-				System.out.println("\tCL_DEVICE_TYPE = " + device.getInfoLong(CL_DEVICE_TYPE));
-				System.out.println("\tCL_DEVICE_VENDOR_ID = " + device.getInfoInt(CL_DEVICE_VENDOR_ID));
-				System.out.println("\tCL_DEVICE_MAX_COMPUTE_UNITS = " + device.getInfoInt(CL_DEVICE_MAX_COMPUTE_UNITS));
-				System.out.println("\tCL_DEVICE_MAX_WORK_ITEM_DIMENSIONS = " + device.getInfoInt(CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS));
-				System.out.println("\tCL_DEVICE_MAX_WORK_GROUP_SIZE = " + device.getInfoSize(CL_DEVICE_MAX_WORK_GROUP_SIZE));
-				System.out.println("\tCL_DEVICE_MAX_CLOCK_FREQUENCY = " + device.getInfoInt(CL_DEVICE_MAX_CLOCK_FREQUENCY));
-				System.out.println("\tCL_DEVICE_ADDRESS_BITS = " + device.getInfoInt(CL_DEVICE_ADDRESS_BITS));
-				System.out.println("\tCL_DEVICE_AVAILABLE = " + device.getInfoBoolean(CL_DEVICE_AVAILABLE));
-				System.out.println("\tCL_DEVICE_COMPILER_AVAILABLE = " + device.getInfoBoolean(CL_DEVICE_COMPILER_AVAILABLE));
+				System.out.println("\tCL_DEVICE_TYPE = " + clGetDeviceInfoLong(cl_device_id, CL_DEVICE_TYPE));
+				System.out.println("\tCL_DEVICE_VENDOR_ID = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_VENDOR_ID));
+				System.out.println("\tCL_DEVICE_MAX_COMPUTE_UNITS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_COMPUTE_UNITS));
+				System.out
+					.println("\tCL_DEVICE_MAX_WORK_ITEM_DIMENSIONS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_WORK_ITEM_DIMENSIONS));
+				System.out.println("\tCL_DEVICE_MAX_WORK_GROUP_SIZE = " + clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_MAX_WORK_GROUP_SIZE));
+				System.out.println("\tCL_DEVICE_MAX_CLOCK_FREQUENCY = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_MAX_CLOCK_FREQUENCY));
+				System.out.println("\tCL_DEVICE_ADDRESS_BITS = " + clGetDeviceInfoInt(cl_device_id, CL_DEVICE_ADDRESS_BITS));
+				System.out.println("\tCL_DEVICE_AVAILABLE = " + clGetDeviceInfoBoolean(cl_device_id, CL_DEVICE_AVAILABLE));
+				System.out.println("\tCL_DEVICE_COMPILER_AVAILABLE = " + clGetDeviceInfoBoolean(cl_device_id, CL_DEVICE_COMPILER_AVAILABLE));
 
 				printDeviceInfo(device, "CL_DEVICE_NAME", CL_DEVICE_NAME);
 				printDeviceInfo(device, "CL_DEVICE_VENDOR", CL_DEVICE_VENDOR);
@@ -81,10 +84,10 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				CLContext context = clCreateContext(ctxProps, device, CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
 				checkCLError(errcode_ret);
 
-				CLMem buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
+				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 
 				int errcode;
@@ -107,7 +110,7 @@ public final class CLDemo {
 					checkCLError(errcode);
 				}
 
-				CLMem subbuffer = null;
+				long subbuffer = NULL;
 				if ( caps.OpenCL11 ) {
 					ByteBuffer buffer_region = cl_buffer_region.malloc(0, 64);
 
@@ -123,10 +126,10 @@ public final class CLDemo {
 					checkCLError(errcode);
 				}
 
-				long exec_caps = device.getInfoLong(CL_DEVICE_EXECUTION_CAPABILITIES);
+				long exec_caps = clGetDeviceInfoLong(cl_device_id, CL_DEVICE_EXECUTION_CAPABILITIES);
 				if ( (exec_caps & CL_EXEC_NATIVE_KERNEL) == CL_EXEC_NATIVE_KERNEL ) {
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
-					CLCommandQueue queue = clCreateCommandQueue(context, device, 0L, errcode_ret);
+					long queue = clCreateCommandQueue(context, device.getPointer(), 0L, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
@@ -141,7 +144,7 @@ public final class CLDemo {
 					}, kernelArgs, null, null, null, ev);
 					checkCLError(errcode);
 
-					CLEvent e = CLEvent.create(ev.get(0), context);
+					long e = ev.get(0);
 
 					final CountDownLatch latch = new CountDownLatch(1);
 					errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
@@ -187,7 +190,7 @@ public final class CLDemo {
 
 				System.out.println();
 
-				if ( subbuffer != null ) {
+				if ( subbuffer != NULL ) {
 					errcode = clReleaseMemObject(subbuffer);
 					checkCLError(errcode);
 				}
@@ -206,11 +209,11 @@ public final class CLDemo {
 	}
 
 	private static void printPlatformInfo(CLPlatform platform, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + platform.getInfoStringUTF8(param));
+		System.out.println("\t" + param_name + " = " + clGetPlatformInfoStringUTF8(platform.getPointer(), param));
 	}
 
 	private static void printDeviceInfo(CLDevice device, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + device.getInfoStringUTF8(param));
+		System.out.println("\t" + param_name + " = " + clGetDeviceInfoStringUTF8(device.getPointer(), param));
 	}
 
 	private static String getEventStatusName(int status) {

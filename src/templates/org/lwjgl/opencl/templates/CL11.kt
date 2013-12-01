@@ -106,7 +106,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		"BUFFER_CREATE_TYPE_REGION" _ 0x1220
 	).toJavaDocLinks()
 
-	(Construct("buffer") _ cl_mem).func(
+	cl_mem.func(
 		"CreateSubBuffer",
 		"""
 		Creates a new buffer object (referred to as a sub-buffer object) from an existing buffer object.
@@ -182,7 +182,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
 			Code.ApplyTo.ALTERNATIVE
 		),
-		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"SetMemObjectDestructorCallback",
 		"""
@@ -543,7 +543,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	val CreateUserEvent = ((Construct("context") _ cl_event).func(
+	val CreateUserEvent = cl_event.func(
 		"CreateUserEvent",
 		"""
 		Creates a user event object. User events allow applications to enqueue commands that wait on a user event to finish before the command is executed by
@@ -565,7 +565,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	cl_int.func(
 		"SetUserEventStatus",
@@ -623,7 +623,7 @@ clReleaseMemObject(buf2);
 			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
 			Code.ApplyTo.ALTERNATIVE
 		),
-		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"SetEventCallback",
 		"""

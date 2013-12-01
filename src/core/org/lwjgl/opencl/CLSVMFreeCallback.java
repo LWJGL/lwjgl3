@@ -12,7 +12,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of this interface may be passed to the {@link CL20#clEnqueueSVMFree(CLCommandQueue, PointerBuffer, CLSVMFreeCallback, PointerBuffer,
+ * Instances of this interface may be passed to the {@link CL20#clEnqueueSVMFree(long, PointerBuffer, CLSVMFreeCallback, PointerBuffer,
  * PointerBuffer) EnqueueSVMFree} method.
  */
 /*@FunctionalInterface*/

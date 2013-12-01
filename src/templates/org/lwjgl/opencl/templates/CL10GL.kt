@@ -84,7 +84,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"GL_MIPMAP_LEVEL" _ 0x2005
 	).toJavaDocLinks() + " KHRGLMSAASharing#GL_NUM_SAMPLES"
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateFromGLBuffer",
 		"""
 		Creates an OpenCL buffer object from an OpenGL buffer object.
@@ -128,7 +128,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateFromGLTexture2D",
 		"""
 		Creates an OpenCL 2D image object from an OpenGL 2D texture object, or a single face of an OpenGL cubemap texture object.
@@ -196,7 +196,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateFromGLTexture3D",
 		"""
 		Creates an OpenCL 3D image object from an OpenGL 3D texture object.
@@ -260,7 +260,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateFromGLRenderbuffer",
 		"""
 		Creates an OpenCL 2D image object from an OpenGL renderbuffer object.

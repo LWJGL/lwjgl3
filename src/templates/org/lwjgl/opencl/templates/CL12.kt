@@ -397,7 +397,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateImage",
 		"""
 		Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D image array or 3D image object.
@@ -465,7 +465,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		ERROR_RET
 	)
 
-	(Construct("context") _ cl_program).func(
+	cl_program.func(
 		"CreateProgramWithBuiltInKernels",
 		"Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
 
@@ -505,7 +505,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	val CompileProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( __result != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"CompileProgram",
 		"""
@@ -611,8 +611,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	val LinkProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( __result == null && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ (Construct("context") _ cl_program).func(
+		javaAfterNative = statement("\t\tif ( $RESULT == NULL && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+	) _ cl_program.func(
 		"LinkProgram",
 		"""
 		Links a set of compiled program objects and libraries for all the devices or a specific device(s) in the OpenCL context and creates an executable.

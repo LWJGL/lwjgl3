@@ -5,11 +5,15 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.system.APIBuffer;
 
 import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.HashMap;
+import java.util.Map;
 
+import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -77,13 +81,39 @@ public interface CLContextCallback {
 			}
 		};
 
+		// Map from cl_context to CLContextCallback global reference.
+		private static final Map<Long, Long> contextCallbacks = new HashMap<>(8);
+
 		private Util() {
 		}
 
 		private static native long setCallback(Method callback);
 
 		static long register(CLContextCallback proc) {
-			return proc == null ? NULL : memGlobalRefNewWeak(proc);
+			return proc == null ? NULL : memGlobalRefNew(proc);
+		}
+
+		static void retain(long context, long proc) {
+			if ( proc == NULL )
+				return;
+
+			if ( context == NULL ) // CreateContext failed.
+				memGlobalRefDelete(proc);
+			else
+				contextCallbacks.put(context, proc);
+		}
+
+		static void release(long context) {
+			Long proc = contextCallbacks.get(context);
+			if ( proc == null )
+				return;
+
+			APIBuffer __buffer = apiBuffer();
+			int __result = nclGetContextInfo(context, CL_CONTEXT_REFERENCE_COUNT, 4, __buffer.address(), NULL);
+			if ( __result == CL_INVALID_CONTEXT || (__result == CL_SUCCESS && __buffer.intValue(0) == 0) ) {
+				memGlobalRefDelete(proc);
+				contextCallbacks.remove(context);
+			}
 		}
 
 		/**

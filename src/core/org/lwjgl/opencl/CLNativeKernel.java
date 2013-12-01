@@ -15,7 +15,7 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of this interface may be passed to the {@link CL10#clEnqueueNativeKernel(CLCommandQueue, CLNativeKernel, ByteBuffer, PointerBuffer,
+ * Instances of this interface may be passed to the {@link CL10#clEnqueueNativeKernel(long, CLNativeKernel, ByteBuffer, PointerBuffer,
  * PointerBuffer, PointerBuffer, PointerBuffer) EnqueueNativeKernel} method. Instances may be re-used after the native kernel has been invoked.
  */
 /*@FunctionalInterface*/

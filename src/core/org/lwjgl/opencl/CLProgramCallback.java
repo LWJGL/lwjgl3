@@ -13,9 +13,9 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Instances of this interface may be passed to the {@link CL10#clBuildProgram(CLProgram, PointerBuffer, ByteBuffer, CLProgramCallback) BuildProgram},
- * {@link CL12#clCompileProgram(CLProgram, PointerBuffer, ByteBuffer, PointerBuffer, PointerBuffer, CLProgramCallback) CompileProgram} and
- * {@link CL12#clLinkProgram(CLContext, PointerBuffer, ByteBuffer, PointerBuffer, CLProgramCallback) LinkProgram} methods.
+ * Instances of this interface may be passed to the {@link CL10#clBuildProgram(long, PointerBuffer, ByteBuffer, CLProgramCallback) BuildProgram},
+ * {@link CL12#clCompileProgram(long, PointerBuffer, ByteBuffer, PointerBuffer, PointerBuffer, CLProgramCallback) CompileProgram} and
+ * {@link CL12#clLinkProgram(long, PointerBuffer, ByteBuffer, PointerBuffer, CLProgramCallback) LinkProgram} methods.
  */
 /*@FunctionalInterface*/
 public interface CLProgramCallback {

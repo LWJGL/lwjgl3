@@ -5,7 +5,7 @@
 package org.lwjgl.opencl;
 
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.PointerWrapper;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,36 +13,49 @@ import java.util.StringTokenizer;
 
 import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.system.APIUtil.*;
-import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.opencl.Info.*;
 
 /** This class is a wrapper around a cl_device_id pointer. */
-public class CLDevice extends CLObjectChild<CLPlatform> {
+public class CLDevice extends PointerWrapper {
 
 	private final CLCapabilities capabilities;
 
-	private CLDevice(long cl_device_id, CLPlatform platform) {
-		super(cl_device_id, platform);
+	public CLDevice(long cl_device_id, CLPlatform platform) {
+		this(cl_device_id, platform.getCapabilities());
 
-		capabilities = createCapabilities(cl_device_id, platform);
+		if ( LWJGLUtil.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.getPointer() )
+			throw new IllegalArgumentException("The given device does not belong to the given platform.");
 	}
 
-	public static CLDevice create(long cl_device_id, CLPlatform platform) {
-		if ( cl_device_id == NULL )
-			return null;
+	public CLDevice(long cl_device_id, CLCapabilities platformCapabilities) {
+		super(cl_device_id);
 
-		return new CLDevice(cl_device_id, platform);
+		this.capabilities = createCapabilities(cl_device_id, platformCapabilities);
 	}
 
-	private static CLCapabilities createCapabilities(long cl_device_id, CLPlatform platform) {
+	/** Returns the {@link CLCapabilities} instance associated with this OpenCL device. */
+	public CLCapabilities getCapabilities() {
+		return capabilities;
+	}
+
+	/**
+	 * Creates a {@link CLCapabilities} instance for the given OpenCL device.
+	 * <p/>
+	 * This method call is relatively expensive. The result should be cached and reused.
+	 *
+	 * @param cl_device_id the device to query
+	 *
+	 * @return the {@link CLCapabilities instance}
+	 */
+	public static CLCapabilities createCapabilities(long cl_device_id, CLCapabilities platformCapabilities) {
 		Set<String> supportedExtensions = new HashSet<>(32);
 
 		// Parse DEVICE_EXTENSIONS string
-		String extensionsString = getDeviceInfo(cl_device_id, CL_DEVICE_EXTENSIONS);
+		String extensionsString = clGetDeviceInfoStringASCII(cl_device_id, CL_DEVICE_EXTENSIONS);
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Parse DEVICE_VERSION string
-		String version = getDeviceInfo(cl_device_id, CL_DEVICE_VERSION);
+		String version = clGetDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION);
 		int majorVersion;
 		int minorVersion;
 		try {
@@ -55,34 +68,7 @@ public class CLDevice extends CLObjectChild<CLPlatform> {
 		}
 		CL.addCLVersions(majorVersion, minorVersion, supportedExtensions);
 
-		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platform.getCapabilities());
-	}
-
-	static String getDeviceInfo(long device_id, int param_name) {
-		APIBuffer __buffer = apiBuffer();
-
-		__buffer.intParam(0);
-		int errcode = nclGetDeviceInfo(device_id, param_name, 0L, NULL, __buffer.address());
-		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
-			throw new OpenCLException("Failed to query size of OpenCL device information.");
-
-		int bytes = __buffer.intValue(0);
-
-		__buffer.bufferParam(bytes);
-		errcode = nclGetDeviceInfo(device_id, param_name, bytes, __buffer.address(), NULL);
-		if ( LWJGLUtil.DEBUG && errcode != CL_SUCCESS )
-			throw new OpenCLException("Failed to query OpenCL device information.");
-
-		return __buffer.stringValueASCII(0, bytes - 1);
-	}
-
-	public CLCapabilities getCapabilities() {
-		return capabilities;
-	}
-
-	@Override
-	protected int getInfo(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
-		return nclGetDeviceInfo(pointer, param_name, param_value_size, param_value, param_value_size_ret, CL10.getInstance().GetDeviceInfo);
+		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platformCapabilities);
 	}
 
 }

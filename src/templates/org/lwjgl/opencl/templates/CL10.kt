@@ -115,6 +115,10 @@ val PARAM_VALUE_SIZE_RET = mods(Check(1), nullable) _ size_t_p.OUT(
 )
 
 fun CL10() = "CL10".nativeClassCL("CL10") {
+	javaImport (
+		"static org.lwjgl.opencl.Info.*"
+	)
+
 	nativeImport (
 		"OpenCL.h"
 	)
@@ -689,12 +693,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = arrayListOf(
-				Code.Statement("\t\tCLPlatform platform = CLContext.getPlatform(properties);", Code.ApplyTo.BOTH),
-				Code.Statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE)
-			)
+			javaBeforeNative = statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
+			javaAfterNative = statement("\t\tCLContextCallback.Util.retain($RESULT, user_data);", Code.ApplyTo.ALTERNATIVE)
 		)
-	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
+	) _ cl_context.func(
 		"CreateContext",
 		"""
 		Creates an OpenCL context. An OpenCL context is created with one or more devices. Contexts are used by the OpenCL runtime for managing objects such as
@@ -706,8 +708,6 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
 			list is terminated with 0.
-
-			<strong>LWJGL note</strong>: The ${"CONTEXT_PLATFORM".link} property must be present.
 			""",
 			ContextProperties
 		),
@@ -763,12 +763,10 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		Code(
 			// Create a global reference to the pfn_notify instance. We pass it to the actual
 			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = arrayListOf(
-				Code.Statement("\t\tCLPlatform platform = CLContext.getPlatform(properties);", Code.ApplyTo.BOTH),
-				Code.Statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE)
-			)
+			javaBeforeNative = statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
+			javaAfterNative = statement("\t\tCLContextCallback.Util.retain($RESULT, user_data);", Code.ApplyTo.ALTERNATIVE)
 		)
-	) _ (Construct("platform", "pfn_notify", "user_data") _ cl_context).func(
+	) _ cl_context.func(
 		"CreateContextFromType",
 		"Creates a context using devices of the specified type. See $CreateContext for details.",
 
@@ -777,8 +775,6 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
 			list is terminated with 0.
-
-			<strong>LWJGL note</strong>: The ${"CONTEXT_PLATFORM".link} property must be present.
 			"""
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
@@ -816,7 +812,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	Code(
+		javaAfterNative = statement("\t\tif (__result == CL_SUCCESS) CLContextCallback.Util.release(context);")
+	) _ cl_int.func(
 		"ReleaseContext",
 		"""
 		Decrements the context reference count.
@@ -868,7 +866,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Runtime ]------------------
 
-	val CreateCommandQueue = ((Construct("context", "device") _ cl_command_queue).func(
+	val CreateCommandQueue = cl_command_queue.func(
 		"CreateCommandQueue",
 		"""
 		Creates a command-queue on a specific device.
@@ -903,7 +901,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	cl_int.func(
 		"RetainCommandQueue",
@@ -980,7 +978,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateBuffer = ((Construct("context") _ cl_mem).func(
+	val CreateBuffer = cl_mem.func(
 		"CreateBuffer",
 		"Creates a buffer object.",
 
@@ -1026,7 +1024,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	val EnqueueReadBuffer = cl_int.func(
 		"EnqueueReadBuffer",
@@ -1304,7 +1302,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)).javaDocLink
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateImage2D",
 		"Creates a 2D image object.",
 
@@ -1363,7 +1361,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(Construct("context") _ cl_mem).func(
+	cl_mem.func(
 		"CreateImage3D",
 		"Creates a 3D image object.",
 
@@ -2006,7 +2004,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueMapImage = ((MapPointer("(int)image.getInfoLong(CL_MEM_SIZE)") _ void_p).func(
+	val EnqueueMapImage = ((MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p).func(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.
@@ -2271,7 +2269,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateSampler = ((Construct("context") _ cl_sampler).func(
+	val CreateSampler = cl_sampler.func(
 		"CreateSampler",
 		"""
 		Creates a sampler object.
@@ -2305,7 +2303,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	cl_int.func(
 		"RetainSampler",
@@ -2375,7 +2373,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateProgramWithSource = ((Construct("context") _ cl_program).func(
+	val CreateProgramWithSource = cl_program.func(
 		"CreateProgramWithSource",
 		"""
 		Creates a program object for a context, and loads the source code specified by the text strings in the strings array into the program object. The
@@ -2410,9 +2408,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
-	val CreateProgramWithBinary = ((Construct("context") _ cl_program).func(
+	val CreateProgramWithBinary = cl_program.func(
 		"CreateProgramWithBinary",
 		"""
 		Creates a program object for a context, and loads the binary bits specified by {@code binary} into the program object.
@@ -2481,7 +2479,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
 	cl_int.func(
 		"RetainProgram",
@@ -2523,7 +2521,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	val BuildProgram = (Code(
 		// Create a global reference to the pfn_notify instance.
 		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( __result != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
+		javaAfterNative = statement("\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
 	) _ cl_int.func(
 		"BuildProgram",
 		"""
@@ -2677,7 +2675,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateKernel = ((Construct("program") _ cl_kernel).func(
+	val CreateKernel = cl_kernel.func(
 		"CreateKernel",
 		"""
 		Creates a kernel object.
@@ -2715,12 +2713,9 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	).javaDocLink
 
-	// TODO: fix
-	val CreateKernelsInProgram = (/*Code(
-		javaAfterNative = "\t\tif ( __result == CL_SUCCESS && kernels != null ) program.registerKernels(kernels);"
-	) _ */cl_int.func(
+	val CreateKernelsInProgram = (cl_int.func(
 		"CreateKernelsInProgram",
 		"""
 		Creates kernel objects for all kernel functions in {@code program}. Kernel objects are not created for any {@code __kernel} functions in {@code program}
@@ -2835,7 +2830,8 @@ kernel void image_filter (
 		),
 		mods(
 			const,
-			MultiType(
+			optional, // generates clSetKernelArg(long kernel, int arg_index, long arg_size)
+			MultiType( // generates clSetKernalArg(long kernel, int arg_index, <type>Buffer arg_value)
 				PointerMapping.DATA_BYTE,
 				PointerMapping.DATA_SHORT,
 				PointerMapping.DATA_INT,
@@ -2844,7 +2840,7 @@ kernel void image_filter (
 				PointerMapping.DATA_DOUBLE,
 				PointerMapping.DATA_POINTER
 			),
-			optional
+			SingleValue("arg") // generates clSetKernelArg<xp>(long kernel, int arg_index, <p> arg<x-1>, ...), where x = 1..4
 		) _ void_p.IN(
 			"arg_value",
 			"""

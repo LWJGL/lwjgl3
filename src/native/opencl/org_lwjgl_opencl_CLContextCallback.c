@@ -15,16 +15,11 @@ static void CL_CALLBACK CLContextCallbackProc(
 ) {
 	JNIEnv* env = getEnv();
 
-	// user_data is a weak global reference
-	jobject callback = (*env)->NewLocalRef(env, (jweak)user_data);
-	if ( callback != NULL ) {
-	    (*env)->CallVoidMethod(env, callback, CLContextCallbackInvoke,
-	        (jlong)(intptr_t)errinfo,
-	        (jlong)(intptr_t)private_info,
-	        (jlong)cb
-	    );
-	    (*env)->DeleteLocalRef(env, callback);
-    }
+    (*env)->CallVoidMethod(env, (jobject)user_data, CLContextCallbackInvoke,
+        (jlong)(intptr_t)errinfo,
+        (jlong)(intptr_t)private_info,
+        (jlong)cb
+    );
 }
 
 CALLBACK_SETUP(org_lwjgl_opencl_CLContextCallback, CLContextCallback)
