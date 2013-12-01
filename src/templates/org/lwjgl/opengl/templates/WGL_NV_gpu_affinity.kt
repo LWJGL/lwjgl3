@@ -49,7 +49,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 	val PGPU_DEVICE = StructType(
 		name = "PGPU_DEVICE",
 		includesPointer = true,
-		definition = struct("org.lwjgl.opengl", "GPU_DEVICE", "wgl") {
+		definition = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl") {
 			documentation =
 				"""
 				Receives information about the display device specified by the {@code deviceIndex} parameter of the ${"WGLNVGPUAffinity#EnumGpuDevicesNV()".link}

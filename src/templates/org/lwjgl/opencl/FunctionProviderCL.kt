@@ -19,13 +19,12 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderCL: FunctionProvider = Generator.register(object : FunctionProvider(OPENCL_PACKAGE, "CLCapabilities") {
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
-	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
-		println("\t/** Returns the {@link ${nativeClass.className}} instance for the CL platform or device that corresponds to the given {@link CLObject}. */")
+		println("\t/** Returns the {@link ${nativeClass.className}} instance for the currently loaded ICD. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn CL.getICD().__${nativeClass.className};")
 		println("\t}")
@@ -46,24 +45,14 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		println("\t}\n")
 	}
 
-	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()
-	private fun PrintWriter.generateCapabilitiesImpl() {
-		print(HEADER)
-		println("package org.lwjgl.opencl;\n")
-
-		println("import org.lwjgl.system.*;\n")
-
-		println("import java.util.Set;\n")
-
+	override fun PrintWriter.generateContent() {
 		println("""/**
  * Defines the capabilities of an OpenCL platform or device.
  * <p/>
- * The instance returned by {@link CLPlatform#getCapabilities} )} exposes the functionality present on either the platform or any of its devices. This is
+ * The instance returned by {@link CLPlatform#createCapabilities} )} exposes the functionality present on either the platform or any of its devices. This is
  * unlike the ${"CL10".linkCL("PLATFORM_EXTENSIONS")} string, which returns only platform functionality, supported across all platform devices.
  * <p/>
- * The instance returned by {@link CLDevice#getCapabilities} exposes only the functionality available on that particular device.
- * <p/>
- * The instance returned by any other OpenCL object will be the instance of its parent object.
+ * The instance returned by {@link CLDevice#createCapabilities} exposes only the functionality available on that particular device.
  */""")
 		println("public class CLCapabilities {\n")
 
@@ -154,7 +143,7 @@ public val FunctionProviderCL: FunctionProvider = object : FunctionProvider() {
 		print("}")
 	}
 
-}
+})
 
 // DSL Extensions
 

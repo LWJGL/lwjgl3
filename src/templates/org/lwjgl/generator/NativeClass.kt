@@ -14,7 +14,17 @@ public val EXT_FLAG: String = ""
 
 public val NULL: String = "{@code NULL}"
 
-public abstract class FunctionProvider {
+public abstract class FunctionProvider(
+	packageName: String,
+	className: String
+): CustomClass(packageName, className) {
+
+	{
+		javaImport(
+			"org.lwjgl.system.*",
+		    "java.util.Set"
+		)
+	}
 
 	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
 
@@ -96,10 +106,11 @@ public abstract class FunctionProvider {
 		print("\n\t\t")
 	}
 
-	abstract fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass)
-	abstract fun generateCapabilities(writer: PrintWriter)
+	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
 
 }
+// TODO: Remove if KT-457 or KT-1183 are fixed.
+private fun FunctionProvider.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGetters(nativeClass)
 
 public class NativeClass(
 	packageName: String,
@@ -126,8 +137,7 @@ public class NativeClass(
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty()
 
-	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
-	private fun PrintWriter.generateJavaImpl() {
+	override fun PrintWriter.generateJava() {
 		print(HEADER)
 		println("package $packageName;\n")
 
@@ -221,8 +231,7 @@ public class NativeClass(
 		println("\t}\n")
 	}
 
-	override fun generateNative(writer: PrintWriter): Unit = writer.generateNativeImpl()
-	private fun PrintWriter.generateNativeImpl() {
+	override fun PrintWriter.generateNative() {
 		print(HEADER)
 		println("#include \"common_tools.h\"")
 

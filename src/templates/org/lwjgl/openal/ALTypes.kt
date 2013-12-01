@@ -6,6 +6,8 @@ package org.lwjgl.openal
 
 import org.lwjgl.generator.*
 
+val OPENAL_PACKAGE = "org.lwjgl.openal"
+
 // void
 
 val ALvoid = NativeType("ALvoid", TypeMapping.VOID)

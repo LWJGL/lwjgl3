@@ -8,13 +8,13 @@ import java.io.PrintWriter
 import org.lwjgl.generator.*
 
 /** Dummy FunctionProvider for dynamically loaded Windows functions. Nothing to do here, we use Functions instances directly. */
-public val FunctionProviderWin: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderWin: FunctionProvider = object : FunctionProvider(WINDOWS_PACKAGE, "*DUMMY*") {
 
 	override val hasCurrentCapabilities: Boolean = false
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass): Unit {
 	}
-	override fun generateCapabilities(writer: PrintWriter): Unit {
+	override fun PrintWriter.generateContent(): Unit {
 	}
 
 }

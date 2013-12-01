@@ -1553,13 +1553,13 @@ private class VectorValueTransform(
 private val MapPointerTransform = object : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String): String = """int $MAP_LENGTH = ${param.get(MapPointer).sizeExpression};
-		return old_buffer != null && __result == memAddress0(old_buffer) && old_buffer.capacity() == $MAP_LENGTH ? old_buffer : memByteBuffer(__result, $MAP_LENGTH);"""
+		return old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $MAP_LENGTH ? old_buffer : memByteBuffer($RESULT, $MAP_LENGTH);"""
 }
 
 private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"old_buffer != null && __result == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer(__result, $lengthParam)"
+		"old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer($RESULT, $lengthParam)"
 }
 
 private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {

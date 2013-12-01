@@ -6,6 +6,8 @@ package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 
+val OPENGL_PACKAGE = "org.lwjgl.opengl"
+
 // void
 
 val GLvoid = NativeType("GLvoid", TypeMapping.VOID)

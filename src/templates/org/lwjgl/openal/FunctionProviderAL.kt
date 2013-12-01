@@ -8,10 +8,9 @@ import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
 
-public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderAL: FunctionProvider = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCapabilities") {
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
-	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
@@ -42,15 +41,7 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		println("\t}\n")
 	}
 
-	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()
-	private fun PrintWriter.generateCapabilitiesImpl() {
-		print(HEADER)
-		println("package org.lwjgl.openal;\n")
-
-		println("import org.lwjgl.system.*;\n")
-
-		println("import java.util.Set;\n")
-
+	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of an OpenAL context. */")
 		println("public final class ALCapabilities {\n")
 
@@ -106,9 +97,9 @@ public val FunctionProviderAL: FunctionProvider = object : FunctionProvider() {
 		print("}")
 	}
 
-}
+})
 
 // DSL Extensions
 
 public fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
-	nativeClass("org.lwjgl.openal", templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, functionProvider = FunctionProviderAL, init = init)
+	nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, functionProvider = FunctionProviderAL, init = init)

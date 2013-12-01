@@ -341,7 +341,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	val Init = (Code(
-		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();")
+		javaInit = statement("\t\tSys.touch();\n\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();")
 	) _ int.func(
 		"Init",
 		"""
@@ -594,7 +594,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	Code(
 		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
 		javaAfterNative = statement(
-			"\t\tif ( __result != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
+			"\t\tif ( $RESULT != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
 		)
 	) _ GLFWwindow.func(
 		"CreateWindow",

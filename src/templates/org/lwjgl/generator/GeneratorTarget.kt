@@ -65,9 +65,16 @@ class Preamble {
 		if ( javaImports.isEmpty() )
 			return
 
-		javaImports.forEach {
-			writer.println("import $it;")
-		}
+		fun List<String>.print(): Unit = this.forEach { writer.println("import $it;") }
+
+		val static = javaImports.filter { it.startsWith("static ") }
+		if ( !static.isEmpty() && static.size() < javaImports.size() ) {
+			// Separate plain from static imports
+			javaImports.filter { !it.startsWith("static ") }.print()
+			writer.println();
+			static.print()
+		} else
+			javaImports.print()
 
 		writer.println()
 	}
@@ -121,9 +128,11 @@ public abstract class GeneratorTarget(
 
 	val preamble = Preamble()
 
-	abstract fun generateJava(writer: PrintWriter)
+	abstract fun PrintWriter.generateJava()
 
 }
+// TODO: Remove if KT-457 or KT-1183 are fixed.
+private fun GeneratorTarget.generateJava(writer: PrintWriter): Unit = writer.generateJava()
 
 public abstract class GeneratorTargetNative(
 	packageName: String,
@@ -152,9 +161,11 @@ public abstract class GeneratorTargetNative(
 		$nativeFileNameJNI = fileName.toString()
 	}
 
-	abstract fun generateNative(writer: PrintWriter)
+	abstract fun PrintWriter.generateNative()
 
 }
+// TODO: Remove if KT-457 or KT-1183 are fixed.
+private fun GeneratorTargetNative.generateNative(writer: PrintWriter): Unit = writer.generateNative()
 
 fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
 	preamble.javaImport(*classes)
@@ -173,14 +184,12 @@ fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
 
 // ------------------------------------
 
-public class CustomClass(
+public abstract class CustomClass(
 	packageName: String,
-	className: String,
-	val printContent: PrintWriter.() -> Unit
+	className: String
 ): GeneratorTarget(packageName, className) {
 
-	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
-	private fun PrintWriter.generateJavaImpl() {
+	override fun PrintWriter.generateJava() {
 		print(HEADER)
 		println("package $packageName;\n")
 
@@ -189,7 +198,25 @@ public class CustomClass(
 		if ( documentation != null )
 			println(documentation)
 
-		printContent()
+		generateContent()
 	}
 
+	protected abstract fun PrintWriter.generateContent(): Unit
+
+}
+
+public fun CustomClass(
+	packageName: String,
+	className: String,
+	init: (CustomClass.() -> Unit)? = null,
+	printContent: PrintWriter.() -> Unit
+): CustomClass {
+	var cc = object : CustomClass(packageName, className) {
+		override fun PrintWriter.generateContent(): Unit = printContent()
+	}
+
+	if ( init != null )
+		cc.init()
+
+	return cc
 }

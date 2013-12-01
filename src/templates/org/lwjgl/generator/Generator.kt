@@ -65,13 +65,6 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.system.windows")
 		generate("org.lwjgl.system.glfw")
 
-		// Generate capabilities
-		// TODO: Register and generate automatically, like structs.
-		generateCapabilities(org.lwjgl.openal.FunctionProviderALC, "org.lwjgl.openal.ALCCapabilities")
-		generateCapabilities(org.lwjgl.openal.FunctionProviderAL, "org.lwjgl.openal.ALCapabilities")
-		generateCapabilities(org.lwjgl.opencl.FunctionProviderCL, "org.lwjgl.opencl.CLCapabilities")
-		generateCapabilities(org.lwjgl.opengl.FunctionProviderGL, "org.lwjgl.opengl.ContextCapabilities")
-
 		// Generate utility classes. These are auto-registered during the process above.
 		generate("struct", Generator.structs)
 		generate("custom class", Generator.customClasses)
@@ -88,12 +81,14 @@ class Generator(
 		val structs = ArrayList<Struct>()
 		val customClasses = ArrayList<CustomClass>()
 
-		fun register(struct: Struct) {
+		fun register(struct: Struct): Struct {
 			structs add struct
+			return struct
 		}
 
-		fun register(customClass: CustomClass) {
+		fun <T: CustomClass> register(customClass: T): T {
 			customClasses add customClass
+			return customClass
 		}
 	}
 
@@ -238,11 +233,6 @@ class Generator(
 			}
 		}
 	}
-
-	fun <T: FunctionProvider> generateCapabilities(provider: T, targetFile: String) =
-		generateOutput(provider, File("$trgPath/java/${targetFile.replace('.', '/')}.java")) {
-			generateCapabilities(it)
-		}
 
 	private fun generateNative(target: GeneratorTargetNative, generate: (File) -> Unit) {
 		var subPackagePath = target.packageName.substring("org.lwjgl.".size).replace('.', '/')

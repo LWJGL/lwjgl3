@@ -110,8 +110,7 @@ public class Struct(
 	val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
 
-	override fun generateJava(writer: PrintWriter): Unit = writer.generateJavaImpl()
-	private fun PrintWriter.generateJavaImpl() {
+	override fun PrintWriter.generateJava() {
 		print(HEADER)
 		println("package $packageName;\n")
 
@@ -642,8 +641,7 @@ public class Struct(
 		return bufferMethod
 	}
 
-	override fun generateNative(writer: PrintWriter): Unit = writer.generateNativeImpl()
-	private fun PrintWriter.generateNativeImpl() {
+	override fun PrintWriter.generateNative() {
 		print(HEADER)
 		println("#include \"common_tools.h\"")
 		println("#include <stddef.h>")

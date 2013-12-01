@@ -18,7 +18,7 @@ fun NativeClass.capName(core: String): String =
 		"${prefixTemplate}_$templateName"
 	}
 
-public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderALC: FunctionProvider = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCCapabilities") {
 
 	override val isLocal: Boolean = true
 
@@ -33,8 +33,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		else
 			"provider.getFunctionAddress(device, \"${function.name}\")"
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
-	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
@@ -68,15 +67,7 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		println("\t}\n")
 	}
 
-	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()
-	private fun PrintWriter.generateCapabilitiesImpl() {
-		print(HEADER)
-		println("package org.lwjgl.openal;\n")
-
-		println("import org.lwjgl.system.*;\n")
-
-		println("import java.util.Set;\n")
-
+	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of the OpenAL Context API. */")
 		println("public final class ALCCapabilities {\n")
 
@@ -119,9 +110,9 @@ public val FunctionProviderALC: FunctionProvider = object : FunctionProvider() {
 		print("}")
 	}
 
-}
+})
 
 // DSL Extensions
 
 public fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
-	nativeClass("org.lwjgl.openal", templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, functionProvider = FunctionProviderALC, init = init)
+	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, functionProvider = FunctionProviderALC, init = init)

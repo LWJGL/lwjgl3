@@ -24,7 +24,7 @@ private val List<NativeClassFunction>.hasDependencies: Boolean
 private val List<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
-public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
+public val FunctionProviderGL: FunctionProvider = Generator.register(object : FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
 
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
@@ -41,8 +41,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		else
 			"provider.getFunctionAddress(\"${function.name}\")"
 
-	override fun generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGettersImpl(nativeClass)
-	private fun PrintWriter.generateFunctionGettersImpl(nativeClass: NativeClass) {
+	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
@@ -89,15 +88,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		println("\t}\n")
 	}
 
-	override fun generateCapabilities(writer: PrintWriter): Unit = writer.generateCapabilitiesImpl()
-	private fun PrintWriter.generateCapabilitiesImpl() {
-		print(HEADER)
-		println("package org.lwjgl.opengl;\n")
-
-		println("import org.lwjgl.system.*;\n")
-
-		println("import java.util.Set;\n")
-
+	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of an OpenGL context. */")
 		println("public final class ContextCapabilities {\n")
 
@@ -141,7 +132,7 @@ public val FunctionProviderGL: FunctionProvider = object : FunctionProvider() {
 		print("}")
 	}
 
-}
+})
 
 // DSL Extensions
 
@@ -154,7 +145,7 @@ public fun String.nativeClassGL(
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass =
 	nativeClass(
-		"org.lwjgl.opengl",
+		OPENGL_PACKAGE,
 		templateName,
 		nativeSubPath = nativeSubPath,
 		prefix = prefix,
