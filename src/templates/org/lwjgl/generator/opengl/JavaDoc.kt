@@ -8,19 +8,19 @@ import java.io.PrintWriter
 import org.lwjgl.generator.*
 
 /** Specifies an alternative name for the OpenGL SDK Reference url. */
-public class ReferenceGL(val function: String): FunctionModifier() {
+class ReferenceGL(val function: String): FunctionModifier() {
 	class object: ModifierObject<ReferenceGL> {
 		override val key = javaClass<ReferenceGL>()
 	}
 
-	override val isSpecial: Boolean = false
+	override val isSpecial = false
 	override protected fun validate(func: NativeClassFunction) {
 		if ( !func.nativeClass.postfix.isEmpty() )
 			throw IllegalArgumentException("The ReferenceGL modifier can only be applied on core functionality.")
 	}
 }
 
-public fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
+fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
 	val link = url("http://www.opengl.org/sdk/docs/man${if ( deprecated ) "2" else ""}/xhtml/$function.xml", "OpenGL SDK Reference")
 	val injectedJavaDoc =
 		if ( deprecated )

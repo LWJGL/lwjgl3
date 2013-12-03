@@ -7,7 +7,7 @@ package org.lwjgl.generator.opengl
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.GLenum
 
-public enum class BufferType(val mapping: PointerMapping) {
+enum class BufferType(val mapping: PointerMapping) {
 
 	GL_UNSIGNED_BYTE: BufferType(PointerMapping.DATA_BYTE)
 	GL_UNSIGNED_SHORT: BufferType(PointerMapping.DATA_SHORT)
@@ -28,12 +28,12 @@ public enum class BufferType(val mapping: PointerMapping) {
 
 }
 
-public class AutoType(override val reference: String, vararg val types: BufferType): ParameterModifier(), ReferenceModifier {
+class AutoType(override val reference: String, vararg val types: BufferType): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoType> {
 		override val key = javaClass<AutoType>()
 	}
 
-	override val isSpecial: Boolean = false
+	override val isSpecial = false
 
 	{
 		if ( types.isEmpty() )

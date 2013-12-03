@@ -47,11 +47,11 @@ abstract class QualifiedType(
 
 }
 
-public class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
+class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
-	public fun hashCode(): Int = RESULT.hashCode()
+	fun hashCode(): Int = RESULT.hashCode()
 
-	public fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is ReturnValue && obj.nativeType == this.nativeType)
+	fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is ReturnValue && obj.nativeType == this.nativeType)
 
 	// --- [ Helper functions & properties ] ---
 
@@ -60,13 +60,13 @@ public class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
 }
 
-public enum class ParameterType {
+enum class ParameterType {
 	IN
 	OUT
 	INOUT
 }
 
-public class Parameter(
+class Parameter(
 	nativeType: NativeType,
 	val name: String,
 	val paramType: ParameterType = ParameterType.IN,
@@ -74,11 +74,11 @@ public class Parameter(
 	links: String = ""
 ): QualifiedType(nativeType) {
 
-	val documentation: String = if ( links.isEmpty() ) documentation else doc(documentation, links)
+	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links)
 
-	public fun hashCode(): Int = name.hashCode()
+	fun hashCode(): Int = name.hashCode()
 
-	public fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is Parameter && obj.name equals this.name)
+	fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is Parameter && obj.name equals this.name)
 
 	private fun doc(description: String, links: String): String {
 		val trimmed = description.trim()
@@ -145,19 +145,19 @@ public class Parameter(
 
 // DSL extensions
 
-public fun ReturnValueModifier._(returnType: NativeType): ReturnValue {
+fun ReturnValueModifier._(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(this)
 	return returns
 }
 
-public fun QualifiedTypeModifier._(returnType: NativeType): ReturnValue {
+fun QualifiedTypeModifier._(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(this)
 	return returns
 }
 
-public fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
+fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(*this)
 	return returns
@@ -168,8 +168,8 @@ public fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
 // General
 
 /** Marks the function parameter or return value as const. */
-public val const: QualifiedTypeModifier = object : QualifiedTypeModifier() {
-	override val isSpecial: Boolean = false
+val const = object : QualifiedTypeModifier() {
+	override val isSpecial = false
 	override fun validate(qtype: QualifiedType) {
 		if ( qtype.nativeType !is PointerType )
 			throw IllegalArgumentException("The const modifier can only be applied on pointer types.")
@@ -181,8 +181,8 @@ public val const: QualifiedTypeModifier = object : QualifiedTypeModifier() {
 
 // Parameter
 
-public val virtual: ParameterModifier = object : ParameterModifier() {
-	override val isSpecial: Boolean = false
+val virtual = object : ParameterModifier() {
+	override val isSpecial = false
 }
 
 trait AutoSizeFactor {
@@ -194,8 +194,8 @@ class AutoSizeFactorShift(
 	val left: Boolean,
 	val expression: String
 ): AutoSizeFactor {
-	override fun expression(): String = getExpression(left)
-	override fun expressionInv(): String = getExpression(!left)
+	override fun expression() = getExpression(left)
+	override fun expressionInv() = getExpression(!left)
 
 	private fun getExpression(left: Boolean) = if ( left ) "<< $expression" else ">> $expression"
 }
@@ -204,55 +204,55 @@ class AutoSizeFactorScale(
 	val multiply: Boolean,
 	val expression: String
 ): AutoSizeFactor {
-	override fun expression(): String = getExpression(multiply)
-	override fun expressionInv(): String = getExpression(!multiply)
+	override fun expression() = getExpression(multiply)
+	override fun expressionInv() = getExpression(!multiply)
 
 	private fun getExpression(multiply: Boolean) = if ( multiply ) "* $expression" else "/ $expression"
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
-public class AutoSize(override val reference: String, vararg val dependent: String): ParameterModifier(), ReferenceModifier {
+class AutoSize(override val reference: String, vararg val dependent: String): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoSize> {
 		override val key = javaClass<AutoSize>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 
 	/** If not null, the expression will be appended to the parameter. */
 	var factor: AutoSizeFactor? = null
 	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
 	var toBytes: Boolean = false
 
-	public fun shl(value: Int): AutoSize = shl("$value")
-	public fun shl(expression: String): AutoSize {
+	fun shl(value: Int) = shl("$value")
+	fun shl(expression: String): AutoSize {
 		this.factor = AutoSizeFactorShift(true, expression)
 		return this
 	}
 
-	public fun shr(value: Int): AutoSize = shr("$value")
-	public fun shr(expression: String): AutoSize {
+	fun shr(value: Int) = shr("$value")
+	fun shr(expression: String): AutoSize {
 		this.factor = AutoSizeFactorShift(false, expression)
 		return this
 	}
 
-	public fun times(value: Int): AutoSize = times("$value")
-	public fun times(expression: String): AutoSize {
+	fun times(value: Int) = times("$value")
+	fun times(expression: String): AutoSize {
 		this.factor = AutoSizeFactorScale(true, expression)
 		return this
 	}
 
-	public fun div(value: Int): AutoSize = div("$value")
-	public fun div(expression: String): AutoSize {
+	fun div(value: Int) = div("$value")
+	fun div(expression: String): AutoSize {
 		this.factor = AutoSizeFactorScale(false, expression)
 		return this
 	}
 
-	public fun toBytes(): AutoSize {
+	fun toBytes(): AutoSize {
 		this.toBytes = true
 		return this
 	}
 
-	public fun hasReference(reference: String): Boolean = this.reference == reference || dependent.any { it == reference }
+	fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
 	override fun validate(param: Parameter) {
 		if ( param.paramType == ParameterType.OUT )
@@ -269,8 +269,8 @@ public class AutoSize(override val reference: String, vararg val dependent: Stri
 	}
 }
 
-public val autoSizeResult: ParameterModifier = object : ParameterModifier() {
-	override val isSpecial: Boolean = true
+val autoSizeResult = object : ParameterModifier() {
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.paramType == ParameterType.IN )
 			when ( param.nativeType.mapping ) {
@@ -296,7 +296,7 @@ public val autoSizeResult: ParameterModifier = object : ParameterModifier() {
 }
 
 /** Adds a capacity check to a buffer parameter. */
-public class Check(
+class Check(
 	/** An integer expression to validate against the buffer capacity. */
 	val expression: String,
 	/** If the expression value is in bytes rather in elements (of the buffer type). */
@@ -308,7 +308,7 @@ public class Check(
 		override val key = javaClass<Check>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The Check modifier can only be applied on pointer types.")
@@ -317,27 +317,27 @@ public class Check(
 			throw IllegalArgumentException("The Check modifier cannot be applied on opaque pointer types.")
 	}
 }
-public fun Check(value: Int): Check = Check(Integer.toString(value))
+fun Check(value: Int) = Check(Integer.toString(value))
 
 class Nullable internal(val optional: Boolean): ParameterModifier() {
 	class object: ModifierObject<Nullable> {
 		override val key = javaClass<Nullable>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
 	}
 }
 /** Marks a pointer parameter as nullable. */
-public val nullable: Nullable = Nullable(false)
+val nullable = Nullable(false)
 /** Marks a pointer parameter as optional. Similar to nullable, but the parameter either doesn't exist or it exists and is not null. */
-public val optional: Nullable = Nullable(true)
+val optional = Nullable(true)
 
 /** Marks a buffer parameter as null-terminated. */
-public val nullTerminated: TemplateModifier = object : ParameterModifier() {
-	override val isSpecial: Boolean = true
+val nullTerminated = object : ParameterModifier() {
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The NullTerminated modifier can only be applied on pointer types.")
@@ -348,7 +348,7 @@ public val nullTerminated: TemplateModifier = object : ParameterModifier() {
 }
 
 /** Marks a parameter to be replaced with an expression. */
-public class Expression(
+class Expression(
 	/** The expression to use instead of the parameter name. */
 	val value: String,
 	/** If true, the parameter will not be removed from the method signature. */
@@ -358,11 +358,11 @@ public class Expression(
 		override val key = javaClass<Expression>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 }
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
-public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
+class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 	class object: ModifierObject<MultiType> {
 		override val key = javaClass<MultiType>()
 	}
@@ -375,7 +375,7 @@ public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 			throw IllegalArgumentException("The MultiType modifier can only be applied with concrete PointerMappings.")
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The MultiType modifier can only be applied on pointer types.")
@@ -387,7 +387,7 @@ public class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 }
 
 /** Marks a char pointer parameter to become the return value of an alternative method. */
-public class Return(
+class Return(
 	/** The parameter that defines the maximum string size. */
 	val maxLengthParam: String,
 	/** The parameter that returns the actual string size */
@@ -399,7 +399,7 @@ public class Return(
 		override val key = javaClass<Return>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on pointer types.")
@@ -412,15 +412,15 @@ public class Return(
 	}
 }
 /** Used for simple return values. */
-public val returnValue: Return = Return("", "")
+val returnValue = Return("", "")
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
-public class SingleValue(val newName: String): ParameterModifier() {
+class SingleValue(val newName: String): ParameterModifier() {
 	class object: ModifierObject<SingleValue> {
 		override val key = javaClass<SingleValue>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The SingleValue modifier can only be applied on pointer types.")
@@ -434,7 +434,7 @@ public class SingleValue(val newName: String): ParameterModifier() {
 }
 
 /** Marks a pointer parameter as an array of pointers. */
-public class PointerArray(
+class PointerArray(
 	/** The array element type. */
 	val elementType: PointerType,
 	/** The single version parameter name. */
@@ -448,7 +448,7 @@ public class PointerArray(
 		override val key = javaClass<PointerArray>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The PointerArray modifier can only be applied on pointer types.")
@@ -461,12 +461,12 @@ public class PointerArray(
 	}
 }
 
-public class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
+class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
 	class object: ModifierObject<Callback> {
 		override val key = javaClass<Callback>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The Callback modifier can only be applied on opaque pointer types.")
@@ -479,7 +479,7 @@ public class Callback(val procClass: String, val storeInFunctions: Boolean = fal
 // ReturnValue
 
 /** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */
-public class MapPointer(
+class MapPointer(
 	/** An expression that defines the ByteBuffer capacity. */
 	val sizeExpression: String
 ): ReturnValueModifier() {
@@ -487,7 +487,7 @@ public class MapPointer(
 		override val key = javaClass<MapPointer>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(returns: ReturnValue) {
 		if ( returns.nativeType !is PointerType )
 			throw IllegalArgumentException("The MapPointer modifier can only be applied on pointer types.")
@@ -497,7 +497,7 @@ public class MapPointer(
 	}
 }
 
-public class Construct(
+class Construct(
 	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
 	vararg val otherArgs: String
 ): ReturnValueModifier() {
@@ -505,7 +505,7 @@ public class Construct(
 		override val key = javaClass<Construct>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(returns: ReturnValue) {
 		if ( returns.nativeType !is ObjectType )
 			throw IllegalArgumentException("The Construct modifier can only be applied on object types.")
@@ -513,8 +513,8 @@ public class Construct(
 }
 
 /** Returns the address of the return value, instead of the return value itself. */
-public val address: ReturnValueModifier = object : ReturnValueModifier() {
-	override val isSpecial: Boolean = false
+val address = object : ReturnValueModifier() {
+	override val isSpecial = false
 	override protected fun validate(returns: ReturnValue) {
 		if ( returns.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The address modifier can only be applied on opaque pointer types.")

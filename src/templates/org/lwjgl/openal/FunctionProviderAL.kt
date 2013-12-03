@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
 
-public val FunctionProviderAL: FunctionProvider = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCapabilities") {
+private val FunctionProviderAL = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCapabilities") {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -101,5 +101,5 @@ public val FunctionProviderAL: FunctionProvider = Generator.register(object : Fu
 
 // DSL Extensions
 
-public fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+private fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, functionProvider = FunctionProviderAL, init = init)

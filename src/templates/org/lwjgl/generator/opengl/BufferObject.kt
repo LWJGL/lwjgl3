@@ -6,12 +6,12 @@ package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
 
-public class BufferObject(public val binding: String): ParameterModifier() {
+class BufferObject(val binding: String): ParameterModifier() {
 	class object: ModifierObject<BufferObject> {
 		override val key = javaClass<BufferObject>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( !((param.nativeType is PointerType && param.nativeType.mapping != PointerMapping.OPAQUE_POINTER) || param.nativeType.mapping == PrimitiveMapping.PTR) )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
@@ -31,17 +31,17 @@ public class BufferObject(public val binding: String): ParameterModifier() {
 	}
 }
 
-public val ARRAY_BUFFER: BufferObject = BufferObject("GL15.GL_ARRAY_BUFFER_BINDING")
-public val ELEMENT_ARRAY_BUFFER: BufferObject = BufferObject("GL15.GL_ELEMENT_ARRAY_BUFFER_BINDING")
-public val PIXEL_PACK_BUFFER: BufferObject = BufferObject("GL21.GL_PIXEL_PACK_BUFFER_BINDING")
-public val PIXEL_UNPACK_BUFFER: BufferObject = BufferObject("GL21.GL_PIXEL_UNPACK_BUFFER_BINDING")
-public val DRAW_INDIRECT_BUFFER: BufferObject = BufferObject("GL40.GL_DRAW_INDIRECT_BUFFER_BINDING")
-public val UNIFORM_BUFFER_BINDING: BufferObject = BufferObject("GL31.GL_UNIFORM_BUFFER_BINDING")
-public val TRANSFORM_FEEDBACK_BUFFER: BufferObject = BufferObject("GL30.GL_TRANSFORM_FEEDBACK_BUFFER_BINDING")
-public val SHADER_STORAGE_BUFFER: BufferObject = BufferObject("GL43.GL_SHADER_STORAGE_BUFFER_BINDING")
-public val ATOMIC_COUNTER_BUFFER: BufferObject = BufferObject("GL42.GL_ATOMIC_COUNTER_BUFFER_BINDING")
-public val DISPATCH_INDIRECT_BUFFER: BufferObject = BufferObject("GL43.GL_DISPATCH_INDIRECT_BUFFER_BINDING")
+val ARRAY_BUFFER = BufferObject("GL15.GL_ARRAY_BUFFER_BINDING")
+val ELEMENT_ARRAY_BUFFER = BufferObject("GL15.GL_ELEMENT_ARRAY_BUFFER_BINDING")
+val PIXEL_PACK_BUFFER = BufferObject("GL21.GL_PIXEL_PACK_BUFFER_BINDING")
+val PIXEL_UNPACK_BUFFER = BufferObject("GL21.GL_PIXEL_UNPACK_BUFFER_BINDING")
+val DRAW_INDIRECT_BUFFER = BufferObject("GL40.GL_DRAW_INDIRECT_BUFFER_BINDING")
+val UNIFORM_BUFFER_BINDING = BufferObject("GL31.GL_UNIFORM_BUFFER_BINDING")
+val TRANSFORM_FEEDBACK_BUFFER = BufferObject("GL30.GL_TRANSFORM_FEEDBACK_BUFFER_BINDING")
+val SHADER_STORAGE_BUFFER = BufferObject("GL43.GL_SHADER_STORAGE_BUFFER_BINDING")
+val ATOMIC_COUNTER_BUFFER = BufferObject("GL42.GL_ATOMIC_COUNTER_BUFFER_BINDING")
+val DISPATCH_INDIRECT_BUFFER = BufferObject("GL43.GL_DISPATCH_INDIRECT_BUFFER_BINDING")
 
 // TODO: Convert to tokens
-public val QUERY_BUFFER_AMD: BufferObject = BufferObject("0x9193")
-public val VIDEO_BUFFER_NV: BufferObject = BufferObject("0x9021")
+val QUERY_BUFFER_AMD = BufferObject("0x9193")
+val VIDEO_BUFFER_NV = BufferObject("0x9021")

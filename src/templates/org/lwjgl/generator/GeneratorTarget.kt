@@ -65,7 +65,7 @@ class Preamble {
 		if ( javaImports.isEmpty() )
 			return
 
-		fun List<String>.print(): Unit = this.forEach { writer.println("import $it;") }
+		fun List<String>.print() = this.forEach { writer.println("import $it;") }
 
 		val static = javaImports.filter { it.startsWith("static ") }
 		if ( !static.isEmpty() && static.size() < javaImports.size() ) {
@@ -103,25 +103,25 @@ val String.asJNIName: String
 	else
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
-public enum class Access(internal val modifier: String) {
+enum class Access(internal val modifier: String) {
 	PUBLIC : Access("public ")
 	INTERNAL : Access("")
 	PRIVATE : Access("private ")
 }
 
-public abstract class GeneratorTarget(
+abstract class GeneratorTarget(
 	val packageName: String,
 	val className: String
 ): TemplateElement() {
 
-	internal var access: Access = Access.PUBLIC
+	var access = Access.PUBLIC
 		set(access: Access) {
 			if ( access == Access.PRIVATE )
 				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
 			$access = access
 		}
 
-	internal var documentation: String? = null
+	var documentation: String? = null
 		set(documentation: String?) {
 			$documentation = documentation?.toJavaDoc(indentation = "")
 		}
@@ -132,9 +132,9 @@ public abstract class GeneratorTarget(
 
 }
 // TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun GeneratorTarget.generateJava(writer: PrintWriter): Unit = writer.generateJava()
+private fun GeneratorTarget.generateJava(writer: PrintWriter) = writer.generateJava()
 
-public abstract class GeneratorTargetNative(
+abstract class GeneratorTargetNative(
 	packageName: String,
 	className: String,
 	val nativeSubPath: String = ""
@@ -165,7 +165,7 @@ public abstract class GeneratorTargetNative(
 
 }
 // TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun GeneratorTargetNative.generateNative(writer: PrintWriter): Unit = writer.generateNative()
+private fun GeneratorTargetNative.generateNative(writer: PrintWriter) = writer.generateNative()
 
 fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
 	preamble.javaImport(*classes)
@@ -184,7 +184,7 @@ fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
 
 // ------------------------------------
 
-public abstract class CustomClass(
+abstract class CustomClass(
 	packageName: String,
 	className: String
 ): GeneratorTarget(packageName, className) {
@@ -205,14 +205,14 @@ public abstract class CustomClass(
 
 }
 
-public fun CustomClass(
+fun CustomClass(
 	packageName: String,
 	className: String,
 	init: (CustomClass.() -> Unit)? = null,
 	printContent: PrintWriter.() -> Unit
 ): CustomClass {
 	var cc = object : CustomClass(packageName, className) {
-		override fun PrintWriter.generateContent(): Unit = printContent()
+		override fun PrintWriter.generateContent() = printContent()
 	}
 
 	if ( init != null )

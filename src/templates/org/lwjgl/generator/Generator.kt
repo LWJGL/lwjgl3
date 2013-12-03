@@ -92,6 +92,7 @@ class Generator(
 		}
 	}
 
+	// TODO: add more, e.g. kotlinc
 	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("$srcPath/org/lwjgl/generator", true);
 
 	{
@@ -239,9 +240,7 @@ class Generator(
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
-		val outputNative: File = File("$trgPath/native/$subPackagePath/${target.nativeFileName}.c")
-
-		generate(outputNative)
+		generate(File("$trgPath/native/$subPackagePath/${target.nativeFileName}.c"))
 	}
 
 }
@@ -250,7 +249,7 @@ class Generator(
 
 private val packageLastModifiedMap = HashMap<String, Long>()
 
-private fun getDirectoryLastModified(path: String, recursive: Boolean = false): Long = getDirectoryLastModified(File(path), recursive)
+private fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory() )
 		return 0
@@ -285,9 +284,9 @@ private fun ensurePath(path: File) {
 }
 
 private fun readFile(file: File): ByteBuffer {
-	val channel: FileChannel = FileInputStream(file).getChannel()
+	val channel = FileInputStream(file).getChannel()
 	val bytesTotal = channel.size().toInt()
-	val buffer: ByteBuffer = ByteBuffer.allocateDirect(bytesTotal)
+	val buffer = ByteBuffer.allocateDirect(bytesTotal)
 
 	var bytesRead = 0
 	do {
@@ -319,7 +318,7 @@ private fun <T> generateOutput(
 		writer.close()
 
 		// Compare the existing file content with the generated content.
-		val before: ByteBuffer = readFile(file)
+		val before = readFile(file)
 		val after = baos.toByteArray()
 
 		fun somethingChanged(before: ByteBuffer, after: ByteArray): Boolean {

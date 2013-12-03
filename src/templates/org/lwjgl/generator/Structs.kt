@@ -47,7 +47,7 @@ class StructMemberCharArray(
 
 private val ANONYMOUS = "*"
 
-public class Struct(
+class Struct(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = "",
@@ -80,24 +80,24 @@ public class Struct(
 	private val members = ArrayList<StructMember>()
 
 	// We allow primitives as members
-	public fun PrimitiveType.member(nativeName: String, name: String = nativeName) {
+	fun PrimitiveType.member(nativeName: String, name: String = nativeName) {
 		members add StructMember(this, nativeName, name)
 	}
 
 	// We allow primitive arrays as members
-	public fun PrimitiveType.member(nativeName: String, name: String = nativeName, size: Int) {
+	fun PrimitiveType.member(nativeName: String, name: String = nativeName, size: Int) {
 		members add StructMemberArray(this, nativeName, name, size)
 	}
 
 	// TODO: Kotlin bug - Removed nullTerminated = false default. If nullTerminated is omitted on the call site, the above function will be called instead.
 	// TODO: Is nullTerminated ever false?
 	// We allow character arrays as members
-	public fun CharType.member(nativeName: String, name: String = nativeName, size: Int, nullTerminated: Boolean) {
+	fun CharType.member(nativeName: String, name: String = nativeName, size: Int, nullTerminated: Boolean) {
 		members add StructMemberCharArray(this, nativeName, name, size, nullTerminated)
 	}
 
 	// We allow pointers as members
-	public fun PointerType.member(nativeName: String, name: String = nativeName) {
+	fun PointerType.member(nativeName: String, name: String = nativeName) {
 		members add StructMember(this, nativeName, name)
 	}
 
@@ -697,7 +697,7 @@ public class Struct(
 
 }
 
-public fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
+fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
 	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier)
 	struct.init()
 	Generator.register(struct)
@@ -705,7 +705,7 @@ public fun struct(packageName: String, className: String, nativeSubPath: String 
 }
 
 /** Anonymous member struct definition. Mostly useful for union of structs. */
-public fun Struct.struct(init: Struct.() -> Unit): StructType {
+fun Struct.struct(init: Struct.() -> Unit): StructType {
 	val struct = Struct(ANONYMOUS, ANONYMOUS)
 	struct.init()
 	return StructType(struct)

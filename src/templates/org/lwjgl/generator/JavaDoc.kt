@@ -8,15 +8,15 @@ import java.util.ArrayList
 import java.util.regex.Pattern
 
 /** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
-public val tab: String = "#TAB"
+val tab = "#TAB"
 
 private val PARAGRAPH_PATTERN = Pattern.compile("^\\s*$", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^\\s+", Pattern.MULTILINE)
 private val TAB_PATTERN = Pattern.compile(tab)
 
-fun String.replaceAll(pattern: Pattern, replacement: String): String = pattern.matcher(this).replaceAll(replacement)
+fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
-private fun String.cleanup(linePrefix: String = "\t * "): String = trim()
+private fun String.cleanup(linePrefix: String = "\t * ") = trim()
 	.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
 	.replaceAll(CLEANUP_PATTERN, linePrefix)
 	.replaceAll(TAB_PATTERN, "\t")
@@ -88,17 +88,17 @@ private val ESCAPE_TAB_PATTERN = Pattern.compile("\t|(?:^\\s*$)", Pattern.MULTIL
 private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE)
 
 /** Useful for simple expression with embedded markup. */
-public fun code(code: String): String = "<code>$code</code>"
+fun code(code: String) = "<code>$code</code>"
 
 /** Useful for raw code blocks without markup. */
-public fun codeBlock(code: String): String = "<pre><code>\n${code
+fun codeBlock(code: String) = "<pre><code>\n${code
 	.trim()
 	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
 	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
 }</code></pre>"
 
-public fun String.linkPlain(name: String): String = link(name, prefix = "")
-public fun String.link(name: String, prefix: String = ""): String {
+fun String.linkPlain(name: String) = link(name, prefix = "")
+fun String.link(name: String, prefix: String = ""): String {
 	val link =
 		if ( name.endsWith(')') ) {
 			// Method
@@ -129,9 +129,9 @@ val String.link: String
 		return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
 	}
 
-public fun url(href: String, innerHTML: String): String = """<a href="$href">$innerHTML</a>"""
+fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 
-public fun table(vararg rows: String, matrix: Boolean = false): String {
+fun table(vararg rows: String, matrix: Boolean = false): String {
 	val builder = StringBuilder(512)
 	builder append "<table border=1 cellspacing=0 cellpadding=2 class=${if ( matrix ) "\"lwjgl matrix\"" else "lwjgl"}>"
 	for ( row in rows ) {
@@ -143,7 +143,7 @@ public fun table(vararg rows: String, matrix: Boolean = false): String {
 	return builder.toString()
 }
 
-public fun tr(vararg columns: String): String {
+fun tr(vararg columns: String): String {
 	val builder = StringBuilder()
 	builder append "<tr>"
 	for ( column in columns )
@@ -153,8 +153,8 @@ public fun tr(vararg columns: String): String {
 	return builder.toString()
 }
 
-public fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1): String = td(content, colspan, rowspan, "th")
-public fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td"): String {
+fun th(content: String = "", colspan: Int = 1, rowspan: Int = 1) = td(content, colspan, rowspan, "th")
+fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "td"): String {
 	val builder = StringBuilder()
 	builder append "<$tag"
 	if ( 1 < colspan )
@@ -181,5 +181,5 @@ private fun htmlList(tag: String, vararg items: String): String {
 	return builder.toString()
 }
 
-public fun ul(vararg items: String): String = htmlList("ul", *items)
-public fun ol(vararg items: String): String = htmlList("ol", *items)
+fun ul(vararg items: String) = htmlList("ul", *items)
+fun ol(vararg items: String) = htmlList("ol", *items)

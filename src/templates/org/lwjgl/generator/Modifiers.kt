@@ -30,8 +30,8 @@ abstract class TemplateElement {
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] == modifier
 	fun has(modifierObject: ModifierObject<*>) = modifiers.containsKey(modifierObject.key)
-	fun <T: TemplateModifier> get(modifier: Class<T>): T = [suppress("UNCHECKED_CAST")](modifiers[modifier] as T)
-	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>): T = [suppress("UNCHECKED_CAST")](modifiers[modifierObject.key] as T)
+	fun <T: TemplateModifier> get(modifier: Class<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifier] as T)
+	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifierObject.key] as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modifierObject: ModifierObject<*>, reference: String): Boolean {
@@ -45,7 +45,7 @@ abstract class TemplateElement {
 }
 
 /** A template modifier. Replaces the annotations in the pre-3.0 generator. */
-public trait TemplateModifier {
+trait TemplateModifier {
 	/** When true, this modifier requires special Java-side handling. */
 	val isSpecial: Boolean
 
@@ -53,11 +53,11 @@ public trait TemplateModifier {
 	fun validate(element: TemplateElement)
 }
 
-public trait ModifierObject<T: TemplateModifier> {
+trait ModifierObject<T: TemplateModifier> {
 	val key: Class<T>
 }
 
-public abstract class FunctionModifier: TemplateModifier {
+abstract class FunctionModifier: TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if ( element is NativeClassFunction )
 			validate(element)
@@ -69,7 +69,7 @@ public abstract class FunctionModifier: TemplateModifier {
 	}
 }
 
-public abstract class ParameterModifier: TemplateModifier {
+abstract class ParameterModifier: TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if ( element is Parameter )
 			validate(element)
@@ -81,7 +81,7 @@ public abstract class ParameterModifier: TemplateModifier {
 	}
 }
 
-public abstract class ReturnValueModifier: TemplateModifier {
+abstract class ReturnValueModifier: TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if ( element is ReturnValue )
 			validate(element)
@@ -93,7 +93,7 @@ public abstract class ReturnValueModifier: TemplateModifier {
 	}
 }
 
-public abstract class QualifiedTypeModifier: TemplateModifier {
+abstract class QualifiedTypeModifier: TemplateModifier {
 	override fun validate(element: TemplateElement) {
 		if ( element is QualifiedType )
 			validate(element)
@@ -106,34 +106,34 @@ public abstract class QualifiedTypeModifier: TemplateModifier {
 }
 
 /** A TemplateModifier with a reference to another TemplateElement. */
-public trait ReferenceModifier {
+trait ReferenceModifier {
 	val reference: String
 }
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
 
-public fun FunctionModifier._(func: NativeClassFunction): NativeClassFunction {
+fun FunctionModifier._(func: NativeClassFunction): NativeClassFunction {
 	func.setModifiers(this)
 	return func
 }
 
-public fun ParameterModifier._(param: Parameter): Parameter {
+fun ParameterModifier._(param: Parameter): Parameter {
 	param.setModifiers(this)
 	return param
 }
 
-public fun ReturnValueModifier._(retValue: ReturnValue): ReturnValue {
+fun ReturnValueModifier._(retValue: ReturnValue): ReturnValue {
 	retValue.setModifiers(this)
 	return retValue
 }
 
-public fun <T: QualifiedType> QualifiedTypeModifier._(qtype: T): T {
+fun <T: QualifiedType> QualifiedTypeModifier._(qtype: T): T {
 	qtype.setModifiers(this)
 	return qtype
 }
 
-public fun mods(vararg modifiers: TemplateModifier): Array<TemplateModifier> = modifiers
-public fun <T: TemplateElement> Array<TemplateModifier>._(element: T): T {
+fun mods(vararg modifiers: TemplateModifier): Array<TemplateModifier> = modifiers
+fun <T: TemplateElement> Array<TemplateModifier>._(element: T): T {
 	element.setModifiers(*this)
 	return element
 }

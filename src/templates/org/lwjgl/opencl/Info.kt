@@ -50,7 +50,7 @@ fun info() {
 				val info: String = name,
 				val param: String = name.toLowerCase()
 			) {
-				open fun getQueryImpl(field: String, info: String): String =
+				open fun getQueryImpl(field: String, info: String) =
 					"""private static final InfoQuery $field = new InfoQuery() {
 		@Override
 		protected int get(long pointer, int param_name, long param_value_size, long param_value, long param_value_size_ret) {
@@ -71,7 +71,7 @@ fun info() {
 			    val argType: String,
 			    val queryType: String
 			): ObjectType(source, name, types, info, param) {
-				override fun getQueryImpl(field: String, info: String): String =
+				override fun getQueryImpl(field: String, info: String) =
 					"""private static final $queryType $field = new $queryType() {
 		@Override
 		protected int get(long pointer, $argType arg, int param_name, long param_value_size, long param_value, long param_value_size_ret) {

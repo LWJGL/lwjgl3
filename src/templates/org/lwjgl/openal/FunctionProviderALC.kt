@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
 
-fun NativeClass.capName(core: String): String =
+private fun NativeClass.capName(core: String) =
 	if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == core )
 			"Open$core${templateName.substring(core.size)}"
@@ -18,16 +18,16 @@ fun NativeClass.capName(core: String): String =
 		"${prefixTemplate}_$templateName"
 	}
 
-public val FunctionProviderALC: FunctionProvider = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCCapabilities") {
+private val FunctionProviderALC = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCCapabilities") {
 
-	override val isLocal: Boolean = true
+	override val isLocal = true
 
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( !nativeClass.templateName.startsWith("ALC") )
 			writer.print(", long device")
 	}
 
-	override fun getFunctionAddressCall(function: NativeClassFunction): String =
+	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		if ( function.nativeClass.templateName.startsWith("ALC") )
 			"provider.getFunctionAddress(\"${function.name}\")"
 		else
@@ -114,5 +114,5 @@ public val FunctionProviderALC: FunctionProvider = Generator.register(object : F
 
 // DSL Extensions
 
-public fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+private fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, functionProvider = FunctionProviderALC, init = init)

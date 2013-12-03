@@ -24,14 +24,14 @@ private val List<NativeClassFunction>.hasDependencies: Boolean
 private val List<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
-public val FunctionProviderGL: FunctionProvider = Generator.register(object : FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
+private val FunctionProviderGL = Generator.register(object : FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
 
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
 			writer.print(", boolean fc")
 	}
 
-	override fun getFunctionAddressCall(function: NativeClassFunction): String =
+	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		// Do the fc check here, because getFunctionAddress will return an address
 		// even if the current context is forward compatible. We don't want that because
 		// we prefer to throw an exception instead of letting GL raise an error and it's
@@ -65,7 +65,7 @@ public val FunctionProviderGL: FunctionProvider = Generator.register(object : Fu
 
 		print("\n\t\tboolean supported = ")
 
-		val printPointer = { (func: NativeClassFunction) ->
+		val printPointer = {(func: NativeClassFunction) ->
 			if ( func has DependsOn )
 				"ext.contains(\"${func[DependsOn].reference}\") ? funcs.${func.simpleName} : -1L"
 			else
@@ -136,29 +136,28 @@ public val FunctionProviderGL: FunctionProvider = Generator.register(object : Fu
 
 // DSL Extensions
 
-public fun String.nativeClassGL(
+private fun String.nativeClassGL(
 	templateName: String,
 	nativeSubPath: String = "",
 	prefix: String = "GL",
 	prefixMethod: String = prefix.toLowerCase(),
 	postfix: String = "",
 	init: (NativeClass.() -> Unit)? = null
-): NativeClass =
-	nativeClass(
-		OPENGL_PACKAGE,
-		templateName,
-		nativeSubPath = nativeSubPath,
-		prefix = prefix,
-		prefixMethod = prefixMethod,
-		postfix = postfix,
-		functionProvider = FunctionProviderGL,
-		init = init
-	)
+) = nativeClass(
+	OPENGL_PACKAGE,
+	templateName,
+	nativeSubPath = nativeSubPath,
+	prefix = prefix,
+	prefixMethod = prefixMethod,
+	postfix = postfix,
+	functionProvider = FunctionProviderGL,
+	init = init
+)
 
-public fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+private fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "wgl", "WGL", postfix = postfix, init = init)
 
-public fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+private fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
 
 fun String.linkGL(name: String) = this.link(name, if ( name.endsWith(')') ) "gl" else "GL_")

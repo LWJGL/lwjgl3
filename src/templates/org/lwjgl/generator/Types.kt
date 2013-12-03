@@ -7,7 +7,7 @@ package org.lwjgl.generator
 import java.nio.*
 import org.lwjgl.PointerBuffer
 
-public open class NativeType(
+open class NativeType(
 	/** The type used in the native API. */
 	val name: String,
 	/** The type we map the native type to. */
@@ -31,18 +31,18 @@ public open class NativeType(
 }
 
 // Specialization for primitives.
-public open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
+open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
 // Specialization for integers.
-public open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false): PrimitiveType(name, mapping)
-public open class EnumType(name: String): IntegerType(name, PrimitiveMapping.INT, unsigned = true)
+open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false): PrimitiveType(name, mapping)
+open class EnumType(name: String): IntegerType(name, PrimitiveMapping.INT, unsigned = true)
 // Specialization for string characters.
-public class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
+class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
 // "typedef"
-public fun PrimitiveType(name: String, typedef: PrimitiveType): PrimitiveType = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
-public fun PrimitiveType(name: String, typedef: IntegerType): IntegerType = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
+fun PrimitiveType(name: String, typedef: PrimitiveType) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
+fun PrimitiveType(name: String, typedef: IntegerType) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
 
 // Pointers
-public open class PointerType(
+open class PointerType(
 	/** The type used in the native API. */
 	name: String,
 	/** The type we map the native type to. */
@@ -53,7 +53,7 @@ public open class PointerType(
 	val elementType: NativeType? = null
 ): NativeType(name, mapping)
 /** Converts primitive to array */
-public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
+fun PointerType(primitiveType: PrimitiveType) = PointerType(
 	primitiveType.name,
 	when ( primitiveType.mapping as PrimitiveMapping ) {
 		PrimitiveMapping.BYTE   -> PointerMapping.DATA_BYTE
@@ -70,7 +70,7 @@ public fun PointerType(primitiveType: PrimitiveType): PointerType = PointerType(
 	elementType = primitiveType
 )
 /** pointer to pointer. */
-public fun PointerType(pointerType: PointerType): PointerType =
+fun PointerType(pointerType: PointerType) =
 	PointerType(
 		if ( pointerType.includesPointer )
 			pointerType.name
@@ -81,7 +81,7 @@ public fun PointerType(pointerType: PointerType): PointerType =
 	)
 
 // Objects (pointer wrappers)
-public class ObjectType(
+class ObjectType(
 	/** The Java wrapper class. */
 	val className: String,
 	/** The type used in the native API. */
@@ -91,7 +91,7 @@ public class ObjectType(
 ): PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
 
 // Structs
-public class StructType(
+class StructType(
 	/** The struct size in bytes. */
 	val definition: Struct,
 	/** The type used in the native API. */
@@ -102,7 +102,7 @@ public class StructType(
 	includesPointer: Boolean = false
 ): PointerType(name, mapping, includesPointer)
 /** Converts a struct value to a pointer to a struct value. */
-public fun StructType(structType: StructType): StructType =
+fun StructType(structType: StructType) =
 	StructType(
 		name = "${structType.name} *",
 		includesPointer = true,
@@ -110,7 +110,7 @@ public fun StructType(structType: StructType): StructType =
 	)
 
 // Strings
-public class CharSequenceType(
+class CharSequenceType(
 	/** The type used in the native API. */
 	name: String,
 	/** The type we map the native type to. */
@@ -123,17 +123,17 @@ public class CharSequenceType(
 	val nullTerminated: Boolean = true
 ): PointerType(name, mapping, includesPointer)
 /** Converts CharType to CharSequenceType. */
-public fun CharSequenceType(
+fun CharSequenceType(
 	charType: CharType,
 	/** The type we map the native type to. */
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** The CharSequence charset. */
 	nullTerminated: Boolean = true
-): CharSequenceType = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping), nullTerminated = nullTerminated)
+) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping), nullTerminated = nullTerminated)
 
 // --- [ TYPE MAPPINGS ] ---
 
-public open class TypeMapping(
+open class TypeMapping(
 	/** The JNI function argument type. */
 	val jniFunctionType: String,
 	/** The native method argument type. */
@@ -149,7 +149,7 @@ public open class TypeMapping(
 
 }
 
-public open class PrimitiveMapping(
+open class PrimitiveMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
 	val bytes: Int
@@ -171,7 +171,7 @@ public open class PrimitiveMapping(
 
 }
 
-public class CharMapping(
+class CharMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
 	bytes: Int,
@@ -186,7 +186,7 @@ public class CharMapping(
 
 }
 
-public open class PointerMapping(
+open class PointerMapping(
 	javaMethodType: Class<out Any>,
 	val byteShift: String? = null
 ): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {

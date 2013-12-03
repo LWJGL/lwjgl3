@@ -19,7 +19,7 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-public val FunctionProviderCL: FunctionProvider = Generator.register(object : FunctionProvider(OPENCL_PACKAGE, "CLCapabilities") {
+private val FunctionProviderCL = Generator.register(object : FunctionProvider(OPENCL_PACKAGE, "CLCapabilities") {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -147,13 +147,13 @@ public val FunctionProviderCL: FunctionProvider = Generator.register(object : Fu
 
 // DSL Extensions
 
-public fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null): NativeClass =
+private fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", functionProvider = FunctionProviderCL, init = init)
 
-public val NativeClass.extensionLink: String
+private val NativeClass.extensionLink: String
 	get() = url("http://www.khronos.org/registry/cl/extensions/khr/cl_$templateName.txt", templateName)
 
-public val NativeClass.extensionName: String
+private val NativeClass.extensionName: String
 	get() = "<strong>$templateName</strong>"
 
 fun String.linkCL(name: String) = this.link(name, if ( name.endsWith(')') ) "cl" else "CL_")

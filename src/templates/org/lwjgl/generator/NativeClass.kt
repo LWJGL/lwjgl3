@@ -1,4 +1,4 @@
-/* 
+/*
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
@@ -9,12 +9,12 @@ import java.util.ArrayList
 import java.util.Collections
 import java.util.Comparator
 
-public val INSTANCE: String = "__instance"
-public val EXT_FLAG: String = ""
+val INSTANCE = "__instance"
+val EXT_FLAG = ""
 
-public val NULL: String = "{@code NULL}"
+val NULL = "{@code NULL}"
 
-public abstract class FunctionProvider(
+abstract class FunctionProvider(
 	packageName: String,
 	className: String
 ): CustomClass(packageName, className) {
@@ -34,7 +34,7 @@ public abstract class FunctionProvider(
 		val classes = ArrayList<NativeClass>(_classes)
 		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
 			suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
-			override fun compare(o1: NativeClass, o2: NativeClass): Int = comparator(o1, o2)
+			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
 		})
 		return classes
 	}
@@ -78,7 +78,7 @@ public abstract class FunctionProvider(
 
 	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 	}
-	open fun getFunctionAddressCall(function: NativeClassFunction): String = "provider.getFunctionAddress(\"${function.name}\")"
+	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
 
 	protected fun PrintWriter.printPointers(
 		functions: List<NativeClassFunction>,
@@ -110,25 +110,25 @@ public abstract class FunctionProvider(
 
 }
 // TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun FunctionProvider.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass): Unit = writer.generateFunctionGetters(nativeClass)
+private fun FunctionProvider.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
 
-public class NativeClass(
+class NativeClass(
 	packageName: String,
 	className: String,
 	nativeSubPath: String,
-	public val templateName: String = className,
-	public val prefix: String,
-	public val prefixMethod: String,
-	public val prefixConstant: String,
-	public val prefixTemplate: String,
-	public val postfix: String,
+	val templateName: String = className,
+	val prefix: String,
+	val prefixMethod: String,
+	val prefixConstant: String,
+	val prefixTemplate: String,
+	val postfix: String,
 	val functionProvider: FunctionProvider?
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
 
 	private val _functions = ArrayList<NativeClassFunction>()
-	public val functions: List<NativeClassFunction>
+	val functions: List<NativeClassFunction>
 		get() = _functions
 
 	val hasBody: Boolean
@@ -298,7 +298,7 @@ public class NativeClass(
 
 // DSL extensions
 
-public fun String.nativeClass(
+fun String.nativeClass(
 	packageName: String,
 	templateName: String = this,
 	nativeSubPath: String = "",

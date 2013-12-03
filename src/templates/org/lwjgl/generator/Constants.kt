@@ -7,6 +7,13 @@ package org.lwjgl.generator
 import java.io.PrintWriter
 import java.util.regex.Pattern
 
+// Extension properties for numeric literals.
+val Int.b: Byte get() = this.toByte()
+val Int.s: Short get() = this.toShort()
+val Long.i: Int get() = this.toInt()
+val Int.L: Long get() = this.toLong()
+val Double.f: Float get() = this.toFloat()
+
 abstract class ConstantType<T>(
 	val javaType: Class<T>
 ) {
@@ -15,51 +22,31 @@ abstract class ConstantType<T>(
 }
 
 val ByteConstant = object: ConstantType<Byte>(javaClass<Byte>()) {
-	override fun print(value: Byte): String = "0x%X".format(value.toInt())
-	override fun nullValue(): Byte = 0
+	override fun print(value: Byte) = "0x%X".format(value.toInt())
+	override fun nullValue() = 0.b
 }
 
 val ShortConstant = object: ConstantType<Short>(javaClass<Short>()) {
-	override fun print(value: Short): String = "0x%X".format(value.toInt())
-	override fun nullValue(): Short = 0
+	override fun print(value: Short) = "0x%X".format(value.toInt())
+	override fun nullValue() = 0.s
 }
 
 val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
-	override fun print(value: Int): String = "0x%X".format(value)
-	override fun nullValue(): Int = 0
+	override fun print(value: Int) = "0x%X".format(value)
+	override fun nullValue() = 0
 }
 
 val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
-	override fun print(value: Long): String = "0x%XL".format(value)
-	override fun nullValue(): Long = 0.toLong()
+	override fun print(value: Long) = "0x%XL".format(value)
+	override fun nullValue() = 0.L
 }
 
 val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
-	override fun print(value: Float): String = "%sf".format(value)
-	override fun nullValue(): Float = 0.0
+	override fun print(value: Float) = "%sf".format(value)
+	override fun nullValue() = 0.0.f
 }
 
-// Extension property for byte literals.
-val Int.b: Byte
-	get() = this.toByte()
-
-// Extension property for short literals.
-val Int.s: Short
-	get() = this.toShort()
-
-// Extension property for integer literals.
-val Long.i: Int
-	get() = this.toInt()
-
-// Extension property for long literals.
-val Int.L: Long
-	get() = this.toLong()
-
-// Extension property for float literals.
-val Double.f: Float
-	get() = this.toFloat()
-
-public class ConstantBlock<T>(
+class ConstantBlock<T>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
 	val documentation: String,
@@ -68,7 +55,7 @@ public class ConstantBlock<T>(
 
 	private var noPrefix = false
 
-	public fun noPrefix() {
+	fun noPrefix() {
 		noPrefix = true
 	}
 
@@ -112,7 +99,7 @@ public class ConstantBlock<T>(
 			print(constantType.print(value!!))
 	}
 
-	public fun toJavaDocLinks(global: Boolean = false): Links {
+	fun toJavaDocLinks(global: Boolean = false): Links {
 		val builder = StringBuilder(constants.size * 32)
 
 		printJavaDocLink(builder, constants[0], global)
@@ -184,13 +171,11 @@ fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
 
 private val LINK_PATTERN = Pattern.compile("\\s+", Pattern.MULTILINE)
 
-public open data class Constant<T: Any>(val name: String, val value: T?)
-public class ConstantExpression<T>(name: String, val expression: String): Constant<T>(name, null)
+open data class Constant<T: Any>(val name: String, val value: T?)
+class ConstantExpression<T>(name: String, val expression: String): Constant<T>(name, null)
 
 /** Adds a new constant. */
-public fun <T> String._(value: T): Constant<T> =
-	Constant<T>(this, value)
+fun <T> String._(value: T) = Constant<T>(this, value)
 
 /** Adds a new constant whose value is a function of previously defined constants. */
-public fun <T> String.expr(expression: String): ConstantExpression<T> =
-	ConstantExpression<T>(this, expression)
+fun <T> String.expr(expression: String) = ConstantExpression<T>(this, expression)

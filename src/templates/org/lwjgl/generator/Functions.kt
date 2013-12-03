@@ -43,7 +43,7 @@ private val JNIENV = "__env"
 
 private val GLCore_PATTERN = Pattern.compile("GL[1-9][0-9]")
 
-public abstract class Function(
+abstract class Function(
 	val returns: ReturnValue,
 	val simpleName: String,
 	val name: String = simpleName,
@@ -70,7 +70,7 @@ public abstract class Function(
 			throw IllegalStateException("More than one parameter found.")
 		return param
 	}
-	fun hasParam(predicate: (Parameter) -> Boolean): Boolean = getParams(predicate).hasNext()
+	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).hasNext()
 
 	fun getNativeParams(): Iterator<Parameter> = getParams { !it.has(virtual) }
 
@@ -90,9 +90,9 @@ public abstract class Function(
 
 // DSL extensions
 
-public fun NativeType.IN(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.IN, javadoc, links?.html ?: "")
-public fun PointerType.OUT(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.OUT, javadoc, links?.html ?: "")
-public fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null): Parameter = Parameter(this, name, ParameterType.INOUT, javadoc, links?.html ?: "")
+fun NativeType.IN(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.IN, javadoc, links?.html ?: "")
+fun PointerType.OUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.OUT, javadoc, links?.html ?: "")
+fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.INOUT, javadoc, links?.html ?: "")
 
 private fun <T> PrintWriter.printList(items: Array<T>, itemPrint: (item: T) -> String?): Unit = printList(items.iterator(), itemPrint)
 private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -> String?) {
@@ -112,7 +112,7 @@ private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -
 
 // --- [ Native class functions ] ---
 
-public class NativeClassFunction(
+class NativeClassFunction(
 	returns: ReturnValue,
 	simpleName: String,
 	documentation: String,
@@ -177,13 +177,13 @@ public class NativeClassFunction(
 		return name.substring(0, name.size - cutCount) + nativeClass.postfix
 	}
 
-	public val javaDocLink: String
+	val javaDocLink: String
 		get() = if ( strippedName != name )
 			this.javaDocLinkWithParams
 		else
 			"{@link #$strippedName${if ( nativeClass.prefixMethod.isEmpty() ) "" else " ${stripPostfix(simpleName)}"}}"
 
-	public val javaDocLinkWithParams: String
+	val javaDocLinkWithParams: String
 		get() {
 			val builder = StringBuilder()
 
@@ -1184,7 +1184,7 @@ public class NativeClassFunction(
 
 	// --[ JNI FUNCTIONS ]--
 
-	fun generateFunctionDefinition(writer: PrintWriter): Unit = writer.generateFunctionDefinitionImpl()
+	fun generateFunctionDefinition(writer: PrintWriter) = writer.generateFunctionDefinitionImpl()
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
 		print("typedef ${returns.toNativeType} (APIENTRY *${name}PROC) (")
 		val nativeParams = getNativeParams()
@@ -1197,7 +1197,7 @@ public class NativeClassFunction(
 		println(");")
 	}
 
-	fun generateFunction(writer: PrintWriter): Unit = writer.generateFunctionImpl()
+	fun generateFunction(writer: PrintWriter) = writer.generateFunctionImpl()
 	private fun PrintWriter.generateFunctionImpl() {
 		// Step 0: Function signature
 
@@ -1272,28 +1272,28 @@ enum class GenerationMode {
 
 // --- [ MODIFIERS ]---
 
-public class DependsOn(override val reference: String): FunctionModifier(), ReferenceModifier {
+class DependsOn(override val reference: String): FunctionModifier(), ReferenceModifier {
 	class object: ModifierObject<DependsOn> {
 		override val key = javaClass<DependsOn>()
 	}
 
-	override val isSpecial: Boolean = false
+	override val isSpecial = false
 }
 
-public class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
+class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
 	class object: ModifierObject<Reuse> {
 		override val key = javaClass<Reuse>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 }
 
-public val keepPostfix: FunctionModifier = object : FunctionModifier() {
-	override val isSpecial: Boolean = false
+val keepPostfix = object : FunctionModifier() {
+	override val isSpecial = false
 }
 
 /** Defines an expression that should be passed to the getInstance() method. */
-public class Capabilities(
+class Capabilities(
 	/** The expression to pass to the getInstance() method. */
 	val expression: String,
 	/** If defined, is a statement that will be printed before the getInstance() call. */
@@ -1305,10 +1305,10 @@ public class Capabilities(
 		override val key = javaClass<Capabilities>()
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 }
 
-public class Code(
+class Code(
 	val javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
 
 	val javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
@@ -1337,7 +1337,7 @@ public class Code(
 		)
 	}
 
-	override val isSpecial: Boolean = true
+	override val isSpecial = true
 
 	fun hasStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
 		if ( statements identityEquals NO_STATEMENTS ) false else statements.any { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
@@ -1345,12 +1345,12 @@ public class Code(
 		if ( statements identityEquals NO_STATEMENTS ) statements else statements.filter { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
 
 }
-public fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
+fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 
 /** Marks a function without arguments as a macro. */
-public val macro: FunctionModifier = object : FunctionModifier() {
-	override val isSpecial: Boolean = false
+val macro = object : FunctionModifier() {
+	override val isSpecial = false
 
 	protected override fun validate(func: NativeClassFunction) {
 		if ( func.getNativeParams().hasNext() )
@@ -1363,13 +1363,13 @@ class AccessModifier(val access: Access): FunctionModifier() {
 		override val key = javaClass<AccessModifier>()
 	}
 
-	override val isSpecial: Boolean = false
+	override val isSpecial = false
 }
 
 /** Makes the generated methods private. */
-public val private: FunctionModifier = AccessModifier(Access.PUBLIC)
+val private = AccessModifier(Access.PUBLIC)
 /** Makes the generated methods package private. */
-public val internal: FunctionModifier = AccessModifier(Access.INTERNAL)
+val internal = AccessModifier(Access.INTERNAL)
 
 // --- [ ALTERNATIVE FUNCTION TRANSFORMS ] ---
 
@@ -1408,7 +1408,7 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 }
 
 private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor: Boolean = true): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
 		var expression = "${bufferParam.name}.remaining()"
 		val factor = param[AutoSize].factor
@@ -1442,7 +1442,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: Stri
 }
 
 private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
 		// Replace with expression
 		return if ( bufferParam has nullable )
@@ -1453,23 +1453,23 @@ private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): Fu
 }
 
 private class AutoTypeParamTransform(val autoType: String): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = autoType // Replace with hard-coded type
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
 }
 
 private class AutoTypeParamWithSignTransform(val unsignedType: String, val signedType: String): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "boolean unsigned" // Replace with unsigned flag
-	override fun transformCall(param: Parameter, original: String): String = "unsigned ? $unsignedType : $signedType" // Replace with unsigned check
+	override fun transformDeclaration(param: Parameter, original: String) = "boolean unsigned" // Replace with unsigned flag
+	override fun transformCall(param: Parameter, original: String) = "unsigned ? $unsignedType : $signedType" // Replace with unsigned check
 }
 
 private class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "${autoType.javaMethodType.getSimpleName()} ${param.name}"
-	override fun transformCall(param: Parameter, original: String): String = original
+	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.getSimpleName()} ${param.name}"
+	override fun transformCall(param: Parameter, original: String) = original
 }
 
 private val BufferOffsetTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "long ${param.name}Offset"
-	override fun transformCall(param: Parameter, original: String): String = "${param.name}Offset"
+	override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
+	override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 }
 
 private open class ExpressionTransform(
@@ -1477,46 +1477,46 @@ private open class ExpressionTransform(
 	val keepParam: Boolean = false,
 	val paramTransform: FunctionTransform<Parameter>? = null
 ): FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? =
+	override fun transformDeclaration(param: Parameter, original: String) =
 		if ( keepParam ) paramTransform?.transformDeclaration(param, original) ?: original else null
-	override fun transformCall(param: Parameter, original: String): String = expression
+	override fun transformCall(param: Parameter, original: String) = expression
 }
 
 private class ExpressionLocalTransform(
 	expression: String,
 	keepParam: Boolean = false
 ): ExpressionTransform(expression, keepParam), PreFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformCall(param: Parameter, original: String): String = original
-	override fun preprocess(qtype: Parameter, writer: PrintWriter): Unit = writer.println("\t\t${qtype.asJavaMethodParam} = $expression;")
+	override fun transformCall(param: Parameter, original: String) = original
+	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\t${qtype.asJavaMethodParam} = $expression;")
 }
 
 private val CharSequenceTransform = object : FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "CharSequence ${param.name}"
-	override fun transformCall(param: Parameter, original: String): String = "memAddress${if ( param has nullable ) "Safe" else ""}(memEncode${(param.nativeType as CharSequenceType).charMapping.charset}(${param.name}))"
+	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
+	override fun transformCall(param: Parameter, original: String) = "memAddress${if ( param has nullable ) "Safe" else ""}(memEncode${(param.nativeType as CharSequenceType).charMapping.charset}(${param.name}))"
 }
 
 private val StringReturnTransform = object : FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = "String"
-	override fun transformCall(param: ReturnValue, original: String): String = "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($original)";
+	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
+	override fun transformCall(param: ReturnValue, original: String) = "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($original)";
 }
 
 private class BufferValueReturnTransform(
 	val bufferType: String,
 	val paramName: String
 ): FunctionTransform<ReturnValue>, APIBufferFunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = if ( bufferType == "pointer" ) "long" else bufferType // Replace void with the buffer value type
-	override fun transformCall(param: ReturnValue, original: String): String = "\t\treturn $API_BUFFER.${bufferType}Value($paramName);" // Replace with value from APIBuffer
-	override fun setupAPIBuffer(qtype: ReturnValue, writer: PrintWriter): Unit = writer.println("\t\tint $paramName = $API_BUFFER.${bufferType}Param();")
+	override fun transformDeclaration(param: ReturnValue, original: String) = if ( bufferType == "pointer" ) "long" else bufferType // Replace void with the buffer value type
+	override fun transformCall(param: ReturnValue, original: String) = "\t\treturn $API_BUFFER.${bufferType}Value($paramName);" // Replace with value from APIBuffer
+	override fun setupAPIBuffer(qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\tint $paramName = $API_BUFFER.${bufferType}Param();")
 }
 
 private val BufferValueParameterTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 }
 
 private val BufferValueSizeTransform = object : FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "1" // Replace with 1
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "1" // Replace with 1
 }
 
 private class SingleValueTransform(
@@ -1524,8 +1524,8 @@ private class SingleValueTransform(
 	val elementType: String,
 	val newName: String
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "$paramType $newName" // Replace with element type + new name
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformDeclaration(param: Parameter, original: String) = "$paramType $newName" // Replace with element type + new name
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) {
 		if ( "CharSequence" == paramType ) {
 			writer.println("\t\tByteBuffer ${newName}Buffer = memEncodeASCII($newName);") // TODO: Support other than ASCCI
@@ -1541,8 +1541,8 @@ private class VectorValueTransform(
 	val newName: String,
     val size: Int
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = size.indices.map { "$paramType ${newName}$it" }.reduce {(a, b) -> "$a, $b" } // Replace with vector elements
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformDeclaration(param: Parameter, original: String) = size.indices.map { "$paramType ${newName}$it" }.reduce {(a, b) -> "$a, $b" } // Replace with vector elements
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")
 		for ( i in 1..(size - 1) )
@@ -1551,27 +1551,27 @@ private class VectorValueTransform(
 }
 
 private val MapPointerTransform = object : FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String): String = """int $MAP_LENGTH = ${param.get(MapPointer).sizeExpression};
+	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
+	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param.get(MapPointer).sizeExpression};
 		return old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $MAP_LENGTH ? old_buffer : memByteBuffer($RESULT, $MAP_LENGTH);"""
 }
 
 private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String): String =
+	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
+	override fun transformCall(param: ReturnValue, original: String) =
 		"old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer($RESULT, $lengthParam)"
 }
 
 private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter): Unit = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
 }
 
 private val BufferReturnParamTransform: FunctionTransform<Parameter> = object : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter): Unit =
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) =
 		writer.println("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${qtype[Return].maxLengthParam});")
 }
 
@@ -1580,7 +1580,7 @@ private class BufferReturnTransform(
 	val lengthParam: String,
 	val encoding: String? = null
 ): FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String): String? = if ( encoding == null) "ByteBuffer" else "String" // Replace void with String
+	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) "ByteBuffer" else "String" // Replace void with String
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val builder = StringBuilder(64)
 
@@ -1600,8 +1600,8 @@ private class PointerArrayTransform(val paramType: String): FunctionTransform<Pa
 		val paramClass = if ( param[PointerArray].elementType is CharSequenceType ) "CharSequence" else "ByteBuffer"
 		return "$paramClass$paramType $name"
 	}
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${param.name}$POINTER_POSTFIX" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qtype)
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}$POINTER_POSTFIX" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
 		val pointerArray = param[PointerArray]
@@ -1643,9 +1643,9 @@ private class PointerArrayLengthsTransform(
 	val arrayParam: Parameter,
 	val multi: Boolean
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String): String? = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String): String = "$API_BUFFER.address() + ${arrayParam.name}$LENGTHS_POSTFIX" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter): Unit = writer.setupAPIBufferImpl(qtype)
+	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${arrayParam.name}$LENGTHS_POSTFIX" // Replace with APIBuffer address + offset
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
 		val pointerArray = arrayParam[PointerArray]
@@ -1680,7 +1680,7 @@ private class PointerArrayLengthsTransform(
 }
 
 private val CallbackTransform = object : FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String): String? = "${param[Callback].procClass} ${param.name}" // Replace type with the callback class
+	override fun transformDeclaration(param: Parameter, original: String) = "${param[Callback].procClass} ${param.name}" // Replace type with the callback class
 	override fun transformCall(param: Parameter, original: String): String {
 		// Replace with callback function address
 		val procClass = param[Callback].procClass;
