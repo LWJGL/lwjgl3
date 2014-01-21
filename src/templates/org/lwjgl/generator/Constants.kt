@@ -8,11 +8,9 @@ import java.io.PrintWriter
 import java.util.regex.Pattern
 
 // Extension properties for numeric literals.
-val Int.b: Byte get() = this.toByte()
-val Int.s: Short get() = this.toShort()
-val Long.i: Int get() = this.toInt()
-val Int.L: Long get() = this.toLong()
-val Double.f: Float get() = this.toFloat()
+inline val Int.b: Byte get() = this.toByte()
+inline val Int.s: Short get() = this.toShort()
+inline val Long.i: Int get() = this.toInt()
 
 abstract class ConstantType<T>(
 	val javaType: Class<T>
@@ -38,12 +36,12 @@ val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
 
 val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
 	override fun print(value: Long) = "0x%XL".format(value)
-	override fun nullValue() = 0.L
+	override fun nullValue() = 0L
 }
 
 val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
 	override fun print(value: Float) = "%sf".format(value)
-	override fun nullValue() = 0.0.f
+	override fun nullValue() = 0.0f
 }
 
 class ConstantBlock<T>(

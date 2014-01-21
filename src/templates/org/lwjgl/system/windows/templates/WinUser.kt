@@ -629,10 +629,10 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	LongConstant.block(
 		"Virtual window handles used by the ${"SetWindowPos()".link} insertAfter argument.",
-		"HWND_TOP" _ 0.L,
-		"HWND_BOTTOM" _ 1.L,
-		"HWND_TOPMOST" _ -1.L,
-		"HWND_NOTOPMOST" _ -2.L
+		"HWND_TOP" _ 0L,
+		"HWND_BOTTOM" _ 1L,
+		"HWND_TOPMOST" _ -1L,
+		"HWND_NOTOPMOST" _ -2L
 	)
 
 	IntConstant.block(

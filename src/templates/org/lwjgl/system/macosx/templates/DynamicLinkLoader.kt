@@ -27,10 +27,10 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 	LongConstant.block(
 		"Special-handle values for ${"dlsym()".link}:",
 
-		"RTLD_NEXT" _ -1.L,
-		"RTLD_DEFAULT" _ -2.L,
-		"RTLD_SELF" _ -3.L,
-		"RTLD_MAIN_ONLY" _ -5.L
+		"RTLD_NEXT" _ -1L,
+		"RTLD_DEFAULT" _ -2L,
+		"RTLD_SELF" _ -3L,
+		"RTLD_MAIN_ONLY" _ -5L
 	)
 
 	// skipping dladdr
