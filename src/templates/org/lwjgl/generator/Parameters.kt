@@ -49,9 +49,9 @@ abstract class QualifiedType(
 
 class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
-	fun hashCode(): Int = RESULT.hashCode()
+	override fun hashCode() = RESULT.hashCode()
 
-	fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is ReturnValue && obj.nativeType == this.nativeType)
+	override fun equals(other: Any?) = other identityEquals this || (other is ReturnValue && other.nativeType == this.nativeType)
 
 	// --- [ Helper functions & properties ] ---
 
@@ -76,9 +76,9 @@ class Parameter(
 
 	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links)
 
-	fun hashCode(): Int = name.hashCode()
+	override fun hashCode() = name.hashCode()
 
-	fun equals(obj: Any?): Boolean = obj identityEquals this || (obj is Parameter && obj.name equals this.name)
+	override fun equals(other: Any?) = other identityEquals this || (other is Parameter && other.name equals this.name)
 
 	private fun doc(description: String, links: String): String {
 		val trimmed = description.trim()

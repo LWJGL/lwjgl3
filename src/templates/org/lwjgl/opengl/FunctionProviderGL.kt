@@ -19,8 +19,6 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val List<NativeClassFunction>.hasDependencies: Boolean
-	get() = this.any { it has DependsOn }
 private val List<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
@@ -51,7 +49,6 @@ private val FunctionProviderGL = Generator.register(object : FunctionProvider(OP
 
 		val functions = nativeClass.functions
 
-		val hasDependencies = functions.hasDependencies
 		val hasDeprecated = functions.hasDeprecated
 
 		print("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider")

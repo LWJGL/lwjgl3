@@ -124,7 +124,7 @@ class ConstantBlock<T>(
 
 	class Links(val html: String) {
 		fun plus(links: Links) = Links("$html, ${links.html}")
-		fun toString(): String = throw IllegalStateException("Illegal use of a ConstantBlock.Links instance")
+		override fun toString() = throw IllegalStateException("Illegal use of a ConstantBlock.Links instance")
 	}
 
 }

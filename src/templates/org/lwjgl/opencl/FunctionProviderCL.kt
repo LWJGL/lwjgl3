@@ -30,8 +30,6 @@ private val FunctionProviderCL = Generator.register(object : FunctionProvider(OP
 		println("\t}")
 
 		val functions = nativeClass.functions
-		val capName = nativeClass.capName
-		val isExtension = !nativeClass.templateName.startsWith("CL")
 
 		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
 
