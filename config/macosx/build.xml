@@ -135,7 +135,7 @@
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
 			<fileset dir="${generated.native}/system/glfw" includes="*.c"/>
 			<fileset dir="${generated.native}/openal" includes="*.c"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c"/>
+			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
