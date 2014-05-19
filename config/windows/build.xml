@@ -31,7 +31,7 @@
 	<target name="compile-native-windows">
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="/c /Wall /WX /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
+			<arg line="/c /Wall /WX /wd4996 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
 
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
