@@ -209,7 +209,7 @@ open class PointerMapping(
 		val DATA_FLOAT = PointerMapping(javaClass<FloatBuffer>(), 2)
 		val DATA_DOUBLE = PointerMapping(javaClass<DoubleBuffer>(), 3)
 
-		val primitiveMap = hashMapOf<PointerMapping, String>(
+		val primitiveMap = hashMapOf(
 			DATA_POINTER to "pointer",
 
 			DATA_BOOLEAN to "boolean",

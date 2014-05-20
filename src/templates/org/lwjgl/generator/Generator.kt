@@ -132,7 +132,7 @@ class Generator(
 		val methods = packageClass.getMethods()
 
 		return methods
-			.iterator()
+			.stream()
 			.filterTo(ArrayList<Method>(methods.size))
 		{
 			methodFilter(it, javaClass<NativeClass>())

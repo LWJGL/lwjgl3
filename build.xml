@@ -27,7 +27,7 @@
 		<pathelement path="${bin.tests}"/>
 	</path>
 
-	<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/kotlin-ant.jar"/>-->
+	<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
 	<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 
 	<!-- Initialize build -->
@@ -106,7 +106,7 @@
 			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
 
 			<arg value="-module"/>
-			<arg value="${config}/Templates.kts"/>
+			<arg value="${config}/Templates.ktm"/>
 			<!--
 			<arg value="-tags"/>
 			<arg value="-verbose"/>
@@ -120,7 +120,7 @@
 			<arg value="-noJdkAnnotations"/>
 			<!--<arg value="-noJdk"/>-->
 		</java>
-		<!--<kotlinc module="${config}/Templates.kts" jar="${lib}/templates.jar" />-->
+		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->

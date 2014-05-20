@@ -19,27 +19,27 @@ abstract class ConstantType<T>(
 	abstract fun nullValue(): T
 }
 
-val ByteConstant = object: ConstantType<Byte>(javaClass<Byte>()) {
+val ByteConstant = object: ConstantType<Byte>(javaClass()) {
 	override fun print(value: Byte) = "0x%X".format(value.toInt())
 	override fun nullValue() = 0.b
 }
 
-val ShortConstant = object: ConstantType<Short>(javaClass<Short>()) {
+val ShortConstant = object: ConstantType<Short>(javaClass()) {
 	override fun print(value: Short) = "0x%X".format(value.toInt())
 	override fun nullValue() = 0.s
 }
 
-val IntConstant = object: ConstantType<Int>(javaClass<Int>()) {
+val IntConstant = object: ConstantType<Int>(javaClass()) {
 	override fun print(value: Int) = "0x%X".format(value)
 	override fun nullValue() = 0
 }
 
-val LongConstant = object: ConstantType<Long>(javaClass<Long>()) {
+val LongConstant = object: ConstantType<Long>(javaClass()) {
 	override fun print(value: Long) = "0x%XL".format(value)
 	override fun nullValue() = 0L
 }
 
-val FloatConstant = object: ConstantType<Float>(javaClass<Float>()) {
+val FloatConstant = object: ConstantType<Float>(javaClass()) {
 	override fun print(value: Float) = "%sf".format(value)
 	override fun nullValue() = 0.0f
 }
@@ -173,7 +173,7 @@ open data class Constant<T: Any>(val name: String, val value: T?)
 class ConstantExpression<T>(name: String, val expression: String): Constant<T>(name, null)
 
 /** Adds a new constant. */
-fun <T> String._(value: T) = Constant<T>(this, value)
+fun <T> String._(value: T) = Constant(this, value)
 
 /** Adds a new constant whose value is a function of previously defined constants. */
 fun <T> String.expr(expression: String) = ConstantExpression<T>(this, expression)

@@ -58,33 +58,18 @@ abstract class Function(
 		map
 	}();
 
-	protected val hasNativeParams: Boolean = getNativeParams().hasNext()
+	protected val hasNativeParams: Boolean = getNativeParams().any()
 
-	fun getParams(predicate: (Parameter) -> Boolean): Iterator<Parameter> = parameters.iterator().filter(predicate)
-	fun getParam(predicate: (Parameter) -> Boolean): Parameter {
-		val params = getParams(predicate)
-		if ( !params.hasNext() )
-			throw IllegalStateException("Could not find any parameter that satisfies the given predicate.")
-		val param = params.next()
-		if ( params.hasNext() )
-			throw IllegalStateException("More than one parameter found.")
-		return param
-	}
-	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).hasNext()
+	fun getParams(predicate: (Parameter) -> Boolean) = parameters.stream().filter(predicate)
+	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
+	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
-	fun getNativeParams(): Iterator<Parameter> = getParams { !it.has(virtual) }
+	fun getNativeParams() = getParams { !it.has(virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	fun getReferenceParam(modifierObject: ModifierObject<*>, reference: String): Parameter? {
-		// Assumes at most 1 parameter will be found that references the specified parameter
-		val iter = getParams {
-			it.hasRef(modifierObject, reference)
-		}
-		return if ( iter.hasNext() )
-			iter.next()
-		else
-			null
-	}
+	fun getReferenceParam(modifierObject: ModifierObject<*>, reference: String) = getParams {
+		it.hasRef(modifierObject, reference)
+	}.firstOrNull() // Assumes at most 1 parameter will be found that references the specified parameter
 
 }
 
@@ -94,21 +79,7 @@ fun NativeType.IN(name: String, javadoc: String, links: Links? = null) = Paramet
 fun PointerType.OUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.OUT, javadoc, links?.html ?: "")
 fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.INOUT, javadoc, links?.html ?: "")
 
-private fun <T> PrintWriter.printList(items: Array<T>, itemPrint: (item: T) -> String?): Unit = printList(items.iterator(), itemPrint)
-private fun <T> PrintWriter.printList(items: Iterator<T>, itemPrint: (item: T) -> String?) {
-	var first = true
-	while ( items.hasNext() ) {
-		val item = itemPrint(items.next())
-		if ( item != null ) {
-			if ( !first )
-				print(", ")
-			else
-				first = false
-
-			print(item)
-		}
-	}
-}
+private fun <T> PrintWriter.printList(items: Stream<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().makeString(", "))
 
 // --- [ Native class functions ] ---
 
@@ -412,7 +383,7 @@ class NativeClassFunction(
 
 					for ( d in autoSize.dependent ) {
 						val param = paramMap[d]!!
-						val transform = transforms.get(param)
+						val transform = transforms[param]
 						if ( transform !is SkipCheckFunctionTransform ) {
 							prefix = if ( param has Nullable ) "if ( $d != null ) " else ""
 							checks add "${prefix}checkBuffer($d, $expression);"
@@ -556,7 +527,7 @@ class NativeClassFunction(
 		// Step 1: Method signature
 
 		print("\t${accessModifier}static ${returnsJavaMethodType} $strippedName(")
-		printList(parameters) {
+		printList(parameters.stream()) {
 			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else if ( it.isBufferPointer )
@@ -797,7 +768,7 @@ class NativeClassFunction(
 				false
 			else {
 				val param = it
-				getParams { it has AutoSize && it.get(AutoSize).hasReference(param.name) }.forEach {
+				getParams { it has AutoSize && it[AutoSize].hasReference(param.name) }.forEach {
 					transforms[it] = AutoSizeCharSequenceTransform(param)
 				}
 
@@ -812,7 +783,7 @@ class NativeClassFunction(
 			transforms[returns] = BufferValueReturnTransform(PointerMapping.primitiveMap[param.nativeType.mapping]!!, param.name)
 
 			// Transform the AutoSize parameter, if there is one
-			getParams { it has AutoSize && it.get(AutoSize).hasReference(param.name) }.forEach {
+			getParams { it has AutoSize && it[AutoSize].hasReference(param.name) }.forEach {
 				transforms[it] = BufferValueSizeTransform
 			}
 
@@ -882,7 +853,7 @@ class NativeClassFunction(
 					// Transform the AutoSize parameter, if there is one and it's expressed in bytes
 					getParams {
 						if ( it has AutoSize ) {
-							val autoSize = it.get(AutoSize)
+							val autoSize = it[AutoSize]
 							autoSize.hasReference(param.name) && autoSize.toBytes
 						} else
 							false
@@ -896,7 +867,7 @@ class NativeClassFunction(
 
 				// Generate a SingleValue alternative for each type
 				if ( it has SingleValue ) {
-					val autoSizeParam = getParam { it has AutoSize && it.get(AutoSize).hasReference(param.name) } // required
+					val autoSizeParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) } // required
 
 					val singleValue = param[SingleValue]
 					for ( autoType in multiTypes.types ) {
@@ -1002,7 +973,7 @@ class NativeClassFunction(
 				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
 
 				// Transform the AutoSize parameter, if there is one
-				getParams { it has AutoSize && it.get(AutoSize).hasReference(param.name) }.forEach {
+				getParams { it has AutoSize && it[AutoSize].hasReference(param.name) }.forEach {
 					transforms[it] = BufferValueSizeTransform
 				}
 
@@ -1047,7 +1018,7 @@ class NativeClassFunction(
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
 		print("\t${accessModifier}static $retType $name(")
-		printList(parameters) {
+		printList(parameters.stream()) {
 			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else
@@ -1188,8 +1159,8 @@ class NativeClassFunction(
 	private fun PrintWriter.generateFunctionDefinitionImpl() {
 		print("typedef ${returns.toNativeType} (APIENTRY *${name}PROC) (")
 		val nativeParams = getNativeParams()
-		if ( nativeParams.hasNext() ) {
-			printList(getNativeParams()) {
+		if ( nativeParams.any() ) {
+			printList(nativeParams) {
 				it.toNativeType
 			}
 		} else
@@ -1322,7 +1293,7 @@ class Code(
 		override val key = javaClass<Code>()
 
 		// Used to avoid null checks
-		private val NO_STATEMENTS: List<Statement> = ArrayList<Statement>(0)
+		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
 		val NO_CODE = Code()
 
 		enum class ApplyTo {
@@ -1353,7 +1324,7 @@ val macro = object : FunctionModifier() {
 	override val isSpecial = false
 
 	protected override fun validate(func: NativeClassFunction) {
-		if ( func.getNativeParams().hasNext() )
+		if ( func.getNativeParams().any() )
 			throw IllegalArgumentException("The macro modifier can only be applied on functions with no arguments.")
 	}
 }
@@ -1552,7 +1523,7 @@ private class VectorValueTransform(
 
 private val MapPointerTransform = object : FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
-	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param.get(MapPointer).sizeExpression};
+	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param[MapPointer].sizeExpression};
 		return old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $MAP_LENGTH ? old_buffer : memByteBuffer($RESULT, $MAP_LENGTH);"""
 }
 

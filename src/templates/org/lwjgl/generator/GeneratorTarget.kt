@@ -35,7 +35,7 @@ class Preamble {
 
 	fun javaImport(vararg classes: String) {
 		if ( javaImports identityEquals EMPTY_IMPORTS )
-			javaImports = ArrayList<String>(classes.size)
+			javaImports = ArrayList(classes.size)
 
 		classes.forEach {
 			javaImports add it
@@ -44,7 +44,7 @@ class Preamble {
 
 	fun nativeImport(vararg files: String) {
 		if ( nativeImports identityEquals EMPTY_IMPORTS )
-			nativeImports = ArrayList<String>(files.size)
+			nativeImports = ArrayList(files.size)
 
 		files.forEach {
 			nativeImports add if ( it.startsWith('<') )
@@ -56,7 +56,7 @@ class Preamble {
 
 	fun nativeDefine(expression: String, afterIncludes: Boolean) {
 		if ( nativeDefines identityEquals EMPTY_DEFINES )
-			nativeDefines = ArrayList<NativeDefine>()
+			nativeDefines = ArrayList()
 
 		nativeDefines.add(NativeDefine(expression, afterIncludes))
 	}

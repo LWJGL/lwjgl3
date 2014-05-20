@@ -26,12 +26,12 @@ abstract class FunctionProvider(
 		)
 	}
 
-	private val _classes: MutableList<NativeClass> = ArrayList<NativeClass>()
+	private val _classes: MutableList<NativeClass> = ArrayList()
 
 	protected fun getClasses(
 		comparator: (NativeClass, NativeClass) -> Int = {(o1, o2) -> o1.templateName compareTo o2.templateName }
 	): List<NativeClass> {
-		val classes = ArrayList<NativeClass>(_classes)
+		val classes = ArrayList(_classes)
 		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
 			suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
@@ -60,7 +60,7 @@ abstract class FunctionProvider(
 		} else {
 			try {
 				// Use the first ObjectType parameters
-				function.getParams() { it.nativeType is ObjectType }.next().name
+				function.getParams() { it.nativeType is ObjectType }.first().name
 			} catch (e: Exception) {
 				throw IllegalStateException("Neither a Capabilities modifier nor an object parameter were found on function ${function.name}")
 			}
@@ -258,7 +258,7 @@ class NativeClass(
 	// DSL extensions
 
 	fun <T> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
-		val block = ConstantBlock<T>(this@NativeClass, this, documentation.toJavaDoc(), *constants)
+		val block = ConstantBlock(this@NativeClass, this, documentation.toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
 	}
@@ -268,7 +268,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = documentation.toJavaDoc(parameters.iterator(), returnDoc),
+			documentation = documentation.toJavaDoc(parameters.stream(), returnDoc),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
@@ -314,8 +314,7 @@ fun String.nativeClass(
 	if ( init != null )
 		ext.init()
 
-	if ( functionProvider != null )
-		functionProvider.addCapabilities(ext)
+	functionProvider?.addCapabilities(ext)
 
 	return ext
 }
