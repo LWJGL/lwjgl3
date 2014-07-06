@@ -1260,7 +1260,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		thread can have only a single current context at a time.
 		""",
 
-		GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context")
+		nullable _ GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context")
 	)
 
 	GLFWwindow.func(
