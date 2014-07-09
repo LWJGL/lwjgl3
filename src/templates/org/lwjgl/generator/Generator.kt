@@ -193,7 +193,7 @@ class Generator(
 		if ( nativeClass.functions.any { !it.has(Reuse) } ) {
 			generateNative(nativeClass) {
 				generateOutput(nativeClass, it) {
-					generateNative(it)
+					it.generateNative()
 				}
 			}
 		}
@@ -229,7 +229,7 @@ class Generator(
 		if ( target is GeneratorTargetNative ) {
 			generateNative(target) {
 				generateOutput(target, it) {
-					generateNative(it)
+					it.generateNative()
 				}
 			}
 		}

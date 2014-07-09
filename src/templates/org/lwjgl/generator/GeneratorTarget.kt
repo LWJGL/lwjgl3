@@ -164,8 +164,6 @@ abstract class GeneratorTargetNative(
 	abstract fun PrintWriter.generateNative()
 
 }
-// TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun GeneratorTargetNative.generateNative(writer: PrintWriter) = writer.generateNative()
 
 fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
 	preamble.javaImport(*classes)
