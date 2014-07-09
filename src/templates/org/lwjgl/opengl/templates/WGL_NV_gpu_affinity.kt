@@ -27,7 +27,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		"""
 
 	val wglMakeCurrent = "{@link org.lwjgl.system.windows.WGL#wglMakeCurrent}"
-	val wglMakeContextCurrentARB = "${"WGLARBMakeCurrentRead#MakeContextCurrentARB()".link}"
+	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()".link
 
 	IntConstant.block(
 		"New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",

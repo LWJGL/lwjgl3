@@ -453,12 +453,12 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			${table(
 				tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
 
-				tr(td("${"MEM_OBJECT_IMAGE1D".link}"), td("&#x2265; {@code image_row_pitch}")),
-				tr(td("${"MEM_OBJECT_IMAGE1D_BUFFER".link}"), td("&#x2265; {@code image_row_pitch}")),
-				tr(td("${"CL10#MEM_OBJECT_IMAGE2D".link}"), td("&#x2265; {@code image_row_pitch * image_height}")),
-				tr(td("${"CL10#MEM_OBJECT_IMAGE3D".link}"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
-				tr(td("${"MEM_OBJECT_IMAGE1D_ARRAY".link}"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
-				tr(td("${"MEM_OBJECT_IMAGE2D_ARRAY".link}"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
+				tr(td("MEM_OBJECT_IMAGE1D".link), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("MEM_OBJECT_IMAGE1D_BUFFER".link), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("CL10#MEM_OBJECT_IMAGE2D".link), td("&#x2265; {@code image_row_pitch * image_height}")),
+				tr(td("CL10#MEM_OBJECT_IMAGE3D".link), td("&#x2265; {@code image_slice_pitch * image_depth}")),
+				tr(td("MEM_OBJECT_IMAGE1D_ARRAY".link), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
+				tr(td("MEM_OBJECT_IMAGE2D_ARRAY".link), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
 			)}
 			"""
 		),

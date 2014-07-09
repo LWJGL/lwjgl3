@@ -38,7 +38,7 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		display mode change occurs.
 		"""
 
-	val wglGetPixelFormatAttribiARB = "${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link}"
+	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()".link
 
 	val wglCreatePbufferARB = HPBUFFERARB.func(
 		"CreatePbufferARB",

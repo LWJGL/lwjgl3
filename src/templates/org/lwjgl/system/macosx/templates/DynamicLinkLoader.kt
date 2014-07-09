@@ -125,11 +125,11 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 			tr(th("Handle value"), th("Search scope")),
 			tr(td("{@code dlopen} handle"), td("Image associated with the ${"dlopen()".link} handle.")),
 			tr(
-				td("${"RTLD_DEFAULT".link}"),
+				td("RTLD_DEFAULT".link),
 				td("Every dependent library or ${"RTLD_GLOBAL".link}–opened library in the current process, in the order they were loaded.")
 			),
 			tr(
-				td("${"RTLD_NEXT".link}"),
+				td("RTLD_NEXT".link),
 				td("Dependent libraries that were loaded after the one calling this function. Libraries opened with ${"dlopen()".link} are not searched.")
 			)
 		)}
