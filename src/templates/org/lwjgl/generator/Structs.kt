@@ -512,7 +512,7 @@ class Struct(
 							else
 								param
 							println("${method}($struct, $param == null ? NULL : memAddress($buffer)); }")
-							println("\tpublic static void ${method}Set(ByteBuffer $struct, CharSequence $param) { ${method}($struct, $param == null ? NULL : memAddress(memEncode${it.nativeType.charMapping.charset}($param))); }")
+							println("\tpublic static void ${method}Set(ByteBuffer $struct, CharSequence $param) { ByteBuffer ${param}Encoded; ${method}($struct, $param == null ? NULL : memAddress(${param}Encoded = memEncode${it.nativeType.charMapping.charset}($param))); }")
 						}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ->
 						{

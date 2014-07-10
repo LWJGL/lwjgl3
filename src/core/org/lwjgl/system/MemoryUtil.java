@@ -63,78 +63,138 @@ public final class MemoryUtil {
 	 */
 	public static long memAddress0(Buffer buffer) { return ACCESSOR.getAddress(buffer); }
 
+	/** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the given buffer is null. */
 	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer); }
 
+	/** PointerBuffer version of {@link #memAddress0(Buffer)}. */
 	public static long memAddress0(PointerBuffer buffer) { return ACCESSOR.getAddress(buffer.getBuffer()); }
 
+	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
 	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer.getBuffer()); }
 
 	// --- [ Buffer address utilities ] ---
 
+	/**
+	 * Returns the memory address at the current position of the given buffer. This is effectively a pointer value that can be used in native function calls.
+	 * <p/>
+	 * <b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that the
+	 * memory backing the given buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:
+	 * <pre><code>
+	 * nativeFunction(memAddress(memEncodeASCII("test"));</code></pre>
+	 * because a GC execution between <code>memAddress</code> and <code>nativeFunction</code> might deallocate the ByteBuffer returned by
+	 * <code>memEncodeASCII</code>. On the other hand, this code is safe on current JVMs:
+	 * <pre><code>
+	 * ByteBuffer encoded = memEncodeASCII("test");
+	 * nativeFunction(memAddress(encoded));</code><pre>
+	 *
+	 * @param buffer the buffer
+	 *
+	 * @return the memory address
+	 */
 	public static long memAddress(ByteBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/**
+	 * Returns the memory address at the given position of the given buffer.
+	 *
+	 * @param buffer   the buffer
+	 * @param position the buffer position
+	 *
+	 * @return the memory address
+	 *
+	 * @see #memAddress(ByteBuffer)
+	 */
 	public static long memAddress(ByteBuffer buffer, int position) { return memAddress0(buffer) + position; }
 
+	/** ShortBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(ShortBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** ShortBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(ShortBuffer buffer, int position) { return memAddress0(buffer) + (position << 1); }
 
+	/** CharBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(CharBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** CharBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(CharBuffer buffer, int position) { return memAddress0(buffer) + (position << 1); }
 
+	/** IntBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(IntBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** IntBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(IntBuffer buffer, int position) { return memAddress0(buffer) + (position << 2); }
 
+	/** FloatBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(FloatBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** FloatBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(FloatBuffer buffer, int position) { return memAddress0(buffer) + (position << 2); }
 
+	/** LongBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(LongBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** LongBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(LongBuffer buffer, int position) { return memAddress0(buffer) + (position << 3); }
 
+	/** DoubleBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(DoubleBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** DoubleBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(DoubleBuffer buffer, int position) { return memAddress0(buffer) + (position << 3); }
 
+	/** PointerBuffer version of {@link #memAddress(ByteBuffer)}. */
 	public static long memAddress(PointerBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
+	/** PointerBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position * POINTER_SIZE); }
 
 	// --- [ Buffer address utilities - Safe ] ---
 
+	/** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the given buffer is null. */
 	public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** Null-safe version of {@link #memAddress(ByteBuffer, int)}. Returns {@link #NULL} if the given buffer is null. */
 	public static long memAddressSafe(ByteBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** ShortBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(ShortBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** ShortBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(ShortBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** CharBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(CharBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** CharBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(CharBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** IntBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(IntBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** IntBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(IntBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** FloatBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(FloatBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** FloatBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(FloatBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** LongBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(LongBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** LongBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(LongBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** DoubleBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(DoubleBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** DoubleBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(DoubleBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
+	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
 	public static long memAddressSafe(PointerBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
+	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
 	// --- [ Buffer allocation utilities ] ---

@@ -119,9 +119,10 @@ private class ExpressionLocalTransform(
 	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\t${qtype.asJavaMethodParam} = $expression;")
 }
 
-private val CharSequenceTransform = object: FunctionTransform<Parameter> {
+private val CharSequenceTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, PreFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
-	override fun transformCall(param: Parameter, original: String) = "memAddress${if ( param has nullable ) "Safe" else ""}(memEncode${(param.nativeType as CharSequenceType).charMapping.charset}(${param.name}))"
+	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\tByteBuffer ${qtype.name}Encoded = memEncode${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name});")
+	override fun transformCall(param: Parameter, original: String) = "memAddress${if ( param has nullable ) "Safe" else ""}(${param.name}Encoded)"
 }
 
 private val StringReturnTransform = object: FunctionTransform<ReturnValue> {
