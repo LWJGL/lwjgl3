@@ -134,7 +134,7 @@ public final class CLDemo {
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
 					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2 + 4);
-					kernelArgs.putInt(POINTER_SIZE, 1337);
+					kernelArgs.putInt(POINTER_SIZE * 2, 1337);
 
 					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel.BufAdapter() {
 						@Override
