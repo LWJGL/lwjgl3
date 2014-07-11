@@ -103,17 +103,19 @@ public interface CLContextCallback {
 				contextCallbacks.put(context, proc);
 		}
 
+		static int getReferenceCount(long context) {
+			APIBuffer __buffer = apiBuffer();
+			int __result = nclGetContextInfo(context, CL_CONTEXT_REFERENCE_COUNT, 4, __buffer.address(), NULL);
+			return __result == CL_SUCCESS ? __buffer.intValue(0) : -1;
+		}
+
 		static void release(long context) {
 			Long proc = contextCallbacks.get(context);
 			if ( proc == null )
 				return;
 
-			APIBuffer __buffer = apiBuffer();
-			int __result = nclGetContextInfo(context, CL_CONTEXT_REFERENCE_COUNT, 4, __buffer.address(), NULL);
-			if ( __result == CL_INVALID_CONTEXT || (__result == CL_SUCCESS && __buffer.intValue(0) == 0) ) {
-				memGlobalRefDelete(proc);
-				contextCallbacks.remove(context);
-			}
+			memGlobalRefDelete(proc);
+			contextCallbacks.remove(context);
 		}
 
 		/**

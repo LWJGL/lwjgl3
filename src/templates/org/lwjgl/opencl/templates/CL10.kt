@@ -813,7 +813,8 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 	)
 
 	Code(
-		javaAfterNative = statement("\t\tif (__result == CL_SUCCESS) CLContextCallback.Util.release(context);")
+		javaBeforeNative = statement("\t\tint contextRefs = CLContextCallback.Util.getReferenceCount(context);"),
+		javaAfterNative = statement("\t\tif ( __result == CL_SUCCESS && contextRefs == 1 ) CLContextCallback.Util.release(context);")
 	) _ cl_int.func(
 		"ReleaseContext",
 		"""
