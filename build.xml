@@ -207,6 +207,7 @@
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
 		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
+				<pathelement path="${lib}/disruptor.jar"/>
 				<pathelement path="${lib}/jcommander.jar"/>
 			</classpath>
 
