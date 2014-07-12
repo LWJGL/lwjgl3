@@ -1053,8 +1053,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLbitfield.IN(
 			"mask",
-			"Zero or the bitwise OR of one or more values indicating which buffers are to be cleared. Valid values:",
-			"#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT"
+			"Zero or the bitwise OR of one or more values indicating which buffers are to be cleared.",
+			"#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #DEPTH_BUFFER_BIT #STENCIL_BUFFER_BIT", LinkMode.BITFIELD
 		)
 	)
 
@@ -2589,7 +2589,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			#ACCUM_BUFFER_BIT #COLOR_BUFFER_BIT #CURRENT_BIT #DEPTH_BUFFER_BIT #ENABLE_BIT #EVAL_BIT #FOG_BIT #HINT_BIT #LIGHTING_BIT
 			#LINE_BIT #LIST_BIT GL13#MULTISAMPLE_BIT #PIXEL_MODE_BIT #POINT_BIT #POLYGON_BIT #POLYGON_STIPPLE_BIT #SCISSOR_BIT
 			#STENCIL_BUFFER_BIT #TEXTURE_BIT #TRANSFORM_BIT #VIEWPORT_BIT #ALL_ATTRIB_BITS
-			"""
+			""", LinkMode.BITFIELD
 		)
 	)).javaDocLink
 
@@ -2606,7 +2606,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		${"MAX_CLIENT_ATTRIB_STACK_DEPTH".link}.
 		""",
 
-		GLbitfield.IN("mask", "the state variables to push", "#CLIENT_VERTEX_ARRAY_BIT #CLIENT_PIXEL_STORE_BIT #CLIENT_ALL_ATTRIB_BITS")
+		GLbitfield.IN("mask", "the state variables to push", "#CLIENT_VERTEX_ARRAY_BIT #CLIENT_PIXEL_STORE_BIT #CLIENT_ALL_ATTRIB_BITS", LinkMode.BITFIELD)
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -3066,12 +3066,12 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		),
 		GLint.IN(
 			"param",
-			"the parameter value. Scalar value or one of:",
+			"the parameter value. Scalar value or",
 			"""
 			#REPLACE #MODULATE #DECAL #BLEND #ADD GL13#COMBINE
 			GL13#ADD_SIGNED GL13#INTERPOLATE GL13#SUBTRACT GL13#DOT3_RGB GL13#DOT3_RGBA
 			#TEXTURE GL13#TEXTURE0 GL13.GL_TEXTURE[1-31] GL13#CONSTANT GL13#PRIMARY_COLOR GL13#PREVIOUS
-			"""
+			""", LinkMode.SINGLE_CNT
 		)
 	).javaDocLink
 

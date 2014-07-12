@@ -617,7 +617,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			a bitfield that identifies the type of OpenCL device. The {@code device_type} can be used to query specific OpenCL devices or all OpenCL devices
 			available.
 			""",
-			DeviceTypes
+			DeviceTypes, LinkMode.BITFIELD
 		),
 		AutoSize("devices") _ cl_uint.IN(
 			"num_entries",

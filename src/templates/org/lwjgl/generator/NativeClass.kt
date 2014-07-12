@@ -292,7 +292,7 @@ class NativeClass(
 	fun ConstantBlock.Links.plus(links: String) = this + links.links
 	fun String.plus(links: ConstantBlock.Links) = this.links + links // TODO: Kotlin bug, this doesn't take priority over the native one. See GL20#glGetVertexAttribiv
 
-	fun NativeType.IN(name: String, javadoc: String, links: String) = IN(name, javadoc, links.links)
+	fun NativeType.IN(name: String, javadoc: String, links: String, linkMode: LinkMode = LinkMode.SINGLE) = IN(name, javadoc, links.links, linkMode)
 
 }
 

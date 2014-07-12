@@ -960,7 +960,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"Returns the value of an input option for the specified window",
 
 		GLFWwindow.IN("window", "window to query"),
-		int.IN("mode", "One of ${"CURSOR".link}, ${"STICKY_KEYS".link} or ${"STICKY_MOUSE_BUTTONS".link}")
+		int.IN("mode", "", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS")
 	)
 
 	void.func(
@@ -986,7 +986,7 @@ fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "window whose input mode to set"),
-		int.IN("mode", "One of ${"CURSOR".link}, ${"STICKY_KEYS".link} or ${"STICKY_MOUSE_BUTTONS".link}"),
+		int.IN("mode", "", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
 		int.IN("value", "new value of the specified input mode")
 	)
 

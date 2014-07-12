@@ -10,6 +10,9 @@ import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.regex.Pattern
 import org.lwjgl.generator.opengl.*
+import org.lwjgl.generator.GenerationMode.*
+import org.lwjgl.generator.ParameterType.*
+import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.generator.ConstantBlock.Links
 import kotlin.properties.Delegates
 
@@ -80,9 +83,9 @@ abstract class Function(
 
 // DSL extensions
 
-fun NativeType.IN(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.IN, javadoc, links?.html ?: "")
-fun PointerType.OUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.OUT, javadoc, links?.html ?: "")
-fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null) = Parameter(this, name, ParameterType.INOUT, javadoc, links?.html ?: "")
+fun NativeType.IN(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, IN, javadoc, links?.html ?: "", linkMode)
+fun PointerType.OUT(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links?.html ?: "", linkMode)
+fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links?.html ?: "", linkMode)
 
 private fun <T> PrintWriter.printList(items: Stream<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
 
@@ -321,13 +324,13 @@ class NativeClassFunction(
 			if ( it.nativeType.mapping == PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && !it.has(Callback) )
 				checks add "checkPointer(${it.name});"
 
-			if ( mode == GenerationMode.NORMAL && it.paramType == ParameterType.IN && it.nativeType is CharSequenceType ) {
+			if ( mode == NORMAL && it.paramType == IN && it.nativeType is CharSequenceType ) {
 				if ( it.nativeType.nullTerminated )
 					checks add "${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});"
 			}
 
-			if ( it.paramType == ParameterType.IN && it has nullTerminated ) {
-				if ( mode == GenerationMode.NORMAL ) {
+			if ( it.paramType == IN && it has nullTerminated ) {
+				if ( mode == NORMAL ) {
 					val ntBytes = when ( it.nativeType.mapping ) {
 						PointerMapping.DATA_SHORT  -> 2
 						PointerMapping.DATA_INT    -> 4
@@ -350,7 +353,7 @@ class NativeClassFunction(
 
 					if ( check.bytes )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
-					else if ( mode == GenerationMode.NORMAL )
+					else if ( mode == NORMAL )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"
 					else
 						checks add "${prefix}checkBuffer(${it.name}, ${check.expression});"
@@ -359,13 +362,13 @@ class NativeClassFunction(
 				checks add "${prefix}checkBuffer(${it.name}, ${it.nativeType.definition.className}.SIZEOF);"
 			}
 
-			if ( mode == GenerationMode.NORMAL && it has BufferObject ) {
+			if ( mode == NORMAL && it has BufferObject ) {
 				checks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, ${it.nativeType.mapping == PrimitiveMapping.PTR});"
 			}
 
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
-				if ( mode == GenerationMode.NORMAL ) {
+				if ( mode == NORMAL ) {
 					var length = it.name
 					if ( autoSize.factor != null )
 						length += " ${autoSize.factor!!.expressionInv()}"
@@ -557,7 +560,7 @@ class NativeClassFunction(
 
 		// Step 3.a: Generate checks
 		printCode(code.javaInit, Code.ApplyTo.NORMAL)
-		generateChecks(GenerationMode.NORMAL);
+		generateChecks(NORMAL);
 
 		// Step 3.b: Prepare APIBuffer parameters.
 
@@ -575,7 +578,7 @@ class NativeClassFunction(
 
 		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.NORMAL)) {
 			printList(getNativeParams()) {
-				it.asNativeMethodCallParam(this@NativeClassFunction, GenerationMode.NORMAL)
+				it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
 			}
 
 			if ( returnsStructValue ) {
@@ -613,7 +616,7 @@ class NativeClassFunction(
 					} else if ( hasParam { it has autoSizeResult } ) {
 						val param = getParam { it has autoSizeResult }
 						print(
-							if ( param.paramType == ParameterType.IN )
+							if ( param.paramType == IN )
 								", ${param.name}"
 							else if ( param.nativeType.mapping == PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
@@ -733,7 +736,7 @@ class NativeClassFunction(
 
 		// Step 1: Apply basic transformations
 		parameters forEach {
-			if ( it.paramType == ParameterType.IN ) {
+			if ( it.paramType == IN ) {
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
 					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
@@ -907,11 +910,11 @@ class NativeClassFunction(
 
 				for ( autoType in autoTypes.types ) {
 					val unsignedType = when ( autoType ) {
-						BufferType.GL_BYTE  -> BufferType.GL_UNSIGNED_BYTE
-						BufferType.GL_SHORT -> BufferType.GL_UNSIGNED_SHORT
-						BufferType.GL_INT   -> BufferType.GL_UNSIGNED_INT
-						BufferType.GL_LONG  -> BufferType.GL_UNSIGNED_LONG
-						else                -> null
+						GL_BYTE  -> GL_UNSIGNED_BYTE
+						GL_SHORT -> GL_UNSIGNED_SHORT
+						GL_INT   -> GL_UNSIGNED_INT
+						GL_LONG  -> GL_UNSIGNED_LONG
+						else     -> null
 					}
 
 					if ( unsignedType == null || !types.contains(unsignedType) )
@@ -1052,7 +1055,7 @@ class NativeClassFunction(
 
 		// Step 3.A: Generate checks
 		printCode(code.javaInit, Code.ApplyTo.ALTERNATIVE)
-		generateChecks(GenerationMode.ALTERNATIVE, customChecks, transforms);
+		generateChecks(ALTERNATIVE, customChecks, transforms);
 
 		// Step 3.B: Transform pre-processing.
 
@@ -1096,7 +1099,7 @@ class NativeClassFunction(
 
 		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.ALTERNATIVE)) {
 			printList(getNativeParams()) {
-				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, GenerationMode.ALTERNATIVE))
+				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
 			}
 		}
 
@@ -1134,7 +1137,7 @@ class NativeClassFunction(
 					} else if ( hasParam { it has autoSizeResult } ) {
 						val param = getParam { it has autoSizeResult }
 						builder.append(
-							if ( param.paramType == ParameterType.IN )
+							if ( param.paramType == IN )
 								", ${param.name}"
 							else if ( param.nativeType.mapping == PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"

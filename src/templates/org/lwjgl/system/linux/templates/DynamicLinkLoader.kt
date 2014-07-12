@@ -57,7 +57,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		""",
 
 		mods(const, nullable) _ charASCII_p.IN("filename", "the name of the dynamic library to open, or $NULL"),
-		int.IN("mode", "a bitfield", Modes)
+		int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
 	)
 
 	charASCII_p.func(

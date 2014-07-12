@@ -148,7 +148,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of a number of values indicating which buffers are to be copied",
-			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT".toConstantLinks()
+			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT".toConstantLinks(), LinkMode.BITFIELD
 		),
 		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#GL_LINEAR GL11#GL_NEAREST".toConstantLinks())
 	)

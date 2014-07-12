@@ -345,7 +345,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "a binding to which the target buffer is bound", BUFFER_OBJECT_TARGETS),
 		GLintptr.IN("offset", "the starting offset within the buffer of the range to be mapped"),
 		GLsizeiptr.IN("length", "the length of the range to be mapped"),
-		GLbitfield.IN("access", "a combination of access flags indicating the desired access to the range", MapBufferRangeBits)
+		GLbitfield.IN("access", "a combination of access flags indicating the desired access to the range", MapBufferRangeBits, LinkMode.BITFIELD)
 	)
 
 	GLvoid.func(

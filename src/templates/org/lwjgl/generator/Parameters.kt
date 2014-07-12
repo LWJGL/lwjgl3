@@ -4,6 +4,9 @@
  */
 package org.lwjgl.generator
 
+import org.lwjgl.generator.ParameterType.*
+import org.lwjgl.generator.LinkMode.*
+
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
 	val nativeType: NativeType
@@ -64,31 +67,65 @@ enum class ParameterType {
 	INOUT
 }
 
+enum class LinkMode {
+	SINGLE: LinkMode() {
+		override fun print(linkCount: Int): String = if ( linkCount == 1 ) " Must be:" else " One of:"
+	}
+
+	SINGLE_CNT: LinkMode() {
+		override fun print(linkCount: Int): String = if ( linkCount == 1 ) " must be:" else " one of:"
+	}
+
+	BITFIELD: LinkMode() {
+		override fun print(linkCount: Int): String = " One or more of:"
+	}
+
+	BITFIELD_CNT: LinkMode() {
+		override fun print(linkCount: Int): String = " one or more of:"
+	}
+
+	abstract fun print(linkCount: Int): String
+}
+
 class Parameter(
 	nativeType: NativeType,
 	val name: String,
-	val paramType: ParameterType = ParameterType.IN,
+	val paramType: ParameterType = IN,
 	documentation: String,
-	links: String = ""
+	links: String,
+	linkMode: LinkMode
 ): QualifiedType(nativeType) {
 
-	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links)
+	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links, linkMode)
 
 	override fun hashCode() = name.hashCode()
 
 	override fun equals(other: Any?) = other identityEquals this || (other is Parameter && other.name equals this.name)
 
-	private fun doc(description: String, links: String): String {
+	private fun doc(description: String, links: String, linkMode: LinkMode): String {
 		val trimmed = description.trim()
 		val builder = StringBuilder(trimmed.size + 16 + links.size) // Rough estimate to reduce mallocs. TODO: validate
-		builder append trimmed
-		if ( !trimmed.endsWith('.') )
-			builder append '.'
 
-		builder append if ( links.count { it == '@' } == 1 )
-			" Must be:"
-		else
-			" One of:"
+		val effectiveLinkMode: LinkMode
+		if ( trimmed.isEmpty() ) {
+			effectiveLinkMode = when ( linkMode ) {
+				SINGLE   -> SINGLE_CNT
+				BITFIELD -> BITFIELD_CNT
+				else     -> linkMode
+			}
+		} else {
+			effectiveLinkMode = linkMode
+			builder append trimmed
+			when ( linkMode ) {
+				SINGLE,
+				BITFIELD -> {
+					if ( !trimmed.endsWith('.') )
+						builder append '.'
+				}
+			}
+		}
+
+		builder append effectiveLinkMode.print(links.count { it == '@' })
 		builder append "<p/>"
 		builder append links
 
@@ -102,7 +139,7 @@ class Parameter(
 
 	/** Returns true if this is an output parameter with the autoSizeResult modifier. */
 	val isAutoSizeResultOut: Boolean
-		get() = paramType == ParameterType.OUT && has(autoSizeResult)
+		get() = paramType == OUT && has(autoSizeResult)
 
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"

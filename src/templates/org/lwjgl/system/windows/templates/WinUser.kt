@@ -1453,7 +1453,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		nullable _ HWND.IN("window", "a handle to the window whose messages are to be retrieved. The window must belong to the current thread."),
 		UINT.IN("msgFilterMin", "the value of the first message in the range of messages to be examined"),
 		UINT.IN("msgFilterMax", "the value of the last message in the range of messages to be examined"),
-		UINT.IN("removeMsg", "specifies how messages are to be handled: One of", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
+		UINT.IN("removeMsg", "specifies how messages are to be handled.", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
 	)
 
 	BOOL.func(
@@ -1577,7 +1577,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			which the calling thread is running.
 			"""
 		),
-		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or one of:", EnumMode),
+		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or", EnumMode, LinkMode.SINGLE_CNT),
 		DEVMODE_p.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode")
 	)
 
@@ -1589,9 +1589,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		""",
 
 		LPCTSTR.IN("deviceName", "a null-terminated string that specifies the display device about which graphics mode the function will obtain information"),
-		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or one of:", "#ENUM_CURRENT_SETTINGS #ENUM_REGISTRY_SETTINGS"),
+		DWORD.IN("modeNum", "the type of information to be retrieved. This value can be a graphics mode index or", "#ENUM_CURRENT_SETTINGS #ENUM_REGISTRY_SETTINGS", LinkMode.SINGLE_CNT),
 		DEVMODE_p.OUT("devMode", "a {@link DEVMODE} structure into which the function stores information about the specified graphics mode"),
-		DWORD.IN("flags", "One of:", "#EDS_RAWMODE #EDS_ROTATEDMODE")
+		DWORD.IN("flags", "", "#EDS_RAWMODE #EDS_ROTATEDMODE")
 	)
 
 	LONG.func(
@@ -1776,9 +1776,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"index",
 			"""
 			the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-			of an integer. To set any other value, specify one of the following values
+			of an integer. To set any other value, specify
 			""",
-			WindowLongOffsets
+			WindowLongOffsets, LinkMode.SINGLE_CNT
 		),
 		LONG_PTR.IN("newLong", "the replacement value"),
 
@@ -1794,9 +1794,9 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 			"index",
 			"""
 			the zero-based offset to the value to be set. Valid values are in the range zero through the number of bytes of extra window memory, minus the size
-			of an integer. To set any other value, specify one of the following values
+			of an integer. To set any other value, specify
 			""",
-			WindowLongOffsets
+			WindowLongOffsets, LinkMode.SINGLE_CNT
 		)
 	)
 
