@@ -27,9 +27,6 @@
 		<pathelement path="${bin.tests}"/>
 	</path>
 
-	<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
-	<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
-
 	<!-- Initialize build -->
 	<target name="-initialize" description="Initializes the directories required by the build process">
 		<mkdir dir="${lib}"/>
@@ -41,6 +38,9 @@
 		<mkdir dir="${bin.native}"/>
 
 		<ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
+
+		<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
+		<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 	</target>
 
 	<!-- Cleans up any files created during the execution of this script -->
