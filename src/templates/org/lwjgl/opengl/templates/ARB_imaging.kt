@@ -633,15 +633,6 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 	// EXT_blend_color
 
 	IntConstant.block(
-		"Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.",
-
-		"CONSTANT_COLOR" _ 0x8001,
-		"ONE_MINUS_CONSTANT_COLOR" _ 0x8002,
-		"CONSTANT_ALPHA" _ 0x8003,
-		"ONE_MINUS_CONSTANT_ALPHA" _ 0x8004
-	)
-
-	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_COLOR" _ 0x8005

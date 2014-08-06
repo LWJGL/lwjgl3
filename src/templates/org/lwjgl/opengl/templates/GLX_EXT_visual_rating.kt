@@ -14,49 +14,30 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
 
-		This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
-		underlying a GLX visual.
+		This extension allows servers to identify a particular GLX visual as undesirable. A new visual attribute is introduced, providing a way for servers to
+		specify caveats (e.g., slow) for a visual. The attribute  may be queried using ${"GLX#GetConfig()".link}, and can therefore be used by
+		application-specific visual selection routines. The new attribute is also used by ${"GLX#ChooseVisual()".link} to discriminate against visuals with
+		caveats.
 
-		In addition, this extension provides a means to request a visual with a transparent pixel and to query whether a visual supports a transparent pixel
-		value and the value of the transparent pixel. Note that the notion of level and transparent pixels are orthogonal as both layer 1 and layer 0 visuals
-		may or may not have a transparent pixel value.
+		This extension allows servers to export visuals with improved features or image quality, but lower performance or greater system burden, without having
+		to have these visuals selected preferentially.  It is intended to insure that most applications get the "right" visual, not that all applications do.
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attrib} parameter of ${"GLX#GetConfig()".link}, and by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link}:",
+		"Accepted by the {@code attribute} parameter of ${"GLX#GetConfig()".link} and by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link}:",
 
-		"X_VISUAL_TYPE_EXT" _ 0x22,
-		"TRANSPARENT_TYPE_EXT" _ 0x23,
-		"TRANSPARENT_INDEX_VALUE_EXT" _ 0x24,
-		"TRANSPARENT_RED_VALUE_EXT" _ 0x25,
-		"TRANSPARENT_GREEN_VALUE_EXT" _ 0x26,
-		"TRANSPARENT_BLUE_VALUE_EXT" _ 0x27,
-		"TRANSPARENT_ALPHA_VALUE_EXT" _ 0x28
+		"VISUAL_CAVEAT_EXT" _ 0x20
 	)
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
-		${"X_VISUAL_TYPE_EXT".link} token):
-		""",
-
-		"TRUE_COLOR_EXT" _ 0x8002,
-		"DIRECT_COLOR_EXT" _ 0x8003,
-		"PSEUDO_COLOR_EXT" _ 0x8004,
-		"STATIC_COLOR_EXT" _ 0x8005,
-		"GRAY_SCALE_EXT" _ 0x8006,
-		"STATIC_GRAY_EXT" _ 0x8007
-	)
-
-	IntConstant.block(
-		"""
-		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
-		${"TRANSPARENT_TYPE_EXT".link} token):
+		Returned by the {@code value} parameter of ${"GLX#GetConfig()".link} (when {@code attribute} is set to ${"VISUAL_CAVEAT_EXT".link}) and accepted by the {@code attrib_list}
+		parameter of ${"GLX#ChooseVisual()".link} (following the ${"VISUAL_CAVEAT_EXT".link} token):
 		""",
 
 		"NONE_EXT" _ 0x8000,
-		"TRANSPARENT_RGB_EXT" _ 0x8008,
-		"TRANSPARENT_INDEX_EXT" _ 0x8009
+		"SLOW_VISUAL_EXT" _ 0x8001,
+		"NON_CONFORMANT_VISUAL_EXT" _ 0x800D
 	)
 
 }

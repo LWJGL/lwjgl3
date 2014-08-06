@@ -14,12 +14,12 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 		"""
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_rating.txt", templateName)} extension.
 
-		This extension allows servers to identify a particular GLX visual as undesirable. A new visual attribute is introduced, providing a way for servers to
-		specify caveats (e.g., slow) for a visual. The attribute  may be queried using ${"GLX#GetConfig()".link}, and can therefore be used by  application-specific visual
-		selection routines. The new attribute is also used by ${"GLX#ChooseVisual()".link} to discriminate against visuals with caveats.
+		This extension allows the user to request a particular X visual type to be associated with a GLX visual, and allows the user to query the X visual type
+		underlying a GLX visual.
 
-		This extension allows servers to export visuals with improved features or image quality, but lower performance or greater system burden, without having
-		to have these visuals selected preferentially.  It is intended to insure that most applications get the "right" visual, not that all applications do.
+		In addition, this extension provides a means to request a visual with a transparent pixel and to query whether a visual supports a transparent pixel
+		value and the value of the transparent pixel. Note that the notion of level and transparent pixels are orthogonal as both layer 1 and layer 0 visuals
+		may or may not have a transparent pixel value.
 		"""
 
 	IntConstant.block(
