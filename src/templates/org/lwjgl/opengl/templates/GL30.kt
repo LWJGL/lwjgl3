@@ -546,7 +546,6 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 	IntConstant.block(
 		"Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
 
-		"SRGB" _ 0x8C40,
 		"FRAMEBUFFER_DEFAULT" _ 0x8218,
 		"INDEX" _ 0x8222
 	)

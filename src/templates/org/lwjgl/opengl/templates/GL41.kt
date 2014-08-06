@@ -940,9 +940,6 @@ if (shader) {
 	IntConstant.block(
 		"Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.",
 
-		"FIRST_VERTEX_CONVENTION" _ 0x8E4D,
-		"LAST_VERTEX_CONVENTION" _ 0x8E4E,
-		"PROVOKING_VERTEX" _ 0x8E4F,
 		"UNDEFINED_VERTEX" _ 0x8260
 	)
 

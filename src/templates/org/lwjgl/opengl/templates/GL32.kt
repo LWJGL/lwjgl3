@@ -346,8 +346,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachment- Parameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_LAYERED" _ 0x8DA7,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER" _ 0x8CD4
+		"FRAMEBUFFER_ATTACHMENT_LAYERED" _ 0x8DA7
 	)
 
 	IntConstant.block(

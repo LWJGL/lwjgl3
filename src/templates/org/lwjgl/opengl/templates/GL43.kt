@@ -312,13 +312,6 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
 	).toJavaDocLinks()
 
-	IntConstant.block(
-		"Returned by GetError.",
-
-		"STACK_UNDERFLOW" _ 0x0504,
-		"STACK_OVERFLOW" _ 0x0503
-	)
-
 	val DebugIdentifiers = IntConstant.block(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
@@ -494,27 +487,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 	// ARB_internalformat_query2
 
 	IntConstant.block(
-		"Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v.",
-
-		"TEXTURE_1D" _ 0x0DE0,
-		"TEXTURE_1D_ARRAY" _ 0x8C18,
-		"TEXTURE_2D" _ 0x0DE1,
-		"TEXTURE_2D_ARRAY" _ 0x8C1A,
-		"TEXTURE_3D" _ 0x806F,
-		"TEXTURE_CUBE_MAP" _ 0x8513,
-		"TEXTURE_CUBE_MAP_ARRAY" _ 0x9009,
-		"TEXTURE_RECTANGLE" _ 0x84F5,
-		"TEXTURE_BUFFER" _ 0x8C2A,
-		"RENDERBUFFER" _ 0x8D41,
-		"TEXTURE_2D_MULTISAMPLE" _ 0x9100,
-		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
-	)
-
-	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.",
 
-		"SAMPLES" _ 0x80A9,
-		"NUM_SAMPLE_COUNTS" _ 0x9380,
 		"INTERNALFORMAT_SUPPORTED" _ 0x826F,
 		"INTERNALFORMAT_PREFERRED" _ 0x8270,
 		"INTERNALFORMAT_RED_SIZE" _ 0x8271,
@@ -575,12 +549,10 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"IMAGE_COMPATIBILITY_CLASS" _ 0x82A8,
 		"IMAGE_PIXEL_FORMAT" _ 0x82A9,
 		"IMAGE_PIXEL_TYPE" _ 0x82AA,
-		"IMAGE_FORMAT_COMPATIBILITY_TYPE" _ 0x90C7,
 		"SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST" _ 0x82AC,
 		"SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST" _ 0x82AD,
 		"SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE" _ 0x82AE,
 		"SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE" _ 0x82AF,
-		"TEXTURE_COMPRESSED" _ 0x86A1,
 		"TEXTURE_COMPRESSED_BLOCK_WIDTH" _ 0x82B1,
 		"TEXTURE_COMPRESSED_BLOCK_HEIGHT" _ 0x82B2,
 		"TEXTURE_COMPRESSED_BLOCK_SIZE" _ 0x82B3,
