@@ -129,7 +129,7 @@ class ConstantBlock<T>(
 
 }
 
-fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
+fun String.toConstantLinks(inClass: String, prefix: String = ""): ConstantBlock.Links {
 	val builder = StringBuilder(this.size * 2) // Rough estimate to reduce mallocs. TODO: validate
 
 	val tokens = LINK_PATTERN.split(this.trim())
@@ -153,7 +153,10 @@ fun String.toConstantLinks(prefix: String = ""): ConstantBlock.Links {
 				if ( prefix.isEmpty() )
 					builder append tokens[i]
 				else {
-					builder append tokens[i].substring(0, hash + 1)
+					val className = tokens[i].substring(0, hash)
+					if ( className != inClass )
+						builder append className
+					builder append '#'
 					builder append prefix
 					builder append token
 				}

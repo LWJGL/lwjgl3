@@ -286,8 +286,8 @@ class NativeClass(
 			return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
 		}
 
-	val String.links: ConstantBlock.Links
-		get() = this.toConstantLinks(prefixConstant)
+	val String.links: ConstantBlock.Links get() = this.toConstantLinks(className, prefixConstant)
+	fun String.toConstantLinks(): ConstantBlock.Links = this.toConstantLinks(className)
 
 	fun ConstantBlock.Links.plus(links: String) = this + links.links
 	fun String.plus(links: ConstantBlock.Links) = this.links + links // TODO: Kotlin bug, this doesn't take priority over the native one. See GL20#glGetVertexAttribiv
