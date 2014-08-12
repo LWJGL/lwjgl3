@@ -179,7 +179,7 @@ public class TemplateFormatter {
 
 	private static final String BLOCK_COMMENT = "(?:/[*]+.+?[*]+/)?";
 
-	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+:)))";
+	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+):))";
 	private static final String DEFINE         = "(?:#define\\s+)?";
 	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+L?)|(?:\\([^)]+\\))";
 
@@ -207,7 +207,7 @@ public class TemplateFormatter {
 
 			String description = blockMatcher.group(1);
 			if ( description == null )
-				description = blockMatcher.group(2);
+				description = blockMatcher.group(2) + '.';
 
 			description =
 				CODE_CLEANUP.matcher(
