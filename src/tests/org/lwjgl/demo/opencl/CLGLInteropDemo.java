@@ -34,7 +34,6 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
-import static org.lwjgl.opencl.KHRGLEvent.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.opengl.AMDDebugOutput.*;
@@ -165,13 +164,11 @@ public class CLGLInteropDemo {
 
 	private final PointerBuffer syncBuffer = BufferUtils.createPointerBuffer(1);
 
-	private boolean syncGLtoCL; // true if we can make GL wait on events generated from CL queues.
+	private boolean syncGLtoCL; // false if we can make GL wait on events generated from CL queues.
 	private long[]  clEvent;
 	private long[]  fenceFromEvent;
 
-	private boolean syncCLtoGL; // true if we can make CL wait on sync objects generated from GL.
-	private long    glFence;
-	private long    eventFromFence;
+	private boolean syncCLtoGL; // false if we can make CL wait on sync objects generated from GL.
 
 	public CLGLInteropDemo(CLPlatform platform, GLFWWindow window, int deviceType) {
 		this.platform = platform;
@@ -321,33 +318,30 @@ public class CLGLInteropDemo {
 			buildPrograms();
 
 			// Detect GLtoCL synchronization method
-			syncGLtoCL = glCaps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
-			if ( syncGLtoCL ) {
+			syncGLtoCL = true;
+			if ( glCaps.GL_ARB_cl_event ) { // GL3.2 or ARB_sync implied
+				syncGLtoCL = false;
+
 				clEvent = new long[slices];
 				fenceFromEvent = new long[slices];
-				log("GL to CL sync: Using OpenCL events");
-			} else
-				log("GL to CL sync: Using clFinish");
+			}
+			log(syncGLtoCL
+			    ? "GL to CL sync: Using clFinish"
+			    : "GL to CL sync: Using OpenCL events"
+			);
 
 			// Detect CLtoGL synchronization method
-			/*
-				NOTE: We do not have to explicitly synchronize if cl_khr_gl_event is exposed, because it modifies the behavior of clEnqueueAcquireGLObjects
-				and clEnqueueReleaseGLObjects to implicitly guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
-				For this demo we do it anyway, for demostration purposes.
-			*/
-			syncCLtoGL = glCaps.OpenGL32 || glCaps.GL_ARB_sync;
-			if ( syncCLtoGL ) {
-				for ( CLDevice device : devices ) {
-					if ( !device.getCapabilities().cl_khr_gl_event ) {
-						syncCLtoGL = false;
-						break;
-					}
+			syncCLtoGL = false;
+			for ( CLDevice device : devices ) {
+				if ( !device.getCapabilities().cl_khr_gl_event ) {
+					syncCLtoGL = true;
+					break;
 				}
 			}
-			if ( syncCLtoGL ) {
-				log("CL to GL sync: Using OpenGL sync objects");
-			} else
-				log("CL to GL sync: Using glFinish");
+			log(syncCLtoGL
+			    ? "CL to GL sync: Using glFinish"
+			    : "CL to GL sync: Using implicit sync (cl_khr_gl_event)"
+			);
 
 			vao = glGenVertexArrays();
 			glBindVertexArray(vao);
@@ -458,6 +452,10 @@ public class CLGLInteropDemo {
 
 		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		if ( params.contains("debugGL") )
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
@@ -560,10 +558,7 @@ public class CLGLInteropDemo {
 			glfwPollEvents();
 
 			for ( int i = 0; i < windows.length; i++ ) {
-				if ( windows[i] == null )
-					continue;
-
-				if ( windows[i].signal.getCount() == 0 ) {
+				if ( windows[i] != null && windows[i].signal.getCount() == 0 ) {
 					glfwDestroyWindow(windows[i].handle);
 					windows[i] = null;
 				}
@@ -571,6 +566,8 @@ public class CLGLInteropDemo {
 		}
 
 		CL.destroy();
+		glfwTerminate();
+
 		System.out.println("GAME OVER!");
 	}
 
@@ -794,19 +791,6 @@ public class CLGLInteropDemo {
 			}
 		}
 
-		for ( long queue : queues )
-			clFinish(queue);
-
-		CLCleaner eventCleaner = new CLCleaner() {
-			@Override
-			public int release(long object) {
-				return clReleaseEvent(object);
-			}
-		};
-
-		if ( clEvent != null ) release(clEvent, eventCleaner);
-		if ( eventFromFence != NULL ) release(eventFromFence, eventCleaner);
-
 		CLCleaner memObjCleaner = new CLCleaner() {
 			@Override
 			public int release(long object) {
@@ -872,7 +856,7 @@ public class CLGLInteropDemo {
 
 	public void display() {
 		// make sure GL does not use our objects before we start computing
-		if ( eventFromFence == NULL || shouldInitBuffers )
+		if ( syncCLtoGL || shouldInitBuffers )
 			glFinish();
 
 		if ( shouldInitBuffers ) {
@@ -926,20 +910,9 @@ public class CLGLInteropDemo {
 				clSetKernelArg1d(k, 5, rangeY);
 			}
 
-			if ( eventFromFence != NULL )
-				syncBuffer.put(0, eventFromFence);
-
 			// acquire GL objects, and enqueue a kernel with a probe from the list
-			int errcode = clEnqueueAcquireGLObjects(queues[i], clTextures[i], eventFromFence != NULL ? syncBuffer : null, null);
+			int errcode = clEnqueueAcquireGLObjects(queues[i], clTextures[i], null, null);
 			checkCLError(errcode);
-
-			if ( eventFromFence != NULL ) {
-				errcode = clReleaseEvent(eventFromFence);
-				eventFromFence = NULL;
-				checkCLError(errcode);
-
-				glDeleteSync(glFence);
-			}
 
 			errcode = clEnqueueNDRangeKernel(queues[i], kernels[i], 2,
 			                                 null,
@@ -948,17 +921,17 @@ public class CLGLInteropDemo {
 			                                 null, null);
 			checkCLError(errcode);
 
-			errcode = clEnqueueReleaseGLObjects(queues[i], clTextures[i], null, syncGLtoCL ? syncBuffer : null);
+			errcode = clEnqueueReleaseGLObjects(queues[i], clTextures[i], null, !syncGLtoCL ? syncBuffer : null);
 			checkCLError(errcode);
 
-			if ( syncGLtoCL ) {
+			if ( !syncGLtoCL ) {
 				clEvent[i] = syncBuffer.get(0);
 				fenceFromEvent[i] = glCreateSyncFromCLeventARB(clContext, clEvent[i], 0);
 			}
 		}
 
 		// block until done (important: finish before doing further gl work)
-		if ( !syncGLtoCL ) {
+		if ( syncGLtoCL ) {
 			for ( int i = 0; i < slices; i++ ) {
 				int errcode = clFinish(queues[i]);
 				checkCLError(errcode);
@@ -977,7 +950,7 @@ public class CLGLInteropDemo {
 		for ( int i = 0; i < slices; i++ ) {
 			glUniform2f(offsetUniform, i * sliceWidth, 0.0f);
 
-			if ( syncGLtoCL ) {
+			if ( !syncGLtoCL ) {
 				glWaitSync(fenceFromEvent[i], 0, 0);
 				glDeleteSync(fenceFromEvent[i]);
 				fenceFromEvent[i] = NULL;
@@ -989,12 +962,6 @@ public class CLGLInteropDemo {
 
 			glBindTexture(GL_TEXTURE_2D, glTextures.get(i));
 			glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		}
-
-		if ( syncCLtoGL ) {
-			glFence = glFenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
-			eventFromFence = clCreateEventFromGLsyncKHR(clContext, glFence, errcode_ret);
-			checkCLError(errcode_ret);
 		}
 	}
 
