@@ -232,7 +232,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"POINT_SIZE_MAX" _ 0x8127,
 		"POINT_FADE_THRESHOLD_SIZE" _ 0x8128,
 		"POINT_DISTANCE_ATTENUATION" _ 0x8129
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val PointParameterf = GLvoid.func(
 		"PointParameterf",

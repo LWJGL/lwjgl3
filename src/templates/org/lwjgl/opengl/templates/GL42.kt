@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-fun GL42() = "GL42".nativeClassGL("GL42") {
+val GL42 = "GL42".nativeClassGL("GL42") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -280,7 +280,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		"TRANSFORM_FEEDBACK_BARRIER_BIT" _ 0x00000800,
 		"ATOMIC_COUNTER_BARRIER_BIT" _ 0x00001000,
 		"ALL_BARRIER_BITS" _ 0xFFFFFFFF.i
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Returned by the {@code type} parameter of GetActiveUniform.",

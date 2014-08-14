@@ -21,7 +21,7 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 		"MAP_COHERENT_BIT" _ 0x0080,
 		"DYNAMIC_STORAGE_BIT" _ 0x0100,
 		"CLIENT_STORAGE_BIT" _ 0x0200
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}.",

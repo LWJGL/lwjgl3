@@ -99,7 +99,7 @@ val STACK_UNDERFLOW = "GL11#STACK_UNDERFLOW"
 val OUT_OF_MEMORY = "GL11#OUT_OF_MEMORY"
 val INVALID_FRAMEBUFFER_OPERATION = "GL30#INVALID_FRAMEBUFFER_OPERATION"
 
-fun GL11() = "GL11".nativeClassGL("GL11") {
+val GL11 = "GL11".nativeClassGL("GL11") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -882,9 +882,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	val TEXTURE_PARAMETERS =
 		"""
-		GL12#TEXTURE_BASE_LEVEL #TEXTURE_BORDER_COLOR GL14#TEXTURE_COMPARE_MODE GL14#TEXTURE_COMPARE_FUNC GL14#TEXTURE_LOD_BIAS #TEXTURE_MAG_FILTER
-		GL12#TEXTURE_MAX_LEVEL GL12#TEXTURE_MAX_LOD #TEXTURE_MIN_FILTER GL12#TEXTURE_MIN_LOD #TEXTURE_PRIORITY GL33#TEXTURE_SWIZZLE_R
-		GL33#TEXTURE_SWIZZLE_G GL33#TEXTURE_SWIZZLE_B GL33#TEXTURE_SWIZZLE_A GL33#TEXTURE_SWIZZLE_RGBA #TEXTURE_WRAP_S #TEXTURE_WRAP_T
+		GL12#TEXTURE_BASE_LEVEL GL11#TEXTURE_BORDER_COLOR GL14#TEXTURE_COMPARE_MODE GL14#TEXTURE_COMPARE_FUNC GL14#TEXTURE_LOD_BIAS GL11#TEXTURE_MAG_FILTER
+		GL12#TEXTURE_MAX_LEVEL GL12#TEXTURE_MAX_LOD GL11#TEXTURE_MIN_FILTER GL12#TEXTURE_MIN_LOD GL11#TEXTURE_PRIORITY GL33#TEXTURE_SWIZZLE_R
+		GL33#TEXTURE_SWIZZLE_G GL33#TEXTURE_SWIZZLE_B GL33#TEXTURE_SWIZZLE_A GL33#TEXTURE_SWIZZLE_RGBA GL11#TEXTURE_WRAP_S GL11#TEXTURE_WRAP_T
 		GL12#TEXTURE_WRAP_R GL14#DEPTH_TEXTURE_MODE GL14#GENERATE_MIPMAP
 		"""
 
@@ -899,8 +899,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	// Table 17.4 and 17.5
 	val FRAMEBUFFERS =
 		"""
-		#NONE #FRONT_LEFT #FRONT_RIGHT #BACK_LEFT #BACK_RIGHT #FRONT #BACK #LEFT #RIGHT #FRONT_AND_BACK #AUX0 #AUX1 #AUX2
-		#AUX3 GL30#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
+		GL11#NONE GL11#FRONT_LEFT GL11#FRONT_RIGHT GL11#BACK_LEFT GL11#BACK_RIGHT GL11#FRONT GL11#BACK GL11#LEFT GL11#RIGHT GL11#FRONT_AND_BACK GL11#AUX0
+		GL11#AUX1 GL11#AUX2 GL11#AUX3 GL30#COLOR_ATTACHMENT0 GL30.GL_COLOR_ATTACHMENT[1-15]
 		"""
 
 	// Table 21.1
@@ -1558,7 +1558,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		AutoSize("textures") _ GLsizei.IN("n", "the number of textures to create"),
-		returnValue _ GLuint_p.OUT("textures", "a scalar or array in which to place the returned texture names")
+		returnValue _ GLuint_p.OUT("textures", "a scalar or buffer in which to place the returned texture names")
 	).javaDocLink
 
 	GLvoid.func(
@@ -1585,7 +1585,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("plane", "the clip plane"),
-		Check(4) _ GLdouble_p.OUT("equation", "an array in which to place the returned values")
+		Check(4) _ GLdouble_p.OUT("equation", "a buffer in which to place the returned values")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(
@@ -1599,7 +1599,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLboolean_p.OUT("params", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(
@@ -1613,7 +1613,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(
@@ -1627,7 +1627,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(
@@ -1641,7 +1641,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLenum.func(
@@ -1660,14 +1660,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("light", "the light for which to return information", "#LIGHT0 GL_LIGHT[1-7]"),
 		GLenum.IN(
-			"value",
+			"pname",
 			"the light parameter to query",
 			"""
 			#AMBIENT #DIFFUSE #SPECULAR #POSITION #CONSTANT_ATTENUATION #LINEAR_ATTENUATION #QUADRATIC_ATTENUATION
 			#SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
 			"""
 		),
-		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -1675,8 +1675,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetLightiv.",
 
 		GLenum.IN("light", "the light for which to return information"),
-		GLenum.IN("value", "the light parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the light parameter to query"),
+		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 
@@ -1686,7 +1686,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
 		GLenum.IN("query", "the information to query", "#ORDER #COEFF #DOMAIN"),
-		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -1695,7 +1695,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -1704,7 +1704,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	val GetMaterialiv = (deprecatedGL _ GLvoid.func(
@@ -1712,8 +1712,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns integer information about material property {@code value} for {@code face} in {@code data}.",
 
 		GLenum.IN("face", "the material face for which to return information", "#FRONT #BACK"),
-		GLenum.IN("value", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
-		GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
+		GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -1721,8 +1721,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetMaterialiv.",
 
 		GLenum.IN("face", "the material face for which to return information"),
-		GLenum.IN("value", "the information to query"),
-		GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the information to query"),
+		GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	val GetPixelMapfv = (deprecatedGL _ GLvoid.func(
@@ -1730,7 +1730,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns all float values in the pixel map {@code map} in {@code data}.",
 
 		GLenum.IN("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLfloat_p.OUT("data", "an array in which to place the returned data")
+		mods(Check(32), PIXEL_PACK_BUFFER) _ GLfloat_p.OUT("data", "a buffer in which to place the returned data")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -1738,7 +1738,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Unsigned short version of $GetPixelMapfv.",
 
 		GLenum.IN("map", "the pixel map parameter to query"),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLushort_p.OUT("data", "an array in which to place the returned data")
+		mods(Check(32), PIXEL_PACK_BUFFER) _ GLushort_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -1746,7 +1746,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Unsigned integer version of $GetPixelMapfv.",
 
 		GLenum.IN("map", "the pixel map parameter to query"),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLuint_p.OUT("data", "an array in which to place the returned data")
+		mods(Check(32), PIXEL_PACK_BUFFER) _ GLuint_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	GLvoid.func(
@@ -1754,14 +1754,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns a pointer in the current GL context.",
 
 		GLenum.IN("pname", "the pointer to return"),
-		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "an array in which to place the returned pointer")
+		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "a buffer in which to place the returned pointer")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetPolygonStipple",
 		"Obtains the polygon stipple.",
 
-		mods(Check(128), PIXEL_PACK_BUFFER) _ GLvoid_p.OUT("pattern", "an array in which to place the returned data")
+		mods(Check(128), PIXEL_PACK_BUFFER) _ GLvoid_p.OUT("pattern", "a buffer in which to place the returned data")
 	)
 
 	(const _ GLubyteString).func(
@@ -1777,15 +1777,15 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("env", "the texture environment to query", "GL20#POINT_SPRITE #TEXTURE_ENV GL14#TEXTURE_FILTER_CONTROL"),
 		GLenum.IN(
-			"value",
-			"the value to query",
+			"pname",
+			"the parameter to query",
 			"""
 			GL20#COORD_REPLACE #TEXTURE_ENV_MODE #TEXTURE_ENV_COLOR GL14#TEXTURE_LOD_BIAS GL13#COMBINE_RGB GL13#COMBINE_ALPHA GL15#SRC0_RGB
 			GL15#SRC1_RGB GL15#SRC2_RGB GL15#SRC0_ALPHA GL15#SRC1_ALPHA GL15#SRC2_ALPHA GL13#OPERAND0_RGB GL13#OPERAND1_RGB
 			GL13#OPERAND2_RGB GL13#OPERAND0_ALPHA GL13#OPERAND1_ALPHA GL13#OPERAND2_ALPHA GL13#RGB_SCALE #ALPHA_SCALE
 			"""
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	).javaDocLink
 
 	GLvoid.func(
@@ -1793,8 +1793,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetTexEnviv.",
 
 		GLenum.IN("env", "the texture environment to query"),
-		GLenum.IN("value", "the value to query"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the parameter to query"),
+		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	val GetTexGeniv = (deprecatedGL _ GLvoid.func(
@@ -1802,8 +1802,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Returns integer information about {@code value} for {@code coord} in {@code data}.",
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
-		GLenum.IN("value", "the value to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
+		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -1811,8 +1811,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetTexGeniv.",
 
 		GLenum.IN("coord", "the coord to query"),
-		GLenum.IN("value", "the value to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the parameter to query"),
+		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -1820,8 +1820,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Double version of $GetTexGeniv.",
 
 		GLenum.IN("coord", "the coord to query"),
-		GLenum.IN("value", "the value to query"),
-		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the parameter to query"),
+		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid.func(
@@ -1833,13 +1833,13 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"the texture (or texture face) to be obtained",
 			"#TEXTURE_1D #TEXTURE_2D GL12#TEXTURE_3D GL30#TEXTURE_1D_ARRAY GL30#TEXTURE_2D_ARRAY GL31#TEXTURE_RECTANGLE $CUBE_MAP_FACES"
 		),
-		GLint.IN("lod", "the level-of-detail number"),
+		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("img", "the array in which to place the returned data")
+		) _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	val GetTexLevelParameteriv = GLvoid.func(
@@ -1856,20 +1856,20 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			GL32#PROXY_TEXTURE_2D_MULTISAMPLE GL32#PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY
 			"""
 		),
-		GLint.IN("lod", "the level-of-detail number"),
+		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN(
-			"value",
-			"the value to query",
+			"pname",
+			"the parameter to query",
 			"""
-			#TEXTURE_WIDTH #TEXTURE_HEIGHT GL12#TEXTURE_DEPTH #TEXTURE_BORDER GL32#TEXTURE_SAMPLES GL32#TEXTURE_FIXED_SAMPLE_LOCATIONS
-			#TEXTURE_INTERNAL_FORMAT #TEXTURE_RED_SIZE #TEXTURE_GREEN_SIZE #TEXTURE_BLUE_SIZE #TEXTURE_ALPHA_SIZE
-			#TEXTURE_LUMINANCE_SIZE #TEXTURE_INTENSITY_SIZE GL14#TEXTURE_DEPTH_SIZE GL30#TEXTURE_STENCIL_SIZE GL30#TEXTURE_SHARED_SIZE
+			GL11#TEXTURE_WIDTH GL11#TEXTURE_HEIGHT GL12#TEXTURE_DEPTH GL11#TEXTURE_BORDER GL32#TEXTURE_SAMPLES GL32#TEXTURE_FIXED_SAMPLE_LOCATIONS
+			GL11#TEXTURE_INTERNAL_FORMAT GL11#TEXTURE_RED_SIZE GL11#TEXTURE_GREEN_SIZE GL11#TEXTURE_BLUE_SIZE GL11#TEXTURE_ALPHA_SIZE
+			GL11#TEXTURE_LUMINANCE_SIZE GL11#TEXTURE_INTENSITY_SIZE GL14#TEXTURE_DEPTH_SIZE GL30#TEXTURE_STENCIL_SIZE GL30#TEXTURE_SHARED_SIZE
 			GL30#TEXTURE_RED_TYPE GL30#TEXTURE_GREEN_TYPE GL30#TEXTURE_BLUE_TYPE GL30#TEXTURE_ALPHA_TYPE GL30#TEXTURE_LUMINANCE_TYPE
 			GL30#TEXTURE_INTENSITY_TYPE GL30#TEXTURE_DEPTH_TYPE GL13#TEXTURE_COMPRESSED GL13#TEXTURE_COMPRESSED_IMAGE_SIZE
 			GL31#TEXTURE_BUFFER_DATA_STORE_BINDING GL43#TEXTURE_BUFFER_OFFSET GL43#TEXTURE_BUFFER_SIZE
 			"""
 		),
-		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(4), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	).javaDocLink
 
 	GLvoid.func(
@@ -1877,9 +1877,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetTexLevelParameteriv.",
 
 		GLenum.IN("target", "the texture image target"),
-		GLint.IN("lod", "the level-of-detail number"),
-		GLenum.IN("value", "the value to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLint.IN("level", "the level-of-detail number"),
+		GLenum.IN("pname", "the parameter to query"),
+		mods(Check(4), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	val GetTexParameteriv = GLvoid.func(
@@ -1895,14 +1895,14 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		GLenum.IN(
-			"value",
-			"the value to query",
+			"pname",
+			"the parameter to query",
 			"""
 			$TEXTURE_PARAMETERS GL42#IMAGE_FORMAT_COMPATIBILITY_TYPE GL42#TEXTURE_IMMUTABLE_FORMAT GL43#TEXTURE_IMMUTABLE_LEVELS GL43#TEXTURE_VIEW_MIN_LEVEL
-			GL43#TEXTURE_VIEW_NUM_LEVELS GL43#TEXTURE_VIEW_MIN_LAYER GL43#TEXTURE_VIEW_NUM_LAYERS #TEXTURE_RESIDENT
+			GL43#TEXTURE_VIEW_NUM_LEVELS GL43#TEXTURE_VIEW_MIN_LAYER GL43#TEXTURE_VIEW_NUM_LAYERS GL11#TEXTURE_RESIDENT
 			"""
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	).javaDocLink
 
 	GLvoid.func(
@@ -1910,8 +1910,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Float version of $GetTexParameteriv.",
 
 		GLenum.IN("target", "the texture target"),
-		GLenum.IN("value", "the value to query"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or array in which to place the returned data")
+		GLenum.IN("pname", "the parameter to query"),
+		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid.func(
@@ -2748,7 +2748,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "an array in which to place the returned pixel data")
+		) _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	).javaDocLink
 
 	// Rect functions javadoc

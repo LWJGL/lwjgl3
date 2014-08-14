@@ -14,7 +14,7 @@ val CONDITIONAL_RENDER_MODES =
 	GL45#QUERY_WAIT_INVERTED GL45#QUERY_NO_WAIT_INVERTED GL45#QUERY_BY_REGION_WAIT_INVERTED GL45#QUERY_BY_REGION_NO_WAIT_INVERTED
 	"""
 
-fun GL30() = "GL30".nativeClassGL("GL30") {
+val GL30 = "GL30".nativeClassGL("GL30") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -57,6 +57,55 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("name", "the indexed state to query", "GL11#EXTENSIONS GL20#SHADING_LANGUAGE_VERSION"),
 		GLuint.IN("index", "the index of the particular element being queried")
+	)
+
+	GLvoid.func(
+		"ClearBufferiv",
+		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
+
+		GLenum.IN("buffer", "the buffer to clear", "GL11#COLOR GL11#STENCIL"),
+		GLint.IN("drawbuffer", "the draw buffer to clear"),
+		Check(1) _ GLint_p.IN(
+			"value",
+			"""
+	        for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For stencil buffers, a pointer to a
+	        single stencil value to clear the buffer to.
+	        """
+		)
+	)
+
+	GLvoid.func(
+		"ClearBufferuiv",
+		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
+
+		GLenum.IN("buffer", "the buffer to clear", "GL11#COLOR"),
+		GLint.IN("drawbuffer", "the draw buffer to clear"),
+		Check(4) _ GLint_p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
+	)
+
+	GLvoid.func(
+		"ClearBufferfv",
+		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
+
+		GLenum.IN("buffer", "the buffer to clear", "GL11#COLOR GL11#DEPTH"),
+		GLint.IN("drawbuffer", "the draw buffer to clear"),
+		Check(1) _ GLfloat_p.IN(
+			"value",
+			"""
+	        for color buffers, a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to. For depth buffers, a pointer to a
+	        single depth value to clear the buffer to.
+	        """
+		)
+	)
+
+	GLvoid.func(
+		"ClearBufferfi",
+		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
+
+		GLenum.IN("buffer", "the buffer to clear", "GL30#DEPTH_STENCIL"),
+		GLint.IN("drawbuffer", "the draw buffer to clear"),
+		GLfloat.IN("depth", "the depth value to clear the buffer to"),
+		GLint.IN("stencil", "the stencil value to clear the buffer to")
 	)
 
 	// EXT_gpu_shader4
@@ -326,7 +375,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"MAP_INVALIDATE_BUFFER_BIT" _ 0x0008,
 		"MAP_FLUSH_EXPLICIT_BIT" _ 0x0010,
 		"MAP_UNSYNCHRONIZED_BIT" _ 0x0020
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
@@ -496,7 +545,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"FRAMEBUFFER" _ 0x8D40,
 		"READ_FRAMEBUFFER" _ 0x8CA8,
 		"DRAW_FRAMEBUFFER" _ 0x8CA9
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -529,7 +578,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"RENDERBUFFER_DEPTH_SIZE" _ 0x8D54,
 		"RENDERBUFFER_STENCIL_SIZE" _ 0x8D55,
 		"RENDERBUFFER_SAMPLES" _ 0x8CAB
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val FramebufferParameters = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
@@ -547,7 +596,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE" _ 0x8215,
 		"FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE" _ 0x8216,
 		"FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE" _ 0x8217
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
@@ -578,7 +627,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"DEPTH_ATTACHMENT" _ 0x8D00,
 		"STENCIL_ATTACHMENT" _ 0x8D20,
 		"DEPTH_STENCIL_ATTACHMENT" _ 0x821A
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
@@ -678,7 +727,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Generates renderbuffer object names.",
 
 		AutoSize("renderbuffers") _ GLsizei.IN("n", "the number of renderbuffer object names to generate"),
-		returnValue _ GLuint_p.OUT("renderbuffers", "an array in which the generated renderbuffer object names are stored")
+		returnValue _ GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
 	)
 
 	GLvoid.func(
@@ -743,7 +792,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Generates framebuffer object names.",
 
 		AutoSize("framebuffers") _ GLsizei.IN("n", "the number of framebuffer object names to generate"),
-		returnValue _ GLuint_p.OUT("framebuffers", "an array in which the generated framebuffer object names are stored")
+		returnValue _ GLuint_p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
 	)
 
 	GLenum.func(
@@ -804,7 +853,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the framebuffer target", FramebufferTargets),
 		GLenum.IN("attachment", "the attachment point of the framebuffer", FramebufferAttachments),
-		GLenum.IN("renderbuffertarget", "the renderbuffer target", "#RENDERBUFFER"),
+		GLenum.IN("renderbuffertarget", "the renderbuffer target", "GL30#RENDERBUFFER"),
 		GLuint.IN("renderbuffer", "the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach")
 	)
 
@@ -991,7 +1040,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLboolean_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid.func(
@@ -1000,7 +1049,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or array in which to place the returned data")
+		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid.func(
@@ -1109,7 +1158,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		"INTERLEAVED_ATTRIBS" _ 0x8C8C,
 		"SEPARATE_ATTRIBS" _ 0x8C8D
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
@@ -1241,7 +1290,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"Generates vertex array object names.",
 
 		AutoSize("arrays") _ GLsizei.IN("n", "the number of vertex array object names to generate"),
-		returnValue _ GLuint_p.OUT("arrays", "an array in which the generated vertex array object names are stored")
+		returnValue _ GLuint_p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
 	)
 
 	GLboolean.func(

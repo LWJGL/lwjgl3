@@ -73,7 +73,7 @@ fun GL33() = "GL33".nativeClassGL("GL33") {
 		"Generates sampler object names.",
 
 		AutoSize("samplers") _ GLsizei.IN("count", "the number of sampler object names to generate"),
-		returnValue _ GLuint_p.OUT("samplers", "an array in which the generated sampler object names are stored")
+		returnValue _ GLuint_p.OUT("samplers", "a buffer in which the generated sampler object names are stored")
 	)
 
 	GLvoid.func(

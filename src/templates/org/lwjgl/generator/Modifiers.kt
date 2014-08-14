@@ -44,10 +44,8 @@ abstract class TemplateElement {
 		get() = modifiers.values().any { it.isSpecial }
 
 	protected fun <T: TemplateElement> T.copyModifiers(other: T): T {
-		if ( other.modifiers != EMPTY_MODIFIERS ) {
-			println("copying: $this - ${other.modifiers}")
+		if ( other.modifiers != EMPTY_MODIFIERS )
 			this.modifiers = HashMap(other.modifiers)
-		}
 		return this
 	}
 }

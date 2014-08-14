@@ -11,7 +11,7 @@ import org.lwjgl.opengl.*
 
 val SHADER_TYPES = "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER GL32#GEOMETRY_SHADER GL40#TESS_CONTROL_SHADER GL40#TESS_EVALUATION_SHADER"
 
-fun GL20() = "GL20".nativeClassGL("GL20") {
+val GL20 = "GL20".nativeClassGL("GL20") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -519,7 +519,7 @@ fun GL20() = "GL20".nativeClassGL("GL20") {
 		"VERTEX_ATTRIB_ARRAY_TYPE" _ 0x8625,
 		"VERTEX_ATTRIB_ARRAY_NORMALIZED" _ 0x886A,
 		"CURRENT_VERTEX_ATTRIB" _ 0x8626
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetVertexAttribPointerv.",

@@ -28,7 +28,7 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output", post
 		"DEBUG_SEVERITY_HIGH_AMD" _ 0x9146,
 		"DEBUG_SEVERITY_MEDIUM_AMD" _ 0x9147,
 		"DEBUG_SEVERITY_LOW_AMD" _ 0x9148
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val Categories = IntConstant.block(
 		"Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}.",
@@ -41,7 +41,7 @@ fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output", post
 		"DEBUG_CATEGORY_SHADER_COMPILER_AMD" _ 0x914E,
 		"DEBUG_CATEGORY_APPLICATION_AMD" _ 0x914F,
 		"DEBUG_CATEGORY_OTHER_AMD" _ 0x9150
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	GLvoid.func(
 		"DebugMessageEnableAMD",

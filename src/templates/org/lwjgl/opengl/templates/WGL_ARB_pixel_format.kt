@@ -70,7 +70,7 @@ fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_f
 		"DEPTH_BITS_ARB" _ 0x2022,
 		"STENCIL_BITS_ARB" _ 0x2023,
 		"AUX_BUFFERS_ARB" _ 0x2024
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""

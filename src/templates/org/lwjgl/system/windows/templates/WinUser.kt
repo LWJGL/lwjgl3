@@ -606,7 +606,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GWL_EXSTYLE" _ -20,
 		"GWL_USERDATA" _ -21,
 		"GWL_ID" _ -12
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"#ShowWindow() commands.",
@@ -739,7 +739,7 @@ fun WinUser() = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 		"ENUM_CURRENT_SETTINGS".expr<Int>("-1"),
 		"ENUM_REGISTRY_SETTINGS".expr<Int>("-2")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Flags for #ChangeDisplaySettings().",

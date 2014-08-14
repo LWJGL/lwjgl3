@@ -28,7 +28,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		"FREQUENCY" _ 0x1007,
 		"REFRESH" _ 0x1008,
 		"SYNC" _ 0x1009
-	).toJavaDocLinks() + " ALC11#MONO_SOURCES ALC11#STEREO_SOURCES"
+	).javaDocLinks + " ALC11#MONO_SOURCES ALC11#STEREO_SOURCES"
 
 	IntConstant.block(
 		"Error conditions.",
@@ -47,7 +47,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		"DEFAULT_DEVICE_SPECIFIER" _ 0x1004,
 		"DEVICE_SPECIFIER" _ 0x1005,
 		"EXTENSIONS" _ 0x1006
-	).toJavaDocLinks() + " ALC11#CAPTURE_DEFAULT_DEVICE_SPECIFIER ALC11#CAPTURE_DEVICE_SPECIFIER"
+	).javaDocLinks + " ALC11#CAPTURE_DEFAULT_DEVICE_SPECIFIER ALC11#CAPTURE_DEVICE_SPECIFIER"
 
 	val IntegerQueries = IntConstant.block(
 		"Integer queries.",
@@ -56,7 +56,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		"MINOR_VERSION" _ 0x1001,
 		"ATTRIBUTES_SIZE" _ 0x1002,
 		"ALL_ATTRIBUTES" _ 0x1003
-	).toJavaDocLinks() + " ALC11#CAPTURE_SAMPLES"
+	).javaDocLinks + " ALC11#CAPTURE_SAMPLES"
 
 	ALCdevice_p.func(
 		"OpenDevice",

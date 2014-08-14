@@ -198,7 +198,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PLATFORM_NAME" _ 0x0902,
 		"PLATFORM_VENDOR" _ 0x0903,
 		"PLATFORM_EXTENSIONS" _ 0x0904
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val DeviceTypes = IntConstant.block(
 		"cl_device_type - bitfield",
@@ -208,7 +208,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"DEVICE_TYPE_GPU".expr<Int>("1 << 2"),
 		"DEVICE_TYPE_ACCELERATOR".expr<Int>("1 << 3"),
 		"DEVICE_TYPE_ALL" _ 0xFFFFFFFF.i
-	).toJavaDocLinks() + " CL12#DEVICE_TYPE_CUSTOM"
+	).javaDocLinks + " CL12#DEVICE_TYPE_CUSTOM"
 
 	val DeviceInfo = IntConstant.block(
 		"cl_device_info",
@@ -263,7 +263,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"DEVICE_VERSION" _ 0x102F,
 		"DEVICE_EXTENSIONS" _ 0x1030,
 		"DEVICE_PLATFORM" _ 0x1031
-	).toJavaDocLinks() + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
+	).javaDocLinks + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION"""
 
@@ -305,7 +305,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 
 		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE".expr<Int>("1 << 0"),
 		"QUEUE_PROFILING_ENABLE".expr<Int>("1 << 1")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val ContextInfo = IntConstant.block(
 		"cl_context_info",
@@ -313,13 +313,13 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"CONTEXT_REFERENCE_COUNT" _ 0x1080,
 		"CONTEXT_DEVICES" _ 0x1081,
 		"CONTEXT_PROPERTIES" _ 0x1082
-	).toJavaDocLinks() + " CL11#CONTEXT_NUM_DEVICES"
+	).javaDocLinks + " CL11#CONTEXT_NUM_DEVICES"
 
 	val ContextProperties = IntConstant.block(
 		"cl_context_info + cl_context_properties",
 
 		"CONTEXT_PLATFORM" _ 0x1084
-	).toJavaDocLinks() + """ CL12#CONTEXT_INTEROP_USER_SYNC KHRGLSharing#GL_CONTEXT_KHR KHRGLSharing#EGL_DISPLAY_KHR KHRGLSharing#GLX_DISPLAY_KHR
+	).javaDocLinks + """ CL12#CONTEXT_INTEROP_USER_SYNC KHRGLSharing#GL_CONTEXT_KHR KHRGLSharing#EGL_DISPLAY_KHR KHRGLSharing#GLX_DISPLAY_KHR
 	KHRGLSharing#WGL_HDC_KHR KHRGLSharing#CGL_SHAREGROUP_KHR
 	"""
 
@@ -330,7 +330,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"QUEUE_DEVICE" _ 0x1091,
 		"QUEUE_REFERENCE_COUNT" _ 0x1092,
 		"QUEUE_PROPERTIES" _ 0x1093
-	).toJavaDocLinks() + " CL20#QUEUE_SIZE"
+	).javaDocLinks + " CL20#QUEUE_SIZE"
 
 	val MemFlags = IntConstant.block(
 		"cl_mem_flags - bitfield",
@@ -341,7 +341,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"MEM_USE_HOST_PTR".expr<Int>("1 << 3"),
 		"MEM_ALLOC_HOST_PTR".expr<Int>("1 << 4"),
 		"MEM_COPY_HOST_PTR".expr<Int>("1 << 5")
-	).toJavaDocLinks() + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
+	).javaDocLinks + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
 
 	IntConstant.block(
 		"cl_channel_order",
@@ -396,7 +396,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"MEM_MAP_COUNT" _ 0x1104,
 		"MEM_REFERENCE_COUNT" _ 0x1105,
 		"MEM_CONTEXT" _ 0x1106
-	).toJavaDocLinks() + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
+	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
 
 	val ImageInfo = IntConstant.block(
 		"cl_image_info",
@@ -408,7 +408,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"IMAGE_WIDTH" _ 0x1114,
 		"IMAGE_HEIGHT" _ 0x1115,
 		"IMAGE_DEPTH" _ 0x1116
-	).toJavaDocLinks() + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
+	).javaDocLinks + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
 
 	val AddressingModes = IntConstant.block(
 		"cl_addressing_mode",
@@ -417,14 +417,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"ADDRESS_CLAMP_TO_EDGE" _ 0x1131,
 		"ADDRESS_CLAMP" _ 0x1132,
 		"ADDRESS_REPEAT" _ 0x1133
-	).toJavaDocLinks() + " CL11#ADDRESS_MIRRORED_REPEAT"
+	).javaDocLinks + " CL11#ADDRESS_MIRRORED_REPEAT"
 
 	val FilterModes = IntConstant.block(
 		"cl_filter_mode",
 
 		"FILTER_NEAREST" _ 0x1140,
 		"FILTER_LINEAR" _ 0x1141
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val SamplerInfo = IntConstant.block(
 		"cl_sampler_info",
@@ -434,14 +434,14 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"SAMPLER_NORMALIZED_COORDS" _ 0x1152,
 		"SAMPLER_ADDRESSING_MODE" _ 0x1153,
 		"SAMPLER_FILTER_MODE" _ 0x1154
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val MapFlags = IntConstant.block(
 		"cl_map_flags - bitfield",
 
 		"MAP_READ".expr<Int>("1 << 0"),
 		"MAP_WRITE".expr<Int>("1 << 1")
-	).toJavaDocLinks() + " CL12#MAP_WRITE_INVALIDATE_REGION"
+	).javaDocLinks + " CL12#MAP_WRITE_INVALIDATE_REGION"
 
 	val ProgramInfo = IntConstant.block(
 		"cl_program_info",
@@ -453,7 +453,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_SOURCE" _ 0x1164,
 		"PROGRAM_BINARY_SIZES" _ 0x1165,
 		"PROGRAM_BINARIES" _ 0x1166
-	).toJavaDocLinks() + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
+	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
 
 	val ProgramBuildInfo = IntConstant.block(
 		"cl_program_build_info",
@@ -461,7 +461,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BUILD_STATUS" _ 0x1181,
 		"PROGRAM_BUILD_OPTIONS" _ 0x1182,
 		"PROGRAM_BUILD_LOG" _ 0x1183
-	).toJavaDocLinks() + " CL12#PROGRAM_BINARY_TYPE"
+	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE"
 
 	IntConstant.block(
 		"cl_build_status",
@@ -480,7 +480,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"KERNEL_REFERENCE_COUNT" _ 0x1192,
 		"KERNEL_CONTEXT" _ 0x1193,
 		"KERNEL_PROGRAM" _ 0x1194
-	).toJavaDocLinks() + " CL12#KERNEL_ATTRIBUTES"
+	).javaDocLinks + " CL12#KERNEL_ATTRIBUTES"
 
 	val KernelWorkGroupInfo = IntConstant.block(
 		"cl_kernel_work_group_info",
@@ -488,7 +488,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"KERNEL_WORK_GROUP_SIZE" _ 0x11B0,
 		"KERNEL_COMPILE_WORK_GROUP_SIZE" _ 0x11B1,
 		"KERNEL_LOCAL_MEM_SIZE" _ 0x11B2
-	).toJavaDocLinks() + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
+	).javaDocLinks + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
 
 	val EventInfo = IntConstant.block(
 		"cl_event_info",
@@ -497,7 +497,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"EVENT_COMMAND_TYPE" _ 0x11D1,
 		"EVENT_REFERENCE_COUNT" _ 0x11D2,
 		"EVENT_COMMAND_EXECUTION_STATUS" _ 0x11D3
-	).toJavaDocLinks() + " CL11#EVENT_CONTEXT"
+	).javaDocLinks + " CL11#EVENT_CONTEXT"
 
 	IntConstant.block(
 		"cl_command_type",
@@ -537,7 +537,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 		"PROFILING_COMMAND_SUBMIT" _ 0x1281,
 		"PROFILING_COMMAND_START" _ 0x1282,
 		"PROFILING_COMMAND_END" _ 0x1283
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	// ------------------[ OPENCL Platform Layer ]------------------
 

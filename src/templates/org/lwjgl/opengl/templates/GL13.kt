@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
-fun GL13() = "GL13".nativeClassGL("GL13") {
+val GL13 = "GL13".nativeClassGL("GL13") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -143,11 +143,11 @@ fun GL13() = "GL13".nativeClassGL("GL13") {
 		"Returns a compressed texture image.",
 
 		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
-		GLint.IN("lod", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
+		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		mods(
-			Check(expression = "GL11.glGetTexLevelParameteri(target, lod, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true),
+			Check(expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true),
 			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("img", "an array in which to return the compressed texture image")
+		) _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 	// ARB_texture_cube_map

@@ -51,7 +51,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"COLOR_TABLE" _ 0x80D0,
 		"POST_CONVOLUTION_COLOR_TABLE" _ 0x80D1,
 		"POST_COLOR_MATRIX_COLOR_TABLE" _ 0x80D2
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val PROXY_COLOR_TABLE_TARGETS = IntConstant.block(
 		"Accepted by the {@code target} parameter of ColorTable, GetColorTableParameteriv, and GetColorTableParameterfv.",
@@ -59,7 +59,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"PROXY_COLOR_TABLE" _ 0x80D3,
 		"PROXY_POST_CONVOLUTION_COLOR_TABLE" _ 0x80D4,
 		"PROXY_POST_COLOR_MATRIX_COLOR_TABLE" _ 0x80D5
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val COLOR_TABLE_PARAMS = IntConstant.block(
 		"""
@@ -69,7 +69,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		"COLOR_TABLE_SCALE" _ 0x80D6,
 		"COLOR_TABLE_BIAS" _ 0x80D7
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val COLOR_TABLE_PROPERTIES = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetColorTableParameteriv and GetColorTableParameterfv.",
@@ -82,7 +82,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"COLOR_TABLE_ALPHA_SIZE" _ 0x80DD,
 		"COLOR_TABLE_LUMINANCE_SIZE" _ 0x80DE,
 		"COLOR_TABLE_INTENSITY_SIZE" _ 0x80DF
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"ErrorCode",
@@ -154,7 +154,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
-		mods(Check(4), returnValue) _ GLint_p.OUT("params", "an array in which to place the returned value")
+		mods(Check(4), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -163,7 +163,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("params", "an array in which to place the returned value")
+		mods(Check(4), returnValue) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_color_subtable
@@ -240,7 +240,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		"CONVOLUTION_FILTER_SCALE" _ 0x8014,
 		"CONVOLUTION_FILTER_BIAS" _ 0x8015
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -259,7 +259,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"CONVOLUTION_HEIGHT" _ 0x8019,
 		"MAX_CONVOLUTION_WIDTH" _ 0x801A,
 		"MAX_CONVOLUTION_HEIGHT" _ 0x801B
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -374,8 +374,8 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the filter target", "#SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("row", "an array in which to return the filter row"),
-		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("column", "an array in which to return the filter column"),
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("row", "a buffer in which to return the filter row"),
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("column", "a buffer in which to return the filter column"),
 		nullable _ GLvoid_p.IN("span", "unused")
 	)
 
@@ -421,7 +421,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
-		mods(returnValue, Check(4)) _ GLint_p.OUT("params", "an array in which to return the parameter value")
+		mods(returnValue, Check(4)) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -430,7 +430,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(4)) _ GLfloat_p.OUT("params", "an array in which to return the parameter value")
+		mods(returnValue, Check(4)) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	// HP_convolution_border_modes
@@ -504,7 +504,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"HISTOGRAM_ALPHA_SIZE" _ 0x802B,
 		"HISTOGRAM_LUMINANCE_SIZE" _ 0x802C,
 		"HISTOGRAM_SINK" _ 0x802D
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -564,7 +564,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to return the parameter values")
+		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to return the parameter values")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -573,7 +573,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "an array in which to place the returned value")
+		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	deprecatedGL _ GLvoid.func(
@@ -609,7 +609,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "an array in which to place the minmax values")
+		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "a buffer in which to place the minmax values")
 	)
 
 	val GetMinmaxParameteriv = (deprecatedGL _ GLvoid.func(
@@ -618,7 +618,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to place the returned value")
+		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)).javaDocLink
 
 	deprecatedGL _ GLvoid.func(
@@ -627,7 +627,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "an array in which to place the returned value")
+		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_blend_color

@@ -23,7 +23,7 @@ fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_BINDING_MASK" _ 0x3,
 		"RTLD_NOLOAD" _ 0x00004,
 		"RTLD_DEEPBIND" _ 0x00008
-	).toJavaDocLinks() + " #RTLD_GLOBAL #RTLD_LOCAL #RTLD_NODELETE"
+	).javaDocLinks + " #RTLD_GLOBAL #RTLD_LOCAL #RTLD_NODELETE"
 
 	IntConstant.block(
 		"""

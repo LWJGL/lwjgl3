@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-fun GL31() = "GL31".nativeClassGL("GL31") {
+val GL31 = "GL31".nativeClassGL("GL31") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -84,8 +84,8 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 
 		GLenum.IN("readtarget", "the target from whose data store data should be read"),
 		GLenum.IN("writetarget", "the target to whose data store data should be written"),
-		GLintptr.IN("readoffset", "the offset, in basic machine units, within the data store of {@code readtarget} from which data should be read"),
-		GLintptr.IN("writeoffset", "the offset, in basic machine units, within the data store of {@code writetarget} to which data should be written"),
+		GLintptr.IN("readOffset", "the offset, in basic machine units, within the data store of {@code readtarget} from which data should be read"),
+		GLintptr.IN("writeOffset", "the offset, in basic machine units, within the data store of {@code writetarget} to which data should be written"),
 		GLsizeiptr.IN("size", "the size, in basic machine units, of the data to be copied from {@code readtarget} to {@code writetarget}")
 	)
 
@@ -252,7 +252,7 @@ fun GL31() = "GL31".nativeClassGL("GL31") {
 		"UNIFORM_BLOCK_REFERENCED_BY_VERTEX_SHADER" _ 0x8A44,
 		"UNIFORM_BLOCK_REFERENCED_BY_GEOMETRY_SHADER" _ 0x8A45,
 		"UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER" _ 0x8A46
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Returned by GetActiveUniformsiv and GetUniformBlockIndex.",

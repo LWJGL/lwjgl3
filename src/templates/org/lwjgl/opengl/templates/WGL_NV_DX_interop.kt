@@ -27,7 +27,7 @@ fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", N
 		"ACCESS_READ_ONLY_NV" _ 0x0000,
 		"ACCESS_READ_WRITE_NV" _ 0x0001,
 		"ACCESS_WRITE_DISCARD_NV" _ 0x0002
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val void_p = PointerType("void")
 

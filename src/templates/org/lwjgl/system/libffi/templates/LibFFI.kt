@@ -73,7 +73,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"UNIX64" _ 2,
 
 		"DEFAULT_ABI".expr<Int>("FFI_DEFAULT_ABI()")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Status codes.",

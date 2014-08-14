@@ -120,7 +120,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 		"FIRST_VERTEX_CONVENTION" _ 0x8E4D,
 		"LAST_VERTEX_CONVENTION" _ 0x8E4E
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
@@ -383,7 +383,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"SYNC_CONDITION" _ 0x9113,
 		"SYNC_STATUS" _ 0x9114,
 		"SYNC_FLAGS" _ 0x9115
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE.",

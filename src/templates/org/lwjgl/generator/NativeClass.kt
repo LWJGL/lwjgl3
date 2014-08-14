@@ -5,10 +5,9 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
-import java.util.ArrayList
-import java.util.Collections
-import java.util.Comparator
-import java.util.LinkedHashMap
+import java.util.*
+import java.util.regex.Pattern
+import kotlin.properties.Delegates
 
 val INSTANCE = "__instance"
 val EXT_FLAG = ""
@@ -184,7 +183,7 @@ class NativeClass(
 			println(" ${_functions.values().first().addressName};")
 		} else {
 			println()
-			_functions.values().forEachWithMore { (func, more) ->
+			_functions.values().forEachWithMore {(func, more) ->
 				if ( more )
 					println(",")
 				print("\t\t${func.addressName}")
@@ -248,7 +247,7 @@ class NativeClass(
 			_functions.values().filter(filter)
 
 		var lineSize = 12
-		functions.forEachWithMore { (func, more) ->
+		functions.forEachWithMore {(func, more) ->
 			if ( more ) {
 				out.print(", ")
 				lineSize += 2
@@ -303,13 +302,42 @@ class NativeClass(
 		val func = Reuse(this.className) _ NativeClassFunction(
 			returns = reference.returns,
 			simpleName = functionName,
-			documentation = reference.documentation,
+			documentation = convertDocumentation(reference.documentation),
 			nativeClass = this@NativeClass,
 			parameters = *reference.parameters
 		).copyModifiers(reference)
 
 		this@NativeClass._functions.put(functionName, func)
 		return func
+	}
+
+	private val reusePattern: Pattern by Delegates.lazy {
+		Pattern.compile("""${this.className}#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
+	}
+
+	private fun convertDocumentation(documentation: String): String {
+		val matcher = reusePattern.matcher(documentation)
+		if ( !matcher.find() )
+			return documentation
+
+		val buffer = StringBuilder(documentation.size)
+		var lastEnd = 0
+		do {
+			buffer.append(documentation, lastEnd, matcher.start())
+
+			val element = matcher.group(1)
+			if ( this.constantBlocks.any { block -> block.constants.any { it -> it.name == element } }) {
+				buffer.append('#')
+				buffer.append(matcher.group(1))
+			} else {
+				buffer.append(matcher.group(0))
+			}
+
+			lastEnd = matcher.end()
+		} while ( matcher.find() )
+		buffer.append(documentation, lastEnd, documentation.length())
+
+		return buffer.toString()
 	}
 
 }

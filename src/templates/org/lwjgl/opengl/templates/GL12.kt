@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-fun GL12() = "GL12".nativeClassGL("GL12") {
+val GL12 = "GL12".nativeClassGL("GL12") {
 	nativeImport (
 		"OpenGL.h"
 	)

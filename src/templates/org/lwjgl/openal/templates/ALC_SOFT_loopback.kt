@@ -24,7 +24,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"INT_SOFT" _ 0x1404,
 		"UNSIGNED_INT_SOFT" _ 0x1405,
 		"FLOAT_SOFT" _ 0x1406
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val RenderFormatSupportedChannelParameters = IntConstant.block(
 		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
@@ -35,7 +35,7 @@ fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"5POINT1_SOFT" _ 0x1504,
 		"6POINT1_SOFT" _ 0x1505,
 		"7POINT1_SOFT" _ 0x1506
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted as part of the {@code attrList} parameter of alcCreateContext.",

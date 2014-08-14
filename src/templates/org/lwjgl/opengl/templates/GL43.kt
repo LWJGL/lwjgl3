@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
-fun GL43() = "GL43".nativeClassGL("GL43") {
+val GL43 = "GL43".nativeClassGL("GL43") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -274,7 +274,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SOURCE_THIRD_PARTY" _ 0x8249,
 		"DEBUG_SOURCE_APPLICATION" _ 0x824A,
 		"DEBUG_SOURCE_OTHER" _ 0x824B
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val DebugTypes = IntConstant.block(
 		"""
@@ -289,7 +289,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_TYPE_PERFORMANCE" _ 0x8250,
 		"DEBUG_TYPE_OTHER" _ 0x8251,
 		"DEBUG_TYPE_MARKER" _ 0x8268
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -310,7 +310,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SEVERITY_MEDIUM" _ 0x9147,
 		"DEBUG_SEVERITY_LOW" _ 0x9148,
 		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val DebugIdentifiers = IntConstant.block(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
@@ -322,7 +322,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"PROGRAM_PIPELINE" _ 0x82E4,
 		"SAMPLER" _ 0x82E6,
 		"DISPLAY_LIST" _ 0x82E7
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	GLvoid.func(
 		"DebugMessageControl",
@@ -455,7 +455,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"FRAMEBUFFER_DEFAULT_LAYERS" _ 0x9312,
 		"FRAMEBUFFER_DEFAULT_SAMPLES" _ 0x9313,
 		"FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS" _ 0x9314
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
@@ -780,7 +780,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"FRAGMENT_SUBROUTINE_UNIFORM" _ 0x92F2,
 		"COMPUTE_SUBROUTINE_UNIFORM" _ 0x92F3,
 		"TRANSFORM_FEEDBACK_VARYING" _ 0x92F4
-	).toJavaDocLinks() + " GL42#ATOMIC_COUNTER_BUFFER"
+	).javaDocLinks + " GL42#ATOMIC_COUNTER_BUFFER"
 
 	val ProgramInterfaceParameters = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
@@ -789,7 +789,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"MAX_NAME_LENGTH" _ 0x92F6,
 		"MAX_NUM_ACTIVE_VARIABLES" _ 0x92F7,
 		"MAX_NUM_COMPATIBLE_SUBROUTINES" _ 0x92F8
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted in the {@code props} array of GetProgramResourceiv.",
@@ -1140,7 +1140,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"VertexBindingDivisor",
 		"Modifies the rate at which generic vertex attributes advance during instanced rendering.",
 
-		GLuint.IN("index", "the index of the generic vertex attribute"),
+		GLuint.IN("bindingindex", "the index of the generic vertex attribute"),
 		GLuint.IN("divisor", "the number of instances that will pass between updates of the generic attribute at slot {@code index}")
 	)
 

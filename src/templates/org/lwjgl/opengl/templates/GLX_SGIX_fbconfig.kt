@@ -73,7 +73,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 		"RGBA_TYPE_SGIX" _ 0x8014,
 		"COLOR_INDEX_TYPE_SGIX" _ 0x8015
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	int.func(
 		"GetFBConfigAttribSGIX",

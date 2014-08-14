@@ -97,7 +97,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_EQUALLY" _ 0x1086
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -110,7 +110,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_BY_COUNTS" _ 0x1087
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"""
@@ -132,7 +132,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		""",
 
 		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN" _ 0x1088
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"cl_device_affinity_domain",
@@ -158,7 +158,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 		"MIGRATE_MEM_OBJECT_HOST".expr<Int>("1 << 0"),
 		"MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED".expr<Int>("1 << 1")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"cl_mem_object_type",
@@ -220,7 +220,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"KERNEL_ARG_TYPE_NAME" _ 0x1198,
 		"KERNEL_ARG_TYPE_QUALIFIER" _ 0x1999,
 		"KERNEL_ARG_NAME" _ 0x119A
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"cl_kernel_arg_address_qualifier",

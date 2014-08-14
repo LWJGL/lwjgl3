@@ -41,7 +41,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		"GPU_NUM_SIMD_AMD" _ 0x21A6,
 		"GPU_NUM_RB_AMD" _ 0x21A7,
 		"GPU_NUM_SPI_AMD" _ 0x21A8
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val GetGPUIDsAMD = UINT.func(
 		"GetGPUIDsAMD",

@@ -38,7 +38,7 @@ fun AMD_occlusion_query_event() = "AMDOcclusionQueryEvent".nativeClassGL("AMD_oc
 		"QUERY_STENCIL_FAIL_EVENT_BIT_AMD" _ 0x00000004,
 		"QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD" _ 0x00000008,
 		"QUERY_ALL_EVENT_BITS_AMD".expr<Int>("0xFFFFFFFF")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	GLvoid.func(
 		"QueryObjectParameteruiAMD",

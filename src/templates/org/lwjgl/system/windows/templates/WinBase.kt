@@ -39,7 +39,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GMEM_INVALID_HANDLE" _ 0x8000,
 		"GHND".expr<Int>("GMEM_MOVEABLE | GMEM_ZEROINIT"),
 		"GPTR".expr<Int>("GMEM_FIXED | GMEM_ZEROINIT")
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	BOOL.func(
 		"GetVersionEx",

@@ -39,7 +39,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 
 		"DOPPLER_FACTOR" _ 0xC000,
 		"DISTANCE_MODEL" _ 0xD000
-	).toJavaDocLinks() + " AL11#SPEED_OF_SOUND"
+	).javaDocLinks + " AL11#SPEED_OF_SOUND"
 
 	val StringQueries = IntConstant.block(
 		"String queries.",
@@ -48,14 +48,14 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"VERSION" _ 0xB002,
 		"RENDERER" _ 0xB003,
 		"EXTENSIONS" _ 0xB004
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val DistanceModels = IntConstant.block(
 		"Distance attenuation models.",
 
 		"INVERSE_DISTANCE" _ 0xD001,
 		"INVERSE_DISTANCE_CLAMPED" _ 0xD002
-	).toJavaDocLinks() + " AL11#LINEAR_DISTANCE AL11#LINEAR_DISTANCE_CLAMPED AL11#EXPONENT_DISTANCE AL11#EXPONENT_DISTANCE_CLAMPED #NONE"
+	).javaDocLinks + " AL11#LINEAR_DISTANCE AL11#LINEAR_DISTANCE_CLAMPED AL11#EXPONENT_DISTANCE AL11#EXPONENT_DISTANCE_CLAMPED #NONE"
 
 	IntConstant.block(
 		"Source types.",
@@ -70,7 +70,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"POSITION" _ 0x1004,
 		"VELOCITY" _ 0x1006,
 		"GAIN" _ 0x100A
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	var SourceAttributes = IntConstant.block(
 		"Source attributes.",
@@ -84,7 +84,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"SOURCE_STATE" _ 0x1010,
 		"CONE_OUTER_GAIN" _ 0x1022,
 		"SOURCE_TYPE" _ 0x1027
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Source state.",
@@ -99,7 +99,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"Listener attributes.",
 
 		"ORIENTATION" _ 0x100F
-	).toJavaDocLinks() + " $ListenerSourceAttributes"
+	).javaDocLinks + " $ListenerSourceAttributes"
 
 	IntConstant.block(
 		"Queue state.",
@@ -121,7 +121,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"REFERENCE_DISTANCE" _ 0x1020,
 		"ROLLOFF_FACTOR" _ 0x1021,
 		"MAX_DISTANCE" _ 0x1023
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	SourceAttributes += " $ListenerSourceAttributes $DistanceModelAttributes"
 
@@ -132,7 +132,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"BITS" _ 0x2002,
 		"CHANNELS" _ 0x2003,
 		"SIZE" _ 0x2004
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val BufferFormats = IntConstant.block(
 		"Buffer formats.",
@@ -141,7 +141,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"FORMAT_MONO16" _ 0x1101,
 		"FORMAT_STEREO8" _ 0x1102,
 		"FORMAT_STEREO16" _ 0x1103
-	).toJavaDocLinks() // TODO: Add vorbis
+	).javaDocLinks // TODO: Add vorbis
 
 	IntConstant.block(
 		"Buffer state.",

@@ -65,7 +65,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"PFAMPSafe" _ 78,
 		"PFAMultiScreen" _ 81,
 		"PFAFullScreen" _ 54
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val RendererProperties = IntConstant.block(
 		"Property names for #DescribeRenderer().",
@@ -100,7 +100,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"RPMPSafe" _ 78,
 		"RPMultiScreen" _ 81,
 		"RPFullScreen" _ 54
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val ContextOptions = IntConstant.block(
 		"Enable names for #Enable(), #Disable(), and #IsEnabled().",
@@ -112,7 +112,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"CESurfaceBackingSize" _ 305,
 		"CEDisplayListOptimization" _ 307,
 		"CEMPEngine" _ 313
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val ContextParameters = IntConstant.block(
 		"Parameter names for #SetParameter() and #GetParameter().",
@@ -132,7 +132,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"CPGPUFragmentProcessing" _ 311,
 		"CPHasDrawable" _ 314,
 		"CPMPSwapsInFlight" _ 315
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val GlobalOptions = IntConstant.block(
 		"Option names for #SetGlobalOption() and #GetGlobalOption().",
@@ -143,7 +143,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"GOResetLibrary" _ 504,
 		"GOUseErrorHandler" _ 505,
 		"GOUseBuildCache" _ 506
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"OpenGL Implementation Profiles.",
@@ -174,7 +174,7 @@ fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CG
 		"BadCodeModule" _ 10015,
 		"BadAlloc" _ 10016,
 		"BadConnection" _ 10017
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Buffer modes.",

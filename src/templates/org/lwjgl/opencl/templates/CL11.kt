@@ -104,7 +104,7 @@ fun CL11() = "CL11".nativeClassCL("CL11") {
 		"cl_buffer_create_type.",
 
 		"BUFFER_CREATE_TYPE_REGION" _ 0x1220
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	cl_mem.func(
 		"CreateSubBuffer",

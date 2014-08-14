@@ -38,7 +38,7 @@ fun AL_SOFT_buffer_samples() = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_sa
 		"7POINT1_8_SOFT" _ 0x1210,
 		"7POINT1_16_SOFT" _ 0x1211,
 		"7POINT1_32F_SOFT" _ 0x1212
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val ChannelsParameter = IntConstant.block(
 		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
@@ -50,7 +50,7 @@ fun AL_SOFT_buffer_samples() = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_sa
 		"5POINT1_SOFT" _ 0x1504,
 		"6POINT1_SOFT" _ 0x1505,
 		"7POINT1_SOFT" _ 0x1506
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val TypeParameters = IntConstant.block(
 		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
@@ -65,7 +65,7 @@ fun AL_SOFT_buffer_samples() = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_sa
 		"DOUBLE_SOFT" _ 0x1407,
 		"BYTE3_SOFT" _ 0x1408,
 		"UNSIGNED_BYTE3_SOFT" _ 0x1409
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code channels} parameter of alGetBufferi and alGetBufferiv.",

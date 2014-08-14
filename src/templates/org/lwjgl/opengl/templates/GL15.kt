@@ -27,7 +27,7 @@ val QUERY_TARGETS =
 	GL33#ANY_SAMPLES_PASSED GL43#ANY_SAMPLES_PASSED_CONSERVATIVE
 	"""
 
-fun GL15() = "GL15".nativeClassGL("GL15") {
+val GL15 = "GL15".nativeClassGL("GL15") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -99,7 +99,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"DYNAMIC_DRAW" _ 0x88E8,
 		"DYNAMIC_READ" _ 0x88E9,
 		"DYNAMIC_COPY" _ 0x88EA
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val BUFFER_OBJECT_ACCESS_POLICIES = IntConstant.block(
 		"Accepted by the {@code access} parameter of MapBuffer.",
@@ -107,7 +107,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"READ_ONLY" _ 0x88B8,
 		"WRITE_ONLY" _ 0x88B9,
 		"READ_WRITE" _ 0x88BA
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
@@ -145,7 +145,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"Generates buffer object names.",
 
 		AutoSize("buffers") _ GLsizei.IN("n", "the number of buffer object names to be generated"),
-		returnValue _ GLuint_p.OUT("buffers", "an array in which the generated buffer object names are stored")
+		returnValue _ GLuint_p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
 	)
 
 	GLboolean.func(
@@ -268,7 +268,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
+		GLenum.IN("pname", "the pointer to be returned", "GL15#BUFFER_MAP_POINTER"),
 		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 
@@ -285,21 +285,21 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 
 		"QUERY_COUNTER_BITS" _ 0x8864,
 		"CURRENT_QUERY" _ 0x8865
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	val QUERY_OBJECT_PARAMETERS = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv and GetQueryObjectuiv.",
 
 		"QUERY_RESULT" _ 0x8866,
 		"QUERY_RESULT_AVAILABLE" _ 0x8867
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	GLvoid.func(
 		"GenQueries",
 		"Generates query object names.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of query object names to be generated"),
-		returnValue _ GLuint_p.OUT("ids", "an array in which the generated query object names are stored")
+		returnValue _ GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
 	)
 
 	GLvoid.func(

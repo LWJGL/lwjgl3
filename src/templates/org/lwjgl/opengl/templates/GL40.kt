@@ -416,7 +416,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS" _ 0x8E47,
 		"ACTIVE_SUBROUTINE_MAX_LENGTH" _ 0x8E48,
 		"ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH" _ 0x8E49
-	).toJavaDocLinks()
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
