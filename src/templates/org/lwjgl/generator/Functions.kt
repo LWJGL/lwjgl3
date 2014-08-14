@@ -55,7 +55,7 @@ abstract class Function(
 	val simpleName: String,
 	val name: String = simpleName,
 	val documentation: String,
-	protected vararg val parameters: Parameter
+	vararg val parameters: Parameter
 ): TemplateElement() {
 
 	protected val paramMap: Map<String, Parameter> = {
@@ -67,6 +67,12 @@ abstract class Function(
 
 	protected val hasNativeParams: Boolean = getNativeParams().any()
 
+	fun get(paramName: String): Parameter {
+		val param = paramMap[paramName]
+		if ( param == null )
+			throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")
+		return param
+	}
 	fun getParams(predicate: (Parameter) -> Boolean) = parameters.stream().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
@@ -175,11 +181,8 @@ class NativeClassFunction(
 
 		builder append '('
 		if ( !keepPostfix ) {
-			var first = true
-			getParams { !it.isAutoSizeResultOut } forEach {
-				if ( first )
-					first = false
-				else
+			val more = getParams { !it.isAutoSizeResultOut } forEachWithMore { (it, more) ->
+				if ( more )
 					builder append ", "
 
 				builder append if ( it.isBufferPointer )
@@ -188,7 +191,7 @@ class NativeClassFunction(
 					it.javaMethodType
 			}
 			if ( returnsStructValue ) {
-				if ( !first ) builder append ", "
+				if ( more ) builder append ", "
 				builder append "ByteBuffer"
 			}
 		}

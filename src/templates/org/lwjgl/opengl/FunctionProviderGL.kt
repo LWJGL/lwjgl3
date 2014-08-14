@@ -19,7 +19,7 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val List<NativeClassFunction>.hasDeprecated: Boolean
+private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
 private val FunctionProviderGL = Generator.register(object : FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
@@ -71,12 +71,16 @@ private val FunctionProviderGL = Generator.register(object : FunctionProvider(OP
 
 		if ( hasDeprecated ) {
 			print("(fc || checkFunctions(")
-			printPointers(functions.filter { it has deprecatedGL }, printPointer)
+			nativeClass.printPointers(this, printPointer) { it has deprecatedGL }
 			print(")) && ")
 		}
 
 		print("checkFunctions(")
-		printPointers(if ( hasDeprecated ) functions.filterNot { it has deprecatedGL } else functions, printPointer)
+		if ( hasDeprecated )
+			nativeClass.printPointers(this, printPointer) { !(it has deprecatedGL) }
+		else
+			nativeClass.printPointers(this, printPointer)
+
 		println(");")
 
 		print("\n\t\treturn GL.checkExtension(\"")

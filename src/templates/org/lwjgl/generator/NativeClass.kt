@@ -8,6 +8,7 @@ import java.io.PrintWriter
 import java.util.ArrayList
 import java.util.Collections
 import java.util.Comparator
+import java.util.LinkedHashMap
 
 val INSTANCE = "__instance"
 val EXT_FLAG = ""
@@ -80,32 +81,6 @@ abstract class FunctionProvider(
 	}
 	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
 
-	protected fun PrintWriter.printPointers(
-		functions: List<NativeClassFunction>,
-		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.simpleName}" }
-	) {
-		print("\n\t\t\t")
-
-		var lineSize = 12
-		for ( (i, func) in functions.withIndices() ) {
-			val pointer = printPointer(func)
-
-			lineSize += pointer.size
-			if ( 160 <= lineSize ) {
-				print("\n\t\t\t")
-				lineSize = 12 + pointer.size
-			}
-
-			print(pointer)
-			if ( i < functions.lastIndex ) {
-				print(", ")
-				lineSize += 2
-			}
-		}
-
-		print("\n\t\t")
-	}
-
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
 
 }
@@ -127,15 +102,15 @@ class NativeClass(
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
 
-	private val _functions = ArrayList<NativeClassFunction>()
-	val functions: List<NativeClassFunction>
-		get() = _functions
+	private val _functions = LinkedHashMap<String, NativeClassFunction>()
+	val functions: Iterable<NativeClassFunction>
+		get() = _functions.values()
 
 	val hasBody: Boolean
 		get() = !constantBlocks.isEmpty() || hasNativeFunctions
 
 	val hasNativeFunctions: Boolean
-		get() = !functions.isEmpty()
+		get() = !_functions.isEmpty()
 
 	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
 
@@ -143,7 +118,7 @@ class NativeClass(
 		print(HEADER)
 		println("package $packageName;\n")
 
-		if ( !functions.isEmpty() ) {
+		if ( !_functions.isEmpty() ) {
 			println("import org.lwjgl.*;")
 			println("import org.lwjgl.system.*;\n")
 
@@ -183,7 +158,7 @@ class NativeClass(
 			it.generate(this)
 		}
 
-		if ( functionProvider != null && !functions.isEmpty() ) {
+		if ( functionProvider != null && !_functions.isEmpty() ) {
 			generateFunctionAddresses(functionProvider)
 			functionProvider.generateFunctionGetters(this, this@NativeClass)
 		} else
@@ -205,14 +180,16 @@ class NativeClass(
 		println("\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
-		if ( functions.size == 1 ) {
-			println(" ${functions[0].addressName};")
+		if ( _functions.size == 1 ) {
+			println(" ${_functions.values().first().addressName};")
 		} else {
 			println()
-			for ( i in functions.indices ) {
-				print("\t\t${functions[i].addressName}")
-				println(if ( i == functions.lastIndex ) ";" else ",")
+			_functions.values().forEachWithMore { (func, more) ->
+				if ( more )
+					println(",")
+				print("\t\t${func.addressName}")
 			}
+			println(";")
 		}
 
 		for ( func in functions ) {
@@ -257,6 +234,40 @@ class NativeClass(
 		println("\nEXTERN_C_EXIT")
 	}
 
+	fun printPointers(
+		out: PrintWriter,
+		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.simpleName}" },
+		filter: ((NativeClassFunction) -> Boolean)? = null
+	) {
+		out.print("\n\t\t\t")
+
+
+		val functions = if ( filter == null )
+			_functions.values()
+		else
+			_functions.values().filter(filter)
+
+		var lineSize = 12
+		functions.forEachWithMore { (func, more) ->
+			if ( more ) {
+				out.print(", ")
+				lineSize += 2
+			}
+
+			val pointer = printPointer(func)
+
+			lineSize += pointer.size
+			if ( 160 <= lineSize ) {
+				out.print("\n\t\t\t")
+				lineSize = 12 + pointer.size
+			}
+
+			out.print(pointer)
+		}
+
+		out.print("\n\t\t")
+	}
+
 	// DSL extensions
 
 	fun <T> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
@@ -275,7 +286,29 @@ class NativeClass(
 			parameters = *parameters
 		)
 
-		_functions add func
+		_functions.put(name, func)
+		return func
+	}
+
+	fun NativeClass.get(functionName: String): NativeClassFunction {
+		val func = _functions[functionName]
+		if ( func == null )
+			throw IllegalArgumentException("Referenced function does not exist: ${templateName}.$functionName")
+		return func
+	}
+
+	fun NativeClass.reuse(functionName: String): NativeClassFunction {
+		val reference = this[functionName]
+
+		val func = Reuse(this.className) _ NativeClassFunction(
+			returns = reference.returns,
+			simpleName = functionName,
+			documentation = reference.documentation,
+			nativeClass = this@NativeClass,
+			parameters = *reference.parameters
+		).copyModifiers(reference)
+
+		this@NativeClass._functions.put(functionName, func)
 		return func
 	}
 

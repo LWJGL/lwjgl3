@@ -19,7 +19,8 @@ abstract class TemplateElement {
 			it.validate(this)
 		}
 
-		this.modifiers = HashMap(modifiers.size)
+		if ( this.modifiers identityEquals EMPTY_MODIFIERS )
+			this.modifiers = HashMap(modifiers.size)
 
 		modifiers.forEach {
 			val old = this.modifiers.put(it.javaClass, it)
@@ -42,6 +43,13 @@ abstract class TemplateElement {
 	open val isSpecial: Boolean
 		get() = modifiers.values().any { it.isSpecial }
 
+	protected fun <T: TemplateElement> T.copyModifiers(other: T): T {
+		if ( other.modifiers != EMPTY_MODIFIERS ) {
+			println("copying: $this - ${other.modifiers}")
+			this.modifiers = HashMap(other.modifiers)
+		}
+		return this
+	}
 }
 
 /** A template modifier. Replaces the annotations in the pre-3.0 generator. */

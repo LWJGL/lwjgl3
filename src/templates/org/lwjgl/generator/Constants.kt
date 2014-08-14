@@ -75,11 +75,11 @@ class ConstantBlock<T>(
 			Math.max(left, right)
 		}
 
-		for ( i in 0..constants.lastIndex - 1 ) {
-			printConstant(constants[i], alignment)
-			println(',')
+		constants.forEachWithMore { (it, more) ->
+			if ( more )
+				println(',')
+			printConstant(it, alignment)
 		}
-		printConstant(constants[constants.lastIndex], alignment)
 		println(";\n")
 	}
 

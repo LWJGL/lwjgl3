@@ -41,7 +41,6 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 		println("\t\treturn ALC.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
-		val functions = nativeClass.functions
 		val capName = nativeClass.capName("ALC")
 		val isExtension = !nativeClass.templateName.startsWith("ALC")
 
@@ -53,12 +52,12 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 		println(");")
 
 		print("\n\t\tboolean supported = checkFunctions(")
-		printPointers(functions) {
+		nativeClass.printPointers(this, printPointer = {
 			if ( it has DependsOn )
 				"ext.contains(\"${it[DependsOn].reference}\") ? funcs.${it.simpleName} : -1L"
 			else
 				"funcs.${it.simpleName}"
-		}
+		})
 		println(");")
 
 		print("\n\t\treturn ALC.checkExtension(\"")

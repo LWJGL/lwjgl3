@@ -18,7 +18,6 @@ private val FunctionProviderAL = Generator.register(object : FunctionProvider(OP
 		println("\t\treturn AL.getCapabilities().__${nativeClass.className};")
 		println("\t}")
 
-		val functions = nativeClass.functions
 		val capName = nativeClass.capName("AL")
 
 		println("\n\tstatic ${nativeClass.className} create(java.util.Set<String> ext, FunctionProvider provider) {")
@@ -27,12 +26,12 @@ private val FunctionProviderAL = Generator.register(object : FunctionProvider(OP
 		println("\n\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
 
 		print("\n\t\tboolean supported = checkFunctions(")
-		printPointers(functions) {
+		nativeClass.printPointers(this, printPointer = {
 			if ( it has DependsOn )
 				"ext.contains(\"${it[DependsOn].reference}\") ? funcs.${it.simpleName} : -1L"
 			else
 				"funcs.${it.simpleName}"
-		}
+		})
 		println(");")
 
 		print("\n\t\treturn AL.checkExtension(\"")

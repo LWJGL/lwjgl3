@@ -29,14 +29,12 @@ private val FunctionProviderCL = Generator.register(object : FunctionProvider(OP
 		println("\t\treturn CL.getICD().__${nativeClass.className};")
 		println("\t}")
 
-		val functions = nativeClass.functions
-
 		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
 
 		println("\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
 
 		print("\n\t\tboolean supported = checkFunctions(")
-		printPointers(functions)
+		nativeClass.printPointers(this)
 		println(");")
 
 		println("\n\t\treturn supported ? funcs : null;")

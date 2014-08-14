@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-fun GL32() = "GL32".nativeClassGL("GL32") {
+val GL32 = "GL32".nativeClassGL("GL32") {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -469,7 +469,7 @@ fun GL32() = "GL32".nativeClassGL("GL32") {
 		""",
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
-		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT"),
+		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT", LinkMode.BITFIELD),
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 

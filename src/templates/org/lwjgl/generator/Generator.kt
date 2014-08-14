@@ -9,7 +9,6 @@ import java.lang.Math.*
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
-import java.nio.channels.FileChannel
 import java.util.ArrayList
 import java.util.HashMap
 import java.nio.charset.StandardCharsets
@@ -102,10 +101,10 @@ class Generator(
 	private fun methodFilter(method: Method, javaClass: Class<*>) =
 		// static
 		method.getModifiers() and Modifier.STATIC != 0 &&
-		// returns NativeClass
-		method.getReturnType() == javaClass &&
-		// has no arguments
-		method.getParameterTypes().size == 0
+			// returns NativeClass
+			method.getReturnType() == javaClass &&
+			// has no arguments
+			method.getParameterTypes().size == 0
 
 	private fun runConfiguration(cp: String) {
 		val dot = cp.lastIndexOf('.')
@@ -133,10 +132,9 @@ class Generator(
 
 		return methods
 			.stream()
-			.filterTo(ArrayList<Method>(methods.size))
-		{
-			methodFilter(it, javaClass<NativeClass>())
-		}
+			.filterTo(ArrayList<Method>(methods.size)) {
+				methodFilter(it, javaClass<NativeClass>())
+			}
 	}
 
 	fun generate(packageName: String) {
@@ -167,13 +165,12 @@ class Generator(
 	private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 		val packagePath = nativeClass.packageName.replace('.', '/')
 
-		var input = File("$srcPath/$packagePath/templates/${nativeClass.templateName}.kt")
-		if ( !input.exists() ) {
-			if ( !nativeClass.prefixTemplate.isEmpty() )
-				input = File("$srcPath/$packagePath/templates/${nativeClass.prefixTemplate}_${nativeClass.templateName}.kt")
-
-			if ( !input.exists() )
-				throw IllegalStateException("The source file for template ${nativeClass.templateName} does not exist. The source file that defines the template must be: ${input.getPath()}")
+		val input = File("$srcPath/$packagePath/templates/${nativeClass.templateName}.kt").let {
+			if ( it.exists() ) it else
+				File("$srcPath/$packagePath/templates/${nativeClass.prefixTemplate}_${nativeClass.templateName}.kt").let {
+					if ( it.exists() ) it else
+						throw IllegalStateException("The source file for template ${nativeClass.templateName} does not exist. The source file that defines the template must be: ${it.getPath()}")
+				}
 		}
 
 		val outputJava = File("$trgPath/java/$packagePath/${nativeClass.className}.java")
@@ -350,4 +347,33 @@ private fun <T> generateOutput(
 		target.generate(writer)
 		writer.close();
 	}
+}
+
+/** Returns true if the array was empty. */
+fun <T> Array<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
+	for ( i in 0..this.lastIndex )
+		apply(this[i], 0 < i)
+	return this.size == 0
+}
+
+/** Returns true if the stream was empty. */
+fun <T> Stream<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
+	var more = false
+	for ( item in this ) {
+		apply(item, more)
+		if ( !more )
+			more = true
+	}
+	return more
+}
+
+/** Returns true if the collection was empty. */
+fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, Boolean) -> Unit): Boolean {
+	var more = moreOverride
+	for ( item in this ) {
+		apply(item, more)
+		if ( !more )
+			more = true
+	}
+	return more
 }
