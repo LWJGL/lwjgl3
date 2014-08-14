@@ -104,7 +104,7 @@ val ERROR_RET = mods(Check(1), nullable) _ cl_int_p.OUT(
 	"will return an appropriate error code. If $errcode_ret is $NULL, no error code is returned."
 )
 
-val PARAM_VALUE_SIZE = AutoSize("param_value").toBytes() _ size_t.IN(
+val PARAM_VALUE_SIZE = AutoSize("param_value") _ size_t.IN(
 	"param_value_size",
 	"the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is $NULL, it is ignored."
 )
@@ -988,7 +988,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			""",
 			MemFlags
 		),
-		AutoSize("host_ptr").toBytes() _ size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
+		AutoSize("host_ptr") _ size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			optional
@@ -1061,7 +1061,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		size_t.IN("offset", "the offset in bytes in the buffer object to read from"),
-		AutoSize("ptr").toBytes() _ size_t.IN("size", "the size in bytes of data being read"),
+		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being read"),
 		MultiType(
 			PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
 		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
@@ -1132,7 +1132,7 @@ fun CL10() = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		size_t.IN("offset", "the offset in bytes in the buffer object to write to"),
-		AutoSize("ptr").toBytes() _ size_t.IN("size", "the size in bytes of data being written"),
+		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being written"),
 		mods(
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
 			const

@@ -749,7 +749,7 @@ fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
 			const,
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT)
 		) _ unsigned_char_p.IN("data", "the property data"),
-		AutoSize("data") _ int.IN("nelements", "the number of elements of the specified data format")
+		AutoSize("data", autoTyped = true) _ int.IN("nelements", "the number of elements of the specified data format")
 	)
 
 	Bool.func(

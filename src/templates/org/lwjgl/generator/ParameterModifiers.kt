@@ -46,7 +46,12 @@ private class AutoSizeFactorScale(
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
-class AutoSize(override val reference: String, vararg val dependent: String): ParameterModifier(), ReferenceModifier {
+class AutoSize(
+	override val reference: String,
+	vararg val dependent: String,
+	/** When true, there exists a parameter that specifies the element type, so ignore any toBytes() call. */
+	val autoTyped: Boolean = false
+): ParameterModifier(), ReferenceModifier {
 	class object: ModifierObject<AutoSize> {
 		override val key = javaClass<AutoSize>()
 	}
@@ -57,6 +62,10 @@ class AutoSize(override val reference: String, vararg val dependent: String): Pa
 	var factor: AutoSizeFactor? = null
 	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
 	var toBytes: Boolean = false
+		set(toBytes: Boolean) {
+			if ( !autoTyped )
+				$toBytes = toBytes
+		}
 
 	fun shl(value: Int) = shl("$value")
 	fun shl(expression: String): AutoSize {
@@ -79,11 +88,6 @@ class AutoSize(override val reference: String, vararg val dependent: String): Pa
 	fun div(value: Int) = div("$value")
 	fun div(expression: String): AutoSize {
 		this.factor = AutoSizeFactorScale(false, expression)
-		return this
-	}
-
-	fun toBytes(): AutoSize {
-		this.toBytes = true
 		return this
 	}
 

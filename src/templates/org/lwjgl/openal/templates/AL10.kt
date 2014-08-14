@@ -689,7 +689,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF*vss)
 			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT),
 			const
 		)_ ALvoid_p.IN("data", "the sample data"),
-		AutoSize("data").toBytes() _ ALsizei.IN("size", "the data buffer size, in bytes"),
+		AutoSize("data") _ ALsizei.IN("size", "the data buffer size, in bytes"),
 		ALsizei.IN("frequency", "the data frequency")
 	)
 

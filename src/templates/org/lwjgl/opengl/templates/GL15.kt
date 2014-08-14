@@ -178,7 +178,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 		""",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		AutoSize("data").toBytes() _ GLsizeiptr.IN("size", " the size in bytes of the buffer object's new data store"),
+		AutoSize("data") _ GLsizeiptr.IN("size", " the size in bytes of the buffer object's new data store"),
 		mods(
 			const,
 			optional,
@@ -209,7 +209,7 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLintptr.IN("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
-		AutoSize("data").toBytes() _ GLsizeiptr.IN("size", "the size in bytes of the data store region being returned"),
+		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the data store region being returned"),
 		MultiType(
 			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,

@@ -230,12 +230,16 @@ class NativeClassFunction(
 		var returnCount = 0
 		parameters.forEach {
 			if ( it has AutoSize ) {
-				val bufferParamName = it[AutoSize].reference
-				val bufferParam = paramMap[bufferParamName]
-				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoSize($bufferParamName)")
-				else when {
-					bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize($bufferParamName)")
-					!bufferParam.isBufferPointer           -> it.error("Buffer reference must not be a opaque pointer: AutoSize($bufferParamName)")
+				val autoSize = it[AutoSize]
+				val bufferParam = paramMap[autoSize.reference]
+				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoSize(${autoSize.reference})")
+				else {
+					when {
+						bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize(${autoSize.reference})")
+						!bufferParam.isBufferPointer           -> it.error("Buffer reference must not be a opaque pointer: AutoSize(${autoSize.reference})")
+					}
+					if ( bufferParam has MultiType )
+						autoSize.toBytes = true
 				}
 			}
 
