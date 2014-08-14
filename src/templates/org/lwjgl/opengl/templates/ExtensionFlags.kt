@@ -23,6 +23,7 @@ val SGIX = "SGIX"
 fun ARB_arrays_of_arrays() = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", ARB)
 fun ARB_compatibility() = EXT_FLAG.nativeClassGL("ARB_compatibility", ARB)
 fun ARB_conservative_depth() = EXT_FLAG.nativeClassGL("ARB_conservative_depth", ARB)
+fun ARB_derivative_control() = EXT_FLAG.nativeClassGL("ARB_derivative_control", ARB)
 fun ARB_explicit_attrib_location() = EXT_FLAG.nativeClassGL("ARB_explicit_attrib_location", ARB)
 fun ARB_fragment_coord_conventions() = EXT_FLAG.nativeClassGL("ARB_fragment_coord_conventions", ARB)
 fun ARB_fragment_layer_viewport() = EXT_FLAG.nativeClassGL("ARB_fragment_layer_viewport", ARB)
@@ -33,6 +34,7 @@ fun ARB_shader_bit_encoding() = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding"
 fun ARB_shader_image_size() = EXT_FLAG.nativeClassGL("ARB_shader_image_size", ARB)
 fun ARB_shader_precision() = EXT_FLAG.nativeClassGL("ARB_shader_precision", ARB)
 fun ARB_shader_stencil_export() = EXT_FLAG.nativeClassGL("ARB_shader_stencil_export", ARB)
+fun ARB_shader_texture_image_samples() = EXT_FLAG.nativeClassGL("ARB_shader_texture_image_samples", ARB)
 fun ARB_shader_texture_lod() = EXT_FLAG.nativeClassGL("ARB_shader_texture_lod", ARB)
 fun ARB_shading_language_420pack() = EXT_FLAG.nativeClassGL("ARB_shading_language_420pack", ARB)
 fun ARB_shading_language_packing() = EXT_FLAG.nativeClassGL("ARB_shading_language_packing", ARB)
@@ -54,6 +56,8 @@ fun AMD_vertex_shader_layer() = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer"
 fun AMD_vertex_shader_viewport_index() = EXT_FLAG.nativeClassGL("AMD_vertex_shader_viewport_index", AMD)
 
 fun ATI_shader_texture_lod() = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", ATI)
+
+fun KHR_robust_buffer_access_behavior() = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", ARB)
 
 fun NV_blend_square() = EXT_FLAG.nativeClassGL("NV_blend_square", NV)
 fun NV_fragment_program4() = EXT_FLAG.nativeClassGL("NV_fragment_program4", NV)

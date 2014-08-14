@@ -221,10 +221,10 @@ public final class GL {
 			throw new IllegalStateException("OpenGL 1.1 is required.");
 
 		int[][] GL_VERSIONS = {
-			{ 1, 2, 3, 4, 5 },  // OpenGL 1
-			{ 0, 1 },           // OpenGL 2
-			{ 0, 1, 2, 3 },     // OpenGL 3
-			{ 0, 1, 2, 3 },     // OpenGL 4
+			{ 1, 2, 3, 4, 5 },      // OpenGL 1
+			{ 0, 1 },               // OpenGL 2
+			{ 0, 1, 2, 3 },         // OpenGL 3
+			{ 0, 1, 2, 3, 4, 5 },   // OpenGL 4
 		};
 
 		Set<String> supportedExtensions = new HashSet<>(128);

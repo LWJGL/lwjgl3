@@ -1,0 +1,30 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+package org.lwjgl.opengl.templates
+
+import org.lwjgl.generator.*
+import org.lwjgl.opengl.*
+
+fun ARB_conditional_render_inverted() = "ARBConditionalRenderInverted".nativeClassGL("ARB_conditional_render_inverted") {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/conditional_render_inverted.txt", templateName)} extension.
+
+		This extension adds new modes to GL30#BeginConditionalRender() which invert the condition used to determine whether to draw or not.
+		"""
+
+	IntConstant.block(
+		"Accepted by the {@code mode} parameter of GL30#BeginConditionalRender().",
+
+		"QUERY_WAIT_INVERTED" _ 0x8E17,
+		"QUERY_NO_WAIT_INVERTED" _ 0x8E18,
+		"QUERY_BY_REGION_WAIT_INVERTED" _ 0x8E19,
+		"QUERY_BY_REGION_NO_WAIT_INVERTED" _ 0x8E1A
+	)
+}

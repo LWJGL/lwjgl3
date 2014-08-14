@@ -160,3 +160,6 @@ private fun String.nativeClassWGL(templateName: String, postfix: String = "", in
 
 private fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
+
+private val NativeClassFunction.dsaLink: String
+	get() = "${this.nativeClass.className}${this.javaDocLink}"
