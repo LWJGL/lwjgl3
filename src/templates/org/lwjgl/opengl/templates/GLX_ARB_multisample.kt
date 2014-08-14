@@ -21,7 +21,7 @@ fun GLX_ARB_multisample() = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisam
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribList} parameter of ${"GLX#ChooseVisual()".link}, and by the {@code attrib} parameter of ${"GLX#GetConfig()".link}:",
+		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
 		"SAMPLE_BUFFERS_ARB" _ 100000,
 		"SAMPLES_ARB" _ 100001

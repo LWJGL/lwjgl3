@@ -99,7 +99,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"Listener attributes.",
 
 		"ORIENTATION" _ 0x100F
-	).toJavaDocLinks() + ListenerSourceAttributes
+	).toJavaDocLinks() + " $ListenerSourceAttributes"
 
 	IntConstant.block(
 		"Queue state.",
@@ -123,7 +123,7 @@ fun AL10() = "AL10".nativeClassAL("AL10") {
 		"MAX_DISTANCE" _ 0x1023
 	).toJavaDocLinks()
 
-	SourceAttributes += ListenerSourceAttributes + DistanceModelAttributes
+	SourceAttributes += " $ListenerSourceAttributes $DistanceModelAttributes"
 
 	val BufferAttributes = IntConstant.block(
 		"Buffer attributes,",

@@ -6,6 +6,7 @@ package org.lwjgl.generator
 
 import org.lwjgl.generator.ParameterType.*
 import org.lwjgl.generator.LinkMode.*
+import java.util.regex.Pattern
 
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
@@ -69,22 +70,22 @@ enum class ParameterType {
 
 enum class LinkMode {
 	SINGLE: LinkMode() {
-		override fun print(linkCount: Int): String = if ( linkCount == 1 ) " Must be:" else " One of:"
+		override fun print(multi: Boolean): String = if ( multi ) " One of:" else " Must be:"
 	}
 
 	SINGLE_CNT: LinkMode() {
-		override fun print(linkCount: Int): String = if ( linkCount == 1 ) " must be:" else " one of:"
+		override fun print(multi: Boolean): String = if ( multi ) " one of:" else " must be:"
 	}
 
 	BITFIELD: LinkMode() {
-		override fun print(linkCount: Int): String = " One or more of:"
+		override fun print(multi: Boolean): String = " One or more of:"
 	}
 
 	BITFIELD_CNT: LinkMode() {
-		override fun print(linkCount: Int): String = " one or more of:"
+		override fun print(multi: Boolean): String = " one or more of:"
 	}
 
-	abstract fun print(linkCount: Int): String
+	abstract fun print(multi: Boolean): String
 }
 
 class Parameter(
@@ -95,6 +96,10 @@ class Parameter(
 	links: String,
 	linkMode: LinkMode
 ): QualifiedType(nativeType) {
+
+	class object {
+		val LINK_SPLIT = Pattern.compile("\\s+")
+	}
 
 	val documentation = if ( links.isEmpty() ) documentation else doc(documentation, links, linkMode)
 
@@ -125,9 +130,9 @@ class Parameter(
 			}
 		}
 
-		builder append effectiveLinkMode.print(links.count { it == '@' })
+		builder append effectiveLinkMode.print(links.any { Character.isWhitespace(it) })
 		builder append "<p/>"
-		builder append links
+		builder append LINK_SPLIT.matcher(links.trim()).replaceAll(", ")
 
 		return builder.toString()
 	}

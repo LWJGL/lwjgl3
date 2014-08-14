@@ -32,14 +32,14 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for ${"CONTEXT_FLAGS_ARB".link} in {@code attribList}.",
+		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attribList}.",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
 	)
 
 	IntConstant.block(
-		"New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}.",
+		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
 		"ERROR_INVALID_VERSION_ARB" _ 0x2095,
 		"ERROR_INVALID_PROFILE_ARB" _ 0x2096

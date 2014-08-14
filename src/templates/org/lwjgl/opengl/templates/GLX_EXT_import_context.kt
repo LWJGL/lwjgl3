@@ -23,7 +23,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"QueryContextInfoEXT()".link}:",
+		"Accepted by the {@code attribute} parameter of #QueryContextInfoEXT().",
 
 		"SHARE_CONTEXT_EXT" _ 0x800A,
 		"VISUAL_ID_EXT" _ 0x800B,
@@ -62,7 +62,7 @@ fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_imp
 
 	void.func(
 		"FreeContextEXT",
-		"Frees the client-side part of a GLXContext that was created  with ${"ImportContextEXT()".link}.",
+		"Frees the client-side part of a GLXContext that was created  with #ImportContextEXT().",
 
 		DISPLAY,
 		GLXContext.IN("context", "the context to free")

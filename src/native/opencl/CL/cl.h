@@ -51,16 +51,19 @@ typedef cl_bitfield         cl_device_fp_config;
 typedef cl_uint             cl_device_mem_cache_type;
 typedef cl_uint             cl_device_local_mem_type;
 typedef cl_bitfield         cl_device_exec_capabilities;
+typedef cl_bitfield         cl_device_svm_capabilities;
 typedef cl_bitfield         cl_command_queue_properties;
 typedef intptr_t            cl_device_partition_property;
 typedef cl_bitfield         cl_device_affinity_domain;
 
 typedef intptr_t            cl_context_properties;
 typedef cl_uint             cl_context_info;
+typedef cl_bitfield         cl_queue_properties;
 typedef cl_uint             cl_command_queue_info;
 typedef cl_uint             cl_channel_order;
 typedef cl_uint             cl_channel_type;
 typedef cl_bitfield         cl_mem_flags;
+typedef cl_bitfield         cl_svm_mem_flags;
 typedef cl_uint             cl_mem_object_type;
 typedef cl_uint             cl_mem_info;
 typedef cl_bitfield         cl_mem_migration_flags;
@@ -70,6 +73,8 @@ typedef cl_uint             cl_addressing_mode;
 typedef cl_uint             cl_filter_mode;
 typedef cl_uint             cl_sampler_info;
 typedef cl_bitfield         cl_map_flags;
+typedef intptr_t            cl_pipe_properties;
+typedef cl_uint             cl_pipe_info;
 typedef cl_uint             cl_program_info;
 typedef cl_uint             cl_program_build_info;
 typedef cl_uint             cl_program_binary_type;
@@ -83,13 +88,8 @@ typedef cl_uint             cl_kernel_work_group_info;
 typedef cl_uint             cl_event_info;
 typedef cl_uint             cl_command_type;
 typedef cl_uint             cl_profiling_info;
-
-// OpenCL 2.0
-typedef intptr_t            cl_sampler_properties;
-typedef intptr_t            cl_pipe_properties;
-typedef cl_uint             cl_pipe_info;
+typedef cl_bitfield         cl_sampler_properties;
 typedef cl_uint             cl_kernel_exec_info;
-typedef cl_bitfield         cl_svm_mem_flags;
 
 typedef struct _cl_image_format {
     cl_channel_order        image_channel_order;
@@ -106,7 +106,10 @@ typedef struct _cl_image_desc {
     size_t                  image_slice_pitch;
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
-    cl_mem                  buffer;
+    union {
+      cl_mem                  buffer;
+      cl_mem                  mem_object;
+    };
 } cl_image_desc;
 
 typedef struct _cl_buffer_region {

@@ -27,15 +27,15 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		libffi assumes that you have a pointer to the function you wish to call and that you know the number and types of arguments to pass it, as well as the
 		return type of the function.
 
-		The first thing you must do is create an {@link ffi_cif} object that matches the signature of the function you wish to call. This is a separate step
-		because it is common to make multiple calls using a single {@link ffi_cif}. The {@code cif} in {@code ffi_cif} stands for Call InterFace. To prepare a
-		call interface object, use the function ${"prep_cif()".link}. To call a function using an initialized {@code ffi_cif}, use the ${"call()".link} function.
+		The first thing you must do is create an ##ffi_cif object that matches the signature of the function you wish to call. This is a separate step
+		because it is common to make multiple calls using a single ##ffi_cif. The {@code cif} in {@code ffi_cif} stands for Call InterFace. To prepare a
+		call interface object, use the function #prep_cif(). To call a function using an initialized {@code ffi_cif}, use the #call() function.
 
 		<strong>LWJGL note</strong>: The closure and raw APIs are not exposed.
 		"""
 	
 	IntConstant.block(
-		"Types used to create custom {@link ffi_cif}.",
+		"Types used to create custom ##ffi_cif.",
 
 		"TYPE_VOID" _ 0,
 		"TYPE_INT" _ 1,
@@ -84,7 +84,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	)
 	
 	LongConstant.block(
-		"Data types. These are the addresses of libffi's predefined {@link ffi_type} structs.",
+		"Data types. These are the addresses of libffi's predefined ##ffi_type structs.",
 
 		"ffi_type_void".expr<Long>("ffi_type_void()"),
 
@@ -115,36 +115,36 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	ffi_status.func(
 		"prep_cif",
-		"Prepares an {@link ffi_cif} structure for use with ${"call()".link}.",
+		"Prepares an ##ffi_cif structure for use with #call().",
 
-		ffi_cif_p.IN("cif", "the {@link ffi_cif} structure to prepare"),
+		ffi_cif_p.IN("cif", "the ##ffi_cif structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
 		AutoSize("atypes") _ unsigned_int.IN("nargs", "the number of arguments"),
-		ffi_type_p.IN("rtype", "points to an {@link ffi_type} that describes the data type, size and alignment of the return value"),
-		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to {@link ffi_type} structs that describe the data type, size and alignment of each argument"),
+		ffi_type_p.IN("rtype", "points to an ##ffi_type that describes the data type, size and alignment of the return value"),
+		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##ffi_type structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
 		"""
-		Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
-		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
+		Upon successful completion, {@code ffi_prep_cif} returns #OK. It will return #BAD_TYPEDEF if {@code cif} is $NULL or
+		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, #BAD_ABI will be returned.
 		"""
 	)
 
 	ffi_status.func(
 		"prep_cif_var",
-		"Prepares an {@link ffi_cif} structure for use with ${"call()".link} for variadic functions.",
+		"Prepares an ##ffi_cif structure for use with #call() for variadic functions.",
 
-		ffi_cif_p.IN("cif", "the {@link ffi_cif} structure to prepare"),
+		ffi_cif_p.IN("cif", "the ##ffi_cif structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
 		unsigned_int.IN("nfixedargs", "the number of fixed (non-variadic) arguments"),
 		AutoSize("atypes") _ unsigned_int.IN("ntotalargs", "the total number of arguments"),
-		ffi_type_p.IN("rtype", "points to an {@link ffi_type} that describes the data type, size and alignment of the return value"),
-		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to {@link ffi_type} structs that describe the data type, size and alignment of each argument"),
+		ffi_type_p.IN("rtype", "points to an ##ffi_type that describes the data type, size and alignment of the return value"),
+		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to ##ffi_type structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
 		"""
-		Upon successful completion, {@code ffi_prep_cif} returns ${"OK".link}. It will return ${"BAD_TYPEDEF".link} if {@code cif} is $NULL or
-		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, ${"BAD_ABI".link} will be returned.
+		Upon successful completion, {@code ffi_prep_cif} returns #OK. It will return #BAD_TYPEDEF if {@code cif} is $NULL or
+		{@code atypes} or {@code rtype} is malformed. If {@code abi} does not refer to a valid ABI, #BAD_ABI will be returned.
 		"""
 	)
 
@@ -154,7 +154,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 		ffi_cif_p.IN(
 			"cif",
-			"a {@link ffi_cif} structure. It must be initialized with ${"prep_cif()".link} or ${"prep_cif_var()".link} before it is used with {@code ffi_call}."
+			"a ##ffi_cif structure. It must be initialized with #prep_cif() or #prep_cif_var() before it is used with {@code ffi_call}."
 		),
 		FFI_FN_TYPE.IN("fn", "the function to call"),
 		nullable _ void_p.IN(

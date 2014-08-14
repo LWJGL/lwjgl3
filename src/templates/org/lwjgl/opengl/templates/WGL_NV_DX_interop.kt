@@ -22,7 +22,7 @@ fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", N
 		"""
 
 	val accessModes = IntConstant.block(
-		"Accepted by the {@code access} parameters of {@link #wglDXRegisterObjectNV} and {@link #wglDXObjectAccessNV}.",
+		"Accepted by the {@code access} parameters of #DXRegisterObjectNV() and #DXObjectAccessNV().",
 
 		"ACCESS_READ_ONLY_NV" _ 0x0000,
 		"ACCESS_READ_WRITE_NV" _ 0x0001,
@@ -57,7 +57,7 @@ fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", N
 		"DXRegisterObjectNV",
 		"Prepares a DirectX object for use by the GL and returns a handle to a GL/DirectX interop object.",
 
-		HANDLE.IN("device", "a GL/DirectX interop device handle, as returned by {@link #wglDXOpenDeviceNV}"),
+		HANDLE.IN("device", "a GL/DirectX interop device handle, as returned by #DXOpenDeviceNV()"),
 		void_p.IN("dxResource", "a pointer to a DirectX resource to be registered with the GL"),
 		GLuint.IN(
 			"name",

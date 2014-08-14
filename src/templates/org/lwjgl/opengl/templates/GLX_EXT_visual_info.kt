@@ -23,7 +23,7 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attrib} parameter of ${"GLX#GetConfig()".link}, and by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link}:",
+		"Accepted by the {@code attrib} parameter of GLX#GetConfig(), and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
 
 		"X_VISUAL_TYPE_EXT" _ 0x22,
 		"TRANSPARENT_TYPE_EXT" _ 0x23,
@@ -36,8 +36,8 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
-		${"X_VISUAL_TYPE_EXT".link} token):
+		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
+		#X_VISUAL_TYPE_EXT token).
 		""",
 
 		"TRUE_COLOR_EXT" _ 0x8002,
@@ -50,8 +50,8 @@ fun GLX_EXT_visual_info() = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_in
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLX#GetConfig()".link}, and accepted by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link} (following the
-		${"TRANSPARENT_TYPE_EXT".link} token):
+		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
+		#TRANSPARENT_TYPE_EXT token).
 		""",
 
 		"NONE_EXT" _ 0x8000,

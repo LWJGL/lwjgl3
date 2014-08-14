@@ -7,10 +7,10 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val INVALID_IMAGE_DESCRIPTOR = "CL12".linkCL("INVALID_IMAGE_DESCRIPTOR")
-val INVALID_COMPILER_OPTIONS = "CL12".linkCL("INVALID_COMPILER_OPTIONS")
-val INVALID_LINKER_OPTIONS = "CL12".linkCL("INVALID_LINKER_OPTIONS")
-val INVALID_DEVICE_PARTITION_COUNT = "CL12".linkCL("INVALID_DEVICE_PARTITION_COUNT")
+val INVALID_IMAGE_DESCRIPTOR = "CL12#INVALID_IMAGE_DESCRIPTOR"
+val INVALID_COMPILER_OPTIONS = "CL12#INVALID_COMPILER_OPTIONS"
+val INVALID_LINKER_OPTIONS = "CL12#INVALID_LINKER_OPTIONS"
+val INVALID_DEVICE_PARTITION_COUNT = "CL12#INVALID_DEVICE_PARTITION_COUNT"
 
 fun CL12() = "CL12".nativeClassCL("CL12") {
 	nativeImport (
@@ -92,7 +92,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	IntConstant.block(
 		"""
 		Split the aggregate device into as many smaller aggregate devices as can be created, each containing {@code n} compute units. The value {@code n} is
-		passed as the value accompanying this property. If {@code n} does not divide evenly into ${"DEVICE_PARTITION_MAX_COMPUTE_UNITS".link}, then the
+		passed as the value accompanying this property. If {@code n} does not divide evenly into #DEVICE_PARTITION_MAX_COMPUTE_UNITS, then the
 		remaining compute units are not used.
 		""",
 
@@ -101,12 +101,12 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 
 	IntConstant.block(
 		"""
-		This property is followed by a ${"DEVICE_PARTITION_BY_COUNTS_LIST_END".link} terminated list of compute unit counts. For each nonzero count {@code m}
+		This property is followed by a #DEVICE_PARTITION_BY_COUNTS_LIST_END terminated list of compute unit counts. For each nonzero count {@code m}
 		in the list, a sub-device is created with {@code m} compute units in it.
 
-		The number of non-zero count entries in the list may not exceed ${"DEVICE_PARTITION_MAX_SUB_DEVICES".link}.
+		The number of non-zero count entries in the list may not exceed #DEVICE_PARTITION_MAX_SUB_DEVICES.
 
-		The total number of compute units specified may not exceed ${"DEVICE_PARTITION_MAX_COMPUTE_UNITS".link}.
+		The total number of compute units specified may not exceed #DEVICE_PARTITION_MAX_COMPUTE_UNITS.
 		""",
 
 		"DEVICE_PARTITION_BY_COUNTS" _ 0x1087
@@ -117,18 +117,18 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		Split the device into smaller aggregate devices containing one or more compute units that all share part of a cache hierarchy. The value accompanying
 		this property may be drawn from the following list:
 		${ul(
-			"${"DEVICE_AFFINITY_DOMAIN_NUMA".link} &ndash; Split the device into sub-devices comprised of compute units that share a NUMA node.",
-			"${"DEVICE_AFFINITY_DOMAIN_L4_CACHE".link} &ndash; Split the device into sub-devices comprised of compute units that share a level 4 data cache.",
-			"${"DEVICE_AFFINITY_DOMAIN_L3_CACHE".link} &ndash; Split the device into sub-devices comprised of compute units that share a level 3 data cache.",
-			"${"DEVICE_AFFINITY_DOMAIN_L2_CACHE".link} &ndash; Split the device into sub-devices comprised of compute units that share a level 2 data cache.",
-			"${"DEVICE_AFFINITY_DOMAIN_L1_CACHE".link} &ndash; Split the device into sub-devices comprised of compute units that share a level 1 data cache.",
+			"#DEVICE_AFFINITY_DOMAIN_NUMA &ndash; Split the device into sub-devices comprised of compute units that share a NUMA node.",
+			"#DEVICE_AFFINITY_DOMAIN_L4_CACHE &ndash; Split the device into sub-devices comprised of compute units that share a level 4 data cache.",
+			"#DEVICE_AFFINITY_DOMAIN_L3_CACHE &ndash; Split the device into sub-devices comprised of compute units that share a level 3 data cache.",
+			"#DEVICE_AFFINITY_DOMAIN_L2_CACHE &ndash; Split the device into sub-devices comprised of compute units that share a level 2 data cache.",
+			"#DEVICE_AFFINITY_DOMAIN_L1_CACHE &ndash; Split the device into sub-devices comprised of compute units that share a level 1 data cache.",
 			"""
-			${"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE".link} &ndash; Split the device along the next partitionable affinity domain. The implementation
+			#DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE &ndash; Split the device along the next partitionable affinity domain. The implementation
 			shall find the first level along which the device or sub-device may be further subdivided in the order NUMA, L4, L3, L2, L1, and partition the
 			device into sub-devices comprised of compute units that share memory subsystems at this level.
 			"""
 		)}
-		The user may determine what happened by calling ${"CL10#GetDeviceInfo()".link}(${"DEVICE_PARTITION_TYPE".link}) on the sub-devices.
+		The user may determine what happened by calling CL10#GetDeviceInfo()(#DEVICE_PARTITION_TYPE) on the sub-devices.
 		""",
 
 		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN" _ 0x1088
@@ -276,8 +276,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	cl_int.func(
 		"RetainDevice",
 		"""
-		Increments the device reference count if {@code device} is a valid sub-device created by a call to ${"CreateSubDevices()".link}. If {@code device} is a
-		root level device i.e. a {@code cl_device_id} returned by ${"CL10#GetDeviceIDs()".link}, the device reference count remains unchanged.
+		Increments the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
+		root level device i.e. a {@code cl_device_id} returned by CL10#GetDeviceIDs(), the device reference count remains unchanged.
 		""",
 
 		cl_device_id.IN("device", "the device to retain"),
@@ -286,7 +286,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 		$SUCCESS if the function is executed successfully or the device is a root-level device. Otherwise, it returns one of the following errors:
 		${ul(
-			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to ${"CreateSubDevices()".link}.",
+			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to #CreateSubDevices().",
 			OORE,
 			OOHME
 		)}
@@ -296,8 +296,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 	cl_int.func(
 		"ReleaseDevice",
 		"""
-		Decrements the device reference count if {@code device} is a valid sub-device created by a call to ${"CreateSubDevices()".link}. If {@code device} is a
-		root level device i.e. a {@code cl_device_id} returned by ${"CL10#GetDeviceIDs()".link}, the device reference count remains unchanged.
+		Decrements the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
+		root level device i.e. a {@code cl_device_id} returned by CL10#GetDeviceIDs(), the device reference count remains unchanged.
 
 		After the {@code device} reference count becomes zero and all the objects attached to {@code device} (such as command-queues) are released, the device
 		object is deleted.
@@ -309,7 +309,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 		$SUCCESS if the function is executed successfully. Otherwise, it returns one of the following errors:
 		${ul(
-			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to ${"CreateSubDevices()".link}.",
+			"$INVALID_DEVICE if {@code device} is not a valid sub-device created by a call to #CreateSubDevices().",
 			OORE,
 			OOHME
 		)}
@@ -328,16 +328,16 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		${ul(
 			"""
 			To partition a device containing 16 compute units into two sub-devices, each containing 8 compute units, pass the following in {@code properties}:<br>
-			[ ${"DEVICE_PARTITION_EQUALLY".link}, 8, 0 ]
+			[ #DEVICE_PARTITION_EQUALLY, 8, 0 ]
 			""",
 			"""
 			To partition a device with four compute units into two sub-devices with one sub-device containing 3 compute units and the other sub-device 1 compute
 			unit, pass the following in {@code properties} argument:<br>
-			[ ${"DEVICE_PARTITION_BY_COUNTS".link}, 3, 1, ${"DEVICE_PARTITION_BY_COUNTS_LIST_END".link}, 0 ]
+			[ #DEVICE_PARTITION_BY_COUNTS, 3, 1, #DEVICE_PARTITION_BY_COUNTS_LIST_END, 0 ]
 			""",
 			"""
 			To split a device along the outermost cache line (if any), pass the following in {@code properties} argument:<br>
-			[ ${"DEVICE_PARTITION_BY_AFFINITY_DOMAIN".link}, ${"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE".link}, 0 ]
+			[ #DEVICE_PARTITION_BY_AFFINITY_DOMAIN, #DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE, 0 ]
 			"""
 		)}
 		""",
@@ -384,12 +384,12 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			$INVALID_VALUE if {@code out_devices} is not $NULL and {@code num_devices} is less than the number of sub-devices created by the
 			partition scheme.
 			""",
-			"${"DEVICE_PARTITION_FAILED".link} if the partition name is supported by the implementation but {@code in_device} could not be further partitioned.",
+			"#DEVICE_PARTITION_FAILED if the partition name is supported by the implementation but {@code in_device} could not be further partitioned.",
 			"""
-			$INVALID_DEVICE_PARTITION_COUNT if the partition name specified in {@code properties} is ${"DEVICE_PARTITION_BY_COUNTS".link} and the
-			number of sub-devices requested exceeds ${"DEVICE_PARTITION_MAX_SUB_DEVICES".link} or the total number of compute units requested exceeds
-			${"DEVICE_PARTITION_MAX_COMPUTE_UNITS".link} for {@code in_device}, or the number of compute units requested for one or more sub-devices is less
-			than zero or the number of sub-devices requested exceeds ${"DEVICE_PARTITION_MAX_COMPUTE_UNITS".link} for {@code in_device}.
+			$INVALID_DEVICE_PARTITION_COUNT if the partition name specified in {@code properties} is #DEVICE_PARTITION_BY_COUNTS and the
+			number of sub-devices requested exceeds #DEVICE_PARTITION_MAX_SUB_DEVICES or the total number of compute units requested exceeds
+			#DEVICE_PARTITION_MAX_COMPUTE_UNITS for {@code in_device}, or the number of compute units requested for one or more sub-devices is less
+			than zero or the number of sub-devices requested exceeds #DEVICE_PARTITION_MAX_COMPUTE_UNITS for {@code in_device}.
 			""",
 			OORE,
 			OOHME
@@ -418,15 +418,15 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"""
 			a bit-field that is used to specify allocation and usage information about the image memory object being created.
 
-			For all image types except ${"MEM_OBJECT_IMAGE1D_BUFFER".link}, if value specified for {@code flags} is 0, the default is used which is
-			${"CL10#MEM_READ_WRITE".link}.
+			For all image types except #MEM_OBJECT_IMAGE1D_BUFFER, if value specified for {@code flags} is 0, the default is used which is
+			CL10#MEM_READ_WRITE.
 
-			For ${"CL12#MEM_OBJECT_IMAGE1D_BUFFER".link} image type, if the ${"CL10#MEM_READ_WRITE".link}, ${"CL10#MEM_READ_ONLY".link} or ${"CL10#MEM_WRITE_ONLY".link}
+			For CL12#MEM_OBJECT_IMAGE1D_BUFFER image type, if the CL10#MEM_READ_WRITE, CL10#MEM_READ_ONLY or CL10#MEM_WRITE_ONLY
 			values are not specified in {@code flags}, they are inherited from the corresponding memory access qualifers associated with buffer. The
-			${"CL10#MEM_USE_HOST_PTR".link}, ${"CL10#MEM_ALLOC_HOST_PTR".link} and ${"CL10#MEM_COPY_HOST_PTR".link} values cannot be specified in {@code flags}
-			but are inherited from the corresponding memory access qualifiers associated with buffer. If ${"CL10#MEM_COPY_HOST_PTR".link} is specified in the
+			CL10#MEM_USE_HOST_PTR, CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_COPY_HOST_PTR values cannot be specified in {@code flags}
+			but are inherited from the corresponding memory access qualifiers associated with buffer. If CL10#MEM_COPY_HOST_PTR is specified in the
 			memory access qualifier values associated with buffer it does not imply any additional copies when the sub-buffer is created from buffer. If the
-			${"MEM_HOST_WRITE_ONLY".link}, ${"MEM_HOST_READ_ONLY".link} or ${"MEM_HOST_NO_ACCESS".link} values are not specified in {@code flags}, they
+			#MEM_HOST_WRITE_ONLY, #MEM_HOST_READ_ONLY or #MEM_HOST_NO_ACCESS values are not specified in {@code flags}, they
 			are inherited from the corresponding memory access qualifiers associated with buffer.
 			""",
 			"""
@@ -436,11 +436,11 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		),
 		const _ cl_image_format_p.IN(
 			"image_format",
-			"a pointer to a {@link cl_image_format} structure that describes format properties of the image to be allocated"
+			"a pointer to a ##cl_image_format structure that describes format properties of the image to be allocated"
 		),
 		const _ cl_image_desc_p.IN(
 			"image_desc",
-			"a pointer to a {@link cl_image_desc} structure that describes type and dimensions of the image to be allocated"
+			"a pointer to a ##cl_image_desc structure that describes type and dimensions of the image to be allocated"
 		),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
@@ -453,12 +453,12 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			${table(
 				tr(th("ImageType"), th("Size of buffer that {@code host_ptr} points to")),
 
-				tr(td("MEM_OBJECT_IMAGE1D".link), td("&#x2265; {@code image_row_pitch}")),
-				tr(td("MEM_OBJECT_IMAGE1D_BUFFER".link), td("&#x2265; {@code image_row_pitch}")),
-				tr(td("CL10#MEM_OBJECT_IMAGE2D".link), td("&#x2265; {@code image_row_pitch * image_height}")),
-				tr(td("CL10#MEM_OBJECT_IMAGE3D".link), td("&#x2265; {@code image_slice_pitch * image_depth}")),
-				tr(td("MEM_OBJECT_IMAGE1D_ARRAY".link), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
-				tr(td("MEM_OBJECT_IMAGE2D_ARRAY".link), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
+				tr(td("#MEM_OBJECT_IMAGE1D"), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("#MEM_OBJECT_IMAGE1D_BUFFER"), td("&#x2265; {@code image_row_pitch}")),
+				tr(td("CL10#MEM_OBJECT_IMAGE2D"), td("&#x2265; {@code image_row_pitch * image_height}")),
+				tr(td("CL10#MEM_OBJECT_IMAGE3D"), td("&#x2265; {@code image_slice_pitch * image_depth}")),
+				tr(td("#MEM_OBJECT_IMAGE1D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}")),
+				tr(td("#MEM_OBJECT_IMAGE2D_ARRAY"), td("&#x2265; {@code image_slice_pitch * image_array_size}"))
 			)}
 			"""
 		),
@@ -511,8 +511,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 		Compiles a program's source for all the devices or a specific device(s) in the OpenCL context associated with {@code program}. The pre-processor runs
 		before the program sources are compiled. The compiled binary is built for all devices associated with {@code program} or the list of devices specified.
-		The compiled binary can be queried using ${"CL10#GetProgramInfo()".link}(program, ${"CL10#PROGRAM_BINARIES".link}, &hellip;) and can be specified
-		to ${"CL10#CreateProgramWithBinary()".link} to create a new program object.
+		The compiled binary can be queried using CL10#GetProgramInfo()(program, CL10#PROGRAM_BINARIES, &hellip;) and can be specified
+		to CL10#CreateProgramWithBinary() to create a new program object.
 		""",
 
 		cl_program.IN("program", "the program object that is the compilation target"),
@@ -539,7 +539,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			const, nullable, SingleValue("input_header")
 		) _ cl_program_p.IN(
 			"input_headers",
-			"an array of program embedded headers created with ${"CL10#CreateProgramWithSource()".link}"
+			"an array of program embedded headers created with CL10#CreateProgramWithSource()"
 		),
 		mods(
 			const, nullable, SingleValue("header_include_name")
@@ -593,15 +593,15 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"$INVALID_COMPILER_OPTIONS if the compiler options specified by options are invalid.",
 			"""
 			$INVALID_OPERATION if the compilation or build of a program executable for any of the devices listed in {@code device_list} by a
-			previous call to {@code clCompileProgram} or ${"CL10#BuildProgram()".link} for program has not completed.
+			previous call to {@code clCompileProgram} or CL10#BuildProgram() for program has not completed.
 			""",
-			"${"CL10#COMPILER_NOT_AVAILABLE".link} if a compiler is not available i.e. ${"CL10#DEVICE_COMPILER_AVAILABLE".link} is set to $FALSE.",
+			"CL10#COMPILER_NOT_AVAILABLE if a compiler is not available i.e. CL10#DEVICE_COMPILER_AVAILABLE is set to $FALSE.",
 			"""
-			${"COMPILE_PROGRAM_FAILURE".link} if there is a failure to compile the program source. This error will be returned if {@code clCompileProgram}
+			#COMPILE_PROGRAM_FAILURE if there is a failure to compile the program source. This error will be returned if {@code clCompileProgram}
 			does not return until the compile has completed.
 			""",
 			"$INVALID_OPERATION if there are kernel objects attached to {@code program}.",
-			"$INVALID_OPERATION if {@code program} has no source i.e. it has not been created with ${"CL10#CreateProgramWithSource()".link}.",
+			"$INVALID_OPERATION if {@code program} has no source i.e. it has not been created with CL10#CreateProgramWithSource().",
 			OORE,
 			OOHME
 		)}
@@ -617,7 +617,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 		Links a set of compiled program objects and libraries for all the devices or a specific device(s) in the OpenCL context and creates an executable.
 		{@code clLinkProgram} creates a new program object which contains this executable. The executable binary can be queried using
-		${"CL10#GetProgramInfo()".link}(program, ${"CL10#PROGRAM_BINARIES".link}, &hellip;) and can be specified to ${"CL10#CreateProgramWithBinary()".link} to
+		CL10#GetProgramInfo()(program, CL10#PROGRAM_BINARIES, &hellip;) and can be specified to CL10#CreateProgramWithBinary() to
 		create a new program object.
 
 		The devices associated with the returned program object will be the list of devices specified by {@code device_list} or if {@code device_list} is $NULL
@@ -692,11 +692,11 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		a valid non-zero program object, if the linking operation can begin. The linking operation can begin if the context, list of devices, input programs and
 		linker options specified are all valid and appropriate host and device resources needed to perform the link are available.
 
-		If {@code pfn_notify} is NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and ${"LINK_PROGRAM_FAILURE".link} if
+		If {@code pfn_notify} is NULL, the $errcode_ret will be set to $SUCCESS if the link operation was successful and #LINK_PROGRAM_FAILURE if
 		there is a failure to link the compiled binaries and/or libraries.
 
 		If {@code pfn_notify} is not NULL, {@code clLinkProgram} does not have to wait until the linker to complete and can return $SUCCESS in $errcode_ret
-		if the linking operation can begin. The {@code pfn_notify} callback function will return a $SUCCESS or ${"LINK_PROGRAM_FAILURE".link} if the
+		if the linking operation can begin. The {@code pfn_notify} callback function will return a $SUCCESS or #LINK_PROGRAM_FAILURE if the
 		linking operation was successful or not.
 
 		Otherwise {@code clLinkProgram} returns a $NULL program object with an appropriate error in $errcode_ret. The application should query the linker status
@@ -717,14 +717,14 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"$INVALID_LINKER_OPTIONS if the linker options specified by {@code options} are invalid.",
 			"""
 			$INVALID_OPERATION if the compilation or build of a program executable for any of the devices listed in {@code device_list} by a
-			previous call to $CompileProgram or ${"CL10#BuildProgram()".link} for program has not completed.
+			previous call to $CompileProgram or CL10#BuildProgram() for program has not completed.
 			""",
 			"""
 			$INVALID_OPERATION if the rules for devices containing compiled binaries or libraries as described in {@code input_programs} argument
 			above are not followed.
 			""",
-			"${"LINKER_NOT_AVAILABLE".link} if a linker is not available i.e. ${"DEVICE_LINKER_AVAILABLE".link} is set to $FALSE.",
-			"${"LINK_PROGRAM_FAILURE".link} if there is a failure to link the compiled binaries and/or libraries.",
+			"#LINKER_NOT_AVAILABLE if a linker is not available i.e. #DEVICE_LINKER_AVAILABLE is set to $FALSE.",
+			"#LINK_PROGRAM_FAILURE if there is a failure to link the compiled binaries and/or libraries.",
 			OORE,
 			OOHME
 		)}
@@ -736,7 +736,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
 		guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
-		${"CL10#BuildProgram()".link}, $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
+		CL10#BuildProgram(), $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
 		appropriate program executable.
 		""",
 
@@ -755,8 +755,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		"GetKernelArgInfo",
 		"""
 		Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
-		created with ${"CL10#CreateProgramWithSource()".link} and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
-		argument to ${"CL10#BuildProgram()".link} or $CompileProgram.
+		created with CL10#CreateProgramWithSource() and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
+		argument to CL10#BuildProgram() or $CompileProgram.
 		""",
 
 		cl_kernel.IN("kernel", "specifies the kernel object being queried"),
@@ -784,7 +784,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			$INVALID_VALUE if {@code param_name} is not valid, or if size in bytes specified by {@code param_value} size is &lt; size of return
 			type and {@code param_value} is not $NULL.
 			""",
-			"${"KERNEL_ARG_INFO_NOT_AVAILABLE".link} if the argument information is not available for {@code kernel}.",
+			"#KERNEL_ARG_INFO_NOT_AVAILABLE if the argument information is not available for {@code kernel}.",
 			"$INVALID_KERNEL if {@code kernel} is a not a valid kernel object."
 		)}
 		"""
@@ -838,7 +838,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if {@code offset} and {@code size} are not a multiple of {@code pattern_size}.",
 			IEWLE,
 			MSBOE("buffer"),
-			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code buffer}.",
+			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code buffer}.",
 			OORE,
 			OOHME
 		)}
@@ -905,8 +905,8 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if values in {@code origin} and {@code region} do not follow rules described in the argument description for {@code origin} and {@code region}.",
 			IEWLE,
 			"$INVALID_IMAGE_SIZE if image dimensions (image width, height, specified or compute row and/or slice pitch) for image are not supported by device associated with queue.",
-			"${"CL10#IMAGE_FORMAT_NOT_SUPPORTED".link} if image format (image channel order and data type) for image are not supported by device associated with queue.",
-			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for data store associated with {@code image}.",
+			"CL10#IMAGE_FORMAT_NOT_SUPPORTED if image format (image channel order and data type) for image are not supported by device associated with queue.",
+			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for data store associated with {@code image}.",
 			OORE,
 			OOHME
 		)}
@@ -921,7 +921,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 		performed ahead of the dependent commands. This allows a user to preemptively change the association of a memory object, through regular command queue
 		scheduling, in order to prepare for another upcoming command. This also permits an application to overlap the placement of memory objects with other
 		unrelated operations before these memory objects are needed potentially hiding transfer latencies. Once the event, returned from {@code clEnqueueMigrateMemObjects},
-		has been marked ${"CL10#COMPLETE".link} the memory objects specified in {@code mem_objects} have been successfully migrated to the device associated
+		has been marked CL10#COMPLETE the memory objects specified in {@code mem_objects} have been successfully migrated to the device associated
 		with {@code command_queue}. The migrated memory object shall remain resident on the device until another command is enqueued that either implicitly or
 		explicitly migrates it away.
 
@@ -936,7 +936,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"command_queue",
 			"""
 			a valid command-queue. The specified set of memory objects in {@code mem_objects} will be migrated to the OpenCL device associated with
-			{@code command_queue} or to the host if the ${"MIGRATE_MEM_OBJECT_HOST".link} has been specified.
+			{@code command_queue} or to the host if the #MIGRATE_MEM_OBJECT_HOST has been specified.
 			"""
 		),
 		AutoSize("mem_objects") _ cl_uint.IN("num_mem_objects", "the number of memory objects specified in {@code mem_objects}"),
@@ -959,7 +959,7 @@ fun CL12() = "CL12".nativeClassCL("CL12") {
 			"$INVALID_VALUE if {@code num_mem_objects} is zero or if {@code mem_objects} is $NULL.",
 			"$INVALID_VALUE if {@code flags} is not 0 or is not any of the values described in the table above.",
 			IEWLE,
-			"${"CL10#MEM_OBJECT_ALLOCATION_FAILURE".link} if there is a failure to allocate memory for the specified set of memory objects in {@code mem_objects}.",
+			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for the specified set of memory objects in {@code mem_objects}.",
 			OORE,
 			OOHME
 		)}

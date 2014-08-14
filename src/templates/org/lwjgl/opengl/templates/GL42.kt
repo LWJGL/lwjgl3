@@ -353,7 +353,7 @@ fun GL42() = "GL42".nativeClassGL("GL42") {
 		"MemoryBarrier",
 		"Defines a barrier ordering memory transactions.",
 
-		GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers, LinkMode.BITFIELD)
+		GLbitfield.IN("barriers", "the barriers to insert (bitwise combination)", MemoryBarriers + " GL43#SHADER_STORAGE_BARRIER_BIT", LinkMode.BITFIELD)
 	)
 
 	// ARB_internal_format_query

@@ -13,13 +13,13 @@ fun WGL_EXT_pixel_format_packed_float() = "WGLEXTPixelFormatPackedFloat".nativeC
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
 
 		This extension provides support for rendering into an unsigned floating-point rendering format with the assumption that the texture format described in
-		{@link EXTPackedFloat} could also be advertised as an unsigned floating-point format for rendering.
+		##EXTPackedFloat could also be advertised as an unsigned floating-point format for rendering.
 		"""
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attribIList} parameter array of ${"WGLARBPixelFormat#ChoosePixelFormatARB()".link}, and returned in the {@code values}
-		parameter array of ${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link}.
+		Accepted as a value in the {@code attribIList} parameter array of WGLARBPixelFormat#ChoosePixelFormatARB(), and returned in the {@code values}
+		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().
 		""",
 
 		"TYPE_RGBA_UNSIGNED_FLOAT_EXT" _ 0x20A8

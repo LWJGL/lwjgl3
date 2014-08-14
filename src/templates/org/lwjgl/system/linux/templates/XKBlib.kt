@@ -67,7 +67,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Mask bits for {@link XkbDescRec}.",
+		"Mask bits for ##XkbDescRec.",
 
 		"XkbControlsMask".expr<Int>("1<<0"),
 		"XkbServerMapMask".expr<Int>("1<<1"),
@@ -121,7 +121,7 @@ fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
 
 	void.func(
 		"XkbFreeKeyboard",
-		"Destroys either an entire {@link XkbDescRec} or just some of its members.",
+		"Destroys either an entire ##XkbDescRec or just some of its members.",
 
 		XkbDescPtr.IN("xkb", "the keyboard description with components to free"),
 		unsigned_int.IN("which", "the mask selecting components to free"),

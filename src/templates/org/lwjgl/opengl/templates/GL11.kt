@@ -68,7 +68,7 @@ val SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS =
 	GL43#COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2 GL43#COMPRESSED_RGBA8_ETC2_EAC GL43#COMPRESSED_SRGB8_ALPHA8_ETC2_EAC GL43#COMPRESSED_R11_EAC
 	GL43#COMPRESSED_SIGNED_R11_EAC GL43#COMPRESSED_RG11_EAC GL43#COMPRESSED_SIGNED_RG11_EAC
 
-	##EXTTextureCompressionS3TC ##EXTTextureCompressionLATC ##ATITextureCompression3DC
+	@##EXTTextureCompressionS3TC @##EXTTextureCompressionLATC @##ATITextureCompression3DC
 	"""
 
 // Tables 8.18, 8.19, 8.20, 8.21, 8.22
@@ -91,13 +91,13 @@ val TEXTURE_INTERNAL_FORMATS =
 	"""
 
 // Error codes
-val INVALID_ENUM = "GL11".linkGL("INVALID_ENUM")
-val INVALID_VALUE = "GL11".linkGL("INVALID_VALUE")
-val INVALID_OPERATION = "GL11".linkGL("INVALID_OPERATION")
-val STACK_OVERFLOW = "GL11".linkGL("STACK_OVERFLOW")
-val STACK_UNDERFLOW = "GL11".linkGL("STACK_UNDERFLOW")
-val OUT_OF_MEMORY = "GL11".linkGL("OUT_OF_MEMORY")
-val INVALID_FRAMEBUFFER_OPERATION = "GL30".linkGL("INVALID_FRAMEBUFFER_OPERATION")
+val INVALID_ENUM = "GL11#INVALID_ENUM"
+val INVALID_VALUE = "GL11#INVALID_VALUE"
+val INVALID_OPERATION = "GL11#INVALID_OPERATION"
+val STACK_OVERFLOW = "GL11#STACK_OVERFLOW"
+val STACK_UNDERFLOW = "GL11#STACK_UNDERFLOW"
+val OUT_OF_MEMORY = "GL11#OUT_OF_MEMORY"
+val INVALID_FRAMEBUFFER_OPERATION = "GL30#INVALID_FRAMEBUFFER_OPERATION"
 
 fun GL11() = "GL11".nativeClassGL("GL11") {
 	nativeImport (
@@ -940,26 +940,26 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("op", "a symbolic constant indicating an accumulation buffer operation"),
-		GLfloat.IN("value", "a floating-point value to be used in that operation. The possible operations are:", "#ACCUM #LOAD #RETURN #MULT #ADD")
+		GLfloat.IN("value", "a floating-point value to be used in that operation", "#ACCUM #LOAD #RETURN #MULT #ADD")
 	)
 
 	deprecatedGL _ GLvoid.func(
 		"AlphaFunc",
 		"""
 		The alpha test discards a fragment conditionally based on the outcome of a comparison between the incoming fragment’s alpha value and a constant value.
-		The comparison is enabled or disabled with the generic $Enable and $Disable commands using the symbolic constant ${"ALPHA_TEST".link}.
+		The comparison is enabled or disabled with the generic $Enable and $Disable commands using the symbolic constant #ALPHA_TEST.
 		When disabled, it is as if the comparison always passes. The test is controlled with this method.
 		""",
 
-		GLenum.IN("func", "a symbolic constant indicating the alpha test function. The possible constants are:", COMPARISON_FUNCTIONS),
+		GLenum.IN("func", "a symbolic constant indicating the alpha test function", COMPARISON_FUNCTIONS),
 		GLfloat.IN("ref", "a reference value clamped to the range [0, 1]. When performing the alpha test, the GL will convert the reference value to the same representation as the fragment's alpha value (floating-point or fixed-point).")
 	)
 
 	deprecatedGL _ GLboolean.func(
 		"AreTexturesResident",
 		"""
-		Returns ${"TRUE".link} if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
-		at least one of the texture objects named in textures is not resident, then ${"FALSE".link} is returned, and the residence of each texture object is
+		Returns #TRUE if all of the texture objects named in textures are resident, or if the implementation does not distinguish a working set. If
+		at least one of the texture objects named in textures is not resident, then #FALSE is returned, and the residence of each texture object is
 		returned in residences. Otherwise the contents of residences are not changed.
 		""",
 
@@ -1182,7 +1182,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"ColorMaterial",
 		"""
 		It is possible to attach one or more material properties to the current color, so that they continuously track its component values. This behavior is
-		enabled and disabled by calling $Enable or $Disable with the symbolic value ${"COLOR_MATERIAL".link}. This function controls which
+		enabled and disabled by calling $Enable or $Disable with the symbolic value #COLOR_MATERIAL. This function controls which
 		of these modes is selected.
 		""",
 
@@ -1219,9 +1219,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	GLvoid.func(
 		"CullFace",
 		"""
-		Specifies which polygon faces are culled if ${"CULL_FACE".link} is enabled. Front-facing polygons are rasterized if either culling is disabled or the
-		CullFace mode is ${"BACK".link} while back-facing polygons are rasterized only if either culling is disabled or the CullFace mode is
-		${"FRONT".link}. The initial setting of the CullFace mode is ${"BACK".link}. Initially, culling is disabled.
+		Specifies which polygon faces are culled if #CULL_FACE is enabled. Front-facing polygons are rasterized if either culling is disabled or the
+		CullFace mode is #BACK while back-facing polygons are rasterized only if either culling is disabled or the CullFace mode is
+		#FRONT. The initial setting of the CullFace mode is #BACK. Initially, culling is disabled.
 		""",
 
 		GLenum.IN("mode", "the CullFace mode", "#FRONT #BACK #FRONT_AND_BACK")
@@ -1240,7 +1240,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	GLvoid.func(
 		"DepthFunc",
-		"Specifies the comparison that takes place during the depth buffer test (when ${"DEPTH_TEST".link} is enabled).",
+		"Specifies the comparison that takes place during the depth buffer test (when #DEPTH_TEST is enabled).",
 
 		GLenum.IN("func", "the depth test comparison", "#NEVER #ALWAYS #LESS #LEQUAL #EQUAL #GREATER #GEQUAL #NOTEQUAL")
 	)
@@ -1291,8 +1291,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer to which fragment color zero is written.
 
-		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is zero), or
-		a framebuffer object (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code buf} depend on whether the GL is using the default framebuffer (i.e., GL30#DRAW_FRAMEBUFFER_BINDING is zero), or
+		a framebuffer object (i.e., GL30#DRAW_FRAMEBUFFER_BINDING is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("buf", "the color buffer to draw to", FRAMEBUFFERS)
@@ -1345,7 +1345,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		rasterization; some modes affect the interpretation of polygon boundary edges. By default, all edges are boundary edges, but the flagging of polygons,
 		separate triangles, or separate quadrilaterals may be altered by calling this function.
 
-		When a primitive of type ${"POLYGON".link}, ${"TRIANGLES".link}, or ${"QUADS".link} is drawn, each vertex transferred begins an edge. If the edge
+		When a primitive of type #POLYGON, #TRIANGLES, or #QUADS is drawn, each vertex transferred begins an edge. If the edge
 		flag bit is TRUE, then each specified vertex begins an edge that is flagged as boundary. If the bit is FALSE, then induced edges are flagged as
 		non-boundary.
 		""",
@@ -1532,7 +1532,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		The first step of polygon rasterization is to determine if the polygon is back-facing or front-facing. This determination is made based on the sign of
 		the (clipped or unclipped) polygon's area computed in window coordinates. The interpretation of the sign of this value is controlled with this function.
-		In the initial state, the front face direction is set to ${"CCW".link}.
+		In the initial state, the front face direction is set to #CCW.
 		""",
 
 		GLenum.IN("dir", "the front face direction", "#CCW #CW")
@@ -1649,7 +1649,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Returns error information. Each detectable error is assigned a numeric code. When an error is detected, a flag is set and the code is recorded. Further
 		errors, if they occur, do not affect this recorded code. When {@code GetError} is called, the code is returned and the flag is cleared, so that a
-		further error will again record its code. If a call to {@code GetError} returns ${"NO_ERROR".link}, then there has been no detectable error since
+		further error will again record its code. If a call to {@code GetError} returns #NO_ERROR, then there has been no detectable error since
 		the last call to {@code GetError} (or since the GL was initialized).
 		"""
 	)
@@ -1918,7 +1918,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Hint",
 		"""
 		Certain aspects of GL behavior, when there is room for variation, may be controlled with this function. The initial value for all hints is
-		${"DONT_CARE".link}.
+		#DONT_CARE.
 		""",
 
 		GLenum.IN(
@@ -2059,7 +2059,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"LineStipple",
 		"""
 		Defines a line stipple. It determines those fragments that are to be drawn when the line is rasterized. Line stippling may be enabled or disabled using
-		$Enable or $Disable with the constant ${"LINE_STIPPLE".link}. When disabled, it is as if the line stipple has its default value.
+		$Enable or $Disable with the constant #LINE_STIPPLE. When disabled, it is as if the line stipple has its default value.
 		""",
 
 		GLint.IN(
@@ -2530,9 +2530,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Controls the interpretation of polygons for rasterization.
 
-		${"FILL".link} is the default mode of polygon rasterization. Note that these modes affect only the final rasterization of polygons: in particular, a
+		#FILL is the default mode of polygon rasterization. Note that these modes affect only the final rasterization of polygons: in particular, a
 		polygon's vertices are lit, and the polygon is clipped and possibly culled before these modes are applied. Polygon antialiasing applies only to the
-		${"FILL".link} state of PolygonMode. For ${"POINT".link} or ${"LINE".link}, point antialiasing or line segment antialiasing, respectively, apply.
+		#FILL state of PolygonMode. For #POINT or #LINE, point antialiasing or line segment antialiasing, respectively, apply.
 		""",
 
 		GLenum.IN("face", "the face for which to set the rasterizing method", "#FRONT #BACK #FRONT_AND_BACK"),
@@ -2562,7 +2562,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		If x<sub>w</sub> and y<sub>w</sub> are the window coordinates of a rasterized polygon fragment, then that fragment is sent to the next stage of the GL
 		if and only if the bit of the pattern (x<sub>w</sub> mod 32, y<sub>w</sub> mod 32) is 1.
 
-		Polygon stippling may be enabled or disabled with $Enable or $Disable using the constant ${"POLYGON_STIPPLE".link}. When disabled,
+		Polygon stippling may be enabled or disabled with $Enable or $Disable using the constant #POLYGON_STIPPLE. When disabled,
 		it is as if the stipple pattern were all ones.
 		""",
 
@@ -2575,11 +2575,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the server attribute stack. Each constant refers to a
 		group of state variables.
 
-		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value ${"ALL_ATTRIB_BITS".link} may be used to push all
+		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value #ALL_ATTRIB_BITS may be used to push all
 		stackable server state.
 
-		A ${"STACK_OVERFLOW".link} error is generated if {@code PushAttrib} is called and the attribute stack depth is equal to the value of
-		${"MAX_ATTRIB_STACK_DEPTH".link}.
+		A #STACK_OVERFLOW error is generated if {@code PushAttrib} is called and the attribute stack depth is equal to the value of
+		#MAX_ATTRIB_STACK_DEPTH.
 		""",
 
 		GLbitfield.IN(
@@ -2599,11 +2599,11 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Takes a bitwise OR of symbolic constants indicating which groups of state variables to push onto the client attribute stack. Each constant refers to a
 		group of state variables.
 
-		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value ${"CLIENT_ALL_ATTRIB_BITS".link} may be used to push
+		Bits set in mask that do not correspond to an attribute group are ignored. The special mask value #CLIENT_ALL_ATTRIB_BITS may be used to push
 		all stackable client state.
 
-		A ${"STACK_OVERFLOW".link} error is generated if {@code PushAttrib} is called and the client attribute stack depth is equal to the value of
-		${"MAX_CLIENT_ATTRIB_STACK_DEPTH".link}.
+		A #STACK_OVERFLOW error is generated if {@code PushAttrib} is called and the client attribute stack depth is equal to the value of
+		#MAX_CLIENT_ATTRIB_STACK_DEPTH.
 		""",
 
 		GLbitfield.IN("mask", "the state variables to push", "#CLIENT_VERTEX_ARRAY_BIT #CLIENT_PIXEL_STORE_BIT #CLIENT_ALL_ATTRIB_BITS", LinkMode.BITFIELD)
@@ -2722,8 +2722,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Defines the color buffer from which values are obtained.
 
-		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is zero), or
-		a framebuffer object (i.e., ${"GL30#DRAW_FRAMEBUFFER_BINDING".link} is non-zero). In the initial state, the GL is bound to the default framebuffer.
+		Acceptable values for {@code src} depend on whether the GL is using the default framebuffer (i.e., GL30#DRAW_FRAMEBUFFER_BINDING is zero), or
+		a framebuffer object (i.e., GL30#DRAW_FRAMEBUFFER_BINDING is non-zero). In the initial state, the GL is bound to the default framebuffer.
 		""",
 
 		GLenum.IN("src", "the color buffer to read from", FRAMEBUFFERS)
@@ -2735,7 +2735,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		ReadPixels obtains values from the selected read buffer from each pixel with lower left hand corner at {@code (x + i, y + j)} for {@code 0 <= i < width}
 		and {@code 0 <= j < height}; this pixel is said to be the i<sup>th</sup> pixel in the j<sup>th</sup> row. If any of these pixels lies outside of the
 		window allocated to the current GL context, or outside of the image attached to the currently bound read framebuffer object, then the values obtained
-		for those pixels are undefined. When ${"GL30#READ_FRAMEBUFFER_BINDING".link} is zero, values are also undefined for individual pixels that are not owned by
+		for those pixels are undefined. When GL30#READ_FRAMEBUFFER_BINDING is zero, values are also undefined for individual pixels that are not owned by
 		the current context. Otherwise, {@code ReadPixels} obtains values from the selected buffer, regardless of how those values were placed there.
 		""",
 
@@ -2876,7 +2876,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"Scissor",
 		"""
 		Defines the scissor rectangle for all viewports. The scissor test is enabled or disabled for all viewports using $Enable or $Disable
-		with the symbolic constant ${"SCISSOR_TEST".link}. When disabled, it is as if the scissor test always passes. When enabled, if
+		with the symbolic constant #SCISSOR_TEST. When disabled, it is as if the scissor test always passes. When enabled, if
 		${code("left <= x<sub>w</sub> < left + width")} and ${code("bottom <= y<sub>w</sub> < bottom + height")} for the scissor rectangle, then the scissor
 		test passes. Otherwise, the test fails and the fragment is discarded.
 		""",
@@ -2898,9 +2898,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid.func(
 		"ShadeModel",
 		"""
-		Sets the current shade mode. The initial value of the shade mode is ${"SMOOTH".link}.
+		Sets the current shade mode. The initial value of the shade mode is #SMOOTH.
 
-		If mode is ${"SMOOTH".link}, vertex colors are treated individually. If mode is ${"FLAT".link}, flatshading is enabled and colors are taken from the
+		If mode is #SMOOTH, vertex colors are treated individually. If mode is #FLAT, flatshading is enabled and colors are taken from the
 		provoking vertex of the primitive. The colors selected are those derived from current values, generated by lighting, or generated by vertex shading, if
 		lighting is disabled, enabled, or a vertex shader is in use, respectively.
 		""",
@@ -2941,8 +2941,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		"""
 		Indicates what happens to the stored stencil value if this or certain subsequent tests fail or pass.
 
-		The supported actions are ${"KEEP".link}, ${"ZERO".link}, ${"REPLACE".link}, ${"INCR".link}, ${"DECR".link}, ${"INVERT".link},
-		${"GL14#INCR_WRAP".link} and ${"GL14#DECR_WRAP".link}. These correspond to keeping the current value, setting to zero, replacing with the reference value,
+		The supported actions are #KEEP, #ZERO, #REPLACE, #INCR, #DECR, #INVERT,
+		GL14#INCR_WRAP and GL14#DECR_WRAP. These correspond to keeping the current value, setting to zero, replacing with the reference value,
 		incrementing with saturation, decrementing with saturation, bitwise inverting it, incrementing without saturation, and decrementing without saturation.
 
 		For purposes of increment and decrement, the stencil bits are considered as an unsigned integer. Incrementing or decrementing with saturation clamps
@@ -3109,9 +3109,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Sets an integer texture coordinate generation parameter.
 
 		A texture coordinate generation function is enabled or disabled using $Enable and $Disable with an argument of
-		${"TEXTURE_GEN_S".link}, ${"TEXTURE_GEN_T".link}, ${"TEXTURE_GEN_R".link}, or ${"TEXTURE_GEN_Q".link} (each indicates the corresponding texture
-		coordinate). When enabled, the specified texture coordinate is computed according to the current ${"EYE_LINEAR".link}, ${"OBJECT_LINEAR".link} or
-		${"SPHERE_MAP".link} specification, depending on the current setting of ${"TEXTURE_GEN_MODE".link} for that coordinate. When disabled, subsequent
+		#TEXTURE_GEN_S, #TEXTURE_GEN_T, #TEXTURE_GEN_R, or #TEXTURE_GEN_Q (each indicates the corresponding texture
+		coordinate). When enabled, the specified texture coordinate is computed according to the current #EYE_LINEAR, #OBJECT_LINEAR or
+		#SPHERE_MAP specification, depending on the current setting of #TEXTURE_GEN_MODE for that coordinate. When disabled, subsequent
 		vertices will take the indicated texture coordinate from the current texture coordinates.
 
 		The initial state has the texture generation function disabled for all texture coordinates. Initially all texture generation modes are EYE_LINEAR.
@@ -3215,8 +3215,8 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		{@code x}, {@code y}, {@code width}, and {@code height} correspond precisely to the corresponding arguments to $ReadPixels; they specify the
 		image's width and height, and the lower left (x, y) coordinates of the framebuffer region to be copied.
 
-		The image is taken from the framebuffer exactly as if these arguments were passed to $CopyPixels with argument type set to ${"COLOR".link},
-		${"DEPTH".link}, or ${"GL30#DEPTH_STENCIL".link}, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
+		The image is taken from the framebuffer exactly as if these arguments were passed to $CopyPixels with argument type set to #COLOR,
+		#DEPTH, or GL30#DEPTH_STENCIL, depending on {@code internalformat}. RGBA data is taken from the current color buffer, while depth
 		component and stencil index data are taken from the depth and stencil buffers, respectively.
 
 		Subsequent processing is identical to that described for $TexImage2D, beginning with clamping of the R, G, B, A, or depth values, and masking
@@ -3333,7 +3333,7 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 
 	GLvoid.func(
 		"TexSubImage1D",
-		"One-dimensional version of ${"TexSubImage2D()".link}.",
+		"One-dimensional version of #TexSubImage2D().",
 
 		GLenum.IN("target", "the texture target", "#TEXTURE_1D"),
 		GLint.IN("level", "the level-of-detail-number"),
@@ -3486,9 +3486,9 @@ fun GL11() = "GL11".nativeClassGL("GL11") {
 		Specifies the viewport transformation parameters for all viewports.
 
 		The location of the viewport's bottom-left corner, given by {@code (x, y)}, are clamped to be within the implementation-dependent viewport bounds range.
-		The viewport bounds range {@code [min, max]} tuple may be determined by calling ${"GetFloat()".link} with the symbolic
-		constant ${"GL41#VIEWPORT_BOUNDS_RANGE".link}. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
-		width and height may be found by calling ${"GetFloat()".link} with the symbolic constant ${"MAX_VIEWPORT_DIMS".link}. The
+		The viewport bounds range {@code [min, max]} tuple may be determined by calling #GetFloat() with the symbolic
+		constant GL41#VIEWPORT_BOUNDS_RANGE. Viewport width and height are clamped to implementation-dependent maximums when specified. The maximum
+		width and height may be found by calling #GetFloat() with the symbolic constant #MAX_VIEWPORT_DIMS. The
 		maximum viewport dimensions must be greater than or equal to the larger of the visible dimensions of the display being rendered to (if a display
 		exists), and the largest renderbuffer image which can be successfully created and attached to a framebuffer object.
 

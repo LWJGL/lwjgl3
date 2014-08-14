@@ -15,8 +15,8 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
 
 		This extension allows servers to identify a particular GLX visual as undesirable. A new visual attribute is introduced, providing a way for servers to
-		specify caveats (e.g., slow) for a visual. The attribute  may be queried using ${"GLX#GetConfig()".link}, and can therefore be used by
-		application-specific visual selection routines. The new attribute is also used by ${"GLX#ChooseVisual()".link} to discriminate against visuals with
+		specify caveats (e.g., slow) for a visual. The attribute  may be queried using GLX#GetConfig(), and can therefore be used by
+		application-specific visual selection routines. The new attribute is also used by GLX#ChooseVisual() to discriminate against visuals with
 		caveats.
 
 		This extension allows servers to export visuals with improved features or image quality, but lower performance or greater system burden, without having
@@ -24,15 +24,15 @@ fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visua
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GLX#GetConfig()".link} and by the {@code attrib_list} parameter of ${"GLX#ChooseVisual()".link}:",
+		"Accepted by the {@code attribute} parameter of GLX#GetConfig() and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
 
 		"VISUAL_CAVEAT_EXT" _ 0x20
 	)
 
 	IntConstant.block(
 		"""
-		Returned by the {@code value} parameter of ${"GLX#GetConfig()".link} (when {@code attribute} is set to ${"VISUAL_CAVEAT_EXT".link}) and accepted by the {@code attrib_list}
-		parameter of ${"GLX#ChooseVisual()".link} (following the ${"VISUAL_CAVEAT_EXT".link} token):
+		Returned by the {@code value} parameter of GLX#GetConfig() (when {@code attribute} is set to #VISUAL_CAVEAT_EXT) and accepted by the {@code attrib_list}
+		parameter of GLX#ChooseVisual() (following the #VISUAL_CAVEAT_EXT token).
 		""",
 
 		"NONE_EXT" _ 0x8000,

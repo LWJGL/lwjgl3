@@ -156,5 +156,3 @@ private fun String.nativeClassWGL(templateName: String, postfix: String = "", in
 
 private fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
-
-fun String.linkGL(name: String) = this.link(name, if ( name.endsWith(')') ) "gl" else "GL_")

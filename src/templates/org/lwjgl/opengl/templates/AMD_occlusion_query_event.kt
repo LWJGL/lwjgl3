@@ -23,15 +23,15 @@ fun AMD_occlusion_query_event() = "AMDOcclusionQueryEvent".nativeClassGL("AMD_oc
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code pname} argument to ${"#QueryObjectParameteruiAMD()".link}, ${"GL15#GetQueryObjectiv()".link}, ${"GL15#GetQueryObjectuiv()".link},
-		${"GL33#GetQueryObjecti64v()".link}, and ${"GL33#GetQueryObjectui64v()".link}:
+		Accepted by the {@code pname} argument to #QueryObjectParameteruiAMD(), GL15#GetQueryObjectiv(), GL15#GetQueryObjectuiv(),
+		GL33#GetQueryObjecti64v(), and GL33#GetQueryObjectui64v().
 		""",
 
 		"OCCLUSION_QUERY_EVENT_MASK_AMD" _ 0x874F
 	)
 
 	val params = IntConstant.block(
-		"Accepted by the {@code param} argument to ${"#QueryObjectParameteruiAMD()".link}:",
+		"Accepted by the {@code param} argument to #QueryObjectParameteruiAMD().",
 
 		"QUERY_DEPTH_PASS_EVENT_BIT_AMD" _ 0x00000001,
 		"QUERY_DEPTH_FAIL_EVENT_BIT_AMD" _ 0x00000002,
@@ -45,8 +45,8 @@ fun AMD_occlusion_query_event() = "AMDOcclusionQueryEvent".nativeClassGL("AMD_oc
 		"Changes the value of a query object parameter.",
 
 		GLenum.IN("target", "a valid query target", QUERY_TARGETS),
-		GLuint.IN("id", "a value returned from a previous call to ${"GL15#GenQueries()".link}"),
-		GLenum.IN("pname", "the parameter to modify", "#OCCLUSION_QUERY_EVENT_MASK_AMD".links),
+		GLuint.IN("id", "a value returned from a previous call to GL15#GenQueries()"),
+		GLenum.IN("pname", "the parameter to modify", "#OCCLUSION_QUERY_EVENT_MASK_AMD"),
 		GLuint.IN("param", "the new value", params)
 	)
 

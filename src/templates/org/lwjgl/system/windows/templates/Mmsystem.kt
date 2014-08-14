@@ -163,7 +163,7 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 			"joyID",
 			"""
 			Identifier of the joystick to be queried. Valid values for {@code joyID} range from -1 to 15. A value of -1 enables retrieval of the
-			{@code szRegKey} member of the {@link JOYCAPS} structure whether a device is present or not.
+			{@code szRegKey} member of the ##JOYCAPS structure whether a device is present or not.
 			"""
 		),
 		LPJOYCAPS.OUT("jc", "pointer to a {@code JOYCAPS} structure to contain the capabilities of the joystick."),
@@ -174,19 +174,19 @@ fun Mmsystem() = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"joyGetPos",
 		"Queries a joystick for its position and button status.",
 
-		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (${"JOYSTICKID1".link}) to 15"),
-		LPJOYINFO.IN("ji", "pointer to a {@link JOYINFO} structure that contains the position and button status of the joystick")
+		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (#JOYSTICKID1) to 15"),
+		LPJOYINFO.IN("ji", "pointer to a ##JOYINFO structure that contains the position and button status of the joystick")
 	)
 
 	MMRESULT.func(
 		"joyGetPosEx",
 		"Queries a joystick for its position and button status.",
 
-		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (${"JOYSTICKID1".link}) to 15"),
+		UINT.IN("joyID", "identifier of the joystick to be queried. Valid values for {@code joyID} range from zero (#JOYSTICKID1) to 15"),
 		LPJOYINFOEX.IN(
 			"ji",
 			"""
-			pointer to a {@link JOYINFOEX} structure that contains the position and button status of the joystick. You must set the {@code size} and
+			pointer to a ##JOYINFOEX structure that contains the position and button status of the joystick. You must set the {@code size} and
 			{@code flags} members or {@code joyGetPosEx} will fail. The information returned from {@code joyGetPosEx} depends on the flags you specify in
 			{@code flags}.
 			"""

@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-val None = "X#None".link
+val None = "X#None"
 
 fun X() = "X".nativeClass(LINUX_PACKAGE) {
 
@@ -106,7 +106,7 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 
 	IntConstant.block(
 		"""
-		Event names. Used in "type" field in {@link XEvent} structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are
+		Event names. Used in "type" field in ##XEvent structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are
 		reserved in the protocol for errors and replies.
 		""",
 
@@ -280,14 +280,14 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"For ${"Xlib#XCreateColormap()".link}.",
+		"For Xlib#XCreateColormap().",
 
 		"AllocNone" _ 0,
 		"AllocAll" _ 1
 	)
 
 	IntConstant.block(
-		"Used in ${"Xlib#XSetInputFocus()".link}, ${"Xlib#XGetInputFocus()".link}.",
+		"Used in Xlib#XSetInputFocus(), Xlib#XGetInputFocus().",
 
 		"RevertToNone".expr<Int>("None"),
 		"RevertToPointerRoot".expr<Int>("PointerRoot"),
@@ -295,7 +295,7 @@ fun X() = "X".nativeClass(LINUX_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Window classes used by ${"Xlib#XCreateWindow()".link}.",
+		"Window classes used by Xlib#XCreateWindow().",
 
 		"InputOutput" _ 1,
 		"InputOnly" _ 2

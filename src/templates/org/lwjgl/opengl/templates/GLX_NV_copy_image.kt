@@ -31,9 +31,9 @@ fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", N
 	GLvoid.func(
 		"CopyImageSubDataNV",
 		"""
-		Behaves identically to the core function ${"NVCopyImage#CopyImageSubDataNV()".link}, except that the {@code srcCtx} and {@code dstCtx} parameters specify
+		Behaves identically to the core function NVCopyImage#CopyImageSubDataNV(), except that the {@code srcCtx} and {@code dstCtx} parameters specify
 		the contexts in which to look up the source and destination objects, respectively. A value of $NULL for either context indicates that the value which is
-		returned by ${"GLX#GetCurrentContext()".link} should be used instead. Both contexts must share the same address space.
+		returned by GLX#GetCurrentContext() should be used instead. Both contexts must share the same address space.
 		""",
 
 		DISPLAY,

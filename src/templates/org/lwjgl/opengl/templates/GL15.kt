@@ -226,9 +226,9 @@ fun GL15() = "GL15".nativeClassGL("GL15") {
 
 		<b>LWJGL note</b>: This method comes in 3 flavors:
 		${ol(
-			"{@link #glMapBuffer(int, int)} - Calls {@link #glGetBufferParameteri(int, int) glGetBufferParameteri} to retrieve the buffer size and a new ByteBuffer instance is always returned.",
-			"{@link #glMapBuffer(int, int, ByteBuffer)} - Calls {@link #glGetBufferParameteri(int, int) glGetBufferParameteri} to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
-			"{@link #glMapBuffer(int, int, int, ByteBuffer)} - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
+			"GL15##glMapBuffer(int, int) - Calls #GetBufferParameteri() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
+			"GL15##glMapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteri() to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
+			"GL15##glMapBuffer(int, int, int, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
 		)}
 		""",
 

@@ -213,7 +213,7 @@ fun GL14() = "GL14".nativeClassGL("GL14") {
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements.
 
-		<b>LWJGL note</b>: Use {@link MemoryUtil#memAddress} to retrieve pointers to the index buffers.
+		<b>LWJGL note</b>: Use MemoryUtil##memAddress() to retrieve pointers to the index buffers.
 		""",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),

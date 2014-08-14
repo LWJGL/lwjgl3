@@ -8,8 +8,8 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-val INVALID_GL_OBJECT = "CL10GL".linkCL("INVALID_GL_OBJECT")
-val INVALID_MIP_LEVEL = "CL10GL".linkCL("INVALID_MIP_LEVEL")
+val INVALID_GL_OBJECT = "CL10GL#INVALID_GL_OBJECT"
+val INVALID_MIP_LEVEL = "CL10GL#INVALID_MIP_LEVEL"
 
 fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 	javaImport (
@@ -40,8 +40,8 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		created, may be shared, with the exception of the default OpenGL objects (i.e. objects named zero), which may not be shared.
 		<h3>Lifetime of Shared Objects</h3>
 		An OpenCL memory object created from an OpenGL object (hereinafter refered to as a “shared CL/GL object”) remains valid as long as the corresponding GL
-		object has not been deleted. If the GL object is deleted through the GL API (e.g. ${"GL15".linkGL("DeleteBuffers()")}, ${"GL11".linkGL("DeleteTextures()")}, or
-		${"GL30".linkGL("DeleteRenderbuffers()")}), subsequent use of the CL buffer or image object will result in undefined behavior, including but not limited to
+		object has not been deleted. If the GL object is deleted through the GL API (e.g. GL15##glDeleteBuffers(), GL11##glDeleteTextures(), or
+		GL30##glDeleteRenderbuffers()), subsequent use of the CL buffer or image object will result in undefined behavior, including but not limited to
 		possible CL errors and data corruption, but may not result in program termination.
 
 		The CL context and corresponding command-queues are dependent on the existence of the GL share group object, or the share group associated with the GL
@@ -51,7 +51,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		<h3>Synchronizing OpenCL and OpenGL Access to Shared Objects</h3>
 		The application is responsible for maintaining the proper order of operations if the CL and GL contexts are in separate threads.
 
-		If a GL context is bound to a thread other than the one in which ${"EnqueueReleaseGLObjects()".link} is called, changes to any of the objects in
+		If a GL context is bound to a thread other than the one in which #EnqueueReleaseGLObjects() is called, changes to any of the objects in
 		{@code mem_objects} may not be visible to that context without additional steps being taken by the application. For an OpenGL 3.1 (or later) context,
 		the requirements are described in Appendix D ("Shared Objects and Multiple Contexts") of the OpenGL 3.1 Specification. For prior versions of OpenGL, the
 		requirements are implementation dependent.
@@ -90,10 +90,10 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		Creates an OpenCL buffer object from an OpenGL buffer object.
 
 		The size of the GL buffer object data store at the time {@code clCreateFromGLBuffer} is called will be used as the size of buffer object returned by
-		{@code clCreateFromGLBuffer}. If the state of a GL buffer object is modified through the GL API (e.g. ${"GL15".linkGL("BufferData()")}) while there exists a
+		{@code clCreateFromGLBuffer}. If the state of a GL buffer object is modified through the GL API (e.g. GL15##glBufferData()) while there exists a
 		corresponding CL buffer object, subsequent use of the CL buffer object will result in undefined behavior.
 
-		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the buffer object.
+		The CL10#RetainMemObject() and CL10#ReleaseMemObject() functions can be used to retain and release the buffer object.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -105,7 +105,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		GLuint.IN(
 			"bufobj",
 			"""
-			the name of a GL buffer object. The data store of the GL buffer object must have have been previously created by calling ${"GL15".linkGL("BufferData()")},
+			the name of a GL buffer object. The data store of the GL buffer object must have have been previously created by calling GL15##glBufferData(),
 			although its contents need not be initialized. The size of the data store will be used to determine the size of the CL buffer object.
 			"""
 		),
@@ -133,11 +133,11 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"""
 		Creates an OpenCL 2D image object from an OpenGL 2D texture object, or a single face of an OpenGL cubemap texture object.
 
-		If the state of a GL texture object is modified through the GL API (e.g. ${"GL11".linkGL("TexImage2D()")} or the values of the texture parameters
-		${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image object, subsequent use
+		If the state of a GL texture object is modified through the GL API (e.g. GL11##glTexImage2D() or the values of the texture parameters
+		GL12##GL_TEXTURE_BASE_LEVEL or GL12##GL_TEXTURE_MAX_LEVEL are modified) while there exists a corresponding CL image object, subsequent use
 		of the CL image object will result in undefined behavior.
 
-		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
+		The CL10#RetainMemObject() and CL10#ReleaseMemObject() functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -150,9 +150,9 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
 			"""
-			GL11#GL_TEXTURE_2D GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13#GL_TEXTURE_CUBE_MAP_POSITIVE_Z
-			GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13#GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL31#GL_TEXTURE_RECTANGLE
-			""".toConstantLinks()
+			GL11##GL_TEXTURE_2D GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_X GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_Y GL13##GL_TEXTURE_CUBE_MAP_POSITIVE_Z
+			GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_X GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_Y GL13##GL_TEXTURE_CUBE_MAP_NEGATIVE_Z GL31##GL_TEXTURE_RECTANGLE
+			"""
 		),
 		GLint.IN("miplevel", "the mipmap level to be used. Implementations may return $INVALID_OPERATION for {@code miplevel} values &gt; 0."),
 		GLuint.IN(
@@ -201,11 +201,11 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		"""
 		Creates an OpenCL 3D image object from an OpenGL 3D texture object.
 
-		If the state of a GL texture object is modified through the GL API (e.g. ${"GL12".linkGL("TexImage3D()")} or the values of the texture parameters
-		${"GL12".linkGL("TEXTURE_BASE_LEVEL")} or ${"GL12".linkGL("TEXTURE_MAX_LEVEL")} are modified) while there exists a corresponding CL image object, subsequent use
+		If the state of a GL texture object is modified through the GL API (e.g. GL12##glTexImage3D() or the values of the texture parameters
+		GL12##GL_TEXTURE_BASE_LEVEL or GL12##GL_TEXTURE_MAX_LEVEL are modified) while there exists a corresponding CL image object, subsequent use
 		of the CL image object will result in undefined behavior.
 
-		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
+		The CL10#RetainMemObject() and CL10#ReleaseMemObject() functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -217,7 +217,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		GLenum.IN(
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
-			"GL12#GL_TEXTURE_3D".toConstantLinks()
+			"GL12#GL_TEXTURE_3D"
 		),
 		GLint.IN("miplevel", "the mipmap level to be used"),
 		GLuint.IN(
@@ -266,10 +266,10 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		Creates an OpenCL 2D image object from an OpenGL renderbuffer object.
 
 		If the state of a GL renderbuffer object is modified through the GL API (i.e. changes to the dimensions or format used to represent pixels of the GL
-		renderbuffer using appropriate GL API calls such as ${"GL30".linkGL("RenderbufferStorage()")}) while there exists a corresponding CL image object, subsequent
+		renderbuffer using appropriate GL API calls such as GL30##glRenderbufferStorage()) while there exists a corresponding CL image object, subsequent
 		use of the CL image object will result in undefined behavior.
 
-		The ${"CL10#RetainMemObject()".link} and ${"CL10#ReleaseMemObject()".link} functions can be used to retain and release the image objects.
+		The CL10#RetainMemObject() and CL10#ReleaseMemObject() functions can be used to retain and release the image objects.
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context created from an OpenGL context"),
@@ -372,11 +372,11 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 		command-queues associated with the OpenCL context.
 
 		Prior to calling {@code clEnqueueAcquireGLObjects}, the application must ensure that any pending GL operations which access the objects specified in
-		{@code mem_objects} have completed. This may be accomplished portably by issuing and waiting for completion of a ${"GL11".linkGL("Finish()")} command on all GL
+		{@code mem_objects} have completed. This may be accomplished portably by issuing and waiting for completion of a GL11##glFinish() command on all GL
 		contexts with pending references to these objects. Implementations may offer more efficient synchronization methods; for example on some platforms
-		calling ${"GL11".linkGL("Flush()")} may be sufficient, or synchronization may be implicit within a thread, or there may be vendor-specific extensions that
+		calling GL11##glFlush() may be sufficient, or synchronization may be implicit within a thread, or there may be vendor-specific extensions that
 		enable placing a fence in the GL command stream and waiting for completion of that fence in the CL command queue. Note that no synchronization methods
-		other than ${"GL11".linkGL("Finish()")} are portable between OpenGL implementations at this time.
+		other than GL11##glFinish() are portable between OpenGL implementations at this time.
 		""",
 
 		cl_command_queue.IN(
@@ -420,7 +420,7 @@ fun CL10GL() = "CL10GL".nativeClassCL("CL10GL") {
 
 		After calling {@code clEnqueueReleaseGLObjects}, the application is responsible for ensuring that any pending OpenCL operations which access the objects
 		specified in {@code mem_objects} have completed prior to executing subsequent GL commands which reference these objects. This may be accomplished
-		portably by calling ${"CL10#WaitForEvents()".link} with the event object returned by {@code clEnqueueReleaseGLObjects}, or by calling ${"CL10#Finish()".link}.
+		portably by calling CL10#WaitForEvents() with the event object returned by {@code clEnqueueReleaseGLObjects}, or by calling CL10#Finish().
 		Some implementations may offer more efficient methods.
 		""",
 

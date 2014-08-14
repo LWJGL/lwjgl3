@@ -25,7 +25,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, and by the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link}:",
+		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), and by the {@code attrib_list} parameter of #ChooseFBConfigSGIX().",
 
 		"DRAWABLE_TYPE_SGIX" _ 0x8010,
 		"RENDER_TYPE_SGIX" _ 0x8011,
@@ -34,24 +34,24 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}, the {@code attrib_list} parameter of ${"ChooseFBConfigSGIX()".link},
-		by the {@code attribute} parameter of ${"GLXSGIXPbuffer#QueryGLXPbufferSGIX()".link} and by the {@code attribute} parameter of
-		${"GLXEXTImportContext#QueryContextInfoEXT()".link}:
+		Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), the {@code attrib_list} parameter of #ChooseFBConfigSGIX(),
+		by the {@code attribute} parameter of GLXSGIXPbuffer#QueryGLXPbufferSGIX() and by the {@code attribute} parameter of
+		GLXEXTImportContext#QueryContextInfoEXT().
 		""",
 
 		"FBCONFIG_ID_SGIX" _ 0x8013
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GetFBConfigAttribSGIX()".link}:",
+		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX().",
 
 		"SCREEN_EXT" _ 0x800C
 	)
 
 	IntConstant.block(
 		"""
-		Returned by ${"GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"DRAWABLE_TYPE_SGIX".link}) and accepted by the {@code attrib_list}
-		parameter of ${"ChooseFBConfigSGIX()".link} (following the ${"DRAWABLE_TYPE_SGIX".link} token):
+		Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #DRAWABLE_TYPE_SGIX) and accepted by the {@code attrib_list}
+		parameter of #ChooseFBConfigSGIX() (following the #DRAWABLE_TYPE_SGIX token).
 		""",
 
 		"WINDOW_BIT_SGIX" _ 0x00000001,
@@ -60,8 +60,8 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 	IntConstant.block(
 		"""
-		Returned by ${"GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"RENDER_TYPE_SGIX".link}) and accepted by the {@code attrib_list}
-		parameter of ${"ChooseFBConfigSGIX()".link} (following the ${"RENDER_TYPE_SGIX".link} token):
+		Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #RENDER_TYPE_SGIX) and accepted by the {@code attrib_list}
+		parameter of #ChooseFBConfigSGIX() (following the #RENDER_TYPE_SGIX token).
 		""",
 
 		"RGBA_BIT_SGIX" _ 0x00000001,
@@ -69,7 +69,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 	)
 
 	val RenderTypes = IntConstant.block(
-		"Accepted by the {@code render_type} parameter of ${"CreateContextWithConfigSGIX()".link}:",
+		"Accepted by the {@code render_type} parameter of #CreateContextWithConfigSGIX().",
 
 		"RGBA_TYPE_SGIX" _ 0x8014,
 		"COLOR_INDEX_TYPE_SGIX" _ 0x8015
@@ -91,7 +91,7 @@ fun GLX_SGIX_fbconfig() = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", 
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		mods(const, nullable) _ int_p.IN("attrib_list", "an optional list of attributes, terminated with {@link org.lwjgl.system.linux.X#None}"),
+		mods(const, nullable) _ int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.X##None"),
 		autoSizeResult _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
 	)
 

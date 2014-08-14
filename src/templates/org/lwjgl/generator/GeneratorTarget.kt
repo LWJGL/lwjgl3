@@ -104,15 +104,23 @@ val String.asJNIName: String
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
 enum class Access(internal val modifier: String) {
-	PUBLIC : Access("public ")
-	INTERNAL : Access("")
-	PRIVATE : Access("private ")
+	PUBLIC: Access("public ")
+	INTERNAL: Access("")
+	PRIVATE: Access("private ")
 }
 
 abstract class GeneratorTarget(
 	val packageName: String,
 	val className: String
 ): TemplateElement() {
+
+	class object {
+		private val LINKS: Pattern = {
+			val JAVA = """\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*(?:\.\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)*"""
+			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
+			Pattern.compile("""($JAVA)?(?<!&)(@?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
+		}()
+	}
 
 	var access = Access.PUBLIC
 		set(access: Access) {
@@ -123,12 +131,90 @@ abstract class GeneratorTarget(
 
 	var documentation: String? = null
 		set(documentation: String?) {
-			$documentation = documentation?.toJavaDoc(indentation = "")
+			$documentation = processDocumentation(documentation!!).toJavaDoc(indentation = "")
 		}
 
 	val preamble = Preamble()
 
 	abstract fun PrintWriter.generateJava()
+
+	open fun processDocumentation(documentation: String): String = processDocumentation(documentation, "", "")
+
+	protected fun processDocumentation(documentation: String, prefixConstant: String, prefixMethod: String): String {
+		val matcher = LINKS.matcher(documentation)
+		if ( !matcher.find() )
+			return documentation
+
+		val buffer = StringBuilder(documentation.size * 2)
+
+		var lastEnd = 0
+		do {
+			buffer.append(documentation, lastEnd, matcher.start())
+
+			val className = matcher.group(1)
+			/*
+			# - normal link, apply prefix
+			## - custom link, do not transform
+			@# or @## - like above, but add "see " in front
+			 */
+			val linkMethod = matcher.group(2)!!
+			val classElement = matcher.group(3)!!
+
+			if ( linkMethod[0] == '@' )
+				buffer append "see "
+
+			val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
+			val prefix = if ( link == LinkType.FIELD ) prefixConstant else prefixMethod
+			buffer append when ( linkMethod.count { it == '#' } ) {
+				1    -> link.create(this.className, prefix, className, classElement, custom = false)
+				2    ->
+					if ( className == null && link == LinkType.FIELD )
+						"{@link $classElement}"
+					else
+						link.create(this.className, prefix, className, classElement, custom = true)
+				else -> throw IllegalStateException("Unsupported link type: $link")
+			}
+
+			lastEnd = matcher.end()
+		} while ( matcher.find() )
+
+		buffer.append(documentation, lastEnd, documentation.length())
+
+		return buffer.toString()
+	}
+
+	protected enum class LinkType {
+		FIELD: LinkType() {
+			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String {
+				val source = if ( className == null || className == sourceName ) "" else className
+				val prefix = if ( custom ) "" else sourcePrefix
+
+				return "{@link $source#$prefix$classElement${if ( prefix.isEmpty() ) "" else " $classElement"}}"
+			}
+		}
+		METHOD: LinkType() {
+			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String {
+				val source = if ( className == null || className == sourceName ) "" else className
+				val prefix = if ( custom ) "" else sourcePrefix
+
+				val parentheses = classElement.indexOf('(')
+				if ( parentheses == -1 )
+					throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
+
+				val name = classElement.substring(0, parentheses) let {
+					if ( !custom && it endsWith 'v' )
+						it.substring(0, it.length - (if ( it.endsWith("_v") ) 2 else 1))
+					else
+						it
+				}
+
+				val hasParams = parentheses < classElement.size - 2
+				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( (prefix.isEmpty() && !hasParams) || custom ) "" else " $name"}}"
+			}
+		}
+
+		abstract fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String
+	}
 
 }
 // TODO: Remove if KT-457 or KT-1183 are fixed.
@@ -209,7 +295,7 @@ fun CustomClass(
 	init: (CustomClass.() -> Unit)? = null,
 	printContent: PrintWriter.() -> Unit
 ): CustomClass {
-	var cc = object : CustomClass(packageName, className) {
+	var cc = object: CustomClass(packageName, className) {
 		override fun PrintWriter.generateContent() = printContent()
 	}
 

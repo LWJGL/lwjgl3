@@ -15,7 +15,7 @@ fun ARB_clear_texture() = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
 	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/clear_texture.txt", templateName)} extension."
 
 	IntConstant.block(
-		"Accepted by the {@code pname} parameter for ${"GL42#GetInternalformati()".link} and ${"GL43#GetInternalformati64()".link}.",
+		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
 
 		"CLEAR_TEXTURE" _ 0x9365
 	)
@@ -26,7 +26,7 @@ fun ARB_clear_texture() = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
 		Fills all or part of a texture image with a constant value.
 
 		Arguments {@code xoffset}, {@code yoffset}, and {@code zoffset} specify the lower left texel coordinates of a {@code width}-wide by {@code height}-high
-		by {@code depth}-deep rectangular subregion of the texel array and are interpreted as they are in ${"GL12#TexSubImage3D()".link}.
+		by {@code depth}-deep rectangular subregion of the texel array and are interpreted as they are in GL12#TexSubImage3D().
 
 		For 1D array textures, {@code yoffset} is interpreted as the first layer to be cleared and {@code height} is the number of layers to clear. For 2D array
 		textures, {@code zoffset} is interpreted as the first layer to be cleared and {@code depth} is the number of layers to clear. Cube map textures are

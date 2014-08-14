@@ -16,7 +16,7 @@ fun Fcntl() = "Fcntl".nativeClass(LINUX_PACKAGE) {
 	documentation = "Native bindings to <fcntl.h>."
 
 	IntConstant.block(
-		"${"open()".link} flags.",
+		"#open() flags.",
 
 		"O_ACCMODE" _ 0x00000003,
 		"O_RDONLY" _ 0x00000000,

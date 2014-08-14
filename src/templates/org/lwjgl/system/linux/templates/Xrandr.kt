@@ -121,7 +121,7 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRScreenResources_p.func(
 		"XRRGetScreenResources",
-		"Returns a {@link XRRScreenResources} structure for the given window.",
+		"Returns a ##XRRScreenResources structure for the given window.",
 
 		DISPLAY,
 		WINDOW
@@ -129,9 +129,9 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	void.func(
 		"XRRFreeScreenResources",
-		"Frees the given {@link XRRScreenResources} structure.",
+		"Frees the given ##XRRScreenResources structure.",
 
-		XRRScreenResources_p.IN("resources", "the {@link XRRScreenResources} structure to free")
+		XRRScreenResources_p.IN("resources", "the ##XRRScreenResources structure to free")
 	)
 
 	RROutput.func(
@@ -144,34 +144,34 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRCrtcInfo_p.func(
 		"XRRGetCrtcInfo",
-		"Returns information about a screen in a {@link XRRCrtcInfo} structure.",
+		"Returns information about a screen in a ##XRRCrtcInfo structure.",
 
 		DISPLAY,
-		XRRScreenResources_p.OUT("resources", "a pointer to a {@link XRRScreenResources} structure"),
+		XRRScreenResources_p.OUT("resources", "a pointer to a ##XRRScreenResources structure"),
 		RRCrtc.IN("crtc", "the screen to query")
 	)
 
 	void.func(
 		"XRRFreeCrtcInfo",
-		"Frees a {@link XRRCrtcInfo} structure.",
+		"Frees a ##XRRCrtcInfo structure.",
 
-		XRRCrtcInfo_p.IN("crtcInfo", "the {@link XRRCrtcInfo} structure to free")
+		XRRCrtcInfo_p.IN("crtcInfo", "the ##XRRCrtcInfo structure to free")
 	)
 
 	XRROutputInfo_p.func(
 		"XRRGetOutputInfo",
-		"Returns output information in a {@link XRROutputInfo} structure.",
+		"Returns output information in a ##XRROutputInfo structure.",
 
 		DISPLAY,
-		XRRScreenResources_p.IN("resources", "a pointer to a {@link XRRScreenResources} structure"),
+		XRRScreenResources_p.IN("resources", "a pointer to a ##XRRScreenResources structure"),
 		RROutput.IN("output", "the output to query")
 	)
 
 	void.func(
 		"XRRFreeOutputInfo",
-		"Frees a {@link XRROutputInfo} structure.",
+		"Frees a ##XRROutputInfo structure.",
 
-		XRROutputInfo_p.IN("outputInfo", "the {@link XRROutputInfo} structure to free")
+		XRROutputInfo_p.IN("outputInfo", "the ##XRROutputInfo structure to free")
 	)
 
 	void.func(
@@ -216,7 +216,7 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRCrtcGamma_p.func(
 		"XRRGetCrtcGamma",
-		"Returns the current display gamma values in a {@link XRRCrtcGamma} structure.",
+		"Returns the current display gamma values in a ##XRRCrtcGamma structure.",
 
 		DISPLAY,
 		RRCrtc.IN("crtc", "")
@@ -224,16 +224,16 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRCrtcGamma_p.func(
 		"XRRAllocGamma",
-		"Allocates a {@link XRRCrtcGamma} structure of the given {@code size}.",
+		"Allocates a ##XRRCrtcGamma structure of the given {@code size}.",
 
 		int.IN("size", "the gamma size")
 	)
 
 	void.func(
 		"XRRFreeGamma",
-		"Frees the given {@link XRRCrtcGamma} structure.",
+		"Frees the given ##XRRCrtcGamma structure.",
 
-		XRRCrtcGamma_p.IN("gamma", "the {@link XRRCrtcGamma} structure to free")
+		XRRCrtcGamma_p.IN("gamma", "the ##XRRCrtcGamma structure to free")
 	)
 
 	void.func(
@@ -242,7 +242,7 @@ fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		RRCrtc.IN("crtc", ""),
-		XRRCrtcGamma_p.IN("gamma", "a pointer to a {@link XRRCrtcGamma} structure that contains the gamma ramp")
+		XRRCrtcGamma_p.IN("gamma", "a pointer to a ##XRRCrtcGamma structure that contains the gamma ramp")
 	)
 
 }

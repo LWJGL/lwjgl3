@@ -48,7 +48,7 @@ private val FunctionProviderCL = Generator.register(object : FunctionProvider(OP
  * Defines the capabilities of an OpenCL platform or device.
  * <p/>
  * The instance returned by {@link CLPlatform#createCapabilities} )} exposes the functionality present on either the platform or any of its devices. This is
- * unlike the ${"CL10".linkCL("PLATFORM_EXTENSIONS")} string, which returns only platform functionality, supported across all platform devices.
+ * unlike the {@link CL10#CL_PLATFORM_EXTENSIONS} string, which returns only platform functionality, supported across all platform devices.
  * <p/>
  * The instance returned by {@link CLDevice#createCapabilities} exposes only the functionality available on that particular device.
  */""")
@@ -153,5 +153,3 @@ private val NativeClass.extensionLink: String
 
 private val NativeClass.extensionName: String
 	get() = "<strong>$templateName</strong>"
-
-fun String.linkCL(name: String) = this.link(name, if ( name.endsWith(')') ) "cl" else "CL_")

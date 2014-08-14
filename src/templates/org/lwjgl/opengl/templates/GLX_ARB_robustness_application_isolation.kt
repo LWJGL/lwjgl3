@@ -20,8 +20,8 @@ fun GLX_ARB_robustness_application_isolation() = "GLXARBRobustnessApplicationIso
 
 	IntConstant.block(
 		"""
-		Accepted as a bit in the attribute value for ${"GLXARBCreateContext#CONTEXT_FLAGS_ARB".link} in the {@code attrib_list} argument to
-		${"GLXARBCreateContext#CreateContextAttribsARB()".link}:
+		Accepted as a bit in the attribute value for GLXARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
+		GLXARBCreateContext#CreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008

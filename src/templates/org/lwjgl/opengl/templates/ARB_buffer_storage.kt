@@ -15,7 +15,7 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/buffer_storage.txt", templateName)} extension."
 
 	val BufferStorageFlags = IntConstant.block(
-		"Accepted in the {@code flags} parameter of ${"BufferStorage()".link} and ${"EXTDirectStateAccess#NamedBufferStorageEXT()".link}.",
+		"Accepted in the {@code flags} parameter of #BufferStorage() and EXTDirectStateAccess#NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT" _ 0x0040,
 		"MAP_COHERENT_BIT" _ 0x0080,
@@ -31,7 +31,7 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code barriers} parameter of ${"GL42#MemoryBarrier()".link}.",
+		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
 
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT" _ 0x00004000
 	)
@@ -42,11 +42,11 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 		Creates the data store of a buffer object.
 
 		The data store of the buffer object bound to {@code target} is allocated as a result of a call to this function and cannot be de-allocated until the
-		buffer is deleted with a call to ${"GL15#DeleteBuffers()".link}. Such a store may not be re-allocated through further calls to {@code BufferStorage}
-		or ${"GL15#BufferData()".link}.
+		buffer is deleted with a call to GL15#DeleteBuffers(). Such a store may not be re-allocated through further calls to {@code BufferStorage}
+		or GL15#BufferData().
 
 		{@code BufferStorage} deletes any existing data store. If any portion of the buffer object is mapped in the current context or any context current to
-		another thread, it is as though ${"GL15#UnmapBuffer()".link} is executed in each such context prior to deleting the existing data store.
+		another thread, it is as though GL15#UnmapBuffer() is executed in each such context prior to deleting the existing data store.
 		""",
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
@@ -75,54 +75,54 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 			are as follows:
 			${ul(
 				"""
-				${"DYNAMIC_STORAGE_BIT".link} &ndash; The contents of the data store may be updated after creation through calls to
-				${"GL15#BufferSubData()".link}. If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
-				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the ${"DYNAMIC_STORAGE_BIT".link}.
-				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as ${"GL31#CopyBufferSubData()".link} and
-				${"GL43#ClearBufferSubData()".link}.
+				#DYNAMIC_STORAGE_BIT &ndash; The contents of the data store may be updated after creation through calls to
+				GL15#BufferSubData(). If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
+				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the #DYNAMIC_STORAGE_BIT.
+				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as GL31#CopyBufferSubData() and
+				GL43#ClearBufferSubData().
 				""",
 				"""
-				${"GL30#MAP_READ_BIT".link} &ndash; The buffer's data store may be mapped by the client for read access and a pointer in the client's address space
+				GL30#MAP_READ_BIT &ndash; The buffer's data store may be mapped by the client for read access and a pointer in the client's address space
 				obtained that may be read from.
 				""",
 				"""
-				${"GL30#MAP_WRITE_BIT".link} &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
+				GL30#MAP_WRITE_BIT &ndash; The buffer's data store may be mapped by the client for write access and a pointer in the client's address
 				space obtained that may be written to.
 				""",
 				"""
-				${"MAP_PERSISTENT_BIT".link} &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
+				#MAP_PERSISTENT_BIT &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
 				pointer to the data store remains valid so long as the data store is mapped, even during execution of drawing or dispatch commands.
 				""",
 				"""
-				${"MAP_COHERENT_BIT".link} &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
+				#MAP_COHERENT_BIT &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
 				coherent, so long as that mapping is performed using MapBufferRange. That is, data written to the store by either the client or server will be
 				immediately visible to the other with no further action taken by the application. In particular:
 				${ul(
 					"""
-					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the ${"GL42#MemoryBarrier()".link} command with
-					the ${"CLIENT_MAPPED_BUFFER_BARRIER_BIT".link} set, then in subsequent commands the server will see the writes.
+					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the GL42#MemoryBarrier() command with
+					the #CLIENT_MAPPED_BUFFER_BARRIER_BIT set, then in subsequent commands the server will see the writes.
 					""",
 					"If {@code MAP_COHERENT_BIT} is set and the client performs a write, then in subsequent commands the server will see the writes.",
 					"""
-					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call ${"GL42#MemoryBarrier()".link} with the
-					${"CLIENT_MAPPED_BUFFER_BARRIER_BIT".link} set and then call ${"GL32#FenceSync()".link} with ${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or
-					${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call GL42#MemoryBarrier() with the
+					#CLIENT_MAPPED_BUFFER_BARRIER_BIT set and then call GL32#FenceSync() with GL32#SYNC_GPU_COMMANDS_COMPLETE (or
+					GL11#Finish()). Then the CPU will see the writes after the sync is complete.
 					""",
 					"""
-					If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call ${"GL32#FenceSync()".link} with
-					${"GL32#SYNC_GPU_COMMANDS_COMPLETE".link} (or ${"GL11#Finish()".link}). Then the CPU will see the writes after the sync is complete.
+					If {@code MAP_COHERENT_BIT} is set and the server does a write, the app must call GL32#FenceSync() with
+					GL32#SYNC_GPU_COMMANDS_COMPLETE (or GL11#Finish()). Then the CPU will see the writes after the sync is complete.
 					"""
 				)}
 				""",
 				"""
-				${"CLIENT_STORAGE_BIT".link} &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
+				#CLIENT_STORAGE_BIT &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
 				implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
 				"""
 			)}
 
-			If {@code flags} contains ${"MAP_PERSISTENT_BIT".link}, it must also contain at least one of ${"GL30#MAP_READ_BIT".link} or ${"GL30#MAP_WRITE_BIT".link}.
+			If {@code flags} contains #MAP_PERSISTENT_BIT, it must also contain at least one of GL30#MAP_READ_BIT or GL30#MAP_WRITE_BIT.
 
-			It is an error to specify ${"MAP_COHERENT_BIT".link} without also specifying ${"MAP_PERSISTENT_BIT".link}.
+			It is an error to specify #MAP_COHERENT_BIT without also specifying #MAP_PERSISTENT_BIT.
 			"""
 		)
 	)).javaDocLink
@@ -146,7 +146,7 @@ fun ARB_buffer_storage() = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage"
 		GLbitfield.IN(
 			"flags",
 			"the bitwise {@code OR} of flags describing the intended usage of the buffer object's data store by the application",
-			"GL30#MAP_READ_BIT GL30#MAP_WRITE_BIT".links + BufferStorageFlags
+			"GL30#MAP_READ_BIT GL30#MAP_WRITE_BIT $BufferStorageFlags"
 		)
 	)
 

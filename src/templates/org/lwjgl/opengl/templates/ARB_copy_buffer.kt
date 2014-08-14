@@ -17,7 +17,7 @@ fun ARB_copy_buffer() = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 	IntConstant.block(
 		"""
 		Accepted by the target parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv, MapBufferRange,
-		FlushMappedBufferRange, GetBufferParameteriv, BindBufferRange, BindBufferBase, and CopyBufferSubData:
+		FlushMappedBufferRange, GetBufferParameteriv, BindBufferRange, BindBufferBase, and CopyBufferSubData.
 		""",
 		"COPY_READ_BUFFER" _ 0x8F36,
 		"COPY_WRITE_BUFFER" _ 0x8F37

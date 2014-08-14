@@ -34,7 +34,7 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	macro _ CFAllocatorRef.func(
 		"kCFAllocatorMalloc",
 		"""
-		This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to {@link #kCFAllocatorDefault}
+		This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to #kCFAllocatorDefault()
 		whenever possible. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator" in {@code CFString} where the memory
 		was obtained as a result of {@code malloc()} type functions.
 		"""
@@ -55,7 +55,7 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	)
 	macro _ CFAllocatorRef.func(
 		"kCFAllocatorUseContext",
-		"Special allocator argument to ${"CFAllocatorCreate()".link} which means \"use the functions given in the context to allocate the allocator itself as well\"."
+		"Special allocator argument to #CFAllocatorCreate() which means \"use the functions given in the context to allocate the allocator itself as well\"."
 	)
 
 	CFTypeRef.func(
@@ -76,7 +76,7 @@ fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		Releases a Core Foundation object.
 
 		If the retain count of {@code cf} becomes zero the memory allocated to the object is deallocated and the object is destroyed. If you create, copy, or
-		explicitly retain (see the ${"CFRetain()".link} function) a Core Foundation object, you are responsible for releasing it when you no longer need it.
+		explicitly retain (see the #CFRetain() function) a Core Foundation object, you are responsible for releasing it when you no longer need it.
 		""",
 
 		CFTypeRef.IN("cf", "the CFType object to release")

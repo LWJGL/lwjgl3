@@ -24,7 +24,7 @@ fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribList} parameter of ${"GLX#ChooseVisual()".link}, and by the {@code attrib} parameter of ${"GLX#GetConfig()".link}:",
+		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20B2
 	)

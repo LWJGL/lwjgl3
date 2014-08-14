@@ -16,18 +16,18 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 	IntConstant.block(
 		"""
-		Returned by ${"CL10#CreateContext()".link}, ${"CL10#CreateContextFromType()".link}, and ${"GetGLContextInfoKHR()".link} when an invalid OpenGL context or
+		Returned by CL10#CreateContext(), CL10#CreateContextFromType(), and #GetGLContextInfoKHR() when an invalid OpenGL context or
 		share group object handle is specified in {@code properties}.
 		""",
 
 		"INVALID_GL_SHAREGROUP_REFERENCE_KHR" _ -1000
 	)
 
-	val INVALID_GL_SHAREGROUP_REFERENCE_KHR = "INVALID_GL_SHAREGROUP_REFERENCE_KHR".link
+	val INVALID_GL_SHAREGROUP_REFERENCE_KHR = "#INVALID_GL_SHAREGROUP_REFERENCE_KHR"
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} argument of ${"GetGLContextInfoKHR()".link}. Returns a list of all CL devices which may be associated with the
+		Accepted as the {@code param_name} argument of #GetGLContextInfoKHR(). Returns a list of all CL devices which may be associated with the
 		specified OpenGL context.
 		""",
 
@@ -36,7 +36,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} argument of ${"GetGLContextInfoKHR()".link}. Returns the CL device currently associated with the specified OpenGL
+		Accepted as the {@code param_name} argument of #GetGLContextInfoKHR(). Returns the CL device currently associated with the specified OpenGL
 		context.
 		""",
 
@@ -45,7 +45,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 
 	IntConstant.block(
-		"Accepted as an attribute name in the {@code properties} argument of ${"CL10#CreateContext()".link} and ${"CL10#CreateContextFromType()".link}.",
+		"Accepted as an attribute name in the {@code properties} argument of CL10#CreateContext() and CL10#CreateContextFromType().",
 
 		"GL_CONTEXT_KHR" _ 0x2008,
 		"EGL_DISPLAY_KHR" _ 0x2009,
@@ -67,7 +67,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		mods(Check(5), const) _ cl_context_properties_p.IN(
 			"properties",
 			"""
-			points to an attribute list whose format and valid contents are identical to the {code properties} argument of ${"CL10#CreateContext()".link}.
+			points to an attribute list whose format and valid contents are identical to the {code properties} argument of CL10#CreateContext().
 			{@code properties} must identify a single valid GL context or GL share group object.
 			"""
 		),
@@ -90,9 +90,9 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 
 		Returns $INVALID_GL_SHAREGROUP_REFERENCE_KHR if a context was specified by any of the following means:
 		${ul(
-			"A context was specified for an EGL-based OpenGL ES or OpenGL implementation by setting the attributes ${"GL_CONTEXT_KHR".link} and ${"EGL_DISPLAY_KHR".link}.",
-			"A context was specified for a GLX-based OpenGL implementation by setting the attributes ${"GL_CONTEXT_KHR".link} and ${"GLX_DISPLAY_KHR".link}.",
-			"A context was specified for a WGL-based OpenGL implementation by setting the attributes ${"GL_CONTEXT_KHR".link} and ${"WGL_HDC_KHR".link}."
+			"A context was specified for an EGL-based OpenGL ES or OpenGL implementation by setting the attributes #GL_CONTEXT_KHR and #EGL_DISPLAY_KHR.",
+			"A context was specified for a GLX-based OpenGL implementation by setting the attributes #GL_CONTEXT_KHR and #GLX_DISPLAY_KHR.",
+			"A context was specified for a WGL-based OpenGL implementation by setting the attributes #GL_CONTEXT_KHR and #WGL_HDC_KHR."
 		)}
 		and any of the following conditions hold:
 		${ul(
@@ -105,7 +105,7 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 		)}
 
 		Returns $INVALID_GL_SHAREGROUP_REFERENCE_KHR if a share group was specified for a CGL-based OpenGL implementation by setting the attribute
-		${"CGL_SHAREGROUP_KHR".link}, and the specified share group does not identify a valid CGL share group object.
+		#CGL_SHAREGROUP_KHR, and the specified share group does not identify a valid CGL share group object.
 
 		Returns $INVALID_OPERATION if a context was specified as described above and any of the following conditions hold:
 		${ul(
@@ -114,18 +114,18 @@ fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 			binding API.
 			""",
 			"""
-			More than one of the attributes ${"CGL_SHAREGROUP_KHR".link}, ${"EGL_DISPLAY_KHR".link}, ${"GLX_DISPLAY_KHR".link}, and
-			${"WGL_HDC_KHR".link} is set to a non-default value.
+			More than one of the attributes #CGL_SHAREGROUP_KHR, #EGL_DISPLAY_KHR, #GLX_DISPLAY_KHR, and
+			#WGL_HDC_KHR is set to a non-default value.
 			""",
-			"Both of the attributes ${"CGL_SHAREGROUP_KHR".link} and ${"GL_CONTEXT_KHR".link} are set to non-default values.",
+			"Both of the attributes #CGL_SHAREGROUP_KHR and #GL_CONTEXT_KHR are set to non-default values.",
 			"Any of the devices specified in the {@code devices} argument cannot support OpenCL objects which share the data store of an OpenGL object."
 		)}
 
 		Returns $INVALID_VALUE if an invalid attribute name is specified in {@code properties}.
 
 		Additionally, returns $INVALID_VALUE if {@code param_name} is invalid, or if the size in bytes specified by {@code param_value_size} is
-		less than the size of the return type and {@code param_value} is not a $NULL value, ${"CL10#OUT_OF_RESOURCES".link} if there is a failure to allocate
-		resources required by the OpenCL implementation on the device, or ${"CL10#OUT_OF_HOST_MEMORY".link} if there is a failure to allocate resources required by
+		less than the size of the return type and {@code param_value} is not a $NULL value, CL10#OUT_OF_RESOURCES if there is a failure to allocate
+		resources required by the OpenCL implementation on the device, or CL10#OUT_OF_HOST_MEMORY if there is a failure to allocate resources required by
 		the OpenCL implementation on the host.
 		"""
 	)

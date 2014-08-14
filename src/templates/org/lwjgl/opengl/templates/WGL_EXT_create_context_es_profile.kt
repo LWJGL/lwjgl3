@@ -16,7 +16,7 @@ fun WGL_EXT_create_context_es_profile() = "WGLEXTCreateContextESProfile".nativeC
 		"""
 
 	IntConstant.block(
-		"Accepted as a bit in the attribute value for {@link WGLARBCreateContextProfile#WGL_CONTEXT_PROFILE_MASK_ARB} in {@code attribList}.",
+		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
 
 		"CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004
 	)

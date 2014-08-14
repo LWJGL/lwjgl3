@@ -20,9 +20,9 @@ fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisam
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attributes} parameter of ${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link},
-		${"WGLARBPixelFormat#GetPixelFormatAttribfARB()".link}, and the {@code attribIList} and {@code attribFList} of
-		${"WGLARBPixelFormat#ChoosePixelFormatARB()".link}.
+		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(),
+		WGLARBPixelFormat#GetPixelFormatAttribfARB(), and the {@code attribIList} and {@code attribFList} of
+		WGLARBPixelFormat#ChoosePixelFormatARB().
 		""",
 
 		"SAMPLE_BUFFERS_ARB" _ 0x2041,

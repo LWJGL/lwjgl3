@@ -86,7 +86,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Object types for ${"EnumObjects()".link} and ${"GetCurrentObject()".link}.",
+		"Object types for #EnumObjects() and #GetCurrentObject().",
 		"OBJ_PEN" _ 1,
 		"OBJ_BRUSH" _ 2,
 		"OBJ_DC" _ 3,
@@ -104,7 +104,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"Used by the index parameter of ${"GetDeviceCaps()".link}.",
+		"Used by the index parameter of #GetDeviceCaps().",
 		"DRIVERVERSION" _ 0, // Device driver version
 		"TECHNOLOGY" _ 2, // Device classification
 		"HORZSIZE" _ 4, // Horizontal size in millimeters
@@ -160,7 +160,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"{@link PIXELFORMATDESCRIPTOR} flags.",
+		"##PIXELFORMATDESCRIPTOR flags.",
 		"PFD_DOUBLEBUFFER" _ 0x00000001,
 		"PFD_STEREO" _ 0x00000002,
 		"PFD_DRAW_TO_WINDOW" _ 0x00000004,
@@ -185,13 +185,13 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 	)
 
 	IntConstant.block(
-		"{@link PIXELFORMATDESCRIPTOR} pixel types.",
+		"##PIXELFORMATDESCRIPTOR pixel types.",
 		"PFD_TYPE_RGBA" _ 0,
 		"PFD_TYPE_COLORINDEX" _ 1
 	)
 
 	IntConstant.block(
-		"{@link PIXELFORMATDESCRIPTOR} layer types.",
+		"##PIXELFORMATDESCRIPTOR layer types.",
 		"PFD_MAIN_PLANE" _ 0,
 		"PFD_OVERLAY_PLANE" _ 1,
 		"PFD_UNDERLAY_PLANE" _ -1
@@ -271,7 +271,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 			A pointer to a null-terminated character string that specifies the name of the specific output device being used, as shown by the Print Manager (for
 			example, Epson FX-80). It is not the printer model name. The {@code lpszDevice} parameter must be used.
 
-			To obtain valid names for displays, call ${"EnumDisplayDevices()".link}.
+			To obtain valid names for displays, call #EnumDisplayDevices().
 
 			If {@code lpszDriver} is DISPLAY or the device name of a specific display device, then {@code lpszDevice} must be $NULL or that same device name. If
 			{@code lpszDevice} is $NULL, then a DC is created for the primary display device.
@@ -283,11 +283,11 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		mods(const, nullable) _ DEVMODE_p.IN(
 			"lpInitData",
 			"""
-			A pointer to a {@link DEVMODE} structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}
+			A pointer to a ##DEVMODE structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}
 			function retrieves this structure filled in for a specified device. The {@code lpInitData} parameter must be $NULL if the device driver is to use
 			the default initialization (if any) specified by the user.
 
-			If {@code lpszDriver} is DISPLAY, {@code lpInitData} must be $NULL; GDI then uses the display device's current {@link DEVMODE}.
+			If {@code lpszDriver} is DISPLAY, {@code lpInitData} must be $NULL; GDI then uses the display device's current ##DEVMODE.
 			"""
 		)
 	)
@@ -327,7 +327,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"RestoreDC",
 		"""
 		Restores a device context (DC) to the specified state. The DC is restored by popping state information off a stack created by earlier calls to the
-		${"SaveDC()".link} function.
+		#SaveDC() function.
 		""",
 
 		HDC.IN("hdc", "a handle to the DC"),
@@ -348,7 +348,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		""",
 
 		HDC.IN("hdc", "a handle to the DC whose final translation origin is to be retrieved"),
-		LPPOINT.OUT("point", "a {@link POINT} structure that receives the final translation origin, in device coordinates")
+		LPPOINT.OUT("point", "a ##POINT structure that receives the final translation origin, in device coordinates")
 	)
 
 	int.func(
@@ -394,14 +394,14 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
 		HDC.IN("hdc", "the device context that the function examines to determine the best match for the pixel format descriptor pointed to by {@code pixelFormatDescriptor}"),
-		const _ PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a {@link PIXELFORMATDESCRIPTOR} structure that specifies the requested pixel format")
+		const _ PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
 	)
 
 	int.func(
 		"DescribePixelFormat",
 		"""
 		Obtains information about the pixel format identified by pixelFormat of the device associated with dc. The function sets the members of the
-		{@link PIXELFORMATDESCRIPTOR} structure pointed to by pixelFormatDescriptor with that pixel format data. The return value is the maximum pixel format
+		##PIXELFORMATDESCRIPTOR structure pointed to by pixelFormatDescriptor with that pixel format data. The return value is the maximum pixel format
 		index of the device context.
 		""",
 
@@ -411,13 +411,13 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 			"bytes",
 			"""
 			the size, in bytes, of the structure pointed to by {@code pixelFormatDescriptor}. The {@code wglDescribePixelFormat} function stores no more than
-			{@code bytes} bytes of data to that structure. Set this value to {@link PIXELFORMATDESCRIPTOR#SIZEOF}.
+			{@code bytes} bytes of data to that structure. Set this value to PIXELFORMATDESCRIPTOR##SIZEOF.
 			"""
 		),
 		nullable _ LPPIXELFORMATDESCRIPTOR.OUT(
 			"pixelFormatDescriptor",
 			"""
-			a {@link PIXELFORMATDESCRIPTOR} structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
+			a ##PIXELFORMATDESCRIPTOR structure whose members the function sets with pixel format data. The function stores the number of bytes copied to
 			the structure in the structure's {@code size} member. If, upon entry, {@code pixelFormatDescriptor} is $NULL, the function writes no data to the
 			structure. This is useful when you only want to obtain the maximum pixel format index of a device context.
 			"""
@@ -440,7 +440,7 @@ fun WinGDI() = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		const _ PIXELFORMATDESCRIPTOR_p.IN(
 			"pixelFormatDescriptor",
 			"""
-			a {@link PIXELFORMATDESCRIPTOR} structure that contains the logical pixel format specification. The system's metafile component uses this structure
+			a ##PIXELFORMATDESCRIPTOR structure that contains the logical pixel format specification. The system's metafile component uses this structure
 			to record the logical pixel format specification. The structure has no other effect upon the behavior of the SetPixelFormat function.
 			"""
 		)

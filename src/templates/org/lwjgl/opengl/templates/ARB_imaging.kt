@@ -94,7 +94,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"ColorTable",
 		"Specifies a color lookup table.",
 
-		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + PROXY_COLOR_TABLE_TARGETS),
+		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("internalformat", "the color table internal format", IMAGING_INTERNAL_FORMATS),
 		GLsizei.IN("width", "the color table width"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
@@ -152,8 +152,8 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetColorTableParameteriv",
 		"Returns the integer value of the specified color table parameter.",
 
-		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + PROXY_COLOR_TABLE_TARGETS),
-		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + COLOR_TABLE_PROPERTIES),
+		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
+		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("params", "an array in which to place the returned value")
 	)).javaDocLink
 
@@ -393,7 +393,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of $ConvolutionParameteri.",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + "#CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
@@ -411,7 +411,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"Pointer version of $ConvolutionParameterf.",
 
 		GLenum.IN("target", "the filter target"),
-		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + "#CONVOLUTION_BORDER_COLOR"),
+		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
@@ -532,7 +532,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLboolean.IN(
 			"sink",
 			"""
-			whether pixel groups will be consumed by the histogram operation (${"GL11#TRUE".link}) or passed on to the minmax operation (${"GL11#FALSE".link})
+			whether pixel groups will be consumed by the histogram operation (GL11#TRUE) or passed on to the minmax operation (GL11#FALSE)
 			"""
 		)
 	)
@@ -551,7 +551,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLboolean.IN(
 			"reset",
-			"if ${"GL11#TRUE".link}, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
+			"if GL11#TRUE, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
@@ -584,7 +584,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("internalformat", "the minmax table internal format", IMAGING_INTERNAL_FORMATS),
 		GLboolean.IN(
 			"sink",
-			"whether pixel groups will be consumed by the minmax operation (${"GL11#TRUE".link}) or passed on to final conversion (${"GL11#FALSE".link})"
+			"whether pixel groups will be consumed by the minmax operation (GL11#TRUE) or passed on to final conversion (GL11#FALSE)"
 		)
 	)
 
@@ -603,7 +603,7 @@ fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLboolean.IN(
 			"reset",
 			"""
-			If ${"GL11#TRUE".link}, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
+			If GL11#TRUE, then each minimum value is reset to the maximum representable value, and each maximum value is reset to the minimum
 			representable value. All values are reset, whether returned or not.
 			"""
 		),

@@ -18,7 +18,7 @@ fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
 
 	// TODO: Is this portable? What's the type of clockid_t?
 	IntConstant.block(
-		"The IDs of the various system clocks (for POSIX.1b interval timers):",
+		"The IDs of the various system clocks (for POSIX.1b interval timers).",
 
 		"CLOCK_REALTIME" _ 0,
 		"CLOCK_MONOTONIC" _ 1,
@@ -35,20 +35,20 @@ fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
 	int.func(
 		"clock_getres",
 		"""
-		Finds the resolution (precision) of the specified clock {@code clk_id}, and, if res is non-$NULL, stores it in the {@link timespec} struct pointed to by
+		Finds the resolution (precision) of the specified clock {@code clk_id}, and, if res is non-$NULL, stores it in the ##timespec struct pointed to by
 		{@code res}. The resolution of clocks depends on the implementation and cannot be configured by a particular process.
 		""",
 
 		clockid_t.IN("clk_id", "the clock"),
-		nullable _ timespec_p.OUT("res", "a pointer to a {@link timespec} structure")
+		nullable _ timespec_p.OUT("res", "a pointer to a ##timespec structure")
 	)
 
 	int.func(
 		"clock_gettime",
-		"Retrieves the time of the specified clock {@code clk_id} and stores it in the {@link timespec} struct pointed to by {@code res}.",
+		"Retrieves the time of the specified clock {@code clk_id} and stores it in the ##timespec struct pointed to by {@code res}.",
 
 		clockid_t.IN("clk_id", "the clock"),
-		timespec_p.OUT("tp", "a pointer to a {@link timespec} structure")
+		timespec_p.OUT("tp", "a pointer to a ##timespec structure")
 	)
 
 	int.func(

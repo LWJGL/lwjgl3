@@ -17,8 +17,8 @@ fun WGL_ARB_pixel_format_float() = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_
 
 	IntConstant.block(
 		"""
-		Accepted as a value in the {@code attribIList} parameter array of ${"WGLARBPixelFormat#ChoosePixelFormatARB()".link}, and returned in the {@code values}
-		parameter array of ${"WGLARBPixelFormat#GetPixelFormatAttribiARB()".link}.
+		Accepted as a value in the {@code attribIList} parameter array of WGLARBPixelFormat#ChoosePixelFormatARB(), and returned in the {@code values}
+		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().
 		""",
 
 		"TYPE_RGBA_FLOAT_ARB" _ 0x21A0

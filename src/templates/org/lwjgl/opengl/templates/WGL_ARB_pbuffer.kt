@@ -38,14 +38,14 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		display mode change occurs.
 		"""
 
-	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()".link
+	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()"
 
 	val wglCreatePbufferARB = HPBUFFERARB.func(
 		"CreatePbufferARB",
 		"""
 		Creates a pixel buffer (pbuffer) and returns a handle to it.
 
-		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the ${"DRAW_TO_PBUFFER_ARB".link}
+		Support for pbuffers may be restricted to specific pixel formats. Use $wglGetPixelFormatAttribiARB to query the #DRAW_TO_PBUFFER_ARB
 		attribute to determine which pixel formats support the creation of pbuffers.
 		""",
 
@@ -97,7 +97,7 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 	IntConstant.block(
 		"""
-		Accepted by the {@code attribIList} parameter of ${"WGLARBPixelFormat#ChoosePixelFormatARB()".link} and the {@code attributes} parameter of
+		Accepted by the {@code attribIList} parameter of WGLARBPixelFormat#ChoosePixelFormatARB() and the {@code attributes} parameter of
 		$wglGetPixelFormatAttribiARB.
 		""",
 

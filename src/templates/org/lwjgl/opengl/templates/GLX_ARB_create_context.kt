@@ -28,7 +28,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 		"""
 
 	IntConstant.block(
-		"Accepted as an attribute name in {@code attrib_list}:",
+		"Accepted as an attribute name in {@code attrib_list}.",
 
 		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
 		"CONTEXT_MINOR_VERSION_ARB" _ 0x2092,
@@ -37,14 +37,14 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for ${"CONTEXT_FLAGS_ARB".link} in {@code attrib_list}:",
+		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attrib_list}.",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
 	)
 
 	IntConstant.block(
-		"Accepted as bits in the attribute value for ${"CONTEXT_PROFILE_MASK_ARB".link} in {@code attrib_list}:",
+		"Accepted as bits in the attribute value for #CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
 
 		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
@@ -77,17 +77,17 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 		Bool.IN(
 			"direct",
 			"""
-			direct rendering is requested if {@code direct} is {@link Xlib#True}, and indirect rendering if {@code direct} is {@link Xlib#False}. If
-			{@code direct} is {@link Xlib#True}, the implementation may nonetheless create an indirect rendering context if any of the following conditions hold:
+			direct rendering is requested if {@code direct} is Xlib##True, and indirect rendering if {@code direct} is Xlib##False. If
+			{@code direct} is Xlib##True, the implementation may nonetheless create an indirect rendering context if any of the following conditions hold:
 			${ul(
 				"The implementation does not support direct rendering.",
 				"{@code display} is not a local X server.",
 				"Implementation-dependent limits on the number of direct rendering contexts that can be supported simultaneously are exceeded."
 			)}
-			Use ${"GLX#IsDirect()".link} to determine whether or not a request for a direct rendering context succeeded.
+			Use GLX#IsDirect() to determine whether or not a request for a direct rendering context succeeded.
 			"""
 		),
-		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@link X#None}")
+		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with X##None")
 	)
 
 }

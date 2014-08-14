@@ -22,7 +22,7 @@ abstract class FunctionProvider(
 	{
 		javaImport(
 			"org.lwjgl.system.*",
-		    "java.util.Set"
+			"java.util.Set"
 		)
 	}
 
@@ -136,6 +136,8 @@ class NativeClass(
 
 	val hasNativeFunctions: Boolean
 		get() = !functions.isEmpty()
+
+	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
@@ -258,7 +260,7 @@ class NativeClass(
 	// DSL extensions
 
 	fun <T> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
-		val block = ConstantBlock(this@NativeClass, this, documentation.toJavaDoc(), *constants)
+		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
 	}
@@ -268,7 +270,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = documentation.toJavaDoc(parameters.stream(), returnDoc),
+			documentation = processDocumentation(documentation.toJavaDoc(parameters.stream(), returnDoc)),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
@@ -276,23 +278,6 @@ class NativeClass(
 		_functions add func
 		return func
 	}
-
-	// Javadoc DSL extensions
-
-	fun String.link(name: String) = this.link(name, if ( name.endsWith(')') ) prefixMethod else prefixConstant)
-	val String.link: String
-		get() {
-			val hash = this.indexOf('#')
-			return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
-		}
-
-	val String.links: ConstantBlock.Links get() = this.toConstantLinks(className, prefixConstant)
-	fun String.toConstantLinks(): ConstantBlock.Links = this.toConstantLinks(className)
-
-	fun ConstantBlock.Links.plus(links: String) = this + links.links
-	fun String.plus(links: ConstantBlock.Links) = this.links + links // TODO: Kotlin bug, this doesn't take priority over the native one. See GL20#glGetVertexAttribiv
-
-	fun NativeType.IN(name: String, javadoc: String, links: String, linkMode: LinkMode = LinkMode.SINGLE) = IN(name, javadoc, links.links, linkMode)
 
 }
 

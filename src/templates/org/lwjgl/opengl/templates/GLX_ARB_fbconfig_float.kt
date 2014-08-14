@@ -21,13 +21,13 @@ fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbc
 		"""
 
 	IntConstant.block(
-		"Accepted as values of the {@code render_type} arguments in the ${"GLX13#CreateNewContext()".link} and ${"GLX#CreateContext()".link} functions:",
+		"Accepted as values of the {@code render_type} arguments in the GLX13#CreateNewContext() and GLX#CreateContext() functions.",
 
 		"RGBA_FLOAT_TYPE" _ 0x20B9
 	)
 
 	IntConstant.block(
-		"Accepted as a bit set in the GLX_RENDER_TYPE variable:",
+		"Accepted as a bit set in the GLX_RENDER_TYPE variable.",
 
 		"RGBA_FLOAT_BIT" _ 0x00000004
 	)

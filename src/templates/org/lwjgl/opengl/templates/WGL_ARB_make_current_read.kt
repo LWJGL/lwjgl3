@@ -22,7 +22,7 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 		"""
 
 	IntConstant.block(
-		"New errors returned by {@link org.lwjgl.system.windows.WinBase#GetLastError}.",
+		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
 		"ERROR_INVALID_PIXEL_TYPE_ARB" _ 0x2043,
 		"ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB" _ 0x2054
@@ -35,7 +35,7 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 		by the calling thread are drawn on the device identified by {@code drawDC} and read on the device identified by {@code readDC}.
 
 		The {@code drawDC} and {@code readDC} parameters must refer to drawing surfaces supported by OpenGL. These parameters need not be the same {@code hdc}
-		that was passed to {@link org.lwjgl.system.windows.WGL#wglCreateContext} when {@code hglrc} was created. {@code drawDC} must have the same pixel format
+		that was passed to org.lwjgl.system.windows.WGL#CreateContext() when {@code hglrc} was created. {@code drawDC} must have the same pixel format
 		and be created on the same physical device as the {@code hdc} that was passed into wglCreateContext. {@code readDC} must be created on the same device
 		as the {@code hdc} that was passed to wglCreateContext and it must support the same pixel type as the pixel format of the {@code hdc} that was passed to
 		wglCreateContext.
@@ -44,12 +44,12 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 		OpenGL operations:
 		${ol(
 			"""
-			Any pixel data that are sourced based on the value of ${"GL11".linkGL("READ_BUFFER")}. Note, that accumulation operations use the value of
+			Any pixel data that are sourced based on the value of GL11##GL_READ_BUFFER. Note, that accumulation operations use the value of
 			{@code READ_BUFFER}, but are not allowed when a different device context is used for reads.  In this case, the accumulation operation will generate
-			${"GL11".linkGL("INVALID_OPERATION")}.
+			GL11##GL_INVALID_OPERATION.
 			""",
 			"""
-			Any depth values that are retrieved by ${"GL11".linkGL("ReadPixels()")}, ${"GL11".linkGL("CopyPixels()")}, or any OpenGL extension that sources
+			Any depth values that are retrieved by GL11##glReadPixels(), GL11##glCopyPixels(), or any OpenGL extension that sources
 			depth images from the frame buffer in the manner of ReadPixels and CopyPixels.
 			""",
 			"""

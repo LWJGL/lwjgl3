@@ -48,7 +48,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		LPOSVERSIONINFO.INOUT(
 			"versionInfo",
 			"""
-			an {@link OSVERSIONINFOEX} structure that receives the operating system information. Before calling the {@code GetVersionEx} function, set the
+			an ##OSVERSIONINFOEX structure that receives the operating system information. Before calling the {@code GetVersionEx} function, set the
 			{@code OSVersionInfoSize} member of the structure as appropriate to indicate which data structure is being passed to this function.
 			"""
 		)
@@ -146,7 +146,7 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 		On a multiprocessor computer, it should not matter which processor is called. However, you can get different results on different processors due to bugs
 		in the basic input/output system (BIOS) or the hardware abstraction layer (HAL). To specify processor affinity for a thread, use the
-		${"Kernel32#SetThreadAffinityMask()".link} function.
+		Kernel32#SetThreadAffinityMask() function.
 		""",
 
 		LARGE_INTEGER_p.OUT(
@@ -159,11 +159,11 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GlobalAlloc",
 		"Allocates the specified number of bytes from the heap.",
 
-		UINT.IN("flags", "the memory allocation attributes. If zero is specified, the default is ${"GMEM_FIXED".link}.", GlobalMemoryFlags),
+		UINT.IN("flags", "the memory allocation attributes. If zero is specified, the default is #GMEM_FIXED.", GlobalMemoryFlags),
 		SIZE_T.IN(
 			"bytes",
 			"""
-			the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies ${"GMEM_MOVEABLE".link}, the function returns a
+			the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies #GMEM_MOVEABLE, the function returns a
 			handle to a memory object that is marked as discarded.
 			"""
 		)
@@ -179,8 +179,8 @@ fun WinBase() = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 	BOOL.func(
 		"GlobalUnlock",
 		"""
-		Decrements the lock count associated with a memory object that was allocated with ${"GMEM_MOVEABLE".link}. This function has no effect on memory objects
-		allocated with ${"GMEM_FIXED".link}.
+		Decrements the lock count associated with a memory object that was allocated with #GMEM_MOVEABLE. This function has no effect on memory objects
+		allocated with #GMEM_FIXED.
 		""",
 
 		HGLOBAL.IN("hMem", "a handle to the global memory object")

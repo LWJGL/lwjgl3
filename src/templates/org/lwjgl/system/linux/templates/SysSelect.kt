@@ -61,7 +61,7 @@ fun SysSelect() = "SysSelect".nativeClass(LINUX_PACKAGE) {
 		nullable _ timeval_p.IN(
 			"timeout",
 			"""
-			an upper bound on the amount of time elapsed before {@code select()} returns. If both fields of the {@link timeval} structure are zero, then
+			an upper bound on the amount of time elapsed before {@code select()} returns. If both fields of the ##timeval structure are zero, then
 			{@code select()} returns immediately. (This is useful for polling.) If {@code timeout} is $NULL (no timeout), {@code select()} can block
 			indefinitely.
 			"""

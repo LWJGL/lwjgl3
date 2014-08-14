@@ -12,7 +12,7 @@ fun amd_device_attribute_query() = "AMDDeviceAttributeQuery".nativeClassCL("amd_
 	documentation = "Native bindings to the $extensionLink extension."
 
 	IntConstant.block(
-		"Accepted as the {@code param_name} parameter of ${"CL10#GetDeviceInfo()".link}.",
+		"Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().",
 
 		"DEVICE_GLOBAL_FREE_MEMORY_AMD" _ 0x4039,
 		"DEVICE_SIMD_PER_COMPUTE_UNIT_AMD" _ 0x4040,

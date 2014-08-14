@@ -179,7 +179,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		Retrieves extension entry points.
 
 		The application is expected to verify the applicability of an extension or core function entry point before requesting it by name, by use of
-		${"IsExtensionPresent()".link}.
+		#IsExtensionPresent().
 
 		Entry points can be device specific, but are not context specific. Using a NULL device handle does not guarantee that the entry point is returned, even
 		if available for one of the available devices.
@@ -221,7 +221,7 @@ fun ALC10() = "ALC10".nativeClassALC("ALC10") {
 		"""
 		Obtains string value(s) from ALC.
 
-		<b>LWJGL note</b>: Use {@link ALC#getStringList} for those tokens that return multiple values.
+		<b>LWJGL note</b>: Use ALC##getStringList() for those tokens that return multiple values.
 		""",
 
 		nullable _ ALCdevice_p.IN("deviceHandle", "the device to query"),

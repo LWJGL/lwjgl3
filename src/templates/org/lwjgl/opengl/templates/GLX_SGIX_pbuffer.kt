@@ -22,7 +22,7 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 		"""
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"GLXSGIXFBConfig#GetFBConfigAttribSGIX()".link}:",
+		"Accepted by the {@code attribute} parameter of GLXSGIXFBConfig#GetFBConfigAttribSGIX().",
 
 		"MAX_PBUFFER_WIDTH_SGIX" _ 0x8016,
 		"MAX_PBUFFER_HEIGHT_SGIX" _ 0x8017,
@@ -33,23 +33,23 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 
 	IntConstant.block(
 		"""
-		Returned by ${"GLXSGIXFBConfig#GetFBConfigAttribSGIX()".link} (when {@code attribute} is set to ${"GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX".link}) and
-		accepted by the {@code attrib_list} parameter of ${"GLXSGIXFBConfig#ChooseFBConfigSGIX()".link} (following the
-		${"GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX".link} token):
+		Returned by GLXSGIXFBConfig#GetFBConfigAttribSGIX() (when {@code attribute} is set to GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX) and
+		accepted by the {@code attrib_list} parameter of GLXSGIXFBConfig#ChooseFBConfigSGIX() (following the
+		GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX token).
 		""",
 
 		"PBUFFER_BIT_SGIX" _ 0x00000004
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attrib_list} parameter of ${"CreateGLXPbufferSGIX()".link} and by the {@code attribute} parameter of ${"QueryGLXPbufferSGIX()".link}:",
+		"Accepted by the {@code attrib_list} parameter of #CreateGLXPbufferSGIX() and by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
 
 		"PRESERVED_CONTENTS_SGIX" _ 0x801B,
 		"LARGEST_PBUFFER_SGIX" _ 0x801C
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code attribute} parameter of ${"QueryGLXPbufferSGIX()".link}:",
+		"Accepted by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
 
 		"WIDTH_SGIX" _ 0x801D,
 		"HEIGHT_SGIX" _ 0x801E,
@@ -57,27 +57,27 @@ fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGI
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code mask} parameter of ${"SelectEventSGIX()".link} and returned in the {@code mask} parameter of ${"GetSelectedEventSGIX()".link}:",
+		"Accepted by the {@code mask} parameter of #SelectEventSGIX() and returned in the {@code mask} parameter of #GetSelectedEventSGIX().",
 
 		"BUFFER_CLOBBER_MASK_SGIX" _ 0x08000000
 	)
 
 	IntConstant.block(
-		"Returned in the {@code event_type} field of a \"buffer clobber\" event:",
+		"Returned in the {@code event_type} field of a \"buffer clobber\" event.",
 
 		"DAMAGED_SGIX" _ 0x8020,
 		"SAVED_SGIX" _ 0x8021
 	)
 
 	IntConstant.block(
-		"Returned in the {@code draw_type} field of a \"buffer clobber\" event:",
+		"Returned in the {@code draw_type} field of a \"buffer clobber\" event.",
 
 		"WINDOW_SGIX" _ 0x8022,
 		"PBUFFER_SGIX" _ 0x8023
 	)
 
 	IntConstant.block(
-		"Returned in the {@code mask} field of a \"buffer clobber\" event:",
+		"Returned in the {@code mask} field of a \"buffer clobber\" event.",
 
 		"FRONT_LEFT_BUFFER_BIT_SGIX" _ 0x00000001,
 		"FRONT_RIGHT_BUFFER_BIT_SGIX" _ 0x00000002,

@@ -147,7 +147,7 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 		DISPLAY,
 		WINDOW,
-		XIEventMask_p.IN("masks", "a pointer to an array of {@link XIEventMask} structures"),
+		XIEventMask_p.IN("masks", "a pointer to an array of ##XIEventMask structures"),
 		AutoSize("masks") _ int.IN("num_masks", "number of masks in {@code masks}")
 	)
 

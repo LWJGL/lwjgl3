@@ -918,7 +918,7 @@ if (shader) {
 
 	ReferenceGL("glGetVertexAttrib") _ GLvoid.func(
 		"GetVertexAttribLdv",
-		"Double version of ${"GL20#GetVertexAttribi()".link}.",
+		"Double version of GL20#GetVertexAttribi().",
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),

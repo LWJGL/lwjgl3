@@ -16,7 +16,7 @@ fun GLX11() = "GLX11".nativeClassGLX("GLX_11") {
 	documentation = "Native bindings to GLX 1.1."
 
 	IntConstant.block(
-		"Names for attributes to ${"GetClientString()".link}.",
+		"Names for attributes to #GetClientString().",
 
 		"VENDOR" _ 0x1,
 		"VERSION" _ 0x2,

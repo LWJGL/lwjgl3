@@ -8,6 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
+val CONDITIONAL_RENDER_MODES =
+	"""
+	GL30#QUERY_WAIT GL30#QUERY_NO_WAIT GL30#QUERY_BY_REGION_WAIT GL30#QUERY_BY_REGION_NO_WAIT
+	GL45#QUERY_WAIT_INVERTED GL45#QUERY_NO_WAIT_INVERTED GL45#QUERY_BY_REGION_WAIT_INVERTED GL45#QUERY_BY_REGION_NO_WAIT_INVERTED
+	"""
+
 fun GL30() = "GL30".nativeClassGL("GL30") {
 	nativeImport (
 		"OpenGL.h"
@@ -287,21 +293,21 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 	// NV_conditional_render
 
-	val conditionalRenderModes = IntConstant.block(
+	IntConstant.block(
 		"Accepted by the {@code mode} parameter of BeginConditionalRender.",
 
 		"QUERY_WAIT" _ 0x8E13,
 		"QUERY_NO_WAIT" _ 0x8E14,
 		"QUERY_BY_REGION_WAIT" _ 0x8E15,
 		"QUERY_BY_REGION_NO_WAIT" _ 0x8E16
-	).toJavaDocLinks()
+	)
 
 	GLvoid.func(
 		"BeginConditionalRender",
 		"Starts conditional rendering.",
 
 		GLuint.IN("id", "the name of an occlusion query object whose results are used to determine if the rendering commands are discarded"),
-		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", conditionalRenderModes)
+		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", CONDITIONAL_RENDER_MODES)
 	)
 
 	ReferenceGL("glBeginConditionalRender") _ GLvoid.func(
@@ -337,8 +343,8 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 		<b>LWJGL note</b>: This method comes in 2 flavors:
 		${ol(
-			"{@link #glMapBufferRange(int, long, long, int)} - Always returns a new ByteBuffer instance.",
-			"{@link #glMapBufferRange(int, long, long, int, ByteBuffer)} - The {@code old_buffer} parameter is reused if the given length and returned pointer match the buffer capacity and address, respectively."
+			"##glMapBufferRange(int, long, long, int) - Always returns a new ByteBuffer instance.",
+			"##glMapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if the given length and returned pointer match the buffer capacity and address, respectively."
 		)}
 		""",
 
@@ -381,7 +387,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"ClampColor",
-		"Specifies whether data read via ${"GL11#ReadPixels()".link} should be clamped.",
+		"Specifies whether data read via GL11#ReadPixels() should be clamped.",
 
 		GLenum.IN("target", "target for color clamping", "#CLAMP_READ_COLOR"),
 		GLenum.IN("clamp", "whether to apply color clamping", "GL11#TRUE GL11#FALSE")
@@ -680,7 +686,7 @@ fun GL30() = "GL30".nativeClassGL("GL30") {
 		"""
 		Establishes data storage, format and dimensions of a renderbuffer object's image.
 
-		This method is equivalent to calling ${"RenderbufferStorageMultisample()".link} with the samples set to zero.
+		This method is equivalent to calling #RenderbufferStorageMultisample() with the samples set to zero.
 		""",
 
 		GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),

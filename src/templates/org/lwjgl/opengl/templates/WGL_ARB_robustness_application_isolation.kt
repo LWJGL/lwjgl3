@@ -18,8 +18,8 @@ fun WGL_ARB_robustness_application_isolation() = "WGLARBRobustnessApplicationIso
 
 	IntConstant.block(
 		"""
-		Accepted as a bit in the attribute value for {@link WGLARBCreateContext#WGL_CONTEXT_FLAGS_ARB} in the {@code attribList} argument to
-		${"WGLARBCreateContext#CreateContextAttribsARB()".link}.
+		Accepted as a bit in the attribute value for WGLARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attribList} argument to
+		WGLARBCreateContext#CreateContextAttribsARB().
 		""",
 
 		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008

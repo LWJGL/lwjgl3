@@ -199,7 +199,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		DISPATCH_INDIRECT_BUFFER _ GLintptr.IN(
 			"indirect",
 			"""
-			the offset into the buffer object currently bound to the ${"DISPATCH_INDIRECT_BUFFER".link} buffer target at which the dispatch parameters are
+			the offset into the buffer object currently bound to the #DISPATCH_INDIRECT_BUFFER buffer target at which the dispatch parameters are
 			stored.
 			"""
 		)
@@ -393,7 +393,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + "GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
 		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
@@ -407,7 +407,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN(
 			"identifier",
 			"the namespace from which the name of the object is allocated",
-			DebugIdentifiers + "GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
+			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),

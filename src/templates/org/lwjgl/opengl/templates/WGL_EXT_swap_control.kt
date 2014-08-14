@@ -24,7 +24,7 @@ fun WGL_EXT_swap_control() = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_co
 		"SwapIntervalEXT",
 		"""
 		Specifies the minimum number of video frame periods per buffer swap for the window associated with the current context. The interval takes effect when
-		{@link org.lwjgl.system.windows.WinGDI#SwapBuffers} or wglSwapLayerBuffer is first called subsequent to the {@code wglSwapIntervalEXT} call.
+		org.lwjgl.system.windows.WinGDI##SwapBuffers() or wglSwapLayerBuffer is first called subsequent to the {@code wglSwapIntervalEXT} call.
 
 		A video frame period is the time required by the monitor to display a full frame of video data.  In the case of an interlaced monitor, this is typically
 		the time required to display both the even and odd fields of a frame of video data.  An interval set to a value of 2 means that the color buffers will

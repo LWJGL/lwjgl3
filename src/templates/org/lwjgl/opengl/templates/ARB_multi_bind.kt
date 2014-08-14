@@ -148,13 +148,13 @@ for ( i = 0; i < count; i++ ) {
 		affected image unit from {@code first} through {@code first+count-1} will be reset to have no bound texture object.
 
 		When binding a non-zero texture object to an image unit, the image unit {@code level}, {@code layered}, {@code layer}, and {@code access} parameters are
-		set to zero, ${"GL11#TRUE".link}, zero, and ${"GL15#READ_WRITE".link}, respectively. The image unit {@code format} parameter is taken from the internal
+		set to zero, GL11#TRUE, zero, and GL15#READ_WRITE, respectively. The image unit {@code format} parameter is taken from the internal
 		format of the texture image at level zero of the texture object identified by {@code textures}. For cube map textures, the internal format of the
-		${"GL13#TEXTURE_CUBE_MAP_POSITIVE_X".link} image of level zero is used. For multisample, multisample array, buffer, and rectangle textures, the internal
+		GL13#TEXTURE_CUBE_MAP_POSITIVE_X image of level zero is used. For multisample, multisample array, buffer, and rectangle textures, the internal
 		format of the single texture level is used.
 
 		When unbinding a texture object from an image unit, the image unit parameters {@code level}, {@code layered}, {@code layer}, and {@code format} will be
-		reset to their default values of zero, ${"GL11#FALSE".link}, 0, and ${"GL30#R8".link}, respectively.
+		reset to their default values of zero, GL11#FALSE, 0, and GL30#R8, respectively.
 
 		{@code BindImageTextures} is equivalent to:
 		${codeBlock("""

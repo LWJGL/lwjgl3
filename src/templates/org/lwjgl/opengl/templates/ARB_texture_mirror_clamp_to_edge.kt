@@ -17,8 +17,8 @@ fun ARB_texture_mirror_clamp_to_edge() = "ARBTextureMirrorClampToEdge".nativeCla
 	IntConstant.block(
 		"""
 		Accepted by the {@code param} parameter of TexParameter{if}, SamplerParameter{if} and SamplerParameter{if}v, and by the {@code params} parameter of
-		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is ${"GL11#TEXTURE_WRAP_S".link},
-		${"GL11#TEXTURE_WRAP_T".link}, or TEXTURE_WRAP_R".link}:
+		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or
+		GL12#TEXTURE_WRAP_R.
 		""",
 
 		"MIRROR_CLAMP_TO_EDGE" _ 0x8743

@@ -32,7 +32,7 @@ fun GLX_ARB_get_proc_address() = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_
 		implementation.
 
 		A non-$NULL return value for {@code glXGetProcAddressARB} does not guarantee that an extension function is actually supported at runtime. The client
-		must must also query ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("EXTENSIONS")}) or ${"GLX11#QueryExtensionsString()".link} to determine if an extension is
+		must must also query GL11##glGetString()(GL11##GL_EXTENSIONS) or GLX11#QueryExtensionsString() to determine if an extension is
 		supported by a particular context.
 
 		GL function pointers returned by {@code glXGetProcAddressARB} are independent of the currently bound context and may be used by any context which
@@ -43,7 +43,7 @@ fun GLX_ARB_get_proc_address() = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_
 			"All GL and GLX extension functions supported by the implementation (whether those extensions are supported by the current context or not).",
 			"""
 			All core (non-extension) functions in GL and GLX from version 1.0 up to and including the versions of those specifications supported by the
-			implementation, as determined by ${"GL11".linkGL("GetString()")}(${"GL11".linkGL("VERSION")}) and ${"GLX#QueryVersion()".link} queries.
+			implementation, as determined by GL11##glGetString()(GL11##GL_VERSION) and GLX#QueryVersion() queries.
 			"""
 		)}
 		""",

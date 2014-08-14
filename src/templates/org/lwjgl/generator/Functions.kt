@@ -13,7 +13,6 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.GenerationMode.*
 import org.lwjgl.generator.ParameterType.*
 import org.lwjgl.generator.opengl.BufferType.*
-import org.lwjgl.generator.ConstantBlock.Links
 import kotlin.properties.Delegates
 
 /*
@@ -83,9 +82,9 @@ abstract class Function(
 
 // DSL extensions
 
-fun NativeType.IN(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, IN, javadoc, links?.html ?: "", linkMode)
-fun PointerType.OUT(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links?.html ?: "", linkMode)
-fun PointerType.INOUT(name: String, javadoc: String, links: Links? = null, linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links?.html ?: "", linkMode)
+fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, IN, javadoc, links, linkMode)
+fun PointerType.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links, linkMode)
+fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links, linkMode)
 
 private fun <T> PrintWriter.printList(items: Stream<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
 
@@ -157,19 +156,25 @@ class NativeClassFunction(
 	}
 
 	val javaDocLink: String
-		get() = if ( strippedName != name )
-			this.javaDocLinkWithParams
+		get() = if ( strippedName != name || has(keepPostfix) )
+			javaDocLinkWithParams()
 		else
-			"{@link #$strippedName${if ( nativeClass.prefixMethod.isEmpty() ) "" else " ${stripPostfix(simpleName)}"}}"
+			"#$simpleName()"
 
-	val javaDocLinkWithParams: String
-		get() {
-			val builder = StringBuilder()
+	private fun javaDocLinkWithParams(): String {
+		val builder = StringBuilder()
 
-			builder append "{@link #"
-			builder append strippedName
-			builder append '('
+		val keepPostfix = has(keepPostfix)
 
+		builder append '#'
+		if ( keepPostfix ) {
+			builder append '#'
+			builder append name
+		} else
+			builder append stripPostfix(simpleName, false, false)
+
+		builder append '('
+		if ( !keepPostfix ) {
 			var first = true
 			getParams { !it.isAutoSizeResultOut } forEach {
 				if ( first )
@@ -186,12 +191,11 @@ class NativeClassFunction(
 				if ( !first ) builder append ", "
 				builder append "ByteBuffer"
 			}
-			builder append ") "
-			builder append strippedName
-			builder append '}'
-
-			return builder.toString()
 		}
+		builder append ')'
+
+		return builder.toString()
+	}
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.functionProvider == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
@@ -440,7 +444,7 @@ class NativeClassFunction(
 	// --[ JAVA METHODS ]--
 
 	private fun PrintWriter.generateJavaDocLink(description: String, function: NativeClassFunction) {
-		println("\t/** $description ${function.javaDocLink} */")
+		println("\t/** $description ${function.nativeClass.processDocumentation(function.javaDocLink)} */")
 	}
 
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {

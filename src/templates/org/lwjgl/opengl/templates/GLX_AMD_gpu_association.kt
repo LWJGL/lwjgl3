@@ -31,7 +31,7 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 		"""
 
 	val properties = IntConstant.block(
-		"Accepted by the {@code property} parameter of ${"GetGPUInfoAMD()".link}:",
+		"Accepted by the {@code property} parameter of #GetGPUInfoAMD().",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
 		"GPU_RENDERER_STRING_AMD" _ 0x1F01,

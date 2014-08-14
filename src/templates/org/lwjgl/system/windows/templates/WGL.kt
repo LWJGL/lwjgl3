@@ -76,7 +76,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 			the layer plane to which you want to bind a rendering context. The value 0 identifies the main plane. Positive values of {@code layerPlace} identify
 			overlay planes, where 1 is the first overlay plane over the main plane, 2 is the second overlay plane over the first overlay plane, and so on.
 			Negative values identify underlay planes, where 1 is the first underlay plane under the main plane, 2 is the second underlay plane under the first
-			underlay plane, and so on. The number of overlay and underlay planes is given in the {@code reserved} member of the {@link PIXELFORMATDESCRIPTOR}
+			underlay plane, and so on. The number of overlay and underlay planes is given in the {@code reserved} member of the ##PIXELFORMATDESCRIPTOR
 			structure.
 			"""
 		)
@@ -92,7 +92,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 			"mask",
 			"""
 			which groups of the {@code src} rendering state are to be copied to {@code dst}. It contains the bitwise-OR of the same symbolic names that are
-			passed to the {@link org.lwjgl.opengl.GL11#glPushAttrib} function. You can use {@link org.lwjgl.opengl.GL11#GL_ALL_ATTRIB_BITS} to copy all the
+			passed to the org.lwjgl.opengl.GL11##glPushAttrib() function. You can use org.lwjgl.opengl.GL11##GL_ALL_ATTRIB_BITS to copy all the
 			rendering state information.
 			"""
 		)
@@ -196,7 +196,7 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		original font outline from which the font is fitted, is mapped to 1.0 in the x- and y-coordinates in the display lists. The extrusion parameter sets how
 		much depth the font has in the z direction.
 
-		The glyphMetrics parameter returns a {@link GLYPHMETRICSFLOAT} structure that contains information about the placement and orientation of each glyph in
+		The glyphMetrics parameter returns a ##GLYPHMETRICSFLOAT structure that contains information about the placement and orientation of each glyph in
 		a character cell.
 		""",
 
@@ -233,15 +233,15 @@ fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 		int.IN(
 			"format",
 			"""
-			the format to use in the display lists. When format is ${"FONT_LINES".link}, the {@code wglUseFontOutlines} function creates fonts with line
-			segments. When format is ${"FONT_POLYGONS".link}, {@code wglUseFontOutlines} creates fonts with polygons.
+			the format to use in the display lists. When format is #FONT_LINES, the {@code wglUseFontOutlines} function creates fonts with line
+			segments. When format is #FONT_POLYGONS, {@code wglUseFontOutlines} creates fonts with polygons.
 			""",
 			"#FONT_LINES #FONT_POLYGONS"
 		),
 		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
-			an array of {@code count} {@link GLYPHMETRICSFLOAT} structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no
+			an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no
 			glyph metrics are returned.
 			"""
 		)

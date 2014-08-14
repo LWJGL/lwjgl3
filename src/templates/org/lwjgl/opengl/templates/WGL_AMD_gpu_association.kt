@@ -29,7 +29,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		"""
 
 	val properties = IntConstant.block(
-		"Accepted by the {@code property} parameter of {@link #wglGetGPUInfoAMD}.",
+		"Accepted by the {@code property} parameter of #GetGPUInfoAMD().",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
 		"GPU_RENDERER_STRING_AMD" _ 0x1F01,
@@ -74,7 +74,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		AutoType("data", GL_UNSIGNED_BYTE, GL_UNSIGNED_INT) _ GLenum.IN(
 			"dataType",
 			"the data type to be returned",
-			"GL11#GL_UNSIGNED_INT GL11#GL_INT GL11#GL_FLOAT GL11#GL_UNSIGNED_BYTE".toConstantLinks()
+			"GL11##GL_UNSIGNED_INT GL11##GL_INT GL11##GL_FLOAT GL11##GL_UNSIGNED_BYTE"
 		),
 		(AutoSize("data") * "GLChecks.typeToBytes(dataType)") _ UINT.IN("size", "the size of the {@code data} buffer"),
 		GLvoid_p.IN("data", "the buffer which will be filled with the requested information")
@@ -85,7 +85,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		"""
 		Determine which GPU a context is attached to.
 
-		Unassociated contexts are created by calling {@link org.lwjgl.system.windows.WGL#wglCreateContext}. Although these contexts are unassociated, their use
+		Unassociated contexts are created by calling org.lwjgl.system.windows.WGL#CreateContext(). Although these contexts are unassociated, their use
 		will still be tied to a single GPU in most cases. For this reason it is advantageous to be able to query the GPU an existing unassociated context
 		resides on. If multiple GPUs are available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for
 		off-screen rendering.
@@ -106,7 +106,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		"""
 		Create an associated context with a specific GL version.
 
-		All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB} apply to {@code wglCreateAssociatedContextAttribsAMD}.
+		All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
 		""",
 
 		UINT.IN("id", "a valid GPU id"),
@@ -116,16 +116,16 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 
 	BOOL.func(
 		"DeleteAssociatedContextAMD",
-		"Deletes an associated context. An associated context cannot be deleted by calling {@link org.lwjgl.system.windows.WGL#wglDeleteContext}.",
+		"Deletes an associated context. An associated context cannot be deleted by calling org.lwjgl.system.windows.WGL#DeleteContext().",
 
-		HGLRC.IN("hglrc", "a valid associated context created by calling {@link #wglCreateAssociatedContextAMD}")
+		HGLRC.IN("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
 	)
 
 	BOOL.func(
 		"MakeAssociatedContextCurrentAMD",
 		"Makes an associated context current in the current thread.",
 
-		HGLRC.IN("hglrc", "a context handle created by calling {@link #wglCreateAssociatedContextAMD}")
+		HGLRC.IN("hglrc", "a context handle created by calling #CreateAssociatedContextAMD()")
 	)
 
 	HGLRC.func("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
@@ -148,8 +148,8 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 		GLbitfield.IN(
 			"mask",
 			"the bitwise OR of a number of values indicating which buffers are to be copied",
-			"GL11#GL_COLOR_BUFFER_BIT GL11#GL_DEPTH_BUFFER_BIT GL11#GL_STENCIL_BUFFER_BIT".toConstantLinks(), LinkMode.BITFIELD
+			"GL11##GL_COLOR_BUFFER_BIT GL11##GL_DEPTH_BUFFER_BIT GL11##GL_STENCIL_BUFFER_BIT", LinkMode.BITFIELD
 		),
-		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11#GL_LINEAR GL11#GL_NEAREST".toConstantLinks())
+		GLenum.IN("filter", "the interpolation method to apply if the image is stretched", "GL11##GL_LINEAR GL11##GL_NEAREST")
 	)
 }

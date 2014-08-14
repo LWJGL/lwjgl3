@@ -123,7 +123,7 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
 		{@code height}, or {@code border} parameters of the specified texel array, nor is any change made to texel values outside the specified subregion. See
-		${"GL11#CopyTexImage2D()".link} for more details.
+		GL11#CopyTexImage2D() for more details.
 		""",
 		GLenum.IN("target", "the texture target", TEXTURE_3D_TARGETS),
 		GLint.IN("level", "the level-of-detail number"),
@@ -230,11 +230,11 @@ fun GL12() = "GL12".nativeClassGL("GL12") {
 	GLvoid.func(
 		"DrawRangeElements",
 		"""
-		A restricted form of ${"GL11#DrawElements()".link}. mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
+		A restricted form of GL11#DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
 		constraint that all values in the arrays count must lie between start and end, inclusive.
 
 		Implementations denote recommended maximum amounts of vertex and index data, which may be queried by calling glGet with argument
-		${"MAX_ELEMENTS_VERTICES".link} and ${"MAX_ELEMENTS_INDICES".link}. If end - start + 1 is greater than the value of GL_MAX_ELEMENTS_VERTICES, or if
+		#MAX_ELEMENTS_VERTICES and #MAX_ELEMENTS_INDICES. If end - start + 1 is greater than the value of GL_MAX_ELEMENTS_VERTICES, or if
 		count is greater than the value of GL_MAX_ELEMENTS_INDICES, then the call may operate at reduced performance. There is no requirement that all vertices
 		in the range start end be referenced. However, the implementation may partially process unused vertices, reducing performance from what could be
 		achieved with an optimal index set.

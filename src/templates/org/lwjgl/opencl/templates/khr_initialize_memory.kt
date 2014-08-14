@@ -13,7 +13,7 @@ fun khr_initialize_memory() = "KHRInitializeMemory".nativeClassCL("khr_initializ
 
 	IntConstant.block(
 		"""
-		Accepted as a property name in the {@code properties} parameter of ${"CL10#CreateContext()".link}.
+		Accepted as a property name in the {@code properties} parameter of CL10#CreateContext().
 
 		Describes which memory types for the context must be initialized. This is a bit-field, where the following values are currently supported:
 		${ul(

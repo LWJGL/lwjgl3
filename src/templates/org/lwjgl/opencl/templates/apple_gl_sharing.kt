@@ -15,14 +15,14 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
-		"Error code returned by ${"GetGLContextInfoAPPLE()".link} if an invalid {@code platform_gl_ctx} is provided.",
+		"Error code returned by #GetGLContextInfoAPPLE() if an invalid {@code platform_gl_ctx} is provided.",
 
 		"INVALID_GL_CONTEXT_APPLE" _ -1000
 	)
 
 	IntConstant.block(
 		"""
-		This enumerated value can be specified as part of the {@code properties} argument passed to ${"CL10#CreateContext()".link} to allow OpenCL compliant
+		This enumerated value can be specified as part of the {@code properties} argument passed to CL10#CreateContext() to allow OpenCL compliant
 		devices in an existing CGL share group to be used as the devices in the newly created CL context. GL objects that were allocated in the given CGL share
 		group can now be shared between CL and GL.
 		""",
@@ -32,7 +32,7 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} argument of ${"GetGLContextInfoAPPLE()".link}. Returns an array of {@code cl_device_ids} for the CL device(s)
+		Accepted as the {@code param_name} argument of #GetGLContextInfoAPPLE(). Returns an array of {@code cl_device_ids} for the CL device(s)
 		corresponding to the virtual screen(s) for the given CGL context.
 		""",
 
@@ -41,7 +41,7 @@ fun apple_gl_sharing() = "APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPL
 
 	IntConstant.block(
 		"""
-		Accepted as the {@code param_name} argument of ${"GetGLContextInfoAPPLE()".link}. Returns a {@code cl_device_id} for the CL device associated with the
+		Accepted as the {@code param_name} argument of #GetGLContextInfoAPPLE(). Returns a {@code cl_device_id} for the CL device associated with the
 		virtual screen for the given CGL context.
 		""",
 

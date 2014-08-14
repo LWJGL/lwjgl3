@@ -8,7 +8,7 @@ import java.util.ArrayList
 import java.util.regex.Pattern
 
 /** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
-val tab = "#TAB"
+val tab = "_TAB_"
 
 private val PARAGRAPH_PATTERN = Pattern.compile("^\\s*$", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^\\s+", Pattern.MULTILINE)
@@ -96,38 +96,6 @@ fun codeBlock(code: String) = "<pre><code>\n${code
 	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
 	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
 }</code></pre>"
-
-fun String.linkPlain(name: String) = link(name, prefix = "")
-fun String.link(name: String, prefix: String = ""): String {
-	val link =
-		if ( name.endsWith(')') ) {
-			// Method
-			val parentheses = name.indexOf('(')
-			if ( parentheses == -1 )
-				throw IllegalStateException("Invalid method link: $this#$prefix$name")
-
-			var simpleName = name.substring(0, parentheses)
-			if ( simpleName.endsWith('v') )
-				simpleName = simpleName.substring(0, simpleName.length - (if ( simpleName.endsWith("_v") ) 2 else 1))
-
-			val hasParams = parentheses < name.size - 2
-			"$this#$prefix$simpleName${if ( hasParams ) name.substring(parentheses) else ""}${if ( prefix.isEmpty() && !hasParams ) "" else " $simpleName"}"
-		} else {
-			// Field
-			if ( this.isEmpty() && prefix.isEmpty() )
-				"#$name"
-			else
-				"$this#$prefix$name $name"
-		}
-
-	return "{@link $link}"
-}
-
-val String.link: String
-	get() {
-		val hash = this.indexOf('#')
-		return if ( hash == -1 ) "".link(this) else this.substring(0, hash).link(this.substring(hash + 1))
-	}
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 

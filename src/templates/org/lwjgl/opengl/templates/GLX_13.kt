@@ -18,7 +18,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 	documentation = "Native bindings to GLX 1.3."
 
 	IntConstant.block(
-		"Added in GLX 1.3:",
+		"Added in GLX 1.3.",
 
 		"WINDOW_BIT" _ 0x00000001,
 		"PIXMAP_BIT" _ 0x00000002,
@@ -93,7 +93,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}"),
+		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None"),
 		autoSizeResult _ int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
 	)
 
@@ -122,7 +122,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
 		Window.IN("win", "the X Window"),
-		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}")
+		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
 	GLXPixmap.func(
@@ -132,7 +132,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
 		Pixmap.IN("pixmap", "the X Pixmap"),
-		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}")
+		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
 	void.func(
@@ -149,7 +149,7 @@ fun GLX13() = "GLX13".nativeClassGLX("GLX_13") {
 
 		DISPLAY,
 		GLXFBConfig.IN("config", "the GLXFBConfig"),
-		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with {@link X#None}")
+		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
 	void.func(

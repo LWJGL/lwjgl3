@@ -31,13 +31,13 @@ fun GLX_SGIX_swap_group() = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_gro
 		"JoinSwapGroupSGIX",
 		"""
 		Adds {@code drawable} to the swap group containing {@code member} as a member. If {@code drawable} is already a member of a different group, it is
-		implicitly removed from that group first. If {@code member} is {@link X#None}, {@code drawable} is removed from the swap group that it belongs to, if
+		implicitly removed from that group first. If {@code member} is X##None, {@code drawable} is removed from the swap group that it belongs to, if
 		any.
 		""",
 
 		DISPLAY,
 		GLXDrawable.IN("drawable", "the GLXDrawable to add to the swap group"),
-		nullable _ GLXDrawable.IN("member", "a member of the swap group or {@link X#None}")
+		nullable _ GLXDrawable.IN("member", "a member of the swap group or X##None")
 	)
 
 }

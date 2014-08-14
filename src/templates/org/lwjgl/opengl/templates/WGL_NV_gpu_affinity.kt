@@ -26,8 +26,8 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the affinity mask.
 		"""
 
-	val wglMakeCurrent = "{@link org.lwjgl.system.windows.WGL#wglMakeCurrent}"
-	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()".link
+	val wglMakeCurrent = "org.lwjgl.system.windows.WGL#MakeCurrent()"
+	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()"
 
 	IntConstant.block(
 		"New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",
@@ -52,7 +52,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		definition = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl") {
 			documentation =
 				"""
-				Receives information about the display device specified by the {@code deviceIndex} parameter of the ${"WGLNVGPUAffinity#EnumGpuDevicesNV()".link}
+				Receives information about the display device specified by the {@code deviceIndex} parameter of the WGLNVGPUAffinity##wglEnumGpuDevicesNV()
 				function.
 				"""
 			javaImport("org.lwjgl.system.windows.*")
@@ -87,7 +87,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 
 		HGPUNV.IN("gpu", "a handle to the GPU to query"),
 		UINT.IN("deviceIndex", "an index value that specifies a display device, supported by {@code gpu}, to query. The first display device will be index 0."),
-		PGPU_DEVICE.IN("gpuDevice", "a {@link GPU_DEVICE} structure which will receive information about the display device at index {@code deviceIndex}.")
+		PGPU_DEVICE.IN("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
 	)
 
 	HDC.func(
@@ -96,7 +96,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 		Creates an affinity-DC. Affinity-DCs, a new type of DC, can be used to direct OpenGL commands to a specific GPU or set of GPUs. An affinity-DC is a
 		device context with a GPU affinity mask embedded in it. This restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the
 		affinity mask. An affinity-DC can be created directly, using the new function {@code wglCreateAffinityDCNV} and also indirectly by calling
-		${"WGLARBPbuffer#CreatePbufferARB()".link} followed by ${"WGLARBPbuffer#GetPbufferDCARB()".link}.
+		WGLARBPbuffer#CreatePbufferARB() followed by WGLARBPbuffer#GetPbufferDCARB().
 
 		If successful, the function returns an affinity-DC handle. If it fails, NULL will be returned.
 		""",

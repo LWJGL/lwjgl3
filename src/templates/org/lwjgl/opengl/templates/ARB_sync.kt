@@ -106,15 +106,15 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 
 		The return value is one of four status values:
 		${ul(
-			"${"ALREADY_SIGNALED".link} indicates that sync was signaled at the time that glClientWaitSync was called.",
-			"${"TIMEOUT_EXPIRED".link} indicates that at least timeout nanoseconds passed and sync did not become signaled.",
-			"${"CONDITION_SATISFIED".link} indicates that sync was signaled before the timeout expired.",
-			"${"WAIT_FAILED".link} indicates that an error occurred. Additionally, an OpenGL error will be generated."
+			"#ALREADY_SIGNALED indicates that sync was signaled at the time that glClientWaitSync was called.",
+			"#TIMEOUT_EXPIRED indicates that at least timeout nanoseconds passed and sync did not become signaled.",
+			"#CONDITION_SATISFIED indicates that sync was signaled before the timeout expired.",
+			"#WAIT_FAILED indicates that an error occurred. Additionally, an OpenGL error will be generated."
 		)}
 		""",
 
 		GLsync.IN("sync", "the sync object whose status to wait on"),
-		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT"),
+		GLbitfield.IN("flags", "a bitfield controlling the command flushing behavior", "0 #SYNC_FLUSH_COMMANDS_BIT", LinkMode.BITFIELD),
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 
@@ -124,7 +124,7 @@ fun ARB_sync() = "ARBSync".nativeClassGL("ARB_sync") {
 		Causes the GL server to block and wait for a sync object to become signaled.
 
 		{@code glWaitSync} will always wait no longer than an implementation-dependent timeout. The duration of this timeout in nanoseconds may be queried by
-		with ${"MAX_SERVER_WAIT_TIMEOUT".link}. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
+		with #MAX_SERVER_WAIT_TIMEOUT. There is currently no way to determine whether glWaitSync unblocked because the timeout expired or because the
 		sync object being waited on was signaled.
 
 		If an error occurs, {@code glWaitSync} does not cause the GL server to block.
