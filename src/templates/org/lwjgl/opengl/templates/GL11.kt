@@ -1869,7 +1869,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL31#TEXTURE_BUFFER_DATA_STORE_BINDING GL43#TEXTURE_BUFFER_OFFSET GL43#TEXTURE_BUFFER_SIZE
 			"""
 		),
-		mods(Check(4), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	).javaDocLink
 
 	GLvoid.func(
@@ -1879,7 +1879,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the texture image target"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	val GetTexParameteriv = GLvoid.func(

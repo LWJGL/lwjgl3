@@ -128,7 +128,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL42#TRANSFORM_FEEDBACK_PAUSED GL42#TRANSFORM_FEEDBACK_ACTIVE"),
-		returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
+		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid.func(
@@ -138,7 +138,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_BINDING"),
 		GLuint.IN("index", "the transform feedback stream index"),
-		returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
+		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid.func(
@@ -148,7 +148,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_START GL30#TRANSFORM_FEEDBACK_BUFFER_SIZE"),
 		GLuint.IN("index", "the transform feedback stream index"),
-		returnValue _ GLint64_p.OUT("param", "the buffer in which to return the parameter value")
+		mods(Check(1), returnValue) _ GLint64_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid.func(
@@ -1086,7 +1086,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		GLuint.IN("vaobj", "the vertex array object name"),
 		GLenum.IN("pname", "the parameter to query", "GL15#ELEMENT_ARRAY_BUFFER_BINDING"),
-		Check(1) _ GLint_p.IN("param", "the buffer in which to return the parameter values")
+		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid.func(
@@ -1104,7 +1104,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		    GL43#VERTEX_ATTRIB_RELATIVE_OFFSET
 		    """
 		),
-		GLint_p.IN("param", "the buffer in which to return the parameter values")
+		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid.func(
@@ -1114,7 +1114,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("vaobj", "the vertex array object name"),
 		GLuint.IN("index", "the attribute to query"),
 		GLenum.IN("pname", "the parameter to query", "GL43#VERTEX_BINDING_OFFSET"),
-		GLint64_p.IN("param", "the buffer in which to return the parameter values")
+		mods(Check(1), returnValue) _ GLint64_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid.func(
