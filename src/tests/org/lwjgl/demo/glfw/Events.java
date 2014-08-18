@@ -5,6 +5,7 @@ import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.MonitorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /** GLFW events demo. */
@@ -31,7 +32,7 @@ public final class Events {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
-		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", 0L, 0L);
+		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", NULL, NULL);
 		if ( window == 0L )
 			throw new IllegalStateException("Failed to create GLFW window.");
 

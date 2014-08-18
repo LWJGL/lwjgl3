@@ -8,6 +8,7 @@ import org.lwjgl.system.glfw.ErrorCallback;
 import java.util.concurrent.CountDownLatch;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /**
@@ -45,7 +46,7 @@ public final class Threads {
 
 		GLFWThread[] threads = new GLFWThread[titles.length];
 		for ( int i = 0; i < titles.length; i++ ) {
-			long window = glfwCreateWindow(200, 200, titles[i], 0, 0);
+			long window = glfwCreateWindow(200, 200, titles[i], NULL, NULL);
 
 			if ( window == 0 ) {
 				System.out.println("Unable to create glfw window");

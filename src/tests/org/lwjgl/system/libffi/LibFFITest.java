@@ -125,7 +125,7 @@ public class LibFFITest {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 
-		return glfwCreateWindow(width, height, "LibFFI Demo", 0L, 0L);
+		return glfwCreateWindow(width, height, "LibFFI Demo", NULL, NULL);
 	}
 
 	private static long glfwGetWindowSizeAddress() {

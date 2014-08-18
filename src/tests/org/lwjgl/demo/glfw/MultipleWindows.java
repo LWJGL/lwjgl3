@@ -45,7 +45,7 @@ public final class MultipleWindows {
 		for ( int i = 0; i < windows.length; i++ ) {
 			final int windowIndex = i + 1;
 
-			long window = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, 0L, 0L);
+			long window = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, NULL, NULL);
 			if ( window == 0L )
 				error();
 

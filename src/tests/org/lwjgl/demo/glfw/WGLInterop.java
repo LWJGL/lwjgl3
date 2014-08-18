@@ -54,7 +54,7 @@ public final class WGLInterop {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-		long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", 0L, 0L);
+		long window = glfwCreateWindow(640, 480, "GLFW-WGL Interop", NULL, NULL);
 		if ( window == 0L )
 			throw new IllegalStateException("Failed to create GLFW window.");
 

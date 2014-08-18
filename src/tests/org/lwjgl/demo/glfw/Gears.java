@@ -17,6 +17,7 @@ import org.lwjgl.system.glfw.WindowCallbackAdapter;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.macosx.CGL.*;
 
@@ -51,7 +52,7 @@ public class Gears extends AbstractGears {
 		int WIDTH = 300;
 		int HEIGHT = 300;
 
-		window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", 0L, 0L);
+		window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, NULL);
 
 		WindowCallback.set(window, new WindowCallbackAdapter() {
 			@Override
