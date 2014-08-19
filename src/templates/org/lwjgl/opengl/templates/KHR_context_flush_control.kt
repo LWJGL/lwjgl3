@@ -8,14 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.PIXEL_PACK_BUFFER
 
-fun KHR_context_flush_control() = "KHRContextFlushControl".nativeClassGL("KHR_context_flush_control") {
+val KHR_context_flush_control = "KHRContextFlushControl".nativeClassGL("KHR_context_flush_control") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/KHR/context_flush_control.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		OpenGL and OpenGL ES have long supported multiple contexts. The semantics of switching contexts is generally left to window system binding APIs such as
 		WGL, GLX and EGL. Most of these APIs (if not all) specify that when the current context for a thread is changed, the outgoing context performs an
@@ -30,6 +30,8 @@ fun KHR_context_flush_control() = "KHRContextFlushControl".nativeClassGL("KHR_co
 		performance consequences of this unless implementations make special considerations for them, which is generally untenable.
 
 		This extension allows querying the context flush behavior.
+
+		${GL45.promoted}
 		"""
 
 	IntConstant.block(

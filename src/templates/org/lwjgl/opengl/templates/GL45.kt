@@ -1277,7 +1277,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 			"#INNOCENT_CONTEXT_RESET indicates a reset has been detected that is not attributable to the current GL context.",
 			"#UNKNOWN_CONTEXT_RESET indicates a detected graphics reset whose cause is unknown."
 		)}
-
 		If a reset status other than NO_ERROR is returned and subsequent calls return NO_ERROR, the context reset was encountered and completed. If a reset
 		status is repeatedly returned, the context may be in the process of resetting.
 

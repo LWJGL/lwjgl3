@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
+val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
@@ -17,9 +17,11 @@ fun GLX_EXT_texture_from_pixmap() = "GLXEXTTextureFromPixmap".nativeClassGLX("GL
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/texture_from_pixmap.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "texture_from_pixmap")} extension.
 
 		This extension allows a color buffer to be used for both rendering and texturing.
+
+		Requires ${GLX13.glx}.
 		"""
 
 	IntConstant.block(

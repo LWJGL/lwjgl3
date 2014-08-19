@@ -8,14 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_EXT_import_context() = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_import_context", EXT) {
+val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_import_context", EXT) {
 	nativeImport (
 		"<GL/glx.h>"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/import_context.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "import_context")} extension.
 
 		This extension allows multiple X clients to share an indirect rendering context.
 

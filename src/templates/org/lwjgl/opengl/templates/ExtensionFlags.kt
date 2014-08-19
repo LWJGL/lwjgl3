@@ -20,62 +20,543 @@ val NV = "NV"
 val SGI = "SGI"
 val SGIX = "SGIX"
 
-fun ARB_arrays_of_arrays() = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", ARB)
-fun ARB_compatibility() = EXT_FLAG.nativeClassGL("ARB_compatibility", ARB)
-fun ARB_conservative_depth() = EXT_FLAG.nativeClassGL("ARB_conservative_depth", ARB)
-fun ARB_derivative_control() = EXT_FLAG.nativeClassGL("ARB_derivative_control", ARB)
-fun ARB_explicit_attrib_location() = EXT_FLAG.nativeClassGL("ARB_explicit_attrib_location", ARB)
-fun ARB_fragment_coord_conventions() = EXT_FLAG.nativeClassGL("ARB_fragment_coord_conventions", ARB)
-fun ARB_fragment_layer_viewport() = EXT_FLAG.nativeClassGL("ARB_fragment_layer_viewport", ARB)
-fun ARB_fragment_program_shadow() = EXT_FLAG.nativeClassGL("ARB_fragment_program_shadow", ARB)
-fun ARB_robust_buffer_access_behavior() = EXT_FLAG.nativeClassGL("ARB_robust_buffer_access_behavior", ARB)
-fun ARB_robustness_isolation() = EXT_FLAG.nativeClassGL("ARB_robustness_isolation", ARB)
-fun ARB_shader_bit_encoding() = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", ARB)
-fun ARB_shader_image_size() = EXT_FLAG.nativeClassGL("ARB_shader_image_size", ARB)
-fun ARB_shader_precision() = EXT_FLAG.nativeClassGL("ARB_shader_precision", ARB)
-fun ARB_shader_stencil_export() = EXT_FLAG.nativeClassGL("ARB_shader_stencil_export", ARB)
-fun ARB_shader_texture_image_samples() = EXT_FLAG.nativeClassGL("ARB_shader_texture_image_samples", ARB)
-fun ARB_shader_texture_lod() = EXT_FLAG.nativeClassGL("ARB_shader_texture_lod", ARB)
-fun ARB_shading_language_420pack() = EXT_FLAG.nativeClassGL("ARB_shading_language_420pack", ARB)
-fun ARB_shading_language_packing() = EXT_FLAG.nativeClassGL("ARB_shading_language_packing", ARB)
-fun ARB_texture_buffer_object_rgb32() = EXT_FLAG.nativeClassGL("ARB_texture_buffer_object_rgb32", ARB)
-fun ARB_texture_env_add() = EXT_FLAG.nativeClassGL("ARB_texture_env_add", ARB)
-fun ARB_texture_env_crossbar() = EXT_FLAG.nativeClassGL("ARB_texture_env_crossbar", ARB)
-fun ARB_texture_non_power_of_two() = EXT_FLAG.nativeClassGL("ARB_texture_non_power_of_two", ARB)
-fun ARB_texture_query_levels() = EXT_FLAG.nativeClassGL("ARB_texture_query_levels", ARB)
-fun ARB_texture_query_lod() = EXT_FLAG.nativeClassGL("ARB_texture_query_lod", ARB)
+private val NativeClass.cap: String get() = "{@link #${capName} ${templateName}}"
+private val String.cap: String get() = "{@link #GL_$this $this}" // TODO: remove when all extensions have been added
 
-fun EXT_shadow_funcs() = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", EXT)
+val ARB_arrays_of_arrays = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
 
-fun AMD_conservative_depth() = EXT_FLAG.nativeClassGL("AMD_conservative_depth", AMD)
-fun AMD_shader_stencil_export() = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", AMD)
-fun AMD_shader_trinary_minmax() = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minmax", AMD)
-fun AMD_texture_texture4() = EXT_FLAG.nativeClassGL("AMD_texture_texture4", AMD)
-fun AMD_transform_feedback3_lines_triangles() = "AMDTransformFeedback3LinesTriangles".nativeClassGL("AMD_transform_feedback3_lines_triangles", AMD)
-fun AMD_vertex_shader_layer() = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", AMD)
-fun AMD_vertex_shader_viewport_index() = EXT_FLAG.nativeClassGL("AMD_vertex_shader_viewport_index", AMD)
+		This extension removes the restriction that arrays cannot be formed into arrays, allowing arrays of arrays to be declared.
 
-fun ATI_shader_texture_lod() = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", ATI)
+		Requires GLSL 1.2. ${GL43.promoted}
+		"""
+}
+val ARB_compatibility = EXT_FLAG.nativeClassGL("ARB_compatibility", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
 
-fun KHR_robust_buffer_access_behavior() = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", ARB)
+		This extension restores features deprecated by ${GL30.core}.
+		"""
+}
+val ARB_conservative_depth = EXT_FLAG.nativeClassGL("ARB_conservative_depth", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
 
-fun NV_blend_square() = EXT_FLAG.nativeClassGL("NV_blend_square", NV)
-fun NV_fragment_program4() = EXT_FLAG.nativeClassGL("NV_fragment_program4", NV)
-fun NV_fragment_program_option() = EXT_FLAG.nativeClassGL("NV_fragment_program_option", NV)
-fun NV_geometry_shader4() = EXT_FLAG.nativeClassGL("NV_geometry_shader4", NV)
-fun NV_parameter_buffer_object2() = EXT_FLAG.nativeClassGL("NV_parameter_buffer_object2", NV)
-fun NV_shader_atomic_counters() = EXT_FLAG.nativeClassGL("NV_shader_atomic_counters", NV)
-fun NV_shader_atomic_float() = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", NV)
-fun NV_shader_storage_buffer_object() = EXT_FLAG.nativeClassGL("NV_shader_storage_buffer_object", NV)
-fun NV_vertex_program1_1() = EXT_FLAG.nativeClassGL("NV_vertex_program1_1", NV)
-fun NV_vertex_program2() = EXT_FLAG.nativeClassGL("NV_vertex_program2", NV)
-fun NV_vertex_program4() = EXT_FLAG.nativeClassGL("NV_vertex_program4", NV)
+		There is a common optimization for hardware accelerated implementation of OpenGL which relies on an early depth test to be run before the fragment
+		shader so that the shader evaluation can be skipped if the fragment ends up being discarded because it is occluded.
+
+		This optimization does not affect the final rendering, and is typically possible when the fragment does not change the depth programmatically. (i.e.: it
+		does not write to the built-in gl_FragDepth output). There are, however a class of operations on the depth in the shader which could still be performed
+		while allowing the early depth test to operate.
+
+		This extension allows the application to pass enough information to the GL implementation to activate such optimizations safely.
+
+		Requires ${GL30.core}. ${GL42.promoted}
+		"""
+}
+val ARB_derivative_control = EXT_FLAG.nativeClassGL("ARB_derivative_control", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides control over the spacial granularity at which the underlying implementation computes derivatives.
+
+		Requires ${GL40.core} and GLSL 4.00. ${GL45.promoted}
+		"""
+}
+val ARB_explicit_attrib_location = EXT_FLAG.nativeClassGL("ARB_explicit_attrib_location", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a method to pre-assign attribute locations to named vertex shader inputs and color numbers to named fragment shader outputs.
+		This allows applications to globally assign a particular semantic meaning, such as diffuse color or vertex normal, to a particular attribute location
+		without knowing how that attribute will be named in any particular shader.
+
+		Requires ${GL20.core} or ${"ARB_vertex_shader".cap}. ${GL33.promoted}
+		"""
+}
+val ARB_fragment_coord_conventions = EXT_FLAG.nativeClassGL("ARB_fragment_coord_conventions", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides alternative conventions for the fragment coordinate XY location available for programmable fragment processing.
+
+		${GL32.promoted}
+		"""
+}
+val ARB_fragment_layer_viewport = EXT_FLAG.nativeClassGL("ARB_fragment_layer_viewport", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The geometry shader has the special built-in variables gl_Layer and gl_ViewportIndex that specify which layer and viewport primitives are rendered to.
+		Currently the fragment shader does not know which layer or viewport the fragments are being written to without the application implementing their own
+		interface variables between the geometry and fragment shaders.
+
+		This extension specifies that the gl_Layer and gl_ViewportIndex built-in variables are also available to the fragment shader so the application doesn't
+		need to implement these manually.
+
+		Requires ${GL30.core} and ${"ARB_geometry_shader4".cap}, or ${GL32.core}. ${GL43.promoted}
+		"""
+}
+val ARB_fragment_program_shadow = EXT_FLAG.nativeClassGL("ARB_fragment_program_shadow", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension extends ARB_fragment_program to remove the interaction with ARB_shadow and defines the program option "ARB_fragment_program_shadow".
+
+		Requires ${"ARB_fragment_program".cap} and ${"ARB_shadow".cap}.
+		"""
+}
+val ARB_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("ARB_robust_buffer_access_behavior", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension specifies the behavior of out-of-bounds buffer and array accesses. This is an improvement over the existing ARB_robustness extension
+		which stated that the application should not crash, but the behavior is otherwise undefined. This extension specifies the access protection provided by
+		the GL to ensure that out-of-bounds accesses cannot read from or write to data not owned by the application. All accesses are contained within the
+		buffer object and program area they reference. These additional robustness guarantees apply to contexts created with the
+		{@code CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB} feature enabled.
+
+		Requires ${"ARB_robustness".cap}. ${GL43.promoted}
+		"""
+}
+val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		GL_ARB_robustness and supporting window system extensions allow creating an OpenGL context supporting graphics reset notification behavior.
+		GL_ARB_robustness_isolation provides stronger guarantees about the possible side-effects of a graphics reset.
+
+		Requires ${"ARB_robustness".cap}. ${GL43.promoted}
+		"""
+}
+val ARB_shader_bit_encoding = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension trivially adds built-in functions for getting/setting the bit encoding for floating-point values in the OpenGL Shading Language.
+
+		${GL33.promoted}
+		"""
+}
+val ARB_shader_image_size = EXT_FLAG.nativeClassGL("ARB_shader_image_size", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides GLSL built-in functions allowing shaders to query the size of an image.
+
+		Requires ${GL42.core} and GLSL 4.20. ${GL43.promoted}
+		"""
+}
+val ARB_shader_precision = EXT_FLAG.nativeClassGL("ARB_shader_precision", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension more clearly restricts the precision requirements of implementations of the GLSL specification. These include precision of arithmetic
+		operations (operators '+', '/', ...), transcendentals (log, exp, pow, reciprocal sqrt, ...), when NaNs (not a number) and INFs (infinities) will be
+		supported and generated, and denorm flushing behavior.  Trigonometric built-ins and some other categories of built-ins are not addressed.
+
+		Requires ${GL40.core}. ${GL41.promoted}
+		"""
+}
+val ARB_shader_stencil_export = EXT_FLAG.nativeClassGL("ARB_shader_stencil_export", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		In OpenGL, the stencil test is a powerful mechanism to selectively discard fragments based on the content of the stencil buffer. However, facilites to
+		update the content of the stencil buffer are limited to operations such as incrementing the existing value, or overwriting with a fixed reference value.
+
+		This extension provides a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this
+		allows the test to be performed against the value generated in the shader. When the stencil operation is set to {@link GL11#GL_REPLACE REPLACE}, this
+		allows a value generated in the shader to be written to the stencil buffer directly.
+
+		Requires ${"ARB_fragment_shader".cap}.
+		"""
+}
+val ARB_shader_texture_image_samples = EXT_FLAG.nativeClassGL("ARB_shader_texture_image_samples", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides GLSL built-in functions allowing shaders to query the number of samples of a texture.
+
+		Requires ${GL43.core}. ${GL45.promoted}
+		"""
+}
+val ARB_shader_texture_lod = EXT_FLAG.nativeClassGL("ARB_shader_texture_lod", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds additional texture functions to the OpenGL Shading Language which provide the shader writer with explicit control of LOD.
+
+		Requires ${"ARB_shader_objects".cap}. ${GL30.promoted}
+		"""
+}
+val ARB_shading_language_420pack = EXT_FLAG.nativeClassGL("ARB_shading_language_420pack", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This is a language feature only extension formed from changes made to version 4.20 of GLSL.
+
+		Requires GLSL 1.30. Requires GLSL 1.40 for uniform block bindings. ${GL42.promoted}
+		"""
+}
+val ARB_shading_language_packing = EXT_FLAG.nativeClassGL("ARB_shading_language_packing", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides the GLSL built-in functions to convert a 32-bit unsigned integer holding a pair of 16-bit floating-point values to or from a
+		two-component floating-point vector (vec2).
+
+		This mechanism allows GLSL shaders to read and write 16-bit floating-point encodings (via 32-bit unsigned integers) without introducing a full set of
+		16-bit floating-point data types.
+
+		This extension also adds the GLSL built-in packing functions included in GLSL version 4.00 and the ARB_gpu_shader5 extension which pack and unpack
+		vectors of small fixed-point data types into a larger scalar. By putting these packing functions in this separate extension it allows implementations to
+		provide these functions in hardware that supports them independent of the other ${"ARB_gpu_shader5".cap} features.
+
+		In addition to the packing functions from ARB_gpu_shader5 this extension also adds the missing {@code [un]packSnorm2x16} for completeness.
+
+		${GL42.promoted}
+		"""
+}
+val ARB_texture_buffer_object_rgb32 = EXT_FLAG.nativeClassGL("ARB_texture_buffer_object_rgb32", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds three new buffer texture formats - RGB32F, RGB32I, and RGB32UI. This partially addresses one of the limitations of buffer textures
+		in the original ${"EXT_texture_buffer_object".cap} extension and in ${GL31.core}, which provide no support for three-component formats.
+
+		${GL40.promoted}
+		"""
+}
+val ARB_texture_env_add = EXT_FLAG.nativeClassGL("ARB_texture_env_add", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds a new texture environment function: ADD.
+
+		${GL13.promoted}
+		"""
+}
+val ARB_texture_env_crossbar = EXT_FLAG.nativeClassGL("ARB_texture_env_crossbar", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds the capability to use the texture color from other texture units as sources to the COMBINE_ARB environment function. The
+		${"ARB_texture_env_combine".cap} extension defined texture environment functions which could use the color from the current texture unit as a source.
+		This extension adds the ability to use the color from any texture unit as a source.
+
+		Requires ${"ARB_multitexture".cap} and ${"ARB_texture_env_combine".cap}. ${GL14.promoted}
+		"""
+}
+val ARB_texture_non_power_of_two = EXT_FLAG.nativeClassGL("ARB_texture_non_power_of_two", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		Conventional OpenGL texturing is limited to images with power-of-two dimensions and an optional 1-texel border. This extension relaxes the size
+		restrictions for the 1D, 2D, cube map, and 3D texture targets.
+
+		${GL20.promoted}
+		"""
+}
+val ARB_texture_query_levels = EXT_FLAG.nativeClassGL("ARB_texture_query_levels", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a new set of texture functions ({@code textureQueryLevels}) in the OpenGL Shading Language that exposes the number of accessible
+		mipmap levels in the texture associated with a GLSL sampler variable.
+
+		Requires ${GL30.core} and GLSL 1.30. ${GL43.promoted}
+		"""
+}
+val ARB_texture_query_lod = EXT_FLAG.nativeClassGL("ARB_texture_query_lod", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a new set of fragment shader texture functions ({@code textureLOD}) that return the results of automatic level-of-detail
+		computations that would be performed if a texture lookup were performed.
+
+		Requires ${GL20.core}, ${"EXT_gpu_shader4".cap}, ${"EXT_texture_array".cap} and GLSL 1.30. ${GL40.promoted}
+		"""
+}
+
+val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension generalizes the ${"ARB_shadow".cap} extension to support all eight binary texture comparison functions rather than just
+		{@link GL11#GL_LEQUAL LEQUAL} and {@link GL11#GL_GEQUAL GEQUAL}.
+
+		Requires ${"ARB_depth_texture".cap} and ${"ARB_shadow".cap}.
+		"""
+}
+
+val AMD_conservative_depth = EXT_FLAG.nativeClassGL("AMD_conservative_depth", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		There is a common optimization for hardware accelerated implementation of OpenGL which relies on an early depth test to be run before the fragment
+		shader so that the shader evaluation can be skipped if the fragment ends up being discarded because it is occluded.
+
+		This optimization does not affect the final rendering, and is typically possible when the fragment does not change the depth programmatically. (i.e.: it
+		does not write to the built-in {@code gl_FragDepth} output). There are, however a class of operations on the depth in the shader which could still be
+		performed while allowing the early depth test to operate.
+
+		This extension allows the application to pass enough information to the GL implementation to activate such optimizations safely.
+
+		Requires ${GL30.core}. ${GL42.promoted}
+		"""
+}
+val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		In OpenGL, the stencil test is a powerful mechanism to selectively discard fragments based on the content of the stencil buffer. However, facilites to
+		update the content of the stencil buffer are limited to operations such as incrementing the existing value, or overwriting with a fixed reference value.
+
+		This extension provides a mechanism whereby a shader may generate the stencil reference value per invocation. When stencil testing is enabled, this
+		allows the test to be performed against the value generated in the shader. When the stencil operation is set to {@link GL11#GL_REPLACE REPLACE}, this
+		allows a value generated in the shader to be written to the stencil buffer directly.
+
+		Requires ${"ARB_fragment_shader".cap}.
+		"""
+}
+val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minmax", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension introduces three new trinary built-in functions to the OpenGL Shading Languages. These functions allow the minimum, maximum or median of
+		three inputs to be found with a single function call. These operations may be useful for sorting and filtering operations, for example. By explicitly
+		performing a trinary operation with a single built-in function, shader compilers and optimizers may be able to generate better instruction sequences for
+		perform sorting and other multi-input functions.
+
+		Requires ${GL20.core} or ${"ARB_shader_object".cap}.
+		"""
+}
+val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds new shading language built-in texture functions to the shading language.
+
+		These texture functions may be used to access one component textures.
+
+		The {@code texture4} built-in function returns a texture value derived from a 2x2 set of texels in the image array of level levelbase is selected. These
+		texels are selected in the same way as when the value of {@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER} is {@GL11#GL_LINEAR LINEAR}, but instead
+		of these texels being filtered to generate the texture value, the R, G, B and A texture values are derived directly from these four texels.
+		"""
+}
+val AMD_transform_feedback3_lines_triangles = "AMDTransformFeedback3LinesTriangles".nativeClassGL("AMD_transform_feedback3_lines_triangles", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		OpenGL 4.0 introduced the ability to record primitives into multiple output streams using transform feedback. However, the restriction that all streams
+		must output {@link GL11#GL_POINT POINT} primitives when more than one output stream is active was also introduced. This extension simply removes that
+		restriction, allowing the same set of primitives to be used with multiple transform feedback streams as with a single stream.
+
+		Requires ${GL40.core} or ${"ARB_transform_feedback3".cap}.
+		"""
+}
+val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The {@code gl_Layer} built-in shading language variable was introduced with the ${"ARB_geometry_shader".cap} extension and subsequently promoted to core
+		OpenGL in version 3.2. This variable is an output from the geometry shader stage that allows rendering to be directed to a specific layer of an array
+		texture, slice of a 3D texture or face of a cube map or cube map array attachment of the framebuffer. Thus, this extremely useful functionality is only
+		available if a geometry shader is present - even if the geometry shader is not otherwise required by the application. This adds overhead to the graphics
+		processing pipeline, and complexity to applications. It also precludes implementations that cannot support geometry shaders from supporting rendering to
+		layered framebuffer attachments.
+
+		This extension exposes the {@code gl_Layer} built-in variable in the vertex shader, allowing rendering to be directed to layered framebuffer attachments
+		with only a vertex and fragment shader present. Combined with features such as instancing, or static vertex attributes and so on, this allows a wide
+		variety of techniques to be implemented without the requirement for a geometry shader to be present.
+
+		Requires ${GL30.core} or ${"EXT_texture_array".cap}.
+		"""
+}
+val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader_viewport_index", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The {@code gl_ViewportIndex} built-in variable was introduced by the ${"ARB_viewport_array".cap} extension and ${GL41.core}. This variable is available
+		in un-extended OpenGL only to the geometry shader. When written in the geometry shader, it causes geometry to be directed to one of an array of several
+		independent viewport rectangles.
+
+		In order to use any viewport other than zero, a geometry shader must be present. Geometry shaders introduce processing overhead and potential
+		performance issues. This extension exposes the {@code gl_ViewportIndex} built-in variable to the vertex shader, allowing the functionality introduced by
+		ARB_viewport_array to be accessed without requiring a geometry shader to be present.
+
+		Requires ${GL41.core} or ${"ARB_viewport_array".cap}.
+		"""
+}
+
+val ATI_shader_texture_lod = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", postfix = ATI) { documentation =  "When true, the $registryLink extension is supported." }
+
+val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension specifies the behavior of out-of-bounds buffer and array accesses. This is an improvement over the existing ${KHR_robustness.cap}
+		extension which states that the application should not crash, but that behavior is otherwise undefined. This extension specifies the access protection
+		provided by the GL to ensure that out-of-bounds accesses cannot read from or write to data not owned by the application. All accesses are contained
+		within the buffer object and program area they reference. These additional robustness guarantees apply to contexts created with the robust access flag
+		set.
+
+		Requires ${GL32.core} and ${KHR_robustness.cap}.
+		"""
+}
+
+val NV_blend_square = EXT_FLAG.nativeClassGL("NV_blend_square", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_fragment_program4 = EXT_FLAG.nativeClassGL("NV_fragment_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_fragment_program_option = EXT_FLAG.nativeClassGL("NV_fragment_program_option", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_geometry_shader4 = EXT_FLAG.nativeClassGL("NV_geometry_shader4", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds upon the ${"EXT_geometry_shader4".cap} specification to provide two additional capabilities:
+		${ul(
+			"""
+			Support for QUADS, QUAD_STRIP, and POLYGON primitive types when geometry shaders are enabled.  Such primitives will be tessellated into individual
+			triangles.
+			""",
+		    """
+		    Setting the value of GEOMETRY_VERTICES_OUT_EXT will take effect immediately. It is not necessary to link the program object in order for this change
+		    to take effect, as is the case in the EXT version of this extension.
+		    """
+		)}
+		Requires ${"EXT_geometry_shader4".cap}.
+		"""
+}
+val NV_parameter_buffer_object2 = EXT_FLAG.nativeClassGL("NV_parameter_buffer_object2", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds on the ${"NV_parameter_buffer_object".cap} extension to provide additional flexibility in sourcing data from buffer objects.
+
+		Requires ${GL20.core}, ${"NV_gpu_program4".cap} and ${"NV_parameter_buffer_object".cap}.
+		"""
+}
+val NV_shader_atomic_counters = EXT_FLAG.nativeClassGL("NV_shader_atomic_counters", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds upon the ${"ARB_shader_atomic_counters".cap} and ${"NV_gpu_program5".cap} extensions to provide assembly language support for
+		incrementing, decrementing, and querying the values of atomic counters stored in buffer object memory.
+
+		Requires ${"ARB_shader_atomic_counters".cap} and ${"NV_gpu_program5".cap}.
+		"""
+}
+val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides GLSL built-in functions and assembly opcodes allowing shaders to perform atomic read-modify-write operations to buffer or
+		texture memory with floating-point components.  The set of atomic operations provided by this extension is limited to adds and exchanges. Providing
+		atomic add support allows shaders to atomically accumulate the sum of floating-point values into buffer or texture memory across multiple (possibly
+		concurrent) shader invocations.
+
+		This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${"ARB_shader_image_load_store".cap}, or
+		${"EXT_shader_image_load_store".cap} is supported) or floating-point pointers (if ${"NV_gpu_shader5".cap} is supported). Additionally, assembly opcodes
+		for these operations is also provided if ${"NV_gpu_program5".cap} is supported.
+		"""
+}
+val NV_shader_storage_buffer_object = EXT_FLAG.nativeClassGL("NV_shader_storage_buffer_object", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides assembly language support for shader storage buffers (from the ${"ARB_shader_storage_buffer_object".cap} extension) for all
+		program types supported by ${"NV_gpu_program5".cap}, including compute programs added by the ${"NV_compute_program5".cap} extension.
+
+		Assembly programs using this extension can read and write to the memory of buffer objects bound to the binding points provided by
+		${"ARB_shader_storage_buffer_object".cap}.
+		"""
+}
+val NV_vertex_program1_1 = EXT_FLAG.nativeClassGL("NV_vertex_program1_1", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_vertex_program2 = EXT_FLAG.nativeClassGL("NV_vertex_program2", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
+val NV_vertex_program4 = EXT_FLAG.nativeClassGL("NV_vertex_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 
 // Platform-specific
 
-fun WGL_EXT_swap_control_tear() = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_tear", EXT)
-fun WGL_NV_DX_interop2() = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", NV)
+val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_tear", postfix = EXT) {
+	documentation =
+		"""
+		When true, the ${registryLink("EXT", "wgl_swap_control_tear")} extension is supported.
 
-fun GLX_ARB_create_context_profile() = EXT_FLAG.nativeClassGLX("GLX_ARB_create_context_profile", ARB)
-fun GLX_ARB_robustness_share_group_isolation() = EXT_FLAG.nativeClassGLX("GLX_ARB_robustness_share_group_isolation", ARB)
-fun GLX_EXT_framebuffer_sRGB() = EXT_FLAG.nativeClassGLX("GLX_EXT_framebuffer_sRGB", EXT) // Alias for GLX_ARB_framebuffer_sRGB
+		This extension extends the existing {@link #WGL_EXT_swap_control} extension by allowing a negative {@code interval} parameter to
+		{@link WGLEXTSwapControl#wglSwapIntervalEXT}. The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
+		reduces the visual stutter on late frames and reduces the stall on subsequent frames.
+		"""
+}
+val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix = NV) {
+	documentation =
+		"""
+		When true, the ${registryLink("NV", "DX_interop2")} extension is supported.
+
+		This extension expands on the specification of {@link #WGL_NV_DX_interop} to add support for DirectX version 10, 10.1 and 11 resources.
+
+		Requires ${GL20.core} and {@link #WGL_NV_DX_interop}
+		"""
+}
+
+val GLX_ARB_robustness_share_group_isolation = EXT_FLAG.nativeClassGLX("GLX_ARB_robustness_share_group_isolation", postfix = ARB) {
+	documentation =
+		"""
+		When true, the ${registryLink("ARB", "glx_robustness_isolation")} extension is supported.
+
+		If the graphics driver advertises the GLX_ARB_robustness_share_group_isolation extension string, then the driver guarantees that if a context in a
+		particular share group causes a graphics reset to occur:
+		${ol(
+			"No other share group within the application, nor any other application on the system, is affected by the graphics reset.",
+		    "No other share group within the application, nor any other application on the system, receives any notification that the graphics reset occurred."
+		)}
+		Requires ${GLX14.glx} and ${GLX_ARB_create_context_robustness.link}.
+		"""
+}
+
+val GLX_EXT_framebuffer_sRGB = EXT_FLAG.nativeClassGLX("GLX_EXT_framebuffer_sRGB", postfix = EXT) {
+	documentation =
+		"""
+		When true, the ${registryLink("EXT", "framebuffer_sRGB")} extension is supported.
+
+		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
+		"""
+}

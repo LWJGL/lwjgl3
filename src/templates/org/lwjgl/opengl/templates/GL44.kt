@@ -128,7 +128,6 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 				implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
 				"""
 			)}
-
 			If {@code flags} contains GL44#MAP_PERSISTENT_BIT, it must also contain at least one of GL30#MAP_READ_BIT or GL30#MAP_WRITE_BIT.
 
 			It is an error to specify GL44#MAP_COHERENT_BIT without also specifying GL44#MAP_PERSISTENT_BIT.

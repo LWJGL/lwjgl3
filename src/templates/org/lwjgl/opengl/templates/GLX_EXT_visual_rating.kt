@@ -7,12 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_EXT_visual_rating() = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
+val GLX_EXT_visual_rating = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_rating", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/visual_info.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "visual_info")} extension.
 
 		This extension allows servers to identify a particular GLX visual as undesirable. A new visual attribute is introduced, providing a way for servers to
 		specify caveats (e.g., slow) for a visual. The attribute  may be queried using GLX#GetConfig(), and can therefore be used by

@@ -8,18 +8,20 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_create_context", ARB) {
+val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_create_context", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_create_context")} extension.
 
 		With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
 		to indicate at context creation which interface will be used. This extension add a new context creation routine with attributes specifying the GL
 		version and context properties requested for the context.
+
+		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
 	IntConstant.block(
@@ -41,8 +43,7 @@ fun WGL_ARB_create_context() = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_cre
 	IntConstant.block(
 		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
-		"ERROR_INVALID_VERSION_ARB" _ 0x2095,
-		"ERROR_INVALID_PROFILE_ARB" _ 0x2096
+		"ERROR_INVALID_VERSION_ARB" _ 0x2095
 	).noPrefix()
 
 	HGLRC.func(

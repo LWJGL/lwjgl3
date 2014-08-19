@@ -7,18 +7,20 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun AMD_occlusion_query_event() = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occlusion_query_event", postfix = AMD) {
+val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occlusion_query_event", postfix = AMD) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/occlusion_query_event.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension introduces the concept of occlusion query events and changes the concept of an occlusion query from counting passed fragments to counting
 		fragments that generate any of a user-selectable set of events. Provided events include passing the depth test, and passing or failing the stencil test.
 		For a given occlusion query object, counting of these events may be enabled or disabled, allowing any combination to be counted.
+
+		Requires ${GL15.core}.
 		"""
 
 	IntConstant.block(

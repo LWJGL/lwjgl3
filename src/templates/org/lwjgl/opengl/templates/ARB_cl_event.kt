@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.opencl.*
 
-fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
+val ARB_cl_event = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 	javaImport(
 		"org.lwjgl.opencl.*"
 	)
@@ -18,7 +18,16 @@ fun ARB_cl_event() = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		"OpenGL.h"
 	)
 
-	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/cl_event.txt", templateName)} extension."
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers
+		between the two APIs. The companion {@link org.lwjgl.opencl.KHRGLEvent cl_khr_gl_event} OpenCL extension provides the complementary functionality of
+		creating an OpenCL event object from an OpenGL fence sync object.
+
+		Requires ${GL32.core} or ${ARB_sync.link}. Requires an OpenCL implementation supporting sharing event objects with OpenGL.
+		"""
 
 	IntConstant.block(
 		"Returned in {@code values} for GL32#GetSync() {@code pname} GL32#OBJECT_TYPE.",

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
-fun ARB_imaging() = "ARBImaging".nativeClassGL("ARB_imaging") {
+val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	nativeImport (
 		"OpenGL.h"
 	)

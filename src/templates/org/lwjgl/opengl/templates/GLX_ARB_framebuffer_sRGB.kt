@@ -7,12 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_framebuffer_sRGB", ARB) {
+val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_framebuffer_sRGB", ARB) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/framebuffer_sRGB.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "framebuffer_sRGB")} extension.
 
 		Conventionally, OpenGL assumes framebuffer color components are stored in a linear color space.  In particular, framebuffer blending is a linear
 		operation.
@@ -21,6 +21,8 @@ fun GLX_ARB_framebuffer_sRGB() = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB
 		International Electrotechnical Commission (IEC) as IEC 61966-2-1. The sRGB color space roughly corresponds to 2.2 gamma correction.
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
+
+		Requires {@link ARBFramebufferObject ARB_framebuffer_object}.
 		"""
 
 	IntConstant.block(

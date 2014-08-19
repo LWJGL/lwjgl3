@@ -184,7 +184,7 @@ class Generator(
 		println("GENERATING: ${nativeClass.packageName}.${nativeClass.className}")
 
 		generateOutput(nativeClass, outputJava, touchTimestamp) {
-			generateJava(it)
+			it.generateJava()
 		}
 
 		if ( nativeClass.functions.any { !it.has(Reuse) } ) {
@@ -220,7 +220,7 @@ class Generator(
 		println("GENERATING: ${target.packageName}.${target.className}")
 
 		generateOutput(target, outputJava, touchTimestamp) {
-			generateJava(it)
+			it.generateJava()
 		}
 
 		if ( target is GeneratorTargetNative ) {

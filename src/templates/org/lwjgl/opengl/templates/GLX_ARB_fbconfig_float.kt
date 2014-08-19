@@ -7,12 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_ARB_fbconfig_float() = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbconfig_float", ARB) {
+val GLX_ARB_fbconfig_float = "GLXARBFBConfigFloat".nativeClassGLX("GLX_ARB_fbconfig_float", ARB) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "color_buffer_float")} extension.
 
 		The standard OpenGL pipeline is based on a fixed-point pipeline. While color components are nominally floating-point values in the pipeline, components
 		are frequently clamped to the range [0,1] to accomodate the fixed-point color buffer representation and allow for fixed-point computational hardware.

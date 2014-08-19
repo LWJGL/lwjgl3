@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu_association", AMD) {
+val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu_association", AMD) {
 	javaImport(
 		"org.lwjgl.system.linux.*"
 	)
@@ -20,7 +20,7 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/glx_gpu_association.txt", templateName)} extension.
+		Native bindings to the ${registryLink("AMD", "glx_gpu_association")} extension.
 
 		There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
 		that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most
@@ -28,6 +28,8 @@ fun GLX_AMD_gpu_association() = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_g
 
 		This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
 		functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
+
+		Requires ${GL15.core}, ${GLX13.glx}, {@link EXTFramebufferObject EXT_framebuffer_object} and ${GLX_ARB_get_proc_address.link}.
 		"""
 
 	val properties = IntConstant.block(

@@ -10,7 +10,7 @@ import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu_association", AMD) {
+val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu_association", AMD) {
 	nativeImport (
 		"OpenGL.h",
 		"WGL.h"
@@ -18,7 +18,7 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
+		Native bindings to the ${registryLink("AMD", "wgl_gpu_association")} extension.
 
 		There currently is no way for applications to efficiently use GPU resources in systems that contain more than one GPU. Vendors have provided methods
 		that attempt to split the workload for an application among the available GPU resources. This has proven to be very inefficient because most
@@ -26,6 +26,8 @@ fun WGL_AMD_gpu_association() = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_g
 
 		This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
 		functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
+
+		Requires ${WGL_ARB_extensions_string.link} and {@link EXTFramebufferObject EXT_framebuffer_object}.
 		"""
 
 	val properties = IntConstant.block(

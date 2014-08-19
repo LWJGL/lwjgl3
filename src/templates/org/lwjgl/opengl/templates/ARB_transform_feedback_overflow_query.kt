@@ -7,17 +7,19 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_transform_feedback_overflow_query() = "ARBTransformFeedbackOverflowQuery".nativeClassGL("ARB_transform_feedback_overflow_query") {
+val ARB_transform_feedback_overflow_query = "ARBTransformFeedbackOverflowQuery".nativeClassGL("ARB_transform_feedback_overflow_query", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/transform_feedback_overflow_query.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension adds new query types which can be used to detect overflow of transform feedback buffers. The new query types are also accepted by
 		conditional rendering commands.
+
+		Requires ${GL30.core}.
 		"""
 
 	IntConstant.block(

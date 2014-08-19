@@ -7,12 +7,12 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_EXT_extensions_string() = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", EXT) {
+val WGL_EXT_extensions_string = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", EXT) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
-	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/wgl_extensions_string.txt", templateName)} extension."
+	documentation = "Native bindings to the ${registryLink("EXT", "wgl_extensions_string")} extension."
 
 	(const _ charASCII_p).func(
 		"GetExtensionsStringEXT",

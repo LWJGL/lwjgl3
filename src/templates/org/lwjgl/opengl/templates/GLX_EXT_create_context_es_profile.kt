@@ -7,13 +7,15 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_EXT_create_context_es_profile() = "GLXEXTCreateContextESProfile".nativeClassGLX("GLX_EXT_create_context_es_profile", EXT) {
+val GLX_EXT_create_context_es_profile = "GLXEXTCreateContextESProfile".nativeClassGLX("GLX_EXT_create_context_es_profile", EXT) {
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/glx_create_context_es2_profile.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "glx_create_context_es2_profile")} extension.
 
 		This extension allows creating an OpenGL ES context.
+
+		Requires ${GLX14.glx}, ${GLX_ARB_create_context.link}, ${GLX_ARB_create_context_profile.link} and an OpenGL ES implemenation.
 		"""
 
 	IntConstant.block(

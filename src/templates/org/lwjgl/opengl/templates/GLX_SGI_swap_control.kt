@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_control", SGI) {
+val GLX_SGI_swap_control = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_control", SGI) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
@@ -17,7 +17,7 @@ fun GLX_SGI_swap_control() = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_co
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGI/swap_control.txt", templateName)} extension.
+		Native bindings to the ${registryLink("SGI", "swap_control")} extension.
 
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
 		"""

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
+val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 	nativeImport (
 		"OpenGL.h",
 		"WGL.h"
@@ -16,7 +16,7 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pbuffer.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_pbuffer")} extension.
 
 		This extension defines pixel buffers (pbuffer for short). Pbuffers are additional non-visible rendering buffers for an OpenGL renderer. Pbuffers are
 		equivalent to a window that has the same pixel format descriptor with the following exceptions:
@@ -29,13 +29,14 @@ fun WGL_ARB_pbuffer() = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		state of the pixel buffer.
 		"""
 		)}
-
 		The intent of the pbuffer semantics is to enable implementations to allocate pbuffers in non-visible frame buffer memory. These pbuffers are intended to
 		be "static" resources in that a program will typically allocate them only once rather than as a part of its rendering loop.  (Pbuffers should be
 		deallocated when the program is no longer using them -- for example, if the program is iconified.)
 
 		The frame buffer resources that are associated with a pbuffer are also static and are deallocated when the pbuffer is destroyed or possibly when a
 		display mode change occurs.
+
+		Requires ${WGL_ARB_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
 		"""
 
 	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()"

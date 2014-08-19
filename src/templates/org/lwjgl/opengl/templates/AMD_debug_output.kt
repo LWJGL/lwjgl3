@@ -7,12 +7,18 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun AMD_debug_output() = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfix = AMD) {
+val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfix = AMD) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
-	documentation = "Native bindings to the ${url("http://www.opengl.org/registry/specs/AMD/debug_output.txt", templateName)} extension."
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension allows the GL to notify applications when various debug events occur in contexts that have been created with the debug flag, as provided
+		by ${WGL_ARB_create_context.link} and ${GLX_ARB_create_context.link}.
+		"""
 
 	IntConstant.block(
 		"Tokens accepted by GetIntegerv.",

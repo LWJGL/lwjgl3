@@ -8,17 +8,19 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", ARB) {
+val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_make_current_read", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_make_current_read.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_make_current_read")} extension.
 
 		The association of a separate "read" and "draw" DC with the current context allows for preprocessing of image data in an "off screen" DC which is then
 		read into a visible DC for final display.
+
+		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
 	IntConstant.block(
@@ -57,7 +59,6 @@ fun WGL_ARB_make_current_read() = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_AR
 			manner of ReadPixels and CopyPixels.
 			"""
 		)}
-
 		These frame buffer values are taken from the surface associated with the device context specified by {@code readDC}.
 		""",
 

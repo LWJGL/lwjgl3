@@ -8,14 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_SGIX_pbuffer() = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
+val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
 	nativeImport (
 		"<GL/glx.h>"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/pbuffer.txt", templateName)} extension.
+		Native bindings to the ${registryLink("SGIX", "pbuffer")} extension.
 
 		This extension defines pixel buffers (GLXPbuffers, or pbuffer for short). GLXPbuffers are additional non-visible rendering buffers for an OpenGL
 		renderer.

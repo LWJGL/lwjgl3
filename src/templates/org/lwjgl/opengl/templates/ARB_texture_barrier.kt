@@ -7,16 +7,18 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_texture_barrier() = "ARBTextureBarrier".nativeClassGL("ARB_texture_barrier") {
+val ARB_texture_barrier = "ARBTextureBarrier".nativeClassGL("ARB_texture_barrier") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/texture_barrier.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension relaxes the restrictions on rendering to a currently bound texture and provides a mechanism to avoid read-after-write hazards.
+
+		${GL45.promoted}
 		"""
 
 	GL45 reuse "TextureBarrier"

@@ -7,10 +7,10 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_ARB_context_flush_control() = "WGLARBContextFlushControl".nativeClassWGL("WGL_ARB_context_flush_control", ARB) {
+val WGL_ARB_context_flush_control = "WGLARBContextFlushControl".nativeClassWGL("WGL_ARB_context_flush_control", ARB) {
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/KHR/context_flush_control.txt", templateName)} extension.
+		Native bindings to the ${registryLink("KHR", "context_flush_control")} extension.
 
 		The WGL version of ##KHRContextFlushControl. This extension adds new context creation parameters the allow an application to specify the behavior
 		that is desired when a context is made non-current, and specifically to opt out of the implicit flush behavior.

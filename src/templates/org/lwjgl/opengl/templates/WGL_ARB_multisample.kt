@@ -7,15 +7,17 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_ARB_multisample() = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
+val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/multisample.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "multisample")} extension.
 
 		This extension provides a mechanism to antialias all GL primitives: points, lines, polygons, bitmaps, and images.  The technique is to sample all
 		primitives multiple times at each pixel.  The color sample values are resolved to a single, displayable color each time a pixel is updated, so the
 		antialiasing appears to be automatic at the application level.  Because each sample includes depth and stencil information, the depth and stencil
 		functions perform equivalently to the single-sample mode.
+
+		Requires ${WGL_EXT_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
 		"""
 
 	IntConstant.block(

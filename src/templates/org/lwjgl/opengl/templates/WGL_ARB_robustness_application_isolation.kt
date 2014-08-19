@@ -7,13 +7,15 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_ARB_robustness_application_isolation() = "WGLARBRobustnessApplicationIsolation".nativeClassWGL("WGL_ARB_robustness_application_isolation", ARB) {
+val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsolation".nativeClassWGL("WGL_ARB_robustness_application_isolation", ARB) {
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_robustness_isolation.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_robustness_isolation")} extension.
 
 		GL_ARB_robustness and WGL_ARB_create_context_robustness allow creating an OpenGL context supporting graphics reset notification behavior.
 		WGL_ARB_robustness_application_isolation provides stronger guarantees about the possible side-effects of a graphics reset.
+
+		Requires ${WGL_ARB_extensions_string.link} and ${WGL_ARB_create_context_robustness.link}.
 		"""
 
 	IntConstant.block(

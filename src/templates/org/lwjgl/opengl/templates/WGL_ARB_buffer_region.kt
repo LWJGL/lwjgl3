@@ -8,14 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_buffer_region() = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_region", ARB) {
+val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_region", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_buffer_region.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_buffer_region")} extension.
 
 		The buffer region extension is a mechanism that allows an area of an OpenGL window to be saved in off-screen memory for quick restores. The off-screen
 		memory can either be frame buffer memory or system memory, although frame buffer memory might offer optimal performance.

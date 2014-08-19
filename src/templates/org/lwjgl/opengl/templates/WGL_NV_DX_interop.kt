@@ -8,17 +8,19 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_DX_interop() = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV) {
+val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/DX_interop.txt", templateName)} extension.
+		Native bindings to the ${registryLink("NV", "DX_interop")} extension.
 
 		This extension allows OpenGL to directly access DirectX buffers and surfaces. A DirectX vertex buffer may be shared as an OpenGL buffer object and a
 		DirectX surface may be shared as an OpenGL texture or renderbuffer object.
+
+		Requires ${GL21.core}.
 		"""
 
 	val accessModes = IntConstant.block(

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_SGIX_swap_barrier() = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_barrier", SGIX) {
+val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_barrier", SGIX) {
 	javaImport(
 		"org.lwjgl.system.linux.X"
 	)
@@ -19,9 +19,11 @@ fun GLX_SGIX_swap_barrier() = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/SGIX/swap_barrier.txt", templateName)} extension.
+		Native bindings to the ${registryLink("SGIX", "swap_barrier")} extension.
 
 		This extension provides the capability to sychronize the buffer swaps of different swap groups.
+
+		Requires ${GLX_SGIX_swap_group.link}.
 		"""
 
 	void.func(

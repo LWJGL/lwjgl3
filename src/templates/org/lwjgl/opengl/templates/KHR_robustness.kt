@@ -8,14 +8,14 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.PIXEL_PACK_BUFFER
 
-fun KHR_robustness() = "KHRRobustness".nativeClassGL("KHR_robustness") {
+val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/KHR/robustness.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		The intent of this extension is to address some specific robustness goals:
 		 ${ul(

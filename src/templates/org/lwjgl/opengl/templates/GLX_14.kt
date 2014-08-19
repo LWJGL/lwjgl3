@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX14() = "GLX14".nativeClassGLX("GLX_14") {
+val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (

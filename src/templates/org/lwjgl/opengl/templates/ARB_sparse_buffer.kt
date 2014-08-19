@@ -7,18 +7,20 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_sparse_buffer() = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer") {
+val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/sparse_buffer.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension adds to GL a mechanism to decouple the virtual and physical storage requirements of textures and allows an application
 		to create partially populated textures that would over-subscribe available graphics memory if made fully resident. This extension provides like
 		functionality for buffer objects, allowing applications to manage buffer object storage in a similar manner.
+
+		Requires ${GL15.core} or {@link ARBVertexBufferObject ARB_vertex_buffer_object}.
 		"""
 
 	IntConstant.block(

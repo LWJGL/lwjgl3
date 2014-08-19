@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_EXT_swap_control() = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_control", EXT) {
+val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_control", EXT) {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
@@ -17,7 +17,7 @@ fun GLX_EXT_swap_control() = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_co
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/swap_control.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "swap_control")} extension.
 
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods, for a particular drawable.
 		It also allows an application to query the swap interval and the implementation-dependent maximum swap interval of a drawable.

@@ -7,16 +7,25 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_pipeline_statistics_query() = "ARBPipelineStatisticsQuery".nativeClassGL("ARB_pipeline_statistics_query") {
+val ARB_pipeline_statistics_query = "ARBPipelineStatisticsQuery".nativeClassGL("ARB_pipeline_statistics_query", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/pipeline_statistics_query.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
-		This extension introduces new query types that allow applications to get statistics information about different parts of the pipeline.
+		This extension introduces new query types that allow applications to get statistics information about different parts of the pipeline:
+		${ul(
+			"Number of vertices and primitives issued to the GL.",
+			"Number of times a vertex shader, tessellation evaluation shader, geometry shader, fragment shader, and compute shader was invoked.",
+			"Number of patches processed by the tessellation control shader stage.",
+			"Number of primitives emitted by a geometry shader.",
+			"Number of primitives that entered the primitive clipping stage.",
+			"Number of primitives that are output by the primitive clipping stage."
+		)}
+		Requires ${GL30.core}.
 		"""
 
 

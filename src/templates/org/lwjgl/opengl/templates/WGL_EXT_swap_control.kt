@@ -8,16 +8,18 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_EXT_swap_control() = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", EXT) {
+val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", EXT) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/wgl_swap_control.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "wgl_swap_control")} extension.
 
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
+
+		Requires ${WGL_EXT_extensions_string.link}.
 		"""
 
 	BOOL.func(

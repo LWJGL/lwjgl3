@@ -123,8 +123,9 @@ class Struct(
 
 		preamble.printJava(this)
 
+		val documentation = this@Struct.documentation
 		if ( documentation != null )
-			println(documentation)
+			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		println("${access.modifier}final class $className {")
 
 		print("""

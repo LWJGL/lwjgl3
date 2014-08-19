@@ -7,16 +7,18 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", ARB) {
+val WGL_ARB_create_context_profile = "WGLARBCreateContextProfile".nativeClassWGL("WGL_ARB_create_context_profile", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_create_context.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_create_context")} extension.
 
-		Add an attribute to ##WGLARBCreateContext, specifying the GL profile requested for a context of OpenGL 3.2 or later.
+		Adds an attribute to ##WGLARBCreateContext, specifying the GL profile requested for a context of OpenGL 3.2 or later.
+
+		Requires ${WGL_ARB_extensions_string.link} and ${GL32.core}.
 		"""
 
 	IntConstant.block(
@@ -31,5 +33,11 @@ fun WGL_ARB_create_context_profile() = "WGLARBCreateContextProfile".nativeClassW
 		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
 	)
+
+	IntConstant.block(
+		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
+
+		"ERROR_INVALID_PROFILE_ARB" _ 0x2096
+	).noPrefix()
 
 }

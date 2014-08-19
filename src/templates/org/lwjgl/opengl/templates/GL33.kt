@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
-fun GL33() = "GL33".nativeClassGL("GL33") {
+val GL33 = "GL33".nativeClassGL("GL33") {
 	nativeImport (
 		"OpenGL.h"
 	)

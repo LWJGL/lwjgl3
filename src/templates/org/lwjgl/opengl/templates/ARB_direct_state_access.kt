@@ -7,14 +7,14 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_direct_state_access() = "ARBDirectStateAccess".nativeClassGL("ARB_direct_state_access") {
+val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_state_access") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/direct_state_access.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		In unextended OpenGL, most mutation of state contained in objects is through an indirection known as a binding. Objects are attached to a context
 		(either directly or indirectly via a container) and then commands to modify or query their state are issued on that context, indirecting through its
@@ -25,6 +25,8 @@ fun ARB_direct_state_access() = "ARBDirectStateAccess".nativeClassGL("ARB_direct
 		its state can be more efficient than binding the object to the context and then indirecting through it. Further, directly accessing the state of objects
 		through their names rather than by bind-to-edit does not disturb the bindings of the current context, which is useful for tools, middleware and other
 		applications that are unaware of the outer state but it can also avoid cases of redundant state changes.
+
+		Requires ${GL20.core}. ${GL45.promoted}
 		"""
 
 	IntConstant.block(

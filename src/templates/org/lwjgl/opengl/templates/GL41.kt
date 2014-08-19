@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-fun GL41() = "GL41".nativeClassGL("GL41") {
+val GL41 = "GL41".nativeClassGL("GL41") {
 	nativeImport (
 		"OpenGL.h"
 	)

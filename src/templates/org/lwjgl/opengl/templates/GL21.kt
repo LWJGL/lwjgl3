@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GL21() = "GL21".nativeClassGL("GL21") {
+val GL21 = "GL21".nativeClassGL("GL21") {
 	nativeImport (
 		"OpenGL.h"
 	)

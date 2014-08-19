@@ -5,9 +5,9 @@
 package org.lwjgl.opengl
 
 import java.io.PrintWriter
-import java.util.Comparator
 import org.lwjgl.generator.*
 import org.lwjgl.generator.opengl.*
+import java.util.regex.Pattern
 
 private val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefixTemplate) ) {
@@ -22,7 +22,7 @@ private val NativeClass.capName: String
 private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
-private val FunctionProviderGL = Generator.register(object : FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
+private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
 
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
@@ -113,11 +113,12 @@ private val FunctionProviderGL = Generator.register(object : FunctionProvider(OP
 			println(" __${extension.className};")
 		}
 
-		println("\n\t/** Indicates whether an OpenGL functionality is available or not. */")
-		println("\tpublic final boolean")
-		for ( i in classes.indices ) {
-			print("\t\t${classes[i].capName}")
-			println(if ( i == classes.lastIndex ) ";" else ",")
+		println()
+		classes forEach {
+			val documentation = it.documentation
+			if ( documentation != null )
+				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println("\tpublic final boolean ${it.capName};")
 		}
 
 		println("\n\tContextCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {")
@@ -163,3 +164,19 @@ private fun String.nativeClassGLX(templateName: String, postfix: String = "", in
 
 private val NativeClassFunction.dsaLink: String
 	get() = "${this.nativeClass.className}${this.javaDocLink}"
+
+private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
+private val NativeClass.registryLink: String get() {
+	println(templateName)
+	val matcher = REGISTRY_PATTERN.matcher(templateName)
+	if ( !matcher.matches() )
+		throw IllegalStateException("Non-standard extension name: $templateName")
+	return url("http://www.opengl.org/registry/specs/${matcher.group(1)}/${matcher.group(2)}.txt", templateName)
+}
+
+private fun NativeClass.registryLink(prefix: String, name: String): String =
+	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", templateName)
+
+private val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
+private val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
+private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

@@ -35,8 +35,7 @@ fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX
 		"GLXBadFBConfig" _ 9,
 		"GLXBadPbuffer" _ 10,
 		"GLXBadCurrentDrawable" _ 11,
-		"GLXBadWindow" _ 12,
-		"GLXBadProfileARB" _ 13
+		"GLXBadWindow" _ 12
 	).noPrefix()
 
 	IntConstant.block(

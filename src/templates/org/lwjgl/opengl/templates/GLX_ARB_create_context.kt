@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_create_context", ARB) {
+val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_create_context", ARB) {
 	javaImport(
 		"org.lwjgl.system.linux.*"
 	)
@@ -19,12 +19,14 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/glx_create_context.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "glx_create_context")} extension.
 
 		With the advent of new versions of OpenGL which deprecate features and/or break backward compatibility with older versions, there is a need and desire
 		to indicate at context creation which interface will be used. These extensions add a new context creation routine with attributes specifying the GL
 		version and context properties requested for the context, and additionally add an attribute specifying the GL profile requested for a context of OpenGL
 		3.2 or later. It also allows making an OpenGL 3.0 or later context current without providing a default framebuffer.
+
+		Requires ${GLX14.glx}.
 		"""
 
 	IntConstant.block(
@@ -32,8 +34,7 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 
 		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
 		"CONTEXT_MINOR_VERSION_ARB" _ 0x2092,
-		"CONTEXT_FLAGS_ARB" _ 0x2094,
-		"CONTEXT_PROFILE_MASK_ARB" _ 0x9126
+		"CONTEXT_FLAGS_ARB" _ 0x2094
 	)
 
 	IntConstant.block(
@@ -41,13 +42,6 @@ fun GLX_ARB_create_context() = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_cre
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
-	)
-
-	IntConstant.block(
-		"Accepted as bits in the attribute value for #CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
-
-		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
-		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
 	)
 
 	GLXContext.func(

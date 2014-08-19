@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_ARB_multisample() = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
+val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
 	javaImport(
 		"org.lwjgl.system.linux.*",
 		"org.lwjgl.system.linux.GLX"
@@ -15,7 +15,7 @@ fun GLX_ARB_multisample() = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisam
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/multisample.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "multisample")} extension.
 
 		This extension provides a mechanism to antialias all GL primitives.
 		"""

@@ -130,11 +130,23 @@ abstract class GeneratorTarget(
 		}
 
 	var documentation: String? = null
-		set(documentation: String?) {
-			$documentation = processDocumentation(documentation!!).toJavaDoc(indentation = "")
-		}
 
 	val preamble = Preamble()
+
+	fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
+		preamble.javaImport(*classes)
+		return this
+	}
+
+	fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
+		preamble.nativeDefine(expression, afterIncludes)
+		return this
+	}
+
+	fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
+		preamble.nativeImport(*files)
+		return this
+	}
 
 	abstract fun PrintWriter.generateJava()
 
@@ -217,8 +229,6 @@ abstract class GeneratorTarget(
 	}
 
 }
-// TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun GeneratorTarget.generateJava(writer: PrintWriter) = writer.generateJava()
 
 abstract class GeneratorTargetNative(
 	packageName: String,
@@ -251,21 +261,6 @@ abstract class GeneratorTargetNative(
 
 }
 
-fun <T: GeneratorTarget> T.javaImport(vararg classes: String): T {
-	preamble.javaImport(*classes)
-	return this
-}
-
-fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
-	preamble.nativeDefine(expression, afterIncludes)
-	return this
-}
-
-fun <T: GeneratorTarget> T.nativeImport(vararg files: String): T {
-	preamble.nativeImport(*files)
-	return this
-}
-
 // ------------------------------------
 
 abstract class CustomClass(
@@ -279,8 +274,9 @@ abstract class CustomClass(
 
 		preamble.printJava(this)
 
+		val documentation = this@CustomClass.documentation
 		if ( documentation != null )
-			println(documentation)
+			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
 
 		generateContent()
 	}

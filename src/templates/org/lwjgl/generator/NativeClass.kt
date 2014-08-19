@@ -111,6 +111,8 @@ class NativeClass(
 	val hasNativeFunctions: Boolean
 		get() = !_functions.isEmpty()
 
+	public val link: String get() = "{@link ${this.className} ${this.templateName}}"
+
 	override fun processDocumentation(documentation: String): String = processDocumentation(documentation, prefixConstant, prefixMethod)
 
 	override fun PrintWriter.generateJava() {
@@ -149,8 +151,9 @@ class NativeClass(
 
 		preamble.printJava(this)
 
+		val documentation = this@NativeClass.documentation
 		if ( documentation != null )
-			println(documentation)
+			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		println("${access.modifier}final class $className {\n")
 
 		constantBlocks.forEach {

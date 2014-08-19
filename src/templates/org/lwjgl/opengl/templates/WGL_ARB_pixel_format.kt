@@ -8,19 +8,21 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_ARB_pixel_format() = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", ARB) {
+val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_format", ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/wgl_pixel_format.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "wgl_pixel_format")} extension.
 
 		This extension adds functions to query pixel format attributes and to choose from the list of supported pixel formats.
 
 		These functions treat pixel formats as opaque types: attributes are specified by name rather than by accessing them directly as fields in a structure.
 		Thus the list of attributes can be easily extended.
+
+		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
 	val WGL_ATTRIBUTES = IntConstant.block(

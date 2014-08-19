@@ -7,16 +7,18 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_conditional_render_inverted() = "ARBConditionalRenderInverted".nativeClassGL("ARB_conditional_render_inverted") {
+val ARB_conditional_render_inverted = "ARBConditionalRenderInverted".nativeClassGL("ARB_conditional_render_inverted") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/conditional_render_inverted.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension adds new modes to GL30#BeginConditionalRender() which invert the condition used to determine whether to draw or not.
+
+		Requires ${GL30.core}. ${GL45.promoted}
 		"""
 
 	IntConstant.block(

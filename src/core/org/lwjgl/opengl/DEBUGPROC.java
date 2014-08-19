@@ -63,7 +63,7 @@ public interface DEBUGPROC {
 		private static final DEBUGPROC DEFAULT = new StrAdapter() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, String message) {
-				System.err.println("[LWJGL] KHR_debug message");
+				System.err.println("[LWJGL] OpenGL debug message");
 				printDetail("ID", Integer.toString(id));
 
 				String description;

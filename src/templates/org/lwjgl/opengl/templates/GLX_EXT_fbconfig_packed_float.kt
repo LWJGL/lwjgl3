@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
+val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
 	javaImport(
 		"org.lwjgl.system.linux.*",
 		"org.lwjgl.system.linux.GLX"
@@ -15,7 +15,7 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/EXT/packed_float.txt", templateName)} extension.
+		Native bindings to the ${registryLink("EXT", "packed_float")} extension.
 
 		This extension adds a new 3-component floating-point texture format that fits within a single 32-bit word.  This format stores 5 bits of biased exponent
 		per component in the same manner as 16-bit floating-point formats, but rather than 10 mantissa bits, the red, green, and blue components have 6, 6, and
@@ -27,6 +27,8 @@ fun GLX_EXT_fbconfig_packed_float() = "GLXEXTFBConfigPackedFloat".nativeClassGLX
 		described above could also be advertised as an unsigned floating-point format for rendering.
 
 		The extension also provides a pixel external format for specifying packed float values directly.
+
+		Requires ${GLX13.glx}.
 		"""
 
 	IntConstant.block(

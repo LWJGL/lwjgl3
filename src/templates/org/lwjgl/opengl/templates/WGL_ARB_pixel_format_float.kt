@@ -7,12 +7,14 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun WGL_ARB_pixel_format_float() = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_ARB_pixel_format_float", ARB) {
+val WGL_ARB_pixel_format_float = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_ARB_pixel_format_float", ARB) {
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/color_buffer_float.txt", templateName)} extension.
+		Native bindings to the ${registryLink("ARB", "color_buffer_float")} extension.
 
 		This extension adds pixel formats with floating-point RGBA color components.
+
+		Requires ${WGL_ARB_pixel_format.link} and ${GL15.core}.
 		"""
 
 	IntConstant.block(

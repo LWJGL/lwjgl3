@@ -7,17 +7,19 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-fun ARB_clip_control() = "ARBClipControl".nativeClassGL("ARB_clip_control") {
+val ARB_clip_control = "ARBClipControl".nativeClassGL("ARB_clip_control") {
 	nativeImport (
 		"OpenGL.h"
 	)
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/ARB/clip_control.txt", templateName)} extension.
+		Native bindings to the $registryLink extension.
 
 		This extension provides additional clip control modes to configure how clip space is mapped to window space.  This extension's goal is to 1) allow
 		OpenGL to effectively match Direct3D's coordinate system conventions, and 2) potentially improve the numerical precision of the Z coordinate mapping.
+
+		${GL45.promoted}
 		"""
 
 	IntConstant.block(

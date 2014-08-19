@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
+val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
 	javaImport(
 		"org.lwjgl.system.linux.*",
 		"org.lwjgl.system.linux.GLX"
@@ -21,7 +21,7 @@ fun GLX_NV_copy_image() = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", N
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/copy_image.txt", templateName)} extension.
+		Native bindings to the ${registryLink("NV", "copy_image")} extension.
 
 		This extension enables efficient image data transfer between image objects (i.e. textures and renderbuffers) without the need to bind the objects or
 		otherwise configure the rendering pipeline. The GLX version allows copying between images in different contexts, even if those contexts are in different

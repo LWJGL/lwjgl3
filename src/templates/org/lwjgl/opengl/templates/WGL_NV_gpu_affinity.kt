@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
+val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
 	nativeImport (
 		"OpenGL.h",
 		"WGL.h"
@@ -16,7 +16,7 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 
 	documentation =
 		"""
-		Native bindings to the ${url("http://www.opengl.org/registry/specs/NV/gpu_affinity.txt", templateName)} extension.
+		Native bindings to the ${registryLink("NV", "gpu_affinity")} extension.
 
 		On systems with more than one GPU it is desirable to be able to select which GPU(s) in the system become the target for OpenGL rendering commands. This
 		extension introduces the concept of a GPU affinity mask. OpenGL rendering commands are directed to the GPU(s) specified by the affinity mask. GPU
@@ -24,6 +24,8 @@ fun WGL_NV_gpu_affinity() = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affini
 
 		This extension also introduces the concept called affinity-DC. An affinity-DC is a device context with a GPU affinity mask embedded in it. This
 		restricts the device context to only allow OpenGL commands to be sent to the GPU(s) in the affinity mask.
+
+		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
 	val wglMakeCurrent = "org.lwjgl.system.windows.WGL#MakeCurrent()"
