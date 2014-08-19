@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun CL20() = "CL20".nativeClassCL("CL20") {
+val CL20 = "CL20".nativeClassCL("CL20") {
 	nativeImport (
 		"OpenCL.h"
 	)

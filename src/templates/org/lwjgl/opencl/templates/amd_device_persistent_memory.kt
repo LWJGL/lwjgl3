@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_device_persistent_memory() = "AMDDevicePersistentMemory".nativeClassCL("amd_device_persistent_memory", AMD) {
+val amd_device_persistent_memory = "AMDDevicePersistentMemory".nativeClassCL("amd_device_persistent_memory", AMD) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

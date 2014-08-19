@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_SOFT_buffer_sub_data() = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub_data") {
+val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub_data") {
 	nativeImport (
 		"OpenAL.h"
 	)

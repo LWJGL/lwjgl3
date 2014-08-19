@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_OFFSET() = "EXTOffset".nativeClassAL("EXT_OFFSET") {
+val AL_EXT_OFFSET = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 	nativeImport (
 		"OpenAL.h"
 	)

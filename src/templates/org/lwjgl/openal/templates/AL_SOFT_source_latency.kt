@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_SOFT_source_latency() = "SOFTSourceLatency".nativeClassAL("SOFT_source_latency") {
+val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_latency") {
 	nativeImport (
 		"OpenAL.h"
 	)

@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_device_attribute_query() = "AMDDeviceAttributeQuery".nativeClassCL("amd_device_attribute_query", AMD) {
+val amd_device_attribute_query = "AMDDeviceAttributeQuery".nativeClassCL("amd_device_attribute_query", AMD) {
 
 	documentation = "Native bindings to the $extensionLink extension."
 

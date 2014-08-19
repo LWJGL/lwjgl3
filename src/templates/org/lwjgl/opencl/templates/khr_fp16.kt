@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_fp16() = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
+val khr_fp16 = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

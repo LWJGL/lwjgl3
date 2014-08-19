@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun nv_device_attribute_query() = "NVDeviceAttributeQuery".nativeClassCL("nv_device_attribute_query", NV) {
+val nv_device_attribute_query = "NVDeviceAttributeQuery".nativeClassCL("nv_device_attribute_query", NV) {
 
 	documentation =
 		"""

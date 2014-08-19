@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-fun CL12GL() = "CL12GL".nativeClassCL("CL12GL") {
+val CL12GL = "CL12GL".nativeClassCL("CL12GL") {
 	javaImport (
 		"org.lwjgl.opengl.GL11",
 		"org.lwjgl.opengl.GL12",

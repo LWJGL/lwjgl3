@@ -9,7 +9,7 @@ import org.lwjgl.opencl.*
 
 val INVALID_PROPERTY = "CL11#INVALID_PROPERTY"
 
-fun CL11() = "CL11".nativeClassCL("CL11") {
+val CL11 = "CL11".nativeClassCL("CL11") {
 	nativeImport (
 		"OpenCL.h"
 	)

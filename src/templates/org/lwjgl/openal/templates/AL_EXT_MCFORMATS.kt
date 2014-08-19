@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_MCFORMATS() = "EXTMCFormats".nativeClassAL("EXT_MCFORMATS") {
+val AL_EXT_MCFORMATS = "EXTMCFormats".nativeClassAL("EXT_MCFORMATS") {
 	nativeImport (
 		"OpenAL.h"
 	)

@@ -10,4 +10,4 @@ import org.lwjgl.openal.*
 val AL = "AL"
 val ALC = "ALC"
 
-fun ALC_ENUMERATION_EXT() = EXT_FLAG.nativeClassALC("ENUMERATION_EXT")
+val ALC_ENUMERATION_EXT = EXT_FLAG.nativeClassALC("ENUMERATION_EXT")

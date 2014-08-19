@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_DOUBLE() = "EXTDouble".nativeClassAL("EXT_DOUBLE") {
+val AL_EXT_DOUBLE = "EXTDouble".nativeClassAL("EXT_DOUBLE") {
 	nativeImport (
 		"OpenAL.h"
 	)

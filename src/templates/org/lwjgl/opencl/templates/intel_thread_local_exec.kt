@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun intel_thread_local_exec() = "INTELThreadLocalExec".nativeClassCL("intel_thread_local_exec", INTEL) {
+val intel_thread_local_exec = "INTELThreadLocalExec".nativeClassCL("intel_thread_local_exec", INTEL) {
 
 	documentation =
 		"""

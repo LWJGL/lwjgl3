@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL_EXT_EXPONENT_DISTANCE() = "EXTExponentDistance".nativeClassAL("EXT_EXPONENT_DISTANCE") {
+val AL_EXT_EXPONENT_DISTANCE = "EXTExponentDistance".nativeClassAL("EXT_EXPONENT_DISTANCE") {
 	nativeImport (
 		"OpenAL.h"
 	)

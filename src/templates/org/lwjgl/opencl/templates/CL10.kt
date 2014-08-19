@@ -114,7 +114,7 @@ val PARAM_VALUE_SIZE_RET = mods(Check(1), nullable) _ size_t_p.OUT(
 	"the actual size in bytes of data being queried by {@code param_value}. If $NULL, it is ignored."
 )
 
-fun CL10() = "CL10".nativeClassCL("CL10") {
+val CL10 = "CL10".nativeClassCL("CL10") {
 	javaImport (
 		"static org.lwjgl.opencl.Info.*"
 	)

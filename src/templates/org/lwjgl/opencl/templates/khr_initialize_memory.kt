@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_initialize_memory() = "KHRInitializeMemory".nativeClassCL("khr_initialize_memory", KHR) {
+val khr_initialize_memory = "KHRInitializeMemory".nativeClassCL("khr_initialize_memory", KHR) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

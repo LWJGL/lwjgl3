@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun AL10() = "AL10".nativeClassAL("AL10") {
+val AL10 = "AL10".nativeClassAL("AL10") {
 	nativeImport (
 		"OpenAL.h"
 	)

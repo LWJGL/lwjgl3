@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_offline_devices() = "AMDOfflineDevices".nativeClassCL("amd_offline_devices", AMD) {
+val amd_offline_devices = "AMDOfflineDevices".nativeClassCL("amd_offline_devices", AMD) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

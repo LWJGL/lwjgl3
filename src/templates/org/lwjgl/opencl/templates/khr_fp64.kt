@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_fp64() = "KHRFP64".nativeClassCL("khr_fp64", KHR) {
+val khr_fp64 = "KHRFP64".nativeClassCL("khr_fp64", KHR) {
 
 	documentation = "Native bindings to the $extensionLink  extension."
 

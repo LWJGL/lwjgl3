@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_SOFT_loopback() = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
+val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	nativeImport (
 		"OpenAL.h"
 	)

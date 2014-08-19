@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_EXT_EFX() = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
+val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 	nativeImport (
 		"OpenAL.h"
 	)

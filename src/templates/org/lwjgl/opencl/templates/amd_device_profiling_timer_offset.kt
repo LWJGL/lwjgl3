@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_device_profiling_timer_offset() = "AMDDeviceProfilingTimerOffset".nativeClassCL("amd_device_profiling_timer_offset", AMD) {
+val amd_device_profiling_timer_offset = "AMDDeviceProfilingTimerOffset".nativeClassCL("amd_device_profiling_timer_offset", AMD) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

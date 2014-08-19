@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun intel_device_partition_by_names() = "INTELDevicePartitionByNames".nativeClassCL("intel_device_partition_by_names", INTEL) {
+val intel_device_partition_by_names = "INTELDevicePartitionByNames".nativeClassCL("intel_device_partition_by_names", INTEL) {
 
 	documentation =
 		"""

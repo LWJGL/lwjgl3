@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-fun ALC_EXT_thread_local_context() = "EXTThreadLocalContext".nativeClassALC("EXT_thread_local_context") {
+val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_thread_local_context") {
 	nativeImport (
 		"OpenAL.h"
 	)

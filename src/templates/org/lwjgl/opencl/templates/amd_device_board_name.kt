@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_device_board_name() = "AMDDeviceBoardName".nativeClassCL("amd_device_board_name", AMD) {
+val amd_device_board_name = "AMDDeviceBoardName".nativeClassCL("amd_device_board_name", AMD) {
 
 	documentation = "Native bindings to the $extensionName extension."
 

@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_terminate_context() = "KHRTerminateContext".nativeClassCL("khr_terminate_context", KHR) {
+val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_context", KHR) {
 	nativeImport(
 		"OpenCL.h"
 	)

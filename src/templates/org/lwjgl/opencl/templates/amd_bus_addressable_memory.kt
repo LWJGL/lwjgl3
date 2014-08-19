@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun amd_bus_addressable_memory() = "AMDBusAddressableMemory".nativeClassCL("amd_bus_addressable_memory", AMD) {
+val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bus_addressable_memory", AMD) {
 	nativeImport(
 		"OpenCL.h"
 	)

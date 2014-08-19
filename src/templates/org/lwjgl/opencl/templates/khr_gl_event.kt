@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
+val khr_gl_event = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 	nativeImport (
 		"OpenCL.h",
 		"opengl_types.h"
@@ -19,8 +19,8 @@ fun khr_gl_event() = "KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		Native bindings to the $extensionName extension.
 
 		This extension allows creating OpenCL event objects linked to OpenGL fence sync objects, potentially improving efficiency of sharing images and buffers
-		between the two APIs. The companion {@link org.lwjgl.opengl.ARBCLEvent} extension provides the complementary functionality of creating an OpenGL sync
-		object from an OpenCL event object.
+		between the two APIs. The companion {@link org.lwjgl.opengl.ARBCLEvent GL_ARB_cl_event} extension provides the complementary functionality of creating
+		an OpenGL sync object from an OpenCL event object.
 
 		In addition, this extension modifies the behavior of CL10GL#EnqueueAcquireGLObjects() and CL10GL#EnqueueReleaseGLObjects() to implicitly
 		guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.

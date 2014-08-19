@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-fun khr_gl_sharing() = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
+val khr_gl_sharing = "KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
 	nativeImport (
 		"OpenCL.h"
 	)
