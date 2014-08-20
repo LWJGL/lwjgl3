@@ -167,7 +167,6 @@ private val NativeClassFunction.dsaLink: String
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 private val NativeClass.registryLink: String get() {
-	println(templateName)
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
 	if ( !matcher.matches() )
 		throw IllegalStateException("Non-standard extension name: $templateName")
