@@ -370,8 +370,7 @@ public final class MemoryUtil {
 	 * @return the new PointerBuffer
 	 */
 	public static PointerBuffer memPointerBuffer(long address, int capacity) {
-		// TODO: optimize
-		return new PointerBuffer(memByteBuffer(address, capacity << POINTER_SHIFT));
+		return new PointerBuffer(address, capacity);
 	}
 
 	/**

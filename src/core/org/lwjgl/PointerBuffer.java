@@ -25,10 +25,20 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Creates a new PointerBuffer with the specified capacity.
 	 *
-	 * @param capacity the PointerBuffer size, in number of pointers
+	 * @param capacity the buffer size, in number of pointers
 	 */
 	public PointerBuffer(int capacity) {
 		this(BufferUtils.createByteBuffer(capacity * POINTER_SIZE), false);
+	}
+
+	/**
+	 * Creates a new PointerBuffer that starts at the given memory address and has the given capacity.
+	 *
+	 * @param address  the starting memory address
+	 * @param capacity the buffer capacity, in number of pointers
+	 */
+	public PointerBuffer(long address, int capacity) {
+		this(memByteBuffer(address, capacity * POINTER_SIZE), false);
 	}
 
 	/**
