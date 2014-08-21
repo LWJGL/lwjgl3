@@ -154,7 +154,7 @@ val cl_image_desc = StructType(
 		cl_uint.member("num_samples")
 		//union {
 		cl_mem.member("buffer")
-		cl_mem.member("mem_object")
+		//cl_mem.member("mem_object") TODO: Missing from Apple's headers
 		//}
 	}
 )
