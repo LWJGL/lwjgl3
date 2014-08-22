@@ -39,6 +39,19 @@ val GLFWgammaramp = StructType(
 )
 val GLFWgammaramp_p = StructType(GLFWgammaramp)
 
+val GLFWcursor = PointerType("GLFWcursor")
+
+val GLFWimage = StructType(
+	struct(GLFW_PACKAGE, "GLFWimage") {
+		documentation = "Image data."
+		nativeImport("glfw3.h")
+		int.member("width")
+		int.member("height")
+		unsigned_char_p.member("pixels")
+	}
+)
+val GLFWimage_p = StructType(GLFWimage)
+
 // callback functions
 
 val GLFWerrorfun = PointerType(name = "GLFWerrorfun", includesPointer = true)
@@ -55,6 +68,7 @@ val GLFWframebuffersizefun = PointerType(name = "GLFWframebuffersizefun", includ
 
 val GLFWkeyfun = PointerType(name = "GLFWkeyfun", includesPointer = true)
 val GLFWcharfun = PointerType(name = "GLFWcharfun", includesPointer = true)
+val GLFWcharmodsfun = PointerType(name = "GLFWcharmodsfun", includesPointer = true)
 
 val GLFWmousebuttonfun = PointerType(name = "GLFWmousebuttonfun", includesPointer = true)
 
@@ -63,6 +77,8 @@ val GLFWcursorenterfun = PointerType(name = "GLFWcursorenterfun", includesPointe
 
 val GLFWscrollfun = PointerType(name = "GLFWscrollfun", includesPointer = true)
 
+val GLFWdropfun = PointerType(name = "GLFWdropfun", includesPointer = true)
+
 // OpenGL
 
-//val GLFWglproc = PointerType("GLFWglproc")
+val GLFWglproc = PointerType("GLFWglproc")

@@ -14,10 +14,12 @@ DECLARE_CALLBACK(GLFWwindowiconifyfun)
 DECLARE_CALLBACK(GLFWframebuffersizefun)
 DECLARE_CALLBACK(GLFWkeyfun)
 DECLARE_CALLBACK(GLFWcharfun)
+DECLARE_CALLBACK(GLFWcharmodsfun)
 DECLARE_CALLBACK(GLFWmousebuttonfun)
 DECLARE_CALLBACK(GLFWcursorposfun)
 DECLARE_CALLBACK(GLFWcursorenterfun)
 DECLARE_CALLBACK(GLFWscrollfun)
+DECLARE_CALLBACK(GLFWdropfun)
 
 static void GLFWwindowposfunProc(GLFWwindow* window, int xpos, int ypos) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
@@ -75,11 +77,18 @@ static void GLFWkeyfunProc(GLFWwindow* window, int key, int scancode, int action
 	(*env)->CallVoidMethod(env, callback, GLFWkeyfunInvoke, (jlong)(intptr_t)window, (jint)key, (jint)scancode, (jint)action, (jint)mods);
 }
 
-static void GLFWcharfunProc(GLFWwindow* window, int character) {
+static void GLFWcharfunProc(GLFWwindow* window, int codepoint) {
 	jobject callback = (jobject)glfwGetWindowUserPointer(window);
 
 	JNIEnv* env = getEnv();
-	(*env)->CallVoidMethod(env, callback, GLFWcharfunInvoke, (jlong)(intptr_t)window, (jint)character);
+	(*env)->CallVoidMethod(env, callback, GLFWcharfunInvoke, (jlong)(intptr_t)window, (jint)codepoint);
+}
+
+static void GLFWcharmodsfunProc(GLFWwindow* window, unsigned int codepoint, int mods) {
+	jobject callback = (jobject)glfwGetWindowUserPointer(window);
+
+	JNIEnv* env = getEnv();
+	(*env)->CallVoidMethod(env, callback, GLFWcharmodsfunInvoke, (jlong)(intptr_t)window, (jint)codepoint, (jint)mods);
 }
 
 static void GLFWmousebuttonfunProc(GLFWwindow* window, int button, int action, int mods) {
@@ -110,6 +119,19 @@ static void GLFWscrollfunProc(GLFWwindow* window, double xpos, double ypos) {
 	(*env)->CallVoidMethod(env, callback, GLFWscrollfunInvoke, (jlong)(intptr_t)window, (jdouble)xpos, (jdouble)ypos);
 }
 
+static void GLFWdropfunProc(GLFWwindow* window, int count, const char** names) {
+	jobject callback = (jobject)glfwGetWindowUserPointer(window);
+
+	JNIEnv* env = getEnv();
+	(*env)->CallVoidMethod(env, callback, GLFWdropfunInvoke, (jlong)(intptr_t)window, (jint)count, (jlong)(intptr_t)names);
+}
+
+#define GETINVOKE() \
+	(*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++))
+
+#define SETPROC(proc) \
+	procs[i++] = (intptr_t)&proc
+
 // setCallbacks([Ljava/lang/reflect/Method;J)V
 JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JNIEnv *env, jclass clazz,
 	jobjectArray methods, jlong procsAddress
@@ -120,32 +142,37 @@ JNIEXPORT void JNICALL Java_org_lwjgl_system_glfw_WindowCallback_setCallbacks(JN
 
 	UNUSED_PARAM(clazz)
 
-	GLFWwindowposfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-	GLFWwindowsizefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-   	GLFWwindowclosefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-	GLFWwindowrefreshfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-    GLFWwindowfocusfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-    GLFWwindowiconifyfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-    GLFWframebuffersizefunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-	GLFWkeyfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-   	GLFWcharfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-	GLFWmousebuttonfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-    GLFWcursorposfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-	GLFWcursorenterfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i++));
-   	GLFWscrollfunInvoke = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, i));
+	GLFWwindowposfunInvoke = GETINVOKE();
+	GLFWwindowsizefunInvoke = GETINVOKE();
+   	GLFWwindowclosefunInvoke = GETINVOKE();
+	GLFWwindowrefreshfunInvoke = GETINVOKE();
+    GLFWwindowfocusfunInvoke = GETINVOKE();
+    GLFWwindowiconifyfunInvoke = GETINVOKE();
+    GLFWframebuffersizefunInvoke = GETINVOKE();
+	GLFWkeyfunInvoke = GETINVOKE();
+   	GLFWcharfunInvoke = GETINVOKE();
+   	GLFWcharmodsfunInvoke = GETINVOKE();
+	GLFWmousebuttonfunInvoke = GETINVOKE();
+    GLFWcursorposfunInvoke = GETINVOKE();
+	GLFWcursorenterfunInvoke = GETINVOKE();
+   	GLFWscrollfunInvoke = GETINVOKE();
+   	GLFWdropfunInvoke = GETINVOKE();
 
 	i = 0;
-	procs[i++] = (intptr_t)&GLFWwindowposfunProc;
-   	procs[i++] = (intptr_t)&GLFWwindowsizefunProc;
-	procs[i++] = (intptr_t)&GLFWwindowclosefunProc;
-    procs[i++] = (intptr_t)&GLFWwindowrefreshfunProc;
-    procs[i++] = (intptr_t)&GLFWwindowfocusfunProc;
-	procs[i++] = (intptr_t)&GLFWwindowiconifyfunProc;
-	procs[i++] = (intptr_t)&GLFWframebuffersizefunProc;
-	procs[i++] = (intptr_t)&GLFWkeyfunProc;
-	procs[i++] = (intptr_t)&GLFWcharfunProc;
-    procs[i++] = (intptr_t)&GLFWmousebuttonfunProc;
-	procs[i++] = (intptr_t)&GLFWcursorposfunProc;
-	procs[i++] = (intptr_t)&GLFWcursorenterfunProc;
-    procs[i] = (intptr_t)&GLFWscrollfunProc;
+
+	SETPROC(GLFWwindowposfunProc);
+   	SETPROC(GLFWwindowsizefunProc);
+	SETPROC(GLFWwindowclosefunProc);
+    SETPROC(GLFWwindowrefreshfunProc);
+    SETPROC(GLFWwindowfocusfunProc);
+	SETPROC(GLFWwindowiconifyfunProc);
+	SETPROC(GLFWframebuffersizefunProc);
+	SETPROC(GLFWkeyfunProc);
+	SETPROC(GLFWcharfunProc);
+	SETPROC(GLFWcharmodsfunProc);
+    SETPROC(GLFWmousebuttonfunProc);
+	SETPROC(GLFWcursorposfunProc);
+	SETPROC(GLFWcursorenterfunProc);
+    SETPROC(GLFWscrollfunProc);
+    SETPROC(GLFWdropfunProc);
 }

@@ -1,7 +1,7 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-windows">
 	<import file="../build-definitions.xml"/>
 
-	<property name="libs" value="Kernel32.lib ole32.lib OpenGL32.Lib Version.lib user32.lib Gdi32.lib Advapi32.lib delayimp.lib winmm.lib Comctl32.lib"/>
+	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib OpenGL32.Lib"/>
 
 	<condition property="dllname" value="lwjgl.dll" else="lwjgl64.dll">
 		<equals arg1="${os.arch}" arg2="x86"/>
@@ -85,8 +85,8 @@
 
 		<update-dropbox name="OpenAL32" artifact="windows/OpenAL32.dll" hash="i4zue33q7rs4d7k/eK66IxClph" dest="${lib}"/>
 		<update-dropbox name="OpenAL64" artifact="windows/OpenAL64.dll" hash="i4zue33q7rs4d7k/th0369so9E" dest="${lib}"/>
-		<update-dropbox name="GLFW32" artifact="windows/x86/glfw3.lib" hash="i4zue33q7rs4d7k/zb_3aaleWY" dest="${lib}"/>
-		<update-dropbox name="GLFW64" artifact="windows/amd64/glfw3.lib" hash="i4zue33q7rs4d7k/YYcO-kCfU6" dest="${lib}"/>
+		<update-dropbox name="GLFW32" artifact="windows/x86/glfw3.lib" hash="i4zue33q7rs4d7k/AACQYjNxDUghXyNeOFnjdPfRa" dest="${lib}"/>
+		<update-dropbox name="GLFW64" artifact="windows/amd64/glfw3.lib" hash="i4zue33q7rs4d7k/AACZ4zofheM_VYEHlfi-7Bw3a" dest="${lib}"/>
 		<update-dropbox name="libffi32" artifact="windows/x86/libffi.lib" hash="i4zue33q7rs4d7k/JVf4yjtPk0" dest="${lib}"/>
 		<update-dropbox name="libffi64" artifact="windows/amd64/libffi.lib" hash="i4zue33q7rs4d7k/uxqM_I0jf8" dest="${lib}"/>
 	</target>

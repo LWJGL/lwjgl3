@@ -19,6 +19,13 @@ fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix 
 
 	documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
+	(const _ WCHAR_p).func(
+		"GetWin32Monitor",
+	    "Returns the device name of the specified monitor.",
+
+	    GLFWmonitor.IN("monitor", "the GLFW monitor")
+	)
+
 	HWND.func(
 		"GetWin32Window",
 		"Returns the ${code("HWND")} of the given GLFW window.",

@@ -33,10 +33,12 @@ public abstract class WindowCallback {
 		FRAMEBUFFER_SIZE("framebufferSize", long.class, int.class, int.class),
 		KEY("key", long.class, int.class, int.class, int.class, int.class),
 		CHARACTER("character", long.class, int.class),
+		CHARMODS("charMods", long.class, int.class, int.class),
 		MOUSE_BUTTON("mouseButton", long.class, int.class, int.class, int.class),
 		CURSOR_POS("cursorPos", long.class, double.class, double.class),
 		CURSOR_ENTER("cursorEnter", long.class, int.class),
-		SCROLL("scroll", long.class, double.class, double.class);
+		SCROLL("scroll", long.class, double.class, double.class),
+		DROP("drop", long.class, int.class, long.class);
 
 		private final String     method;
 		private final Class<?>[] parameterTypes;
@@ -46,8 +48,6 @@ public abstract class WindowCallback {
 			this.parameterTypes = parameterTypes;
 		}
 	}
-
-	private static final int LAST_INDEX = Event.SCROLL.ordinal();
 
 	public static final EnumSet<Event> ALL = EnumSet.allOf(Event.class);
 
@@ -164,6 +164,9 @@ public abstract class WindowCallback {
 				case CHARACTER:
 					glfwSetCharCallback(window, callback);
 					break;
+				case CHARMODS:
+					glfwSetCharModsCallback(window, callback);
+					break;
 				case MOUSE_BUTTON:
 					glfwSetMouseButtonCallback(window, callback);
 					break;
@@ -175,6 +178,9 @@ public abstract class WindowCallback {
 					break;
 				case SCROLL:
 					glfwSetScrollCallback(window, callback);
+					break;
+				case DROP:
+					glfwSetDropCallback(window, callback);
 					break;
 				default:
 					throw new IllegalStateException("Unsupported event type: " + event.name());
@@ -281,11 +287,22 @@ public abstract class WindowCallback {
 	 * The char callback.
 	 *
 	 * @param window    the window that received the event
-	 * @param character the Unicode code point of the character
+	 * @param codepoint the Unicode code point of the character
 	 *
 	 * @see GLFW#glfwSetCharCallback
 	 */
-	public abstract void character(long window, int character);
+	public abstract void character(long window, int codepoint);
+
+	/**
+	 * This Unicode character with modifiers callback. It is called for each input character, regardless of what modifier keys are held down.
+	 *
+	 * @param window    the window that received the event
+	 * @param codepoint the Unicode code point of the character
+	 * @param mods      bitfield describing which modifier keys were held down
+	 *
+	 * @see GLFW#glfwSetCharModsCallback
+	 */
+	public abstract void charMods(long window, int codepoint, int mods);
 
 	/**
 	 * The mouse button callback.
@@ -303,8 +320,8 @@ public abstract class WindowCallback {
 	 * The cursor move callback.
 	 *
 	 * @param window the window that received the event
-	 * @param xpos   the new x-coordinate of the cursor
-	 * @param ypos   the new y-coordinate of the cursor
+	 * @param xpos   the new x-coordinate, in screen coordinates of the cursor
+	 * @param ypos   the new y-coordinate, in screen coordinates of the cursor
 	 *
 	 * @see GLFW#glfwSetCursorPosCallback
 	 */
@@ -330,5 +347,16 @@ public abstract class WindowCallback {
 	 * @see GLFW#glfwSetScrollCallback
 	 */
 	public abstract void scroll(long window, double xoffset, double yoffset);
+
+	/**
+	 * The file drop callback.
+	 *
+	 * @param window the window that received the event
+	 * @param count  the number of dropped files
+	 * @param names  pointer to the array of UTF-8 encoded path names of the dropped files
+	 *
+	 * @see GLFW#glfwSetDropCallback
+	 */
+	public abstract void drop(long window, int count, long names);
 
 }

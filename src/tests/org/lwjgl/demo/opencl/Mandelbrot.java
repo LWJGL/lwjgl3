@@ -14,21 +14,17 @@ import org.lwjgl.opengl.*;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 
 import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
@@ -57,7 +53,15 @@ public class Mandelbrot {
 
 	private static final int COLOR_MAP_SIZE = 32 * 2 * 4;
 
-	private static final ByteBuffer source = getProgramSource("demo/Mandelbrot.cl");
+	private static final ByteBuffer source;
+
+	static {
+		try {
+			source = ioResourceToByteBuffer("demo/Mandelbrot.cl", 4096);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	/** The event callbacks run on the main thread. We use this queue to apply any changes in the rendering thread. */
 	private final Queue<Runnable> events = new ConcurrentLinkedQueue<>();
@@ -749,28 +753,6 @@ public class Mandelbrot {
 		// init kernel with constants
 		clKernel = clCreateKernel(clProgram, "mandelbrot", errcode_ret);
 		checkCLError(errcode_ret);
-	}
-
-	private static ByteBuffer getProgramSource(String file) {
-		ByteBuffer buffer = ByteBuffer.allocateDirect(4096);
-
-		try {
-			URL sourceURL = Thread.currentThread().getContextClassLoader().getResource(file);
-			if ( sourceURL == null )
-				throw new FileNotFoundException(file);
-
-			try (
-				InputStream source = sourceURL.openStream();
-				ReadableByteChannel rbc = Channels.newChannel(source)
-			) {
-				while ( rbc.read(buffer) != -1 ) ;
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-
-		buffer.flip();
-		return buffer;
 	}
 
 	private void initGLObjects() {

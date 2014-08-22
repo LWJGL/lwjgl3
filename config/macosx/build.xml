@@ -89,6 +89,7 @@
 			<arg line='-dynamiclib -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
 			<arg value="-framework"/><arg value="AppKit"/>
 			<arg value="-framework"/><arg value="CoreFoundation"/>
+			<arg value="-framework"/><arg value="CoreVideo"/>
 			<arg value="-framework"/><arg value="Cocoa"/>
 			<arg value="-framework"/><arg value="IOKit"/>
 			<arg value="-framework"/><arg value="OpenGL"/>
@@ -159,7 +160,7 @@
 		<mkdir dir="${lib}/macosx/x86_64"/>
 
 		<update-dropbox name="OpenAL" artifact="macosx/openal.dylib" hash="i4zue33q7rs4d7k/mjhxw_7sTN" dest="${lib}"/>
-		<update-dropbox name="GLFW" artifact="macosx/x86_64/libglfw3.a" hash="i4zue33q7rs4d7k/TFDrKNsK9H" dest="${lib}"/>
+		<update-dropbox name="GLFW" artifact="macosx/x86_64/libglfw3.a" hash="i4zue33q7rs4d7k/AAB49oHxHpZBrqjcOWpKU3YTa" dest="${lib}"/>
 		<update-dropbox name="libffi" artifact="macosx/x86_64/libffi.a" hash="i4zue33q7rs4d7k/1nhPKRljnB" dest="${lib}"/>
 	</target>
 </project>

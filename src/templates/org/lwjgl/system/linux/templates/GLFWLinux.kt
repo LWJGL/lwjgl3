@@ -8,6 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.glfw.*
 import org.lwjgl.system.linux.*
+import org.lwjgl.system.windows.WCHAR_p
 
 fun GLFWLinux() = "GLFWLinux".nativeClass(packageName = LINUX_PACKAGE, prefix = "GLFW") {
 	nativeDefine("GLFW_EXPOSE_NATIVE_X11")
@@ -19,6 +20,13 @@ fun GLFWLinux() = "GLFWLinux".nativeClass(packageName = LINUX_PACKAGE, prefix = 
 	)
 
 	documentation = "Native bindings to the GLFW library's Linux native access functions."
+
+	RRCrtc.func(
+		"GetX11Monitor",
+		"Returns the {@code RRCrtc} of the specified monitor.",
+
+		GLFWmonitor.IN("monitor", "the GLFW monitor")
+	)
 
 	Display_p.func(
 		"GetX11Display",

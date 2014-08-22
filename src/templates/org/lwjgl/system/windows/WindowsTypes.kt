@@ -45,6 +45,8 @@ val HRESULT = PrimitiveType("HRESULT", LONG)
 val MMRESULT = PrimitiveType("MMRESULT", UINT)
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
+val WCHAR = CharType("WCHAR", CharMapping.UTF16)
+val WCHAR_p = CharSequenceType(WCHAR)
 
 val LPCTSTR = CharSequenceType(
 	name = "LPCTSTR",

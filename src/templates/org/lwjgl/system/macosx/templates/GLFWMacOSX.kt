@@ -19,6 +19,13 @@ fun GLFWMacOSX() = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix
 
 	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
 
+	CGDirectDisplayID.func(
+		"GetCocoaMonitor",
+	    "Returns the {@code CGDirectDisplayID} of the specified monitor.",
+
+	    GLFWmonitor.IN("monitor", "the GLFW monitor")
+	)
+
 	id.func(
 		"GetCocoaWindow",
 		"Returns the ${code("NSWindow")} of the given GLFW window.",

@@ -4,7 +4,7 @@
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
 	<!-- *********************************** -->
-	<property name="disruptor" value="3.2.1"/>
+	<property name="disruptor" value="3.3.0"/>
 	<property name="testng" value="6.8.8"/>
 	<property name="jcommander" value="1.35"/>
 	<property name="kotlinc-build" value="0.8.11"/>

@@ -4,11 +4,19 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.Sys;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.GLFWimage;
 import org.lwjgl.system.glfw.MonitorCallback;
 import org.lwjgl.system.glfw.WindowCallback;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+import static org.lwjgl.demo.util.IOUtil.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
@@ -36,11 +44,24 @@ public final class Events {
 
 	private static void demo() {
 		glfwDefaultWindowHints();
+		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
+
 		long window = glfwCreateWindow(640, 480, "GLFW Event Demo", NULL, NULL);
 		if ( window == 0L )
 			throw new IllegalStateException("Failed to create GLFW window.");
 
 		System.out.println("Window opened.");
+
+		try {
+			ImageData pixels = ioImageResourceToByteBuffer("demo/cursor.png");
+
+			ByteBuffer img = GLFWimage.malloc(pixels.width, pixels.height, pixels.data);
+			long cursor = glfwCreateCursor(img, 0, 8);
+
+			glfwSetCursor(window, cursor);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		glfwSetMonitorCallback(MonitorCallback.Util.getDefault());
 
@@ -104,8 +125,13 @@ public final class Events {
 			}
 
 			@Override
-			public void character(long window, int character) {
-				printEvent(window, "character %s", Character.toString((char)character));
+			public void character(long window, int codepoint) {
+				printEvent(window, "char %s", Character.toString((char)codepoint));
+			}
+
+			@Override
+			public void charMods(long window, int codepoint, int mods) {
+				printEvent(window, "char mods %s%s", getModState(mods), Character.toString((char)codepoint));
 			}
 
 			@Override
@@ -138,10 +164,31 @@ public final class Events {
 			public void scroll(long window, double xoffset, double yoffset) {
 				printEvent(window, "scroll by %f, %f", xoffset, yoffset);
 			}
+
+			@Override
+			public void drop(long window, int count, long names) {
+				printEvent(window, "drop %d file%s", count, count == 1 ? "" : "s");
+
+				PointerBuffer nameBuffer = memPointerBuffer(names, count);
+				for ( int i = 0; i < count; i++ ) {
+					System.out.format("\t%d: %s%n", i + 1, memDecodeUTF8(memByteBufferNT1(nameBuffer.get(i))));
+				}
+			}
 		});
 
-		while ( glfwWindowShouldClose(window) == 0 )
+		glfwMakeContextCurrent(window);
+		GLContext.createFromCurrent();
+
+		glfwShowWindow(window);
+		glfwSwapInterval(1);
+
+		glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
+		while ( glfwWindowShouldClose(window) == 0 ) {
 			glfwWaitEvents();
+
+			glClear(GL_COLOR_BUFFER_BIT);
+			glfwSwapBuffers(window);
+		}
 	}
 
 	private static String getModState(int mods) {

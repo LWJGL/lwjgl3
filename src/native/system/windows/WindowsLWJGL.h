@@ -5,7 +5,13 @@
 #ifndef _WINDOWS_LWJGL_INCLUDED
 	#define _WINDOWS_LWJGL_INCLUDED
 
-	#define WIN32_LEAN_AND_MEAN
+	#ifndef VC_EXTRALEAN
+		#define VC_EXTRALEAN
+	#endif
+
+	#ifndef WIN32_LEAN_AND_MEAN
+		#define WIN32_LEAN_AND_MEAN
+	#endif
 
 	#ifndef _WIN32_WINDOWS
 		#define _WIN32_WINDOWS 0x0500
