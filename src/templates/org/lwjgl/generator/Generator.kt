@@ -138,7 +138,7 @@ class Generator(
 	}
 
 	fun generate(packageName: String) {
-		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}")
+		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", true)
 		packageLastModifiedMap[packageName] = packageLastModified
 
 		// Find and run configuration methods

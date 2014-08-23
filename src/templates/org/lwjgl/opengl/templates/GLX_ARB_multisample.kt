@@ -17,7 +17,7 @@ val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisampl
 		"""
 		Native bindings to the ${registryLink("ARB", "multisample")} extension.
 
-		This extension provides a mechanism to antialias all GL primitives.
+		See ##ARBMultisample for details.
 		"""
 
 	IntConstant.block(

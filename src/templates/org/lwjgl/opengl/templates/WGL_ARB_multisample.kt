@@ -12,10 +12,7 @@ val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisampl
 		"""
 		Native bindings to the ${registryLink("ARB", "multisample")} extension.
 
-		This extension provides a mechanism to antialias all GL primitives: points, lines, polygons, bitmaps, and images.  The technique is to sample all
-		primitives multiple times at each pixel.  The color sample values are resolved to a single, displayable color each time a pixel is updated, so the
-		antialiasing appears to be automatic at the application level.  Because each sample includes depth and stencil information, the depth and stencil
-		functions perform equivalently to the single-sample mode.
+		See ##ARBMultisample for details.
 
 		Requires ${WGL_EXT_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
 		"""
