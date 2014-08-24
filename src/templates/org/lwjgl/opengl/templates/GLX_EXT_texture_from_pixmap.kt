@@ -9,8 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_EXT_texture_from_pixmap", EXT) {
-	javaImport("org.lwjgl.system.linux.*")
-
 	nativeImport (
 		"<GL/glx.h>"
 	)

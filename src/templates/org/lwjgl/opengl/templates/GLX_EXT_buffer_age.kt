@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GLX_EXT_buffer_age = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age", EXT) {
-	javaImport("org.lwjgl.system.linux.*")
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "glx_buffer_age")} extension.

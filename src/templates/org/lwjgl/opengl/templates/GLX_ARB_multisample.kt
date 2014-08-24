@@ -9,8 +9,7 @@ import org.lwjgl.opengl.*
 
 val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
 	javaImport(
-		"org.lwjgl.system.linux.*",
-		"org.lwjgl.system.linux.GLX"
+		"org.lwjgl.system.linux.*"
 	)
 
 	documentation =

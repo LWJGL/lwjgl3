@@ -9,8 +9,7 @@ import org.lwjgl.opengl.*
 
 val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("GLX_EXT_fbconfig_packed_float", EXT) {
 	javaImport(
-		"org.lwjgl.system.linux.*",
-		"org.lwjgl.system.linux.GLX"
+		"org.lwjgl.system.linux.*"
 	)
 
 	documentation =

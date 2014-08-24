@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_ARB_create_context_profile = "GLXARBCreateContextProfile".nativeClassGLX("GLX_ARB_create_context_profile", ARB) {
-	javaImport(
-		"org.lwjgl.system.linux.*"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "glx_create_context")} extension.

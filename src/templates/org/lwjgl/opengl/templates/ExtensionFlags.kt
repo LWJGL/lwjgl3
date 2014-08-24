@@ -273,11 +273,11 @@ val ARB_texture_env_crossbar = EXT_FLAG.nativeClassGL("ARB_texture_env_crossbar"
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension adds the capability to use the texture color from other texture units as sources to the COMBINE_ARB environment function. The
-		${"ARB_texture_env_combine".cap} extension defined texture environment functions which could use the color from the current texture unit as a source.
-		This extension adds the ability to use the color from any texture unit as a source.
+		This extension adds the capability to use the texture color from other texture units as sources to the ARBTextureEnvCombine#COMBINE_ARB environment
+		function. The ${ARB_texture_env_combine.link} extension defined texture environment functions which could use the color from the current texture unit
+		as a source. This extension adds the ability to use the color from any texture unit as a source.
 
-		Requires ${"ARB_multitexture".cap} and ${"ARB_texture_env_combine".cap}. ${GL14.promoted}
+		Requires ${"ARB_multitexture".cap} and ${ARB_texture_env_combine.link}. ${GL14.promoted}
 		"""
 }
 val ARB_texture_non_power_of_two = EXT_FLAG.nativeClassGL("ARB_texture_non_power_of_two", postfix = ARB) {

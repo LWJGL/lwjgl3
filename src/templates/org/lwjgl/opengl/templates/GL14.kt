@@ -225,45 +225,45 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_point_parameters
 
-	val POINT_PARAMETERS = IntConstant.block(
+	IntConstant.block(
 		"Accepted by the {@code pname} parameter of PointParameterfARB, and the {@code pname} of Get.",
 
 		"POINT_SIZE_MIN" _ 0x8126,
 		"POINT_SIZE_MAX" _ 0x8127,
 		"POINT_FADE_THRESHOLD_SIZE" _ 0x8128,
 		"POINT_DISTANCE_ATTENUATION" _ 0x8129
-	).javaDocLinks
+	)
 
-	val PointParameterf = GLvoid.func(
+	GLvoid.func(
 		"PointParameterf",
 		"Sets the float value of a pointer parameter.",
 
-		GLenum.IN("pname", "the parameter to set", POINT_PARAMETERS),
+		GLenum.IN("pname", "the parameter to set", "#POINT_SIZE_MIN #POINT_SIZE_MAX  #POINT_FADE_THRESHOLD_SIZE"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)
 
-	val PointParameteri = GLvoid.func(
+	GLvoid.func(
 		"PointParameteri",
-		"Integer version of $PointParameterf.",
+		"Integer version of #PointParameterf().",
 
-		GLenum.IN("pname", "the parameter to set", POINT_PARAMETERS),
+		GLenum.IN("pname", "the parameter to set", "#POINT_SIZE_MIN #POINT_SIZE_MAX  #POINT_FADE_THRESHOLD_SIZE"),
 		GLint.IN("param", "the parameter value")
 	).javaDocLink
 
 	GLvoid.func(
 		"PointParameterfv",
-		"Pointer version of $PointParameterf.",
+		"Pointer version of #PointParameterf().",
 
-		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(1)) _ GLfloat_p.IN("params", "the parameter value")
+		GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION"),
+		mods(const, Check(3)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	GLvoid.func(
 		"PointParameteriv",
-		"Pointer version of $PointParameteri.",
+		"Pointer version of #PointParameteri().",
 
-		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(1)) _ GLint_p.IN("params", "the parameter value")
+		GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION"),
+		mods(const, Check(3)) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	// EXT_secondary_color

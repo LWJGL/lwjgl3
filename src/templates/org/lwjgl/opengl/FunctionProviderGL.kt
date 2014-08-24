@@ -176,6 +176,7 @@ private val NativeClass.registryLink: String get() {
 private fun NativeClass.registryLink(prefix: String, name: String): String =
 	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", templateName)
 
+private val NativeClass.capLink: String get() = "ContextCapabilities##${capName}"
 private val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
 private val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
 private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

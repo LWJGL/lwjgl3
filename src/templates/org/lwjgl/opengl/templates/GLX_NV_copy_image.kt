@@ -10,8 +10,7 @@ import org.lwjgl.system.linux.*
 
 val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
 	javaImport(
-		"org.lwjgl.system.linux.*",
-		"org.lwjgl.system.linux.GLX"
+		"org.lwjgl.system.linux.*"
 	)
 
 	nativeImport (

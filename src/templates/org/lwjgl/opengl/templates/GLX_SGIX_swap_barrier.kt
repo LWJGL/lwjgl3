@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_barrier", SGIX) {
-	javaImport(
-		"org.lwjgl.system.linux.X"
-	)
-
 	nativeImport (
 		"<GL/glx.h>"
 	)
