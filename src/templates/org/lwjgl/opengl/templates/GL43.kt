@@ -13,7 +13,39 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.3 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.3 functionality. OpenGL 4.3 implementations support revision 4.30 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "arrays_of_arrays"),
+			registryLinkTo("ARB", "ES3_compatibility"),
+			registryLinkTo("ARB", "clear_buffer_object"),
+			registryLinkTo("ARB", "compute_shader"),
+			registryLinkTo("ARB", "copy_image"),
+			registryLinkTo("ARB", "debug_group"),
+			registryLinkTo("ARB", "debug_label"),
+			registryLinkTo("ARB", "debug_output2"),
+			registryLinkTo("ARB", "debug_output"),
+			registryLinkTo("ARB", "explicit_uniform_location"),
+			registryLinkTo("ARB", "fragment_layer_viewport"),
+			registryLinkTo("ARB", "framebuffer_no_attachments"),
+			registryLinkTo("ARB", "internalformat_query2"),
+			registryLinkTo("ARB", "invalidate_subdata"),
+			registryLinkTo("ARB", "multi_draw_indirect"),
+			registryLinkTo("ARB", "program_interface_query"),
+			registryLinkTo("ARB", "robust_buffer_access_behavior"),
+			registryLinkTo("ARB", "shader_image_size"),
+			registryLinkTo("ARB", "shader_storage_buffer_object"),
+			registryLinkTo("ARB", "stencil_texturing"),
+			registryLinkTo("ARB", "texture_buffer_range"),
+			registryLinkTo("ARB", "texture_query_levels"),
+			registryLinkTo("ARB", "texture_storage_multisample"),
+			registryLinkTo("ARB", "texture_view"),
+			registryLinkTo("ARB", "vertex_attrib_binding")
+		)}
+		"""
 
 	IntConstant.block(
 		"No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",

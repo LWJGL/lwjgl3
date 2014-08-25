@@ -14,7 +14,24 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.2 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.2 functionality. OpenGL 4.2 implementations support revision 4.20 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "texture_compression_bptc"),
+			registryLinkTo("ARB", "compressed_texture_pixel_storage"),
+			registryLinkTo("ARB", "shader_atomic_counters"),
+			registryLinkTo("ARB", "texture_storage"),
+			registryLinkTo("ARB", "transform_feedback_instanced"),
+			registryLinkTo("ARB", "base_instance"),
+			registryLinkTo("ARB", "shader_image_load_store"),
+			"${registryLinkTo("ARB", "conservative_depth")} and ${registryLinkTo("ARB", "shading_language_420pack")}",
+			registryLinkTo("ARB", "internalformat_query"),
+			registryLinkTo("ARB", "map_buffer_alignment")
+		)}
+		"""
 
 	IntConstant.block(
 		"Renamed tokens.",

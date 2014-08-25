@@ -13,7 +13,22 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.4 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.4 functionality. OpenGL 4.4 implementations support revision 4.40 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "buffer_storage"),
+			registryLinkTo("ARB", "clear_texture"),
+			registryLinkTo("ARB", "enhanced_layouts"),
+			registryLinkTo("ARB", "multi_bind"),
+			registryLinkTo("ARB", "query_buffer_object"),
+			registryLinkTo("ARB", "texture_mirror_clamp_to_edge"),
+			registryLinkTo("ARB", "texture_stencil8"),
+			registryLinkTo("ARB", "vertex_type_10f_11f_11f_rev")
+		)}
+		"""
 
 	IntConstant.block(
 		"Implementation-dependent state which constrains the maximum value of stride parameters to vertex array pointer-setting commands.",

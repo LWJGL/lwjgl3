@@ -53,6 +53,9 @@ val GLenum_p = PointerType(GLenum)
 val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.PTR)
 val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.PTR)
 
+val GLintptrARB = PrimitiveType("GLintptrARB", PrimitiveMapping.PTR)
+val GLsizeiptrARB = PrimitiveType("GLsizeiptrARB", PrimitiveMapping.PTR)
+
 val GLintptr_p = PointerType(GLintptr)
 val GLsizeiptr_p = PointerType(GLsizeiptr)
 

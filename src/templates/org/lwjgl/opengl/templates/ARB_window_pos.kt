@@ -10,7 +10,7 @@ import org.lwjgl.generator.opengl.AutoType
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.generator.opengl.deprecatedGL
 
-val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos") {
+val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

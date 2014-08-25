@@ -16,7 +16,21 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 2.0 functionality."
+	documentation =
+		"""
+		The core OpenGL 2.0 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "shader_objects"),
+			"${registryLinkTo("ARB", "vertex_shader")} and ${registryLinkTo("ARB", "fragment_shader")}",
+			registryLinkTo("ARB", "shading_language_100"),
+			registryLinkTo("ARB", "draw_buffers"),
+			registryLinkTo("ARB", "texture_non_power_of_two"),
+			registryLinkTo("ARB", "point_sprite"),
+			"${registryLinkTo("ATI", "separate_stencil")} and ${registryLinkTo("EXT", "stencil_two_side")}"
+		)}
+		"""
 
 	// ARB_shading_language_100
 

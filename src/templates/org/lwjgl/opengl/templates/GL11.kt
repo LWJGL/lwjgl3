@@ -104,7 +104,21 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 1.1 functionality."
+	documentation =
+		"""
+		The core OpenGL 1.1 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("EXT", "vertex_array"),
+			registryLinkTo("EXT", "polygon_offset"),
+			registryLinkTo("EXT", "blend_logic_op"),
+			registryLinkTo("EXT", "texture"),
+			registryLinkTo("EXT", "copy_texture"),
+			registryLinkTo("EXT", "subtexture"),
+			registryLinkTo("EXT", "texture_object")
+		)}
+		"""
 
 	IntConstant.block(
 		"AccumOp",

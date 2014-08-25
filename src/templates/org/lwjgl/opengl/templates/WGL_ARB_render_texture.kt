@@ -41,7 +41,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		""",
 		"""
 		A mipmap attribute can be set, in which case memory will be allocated up front for mipmaps. The application can render the mipmap images or, if
-		{@link SGISGenerateMipmap SGIS_generate_mipmap} is supported, they can be automatically generated when the color buffer is bound as a texture.
+		${registryLinkTo("SGIS", "generate_mipmap")} is supported, they can be automatically generated when the color buffer is bound as a texture.
 		""",
 		"A texture target is associated with the pbuffer, so that cubemap images can be rendered into a single color buffer."
 		)}

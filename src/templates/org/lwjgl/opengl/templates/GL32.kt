@@ -14,7 +14,23 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 3.2 functionality."
+	documentation =
+		"""
+		The core OpenGL 3.2 functionality. OpenGL 3.2 implementations support revision 1.50 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "vertex_array_bgra"),
+			registryLinkTo("ARB", "draw_elements_base_vertex"),
+			registryLinkTo("ARB", "fragment_coord_conventions"),
+			registryLinkTo("ARB", "provoking_vertex"),
+			registryLinkTo("ARB", "seamless_cube_map"),
+			registryLinkTo("ARB", "texture_multisample"),
+			registryLinkTo("ARB", "depth_clamp"),
+			registryLinkTo("ARB", "geometry_shader4"),
+			registryLinkTo("ARB", "sync")
+		)}
+		"""
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",

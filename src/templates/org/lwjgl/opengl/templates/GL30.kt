@@ -19,7 +19,33 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 3.0 functionality."
+	documentation =
+		"""
+		The core OpenGL 3.0 functionality. OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language,
+		although versions 1.10 and 1.20 are deprecated in a forward-compatible context.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("EXT", "gpu_shader4"),
+			registryLinkTo("NV", "conditional_render"),
+			registryLinkTo("APPLE", "flush_buffer_range"),
+			"""
+			${registryLinkTo("ARB", "color_buffer_float")}, ${registryLinkTo("NV", "depth_buffer_float")}, ${registryLinkTo("ARB", "texture_float")},
+			${registryLinkTo("EXT", "packed_float")} and ${registryLinkTo("EXT", "texture_shared_exponent")}
+			""",
+			registryLinkTo("EXT", "framebuffer_object"),
+			"${registryLinkTo("NV", "half_float")} and ${registryLinkTo("ARB", "half_float_pixel")}",
+			"${registryLinkTo("EXT", "framebuffer_multisample")} and ${registryLinkTo("EXT", "framebuffer_blit")}",
+			registryLinkTo("EXT", "texture_integer"),
+			registryLinkTo("EXT", "texture_array"),
+			registryLinkTo("EXT", "packed_depth_stencil"),
+			registryLinkTo("EXT", "draw_buffers2"),
+			registryLinkTo("EXT", "texture_compression_rgtc"),
+			registryLinkTo("EXT", "transform_feedback"),
+			registryLinkTo("APPLE", "vertex_array_object"),
+			registryLinkTo("EXT", "framebuffer_sRGB")
+		)}
+		"""
 
 	IntConstant.block(
 		"GetTarget",

@@ -13,7 +13,27 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.0 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.0 functionality. OpenGL 4.0 implementations support revision 4.00 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "texture_query_lod"),
+			registryLinkTo("ARB", "draw_buffers_blend"),
+			registryLinkTo("ARB", "draw_indirect"),
+			registryLinkTo("ARB", "gpu_shader5"),
+			registryLinkTo("ARB", "gpu_shader_fp64"),
+			registryLinkTo("ARB", "sample_shading"),
+			registryLinkTo("ARB", "shader_subroutine"),
+			registryLinkTo("ARB", "tessellation_shader"),
+			registryLinkTo("ARB", "texture_buffer_object_rgb32"),
+			registryLinkTo("ARB", "texture_cube_map_array"),
+			registryLinkTo("ARB", "texture_gather"),
+			registryLinkTo("ARB", "transform_feedback2"),
+			registryLinkTo("ARB", "transform_feedback3")
+		)}
+		"""
 
 	// ARB_draw_buffers_blend
 

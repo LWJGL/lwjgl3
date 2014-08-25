@@ -14,7 +14,27 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 1.4 functionality."
+	documentation =
+		"""
+		The core OpenGL 1.4 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("SGIS", "generate_mipmap"),
+			registryLinkTo("NV", "blend_square"),
+		    "${registryLinkTo("ARB", "depth_texture")} and ${registryLinkTo("ARB", "shadow")}",
+			registryLinkTo("EXT", "fog_coord"),
+			registryLinkTo("EXT", "multi_draw_arrays"),
+			registryLinkTo("ARB", "point_parameters"),
+			registryLinkTo("EXT", "secondary_color"),
+			registryLinkTo("EXT", "blend_func_separate"),
+			registryLinkTo("EXT", "stencil_wrap"),
+			registryLinkTo("ARB", "texture_env_crossbar"),
+			registryLinkTo("EXT", "texture_lod_bias"),
+			registryLinkTo("ARB", "texture_mirrored_repeat"),
+			registryLinkTo("ARB", "window_pos")
+		)}
+		"""
 
 	// SGIS_generate_mipmap
 

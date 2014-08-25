@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_parameters") {
+val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_parameters", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -51,8 +51,8 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 	).javaDocLink
 
 	GLvoid.func(
-		"PointParameterfv",
-		"Pointer version of #PointParameterf().",
+		"PointParameterfvARB",
+		"Pointer version of #PointParameterfARB().",
 
 		GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION_ARB"),
 		mods(const, Check(3)) _ GLfloat_p.IN("params", "the parameter value")

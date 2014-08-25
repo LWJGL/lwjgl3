@@ -13,7 +13,26 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.5 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.5 functionality. OpenGL 4.5 implementations support revision 4.50 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+
+			registryLinkTo("ARB", "clip_control"),
+			registryLinkTo("ARB", "cull_distance"),
+			registryLinkTo("ARB", "ES3_1_compatibility"),
+			registryLinkTo("ARB", "conditional_render_inverted"),
+			registryLinkTo("KHR", "context_flush_control"),
+			registryLinkTo("ARB", "derivative_control"),
+			registryLinkTo("ARB", "direct_state_access"),
+			registryLinkTo("ARB", "get_texture_sub_image"),
+			registryLinkTo("KHR", "robustness"),
+			registryLinkTo("ARB", "shader_texture_image_samples"),
+			registryLinkTo("ARB", "texture_barrier")
+		)}
+		"""
 
 	// ARB_clip_control
 

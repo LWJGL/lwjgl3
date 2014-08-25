@@ -13,7 +13,23 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 1.3 functionality."
+	documentation =
+		"""
+		The core OpenGL 1.3 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "texture_compression"),
+			registryLinkTo("ARB", "texture_cube_map"),
+			registryLinkTo("ARB", "multisample"),
+			registryLinkTo("ARB", "multitexture"),
+			registryLinkTo("ARB", "texture_env_add"),
+			registryLinkTo("ARB", "texture_env_combine"),
+			registryLinkTo("ARB", "texture_env_dot3"),
+			registryLinkTo("ARB", "texture_border_clamp"),
+			registryLinkTo("ARB", "transpose_matrix")
+		)}
+		"""
 
 	// ARB_texture_compression
 

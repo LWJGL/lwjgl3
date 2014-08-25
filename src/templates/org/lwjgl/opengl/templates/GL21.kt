@@ -12,7 +12,16 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 2.1 functionality."
+	documentation =
+		"""
+		The core OpenGL 2.1 functionality. OpenGL 2.1 implementations must support at least revision 1.20 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "pixel_buffer_object"),
+			registryLinkTo("EXT", "texture_sRGB")
+		)}
+		"""
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",

@@ -14,7 +14,20 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 3.1 functionality."
+	documentation =
+		"""
+		The core OpenGL 3.1 functionality. OpenGL 3.1 implementations support revision 1.40 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "draw_instanced"),
+			registryLinkTo("ARB", "copy_buffer"),
+			registryLinkTo("NV", "primitive_restart"),
+			registryLinkTo("ARB", "texture_buffer_object"),
+			registryLinkTo("ARB", "texture_rectangle"),
+			registryLinkTo("ARB", "uniform_buffer_object")
+		)}
+		"""
 
 	IntConstant.block(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",

@@ -173,8 +173,9 @@ private val NativeClass.registryLink: String get() {
 	return url("http://www.opengl.org/registry/specs/${matcher.group(1)}/${matcher.group(2)}.txt", templateName)
 }
 
-private fun NativeClass.registryLink(prefix: String, name: String): String =
-	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", templateName)
+private fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
+private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_${name}"): String =
+	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", extensionName)
 
 private val NativeClass.capLink: String get() = "ContextCapabilities##${capName}"
 private val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"

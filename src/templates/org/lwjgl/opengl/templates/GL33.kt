@@ -13,7 +13,24 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 3.3 functionality."
+	documentation =
+		"""
+		The core OpenGL 3.3 functionality. OpenGL 3.3 implementations support revision 3.30 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "shader_bit_encoding"),
+			registryLinkTo("ARB", "blend_func_extended"),
+			registryLinkTo("ARB", "explicit_attrib_location"),
+			registryLinkTo("ARB", "occlusion_query2"),
+			registryLinkTo("ARB", "sampler_objects"),
+			registryLinkTo("ARB", "texture_rgb10_a2ui"),
+			registryLinkTo("ARB", "texture_swizzle"),
+			registryLinkTo("ARB", "timer_query"),
+			registryLinkTo("ARB", "instanced_arrays"),
+			registryLinkTo("ARB", "vertex_type_2_10_10_10_rev")
+		)}
+		"""
 
 	// ARB_blend_func_extended
 

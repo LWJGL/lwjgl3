@@ -14,7 +14,32 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 1.2 functionality."
+	documentation =
+		"""
+		The core OpenGL 1.2 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("EXT", "texture3D"),
+			registryLinkTo("EXT", "bgra"),
+			registryLinkTo("EXT", "packed_pixels"),
+			registryLinkTo("EXT", "rescale_normal"),
+			registryLinkTo("EXT", "separate_specular_color"),
+			registryLinkTo("SGIS", "texture_edge_clamp"),
+			registryLinkTo("SGIS", "texture_lod"),
+			registryLinkTo("EXT", "draw_range_elements")
+		)}
+
+		Extensions part of the <em>imaging subset</em>:
+		${ul(
+			"${registryLinkTo("EXT", "color_table")} and ${registryLinkTo("EXT", "color_subtable")}",
+			"${registryLinkTo("EXT", "convolution")} and ${registryLinkTo("HP", "convolution_border_modes")}",
+			registryLinkTo("SGI", "color_matrix"),
+			registryLinkTo("EXT", "histogram"),
+			registryLinkTo("EXT", "blend_color"),
+			"${registryLinkTo("EXT", "blend_minmax")} and ${registryLinkTo("EXT", "EXT_blend_subtract")}"
+		)}
+		"""
 
 	IntConstant.block(
 		"Aliases for smooth points and lines.",

@@ -9,7 +9,7 @@ import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 
-val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend") {
+val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

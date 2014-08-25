@@ -14,7 +14,21 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 4.1 functionality."
+	documentation =
+		"""
+		The core OpenGL 4.1 functionality. OpenGL 4.1 implementations support revision 4.10 of the OpenGL Shading Language.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "ES2_compatibility"),
+			registryLinkTo("ARB", "get_program_binary"),
+			registryLinkTo("ARB", "separate_shader_objects"),
+			registryLinkTo("ARB", "shader_precision"),
+			registryLinkTo("ARB", "vertex_attrib_64bit"),
+			registryLinkTo("ARB", "viewport_array")
+		)}
+		"""
+
 
 	// ARB_ES2_compatibility
 

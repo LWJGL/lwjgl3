@@ -9,7 +9,7 @@ import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.AutoType
 import org.lwjgl.generator.opengl.BufferType.*
 
-val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette") {
+val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

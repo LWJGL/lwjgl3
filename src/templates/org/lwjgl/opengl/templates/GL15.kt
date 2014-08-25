@@ -32,7 +32,17 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"OpenGL.h"
 	)
 
-	documentation = "The core OpenGL 1.5 functionality."
+	documentation =
+		"""
+		The core OpenGL 1.5 functionality.
+
+		Extensions promoted to core in this release:
+		${ul(
+			registryLinkTo("ARB", "vertex_buffer_object"),
+			registryLinkTo("ARB", "occlusion_query"),
+			registryLinkTo("EXT", "shadow_funcs")
+		)}
+		"""
 
 	IntConstant.block(
 		"New token names.",
@@ -268,7 +278,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		GLenum.IN("pname", "the pointer to be returned", "GL15#BUFFER_MAP_POINTER"),
+		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
 		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 
