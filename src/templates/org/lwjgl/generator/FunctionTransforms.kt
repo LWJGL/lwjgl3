@@ -201,22 +201,32 @@ private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: 
 private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter) =
-		writer.println("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${qtype[Return].maxLengthParam});")
+	override fun setupAPIBuffer(qtype: Parameter, writer: PrintWriter)  {
+		val mapping = qtype.nativeType.mapping as PointerMapping
+
+		writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${qtype[Return].maxLengthParam}")
+		if ( mapping.isMultiByte )
+			writer.print(" << ${mapping.byteShift}")
+		writer.println(");")
+	}
 }
 
 private class BufferReturnTransform(
-	val paramName: String,
+	val outParam: Parameter,
 	val lengthParam: String,
 	val encoding: String? = null
 ): FunctionTransform<ReturnValue> {
-	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) "ByteBuffer" else "String" // Replace void with String
+
+	private val bufferType: String
+		get() = (outParam.nativeType.mapping as PointerMapping).javaMethodType.getSimpleName()
+
+	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) bufferType else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val builder = StringBuilder(64)
 
 		builder append "\t\treturn "
 		if ( encoding != null ) builder append "memDecode$encoding("
-		builder append "memByteBuffer($API_BUFFER.address() + $paramName, $API_BUFFER.intValue($lengthParam))"
+		builder append "mem${bufferType}($API_BUFFER.address() + ${outParam.name}, $API_BUFFER.intValue($lengthParam))"
 		if ( encoding != null ) builder append ")"
 		builder append ";"
 

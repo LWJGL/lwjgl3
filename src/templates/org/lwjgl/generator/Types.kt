@@ -195,7 +195,7 @@ open class PointerMapping(
 		val OPAQUE_POINTER = PointerMapping(javaClass<Long>())
 
 		/** Useful for void * params that will be AutoTyped. */
-		val DATA = PointerMapping(javaClass<Buffer>())
+		val DATA = PointerMapping(javaClass<ByteBuffer>())
 
 		val DATA_POINTER = PointerMapping(javaClass<PointerBuffer>(), "POINTER_SHIFT")
 

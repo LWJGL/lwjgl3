@@ -840,10 +840,10 @@ class NativeClassFunction(
 					// Transform void to the buffer type
 					val returnType: String
 					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = BufferReturnTransform(it.name, returnMod.lengthParam, it.nativeType.charMapping.charset)
+						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam, it.nativeType.charMapping.charset)
 						returnType = "String"
 					} else {
-						transforms[returns] = BufferReturnTransform(it.name, returnMod.lengthParam)
+						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam)
 						returnType = "Buffer"
 					}
 
