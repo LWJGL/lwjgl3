@@ -446,13 +446,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"RGBA_FLOAT_MODE" _ 0x8820
 	)
 
-	IntConstant.block(
+	val ClampTargets = IntConstant.block(
 		"Accepted by the {@code target} parameter of ClampColor and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"CLAMP_VERTEX_COLOR" _ 0x891A,
 		"CLAMP_FRAGMENT_COLOR" _ 0x891B,
 		"CLAMP_READ_COLOR" _ 0x891C
-	)
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code clamp} parameter of ClampColor.",
@@ -462,10 +462,10 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"ClampColor",
-		"Specifies whether data read via GL11#ReadPixels() should be clamped.",
+		"Controls color clamping.",
 
-		GLenum.IN("target", "target for color clamping", "#CLAMP_READ_COLOR"),
-		GLenum.IN("clamp", "whether to apply color clamping", "GL11#TRUE GL11#FALSE")
+		GLenum.IN("target", "target for color clamping", ClampTargets),
+		GLenum.IN("clamp", "whether to apply color clamping", "GL11#TRUE GL11#FALSE #FIXED_ONLY")
 	)
 
 	// ARB_depth_buffer_float

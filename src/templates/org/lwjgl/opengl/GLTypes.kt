@@ -69,9 +69,14 @@ val GLcharUTF8_pp = PointerType(GLcharUTF8_p)
 
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
-// misc
-
+// ARB_sync
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
-
+// KHR_debug
 val GLDEBUGPROC = PointerType(name = "GLDEBUGPROC", includesPointer = true)
+// AMD_debug_output
 val GLDEBUGPROCAMD = PointerType(name = "GLDEBUGPROCAMD", includesPointer = true)
+// ARB_shader_objects
+val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
+val GLcharARB_pp = PointerType(GLcharARB_p)
+val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = true)
+val GLhandleARB_p = PointerType(GLhandleARB)
