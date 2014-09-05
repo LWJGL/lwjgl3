@@ -4,6 +4,8 @@
  */
 package org.lwjgl.demo.opencl;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.Sys;
 import org.lwjgl.opencl.CL;
 import org.lwjgl.opencl.CLCapabilities;
@@ -95,8 +97,11 @@ public final class CLGLInteropDemo {
 		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
-		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+			glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+		} else
+			glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 		final boolean debugGL = params.contains("debugGL");
 		if ( debugGL )
