@@ -37,7 +37,7 @@ val ALCdouble_p = PointerType(ALCdouble)
 // custom numeric
 
 val ALCsizei = IntegerType("ALCsizei", PrimitiveMapping.INT)
-val ALCenum = IntegerType("ALCenum", PrimitiveMapping.INT, unsigned = true)
+val ALCenum = IntegerType("ALCenum", PrimitiveMapping.INT)
 
 val ALCsizei_p = PointerType(ALCsizei)
 val ALCenum_p = PointerType(ALCenum)

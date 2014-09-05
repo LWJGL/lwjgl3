@@ -207,10 +207,10 @@ val cl_svmfree_callback = PointerType(name = "cl_svmfree_callback", includesPoin
 
 // OpenGL interop
 
-val cl_gl_context_info = PrimitiveType("cl_gl_context_info", PrimitiveMapping.INT)
-val cl_gl_platform_info = PrimitiveType("cl_gl_platform_info", PrimitiveMapping.INT)
+val cl_gl_context_info = IntegerType("cl_gl_context_info", PrimitiveMapping.INT)
+val cl_gl_platform_info = IntegerType("cl_gl_platform_info", PrimitiveMapping.INT)
 
-val cl_gl_object_type = PrimitiveType("cl_gl_object_type", PrimitiveMapping.INT)
+val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)
 val cl_gl_object_type_p = PointerType(cl_gl_object_type)
 
-val cl_gl_texture_info = PrimitiveType("cl_gl_texture_info", PrimitiveMapping.INT)
+val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)

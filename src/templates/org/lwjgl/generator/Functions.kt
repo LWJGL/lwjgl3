@@ -309,7 +309,7 @@ class NativeClassFunction(
 				} else
 					paramMap[param]!!.nativeType.mapping as PointerMapping
 
-			if ( mapping.byteShift == null || mapping.byteShift == "0" )
+			if ( !mapping.isMultiByte )
 				return expression
 
 			val builder = StringBuilder(expression.size + 8)

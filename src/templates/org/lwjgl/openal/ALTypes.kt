@@ -17,12 +17,12 @@ val ALvoid_pp = PointerType(ALvoid_p)
 // numeric
 
 val ALboolean = NativeType("ALboolean", TypeMapping.BOOLEAN)
-val ALbyte = PrimitiveType("ALbyte", PrimitiveMapping.BYTE)
-val ALubyte = PrimitiveType("ALubyte", PrimitiveMapping.BYTE)
-val ALshort = PrimitiveType("ALshort", PrimitiveMapping.SHORT)
-val ALushort = PrimitiveType("ALushort", PrimitiveMapping.SHORT)
-val ALint = PrimitiveType("ALint", PrimitiveMapping.INT)
-val ALuint = PrimitiveType("ALuint", PrimitiveMapping.INT)
+val ALbyte = IntegerType("ALbyte", PrimitiveMapping.BYTE)
+val ALubyte = IntegerType("ALubyte", PrimitiveMapping.BYTE, unsigned = true)
+val ALshort = IntegerType("ALshort", PrimitiveMapping.SHORT)
+val ALushort = IntegerType("ALushort", PrimitiveMapping.SHORT, unsigned = true)
+val ALint = IntegerType("ALint", PrimitiveMapping.INT)
+val ALuint = IntegerType("ALuint", PrimitiveMapping.INT, unsigned = true)
 val ALfloat = PrimitiveType("ALfloat", PrimitiveMapping.FLOAT)
 val ALdouble = PrimitiveType("ALdouble", PrimitiveMapping.DOUBLE)
 
@@ -36,13 +36,13 @@ val ALuint_p = PointerType(ALuint)
 val ALfloat_p = PointerType(ALfloat)
 val ALdouble_p = PointerType(ALdouble)
 
-val ALint64SOFT = PrimitiveType("ALint64SOFT", PrimitiveMapping.LONG)
+val ALint64SOFT = IntegerType("ALint64SOFT", PrimitiveMapping.LONG)
 val ALint64SOFT_p = PointerType(ALint64SOFT)
 
 // custom numeric
 
-val ALsizei = PrimitiveType("ALsizei", PrimitiveMapping.INT)
-val ALenum = PrimitiveType("ALenum", PrimitiveMapping.INT)
+val ALsizei = IntegerType("ALsizei", PrimitiveMapping.INT)
+val ALenum = IntegerType("ALenum", PrimitiveMapping.INT)
 
 val ALsizei_p = PointerType(ALsizei)
 val ALenum_p = PointerType(ALenum)
