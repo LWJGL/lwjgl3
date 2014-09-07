@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_EXT_DEDICATED = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix = AL) {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to ALC_EXT_DEDICATED extension."
 
 	IntConstant.block(

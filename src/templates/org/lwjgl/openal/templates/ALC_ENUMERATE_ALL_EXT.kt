@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_ENUMERATE_ALL_EXT = "EnumerateAllExt".nativeClassALC("ENUMERATE_ALL_EXT") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to ALC_ENUMERATE_ALL_EXT extension."
 
 	IntConstant.block(

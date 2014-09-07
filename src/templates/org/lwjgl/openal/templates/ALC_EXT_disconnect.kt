@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to ALC_EXT_disconnect extension."
 
 	IntConstant.block(

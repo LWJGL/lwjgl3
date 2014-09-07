@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_EXT_source_distance_model = "EXTSourceDistanceModel".nativeClassAL("EXT_source_distance_model") {
-
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_EXT_source_distance_model extension."
 
 	IntConstant.block(

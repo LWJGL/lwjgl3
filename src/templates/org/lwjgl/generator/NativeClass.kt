@@ -236,6 +236,11 @@ class NativeClass(
 		println("\nEXTERN_C_EXIT")
 	}
 
+	fun nativeImportsWarning() {
+		if ( preamble.hasNativeImports )
+			println("\tUnnecessary native imports in: $packageName.$templateName")
+	}
+
 	fun printPointers(
 		out: PrintWriter,
 		printPointer: (func: NativeClassFunction) -> String = { "funcs.${it.simpleName}" },

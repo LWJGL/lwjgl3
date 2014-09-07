@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_LOKI_quadriphonic = "LOKIQuadriphonic".nativeClassAL("LOKI_quadriphonic") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_LOKI_quadriphonic extension."
 
 	IntConstant.block(

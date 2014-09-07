@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_texture_mirror_clamp_to_edge = "ARBTextureMirrorClampToEdge".nativeClassGL("ARB_texture_mirror_clamp_to_edge") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

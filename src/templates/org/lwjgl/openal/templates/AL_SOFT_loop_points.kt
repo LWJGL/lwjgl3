@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_loop_points = "SOFTLoopPoints".nativeClassAL("SOFT_loop_points") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_SOFT_loop_points extension."
 
 	IntConstant.block(

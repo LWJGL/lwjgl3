@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_EXT_FLOAT32 = "EXTFloat32".nativeClassAL("EXT_FLOAT32") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_EXT_FLOAT32 extension."
 
 	IntConstant.block(

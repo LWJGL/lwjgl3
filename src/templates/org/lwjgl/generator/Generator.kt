@@ -193,7 +193,8 @@ class Generator(
 					it.generateNative()
 				}
 			}
-		}
+		} else
+			nativeClass.nativeImportsWarning()
 	}
 
 	fun <T: GeneratorTarget> generate(typeName: String, targets: List<T>) {

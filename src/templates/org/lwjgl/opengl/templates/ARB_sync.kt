@@ -9,10 +9,6 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
 val ARB_sync = "ARBSync".nativeClassGL("ARB_sync") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

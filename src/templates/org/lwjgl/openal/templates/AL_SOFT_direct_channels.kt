@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_direct_channels = "SOFTDirectChannels".nativeClassAL("SOFT_direct_channels") {
-
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_SOFT_direct_channels extension."
 
 	IntConstant.block(

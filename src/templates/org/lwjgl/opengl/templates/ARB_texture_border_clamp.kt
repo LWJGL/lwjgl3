@@ -10,10 +10,6 @@ import org.lwjgl.generator.opengl.PIXEL_UNPACK_BUFFER
 import org.lwjgl.generator.opengl.PIXEL_PACK_BUFFER
 
 val ARB_texture_border_clamp = "ARBTextureBorderClamp".nativeClassGL("ARB_texture_border_clamp", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.PIXEL_PACK_BUFFER
 
 val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

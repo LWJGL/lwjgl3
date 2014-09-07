@@ -33,6 +33,8 @@ class Preamble {
 	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
 	private var nativeDefines: MutableList<NativeDefine> = EMPTY_DEFINES
 
+	val hasNativeImports: Boolean get() = nativeImports.isNotEmpty()
+
 	fun javaImport(vararg classes: String) {
 		if ( javaImports identityEquals EMPTY_IMPORTS )
 			javaImports = ArrayList(classes.size)

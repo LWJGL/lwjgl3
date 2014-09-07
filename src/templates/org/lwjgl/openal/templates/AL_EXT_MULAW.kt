@@ -8,11 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_EXT_MULAW = "EXTMulaw".nativeClassAL("EXT_MULAW") {
-
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_EXT_MULAW extension."
 
 	IntConstant.block(
