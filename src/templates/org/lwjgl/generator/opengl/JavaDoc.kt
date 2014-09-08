@@ -28,17 +28,11 @@ fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, depr
 		else
 			link
 
+	print("\t/**\n\t * <p>$injectedJavaDoc</p>\n\t * \n")
 	if ( documentation.indexOf('\n') == -1 ) {
-		println("\t/**")
-		println("\t * $injectedJavaDoc")
-		println("\t * <p/>")
-		print("\t * ")
 		println(documentation.substring("\t/** ".size, documentation.size - 3))
 		println("\t */")
 	} else {
-		println("\t/**")
-		println("\t * $injectedJavaDoc")
-		println("\t * <p/>")
 		println(documentation.substring("\t/**\n".size))
 	}
 }

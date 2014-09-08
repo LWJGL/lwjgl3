@@ -10,16 +10,47 @@ import java.util.regex.Pattern
 /** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
 val tab = "_TAB_"
 
-private val PARAGRAPH_PATTERN = Pattern.compile("^\\s*$", Pattern.MULTILINE)
-private val CLEANUP_PATTERN = Pattern.compile("^\\s+", Pattern.MULTILINE)
+private val PARAGRAPH_PATTERN = Pattern.compile("\\s*^\\s*$\\s*", Pattern.MULTILINE)
+private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
 private val TAB_PATTERN = Pattern.compile(tab)
 
 fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
-private fun String.cleanup(linePrefix: String = "\t * ") = trim()
-	.replaceAll(PARAGRAPH_PATTERN, " <p/>\n")
-	.replaceAll(CLEANUP_PATTERN, linePrefix)
-	.replaceAll(TAB_PATTERN, "\t")
+private fun String.cleanup(linePrefix: String = "\t * "): String {
+	val trimmed = trim()
+	val matcher = PARAGRAPH_PATTERN.matcher(trimmed)
+
+	val result: String
+	if ( matcher.find() ) {
+		val builder = StringBuilder(trimmed.size)
+
+		fun StringBuilder.appendParagraph(linePrefix: String, text: String, start: Int, end: Int) {
+			this append '\n'
+			this append linePrefix
+			this append '\n'
+			this append linePrefix
+			this append "<p>"
+			this.append(text, start, end)
+			this append "</p>"
+		}
+
+		builder.append(trimmed, 0, matcher.start())
+
+		var lastMatch = matcher.end()
+		while ( matcher.find() ) {
+			builder.appendParagraph(linePrefix, trimmed, lastMatch, matcher.start())
+			lastMatch = matcher.end()
+		}
+		builder.appendParagraph(linePrefix, trimmed, lastMatch, trimmed.size)
+
+		result = builder.toString()
+	} else
+		result = trimmed
+
+	return result
+		.replaceAll(CLEANUP_PATTERN, linePrefix)
+		.replaceAll(TAB_PATTERN, "\t")
+}
 
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
 	val clean = cleanup("$indentation * ")
@@ -136,9 +167,12 @@ fun td(content: String = "", colspan: Int = 1, rowspan: Int = 1, tag: String = "
 	return builder.toString()
 }
 
-private fun htmlList(tag: String, vararg items: String): String {
+private fun htmlList(tag: String, attributes: String, vararg items: String): String {
 	val builder = StringBuilder(512)
-	builder append "<$tag>\n"
+	builder append "<$tag"
+	if ( attributes.isNotEmpty() )
+		builder append " $attributes"
+	builder append ">\n"
 	for ( li in items ) {
 		builder append "\t<li>"
 		builder append li.trim()
@@ -149,5 +183,5 @@ private fun htmlList(tag: String, vararg items: String): String {
 	return builder.toString()
 }
 
-fun ul(vararg items: String) = htmlList("ul", *items)
-fun ol(vararg items: String) = htmlList("ol", *items)
+fun ul(vararg items: String) = htmlList("ul", "", *items)
+fun ol(vararg items: String, marker: Char = '1') = htmlList("ol", if ( marker == '1' ) "" else " type=$marker", *items)

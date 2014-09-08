@@ -131,7 +131,7 @@ class Parameter(
 		}
 
 		builder append effectiveLinkMode.print(links.any { Character.isWhitespace(it) })
-		builder append "<p/>"
+		builder append "<br>"
 		builder append LINK_SPLIT.matcher(links.trim()).replaceAll(", ")
 
 		return builder.toString()
