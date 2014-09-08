@@ -119,14 +119,15 @@ private val ESCAPE_TAB_PATTERN = Pattern.compile("\t|(?:^\\s*$)", Pattern.MULTIL
 private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE)
 
 /** Useful for simple expression with embedded markup. */
-fun code(code: String) = "<code>$code</code>"
+fun code(code: String) = """<code style="font-family: monospace">$code</code>"""
 
 /** Useful for raw code blocks without markup. */
-fun codeBlock(code: String) = "<pre><code>\n${code
+fun codeBlock(code: String) = """<pre><code style="font-family: monospace">
+${code
 	.trim()
 	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
 	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
-}</code></pre>"
+}</code></pre>"""
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""
 
