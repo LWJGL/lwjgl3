@@ -330,7 +330,7 @@ f' = f * (SS - DF * vls) / (SS - DF * vss)
 vss = min(vss, (SS * DV)/DF)
 vls = min(vls, (SS * DV)/DF)
 
-f' = f * (SS * DV - DF*vls) / (SS * DV - DF*vss)
+f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""")}
 		OpenAL 1.1 programmers would never use AL_DOPPLER_VELOCITY (which defaults to 1.0).
 		""",

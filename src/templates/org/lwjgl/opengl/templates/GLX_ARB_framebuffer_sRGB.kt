@@ -22,7 +22,7 @@ val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_f
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 
-		Requires {@link ARBFramebufferObject ARB_framebuffer_object}.
+		Requires ${ARB_framebuffer_object.link}.
 		"""
 
 	IntConstant.block(

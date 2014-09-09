@@ -14,7 +14,7 @@ val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_f
 
 		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 
-		Requires ${WGL_EXT_extensions_string.link}, ${WGL_ARB_pixel_format.link} and {@link ARBFramebufferObject ARB_framebuffer_object}.
+		Requires ${WGL_EXT_extensions_string.link}, ${WGL_ARB_pixel_format.link} and ${ARB_framebuffer_object.link}.
 		"""
 
 	IntConstant.block(

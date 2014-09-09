@@ -20,7 +20,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		to create partially populated textures that would over-subscribe available graphics memory if made fully resident. This extension provides like
 		functionality for buffer objects, allowing applications to manage buffer object storage in a similar manner.
 
-		Requires ${GL15.core} or {@link ARBVertexBufferObject ARB_vertex_buffer_object}.
+		Requires ${GL15.core} or ${ARB_vertex_buffer_object.link}.
 		"""
 
 	IntConstant.block(

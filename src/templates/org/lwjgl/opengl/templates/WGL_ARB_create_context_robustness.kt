@@ -14,7 +14,7 @@ val WGL_ARB_create_context_robustness = "WGLARBCreateContextRobustness".nativeCl
 
 		This extension allows creating an OpenGL context supporting robust buffer access behavior and a specified graphics reset notification behavior.
 
-		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_create_context.link} and {@link ARBRobustness ARB_robustness}.
+		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_create_context.link} and ${ARB_robustness.link}.
 		"""
 
 	val wglCreateContextAttribsARB = "WGLARBCreateContext#CreateContextAttribsARB()"

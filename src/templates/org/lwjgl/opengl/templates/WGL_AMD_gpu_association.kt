@@ -27,7 +27,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
 		functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
 
-		Requires ${WGL_ARB_extensions_string.link} and {@link EXTFramebufferObject EXT_framebuffer_object}.
+		Requires ${WGL_ARB_extensions_string.link} and ${registryLinkTo("EXT", "framebuffer_object")}.
 		"""
 
 	val properties = IntConstant.block(

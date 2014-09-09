@@ -15,7 +15,7 @@ val GLX_ARB_create_context_robustness = "GLXARBCreateContextRobustness".nativeCl
 
 		This extension allows creating an OpenGL context supporting robust buffer access behavior and a specified graphics reset notification behavior.
 
-		Requires ${GLX14.glx}, ${GLX_ARB_create_context.link} and {@link ARBRobustness ARB_robustness}.
+		Requires ${GLX14.glx}, ${GLX_ARB_create_context.link} and ${ARB_robustness.link}.
 		"""
 
 	IntConstant.block(

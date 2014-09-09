@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buffer_float") {
+val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buffer_float", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)

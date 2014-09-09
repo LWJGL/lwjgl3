@@ -14,15 +14,15 @@ val ARB_depth_buffer_float = "ARBDepthBufferFloat".nativeClassGL("ARB_depth_buff
 
 		This extension provides new texture internal formats whose depth components are stored as 32-bit floating-point values, rather than the normalized
 		unsigned integers used in existing depth formats. Floating-point depth textures support all the functionality supported for fixed-point depth textures,
-		including shadow mapping and rendering support via {@link EXTFramebufferObject EXT_framebuffer_object}. Floating-point depth textures can store values
+		including shadow mapping and rendering support via ${registryLinkTo("EXT", "framebuffer_object")}. Floating-point depth textures can store values
 		outside the range [0,1].
 
-		Additionally, this extension provides new packed depth/stencil pixel formats (see {@link EXTPackedDepthStencil EXT_packed_depth_stencil}) that have
-		64-bit pixels consisting of a 32-bit floating-point depth value, 8 bits of stencil, and 24 unused bites. A packed depth/stencil texture internal format
-		is also provided.
+		Additionally, this extension provides new packed depth/stencil pixel formats (see ${registryLinkTo("EXT", "packed_depth_stencil")}) that have 64-bit
+		pixels consisting of a 32-bit floating-point depth value, 8 bits of stencil, and 24 unused bites. A packed depth/stencil texture internal format is also
+		provided.
 
-        Requires ${GL20.core}, ${ARB_color_buffer_float.link}, {@link EXTPackedDepthStencil EXT_packed_depth_stencil} and
-        {@link ARBFramebufferObject ARB_framebuffer_object}. ${GL30.promoted}
+        Requires ${GL20.core}, ${ARB_color_buffer_float.link}, ${registryLinkTo("EXT", "packed_depth_stencil")} and ${ARB_framebuffer_object.link}.
+        ${GL30.promoted}
 		"""
 
 	IntConstant.block(

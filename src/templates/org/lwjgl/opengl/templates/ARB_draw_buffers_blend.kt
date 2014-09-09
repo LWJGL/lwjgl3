@@ -16,9 +16,9 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 		"""
 		Native bindings to the $registryLink extension.
 
-		This extension builds upon the {@link ARBDrawBuffers ARB_draw_buffers} and ${registryLinkTo("EXT", "draw_buffers2")} extensions. In ARB_draw_buffers
-		(part of OpenGL 2.0), separate values could be written to each color buffer. This was further enhanced by EXT_draw_buffers2 by adding in the ability to
-		enable blending and to set color write masks independently per color output.
+		This extension builds upon the ${ARB_draw_buffers.link} and ${registryLinkTo("EXT", "draw_buffers2")} extensions. In ARB_draw_buffers (part of OpenGL
+		2.0), separate values could be written to each color buffer. This was further enhanced by EXT_draw_buffers2 by adding in the ability to enable blending
+		and to set color write masks independently per color output.
 
 		This extension provides the ability to set individual blend equations and blend functions for each color output.
 

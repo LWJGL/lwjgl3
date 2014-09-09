@@ -9,7 +9,7 @@ import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
 
-val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced") {
+val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", postfix = ARB) {
 	nativeImport (
 		"OpenGL.h"
 	)
@@ -31,7 +31,7 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced") 
 		By using the instance ID or multiples thereof as an index into a uniform array containing transform data, vertex shaders can draw multiple instances of
 		an object with a single draw call.
     
-        Requires ${GL30.core} or {@link EXTGPUShader4 EXT_gpu_shader4} or {@link NVVertexProgram4 NV_vertex_program4}. ${GL31.promoted}
+        Requires ${GL30.core} or ${registryLinkTo("EXT", "gpu_shader4")} or ${registryLinkTo("NV", "vertex_program4")}. ${GL31.promoted}
 		"""
 
 	GLvoid.func(

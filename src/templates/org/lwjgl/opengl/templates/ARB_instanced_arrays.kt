@@ -54,7 +54,7 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
 
 	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
 		"VertexArrayVertexAttribDivisorEXT",
-		"{@link EXTDirectStateAccess EXT_direct_state_access} version of #VertexAttribDivisorARB().",
+		"${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().",
 
 		GLuint.IN("vaobj", "the vertex array object"),
 		GLuint.IN("index", "the attribute index"),

@@ -29,7 +29,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		This extension provides a mechanism for applications to explicitly use the GPU resources on a given system individually. By providing this
 		functionality, a driver allows applications to make appropriate decisions regarding where and when to distribute rendering tasks.
 
-		Requires ${GL15.core}, ${GLX13.glx}, {@link EXTFramebufferObject EXT_framebuffer_object} and ${GLX_ARB_get_proc_address.link}.
+		Requires ${GL15.core}, ${GLX13.glx}, ${registryLinkTo("EXT", "framebuffer_object")} and ${GLX_ARB_get_proc_address.link}.
 		"""
 
 	val properties = IntConstant.block(

@@ -93,13 +93,32 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	GLvoid.func(
 		"CopyBufferSubData",
-		"Copies part of the data store of a buffer object to the data store of another buffer object.",
+		"""
+		Copies all or part of one buffer object's data store to the data store of another buffer object.
 
-		GLenum.IN("readtarget", "the target from whose data store data should be read"),
-		GLenum.IN("writetarget", "the target to whose data store data should be written"),
-		GLintptr.IN("readOffset", "the offset, in basic machine units, within the data store of {@code readtarget} from which data should be read"),
-		GLintptr.IN("writeOffset", "the offset, in basic machine units, within the data store of {@code writetarget} to which data should be written"),
-		GLsizeiptr.IN("size", "the size, in basic machine units, of the data to be copied from {@code readtarget} to {@code writetarget}")
+		An GL11#INVALID_VALUE error is generated if any of readoffset, writeoffset, or size are negative, if readoffset+size exceeds the size of the buffer object
+		bound to readtarget, or if writeoffset+size exceeds the size of the buffer object bound to writetarget.
+
+		An GL11#INVALID_VALUE error is generated if the same buffer object is bound to both readtarget and writetarget, and the ranges [readoffset, readoffset+size)
+		and [writeoffset, writeoffset+size) overlap.
+
+		An GL11#INVALID_OPERATION error is generated if zero is bound to readtarget or writetarget.
+
+		An GL11#INVALID_OPERATION error is generated if the buffer objects bound to either readtarget or writetarget are mapped.
+		""",
+
+		GLenum.IN(
+			"readTarget",
+			"the source buffer object target.",
+			"""
+			GL15#ARRAY_BUFFER #COPY_READ_BUFFER #COPY_WRITE_BUFFER GL15#ELEMENT_ARRAY_BUFFER GL21#PIXEL_PACK_BUFFER GL21#PIXEL_UNPACK_BUFFER
+			GL30#TRANSFORM_FEEDBACK_BUFFER GL31#TEXTURE_BUFFER GL31#UNIFORM_BUFFER
+			"""
+		),
+		GLenum.IN("writeTarget", "the destination buffer object target"),
+		GLintptr.IN("readOffset", "the source buffer object offset, in bytes"),
+		GLintptr.IN("writeOffset", "the destination buffer object offset, in bytes"),
+		GLsizeiptr.IN("size", "the number of bytes to copy")
 	)
 
 	// NV_primitive_restart

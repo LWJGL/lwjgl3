@@ -18,7 +18,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 
 		OpenGL has long supported buffer objects as a means of storing data that may be used to source vertex attributes, pixel data for textures, uniforms and
 		other elements. In un-extended GL, buffer data stores are mutable - that is, they may be de-allocated or resized while they are in use. The
-		{@link ARBTextureStorage ARB_texture_storage} extension added immutable storage for texture object (and was subsequently incorporated into OpenGL 4.2).
+		${registryLinkTo("ARB", "texture_storage")} extension added immutable storage for texture object (and was subsequently incorporated into OpenGL 4.2).
 		This extension further applies the concept of immutable storage to buffer objects. If an implementation is aware of a buffer's immutability, it may be
 		able to make certain assumptions or apply particular optimizations in order to increase performance or reliability.
 
