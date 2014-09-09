@@ -341,7 +341,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetConvolutionFilter",
 		"Returns the contents of a convolution filter.",
 
-		GLenum.IN("target", "the convolution target", "#CONVOLUTION_1D #CONVOLUTION_2D"),
+		GLenum.IN("target", "the convolution target", "ARBImaging#CONVOLUTION_1D ARBImaging#CONVOLUTION_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("image", "the filter data")
@@ -371,7 +371,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetSeparableFilter",
 		"Returns the current contents of a separable convolution filter.",
 
-		GLenum.IN("target", "the filter target", "#SEPARABLE_2D"),
+		GLenum.IN("target", "the filter target", "ARBImaging#SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("row", "a buffer in which to return the filter row"),
@@ -548,7 +548,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetHistogram",
 		"Returns the current contents of the histogram table.",
 
-		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
+		GLenum.IN("target", "the histogram target", "ARBImaging#HISTOGRAM"),
 		GLboolean.IN(
 			"reset",
 			"if GL11#TRUE, then all counters of all elements of the histogram are reset to zero. Counters are reset whether returned or not."
@@ -599,7 +599,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"GetMinmax",
 		"Returns the current contents of the minmax table.",
 
-		GLenum.IN("target", "the minmax target", "#MINMAX"),
+		GLenum.IN("target", "the minmax target", "ARBImaging#MINMAX"),
 		GLboolean.IN(
 			"reset",
 			"""

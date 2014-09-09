@@ -86,6 +86,36 @@ val ARB_fragment_coord_conventions = EXT_FLAG.nativeClassGL("ARB_fragment_coord_
 		When true, the $registryLink extension is supported.
 
 		This extension provides alternative conventions for the fragment coordinate XY location available for programmable fragment processing.
+		
+		The scope of this extension deals *only* with how the fragment coordinate XY location appears during programming fragment processing. Beyond the scope
+		of this extension are coordinate conventions used for rasterization or transformation.
+
+		In the case of the coordinate conventions for rasterization and transformation, some combination of the viewport, depth range, culling state, and
+		projection matrix state can be reconfigured to adopt other arbitrary clip-space and window-space coordinate space conventions. Adopting other clip-space
+		and window-space conventions involves adjusting existing OpenGL state. However it is non-trivial to massage an arbitrary fragment shader or program to
+		adopt a different window-space coordinate system because such shaders are encoded in various textual representations.
+
+		The dominant 2D and 3D rendering APIs make two basic choices of convention when locating fragments in window space. The two choices are:
+		${ol(
+			"Is the origin nearest the lower-left- or upper-left-most pixel of the window?",
+		    "Is the (x,y) location of the pixel nearest the origin at (0,0) or (0.5,0.5)?"
+		)}
+		OpenGL assumes a lower-left origin for window coordinates and assumes pixel centers are located at half-pixel coordinates. This means the XY location
+		(0.5,0.5) corresponds to the lower-left-most pixel in a window.
+
+		Other window coordinate conventions exist for other rendering APIs. X11, GDI, and Direct3D version through DirectX 9 assume an upper-left window origin
+		and locate pixel centers at integer XY values. By this alternative convention, the XY location (0,0) corresponds to the upper-left-most pixel in a window.
+
+		Direct3D for DirectX 10 assumes an upper-left origin (as do prior DirectX versions) yet assumes half-pixel coordinates (unlike prior DirectX versions).
+		By the DirectX 10 convention, the XY location (0.5,0.5) corresponds to the upper-left-most pixel in a window.
+
+		Fragment shaders can directly access the location of a given processed fragment in window space. We call this location the "fragment coordinate".
+
+		This extension provides a means for fragment shaders written in GLSL or OpenGL assembly extensions to specify alternative conventions for determining
+		the fragment coordinate value accessed during programmable fragment processing.
+
+		The motivation for this extension is to provide an easy, efficient means for fragment shaders accessing a fragment's window-space location to adopt the
+		fragment coordinate convention for which the shader was originally written.
 
 		${GL32.promoted}
 		"""
@@ -213,6 +243,90 @@ val ARB_shader_texture_lod = EXT_FLAG.nativeClassGL("ARB_shader_texture_lod", po
 		When true, the $registryLink extension is supported.
 
 		This extension adds additional texture functions to the OpenGL Shading Language which provide the shader writer with explicit control of LOD.
+
+		Mipmap texture fetches and anisotropic texture fetches require an implicit derivatives to calculate rho, lambda and/or the line of anisotropy. These
+		implicit derivatives will be undefined for texture fetches occurring inside non-uniform control flow or for vertex shader texture fetches, resulting in
+		undefined texels.
+
+		The additional texture functions introduced with this extension provide explict control of LOD (isotropic texture functions) or provide explicit
+		derivatives (anisotropic texture functions).
+
+		Anisotropic texture functions return defined texels for mipmap texture fetches or anisotropic texture fetches, even inside non-uniform control flow.
+		Isotropic texture functions return defined texels for mipmap texture fetches, even inside non-uniform control flow. However, isotropic texture functions
+		return undefined texels for anisotropic texture fetches.
+
+		The existing isotropic vertex texture functions:
+		${codeBlock("""
+texture1DLod,   texture1DProjLod,
+texture2DLod,   texture2DProjLod,
+texture3DLod,   texture3DProjLod,
+textureCubeLod,
+shadow1DLod,    shadow1DProjLod,
+shadow2DLod,    shadow2DProjLod""")}
+
+		are added to the built-in functions for fragment shaders.
+
+		New anisotropic texture functions, providing explicit derivatives:
+		${codeBlock("""
+texture1DGradARB(
+	sampler1D sampler,
+	float P, float dPdx, float dPdy);
+texture1DProjGradARB(
+	sampler1D sampler,
+	vec2 P, float dPdx, float dPdy);
+texture1DProjGradARB(
+	sampler1D sampler,
+	vec4 P, float dPdx, float dPdy);
+texture2DGradARB(
+	sampler2D sampler,
+	vec2 P, vec2 dPdx, vec2 dPdy);
+texture2DProjGradARB(
+	sampler2D sampler,
+	vec3 P, vec2 dPdx, vec2 dPdy);
+texture2DProjGradARB(
+	sampler2D sampler,
+	vec4 P, vec2 dPdx, vec2 dPdy);
+texture3DGradARB(
+	sampler3D sampler,
+	vec3 P, vec3 dPdx, vec3 dPdy);
+texture3DProjGradARB(
+	sampler3D sampler,
+	vec4 P, vec3 dPdx, vec3 dPdy);
+textureCubeGradARB(
+	samplerCube sampler,
+	vec3 P, vec3 dPdx, vec3 dPdy);
+
+shadow1DGradARB(
+	sampler1DShadow sampler,
+	vec3 P, float dPdx, float dPdy);
+shadow1DProjGradARB(
+	sampler1DShadow sampler,
+	vec4 P, float dPdx, float dPdy);
+shadow2DGradARB(
+	sampler2DShadow sampler,
+	vec3 P, vec2 dPdx, vec2 dPdy);
+shadow2DProjGradARB(
+	sampler2DShadow sampler,
+	vec4 P, vec2 dPdx, vec2 dPdy);
+
+texture2DRectGradARB(
+	sampler2DRect sampler,
+	vec2 P, vec2 dPdx, vec2 dPdy);
+texture2DRectProjGradARB(
+	sampler2DRect sampler,
+	vec3 P, vec2 dPdx, vec2 dPdy);
+texture2DRectProjGradARB(
+	sampler2DRect sampler,
+	vec4 P, vec2 dPdx, vec2 dPdy);
+
+shadow2DRectGradARB(
+	sampler2DRectShadow sampler,
+	vec3 P, vec2 dPdx, vec2 dPdy);
+shadow2DRectProjGradARB(
+	sampler2DRectShadow sampler,
+	vec4 P, vec2 dPdx, vec2 dPdy);""")}
+
+        are added to the built-in functions for vertex shaders and fragment shaders.
 
 		Requires ${"ARB_shader_objects".cap}. ${GL30.promoted}
 		"""
@@ -531,7 +645,7 @@ val WGL_EXT_swap_control_tear = EXT_FLAG.nativeClassWGL("WGL_EXT_swap_control_te
 		"""
 		When true, the ${registryLink("EXT", "wgl_swap_control_tear")} extension is supported.
 
-		This extension extends the existing {@link #WGL_EXT_swap_control} extension by allowing a negative {@code interval} parameter to
+		This extension extends the existing ${WGL_EXT_swap_control.link} extension by allowing a negative {@code interval} parameter to
 		{@link WGLEXTSwapControl#wglSwapIntervalEXT}. The negative {@code interval} allows late swaps to occur without synchronization to the video frame. This
 		reduces the visual stutter on late frames and reduces the stall on subsequent frames.
 		"""
@@ -541,9 +655,9 @@ val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix =
 		"""
 		When true, the ${registryLink("NV", "DX_interop2")} extension is supported.
 
-		This extension expands on the specification of {@link #WGL_NV_DX_interop} to add support for DirectX version 10, 10.1 and 11 resources.
+		This extension expands on the specification of ${registryLinkTo("NV", "DX_interop")} to add support for DirectX version 10, 10.1 and 11 resources.
 
-		Requires ${GL20.core} and {@link #WGL_NV_DX_interop}
+		Requires ${GL20.core} and ${registryLinkTo("NV", "DX_interop")}.
 		"""
 }
 
