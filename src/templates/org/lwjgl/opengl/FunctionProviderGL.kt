@@ -64,7 +64,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		val printPointer = {(func: NativeClassFunction) ->
 			if ( func has DependsOn )
-				"ext.contains(\"${func[DependsOn].reference}\") ? funcs.${func.simpleName} : -1L"
+				"${func[DependsOn].reference let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
 			else
 				"funcs.${func.simpleName}"
 		}
