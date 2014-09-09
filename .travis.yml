@@ -1,0 +1,15 @@
+language: java 
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+before_install: 
+  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+  - sudo apt-get -qq update
+  - sudo apt-get -qq install g++-4.8
+  - sudo apt-get -qq install libxxf86vm-dev
+  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 90
+  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 90
+install:
+  - "export JAVA8_HOME=/usr/lib/jvm/java-8-oracle"
+  - "export JAVA7_HOME=/usr/lib/jvm/java-7-oracle"
+script: ant all
