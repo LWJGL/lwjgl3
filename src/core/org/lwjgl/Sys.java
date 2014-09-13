@@ -60,11 +60,12 @@ public final class Sys {
 		String osArch = System.getProperty("os.arch");
 		boolean try64First = LWJGLUtil.getPlatform() != LWJGLUtil.Platform.MACOSX && ("amd64".equals(osArch) || "x86_64".equals(osArch));
 
+		Error err = null;
 		if ( try64First ) {
 			try {
 				return doLoadLibrary(libraryName + POSTFIX64BIT);
 			} catch (UnsatisfiedLinkError e) {
-				LWJGLUtil.log("Failed to load 64 bit library: " + e.getMessage());
+				err = e;
 			}
 		}
 
@@ -72,6 +73,9 @@ public final class Sys {
 		try {
 			return doLoadLibrary(libraryName);
 		} catch (UnsatisfiedLinkError e) {
+			if ( try64First )
+				throw err;
+
 			if ( platform.has64Bit() ) {
 				try {
 					return doLoadLibrary(libraryName + POSTFIX64BIT);
@@ -79,6 +83,7 @@ public final class Sys {
 					LWJGLUtil.log("Failed to load 64 bit library: " + e2.getMessage());
 				}
 			}
+
 			// Throw original error
 			throw e;
 		}
