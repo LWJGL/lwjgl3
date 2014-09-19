@@ -63,6 +63,7 @@ val GLsizeiptr_p = PointerType(GLsizeiptr)
 
 val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
 val GLcharASCII_pp = PointerType(GLcharASCII_p)
+val GLcharASCII_p_const_p = PointerType(GLcharASCII_p, const = true)
 
 val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
 val GLcharUTF8_pp = PointerType(GLcharUTF8_p)

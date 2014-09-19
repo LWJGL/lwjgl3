@@ -508,7 +508,7 @@ val AMD_transform_feedback3_lines_triangles = "AMDTransformFeedback3LinesTriangl
 		must output {@link GL11#GL_POINT POINT} primitives when more than one output stream is active was also introduced. This extension simply removes that
 		restriction, allowing the same set of primitives to be used with multiple transform feedback streams as with a single stream.
 
-		Requires ${GL40.core} or ${"ARB_transform_feedback3".cap}.
+		Requires ${GL40.core} or ${ARB_transform_feedback3.link}.
 		"""
 }
 val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", postfix = AMD) {
