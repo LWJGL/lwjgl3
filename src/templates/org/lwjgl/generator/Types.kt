@@ -70,12 +70,9 @@ fun PointerType(primitiveType: PrimitiveType) = PointerType(
 	elementType = primitiveType
 )
 /** pointer to pointer. */
-fun PointerType(pointerType: PointerType) =
+fun PointerType(pointerType: PointerType, const: Boolean = false) =
 	PointerType(
-		if ( pointerType.includesPointer )
-			pointerType.name
-		else
-			"${pointerType.name} *",
+		"${pointerType.name}${if ( pointerType.includesPointer ) "" else " *"}${if ( const ) " const" else ""}",
 		PointerMapping.DATA_POINTER,
 		elementType = pointerType
 	)
