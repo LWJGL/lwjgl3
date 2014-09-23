@@ -221,14 +221,14 @@ class NativeClass(
 		if ( functionProvider != null ) {
 			// Generate typedefs for casting the function pointers
 			println()
-			functions.forEach {
+			functions.stream().filter { !it.has(Reuse) }.forEach {
 				it.generateFunctionDefinition(this)
 			}
 		}
 
 		println("\nEXTERN_C_ENTER")
 
-		functions.forEach {
+		functions.stream().filter { !it.has(Reuse) }.forEach {
 			println()
 			it.generateFunction(this)
 		}
