@@ -88,7 +88,9 @@ public abstract class GLContext implements Pointer {
 	/** Destroys this {@code GLContext} and releases any resources associated with it. */
 	public void destroy() {
 		// Clean-up callbacks
+		if ( capabilities.GL_ARB_debug_output && capabilities.__ARBDebugOutput.refDEBUGPROCARB != NULL ) ARBDebugOutput.glDebugMessageCallbackARB(null);
 		if ( capabilities.GL_AMD_debug_output && capabilities.__AMDDebugOutput.refDEBUGPROCAMD != NULL ) AMDDebugOutput.glDebugMessageCallbackAMD(null);
+		if ( capabilities.GL_KHR_debug && capabilities.__KHRDebug.refDEBUGPROC != NULL ) KHRDebug.glDebugMessageCallback(null);
 		if ( capabilities.OpenGL43 && capabilities.__GL43.refDEBUGPROC != NULL ) GL43.glDebugMessageCallback(null);
 
 		destroyImpl();

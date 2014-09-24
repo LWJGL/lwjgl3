@@ -63,7 +63,7 @@ public interface DEBUGPROCAMD {
 			@Override
 			public void invoke(int id, int category, int severity, String message) {
 				System.err.println("[LWJGL] AMD_debug_output message");
-				printDetail("ID", Integer.toString(id));
+				printDetail("ID", String.format("0x%X", id));
 
 				String description;
 				switch ( category ) {
