@@ -136,7 +136,7 @@ class NativeClass(
 					if ( it.hasParam { it.nativeType.mapping == PointerMapping.DATA_POINTER } )
 						needsPointer = true
 
-					if ( it.hasParam { it has returnValue || it has SingleValue || it.isAutoSizeResultOut || it has PointerArray } )
+					if ( it.hasParam { it has Return || it has SingleValue || it.isAutoSizeResultOut || it has PointerArray } )
 						needsAPIUtil = true
 				}
 
