@@ -5,6 +5,7 @@
 package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.DEBUGPROCAMD;
 import org.lwjgl.opengl.GL;
@@ -55,8 +56,7 @@ public final class WGLDemo {
 
 		ContextCapabilities caps = GL.getCapabilities();
 
-		if ( caps.GL_AMD_debug_output )
-			glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
+		GLUtil.debugSetupCallback(caps);
 
 		if ( caps.WGL_AMD_gpu_association ) {
 			int GPUs = wglGetGPUIDsAMD(null);

@@ -8,6 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.*;
@@ -30,14 +31,12 @@ import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
-import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
-import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.linux.GLFWLinux.*;
@@ -148,14 +147,8 @@ public class Mandelbrot {
 		if ( !glCaps.OpenGL30 )
 			throw new RuntimeException("OpenGL 3.0 is required to run this demo.");
 
-		if ( debugGL ) {
-			if ( glCaps.OpenGL43 )
-				glDebugMessageCallback(DEBUGPROC.Util.getDefault());
-			/*else if ( glCaps.GL_ARB_debug_output )
-				glDebugMessageCallbackARB(new ARBDebugOutputCallback());*/
-			else if ( glCaps.GL_AMD_debug_output )
-				glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
-		}
+		if ( debugGL )
+			GLUtil.debugSetupCallback(glCaps);
 
 		glfwSwapInterval(0);
 

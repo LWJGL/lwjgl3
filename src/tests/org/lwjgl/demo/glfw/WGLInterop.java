@@ -6,8 +6,8 @@ package org.lwjgl.demo.glfw;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.Sys;
+import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.DEBUGPROCAMD;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.ErrorCallback;
@@ -19,7 +19,6 @@ import java.nio.IntBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.lang.Math.*;
-import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
@@ -89,8 +88,7 @@ public final class WGLInterop {
 		// Now we can retrieve the GLFW context's capabilities
 		ContextCapabilities caps = GL.getCapabilities();
 
-		if ( caps.GL_AMD_debug_output )
-			glDebugMessageCallbackAMD(DEBUGPROCAMD.Util.getDefault());
+		GLUtil.debugSetupCallback(caps);
 
 		int success;
 
