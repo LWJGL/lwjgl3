@@ -511,7 +511,16 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"Returns the 64bit integer value or values of a selected parameter.",
 
 		GLenum.IN("pname", "the parameter value to be returned"),
-		returnValue _ GLint64_p.OUT("params", "the value or values of the specified parameter")
+		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the value or values of the specified parameter")
+	)
+
+	ReferenceGL("glGet") _ GLvoid.func(
+		"GetInteger64i_v",
+		"Queries the 64bit integer value of an indexed state variable.",
+
+		GLenum.IN("pname", "the indexed state to query"),
+		GLuint.IN("index", "the index of the element being queried"),
+		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
 	GLvoid.func(

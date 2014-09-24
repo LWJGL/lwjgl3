@@ -358,7 +358,38 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	GLvoid.func(
 		"DebugMessageControl",
-		"Controls the reporting of debug messages in a debug context.",
+		"""
+		Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
+		
+		If {@code enabled} is GL11#TRUE, the referenced subset of messages will be enabled. If GL11#FALSE, then those messages will be disabled.
+    
+		This command can reference different subsets of messages by first considering the set of all messages, and filtering out messages based on the following
+		ways:
+		${ul(
+			"""
+			If {@code source}, {@code type}, or {@code severity} is GL11#DONT_CARE, the messages from all sources, of all types, or of all severities are
+			referenced respectively.
+			""",
+		    """
+		    When values other than GL11#DONT_CARE are specified, all messages whose source, type, or severity match the specified {@code source}, {@code type},
+		    or {@code severity} respectively will be referenced.
+		    """,
+		    """
+		    If {@code count} is greater than zero, then {@code ids} is an array of {@code count} message IDs for the specified combination of {@code source} and
+		    {@code type}. In this case, if {@code source} or {@code type} is GL11#DONT_CARE, or {@code severity} is not GL11#DONT_CARE, the error
+		    GL11#INVALID_OPERATION is generated.
+		    """
+		)}
+
+
+		Unrecognized message IDs in {@code ids} are ignored. If {@code count} is zero, the value if {@code ids} is ignored.
+
+		Although messages are grouped into an implicit hierarchy by their sources and types, there is no explicit per-source, per-type or per-severity enabled
+		state. Instead, the enabled state is stored individually for each message. There is no difference between disabling all messages from one source in a
+		single call, and individually disabling all messages from that source using their types and IDs.
+
+		If the #DEBUG_OUTPUT state is disabled the GL operates the same as if messages of every {@code source}, {@code type} or {@code severity} are disabled.
+		""",
 
 		GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
@@ -370,7 +401,18 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	GLvoid.func(
 		"DebugMessageInsert",
-		"Injects an application-supplied message into the debug message queue.",
+		"""
+		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
+		signals about specific render system events.
+		
+		The value of {@code id} specifies the ID for the message and {@code severity} indicates its severity level as defined by the caller. The string
+		{@code buf} contains the string representation of the message. The parameter {@code length} contains the number of characters in {@code buf}. If
+		{@code length} is negative, it is implied that {@code buf} contains a null terminated string. The error GL11#INVALID_VALUE will be generated if the
+		number of characters in {@code buf}, excluding the null terminator when {@code length} is negative, is not less than the value of
+		#MAX_DEBUG_MESSAGE_LENGTH.
+
+		If the #DEBUG_OUTPUT state is disabled calls to DebugMessageInsert are discarded and do not generate an error.
+		""",
 
 		GLenum.IN("source", "the source of the debug message to insert", DebugSources),
 		GLenum.IN("type", "the type of the debug message insert", DebugTypes),
@@ -382,7 +424,34 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	GLvoid.func(
 		"DebugMessageCallback",
-		"Specifies a callback to receive debugging messages from the GL.",
+		"""
+		Specifies a callback to receive debugging messages from the GL.
+
+		The function's prototype must follow the type definition of DEBUGPROC including its platform-dependent calling convention. Anything else will result in
+		undefined behavior. Only one debug callback can be specified for the current context, and further calls overwrite the previous callback. Specifying
+		$NULL as the value of {@code callback} clears the current callback and disables message output through callbacks. Applications can provide
+		user-specified data through the pointer {@code userParam}. The context will store this pointer and will include it as one of the parameters in each call
+		to the callback function.
+
+		If the application has specified a callback function for receiving debug output, the implementation will call that function whenever any enabled message
+		is generated.  The source, type, ID, and severity of the message are specified by the DEBUGPROC parameters {@code source}, {@code type}, {@code id}, and
+		{@code severity}, respectively. The string representation of the message is stored in {@code message} and its length (excluding the null-terminator) is
+		stored in {@code length}. The parameter {@code userParam} is the user-specified parameter that was given when calling DebugMessageCallback.
+
+		Applications can query the current callback function and the current user-specified parameter by obtaining the values of #DEBUG_CALLBACK_FUNCTION and
+		#DEBUG_CALLBACK_USER_PARAM, respectively.
+
+		Applications that specify a callback function must be aware of certain special conditions when executing code inside a callback when it is called by the
+		GL, regardless of the debug source.
+
+		The memory for {@code message} is owned and managed by the GL, and should only be considered valid for the duration of the function call.
+
+		The behavior of calling any GL or window system function from within the callback function is undefined and may lead to program termination.
+
+		Care must also be taken in securing debug callbacks for use with asynchronous debug output by multi-threaded GL implementations.
+
+		If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
+		""",
 
 		mods(
 			Callback("DEBUGPROC", storeInFunctions = true),
@@ -396,7 +465,30 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	GLuint.func(
 		"GetDebugMessageLog",
-		"Retrieves messages from the debug message log.",
+		"""
+		Retrieves messages from the debug message log.
+		
+		This function fetches a maximum of <count> messages from the message log, and will return the number of messages successfully fetched.
+    
+		Messages will be fetched from the log in order of oldest to newest. Those messages that were fetched will be removed from the log.
+    
+		The sources, types, severities, IDs, and string lengths of fetched messages will be stored in the application-provided arrays {@code sources},
+		{@code types}, {@code severities}, {@code ids}, and {@code lengths}, respectively. The application is responsible for allocating enough space for each
+		array to hold up to {@code count} elements. The string representations of all fetched messages are stored in the {@code messageLog} array. If multiple
+		messages are fetched, their strings are concatenated into the same {@code messageLog} array and will be separated by single null terminators. The last
+		string in the array will also be null-terminated. The maximum size of {@code messageLog}, including the space used by all null terminators, is given by
+		{@code bufSize}. If {@code bufSize} is less than zero and {@code messageLog} is not $NULL, an GL11#INVALID_VALUE error will be generated. If a message's
+		string, including its null terminator, can not fully fit within the {@code messageLog} array's remaining space, then that message and any subsequent
+		messages will not be fetched and will remain in the log. The string lengths stored in the array {@code lengths} include the space for the null terminator of each string.
+  
+		Any or all of the arrays {@code sources}, {@code types}, {@code ids}, {@code severities}, {@code lengths} and {@code messageLog} can also be null
+		pointers, which causes the attributes for such arrays to be discarded when messages are fetched, however those messages will still be removed from the
+		log. Thus to simply delete up to {@code count} messages from the message log while ignoring their attributes, the application can call the function with
+		null pointers for all attribute arrays.
+
+		If the context was created without the #CONTEXT_FLAG_DEBUG_BIT in the GL30#CONTEXT_FLAGS state, then the GL can opt to never add messages to the message
+		log so GetDebugMessageLog will always return zero.
+		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
 		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
@@ -410,12 +502,36 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	GLvoid.func(
 		"PushDebugGroup",
-		"Pushes a named debug group into the command stream.",
+		"""
+		Pushes a debug group described by the string {@code message} into the command stream. The value of {@code id} specifies the ID of messages generated.
+		The parameter {@code length} contains the number of characters in {@code message}. If {@code length} is negative, it is implied that {@code message}
+		contains a null terminated string. The message has the specified {@code source} and {@code id}, {@code type} #DEBUG_TYPE_PUSH_GROUP, and
+		{@code severity} #DEBUG_SEVERITY_NOTIFICATION. The GL will put a new debug group on top of the debug group stack which inherits the control of the
+		volume of debug output of the debug group previously residing on the top of the debug group stack. Because debug groups are strictly hierarchical, any
+		additional control of the debug output volume will only apply within the active debug group and the debug groups pushed on top of the active debug group.
 
-		GLenum.IN("source", "the source of the debug message", DebugSources),
+		An GL11#INVALID_ENUM error is generated if the value of {@code source} is neither #DEBUG_SOURCE_APPLICATION nor #DEBUG_SOURCE_THIRD_PARTY. An
+		GL11#INVALID_VALUE error is generated if {@code length} is negative and the number of characters in {@code message}, excluding the null-terminator, is
+		not less than the value of #MAX_DEBUG_MESSAGE_LENGTH.
+		""",
+
+		GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
 		GLuint.IN("id", "the identifier of the message"),
 		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
 		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
+	)
+
+	GLvoid.func(
+		"PopDebugGroup",
+		"""
+		Pops the active debug group. When a debug group is popped, the GL will also generate a debug output message describing its cause based on the
+		{@code message} string, the source {@code source}, and an ID {@code id} submitted to the associated #PushDebugGroup() command. #DEBUG_TYPE_PUSH_GROUP
+		and #DEBUG_TYPE_POP_GROUP share a single namespace for message {@code id}. {@code severity} has the value #DEBUG_SEVERITY_NOTIFICATION. The {@code type}
+		has the value #DEBUG_TYPE_POP_GROUP. Popping a debug group restores the debug output volume control of the parent debug group.
+
+		Attempting to pop the default debug group off the stack generates a GL11#STACK_UNDERFLOW error; pushing a debug group onto a stack containing
+		#MAX_DEBUG_GROUP_STACK_DEPTH minus one elements will generate a GL11#STACK_OVERFLOW error.
+		"""
 	)
 
 	GLvoid.func(

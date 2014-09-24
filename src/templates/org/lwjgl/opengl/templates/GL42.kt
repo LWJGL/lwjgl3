@@ -96,7 +96,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"ATOMIC_COUNTER_BUFFER_SIZE" _ 0x92C3
 	)
 
-	IntConstant.block(
+	val AtomicCounterBufferParameters = IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
 		"ATOMIC_COUNTER_BUFFER_DATA_SIZE" _ 0x92C4,
@@ -107,7 +107,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_TESS_EVALUATION_SHADER" _ 0x92C9,
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_GEOMETRY_SHADER" _ 0x92CA,
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER" _ 0x92CB
-	)
+	).javaDocLinks
 
 	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
@@ -144,6 +144,16 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"Returned in {@code params} by GetActiveUniform and GetActiveUniformsiv.",
 
 		"UNSIGNED_INT_ATOMIC_COUNTER" _ 0x92DB
+	)
+
+	GLvoid.func(
+		"GetActiveAtomicCounterBufferiv",
+		"Obtains information about the set of active atomic counter buffers for a program.",
+
+		GLuint.IN("program", "the name of a program object for which the command GL20#LinkProgram() has been issued in the past"),
+		GLuint.IN("bufferIndex", "the index of an active atomic counter buffer"),
+		GLenum.IN("pname", "the parameter to query", AtomicCounterBufferParameters),
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// ARB_texture_storage

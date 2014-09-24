@@ -69,6 +69,11 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 	)
 
 	GLvoid.func(
+		"ReleaseShaderCompiler",
+	    "Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler."
+	)
+
+	GLvoid.func(
 		"ShaderBinary",
 		"Loads pre-compiled shader binaries.",
 
@@ -1031,4 +1036,21 @@ if (shader) {
 		GLdouble.IN("zFar", "the mapping of the far clipping plane to window coordinates. The initial value is 1.")
 	)
 
+	GLvoid.func(
+		"GetFloati_v",
+		"Queries the float value of an indexed state variable.",
+
+		GLenum.IN("target", "the indexed state to query"),
+		GLuint.IN("index", "the index of the element being queried"),
+		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+	)
+
+	GLvoid.func(
+		"GetDoublei_v",
+		"Queries the double value of an indexed state variable.",
+
+		GLenum.IN("target", "the indexed state to query"),
+		GLuint.IN("index", "the index of the element being queried"),
+		mods(Check(1), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+	)
 }

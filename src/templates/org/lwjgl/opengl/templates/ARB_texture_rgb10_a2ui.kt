@@ -17,7 +17,7 @@ val ARB_texture_rgb10_a2ui = "ARBTextureRGB10_A2UI".nativeClassGL("ARB_texture_r
 		OpenGL has supported GL11#RGB10 and GL11#RGB10_A2 formats for a very long time. This extension provides a variant of RGB10_A2 which supports unsigned
 		integer data (in contrast to the above "unsigned normalized integer" formats).
 
-		Requires ${GL30.core} or ${registryLink("EXT", "texture_integer")}. ${GL33.promoted}
+		Requires ${GL30.core} or ${registryLinkTo("EXT", "texture_integer")}. ${GL33.promoted}
 		"""
 
 	IntConstant.block(

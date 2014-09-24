@@ -43,7 +43,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
 		overloading rules specified by the ARB_gpu_shader5 extension to resolve ambiguities.
 
 		This extension provides API functions for specifying double-precision uniforms in the default uniform block, including functions similar to the uniform
-		functions added by ${registryLink("EXT", "direct_state_access")} (if supported).
+		functions added by ${registryLinkTo("EXT", "direct_state_access")} (if supported).
 
 		This extension provides an "LF" suffix for specifying double-precision constants. Floating-point constants without a suffix in GLSL are treated as
 		single-precision values for backward compatibility with versions not supporting doubles; similar constants are treated as double-precision values in the
@@ -51,7 +51,7 @@ val ARB_gpu_shader_fp64 = "ARBGPUShaderFP64".nativeClassGL("ARB_gpu_shader_fp64"
 
 		This extension does not support interpolation of double-precision values; doubles used as fragment shader inputs must be qualified as "flat".
 		Additionally, this extension does not allow vertex attributes with 64-bit components. That support is added separately by
-		${registryLink("EXT", "vertex_attrib_64bit")}.
+		${registryLinkTo("EXT", "vertex_attrib_64bit")}.
 
 		Requires ${GL32.link} and GLSL 1.50. ${GL40.promoted}
 		"""

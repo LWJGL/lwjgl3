@@ -66,7 +66,7 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 			""",
 		    """
 		    support for emitting vertices in a geometry program where each vertex emitted may be directed independently at a specified vertex stream (as
-		    provided by ${registryLink("ARB", "transform_feedback3")}), and where each shader output is associated with a stream;
+		    provided by ${registryLinkTo("ARB", "transform_feedback3")}), and where each shader output is associated with a stream;
 		    """,
 		    "support for reading a mask of covered samples in a fragment shader; and",
 		    """
