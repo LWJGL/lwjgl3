@@ -18,6 +18,15 @@ class Reuse(override val reference: String): FunctionModifier(), ReferenceModifi
 	override val isSpecial = true
 }
 
+/**
+ * Can be used to mark a function as optional. FunctionProviders should ignore such functions if they're missing.
+ * This is useful for functions that have been added long after the initial release of a particular extension, or
+ * as a workaround for buggy drivers.
+ */
+val ignoreMissing = object: FunctionModifier() {
+	override val isSpecial = false
+}
+
 val keepPostfix = object: FunctionModifier() {
 	override val isSpecial = false
 }
@@ -76,7 +85,6 @@ class Code(
 
 }
 fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
-
 
 /** Marks a function without arguments as a macro. */
 val macro = object: FunctionModifier() {

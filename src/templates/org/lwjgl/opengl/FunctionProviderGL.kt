@@ -77,9 +77,9 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		print("checkFunctions(")
 		if ( hasDeprecated )
-			nativeClass.printPointers(this, printPointer) { !(it has deprecatedGL) }
+			nativeClass.printPointers(this, printPointer) { !(it has deprecatedGL || it has ignoreMissing) }
 		else
-			nativeClass.printPointers(this, printPointer)
+			nativeClass.printPointers(this, printPointer) { !(it has ignoreMissing) }
 
 		println(");")
 

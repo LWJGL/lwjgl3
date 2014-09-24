@@ -52,9 +52,18 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
 		GLuint.IN("divisor", "the divisor value")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	mods(DependsOn("GL_EXT_direct_state_access"), ignoreMissing) _ GLvoid.func(
 		"VertexArrayVertexAttribDivisorEXT",
-		"${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().",
+		"""
+		${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().
+
+		This function was added to the extension specification in July 2013. Implemenations are allowed to expose ARB_instanced_arrays without providing this
+		function. The correct way to test its availability is:
+		${codeBlock("""
+ContextCapabilities caps = GL.getCapabilities();
+if ( caps.GL_ARB_instanced_arrays && ARBInstancedArrays.getInstance().VertexArrayVertexAttribDivisorEXT != NULL )
+	glVertexArrayVertexAttribDivisorEXT(...); // the DSA function can now be used""")}
+		""",
 
 		GLuint.IN("vaobj", "the vertex array object"),
 		GLuint.IN("index", "the attribute index"),
