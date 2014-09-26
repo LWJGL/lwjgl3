@@ -29,9 +29,11 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 			this append linePrefix
 			this append '\n'
 			this append linePrefix
-			this append "<p>"
+			if ( !text.startsWith("<h3>", start) )
+				this append "<p>"
 			this.append(text, start, end)
-			this append "</p>"
+			if ( (end - start) < 5 || !text.startsWith("</h3>", end - 5) )
+				this append "</p>"
 		}
 
 		builder.append(trimmed, 0, matcher.start())
