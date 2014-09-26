@@ -129,8 +129,17 @@ class NativeClassFunction(
 			return functionName
 
 		var name = functionName
-		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) )
+		var postfix = ""
+		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) ) {
 			name = name.substring(0, name.size - nativeClass.postfix.size)
+			postfix = nativeClass.postfix
+		} else if ( has(DependsOn) ) {
+			val dependsOn = this[DependsOn]
+			if ( dependsOn.postfix != null && name.endsWith(dependsOn.postfix) ) {
+				name = name.substring(0, name.size - dependsOn.postfix.size)
+				postfix = dependsOn.postfix
+			}
+		}
 
 		var cutCount = if ( name.endsWith("v") ) {
 			if ( name.endsWith("_v") ) 2 else 1
@@ -158,7 +167,7 @@ class NativeClassFunction(
 			}
 		}
 
-		return name.substring(0, name.size - cutCount) + nativeClass.postfix
+		return name.substring(0, name.size - cutCount) + postfix
 	}
 
 	val javaDocLink: String

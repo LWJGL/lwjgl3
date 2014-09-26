@@ -2,7 +2,7 @@ package org.lwjgl.generator
 
 import java.util.ArrayList
 
-class DependsOn(override val reference: String): FunctionModifier(), ReferenceModifier {
+class DependsOn(override val reference: String, val postfix: String? = null): FunctionModifier(), ReferenceModifier {
 	class object: ModifierObject<DependsOn> {
 		override val key = javaClass<DependsOn>()
 	}
