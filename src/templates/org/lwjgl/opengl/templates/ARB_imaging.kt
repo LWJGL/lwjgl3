@@ -638,15 +638,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"BLEND_COLOR" _ 0x8005
 	)
 
-	GLvoid.func(
-		"BlendColor",
-		"Specifies the constant color C<sub>c</sub> to be used in blending.",
-
-		GLfloat.IN("red", "the red color component"),
-		GLfloat.IN("green", "the green color component"),
-		GLfloat.IN("blue", "the blue color component"),
-		GLfloat.IN("alpha", "the alpha color component")
-	)
+	GL14 reuse "BlendColor"
 
 	// EXT_blend_minmax
 
@@ -664,12 +656,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"BLEND_EQUATION" _ 0x8009
 	)
 
-	GLvoid.func(
-		"BlendEquation",
-		"Controls the blend equations used for per-fragment blending.",
-
-		GLenum.IN("mode", "the blend equation", "#FUNC_ADD #FUNC_SUBTRACT #FUNC_REVERSE_SUBTRACT #MIN #MAX")
-	)
+	GL14 reuse "BlendEquation"
 
 	// EXT_blend_subtract
 
