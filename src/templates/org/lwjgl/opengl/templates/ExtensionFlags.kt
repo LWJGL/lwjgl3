@@ -66,6 +66,27 @@ val ARB_derivative_control = EXT_FLAG.nativeClassGL("ARB_derivative_control", po
 
 		This extension provides control over the spacial granularity at which the underlying implementation computes derivatives.
 
+		For example, for the coarse-granularity derivative, a single x derivative could be computed for each 2x2 group of pixels, using that same derivative
+		value for all 4 pixels. For the fine-granularity derivative, two derivatives could be computed for each 2x2 group of pixels; one for the top row and one
+		for the bottom row. Implementations vary somewhat on how this is done.
+
+		To select the coarse derivative, use:
+		${codeBlock("""
+dFdxCoarse(p)
+dFdyCoarse(p)
+fwidthCoarse(p)""")}
+		To select the fine derivative, use:
+		${codeBlock("""
+dFdxFine(p)
+dFdyFine(p)
+fwidthFine(p)""")}
+		To select which ever is "better" (based on performance, API hints, or other factors), use:
+		${codeBlock("""
+dFdx(p)
+dFdy(p)
+fwidth(p)""")}
+		This last set is the set of previously existing built-ins for derivatives, and continues to work in a backward compatible way.
+
 		Requires ${GL40.core} and GLSL 4.00. ${GL45.promoted}
 		"""
 }
@@ -167,7 +188,7 @@ val ARB_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("ARB_robust_buffe
 		buffer object and program area they reference. These additional robustness guarantees apply to contexts created with the
 		{@code CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB} feature enabled.
 
-		Requires ${"ARB_robustness".cap}. ${GL43.promoted}
+		Requires ${ARB_robustness.link}. ${GL43.promoted}
 		"""
 }
 val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation", postfix = ARB) {
@@ -175,10 +196,15 @@ val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation"
 		"""
 		When true, the $registryLink extension is supported.
 
-		GL_ARB_robustness and supporting window system extensions allow creating an OpenGL context supporting graphics reset notification behavior.
-		GL_ARB_robustness_isolation provides stronger guarantees about the possible side-effects of a graphics reset.
+		${ARB_robustness.link} and supporting window system extensions allow creating an OpenGL context supporting graphics reset notification behavior. This
+		extension provides stronger guarantees about the possible side-effects of a graphics reset.
 
-		Requires ${"ARB_robustness".cap}. ${GL43.promoted}
+		It is expected that there may be a performance cost associated with isolating an application or share group from other contexts on the GPU. For this
+		reason, ARB_robustness_isolation is phrased as an opt-in mechanism, with a new context creation bit defined in the window system bindings. It is
+		expected that implementations might only advertise the strings in this extension if both the implementation supports the desired isolation properties,
+		and the context was created with the appropriate reset isolation bit.
+
+		Requires ${ARB_robustness.link}. ${GL43.promoted}
 		"""
 }
 val ARB_shader_bit_encoding = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", postfix = ARB) {
@@ -189,6 +215,69 @@ val ARB_shader_bit_encoding = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", 
 		This extension trivially adds built-in functions for getting/setting the bit encoding for floating-point values in the OpenGL Shading Language.
 
 		${GL33.promoted}
+		"""
+}
+val ARB_shader_draw_parameters = EXT_FLAG.nativeClassGL("ARB_shader_draw_parameters", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		In unextended GL, vertex shaders have inputs named {@code gl_VertexID} and {@code gl_InstanceID}, which contain, respectively the index of the vertex
+		and instance. The value of {@code gl_VertexID} is the implicitly passed index of the vertex being processed, which includes the value of baseVertex, for
+		those commands that accept it. Meanwhile, {@code gl_InstanceID} is the integer index of the current instance being processed, but, even for commands
+		that accept a baseInstance parameter, it does not include the value of this argument. Furthermore, the equivalents to these variables in other graphics
+		APIs do not necessarily follow these conventions. The reason for this inconsistency is that there are legitimate use cases for both inclusion and
+		exclusion of the baseVertex or baseInstance parameters in {@code gl_VertexID} and {@code gl_InstanceID}, respectively.
+
+		Rather than change the semantics of either built-in variable, this extension adds two new built-in variables to the GL shading language,
+		{@code gl_BaseVertexARB} and {@code gl_BaseInstanceARB}, which contain the values passed in the baseVertex and baseInstance parameters, respectively.
+		Shaders provided by the application may use these variables to offset {@code gl_VertexID} or {@code gl_InstanceID} if desired, or use them for any other
+		purpose.
+
+		Additionally, this extension adds a further built-in variable, {@code gl_DrawID} to the shading language. This variable contains the index of the draw
+		currently being processed by a Multi* variant of a drawing command (such as GL14#MultiDrawElements() or GL43#MultiDrawArraysIndirect()).
+
+		Requires ${GL31.core}. ${GL33.promoted}
+		"""
+}
+val ARB_shader_group_vote = EXT_FLAG.nativeClassGL("ARB_shader_group_vote", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides new built-in functions to compute the composite of a set of boolean conditions across a group of shader invocations. These
+		composite results may be used to execute shaders more efficiently on a single-instruction multiple-data (SIMD) processor. The set of shader invocations
+		across which boolean conditions are evaluated is implementation-dependent, and this extension provides no guarantee over how individual shader
+		invocations are assigned to such sets. In particular, the set of shader invocations has no necessary relationship with the compute shader local work
+		group -- a pair of shader invocations in a single compute shader work group may end up in different sets used by these built-ins.
+
+		Compute shaders operate on an explicitly specified group of threads (a local work group), but many implementations of OpenGL 4.3 will even group
+		non-compute shader invocations and execute them in a SIMD fashion. When executing code like
+		${codeBlock("""
+if (condition) {
+	result = do_fast_path();
+} else {
+	result = do_general_path();
+}""")}
+		where {@code condition} diverges between invocations, a SIMD implementation might first call do_fast_path() for the invocations where {@code condition}
+		is true and leave the other invocations dormant. Once do_fast_path() returns, it might call do_general_path() for invocations where {@code condition} is
+		false and leave the other invocations dormant. In this case, the shader executes *both* the fast and the general path and might be better off just using
+		the general path for all invocations.
+
+		This extension provides the ability to avoid divergent execution by evaluting a condition across an entire SIMD invocation group using code like:
+		${codeBlock("""
+if (allInvocationsARB(condition)) {
+	result = do_fast_path();
+} else {
+	result = do_general_path();
+}""")}
+		The built-in function allInvocationsARB() will return the same value for all invocations in the group, so the group will either execute do_fast_path()
+		or do_general_path(), but never both. For example, shader code might want to evaluate a complex function iteratively by starting with an approximation
+		of the result and then refining the approximation. Some input values may require a small number of iterations to generate an accurate result
+		(do_fast_path) while others require a larger number (do_general_path). In another example, shader code might want to evaluate a complex function
+		(do_general_path) that can be greatly simplified when assuming a specific value for one of its inputs (do_fast_path).
+
+		Requires ${GL43.core} or ${ARB_compute_shader.link}.
 		"""
 }
 val ARB_shader_image_size = EXT_FLAG.nativeClassGL("ARB_shader_image_size", postfix = ARB) {
@@ -431,7 +520,16 @@ val ARB_texture_query_levels = EXT_FLAG.nativeClassGL("ARB_texture_query_levels"
 		When true, the $registryLink extension is supported.
 
 		This extension provides a new set of texture functions ({@code textureQueryLevels}) in the OpenGL Shading Language that exposes the number of accessible
-		mipmap levels in the texture associated with a GLSL sampler variable.
+		mipmap levels in the texture associated with a GLSL sampler variable. The set of accessible levels includes all the levels of the texture defined either
+		through TexImage*, TexStorage*, or TextureView* (${ARB_texture_view.link}) APIs that are not below the GL12#TEXTURE_BASE_LEVEL or above the
+		GL12#TEXTURE_MAX_LEVEL parameters. For textures defined with TexImage*, the set of resident levels is somewhat implementation-dependent. For fully
+		defined results, applications should use TexStorage*&#47;TextureView unless the texture has a full mipmap chain and is used with a mipmapped minification
+		filter.
+
+		These functions means that shaders are not required to manually recompute, approximate, or maintain a uniform holding a pre-computed level count, since
+		the true level count is already available to the implementation. This value can be used to avoid black or leaking pixel artifacts for rendering methods
+		which are using texture images as memory pages (eg: virtual textures); methods that can't only rely on the fixed pipeline texture functions which take
+		advantage of GL12#TEXTURE_MAX_LEVEL for their sampling.
 
 		Requires ${GL30.core} and GLSL 1.30. ${GL43.promoted}
 		"""
@@ -445,6 +543,30 @@ val ARB_texture_query_lod = EXT_FLAG.nativeClassGL("ARB_texture_query_lod", post
 		computations that would be performed if a texture lookup were performed.
 
 		Requires ${GL20.core}, ${"EXT_gpu_shader4".cap}, ${"EXT_texture_array".cap} and GLSL 1.30. ${GL40.promoted}
+		"""
+}
+val ARB_texture_stencil8 = EXT_FLAG.nativeClassGL("ARB_texture_stencil8") {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension accepts GL30#STENCIL_INDEX8 as a texture internal format, and adds STENCIL_INDEX8 to the required internal format list. This removes the
+		need to use renderbuffers if a stencil-only format is desired.
+
+		${GL44.promoted}
+		"""
+}
+val ARB_vertex_type_10f_11f_11f_rev = EXT_FLAG.nativeClassGL("ARB_vertex_type_10f_11f_11f_rev") {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension a new vertex attribute data format: a packed 11.11.10 unsigned float vertex data format. This vertex data format can be used to describe
+		a compressed 3 component stream of values that can be represented by 10- or 11-bit unsigned floating point values.
+
+		The GL30#UNSIGNED_INT_10F_11F_11F_REV vertex attribute type is equivalent to the GL30#R11F_G11F_B10F texture internal format.
+
+		Requires ${GL30.core} and ${ARB_vertex_type_2_10_10_10_rev.link}. ${GL44.promoted}
 		"""
 }
 
@@ -589,7 +711,7 @@ val KHR_texture_compression_astc_hdr = EXT_FLAG.nativeClassGL("KHR_texture_compr
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension corresponds to the ASTC HDR Profile, see ${KHR_texture_compression_astc_ldr.link} for details.
+		This extension corresponds to the ASTC HDR Profile, see ${KHR_texture_compression_astc_ldr.cap} for details.
 		"""
 }
 
