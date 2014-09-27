@@ -855,8 +855,10 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		mods(
+			const,
 			Check(expression = "primcount * (stride == 0 ? (4 * 4) : stride)", bytes = true),
-			const
+			MultiType(PointerMapping.DATA_INT),
+			DRAW_INDIRECT_BUFFER
 		) _ GLvoid_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
@@ -894,8 +896,10 @@ for ( i = 0; i < primcount; i++ ) {
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
 		mods(
+			const,
 			Check(expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true),
-			const
+			MultiType(PointerMapping.DATA_INT),
+			DRAW_INDIRECT_BUFFER
 		) _ GLvoid_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
