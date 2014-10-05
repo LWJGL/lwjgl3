@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.glfw.*
 import org.lwjgl.opengl.*
 
-fun GLFW() = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
+val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	javaImport (
 		"org.lwjgl.opengl.GL11"
 	)

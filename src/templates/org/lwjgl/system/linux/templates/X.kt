@@ -9,7 +9,7 @@ import org.lwjgl.system.linux.*
 
 val None = "X#None"
 
-fun X() = "X".nativeClass(LINUX_PACKAGE) {
+val X = "X".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to X.h."
 

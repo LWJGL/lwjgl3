@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Time() = "Time".nativeClass(LINUX_PACKAGE) {
+val time = "Time".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<sys/time.h>",

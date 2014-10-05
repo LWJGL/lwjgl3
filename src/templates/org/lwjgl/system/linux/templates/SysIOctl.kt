@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun SysIOctl() = "SysIOctl".nativeClass(LINUX_PACKAGE) {
+val sys_ioctl = "SysIOctl".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<sys/ioctl.h>"

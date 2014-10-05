@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.macosx.*
 import org.lwjgl.opengl.*
 
-fun CGL() = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
+val CGL = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
 	javaImport("org.lwjgl.opengl.GL11")
 
 	nativeImport (

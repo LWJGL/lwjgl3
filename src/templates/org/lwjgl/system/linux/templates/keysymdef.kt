@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun keysymdef() = "keysymdef".nativeClass(LINUX_PACKAGE) {
+val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to keysymdef.h."
 

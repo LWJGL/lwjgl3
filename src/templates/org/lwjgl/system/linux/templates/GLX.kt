@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.opengl.*
 
-fun GLX() = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX") {
+val GLX = "GLX".nativeClass(LINUX_PACKAGE, prefix = "GLX", prefixMethod = "glX") {
 	javaImport(
 		"org.lwjgl.opengl.*"
 	)

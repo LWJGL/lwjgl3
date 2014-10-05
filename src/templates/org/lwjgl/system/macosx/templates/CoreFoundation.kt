@@ -12,7 +12,7 @@ val ALLOCATOR = nullable _ CFAllocatorRef.IN(
 	"the allocator to use to allocate memory for the new object. Pass $NULL or {@code kCFAllocatorDefault} to use the current default allocator."
 )
 
-fun CoreFoundation() = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
+val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	nativeImport (
 		"MacOSXLWJGL.h"
 	)

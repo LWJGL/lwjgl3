@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-fun Dwmapi() = "Dwmapi".nativeClassWin {
+val Dwmapi = "Dwmapi".nativeClassWin {
 	nativeImport(
 		"WindowsLWJGL.h"
 	)

@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Xatom() = "Xatom".nativeClass(LINUX_PACKAGE) {
+val Xatom = "Xatom".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to Xatom.h."
 

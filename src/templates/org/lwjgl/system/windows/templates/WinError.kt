@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-fun WinError() = "WinError".nativeClass(WINDOWS_PACKAGE) {
+val WinError = "WinError".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to WinError.h."
 

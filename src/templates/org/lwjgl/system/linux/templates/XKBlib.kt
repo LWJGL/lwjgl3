@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun XKBlib() = "XKBlib".nativeClass(LINUX_PACKAGE) {
+val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/XKBlib.h>"

@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun dlfcn() = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
+val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<dlfcn.h>"

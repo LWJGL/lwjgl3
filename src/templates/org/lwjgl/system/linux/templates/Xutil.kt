@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Xutil() = "Xutil".nativeClass(LINUX_PACKAGE) {
+val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/Xresource.h>",

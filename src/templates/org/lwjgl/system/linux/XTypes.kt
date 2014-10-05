@@ -221,6 +221,8 @@ val XClassHint = StructType(
 )
 val XClassHint_p = StructType(XClassHint)
 
+// --------------- XInput2.h ---------------
+
 val XIEventMask = StructType(
 	struct(LINUX_PACKAGE, "XIEventMask") {
 		documentation = "XInput2 event mask."
@@ -235,6 +237,98 @@ val XIEventMask = StructType(
 	}
 )
 val XIEventMask_p = StructType(XIEventMask)
+
+val XIButtonState = StructType(
+	struct(LINUX_PACKAGE, "XIButtonState") {
+		documentation = "XInput2 button state."
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/extensions/XInput2.h>"
+		)
+
+		int.member("mask_len")
+		unsigned_char_p.member("mask")
+	}
+)
+
+val XIValuatorState = StructType(
+	struct(LINUX_PACKAGE, "XIValuatorState") {
+		documentation = "XInput2 valuator state."
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/extensions/XInput2.h>"
+		)
+
+		int.member("mask_len")
+		unsigned_char_p.member("mask")
+		double_p.member("values")
+	}
+)
+
+val XIModifierState = StructType(
+	struct(LINUX_PACKAGE, "XIModifierState") {
+		documentation = "XInput2 modifier state."
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/extensions/XInput2.h>"
+		)
+
+		int.member("base")
+		int.member("latched")
+		int.member("locked")
+		int.member("effective")
+	}
+)
+
+val XIDeviceEvent = StructType(
+	struct(LINUX_PACKAGE, "XIDeviceEvent") {
+		documentation = "XInput2 device event."
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<X11/extensions/XInput2.h>"
+		)
+
+		int.member("type")
+		unsigned_long.member("serial")
+		Bool.member("send_event")
+		Display_p.member("display")
+		int.member("extension")
+		int.member("evtype")
+		Time.member("time")
+		int.member("deviceid")
+		int.member("sourceid")
+		int.member("detail")
+		Window.member("root")
+		Window.member("event")
+		Window.member("child")
+		double.member("root_x")
+		double.member("root_y")
+		double.member("event_x")
+		double.member("event_y")
+		int.member("flags")
+		XIButtonState.member("buttons")
+		XIValuatorState.member("valuators")
+		XIModifierState.member("mods")
+		XIModifierState.member("group") // XIGroupState == XIModifierState
+	}
+)
+
+// --------------- joystick.h ---------------
+
+val JSEvent = StructType(
+	struct(LINUX_PACKAGE, "JSEvent", structName = "js_event", globalIdentifier = false) {
+		documentation = "Joystick event."
+		nativeImport (
+			"LinuxLWJGL.h",
+			"<linux/joystick.h>"
+		)
+
+		int.member("time")
+		short.member("value")
+		unsigned_char.member("type")
+		unsigned_char.member("number")
+	}
+)
 
 // --------------- Xrandr.h ---------------
 

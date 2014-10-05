@@ -247,7 +247,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 
 		GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
 		GLuint64.IN("x", "the handle value")
-	)
+	).javaDocLink
 
 	GLvoid.func(
 		"VertexAttribL1ui64vARB",

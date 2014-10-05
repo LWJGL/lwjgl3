@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Fcntl() = "Fcntl".nativeClass(LINUX_PACKAGE) {
+val fcntl = "Fcntl".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<fcntl.h>"

@@ -10,7 +10,7 @@ import org.lwjgl.system.linux.*
 val WINDOW = Window.IN("w", "the window")
 val DRAWABLE = Drawable.IN("d", "the drawable")
 
-fun Xlib() = "Xlib".nativeClass(LINUX_PACKAGE) {
+val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/Xutil.h>"

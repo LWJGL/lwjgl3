@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Xrandr() = "Xrandr".nativeClass(LINUX_PACKAGE) {
+val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/extensions/Xrandr.h>"

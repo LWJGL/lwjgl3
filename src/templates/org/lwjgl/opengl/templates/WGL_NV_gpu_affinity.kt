@@ -43,30 +43,6 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		"ERROR_MISSING_AFFINITY_MASK_NV" _ 0x20D1
 	)
 
-	// Type definitions
-
-	val HGPUNV = PointerType(name = "HGPUNV", includesPointer = true)
-	val HGPUNV_p = PointerType(HGPUNV)
-
-	val PGPU_DEVICE = StructType(
-		name = "PGPU_DEVICE",
-		includesPointer = true,
-		definition = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl") {
-			documentation =
-				"""
-				Receives information about the display device specified by the {@code deviceIndex} parameter of the WGLNVGPUAffinity##wglEnumGpuDevicesNV()
-				function.
-				"""
-			javaImport("org.lwjgl.system.windows.*")
-			nativeImport("WindowsLWJGL.h", "WGL.h")
-			DWORD.member("cb")
-			TCHAR.member(nativeName = "DeviceName", size = 32, nullTerminated = true)
-			TCHAR.member(nativeName = "DeviceString", size = 128, nullTerminated = true)
-			DWORD.member("Flags")
-			RECT.member(nativeName = "rcVirtualScreen", name = "virtualScreen");
-		}
-	)
-
 	// Functions
 
 	BOOL.func(

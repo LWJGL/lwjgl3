@@ -10,7 +10,7 @@ import org.lwjgl.system.glfw.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.WCHAR_p
 
-fun GLFWLinux() = "GLFWLinux".nativeClass(packageName = LINUX_PACKAGE, prefix = "GLFW") {
+val GLFWLinux = "GLFWLinux".nativeClass(packageName = LINUX_PACKAGE, prefix = "GLFW") {
 	nativeDefine("GLFW_EXPOSE_NATIVE_X11")
 	nativeDefine("GLFW_EXPOSE_NATIVE_GLX")
 

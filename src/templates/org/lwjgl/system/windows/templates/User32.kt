@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-fun User32() = "User32".nativeClassWin {
+val User32 = "User32".nativeClassWin {
 	nativeImport(
 		"WindowsLWJGL.h"
 	)

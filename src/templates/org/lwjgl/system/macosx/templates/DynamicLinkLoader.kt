@@ -7,7 +7,7 @@ package org.lwjgl.system.macosx.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.macosx.*
 
-fun dlfcn() = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
+val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 	nativeImport (
 		"MacOSXLWJGL.h",
 		"<dlfcn.h>"

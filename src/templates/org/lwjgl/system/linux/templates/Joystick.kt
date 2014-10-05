@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun Joystick() = "Joystick".nativeClass(LINUX_PACKAGE) {
+val joystick = "Joystick".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<linux/joystick.h>"
@@ -21,21 +21,6 @@ fun Joystick() = "Joystick".nativeClass(LINUX_PACKAGE) {
 		"JS_EVENT_BUTTON" _ 0x01,
 		"JS_EVENT_AXIS" _ 0x02,
 		"JS_EVENT_INIT" _ 0x80
-	)
-
-	StructType(
-		struct(LINUX_PACKAGE, "JSEvent", structName = "js_event", globalIdentifier = false) {
-			documentation = "Joystick event."
-			nativeImport (
-				"LinuxLWJGL.h",
-				"<linux/joystick.h>"
-			)
-
-			int.member("time")
-			short.member("value")
-			unsigned_char.member("type")
-			unsigned_char.member("number")
-		}
 	)
 
 	macro _ int.func("JSIOCGVERSION", "IOCTL command: get driver version.")

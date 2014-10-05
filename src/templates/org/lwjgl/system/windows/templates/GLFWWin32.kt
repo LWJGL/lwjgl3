@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.system.glfw.*
 import org.lwjgl.system.windows.*
 
-fun GLFWWin32() = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "GLFW") {
+val GLFWWin32 = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "GLFW") {
 	nativeDefine("GLFW_EXPOSE_NATIVE_WIN32")
 	nativeDefine("GLFW_EXPOSE_NATIVE_WGL")
 

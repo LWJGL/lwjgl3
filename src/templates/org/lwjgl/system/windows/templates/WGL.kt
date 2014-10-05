@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-fun WGL() = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
+val WGL = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 	nativeImport (
 		"WindowsLWJGL.h"
 	)

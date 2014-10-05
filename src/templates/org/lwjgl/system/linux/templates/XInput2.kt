@@ -7,7 +7,7 @@ package org.lwjgl.system.linux.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
+val XInput2 = "XInput2".nativeClass(LINUX_PACKAGE) {
 	nativeImport (
 		"LinuxLWJGL.h",
 		"<X11/extensions/XInput2.h>"
@@ -43,85 +43,6 @@ fun XInput2() = "XInput2".nativeClass(LINUX_PACKAGE) {
 		"XI_RawTouchUpdate" _ 23,
 		"XI_RawTouchEnd" _ 24
 	)
-
-	// Type definitions
-
-	val XIButtonState = StructType(
-		struct(LINUX_PACKAGE, "XIButtonState") {
-			documentation = "XInput2 button state."
-			nativeImport (
-				"LinuxLWJGL.h",
-				"<X11/extensions/XInput2.h>"
-			)
-
-			int.member("mask_len")
-			unsigned_char_p.member("mask")
-		}
-	)
-
-	val XIValuatorState = StructType(
-		struct(LINUX_PACKAGE, "XIValuatorState") {
-			documentation = "XInput2 valuator state."
-			nativeImport (
-				"LinuxLWJGL.h",
-				"<X11/extensions/XInput2.h>"
-			)
-
-			int.member("mask_len")
-			unsigned_char_p.member("mask")
-			double_p.member("values")
-		}
-	)
-
-	val XIModifierState = StructType(
-		struct(LINUX_PACKAGE, "XIModifierState") {
-			documentation = "XInput2 modifier state."
-			nativeImport (
-				"LinuxLWJGL.h",
-				"<X11/extensions/XInput2.h>"
-			)
-
-			int.member("base")
-			int.member("latched")
-			int.member("locked")
-			int.member("effective")
-		}
-	)
-
-	StructType(
-		struct(LINUX_PACKAGE, "XIDeviceEvent") {
-			documentation = "XInput2 device event."
-			nativeImport (
-				"LinuxLWJGL.h",
-				"<X11/extensions/XInput2.h>"
-			)
-
-			int.member("type")
-			unsigned_long.member("serial")
-			Bool.member("send_event")
-			Display_p.member("display")
-			int.member("extension")
-			int.member("evtype")
-			Time.member("time")
-			int.member("deviceid")
-			int.member("sourceid")
-			int.member("detail")
-			Window.member("root")
-			Window.member("event")
-			Window.member("child")
-			double.member("root_x")
-			double.member("root_y")
-			double.member("event_x")
-			double.member("event_y")
-			int.member("flags")
-			XIButtonState.member("buttons")
-			XIValuatorState.member("valuators")
-			XIModifierState.member("mods")
-			XIModifierState.member("group") // XIGroupState == XIModifierState
-		}
-	)
-
-	// ----------------
 
 	Status.func(
 		"XIQueryVersion",
