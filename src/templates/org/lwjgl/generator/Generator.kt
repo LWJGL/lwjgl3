@@ -138,7 +138,7 @@ class Generator(
 	}
 
 	fun generate(packageName: String) {
-		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", true)
+		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", false)
 		packageLastModifiedMap[packageName] = packageLastModified
 
 		// Find and run configuration methods
@@ -165,17 +165,9 @@ class Generator(
 	private fun generate(nativeClass: NativeClass, packageLastModified: Long) {
 		val packagePath = nativeClass.packageName.replace('.', '/')
 
-		val input = File("$srcPath/$packagePath/templates/${nativeClass.templateName}.kt").let {
-			if ( it.exists() ) it else
-				File("$srcPath/$packagePath/templates/${nativeClass.prefixTemplate}_${nativeClass.templateName}.kt").let {
-					if ( it.exists() ) it else
-						throw IllegalStateException("The source file for template ${nativeClass.templateName} does not exist. The source file that defines the template must be: ${it.getPath()}")
-				}
-		}
-
 		val outputJava = File("$trgPath/java/$packagePath/${nativeClass.className}.java")
 
-		val touchTimestamp = max(input.lastModified(), packageLastModified)
+		val touchTimestamp = max(nativeClass.getLastModified("$srcPath/$packagePath/templates"), packageLastModified)
 		if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
 			//println("SKIPPED: ${nativeClass.packageName}.${nativeClass.className}")
 			return
@@ -208,13 +200,13 @@ class Generator(
 	}
 
 	fun generate(target: GeneratorTarget) {
-		val packageLastModified = packageLastModifiedMap[target.packageName]!!
+		val packagePath = target.packageName.replace('.', '/')
 
-		val outputJava = File("$trgPath/java/${target.packageName.replace('.', '/')}/${target.className}.java")
+		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
 
-		val touchTimestamp = max(packageLastModified, GENERATOR_LAST_MODIFIED)
+		val touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
 		if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
-			//println("SKIPPED: ${target.packageName}.${target.className}")
+			println("SKIPPED: ${target.packageName}.${target.className}")
 			return
 		}
 
@@ -245,7 +237,7 @@ class Generator(
 
 // File management
 
-private val packageLastModifiedMap = HashMap<String, Long>()
+private val packageLastModifiedMap: MutableMap<String, Long> = HashMap()
 
 private fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {

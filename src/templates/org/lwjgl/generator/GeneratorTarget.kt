@@ -4,9 +4,9 @@
  */
 package org.lwjgl.generator
 
-import java.util.ArrayList
-import java.io.PrintWriter
+import java.util.*
 import java.util.regex.Pattern
+import java.io.*
 
 
 val HEADER = """/*
@@ -123,6 +123,27 @@ abstract class GeneratorTarget(
 			Pattern.compile("""($JAVA)?(?<!&)(@?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
 		}()
 	}
+
+	private fun getSourceFileName(): String {
+		// Nasty hack to retrieve the source file that defines this template, without having to specify it explictly.
+		// This enables incremental builds to work even with arbitrary file names or when multiple templates are bundled
+		// in the same file (e.g. ExtensionFlags).
+		try {
+			throw RuntimeException()
+		} catch (t: Throwable) {
+			return t.getStackTrace().stream()
+				.map { it.getFileName() }
+				.filterNotNull()
+				.filter {
+					it.endsWith(".kt") && !it.startsWith("Generator") && !it.equals("NativeClass.kt") && !it.equals("Structs.kt") && !(this is NativeClass && it.startsWith("FunctionProvider"))
+				}.first()
+		}
+	}
+	private val sourceFile: String = getSourceFileName();
+	open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
+		if ( it.exists() ) it else
+			throw IllegalStateException("The source file for template $packageName.$className does not exist ($it).")
+	}.lastModified()
 
 	var access = Access.PUBLIC
 		set(access: Access) {

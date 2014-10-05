@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
+import java.lang.Math.*
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.properties.Delegates
@@ -37,6 +38,13 @@ abstract class FunctionProvider(
 			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
 		})
 		return classes
+	}
+
+	override fun getLastModified(root: String): Long {
+		return max(
+			super.getLastModified(root),
+			getDirectoryLastModified("$root/templates")
+		)
 	}
 
 	fun addCapabilities(clazz: NativeClass) {
