@@ -108,17 +108,9 @@
 			<arg value="-module"/>
 			<arg value="${config}/Templates.ktm"/>
 			<!--
-			<arg value="-tags"/>
-			<arg value="-verbose"/>
-			<arg value="-version"/>
-			-->
-			<!--
 			<arg value="-notNullAssertions"/>
 			<arg value="-notNullParamAssertions"/>
 			-->
-			<arg value="-noStdlib"/>
-			<arg value="-noJdkAnnotations"/>
-			<!--<arg value="-noJdk"/>-->
 		</java>
 		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
 	</target>

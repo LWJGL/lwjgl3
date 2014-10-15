@@ -31,12 +31,7 @@ fun project() {
 			//classpath += jar
 
 		// Compilation classpath
-		classpath += "libs/kotlinc/lib/kotlin-runtime.jar"
 		classpath += "src/templates"
-
-		// External annotations
-		annotationsPath += "libs/kotlinc/lib/kotlin-jdk-annotations.jar"
-		annotationsPath += "config/kotlin"
 	}
 }
 

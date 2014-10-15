@@ -7,7 +7,7 @@
 	<property name="disruptor" value="3.3.0"/>
 	<property name="testng" value="6.8.8"/>
 	<property name="jcommander" value="1.35"/>
-	<property name="kotlinc-build" value="0.8.11"/>
+	<property name="kotlinc-build" value="0.9.66"/>
 	<!-- *********************************** -->
 
 	<local name="config"/>
