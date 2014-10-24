@@ -167,6 +167,6 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		AutoSize("name") _ GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
 		const _ GLcharASCII_p.IN("name", "the name associated with the string"),
 		GLenum.IN("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
-		returnValue _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 }

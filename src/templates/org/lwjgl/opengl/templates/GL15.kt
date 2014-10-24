@@ -270,7 +270,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-		returnValue _ GLint_p.OUT("params", "the requested parameter")
+		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested parameter")
 	)
 
 	GLvoid.func(
@@ -279,7 +279,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
-		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
+		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 
 	// ARB_occlusion_query

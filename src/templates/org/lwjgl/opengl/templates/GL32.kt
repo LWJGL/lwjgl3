@@ -60,7 +60,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-		returnValue _ GLint64_p.OUT("params", "the requested parameter")
+		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the requested parameter")
 	)
 
 	// ARB_draw_elements_base_vertex
