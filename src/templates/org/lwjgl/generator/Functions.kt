@@ -940,7 +940,7 @@ class NativeClassFunction(
 					if ( unsignedType == null || !types.contains(unsignedType) )
 						continue
 
-					transforms[it] = AutoTypeParamWithSignTransform("GL11.${unsignedType.name()}", "GL11.${autoType.name()}")
+					transforms[it] = AutoTypeParamWithSignTransform("${unsignedType.className}.${unsignedType.name()}", "${autoType.className}.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(strippedName, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks)
 
@@ -949,7 +949,7 @@ class NativeClassFunction(
 				}
 
 				for ( autoType in types ) {
-					transforms[it] = AutoTypeParamTransform("GL11.${autoType.name()}")
+					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks)
 				}

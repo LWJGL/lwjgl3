@@ -7,7 +7,7 @@ package org.lwjgl.generator.opengl
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.GLenum
 
-enum class BufferType(val mapping: PointerMapping) {
+enum class BufferType(val mapping: PointerMapping, val className: String = "GL11") {
 
 	GL_UNSIGNED_BYTE: BufferType(PointerMapping.DATA_BYTE)
 	GL_UNSIGNED_SHORT: BufferType(PointerMapping.DATA_SHORT)
@@ -19,6 +19,7 @@ enum class BufferType(val mapping: PointerMapping) {
 	GL_INT: BufferType(PointerMapping.DATA_INT)
 	GL_LONG: BufferType(PointerMapping.DATA_LONG)
 
+	GL_HALF_FLOAT: BufferType(PointerMapping.DATA_SHORT, "GL30")
 	GL_FLOAT: BufferType(PointerMapping.DATA_FLOAT)
 	GL_DOUBLE: BufferType(PointerMapping.DATA_DOUBLE)
 
