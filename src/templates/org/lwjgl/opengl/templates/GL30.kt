@@ -985,7 +985,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		mods(Check(1), SingleValue("param")) _ GLint_p.IN("params", "the value of {@code pname}")
+		mods(const, Check(1), SingleValue("param")) _ GLint_p.IN("params", "the value of {@code pname}")
 	)
 
 	GLvoid.func(
@@ -994,7 +994,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		mods(Check(1), SingleValue("param")) _ GLuint_p.IN("params", "the value of {@code pname}")
+		mods(const, Check(1), SingleValue("param")) _ GLuint_p.IN("params", "the value of {@code pname}")
 	)
 
 	GLvoid.func(

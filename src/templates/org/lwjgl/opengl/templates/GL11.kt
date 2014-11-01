@@ -3051,8 +3051,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Specifies the location and organization of a texture coordinate array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4"),
-		// Removed GL_SHORT, GL_INT, GL_DOUBLE. TODO: Add GL_HALF?
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_HALF_FLOAT, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
@@ -3142,7 +3141,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
-		mods(const, Check("4")) _ GLint_p.IN("params", "the parameter value")
+		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	val TexGenf = (deprecatedGL _ GLvoid.func(

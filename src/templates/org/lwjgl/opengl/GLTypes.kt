@@ -27,7 +27,9 @@ val GLuint = IntegerType("GLuint", PrimitiveMapping.INT, unsigned = true)
 val GLint64 = IntegerType("GLint64", PrimitiveMapping.LONG)
 val GLuint64 = IntegerType("GLuint64", PrimitiveMapping.LONG, unsigned = true)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
+val GLclampf = PrimitiveType("GLclampf", GLfloat)
 val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
+val GLclampd = PrimitiveType("GLclampd", GLdouble)
 
 val GLboolean_p = PointerType("GLboolean", PointerMapping.DATA_BOOLEAN)
 val GLbyte_p = PointerType(GLbyte)
@@ -83,3 +85,6 @@ val GLhandleARB_p = PointerType(GLhandleARB)
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
 // KHR_debug
 val GLDEBUGPROC = PointerType(name = "GLDEBUGPROC", includesPointer = true)
+// EXT_timer_query
+val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
+val GLuint64EXT_p = PointerType(GLuint64EXT)
