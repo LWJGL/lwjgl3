@@ -77,7 +77,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("width", "the width of the texture image"),
 		GLsizei.IN("height", "the height of the texture image"),
 		GLsizei.IN("depth", "the depth of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
+		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
@@ -91,7 +91,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
 		GLsizei.IN("height", "the height of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
+		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
@@ -104,7 +104,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
+		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
