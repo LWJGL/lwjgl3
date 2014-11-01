@@ -7,7 +7,7 @@
 	<property name="disruptor" value="3.3.0"/>
 	<property name="testng" value="6.8.8"/>
 	<property name="jcommander" value="1.35"/>
-	<property name="kotlinc-build" value="0.9.66"/>
+	<property name="kotlinc-build" value="0.9.206"/>
 	<!-- *********************************** -->
 
 	<local name="config"/>
@@ -60,7 +60,7 @@
 		<!-- Delete current build -->
 		<delete dir="${kotlinc}" taskname="kotlinc"/>
 		<!-- Download new build -->
-		<get src="http://teamcity.jetbrains.com/guestAuth/repository/download/bt345/${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true" taskname="kotlinc"/>
+		<get src="https://teamcity.jetbrains.com/guestAuth/repository/download/bt345/${kotlinc-build}/${kotlinc-archive}" dest="${lib}" verbose="true" taskname="kotlinc"/>
 		<!-- Extract build -->
 		<unzip src="${lib}/${kotlinc-archive}" dest="${lib}" taskname="kotlinc"/>
 		<!-- Delete build archive -->
