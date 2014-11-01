@@ -210,7 +210,16 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLintptr.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the data store region being replaced"),
-		const _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
+		mods(
+			const,
+			MultiType(
+				PointerMapping.DATA_BYTE,
+				PointerMapping.DATA_SHORT,
+				PointerMapping.DATA_INT,
+				PointerMapping.DATA_FLOAT,
+				PointerMapping.DATA_DOUBLE
+			)
+		) _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
 	GLvoid.func(
