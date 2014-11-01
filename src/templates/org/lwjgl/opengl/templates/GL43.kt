@@ -560,7 +560,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	GLvoid.func(
@@ -579,7 +579,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-		Return("bufSize", "length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	// ARB_explicit_uniform_location
@@ -1000,7 +1000,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("index", "the index of the resource within {@code programInterface} of {@code program}"),
 		AutoSize("name") _ GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
-		Return("bufSize", "length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLcharASCII_p.OUT(
+		Return("length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"name",
 			"a character array into which will be written the name of the resource"
 		)
@@ -1017,7 +1017,7 @@ for ( i = 0; i < primcount; i++ ) {
 		const _ GLenum_p.IN("props", "an array that will receive the active resource properties"),
 		AutoSize("params") _ GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
-		Return("bufSize", "length") _ GLint_p.OUT("params", "an array that will receive the property values")
+		Return("length") _ GLint_p.OUT("params", "an array that will receive the property values")
 	)
 
 	GLint.func(

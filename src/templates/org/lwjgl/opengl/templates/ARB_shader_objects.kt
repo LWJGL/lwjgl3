@@ -485,7 +485,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"""
 		),
 		Return(
-			"maxLength",
 			"length",
 			"glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB)"
 		) _ GLcharARB_p.OUT("infoLog", "a buffer in which to return the info log")
@@ -506,7 +505,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If $NULL then the GL ignores this parameter."
 		),
 		Return(
-			"maxCount",
 			"count",
 			"glGetObjectParameteriARB(containerObj, GL_OBJECT_ATTACHED_OBJECTS_ARB)"
 		) _ GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
@@ -577,7 +575,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1) _ GLint_p.OUT("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
 		Check(1) _ GLenum_p.OUT("type", "a buffer in which to return the uniform type"),
 		Return(
-			"maxLength",
 			"length",
 			"glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB)"
 		) _ GLcharARB_p.OUT("name", "a buffer in which to return the uniform name")
@@ -621,7 +618,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"""
 		),
 		Return(
-			"maxLength",
 			"length",
 			"glGetObjectParameteriARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB)"
 		) _ GLcharARB_p.OUT("source", "a buffer in which to return the shader object source")

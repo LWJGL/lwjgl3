@@ -495,7 +495,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
 		mods(
-			Return("bufsize", "length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)")
+			Return("length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)")
 		) _ GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
 	)
 
@@ -509,7 +509,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
 		mods(
-			Return("bufsize", "length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)")
+			Return("length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)")
 		) _ GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
 	)
 

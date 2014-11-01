@@ -227,8 +227,6 @@ class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 
 /** Marks a char pointer parameter to become the return value of an alternative method. */
 class Return(
-	/** The parameter that defines the maximum string size. */
-	val maxLengthParam: String,
 	/** The parameter that returns the actual string size */
 	val lengthParam: String,
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */

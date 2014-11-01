@@ -154,7 +154,6 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 			"""
 		),
 		Return(
-			"bufSize",
 			"stringlen",
 			"glGetNamedStringiARB(name, GL_NAMED_STRING_LENGTH_ARB)"
 		) _ GLcharUTF8_p.OUT("string", "a buffer in which to place the returned string")

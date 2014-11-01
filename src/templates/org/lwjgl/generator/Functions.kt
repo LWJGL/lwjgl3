@@ -255,7 +255,7 @@ class NativeClassFunction(
 
 			if ( param has autoSizeResult ) {
 				if ( returns.nativeType !is PointerType || returns.nativeType.mapping == PointerMapping.OPAQUE_POINTER )
-					param.error("Return type is not an array: autoSizeResult(${it.name})")
+					param.error("Return type is not an array: autoSizeResult")
 			}
 
 			if ( param has AutoType ) {
@@ -279,16 +279,14 @@ class NativeClassFunction(
 
 				val returnMod = param[Return]
 				if ( returnMod != returnValue ) {
-					val maxLengthParam = paramMap[returnMod.maxLengthParam]
+					if ( !hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) } )
+						param.error("An AutoSize for Return parameter does not exist")
+
 					val lengthParam = paramMap[returnMod.lengthParam]
-					if ( maxLengthParam == null )
-						param.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
-					else if ( lengthParam == null )
+					if ( lengthParam == null )
 						param.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
-					else when {
-						!maxLengthParam.nativeType.mapping.isSizeType -> param.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
-						!lengthParam.nativeType.mapping.isSizePointer -> param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
-					}
+					else if ( !lengthParam.nativeType.mapping.isSizePointer )
+						param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
 				}
 			}
 
@@ -839,8 +837,9 @@ class NativeClassFunction(
 				} else {
 					// Generate String return alternative
 
-					// Remove any transform from the maxLength parameter (e.g. AutoSize)
-					transforms.remove(paramMap[returnMod.maxLengthParam])
+					// Remove any transform from the maxLength parameter
+					val maxLengthParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) }
+					transforms.remove(maxLengthParam)
 
 					// Hide length parameter and use APIBuffer
 					transforms[paramMap[returnMod.lengthParam]!!] = BufferReturnLengthTransform
@@ -862,7 +861,7 @@ class NativeClassFunction(
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
-						transforms[paramMap[returnMod.maxLengthParam]!!] = ExpressionLocalTransform(returnMod.maxLengthExpression)
+						transforms[maxLengthParam] = ExpressionLocalTransform(returnMod.maxLengthExpression)
 						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
 					}
 				}
@@ -1110,8 +1109,8 @@ class NativeClassFunction(
 
 				[suppress("UNCHECKED_CAST")]
 				when ( qtype ) {
-					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(qtype, this)
-					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(qtype, this)
+					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
+					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
 				}
 			}
 		}

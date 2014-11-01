@@ -411,7 +411,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		AutoSize("infoLog") _ GLsizei.IN("maxLength", "the size of the character buffer for storing the returned information log"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
 		Return(
-			"maxLength",
 			"length",
 			"glGetShaderi(shader, GL_INFO_LOG_LENGTH)"
 		) _ GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
@@ -425,7 +424,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		AutoSize("infoLog") _ GLsizei.IN("maxLength", "the size of the character buffer for storing the returned information log"),
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the length of the string returned in {@code infoLog} (excluding the null terminator)"),
 		Return(
-			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_INFO_LOG_LENGTH)"
 		) _ GLcharUTF8_p.OUT("infoLog", "an array of characters that is used to return the information log")
@@ -439,7 +437,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		AutoSize("shaders") _ GLsizei.IN("maxCount", "the size of the array for storing the returned object names"),
 		mods(Check(1), nullable) _ GLsizei_p.IN("count", "the number of names actually returned in {@code shaders}"),
 		Return(
-			"maxCount",
 			"count",
 			"glGetProgrami(program, GL_ATTACHED_SHADERS)"
 		) _ GLuint_p.OUT("shaders", "an array that is used to return the names of attached shader objects")
@@ -464,7 +461,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		Check(1) _ GLint_p.OUT("size", "the size of the uniform variable"),
 		Check(1) _ GLenum_p.OUT("type", "the data type of the uniform variable"),
 		Return(
-			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_ACTIVE_UNIFORM_MAX_LENGTH)"
 		) _ GLcharASCII_p.OUT("name", "a null terminated string containing the name of the uniform variable")
@@ -495,7 +491,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("shader", "the shader object to be queried"),
 		AutoSize("source") _ GLsizei.IN("maxLength", "the size of the character buffer for storing the returned source code string"),
 		mods(Check(1), nullable) _ GLsizei_p.IN("length", "the length of the string returned in source (excluding the null terminator)"),
-		Return("maxLength", "length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)") _ GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
+		Return("length", "glGetShaderi(shader, GL_SHADER_SOURCE_LENGTH)") _ GLcharUTF8_p.OUT("source", "an array of characters that is used to return the source code string")
 	)
 
 	// ARB_vertex_shader
@@ -700,7 +696,6 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLint_p.OUT("size", "the size of the attribute variable"),
 		GLenum_p.OUT("type", "the data type of the attribute variable"),
 		Return(
-			"maxLength",
 			"length",
 			"glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"
 		) _ GLcharASCII_p.OUT("name", "a null terminated string containing the name of the attribute variable")

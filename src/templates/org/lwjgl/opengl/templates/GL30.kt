@@ -1282,7 +1282,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
 		Check(1) _ GLsizei_p.OUT("size", "a variable that will receive the size of the varying"),
 		Check(1) _ GLenum_p.OUT("type", "a variable that will receive the type of the varying"),
-		Return("bufSize", "length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)") _ GLcharASCII_p.OUT(
+		Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)") _ GLcharASCII_p.OUT(
 			"name",
 			"a buffer into which will be written the name of the varying"
 		)

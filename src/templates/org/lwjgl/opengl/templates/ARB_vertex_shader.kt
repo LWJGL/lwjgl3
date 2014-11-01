@@ -246,7 +246,6 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		GLint_p.OUT("size", "the size of the attribute variable"),
 		GLenum_p.OUT("type", "the data type of the attribute variable"),
 		Return(
-			"maxLength",
 			"length",
 			"ARBShaderObjects.glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_ATTRIBUTE_MAX_LENGTH_ARB)"
 		) _ GLcharASCII_p.OUT("name", "a null terminated string containing the name of the attribute variable")
