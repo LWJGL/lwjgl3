@@ -355,9 +355,15 @@ public class TemplateFormatter {
 					if ( !paramMatcher.group(3).startsWith(prefix) )
 						builder.append(prefix);
 					builder.append(paramMatcher.group(3));
-					if ( paramMatcher.group(4) != null ) // pointer
+					if ( paramMatcher.group(4) != null ) { // pointer
 						writerPointer(builder, paramMatcher);
-					builder.append(".IN(\"");
+						builder.append(
+							paramMatcher.group(1) != null // const
+							? ".IN(\""
+							: ".OUT(\""
+						);
+					} else
+						builder.append(".IN(\"");
 					builder.append(paramMatcher.group(5));
 					builder.append("\", \"\")");
 				}
