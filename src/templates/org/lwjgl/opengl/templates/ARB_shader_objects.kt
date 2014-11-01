@@ -145,7 +145,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("shaderObj", "the shader object"),
 		AutoSize("string", "length") _ GLsizei.IN("count", "the number of strings in the array"),
-		mods(const, PointerArray(GLcharARB_p, "string", "count", "length")) _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
+		mods(const, PointerArray(GLcharARB_p, "string", "length")) _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
 		mods(const, nullable) _ GLint_p.IN(
 			"length",
 			"""

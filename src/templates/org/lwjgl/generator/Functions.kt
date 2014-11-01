@@ -241,7 +241,8 @@ class NativeClassFunction(
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
 				val bufferParam = paramMap[autoSize.reference]
-				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoSize(${autoSize.reference})")
+				if ( bufferParam == null )
+					it.error("Buffer reference does not exist: AutoSize(${autoSize.reference})")
 				else {
 					when {
 						bufferParam.nativeType !is PointerType -> it.error("Buffer reference must be a pointer type: AutoSize(${autoSize.reference})")
@@ -260,7 +261,8 @@ class NativeClassFunction(
 			if ( it has AutoType ) {
 				val bufferParamName = it[AutoType].reference
 				val bufferParam = paramMap[bufferParamName]
-				if ( bufferParam == null ) it.error("Buffer reference does not exist: AutoType($bufferParamName)")
+				if ( bufferParam == null )
+					it.error("Buffer reference does not exist: AutoType($bufferParamName)")
 				else when {
 					bufferParam.nativeType !is PointerType                -> it.error("Buffer reference must be a pointer type: AutoType($bufferParamName)")
 					bufferParam.nativeType.mapping != PointerMapping.DATA -> it.error("Pointer reference must have a DATA mapping: AutoType($bufferParamName)")
@@ -279,8 +281,10 @@ class NativeClassFunction(
 				if ( returnMod != returnValue ) {
 					val maxLengthParam = paramMap[returnMod.maxLengthParam]
 					val lengthParam = paramMap[returnMod.lengthParam]
-					if ( maxLengthParam == null ) it.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
-					else if ( lengthParam == null ) it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
+					if ( maxLengthParam == null )
+						it.error("The maxLength parameter does not exist: Return(${returnMod.maxLengthParam})")
+					else if ( lengthParam == null )
+						it.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
 					else when {
 						!maxLengthParam.nativeType.mapping.isSizeType -> it.error("The maxLength parameter must be an integer type: Return(${returnMod.maxLengthParam})")
 						!lengthParam.nativeType.mapping.isSizePointer -> it.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
@@ -289,15 +293,14 @@ class NativeClassFunction(
 			}
 
 			if ( it has PointerArray ) {
-				val countParamName = it[PointerArray].countParam
-				val countParam = paramMap[countParamName]
+				val param = it
+				if ( !hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) } )
+					it.error("An AutoSize for PointerArray parameter does not exist")
+
 				val lengthsParamName = it[PointerArray].lengthsParam
 				val lengthsParam = paramMap[lengthsParamName]
-				if ( countParam == null ) it.error("Count reference does not exist: PointerArray($countParamName)")
-				else when {
-					!countParam.nativeType.mapping.isSizeType                              -> it.error("Count reference must be an integer type: PointerArray($countParamName)")
-					lengthsParam != null && !lengthsParam.nativeType.mapping.isSizePointer -> it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
-				}
+				if ( lengthsParam != null && !lengthsParam.nativeType.mapping.isSizePointer )
+					 it.error("Lengths reference must be an integer pointer type: PointerArray($lengthsParamName)")
 			}
 		}
 	}
@@ -960,7 +963,7 @@ class NativeClassFunction(
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, true)
 
-				val countParam = paramMap[pointerArray.countParam]!!
+				val countParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) }
 				transforms[countParam] = ExpressionTransform("${it.name}.length")
 
 				val vararg = {

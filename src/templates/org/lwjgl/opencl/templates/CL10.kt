@@ -2380,7 +2380,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		AutoSize("strings", "lengths") _ cl_uint.IN("count", "the number of elements in the {@code strings} and {@code lengths} arrays"),
-		mods(const, PointerArray(cl_charUTF8_p, "string", "count", "lengths")) _ cl_charUTF8_pp.IN(
+		mods(const, PointerArray(cl_charUTF8_p, "string", "lengths")) _ cl_charUTF8_pp.IN(
 			"strings",
 			"an array of {@code count} pointers to optionally null-terminated character strings that make up the source code"
 		),
@@ -2443,7 +2443,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"lengths",
 			"an array of the size in bytes of the program binaries to be loaded for devices specified by {@code device_list}."
 		),
-		mods(const, PointerArray(cl_uchar_p, "binary", "num_devices", "lengths")) _ cl_uchar_pp.IN(
+		mods(const, PointerArray(cl_uchar_p, "binary", "lengths")) _ cl_uchar_pp.IN(
 			"binaries",
 			"""
 			an array of pointers to program binaries to be loaded for devices specified by {@code device_list}. For each device given by {@code device_list[i]},

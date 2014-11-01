@@ -1265,7 +1265,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the target program object"),
 		AutoSize("varyings") _ GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-		mods(const, PointerArray(GLcharASCII_p, "varying", "count")) _ GLcharASCII_pp.IN(
+		mods(const, PointerArray(GLcharASCII_p, "varying")) _ GLcharASCII_pp.IN(
 			"varyings",
 			"an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
 		),

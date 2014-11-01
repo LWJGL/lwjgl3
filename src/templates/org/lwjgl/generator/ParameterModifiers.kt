@@ -278,8 +278,6 @@ class PointerArray(
 	val elementType: PointerType,
 	/** The single version parameter name. */
 	val singleName: String,
-	/** The parameter that defines that number of pointers in the array */
-	val countParam: String,
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
 	val lengthsParam: String? = null
 ): ParameterModifier() {
