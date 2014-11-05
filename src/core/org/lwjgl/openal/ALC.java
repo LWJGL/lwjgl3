@@ -12,7 +12,6 @@ import org.lwjgl.system.FunctionProviderLocal;
 import java.nio.ByteBuffer;
 import java.util.*;
 
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
@@ -28,16 +27,16 @@ public final class ALC {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS:
 				libName = "OpenAL32";
-				libNamePlatform = BITS64 ? "OpenAL64.dll" : "OpenAL32.dll";
+				libNamePlatform = "OpenAL32.dll";
 				break;
 			case LINUX:
 				libName = "openal";
-				libNamePlatform = BITS64 ? "libopenal64.so" : "libopenal.so";
+				libNamePlatform = "libopenal.so";
 				break;
 			case MACOSX:
 				libName = "openal";
 				// TODO: Support .framework too?
-				libNamePlatform = "openal.dylib";
+				libNamePlatform = "libopenal.dylib";
 				break;
 			default:
 				throw new IllegalStateException();

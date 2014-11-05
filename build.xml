@@ -15,7 +15,7 @@
 	<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
 
 	<path id="lib.bin">
-		<pathelement path="${lib}/${platform}"/>
+		<pathelement path="${lib}/${platform}/${build.arch}"/>
 		<pathelement path="${bin.native}"/>
 	</path>
 	<property name="lib.bin" refid="lib.bin"/>
@@ -243,7 +243,7 @@
 			destdir="${generated.javadoc}"
 			source="1.7"
 			bootclasspathref="${jdk.boot.classpath}"
-			windowtitle="LWJGL ${version}"
+			windowtitle="LWJGL ${build.version}"
 			encoding="utf8"
 			docencoding="utf8"
 			useexternalfile="true"

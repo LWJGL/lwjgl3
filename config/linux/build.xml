@@ -1,7 +1,7 @@
 <project name="lwjgl native code" basedir="../.." default="compile-native-linux">
 	<import file="../build-definitions.xml"/>
 
-	<property name="system_libs" value="-lm -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm"/>
+	<property name="system_libs" value="-lm -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor"/>
 
 	<condition
 		property="libs"
@@ -10,16 +10,14 @@
 		else
 			="-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs} -L${java.home}/lib/amd64"
 		>
-		<equals arg1="${os.arch}" arg2="x86"/>
+		<equals arg1="${build.arch}" arg2="x86"/>
 	</condition>
 
-	<condition property="libname" value="liblwjgl.so" else="liblwjgl64.so">
-		<equals arg1="${os.arch}" arg2="x86"/>
-	</condition>
+	<property name="libname" value="liblwjgl.so"/>
 
 	<patternset id="link-objects">
 		<include name="${bin.native}/*.o"/>
-		<include name="${lib}/linux/${os.arch}/*.a"/>
+		<include name="${lib}/linux/${build.arch}/*.a"/>
 	</patternset>
 
 	<target name="-link" unless="link-uptodate">
@@ -88,11 +86,16 @@
 
 	<target name="update-platform-dependencies">
 		<mkdir dir="${lib}/linux"/>
-		<mkdir dir="${lib}/linux/amd64"/>
+		<mkdir dir="${lib}/linux/x86"/>
+		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dropbox name="OpenAL32" artifact="linux/libopenal.so" hash="i4zue33q7rs4d7k/s5QZB5Dz0Z" dest="${lib}"/>
-		<update-dropbox name="OpenAL64" artifact="linux/libopenal64.so" hash="i4zue33q7rs4d7k/JT9CEwZjfk" dest="${lib}"/>
-		<update-dropbox name="GLFW64" artifact="linux/amd64/libglfw3.a" hash="i4zue33q7rs4d7k/AABrFIelMeTOCluawbqzQ05va" dest="${lib}"/>
-		<update-dropbox name="libffi64" artifact="linux/amd64/libffi.a" hash="i4zue33q7rs4d7k/4zvqeeywWX" dest="${lib}"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so"/>
+
+		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a"/>
+
+		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
+		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
 	</target>
 </project>

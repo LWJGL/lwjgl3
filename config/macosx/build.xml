@@ -78,7 +78,7 @@
 
 	<patternset id="link-objects">
 		<include name="${bin.native}/*.o"/>
-		<include name="${lib}/macosx/${os.arch}/*.a"/>
+		<include name="${lib}/macosx/${build.arch}/*.a"/>
 	</patternset>
 
 	<property name="macosx-version-min" value="10.7"/>
@@ -157,10 +157,10 @@
 
 	<target name="update-platform-dependencies">
 		<mkdir dir="${lib}/macosx"/>
-		<mkdir dir="${lib}/macosx/x86_64"/>
+		<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dropbox name="OpenAL" artifact="macosx/openal.dylib" hash="i4zue33q7rs4d7k/mjhxw_7sTN" dest="${lib}"/>
-		<update-dropbox name="GLFW" artifact="macosx/x86_64/libglfw3.a" hash="i4zue33q7rs4d7k/AAB49oHxHpZBrqjcOWpKU3YTa" dest="${lib}"/>
-		<update-dropbox name="libffi" artifact="macosx/x86_64/libffi.a" hash="i4zue33q7rs4d7k/1nhPKRljnB" dest="${lib}"/>
+		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib"/>
+		<update-dependency name="glfw3" artifact="x64/libglfw3.a"/>
+		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 	</target>
 </project>

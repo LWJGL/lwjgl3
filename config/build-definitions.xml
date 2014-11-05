@@ -6,13 +6,33 @@
 
 	<fail unless="env.JAVA7_HOME" message="Please set an environment variable named JAVA7_HOME that points to a Java 7 SDK."/>
 
+	<!--
+		MAJOR.MINOR.REVISION
+		[0-9].[0-9].[0-9]+[ab]?
+	-->
+	<property name="build.version" value="3.0.0a"/>
+	<!--
+		This used as the source of binary dependencies. Valid values:
+		- nightly
+			the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
+		- stable
+			the latest nightly build that has been verified to work with LWJGL.
+			this is the default, set the LWJGL_BUILD_TYPE environment variable to override.
+		- release/latest
+			the latest stable build that has been promoted to an official LWJGL release.
+		- release/{build.version}
+			a specific previously released build.
+	 -->
+	<condition property="build.type" value="${env.LWJGL_BUILD_TYPE}" else="stable">
+		<isset property="env.LWJGL_BUILD_TYPE"/>
+	</condition>
+
 	<property name="src" location="src" relative="true"/>
 	<property name="generated" location="generated" relative="false"/>
 	<property name="bin" location="bin" relative="false"/>
 	<property name="lib" location="libs" relative="true"/>
 	<property name="lib.abs" location="${lib}" relative="false"/>
 	<property name="res" location="res" relative="true"/>
-	<property name="version" value="3.0.0"/>
 
 	<property name="src.core" location="${src}/core" relative="true"/>
 	<property name="src.util" location="${src}/util" relative="true"/>
@@ -21,6 +41,8 @@
 
 	<property name="src.native" location="${src}/native" relative="true"/>
 	<property name="src.native.abs" location="${src.native}" relative="false"/>
+
+	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
 
 	<property name="generated.java" location="${generated}/java" relative="true"/>
 	<property name="generated.native" location="${generated}/native" relative="true"/>
@@ -31,10 +53,14 @@
 	<property name="bin.util" location="${bin}/Utilities" relative="true"/>
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
-	<!-- Different location per architecture. This is intentional. -->
-	<property name="bin.native" location="${bin}/lwjgl${os.arch}" relative="true"/>
 
-	<property name="kotlinc" location="${lib}/kotlinc" relative="true"/>
+	<!-- Normalize os.arch -->
+	<condition property="build.arch" value="x64"> <!-- amd64, x86_amd64, etc -->
+		<contains string="${os.arch}" substring="64"/>
+	</condition>
+	<condition property="build.arch" value="x86"> <!-- Assume x86 for everything else -->
+		<not><isset property="build.arch"/></not>
+	</condition>
 
 	<condition property="platform.windows">
 		<os family="Windows"/>
@@ -68,6 +94,9 @@
 		<isset property="platform.macosx"/>
 	</condition>
 
+	<!-- Different location per platform/architecture. This is intentional. -->
+	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
+
 	<macrodef name="update">
 		<attribute name="name"/>
 		<attribute name="url"/>
@@ -92,15 +121,12 @@
 		</sequential>
 	</macrodef>
 
-	<macrodef name="update-dropbox">
+	<macrodef name="update-dependency">
 		<attribute name="name"/>
 		<attribute name="artifact"/>
-		<attribute name="hash"/>
-		<attribute name="dest"/>
 
 		<sequential>
-			<update name="@{name}" url="https://dl.dropboxusercontent.com/sh/@{hash}/@{artifact}" dest="@{dest}/@{artifact}"/>
+			<update name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="${lib}/${platform}/@{artifact}"/>
 		</sequential>
 	</macrodef>
-
 </project>

@@ -2,14 +2,11 @@
 	<import file="../build-definitions.xml"/>
 
 	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib OpenGL32.Lib"/>
-
-	<condition property="dllname" value="lwjgl.dll" else="lwjgl64.dll">
-		<equals arg1="${os.arch}" arg2="x86"/>
-	</condition>
+	<property name="dllname" value="lwjgl.dll"/>
 
 	<patternset id="link-objects">
 		<include name="${bin.native}/*.obj"/>
-		<include name="${lib}/windows/${os.arch}/*.lib"/>
+		<include name="${lib}/windows/${build.arch}/*.lib"/>
 	</patternset>
 
 	<target name="-link" unless="link-uptodate">
@@ -31,6 +28,7 @@
 	<target name="compile-native-windows">
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+			<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
 			<arg line="/c /Wall /WX /wd4996 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
 
 			<arg value="/I${java.home}\..\include"/>
@@ -81,13 +79,15 @@
 	<target name="update-platform-dependencies">
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
-		<mkdir dir="${lib}/windows/amd64"/>
+		<mkdir dir="${lib}/windows/x64"/>
 
-		<update-dropbox name="OpenAL32" artifact="windows/OpenAL32.dll" hash="i4zue33q7rs4d7k/eK66IxClph" dest="${lib}"/>
-		<update-dropbox name="OpenAL64" artifact="windows/OpenAL64.dll" hash="i4zue33q7rs4d7k/th0369so9E" dest="${lib}"/>
-		<update-dropbox name="GLFW32" artifact="windows/x86/glfw3.lib" hash="i4zue33q7rs4d7k/AACQYjNxDUghXyNeOFnjdPfRa" dest="${lib}"/>
-		<update-dropbox name="GLFW64" artifact="windows/amd64/glfw3.lib" hash="i4zue33q7rs4d7k/AACZ4zofheM_VYEHlfi-7Bw3a" dest="${lib}"/>
-		<update-dropbox name="libffi32" artifact="windows/x86/libffi.lib" hash="i4zue33q7rs4d7k/JVf4yjtPk0" dest="${lib}"/>
-		<update-dropbox name="libffi64" artifact="windows/amd64/libffi.lib" hash="i4zue33q7rs4d7k/uxqM_I0jf8" dest="${lib}"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll"/>
+
+		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib"/>
+
+		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
+		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
 	</target>
 </project>
