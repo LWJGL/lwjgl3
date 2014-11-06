@@ -22,13 +22,11 @@
 		</condition>
 
 		<uptodate property="lib-uptodate" srcfile="update-dependencies.xml" targetfile="${lib}/touch.txt"/>
-		<uptodate property="platform-uptodate" srcfile="${config}/${platform}/build.xml" targetfile="${lib}/${platform}/touch.txt"/>
 
 		<condition property="dependencies-uptodate">
 			<and>
 				<isset property="kotlinc-uptodate"/>
 				<isset property="lib-uptodate"/>
-				<isset property="platform-uptodate"/>
 			</and>
 		</condition>
 	</target>
@@ -44,7 +42,6 @@
 	<target name="update-dependencies" description="Updates LWJGL dependencies">
 		<antcall target="-lib-download"/>
 		<antcall target="-kotlinc-download"/>
-		<antcall target="-platform-download"/>
 	</target>
 
 	<!-- Downloads and extracts the Kotlin compiler. -->
@@ -71,13 +68,6 @@
 		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
 
 		<touch file="${lib}/touch.txt" verbose="false"/>
-	</target>
-
-	<!-- Downloads the platform dependencies. -->
-	<target name="-platform-download" unless="platform-uptodate">
-		<ant antfile="${config}/${platform}/build.xml" target="update-platform-dependencies" inheritAll="false"/>
-
-		<touch file="${lib}/${platform}/touch.txt" verbose="false"/>
 	</target>
 
 	<target name="clean" description="Deletes LWJGL dependencies">

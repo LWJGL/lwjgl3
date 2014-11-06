@@ -20,19 +20,6 @@
 		<include name="${lib}/linux/${build.arch}/*.a"/>
 	</patternset>
 
-	<target name="-link" unless="link-uptodate">
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
-			<srcfile/>
-			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
-			<fileset dir=".">
-				<patternset refid="link-objects"/>
-			</fileset>
-		</apply>
-		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
-			<fileset file="${libname}"/>
-		</apply>
-	</target>
-
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -78,24 +65,45 @@
 			</srcfiles>
 		</uptodate>
 
+		<antcall target="-link-if-necessary"/>
+	</target>
+
+	<target name="-link-if-necessary" unless="link-uptodate">
 		<antcall target="-link"/>
 	</target>
 
-	<!-- Bump this to force dependencies to be updated. -->
-	<property name="revision" value="1"/>
-
-	<target name="update-platform-dependencies">
+	<target name="-update-dependencies-x86">
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x86"/>
-		<mkdir dir="${lib}/linux/x64"/>
 
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so"/>
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so"/>
-
 		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a"/>
-
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
+	</target>
+
+	<target name="-update-dependencies-x64">
+		<mkdir dir="${lib}/linux"/>
+		<mkdir dir="${lib}/linux/x64"/>
+
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
+	</target>
+
+	<target name="-update-dependencies">
+		<antcall target="-update-dependencies-${build.arch}"/>
+	</target>
+
+	<target name="-link" depends="-update-dependencies">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
+			<srcfile/>
+			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
+			<fileset dir=".">
+				<patternset refid="link-objects"/>
+			</fileset>
+		</apply>
+		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
+			<fileset file="${libname}"/>
+		</apply>
 	</target>
 </project>

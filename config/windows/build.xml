@@ -9,22 +9,6 @@
 		<include name="${lib}/windows/${build.arch}/*.lib"/>
 	</patternset>
 
-	<target name="-link" unless="link-uptodate">
-		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line="/LD /WX /nologo"/>
-			<srcfile/>
-			<arg line="/Fe${dllname} /link"/>
-			<arg value="/LIBPATH:${java.home}\..\lib"/>
-			<arg value="/OPT:REF"/>
-			<arg value="/OPT:ICF"/>
-			<arg line="/DLL ${libs}"/>
-
-			<fileset dir=".">
-				<patternset refid="link-objects"/>
-			</fileset>
-		</apply>
-	</target>
-
 	<target name="compile-native-windows">
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
@@ -70,24 +54,48 @@
 			</srcfiles>
 		</uptodate>
 
+		<antcall target="-link-if-necessary" />
+	</target>
+
+	<target name="-link-if-necessary" unless="link-uptodate">
 		<antcall target="-link"/>
 	</target>
 
-	<!-- Bump this to force dependencies to be updated. -->
-	<property name="revision" value="1"/>
-
-	<target name="update-platform-dependencies">
+	<target name="-update-dependencies-x86">
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
-		<mkdir dir="${lib}/windows/x64"/>
 
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll"/>
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll"/>
-
 		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib"/>
-
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
+	</target>
+
+	<target name="-update-dependencies-x64">
+		<mkdir dir="${lib}/windows"/>
+		<mkdir dir="${lib}/windows/x64"/>
+
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
+	</target>
+
+	<target name="-update-dependencies">
+		<antcall target="-update-dependencies-${build.arch}"/>
+	</target>
+
+	<target name="-link" depends="-update-dependencies">
+		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
+			<arg line="/LD /WX /nologo"/>
+			<srcfile/>
+			<arg line="/Fe${dllname} /link"/>
+			<arg value="/LIBPATH:${java.home}\..\lib"/>
+			<arg value="/OPT:REF"/>
+			<arg value="/OPT:ICF"/>
+			<arg line="/DLL ${libs}"/>
+
+			<fileset dir=".">
+				<patternset refid="link-objects"/>
+			</fileset>
+		</apply>
 	</target>
 </project>
