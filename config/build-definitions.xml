@@ -97,13 +97,28 @@
 	<!-- Different location per platform/architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
 
+	<macrodef name="quiet">
+		<element name="body" implicit="yes"/>
+		<sequential>
+			<script language="javascript">
+			project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_WARN);
+			</script>
+			<body/>
+			<script language="javascript">
+			project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_INFO);
+			</script>
+		</sequential>
+	</macrodef>
+
 	<macrodef name="update">
 		<attribute name="name"/>
 		<attribute name="url"/>
 		<attribute name="dest"/>
 
 		<sequential>
-			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+			<quiet>
+				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+			</quiet>
 		</sequential>
 	</macrodef>
 
