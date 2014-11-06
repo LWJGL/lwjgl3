@@ -81,6 +81,13 @@
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
+		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
+			<srcfiles dir="${src.templates}" includes="**" />
+		</uptodate>
+		<antcall target="-compile-templates"/>
+	</target>
+
+	<target name="-compile-templates" description="Compiles the Templates module" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.7" target="1.7" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
@@ -113,6 +120,8 @@
 			-->
 		</java>
 		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
+
+		<touch file="${bin}/Templates/touch.txt"/>
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
