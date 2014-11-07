@@ -5,11 +5,15 @@
 
 	<condition
 		property="libs"
-		value
-			="-L/usr/X11R6/lib -L/usr/X11/lib ${system_libs} -L${java.home}/lib/i386"
-		else
-			="-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs} -L${java.home}/lib/amd64"
+		value=
+			"-L/usr/X11R6/lib -L/usr/X11/lib ${system_libs} -L${java.home}/lib/i386"
+		else=
+			"-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs} -L${java.home}/lib/amd64"
 		>
+		<equals arg1="${build.arch}" arg2="x86"/>
+	</condition>
+
+	<condition property="compiler.arch" value="-m32" else="-m64">
 		<equals arg1="${build.arch}" arg2="x86"/>
 	</condition>
 
@@ -25,7 +29,7 @@
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="-c -std=c11 -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
+			<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
 
@@ -97,7 +101,7 @@
 	<target name="-link" depends="-update-dependencies">
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
+			<arg line="-shared ${compiler.arch} -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
 			<fileset dir=".">
 				<patternset refid="link-objects"/>
 			</fileset>

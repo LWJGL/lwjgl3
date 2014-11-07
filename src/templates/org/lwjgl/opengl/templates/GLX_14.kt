@@ -11,7 +11,6 @@ val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
-		"OpenGL.h",
 		"<GL/glx.h>"
 	)
 

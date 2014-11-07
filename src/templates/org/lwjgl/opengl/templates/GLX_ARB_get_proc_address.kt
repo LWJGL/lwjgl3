@@ -11,7 +11,6 @@ val GLX_ARB_get_proc_address = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_ge
 	javaImport("org.lwjgl.system.linux.*")
 
 	nativeImport (
-		"OpenGL.h",
 		"<GL/glx.h>"
 	)
 

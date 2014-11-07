@@ -14,7 +14,6 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 	)
 
 	nativeImport (
-		"OpenGL.h",
 		"<GL/glx.h>"
 	)
 

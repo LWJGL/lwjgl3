@@ -14,7 +14,6 @@ val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_del
 	)
 
 	nativeImport (
-		"OpenGL.h",
 		"<GL/glx.h>"
 	)
 

@@ -14,7 +14,6 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 	)
 
 	nativeImport (
-		"OpenGL.h",
 		"<GL/glx.h>"
 	)
 
