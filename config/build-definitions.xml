@@ -55,11 +55,14 @@
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
 	<!-- Normalize os.arch -->
-	<condition property="build.arch" value="x64" else="x86">
-		<contains string="${os.arch}" substring="64"/>
-	</condition>
 	<condition property="build.arch" value="${env.LWJGL_BUILD_ARCH}">
 		<isset property="env.LWJGL_BUILD_ARCH"/>
+	</condition>
+	<condition property="build.arch" value="x64" else="x86">
+		<and>
+			<not><isset property="build.arch"/></not>
+			<contains string="${os.arch}" substring="64"/>
+		</and>
 	</condition>
 
 	<condition property="platform.windows">
