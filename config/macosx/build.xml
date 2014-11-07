@@ -13,68 +13,27 @@
 		<isset property="xcode-error"/>
 	</condition>
 
-	<property name="sdk_path" value="Platforms/MacOSX.platform/Developer/SDKs"/>
-	<property name="jvm_headers_path" value="System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
-
-	<!-- Choose a JavaVM.framework -->
-	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
-		<and>
-			<not>
-				<isset property="javavmroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.9.sdk/${jvm_headers_path}" type="dir"/>
-		</and>
-	</condition>
-	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
-		<and>
-			<not>
-				<isset property="javavmroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.8.sdk/${jvm_headers_path}" type="dir"/>
-		</and>
-	</condition>
-	<condition property="javavmroot" value="${developer_path}/${sdk_path}/MacOSX10.7.sdk">
-		<and>
-			<not>
-				<isset property="javavmroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk/${jvm_headers_path}" type="dir"/>
-		</and>
-	</condition>
-	<condition property="javavmroot" value="">
-		<and>
-			<not>
-				<isset property="javavmroot"/>
-			</not>
-			<available file="/${jvm_headers_path}" type="dir"/>
-		</and>
-	</condition>
-
 	<!-- Choose a MacOSX SDK -->
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.9.sdk">
-		<and>
-			<not>
-				<isset property="sdkroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.9.sdk" type="dir"/>
-		</and>
-	</condition>
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.8.sdk">
-		<and>
-			<not>
-				<isset property="sdkroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.8.sdk" type="dir"/>
-		</and>
-	</condition>
-	<condition property="sdkroot" value="${developer_path}/${sdk_path}/MacOSX10.7.sdk">
-		<and>
-			<not>
-				<isset property="sdkroot"/>
-			</not>
-			<available file="${developer_path}/${sdk_path}/MacOSX10.7.sdk" type="dir"/>
-		</and>
-	</condition>
+	<macrodef name="find-sdkroot">
+		<attribute name="version"/>
+
+		<sequential>
+			<condition property="sdkroot" value="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk">
+				<and>
+					<not><isset property="sdkroot"/></not>
+					<available file="${developer_path}/Platforms/MacOSX.platform/Developer/SDKs/MacOSX@{version}.sdk" type="dir"/>
+				</and>
+			</condition>
+		</sequential>
+	</macrodef>
+
+	<property name="compiler" value="clang"/> <!-- Use clang on 10.8 or newer -->
+	<find-sdkroot version="10.10"/>
+	<find-sdkroot version="10.9"/>
+	<find-sdkroot version="10.8"/>
+	<condition property="compiler" value="gcc"><not><isset property="sdkroot"/></not></condition> <!-- Use gcc on 10.7 -->
+	<find-sdkroot version="10.7"/>
+	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
 	<patternset id="link-objects">
 		<include name="${bin.native}/*.o"/>
@@ -88,9 +47,9 @@
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
-		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+		<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
-			<arg value="-I${javavmroot}/${jvm_headers_path}"/>
+			<arg value="-I${sdkroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
 
 			<!-- Paths relative to dir -->
 			<arg value="-I${src.native.abs}/system"/>
@@ -165,9 +124,5 @@
 				<patternset refid="link-objects"/>
 			</fileset>
 		</apply>
-		<!--<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol Strip">
-			<arg line="-S -X"/>
-			<fileset file="${libname}"/>
-		</apply>-->
 	</target>
 </project>
