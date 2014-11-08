@@ -66,7 +66,15 @@ class ConstantBlock<T>(
 	private fun PrintWriter.generateBlock() {
 		println(documentation)
 
-		println("\tpublic static final ${constantType.javaType.getSimpleName()}")
+		print("\tpublic static final ${constantType.javaType.getSimpleName()}")
+
+		val indent: String
+		if ( constants.size == 1 ) {
+			indent = " ";
+		} else {
+			print('\n')
+			indent = "\t\t";
+		}
 
 		// Find maximum constant name length
 		val alignment = constants.map {
@@ -78,15 +86,15 @@ class ConstantBlock<T>(
 		constants.forEachWithMore { (it, more) ->
 			if ( more )
 				println(',')
-			printConstant(it, alignment)
+			printConstant(it, indent, alignment)
 		}
 		println(";\n")
 	}
 
-	private fun PrintWriter.printConstant(constant: Constant<T>, alignment: Int) {
+	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
 		val (name, value) = constant
 
-		print("\t\t${getConstantName(name)}")
+		print("$indent${getConstantName(name)}")
 		for ( i in 0..(alignment - name.size - 1) )
 			print(' ')
 
