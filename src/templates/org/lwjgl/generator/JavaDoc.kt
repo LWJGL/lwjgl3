@@ -64,7 +64,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun String.toJavaDoc(paramsIn: Stream<Parameter>, returnDoc: String): String {
+fun String.toJavaDoc(paramsIn: Stream<Parameter>, returnDoc: String, since: String): String {
 	// TODO: This is shit, optimize
 	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut }
 	if ( params.isEmpty() && returnDoc.isEmpty() )
@@ -96,6 +96,12 @@ fun String.toJavaDoc(paramsIn: Stream<Parameter>, returnDoc: String): String {
 		builder append "\n\t *"
 		builder append "\n\t * @return "
 		builder append returnDoc.cleanup("\t *         ")
+	}
+
+	if ( !since.isEmpty() ) {
+		builder append "\n\t *"
+		builder append "\n\t * @since "
+		builder append since
 	}
 
 	builder append "\n\t */"

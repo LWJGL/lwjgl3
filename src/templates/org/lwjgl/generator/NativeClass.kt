@@ -291,12 +291,13 @@ class NativeClass(
 		return block
 	}
 
-	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "") = ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc)
-	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = ""): NativeClassFunction {
+	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
+		ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc, since = since)
+	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = processDocumentation(documentation.toJavaDoc(parameters.stream(), returnDoc)),
+			documentation = processDocumentation(documentation.toJavaDoc(parameters.stream(), returnDoc, since)),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
