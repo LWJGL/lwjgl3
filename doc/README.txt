@@ -5,6 +5,7 @@ LWJGL is organized in modules, described below:
 Module: Core
 	Description: The LWJGL core.
 	Module Dependencies: n/a (but the Generator has to execute successfully first)
+	Library Dependencies: disruptor (OSX only, if GLFW is used)
 	Structure:
 		* src/core
 		* src/native
@@ -18,7 +19,7 @@ Module: Utilities
 		* src/util
 
 Module: Templates
-	Description: The source code Generator and the templates it uses to defined the native bindings.
+	Description: The source code Generator and the templates it uses to define the native bindings.
 	Module Dependencies: Core
 	Library Dependencies: Kotlin runtime
 	Structure:
@@ -39,7 +40,7 @@ LWJGL uses Ant for the build process, which goes like so:
 2) Run the Generator (ant generate)
 3) Compile Java code (ant compile)
 4) Compile native code for the target platform (ant compile-native)
-5) Create and sign JARs (TBD)
+5) Run tests or demos (ant tests | ant demo -Dclass=<classpath to demo>)
 
 GENERATOR
 ---------
@@ -74,10 +75,27 @@ The config folder contains the LWJGL configuration.
 
 	* Kotlin
 		- config/Templates.kts is the build script used by the Kotlin compiler
-		- External annotations in config/kotlin
-			Because of Kotlin's built-in null-safety and its current beta status, compiling the
-			Generator module requires some external annotations. These are generated through the
-			IntelliJ IDEA gui and placed in the config/kotlin for use by the command-line compiler.
+
+The ANT build can be configured with the following environment variables:
+
+	* JAVA7_HOME (required)
+		This is used as the "bootclasspath" to ensure that the source code is compatible with Java 7.
+	* LWJGL_BUILD_TYPE
+		This is used as the source of binary dependencies. Valid values:
+        - nightly
+            the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
+        - stable
+            the latest nightly build that has been verified to work with LWJGL. This is the default.
+        - release/latest
+            the latest stable build that has been promoted to an official LWJGL release.
+        - release/{build.version}
+            a specific previously released build.
+	* LWJGL_BUILD_ARCH
+		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
+		that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+	* LWJGL_BUILD_OFFLINE
+		Offline build flag. This is useful when working offline, or when custom binary dependencies
+		are used (so they are not overriden). Set to one of true/on/yes to enable.
 
 LIBRARY DEPENDENCIES
 --------------------
@@ -87,6 +105,9 @@ Kotlin
 TestNG
 	* libs/testng.jar
 	* libs/jcommander.jar
+
+Disruptor
+	* libs/disruptor.jar
 
 CODE STYLE
 ----------
