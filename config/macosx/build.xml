@@ -94,7 +94,7 @@
 		<antcall target="-link"/>
 	</target>
 
-	<target name="-update-dependencies">
+	<target name="-update-dependencies" unless="${build.offline}">
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 

@@ -54,15 +54,26 @@
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
-	<!-- Normalize os.arch -->
+	<!--
+		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
+		that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
+	-->
 	<condition property="build.arch" value="${env.LWJGL_BUILD_ARCH}">
 		<isset property="env.LWJGL_BUILD_ARCH"/>
 	</condition>
-	<condition property="build.arch" value="x64" else="x86">
+	<condition property="build.arch" value="x64" else="x86"> <!-- Normalize os.arch -->
 		<and>
 			<not><isset property="build.arch"/></not>
 			<contains string="${os.arch}" substring="64"/>
 		</and>
+	</condition>
+
+	<!--
+		Offline build flag. This is useful when working offline, or when custom binary dependencies
+		are used (so they are not overriden). Set to one of true/on/yes to enable.
+	-->
+	<condition property="build.offline" value="${env.LWJGL_BUILD_OFFLINE}" else="false">
+		<isset property="env.LWJGL_BUILD_OFFLINE"/>
 	</condition>
 
 	<condition property="platform.windows">

@@ -94,7 +94,7 @@
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
 	</target>
 
-	<target name="-update-dependencies">
+	<target name="-update-dependencies" unless="${build.offline}">
 		<antcall target="-update-dependencies-${build.arch}"/>
 	</target>
 

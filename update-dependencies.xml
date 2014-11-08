@@ -39,7 +39,7 @@
 		<antcall target="update-dependencies"/>
 	</target>
 
-	<target name="update-dependencies" description="Updates LWJGL dependencies">
+	<target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
 		<antcall target="-lib-download"/>
 		<antcall target="-kotlinc-download"/>
 	</target>
