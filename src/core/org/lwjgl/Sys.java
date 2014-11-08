@@ -4,9 +4,6 @@
  */
 package org.lwjgl;
 
-import org.lwjgl.system.Platform;
-import org.lwjgl.system.windows.WindowsPlatform;
-
 import java.io.File;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
@@ -22,8 +19,7 @@ public final class Sys {
 	/** The native library name */
 	private static final String JNI_LIBRARY_NAME = "lwjgl";
 
-	private static final Platform platform;
-	private static final String   nativeLibrary;
+	private static final String nativeLibrary;
 
 	/** Current version of library. */
 	public static final int
@@ -36,7 +32,6 @@ public final class Sys {
 
 	static {
 		log("Version " + getVersion());
-		platform = new WindowsPlatform();
 		nativeLibrary = loadLibrary(JNI_LIBRARY_NAME);
 	}
 
@@ -46,11 +41,6 @@ public final class Sys {
 	/** Dummy method to trigger the static initializers. */
 	public static void touch() {
 		// Intentionally empty
-	}
-
-	/** Returns the Platform implementation. */
-	public static Platform getPlatform() {
-		return platform;
 	}
 
 	/** Returns the native LWJGL library file that was loaded. */
