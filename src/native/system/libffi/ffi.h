@@ -1,5 +1,5 @@
 /* -----------------------------------------------------------------*-C-*-
-   libffi 3.0.14-rc0 - Copyright (c) 2011 Anthony Green
+   libffi 3.1.1 - Copyright (c) 2011, 2014 Anthony Green
                     - Copyright (c) 1996-2003, 2007, 2008 Red Hat, Inc.
 
    Permission is hereby granted, free of charge, to any person
@@ -91,7 +91,7 @@ extern "C" {
 
 #ifndef LIBFFI_ASM
 
-#ifdef _MSC_VER
+#if defined(_MSC_VER) && !defined(__clang__)
 #define __attribute__(X)
 #endif
 
@@ -243,6 +243,11 @@ typedef struct {
   FFI_EXTRA_CIF_FIELDS;
 #endif
 } ffi_cif;
+
+#if 0
+/* Used to adjust size/alignment of ffi types.  */
+void ffi_prep_types (ffi_abi abi);
+#endif
 
 /* Used internally, but overridden by some architectures */
 ffi_status ffi_prep_cif_core(ffi_cif *cif,
