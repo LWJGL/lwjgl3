@@ -248,6 +248,7 @@
 	</target>
 
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
+		<delete dir="${generated.javadoc}"/>
 		<javadoc
 			destdir="${generated.javadoc}"
 			source="1.7"
