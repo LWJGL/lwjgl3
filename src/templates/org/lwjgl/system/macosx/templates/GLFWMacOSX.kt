@@ -21,23 +21,41 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix =
 
 	CGDirectDisplayID.func(
 		"GetCocoaMonitor",
-	    "Returns the {@code CGDirectDisplayID} of the specified monitor.",
+	    """
+	    Returns the ${code("CGDirectDisplayID")} of the specified monitor.
 
-	    GLFWmonitor.IN("monitor", "the GLFW monitor")
+	    Note: This function may be called from any thread. Access is not synchronized.
+	    """,
+
+	    GLFWmonitor.IN("monitor", "the GLFW monitor"),
+	    // TODO: kCGNullDirectDisplay
+	    returnDoc = "The ${code("CGDirectDisplayID")} of the specified monitor, or kCGNullDirectDisplay` if an error occurred.",
+	    since = "GLFW 3.1"
 	)
 
 	id.func(
 		"GetCocoaWindow",
-		"Returns the ${code("NSWindow")} of the given GLFW window.",
+		"""
+		Returns the ${code("NSWindow")} of the given GLFW window.
 
-		GLFWwindow.IN("window", "the GLFW window")
+		Note: This function may be called from any thread. Access is not synchronized.
+		""",
+
+		GLFWwindow.IN("window", "the GLFW window"),
+		returnDoc = "The ${code("NSWindow")} of the specified window, or nil if an error occurred.",
+		since = "GLFW 3.0"
 	)
 
 	id.func(
 		"GetNSGLContext",
-		"Returns the ${code("NSOpenGLContext")} of the given GLFW window.",
+		"""
+		Returns the ${code("NSOpenGLContext")} of the given GLFW window.
 
-		GLFWwindow.IN("window", "the GLFW window")
+		Note: This function may be called from any thread. Access is not synchronized.
+		""",
+
+		GLFWwindow.IN("window", "the GLFW window"),
+		returnDoc = "The ${code("NSOpenGLContext")} of the specified window, or nil if an error occurred.",
+		since = "GLFW 3.0"
 	)
-
 }
