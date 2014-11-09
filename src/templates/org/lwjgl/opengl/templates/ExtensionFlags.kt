@@ -711,7 +711,7 @@ val KHR_texture_compression_astc_hdr = EXT_FLAG.nativeClassGL("KHR_texture_compr
 		"""
 		When true, the $registryLink extension is supported.
 
-		This extension corresponds to the ASTC HDR Profile, see ${KHR_texture_compression_astc_ldr.cap} for details.
+		This extension corresponds to the ASTC HDR Profile, see ${KHR_texture_compression_astc_ldr.link} for details.
 		"""
 }
 
