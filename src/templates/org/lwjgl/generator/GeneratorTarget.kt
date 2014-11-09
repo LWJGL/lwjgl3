@@ -120,7 +120,7 @@ abstract class GeneratorTarget(
 		private val LINKS: Pattern = {
 			val JAVA = """\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*(?:\.\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)*"""
 			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
-			Pattern.compile("""($JAVA)?(?<!&)(@?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
+			Pattern.compile("""($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
 		}()
 	}
 
@@ -186,28 +186,33 @@ abstract class GeneratorTarget(
 		do {
 			buffer.append(documentation, lastEnd, matcher.start())
 
-			val className = matcher.group(1)
 			/*
 			# - normal link, apply prefix
 			## - custom link, do not transform
 			@# or @## - like above, but add "see " in front
+			\# - escape, replace with #
 			 */
 			val linkMethod = matcher.group(2)!!
-			val classElement = matcher.group(3)!!
+			if ( linkMethod[0] == '\\' ) {
+				buffer append matcher.group().replace("\\#", "#")
+			} else {
+				if ( linkMethod[0] == '@' )
+					buffer append "see "
 
-			if ( linkMethod[0] == '@' )
-				buffer append "see "
+				val className = matcher.group(1)
+				val classElement = matcher.group(3)!!
 
-			val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
-			val prefix = if ( link == LinkType.FIELD ) prefixConstant else prefixMethod
-			buffer append when ( linkMethod.count { it == '#' } ) {
-				1    -> link.create(this.className, prefix, className, classElement, custom = false)
-				2    ->
-					if ( className == null && link == LinkType.FIELD )
-						"{@link $classElement}"
-					else
-						link.create(this.className, prefix, className, classElement, custom = true)
-				else -> throw IllegalStateException("Unsupported link type: $link")
+				val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
+				val prefix = if ( link == LinkType.FIELD ) prefixConstant else prefixMethod
+				buffer append when ( linkMethod.count { it == '#' } ) {
+					1    -> link.create(this.className, prefix, className, classElement, custom = false)
+					2    ->
+						if ( className == null && link == LinkType.FIELD )
+							"{@link $classElement}"
+						else
+							link.create(this.className, prefix, className, classElement, custom = true)
+					else -> throw IllegalStateException("Unsupported link type: $link")
+				}
 			}
 
 			lastEnd = matcher.end()
