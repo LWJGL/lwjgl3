@@ -10,6 +10,7 @@ import org.lwjgl.Sys;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.system.glfw.ErrorCallback;
 import org.lwjgl.system.glfw.GLFWvidmode;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
@@ -35,6 +36,8 @@ public class Gears extends AbstractGears {
 	protected void init() {
 		Sys.touch();
 
+		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 
@@ -53,6 +56,8 @@ public class Gears extends AbstractGears {
 		int HEIGHT = 300;
 
 		window = glfwCreateWindow(WIDTH, HEIGHT, "GLFW Gears Demo", NULL, NULL);
+		if ( window == NULL )
+			throw new RuntimeException("Failed to create the GLFW window");
 
 		WindowCallback.set(window, new WindowCallbackAdapter() {
 			@Override

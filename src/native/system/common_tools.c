@@ -47,21 +47,30 @@ inline void detachCurrentThread(void) {
 // thread-local value.
 
 #ifdef LWJGL_WINDOWS
-	__declspec(thread) JNIEnv* envTLS = NULL;
+	#include <WindowsLWJGL.h>
+	DWORD envTLS = TLS_OUT_OF_INDEXES;
 
-	static inline void envTLSInit(void) {}
-	static inline void envTLSDestroy(void) {}
+	static inline void envTLSInit(void) {
+		envTLS = TlsAlloc();
+		if ( envTLS == TLS_OUT_OF_INDEXES )
+			fprintf(stderr, "Failed to allocate TLS for JNIEnv.");
+	}
+
+	static inline void envTLSDestroy(void) {
+		TlsFree(envTLS);
+	}
 
 	JNIEnv* envTLSGet(void) {
 		JNIEnv* env = getThreadEnv();
     	if ( env == NULL )
     	    env = attachCurrentThreadAsDaemon();
 
-		return envTLS = env;
+		TlsSetValue(envTLS, (LPVOID)env);
+		return env;
 	}
 
 	inline JNIEnv* getEnv(void) {
-		JNIEnv* env = envTLS;
+		JNIEnv* env = (JNIEnv*)TlsGetValue(envTLS);
 		if ( env == NULL )
 			env = envTLSGet();
 		return env;
@@ -71,7 +80,8 @@ inline void detachCurrentThread(void) {
 	pthread_key_t envTLS = 0;
 
 	static inline void envTLSInit(void) {
-		pthread_key_create(&envTLS, NULL);
+		if ( pthread_key_create(&envTLS, NULL) != 0 )
+			fprintf(stderr, "Failed to allocate TLS for JNIEnv.");
 	}
 
 	static inline void envTLSDestroy(void) {
