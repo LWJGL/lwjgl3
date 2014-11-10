@@ -8,6 +8,7 @@ import org.lwjgl.system.DynamicLinkLibrary;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
 /** Implements a {@link DynamicLinkLibrary} on the Linux OS. */
@@ -20,9 +21,14 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 	public LinuxLibrary(String name) {
 		this.name = name;
 
-		this.handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
-		if ( handle == 0 ) // TODO: better error handling
+		long handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
+		if ( handle == NULL && name.endsWith(".so") )
+			handle = dlopen(name + ".1", RTLD_LAZY | RTLD_GLOBAL);
+
+		if ( handle == NULL ) // TODO: better error handling
 			throw new RuntimeException("Failed to dynamically load library: " + name);
+
+		this.handle = handle;
 	}
 
 	@Override
