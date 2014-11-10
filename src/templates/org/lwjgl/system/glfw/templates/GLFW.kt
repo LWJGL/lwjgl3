@@ -727,7 +727,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	val WindowHint = void.func(
+	void.func(
 		"WindowHint",
 		"""
 		Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to glfwWindowHint or
@@ -739,7 +739,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		int.IN("target", "the window hint to set"),
 		int.IN("hint", "the new value of the window hint"),
 		since = "GLFW 2.2"
-	).javaDocLink
+	)
 
 	Code(
 		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
