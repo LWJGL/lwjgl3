@@ -407,6 +407,73 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"DONT_CARE" _ -1
 	)
 
+	// [ OpenGL ]
+
+	val PixelFormatHints = IntConstant.block(
+		"PixelFormat hints.",
+
+		"RED_BITS" _ 0x00021001,
+		"GREEN_BITS" _ 0x00021002,
+		"BLUE_BITS" _ 0x00021003,
+		"ALPHA_BITS" _ 0x00021004,
+		"DEPTH_BITS" _ 0x00021005,
+		"STENCIL_BITS" _ 0x00021006,
+		"ACCUM_RED_BITS" _ 0x00021007,
+		"ACCUM_GREEN_BITS" _ 0x00021008,
+		"ACCUM_BLUE_BITS" _ 0x00021009,
+		"ACCUM_ALPHA_BITS" _ 0x0002100A,
+		"AUX_BUFFERS" _ 0x0002100B,
+		"STEREO" _ 0x0002100C,
+		"SAMPLES" _ 0x0002100D,
+		"SRGB_CAPABLE" _ 0x0002100E,
+		"REFRESH_RATE" _ 0x0002100F,
+		"DOUBLE_BUFFER" _ 0x00021010
+	).javaDocLinks
+
+	val ClientAPIHints = IntConstant.block(
+		"Client API hints.",
+
+		"CLIENT_API" _ 0x00022001,
+		"CONTEXT_VERSION_MAJOR" _ 0x00022002,
+		"CONTEXT_VERSION_MINOR" _ 0x00022003,
+		"CONTEXT_REVISION" _ 0x00022004,
+		"CONTEXT_ROBUSTNESS" _ 0x00022005,
+		"OPENGL_FORWARD_COMPAT" _ 0x00022006,
+		"OPENGL_DEBUG_CONTEXT" _ 0x00022007,
+		"OPENGL_PROFILE" _ 0x00022008,
+		"CONTEXT_RELEASE_BEHAVIOR" _ 0x00022009
+	).javaDocLinks
+
+	val ClientAPIValues = IntConstant.block(
+		"Values for the #CLIENT_API hint.",
+
+		"OPENGL_API" _ 0x00030001,
+		"OPENGL_ES_API" _ 0x00030002
+	).javaDocLinks
+
+	val ContextRobustnessValues = IntConstant.block(
+		"Values for the #CONTEXT_ROBUSTNESS hint.",
+
+		"NO_ROBUSTNESS" _ 0,
+		"NO_RESET_NOTIFICATION" _ 0x00031001,
+		"LOSE_CONTEXT_ON_RESET" _ 0x00031002
+	).javaDocLinks
+
+	val OpenGLProfileValues = IntConstant.block(
+		"Values for the #OPENGL_PROFILE hint.",
+
+		"OPENGL_ANY_PROFILE" _ 0,
+		"OPENGL_CORE_PROFILE" _ 0x00032001,
+		"OPENGL_COMPAT_PROFILE" _ 0x00032002
+	).javaDocLinks
+
+	val ContextReleaseBehaviorValues = IntConstant.block(
+		"Values for the #CONTEXT_RELEASE_BEHAVIOR hint.",
+
+		"ANY_RELEASE_BEHAVIOR" _ 0,
+		"RELEASE_BEHAVIOR_FLUSH" _ 0x00035001,
+		"RELEASE_BEHAVIOR_NONE" _ 0x00035002
+	).javaDocLinks
 
 	val Init = (Code(
 		javaInit = statement("\t\tSys.touch();\n\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();")
@@ -720,7 +787,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"DefaultWindowHints",
 		"""
-		Resets all window hints to their default values.
+		Resets all window hints to their default values. See #WindowHint() for details.
 
 		This function may only be called from the main thread.
 		""",
@@ -733,10 +800,49 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to glfwWindowHint or
 		#DefaultWindowHints(), or until the library is terminated.
 
+		<h3>Supported and default values</h3>
+		${table(
+			tr(th("Name"), th("Default value"), th("Supported values")),
+
+		    tr(td("#RESIZABLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#VISIBLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#DECORATED"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#AUTO_ICONIFY"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#FLOATING"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+
+		    tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#BLUE_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#ALPHA_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#DEPTH_BITS"), td("24"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#STENCIL_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#ACCUM_RED_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#ACCUM_GREEN_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#ACCUM_BLUE_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#ACCUM_ALPHA_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#AUX_BUFFERS"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#SAMPLES"), td("0"), td("0 to Integer##MAX_VALUE")),
+		    tr(td("#REFRESH_RATE"), td("0"), td("0 to Integer##MAX_VALUE")),
+
+		    tr(td("#STEREO"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#SRGB_CAPABLE"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+
+		    tr(td("#CLIENT_API"), td("#OPENGL_API"), td(ClientAPIValues)),
+		    tr(td("#CONTEXT_VERSION_MAJOR"), td("1"), td("Any valid major version number of the chosen client API")),
+		    tr(td("#CONTEXT_VERSION_MINOR"), td("0"), td("Any valid minor version number of the chosen client API")),
+
+		    tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
+		    tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
+
+		    tr(td("#OPENGL_FORWARD_COMPAT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#OPENGL_DEBUG_CONTEXT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+		    tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
+		)}
+
 		This function may only be called from the main thread.
 		""",
 
-		int.IN("target", "the window hint to set"),
+		int.IN("target", "the window hint to set", "#RESIZABLE #VISIBLE #DECORATED $ClientAPIHints $PixelFormatHints"),
 		int.IN("hint", "the new value of the window hint"),
 		since = "GLFW 2.2"
 	)
@@ -1868,72 +1974,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	// [ OpenGL ]
-
-	IntConstant.block(
-		"PixelFormat hints.",
-
-		"RED_BITS" _ 0x00021001,
-		"GREEN_BITS" _ 0x00021002,
-		"BLUE_BITS" _ 0x00021003,
-		"ALPHA_BITS" _ 0x00021004,
-		"DEPTH_BITS" _ 0x00021005,
-		"STENCIL_BITS" _ 0x00021006,
-		"ACCUM_RED_BITS" _ 0x00021007,
-		"ACCUM_GREEN_BITS" _ 0x00021008,
-		"ACCUM_BLUE_BITS" _ 0x00021009,
-		"ACCUM_ALPHA_BITS" _ 0x0002100A,
-		"AUX_BUFFERS" _ 0x0002100B,
-		"STEREO" _ 0x0002100C,
-		"SAMPLES" _ 0x0002100D,
-		"SRGB_CAPABLE" _ 0x0002100E,
-		"REFRESH_RATE" _ 0x0002100F,
-		"DOUBLE_BUFFER" _ 0x00021010
-	)
-
-	IntConstant.block(
-		"Client API hints.",
-
-		"CLIENT_API" _ 0x00022001,
-		"CONTEXT_VERSION_MAJOR" _ 0x00022002,
-		"CONTEXT_VERSION_MINOR" _ 0x00022003,
-		"CONTEXT_REVISION" _ 0x00022004,
-		"CONTEXT_ROBUSTNESS" _ 0x00022005,
-		"OPENGL_FORWARD_COMPAT" _ 0x00022006,
-		"OPENGL_DEBUG_CONTEXT" _ 0x00022007,
-		"OPENGL_PROFILE" _ 0x00022008,
-	    "CONTEXT_RELEASE_BEHAVIOR" _ 0x00022009
-	)
-
-	IntConstant.block(
-		"Values for the #CLIENT_API hint.",
-
-		"OPENGL_API" _ 0x00030001,
-		"OPENGL_ES_API" _ 0x00030002
-	)
-
-	IntConstant.block(
-		"Values for the #CONTEXT_ROBUSTNESS hint.",
-
-		"NO_ROBUSTNESS" _ 0,
-		"NO_RESET_NOTIFICATION" _ 0x00031001,
-		"LOSE_CONTEXT_ON_RESET" _ 0x00031002
-	)
-
-	IntConstant.block(
-		"Values for the #OPENGL_PROFILE hint.",
-
-		"OPENGL_ANY_PROFILE" _ 0,
-		"OPENGL_CORE_PROFILE" _ 0x00032001,
-		"OPENGL_COMPAT_PROFILE" _ 0x00032002
-	)
-
-	IntConstant.block(
-		"Values for the #CONTEXT_RELEASE_BEHAVIOR hint.",
-
-		"ANY_RELEASE_BEHAVIOR" _ 0,
-		"RELEASE_BEHAVIOR_FLUSH" _ 0x00035001,
-		"RELEASE_BEHAVIOR_NONE" _ 0x00035002
-	)
 
 	void.func(
 		"MakeContextCurrent",
