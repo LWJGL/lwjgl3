@@ -194,13 +194,10 @@ public final class GL {
 		int minorVersion;
 
 		// Try the 3.0+ version query first
+		__buffer.intParam(0, 0, 0);
 		nglGetIntegerv(GL_MAJOR_VERSION, __buffer.address(), GetIntegerv);
-		errorCode = nglGetError(GetError);
-		if ( errorCode == GL_NO_ERROR ) {
+		if ( nglGetError(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
 			// We're on an 3.0+ context.
-			majorVersion = __buffer.intValue(0);
-			assert 3 <= majorVersion;
-
 			nglGetIntegerv(GL_MINOR_VERSION, __buffer.address(), GetIntegerv);
 			minorVersion = __buffer.intValue(0);
 		} else {
