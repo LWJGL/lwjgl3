@@ -455,7 +455,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		const _ ALfloat_p.IN("values", "the parameter values")
+		mods(Check(1), const) _ ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid.func(
@@ -603,7 +603,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"SourcePausev",
 		"Pointer version of $alSourcePause.",
 
-		ALsizei.IN("n", "the number of sources to pause"),
+		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to pause"),
 		const _ ALuint_p.IN("sources", "the sources to pause")
 	)
 
@@ -611,7 +611,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"SourceStopv",
 		"Pointer version of $alSourceStop.",
 
-		ALsizei.IN("n", "the number of sources to stop"),
+		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to stop"),
 		const _ ALuint_p.IN("sources", "the sources to stop")
 	)
 
@@ -619,7 +619,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"SourceRewindv",
 		"Pointer version of $alSourceRewind.",
 
-		ALsizei.IN("n", "the number of sources to rewind"),
+		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to rewind"),
 		const _ ALuint_p.IN("sources", "the sources to rewind")
 	)
 
