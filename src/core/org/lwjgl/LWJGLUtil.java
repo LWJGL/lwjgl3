@@ -314,7 +314,7 @@ public final class LWJGLUtil {
 	 */
 	public static String[] getLibraryPaths(ClassLoader classloader, String libname, String... platform_lib_names) {
 		// need to pass path of possible locations of library to native side
-		List<String> possible_paths = new ArrayList<>();
+		List<String> possible_paths = new ArrayList<String>();
 
 		String classloader_path = getPathFromClassLoader(libname, classloader);
 		if ( classloader_path != null ) {
@@ -532,7 +532,7 @@ public final class LWJGLUtil {
 	 */
 	public static Map<Integer, String> getClassTokens(TokenFilter filter, Map<Integer, String> target, Iterable<Class<?>> tokenClasses) {
 		if ( target == null )
-			target = new HashMap<>(64);
+			target = new HashMap<Integer, String>(64);
 
 		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 

@@ -48,7 +48,7 @@ public class CLDevice extends PointerWrapper {
 	 * @return the {@link CLCapabilities instance}
 	 */
 	public static CLCapabilities createCapabilities(long cl_device_id, CLCapabilities platformCapabilities) {
-		Set<String> supportedExtensions = new HashSet<>(32);
+		Set<String> supportedExtensions = new HashSet<String>(32);
 
 		// Parse DEVICE_EXTENSIONS string
 		String extensionsString = clGetDeviceInfoStringASCII(cl_device_id, CL_DEVICE_EXTENSIONS);

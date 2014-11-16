@@ -4,8 +4,6 @@
 	<!-- ================================================================== -->
 	<property environment="env"/>
 
-	<fail unless="env.JAVA7_HOME" message="Please set an environment variable named JAVA7_HOME that points to a Java 7 SDK."/>
-
 	<!--
 		MAJOR.MINOR.REVISION
 		[0-9].[0-9].[0-9]+[ab]?

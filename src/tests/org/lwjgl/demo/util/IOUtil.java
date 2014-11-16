@@ -55,17 +55,22 @@ public final class IOUtil {
 		if ( sourceURL == null )
 			throw new FileNotFoundException(resource);
 
-		try (
-			InputStream source = sourceURL.openStream();
-			ReadableByteChannel rbc = Channels.newChannel(source)
-		) {
-			while ( true ) {
-				int bytes = rbc.read(buffer);
-				if ( bytes == -1 )
-					break;
-				if ( buffer.remaining() == 0 )
-					buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+		InputStream source = sourceURL.openStream();
+		try {
+			ReadableByteChannel rbc = Channels.newChannel(source);
+			try {
+				while ( true ) {
+					int bytes = rbc.read(buffer);
+					if ( bytes == -1 )
+						break;
+					if ( buffer.remaining() == 0 )
+						buffer = resizeBuffer(buffer, buffer.capacity() * 2);
+				}
+			} finally {
+				rbc.close();
 			}
+		} finally {
+			source.close();
 		}
 
 		buffer.flip();
@@ -86,11 +91,9 @@ public final class IOUtil {
 		if ( sourceURL == null )
 			throw new FileNotFoundException(file);
 
-		try (ImageInputStream input = ImageIO.createImageInputStream(sourceURL.openStream())) {
+		ImageInputStream input = ImageIO.createImageInputStream(sourceURL.openStream());
+		try {
 			ImageReader reader = ImageIO.getImageReaders(input).next();
-
-			final ByteBuffer pixels;
-
 			try {
 				reader.setInput(input);
 
@@ -100,7 +103,7 @@ public final class IOUtil {
 				ImageTypeSpecifier type = reader.getImageTypes(0).next();
 				SampleModel sm = type.getColorModel().createCompatibleSampleModel(width, height);
 
-				pixels = createByteBuffer(width * height * sm.getNumDataElements());
+				final ByteBuffer pixels = createByteBuffer(width * height * sm.getNumDataElements());
 
 				ImageReadParam param = reader.getDefaultReadParam();
 				param.setDestination(new BufferedImage(type.getColorModel(), new ByteBufferWritableRaster(
@@ -125,6 +128,8 @@ public final class IOUtil {
 			} finally {
 				reader.dispose();
 			}
+		} finally {
+			input.close();
 		}
 	}
 

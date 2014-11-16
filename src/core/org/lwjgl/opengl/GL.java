@@ -33,7 +33,7 @@ public final class GL {
 
 	private static FunctionProvider functionProvider;
 
-	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<>();
+	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
 
 	static {
 		create();
@@ -224,7 +224,7 @@ public final class GL {
 			{ 0, 1, 2, 3, 4, 5 },   // OpenGL 4
 		};
 
-		Set<String> supportedExtensions = new HashSet<>(128);
+		Set<String> supportedExtensions = new HashSet<String>(128);
 
 		for ( int major = 1; major <= GL_VERSIONS.length; major++ ) {
 			for ( int minor : GL_VERSIONS[major - 1] ) {

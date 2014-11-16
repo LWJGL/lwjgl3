@@ -12,8 +12,6 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.nio.ByteBuffer;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -132,16 +130,18 @@ public class LibFFITest {
 		// dlopen cannot find Sys.getNativeLibrary(), so resolve the path manually.
 		String library = System.mapLibraryName(Sys.getNativeLibrary());
 		String[] libPaths = System.getProperty("org.lwjgl.librarypath", System.getProperty("java.library.path")).split(File.pathSeparator);
-		Path libPath = null;
+		String libPath = null;
 		for ( String path : libPaths ) {
-			Path p = Paths.get(path, library);
-			if ( p.toFile().exists() )
-				libPath = Paths.get("").toAbsolutePath().relativize(p);
+			File file = new File(path + File.separator + library);
+			if ( file.exists() ) {
+				libPath = file.getPath();
+				break;
+			}
 		}
 		if ( libPath == null )
 			throw new IllegalStateException("Could not resolve LWJGL library path.");
 
-		DynamicLinkLibrary lib = apiCreateLibrary(libPath.toString());
+		DynamicLinkLibrary lib = apiCreateLibrary(libPath);
 
 		long glfwGetWindowSize = lib.getFunctionAddress("Java_org_lwjgl_system_glfw_GLFW_nglfwGetWindowSize");
 		if ( glfwGetWindowSize == NULL )

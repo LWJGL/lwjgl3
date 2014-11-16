@@ -72,7 +72,7 @@ import static org.lwjgl.system.glfw.GLFW.*;
 
 public final class CLGLInteropDemo {
 
-	private static final Set<String> params = new HashSet<>(8);
+	private static final Set<String> params = new HashSet<String>(8);
 
 	// max per pixel iterations to compute the fractal
 	private static int maxIterations = 500;

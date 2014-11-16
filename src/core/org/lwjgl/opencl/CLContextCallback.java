@@ -82,7 +82,7 @@ public interface CLContextCallback {
 		};
 
 		// Map from cl_context to CLContextCallback global reference.
-		private static final Map<Long, Long> contextCallbacks = new HashMap<>(8);
+		private static final Map<Long, Long> contextCallbacks = new HashMap<Long, Long>(8);
 
 		private Util() {
 		}

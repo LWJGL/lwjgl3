@@ -73,7 +73,7 @@ public abstract class WindowCallback {
 		}
 	}
 
-	private static final Set<Long> windows = new HashSet<>();
+	private static final Set<Long> windows = new HashSet<Long>();
 
 	private EnumSet<Event> eventTypes = EnumSet.noneOf(Event.class);
 

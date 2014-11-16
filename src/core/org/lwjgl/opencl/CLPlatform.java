@@ -43,7 +43,7 @@ public class CLPlatform extends PointerWrapper {
 	 * @return the {@link CLCapabilities instance}
 	 */
 	public static CLCapabilities createCapabilities(long cl_platform_id) {
-		Set<String> supportedExtensions = new HashSet<>(32);
+		Set<String> supportedExtensions = new HashSet<String>(32);
 
 		// Parse PLATFORM_EXTENSIONS string
 		String extensionsString = clGetPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_EXTENSIONS);
@@ -187,7 +187,7 @@ public class CLPlatform extends PointerWrapper {
 	}
 
 	private static <T> List<T> filterObjects(long[] objects, Filter<T> filter, Factory<T> factory) {
-		ArrayList<T> list = new ArrayList<>(objects.length);
+		ArrayList<T> list = new ArrayList<T>(objects.length);
 		for ( int i = 0; i < objects.length; i++ ) {
 			T object = factory.create(objects[i]);
 			if ( filter == null || filter.accept(object) )

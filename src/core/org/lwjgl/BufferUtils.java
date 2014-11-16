@@ -24,41 +24,41 @@ public final class BufferUtils {
 	private static BufferAllocator getDefaultAllocator() {
 		String alignment = System.getProperty("org.lwjgl.util.BufferAlign", "default");
 
-		switch ( alignment ) {
-			case "page":
-				return new BufferAllocator() {
-					@Override
-					public ByteBuffer malloc(int capacity) {
-						return createAlignedByteBufferPage(capacity);
-					}
-				};
-			case "cache-line":
-				return new BufferAllocator() {
-					@Override
-					public ByteBuffer malloc(int capacity) {
-						return createAlignedByteBufferCacheLine(capacity);
-					}
-				};
-			case "default":
-				return new BufferAllocator() {
-					@Override
-					public ByteBuffer malloc(int capacity) {
-						return createUnalignedByteBuffer(capacity);
-					}
-				};
-			default:
-				try {
-					final int bytes = Integer.parseInt(alignment);
-					if ( mathIsPoT(bytes) && 8 < bytes )
-						return new BufferAllocator() {
-							@Override
-							public ByteBuffer malloc(int capacity) {
-								return createAlignedByteBuffer(capacity, bytes);
-							}
-						};
-				} catch (NumberFormatException e) {
-					// ignore
+		if ( "page".equals(alignment) )
+			return new BufferAllocator() {
+				@Override
+				public ByteBuffer malloc(int capacity) {
+					return createAlignedByteBufferPage(capacity);
 				}
+			};
+
+		if ( "cache-line".equals(alignment) )
+			return new BufferAllocator() {
+				@Override
+				public ByteBuffer malloc(int capacity) {
+					return createAlignedByteBufferCacheLine(capacity);
+				}
+			};
+
+		if ( "default".equals(alignment) )
+			return new BufferAllocator() {
+				@Override
+				public ByteBuffer malloc(int capacity) {
+					return createUnalignedByteBuffer(capacity);
+				}
+			};
+
+		try {
+			final int bytes = Integer.parseInt(alignment);
+			if ( mathIsPoT(bytes) && 8 < bytes )
+				return new BufferAllocator() {
+					@Override
+					public ByteBuffer malloc(int capacity) {
+						return createAlignedByteBuffer(capacity, bytes);
+					}
+				};
+		} catch (NumberFormatException e) {
+			// ignore
 		}
 
 		throw new IllegalArgumentException(String.format(

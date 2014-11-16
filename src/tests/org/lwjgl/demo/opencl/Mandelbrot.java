@@ -63,7 +63,7 @@ public class Mandelbrot {
 	}
 
 	/** The event callbacks run on the main thread. We use this queue to apply any changes in the rendering thread. */
-	private final Queue<Runnable> events = new ConcurrentLinkedQueue<>();
+	private final Queue<Runnable> events = new ConcurrentLinkedQueue<Runnable>();
 
 	private final GLFWWindow window;
 
