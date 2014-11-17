@@ -4,10 +4,8 @@
 	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib OpenGL32.Lib"/>
 	<property name="dllname" value="lwjgl.dll"/>
 
-	<patternset id="link-objects">
-		<include name="${bin.native}/*.obj"/>
-		<include name="${lib}/windows/${build.arch}/*.lib"/>
-	</patternset>
+	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
+	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/" includes="*.lib"/>
 
 	<target name="compile-native-windows">
 		<!-- COMPILE -->
@@ -49,9 +47,8 @@
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${dllname}">
-			<srcfiles dir=".">
-				<patternset refid="link-objects"/>
-			</srcfiles>
+			<srcfiles refid="link-objects"/>
+			<srcfiles refid="link-libraries"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary" />
@@ -85,17 +82,12 @@
 
 	<target name="-link" depends="-update-dependencies">
 		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line="/LD /WX /nologo"/>
+			<arg line='/LD /WX /nologo /Fe${dllname}'/>
 			<srcfile/>
-			<arg line="/Fe${dllname} /link"/>
-			<arg value="/LIBPATH:${java.home}\..\lib"/>
-			<arg value="/OPT:REF"/>
-			<arg value="/OPT:ICF"/>
-			<arg line="/DLL ${libs}"/>
+			<arg line='/link /OPT:REF,ICF /DLL ${libs}'/>
 
-			<fileset dir=".">
-				<patternset refid="link-objects"/>
-			</fileset>
+			<fileset refid="link-objects"/>
+			<fileset refid="link-libraries"/>
 		</apply>
 	</target>
 </project>

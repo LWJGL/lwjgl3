@@ -25,9 +25,20 @@
 		<isset property="env.LWJGL_BUILD_TYPE"/>
 	</condition>
 
+	<!--
+		This is used to override the default output directory. By default, the directories
+		bin, generated and release will be created in the same directory as the main build
+		script. You may want to change that, to keep the main directory clean, or due to the
+		performance characteristics of the storage hardware. Note that these 3 directories
+		will contain thousands of tiny files.
+	-->
+	<condition property="build.output" value="${env.LWJGL_BUILD_OUTPUT}" else=".">
+		<isset property="env.LWJGL_BUILD_OUTPUT"/>
+	</condition>
+
 	<property name="src" location="src" relative="true"/>
-	<property name="generated" location="generated" relative="false"/>
-	<property name="bin" location="bin" relative="false"/>
+	<property name="generated" location="${build.output}/generated" relative="false"/>
+	<property name="bin" location="${build.output}/bin" relative="false"/>
 	<property name="lib" location="libs" relative="true"/>
 	<property name="lib.abs" location="${lib}" relative="false"/>
 	<property name="res" location="res" relative="true"/>

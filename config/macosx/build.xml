@@ -35,10 +35,8 @@
 	<find-sdkroot version="10.7"/>
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
-	<patternset id="link-objects">
-		<include name="${bin.native}/*.o"/>
-		<include name="${lib}/macosx/${build.arch}/*.a"/>
-	</patternset>
+	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
+	<fileset id="link-libraries" dir="${lib.abs}/macosx/${build.arch}/" includes="*.a"/>
 
 	<property name="macosx-version-min" value="10.7"/>
 
@@ -82,9 +80,8 @@
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
-			<srcfiles dir=".">
-				<patternset refid="link-objects"/>
-			</srcfiles>
+			<srcfiles refid="link-objects"/>
+			<srcfiles refid="link-libraries"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary"/>
@@ -107,22 +104,15 @@
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line='-dynamiclib -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
-			<arg value="-framework"/>
-			<arg value="AppKit"/>
-			<arg value="-framework"/>
-			<arg value="CoreFoundation"/>
-			<arg value="-framework"/>
-			<arg value="CoreVideo"/>
-			<arg value="-framework"/>
-			<arg value="Cocoa"/>
-			<arg value="-framework"/>
-			<arg value="IOKit"/>
-			<arg value="-framework"/>
-			<arg value="OpenGL"/>
+			<arg line="-framework AppKit"/>
+			<arg line="-framework CoreFoundation"/>
+			<arg line="-framework CoreVideo"/>
+			<arg line="-framework Cocoa"/>
+			<arg line="-framework IOKit"/>
+			<arg line="-framework OpenGL"/>
 
-			<fileset dir=".">
-				<patternset refid="link-objects"/>
-			</fileset>
+			<fileset refid="link-objects"/>
+			<fileset refid="link-libraries"/>
 		</apply>
 	</target>
 </project>

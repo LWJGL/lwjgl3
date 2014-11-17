@@ -6,9 +6,9 @@
 	<condition
 		property="libs"
 		value=
-			"-L/usr/X11R6/lib -L/usr/X11/lib ${system_libs} -L${java.home}/lib/i386"
+			"-L/usr/X11R6/lib -L/usr/X11/lib ${system_libs}"
 		else=
-			"-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs} -L${java.home}/lib/amd64"
+			"-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs}"
 		>
 		<equals arg1="${build.arch}" arg2="x86"/>
 	</condition>
@@ -19,10 +19,8 @@
 
 	<property name="libname" value="liblwjgl.so"/>
 
-	<patternset id="link-objects">
-		<include name="${bin.native}/*.o"/>
-		<include name="${lib}/linux/${build.arch}/*.a"/>
-	</patternset>
+	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
+	<fileset id="link-libraries" dir="${lib.abs}/linux/${build.arch}/" includes="*.a"/>
 
 	<target name="compile-native-linux">
 		<!-- COMPILE -->
@@ -64,9 +62,8 @@
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
-			<srcfiles dir=".">
-				<patternset refid="link-objects"/>
-			</srcfiles>
+			<srcfiles refid="link-objects"/>
+			<srcfiles refid="link-libraries"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary"/>
@@ -99,13 +96,14 @@
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" verbose="true" taskname="Linker">
+		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared ${compiler.arch} -O3 -fPIC -Wall -Wunused -pthread -o ${libname} ${libs}"/>
-			<fileset dir=".">
-				<patternset refid="link-objects"/>
-			</fileset>
+			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${libname} ${libs}"/>
+
+			<fileset refid="link-objects"/>
+			<fileset refid="link-libraries"/>
 		</apply>
+
 		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
 			<fileset file="${libname}"/>
 		</apply>
