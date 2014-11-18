@@ -6,7 +6,6 @@ package org.lwjgl.demo.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
-import org.lwjgl.Sys;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -34,8 +33,6 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void init() {
-		Sys.touch();
-
 		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 
 		if ( glfwInit() != GL11.GL_TRUE )

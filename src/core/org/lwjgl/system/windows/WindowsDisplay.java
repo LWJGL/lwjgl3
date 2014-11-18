@@ -14,10 +14,6 @@ import static org.lwjgl.system.windows.WindowsPlatform.*;
 
 public class WindowsDisplay {
 
-	static {
-		Sys.touch();
-	}
-
 	/** Handle to the default window proc. */
 	public static final long DEF_WINDOW_PROC =
 		GetProcAddress(

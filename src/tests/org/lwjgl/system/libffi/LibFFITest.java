@@ -115,8 +115,6 @@ public class LibFFITest {
 	}
 
 	private static long createGLFWWindow(int width, int height) {
-		Sys.touch();
-
 		if ( glfwInit() != GL_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 

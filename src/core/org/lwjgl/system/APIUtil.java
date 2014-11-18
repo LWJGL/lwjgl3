@@ -5,6 +5,7 @@
 package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Sys;
 import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
@@ -24,6 +25,10 @@ public final class APIUtil {
 			return new APIBuffer();
 		}
 	};
+
+	static {
+		Sys.touch();
+	}
 
 	private APIUtil() {
 	}

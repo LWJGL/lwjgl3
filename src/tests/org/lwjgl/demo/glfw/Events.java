@@ -27,8 +27,6 @@ public final class Events {
 	}
 
 	public static void main(String[] args) {
-		Sys.touch();
-
 		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");

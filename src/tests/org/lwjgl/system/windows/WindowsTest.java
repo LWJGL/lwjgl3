@@ -35,7 +35,6 @@ public class WindowsTest {
 
 	@Test(enabled = false)
 	public static void main(String[] args) {
-		Sys.touch();
 		new WindowsTest().testCreateWindow();
 		//new WindowsTest().testOSVERSIONINFOEX();
 	}

@@ -88,7 +88,6 @@ public final class CLGLInteropDemo {
 	public static void main(String... args) {
 		parseArgs(args);
 
-		Sys.touch();
 		if ( glfwInit() != GL11.GL_TRUE ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);

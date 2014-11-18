@@ -171,8 +171,12 @@ class NativeClass(
 		if ( functionProvider != null && !_functions.isEmpty() ) {
 			generateFunctionAddresses(functionProvider)
 			functionProvider.generateFunctionGetters(this, this@NativeClass)
-		} else
+		} else {
+			if ( !_functions.isEmpty() )
+				println("\tstatic { Sys.touch(); }\n")
+
 			println("\tprivate $className() {}\n")
+		}
 
 		functions.forEach {
 			println("\t// --- [ ${it.name} ] ---\n")
