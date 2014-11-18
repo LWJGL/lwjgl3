@@ -32,17 +32,17 @@ val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.PTR)
 val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
 val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
 val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
-val SIZE_T = PrimitiveType("SIZE_T", ULONG_PTR)
+val SIZE_T = typedef(ULONG_PTR, "SIZE_T")
 
 val UINT_p = PointerType(UINT)
 val FLOAT_p = PointerType(FLOAT)
 
-val LRESULT = PrimitiveType("LRESULT", LONG_PTR)
-val WPARAM = PrimitiveType("WPARAM", UINT_PTR)
-val LPARAM = PrimitiveType("LPARAM", LONG_PTR)
+val LRESULT = typedef(LONG_PTR, "LRESULT")
+val WPARAM = typedef(UINT_PTR, "WPARAM")
+val LPARAM = typedef(LONG_PTR, "LPARAM")
 
-val HRESULT = PrimitiveType("HRESULT", LONG)
-val MMRESULT = PrimitiveType("MMRESULT", UINT)
+val HRESULT = typedef(LONG, "HRESULT")
+val MMRESULT = typedef(UINT, "MMRESULT")
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
 val WCHAR = CharType("WCHAR", CharMapping.UTF16)

@@ -11,8 +11,8 @@ val FFI_PACKAGE = "org.lwjgl.system.libffi"
 val size_t = PrimitiveType("size_t", PrimitiveMapping.PTR)
 val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
 
-val ffi_abi = PrimitiveType("ffi_abi", int)
-val ffi_status = PrimitiveType("ffi_abi", int)
+val ffi_abi = typedef(int, "ffi_abi")
+val ffi_status = typedef(int, "ffi_abi")
 
 val FFI_FN_TYPE = PointerType("FFI_FN_TYPE", includesPointer = true)
 

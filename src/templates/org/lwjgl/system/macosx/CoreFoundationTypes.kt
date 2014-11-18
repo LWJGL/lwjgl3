@@ -9,10 +9,10 @@ import org.lwjgl.generator.*
 val CFTypeRef = PointerType("CFTypeRef", includesPointer = true)
 val CFAllocatorRef = PointerType("CFAllocatorRef", includesPointer = true)
 
-val CFStringEncoding = PrimitiveType("CFStringEncoding", UInt32)
+val CFStringEncoding = typedef(UInt32, "CFStringEncoding")
 val CFStringRef = PointerType("CFStringRef", includesPointer = true)
 
 val CFBundleRef = PointerType("CFBundleRef", includesPointer = true)
 
-val CFURLPathStyle = PrimitiveType("CFURLPathStyle", CFIndex)
+val CFURLPathStyle = typedef(CFIndex, "CFURLPathStyle")
 val CFURLRef = PointerType("CFURLRef", includesPointer = true)

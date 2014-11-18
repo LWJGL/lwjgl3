@@ -19,6 +19,6 @@ val GLXWindow = PointerType("GLXWindow", includesPointer = true)
 val GLXDrawable = PointerType("GLXDrawable", includesPointer = true)
 val GLXPixmap = PointerType("GLXPixmap", includesPointer = true)
 
-val GLXContextID = PrimitiveType("GLXContextID", XID)
+val GLXContextID = typedef(XID, "GLXContextID")
 
 val GLXPbuffer = PointerType("GLXPbuffer", includesPointer = true)

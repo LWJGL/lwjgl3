@@ -37,9 +37,9 @@ open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Bo
 open class EnumType(name: String): IntegerType(name, PrimitiveMapping.INT, unsigned = true)
 // Specialization for string characters.
 class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
-// "typedef"
-fun PrimitiveType(name: String, typedef: PrimitiveType) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
-fun PrimitiveType(name: String, typedef: IntegerType) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
+// typedefs
+fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
+fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
 
 // Pointers
 open class PointerType(

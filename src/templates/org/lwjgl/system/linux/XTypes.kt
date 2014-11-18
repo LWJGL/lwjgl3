@@ -6,29 +6,29 @@ package org.lwjgl.system.linux
 
 import org.lwjgl.generator.*
 
-val Bool = PrimitiveType("Bool", int)
-val Status = PrimitiveType("Status", int)
+val Bool = typedef(int, "Bool")
+val Status = typedef(int, "Status")
 
-val CARD32 = PrimitiveType("CARD32", unsigned_int)
+val CARD32 = typedef(unsigned_int, "CARD32")
 
-val XID = PrimitiveType("XID", unsigned_long)
-val Mask = PrimitiveType("Mask", unsigned_long)
-val Atom = PrimitiveType("Atom", unsigned_long)
-val VisualID = PrimitiveType("VisualID", unsigned_long)
-val Time = PrimitiveType("Time", unsigned_long)
+val XID = typedef(unsigned_long, "XID")
+val Mask = typedef(unsigned_long, "Mask")
+val Atom = typedef(unsigned_long, "Atom")
+val VisualID = typedef(unsigned_long, "VisualID")
+val Time = typedef(unsigned_long, "Time")
 
-val Window = PrimitiveType("Window", XID)
-val Drawable = PrimitiveType("Drawable", XID)
-val Font = PrimitiveType("Font", XID)
-val Pixmap = PrimitiveType("Pixmap", XID)
-val Cursor = PrimitiveType("Cursor", XID)
-val Colormap = PrimitiveType("Colormap", XID)
-val GContext = PrimitiveType("GContext", XID)
-val KeySym = PrimitiveType("KeySym", XID)
+val Window = typedef(XID, "Window")
+val Drawable = typedef(XID, "Drawable")
+val Font = typedef(XID, "Font")
+val Pixmap = typedef(XID, "Pixmap")
+val Cursor = typedef(XID, "Cursor")
+val Colormap = typedef(XID, "Colormap")
+val GContext = typedef(XID, "GContext")
+val KeySym = typedef(XID, "KeySym")
 
-val KeyCode = PrimitiveType("KeyCode", unsigned_char)
+val KeyCode = typedef(unsigned_char, "KeyCode")
 
-val XContext = PrimitiveType("XContext", int)
+val XContext = typedef(int, "XContext")
 val XPointer = PointerType(char)
 val XPointer_p = PointerType(XPointer)
 
@@ -332,19 +332,19 @@ val JSEvent = StructType(
 
 // --------------- Xrandr.h ---------------
 
-val Rotation = PrimitiveType("Rotation", unsigned_short)
-val SizeID = PrimitiveType("SizeID", unsigned_short)
-val SubpixelOrder = PrimitiveType("SubpixelOrder", unsigned_short)
-val Connection = PrimitiveType("Connection", unsigned_short)
-val XRandrRotation = PrimitiveType("XRandrRotation", unsigned_short)
-val XRandrSizeID = PrimitiveType("XRandrSizeID", unsigned_short)
-val XRandrSubpixelOrder = PrimitiveType("XRandrSubpixelOrder", unsigned_short)
-val XRRModeFlags = PrimitiveType("XRRModeFlags", unsigned_long)
+val Rotation = typedef(unsigned_short, "Rotation")
+val SizeID = typedef(unsigned_short, "SizeID")
+val SubpixelOrder = typedef(unsigned_short, "SubpixelOrder")
+val Connection = typedef(unsigned_short, "Connection")
+val XRandrRotation = typedef(unsigned_short, "XRandrRotation")
+val XRandrSizeID = typedef(unsigned_short, "XRandrSizeID")
+val XRandrSubpixelOrder = typedef(unsigned_short, "XRandrSubpixelOrder")
+val XRRModeFlags = typedef(unsigned_long, "XRRModeFlags")
 
-val RROutput = PrimitiveType("RROutput", XID)
-val RRCrtc = PrimitiveType("RRCrtc", XID)
-val RRMode = PrimitiveType("RRMode", XID)
-val RRProvider = PrimitiveType("RRProvider", XID)
+val RROutput = typedef(XID, "RROutput")
+val RRCrtc = typedef(XID, "RRCrtc")
+val RRMode = typedef(XID, "RRMode")
+val RRProvider = typedef(XID, "RRProvider")
 
 val XRRModeFlags_p = PointerType(XRRModeFlags)
 

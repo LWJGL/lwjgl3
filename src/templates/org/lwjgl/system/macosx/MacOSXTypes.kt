@@ -24,7 +24,7 @@ val SInt64 = IntegerType("SInt64", PrimitiveMapping.LONG)
 val Float32 = PrimitiveType("Float32", PrimitiveMapping.FLOAT)
 val Float64 = PrimitiveType("Float64", PrimitiveMapping.DOUBLE)
 
-val UTF32Char = PrimitiveType("UTF32Char", UInt32)
+val UTF32Char = typedef(UInt32, "UTF32Char")
 val UTF16Char = CharType("UTF16Char", CharMapping.UTF16)
 val UTF8Char = CharType("UTF8Char", CharMapping.UTF8)
 
