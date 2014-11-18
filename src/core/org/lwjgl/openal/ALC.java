@@ -21,8 +21,6 @@ public final class ALC {
 
 	private static FunctionProviderLocal functionProvider;
 
-	private static ALCContext context;
-
 	static {
 		if ( !Boolean.getBoolean("org.lwjgl.openal.explicitInit") )
 			create();
@@ -108,12 +106,12 @@ public final class ALC {
 		return functionProvider;
 	}
 
-	static void setCurrent(ALCContext context) {
-		ALC.context = context;
-	}
-
 	public static ALCCapabilities getCapabilities() {
-		return context.getCapabilities();
+		ALContext context = AL.getCurrentContext();
+		if ( context != null )
+			return context.getDevice().getCapabilities();
+
+		return ALDevice.getLastDevice().getCapabilities();
 	}
 
 	// We could remove the method below if we add support for it in the code generator.
@@ -196,12 +194,6 @@ public final class ALC {
 
 		// Parse EXTENSIONS string
 		String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString))));
-
-		/*
-		OpenALSoft: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_DEDICATED ALC_EXT_disconnect ALC_EXT_EFX ALC_EXT_thread_local_context
-		ALC_SOFT_loopback
-		Creative: ALC_ENUMERATE_ALL_EXT ALC_ENUMERATION_EXT ALC_EXT_CAPTURE ALC_EXT_EFX
-		 */
 
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {

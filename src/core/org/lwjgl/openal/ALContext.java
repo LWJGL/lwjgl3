@@ -5,60 +5,80 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.system.PointerWrapper;
 
 import java.nio.IntBuffer;
 
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.openal.EXTThreadLocalContext.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-public class ALContext {
+/**
+ * This class is a wrapper around an AL Context handle. Within the scope of AL the ALC is implied - it is not visible as a handle or function parameter. Only
+ * one AL Context per process can be current at a time. Applications maintaining multiple AL Contexts, whether threaded or not, have to set the current context
+ * accordingly. Applications can have multiple threads that share one more or contexts. In other words, AL and ALC are threadsafe.
+ */
+public class ALContext extends PointerWrapper {
 
-	private final ALCContext deviceContext;
-
-	private final long handle;
+	private final ALDevice device;
 
 	private final ALCapabilities capabilities;
 
-	public ALContext(ALCContext deviceContext, long handle) {
-		this.deviceContext = deviceContext;
-		this.handle = handle;
+	public ALContext(ALDevice device, long handle) {
+		super(handle);
+
+		this.device = device;
 
 		makeCurrent();
 
-		if ( deviceContext.getDevice() != alcGetContextsDevice(handle) )
-			throw new IllegalArgumentException("The context device and the ALC context device do not match.");
+		if ( device.getPointer() != alcGetContextsDevice(handle) )
+			throw new IllegalArgumentException("The specified device does not match with the context device.");
 
-		this.capabilities = AL.createCapabilities(deviceContext.getDevice());
+		this.capabilities = AL.createCapabilities(device.getPointer());
 	}
 
-	public ALCContext getDeviceContext() {
-		return deviceContext;
-	}
-
-	public long getHandle() {
-		return handle;
+	public ALDevice getDevice() {
+		return device;
 	}
 
 	public ALCapabilities getCapabilities() {
 		return capabilities;
 	}
 
+	/**
+	 * Makes this context the current process-wide OpenAL context.
+	 */
 	public void makeCurrent() {
-		if ( !alcMakeContextCurrent(handle) )
-			throw new RuntimeException("Failed to make AL context current.");
+		if ( !alcMakeContextCurrent(getPointer()) )
+			throw new RuntimeException("Failed to make AL context current in process.");
 
-		AL.setCurrent(this);
+		AL.setCurrentProcess(this);
+	}
+
+	/**
+	 * Makes this context the current thread-local OpenAL context.
+	 */
+	public void makeCurrentThread() {
+		if ( !alcSetThreadContext(getPointer()) )
+			throw new RuntimeException("Failed to make AL context current in thread.");
+
+		AL.setCurrentThread(this);
 	}
 
 	public boolean isCurrent() {
-		return alcGetCurrentContext() == handle;
+		if ( device.getCapabilities().ALC_EXT_thread_local_context ) {
+			if ( alcGetThreadContext() == getPointer() )
+				return true;
+		}
+
+		return alcGetCurrentContext() == getPointer();
 	}
 
 	public void destroy() {
 		if ( isCurrent() )
 			alcMakeContextCurrent(NULL);
 
-		alcDestroyContext(handle);
+		alcDestroyContext(getPointer());
 	}
 
 	public static ALContext create() {
@@ -76,7 +96,7 @@ public class ALContext {
 	 * @return
 	 */
 	public static ALContext create(String deviceName, int frequency, int refresh, boolean sync) {
-		ALCContext deviceContext = ALCContext.create(deviceName);
+		ALDevice device = ALDevice.create(deviceName);
 		IntBuffer attribs = BufferUtils.createIntBuffer(16);
 
 		attribs.put(ALC_FREQUENCY);
@@ -91,8 +111,8 @@ public class ALContext {
 		attribs.put(0);
 		attribs.flip();
 
-		long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
-		return new ALContext(deviceContext, contextHandle);
+		long contextHandle = alcCreateContext(device.getPointer(), attribs);
+		return new ALContext(device, contextHandle);
 	}
 
 }

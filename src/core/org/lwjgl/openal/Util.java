@@ -13,10 +13,10 @@ public final class Util {
 	private Util() {
 	}
 
-	public static void checkALCError(ALCContext deviceContext) {
-		int err = alcGetError(deviceContext.getDevice());
+	public static void checkALCError(ALDevice device) {
+		int err = alcGetError(device.getPointer());
 		if ( err != ALC_NO_ERROR )
-			throw new OpenALException(alcGetString(deviceContext.getDevice(), err));
+			throw new OpenALException(alcGetString(device.getPointer(), err));
 	}
 
 	public static void checkALError() {

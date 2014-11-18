@@ -7,7 +7,7 @@ package org.lwjgl.demo.openal;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
-import org.lwjgl.openal.ALCContext;
+import org.lwjgl.openal.ALDevice;
 import org.lwjgl.openal.ALContext;
 
 import java.io.BufferedInputStream;
@@ -38,9 +38,9 @@ public class ALCDemo {
 	}
 
 	public static void main(String[] args) {
-		ALCContext deviceContext = ALCContext.create(null);
+		ALDevice device = ALDevice.create(null);
 
-		ALCCapabilities caps = ALC.getCapabilities();
+		ALCCapabilities caps = device.getCapabilities();
 
 		assertTrue(caps.OpenALC10);
 
@@ -73,16 +73,16 @@ public class ALCDemo {
 		attribs.put(0);
 		attribs.flip();
 
-		long contextHandle = alcCreateContext(deviceContext.getDevice(), attribs);
+		long contextHandle = alcCreateContext(device.getPointer(), attribs);
 		assertTrue(contextHandle != 0L);
 
-		ALContext context = new ALContext(deviceContext, contextHandle);
+		ALContext context = new ALContext(device, contextHandle);
 
 		try {
 			testPlayback();
 		} finally {
 			context.destroy();
-			deviceContext.destroy();
+			device.destroy();
 		}
 	}
 

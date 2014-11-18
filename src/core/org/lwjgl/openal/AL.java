@@ -21,7 +21,8 @@ public final class AL {
 
 	private static FunctionProvider functionProvider;
 
-	private static ALContext context;
+	private static ALContext processContext;
+	private static final ThreadLocal<ALContext> threadContext = new ThreadLocal<ALContext>();
 
 	private AL() {}
 
@@ -49,6 +50,11 @@ public final class AL {
 	}
 
 	static void destroy() {
+		if ( functionProvider == null )
+			return;
+
+		setCurrentProcess(null);
+
 		functionProvider.release();
 		functionProvider = null;
 	}
@@ -57,19 +63,22 @@ public final class AL {
 		return functionProvider;
 	}
 
-	static void setCurrent(ALContext context) {
-		// TODO: Synchronize or let the user handle it?
-		// The current AL context is process-wide, so synchronization won't offer anything interesting.
-		// Users doing advanced stuff can sync as necessary.
+	static void setCurrentProcess(ALContext context) {
+		processContext = context;
+		threadContext.set(null); // See EXT_thread_local_context, second Q.
+	}
 
-		// TODO: Handle ALC_EXT_thread_local_context?
-		// Add custom code to alcSetThreadContext and new ThreadLocal context state to track everything.
-		AL.context = context;
-		ALC.setCurrent(context.getDeviceContext());
+	static void setCurrentThread(ALContext context) {
+		threadContext.set(context);
+	}
+
+	public static ALContext getCurrentContext() {
+		ALContext context = threadContext.get();
+		return context != null ? context : processContext;
 	}
 
 	public static ALCapabilities getCapabilities() {
-		return context.getCapabilities();
+		return getCurrentContext().getCapabilities();
 	}
 
 	/**
@@ -131,9 +140,9 @@ public final class AL {
 	}
 
 	public static void destroy(ALContext alContext) {
-		ALCContext deviceContext = alContext.getDeviceContext();
+		ALDevice device = alContext.getDevice();
 		alContext.destroy();
-		deviceContext.destroy();
+		device.destroy();
 	}
 
 }
