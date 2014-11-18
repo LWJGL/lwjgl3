@@ -114,27 +114,23 @@
 
 		<!-- Compile Kotlin code -->
 		<echo message="Compiling Kotlin templates. This will take several seconds..." level="info" taskname="Templates"/>
-		<java
-			classname="org.jetbrains.jet.cli.jvm.K2JVMCompiler"
-			fork="true"
-			failonerror="true"
-			taskname="Templates"
-			>
-			<classpath>
-				<pathelement path="${kotlinc}/lib/kotlin-compiler.jar"/>
-			</classpath>
-
+		<java classname="org.jetbrains.jet.preloading.Preloader" fork="true" failonerror="true" taskname="Templates">
 			<jvmarg value="-server"/>
 			<jvmarg value="-Xms1024m"/>
 			<jvmarg value="-Xverify:none"/>
 
 			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
 
-			<arg value="-module"/>
-			<arg value="${config}/Templates.ktm"/>
+			<classpath>
+				<pathelement path="${kotlinc}/lib/kotlin-preloader.jar"/>
+			</classpath>
+			<arg line="${kotlinc}/lib/kotlin-compiler.jar;${kotlinc}/lib/kotlin-runtime.jar"/>
+			<arg line="org.jetbrains.jet.cli.jvm.K2JVMCompiler 4096 notime"/>
+
+			<arg line="-module ${config}/Templates.ktm"/>
 			<!--
-			<arg value="-notNullAssertions"/>
-			<arg value="-notNullParamAssertions"/>
+			<arg value="-Xno-call-assertions"/>
+			<arg value="-Xno-param-assertions"/>
 			-->
 		</java>
 		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
