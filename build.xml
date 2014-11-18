@@ -139,7 +139,7 @@
 		</java>
 		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
 
-		<touch file="${bin}/Templates/touch.txt"/>
+		<touch file="${bin.templates}/touch.txt"/>
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
@@ -160,13 +160,17 @@
 		</java>
 	</target>
 
-	<target name="-generated-uptodate" description="Runs the code Generator" unless="generated-uptodate">
+	<target name="generate" description="Runs the bindings Generator" depends="-initialize">
+		<available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
+		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
+
 		<uptodate property="generated-uptodate" targetfile="${generated}/touch.txt">
 			<srcfiles dir="${bin.templates}" includes="**/*.class"/>
 		</uptodate>
+		<antcall target="-generate"/>
 	</target>
 
-	<target name="generate" description="Runs the code Generator" depends="-initialize,-generated-uptodate" unless="generated-uptodate">
+	<target name="-generate" description="Runs the code Generator" unless="generated-uptodate">
 		<java
 			classname="org.lwjgl.generator.GeneratorPackage"
 			fork="true"
@@ -261,6 +265,14 @@
 	</target>
 
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
+		<uptodate targetfile="${generated.javadoc}/index.html" property="javadoc-uptodate">
+			<srcfiles dir="${src.core}" includes="**"/>
+			<srcfiles dir="${generated.java}" includes="**"/>
+		</uptodate>
+		<antcall target="-javadoc"/>
+	</target>
+
+	<target name="-javadoc" description="Generates the LWJGL JavaDoc" unless="javadoc-uptodate">
 		<delete dir="${generated.javadoc}"/>
 		<javadoc
 			destdir="${generated.javadoc}"
@@ -282,14 +294,55 @@
 			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
 
-			<fileset dir=".">
-				<include name="${src.core}/**/*.java"/>
-				<include name="${src.util}/**/*.java"/>
-			</fileset>
-			<fileset dir="${generated.java}" includes="**/*.java"/>
+			<fileset dir="${src.core}" includes="**"/>
+			<fileset dir="${src.util}" includes="**"/>
+			<fileset dir="${generated.java}" includes="**"/>
 
 			<classpath path="${lib}/disruptor.jar"/>
 		</javadoc>
 	</target>
 
+	<target name="release" description="" depends="compile,javadoc">
+		<!-- Bundle classes -->
+		<mkdir dir="${release.jar}"/>
+		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
+
+		<!-- Java dependencies -->
+		<copy todir="${release.jar}" file="${lib}/disruptor.jar"/>
+
+		<!-- Download binaries from build.lwjgl.org -->
+		<mkdir dir="${release.native}/windows/x64"/>
+		<mkdir dir="${release.native}/windows/x86"/>
+		<update name="LWJGL Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll" dest="${release.native}/windows/x64"/>
+		<update name="LWJGL Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll" dest="${release.native}/windows/x86"/>
+		<update name="OpenAL32 Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/windows/x64"/>
+		<update name="OpenAL32 Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}/windows/x86"/>
+
+		<mkdir dir="${release.native}/linux/x64"/>
+		<mkdir dir="${release.native}/linux/x86"/>
+		<update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}/linux/x64"/>
+		<update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/linux/x86"/>
+		<update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x64"/>
+		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x86"/>
+
+		<mkdir dir="${release.native}/macosx/x64"/>
+		<update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}/macosx/x64"/>
+		<update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}/macosx/x64"/>
+
+		<!-- Bundle javadoc -->
+		<mkdir dir="${release.doc}"/>
+		<zip destfile="${release.doc}/javadoc.zip" basedir="${generated.javadoc}" includes="**" level="9" />
+
+		<!-- Copy license files -->
+		<copy todir="${release.doc}">
+			<fileset dir="${doc}" includes="LICENSE.txt"/>
+			<fileset dir="${doc}" includes="3rdparty/**"/>
+		</copy>
+
+		<!-- Bundle source -->
+		<zip destfile="${release}/src.zip" level="9">
+			<fileset dir="${src.core}" includes="**"/>
+			<fileset dir="${generated.java}" includes="**"/>
+		</zip>
+	</target>
 </project>

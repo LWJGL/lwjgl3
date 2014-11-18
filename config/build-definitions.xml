@@ -63,6 +63,13 @@
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
+	<property name="doc" location="doc" relative="true"/>
+
+	<property name="release" location="${build.output}/release" relative="false"/>
+	<property name="release.jar" location="${release}/jar" relative="false"/>
+	<property name="release.native" location="${release}/native" relative="false"/>
+	<property name="release.doc" location="${release}/doc" relative="false"/>
+
 	<!--
 		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
 		that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
@@ -139,8 +146,18 @@
 		<attribute name="dest"/>
 
 		<sequential>
+			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="update-quiet">
+		<attribute name="name"/>
+		<attribute name="url"/>
+		<attribute name="dest"/>
+
+		<sequential>
 			<quiet>
-				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
+				<update name="@{name}" url="@{url}" dest="@{dest}"/>
 			</quiet>
 		</sequential>
 	</macrodef>
@@ -153,9 +170,7 @@
 		<attribute name="dest"/>
 
 		<sequential>
-			<update
-				name="@{name}"
-				url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
+			<update-quiet name="@{name}" url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
 		</sequential>
 	</macrodef>
 
@@ -164,7 +179,7 @@
 		<attribute name="artifact"/>
 
 		<sequential>
-			<update name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="${lib}/${platform}/@{artifact}"/>
+			<update-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="${lib}/${platform}/@{artifact}"/>
 		</sequential>
 	</macrodef>
 </project>
