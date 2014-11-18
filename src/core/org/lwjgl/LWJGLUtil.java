@@ -4,16 +4,21 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.DynamicLinkLibrary;
+
 import java.io.File;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
-import java.security.PrivilegedActionException;
-import java.security.PrivilegedExceptionAction;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
+import java.util.regex.Pattern;
+
+import static org.lwjgl.system.APIUtil.*;
 
 /** Internal library methods */
 public final class LWJGLUtil {
@@ -32,7 +37,6 @@ public final class LWJGLUtil {
 		public String getName() {
 			return name;
 		}
-
 	}
 
 	private static final String LWJGL_ICON_DATA_16x16 =
@@ -245,7 +249,7 @@ public final class LWJGLUtil {
 	 * <p/>
 	 * If maximum performance is required, they can be disabled by setting the system property {@code org.lwjgl.util.NoChecks} to true.
 	 */
-	public static final boolean CHECKS = !getPrivilegedBoolean("org.lwjgl.util.NoChecks");
+	public static final boolean CHECKS = !Boolean.getBoolean("org.lwjgl.util.NoChecks");
 
 	/**
 	 * Debug flag. When enabled, LWJGL will perform additional checks during its operation. These checks are less trivial than the ones
@@ -258,12 +262,12 @@ public final class LWJGLUtil {
 	 * @see org.lwjgl.opencl.OpenCLException
 	 * @see org.lwjgl.opengl.OpenGLException
 	 */
-	public static final boolean DEBUG = getPrivilegedBoolean("org.lwjgl.util.Debug");
+	public static final boolean DEBUG = Boolean.getBoolean("org.lwjgl.util.Debug");
 
 	private static final Platform PLATFORM;
 
 	static {
-		String osName = getPrivilegedProperty("os.name");
+		String osName = System.getProperty("os.name");
 		if ( osName.startsWith("Windows") )
 			PLATFORM = Platform.WINDOWS;
 		else if ( osName.startsWith("Linux") || osName.startsWith("FreeBSD") || osName.startsWith("SunOS") || osName.startsWith("Unix") )
@@ -304,164 +308,100 @@ public final class LWJGLUtil {
 	}
 
 	/**
-	 * Locates the paths required by a library.
+	 * Loads a native library using the {@link System#load} and {@link System#loadLibrary}.
 	 *
-	 * @param classloader        the classloader to ask for library paths
-	 * @param libname            the local library name to search the classloader with ("openal").
-	 * @param platform_lib_names the list of possible library names ("libopenal.so")
+	 * @param name the library name, without an OS specific prefix or file extension (e.g. GL, not libGL.so)
 	 *
-	 * @return paths to located libraries, if any
+	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
-	public static String[] getLibraryPaths(ClassLoader classloader, String libname, String... platform_lib_names) {
-		// need to pass path of possible locations of library to native side
-		List<String> possible_paths = new ArrayList<String>();
+	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
+		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
-		String classloader_path = getPathFromClassLoader(libname, classloader);
-		if ( classloader_path != null ) {
-			log("getPathFromClassLoader: Path found: " + classloader_path);
-			possible_paths.add(classloader_path);
-		}
-
-		for ( String platform_lib_name : platform_lib_names ) {
-			String lwjgl_classloader_path = getPathFromClassLoader("lwjgl", classloader);
-			if ( lwjgl_classloader_path != null ) {
-				log("getPathFromClassLoader: Path found: " + lwjgl_classloader_path);
-				possible_paths.add(lwjgl_classloader_path.substring(0, lwjgl_classloader_path.lastIndexOf(File.separator))
-				                   + File.separator + platform_lib_name);
-			}
-
-			// add Installer path
-			String alternative_path = getPrivilegedProperty("org.lwjgl.librarypath");
-			if ( alternative_path != null ) {
-				possible_paths.add(alternative_path + File.separator + platform_lib_name);
-			}
-
-			// Add all possible paths from java.library.path
-			String java_library_path = getPrivilegedProperty("java.library.path");
-
-			StringTokenizer st = new StringTokenizer(java_library_path, File.pathSeparator);
-			while ( st.hasMoreTokens() ) {
-				String path = st.nextToken();
-				possible_paths.add(path + File.separator + platform_lib_name);
-			}
-
-			//add current path
-			String current_dir = getPrivilegedProperty("user.dir");
-			possible_paths.add(current_dir + File.separator + platform_lib_name);
-
-			//add pure library (no path, let OS search)
-			possible_paths.add(platform_lib_name);
-		}
-
-		//create needed string array
-		return possible_paths.toArray(new String[possible_paths.size()]);
-	}
-
-	static void execPrivileged(final String[] cmd_array) throws Exception {
-		try {
-			Process process = AccessController.doPrivileged(new PrivilegedExceptionAction<Process>() {
-				@Override
-				public Process run() throws Exception {
-					return Runtime.getRuntime().exec(cmd_array);
-				}
-			});
-			// Close unused streams to make sure the child process won't hang
-			process.getInputStream().close();
-			process.getOutputStream().close();
-			process.getErrorStream().close();
-		} catch (PrivilegedActionException e) {
-			throw (Exception)e.getCause();
-		}
-	}
-
-	private static String getPrivilegedProperty(final String property_name) {
-		return AccessController.doPrivileged(new PrivilegedAction<String>() {
-			@Override
-			public String run() {
-				return System.getProperty(property_name);
-			}
-		});
-	}
-
-	/**
-	 * Tries to locate named library from the current ClassLoader
-	 * This method exists because native libraries are loaded from native code, and as such
-	 * is exempt from ClassLoader library loading rutines. It therefore always fails.
-	 * We therefore invoke the protected method of the ClassLoader to see if it can
-	 * locate it.
-	 *
-	 * @param libname     Name of library to search for
-	 * @param classloader Classloader to use
-	 *
-	 * @return Absolute path to library if found, otherwise null
-	 */
-	private static String getPathFromClassLoader(final String libname, final ClassLoader classloader) {
-		try {
-			//log("getPathFromClassLoader: searching for: " + libname);
-			Class<?> c = classloader.getClass();
-			while ( c != null ) {
-				final Class<?> clazz = c;
+		// Try org.lwjgl.librarypath first
+		String override = System.getProperty("org.lwjgl.librarypath");
+		if ( override != null ) {
+			String libName = System.mapLibraryName(name);
+			for ( String root : Pattern.compile(File.pathSeparator).split(override) ) {
 				try {
-					return AccessController.doPrivileged(new PrivilegedExceptionAction<String>() {
-						@Override
-						public String run() throws Exception {
-							Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
-							findLibrary.setAccessible(true);
-							return (String)findLibrary.invoke(classloader, libname);
-						}
-					});
-				} catch (PrivilegedActionException e) {
-					//log("Failed to locate findLibrary method: " + e.getCause());
-					c = c.getSuperclass();
+					System.load(root + File.separator + libName);
+					return;
+				} catch (Throwable t0) {
+					try {
+						System.load(root + File.separator + platformPath + File.separator + libName);
+						return;
+					} catch (Throwable t1) {}
 				}
 			}
-		} catch (Exception e) {
-			log("Failure locating " + e + " using classloader:" + e);
 		}
+
+		// Then java.library.path
+		try {
+			System.loadLibrary(name);
+			return;
+		} catch (Throwable t0) {
+			try {
+				System.loadLibrary(platformPath.replace(File.separatorChar, '/') + '/' + name);
+				return;
+			} catch (Throwable t1) {
+			}
+		}
+
+		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
+	}
+
+	/**
+	 * Loads a native library using OS-specific APIs (e.g. {@link org.lwjgl.system.windows.WinBase#LoadLibrary LoadLibrary} or
+	 * {@link org.lwjgl.system.linux.DynamicLinkLoader#dlopen dlopen}).
+	 *
+	 * @param name the library name, without an OS specific prefix or file extension (e.g. GL, not libGL.so)
+	 *
+	 * @return the native library
+	 *
+	 * @throws UnsatisfiedLinkError if the library could not be loaded
+	 */
+
+	public static DynamicLinkLibrary loadLibraryNative(String name) {
+		if ( getPlatform() == Platform.MACOSX && name.endsWith(".framework") )
+			return apiCreateLibrary(name);
+
+		String libName = System.mapLibraryName(name);
+		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
+
+		// Try org.lwjgl.librarypath first
+		String override = System.getProperty("org.lwjgl.librarypath");
+		if ( override != null ) {
+			DynamicLinkLibrary lib = loadLibraryNative(override, platformPath, libName);
+			if ( lib != null )
+				return lib;
+		}
+
+		// Then java.library.path
+		DynamicLinkLibrary lib = loadLibraryNative(System.getProperty("java.library.path"), platformPath, libName);
+		if ( lib != null )
+			return lib;
+
+		// Then the OS paths
+		try {
+			return apiCreateLibrary(libName);
+		} catch (Throwable t) {
+		}
+
+		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
+	}
+
+	private static DynamicLinkLibrary loadLibraryNative(String path, String platformPath, String libName) {
+		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
+			try {
+				return apiCreateLibrary(root + File.separator + libName);
+			} catch (Throwable t0) {
+				try {
+					return apiCreateLibrary(root + File.separator + platformPath + File.separator + libName);
+				} catch (Throwable t1) {
+				}
+			}
+		}
+
 		return null;
-	}
-
-	/** Gets a boolean property as a privileged action. */
-	public static boolean getPrivilegedBoolean(final String property_name) {
-		return AccessController.doPrivileged(new PrivilegedAction<Boolean>() {
-			@Override
-			public Boolean run() {
-				return Boolean.getBoolean(property_name);
-			}
-		});
-	}
-
-	/**
-	 * Gets an integer property as a privileged action.
-	 *
-	 * @param property_name the integer property name
-	 *
-	 * @return the property value
-	 */
-	public static Integer getPrivilegedInteger(final String property_name) {
-		return AccessController.doPrivileged(new PrivilegedAction<Integer>() {
-			@Override
-			public Integer run() {
-				return Integer.getInteger(property_name);
-			}
-		});
-	}
-
-	/**
-	 * Gets an integer property as a privileged action.
-	 *
-	 * @param property_name the integer property name
-	 * @param default_val   the default value to use if the property is not defined
-	 *
-	 * @return the property value
-	 */
-	public static Integer getPrivilegedInteger(final String property_name, final int default_val) {
-		return AccessController.doPrivileged(new PrivilegedAction<Integer>() {
-			@Override
-			public Integer run() {
-				return Integer.getInteger(property_name, default_val);
-			}
-		});
 	}
 
 	/**
@@ -474,29 +414,6 @@ public final class LWJGLUtil {
 			System.err.print("[LWJGL] ");
 			System.err.println(msg);
 		}
-	}
-
-	/**
-	 * Method to determine if the current system is running a version of
-	 * Mac OS X better than the given version. This is only useful for Mac OS X
-	 * specific code and will not work for any other platform.
-	 */
-	public static boolean isMacOSXEqualsOrBetterThan(int major_required, int minor_required) {
-		String os_version = getPrivilegedProperty("os.version");
-		StringTokenizer version_tokenizer = new StringTokenizer(os_version, ".");
-		int major;
-		int minor;
-		try {
-			String major_str = version_tokenizer.nextToken();
-			String minor_str = version_tokenizer.nextToken();
-			major = Integer.parseInt(major_str);
-			minor = Integer.parseInt(minor_str);
-		} catch (Exception e) {
-			LWJGLUtil.log("Exception occurred while trying to determine OS version: " + e);
-			// Best guess, no
-			return false;
-		}
-		return major > major_required || (major == major_required && minor >= minor_required);
 	}
 
 	/**

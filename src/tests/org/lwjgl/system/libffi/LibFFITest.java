@@ -5,17 +5,15 @@
 package org.lwjgl.system.libffi;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
@@ -125,21 +123,7 @@ public class LibFFITest {
 	}
 
 	private static long glfwGetWindowSizeAddress() {
-		// dlopen cannot find Sys.getNativeLibrary(), so resolve the path manually.
-		String library = System.mapLibraryName(Sys.getNativeLibrary());
-		String[] libPaths = System.getProperty("org.lwjgl.librarypath", System.getProperty("java.library.path")).split(File.pathSeparator);
-		String libPath = null;
-		for ( String path : libPaths ) {
-			File file = new File(path + File.separator + library);
-			if ( file.exists() ) {
-				libPath = file.getPath();
-				break;
-			}
-		}
-		if ( libPath == null )
-			throw new IllegalStateException("Could not resolve LWJGL library path.");
-
-		DynamicLinkLibrary lib = apiCreateLibrary(libPath);
+		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative("lwjgl");
 
 		long glfwGetWindowSize = lib.getFunctionAddress("Java_org_lwjgl_system_glfw_GLFW_nglfwGetWindowSize");
 		if ( glfwGetWindowSize == NULL )

@@ -29,8 +29,6 @@ public final class CLDemo {
 	}
 
 	public static void main(String[] args) {
-		CL.create();
-
 		List<CLPlatform> platforms = CLPlatform.getPlatforms();
 		if ( platforms.isEmpty() )
 			throw new RuntimeException("No OpenCL platforms found.");

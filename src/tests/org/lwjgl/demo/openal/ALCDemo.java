@@ -38,7 +38,7 @@ public class ALCDemo {
 	}
 
 	public static void main(String[] args) {
-		ALCContext deviceContext = ALC.createALCContextFromDevice(null);
+		ALCContext deviceContext = ALCContext.create(null);
 
 		ALCCapabilities caps = ALC.getCapabilities();
 

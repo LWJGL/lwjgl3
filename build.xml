@@ -33,8 +33,8 @@
 	<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
 
 	<path id="lib.bin">
-		<pathelement path="${lib}/${platform}/${build.arch}"/>
-		<pathelement path="${bin.native}"/>
+		<pathelement path="${bin}"/>
+		<pathelement path="${lib}"/>
 	</path>
 	<property name="lib.bin" refid="lib.bin"/>
 

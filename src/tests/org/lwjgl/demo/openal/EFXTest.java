@@ -45,7 +45,7 @@ public final class EFXTest {
 
 	/** Loads OpenAL and makes sure EXTEfx is supported. */
 	private static ALContext setupEfx() throws Exception {
-		ALContext context = AL.create();
+		ALContext context = ALContext.create();
 
 		// Query for Effect Extension
 		if ( !ALC.getCapabilities().ALC_EXT_EFX ) {
@@ -62,7 +62,7 @@ public final class EFXTest {
 	 * OpenAL SDK. Nothing is played in this method.
 	 */
 	private static void silentTests() throws Exception {
-		ALCContext deviceContext = ALC.createALCContextFromDevice(null);
+		ALCContext deviceContext = ALCContext.create(null);
 
 		// Create context (only necessary if LWJGL context isn't sufficient, done as example)
 		IntBuffer contextAttribList = BufferUtils.createIntBuffer(16);

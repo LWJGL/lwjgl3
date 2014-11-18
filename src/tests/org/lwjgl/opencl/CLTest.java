@@ -8,7 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.testng.SkipException;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
@@ -45,17 +45,20 @@ public class CLTest {
 		}
 	};
 
-	@BeforeMethod
+	@BeforeClass
 	private void createCL() {
 		try {
-			CL.create();
+			CL.getFunctionProvider();
 		} catch (Throwable t) {
 			throw new SkipException("Skipped because OpenCL initialization failed [" + t.getMessage() + "]");
+		} finally {
+			CL.destroy();
 		}
 	}
 
 	public void testLifecycle() {
 		try {
+			CL.create();
 			List<CLPlatform> platforms = CLPlatform.getPlatforms();
 			assertFalse(platforms.isEmpty());
 
@@ -79,6 +82,7 @@ public class CLTest {
 
 	private static void contextTest(Filter<CLPlatform> platformFilter, ContextTest test) {
 		try {
+			CL.create();
 			List<CLPlatform> platforms = CLPlatform.getPlatforms(platformFilter);
 			if ( platforms.isEmpty() ) {
 				assert platformFilter != null;

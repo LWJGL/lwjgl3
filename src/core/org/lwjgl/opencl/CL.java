@@ -25,32 +25,20 @@ public final class CL {
 
 	private static CLCapabilities icd;
 
+	static {
+		if ( !Boolean.getBoolean("org.lwjgl.opencl.explicitInit") )
+			create();
+	}
+
 	private CL() {}
 
 	public static void create() {
-		String libName = System.getProperty("org.lwjgl.opencl.libname", null);
-		if ( libName == null ) {
-			switch ( LWJGLUtil.getPlatform() ) {
-				case WINDOWS:
-					libName = "OpenCL.dll";
-					break;
-				case LINUX:
-					libName = "libOpenCL.so";
-					break;
-				case MACOSX:
-					libName = "OpenCL.dylib";
-					break;
-				default:
-					throw new IllegalStateException();
-			}
-		}
-
-		create(libName);
+		create(System.getProperty("org.lwjgl.opencl.libname", "OpenCL"));
 	}
 
 	public static void create(final String libName) {
 		if ( functionProvider != null )
-			throw new IllegalStateException("CL has already been created.");
+			throw new IllegalStateException("OpenCL has already been created.");
 
 		functionProvider = new FunctionProviderLocal.Default() {
 
@@ -59,12 +47,12 @@ public final class CL {
 			{
 				DynamicLinkLibrary dll;
 				try {
-					dll = apiCreateLibrary(libName);
-				} catch (Exception e) {
+					dll = LWJGLUtil.loadLibraryNative(libName);
+				} catch (Throwable t) {
 					if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
 						dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
 					else
-						throw new RuntimeException(e);
+						throw new RuntimeException(t);
 				}
 				OPENCL = dll;
 			}
@@ -109,8 +97,7 @@ public final class CL {
 			public long getFunctionAddress(CharSequence functionName) {
 				ByteBuffer nameBuffer = memEncodeASCII(functionName);
 
-				long address =
-					platform == NULL
+				long address = platform == NULL
 					? nclGetExtensionFunctionAddress(memAddress(nameBuffer), clGetExtensionFunctionAddress)
 					: nclGetExtensionFunctionAddressForPlatform(platform, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform);
 
@@ -143,6 +130,7 @@ public final class CL {
 
 		functionProvider.release();
 		functionProvider = null;
+		icd = null;
 	}
 
 	public static FunctionProviderLocal getFunctionProvider() {

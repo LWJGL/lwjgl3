@@ -26,7 +26,7 @@ public class OpenALInfo {
 	protected void execute(String[] args) {
 		ALContext alContext = null;
 		try {
-			alContext = AL.create(null, 44100, 60, false);
+			alContext = ALContext.create(null, 44100, 60, false);
 			checkForErrors(alContext);
 		} catch (Exception e) {
 			die("Init", e.getMessage());

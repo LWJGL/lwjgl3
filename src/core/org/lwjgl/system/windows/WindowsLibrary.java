@@ -17,7 +17,7 @@ import static org.lwjgl.system.windows.WindowsPlatform.*;
 public class WindowsLibrary extends DynamicLinkLibrary.Default {
 
 	/** The LWJGL dll handle. */
-	public static final long HINSTANCE = GetModuleHandle(memEncodeUTF16(Sys.getNativeLibrary()));
+	public static final long HINSTANCE = GetModuleHandle("lwjgl");
 
 	static {
 		if ( HINSTANCE == 0 )

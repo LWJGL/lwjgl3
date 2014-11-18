@@ -4,7 +4,6 @@
  */
 package org.lwjgl;
 
-import java.io.File;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -19,8 +18,6 @@ public final class Sys {
 	/** The native library name */
 	private static final String JNI_LIBRARY_NAME = "lwjgl";
 
-	private static final String nativeLibrary;
-
 	/** Current version of library. */
 	public static final int
 		VERSION_MAJOR    = 3,
@@ -32,7 +29,14 @@ public final class Sys {
 
 	static {
 		log("Version " + getVersion());
-		nativeLibrary = loadLibrary(JNI_LIBRARY_NAME);
+
+		AccessController.doPrivileged(new PrivilegedAction<Object>() {
+			@Override
+			public Object run() {
+				LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+				return null;
+			}
+		});
 	}
 
 	private Sys() {
@@ -43,30 +47,9 @@ public final class Sys {
 		// Intentionally empty
 	}
 
-	/** Returns the native LWJGL library file that was loaded. */
-	public static String getNativeLibrary() {
-		return nativeLibrary;
-	}
-
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
 		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix;
-	}
-
-	private static String loadLibrary(final String libraryName) {
-		return AccessController.doPrivileged(new PrivilegedAction<String>() {
-			@Override
-			public String run() {
-				String libraryPath = System.getProperty("org.lwjgl.librarypath");
-
-				if ( libraryPath != null )
-					System.load(libraryPath + File.separator + System.mapLibraryName(libraryName));
-				else
-					System.loadLibrary(libraryName);
-
-				return libraryName;
-			}
-		});
 	}
 
 	/** The development state of the current build. */

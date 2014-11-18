@@ -36,37 +36,36 @@ public final class GL {
 	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
 
 	static {
-		create();
+		if ( !Boolean.getBoolean("org.lwjgl.opengl.explicitInit") )
+			create();
 	}
 
 	private GL() {}
 
 	public static void create() {
-		String libName = System.getProperty("org.lwjgl.opengl.libname", null);
-		if ( libName == null ) {
-			switch ( LWJGLUtil.getPlatform() ) {
-				case WINDOWS:
-					libName = "opengl32.dll";
-					break;
-				case LINUX:
-					libName = "libGL.so";
-					break;
-				case MACOSX:
-					libName = "/System/Library/Frameworks/OpenGL.framework";
-					break;
-				default:
-					throw new IllegalStateException();
-			}
+		String libName;
+		switch ( LWJGLUtil.getPlatform() ) {
+			case WINDOWS:
+				libName = "opengl32";
+				break;
+			case LINUX:
+				libName = "GL";
+				break;
+			case MACOSX:
+				libName = "/System/Library/Frameworks/OpenGL.framework";
+				break;
+			default:
+				throw new IllegalStateException();
 		}
 
-		create(libName);
+		create(System.getProperty("org.lwjgl.opengl.libname", libName));
 	}
 
 	public static void create(String libName) {
 		if ( functionProvider != null )
-			throw new IllegalStateException("GL has already been created.");
+			throw new IllegalStateException("OpenGL has already been created.");
 
-		final DynamicLinkLibrary OPENGL = apiCreateLibrary(libName);
+		final DynamicLinkLibrary OPENGL = LWJGLUtil.loadLibraryNative(libName);
 
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(ByteBuffer name);

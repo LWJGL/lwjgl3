@@ -41,7 +41,7 @@ public class WindowsTest {
 
 	public void testLWJGLInstance() {
 		assertEquals(
-			GetModuleHandle(memEncodeUTF16(Sys.getNativeLibrary())),
+			GetModuleHandle("lwjgl"),
 			HINSTANCE
 		);
 	}

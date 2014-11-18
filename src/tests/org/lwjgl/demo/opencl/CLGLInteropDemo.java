@@ -108,8 +108,6 @@ public final class CLGLInteropDemo {
 
 		final String vendorGL = getOpenGLVendor();
 
-		CL.create();
-
 		final Filter<CLPlatform> platformFilter = new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
