@@ -12,13 +12,19 @@ val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_t
 		"OpenAL.h"
 	)
 
-	documentation = "Native bindings to the EXT_thread_local_context ALC extension."
+	documentation =
+		"""
+		Native bindings to the $specLinkOpenALSoft extension.
+
+		This extension introduces the concept of a current thread-local context, with each thread able to have its own current context. The current context is
+		what the al- functions work on, effectively allowing multiple threads to independently drive separate OpenAL playback contexts.
+		"""
 
 	ALCboolean.func(
 		"SetThreadContext",
 		"""
-		Makes a context current with respect to OpenAL operation on the current thread. The context parameter can be NULL or a valid context pointer. Using NULL
-		results in no thread-specific context being current in the calling thread, which is useful when shutting OpenAL down.
+		Makes a context current with respect to OpenAL operation on the current thread. The context parameter can be $NULL or a valid context pointer. Using
+		$NULL results in no thread-specific context being current in the calling thread, which is useful when shutting OpenAL down.
 		""",
 
 		ALCcontext_p.IN("context", "the context to make current")
@@ -26,10 +32,6 @@ val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_t
 
 	ALCcontext_p.func(
 		"GetThreadContext",
-		"""
-		Returns a handle for the context that is currently affecting the thread. This will return a handle to the current thread-specific context if it is not
-		NULL, otherwise it will return the last set process-wide context.
-		"""
+		"Retrieve a handle to the thread-specific context of the calling thread. This function will return $NULL if no thread- specific context is set."
 	)
-
 }

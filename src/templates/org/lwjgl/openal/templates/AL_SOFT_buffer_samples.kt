@@ -12,10 +12,32 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"OpenAL.h"
 	)
 
-	documentation = "bindings to AL_SOFT_buffer_samples extension."
+	documentation =
+		"""
+		Native bindings to the $specLinkOpenALSoft extension.
+
+		This extension provides a more flexible mechanism for loading buffer data, as well as a method to retrieve buffer data. Unextended OpenAL only provides
+		a method to specify a single buffer format when loading data, which defines the data given by the application. The AL is given leeway in converting the
+		data, so that it is possible or more efficient to use internally. However, there are some drawbacks to this approach:
+		${ul(
+			"""
+			The conversion done by the implementation is hidden from the app. This makes it difficult for the app to know what kind of precision it will have,
+			and impossible to request a storage precision.
+			""",
+		    "Conversion is not guaranteed, so the application can be restricted in the formats that can be loaded depending on the implementation."
+		)}
+		If the application could specify the internal storage format, as well as use a separate format to specify the incoming data's format, it would allow to
+		add more input formats (signed 8-bit, 32-bit int, and float, for example), with no undue burden placed on the implementation beyond needing some
+		conversion routines. The application can then be assured that many different formats can be loaded, even if storage is restricted to a comparatively
+		small subset.
+
+		In addition, unextended OpenAL does not have any methods for updating only a portion of a buffer, nor a method to retrieve the data from a buffer.
+		"""
 
 	val InternalFormatParameters = IntConstant.block(
-		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).",
+		"""
+		Accepted by the {@code internalformat} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).
+		""",
 
 		"MONO8_SOFT" _ 0x1100,
 		"MONO16_SOFT" _ 0x1101,
@@ -53,7 +75,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	).javaDocLinks
 
 	val TypeParameters = IntConstant.block(
-		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
+		"Accepted by the {@code type} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
 
 		"BYTE_SOFT" _ 0x1400,
 		"UNSIGNED_BYTE_SOFT" _ 0x1401,
@@ -68,7 +90,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	).javaDocLinks
 
 	IntConstant.block(
-		"Accepted by the {@code channels} parameter of alGetBufferi and alGetBufferiv.",
+		"Accepted by the {@code paramName} parameter of alGetBufferi and alGetBufferiv.",
 
 		"INTERNAL_FORMAT_SOFT" _ 0x2008,
 		"BYTE_LENGTH_SOFT" _ 0x2009,
@@ -76,13 +98,13 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code channels} parameter of alGetBufferf and alGetBufferfv.",
+		"Accepted by the {@code paramName} parameter of alGetBufferf and alGetBufferfv.",
 
 		"SEC_LENGTH_SOFT" _ 0x200B
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code channels} parameter of alGetSourceiv and alGetSourcefv (these are the same as in AL_SOFT_buffer_sub_data).",
+		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv (these are the same as in AL_SOFT_buffer_sub_data).",
 
 		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
@@ -91,99 +113,76 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	ALvoid.func(
 		"BufferSamplesSOFT",
 		"""
-		To remove a buffer's sample data and replace it with new data, the
-		alBufferSamplesSOFT function should be used.
-		The named {@code channels} must be a buffer ID returned by alGenBuffers, and
-		not currently be attached to or queued on a source. The given
-		{@code channels} is the number of sample frames per second the data will
-		play at, and the {@code channels} is the storage format used (see Table
-		1.1). The number of uncompressed sample frames to load is specified by
-		{@code channels}.
+		Removes a buffer's sample data and replaces it with new data. The named {@code buffer} must be a buffer ID returned by AL10#GenBuffers(), and not
+		currently be attached to or queued on a source. The given {@code samplerate} is the number of sample frames per second the data will play at, and the
+		{@code internalformat} is the storage format used. The number of uncompressed sample frames to load is specified by {@code samples}.
 
-		The {@code channels} and {@code type} parameters specify the channel configuration and
-		sample type of the provided data (see Table 1.2 and 1.3). The samples will
-		be converted to the internal storage format as needed, however the channel
-		configuration must match the channel configuration of the storage format
-		or an AL_INVALID_ENUM error will be generated.
+		The {@code channels} and {@code type} parameters specify the channel configuration and sample type of the provided data. The samples will be converted
+		to the internal storage format as needed, however the channel configuration must match the channel configuration of the storage format or an
+		AL10#INVALID_ENUM error will be generated.
 
-		The {@code data} pointer should hold enough data as specified by the {@code channels},
-		{@code type}, and {@code samples} parameters, and will be copied and converted into
-		the buffer's storage. It may also be NULL, in which case the stored data
-		will be undefined.
+		The {@code data} pointer should hold enough data as specified by the {@code channels}, {@code type}, and {@code samples} parameters, and will be copied
+		and converted into the buffer's storage. It may also be $NULL, in which case the stored data will be undefined.
 
-		If AL_SOFT_loop_points is supported, a successful call will reset the
-		start and end loop points to 0 and {@code samples} respectively.
+		If {@link SOFTLoopPoints AL_SOFT_loop_points} is supported, a successful call will reset the start and end loop points to 0 and {@code samples}
+		respectively.
 		""",
-		ALuint.IN("buffer", "buffer ID returned by alGenBuffers, and not currently be attached to or queued on a source"),
-		ALuint.IN("samplerate", "number of sample frames per second the data will play at"),
-		ALenum.IN("internalformat", "storage format used", InternalFormatParameters),
-		ALsizei.IN("samples", "number of uncompressed sample frames to load"),
-		ALenum.IN("channels", "channel configuration of the provided data", ChannelsParameter),
-		ALenum.IN("type", "type of the provided data", TypeParameters),
-		const _ ALCvoid_p.IN("data", "buffer to write to")
+		ALuint.IN("buffer", "the buffer ID"),
+		ALuint.IN("samplerate", "the number of sample frames per second the data will play at"),
+		ALenum.IN("internalformat", "the internal format", InternalFormatParameters),
+		ALsizei.IN("samples", "the number of uncompressed sample frames to load"),
+		ALenum.IN("channels", "the channel configuration of the provided data", ChannelsParameter),
+		ALenum.IN("type", "the type of the provided data", TypeParameters),
+		const _ ALCvoid_p.IN("data", "the buffer data")
 	)
 
 	ALCboolean.func(
 		"IsBufferFormatSupportedSOFT",
-		"""
-		To query if a storage format is supported by the implementation, use the function
-		alIsBufferFormatSupportedSOFT. The function returns false if the given {@code format} is
-		not a recognized storage format. Otherwise, if it returns true it may be specified
-		as the {@code internalformat} for alBufferSamplesSOFT.
-		""",
-		ALCenum.IN("format", "format to check if supported", InternalFormatParameters)
+		"Queries if a storage format is supported by the implementation",
+
+		ALCenum.IN("format", "the format to query", InternalFormatParameters),
+	    returnDoc =
+	        """
+	        false if the given {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
+	        {@code internalformat} for #BufferSamplesSOFT().
+	        """
 	)
 
 	ALCvoid.func(
 		"BufferSubSamplesSOFT",
 		"""
-		To update a buffer with new data, call alBufferSubSamplesSOFT.
-		{@code buffer} is the ID of the buffer to modify. {@code offset} is the first sample
-		frame in the internal storage to be modified, and {@code samples} is the number
-		of sample frames to modify. They must not extend beyond the existing
-		internal storage length. The {@code channels} and {@code type} parameters specify the
-		channel configuration and sample type of the provided data buffer,
-		specified by {@code data}, which will be copied and converted to the buffer's
-		storage format. As with alBufferSamplesSOFT, the channel configuration
-		must match the storage format's channel configuration or an
-		AL_INVALID_ENUM error will be generated.
+		Update a buffer with new data. {@code buffer} is the ID of the buffer to modify. {@code offset} is the first sample frame in the internal storage to be
+		modified, and {@code samples} is the number of sample frames to modify. They must not extend beyond the existing internal storage length. The
+		{@code channels} and {@code type} parameters specify the channel configuration and sample type of the provided data buffer, specified by {@code data},
+		which will be copied and converted to the buffer's storage format. As with #BufferSamplesSOFT(), the channel configuration must match the storage
+		format's channel configuration or an AL10#INVALID_ENUM error will be generated.
 
-		When modifying a buffer that's playing on a source, an application must
-		take care to not modify the section that is currently being played. The
-		read-only source attributes
-
-		  AL_BYTE_RW_OFFSETS_SOFT
-		  AL_SAMPLE_RW_OFFSETS_SOFT
-
-		may be used to retrieve the read and write cursor offsets (see Table 3.0
-		and 3.1). Behavior is undefined if an attempt is made to modify buffer
-		data between the read and write offsets.
+		When modifying a buffer that's playing on a source, an application must take care to not modify the section that is currently being played. The
+		read-only source attributes #BYTE_RW_OFFSETS_SOFT and #SAMPLE_RW_OFFSETS_SOFT may be used to retrieve the read and write cursor offsets. Behavior is
+		undefined if an attempt is made to modify buffer data between the read and write offsets.
 		""",
-		ALuint.IN("buffer", "ID of the buffer to modify"),
-		ALCsizei.IN("offset", "first sample frame in the internal storage to be modified"),
-		ALCsizei.IN("samples", "number of sample frames to modify. They must not extend beyond the existing internal storage length."),
-		ALenum.IN("channels", "channel configuration of the provided data", ChannelsParameter),
-		ALenum.IN("type", "type of the provided data", TypeParameters),
-		const _ ALCvoid_p.IN("data", "buffer to write to")
+		ALuint.IN("buffer", "the buffer ID"),
+		ALCsizei.IN("offset", "the first sample frame in the internal storage to be modified"),
+		ALCsizei.IN("samples", "the number of sample frames to modify"),
+		ALenum.IN("channels", "the channel configuration of the provided data", ChannelsParameter),
+		ALenum.IN("type", "the type of the provided data", TypeParameters),
+		const _ ALCvoid_p.IN("data", "the buffer data")
 	)
 
 	ALCvoid.func(
 		"GetBufferSamplesSOFT",
 		"""
-		To retrieve a buffer's sample data, use alGetBufferSamplesSOFT.
-		This function will read the number of sample frames, given by {@code samples},
-		starting at {@code offset}, and convert them to the channel configuration and
-		sample type specified by {@code channels} and {@code type}, before writing to the
-		provided {@code data} buffer pointer. An AL_INVALID_VALUE error is generated if
-		{@code offset} and {@code samples} reach beyond the range of the buffer. The channel
-		configuration must match the internal storage format's channel
-		configuration, or else an AL_INVALID_ENUM error will be generated.
+		Reads the number of sample frames, given by {@code samples}, starting at {@code offset}, and converts them to the channel configuration and sample type
+		specified by {@code channels} and {@code type}, before writing to the provided {@code data} buffer pointer. An AL10#INVALID_VALUE error is generated if
+		{@code offset} and {@code samples} reach beyond the range of the buffer. The channel configuration must match the internal storage format's channel
+		configuration, or else an AL10#INVALID_ENUM error will be generated.
 		""",
-		ALuint.IN("buffer", "ID of the buffer to modify"),
-		ALCsizei.IN("offset", "first sample frame in the internal storage to be modified"),
-		ALCsizei.IN("samples", "number of sample frames to modify. They must not extend beyond the existing internal storage length."),
-		ALenum.IN("channels", "channel configuration of the provided data", ChannelsParameter),
-		ALenum.IN("type", "type of the provided data", TypeParameters),
-		ALCvoid_p.IN("data", "buffer to write to")
+
+		ALuint.IN("buffer", "the buffer to read"),
+		ALCsizei.IN("offset", "the sample frame offset"),
+		ALCsizei.IN("samples", "the number of sample frames to read"),
+		ALenum.IN("channels", "the target channel configuration", ChannelsParameter),
+		ALenum.IN("type", "the target sample type", TypeParameters),
+		ALCvoid_p.OUT("data", "buffer to write to")
 	)
 }

@@ -6,12 +6,20 @@ package org.lwjgl.openal.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
+import org.lwjgl.opengl.registryLink
 
 val AL_EXT_source_distance_model = "EXTSourceDistanceModel".nativeClassAL("EXT_source_distance_model") {
-	documentation = "bindings to AL_EXT_source_distance_model extension."
+	documentation =
+		"""
+		Native bindings to the $specLinkOpenALSoft extension.
+
+		This extension allows each source to specify a distance model, instead of being restricted to one distance model for every source in the context. It
+		provides a mechanism for applications to apply different models to each source, without the burden of manually applying the attenuation through the
+		source gain.
+		"""
 
 	IntConstant.block(
-		"AL_EXT_source_distance_model tokens.",
+		"Accepted by the {@code target} parameter of alEnable, alDisable, and alIsEnabled.",
 
 		"SOURCE_DISTANCE_MODEL" _ 0x200
 	)

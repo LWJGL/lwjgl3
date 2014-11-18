@@ -12,9 +12,15 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"OpenAL.h"
 	)
 
-	documentation = "bindings to ALC_SOFT_loopback extension."
+	documentation =
+		"""
+		Native bindings to the $specLinkOpenALSoft extension.
 
-	val RenderFormatSupportedTypeParameters = IntConstant.block(
+		This extension allows an application to read back OpenAL's rendered audio instead of having it output to an audio device on the system. Unextended
+		OpenAL will output audio to an audio device, with no mechanism to allow an application to divert the audio somewhere else.
+		"""
+
+	val Types = IntConstant.block(
 		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"BYTE_SOFT" _ 0x1400,
@@ -26,7 +32,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"FLOAT_SOFT" _ 0x1406
 	).javaDocLinks
 
-	val RenderFormatSupportedChannelParameters = IntConstant.block(
+	val Channels = IntConstant.block(
 		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"MONO_SOFT" _ 0x1500,
@@ -47,52 +53,52 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	ALCdevice_p.func(
 		"LoopbackOpenDeviceSOFT",
 		"""
-		Loopback devices provide a way for applications to "read back" rendered
-		audio without it being sent to an actual audio device. It allows
-		applications to render audio as fast or slow as it needs, making it
-		suitable for non-real-time rendering, and so it can be passed to an audio
-		codec or something for further processing.
+		Loopback devices provide a way for applications to "read back" rendered audio without it being sent to an actual audio device. It allows applications to
+		render audio as fast or slow as it needs, making it suitable for non-real-time rendering, and so it can be passed to an audio codec or something for
+		further processing.
 
-		The deviceName parameter is used to tell the AL which device or device
-		driver to use for subsequent rendering. This may be NULL for an
-		implementation-defined default, otherwise it must be a valid name returned
-		by enumeration (and further must be a device capable of loopback
-		rendering).
+		To open a loopback device, use this function.
 
-		A loopback device behaves largely the same as a playback device. You may
-		query playback state and error codes, and create contexts, which can then
-		be set as current to generate sources and buffers like normal.
+		A loopback device behaves largely the same as a playback device. You may query playback state and error codes, and create contexts, which can then be
+		set as current to generate sources and buffers like normal.
 
-		Note that loopback devices do not have either the ALC_SYNC or ALC_REFRESH
-		attributes. Attempting to query them will result in an ALC_INVALID_ENUM
+		Note that loopback devices do not have either the ALC10#SYNC or ALC10#REFRESH attributes. Attempting to query them will result in an ALC10#INVALID_ENUM
 		error.
 		""",
-		const _ ALCcharUTF8_p.IN("deviceName", "name of the device to open")
+
+		mods(const, nullable) _ ALCcharUTF8_p.IN(
+			"deviceName",
+			"""
+			which device or device driver to use for subsequent rendering. This may be $NULL for an implementation-defined default, otherwise it must be a valid
+			name returned by enumeration (and further must be a device capable of loopback rendering).
+			"""
+		)
 	)
 
 	ALCboolean.func(
 		"IsRenderFormatSupportedSOFT",
 		"""
-		When creating contexts, the attribute list must specify the format used
-		for rendering. This is done with the ALC_FORMAT_CHANNELS_SOFT,
-		ALC_FORMAT_TYPE_SOFT, and ALC_FREQUENCY attributes. This controls the
-		format of the audio subsequently rendered by the device.
+		When creating contexts, the attribute list must specify the format used for rendering. This is done with the #FORMAT_CHANNELS_SOFT, #FORMAT_TYPE_SOFT,
+		and ALC10#FREQUENCY attributes. This controls the format of the audio subsequently rendered by the device.
+
+		To check if a particular rendering format is available, use this function.
 		""",
-		nullable _ ALCdevice_p.IN("device", "the loopback device to query"),
-		ALCsizei.IN("frequency", "positive sample rate of the rendered audio"),
-		ALCenum.IN("channels", "channel configuration used for rendering", RenderFormatSupportedChannelParameters),
-		ALCenum.IN("type", "sample type of the written audio", RenderFormatSupportedTypeParameters)
+
+		ALCdevice_p.OUT("device", "the loopback device to query"),
+		ALCsizei.IN("frequency", "the sample rate of the rendered audio"),
+		ALCenum.IN("channels", "the channel configuration used for rendering", Channels),
+		ALCenum.IN("type", "sample type of the written audio", Types)
 	)
 
 	ALCvoid.func(
 		"RenderSamplesSOFT",
 		"""
-		The state of various objects on loopback devices (including processed
-		buffers and source offsets) is processed only when new samples are
-		rendered. To render samples, use the function
+		The state of various objects on loopback devices (including processed buffers and source offsets) is processed only when new samples are rendered. To
+		render samples, use this function.
 		""",
-		nullable _ ALCdevice_p.IN("device", "loopback device which samples are rendered from"),
-		ALCvoid_p.IN("buffer", "buffer to write to"),
-		ALCsizei.IN("samples", "number of sample frames to render")
+
+		ALCdevice_p.OUT("device", "the loopback device which samples are rendered from, using its contexts and associated buffers and sources"),
+		ALCvoid_p.OUT("buffer", "the buffer to write to"),
+		ALCsizei.IN("samples", "the number of sample frames to render")
 	)
 }
