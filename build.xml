@@ -18,10 +18,9 @@
     if ( !version.equals("1.6") )
       var messageString = "The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").";
       if (typeof println === 'undefined') {
-        this.println = messageString;
-      } else {
-        println(messageString);
+        this.println = print;
       }
+      println(messageString);
   }
   </script>
   </sequential>
