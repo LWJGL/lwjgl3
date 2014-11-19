@@ -16,7 +16,12 @@
 	if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
 		var version = java.lang.System.getProperty("java.specification.version");
 		if ( !version.equals("1.6") )
-			println("The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").");
+      var messageString = "The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").";
+      if (typeof println === 'undefined') {
+        this.println = messageString;
+      } else {
+        println(messageString);
+      }
 	}
 	</script>
 	</sequential>
