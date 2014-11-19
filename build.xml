@@ -6,45 +6,6 @@
 
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
-	<!--
-		JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
-		if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
-		JAVA_HOME instead and issue a warning if that's not a Java 6 SDK.
-	-->
-	<sequential>
-	<script language="javascript">
-	if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
-		var version = java.lang.System.getProperty("java.specification.version");
-		if ( !version.equals("1.6") )
-			println("The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").");
-	}
-	</script>
-	</sequential>
-	<condition property="env.JAVA6_HOME" value="${env.JAVA_HOME}">
-		<not><isset property="env.JAVA6_HOME"/></not>
-	</condition>
-
-	<path id="jdk.boot.classpath.jars">
-		<fileset dir="${env.JAVA6_HOME}/jre/lib">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
-	</path>
-	<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
-
-	<path id="lib.bin">
-		<pathelement path="${bin}"/>
-		<pathelement path="${lib}"/>
-	</path>
-	<property name="lib.bin" refid="lib.bin"/>
-
-	<path id="runtime.classpath">
-		<pathelement path="${bin.core}"/>
-		<pathelement path="${bin.util}"/>
-		<pathelement path="${res}"/>
-		<pathelement path="${bin.tests}"/>
-	</path>
-
 	<!-- Initialize build -->
 	<target name="-initialize" description="Initializes the directories required by the build process">
 		<mkdir dir="${lib}"/>
@@ -98,6 +59,34 @@
 
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
+	<target name="-init-compile" description="Initializes properties required for compilation">
+		<!--
+			JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
+			if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
+			JAVA_HOME instead and issue a warning if that's not a Java 6 SDK.
+		-->
+		<sequential>
+		<script language="javascript">
+		if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
+			var version = java.lang.System.getProperty("java.specification.version");
+			if ( !version.equals("1.6") )
+				print("The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").");
+		}
+		</script>
+		</sequential>
+		<condition property="env.JAVA6_HOME" value="${env.JAVA_HOME}">
+			<not><isset property="env.JAVA6_HOME"/></not>
+		</condition>
+
+		<path id="jdk.boot.classpath.jars">
+			<fileset dir="${env.JAVA6_HOME}/jre/lib">
+				<include name="*.jar"/>
+			</fileset>
+			<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
+		</path>
+		<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
+	</target>
+
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
 		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
 			<srcfiles dir="${src.templates}" includes="**" />
@@ -105,7 +94,7 @@
 		<antcall target="-compile-templates"/>
 	</target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" unless="templates-uptodate">
+	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
@@ -138,7 +127,7 @@
 		<touch file="${bin.templates}/touch.txt"/>
 	</target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+	<target name="formatter" description="Runs the template formatter tool" depends="-initialize, -init-compile"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
 		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
@@ -187,7 +176,7 @@
 		<touch file="${generated}/touch.txt" verbose="false"/>
 	</target>
 
-	<target name="compile" description="Compiles the Java source code" depends="generate">
+	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
 		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
@@ -218,7 +207,22 @@
 		</javac>
 	</target>
 
-	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
+	<target name="-init-runtime" description="Initializes properties required for running demos and tests">
+		<path id="lib.bin">
+			<pathelement path="${bin}"/>
+			<pathelement path="${lib}"/>
+		</path>
+		<property name="lib.bin" refid="lib.bin"/>
+
+		<path id="runtime.classpath">
+			<pathelement path="${bin.core}"/>
+			<pathelement path="${bin.util}"/>
+			<pathelement path="${res}"/>
+			<pathelement path="${bin.tests}"/>
+		</path>
+	</target>
+
+	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
 		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
 				<pathelement path="${lib}/disruptor.jar"/>
@@ -234,7 +238,7 @@
 		</testng>
 	</target>
 
-	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native">
+	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 		<condition property="class" value="${class}" else="">
 			<isset property="class"/>
@@ -268,7 +272,7 @@
 		<antcall target="-javadoc"/>
 	</target>
 
-	<target name="-javadoc" description="Generates the LWJGL JavaDoc" unless="javadoc-uptodate">
+	<target name="-javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile" unless="javadoc-uptodate">
 		<delete dir="${generated.javadoc}"/>
 		<javadoc
 			destdir="${generated.javadoc}"
