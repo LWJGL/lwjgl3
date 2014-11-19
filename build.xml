@@ -1,349 +1,349 @@
 <project name="LWJGL" basedir="." default="all">
 
-	<property name="build.sysclasspath" value="ignore"/>
+  <property name="build.sysclasspath" value="ignore"/>
 
-	<property name="config" location="config" relative="true"/>
+  <property name="config" location="config" relative="true"/>
 
-	<import file="${config}/build-definitions.xml" id="defs"/>
+  <import file="${config}/build-definitions.xml" id="defs"/>
 
-	<!--
-		JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
-		if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
-		JAVA_HOME instead and issue a warning if that's not a Java 6 SDK.
-	-->
-	<sequential>
-	<script language="javascript">
-	if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
-		var version = java.lang.System.getProperty("java.specification.version");
-		if ( !version.equals("1.6") )
+  <!--
+    JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
+    if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
+    JAVA_HOME instead and issue a warning if that's not a Java 6 SDK.
+  -->
+  <sequential>
+  <script language="javascript">
+  if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
+    var version = java.lang.System.getProperty("java.specification.version");
+    if ( !version.equals("1.6") )
       var messageString = "The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").";
       if (typeof println === 'undefined') {
         this.println = messageString;
       } else {
         println(messageString);
       }
-	}
-	</script>
-	</sequential>
-	<condition property="env.JAVA6_HOME" value="${env.JAVA_HOME}">
-		<not><isset property="env.JAVA6_HOME"/></not>
-	</condition>
+  }
+  </script>
+  </sequential>
+  <condition property="env.JAVA6_HOME" value="${env.JAVA_HOME}">
+    <not><isset property="env.JAVA6_HOME"/></not>
+  </condition>
 
-	<path id="jdk.boot.classpath.jars">
-		<fileset dir="${env.JAVA6_HOME}/jre/lib">
-			<include name="*.jar"/>
-		</fileset>
-		<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
-	</path>
-	<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
+  <path id="jdk.boot.classpath.jars">
+    <fileset dir="${env.JAVA6_HOME}/jre/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
+  </path>
+  <property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
 
-	<path id="lib.bin">
-		<pathelement path="${bin}"/>
-		<pathelement path="${lib}"/>
-	</path>
-	<property name="lib.bin" refid="lib.bin"/>
+  <path id="lib.bin">
+    <pathelement path="${bin}"/>
+    <pathelement path="${lib}"/>
+  </path>
+  <property name="lib.bin" refid="lib.bin"/>
 
-	<path id="runtime.classpath">
-		<pathelement path="${bin.core}"/>
-		<pathelement path="${bin.util}"/>
-		<pathelement path="${res}"/>
-		<pathelement path="${bin.tests}"/>
-	</path>
+  <path id="runtime.classpath">
+    <pathelement path="${bin.core}"/>
+    <pathelement path="${bin.util}"/>
+    <pathelement path="${res}"/>
+    <pathelement path="${bin.tests}"/>
+  </path>
 
-	<!-- Initialize build -->
-	<target name="-initialize" description="Initializes the directories required by the build process">
-		<mkdir dir="${lib}"/>
-		<mkdir dir="${generated}"/>
-		<mkdir dir="${bin.core}"/>
-		<mkdir dir="${bin.util}"/>
-		<mkdir dir="${bin.templates}"/>
-		<mkdir dir="${bin.tests}"/>
-		<mkdir dir="${bin.native}"/>
+  <!-- Initialize build -->
+  <target name="-initialize" description="Initializes the directories required by the build process">
+    <mkdir dir="${lib}"/>
+    <mkdir dir="${generated}"/>
+    <mkdir dir="${bin.core}"/>
+    <mkdir dir="${bin.util}"/>
+    <mkdir dir="${bin.templates}"/>
+    <mkdir dir="${bin.tests}"/>
+    <mkdir dir="${bin.native}"/>
 
-		<ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
+    <ant antfile="update-dependencies.xml" target="check-dependencies" inheritAll="false"/>
 
-		<!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
-		<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
-	</target>
+    <!--<taskdef resource="org/jetbrains/jet/buildtools/ant/antlib.xml" classpath="${kotlinc}/lib/kotlin-ant.jar"/>-->
+    <taskdef resource="testngtasks" classpath="libs/testng.jar"/>
+  </target>
 
-	<!-- Cleans up any files created during the execution of this script -->
-	<target name="clean" description="Cleans all directories controlled by this ant script" depends="clean-java, clean-native, clean-generated">
-		<delete dir="${bin}"/>
-	</target>
+  <!-- Cleans up any files created during the execution of this script -->
+  <target name="clean" description="Cleans all directories controlled by this ant script" depends="clean-java, clean-native, clean-generated">
+    <delete dir="${bin}"/>
+  </target>
 
-	<target name="clean-generated" description="Cleans files generated by this ant script" depends="clean-generated-java,clean-generated-native">
-		<!-- We track the generated directory in a separate repo, so delete individual subdirectories only. -->
-		<delete dir="${generated.tests}"/>
-		<delete dir="${generated.javadoc}"/>
-	</target>
+  <target name="clean-generated" description="Cleans files generated by this ant script" depends="clean-generated-java,clean-generated-native">
+    <!-- We track the generated directory in a separate repo, so delete individual subdirectories only. -->
+    <delete dir="${generated.tests}"/>
+    <delete dir="${generated.javadoc}"/>
+  </target>
 
-	<!-- Cleans up any non-native files created during the execution of this script -->
-	<target name="clean-java" description="Cleans non-native files generated by this ant script" depends="clean-generated-java">
-		<!-- Delete java classes only to avoid unnecessary native recompilation -->
-		<delete dir="${bin.core}"/>
-		<delete dir="${bin.util}"/>
-		<delete dir="${bin.templates}"/>
-		<delete dir="${bin.tests}"/>
-	</target>
+  <!-- Cleans up any non-native files created during the execution of this script -->
+  <target name="clean-java" description="Cleans non-native files generated by this ant script" depends="clean-generated-java">
+    <!-- Delete java classes only to avoid unnecessary native recompilation -->
+    <delete dir="${bin.core}"/>
+    <delete dir="${bin.util}"/>
+    <delete dir="${bin.templates}"/>
+    <delete dir="${bin.tests}"/>
+  </target>
 
-	<target name="clean-generated-java" description="Cleans Java source files generated by this ant script">
-		<delete file="${generated}/touch.txt" quiet="true"/>
-		<delete dir="${generated.java}"/>
-	</target>
+  <target name="clean-generated-java" description="Cleans Java source files generated by this ant script">
+    <delete file="${generated}/touch.txt" quiet="true"/>
+    <delete dir="${generated.java}"/>
+  </target>
 
-	<!-- Useful when we need to force native recompilation -->
-	<target name="clean-native" description="Cleans native binary files generated by this ant script">
-		<delete dir="${bin.native}"/>
-	</target>
+  <!-- Useful when we need to force native recompilation -->
+  <target name="clean-native" description="Cleans native binary files generated by this ant script">
+    <delete dir="${bin.native}"/>
+  </target>
 
-	<target name="clean-generated-native" description="Cleans native source files generated by this ant script">
-		<delete file="${generated}/touch.txt" quiet="true"/>
-		<delete dir="${generated.native}"/>
-	</target>
+  <target name="clean-generated-native" description="Cleans native source files generated by this ant script">
+    <delete file="${generated}/touch.txt" quiet="true"/>
+    <delete dir="${generated.native}"/>
+  </target>
 
-	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
+  <target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
-	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
-		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
-			<srcfiles dir="${src.templates}" includes="**" />
-		</uptodate>
-		<antcall target="-compile-templates"/>
-	</target>
+  <target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
+    <uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
+      <srcfiles dir="${src.templates}" includes="**" />
+    </uptodate>
+    <antcall target="-compile-templates"/>
+  </target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" unless="templates-uptodate">
-		<!-- Compile Java dependencies -->
-		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
-			<src path="${src.templates}"/>
-			<include name="org/lwjgl/**"/>
-		</javac>
+  <target name="-compile-templates" description="Compiles the Templates module" unless="templates-uptodate">
+    <!-- Compile Java dependencies -->
+    <javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
+      <src path="${src.templates}"/>
+      <include name="org/lwjgl/**"/>
+    </javac>
 
-		<!-- Compile Kotlin code -->
-		<echo message="Compiling Kotlin templates. This will take several seconds..." level="info" taskname="Templates"/>
-		<java classname="org.jetbrains.jet.preloading.Preloader" fork="true" failonerror="true" taskname="Templates">
-			<jvmarg value="-server"/>
-			<jvmarg value="-Xms1024m"/>
-			<jvmarg value="-Xverify:none"/>
+    <!-- Compile Kotlin code -->
+    <echo message="Compiling Kotlin templates. This will take several seconds..." level="info" taskname="Templates"/>
+    <java classname="org.jetbrains.jet.preloading.Preloader" fork="true" failonerror="true" taskname="Templates">
+      <jvmarg value="-server"/>
+      <jvmarg value="-Xms1024m"/>
+      <jvmarg value="-Xverify:none"/>
 
-			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
+      <jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
 
-			<classpath>
-				<pathelement path="${kotlinc}/lib/kotlin-preloader.jar"/>
-			</classpath>
-			<arg line="${kotlinc}/lib/kotlin-compiler.jar;${kotlinc}/lib/kotlin-runtime.jar"/>
-			<arg line="org.jetbrains.jet.cli.jvm.K2JVMCompiler 4096 notime"/>
+      <classpath>
+        <pathelement path="${kotlinc}/lib/kotlin-preloader.jar"/>
+      </classpath>
+      <arg line="${kotlinc}/lib/kotlin-compiler.jar;${kotlinc}/lib/kotlin-runtime.jar"/>
+      <arg line="org.jetbrains.jet.cli.jvm.K2JVMCompiler 4096 notime"/>
 
-			<arg line="-module ${config}/Templates.ktm"/>
-			<!--
-			<arg value="-Xno-call-assertions"/>
-			<arg value="-Xno-param-assertions"/>
-			-->
-		</java>
-		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
+      <arg line="-module ${config}/Templates.ktm"/>
+      <!--
+      <arg value="-Xno-call-assertions"/>
+      <arg value="-Xno-param-assertions"/>
+      -->
+    </java>
+    <!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
 
-		<touch file="${bin.templates}/touch.txt"/>
-	</target>
+    <touch file="${bin.templates}/touch.txt"/>
+  </target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
-		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}">
-			<src path="${src.templates}"/>
-			<include name="org/lwjgl/**"/>
-		</javac>
+  <target name="formatter" description="Runs the template formatter tool" depends="-initialize"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+    <javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}">
+      <src path="${src.templates}"/>
+      <include name="org/lwjgl/**"/>
+    </javac>
 
-		<java
-			classname="org.lwjgl.generator.util.TemplateFormatter"
-			fork="true"
-			spawn="true"
-			>
-			<classpath>
-				<pathelement path="${bin.templates}"/>
-				<pathelement path="${res}"/>
-			</classpath>
-		</java>
-	</target>
+    <java
+      classname="org.lwjgl.generator.util.TemplateFormatter"
+      fork="true"
+      spawn="true"
+      >
+      <classpath>
+        <pathelement path="${bin.templates}"/>
+        <pathelement path="${res}"/>
+      </classpath>
+    </java>
+  </target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="-initialize">
-		<available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
-		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
+  <target name="generate" description="Runs the bindings Generator" depends="-initialize">
+    <available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
+    <fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
-		<uptodate property="generated-uptodate" targetfile="${generated}/touch.txt">
-			<srcfiles dir="${bin.templates}" includes="**/*.class"/>
-		</uptodate>
-		<antcall target="-generate"/>
-	</target>
+    <uptodate property="generated-uptodate" targetfile="${generated}/touch.txt">
+      <srcfiles dir="${bin.templates}" includes="**/*.class"/>
+    </uptodate>
+    <antcall target="-generate"/>
+  </target>
 
-	<target name="-generate" description="Runs the code Generator" unless="generated-uptodate">
-		<java
-			classname="org.lwjgl.generator.GeneratorPackage"
-			fork="true"
-			failonerror="true"
-			taskname="Generator"
-			>
-			<classpath>
-				<pathelement path="${bin.templates}"/>
-				<pathelement path="${kotlinc}/lib/kotlin-runtime.jar"/>
-			</classpath>
+  <target name="-generate" description="Runs the code Generator" unless="generated-uptodate">
+    <java
+      classname="org.lwjgl.generator.GeneratorPackage"
+      fork="true"
+      failonerror="true"
+      taskname="Generator"
+      >
+      <classpath>
+        <pathelement path="${bin.templates}"/>
+        <pathelement path="${kotlinc}/lib/kotlin-runtime.jar"/>
+      </classpath>
 
-			<jvmarg value="-server"/>
+      <jvmarg value="-server"/>
 
-			<arg value="${src.templates}"/>
-			<arg value="${generated}"/>
-		</java>
+      <arg value="${src.templates}"/>
+      <arg value="${generated}"/>
+    </java>
 
-		<touch file="${generated}/touch.txt" verbose="false"/>
-	</target>
+    <touch file="${generated}/touch.txt" verbose="false"/>
+  </target>
 
-	<target name="compile" description="Compiles the Java source code" depends="generate">
-		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
-			<src>
-				<pathelement path="${src.core}"/>
-				<pathelement path="${src.util}"/>
-				<pathelement path="${generated.java}"/>
-			</src>
+  <target name="compile" description="Compiles the Java source code" depends="generate">
+    <javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
+      <src>
+        <pathelement path="${src.core}"/>
+        <pathelement path="${src.util}"/>
+        <pathelement path="${generated.java}"/>
+      </src>
 
-			<classpath path="${lib}/disruptor.jar"/>
+      <classpath path="${lib}/disruptor.jar"/>
 
-			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
-			<compilerarg value="-XDignore.symbol.file=true"/>
-		</javac>
-	</target>
+      <!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+      <compilerarg value="-XDignore.symbol.file=true"/>
+    </javac>
+  </target>
 
-	<target name="compile-native" description="Compiles the native source code" depends="-initialize, compile">
-		<ant antfile="${config}/${platform}/build.xml" inheritAll="false"/>
-	</target>
+  <target name="compile-native" description="Compiles the native source code" depends="-initialize, compile">
+    <ant antfile="${config}/${platform}/build.xml" inheritAll="false"/>
+  </target>
 
-	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
-		<javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Tests">
-			<classpath>
-				<pathelement path="${bin.core}"/>
-				<pathelement path="${bin.util}"/>
-				<pathelement path="${lib}/testng.jar"/>
-			</classpath>
+  <target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
+    <javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Tests">
+      <classpath>
+        <pathelement path="${bin.core}"/>
+        <pathelement path="${bin.util}"/>
+        <pathelement path="${lib}/testng.jar"/>
+      </classpath>
 
-			<src path="${src.tests}/"/>
-		</javac>
-	</target>
+      <src path="${src.tests}/"/>
+    </javac>
+  </target>
 
-	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
-		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
-			<classpath>
-				<pathelement path="${lib}/disruptor.jar"/>
-				<pathelement path="${lib}/jcommander.jar"/>
-			</classpath>
+  <target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native">
+    <testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
+      <classpath>
+        <pathelement path="${lib}/disruptor.jar"/>
+        <pathelement path="${lib}/jcommander.jar"/>
+      </classpath>
 
-			<jvmarg value="-Xcheck:jni"/>
-			<jvmarg value="-ea"/>
-			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+      <jvmarg value="-Xcheck:jni"/>
+      <jvmarg value="-ea"/>
+      <jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
+      <jvmarg value="-Djava.library.path=${lib.bin}"/>
 
-			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
-		</testng>
-	</target>
+      <xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
+    </testng>
+  </target>
 
-	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native">
-		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
-		<condition property="class" value="${class}" else="">
-			<isset property="class"/>
-		</condition>
+  <target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native">
+    <fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
+    <condition property="class" value="${class}" else="">
+      <isset property="class"/>
+    </condition>
 
-		<condition property="jvmargs" value="${jvmargs}" else="">
-			<isset property="jvmargs"/>
-		</condition>
-		<condition property="args" value="${args}" else="">
-			<isset property="args"/>
-		</condition>
+    <condition property="jvmargs" value="${jvmargs}" else="">
+      <isset property="jvmargs"/>
+    </condition>
+    <condition property="args" value="${args}" else="">
+      <isset property="args"/>
+    </condition>
 
-		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
-			<classpath>
-				<pathelement path="${lib}/disruptor.jar"/>
-				<pathelement path="${lib}/testng.jar"/>
-			</classpath>
+    <java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
+      <classpath>
+        <pathelement path="${lib}/disruptor.jar"/>
+        <pathelement path="${lib}/testng.jar"/>
+      </classpath>
 
-			<jvmarg value="-Djava.library.path=${lib.bin}"/>
-			<jvmarg line="${jvmargs}"/>
+      <jvmarg value="-Djava.library.path=${lib.bin}"/>
+      <jvmarg line="${jvmargs}"/>
 
-			<arg line="${args}"/>
-		</java>
-	</target>
+      <arg line="${args}"/>
+    </java>
+  </target>
 
-	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
-		<uptodate targetfile="${generated.javadoc}/index.html" property="javadoc-uptodate">
-			<srcfiles dir="${src.core}" includes="**"/>
-			<srcfiles dir="${generated.java}" includes="**"/>
-		</uptodate>
-		<antcall target="-javadoc"/>
-	</target>
+  <target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
+    <uptodate targetfile="${generated.javadoc}/index.html" property="javadoc-uptodate">
+      <srcfiles dir="${src.core}" includes="**"/>
+      <srcfiles dir="${generated.java}" includes="**"/>
+    </uptodate>
+    <antcall target="-javadoc"/>
+  </target>
 
-	<target name="-javadoc" description="Generates the LWJGL JavaDoc" unless="javadoc-uptodate">
-		<delete dir="${generated.javadoc}"/>
-		<javadoc
-			destdir="${generated.javadoc}"
-			source="1.6"
-			bootclasspathref="${jdk.boot.classpath}"
-			windowtitle="LWJGL ${build.version}"
-			encoding="utf8"
-			docencoding="utf8"
-			useexternalfile="true"
-			nohelp="true"
-			notree="true"
-		    stylesheetfile="${config}/javadoc.css"
-		    doclet="org.lwjgl.system.ExcludeDoclet"
-		    docletpath="${bin.templates}"
-			>
+  <target name="-javadoc" description="Generates the LWJGL JavaDoc" unless="javadoc-uptodate">
+    <delete dir="${generated.javadoc}"/>
+    <javadoc
+      destdir="${generated.javadoc}"
+      source="1.6"
+      bootclasspathref="${jdk.boot.classpath}"
+      windowtitle="LWJGL ${build.version}"
+      encoding="utf8"
+      docencoding="utf8"
+      useexternalfile="true"
+      nohelp="true"
+      notree="true"
+        stylesheetfile="${config}/javadoc.css"
+        doclet="org.lwjgl.system.ExcludeDoclet"
+        docletpath="${bin.templates}"
+      >
 
-			<!-- TODO: Add package-info documentation -->
+      <!-- TODO: Add package-info documentation -->
 
-			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
-			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
+      <doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
+      <bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
 
-			<fileset dir="${src.core}" includes="**"/>
-			<fileset dir="${src.util}" includes="**"/>
-			<fileset dir="${generated.java}" includes="**"/>
+      <fileset dir="${src.core}" includes="**"/>
+      <fileset dir="${src.util}" includes="**"/>
+      <fileset dir="${generated.java}" includes="**"/>
 
-			<classpath path="${lib}/disruptor.jar"/>
-		</javadoc>
-	</target>
+      <classpath path="${lib}/disruptor.jar"/>
+    </javadoc>
+  </target>
 
-	<target name="release" description="" depends="compile,javadoc">
-		<!-- Bundle classes -->
-		<mkdir dir="${release.jar}"/>
-		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
+  <target name="release" description="" depends="compile,javadoc">
+    <!-- Bundle classes -->
+    <mkdir dir="${release.jar}"/>
+    <jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
 
-		<!-- Java dependencies -->
-		<copy todir="${release.jar}" file="${lib}/disruptor.jar"/>
+    <!-- Java dependencies -->
+    <copy todir="${release.jar}" file="${lib}/disruptor.jar"/>
 
-		<!-- Download binaries from build.lwjgl.org -->
-		<mkdir dir="${release.native}/windows/x64"/>
-		<mkdir dir="${release.native}/windows/x86"/>
-		<update name="LWJGL Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll" dest="${release.native}/windows/x64"/>
-		<update name="LWJGL Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll" dest="${release.native}/windows/x86"/>
-		<update name="OpenAL32 Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/windows/x64"/>
-		<update name="OpenAL32 Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}/windows/x86"/>
+    <!-- Download binaries from build.lwjgl.org -->
+    <mkdir dir="${release.native}/windows/x64"/>
+    <mkdir dir="${release.native}/windows/x86"/>
+    <update name="LWJGL Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll" dest="${release.native}/windows/x64"/>
+    <update name="LWJGL Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll" dest="${release.native}/windows/x86"/>
+    <update name="OpenAL32 Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/windows/x64"/>
+    <update name="OpenAL32 Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}/windows/x86"/>
 
-		<mkdir dir="${release.native}/linux/x64"/>
-		<mkdir dir="${release.native}/linux/x86"/>
-		<update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}/linux/x64"/>
-		<update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/linux/x86"/>
-		<update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x64"/>
-		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x86"/>
+    <mkdir dir="${release.native}/linux/x64"/>
+    <mkdir dir="${release.native}/linux/x86"/>
+    <update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}/linux/x64"/>
+    <update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/linux/x86"/>
+    <update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x64"/>
+    <update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x86"/>
 
-		<mkdir dir="${release.native}/macosx/x64"/>
-		<update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}/macosx/x64"/>
-		<update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}/macosx/x64"/>
+    <mkdir dir="${release.native}/macosx/x64"/>
+    <update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}/macosx/x64"/>
+    <update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}/macosx/x64"/>
 
-		<!-- Bundle javadoc -->
-		<mkdir dir="${release.doc}"/>
-		<zip destfile="${release.doc}/javadoc.zip" basedir="${generated.javadoc}" includes="**" level="9" />
+    <!-- Bundle javadoc -->
+    <mkdir dir="${release.doc}"/>
+    <zip destfile="${release.doc}/javadoc.zip" basedir="${generated.javadoc}" includes="**" level="9" />
 
-		<!-- Copy license files -->
-		<copy todir="${release.doc}">
-			<fileset dir="${doc}" includes="LICENSE.txt"/>
-			<fileset dir="${doc}" includes="3rdparty/**"/>
-		</copy>
+    <!-- Copy license files -->
+    <copy todir="${release.doc}">
+      <fileset dir="${doc}" includes="LICENSE.txt"/>
+      <fileset dir="${doc}" includes="3rdparty/**"/>
+    </copy>
 
-		<!-- Bundle source -->
-		<zip destfile="${release}/src.zip" level="9">
-			<fileset dir="${src.core}" includes="**"/>
-			<fileset dir="${generated.java}" includes="**"/>
-		</zip>
-	</target>
+    <!-- Bundle source -->
+    <zip destfile="${release}/src.zip" level="9">
+      <fileset dir="${src.core}" includes="**"/>
+      <fileset dir="${generated.java}" includes="**"/>
+    </zip>
+  </target>
 </project>
