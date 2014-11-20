@@ -103,17 +103,18 @@
 
 		<!-- Compile Kotlin code -->
 		<echo message="Compiling Kotlin templates. This will take several seconds..." level="info" taskname="Templates"/>
-		<java classname="org.jetbrains.jet.preloading.Preloader" fork="true" failonerror="true" taskname="Templates">
+		<java
+			classpath="${kotlinc}/lib/kotlin-preloader.jar"
+			classname="org.jetbrains.jet.preloading.Preloader"
+			fork="true" failonerror="true" taskname="Templates"
+			>
 			<jvmarg value="-server"/>
 			<jvmarg value="-Xms1024m"/>
 			<jvmarg value="-Xverify:none"/>
 
 			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
 
-			<classpath>
-				<pathelement path="${kotlinc}/lib/kotlin-preloader.jar"/>
-			</classpath>
-			<arg line="${kotlinc}/lib/kotlin-compiler.jar;${kotlinc}/lib/kotlin-runtime.jar"/>
+			<arg line="${kotlinc}/lib/kotlin-compiler.jar${path.separator}${kotlinc}/lib/kotlin-runtime.jar"/>
 			<arg line="org.jetbrains.jet.cli.jvm.K2JVMCompiler 4096 notime"/>
 
 			<arg line="-module ${config}/Templates.ktm"/>
@@ -122,7 +123,6 @@
 			<arg value="-Xno-param-assertions"/>
 			-->
 		</java>
-		<!--<kotlinc module="${config}/Templates.ktm" jar="${lib}/templates.jar" />-->
 
 		<touch file="${bin.templates}/touch.txt"/>
 	</target>
