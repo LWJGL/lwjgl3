@@ -28,7 +28,7 @@ public final class Sys {
 	public static final BuildType BUILD_TYPE = BuildType.ALPHA;
 
 	static {
-		log("Version " + getVersion());
+		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
 
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
 			@Override

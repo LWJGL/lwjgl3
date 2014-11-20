@@ -52,7 +52,6 @@ public abstract class AbstractGears {
 	protected abstract void destroy();
 
 	protected void initGLState() {
-		System.err.println("LWJGL: " + Sys.getVersion() + " / " + LWJGLUtil.getPlatformName());
 		System.err.println("GL_VENDOR: " + glGetString(GL_VENDOR));
 		System.err.println("GL_RENDERER: " + glGetString(GL_RENDERER));
 		System.err.println("GL_VERSION: " + glGetString(GL_VERSION));
