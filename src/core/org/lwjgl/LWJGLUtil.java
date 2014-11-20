@@ -318,12 +318,12 @@ public final class LWJGLUtil {
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			if ( loadLibrary(LOADER_SYSTEM, override, platformPath, libName) )
+			if ( loadLibrary(LOADER_SYSTEM, override, platformPath, libName, false) )
 				return;
 		}
 
 		// Then java.library.path
-		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), platformPath, libName) )
+		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), platformPath, libName, false) )
 			return;
 
 		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
@@ -350,13 +350,13 @@ public final class LWJGLUtil {
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName);
+			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName, null);
 			if ( lib != null )
 				return lib;
 		}
 
 		// Then java.library.path
-		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName);
+		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName, null);
 		if ( lib != null )
 			return lib;
 
@@ -376,7 +376,7 @@ public final class LWJGLUtil {
 	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
 		@Override
 		public Boolean load(String library) {
-			System.load(library);
+			System.load(new File(library).getAbsolutePath());
 			return true;
 		}
 	};
@@ -388,7 +388,7 @@ public final class LWJGLUtil {
 		}
 	};
 
-	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String platformPath, String libName) {
+	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String platformPath, String libName, T onFailure) {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
 			try {
 				return loader.load(root + File.separator + libName);
@@ -400,7 +400,7 @@ public final class LWJGLUtil {
 			}
 		}
 
-		return null;
+		return onFailure;
 	}
 
 	/**

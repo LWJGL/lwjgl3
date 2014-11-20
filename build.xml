@@ -208,11 +208,11 @@
 	</target>
 
 	<target name="-init-runtime" description="Initializes properties required for running demos and tests">
-		<path id="lib.bin">
+		<path id="library.path">
 			<pathelement path="${bin}"/>
 			<pathelement path="${lib}"/>
 		</path>
-		<property name="lib.bin" refid="lib.bin"/>
+		<property name="library.path" refid="library.path"/>
 
 		<path id="runtime.classpath">
 			<pathelement path="${bin.core}"/>
@@ -232,7 +232,7 @@
 			<jvmarg value="-Xcheck:jni"/>
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+			<jvmarg value="-Djava.library.path=${library.path}"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
 		</testng>
@@ -260,7 +260,7 @@
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
-			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+			<jvmarg value="-Djava.library.path=${library.path}"/>
 			<jvmarg line="${osxargs}"/>
 			<jvmarg line="${jvmargs}"/>
 
