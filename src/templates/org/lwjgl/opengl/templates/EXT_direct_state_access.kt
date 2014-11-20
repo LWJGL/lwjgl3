@@ -1122,7 +1122,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     value parameters
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
 		"EnableClientStateiEXT",
 		"",
 
@@ -1130,7 +1130,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
 		"DisableClientStateiEXT",
 		"",
 
@@ -1179,7 +1179,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and before state value parameters
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
 		"GetFloati_vEXT",
 		"",
 
@@ -1188,7 +1188,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
 		"GetDoublei_vEXT",
 		"",
 
@@ -1197,7 +1197,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
 		"GetPointeri_vEXT",
 		"",
 
