@@ -32,3 +32,5 @@ val CFTypeID = IntegerType("CFTypeID", PrimitiveMapping.LONG, unsigned = true)
 val CFOptionFlags = IntegerType("CFOptionFlags", PrimitiveMapping.LONG, unsigned = true)
 val CFHashCode = IntegerType("CFHashCode", PrimitiveMapping.LONG, unsigned = true)
 val CFIndex = IntegerType("CFIndex", PrimitiveMapping.LONG)
+
+val pid_t = PointerType("pid_t")

@@ -23,18 +23,17 @@ public class MacOSXGLContext extends GLContext {
 
 	@Override
 	protected void makeCurrentImpl(long target) {
-		// TODO: implement
+		CGLSetCurrentContext(handle);
 	}
 
 	@Override
 	protected void makeCurrentImpl(long targetDraw, long targetRead) {
-		// TODO: implement
+		CGLSetCurrentContext(handle);
 	}
 
 	@Override
 	public boolean isCurrent() {
-		// TODO: implement
-		return false;
+		return CGLGetCurrentContext() == handle;
 	}
 
 	public static MacOSXGLContext createFromCurrent() {
@@ -45,7 +44,7 @@ public class MacOSXGLContext extends GLContext {
 
 	@Override
 	public void destroyImpl() {
-		// TODO: implement
+		CGLDestroyContext(handle);
 	}
 
 }

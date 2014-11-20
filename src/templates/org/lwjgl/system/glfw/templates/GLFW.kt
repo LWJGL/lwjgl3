@@ -850,7 +850,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	Code(
 		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
 		javaAfterNative = statement(
-			"\t\tif ( $RESULT != NULL && LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX )\n\t\t\tWindowCallback.set(__result, new WindowCallbackAdapter());"
+			"\t\tif ( $RESULT != NULL )\n\t\t\tWindowCallback.windowCreated(__result);"
 		)
 	) _ GLFWwindow.func(
 		"CreateWindow",
@@ -1376,7 +1376,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	Code(
-		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.pollEvents(); return; }")
+		javaInit = statement("\t\tif ( WindowCallback.pollEventsOverride() ) return;")
 	) _ void.func(
 		"PollEvents",
 		"""
@@ -1404,7 +1404,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	Code(
-		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) { WindowCallbackMacOSX.waitEvents(); return; }")
+		javaInit = statement("\t\tif ( WindowCallback.waitEventsOverride() ) return;")
 	) _ void.func(
 		"WaitEvents",
 		"""

@@ -9,6 +9,7 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.system.macosx.EventLoop;
 
 import java.lang.reflect.Method;
 import java.util.EnumSet;
@@ -108,7 +109,7 @@ public abstract class WindowCallback {
 		}
 
 		if ( proc != null ) {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
+			if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !EventLoop.STARTED_ON_FIRST_THREAD ) {
 				// Wrap the user-specified callback
 				proc = new WindowCallbackMacOSX(proc);
 				// Enable all event types, else glfwWaitEvents can block
@@ -358,5 +359,28 @@ public abstract class WindowCallback {
 	 * @see GLFW#glfwSetDropCallback
 	 */
 	public abstract void drop(long window, int count, long names);
+
+	// Workarounds
+
+	static void windowCreated(long window) {
+		if ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX && !EventLoop.STARTED_ON_FIRST_THREAD )
+			WindowCallback.set(window, new WindowCallbackAdapter());
+	}
+
+	static boolean pollEventsOverride() {
+		if ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX && !EventLoop.STARTED_ON_FIRST_THREAD ) {
+			WindowCallbackMacOSX.pollEvents();
+			return true;
+		}
+		return false;
+	}
+
+	static boolean waitEventsOverride() {
+		if ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX && !EventLoop.STARTED_ON_FIRST_THREAD ) {
+			WindowCallbackMacOSX.waitEvents();
+			return true;
+		}
+		return false;
+	}
 
 }

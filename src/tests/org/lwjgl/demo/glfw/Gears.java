@@ -4,8 +4,6 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -19,13 +17,11 @@ import java.nio.ByteBuffer;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.glfw.GLFW.*;
-import static org.lwjgl.system.macosx.CGL.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
 
-	private long      window;
-	private GLContext context;
+	private long window;
 
 	public static void main(String[] args) {
 		new Gears().execute();
@@ -71,7 +67,7 @@ public class Gears extends AbstractGears {
 		);
 
 		glfwMakeContextCurrent(window);
-		context = GLContext.createFromCurrent();
+		GLContext.createFromCurrent();
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
@@ -83,15 +79,7 @@ public class Gears extends AbstractGears {
 		int frames = 0;
 
 		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
-			try {
-				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-					CGLLockContext(context.getPointer());
-
-				renderLoop();
-			} finally {
-				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-					CGLUnlockContext(context.getPointer());
-			}
+			renderLoop();
 
 			glfwPollEvents();
 			glfwSwapBuffers(window);

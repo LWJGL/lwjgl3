@@ -244,6 +244,9 @@
 			<isset property="class"/>
 		</condition>
 
+		<condition property="osxargs" value="-XstartOnFirstThread" else="">
+			<isset property="platform.macosx"/>
+		</condition>
 		<condition property="jvmargs" value="${jvmargs}" else="">
 			<isset property="jvmargs"/>
 		</condition>
@@ -258,6 +261,7 @@
 			</classpath>
 
 			<jvmarg value="-Djava.library.path=${lib.bin}"/>
+			<jvmarg line="${osxargs}"/>
 			<jvmarg line="${jvmargs}"/>
 
 			<arg line="${args}"/>

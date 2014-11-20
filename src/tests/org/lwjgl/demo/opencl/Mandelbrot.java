@@ -6,12 +6,13 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
-import org.lwjgl.opengl.*;
+import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.glfw.WindowCallback;
 import org.lwjgl.system.glfw.WindowCallbackAdapter;
 
@@ -251,15 +252,15 @@ public class Mandelbrot {
 			// Detect GLtoCL synchronization method
 			syncGLtoCL = !glCaps.GL_ARB_cl_event; // GL3.2 or ARB_sync implied
 			log(syncGLtoCL
-			    ? "GL to CL sync: Using clFinish"
-			    : "GL to CL sync: Using OpenCL events"
+				    ? "GL to CL sync: Using clFinish"
+				    : "GL to CL sync: Using OpenCL events"
 			);
 
 			// Detect CLtoGL synchronization method
 			syncCLtoGL = !device.getCapabilities().cl_khr_gl_event;
 			log(syncCLtoGL
-			    ? "CL to GL sync: Using glFinish"
-			    : "CL to GL sync: Using implicit sync (cl_khr_gl_event)"
+				    ? "CL to GL sync: Using glFinish"
+				    : "CL to GL sync: Using implicit sync (cl_khr_gl_event)"
 			);
 
 			vao = glGenVertexArrays();
@@ -584,15 +585,7 @@ public class Mandelbrot {
 		}
 		computeCL(doublePrecision);
 
-		try {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-				CGLLockContext(glContext.getPointer());
-
-			renderGL();
-		} finally {
-			if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-				CGLUnlockContext(glContext.getPointer());
-		}
+		renderGL();
 	}
 
 	// OpenCL
