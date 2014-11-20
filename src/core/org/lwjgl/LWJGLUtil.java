@@ -10,12 +10,9 @@ import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.nio.ByteBuffer;
-import java.security.AccessController;
-import java.security.PrivilegedAction;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.regex.Pattern;
 
 import static org.lwjgl.system.APIUtil.*;
@@ -315,36 +312,19 @@ public final class LWJGLUtil {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
+		String libName = System.mapLibraryName(name);
 		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			String libName = System.mapLibraryName(name);
-			for ( String root : Pattern.compile(File.pathSeparator).split(override) ) {
-				try {
-					System.load(root + File.separator + libName);
-					return;
-				} catch (Throwable t0) {
-					try {
-						System.load(root + File.separator + platformPath + File.separator + libName);
-						return;
-					} catch (Throwable t1) {}
-				}
-			}
+			if ( loadLibrary(LOADER_SYSTEM, override, platformPath, libName) )
+				return;
 		}
 
 		// Then java.library.path
-		try {
-			System.loadLibrary(name);
+		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), platformPath, libName) )
 			return;
-		} catch (Throwable t0) {
-			try {
-				System.loadLibrary(platformPath.replace(File.separatorChar, '/') + '/' + name);
-				return;
-			} catch (Throwable t1) {
-			}
-		}
 
 		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
 	}
@@ -370,13 +350,13 @@ public final class LWJGLUtil {
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			DynamicLinkLibrary lib = loadLibraryNative(override, platformPath, libName);
+			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName);
 			if ( lib != null )
 				return lib;
 		}
 
 		// Then java.library.path
-		DynamicLinkLibrary lib = loadLibraryNative(System.getProperty("java.library.path"), platformPath, libName);
+		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName);
 		if ( lib != null )
 			return lib;
 
@@ -389,13 +369,32 @@ public final class LWJGLUtil {
 		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
 	}
 
-	private static DynamicLinkLibrary loadLibraryNative(String path, String platformPath, String libName) {
+	private interface LibraryLoader<T> {
+		T load(String library);
+	}
+
+	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
+		@Override
+		public Boolean load(String library) {
+			System.load(library);
+			return true;
+		}
+	};
+
+	private static final LibraryLoader<DynamicLinkLibrary> LOADER_NATIVE = new LibraryLoader<DynamicLinkLibrary>() {
+		@Override
+		public DynamicLinkLibrary load(String library) {
+			return apiCreateLibrary(library);
+		}
+	};
+
+	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String platformPath, String libName) {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
 			try {
-				return apiCreateLibrary(root + File.separator + libName);
+				return loader.load(root + File.separator + libName);
 			} catch (Throwable t0) {
 				try {
-					return apiCreateLibrary(root + File.separator + platformPath + File.separator + libName);
+					return loader.load(root + File.separator + platformPath + File.separator + libName);
 				} catch (Throwable t1) {
 				}
 			}
