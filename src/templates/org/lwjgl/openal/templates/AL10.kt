@@ -533,7 +533,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("sourceName", "the target source"),
 		AutoSize("bufferNames") _ ALsizei.IN("numEntries", "the number of buffers to unqueue"),
-		SingleValue("bufferName") _ ALuint_p.IN("bufferNames", "the buffer names")
+		returnValue _ ALuint_p.OUT("bufferNames", "the buffer names")
 	)
 
 	val alSourcePlay = ALvoid.func(
