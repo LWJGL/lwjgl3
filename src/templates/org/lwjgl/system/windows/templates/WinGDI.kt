@@ -334,7 +334,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		int.IN(
 			"savedDC",
 			"""
-			the saved state to be restored. If this parameter is positive, {@code savedDC} represents a specific instance of the state to be restored. If this\
+			the saved state to be restored. If this parameter is positive, {@code savedDC} represents a specific instance of the state to be restored. If this
 			parameter is negative, {@code savedDC} represents an instance relative to the current state. For example, -1 restores the most recently saved state.
 			"""
 		)

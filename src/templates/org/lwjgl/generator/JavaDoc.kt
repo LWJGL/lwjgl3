@@ -7,12 +7,9 @@ package org.lwjgl.generator
 import java.util.ArrayList
 import java.util.regex.Pattern
 
-/** Can be used inside JavaDoc. Will be replaced by a \t character after laying out the output JavaDoc. */
-val tab = "_TAB_"
-
 private val PARAGRAPH_PATTERN = Pattern.compile("\\s*^\\s*$\\s*", Pattern.MULTILINE)
 private val CLEANUP_PATTERN = Pattern.compile("^[ \t]++(?![*])", Pattern.MULTILINE)
-private val TAB_PATTERN = Pattern.compile(tab)
+private val UNESCAPE_PATTERN = Pattern.compile("\uFFFF")
 
 fun String.replaceAll(pattern: Pattern, replacement: String) = pattern.matcher(this).replaceAll(replacement)
 
@@ -50,7 +47,7 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 
 	return result
 		.replaceAll(CLEANUP_PATTERN, linePrefix)
-		.replaceAll(TAB_PATTERN, "\t")
+		.replaceAll(UNESCAPE_PATTERN, "")
 }
 
 fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true): String {
@@ -63,13 +60,13 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun String.toJavaDoc(paramsIn: Stream<Parameter>, returnDoc: String, since: String): String {
+fun NativeClass.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>, returnDoc: String, since: String): String {
 	// TODO: This is shit, optimize
 	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut }
 	if ( params.isEmpty() && returnDoc.isEmpty() )
-		return this.toJavaDoc()
+		return documentation.toJavaDoc()
 
-	val javaDoc = "\t/**\n\t * ${cleanup()}"
+	val javaDoc = "\t/**\n\t * ${documentation.cleanup()}"
 
 	val builder = StringBuilder(javaDoc)
 
@@ -87,14 +84,14 @@ fun String.toJavaDoc(paramsIn: Stream<Parameter>, returnDoc: String, since: Stri
 			for ( i in 0..(alignment - it.name.size) )
 				builder append ' '
 
-			builder append it.documentation.cleanup(paramMultilineAligment)
+			builder append processDocumentation(it.documentation).cleanup(paramMultilineAligment)
 		}
 	}
 
 	if ( !returnDoc.isEmpty() ) {
 		builder append "\n\t *"
 		builder append "\n\t * @return "
-		builder append returnDoc.cleanup("\t *         ")
+		builder append processDocumentation(returnDoc).cleanup("\t *         ")
 	}
 
 	if ( !since.isEmpty() ) {
@@ -122,18 +119,19 @@ private fun paramMultilineAligment(alignment: Int): String {
 
 // DSL extensions
 
-private val ESCAPE_TAB_PATTERN = Pattern.compile("\t|(?:^\\s*$)", Pattern.MULTILINE) // Tabs and empty-lines
-private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE)
-
 /** Useful for simple expression with embedded markup. */
 fun code(code: String) = """<code style="font-family: monospace">$code</code>"""
+
+private val TRIM_PATTERN = Pattern.compile("""^\s*\n|\n\s*$""") // first and/or last empty lines...
+private val ESCAPE_PATTERN = Pattern.compile("^[ \t\n]", Pattern.MULTILINE) // leading space/tab in line, empty line
+private val CODE_BLOCK_CLEANUP_PATTERN = Pattern.compile("^", Pattern.MULTILINE) // to the start of all lines...
 
 /** Useful for raw code blocks without markup. */
 fun codeBlock(code: String) = """<pre><code style="font-family: monospace">
 ${code
-	.trim()
-	.replaceAll(ESCAPE_TAB_PATTERN, tab) // Replace tabs/empty-lines with the tab token
-	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // Add a \t so that the JavaDoc layout code above picks up new lines.
+	.replaceAll(TRIM_PATTERN, "") // ...trim (not lines with content)
+	.replaceAll(ESCAPE_PATTERN, "\uFFFF$0") // ...escape
+	.replaceAll(CODE_BLOCK_CLEANUP_PATTERN, "\t") // ...add a \t so that the JavaDoc layout code above picks up new lines.
 }</code></pre>"""
 
 fun url(href: String, innerHTML: String) = """<a href="$href">$innerHTML</a>"""

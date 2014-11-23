@@ -1222,7 +1222,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	val CallbackReturnDoc =
 		"""
 		the previously set callback, or $NULL if no callback was set or the library had not been
-		<a href=\"http://www.glfw.org/docs/latest/intro.html\#intro_init\">initialized</a>
+		<a href="http://www.glfw.org/docs/latest/intro.html\#intro_init">initialized</a>
 		"""
 
 	val CALLBACK_WINDOW = GLFWwindow.IN("window", "the window whose callback to set")

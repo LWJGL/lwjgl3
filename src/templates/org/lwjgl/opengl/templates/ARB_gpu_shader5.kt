@@ -15,7 +15,7 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 		This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs, extending the
 		capabilities of version 1.50 of the OpenGL Shading Language. Shaders using the new functionality provided by this extension should enable this
 		functionality via the construct:
-		${codeBlock("#extension GL_ARB_gpu_shader5 : require     (or enable)")}
+		${codeBlock("\\#extension GL_ARB_gpu_shader5 : require     (or enable)")}
 		This extension provides a variety of new features for all shader types, including:
 		${ul(
 			"""
