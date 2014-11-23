@@ -603,8 +603,8 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"MaterialParameter",
 		"EMISSION" _ 0x1600,
 		"SHININESS" _ 0x1601,
-		"AMBIENT_AND_DIFFUSE" _ 0x1602
-		//"COLOR_INDEXES" _ 0x1603
+		"AMBIENT_AND_DIFFUSE" _ 0x1602,
+		"COLOR_INDEXES" _ 0x1603
 		/*	  AMBIENT */
 		/*	  DIFFUSE */
 		/*	  SPECULAR */
@@ -626,7 +626,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	IntConstant.block(
 		"PixelFormat",
-		//"COLOR_INDEX" _ 0x1900,
+		"COLOR_INDEX" _ 0x1900,
 		"STENCIL_INDEX" _ 0x1901,
 		"DEPTH_COMPONENT" _ 0x1902,
 		"RED" _ 0x1903,
@@ -1100,6 +1100,17 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLdouble.IN("depth", "the value to which to clear the depth buffer")
+	)
+
+	deprecatedGL _ GLvoid.func(
+		"ClearIndex",
+		"""
+		sets the clear color index. index is converted to a fixed-point value with unspecified precision to the left of the binary point; the integer part of
+		this value is then masked with ${code("2<sup>m</sup> &ndash; 1")}, where {@code m} is the number of bits in a color index value stored in the
+		framebuffer.
+		""",
+
+		GLfloat.IN("index", "the value to which to clear the color buffer in color index mode")
 	)
 
 	GLvoid.func(
@@ -1945,6 +1956,54 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		GLenum.IN("hint", "the behavior hint", "#FASTEST #NICEST #DONT_CARE")
+	)
+
+	val index = "the value to which the current color index should be set"
+
+	deprecatedGL _ GLvoid.func(
+		"Indexi",
+		"Updates the current (single-valued) color index.",
+		GLint.IN("index", index)
+	)
+	deprecatedGL _ GLvoid.func("Indexub", "Unsigned byte version of #Indexi().", GLubyte.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexs", "Short version of #Indexi().", GLshort.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexf", "Float version of #Indexi().", GLfloat.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexd", "Double version of #Indexi().", GLdouble.IN("index", index))
+
+	deprecatedGL _ GLvoid.func(
+		"Indexiv",
+		"Pointer version of #Indexi()",
+
+		mods(const, Check(1)) _ GLint_p.IN("index", index)
+	)
+
+	deprecatedGL _ GLvoid.func("Indexubv", "Pointer version of #Indexub().", mods(const, Check(1)) _ GLubyte_p.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexsv", "Pointer version of #Indexs().", mods(const, Check(1)) _ GLshort_p.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexfv", "Pointer version of #Indexf().", mods(const, Check(1)) _ GLfloat_p.IN("index", index))
+	deprecatedGL _ GLvoid.func("Indexdv", "Pointer version of #Indexd().", mods(const, Check(1)) _ GLdouble_p.IN("index", index))
+
+	deprecatedGL _ GLvoid.func(
+		"IndexMask",
+	    """
+	    The least significant n bits of mask, where n is the number of bits in a color index buffer, specify a mask. Where a 1 appears in this mask, the
+	    corresponding bit in the color index buffer (or buffers) is written; where a 0 appears, the bit is not written. This mask applies only in color index
+	    mode.
+	    """,
+
+	    GLuint.IN("mask", "the color index mask value")
+	)
+
+	deprecatedGL _ GLvoid.func(
+		"IndexPointer",
+	    "Specifies the location and organization of a color index array.",
+
+	    AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
+		    "type",
+		    "the data type of the values stored in the array",
+		    "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
+	     ),
+		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
+		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color index array data")
 	)
 
 	deprecatedGL _ GLvoid.func("InitNames", "Clears the selection name stack.")

@@ -167,16 +167,6 @@ val ARB_fragment_program_shadow = EXT_FLAG.nativeClassGL("ARB_fragment_program_s
 		Requires ${"ARB_fragment_program".cap} and ${"ARB_shadow".cap}.
 		"""
 }
-val ARB_multitexture = EXT_FLAG.nativeClassGL("ARB_multitexture", postfix = ARB) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension allows application of multiple textures to a fragment in one rendering pass.
-
-		${GL12.promoted}
-		"""
-}
 val ARB_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("ARB_robust_buffer_access_behavior", postfix = ARB) {
 	documentation =
 		"""
