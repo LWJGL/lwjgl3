@@ -7,7 +7,7 @@ package org.lwjgl.openal.templates
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
-val AL_SOFT_deferred_updates = "SOFTDeferredUupdates".nativeClassAL("SOFT_deferred_updates") {
+val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferred_updates") {
 	nativeImport (
 		"OpenAL.h"
 	)
