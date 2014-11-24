@@ -1778,7 +1778,16 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"GetPointerv",
 		"Returns a pointer in the current GL context.",
 
-		GLenum.IN("pname", "the pointer to return"),
+		GLenum.IN(
+			"pname",
+			"the pointer to return",
+			"""
+			#FEEDBACK_BUFFER_POINTER #SELECTION_BUFFER_POINTER
+			#VERTEX_ARRAY_POINTER #NORMAL_ARRAY_POINTER #COLOR_ARRAY_POINTER #INDEX_ARRAY_POINTER #TEXTURE_COORD_ARRAY_POINTER #EDGE_FLAG_ARRAY_POINTER
+			GL14#SECONDARY_COLOR_ARRAY_POINTER GL15#FOG_COORD_ARRAY_POINTER
+			GL43#DEBUG_CALLBACK_FUNCTION GL43#DEBUG_CALLBACK_USER_PARAM
+			"""
+		),
 		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "a buffer in which to place the returned pointer")
 	)
 
