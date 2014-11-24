@@ -404,7 +404,7 @@ public final class LWJGLUtil {
 	}
 
 	/**
-	 * Prints the given message to System.err if DEBUG is true.
+	 * Prints the specified message to System.err if DEBUG is true.
 	 *
 	 * @param msg Message to print
 	 */

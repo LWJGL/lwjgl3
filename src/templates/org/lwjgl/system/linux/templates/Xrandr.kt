@@ -121,7 +121,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRScreenResources_p.func(
 		"XRRGetScreenResources",
-		"Returns a ##XRRScreenResources structure for the given window.",
+		"Returns a ##XRRScreenResources structure for the specified window.",
 
 		DISPLAY,
 		WINDOW
@@ -129,7 +129,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	void.func(
 		"XRRFreeScreenResources",
-		"Frees the given ##XRRScreenResources structure.",
+		"Frees the specified ##XRRScreenResources structure.",
 
 		XRRScreenResources_p.IN("resources", "the ##XRRScreenResources structure to free")
 	)
@@ -224,14 +224,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	XRRCrtcGamma_p.func(
 		"XRRAllocGamma",
-		"Allocates a ##XRRCrtcGamma structure of the given {@code size}.",
+		"Allocates a ##XRRCrtcGamma structure of the specified {@code size}.",
 
 		int.IN("size", "the gamma size")
 	)
 
 	void.func(
 		"XRRFreeGamma",
-		"Frees the given ##XRRCrtcGamma structure.",
+		"Frees the specified ##XRRCrtcGamma structure.",
 
 		XRRCrtcGamma_p.IN("gamma", "the ##XRRCrtcGamma structure to free")
 	)

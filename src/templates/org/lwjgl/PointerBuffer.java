@@ -396,7 +396,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given long into this buffer at the current
+	 * <p> Writes the specified long into this buffer at the current
 	 * position, and then increments the position. </p>
 	 *
 	 * @param l The long to be written
@@ -430,12 +430,12 @@ public class PointerBuffer implements Comparable {
 	}
 
 	/**
-	 * Absolute <i>get</i> method.  Reads the long at the given
+	 * Absolute <i>get</i> method.  Reads the long at the specified
 	 * index. </p>
 	 *
 	 * @param index The index from which the long will be read
 	 *
-	 * @return The long at the given index
+	 * @return The long at the specified index
 	 *
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative
 	 *                                   or not smaller than the buffer's limit
@@ -461,7 +461,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given long into this buffer at the given
+	 * <p> Writes the specified long into this buffer at the specified
 	 * index. </p>
 	 *
 	 * @param index The index at which the long will be written
@@ -501,7 +501,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative bulk <i>get</i> method.
 	 * <p/>
-	 * <p> This method transfers longs from this buffer into the given
+	 * <p> This method transfers longs from this buffer into the specified
 	 * destination array.  If there are fewer longs remaining in the
 	 * buffer than are required to satisfy the request, that is, if
 	 * <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no
@@ -509,8 +509,8 @@ public class PointerBuffer implements Comparable {
 	 * thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies <tt>length</tt> longs from this
-	 * buffer into the given array, starting at the current position of this
-	 * buffer and at the given offset in the array.  The position of this
+	 * buffer into the specified array, starting at the current position of this
+	 * buffer and at the specified offset in the array.  The position of this
 	 * buffer is then incremented by <tt>length</tt>.
 	 * <p/>
 	 * <p> In other words, an invocation of this method of the form
@@ -528,7 +528,7 @@ public class PointerBuffer implements Comparable {
 	 * @param offset The offset within the array of the first long to be
 	 *               written; must be non-negative and no larger than
 	 *               <tt>dst.length</tt>
-	 * @param length The maximum number of longs to be written to the given
+	 * @param length The maximum number of longs to be written to the specified
 	 *               array; must be non-negative and no larger than
 	 *               <tt>dst.length - offset</tt>
 	 *
@@ -558,7 +558,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative bulk <i>get</i> method.
 	 * <p/>
-	 * <p> This method transfers longs from this buffer into the given
+	 * <p> This method transfers longs from this buffer into the specified
 	 * destination array.  An invocation of this method of the form
 	 * <tt>src.get(a)</tt> behaves in exactly the same way as the invocation
 	 * <p/>
@@ -578,7 +578,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers the longs remaining in the given source
+	 * <p> This method transfers the longs remaining in the specified source
 	 * buffer into this buffer.  If there are more longs remaining in the
 	 * source buffer than in this buffer, that is, if
 	 * <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>,
@@ -586,7 +586,7 @@ public class PointerBuffer implements Comparable {
 	 * java.nio.BufferOverflowException} is thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies
-	 * <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> longs from the given
+	 * <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> longs from the specified
 	 * buffer into this buffer, starting at each buffer's current position.
 	 * The positions of both buffers are then incremented by <i>n</i>.
 	 * <p/>
@@ -623,7 +623,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers longs into this buffer from the given
+	 * <p> This method transfers longs into this buffer from the specified
 	 * source array.  If there are more longs to be copied from the array
 	 * than remain in this buffer, that is, if
 	 * <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no
@@ -631,7 +631,7 @@ public class PointerBuffer implements Comparable {
 	 * thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies <tt>length</tt> longs from the
-	 * given array into this buffer, starting at the given offset in the array
+	 * specified array into this buffer, starting at the specified offset in the array
 	 * and at the current position of this buffer.  The position of this buffer
 	 * is then incremented by <tt>length</tt>.
 	 * <p/>
@@ -649,7 +649,7 @@ public class PointerBuffer implements Comparable {
 	 * @param src    The array from which longs are to be read
 	 * @param offset The offset within the array of the first long to be read;
 	 *               must be non-negative and no larger than <tt>array.length</tt>
-	 * @param length The number of longs to be read from the given array;
+	 * @param length The number of longs to be read from the specified array;
 	 *               must be non-negative and no larger than
 	 *               <tt>array.length - offset</tt>
 	 *
@@ -680,7 +680,7 @@ public class PointerBuffer implements Comparable {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers the entire content of the given source
+	 * <p> This method transfers the entire content of the specified source
 	 * long array into this buffer.  An invocation of this method of the
 	 * form <tt>dst.put(a)</tt> behaves in exactly the same way as the
 	 * invocation
@@ -811,7 +811,7 @@ public class PointerBuffer implements Comparable {
 	 * @param ob The object to which this buffer is to be compared
 	 *
 	 * @return <tt>true</tt> if, and only if, this buffer is equal to the
-	 *         given object
+	 *         specified object
 	 */
 	public boolean equals(Object ob) {
 		if ( !(ob instanceof PointerBuffer) )
@@ -840,7 +840,7 @@ public class PointerBuffer implements Comparable {
 	 * <p> A pointer buffer is not comparable to any other type of object.
 	 *
 	 * @return A negative integer, zero, or a positive integer as this buffer
-	 *         is less than, equal to, or greater than the given buffer
+	 *         is less than, equal to, or greater than the specified buffer
 	 */
 	@Override
 	public int compareTo(Object o) {

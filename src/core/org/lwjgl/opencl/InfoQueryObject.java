@@ -28,7 +28,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the integer value for the given {@code param_name}, converted to a boolean.
+	 * Returns the integer value for the specified {@code param_name}, converted to a boolean.
 	 *
 	 * @param object     the object to query
 	 * @param arg        an object argument
@@ -41,7 +41,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the integer value for the given {@code param_name}.
+	 * Returns the integer value for the specified {@code param_name}.
 	 * <p/>
 	 * For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.
 	 *
@@ -60,7 +60,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the long value for the given {@code param_name}.
+	 * Returns the long value for the specified {@code param_name}.
 	 * <p/>
 	 * For integer parameters that may be 32 or 64 bits (e.g. {@code size_t}), {@link #getPointer} should be used instead.
 	 *
@@ -79,7 +79,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the pointer value for the given {@code param_name}.
+	 * Returns the pointer value for the specified {@code param_name}.
 	 * <p/>
 	 * This method should also be used for integer parameters that may be 32 or 64 bits (e.g. {@code size_t}).
 	 *
@@ -98,7 +98,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Writes the pointer list for the given {@code param_name} into {@code target}.
+	 * Writes the pointer list for the specified {@code param_name} into {@code target}.
 	 * <p/>
 	 * This method should also be used for integer parameters that may be 32 or 64 bits (e.g. {@code size_t}).
 	 *
@@ -118,7 +118,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be ASCII encoded.
+	 * Returns the string value for the specified {@code param_name}. The raw bytes returned are assumed to be ASCII encoded.
 	 *
 	 * @param object     the object to query
 	 * @param arg        an object argument
@@ -133,7 +133,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be ASCII encoded and have length equal to {@code
+	 * Returns the string value for the specified {@code param_name}. The raw bytes returned are assumed to be ASCII encoded and have length equal to {@code
 	 * param_value_size}.
 	 *
 	 * @param object           the object to query
@@ -152,7 +152,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded.
+	 * Returns the string value for the specified {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded.
 	 *
 	 * @param object     the object to query
 	 * @param arg        an object argument
@@ -167,7 +167,7 @@ abstract class InfoQueryObject {
 	}
 
 	/**
-	 * Returns the string value for the given {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded and have length equal to {@code
+	 * Returns the string value for the specified {@code param_name}. The raw bytes returned are assumed to be UTF-8 encoded and have length equal to {@code
 	 * param_value_size}.
 	 *
 	 * @param object           the object to query

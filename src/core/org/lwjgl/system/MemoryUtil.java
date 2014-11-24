@@ -63,7 +63,7 @@ public final class MemoryUtil {
 	 */
 	public static long memAddress0(Buffer buffer) { return ACCESSOR.getAddress(buffer); }
 
-	/** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the given buffer is null. */
+	/** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the specified buffer is null. */
 	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer); }
 
 	/** PointerBuffer version of {@link #memAddress0(Buffer)}. */
@@ -75,10 +75,10 @@ public final class MemoryUtil {
 	// --- [ Buffer address utilities ] ---
 
 	/**
-	 * Returns the memory address at the current position of the given buffer. This is effectively a pointer value that can be used in native function calls.
+	 * Returns the memory address at the current position of the specified buffer. This is effectively a pointer value that can be used in native function calls.
 	 * <p/>
 	 * <b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that the
-	 * memory backing the given buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:
+	 * memory backing the specified buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:
 	 * <pre><code>
 	 * nativeFunction(memAddress(memEncodeASCII("test"));</code></pre>
 	 * because a GC execution between <code>memAddress</code> and <code>nativeFunction</code> might deallocate the ByteBuffer returned by
@@ -94,7 +94,7 @@ public final class MemoryUtil {
 	public static long memAddress(ByteBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
 	/**
-	 * Returns the memory address at the given position of the given buffer.
+	 * Returns the memory address at the specified position of the specified buffer.
 	 *
 	 * @param buffer   the buffer
 	 * @param position the buffer position
@@ -149,10 +149,10 @@ public final class MemoryUtil {
 
 	// --- [ Buffer address utilities - Safe ] ---
 
-	/** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the given buffer is null. */
+	/** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the specified buffer is null. */
 	public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
 
-	/** Null-safe version of {@link #memAddress(ByteBuffer, int)}. Returns {@link #NULL} if the given buffer is null. */
+	/** Null-safe version of {@link #memAddress(ByteBuffer, int)}. Returns {@link #NULL} if the specified buffer is null. */
 	public static long memAddressSafe(ByteBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
 	/** ShortBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
@@ -200,8 +200,8 @@ public final class MemoryUtil {
 	// --- [ Buffer allocation utilities ] ---
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the given memory
-	 * address and has the given capacity. The returned ByteBuffer instance
+	 * Creates a new direct ByteBuffer that starts at the specified memory
+	 * address and has the specified capacity. The returned ByteBuffer instance
 	 * will be set to the native ByteOrder.
 	 *
 	 * @param address  the starting memory address
@@ -230,7 +230,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the given memory
+	 * Creates a new direct ByteBuffer that starts at the specified memory
 	 * address and has capacity equal to the null-terminated string
 	 * starting at that address. A single \0 character will terminate
 	 * the string. The returned buffer will NOT include the \0 byte.
@@ -251,7 +251,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the given memory
+	 * Creates a new direct ByteBuffer that starts at the specified memory
 	 * address and has capacity equal to the null-terminated string
 	 * starting at that address. Two \0 characters will terminate
 	 * the string. The returned buffer will NOT include the \0 bytes.
@@ -272,7 +272,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct ShortBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct ShortBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -287,7 +287,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct CharBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct CharBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -302,7 +302,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct IntBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct IntBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -317,7 +317,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct LongBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct LongBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -332,7 +332,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct FloatBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct FloatBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -347,7 +347,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new direct DoubleBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new direct DoubleBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -362,7 +362,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Creates a new PointerBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new PointerBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -375,7 +375,7 @@ public final class MemoryUtil {
 
 	/**
 	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance.
-	 * It modifies that instance so that it starts at the given memory address and has the given capacity. The instance passed
+	 * It modifies that instance so that it starts at the specified memory address and has the specified capacity. The instance passed
 	 * to this method should not own native memory, i.e. it should not be an instance created using {@link ByteBuffer#allocateDirect}.
 	 * Using such an instance will cause an exception to be thrown. Other instances are allowed and their parent reference will be
 	 * cleared before this method returns.
@@ -447,7 +447,7 @@ public final class MemoryUtil {
 	// --- [ Direct memory access ] ---
 
 	/**
-	 * Sets all bytes in a given block of memory to a fixed value (usually zero).
+	 * Sets all bytes in a specified block of memory to a fixed value (usually zero).
 	 *
 	 * @param ptr   the starting memory address
 	 * @param value the value to set (memSet will convert it to unsigned byte)
@@ -461,7 +461,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Sets all bytes in a given block of memory to a copy of another block.
+	 * Sets all bytes in a specified block of memory to a copy of another block.
 	 *
 	 * @param src   the source memory address
 	 * @param dst   the destination memory address
@@ -542,7 +542,7 @@ public final class MemoryUtil {
 	public static native int memPointerSize();
 
 	/**
-	 * Returns the object that the given global reference points to.
+	 * Returns the object that the specified global reference points to.
 	 *
 	 * @param globalRef the global reference
 	 * @param <T>       the object type
@@ -723,7 +723,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Encodes and optionally null-terminates the given text using UTF-16 encoding. The encoded text is stored in the given {@link ByteBuffer}. The
+	 * Encodes and optionally null-terminates the specified text using UTF-16 encoding. The encoded text is stored in the specified {@link ByteBuffer}. The
 	 * {@code target} buffer is assumed to have enough remaining space to store the encoded text.
 	 *
 	 * @param text           the text to encode
@@ -874,11 +874,11 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as an ASCII string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the given {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code } is null
 	 */
 	public static String memDecodeASCII(ByteBuffer buffer) {
 		if ( buffer == null )
@@ -890,7 +890,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as an ASCII string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -904,7 +904,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as an ASCII string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -924,11 +924,11 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-8 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the given {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code } is null
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer) {
 		return memDecode(buffer, UTF8);
@@ -937,7 +937,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-8 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -951,7 +951,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-8 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -966,11 +966,11 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-16 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the given {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code } is null
 	 */
 	public static String memDecodeUTF16(ByteBuffer buffer) {
 		if ( buffer == null )
@@ -982,7 +982,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-16 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -996,7 +996,7 @@ public final class MemoryUtil {
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-16 string.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -1015,14 +1015,14 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, using the given {@code charset}.
+	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, using the specified {@code charset}.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer  the {@link ByteBuffer} to decode, or null
 	 * @param charset the {@link Charset} to use for decoding
 	 *
-	 * @return the decoded {@link String} or null if the given {@code buffer} is null
+	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memDecode(ByteBuffer buffer, Charset charset) {
 		if ( buffer == null )
@@ -1032,9 +1032,9 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, using the given {@code charset}.
+	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, using the specified {@code charset}.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer  the {@link ByteBuffer} to decode
 	 * @param length  the number of bytes to decode
@@ -1047,9 +1047,9 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, using the given {@code charset}.
+	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, using the specified {@code charset}.
 	 * <p/>
-	 * The current {@code position} and {@code limit} of the given {@code buffer} are not affected by this operation.
+	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer  the {@link ByteBuffer} to decode
 	 * @param length  the number of bytes to decode

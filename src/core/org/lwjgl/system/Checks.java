@@ -26,7 +26,7 @@ public final class Checks {
 	}
 
 	/**
-	 * Checks if any of the given functions pointers is {@code NULL}.
+	 * Checks if any of the specified functions pointers is {@code NULL}.
 	 *
 	 * @param functions the function pointers to check
 	 *

@@ -580,7 +580,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	cl_int.func(
 		"GetPlatformInfo",
-		"Returns information about the given OpenCL platform.",
+		"Returns information about the specified OpenCL platform.",
 
 		cl_platform_id.IN("platform", "the platform to query"),
 		cl_platform_info.IN("param_name", "the parameter to query", PlatformInfo),

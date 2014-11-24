@@ -15,7 +15,7 @@ public final class MathUtil {
 	}
 
 	/**
-	 * Returns true if the given integer {@code value} is a power-of-two number.
+	 * Returns true if the specified integer {@code value} is a power-of-two number.
 	 *
 	 * @param value the value to test
 	 *
@@ -26,7 +26,7 @@ public final class MathUtil {
 	}
 
 	/**
-	 * Rounds the given integer {@code value} up to the next power-of-two number. The returned value will be equal to {@code value} if it already is a
+	 * Rounds the specified integer {@code value} up to the next power-of-two number. The returned value will be equal to {@code value} if it already is a
 	 * power-of-two number.
 	 *
 	 * @param value the value to round-up. Must be a number between {@code 1} and <code>1 &lt;&lt; 30</code>.

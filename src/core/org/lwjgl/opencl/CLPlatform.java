@@ -34,7 +34,7 @@ public class CLPlatform extends PointerWrapper {
 	}
 
 	/**
-	 * Creates a {@link CLCapabilities} instance for the given OpenCL platform.
+	 * Creates a {@link CLCapabilities} instance for the specified OpenCL platform.
 	 * <p/>
 	 * This method call is relatively expensive. The result should be cached and reused.
 	 *

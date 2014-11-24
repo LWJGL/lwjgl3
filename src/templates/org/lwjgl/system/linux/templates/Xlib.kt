@@ -624,7 +624,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	Bool.func(
 		"XGetEventData",
-		"Retrieves extra data from the given cookie.",
+		"Retrieves extra data from the specified cookie.",
 
 		DISPLAY,
 		XGenericEventCookie_p.OUT("cookie", "a pointer to a ##XGenericEventCookie structure.")

@@ -164,7 +164,7 @@ class Struct(
 
 		// Step: 3: Constructors
 		generateConstructor(
-			"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the given values.",
+			"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the specified values.",
 			members, generateConstructorArguments, generateConstructorSetters
 		)
 		if ( generateAlternativeConstructor(members) ) {

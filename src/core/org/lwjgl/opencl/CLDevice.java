@@ -24,7 +24,7 @@ public class CLDevice extends PointerWrapper {
 		this(cl_device_id, platform.getCapabilities());
 
 		if ( LWJGLUtil.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.getPointer() )
-			throw new IllegalArgumentException("The given device does not belong to the given platform.");
+			throw new IllegalArgumentException("The specified device does not belong to the specified platform.");
 	}
 
 	public CLDevice(long cl_device_id, CLCapabilities platformCapabilities) {
@@ -39,7 +39,7 @@ public class CLDevice extends PointerWrapper {
 	}
 
 	/**
-	 * Creates a {@link CLCapabilities} instance for the given OpenCL device.
+	 * Creates a {@link CLCapabilities} instance for the specified OpenCL device.
 	 * <p/>
 	 * This method call is relatively expensive. The result should be cached and reused.
 	 *

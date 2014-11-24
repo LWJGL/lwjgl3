@@ -369,7 +369,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	GLvoid.func("ProgramEnvParameter4dvARB", "Pointer version of #ProgramEnvParameter4dARB()", TARGET, VP_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("params", VP_V))
 	GLvoid.func(
 		"ProgramEnvParameter4fARB",
-		"Updates the values of the program environment parameter numbered {@code index} for the given program target {@code target}.",
+		"Updates the values of the program environment parameter numbered {@code index} for the specified program target {@code target}.",
 
 		TARGET,
 		VP_INDEX,
@@ -384,7 +384,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	GLvoid.func("ProgramLocalParameter4dvARB", "Pointer version of #ProgramLocalParameter4dARB().", TARGET, VP_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("params", VP_V))
 	GLvoid.func(
 		"ProgramLocalParameter4fARB",
-		"Updates the values of the program local parameter numbered {@code index} for the given program target {@code target}.",
+		"Updates the values of the program local parameter numbered {@code index} for the specified program target {@code target}.",
 
 		TARGET,
 		VP_INDEX,
@@ -398,7 +398,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	val GetProgramEnvParameterfvARB = GLvoid.func(
 		"GetProgramEnvParameterfvARB",
 		"""
-		Obtain the current value for the program environment parameter numbered {@code index} for the given program target {@code target}, and places the
+		Obtain the current value for the program environment parameter numbered {@code index} for the specified program target {@code target}, and places the
 		information in the array {@code params}.
 		""",
 
@@ -419,7 +419,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	val GetProgramLocalParameterfvARB = GLvoid.func(
 		"GetProgramLocalParameterfvARB",
 		"""
-		Obtain the current value for the program local parameter numbered {@code index} for the given program target {@code target}, and places the
+		Obtain the current value for the program local parameter numbered {@code index} for the specified program target {@code target}, and places the
 		information in the array {@code params}.
 		""",
 

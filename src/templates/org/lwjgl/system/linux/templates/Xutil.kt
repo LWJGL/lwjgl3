@@ -120,7 +120,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 
 	int.func(
 		"XDeleteContext",
-		"Deletes an entry for the given resource ID and type.",
+		"Deletes an entry for the specified resource ID and type.",
 
 		DISPLAY,
 		XID.IN("rid", "the resource ID with which the data is associated"),

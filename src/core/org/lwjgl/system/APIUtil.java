@@ -34,7 +34,7 @@ public final class APIUtil {
 	}
 
 	/**
-	 * Returns the callback method for the given callback class. The callback method should be named "invoke" and the parameter types should not contain the
+	 * Returns the callback method for the specified callback class. The callback method should be named "invoke" and the parameter types should not contain the
 	 * user data parameter.
 	 *
 	 * @param clazz          the callback class

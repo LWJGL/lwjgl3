@@ -32,7 +32,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	}
 
 	/**
-	 * Creates a new PointerBuffer that starts at the given memory address and has the given capacity.
+	 * Creates a new PointerBuffer that starts at the specified memory address and has the specified capacity.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity, in number of pointers
@@ -406,7 +406,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given pointer into this buffer at the current
+	 * <p> Writes the specified pointer into this buffer at the current
 	 * position, and then increments the position. </p>
 	 *
 	 * @param l The long to be written
@@ -438,12 +438,12 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	}
 
 	/**
-	 * Absolute <i>get</i> method.  Reads the pointer at the given
+	 * Absolute <i>get</i> method.  Reads the pointer at the specified
 	 * index. </p>
 	 *
 	 * @param index The index from which the long will be read
 	 *
-	 * @return the long at the given index
+	 * @return the long at the specified index
 	 *
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative
 	 *                                   or not smaller than the buffer's limit
@@ -469,7 +469,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> Writes the given pointer into this buffer at the given
+	 * <p> Writes the specified pointer into this buffer at the specified
 	 * index. </p>
 	 *
 	 * @param index The index at which the long will be written
@@ -505,13 +505,13 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 
 	// -- PointerWrapper operations --
 
-	/** Puts the pointer value of the given {@link Pointer} at the current position and then increments the position. */
+	/** Puts the pointer value of the specified {@link Pointer} at the current position and then increments the position. */
 	public PointerBuffer put(Pointer wrapper) {
 		put(wrapper.getPointer());
 		return this;
 	}
 
-	/** Puts the pointer value of the given {@link Pointer} at the given index. */
+	/** Puts the pointer value of the specified {@link Pointer} at the specified index. */
 	public PointerBuffer put(int index, Pointer wrapper) {
 		put(index, wrapper.getPointer());
 		return this;
@@ -519,43 +519,43 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 
 	// -- Buffer address operations --
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(ByteBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(ShortBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(IntBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(LongBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(FloatBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer put(DoubleBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
 	}
 
-	/** Puts the address of the given buffer at the current position and then increments the position. */
+	/** Puts the address of the specified buffer at the current position and then increments the position. */
 	public PointerBuffer putAddressOf(PointerBuffer buffer) {
 		put(memAddress(buffer));
 		return this;
@@ -563,71 +563,71 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 
 	// ---
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, ByteBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, ShortBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, IntBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, LongBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, FloatBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void put(int index, DoubleBuffer buffer) { put(index, memAddress(buffer)); }
 
-	/** Puts the address of the given buffer at the given index. */
+	/** Puts the address of the specified buffer at the specified index. */
 	public void putAddressOf(int index, PointerBuffer buffer) { put(index, memAddress(buffer)); }
 
 	// ---
 
-	/** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public ByteBuffer getByteBuffer(int size) { return memByteBuffer(get(), size); }
 
-	/** Returns a ShortBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a ShortBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public ShortBuffer getShortBuffer(int size) { return memShortBuffer(get(), size); }
 
-	/** Returns a IntBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a IntBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public IntBuffer getIntBuffer(int size) { return memIntBuffer(get(), size); }
 
-	/** Returns a LongBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a LongBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public LongBuffer getLongBuffer(int size) { return memLongBuffer(get(), size); }
 
-	/** Returns a FloatBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a FloatBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public FloatBuffer getFloatBuffer(int size) { return memFloatBuffer(get(), size); }
 
-	/** Returns a DoubleBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a DoubleBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public DoubleBuffer getDoubleBuffer(int size) { return memDoubleBuffer(get(), size); }
 
-	/** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the given size. */
+	/** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
 	public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
 
 	// ---
 
-	/** Returns a ByteBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a ByteBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public ByteBuffer getByteBuffer(int index, int size) { return memByteBuffer(get(index), size); }
 
-	/** Returns a ShortBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a ShortBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public ShortBuffer getShortBuffer(int index, int size) { return memShortBuffer(get(index), size); }
 
-	/** Returns a IntBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a IntBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public IntBuffer getIntBuffer(int index, int size) { return memIntBuffer(get(index), size); }
 
-	/** Returns a LongBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a LongBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public LongBuffer getLongBuffer(int index, int size) { return memLongBuffer(get(index), size); }
 
-	/** Returns a FloatBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a FloatBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public FloatBuffer getFloatBuffer(int index, int size) { return memFloatBuffer(get(index), size); }
 
-	/** Returns a DoubleBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a DoubleBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public DoubleBuffer getDoubleBuffer(int index, int size) { return memDoubleBuffer(get(index), size); }
 
-	/** Returns a PointerBuffer instance that starts at the address found at the given index and has capacity equal to the given size. */
+	/** Returns a PointerBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
 	public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
 
 	// -- Bulk get operations --
@@ -635,7 +635,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>get</i> method.
 	 * <p/>
-	 * <p> This method transfers longs from this buffer into the given
+	 * <p> This method transfers longs from this buffer into the specified
 	 * destination array.  If there are fewer longs remaining in the
 	 * buffer than are required to satisfy the request, that is, if
 	 * <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no
@@ -643,8 +643,8 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies <tt>length</tt> longs from this
-	 * buffer into the given array, starting at the current position of this
-	 * buffer and at the given offset in the array.  The position of this
+	 * buffer into the specified array, starting at the current position of this
+	 * buffer and at the specified offset in the array.  The position of this
 	 * buffer is then incremented by <tt>length</tt>.
 	 * <p/>
 	 * <p> In other words, an invocation of this method of the form
@@ -662,7 +662,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param offset The offset within the array of the first long to be
 	 *               written; must be non-negative and no larger than
 	 *               <tt>dst.length</tt>
-	 * @param length The maximum number of longs to be written to the given
+	 * @param length The maximum number of longs to be written to the specified
 	 *               array; must be non-negative and no larger than
 	 *               <tt>dst.length - offset</tt>
 	 *
@@ -691,7 +691,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>get</i> method.
 	 * <p/>
-	 * <p> This method transfers longs from this buffer into the given
+	 * <p> This method transfers longs from this buffer into the specified
 	 * destination array.  An invocation of this method of the form
 	 * <tt>src.get(a)</tt> behaves in exactly the same way as the invocation
 	 * <p/>
@@ -710,7 +710,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers the longs remaining in the given source
+	 * <p> This method transfers the longs remaining in the specified source
 	 * buffer into this buffer.  If there are more longs remaining in the
 	 * source buffer than in this buffer, that is, if
 	 * <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>,
@@ -718,7 +718,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * java.nio.BufferOverflowException} is thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies
-	 * <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> longs from the given
+	 * <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> longs from the specified
 	 * buffer into this buffer, starting at each buffer's current position.
 	 * The positions of both buffers are then incremented by <i>n</i>.
 	 * <p/>
@@ -753,7 +753,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers longs into this buffer from the given
+	 * <p> This method transfers longs into this buffer from the specified
 	 * source array.  If there are more longs to be copied from the array
 	 * than remain in this buffer, that is, if
 	 * <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no
@@ -761,7 +761,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * thrown.
 	 * <p/>
 	 * <p> Otherwise, this method copies <tt>length</tt> longs from the
-	 * given array into this buffer, starting at the given offset in the array
+	 * specified array into this buffer, starting at the specified offset in the array
 	 * and at the current position of this buffer.  The position of this buffer
 	 * is then incremented by <tt>length</tt>.
 	 * <p/>
@@ -779,7 +779,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @param src    The array from which longs are to be read
 	 * @param offset The offset within the array of the first long to be read;
 	 *               must be non-negative and no larger than <tt>array.length</tt>
-	 * @param length The number of longs to be read from the given array;
+	 * @param length The number of longs to be read from the specified array;
 	 *               must be non-negative and no larger than
 	 *               <tt>array.length - offset</tt>
 	 *
@@ -808,7 +808,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 * <p/>
-	 * <p> This method transfers the entire content of the given source
+	 * <p> This method transfers the entire content of the specified source
 	 * long array into this buffer.  An invocation of this method of the
 	 * form <tt>dst.put(a)</tt> behaves in exactly the same way as the
 	 * invocation
@@ -956,7 +956,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * <p> A pointer buffer is not comparable to any other type of object.
 	 *
 	 * @return A negative integer, zero, or a positive integer as this buffer
-	 * is less than, equal to, or greater than the given buffer
+	 * is less than, equal to, or greater than the specified buffer
 	 */
 	@Override
 	public int compareTo(PointerBuffer that) {

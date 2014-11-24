@@ -39,8 +39,8 @@ public final class EFXUtil {
 	}
 
 	/**
-	 * Tests OpenAL to see whether the given effect type is supported. This is done by creating an
-	 * effect of the given type. If creation succeeds the effect is supported.
+	 * Tests OpenAL to see whether the specified effect type is supported. This is done by creating an
+	 * effect of the specified type. If creation succeeds the effect is supported.
 	 *
 	 * @param effectType Type of effect whose support is to be tested, e.g. AL_EFFECT_REVERB.
 	 *
@@ -77,8 +77,8 @@ public final class EFXUtil {
 	}
 
 	/**
-	 * Tests OpenAL to see whether the given filter type is supported. This is done by creating a
-	 * filter of the given type. If creation succeeds the filter is supported.
+	 * Tests OpenAL to see whether the specified filter type is supported. This is done by creating a
+	 * filter of the specified type. If creation succeeds the filter is supported.
 	 *
 	 * @param filterType Type of filter whose support is to be tested, e.g. AL_FILTER_LOWPASS.
 	 *
@@ -105,7 +105,7 @@ public final class EFXUtil {
 	}
 
 	/**
-	 * Generic test function to see if an EFX object supports a given kind of type. Works for
+	 * Generic test function to see if an EFX object supports a specified kind of type. Works for
 	 * effects and filters.
 	 *
 	 * @param objectType Type of object to test. Must be either EFXUtil.EFFECT or EFXUtil.FILTER.

@@ -65,7 +65,7 @@ public class WindowsGLContext extends GLContext {
 	}
 
 	/**
-	 * Creates an OpenGL context on the given device context and returns a {@code WindowContext} instance that describes it.
+	 * Creates an OpenGL context on the specified device context and returns a {@code WindowContext} instance that describes it.
 	 *
 	 * @param hdc the device context
 	 *

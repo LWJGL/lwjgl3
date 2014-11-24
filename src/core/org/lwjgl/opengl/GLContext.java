@@ -46,7 +46,7 @@ public abstract class GLContext implements Pointer {
 	}
 
 	/**
-	 * Makes the context current in the current thread and associates with the device/drawable given by the {@code target} handle for both draw and read
+	 * Makes the context current in the current thread and associates with the device/drawable specified by the {@code target} handle for both draw and read
 	 * operations.
 	 * <p/>
 	 * The {@code target} handle is OS-specific.
@@ -61,9 +61,9 @@ public abstract class GLContext implements Pointer {
 	}
 
 	/**
-	 * Makes the context current in the current thread and associates with the device/drawable given by the {@code targetDraw} handle for draw operations and
+	 * Makes the context current in the current thread and associates with the device/drawable specified by the {@code targetDraw} handle for draw operations and
 	 * the
-	 * device/drawable given by the {@code targetRead} handle for read operations. This functionality is optional as it may not be supported by the OpenGL
+	 * device/drawable specified by the {@code targetRead} handle for read operations. This functionality is optional as it may not be supported by the OpenGL
 	 * implementation. The user must check the availability of the corresponding OpenGL extension before calling this method.
 	 * <p/>
 	 * The {@code targetDraw} and {@code targetRead} handles are OS-specific.

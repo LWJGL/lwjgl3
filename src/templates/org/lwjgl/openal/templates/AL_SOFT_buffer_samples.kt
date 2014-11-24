@@ -143,7 +143,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		ALCenum.IN("format", "the format to query", InternalFormatParameters),
 	    returnDoc =
 	        """
-	        false if the given {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
+	        false if the specified {@code format} is not a recognized storage format. Otherwise, if it returns true it may be specified as the
 	        {@code internalformat} for #BufferSamplesSOFT().
 	        """
 	)

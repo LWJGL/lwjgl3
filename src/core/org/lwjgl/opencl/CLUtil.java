@@ -26,7 +26,7 @@ public final class CLUtil {
 	private CLUtil() {}
 
 	/**
-	 * Checks the {@code errcode} present in the current position of the given {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
+	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
 	 * equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode_ret the {@code errcode} buffer
@@ -38,7 +38,7 @@ public final class CLUtil {
 	}
 
 	/**
-	 * Checks the {@code errcode} present in the current position of the given {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
+	 * Checks the {@code errcode} present in the current position of the specified {@code errcode_ret} buffer and throws an {@link OpenCLException} if it's not
 	 * equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode_ret the {@code errcode} buffer
@@ -50,7 +50,7 @@ public final class CLUtil {
 	}
 
 	/**
-	 * Checks the given {@code errcode} and throws an {@link OpenCLException} if it's not equal to {@link CL10#CL_SUCCESS}.
+	 * Checks the specified {@code errcode} and throws an {@link OpenCLException} if it's not equal to {@link CL10#CL_SUCCESS}.
 	 *
 	 * @param errcode the {@code errcode} to check
 	 *
@@ -62,7 +62,7 @@ public final class CLUtil {
 	}
 
 	/**
-	 * Returns the token name of the given {@code errcode}.
+	 * Returns the token name of the specified {@code errcode}.
 	 *
 	 * @param errcode the {@code errcode}
 	 *

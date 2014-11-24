@@ -424,7 +424,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALboolean.func(
 		"IsSource",
-		"Verifies whether the given object name is a source name.",
+		"Verifies whether the specified object name is a source name.",
 
 		ALuint.IN("sourceName", "a value that may be a source name")
 	)
@@ -641,7 +641,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALboolean.func(
 		"IsBuffer",
-		"Verifies whether the given object name is a buffer name.",
+		"Verifies whether the specified object name is a buffer name.",
 
 		ALuint.IN("bufferName", "a value that may be a buffer name")
 	)
@@ -667,7 +667,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 	ALvoid.func(
 		"BufferData",
 		"""
-		Sets the sample data of the given buffer.
+		Sets the sample data of the specified buffer.
 
 		The data specified is copied to an internal software, or if possible, hardware buffer. The implementation is free to apply decompression, conversion,
 		resampling, and filtering as needed.

@@ -97,7 +97,7 @@ public class APIBuffer {
 	}
 
 	private int param(int bytes, int alignment) {
-		// Upward align the current offset to the given alignment
+		// Upward align the current offset to the specified alignment
 		int param = (offset + (alignment - 1)) & -alignment;
 		ensureCapacity(offset = param + bytes);
 		return param;
@@ -127,80 +127,80 @@ public class APIBuffer {
 	/** Ensures space for an additional pointer value and returns the address offset. */
 	public int pointerParam() { return param(POINTER_SIZE); }
 
-	/** Ensures space for an additional buffer with the given size (in bytes) and returns the address offset. */
+	/** Ensures space for an additional buffer with the specified size (in bytes) and returns the address offset. */
 	public int bufferParam(int size) { return param(size, POINTER_SIZE); }
 
 	// ---------------------------------------------------------------------------------------------------------------------
 
-	/** Ensures space for an additional boolean value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional boolean value, sets the specified value at the allocated offset and returns that offset. */
 	public int booleanParam(boolean value) {
 		int offset = booleanParam();
 		buffer.put(offset, value ? (byte)1 : (byte)0);
 		return offset;
 	}
 
-	/** Ensures space for an additional byte value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional byte value, sets the specified value at the allocated offset and returns that offset. */
 	public int byteParam(byte value) {
 		int offset = byteParam();
 		buffer.put(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional short value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional short value, sets the specified value at the allocated offset and returns that offset. */
 	public int shortParam(short value) {
 		int offset = shortParam();
 		buffer.putShort(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional int value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional int value, sets the specified value at the allocated offset and returns that offset. */
 	public int intParam(int value) {
 		int offset = intParam();
 		buffer.putInt(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional long value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional long value, sets the specified value at the allocated offset and returns that offset. */
 	public int longParam(long value) {
 		int offset = longParam();
 		buffer.putLong(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional float value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional float value, sets the specified value at the allocated offset and returns that offset. */
 	public int floatParam(float value) {
 		int offset = floatParam();
 		buffer.putFloat(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional double value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional double value, sets the specified value at the allocated offset and returns that offset. */
 	public int doubleParam(double value) {
 		int offset = doubleParam();
 		buffer.putDouble(offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional pointer value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional pointer value, sets the specified value at the allocated offset and returns that offset. */
 	public int pointerParam(long value) {
 		int offset = pointerParam();
 		PointerBuffer.put(buffer, offset, value);
 		return offset;
 	}
 
-	/** Ensures space for an additional pointer value, sets the given value at the allocated offset and returns that offset. */
+	/** Ensures space for an additional pointer value, sets the specified value at the allocated offset and returns that offset. */
 	public int pointerParam(PointerWrapper value) {
 		return pointerParam(value.getPointer());
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------
 
-	/** Sets an int value at the given index of the int buffer that starts at the given offset. */
+	/** Sets an int value at the specified index of the int buffer that starts at the specified offset. */
 	public void intParam(int offset, int index, int value) {
 		buffer.putInt(offset + (index << 2), value);
 	}
 
-	/** Sets a pointer value at the given index of the pointer buffer that starts at the given offset. */
+	/** Sets a pointer value at the specified index of the pointer buffer that starts at the specified offset. */
 	public void pointerParam(int offset, int index, long value) {
 		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
 	}

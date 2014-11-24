@@ -41,7 +41,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	ReferenceGL("glBlendEquation") _ GLvoid.func(
 		"BlendEquationi",
-		"Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the given draw buffer.",
+		"Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the specified draw buffer.",
 
 		GLuint.IN("buf", "the index of the draw buffer for which to set the blend equation"),
 		GLenum.IN("mode", "how source and destination colors are combined", blendEquations)
@@ -49,7 +49,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	ReferenceGL("glBlendEquationSeparate") _ GLvoid.func(
 		"BlendEquationSeparatei",
-		"Sets the RGB blend equation and the alpha blend equation separately for the given draw buffer.",
+		"Sets the RGB blend equation and the alpha blend equation separately for the specified draw buffer.",
 
 		GLuint.IN("buf", "the index of the draw buffer for which to set the blend equations"),
 		GLenum.IN("modeRGB", "the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined", blendEquations),
@@ -58,7 +58,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	GLvoid.func(
 		"BlendFunci",
-		"Specifies pixel arithmetic for the given draw buffer.",
+		"Specifies pixel arithmetic for the specified draw buffer.",
 
 		GLuint.IN("buf", "the index of the draw buffer for which to set the blend function"),
 		GLenum.IN("sfactor", "how the red, green, blue, and alpha source blending factors are computed"),
@@ -67,7 +67,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	GLvoid.func(
 		"BlendFuncSeparatei",
-		"Specifies pixel arithmetic for RGB and alpha components separately for the given draw buffer.",
+		"Specifies pixel arithmetic for RGB and alpha components separately for the specified draw buffer.",
 
 		GLuint.IN("buf", "the index of the draw buffer for which to set the blend functions"),
 		GLenum.IN("srcRGB", "how the red, green, and blue blending factors are computed"),
@@ -622,7 +622,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	GLvoid.func(
 		"PatchParameteri",
-		"Specifies the integer value of the given parameter for patch primitives.",
+		"Specifies the integer value of the specified parameter for patch primitives.",
 
 		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_VERTICES"),
 		GLint.IN("value", "the new value for the parameter given by {@code pname}")
@@ -630,7 +630,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	GLvoid.func(
 		"PatchParameterfv",
-		"Specifies an array of float values for the given parameter for patch primitives.",
+		"Specifies an array of float values for the specified parameter for patch primitives.",
 
 		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
 		mods(

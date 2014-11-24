@@ -96,7 +96,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
 
 	val MultiTexCoord1f = GLvoid.func(
 		"MultiTexCoord1fARB",
-		"Sets the current one-dimensional texture coordinate for the given texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
+		"Sets the current one-dimensional texture coordinate for the specified texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS)
@@ -113,7 +113,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
 
 	val MultiTexCoord2f = GLvoid.func(
 		"MultiTexCoord2fARB",
-		"Sets the current two-dimensional texture coordinate for the given texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
+		"Sets the current two-dimensional texture coordinate for the specified texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),
@@ -131,7 +131,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
 
 	val MultiTexCoord3f = GLvoid.func(
 		"MultiTexCoord3fARB",
-		"Sets the current three-dimensional texture coordinate for the given texture coordinate set. {@code q} is implicitly set to 1.",
+		"Sets the current three-dimensional texture coordinate for the specified texture coordinate set. {@code q} is implicitly set to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),
@@ -150,7 +150,7 @@ val ARB_multitexture = "ARBMultitexture".nativeClassGL("ARB_multitexture", postf
 
 	val MultiTexCoord4f = GLvoid.func(
 		"MultiTexCoord4fARB",
-		"Sets the current four-dimensional texture coordinate for the given texture coordinate set.",
+		"Sets the current four-dimensional texture coordinate for the specified texture coordinate set.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),

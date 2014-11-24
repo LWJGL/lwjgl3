@@ -84,7 +84,7 @@ public abstract class WindowCallback {
 	private static native void setCallbacks(Method[] callbacks, long procs);
 
 	/**
-	 * Enables all window event callbacks for the given GLFW window.
+	 * Enables all window event callbacks for the specified GLFW window.
 	 *
 	 * @param window the GLFW window
 	 * @param proc   the WindowCallback instance, or NULL to disable event callbacks.
@@ -94,7 +94,7 @@ public abstract class WindowCallback {
 	}
 
 	/**
-	 * Enables window event callbacks for the given GLFW window. The {@code eventTypes} parameter
+	 * Enables window event callbacks for the specified GLFW window. The {@code eventTypes} parameter
 	 * is a bit-field the defines which type of events to enable.
 	 *
 	 * @param window     the GLFW window

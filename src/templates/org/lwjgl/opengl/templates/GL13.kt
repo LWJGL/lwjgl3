@@ -347,7 +347,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 
 	val MultiTexCoord1f = (deprecatedGL _ GLvoid.func(
 		"MultiTexCoord1f",
-		"Sets the current one-dimensional texture coordinate for the given texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
+		"Sets the current one-dimensional texture coordinate for the specified texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS)
@@ -364,7 +364,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 
 	val MultiTexCoord2f = (deprecatedGL _ GLvoid.func(
 		"MultiTexCoord2f",
-		"Sets the current two-dimensional texture coordinate for the given texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
+		"Sets the current two-dimensional texture coordinate for the specified texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),
@@ -382,7 +382,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 
 	val MultiTexCoord3f = (deprecatedGL _ GLvoid.func(
 		"MultiTexCoord3f",
-		"Sets the current three-dimensional texture coordinate for the given texture coordinate set. {@code q} is implicitly set to 1.",
+		"Sets the current three-dimensional texture coordinate for the specified texture coordinate set. {@code q} is implicitly set to 1.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),
@@ -401,7 +401,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 
 	val MultiTexCoord4f = (deprecatedGL _ GLvoid.func(
 		"MultiTexCoord4f",
-		"Sets the current four-dimensional texture coordinate for the given texture coordinate set.",
+		"Sets the current four-dimensional texture coordinate for the specified texture coordinate set.",
 
 		GLenum.IN("texture", texCoordTex),
 		GLfloat.IN("s", texCoordS),

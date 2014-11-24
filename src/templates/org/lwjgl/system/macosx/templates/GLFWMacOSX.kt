@@ -36,7 +36,7 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix =
 	id.func(
 		"GetCocoaWindow",
 		"""
-		Returns the ${code("NSWindow")} of the given GLFW window.
+		Returns the ${code("NSWindow")} of the specified GLFW window.
 
 		Note: This function may be called from any thread. Access is not synchronized.
 		""",
@@ -49,7 +49,7 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix =
 	id.func(
 		"GetNSGLContext",
 		"""
-		Returns the ${code("NSOpenGLContext")} of the given GLFW window.
+		Returns the ${code("NSOpenGLContext")} of the specified GLFW window.
 
 		Note: This function may be called from any thread. Access is not synchronized.
 		""",
