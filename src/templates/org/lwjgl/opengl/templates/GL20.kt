@@ -98,6 +98,16 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("program", "the program object to be deleted")
 	)
 
+	GLboolean.func(
+		"IsProgram",
+		"""
+	    Returns GL11#TRUE if {@code program} is the name of a program object. If {@code program} is zero, or a non-zero value that is not the name of a program
+	    object, IsProgram returns GL11#FALSE. No error is generated if program is not a valid program object name.
+	    """,
+
+		GLuint.IN("program", "the program object name to query")
+	)
+
 	GLuint.func(
 		"CreateShader",
 		"Creates a shader object.",
@@ -110,6 +120,16 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"Deletes a shader object.",
 
 		GLuint.IN("shader", "the shader object to be deleted")
+	)
+
+	GLboolean.func(
+		"IsShader",
+		"""
+	    Returns GL11#TRUE if {@code shader} is the name of a shader object. If {@code shader} is zero, or a nonzero value that is not the name of a shader
+	    object, IsShader returns GL11#FALSE. No error is generated if shader is not a valid shader object name.
+	    """,
+
+		GLuint.IN("shader", "the shader object name to query")
 	)
 
 	GLvoid.func(
@@ -152,7 +172,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		parsed at this time; they are simply copied into the specified shader object.
 		""",
 
-		GLuint.IN("shader", "the handle of the shader object whose source code is to be replaced"),
+		GLuint.IN("shader", "the shader object whose source code is to be replaced"),
 		AutoSize("strings", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
 		mods(const, PointerArray(GLcharUTF8_p, "string", "length")) _ GLcharUTF8_pp.IN(
 			"strings",
@@ -172,21 +192,21 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"LinkProgram",
 		"Links a program object.",
 
-		GLuint.IN("program", "the handle of the program object to be linked")
+		GLuint.IN("program", "the program object to be linked")
 	)
 
 	GLvoid.func(
 		"UseProgram",
 		"Installs a program object as part of current rendering state.",
 
-		GLuint.IN("program", "the handle of the program object whose executables are to be used as part of current rendering state")
+		GLuint.IN("program", "the program object whose executables are to be used as part of current rendering state")
 	)
 
 	GLvoid.func(
 		"ValidateProgram",
 		"Validates a program object.",
 
-		GLuint.IN("program", "the handle of the program object to be validated")
+		GLuint.IN("program", "the program object to be validated")
 	)
 
 	// Uniform functions javadoc
@@ -431,7 +451,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	GLvoid.func(
 		"GetAttachedShaders",
-		"Returns the handles of the shader objects attached to a program object.",
+		"Returns the shader objects attached to a program object.",
 
 		GLuint.IN("program", "the program object to be queried"),
 		AutoSize("shaders") _ GLsizei.IN("maxCount", "the size of the array for storing the returned object names"),
@@ -677,7 +697,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"BindAttribLocation",
 		"Associates a generic vertex attribute index with a named attribute variable.",
 
-		GLuint.IN("program", "the handle of the program object in which the association is to be made"),
+		GLuint.IN("program", "the program object in which the association is to be made"),
 		GLuint.IN("index", "the index of the generic vertex attribute to be bound"),
 		const _ GLcharASCII_p.IN("name", "a null terminated string containing the name of the vertex shader attribute variable to which {@code index} is to be bound")
 	)
