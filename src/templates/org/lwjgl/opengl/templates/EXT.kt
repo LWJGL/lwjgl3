@@ -336,6 +336,208 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
 	)
 }
 
+val EXT_framebuffer_blit = "EXTFramebufferBlit".nativeClassGL("EXT_framebuffer_blit", postfix = EXT) {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension modifies EXT_framebuffer_object by splitting the framebuffer object binding point into separate DRAW and READ bindings. This allows
+		copying directly from one framebuffer to another. In addition, a new high performance blit function is added to facilitate these blits and perform some
+		data conversion where allowed.
+
+		${GL30.promoted}
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code target} parameter of BindFramebufferEXT, CheckFramebufferStatusEXT, FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT,
+		and GetFramebufferAttachmentParameterivEXT.
+		""",
+
+		"READ_FRAMEBUFFER_EXT" _ 0x8CA8,
+		"DRAW_FRAMEBUFFER_EXT" _ 0x8CA9
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
+
+		"DRAW_FRAMEBUFFER_BINDING_EXT" _ 0x8CA6,
+		"READ_FRAMEBUFFER_BINDING_EXT" _ 0x8CAA
+	)
+
+	GLvoid.func(
+		"BlitFramebufferEXT",
+		"",
+
+		GLint.IN("srcX0", ""),
+		GLint.IN("srcY0", ""),
+		GLint.IN("srcX1", ""),
+		GLint.IN("srcY1", ""),
+		GLint.IN("dstX0", ""),
+		GLint.IN("dstY0", ""),
+		GLint.IN("dstX1", ""),
+		GLint.IN("dstY1", ""),
+		GLbitfield.IN("mask", ""),
+		GLenum.IN("filter", "")
+	)
+}
+
+val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT_framebuffer_multisample", postfix = EXT) {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension extends the EXT_framebuffer_object framework to enable multisample rendering.
+
+		The new operation RenderbufferStorageMultisampleEXT() allocates storage for a renderbuffer object that can be used as a multisample buffer. A
+		multisample render buffer image differs from a single-sample render buffer image in that a multisample image has a number of SAMPLES that is greater
+		than zero. No method is provided for creating multisample texture images.
+
+		All of the framebuffer-attachable images attached to a framebuffer object must have the same number of SAMPLES or else the framebuffer object is not
+		"framebuffer complete". If a framebuffer object with multisample attachments is "framebuffer complete", then the framebuffer object behaves as if
+		SAMPLE_BUFFERS is one.
+
+		In traditional multisample rendering, where DRAW_FRAMEBUFFER_BINDING_EXT is zero and SAMPLE_BUFFERS is one, the GL spec states that "the color sample
+		values are resolved to a single, displayable color each time a pixel is updated." There are, however, several modern hardware implementations that do
+		not actually resolve for each sample update, but instead postpones the resolve operation to a later time and resolve a batch of sample updates at a
+		time. This is OK as long as the implementation behaves "as if" it had resolved a sample-at-a-time. Unfortunately, however, honoring the "as if" rule can
+		sometimes degrade performance.
+
+		In contrast, when DRAW_FRAMEBUFFER_BINDING_EXT is an application-created framebuffer object, MULTISAMPLE is enabled, and SAMPLE_BUFFERS is one, there is
+		no implicit per-sample-update resolve. Instead, the application explicitly controls when the resolve operation is performed. The resolve operation is
+		affected by calling BlitFramebufferEXT (provided by the EXT_framebuffer_blit extension) where the source is a multisample application-created
+		framebuffer object and the destination is a single-sample framebuffer object (either application-created or window-system provided).
+
+		This design for multisample resolve more closely matches current hardware, but still permits implementations which choose to resolve a single sample at
+		a time. If hardware that implementes the multisample resolution "one sample at a time" exposes EXT_framebuffer_multisample, it could perform the
+		implicit resolve to a driver-managed hidden surface, then read from that surface when the application calls BlitFramebufferEXT.
+
+		Another motivation for granting the application explicit control over the multisample resolve operation has to do with the flexibility afforded by
+		EXT_framebuffer_object. Previously, a drawable (window or pbuffer) had exclusive access to all of its buffers. There was no mechanism for sharing a
+		buffer across multiple drawables. Under EXT_framebuffer_object, however, a mechanism exists for sharing a framebuffer-attachable image across several
+		framebuffer objects, as well as sharing an image between a framebuffer object and a texture. If we had retained the "implicit"
+		resolve from traditional multisampled rendering, and allowed the creation of "multisample" format renderbuffers, then this type of sharing would have
+		lead to two problematic situations:
+		${ul(
+			"Two contexts, which shared renderbuffers, might perform competing resolve operations into the same single-sample buffer with ambiguous results.",
+		    "It would have introduced the unfortunate ability to use the single-sample buffer as a texture while MULTISAMPLE is ENABLED."
+		)}
+		By using the BlitFramebufferEXT from EXT_framebuffer_blit as an explicit resolve to serialize access to the multisampled contents and eliminate the
+		implicit per-sample resolve operation, we avoid both of these problems.
+
+		${GL30.promoted}
+		"""
+
+	GLvoid.func(
+		"RenderbufferStorageMultisampleEXT",
+		"",
+
+		GLenum.IN("target", ""),
+		GLsizei.IN("samples", ""),
+		GLenum.IN("internalformat", ""),
+		GLsizei.IN("width", ""),
+		GLsizei.IN("height", "")
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
+
+		"RENDERBUFFER_SAMPLES_EXT" _ 0x8CAB
+	)
+
+	IntConstant.block(
+		"Returned by CheckFramebufferStatusEXT.",
+
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT" _ 0x8D56
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+
+		"MAX_SAMPLES_EXT" _ 0x8D57
+	)
+}
+
+val EXT_framebuffer_multisample_blit_scaled = "EXTFramebufferMultisampleBlitScaled".nativeClassGL("EXT_framebuffer_multisample_blit_scaled", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension relaxes some of the restrictions associated with multisample resolve operations, specifically to allow a combined resolve and scale
+		operation through a single call to BlitFramebuffer. It also adds two new filter types to control the quality of the combined scaled resolve operation.
+
+		In traditional multisampled framebuffer rendering, color samples must be explicitly resolved via BlitFramebuffer before any other operation on the
+		resulting pixel values can be performed. This multisample resolve operation must be done using a BlitFramebuffer call where the dimensions of the source
+		and destination rectangles are identical. If the resulting pixel values need to be copied to a texture with different dimensions, these resolved values
+		can then be scaled with a second call to BlitFramebuffer.
+
+		By requiring two separate calls to BlitFramebuffer, the quality of final image can be maintained to a certain degree. The samples are first resolved,
+		and then these resolved values can be filtered to produce the final image. This image quality comes at the price of increased memory usage and lower
+		performance. However, the scaling blit can still introduce artifacts, particularly if it is done with a simple bilinear filter.
+
+		The new filter types introduced by this extension allow the scaled resolve to be done with a single call to BlitFramebuffer. Not all samples from the
+		read framebuffer are required to be be used when producing the final pixel values, and there may be a loss in quality when compared to an image produced
+		by a separate resolve and scale. However, the single-pass scaled resolve blit should be faster than the traditional two-pass resolve then scale blits.
+  
+		Requires ${ARB_framebuffer_object.link}.
+		"""
+
+	IntConstant.block(
+		"Accepted by the {@code filter} parameter of BlitFramebuffer.",
+
+		"SCALED_RESOLVE_FASTEST_EXT" _ 0x90BA,
+		"SCALED_RESOLVE_NICEST_EXT" _ 0x90BB
+	)
+}
+
+val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_sRGB", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Conventionally, OpenGL assumes framebuffer color components are stored in a linear color space. In particular, framebuffer blending is a linear
+		operation.
+
+		The sRGB color space is based on typical (non-linear) monitor characteristics expected in a dimly lit office. It has been standardized by the
+		International Electrotechnical Commission (IEC) as IEC 61966-2-1. The sRGB color space roughly corresponds to 2.2 gamma correction.
+
+		This extension adds a framebuffer capability for sRGB framebuffer update and blending. When blending is disabled but the new sRGB updated mode is
+		enabled (assume the framebuffer supports the capability), high-precision linear color component values for red, green, and blue generated by fragment
+		coloring are encoded for sRGB prior to being written into the framebuffer. When blending is enabled along with the new sRGB update mode, red, green, and
+		blue framebuffer color components are treated as sRGB values that are converted to linear color values, blended with the high-precision color values
+		generated by fragment coloring, and then the blend result is encoded for sRGB just prior to being written into the framebuffer.
+
+		The primary motivation for this extension is that it allows OpenGL applications to render into a framebuffer that is scanned to a monitor configured to
+		assume framebuffer color values are sRGB encoded. This assumption is roughly true of most PC monitors with default gamma correction. This allows
+		applications to achieve faithful color reproduction for OpenGL rendering without adjusting the monitor's gamma correction.
+    
+		${GL30.promoted}
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
+		GetDoublev.
+		""",
+
+		"FRAMEBUFFER_SRGB_EXT" _ 0x8DB9
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x8DBA
+	)
+}
+
 val EXT_point_parameters = "EXTPointParameters".nativeClassGL("EXT_point_parameters", postfix = EXT) {
 	nativeImport (
 		"OpenGL.h"
