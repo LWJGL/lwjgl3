@@ -301,7 +301,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.stream(), returnDoc, since),
+			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.stream(), this, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

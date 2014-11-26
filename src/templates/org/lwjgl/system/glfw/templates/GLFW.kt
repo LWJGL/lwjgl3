@@ -698,7 +698,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ GLFWvidmode).func(
+	(const _ GLFWvidmode_p).func(
 		"GetVideoModes",
 		"""
 		Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the

@@ -190,7 +190,7 @@ class NativeClassFunction(
 
 		builder append '('
 		if ( !keepPostfix ) {
-			val more = getParams { !it.isAutoSizeResultOut } forEachWithMore { (it, more) ->
+			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore { (it, more) ->
 				if ( more )
 					builder append ", "
 
