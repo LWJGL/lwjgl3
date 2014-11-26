@@ -53,13 +53,13 @@ ENABLE_WARNINGS()
 
 // Callback function typedefs
 
-typedef void (CL_CALLBACK * cl_program_callback)(cl_program program, void *user_data);
-typedef void (CL_CALLBACK * cl_create_context_callback)(const char *errinfo, const void *private_info, size_t cb, void *user_data);
-typedef void (CL_CALLBACK * cl_native_kernel_func)(void *args);
-typedef void (CL_CALLBACK * cl_mem_object_destructor_callback)(cl_mem memobj, void *user_data);
-typedef void (CL_CALLBACK * cl_event_callback)(cl_event event, cl_int event_command_exec_status, void *user_data);
-typedef void (CL_CALLBACK * cl_printf_callback)(cl_context context, cl_uint printf_data_len, char *printf_data_ptr, void *user_data);
-typedef void (CL_CALLBACK * cl_svmfree_callback)(cl_command_queue queue, cl_uint num_svm_pointers, void *svm_pointers[], void *user_data);
+typedef void (CL_CALLBACK * cl_program_callback)(cl_program, void *);
+typedef void (CL_CALLBACK * cl_create_context_callback)(const char *, const void *, size_t, void *);
+typedef void (CL_CALLBACK * cl_native_kernel_func)(void *);
+typedef void (CL_CALLBACK * cl_mem_object_destructor_callback)(cl_mem, void *);
+typedef void (CL_CALLBACK * cl_event_callback)(cl_event, cl_int, void *);
+typedef void (CL_CALLBACK * cl_printf_callback)(cl_context, cl_uint, char *, void *);
+typedef void (CL_CALLBACK * cl_svmfree_callback)(cl_command_queue, cl_uint, void *[], void *);
 
 // Extension struct typedefs
 
