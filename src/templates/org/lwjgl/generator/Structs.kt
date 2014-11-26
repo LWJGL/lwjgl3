@@ -118,9 +118,12 @@ class Struct(
 
 		println("import org.lwjgl.*;")
 
-		println("import static org.lwjgl.system.Checks.*;")
-		println("import static org.lwjgl.system.MemoryUtil.*;\n")
+		if ( members.isNotEmpty() ) {
+			println("import static org.lwjgl.system.Checks.*;")
+			println("import static org.lwjgl.system.MemoryUtil.*;")
+		}
 
+		println();
 		preamble.printJava(this)
 
 		val documentation = this@Struct.documentation
@@ -133,61 +136,73 @@ class Struct(
 	public static final int SIZEOF;
 """)
 
-		// Step 1: Member offset fields
+		if ( members.isNotEmpty() ) {
+			// Member offset fields
 
-		print("""
+			print("""
 	/** The struct member offsets. */
 	public static final int
 """)
-		generateOffsetFields(members)
+			generateOffsetFields(members)
 
-		// Step 2: Member offset initialization
+			// Member offset initialization
 
-		print("""
+			print("""
 	static {
 		IntBuffer offsets = BufferUtils.createIntBuffer(${getMemberCount(members)});
 
 		SIZEOF = offsets(memAddress(offsets));
 
 """)
-		generateOffsetInit(members)
-		println("\t}\n")
+			generateOffsetInit(members)
+			println("\t}")
+		} else {
+			print("""
+	static {
+		SIZEOF = offsets();
+	}
+""")
+		}
 
-		println("\tprivate $className() {}")
+		// Constructors
+
+		println("\n\tprivate $className() {}")
 
 		print("""
-	private static native int offsets(long buffer);
+	private static native int offsets(${if ( members.isNotEmpty() ) "long buffer" else ""});
 
 	/** Returns a new {@link ByteBuffer} instance with a capacity equal to {@link #SIZEOF}. */
 	public static ByteBuffer malloc() { return BufferUtils.createByteBuffer(SIZEOF); }
 """)
 
-		// Step: 3: Constructors
-		generateConstructor(
-			"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the specified values.",
-			members, generateConstructorArguments, generateConstructorSetters
-		)
-		if ( generateAlternativeConstructor(members) ) {
+		if ( members.isNotEmpty() ) {
+			// Virtual constructors
 			generateConstructor(
-				"Alternative virtual constructor.",
-				members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER1
+				"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the specified values.",
+				members, generateConstructorArguments, generateConstructorSetters
 			)
-			if ( members any { it is StructMemberCharArray || it.nativeType is CharSequenceType } )
+			if ( generateAlternativeConstructor(members) ) {
 				generateConstructor(
 					"Alternative virtual constructor.",
-					members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER2
+					members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER1
 				)
+				if ( members any { it is StructMemberCharArray || it.nativeType is CharSequenceType } )
+					generateConstructor(
+						"Alternative virtual constructor.",
+						members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER2
+					)
+			}
+
+			println();
+
+			// Setters
+			generateSetters(members)
+
+			println()
+
+			// Getters
+			generateGetters(members)
 		}
-
-		println();
-
-		// Step 4: Setters
-		generateSetters(members)
-
-		println()
-
-		// Step 5: Getters
-		generateGetters(members)
 
 		print("\n}")
 	}
@@ -627,8 +642,13 @@ class Struct(
 
 		println("\nEXTERN_C_EXIT\n")
 
-		println("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz, jlong bufferAddress) {")
-		println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
+		print("JNIEXPORT jint JNICALL Java_${nativeFileNameJNI}_offsets(JNIEnv *$JNIENV, jclass clazz")
+		if ( members.isNotEmpty() ) {
+			println(", jlong bufferAddress) {")
+			println("\tjint *buffer = (jint *)(intptr_t)bufferAddress;\n")
+		} else {
+			println(") {")
+		}
 
 		println("\tUNUSED_PARAMS($JNIENV, clazz)\n")
 
@@ -647,9 +667,12 @@ class Struct(
 			println("\t} ${structName};\n")
 		}
 
-		generateNativeMembers(members)
+		if ( members.isNotEmpty() ) {
+			generateNativeMembers(members)
+			println()
+		}
 
-		println("\n\treturn sizeof($nativeName);")
+		println("\treturn sizeof($nativeName);")
 		println("}")
 
 		println("\nEXTERN_C_EXIT")
