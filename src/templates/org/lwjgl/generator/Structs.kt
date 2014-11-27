@@ -53,10 +53,12 @@ class Struct(
 	nativeSubPath: String = "",
 	/** The native struct name. May be different than className. */
 	val structName: String = className,
-	/** false: the Struct has an existing declaration. true: a declaration is missing, we need to output one. */
+	/** when true, a declaration is missing, we need to output one. */
 	val virtual: Boolean = false,
 	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
-	val globalIdentifier: Boolean = true
+	val globalIdentifier: Boolean = true,
+	/** when false, malloc methods will not be generated. */
+    val malloc: Boolean = true
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	class object {
@@ -170,30 +172,34 @@ class Struct(
 
 		print("""
 	private static native int offsets(${if ( members.isNotEmpty() ) "long buffer" else ""});
-
+""")
+		if ( malloc )
+			print("""
 	/** Returns a new {@link ByteBuffer} instance with a capacity equal to {@link #SIZEOF}. */
 	public static ByteBuffer malloc() { return BufferUtils.createByteBuffer(SIZEOF); }
 """)
 
 		if ( members.isNotEmpty() ) {
-			// Virtual constructors
-			generateConstructor(
-				"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the specified values.",
-				members, generateConstructorArguments, generateConstructorSetters
-			)
-			if ( generateAlternativeConstructor(members) ) {
+			if ( malloc ) {
+				// Virtual constructors
 				generateConstructor(
-					"Alternative virtual constructor.",
-					members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER1
+					"Virtual constructor. Calls {@link #malloc} and initializes the returned {@link ByteBuffer} instance with the specified values.",
+					members, generateConstructorArguments, generateConstructorSetters
 				)
-				if ( members any { it is StructMemberCharArray || it.nativeType is CharSequenceType } )
+				if ( generateAlternativeConstructor(members) ) {
 					generateConstructor(
 						"Alternative virtual constructor.",
-						members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER2
+						members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER1
 					)
-			}
+					if ( members any { it is StructMemberCharArray || it.nativeType is CharSequenceType } )
+						generateConstructor(
+							"Alternative virtual constructor.",
+							members, generateAlternativeConstructorArguments, generateAlternativeConstructorSetters, ConstructorMode.ALTER2
+						)
+				}
 
-			println();
+				println();
+			}
 
 			// Setters
 			generateSetters(members)
@@ -696,8 +702,8 @@ class Struct(
 
 }
 
-fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, init: Struct.() -> Unit): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier)
+fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, malloc: Boolean = true, init: Struct.() -> Unit): Struct {
+	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier, malloc)
 	struct.init()
 	Generator.register(struct)
 	return struct
