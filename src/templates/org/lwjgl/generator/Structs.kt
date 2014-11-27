@@ -58,7 +58,7 @@ class Struct(
 	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
 	val globalIdentifier: Boolean = true,
 	/** when false, malloc methods will not be generated. */
-    val malloc: Boolean = true
+	val malloc: Boolean = true
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
 	class object {
@@ -74,8 +74,8 @@ class Struct(
 		)
 	}
 
-	val nativeName: String
-		get() = if ( globalIdentifier ) structName else "struct $structName"
+	val nativeType: StructType get() = StructType(this)
+	val nativeName: String get() = if ( globalIdentifier ) structName else "struct $structName"
 
 	private val struct = structName.toLowerCase()
 
@@ -219,7 +219,7 @@ class Struct(
 		parentField: String = "",
 		more: Boolean = false
 	) {
-		members.forEachWithMore(more) { (member, more) ->
+		members.forEachWithMore(more) {(member, more) ->
 			if ( more )
 				println(",")
 
@@ -702,7 +702,16 @@ class Struct(
 
 }
 
-fun struct(packageName: String, className: String, nativeSubPath: String = "", structName: String = className, virtual: Boolean = false, globalIdentifier: Boolean = true, malloc: Boolean = true, init: Struct.() -> Unit): Struct {
+fun struct(
+	packageName: String,
+	className: String,
+	nativeSubPath: String = "",
+	structName: String = className,
+	virtual: Boolean = false,
+	globalIdentifier: Boolean = true,
+	malloc: Boolean = true,
+	init: Struct.() -> Unit
+): Struct {
 	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier, malloc)
 	struct.init()
 	Generator.register(struct)

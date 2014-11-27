@@ -13,43 +13,37 @@ val GLFWmonitor_p = PointerType(GLFWmonitor)
 
 val GLFWwindow = PointerType("GLFWwindow")
 
-val GLFWvidmode = StructType(
-	struct(GLFW_PACKAGE, "GLFWvidmode") {
-		documentation = "Video mode."
-		nativeImport("glfw3.h")
-		int.member("width")
-		int.member("height")
-		int.member("redBits")
-		int.member("greenBits")
-		int.member("blueBits")
-		int.member("refreshRate")
-	}
-)
+val GLFWvidmode = struct(GLFW_PACKAGE, "GLFWvidmode") {
+	documentation = "Video mode."
+	nativeImport("glfw3.h")
+	int.member("width")
+	int.member("height")
+	int.member("redBits")
+	int.member("greenBits")
+	int.member("blueBits")
+	int.member("refreshRate")
+}.nativeType
 val GLFWvidmode_p = StructType(GLFWvidmode)
 
-val GLFWgammaramp = StructType(
-	struct(GLFW_PACKAGE, "GLFWgammaramp") {
-		documentation = "Gamma ramp."
-		nativeImport("glfw3.h")
-		unsigned_short_p.member("red")
-		unsigned_short_p.member("green")
-		unsigned_short_p.member("blue")
-		unsigned_int.member("size")
-	}
-)
+val GLFWgammaramp = struct(GLFW_PACKAGE, "GLFWgammaramp") {
+	documentation = "Gamma ramp."
+	nativeImport("glfw3.h")
+	unsigned_short_p.member("red")
+	unsigned_short_p.member("green")
+	unsigned_short_p.member("blue")
+	unsigned_int.member("size")
+}.nativeType
 val GLFWgammaramp_p = StructType(GLFWgammaramp)
 
 val GLFWcursor = PointerType("GLFWcursor")
 
-val GLFWimage = StructType(
-	struct(GLFW_PACKAGE, "GLFWimage") {
-		documentation = "Image data."
-		nativeImport("glfw3.h")
-		int.member("width")
-		int.member("height")
-		unsigned_char_p.member("pixels")
-	}
-)
+val GLFWimage = struct(GLFW_PACKAGE, "GLFWimage") {
+	documentation = "Image data."
+	nativeImport("glfw3.h")
+	int.member("width")
+	int.member("height")
+	unsigned_char_p.member("pixels")
+}.nativeType
 val GLFWimage_p = StructType(GLFWimage)
 
 // callback functions

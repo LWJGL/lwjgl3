@@ -129,45 +129,39 @@ val cl_charUTF8_pp = PointerType(cl_charUTF8_p)
 
 // structs
 
-val cl_image_format = StructType(
-	struct(OPENCL_PACKAGE, "cl_image_format") {
-		documentation = "Image format struct."
-		nativeImport("OpenCL.h")
-		cl_channel_order.member("image_channel_order")
-		cl_channel_type.member("image_channel_data_type")
-	}
-)
+val cl_image_format = struct(OPENCL_PACKAGE, "cl_image_format") {
+	documentation = "Image format struct."
+	nativeImport("OpenCL.h")
+	cl_channel_order.member("image_channel_order")
+	cl_channel_type.member("image_channel_data_type")
+}.nativeType
 val cl_image_format_p = StructType(cl_image_format)
 
-val cl_image_desc = StructType(
-	struct(OPENCL_PACKAGE, "cl_image_desc") {
-		documentation = "Image description struct."
-		nativeImport("OpenCL.h")
-		cl_mem_object_type.member("image_type")
-		size_t.member("image_width")
-		size_t.member("image_height")
-		size_t.member("image_depth")
-		size_t.member("image_array_size")
-		size_t.member("image_row_pitch")
-		size_t.member("image_slice_pitch")
-		cl_uint.member("num_mip_levels")
-		cl_uint.member("num_samples")
-		//union {
-		cl_mem.member("buffer")
-		//cl_mem.member("mem_object") TODO: Missing from Apple's headers
-		//}
-	}
-)
+val cl_image_desc = struct(OPENCL_PACKAGE, "cl_image_desc") {
+	documentation = "Image description struct."
+	nativeImport("OpenCL.h")
+	cl_mem_object_type.member("image_type")
+	size_t.member("image_width")
+	size_t.member("image_height")
+	size_t.member("image_depth")
+	size_t.member("image_array_size")
+	size_t.member("image_row_pitch")
+	size_t.member("image_slice_pitch")
+	cl_uint.member("num_mip_levels")
+	cl_uint.member("num_samples")
+	//union {
+	cl_mem.member("buffer")
+	//cl_mem.member("mem_object") TODO: Missing from Apple's headers
+	//}
+}.nativeType
 val cl_image_desc_p = StructType(cl_image_desc)
 
-val cl_bus_address_amd = StructType(
-	struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
-		documentation = "Used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
-		nativeImport("OpenCL.h")
-		cl_ulong.member("surface_bus_address")
-		cl_ulong.member("marker_bus_address")
-	}
-)
+val cl_bus_address_amd = struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
+	documentation = "Used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
+	nativeImport("OpenCL.h")
+	cl_ulong.member("surface_bus_address")
+	cl_ulong.member("marker_bus_address")
+}.nativeType
 val cl_bus_address_amd_p = StructType(cl_bus_address_amd)
 
 fun config() {

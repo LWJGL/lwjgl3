@@ -68,13 +68,11 @@ val HGDIOBJ = PointerType("HGDIOBJ", includesPointer = true)
 val PROC = PointerType("PROC", includesPointer = true)
 val HGLOBAL = PointerType("HGLOBAL", includesPointer = true)
 
-val POINTFLOAT = StructType(
-	struct(WINDOWS_PACKAGE, "POINTFLOAT") {
-		nativeImport ("WindowsLWJGL.h")
-		FLOAT.member("x")
-		FLOAT.member("y")
-	}
-)
+val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
+	nativeImport ("WindowsLWJGL.h")
+	FLOAT.member("x")
+	FLOAT.member("y")
+}.nativeType
 
 val LPGLYPHMETRICSFLOAT = StructType(
 	name = "LPGLYPHMETRICSFLOAT",
@@ -222,68 +220,66 @@ val POINTL = StructType (
 	}
 )
 
-val DEVMODE = StructType(
-	struct(WINDOWS_PACKAGE, "DEVMODE") {
-		documentation = "Contains information about the initialization and environment of a printer or a display device."
-		nativeImport("WindowsLWJGL.h")
-		TCHAR.member("dmDeviceName", "deviceName", 32, true)
-		WORD.member("dmSpecVersion", "specVersion")
-		WORD.member("dmDriverVersion", "driverVersion")
-		WORD.member("dmSize", "size")
-		WORD.member("dmDriverExtra", "driverExtra")
-		DWORD.member("dmFields", "fields")
-		//union {
-		//struct {
-		/*
-		short.member("dmOrientation", "orientation")
-		short.member("dmPaperSize", "paperSize")
-		short.member("dmPaperLength", "paperLength")
-		short.member("dmPaperWidth", "paperWidth")
-		short.member("dmScale", "scale")
-		short.member("dmCopies", "copies")
-		short.member("dmDefaultSource", "defaultSource")
-		short.member("dmPrintQuality", "printQuality")
-		*/
-		//}
-		//struct {
-		POINTL.member("dmPosition", "position")
-		//DWORD.member("dmDisplayOrientation", "displayOrientation") // Not supported on win2k
-		//DWORD.member("dmDisplayFixedOutput", "displayFixedOutput") // Not supported on win2k
-		//}
-		//}
-		/*
-		short.member("dmColor", "color")
-		short.member("dmDuplex", "duplex")
-		short.member("dmYResolution", "yResolution")
-		short.member("dmTTOption", "ttOption")
-		short.member("dmCollate", "collate")
-		TCHAR.member("dmFormName", "formName", 32, true)
-		*/
-		WORD.member("dmLogPixels", "logPixels")
-		DWORD.member("dmBitsPerPel", "bitsPerPel")
-		DWORD.member("dmPelsWidth", "pelsWidth")
-		DWORD.member("dmPelsHeight", "pelsHeight")
-		//union {
-		DWORD.member("dmDisplayFlags", "displayFlags")
-		//DWORD.member("dmNup", "nup")
-		//}
-		DWORD.member("dmDisplayFrequency", "displayFrequency")
-		/*
-		DWORD.member("dmICMMethod", "icmMethod")
-		DWORD.member("dmICMIntent", "icmIntent")
-		DWORD.member("dmMediaType", "mediaType")
-		DWORD.member("dmDitherType", "ditherType")
-		*/
+val DEVMODE = struct(WINDOWS_PACKAGE, "DEVMODE") {
+	documentation = "Contains information about the initialization and environment of a printer or a display device."
+	nativeImport("WindowsLWJGL.h")
+	TCHAR.member("dmDeviceName", "deviceName", 32, true)
+	WORD.member("dmSpecVersion", "specVersion")
+	WORD.member("dmDriverVersion", "driverVersion")
+	WORD.member("dmSize", "size")
+	WORD.member("dmDriverExtra", "driverExtra")
+	DWORD.member("dmFields", "fields")
+	//union {
+	//struct {
+	/*
+	short.member("dmOrientation", "orientation")
+	short.member("dmPaperSize", "paperSize")
+	short.member("dmPaperLength", "paperLength")
+	short.member("dmPaperWidth", "paperWidth")
+	short.member("dmScale", "scale")
+	short.member("dmCopies", "copies")
+	short.member("dmDefaultSource", "defaultSource")
+	short.member("dmPrintQuality", "printQuality")
+	*/
+	//}
+	//struct {
+	POINTL.member("dmPosition", "position")
+	//DWORD.member("dmDisplayOrientation", "displayOrientation") // Not supported on win2k
+	//DWORD.member("dmDisplayFixedOutput", "displayFixedOutput") // Not supported on win2k
+	//}
+	//}
+	/*
+	short.member("dmColor", "color")
+	short.member("dmDuplex", "duplex")
+	short.member("dmYResolution", "yResolution")
+	short.member("dmTTOption", "ttOption")
+	short.member("dmCollate", "collate")
+	TCHAR.member("dmFormName", "formName", 32, true)
+	*/
+	WORD.member("dmLogPixels", "logPixels")
+	DWORD.member("dmBitsPerPel", "bitsPerPel")
+	DWORD.member("dmPelsWidth", "pelsWidth")
+	DWORD.member("dmPelsHeight", "pelsHeight")
+	//union {
+	DWORD.member("dmDisplayFlags", "displayFlags")
+	//DWORD.member("dmNup", "nup")
+	//}
+	DWORD.member("dmDisplayFrequency", "displayFrequency")
+	/*
+	DWORD.member("dmICMMethod", "icmMethod")
+	DWORD.member("dmICMIntent", "icmIntent")
+	DWORD.member("dmMediaType", "mediaType")
+	DWORD.member("dmDitherType", "ditherType")
+	*/
 
-		/*
-		DWORD.member("dmReserved1", "reserved1")
-		DWORD.member("dmReserved2", "reserved2")
+	/*
+	DWORD.member("dmReserved1", "reserved1")
+	DWORD.member("dmReserved2", "reserved2")
 
-		DWORD.member("dmPanningWidth", "panningWidth")
-		DWORD.member("dmPanningHeight", "panningHeight")
-		*/
-	}
-)
+	DWORD.member("dmPanningWidth", "panningWidth")
+	DWORD.member("dmPanningHeight", "panningHeight")
+	*/
+}.nativeType
 val DEVMODE_p = StructType(DEVMODE)
 
 val PDISPLAY_DEVICE = StructType(
@@ -320,13 +316,11 @@ val LPTRACKMOUSEEVENT = StructType(
 	}
 )
 
-val LARGE_INTEGER = StructType(
-	struct(WINDOWS_PACKAGE, "LARGE_INTEGER") {
-		nativeImport ("WindowsLWJGL.h")
-		// LARGE_INTEGER is a union really, but we don't care about the other stuff.
-		LONGLONG.member("QuadPart")
-	}
-)
+val LARGE_INTEGER = struct(WINDOWS_PACKAGE, "LARGE_INTEGER") {
+	nativeImport ("WindowsLWJGL.h")
+	// LARGE_INTEGER is a union really, but we don't care about the other stuff.
+	LONGLONG.member("QuadPart")
+}.nativeType
 val LARGE_INTEGER_p = StructType(LARGE_INTEGER)
 
 val LPJOYCAPS = StructType(

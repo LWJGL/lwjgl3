@@ -6,260 +6,235 @@ package org.lwjgl.system.linux
 
 import org.lwjgl.generator.*
 
-val XAnyEvent = StructType(
-	struct(LINUX_PACKAGE, "XAnyEvent") {
-		documentation = "Any event."
-		nativeImport ("LinuxLWJGL.h")
+val XAnyEvent = struct(LINUX_PACKAGE, "XAnyEvent") {
+	documentation = "Any event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+}.nativeType
 
-val XKeyEvent = StructType(
-	struct(LINUX_PACKAGE, "XKeyEvent") {
-		documentation = "Key event."
-		nativeImport ("LinuxLWJGL.h")
+val XKeyEvent = struct(LINUX_PACKAGE, "XKeyEvent") {
+	documentation = "Key event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-		Window.member("root")
-		Window.member("subwindow")
-		Time.member("time")
-		int.member("x")
-		int.member("y")
-		int.member("x_root")
-		int.member("y_root")
-		unsigned_int.member("state")
-		unsigned_int.member("keycode")
-		Bool.member("same_screen")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+	Window.member("root")
+	Window.member("subwindow")
+	Time.member("time")
+	int.member("x")
+	int.member("y")
+	int.member("x_root")
+	int.member("y_root")
+	unsigned_int.member("state")
+	unsigned_int.member("keycode")
+	Bool.member("same_screen")
+}.nativeType
 val XKeyEvent_p = StructType(XKeyEvent)
 
-val XButtonEvent = StructType(
-	struct(LINUX_PACKAGE, "XButtonEvent") {
-		documentation = "Button event."
-		nativeImport ("LinuxLWJGL.h")
+val XButtonEvent = struct(LINUX_PACKAGE, "XButtonEvent") {
+	documentation = "Button event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-		Window.member("root")
-		Window.member("subwindow")
-		Time.member("time")
-		int.member("x")
-		int.member("y")
-		int.member("x_root")
-		int.member("y_root")
-		unsigned_int.member("state")
-		unsigned_int.member("button")
-		Bool.member("same_screen")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+	Window.member("root")
+	Window.member("subwindow")
+	Time.member("time")
+	int.member("x")
+	int.member("y")
+	int.member("x_root")
+	int.member("y_root")
+	unsigned_int.member("state")
+	unsigned_int.member("button")
+	Bool.member("same_screen")
+}.nativeType
 
-val XMotionEvent = StructType(
-	struct(LINUX_PACKAGE, "XMotionEvent") {
-		documentation = "Motion event."
-		nativeImport ("LinuxLWJGL.h")
+val XMotionEvent = struct(LINUX_PACKAGE, "XMotionEvent") {
+	documentation = "Motion event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-		Window.member("root")
-		Window.member("subwindow")
-		Time.member("time")
-		int.member("x")
-		int.member("y")
-		int.member("x_root")
-		int.member("y_root")
-		unsigned_int.member("state")
-		char.member("is_hint")
-		Bool.member("same_screen")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+	Window.member("root")
+	Window.member("subwindow")
+	Time.member("time")
+	int.member("x")
+	int.member("y")
+	int.member("x_root")
+	int.member("y_root")
+	unsigned_int.member("state")
+	char.member("is_hint")
+	Bool.member("same_screen")
+}.nativeType
 
-val XConfigureEvent = StructType(
-	struct(LINUX_PACKAGE, "XConfigureEvent") {
-		documentation = "Motion event."
-		nativeImport ("LinuxLWJGL.h")
+val XConfigureEvent = struct(LINUX_PACKAGE, "XConfigureEvent") {
+	documentation = "Motion event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("event")
-		Window.member("window")
-		int.member("x")
-		int.member("y")
-		int.member("width")
-		int.member("height")
-		int.member("border_width")
-		Window.member("above")
-		Bool.member("override_redirect")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("event")
+	Window.member("window")
+	int.member("x")
+	int.member("y")
+	int.member("width")
+	int.member("height")
+	int.member("border_width")
+	Window.member("above")
+	Bool.member("override_redirect")
+}.nativeType
 
-val XPropertyEvent = StructType(
-	struct(LINUX_PACKAGE, "XPropertyEvent") {
-		documentation = "Property event."
-		nativeImport ("LinuxLWJGL.h")
+val XPropertyEvent = struct(LINUX_PACKAGE, "XPropertyEvent") {
+	documentation = "Property event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-		Atom.member("atom")
-		Time.member("time")
-		int.member("state")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+	Atom.member("atom")
+	Time.member("time")
+	int.member("state")
+}.nativeType
 
-val XSelectionRequestEvent = StructType(
-	struct(LINUX_PACKAGE, "XSelectionRequestEvent") {
-		documentation = "SelectionRequest event structure."
-		nativeImport ("LinuxLWJGL.h")
+val XSelectionRequestEvent = struct(LINUX_PACKAGE, "XSelectionRequestEvent") {
+	documentation = "SelectionRequest event structure."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("owner")
-		Window.member("requestor")
-		Atom.member("selection")
-		Atom.member("target")
-		Atom.member("property")
-		Time.member("time")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("owner")
+	Window.member("requestor")
+	Atom.member("selection")
+	Atom.member("target")
+	Atom.member("property")
+	Time.member("time")
+}.nativeType
 val XSelectionRequestEvent_p = StructType(XSelectionRequestEvent)
 
-val XSelectionEvent = StructType(
-	struct(LINUX_PACKAGE, "XSelectionEvent") {
-		documentation = "Selection event structure."
-		nativeImport ("LinuxLWJGL.h")
+val XSelectionEvent = struct(LINUX_PACKAGE, "XSelectionEvent") {
+	documentation = "Selection event structure."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("requestor")
-		Atom.member("selection")
-		Atom.member("target")
-		Atom.member("property")
-		Time.member("time")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("requestor")
+	Atom.member("selection")
+	Atom.member("target")
+	Atom.member("property")
+	Time.member("time")
+}.nativeType
 
-val XClientMessageEvent = StructType(
-	struct(LINUX_PACKAGE, "XClientMessageEvent") {
-		documentation = "Client message event."
-		nativeImport ("LinuxLWJGL.h")
+val XClientMessageEvent = struct(LINUX_PACKAGE, "XClientMessageEvent") {
+	documentation = "Client message event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		Window.member("window")
-		Atom.member("message_type")
-		int.member("format")
-		struct {
-			char.member("b", size = 20)
-			short.member("s", size = 10)
-			long.member("l", size = 5)
-		}.member("data")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	Window.member("window")
+	Atom.member("message_type")
+	int.member("format")
+	struct {
+		char.member("b", size = 20)
+		short.member("s", size = 10)
+		long.member("l", size = 5)
+	}.member("data")
+}.nativeType
 
-val XErrorEvent = StructType(
-	struct(LINUX_PACKAGE, "XErrorEvent") {
-		documentation = "Error event."
-		nativeImport ("LinuxLWJGL.h")
+val XErrorEvent = struct(LINUX_PACKAGE, "XErrorEvent") {
+	documentation = "Error event."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		Display_p.member("display")
-		unsigned_long.member("serial")
-		unsigned_char.member("error_code")
-		unsigned_char.member("request_code")
-		unsigned_char.member("minor_code")
-		XID.member("resourceid")
-	}
-)
+	int.member("type")
+	Display_p.member("display")
+	unsigned_long.member("serial")
+	unsigned_char.member("error_code")
+	unsigned_char.member("request_code")
+	unsigned_char.member("minor_code")
+	XID.member("resourceid")
+}.nativeType
 val XErrorEvent_p = StructType(XErrorEvent)
 
-val XGenericEventCookie = StructType(
-	struct(LINUX_PACKAGE, "XGenericEventCookie") {
-		documentation = "Additional information for an {@code XGenericEvent}."
-		nativeImport ("LinuxLWJGL.h")
+val XGenericEventCookie = struct(LINUX_PACKAGE, "XGenericEventCookie") {
+	documentation = "Additional information for an {@code XGenericEvent}."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
-		unsigned_long.member("serial")
-		Bool.member("send_event")
-		Display_p.member("display")
-		int.member("extension")
-		int.member("evtype")
-		unsigned_int.member("cookie")
-		void_p.member("data")
-	}
-)
+	int.member("type")
+	unsigned_long.member("serial")
+	Bool.member("send_event")
+	Display_p.member("display")
+	int.member("extension")
+	int.member("evtype")
+	unsigned_int.member("cookie")
+	void_p.member("data")
+}.nativeType
 val XGenericEventCookie_p = StructType(XGenericEventCookie)
 
-val XEvent = StructType(
-	// O.o holy mother of unions
-	struct(LINUX_PACKAGE, "XEvent") {
-		documentation = "This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation."
-		nativeImport ("LinuxLWJGL.h")
+val XEvent = struct(LINUX_PACKAGE, "XEvent") {
+	documentation = "This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation."
+	nativeImport ("LinuxLWJGL.h")
 
-		int.member("type")
+	int.member("type")
 
-		XAnyEvent.member("xany")
-		XKeyEvent.member("xkey")
-		XButtonEvent.member("xbutton")
-		XMotionEvent.member("xmotion")
-		//XCrossingEvent.member("xcrossing")
-		//XFocusChangeEvent.member("xfocus")
-		//XExposeEvent.member("xexpose")
-		//XGraphicsExposeEvent.member("xgraphicsexpose")
-		//XNoExposeEvent.member("xnoexpose")
-		//XVisibilityEvent.member("xvisibility")
-		//XCreateWindowEvent.member("xcreatewindow")
-		//XDestroyWindowEvent.member("xdestroywindow")
-		//XUnmapEvent.member("xunmap")
-		//XMapEvent.member("xmap")
-		//XMapRequestEvent.member("xmaprequest")
-		//XReparentEvent.member("xreparent")
-		XConfigureEvent.member("xconfigure")
-		//XGravityEvent.member("xgravity")
-		//XResizeRequestEvent.member("xresizerequest")
-		//XConfigureRequestEvent.member("xconfigurerequest")
-		//XCirculateEvent.member("xcirculate")
-		//XCirculateRequestEvent.member("xcirculaterequest")
-		XPropertyEvent.member("xproperty")
-		//XSelectionClearEvent.member("xselectionclear")
-		XSelectionRequestEvent.member("xselectionrequest")
-		XSelectionEvent.member("xselection")
-		//XColormapEvent.member("xcolormap")
-		XClientMessageEvent.member("xclient")
-		//XMappingEvent.member("xmapping")
-		XErrorEvent.member("xerror")
-		//XKeymapEvent.member("xkeymap")
-		//XGenericEvent.member("xgeneric")
-		XGenericEventCookie.member("xcookie")
+	XAnyEvent.member("xany")
+	XKeyEvent.member("xkey")
+	XButtonEvent.member("xbutton")
+	XMotionEvent.member("xmotion")
+	//XCrossingEvent.member("xcrossing")
+	//XFocusChangeEvent.member("xfocus")
+	//XExposeEvent.member("xexpose")
+	//XGraphicsExposeEvent.member("xgraphicsexpose")
+	//XNoExposeEvent.member("xnoexpose")
+	//XVisibilityEvent.member("xvisibility")
+	//XCreateWindowEvent.member("xcreatewindow")
+	//XDestroyWindowEvent.member("xdestroywindow")
+	//XUnmapEvent.member("xunmap")
+	//XMapEvent.member("xmap")
+	//XMapRequestEvent.member("xmaprequest")
+	//XReparentEvent.member("xreparent")
+	XConfigureEvent.member("xconfigure")
+	//XGravityEvent.member("xgravity")
+	//XResizeRequestEvent.member("xresizerequest")
+	//XConfigureRequestEvent.member("xconfigurerequest")
+	//XCirculateEvent.member("xcirculate")
+	//XCirculateRequestEvent.member("xcirculaterequest")
+	XPropertyEvent.member("xproperty")
+	//XSelectionClearEvent.member("xselectionclear")
+	XSelectionRequestEvent.member("xselectionrequest")
+	XSelectionEvent.member("xselection")
+	//XColormapEvent.member("xcolormap")
+	XClientMessageEvent.member("xclient")
+	//XMappingEvent.member("xmapping")
+	XErrorEvent.member("xerror")
+	//XKeymapEvent.member("xkeymap")
+	//XGenericEvent.member("xgeneric")
+	XGenericEventCookie.member("xcookie")
 
-		long.member("pad", size = 24)
-	}
-)
+	long.member("pad", size = 24)
+}.nativeType
 val XEvent_p = StructType(XEvent)
 
 fun config() {
