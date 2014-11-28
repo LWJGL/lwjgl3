@@ -312,7 +312,7 @@ public final class LWJGLUtil {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
-		String libName = System.mapLibraryName(name);
+		String libName = mapLibraryName(name);
 		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
 		// Try org.lwjgl.librarypath first
@@ -344,7 +344,7 @@ public final class LWJGLUtil {
 		if ( getPlatform() == Platform.MACOSX && name.endsWith(".framework") )
 			return apiCreateLibrary(name);
 
-		String libName = System.mapLibraryName(name);
+		String libName = mapLibraryName(name);
 		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
 		// Try org.lwjgl.librarypath first
@@ -367,6 +367,14 @@ public final class LWJGLUtil {
 		}
 
 		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
+	}
+
+	// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
+	private static String mapLibraryName(String name) {
+		String libName = System.mapLibraryName(name);
+		return PLATFORM == Platform.MACOSX && libName.endsWith(".jnilib")
+			? libName.substring(0, libName.length() - ".jnilib".length()) + ".dylib"
+			: libName;
 	}
 
 	private interface LibraryLoader<T> {
