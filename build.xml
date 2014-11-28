@@ -84,7 +84,14 @@
 			</fileset>
 			<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
 		</path>
-		<property name="jdk.boot.classpath" value="jdk.boot.classpath.jars"/>
+		<path id="jdk.boot.classpath.applejars">
+			<fileset dir="${env.JAVA6_HOME}/bundle/Classes">
+				<include name="*.jar"/>
+			</fileset>
+		</path>
+		<condition property="jdk.boot.classpath" value="jdk.boot.classpath.applejars" else="jdk.boot.classpath.jars">
+			<available file="${env.JAVA6_HOME}/bundle/Classes/classes.jar"/>
+		</condition>
 	</target>
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
