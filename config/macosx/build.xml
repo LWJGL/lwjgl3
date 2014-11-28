@@ -27,11 +27,12 @@
 		</sequential>
 	</macrodef>
 
-	<property name="compiler" value="clang"/> <!-- Use clang on 10.8 or newer -->
 	<find-sdkroot version="10.10"/>
 	<find-sdkroot version="10.9"/>
 	<find-sdkroot version="10.8"/>
-	<condition property="compiler" value="gcc"><not><isset property="sdkroot"/></not></condition> <!-- Use gcc on 10.7 -->
+	<condition property="compiler" value="clang" else="gcc"> <!-- Use clang on 10.8 or newer, gcc on 10.7 -->
+		<isset property="sdkroot"/>
+	</condition>
 	<find-sdkroot version="10.7"/>
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
@@ -101,13 +102,13 @@
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
+		<apply dir="${bin.native}" executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
+			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
 			<arg line="-framework AppKit"/>
-			<arg line="-framework CoreFoundation"/>
+			<!--<arg line="-framework CoreFoundation"/>-->
 			<arg line="-framework CoreVideo"/>
-			<arg line="-framework Cocoa"/>
+			<!--<arg line="-framework Cocoa"/>-->
 			<arg line="-framework IOKit"/>
 			<arg line="-framework OpenGL"/>
 
