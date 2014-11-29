@@ -71,8 +71,11 @@ public final class CL {
 					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 				}
 
-				// clGetExtensionFunctionAddress has been deprecated, but clGetExtensionFunctionAddressForPlatform is pointless when the ICD is used.
-				// If there is only 1 platform available, try to use clGetExtensionFunctionAddressForPlatform instead.
+				/*
+				We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless when the
+				ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports OpenCL
+				1.2 or higher.
+				*/
 				long platform = NULL;
 				if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
 					long clGetPlatformIDs = OPENCL.getFunctionAddress("clGetPlatformIDs");
@@ -86,11 +89,33 @@ public final class CL {
 
 					if ( platforms == 1 ) {
 						nclGetPlatformIDs(1, __buffer.address(), NULL, clGetPlatformIDs);
-						platform = __buffer.pointerValue(0);
+						long cl_platform_id = __buffer.pointerValue(0);
+						if ( supportsOpenCL12(__buffer, cl_platform_id) )
+							platform = cl_platform_id;
 					} else if ( clGetExtensionFunctionAddress == NULL )
 						throw new IllegalStateException();
 				}
 				this.platform = platform;
+			}
+
+			private boolean supportsOpenCL12(APIBuffer __buffer, long platform) {
+				long clGetPlatformInfo = OPENCL.getFunctionAddress("clGetPlatformInfo");
+				if ( clGetPlatformInfo == NULL )
+					return false;
+
+				int errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address(), clGetPlatformInfo);
+				if ( errcode != CL_SUCCESS )
+					return false;
+
+				long bytes = __buffer.pointerValue(0);
+				__buffer.bufferParam((int)bytes);
+
+				errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL, clGetPlatformInfo);
+				if ( errcode != CL_SUCCESS )
+					return false;
+
+				APIVersion version = apiParseVersion(__buffer.stringValueASCII(0, (int)bytes - 1), "OpenCL");
+				return 1 < version.major || 2 <= version.minor;
 			}
 
 			@Override

@@ -183,7 +183,7 @@ abstract class InfoQuery {
 			checkCLError(errcode);
 
 		int bytes = (int)__buffer.pointerValue(0);
-		__buffer.bufferParam(bytes + POINTER_SIZE);
+		__buffer.bufferParam(bytes);
 
 		// Get string
 		errcode = get(object, param_name, bytes, __buffer.address(), NULL);
