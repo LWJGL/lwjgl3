@@ -10,7 +10,6 @@ import org.lwjgl.system.PointerWrapper;
 
 import java.util.*;
 
-import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
@@ -79,20 +78,10 @@ public class CLPlatform extends PointerWrapper {
 		}
 
 		// Parse PLATFORM_VERSION string
-		String version = clGetPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION);
-		int majorVersion;
-		int minorVersion;
-		try {
-			StringTokenizer tokenizer = new StringTokenizer(version.substring(7), ". ");
+		APIVersion version = apiParseVersion(clGetPlatformInfoStringASCII(cl_platform_id, CL_PLATFORM_VERSION), "OpenCL");
+		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-			majorVersion = parseInt(tokenizer.nextToken());
-			minorVersion = parseInt(tokenizer.nextToken());
-		} catch (Exception e) {
-			throw new OpenCLException("The platform major and/or minor OpenCL version \"" + version + "\" is malformed: " + e.getMessage());
-		}
-		CL.addCLVersions(majorVersion, minorVersion, supportedExtensions);
-
-		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, CL.getICD());
+		return new CLCapabilities(version.major, version.minor, supportedExtensions, CL.getICD());
 	}
 
 	/**

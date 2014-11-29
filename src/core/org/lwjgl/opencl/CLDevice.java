@@ -9,11 +9,10 @@ import org.lwjgl.system.PointerWrapper;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.StringTokenizer;
 
-import static java.lang.Integer.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.Info.*;
+import static org.lwjgl.system.APIUtil.*;
 
 /** This class is a wrapper around a cl_device_id pointer. */
 public class CLDevice extends PointerWrapper {
@@ -55,20 +54,10 @@ public class CLDevice extends PointerWrapper {
 		CL.addExtensions(extensionsString, supportedExtensions);
 
 		// Parse DEVICE_VERSION string
-		String version = clGetDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION);
-		int majorVersion;
-		int minorVersion;
-		try {
-			StringTokenizer tokenizer = new StringTokenizer(version.substring(7), ". ");
+		APIVersion version = apiParseVersion(clGetDeviceInfoStringASCII(cl_device_id, CL_DEVICE_VERSION), "OpenCL");
+		CL.addCLVersions(version.major, version.minor, supportedExtensions);
 
-			majorVersion = parseInt(tokenizer.nextToken());
-			minorVersion = parseInt(tokenizer.nextToken());
-		} catch (Exception e) {
-			throw new OpenCLException("The device major and/or minor OpenCL version \"" + version + "\" is malformed: " + e.getMessage());
-		}
-		CL.addCLVersions(majorVersion, minorVersion, supportedExtensions);
-
-		return new CLCapabilities(majorVersion, minorVersion, supportedExtensions, platformCapabilities);
+		return new CLCapabilities(version.major, version.minor, supportedExtensions, platformCapabilities);
 	}
 
 }

@@ -201,16 +201,10 @@ public final class GL {
 			minorVersion = __buffer.intValue(0);
 		} else {
 			// Fallback to the string query.
-			String version = memDecodeUTF8(memByteBufferNT1(checkPointer(nglGetString(GL_VERSION, GetString))));
+			APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(nglGetString(GL_VERSION, GetString))));
 
-			try {
-				StringTokenizer versionTokenizer = new StringTokenizer(version, ". ");
-
-				majorVersion = Integer.parseInt(versionTokenizer.nextToken());
-				minorVersion = Integer.parseInt(versionTokenizer.nextToken());
-			} catch (Exception e) {
-				throw new IllegalStateException("The OpenGL version string is malformed: " + version, e);
-			}
+			majorVersion = version.major;
+			minorVersion = version.minor;
 		}
 
 		if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )

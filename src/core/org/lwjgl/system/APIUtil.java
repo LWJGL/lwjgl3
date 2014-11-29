@@ -11,6 +11,8 @@ import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Utility class useful to API bindings.
@@ -34,7 +36,8 @@ public final class APIUtil {
 	}
 
 	/**
-	 * Returns the callback method for the specified callback class. The callback method should be named "invoke" and the parameter types should not contain the
+	 * Returns the callback method for the specified callback class. The callback method should be named "invoke" and the parameter types should not contain
+	 * the
 	 * user data parameter.
 	 *
 	 * @param clazz          the callback class
@@ -76,6 +79,68 @@ public final class APIUtil {
 			default:
 				throw new IllegalStateException();
 		}
+	}
+
+	/** A data class for API versioning information. */
+	public static class APIVersion {
+
+		/** Returns the API major version. */
+		public final int major;
+		/** Returns the API minor version. */
+		public final int minor;
+
+		/** Returns the API revision. May be null. */
+		public final String revision;
+		/** Returns the API implementation-specific versioning information. May be null. */
+		public final String implementation;
+
+		public APIVersion(int major, int minor, String revision, String implementation) {
+			this.major = major;
+			this.minor = minor;
+			this.revision = revision;
+			this.implementation = implementation;
+		}
+
+	}
+
+	/**
+	 * Parses a version string. The version string must have the format {@code MAJOR.MINOR.REVISION IMPL}, where {@code MAJOR} is the major version (integer),
+	 * {@code MINOR} is the minor version (integer), {@code REVISION} is the revision version (string, optional) and {@code IMPL} is implementation-specific
+	 * information (string, optional).
+	 *
+	 * @param version the API version string
+	 *
+	 * @return the parsed {@link APIVersion}
+	 */
+	public static APIVersion apiParseVersion(String version) {
+		return apiParseVersion(version, null);
+	}
+
+	/**
+	 * Parses a version string. The version string must have the format {@code PREFIX MAJOR.MINOR.REVISION IMPL}, where {@code PREFIX} is the specified prefix
+	 * (string, optional), {@code MAJOR} is the major version (integer), {@code MINOR} is the minor version (integer), {@code REVISION} is the revision version
+	 * (string, optional) and {@code IMPL} is implementation-specific information (string, optional).
+	 *
+	 * @param version the version string
+	 * @param prefix  the version string prefix, may be null
+	 *
+	 * @return the parsed {@link APIVersion}
+	 */
+	public static APIVersion apiParseVersion(String version, String prefix) {
+		String pattern = "([0-9]+)[.]([0-9]+)([.]\\S+)?\\s*(.+)?";
+		if ( prefix != null )
+			pattern = prefix + "\\s+" + pattern;
+
+		Matcher matcher = Pattern.compile(pattern).matcher(version);
+		if ( !matcher.matches() )
+			throw new IllegalArgumentException(String.format("Malformed API version string [%s]", version));
+
+		return new APIVersion(
+			Integer.parseInt(matcher.group(1)),
+			Integer.parseInt(matcher.group(2)),
+			matcher.group(3),
+			matcher.group(4)
+		);
 	}
 
 }
