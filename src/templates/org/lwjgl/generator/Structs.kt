@@ -128,7 +128,7 @@ class Struct(
 		println();
 		preamble.printJava(this)
 
-		val documentation = this@Struct.documentation
+		val documentation = super.documentation
 		if ( documentation != null )
 			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		println("${access.modifier}final class $className {")
@@ -614,7 +614,7 @@ class Struct(
 					it.nativeType is CharSequenceType                                                      -> {
 						if ( it.nativeType.nullTerminated ) {
 							println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memByteBufferNT${it.nativeType.charMapping.bytes}(address); }")
-							println("\tpublic static String ${method}Gets(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(memByteBufferNT${it.nativeType.charMapping.bytes}(address)); }")
+							println("\tpublic static String ${method}Gets(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(address); }")
 						} else {
 							println("\tpublic static ByteBuffer ${method}Getb(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
 							println("\tpublic static String ${method}Gets(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(memByteBuffer(address, size)); }")

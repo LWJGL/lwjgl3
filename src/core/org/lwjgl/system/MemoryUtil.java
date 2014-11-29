@@ -75,7 +75,8 @@ public final class MemoryUtil {
 	// --- [ Buffer address utilities ] ---
 
 	/**
-	 * Returns the memory address at the current position of the specified buffer. This is effectively a pointer value that can be used in native function calls.
+	 * Returns the memory address at the current position of the specified buffer. This is effectively a pointer value that can be used in native function
+	 * calls.
 	 * <p/>
 	 * <b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that the
 	 * memory backing the specified buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:
@@ -872,13 +873,24 @@ public final class MemoryUtil {
 	}
 
 	/**
+	 * Converts the null-terminated ASCII encoded string at the specified memory address to a {@link String}.
+	 *
+	 * @param address the string memory address
+	 *
+	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 */
+	public static String memDecodeASCII(long address) {
+		return memDecodeASCII(memByteBufferNT1(address));
+	}
+
+	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as an ASCII string.
 	 * <p/>
 	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the specified {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memDecodeASCII(ByteBuffer buffer) {
 		if ( buffer == null )
@@ -922,13 +934,24 @@ public final class MemoryUtil {
 	}
 
 	/**
+	 * Converts the null-terminated UTF-8 encoded string at the specified memory address to a {@link String}.
+	 *
+	 * @param address the string memory address
+	 *
+	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 */
+	public static String memDecodeUTF8(long address) {
+		return memDecodeUTF8(memByteBufferNT1(address));
+	}
+
+	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-8 string.
 	 * <p/>
 	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
-	 * @return the decoded {@link String} or null if the specified {@code } is null
+	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer) {
 		return memDecode(buffer, UTF8);
@@ -961,6 +984,17 @@ public final class MemoryUtil {
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer, int length, int offset) {
 		return memDecode(buffer, UTF8, length, offset);
+	}
+
+	/**
+	 * Converts the null-terminated UTF-16 encoded string at the specified memory address to a {@link String}.
+	 *
+	 * @param address the string memory address
+	 *
+	 * @return the decode {@link String} or null if the specified {@code address} is null
+	 */
+	public static String memDecodeUTF16(long address) {
+		return memDecodeUTF16(memByteBufferNT2(address));
 	}
 
 	/**

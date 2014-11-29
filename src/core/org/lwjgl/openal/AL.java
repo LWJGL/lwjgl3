@@ -110,7 +110,7 @@ public final class AL {
 			throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that OpenAL has been loaded.");
 
 		// Parse EXTENSIONS string
-		String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalGetString(AL_EXTENSIONS, GetString))));
+		String extensionsString = memDecodeUTF8(checkPointer(nalGetString(AL_EXTENSIONS, GetString)));
 
 		/*
 		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW

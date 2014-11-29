@@ -193,7 +193,7 @@ public final class ALC {
 		}
 
 		// Parse EXTENSIONS string
-		String extensionsString = memDecodeUTF8(memByteBufferNT1(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString))));
+		String extensionsString = memDecodeUTF8(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString)));
 
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {

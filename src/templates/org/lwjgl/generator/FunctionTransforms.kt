@@ -127,7 +127,13 @@ private val CharSequenceTransform: FunctionTransform<Parameter> = object: Functi
 
 private val StringReturnTransform = object: FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
-	override fun transformCall(param: ReturnValue, original: String) = "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($original)";
+	override fun transformCall(param: ReturnValue, original: String): String {
+		val expression = if ( original.startsWith("memByteBufferNT") )
+			original.substring(17, original.length - 1);
+		else
+			original
+		return "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";
+	}
 }
 
 private class BufferValueReturnTransform(
@@ -201,7 +207,7 @@ private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: 
 private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
-	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter)  {
+	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		val mapping = qtype.nativeType.mapping as PointerMapping
 
 		writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }.name}")
