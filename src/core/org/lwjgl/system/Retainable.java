@@ -45,6 +45,7 @@ public interface Retainable {
 				destroy();
 		}
 
+		/** Destroys any resources held by this Retainable instance. */
 		protected abstract void destroy();
 
 	}

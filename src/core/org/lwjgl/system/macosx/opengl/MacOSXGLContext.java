@@ -43,7 +43,7 @@ public class MacOSXGLContext extends GLContext {
 	}
 
 	@Override
-	public void destroyImpl() {
+	protected void destroyImpl() {
 		CGLDestroyContext(handle);
 	}
 

@@ -77,7 +77,7 @@ public class LinuxGLContext extends GLContext {
 	}
 
 	@Override
-	public void destroyImpl() {
+	protected void destroyImpl() {
 		glXDestroyContext(display, ctx);
 	}
 
