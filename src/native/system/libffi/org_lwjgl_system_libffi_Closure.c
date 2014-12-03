@@ -30,7 +30,7 @@ static void ffi_closure_funVoid(ffi_cif* cif, void* ret, void** args, void* user
 }
 
 #define DEFINE_FFI_CLOSURE_FUN(Name, Type, Method) \
-	static void ffi_closure_fun##Name##(ffi_cif* cif, void* ret, void** args, void* user_data) { \
+	static void ffi_closure_fun##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
 		JNIEnv* env = getEnv(); \
 		ClosureCallback* callback = (ClosureCallback*)user_data; \
  \
