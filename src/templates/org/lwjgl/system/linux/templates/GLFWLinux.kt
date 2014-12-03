@@ -6,7 +6,7 @@ package org.lwjgl.system.linux.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.system.glfw.*
+import org.lwjgl.glfw.*
 import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.WCHAR_p
 

@@ -54,6 +54,7 @@ fun main(args: Array<String>) {
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
 		// TODO: Move these to args[2] or a file in /config to enable build customization
+		generate("org.lwjgl.glfw")
 		generate("org.lwjgl.openal")
 		generate("org.lwjgl.opencl")
 		generate("org.lwjgl.opengl")
@@ -61,7 +62,6 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.system.linux")
 		generate("org.lwjgl.system.macosx")
 		generate("org.lwjgl.system.windows")
-		generate("org.lwjgl.system.glfw")
 
 		// Generate utility classes. These are auto-registered during the process above.
 		generate("struct", Generator.structs)

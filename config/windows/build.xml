@@ -20,7 +20,7 @@
 			<arg value="/I${src.native.abs}\system"/>
 			<arg value="/I${src.native.abs}\system\windows"/>
 			<arg value="/I${src.native.abs}\system\libffi"/>
-			<arg value="/I${src.native.abs}\system\glfw"/>
+			<arg value="/I${src.native.abs}\glfw"/>
 			<arg value="/I${src.native.abs}\openal"/>
 			<arg value="/I${src.native.abs}\opencl"/>
 			<arg value="/I${src.native.abs}\opengl"/>
@@ -30,13 +30,13 @@
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.native}/system/glfw" includes="*.c"/>
+			<fileset dir="${src.native}/glfw" includes="*.c"/>
 			<fileset dir="${src.native}/opencl" includes="*.c"/>
 			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${generated.native}/system" includes="*.c"/>
 			<fileset dir="${generated.native}/system/windows" includes="*.c"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/system/glfw" includes="*.c"/>
+			<fileset dir="${generated.native}/glfw" includes="*.c"/>
 			<fileset dir="${generated.native}/openal" includes="*.c"/>
 			<fileset dir="${generated.native}/opencl" includes="*.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>

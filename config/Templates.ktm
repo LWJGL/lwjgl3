@@ -19,7 +19,7 @@ fun project() {
 		//for ( source in listFiles("src/templates/org/lwjgl/opencl", FILTER_RECURSIVE) ) sources += source
 		for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_FILES_ONLY) ) sources += source
 		//for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_RECURSIVE) ) sources += source
-		for ( source in listFiles("src/templates/org/lwjgl/system/glfw", FILTER_RECURSIVE) ) sources += source
+		for ( source in listFiles("src/templates/org/lwjgl/glfw", FILTER_RECURSIVE) ) sources += source
 		//for ( source in listFiles("src/templates/org/lwjgl/system/windows", FILTER_RECURSIVE) ) sources += source
 		for ( source in listFiles("src/templates/org/lwjgl/system/linux", FILTER_RECURSIVE) ) sources += source
 		*/

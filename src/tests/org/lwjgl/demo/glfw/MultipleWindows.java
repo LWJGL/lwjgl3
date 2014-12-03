@@ -4,18 +4,18 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.lwjgl.glfw.GLFWcursorenterfun;
+import org.lwjgl.glfw.GLFWerrorfun;
+import org.lwjgl.glfw.GLFWkeyfun;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.GLFWcursorenterfun;
-import org.lwjgl.system.glfw.GLFWerrorfun;
-import org.lwjgl.system.glfw.GLFWkeyfun;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.Callbacks.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 
 /** GLFW demo that showcases rendering to multiple windows from a single thread. */
 public final class MultipleWindows {

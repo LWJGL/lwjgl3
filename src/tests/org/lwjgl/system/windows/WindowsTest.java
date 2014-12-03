@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.Sys;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;

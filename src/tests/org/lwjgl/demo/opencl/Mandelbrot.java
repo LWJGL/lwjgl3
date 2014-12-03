@@ -7,11 +7,11 @@ package org.lwjgl.demo.opencl;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.*;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
@@ -25,6 +25,7 @@ import java.util.concurrent.CountDownLatch;
 
 import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
 import static org.lwjgl.demo.util.IOUtil.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
@@ -37,7 +38,6 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.linux.GLFWLinux.*;
 import static org.lwjgl.system.macosx.CGL.*;
 import static org.lwjgl.system.windows.WGL.*;

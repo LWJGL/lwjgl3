@@ -7,8 +7,8 @@ package org.lwjgl.demo.openal;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
-import org.lwjgl.openal.ALDevice;
 import org.lwjgl.openal.ALContext;
+import org.lwjgl.openal.ALDevice;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

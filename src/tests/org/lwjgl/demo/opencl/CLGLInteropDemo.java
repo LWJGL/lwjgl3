@@ -6,13 +6,13 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.CL;
 import org.lwjgl.opencl.CLCapabilities;
 import org.lwjgl.opencl.CLDevice;
 import org.lwjgl.opencl.CLPlatform;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -20,13 +20,13 @@ import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.Callbacks.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 
 /*
 		THIS DEMO USES CODE PORTED FROM JogAmp.org

@@ -5,7 +5,7 @@
 package org.lwjgl.system.windows.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.glfw.*
+import org.lwjgl.glfw.*
 import org.lwjgl.system.windows.*
 
 val GLFWWin32 = "GLFWWin32".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "GLFW") {

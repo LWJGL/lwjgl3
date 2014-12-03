@@ -8,8 +8,8 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.demo.util.ClosureGC;
+import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.*;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -17,10 +17,10 @@ import java.nio.ByteBuffer;
 import java.util.Map;
 
 import static org.lwjgl.demo.util.IOUtil.*;
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.Callbacks.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 
 /** GLFW events demo. */
 public final class Events {

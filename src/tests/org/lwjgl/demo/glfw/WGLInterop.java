@@ -5,11 +5,11 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFWerrorfun;
+import org.lwjgl.glfw.GLFWkeyfun;
+import org.lwjgl.glfw.GLFWwindowsizefun;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.GLFWerrorfun;
-import org.lwjgl.system.glfw.GLFWkeyfun;
-import org.lwjgl.system.glfw.GLFWwindowsizefun;
 import org.lwjgl.system.libffi.Closure;
 
 import java.nio.ByteBuffer;
@@ -17,13 +17,13 @@ import java.nio.IntBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.lang.Math.*;
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.Callbacks.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.windows.GLFWWin32.*;
 import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinGDI.*;

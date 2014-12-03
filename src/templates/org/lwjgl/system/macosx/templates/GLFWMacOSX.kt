@@ -5,7 +5,7 @@
 package org.lwjgl.system.macosx.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.glfw.*
+import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
 val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix = "GLFW") {

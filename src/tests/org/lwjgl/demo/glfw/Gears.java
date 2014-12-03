@@ -5,19 +5,19 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.demo.opengl.AbstractGears;
+import org.lwjgl.glfw.GLFWerrorfun;
+import org.lwjgl.glfw.GLFWkeyfun;
+import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.GLFWerrorfun;
-import org.lwjgl.system.glfw.GLFWkeyfun;
-import org.lwjgl.system.glfw.GLFWvidmode;
 import org.lwjgl.system.libffi.Closure;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.glfw.Callbacks.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.Callbacks.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {

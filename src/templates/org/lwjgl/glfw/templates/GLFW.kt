@@ -2,10 +2,10 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.glfw.templates
+package org.lwjgl.glfw.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.glfw.*
+import org.lwjgl.glfw.*
 import org.lwjgl.opengl.*
 
 val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {

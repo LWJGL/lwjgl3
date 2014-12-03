@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.Pointer.*;
+import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.testng.Assert.*;
 
@@ -123,9 +123,9 @@ public class LibFFITest {
 	private static long glfwGetWindowSizeAddress() {
 		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative("lwjgl");
 
-		long glfwGetWindowSize = lib.getFunctionAddress("Java_org_lwjgl_system_glfw_GLFW_nglfwGetWindowSize");
+		long glfwGetWindowSize = lib.getFunctionAddress("Java_org_lwjgl_glfw_GLFW_nglfwGetWindowSize");
 		if ( glfwGetWindowSize == NULL )
-			glfwGetWindowSize = lib.getFunctionAddress("_Java_org_lwjgl_system_glfw_GLFW_nglfwGetWindowSize@32"); // __stdcall (Win32)
+			glfwGetWindowSize = lib.getFunctionAddress("_Java_org_lwjgl_glfw_GLFW_nglfwGetWindowSize@32"); // __stdcall (Win32)
 
 		assertTrue(glfwGetWindowSize != NULL);
 

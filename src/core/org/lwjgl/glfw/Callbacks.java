@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.glfw;
+package org.lwjgl.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.TokenFilter;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Utility class for GLFW callbacks.
