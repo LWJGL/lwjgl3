@@ -52,12 +52,3 @@ val ffi_closure = struct(FFI_PACKAGE, "ffi_closure", malloc = false) {
 }.nativeType
 val ffi_closure_p = StructType(ffi_closure)
 val FFI_CLOSURE_FUN = PointerType(name = "FFI_CLOSURE_FUN", includesPointer = true)
-
-fun config() {
-	struct(FFI_PACKAGE, "ClosureCallback") {
-		documentation = "Contains information about a Java method callback. It is used as the {@code user_data} of a libffi closure."
-
-		jobject.member("object")
-		jMethodID.member("method")
-	}
-}
