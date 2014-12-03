@@ -43,12 +43,15 @@ class CallbackFunction(
 
 	val NativeType.callbackType: String
 		get() = when ( this ) {
-			is PointerType   -> "PTR"
+			is PointerType   -> "Ptr"
 			is PrimitiveType -> when ( mapping ) {
-				PrimitiveMapping.PTR -> "PTR"
-				else                 -> mapping.javaMethodType.getSimpleName().toUpperCase()
+				PrimitiveMapping.PTR -> "Ptr"
+				else                 -> {
+					val t = mapping.javaMethodType.getSimpleName()
+					"${Character.toUpperCase(t[0])}${t.substring(1)}"
+				}
 			}
-			else             -> if ( mapping == TypeMapping.VOID) "VOID" else throw IllegalArgumentException("Unsupported callback return type: $this")
+			else             -> if ( mapping == TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
 
 	val NativeType.memType: String
@@ -78,7 +81,7 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		if ( documentation != null )
 			print(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		print("""
-${access.modifier}abstract class $className extends Closure {
+${access.modifier}abstract class $className extends Closure.${returns.callbackType} {
 
 	private static final ByteBuffer    CIF  = ffi_cif.malloc();
 	private static final PointerBuffer ARGS = BufferUtils.createPointerBuffer(${signature.size()});
@@ -94,7 +97,7 @@ ${signature.stream().withIndices().map {
 	}
 
 	protected $className() {
-		super(CIF, NATIVE_CALLBACK_${returns.callbackType});
+		super(CIF);
 	}
 
 	/**
@@ -102,7 +105,8 @@ ${signature.stream().withIndices().map {
 	 *
 	 * @param args pointer to an array of jvalues
 	 */
-	private ${returns.javaMethodType} callback(long args) {
+	@Override
+	protected ${returns.javaMethodType} callback(long args) {
 		""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")

@@ -5,12 +5,21 @@
 #include "common_tools.h"
 #include "ffi.h"
 
-static void ffi_closure_funVoid(ffi_cif* cif, void* ret, void** args, void* user_data) {
+static jmethodID
+	javaCallbackVoid,
+	javaCallbackByte,
+	javaCallbackShort,
+	javaCallbackInt,
+	javaCallbackLong,
+	javaCallbackFloat,
+	javaCallbackDouble,
+	javaCallbackPtr;
+
+static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data) {
 	JNIEnv* env = getEnv();
-	ClosureCallback* callback = (ClosureCallback*)user_data;
 
 	// Dereference the weak global reference
-	jobject object = (*env)->NewLocalRef(env, callback->object);
+	jobject object = (*env)->NewLocalRef(env, (jweak)user_data);
 
 	UNUSED_PARAM(cif)
 	UNUSED_PARAM(ret)
@@ -24,17 +33,16 @@ static void ffi_closure_funVoid(ffi_cif* cif, void* ret, void** args, void* user
 	// Invoke the Java callback
 	(*env)->CallVoidMethodA(env,
 		object,
-		callback->method,
+		javaCallbackVoid,
 		(const jvalue *)args
 	);
 }
 
 #define DEFINE_FFI_CLOSURE_FUN(Name, Type, Method) \
-	static void ffi_closure_fun##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
+	static void ffiClosure##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
 		JNIEnv* env = getEnv(); \
-		ClosureCallback* callback = (ClosureCallback*)user_data; \
  \
-		jobject object = (*env)->NewLocalRef(env, callback->object); \
+		jobject object = (*env)->NewLocalRef(env, (jweak)user_data); \
  \
 		UNUSED_PARAM(cif) \
  \
@@ -45,7 +53,7 @@ static void ffi_closure_funVoid(ffi_cif* cif, void* ret, void** args, void* user
  \
 		*(Type*)ret = (Type)(*env)->Call##Method##MethodA(env, \
 			object, \
-			callback->method, \
+			javaCallback##Name, \
 			(const jvalue *)args \
 		); \
 	}
@@ -60,26 +68,23 @@ DEFINE_FFI_CLOSURE_FUN(Ptr,     intptr_t,   Long)
 
 EXTERN_C_ENTER
 
-JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getJavaCallback(JNIEnv *env, jobject object, jobject method, jlong callbackAddress) {
-	ClosureCallback* callback = (ClosureCallback*)(uintptr_t)callbackAddress;
+#define SETUP_CALLBACK(Index, Type) \
+	javaCallback##Type = (*env)->FromReflectedMethod(env, (*env)->GetObjectArrayElement(env, methods, Index)); \
+	callbacks[Index] = (uintptr_t)&ffiClosure##Type;
 
-	callback->object = (*env)->NewWeakGlobalRef(env, object);
-	callback->method = (*env)->FromReflectedMethod(env, method);
-}
-
-JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getNativeCallbacks(JNIEnv *env, jclass clazz, jlong callbacksAddress) {
+JNIEXPORT void JNICALL Java_org_lwjgl_system_libffi_Closure_getNativeCallbacks(JNIEnv *env, jclass clazz, jobjectArray methods, jlong callbacksAddress) {
 	uintptr_t* callbacks = (uintptr_t *)(intptr_t)callbacksAddress;
 
 	UNUSED_PARAMS(env, clazz)
-
-	callbacks[0] = (uintptr_t)&ffi_closure_funVoid;
-	callbacks[1] = (uintptr_t)&ffi_closure_funByte;
-	callbacks[2] = (uintptr_t)&ffi_closure_funShort;
-	callbacks[3] = (uintptr_t)&ffi_closure_funInt;
-	callbacks[4] = (uintptr_t)&ffi_closure_funLong;
-	callbacks[5] = (uintptr_t)&ffi_closure_funFloat;
-	callbacks[6] = (uintptr_t)&ffi_closure_funDouble;
-	callbacks[7] = (uintptr_t)&ffi_closure_funPtr;
+	
+	SETUP_CALLBACK(0, Void)
+	SETUP_CALLBACK(1, Byte)
+	SETUP_CALLBACK(2, Short)
+	SETUP_CALLBACK(3, Int)
+	SETUP_CALLBACK(4, Long)
+	SETUP_CALLBACK(5, Float)
+	SETUP_CALLBACK(6, Double)
+	SETUP_CALLBACK(7, Ptr)
 }
 
 EXTERN_C_EXIT

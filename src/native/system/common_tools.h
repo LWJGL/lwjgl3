@@ -59,9 +59,4 @@ extern void detachCurrentThread(void);
 
 // -----------------------------------------------------
 
-typedef struct {
-	jobject     object;
-	jmethodID   method;
-} ClosureCallback;
-
 #endif

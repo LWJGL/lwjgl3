@@ -10,7 +10,7 @@ import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.Pointer;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.APIBuffer;
-import org.lwjgl.system.Retainable.Default;
+import org.lwjgl.system.Retainable;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -23,20 +23,16 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 /**
  * This class makes it possible to dynamically create, at runtime, native functions that call into Java code. Pointers to such functions can then be passed to
  * native APIs as callbacks.
+ * <p/>
+ * Closures must be referenced strongly in user code, else a {@link ClosureError} will be thrown on the next native callback invocation. Closures also use
+ * native resources, while will result in memory leaks if not released after a Closure is no longer required.
  */
-public abstract class Closure extends Default implements Pointer {
+public abstract class Closure extends Retainable.Default implements Pointer {
 
 	/*
-		We could use a single method (ret, args) in this class that forwards all callbacks, but then we'd
-		have the following issues:
-
-		a) The call would be heavily megamorphic. Instead, we create a callback struct (jobject, jMethodID)
-		per instance. jMethodID points to the non virtual callback method in the callback subclass, avoiding
-		the vtable lookup.
-
-		b) We also use the MethodA routines so that we decode an array of jvalues, instead of an array of
-		pointers to jvalues. We cannot also pass the ret pointer, so we use different native callbacks per
-		return type.
+		We use the MethodA routines so that we decode an array of jvalues, instead of an array of
+		pointers to jvalues. We cannot also pass the ret pointer, so we use different native
+		callbacks per return type.
 	 */
 
 	/** Native callback function pointer. */
@@ -50,16 +46,25 @@ public abstract class Closure extends Default implements Pointer {
 		NATIVE_CALLBACK_DOUBLE,
 		NATIVE_CALLBACK_PTR;
 
-	/** The default calling convention. */
-	protected static final int CALL_CONVENTION_DEFAULT;
-	/** The system calling convention. This may differ from the default on certain OS/arch combinations. */
-	protected static final int CALL_CONVENTION_SYSTEM;
-
 	static {
 		// Setup native callbacks
 		PointerBuffer callbacks = BufferUtils.createPointerBuffer(8);
 
-		getNativeCallbacks(memAddress(callbacks));
+		try {
+			Class<?>[] params = new Class<?>[] { long.class };
+			getNativeCallbacks(new Method[] {
+				Void.class.getDeclaredMethod("callback", params),
+				Byte.class.getDeclaredMethod("callback", params),
+				Short.class.getDeclaredMethod("callback", params),
+				Int.class.getDeclaredMethod("callback", params),
+				Long.class.getDeclaredMethod("callback", params),
+				Float.class.getDeclaredMethod("callback", params),
+				Double.class.getDeclaredMethod("callback", params),
+				Ptr.class.getDeclaredMethod("callback", params)
+			}, memAddress(callbacks));
+		} catch (NoSuchMethodException e) {
+			throw new IllegalStateException("Failed to initialize closure callbacks.", e);
+		}
 
 		NATIVE_CALLBACK_VOID = callbacks.get(0);
 		NATIVE_CALLBACK_BYTE = callbacks.get(1);
@@ -69,7 +74,14 @@ public abstract class Closure extends Default implements Pointer {
 		NATIVE_CALLBACK_FLOAT = callbacks.get(5);
 		NATIVE_CALLBACK_DOUBLE = callbacks.get(6);
 		NATIVE_CALLBACK_PTR = callbacks.get(7);
+	}
 
+	/** The default calling convention. */
+	protected static final int CALL_CONVENTION_DEFAULT;
+	/** The system calling convention. This may differ from the default on certain OS/arch combinations. */
+	protected static final int CALL_CONVENTION_SYSTEM;
+
+	static {
 		// Setup calling conventions
 		CALL_CONVENTION_DEFAULT = FFI_DEFAULT_ABI;
 		CALL_CONVENTION_SYSTEM = LWJGLUtil.getPlatform() == Platform.WINDOWS && Pointer.BITS32
@@ -98,36 +110,39 @@ public abstract class Closure extends Default implements Pointer {
 		}
 	}
 
-	/** The ClosureCallback structure. */
-	private final ByteBuffer callback;
+	/** The weak global reference to this Closure. */
+	private long jweak;
 
-	/** Pointer to libFFI's cif structure. */
-	private long closure;
+	/** Pointer to libFFI's closure structure. */
+	private final long closure;
 
 	/** The dynamically generated function pointer. */
 	private final long pointer;
 
-	protected Closure(ByteBuffer cif, long nativeCallback) {
-		this.callback = getJavaCallback(this.getClass(), "callback", long.class);
-
+	Closure(ByteBuffer cif, long nativeCallback) {
 		// Allocate ffi closure
 		APIBuffer __buf = apiStack();
 		this.closure = nffi_closure_alloc(ffi_closure.SIZEOF, __buf.address() + __buf.getOffset());
 		this.pointer = __buf.pointerValue(__buf.getOffset());
 		__buf.pop();
 
-		if ( closure == NULL ) {
-			memDeleteWeakGlobalRef(PointerBuffer.get(callback, 0));
+		if ( closure == NULL )
 			throw new OutOfMemoryError("Failed to allocate libffi closure.");
-		}
+
+		// If this reference was strong, it would be very easy for users to never pay
+		// attention to releasing closures, resulting in memory leaks. For this reason
+		// we make it weak, making it eligible for GC very quickly if no strong reference
+		// exists. We detect this in native code and instead of crashing or throwing an
+		// NPE, we throw a ClosureError with an appropriate message.
+		this.jweak = memNewWeakGlobalRef(this);
 
 		// Prepare ffi closure
 		int status = nffi_prep_closure_loc(
-			closure,                // ffi_closure*
-			memAddress(cif),        // ffi_cif*
-			nativeCallback,        // (void)(*FFI_CLOSURE_FUN)(ffi_cif* cif, void* ret, void** args, void* user_data)
-			memAddress(callback),   // ClosureCallback*
-			pointer                 // function*
+			closure,            // ffi_closure*
+			memAddress(cif),    // ffi_cif*
+			nativeCallback,     // (void)(*FFI_CLOSURE_FUN)(ffi_cif* cif, void* ret, void** args, void* user_data)
+			jweak,              // jweak
+			pointer             // function*
 		);
 		if ( status != FFI_OK ) {
 			destroy();
@@ -148,12 +163,13 @@ public abstract class Closure extends Default implements Pointer {
 
 	@Override
 	protected void destroy() {
-		if ( closure == NULL )
+		if ( jweak == NULL )
 			throw new IllegalStateException("This closure instance has been destroyed.");
 
-		memDeleteWeakGlobalRef(PointerBuffer.get(callback, 0));
+		memDeleteWeakGlobalRef(jweak);
+		jweak = NULL;
+
 		nffi_closure_free(closure);
-		closure = NULL;
 	}
 
 	/**
@@ -162,7 +178,7 @@ public abstract class Closure extends Default implements Pointer {
 	 * @return the if the Closure is destroyed
 	 */
 	public boolean isDestroyed() {
-		return closure == NULL;
+		return jweak == NULL;
 	}
 
 	/**
@@ -181,12 +197,8 @@ public abstract class Closure extends Default implements Pointer {
 			This implementation assumes that ffi_closure and executable both point to the same address.
 	        This is valid for x86 architectures on Windows, Linux and OS X. It is not valid on ARM and
 	        other architectures/OSes. TODO: Fix on other architectures
-
-			function*
-				... USER_DATA bytes
-				ClosureCallback* -> globalRef
 		 */
-		return memGlobalRefToObject(memGetAddress(memGetAddress(functionPointer + ffi_closure.USER_DATA)));
+		return memGlobalRefToObject(memGetAddress(functionPointer + ffi_closure.USER_DATA));
 	}
 
 	/**
@@ -200,22 +212,80 @@ public abstract class Closure extends Default implements Pointer {
 			clojure.release();
 	}
 
-	private ByteBuffer getJavaCallback(Class<? extends Closure> clazz, String name, Class<?>... parameterTypes) {
-		try {
-			Class<?> source = clazz;
-			while ( source.getSuperclass() != Closure.class )
-				source = source.getSuperclass();
+	private static native long getNativeCallbacks(Method[] methods, long callbacks);
 
-			ByteBuffer callback = ClosureCallback.malloc();
-			getJavaCallback(source.getDeclaredMethod(name, parameterTypes), memAddress(callback));
-			return callback;
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
+	// Closures types
+
+	/** A {@Closure} with no return value. */
+	public abstract static class Void extends Closure {
+		protected Void(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_VOID);
 		}
+
+		protected abstract void callback(long args);
 	}
 
-	private native void getJavaCallback(Method method, long callback);
+	/** A {@Closure} that returns a byte value. */
+	public abstract static class Byte extends Closure {
+		protected Byte(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_BYTE);
+		}
 
-	private static native long getNativeCallbacks(long callbacks);
+		protected abstract byte callback(long args);
+	}
+
+	/** A {@Closure} that returns a short value. */
+	public abstract static class Short extends Closure {
+		protected Short(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_SHORT);
+		}
+
+		protected abstract short callback(long args);
+	}
+
+	/** A {@Closure} that returns an int value. */
+	public abstract static class Int extends Closure {
+		protected Int(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_INT);
+		}
+
+		protected abstract int callback(long args);
+	}
+
+	/** A {@Closure} that returns a long value. */
+	public abstract static class Long extends Closure {
+		protected Long(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_LONG);
+		}
+
+		protected abstract int callback(long args);
+	}
+
+	/** A {@Closure} that returns a float value. */
+	public abstract static class Float extends Closure {
+		protected Float(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_FLOAT);
+		}
+
+		protected abstract int callback(long args);
+	}
+
+	/** A {@Closure} that returns a double value. */
+	public abstract static class Double extends Closure {
+		protected Double(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_DOUBLE);
+		}
+
+		protected abstract int callback(long args);
+	}
+
+	/** A {@Closure} that returns a pointer value. */
+	public abstract static class Ptr extends Closure {
+		protected Ptr(ByteBuffer cif) {
+			super(cif, NATIVE_CALLBACK_PTR);
+		}
+
+		protected abstract long callback(long args);
+	}
 
 }
