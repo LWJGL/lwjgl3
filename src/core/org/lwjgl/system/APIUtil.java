@@ -10,7 +10,6 @@ import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
 
-import java.lang.reflect.Method;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,24 +32,6 @@ public final class APIUtil {
 	}
 
 	private APIUtil() {
-	}
-
-	/**
-	 * Returns the callback method for the specified callback class. The callback method should be named "invoke" and the parameter types should not contain
-	 * the
-	 * user data parameter.
-	 *
-	 * @param clazz          the callback class
-	 * @param parameterTypes the callback function parameters
-	 *
-	 * @return the callback method
-	 */
-	public static Method apiCallbackMethod(Class<?> clazz, Class<?>... parameterTypes) {
-		try {
-			return clazz.getDeclaredMethod("invoke", parameterTypes);
-		} catch (NoSuchMethodException e) {
-			throw new RuntimeException(e);
-		}
 	}
 
 	/** Returns a resetted thread-local {@link APIBuffer}. */

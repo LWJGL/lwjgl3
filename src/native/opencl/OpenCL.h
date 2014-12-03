@@ -55,7 +55,7 @@ ENABLE_WARNINGS()
 
 typedef void (CL_CALLBACK * cl_program_callback)(cl_program, void *);
 typedef void (CL_CALLBACK * cl_create_context_callback)(const char *, const void *, size_t, void *);
-typedef void (CL_CALLBACK * cl_native_kernel_func)(void *);
+typedef void (CL_CALLBACK * cl_native_kernel)(void *);
 typedef void (CL_CALLBACK * cl_mem_object_destructor_callback)(cl_mem, void *);
 typedef void (CL_CALLBACK * cl_event_callback)(cl_event, cl_int, void *);
 typedef void (CL_CALLBACK * cl_printf_callback)(cl_context, cl_uint, char *, void *);

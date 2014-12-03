@@ -7,19 +7,25 @@ package org.lwjgl.demo.glfw;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.GLFWerrorfun;
+import org.lwjgl.system.glfw.GLFWkeyfun;
 import org.lwjgl.system.glfw.GLFWvidmode;
-import org.lwjgl.system.glfw.WindowCallback;
-import org.lwjgl.system.glfw.WindowCallbackAdapter;
+import org.lwjgl.system.libffi.Closure;
 
 import java.nio.ByteBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.glfw.Callbacks.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
+
+	private GLFWerrorfun errorfun;
+	private GLFWkeyfun   keyfun;
+
+	private Closure debugProc;
 
 	private long window;
 
@@ -29,8 +35,7 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void init() {
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
-
+		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 
@@ -52,9 +57,9 @@ public class Gears extends AbstractGears {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		WindowCallback.set(window, new WindowCallbackAdapter() {
+		glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
 			@Override
-			public void key(long window, int key, int scancode, int action, int mods) {
+			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, GL_TRUE);
 			}
@@ -67,7 +72,7 @@ public class Gears extends AbstractGears {
 		);
 
 		glfwMakeContextCurrent(window);
-		GLContext.createFromCurrent();
+		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback();
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
@@ -101,12 +106,10 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void destroy() {
-		try {
-			glfwTerminate();
-		} catch (Throwable t) {
-			System.err.println("CLEANUP FAILED:");
-			t.printStackTrace();
-		}
+		debugProc.release();
+		keyfun.release();
+		glfwTerminate();
+		errorfun.release();
 	}
 
 }

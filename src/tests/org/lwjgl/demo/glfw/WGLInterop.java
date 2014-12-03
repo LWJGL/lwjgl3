@@ -5,14 +5,12 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.Sys;
-import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.ErrorCallback;
-import org.lwjgl.system.glfw.WindowCallback;
-import org.lwjgl.system.glfw.WindowCallbackAdapter;
+import org.lwjgl.system.glfw.GLFWerrorfun;
+import org.lwjgl.system.glfw.GLFWkeyfun;
+import org.lwjgl.system.glfw.GLFWwindowsizefun;
+import org.lwjgl.system.libffi.Closure;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
@@ -24,6 +22,7 @@ import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.glfw.Callbacks.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 import static org.lwjgl.system.windows.GLFWWin32.*;
 import static org.lwjgl.system.windows.WGL.*;
@@ -37,7 +36,8 @@ public final class WGLInterop {
 	}
 
 	public static void main(String[] args) {
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+		GLFWerrorfun errorfun;
+		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
@@ -47,6 +47,7 @@ public final class WGLInterop {
 			demo();
 		} finally {
 			glfwTerminate();
+			errorfun.release();
 		}
 	}
 
@@ -62,15 +63,19 @@ public final class WGLInterop {
 		final AtomicInteger windowWidth = new AtomicInteger(640);
 		final AtomicInteger windowHeight = new AtomicInteger(480);
 
-		WindowCallback.set(window, new WindowCallbackAdapter() {
+		GLFWwindowsizefun windowsizefun;
+		glfwSetWindowSizeCallback(window, windowsizefun = new GLFWwindowsizefun() {
 			@Override
-			public void windowSize(long window, int width, int height) {
+			public void invoke(long window, int width, int height) {
 				windowWidth.set(width);
 				windowHeight.set(height);
 			}
+		});
 
+		GLFWkeyfun keyfun;
+		glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
 			@Override
-			public void key(long window, int key, int scancode, int action, int mods) {
+			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
 					glfwSetWindowShouldClose(window, 1);
 			}
@@ -81,12 +86,13 @@ public final class WGLInterop {
 
 		// Make the GLFW context current in the current thread
 		glfwMakeContextCurrent(window);
-		// Creates an LWJGL GLContext from the GLFW context.
-		GLContext.createFromCurrent();
-		// Now we can retrieve the GLFW context's capabilities
-		ContextCapabilities caps = GL.getCapabilities();
 
-		GLUtil.debugSetupCallback(caps);
+		// Creates an LWJGL GLContext from the GLFW context.
+		GLContext context = GLContext.createFromCurrent();
+		Closure debugproc = context.setupDebugMessageCallback();
+
+		// Now we can retrieve the GLFW context's capabilities
+		ContextCapabilities caps = context.getCapabilities();
 
 		int success;
 
@@ -209,5 +215,8 @@ public final class WGLInterop {
 		wglDeleteBufferRegionARB(bufferRegion);
 
 		glfwDestroyWindow(window);
+		debugproc.release();
+		keyfun.release();
+		windowsizefun.release();
 	}
 }

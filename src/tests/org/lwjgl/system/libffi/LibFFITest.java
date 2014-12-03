@@ -50,8 +50,6 @@ public class LibFFITest {
 		// Prepare the call interface
 		ByteBuffer cif = ffi_cif.malloc();
 
-		ByteBuffer returnType = memByteBuffer(ffi_type_void, ffi_type.SIZEOF); // Returns void
-
 		PointerBuffer argumentTypes = BufferUtils.createPointerBuffer(5); // 5 arguments
 		argumentTypes.put(0, ffi_type_pointer); // JNIEnv*
 		argumentTypes.put(1, ffi_type_pointer); // jclass
@@ -59,7 +57,7 @@ public class LibFFITest {
 		argumentTypes.put(3, ffi_type_sint64); // int* (jlong)
 		argumentTypes.put(4, ffi_type_sint64); // int* (jlong)
 
-		int status = ffi_prep_cif(cif, FFI_DEFAULT_ABI, returnType, argumentTypes);
+		int status = ffi_prep_cif(cif, FFI_DEFAULT_ABI, ffi_type_void, argumentTypes);
 		if ( status != FFI_OK )
 			throw new IllegalStateException("ffi_prep_cif failed: " + status);
 

@@ -237,11 +237,8 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		(including its null terminator) of the oldest message in the log through the value of #DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB.
 		""",
 
-		mods(
-			Callback("DEBUGPROCARB", storeInFunctions = true),
-			nullable
-		) _ GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
-		mods(Expression("DEBUGPROCARB.Util.register($INSTANCE, callback)"), const, nullable) _ voidptr.IN(
+		nullable _ GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
+		mods(nullable, const) _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

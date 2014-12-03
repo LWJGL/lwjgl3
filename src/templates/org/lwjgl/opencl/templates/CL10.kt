@@ -685,14 +685,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateContext = (mods(
-		Code(
-			// Create a global reference to the pfn_notify instance. We pass it to the actual
-			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-			javaAfterNative = statement("\t\tCLContextCallback.Util.retain($RESULT, user_data);", Code.ApplyTo.ALTERNATIVE)
-		)
-	) _ cl_context.func(
+	cl_context.func(
 		"CreateContext",
 		"""
 		Creates an OpenCL context. An OpenCL context is created with one or more devices. Contexts are used by the OpenCL runtime for managing objects such as
@@ -712,10 +705,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"devices",
 			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by CL12#CreateSubDevices() for a platform"
 		),
-		mods(
-			Callback("CLContextCallback"),
-			nullable
-		) _ cl_create_context_callback.IN(
+		nullable _ cl_create_context_callback.IN(
 			"pfn_notify",
 			"""
 			a callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report
@@ -725,10 +715,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			If {@code pfn_notify} is $NULL, no callback function is registered.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET,
 
 		returnDoc =
@@ -753,18 +740,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
-	val CreateContextFromType = (mods(
-		Code(
-			// Create a global reference to the pfn_notify instance. We pass it to the actual
-			// native call as well as to the CLContext constructor (for later clean-up).
-			javaBeforeNative = statement("\t\tlong user_data = CLContextCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-			javaAfterNative = statement("\t\tCLContextCallback.Util.retain($RESULT, user_data);", Code.ApplyTo.ALTERNATIVE)
-		)
-	) _ cl_context.func(
+	cl_context.func(
 		"CreateContextFromType",
-		"Creates a context using devices of the specified type. See $CreateContext for details.",
+		"Creates a context using devices of the specified type. See #CreateContext() for details.",
 
 		mods(const, Check(3)) _ cl_context_properties_p.IN(
 			"properties",
@@ -774,23 +754,17 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
-		mods(
-			Callback("CLContextCallback"),
-			nullable
-		) _ cl_create_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable _ cl_create_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
+		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET
-	)).javaDocLink
+	)
 
 	cl_int.func(
 		"RetainContext",
 		"""
 		Increments the context reference count.
 
-		$CreateContext and $CreateContextFromType perform an implicit retain. This is very helpful for 3rd party libraries, which typically get a context passed
+		#CreateContext() and #CreateContextFromType() perform an implicit retain. This is very helpful for 3rd party libraries, which typically get a context passed
 		to them by the application. However, it is possible that the application may delete the context without informing the library. Allowing functions to
 		attach to (i.e. retain) and release a context solves the problem of a context being used by a library no longer being valid.
 		""",
@@ -808,10 +782,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	Code(
-		javaBeforeNative = statement("\t\tint contextRefs = CLContextCallback.Util.getReferenceCount(context);"),
-		javaAfterNative = statement("\t\tif ( __result == CL_SUCCESS && contextRefs == 1 ) CLContextCallback.Util.release(context);")
-	) _ cl_int.func(
+	cl_int.func(
 		"ReleaseContext",
 		"""
 		Decrements the context reference count.
@@ -878,8 +849,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_device_id.IN(
 			"device",
 			"""
-			a device associated with context. It can either be in the list of devices specified when context is created using $CreateContext or have the same
-			device type as device type specified when context is created using $CreateContextFromType.
+			a device associated with context. It can either be in the list of devices specified when context is created using #CreateContext() or have the same
+			device type as device type specified when context is created using #CreateContextFromType().
 			"""
 		),
 		cl_command_queue_properties.IN("properties", "a bit-field of properties for the command-queue", CommandQueueProperties),
@@ -2515,11 +2486,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val BuildProgram = (Code(
-		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"BuildProgram",
 		"""
 		Builds (compiles & links) a program executable from the program source or binary for all the devices or a specific device(s) in the OpenCL context
@@ -2545,10 +2512,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"options",
 			"a pointer to a null-terminated string of characters that describes the build options to be used for building the program executable"
 		),
-		mods(
-			Callback("CLProgramCallback"),
-			nullable
-		) _ cl_program_callback.IN(
+		nullable _ cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -2560,10 +2524,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			that the callback function is thread-safe.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -2596,7 +2557,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
 	cl_int.func(
 		"UnloadCompiler",
@@ -2604,7 +2565,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		Allows the implementation to release the resources allocated by the OpenCL compiler. This is a hint from the application and does not guarantee that the
 		compiler will not be used in the future or that the compiler will actually be unloaded by the implementation.
 
-		Calls to $BuildProgram after {@code clUnloadCompiler} will reload the compiler, if necessary, to build the appropriate program executable.
+		Calls to #BuildProgram() after #UnloadCompiler() will reload the compiler, if necessary, to build the appropriate program executable.
 		""",
 
 		returnDoc = "always $SUCCESS"
@@ -2683,7 +2644,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		Kernel objects can only be created once you have a program object with a valid program source or binary loaded into the program object and the program
 		executable has been successfully built for one or more devices associated with program. No changes to the program executable are allowed while there are
-		kernel objects associated with a program object. This means that calls to $BuildProgram and CL12#CompileProgram() return
+		kernel objects associated with a program object. This means that calls to #BuildProgram() and CL12#CompileProgram() return
 		$INVALID_OPERATION if there are kernel objects attached to a program object. The OpenCL context associated with program will be the context
 		associated with kernel. The list of devices associated with program are the devices associated with kernel. Devices associated with a program object for
 		which a valid program executable has been built can be used to execute kernels declared in the program object.
@@ -3104,19 +3065,9 @@ kernel void image_filter (
 		returnDoc = "$SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
 	)
 
-	Code(
-		// Create a global reference to the user_func instance.
-		javaBeforeNative = statement("\t\tlong user_data = CLNativeKernel.Util.register(user_func, args);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"EnqueueNativeKernel",
-		"""
-		Enqueues a command to execute a native C/C++ function not compiled using the OpenCL compiler.
-
-		<strong>LWJGL note</strong>: For the versions of this method that accept a ##CLNativeKernel, the {@code args} argument must not be null and must
-		have enough extra space at the beginning to store two pointer values, i.e. 2&times; Pointer##POINTER_SIZE bytes. The application must not store
-		useful information there, as it will be overwritten by <em>LWJGL</em>.
-		""",
+		"Enqueues a command to execute a native C/C++ function not compiled using the OpenCL compiler.",
 
 		cl_command_queue.IN(
 			"command_queue",
@@ -3125,8 +3076,8 @@ kernel void image_filter (
 			capability set in #DEVICE_EXECUTION_CAPABILITIES.
 			"""
 		),
-		Callback("CLNativeKernel") _ cl_native_kernel_func.IN("user_func", "a pointer to a host-callable user function"),
-		mods(nullable, Check("POINTER_SIZE * 2")) _ void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
+		cl_native_kernel.IN("user_func", "a pointer to a host-callable user function"),
+		nullable _ void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
 		AutoSize("args") _ size_t.IN(
 			"cb_args",
 			"""

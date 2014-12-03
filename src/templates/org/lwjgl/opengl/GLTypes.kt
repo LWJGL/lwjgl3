@@ -73,9 +73,36 @@ val GLcharUTF8_pp = PointerType(GLcharUTF8_p)
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
 // AMD_debug_output
-val GLDEBUGPROCAMD = PointerType(name = "GLDEBUGPROCAMD", includesPointer = true)
+val GLDEBUGPROCAMD = CallbackType(callback(
+	OPENGL_PACKAGE, void, "DEBUGPROCAMD",
+	"Will be called when a debug message is generated.",
+	GLuint.IN("id", "the message ID"),
+	GLenum.IN("category", "the message category"),
+	GLenum.IN("severity", "the message severity"),
+	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	GLvoid_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
+	samConstructor = "AMDDebugOutput"
+) {
+	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
+	CALL_CONVENTION_SYSTEM
+}, "GLDEBUGPROCAMD")
 // ARB_debug_output
-val GLDEBUGPROCARB = PointerType(name = "GLDEBUGPROCARB", includesPointer = true)
+val GLDEBUGPROCARB = CallbackType(callback(
+	OPENGL_PACKAGE, void, "DEBUGPROCARB",
+	"Will be called when a debug message is generated.",
+	GLenum.IN("source", "the message source"),
+	GLenum.IN("type", "the message type"),
+	GLuint.IN("id", "the message ID"),
+	GLenum.IN("severity", "the message severity"),
+	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	const _ GLvoid_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
+	samConstructor = "ARBDebugOutput"
+) {
+	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
+	CALL_CONVENTION_SYSTEM
+}, "GLDEBUGPROCARB")
 // ARB_shader_objects
 val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
 val GLcharARB_pp = PointerType(GLcharARB_p)
@@ -84,7 +111,24 @@ val GLhandleARB_p = PointerType(GLhandleARB)
 // ARB_sync
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
 // KHR_debug
-val GLDEBUGPROC = PointerType(name = "GLDEBUGPROC", includesPointer = true)
+val GLDEBUGPROC = CallbackType(callback(
+	OPENGL_PACKAGE, void, "DEBUGPROC",
+	"Will be called when a debug message is generated.",
+	GLenum.IN("source", "the message source"),
+	GLenum.IN("type", "the message type"),
+	GLuint.IN("id", "the message ID"),
+	GLenum.IN("severity", "the message severity"),
+	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	const _ GLvoid_p.IN(
+		"userParam",
+		"the user-specified value that was passed when calling GL43##glDebugMessageCallbackARB() or KHRDebug##glDebugMessageCallback()"
+	),
+	samConstructor = "GL43,KHRDebug"
+) {
+	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
+	CALL_CONVENTION_SYSTEM
+}, "GLDEBUGPROC")
 // EXT_timer_query
 val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
 val GLuint64EXT_p = PointerType(GLuint64EXT)

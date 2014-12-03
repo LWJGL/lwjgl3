@@ -167,4 +167,31 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		nullable _ void_pp.IN("avalue", "an array of pointers from which the argument values are retrieved")
 	)
 
+	void_p.func(
+		"closure_alloc",
+	    "Allocates an {@link ffi_closure} structure.",
+
+	    autoSizeResult _ size_t.IN("size", "the number of bytes to allocate", "ffi_closure##SIZEOF"),
+	    Check(1) _ void_pp.OUT("code", "a buffer in which to place the returned executable address"),
+
+	    returnDoc = "a pointer to the writable address"
+	)
+
+	void.func(
+		"closure_free",
+	    "Frees memory allocated using #closure_alloc().",
+
+	    void_p.IN("writable", "the address of an {@link ffi_closure} structure")
+	)
+
+	ffi_status.func(
+		"prep_closure_loc",
+	    "",
+
+	    ffi_closure_p.IN("closure", "the address of an {@link ffi_closure} object; this is the writable address returned by #closure_alloc()."),
+	    ffi_cif_p.IN("cif", "the {@link ffi_cif} describing the function parameters"),
+	    FFI_CLOSURE_FUN.IN("fun", "the function which will be called when the closure is invoked"),
+	    nullable _ voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
+	    voidptr.IN("codeloc", "the executable address returned by #closure_alloc().")
+	)
 }

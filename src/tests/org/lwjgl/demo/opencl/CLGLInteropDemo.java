@@ -6,15 +6,13 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
-import org.lwjgl.Sys;
 import org.lwjgl.opencl.CL;
 import org.lwjgl.opencl.CLCapabilities;
 import org.lwjgl.opencl.CLDevice;
 import org.lwjgl.opencl.CLPlatform;
 import org.lwjgl.opencl.CLPlatform.Filter;
-import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.*;
 
 import java.util.HashSet;
 import java.util.List;
@@ -27,6 +25,7 @@ import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRICD.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.glfw.Callbacks.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /*
@@ -88,12 +87,13 @@ public final class CLGLInteropDemo {
 	public static void main(String... args) {
 		parseArgs(args);
 
-		if ( glfwInit() != GL11.GL_TRUE ) {
+		GLFWerrorfun errorfun;
+		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
+		if ( glfwInit() != GL_TRUE ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
 		}
 
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 		if ( LWJGLUtil.getPlatform() == Platform.MACOSX ) {
@@ -204,7 +204,7 @@ public final class CLGLInteropDemo {
 
 			for ( int i = 0; i < windows.length; i++ ) {
 				if ( windows[i] != null && windows[i].signal.getCount() == 0 ) {
-					glfwDestroyWindow(windows[i].handle);
+					windows[i].destroy();
 					windows[i] = null;
 				}
 			}
@@ -212,6 +212,7 @@ public final class CLGLInteropDemo {
 
 		CL.destroy();
 		glfwTerminate();
+		errorfun.release();
 
 		System.out.println("GAME OVER!");
 	}
@@ -277,10 +278,21 @@ public final class CLGLInteropDemo {
 		/** Used to signal that the rendering thread has completed. */
 		final CountDownLatch signal;
 
+		GLFWwindowsizefun  windowsizefun;
+		GLFWkeyfun         keyfun;
+		GLFWmousebuttonfun mousebuttonfun;
+		GLFWcursorposfun   cursorposfun;
+		GLFWscrollfun      scrollfun;
+
 		private GLFWWindow(long handle, String ID, CountDownLatch signal) {
 			this.handle = handle;
 			this.ID = ID;
 			this.signal = signal;
+		}
+
+		void destroy() {
+			Callbacks.releaseAllCallbacks(handle);
+			glfwDestroyWindow(handle);
 		}
 
 	}

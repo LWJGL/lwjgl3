@@ -135,10 +135,16 @@ abstract class GeneratorTarget(
 				.map { it.getFileName() }
 				.filterNotNull()
 				.filter {
-					it.endsWith(".kt") && !it.startsWith("Generator") && !it.equals("NativeClass.kt") && !it.equals("Structs.kt") && !(this is NativeClass && it.startsWith("FunctionProvider"))
+					it.endsWith(".kt")
+						&& !it.startsWith("Generator")
+						&& !it.equals("NativeClass.kt")
+						&& !it.equals("Structs.kt")
+						&& !it.equals("CallbackFunction.kt")
+						&& !(this is NativeClass && it.startsWith("FunctionProvider"))
 				}.first()
 		}
 	}
+
 	private val sourceFile: String = getSourceFileName();
 	open fun getLastModified(root: String): Long = File("$root/$sourceFile").let {
 		if ( it.exists() ) it else

@@ -453,11 +453,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
 		""",
 
-		mods(
-			Callback("DEBUGPROC", storeInFunctions = true),
-			nullable
-		) _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		mods(Expression("DEBUGPROC.Util.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
+		nullable _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
+		mods(nullable, const) _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

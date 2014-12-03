@@ -7,14 +7,12 @@ package org.lwjgl.demo.opencl;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.WindowCallback;
-import org.lwjgl.system.glfw.WindowCallbackAdapter;
+import org.lwjgl.system.glfw.*;
+import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -93,8 +91,6 @@ public class Mandelbrot {
 
 	// OPENGL
 
-	private final GLContext glContext;
-
 	private int glTexture;
 
 	private int vao;
@@ -128,6 +124,25 @@ public class Mandelbrot {
 
 	private boolean syncCLtoGL; // false if we can make CL wait on sync objects generated from GL.
 
+	// INPUT
+
+	private double mouseX;
+	private double mouseY;
+
+	private boolean ctrlDown;
+
+	private boolean dragging;
+
+	private double dragX;
+	private double dragY;
+
+	private double dragOffsetX;
+	private double dragOffsetY;
+
+	// CALLBACKS
+
+	Closure debugProc;
+
 	public Mandelbrot(CLPlatform platform, GLFWWindow window, int deviceType, boolean debugGL, int maxIterations) {
 		this.platform = platform;
 
@@ -141,15 +156,13 @@ public class Mandelbrot {
 		height = windowSize.get(1);
 
 		glfwMakeContextCurrent(window.handle);
-		glContext = GLContext.createFromCurrent();
+		GLContext glContext = GLContext.createFromCurrent();
 
-		ContextCapabilities glCaps = GL.getCapabilities();
-
+		ContextCapabilities glCaps = glContext.getCapabilities();
 		if ( !glCaps.OpenGL30 )
 			throw new RuntimeException("OpenGL 3.0 is required to run this demo.");
 
-		if ( debugGL )
-			GLUtil.debugSetupCallback(glCaps);
+		debugProc = debugGL ? glContext.setupDebugMessageCallback() : null;
 
 		glfwSwapInterval(0);
 
@@ -220,7 +233,13 @@ public class Mandelbrot {
 
 			ctxProps.put(useAPPLEGLSharing ? 4 : 6, 0);
 
-			clContext = clCreateContext(ctxProps, deviceBuffer, CLContextCallback.Util.getDefault(), errcode_ret);
+			clContext = clCreateContext(ctxProps, deviceBuffer, new CLCreateContextCallback() {
+				@Override
+				public void invoke(long errinfo, long private_info, long cb, long user_data) {
+					System.err.println("[LWJGL] cl_create_context_callback");
+					System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+				}
+			}, NULL, errcode_ret);
 			checkCLError(errcode_ret);
 
 			// create command queues for every GPU, setup colormap and init kernels
@@ -297,7 +316,7 @@ public class Mandelbrot {
 			glCompileShader(vsh);
 			String log = glGetShaderInfoLog(vsh, glGetShaderi(vsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.out.println("VERTEX SHADER LOG: " + log);
+				System.err.println("VERTEX SHADER LOG: " + log);
 
 			fsh = glCreateShader(GL_FRAGMENT_SHADER);
 			glShaderSource(fsh, "#version 150\n" +
@@ -314,7 +333,7 @@ public class Mandelbrot {
 			glCompileShader(fsh);
 			log = glGetShaderInfoLog(fsh, glGetShaderi(fsh, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.out.println("FRAGMENT SHADER LOG: " + log);
+				System.err.println("FRAGMENT SHADER LOG: " + log);
 
 			glProgram = glCreateProgram();
 			glAttachShader(glProgram, vsh);
@@ -322,7 +341,7 @@ public class Mandelbrot {
 			glLinkProgram(glProgram);
 			log = glGetProgramInfoLog(glProgram, glGetProgrami(glProgram, GL_INFO_LOG_LENGTH));
 			if ( !log.isEmpty() )
-				System.out.println("PROGRAM LOG: " + log);
+				System.err.println("PROGRAM LOG: " + log);
 
 			int posIN = glGetAttribLocation(glProgram, "posIN");
 			int texIN = glGetAttribLocation(glProgram, "texIN");
@@ -352,22 +371,9 @@ public class Mandelbrot {
 
 		setKernelConstants();
 
-		WindowCallback.set(window.handle, new WindowCallbackAdapter() {
-			private double mouseX;
-			private double mouseY;
-
-			private boolean ctrlDown;
-
-			private boolean dragging;
-
-			private double dragX;
-			private double dragY;
-
-			private double dragOffsetX;
-			private double dragOffsetY;
-
+		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = new GLFWwindowsizefun() {
 			@Override
-			public void windowSize(long window, final int width, final int height) {
+			public void invoke(long window, final int width, final int height) {
 				if ( width == 0 || height == 0 )
 					return;
 
@@ -381,9 +387,11 @@ public class Mandelbrot {
 					}
 				});
 			}
+		});
 
+		glfwSetKeyCallback(window.handle, window.keyfun = new GLFWkeyfun() {
 			@Override
-			public void key(long window, int key, int scancode, int action, int mods) {
+			public void invoke(long window, int key, int scancode, int action, int mods) {
 				switch ( key ) {
 					case GLFW_KEY_LEFT_CONTROL:
 					case GLFW_KEY_RIGHT_CONTROL:
@@ -420,9 +428,11 @@ public class Mandelbrot {
 						break;
 				}
 			}
+		});
 
+		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = new GLFWmousebuttonfun() {
 			@Override
-			public void mouseButton(long window, int button, int action, int mods) {
+			public void invoke(long window, int button, int action, int mods) {
 				if ( button != GLFW_MOUSE_BUTTON_LEFT )
 					return;
 
@@ -438,9 +448,11 @@ public class Mandelbrot {
 					dragOffsetY = offsetY;
 				}
 			}
+		});
 
+		glfwSetCursorPosCallback(window.handle, window.cursorposfun = new GLFWcursorposfun() {
 			@Override
-			public void cursorPos(long window, double xpos, double ypos) {
+			public void invoke(long window, double xpos, double ypos) {
 				mouseX = xpos;
 				mouseY = height - ypos;
 
@@ -449,9 +461,11 @@ public class Mandelbrot {
 					offsetY = dragOffsetY + transformY(dragY - mouseY);
 				}
 			}
+		});
 
+		glfwSetScrollCallback(window.handle, window.scrollfun = new GLFWscrollfun() {
 			@Override
-			public void scroll(long window, double xoffset, double yoffset) {
+			public void invoke(long window, double xoffset, double yoffset) {
 				if ( yoffset == 0 )
 					return;
 
@@ -470,7 +484,7 @@ public class Mandelbrot {
 	}
 
 	private void log(String msg) {
-		System.out.format("[%s] %s\n", window.ID, msg);
+		System.err.format("[%s] %s\n", window.ID, msg);
 	}
 
 	void renderLoop() {
@@ -567,6 +581,9 @@ public class Mandelbrot {
 		glDeleteShader(vsh);
 		glDeleteBuffers(vbo);
 		glDeleteVertexArrays(vao);
+
+		if ( debugProc != null )
+			debugProc.release();
 	}
 
 	private void display() {
@@ -710,21 +727,22 @@ public class Mandelbrot {
 
 		log("OpenCL COMPILER OPTIONS: " + options);
 
-		int errcode = clBuildProgram(clProgram, device.getPointer(), options, new CLProgramCallback() {
+		final long cl_device_id = device.getPointer();
+		int errcode = clBuildProgram(clProgram, cl_device_id, options, new CLProgramCallback() {
 			@Override
-			public void invoke(long program) {
-				System.out.printf(
+			public void invoke(long program, long user_data) {
+				System.err.printf(
 					"The cl_program [0x%X] was built %s\n",
 					program,
-					clGetProgramBuildInfoInt(program, device.getPointer(), CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
+					clGetProgramBuildInfoInt(program, cl_device_id, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
 				);
-				String log = clGetProgramBuildInfoStringASCII(program, device.getPointer(), CL_PROGRAM_BUILD_LOG);
+				String log = clGetProgramBuildInfoStringASCII(program, cl_device_id, CL_PROGRAM_BUILD_LOG);
 				if ( !log.isEmpty() )
-					System.out.printf("BUILD LOG:\n----\n%s\n-----\n", log);
+					System.err.printf("BUILD LOG:\n----\n%s\n-----\n", log);
 
 				latch.countDown();
 			}
-		});
+		}, NULL);
 		checkCLError(errcode);
 
 		// Make sure the program has been built before proceeding

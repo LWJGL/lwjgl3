@@ -47,3 +47,9 @@ val charASCII_pp = PointerType(charASCII_p)
 val charUTF8 = CharType("char", CharMapping.UTF8) // for struct members
 val charUTF8_p = CharSequenceType(name = "char", charMapping = CharMapping.UTF8)
 val charUTF8_pp = PointerType(charUTF8_p)
+
+// JNI
+
+val jobject = PointerType("jobject", includesPointer = true)
+val jclass = PointerType("jclass", includesPointer = true)
+val jMethodID = PointerType("jMethodID", includesPointer = true)

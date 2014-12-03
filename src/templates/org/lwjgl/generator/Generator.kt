@@ -65,6 +65,7 @@ fun main(args: Array<String>) {
 
 		// Generate utility classes. These are auto-registered during the process above.
 		generate("struct", Generator.structs)
+		generate("callback", Generator.callbacks)
 		generate("custom class", Generator.customClasses)
 	}
 }
@@ -77,11 +78,25 @@ class Generator(
 
 	class object {
 		val structs = ArrayList<Struct>()
+		val callbacks = ArrayList<CallbackFunction>()
+		val callbacksSAM = HashMap<String, MutableList<CallbackFunction>>()
 		val customClasses = ArrayList<CustomClass>()
 
 		fun register(struct: Struct): Struct {
 			structs add struct
 			return struct
+		}
+
+		fun register(callback: CallbackFunction, samConstructor: String?) {
+			callbacks add callback
+			if ( samConstructor == null )
+				return
+
+			samConstructor.split(",") forEach {
+				callbacksSAM.getOrPut("${callback.packageName}.$it") {
+					ArrayList<CallbackFunction>()
+				}.add(callback)
+			}
 		}
 
 		fun <T: CustomClass> register(customClass: T): T {

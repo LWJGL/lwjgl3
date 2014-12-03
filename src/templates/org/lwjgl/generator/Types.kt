@@ -28,6 +28,8 @@ open class NativeType(
 	val javaMethodType: Class<out Any>
 		get() = mapping.javaMethodType
 
+	override fun toString(): String =
+		"${this.javaClass.getSimpleName()}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
 }
 
 // Specialization for primitives.
@@ -78,11 +80,11 @@ fun PointerType(pointerType: PointerType, const: Boolean = false) =
 	)
 
 // Objects (pointer wrappers)
-class ObjectType(
+open class ObjectType(
 	/** The Java wrapper class. */
 	val className: String,
 	/** The type used in the native API. */
-	name: String,
+	name: String = className,
 	/** If true, the nativeType typedef includes a pointer. */
 	includesPointer: Boolean = true
 ): PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
@@ -127,6 +129,12 @@ fun CharSequenceType(
 	/** The CharSequence charset. */
 	nullTerminated: Boolean = true
 ) = CharSequenceType(charType.name, mapping = mapping, charMapping = (charType.mapping as CharMapping), nullTerminated = nullTerminated)
+
+// Callbacks
+class CallbackType(
+	val signature: CallbackFunction,
+    name: String = signature.className
+): ObjectType(signature.className, name)
 
 // --- [ TYPE MAPPINGS ] ---
 

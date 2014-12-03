@@ -176,14 +176,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	Code(
-		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = statement(
-			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
-			Code.ApplyTo.ALTERNATIVE
-		),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"SetMemObjectDestructorCallback",
 		"""
 		Registers a user callback function with a memory object. Each call to {@code clSetMemObjectDestructorCallback} registers the specified user callback
@@ -194,17 +187,14 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		""",
 
 		cl_mem.IN("memobj", "a valid memory object"),
-		Callback("CLMemObjectDestructorCallback") _ cl_mem_object_destructor_callback.IN(
+		cl_mem_object_destructor_callback.IN(
 			"pfn_notify",
 			"""
 			the callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL implementation.
 			It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
@@ -617,14 +607,7 @@ clReleaseMemObject(buf2);
 		"""
 	)
 
-	Code(
-		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = statement(
-			"\t\tlong user_data = memGlobalRefNew(pfn_notify); // this global reference is deleted in native code (after invoke)",
-			Code.ApplyTo.ALTERNATIVE
-		),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"SetEventCallback",
 		"""
 		Registers a user callback function for a specific command execution status. The registered callback function will be called when the execution status of
@@ -663,17 +646,14 @@ clReleaseMemObject(buf2);
 			""",
 			"CL10#SUBMITTED CL10#RUNNING CL10#COMPLETE"
 		),
-		Callback("CLEventCallback") _ cl_event_callback.IN(
+		cl_event_callback.IN(
 			"pfn_notify",
 			"""
 			the event callback function that can be registered by the application. This callback function may be called asynchronously by the OpenCL
 			implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""

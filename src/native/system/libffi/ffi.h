@@ -61,10 +61,8 @@
 		* Disabled warnings.
 		* Defined FFI_BUILDING for MSC.
 		* Added FFI_FN_TYPE typedef.
+		* Added FFI_CLOSURE_FUN typedef.
 */
-DISABLE_WARNINGS()
-
-typedef void (*FFI_FN_TYPE)(void);
 
 /* Specify which architecture libffi is configured for. */
 #if defined(LWJGL_WINDOWS)
@@ -84,6 +82,8 @@ typedef void (*FFI_FN_TYPE)(void);
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+DISABLE_WARNINGS()
 
 /* ---- System configuration information --------------------------------- */
 
@@ -492,10 +492,14 @@ void ffi_call(ffi_cif *cif,
 /* This should always refer to the last type code (for sanity checks) */
 #define FFI_TYPE_LAST       FFI_TYPE_POINTER
 
+ENABLE_WARNINGS()
+
+typedef void (*FFI_FN_TYPE)(void);
+typedef void (*FFI_CLOSURE_FUN)(ffi_cif*, void*, void**, void*);
+typedef void (*FFI_RAW_CLOSURE_FUN)(ffi_cif*,void*,ffi_raw*,void*);
+
 #ifdef __cplusplus
 }
 #endif
-
-ENABLE_WARNINGS()
 
 #endif

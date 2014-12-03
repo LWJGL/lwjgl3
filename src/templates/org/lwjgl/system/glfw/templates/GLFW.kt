@@ -501,9 +501,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)).javaDocLink
 
-	Code(
-		javaBeforeNative = statement("\t\tWindowCallback.clearAll();")
-	) _ void.func(
+	void.func(
 		"Terminate",
 		"""
 		Destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function is called, you
@@ -579,11 +577,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		)}
 		""",
 
-		mods(
-			Callback("ErrorCallback"),
-			Expression("ErrorCallback.Util.register(cbfun)", keepParam = true),
-			nullable
-		) _ GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable _ GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
 	    since = "GLFW 3.0"
@@ -688,11 +682,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		)}
 		""",
 
-		mods(
-			Callback("MonitorCallback"),
-			Expression("MonitorCallback.Util.register(cbfun)", keepParam = true),
-			nullable
-		) _ GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+		nullable _ GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
 
 	    returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
 	    since = "GLFW 3.0"
@@ -847,12 +837,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		since = "GLFW 2.2"
 	)
 
-	Code(
-		// Make sure there's always a WindowCallback registered on MacOSX, else glfwWaitEvents will block indefinitely.
-		javaAfterNative = statement(
-			"\t\tif ( $RESULT != NULL )\n\t\t\tWindowCallback.windowCreated(__result);"
-		)
-	) _ GLFWwindow.func(
+	GLFWwindow.func(
 		"CreateWindow",
 		"""
 		Creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are
@@ -922,9 +907,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since ="GLFW 1.0"
 	)
 
-	Code(
-		javaBeforeNative = statement("\t\tWindowCallback.set(window, null);")
-	) _ (void.func(
+	void.func(
 		"DestroyWindow",
 		"""
 		Destroys the specified window and its context. On calling this function, no further callbacks will be called for that window.
@@ -941,7 +924,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		GLFWwindow.IN("window", "the window to destroy"),
 	    since = "GLFW 1.0"
-	))
+	)
 
 	int.func(
 		"WindowShouldClose",
@@ -1218,7 +1201,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	val WindowCallbackSet = "WindowCallback##set(long, WindowCallback, java.util.EnumSet)"
 	val CallbackReturnDoc =
 		"""
 		the previously set callback, or $NULL if no callback was set or the library had not been
@@ -1233,11 +1215,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the screen position of the
 		upper-left corner of the client area of the window.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-		    "<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
  		""",
 
 		CALLBACK_WINDOW,
@@ -1253,11 +1231,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the size callback of the specified window, which is called when the window is resized. The callback is provided with the size, in screen
 		coordinates, of the client area of the window.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
@@ -1280,7 +1254,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet.",
 		    "<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
 		)}
 		""",
@@ -1301,11 +1274,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		On compositing window systems such as Aero, Compiz or Aqua, where the window contents are saved off-screen, this callback may be called only very
 		infrequently or never at all.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
@@ -1323,11 +1292,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		After the focus callback is called for a window that lost focus, synthetic key and mouse button release events will be generated for all such that had
 		been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
@@ -1342,11 +1307,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
@@ -1361,11 +1322,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets the framebuffer resize callback of the specified window, which is called when the framebuffer of the specified window is resized.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		CALLBACK_WINDOW,
@@ -1375,9 +1332,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	Code(
-		javaInit = statement("\t\tif ( WindowCallback.pollEventsOverride() ) return;")
-	) _ void.func(
+	void.func(
 		"PollEvents",
 		"""
 		Processes all pending events.
@@ -1403,9 +1358,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	Code(
-		javaInit = statement("\t\tif ( WindowCallback.waitEventsOverride() ) return;")
-	) _ void.func(
+	void.func(
 		"WaitEvents",
 		"""
 		Waits until events are queued and processes them.
@@ -1670,11 +1623,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Sometimes GLFW needs to generate synthetic key events, in which case the scancode may be zero.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1696,11 +1645,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		The character callback behaves as system text input normally does and will not be called if modifier keys are held down that would prevent normal text
 		input on that platform, for example a Super (Command) key on OS X or Alt key on Windows. There is #SetCharModsCallback() that receives these events.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1721,11 +1666,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Characters do not map 1:1 to physical keys, as a key may produce zero, one or more characters. If you want to know whether a specific physical key was
 		pressed or released, see #SetKeyCallback() instead.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1744,11 +1685,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		user-generated events by the fact that the synthetic ones are generated after the window has lost focus, i.e. #FOCUSED will be false and the focus
 		callback will have already been called.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1764,11 +1701,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the cursor position callback of the specified window, which is called when the cursor is moved. The callback is provided with the position, in
 		screen coordinates, relative to the upper-left corner of the client area of the window.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1783,11 +1716,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the client area of the window.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1804,11 +1733,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		The scroll callback receives all scrolling input, like that from a mouse wheel or a touchpad scrolling area.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"<b>LWJGL</b>: see $WindowCallbackSet."
-		)}
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
@@ -1826,11 +1751,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    Because the path array and its strings may have been generated specifically for that event, they are not guaranteed to be valid after the callback has
 	    returned. If you wish to use them after the callback returns, you need to make a deep copy.
 
-		Notes:
-		${ul(
-		    "This function may only be called from the main thread.",
-		    "<b>LWJGL</b>: see $WindowCallbackSet."
-	    )}
+		This function may only be called from the main thread.
 	    """,
 
 	    GLFWwindow.IN("window", "the window whose callback to set"),

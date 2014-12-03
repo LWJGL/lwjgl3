@@ -4,17 +4,17 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.ErrorCallback;
-import org.lwjgl.system.glfw.WindowCallback;
-import org.lwjgl.system.glfw.WindowCallbackAdapter;
+import org.lwjgl.system.glfw.GLFWcursorenterfun;
+import org.lwjgl.system.glfw.GLFWerrorfun;
+import org.lwjgl.system.glfw.GLFWkeyfun;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.glfw.Callbacks.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /** GLFW demo that showcases rendering to multiple windows from a single thread. */
@@ -24,7 +24,8 @@ public final class MultipleWindows {
 	}
 
 	public static void main(String[] args) {
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+		GLFWerrorfun errorfun = errorfunPrint(System.err);
+		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 
@@ -32,6 +33,7 @@ public final class MultipleWindows {
 			demo();
 		} finally {
 			glfwTerminate();
+			errorfun.release();
 		}
 	}
 
@@ -39,60 +41,63 @@ public final class MultipleWindows {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 
-		long[] windows = new long[4];
-		GLContext[] contexts = new GLContext[4];
+		Window[] windows = new Window[4];
 
 		final AtomicInteger latch = new AtomicInteger(windows.length);
 
 		for ( int i = 0; i < windows.length; i++ ) {
 			final int windowIndex = i + 1;
 
-			long window = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, NULL, NULL);
-			if ( window == 0L )
-				error();
+			long handle = glfwCreateWindow(300, 200, "GLFW Demo - " + windowIndex, NULL, NULL);
+			if ( handle == 0L )
+				throw new IllegalStateException("Failed to create GLFW window");
 
-			WindowCallback.set(window, new WindowCallbackAdapter() {
+			Window window = new Window(handle);
+
+			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWcursorenterfun() {
 				@Override
-				public void cursorEnter(long window, int entered) {
-					if ( entered != 0 )
+				public void invoke(long window, int entered) {
+					if ( entered == GL_TRUE )
 						System.out.println("Mouse entered window: " + windowIndex);
-				}
-
-				@Override
-				public void key(long window, int key, int scancode, int action, int mods) {
-					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-						latch.set(0); // Tests WindowCallback clean-up
 				}
 			});
 
-			windows[i] = window;
+			glfwSetKeyCallback(handle, window.keyfun = new GLFWkeyfun() {
+				@Override
+				public void invoke(long window, int key, int scancode, int action, int mods) {
+					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+						latch.set(0);
+				}
+			});
 
-			glfwMakeContextCurrent(window);
-			contexts[i] = GLContext.createFromCurrent();
+			glfwMakeContextCurrent(handle);
+			window.context = GLContext.createFromCurrent();
 
 			glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);
 
-			glfwShowWindow(window);
-			glfwSetWindowPos(window, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
+			glfwShowWindow(handle);
+			glfwSetWindowPos(handle, 100 + (i & 1) * 400, 100 + (i >> 1) * 400);
+
+			windows[i] = window;
 		}
 
 		while ( latch.get() != 0 ) {
 			glfwPollEvents();
 
 			for ( int i = 0; i < 4; i++ ) {
-				if ( windows[i] == 0L )
+				Window window = windows[i];
+				if ( window == null )
 					continue;
 
-				glfwMakeContextCurrent(windows[i]);
-				GL.setCurrent(contexts[i]);
+				glfwMakeContextCurrent(window.handle);
+				GL.setCurrent(window.context);
 
 				glClear(GL_COLOR_BUFFER_BIT);
-				glfwSwapBuffers(windows[i]);
+				glfwSwapBuffers(window.handle);
 
-				if ( glfwWindowShouldClose(windows[i]) != 0 ) {
-					glfwDestroyWindow(windows[i]);
-					windows[i] = NULL;
-					contexts[i] = null;
+				if ( glfwWindowShouldClose(window.handle) != 0 ) {
+					glfwDestroyWindow(window.handle);
+					windows[i] = null;
 
 					latch.decrementAndGet();
 				}
@@ -100,14 +105,23 @@ public final class MultipleWindows {
 		}
 
 		for ( int i = 0; i < 4; i++ ) {
-			if ( windows[i] != NULL )
-				glfwDestroyWindow(windows[i]);
+			Window window = windows[i];
+			if ( window != null )
+				glfwDestroyWindow(window.handle);
 		}
 	}
 
-	private static void error() {
-		glfwTerminate();
-		System.exit(-1);
+	private static class Window {
+		final long handle;
+
+		GLContext context;
+
+		GLFWcursorenterfun cursorenterfun;
+		GLFWkeyfun         keyfun;
+
+		Window(long handle) {
+			this.handle = handle;
+		}
 	}
 
 }

@@ -184,7 +184,7 @@ public final class GL {
 		int errorCode = nglGetError(GetError);
 		if ( errorCode != GL_NO_ERROR )
 			LWJGLUtil.log(
-				"A GL context was in an error state before the creation of its capabilities instance. Error: " + Util.translateGLErrorString(errorCode)
+				"A GL context was in an error state before the creation of its capabilities instance. Error: " + GLContext.translateGLErrorString(errorCode)
 			);
 
 		APIBuffer __buffer = apiBuffer();

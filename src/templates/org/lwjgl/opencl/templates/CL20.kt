@@ -265,7 +265,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	val SVMAlloc = void_p.func(
+	void_p.func(
 		"SVMAlloc",
 		"""
 		Allocates a shared virtual memory buffer (referred to as a SVM buffer) that can be shared by the host and all devices in an OpenCL context that support
@@ -325,12 +325,12 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"There was a failure to allocate resources."
 		)}
 		"""
-	).javaDocLink
+	)
 
 	void.func(
 		"SVMFree",
 		"""
-		Frees a shared virtual memory buffer allocated using $SVMAlloc.
+		Frees a shared virtual memory buffer allocated using #SVMAlloc().
 
 		Note that {@code SVMFree} does not wait for previously enqueued commands that may be using {@code svm_pointer} to finish before freeing
 		{@code svm_pointer}. It is the responsibility of the application to make sure that enqueued commands that use {@code svm_pointer} have finished before
@@ -343,42 +343,33 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context used to create the SVM buffer"),
-		void_p.IN("svm_pointer", "must be the value returned by a call to $SVMAlloc. If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
+		void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
 	)
 
-	Code(
-		javaBeforeNative = statement("\t\tlong user_data = CLSVMFreeCallback.Util.register(pfn_free_func);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"EnqueueSVMFree",
-		"Enqueues a command to free the shared virtual memory buffer allocated using $SVMAlloc or a shared system memory pointer.",
+		"Enqueues a command to free the shared virtual memory buffer allocated using #SVMAlloc() or a shared system memory pointer.",
 
 		cl_command_queue.IN("command_queue", "a valid host command-queue"),
 		AutoSize("svm_pointers") _ cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
 		void_pp.IN(
 			"svm_pointers",
 			"""
-			the shared virtual memory pointers to be freed. Each pointer in {@code svm_pointers} that was allocated using $SVMAlloc must have been allocated
+			the shared virtual memory pointers to be freed. Each pointer in {@code svm_pointers} that was allocated using #SVMAlloc() must have been allocated
 			from the same context from which {@code command_queue} was created. The memory associated with {@code svm_pointers} can be reused or freed after the
 			function returns.
 			"""
 		),
-		mods(
-			Callback("CLSVMFreeCallback"),
-			nullable
-		) _ cl_svmfree_callback.IN(
+		nullable _ cl_svmfree_callback.IN(
 			"pfn_free_func",
 			"""
 			the callback function to be called to free the SVM pointers. If pfn_free_func is $NULL, all pointers specified in {@code svm_pointers} must be
-			allocated using $SVMAlloc and the OpenCL implementation will free these SVM pointers. {@code pfn_free_func} must be a valid callback function if any
-			SVM pointer to be freed is a shared system memory pointer i.e. not allocated using $SVMAlloc. If {@code pfn_free_func} is a valid callback function,
+			allocated using #SVMAlloc() and the OpenCL implementation will free these SVM pointers. {@code pfn_free_func} must be a valid callback function if any
+			SVM pointer to be freed is a shared system memory pointer i.e. not allocated using #SVMAlloc(). If {@code pfn_free_func} is a valid callback function,
 			the OpenCL implementation will call {@code pfn_free_func} to free all the SVM pointers specified in {@code svm_pointers}.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ void_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
+		nullable _ void_p.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_free_func} is called. {@code user_data} can be $NULL."),
 		NEWL,
 		EWL,
 		EVENT,
@@ -404,7 +395,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 		Enqueues a command to do a {@code memcpy} operation.
 
-		If {@code dst_ptr} and/or {@code src_ptr} are allocated using $SVMAlloc then they must be allocated from the same context from which
+		If {@code dst_ptr} and/or {@code src_ptr} are allocated using #SVMAlloc() then they must be allocated from the same context from which
 		{@code command_queue} was created. Otherwise the behavior is undefined.
 		""",
 
@@ -456,7 +447,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"svm_ptr",
 			"""
 			a pointer to a memory region that will be filled with pattern. It must be aligned to {@code pattern_size} bytes. If {@code svm_ptr} is allocated
-			using $SVMAlloc then it must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
+			using #SVMAlloc() then it must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
 			"""
 		),
 		const _ void_p.IN(
@@ -521,7 +512,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		void_p.IN(
 			"svm_ptr",
 			"""
-			a pointer to a memory region and {@code size} in bytes that will be updated by the host. If {@code svm_ptr} is allocated using $SVMAlloc then it
+			a pointer to a memory region and {@code size} in bytes that will be updated by the host. If {@code svm_ptr} is allocated using #SVMAlloc() then it
 			must be allocated from the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
 			"""
 		),
@@ -557,7 +548,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		void_p.IN(
 			"svm_ptr",
 			"""
-			a pointer that was specified in a previous call to $EnqueueSVMMap. If {@code svm_ptr} is allocated using $SVMAlloc then it must be allocated from
+			a pointer that was specified in a previous call to $EnqueueSVMMap. If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
 			the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
 			"""
 		),
@@ -599,7 +590,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			{@code SetKernelArgSVMPointer} for {@code kernel}. The SVM pointer can only be used for arguments that are declared to be a pointer to global or
 			constant memory. The SVM pointer value must be aligned according to the argument's type. For example, if the argument is declared to be
 			{@code global float4 *p}, the SVM pointer value passed for {@code p} must be at a minimum aligned to a {@code float4}. The SVM pointer value
-			specified as the argument value can be the pointer returned by $SVMAlloc or can be a pointer + offset into the SVM region.
+			specified as the argument value can be the pointer returned by #SVMAlloc() or can be a pointer + offset into the SVM region.
 			"""
 		),
 
@@ -632,7 +623,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 		Here {@code num_ptrs} specifies the number of additional SVM pointers while {@code extra_svm_ptr_list} specifies a pointer to memory containing those
 		SVM pointers. When calling {@code SetKernelExecInfo} with #KERNEL_EXEC_INFO_SVM_PTRS to specify pointers to non-argument SVM buffers as extra
-		arguments to a kernel, each of these pointers can be the SVM pointer returned by $SVMAlloc or can be a pointer + offset into the SVM region. It is
+		arguments to a kernel, each of these pointers can be the SVM pointer returned by #SVMAlloc() or can be a pointer + offset into the SVM region. It is
 		sufficient to provide one pointer for each SVM buffer used.
 
 		2. #KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM is used to indicate whether SVM pointers used by a kernel will refer to system allocations or not.

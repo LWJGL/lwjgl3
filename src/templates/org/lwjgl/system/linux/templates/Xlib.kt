@@ -46,20 +46,6 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	/*int.func(
-		"XErrorHandler",
-		"Invokes an X11 error handler.",
-
-		DISPLAY,
-		XErrorEvent_p.IN("error_event", "a pointer to an ##XErrorEvent struct describing the error that occured"),
-		mods(
-			virtual,
-			nullable // the generator emits checkFunctionAddress, no need to check again
-		) _ voidptr.IN(FUNCTION_ADDRESS, "the error handler function address"),
-
-		returnDoc = "a value that is ignored"
-	)*/
-
 	XErrorHandler.func(
 		"XSetErrorHandler",
 		"""
@@ -69,11 +55,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		If the returned value is non-$NULL, the new error handler must pass the error down to the previous error handler. Use #XErrorHandler() to do that.
 		""",
 
-		mods(
-			Callback("XErrorHandler"),
-			Expression("XErrorHandler.Util.register(handler)", keepParam = true),
-			nullable
-		) _ XErrorHandler.IN("handler", "the program's supplied error handler."),
+		nullable _ XErrorHandler.IN("handler", "the program's supplied error handler."),
 
 		returnDoc = "the previous error handler"
 	)

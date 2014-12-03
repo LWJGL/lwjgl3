@@ -122,7 +122,18 @@ val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
 val PIXELFORMATDESCRIPTOR_p = StructType(PIXELFORMATDESCRIPTOR)
 
-val WNDPROC = PointerType("WNDPROC", includesPointer = true)
+val WNDPROC = CallbackType(callback(
+	WINDOWS_PACKAGE, LRESULT, "WindowProc",
+	"Will be called for each message sent to the window.",
+	HWND.IN("hwnd", "a handle to the window procedure that received the message"),
+    UINT.IN("uMsg", "the message"),
+    WPARAM.IN("wParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+    LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code uMsg} parameter."),
+    samConstructor = "WinUser"
+) {
+	documentation = "An application-defined function that processes messages sent to a window."
+	CALL_CONVENTION_SYSTEM
+}, "WNDPROC")
 
 val HICON = PointerType("HICON", includesPointer = true)
 val HCURSOR = PointerType("HCURSOR", includesPointer = true)
@@ -297,7 +308,16 @@ val PDISPLAY_DEVICE = StructType(
 	}
 )
 
-val GOBJENUMPROC = PointerType(name = "GOBJENUMPROC", includesPointer = true)
+val GOBJENUMPROC = CallbackType(callback(
+	WINDOWS_PACKAGE, int, "EnumObjectsProc",
+	"Will be called for each available object.",
+	LPVOID.IN("logObject", "a pointer to a {@link LOGPEN} or {@link LOGBRUSH} structure describing the attributes of the object"),
+	LPARAM.IN("data", "a pointer to the application-defined data passed by the WinGDI##EnumObjects() function"),
+	samConstructor = "WinGDI"
+) {
+	documentation = "Instances of this interface may be passed to the WinGDI##EnumObjects() method."
+	CALL_CONVENTION_SYSTEM
+}, "GOBJENUMPROC")
 
 val LPTRACKMOUSEEVENT = StructType(
 	name = "LPTRACKMOUSEEVENT",

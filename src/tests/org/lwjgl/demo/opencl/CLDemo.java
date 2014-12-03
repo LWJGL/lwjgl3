@@ -6,6 +6,7 @@ package org.lwjgl.demo.opencl;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.demo.util.ClosureGC;
 import org.lwjgl.opencl.*;
 import org.lwjgl.system.FunctionProviderLocal;
 
@@ -29,6 +30,11 @@ public final class CLDemo {
 	}
 
 	public static void main(String[] args) {
+		System.setProperty(
+			"org.lwjgl.system.libffi.ClosureRegistry",
+			"org.lwjgl.demo.util.ClosureGC"
+		);
+
 		List<CLPlatform> platforms = CLPlatform.getPlatforms();
 		if ( platforms.isEmpty() )
 			throw new RuntimeException("No OpenCL platforms found.");
@@ -82,7 +88,13 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), new CLCreateContextCallback() {
+					@Override
+					public void invoke(long errinfo, long private_info, long cb, long user_data) {
+						System.err.println("[LWJGL] cl_create_context_callback");
+						System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
+					}
+				}, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -93,18 +105,18 @@ public final class CLDemo {
 				if ( caps.OpenCL11 ) {
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long cl_mem) {
-							System.out.println("\t\tBuffer destructed (1): " + cl_mem);
+						public void invoke(long memobj, long user_data) {
+							System.out.println("\t\tBuffer destructed (1): " + memobj);
 						}
-					});
+					}, NULL);
 					checkCLError(errcode);
 
 					errcode = clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long cl_mem) {
-							System.out.println("\t\tBuffer destructed (2): " + cl_mem);
+						public void invoke(long memobj, long user_data) {
+							System.out.println("\t\tBuffer destructed (2): " + memobj);
 						}
-					});
+					}, NULL);
 					checkCLError(errcode);
 				}
 
@@ -117,27 +129,29 @@ public final class CLDemo {
 
 					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {
 						@Override
-						public void invoke(long cl_mem) {
-							System.out.println("\t\tSub Buffer destructed: " + cl_mem);
+						public void invoke(long memobj, long user_data) {
+							System.out.println("\t\tSub Buffer destructed: " + memobj);
 						}
-					});
+					}, NULL);
 					checkCLError(errcode);
 				}
 
 				long exec_caps = clGetDeviceInfoLong(cl_device_id, CL_DEVICE_EXECUTION_CAPABILITIES);
 				if ( (exec_caps & CL_EXEC_NATIVE_KERNEL) == CL_EXEC_NATIVE_KERNEL ) {
+					ClosureGC.get().push();
+
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
 					long queue = clCreateCommandQueue(context, device.getPointer(), 0L, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
-					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2 + 4);
-					kernelArgs.putInt(POINTER_SIZE * 2, 1337);
+					ByteBuffer kernelArgs = BufferUtils.createByteBuffer(4);
+					kernelArgs.putInt(0, 1337);
 
-					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel.BufAdapter() {
+					errcode = clEnqueueNativeKernel(queue, new CLNativeKernel() {
 						@Override
-						public void invoke(ByteBuffer args) {
-							System.out.println("\t\tKERNEL EXEC arguments: " + args.getInt(0) + ", should be 1337");
+						public void invoke(long args) {
+							System.out.println("\t\tKERNEL EXEC argument: " + memByteBuffer(args, 4).getInt(0) + ", should be 1337");
 						}
 					}, kernelArgs, null, null, null, ev);
 					checkCLError(errcode);
@@ -147,11 +161,11 @@ public final class CLDemo {
 					final CountDownLatch latch = new CountDownLatch(1);
 					errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
 						@Override
-						public void invoke(long cl_event, int command_exec_status) {
-							System.out.println("\t\tEvent callback status: " + getEventStatusName(command_exec_status));
+						public void invoke(long event, int event_command_exec_status, long user_data) {
+							System.out.println("\t\tEvent callback status: " + getEventStatusName(event_command_exec_status));
 							latch.countDown();
 						}
-					});
+					}, NULL);
 					checkCLError(errcode);
 
 					try {
@@ -169,12 +183,12 @@ public final class CLDemo {
 
 					CLNativeKernel kernel = new CLNativeKernel() {
 						@Override
-						public void invoke(long args, int cb_args) {
+						public void invoke(long args) {
 						}
 					};
 
 					long time = System.nanoTime();
-					int REPEAT = 100000;
+					int REPEAT = 1000;
 					for ( int i = 0; i < REPEAT; i++ )
 						clEnqueueNativeKernel(queue, kernel, kernelArgs, null, null, null, null);
 					clFinish(queue);
@@ -184,6 +198,8 @@ public final class CLDemo {
 
 					errcode = clReleaseCommandQueue(queue);
 					checkCLError(errcode);
+
+					ClosureGC.get().pop();
 				}
 
 				System.out.println();
@@ -198,6 +214,8 @@ public final class CLDemo {
 
 				errcode = clReleaseContext(context);
 				checkCLError(errcode);
+
+				ClosureGC.get().gc();
 			}
 		}
 	}

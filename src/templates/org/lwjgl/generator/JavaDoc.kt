@@ -60,9 +60,9 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun NativeClass.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>, returns: ReturnValue, returnDoc: String, since: String): String {
+fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
 	// TODO: This is shit, optimize
-	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut || returns.nativeType is StructType }
+	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut || returns is StructType }
 	if ( params.isEmpty() && returnDoc.isEmpty() )
 		return documentation.toJavaDoc()
 

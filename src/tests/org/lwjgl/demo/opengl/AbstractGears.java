@@ -6,8 +6,6 @@
 package org.lwjgl.demo.opengl;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Sys;
 
 import java.nio.FloatBuffer;
 

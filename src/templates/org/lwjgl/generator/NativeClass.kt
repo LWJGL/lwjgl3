@@ -159,7 +159,7 @@ class NativeClass(
 
 		preamble.printJava(this)
 
-		val documentation = this@NativeClass.documentation
+		val documentation = super.documentation
 		if ( documentation != null )
 			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
 		println("${access.modifier}final class $className {\n")
@@ -185,6 +185,11 @@ class NativeClass(
 			} catch (e: Exception) {
 				throw RuntimeException("Uncaught exception while generating method: $className.${it.name}", e)
 			}
+		}
+
+		val samConstructors = Generator.callbacksSAM["$packageName.$className"]
+		if ( samConstructors != null ) {
+			samConstructors forEach { it.generateCallbackSAM(this) }
 		}
 
 		print("}")
@@ -301,7 +306,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.stream(), this, returnDoc, since),
+			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.stream(), this.nativeType, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

@@ -5,11 +5,9 @@
 package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.demo.opengl.GLUtil;
 import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.DEBUGPROCAMD;
-import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.system.libffi.Closure;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WindowsDisplay;
@@ -19,7 +17,6 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
-import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
@@ -53,11 +50,9 @@ public final class WGLDemo {
 		assertTrue(success != 0);
 
 		GLContext context = WindowsGLContext.create(window.getHdc());
+		Closure debugProc = context.setupDebugMessageCallback();
 
-		ContextCapabilities caps = GL.getCapabilities();
-
-		GLUtil.debugSetupCallback(caps);
-
+		ContextCapabilities caps = context.getCapabilities();
 		if ( caps.WGL_AMD_gpu_association ) {
 			int GPUs = wglGetGPUIDsAMD(null);
 
@@ -183,6 +178,8 @@ public final class WGLDemo {
 		wglDeleteBufferRegionARB(bufferRegion);
 
 		context.destroy();
+		debugProc.release();
+
 		window.destroy();
 	}
 

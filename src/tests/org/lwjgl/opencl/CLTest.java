@@ -12,7 +12,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -42,6 +41,14 @@ public class CLTest {
 		public boolean accept(CLPlatform platform) {
 			return platform.getCapabilities().OpenCL12;
 
+		}
+	};
+
+	private static final CLCreateContextCallback CREATE_CONTEXT_CALLBACK = new CLCreateContextCallback() {
+		@Override
+		public void invoke(long errinfo, long private_info, long cb, long user_data) {
+			System.err.println("[LWJGL] cl_create_context_callback");
+			System.err.println("\tInfo: " + memDecodeUTF8(errinfo));
 		}
 	};
 
@@ -108,7 +115,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -120,14 +127,9 @@ public class CLTest {
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
-				int errcode = clReleaseCommandQueue(queue);
-				checkCLError(errcode);
-
-				errcode = clReleaseMemObject(buffer);
-				checkCLError(errcode);
-
-				errcode = clReleaseContext(context);
-				checkCLError(errcode);
+				checkCLError(clReleaseCommandQueue(queue));
+				checkCLError(clReleaseMemObject(buffer));
+				checkCLError(clReleaseContext(context));
 			}
 		});
 	}
@@ -141,7 +143,7 @@ public class CLTest {
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long queue = clCreateCommandQueue(context, device.getPointer(), 0, errcode_ret);
@@ -159,75 +161,74 @@ public class CLTest {
 				for ( int i = 0; i < bufferContents.capacity(); i++ )
 					bufferContents.put(i, (byte)i);
 
-				int errcode = clEnqueueWriteBuffer(queue, buffer, CL_TRUE, 0, bufferContents, null, null);
-				checkCLError(errcode);
+				checkCLError(clEnqueueWriteBuffer(queue, buffer, CL_TRUE, 0, bufferContents, null, null));
 
 				// Prepare enqueue arguments
 
-				ByteBuffer enqueueArgs = BufferUtils.createByteBuffer(POINTER_SIZE * 2 + POINTER_SIZE + 4);
+				ByteBuffer args = BufferUtils.createByteBuffer(4 * 2 + POINTER_SIZE);
 
-				// Slice to skip the pointers (reserved by LWJGL)
-				enqueueArgs.position(POINTER_SIZE * 2);
-				ByteBuffer args = enqueueArgs.slice().order(ByteOrder.nativeOrder());
-				enqueueArgs.clear();
+				// non-random numbers
+				args.putInt(0xDEADBEEF);
+				args.putInt(1337);
 
 				// a cl_mem object
 				PointerBuffer mem_list = BufferUtils.createPointerBuffer(1);
 				mem_list.put(0, buffer);
 
+				// offset to where the pointer to global memory for the cl_mem object will be placed
 				PointerBuffer args_mem_loc = BufferUtils.createPointerBuffer(1);
-				args_mem_loc.put(0, args); // offset to where the cl_mem object id is stored
-
-				// a non-random number
-				args.putInt(POINTER_SIZE, 1337);
+				args_mem_loc.put(0, args); // current args position
+				args.clear();
 
 				// A cl_event will be stored here that will let us know when the native kernel has been called.
 				PointerBuffer eventOut = BufferUtils.createPointerBuffer(1);
 
-				errcode = clEnqueueNativeKernel(queue, new CLNativeKernel.BufAdapter() {
-					@Override
-					public void invoke(ByteBuffer args) {
-						assertEquals(args.remaining(), POINTER_SIZE + 4);
+				CLNativeKernel kernel;
+				checkCLError(
+					clEnqueueNativeKernel(queue, kernel = new CLNativeKernel() {
+						@Override
+						public void invoke(long args) {
+							ByteBuffer arguments = memByteBuffer(args, 4 * 2 + POINTER_SIZE);
 
-						long memAddress = PointerBuffer.get(args, 0);
-						assertTrue(memAddress != NULL);
-						assertTrue(memAddress != buffer);
+							assertEquals(arguments.getInt(0), 0xDEADBEEF);
+							assertEquals(arguments.getInt(4), 1337);
 
-						ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
-						for ( int i = 0; i < kernelBuffer.capacity(); i++ )
-							assertEquals(kernelBuffer.get(i), i);
+							long memAddress = PointerBuffer.get(arguments, 8);
+							assertTrue(memAddress != NULL);
+							assertTrue(memAddress != buffer);
 
-						assertEquals(args.getInt(POINTER_SIZE), 1337);
-					}
-				}, enqueueArgs, mem_list, args_mem_loc, null, eventOut);
-				checkCLError(errcode);
+							ByteBuffer kernelBuffer = memByteBuffer(memAddress, BUFFER_SIZE);
+							for ( int i = 0; i < kernelBuffer.capacity(); i++ )
+								assertEquals(kernelBuffer.get(i), i);
+						}
+					}, args, mem_list, args_mem_loc, null, eventOut)
+				);
 
 				long e = eventOut.get(0);
 				assertNotNull(e);
 
 				final CountDownLatch latch = new CountDownLatch(1);
-				errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
-					@Override
-					public void invoke(long event, int command_exec_status) {
-						latch.countDown();
-					}
-				});
-				checkCLError(errcode);
+				CLEventCallback eventCallback;
+				checkCLError(
+					clSetEventCallback(e, CL_COMPLETE, eventCallback = new CLEventCallback() {
+						@Override
+						public void invoke(long event, int event_command_exec_status, long user_data) {
+							latch.countDown();
+						}
+					}, NULL)
+				);
 
 				try {
 					latch.await();
+					kernel.release();
 				} catch (InterruptedException exc) {
 					exc.printStackTrace();
 				}
 
-				errcode = clReleaseEvent(e);
-				checkCLError(errcode);
-
-				errcode = clReleaseCommandQueue(queue);
-				checkCLError(errcode);
-
-				errcode = clReleaseContext(context);
-				checkCLError(errcode);
+				checkCLError(clReleaseEvent(e));
+				eventCallback.release();
+				checkCLError(clReleaseCommandQueue(queue));
+				checkCLError(clReleaseContext(context));
 			}
 		});
 	}
@@ -238,7 +239,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -247,38 +248,36 @@ public class CLTest {
 
 				final CountDownLatch eventLatch = new CountDownLatch(1);
 
-				clSetMemObjectDestructorCallback(buffer, new CLMemObjectDestructorCallback() {
-					@Override
-					public void invoke(long cl_mem) {
-						eventLatch.countDown();
-					}
-				});
-
+				CLMemObjectDestructorCallback memDestructorCallback;
+				checkCLError(
+					clSetMemObjectDestructorCallback(buffer, memDestructorCallback = new CLMemObjectDestructorCallback() {
+						@Override
+						public void invoke(long memobj, long user_data) {
+							eventLatch.countDown();
+						}
+					}, NULL)
+				);
 				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 
-				int errcode = clRetainMemObject(buffer);
-				checkCLError(errcode);
-
+				checkCLError(clRetainMemObject(buffer));
 				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 2);
 
-				errcode = clReleaseMemObject(buffer);
-				checkCLError(errcode);
-
+				checkCLError(clReleaseMemObject(buffer));
 				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 				assertEquals(eventLatch.getCount(), 1L);
 
-				errcode = clReleaseMemObject(buffer);
-				checkCLError(errcode);
+				checkCLError(clReleaseMemObject(buffer));
 
 				try {
 					if ( !eventLatch.await(100, TimeUnit.MILLISECONDS) )
 						throw new IllegalStateException("MemObjectDestructor callback failed.");
 				} catch (InterruptedException exc) {
 					exc.printStackTrace();
+				} finally {
+					memDestructorCallback.release();
 				}
 
-				errcode = clReleaseContext(context);
-				checkCLError(errcode);
+				checkCLError(clReleaseContext(context));
 			}
 		});
 	}
@@ -289,7 +288,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -299,19 +298,20 @@ public class CLTest {
 
 				final CountDownLatch eventLatch = new CountDownLatch(1);
 
-				int errcode = clSetEventCallback(e, CL_COMPLETE, new CLEventCallback() {
-					@Override
-					public void invoke(long event, int command_exec_status) {
-						assertEquals(event, e);
-						assertEquals(command_exec_status, CL_COMPLETE);
+				CLEventCallback eventCallback;
+				checkCLError(
+					clSetEventCallback(e, CL_COMPLETE, eventCallback = new CLEventCallback() {
+						@Override
+						public void invoke(long event, int event_command_exec_status, long user_data) {
+							assertEquals(event, e);
+							assertEquals(event_command_exec_status, CL_COMPLETE);
 
-						eventLatch.countDown();
-					}
-				});
-				checkCLError(errcode);
+							eventLatch.countDown();
+						}
+					}, NULL)
+				);
 
-				errcode = clSetUserEventStatus(e, CL_COMPLETE);
-				checkCLError(errcode);
+				checkCLError(clSetUserEventStatus(e, CL_COMPLETE));
 
 				try {
 					if ( !eventLatch.await(100, TimeUnit.MILLISECONDS) )
@@ -320,11 +320,9 @@ public class CLTest {
 					exc.printStackTrace();
 				}
 
-				errcode = clReleaseEvent(e);
-				checkCLError(errcode);
-
-				errcode = clReleaseContext(context);
-				checkCLError(errcode);
+				checkCLError(clReleaseEvent(e));
+				eventCallback.release();
+				checkCLError(clReleaseContext(context));
 			}
 		});
 	}
@@ -338,7 +336,7 @@ public class CLTest {
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CLContextCallback.Util.getDefault(), errcode_ret);
+				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -368,21 +366,18 @@ public class CLTest {
 					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
 				}
 
-				int errcode = clReleaseMemObject(buffer);
-				checkCLError(errcode);
+				checkCLError(clReleaseMemObject(buffer));
 
 				if ( doContextCountChecks ) {
 					assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
 					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
 				}
 
-				errcode = clReleaseMemObject(subbuffer);
-				checkCLError(errcode);
+				checkCLError(clReleaseMemObject(subbuffer));
 
 				assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 1);
 
-				errcode = clReleaseContext(context);
-				checkCLError(errcode);
+				checkCLError(clReleaseContext(context));
 			}
 		});
 	}

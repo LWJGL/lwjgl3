@@ -4,21 +4,21 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.Sys;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.glfw.ErrorCallback;
+import org.lwjgl.system.glfw.GLFWerrorfun;
+import org.lwjgl.system.glfw.GLFWkeyfun;
 
 import java.util.concurrent.CountDownLatch;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
+import static org.lwjgl.system.glfw.Callbacks.*;
 import static org.lwjgl.system.glfw.GLFW.*;
 
 /**
- * Port of https://github.com/elmindreda/glfw/blob/master/tests/threads.c
- * <p/>
- * GLFW demo that showcases rendering to multiple windows from multiple threads.
+ * GLFW demo that showcases rendering to multiple windows from multiple threads. Ported from the GLFW
+ * <a href="https://github.com/elmindreda/glfw/blob/master/tests/threads.c">threads</a> test.
  *
  * @author Brian Matzon <brian@matzon.dk>
  */
@@ -35,12 +35,10 @@ public final class Threads {
 	}
 
 	public static void main(String[] args) {
-		if ( glfwInit() != GL11.GL_TRUE ) {
-			System.out.println("Unable to initialize glfw");
-			System.exit(-1);
-		}
-
-		glfwSetErrorCallback(ErrorCallback.Util.getDefault());
+		GLFWerrorfun errorfun = errorfunPrint(System.err);
+		glfwSetErrorCallback(errorfun);
+		if ( glfwInit() != GL11.GL_TRUE )
+			throw new IllegalStateException("Failed to initialize GLFW.");
 
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 
@@ -49,16 +47,21 @@ public final class Threads {
 		GLFWThread[] threads = new GLFWThread[titles.length];
 		for ( int i = 0; i < titles.length; i++ ) {
 			long window = glfwCreateWindow(200, 200, titles[i], NULL, NULL);
+			if ( window == NULL )
+				throw new IllegalStateException("Failed to create GLFW window.");
 
-			if ( window == 0 ) {
-				System.out.println("Unable to create glfw window");
-				glfwTerminate();
-			}
-
+			GLFWkeyfun keyfun;
+			glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
+				@Override
+				public void invoke(long window, int key, int scancode, int action, int mods) {
+					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
+						glfwSetWindowShouldClose(window, GL_TRUE);
+				}
+			});
 			glfwSetWindowPos(window, 200 + 250 * i, 200);
 			glfwShowWindow(window);
 
-			threads[i] = new GLFWThread(window, i, quit);
+			threads[i] = new GLFWThread(window, keyfun, i, quit);
 			threads[i].start();
 		}
 
@@ -67,7 +70,7 @@ public final class Threads {
 			glfwWaitEvents();
 
 			for ( int i = 0; i < titles.length; i++ ) {
-				if ( glfwWindowShouldClose(threads[i].window) == 1 || !threads[i].isAlive() ) {
+				if ( glfwWindowShouldClose(threads[i].window) == GL_TRUE ) {
 					quit.countDown();
 					break out;
 				}
@@ -84,21 +87,26 @@ public final class Threads {
 
 		for ( int i = 0; i < threads.length; i++ ) {
 			glfwDestroyWindow(threads[i].window);
+			threads[i].keyfun.release();
 		}
 
 		glfwTerminate();
+		errorfun.release();
 	}
 
 	private static class GLFWThread extends Thread {
 
-		long  window;
-		int   index;
-		float r, g, b;
+		final long       window;
+		final GLFWkeyfun keyfun;
+
+		final int   index;
+		final float r, g, b;
 
 		CountDownLatch quit;
 
-		GLFWThread(long window, int index, CountDownLatch quit) {
+		GLFWThread(long window, GLFWkeyfun keyfun, int index, CountDownLatch quit) {
 			this.window = window;
+			this.keyfun = keyfun;
 
 			this.index = index;
 

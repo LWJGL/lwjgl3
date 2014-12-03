@@ -1,11 +1,9 @@
 package org.lwjgl.system.windows;
 
-import org.lwjgl.Sys;
-
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.lwjgl.Pointer.*;
+import static org.lwjgl.Pointer.POINTER_SIZE;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinUser.*;
@@ -32,7 +30,6 @@ public class WindowsDisplay {
 	private final int id;
 
 	private final WindowProc wndProc;
-	private final long       wndProcRef;
 
 	private final short classAtom;
 
@@ -55,7 +52,6 @@ public class WindowsDisplay {
 		this.id = WINDOW_ID.incrementAndGet();
 
 		this.wndProc = new WindowProcImpl();
-		this.wndProcRef = memGlobalRefNew(wndProc);
 
 		this.windowPos = WINDOWPOS.malloc();
 		WINDOWPOS.cx(windowPos, width);
@@ -66,7 +62,7 @@ public class WindowsDisplay {
 		ByteBuffer in = WNDCLASSEX.malloc(
 			WNDCLASSEX.SIZEOF,
 			CS_OWNDC /*| CS_HREDRAW | CS_VREDRAW*/,
-			WindowProc.CALLBACK,
+			wndProc.getPointer(),
 			0,
 			POINTER_SIZE + 4, // WNDPROC reference + reserved int
 			HINSTANCE,
@@ -88,7 +84,7 @@ public class WindowsDisplay {
 			// WS_OVERLAPPEDWINDOW == WS_OVERLAPPED | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME | WS_MINIMIZEBOX | WS_MAXIMIZEBOX
 			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_CLIPSIBLINGS, // CLIP CHILDREN & SIBLINGS are required for OpenGL windows
 			0, 0, width, height,
-			NULL, NULL, HINSTANCE, wndProcRef
+			NULL, NULL, HINSTANCE, wndProc.getPointer()
 		);
 		windowsCheckHandle(hwnd, "Failed to create window");
 
@@ -142,15 +138,14 @@ public class WindowsDisplay {
 		windowsCheckResult(DestroyWindow(hwnd), "DestroyWindow");
 		windowsCheckResult(UnregisterClass("LWJGL" + id, HINSTANCE), "UnregisterClass");
 
-		memGlobalRefDelete(wndProcRef);
+		wndProc.release();
 	}
 
 	public boolean isCloseRequested() {
 		return closeRequested;
 	}
 
-	private class WindowProcImpl implements WindowProc {
-
+	private class WindowProcImpl extends WindowProc {
 		@Override
 		public long invoke(long hWnd, int msg, long wParam, long lParam) {
 			//System.out.println("In WINDOW PROC: " + Integer.toHexString(msg) + " - " +wParam + " - " +lParam);

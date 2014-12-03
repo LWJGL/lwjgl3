@@ -168,11 +168,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		application can query the number of messages currently in the log by obtaining the value of #DEBUG_LOGGED_MESSAGES_AMD.
 		""",
 
-		mods(
-			Callback("DEBUGPROCAMD", storeInFunctions = true),
-			nullable
-		) _ GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
-		mods(Expression("DEBUGPROCAMD.Util.register($INSTANCE, callback)"), nullable) _ voidptr.IN(
+		nullable _ GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)

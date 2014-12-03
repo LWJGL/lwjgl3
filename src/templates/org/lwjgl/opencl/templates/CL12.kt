@@ -502,11 +502,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	val CompileProgram = (Code(
-		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( $RESULT != CL10.CL_SUCCESS && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_int.func(
+	cl_int.func(
 		"CompileProgram",
 		"""
 		Compiles a program's source for all the devices or a specific device(s) in the OpenCL context associated with {@code program}. The pre-processor runs
@@ -552,10 +548,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			compile option. If multiple entries in {@code header_include_names} refer to the same header name, the first one encountered will be used.
 			"""
 		),
-		mods(
-			Callback("CLProgramCallback"),
-			nullable
-		) _ cl_program_callback.IN(
+		nullable _ cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -570,10 +563,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -606,13 +596,9 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
-	val LinkProgram = (Code(
-		// Create a global reference to the pfn_notify instance.
-		javaBeforeNative = statement("\t\tlong user_data = CLProgramCallback.Util.register(pfn_notify);", Code.ApplyTo.ALTERNATIVE),
-		javaAfterNative = statement("\t\tif ( $RESULT == NULL && user_data != NULL ) memGlobalRefDelete(user_data);", Code.ApplyTo.ALTERNATIVE)
-	) _ cl_program.func(
+	cl_program.func(
 		"LinkProgram",
 		"""
 		Links a set of compiled program objects and libraries for all the devices or a specific device(s) in the OpenCL context and creates an executable.
@@ -665,10 +651,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			)}
 			"""
 		),
-		mods(
-			Callback("CLProgramCallback"),
-			nullable
-		) _ cl_program_callback.IN(
+		nullable _ cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -682,10 +665,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			If {@code pfn_notify} is $NULL, {@code clLinkProgram} does not return until the linker has completed.
 			"""
 		),
-		mods(
-			Expression("user_data"),
-			nullable
-		) _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -717,7 +697,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"$INVALID_LINKER_OPTIONS if the linker options specified by {@code options} are invalid.",
 			"""
 			$INVALID_OPERATION if the compilation or build of a program executable for any of the devices listed in {@code device_list} by a
-			previous call to $CompileProgram or CL10#BuildProgram() for program has not completed.
+			previous call to #CompileProgram() or CL10#BuildProgram() for program has not completed.
 			""",
 			"""
 			$INVALID_OPERATION if the rules for devices containing compiled binaries or libraries as described in {@code input_programs} argument
@@ -729,14 +709,14 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
 	cl_int.func(
 		"UnloadPlatformCompiler",
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
 		guarantee that the compiler will not be used in the future or that the compiler will actually be unloaded by the implementation. Calls to
-		CL10#BuildProgram(), $CompileProgram or $LinkProgram after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
+		CL10#BuildProgram(), #CompileProgram() or #LinkProgram() after {@code clUnloadPlatformCompiler} will reload the compiler, if necessary, to build the
 		appropriate program executable.
 		""",
 
@@ -756,7 +736,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 		Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
 		created with CL10#CreateProgramWithSource() and the program executable is built with the {@code -cl-kernel-arg-info} option specified in options
-		argument to CL10#BuildProgram() or $CompileProgram.
+		argument to CL10#BuildProgram() or #CompileProgram().
 		""",
 
 		cl_kernel.IN("kernel", "specifies the kernel object being queried"),
@@ -1020,4 +1000,5 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
+	// TODO: add SetPrintfCallback
 }

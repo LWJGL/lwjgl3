@@ -6,6 +6,7 @@ package org.lwjgl.system.windows;
 
 import org.testng.annotations.Test;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinGDI.*;
 import static org.lwjgl.system.windows.WinUser.*;
 import static org.testng.Assert.*;
@@ -17,11 +18,11 @@ public class WinGDITest {
 		long dc = GetDC(0);
 		EnumObjects(dc, OBJ_BRUSH, new EnumObjectsProc() {
 			@Override
-			public int invoke(long logObject) {
+			public int invoke(long logObject, long data) {
 				assertTrue(logObject != 0L);
 				return 1;
 			}
-		});
+		}, NULL);
 	}
 
 }

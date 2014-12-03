@@ -191,13 +191,92 @@ fun config() {
 }
 
 // callback functions
+val cl_create_context_callback = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLCreateContextCallback",
+	"Will be called when a debug message is generated.",
+	const _ cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
+	const _ void_p.IN(
+		"private_info",
+		"a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
+	),
+	size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL10##clCreateContext() or CL10##clCreateContextFromType()"),
+	samConstructor = "CL10"
+) {
+	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
+	CALL_CONVENTION_SYSTEM
+}, "cl_create_context_callback")
 
-val cl_create_context_callback = PointerType(name = "cl_create_context_callback", includesPointer = true)
-val cl_program_callback = PointerType(name = "cl_program_callback", includesPointer = true)
-val cl_native_kernel_func = PointerType(name = "cl_native_kernel_func", includesPointer = true)
-val cl_mem_object_destructor_callback = PointerType(name = "cl_mem_object_destructor_callback", includesPointer = true)
-val cl_event_callback = PointerType(name = "cl_event_callback", includesPointer = true)
-val cl_svmfree_callback = PointerType(name = "cl_svmfree_callback", includesPointer = true)
+val cl_program_callback = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLProgramCallback",
+	"Will be called when the program is built, compiled or linked.",
+	cl_program.IN("program", "the program that was built, compiled or linked"),
+	void_p.IN(
+		"user_data",
+		"the user-specified value that was passed when calling CL10##clBuildProgram(), CL12##clCompileProgram() or CL12##clLinkProgram()"
+	),
+	samConstructor = "CL10"
+) {
+	documentation = "Instances of this interface may be passed to the CL10##clBuildProgram(), CL12##clCompileProgram() and CL12##clLinkProgram() methods."
+	CALL_CONVENTION_SYSTEM
+}, "cl_program_callback")
+
+val cl_native_kernel = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLNativeKernel",
+	"Will be called by the OpenCL using CL10##clEnqueueNativeKernel().",
+	void_p.IN("args", "a pointer to the arguments list"),
+	samConstructor = "CL10"
+) {
+	documentation = "Instances of this interface may be passed to the CL10##clEnqueueNativeKernel() method."
+	CALL_CONVENTION_SYSTEM
+}, "cl_native_kernel")
+
+val cl_mem_object_destructor_callback = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLMemObjectDestructorCallback",
+	"Will be called when a memory object is deleted.",
+	cl_mem.IN("memobj", "the memory object that was deleted"),
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetMemObjectDestructorCallback()"),
+	samConstructor = "CL11"
+) {
+	documentation = "Instances of this interface may be passed to the CL11##clSetMemObjectDestructorCallback() method."
+	CALL_CONVENTION_SYSTEM
+}, "cl_mem_object_destructor_callback")
+
+val cl_event_callback = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLEventCallback",
+	"""
+	Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
+	{@code command_exec_status}."
+	""",
+	cl_event.IN("event", "the event"),
+	cl_int.IN(
+		"event_command_exec_status",
+	    """
+	    represents the execution status of command for which this callback function is invoked. If the callback is called as the result of the command
+	    associated with event being abnormally terminated, an appropriate error code for the error that caused the termination will be passed to
+	    {@code event_command_exec_status} instead.
+	    """
+	),
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL11##clSetEventCallback()"),
+	samConstructor = "CL11"
+) {
+	documentation = "Instances of this interface may be passed to the CL11##clSetEventCallback() method."
+	CALL_CONVENTION_SYSTEM
+}, "cl_event_callback")
+
+val cl_svmfree_callback = CallbackType(callback(
+	OPENCL_PACKAGE, void, "CLSVMFreeCallback",
+	"Will be called to free shared virtual memory pointers.",
+	cl_command_queue.IN("queue", "a valid host command-queue"),
+	cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
+	void_pp.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
+	void_p.IN("user_data", "the user-specified value that was passed when calling CL20##clEnqueueSVMFree()"),
+	samConstructor = "CL20"
+) {
+	documentation = "Instances of this interface may be passed to the CL20##clEnqueueSVMFree() method."
+	CALL_CONVENTION_SYSTEM
+}, "cl_svmfree_callback")
+
 
 // OpenGL interop
 
