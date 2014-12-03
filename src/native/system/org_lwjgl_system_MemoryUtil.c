@@ -18,6 +18,7 @@ JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memPointerSize(JNIEnv *e
 	return (jint)sizeof(void *);
 }
 
+// memGlobalRefToObject(J)Ljava/lang/Object;
 JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(JNIEnv *env, jclass clazz,
 	jlong globalRef
 ) {
@@ -25,32 +26,32 @@ JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(
 	return (jobject)(intptr_t)globalRef;
 }
 
-// memGlobalRefNew(Ljava/lang/Object;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefNew(JNIEnv *env, jclass clazz,
+// memNewGlobalRef(Ljava/lang/Object;)J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memNewGlobalRef(JNIEnv *env, jclass clazz,
 	jobject object
 ) {
 	UNUSED_PARAM(clazz)
 	return (jlong)(intptr_t)(*env)->NewGlobalRef(env, object);
 }
 
-// memGlobalRefDelete(J)V
-JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefDelete(JNIEnv *env, jclass clazz,
+// memDeleteGlobalRef(J)V
+JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memDeleteGlobalRef(JNIEnv *env, jclass clazz,
 	jlong globalRef
 ) {
 	UNUSED_PARAM(clazz)
 	(*env)->DeleteGlobalRef(env, (jobject)(intptr_t)globalRef);
 }
 
-// memGlobalRefNewWeak(Ljava/lang/Object;)J
-JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefNewWeak(JNIEnv *env, jclass clazz,
+// memNewWeakGlobalRef(Ljava/lang/Object;)J
+JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memNewWeakGlobalRef(JNIEnv *env, jclass clazz,
 	jobject object
 ) {
 	UNUSED_PARAM(clazz)
 	return (jlong)(intptr_t)(*env)->NewWeakGlobalRef(env, object);
 }
 
-// memGlobalRefDeleteWeak(J)V
-JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefDeleteWeak(JNIEnv *env, jclass clazz,
+// memDeleteWeakGlobalRef(J)V
+JNIEXPORT void JNICALL Java_org_lwjgl_system_MemoryUtil_memDeleteWeakGlobalRef(JNIEnv *env, jclass clazz,
 	jlong globalRef
 ) {
 	UNUSED_PARAM(clazz)

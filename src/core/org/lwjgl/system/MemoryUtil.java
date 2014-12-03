@@ -559,14 +559,14 @@ public final class MemoryUtil {
 	 *
 	 * @return the global reference memory address
 	 */
-	public static native long memGlobalRefNew(Object obj);
+	public static native long memNewGlobalRef(Object obj);
 
 	/**
 	 * Deletes a global reference. This method is a simpler wrapper over the JNI {@code DeleteGlobalRef} function.
 	 *
 	 * @param globalRef the memory address of the global reference to delete
 	 */
-	public static native void memGlobalRefDelete(long globalRef);
+	public static native void memDeleteGlobalRef(long globalRef);
 
 	/**
 	 * Creates a new weak global reference to the specified object. This method is a simpler wrapper over the JNI {@code NewWeakGlobalRef} function.
@@ -575,14 +575,14 @@ public final class MemoryUtil {
 	 *
 	 * @return the weak global reference memory address
 	 */
-	public static native long memGlobalRefNewWeak(Object obj);
+	public static native long memNewWeakGlobalRef(Object obj);
 
 	/**
 	 * Deletes a weak global reference. This method is a simpler wrapper over the JNI {@code DeleteWeakGlobalRef} function.
 	 *
 	 * @param globalRef the memory address of the weak global reference to delete
 	 */
-	public static native void memGlobalRefDeleteWeak(long globalRef);
+	public static native void memDeleteWeakGlobalRef(long globalRef);
 
 	// The standard C memset function
 	static native void nMemSet(long ptr, int value, long bytes);
