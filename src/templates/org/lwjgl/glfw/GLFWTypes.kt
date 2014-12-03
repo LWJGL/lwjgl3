@@ -6,7 +6,7 @@ package org.lwjgl.glfw
 
 import org.lwjgl.generator.*
 
-val GLFW_PACKAGE = "org.lwjgl.system.glfw"
+val GLFW_PACKAGE = "org.lwjgl.glfw"
 
 val GLFWmonitor = PointerType("GLFWmonitor")
 val GLFWmonitor_p = PointerType(GLFWmonitor)
