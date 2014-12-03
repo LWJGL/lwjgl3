@@ -444,7 +444,7 @@ class NativeClassFunction(
 			writer.generateNativeMethod(simpleFunction)
 
 		if ( !simpleFunction ) {
-			if ( nativeClass.functionProvider != null && hasUnsafeMethod )
+			if ( hasUnsafeMethod )
 				writer.generateUnsafeMethod()
 
 			// This the only special case where we don't generate a "normal" Java method. If we did,
@@ -524,19 +524,21 @@ class NativeClassFunction(
 			println("\t\t}")
 
 		// Native method call
-		generateNativeMethodCall {
-			printList(getNativeParams()) {
-				it.name
-			}
+		print("\t\t")
+		if ( !returns.isVoid )
+			print("return ")
 
-			if ( returnsStructValue ) {
-				if ( hasNativeParams ) print(", ")
-				print("memAddress($RESULT)")
-			}
-
-			if ( hasNativeParams ) print(", ")
-			print("$FUNCTION_ADDRESS")
+		if ( has(Reuse) )
+			print("${get(Reuse).reference}.")
+		print("n$name(")
+		printList(getNativeParams()) {
+			it.name
 		}
+
+		if ( hasNativeParams ) print(", ")
+		print("$FUNCTION_ADDRESS")
+		println(");")
+
 		println("\t}\n")
 	}
 
@@ -688,29 +690,27 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.generateNativeMethodCall(
-		// false: check return type
-		// true: force later
-		// null: force immediate
-		returnLater: Boolean? = null,
+		returnLater: Boolean,
 		printParams: PrintWriter.() -> Unit
 	) {
+		val hasConstructor = returns.nativeType is ObjectType
+		val returnType = if ( hasConstructor ) (returns.nativeType as ObjectType).className else returnsNativeMethodType
+
 		print("\t\t")
 		if ( !(returns.isVoid || returnsStructValue) ) {
-			if ( returnLater != null && (returns.isBufferPointer || true.equals(returnLater)) ) {
-				print(
-					if ( returns.nativeType is ObjectType )
-						"${returns.nativeType.className} $RESULT = ${returns.nativeType.className}.create("
-					else
-						"${returnsNativeMethodType} $RESULT = "
-				)
+			if ( returnLater || returns.isBufferPointer ) {
+				print("$returnType $RESULT = ")
+				if ( hasConstructor )
+					print("$returnType.create(")
 			} else {
 				print("return ")
-				if ( returnLater != null && returns.nativeType is ObjectType )
-					print("${returns.nativeType.className}.create(")
+				if ( hasConstructor )
+					print("$returnType.create(")
 			}
 		}
 
-		if ( has(Reuse) ) print("${get(Reuse).reference}.")
+		if ( has(Reuse) && !hasUnsafeMethod )
+			print("${get(Reuse).reference}.")
 		print("n$name(")
 		printParams()
 		if ( nativeClass.functionProvider != null && !hasUnsafeMethod ) {
@@ -719,7 +719,7 @@ class NativeClassFunction(
 		}
 		print(")")
 
-		if ( returnLater != null && returns.nativeType is ObjectType ) {
+		if ( hasConstructor ) {
 			if ( returns has Construct ) {
 				val construct = returns[Construct]
 				print(", ${construct.firstArg}")
