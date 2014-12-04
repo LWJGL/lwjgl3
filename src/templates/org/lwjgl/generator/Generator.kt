@@ -384,3 +384,10 @@ fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, 
 	}
 	return more
 }
+
+/** Returns the string with the first letter uppercase. */
+val String.upperCaseFirst: String
+	get() = if ( this.length == 1 )
+		this.toUpperCase()
+	else
+		"${Character.toUpperCase(this[0])}${this.substring(1)}"

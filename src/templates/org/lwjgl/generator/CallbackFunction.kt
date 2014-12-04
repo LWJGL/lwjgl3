@@ -46,10 +46,7 @@ class CallbackFunction(
 			is PointerType   -> "Ptr"
 			is PrimitiveType -> when ( mapping ) {
 				PrimitiveMapping.PTR -> "Ptr"
-				else                 -> {
-					val t = mapping.javaMethodType.getSimpleName()
-					"${Character.toUpperCase(t[0])}${t.substring(1)}"
-				}
+				else                 -> mapping.javaMethodType.getSimpleName().upperCaseFirst
 			}
 			else             -> if ( mapping == TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
@@ -57,10 +54,8 @@ class CallbackFunction(
 	val NativeType.memType: String
 		get() = if ( this is PointerType || mapping == PrimitiveMapping.PTR)
 			"Address"
-		else {
-			val name = (mapping as PrimitiveMapping).javaMethodType.getSimpleName()
-			Character.toUpperCase(name[0]) + name.substring(1)
-		}
+		else
+			(mapping as PrimitiveMapping).javaMethodType.getSimpleName().upperCaseFirst
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)
