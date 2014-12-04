@@ -3,11 +3,9 @@
  * License terms: http://lwjgl.org/license.php
  */
 #include "common_tools.h"
-#ifndef LWJGL_WINDOWS
-	DISABLE_WARNINGS()
-	#include <string.h>
-	ENABLE_WARNINGS()
-#endif
+DISABLE_WARNINGS()
+#include <string.h>
+ENABLE_WARNINGS()
 
 EXTERN_C_ENTER
 

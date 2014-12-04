@@ -25,8 +25,13 @@
 		#define _WIN32_WINNT 0x0500
 	#endif
 
-	#define UNICODE
-	#define _UNICODE
+	#ifndef UNICODE
+		#define UNICODE
+	#endif
+
+	#ifndef _UNICODE
+		#define _UNICODE
+	#endif
 
 	// Disable optional features we don't need.
 
