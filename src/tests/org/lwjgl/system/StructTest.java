@@ -24,10 +24,10 @@ public class StructTest {
 	public void testStructLayout() {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS: {
-				ByteBuffer s = GLYPHMETRICSFLOAT.malloc();
+				GLYPHMETRICSFLOAT s = new GLYPHMETRICSFLOAT();
 
 				assertEquals(GLYPHMETRICSFLOAT.SIZEOF, 24);
-				assertEquals(s.capacity(), GLYPHMETRICSFLOAT.SIZEOF);
+				assertEquals(s.buffer().capacity(), GLYPHMETRICSFLOAT.SIZEOF);
 
 				assertEquals(GLYPHMETRICSFLOAT.BLACKBOXX, 0);
 				assertEquals(GLYPHMETRICSFLOAT.BLOCKBOXY, 4);
@@ -40,10 +40,10 @@ public class StructTest {
 			}
 
 			case LINUX: {
-				ByteBuffer s = XColor.malloc();
+				XColor s = new XColor();
 
 				assertEquals(XColor.SIZEOF, 16);
-				assertEquals(s.capacity(), XColor.SIZEOF);
+				assertEquals(s.buffer().capacity(), XColor.SIZEOF);
 
 				assertEquals(XColor.PIXEL, 0);
 				assertEquals(XColor.RED, 8);
@@ -59,7 +59,7 @@ public class StructTest {
 	public void testFields() {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS: {
-				ByteBuffer s = WNDCLASSEX.malloc();
+				WNDCLASSEX s = new WNDCLASSEX();
 
 				int style = 1337;
 				long wndProc = (1L << 32) - 1;
@@ -73,47 +73,47 @@ public class StructTest {
 				String className = "class";
 				long iconSm = 876543210L;
 
-				WNDCLASSEX.size(s, WNDCLASSEX.SIZEOF);
-				WNDCLASSEX.style(s, style);
-				WNDCLASSEX.wndProc(s, wndProc);
-				WNDCLASSEX.clsExtra(s, clsExtra);
-				WNDCLASSEX.wndExtra(s, wndExtra);
-				WNDCLASSEX.instance(s, instance);
-				WNDCLASSEX.icon(s, icon);
-				WNDCLASSEX.cursor(s, cursor);
-				WNDCLASSEX.background(s, background);
-				WNDCLASSEX.menuNameSet(s, menuName);
-				WNDCLASSEX.classNameSet(s, className);
-				WNDCLASSEX.iconSm(s, iconSm);
+				s.setSize(WNDCLASSEX.SIZEOF);
+				s.setStyle(style);
+				s.setWndProc(wndProc);
+				s.setClsExtra(clsExtra);
+				s.setWndExtra(wndExtra);
+				s.setInstance(instance);
+				s.setIcon(icon);
+				s.setCursor(cursor);
+				s.setBackground(background);
+				s.setMenuName(menuName);
+				s.setClassName(className);
+				s.setIconSm(iconSm);
 
-				assertEquals(WNDCLASSEX.size(s), WNDCLASSEX.SIZEOF);
-				assertEquals(WNDCLASSEX.style(s), style);
-				assertEquals(WNDCLASSEX.wndProc(s), wndProc);
-				assertEquals(WNDCLASSEX.clsExtra(s), clsExtra);
-				assertEquals(WNDCLASSEX.wndExtra(s), wndExtra);
-				assertEquals(WNDCLASSEX.instance(s), instance);
-				assertEquals(WNDCLASSEX.icon(s), icon);
-				assertEquals(WNDCLASSEX.cursor(s), cursor);
-				assertEquals(WNDCLASSEX.background(s), background);
-				assertEquals(WNDCLASSEX.menuNameGets(s), menuName);
-				assertEquals(WNDCLASSEX.classNameGets(s), className);
-				assertEquals(WNDCLASSEX.iconSm(s), iconSm);
+				assertEquals(s.getSize(), WNDCLASSEX.SIZEOF);
+				assertEquals(s.getStyle(), style);
+				assertEquals(s.getWndProc(), wndProc);
+				assertEquals(s.getClsExtra(), clsExtra);
+				assertEquals(s.getWndExtra(), wndExtra);
+				assertEquals(s.getInstance(), instance);
+				assertEquals(s.getIcon(), icon);
+				assertEquals(s.getCursor(), cursor);
+				assertEquals(s.getBackground(), background);
+				assertEquals(s.getMenuNameStr(), menuName);
+				assertEquals(s.getClassNameStr(), className);
+				assertEquals(s.getIconSm(), iconSm);
 				break;
 			}
 			case LINUX: {
-				ByteBuffer s = XGCValues.malloc();
+				XGCValues s = new XGCValues();
 
 				int cap_style = X.CapRound;
 				int arc_mode = X.ArcPieSlice;
 				byte dashes = 0x3;
 
-				XGCValues.cap_style(s, cap_style);
-				XGCValues.arc_mode(s, arc_mode);
-				XGCValues.dashes(s, dashes);
+				s.setCapStyle(cap_style);
+				s.setArcMode(arc_mode);
+				s.setDashes(dashes);
 
-				assertEquals(XGCValues.cap_style(s), cap_style);
-				assertEquals(XGCValues.arc_mode(s), arc_mode);
-				assertEquals(XGCValues.dashes(s), dashes);
+				assertEquals(s.getCapStyle(), cap_style);
+				assertEquals(s.getArcMode(), arc_mode);
+				assertEquals(s.getDashes(), dashes);
 				break;
 			}
 		}

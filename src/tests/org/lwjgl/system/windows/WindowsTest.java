@@ -6,8 +6,6 @@ package org.lwjgl.system.windows;
 
 import org.testng.annotations.Test;
 
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinGDI.*;
@@ -56,60 +54,60 @@ public class WindowsTest {
 	}
 
 	public void testOSVERSIONINFOEX() {
-		ByteBuffer versionInfo = OSVERSIONINFOEX.malloc();
+		OSVERSIONINFOEX versionInfo = new OSVERSIONINFOEX();
 
-		OSVERSIONINFOEX.osVersionInfoSize(versionInfo, OSVERSIONINFOEX.SIZEOF);
+		versionInfo.setOsVersionInfoSize(OSVERSIONINFOEX.SIZEOF);
 
-		int success = GetVersionEx(versionInfo);
+		int success = GetVersionEx(versionInfo.buffer());
 		assertTrue(success != 0);
 
 		// We support Windows 2000 or higher
-		assertTrue(OSVERSIONINFOEX.majorVersion(versionInfo) >= 5);
+		assertTrue(versionInfo.getMajorVersion() >= 5);
 
 		// Tests char array struct members
-		OSVERSIONINFOEX.csdVersionSet(versionInfo, "Service Pack X");
-		assertEquals(OSVERSIONINFOEX.csdVersionGets(versionInfo), "Service Pack X");
+		versionInfo.setCsdVersion("Service Pack X");
+		assertEquals(versionInfo.getCsdVersionStr(), "Service Pack X");
 	}
 
 	public void testWNDCLASSEX() {
 		String menuName = null;
 		String className = "LWJGL";
 
-		ByteBuffer in = WNDCLASSEX.malloc();
+		WNDCLASSEX in = new WNDCLASSEX();
 
-		WNDCLASSEX.size(in, WNDCLASSEX.SIZEOF);
-		WNDCLASSEX.style(in, CS_OWNDC);
-		WNDCLASSEX.wndProc(in, DEF_WINDOW_PROC);
-		WNDCLASSEX.clsExtra(in, 0);
-		WNDCLASSEX.wndExtra(in, 0);
-		WNDCLASSEX.instance(in, HINSTANCE);
-		WNDCLASSEX.icon(in, nLoadIcon(0, IDI_APPLICATION));
-		WNDCLASSEX.cursor(in, nLoadCursor(0, IDC_ARROW));
-		WNDCLASSEX.background(in, 0);
-		WNDCLASSEX.menuNameSet(in, menuName);
-		WNDCLASSEX.classNameSet(in, className);
-		WNDCLASSEX.iconSm(in, 0);
+		in.setSize(WNDCLASSEX.SIZEOF);
+		in.setStyle(CS_OWNDC);
+		in.setWndProc(DEF_WINDOW_PROC);
+		in.setClsExtra(0);
+		in.setWndExtra(0);
+		in.setInstance(HINSTANCE);
+		in.setIcon(nLoadIcon(0, IDI_APPLICATION));
+		in.setCursor(nLoadCursor(0, IDC_ARROW));
+		in.setBackground(0);
+		in.setMenuName(menuName);
+		in.setClassName(className);
+		in.setIconSm(0);
 
-		short classAtom = RegisterClassEx(in);
+		short classAtom = RegisterClassEx(in.buffer());
 		assertTrue(classAtom != 0);
 
-		ByteBuffer out = WNDCLASSEX.malloc();
-		WNDCLASSEX.size(out, WNDCLASSEX.SIZEOF);
+		WNDCLASSEX out = new WNDCLASSEX();
+		out.setSize(WNDCLASSEX.SIZEOF);
 
-		int success = GetClassInfoEx(HINSTANCE, className, out);
+		int success = GetClassInfoEx(HINSTANCE, className, out.buffer());
 		assertTrue(success != 0);
 
-		assertEquals(WNDCLASSEX.style(out), WNDCLASSEX.style(in));
-		assertEquals(WNDCLASSEX.wndProc(out), WNDCLASSEX.wndProc(in));
-		assertEquals(WNDCLASSEX.clsExtra(out), WNDCLASSEX.clsExtra(in));
-		assertEquals(WNDCLASSEX.wndExtra(out), WNDCLASSEX.wndExtra(in));
-		assertEquals(WNDCLASSEX.instance(out), WNDCLASSEX.instance(in));
-		assertEquals(WNDCLASSEX.icon(out), WNDCLASSEX.icon(in));
-		assertEquals(WNDCLASSEX.cursor(out), WNDCLASSEX.cursor(in));
-		assertEquals(WNDCLASSEX.background(out), WNDCLASSEX.background(in));
-		assertEquals(WNDCLASSEX.menuNameGets(out), menuName);
-		assertEquals(WNDCLASSEX.classNameGets(out), className);
-		assertEquals(WNDCLASSEX.iconSm(out), WNDCLASSEX.iconSm(in));
+		assertEquals(out.getStyle(), in.getStyle());
+		assertEquals(out.getWndProc(), in.getWndProc());
+		assertEquals(out.getClsExtra(), in.getClsExtra());
+		assertEquals(out.getWndExtra(), in.getWndExtra());
+		assertEquals(out.getInstance(), in.getInstance());
+		assertEquals(out.getIcon(), in.getIcon());
+		assertEquals(out.getCursor(), in.getCursor());
+		assertEquals(out.getBackground(), in.getBackground());
+		assertEquals(out.getMenuNameStr(), menuName);
+		assertEquals(out.getClassNameStr(), className);
+		assertEquals(out.getIconSm(), in.getIconSm());
 	}
 
 	@Test(

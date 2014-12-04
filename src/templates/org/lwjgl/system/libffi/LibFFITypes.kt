@@ -43,7 +43,7 @@ val ffi_cif_p = StructType(ffi_cif)
 // Closures
 
 val ffi_closure = struct(FFI_PACKAGE, "ffi_closure", malloc = false) {
-	documentation = "A libffi closure. This is an opaque data structure."
+	documentation = "The libffi closure structure."
 	nativeImport("ffi.h")
 
 	ffi_cif_p.member("cif")

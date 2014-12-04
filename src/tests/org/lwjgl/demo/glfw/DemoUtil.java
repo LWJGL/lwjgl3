@@ -31,18 +31,18 @@ public final class DemoUtil {
 	}
 
 	private static int findPixelFormatLegacy(long dc, ByteBuffer pfdOut) {
-		ByteBuffer pfdIn = PIXELFORMATDESCRIPTOR.malloc();
+		PIXELFORMATDESCRIPTOR pfdIn = new PIXELFORMATDESCRIPTOR();
 
-		PIXELFORMATDESCRIPTOR.size(pfdIn, PIXELFORMATDESCRIPTOR.SIZEOF);
-		PIXELFORMATDESCRIPTOR.version(pfdIn, 1);
-		PIXELFORMATDESCRIPTOR.flags(pfdIn, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
-		PIXELFORMATDESCRIPTOR.pixelType(pfdIn, PFD_TYPE_RGBA);
-		PIXELFORMATDESCRIPTOR.colorBits(pfdIn, 24);
-		PIXELFORMATDESCRIPTOR.alphaBits(pfdIn, 8);
-		PIXELFORMATDESCRIPTOR.depthBits(pfdIn, 24);
-		PIXELFORMATDESCRIPTOR.stencilBits(pfdIn, 8);
+		pfdIn.setSize(PIXELFORMATDESCRIPTOR.SIZEOF);
+		pfdIn.setVersion(1);
+		pfdIn.setFlags(PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
+		pfdIn.setPixelType(PFD_TYPE_RGBA);
+		pfdIn.setColorBits(24);
+		pfdIn.setAlphaBits(8);
+		pfdIn.setDepthBits(24);
+		pfdIn.setStencilBits(8);
 
-		int pixelFormat = ChoosePixelFormat(dc, pfdIn);
+		int pixelFormat = ChoosePixelFormat(dc, pfdIn.buffer());
 		assertTrue(pixelFormat != 0);
 
 		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut);
@@ -54,10 +54,10 @@ public final class DemoUtil {
 		assertEquals(flagsOut & PFD_SUPPORT_OPENGL, PFD_SUPPORT_OPENGL);
 		assertEquals(flagsOut & PFD_DOUBLEBUFFER, PFD_DOUBLEBUFFER);
 		assertEquals(flagsOut & PFD_GENERIC_FORMAT, 0); // software mode
-		assertTrue(PIXELFORMATDESCRIPTOR.colorBits(pfdIn) <= PIXELFORMATDESCRIPTOR.colorBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.alphaBits(pfdIn) <= PIXELFORMATDESCRIPTOR.alphaBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.depthBits(pfdIn) <= PIXELFORMATDESCRIPTOR.depthBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.stencilBits(pfdIn) <= PIXELFORMATDESCRIPTOR.stencilBits(pfdOut));
+		assertTrue(pfdIn.getColorBits() <= PIXELFORMATDESCRIPTOR.colorBits(pfdOut));
+		assertTrue(pfdIn.getAlphaBits() <= PIXELFORMATDESCRIPTOR.alphaBits(pfdOut));
+		assertTrue(pfdIn.getDepthBits() <= PIXELFORMATDESCRIPTOR.depthBits(pfdOut));
+		assertTrue(pfdIn.getStencilBits() <= PIXELFORMATDESCRIPTOR.stencilBits(pfdOut));
 
 		return pixelFormat;
 	}

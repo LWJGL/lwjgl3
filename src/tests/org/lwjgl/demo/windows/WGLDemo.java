@@ -41,12 +41,12 @@ public final class WGLDemo {
 		int deviceBPP = GetDeviceCaps(window.getHdc(), BITSPIXEL);
 		System.out.println("deviceBPP = " + deviceBPP);
 
-		ByteBuffer pfdOut = PIXELFORMATDESCRIPTOR.malloc();
+		PIXELFORMATDESCRIPTOR pfdOut = new PIXELFORMATDESCRIPTOR();
 		int pixelFormat = findPixelFormatLegacy(window.getHdc(), pfdOut);
 
 		pixelFormat = findPixelFormatARB(pixelFormat, pfdOut);
 
-		int success = SetPixelFormat(window.getHdc(), pixelFormat, pfdOut);
+		int success = SetPixelFormat(window.getHdc(), pixelFormat, pfdOut.buffer());
 		assertTrue(success != 0);
 
 		GLContext context = WindowsGLContext.create(window.getHdc());
@@ -183,34 +183,34 @@ public final class WGLDemo {
 		window.destroy();
 	}
 
-	private static int findPixelFormatLegacy(long dc, ByteBuffer pfdOut) {
-		ByteBuffer pfdIn = PIXELFORMATDESCRIPTOR.malloc();
+	private static int findPixelFormatLegacy(long dc, PIXELFORMATDESCRIPTOR pfdOut) {
+		PIXELFORMATDESCRIPTOR pfdIn = new PIXELFORMATDESCRIPTOR();
 
-		PIXELFORMATDESCRIPTOR.size(pfdIn, PIXELFORMATDESCRIPTOR.SIZEOF);
-		PIXELFORMATDESCRIPTOR.version(pfdIn, 1);
-		PIXELFORMATDESCRIPTOR.flags(pfdIn, PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
-		PIXELFORMATDESCRIPTOR.pixelType(pfdIn, PFD_TYPE_RGBA);
-		PIXELFORMATDESCRIPTOR.colorBits(pfdIn, 24);
-		PIXELFORMATDESCRIPTOR.alphaBits(pfdIn, 8);
-		PIXELFORMATDESCRIPTOR.depthBits(pfdIn, 24);
-		PIXELFORMATDESCRIPTOR.stencilBits(pfdIn, 8);
+		pfdIn.setSize(PIXELFORMATDESCRIPTOR.SIZEOF);
+		pfdIn.setVersion(1);
+		pfdIn.setFlags(PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER);
+		pfdIn.setPixelType(PFD_TYPE_RGBA);
+		pfdIn.setColorBits(24);
+		pfdIn.setAlphaBits(8);
+		pfdIn.setDepthBits(24);
+		pfdIn.setStencilBits(8);
 
-		int pixelFormat = ChoosePixelFormat(dc, pfdIn);
+		int pixelFormat = ChoosePixelFormat(dc, pfdIn.buffer());
 		assertTrue(pixelFormat != 0);
 
-		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut);
+		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut.buffer());
 		assertTrue(describePF != 0);
 
-		int flagsOut = PIXELFORMATDESCRIPTOR.flags(pfdOut);
+		int flagsOut = pfdOut.getFlags();
 
 		assertEquals(flagsOut & PFD_DRAW_TO_WINDOW, PFD_DRAW_TO_WINDOW);
 		assertEquals(flagsOut & PFD_SUPPORT_OPENGL, PFD_SUPPORT_OPENGL);
 		assertEquals(flagsOut & PFD_DOUBLEBUFFER, PFD_DOUBLEBUFFER);
 		assertEquals(flagsOut & PFD_GENERIC_FORMAT, 0); // software mode
-		assertTrue(PIXELFORMATDESCRIPTOR.colorBits(pfdIn) <= PIXELFORMATDESCRIPTOR.colorBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.alphaBits(pfdIn) <= PIXELFORMATDESCRIPTOR.alphaBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.depthBits(pfdIn) <= PIXELFORMATDESCRIPTOR.depthBits(pfdOut));
-		assertTrue(PIXELFORMATDESCRIPTOR.stencilBits(pfdIn) <= PIXELFORMATDESCRIPTOR.stencilBits(pfdOut));
+		assertTrue(pfdIn.getColorBits() <= pfdOut.getColorBits());
+		assertTrue(pfdIn.getAlphaBits() <= pfdOut.getAlphaBits());
+		assertTrue(pfdIn.getDepthBits() <= pfdOut.getDepthBits());
+		assertTrue(pfdIn.getStencilBits() <= pfdOut.getStencilBits());
 
 		return pixelFormat;
 	}
@@ -220,13 +220,13 @@ public final class WGLDemo {
 		properties.put(value);
 	}
 
-	private static int findPixelFormatARB(int pixelFormat, ByteBuffer pfd) {
+	private static int findPixelFormatARB(int pixelFormat, PIXELFORMATDESCRIPTOR pfd) {
 		long pushDC = wglGetCurrentDC();
 		long pushGLRC = wglGetCurrentContext();
 
 		WindowsDisplay dummy = new WindowsDisplay();
 
-		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
+		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd.buffer());
 		assertTrue(success != 0);
 
 		GLContext context = WindowsGLContext.create(dummy.getHdc());
