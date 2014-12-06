@@ -31,14 +31,14 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 	}
 
 	// Invoke the Java callback
-	(*env)->CallVoidMethodA(env,
+	(*env)->CallVoidMethod(env,
 		object,
 		javaCallbackVoid,
-		(const jvalue *)args
+		args
 	);
 }
 
-#define DEFINE_FFI_CLOSURE_FUN(Name, Type, Method) \
+#define DEFINE_FFI_CLOSURE_FUN(Name, Type, JavaType) \
 	static void ffiClosure##Name(ffi_cif* cif, void* ret, void** args, void* user_data) { \
 		JNIEnv* env = getEnv(); \
  \
@@ -51,10 +51,10 @@ static void ffiClosureVoid(ffi_cif* cif, void* ret, void** args, void* user_data
 			return; \
 		} \
  \
-		*(Type*)ret = (Type)(*env)->Call##Method##MethodA(env, \
+		*(Type*)ret = (Type)(*env)->Call##JavaType##Method(env, \
 			object, \
 			javaCallback##Name, \
-			(const jvalue *)args \
+			args \
 		); \
 	}
 	

@@ -107,7 +107,7 @@ ${signature.stream().withIndices().map {
 			print("return ")
 		print("""invoke(
 ${signature.stream().withIndices().map {
-			"\t\t\tmemGet${it.second.nativeType.memType}(POINTER_SIZE * ${it.first} + args)"
+			"\t\t\tmemGet${it.second.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.first} + args))"
 		}.join(",\n")}
 		);
 	}

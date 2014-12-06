@@ -29,12 +29,6 @@ import static org.lwjgl.system.libffi.LibFFI.*;
  */
 public abstract class Closure extends Retainable.Default implements Pointer {
 
-	/*
-		We use the MethodA routines so that we decode an array of jvalues, instead of an array of
-		pointers to jvalues. We cannot also pass the ret pointer, so we use different native
-		callbacks per return type.
-	 */
-
 	/** Native callback function pointer. */
 	protected static final long
 		NATIVE_CALLBACK_VOID,
