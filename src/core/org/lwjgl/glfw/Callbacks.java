@@ -27,55 +27,55 @@ public final class Callbacks {
 	private Callbacks() {}
 
 	/** @see GLFW#glfwSetErrorCallback */
-	public static void glfwSetCallback(GLFWerrorfun cbfun) { glfwSetErrorCallback(cbfun); }
+	public static void glfwSetCallback(GLFWErrorCallback cbfun) { glfwSetErrorCallback(cbfun); }
 
 	/** @see GLFW#glfwSetMonitorCallback */
-	public static void glfwSetCallback(GLFWmonitorfun cbfun) { glfwSetMonitorCallback(cbfun); }
+	public static void glfwSetCallback(GLFWMonitorCallback cbfun) { glfwSetMonitorCallback(cbfun); }
 
 	/** @see GLFW#glfwSetWindowPosCallback */
-	public static void glfwSetCallback(long window, GLFWwindowposfun cbfun) { glfwSetWindowPosCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowPosCallback cbfun) { glfwSetWindowPosCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetWindowSizeCallback */
-	public static void glfwSetCallback(long window, GLFWwindowsizefun cbfun) { glfwSetWindowSizeCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowSizeCallback cbfun) { glfwSetWindowSizeCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetWindowCloseCallback */
-	public static void glfwSetCallback(long window, GLFWwindowclosefun cbfun) { glfwSetWindowCloseCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowCloseCallback cbfun) { glfwSetWindowCloseCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetWindowRefreshCallback */
-	public static void glfwSetCallback(long window, GLFWwindowrefreshfun cbfun) { glfwSetWindowRefreshCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowRefreshCallback cbfun) { glfwSetWindowRefreshCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetWindowFocusCallback */
-	public static void glfwSetCallback(long window, GLFWwindowfocusfun cbfun) { glfwSetWindowFocusCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowFocusCallback cbfun) { glfwSetWindowFocusCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetWindowIconifyCallback */
-	public static void glfwSetCallback(long window, GLFWwindowiconifyfun cbfun) { glfwSetWindowIconifyCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWWindowIconifyCallback cbfun) { glfwSetWindowIconifyCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetFramebufferSizeCallback */
-	public static void glfwSetCallback(long window, GLFWframebuffersizefun cbfun) { glfwSetFramebufferSizeCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWFramebufferSizeCallback cbfun) { glfwSetFramebufferSizeCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetKeyCallback */
-	public static void glfwSetCallback(long window, GLFWkeyfun cbfun) { glfwSetKeyCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWKeyCallback cbfun) { glfwSetKeyCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetCharCallback */
-	public static void glfwSetCallback(long window, GLFWcharfun cbfun) { glfwSetCharCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWCharCallback cbfun) { glfwSetCharCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetCharModsCallback */
-	public static void glfwSetCallback(long window, GLFWcharmodsfun cbfun) { glfwSetCharModsCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWCharModsCallback cbfun) { glfwSetCharModsCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetMouseButtonCallback */
-	public static void glfwSetCallback(long window, GLFWmousebuttonfun cbfun) { glfwSetMouseButtonCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWMouseButtonCallback cbfun) { glfwSetMouseButtonCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetCursorPosCallback */
-	public static void glfwSetCallback(long window, GLFWcursorposfun cbfun) { glfwSetCursorPosCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWCursorPosCallback cbfun) { glfwSetCursorPosCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetCursorEnterCallback */
-	public static void glfwSetCallback(long window, GLFWcursorenterfun cbfun) { glfwSetCursorEnterCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWCursorEnterCallback cbfun) { glfwSetCursorEnterCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetScrollCallback */
-	public static void glfwSetCallback(long window, GLFWscrollfun cbfun) { glfwSetScrollCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWScrollCallback cbfun) { glfwSetScrollCallback(window, cbfun); }
 
 	/** @see GLFW#glfwSetDropCallback */
-	public static void glfwSetCallback(long window, GLFWdropfun cbfun) { glfwSetDropCallback(window, cbfun); }
+	public static void glfwSetCallback(long window, GLFWDropCallback cbfun) { glfwSetDropCallback(window, cbfun); }
 
 	/**
 	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Closure#release releases} all previously set callbacks.
@@ -108,23 +108,23 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Returns a {@link GLFWerrorfun} instance that prints the error in the standard error stream.
+	 * Returns a {@link GLFWErrorCallback} instance that prints the error in the standard error stream.
 	 *
-	 * @return the GLFWerrorfun
+	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWerrorfun errorfunPrint() {
+	public static GLFWErrorCallback errorfunPrint() {
 		return errorfunPrint(System.err);
 	}
 
 	/**
-	 * Returns a {@link GLFWerrorfun} instance that prints the error in the specified {@link PrintStream}.
+	 * Returns a {@link GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
 	 *
 	 * @param stream the PrintStream to use
 	 *
-	 * @return the GLFWerrorfun
+	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWerrorfun errorfunPrint(final PrintStream stream) {
-		return new GLFWerrorfun() {
+	public static GLFWErrorCallback errorfunPrint(final PrintStream stream) {
+		return new GLFWErrorCallback() {
 			private final Map<Integer, String> ERROR_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
 				@Override
 				public boolean accept(Field field, int value) {
@@ -149,12 +149,12 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Returns a {@link GLFWerrorfun} instance that throws an {@link IllegalStateException} when an error occurs.
+	 * Returns a {@link GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
 	 *
-	 * @return the GLFWerrorfun
+	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWerrorfun errorfunThrow() {
-		return new GLFWerrorfun() {
+	public static GLFWErrorCallback errorfunThrow() {
+		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
 				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, errorfunDescriptionString(description)));
@@ -163,9 +163,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Converts the specified {@link GLFWerrorfun} description string pointer to a {@link ByteBuffer}, with a capacity equal to the UTF-8 encoded string.
+	 * Converts the specified {@link GLFWErrorCallback} description string pointer to a {@link ByteBuffer}, with a capacity equal to the UTF-8 encoded string.
 	 * <p/>
-	 * This method may only be used inside a GLFWerrorfun invocation. If you wish to use the ByteBuffer after the callback returns, you need to make a copy.
+	 * This method may only be used inside a GLFWerrorCallback invocation. If you wish to use the ByteBuffer after the callback returns, you need to make a copy.
 	 *
 	 * @param description a pointer to the UTF-8 encoded description string
 	 *
@@ -176,9 +176,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Converts the specified {@link GLFWerrorfun} description string pointer to a String.
+	 * Converts the specified {@link GLFWErrorCallback} description string pointer to a String.
 	 * <p/>
-	 * This method may only be used inside a GLFWerrorfun invocation.
+	 * This method may only be used inside a GLFWerrorCallback invocation.
 	 *
 	 * @param description a pointer to the UTF-8 encoded description string
 	 *
@@ -189,9 +189,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Converts the specified {@link GLFWdropfun} arguments to a ByteBuffer array.
+	 * Converts the specified {@link GLFWDropCallback} arguments to a ByteBuffer array.
 	 * <p/>
-	 * This method may only be used inside a GLFWdropfun invocation. If you wish to use the array after the callback returns, you need to make a deep copy.
+	 * This method may only be used inside a GLFWdropCallback invocation. If you wish to use the array after the callback returns, you need to make a deep copy.
 	 *
 	 * @param count the number of dropped files
 	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
@@ -208,9 +208,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Converts the specified {@link GLFWdropfun} arguments to a String array.
+	 * Converts the specified {@link GLFWDropCallback} arguments to a String array.
 	 * <p/>
-	 * This method may only be used inside a GLFWdropfun invocation.
+	 * This method may only be used inside a GLFWdropCallback invocation.
 	 *
 	 * @param count the number of dropped files
 	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
@@ -237,9 +237,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Applies the specified {@link DropConsumerBuffer} to the specified {@link GLFWdropfun} arguments.
+	 * Applies the specified {@link DropConsumerBuffer} to the specified {@link GLFWDropCallback} arguments.
 	 * <p/>
-	 * This method may only be used inside a GLFWdropfun invocation.
+	 * This method may only be used inside a GLFWdropCallback invocation.
 	 *
 	 * @param count    the number of dropped files
 	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
@@ -251,9 +251,9 @@ public final class Callbacks {
 	}
 
 	/**
-	 * Applies the specified {@link DropConsumerString} to the specified {@link GLFWdropfun} arguments.
+	 * Applies the specified {@link DropConsumerString} to the specified {@link GLFWDropCallback} arguments.
 	 * <p/>
-	 * This method may only be used inside a GLFWdropfun invocation.
+	 * This method may only be used inside a GLFWdropCallback invocation.
 	 *
 	 * @param count    the number of dropped files
 	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files

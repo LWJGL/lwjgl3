@@ -4,8 +4,8 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.glfw.GLFWerrorfun;
-import org.lwjgl.glfw.GLFWkeyfun;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 
@@ -35,7 +35,7 @@ public final class Threads {
 	}
 
 	public static void main(String[] args) {
-		GLFWerrorfun errorfun = errorfunPrint(System.err);
+		GLFWErrorCallback errorfun = errorfunPrint(System.err);
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Failed to initialize GLFW.");
@@ -50,8 +50,8 @@ public final class Threads {
 			if ( window == NULL )
 				throw new IllegalStateException("Failed to create GLFW window.");
 
-			GLFWkeyfun keyfun;
-			glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
+			GLFWKeyCallback keyfun;
+			glfwSetKeyCallback(window, keyfun = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
@@ -96,15 +96,16 @@ public final class Threads {
 
 	private static class GLFWThread extends Thread {
 
-		final long       window;
-		final GLFWkeyfun keyfun;
+		final long window;
+
+		final GLFWKeyCallback keyfun;
 
 		final int   index;
 		final float r, g, b;
 
 		CountDownLatch quit;
 
-		GLFWThread(long window, GLFWkeyfun keyfun, int index, CountDownLatch quit) {
+		GLFWThread(long window, GLFWKeyCallback keyfun, int index, CountDownLatch quit) {
 			this.window = window;
 			this.keyfun = keyfun;
 

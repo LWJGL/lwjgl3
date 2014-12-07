@@ -5,9 +5,9 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFWerrorfun;
-import org.lwjgl.glfw.GLFWkeyfun;
-import org.lwjgl.glfw.GLFWwindowsizefun;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.glfw.GLFWWindowSizeCallback;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
@@ -36,7 +36,7 @@ public final class WGLInterop {
 	}
 
 	public static void main(String[] args) {
-		GLFWerrorfun errorfun;
+		GLFWErrorCallback errorfun;
 		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
@@ -63,8 +63,8 @@ public final class WGLInterop {
 		final AtomicInteger windowWidth = new AtomicInteger(640);
 		final AtomicInteger windowHeight = new AtomicInteger(480);
 
-		GLFWwindowsizefun windowsizefun;
-		glfwSetWindowSizeCallback(window, windowsizefun = new GLFWwindowsizefun() {
+		GLFWWindowSizeCallback windowsizefun;
+		glfwSetWindowSizeCallback(window, windowsizefun = new GLFWWindowSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
 				windowWidth.set(width);
@@ -72,8 +72,8 @@ public final class WGLInterop {
 			}
 		});
 
-		GLFWkeyfun keyfun;
-		glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
+		GLFWKeyCallback keyfun;
+		glfwSetKeyCallback(window, keyfun = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )

@@ -309,7 +309,7 @@ val PDISPLAY_DEVICE = StructType(
 )
 
 val GOBJENUMPROC = CallbackType(callback(
-	WINDOWS_PACKAGE, int, "EnumObjectsProc",
+	WINDOWS_PACKAGE, int, "EnumObjectsCallback",
 	"Will be called for each available object.",
 	LPVOID.IN("logObject", "a pointer to a {@link LOGPEN} or {@link LOGBRUSH} structure describing the attributes of the object"),
 	LPARAM.IN("data", "a pointer to the application-defined data passed by the WinGDI##EnumObjects() function"),

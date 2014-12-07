@@ -74,7 +74,7 @@ val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping
 
 // AMD_debug_output
 val GLDEBUGPROCAMD = CallbackType(callback(
-	OPENGL_PACKAGE, void, "DEBUGPROCAMD",
+	OPENGL_PACKAGE, void, "GLDebugMessageAMDCallback",
 	"Will be called when a debug message is generated.",
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("category", "the message category"),
@@ -89,7 +89,7 @@ val GLDEBUGPROCAMD = CallbackType(callback(
 }, "GLDEBUGPROCAMD")
 // ARB_debug_output
 val GLDEBUGPROCARB = CallbackType(callback(
-	OPENGL_PACKAGE, void, "DEBUGPROCARB",
+	OPENGL_PACKAGE, void, "GLDebugMessageARBCallback",
 	"Will be called when a debug message is generated.",
 	GLenum.IN("source", "the message source"),
 	GLenum.IN("type", "the message type"),
@@ -112,7 +112,7 @@ val GLhandleARB_p = PointerType(GLhandleARB)
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
 // KHR_debug
 val GLDEBUGPROC = CallbackType(callback(
-	OPENGL_PACKAGE, void, "DEBUGPROC",
+	OPENGL_PACKAGE, void, "GLDebugMessageCallback",
 	"Will be called when a debug message is generated.",
 	GLenum.IN("source", "the message source"),
 	GLenum.IN("type", "the message type"),

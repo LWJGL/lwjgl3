@@ -158,28 +158,28 @@ public abstract class GLContext implements Pointer {
 	public Closure setupDebugMessageCallback(PrintStream stream) {
 		if ( capabilities.OpenGL43 ) {
 			log("[GL] Using OpenGL 4.3 for error logging.");
-			DEBUGPROC proc = createDEBUGPROC(stream);
+			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			glDebugMessageCallback(proc, NULL);
 			return proc;
 		}
 
 		if ( capabilities.GL_KHR_debug ) {
 			log("[GL] Using KHR_debug for error logging.");
-			DEBUGPROC proc = createDEBUGPROC(stream);
+			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			KHRDebug.glDebugMessageCallback(proc, NULL);
 			return proc;
 		}
 
 		if ( capabilities.GL_ARB_debug_output ) {
 			log("[GL] Using ARB_debug_output for error logging.");
-			DEBUGPROCARB proc = createDEBUGPROCARB(stream);
+			GLDebugMessageARBCallback proc = createDEBUGPROCARB(stream);
 			glDebugMessageCallbackARB(proc, NULL);
 			return proc;
 		}
 
 		if ( capabilities.GL_AMD_debug_output ) {
 			log("[GL] Using AMD_debug_output for error logging.");
-			DEBUGPROCAMD proc = createDEBUGPROCAMD(stream);
+			GLDebugMessageAMDCallback proc = createDEBUGPROCAMD(stream);
 			glDebugMessageCallbackAMD(proc, NULL);
 			return proc;
 		}
@@ -192,8 +192,8 @@ public abstract class GLContext implements Pointer {
 		stream.printf("\t%s: %s\n", type, message);
 	}
 
-	private static DEBUGPROC createDEBUGPROC(final PrintStream stream) {
-		return new DEBUGPROC() {
+	private static GLDebugMessageCallback createDEBUGPROC(final PrintStream stream) {
+		return new GLDebugMessageCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
 				stream.println("[LWJGL] OpenGL debug message");
@@ -261,8 +261,8 @@ public abstract class GLContext implements Pointer {
 		};
 	}
 
-	private static DEBUGPROCARB createDEBUGPROCARB(final PrintStream stream) {
-		return new DEBUGPROCARB() {
+	private static GLDebugMessageARBCallback createDEBUGPROCARB(final PrintStream stream) {
+		return new GLDebugMessageARBCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
 				stream.println("[LWJGL] ARB_debug_output message");
@@ -326,8 +326,8 @@ public abstract class GLContext implements Pointer {
 		};
 	}
 
-	private static DEBUGPROCAMD createDEBUGPROCAMD(final PrintStream stream) {
-		return new DEBUGPROCAMD() {
+	private static GLDebugMessageAMDCallback createDEBUGPROCAMD(final PrintStream stream) {
+		return new GLDebugMessageAMDCallback() {
 			@Override
 			public void invoke(int id, int category, int severity, int length, long message, long userParam) {
 				stream.println("[LWJGL] AMD_debug_output message");

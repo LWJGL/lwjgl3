@@ -4,9 +4,9 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.glfw.GLFWcursorenterfun;
-import org.lwjgl.glfw.GLFWerrorfun;
-import org.lwjgl.glfw.GLFWkeyfun;
+import org.lwjgl.glfw.GLFWCursorEnterCallback;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 
@@ -24,7 +24,7 @@ public final class MultipleWindows {
 	}
 
 	public static void main(String[] args) {
-		GLFWerrorfun errorfun = errorfunPrint(System.err);
+		GLFWErrorCallback errorfun = errorfunPrint(System.err);
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
@@ -54,7 +54,7 @@ public final class MultipleWindows {
 
 			Window window = new Window(handle);
 
-			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWcursorenterfun() {
+			glfwSetCursorEnterCallback(handle, window.cursorenterfun = new GLFWCursorEnterCallback() {
 				@Override
 				public void invoke(long window, int entered) {
 					if ( entered == GL_TRUE )
@@ -62,7 +62,7 @@ public final class MultipleWindows {
 				}
 			});
 
-			glfwSetKeyCallback(handle, window.keyfun = new GLFWkeyfun() {
+			glfwSetKeyCallback(handle, window.keyfun = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
@@ -116,8 +116,8 @@ public final class MultipleWindows {
 
 		GLContext context;
 
-		GLFWcursorenterfun cursorenterfun;
-		GLFWkeyfun         keyfun;
+		GLFWCursorEnterCallback cursorenterfun;
+		GLFWKeyCallback         keyfun;
 
 		Window(long handle) {
 			this.handle = handle;

@@ -16,7 +16,7 @@ public class WinGDITest {
 
 	public void testEnumObjects() {
 		long dc = GetDC(0);
-		EnumObjects(dc, OBJ_BRUSH, new EnumObjectsProc() {
+		EnumObjects(dc, OBJ_BRUSH, new EnumObjectsCallback() {
 			@Override
 			public int invoke(long logObject, long data) {
 				assertTrue(logObject != 0L);

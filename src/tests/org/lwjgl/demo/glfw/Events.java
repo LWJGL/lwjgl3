@@ -76,63 +76,63 @@ public final class Events {
 			}
 		}
 
-		glfwSetMonitorCallback(new GLFWmonitorfun() {
+		glfwSetMonitorCallback(new GLFWMonitorCallback() {
 			@Override
 			public void invoke(long monitor, int event) {
 				printEvent("Monitor", "[0x%X] %s", monitor, event == GLFW_CONNECTED ? "connected" : "disconnected");
 			}
 		});
 
-		glfwSetWindowPosCallback(window, new GLFWwindowposfun() {
+		glfwSetWindowPosCallback(window, new GLFWWindowPosCallback() {
 			@Override
 			public void invoke(long window, int xpos, int ypos) {
 				printEvent("moved to %d, %d", window, xpos, ypos);
 			}
 		});
 
-		glfwSetWindowSizeCallback(window, new GLFWwindowsizefun() {
+		glfwSetWindowSizeCallback(window, new GLFWWindowSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
 				printEvent("resized to %d x %d", window, width, height);
 			}
 		});
 
-		glfwSetWindowCloseCallback(window, new GLFWwindowclosefun() {
+		glfwSetWindowCloseCallback(window, new GLFWWindowCloseCallback() {
 			@Override
 			public void invoke(long window) {
 				printEvent("closed", window);
 			}
 		});
 
-		glfwSetWindowRefreshCallback(window, new GLFWwindowrefreshfun() {
+		glfwSetWindowRefreshCallback(window, new GLFWWindowRefreshCallback() {
 			@Override
 			public void invoke(long window) {
 				printEvent("refreshed", window);
 			}
 		});
 
-		glfwSetWindowFocusCallback(window, new GLFWwindowfocusfun() {
+		glfwSetWindowFocusCallback(window, new GLFWWindowFocusCallback() {
 			@Override
 			public void invoke(long window, int focused) {
 				printEvent(focused == 0 ? "lost focus" : "gained focus", window);
 			}
 		});
 
-		glfwSetWindowIconifyCallback(window, new GLFWwindowiconifyfun() {
+		glfwSetWindowIconifyCallback(window, new GLFWWindowIconifyCallback() {
 			@Override
 			public void invoke(long window, int iconified) {
 				printEvent(iconified == 0 ? "restored" : "iconified", window);
 			}
 		});
 
-		glfwSetFramebufferSizeCallback(window, new GLFWframebuffersizefun() {
+		glfwSetFramebufferSizeCallback(window, new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
 				printEvent("framebuffer resized to %d x %d", window, width, height);
 			}
 		});
 
-		glfwSetKeyCallback(window, new GLFWkeyfun() {
+		glfwSetKeyCallback(window, new GLFWKeyCallback() {
 			private final Map<Integer, String> KEY_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
 				@Override
 				public boolean accept(Field field, int value) {
@@ -164,21 +164,21 @@ public final class Events {
 			}
 		});
 
-		glfwSetCharCallback(window, new GLFWcharfun() {
+		glfwSetCharCallback(window, new GLFWCharCallback() {
 			@Override
 			public void invoke(long window, int codepoint) {
 				printEvent("char %s", window, Character.toString((char)codepoint));
 			}
 		});
 
-		glfwSetCharModsCallback(window, new GLFWcharmodsfun() {
+		glfwSetCharModsCallback(window, new GLFWCharModsCallback() {
 			@Override
 			public void invoke(long window, int codepoint, int mods) {
 				printEvent("char mods %s%s", window, getModState(mods), Character.toString((char)codepoint));
 			}
 		});
 
-		glfwSetMouseButtonCallback(window, new GLFWmousebuttonfun() {
+		glfwSetMouseButtonCallback(window, new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
 				String state;
@@ -196,28 +196,28 @@ public final class Events {
 			}
 		});
 
-		glfwSetCursorPosCallback(window, new GLFWcursorposfun() {
+		glfwSetCursorPosCallback(window, new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
 				printEvent("cursor moved to %f, %f", window, xpos, ypos);
 			}
 		});
 
-		glfwSetCursorEnterCallback(window, new GLFWcursorenterfun() {
+		glfwSetCursorEnterCallback(window, new GLFWCursorEnterCallback() {
 			@Override
 			public void invoke(long window, int entered) {
 				printEvent("cursor %s", window, entered == 0 ? "left" : "entered");
 			}
 		});
 
-		glfwSetScrollCallback(window, new GLFWscrollfun() {
+		glfwSetScrollCallback(window, new GLFWScrollCallback() {
 			@Override
 			public void invoke(long window, double xoffset, double yoffset) {
 				printEvent("scroll by %f, %f", window, xoffset, yoffset);
 			}
 		});
 
-		glfwSetDropCallback(window, new GLFWdropfun() {
+		glfwSetDropCallback(window, new GLFWDropCallback() {
 			@Override
 			public void invoke(long window, int count, long names) {
 				printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");

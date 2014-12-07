@@ -371,7 +371,7 @@ public class Mandelbrot {
 
 		setKernelConstants();
 
-		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = new GLFWwindowsizefun() {
+		glfwSetWindowSizeCallback(window.handle, window.windowsizefun = new GLFWWindowSizeCallback() {
 			@Override
 			public void invoke(long window, final int width, final int height) {
 				if ( width == 0 || height == 0 )
@@ -389,7 +389,7 @@ public class Mandelbrot {
 			}
 		});
 
-		glfwSetKeyCallback(window.handle, window.keyfun = new GLFWkeyfun() {
+		glfwSetKeyCallback(window.handle, window.keyfun = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				switch ( key ) {
@@ -430,7 +430,7 @@ public class Mandelbrot {
 			}
 		});
 
-		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = new GLFWmousebuttonfun() {
+		glfwSetMouseButtonCallback(window.handle, window.mousebuttonfun = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
 				if ( button != GLFW_MOUSE_BUTTON_LEFT )
@@ -450,7 +450,7 @@ public class Mandelbrot {
 			}
 		});
 
-		glfwSetCursorPosCallback(window.handle, window.cursorposfun = new GLFWcursorposfun() {
+		glfwSetCursorPosCallback(window.handle, window.cursorposfun = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
 				mouseX = xpos;
@@ -463,7 +463,7 @@ public class Mandelbrot {
 			}
 		});
 
-		glfwSetScrollCallback(window.handle, window.scrollfun = new GLFWscrollfun() {
+		glfwSetScrollCallback(window.handle, window.scrollfun = new GLFWScrollCallback() {
 			@Override
 			public void invoke(long window, double xoffset, double yoffset) {
 				if ( yoffset == 0 )

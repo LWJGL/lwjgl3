@@ -87,7 +87,7 @@ public final class CLGLInteropDemo {
 	public static void main(String... args) {
 		parseArgs(args);
 
-		GLFWerrorfun errorfun;
+		GLFWErrorCallback errorfun;
 		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
 		if ( glfwInit() != GL_TRUE ) {
 			System.out.println("Unable to initialize glfw");
@@ -278,11 +278,11 @@ public final class CLGLInteropDemo {
 		/** Used to signal that the rendering thread has completed. */
 		final CountDownLatch signal;
 
-		GLFWwindowsizefun  windowsizefun;
-		GLFWkeyfun         keyfun;
-		GLFWmousebuttonfun mousebuttonfun;
-		GLFWcursorposfun   cursorposfun;
-		GLFWscrollfun      scrollfun;
+		GLFWWindowSizeCallback  windowsizefun;
+		GLFWKeyCallback         keyfun;
+		GLFWMouseButtonCallback mousebuttonfun;
+		GLFWCursorPosCallback   cursorposfun;
+		GLFWScrollCallback      scrollfun;
 
 		private GLFWWindow(long handle, String ID, CountDownLatch signal) {
 			this.handle = handle;

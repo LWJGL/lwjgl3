@@ -5,8 +5,8 @@
 package org.lwjgl.demo.glfw;
 
 import org.lwjgl.demo.opengl.AbstractGears;
-import org.lwjgl.glfw.GLFWerrorfun;
-import org.lwjgl.glfw.GLFWkeyfun;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -22,8 +22,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** The Gears demo implemented using GLFW. */
 public class Gears extends AbstractGears {
 
-	private GLFWerrorfun errorfun;
-	private GLFWkeyfun   keyfun;
+	private GLFWErrorCallback errorfun;
+	private GLFWKeyCallback   keyfun;
 
 	private Closure debugProc;
 
@@ -57,7 +57,7 @@ public class Gears extends AbstractGears {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetKeyCallback(window, keyfun = new GLFWkeyfun() {
+		glfwSetKeyCallback(window, keyfun = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
 				if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
