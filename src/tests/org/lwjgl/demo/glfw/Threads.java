@@ -35,7 +35,7 @@ public final class Threads {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorfun = errorfunPrint(System.err);
+		GLFWErrorCallback errorfun = errorCallbackPrint(System.err);
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Failed to initialize GLFW.");

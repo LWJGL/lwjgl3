@@ -37,7 +37,7 @@ public final class WGLInterop {
 
 	public static void main(String[] args) {
 		GLFWErrorCallback errorfun;
-		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
+		glfwSetErrorCallback(errorfun = errorCallbackPrint(System.err));
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
 

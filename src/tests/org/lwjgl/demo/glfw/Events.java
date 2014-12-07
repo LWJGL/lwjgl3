@@ -34,7 +34,7 @@ public final class Events {
 			"org.lwjgl.demo.util.ClosureGC"
 		);
 
-		glfwSetErrorCallback(errorfunPrint(System.out));
+		glfwSetErrorCallback(errorCallbackPrint(System.out));
 
 		System.out.println("---- [ Error callback test ] ----");
 		glfwDefaultWindowHints();
@@ -222,7 +222,7 @@ public final class Events {
 			public void invoke(long window, int count, long names) {
 				printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
 
-				dropfunNamesApply(count, names, new DropConsumerString() {
+				dropCallbackNamesApply(count, names, new DropConsumerString() {
 					@Override
 					public void accept(int index, String name) {
 						System.out.format("\t%d: %s%n", index + 1, name);

@@ -112,8 +112,8 @@ public final class Callbacks {
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback errorfunPrint() {
-		return errorfunPrint(System.err);
+	public static GLFWErrorCallback errorCallbackPrint() {
+		return errorCallbackPrint(System.err);
 	}
 
 	/**
@@ -123,7 +123,7 @@ public final class Callbacks {
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback errorfunPrint(final PrintStream stream) {
+	public static GLFWErrorCallback errorCallbackPrint(final PrintStream stream) {
 		return new GLFWErrorCallback() {
 			private final Map<Integer, String> ERROR_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
 				@Override
@@ -134,7 +134,7 @@ public final class Callbacks {
 
 			@Override
 			public void invoke(int error, long description) {
-				String msg = errorfunDescriptionString(description);
+				String msg = errorCallbackDescriptionString(description);
 
 				stream.printf("[LWJGL] %s error\n", ERROR_CODES.get(error));
 				stream.println("\tDescription : " + msg);
@@ -153,11 +153,11 @@ public final class Callbacks {
 	 *
 	 * @return the GLFWerrorCallback
 	 */
-	public static GLFWErrorCallback errorfunThrow() {
+	public static GLFWErrorCallback errorCallbackThrow() {
 		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
-				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, errorfunDescriptionString(description)));
+				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, errorCallbackDescriptionString(description)));
 			}
 		};
 	}
@@ -165,13 +165,14 @@ public final class Callbacks {
 	/**
 	 * Converts the specified {@link GLFWErrorCallback} description string pointer to a {@link ByteBuffer}, with a capacity equal to the UTF-8 encoded string.
 	 * <p/>
-	 * This method may only be used inside a GLFWerrorCallback invocation. If you wish to use the ByteBuffer after the callback returns, you need to make a copy.
+	 * This method may only be used inside a GLFWerrorCallback invocation. If you wish to use the ByteBuffer after the callback returns, you need to make a
+	 * copy.
 	 *
 	 * @param description a pointer to the UTF-8 encoded description string
 	 *
 	 * @return the description string, as a ByteBuffer
 	 */
-	public static ByteBuffer errorfunDescriptionBuffer(long description) {
+	public static ByteBuffer errorCallbackDescriptionBuffer(long description) {
 		return memByteBufferNT1(description);
 	}
 
@@ -184,21 +185,22 @@ public final class Callbacks {
 	 *
 	 * @return the description string
 	 */
-	public static String errorfunDescriptionString(long description) {
+	public static String errorCallbackDescriptionString(long description) {
 		return memDecodeUTF8(description);
 	}
 
 	/**
 	 * Converts the specified {@link GLFWDropCallback} arguments to a ByteBuffer array.
 	 * <p/>
-	 * This method may only be used inside a GLFWdropCallback invocation. If you wish to use the array after the callback returns, you need to make a deep copy.
+	 * This method may only be used inside a GLFWdropCallback invocation. If you wish to use the array after the callback returns, you need to make a deep
+	 * copy.
 	 *
 	 * @param count the number of dropped files
 	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
 	 *
 	 * @return the array of names, as ByteBuffers
 	 */
-	public static ByteBuffer[] dropfunNamesBuffer(int count, long names) {
+	public static ByteBuffer[] dropCallbackNamesBuffer(int count, long names) {
 		ByteBuffer[] buffers = new ByteBuffer[count];
 
 		for ( int i = 0; i < count; i++ )
@@ -217,7 +219,7 @@ public final class Callbacks {
 	 *
 	 * @return the array of names, as Strings
 	 */
-	public static String[] dropfunNamesString(int count, long names) {
+	public static String[] dropCallbackNamesString(int count, long names) {
 		String[] strings = new String[count];
 
 		for ( int i = 0; i < count; i++ )
@@ -226,12 +228,12 @@ public final class Callbacks {
 		return strings;
 	}
 
-	/** A functional interface that can be used with {@link #dropfunNamesApply(int, long, DropConsumerBuffer) dropfunNamesApply}. */
+	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerBuffer) dropfunNamesApply}. */
 	public interface DropConsumerBuffer {
 		void accept(int index, ByteBuffer name);
 	}
 
-	/** A functional interface that can be used with {@link #dropfunNamesApply(int, long, DropConsumerString) dropfunNamesApply}. */
+	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerString) dropfunNamesApply}. */
 	public interface DropConsumerString {
 		void accept(int index, String name);
 	}
@@ -245,7 +247,7 @@ public final class Callbacks {
 	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
 	 * @param consumer the DropConsumerBuffer to apply
 	 */
-	public static void dropfunNamesApply(int count, long names, DropConsumerBuffer consumer) {
+	public static void dropCallbackNamesApply(int count, long names, DropConsumerBuffer consumer) {
 		for ( int i = 0; i < count; i++ )
 			consumer.accept(i, memByteBufferNT1(memGetAddress(names + POINTER_SIZE * i)));
 	}
@@ -259,7 +261,7 @@ public final class Callbacks {
 	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
 	 * @param consumer the DropConsumerString to apply
 	 */
-	public static void dropfunNamesApply(int count, long names, DropConsumerString consumer) {
+	public static void dropCallbackNamesApply(int count, long names, DropConsumerString consumer) {
 		for ( int i = 0; i < count; i++ )
 			consumer.accept(i, memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i)));
 	}

@@ -35,7 +35,7 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void init() {
-		glfwSetErrorCallback(errorfun = errorfunPrint(System.err));
+		glfwSetErrorCallback(errorfun = errorCallbackPrint(System.err));
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 

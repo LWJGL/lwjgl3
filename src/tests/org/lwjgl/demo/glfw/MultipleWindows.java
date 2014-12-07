@@ -24,7 +24,7 @@ public final class MultipleWindows {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorfun = errorfunPrint(System.err);
+		GLFWErrorCallback errorfun = errorCallbackPrint(System.err);
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");
