@@ -228,12 +228,12 @@ public final class Callbacks {
 		return strings;
 	}
 
-	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerBuffer) dropfunNamesApply}. */
+	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerBuffer) dropCallbackNamesApply}. */
 	public interface DropConsumerBuffer {
 		void accept(int index, ByteBuffer name);
 	}
 
-	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerString) dropfunNamesApply}. */
+	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerString) dropCallbackNamesApply}. */
 	public interface DropConsumerString {
 		void accept(int index, String name);
 	}
