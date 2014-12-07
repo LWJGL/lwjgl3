@@ -1062,7 +1062,7 @@ class NativeClassFunction(
 				print(", ")
 			val mapPointerExplicit = returnTransform as MapPointerExplicitTransform
 			if ( mapPointerExplicit.addParam )
-				print("int ${mapPointerExplicit.lengthParam}, ")
+				print("long ${mapPointerExplicit.lengthParam}, ")
 			print("ByteBuffer old_buffer")
 		}
 		println(") {")
