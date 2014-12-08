@@ -22,6 +22,7 @@ public class TemplateFormatter {
 
 	final JRadioButton radioConst;
 	final JRadioButton radioFunc;
+	final JRadioButton radioDoc;
 
 	final JTextField prefix;
 
@@ -41,6 +42,7 @@ public class TemplateFormatter {
 
 		radioConst = new JRadioButton("Constants", true);
 		radioFunc = new JRadioButton("Functions");
+		radioDoc = new JRadioButton("Documentation");
 
 		prefix = new JTextField("GL", 4);
 
@@ -48,10 +50,12 @@ public class TemplateFormatter {
 
 		radioGroup.add(radioConst);
 		radioGroup.add(radioFunc);
+		radioGroup.add(radioDoc);
 
 		JPanel radioPane = new JPanel(new FlowLayout());
 		radioPane.add(radioConst);
 		radioPane.add(radioFunc);
+		radioPane.add(radioDoc);
 		radioPane.add(new JLabel("Prefix:"));
 		radioPane.add(prefix);
 
@@ -130,6 +134,7 @@ public class TemplateFormatter {
 
 		radioConst.addActionListener(settingsAction);
 		radioFunc.addActionListener(settingsAction);
+		radioDoc.addActionListener(settingsAction);
 
 		prefix.addActionListener(settingsAction);
 	}
@@ -143,27 +148,34 @@ public class TemplateFormatter {
 		}
 
 		try {
-			String outputText = radioConst.isSelected() ? formatConstants(inputText, prefix.getText()) : formatFunctions(inputText, prefix.getText());
+			String outputText;
+			if ( !radioDoc.isSelected() ) {
+				outputText = radioConst.isSelected()
+					? formatConstants(inputText, prefix.getText())
+					: formatFunctions(inputText, prefix.getText());
 
-			// Try to automatically detect the input type
-			if ( outputText.isEmpty() ) {
-				outputText = radioConst.isSelected() ? formatFunctions(inputText, prefix.getText()) : formatConstants(inputText, prefix.getText());
-				// Got it, flip the selection
-				if ( !outputText.isEmpty() )
-					(radioConst.isSelected() ? radioFunc : radioConst).setSelected(true);
-			}
+				// Try to automatically detect the input type
+				if ( outputText.isEmpty() ) {
+					outputText = radioConst.isSelected()
+						? formatFunctions(inputText, prefix.getText())
+						: formatConstants(inputText, prefix.getText());
 
-			if ( outputText.isEmpty() ) {
-				output.setBackground(Color.ORANGE);
-				output.setText("** PARSE ERROR **");
+					// Got it, flip the selection
+					if ( !outputText.isEmpty() )
+						(radioConst.isSelected() ? radioFunc : radioConst).setSelected(true);
+					else
+						outputText = formatDocumentation(inputText);
+				}
 			} else {
-				output.setBackground(Color.WHITE);
-				output.setText(outputText);
-
-				// Copy output to clipboard
-				//final StringSelection copyData = new StringSelection(outputText);
-				//Toolkit.getDefaultToolkit().getSystemClipboard().setContents(copyData, copyData);
+				outputText = formatDocumentation(inputText);
 			}
+
+			output.setBackground(Color.WHITE);
+			output.setText(outputText);
+
+			// Copy output to clipboard
+			//final StringSelection copyData = new StringSelection(outputText);
+			//Toolkit.getDefaultToolkit().getSystemClipboard().setContents(copyData, copyData);
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -359,8 +371,8 @@ public class TemplateFormatter {
 						writerPointer(builder, paramMatcher);
 						builder.append(
 							paramMatcher.group(1) != null // const
-							? ".IN(\""
-							: ".OUT(\""
+								? ".IN(\""
+								: ".OUT(\""
 						);
 					} else
 						builder.append(".IN(\"");
@@ -379,6 +391,42 @@ public class TemplateFormatter {
 		builder.append('_');
 		for ( int i = 0; i < paramMatcher.group(4).length(); i++ )
 			builder.append('p');
+	}
+
+	// ---[ DOCUMENTATION FORMATTING ]----
+
+	private static final Pattern PARAGRAPH  = Pattern.compile("\\n(\\s*\\n)+\\s*");
+	private static final Pattern WHITESPACE = Pattern.compile("\\s+|$");
+
+	private static String formatDocumentation(String input) {
+		StringBuilder builder = new StringBuilder(input.length());
+
+		String[] paragraphs = PARAGRAPH.split(input);
+		for ( String paragraph : paragraphs ) {
+			if ( builder.length() != 0 )
+				builder.append("\n\n");
+
+			Matcher matcher = WHITESPACE.matcher(paragraph);
+
+			int lineLen = 8;
+			int lastMatch = 0;
+			while ( matcher.find() ) {
+				int wordLen = matcher.start() - lastMatch;
+
+				if ( 160 < lineLen + wordLen + 1 ) {
+					builder.append("\n");
+					lineLen = 8;
+				}
+
+				builder.append(lineLen == 8 ? "\t\t" : " ");
+				builder.append(paragraph, lastMatch, matcher.start());
+
+				lineLen += wordLen + 1;
+				lastMatch = matcher.end();
+			}
+		}
+
+		return builder.toString();
 	}
 
 }
