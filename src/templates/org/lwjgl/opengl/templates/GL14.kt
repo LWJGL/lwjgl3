@@ -353,8 +353,8 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"SecondaryColorPointer",
 		"Specifies the location and organization of a secondary color array.",
 
-		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 GL12#BGRA"),
-		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
+		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3"),
+		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"""

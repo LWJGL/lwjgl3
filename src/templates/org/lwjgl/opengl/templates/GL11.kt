@@ -1221,7 +1221,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 4 GL12#BGRA"),
 		// Removed GL_DOUBLE
-		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
