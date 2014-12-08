@@ -538,6 +538,136 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 	)
 }
 
+val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed_depth_stencil", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Many OpenGL implementations have chosen to interleave the depth and stencil buffers into one buffer, often with 24 bits of depth precision and 8 bits
+		of stencil data. 32 bits is more than is needed for the depth buffer much of the time; a 24-bit depth buffer, on the other hand, requires that reads
+		and writes of depth data be unaligned with respect to power-of-two boundaries. On the other hand, 8 bits of stencil data is more than sufficient for
+		most applications, so it is only natural to pack the two buffers into a single buffer with both depth and stencil data. OpenGL never provides direct
+		access to the buffers, so the OpenGL implementation can provide an interface to applications where it appears the one merged buffer is composed of two
+		logical buffers.
+
+		One disadvantage of this scheme is that OpenGL lacks any means by which this packed data can be handled efficiently. For example, when an application
+		reads from the 24-bit depth buffer, using the type GL_UNSIGNED_SHORT will lose 8 bits of data, while GL_UNSIGNED_INT has 8 too many. Both require
+		expensive format conversion operations. A 24-bit format would be no more suitable, because it would also suffer from the unaligned memory accesses that
+		made the standalone 24-bit depth buffer an unattractive proposition in the first place.
+
+		Many applications, such as parallel rendering applications, may also wish to draw to or read back from both the depth and stencil buffers at the same
+		time. Currently this requires two separate operations, reducing performance. Since the buffers are interleaved, drawing to or reading from both should
+		be no more expensive than using just one; in some cases, it may even be cheaper.
+
+		This extension provides a new data format, GL_DEPTH_STENCIL_EXT, that can be used with the glDrawPixels, glReadPixels, and glCopyPixels commands, as
+		well as a packed data type, GL_UNSIGNED_INT_24_8_EXT, that is meant to be used with GL_DEPTH_STENCIL_EXT. No other data types are supported with
+		GL_DEPTH_STENCIL_EXT. If ARB_depth_texture or SGIX_depth_texture is supported, GL_DEPTH_STENCIL_EXT/GL_UNSIGNED_INT_24_8_EXT data can also be used for
+		textures; this provides a more efficient way to supply data for a 24-bit depth texture.
+
+		GL_DEPTH_STENCIL_EXT data, when passed through the pixel path, undergoes both depth and stencil operations. The depth data is scaled and biased by the
+		current GL_DEPTH_SCALE and GL_DEPTH_BIAS, while the stencil data is shifted and offset by the current GL_INDEX_SHIFT and GL_INDEX_OFFSET. The stencil
+		data is also put through the stencil-to-stencil pixel map.
+
+		glDrawPixels of GL_DEPTH_STENCIL_EXT data operates similarly to that of GL_STENCIL_INDEX data, bypassing the OpenGL fragment pipeline entirely, unlike
+		the treatment of GL_DEPTH_COMPONENT data. The stencil and depth masks are applied, as are the pixel ownership and scissor tests, but all other
+		operations are skipped.
+
+		glReadPixels of GL_DEPTH_STENCIL_EXT data reads back a rectangle from both the depth and stencil buffers.
+
+		glCopyPixels of GL_DEPTH_STENCIL_EXT data copies a rectangle from both the depth and stencil buffers. Like glDrawPixels, it applies both the stencil
+		and depth masks but skips the remainder of the OpenGL fragment pipeline.
+
+		glTex[Sub]Image[1,2,3]D of GL_DEPTH_STENCIL_EXT data loads depth and stencil data into a depth_stencil texture. glGetTexImage of GL_DEPTH_STENCIL_EXT
+		data can be used to retrieve depth and stencil data from a depth/stencil texture.
+
+		In addition, a new base internal format, GL_DEPTH_STENCIL_EXT, can be used by both texture images and renderbuffer storage. When an image with a
+		DEPTH_STENCIL_EXT internal format is attached to both the depth and stencil attachment points of a framebuffer object (see EXT_framebuffer_object),
+		then it becomes both the depth and stencil buffers of the framebuffer. This fits nicely with hardware that interleaves both depth and stencil data into
+		a single buffer. When a texture with DEPTH_STENCIL_EXT data is bound for texturing, only the depth component is accessible through the texture fetcher.
+		The stencil data can be written with TexImage or CopyTexImage, and can be read with GetTexImage. When a DEPTH_STENCIL_EXT image is attached to the
+		stencil attachment of the bound framebuffer object, the stencil data can be accessed through any operation that reads from or writes to the
+		framebuffer's stencil buffer.
+
+		Requires ${EXT_framebuffer_object.link}. ${GL30.promoted}
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
+		GetTexImage, by the {@code type} parameter of CopyPixels, by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D,
+		CopyTexImage2D, and RenderbufferStorageEXT, and returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
+		""",
+
+		"DEPTH_STENCIL_EXT" _ 0x84F9
+	)
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
+		GetTexImage.
+		""",
+
+		"UNSIGNED_INT_24_8_EXT" _ 0x84FA
+	)
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT, and
+		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
+		""",
+
+		"DEPTH24_STENCIL8_EXT" _ 0x88F0
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
+
+		"TEXTURE_STENCIL_SIZE_EXT" _ 0x88F1
+	)
+}
+
+val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension adds a new 3-component floating-point texture format that fits within a single 32-bit word. This format stores 5 bits of biased exponent
+		per component in the same manner as 16-bit floating-point formats, but rather than 10 mantissa bits, the red, green, and blue components have 6, 6, and
+		5 bits respectively. Each mantissa is assumed to have an implied leading one except in the denorm exponent case. There is no sign bit so only
+		non-negative values can be represented. Positive infinity, positive denorms, and positive NaN values are representable. The value of the fourth
+		component returned by a texture fetch is always 1.0.
+
+		This extension also provides support for rendering into an unsigned floating-point rendering format with the assumption that the texture format
+		described above could also be advertised as an unsigned floating-point format for rendering.
+
+		The extension also provides a pixel external format for specifying packed float values directly.
+
+		${GL30.promoted}
+		"""
+
+	IntConstant.block(
+		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
+
+		"R11F_G11F_B10F_EXT" _ 0x8C3A
+	)
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
+		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
+		GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
+		""",
+
+		"UNSIGNED_INT_10F_11F_11F_REV_EXT" _ 0x8C3B
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
+
+		"RGBA_SIGNED_COMPONENTS_EXT" _ 0x8C3C
+	)
+}
+
 val EXT_point_parameters = "EXTPointParameters".nativeClassGL("EXT_point_parameters", postfix = EXT) {
 	nativeImport (
 		"OpenGL.h"
@@ -661,6 +791,68 @@ val EXT_stencil_wrap = "EXTStencilWrap".nativeClassGL("EXT_stencil_wrap", postfi
 	)
 }
 
+val EXT_texture_compression_latc = "EXTTextureCompressionLATC".nativeClassGL("EXT_texture_compression_latc", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+        This extension introduces four new block-based texture compression formats suited for unsigned and signed luminance and luminance-alpha textures (hence
+        the name "latc" for Luminance-Alpha Texture Compression).
+
+		These formats are designed to reduce the storage requirements and memory bandwidth required for luminance and luminance-alpha textures by a factor of
+		2-to-1 over conventional uncompressed luminance and luminance-alpha textures with 8-bit components (GL11#LUMINANCE8 and GL11#LUMINANCE8_ALPHA8).
+
+		The compressed signed luminance-alpha format is reasonably suited for storing compressed normal maps.
+
+		Requires ${GL13.core} or ${ARB_texture_compression.link}.
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
+		CompressedTexSubImage2D.
+		""",
+
+		"COMPRESSED_LUMINANCE_LATC1_EXT" _ 0x8C70,
+		"COMPRESSED_SIGNED_LUMINANCE_LATC1_EXT" _ 0x8C71,
+		"COMPRESSED_LUMINANCE_ALPHA_LATC2_EXT" _ 0x8C72,
+		"COMPRESSED_SIGNED_LUMINANCE_ALPHA_LATC2_EXT" _ 0x8C73
+	)
+}
+
+val EXT_texture_compression_rgtc = "EXTTextureCompressionRGTC".nativeClassGL("EXT_texture_compression_rgtc", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+        This extension introduces four new block-based texture compression formats suited for unsigned and signed red and red-green textures (hence the name
+        "rgtc" for Red-Green Texture Compression).
+
+		These formats are designed to reduce the storage requirements and memory bandwidth required for red and red-green textures by a factor of 2-to-1 over
+		conventional uncompressed luminance and luminance-alpha textures with 8-bit components (GL11#LUMINANCE8 and GL11#LUMINANCE8_ALPHA8).
+
+		The compressed signed red-green format is reasonably suited for storing compressed normal maps.
+
+		This extension uses the same compression format as the EXT_texture_compression_latc extension except the color data is stored in the red and green
+		components rather than luminance and alpha. Representing compressed red and green components is consistent with the BC4 and BC5 compressed formats
+		supported by DirectX 10.
+
+		Requires ${GL13.core} or ${ARB_texture_compression.link}.
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
+		CompressedTexSubImage2D.
+		""",
+
+		"COMPRESSED_RED_RGTC1_EXT" _ 0x8DBB,
+		"COMPRESSED_SIGNED_RED_RGTC1_EXT" _ 0x8DBC,
+		"COMPRESSED_RED_GREEN_RGTC2_EXT" _ 0x8DBD,
+		"COMPRESSED_SIGNED_RED_GREEN_RGTC2_EXT" _ 0x8DBE
+	)
+}
+
 val EXT_texture_compression_s3tc = "EXTTextureCompressionS3TC".nativeClassGL("EXT_texture_compression_s3tc", postfix = EXT) {
 	documentation =
 		"""
@@ -671,6 +863,8 @@ val EXT_texture_compression_s3tc = "EXTTextureCompressionS3TC".nativeClassGL("EX
 
 		This extension supports DXT1, DXT3, and DXT5 texture compression formats. For the DXT1 image format, this specification supports an RGB-only mode and a
 		special RGBA mode with single-bit "transparent" alpha.
+
+		Requires ${ARB_texture_compression.link}.
 		"""
 
 	IntConstant.block(
@@ -725,5 +919,119 @@ val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGL
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
 		"MAX_TEXTURE_MAX_ANISOTROPY_EXT" _ 0x84FF
+	)
+}
+
+val EXT_texture_mirror_clamp = "EXTTextureMirrorClamp".nativeClassGL("EXT_texture_mirror_clamp", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		EXT_texture_mirror_clamp extends the set of texture wrap modes to include three modes (#MIRROR_CLAMP_EXT, #MIRROR_CLAMP_TO_EDGE_EXT,
+		#MIRROR_CLAMP_TO_BORDER_EXT) that effectively use a texture map twice as large as the original image in which the additional half of the new image is
+		a mirror image of the original image.
+
+		This new mode relaxes the need to generate images whose opposite edges match by using the original image to generate a matching "mirror image". This
+		mode allows the texture to be mirrored only once in the negative s, t, and r directions.
+		"""
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
+		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
+		""",
+
+		"MIRROR_CLAMP_EXT" _ 0x8742,
+		"MIRROR_CLAMP_TO_EDGE_EXT" _ 0x8743,
+		"MIRROR_CLAMP_TO_BORDER_EXT" _ 0x8912
+	)
+}
+
+val EXT_texture_shared_exponent = "EXTTextureSharedExponent".nativeClassGL("EXT_texture_shared_exponent", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Existing texture formats provide either fixed-point formats with limited range and precision but with compact encodings (allowing 32 or fewer bits per
+		multi-component texel), or floating-point formats with tremendous range and precision but without compact encodings (typically 16 or 32 bits per
+		component).
+
+		This extension adds a new packed format and new internal texture format for encoding 3-component vectors (typically RGB colors) with a single 5-bit
+		exponent (biased up by 15) and three 9-bit mantissas for each respective component. There is no sign bit so all three components must be non-negative.
+		The fractional mantissas are stored without an implied 1 to the left of the decimal point. Neither infinity nor not-a-number (NaN) are representable in
+		this shared exponent format.
+
+		This 32 bits/texel shared exponent format is particularly well-suited to high dynamic range (HDR) applications where light intensity is typically stored
+		as non-negative red, green, and blue components with considerable range.
+
+		${GL30.promoted}
+		"""
+
+	IntConstant.block(
+		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
+
+		"RGB9_E5_EXT" _ 0x8C3D
+	)
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
+		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
+		GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
+		""",
+
+		"UNSIGNED_INT_5_9_9_9_REV_EXT" _ 0x8C3E
+	)
+
+	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
+
+		"TEXTURE_SHARED_SIZE_EXT" _ 0x8C3F
+	)
+}
+
+val EXT_texture_sRGB = "EXTTextureSRGB".nativeClassGL("EXT_texture_sRGB", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Conventional texture formats assume a linear color space.  So for a conventional internal texture format such as GL_RGB8, the 256 discrete values for
+		each 8-bit color component map linearly and uniformly to the [0,1] range.
+
+		The sRGB color space is based on typical (non-linear) monitor characteristics expected in a dimly lit office.  It has been standardized by the
+		International Electrotechnical Commission (IEC) as IEC 61966-2-1. The sRGB color space roughly corresponds to 2.2 gamma correction.
+
+		This extension adds a few new uncompressed and compressed color texture formats with sRGB color components.
+
+		${GL21.promoted}
+		"""
+
+	IntConstant.block(
+		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D.",
+
+		"SRGB_EXT" _ 0x8C40,
+		"SRGB8_EXT" _ 0x8C41,
+		"SRGB_ALPHA_EXT" _ 0x8C42,
+		"SRGB8_ALPHA8_EXT" _ 0x8C43,
+		"SLUMINANCE_ALPHA_EXT" _ 0x8C44,
+		"SLUMINANCE8_ALPHA8_EXT" _ 0x8C45,
+		"SLUMINANCE_EXT" _ 0x8C46,
+		"SLUMINANCE8_EXT" _ 0x8C47,
+		"COMPRESSED_SRGB_EXT" _ 0x8C48,
+		"COMPRESSED_SRGB_ALPHA_EXT" _ 0x8C49,
+		"COMPRESSED_SLUMINANCE_EXT" _ 0x8C4A,
+		"COMPRESSED_SLUMINANCE_ALPHA_EXT" _ 0x8C4B
+	)
+
+	IntConstant.block(
+		"""
+		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2DARB and the {@code format} parameter of
+		CompressedTexSubImage2DARB.
+		""",
+
+		"COMPRESSED_SRGB_S3TC_DXT1_EXT" _ 0x8C4C,
+		"COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT" _ 0x8C4D,
+		"COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT" _ 0x8C4E,
+		"COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT" _ 0x8C4F
 	)
 }

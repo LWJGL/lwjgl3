@@ -6,8 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
-import org.lwjgl.generator.opengl.BufferType.*
 
 val ARB_fragment_program = "ARBFragmentProgram".nativeClassGL("ARB_fragment_program", postfix = ARB) {
 	documentation =

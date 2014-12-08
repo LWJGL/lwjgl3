@@ -6,9 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
-import org.lwjgl.generator.opengl.BufferType.*
-import org.lwjgl.generator.opengl.deprecatedGL
 
 val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = ARB) {
 	nativeImport (

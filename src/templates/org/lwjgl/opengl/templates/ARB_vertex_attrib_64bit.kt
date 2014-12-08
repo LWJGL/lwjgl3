@@ -6,9 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
-import org.lwjgl.generator.opengl.BufferType.GL_DOUBLE
-import org.lwjgl.generator.opengl.ARRAY_BUFFER
 
 val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_attrib_64bit") {
 	nativeImport (
@@ -64,17 +61,17 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 	)
 
 	GL41 reuse "VertexAttribL1d"
-    GL41 reuse "VertexAttribL2d"
-    GL41 reuse "VertexAttribL3d"
-    GL41 reuse "VertexAttribL4d"
-    GL41 reuse "VertexAttribL1dv"
-    GL41 reuse "VertexAttribL2dv"
-    GL41 reuse "VertexAttribL3dv"
-    GL41 reuse "VertexAttribL4dv"
+	GL41 reuse "VertexAttribL2d"
+	GL41 reuse "VertexAttribL3d"
+	GL41 reuse "VertexAttribL4d"
+	GL41 reuse "VertexAttribL1dv"
+	GL41 reuse "VertexAttribL2dv"
+	GL41 reuse "VertexAttribL3dv"
+	GL41 reuse "VertexAttribL4dv"
 
-    GL41 reuse "VertexAttribLPointer"
+	GL41 reuse "VertexAttribLPointer"
 
-    GL41 reuse "GetVertexAttribLdv"
+	GL41 reuse "GetVertexAttribLdv"
 
 	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
 		"VertexArrayVertexAttribLOffsetEXT",
