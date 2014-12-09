@@ -749,9 +749,10 @@ class NativeClassFunction(
 
 		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.PTR } forEach {
 			transforms[it] = BufferOffsetTransform
-			customChecks add ("GLChecks.ensureBufferObject(${it[BufferObject].binding}, true);")
+			customChecks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, true);"
 			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks)
-			transforms.remove(it)
+			customChecks.clear()
+			transforms remove it
 		}
 
 		// Step 1: Apply basic transformations
@@ -775,6 +776,12 @@ class NativeClassFunction(
 					transforms[it] = ExpressionTransform(expression.value, expression.keepParam, [suppress("UNCHECKED_CAST")](transforms[it] as FunctionTransform<Parameter>?))
 				}
 			}
+		}
+
+		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.PTR }.map { it[BufferObject].binding } forEach {
+			val c = "GLChecks.ensureBufferObject($it, false);"
+			if ( !customChecks.contains(c) )
+				customChecks add c
 		}
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
@@ -867,7 +874,6 @@ class NativeClassFunction(
 				}
 			} else if ( it has MultiType ) {
 				// Generate MultiType alternatives
-				customChecks.clear()
 
 				// Add the AutoSize transformation if we skipped it above
 				getParams { it has AutoSize } forEach {
@@ -875,9 +881,6 @@ class NativeClassFunction(
 				}
 
 				val multiTypes = it[MultiType]
-				if ( it has BufferObject )
-					customChecks add ("GLChecks.ensureBufferObject(${it[BufferObject].binding}, false);")
-
 				for ( autoType in multiTypes.types ) {
 					// Transform the AutoSize parameter, if there is one and it's expressed in bytes
 					getParams {
@@ -914,12 +917,9 @@ class NativeClassFunction(
 				}
 			} else if ( it has AutoType ) {
 				// Generate AutoType alternatives
-				customChecks.clear()
 
 				val autoTypes = it[AutoType]
 				val bufferParam = paramMap[autoTypes.reference]!!
-				if ( bufferParam has BufferObject )
-					customChecks add ("GLChecks.ensureBufferObject(${bufferParam[BufferObject].binding}, false);")
 
 				// Disable AutoSize factor
 				val autoSizeParam = getReferenceParam(AutoSize, bufferParam.name)
