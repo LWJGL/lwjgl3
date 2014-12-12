@@ -1601,7 +1601,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    """,
 
 	    GLFWwindow.IN("window", "the window to set the system cursor for"),
-	    nullable _ GLFWcursor.IN("cursor", "he cursor to change to, or $NULL to switch back to the default system cursor"),
+	    nullable _ GLFWcursor.IN("cursor", "the cursor to change to, or $NULL to switch back to the default system cursor"),
 
 	    since = "GLFW 3.1"
 	)
