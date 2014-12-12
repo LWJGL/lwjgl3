@@ -1081,10 +1081,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    """,
 
 	    GLFWwindow.IN("window", "the window whose frame size to query"),
-	    Check(1) _ int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
-	    Check(1) _ int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
-	    Check(1) _ int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
-	    Check(1) _ int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
+	    mods(Check(1), nullable) _ int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
+		mods(Check(1), nullable) _ int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
+		mods(Check(1), nullable) _ int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
+		mods(Check(1), nullable) _ int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
 
 	    since = "GLFW 3.1"
 	)
@@ -1601,7 +1601,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    """,
 
 	    GLFWwindow.IN("window", "the window to set the system cursor for"),
-	    GLFWcursor.IN("cursor", "he cursor to change to, or $NULL to switch back to the default system cursor"),
+	    nullable _ GLFWcursor.IN("cursor", "he cursor to change to, or $NULL to switch back to the default system cursor"),
 
 	    since = "GLFW 3.1"
 	)
