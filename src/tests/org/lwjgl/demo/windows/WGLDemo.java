@@ -178,7 +178,8 @@ public final class WGLDemo {
 		wglDeleteBufferRegionARB(bufferRegion);
 
 		context.destroy();
-		debugProc.release();
+		if ( debugProc != null )
+			debugProc.release();
 
 		window.destroy();
 	}

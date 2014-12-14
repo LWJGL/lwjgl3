@@ -89,7 +89,7 @@ public final class WGLInterop {
 
 		// Creates an LWJGL GLContext from the GLFW context.
 		GLContext context = GLContext.createFromCurrent();
-		Closure debugproc = context.setupDebugMessageCallback();
+		Closure debugProc = context.setupDebugMessageCallback();
 
 		// Now we can retrieve the GLFW context's capabilities
 		ContextCapabilities caps = context.getCapabilities();
@@ -215,7 +215,8 @@ public final class WGLInterop {
 		wglDeleteBufferRegionARB(bufferRegion);
 
 		glfwDestroyWindow(window);
-		debugproc.release();
+		if ( debugProc != null )
+			debugProc.release();
 		keyfun.release();
 		windowsizefun.release();
 	}

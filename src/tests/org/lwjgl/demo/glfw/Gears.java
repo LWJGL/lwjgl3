@@ -87,7 +87,8 @@ public class Gears extends AbstractGears {
 		if ( this.window != NULL ) {
 			glfwSetInputMode(this.window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 			glfwDestroyWindow(this.window);
-			debugProc.release();
+			if ( debugProc != null )
+				debugProc.release();
 		}
 
 		glfwSetKeyCallback(window, keyfun);
@@ -148,7 +149,8 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void destroy() {
-		debugProc.release();
+		if ( debugProc != null )
+			debugProc.release();
 		keyfun.release();
 		glfwTerminate();
 		errorfun.release();
