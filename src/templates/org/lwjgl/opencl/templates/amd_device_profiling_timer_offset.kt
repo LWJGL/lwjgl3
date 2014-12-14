@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val amd_device_profiling_timer_offset = "AMDDeviceProfilingTimerOffset".nativeClassCL("amd_device_profiling_timer_offset", AMD) {
-
 	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant.block(
@@ -16,5 +15,4 @@ val amd_device_profiling_timer_offset = "AMDDeviceProfilingTimerOffset".nativeCl
 
 		"DEVICE_PROFILING_TIMER_OFFSET_AMD" _ 0x4036
 	)
-
 }

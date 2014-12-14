@@ -8,8 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val amd_device_topology = "AMDDeviceTopology".nativeClassCL("amd_device_topology", AMD) {
+	documentation =
+		"""
+		Native bindings to the $extensionName extension.
 
-	documentation = "Native bindings to the $extensionName extension."
+		This extension enables the developer to get a description of the topology used to connect the device to the host.
+		"""
 
 	IntConstant.block(
 		"""
@@ -38,5 +42,4 @@ typedef union
 
 		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD" _ 1
 	)
-
 }

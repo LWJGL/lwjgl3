@@ -190,4 +190,4 @@ private fun htmlList(tag: String, attributes: String, vararg items: String): Str
 }
 
 fun ul(vararg items: String) = htmlList("ul", "", *items)
-fun ol(vararg items: String, marker: Char = '1') = htmlList("ol", if ( marker == '1' ) "" else " type=$marker", *items)
+fun ol(vararg items: String, marker: Char = '1') = htmlList("ol", if ( marker == '1' ) "" else "type=$marker", *items)

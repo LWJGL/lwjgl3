@@ -8,8 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val amd_device_board_name = "AMDDeviceBoardName".nativeClassCL("amd_device_board_name", AMD) {
+	documentation =
+		"""
+		Native bindings to the $extensionName extension.
 
-	documentation = "Native bindings to the $extensionName extension."
+		This query enables the developer to get the name of the GPU board and model of the specific device. Currently, this is only for GPU devices.
+		"""
 
 	IntConstant.block(
 		"""
@@ -20,5 +24,4 @@ val amd_device_board_name = "AMDDeviceBoardName".nativeClassCL("amd_device_board
 
 		"DEVICE_BOARD_NAME_AMD" _ 0x4038
 	)
-
 }

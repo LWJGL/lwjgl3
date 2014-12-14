@@ -33,7 +33,7 @@ DISABLE_WARNINGS()
 #include <OpenCL/cl.h>
 #include <OpenCL/cl_gl.h>
 
-typedef cl_uint     cl_gl_context_info;
+typedef cl_uint cl_gl_context_info;
 
 #else
 
@@ -72,5 +72,26 @@ typedef struct {
 	cl_ulong surface_bus_address;
 	cl_ulong marker_bus_address;
 } cl_bus_address_amd;
+
+// APPLE
+
+typedef intptr_t cl_queue_properties_APPLE;
+
+// EXT
+
+typedef cl_bitfield cl_mem_migration_flags_ext;
+
+// INTEL
+
+typedef struct _cl_accelerator_intel* cl_accelerator_intel;
+typedef cl_uint cl_accelerator_type_intel;
+typedef cl_uint cl_accelerator_info_intel;
+
+typedef struct _cl_motion_estimation_desc_intel {
+    cl_uint     mb_block_type;
+    cl_uint     subpixel_mode;
+    cl_uint     sad_adjust_mode;
+    cl_uint     search_path_type;
+} cl_motion_estimation_desc_intel;
 
 #endif  /* __OPENCL_H   */

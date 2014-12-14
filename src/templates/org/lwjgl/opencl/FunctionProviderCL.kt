@@ -78,11 +78,11 @@ private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPE
 	public final int minorVersion;
 """)
 
-		println("\t/** Indicates whether an OpenCL functionality is available or not. */")
-		println("\tpublic final boolean")
-		for ( i in classes.indices ) {
-			print("\t\t${classes[i].capName}")
-			println(if ( i == classes.lastIndex ) ";" else ",")
+		classes forEach {
+			val documentation = it.documentation
+			if ( documentation != null )
+				println((if ( it.hasBody ) "When true, {@link ${it.className}} is supported." else documentation).toJavaDoc())
+			println("\tpublic final boolean ${it.capName};")
 		}
 
 		// ICD constructor

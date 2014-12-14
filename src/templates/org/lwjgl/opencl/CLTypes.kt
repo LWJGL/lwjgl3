@@ -188,6 +188,15 @@ fun config() {
 			cl_char.member("function")
 		}.member("pcie")
 	}
+
+	struct(OPENCL_PACKAGE, "CLMotionEstimationDescINTEL", structName = "cl_motion_estimation_desc_intel") {
+		documentation = "Describes the configuration of the motion estimation algorithm."
+		nativeImport("OpenCL.h")
+		cl_uint.member("mb_block_type");
+		cl_uint.member("subpixel_mode");
+		cl_uint.member("sad_adjust_mode");
+		cl_uint.member("search_path_type");
+	}
 }
 
 // callback functions
@@ -287,3 +296,19 @@ val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)
 val cl_gl_object_type_p = PointerType(cl_gl_object_type)
 
 val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)
+
+// APPLE
+
+val intptr_t = PrimitiveType("intptr_t", PrimitiveMapping.PTR)
+val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
+val cl_queue_properties_APPLE_p = PointerType(cl_queue_properties_APPLE)
+
+// EXT
+
+val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ext")
+
+// INTEL
+
+val cl_accelerator_intel = PointerType("cl_accelerator_intel", includesPointer = true)
+val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
+val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")
