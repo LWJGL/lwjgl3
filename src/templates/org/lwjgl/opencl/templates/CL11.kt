@@ -141,7 +141,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			"""
 			details about the buffer object to be created.
 
-			When {@code buffer_create_type} is #BUFFER_CREATE_TYPE_REGION, then {@code buffer_create_info} is a pointer to a ##cl_buffer_region
+			When {@code buffer_create_type} is #BUFFER_CREATE_TYPE_REGION, then {@code buffer_create_info} is a pointer to a ##CLBufferRegion
 			structure. {@code (origin, size)} defines the offset and size in bytes in buffer.
 			"""
 		),

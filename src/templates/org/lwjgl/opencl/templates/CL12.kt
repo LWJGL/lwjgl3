@@ -436,11 +436,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		),
 		const _ cl_image_format_p.IN(
 			"image_format",
-			"a pointer to a ##cl_image_format structure that describes format properties of the image to be allocated"
+			"a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"
 		),
 		const _ cl_image_desc_p.IN(
 			"image_desc",
-			"a pointer to a ##cl_image_desc structure that describes type and dimensions of the image to be allocated"
+			"a pointer to a ##CLImageDesc structure that describes type and dimensions of the image to be allocated"
 		),
 		mods(
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),

@@ -1276,7 +1276,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify allocation and usage information about the image memory object being created", MemFlags),
-		const _ cl_image_format_p.IN("image_format", "a pointer to a ##cl_image_format structure that describes format properties of the image to be allocated"),
+		const _ cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
 		size_t.IN("image_width", "the width of the image in pixels"),
 		size_t.IN("image_height", "the height of the image in pixels"),
 		size_t.IN(
@@ -1335,7 +1335,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify allocation and usage information about the image memory object being created", MemFlags),
-		const _ cl_image_format_p.IN("image_format", "a pointer to a ##cl_image_format structure that describes format properties of the image to be allocated"),
+		const _ cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
 		size_t.IN("image_width", "the width of the image in pixels"),
 		size_t.IN("image_height", "the height of the image in pixels"),
 		size_t.IN("image_depth", "the depth of the image in pixels. This must be a value &gt; 1."),
@@ -1424,14 +1424,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			CL12#MEM_OBJECT_IMAGE2D_ARRAY
 			"""
 		),
-		(AutoSize("image_formats") / "cl_image_format.SIZEOF") _ cl_uint.IN(
+		(AutoSize("image_formats") / "CLImageFormat.SIZEOF") _ cl_uint.IN(
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
 		),
 		nullable _ cl_image_format_p.OUT(
 			"image_formats",
 			"""
-			a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##cl_image_format structure
+			a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##CLImageFormat structure
 			supported by the OpenCL implementation. If {@code image_formats} is $NULL, it is ignored.
 			"""
 		),

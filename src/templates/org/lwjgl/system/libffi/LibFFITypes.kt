@@ -18,7 +18,7 @@ val FFI_FN_TYPE = PointerType("FFI_FN_TYPE", includesPointer = true)
 
 val ffi_type_p = PointerType("ffi_type")
 val ffi_type_pp = PointerType(ffi_type_p)
-val ffi_type = struct(FFI_PACKAGE, "ffi_type") {
+val ffi_type = struct(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
 	nativeImport("ffi.h")
 	size_t.member("size")
@@ -27,7 +27,7 @@ val ffi_type = struct(FFI_PACKAGE, "ffi_type") {
 	ffi_type_pp.member("elements") // TODO: self-reference here...
 }.nativeType
 
-val ffi_cif = struct(FFI_PACKAGE, "ffi_cif") {
+val ffi_cif = struct(FFI_PACKAGE, "FFICIF", structName = "ffi_cif") {
 	documentation = "Contains information about a libffi call interface."
 	nativeImport("ffi.h")
 
@@ -42,7 +42,7 @@ val ffi_cif_p = StructType(ffi_cif)
 
 // Closures
 
-val ffi_closure = struct(FFI_PACKAGE, "ffi_closure", malloc = false) {
+val ffi_closure = struct(FFI_PACKAGE, "FFIClosure", structName = "ffi_closure", malloc = false) {
 	documentation = "The libffi closure structure."
 	nativeImport("ffi.h")
 

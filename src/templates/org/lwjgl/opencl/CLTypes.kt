@@ -129,7 +129,7 @@ val cl_charUTF8_pp = PointerType(cl_charUTF8_p)
 
 // structs
 
-val cl_image_format = struct(OPENCL_PACKAGE, "cl_image_format") {
+val cl_image_format = struct(OPENCL_PACKAGE, "CLImageFormat", structName = "cl_image_format") {
 	documentation = "Image format struct."
 	nativeImport("OpenCL.h")
 	cl_channel_order.member("image_channel_order")
@@ -137,7 +137,7 @@ val cl_image_format = struct(OPENCL_PACKAGE, "cl_image_format") {
 }.nativeType
 val cl_image_format_p = StructType(cl_image_format)
 
-val cl_image_desc = struct(OPENCL_PACKAGE, "cl_image_desc") {
+val cl_image_desc = struct(OPENCL_PACKAGE, "CLImageDesc", structName = "cl_image_desc") {
 	documentation = "Image description struct."
 	nativeImport("OpenCL.h")
 	cl_mem_object_type.member("image_type")
@@ -156,23 +156,23 @@ val cl_image_desc = struct(OPENCL_PACKAGE, "cl_image_desc") {
 }.nativeType
 val cl_image_desc_p = StructType(cl_image_desc)
 
-val cl_bus_address_amd = struct(OPENCL_PACKAGE, "cl_bus_address_amd") {
+val cl_bus_address_amd = struct(OPENCL_PACKAGE, "CLBusAddressAMD", structName = "cl_bus_address_amd") {
 	documentation = "Used in AMDBusAddressableMemory##clEnqueueMakeBuffersResidentAMD()."
 	nativeImport("OpenCL.h")
-	cl_ulong.member("surface_bus_address")
-	cl_ulong.member("marker_bus_address")
+	cl_long.member("surface_bus_address")
+	cl_long.member("marker_bus_address")
 }.nativeType
 val cl_bus_address_amd_p = StructType(cl_bus_address_amd)
 
 fun config() {
-	struct(OPENCL_PACKAGE, "cl_buffer_region") {
+	struct(OPENCL_PACKAGE, "CLBufferRegion", structName = "cl_buffer_region") {
 		documentation = "Buffer region struct."
 		nativeImport("OpenCL.h")
 		size_t.member("origin")
 		size_t.member("size")
 	}
 
-	struct(OPENCL_PACKAGE, "cl_device_topology_amd") {
+	struct(OPENCL_PACKAGE, "CLDeviceTopologyAMD", structName = "cl_device_topology_amd") {
 		documentation =
 			"The struct returned by CL10##clGetDeviceInfo() with {@code param_name} set to AMDDeviceTopology##CL_DEVICE_TOPOLOGY_AMD."
 		nativeImport("OpenCL.h")

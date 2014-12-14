@@ -116,7 +116,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	Closure(ByteBuffer cif, long nativeCallback) {
 		// Allocate ffi closure
 		APIBuffer __buf = apiStack();
-		this.closure = nffi_closure_alloc(ffi_closure.SIZEOF, __buf.address() + __buf.getOffset());
+		this.closure = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address() + __buf.getOffset());
 		this.pointer = __buf.pointerValue(__buf.getOffset());
 		__buf.pop();
 
@@ -192,7 +192,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	        This is valid for x86 architectures on Windows, Linux and OS X. It is not valid on ARM and
 	        other architectures/OSes. TODO: Fix on other architectures
 		 */
-		return memGlobalRefToObject(memGetAddress(functionPointer + ffi_closure.USER_DATA));
+		return memGlobalRefToObject(memGetAddress(functionPointer + FFIClosure.USER_DATA));
 	}
 
 	/**
