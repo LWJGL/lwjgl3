@@ -73,6 +73,7 @@ abstract class Function(
 			throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")
 		return param
 	}
+
 	fun getParams(predicate: (Parameter) -> Boolean) = parameters.stream().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
@@ -190,7 +191,7 @@ class NativeClassFunction(
 
 		builder append '('
 		if ( !keepPostfix ) {
-			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore { (it, more) ->
+			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore {(it, more) ->
 				if ( more )
 					builder append ", "
 
@@ -312,14 +313,19 @@ class NativeClassFunction(
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
 		// So we need to scale the length check by the number of bytes per element.
 		fun bufferShift(expression: String, param: String, shift: String, transform: FunctionTransform<out QualifiedType>?): String {
+			val nativeType = paramMap[param]!!.nativeType
 			val mapping =
 				if ( transform != null && transform is AutoTypeTargetTransform ) {
 					transform.autoType
 				} else
-					paramMap[param]!!.nativeType.mapping as PointerMapping
+					nativeType.mapping as PointerMapping
 
-			if ( !mapping.isMultiByte )
-				return expression
+			if ( !mapping.isMultiByte ) {
+				return if ( nativeType is StructType )
+					"${expression} * ${nativeType.definition.className}.SIZEOF"
+				else
+					expression
+			}
 
 			val builder = StringBuilder(expression.size + 8)
 
@@ -379,7 +385,9 @@ class NativeClassFunction(
 						checks add "${prefix}checkBuffer(${it.name}, ${check.expression});"
 				}
 			} else if ( it.nativeType is StructType ) {
-				checks add "${prefix}checkBuffer(${it.name}, ${it.nativeType.definition.className}.SIZEOF);"
+				val param = it
+				if ( !hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) } )
+					checks add "${prefix}checkBuffer(${it.name}, ${it.nativeType.definition.className}.SIZEOF);"
 			}
 
 			if ( mode == NORMAL && it has BufferObject ) {
@@ -393,11 +401,9 @@ class NativeClassFunction(
 					if ( autoSize.factor != null )
 						length += " ${autoSize.factor!!.expressionInv()}"
 
-					prefix = if ( paramMap[autoSize.reference]!! has Nullable ) "if ( ${autoSize.reference} != null ) " else ""
-					checks add "${prefix}checkBuffer(${autoSize.reference}, ${bufferShift(length, autoSize.reference, "<<", null)});"
-					for ( d in autoSize.dependent ) {
-						prefix = if ( paramMap[d]!! has Nullable ) "if ( $d != null ) " else ""
-						checks add "${prefix}checkBuffer($d, ${bufferShift(length, d, "<<", null)});"
+					streamOf(autoSize.reference, *autoSize.dependent).forEach {
+						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""
+						checks add "${prefix}checkBuffer($it, ${bufferShift(length, it, "<<", null)});"
 					}
 				} else {
 					val referenceTransform = transforms!![paramMap[autoSize.reference]!!]
@@ -409,12 +415,14 @@ class NativeClassFunction(
 						else
 							"${autoSize.reference}.remaining()"
 
-					for ( d in autoSize.dependent ) {
-						val param = paramMap[d]!!
-						val transform = transforms[param]
-						if ( transform !is SkipCheckFunctionTransform ) {
-							prefix = if ( param has Nullable ) "if ( $d != null ) " else ""
-							checks add "${prefix}checkBuffer($d, $expression);"
+					autoSize.dependent forEach {
+						val param = paramMap[it]!!
+						if ( transforms[param] !is SkipCheckFunctionTransform ) {
+							prefix = if ( param has Nullable ) "if ( $it != null ) " else ""
+							checks add if ( param.nativeType is StructType )
+								"${prefix}checkBuffer($it, $expression * ${param.nativeType.definition.className}.SIZEOF);"
+							else
+								"${prefix}checkBuffer($it, $expression);"
 						}
 					}
 				}
