@@ -140,7 +140,7 @@ class Parameter(
 	// --- [ Helper functions & properties ] ----
 
 	override val isSpecial: Boolean
-		get() = nativeType.mapping == PointerMapping.OPAQUE_POINTER || super.isSpecial
+		get() = (nativeType.mapping == PointerMapping.OPAQUE_POINTER && (nativeType is ObjectType || !has(nullable))) || super.isSpecial
 
 	/** Returns true if this is an output parameter with the autoSizeResult modifier. */
 	val isAutoSizeResultOut: Boolean

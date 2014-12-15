@@ -163,7 +163,7 @@ class Nullable internal(val optional: Boolean): ParameterModifier() {
 		override val key = javaClass<Nullable>()
 	}
 
-	override val isSpecial = true
+	override val isSpecial = optional
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
 			throw IllegalArgumentException("The nullable modifier can only be applied on pointer types.")
