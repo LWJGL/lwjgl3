@@ -16,6 +16,7 @@ val int = IntegerType("int", PrimitiveMapping.INT)
 val long = IntegerType("long", PrimitiveMapping.PTR)
 val float = PrimitiveType("float", PrimitiveMapping.FLOAT)
 val double = PrimitiveType("double", PrimitiveMapping.DOUBLE)
+val size_t = IntegerType("size_t", PrimitiveMapping.PTR, unsigned = true)
 
 val char_p = PointerType(char)
 val short_p = PointerType(short)
@@ -23,6 +24,7 @@ val int_p = PointerType(int)
 val long_p = PointerType(long)
 val float_p = PointerType(float)
 val double_p = PointerType(double)
+val size_t_p = PointerType(size_t)
 
 val char_pp = PointerType(char_p)
 

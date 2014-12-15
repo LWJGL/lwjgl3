@@ -9,7 +9,6 @@ import org.lwjgl.generator.*
 val LINUX_PACKAGE = "org.lwjgl.system.linux"
 
 val ssize_t = IntegerType("ssize_t", PrimitiveMapping.PTR)
-val size_t = IntegerType("size_t", PrimitiveMapping.PTR, unsigned = true)
 
 val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figure this out
 val time_t = PrimitiveType("time_t", PrimitiveMapping.LONG) // TODO: time_t can be any type

@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 
 val FFI_PACKAGE = "org.lwjgl.system.libffi"
 
-val size_t = PrimitiveType("size_t", PrimitiveMapping.PTR)
 val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
 
 val ffi_abi = typedef(int, "ffi_abi")

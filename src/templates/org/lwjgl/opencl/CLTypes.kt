@@ -33,11 +33,6 @@ val cl_double_p = PointerType(cl_double)
 
 val cl_uchar_pp = PointerType(cl_uchar_p)
 
-// custom numeric
-
-val size_t = PrimitiveType("size_t", PrimitiveMapping.PTR)
-val size_t_p = PointerType(size_t)
-
 // objects
 
 val cl_platform_id = PointerType("cl_platform_id", includesPointer = true)
