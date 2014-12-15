@@ -48,7 +48,7 @@ public class LibFFITest {
 		long glfwGetWindowSize = glfwGetWindowSizeAddress();
 
 		// Prepare the call interface
-		ByteBuffer cif = ffi_cif.malloc();
+		ByteBuffer cif = FFICIF.malloc();
 
 		PointerBuffer argumentTypes = BufferUtils.createPointerBuffer(5); // 5 arguments
 		argumentTypes.put(0, ffi_type_pointer); // JNIEnv*

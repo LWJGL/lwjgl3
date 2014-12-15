@@ -351,7 +351,7 @@ public class CLTest {
 				if ( doContextCountChecks )
 					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 2);
 
-				ByteBuffer bufferRegion = cl_buffer_region.malloc(0, 64);
+				ByteBuffer bufferRegion = CLBufferRegion.malloc(0, 64);
 
 				long subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
 				checkCLError(errcode_ret);

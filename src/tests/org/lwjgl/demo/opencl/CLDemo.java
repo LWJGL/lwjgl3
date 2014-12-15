@@ -122,7 +122,7 @@ public final class CLDemo {
 
 				long subbuffer = NULL;
 				if ( caps.OpenCL11 ) {
-					ByteBuffer buffer_region = cl_buffer_region.malloc(0, 64);
+					ByteBuffer buffer_region = CLBufferRegion.malloc(0, 64);
 
 					subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region, errcode_ret);
 					checkCLError(errcode_ret);

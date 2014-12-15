@@ -5,7 +5,7 @@
 package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.opencl.cl_buffer_region;
+import org.lwjgl.opencl.CLBufferRegion;
 import org.lwjgl.system.linux.X;
 import org.lwjgl.system.linux.XColor;
 import org.lwjgl.system.linux.XGCValues;
@@ -121,10 +121,10 @@ public class StructTest {
 	}
 
 	public void testStructConstructor() {
-		ByteBuffer s = cl_buffer_region.malloc(1337, 80085);
+		ByteBuffer s = CLBufferRegion.malloc(1337, 80085);
 
-		assertEquals(cl_buffer_region.origin(s), 1337);
-		assertEquals(cl_buffer_region.size(s), 80085);
+		assertEquals(CLBufferRegion.origin(s), 1337);
+		assertEquals(CLBufferRegion.size(s), 80085);
 	}
 
 }
