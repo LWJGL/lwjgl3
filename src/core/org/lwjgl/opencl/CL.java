@@ -14,6 +14,7 @@ import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL12.*;
 import static org.lwjgl.system.APIUtil.*;
@@ -192,10 +193,12 @@ public final class CL {
 	}
 
 	private static void addCLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions, String postfix, int[][] versions) {
-		for ( int major = 1; major <= versions.length; major++ ) {
+		for ( int major = 1; major <= min(MAJOR, versions.length); major++ ) {
 			for ( int minor : versions[major - 1] ) {
-				if ( major < MAJOR || (major == MAJOR && minor <= MINOR) )
-					supportedExtensions.add(String.format("OpenCL%d%d%s", major, minor, postfix));
+				if ( major == MAJOR && MINOR < minor )
+					break;
+
+				supportedExtensions.add(String.format("OpenCL%d%d%s", major, minor, postfix));
 			}
 		}
 	}

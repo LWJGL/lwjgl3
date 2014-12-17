@@ -14,6 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
+import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
@@ -35,7 +36,12 @@ public final class GL {
 
 	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
 
+	private static final APIVersion MAX_VERSION;
+
 	static {
+		String max = System.getProperty("org.lwjgl.opengl.maxVersion");
+		MAX_VERSION = max == null ? null : apiParseVersion(max, null);
+
 		if ( !Boolean.getBoolean("org.lwjgl.opengl.explicitInit") )
 			create();
 	}
@@ -210,20 +216,27 @@ public final class GL {
 		if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
 			throw new IllegalStateException("OpenGL 1.1 is required.");
 
-		int[][] GL_VERSIONS = {
-			{ 1, 2, 3, 4, 5 },      // OpenGL 1
-			{ 0, 1 },               // OpenGL 2
-			{ 0, 1, 2, 3 },         // OpenGL 3
-			{ 0, 1, 2, 3, 4, 5 },   // OpenGL 4
+		int[] GL_VERSIONS = {
+			5, // OpenGL 1.1 to 1.5
+			1, // OpenGL 2.0 to 2.1
+			3, // OpenGL 3.0 to 3.3
+			5, // OpenGL 4.0 to 4.5
 		};
 
 		Set<String> supportedExtensions = new HashSet<String>(128);
 
-		for ( int major = 1; major <= GL_VERSIONS.length; major++ ) {
-			for ( int minor : GL_VERSIONS[major - 1] ) {
-				if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
-					supportedExtensions.add(String.format("OpenGL%d%d", major, minor));
-			}
+		int maxMajor = min(majorVersion, GL_VERSIONS.length);
+		if ( MAX_VERSION != null )
+			maxMajor = min(MAX_VERSION.major, maxMajor);
+		for ( int M = 1; M <= maxMajor; M++ ) {
+			int maxMinor = GL_VERSIONS[M - 1];
+			if ( M == majorVersion )
+				maxMinor = min(minorVersion, maxMinor);
+			if ( MAX_VERSION != null && M == MAX_VERSION.major )
+				maxMinor = min(MAX_VERSION.minor, maxMinor);
+
+			for ( int m = M == 1 ? 1 : 0; m <= maxMinor; m++ )
+				supportedExtensions.add(String.format("OpenGL%d%d", M, m));
 		}
 
 		if ( majorVersion < 3 ) {
