@@ -377,7 +377,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of integer values.",
 
 		uniformLocation,
-		GLsizei.IN("count", "the number of integer values to load"),
+		AutoSize("value") _ GLsizei.IN("count", "the number of integer values to load"),
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
@@ -386,7 +386,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec2 vectors.",
 
 		uniformLocation,
-		GLsizei.IN("count", "the number of ivec2 vectors to load"),
+		AutoSize("value") shr 1 _ GLsizei.IN("count", "the number of ivec2 vectors to load"),
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
@@ -395,7 +395,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec3 vectors.",
 
 		uniformLocation,
-		GLsizei.IN("count", "the number of ivec3 vectors to load"),
+		AutoSize("value") / 3 _ GLsizei.IN("count", "the number of ivec3 vectors to load"),
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
@@ -404,7 +404,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec4 vectors.",
 
 		uniformLocation,
-		GLsizei.IN("count", "the number of ivec4 vectors to load"),
+		AutoSize("value") shr 2 _ GLsizei.IN("count", "the number of ivec4 vectors to load"),
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
