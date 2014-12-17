@@ -24,6 +24,11 @@ val ByteConstant = object: ConstantType<Byte>(javaClass()) {
 	override fun nullValue() = 0.b
 }
 
+val CharConstant = object: ConstantType<Char>(javaClass()) {
+	override fun print(value: Char) = "'%s'".format(value)
+	override fun nullValue() = 0.toChar()
+}
+
 val ShortConstant = object: ConstantType<Short>(javaClass()) {
 	override fun print(value: Short) = "0x%X".format(value.toInt())
 	override fun nullValue() = 0.s
