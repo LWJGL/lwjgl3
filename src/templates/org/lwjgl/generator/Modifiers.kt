@@ -20,7 +20,7 @@ abstract class TemplateElement {
 		}
 
 		if ( this.modifiers identityEquals EMPTY_MODIFIERS )
-			this.modifiers = HashMap(modifiers.size)
+			this.modifiers = HashMap(modifiers.size())
 
 		modifiers.forEach {
 			val old = this.modifiers.put(it.javaClass, it)
@@ -138,8 +138,8 @@ fun <T: QualifiedType> QualifiedTypeModifier._(qtype: T): T {
 	return qtype
 }
 
-fun mods(vararg modifiers: TemplateModifier): Array<TemplateModifier> = modifiers
-fun <T: TemplateElement> Array<TemplateModifier>._(element: T): T {
+fun mods(vararg modifiers: TemplateModifier): Array<out TemplateModifier> = modifiers
+fun <T: TemplateElement> Array<out TemplateModifier>._(element: T): T {
 	element.setModifiers(*this)
 	return element
 }

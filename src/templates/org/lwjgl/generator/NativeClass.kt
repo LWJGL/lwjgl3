@@ -107,7 +107,7 @@ class NativeClass(
 	val functionProvider: FunctionProvider?
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
-	private val constantBlocks = ArrayList<ConstantBlock<out Any>>()
+	private val constantBlocks = ArrayList<ConstantBlock<out Comparable<*>>>()
 
 	private val _functions = LinkedHashMap<String, NativeClassFunction>()
 	val functions: Iterable<NativeClassFunction>
@@ -199,7 +199,7 @@ class NativeClass(
 		println("\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
-		if ( _functions.size == 1 ) {
+		if ( _functions.size() == 1 ) {
 			println(" ${_functions.values().first().addressName};")
 		} else {
 			println()
@@ -280,10 +280,10 @@ class NativeClass(
 
 			val pointer = printPointer(func)
 
-			lineSize += pointer.size
+			lineSize += pointer.length()
 			if ( 160 <= lineSize ) {
 				out.print("\n\t\t\t")
-				lineSize = 12 + pointer.size
+				lineSize = 12 + pointer.length()
 			}
 
 			out.print(pointer)
@@ -294,11 +294,17 @@ class NativeClass(
 
 	// DSL extensions
 
-	fun <T> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	fun <T: Comparable<T>> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
 	}
+
+	/** Adds a new constant. */
+	fun <T: Comparable<T>> String._(value: T) = Constant(this, value)
+
+	/** Adds a new constant whose value is an expression. */
+	fun <T: Comparable<T>> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
 	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
 		ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc, since = since)
@@ -346,7 +352,7 @@ class NativeClass(
 		if ( !matcher.find() )
 			return documentation
 
-		val buffer = StringBuilder(documentation.size)
+		val buffer = StringBuilder(documentation.length())
 		var lastEnd = 0
 		do {
 			buffer.append(documentation, lastEnd, matcher.start())

@@ -29,7 +29,7 @@ import java.util.HashMap
 */
 
 fun main(args: Array<String>) {
-	if ( args.size < 2 )
+	if ( args.size() < 2 )
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = {(name: String, path: String) ->
@@ -118,7 +118,7 @@ class Generator(
 			// returns NativeClass
 			method.getReturnType() == javaClass &&
 			// has no arguments
-			method.getParameterTypes().size == 0
+			method.getParameterTypes().size() == 0
 
 	private fun runConfiguration(cp: String) {
 		val dot = cp.lastIndexOf('.')
@@ -146,7 +146,7 @@ class Generator(
 
 		return methods
 			.stream()
-			.filterTo(ArrayList<Method>(methods.size)) {
+			.filterTo(ArrayList<Method>(methods.size())) {
 				methodFilter(it, javaClass<NativeClass>())
 			}
 	}
@@ -240,7 +240,7 @@ class Generator(
 	}
 
 	private fun generateNative(target: GeneratorTargetNative, generate: (File) -> Unit) {
-		var subPackagePath = target.packageName.substring("org.lwjgl.".size).replace('.', '/')
+		var subPackagePath = target.packageName.substring("org.lwjgl.".length()).replace('.', '/')
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
@@ -262,7 +262,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 		(it.isDirectory() && recursive) || (it.isFile() && it.getName().endsWith(".kt"))
 	}
 
-	if ( classes == null || classes.size == 0 )
+	if ( classes == null || classes.size() == 0 )
 		return 0
 
 	return classes.map {
@@ -326,7 +326,7 @@ private fun <T> generateOutput(
 		val after = baos.toByteArray()
 
 		fun somethingChanged(before: ByteBuffer, after: ByteArray): Boolean {
-			if ( before.remaining() != after.size )
+			if ( before.remaining() != after.size() )
 				return true
 
 			for ( i in 0..before.limit() - 1 ) {
@@ -357,10 +357,10 @@ private fun <T> generateOutput(
 }
 
 /** Returns true if the array was empty. */
-fun <T> Array<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
+inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
 	for ( i in 0..this.lastIndex )
 		apply(this[i], 0 < i)
-	return this.size == 0
+	return this.size() == 0
 }
 
 /** Returns true if the stream was empty. */
@@ -387,7 +387,7 @@ fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, 
 
 /** Returns the string with the first letter uppercase. */
 val String.upperCaseFirst: String
-	get() = if ( this.length == 1 )
+	get() = if ( this.length() == 1 )
 		this.toUpperCase()
 	else
 		"${Character.toUpperCase(this[0])}${this.substring(1)}"

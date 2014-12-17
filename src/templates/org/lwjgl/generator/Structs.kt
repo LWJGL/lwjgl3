@@ -276,7 +276,7 @@ class Struct(
 	}
 
 	private fun getMemberCount(members: List<StructMember>): Int {
-		var count = members.size
+		var count = members.size()
 		for ( member in members.stream().filter { it.isNestedAnonymousStruct } )
 			count += getMemberCount(member.nestedMembers) // recursion
 		return count

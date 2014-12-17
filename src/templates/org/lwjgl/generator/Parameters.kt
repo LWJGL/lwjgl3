@@ -109,7 +109,7 @@ class Parameter(
 
 	private fun doc(description: String, links: String, linkMode: LinkMode): String {
 		val trimmed = description.trim()
-		val builder = StringBuilder(trimmed.size + 16 + links.size) // Rough estimate to reduce mallocs. TODO: validate
+		val builder = StringBuilder(trimmed.length() + 16 + links.length()) // Rough estimate to reduce mallocs. TODO: validate
 
 		val effectiveLinkMode: LinkMode
 		if ( trimmed.isEmpty() ) {

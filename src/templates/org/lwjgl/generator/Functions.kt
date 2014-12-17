@@ -132,12 +132,12 @@ class NativeClassFunction(
 		var name = functionName
 		var postfix = ""
 		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) ) {
-			name = name.substring(0, name.size - nativeClass.postfix.size)
+			name = name.substring(0, name.length() - nativeClass.postfix.length())
 			postfix = nativeClass.postfix
 		} else if ( has(DependsOn) ) {
 			val dependsOn = this[DependsOn]
 			if ( dependsOn.postfix != null && name.endsWith(dependsOn.postfix) ) {
-				name = name.substring(0, name.size - dependsOn.postfix.size)
+				name = name.substring(0, name.length() - dependsOn.postfix.length())
 				postfix = dependsOn.postfix
 			}
 		}
@@ -159,16 +159,16 @@ class NativeClassFunction(
 			}
 
 			if ( typeChar != "" ) {
-				val offset = name.size - cutCount
-				if ( typeChar equals name.substring(offset - typeChar.size, offset) )
-					cutCount += typeChar.size
+				val offset = name.length() - cutCount
+				if ( typeChar equals name.substring(offset - typeChar.length(), offset) )
+					cutCount += typeChar.length()
 
-				if ( stripUnsigned && name.charAt(name.size - cutCount - 1) == 'u' )
+				if ( stripUnsigned && name.charAt(name.length() - cutCount - 1) == 'u' )
 					cutCount++
 			}
 		}
 
-		return name.substring(0, name.size - cutCount) + postfix
+		return name.substring(0, name.length() - cutCount) + postfix
 	}
 
 	val javaDocLink: String
@@ -327,7 +327,7 @@ class NativeClassFunction(
 					expression
 			}
 
-			val builder = StringBuilder(expression.size + 8)
+			val builder = StringBuilder(expression.length() + 8)
 
 			if ( expression.indexOf(' ') != -1 ) {
 				builder append '('
@@ -435,12 +435,12 @@ class NativeClassFunction(
 		if ( checks.isEmpty() )
 			return
 
-		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
+		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
 		checks.forEach {
 			print("\t\t\t")
 			println(it)
 		}
-		if ( 1 < checks.size )
+		if ( 1 < checks.size() )
 			println("\t\t}")
 	}
 
@@ -523,12 +523,12 @@ class NativeClassFunction(
 				checks add "checkPointer(${it.name});"
 		}
 
-		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size == 1) "" else " {" }")
+		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
 		checks.forEach {
 			print("\t\t\t")
 			println(it)
 		}
-		if ( 1 < checks.size )
+		if ( 1 < checks.size() )
 			println("\t\t}")
 
 		// Native method call
@@ -934,7 +934,7 @@ class NativeClassFunction(
 				if ( autoSizeParam != null )
 					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, false)
 
-				val types = ArrayList<BufferType>(autoTypes.types.size)
+				val types = ArrayList<BufferType>(autoTypes.types.size())
 				autoTypes.types.forEach { types add it }
 
 				for ( autoType in autoTypes.types ) {

@@ -5,51 +5,28 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
-import java.util.regex.Pattern
 
 // Extension properties for numeric literals.
 inline val Int.b: Byte get() = this.toByte()
 inline val Int.s: Short get() = this.toShort()
 inline val Long.i: Int get() = this.toInt()
 
-abstract class ConstantType<T>(
-	val javaType: Class<T>
-) {
-	abstract fun print(value: T): String
-	abstract fun nullValue(): T
-}
+class ConstantType<T: Comparable<T>>(
+	val javaType: Class<T>,
+	val print: (T) -> String
+)
 
-val ByteConstant = object: ConstantType<Byte>(javaClass()) {
-	override fun print(value: Byte) = "0x%X".format(value.toInt())
-	override fun nullValue() = 0.b
-}
+val ByteConstant = ConstantType(javaClass<Byte>()) { "0x%X".format(it.toInt()) }
+val CharConstant = ConstantType(javaClass<Char>()) { "'$it'" }
+val ShortConstant = ConstantType(javaClass<Short>()) { "0x%X".format(it.toInt()) }
+val IntConstant = ConstantType(javaClass<Int>()) { "0x%X".format(it) }
+val LongConstant = ConstantType(javaClass<Long>()) { "0x%XL".format(it) }
+val FloatConstant = ConstantType(javaClass<Float>()) { "%sf".format(it) }
 
-val CharConstant = object: ConstantType<Char>(javaClass()) {
-	override fun print(value: Char) = "'%s'".format(value)
-	override fun nullValue() = 0.toChar()
-}
+open data class Constant<T: Comparable<T>>(val name: String, val value: T?)
+class ConstantExpression<T: Comparable<T>>(name: String, val expression: String): Constant<T>(name, null)
 
-val ShortConstant = object: ConstantType<Short>(javaClass()) {
-	override fun print(value: Short) = "0x%X".format(value.toInt())
-	override fun nullValue() = 0.s
-}
-
-val IntConstant = object: ConstantType<Int>(javaClass()) {
-	override fun print(value: Int) = "0x%X".format(value)
-	override fun nullValue() = 0
-}
-
-val LongConstant = object: ConstantType<Long>(javaClass()) {
-	override fun print(value: Long) = "0x%XL".format(value)
-	override fun nullValue() = 0L
-}
-
-val FloatConstant = object: ConstantType<Float>(javaClass()) {
-	override fun print(value: Float) = "%sf".format(value)
-	override fun nullValue() = 0.0f
-}
-
-class ConstantBlock<T>(
+class ConstantBlock<T: Comparable<T>>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
 	val documentation: String,
@@ -59,6 +36,7 @@ class ConstantBlock<T>(
 	private var noPrefix = false
 
 	fun noPrefix() {
+		javaClass<Int>()
 		noPrefix = true
 	}
 
@@ -74,7 +52,7 @@ class ConstantBlock<T>(
 		print("\tpublic static final ${constantType.javaType.getSimpleName()}")
 
 		val indent: String
-		if ( constants.size == 1 ) {
+		if ( constants.size() == 1 ) {
 			indent = " ";
 		} else {
 			print('\n')
@@ -83,12 +61,12 @@ class ConstantBlock<T>(
 
 		// Find maximum constant name length
 		val alignment = constants.map {
-			it.name.size
+			it.name.length()
 		}.fold(0) {(left, right) ->
 			Math.max(left, right)
 		}
 
-		constants.forEachWithMore { (it, more) ->
+		constants.forEachWithMore {(it, more) ->
 			if ( more )
 				println(',')
 			printConstant(it, indent, alignment)
@@ -100,7 +78,7 @@ class ConstantBlock<T>(
 		val (name, value) = constant
 
 		print("$indent${getConstantName(name)}")
-		for ( i in 0..(alignment - name.size - 1) )
+		for ( i in 0..(alignment - name.length() - 1) )
 			print(' ')
 
 		print(" = ")
@@ -111,7 +89,7 @@ class ConstantBlock<T>(
 	}
 
 	val javaDocLinks: String get() {
-		val builder = StringBuilder(constants.size * 32)
+		val builder = StringBuilder(constants.size() * 32)
 
 		printJavaDocLink(builder, constants[0])
 		for ( i in 1..constants.lastIndex ) {
@@ -122,19 +100,10 @@ class ConstantBlock<T>(
 		return builder.toString()
 	}
 
-	private fun <T> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
+	private fun <T: Comparable<T>> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
 		builder append nativeClass.className
 		builder append '#'
 		builder append constant.name
 	}
 
 }
-
-open data class Constant<T: Any>(val name: String, val value: T?)
-class ConstantExpression<T>(name: String, val expression: String): Constant<T>(name, null)
-
-/** Adds a new constant. */
-fun <T> String._(value: T) = Constant(this, value)
-
-/** Adds a new constant whose value is a function of previously defined constants. */
-fun <T> String.expr(expression: String) = ConstantExpression<T>(this, expression)

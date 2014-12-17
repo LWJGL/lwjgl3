@@ -82,8 +82,8 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 	private static final PointerBuffer ARGS = BufferUtils.createPointerBuffer(${signature.size()});
 
 	static {
-${signature.stream().withIndices().map {
-			"\t\tARGS.put(${it.first}, ${it.second.nativeType.ffi});"
+${signature.stream().withIndex().map {
+			"\t\tARGS.put(${it.index}, ${it.value.nativeType.ffi});"
 		}.join("\n")}
 
 		int status = ffi_prep_cif(CIF, CALL_CONVENTION_${if ( $callConventionSystem ) "SYSTEM" else "DEFAULT"}, ${returns.ffi}, ARGS);
@@ -106,8 +106,8 @@ ${signature.stream().withIndices().map {
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
 		print("""invoke(
-${signature.stream().withIndices().map {
-			"\t\t\tmemGet${it.second.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.first} + args))"
+${signature.stream().withIndex().map {
+			"\t\t\tmemGet${it.value.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.index} + args))"
 		}.join(",\n")}
 		);
 	}

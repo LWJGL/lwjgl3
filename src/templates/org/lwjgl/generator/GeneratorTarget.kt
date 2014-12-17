@@ -37,7 +37,7 @@ class Preamble {
 
 	fun javaImport(vararg classes: String) {
 		if ( javaImports identityEquals EMPTY_IMPORTS )
-			javaImports = ArrayList(classes.size)
+			javaImports = ArrayList(classes.size())
 
 		classes.forEach {
 			javaImports add it
@@ -46,7 +46,7 @@ class Preamble {
 
 	fun nativeImport(vararg files: String) {
 		if ( nativeImports identityEquals EMPTY_IMPORTS )
-			nativeImports = ArrayList(files.size)
+			nativeImports = ArrayList(files.size())
 
 		files.forEach {
 			nativeImports add if ( it.startsWith('<') )
@@ -186,7 +186,7 @@ abstract class GeneratorTarget(
 		if ( !matcher.find() )
 			return documentation
 
-		val buffer = StringBuilder(documentation.size * 2)
+		val buffer = StringBuilder(documentation.length() * 2)
 
 		var lastEnd = 0
 		do {
@@ -249,12 +249,12 @@ abstract class GeneratorTarget(
 
 				val name = classElement.substring(0, parentheses) let {
 					if ( !custom && it endsWith 'v' )
-						it.substring(0, it.length - (if ( it.endsWith("_v") ) 2 else 1))
+						it.substring(0, it.length() - (if ( it.endsWith("_v") ) 2 else 1))
 					else
 						it
 				}
 
-				val hasParams = parentheses < classElement.size - 2
+				val hasParams = parentheses < classElement.length() - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( (prefix.isEmpty() && !hasParams) || custom ) "" else " $name"}}"
 			}
 		}
@@ -279,7 +279,7 @@ abstract class GeneratorTargetNative(
 
 	val nativeFileNameJNI: String
 	{
-		val fileName = StringBuilder(packageName.size + className.size + 4); // some extra room for escaping
+		val fileName = StringBuilder(packageName.length() + className.length() + 4); // some extra room for escaping
 
 		for ( subpackage in DOT_PATTERN.split(packageName) ) {
 			fileName append subpackage.asJNIName

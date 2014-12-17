@@ -129,7 +129,7 @@ private val StringReturnTransform = object: FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val expression = if ( original.startsWith("memByteBufferNT") )
-			original.substring(17, original.length - 1);
+			original.substring(17, original.length() - 1);
 		else
 			original
 		return "memDecode${(param.nativeType as CharSequenceType).charMapping.charset}($expression)";

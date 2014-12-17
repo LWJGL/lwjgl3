@@ -19,7 +19,7 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 
 	val result: String
 	if ( matcher.find() ) {
-		val builder = StringBuilder(trimmed.size)
+		val builder = StringBuilder(trimmed.length())
 
 		fun StringBuilder.appendParagraph(linePrefix: String, text: String, start: Int, end: Int) {
 			this append '\n'
@@ -39,7 +39,7 @@ private fun String.cleanup(linePrefix: String = "\t * "): String {
 			builder.appendParagraph(linePrefix, trimmed, lastMatch, matcher.start())
 			lastMatch = matcher.end()
 		}
-		builder.appendParagraph(linePrefix, trimmed, lastMatch, trimmed.size)
+		builder.appendParagraph(linePrefix, trimmed, lastMatch, trimmed.length())
 
 		result = builder.toString()
 	} else
@@ -72,7 +72,7 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>
 
 	if ( !params.isEmpty() ) {
 		// Find maximum param name length
-		val alignment = params.map { it.name.size }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = params.map { it.name.length() }.fold(0) {(left, right) -> Math.max(left, right) }
 
 		val paramMultilineAligment = paramMultilineAligment(alignment)
 
@@ -81,7 +81,7 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>
 			builder append "\n\t * @param ${it.name}"
 
 			// Align
-			for ( i in 0..(alignment - it.name.size) )
+			for ( i in 0..(alignment - it.name.length()) )
 				builder append ' '
 
 			builder append processDocumentation(it.documentation).cleanup(paramMultilineAligment)
@@ -107,8 +107,8 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>
 
 // Used for aligning parameter javadoc when it spans multiple lines.
 private fun paramMultilineAligment(alignment: Int): String {
-	val whitespace = " @param ".size + alignment + 1
-	val builder = StringBuilder("\t *".size + whitespace)
+	val whitespace = " @param ".length() + alignment + 1
+	val builder = StringBuilder("\t *".length() + whitespace)
 
 	builder append "\t *"
 	for ( i in whitespace.indices )
