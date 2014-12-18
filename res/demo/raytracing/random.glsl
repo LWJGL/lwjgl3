@@ -27,6 +27,7 @@ uint hash( uvec3 v ) {
 
 /**
  * Generate a random value in [-1..+1).
+ * 
  * The distribution MUST be really uniform and exhibit NO pattern at all,
  * because it is heavily used to generate random sample directions for various
  * things, and if the random function contains the slightest pattern, it will
@@ -60,8 +61,8 @@ float random(vec2 f, float time) {
  * http://mathworld.wolfram.com/DiskPointPicking.html
  */
 vec3 randomDiskPoint_(vec3 rand, vec3 n) {
-  float r = rand.x * 0.5 + 0.5;
-  float angle = (rand.y + 1.0) * PI;
+  float r = rand.x * 0.5 + 0.5; // [-1..1) -> [0..1)
+  float angle = (rand.y + 1.0) * PI; // [-1..1] -> [0..2*PI)
   float sr = sqrt(r);
   vec2 p = vec2(sr * cos(angle), sr * sin(angle));
   /*
@@ -97,7 +98,7 @@ vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
  * http://mathworld.wolfram.com/SpherePointPicking.html
  */
 vec3 randomSpherePoint_(vec3 rand) {
-  float ang1 = (rand.x + 1.0) * PI; // 2.0 * [0..1) * PI
+  float ang1 = (rand.x + 1.0) * PI; // [-1..1) -> [0..2*PI)
   float u = rand.y; // [-1..1), cos and acos(2v-1) cancel each other out, so we arrive at [-1..1)
   float u2 = u * u;
   float x = sqrt(1.0 - u2) * cos(ang1);
@@ -109,6 +110,18 @@ vec3 randomSpherePoint_(vec3 rand) {
 /**
  * Generate a uniformly distributed random point on the unit-hemisphere
  * around the given normal vector.
+ * 
+ * This function can be used to generate reflected rays for diffuse surfaces.
+ * Actually, this function can be used to sample reflected rays for ANY surface
+ * with an arbitrary BRDF correctly.
+ * This is because we always need to solve the integral over the hemisphere of
+ * a surface point by using numerical approximation using a sum of many
+ * sample directions.
+ * It is only with non-lambertian BRDF's that, in theory, we could sample them more
+ * efficiently, if we knew in which direction the BRDF reflects the most energy.
+ * This would be importance sampling, but care must be taken as to not over-estimate
+ * those surfaces, because then our sum for the integral would be greater than the
+ * integral itself. This is the inherent problem with importance sampling.
  * 
  * The points are uniform over the sphere and NOT over the projected disk
  * of the sphere, so this function cannot be used when sampling a spherical
