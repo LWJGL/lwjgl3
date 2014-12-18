@@ -17,6 +17,7 @@ uniform float time;
 uniform float width;
 uniform float height;
 uniform int sampleCount;
+uniform int bounceCount;
 
 in vec2 texcoord;
 
@@ -56,13 +57,21 @@ const vec3 lightCenterPosition = vec3(1.5, 3.9, 3);
 const vec4 lightColor = vec4(1);
 
 float random(vec2 f, float time);
-vec3 randomDiskPoint(vec3 n, vec2 pix, float time);
+vec3 randomDiskPoint_(vec3 rand, vec3 n);
+vec3 randomHemispherePoint_(vec3 rand, vec3 n);
 
 struct hitinfo {
   float near;
   float far;
   int bi;
 };
+
+/*
+ * We need random values every now and then.
+ * So, they will be precomputed for each ray we trace and
+ * can be used by any function.
+ */
+vec3 rand;
 
 vec2 intersectBox(vec3 origin, vec3 dir, const box b) {
   vec3 tMin = (b.min - origin) / dir;
@@ -121,48 +130,52 @@ vec3 normalForBox(vec3 hit, const box b) {
     return vec3(0.0, 0.0, 1.0);
 }
 
-vec4 trace(vec3 origin, vec3 dir, vec2 pix) {
+vec4 trace(vec3 origin, vec3 dir) {
   hitinfo i;
-  vec4 finalColor = vec4(0.0, 0.0, 0.0, 1.0);
-  if (intersectBoxes(origin, dir, i)) {
-    box b = boxes[i.bi];
-    vec3 hitPoint = origin + i.near * dir;
-    vec3 normal = normalForBox(hitPoint, b);
-    vec3 lightNormal = normalize(hitPoint - lightCenterPosition);
-    vec3 lightPosition = lightCenterPosition + randomDiskPoint(lightNormal, pix, time) * LIGHT_RADIUS;
-    vec3 shadowRayDir = lightPosition - hitPoint;
-    vec3 shadowRayStart = hitPoint + normal * EPSILON;
-    hitinfo shadowRayInfo;
-    bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
-    if (lightObstructed && shadowRayInfo.near < 1.0) {
-      finalColor = vec4(0.0, 0.0, 0.0, 1.0);
+  vec4 accumulated = vec4(0.0);
+  vec4 attenuation = vec4(1.0);
+  for (int bounce = 0; bounce < bounceCount; bounce++) {
+    if (intersectBoxes(origin, dir, i)) {
+      box b = boxes[i.bi];
+      vec3 hitPoint = origin + i.near * dir;
+      vec3 normal = normalForBox(hitPoint, b);
+      vec3 lightNormal = normalize(hitPoint - lightCenterPosition);
+      vec3 lightPosition = lightCenterPosition + randomDiskPoint_(rand, lightNormal) * LIGHT_RADIUS;
+      vec3 shadowRayDir = lightPosition - hitPoint;
+      vec3 shadowRayStart = hitPoint + normal * EPSILON;
+      hitinfo shadowRayInfo;
+      bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
+      attenuation *= colorOfBox(b);
+      if (shadowRayInfo.near >= 1.0) {
+        float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
+        float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
+        accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);
+      }
+      origin = shadowRayStart;
+      dir = randomHemispherePoint_(rand, normal);
+      attenuation *= dot(normal, dir);
     } else {
-      float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
-      float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
-      vec4 col = colorOfBox(b);
-      finalColor = col * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);
+      break;
     }
   }
-  return finalColor;
+  return accumulated;
 }
 
 void main(void) {
   vec2 pos = texcoord;
   vec4 newColor = vec4(0.0, 0.0, 0.0, 1.0);
-  for (int sample = 0; sample < sampleCount; sample++) {
-    vec2 jitter = random(vec2(float(sample), 612.653), time) / vec2(width, height) / 2.0;
+  for (int s = 0; s < sampleCount; s++) {
+    float rand1 = random(pos, time + float(s));
+    float rand2 = random(pos + vec2(641.51224, 423.178), time + float(s));
+    float rand3 = random(pos - vec2(147.16414, 363.941), time - float(s));
+    rand = vec3(rand1, rand2, rand3);
+    vec2 jitter = vec2(rand1, rand2) / vec2(width, height);
     vec2 p = pos + jitter;
     vec3 dir = mix(mix(ray00, ray01, p.y), mix(ray10, ray11, p.y), p.x);
-    newColor += trace(eye, dir, p);
+    newColor += trace(eye, dir);
   }
   newColor /= sampleCount;
   vec4 oldColor = vec4(0.0);
-  if (blendFactor > 0.0) {
-    /* Without explicitly disabling imageLoad for
-     * the first frame, we get VERY STRANGE corrupted image!
-     * 'mix' SHOULD mix oldColor out, but strangely it does not!
-     */
-    oldColor = texture(framebuffer, pos);
-  }
+  oldColor = texture(framebuffer, pos);
   color = mix(newColor, oldColor, blendFactor);
 }

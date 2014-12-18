@@ -53,6 +53,7 @@ public class Demo {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int sampleCountUniform;
+	private int bounceCountUniform;
 
 	private int workGroupSizeX;
 	private int workGroupSizeY;
@@ -68,6 +69,7 @@ public class Demo {
 	private long firstTime;
 	private int  sample;
 	private int antialiasSampleCount = 1;
+	private int bounceCount = 1;
 
 	private Vector3f tmpVector    = new Vector3f();
 	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
@@ -116,6 +118,8 @@ public class Demo {
 		}
 
 		System.out.println("Press 1 through 9 to change the number of antialiasing samples.");
+		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
+		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
@@ -125,9 +129,18 @@ public class Demo {
 				if ( key == GLFW_KEY_ESCAPE )
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-					System.out.println("Antialiasing sample count is now: " + (Demo.this.antialiasSampleCount = key - GLFW_KEY_1 + 1));
+				    Demo.this.antialiasSampleCount = key - GLFW_KEY_1 + 1;
+					System.out.println("Antialiasing sample count is now: " + Demo.this.antialiasSampleCount);
 					Demo.this.sample = 0;
-				}
+				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
+				    Demo.this.bounceCount = Math.min(4, Demo.this.bounceCount + 1);
+                    System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+                    Demo.this.sample = 0;
+                } else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
+                    Demo.this.bounceCount = Math.max(1, Demo.this.bounceCount - 1);
+                    System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+                    Demo.this.sample = 0;
+                }
 			}
 		});
 
@@ -323,6 +336,7 @@ public class Demo {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 		sampleCountUniform = glGetUniformLocation(computeProgram, "sampleCount");
+		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
 		glUseProgram(0);
 	}
 
@@ -343,13 +357,6 @@ public class Demo {
 	}
 
 	private void resizeFramebufferTexture() {
-		/*
-		glBindTexture(GL_TEXTURE_2D, tex);
-		ByteBuffer black = BufferUtils.createByteBuffer(4 * 4 * width * height);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, black);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		//*/
-
 		glDeleteTextures(tex);
 		tex = createFramebufferTexture();
 	}
@@ -389,6 +396,7 @@ public class Demo {
 		glUniform1f(blendFactorUniform, blendFactor);
 
 		glUniform1i(sampleCountUniform, antialiasSampleCount);
+		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Set viewing frustum corner rays in shader */
 		glUniform3f(eyeUniform, camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
