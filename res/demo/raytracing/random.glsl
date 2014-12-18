@@ -83,7 +83,7 @@ vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
  */
 vec3 randomSpherePoint_(vec3 rand) {
   float ang1 = (rand.x + 1.0) * PI; // 2.0 * [0..1) * PI
-  float u = rand.y; // [0..1)
+  float u = rand.y; // [-1..1), cos and acos(2v-1)) cancels each other out, so we arrive at [-1..1)
   float u2 = u * u;
   float x = sqrt(1.0 - u2) * cos(ang1);
   float y = sqrt(1.0 - u2) * sin(ang1);
