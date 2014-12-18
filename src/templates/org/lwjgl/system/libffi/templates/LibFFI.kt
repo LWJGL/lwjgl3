@@ -27,15 +27,15 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		libffi assumes that you have a pointer to the function you wish to call and that you know the number and types of arguments to pass it, as well as the
 		return type of the function.
 
-		The first thing you must do is create an ##ffi_cif object that matches the signature of the function you wish to call. This is a separate step
-		because it is common to make multiple calls using a single ##ffi_cif. The {@code cif} in {@code ffi_cif} stands for Call InterFace. To prepare a
+		The first thing you must do is create an ##FFICIF object that matches the signature of the function you wish to call. This is a separate step
+		because it is common to make multiple calls using a single ##FFICIF. The {@code cif} in {@code ffi_cif} stands for Call InterFace. To prepare a
 		call interface object, use the function #prep_cif(). To call a function using an initialized {@code ffi_cif}, use the #call() function.
 
 		<strong>LWJGL note</strong>: The closure and raw APIs are not exposed.
 		"""
 	
 	IntConstant.block(
-		"Types used to create custom ##ffi_cif.",
+		"Types used to create custom ##FFICIF.",
 
 		"TYPE_VOID" _ 0,
 		"TYPE_INT" _ 1,
@@ -84,7 +84,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	)
 	
 	LongConstant.block(
-		"Data types. These are the addresses of libffi's predefined ##ffi_type structs.",
+		"Data types. These are the addresses of libffi's predefined ##FFIType structs.",
 
 		"ffi_type_void".expr<Long>("ffi_type_void()"),
 
@@ -115,13 +115,13 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	ffi_status.func(
 		"prep_cif",
-		"Prepares an ##ffi_cif structure for use with #call().",
+		"Prepares an ##FFICIF structure for use with #call().",
 
-		ffi_cif_p.IN("cif", "the ##ffi_cif structure to prepare"),
+		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
 		AutoSize("atypes") _ unsigned_int.IN("nargs", "the number of arguments"),
-		ffi_type_p.IN("rtype", "points to an ##ffi_type that describes the data type, size and alignment of the return value"),
-		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##ffi_type structs that describe the data type, size and alignment of each argument"),
+		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
+		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
 		"""
@@ -132,14 +132,14 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	ffi_status.func(
 		"prep_cif_var",
-		"Prepares an ##ffi_cif structure for use with #call() for variadic functions.",
+		"Prepares an ##FFICIF structure for use with #call() for variadic functions.",
 
-		ffi_cif_p.IN("cif", "the ##ffi_cif structure to prepare"),
+		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
 		unsigned_int.IN("nfixedargs", "the number of fixed (non-variadic) arguments"),
 		AutoSize("atypes") _ unsigned_int.IN("ntotalargs", "the total number of arguments"),
-		ffi_type_p.IN("rtype", "points to an ##ffi_type that describes the data type, size and alignment of the return value"),
-		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to ##ffi_type structs that describe the data type, size and alignment of each argument"),
+		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
+		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
 		"""
@@ -154,7 +154,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 		ffi_cif_p.IN(
 			"cif",
-			"a ##ffi_cif structure. It must be initialized with #prep_cif() or #prep_cif_var() before it is used with {@code ffi_call}."
+			"a ##FFICIF structure. It must be initialized with #prep_cif() or #prep_cif_var() before it is used with {@code ffi_call}."
 		),
 		FFI_FN_TYPE.IN("fn", "the function to call"),
 		nullable _ void_p.IN(
@@ -169,9 +169,9 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 	void_p.func(
 		"closure_alloc",
-	    "Allocates an {@link ffi_closure} structure.",
+	    "Allocates an ##FFIClosure structure.",
 
-	    autoSizeResult _ size_t.IN("size", "the number of bytes to allocate", "ffi_closure##SIZEOF"),
+	    autoSizeResult _ size_t.IN("size", "the number of bytes to allocate", "FFIClosure##SIZEOF"),
 	    Check(1) _ void_pp.OUT("code", "a buffer in which to place the returned executable address"),
 
 	    returnDoc = "a pointer to the writable address"
@@ -181,15 +181,15 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"closure_free",
 	    "Frees memory allocated using #closure_alloc().",
 
-	    void_p.IN("writable", "the address of an {@link ffi_closure} structure")
+	    void_p.IN("writable", "the address of an ##FFIClosure structure")
 	)
 
 	ffi_status.func(
 		"prep_closure_loc",
 	    "",
 
-	    ffi_closure_p.IN("closure", "the address of an {@link ffi_closure} object; this is the writable address returned by #closure_alloc()."),
-	    ffi_cif_p.IN("cif", "the {@link ffi_cif} describing the function parameters"),
+	    ffi_closure_p.IN("closure", "the address of an ##FFIClosure object; this is the writable address returned by #closure_alloc()."),
+	    ffi_cif_p.IN("cif", "the ##FFICIF describing the function parameters"),
 	    FFI_CLOSURE_FUN.IN("fun", "the function which will be called when the closure is invoked"),
 	    nullable _ voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
 	    voidptr.IN("codeloc", "the executable address returned by #closure_alloc().")
