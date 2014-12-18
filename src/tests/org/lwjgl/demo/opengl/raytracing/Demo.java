@@ -83,6 +83,13 @@ public class Demo {
 
 	Closure debugProc;
 
+	static {
+		/*
+		 * Tell LWJGL that we only want 4.3 functionality.
+		 */
+		System.setProperty("org.lwjgl.opengl.maxVersion", "4.3");
+	}
+
 	private void init() throws IOException {
 		glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
 			private GLFWErrorCallback delegate = Callbacks.errorCallbackPrint(System.err);
@@ -90,7 +97,7 @@ public class Demo {
 			@Override
 			public void invoke(int error, long description) {
 				if ( error == GLFW_VERSION_UNAVAILABLE )
-					System.err.println("This demo requires OpenGL 4.3 or higher. The Demo33 version works on OpenGL 3.3 or higher.");
+					System.err.println("This demo requires OpenGL 4.3 or higher. The Demo version works on OpenGL 3.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -117,7 +124,7 @@ public class Demo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-		System.out.println("Press 1 through 9 to change the number of antialiasing samples.");
+		System.out.println("Press 1 through 9 to change the number of samples per frame.");
 		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
 		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
@@ -129,17 +136,26 @@ public class Demo {
 				if ( key == GLFW_KEY_ESCAPE )
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-					Demo.this.samplesPerFrameCount = key - GLFW_KEY_1 + 1;
-					System.out.println("Samples per frame is now: " + Demo.this.samplesPerFrameCount);
-					Demo.this.frameNumber = 0;
+					int newSamplesPerFrameCount = key - GLFW_KEY_1 + 1;
+					if (newSamplesPerFrameCount != Demo.this.samplesPerFrameCount) {
+						Demo.this.samplesPerFrameCount = newSamplesPerFrameCount;
+						System.out.println("Samples per frame is now: " + Demo.this.samplesPerFrameCount);
+						Demo.this.frameNumber = 0;
+					}
 				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
-					Demo.this.bounceCount = Math.min(4, Demo.this.bounceCount + 1);
-					System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
-					Demo.this.frameNumber = 0;
+					int newBounceCount = Math.min(4, Demo.this.bounceCount + 1);
+					if (newBounceCount != Demo.this.bounceCount) {
+						Demo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+						Demo.this.frameNumber = 0;
+					}
 				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
-					Demo.this.bounceCount = Math.max(1, Demo.this.bounceCount - 1);
-					System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
-					Demo.this.frameNumber = 0;
+					int newBounceCount = Math.max(1, Demo.this.bounceCount - 1);
+					if (newBounceCount != Demo.this.bounceCount) {
+						Demo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+						Demo.this.frameNumber = 0;
+					}
 				}
 			}
 		});

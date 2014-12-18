@@ -34,15 +34,17 @@ uint hash( uvec3 v ) {
  * be visible in the final image.
  * 
  * In the GLSL world, the function presented in the first answer to:
+ * 
  *   http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
+ * 
  * is often used, but that is not a good function, as it has problems with
  * floating point precision and is very sensitive to the seed value, resulting
  * in visible patterns for small and large seeds.
- *
+ * 
  * The best implementation (requiring GLSL 330, though) that I found over
  * time is actually this:
  * 
- * http://amindforeverprogramming.blogspot.de/2013/07/random-floats-in-glsl-330.html
+ *   http://amindforeverprogramming.blogspot.de/2013/07/random-floats-in-glsl-330.html
  */
 float random(vec2 f, float time) {
   const uint mantissaMask = 0x007FFFFFu;
@@ -93,7 +95,7 @@ vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
 
 /**
  * Generate a uniformly distributed random point on the unit-sphere.
- *
+ * 
  * After:
  * http://mathworld.wolfram.com/SpherePointPicking.html
  */
@@ -101,8 +103,9 @@ vec3 randomSpherePoint_(vec3 rand) {
   float ang1 = (rand.x + 1.0) * PI; // [-1..1) -> [0..2*PI)
   float u = rand.y; // [-1..1), cos and acos(2v-1) cancel each other out, so we arrive at [-1..1)
   float u2 = u * u;
-  float x = sqrt(1.0 - u2) * cos(ang1);
-  float y = sqrt(1.0 - u2) * sin(ang1);
+  float sqrt1MinusU2 = sqrt(1.0 - u2);
+  float x = sqrt1MinusU2 * cos(ang1);
+  float y = sqrt1MinusU2 * sin(ang1);
   float z = u;
   return vec3(x, y, z);
 }
@@ -130,7 +133,9 @@ vec3 randomSpherePoint_(vec3 rand) {
 vec3 randomHemispherePoint_(vec3 rand, vec3 n) {
   /**
    * Generate random sphere point and swap vector along the normal, if it
-   * points the other way.
+   * points to the wrong of the two hemispheres.
+   * This method provides a uniform distribution over the hemisphere, 
+   * provided that the sphere distribution is also uniform.
    */
   vec3 v = randomSpherePoint_(rand);
   return v * sign(dot(v, n));

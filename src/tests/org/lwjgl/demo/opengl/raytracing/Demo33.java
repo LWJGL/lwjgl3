@@ -87,6 +87,13 @@ public class Demo33 {
 
 	Closure debugProc;
 
+	static {
+		/*
+		 * Tell LWJGL that we only want 3.3 functionality.
+		 */
+		System.setProperty("org.lwjgl.opengl.maxVersion", "3.3");
+	}
+
 	private void init() throws IOException {
 	    glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
 			private GLFWErrorCallback delegate = Callbacks.errorCallbackPrint(System.err);
@@ -121,7 +128,7 @@ public class Demo33 {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-		System.out.println("Press 1 through 9 to change the number of antialiasing samples.");
+		System.out.println("Press 1 through 9 to change the number of samples per frame.");
 		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
 		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
@@ -133,17 +140,26 @@ public class Demo33 {
 				if ( key == GLFW_KEY_ESCAPE )
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-					Demo33.this.samplesPerFrameCount = key - GLFW_KEY_1 + 1;
-					System.out.println("Samples per frame is now: " + Demo33.this.samplesPerFrameCount);
-					Demo33.this.frameNumber = 0;
+					int newSamplesPerFrameCount = key - GLFW_KEY_1 + 1;
+					if (newSamplesPerFrameCount != Demo33.this.samplesPerFrameCount) {
+						Demo33.this.samplesPerFrameCount = newSamplesPerFrameCount;
+						System.out.println("Samples per frame is now: " + Demo33.this.samplesPerFrameCount);
+						Demo33.this.frameNumber = 0;
+					}
 				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
-					Demo33.this.bounceCount = Math.min(4, Demo33.this.bounceCount + 1);
-					System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
-					Demo33.this.frameNumber = 0;
+					int newBounceCount = Math.min(4, Demo33.this.bounceCount + 1);
+					if (newBounceCount != Demo33.this.bounceCount) {
+						Demo33.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
+						Demo33.this.frameNumber = 0;
+					}
 				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
-					Demo33.this.bounceCount = Math.max(1, Demo33.this.bounceCount - 1);
-					System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
-					Demo33.this.frameNumber = 0;
+					int newBounceCount = Math.max(1, Demo33.this.bounceCount - 1);
+					if (newBounceCount != Demo33.this.bounceCount) {
+						Demo33.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
+						Demo33.this.frameNumber = 0;
+					}
 				}
 			}
 		});
@@ -187,7 +203,7 @@ public class Demo33 {
 		ByteBuffer vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		glfwSetWindowPos(window, (GLFWvidmode.width(vidmode) - width) / 2, (GLFWvidmode.height(vidmode) - height) / 2);
 		glfwMakeContextCurrent(window);
-		glfwSwapInterval(1);
+		glfwSwapInterval(0);
 		glfwShowWindow(window);
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
