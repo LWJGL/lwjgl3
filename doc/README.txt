@@ -136,6 +136,10 @@ The supported properties are:
 	* org.lwjgl.opencl.libname [DYNAMIC]
 	* org.lwjgl.opengl.libname [DYNAMIC]
 		Can be used to override the library name of the corresponding library.
+	* org.lwjgl.opengl.maxVersion [STATIC]
+		Can be used to limit the maximum available OpenGL version. This can be useful to ensure
+		that an application has not accidentally used features only available in a higher OpenGL
+		version.
 
 	* org.lwjgl.openal.explicitInit [STATIC]
 	* org.lwjgl.opencl.explicitInit [STATIC]
