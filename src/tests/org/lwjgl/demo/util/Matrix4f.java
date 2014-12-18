@@ -23,32 +23,6 @@ public class Matrix4f {
 	public float m32;
 	public float m33;
 
-	public Matrix4f() {
-		setZero();
-	}
-
-	/**
-	 * Sets this matrix to all zeros.
-	 */
-	public final void setZero() {
-		m00 = 0.0f;
-		m01 = 0.0f;
-		m02 = 0.0f;
-		m03 = 0.0f;
-		m10 = 0.0f;
-		m11 = 0.0f;
-		m12 = 0.0f;
-		m13 = 0.0f;
-		m20 = 0.0f;
-		m21 = 0.0f;
-		m22 = 0.0f;
-		m23 = 0.0f;
-		m30 = 0.0f;
-		m31 = 0.0f;
-		m32 = 0.0f;
-		m33 = 0.0f;
-	}
-
 	public void set(Matrix4f m1) {
 		m00 = m1.m00;
 		m01 = m1.m01;
