@@ -38,7 +38,7 @@ public class Demo {
 	private long window;
 	private int width  = 1024;
 	private int height = 768;
-	private boolean resetFramebuffer;
+	private boolean resetFramebuffer = true;
 
 	private int tex;
 	private int vao;
@@ -52,7 +52,7 @@ public class Demo {
 	private int ray11Uniform;
 	private int timeUniform;
 	private int blendFactorUniform;
-	private int sampleCountUniform;
+	private int samplesPerFrameCountUniform;
 	private int bounceCountUniform;
 
 	private int workGroupSizeX;
@@ -67,8 +67,8 @@ public class Demo {
 	private float rotationAboutY     = 0.8f;
 
 	private long firstTime;
-	private int  sample;
-	private int antialiasSampleCount = 1;
+	private int  frameNumber;
+	private int samplesPerFrameCount = 1;
 	private int bounceCount = 1;
 
 	private Vector3f tmpVector    = new Vector3f();
@@ -129,29 +129,30 @@ public class Demo {
 				if ( key == GLFW_KEY_ESCAPE )
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-				    Demo.this.antialiasSampleCount = key - GLFW_KEY_1 + 1;
-					System.out.println("Antialiasing sample count is now: " + Demo.this.antialiasSampleCount);
-					Demo.this.sample = 0;
+					Demo.this.samplesPerFrameCount = key - GLFW_KEY_1 + 1;
+					System.out.println("Samples per frame is now: " + Demo.this.samplesPerFrameCount);
+					Demo.this.frameNumber = 0;
 				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
-				    Demo.this.bounceCount = Math.min(4, Demo.this.bounceCount + 1);
-                    System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
-                    Demo.this.sample = 0;
-                } else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
-                    Demo.this.bounceCount = Math.max(1, Demo.this.bounceCount - 1);
-                    System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
-                    Demo.this.sample = 0;
-                }
+					Demo.this.bounceCount = Math.min(4, Demo.this.bounceCount + 1);
+					System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+					Demo.this.frameNumber = 0;
+				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
+					Demo.this.bounceCount = Math.max(1, Demo.this.bounceCount - 1);
+					System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
+					Demo.this.frameNumber = 0;
+				}
 			}
 		});
 
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 ) {
+				if ( width > 0 && height > 0 && 
+						(Demo.this.width != width || Demo.this.height != height)) {
 					Demo.this.width = width;
 					Demo.this.height = height;
 					Demo.this.resetFramebuffer = true;
-					Demo.this.sample = 0;
+					Demo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -161,7 +162,7 @@ public class Demo {
 			public void invoke(long window, double x, double y) {
 				Demo.this.mouseX = (float)x;
 				if ( mouseDown ) {
-					Demo.this.sample = 0;
+					Demo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -335,7 +336,7 @@ public class Demo {
 		ray11Uniform = glGetUniformLocation(computeProgram, "ray11");
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
-		sampleCountUniform = glGetUniformLocation(computeProgram, "sampleCount");
+		samplesPerFrameCountUniform = glGetUniformLocation(computeProgram, "sampleCount");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
 		glUseProgram(0);
 	}
@@ -350,8 +351,7 @@ public class Demo {
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		ByteBuffer black = null;
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, black);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer)null);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		return tex;
 	}
@@ -392,10 +392,14 @@ public class Demo {
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
 		glUniform1f(timeUniform, elapsedSeconds);
 
-		float blendFactor = (float)sample / ((float)sample + 1.0f);
+		/* We are going to average multiple successive frames, so 
+		 * here we compute the blend factor between old frame and new frame.
+		 *   0.0 - use only the new frame
+		 * > 0.0 - blend between old frame and new frame */
+		float blendFactor = (float)frameNumber / ((float)frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
 
-		glUniform1i(sampleCountUniform, antialiasSampleCount);
+		glUniform1i(samplesPerFrameCountUniform, samplesPerFrameCount);
 		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Set viewing frustum corner rays in shader */
@@ -436,7 +440,7 @@ public class Demo {
 		glBindVertexArray(0);
 		glUseProgram(0);
 
-		sample++;
+		frameNumber++;
 	}
 
 	private void loop() {

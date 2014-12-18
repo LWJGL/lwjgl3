@@ -35,7 +35,11 @@ uint hash( uvec3 v ) {
  * In the GLSL world, the function presented in the first answer to:
  *   http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
  * is often used, but that is not a good function, as it has problems with
- * floating point precision and very sensitive to the seed value.
+ * floating point precision and is very sensitive to the seed value, resulting
+ * in visible patterns for small and large seeds.
+ *
+ * The best implementation (requiring GLSL 330, though) that I found over
+ * time is actually this:
  * 
  * http://amindforeverprogramming.blogspot.de/2013/07/random-floats-in-glsl-330.html
  */
@@ -94,7 +98,7 @@ vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
  */
 vec3 randomSpherePoint_(vec3 rand) {
   float ang1 = (rand.x + 1.0) * PI; // 2.0 * [0..1) * PI
-  float u = rand.y; // [-1..1), cos and acos(2v-1) cancels each other out, so we arrive at [-1..1)
+  float u = rand.y; // [-1..1), cos and acos(2v-1) cancel each other out, so we arrive at [-1..1)
   float u2 = u * u;
   float x = sqrt(1.0 - u2) * cos(ang1);
   float y = sqrt(1.0 - u2) * sin(ang1);

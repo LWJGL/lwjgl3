@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 330 core
+#version 130
 
 /* This comes interpolated from the vertex shader */
 in vec2 texcoord;

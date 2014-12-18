@@ -41,7 +41,7 @@ public class Demo33 {
 	private long window;
 	private int width  = 1024;
 	private int height = 768;
-	private boolean resetFramebuffer;
+	private boolean resetFramebuffer = true;
 
 	private int tex;
 	private int vao;
@@ -59,7 +59,7 @@ public class Demo33 {
 	private int framebufferUniform;
 	private int widthUniform;
 	private int heightUniform;
-	private int sampleCountUniform;
+	private int samplesPerFrameCountUniform;
 	private int bounceCountUniform;
 
 	private Camera  camera;
@@ -71,8 +71,8 @@ public class Demo33 {
 	private float rotationAboutY     = 0.8f;
 
 	private long firstTime;
-	private int  sample;
-	private int antialiasSampleCount = 1;
+	private int  frameNumber;
+	private int samplesPerFrameCount = 1;
 	private int bounceCount = 1;
 
 	private Vector3f tmpVector    = new Vector3f();
@@ -88,7 +88,22 @@ public class Demo33 {
 	Closure debugProc;
 
 	private void init() throws IOException {
-		glfwSetErrorCallback(errCallback = Callbacks.errorCallbackPrint(System.err));
+	    glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
+			private GLFWErrorCallback delegate = Callbacks.errorCallbackPrint(System.err);
+
+			@Override
+			public void invoke(int error, long description) {
+				if ( error == GLFW_VERSION_UNAVAILABLE )
+					System.err.println("This demo requires OpenGL 3.3 or higher.");
+				delegate.invoke(error, description);
+			}
+
+			@Override
+			public void release() {
+				delegate.release();
+				super.release();
+			}
+		});
 
 		if ( glfwInit() != GL_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
@@ -106,41 +121,42 @@ public class Demo33 {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-        System.out.println("Press 1 through 9 to change the number of antialiasing samples.");
-        System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
-        System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
-        glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
-            @Override
-            public void invoke(long window, int key, int scancode, int action, int mods) {
-                if ( action != GLFW_RELEASE )
-                    return;
+		System.out.println("Press 1 through 9 to change the number of antialiasing samples.");
+		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
+		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
+		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
+			@Override
+			public void invoke(long window, int key, int scancode, int action, int mods) {
+				if ( action != GLFW_RELEASE )
+					return;
 
-                if ( key == GLFW_KEY_ESCAPE )
-                    glfwSetWindowShouldClose(window, GL_TRUE);
-                else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-                    Demo33.this.antialiasSampleCount = key - GLFW_KEY_1 + 1;
-                    System.out.println("Antialiasing sample count is now: " + Demo33.this.antialiasSampleCount);
-                    Demo33.this.sample = 0;
-                } else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
-                    Demo33.this.bounceCount = Math.min(4, Demo33.this.bounceCount + 1);
-                    System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
-                    Demo33.this.sample = 0;
-                } else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
-                    Demo33.this.bounceCount = Math.max(1, Demo33.this.bounceCount - 1);
-                    System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
-                    Demo33.this.sample = 0;
-                }
-            }
-        });
+				if ( key == GLFW_KEY_ESCAPE )
+					glfwSetWindowShouldClose(window, GL_TRUE);
+				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
+					Demo33.this.samplesPerFrameCount = key - GLFW_KEY_1 + 1;
+					System.out.println("Samples per frame is now: " + Demo33.this.samplesPerFrameCount);
+					Demo33.this.frameNumber = 0;
+				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
+					Demo33.this.bounceCount = Math.min(4, Demo33.this.bounceCount + 1);
+					System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
+					Demo33.this.frameNumber = 0;
+				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
+					Demo33.this.bounceCount = Math.max(1, Demo33.this.bounceCount - 1);
+					System.out.println("Ray bounce count is now: " + Demo33.this.bounceCount);
+					Demo33.this.frameNumber = 0;
+				}
+			}
+		});
 
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 ) {
+				if ( width > 0 && height > 0 && 
+						(Demo33.this.width != width || Demo33.this.height != height)) {
 					Demo33.this.width = width;
 					Demo33.this.height = height;
 					Demo33.this.resetFramebuffer = true;
-					Demo33.this.sample = 0;
+					Demo33.this.frameNumber = 0;
 				}
 			}
 		});
@@ -150,7 +166,7 @@ public class Demo33 {
 			public void invoke(long window, double x, double y) {
 				Demo33.this.mouseX = (float)x;
 				if ( mouseDown ) {
-					Demo33.this.sample = 0;
+					Demo33.this.frameNumber = 0;
 				}
 			}
 		});
@@ -328,7 +344,7 @@ public class Demo33 {
 		framebufferUniform = glGetUniformLocation(rayTracingProgram, "framebuffer");
 		widthUniform = glGetUniformLocation(rayTracingProgram, "width");
 		heightUniform = glGetUniformLocation(rayTracingProgram, "height");
-		sampleCountUniform = glGetUniformLocation(rayTracingProgram, "sampleCount");
+		samplesPerFrameCountUniform = glGetUniformLocation(rayTracingProgram, "sampleCount");
 		bounceCountUniform = glGetUniformLocation(rayTracingProgram, "bounceCount");
 		glUniform1i(framebufferUniform, 0);
 		glUseProgram(0);
@@ -404,10 +420,14 @@ public class Demo33 {
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
 		glUniform1f(timeUniform, elapsedSeconds);
 
-		float blendFactor = (float)sample / ((float)sample + 1.0f);
+		/* We are going to average multiple successive frames, so 
+		 * here we compute the blend factor between old frame and new frame.
+		 *   0.0 - use only the new frame
+		 * > 0.0 - blend between old frame and new frame */
+		float blendFactor = (float)frameNumber / ((float)frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
 
-		glUniform1i(sampleCountUniform, antialiasSampleCount);
+		glUniform1i(samplesPerFrameCountUniform, samplesPerFrameCount);
 		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Set viewing frustum corner rays in shader */
@@ -449,7 +469,7 @@ public class Demo33 {
 		glBindVertexArray(0);
 		glUseProgram(0);
 
-		sample++;
+		frameNumber++;
 	}
 
 	private void loop() {

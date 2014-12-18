@@ -52,7 +52,7 @@ const box boxes[] = box[7](
 #define EPSILON 0.00001
 #define LIGHT_RADIUS 0.6
 
-#define LIGHT_BASE_INTENSITY 15.0
+#define LIGHT_BASE_INTENSITY 12.0
 const vec3 lightCenterPosition = vec3(1.5, 3.9, 3);
 const vec4 lightColor = vec4(1);
 
