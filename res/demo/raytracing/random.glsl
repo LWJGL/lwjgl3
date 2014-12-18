@@ -26,6 +26,17 @@ uint hash( uvec3 v ) {
 }
 
 /**
+ * Generate a random value in [-1..+1).
+ * The distribution MUST be really uniform and exhibit NO pattern at all,
+ * because it is heavily used to generate random sample directions for various
+ * things, and if the random function contains the slightest pattern, it will
+ * be visible in the final image.
+ * 
+ * In the GLSL world, the function presented in the first answer to:
+ *   http://stackoverflow.com/questions/4200224/random-noise-functions-for-glsl
+ * is often used, but that is not a good function, as it has problems with
+ * floating point precision and very sensitive to the seed value.
+ * 
  * http://amindforeverprogramming.blogspot.de/2013/07/random-floats-in-glsl-330.html
  */
 float random(vec2 f, float time) {
@@ -83,7 +94,7 @@ vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
  */
 vec3 randomSpherePoint_(vec3 rand) {
   float ang1 = (rand.x + 1.0) * PI; // 2.0 * [0..1) * PI
-  float u = rand.y; // [-1..1), cos and acos(2v-1)) cancels each other out, so we arrive at [-1..1)
+  float u = rand.y; // [-1..1), cos and acos(2v-1) cancels each other out, so we arrive at [-1..1)
   float u2 = u * u;
   float x = sqrt(1.0 - u2) * cos(ang1);
   float y = sqrt(1.0 - u2) * sin(ang1);
@@ -109,7 +120,7 @@ vec3 randomHemispherePoint_(vec3 rand, vec3 n) {
 }
 
 /**
- * See above function above.
+ * See above function.
  */
 vec3 randomHemispherePoint(vec3 n, vec2 pix, float time) {
   float rand1 = random(pix, time);
