@@ -484,8 +484,8 @@ public class Demo {
 			cpCallback.release();
 			mbCallback.release();
 			glfwDestroyWindow(window);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable t) {
+			t.printStackTrace();
 		} finally {
 			glfwTerminate();
 		}

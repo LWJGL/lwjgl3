@@ -513,8 +513,8 @@ public class Demo33 {
 			cpCallback.release();
 			mbCallback.release();
 			glfwDestroyWindow(window);
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Throwable t) {
+			t.printStackTrace();
 		} finally {
 			glfwTerminate();
 		}
