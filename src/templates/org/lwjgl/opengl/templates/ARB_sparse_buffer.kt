@@ -35,7 +35,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		"SPARSE_BUFFER_PAGE_SIZE_ARB" _ 0x82F8
 	)
 
-	val BufferPageCommitmentARB = GLvoid.func(
+	GLvoid.func(
 		"BufferPageCommitmentARB",
 		"Commit and de-commits regions of sparse buffer storage.",
 
@@ -50,11 +50,11 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 			redundantly committing pages does not alter their content.
 			"""
 		)
-	).javaDocLink
+	)
 
 	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
 		"NamedBufferPageCommitmentEXT",
-		"Direct-state-access version of $BufferPageCommitmentARB.",
+		"Direct-state-access version of #BufferPageCommitmentARB().",
 
 		GLuint.IN("buffer", "the buffer object"),
 		GLintptr.IN("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),
@@ -64,7 +64,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 
 	DependsOn("GL_ARB_direct_state_access") _ GLvoid.func(
 		"NamedBufferPageCommitmentARB",
-		"Direct-state-access version of $BufferPageCommitmentARB.",
+		"Direct-state-access version of #BufferPageCommitmentARB().",
 
 		GLuint.IN("buffer", "the buffer object"),
 		GLintptr.IN("offset", "the region offset. Must be an integer multiple of the implementation dependent constant #SPARSE_BUFFER_PAGE_SIZE_ARB."),

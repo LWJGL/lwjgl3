@@ -763,36 +763,36 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALuint.IN("effect", "a value that may be a effect name")
 	)
 
-	val alEffecti = ALvoid.func(
+	ALvoid.func(
 		"Effecti",
 		"Sets the integer value of an effect parameter.",
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Effectiv",
-		"Pointer version of $alEffecti.",
+		"Pointer version of #Effecti().",
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	val alEffectf = ALvoid.func(
+	ALvoid.func(
 		"Effectf",
 		"Sets the float value of an effect parameter.",
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALfloat.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Effectfv",
-		"Pointer version of $alEffectf.",
+		"Pointer version of #Effectf().",
 
 		ALuint.IN("effect", "the effect to modify"),
 		ALenum.IN("param", "the parameter to modify"),
@@ -858,36 +858,36 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALuint.IN("filter", "a value that may be a filter name")
 	)
 
-	val alFilteri = ALvoid.func(
+	ALvoid.func(
 		"Filteri",
 		"Sets the integer value of a filter parameter.",
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Filteriv",
-		"Pointer version of $alFilteri.",
+		"Pointer version of #Filteri().",
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	val alFilterf = ALvoid.func(
+	ALvoid.func(
 		"Filterf",
 		"Sets the float value of a filter parameter.",
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALfloat.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Filterfv",
-		"Pointer version of $alFilterf.",
+		"Pointer version of #Filterf().",
 
 		ALuint.IN("filter", "the filter to modify"),
 		ALenum.IN("param", "the parameter to modify"),
@@ -953,36 +953,36 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALuint.IN("effectSlot", "a value that may be an effect slot name")
 	)
 
-	val alAuxiliaryEffectSloti = ALvoid.func(
+	ALvoid.func(
 		"AuxiliaryEffectSloti",
 		"Sets the integer value of an effect slot parameter.",
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALint.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"AuxiliaryEffectSlotiv",
-		"Pointer version of $alAuxiliaryEffectSloti.",
+		"Pointer version of #AuxiliaryEffectSloti().",
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	val alAuxiliaryEffectSlotf = ALvoid.func(
+	ALvoid.func(
 		"AuxiliaryEffectSlotf",
 		"Sets the float value of an effect slot parameter.",
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),
 		ALfloat.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"AuxiliaryEffectSlotfv",
-		"Pointer version of $alAuxiliaryEffectSlotf.",
+		"Pointer version of #AuxiliaryEffectSlotf().",
 
 		ALuint.IN("effectSlot", "the effect slot to modify"),
 		ALenum.IN("param", "the parameter to modify"),

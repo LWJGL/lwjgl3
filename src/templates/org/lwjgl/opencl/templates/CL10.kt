@@ -602,7 +602,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val GetDeviceIDs = cl_int.func(
+	cl_int.func(
 		"GetDeviceIDs",
 		"Obtains the list of devices available on a platform.",
 
@@ -647,12 +647,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"GetDeviceInfo",
 		"""
-		Returns specific information about an OpenCL device. {@code device} may be a device returned by $GetDeviceIDs or a sub-device created by
+		Returns specific information about an OpenCL device. {@code device} may be a device returned by #GetDeviceIDs() or a sub-device created by
 		CL12#CreateSubDevices(). If {@code device} is a sub-device, the specific information for the sub-device will be returned.
 		""",
 
@@ -703,7 +703,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
 		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
 			"devices",
-			"a list of unique devices returned by $GetDeviceIDs or sub-devices created by CL12#CreateSubDevices() for a platform"
+			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by CL12#CreateSubDevices() for a platform"
 		),
 		nullable _ cl_create_context_callback.IN(
 			"pfn_notify",
@@ -735,7 +735,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_VALUE if {@code num_devices} is equal to zero.",
 			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
 			"$INVALID_DEVICE if {@code devices} contains an invalid device.",
-			"#DEVICE_NOT_AVAILABLE if a device in {@code devices} is currently not available even though the device was returned by $GetDeviceIDs.",
+			"#DEVICE_NOT_AVAILABLE if a device in {@code devices} is currently not available even though the device was returned by #GetDeviceIDs().",
 			OORE,
 			OOHME
 		)}
@@ -834,7 +834,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Runtime ]------------------
 
-	val CreateCommandQueue = cl_command_queue.func(
+	cl_command_queue.func(
 		"CreateCommandQueue",
 		"""
 		Creates a command-queue on a specific device.
@@ -869,14 +869,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"RetainCommandQueue",
 		"""
 		Increments the {@code command_queue} reference count.
 
-		$CreateCommandQueue performs an implicit retain. This is very helpful for 3rd party libraries, which typically get a command-queue passed to them by the
+		#CreateCommandQueue() performs an implicit retain. This is very helpful for 3rd party libraries, which typically get a command-queue passed to them by the
 		application. However, it is possible that the application may delete the command-queue without informing the library. Allowing functions to attach to
 		(i.e. retain) and release a command-queue solves the problem of a command-queue being used by a library no longer being valid.
 		""",
@@ -894,7 +894,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val ReleaseCommandQueue = cl_int.func(
+	cl_int.func(
 		"ReleaseCommandQueue",
 		"""
 		Decrements the {@code command_queue} reference count.
@@ -916,7 +916,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"GetCommandQueueInfo",
@@ -946,7 +946,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateBuffer = cl_mem.func(
+	cl_mem.func(
 		"CreateBuffer",
 		"Creates a buffer object.",
 
@@ -992,9 +992,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
-	val EnqueueReadBuffer = cl_int.func(
+	cl_int.func(
 		"EnqueueReadBuffer",
 		"""
 		Enqueues a command to read from a buffer object to host memory.
@@ -1066,9 +1066,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
-	val EnqueueWriteBuffer = cl_int.func(
+	cl_int.func(
 		"EnqueueWriteBuffer",
 		"""
 		Enqueues a command to write to a buffer object from host memory.
@@ -1138,7 +1138,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"EnqueueCopyBuffer",
@@ -1191,7 +1191,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueMapBuffer = ((MapPointer("size") _ void_p).func(
+	(MapPointer("size") _ void_p).func(
 		"EnqueueMapBuffer",
 		"""
 		Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
@@ -1203,7 +1203,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		If the buffer object is created with #MEM_USE_HOST_PTR set in {@code mem_flags}, the following will be true:
 		${ul(
 			"""
-			The {@code host_ptr} specified in $CreateBuffer is guaranteed to contain the latest bits in the region being mapped when the
+			The {@code host_ptr} specified in #CreateBuffer() is guaranteed to contain the latest bits in the region being mapped when the
 			{@code clEnqueueMapBuffer} command has completed.
 			""",
 			"The pointer value returned by {@code clEnqueueMapBuffer} will be derived from the {@code host_ptr} specified when the buffer object is created."
@@ -1268,7 +1268,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
 	cl_mem.func(
 		"CreateImage2D",
@@ -1455,7 +1455,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueReadImage = cl_int.func(
+	cl_int.func(
 		"EnqueueReadImage",
 		"""
 		Enqueues a command to read from an image or image array object to host memory.
@@ -1577,9 +1577,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
-	val EnqueueWriteImage = cl_int.func(
+	cl_int.func(
 		"EnqueueWriteImage",
 		"""
 		Enqueues a command to write to an image or image array object from host memory.
@@ -1702,7 +1702,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"EnqueueCopyImage",
@@ -1972,7 +1972,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val EnqueueMapImage = ((MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p).func(
+	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p).func(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.
@@ -2091,7 +2091,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
 	cl_int.func(
 		"GetImageInfo",
@@ -2129,7 +2129,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 		Increments the {@code memobj} reference count.
 
-		$CreateBuffer, CL11#CreateSubBuffer() and CL12#CreateImage() perform an implicit retain.
+		#CreateBuffer(), CL11#CreateSubBuffer() and CL12#CreateImage() perform an implicit retain.
 		""",
 
 		cl_mem.IN("memobj", "the memory object to retain"),
@@ -2172,17 +2172,17 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"EnqueueUnmapMemObject",
 		"""
 		Enqueues a command to unmap a previously mapped region of a memory object. Reads or writes from the host using the pointer returned by
-		$EnqueueMapBuffer or $EnqueueMapImage are considered to be complete.
+		#EnqueueMapBuffer() or #EnqueueMapImage() are considered to be complete.
 
-		$EnqueueMapBuffer, and $EnqueueMapImage increments the mapped count of the memory object. The initial mapped count value of the memory object is zero.
-		Multiple calls to $EnqueueMapBuffer, or $EnqueueMapImage on the same memory object will increment this mapped count by appropriate number of calls.
-		{@code clEnqueueUnmapMemObject} decrements the mapped count of the memory object. $EnqueueMapBuffer, and $EnqueueMapImage act as synchronization points
+		#EnqueueMapBuffer(), and #EnqueueMapImage() increments the mapped count of the memory object. The initial mapped count value of the memory object is zero.
+		Multiple calls to #EnqueueMapBuffer(), or #EnqueueMapImage() on the same memory object will increment this mapped count by appropriate number of calls.
+		{@code clEnqueueUnmapMemObject} decrements the mapped count of the memory object. #EnqueueMapBuffer(), and #EnqueueMapImage() act as synchronization points
 		for a region of the buffer object being mapped.
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid command-queue"),
 		cl_mem.IN("memobj", "a valid memory object. The OpenCL context associated with {@code command_queue} and {@code memobj} must be the same."),
-		void_p.IN("mapped_ptr", "the host address returned by a previous call to $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}"),
+		void_p.IN("mapped_ptr", "the host address returned by a previous call to #EnqueueMapBuffer(), or #EnqueueMapImage() for {@code memobj}"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -2193,7 +2193,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		${ul(
 			ICQE,
 			"$INVALID_MEM_OBJECT if {@code memobj} is not a valid memory object.",
-			"$INVALID_VALUE if {@code mapped_ptr} is not a valid pointer returned by $EnqueueMapBuffer, or $EnqueueMapImage for {@code memobj}.",
+			"$INVALID_VALUE if {@code mapped_ptr} is not a valid pointer returned by #EnqueueMapBuffer(), or #EnqueueMapImage() for {@code memobj}.",
 			IEWLE,
 			OORE,
 			OOHME,
@@ -2237,7 +2237,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateSampler = cl_sampler.func(
+	cl_sampler.func(
 		"CreateSampler",
 		"""
 		Creates a sampler object.
@@ -2271,11 +2271,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"RetainSampler",
-		"Increments the sampler reference count. $CreateSampler performs an implicit retain.",
+		"Increments the sampler reference count. #CreateSampler() performs an implicit retain.",
 
 		cl_sampler.IN("sampler", "the sample object to retain"),
 
@@ -2341,7 +2341,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateProgramWithSource = cl_program.func(
+	cl_program.func(
 		"CreateProgramWithSource",
 		"""
 		Creates a program object for a context, and loads the source code specified by the text strings in the strings array into the program object. The
@@ -2376,9 +2376,9 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
-	val CreateProgramWithBinary = cl_program.func(
+	cl_program.func(
 		"CreateProgramWithBinary",
 		"""
 		Creates a program object for a context, and loads the binary bits specified by {@code binary} into the program object.
@@ -2447,7 +2447,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"RetainProgram",
@@ -2491,11 +2491,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 		Builds (compiles & links) a program executable from the program source or binary for all the devices or a specific device(s) in the OpenCL context
 		associated with {@code program}. OpenCL allows program executables to be built using the source or the binary. {@code clBuildProgram} must be called for
-		{@code program} created using either $CreateProgramWithSource or $CreateProgramWithBinary to build the program executable for one or more devices
-		associated with {@code program}. If {@code program} is created with $CreateProgramWithBinary, then the program binary must be an executable binary (not
+		{@code program} created using either #CreateProgramWithSource() or #CreateProgramWithBinary() to build the program executable for one or more devices
+		associated with {@code program}. If {@code program} is created with #CreateProgramWithBinary(), then the program binary must be an executable binary (not
 		a compiled binary or library).
 
-		The executable binary can be queried using #GetProgramInfo() and can be specified to $CreateProgramWithBinary to create a new program object.
+		The executable binary can be queried using #GetProgramInfo() and can be specified to #CreateProgramWithBinary() to create a new program object.
 		""",
 
 		cl_program.IN("program", "the program object"),
@@ -2535,7 +2535,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"$INVALID_VALUE if {@code pfn_notify} is $NULL but {@code user_data} is not $NULL.",
 			"$INVALID_DEVICE if OpenCL devices listed in {@code device_list} are not in the list of devices associated with program.",
 			"""
-			$INVALID_BINARY if {@code program} is created with $CreateProgramWithBinary and devices listed in {@code device_list} do not have a valid
+			$INVALID_BINARY if {@code program} is created with #CreateProgramWithBinary() and devices listed in {@code device_list} do not have a valid
 			program binary loaded.
 			""",
 			"$INVALID_BUILD_OPTIONS if the build options specified by {@code options} are invalid.",
@@ -2544,7 +2544,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code clBuildProgram} for {@code program} has not completed.
 			""",
 			"""
-			#COMPILER_NOT_AVAILABLE if {@code program} is created with $CreateProgramWithSource and a compiler is not available i.e.
+			#COMPILER_NOT_AVAILABLE if {@code program} is created with #CreateProgramWithSource() and a compiler is not available i.e.
 			#DEVICE_COMPILER_AVAILABLE is set to $FALSE.
 			""",
 			"""
@@ -2552,7 +2552,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			not return until the build has completed.
 			""",
 			"$INVALID_OPERATION if there are kernel objects attached to {@code program}.",
-			"$INVALID_OPERATION if program was not created with $CreateProgramWithSource or $CreateProgramWithBinary.",
+			"$INVALID_OPERATION if program was not created with #CreateProgramWithSource() or #CreateProgramWithBinary().",
 			OORE,
 			OOHME
 		)}
@@ -2633,7 +2633,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	val CreateKernel = cl_kernel.func(
+	cl_kernel.func(
 		"CreateKernel",
 		"""
 		Creates a kernel object.
@@ -2671,15 +2671,15 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
-	val CreateKernelsInProgram = (cl_int.func(
+	cl_int.func(
 		"CreateKernelsInProgram",
 		"""
 		Creates kernel objects for all kernel functions in {@code program}. Kernel objects are not created for any {@code __kernel} functions in {@code program}
 		that do not have the same function definition across all devices for which a program executable has been successfully built.
 
-		See $CreateKernel for more details.
+		See #CreateKernel() for more details.
 		""",
 
 		cl_program.IN("program", "a program object with a successfully built executable"),
@@ -2707,11 +2707,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			OOHME
 		)}
 		"""
-	)).javaDocLink
+	)
 
 	cl_int.func(
 		"RetainKernel",
-		"Increments the {@code kernel} reference count. $CreateKernel or $CreateKernelsInProgram do an implicit retain.",
+		"Increments the {@code kernel} reference count. #CreateKernel() or #CreateKernelsInProgram() do an implicit retain.",
 
 		cl_kernel.IN("kernel", "the kernel to retain"),
 
@@ -2926,7 +2926,7 @@ kernel void image_filter (
 		"""
 	)
 
-	val EnqueueNDRangeKernel = cl_int.func(
+	cl_int.func(
 		"EnqueueNDRangeKernel",
 		"Enqueues a command to execute a kernel on a device.",
 
@@ -3045,14 +3045,14 @@ kernel void image_filter (
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"EnqueueTask",
 		"""
 		Enqueues a command to execute a kernel on a device. The kernel is executed using a single work-item.
 
-		{@code clEnqueueTask} is equivalent to calling $EnqueueNDRangeKernel with {@code work_dim = 1}, {@code global_work_offset = NULL},
+		{@code clEnqueueTask} is equivalent to calling #EnqueueNDRangeKernel() with {@code work_dim = 1}, {@code global_work_offset = NULL},
 		{@code global_work_size[0]} set to 1 and {@code local_work_size[0]} set to 1.
 		""",
 
@@ -3062,7 +3062,7 @@ kernel void image_filter (
 		EWL,
 		EVENT,
 
-		returnDoc = "$SUCCESS if the kernel execution was successfully queued. Otherwise, see $EnqueueNDRangeKernel."
+		returnDoc = "$SUCCESS if the kernel execution was successfully queued. Otherwise, see #EnqueueNDRangeKernel()."
 	)
 
 	cl_int.func(
@@ -3096,7 +3096,7 @@ kernel void image_filter (
 			"mem_list",
 			"""
 			a list of valid buffer objects, if {@code num_mem_objects} &gt; 0. The buffer object values specified in {@code mem_list} are memory object handles
-			(cl_mem values) returned by $CreateBuffer or $NULL.
+			(cl_mem values) returned by #CreateBuffer() or $NULL.
 			"""
 		),
 		mods(
@@ -3143,7 +3143,7 @@ kernel void image_filter (
 		"""
 	)
 
-	val WaitForEvents = cl_int.func(
+	cl_int.func(
 		"WaitForEvents",
 		"""
 		Waits on the host thread for commands identified by event objects in {@code event_list} to complete. A command is considered complete if its execution
@@ -3165,7 +3165,7 @@ kernel void image_filter (
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"GetEventInfo",
@@ -3229,7 +3229,7 @@ kernel void image_filter (
 
 		<strong>NOTE</strong>: Developers should be careful when releasing their last reference count on events created by CL11#CreateUserEvent() that
 		have not yet been set to status of #COMPLETE or an error. If the user event was used in the {@code event_wait_list} argument passed to a
-		clEnqueue*** API or another application host thread is waiting for it in $WaitForEvents, those commands and host threads will continue to wait for the
+		clEnqueue*** API or another application host thread is waiting for it in #WaitForEvents(), those commands and host threads will continue to wait for the
 		event status to reach #COMPLETE or error, even after the user has released the object. Since in this scenario the developer has released his
 		last reference count to the user event, it would be in principle no longer valid for him to change the status of the event to unblock all the other
 		machinery. As a result the waiting tasks will wait forever, and associated events, cl_mem objects, command queues and contexts are likely to leak.
@@ -3353,10 +3353,10 @@ kernel void image_filter (
 		guarantees that all queued commands to {@code command_queue} will eventually be submitted to the appropriate device. There is no guarantee that they
 		will be complete after {@code clFlush} returns.
 
-		Any blocking commands queued in a command-queue and $ReleaseCommandQueue perform an implicit flush of the command-queue. These blocking commands are
-		$EnqueueReadBuffer, CL11#EnqueueReadBufferRect(), $EnqueueReadImage, with {@code blocking_read} set to $TRUE; $EnqueueWriteBuffer,
-		CL11#EnqueueWriteBufferRect(), $EnqueueWriteImage with {@code blocking_write} set to $TRUE; $EnqueueMapBuffer, $EnqueueMapImage with
-		{@code blocking_map} set to $TRUE; or $WaitForEvents.
+		Any blocking commands queued in a command-queue and #ReleaseCommandQueue() perform an implicit flush of the command-queue. These blocking commands are
+		#EnqueueReadBuffer(), CL11#EnqueueReadBufferRect(), #EnqueueReadImage(), with {@code blocking_read} set to $TRUE; #EnqueueWriteBuffer(),
+		CL11#EnqueueWriteBufferRect(), #EnqueueWriteImage() with {@code blocking_write} set to $TRUE; #EnqueueMapBuffer(), #EnqueueMapImage() with
+		{@code blocking_map} set to $TRUE; or #WaitForEvents().
 
 		To use event objects that refer to commands enqueued in a command-queue as event objects to wait on by commands enqueued in a different command-queue,
 		the application must call a {@code clFlush} or any blocking commands that perform an implicit flush of the command-queue where the commands that refer

@@ -77,14 +77,14 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
 	)
 
-	val alBufferf = ALvoid.func(
+	ALvoid.func(
 		"Bufferf",
 		"Sets the float value of a buffer parameter.",
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
 		ALfloat.IN("value", "the value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Buffer3f",
@@ -99,21 +99,21 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 	ALvoid.func(
 		"Bufferfv",
-		"the pointer version of $alBufferf",
+		"the pointer version of #Bufferf()",
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
 		mods(Check(1), const) _ ALfloat_p.IN("value", "the parameter values")
 	)
 
-	val alBufferi = ALvoid.func(
+	ALvoid.func(
 		"Bufferi",
 		"Sets the integer value of a buffer parameter.",
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
 		ALint.IN("value", "the value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Buffer3i",
@@ -128,7 +128,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 	ALvoid.func(
 		"Bufferiv",
-		"the pointer version of $alBufferi",
+		"the pointer version of #Bufferi()",
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),

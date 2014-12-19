@@ -869,24 +869,24 @@ if (shader) {
 
 	val VertexAttribRef = ReferenceGL("glVertexAttrib")
 
-	val VertexAttribL1d = (VertexAttribRef _ GLvoid.func(
+	VertexAttribRef _ GLvoid.func(
 		"VertexAttribL1d",
 		"Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0 and w to 1.0.",
 
 		GLuint.IN("index", attribIndex),
 		GLdouble.IN("x", attribX)
-	)).javaDocLink
+	)
 
-	val VertexAttribL2d = (VertexAttribRef _ GLvoid.func(
+	VertexAttribRef _ GLvoid.func(
 		"VertexAttribL2d",
 		"Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0 and w to 1.0.",
 
 		GLuint.IN("index", attribIndex),
 		GLdouble.IN("x", attribX),
 		GLdouble.IN("y", attribY)
-	)).javaDocLink
+	)
 
-	val VertexAttribL3d = (VertexAttribRef _ GLvoid.func(
+	VertexAttribRef _ GLvoid.func(
 		"VertexAttribL3d",
 		"Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0.",
 
@@ -894,9 +894,9 @@ if (shader) {
 		GLdouble.IN("x", attribX),
 		GLdouble.IN("y", attribY),
 		GLdouble.IN("z", attribZ)
-	)).javaDocLink
+	)
 
-	val VertexAttribL4d = (VertexAttribRef _ GLvoid.func(
+	VertexAttribRef _ GLvoid.func(
 		"VertexAttribL4d",
 		"Specifies the value of a generic vertex attribute.",
 
@@ -905,12 +905,12 @@ if (shader) {
 		GLdouble.IN("y", attribY),
 		GLdouble.IN("z", attribZ),
 		GLdouble.IN("w", attribW)
-	)).javaDocLink
+	)
 
-	VertexAttribRef _ GLvoid.func("VertexAttribL1dv", "Pointer version of $VertexAttribL1d.", GLuint.IN("index", attribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid.func("VertexAttribL2dv", "Pointer version of $VertexAttribL2d.", GLuint.IN("index", attribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid.func("VertexAttribL3dv", "Pointer version of $VertexAttribL3d.", GLuint.IN("index", attribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid.func("VertexAttribL4dv", "Pointer version of $VertexAttribL4d.", GLuint.IN("index", attribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid.func("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid.func("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid.func("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid.func("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", attribBuffer))
 
 	ReferenceGL("glVertexAttribPointer") _ GLvoid.func(
 		"VertexAttribLPointer",
@@ -971,7 +971,7 @@ if (shader) {
 		const _ GLfloat_p.IN("v", "an array containing the viewport parameters")
 	)
 
-	val ViewportIndexedf = (ReferenceGL("glViewportIndexed") _ GLvoid.func(
+	ReferenceGL("glViewportIndexed") _ GLvoid.func(
 		"ViewportIndexedf",
 		"Sets a specified viewport.",
 
@@ -980,11 +980,11 @@ if (shader) {
 		GLfloat.IN("y", "the bottom viewport coordinate"),
 		GLfloat.IN("w", "the viewport width"),
 		GLfloat.IN("h", "the viewport height")
-	)).javaDocLink
+	)
 
 	GLvoid.func(
 		"ViewportIndexedfv",
-		"Pointer version of $ViewportIndexedf.",
+		"Pointer version of #ViewportIndexedf().",
 
 		GLuint.IN("index", "the viewport to set"),
 		mods(Check(4), const) _ GLfloat_p.IN("v", "the viewport parameters")
@@ -999,7 +999,7 @@ if (shader) {
 		const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
-	val ScissorIndexed = GLvoid.func(
+	GLvoid.func(
 		"ScissorIndexed",
 		"Defines the scissor box for a specific viewport.",
 
@@ -1008,11 +1008,11 @@ if (shader) {
 		GLint.IN("bottom", "the bottom scissor box coordinate"),
 		GLsizei.IN("width", "the scissor box width"),
 		GLsizei.IN("height", "the scissor box height")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"ScissorIndexedv",
-		"Pointer version of $ScissorIndexed.",
+		"Pointer version of #ScissorIndexed().",
 
 		GLuint.IN("index", "the index of the viewport whose scissor box to modify"),
 		mods(Check(4), const) _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")

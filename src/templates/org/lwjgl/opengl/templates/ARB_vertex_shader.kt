@@ -99,30 +99,30 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 	val vertexAttribW = "the vertex attribute w component"
 	val vertexAttribBuffer = "the vertex attribute buffer"
 
-	val VertexAttrib1fARB = GLvoid.func(
+	GLvoid.func(
 		"VertexAttrib1fARB",
 		"Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0f and w to 1.0f.",
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLfloat.IN("v0", vertexAttribX)
-	).javaDocLink
+	)
 
-	val VertexAttrib1sARB = GLvoid.func("VertexAttrib1sARB", "Short version of $VertexAttrib1fARB.", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX)).javaDocLink
-	val VertexAttrib1dARB = GLvoid.func("VertexAttrib1dARB", "Double version of $VertexAttrib1fARB.", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX)).javaDocLink
+	GLvoid.func("VertexAttrib1sARB", "Short version of #VertexAttrib1fARB().", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX))
+	GLvoid.func("VertexAttrib1dARB", "Double version of #VertexAttrib1fARB().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX))
 
-	val VertexAttrib2fARB = GLvoid.func(
+	GLvoid.func(
 		"VertexAttrib2fARB",
 		"Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0f and w to 1.0f.",
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLfloat.IN("v0", vertexAttribX),
 		GLfloat.IN("v1", vertexAttribY)
-	).javaDocLink
+	)
 
-	val VertexAttrib2sARB = GLvoid.func("VertexAttrib2sARB", "Short version of $VertexAttrib2fARB.", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY)).javaDocLink
-	val VertexAttrib2dARB = GLvoid.func("VertexAttrib2dARB", "Double version of $VertexAttrib2fARB.", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY)).javaDocLink
+	GLvoid.func("VertexAttrib2sARB", "Short version of #VertexAttrib2fARB().", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY))
+	GLvoid.func("VertexAttrib2dARB", "Double version of #VertexAttrib2fARB().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY))
 
-	val VertexAttrib3fARB = GLvoid.func(
+	GLvoid.func(
 		"VertexAttrib3fARB",
 		"Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0f.",
 
@@ -130,12 +130,12 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		GLfloat.IN("v0", vertexAttribX),
 		GLfloat.IN("v1", vertexAttribY),
 		GLfloat.IN("v2", vertexAttribZ)
-	).javaDocLink
+	)
 
-	val VertexAttrib3sARB = GLvoid.func("VertexAttrib3sARB", "Short version of $VertexAttrib3fARB.", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY), GLshort.IN("v2", vertexAttribZ)).javaDocLink
-	val VertexAttrib3dARB = GLvoid.func("VertexAttrib3dARB", "Double version of $VertexAttrib3fARB.", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ)).javaDocLink
+	GLvoid.func("VertexAttrib3sARB", "Short version of #VertexAttrib3fARB().", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY), GLshort.IN("v2", vertexAttribZ))
+	GLvoid.func("VertexAttrib3dARB", "Double version of #VertexAttrib3fARB().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ))
 
-	val VertexAttrib4fARB = GLvoid.func(
+	GLvoid.func(
 		"VertexAttrib4fARB",
 		"Specifies the value of a generic vertex attribute.",
 
@@ -144,39 +144,39 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		GLfloat.IN("v1", vertexAttribY),
 		GLfloat.IN("v2", vertexAttribZ),
 		GLfloat.IN("v3", vertexAttribW)
-	).javaDocLink
+	)
 
-	val VertexAttrib4sARB = GLvoid.func("VertexAttrib4sARB", "Short version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY), GLshort.IN("v2", vertexAttribZ), GLshort.IN("v3", vertexAttribW)).javaDocLink
-	val VertexAttrib4dARB = GLvoid.func("VertexAttrib4dARB", "Double version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ), GLdouble.IN("v3", vertexAttribW)).javaDocLink
-	val VertexAttrib4NubARB = GLvoid.func("VertexAttrib4NubARB", "Normalized unsigned byte version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), GLubyte.IN("x", vertexAttribX), GLubyte.IN("y", vertexAttribY), GLubyte.IN("z", vertexAttribZ), GLubyte.IN("w", vertexAttribW)).javaDocLink
+	GLvoid.func("VertexAttrib4sARB", "Short version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), GLshort.IN("v0", vertexAttribX), GLshort.IN("v1", vertexAttribY), GLshort.IN("v2", vertexAttribZ), GLshort.IN("v3", vertexAttribW))
+	GLvoid.func("VertexAttrib4dARB", "Double version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ), GLdouble.IN("v3", vertexAttribW))
+	GLvoid.func("VertexAttrib4NubARB", "Normalized unsigned byte version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), GLubyte.IN("x", vertexAttribX), GLubyte.IN("y", vertexAttribY), GLubyte.IN("z", vertexAttribZ), GLubyte.IN("w", vertexAttribW))
 
-	GLvoid.func("VertexAttrib1fvARB", "Pointer version of $VertexAttrib1fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib1svARB", "Pointer version of $VertexAttrib1sARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib1dvARB", "Pointer version of $VertexAttrib1dARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttrib2fvARB", "Pointer version of $VertexAttrib2fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib2svARB", "Pointer version of $VertexAttrib2sARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib2dvARB", "Pointer version of $VertexAttrib2dARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttrib3fvARB", "Pointer version of $VertexAttrib3fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib3svARB", "Pointer version of $VertexAttrib3sARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib3dvARB", "Pointer version of $VertexAttrib3dARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttrib4fvARB", "Pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4svARB", "Pointer version of $VertexAttrib4sARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4dvARB", "Pointer version of $VertexAttrib4dARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttrib4ivARB", "Integer pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4bvARB", "Byte pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4ubvARB", "Pointer version of $VertexAttrib4NubARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4usvARB", "Unsigned short pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4uivARB", "Unsigned int pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NbvARB", "Normalized byte pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NsvARB", "Normalized short pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NivARB", "Normalized int pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NubvARB", "Normalized unsigned byte pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NusvARB", "Normalized unsigned short pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttrib4NuivARB", "Normalized unsigned int pointer version of $VertexAttrib4fARB.", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4ivARB", "Integer pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4bvARB", "Byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4ubvARB", "Pointer version of #VertexAttrib4NubARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4usvARB", "Unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4uivARB", "Unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NbvARB", "Normalized byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NsvARB", "Normalized short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NivARB", "Normalized int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NubvARB", "Normalized unsigned byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NusvARB", "Normalized unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttrib4NuivARB", "Normalized unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
 
 	GLvoid.func(
 		"VertexAttribPointerARB",
@@ -259,7 +259,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 		const _ GLcharASCII_p.IN("name", "a null terminated string containing the name of the attribute variable whose location is to be queried")
 	)
 
-	val GetVertexAttribivARB = GLvoid.func(
+	GLvoid.func(
 		"GetVertexAttribivARB",
 		"Returns the integer value of a generic vertex attribute parameter.",
 
@@ -270,11 +270,11 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "returns the requested data")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"GetVertexAttribfvARB",
-		"Float version of $GetVertexAttribivARB.",
+		"Float version of #GetVertexAttribivARB().",
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
@@ -283,7 +283,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
 	GLvoid.func(
 		"GetVertexAttribdvARB",
-		"Double version of $GetVertexAttribivARB.",
+		"Double version of #GetVertexAttribivARB().",
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),

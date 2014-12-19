@@ -48,7 +48,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 
 		GLenum.IN("pname", "the parameter to set", "#POINT_SIZE_MIN_ARB #POINT_SIZE_MAX_ARB #POINT_FADE_THRESHOLD_SIZE_ARB"),
 		GLfloat.IN("param", "the parameter value")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"PointParameterfvARB",

@@ -189,31 +189,31 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	val vertexAttribW = "the vertex attribute w component"
 	val vertexAttribBuffer = "the pure integer vertex attribute buffer"
 
-	val VertexAttribI1i = GLvoid.func("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX)).javaDocLink
-	val VertexAttribI2i = GLvoid.func("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY)).javaDocLink
-	val VertexAttribI3i = GLvoid.func("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ)).javaDocLink
-	val VertexAttribI4i = GLvoid.func("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW)).javaDocLink
+	GLvoid.func("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
+	GLvoid.func("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
+	GLvoid.func("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	GLvoid.func("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	val VertexAttribI1ui = GLvoid.func("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX)).javaDocLink
-	val VertexAttribI2ui = GLvoid.func("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY)).javaDocLink
-	val VertexAttribI3ui = GLvoid.func("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ)).javaDocLink
-	val VertexAttribI4ui = GLvoid.func("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW)).javaDocLink
+	GLvoid.func("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
+	GLvoid.func("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
+	GLvoid.func("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	GLvoid.func("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid.func("VertexAttribI1iv", "Pointer version of $VertexAttribI1i.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI2iv", "Pointer version of $VertexAttribI2i.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI3iv", "Pointer version of $VertexAttribI3i.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLint_p.IN("v", vertexAttribBuffer))
-	val VertexAttribI4iv = GLvoid.func("VertexAttribI4iv", "Pointer version of $VertexAttribI4i.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLint_p.IN("v", vertexAttribBuffer)).javaDocLink
+	GLvoid.func("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI1uiv", "Pointer version of $VertexAttribI1ui.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI2uiv", "Pointer version of $VertexAttribI2ui.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI3uiv", "Pointer version of $VertexAttribI3ui.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	val VertexAttribI4uiv = GLvoid.func("VertexAttribI4uiv", "Pointer version of $VertexAttribI4ui.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLuint_p.IN("v", vertexAttribBuffer)).javaDocLink
+	GLvoid.func("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI4bv", "Byte version of $VertexAttribI4iv.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4sv", "Short version of $VertexAttribI4iv.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI4ubv", "Byte version of $VertexAttribI4uiv.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4usv", "Short version of $VertexAttribI4uiv.", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid.func("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
 
 	GLvoid.func(
 		"VertexAttribIPointer",
@@ -241,18 +241,18 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	val GetVertexAttribIiv = GLvoid.func(
+	GLvoid.func(
 		"GetVertexAttribIiv",
 		"Returns the value of a pure integer generic vertex attribute parameter.",
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("params", "returns the requested data")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"GetVertexAttribIuiv",
-		"Unsigned version of $GetVertexAttribIiv.",
+		"Unsigned version of #GetVertexAttribIiv().",
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),

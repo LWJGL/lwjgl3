@@ -187,37 +187,37 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		ALenum.IN("target", "the capability to query")
 	)
 
-	val alGetBoolean = ALboolean.func(
+	ALboolean.func(
 		"GetBoolean",
 		"Returns the boolean value of the specified parameter.",
 
 		ALenum.IN("paramName", "the parameter to query")
-	).javaDocLink
+	)
 
-	val alGetInteger = ALint.func(
+	ALint.func(
 		"GetInteger",
 		"Returns the integer value of the specified parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", NumericalQueries)
-	).javaDocLink
+	)
 
-	val alGetFloat = ALfloat.func(
+	ALfloat.func(
 		"GetFloat",
 		"Returns the float value of the specified parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", NumericalQueries)
-	).javaDocLink
+	)
 
-	val alGetDouble = ALdouble.func(
+	ALdouble.func(
 		"GetDouble",
 		"Returns the double value of the specified parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", NumericalQueries)
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"GetBooleanv",
-		"Pointer version of $alGetBoolean.",
+		"Pointer version of #GetBoolean().",
 
 		ALenum.IN("paramName", "the parameter to query"),
 		Check(1) _ ALboolean_p.OUT("dest", "a buffer that will receive the parameter values")
@@ -225,7 +225,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
 	ALvoid.func(
 		"GetIntegerv",
-		"Pointer version of $alGetInteger.",
+		"Pointer version of #GetInteger().",
 
 		ALenum.IN("paramName", "the parameter to query"),
 		Check(1) _ ALint_p.IN("dest", "a buffer that will receive the parameter values")
@@ -233,7 +233,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
 	ALvoid.func(
 		"GetFloatv",
-		"Pointer version of $alGetFloat.",
+		"Pointer version of #GetFloat().",
 
 		ALenum.IN("paramName", "the parameter to query"),
 		Check(1) _ ALfloat_p.IN("dest", "a buffer that will receive the parameter values")
@@ -241,7 +241,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 
 	ALvoid.func(
 		"GetDoublev",
-		"Pointer version of $alGetDouble.",
+		"Pointer version of #GetDouble().",
 
 		ALenum.IN("paramName", "the parameter to query"),
 		Check(1) _ ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
@@ -338,17 +338,17 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		ALfloat.IN("dopplerVelocity", "the doppler velocity")
 	)
 
-	val alListenerf = ALvoid.func(
+	ALvoid.func(
 		"Listenerf",
 		"Sets the float value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to modify", ListenerAttributes),
 		ALfloat.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Listeneri",
-		"Integer version of $alListenerf.",
+		"Integer version of #Listenerf().",
 
 		ALenum.IN("paramName", "the parameter to modify", ListenerAttributes),
 		ALint.IN("values", "the parameter value")
@@ -366,7 +366,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"Listenerfv",
-		"Pointer version of $alListenerf.",
+		"Pointer version of #Listenerf().",
 
 		ALenum.IN("paramName", "the parameter to modify"),
 		mods(Check(1), const) _ ALfloat_p.IN("values", "the parameter values")
@@ -429,14 +429,14 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		ALuint.IN("sourceName", "a value that may be a source name")
 	)
 
-	val alSourcef = ALvoid.func(
+	ALvoid.func(
 		"Sourcef",
 		"Sets the float value of a source parameter.",
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify", SourceAttributes),
 		ALfloat.IN("value", "the parameter value")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"Source3f",
@@ -451,7 +451,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"Sourcefv",
-		"Pointer version of $alSourcef.",
+		"Pointer version of #Sourcef().",
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
@@ -460,7 +460,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"Sourcei",
-		"Integer version of $alSourcef.",
+		"Integer version of #Sourcef().",
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
@@ -536,7 +536,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		returnValue _ ALuint_p.OUT("bufferNames", "the buffer names")
 	)
 
-	val alSourcePlay = ALvoid.func(
+	ALvoid.func(
 		"SourcePlay",
 		"""
 		Sets the source state to AL_PLAYING.
@@ -549,9 +549,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("source", "the source to play")
-	).javaDocLink
+	)
 
-	val alSourcePause = ALvoid.func(
+	ALvoid.func(
 		"SourcePause",
 		"""
 		Sets the source state to AL_PAUSED.
@@ -562,9 +562,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("source", "the source to pause")
-	).javaDocLink
+	)
 
-	val alSourceStop = ALvoid.func(
+	ALvoid.func(
 		"SourceStop",
 		"""
 		Sets the source state to AL_STOPPED.
@@ -575,9 +575,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("source", "the source to stop")
-	).javaDocLink
+	)
 
-	val alSourceRewind = ALvoid.func(
+	ALvoid.func(
 		"SourceRewind",
 		"""
 		Sets the source state to AL_INITIAL.
@@ -589,11 +589,11 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("source", "the source to rewind")
-	).javaDocLink
+	)
 
 	ALvoid.func(
 		"SourcePlayv",
-		"Pointer version of $alSourcePlay.",
+		"Pointer version of #SourcePlay().",
 
 		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to play"),
 		const _ ALuint_p.IN("sources", "the sources to play")
@@ -601,7 +601,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"SourcePausev",
-		"Pointer version of $alSourcePause.",
+		"Pointer version of #SourcePause().",
 
 		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to pause"),
 		const _ ALuint_p.IN("sources", "the sources to pause")
@@ -609,7 +609,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"SourceStopv",
-		"Pointer version of $alSourceStop.",
+		"Pointer version of #SourceStop().",
 
 		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to stop"),
 		const _ ALuint_p.IN("sources", "the sources to stop")
@@ -617,7 +617,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 	ALvoid.func(
 		"SourceRewindv",
-		"Pointer version of $alSourceRewind.",
+		"Pointer version of #SourceRewind().",
 
 		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to rewind"),
 		const _ ALuint_p.IN("sources", "the sources to rewind")

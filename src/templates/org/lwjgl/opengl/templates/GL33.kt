@@ -122,36 +122,36 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		GL12#TEXTURE_MAX_LOD GL14#TEXTURE_LOD_BIAS GL14#TEXTURE_COMPARE_MODE GL14#TEXTURE_COMPARE_FUNC
 		"""
 
-	val SamplerParameteri = GLvoid.func(
+	GLvoid.func(
 		"SamplerParameteri",
 		"Set the integer value of a sampler parameter.",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a single-valued sampler parameter", SamplerParameters),
 		GLint.IN("param", "the value of {@code pname}")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"SamplerParameterf",
-		"Float version of $SamplerParameteri.",
+		"Float version of #SamplerParameteri().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a single-valued sampler parameter"),
 		GLfloat.IN("param", "the value of {@code pname}")
-	).javaDocLink
+	)
 
-	val SamplerParameteriv = GLvoid.func(
+	GLvoid.func(
 		"SamplerParameteriv",
-		"Pointer version of $SamplerParameteri.",
+		"Pointer version of #SamplerParameteri().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter", "GL11#TEXTURE_BORDER_COLOR $SamplerParameters"),
 		const _ GLint_p.IN("params", "an array where the value or values of {@code pname} are stored")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"SamplerParameterfv",
-		"Float version of $SamplerParameteriv.",
+		"Float version of #SamplerParameteriv().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
@@ -160,7 +160,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	GLvoid.func(
 		"SamplerParameterIiv",
-		"Pure integer version of $SamplerParameteriv.",
+		"Pure integer version of #SamplerParameteriv().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
@@ -169,25 +169,25 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	GLvoid.func(
 		"SamplerParameterIuiv",
-		"Unsigned pure integer version of $SamplerParameteriv.",
+		"Unsigned pure integer version of #SamplerParameteriv().",
 
 		GLuint.IN("sampler", "the sampler object whose parameter to modify"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
 		const _ GLuint_p.IN("params", "an array where the value or values of {@code pname} are stored")
 	)
 
-	val GetSamplerParameteriv = GLvoid.func(
+	GLvoid.func(
 		"GetSamplerParameteriv",
 		"Return the integer value(s) of a sampler parameter.",
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter", "$SamplerParameters, GL11#TEXTURE_BORDER_COLOR"),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the sampler parameters")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"GetSamplerParameterfv",
-		"Float version of $GetSamplerParameteriv.",
+		"Float version of #GetSamplerParameteriv().",
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
@@ -196,7 +196,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	GLvoid.func(
 		"GetSamplerParameterIiv",
-		"Pure integer version of $GetSamplerParameteriv.",
+		"Pure integer version of #GetSamplerParameteriv().",
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
@@ -205,7 +205,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 
 	GLvoid.func(
 		"GetSamplerParameterIuiv",
-		"Unsigned pure integer version of $GetSamplerParameteriv.",
+		"Unsigned pure integer version of #GetSamplerParameteriv().",
 
 		GLuint.IN("sampler", "the name of the sampler object from which to retrieve parameters"),
 		GLenum.IN("pname", "the symbolic name of a sampler parameter"),
@@ -265,18 +265,18 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		GLenum.IN("target", "the counter to query", "#TIMESTAMP")
 	)
 
-	val GetQueryObjecti64v = GLvoid.func(
+	GLvoid.func(
 		"GetQueryObjecti64v",
 		"Returns the 64bit integer value of query object parameter.",
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", "GL15#QUERY_RESULT GL15#QUERY_RESULT_AVAILABLE"),
 		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the requested data")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"GetQueryObjectui64v",
-		"Unsigned version of $GetQueryObjecti64v.",
+		"Unsigned version of #GetQueryObjecti64v().",
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter"),
@@ -361,14 +361,14 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 	val vertexAttribIndex = "the index of the generic vertex attribute to be modified"
 	val vertexAttribNormalized = "whether values should be normalized or cast directly to floating-point"
 
-	val VertexAttribP1ui = GLvoid.func("VertexAttribP1ui", "Packed component version of GL20#VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP2ui = GLvoid.func("VertexAttribP2ui", "Packed component version of GL20#VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP3ui = GLvoid.func("VertexAttribP3ui", "Packed component version of GL20#VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
-	val VertexAttribP4ui = GLvoid.func("VertexAttribP4ui", "Packed component version of GL20#VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue)).javaDocLink
+	GLvoid.func("VertexAttribP1ui", "Packed component version of GL20#VertexAttrib1f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	GLvoid.func("VertexAttribP2ui", "Packed component version of GL20#VertexAttrib2f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	GLvoid.func("VertexAttribP3ui", "Packed component version of GL20#VertexAttrib3f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
+	GLvoid.func("VertexAttribP4ui", "Packed component version of GL20#VertexAttrib4f().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), GLuint.IN("value", packedValue))
 
-	GLvoid.func("VertexAttribP1uiv", "Pointer version of $VertexAttribP1ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
-	GLvoid.func("VertexAttribP2uiv", "Pointer version of $VertexAttribP2ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
-	GLvoid.func("VertexAttribP3uiv", "Pointer version of $VertexAttribP3ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
-	GLvoid.func("VertexAttribP4uiv", "Pointer version of $VertexAttribP4ui.", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
+	GLvoid.func("VertexAttribP1uiv", "Pointer version of #VertexAttribP1ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
+	GLvoid.func("VertexAttribP2uiv", "Pointer version of #VertexAttribP2ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
+	GLvoid.func("VertexAttribP3uiv", "Pointer version of #VertexAttribP3ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
+	GLvoid.func("VertexAttribP4uiv", "Pointer version of #VertexAttribP4ui().", GLuint.IN("index", vertexAttribIndex), GLenum.IN("type", packedType, packedTypes), GLboolean.IN("normalized", vertexAttribNormalized), mods(Check(1), const) _ GLuint_p.IN("value", packedValue))
 
 }

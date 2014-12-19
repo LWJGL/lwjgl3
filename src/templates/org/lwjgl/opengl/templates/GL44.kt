@@ -158,7 +158,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"CLEAR_TEXTURE" _ 0x9365
 	)
 
-	val ClearTexSubImage = GLvoid.func(
+	GLvoid.func(
 		"ClearTexSubImage",
 		"""
 		Fills all or part of a texture image with a constant value.
@@ -202,12 +202,12 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 			then the pointer is ignored and the sub-range of the texture image is filled with zeros.
 			"""
 		)
-	).javaDocLink
+	)
 
    	GLvoid.func(
 		"ClearTexImage",
 		"""
-		Is equivalent to calling $ClearTexSubImage with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
+		Is equivalent to calling #ClearTexSubImage() with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
 		{@code height}, and {@code depth} equal to the dimensions of the texture image plus {@code 2xb} (or zero and one for dimensions the texture doesn't
 		have).
 		""",

@@ -110,18 +110,18 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 
 	val size = AutoSize("weights") _ GLint.IN("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
-	val WeightfvARB = GLvoid.func("WeightfvARB", "Sets the current vertex weights.", size, GLfloat_p.IN("weights", "the vertex weights")).javaDocLink
+	GLvoid.func("WeightfvARB", "Sets the current vertex weights.", size, GLfloat_p.IN("weights", "the vertex weights"))
 
-	GLvoid.func("WeightbvARB", "Byte version of $WeightfvARB.", size, GLbyte_p.IN("weights", "the vertex weights"))
-	GLvoid.func("WeightubvARB", "Unsigned byte version of $WeightfvARB.", size, GLubyte_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightbvARB", "Byte version of #WeightfvARB().", size, GLbyte_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightubvARB", "Unsigned byte version of #WeightfvARB().", size, GLubyte_p.IN("weights", "the vertex weights"))
 
-	GLvoid.func("WeightsvARB", "Short version of $WeightfvARB.", size, GLshort_p.IN("weights", "the vertex weights"))
-	GLvoid.func("WeightusvARB", "Unsigned short version of $WeightfvARB.", size, GLushort_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightsvARB", "Short version of #WeightfvARB().", size, GLshort_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightusvARB", "Unsigned short version of #WeightfvARB().", size, GLushort_p.IN("weights", "the vertex weights"))
 
-	GLvoid.func("WeightivARB", "Integer version of $WeightfvARB.", size, GLint_p.IN("weights", "the vertex weights"))
-	GLvoid.func("WeightuivARB", "Unsigned integer version of $WeightfvARB.", size, GLuint_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightivARB", "Integer version of #WeightfvARB().", size, GLint_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightuivARB", "Unsigned integer version of #WeightfvARB().", size, GLuint_p.IN("weights", "the vertex weights"))
 
-	GLvoid.func("WeightdvARB", "Double version of $WeightfvARB.", size, GLdouble_p.IN("weights", "the vertex weights"))
+	GLvoid.func("WeightdvARB", "Double version of #WeightfvARB().", size, GLdouble_p.IN("weights", "the vertex weights"))
 
 	GLvoid.func(
 		"WeightPointerARB",

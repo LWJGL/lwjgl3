@@ -122,6 +122,8 @@ abstract class GeneratorTarget(
 			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
 			Pattern.compile("""($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
 		}()
+
+		private val VECTOR_POSTFIX = Pattern.compile("^(\\w+)_?v([A-Z]+)?$")
 	}
 
 	private fun getSourceFileName(): String {
@@ -211,12 +213,12 @@ abstract class GeneratorTarget(
 				val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
 				val prefix = if ( link == LinkType.FIELD ) prefixConstant else prefixMethod
 				buffer append when ( linkMethod.count { it == '#' } ) {
-					1    -> link.create(this.className, prefix, className, classElement, custom = false)
+					1    -> link.create(this.className, prefix, className, classElement, if ( this is NativeClass) this.postfix else "", custom = false)
 					2    ->
 						if ( className == null && link == LinkType.FIELD )
 							"{@link $classElement}"
 						else
-							link.create(this.className, prefix, className, classElement, custom = true)
+							link.create(this.className, prefix, className, classElement, "", custom = true)
 					else -> throw IllegalStateException("Unsupported link type: $link")
 				}
 			}
@@ -231,7 +233,7 @@ abstract class GeneratorTarget(
 
 	protected enum class LinkType {
 		FIELD: LinkType() {
-			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String {
+			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
 				val source = if ( className == null || className == sourceName ) "" else className
 				val prefix = if ( custom ) "" else sourcePrefix
 
@@ -239,7 +241,7 @@ abstract class GeneratorTarget(
 			}
 		}
 		METHOD: LinkType() {
-			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String {
+			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
 				val source = if ( className == null || className == sourceName ) "" else className
 				val prefix = if ( custom ) "" else sourcePrefix
 
@@ -247,9 +249,13 @@ abstract class GeneratorTarget(
 				if ( parentheses == -1 )
 					throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
 
-				val name = classElement.substring(0, parentheses) let {
-					if ( !custom && it endsWith 'v' )
-						it.substring(0, it.length() - (if ( it.endsWith("_v") ) 2 else 1))
+				val name = classElement.substring(0, parentheses).let { (it): String ->
+					if ( custom )
+						return@let it
+
+					val matcher = VECTOR_POSTFIX.matcher(it)
+					if ( matcher.matches() )
+						"${matcher.group(1)}${matcher.group(2) ?: ""}"
 					else
 						it
 				}
@@ -259,7 +265,7 @@ abstract class GeneratorTarget(
 			}
 		}
 
-		abstract fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, custom: Boolean): String
+		abstract fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String
 	}
 
 }

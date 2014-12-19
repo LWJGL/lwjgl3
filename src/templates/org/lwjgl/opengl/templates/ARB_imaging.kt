@@ -90,7 +90,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"TABLE_TOO_LARGE" _ 0x8031
 	)
 
-	val ColorTable = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"ColorTable",
 		"Specifies a color lookup table.",
 
@@ -104,11 +104,11 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("table", "the color table data")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"CopyColorTable",
-		"Defines a color table in exactly the manner of $ColorTable, except that the image data are taken from the framebuffer rather than from client memory.",
+		"Defines a color table in exactly the manner of #ColorTable(), except that the image data are taken from the framebuffer rather than from client memory.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("internalformat", "the color table internal format", IMAGING_INTERNAL_FORMATS),
@@ -117,18 +117,18 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the color table width")
 	)
 
-	val ColorTableParameteriv = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"ColorTableParameteriv",
 		"Specifies the scale and bias parameters for a color table.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("pname", "the parameter to set", COLOR_TABLE_PARAMS),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"ColorTableParameterfv",
-		"Float version of $ColorTableParameteriv.",
+		"Float version of #ColorTableParameteriv().",
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to set"),
@@ -148,18 +148,18 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		) _ GLvoid_p.OUT("table", "the color table data")
 	)
 
-	val GetColorTableParameteriv = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"GetColorTableParameteriv",
 		"Returns the integer value of the specified color table parameter.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
 		mods(Check(4), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetColorTableParameterfv",
-		"Float version of $GetColorTableParameteriv.",
+		"Float version of #GetColorTableParameteriv().",
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to query"),
@@ -277,7 +277,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"POST_CONVOLUTION_ALPHA_BIAS" _ 0x8023
 	)
 
-	val ConvolutionFilter1D = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"ConvolutionFilter1D",
 		"Defines a one-dimensional convolution filter.",
 
@@ -290,7 +290,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 			const,
 			PIXEL_UNPACK_BUFFER
 		) _ GLvoid_p.IN("data", "the filter data")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"ConvolutionFilter2D",
@@ -311,7 +311,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	deprecatedGL _ GLvoid.func(
 		"CopyConvolutionFilter1D",
 		"""
-		Defines a one-dimensional filter in exactly the manner of $ConvolutionFilter1D, except that image data are taken from the framebuffer, rather than from
+		Defines a one-dimensional filter in exactly the manner of #ConvolutionFilter1D(), except that image data are taken from the framebuffer, rather than from
 		client memory.
 		""",
 
@@ -325,7 +325,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	deprecatedGL _ GLvoid.func(
 		"CopyConvolutionFilter2D",
 		"""
-		Defines a two-dimensional filter in exactly the manner of $ConvolutionFilter1D, except that image data are taken from the framebuffer, rather than from
+		Defines a two-dimensional filter in exactly the manner of #ConvolutionFilter1D(), except that image data are taken from the framebuffer, rather than from
 		client memory.
 		""",
 
@@ -379,54 +379,54 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		nullable _ GLvoid_p.IN("span", "unused")
 	)
 
-	val ConvolutionParameteri = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"ConvolutionParameteri",
 		"Specifies the scale and bias of a convolution filter.",
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to set", "#CONVOLUTION_BORDER_MODE"),
 		GLint.IN("param", "the parameter value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"ConvolutionParameteriv",
-		"Pointer version of $ConvolutionParameteri.",
+		"Pointer version of #ConvolutionParameteri().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
 	)
 
-	val ConvolutionParameterf = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"ConvolutionParameterf",
-		"Float version of $ConvolutionParameteri",
+		"Float version of #ConvolutionParameteri()",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set"),
 		GLfloat.IN("param", "the parameter value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"ConvolutionParameterfv",
-		"Pointer version of $ConvolutionParameterf.",
+		"Pointer version of #ConvolutionParameterf().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	val GetConvolutionParameteriv = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"GetConvolutionParameteriv",
 		"Returns the value of a convolution filter parameter.",
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
 		mods(returnValue, Check(4)) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetConvolutionParameterfv",
-		"Float version of $GetConvolutionParameteriv.",
+		"Float version of #GetConvolutionParameteriv().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to query"),
@@ -558,18 +558,18 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "the pixel data")
 	)
 
-	val GetHistogramParameteriv = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"GetHistogramParameteriv",
 		"Returns the integer values of the specified histogram parameter",
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
 		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to return the parameter values")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetHistogramParameterfv",
-		"Float version of $GetHistogramParameteriv.",
+		"Float version of #GetHistogramParameteriv().",
 
 		GLenum.IN("target", "the histogram target"),
 		GLenum.IN("pname", "the parameter to query"),
@@ -612,18 +612,18 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		PIXEL_PACK_BUFFER _ GLvoid_p.OUT("values", "a buffer in which to place the minmax values")
 	)
 
-	val GetMinmaxParameteriv = (deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid.func(
 		"GetMinmaxParameteriv",
 		"Returns the integer value of the specified minmax parameter.",
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
 		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
-	)).javaDocLink
+	)
 
 	deprecatedGL _ GLvoid.func(
 		"GetMinmaxParameterfv",
-		"Float version of $GetMinmaxParameteriv.",
+		"Float version of #GetMinmaxParameteriv().",
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),

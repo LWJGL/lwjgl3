@@ -45,7 +45,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"GPU_NUM_SPI_AMD" _ 0x21A8
 	).javaDocLinks
 
-	val GetGPUIDsAMD = UINT.func(
+	UINT.func(
 		"GetGPUIDsAMD",
 		"""
 		Returns the IDs for available GPUs.
@@ -57,7 +57,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 		AutoSize("ids") _ UINT.IN("maxCount", "the max number of IDs that can be returned"),
 		nullable _ UINT_p.IN("ids", "the array of returned IDs")
-	).javaDocLink
+	)
 
 	int.func(
 		"GetGPUInfoAMD",
@@ -71,7 +71,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		are UTF-8 encoded and will be NULL terminated. If the function fails, -1 will be returned.
 		""",
 
-		UINT.IN("id", "a GPU id obtained from calling $GetGPUIDsAMD"),
+		UINT.IN("id", "a GPU id obtained from calling #GetGPUIDsAMD()"),
 		int.IN("property", "the information being queried", properties),
 		AutoType("data", GL_UNSIGNED_BYTE, GL_UNSIGNED_INT) _ GLenum.IN(
 			"dataType",

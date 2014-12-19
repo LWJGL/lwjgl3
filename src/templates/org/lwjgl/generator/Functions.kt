@@ -172,6 +172,9 @@ class NativeClassFunction(
 	}
 
 	val javaDocLink: String
+		get() = "${nativeClass.className}$methodLink"
+
+	private val methodLink: String
 		get() = if ( strippedName != name || has(keepPostfix) )
 			javaDocLinkWithParams()
 		else
@@ -468,7 +471,7 @@ class NativeClassFunction(
 	// --[ JAVA METHODS ]--
 
 	private fun PrintWriter.generateJavaDocLink(description: String, function: NativeClassFunction) {
-		println("\t/** $description ${function.nativeClass.processDocumentation(function.javaDocLink)} */")
+		println("\t/** $description ${function.nativeClass.processDocumentation(function.methodLink)} */")
 	}
 
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {

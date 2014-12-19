@@ -475,7 +475,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"RELEASE_BEHAVIOR_NONE" _ 0x00035002
 	).javaDocLinks
 
-	val Init = (Code(
+	Code(
 		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.initSharedApplication();")
 	) _ int.func(
 		"Init",
@@ -499,7 +499,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	    returnDoc = "GL11##GL_TRUE if successful, or GL11##GL_FALSE if an error occured.",
 	    since = "GLFW 1.0"
-	)).javaDocLink
+	)
 
 	void.func(
 		"Terminate",
@@ -512,7 +512,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Notes:
 		${ul(
-			"This function may be called before $Init.",
+			"This function may be called before #Init().",
 			"This function may only be called from the main thread.",
 			"No window's context may be current on another thread when this function is called."
 		)}
@@ -530,7 +530,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		${ul(
 			"Any or all of the version arguments may be $NULL.",
 			"This function always succeeds.",
-			"This function may be called before $Init.",
+			"This function may be called before #Init().",
 			"This function may be called from any thread."
 		)}
 		""",
@@ -550,7 +550,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Notes:
 		${ul(
 			"This function always succeeds.",
-			"This function may be called before $Init.",
+			"This function may be called before #Init().",
 			"This function may be called from any thread.",
 		    "The returned string is static and compile-time generated."
 		)}
@@ -572,7 +572,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Notes:
 		${ul(
-			"This function may be called before $Init.",
+			"This function may be called before #Init().",
 			"This function may only be called from the main thread."
 		)}
 		""",

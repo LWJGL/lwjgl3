@@ -132,7 +132,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	var src = GL11["GetMapdv"]
 	DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL") _ GLvoid.func(
 		"GetnMapdvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["query"],
@@ -143,7 +143,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetMapfv"]
 	DependsOn("provider.getFunctionAddress(\"glGetMapfv\") != NULL") _ GLvoid.func(
 		"GetnMapfvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["query"],
@@ -154,7 +154,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetMapiv"]
 	DependsOn("provider.getFunctionAddress(\"glGetMapiv\") != NULL") _ GLvoid.func(
 		"GetnMapivARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["query"],
@@ -165,7 +165,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetPixelMapfv"]
 	DependsOn("provider.getFunctionAddress(\"glGetPixelMapfv\") != NULL") _ GLvoid.func(
 		"GetnPixelMapfvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["map"],
 		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
@@ -175,7 +175,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetPixelMapuiv"]
 	DependsOn("provider.getFunctionAddress(\"glGetPixelMapuiv\") != NULL") _ GLvoid.func(
 		"GetnPixelMapuivARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["map"],
 		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
@@ -185,7 +185,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetPixelMapusv"]
 	DependsOn("provider.getFunctionAddress(\"glGetPixelMapusv\") != NULL") _ GLvoid.func(
 		"GetnPixelMapusvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["map"],
 		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
@@ -195,7 +195,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetPolygonStipple"]
 	DependsOn("provider.getFunctionAddress(\"glGetPolygonStipple\") != NULL") _ GLvoid.func(
 		"GetnPolygonStippleARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		AutoSize("pattern") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code pattern}"),
 		PIXEL_PACK_BUFFER _ GLubyte_p.OUT("pattern", "a buffer in which to place the returned pattern")
@@ -204,7 +204,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["GetTexImage"]
 	DependsOn("provider.getFunctionAddress(\"glGetTexImage\") != NULL") _ GLvoid.func(
 		"GetnTexImageARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["tex"],
 		src["level"],
@@ -220,7 +220,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL11["ReadPixels"]
 	GLvoid.func(
 		"ReadnPixelsARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["x"],
 		src["y"],
@@ -238,7 +238,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = ARB_imaging["GetColorTable"]
 	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL") _ GLvoid.func(
 		"GetnColorTableARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["format"],
@@ -253,7 +253,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = ARB_imaging["GetConvolutionFilter"]
 	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetConvolutionFilter\") != NULL") _ GLvoid.func(
 		"GetnConvolutionFilterARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["format"],
@@ -265,7 +265,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = ARB_imaging["GetSeparableFilter"]
 	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetSeparableFilter\") != NULL") _ GLvoid.func(
 		"GetnSeparableFilterARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["format"],
@@ -280,7 +280,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = ARB_imaging["GetHistogram"]
 	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetHistogram\") != NULL") _ GLvoid.func(
 		"GetnHistogramARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["reset"],
@@ -293,7 +293,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = ARB_imaging["GetMinmax"]
 	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetMinmax\") != NULL") _ GLvoid.func(
 		"GetnMinmaxARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["reset"],
@@ -306,7 +306,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL13["GetCompressedTexImage"]
 	DependsOn("OpenGL13") _ GLvoid.func(
 		"GetnCompressedTexImageARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["target"],
 		src["level"],
@@ -320,7 +320,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL20["GetUniformfv"]
 	DependsOn("OpenGL20") _ GLvoid.func(
 		"GetnUniformfvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["program"],
 		src["location"],
@@ -331,7 +331,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL20["GetUniformiv"]
 	DependsOn("OpenGL20") _ GLvoid.func(
 		"GetnUniformivARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["program"],
 		src["location"],
@@ -342,7 +342,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL30["GetUniformuiv"]
 	DependsOn("OpenGL30") _ GLvoid.func(
 		"GetnUniformuivARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["program"],
 		src["location"],
@@ -353,7 +353,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	src = GL40["GetUniformdv"]
 	DependsOn("OpenGL40") _ GLvoid.func(
 		"GetnUniformdvARB",
-		"Robust version of ${src.dsaLink}",
+		"Robust version of ${src.javaDocLink}",
 
 		src["program"],
 		src["location"],

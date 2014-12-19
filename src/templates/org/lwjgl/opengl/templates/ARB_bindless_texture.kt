@@ -219,7 +219,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 
 	GLvoid.func(
 		"ProgramUniformHandleui64vARB",
-		"DSA version of ${UniformHandleui64vARB.javaDocLink}.",
+		"DSA version of #UniformHandleui64vARB().",
 
 		GLuint.IN("program", "the program object"),
 		location,
@@ -241,17 +241,17 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint64.IN("handle", "the image handle")
 	)
 
-	val VertexAttribL1ui64ARB = GLvoid.func(
+	GLvoid.func(
 		"VertexAttribL1ui64ARB",
 		"Specifies the 64-bit unsigned integer handle value of a generic vertex attribute.",
 
 		GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
 		GLuint64.IN("x", "the handle value")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"VertexAttribL1ui64vARB",
-		"Pointer version of $VertexAttribL1ui64ARB.",
+		"Pointer version of #VertexAttribL1ui64ARB().",
 
 		GLuint.IN("index", "the index of the generic vertex attribute to be modified"),
 		const _ GLuint64_p.IN("v", "the vertex attribute buffer")

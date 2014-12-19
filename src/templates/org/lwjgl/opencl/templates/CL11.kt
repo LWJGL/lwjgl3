@@ -533,7 +533,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	val CreateUserEvent = cl_event.func(
+	cl_event.func(
 		"CreateUserEvent",
 		"""
 		Creates a user event object. User events allow applications to enqueue commands that wait on a user event to finish before the command is executed by
@@ -555,7 +555,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"SetUserEventStatus",
@@ -584,7 +584,7 @@ clReleaseMemObject(buf2);
 		""")}
 		""",
 
-		cl_event.IN("event", "a user event object created using $CreateUserEvent"),
+		cl_event.IN("event", "a user event object created using #CreateUserEvent()"),
 		cl_int.IN(
 			"execution_status",
 			"""

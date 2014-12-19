@@ -92,7 +92,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		"TYPE_COLORINDEX_ARB" _ 0x202C
 	)
 
-	val GetPixelFormatAttribivARB = BOOL.func(
+	BOOL.func(
 		"GetPixelFormatAttribivARB",
 		"",
 
@@ -102,11 +102,11 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
 		mods(const, SingleValue("attribute")) _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
 		int_p.OUT("values", "a buffer into which the results of the query will be placed")
-	).javaDocLink
+	)
 
 	BOOL.func(
 		"GetPixelFormatAttribfvARB",
-		"Float version of $GetPixelFormatAttribivARB.",
+		"Float version of #GetPixelFormatAttribivARB().",
 
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
 		int.IN("pixelFormat", "an index that specifies the pixel format"),

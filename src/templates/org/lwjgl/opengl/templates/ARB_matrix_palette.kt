@@ -80,9 +80,9 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 
 	val size = AutoSize("indices") _ GLint.IN("size", "the number of index values to set. Must be a value between 1 and ARBVertexBlend#MAX_VERTEX_UNITS_ARB.")
 
-	val MatrixIndexuivARB = GLvoid.func("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint_p.IN("indices", "the matrix index values")).javaDocLink
-	GLvoid.func("MatrixIndexubvARB", "Byte version of $MatrixIndexuivARB.", size, GLubyte_p.IN("indices", "the matrix index values"))
-	GLvoid.func("MatrixIndexusvARB", "Short version of $MatrixIndexuivARB.", size, GLushort_p.IN("indices", "the matrix index values"))
+	GLvoid.func("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint_p.IN("indices", "the matrix index values"))
+	GLvoid.func("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte_p.IN("indices", "the matrix index values"))
+	GLvoid.func("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort_p.IN("indices", "the matrix index values"))
 
 	GLvoid.func(
 		"MatrixIndexPointerARB",

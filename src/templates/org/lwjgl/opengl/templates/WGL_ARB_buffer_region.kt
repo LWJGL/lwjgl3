@@ -24,7 +24,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		exist.
 		"""
 
-	val CreateBufferRegionARB = HANDLE.func(
+	HANDLE.func(
 		"CreateBufferRegionARB",
 		"Creates a buffer region and returns a handle associated with it.",
 
@@ -41,13 +41,13 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 			""",
 			"#FRONT_COLOR_BUFFER_BIT_ARB #BACK_COLOR_BUFFER_BIT_ARB #DEPTH_BUFFER_BIT_ARB #STENCIL_BUFFER_BIT_ARB"
 		)
-	).javaDocLink
+	)
 
 	VOID.func(
 		"DeleteBufferRegionARB",
 		"Deletes a buffer region.",
 
-		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB.")
+		HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB().")
 	)
 
 	BOOL.func(
@@ -63,7 +63,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		The saved buffer region area can be freed by calling {@code wglSaveBufferRegionARB} with {@code width} or {@code height} set to a value of 0.
 		""",
 
-		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
+		HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
 		int.IN("x", "the window x-coordinate for the source rectangle"),
 		int.IN("y", "the window y-coordinate for the source rectangle"),
 		int.IN("width", "the source rectangle width"),
@@ -74,7 +74,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		"RestoreBufferRegionARB",
 		"Restores a previously saved buffer region.",
 
-		HANDLE.IN("region", "a handle to a buffer region previously created with $CreateBufferRegionARB."),
+		HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB()."),
 		int.IN("x", "the window x-coordinate for the destination rectangle"),
 		int.IN("y", "the window y-coordinate for the destination rectangle"),
 		int.IN("width", "the destination rectangle width"),
@@ -84,7 +84,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 	)
 
 	IntConstant.block(
-		"Accepted by the {@code type} parameter of $CreateBufferRegionARB.",
+		"Accepted by the {@code type} parameter of #CreateBufferRegionARB().",
 
 		"FRONT_COLOR_BUFFER_BIT_ARB" _ 0x00000001,
 		"BACK_COLOR_BUFFER_BIT_ARB" _ 0x00000002,

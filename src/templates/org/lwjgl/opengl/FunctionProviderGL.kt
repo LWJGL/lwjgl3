@@ -162,9 +162,6 @@ private fun String.nativeClassWGL(templateName: String, postfix: String = "", in
 private fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
 
-private val NativeClassFunction.dsaLink: String
-	get() = "${this.nativeClass.className}${this.javaDocLink}"
-
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
 private val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)

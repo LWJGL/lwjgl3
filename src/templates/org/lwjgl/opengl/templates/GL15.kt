@@ -360,18 +360,18 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
 	)
 
-	val GetQueryObjectiv = GLvoid.func(
+	GLvoid.func(
 		"GetQueryObjectiv",
 		"Returns the integer value of a query object parameter.",
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
-	).javaDocLink
+	)
 
 	GLvoid.func(
 		"GetQueryObjectuiv",
-		"Unsigned version of $GetQueryObjectiv.",
+		"Unsigned version of #GetQueryObjectiv().",
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),

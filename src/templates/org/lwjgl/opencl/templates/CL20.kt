@@ -487,7 +487,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	val EnqueueSVMMap = cl_int.func(
+	cl_int.func(
 		"EnqueueSVMMap",
 		"""
 		Enqueues a command that will allow the host to update a region of a SVM buffer. Note that since we are enqueuing a command with a SVM buffer, the region
@@ -535,20 +535,20 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			OOHME
 		)}
 		"""
-	).javaDocLink
+	)
 
 	cl_int.func(
 		"EnqueueSVMUnmap",
 		"""
 		Enqueues a command to indicate that the host has completed updating the region given by {@code svm_ptr} and which was specified in a previous call to
-		$EnqueueSVMMap.
+		#EnqueueSVMMap().
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid host command-queue"),
 		void_p.IN(
 			"svm_ptr",
 			"""
-			a pointer that was specified in a previous call to $EnqueueSVMMap. If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
+			a pointer that was specified in a previous call to #EnqueueSVMMap(). If {@code svm_ptr} is allocated using #SVMAlloc() then it must be allocated from
 			the same context from which {@code command_queue} was created. Otherwise the behavior is undefined.
 			"""
 		),
