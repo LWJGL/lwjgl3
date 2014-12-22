@@ -62,7 +62,7 @@ float random(vec2 f, float time) {
  * After:
  * http://mathworld.wolfram.com/DiskPointPicking.html
  */
-vec3 randomDiskPoint_(vec3 rand, vec3 n) {
+vec3 randomDiskPoint(vec3 rand, vec3 n) {
   float r = rand.x * 0.5 + 0.5; // [-1..1) -> [0..1)
   float angle = (rand.y + 1.0) * PI; // [-1..1] -> [0..2*PI)
   float sr = sqrt(r);
@@ -85,21 +85,12 @@ vec3 randomDiskPoint_(vec3 rand, vec3 n) {
 }
 
 /**
- * See above function.
- */
-vec3 randomDiskPoint(vec3 n, vec2 pix, float time) {
-  float rand1 = random(pix + vec2(512.62, 112.7346), time);
-  float rand2 = random(pix - vec2(754.234, 231.845), time);
-  return randomDiskPoint_(vec3(rand1, rand2, 0.0), n);
-}
-
-/**
  * Generate a uniformly distributed random point on the unit-sphere.
  * 
  * After:
  * http://mathworld.wolfram.com/SpherePointPicking.html
  */
-vec3 randomSpherePoint_(vec3 rand) {
+vec3 randomSpherePoint(vec3 rand) {
   float ang1 = (rand.x + 1.0) * PI; // [-1..1) -> [0..2*PI)
   float u = rand.y; // [-1..1), cos and acos(2v-1) cancel each other out, so we arrive at [-1..1)
   float u2 = u * u;
@@ -130,24 +121,13 @@ vec3 randomSpherePoint_(vec3 rand) {
  * of the sphere, so this function cannot be used when sampling a spherical
  * light, where we need to sample the projected surface of the light (i.e. disk)!
  */
-vec3 randomHemispherePoint_(vec3 rand, vec3 n) {
+vec3 randomHemispherePoint(vec3 rand, vec3 n) {
   /**
    * Generate random sphere point and swap vector along the normal, if it
    * points to the wrong of the two hemispheres.
    * This method provides a uniform distribution over the hemisphere, 
    * provided that the sphere distribution is also uniform.
    */
-  vec3 v = randomSpherePoint_(rand);
+  vec3 v = randomSpherePoint(rand);
   return v * sign(dot(v, n));
 }
-
-/**
- * See above function.
- */
-vec3 randomHemispherePoint(vec3 n, vec2 pix, float time) {
-  float rand1 = random(pix, time);
-  float rand2 = random(pix + vec2(641.51224, 423.178), time);
-  float rand3 = random(pix - vec2(147.16414, 363.941), time);
-  return randomHemispherePoint_(vec3(rand1, rand2, rand3), n);
-}
-
