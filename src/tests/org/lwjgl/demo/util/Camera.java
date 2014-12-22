@@ -62,7 +62,6 @@ public class Camera {
 	private Vector3f tmp1      = new Vector3f();
 	private Vector3f tmp2      = new Vector3f();
 	private Vector4f tmp3      = new Vector4f();
-	private float[]  tmpMatArr = new float[16];
 
 	public Vector3f getDirection() {
 		return direction;
@@ -139,24 +138,23 @@ public class Camera {
 		tmp1.cross(tmp0, tmp1);
 		/* up = right x direction */
 		tmp2.cross(tmp1, tmp0);
-		float[] m = tmpMatArr;
-		m[0] = tmp1.x;
-		m[1] = tmp1.y;
-		m[2] = tmp1.z;
-		m[3] = -tmp1.x * position.x - tmp1.y * position.y - tmp1.z * position.z;
-		m[4] = tmp2.x;
-		m[5] = tmp2.y;
-		m[6] = tmp2.z;
-		m[7] = -tmp2.x * position.x - tmp2.y * position.y - tmp2.z * position.z;
-		m[8] = -tmp0.x;
-		m[9] = -tmp0.y;
-		m[10] = -tmp0.z;
-		m[11] = tmp0.x * position.x + tmp0.y * position.y + tmp0.z * position.z;
-		m[12] = 0.0f;
-		m[13] = 0.0f;
-		m[14] = 0.0f;
-		m[15] = 1.0f;
-		viewMatrix.set(m);
+		Matrix4f m = viewMatrix;
+		m.m00 = tmp1.x;
+		m.m01 = tmp1.y;
+		m.m02 = tmp1.z;
+		m.m03 = -tmp1.x * position.x - tmp1.y * position.y - tmp1.z * position.z;
+		m.m10 = tmp2.x;
+		m.m11 = tmp2.y;
+		m.m12 = tmp2.z;
+		m.m13 = -tmp2.x * position.x - tmp2.y * position.y - tmp2.z * position.z;
+		m.m20 = -tmp0.x;
+		m.m21 = -tmp0.y;
+		m.m22 = -tmp0.z;
+		m.m23 = tmp0.x * position.x + tmp0.y * position.y + tmp0.z * position.z;
+		m.m30 = 0.0f;
+		m.m31 = 0.0f;
+		m.m32 = 0.0f;
+		m.m33 = 1.0f;
 		refreshViewMatrix = false;
 	}
 
@@ -324,43 +322,42 @@ public class Camera {
 	}
 
 	private void doRefreshProjectionMatrix() {
+		Matrix4f m = projectionMatrix;
 		// Reset projection matrix
 		if ( !orthographic ) {
-			tmpMatArr[0] = 2.0f * fn / (fr - fl);
-			tmpMatArr[1] = 0.0f;
-			tmpMatArr[2] = (fr + fl) / (fr - fl);
-			tmpMatArr[3] = 0.0f;
-			tmpMatArr[4] = 0.0f;
-			tmpMatArr[5] = 2.0f * fn / (ft - fb);
-			tmpMatArr[6] = (ft + fb) / (ft - fb);
-			tmpMatArr[7] = 0.0f;
-			tmpMatArr[8] = 0.0f;
-			tmpMatArr[9] = 0.0f;
-			tmpMatArr[10] = -(ff + fn) / (ff - fn);
-			tmpMatArr[11] = -2.0f * ff * fn / (ff - fn);
-			tmpMatArr[12] = 0.0f;
-			tmpMatArr[13] = 0.0f;
-			tmpMatArr[14] = -1.0f;
-			tmpMatArr[15] = 0.0f;
-			projectionMatrix.set(tmpMatArr);
+			m.m00 = 2.0f * fn / (fr - fl);
+			m.m01 = 0.0f;
+			m.m02 = (fr + fl) / (fr - fl); // zero if symmetric
+			m.m03 = 0.0f;
+			m.m10 = 0.0f;
+			m.m11 = 2.0f * fn / (ft - fb);
+			m.m12 = (ft + fb) / (ft - fb); // zero if symmetric
+			m.m13 = 0.0f;
+			m.m20 = 0.0f;
+			m.m21 = 0.0f;
+			m.m22 = -(ff + fn) / (ff - fn);
+			m.m23 = -2.0f * ff * fn / (ff - fn);
+			m.m30 = 0.0f;
+			m.m31 = 0.0f;
+			m.m32 = -1.0f;
+			m.m33 = 0.0f;
 		} else {
-			tmpMatArr[0] = 2.0f / (fr - fl);
-			tmpMatArr[1] = 0.0f;
-			tmpMatArr[2] = 0.0f;
-			tmpMatArr[3] = -(fr + fl) / (fr - fl);
-			tmpMatArr[4] = 0.0f;
-			tmpMatArr[5] = 2.0f / (ft - fb);
-			tmpMatArr[6] = 0.0f;
-			tmpMatArr[7] = -(ft + fb) / (ft - fb);
-			tmpMatArr[8] = 0.0f;
-			tmpMatArr[9] = 0.0f;
-			tmpMatArr[10] = -2.0f / (ff - fn);
-			tmpMatArr[11] = -(ff + fn) / (ff - fn);
-			tmpMatArr[12] = 0.0f;
-			tmpMatArr[13] = 0.0f;
-			tmpMatArr[14] = 0.0f;
-			tmpMatArr[15] = 1.0f;
-			projectionMatrix.set(tmpMatArr);
+			m.m00 = 2.0f / (fr - fl);
+			m.m01 = 0.0f;
+			m.m02 = 0.0f;
+			m.m03 = -(fr + fl) / (fr - fl); // zero if symmetric
+			m.m10 = 0.0f;
+			m.m11 = 2.0f / (ft - fb);
+			m.m12 = 0.0f;
+			m.m13 = -(ft + fb) / (ft - fb); // zero if symmetric
+			m.m20 = 0.0f;
+			m.m21 = 0.0f;
+			m.m22 = -2.0f / (ff - fn);
+			m.m23 = -(ff + fn) / (ff - fn);
+			m.m30 = 0.0f;
+			m.m31 = 0.0f;
+			m.m32 = 0.0f;
+			m.m33 = 1.0f;
 		}
 		refreshProjectionMatrix = false;
 	}
