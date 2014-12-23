@@ -104,6 +104,8 @@ public class HybridDemo {
 	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
+	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
+	private Matrix4f normalMatrix = new Matrix4f();
 
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
@@ -564,17 +566,11 @@ public class HybridDemo {
 	}
 
 	public void setUniform(int location, Matrix4f value, boolean transpose) {
-		FloatBuffer fv = matrixByteBuffer.asFloatBuffer();
-		if (transpose) {
-			fv.put(value.m00).put(value.m01).put(value.m02).put(value.m03).put(value.m10).put(value.m11).put(value.m12)
-					.put(value.m13).put(value.m20).put(value.m21).put(value.m22).put(value.m23).put(value.m30)
-					.put(value.m31).put(value.m32).put(value.m33);
-		} else {
-			fv.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01).put(value.m11).put(value.m21)
-					.put(value.m31).put(value.m02).put(value.m12).put(value.m22).put(value.m32).put(value.m03)
-					.put(value.m13).put(value.m23).put(value.m33);
-		}
-		glUniformMatrix4f(location, 1, false, matrixByteBuffer);
+		matrixByteBufferFloatView.rewind();
+		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01)
+				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
+				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
+		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
 	}
 
 	private void raster() {
@@ -587,7 +583,7 @@ public class HybridDemo {
 		setUniform(modelViewMatrixUniform, viewMatrix, false);
 		Matrix4f projMatrix = camera.getProjectionMatrix();
 		setUniform(projectionMatrixUniform, projMatrix, false);
-		Matrix4f normalMatrix = new Matrix4f(camera.getViewMatrix());
+		normalMatrix.set(camera.getViewMatrix());
 		normalMatrix.invert();
 		setUniform(normalMatrixUniform, normalMatrix, true);
 
