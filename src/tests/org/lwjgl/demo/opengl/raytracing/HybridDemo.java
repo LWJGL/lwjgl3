@@ -61,14 +61,15 @@ public class HybridDemo {
 	private int height = 768;
 	private boolean resetFramebuffer = true;
 
-	private int tex;
+	private int raytraceTexture;
 	private int vao;
 	private int computeProgram;
 	private int quadProgram;
 	private int rasterProgram;
 	private int fbo;
 	private int vaoScene;
-	private int positionTex;
+	private int positionTexture;
+	private int normalTexture;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -130,7 +131,7 @@ public class HybridDemo {
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
 					System.err
-							.println("This demo requires OpenGL 4.3 or higher. The Demo33 version works on OpenGL 3.3 or higher.");
+							.println("This demo requires OpenGL 4.3 or higher. The HybridDemo33 version works on OpenGL 3.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -236,9 +237,9 @@ public class HybridDemo {
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
-		tex = createFramebufferTexture();
-		positionTex = createFramebufferTexture();
-		fbo = createFrameBufferObject(positionTex);
+		createRaytracingTexture();
+		createRasterizerTextures();
+		createRasterFrameBufferObject();
 		vao = createFullScreenVao();
 		vaoScene = createSceneVao();
 		rasterProgram = createRasterProgram();
@@ -348,21 +349,26 @@ public class HybridDemo {
 	}
 
 	/**
-	 * Create the frame buffer object that our rasterizer uses to render into
-	 * the world-space position into the framebuffer texture.
+	 * Create the frame buffer object that our rasterizer uses to render the
+	 * view-space position and normal into the textures.
 	 *
 	 * @return the FBO id
 	 */
-	private static int createFrameBufferObject(int tex) {
-		int fbo = glGenFramebuffers();
+	private void createRasterFrameBufferObject() {
+		this.fbo = glGenFramebuffers();
+		int depthBuffer = glGenRenderbuffers();
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+		glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, positionTexture, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normalTexture, 0);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
 		int fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 			throw new AssertionError("Could not create FBO: " + fboStatus);
 		}
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		return fbo;
+		glBindRenderbuffer(GL_RENDERBUFFER, 0);
 	}
 
 	/**
@@ -524,23 +530,46 @@ public class HybridDemo {
 	}
 
 	/**
-	 * Create the texture that will serve as our framebuffer.
+	 * Create the textures that will serve as our framebuffer.
 	 *
 	 * @return the texture id
 	 */
-	private int createFramebufferTexture() {
-		int tex = glGenTextures();
-		glBindTexture(GL_TEXTURE_2D, tex);
+	private void createRaytracingTexture() {
+		this.raytraceTexture = glGenTextures();
+		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		return tex;
+	}
+
+	private void createRasterizerTextures() {
+		this.positionTexture = glGenTextures();
+		glBindTexture(GL_TEXTURE_2D, positionTexture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		this.normalTexture = glGenTextures();
+		glBindTexture(GL_TEXTURE_2D, normalTexture);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	private void resizeFramebufferTexture() {
-		glDeleteTextures(tex);
-		tex = createFramebufferTexture();
+		glDeleteTextures(raytraceTexture);
+		createRaytracingTexture();
+
+		glBindTexture(GL_TEXTURE_2D, positionTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glBindTexture(GL_TEXTURE_2D, 0);
+
+		glBindTexture(GL_TEXTURE_2D, normalTexture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	private void update() {
@@ -565,7 +594,7 @@ public class HybridDemo {
 		}
 	}
 
-	public void setUniform(int location, Matrix4f value, boolean transpose) {
+	private void setUniform(int location, Matrix4f value, boolean transpose) {
 		matrixByteBufferFloatView.rewind();
 		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01)
 				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
@@ -587,11 +616,11 @@ public class HybridDemo {
 		normalMatrix.invert();
 		setUniform(normalMatrixUniform, normalMatrix, true);
 
-		// glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		//glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glBindVertexArray(vaoScene);
 		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
 		glBindVertexArray(0);
-		// glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
 	}
 
@@ -629,7 +658,7 @@ public class HybridDemo {
 		glUniform3f(ray11Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
 
 		/* Bind level 0 of framebuffer texture as writable image in the shader. */
-		glBindImageTexture(0, tex, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(0, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -649,7 +678,7 @@ public class HybridDemo {
 		 */
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
-		glBindTexture(GL_TEXTURE_2D, tex);
+		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
