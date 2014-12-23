@@ -67,6 +67,7 @@ public class HybridDemo {
 	private int quadProgram;
 	private int rasterProgram;
 	private int fbo;
+	private int depthBuffer;
 	private int vaoScene;
 	private int positionTexture;
 	private int normalTexture;
@@ -107,6 +108,8 @@ public class HybridDemo {
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
 	private Matrix4f normalMatrix = new Matrix4f();
+
+	private ByteBuffer renderBuffers;
 
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
@@ -252,6 +255,13 @@ public class HybridDemo {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 
+		/*
+		 * Our rasterizer wants to output color attchment 0 and 1.
+		 */
+		renderBuffers = BufferUtils.createByteBuffer(4 * 2);
+		renderBuffers.putInt(GL_COLOR_ATTACHMENT0).putInt(GL_COLOR_ATTACHMENT1);
+		renderBuffers.flip();
+
 		/* Setup camera */
 		camera = new Camera();
 
@@ -356,7 +366,7 @@ public class HybridDemo {
 	 */
 	private void createRasterFrameBufferObject() {
 		this.fbo = glGenFramebuffers();
-		int depthBuffer = glGenRenderbuffers();
+		this.depthBuffer = glGenRenderbuffers();
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
@@ -449,7 +459,8 @@ public class HybridDemo {
 		glAttachShader(quadProgram, fshader);
 		glBindAttribLocation(quadProgram, 0, "vertexPosition");
 		glBindAttribLocation(quadProgram, 1, "vertexNormal");
-		glBindFragDataLocation(quadProgram, 0, "value");
+		glBindFragDataLocation(quadProgram, 0, "worldPosition_out");
+		glBindFragDataLocation(quadProgram, 1, "worldNormal_out");
 		glLinkProgram(quadProgram);
 		int linked = glGetProgrami(quadProgram, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(quadProgram);
@@ -471,7 +482,7 @@ public class HybridDemo {
 	 */
 	private static int createComputeProgram() throws IOException {
 		int program = glCreateProgram();
-		int cshader = createShader("demo/raytracing/raytracing.glslcs", GL_COMPUTE_SHADER);
+		int cshader = createShader("demo/raytracing/hybrid.glsl", GL_COMPUTE_SHADER);
 		int random = createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
@@ -548,28 +559,27 @@ public class HybridDemo {
 		glBindTexture(GL_TEXTURE_2D, positionTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		this.normalTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, normalTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
 	private void resizeFramebufferTexture() {
 		glDeleteTextures(raytraceTexture);
+		glDeleteTextures(positionTexture);
+		glDeleteTextures(normalTexture);
+		glDeleteRenderbuffers(depthBuffer);
+		glDeleteFramebuffers(fbo);
+
 		createRaytracingTexture();
-
-		glBindTexture(GL_TEXTURE_2D, positionTexture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
-		glBindTexture(GL_TEXTURE_2D, 0);
-
-		glBindTexture(GL_TEXTURE_2D, normalTexture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, (ByteBuffer) null);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		createRasterizerTextures();
+		createRasterFrameBufferObject();
 	}
 
 	private void update() {
@@ -603,8 +613,6 @@ public class HybridDemo {
 	}
 
 	private void raster() {
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		glUseProgram(rasterProgram);
 
 		/* Update matrices in shader */
@@ -616,11 +624,13 @@ public class HybridDemo {
 		normalMatrix.invert();
 		setUniform(normalMatrixUniform, normalMatrix, true);
 
-		//glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		glDrawBuffers(2, renderBuffers);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
 		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
 		glBindVertexArray(0);
-	    //glBindFramebuffer(GL_FRAMEBUFFER, 0);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
 	}
 
@@ -630,6 +640,7 @@ public class HybridDemo {
 	 */
 	private void trace() {
 		glUseProgram(computeProgram);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		long thisTime = System.nanoTime();
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
@@ -659,6 +670,9 @@ public class HybridDemo {
 
 		/* Bind level 0 of framebuffer texture as writable image in the shader. */
 		glBindImageTexture(0, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		/* Bind level 1 and 2 to our rasterized images */
+		glBindImageTexture(1, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -669,6 +683,8 @@ public class HybridDemo {
 
 		/* Reset image binding. */
 		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 		glUseProgram(0);
 
@@ -694,7 +710,7 @@ public class HybridDemo {
 
 			update();
 			raster();
-			// trace();
+			trace();
 
 			glfwSwapBuffers(window);
 		}

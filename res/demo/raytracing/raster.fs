@@ -4,11 +4,13 @@
  */
 #version 130
 
-in vec4 viewPosition;
-in vec4 viewNormal;
+in vec4 worldPosition;
+in vec4 worldNormal;
 
-out vec4 value;
+out vec4 worldPosition_out;
+out vec4 worldNormal_out;
 
 void main(void) {
-  value = viewNormal;
+  worldPosition_out = worldPosition;
+  worldNormal_out = worldNormal;
 }
