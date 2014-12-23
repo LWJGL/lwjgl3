@@ -112,7 +112,6 @@ public class Matrix4f {
 	}
 
 	public float determinant() {
-		// less *,+,- calculation than expanded expression.
 		return
 			(m00 * m11 - m01 * m10) * (m22 * m33 - m23 * m32) - (m00 * m12 - m02 * m10) * (m21 * m33 - m23 * m31) +
 			(m00 * m13 - m03 * m10) * (m21 * m32 - m22 * m31) + (m01 * m12 - m02 * m11) * (m20 * m33 - m23 * m30) -

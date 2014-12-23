@@ -62,7 +62,7 @@ float random(vec2 f, float time) {
  * After:
  * http://mathworld.wolfram.com/DiskPointPicking.html
  */
-vec3 randomDiskPoint(vec3 rand, vec3 n) {
+vec3 randomDiskPoint(vec3 rand, vec3 n, vec3 up) {
   float r = rand.x * 0.5 + 0.5; // [-1..1) -> [0..1)
   float angle = (rand.y + 1.0) * PI; // [-1..1] -> [0..2*PI)
   float sr = sqrt(r);
@@ -70,13 +70,12 @@ vec3 randomDiskPoint(vec3 rand, vec3 n) {
   /*
    * Compute some arbitrary tangent space for orienting
    * our disk towards the normal.
+   * FIXME: There is an issue here when somewhere in mid-screen the tangent
+   *        space changes, because the condition below changes its value.
+   *        That will be noticeable on the final render. But how to combat?
+   *        We could use the camera's vectors.
    */
-  vec3 tangent;
-  if (abs(n.x) < 0.5) {
-    tangent = vec3(1.0, 0.0, 0.0);
-  } else {
-    tangent = vec3(0.0, 1.0, 0.0);
-  }
+  vec3 tangent = up;
   vec3 bitangent = cross(tangent, n);
   tangent = cross(bitangent, n);
   
