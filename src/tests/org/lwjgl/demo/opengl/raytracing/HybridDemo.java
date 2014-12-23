@@ -613,6 +613,7 @@ public class HybridDemo {
 	}
 
 	private void raster() {
+		glEnable(GL_DEPTH_TEST);
 		glUseProgram(rasterProgram);
 
 		/* Update matrices in shader */
@@ -640,7 +641,7 @@ public class HybridDemo {
 	 */
 	private void trace() {
 		glUseProgram(computeProgram);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glDisable(GL_DEPTH_TEST);
 
 		long thisTime = System.nanoTime();
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;

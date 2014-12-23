@@ -131,24 +131,20 @@ vec4 trace(vec3 origin, vec3 dir, vec3 hitPoint, vec3 normal) {
   hitinfo i;
   vec4 accumulated = vec4(0.0);
   vec4 attenuation = vec4(1.0);
-  box b;
-  do {
-    vec3 lightNormal = normalize(hitPoint - lightCenterPosition);
-    vec3 lightPosition = lightCenterPosition + randomDiskPoint(rand, lightNormal, cameraUp) * LIGHT_RADIUS;
-    vec3 shadowRayDir = lightPosition - hitPoint;
-    vec3 shadowRayStart = hitPoint + normal * EPSILON;
-    hitinfo shadowRayInfo;
-    bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
-    attenuation *= colorOfBox(b);
-    if (shadowRayInfo.near >= 1.0) {
-      float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
-      float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
-      accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);
-    }
-    origin = shadowRayStart;
-    dir = randomHemispherePoint(rand, normal);
-    attenuation *= dot(normal, dir);
-  } while (false);
+  vec3 lightNormal = normalize(hitPoint - lightCenterPosition);
+  vec3 lightPosition = lightCenterPosition + randomDiskPoint(rand, lightNormal, cameraUp) * LIGHT_RADIUS;
+  vec3 shadowRayDir = lightPosition - hitPoint;
+  vec3 shadowRayStart = hitPoint + normal * EPSILON;
+  hitinfo shadowRayInfo;
+  bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
+  if (shadowRayInfo.near >= 1.0) {
+    float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
+    float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
+    accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);
+  }
+  origin = shadowRayStart;
+  dir = randomHemispherePoint(rand, normal);
+  attenuation *= dot(normal, dir);
   return accumulated;
 }
 
@@ -187,7 +183,6 @@ void main(void) {
      */
     oldColor = imageLoad(framebuffer, pix);
   }
-
   vec4 finalColor = mix(color, oldColor, blendFactor);
   imageStore(framebuffer, pix, finalColor);
 }
