@@ -7,7 +7,6 @@ package org.lwjgl.system;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
-import org.lwjgl.Sys;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 
 import java.nio.*;
@@ -39,7 +38,7 @@ public final class MemoryUtil {
 	public static final int PAGE_SIZE;
 
 	static {
-		Sys.touch();
+		LWJGLUtil.initialize();
 
 		//ASCII = Charset.forName("ISO-8859-1");
 		UTF8 = Charset.forName("UTF-8");

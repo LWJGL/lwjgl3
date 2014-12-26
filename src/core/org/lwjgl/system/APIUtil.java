@@ -5,7 +5,6 @@
 package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Sys;
 import org.lwjgl.system.linux.LinuxLibrary;
 import org.lwjgl.system.macosx.MacOSXLibrary;
 import org.lwjgl.system.windows.WindowsLibrary;
@@ -28,7 +27,7 @@ public final class APIUtil {
 	};
 
 	static {
-		Sys.touch();
+		LWJGLUtil.initialize();
 	}
 
 	private APIUtil() {

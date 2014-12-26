@@ -304,6 +304,11 @@ public final class LWJGLUtil {
 		return PLATFORM.getName();
 	}
 
+	/** Ensures that the LWJGL native library has been loaded. */
+	public static void initialize() {
+		Sys.touch();
+	}
+
 	/**
 	 * Loads a native library using the {@link System#load} and {@link System#loadLibrary}.
 	 *

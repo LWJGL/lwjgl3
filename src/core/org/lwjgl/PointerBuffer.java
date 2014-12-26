@@ -12,10 +12,6 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
 public class PointerBuffer implements Comparable<PointerBuffer> {
 
-	static {
-		Sys.touch();
-	}
-
 	protected final ByteBuffer pointers;
 
 	protected final Buffer     view;
@@ -399,8 +395,8 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 */
 	public long get() {
 		return BITS64
-		       ? view64.get()
-		       : view32.get() & 0x00000000FFFFFFFFL;
+			? view64.get()
+			: view32.get() & 0x00000000FFFFFFFFL;
 	}
 
 	/**
@@ -450,8 +446,8 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 */
 	public long get(int index) {
 		return BITS64
-		       ? view64.get(index)
-		       : view32.get(index) & 0x00000000FFFFFFFFL;
+			? view64.get(index)
+			: view32.get(index) & 0x00000000FFFFFFFFL;
 	}
 
 	/**
@@ -462,8 +458,8 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 */
 	public static long get(ByteBuffer target, int index) {
 		return BITS64
-		       ? target.getLong(index)
-		       : target.getInt(index) & 0x00000000FFFFFFFFL;
+			? target.getLong(index)
+			: target.getInt(index) & 0x00000000FFFFFFFFL;
 	}
 
 	/**

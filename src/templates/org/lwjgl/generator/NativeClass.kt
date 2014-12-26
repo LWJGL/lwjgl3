@@ -173,7 +173,7 @@ class NativeClass(
 			functionProvider.generateFunctionGetters(this, this@NativeClass)
 		} else {
 			if ( !_functions.isEmpty() )
-				println("\tstatic { Sys.touch(); }\n")
+				println("\tstatic { LWJGLUtil.initialize(); }\n")
 
 			println("\tprivate $className() {}\n")
 		}

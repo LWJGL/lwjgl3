@@ -42,8 +42,8 @@ public final class Sys {
 	private Sys() {
 	}
 
-	/** Dummy method to trigger the static initializers. */
-	public static void touch() {
+	// Dummy method to trigger the static initializers.
+	static void touch() {
 		// Intentionally empty
 	}
 
