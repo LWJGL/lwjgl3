@@ -60,6 +60,15 @@
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
 	<target name="-init-compile" description="Initializes properties required for compilation">
+		<condition property="java.home.missing">
+			<not>
+				<or>
+					<isset property="env.JAVA_HOME"/>
+					<isset property="env.JAVA6_HOME"/>
+				</or>
+			</not>
+		</condition>
+		<fail if="java.home.missing" message="Please set the JAVA_HOME environment variable."/>
 		<!--
 			JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
 			if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
