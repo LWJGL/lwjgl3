@@ -149,7 +149,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	@Override
 	public long getPointer() {
-		if ( closure == NULL )
+		if ( isDestroyed() )
 			throw new IllegalStateException("This closure instance has been destroyed.");
 
 		return pointer;
@@ -157,7 +157,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	@Override
 	protected void destroy() {
-		if ( jweak == NULL )
+		if ( isDestroyed() )
 			throw new IllegalStateException("This closure instance has been destroyed.");
 
 		memDeleteWeakGlobalRef(jweak);
