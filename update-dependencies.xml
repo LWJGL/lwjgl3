@@ -7,7 +7,7 @@
 	<property name="disruptor" value="3.3.0"/>
 	<property name="testng" value="6.8.8"/>
 	<property name="jcommander" value="1.35"/>
-	<property name="kotlinc-build" value="0.10.4"/>
+	<property name="kotlinc-build" value="0.10.195"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
