@@ -5,7 +5,6 @@ LWJGL is organized in modules, described below:
 Module: Core
 	Description: The LWJGL core.
 	Module Dependencies: n/a (but the Generator has to execute successfully first)
-	Library Dependencies: disruptor (OSX only, if GLFW is used)
 	Structure:
 		* src/core
 		* src/native
@@ -158,9 +157,6 @@ Kotlin
 TestNG
 	* libs/testng.jar
 	* libs/jcommander.jar
-
-Disruptor
-	* libs/disruptor.jar
 
 CODE STYLE
 ----------

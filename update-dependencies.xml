@@ -4,9 +4,8 @@
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
 	<!-- *********************************** -->
-	<property name="disruptor" value="3.3.0"/>
-	<property name="testng" value="6.8.8"/>
-	<property name="jcommander" value="1.35"/>
+	<property name="testng" value="6.8.13"/>
+	<property name="jcommander" value="1.47"/>
 	<property name="kotlinc-build" value="0.10.195"/>
 	<!-- *********************************** -->
 
@@ -63,7 +62,6 @@
 
 	<!-- Downloads the Java dependencies. -->
 	<target name="-lib-download" unless="lib-uptodate">
-		<update-mvn name="Disruptor" group="com/lmax" artifact="disruptor" version="${disruptor}" dest="${lib}"/>
 		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
 		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
 
@@ -71,7 +69,6 @@
 	</target>
 
 	<target name="clean" description="Deletes LWJGL dependencies">
-		<delete taskname="Disruptor" file="${lib}/disruptor.jar"/>
 		<delete taskname="JCommander" file="${lib}/jcommander.jar"/>
 		<delete taskname="TestNG" file="${lib}/testng.jar"/>
 	</target>

@@ -200,8 +200,6 @@
 				<pathelement path="${generated.java}"/>
 			</src>
 
-			<classpath path="${lib}/disruptor.jar"/>
-
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
 		</javac>
@@ -241,7 +239,6 @@
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
 		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
-				<pathelement path="${lib}/disruptor.jar"/>
 				<pathelement path="${lib}/jcommander.jar"/>
 			</classpath>
 
@@ -272,7 +269,6 @@
 
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
 			<classpath>
-				<pathelement path="${lib}/disruptor.jar"/>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
@@ -317,8 +313,6 @@
 			<fileset dir="${src.core}" includes="**"/>
 			<fileset dir="${src.util}" includes="**"/>
 			<fileset dir="${generated.java}" includes="**"/>
-
-			<classpath path="${lib}/disruptor.jar"/>
 		</javadoc>
 	</target>
 
@@ -326,9 +320,6 @@
 		<!-- Bundle classes -->
 		<mkdir dir="${release.jar}"/>
 		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
-
-		<!-- Java dependencies -->
-		<copy todir="${release.jar}" file="${lib}/disruptor.jar"/>
 
 		<!-- Download binaries from build.lwjgl.org -->
 		<mkdir dir="${release.native}/windows/x64"/>
