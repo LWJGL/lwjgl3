@@ -39,7 +39,11 @@ public abstract class AbstractGears {
 
 			loop();
 		} finally {
-			destroy();
+			try {
+				destroy();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 

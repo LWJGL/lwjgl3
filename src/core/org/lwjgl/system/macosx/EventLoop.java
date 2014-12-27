@@ -6,7 +6,7 @@ package org.lwjgl.system.macosx;
 
 import static org.lwjgl.system.macosx.Unistd.*;
 
-/** MacOX event loop utility class. */
+/** MacOSX event loop utility class. */
 public final class EventLoop {
 
 	public static final boolean STARTED_ON_FIRST_THREAD =
@@ -15,19 +15,9 @@ public final class EventLoop {
 	private EventLoop() {
 	}
 
-	/** Ensures that the Cocoa NSApplication event loop is running. */
-	public static void initSharedApplication() {
-		String type = System.getProperty("org.lwjgl.macosx.nsloop", STARTED_ON_FIRST_THREAD ? "NA" : "AWT");
-
-		if ( "AWT".equals(type) ) {
-			java.awt.Toolkit.getDefaultToolkit();
-		} else if ( "JFX".equals(type) ) { // TODO: Implement
-			throw new UnsupportedOperationException("not implemented yet");
-		} else if ( "NA".equals(type) ) {// don't start anything
-
-		} else {
-			throw new IllegalStateException("Invalid NS event loop setting: " + type);
-		}
+	public static void checkFirstThread() {
+		if ( !STARTED_ON_FIRST_THREAD )
+			throw new IllegalStateException("Please run the JVM with -XstartOnFirstThread.");
 	}
 
 }
