@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$MODULE_DIR$/../../../bin/Templates" />
-    <output-test url="file://$MODULE_DIR$/../../../bin/Templates" />
+    <output url="file://$LWJGL_BUILD_OUTPUT$/bin/Templates" />
+    <output-test url="file://$LWJGL_BUILD_OUTPUT$/bin/Templates" />
     <exclude-output />
-    <annotation-paths>
-      <root url="file://$MODULE_DIR$/../../kotlin" />
-    </annotation-paths>
     <content url="file://$MODULE_DIR$/../../../src/templates">
       <sourceFolder url="file://$MODULE_DIR$/../../../src/templates" isTestSource="false" />
     </content>
@@ -17,4 +14,3 @@
     <orderEntry type="library" name="JDK Tools" level="application" />
   </component>
 </module>
-

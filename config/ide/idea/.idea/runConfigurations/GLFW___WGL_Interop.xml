@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="GLFW - WGL Interop" type="Application" factoryName="Application" singleton="true">
     <option name="MAIN_CLASS_NAME" value="org.lwjgl.demo.glfw.WGLInterop" />
-    <option name="VM_PARAMETERS" value="-Dorg.lwjgl.util.Debug=false -Djava.library.path=$LWJGL_LIB_PATH$" />
+    <option name="VM_PARAMETERS" value="-Djava.library.path=$LWJGL_BUILD_OUTPUT$/bin;libs" />
     <option name="PROGRAM_PARAMETERS" value="" />
-    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../../../" />
+    <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../../.." />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" value="" />
     <option name="ENABLE_SWING_INSPECTOR" value="false" />

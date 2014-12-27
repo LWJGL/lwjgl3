@@ -147,7 +147,6 @@
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
           <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_ASSIGNMENT" value="true" />
-          <option name="ALIGN_MULTILINE_TERNARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_THROWS_LIST" value="true" />
           <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
           <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
@@ -388,12 +387,12 @@
           <option name="KEEP_BLANK_LINES_IN_CODE" value="1" />
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
           <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
-          <option name="ALIGN_MULTILINE_TERNARY_OPERATION" value="true" />
           <option name="ALIGN_MULTILINE_ARRAY_INITIALIZER_EXPRESSION" value="true" />
           <option name="SPACE_WITHIN_IF_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_WHILE_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_FOR_PARENTHESES" value="true" />
           <option name="SPACE_WITHIN_SWITCH_PARENTHESES" value="true" />
+          <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
           <option name="KEEP_SIMPLE_BLOCKS_IN_ONE_LINE" value="true" />
           <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
           <option name="DOWHILE_BRACE_FORCE" value="3" />
@@ -418,15 +417,6 @@
             <option name="USE_TAB_CHARACTER" value="true" />
             <option name="SMART_TABS" value="true" />
           </indentOptions>
-          <arrangement>
-            <rules>
-              <rule>
-                <match>
-                  <NAME>xmlns:.*</NAME>
-                </match>
-              </rule>
-            </rules>
-          </arrangement>
         </codeStyleSettings>
         <codeStyleSettings language="jet">
           <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
@@ -442,4 +432,3 @@
     <option name="USE_PER_PROJECT_SETTINGS" value="true" />
   </component>
 </project>
-
