@@ -12,11 +12,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
 public class PointerBuffer implements Comparable<PointerBuffer> {
 
-	protected final ByteBuffer pointers;
-
-	protected final Buffer     view;
-	protected final IntBuffer  view32;
-	protected final LongBuffer view64;
+	/** The backing buffer. */
+	protected final ByteBuffer buffer;
 
 	/**
 	 * Creates a new PointerBuffer with the specified capacity.
@@ -49,15 +46,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	}
 
 	private PointerBuffer(ByteBuffer source, boolean dummy) {
-		pointers = source;
-
-		if ( BITS64 ) {
-			view32 = null;
-			view = view64 = pointers.asLongBuffer();
-		} else {
-			view = view32 = pointers.asIntBuffer();
-			view64 = null;
-		}
+		buffer = source;
 	}
 
 	private static ByteBuffer checkSource(ByteBuffer source) {
@@ -80,7 +69,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the pointer ByteBuffer
 	 */
 	public ByteBuffer getBuffer() {
-		return pointers;
+		return buffer;
 	}
 
 	/**
@@ -89,7 +78,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the capacity of this buffer
 	 */
 	public final int capacity() {
-		return view.capacity();
+		return buffer.capacity() >> POINTER_SHIFT;
 	}
 
 	/**
@@ -98,7 +87,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the position of this buffer
 	 */
 	public final int position() {
-		return view.position();
+		return buffer.position() >> POINTER_SHIFT;
 	}
 
 	/**
@@ -107,7 +96,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the position of this buffer in bytes.
 	 */
 	public final int positionByte() {
-		return position() * POINTER_SIZE;
+		return buffer.position();
 	}
 
 	/**
@@ -122,7 +111,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
 	 */
 	public final PointerBuffer position(int newPosition) {
-		view.position(newPosition);
+		buffer.position(newPosition << POINTER_SHIFT);
 		return this;
 	}
 
@@ -132,7 +121,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the limit of this buffer
 	 */
 	public final int limit() {
-		return view.limit();
+		return buffer.limit() >> POINTER_SHIFT;
 	}
 
 	/**
@@ -148,7 +137,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
 	 */
 	public final PointerBuffer limit(int newLimit) {
-		view.limit(newLimit);
+		buffer.limit(newLimit << POINTER_SHIFT);
 		return this;
 	}
 
@@ -158,7 +147,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return This buffer
 	 */
 	public final PointerBuffer mark() {
-		view.mark();
+		buffer.mark();
 		return this;
 	}
 
@@ -173,7 +162,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.InvalidMarkException If the mark has not been set
 	 */
 	public final PointerBuffer reset() {
-		view.reset();
+		buffer.reset();
 		return this;
 	}
 
@@ -195,7 +184,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return This buffer
 	 */
 	public final PointerBuffer clear() {
-		view.clear();
+		buffer.clear();
 		return this;
 	}
 
@@ -221,7 +210,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return This buffer
 	 */
 	public final PointerBuffer flip() {
-		view.flip();
+		buffer.flip();
 		return this;
 	}
 
@@ -241,7 +230,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return This buffer
 	 */
 	public final PointerBuffer rewind() {
-		view.rewind();
+		buffer.rewind();
 		return this;
 	}
 
@@ -252,7 +241,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the number of elements remaining in this buffer
 	 */
 	public final int remaining() {
-		return view.remaining();
+		return buffer.remaining() >> POINTER_SHIFT;
 	}
 
 	/**
@@ -262,7 +251,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the number of bytes remaining in this buffer
 	 */
 	public final int remainingByte() {
-		return remaining() * POINTER_SIZE;
+		return buffer.remaining();
 	}
 
 	/**
@@ -273,7 +262,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * remaining in this buffer
 	 */
 	public final boolean hasRemaining() {
-		return view.hasRemaining();
+		return buffer.hasRemaining();
 	}
 
 	/**
@@ -300,7 +289,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return A new PointerBuffer instance
 	 */
-	protected PointerBuffer newInstance(ByteBuffer source) {
+	protected static PointerBuffer newInstance(ByteBuffer source) {
 		return new PointerBuffer(source, false);
 	}
 
@@ -322,14 +311,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer slice() {
-		pointers.position(view.position() << POINTER_SIZE);
-		pointers.limit(view.limit() << POINTER_SIZE);
-
-		try {
-			return newInstance(pointers.slice().order(pointers.order()));
-		} finally {
-			pointers.clear();
-		}
+		return newInstance(buffer.slice().order(buffer.order()));
 	}
 
 	/**
@@ -346,12 +328,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the new pointer buffer
 	 */
 	public PointerBuffer duplicate() {
-		PointerBuffer buffer = newInstance(pointers);
-
-		buffer.position(view.position());
-		buffer.limit(view.limit());
-
-		return buffer;
+		return newInstance(buffer.duplicate().order(buffer.order()));
 	}
 
 	/**
@@ -373,16 +350,11 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the new, read-only pointer buffer
 	 */
 	public PointerBuffer asReadOnlyBuffer() {
-		PointerBuffer buffer = new PointerBufferR(pointers);
-
-		buffer.position(view.position());
-		buffer.limit(view.limit());
-
-		return buffer;
+		return newInstance(buffer.asReadOnlyBuffer().order(buffer.order()));
 	}
 
 	public boolean isReadOnly() {
-		return false;
+		return buffer.isReadOnly();
 	}
 
 	/**
@@ -395,8 +367,8 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 */
 	public long get() {
 		return BITS64
-			? view64.get()
-			: view32.get() & 0x00000000FFFFFFFFL;
+			? buffer.getLong()
+			: buffer.getInt() & 0x00000000FFFFFFFFL;
 	}
 
 	/**
@@ -413,10 +385,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(long l) {
-		if ( BITS64 )
-			view64.put(l);
-		else
-			view32.put((int)l);
+		put(buffer, l);
 		return this;
 	}
 
@@ -445,9 +414,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 *                                   or not smaller than the buffer's limit
 	 */
 	public long get(int index) {
-		return BITS64
-			? view64.get(index)
-			: view32.get(index) & 0x00000000FFFFFFFFL;
+		return get(buffer, index << POINTER_SHIFT);
 	}
 
 	/**
@@ -478,10 +445,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(int index, long l) {
-		if ( BITS64 )
-			view64.put(index, l);
-		else
-			view32.put(index, (int)l);
+		put(buffer, index << POINTER_SHIFT, l);
 		return this;
 	}
 
@@ -670,16 +634,13 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 *                                           parameters do not hold
 	 */
 	public PointerBuffer get(long[] dst, int offset, int length) {
-		if ( BITS64 )
-			view64.get(dst, offset, length);
-		else {
-			checkBounds(offset, length, dst.length);
-			if ( length > view32.remaining() )
-				throw new BufferUnderflowException();
-			int end = offset + length;
-			for ( int i = offset; i < end; i++ )
-				dst[i] = view32.get() & 0x00000000FFFFFFFFL;
-		}
+		checkBounds(offset, length, dst.length);
+		if ( length > remaining() )
+			throw new BufferUnderflowException();
+
+		int end = offset + length;
+		for ( int i = offset; i < end; i++ )
+			dst[i] = get();
 
 		return this;
 	}
@@ -739,10 +700,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(PointerBuffer src) {
-		if ( BITS64 )
-			view64.put(src.view64);
-		else
-			view32.put(src.view32);
+		buffer.put(src.buffer);
 		return this;
 	}
 
@@ -787,16 +745,12 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer put(long[] src, int offset, int length) {
-		if ( BITS64 )
-			view64.put(src, offset, length);
-		else {
-			checkBounds(offset, length, src.length);
-			if ( length > view32.remaining() )
-				throw new BufferOverflowException();
-			int end = offset + length;
-			for ( int i = offset; i < end; i++ )
-				view32.put((int)src[i]);
-		}
+		checkBounds(offset, length, src.length);
+		if ( length > remaining() )
+			throw new BufferOverflowException();
+		int end = offset + length;
+		for ( int i = offset; i < end; i++ )
+			put(src[i]);
 
 		return this;
 	}
@@ -844,10 +798,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public PointerBuffer compact() {
-		if ( BITS64 )
-			view64.compact();
-		else
-			view32.compact();
+		buffer.compact();
 		return this;
 	}
 
@@ -864,10 +815,7 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return This buffer's byte order
 	 */
 	public ByteOrder order() {
-		if ( BITS64 )
-			return view64.order();
-		else
-			return view32.order();
+		return buffer.order();
 	}
 
 	/**
@@ -972,55 +920,6 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	private static void checkBounds(int off, int len, int size) {
 		if ( (off | len | (off + len) | (size - (off + len))) < 0 )
 			throw new IndexOutOfBoundsException();
-	}
-
-	/** Read-only version of PointerBuffer. */
-	private static final class PointerBufferR extends PointerBuffer {
-
-		PointerBufferR(ByteBuffer source) {
-			super(source, false);
-		}
-
-		@Override
-		public boolean isReadOnly() {
-			return true;
-		}
-
-		@Override
-		protected PointerBuffer newInstance(ByteBuffer source) {
-			return new PointerBufferR(source);
-		}
-
-		@Override
-		public PointerBuffer asReadOnlyBuffer() {
-			return duplicate();
-		}
-
-		@Override
-		public PointerBuffer put(long l) {
-			throw new ReadOnlyBufferException();
-		}
-
-		@Override
-		public PointerBuffer put(int index, long l) {
-			throw new ReadOnlyBufferException();
-		}
-
-		@Override
-		public PointerBuffer put(PointerBuffer src) {
-			throw new ReadOnlyBufferException();
-		}
-
-		@Override
-		public PointerBuffer put(long[] src, int offset, int length) {
-			throw new ReadOnlyBufferException();
-		}
-
-		@Override
-		public PointerBuffer compact() {
-			throw new ReadOnlyBufferException();
-		}
-
 	}
 
 }
