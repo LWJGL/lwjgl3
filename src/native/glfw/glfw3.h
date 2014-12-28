@@ -479,6 +479,42 @@ DISABLE_WARNINGS()
 #define GLFW_RELEASE_BEHAVIOR_FLUSH 0x00035001
 #define GLFW_RELEASE_BEHAVIOR_NONE  0x00035002
 
+/*! @defgroup shapes Standard cursor shapes
+ *  @ingroup input
+ *  @{ */
+
+/*! @brief The regular arrow cursor shape.
+ *
+ *  The regular arrow cursor.
+ */
+#define GLFW_ARROW_CURSOR           0x00036001
+/*! @brief The text input I-beam cursor shape.
+ *
+ *  The text input I-beam cursor shape.
+ */
+#define GLFW_IBEAM_CURSOR           0x00036002
+/*! @brief The crosshair shape.
+ *
+ *  The crosshair shape.
+ */
+#define GLFW_CROSSHAIR_CURSOR       0x00036003
+/*! @brief The hand shape.
+ *
+ *  The hand shape.
+ */
+#define GLFW_HAND_CURSOR            0x00036004
+/*! @brief The horizontal resize arrow shape.
+ *
+ *  The horizontal resize arrow shape.
+ */
+#define GLFW_HRESIZE_CURSOR         0x00036005
+/*! @brief The vertical resize arrow shape.
+ *
+ *  The vertical resize arrow shape.
+ */
+#define GLFW_VRESIZE_CURSOR         0x00036006
+/*! @} */
+
 #define GLFW_CONNECTED              0x00040001
 #define GLFW_DISCONNECTED           0x00040002
 
@@ -820,8 +856,6 @@ typedef struct GLFWgammaramp
 } GLFWgammaramp;
 
 /*! @brief Image data.
- *
- *  @ingroup window
  */
 typedef struct GLFWimage
 {
@@ -861,6 +895,12 @@ typedef struct GLFWimage
  *  application to the `Contents/Resources` subdirectory of the application's
  *  bundle, if present.  This can be disabled with a
  *  [compile-time option](@ref compile_options_osx).
+ *
+ *  @remarks __X11:__ If the `LC_CTYPE` category of the current locale is set to
+ *  `"C"` then the environment's locale will be applied to that category.  This
+ *  is done because character input will not function when `LC_CTYPE` is set to
+ *  `"C"`.  If another locale was set before this function was called, it will
+ *  be left untouched.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -1398,6 +1438,9 @@ GLFWAPI void glfwWindowHint(int target, int hint);
  *  `GLFW_ICON,` it will be set as the icon for the window.  If no such icon is
  *  present, the `IDI_WINLOGO` icon will be used instead.
  *
+ *  @remarks __Windows:__ The context to share resources with may not be current
+ *  on any other thread.
+ *
  *  @remarks __OS X:__ The GLFW window has no icon, as it is not a document
  *  window, but the dock icon will be the same as the application bundle's icon.
  *  For more information on bundles, see the
@@ -1415,7 +1458,8 @@ GLFWAPI void glfwWindowHint(int target, int hint);
  *  @remarks __X11:__ Some window managers will not respect the placement of
  *  initially hidden windows.
  *
- *  @note This function may not be called from a callback.
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -1443,10 +1487,11 @@ GLFWAPI GLFWwindow* glfwCreateWindow(int width, int height, const char* title, G
  *
  *  @param[in] window The window to destroy.
  *
- *  @note This function may not be called from a callback.
- *
  *  @note The context of the specified window must not be current on any other
  *  thread when this function is called.
+ *
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -2109,7 +2154,8 @@ GLFWAPI GLFWframebuffersizefun glfwSetFramebufferSizeCallback(GLFWwindow* window
  *
  *  Event processing is not required for joystick input to work.
  *
- *  @note This function may not be called from a callback.
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -2152,10 +2198,11 @@ GLFWAPI void glfwPollEvents(void);
  *
  *  Event processing is not required for joystick input to work.
  *
- *  @note This function may not be called from a callback.
- *
  *  @note On some platforms, certain callbacks may be called outside of a call
  *  to one of the event processing functions.
+ *
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -2413,7 +2460,7 @@ GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
  */
 GLFWAPI void glfwSetCursorPos(GLFWwindow* window, double xpos, double ypos);
 
-/*! @brief Creates a cursor.
+/*! @brief Creates a custom cursor.
  *
  *  Creates a new cursor that can be made the system cursor for a window with
  *  @ref glfwSetCursor.  The cursor can be destroyed with @ref
@@ -2430,16 +2477,18 @@ GLFWAPI void glfwSetCursorPos(GLFWwindow* window, double xpos, double ypos);
  *  @return A new cursor ready to use or `NULL` if an
  *  [error](@ref error_handling) occurred.
  *
- *  @note This function may not be called from a callback.
- *
  *  @par Pointer Lifetime
  *  The specified image data is copied before this function returns.
+ *
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
  *
  *  @sa @ref input_cursor
  *  @sa glfwDestroyCursor
+ *  @sa glfwCreateStandardCursor
  *
  *  @par History
  *  Added in GLFW 3.1.
@@ -2447,6 +2496,32 @@ GLFWAPI void glfwSetCursorPos(GLFWwindow* window, double xpos, double ypos);
  *  @ingroup input
  */
 GLFWAPI GLFWcursor* glfwCreateCursor(const GLFWimage* image, int xhot, int yhot);
+
+/*! @brief Creates a cursor with a standard shape.
+ *
+ *  Returns a cursor with a [standard shape](@ref shapes), which can be made the
+ *  system cursor for a window with @ref glfwSetCursor.
+ *
+ *  @param[in] shape One of the [standard shapes](@ref shapes).
+ *
+ *  @return A new cursor ready to use or `NULL` if an
+ *  [error](@ref error_handling) occurred.
+ *
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
+ *
+ *  @par Thread Safety
+ *  This function may only be called from the main thread.
+ *
+ *  @sa @ref input_cursor
+ *  @sa glfwCreateCursor
+ *
+ *  @par History
+ *  Added in GLFW 3.1.
+ *
+ *  @ingroup input
+ */
+GLFWAPI GLFWcursor* glfwCreateStandardCursor(int shape);
 
 /*! @brief Destroys a cursor.
  *
@@ -2456,7 +2531,8 @@ GLFWAPI GLFWcursor* glfwCreateCursor(const GLFWimage* image, int xhot, int yhot)
  *
  *  @param[in] cursor The cursor object to destroy.
  *
- *  @note This function may not be called from a callback.
+ *  @par Reentrancy
+ *  This function may not be called from a callback.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.

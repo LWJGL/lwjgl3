@@ -394,6 +394,17 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"CURSOR_DISABLED" _ 0x00034003
 	)
 
+	val CursorShapes = IntConstant.block(
+		"Standard cursor shapes.",
+
+		"ARROW_CURSOR" _ 0x00036001,
+		"IBEAM_CURSOR" _ 0x00036002,
+		"CROSSHAIR_CURSOR" _ 0x00036003,
+		"HAND_CURSOR" _ 0x00036004,
+		"HRESIZE_CURSOR" _ 0x00036005,
+		"VRESIZE_CURSOR" _ 0x00036006
+	).javaDocLinks
+
 	IntConstant.block(
 		"Monitor events.",
 
@@ -493,7 +504,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			"""
 			<b>Mac OS X</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
 			bundle, if present.
-			"""
+			""",
+		    """
+		    <b>X11</b>: If the {@code LC_CTYPE} category of the current locale is set to {@code "C"} then the environment's locale will be applied to that
+		    category. This is done because character input will not function when {@code LC_CTYPE} is set to {@code "C"}. If another locale was set before this
+		    function was called, it will be left untouched.
+		    """
 		)}
 		""",
 
@@ -857,7 +873,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		For full screen windows, the specified size becomes the resolution of the window's desired video mode. As long as a full screen window has input focus,
 		the supported video mode most closely matching the desired video mode is set for the specified monitor. For more information about full screen windows,
 		including the creation of so called windowed full screen or borderless full screen windows, see
-		<a href="http://www.glfw.org/docs/latest/window.html\#window_full_screen window">full screen</a>.
+		<a href="http://www.glfw.org/docs/latest/window.html\#window_full_screen">full screen</a>.
 
 		By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, make it initially
 		invisible using the #VISIBLE window hint, set its <a href="http://www.glfw.org/docs/latest/window.html\#window_pos">position</a> and then
@@ -880,6 +896,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the icon for the window. If no such icon
 		    is present, the {@code IDI_WINLOGO} icon will be used instead.
 			""",
+		    "<b>Windows</b>: The context to share resources with may not be current on any other thread.",
 		    """
 		    <b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's
 		    icon. Also, the first time a window is opened the menu bar is populated with common commands like Hide, Quit and About. The (minimal) about dialog
@@ -1573,6 +1590,25 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	    returnDoc = "a new cursor ready to use or $NULL if an error occurred",
 	    since = "GLFW 3.1"
+	)
+
+	GLFWcursor.func(
+		"CreateStandardCursor",
+		"""
+		Returns a cursor with a standard shape, which can be made the system cursor for a window with #SetCursor().
+
+	    Notes:
+	    ${ul(
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback.",
+			"The specified image data is copied before this function returns."
+		)}
+	    """,
+
+		int.IN("shape", "one of the standard shapes", CursorShapes),
+
+		returnDoc = "a new cursor ready to use or $NULL if an error occurred",
+		since = "GLFW 3.1"
 	)
 
 	void.func(
