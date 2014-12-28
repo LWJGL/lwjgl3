@@ -19,7 +19,7 @@ abstract class TemplateElement {
 			it.validate(this)
 		}
 
-		if ( this.modifiers identityEquals EMPTY_MODIFIERS )
+		if ( this.modifiers === EMPTY_MODIFIERS )
 			this.modifiers = HashMap(modifiers.size())
 
 		modifiers.forEach {
@@ -29,7 +29,7 @@ abstract class TemplateElement {
 		}
 	}
 
-	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] == modifier
+	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
 	fun has(modifierObject: ModifierObject<*>) = modifiers.containsKey(modifierObject.key)
 	fun <T: TemplateModifier> get(modifier: Class<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifier] as T)
 	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifierObject.key] as T)

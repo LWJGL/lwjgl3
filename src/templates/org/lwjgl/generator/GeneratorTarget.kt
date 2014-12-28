@@ -36,7 +36,7 @@ class Preamble {
 	val hasNativeImports: Boolean get() = nativeImports.isNotEmpty()
 
 	fun javaImport(vararg classes: String) {
-		if ( javaImports identityEquals EMPTY_IMPORTS )
+		if ( javaImports === EMPTY_IMPORTS )
 			javaImports = ArrayList(classes.size())
 
 		classes.forEach {
@@ -45,7 +45,7 @@ class Preamble {
 	}
 
 	fun nativeImport(vararg files: String) {
-		if ( nativeImports identityEquals EMPTY_IMPORTS )
+		if ( nativeImports === EMPTY_IMPORTS )
 			nativeImports = ArrayList(files.size())
 
 		files.forEach {
@@ -57,7 +57,7 @@ class Preamble {
 	}
 
 	fun nativeDefine(expression: String, afterIncludes: Boolean) {
-		if ( nativeDefines identityEquals EMPTY_DEFINES )
+		if ( nativeDefines === EMPTY_DEFINES )
 			nativeDefines = ArrayList()
 
 		nativeDefines.add(NativeDefine(expression, afterIncludes))
@@ -155,7 +155,7 @@ abstract class GeneratorTarget(
 
 	var access = Access.PUBLIC
 		set(access: Access) {
-			if ( access == Access.PRIVATE )
+			if ( access === Access.PRIVATE )
 				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
 			$access = access
 		}
@@ -211,11 +211,11 @@ abstract class GeneratorTarget(
 				val classElement = matcher.group(3)!!
 
 				val link = if ( classElement.endsWith(')') ) LinkType.METHOD else LinkType.FIELD
-				val prefix = if ( link == LinkType.FIELD ) prefixConstant else prefixMethod
+				val prefix = if ( link === LinkType.FIELD ) prefixConstant else prefixMethod
 				buffer append when ( linkMethod.count { it == '#' } ) {
 					1    -> link.create(this.className, prefix, className, classElement, if ( this is NativeClass) this.postfix else "", custom = false)
 					2    ->
-						if ( className == null && link == LinkType.FIELD )
+						if ( className == null && link === LinkType.FIELD )
 							"{@link $classElement}"
 						else
 							link.create(this.className, prefix, className, classElement, "", custom = true)

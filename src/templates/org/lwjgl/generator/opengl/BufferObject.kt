@@ -13,7 +13,7 @@ class BufferObject(val binding: String): ParameterModifier() {
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
-		if ( !((param.nativeType is PointerType && param.nativeType.mapping != PointerMapping.OPAQUE_POINTER) || param.nativeType.mapping == PrimitiveMapping.PTR) )
+		if ( !((param.nativeType is PointerType && param.nativeType.mapping !== PointerMapping.OPAQUE_POINTER) || param.nativeType.mapping === PrimitiveMapping.PTR) )
 			throw IllegalArgumentException("The BufferObject modifier can only be applied on data pointer types or long primitives.")
 
 		when ( this ) {

@@ -114,7 +114,7 @@ class Struct(
 		get() = nativeType is StructType && !nativeType.includesPointer
 
 	val StructMember.isNestedAnonymousStruct: Boolean
-		get() = isNestedStruct && (nativeType as StructType).name identityEquals ANONYMOUS
+		get() = isNestedStruct && (nativeType as StructType).name === ANONYMOUS
 
 	val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
@@ -352,7 +352,7 @@ class Struct(
 					println("long $param,")
 					print("\t\tint ${param}Bytes")
 				}
-				it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
+				it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 					print("long $param")
 				}
 				else                                                                          -> {
@@ -420,16 +420,16 @@ class Struct(
 			when {
 				it is StructMemberArray                                                                -> {
 					print(
-						if ( it is StructMemberCharArray && mode == ConstructorMode.ALTER2 )
+						if ( it is StructMemberCharArray && mode === ConstructorMode.ALTER2 )
 							"CharSequence $param"
 						else
 							"ByteBuffer $param"
 					)
 				}
-				it.nativeType is CharSequenceType && mode == ConstructorMode.ALTER2                    -> {
+				it.nativeType is CharSequenceType && mode === ConstructorMode.ALTER2                    -> {
 					print("CharSequence $param")
 				}
-				it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
+				it.nativeType is PointerType && it.nativeType.mapping !== PointerMapping.OPAQUE_POINTER -> {
 					print("ByteBuffer $param")
 				}
 				else                                                                                   -> {
@@ -465,7 +465,7 @@ class Struct(
 		parentField: String
 	) = if ( parentStruct == null )
 		m.offsetField
-	else if ( parentStruct.className identityEquals ANONYMOUS )
+	else if ( parentStruct.className === ANONYMOUS )
 		"${parentField}_${m.offsetField}"
 	else {
 		val classPrefix = if ( parentField equals parentStruct.className ) // See org.lwjgl.system.windows.MSG, field POINT
@@ -497,7 +497,7 @@ class Struct(
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					println("\tpublic static void ${method}Set(ByteBuffer $struct, long $param) { if ( $param != NULL ) memCopy($param, memAddress($struct) + $field, ${getNestedStructSizeOf(nestedStruct, field)}); }")
 					println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) { ${method}Set($struct, memAddressSafe($param)); }")
 				}
@@ -511,7 +511,7 @@ class Struct(
 					it is StructMemberArray                                                       -> {
 						println("long $param, int bytes) { memCopy($param, memAddress($struct) + $field, bytes); }")
 					}
-					it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
+					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long $param) { PointerBuffer.put($struct, $struct.position() + $field, $param); }")
 					}
 					else                                                                          -> {
@@ -583,7 +583,7 @@ class Struct(
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					println("\tpublic void ${setMethod}(long $param) { ${method}Set(struct, $param); }")
 					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}Set(struct, $param); }")
 				}
@@ -596,7 +596,7 @@ class Struct(
 					it is StructMemberArray                                                       -> {
 						println("long $param, int bytes) { ${method}Set(struct, $param, bytes); }")
 					}
-					it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
+					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long $param) { ${method}(struct, $param); }")
 					}
 					else                                                                          -> {
@@ -635,7 +635,7 @@ class Struct(
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					val param = it.name
 					val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
 					println("\tpublic static void ${method}Get(ByteBuffer $struct, long $param) { memCopy(memAddress($struct) + $field, $param, $SIZEOF); }")
@@ -654,7 +654,7 @@ class Struct(
 						println("\t\tmemCopy(memAddress($struct) + $field, $param, bytes);")
 						println("\t}")
 					}
-					it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
+					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long ${method}(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
 					}
 					else                                                                          -> {
@@ -739,7 +739,7 @@ class Struct(
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
-				if ( !(nestedStruct.className identityEquals ANONYMOUS) ) {
+				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					val param = it.name
 					println("\tpublic void ${getMethod}(long $param) { ${method}Get(struct, $param); }")
 					println("\tpublic void ${getMethod}(ByteBuffer $param) { ${method}Get(struct, $param); }")
@@ -755,7 +755,7 @@ class Struct(
 						val param = it.name
 						println("void ${getMethod}(long $param, int bytes) { ${method}Get(struct, $param, bytes); }")
 					}
-					it.nativeType is PointerType || it.nativeType.mapping == PrimitiveMapping.PTR -> {
+					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long ${getMethod}() { return $method(struct); }")
 					}
 					else                                                                          -> {
@@ -868,7 +868,7 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				// Output anonymous inner structs
 				val structType = it.nativeType as StructType
-				if ( structType.name identityEquals ANONYMOUS )
+				if ( structType.name === ANONYMOUS )
 					index = generateNativeMembers(structType.definition.members, index, prefix = "${it.nativeName}.") // recursion
 			}
 		}

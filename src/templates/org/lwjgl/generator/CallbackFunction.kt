@@ -38,7 +38,7 @@ class CallbackFunction(
 				PrimitiveMapping.DOUBLE -> "ffi_type_double"
 				else                    -> "ffi_type_${if ( (this as IntegerType).unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
 			}
-			else             -> if ( mapping == TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
+			else             -> if ( mapping === TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
 
 	val NativeType.callbackType: String
@@ -48,11 +48,11 @@ class CallbackFunction(
 				PrimitiveMapping.PTR -> "Ptr"
 				else                 -> mapping.javaMethodType.getSimpleName().upperCaseFirst
 			}
-			else             -> if ( mapping == TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
+			else             -> if ( mapping === TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
 
 	val NativeType.memType: String
-		get() = if ( this is PointerType || mapping == PrimitiveMapping.PTR)
+		get() = if ( this is PointerType || mapping === PrimitiveMapping.PTR)
 			"Address"
 		else
 			(mapping as PrimitiveMapping).javaMethodType.getSimpleName().upperCaseFirst

@@ -22,7 +22,7 @@ abstract class QualifiedType(
 	val javaMethodType: String
 		get() = when {
 			nativeType is ObjectType                  -> nativeType.className
-			nativeType.mapping == PointerMapping.DATA -> "ByteBuffer"
+			nativeType.mapping === PointerMapping.DATA -> "ByteBuffer"
 			else                                      -> nativeType.javaMethodType.getSimpleName()
 		}
 
@@ -53,12 +53,12 @@ class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 
 	override fun hashCode() = RESULT.hashCode()
 
-	override fun equals(other: Any?) = other identityEquals this || (other is ReturnValue && other.nativeType == this.nativeType)
+	override fun equals(other: Any?) = other === this || (other is ReturnValue && other.nativeType == this.nativeType)
 
 	// --- [ Helper functions & properties ] ---
 
 	val isVoid: Boolean
-		get() = nativeType.mapping == TypeMapping.VOID
+		get() = nativeType.mapping === TypeMapping.VOID
 
 }
 
@@ -105,7 +105,7 @@ class Parameter(
 
 	override fun hashCode() = name.hashCode()
 
-	override fun equals(other: Any?) = other identityEquals this || (other is Parameter && other.name equals this.name)
+	override fun equals(other: Any?) = other === this || (other is Parameter && other.name equals this.name)
 
 	private fun doc(description: String, links: String, linkMode: LinkMode): String {
 		val trimmed = description.trim()
@@ -140,11 +140,11 @@ class Parameter(
 	// --- [ Helper functions & properties ] ----
 
 	override val isSpecial: Boolean
-		get() = (nativeType.mapping == PointerMapping.OPAQUE_POINTER && (nativeType is ObjectType || !has(nullable))) || super.isSpecial
+		get() = (nativeType.mapping === PointerMapping.OPAQUE_POINTER && (nativeType is ObjectType || !has(nullable))) || super.isSpecial
 
 	/** Returns true if this is an output parameter with the autoSizeResult modifier. */
 	val isAutoSizeResultOut: Boolean
-		get() = paramType == OUT && has(autoSizeResult)
+		get() = paramType === OUT && has(autoSizeResult)
 
 	val asJavaMethodParam: String
 		get() = "$javaMethodType $name"
@@ -158,7 +158,7 @@ class Parameter(
 		                         -> {
 			if ( isAutoSizeResultOut && (func.returns.nativeType !is StructType || func.returnsStructValue) )
 				"$API_BUFFER.address() + $name"
-			else if ( has(nullable) || (has(optional) && mode == GenerationMode.NORMAL) )
+			else if ( has(nullable) || (has(optional) && mode === GenerationMode.NORMAL) )
 				"memAddressSafe($name)"
 			else
 				"memAddress($name)"

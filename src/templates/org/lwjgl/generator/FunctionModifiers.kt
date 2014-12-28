@@ -79,9 +79,9 @@ class Code(
 	override val isSpecial = true
 
 	fun hasStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
-		if ( statements identityEquals NO_STATEMENTS ) false else statements.any { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
+		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === Code.ApplyTo.BOTH || it.applyTo === applyTo }
 	fun getStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
-		if ( statements identityEquals NO_STATEMENTS ) statements else statements.filter { it.applyTo == Code.ApplyTo.BOTH || it.applyTo == applyTo }
+		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === Code.ApplyTo.BOTH || it.applyTo === applyTo }
 
 }
 fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))

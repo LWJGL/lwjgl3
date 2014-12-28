@@ -116,7 +116,7 @@ class Generator(
 		// static
 		method.getModifiers() and Modifier.STATIC != 0 &&
 			// returns NativeClass
-			method.getReturnType() == javaClass &&
+			method.getReturnType() === javaClass &&
 			// has no arguments
 			method.getParameterTypes().size() == 0
 
