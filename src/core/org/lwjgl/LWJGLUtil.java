@@ -317,6 +317,11 @@ public final class LWJGLUtil {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
+		if ( new File(name).isAbsolute() ) {
+			System.load(name);
+			return;
+		}
+
 		String libName = mapLibraryName(name);
 		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
@@ -349,21 +354,26 @@ public final class LWJGLUtil {
 		if ( getPlatform() == Platform.MACOSX && name.endsWith(".framework") )
 			return apiCreateLibrary(name);
 
-		String libName = mapLibraryName(name);
-		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
+		String libName;
+		if ( new File(name).isAbsolute() )
+			libName = name;
+		else {
+			libName = mapLibraryName(name);
+			String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
-		// Try org.lwjgl.librarypath first
-		String override = System.getProperty("org.lwjgl.librarypath");
-		if ( override != null ) {
-			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName, null);
+			// Try org.lwjgl.librarypath first
+			String override = System.getProperty("org.lwjgl.librarypath");
+			if ( override != null ) {
+				DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName, null);
+				if ( lib != null )
+					return lib;
+			}
+
+			// Then java.library.path
+			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName, null);
 			if ( lib != null )
 				return lib;
 		}
-
-		// Then java.library.path
-		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName, null);
-		if ( lib != null )
-			return lib;
 
 		// Then the OS paths
 		try {
