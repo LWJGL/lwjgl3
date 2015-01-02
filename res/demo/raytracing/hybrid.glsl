@@ -160,20 +160,18 @@ void main(void) {
   vec3 viewPosition = imageLoad(viewPositionImage, pix).xyz;
   vec3 viewNormal = imageLoad(viewNormalImage, pix).xyz;
 
-  vec2 pos = vec2(pix) / vec2(size.x - 1, size.y - 1);
+  vec2 pos = (vec2(pix) + vec2(0.5, 0.5)) / vec2(size.x, size.y);
   cameraUp = normalize(ray01 - ray00);
 
   float rand1 = random(pix, time);
   float rand2 = random(pix + vec2(641.51224, 423.178), time);
   float rand3 = random(pix - vec2(147.16414, 363.941), time);
+  /* Set global 'rand' variable */
   rand = vec3(rand1, rand2, rand3);
 
-  vec2 jitter = vec2(rand1, rand2) / vec2(size);
-  vec2 p = pos + jitter;
-  vec3 dir = mix(mix(ray00, ray01, p.y), mix(ray10, ray11, p.y), p.x);
-
+  vec3 dir = normalize(mix(mix(ray00, ray01, pos.y), mix(ray10, ray11, pos.y), pos.x));
   vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
-  color += trace(eye, dir, viewPosition, viewNormal);
+  color += trace(eye, dir, viewPosition - dir/1E3, viewNormal);
 
   vec4 oldColor = vec4(0.0);
   if (blendFactor > 0.0) {

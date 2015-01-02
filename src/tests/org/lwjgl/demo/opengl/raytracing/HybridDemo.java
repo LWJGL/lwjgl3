@@ -689,6 +689,10 @@ public class HybridDemo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 		glUseProgram(0);
 
+		frameNumber++;
+	}
+
+	private void present() {
 		/*
 		 * Draw the rendered image on the screen using textured full-screen
 		 * quad.
@@ -700,8 +704,6 @@ public class HybridDemo {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
-
-		frameNumber++;
 	}
 
 	private void loop() {
@@ -712,6 +714,7 @@ public class HybridDemo {
 			update();
 			raster();
 			trace();
+			present();
 
 			glfwSwapBuffers(window);
 		}
