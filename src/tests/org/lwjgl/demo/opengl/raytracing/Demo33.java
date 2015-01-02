@@ -223,7 +223,7 @@ public class Demo33 {
 	}
 
 	/**
-	 * Creates a VAO with a full-screen quad VBO.
+	 * Create a VAO with a full-screen quad VBO.
 	 */
 	private static int quadFullScreenVao() {
 		int vao = glGenVertexArrays();
@@ -473,6 +473,13 @@ public class Demo33 {
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
 
+		frameNumber++;
+	}
+
+	/**
+	 * Present the final image on the screen/viewport.
+	 */
+	private void present() {
 		/*
 		 * Draw the rendered image on the screen using textured full-screen
 		 * quad.
@@ -484,8 +491,6 @@ public class Demo33 {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
-
-		frameNumber++;
 	}
 
 	private void loop() {
@@ -494,6 +499,7 @@ public class Demo33 {
 			glViewport(0, 0, width, height);
 
 			trace();
+			present();
 
 			glfwSwapBuffers(window);
 		}

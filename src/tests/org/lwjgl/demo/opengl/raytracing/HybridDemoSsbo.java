@@ -34,22 +34,17 @@ import static org.lwjgl.system.MemoryUtil.*;
  * This demo is used to showcase hybrid rasterization and ray tracing to make
  * the first bounce faster.
  * <p>
- * The idea behind this is not new, others have done it, too, like in <a
- * href="https://www.youtube.com/watch?v=LyH4yBm6Z9g">Hybrid Rendering Demo -
- * PowerVR Ray Tracing - GDC 2014</a>.
- * <p>
- * The benefit of doing it this way is to use the rasterizer to rasterize the
- * depth/view position and normal information of a potentially complex model
- * first, storing it in a A-buffer. This essentially saves us one bounce of path
- * tracing for the first hit of the eye ray into the scene.
- * <p>
- * From there on we can use the ray tracer again and compute shadow rays and
- * reflection rays as usual.
+ * It works like the {@link HybridDemo}, but uses a Shader Storage Buffer Object
+ * (SSBO) to let the host program dynamically specify the boxes via a memory
+ * buffer that is read by the shader.
  * 
  * @author Kai Burjack
  */
-public class HybridDemo {
+public class HybridDemoSsbo {
 
+	/**
+	 * The boxes for both rasterization and ray tracing.
+	 */
 	private static Vector3f[] boxes = { new Vector3f(-5.0f, -0.1f, -5.0f), new Vector3f(5.0f, 0.0f, 5.0f),
 			new Vector3f(-0.5f, 0.0f, -0.5f), new Vector3f(0.5f, 1.0f, 0.5f), new Vector3f(-5.1f, 0.0f, -5.0f),
 			new Vector3f(-5.0f, 5.0f, 5.0f), new Vector3f(5.0f, 0.0f, -5.0f), new Vector3f(5.1f, 5.0f, 5.0f),
@@ -71,6 +66,7 @@ public class HybridDemo {
 	private int vaoScene;
 	private int positionTexture;
 	private int normalTexture;
+	private int ssbo;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -154,7 +150,7 @@ public class HybridDemo {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader + raster)", NULL, NULL);
+		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader (with SSBO) + raster)", NULL, NULL);
 		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
@@ -170,18 +166,18 @@ public class HybridDemo {
 				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
-					int newBounceCount = Math.min(4, HybridDemo.this.bounceCount + 1);
-					if (newBounceCount != HybridDemo.this.bounceCount) {
-						HybridDemo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + HybridDemo.this.bounceCount);
-						HybridDemo.this.frameNumber = 0;
+					int newBounceCount = Math.min(4, HybridDemoSsbo.this.bounceCount + 1);
+					if (newBounceCount != HybridDemoSsbo.this.bounceCount) {
+						HybridDemoSsbo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + HybridDemoSsbo.this.bounceCount);
+						HybridDemoSsbo.this.frameNumber = 0;
 					}
 				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
-					int newBounceCount = Math.max(1, HybridDemo.this.bounceCount - 1);
-					if (newBounceCount != HybridDemo.this.bounceCount) {
-						HybridDemo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + HybridDemo.this.bounceCount);
-						HybridDemo.this.frameNumber = 0;
+					int newBounceCount = Math.max(1, HybridDemoSsbo.this.bounceCount - 1);
+					if (newBounceCount != HybridDemoSsbo.this.bounceCount) {
+						HybridDemoSsbo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + HybridDemoSsbo.this.bounceCount);
+						HybridDemoSsbo.this.frameNumber = 0;
 					}
 				}
 			}
@@ -190,11 +186,12 @@ public class HybridDemo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0 && (HybridDemo.this.width != width || HybridDemo.this.height != height)) {
-					HybridDemo.this.width = width;
-					HybridDemo.this.height = height;
-					HybridDemo.this.resetFramebuffer = true;
-					HybridDemo.this.frameNumber = 0;
+				if (width > 0 && height > 0
+						&& (HybridDemoSsbo.this.width != width || HybridDemoSsbo.this.height != height)) {
+					HybridDemoSsbo.this.width = width;
+					HybridDemoSsbo.this.height = height;
+					HybridDemoSsbo.this.resetFramebuffer = true;
+					HybridDemoSsbo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -202,9 +199,9 @@ public class HybridDemo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				HybridDemo.this.mouseX = (float) x;
+				HybridDemoSsbo.this.mouseX = (float) x;
 				if (mouseDown) {
-					HybridDemo.this.frameNumber = 0;
+					HybridDemoSsbo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -213,11 +210,11 @@ public class HybridDemo {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
 				if (action == GLFW_PRESS) {
-					HybridDemo.this.mouseDownX = HybridDemo.this.mouseX;
-					HybridDemo.this.mouseDown = true;
+					HybridDemoSsbo.this.mouseDownX = HybridDemoSsbo.this.mouseX;
+					HybridDemoSsbo.this.mouseDown = true;
 				} else if (action == GLFW_RELEASE) {
-					HybridDemo.this.mouseDown = false;
-					HybridDemo.this.rotationAboutY = HybridDemo.this.currRotationAboutY;
+					HybridDemoSsbo.this.mouseDown = false;
+					HybridDemoSsbo.this.rotationAboutY = HybridDemoSsbo.this.currRotationAboutY;
 				}
 			}
 		});
@@ -233,6 +230,7 @@ public class HybridDemo {
 		createRaytracingTexture();
 		createRasterizerTextures();
 		createRasterFrameBufferObject();
+		ssbo = createSceneSSBO();
 		vao = createFullScreenVao();
 		vaoScene = createSceneVao();
 		rasterProgram = createRasterProgram();
@@ -256,6 +254,31 @@ public class HybridDemo {
 		camera = new Camera();
 
 		firstTime = System.nanoTime();
+	}
+
+	/**
+	 * Create a Shader Storage Buffer Object which will hold our boxes to be
+	 * read by our Compute Shader.
+	 */
+	private static int createSceneSSBO() {
+		int ssbo = glGenBuffers();
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4) * boxes.length);
+		for (int i = 0; i < boxes.length; i += 2) {
+			Vector3f min = boxes[i];
+			Vector3f max = boxes[i + 1];
+			/*
+			 * NOTE: We need to write vec4 here, because SSBOs have specific
+			 * alignment requirements for struct members (vec3 is always treated
+			 * as vec4 in memory!)
+			 */
+			ssboData.putFloat(min.x).putFloat(min.y).putFloat(min.z).putFloat(0.0f);
+			ssboData.putFloat(max.x).putFloat(max.y).putFloat(max.z).putFloat(0.0f);
+		}
+		ssboData.flip();
+		glBufferData(GL_SHADER_STORAGE_BUFFER, ssboData, GL_STATIC_DRAW);
+		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+		return ssbo;
 	}
 
 	/**
@@ -484,7 +507,7 @@ public class HybridDemo {
 	 */
 	private static int createComputeProgram() throws IOException {
 		int program = glCreateProgram();
-		int cshader = createShader("demo/raytracing/hybrid.glsl", GL_COMPUTE_SHADER);
+		int cshader = createShader("demo/raytracing/hybridSsbo.glsl", GL_COMPUTE_SHADER);
 		int random = createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
@@ -697,12 +720,16 @@ public class HybridDemo {
 		glBindImageTexture(1, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
+		/* Bind the SSBO containing our boxes */
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
+
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
 		int worksizeY = mathRoundPoT(height);
 
 		/* Invoke the compute shader. */
 		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
+
 		/*
 		 * Synchronize all writes to the framebuffer image before we let OpenGL
 		 * source texels from it afterwards when rendering the final image with
@@ -711,6 +738,7 @@ public class HybridDemo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
 		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
@@ -772,7 +800,7 @@ public class HybridDemo {
 	}
 
 	public static void main(String[] args) {
-		new HybridDemo().run();
+		new HybridDemoSsbo().run();
 	}
 
 }

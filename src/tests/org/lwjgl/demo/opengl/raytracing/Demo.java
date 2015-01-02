@@ -218,7 +218,7 @@ public class Demo {
 	}
 
 	/**
-	 * Creates a VAO with a full-screen quad VBO.
+	 * Create a VAO with a full-screen quad VBO.
 	 */
 	private static int quadFullScreenVao() {
 		int vao = glGenVertexArrays();
@@ -372,6 +372,9 @@ public class Demo {
 		return tex;
 	}
 
+	/**
+	 * Recreate the framebuffer when the window size changes.
+	 */
 	private void resizeFramebufferTexture() {
 		glDeleteTextures(tex);
 		tex = createFramebufferTexture();
@@ -438,12 +441,24 @@ public class Demo {
 
 		/* Invoke the compute shader. */
 		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
-
-		/* Reset image binding. */
-		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		/*
+		 * Synchronize all writes to the framebuffer image before we let OpenGL
+		 * source texels from it afterwards when rendering the final image with
+		 * the full-screen quad.
+		 */
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
+
+		/* Reset bindings. */
+		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glUseProgram(0);
 
+		frameNumber++;
+	}
+
+	/**
+	 * Present the final image on the screen/viewport.
+	 */
+	private void present() {
 		/*
 		 * Draw the rendered image on the screen using textured full-screen
 		 * quad.
@@ -455,8 +470,6 @@ public class Demo {
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
-
-		frameNumber++;
 	}
 
 	private void loop() {
@@ -465,6 +478,7 @@ public class Demo {
 			glViewport(0, 0, width, height);
 
 			trace();
+			present();
 
 			glfwSwapBuffers(window);
 		}
