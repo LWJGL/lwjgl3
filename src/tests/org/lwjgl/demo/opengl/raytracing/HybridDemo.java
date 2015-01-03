@@ -363,8 +363,6 @@ public class HybridDemo {
 	/**
 	 * Create the frame buffer object that our rasterizer uses to render the
 	 * view-space position and normal into the textures.
-	 *
-	 * @return the FBO id
 	 */
 	private void createRasterFrameBufferObject() {
 		this.fbo = glGenFramebuffers();
@@ -543,8 +541,6 @@ public class HybridDemo {
 
 	/**
 	 * Create the texture that will serve as our framebuffer for the ray tracer.
-	 *
-	 * @return the texture id
 	 */
 	private void createRaytracingTexture() {
 		this.raytraceTexture = glGenTextures();
@@ -673,8 +669,9 @@ public class HybridDemo {
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame. 0.0 - use
-		 * only the new frame > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame.
+		 *   0.0 - use only the new frame
+		 * > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
