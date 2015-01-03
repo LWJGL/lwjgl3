@@ -24,7 +24,7 @@ layout (std430, binding = 0) buffer Boxes
 
 #define MAX_SCENE_BOUNDS 100.0
 #define EPSILON 0.0001
-#define LIGHT_BASE_INTENSITY 20.0
+#define LIGHT_BASE_INTENSITY 12.0
 
 float random(vec2 f, float time);
 vec3 randomSpherePoint(vec3 rand);
@@ -103,7 +103,7 @@ vec3 normalForFace(int fIndex) {
 vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
   if (fIndex == 0) {
     vec2 res = (hit.zy - b.min.zy) / (b.max.zy - b.min.zy);
-    return vec2(1.0 - res.x, res.y);
+    return vec2(1.0 - res.x, 1.0 - res.y);
   } else if (fIndex == 1) {
     vec2 res = (hit.zy - b.min.zy) / (b.max.zy - b.min.zy);
     return vec2(res.x, res.y);
@@ -117,18 +117,11 @@ vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
     
   } else if (fIndex == 4) {
     vec2 res = (hit.xy - b.min.xy) / (b.max.xy - b.min.xy);
-    return vec2(res.x, res.y);
+    return vec2(res.x, 1.0 - res.y);
   } else {
     vec2 res = (hit.xy - b.min.xy) / (b.max.xy - b.min.xy);
     return vec2(1.0 - res.x, res.y);
   }
-}
-
-void trace_(vec3 origin, vec3 dir) {
-  ivec3 size = imageSize(photonMaps);
-  float r = rand.x;
-  ivec3 index = ivec3(abs(rand.xy) * size.x, 2.0);
-  imageStore(photonMaps, index, vec4(r));
 }
 
 void trace(vec3 origin, vec3 dir) {
@@ -141,13 +134,15 @@ void trace(vec3 origin, vec3 dir) {
     vec3 hitPoint = origin + i.near * dir;
     int fIndex = faceIndex(hitPoint, b);
     vec3 normal = normalForFace(fIndex);
-    attenuation *= dot(normal, -dir);
+    vec3 lightToSurface = origin - hitPoint;
+    float oneOverR2 = 1.0 / dot(lightToSurface, lightToSurface);
+    attenuation *= dot(normal, -dir) * oneOverR2;
     origin = hitPoint + normal * EPSILON;
     dir = randomHemispherePoint(rand, normal);
     /* Write into photon map */
     vec2 texCoord = texCoordForFace(hitPoint, b, fIndex);
     ivec3 index = ivec3(texCoord * size.xy, i.bi * 6 + fIndex);
-    float color = attenuation.r;
+    float color = attenuation.r * LIGHT_BASE_INTENSITY;
     vec2 oldColor = imageLoad(photonMaps, index).rg;
     float numPhotons = oldColor.g;
     float blendFactor = numPhotons / (numPhotons + 1.0);
@@ -170,6 +165,5 @@ void main(void) {
   vec3 randSphere = randomSpherePoint(rand);
   vec3 positionOnLight = lightCenterPosition + randSphere * lightRadius;
   vec3 lightDirection = randomHemispherePoint(rand, randSphere);
-  float cosineAttenuation = dot(lightDirection, randSphere);
   trace(positionOnLight, lightDirection);
 }

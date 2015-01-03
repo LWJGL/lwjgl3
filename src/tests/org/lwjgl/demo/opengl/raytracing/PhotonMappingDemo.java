@@ -100,7 +100,7 @@ public class PhotonMappingDemo {
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
-	private Vector3f lightCenterPosition = new Vector3f(1.5f, 2.9f, 3);
+	private Vector3f lightCenterPosition = new Vector3f(2.5f, 2.9f, 3);
 
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
