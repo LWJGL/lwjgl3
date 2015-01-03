@@ -26,6 +26,13 @@ layout (std430, binding = 0) buffer Boxes
 #define EPSILON 0.0001
 #define LIGHT_BASE_INTENSITY 12.0
 
+#define CUBE_FACE_POS_X 0
+#define CUBE_FACE_NEG_X 1
+#define CUBE_FACE_POS_Y 2
+#define CUBE_FACE_NEG_Y 3
+#define CUBE_FACE_POS_Z 4
+#define CUBE_FACE_NEG_Z 5
+
 float random(vec2 f, float time);
 vec3 randomSpherePoint(vec3 rand);
 vec3 randomHemispherePoint(vec3 rand, vec3 n);
@@ -72,50 +79,50 @@ bool intersectBoxes(vec3 origin, vec3 dir, out hitinfo info) {
 
 int faceIndex(vec3 hit, const box b) {
   if (hit.x < b.min.x + EPSILON)
-    return 1;
+    return CUBE_FACE_NEG_X;
   else if (hit.x > b.max.x - EPSILON)
-    return 0;
+    return CUBE_FACE_POS_X;
   else if (hit.y < b.min.y + EPSILON)
-    return 3;
+    return CUBE_FACE_NEG_Y;
   else if (hit.y > b.max.y - EPSILON)
-    return 2;
+    return CUBE_FACE_POS_Y;
   else if (hit.z < b.min.z + EPSILON)
-    return 5;
+    return CUBE_FACE_NEG_Z;
   else
-    return 4;
+    return CUBE_FACE_POS_Z;
 }
 
 vec3 normalForFace(int fIndex) {
-  if (fIndex == 1)
+  if (fIndex == CUBE_FACE_NEG_X)
     return vec3(-1.0, 0.0, 0.0);
-  else if (fIndex == 0)
+  else if (fIndex == CUBE_FACE_POS_X)
     return vec3(1.0, 0.0, 0.0);
-  else if (fIndex == 3)
+  else if (fIndex == CUBE_FACE_NEG_Y)
     return vec3(0.0, -1.0, 0.0);
-  else if (fIndex == 2)
+  else if (fIndex == CUBE_FACE_POS_Y)
     return vec3(0.0, 1.0, 0.0);
-  else if (fIndex == 5)
+  else if (fIndex == CUBE_FACE_NEG_Z)
     return vec3(0.0, 0.0, -1.0);
   else
     return vec3(0.0, 0.0, 1.0);
 }
 
 vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
-  if (fIndex == 0) {
+  if (fIndex == CUBE_FACE_POS_X) {
     vec2 res = (hit.zy - b.min.zy) / (b.max.zy - b.min.zy);
     return vec2(1.0 - res.x, 1.0 - res.y);
-  } else if (fIndex == 1) {
+  } else if (fIndex == CUBE_FACE_NEG_X) {
     vec2 res = (hit.zy - b.min.zy) / (b.max.zy - b.min.zy);
     return vec2(res.x, res.y);
     
-  } else if (fIndex == 2) {
+  } else if (fIndex == CUBE_FACE_POS_Y) {
     vec2 res = (hit.xz - b.min.xz) / (b.max.xz - b.min.xz);
     return res;
-  } else if (fIndex == 3) {
+  } else if (fIndex == CUBE_FACE_NEG_Y) {
     vec2 res = (hit.xz - b.min.xz) / (b.max.xz - b.min.xz);
     return res;
     
-  } else if (fIndex == 4) {
+  } else if (fIndex == CUBE_FACE_POS_Z) {
     vec2 res = (hit.xy - b.min.xy) / (b.max.xy - b.min.xy);
     return vec2(res.x, 1.0 - res.y);
   } else {
