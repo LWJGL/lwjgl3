@@ -261,7 +261,7 @@ public class HybridDemoSsbo {
 	private void createSceneSSBO() {
 		this.ssbo = glGenBuffers();
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
-		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4) * boxes.length);
+		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4) * boxes.length / 2);
 		FloatBuffer fv = ssboData.asFloatBuffer();
 		for (int i = 0; i < boxes.length; i += 2) {
 			Vector3f min = boxes[i];
