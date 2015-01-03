@@ -271,6 +271,9 @@ public class HybridDemoSsbo {
 			 * NOTE: We need to write vec4 here, because SSBOs have specific
 			 * alignment requirements for struct members (vec3 is always treated
 			 * as vec4 in memory!)
+			 * 
+			 * See:
+			 * "https://www.safaribooksonline.com/library/view/opengl-programming-guide/9780132748445/app09lev1sec3.html"
 			 */
 			ssboData.putFloat(min.x).putFloat(min.y).putFloat(min.z).putFloat(0.0f);
 			ssboData.putFloat(max.x).putFloat(max.y).putFloat(max.z).putFloat(0.0f);
