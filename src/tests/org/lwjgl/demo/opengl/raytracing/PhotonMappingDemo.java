@@ -36,6 +36,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Photon mapping using cubemap texture arrays.
+ * <p>
+ * This demo uses a cube map array texture to hold a "photon map" for each of
+ * the boxes in the scene.
+ * <p>
+ * Within a computer shader light rays are being shot into the scene and
+ * whenever they hit a box the texel coordinate is computed and the "photon" is
+ * stored in the corresponding face and layer of the cube map array image.
+ * <p>
+ * Afterwards, the scene is rasterized and the cube map array is sampled via a
+ * samplerCubeArray. The boxes are rendered via hardware instancing and the
+ * layer of the cube map array is obtained via the gl_InstanceID.
  * 
  * @author Kai Burjack
  */
@@ -147,7 +158,8 @@ public class PhotonMappingDemo {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader (with SSBO) + raster)", NULL, NULL);
+		window = glfwCreateWindow(width, height,
+				"Photon Mapping Demo - compute shader (with SSBO) + raster (with instancing)", NULL, NULL);
 		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
@@ -446,7 +458,8 @@ public class PhotonMappingDemo {
 		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 1, GL_RG16F, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2);
-		ByteBuffer color = BufferUtils.createByteBuffer(PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * (4 + 4) * 6 * boxes.length / 2);
+		ByteBuffer color = BufferUtils.createByteBuffer(PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * (4 + 4) * 6 * boxes.length
+				/ 2);
 		while (color.hasRemaining()) {
 			color.putFloat(0.0f);
 		}
