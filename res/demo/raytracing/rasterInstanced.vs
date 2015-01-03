@@ -4,7 +4,7 @@
  */
 #version 130
 
-uniform mat4 modelViewMatrix;
+uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
 in vec3 vertexPosition;
@@ -18,5 +18,5 @@ out vec4 worldNormal;
 void main(void) {
   worldPosition = vec4(boxCenter + vertexPosition * boxHalfSize, 1.0);
   worldNormal = vec4(vertexNormal, 0.0);
-  gl_Position = projectionMatrix * modelViewMatrix * worldPosition;
+  gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

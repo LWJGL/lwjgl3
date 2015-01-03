@@ -80,9 +80,8 @@ public class HybridDemoSsboInstancing {
 	private int blendFactorUniform;
 	private int bounceCountUniform;
 
-	private int modelViewMatrixUniform;
+	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
-	private int normalMatrixUniform;
 
 	private int workGroupSizeX;
 	private int workGroupSizeY;
@@ -104,7 +103,6 @@ public class HybridDemoSsboInstancing {
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
-	private Matrix4f normalMatrix = new Matrix4f();
 
 	private ByteBuffer renderBuffers;
 
@@ -555,9 +553,8 @@ public class HybridDemoSsboInstancing {
 	 */
 	private void initRasterProgram() {
 		glUseProgram(rasterProgram);
-		modelViewMatrixUniform = glGetUniformLocation(rasterProgram, "modelViewMatrix");
+		viewMatrixUniform = glGetUniformLocation(rasterProgram, "viewMatrix");
 		projectionMatrixUniform = glGetUniformLocation(rasterProgram, "projectionMatrix");
-		normalMatrixUniform = glGetUniformLocation(rasterProgram, "normalMatrix");
 		glUseProgram(0);
 	}
 
@@ -680,12 +677,9 @@ public class HybridDemoSsboInstancing {
 
 		/* Update matrices in shader */
 		Matrix4f viewMatrix = camera.getViewMatrix();
-		matrixUniform(modelViewMatrixUniform, viewMatrix, false);
+		matrixUniform(viewMatrixUniform, viewMatrix, false);
 		Matrix4f projMatrix = camera.getProjectionMatrix();
 		matrixUniform(projectionMatrixUniform, projMatrix, false);
-		normalMatrix.set(camera.getViewMatrix());
-		normalMatrix.invert();
-		matrixUniform(normalMatrixUniform, normalMatrix, true);
 
 		/* Rasterize the boxes into the FBO */
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
