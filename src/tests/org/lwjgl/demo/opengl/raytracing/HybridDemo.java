@@ -267,13 +267,13 @@ public class HybridDemo {
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		ByteBuffer bb = BufferUtils.createByteBuffer(4 * 2 * 6);
-		bb.putFloat(-1.0f).putFloat(-1.0f);
-		bb.putFloat(1.0f).putFloat(-1.0f);
-		bb.putFloat(1.0f).putFloat(1.0f);
-		bb.putFloat(1.0f).putFloat(1.0f);
-		bb.putFloat(-1.0f).putFloat(1.0f);
-		bb.putFloat(-1.0f).putFloat(-1.0f);
-		bb.flip();
+		FloatBuffer fv = bb.asFloatBuffer();
+		fv.put(-1.0f).put(-1.0f);
+		fv.put(1.0f).put(-1.0f);
+		fv.put(1.0f).put(1.0f);
+		fv.put(1.0f).put(1.0f);
+		fv.put(-1.0f).put(1.0f);
+		fv.put(-1.0f).put(-1.0f);
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
@@ -662,9 +662,8 @@ public class HybridDemo {
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame.
-		 *   0.0 - use only the new frame
-		 * > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame. 0.0 - use
+		 * only the new frame > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);

@@ -264,6 +264,7 @@ public class HybridDemoSsbo {
 		this.ssbo = glGenBuffers();
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
 		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4) * boxes.length);
+		FloatBuffer fv = ssboData.asFloatBuffer();
 		for (int i = 0; i < boxes.length; i += 2) {
 			Vector3f min = boxes[i];
 			Vector3f max = boxes[i + 1];
@@ -275,10 +276,9 @@ public class HybridDemoSsbo {
 			 * See:
 			 * "https://www.safaribooksonline.com/library/view/opengl-programming-guide/9780132748445/app09lev1sec3.html"
 			 */
-			ssboData.putFloat(min.x).putFloat(min.y).putFloat(min.z).putFloat(0.0f);
-			ssboData.putFloat(max.x).putFloat(max.y).putFloat(max.z).putFloat(0.0f);
+			fv.put(min.x).put(min.y).put(min.z).put(0.0f);
+			fv.put(max.x).put(max.y).put(max.z).put(0.0f);
 		}
-		ssboData.flip();
 		glBufferData(GL_SHADER_STORAGE_BUFFER, ssboData, GL_STATIC_DRAW);
 		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 	}
@@ -292,13 +292,13 @@ public class HybridDemoSsbo {
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		ByteBuffer bb = BufferUtils.createByteBuffer(4 * 2 * 6);
-		bb.putFloat(-1.0f).putFloat(-1.0f);
-		bb.putFloat(1.0f).putFloat(-1.0f);
-		bb.putFloat(1.0f).putFloat(1.0f);
-		bb.putFloat(1.0f).putFloat(1.0f);
-		bb.putFloat(-1.0f).putFloat(1.0f);
-		bb.putFloat(-1.0f).putFloat(-1.0f);
-		bb.flip();
+		FloatBuffer fv = bb.asFloatBuffer();
+		fv.put(-1.0f).put(-1.0f);
+		fv.put(1.0f).put(-1.0f);
+		fv.put(1.0f).put(1.0f);
+		fv.put(1.0f).put(1.0f);
+		fv.put(-1.0f).put(1.0f);
+		fv.put(-1.0f).put(-1.0f);
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
@@ -687,9 +687,8 @@ public class HybridDemoSsbo {
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame.
-		 *   0.0 - use only the new frame
-		 * > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame. 0.0 - use
+		 * only the new frame > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
