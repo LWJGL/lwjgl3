@@ -1,0 +1,10 @@
+{
+	# Expose symbols required by the JVM
+	global:
+		Java_*;
+		JNI_OnLoad;
+		JNI_OnUnload;
+
+	# Hide everything else
+	local: *;
+};

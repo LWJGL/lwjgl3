@@ -96,9 +96,10 @@
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
+		<dirname property="ant.file.dir" file="${ant.file}"/>
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${libname} ${libs}"/>
+			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${libname} ${libs} -Xlinker --version-script -Xlinker ${ant.file.dir}/version.script"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
