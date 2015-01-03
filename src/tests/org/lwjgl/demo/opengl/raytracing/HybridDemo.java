@@ -233,13 +233,13 @@ public class HybridDemo {
 		createRaytracingTexture();
 		createRasterizerTextures();
 		createRasterFrameBufferObject();
-		vao = createFullScreenVao();
-		vaoScene = createSceneVao();
-		rasterProgram = createRasterProgram();
+		createFullScreenVao();
+		createSceneVao();
+		createRasterProgram();
 		initRasterProgram();
-		computeProgram = createComputeProgram();
+		createComputeProgram();
 		initComputeProgram();
-		quadProgram = createQuadProgram();
+		createQuadProgram();
 		initQuadProgram();
 
 		glEnable(GL_DEPTH_TEST);
@@ -261,8 +261,8 @@ public class HybridDemo {
 	/**
 	 * Creates a VAO with a full-screen quad VBO.
 	 */
-	private static int createFullScreenVao() {
-		int vao = glGenVertexArrays();
+	private void createFullScreenVao() {
+		this.vao = glGenVertexArrays();
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -278,13 +278,12 @@ public class HybridDemo {
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
 		glBindVertexArray(0);
-		return vao;
 	}
 
 	/**
 	 * Creates a VAO for the scene.
 	 */
-	private static int createSceneVao() {
+	private void createSceneVao() {
 		int vao = glGenVertexArrays();
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
@@ -300,7 +299,7 @@ public class HybridDemo {
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, false, 4 * (3 + 3), 4 * 3);
 		glBindVertexArray(0);
-		return vao;
+		this.vaoScene = vao;
 	}
 
 	/**
@@ -420,67 +419,61 @@ public class HybridDemo {
 	/**
 	 * Create the full-scren quad shader.
 	 *
-	 * @return that program id
-	 *
 	 * @throws IOException
 	 */
-	private static int createQuadProgram() throws IOException {
-		int quadProgram = glCreateProgram();
+	private void createQuadProgram() throws IOException {
+		int program = glCreateProgram();
 		int vshader = createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER);
 		int fshader = createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER);
-		glAttachShader(quadProgram, vshader);
-		glAttachShader(quadProgram, fshader);
-		glBindAttribLocation(quadProgram, 0, "vertex");
-		glBindFragDataLocation(quadProgram, 0, "color");
-		glLinkProgram(quadProgram);
-		int linked = glGetProgrami(quadProgram, GL_LINK_STATUS);
-		String programLog = glGetProgramInfoLog(quadProgram);
+		glAttachShader(program, vshader);
+		glAttachShader(program, fshader);
+		glBindAttribLocation(program, 0, "vertex");
+		glBindFragDataLocation(program, 0, "color");
+		glLinkProgram(program);
+		int linked = glGetProgrami(program, GL_LINK_STATUS);
+		String programLog = glGetProgramInfoLog(program);
 		if (!programLog.trim().isEmpty()) {
 			System.err.println(programLog);
 		}
 		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
-		return quadProgram;
+		this.quadProgram = program;
 	}
 
 	/**
 	 * Create the raster shader.
 	 *
-	 * @return that program id
-	 *
 	 * @throws IOException
 	 */
-	private static int createRasterProgram() throws IOException {
-		int quadProgram = glCreateProgram();
+	private void createRasterProgram() throws IOException {
+		int program = glCreateProgram();
 		int vshader = createShader("demo/raytracing/raster.vs", GL_VERTEX_SHADER);
 		int fshader = createShader("demo/raytracing/raster.fs", GL_FRAGMENT_SHADER);
-		glAttachShader(quadProgram, vshader);
-		glAttachShader(quadProgram, fshader);
-		glBindAttribLocation(quadProgram, 0, "vertexPosition");
-		glBindAttribLocation(quadProgram, 1, "vertexNormal");
-		glBindFragDataLocation(quadProgram, 0, "worldPosition_out");
-		glBindFragDataLocation(quadProgram, 1, "worldNormal_out");
-		glLinkProgram(quadProgram);
-		int linked = glGetProgrami(quadProgram, GL_LINK_STATUS);
-		String programLog = glGetProgramInfoLog(quadProgram);
+		glAttachShader(program, vshader);
+		glAttachShader(program, fshader);
+		glBindAttribLocation(program, 0, "vertexPosition");
+		glBindAttribLocation(program, 1, "vertexNormal");
+		glBindFragDataLocation(program, 0, "worldPosition_out");
+		glBindFragDataLocation(program, 1, "worldNormal_out");
+		glLinkProgram(program);
+		int linked = glGetProgrami(program, GL_LINK_STATUS);
+		String programLog = glGetProgramInfoLog(program);
 		if (!programLog.trim().isEmpty()) {
 			System.err.println(programLog);
 		}
 		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
-		return quadProgram;
+		this.rasterProgram = program;
 	}
 
 	/**
 	 * Create the tracing compute shader program.
 	 *
-	 * @return that program id
-	 *
 	 * @throws IOException
 	 */
-	private static int createComputeProgram() throws IOException {
+	private void createComputeProgram() throws IOException {
 		int program = glCreateProgram();
 		int cshader = createShader("demo/raytracing/hybrid.glsl", GL_COMPUTE_SHADER);
 		int random = createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
@@ -495,7 +488,7 @@ public class HybridDemo {
 		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
-		return program;
+		this.computeProgram = program;
 	}
 
 	/**
@@ -547,7 +540,7 @@ public class HybridDemo {
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -559,14 +552,14 @@ public class HybridDemo {
 		glBindTexture(GL_TEXTURE_2D, positionTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		this.normalTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, normalTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA16F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

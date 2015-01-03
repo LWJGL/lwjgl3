@@ -208,12 +208,12 @@ public class Demo33 {
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
-		tex = createFramebufferTexture();
-		fbo = createFrameBufferObject(tex);
-		vao = quadFullScreenVao();
-		rayTracingProgram = createRayTracingProgram();
+		createFramebufferTexture();
+		createFrameBufferObject();
+		quadFullScreenVao();
+		createRayTracingProgram();
 		initRayTracingProgram();
-		quadProgram = createQuadProgram();
+		createQuadProgram();
 		initQuadProgram();
 
 		/* Setup camera */
@@ -225,8 +225,8 @@ public class Demo33 {
 	/**
 	 * Create a VAO with a full-screen quad VBO.
 	 */
-	private static int quadFullScreenVao() {
-		int vao = glGenVertexArrays();
+	private void quadFullScreenVao() {
+		this.vao = glGenVertexArrays();
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -242,7 +242,6 @@ public class Demo33 {
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
 		glBindVertexArray(0);
-		return vao;
 	}
 
 	/**
@@ -282,28 +281,26 @@ public class Demo33 {
 	/**
 	 * Create the full-scren quad shader.
 	 *
-	 * @return that program id
-	 *
 	 * @throws IOException
 	 */
-	private static int createQuadProgram() throws IOException {
-		int quadProgram = glCreateProgram();
+	private void createQuadProgram() throws IOException {
+		int program = glCreateProgram();
 		int vshader = createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER);
 		int fshader = createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER);
-		glAttachShader(quadProgram, vshader);
-		glAttachShader(quadProgram, fshader);
-		glBindAttribLocation(quadProgram, 0, "vertex");
-		glBindFragDataLocation(quadProgram, 0, "color");
-		glLinkProgram(quadProgram);
-		int linked = glGetProgrami(quadProgram, GL_LINK_STATUS);
-		String programLog = glGetProgramInfoLog(quadProgram);
+		glAttachShader(program, vshader);
+		glAttachShader(program, fshader);
+		glBindAttribLocation(program, 0, "vertex");
+		glBindFragDataLocation(program, 0, "color");
+		glLinkProgram(program);
+		int linked = glGetProgrami(program, GL_LINK_STATUS);
+		String programLog = glGetProgramInfoLog(program);
 		if ( !programLog.trim().isEmpty() ) {
 			System.err.println(programLog);
 		}
 		if ( linked == 0 ) {
 			throw new AssertionError("Could not link program");
 		}
-		return quadProgram;
+		this.quadProgram = program;
 	}
 
 	/**
@@ -313,7 +310,7 @@ public class Demo33 {
 	 *
 	 * @throws IOException
 	 */
-	private static int createRayTracingProgram() throws IOException {
+	private void createRayTracingProgram() throws IOException {
 		int program = glCreateProgram();
 		int vshader = createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER);
 		int fshader = createShader("demo/raytracing/raytracing.fs", GL_FRAGMENT_SHADER);
@@ -332,7 +329,7 @@ public class Demo33 {
 		if ( linked == 0 ) {
 			throw new AssertionError("Could not link program");
 		}
-		return program;
+		this.rayTracingProgram = program;
 	}
 
 	/**
@@ -368,35 +365,32 @@ public class Demo33 {
 
 	/**
 	 * Create the texture that will serve as our framebuffer.
-	 *
-	 * @return the texture id
 	 */
-	private int createFramebufferTexture() {
-		int tex = glGenTextures();
+	private void createFramebufferTexture() {
+		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, tex);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer)null);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
-		return tex;
 	}
 
 	private void resizeFramebufferTexture() {
-		glBindTexture(GL_TEXTURE_2D, tex);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer)null);
-		glBindTexture(GL_TEXTURE_2D, 0);
+		glDeleteTextures(tex);
+		glDeleteFramebuffers(fbo);
+
+		createFramebufferTexture();
+		createFrameBufferObject();
 	}
 
 	/**
 	 * Create the frame buffer object that our ray tracing shader uses to render
 	 * into the framebuffer texture.
-	 *
-	 * @return the FBO id
 	 */
-	private static int createFrameBufferObject(int tex) {
-		int fbo = glGenFramebuffers();
+	private int createFrameBufferObject() {
+		this.fbo = glGenFramebuffers();
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, tex, 0);
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this.tex, 0);
 		int fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if ( fboStatus != GL_FRAMEBUFFER_COMPLETE ) {
 			throw new AssertionError("Could not create FBO: " + fboStatus);
