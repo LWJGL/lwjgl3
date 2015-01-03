@@ -2,19 +2,22 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 130
+#version 140
 
 uniform mat4 viewMatrix;
 uniform mat4 projectionMatrix;
 
 in vec3 vertexPosition;
 in vec3 vertexNormal;
+in vec3 boxCenter;
+in vec3 boxHalfSize;
 
-out vec4 worldPosition;
-out vec4 worldNormal;
+out vec3 positionOnUnitCube;
+out float level;
 
 void main(void) {
-  worldPosition = vec4(vertexPosition, 1.0);
-  worldNormal = vec4(vertexNormal, 0.0);
+  positionOnUnitCube = vertexPosition;
+  level = float(gl_InstanceID);
+  vec4 worldPosition = vec4(boxCenter + vertexPosition * boxHalfSize, 1.0);
   gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }
