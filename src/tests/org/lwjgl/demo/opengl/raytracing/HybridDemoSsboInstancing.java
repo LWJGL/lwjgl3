@@ -36,9 +36,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * This demo is used to showcase hybrid rasterization and ray tracing to make
  * the first bounce faster.
  * <p>
- * It works like the {@link HybridDemo}, but uses a Shader Storage Buffer Object
- * (SSBO) to let the host program dynamically specify the boxes via a memory
- * buffer that is read by the shader.
+ * It works like the {@link HybridDemoSsbo}, but uses hardware instancing to
+ * rasterize the boxes. It won't be any faster, but will use less GPU memory as
+ * we only need to create a small VBO containing a unit axis-aligned box and a
+ * buffer with per-instanced box data (position and size).
  * 
  * @author Kai Burjack
  */
@@ -129,8 +130,7 @@ public class HybridDemoSsboInstancing {
 			@Override
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
-					System.err
-							.println("This demo requires OpenGL 4.3 or higher. The HybridDemo33 version works on OpenGL 3.3 or higher.");
+					System.err.println("This demo requires OpenGL 4.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
