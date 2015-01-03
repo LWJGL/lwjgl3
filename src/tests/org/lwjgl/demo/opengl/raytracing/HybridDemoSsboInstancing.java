@@ -25,6 +25,8 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL31.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -40,7 +42,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * 
  * @author Kai Burjack
  */
-public class HybridDemoSsbo {
+public class HybridDemoSsboInstancing {
 
 	/**
 	 * The boxes for both rasterization and ray tracing.
@@ -166,18 +168,18 @@ public class HybridDemoSsbo {
 				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
-					int newBounceCount = Math.min(4, HybridDemoSsbo.this.bounceCount + 1);
-					if (newBounceCount != HybridDemoSsbo.this.bounceCount) {
-						HybridDemoSsbo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + HybridDemoSsbo.this.bounceCount);
-						HybridDemoSsbo.this.frameNumber = 0;
+					int newBounceCount = Math.min(4, HybridDemoSsboInstancing.this.bounceCount + 1);
+					if (newBounceCount != HybridDemoSsboInstancing.this.bounceCount) {
+						HybridDemoSsboInstancing.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + HybridDemoSsboInstancing.this.bounceCount);
+						HybridDemoSsboInstancing.this.frameNumber = 0;
 					}
 				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
-					int newBounceCount = Math.max(1, HybridDemoSsbo.this.bounceCount - 1);
-					if (newBounceCount != HybridDemoSsbo.this.bounceCount) {
-						HybridDemoSsbo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + HybridDemoSsbo.this.bounceCount);
-						HybridDemoSsbo.this.frameNumber = 0;
+					int newBounceCount = Math.max(1, HybridDemoSsboInstancing.this.bounceCount - 1);
+					if (newBounceCount != HybridDemoSsboInstancing.this.bounceCount) {
+						HybridDemoSsboInstancing.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + HybridDemoSsboInstancing.this.bounceCount);
+						HybridDemoSsboInstancing.this.frameNumber = 0;
 					}
 				}
 			}
@@ -186,12 +188,13 @@ public class HybridDemoSsbo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0
-						&& (HybridDemoSsbo.this.width != width || HybridDemoSsbo.this.height != height)) {
-					HybridDemoSsbo.this.width = width;
-					HybridDemoSsbo.this.height = height;
-					HybridDemoSsbo.this.resetFramebuffer = true;
-					HybridDemoSsbo.this.frameNumber = 0;
+				if (width > 0
+						&& height > 0
+						&& (HybridDemoSsboInstancing.this.width != width || HybridDemoSsboInstancing.this.height != height)) {
+					HybridDemoSsboInstancing.this.width = width;
+					HybridDemoSsboInstancing.this.height = height;
+					HybridDemoSsboInstancing.this.resetFramebuffer = true;
+					HybridDemoSsboInstancing.this.frameNumber = 0;
 				}
 			}
 		});
@@ -199,9 +202,9 @@ public class HybridDemoSsbo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				HybridDemoSsbo.this.mouseX = (float) x;
+				HybridDemoSsboInstancing.this.mouseX = (float) x;
 				if (mouseDown) {
-					HybridDemoSsbo.this.frameNumber = 0;
+					HybridDemoSsboInstancing.this.frameNumber = 0;
 				}
 			}
 		});
@@ -210,11 +213,11 @@ public class HybridDemoSsbo {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
 				if (action == GLFW_PRESS) {
-					HybridDemoSsbo.this.mouseDownX = HybridDemoSsbo.this.mouseX;
-					HybridDemoSsbo.this.mouseDown = true;
+					HybridDemoSsboInstancing.this.mouseDownX = HybridDemoSsboInstancing.this.mouseX;
+					HybridDemoSsboInstancing.this.mouseDown = true;
 				} else if (action == GLFW_RELEASE) {
-					HybridDemoSsbo.this.mouseDown = false;
-					HybridDemoSsbo.this.rotationAboutY = HybridDemoSsbo.this.currRotationAboutY;
+					HybridDemoSsboInstancing.this.mouseDown = false;
+					HybridDemoSsboInstancing.this.rotationAboutY = HybridDemoSsboInstancing.this.currRotationAboutY;
 				}
 			}
 		});
@@ -302,6 +305,7 @@ public class HybridDemoSsbo {
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 
@@ -310,78 +314,95 @@ public class HybridDemoSsbo {
 	 */
 	private void createSceneVao() {
 		int vao = glGenVertexArrays();
+
+		/* Create vertex data */
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		ByteBuffer bb = BufferUtils.createByteBuffer(boxes.length * 4 * (3 + 3) * 6 * 6);
+		ByteBuffer bb = BufferUtils.createByteBuffer(4 * (3 + 3) * 6 * 6);
 		FloatBuffer fv = bb.asFloatBuffer();
-		for (int i = 0; i < boxes.length; i += 2) {
-			triangulateBox(boxes[i], boxes[i + 1], fv);
-		}
+		triangulateUnitBox(fv);
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * (3 + 3), 0L);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, false, 4 * (3 + 3), 4 * 3);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		/* Create per instance data (position and size of box) */
+		int ivbo = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, ivbo);
+		bb = BufferUtils.createByteBuffer(4 * (3 + 3) * boxes.length);
+		fv = bb.asFloatBuffer();
+		for (int i = 0; i < boxes.length; i += 2) {
+			Vector3f min = boxes[i];
+			Vector3f max = boxes[i + 1];
+			fv.put((max.x + min.x) / 2.0f).put((max.y + min.y) / 2.0f).put((max.z + min.z) / 2.0f);
+			fv.put((max.x - min.x) / 2.0f).put((max.y - min.y) / 2.0f).put((max.z - min.z) / 2.0f);
+		}
+		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
+		glEnableVertexAttribArray(2);
+		glVertexAttribPointer(2, 3, GL_FLOAT, false, 4 * (3 + 3), 0L);
+		glVertexAttribDivisor(2, 1);
+		glEnableVertexAttribArray(3);
+		glVertexAttribPointer(3, 3, GL_FLOAT, false, 4 * (3 + 3), 4 * 3);
+		glVertexAttribDivisor(3, 1);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		this.vaoScene = vao;
 	}
 
 	/**
-	 * Write the vertices (position and normal) of an axis-aligned box with the
-	 * given corner coordinates into the provided {@link FloatBuffer}.
+	 * Write the vertices (position and normal) of an axis-aligned unit box into
+	 * the provided {@link FloatBuffer}.
 	 * 
-	 * @param min
-	 *            the min corner
-	 * @param max
-	 *            the max corner
 	 * @param fv
 	 *            the {@link FloatBuffer} receiving the vertex position and
 	 *            normal
 	 */
-	private static void triangulateBox(Vector3f min, Vector3f max, FloatBuffer fv) {
+	private static void triangulateUnitBox(FloatBuffer fv) {
 		/* Front face */
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
+		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
 		/* Back face */
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
+		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
 		/* Left face */
-		fv.put(min.x).put(min.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
 		/* Right face */
-		fv.put(max.x).put(min.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
 		/* Top face */
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
+		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
 		/* Bottom face */
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
+		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
 	}
 
 	/**
@@ -473,12 +494,14 @@ public class HybridDemoSsbo {
 	 */
 	private void createRasterProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = createShader("demo/raytracing/raster.vs", GL_VERTEX_SHADER);
+		int vshader = createShader("demo/raytracing/rasterInstanced.vs", GL_VERTEX_SHADER);
 		int fshader = createShader("demo/raytracing/raster.fs", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertexPosition");
 		glBindAttribLocation(program, 1, "vertexNormal");
+		glBindAttribLocation(program, 2, "boxCenter");
+		glBindAttribLocation(program, 3, "boxHalfSize");
 		glBindFragDataLocation(program, 0, "worldPosition_out");
 		glBindFragDataLocation(program, 1, "worldNormal_out");
 		glLinkProgram(program);
@@ -668,7 +691,7 @@ public class HybridDemoSsbo {
 		glDrawBuffers(2, renderBuffers);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
-		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
+		glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * 6, boxes.length / 2);
 		glBindVertexArray(0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
@@ -687,9 +710,8 @@ public class HybridDemoSsbo {
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame.
-		 *   0.0 - use only the new frame
-		 * > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame. 0.0 - use
+		 * only the new frame > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
@@ -792,7 +814,7 @@ public class HybridDemoSsbo {
 	}
 
 	public static void main(String[] args) {
-		new HybridDemoSsbo().run();
+		new HybridDemoSsboInstancing().run();
 	}
 
 }
