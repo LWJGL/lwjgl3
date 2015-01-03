@@ -5,8 +5,8 @@
 #version 430 core
 
 layout(binding = 0, rgba32f) uniform image2D framebuffer;
-layout(binding = 1, rgba32f) uniform readonly image2D viewPositionImage;
-layout(binding = 2, rgba16f) uniform readonly image2D viewNormalImage;
+layout(binding = 1, rgba32f) uniform readonly image2D worldPositionImage;
+layout(binding = 2, rgba16f) uniform readonly image2D worldNormalImage;
 
 uniform vec3 eye;
 uniform vec3 ray00;
@@ -154,8 +154,8 @@ void main(void) {
     return;
   }
 
-  vec3 viewPosition = imageLoad(viewPositionImage, pix).xyz;
-  vec3 viewNormal = imageLoad(viewNormalImage, pix).xyz;
+  vec3 worldPosition = imageLoad(worldPositionImage, pix).xyz;
+  vec3 worldNormal = imageLoad(worldNormalImage, pix).xyz;
 
   vec2 pos = (vec2(pix) + vec2(0.5, 0.5)) / vec2(size.x, size.y);
   cameraUp = normalize(ray01 - ray00);
@@ -168,7 +168,7 @@ void main(void) {
 
   vec3 dir = normalize(mix(mix(ray00, ray01, pos.y), mix(ray10, ray11, pos.y), pos.x));
   vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
-  color += trace(eye, dir, viewPosition - dir/1E3, viewNormal);
+  color += trace(eye, dir, worldPosition - dir/1E3, worldNormal);
 
   vec4 oldColor = vec4(0.0);
   if (blendFactor > 0.0) {
