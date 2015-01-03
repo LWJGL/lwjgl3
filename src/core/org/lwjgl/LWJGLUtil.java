@@ -376,12 +376,7 @@ public final class LWJGLUtil {
 		}
 
 		// Then the OS paths
-		try {
-			return apiCreateLibrary(libName);
-		} catch (Throwable t) {
-		}
-
-		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
+		return apiCreateLibrary(libName);
 	}
 
 	// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
@@ -413,14 +408,13 @@ public final class LWJGLUtil {
 
 	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String platformPath, String libName, T onFailure) {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
-			try {
-				return loader.load(root + File.separator + libName);
-			} catch (Throwable t0) {
-				try {
-					return loader.load(root + File.separator + platformPath + File.separator + libName);
-				} catch (Throwable t1) {
-				}
-			}
+			File f = new File(root + File.separator + libName);
+			if ( f.exists() )
+				return loader.load(f.getPath());
+
+			f = new File(root + File.separator + platformPath + File.separator + libName);
+			if ( f.exists() )
+				return loader.load(f.getPath());
 		}
 
 		return onFailure;
