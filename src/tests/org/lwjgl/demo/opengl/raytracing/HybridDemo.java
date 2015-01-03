@@ -641,7 +641,7 @@ public class HybridDemo {
 		/* Rasterize the boxes into the FBO */
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glDrawBuffers(2, renderBuffers);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
 		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
 		glBindVertexArray(0);
