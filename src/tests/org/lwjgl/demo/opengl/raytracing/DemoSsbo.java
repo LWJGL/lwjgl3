@@ -342,7 +342,6 @@ public class DemoSsbo {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		/* Query the binding point of the SSBO */
 		IntBuffer props = BufferUtils.createIntBuffer(1);
-		IntBuffer length = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		/*
@@ -352,9 +351,9 @@ public class DemoSsbo {
 		int boxesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
 		int outputImageResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "OutputImage");
 		/* Now query the "BUFFER_BINDING" of those resources */
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, length, params);
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, outputImageResourceIndex, props, length, params);
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, outputImageResourceIndex, props, null, params);
 		outputImageBinding = params.get(0);
 		glUseProgram(0);
 	}

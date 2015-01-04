@@ -583,11 +583,10 @@ public class HybridDemoSsboInstancing {
 		 */
 		int boxesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
 		IntBuffer props = BufferUtils.createIntBuffer(1);
-		IntBuffer length = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		/* Now query the "BUFFER_BINDING" of that resource */
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, length, params);
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
 		glUseProgram(0);
 	}
