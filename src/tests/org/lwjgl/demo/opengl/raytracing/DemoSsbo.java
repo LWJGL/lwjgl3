@@ -36,6 +36,12 @@ import static org.lwjgl.system.MemoryUtil.*;
  * The same as {@link Demo} but using a Shader Storage Buffer Object (SSBO) to
  * specify the scene dynamically from the host program instead of hardcoded in
  * the shader.
+ * <p>
+ * Also, the compute shader does not directly write into an image but instead
+ * into a SSBO buffer that is afterwards uploaded via Pixel Buffer Object into a
+ * texture, which is then eventually displayed on the screen. This was just some
+ * left-over from a long debugging session, but I think it can stay this way to
+ * showcase writing into an SSBO.
  *
  * @author Kai Burjack
  */
