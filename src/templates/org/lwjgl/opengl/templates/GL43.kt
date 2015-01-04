@@ -128,7 +128,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		mods(
-		  nullable,
+			nullable,
 			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
 			const
 		) _ GLvoid_p.IN("data", "a memory location storing the data to be replicated into the buffer's data store")
