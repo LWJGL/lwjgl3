@@ -75,6 +75,8 @@ public class DemoSsbo {
 	private int ray11Uniform;
 	private int sizeUniform;
 	private int timeUniform;
+	private int boxesSsboBinding;
+	private int outputImageBinding;
 
 	private int workGroupSizeX;
 	private int workGroupSizeY;
@@ -338,6 +340,22 @@ public class DemoSsbo {
 		ray11Uniform = glGetUniformLocation(computeProgram, "ray11");
 		sizeUniform = glGetUniformLocation(computeProgram, "size");
 		timeUniform = glGetUniformLocation(computeProgram, "time");
+		/* Query the binding point of the SSBO */
+		IntBuffer props = BufferUtils.createIntBuffer(1);
+		IntBuffer length = BufferUtils.createIntBuffer(1);
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		props.put(0, GL_BUFFER_BINDING);
+		/*
+		 * First, obtain the "resource index" used for further queries on the
+		 * resources.
+		 */
+		int boxesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
+		int outputImageResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "OutputImage");
+		/* Now query the "BUFFER_BINDING" of those resources */
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, length, params);
+		boxesSsboBinding = params.get(0);
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, outputImageResourceIndex, props, length, params);
+		outputImageBinding = params.get(0);
 		glUseProgram(0);
 	}
 
@@ -444,9 +462,9 @@ public class DemoSsbo {
 		glUniform2i(sizeUniform, width, height);
 
 		/* Bind the SSBO containing our boxes */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
 		/* Bind the SSBO of our output image */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, imageBuffer);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, outputImageBinding, imageBuffer);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -461,8 +479,8 @@ public class DemoSsbo {
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 1, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, outputImageBinding, 0);
 
 		/* Upload texels */
 		glBindTexture(GL_TEXTURE_2D, tex);

@@ -76,7 +76,7 @@ public class HybridDemoSsbo {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int bounceCountUniform;
-	private int ssboBindingPoint;
+	private int boxesSsboBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -552,13 +552,20 @@ public class HybridDemoSsbo {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
+
 		/* Query the binding point of the SSBO */
+		/*
+		 * First, obtain the "resource index" used for further queries on that
+		 * resource.
+		 */
+		int boxesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
 		IntBuffer props = BufferUtils.createIntBuffer(1);
 		IntBuffer length = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, 0, props, length, params);
-		ssboBindingPoint = params.get(0);
+		/* Now query the "BUFFER_BINDING" of that resource */
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, length, params);
+		boxesSsboBinding = params.get(0);
 		glUseProgram(0);
 	}
 
@@ -714,7 +721,7 @@ public class HybridDemoSsbo {
 		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
 		/* Bind the SSBO containing our boxes */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, ssboBindingPoint, ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -731,7 +738,7 @@ public class HybridDemoSsbo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, ssboBindingPoint, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);
 		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
