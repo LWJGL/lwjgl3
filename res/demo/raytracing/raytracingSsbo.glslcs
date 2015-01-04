@@ -19,7 +19,7 @@ struct box {
 
 layout (std430, binding = 0) buffer Boxes
 {
-  box boxes[7];
+  box boxes[];
 };
 
 layout (std430, binding = 1) buffer OutputImage

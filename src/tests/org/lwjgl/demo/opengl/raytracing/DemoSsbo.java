@@ -455,9 +455,8 @@ public class DemoSsbo {
 		/* Invoke the compute shader. */
 		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
 		/*
-		 * Synchronize all writes to the framebuffer image before we let OpenGL
-		 * source texels from it afterwards when rendering the final image with
-		 * the full-screen quad.
+		 * Synchronize all writes to the SSBO image buffer before we copy the
+		 * buffer into a texture via a PBO.
 		 */
 		glMemoryBarrier(GL_SHADER_STORAGE_BARRIER_BIT);
 
