@@ -17,7 +17,7 @@ struct box {
   vec3 max;
 };
 
-layout (std430, binding = 0) buffer Boxes
+layout (std430, binding = 1) buffer Boxes
 {
   box[] boxes;
 };

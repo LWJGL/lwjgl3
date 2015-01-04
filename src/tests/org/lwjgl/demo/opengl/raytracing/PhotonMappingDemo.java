@@ -86,6 +86,7 @@ public class PhotonMappingDemo {
 	private int bounceCountUniform;
 	private int lightCenterPositionUniform;
 	private int lightRadiusUniform;
+	private int boxesSsboBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -102,7 +103,6 @@ public class PhotonMappingDemo {
 	private float rotationAboutY = 0.8f;
 
 	private long firstTime;
-	private int frameNumber;
 	private int bounceCount = 2;
 	private float lightRadius = 0.4f;
 
@@ -172,20 +172,6 @@ public class PhotonMappingDemo {
 
 				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
-					int newBounceCount = Math.min(4, PhotonMappingDemo.this.bounceCount + 1);
-					if (newBounceCount != PhotonMappingDemo.this.bounceCount) {
-						PhotonMappingDemo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + PhotonMappingDemo.this.bounceCount);
-						PhotonMappingDemo.this.frameNumber = 0;
-					}
-				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
-					int newBounceCount = Math.max(1, PhotonMappingDemo.this.bounceCount - 1);
-					if (newBounceCount != PhotonMappingDemo.this.bounceCount) {
-						PhotonMappingDemo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + PhotonMappingDemo.this.bounceCount);
-						PhotonMappingDemo.this.frameNumber = 0;
-					}
 				}
 			}
 		});
@@ -198,7 +184,6 @@ public class PhotonMappingDemo {
 					PhotonMappingDemo.this.width = width;
 					PhotonMappingDemo.this.height = height;
 					PhotonMappingDemo.this.resetFramebuffer = true;
-					PhotonMappingDemo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -208,7 +193,6 @@ public class PhotonMappingDemo {
 			public void invoke(long window, double x, double y) {
 				PhotonMappingDemo.this.mouseX = (float) x;
 				if (mouseDown) {
-					PhotonMappingDemo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -441,6 +425,18 @@ public class PhotonMappingDemo {
 		glUniform3f(lightCenterPositionUniform, lightCenterPosition.x, lightCenterPosition.y, lightCenterPosition.z);
 		lightRadiusUniform = glGetUniformLocation(photonTraceProgram, "lightRadius");
 		glUniform1f(lightRadiusUniform, lightRadius);
+		/* Query the binding point of the SSBO */
+		/*
+		 * First, obtain the "resource index" used for further queries on that
+		 * resource.
+		 */
+		int boxesResourceIndex = glGetProgramResourceIndex(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
+		IntBuffer props = BufferUtils.createIntBuffer(1);
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		props.put(0, GL_BUFFER_BINDING);
+		/* Now query the "BUFFER_BINDING" of that resource */
+		glGetProgramResource(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
+		boxesSsboBinding = params.get(0);
 		glUseProgram(0);
 	}
 
@@ -562,7 +558,7 @@ public class PhotonMappingDemo {
 		glBindImageTexture(0, photonMapTexture, 0, true, 0, GL_READ_WRITE, GL_RG16F);
 
 		/* Bind the SSBO containing our boxes */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
 
 		/* Compute appropriate invocation dimension. */
 		int invocationsPerDimension = (int) Math.sqrt(PHOTON_TRACE_PER_FRAME);
@@ -574,11 +570,9 @@ public class PhotonMappingDemo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);
 		glBindImageTexture(0, 0, 0, true, 0, GL_READ_WRITE, GL_RG16F);
 		glUseProgram(0);
-
-		frameNumber++;
 	}
 
 	/**

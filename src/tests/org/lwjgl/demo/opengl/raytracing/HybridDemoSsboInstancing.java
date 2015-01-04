@@ -70,7 +70,6 @@ public class HybridDemoSsboInstancing {
 	private int positionTexture;
 	private int normalTexture;
 	private int ssbo;
-	private int boxesSsboBinding;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -80,6 +79,7 @@ public class HybridDemoSsboInstancing {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int bounceCountUniform;
+	private int boxesSsboBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
