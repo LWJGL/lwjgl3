@@ -466,17 +466,11 @@ public class PhotonMappingDemo {
 		 */
 		int texBuffer = glGenBuffers();
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
-		/*
-		 * Even though GL_RG16F would only use 2 bytes for 2 components, it
-		 * actually takes 4 components when doing pixel unpack with a buffer.
-		 * Using 2 components would give 1282 error with texSubImage3D and pixel
-		 * unpack.
-		 */
-		int size = 2 * 4 * PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * 6 * boxes.length / 2;
+		int size = 2 * 2 * PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * 6 * boxes.length / 2;
 		glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
-		glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_FLOAT, (ByteBuffer) null);
+		glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
 		glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2,
-				GL_RG, GL_FLOAT, 0L);
+				GL_RG, GL_HALF_FLOAT, 0L);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		glDeleteBuffers(texBuffer);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
