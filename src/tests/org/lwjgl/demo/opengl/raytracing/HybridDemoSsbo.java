@@ -749,7 +749,7 @@ public class HybridDemoSsbo {
 		 * source texels from it afterwards when rendering the final image with
 		 * the full-screen quad.
 		 */
-		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT);
+		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);

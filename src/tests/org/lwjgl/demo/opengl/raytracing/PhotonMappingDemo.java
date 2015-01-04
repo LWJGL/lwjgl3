@@ -35,18 +35,19 @@ import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Photon mapping using cubemap texture arrays.
+ * Photon mapping using cubemap array textures.
  * <p>
  * This demo uses a cube map array texture to hold a "photon map" for each of
  * the boxes in the scene.
  * <p>
- * Within a computer shader light rays are being shot into the scene and
- * whenever they hit a box the texel coordinate is computed and the "photon" is
- * stored in the corresponding face and layer of the cube map array image.
+ * A compute shader is used to shoot light rays into the scene and whenever they
+ * hit a box the texel coordinate is computed and the "photon" is stored in the
+ * corresponding face and layer of the cube map array image.
  * <p>
  * Afterwards, the scene is rasterized and the cube map array is sampled via a
  * samplerCubeArray. The boxes are rendered via hardware instancing and the
- * layer of the cube map array is obtained via the gl_InstanceID.
+ * layer of the cube map array (i.e. the cube map for that particular box
+ * instance) is obtained via the gl_InstanceID.
  * 
  * @author Kai Burjack
  */
