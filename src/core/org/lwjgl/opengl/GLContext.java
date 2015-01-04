@@ -18,6 +18,7 @@ import static org.lwjgl.opengl.AMDDebugOutput.*;
 import static org.lwjgl.opengl.ARBDebugOutput.*;
 import static org.lwjgl.opengl.ARBImaging.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glGetInteger;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -160,6 +161,10 @@ public abstract class GLContext implements Pointer {
 			log("[GL] Using OpenGL 4.3 for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			glDebugMessageCallback(proc, NULL);
+			if ( (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
+				log("[GL] Warning: A non-debug context may not produce any debug output.");
+				glEnable(GL_DEBUG_OUTPUT);
+			}
 			return proc;
 		}
 
@@ -167,6 +172,10 @@ public abstract class GLContext implements Pointer {
 			log("[GL] Using KHR_debug for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			KHRDebug.glDebugMessageCallback(proc, NULL);
+			if ( (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
+				log("[GL] Warning: A non-debug context may not produce any debug output.");
+				glEnable(GL_DEBUG_OUTPUT);
+			}
 			return proc;
 		}
 
