@@ -164,8 +164,6 @@ public class PhotonMappingDemo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
-		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {

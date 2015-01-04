@@ -65,7 +65,8 @@ bool intersectBoxes(vec3 origin, vec3 dir, out hitinfo info) {
   bool found = false;
   int numBoxes = boxes.length();
   for (int i = 0; i < numBoxes; i++) {
-    vec2 lambda = intersectBox(origin, dir, boxes[i]);
+    box b = boxes[i];
+    vec2 lambda = intersectBox(origin, dir, b);
     if (lambda.x > 0.0 && lambda.x < lambda.y && lambda.x < smallest) {
       info.near = lambda.x;
       info.far = lambda.y;

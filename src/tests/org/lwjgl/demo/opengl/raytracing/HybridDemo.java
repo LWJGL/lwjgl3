@@ -537,7 +537,7 @@ public class HybridDemo {
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 

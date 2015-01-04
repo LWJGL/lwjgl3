@@ -69,7 +69,8 @@ bool intersectBoxes(vec3 origin, vec3 dir, out hitinfo info) {
   bool found = false;
   int numBoxes = boxes.length();
   for (int i = 0; i < numBoxes; i++) {
-    vec2 lambda = intersectBox(origin, dir, boxes[i]);
+    box b = boxes[i];
+    vec2 lambda = intersectBox(origin, dir, b);
     if (lambda.x > 0.0 && lambda.x < lambda.y && lambda.x < smallest) {
       info.near = lambda.x;
       info.far = lambda.y;
@@ -110,7 +111,7 @@ vec4 trace(vec3 origin, vec3 dir, vec3 hitPoint, vec3 normal) {
     vec3 shadowRayStart = hitPoint + normal * EPSILON;
     hitinfo shadowRayInfo;
     bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
-    if (shadowRayInfo.near >= 1.0) {
+    if (!lightObstructed || shadowRayInfo.near >= 1.0) {
       float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
       float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
       accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);

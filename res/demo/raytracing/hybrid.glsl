@@ -123,7 +123,7 @@ vec4 trace(vec3 origin, vec3 dir, vec3 hitPoint, vec3 normal) {
     vec3 shadowRayStart = hitPoint + normal * EPSILON;
     hitinfo shadowRayInfo;
     bool lightObstructed = intersectBoxes(shadowRayStart, shadowRayDir, shadowRayInfo);
-    if (shadowRayInfo.near >= 1.0) {
+    if (!lightObstructed || shadowRayInfo.near >= 1.0) {
       float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
       float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
       accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);

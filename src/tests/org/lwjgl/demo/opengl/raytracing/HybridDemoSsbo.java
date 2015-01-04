@@ -76,6 +76,7 @@ public class HybridDemoSsbo {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int bounceCountUniform;
+	private int ssboBindingPoint;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -260,7 +261,7 @@ public class HybridDemoSsbo {
 	 */
 	private void createSceneSSBO() {
 		this.ssbo = glGenBuffers();
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
+		glBindBuffer(GL_ARRAY_BUFFER, ssbo);
 		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4) * boxes.length / 2);
 		FloatBuffer fv = ssboData.asFloatBuffer();
 		for (int i = 0; i < boxes.length; i += 2) {
@@ -277,8 +278,8 @@ public class HybridDemoSsbo {
 			fv.put(min.x).put(min.y).put(min.z).put(0.0f);
 			fv.put(max.x).put(max.y).put(max.z).put(0.0f);
 		}
-		glBufferData(GL_SHADER_STORAGE_BUFFER, ssboData, GL_STATIC_DRAW);
-		glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+		glBufferData(GL_ARRAY_BUFFER, ssboData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 
 	/**
@@ -551,6 +552,13 @@ public class HybridDemoSsbo {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
+		/* Query the binding point of the SSBO */
+		IntBuffer props = BufferUtils.createIntBuffer(1);
+		IntBuffer length = BufferUtils.createIntBuffer(1);
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		props.put(0, GL_BUFFER_BINDING);
+		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, 0, props, length, params);
+		ssboBindingPoint = params.get(0);
 		glUseProgram(0);
 	}
 
@@ -706,7 +714,7 @@ public class HybridDemoSsbo {
 		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
 		/* Bind the SSBO containing our boxes */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, ssboBindingPoint, ssbo);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -720,10 +728,10 @@ public class HybridDemoSsbo {
 		 * source texels from it afterwards when rendering the final image with
 		 * the full-screen quad.
 		 */
-		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
+		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT | GL_SHADER_STORAGE_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, ssboBindingPoint, 0);
 		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
