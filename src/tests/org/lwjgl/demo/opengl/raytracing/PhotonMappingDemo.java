@@ -560,7 +560,6 @@ public class PhotonMappingDemo {
 	 */
 	private void trace() {
 		glUseProgram(photonTraceProgram);
-		glDisable(GL_DEPTH_TEST);
 
 		long thisTime = System.nanoTime();
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
@@ -579,6 +578,12 @@ public class PhotonMappingDemo {
 
 		/* Invoke the compute shader. */
 		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
+		/*
+		 * Synchronize all writes that the shader did on the photonMap cube map
+		 * array image before we later let OpenGL source texels from it when
+		 * rasterizing the scene and sampling the cube maps in the fragment
+		 * shader.
+		 */
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
@@ -592,7 +597,6 @@ public class PhotonMappingDemo {
 	 * final image on the screen/viewport.
 	 */
 	private void raster() {
-		glEnable(GL_DEPTH_TEST);
 		glUseProgram(rasterProgram);
 
 		/* Update matrices in shader */
