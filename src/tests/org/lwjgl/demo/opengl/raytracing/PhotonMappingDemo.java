@@ -25,6 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
 import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
@@ -84,7 +85,6 @@ public class PhotonMappingDemo {
 	private int ssbo;
 
 	private int timeUniform;
-	private int bounceCountUniform;
 	private int lightCenterPositionUniform;
 	private int lightRadiusUniform;
 	private int boxesSsboBinding;
@@ -105,7 +105,6 @@ public class PhotonMappingDemo {
 	private float rotationAboutY = 0.8f;
 
 	private long firstTime;
-	private int bounceCount = 2;
 	private float lightRadius = 0.4f;
 
 	private Vector3f tmpVector = new Vector3f();
@@ -422,7 +421,6 @@ public class PhotonMappingDemo {
 		workGroupSizeX = workGroupSize.get(0);
 		workGroupSizeY = workGroupSize.get(1);
 		timeUniform = glGetUniformLocation(photonTraceProgram, "time");
-		bounceCountUniform = glGetUniformLocation(photonTraceProgram, "bounceCount");
 		lightCenterPositionUniform = glGetUniformLocation(photonTraceProgram, "lightCenterPosition");
 		glUniform3f(lightCenterPositionUniform, lightCenterPosition.x, lightCenterPosition.y, lightCenterPosition.z);
 		lightRadiusUniform = glGetUniformLocation(photonTraceProgram, "lightRadius");
@@ -460,14 +458,27 @@ public class PhotonMappingDemo {
 		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 1, GL_RG16F, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2);
-		ByteBuffer color = BufferUtils.createByteBuffer(PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * (4 + 4) * 6 * boxes.length
-				/ 2);
-		while (color.hasRemaining()) {
-			color.putFloat(0.0f);
-		}
-		color.flip();
+		/*
+		 * Clear the first level of the texture with black without allocating
+		 * host memory by using a buffer object and uploading it via PBO to the
+		 * texture. I would rather use clearTexImage but that is only available
+		 * in 4.4.
+		 */
+		int texBuffer = glGenBuffers();
+		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
+		/*
+		 * Even though GL_RG16F would only use 2 bytes for 2 components, it
+		 * actually takes 4 components when doing pixel unpack with a buffer.
+		 * Using 2 components would give 1282 error with texSubImage3D and pixel
+		 * unpack.
+		 */
+		int size = 2 * 4 * PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * 6 * boxes.length / 2;
+		glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
+		glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_FLOAT, (ByteBuffer) null);
 		glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2,
-				GL_RG, GL_FLOAT, color);
+				GL_RG, GL_FLOAT, 0L);
+		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+		glDeleteBuffers(texBuffer);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
 	}
 
@@ -560,7 +571,6 @@ public class PhotonMappingDemo {
 		long thisTime = System.nanoTime();
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
 		glUniform1f(timeUniform, elapsedSeconds);
-		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Bind photon maps */
 		glBindImageTexture(photonMapsBinding, photonMapTexture, 0, true, 0, GL_READ_WRITE, GL_RG16F);

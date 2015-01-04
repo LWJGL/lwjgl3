@@ -8,7 +8,6 @@
 layout(binding = 1, rg16f) uniform imageCubeArray photonMaps;
 
 uniform float time;
-uniform int bounceCount;
 uniform vec3 lightCenterPosition;
 uniform float lightRadius;
 
