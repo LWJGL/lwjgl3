@@ -55,6 +55,7 @@ public class Demo {
 	private int blendFactorUniform;
 	private int samplesPerFrameCountUniform;
 	private int bounceCountUniform;
+	private int framebufferImageBinding;
 
 	private int workGroupSizeX;
 	private int workGroupSizeY;
@@ -350,6 +351,13 @@ public class Demo {
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 		samplesPerFrameCountUniform = glGetUniformLocation(computeProgram, "sampleCount");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
+
+		/* Query the "image binding point" of the image uniform */
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
+		glGetUniform(computeProgram, loc, params);
+		framebufferImageBinding = params.get(0);
+
 		glUseProgram(0);
 	}
 
@@ -426,7 +434,7 @@ public class Demo {
 		glUniform3f(ray11Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
 
 		/* Bind level 0 of framebuffer texture as writable image in the shader. */
-		glBindImageTexture(0, tex, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(framebufferImageBinding, tex, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -442,7 +450,7 @@ public class Demo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(framebufferImageBinding, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glUseProgram(0);
 
 		frameNumber++;

@@ -80,6 +80,9 @@ public class HybridDemoSsboInstancing {
 	private int blendFactorUniform;
 	private int bounceCountUniform;
 	private int boxesSsboBinding;
+	private int framebufferImageBinding;
+	private int worldPositionImageBinding;
+	private int worldNormalImageBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -588,6 +591,18 @@ public class HybridDemoSsboInstancing {
 		/* Now query the "BUFFER_BINDING" of that resource */
 		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
+
+		/* Query the "image binding point" of the image uniforms */
+		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
+		glGetUniform(computeProgram, loc, params);
+		framebufferImageBinding = params.get(0);
+		loc = glGetUniformLocation(computeProgram, "worldPositionImage");
+		glGetUniform(computeProgram, loc, params);
+		worldPositionImageBinding = params.get(0);
+		loc = glGetUniformLocation(computeProgram, "worldNormalImage");
+		glGetUniform(computeProgram, loc, params);
+		worldNormalImageBinding = params.get(0);
+
 		glUseProgram(0);
 	}
 
@@ -737,10 +752,10 @@ public class HybridDemoSsboInstancing {
 		glUniform3f(ray11Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
 
 		/* Bind level 0 of framebuffer texture as writable image in the shader. */
-		glBindImageTexture(0, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(framebufferImageBinding, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		/* Bind level 1 and 2 to our rasterized images */
-		glBindImageTexture(1, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
-		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
+		glBindImageTexture(worldPositionImageBinding, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(worldNormalImageBinding, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
 		/* Bind the SSBO containing our boxes */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
@@ -761,9 +776,9 @@ public class HybridDemoSsboInstancing {
 
 		/* Reset bindings. */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);
-		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
-		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
-		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
+		glBindImageTexture(framebufferImageBinding, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(worldPositionImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(worldNormalImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 		glUseProgram(0);
 
 		frameNumber++;

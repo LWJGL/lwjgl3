@@ -5,7 +5,7 @@
 #version 430 core
 
 /* Cube map array. A single cube map for each box. */
-layout(binding = 0, rg16f) uniform imageCubeArray photonMaps;
+layout(binding = 1, rg16f) uniform imageCubeArray photonMaps;
 
 uniform float time;
 uniform int bounceCount;

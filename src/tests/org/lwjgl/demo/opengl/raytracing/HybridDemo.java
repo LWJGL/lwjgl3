@@ -80,6 +80,9 @@ public class HybridDemo {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int bounceCountUniform;
+	private int framebufferImageBinding;
+	private int worldPositionImageBinding;
+	private int worldNormalImageBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -526,6 +529,19 @@ public class HybridDemo {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
+
+		/* Query the "image binding point" of the image uniforms */
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
+		glGetUniform(computeProgram, loc, params);
+		framebufferImageBinding = params.get(0);
+		loc = glGetUniformLocation(computeProgram, "worldPositionImage");
+		glGetUniform(computeProgram, loc, params);
+		worldPositionImageBinding = params.get(0);
+		loc = glGetUniformLocation(computeProgram, "worldNormalImage");
+		glGetUniform(computeProgram, loc, params);
+		worldNormalImageBinding = params.get(0);
+
 		glUseProgram(0);
 	}
 
@@ -675,10 +691,10 @@ public class HybridDemo {
 		glUniform3f(ray11Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
 
 		/* Bind level 0 of framebuffer texture as writable image in the shader. */
-		glBindImageTexture(0, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(framebufferImageBinding, raytraceTexture, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		/* Bind level 1 and 2 to our rasterized images */
-		glBindImageTexture(1, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
-		glBindImageTexture(2, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
+		glBindImageTexture(worldPositionImageBinding, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(worldNormalImageBinding, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -694,9 +710,9 @@ public class HybridDemo {
 		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
 		/* Reset bindings. */
-		glBindImageTexture(0, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
-		glBindImageTexture(1, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
-		glBindImageTexture(2, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
+		glBindImageTexture(framebufferImageBinding, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindImageTexture(worldPositionImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
+		glBindImageTexture(worldNormalImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 		glUseProgram(0);
 
 		frameNumber++;

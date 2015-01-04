@@ -4,9 +4,9 @@
  */
 #version 430 core
 
-layout(binding = 0, rgba32f) uniform image2D framebuffer;
-layout(binding = 1, rgba32f) uniform readonly image2D worldPositionImage;
-layout(binding = 2, rgba16f) uniform readonly image2D worldNormalImage;
+layout(binding = 1, rgba32f) uniform image2D framebufferImage;
+layout(binding = 2, rgba32f) uniform readonly image2D worldPositionImage;
+layout(binding = 3, rgba16f) uniform readonly image2D worldNormalImage;
 
 uniform vec3 eye;
 uniform vec3 ray00;
@@ -149,7 +149,7 @@ layout (local_size_x = 16, local_size_y = 8) in;
 
 void main(void) {
   ivec2 pix = ivec2(gl_GlobalInvocationID.xy);
-  ivec2 size = imageSize(framebuffer);
+  ivec2 size = imageSize(framebufferImage);
   if (pix.x >= size.x || pix.y >= size.y) {
     return;
   }
@@ -176,8 +176,8 @@ void main(void) {
      * the first frame, we get VERY STRANGE corrupted image!
      * 'mix' SHOULD mix oldColor out, but strangely it does not!
      */
-    oldColor = imageLoad(framebuffer, pix);
+    oldColor = imageLoad(framebufferImage, pix);
   }
   vec4 finalColor = mix(color, oldColor, blendFactor);
-  imageStore(framebuffer, pix, finalColor);
+  imageStore(framebufferImage, pix, finalColor);
 }

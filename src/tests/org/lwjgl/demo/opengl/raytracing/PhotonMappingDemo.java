@@ -87,6 +87,7 @@ public class PhotonMappingDemo {
 	private int lightCenterPositionUniform;
 	private int lightRadiusUniform;
 	private int boxesSsboBinding;
+	private int photonMapsBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -437,6 +438,12 @@ public class PhotonMappingDemo {
 		/* Now query the "BUFFER_BINDING" of that resource */
 		glGetProgramResource(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
+
+		/* Query the "image binding point" of the photonMaps uniform image2D */
+		int loc = glGetUniformLocation(photonTraceProgram, "photonMaps");
+		glGetUniform(photonTraceProgram, loc, params);
+		photonMapsBinding = params.get(0);
+
 		glUseProgram(0);
 	}
 
@@ -555,7 +562,7 @@ public class PhotonMappingDemo {
 		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Bind photon maps */
-		glBindImageTexture(0, photonMapTexture, 0, true, 0, GL_READ_WRITE, GL_RG16F);
+		glBindImageTexture(photonMapsBinding, photonMapTexture, 0, true, 0, GL_READ_WRITE, GL_RG16F);
 
 		/* Bind the SSBO containing our boxes */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
@@ -571,7 +578,7 @@ public class PhotonMappingDemo {
 
 		/* Reset bindings. */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, 0);
-		glBindImageTexture(0, 0, 0, true, 0, GL_READ_WRITE, GL_RG16F);
+		glBindImageTexture(photonMapsBinding, 0, 0, true, 0, GL_READ_WRITE, GL_RG16F);
 		glUseProgram(0);
 	}
 
