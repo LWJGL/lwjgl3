@@ -25,6 +25,7 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -67,6 +68,7 @@ public class DemoSsbo {
 	private int computeProgram;
 	private int quadProgram;
 	private int ssbo;
+	private int sampler;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -198,6 +200,7 @@ public class DemoSsbo {
 
 		/* Create all needed GL resources */
 		createFramebufferTexture();
+		createSampler();
 		quadFullScreenVao();
 		createComputeProgram();
 		initComputeProgram();
@@ -364,10 +367,17 @@ public class DemoSsbo {
 	private void createFramebufferTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, tex);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	/**
@@ -502,7 +512,9 @@ public class DemoSsbo {
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, tex);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);

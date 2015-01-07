@@ -24,6 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -49,6 +50,7 @@ public class Demo33 {
 	private int fbo;
 	private int rayTracingProgram;
 	private int quadProgram;
+	private int sampler;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -210,6 +212,7 @@ public class Demo33 {
 
 		/* Create all needed GL resources */
 		createFramebufferTexture();
+		createSampler();
 		createFrameBufferObject();
 		quadFullScreenVao();
 		createRayTracingProgram();
@@ -370,10 +373,17 @@ public class Demo33 {
 	private void createFramebufferTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, tex);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	private void resizeFramebufferTexture() {
@@ -462,7 +472,9 @@ public class Demo33 {
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, tex);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -482,7 +494,9 @@ public class Demo33 {
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, tex);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);

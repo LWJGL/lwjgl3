@@ -27,8 +27,8 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL31.glDrawArraysInstanced;
-import static org.lwjgl.opengl.GL33.glVertexAttribDivisor;
+import static org.lwjgl.opengl.GL31.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL40.*;
 import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.opengl.GL43.*;
@@ -83,6 +83,7 @@ public class PhotonMappingDemo {
 	private int rasterProgram;
 	private int vaoScene;
 	private int ssbo;
+	private int sampler;
 
 	private int timeUniform;
 	private int lightCenterPositionUniform;
@@ -136,8 +137,7 @@ public class PhotonMappingDemo {
 			@Override
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
-					System.err
-							.println("This demo requires OpenGL 4.3 or higher. The HybridDemo33 version works on OpenGL 3.3 or higher.");
+					System.err.println("This demo requires OpenGL 4.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -221,6 +221,7 @@ public class PhotonMappingDemo {
 
 		/* Create all needed GL resources */
 		createPhotonMapTexture();
+		createSampler();
 		createPhotonTraceProgram();
 		initPhotonTraceProgram();
 		createRasterProgram();
@@ -452,11 +453,6 @@ public class PhotonMappingDemo {
 	private void createPhotonMapTexture() {
 		this.photonMapTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_CUBE_MAP_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 1, GL_RG16F, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2);
 		/*
 		 * Clear the first level of the texture with black without allocating
@@ -474,6 +470,18 @@ public class PhotonMappingDemo {
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		glDeleteBuffers(texBuffer);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	/**
@@ -607,9 +615,11 @@ public class PhotonMappingDemo {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
+		glBindSampler(0, this.sampler);
 		glBindVertexArray(vaoScene);
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * 6, boxes.length / 2);
 		glBindVertexArray(0);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
 		glUseProgram(0);
 	}

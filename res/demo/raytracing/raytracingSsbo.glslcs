@@ -88,5 +88,5 @@ void main(void) {
   color = trace(eye, dir);
   vec4 oldColor = vec4(0.0);
   vec4 finalColor = color;
-  outputImage[size.x * pix.y + pix.x] = finalColor;//vec4(abs(sin(pos.x * 5.0 + time)));
+  outputImage[size.x * pix.y + pix.x] = finalColor;
 }

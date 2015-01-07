@@ -24,6 +24,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -37,7 +38,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class Demo {
 
 	private long window;
-	private int width  = 1024;
+	private int width = 1024;
 	private int height = 768;
 	private boolean resetFramebuffer = true;
 
@@ -45,6 +46,7 @@ public class Demo {
 	private int vao;
 	private int computeProgram;
 	private int quadProgram;
+	private int sampler;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -60,28 +62,28 @@ public class Demo {
 	private int workGroupSizeX;
 	private int workGroupSizeY;
 
-	private Camera  camera;
-	private float   mouseDownX;
-	private float   mouseX;
+	private Camera camera;
+	private float mouseDownX;
+	private float mouseX;
 	private boolean mouseDown;
 
 	private float currRotationAboutY = 0.0f;
-	private float rotationAboutY     = 0.8f;
+	private float rotationAboutY = 0.8f;
 
 	private long firstTime;
-	private int  frameNumber;
+	private int frameNumber;
 	private int samplesPerFrameCount = 1;
 	private int bounceCount = 1;
 
-	private Vector3f tmpVector    = new Vector3f();
+	private Vector3f tmpVector = new Vector3f();
 	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
-	private Vector3f cameraUp     = new Vector3f(0.0f, 1.0f, 0.0f);
+	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 
-	GLFWErrorCallback           errCallback;
-	GLFWKeyCallback             keyCallback;
+	GLFWErrorCallback errCallback;
+	GLFWKeyCallback keyCallback;
 	GLFWFramebufferSizeCallback fbCallback;
-	GLFWCursorPosCallback       cpCallback;
-	GLFWMouseButtonCallback     mbCallback;
+	GLFWCursorPosCallback cpCallback;
+	GLFWMouseButtonCallback mbCallback;
 
 	Closure debugProc;
 
@@ -98,8 +100,9 @@ public class Demo {
 
 			@Override
 			public void invoke(int error, long description) {
-				if ( error == GLFW_VERSION_UNAVAILABLE )
-					System.err.println("This demo requires OpenGL 4.3 or higher. The Demo33 version works on OpenGL 3.3 or higher.");
+				if (error == GLFW_VERSION_UNAVAILABLE)
+					System.err
+							.println("This demo requires OpenGL 4.3 or higher. The Demo33 version works on OpenGL 3.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -110,7 +113,7 @@ public class Demo {
 			}
 		});
 
-		if ( glfwInit() != GL_TRUE )
+		if (glfwInit() != GL_TRUE)
 			throw new IllegalStateException("Unable to initialize GLFW");
 
 		glfwDefaultWindowHints();
@@ -122,7 +125,7 @@ public class Demo {
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader)", NULL, NULL);
-		if ( window == NULL ) {
+		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
@@ -132,26 +135,26 @@ public class Demo {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action != GLFW_RELEASE )
+				if (action != GLFW_RELEASE)
 					return;
 
-				if ( key == GLFW_KEY_ESCAPE )
+				if (key == GLFW_KEY_ESCAPE)
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
+				else if (GLFW_KEY_1 <= key && key <= GLFW_KEY_9) {
 					int newSamplesPerFrameCount = key - GLFW_KEY_1 + 1;
 					if (newSamplesPerFrameCount != Demo.this.samplesPerFrameCount) {
 						Demo.this.samplesPerFrameCount = newSamplesPerFrameCount;
 						System.out.println("Samples per frame is now: " + Demo.this.samplesPerFrameCount);
 						Demo.this.frameNumber = 0;
 					}
-				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
+				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
 					int newBounceCount = Math.min(4, Demo.this.bounceCount + 1);
 					if (newBounceCount != Demo.this.bounceCount) {
 						Demo.this.bounceCount = newBounceCount;
 						System.out.println("Ray bounce count is now: " + Demo.this.bounceCount);
 						Demo.this.frameNumber = 0;
 					}
-				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
+				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
 					int newBounceCount = Math.max(1, Demo.this.bounceCount - 1);
 					if (newBounceCount != Demo.this.bounceCount) {
 						Demo.this.bounceCount = newBounceCount;
@@ -165,8 +168,7 @@ public class Demo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 && 
-						(Demo.this.width != width || Demo.this.height != height)) {
+				if (width > 0 && height > 0 && (Demo.this.width != width || Demo.this.height != height)) {
 					Demo.this.width = width;
 					Demo.this.height = height;
 					Demo.this.resetFramebuffer = true;
@@ -178,8 +180,8 @@ public class Demo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				Demo.this.mouseX = (float)x;
-				if ( mouseDown ) {
+				Demo.this.mouseX = (float) x;
+				if (mouseDown) {
 					Demo.this.frameNumber = 0;
 				}
 			}
@@ -188,10 +190,10 @@ public class Demo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if ( action == GLFW_PRESS ) {
+				if (action == GLFW_PRESS) {
 					Demo.this.mouseDownX = Demo.this.mouseX;
 					Demo.this.mouseDown = true;
-				} else if ( action == GLFW_RELEASE ) {
+				} else if (action == GLFW_RELEASE) {
 					Demo.this.mouseDown = false;
 					Demo.this.rotationAboutY = Demo.this.currRotationAboutY;
 				}
@@ -207,6 +209,7 @@ public class Demo {
 
 		/* Create all needed GL resources */
 		createFramebufferTexture();
+		createSampler();
 		quadFullScreenVao();
 		createComputeProgram();
 		initComputeProgram();
@@ -244,8 +247,10 @@ public class Demo {
 	/**
 	 * Create a shader object from the given classpath resource.
 	 *
-	 * @param resource the class path
-	 * @param type     the shader type
+	 * @param resource
+	 *            the class path
+	 * @param type
+	 *            the shader type
 	 *
 	 * @return the shader object id
 	 *
@@ -266,10 +271,10 @@ public class Demo {
 		glCompileShader(shader);
 		int compiled = glGetShaderi(shader, GL_COMPILE_STATUS);
 		String shaderLog = glGetShaderInfoLog(shader);
-		if ( !shaderLog.trim().isEmpty() ) {
+		if (!shaderLog.trim().isEmpty()) {
 			System.err.println(shaderLog);
 		}
-		if ( compiled == 0 ) {
+		if (compiled == 0) {
 			throw new AssertionError("Could not compile shader");
 		}
 		return shader;
@@ -291,10 +296,10 @@ public class Demo {
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);
-		if ( !programLog.trim().isEmpty() ) {
+		if (!programLog.trim().isEmpty()) {
 			System.err.println(programLog);
 		}
-		if ( linked == 0 ) {
+		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
 		this.quadProgram = program;
@@ -314,10 +319,10 @@ public class Demo {
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);
-		if ( !programLog.trim().isEmpty() ) {
+		if (!programLog.trim().isEmpty()) {
 			System.err.println(programLog);
 		}
-		if ( linked == 0 ) {
+		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
 		this.computeProgram = program;
@@ -367,10 +372,17 @@ public class Demo {
 	private void createFramebufferTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, tex);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	/**
@@ -388,7 +400,7 @@ public class Demo {
 	private void trace() {
 		glUseProgram(computeProgram);
 
-		if ( mouseDown ) {
+		if (mouseDown) {
 			/*
 			 * If mouse is down, compute the camera rotation based on mouse
 			 * cursor location.
@@ -399,11 +411,11 @@ public class Demo {
 		}
 
 		/* Rotate camera about Y axis. */
-		tmpVector.set((float)sin(-currRotationAboutY) * 3.0f, 2.0f, (float)cos(-currRotationAboutY) * 3.0f);
+		tmpVector.set((float) sin(-currRotationAboutY) * 3.0f, 2.0f, (float) cos(-currRotationAboutY) * 3.0f);
 		camera.setLookAt(tmpVector, cameraLookAt, cameraUp);
 
-		if ( resetFramebuffer ) {
-			camera.setFrustumPerspective(60.0f, (float)width / height, 1f, 2f);
+		if (resetFramebuffer) {
+			camera.setFrustumPerspective(60.0f, (float) width / height, 1f, 2f);
 			resizeFramebufferTexture();
 			resetFramebuffer = false;
 		}
@@ -412,11 +424,12 @@ public class Demo {
 		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
 		glUniform1f(timeUniform, elapsedSeconds);
 
-		/* We are going to average multiple successive frames, so 
-		 * here we compute the blend factor between old frame and new frame.
-		 *   0.0 - use only the new frame
-		 * > 0.0 - blend between old frame and new frame */
-		float blendFactor = (float)frameNumber / ((float)frameNumber + 1.0f);
+		/*
+		 * We are going to average multiple successive frames, so here we
+		 * compute the blend factor between old frame and new frame. 0.0 - use
+		 * only the new frame > 0.0 - blend between old frame and new frame
+		 */
+		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
 
 		glUniform1i(samplesPerFrameCountUniform, samplesPerFrameCount);
@@ -467,14 +480,16 @@ public class Demo {
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, tex);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
 
 	private void loop() {
-		while ( glfwWindowShouldClose(window) == GL_FALSE ) {
+		while (glfwWindowShouldClose(window) == GL_FALSE) {
 			glfwPollEvents();
 			glViewport(0, 0, width, height);
 
@@ -490,7 +505,7 @@ public class Demo {
 			init();
 			loop();
 
-			if ( debugProc != null )
+			if (debugProc != null)
 				debugProc.release();
 
 			errCallback.release();

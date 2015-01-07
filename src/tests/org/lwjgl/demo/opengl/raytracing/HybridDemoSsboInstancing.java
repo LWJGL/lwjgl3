@@ -39,7 +39,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  * It works like the {@link HybridDemoSsbo}, but uses hardware instancing to
  * rasterize the boxes. It won't be any faster, but will use less GPU memory as
  * we only need to create a small VBO containing a unit axis-aligned box and a
- * buffer with per-instanced box data (position and size).
+ * buffer with per-instance box data (position and size).
  * 
  * @author Kai Burjack
  */
@@ -70,6 +70,7 @@ public class HybridDemoSsboInstancing {
 	private int positionTexture;
 	private int normalTexture;
 	private int ssbo;
+	private int sampler;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -234,6 +235,7 @@ public class HybridDemoSsboInstancing {
 
 		/* Create all needed GL resources */
 		createRaytracingTexture();
+		createSampler();
 		createRasterizerTextures();
 		createRasterFrameBufferObject();
 		createSceneSSBO();
@@ -612,10 +614,17 @@ public class HybridDemoSsboInstancing {
 	private void createRaytracingTexture() {
 		this.raytraceTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	/**
@@ -624,15 +633,11 @@ public class HybridDemoSsboInstancing {
 	private void createRasterizerTextures() {
 		this.positionTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, positionTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		this.normalTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, normalTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA16F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -795,20 +800,30 @@ public class HybridDemoSsboInstancing {
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}
 
+	/**
+	 * This is the main loop, continuously updating the camera and rendering the
+	 * scene.
+	 */
 	private void loop() {
 		while (glfwWindowShouldClose(window) == GL_FALSE) {
 			glfwPollEvents();
 			glViewport(0, 0, width, height);
 
+			/* Update everything */
 			update();
+			/* Raster the scene */
 			raster();
+			/* Trace the scene */
 			trace();
+			/* Render and present the final image */
 			present();
 
 			glfwSwapBuffers(window);

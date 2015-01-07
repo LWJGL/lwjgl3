@@ -25,6 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
+import static org.lwjgl.opengl.GL33.*;
 import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -71,6 +72,7 @@ public class HybridDemo {
 	private int vaoScene;
 	private int positionTexture;
 	private int normalTexture;
+	private int sampler;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -132,8 +134,7 @@ public class HybridDemo {
 			@Override
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
-					System.err
-							.println("This demo requires OpenGL 4.3 or higher. The HybridDemo33 version works on OpenGL 3.3 or higher.");
+					System.err.println("This demo requires OpenGL 4.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -232,6 +233,7 @@ public class HybridDemo {
 
 		/* Create all needed GL resources */
 		createRaytracingTexture();
+		createSampler();
 		createRasterizerTextures();
 		createRasterFrameBufferObject();
 		createFullScreenVao();
@@ -551,10 +553,17 @@ public class HybridDemo {
 	private void createRaytracingTexture() {
 		this.raytraceTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	/**
+	 * Create the sampler to sample the framebuffer texture within the shader.
+	 */
+	private void createSampler() {
+		this.sampler = glGenSamplers();
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
 	/**
@@ -563,15 +572,11 @@ public class HybridDemo {
 	private void createRasterizerTextures() {
 		this.positionTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, positionTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
 		this.normalTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, normalTexture);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA16F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
@@ -729,7 +734,9 @@ public class HybridDemo {
 		glUseProgram(quadProgram);
 		glBindVertexArray(vao);
 		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
+		glBindSampler(0, this.sampler);
 		glDrawArrays(GL_TRIANGLES, 0, 6);
+		glBindSampler(0, 0);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
