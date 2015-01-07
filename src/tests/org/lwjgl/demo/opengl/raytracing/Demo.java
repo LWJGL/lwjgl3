@@ -55,7 +55,6 @@ public class Demo {
 	private int ray11Uniform;
 	private int timeUniform;
 	private int blendFactorUniform;
-	private int samplesPerFrameCountUniform;
 	private int bounceCountUniform;
 	private int framebufferImageBinding;
 
@@ -72,7 +71,6 @@ public class Demo {
 
 	private long firstTime;
 	private int frameNumber;
-	private int samplesPerFrameCount = 1;
 	private int bounceCount = 1;
 
 	private Vector3f tmpVector = new Vector3f();
@@ -129,24 +127,17 @@ public class Demo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-		System.out.println("Press 1 through 9 to change the number of samples per frame.");
 		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
 		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if (action != GLFW_RELEASE)
+				if (action != GLFW_RELEASE) {
 					return;
+				}
 
-				if (key == GLFW_KEY_ESCAPE)
+				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				else if (GLFW_KEY_1 <= key && key <= GLFW_KEY_9) {
-					int newSamplesPerFrameCount = key - GLFW_KEY_1 + 1;
-					if (newSamplesPerFrameCount != Demo.this.samplesPerFrameCount) {
-						Demo.this.samplesPerFrameCount = newSamplesPerFrameCount;
-						System.out.println("Samples per frame is now: " + Demo.this.samplesPerFrameCount);
-						Demo.this.frameNumber = 0;
-					}
 				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
 					int newBounceCount = Math.min(4, Demo.this.bounceCount + 1);
 					if (newBounceCount != Demo.this.bounceCount) {
@@ -354,7 +345,6 @@ public class Demo {
 		ray11Uniform = glGetUniformLocation(computeProgram, "ray11");
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
-		samplesPerFrameCountUniform = glGetUniformLocation(computeProgram, "sampleCount");
 		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
 
 		/* Query the "image binding point" of the image uniform */
@@ -431,8 +421,6 @@ public class Demo {
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
-
-		glUniform1i(samplesPerFrameCountUniform, samplesPerFrameCount);
 		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Set viewing frustum corner rays in shader */

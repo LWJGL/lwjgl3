@@ -62,7 +62,6 @@ public class Demo33 {
 	private int framebufferUniform;
 	private int widthUniform;
 	private int heightUniform;
-	private int samplesPerFrameCountUniform;
 	private int bounceCountUniform;
 
 	private Camera  camera;
@@ -75,7 +74,6 @@ public class Demo33 {
 
 	private long firstTime;
 	private int  frameNumber;
-	private int samplesPerFrameCount = 1;
 	private int bounceCount = 1;
 
 	private Vector3f tmpVector    = new Vector3f();
@@ -131,24 +129,17 @@ public class Demo33 {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
-		System.out.println("Press 1 through 9 to change the number of samples per frame.");
 		System.out.println("Press keypad '+' or 'page up' to increase the number of bounces.");
 		System.out.println("Press keypad '-' or 'page down' to decrease the number of bounces.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if ( action != GLFW_RELEASE )
+				if ( action != GLFW_RELEASE ) {
 					return;
+				}
 
-				if ( key == GLFW_KEY_ESCAPE )
+				if ( key == GLFW_KEY_ESCAPE ) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				else if ( GLFW_KEY_1 <= key && key <= GLFW_KEY_9 ) {
-					int newSamplesPerFrameCount = key - GLFW_KEY_1 + 1;
-					if (newSamplesPerFrameCount != Demo33.this.samplesPerFrameCount) {
-						Demo33.this.samplesPerFrameCount = newSamplesPerFrameCount;
-						System.out.println("Samples per frame is now: " + Demo33.this.samplesPerFrameCount);
-						Demo33.this.frameNumber = 0;
-					}
 				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
 					int newBounceCount = Math.min(4, Demo33.this.bounceCount + 1);
 					if (newBounceCount != Demo33.this.bounceCount) {
@@ -361,7 +352,6 @@ public class Demo33 {
 		framebufferUniform = glGetUniformLocation(rayTracingProgram, "framebuffer");
 		widthUniform = glGetUniformLocation(rayTracingProgram, "width");
 		heightUniform = glGetUniformLocation(rayTracingProgram, "height");
-		samplesPerFrameCountUniform = glGetUniformLocation(rayTracingProgram, "sampleCount");
 		bounceCountUniform = glGetUniformLocation(rayTracingProgram, "bounceCount");
 		glUniform1i(framebufferUniform, 0);
 		glUseProgram(0);
@@ -447,8 +437,6 @@ public class Demo33 {
 		 * > 0.0 - blend between old frame and new frame */
 		float blendFactor = (float)frameNumber / ((float)frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
-
-		glUniform1i(samplesPerFrameCountUniform, samplesPerFrameCount);
 		glUniform1i(bounceCountUniform, bounceCount);
 
 		/* Set viewing frustum corner rays in shader */
