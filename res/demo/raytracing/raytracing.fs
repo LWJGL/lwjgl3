@@ -16,7 +16,6 @@ uniform float blendFactor;
 uniform float time;
 uniform float width;
 uniform float height;
-uniform int sampleCount;
 uniform int bounceCount;
 
 in vec2 texcoord;
@@ -166,7 +165,7 @@ void main(void) {
   vec2 pos = texcoord;
   vec4 newColor = vec4(0.0, 0.0, 0.0, 1.0);
   cameraUp = normalize(ray01 - ray00);
-  for (int s = 0; s < sampleCount; s++) {
+  for (int s = 0; s < 1; s++) {
     float rand1 = random(pos, time + float(s));
     float rand2 = random(pos + vec2(641.51224, 423.178), time + float(s));
     float rand3 = random(pos - vec2(147.16414, 363.941), time - float(s));
@@ -176,7 +175,7 @@ void main(void) {
     vec3 dir = mix(mix(ray00, ray01, p.y), mix(ray10, ray11, p.y), p.x);
     newColor += trace(eye, dir);
   }
-  newColor /= sampleCount;
+  newColor /= 1;
   vec4 oldColor = vec4(0.0);
   oldColor = texture(framebuffer, pos);
   color = mix(newColor, oldColor, blendFactor);
