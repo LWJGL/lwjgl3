@@ -10,8 +10,8 @@ import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.ARBClearTexture;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -76,6 +76,8 @@ public class PhotonMappingDemo {
 	 */
 	private static int INITIAL_PHOTONS_PER_FRAME = 32;
 
+	private GLContext ctx;
+
 	private long window;
 	private int width = 1024;
 	private int height = 768;
@@ -123,21 +125,13 @@ public class PhotonMappingDemo {
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
 	private Vector3f lightCenterPosition = new Vector3f(2.5f, 2.9f, 3);
+	private ByteBuffer clearTexBuffer = BufferUtils.createByteBuffer(4);
 
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
 	GLFWFramebufferSizeCallback fbCallback;
 	GLFWCursorPosCallback cpCallback;
 	GLFWMouseButtonCallback mbCallback;
-
-	Closure debugProc;
-
-	static {
-		/*
-		 * Tell LWJGL that we only want 4.3 functionality.
-		 */
-		System.setProperty("org.lwjgl.opengl.maxVersion", "4.3");
-	}
 
 	private void init() throws IOException {
 		glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
@@ -253,8 +247,7 @@ public class PhotonMappingDemo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
-		GLContext ctx = GLContext.createFromCurrent();
-		debugProc = ctx.setupDebugMessageCallback(System.err);
+		ctx = GLContext.createFromCurrent();
 
 		/* Create all needed GL resources */
 		createPhotonMapTexture();
@@ -504,21 +497,31 @@ public class PhotonMappingDemo {
 	private void clearPhotonMapTexture() {
 		/*
 		 * Clear the first level of the texture with black without allocating
-		 * host memory by using a buffer object and uploading it via PBO to the
-		 * texture. I would rather use clearTexImage but that is only available
-		 * in 4.4.
+		 * host memory.
 		 */
-		int texBuffer = glGenBuffers();
-		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
-		int size = 2 * 2 * photonMapSize * photonMapSize * 6 * boxes.length / 2;
-		glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
-		glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
-		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
-		glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, photonMapSize, photonMapSize, 6 * boxes.length / 2,
-				GL_RG, GL_HALF_FLOAT, 0L);
-		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
-		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
-		glDeleteBuffers(texBuffer);
+		if (ctx.getCapabilities().GL_ARB_clear_texture) {
+			/*
+			 * If ARB_clear_texture is available, we can directly clear the
+			 * image of the texture.
+			 */
+			ARBClearTexture.glClearTexImage(photonMapTexture, 0, GL_RG, GL_HALF_FLOAT, clearTexBuffer);
+		} else {
+			/*
+			 * If not, we create a temporary buffer object and use pixel unpack
+			 * to move GPU memory from that buffer to the texture image.
+			 */
+			int texBuffer = glGenBuffers();
+			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
+			int size = 2 * 2 * photonMapSize * photonMapSize * 6 * boxes.length / 2;
+			glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
+			glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
+			glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
+			glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, photonMapSize, photonMapSize, 6 * boxes.length / 2,
+					GL_RG, GL_HALF_FLOAT, 0L);
+			glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
+			glDeleteBuffers(texBuffer);
+		}
 	}
 
 	/**
@@ -706,9 +709,6 @@ public class PhotonMappingDemo {
 		try {
 			init();
 			loop();
-
-			if (debugProc != null)
-				debugProc.release();
 
 			errCallback.release();
 			keyCallback.release();
