@@ -82,7 +82,7 @@ public class PhotonMappingDemo {
 	private boolean resetFramebuffer = true;
 	private boolean clearPhotonMapTexture = false;
 	private boolean recreatePhotonMapTexture = true;
-	private int maxPhotonMapSize;
+	private int maxPhotonMapSize = 2048;
 	private int maxPhotonsPerFrame = 2048;
 	private int photonMapSize = INITIAL_PHOTON_MAP_SIZE;
 	private int photonsPerFrame = INITIAL_PHOTONS_PER_FRAME;
@@ -265,9 +265,6 @@ public class PhotonMappingDemo {
 		initRasterProgram();
 		createSceneSSBO();
 		createSceneVao();
-
-		/* Query max photon map resolution */
-		maxPhotonMapSize = glGetInteger(GL_MAX_3D_TEXTURE_SIZE);
 
 		/* Set some state */
 		glEnable(GL_DEPTH_TEST);
