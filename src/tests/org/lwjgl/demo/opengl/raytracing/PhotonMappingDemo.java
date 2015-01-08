@@ -66,17 +66,26 @@ public class PhotonMappingDemo {
 	/**
 	 * The resolution of the photon map for each box.
 	 */
-	private static int PHOTON_MAP_SIZE = 64;
+	private static int INITIAL_PHOTON_MAP_SIZE = 64;
 
 	/**
 	 * The number of photons to trace when doing a single photonmap computation.
+	 * This is actually the square root of the number of photons, since we are
+	 * using both dimension X and Y of the compute shader, with equal number of
+	 * work items.
 	 */
-	private static int PHOTON_TRACE_PER_FRAME = 256 * 256;
+	private static int INITIAL_PHOTONS_PER_FRAME = 32;
 
 	private long window;
 	private int width = 1024;
 	private int height = 768;
 	private boolean resetFramebuffer = true;
+	private boolean clearPhotonMapTexture = false;
+	private boolean recreatePhotonMapTexture = true;
+	private int maxPhotonMapSize;
+	private int maxPhotonsPerFrame = 2048;
+	private int photonMapSize = INITIAL_PHOTON_MAP_SIZE;
+	private int photonsPerFrame = INITIAL_PHOTONS_PER_FRAME;
 
 	private int photonMapTexture;
 	private int photonTraceProgram;
@@ -165,6 +174,10 @@ public class PhotonMappingDemo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
+		System.out.println("Press arrow 'up' to increase photon map resolution.");
+		System.out.println("Press arrow 'down' to decrease the photon map resolution.");
+		System.out.println("Press arrow 'right' to increase number of photons per frame.");
+		System.out.println("Press arrow 'left' to decrease number of photons per frame.");
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
@@ -173,6 +186,30 @@ public class PhotonMappingDemo {
 
 				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
+				} else if (key == GLFW_KEY_R) {
+					PhotonMappingDemo.this.clearPhotonMapTexture = true;
+				} else if (key == GLFW_KEY_UP) {
+					PhotonMappingDemo.this.photonMapSize *= 2;
+					PhotonMappingDemo.this.photonMapSize = Math.min(PhotonMappingDemo.this.photonMapSize,
+							maxPhotonMapSize);
+					PhotonMappingDemo.this.recreatePhotonMapTexture = true;
+					System.out.println("Photon map resolution: " + PhotonMappingDemo.this.photonMapSize);
+				} else if (key == GLFW_KEY_DOWN) {
+					PhotonMappingDemo.this.photonMapSize /= 2;
+					PhotonMappingDemo.this.photonMapSize = Math.max(PhotonMappingDemo.this.photonMapSize, 4);
+					PhotonMappingDemo.this.recreatePhotonMapTexture = true;
+					System.out.println("Photon map resolution: " + PhotonMappingDemo.this.photonMapSize);
+				} else if (key == GLFW_KEY_RIGHT) {
+					PhotonMappingDemo.this.photonsPerFrame *= 2;
+					PhotonMappingDemo.this.photonsPerFrame = Math.min(PhotonMappingDemo.this.photonsPerFrame,
+							maxPhotonsPerFrame);
+					PhotonMappingDemo.this.clearPhotonMapTexture = true;
+					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
+				} else if (key == GLFW_KEY_LEFT) {
+					PhotonMappingDemo.this.photonsPerFrame /= 2;
+					PhotonMappingDemo.this.photonsPerFrame = Math.max(PhotonMappingDemo.this.photonsPerFrame, 4);
+					PhotonMappingDemo.this.clearPhotonMapTexture = true;
+					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
 				}
 			}
 		});
@@ -229,6 +266,10 @@ public class PhotonMappingDemo {
 		createSceneSSBO();
 		createSceneVao();
 
+		/* Query max photon map resolution */
+		maxPhotonMapSize = glGetInteger(GL_MAX_3D_TEXTURE_SIZE);
+
+		/* Set some state */
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 
@@ -451,9 +492,19 @@ public class PhotonMappingDemo {
 	 * Create the cubemap texture array for our photon map.
 	 */
 	private void createPhotonMapTexture() {
+		/* Create it */
 		this.photonMapTexture = glGenTextures();
 		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
-		glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 1, GL_RG16F, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2);
+		glTexStorage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 1, GL_RG16F, photonMapSize, photonMapSize, 6 * boxes.length / 2);
+		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+		/* Clear it */
+		clearPhotonMapTexture();
+	}
+
+	/**
+	 * Clear the photon map texture.
+	 */
+	private void clearPhotonMapTexture() {
 		/*
 		 * Clear the first level of the texture with black without allocating
 		 * host memory by using a buffer object and uploading it via PBO to the
@@ -462,14 +513,23 @@ public class PhotonMappingDemo {
 		 */
 		int texBuffer = glGenBuffers();
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
-		int size = 2 * 2 * PHOTON_MAP_SIZE * PHOTON_MAP_SIZE * 6 * boxes.length / 2;
+		int size = 2 * 2 * photonMapSize * photonMapSize * 6 * boxes.length / 2;
 		glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
 		glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
-		glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, PHOTON_MAP_SIZE, PHOTON_MAP_SIZE, 6 * boxes.length / 2,
+		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
+		glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, photonMapSize, photonMapSize, 6 * boxes.length / 2,
 				GL_RG, GL_HALF_FLOAT, 0L);
+		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
 		glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 		glDeleteBuffers(texBuffer);
-		glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, 0);
+	}
+
+	/**
+	 * Delete the photon map texture.
+	 */
+	private void recreatePhotonMapTexture() {
+		glDeleteTextures(this.photonMapTexture);
+		createPhotonMapTexture();
 	}
 
 	/**
@@ -540,6 +600,14 @@ public class PhotonMappingDemo {
 			camera.setFrustumPerspective(60.0f, (float) width / height, 0.01f, 100.0f);
 			resetFramebuffer = false;
 		}
+		if (recreatePhotonMapTexture) {
+			recreatePhotonMapTexture();
+			recreatePhotonMapTexture = false;
+			clearPhotonMapTexture = false;
+		} else if (clearPhotonMapTexture) {
+			clearPhotonMapTexture();
+			clearPhotonMapTexture = false;
+		}
 	}
 
 	/**
@@ -580,7 +648,7 @@ public class PhotonMappingDemo {
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
 
 		/* Compute appropriate invocation dimension. */
-		int invocationsPerDimension = (int) Math.sqrt(PHOTON_TRACE_PER_FRAME);
+		int invocationsPerDimension = photonsPerFrame;
 		int worksizeX = mathRoundPoT(invocationsPerDimension);
 		int worksizeY = mathRoundPoT(invocationsPerDimension);
 
