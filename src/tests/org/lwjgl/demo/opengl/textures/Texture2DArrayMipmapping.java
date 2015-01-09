@@ -33,7 +33,7 @@ public class Texture2DArrayMipmapping {
 	private long window;
 	private int width = 1024;
 	private int height = 768;
-	private int texSize = 256;
+	private int texSize = 1024;
 
 	private int tex;
 	private int vao;
@@ -138,10 +138,11 @@ public class Texture2DArrayMipmapping {
 		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, 1, 0, GL_RGB,
 				GL_UNSIGNED_BYTE, (ByteBuffer) null);
 		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
+		int checkSize = 5;
 		/* Generate some checker board pattern */
 		for (int y = 0; y < texSize; y++) {
 			for (int x = 0; x < texSize; x++) {
-				if (((x + y) % 2) == 0) {
+				if (((x/checkSize + y/checkSize) % 2) == 0) {
 					bb.put((byte) 255).put((byte) 255).put((byte) 255);
 				} else {
 					bb.put((byte) 0).put((byte) 0).put((byte) 0);
