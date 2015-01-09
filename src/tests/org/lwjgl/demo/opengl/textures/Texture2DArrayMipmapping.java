@@ -262,12 +262,14 @@ public class Texture2DArrayMipmapping {
 	 */
 	private void createSampler() {
 		this.sampler = glGenSamplers();
-		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		/* Add maximum anisotropic filtering, if available */
 		if (ctx.getCapabilities().GL_EXT_texture_filter_anisotropic) {
+			glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 			int maxAnisotropy = glGetInteger(EXTTextureFilterAnisotropic.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
 			glSamplerParameteri(this.sampler, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAnisotropy);
+		} else {
+			glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		}
 	}
 
