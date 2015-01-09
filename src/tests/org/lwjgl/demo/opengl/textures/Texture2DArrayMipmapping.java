@@ -61,7 +61,7 @@ public class Texture2DArrayMipmapping {
 			@Override
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
-					System.err.println("This demo requires OpenGL 4.3 or higher.");
+					System.err.println("This demo requires OpenGL 3.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
