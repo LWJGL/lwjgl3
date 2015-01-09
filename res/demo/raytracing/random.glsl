@@ -69,11 +69,8 @@ vec3 randomDiskPoint(vec3 rand, vec3 n, vec3 up) {
   vec2 p = vec2(sr * cos(angle), sr * sin(angle));
   /*
    * Compute some arbitrary tangent space for orienting
-   * our disk towards the normal.
-   * FIXME: There is an issue here when somewhere in mid-screen the tangent
-   *        space changes, because the condition below changes its value.
-   *        That will be noticeable on the final render. But how to combat?
-   *        We could use the camera's vectors.
+   * our disk towards the normal. We use the camera's up vector
+   * to have some fix reference vector over the whole screen.
    */
   vec3 tangent = up;
   vec3 bitangent = cross(tangent, n);
