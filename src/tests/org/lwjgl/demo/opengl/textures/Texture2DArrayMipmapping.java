@@ -10,7 +10,9 @@ import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.system.MathUtil;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -33,6 +35,7 @@ public class Texture2DArrayMipmapping {
 	private long window;
 	private int width = 1024;
 	private int height = 768;
+	private int texSize = 256;
 
 	private int tex;
 	private int vao;
@@ -41,14 +44,17 @@ public class Texture2DArrayMipmapping {
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
+	private boolean resetProjection = true;
 
 	private Camera camera;
 
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
 
+	GLContext ctx;
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
+	GLFWFramebufferSizeCallback fbCallback;
 
 	private void init() throws IOException {
 		glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
@@ -84,6 +90,19 @@ public class Texture2DArrayMipmapping {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
+		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
+			@Override
+			public void invoke(long window, int width, int height) {
+				if (width > 0
+						&& height > 0
+						&& (Texture2DArrayMipmapping.this.width != width || Texture2DArrayMipmapping.this.height != height)) {
+					Texture2DArrayMipmapping.this.width = width;
+					Texture2DArrayMipmapping.this.height = height;
+					Texture2DArrayMipmapping.this.resetProjection = true;
+				}
+			}
+		});
+
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
@@ -101,7 +120,7 @@ public class Texture2DArrayMipmapping {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
-		GLContext.createFromCurrent();
+		ctx = GLContext.createFromCurrent();
 
 		/* Create all needed GL resources */
 		createTexture();
@@ -119,8 +138,8 @@ public class Texture2DArrayMipmapping {
 	private void createTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D_ARRAY, this.tex);
-		int texSize = 256;
-		glTexStorage3D(GL_TEXTURE_2D_ARRAY, 3, GL_RGB8, texSize, texSize, 1);
+		int requiredMipmapLevels = MathUtil.mathLog2i(texSize);
+		glTexStorage3D(GL_TEXTURE_2D_ARRAY, requiredMipmapLevels, GL_RGB8, texSize, texSize, 1);
 		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
 		/* Generate some checker board pattern */
 		for (int y = 0; y < texSize; y++) {
@@ -235,6 +254,11 @@ public class Texture2DArrayMipmapping {
 		this.sampler = glGenSamplers();
 		glSamplerParameteri(this.sampler, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		/* Add maximum anisotropic filtering, if available */
+		if (ctx.getCapabilities().GL_EXT_texture_filter_anisotropic) {
+			int maxAnisotropy = glGetInteger(EXTTextureFilterAnisotropic.GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT);
+			glSamplerParameteri(this.sampler, EXTTextureFilterAnisotropic.GL_TEXTURE_MAX_ANISOTROPY_EXT, maxAnisotropy);
+		}
 	}
 
 	/**
@@ -256,6 +280,13 @@ public class Texture2DArrayMipmapping {
 				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
 		matrixByteBufferFloatView.rewind();
 		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
+	}
+
+	private void update() {
+		if (resetProjection) {
+			camera.setFrustumPerspective(60.0f, (float) width / height, 0.01f, 100.0f);
+			resetProjection = false;
+		}
 	}
 
 	private void render() {
@@ -283,6 +314,7 @@ public class Texture2DArrayMipmapping {
 			glViewport(0, 0, width, height);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+			update();
 			render();
 
 			glfwSwapBuffers(window);
