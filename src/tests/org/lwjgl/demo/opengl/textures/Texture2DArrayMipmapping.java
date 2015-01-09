@@ -131,7 +131,6 @@ public class Texture2DArrayMipmapping {
 
 		/* Setup camera */
 		camera = new Camera();
-		camera.setFrustumPerspective(45.0f, 1.0f, 0.01f, 100.0f);
 		camera.setLookAt(new Vector3f(0.0f, 1.0f, 5.0f), new Vector3f(0.0f, 0.0f, 0.0f), new Vector3f(0.0f, 1.0f, 0.0f));
 	}
 
@@ -328,6 +327,7 @@ public class Texture2DArrayMipmapping {
 
 			errCallback.release();
 			keyCallback.release();
+			fbCallback.release();
 			glfwDestroyWindow(window);
 		} catch (Throwable t) {
 			t.printStackTrace();
