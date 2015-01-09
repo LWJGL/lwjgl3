@@ -59,9 +59,9 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"Draw multiple instances of a range of elements.",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-		GLint.IN("first", "the starting index in the enabled arrays"),
-		GLsizei.IN("count", "the number of indices to be rendered"),
-		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
+		GLint.IN("first", "the index of the first vertex to be rendered"),
+		GLsizei.IN("count", "the number of vertices to be rendered"),
+		GLsizei.IN("primcount", "the number of instances of the specified range of vertices to be rendered")
 	)
 
 	GLvoid.func(
@@ -75,7 +75,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
 	)
 
