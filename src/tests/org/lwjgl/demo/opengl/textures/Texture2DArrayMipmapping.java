@@ -135,7 +135,7 @@ public class Texture2DArrayMipmapping {
 	private void createTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D_ARRAY, this.tex);
-		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, 1, 0, GL_RGB,
+		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, 2, 0, GL_RGB,
 				GL_UNSIGNED_BYTE, (ByteBuffer) null);
 		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
 		int checkSize = 5;
@@ -151,6 +151,18 @@ public class Texture2DArrayMipmapping {
 		}
 		bb.flip();
 		glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, texSize, texSize, 1, GL_RGB, GL_UNSIGNED_BYTE, bb);
+		/* Generate some diagonal lines for the second layer */
+		for (int y = 0; y < texSize; y++) {
+			for (int x = 0; x < texSize; x++) {
+				if ((x + y) / 3 % 3 == 0) {
+					bb.put((byte) 255).put((byte) 255).put((byte) 255);
+				} else {
+					bb.put((byte) 0).put((byte) 0).put((byte) 0);
+				}
+			}
+		}
+		bb.flip();
+		glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 1, texSize, texSize, 1, GL_RGB, GL_UNSIGNED_BYTE, bb);
 		glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
 		glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 	}
