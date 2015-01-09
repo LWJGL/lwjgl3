@@ -120,20 +120,20 @@ public class Texture2DArrayMipmapping {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D_ARRAY, this.tex);
 		int texSize = 256;
-		glTexStorage3D(GL_TEXTURE_2D_ARRAY, 3, GL_RGBA8, texSize, texSize, 1);
-		ByteBuffer bb = BufferUtils.createByteBuffer(4 * texSize * texSize);
+		glTexStorage3D(GL_TEXTURE_2D_ARRAY, 3, GL_RGB8, texSize, texSize, 1);
+		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
 		/* Generate some checker board pattern */
 		for (int y = 0; y < texSize; y++) {
 			for (int x = 0; x < texSize; x++) {
 				if (((x + y) % 2) == 0) {
-					bb.put((byte) 255).put((byte) 255).put((byte) 255).put((byte) 255);
+					bb.put((byte) 255).put((byte) 255).put((byte) 255);
 				} else {
-					bb.put((byte) 0).put((byte) 0).put((byte) 0).put((byte) 1);
+					bb.put((byte) 0).put((byte) 0).put((byte) 0);
 				}
 			}
 		}
 		bb.flip();
-		glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, texSize, texSize, 1, GL_RGBA, GL_UNSIGNED_BYTE, bb);
+		glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, 0, texSize, texSize, 1, GL_RGB, GL_UNSIGNED_BYTE, bb);
 		glGenerateMipmap(GL_TEXTURE_2D_ARRAY);
 		glBindTexture(GL_TEXTURE_2D_ARRAY, 0);
 	}
