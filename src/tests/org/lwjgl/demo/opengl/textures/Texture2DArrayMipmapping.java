@@ -127,7 +127,7 @@ public class Texture2DArrayMipmapping {
 		createSampler();
 		createVao();
 		createRasterProgram();
-		initRasterProgram();
+		initProgram();
 
 		/* Setup camera */
 		camera = new Camera();
@@ -237,9 +237,9 @@ public class Texture2DArrayMipmapping {
 	}
 
 	/**
-	 * Initialize the raster program.
+	 * Initialize the shader program.
 	 */
-	private void initRasterProgram() {
+	private void initProgram() {
 		glUseProgram(this.program);
 		viewMatrixUniform = glGetUniformLocation(this.program, "viewMatrix");
 		projectionMatrixUniform = glGetUniformLocation(this.program, "projMatrix");
@@ -247,7 +247,7 @@ public class Texture2DArrayMipmapping {
 	}
 
 	/**
-	 * Create the sampler to sample the framebuffer texture within the shader.
+	 * Create the sampler to sample the texture within the shader.
 	 */
 	private void createSampler() {
 		this.sampler = glGenSamplers();
