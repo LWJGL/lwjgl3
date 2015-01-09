@@ -27,7 +27,6 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL33.*;
-import static org.lwjgl.opengl.GL42.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public class Texture2DArrayMipmapping {
@@ -80,8 +79,8 @@ public class Texture2DArrayMipmapping {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
@@ -138,7 +137,8 @@ public class Texture2DArrayMipmapping {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D_ARRAY, this.tex);
 		int requiredMipmapLevels = MathUtil.mathLog2i(texSize);
-		glTexStorage3D(GL_TEXTURE_2D_ARRAY, requiredMipmapLevels, GL_RGB8, texSize, texSize, 1);
+		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, requiredMipmapLevels, 0, GL_RGB,
+				GL_UNSIGNED_BYTE, (ByteBuffer) null);
 		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
 		/* Generate some checker board pattern */
 		for (int y = 0; y < texSize; y++) {

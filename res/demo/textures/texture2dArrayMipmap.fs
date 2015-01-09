@@ -1,4 +1,4 @@
-#version 420 core
+#version 330 core
 #extension GL_EXT_texture_array : enable
 
 in vec2 texcoord;
