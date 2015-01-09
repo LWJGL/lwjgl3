@@ -12,7 +12,6 @@ import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.EXTTextureFilterAnisotropic;
 import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.MathUtil;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -136,8 +135,7 @@ public class Texture2DArrayMipmapping {
 	private void createTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D_ARRAY, this.tex);
-		int requiredMipmapLevels = MathUtil.mathLog2i(texSize);
-		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, requiredMipmapLevels, 0, GL_RGB,
+		glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, texSize, texSize, 1, 0, GL_RGB,
 				GL_UNSIGNED_BYTE, (ByteBuffer) null);
 		ByteBuffer bb = BufferUtils.createByteBuffer(3 * texSize * texSize);
 		/* Generate some checker board pattern */
