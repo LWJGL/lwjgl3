@@ -306,6 +306,7 @@ public class HybridDemoSsbo {
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 2, GL_FLOAT, false, 0, 0L);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 	}
 
@@ -327,6 +328,7 @@ public class HybridDemoSsbo {
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * (3 + 3), 0L);
 		glEnableVertexAttribArray(1);
 		glVertexAttribPointer(1, 3, GL_FLOAT, false, 4 * (3 + 3), 4 * 3);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		this.vaoScene = vao;
 	}
