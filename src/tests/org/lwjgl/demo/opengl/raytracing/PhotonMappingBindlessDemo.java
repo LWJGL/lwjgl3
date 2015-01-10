@@ -259,6 +259,8 @@ public class PhotonMappingBindlessDemo {
 
 		/* Create all needed GL resources */
 		createSampler();
+		createImageHandlesUbo();
+		createSamplerHandlesUbo();
 		createPhotonMapTextures();
 		createPhotonTraceProgram();
 		initPhotonTraceProgram();
@@ -512,14 +514,19 @@ public class PhotonMappingBindlessDemo {
 		/* Clear them */
 		clearPhotonMapTextures();
 		/* Create SSBO with bindless image handles */
-		createImageHandlesUbo();
+		updateImageHandlesUbo();
 		/* Create UBO with bindless sampler handles */
-		createSamplerHandlesUbo();
+		updateSamplerHandlesUbo();
 	}
 
 	private void createImageHandlesUbo() {
 		this.imageHandlesUbo = glGenBuffers();
 		glBindBuffer(GL_UNIFORM_BUFFER, imageHandlesUbo);
+		glBufferData(GL_UNIFORM_BUFFER, photonMapTextures.length * 8, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	}
+
+	private void updateImageHandlesUbo() {
 		ByteBuffer ssboData = BufferUtils.createByteBuffer(photonMapTextures.length * 8);
 		LongBuffer lv = ssboData.asLongBuffer();
 		for (int i = 0; i < photonMapTextures.length; i++) {
@@ -527,19 +534,26 @@ public class PhotonMappingBindlessDemo {
 			long bindlessImageHandle = info.bindlessImageHandle;
 			lv.put(bindlessImageHandle);
 		}
-		glBufferData(GL_UNIFORM_BUFFER, ssboData, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, this.imageHandlesUbo);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, photonMapTextures.length * 8, ssboData);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	}
 
 	private void createSamplerHandlesUbo() {
 		this.samplersUbo = glGenBuffers();
 		glBindBuffer(GL_UNIFORM_BUFFER, samplersUbo);
+		glBufferData(GL_UNIFORM_BUFFER, photonMapTextures.length * 8, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, 0);
+	}
+
+	private void updateSamplerHandlesUbo() {
 		ByteBuffer ssboData = BufferUtils.createByteBuffer(photonMapTextures.length * 8);
 		LongBuffer lv = ssboData.asLongBuffer();
 		for (int i = 0; i < photonMapTextures.length; i++) {
 			lv.put(photonMapTextures[i].bindlessTextureAndSamplerHandle);
 		}
-		glBufferData(GL_UNIFORM_BUFFER, ssboData, GL_STATIC_DRAW);
+		glBindBuffer(GL_UNIFORM_BUFFER, samplersUbo);
+		glBufferSubData(GL_UNIFORM_BUFFER, 0, photonMapTextures.length * 8, ssboData);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
 	}
 
