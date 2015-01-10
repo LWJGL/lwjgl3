@@ -38,9 +38,9 @@ import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Photon mapping using cubemap textures.
+ * Photon mapping using bindless cube map textures.
  * <p>
- * The same as {@link PhotonMappingDemo} BUT it uses ARB_bindless_textures to
+ * The same as {@link PhotonMappingDemo} BUT it uses ARB_bindless_texture to
  * have an array of cube map textures without the restriction of equal
  * dimensions for each cube map. We want each cube map to have the dimension in
  * proportion to the actual size of the cube it is mapped to.
@@ -570,13 +570,7 @@ public class PhotonMappingBindlessDemo {
 				int texBuffer = glGenBuffers();
 				glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
 				int size = 2 * info.width * info.height;
-				ByteBuffer bb = BufferUtils.createByteBuffer(size);
-				while (bb.hasRemaining()) {
-					float rnd = (float) Math.random();
-					bb.put((byte) (((int) (rnd * 255.0f)) & 0xFF));
-				}
-				bb.flip();
-				glBufferData(GL_PIXEL_UNPACK_BUFFER, size, bb, GL_STATIC_DRAW);
+				glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
 				glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, info.openGlHandle);
 				for (int f = 0; f < 6; f++) {
