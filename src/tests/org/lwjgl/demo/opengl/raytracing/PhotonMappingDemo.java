@@ -201,12 +201,10 @@ public class PhotonMappingDemo {
 					PhotonMappingDemo.this.photonsPerFrame *= 2;
 					PhotonMappingDemo.this.photonsPerFrame = Math.min(PhotonMappingDemo.this.photonsPerFrame,
 							maxPhotonsPerFrame);
-					PhotonMappingDemo.this.clearPhotonMapTexture = true;
 					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
 				} else if (key == GLFW_KEY_LEFT) {
 					PhotonMappingDemo.this.photonsPerFrame /= 2;
 					PhotonMappingDemo.this.photonsPerFrame = Math.max(PhotonMappingDemo.this.photonsPerFrame, 4);
-					PhotonMappingDemo.this.clearPhotonMapTexture = true;
 					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
 				}
 			}

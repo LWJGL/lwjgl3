@@ -212,13 +212,11 @@ public class PhotonMappingBindlessDemo {
 					PhotonMappingBindlessDemo.this.photonsPerFrame *= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.min(
 							PhotonMappingBindlessDemo.this.photonsPerFrame, MAX_PHOTONS_PER_FRAME);
-					PhotonMappingBindlessDemo.this.clearPhotonMapTexture = true;
 					System.out.println("Photons per frame: " + PhotonMappingBindlessDemo.this.photonsPerFrame);
 				} else if (key == GLFW_KEY_LEFT) {
 					PhotonMappingBindlessDemo.this.photonsPerFrame /= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.max(
 							PhotonMappingBindlessDemo.this.photonsPerFrame, Math.max(workGroupSizeX, workGroupSizeY));
-					PhotonMappingBindlessDemo.this.clearPhotonMapTexture = true;
 					System.out.println("Photons per frame: " + PhotonMappingBindlessDemo.this.photonsPerFrame);
 				}
 			}
