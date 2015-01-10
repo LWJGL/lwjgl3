@@ -643,7 +643,7 @@ public class PhotonMappingBindlessDemo {
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		int samplersResourceIndex = glGetProgramResourceIndex(photonTraceProgram, GL_UNIFORM_BLOCK, "Samplers");
-		glGetProgramResource(photonTraceProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
+		glGetProgramResource(rasterProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
 		samplersUboBinding = params.get(0);
 	}
 
