@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 420
+#version 400
 #extension GL_NV_bindless_texture : require
 
 #define MAX_BOXES 128
 
-layout (binding = 0) uniform Samplers {
+uniform Samplers {
   samplerCube samplers[MAX_BOXES];
 };
 

@@ -106,6 +106,7 @@ public class PhotonMappingBindlessDemo {
 	private int lightRadiusUniform;
 	private int boxesSsboBinding;
 	private int imagesUboBinding;
+	private int samplersUboBinding;
 
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
@@ -637,6 +638,13 @@ public class PhotonMappingBindlessDemo {
 			throw new AssertionError("Could not link program");
 		}
 		this.rasterProgram = program;
+
+		IntBuffer props = BufferUtils.createIntBuffer(1);
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		props.put(0, GL_BUFFER_BINDING);
+		int samplersResourceIndex = glGetProgramResourceIndex(photonTraceProgram, GL_UNIFORM_BLOCK, "Samplers");
+		glGetProgramResource(photonTraceProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
+		samplersUboBinding = params.get(0);
 	}
 
 	private void initRasterProgram() {
@@ -749,9 +757,9 @@ public class PhotonMappingBindlessDemo {
 
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
-		glBindBufferBase(GL_UNIFORM_BUFFER, 0, samplersUbo);
+		glBindBufferBase(GL_UNIFORM_BUFFER, samplersUboBinding, samplersUbo);
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * 6, boxes.length / 2);
-		glBindBufferBase(GL_UNIFORM_BUFFER, 0, 0);
+		glBindBufferBase(GL_UNIFORM_BUFFER, samplersUboBinding, 0);
 		glBindVertexArray(0);
 		glUseProgram(0);
 	}

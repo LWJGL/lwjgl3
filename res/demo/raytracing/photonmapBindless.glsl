@@ -2,8 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 430 core
+#version 400 core
 #extension GL_ARB_bindless_texture : enable
+#extension GL_ARB_shader_image_size : enable
+#extension GL_ARB_shader_storage_buffer_object : enable
+#extension GL_ARB_shader_image_load_store : enable
+#extension GL_ARB_compute_shader : enable
 
 uniform float time;
 uniform vec3 lightCenterPosition;
@@ -14,14 +18,14 @@ struct box {
   vec3 max;
 };
 
-layout (std430, binding = 1) buffer Boxes
+layout (std430) buffer Boxes
 {
   box[] boxes;
 };
 
 #define MAX_BOXES 128
 
-layout (binding = 0) uniform Images {
+uniform Images {
   layout(rg16f) imageCube images[MAX_BOXES];
 };
 
