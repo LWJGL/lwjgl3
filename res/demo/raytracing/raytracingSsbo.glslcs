@@ -67,7 +67,7 @@ bool intersectBoxes(vec3 origin, vec3 dir, out hitinfo info) {
 vec4 trace(vec3 origin, vec3 dir) {
   hitinfo i;
   if (intersectBoxes(origin, dir, i)) {
-    float gray = 0.25 + float(i.bi) / 7.0;
+    float gray = 0.25 + (float(i.bi) / boxes.length()) * 0.75;
     return vec4(gray, gray, gray, 1.0);
   } else {
     return vec4(0.0);
