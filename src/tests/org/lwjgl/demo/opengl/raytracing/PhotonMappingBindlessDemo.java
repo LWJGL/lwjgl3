@@ -638,13 +638,6 @@ public class PhotonMappingBindlessDemo {
 			throw new AssertionError("Could not link program");
 		}
 		this.rasterProgram = program;
-
-		IntBuffer props = BufferUtils.createIntBuffer(1);
-		IntBuffer params = BufferUtils.createIntBuffer(1);
-		props.put(0, GL_BUFFER_BINDING);
-		int samplersResourceIndex = glGetProgramResourceIndex(rasterProgram, GL_UNIFORM_BLOCK, "Samplers");
-		glGetProgramResource(rasterProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
-		samplersUboBinding = params.get(0);
 	}
 
 	private void initRasterProgram() {
@@ -654,6 +647,13 @@ public class PhotonMappingBindlessDemo {
 		int cubeMapsUniform = glGetUniformLocation(rasterProgram, "cubeMaps");
 		glUniform1i(cubeMapsUniform, 0);
 		glUseProgram(0);
+		/* Get binding point of "Samplers" uniform block */
+		IntBuffer props = BufferUtils.createIntBuffer(1);
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		props.put(0, GL_BUFFER_BINDING);
+		int samplersResourceIndex = glGetProgramResourceIndex(rasterProgram, GL_UNIFORM_BLOCK, "Samplers");
+		glGetProgramResource(rasterProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
+		samplersUboBinding = params.get(0);
 	}
 
 	private void update() {
