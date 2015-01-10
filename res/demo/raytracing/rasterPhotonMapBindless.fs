@@ -5,7 +5,7 @@
 #version 420
 #extension GL_NV_bindless_texture : require
 
-#define MAX_BOXES 2
+#define MAX_BOXES 128
 
 layout (binding = 0) uniform Samplers {
   samplerCube samplers[MAX_BOXES];

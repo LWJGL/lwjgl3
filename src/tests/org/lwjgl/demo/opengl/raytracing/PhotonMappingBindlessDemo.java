@@ -600,7 +600,7 @@ public class PhotonMappingBindlessDemo {
 	}
 
 	/**
-	 * Create the sampler to sample the framebuffer texture within the shader.
+	 * Create the sampler to sample the cube map textures within the shader.
 	 */
 	private void createSampler() {
 		this.sampler = glGenSamplers();

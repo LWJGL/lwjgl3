@@ -19,7 +19,7 @@ layout (std430, binding = 1) buffer Boxes
   box[] boxes;
 };
 
-#define MAX_BOXES 32
+#define MAX_BOXES 128
 
 layout (binding = 0) uniform Images {
   layout(rg16f) imageCube images[MAX_BOXES];
