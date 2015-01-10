@@ -469,7 +469,7 @@ public class PhotonMappingBindlessDemo {
 			/* We can dynamically set the work group size! */
 			variableGroupSize = true;
 		}
-		if (staticWorkGroupSizeX > 1 && staticWorkGroupSizeY > 1) {
+		if (staticWorkGroupSizeX > 0 && staticWorkGroupSizeY > 0) {
 			/*
 			 * If the shader specified a work group size (if variable group size
 			 * is not available), use that.
