@@ -65,7 +65,11 @@ public class PhotonMappingBindlessDemo {
 			new Vector3f(-0.5f, 0.0f, -0.5f), new Vector3f(0.5f, 1.0f, 0.5f), new Vector3f(-5.1f, 0.0f, -5.0f),
 			new Vector3f(-5.0f, 5.0f, 5.0f), new Vector3f(5.0f, 0.0f, -5.0f), new Vector3f(5.1f, 5.0f, 5.0f),
 			new Vector3f(-5.0f, 0.0f, -5.1f), new Vector3f(5.0f, 5.0f, -5.0f), new Vector3f(-5.0f, 0.0f, 5.0f),
-			new Vector3f(5.0f, 5.0f, 5.1f), new Vector3f(-5.0f, 5.0f, -5.0f), new Vector3f(5.0f, 5.1f, 5.0f) };
+			new Vector3f(5.0f, 5.0f, 5.1f), new Vector3f(-5.0f, 5.0f, -5.0f), new Vector3f(5.0f, 5.1f, 5.0f),
+			new Vector3f(-2.5f, 0.0f, -1.5f), new Vector3f(-1.5f, 1.0f, -0.5f),
+			new Vector3f(-2.5f, 0.0f, 1.5f), new Vector3f(-1.5f, 1.0f, 2.5f),
+			new Vector3f(1.5f, 0.0f, 1.5f), new Vector3f(2.5f, 1.0f, 2.5f),
+			new Vector3f(1.5f, 0.0f, -2.5f), new Vector3f(2.5f, 1.0f, -1.5f)};
 
 	/**
 	 * The number of texels to use for one unit of length in the scene.
@@ -175,6 +179,7 @@ public class PhotonMappingBindlessDemo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
+		System.out.println("Press arrow 'r' to clear the photon map.");
 		System.out.println("Press arrow 'up' to increase photon map resolution.");
 		System.out.println("Press arrow 'down' to decrease the photon map resolution.");
 		System.out.println("Press arrow 'right' to increase number of photons per frame.");
@@ -194,13 +199,15 @@ public class PhotonMappingBindlessDemo {
 					PhotonMappingBindlessDemo.this.texelsPerUnit = Math.min(
 							PhotonMappingBindlessDemo.this.texelsPerUnit, MAX_TEXELS_PER_UNIT);
 					PhotonMappingBindlessDemo.this.recreatePhotonMapTextures = true;
-					System.out.println("Photon map resolution: " + PhotonMappingBindlessDemo.this.texelsPerUnit);
+					System.out.println("Photon map resolution (texels per unit): "
+							+ PhotonMappingBindlessDemo.this.texelsPerUnit);
 				} else if (key == GLFW_KEY_DOWN) {
 					PhotonMappingBindlessDemo.this.texelsPerUnit /= 2;
 					PhotonMappingBindlessDemo.this.texelsPerUnit = Math.max(
 							PhotonMappingBindlessDemo.this.texelsPerUnit, 4);
 					PhotonMappingBindlessDemo.this.recreatePhotonMapTextures = true;
-					System.out.println("Photon map resolution: " + PhotonMappingBindlessDemo.this.texelsPerUnit);
+					System.out.println("Photon map resolution (texels per unit): "
+							+ PhotonMappingBindlessDemo.this.texelsPerUnit);
 				} else if (key == GLFW_KEY_RIGHT) {
 					PhotonMappingBindlessDemo.this.photonsPerFrame *= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.min(
@@ -697,7 +704,7 @@ public class PhotonMappingBindlessDemo {
 		}
 
 		/* Rotate camera about Y axis. */
-		tmpVector.set((float) sin(-currRotationAboutY) * 3.0f, 2.0f, (float) cos(-currRotationAboutY) * 3.0f);
+		tmpVector.set((float) sin(-currRotationAboutY) * 4.0f, 2.0f, (float) cos(-currRotationAboutY) * 4.0f);
 		camera.setLookAt(tmpVector, cameraLookAt, cameraUp);
 
 		if (resetFramebuffer) {
