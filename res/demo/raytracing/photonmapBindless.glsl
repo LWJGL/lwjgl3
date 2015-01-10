@@ -3,11 +3,12 @@
  * License terms: http://lwjgl.org/license.php
  */
 #version 400 core
-#extension GL_ARB_bindless_texture : enable
-#extension GL_ARB_shader_image_size : enable
-#extension GL_ARB_shader_storage_buffer_object : enable
-#extension GL_ARB_shader_image_load_store : enable
-#extension GL_ARB_compute_shader : enable
+#extension GL_ARB_bindless_texture : require
+#extension GL_ARB_shader_image_size : require
+#extension GL_ARB_shader_storage_buffer_object : require
+#extension GL_ARB_shader_image_load_store : require
+#extension GL_ARB_compute_shader : require
+#extension GL_ARB_compute_variable_group_size : enable
 
 uniform float time;
 uniform vec3 lightCenterPosition;
@@ -49,13 +50,6 @@ struct hitinfo {
   float far;
   int bi;
 };
-
-/*
- * We need random values every now and then.
- * So, they will be precomputed for each ray we trace and
- * can be used by any function.
- */
-vec3 rand;
 
 vec2 intersectBox(vec3 origin, vec3 dir, const box b) {
   vec3 tMin = (b.min - origin) / dir;
@@ -165,7 +159,11 @@ void trace(vec3 origin, vec3 dir) {
   }
 }
 
-layout (local_size_x = 8, local_size_y = 8) in;
+#ifdef GL_ARB_compute_variable_group_size
+layout (local_size_variable) in;
+#else
+layout (local_size_x = 16, local_size_y = 8) in;
+#endif
 
 void main(void) {
   vec2 invId = vec2(gl_GlobalInvocationID.xy);
@@ -173,7 +171,7 @@ void main(void) {
   float rand2 = random(invId + vec2(641.51224, 423.178), time);
   float rand3 = random(invId - vec2(147.16414, 363.941), time);
   /* Set global 'rand' variable */
-  rand = vec3(rand1, rand2, rand3);
+  vec3 rand = vec3(rand1, rand2, rand3);
 
   /* Sample random sphere point */
   vec3 randSphere = randomSpherePoint(rand);

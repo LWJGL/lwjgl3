@@ -12,6 +12,7 @@ import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.ARBBindlessTexture;
 import org.lwjgl.opengl.ARBClearTexture;
+import org.lwjgl.opengl.ARBComputeVariableGroupSize;
 import org.lwjgl.opengl.GLContext;
 
 import java.io.IOException;
@@ -111,8 +112,9 @@ public class PhotonMappingBindlessDemo {
 	private int viewMatrixUniform;
 	private int projectionMatrixUniform;
 
-	private int workGroupSizeX;
-	private int workGroupSizeY;
+	private int workGroupSizeX = 8;
+	private int workGroupSizeY = 8;
+	private boolean variableGroupSize;
 
 	private Camera camera;
 	private float mouseDownX;
@@ -458,15 +460,30 @@ public class PhotonMappingBindlessDemo {
 
 	private void initPhotonTraceProgram() {
 		glUseProgram(photonTraceProgram);
+
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
 		glGetProgram(photonTraceProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
-		workGroupSizeX = workGroupSize.get(0);
-		workGroupSizeY = workGroupSize.get(1);
+		int staticWorkGroupSizeX = workGroupSize.get(0);
+		int staticWorkGroupSizeY = workGroupSize.get(1);
+		if (ctx.getCapabilities().GL_ARB_compute_variable_group_size) {
+			/* We can dynamically set the work group size! */
+			variableGroupSize = true;
+		}
+		if (staticWorkGroupSizeX > 1 && staticWorkGroupSizeY > 1) {
+			/*
+			 * If the shader specified a work group size (if variable group size
+			 * is not available), use that.
+			 */
+			workGroupSizeX = staticWorkGroupSizeX;
+			workGroupSizeY = staticWorkGroupSizeY;
+		}
+
 		timeUniform = glGetUniformLocation(photonTraceProgram, "time");
 		lightCenterPositionUniform = glGetUniformLocation(photonTraceProgram, "lightCenterPosition");
 		glUniform3f(lightCenterPositionUniform, lightCenterPosition.x, lightCenterPosition.y, lightCenterPosition.z);
 		lightRadiusUniform = glGetUniformLocation(photonTraceProgram, "lightRadius");
 		glUniform1f(lightRadiusUniform, lightRadius);
+
 		/* Query the binding point of the SSBO */
 		/*
 		 * First, obtain the "resource index" used for further queries on that
@@ -495,13 +512,13 @@ public class PhotonMappingBindlessDemo {
 		for (int i = 0; i < photonMapTextures.length; i++) {
 			TextureInfo info = new TextureInfo();
 			info.openGlHandle = textures.get(i);
-			glBindTexture(GL_TEXTURE_CUBE_MAP, info.openGlHandle);
 			Vector3f min = boxes[2 * i + 0];
 			Vector3f max = boxes[2 * i + 1];
 			float maxExtent = Math.max(Math.max(max.x - min.x, max.y - min.y), max.z - min.z);
 			int texSize = (int) (maxExtent * texelsPerUnit);
 			info.width = texSize;
 			info.height = texSize;
+			glBindTexture(GL_TEXTURE_CUBE_MAP, info.openGlHandle);
 			glTexStorage2D(GL_TEXTURE_CUBE_MAP, 1, GL_RG16F, texSize, texSize);
 			glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 			info.bindlessImageHandle = ARBBindlessTexture.glGetImageHandleARB(info.openGlHandle, 0, true, 0, GL_RG16F);
@@ -513,9 +530,9 @@ public class PhotonMappingBindlessDemo {
 		}
 		/* Clear them */
 		clearPhotonMapTextures();
-		/* Create SSBO with bindless image handles */
+		/* Update SSBO with bindless image handles */
 		updateImageHandlesUbo();
-		/* Create UBO with bindless sampler handles */
+		/* Update UBO with bindless sampler handles */
 		updateSamplerHandlesUbo();
 	}
 
@@ -732,7 +749,7 @@ public class PhotonMappingBindlessDemo {
 
 		/* Bind the SSBO containing our boxes */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, boxesSsboBinding, ssbo);
-		/* Bind the SSBO containing the bindless handles of our images */
+		/* Bind the UBO containing the bindless handles of our images */
 		glBindBufferBase(GL_UNIFORM_BUFFER, imagesUboBinding, imageHandlesUbo);
 
 		/* Compute appropriate invocation dimension. */
@@ -741,7 +758,12 @@ public class PhotonMappingBindlessDemo {
 		int worksizeY = mathRoundPoT(invocationsPerDimension);
 
 		/* Invoke the compute shader. */
-		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
+		if (variableGroupSize) {
+			ARBComputeVariableGroupSize.glDispatchComputeGroupSizeARB(worksizeX / workGroupSizeX, worksizeY
+					/ workGroupSizeY, 1, workGroupSizeX, workGroupSizeY, 1);
+		} else {
+			glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
+		}
 		/*
 		 * Synchronize all writes that the shader did on the photonMap cube map
 		 * array image before we later let OpenGL source texels from it when
@@ -769,7 +791,6 @@ public class PhotonMappingBindlessDemo {
 		Matrix4f projMatrix = camera.getProjectionMatrix();
 		matrixUniform(projectionMatrixUniform, projMatrix, false);
 
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
 		glBindBufferBase(GL_UNIFORM_BUFFER, samplersUboBinding, samplersUbo);
 		glDrawArraysInstanced(GL_TRIANGLES, 0, 6 * 6, boxes.length / 2);
@@ -782,6 +803,7 @@ public class PhotonMappingBindlessDemo {
 		while (glfwWindowShouldClose(window) == GL_FALSE) {
 			glfwPollEvents();
 			glViewport(0, 0, width, height);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			update();
 			trace();
