@@ -70,6 +70,7 @@ public class PhotonMappingBindlessDemo {
 	 * The number of texels to use for one unit of length in the scene.
 	 */
 	private static int INITIAL_TEXELS_PER_UNIT = 8;
+	private static int MAX_TEXELS_PER_UNIT = 128;
 
 	/**
 	 * The number of photons to trace when doing a single photonmap computation.
@@ -78,6 +79,7 @@ public class PhotonMappingBindlessDemo {
 	 * work items.
 	 */
 	private static int INITIAL_PHOTONS_PER_FRAME = 16;
+	private static int MAX_PHOTONS_PER_FRAME = 2048;
 
 	private GLContext ctx;
 
@@ -87,8 +89,6 @@ public class PhotonMappingBindlessDemo {
 	private boolean resetFramebuffer = true;
 	private boolean clearPhotonMapTexture = false;
 	private boolean recreatePhotonMapTextures = false;
-	private int maxTexelsPerUnit = 64;
-	private int maxPhotonsPerFrame = 2048;
 	private int texelsPerUnit = INITIAL_TEXELS_PER_UNIT;
 	private int photonsPerFrame = INITIAL_PHOTONS_PER_FRAME;
 
@@ -190,7 +190,7 @@ public class PhotonMappingBindlessDemo {
 				} else if (key == GLFW_KEY_UP) {
 					PhotonMappingBindlessDemo.this.texelsPerUnit *= 2;
 					PhotonMappingBindlessDemo.this.texelsPerUnit = Math.min(
-							PhotonMappingBindlessDemo.this.texelsPerUnit, maxTexelsPerUnit);
+							PhotonMappingBindlessDemo.this.texelsPerUnit, MAX_TEXELS_PER_UNIT);
 					PhotonMappingBindlessDemo.this.recreatePhotonMapTextures = true;
 					System.out.println("Photon map resolution: " + PhotonMappingBindlessDemo.this.texelsPerUnit);
 				} else if (key == GLFW_KEY_DOWN) {
@@ -202,7 +202,7 @@ public class PhotonMappingBindlessDemo {
 				} else if (key == GLFW_KEY_RIGHT) {
 					PhotonMappingBindlessDemo.this.photonsPerFrame *= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.min(
-							PhotonMappingBindlessDemo.this.photonsPerFrame, maxPhotonsPerFrame);
+							PhotonMappingBindlessDemo.this.photonsPerFrame, MAX_PHOTONS_PER_FRAME);
 					PhotonMappingBindlessDemo.this.clearPhotonMapTexture = true;
 					System.out.println("Photons per frame: " + PhotonMappingBindlessDemo.this.photonsPerFrame);
 				} else if (key == GLFW_KEY_LEFT) {
