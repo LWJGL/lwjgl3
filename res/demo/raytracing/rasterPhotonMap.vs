@@ -13,11 +13,11 @@ in vec3 boxCenter;
 in vec3 boxHalfSize;
 
 out vec3 positionOnUnitCube;
-out float level;
+flat out int level;
 
 void main(void) {
   positionOnUnitCube = vertexPosition;
-  level = float(gl_InstanceID);
+  level = gl_InstanceID;
   vec4 worldPosition = vec4(boxCenter + vertexPosition * boxHalfSize, 1.0);
   gl_Position = projectionMatrix * viewMatrix * worldPosition;
 }

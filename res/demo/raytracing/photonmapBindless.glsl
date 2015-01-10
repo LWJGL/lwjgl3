@@ -3,9 +3,7 @@
  * License terms: http://lwjgl.org/license.php
  */
 #version 430 core
-
-/* Cube map array. A single cube map for each box. */
-layout(binding = 1, rg16f) uniform imageCubeArray photonMaps;
+#extension GL_ARB_bindless_texture : enable
 
 uniform float time;
 uniform vec3 lightCenterPosition;
@@ -19,6 +17,12 @@ struct box {
 layout (std430, binding = 1) buffer Boxes
 {
   box[] boxes;
+};
+
+#define MAX_BOXES 32
+
+layout (binding = 0) uniform Images {
+  layout(rg16f) imageCube images[MAX_BOXES];
 };
 
 #define MAX_SCENE_BOUNDS 100.0
@@ -135,7 +139,6 @@ void trace(vec3 origin, vec3 dir) {
   hitinfo i;
   vec4 accumulated = vec4(0.0);
   vec4 attenuation = vec4(1.0);
-  ivec3 size = imageSize(photonMaps);
   if (intersectBoxes(origin, dir, i)) {
     box b = boxes[i.bi];
     vec3 hitPoint = origin + i.near * dir;
@@ -146,13 +149,15 @@ void trace(vec3 origin, vec3 dir) {
     attenuation *= dot(normal, -dir) * oneOverR2;
     /* Write into photon map */
     vec2 texCoord = texCoordForFace(hitPoint, b, fIndex);
-    ivec3 index = ivec3(texCoord * size.xy, i.bi * 6 + fIndex);
+    layout(rg16f) imageCube image = images[i.bi];
+    ivec2 size = imageSize(image);
+    ivec3 index = ivec3(texCoord * size.xy, fIndex);
     float color = attenuation.r * LIGHT_BASE_INTENSITY;
-    vec2 oldColor = imageLoad(photonMaps, index).rg;
+    vec2 oldColor = imageLoad(image, index).rg;
     float numPhotons = oldColor.g;
     float blendFactor = numPhotons / (numPhotons + 1.0);
     float blended = mix(color, oldColor.r, blendFactor);
-    imageStore(photonMaps, index, vec4(blended, numPhotons + 1.0, 0.0, 1.0));
+    imageStore(image, index, vec4(blended, numPhotons + 1.0, 0.0, 1.0));
   }
 }
 
