@@ -113,7 +113,7 @@ vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
     return vec2(1.0 - res.x, 1.0 - res.y);
   } else if (fIndex == CUBE_FACE_NEG_X) {
     vec2 res = (hit.zy - b.min.zy) / (b.max.zy - b.min.zy);
-    return vec2(res.x, res.y);
+    return vec2(res.x, 1.0 - res.y);
     
   } else if (fIndex == CUBE_FACE_POS_Y) {
     vec2 res = (hit.xz - b.min.xz) / (b.max.xz - b.min.xz);
@@ -127,7 +127,7 @@ vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
     return vec2(res.x, 1.0 - res.y);
   } else {
     vec2 res = (hit.xy - b.min.xy) / (b.max.xy - b.min.xy);
-    return vec2(1.0 - res.x, res.y);
+    return vec2(1.0 - res.x, 1.0 - res.y);
   }
 }
 

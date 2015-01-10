@@ -129,14 +129,14 @@ public class PhotonMappingBindlessDemo {
 	private float rotationAboutY = 0.8f;
 
 	private long firstTime;
-	private float lightRadius = 0.4f;
+	private float lightRadius = 0.2f;
 
 	private Vector3f tmpVector = new Vector3f();
 	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
-	private Vector3f lightCenterPosition = new Vector3f(2.5f, 2.9f, 3);
+	private Vector3f lightCenterPosition = new Vector3f(2.5f, 1.4f, 3);
 	private ByteBuffer clearTexBuffer = BufferUtils.createByteBuffer(4);
 
 	GLFWErrorCallback errCallback;
