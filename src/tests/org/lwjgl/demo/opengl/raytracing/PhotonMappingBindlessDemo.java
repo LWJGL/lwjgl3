@@ -569,7 +569,7 @@ public class PhotonMappingBindlessDemo {
 				TextureInfo info = photonMapTextures[i];
 				int texBuffer = glGenBuffers();
 				glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
-				int size = 2 * info.width * info.height;
+				int size = 2 * 2 * info.width * info.height;
 				glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
 				glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
 				glBindTexture(GL_TEXTURE_CUBE_MAP, info.openGlHandle);
