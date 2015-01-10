@@ -675,8 +675,6 @@ public class PhotonMappingBindlessDemo {
 		glUseProgram(rasterProgram);
 		viewMatrixUniform = glGetUniformLocation(rasterProgram, "viewMatrix");
 		projectionMatrixUniform = glGetUniformLocation(rasterProgram, "projectionMatrix");
-		int cubeMapsUniform = glGetUniformLocation(rasterProgram, "cubeMaps");
-		glUniform1i(cubeMapsUniform, 0);
 		glUseProgram(0);
 		/* Get binding point of "Samplers" uniform block */
 		IntBuffer props = BufferUtils.createIntBuffer(1);
