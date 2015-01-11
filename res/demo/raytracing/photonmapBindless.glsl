@@ -31,7 +31,7 @@ uniform Images {
 };
 
 #define MAX_SCENE_BOUNDS 100.0
-#define EPSILON 0.0001
+#define EPSILON 0.001
 #define LIGHT_BASE_INTENSITY 12.0
 
 #define CUBE_FACE_POS_X 0
@@ -79,19 +79,21 @@ bool intersectBoxes(vec3 origin, vec3 dir, out hitinfo info) {
   return found;
 }
 
-int faceIndex(vec3 hit, const box b) {
-  if (hit.x < b.min.x + EPSILON)
+int faceIndex(vec3 hit, vec3 dir, const box b) {
+  if (dir.x > 0.0 && abs(hit.x - b.min.x) < EPSILON)
     return CUBE_FACE_NEG_X;
-  else if (hit.x > b.max.x - EPSILON)
+  else if (dir.x < 0.0 && abs(hit.x - b.max.x) < EPSILON)
     return CUBE_FACE_POS_X;
-  else if (hit.y < b.min.y + EPSILON)
+  else if (dir.y > 0.0 && abs(hit.y - b.min.y) < EPSILON)
     return CUBE_FACE_NEG_Y;
-  else if (hit.y > b.max.y - EPSILON)
+  else if (dir.y < 0.0 && abs(hit.y - b.max.y) < EPSILON)
     return CUBE_FACE_POS_Y;
-  else if (hit.z < b.min.z + EPSILON)
+  else if (dir.z > 0.0 && abs(hit.z - b.min.z) < EPSILON)
     return CUBE_FACE_NEG_Z;
-  else
+  else if (dir.z < 0.0 && abs(hit.z - b.max.z) < EPSILON)
     return CUBE_FACE_POS_Z;
+  else
+    return -1;
 }
 
 vec3 normalForFace(int fIndex) {
@@ -133,6 +135,7 @@ vec2 texCoordForFace(vec3 hit, const box b, int fIndex) {
   }
 }
 
+
 void trace(vec3 origin, vec3 dir) {
   hitinfo i;
   vec4 accumulated = vec4(0.0);
@@ -140,7 +143,10 @@ void trace(vec3 origin, vec3 dir) {
   if (intersectBoxes(origin, dir, i)) {
     box b = boxes[i.bi];
     vec3 hitPoint = origin + i.near * dir;
-    int fIndex = faceIndex(hitPoint, b);
+    int fIndex = faceIndex(hitPoint, dir, b);
+    if (fIndex == -1) {
+      return;
+    }
     vec3 normal = normalForFace(fIndex);
     vec3 lightToSurface = origin - hitPoint;
     float oneOverR2 = 1.0 / dot(lightToSurface, lightToSurface);
