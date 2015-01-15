@@ -16,7 +16,7 @@ import static org.lwjgl.LWJGLUtil.*;
 public final class Sys {
 
 	/** The native library name */
-	private static final String JNI_LIBRARY_NAME = "lwjgl";
+	private static final String JNI_LIBRARY_NAME = System.getProperty("org.lwjgl.libname", "lwjgl");
 
 	/** Current version of library. */
 	public static final int

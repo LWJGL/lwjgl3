@@ -108,9 +108,12 @@ LWJGL can be configured at runtime with system properties. There are two types o
 
 The supported properties are:
 
+	* org.lwjgl.libname [STATIC]
+		Can be used to override the LWJGL library name. It can also be an absolute path.
+
 	* org.lwjgl.librarypath [DYNAMIC]
-	    Overrides java.library.path. It may contain one or more directory paths, separated by the platform
-	    path separator (: or ;).
+	    Takes priority over java.library.path. It may contain one or more directory paths, separated by the
+	    platform path separator (: or ;).
 
 	* org.lwjgl.util.Debug [STATIC]
 		Set to true to enable LWJGL's debug mode. There will be logged messages on stderr and extra runtime
@@ -134,7 +137,7 @@ The supported properties are:
 	* org.lwjgl.openal.libname [DYNAMIC]
 	* org.lwjgl.opencl.libname [DYNAMIC]
 	* org.lwjgl.opengl.libname [DYNAMIC]
-		Can be used to override the library name of the corresponding library.
+		Can be used to override the library name of the corresponding library. It can also be an absolute path.
 	* org.lwjgl.opengl.maxVersion [STATIC]
 		Can be used to limit the maximum available OpenGL version. This can be useful to ensure
 		that an application has not accidentally used features only available in a higher OpenGL
