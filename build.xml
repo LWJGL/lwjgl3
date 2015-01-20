@@ -237,6 +237,9 @@
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
+		<condition property="osxargs" value="-XstartOnFirstThread" else="">
+			<isset property="platform.macosx"/>
+		</condition>
 		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
 				<pathelement path="${lib}/jcommander.jar"/>
@@ -246,6 +249,7 @@
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Djava.library.path=${library.path}"/>
+			<jvmarg line="${osxargs}"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
 		</testng>
