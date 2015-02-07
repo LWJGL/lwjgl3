@@ -80,7 +80,7 @@ val GLDEBUGPROCAMD = CallbackType(callback(
 	GLenum.IN("category", "the message category"),
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	GLvoid_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
 	samConstructor = "AMDDebugOutput"
 ) {
@@ -96,7 +96,7 @@ val GLDEBUGPROCARB = CallbackType(callback(
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ GLvoid_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
 	samConstructor = "ARBDebugOutput"
 ) {
@@ -119,7 +119,7 @@ val GLDEBUGPROC = CallbackType(callback(
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharASCII_p.IN("message", "a pointer to the message string representation"),
+	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ GLvoid_p.IN(
 		"userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallbackARB() or KHRDebug##glDebugMessageCallback()"
