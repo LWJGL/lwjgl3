@@ -286,11 +286,17 @@ class NativeClassFunction(
 					if ( !hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) } )
 						param.error("An AutoSize for Return parameter does not exist")
 
-					val lengthParam = paramMap[returnMod.lengthParam]
-					if ( lengthParam == null )
-						param.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
-					else if ( !lengthParam.nativeType.mapping.isSizePointer )
-						param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+					val lengthParamName = returnMod.lengthParam
+					if ( lengthParamName == null ) {
+						if ( param.nativeType !is CharSequenceType )
+							param.error("Null-terminated Return parameter must be a CharSequenceType")
+					} else {
+						val lengthParam = paramMap[returnMod.lengthParam]
+						if ( lengthParam == null )
+							param.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
+						else if ( !lengthParam.nativeType.mapping.isSizePointer )
+							param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+					}
 				}
 			}
 
@@ -860,7 +866,9 @@ class NativeClassFunction(
 					transforms.remove(maxLengthParam)
 
 					// Hide length parameter and use APIBuffer
-					transforms[paramMap[returnMod.lengthParam]!!] = BufferReturnLengthTransform
+					val lengthParam = returnMod.lengthParam
+					if ( lengthParam != null )
+						transforms[paramMap[lengthParam]] = BufferReturnLengthTransform
 
 					// Hide target parameter and use APIBuffer
 					transforms[it] = BufferReturnParamTransform
@@ -868,10 +876,16 @@ class NativeClassFunction(
 					// Transform void to the buffer type
 					val returnType: String
 					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam, it.nativeType.charMapping.charset)
+						transforms[returns] = if ( lengthParam != null )
+							BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
+						else
+							BufferReturnNTTransform(it,
+								if ( 4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes ) "(int)${maxLengthParam.name}" else maxLengthParam.name,
+								it.nativeType.charMapping.charset
+							)
 						returnType = "String"
 					} else {
-						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam)
+						transforms[returns] = BufferReturnTransform(it, lengthParam!!)
 						returnType = "Buffer"
 					}
 

@@ -240,6 +240,16 @@ private class BufferReturnTransform(
 	}
 }
 
+private class BufferReturnNTTransform(
+	val outParam: Parameter,
+	val maxLengthParam: String,
+	val encoding: String
+): FunctionTransform<ReturnValue> {
+	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
+	override fun transformCall(param: ReturnValue, original: String): String =
+		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address() + ${outParam.name}, $maxLengthParam));"
+}
+
 private class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
 		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
