@@ -72,6 +72,14 @@ public class APIBuffer {
 		return address;
 	}
 
+	/**
+	 * Returns the memory address of the specified {@code offset} or {@link MemoryUtil#NULL NULL} if the specified {@code value} is null. This address may
+	 * change after a call to one of the {@code <type>Param()} methods.
+	 */
+	public long addressSafe(Object value, int offset) {
+		return value == null ? NULL : address() + offset;
+	}
+
 	/** Returns the {@link ByteBuffer} that backs this {@link APIBuffer}. */
 	public ByteBuffer buffer() {
 		return buffer;
@@ -203,6 +211,37 @@ public class APIBuffer {
 	/** Sets a pointer value at the specified index of the pointer buffer that starts at the specified offset. */
 	public void pointerParam(int offset, int index, long value) {
 		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
+	}
+
+	/** Ensures space for the specified string encoded in ASCII, encodes the string at the allocated offset and returns that offset. */
+	public int stringParamASCII(CharSequence value, boolean nullTerminated) {
+		if ( value == null )
+			return -1;
+
+		int offset = bufferParam(value.length() + (nullTerminated ? 1 : 0));
+		memEncodeASCII(value, nullTerminated, buffer, offset);
+		return offset;
+	}
+
+	/** Ensures space for the specified string encoded in UTF-8, encodes the string at the allocated offset and returns that offset. */
+	public int stringParamUTF8(CharSequence value, boolean nullTerminated) {
+		if ( value == null )
+			return -1;
+
+		int encodedLen = memEncodedLengthUTF8(value);
+		int offset = bufferParam(encodedLen + (nullTerminated ? 1 : 0));
+		memEncodeUTF8(value, nullTerminated, buffer, offset);
+		return offset;
+	}
+
+	/** Ensures space for the specified string encoded in UTF-16, encodes the string at the allocated offset and returns that offset. */
+	public int stringParamUTF16(CharSequence value, boolean nullTerminated) {
+		if ( value == null )
+			return -1;
+
+		int offset = bufferParam((value.length() + (nullTerminated ? 1 : 0)) << 1);
+		memEncodeUTF16(value, nullTerminated, buffer, offset);
+		return offset;
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------

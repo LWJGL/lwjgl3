@@ -824,7 +824,7 @@ class NativeClassFunction(
 					transforms[it] = AutoSizeCharSequenceTransform(param)
 				}
 
-				transforms[it] = CharSequenceTransform
+				transforms[it] = CharSequenceTransform(!hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) })
 				true
 			}
 		} != 0 )

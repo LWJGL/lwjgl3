@@ -10,7 +10,6 @@ import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProviderLocal;
 
-import java.nio.ByteBuffer;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -121,11 +120,12 @@ public final class CL {
 
 			@Override
 			public long getFunctionAddress(CharSequence functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
+				APIBuffer __buffer = apiBuffer();
+				__buffer.stringParamASCII(functionName, true);
 
 				long address = platform == NULL
-					? nclGetExtensionFunctionAddress(memAddress(nameBuffer), clGetExtensionFunctionAddress)
-					: nclGetExtensionFunctionAddressForPlatform(platform, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform);
+					? nclGetExtensionFunctionAddress(__buffer.address(), clGetExtensionFunctionAddress)
+					: nclGetExtensionFunctionAddressForPlatform(platform, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
 
 				if ( address == NULL )
 					address = OPENCL.getFunctionAddress(functionName);
@@ -135,8 +135,10 @@ public final class CL {
 
 			@Override
 			public long getFunctionAddress(long handle, CharSequence functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
-				return nclGetExtensionFunctionAddressForPlatform(handle, memAddress(nameBuffer), clGetExtensionFunctionAddressForPlatform);
+				APIBuffer __buffer = apiBuffer();
+				__buffer.stringParamASCII(functionName, true);
+
+				return nclGetExtensionFunctionAddressForPlatform(handle, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
 			}
 
 			@Override

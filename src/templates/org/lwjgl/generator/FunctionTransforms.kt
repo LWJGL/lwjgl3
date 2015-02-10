@@ -75,9 +75,9 @@ private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): Fu
 	override fun transformCall(param: Parameter, original: String): String {
 		// Replace with expression
 		return if ( bufferParam has nullable )
-			"${bufferParam.name} == null ? 0 : ${bufferParam.name}.length()"
+			"${bufferParam.name} == null ? 0 : ${bufferParam.name}Encoded.remaining()"
 		else
-			"${bufferParam.name}.length()"
+			"${bufferParam.name}EncodedLen"
 	}
 }
 
@@ -119,10 +119,19 @@ private class ExpressionLocalTransform(
 	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\t${qtype.asJavaMethodParam} = $expression;")
 }
 
-private val CharSequenceTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, PreFunctionTransform<Parameter> {
+private class CharSequenceTransform(
+	val nullTerminated: Boolean
+): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
-	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\tByteBuffer ${qtype.name}Encoded = memEncode${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name});")
-	override fun transformCall(param: Parameter, original: String) = "memAddress${if ( param has nullable ) "Safe" else ""}(${param.name}Encoded)"
+	override fun transformCall(param: Parameter, original: String) = if ( param has nullable )
+		"$API_BUFFER.addressSafe(${param.name}, ${param.name}Encoded)"
+	else
+		"$API_BUFFER.address() + ${param.name}Encoded"
+	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
+		writer.println("\t\tint ${qtype.name}Encoded = $API_BUFFER.stringParam${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated);")
+		if ( !nullTerminated )
+			writer.println("\t\tint ${qtype.name}EncodedLen = $API_BUFFER.getOffset() - ${qtype.name}Encoded;")
+	}
 }
 
 private val StringReturnTransform = object: FunctionTransform<ReturnValue> {

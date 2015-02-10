@@ -75,8 +75,10 @@ public final class ALC {
 
 			@Override
 			public long getFunctionAddress(long handle, CharSequence functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
-				long address = nalcGetProcAddress(handle, memAddress(nameBuffer), alcGetProcAddress);
+				APIBuffer __buffer = apiBuffer();
+				__buffer.stringParamASCII(functionName, true);
+
+				long address = nalcGetProcAddress(handle, __buffer.address(), alcGetProcAddress);
 				if ( address == NULL )
 					LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
 
@@ -198,8 +200,8 @@ public final class ALC {
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
-			ByteBuffer nameBuffer = memEncodeASCII(extName);
-			if ( nalcIsExtensionPresent(device, memAddress(nameBuffer), IsExtensionPresent) )
+			__buffer.reset().stringParamASCII(extName, true);
+			if ( nalcIsExtensionPresent(device, __buffer.address(), IsExtensionPresent) )
 				supportedExtensions.add(extName);
 		}
 

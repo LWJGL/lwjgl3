@@ -6,6 +6,8 @@ package org.lwjgl.system.windows;
 
 import org.testng.annotations.Test;
 
+import java.nio.ByteBuffer;
+
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinGDI.*;
@@ -44,10 +46,10 @@ public class WindowsTest {
 	}
 
 	public void testDefWindowProc() {
-		long user32 = GetModuleHandle(memEncodeUTF16("User32.dll"));
+		long user32 = GetModuleHandle("User32.dll");
 		assertTrue(user32 != 0);
 
-		long dwp = GetProcAddress(user32, memEncodeASCII("DefWindowProcW"));
+		long dwp = GetProcAddress(user32, "DefWindowProcW");
 		assertTrue(dwp != 0);
 
 		assertEquals(dwp, DEF_WINDOW_PROC);
@@ -66,12 +68,12 @@ public class WindowsTest {
 
 		// Tests char array struct members
 		versionInfo.setCsdVersion("Service Pack X");
-		assertEquals(versionInfo.getCsdVersionStr(), "Service Pack X");
+		assertEquals(versionInfo.getCsdVersionString(), "Service Pack X");
 	}
 
 	public void testWNDCLASSEX() {
-		String menuName = null;
 		String className = "LWJGL";
+		ByteBuffer classNameEncoded = memEncodeUTF16(className);
 
 		WNDCLASSEX in = new WNDCLASSEX();
 
@@ -84,8 +86,8 @@ public class WindowsTest {
 		in.setIcon(nLoadIcon(0, IDI_APPLICATION));
 		in.setCursor(nLoadCursor(0, IDC_ARROW));
 		in.setBackground(0);
-		in.setMenuName(menuName);
-		in.setClassName(className);
+		in.setMenuName(NULL);
+		in.setClassName(classNameEncoded);
 		in.setIconSm(0);
 
 		short classAtom = RegisterClassEx(in.buffer());
@@ -105,8 +107,8 @@ public class WindowsTest {
 		assertEquals(out.getIcon(), in.getIcon());
 		assertEquals(out.getCursor(), in.getCursor());
 		assertEquals(out.getBackground(), in.getBackground());
-		assertEquals(out.getMenuNameStr(), menuName);
-		assertEquals(out.getClassNameStr(), className);
+		assertEquals(out.getMenuNameString(), null);
+		assertEquals(out.getClassNameString(), className);
 		assertEquals(out.getIconSm(), in.getIconSm());
 	}
 

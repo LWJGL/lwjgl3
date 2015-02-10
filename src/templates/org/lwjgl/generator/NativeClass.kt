@@ -131,6 +131,8 @@ class NativeClass(
 			println("import org.lwjgl.*;")
 			println("import org.lwjgl.system.*;\n")
 
+			// TODO: This is horrible. Refactor so that we build imports after code generation.
+
 			val hasNIO = functions.any { it.returns.isBufferPointer || it.hasParam { it.isBufferPointer } }
 
 			if ( hasNIO )
@@ -138,20 +140,21 @@ class NativeClass(
 
 			println("import static org.lwjgl.system.Checks.*;")
 			if ( hasNIO ) {
-				var needsPointer = false
-				var needsAPIUtil = false
-				functions forEach {
-					if ( it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } )
-						needsPointer = true
-
-					if ( it.hasParam { it has Return || it has SingleValue || it.isAutoSizeResultOut || it has PointerArray } )
-						needsAPIUtil = true
-				}
-
-				if ( needsPointer )
+				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
 					println("import static org.lwjgl.Pointer.*;")
 				println("import static org.lwjgl.system.MemoryUtil.*;")
-				if ( needsAPIUtil )
+				if ( functions.any {
+					it.hasParam {
+						it.nativeType is PointerType &&
+						(
+							it has Return ||
+							it has SingleValue ||
+							it.isAutoSizeResultOut ||
+							it has PointerArray ||
+							it.nativeType is CharSequenceType
+						)
+					}
+				} )
 					println("import static org.lwjgl.system.APIUtil.*;")
 			}
 			println()

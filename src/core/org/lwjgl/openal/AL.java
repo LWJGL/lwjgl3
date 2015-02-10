@@ -5,6 +5,7 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
 
 import java.nio.ByteBuffer;
@@ -14,6 +15,7 @@ import java.util.StringTokenizer;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
@@ -36,8 +38,10 @@ public final class AL {
 
 			@Override
 			public long getFunctionAddress(CharSequence functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
-				long address = nalGetProcAddress(memAddress(nameBuffer), alGetProcAddress);
+				APIBuffer __buffer = apiBuffer();
+				__buffer.stringParamASCII(functionName, true);
+
+				long address = nalGetProcAddress(__buffer.address(), alGetProcAddress);
 				if ( address == NULL )
 					LWJGLUtil.log("Failed to locate address for AL function " + functionName);
 
@@ -119,11 +123,12 @@ public final class AL {
 		Creative: EAX EAX2.0 EAX3.0 EAX4.0 EAX5.0 EAX3.0EMULATED EAX4.0EMULATED AL_EXT_OFFSET AL_EXT_LINEAR_DISTANCE AL_EXT_EXPONENT_DISTANCE
 		 */
 
+		APIBuffer __buffer = apiBuffer();
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
-			ByteBuffer nameBuffer = memEncodeASCII(extName);
-			if ( nalIsExtensionPresent(memAddress(nameBuffer), IsExtensionPresent) )
+			__buffer.reset().stringParamASCII(extName, true);
+			if ( nalIsExtensionPresent(__buffer.address(), IsExtensionPresent) )
 				supportedExtensions.add(extName);
 		}
 

@@ -95,7 +95,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		GLenum.IN("type", "the string type", "#SHADER_INCLUDE_ARB"),
 		AutoSize("name") _ GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
 		const _ GLcharASCII_p.IN("name", "the name associated with the string"),
-		GLint.IN("stringlen", "the number of characters in {@code string}. If negative, {@code string} is considered to be a null-terminated string."),
+		AutoSize("string") _ GLint.IN("stringlen", "the number of characters in {@code string}. If negative, {@code string} is considered to be a null-terminated string."),
 		const _ GLcharUTF8_p.IN("string", "an arbitrary string of characters")
 	)
 

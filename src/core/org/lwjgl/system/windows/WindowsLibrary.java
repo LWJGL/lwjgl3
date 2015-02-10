@@ -4,12 +4,8 @@
  */
 package org.lwjgl.system.windows;
 
-import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
 
-import java.nio.ByteBuffer;
-
-import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsPlatform.*;
 
@@ -31,7 +27,7 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 	public WindowsLibrary(String name) {
 		this.name = name;
 
-		handle = LoadLibrary(memEncodeUTF16(name));
+		handle = LoadLibrary(name);
 		if ( handle == 0 )
 			windowsThrowException("Failed to load library: " + name);
 	}
@@ -44,11 +40,6 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 	@Override
 	public long getPointer() {
 		return handle;
-	}
-
-	@Override
-	public long getFunctionAddress(ByteBuffer name) {
-		return GetProcAddress(handle, name);
 	}
 
 	@Override

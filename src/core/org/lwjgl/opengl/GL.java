@@ -9,7 +9,6 @@ import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProvider;
 
-import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
@@ -74,14 +73,16 @@ public final class GL {
 		final DynamicLinkLibrary OPENGL = LWJGLUtil.loadLibraryNative(libName);
 
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
-			abstract long getExtensionAddress(ByteBuffer name);
+			abstract long getExtensionAddress(long name);
 
 			@Override
 			public long getFunctionAddress(CharSequence functionName) {
-				ByteBuffer nameBuffer = memEncodeASCII(functionName);
-				long address = getExtensionAddress(nameBuffer);
+				APIBuffer __buffer = apiBuffer();
+				__buffer.stringParamASCII(functionName, true);
+
+				long address = getExtensionAddress(__buffer.address());
 				if ( address == NULL ) {
-					address = OPENGL.getFunctionAddress(nameBuffer);
+					address = OPENGL.getFunctionAddress(functionName);
 					if ( address == NULL )
 						LWJGLUtil.log("Failed to locate address for GL function " + functionName);
 				}
@@ -99,8 +100,8 @@ public final class GL {
 			case WINDOWS:
 				functionProvider = new FunctionProviderGL() {
 					@Override
-					long getExtensionAddress(ByteBuffer name) {
-						return wglGetProcAddress(name);
+					long getExtensionAddress(long name) {
+						return nwglGetProcAddress(name);
 					}
 				};
 				break;
@@ -110,12 +111,12 @@ public final class GL {
 					final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
 
 					@Override
-					long getExtensionAddress(ByteBuffer name) {
+					long getExtensionAddress(long name) {
 						if ( glXGetProcAddress != NULL )
-							return nglXGetProcAddress(memAddress(name), glXGetProcAddress);
+							return nglXGetProcAddress(name, glXGetProcAddress);
 
 						if ( glXGetProcAddressARB != NULL )
-							return nglXGetProcAddressARB(memAddress(name), glXGetProcAddressARB);
+							return nglXGetProcAddressARB(name, glXGetProcAddressARB);
 
 						return NULL;
 					}
@@ -124,7 +125,7 @@ public final class GL {
 			case MACOSX:
 				functionProvider = new FunctionProviderGL() {
 					@Override
-					long getExtensionAddress(ByteBuffer name) {
+					long getExtensionAddress(long name) {
 						return NULL;
 					}
 				};
