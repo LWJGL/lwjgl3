@@ -116,7 +116,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 	Closure(ByteBuffer cif, long nativeCallback) {
 		// Allocate ffi closure
 		APIBuffer __buf = apiStack();
-		this.closure = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address() + __buf.getOffset());
+		this.closure = nffi_closure_alloc(FFIClosure.SIZEOF, __buf.address(__buf.getOffset()));
 		this.pointer = __buf.pointerValue(__buf.getOffset());
 		__buf.pop();
 

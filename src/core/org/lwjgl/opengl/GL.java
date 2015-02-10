@@ -323,7 +323,7 @@ public final class GL {
 
 		APIBuffer __buffer = apiBuffer();
 
-		if ( nglXQueryVersion(display, __buffer.address(), __buffer.address() + 4) == 0 )
+		if ( nglXQueryVersion(display, __buffer.address(), __buffer.address(4)) == 0 )
 			throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
 
 		int majorVersion = __buffer.intValue(0);

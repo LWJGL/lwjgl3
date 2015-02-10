@@ -72,12 +72,17 @@ public class APIBuffer {
 		return address;
 	}
 
+	/** Returns the memory address of the specified {@code offset}. This address may change after a call to one of the {@code <type>Param()} methods. */
+	public long address(int offset) {
+		return address + offset;
+	}
+
 	/**
 	 * Returns the memory address of the specified {@code offset} or {@link MemoryUtil#NULL NULL} if the specified {@code value} is null. This address may
 	 * change after a call to one of the {@code <type>Param()} methods.
 	 */
 	public long addressSafe(Object value, int offset) {
-		return value == null ? NULL : address() + offset;
+		return value == null ? NULL : address(offset);
 	}
 
 	/** Returns the {@link ByteBuffer} that backs this {@link APIBuffer}. */

@@ -175,7 +175,7 @@ public final class ALC {
 		APIBuffer __buffer = apiBuffer();
 
 		nalcGetIntegerv(device, ALC_MAJOR_VERSION, 1, __buffer.address(), GetIntegerv);
-		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, __buffer.address() + 4, GetIntegerv);
+		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, __buffer.address(4), GetIntegerv);
 
 		int majorVersion = __buffer.intValue(0);
 		int minorVersion = __buffer.intValue(4);

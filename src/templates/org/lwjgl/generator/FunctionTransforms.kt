@@ -126,7 +126,7 @@ private class CharSequenceTransform(
 	override fun transformCall(param: Parameter, original: String) = if ( param has nullable )
 		"$API_BUFFER.addressSafe(${param.name}, ${param.name}Encoded)"
 	else
-		"$API_BUFFER.address() + ${param.name}Encoded"
+		"$API_BUFFER.address(${param.name}Encoded)"
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\tint ${qtype.name}Encoded = $API_BUFFER.stringParam${(qtype.nativeType as CharSequenceType).charMapping.charset}(${qtype.name}, $nullTerminated);")
 		if ( !nullTerminated )
@@ -156,7 +156,7 @@ private class BufferValueReturnTransform(
 
 private val BufferValueParameterTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 }
 
 private val BufferValueSizeTransform = object: FunctionTransform<Parameter> {
@@ -170,7 +170,7 @@ private class SingleValueTransform(
 	val newName: String
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = "$paramType $newName" // Replace with element type + new name
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		if ( "CharSequence" == paramType ) {
 			writer.println("\t\tByteBuffer ${newName}Buffer = memEncodeASCII($newName);") // TODO: Support other than ASCCI
@@ -187,7 +187,7 @@ private class VectorValueTransform(
 	val size: Int
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = size.indices.map { "$paramType ${newName}$it" }.reduce {(a, b) -> "$a, $b" } // Replace with vector elements
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")
 		for ( i in 1..(size - 1) )
@@ -209,13 +209,13 @@ private class MapPointerExplicitTransform(val lengthParam: String, val addParam:
 
 private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
 }
 
 private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		val mapping = qtype.nativeType.mapping as PointerMapping
 
@@ -242,7 +242,7 @@ private class BufferReturnTransform(
 
 		builder append "\t\treturn "
 		if ( encoding != null ) builder append "memDecode$encoding("
-		builder append "mem${bufferType}($API_BUFFER.address() + ${outParam.name}, $API_BUFFER.intValue($lengthParam))"
+		builder append "mem${bufferType}($API_BUFFER.address(${outParam.name}), $API_BUFFER.intValue($lengthParam))"
 		if ( encoding != null ) builder append ")"
 		builder append ";"
 
@@ -257,7 +257,7 @@ private class BufferReturnNTTransform(
 ): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String =
-		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address() + ${outParam.name}, $maxLengthParam));"
+		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address(${outParam.name}), $maxLengthParam));"
 }
 
 private class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
@@ -266,7 +266,7 @@ private class PointerArrayTransform(val paramType: String): FunctionTransform<Pa
 		val paramClass = if ( param[PointerArray].elementType is CharSequenceType ) "CharSequence" else "ByteBuffer"
 		return "$paramClass$paramType $name"
 	}
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${param.name}$POINTER_POSTFIX" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name}$POINTER_POSTFIX)" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
@@ -310,7 +310,7 @@ private class PointerArrayLengthsTransform(
 	val multi: Boolean
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address() + ${arrayParam.name}$LENGTHS_POSTFIX" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${arrayParam.name}$LENGTHS_POSTFIX)" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
