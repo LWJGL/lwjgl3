@@ -195,7 +195,7 @@ private val MapPointerTransform = object: FunctionTransform<ReturnValue> {
 private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) =
-		"old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer($RESULT, $lengthParam)"
+		"old_buffer != null && $RESULT == memAddress0(old_buffer) && old_buffer.capacity() == $lengthParam ? old_buffer : memByteBuffer($RESULT, (int)$lengthParam)"
 }
 
 private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -210,7 +210,8 @@ private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: F
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		val mapping = qtype.nativeType.mapping as PointerMapping
 
-		writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }.name}")
+		val autoSizeParam = func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }
+		writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${if ( 4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}")
 		if ( mapping.isMultiByte )
 			writer.print(" << ${mapping.byteShift}")
 		writer.println(");")

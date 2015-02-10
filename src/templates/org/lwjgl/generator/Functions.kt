@@ -642,7 +642,7 @@ class NativeClassFunction(
 					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 				print("($RESULT")
 				if ( returns has MapPointer )
-					print(", ${returns[MapPointer].sizeExpression}")
+					print(", (int)${returns[MapPointer].sizeExpression}")
 				else if ( !isNullTerminated ) {
 					if ( returns.nativeType is StructType ) {
 						print(
@@ -656,7 +656,7 @@ class NativeClassFunction(
 						val param = getParam { it has autoSizeResult }
 						print(
 							if ( param.paramType === IN )
-								", ${param.name}"
+								", (int)${param.name}"
 							else if ( param.nativeType.mapping === PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
 							else
@@ -1184,7 +1184,7 @@ class NativeClassFunction(
 						val param = getParam { it has autoSizeResult }
 						builder.append(
 							if ( param.paramType === IN )
-								", ${param.name}"
+								", (int)${param.name}"
 							else if ( param.nativeType.mapping === PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
 							else

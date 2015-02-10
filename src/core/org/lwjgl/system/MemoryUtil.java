@@ -217,19 +217,6 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Overloads {@link #memByteBuffer(long, int)} with a long capacity parameter. This
-	 * is used by the auto-generated code, for simplicity.
-	 *
-	 * @param address  the starting memory address
-	 * @param capacity the buffer capacity. Will be cast to an integer.
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBuffer(long address, long capacity) {
-		return memByteBuffer(address, (int)capacity);
-	}
-
-	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory
 	 * address and has capacity equal to the null-terminated string
 	 * starting at that address. A single \0 character will terminate
