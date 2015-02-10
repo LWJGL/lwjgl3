@@ -320,7 +320,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 			"Values specified in {@code flags} do not follow rules for supported values.",
 			"#MEM_SVM_FINE_GRAIN_BUFFER or #MEM_SVM_ATOMICS is specified in flags and these are not supported by at least one device in context.",
 			"The values specified in {@code flags} are not valid.",
-			"{@code size} is {@code 0} or &gt; #DEVICE_MAX_MEM_ALLOC_SIZE value for any device in context.",
+			"{@code size} is {@code 0} or &gt; CL10#DEVICE_MAX_MEM_ALLOC_SIZE value for any device in context.",
 			"{@code alignment} is not a power of two or the OpenCL implementation cannot support the specified alignment for at least one device in context.",
 			"There was a failure to allocate resources."
 		)}
