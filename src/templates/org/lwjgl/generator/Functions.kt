@@ -810,7 +810,7 @@ class NativeClassFunction(
 
 		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
 		if ( parameters count {
-			if ( it.nativeType !is CharSequenceType || it.has(Return) )
+			if ( it.paramType === OUT || it.nativeType !is CharSequenceType )
 				false
 			else {
 				val param = it
