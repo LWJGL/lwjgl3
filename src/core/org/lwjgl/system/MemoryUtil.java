@@ -201,8 +201,8 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newByteBuffer(address, capacity);
 	}
@@ -283,8 +283,8 @@ public final class MemoryUtil {
 	 * @return the new ShortBuffer
 	 */
 	public static ShortBuffer memShortBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newShortBuffer(address, capacity);
 	}
@@ -298,8 +298,8 @@ public final class MemoryUtil {
 	 * @return the new CharBuffer
 	 */
 	public static CharBuffer memCharBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newCharBuffer(address, capacity);
 	}
@@ -313,8 +313,8 @@ public final class MemoryUtil {
 	 * @return the new IntBuffer
 	 */
 	public static IntBuffer memIntBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newIntBuffer(address, capacity);
 	}
@@ -328,8 +328,8 @@ public final class MemoryUtil {
 	 * @return the new LongBuffer
 	 */
 	public static LongBuffer memLongBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newLongBuffer(address, capacity);
 	}
@@ -343,8 +343,8 @@ public final class MemoryUtil {
 	 * @return the new FloatBuffer
 	 */
 	public static FloatBuffer memFloatBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newFloatBuffer(address, capacity);
 	}
@@ -358,8 +358,8 @@ public final class MemoryUtil {
 	 * @return the new DoubleBuffer
 	 */
 	public static DoubleBuffer memDoubleBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newDoubleBuffer(address, capacity);
 	}
@@ -393,56 +393,56 @@ public final class MemoryUtil {
 	 * @return the modified ByteBuffer
 	 */
 	public static ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** ShortBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** CharBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** IntBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** LongBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** FloatBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** DoubleBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
@@ -457,7 +457,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to set
 	 */
 	public static void memSet(long ptr, int value, int bytes) {
-		if ( LWJGLUtil.DEBUG && ptr == NULL )
+		if ( LWJGLUtil.DEBUG && (ptr == NULL || bytes < 0) )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memSet(ptr, value, bytes);
