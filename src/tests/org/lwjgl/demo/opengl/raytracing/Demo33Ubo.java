@@ -9,9 +9,8 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
-
-import com.joml.utils.Camera;
-import com.joml.vector.Vector3f;
+import org.lwjgl.demo.util.Camera;
+import org.lwjgl.demo.util.Vector3f;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
