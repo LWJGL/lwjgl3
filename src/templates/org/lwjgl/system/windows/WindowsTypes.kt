@@ -45,8 +45,6 @@ val HRESULT = typedef(LONG, "HRESULT")
 val MMRESULT = typedef(UINT, "MMRESULT")
 
 val TCHAR = CharType("TCHAR", CharMapping.UTF16)
-val WCHAR = CharType("WCHAR", CharMapping.UTF16)
-val WCHAR_p = CharSequenceType(WCHAR)
 
 val LPCTSTR = CharSequenceType(
 	name = "LPCTSTR",
@@ -414,6 +412,16 @@ val LPJOYINFOEX = StructType(
 		DWORD.member("dwReserved1", "reserved1")
 		DWORD.member("dwReserved2", "reserved2")
 	}
+)
+
+val GUID = struct(WINDOWS_PACKAGE, "GUID") {
+	documentation = "GUID"
+	nativeImport("WindowsLWJGL.h")
+}
+val LPGUID = StructType(
+	name = "LPGUID",
+	includesPointer = true,
+	definition = GUID
 )
 
 fun config() {

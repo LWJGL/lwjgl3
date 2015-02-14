@@ -286,11 +286,17 @@ class NativeClassFunction(
 					if ( !hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) } )
 						param.error("An AutoSize for Return parameter does not exist")
 
-					val lengthParam = paramMap[returnMod.lengthParam]
-					if ( lengthParam == null )
-						param.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
-					else if ( !lengthParam.nativeType.mapping.isSizePointer )
-						param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+					val lengthParamName = returnMod.lengthParam
+					if ( lengthParamName == null ) {
+						if ( param.nativeType !is CharSequenceType )
+							param.error("Null-terminated Return parameter must be a CharSequenceType")
+					} else {
+						val lengthParam = paramMap[returnMod.lengthParam]
+						if ( lengthParam == null )
+							param.error("The length parameter does not exist: Return(${returnMod.lengthParam})")
+						else if ( !lengthParam.nativeType.mapping.isSizePointer )
+							param.error("The length parameter must be an integer pointer type: Return(${returnMod.lengthParam})")
+					}
 				}
 			}
 
@@ -354,7 +360,7 @@ class NativeClassFunction(
 				checks add "checkPointer(${it.name});"
 
 			if ( mode === NORMAL && it.paramType === IN && it.nativeType is CharSequenceType ) {
-				if ( it.nativeType.nullTerminated )
+				if ( it.nativeType.nullTerminated && getReferenceParam(AutoSize, it.name) == null )
 					checks add "${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});"
 			}
 
@@ -636,7 +642,7 @@ class NativeClassFunction(
 					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 				print("($RESULT")
 				if ( returns has MapPointer )
-					print(", ${returns[MapPointer].sizeExpression}")
+					print(", (int)${returns[MapPointer].sizeExpression}")
 				else if ( !isNullTerminated ) {
 					if ( returns.nativeType is StructType ) {
 						print(
@@ -650,7 +656,7 @@ class NativeClassFunction(
 						val param = getParam { it has autoSizeResult }
 						print(
 							if ( param.paramType === IN )
-								", ${param.name}"
+								", (int)${param.name}"
 							else if ( param.nativeType.mapping === PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
 							else
@@ -810,7 +816,7 @@ class NativeClassFunction(
 
 		// Apply any CharSequenceTransforms. These can be combined with any of the other transformations.
 		if ( parameters count {
-			if ( it.nativeType !is CharSequenceType || it.has(Return) )
+			if ( it.paramType === OUT || it.nativeType !is CharSequenceType )
 				false
 			else {
 				val param = it
@@ -818,7 +824,7 @@ class NativeClassFunction(
 					transforms[it] = AutoSizeCharSequenceTransform(param)
 				}
 
-				transforms[it] = CharSequenceTransform
+				transforms[it] = CharSequenceTransform(!hasParam { it has AutoSize && it[AutoSize].hasReference(param.name) })
 				true
 			}
 		} != 0 )
@@ -860,7 +866,9 @@ class NativeClassFunction(
 					transforms.remove(maxLengthParam)
 
 					// Hide length parameter and use APIBuffer
-					transforms[paramMap[returnMod.lengthParam]!!] = BufferReturnLengthTransform
+					val lengthParam = returnMod.lengthParam
+					if ( lengthParam != null )
+						transforms[paramMap[lengthParam]] = BufferReturnLengthTransform
 
 					// Hide target parameter and use APIBuffer
 					transforms[it] = BufferReturnParamTransform
@@ -868,10 +876,16 @@ class NativeClassFunction(
 					// Transform void to the buffer type
 					val returnType: String
 					if ( it.nativeType is CharSequenceType ) {
-						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam, it.nativeType.charMapping.charset)
+						transforms[returns] = if ( lengthParam != null )
+							BufferReturnTransform(it, lengthParam, it.nativeType.charMapping.charset)
+						else
+							BufferReturnNTTransform(it,
+								if ( 4 < (maxLengthParam.nativeType.mapping as PrimitiveMapping).bytes ) "(int)${maxLengthParam.name}" else maxLengthParam.name,
+								it.nativeType.charMapping.charset
+							)
 						returnType = "String"
 					} else {
-						transforms[returns] = BufferReturnTransform(it, returnMod.lengthParam)
+						transforms[returns] = BufferReturnTransform(it, lengthParam!!)
 						returnType = "Buffer"
 					}
 
@@ -1170,7 +1184,7 @@ class NativeClassFunction(
 						val param = getParam { it has autoSizeResult }
 						builder.append(
 							if ( param.paramType === IN )
-								", ${param.name}"
+								", (int)${param.name}"
 							else if ( param.nativeType.mapping === PointerMapping.DATA_INT )
 								", $API_BUFFER.intValue(${param.name})"
 							else

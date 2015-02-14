@@ -6,8 +6,6 @@ package org.lwjgl.system.linux;
 
 import org.lwjgl.system.DynamicLinkLibrary;
 
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 
@@ -41,11 +39,6 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 	@Override
 	public String getName() {
 		return name;
-	}
-
-	@Override
-	public long getFunctionAddress(ByteBuffer name) {
-		return dlsym(handle, name);
 	}
 
 	@Override

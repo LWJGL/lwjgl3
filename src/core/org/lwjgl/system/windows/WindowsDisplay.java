@@ -15,8 +15,8 @@ public class WindowsDisplay {
 	/** Handle to the default window proc. */
 	public static final long DEF_WINDOW_PROC =
 		GetProcAddress(
-			GetModuleHandle(memEncodeUTF16("User32.dll")),
-			memEncodeASCII("DefWindowProcW")
+			GetModuleHandle("User32.dll"),
+			"DefWindowProcW"
 		);
 
 	static {
@@ -58,6 +58,7 @@ public class WindowsDisplay {
 		WINDOWPOS.cy(windowPos, height);
 
 		String className = "LWJGL" + id;
+		ByteBuffer classNameEncoded = memEncodeUTF16(className);
 
 		ByteBuffer in = WNDCLASSEX.malloc(
 			WNDCLASSEX.SIZEOF,
@@ -70,7 +71,7 @@ public class WindowsDisplay {
 			nLoadCursor(0, IDC_ARROW),
 			NULL,
 			null,
-			className,
+			classNameEncoded,
 			NULL
 		);
 

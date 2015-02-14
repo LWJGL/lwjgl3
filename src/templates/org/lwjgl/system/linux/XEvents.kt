@@ -233,7 +233,7 @@ val XEvent = struct(LINUX_PACKAGE, "XEvent") {
 	//XGenericEvent.member("xgeneric")
 	XGenericEventCookie.member("xcookie")
 
-	long.member("pad", size = 24)
+	//long.member("pad", size = 24)
 }.nativeType
 val XEvent_p = StructType(XEvent)
 

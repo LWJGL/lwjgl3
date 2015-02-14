@@ -4,8 +4,6 @@
  */
 package org.lwjgl.system.macosx;
 
-import java.nio.ByteBuffer;
-
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
 /** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X using dlopen. */
@@ -24,11 +22,6 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	@Override
 	public long getPointer() {
 		return handle;
-	}
-
-	@Override
-	public long getFunctionAddress(ByteBuffer name) {
-		return dlsym(handle, name);
 	}
 
 	@Override

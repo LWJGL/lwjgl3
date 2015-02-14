@@ -228,7 +228,7 @@ class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 /** Marks a char pointer parameter to become the return value of an alternative method. */
 class Return(
 	/** The parameter that returns the actual string size */
-	val lengthParam: String,
+	val lengthParam: String?,
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
 ): ParameterModifier() {
@@ -244,7 +244,7 @@ class Return(
 		if ( param.nativeType.mapping === PointerMapping.OPAQUE_POINTER )
 			throw IllegalArgumentException("The returnValue modifier cannot be applied on opaque pointer types.")
 
-		if ( param.paramType != ParameterType.OUT )
+		if ( param.paramType !== ParameterType.OUT )
 			throw IllegalArgumentException("The returnValue modifier can only be applied on output parameters.")
 	}
 }

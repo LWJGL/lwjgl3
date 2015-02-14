@@ -16,6 +16,7 @@ import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.testng.Assert.*;
 
 @Test
@@ -70,7 +71,9 @@ public class StructTest {
 				long cursor = 0x76543210L;
 				long background = 987654321L;
 				String menuName = "menu";
+				ByteBuffer menuNameEncoded = memEncodeUTF16(menuName);
 				String className = "class";
+				ByteBuffer classNameEncoded = memEncodeUTF16(className);
 				long iconSm = 876543210L;
 
 				s.setSize(WNDCLASSEX.SIZEOF);
@@ -82,8 +85,8 @@ public class StructTest {
 				s.setIcon(icon);
 				s.setCursor(cursor);
 				s.setBackground(background);
-				s.setMenuName(menuName);
-				s.setClassName(className);
+				s.setMenuName(menuNameEncoded);
+				s.setClassName(classNameEncoded);
 				s.setIconSm(iconSm);
 
 				assertEquals(s.getSize(), WNDCLASSEX.SIZEOF);
@@ -95,8 +98,8 @@ public class StructTest {
 				assertEquals(s.getIcon(), icon);
 				assertEquals(s.getCursor(), cursor);
 				assertEquals(s.getBackground(), background);
-				assertEquals(s.getMenuNameStr(), menuName);
-				assertEquals(s.getClassNameStr(), className);
+				assertEquals(s.getMenuNameString(), menuName);
+				assertEquals(s.getClassNameString(), className);
 				assertEquals(s.getIconSm(), iconSm);
 				break;
 			}

@@ -10,7 +10,6 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 
 import java.nio.*;
-import java.nio.charset.*;
 
 import static org.lwjgl.Pointer.*;
 
@@ -28,10 +27,6 @@ public final class MemoryUtil {
 	/** Alias for the null pointer address. */
 	public static final long NULL = 0L;
 
-	//private static final Charset ASCII;
-	private static final Charset UTF8;
-	//private static final Charset UTF16;
-
 	private static final MemoryAccessor ACCESSOR;
 
 	/** The memory page size, in bytes. This value is always a power-of-two. */
@@ -39,10 +34,6 @@ public final class MemoryUtil {
 
 	static {
 		LWJGLUtil.initialize();
-
-		//ASCII = Charset.forName("ISO-8859-1");
-		UTF8 = Charset.forName("UTF-8");
-		//UTF16 = Charset.forName(ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN ? "UTF-16BE" : "UTF-16LE");
 
 		ACCESSOR = MemoryAccess.getInstance();
 		PAGE_SIZE = ACCESSOR.getPageSize();
@@ -210,30 +201,15 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newByteBuffer(address, capacity);
 	}
 
 	/**
-	 * Overloads {@link #memByteBuffer(long, int)} with a long capacity parameter. This
-	 * is used by the auto-generated code, for simplicity.
-	 *
-	 * @param address  the starting memory address
-	 * @param capacity the buffer capacity. Will be cast to an integer.
-	 *
-	 * @return the new ByteBuffer
-	 */
-	public static ByteBuffer memByteBuffer(long address, long capacity) {
-		return memByteBuffer(address, (int)capacity);
-	}
-
-	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory
-	 * address and has capacity equal to the null-terminated string
-	 * starting at that address. A single \0 character will terminate
-	 * the string. The returned buffer will NOT include the \0 byte.
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
 	 * <p/>
 	 * This method is useful for reading ASCII and UTF8 encoded text.
 	 *
@@ -242,19 +218,32 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT1(long address) {
-		if ( address == NULL )
-			return null;
-
-		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
-
-		return memSetupBuffer(infPointer, address, memStrLen1(infPointer, 0));
+		return memByteBufferNT1(address, Integer.MAX_VALUE);
 	}
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory
-	 * address and has capacity equal to the null-terminated string
-	 * starting at that address. Two \0 characters will terminate
-	 * the string. The returned buffer will NOT include the \0 bytes.
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address, up to a maximum of {@code maxLength} bytes. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
+	 * <p/>
+	 * This method is useful for reading ASCII and UTF8 encoded text.
+	 *
+	 * @param address   the starting memory address
+	 * @param maxLength the maximum string length, in bytes
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT1(long address, int maxLength) {
+		if ( address == NULL )
+			return null;
+
+		ByteBuffer string = ACCESSOR.newByteBuffer(address, maxLength);
+
+		return memSetupBuffer(string, address, memStrLen1(string, 0));
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
 	 * <p/>
 	 * This method is useful for reading UTF16 encoded text.
 	 *
@@ -263,12 +252,26 @@ public final class MemoryUtil {
 	 * @return the new ByteBuffer
 	 */
 	public static ByteBuffer memByteBufferNT2(long address) {
+		return memByteBufferNT2(address, Integer.MAX_VALUE);
+	}
+
+	/**
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
+	 * address, up to a maximum of {@code maxLength} bytes. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
+	 * <p/>
+	 * This method is useful for reading UTF16 encoded text.
+	 *
+	 * @param address the starting memory address
+	 *
+	 * @return the new ByteBuffer
+	 */
+	public static ByteBuffer memByteBufferNT2(long address, int maxLength) {
 		if ( address == NULL )
 			return null;
 
-		ByteBuffer infPointer = ACCESSOR.newByteBuffer(address, Integer.MAX_VALUE);
+		ByteBuffer string = ACCESSOR.newByteBuffer(address, maxLength);
 
-		return memSetupBuffer(infPointer, address, memStrLen2(infPointer, 0));
+		return memSetupBuffer(string, address, memStrLen2(string, 0));
 	}
 
 	/**
@@ -280,8 +283,8 @@ public final class MemoryUtil {
 	 * @return the new ShortBuffer
 	 */
 	public static ShortBuffer memShortBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newShortBuffer(address, capacity);
 	}
@@ -295,8 +298,8 @@ public final class MemoryUtil {
 	 * @return the new CharBuffer
 	 */
 	public static CharBuffer memCharBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newCharBuffer(address, capacity);
 	}
@@ -310,8 +313,8 @@ public final class MemoryUtil {
 	 * @return the new IntBuffer
 	 */
 	public static IntBuffer memIntBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newIntBuffer(address, capacity);
 	}
@@ -325,8 +328,8 @@ public final class MemoryUtil {
 	 * @return the new LongBuffer
 	 */
 	public static LongBuffer memLongBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newLongBuffer(address, capacity);
 	}
@@ -340,8 +343,8 @@ public final class MemoryUtil {
 	 * @return the new FloatBuffer
 	 */
 	public static FloatBuffer memFloatBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newFloatBuffer(address, capacity);
 	}
@@ -355,8 +358,8 @@ public final class MemoryUtil {
 	 * @return the new DoubleBuffer
 	 */
 	public static DoubleBuffer memDoubleBuffer(long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.newDoubleBuffer(address, capacity);
 	}
@@ -390,56 +393,56 @@ public final class MemoryUtil {
 	 * @return the modified ByteBuffer
 	 */
 	public static ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** ShortBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** CharBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** IntBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** LongBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** FloatBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
 
 	/** DoubleBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
 	public static DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
-		if ( LWJGLUtil.DEBUG && (address == NULL || capacity < 0) )
-			throw new IllegalArgumentException();
+		if ( address == NULL )
+			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
 	}
@@ -454,7 +457,7 @@ public final class MemoryUtil {
 	 * @param bytes the number of bytes to set
 	 */
 	public static void memSet(long ptr, int value, int bytes) {
-		if ( LWJGLUtil.DEBUG && ptr == NULL )
+		if ( LWJGLUtil.DEBUG && (ptr == NULL || bytes < 0) )
 			throw new IllegalArgumentException();
 
 		ACCESSOR.memSet(ptr, value, bytes);
@@ -630,8 +633,7 @@ public final class MemoryUtil {
 	// --- [ String utilities ] ---
 
 	/**
-	 * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated.
-	 * If text is null, null is returned.
+	 * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated. If text is null, null is returned.
 	 *
 	 * @param text the text to encode
 	 *
@@ -642,8 +644,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated.
-	 * If text is null, null is returned.
+	 * Returns a ByteBuffer containing the specified text ASCII encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -654,20 +655,50 @@ public final class MemoryUtil {
 		if ( text == null )
 			return null;
 
-		ByteBuffer buffer = BufferUtils.createByteBuffer(text.length() + (nullTerminated ? 1 : 0));
-
-		for ( int i = 0; i < text.length(); i++ )
-			buffer.put(i, (byte)text.charAt(i));
-
-		if ( nullTerminated )
-			buffer.put(text.length(), (byte)0);
-
-		return buffer;
+		ByteBuffer target = BufferUtils.createByteBuffer(text.length() + (nullTerminated ? 1 : 0));
+		memEncodeASCII(text, nullTerminated, target);
+		return target;
 	}
 
 	/**
-	 * Returns a ByteBuffer containing the specified text UTF-8 encoded and null-terminated.
-	 * If text is null, null is returned.
+	 * Encodes and optionally null-terminates the specified text using ASCII encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
+	 * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
+	 * space to store the encoded text.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 *
+	 * @return the encoded text or null
+	 */
+	public static int memEncodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memEncodeASCII(text, nullTerminated, target, target.position());
+	}
+
+	/**
+	 * Encodes and optionally null-terminates the specified text using ASCII encoding. The encoded text is stored in the specified {@link ByteBuffer} at the
+	 * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
+	 * remaining space to store the encoded text.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param offset         the buffer position to which the string will be encoded
+	 *
+	 * @return the number of bytes of the encoded string
+	 */
+	public static int memEncodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+		int p = offset;
+
+		for ( int i = 0; i < text.length(); i++, p++ )
+			target.put(p, (byte)text.charAt(i));
+
+		if ( nullTerminated )
+			target.put(p++, (byte)0);
+
+		return p - offset;
+	}
+
+	/**
+	 * Returns a ByteBuffer containing the specified text UTF-8 encoded and null-terminated. If text is null, null is returned.
 	 *
 	 * @param text the text to encode
 	 *
@@ -678,8 +709,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Returns a ByteBuffer containing the specified text UTF-8 encoded and optionally null-terminated.
-	 * If text is null, null is returned.
+	 * Returns a ByteBuffer containing the specified text UTF-8 encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -687,12 +717,113 @@ public final class MemoryUtil {
 	 * @return the encoded text or null
 	 */
 	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated) {
-		return memEncode(text, UTF8, nullTerminated);
+		if ( text == null )
+			return null;
+
+		ByteBuffer target = BufferUtils.createByteBuffer(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
+		memEncodeUTF8(text, nullTerminated, target);
+		return target;
 	}
 
 	/**
-	 * Returns a ByteBuffer containing the specified text UTF-16 encoded and null-terminated.
-	 * If text is null, null is returned.
+	 * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
+	 * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
+	 * space to store the encoded text. The specified text is assumed to be a valid UTF-16 string.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param target         the buffer in which to store the encoded text
+	 *
+	 * @return the number of bytes of the encoded string
+	 */
+	public static int memEncodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memEncodeUTF8(text, nullTerminated, target, target.position());
+	}
+
+	/**
+	 * Encodes and optionally null-terminates the specified text using UTF-8 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
+	 * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
+	 * remaining space to store the encoded text. The specified text is assumed to be a valid UTF-16 string.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param target         the buffer in which to store the encoded text
+	 * @param offset         the buffer position to which the string will be encoded
+	 *
+	 * @return the number of bytes of the encoded string
+	 */
+	public static int memEncodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+		int i = 0, p = offset;
+
+		// Fast path
+		while ( i < text.length() ) {
+			char c = text.charAt(i);
+			if ( 128 <= c )
+				break;
+			target.put(p++, (byte)c);
+			i++;
+		}
+
+		// Slow path
+		while ( i < text.length() ) {
+			char c = text.charAt(i++);
+			if ( c < 128 ) {
+				target.put(p++, (byte)c);
+			} else {
+				int cp = c;
+				if ( c < 2048 ) {
+					target.put(p++, (byte)(0xC0 | cp >> 6));
+				} else {
+					if ( !Character.isHighSurrogate(c) ) {
+						target.put(p++, (byte)(0xE0 | cp >> 12));
+					} else {
+						cp = Character.toCodePoint(c, text.charAt(i++));
+
+						target.put(p++, (byte)(0xF0 | cp >> 18));
+						target.put(p++, (byte)(0x80 | cp >> 12 & 0x3F));
+					}
+					target.put(p++, (byte)(0x80 | cp >> 6 & 0x3F));
+				}
+				target.put(p++, (byte)(0x80 | cp & 0x3F));
+			}
+		}
+
+		if ( nullTerminated )
+			target.put(p++, (byte)0);
+
+		return p - offset;
+	}
+
+	/**
+	 * Returns the number of bytes required to encode the specified text in the UTF-8 encoding.
+	 *
+	 * @param value the text to encode
+	 *
+	 * @return the number of bytes in UTF-8
+	 */
+	public static int memEncodedLengthUTF8(CharSequence value) {
+		int i = 0, len = value.length(), bytes = 0;
+		while ( i < len ) {
+			char c = value.charAt(i++);
+			if ( c < 128 )
+				bytes += 1;
+			else if ( c < 2048 )
+				bytes += 2;
+			else if ( c < Character.MIN_SURROGATE || Character.MAX_SURROGATE < c ) {
+				bytes += 3;
+			} else {
+				if ( LWJGLUtil.DEBUG && (len <= i || !Character.isHighSurrogate(c) || !Character.isLowSurrogate(value.charAt(i))) )
+					throw new RuntimeException("Malformed character sequence");
+
+				bytes += 4;
+				i++;
+			}
+		}
+		return bytes;
+	}
+
+	/**
+	 * Returns a ByteBuffer containing the specified text UTF-16 encoded and null-terminated. If text is null, null is returned.
 	 *
 	 * @param text the text to encode
 	 *
@@ -703,8 +834,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Returns a ByteBuffer containing the specified text UTF-16 encoded and optionally null-terminated.
-	 * If text is null, null is returned.
+	 * Returns a ByteBuffer containing the specified text UTF-16 encoded and optionally null-terminated. If text is null, null is returned.
 	 *
 	 * @param text           the text to encode
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
@@ -715,103 +845,53 @@ public final class MemoryUtil {
 		if ( text == null )
 			return null;
 
-		ByteBuffer buffer = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
-
-		memEncodeUTF16(text, nullTerminated, buffer);
-
-		return buffer;
+		ByteBuffer target = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
+		memEncodeUTF16(text, nullTerminated, target);
+		return target;
 	}
 
 	/**
-	 * Encodes and optionally null-terminates the specified text using UTF-16 encoding. The encoded text is stored in the specified {@link ByteBuffer}. The
-	 * {@code target} buffer is assumed to have enough remaining space to store the encoded text.
+	 * Encodes and optionally null-terminates the specified text using UTF-16 encoding. The encoded text is stored in the specified {@link ByteBuffer}, at the
+	 * current buffer position. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough remaining
+	 * space to store the encoded text.
 	 *
 	 * @param text           the text to encode
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
 	 * @param target         the buffer in which to store the encoded text
+	 *
+	 * @return the number of bytes of the encoded string
 	 */
-	public static void memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
-		for ( int i = 0; i < text.length(); i++ )
-			target.putChar(i << 1, text.charAt(i));
-
-		if ( nullTerminated )
-			target.putChar(target.capacity() - 2, '\0');
+	public static int memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target) {
+		return memEncodeUTF16(text, nullTerminated, target, target.position());
 	}
 
 	/**
-	 * Wraps the specified text in a CharBuffer and encodes it using the specified Charset and null-terminated.
-	 *
-	 * @param text    the text to encode
-	 * @param charset the charset to use for encoding
-	 *
-	 * @return the encoded text
-	 */
-	public static ByteBuffer memEncode(CharSequence text, Charset charset) {
-		return memEncode(text, charset, true);
-	}
-
-	/**
-	 * Wraps the specified text in an optionally null-terminated CharBuffer and encodes it using the specified Charset.
+	 * Encodes and optionally null-terminates the specified text using UTF-16 encoding. The encoded text is stored in the specified {@link ByteBuffer} at the
+	 * specified {@code position} offset. The current buffer position is not modified by this operation. The {@code target} buffer is assumed to have enough
+	 * remaining space to store the encoded text.
 	 *
 	 * @param text           the text to encode
-	 * @param charset        the charset to use for encoding
 	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param target         the buffer in which to store the encoded text
+	 * @param offset         the buffer position to which the string will be encoded
 	 *
-	 * @return the encoded text
+	 * @return the number of bytes of the encoded string
 	 */
-	public static ByteBuffer memEncode(CharSequence text, Charset charset, boolean nullTerminated) {
-		if ( text == null )
-			return null;
+	public static int memEncodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+		int p = offset;
+		for ( int i = 0; i < text.length(); i++, p += 2 )
+			target.putChar(p, text.charAt(i));
 
-		return encode(CharBuffer.wrap(nullTerminated ? new CharSequenceNT(text) : text), charset);
-	}
-
-	/**
-	 * A {@link java.nio.charset.CharsetEncoder#encode(java.nio.CharBuffer)} implementation that uses {@link org.lwjgl.BufferUtils#createByteBuffer(int)}
-	 * instead of {@link java.nio.ByteBuffer#allocate(int)}.
-	 *
-	 * @see java.nio.charset.CharsetEncoder#encode(java.nio.CharBuffer)
-	 */
-	private static ByteBuffer encode(CharBuffer in, Charset charset) {
-		CharsetEncoder encoder = charset.newEncoder(); // encoders are not thread-safe, create a new one on every call
-
-		int n = (int)(in.remaining() * encoder.averageBytesPerChar());
-		ByteBuffer out = BufferUtils.createByteBuffer(n);
-
-		if ( n == 0 && in.remaining() == 0 )
-			return out;
-
-		encoder.reset();
-		while ( true ) {
-			CoderResult cr = in.hasRemaining() ? encoder.encode(in, out, true) : CoderResult.UNDERFLOW;
-			if ( cr.isUnderflow() )
-				cr = encoder.flush(out);
-
-			if ( cr.isUnderflow() )
-				break;
-
-			if ( cr.isOverflow() ) {
-				n = 2 * n + 1;    // Ensure progress; n might be 0!
-				ByteBuffer o = BufferUtils.createByteBuffer(n);
-				out.flip();
-				o.put(out);
-				out = o;
-				continue;
-			}
-
-			try {
-				cr.throwException();
-			} catch (CharacterCodingException e) {
-				throw new RuntimeException(e);
-			}
+		if ( nullTerminated ) {
+			target.putChar(p, '\0');
+			p += 2;
 		}
-		out.flip();
-		return out;
+		return p - offset;
 	}
 
 	/**
-	 * Calculates the length of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is assumed
-	 * to be a single {@code \0} character.
+	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is
+	 * assumed to be a single {@code \0} character.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
 	 *
@@ -822,8 +902,8 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Calculates the length of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a single
-	 * {@code \0} character.
+	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be a
+	 * single {@code \0} character.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
 	 * @param from   the index at which to start the search
@@ -832,7 +912,7 @@ public final class MemoryUtil {
 	 */
 	public static int memStrLen1(ByteBuffer buffer, int from) {
 		int to = from;
-		while ( to < buffer.remaining() ) {
+		while ( to < buffer.limit() ) {
 			if ( buffer.get(to) == 0 )
 				break;
 			to++;
@@ -841,8 +921,8 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Calculates the length of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is assumed
-	 * to be 2 consecutive {@code \0} characters.
+	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is
+	 * assumed to be 2 consecutive {@code \0} characters.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
 	 *
@@ -853,7 +933,7 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Calculates the length of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be 2
+	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be 2
 	 * consecutive {@code \0} characters.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
@@ -863,8 +943,8 @@ public final class MemoryUtil {
 	 */
 	public static int memStrLen2(ByteBuffer buffer, int from) {
 		int to = from;
-		while ( to < buffer.remaining() ) {
-			if ( buffer.getChar(to) == 0 )
+		while ( to < buffer.limit() ) {
+			if ( buffer.get(to) == 0 && to < buffer.limit() - 1 && buffer.get(to + 1) == 0 )
 				break;
 			to += 2;
 		}
@@ -953,7 +1033,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer) {
-		return memDecode(buffer, UTF8);
+		return memDecodeUTF8(buffer, buffer.remaining());
 	}
 
 	/**
@@ -967,7 +1047,7 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer, int length) {
-		return memDecode(buffer, UTF8, length);
+		return memDecodeUTF8(buffer, length, buffer.position());
 	}
 
 	/**
@@ -982,7 +1062,65 @@ public final class MemoryUtil {
 	 * @return the decoded {@link String}
 	 */
 	public static String memDecodeUTF8(ByteBuffer buffer, int length, int offset) {
-		return memDecode(buffer, UTF8, length, offset);
+		char[] string = new char[length];
+
+		int i = 0, position = offset, limit = offset + length;
+
+		// fast path
+		while ( position < limit ) {
+			int c = buffer.get(position);
+			if ( c < 0 )
+				break;
+
+			string[i++] = (char)c;
+			position++;
+		}
+
+		// slow path
+		while ( position < limit ) {
+			int b0 = buffer.get(position++);
+			if ( 0 <= b0 ) {
+				string[i++] = (char)b0;
+			} else if ( (b0 >> 5) == -2 && (b0 & 0x1E) != 0 ) {
+				int b1 = buffer.get(position++);
+				if ( LWJGLUtil.DEBUG && (b1 & 0xC0) != 0x80 )
+					throw new RuntimeException("Malformed character sequence");
+
+				string[i++] = (char)(((b0 << 6) ^ b1) ^ (((byte)0xC0 << 6) ^ ((byte)0x80 << 0)));
+			} else if ( (b0 >> 4) == -2 ) {
+				int b1 = buffer.get(position++);
+				int b2 = buffer.get(position++);
+				if ( LWJGLUtil.DEBUG && isMalformed3(b0, b1, b2) )
+					throw new RuntimeException("Malformed character sequence");
+
+				char c = (char)((b0 << 12) ^ (b1 << 6) ^ (b2 ^ (((byte)0xE0 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
+				if ( LWJGLUtil.DEBUG && Character.MIN_SURROGATE <= c && c <= Character.MAX_SURROGATE )
+					throw new RuntimeException("Malformed character sequence");
+
+				string[i++] = c;
+			} else if ( (b0 >> 3) == -2 ) {
+				int b1 = buffer.get(position++);
+				int b2 = buffer.get(position++);
+				int b3 = buffer.get(position++);
+				int cp = ((b0 << 18) ^ (b1 << 12) ^ (b2 << 6) ^ (b3 ^ ((byte)0xF0 << 18 ^ ((byte)0x80 << 12) ^ ((byte)0x80 << 6) ^ ((byte)0x80 << 0))));
+				if ( LWJGLUtil.DEBUG && (isMalformed4(b1, b2, b3) || !Character.isSupplementaryCodePoint(cp)) )
+					throw new RuntimeException("Malformed character sequence");
+
+				string[i++] = (char)((cp >>> 10) + Character.MIN_HIGH_SURROGATE - (Character.MIN_SUPPLEMENTARY_CODE_POINT >>> 10));
+				string[i++] = (char)((cp & 0x3FF) + Character.MIN_LOW_SURROGATE);
+			} else if ( LWJGLUtil.DEBUG )
+				throw new RuntimeException("Malformed character sequence");
+		}
+
+		return new String(string, 0, i);
+	}
+
+	private static boolean isMalformed3(int b1, int b2, int b3) {
+		return (b1 == (byte)0xE0 && (b2 & 0xE0) == 0x80) || (b2 & 0xC0) != 0x80 || (b3 & 0xC0) != 0x80;
+	}
+
+	private static boolean isMalformed4(int b2, int b3, int b4) {
+		return (b2 & 0xC0) != 0x80 || (b3 & 0xC0) != 0x80 || (b4 & 0xC0) != 0x80;
 	}
 
 	/**
@@ -1045,99 +1183,6 @@ public final class MemoryUtil {
 		}
 
 		return new String(chars);
-	}
-
-	/**
-	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, using the specified {@code charset}.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
-	 *
-	 * @param buffer  the {@link ByteBuffer} to decode, or null
-	 * @param charset the {@link Charset} to use for decoding
-	 *
-	 * @return the decoded {@link String} or null if the specified {@code buffer} is null
-	 */
-	public static String memDecode(ByteBuffer buffer, Charset charset) {
-		if ( buffer == null )
-			return null;
-
-		return memDecode(buffer, charset, buffer.remaining());
-	}
-
-	/**
-	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, using the specified {@code charset}.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
-	 *
-	 * @param buffer  the {@link ByteBuffer} to decode
-	 * @param length  the number of bytes to decode
-	 * @param charset the {@link Charset} to use for decoding
-	 *
-	 * @return the decoded {@link String}
-	 */
-	public static String memDecode(ByteBuffer buffer, Charset charset, int length) {
-		return memDecode(buffer, charset, length, buffer.position());
-	}
-
-	/**
-	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, using the specified {@code charset}.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
-	 *
-	 * @param buffer  the {@link ByteBuffer} to decode
-	 * @param length  the number of bytes to decode
-	 * @param offset  the offset at which to start decoding. It must be &#x2264; the current limit of {@code buffer}.
-	 * @param charset the {@link Charset} to use for decoding
-	 *
-	 * @return the decoded {@link String}
-	 */
-	public static String memDecode(ByteBuffer buffer, Charset charset, int length, int offset) {
-		int position = buffer.position();
-		int limit = buffer.limit();
-		try {
-			buffer.position(offset);
-			buffer.limit(offset + length);
-
-			return decodeImpl(buffer, charset);
-		} finally {
-			buffer.limit(limit);
-			buffer.position(position);
-		}
-	}
-
-	private static String decodeImpl(ByteBuffer in, Charset charset) {
-		CharsetDecoder decoder = charset.newDecoder(); // decoders are not thread-safe, create a new one on every call
-
-		int n = (int)(in.remaining() * decoder.averageCharsPerByte());
-		CharBuffer out = BufferUtils.createCharBuffer(n);
-
-		if ( (n == 0) && (in.remaining() == 0) )
-			return "";
-
-		decoder.reset();
-		for (; ; ) {
-			CoderResult cr = in.hasRemaining() ? decoder.decode(in, out, true) : CoderResult.UNDERFLOW;
-			if ( cr.isUnderflow() )
-				cr = decoder.flush(out);
-
-			if ( cr.isUnderflow() )
-				break;
-			if ( cr.isOverflow() ) {
-				n = 2 * n + 1;    // Ensure progress; n might be 0!
-				CharBuffer o = BufferUtils.createCharBuffer(n);
-				out.flip();
-				o.put(out);
-				out = o;
-				continue;
-			}
-			try {
-				cr.throwException();
-			} catch (CharacterCodingException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		out.flip();
-		return out.toString();
 	}
 
 }

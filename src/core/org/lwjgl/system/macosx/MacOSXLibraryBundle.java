@@ -4,8 +4,9 @@
  */
 package org.lwjgl.system.macosx;
 
-import java.nio.ByteBuffer;
+import org.lwjgl.system.APIBuffer;
 
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.CoreFoundation.*;
 
@@ -20,7 +21,10 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		long fsPath = NULL, url = NULL;
 
 		try {
-			fsPath = CFStringCreateWithCStringNoCopy(NULL, memEncodeASCII(name), kCFStringEncodingASCII, kCFAllocatorNull());
+			APIBuffer __buffer = apiBuffer();
+			__buffer.stringParamUTF8(name, true);
+
+			fsPath = nCFStringCreateWithCStringNoCopy(NULL, __buffer.address(), kCFStringEncodingUTF8, kCFAllocatorNull());
 			if ( fsPath == NULL )
 				throw new NullPointerException();
 
@@ -43,8 +47,11 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getFunctionAddress(ByteBuffer name) {
-		long nameRef = CFStringCreateWithCStringNoCopy(NULL, name, kCFStringEncodingASCII, kCFAllocatorNull());
+	public long getFunctionAddress(CharSequence functionName) {
+		APIBuffer __buffer = apiBuffer();
+		__buffer.stringParamASCII(functionName, true);
+
+		long nameRef = nCFStringCreateWithCStringNoCopy(NULL, __buffer.address(), kCFStringEncodingASCII, kCFAllocatorNull());
 		if ( nameRef == NULL )
 			throw new NullPointerException();
 

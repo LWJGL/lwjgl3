@@ -177,7 +177,7 @@ fun config() {
 		}.member("raw")
 		struct {
 			cl_uint.member("type")
-			cl_char.member("unused", size = 17)
+			//cl_char.member("unused", size = 17)
 			cl_char.member("bus")
 			cl_char.member("device")
 			cl_char.member("function")
