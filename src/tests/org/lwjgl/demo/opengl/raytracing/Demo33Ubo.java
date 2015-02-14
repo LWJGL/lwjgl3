@@ -51,6 +51,7 @@ public class Demo33Ubo {
 	private int sampler;
 	private int cameraSettingsUbo;
 	private ByteBuffer cameraSettingsUboData = BufferUtils.createByteBuffer(4 * 4 * 5);
+	private FloatBuffer cameraSettingsUboDataFb = cameraSettingsUboData.asFloatBuffer();
 
 	/**
 	 * The UBO binding point that we assign manually. In OpenGL 4.3 this can be
@@ -409,7 +410,7 @@ public class Demo33Ubo {
 	}
 
 	private void updateCameraSettingsUbo() {
-		FloatBuffer fv = cameraSettingsUboData.asFloatBuffer();
+		FloatBuffer fv = cameraSettingsUboDataFb;
 		/* Set viewing frustum corner rays in shader */
 		Vector3f pos = camera.getPosition();
 		fv.put(pos.x).put(pos.y).put(pos.z).put(0.0f);
@@ -421,6 +422,7 @@ public class Demo33Ubo {
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
 		camera.getEyeRay(1, 1, tmpVector);
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
+		fv.rewind();
 		glBindBuffer(GL_UNIFORM_BUFFER, this.cameraSettingsUbo);
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, 4 * 4 * 5, this.cameraSettingsUboData);
 		glBindBuffer(GL_UNIFORM_BUFFER, 0);
