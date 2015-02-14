@@ -413,13 +413,13 @@ public class Demo33Ubo {
 		/* Set viewing frustum corner rays in shader */
 		Vector3f pos = camera.getPosition();
 		fv.put(pos.x).put(pos.y).put(pos.z).put(0.0f);
-		camera.computeWorldRay(-1, -1, tmpVector);
+		camera.getEyeRay(-1, -1, tmpVector);
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.computeWorldRay(-1, 1, tmpVector);
+		camera.getEyeRay(-1, 1, tmpVector);
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.computeWorldRay(1, -1, tmpVector);
+		camera.getEyeRay(1, -1, tmpVector);
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.computeWorldRay(1, 1, tmpVector);
+		camera.getEyeRay(1, 1, tmpVector);
 		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
 		glBindBuffer(GL_UNIFORM_BUFFER, this.cameraSettingsUbo);
 		glBufferSubData(GL_UNIFORM_BUFFER, 0, 4 * 4 * 5, this.cameraSettingsUboData);
