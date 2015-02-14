@@ -7,11 +7,11 @@
 uniform sampler2D framebuffer;
 
 uniform CameraSettings {
-  uniform vec3 eye;
-  uniform vec3 ray00;
-  uniform vec3 ray01;
-  uniform vec3 ray10;
-  uniform vec3 ray11;
+  vec3 eye;
+  vec3 ray00;
+  vec3 ray01;
+  vec3 ray10;
+  vec3 ray11;
 };
 
 uniform float blendFactor;
