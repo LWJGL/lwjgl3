@@ -6,7 +6,7 @@
 	<!-- *********************************** -->
 	<property name="testng" value="6.8.13"/>
 	<property name="jcommander" value="1.47"/>
-	<property name="kotlinc-build" value="0.10.836"/>
+	<property name="kotlinc-build" value="0.10.1154"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
