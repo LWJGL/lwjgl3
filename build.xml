@@ -321,8 +321,12 @@
 	</target>
 
 	<target name="release" description="" depends="compile,javadoc">
-		<!-- Bundle classes -->
+
+		<taskdef resource="aQute/bnd/ant/taskdef.properties" classpath="${lib}/bnd.jar"/>
+
 		<mkdir dir="${release.jar}"/>
+
+		<!-- Bundle classes -->
 		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
 
 		<!-- Download binaries from build.lwjgl.org -->
@@ -359,5 +363,11 @@
 			<fileset dir="${src.core}" includes="**"/>
 			<fileset dir="${generated.java}" includes="**"/>
 		</zip>
+
+        <bnd classpath="${bin.core}"
+             exceptions="true"
+             files="${config}/bnd/default.bnd"
+             output="${release.jar}/lwjgl-bundle-${build.version}.jar">
+        </bnd>
 	</target>
 </project>
