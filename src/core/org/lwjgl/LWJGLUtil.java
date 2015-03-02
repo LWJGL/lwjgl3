@@ -317,6 +317,11 @@ public final class LWJGLUtil {
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
 	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
+		try {
+			System.loadLibrary(name);
+			return;
+		} catch(Throwable t) {}
+
 		if ( new File(name).isAbsolute() ) {
 			System.load(name);
 			return;
