@@ -1227,7 +1227,8 @@ for ( i = 0; i < primcount; i++ ) {
 
 		"VERTEX_BINDING_DIVISOR" _ 0x82D6,
 		"VERTEX_BINDING_OFFSET" _ 0x82D7,
-		"VERTEX_BINDING_STRIDE" _ 0x82D8
+		"VERTEX_BINDING_STRIDE" _ 0x82D8,
+		"VERTEX_BINDING_BUFFER" _ 0x8F4F
 	)
 
 	IntConstant.block(
