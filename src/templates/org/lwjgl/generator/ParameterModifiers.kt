@@ -52,9 +52,7 @@ class AutoSize(
 	/** When true, there exists a parameter that specifies the element type, so ignore any toBytes() call. */
 	val autoTyped: Boolean = false
 ): ParameterModifier(), ReferenceModifier {
-	companion object: ModifierObject<AutoSize> {
-		override val key = javaClass<AutoSize>()
-	}
+	companion object: ModifierKey<AutoSize>
 
 	override val isSpecial = true
 
@@ -143,9 +141,7 @@ class Check(
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
 ): ParameterModifier() {
-	companion object: ModifierObject<Check> {
-		override val key = javaClass<Check>()
-	}
+	companion object: ModifierKey<Check>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
@@ -159,9 +155,7 @@ class Check(
 fun Check(value: Int) = Check(Integer.toString(value))
 
 class Nullable internal(val optional: Boolean): ParameterModifier() {
-	companion object: ModifierObject<Nullable> {
-		override val key = javaClass<Nullable>()
-	}
+	companion object: ModifierKey<Nullable>
 
 	override val isSpecial = optional
 	override protected fun validate(param: Parameter) {
@@ -193,18 +187,14 @@ class Expression(
 	/** If true, the parameter will not be removed from the method signature. */
 	val keepParam: Boolean = false
 ): ParameterModifier() {
-	companion object: ModifierObject<Expression> {
-		override val key = javaClass<Expression>()
-	}
+	companion object: ModifierKey<Expression>
 
 	override val isSpecial = true
 }
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
 class MultiType(vararg val types: PointerMapping): ParameterModifier() {
-	companion object: ModifierObject<MultiType> {
-		override val key = javaClass<MultiType>()
-	}
+	companion object: ModifierKey<MultiType>
 
 	init {
 		if ( types.isEmpty() )
@@ -232,9 +222,7 @@ class Return(
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
 ): ParameterModifier() {
-	companion object: ModifierObject<Return> {
-		override val key = javaClass<Return>()
-	}
+	companion object: ModifierKey<Return>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
@@ -253,9 +241,7 @@ val returnValue = Return("", "")
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
 class SingleValue(val newName: String): ParameterModifier() {
-	companion object: ModifierObject<SingleValue> {
-		override val key = javaClass<SingleValue>()
-	}
+	companion object: ModifierKey<SingleValue>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
@@ -279,9 +265,7 @@ class PointerArray(
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
 	val lengthsParam: String? = null
 ): ParameterModifier() {
-	companion object: ModifierObject<PointerArray> {
-		override val key = javaClass<PointerArray>()
-	}
+	companion object: ModifierKey<PointerArray>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
@@ -297,9 +281,7 @@ class PointerArray(
 }
 
 class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
-	companion object: ModifierObject<Callback> {
-		override val key = javaClass<Callback>()
-	}
+	companion object: ModifierKey<Callback>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
@@ -318,9 +300,7 @@ class MapPointer(
 	/** An expression that defines the ByteBuffer capacity. */
 	val sizeExpression: String
 ): ReturnValueModifier() {
-	companion object: ModifierObject<MapPointer> {
-		override val key = javaClass<MapPointer>()
-	}
+	companion object: ModifierKey<MapPointer>
 
 	override val isSpecial = true
 	override protected fun validate(returns: ReturnValue) {
@@ -336,9 +316,7 @@ class Construct(
 	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
 	vararg val otherArgs: String
 ): ReturnValueModifier() {
-	companion object: ModifierObject<Construct> {
-		override val key = javaClass<Construct>()
-	}
+	companion object: ModifierKey<Construct>
 
 	override val isSpecial = true
 	override protected fun validate(returns: ReturnValue) {

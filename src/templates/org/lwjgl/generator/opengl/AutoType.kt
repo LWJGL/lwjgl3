@@ -30,9 +30,7 @@ enum class BufferType(val mapping: PointerMapping, val className: String = "GL11
 }
 
 class AutoType(override val reference: String, vararg val types: BufferType): ParameterModifier(), ReferenceModifier {
-	companion object: ModifierObject<AutoType> {
-		override val key = javaClass<AutoType>()
-	}
+	companion object: ModifierKey<AutoType>
 
 	override val isSpecial = false
 

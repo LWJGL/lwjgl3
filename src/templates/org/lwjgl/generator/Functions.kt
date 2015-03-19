@@ -81,7 +81,7 @@ abstract class Function(
 	fun getNativeParams() = getParams { !it.has(virtual) }
 
 	/** Returns a parameter that has the specified ReferenceModifier with the specified reference. Returns null if no such parameter exists. */
-	fun getReferenceParam(modifierObject: ModifierObject<*>, reference: String) = getParams {
+	fun getReferenceParam(modifierObject: ModifierKey<*>, reference: String) = getParams {
 		it.hasRef(modifierObject, reference)
 	}.firstOrNull() // Assumes at most 1 parameter will be found that references the specified parameter
 

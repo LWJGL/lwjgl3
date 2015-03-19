@@ -3,17 +3,13 @@ package org.lwjgl.generator
 import java.util.ArrayList
 
 class DependsOn(override val reference: String, val postfix: String? = null): FunctionModifier(), ReferenceModifier {
-	companion object: ModifierObject<DependsOn> {
-		override val key = javaClass<DependsOn>()
-	}
+	companion object: ModifierKey<DependsOn>
 
 	override val isSpecial = false
 }
 
 class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
-	companion object: ModifierObject<Reuse> {
-		override val key = javaClass<Reuse>()
-	}
+	companion object: ModifierKey<Reuse>
 
 	override val isSpecial = true
 }
@@ -40,9 +36,7 @@ class Capabilities(
 	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
 ): FunctionModifier() {
-	companion object: ModifierObject<Capabilities> {
-		override val key = javaClass<Capabilities>()
-	}
+	companion object: ModifierKey<Capabilities>
 
 	override val isSpecial = true
 }
@@ -57,13 +51,10 @@ class Code(
 	val nativeBeforeCall: String? = null,
 	val nativeAfterCall: String? = null
 ): FunctionModifier() {
-	companion object: ModifierObject<Code> {
-		override val key = javaClass<Code>()
-
+	companion object: ModifierKey<Code> {
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
 		val NO_CODE = Code()
-
 	}
 
 	enum class ApplyTo {
@@ -98,9 +89,7 @@ val macro = object: FunctionModifier() {
 }
 
 class AccessModifier(val access: Access): FunctionModifier() {
-	companion object: ModifierObject<AccessModifier> {
-		override val key = javaClass<AccessModifier>()
-	}
+	companion object: ModifierKey<AccessModifier>
 
 	override val isSpecial = false
 }

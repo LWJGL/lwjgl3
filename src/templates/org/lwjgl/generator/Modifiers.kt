@@ -30,13 +30,13 @@ abstract class TemplateElement {
 	}
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
-	fun has(modifierObject: ModifierObject<*>) = modifiers.containsKey(modifierObject.key)
-	fun <T: TemplateModifier> get(modifier: Class<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifier] as T)
-	fun <T: TemplateModifier> get(modifierObject: ModifierObject<T>) = [suppress("UNCHECKED_CAST")](modifiers[modifierObject.key] as T)
+	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.getDeclaringClass())
+	fun <T: TemplateModifier> get(modClass: Class<T>) = [suppress("UNCHECKED_CAST")](modifiers[modClass] as T)
+	fun <T: TemplateModifier> get(modKey: ModifierKey<T>) = [suppress("UNCHECKED_CAST")](modifiers[modKey.javaClass.getDeclaringClass()] as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
-	fun hasRef(modifierObject: ModifierObject<*>, reference: String): Boolean {
-		val mod = modifiers[modifierObject.key]
+	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
+		val mod = modifiers[modKey.javaClass.getDeclaringClass()]
 		return mod != null && (mod as ReferenceModifier).reference equals reference
 	}
 
@@ -59,9 +59,7 @@ trait TemplateModifier {
 	fun validate(element: TemplateElement)
 }
 
-trait ModifierObject<T: TemplateModifier> {
-	val key: Class<T>
-}
+trait ModifierKey<T: TemplateModifier>
 
 abstract class FunctionModifier: TemplateModifier {
 	override fun validate(element: TemplateElement) {

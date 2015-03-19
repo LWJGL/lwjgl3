@@ -7,9 +7,7 @@ package org.lwjgl.generator.opengl
 import org.lwjgl.generator.*
 
 class BufferObject(val binding: String): ParameterModifier() {
-	companion object: ModifierObject<BufferObject> {
-		override val key = javaClass<BufferObject>()
-	}
+	companion object: ModifierKey<BufferObject>
 
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
