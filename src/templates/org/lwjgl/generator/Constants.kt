@@ -62,11 +62,11 @@ class ConstantBlock<T: Comparable<T>>(
 		// Find maximum constant name length
 		val alignment = constants.map {
 			it.name.length()
-		}.fold(0) {(left, right) ->
+		}.fold(0) { left, right ->
 			Math.max(left, right)
 		}
 
-		constants.forEachWithMore {(it, more) ->
+		constants.forEachWithMore { it, more ->
 			if ( more )
 				println(',')
 			printConstant(it, indent, alignment)

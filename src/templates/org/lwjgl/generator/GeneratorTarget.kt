@@ -18,7 +18,7 @@ val HEADER = """/*
 
 class Preamble {
 
-	class object {
+	companion object {
 		data class NativeDefine(
 			val expression: String,
 			val afterIncludes: Boolean
@@ -116,7 +116,7 @@ abstract class GeneratorTarget(
 	val className: String
 ): TemplateElement() {
 
-	class object {
+	companion object {
 		private val LINKS: Pattern = {
 			val JAVA = """\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*(?:\.\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)*"""
 			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
@@ -133,7 +133,7 @@ abstract class GeneratorTarget(
 		try {
 			throw RuntimeException()
 		} catch (t: Throwable) {
-			return t.getStackTrace().stream()
+			return t.getStackTrace().sequence()
 				.map { it.getFileName() }
 				.filterNotNull()
 				.filter {
@@ -249,16 +249,16 @@ abstract class GeneratorTarget(
 				if ( parentheses == -1 )
 					throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
 
-				val name = classElement.substring(0, parentheses).let { (it): String ->
+				val name = classElement.substring(0, parentheses).let(fun(it): String {
 					if ( custom )
 						return@let it
 
 					val matcher = VECTOR_POSTFIX.matcher(it)
-					if ( matcher.matches() )
+					return if ( matcher.matches() )
 						"${matcher.group(1)}${matcher.group(2) ?: ""}"
 					else
 						it
-				}
+				})
 
 				val hasParams = parentheses < classElement.length() - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( (prefix.isEmpty() && !hasParams) || custom ) "" else " $name"}}"
@@ -276,7 +276,7 @@ abstract class GeneratorTargetNative(
 	val nativeSubPath: String = ""
 ): GeneratorTarget(packageName, className) {
 
-	class object {
+	companion object {
 		val DOT_PATTERN = Pattern.compile("[.]")
 	}
 
@@ -284,7 +284,7 @@ abstract class GeneratorTargetNative(
 		get() = "${packageName.replace('.', '_')}_$className"
 
 	val nativeFileNameJNI: String
-	{
+	init {
 		val fileName = StringBuilder(packageName.length() + className.length() + 4); // some extra room for escaping
 
 		for ( subpackage in DOT_PATTERN.split(packageName) ) {

@@ -25,7 +25,7 @@ class CallbackFunction(
 			return true
 		}
 
-	private val signatureJava: String = signature.stream().map {
+	private val signatureJava: String = signature.sequence().map {
 		"${it.nativeMethodType} ${it.name}"
 	}.join(", ")
 
@@ -82,7 +82,7 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 	private static final PointerBuffer ARGS = BufferUtils.createPointerBuffer(${signature.size()});
 
 	static {
-${signature.stream().withIndex().map {
+${signature.sequence().withIndex().map {
 			"\t\tARGS.put(${it.index}, ${it.value.nativeType.ffi});"
 		}.join("\n")}
 
@@ -106,7 +106,7 @@ ${signature.stream().withIndex().map {
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
 		print("""invoke(
-${signature.stream().withIndex().map {
+${signature.sequence().withIndex().map {
 			"\t\t\tmemGet${it.value.nativeType.memType}(memGetAddress(POINTER_SIZE * ${it.index} + args))"
 		}.join(",\n")}
 		);
@@ -140,7 +140,7 @@ ${signature.stream().withIndex().map {
 				""")
 		if ( returns.mapping != TypeMapping.VOID )
 			writer.print("return ")
-		writer.print("""sam.invoke(${signature.stream().map { it.name }.join(", ")});
+		writer.print("""sam.invoke(${signature.sequence().map { it.name }.join(", ")});
 			}
 		};
 	}
@@ -163,7 +163,7 @@ fun callback(
 	val callback = CallbackFunction(packageName, className, returns, *signature)
 	if ( init != null )
 		callback.init()
-	callback.functionDoc = callback.toJavaDoc(functionDoc, signature.stream(), returns, returnDoc, since)
+	callback.functionDoc = callback.toJavaDoc(functionDoc, signature.sequence(), returns, returnDoc, since)
 	Generator.register(callback, samConstructor)
 	return callback
 }

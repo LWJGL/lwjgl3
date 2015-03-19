@@ -32,7 +32,7 @@ fun main(args: Array<String>) {
 	if ( args.size() < 2 )
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
-	val validateDirectory = {(name: String, path: String) ->
+	val validateDirectory = { name: String, path: String ->
 		if ( File(path) let { !it.exists() || !it.isDirectory() } )
 			throw IllegalArgumentException("Invalid $name path: $path")
 	}
@@ -76,7 +76,7 @@ class Generator(
 	generate: Generator.() -> Unit
 ) {
 
-	class object {
+	companion object {
 		val structs = ArrayList<Struct>()
 		val callbacks = ArrayList<CallbackFunction>()
 		val callbacksSAM = HashMap<String, MutableList<CallbackFunction>>()
@@ -106,9 +106,9 @@ class Generator(
 	}
 
 	// TODO: add more, e.g. kotlinc
-	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("$srcPath/org/lwjgl/generator", true);
+	private val GENERATOR_LAST_MODIFIED = getDirectoryLastModified("$srcPath/org/lwjgl/generator", true)
 
-	{
+	init {
 		generate()
 	}
 
@@ -145,7 +145,7 @@ class Generator(
 		val methods = packageClass.getMethods()
 
 		return methods
-			.stream()
+			.sequence()
 			.filterTo(ArrayList<Method>(methods.size())) {
 				methodFilter(it, javaClass<NativeClass>())
 			}
@@ -270,7 +270,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 			getDirectoryLastModified(it, true)
 		else
 			it.lastModified()
-	}.fold(0.toLong()) {(left, right) ->
+	}.fold(0.toLong()) { left, right ->
 		max(left, right)
 	}
 }
@@ -364,7 +364,7 @@ inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolea
 }
 
 /** Returns true if the stream was empty. */
-fun <T> Stream<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
+fun <T> Sequence<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
 	var more = false
 	for ( item in this ) {
 		apply(item, more)

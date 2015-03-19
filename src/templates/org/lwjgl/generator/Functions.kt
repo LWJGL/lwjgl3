@@ -74,7 +74,7 @@ abstract class Function(
 		return param
 	}
 
-	fun getParams(predicate: (Parameter) -> Boolean) = parameters.stream().filter(predicate)
+	fun getParams(predicate: (Parameter) -> Boolean) = parameters.sequence().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
@@ -93,7 +93,7 @@ fun NativeType.IN(name: String, javadoc: String, links: String = "", linkMode: L
 fun PointerType.OUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, OUT, javadoc, links, linkMode)
 fun PointerType.INOUT(name: String, javadoc: String, links: String = "", linkMode: LinkMode = LinkMode.SINGLE) = Parameter(this, name, INOUT, javadoc, links, linkMode)
 
-private fun <T> PrintWriter.printList(items: Stream<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
+private fun <T> PrintWriter.printList(items: Sequence<T>, itemPrint: (item: T) -> String?) = print(items.map(itemPrint).filterNotNull().joinToString(", "))
 
 // --- [ Native class functions ] ---
 
@@ -105,7 +105,7 @@ class NativeClassFunction(
 	vararg parameters: Parameter
 ): Function(returns, simpleName, "${nativeClass.prefixMethod}$simpleName", documentation, *parameters) {
 
-	{
+	init {
 		validate();
 	}
 
@@ -194,7 +194,7 @@ class NativeClassFunction(
 
 		builder append '('
 		if ( !keepPostfix ) {
-			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore {(it, more) ->
+			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore { it, more ->
 				if ( more )
 					builder append ", "
 
@@ -410,7 +410,7 @@ class NativeClassFunction(
 					if ( autoSize.factor != null )
 						length += " ${autoSize.factor!!.expressionInv()}"
 
-					streamOf(autoSize.reference, *autoSize.dependent).forEach {
+					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""
 						checks add "${prefix}checkBuffer($it, ${bufferShift(length, it, "<<", null)});"
 					}
@@ -574,7 +574,7 @@ class NativeClassFunction(
 		// Step 1: Method signature
 
 		print("\t${accessModifier}static ${returnsJavaMethodType} $strippedName(")
-		printList(parameters.stream()) {
+		printList(parameters.sequence()) {
 			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else if ( it.isBufferPointer )
@@ -1072,7 +1072,7 @@ class NativeClassFunction(
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
 		print("\t${accessModifier}static $retType $name(")
-		printList(parameters.stream()) {
+		printList(parameters.sequence()) {
 			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
 			else

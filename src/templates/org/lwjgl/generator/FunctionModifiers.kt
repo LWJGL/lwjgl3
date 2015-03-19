@@ -3,7 +3,7 @@ package org.lwjgl.generator
 import java.util.ArrayList
 
 class DependsOn(override val reference: String, val postfix: String? = null): FunctionModifier(), ReferenceModifier {
-	class object: ModifierObject<DependsOn> {
+	companion object: ModifierObject<DependsOn> {
 		override val key = javaClass<DependsOn>()
 	}
 
@@ -11,7 +11,7 @@ class DependsOn(override val reference: String, val postfix: String? = null): Fu
 }
 
 class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
-	class object: ModifierObject<Reuse> {
+	companion object: ModifierObject<Reuse> {
 		override val key = javaClass<Reuse>()
 	}
 
@@ -40,7 +40,7 @@ class Capabilities(
 	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
 ): FunctionModifier() {
-	class object: ModifierObject<Capabilities> {
+	companion object: ModifierObject<Capabilities> {
 		override val key = javaClass<Capabilities>()
 	}
 
@@ -57,24 +57,25 @@ class Code(
 	val nativeBeforeCall: String? = null,
 	val nativeAfterCall: String? = null
 ): FunctionModifier() {
-	class object: ModifierObject<Code> {
+	companion object: ModifierObject<Code> {
 		override val key = javaClass<Code>()
 
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
 		val NO_CODE = Code()
 
-		enum class ApplyTo {
-			NORMAL
-			ALTERNATIVE
-			BOTH
-		}
-
-		data class Statement(
-			val code: String,
-			val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
-		)
 	}
+
+	enum class ApplyTo {
+		NORMAL
+		ALTERNATIVE
+		BOTH
+	}
+
+	data class Statement(
+		val code: String,
+		val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
+	)
 
 	override val isSpecial = true
 
@@ -97,7 +98,7 @@ val macro = object: FunctionModifier() {
 }
 
 class AccessModifier(val access: Access): FunctionModifier() {
-	class object: ModifierObject<AccessModifier> {
+	companion object: ModifierObject<AccessModifier> {
 		override val key = javaClass<AccessModifier>()
 	}
 

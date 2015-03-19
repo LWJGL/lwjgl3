@@ -7,7 +7,7 @@ package org.lwjgl.generator.opengl
 import org.lwjgl.generator.*
 
 class BufferObject(val binding: String): ParameterModifier() {
-	class object: ModifierObject<BufferObject> {
+	companion object: ModifierObject<BufferObject> {
 		override val key = javaClass<BufferObject>()
 	}
 

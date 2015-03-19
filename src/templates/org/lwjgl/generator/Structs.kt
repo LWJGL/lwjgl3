@@ -14,7 +14,7 @@ open class StructMember(
 	val nativeName: String,
 	val name: String
 ) {
-	class object {
+	companion object {
 		val UNDERSCORE = Pattern.compile("_")
 	}
 
@@ -69,7 +69,7 @@ class Struct(
 	val malloc: Boolean = true
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 
-	class object {
+	companion object {
 		private val bufferMethodMap = hashMapOf(
 			"byte" to "",
 			"char" to "Char",
@@ -260,7 +260,7 @@ class Struct(
 		parentField: String = "",
 		more: Boolean = false
 	) {
-		members.forEachWithMore(more) {(member, more) ->
+		members.forEachWithMore(more) { member, more ->
 			if ( more )
 				println(",")
 
@@ -278,7 +278,7 @@ class Struct(
 
 	private fun getMemberCount(members: List<StructMember>): Int {
 		var count = members.size()
-		for ( member in members.stream().filter { it.isNestedAnonymousStruct } )
+		for ( member in members.sequence().filter { it.isNestedAnonymousStruct } )
 			count += getMemberCount(member.nestedMembers) // recursion
 		return count
 	}
@@ -332,8 +332,8 @@ class Struct(
 """)
 	}
 
-	private val generateConstructorArguments: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = {(members, parentMember, mode, more) ->
-		members.forEachWithMore(more) {(it, more): Unit ->
+	private val generateConstructorArguments: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+		members.forEachWithMore(more) { it, more ->
 			val method = it.method(parentMember)
 
 			if ( it.isNestedAnonymousStruct ) {
@@ -349,14 +349,14 @@ class Struct(
 			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
 			when {
-				it is StructMemberArray                                                       -> {
+				it is StructMemberArray -> {
 					println("long $param,")
 					print("\t\tint ${param}Bytes")
 				}
 				it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 					print("long $param")
 				}
-				else                                                                          -> {
+				else -> {
 					val javaType = it.nativeType.javaMethodType.getSimpleName()
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
@@ -369,7 +369,7 @@ class Struct(
 		}
 	}
 
-	private val generateConstructorSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = {(members, parentMember, mode) ->
+	private val generateConstructorSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val method = it.method(parentMember)
 
@@ -393,7 +393,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeConstructor: (List<StructMember>) -> Boolean = {(members) ->
+	private val generateAlternativeConstructor: (List<StructMember>) -> Boolean = { members ->
 		members any {
 			if ( it.isNestedAnonymousStruct )
 				generateAlternativeConstructor(it.nestedMembers)
@@ -402,8 +402,8 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeConstructorArguments: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = {(members, parentMember, mode, more) ->
-		members.forEachWithMore(more) {(it, more): Unit ->
+	private val generateAlternativeConstructorArguments: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+		members.forEachWithMore(more) { it, more ->
 			val method = it.method(parentMember)
 
 			if ( it.isNestedAnonymousStruct ) {
@@ -419,7 +419,7 @@ class Struct(
 			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
 			when {
-				it is StructMemberArray                                                                -> {
+				it is StructMemberArray -> {
 					print(
 						if ( it is StructMemberCharArray && mode === ConstructorMode.ALTER2 )
 							"CharSequence $param"
@@ -430,7 +430,7 @@ class Struct(
 				it.nativeType is PointerType && it.nativeType.mapping !== PointerMapping.OPAQUE_POINTER -> {
 					print("ByteBuffer $param")
 				}
-				else                                                                                   -> {
+				else -> {
 					val javaType = it.nativeType.javaMethodType.getSimpleName()
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
@@ -443,7 +443,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeConstructorSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = {(members, parentMember, mode) ->
+	private val generateAlternativeConstructorSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val method = it.method(parentMember)
 

@@ -62,7 +62,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		print("\n\t\tboolean supported = ")
 
-		val printPointer = {(func: NativeClassFunction) ->
+		val printPointer = { func: NativeClassFunction ->
 			if ( func has DependsOn )
 				"${func[DependsOn].reference let { if ( it.indexOf(' ') == -1 ) "ext.contains(\"$it\")" else it }} ? funcs.${func.simpleName} : -1L"
 			else
@@ -93,7 +93,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 		println("/** Defines the capabilities of an OpenGL context. */")
 		println("public final class ContextCapabilities {\n")
 
-		val classes = super.getClasses {(o1, o2) ->
+		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
 			val isGL1 = o1.templateName.startsWith("GL")
 			val isGL2 = o2.templateName.startsWith("GL")
@@ -105,7 +105,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.length() - 1) )

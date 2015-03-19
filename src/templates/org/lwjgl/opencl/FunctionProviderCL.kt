@@ -50,7 +50,7 @@ private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPE
  */""")
 		println("public class CLCapabilities {\n")
 
-		val classes = super.getClasses {(o1, o2) ->
+		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
 			val isCL1 = o1.templateName.startsWith("CL")
 			val isCL2 = o2.templateName.startsWith("CL")
@@ -62,7 +62,7 @@ private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPE
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.length() - 1) )

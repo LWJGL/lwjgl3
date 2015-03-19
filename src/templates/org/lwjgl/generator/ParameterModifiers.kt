@@ -52,7 +52,7 @@ class AutoSize(
 	/** When true, there exists a parameter that specifies the element type, so ignore any toBytes() call. */
 	val autoTyped: Boolean = false
 ): ParameterModifier(), ReferenceModifier {
-	class object: ModifierObject<AutoSize> {
+	companion object: ModifierObject<AutoSize> {
 		override val key = javaClass<AutoSize>()
 	}
 
@@ -143,7 +143,7 @@ class Check(
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
 ): ParameterModifier() {
-	class object: ModifierObject<Check> {
+	companion object: ModifierObject<Check> {
 		override val key = javaClass<Check>()
 	}
 
@@ -159,7 +159,7 @@ class Check(
 fun Check(value: Int) = Check(Integer.toString(value))
 
 class Nullable internal(val optional: Boolean): ParameterModifier() {
-	class object: ModifierObject<Nullable> {
+	companion object: ModifierObject<Nullable> {
 		override val key = javaClass<Nullable>()
 	}
 
@@ -193,7 +193,7 @@ class Expression(
 	/** If true, the parameter will not be removed from the method signature. */
 	val keepParam: Boolean = false
 ): ParameterModifier() {
-	class object: ModifierObject<Expression> {
+	companion object: ModifierObject<Expression> {
 		override val key = javaClass<Expression>()
 	}
 
@@ -202,11 +202,11 @@ class Expression(
 
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
 class MultiType(vararg val types: PointerMapping): ParameterModifier() {
-	class object: ModifierObject<MultiType> {
+	companion object: ModifierObject<MultiType> {
 		override val key = javaClass<MultiType>()
 	}
 
-	{
+	init {
 		if ( types.isEmpty() )
 			throw IllegalArgumentException("No buffer types specified.")
 
@@ -232,7 +232,7 @@ class Return(
 	/** An expression that defines the maxLength value. If defined an additional alternative method will be generated. */
 	val maxLengthExpression: String? = null
 ): ParameterModifier() {
-	class object: ModifierObject<Return> {
+	companion object: ModifierObject<Return> {
 		override val key = javaClass<Return>()
 	}
 
@@ -253,7 +253,7 @@ val returnValue = Return("", "")
 
 /** Marks a buffer parameter to transform to a single element value in an alternative method. */
 class SingleValue(val newName: String): ParameterModifier() {
-	class object: ModifierObject<SingleValue> {
+	companion object: ModifierObject<SingleValue> {
 		override val key = javaClass<SingleValue>()
 	}
 
@@ -279,7 +279,7 @@ class PointerArray(
 	/** The parameter that defines the data legth of each element in the array. If null, the elements are assumed to be null-terminated. */
 	val lengthsParam: String? = null
 ): ParameterModifier() {
-	class object: ModifierObject<PointerArray> {
+	companion object: ModifierObject<PointerArray> {
 		override val key = javaClass<PointerArray>()
 	}
 
@@ -297,7 +297,7 @@ class PointerArray(
 }
 
 class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
-	class object: ModifierObject<Callback> {
+	companion object: ModifierObject<Callback> {
 		override val key = javaClass<Callback>()
 	}
 
@@ -318,7 +318,7 @@ class MapPointer(
 	/** An expression that defines the ByteBuffer capacity. */
 	val sizeExpression: String
 ): ReturnValueModifier() {
-	class object: ModifierObject<MapPointer> {
+	companion object: ModifierObject<MapPointer> {
 		override val key = javaClass<MapPointer>()
 	}
 
@@ -336,7 +336,7 @@ class Construct(
 	val firstArg: String, // Makes the user specify at least one, else the modifier is pointless
 	vararg val otherArgs: String
 ): ReturnValueModifier() {
-	class object: ModifierObject<Construct> {
+	companion object: ModifierObject<Construct> {
 		override val key = javaClass<Construct>()
 	}
 

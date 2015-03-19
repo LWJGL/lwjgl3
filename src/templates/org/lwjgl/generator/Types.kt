@@ -147,7 +147,7 @@ open class TypeMapping(
 	val javaMethodType: Class<out Any>
 ) {
 
-	class object {
+	companion object {
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 		val BOOLEAN = TypeMapping("jboolean", javaClass<Boolean>(), javaClass<Boolean>())
 	}
@@ -160,7 +160,7 @@ open class PrimitiveMapping(
 	val bytes: Int
 ): TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
-	class object {
+	companion object {
 		val BYTE = PrimitiveMapping("jbyte", javaClass<Byte>(), 1)
 		val CHAR = PrimitiveMapping("jchar", javaClass<Char>(), 2)
 		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2)
@@ -183,7 +183,7 @@ class CharMapping(
 	val charset: String
 ): PrimitiveMapping(jniFunctionType, javaMethodType, bytes) {
 
-	class object {
+	companion object {
 		val ASCII = CharMapping("jbyte", javaClass<Byte>(), 1, "ASCII")
 		val UTF8 = CharMapping("jbyte", javaClass<Byte>(), 1, "UTF8")
 		val UTF16 = CharMapping("jchar", javaClass<Char>(), 2, "UTF16")
@@ -196,7 +196,7 @@ open class PointerMapping(
 	val byteShift: String? = null
 ): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {
 
-	class object {
+	companion object {
 		val OPAQUE_POINTER = PointerMapping(javaClass<Long>())
 
 		/** Useful for void * params that will be AutoTyped. */

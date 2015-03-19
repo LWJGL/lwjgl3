@@ -60,7 +60,7 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 }
 
 /** Specialized conversion for methods. */
-fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
+fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
 	// TODO: This is shit, optimize
 	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut || returns is StructType }
 	if ( params.isEmpty() && returnDoc.isEmpty() )
@@ -72,7 +72,7 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Stream<Parameter>
 
 	if ( !params.isEmpty() ) {
 		// Find maximum param name length
-		val alignment = params.map { it.name.length() }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = params.map { it.name.length() }.fold(0) { left, right -> Math.max(left, right) }
 
 		val paramMultilineAligment = paramMultilineAligment(alignment)
 

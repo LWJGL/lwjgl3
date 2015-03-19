@@ -20,7 +20,7 @@ abstract class FunctionProvider(
 	className: String
 ): CustomClass(packageName, className) {
 
-	{
+	init {
 		javaImport(
 			"org.lwjgl.system.*",
 			"java.util.Set"
@@ -30,7 +30,7 @@ abstract class FunctionProvider(
 	private val _classes: MutableList<NativeClass> = ArrayList()
 
 	protected fun getClasses(
-		comparator: (NativeClass, NativeClass) -> Int = {(o1, o2) -> o1.templateName compareTo o2.templateName }
+		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName compareTo o2.templateName }
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
 		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
@@ -206,7 +206,7 @@ class NativeClass(
 			println(" ${_functions.values().first().addressName};")
 		} else {
 			println()
-			_functions.values().forEachWithMore {(func, more) ->
+			_functions.values().forEachWithMore { func, more ->
 				if ( more )
 					println(",")
 				print("\t\t${func.addressName}")
@@ -241,14 +241,14 @@ class NativeClass(
 		if ( functionProvider != null ) {
 			// Generate typedefs for casting the function pointers
 			println()
-			functions.stream().filter { !it.has(Reuse) }.forEach {
+			functions.sequence().filter { !it.has(Reuse) }.forEach {
 				it.generateFunctionDefinition(this)
 			}
 		}
 
 		println("\nEXTERN_C_ENTER")
 
-		functions.stream().filter { !it.has(Reuse) }.forEach {
+		functions.sequence().filter { !it.has(Reuse) }.forEach {
 			println()
 			it.generateFunction(this)
 		}
@@ -275,7 +275,7 @@ class NativeClass(
 			_functions.values().filter(filter)
 
 		var lineSize = 12
-		functions.forEachWithMore {(func, more) ->
+		functions.forEachWithMore { func, more ->
 			if ( more ) {
 				out.print(", ")
 				lineSize += 2
@@ -315,7 +315,7 @@ class NativeClass(
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.stream(), this.nativeType, returnDoc, since),
+			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.sequence(), this.nativeType, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)

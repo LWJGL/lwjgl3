@@ -8,7 +8,7 @@ import java.util.HashMap
 
 abstract class TemplateElement {
 
-	class object {
+	companion object {
 		private val EMPTY_MODIFIERS: MutableMap<Class<out TemplateModifier>, TemplateModifier> = HashMap(0)
 	}
 

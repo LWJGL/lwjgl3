@@ -97,7 +97,7 @@ class Parameter(
 	linkMode: LinkMode
 ): QualifiedType(nativeType) {
 
-	class object {
+	companion object {
 		val LINK_SPLIT = Pattern.compile("\\s+")
 	}
 

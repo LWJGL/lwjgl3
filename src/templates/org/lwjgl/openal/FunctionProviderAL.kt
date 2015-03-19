@@ -44,7 +44,7 @@ private val FunctionProviderAL = Generator.register(object : FunctionProvider(OP
 		println("/** Defines the capabilities of an OpenAL context. */")
 		println("public final class ALCapabilities {\n")
 
-		val classes = super.getClasses {(o1, o2) ->
+		val classes = super.getClasses { o1, o2 ->
 			val isAL1 = o1.templateName.startsWith("AL")
 			val isAL2 = o2.templateName.startsWith("AL")
 
@@ -55,7 +55,7 @@ private val FunctionProviderAL = Generator.register(object : FunctionProvider(OP
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.length() - 1) )

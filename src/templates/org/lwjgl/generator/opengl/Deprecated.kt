@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 
 /** Marks an OpenGL function as deprecated; its function address will not be loaded in a forward-compatible context. */
 class DeprecatedGL internal(): FunctionModifier() {
-	class object: ModifierObject<DeprecatedGL> {
+	companion object: ModifierObject<DeprecatedGL> {
 		override val key = javaClass<DeprecatedGL>()
 	}
 

@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 /** Specifies an alternative name for the OpenGL SDK Reference url. */
 class ReferenceGL(val function: String): FunctionModifier() {
-	class object: ModifierObject<ReferenceGL> {
+	companion object: ModifierObject<ReferenceGL> {
 		override val key = javaClass<ReferenceGL>()
 	}
 

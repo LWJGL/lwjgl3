@@ -70,7 +70,7 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 		println("/** Defines the capabilities of the OpenAL Context API. */")
 		println("public final class ALCCapabilities {\n")
 
-		val classes = super.getClasses {(o1, o2) ->
+		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
 			val isALC1 = o1.templateName.startsWith("ALC")
 			val isALC2 = o2.templateName.startsWith("ALC")
@@ -82,7 +82,7 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions && it.prefix == "ALC" }
-		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) {(left, right) -> Math.max(left, right) }
+		val alignment = classesWithFunctions.map { it.className.length() }.fold(0) { left, right -> Math.max(left, right) }
 		for ( extension in classesWithFunctions ) {
 			print("\tfinal ${extension.className}")
 			for ( i in 0..(alignment - extension.className.length() - 1) )
