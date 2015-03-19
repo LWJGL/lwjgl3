@@ -405,8 +405,16 @@ class NativeClassFunction(
 
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
-				if ( mode === NORMAL ) {
+				if ( mode === NORMAL || it.nativeType is PointerType ) {
 					var length = it.name
+					if ( it.nativeType is PointerType ) {
+						if ( mode !== NORMAL )
+							length += ".get($length.position())"
+						else if ( it.nativeType.mapping === PointerMapping.DATA_INT )
+							length += ".getInt($length.position())"
+						else
+							length = "PointerBuffer.get($length, $length.position())"
+					}
 					if ( autoSize.factor != null )
 						length += " ${autoSize.factor!!.expressionInv()}"
 
@@ -414,7 +422,9 @@ class NativeClassFunction(
 						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""
 						checks add "${prefix}checkBuffer($it, ${bufferShift(length, it, "<<", null)});"
 					}
-				} else {
+				}
+
+				if ( mode !== NORMAL ) {
 					val referenceTransform = transforms!![paramMap[autoSize.reference]!!]
 					val expression =
 						if ( referenceTransform != null && (referenceTransform.javaClass === javaClass<SingleValueTransform>() || referenceTransform === PointerArrayTransformSingle) )

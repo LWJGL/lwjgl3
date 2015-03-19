@@ -92,16 +92,23 @@ class AutoSize(
 	fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
 	override fun validate(param: Parameter) {
-		if ( param.paramType === ParameterType.OUT )
-			throw IllegalArgumentException("The AutoSize modifier can only be applied on input parameters.")
-
-		when ( param.nativeType.mapping ) {
-			PrimitiveMapping.INT,
-			PrimitiveMapping.PTR -> {
+		when ( param.paramType ) {
+			ParameterType.IN -> if ( when ( param.nativeType.mapping ) {
+				PrimitiveMapping.INT,
+				PrimitiveMapping.PTR -> false
+				else -> true
+			} )
+				throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
+			ParameterType.INOUT -> {
+				if ( param.nativeType !is PointerType || when ( param.nativeType.mapping ) {
+					PointerMapping.DATA_INT,
+					PointerMapping.DATA_POINTER -> false
+					else -> true
+				} )
+					throw IllegalArgumentException("INOUT parameters with the AutoSize modifier must be integer pointer types.")
 			}
-			else                 -> {
-				throw IllegalArgumentException("The AutoSize modifier can only be applied on integer primitive types.")
-			}
+			else ->
+				throw IllegalArgumentException("The AutoSize modifier can only be applied on IN or INOUT parameters.")
 		}
 	}
 }
