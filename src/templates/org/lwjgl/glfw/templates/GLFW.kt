@@ -40,7 +40,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	IntConstant.block(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION" _ 0
+		"VERSION_REVISION" _ 1
 	)
 
 	IntConstant.block(
@@ -223,7 +223,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Mouse buttons.",
+		"""Mouse buttons. See <a href="http://www.glfw.org/docs/latest/input.html\#input_mouse_button">mouse button input</a> for how these are used.""",
 
 		"MOUSE_BUTTON_1" _ 0,
 		"MOUSE_BUTTON_2" _ 1,
@@ -240,7 +240,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	IntConstant.block(
-		"Joysticks.",
+		"""Joysticks. See <a href="http://www.glfw.org/docs/latest/input.html\#joystick">joystick input</a> for how these are used.""",
 
 		"JOYSTICK_1" _ 0,
 		"JOYSTICK_2" _ 1,
@@ -316,13 +316,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	IntConstant.block(
 		"""
-		GLFW could not find support for the requested client API on the system.
+		GLFW could not find support for the requested client API on the system. If emitted by functions other than @ref glfwCreateWindow, no supported client
+		API was found.
 
-		The installed graphics driver does not support the requested client API, or does not support it via the chosen context creation backend. Below are a few
-		examples:
+		The installed graphics driver does not support the requested client API, or does not support it via the chosen context creation backend. Below are a
+		few examples:
 
-		Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while nVidia and Intel only supports it via a
-		WGL or GLX extension. OS X does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the nVidia binary
+		Some pre-installed Windows graphics drivers do not support OpenGL. AMD only supports OpenGL ES via EGL, while Nvidia and Intel only support it via a
+		WGL or GLX extension. OS X does not provide OpenGL ES at all. The Mesa EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
 		driver.
 		""",
 
@@ -331,7 +332,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	IntConstant.block(
 		"""
-		The requested OpenGL or OpenGL ES version (including any requested profile or context option) is not available on this machine.
+		The requested OpenGL or OpenGL ES version (including any requested context or framebuffer hints) is not available on this machine.
 
 		The machine does not support your requirements. If your application is sufficiently flexible, downgrade your requirements and try again. Otherwise,
 		inform the user that their machine does not match your requirements.
@@ -347,7 +348,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		A platform-specific error occurred that does not match any of the more specific categories.
 
-		A bug in GLFW or the underlying operating system. Report the bug to our <a href="https://github.com/glfw/glfw/issues">issue tracker</a>.
+		A bug or configuration error in GLFW, the underlying operating system or its drivers, or a lack of required resources. Report the issue to our
+		<a href="https://github.com/glfw/glfw/issues">issue tracker</a>.
 		""",
 
 		"PLATFORM_ERROR" _ 0x00010008
@@ -395,7 +397,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	)
 
 	val CursorShapes = IntConstant.block(
-		"Standard cursor shapes.",
+		"""Standard cursor shapes. See <a href="http://www.glfw.org/docs/latest/input.html\#cursor_standard">standard cursor creation</a> for how these are used.""",
 
 		"ARROW_CURSOR" _ 0x00036001,
 		"IBEAM_CURSOR" _ 0x00036002,
@@ -530,6 +532,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		${ul(
 			"This function may be called before #Init().",
 			"This function may only be called from the main thread.",
+			"This function may not be called from a callback.",
 			"No window's context may be current on another thread when this function is called."
 		)}
 		""",
@@ -563,6 +566,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
 		compile-time options.
 
+		<b>Do not use the version string</b> to parse the GLFW library version. The #GetVersion() function already provides the version of the
+		running library binary.
+
 		Notes:
 		${ul(
 			"This function always succeeds.",
@@ -585,6 +591,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		Because the description string may have been generated specifically for that error, it is not guaranteed to be valid after the callback has returned. If
         you wish to use it after the callback returns, you need to make a copy.
+
+        Once set, the error callback remains set even after the library has been terminated.
 
 		Notes:
 		${ul(
@@ -649,21 +657,24 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Returns the size, in millimetres, of the display area of the specified monitor.
 
+		Some systems do not provide accurate monitor size information, either because the monitor
+		<a href="https://en.wikipedia.org/wiki/Extended_display_identification_data">EDID</a> data is incorrect or because the driver does not report it
+		accurately.
+
 		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
 
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
 		    """
-			Some systems do not provide accurate monitor size information, either because the EDID data is incorrect, or because the driver does not report it
-			accurately.
+			<b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.
 		    """
 		)}
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in mm, of the monitor's display area, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in mm, of the monitor's display area, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
+		mods(nullable, Check(1)) _ int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
 	    since = "GLFW 3.0"
 	)
 
@@ -744,7 +755,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetGamma",
 		"""
-		Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it.
+		Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a finite number greater than
+		zero.
 
 		This function may only be called from the main thread.
 		""",
@@ -781,6 +793,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		${ul(
 			"This function may only be called from the main thread.",
 			"Gamma ramp sizes other than 256 are not supported by all hardware",
+			"<b>Windows</b>: The gamma ramp size must be 256.",
 		    "The specified gamma ramp is copied before this function returns."
 		)}
 		""",
@@ -872,19 +885,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		For full screen windows, the specified size becomes the resolution of the window's desired video mode. As long as a full screen window has input focus,
 		the supported video mode most closely matching the desired video mode is set for the specified monitor. For more information about full screen windows,
-		including the creation of so called windowed full screen or borderless full screen windows, see
-		<a href="http://www.glfw.org/docs/latest/window.html\#window_full_screen">full screen</a>.
+		including the creation of so called <i>windowed full screen</i> or <i>borderless full screen windows</i>, see
+		<a href="http://www.glfw.org/docs/latest/window.html\#window_windowed_full_screen">full screen</a>.
 
 		By default, newly created windows use the placement recommended by the window system. To create the window at a specific position, make it initially
 		invisible using the #VISIBLE window hint, set its <a href="http://www.glfw.org/docs/latest/window.html\#window_pos">position</a> and then
 		<a href="http://www.glfw.org/docs/latest/window.html\#window_hide">show</a> it.
 
-		If a full screen window is focused, the screensaver is prohibited from starting.
+		If a full screen window has input focus, the screensaver is prohibited from starting.
 
 		Window systems put limits on window sizes. Very large or very small window dimensions may be overridden by the window system on creation. Check the
 		actual <a href="http://www.glfw.org/docs/latest/window.html\#window_size">size</a> after creation.
 
-		The <a href="http://www.glfw.org/docs/latest/window.html\#window_swap">swap interval</a> is not set during window creation and the initial value may vary
+		The <a href="http://www.glfw.org/docs/latest/window.html\#buffer_swap">swap interval</a> is not set during window creation and the initial value may vary
 		depending on driver settings and defaults.
 
         Notes:
@@ -909,6 +922,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		    minimal about dialog with information from the application's bundle. The menu bar can be disabled with a
 		    <a href="http://www.glfw.org/docs/latest/compile.html\#compile_options_osx">compile-time option</a>.
 		    """,
+			"""
+		    <b>OS X</b>: On OS X 10.10 and later the window frame will not be rendered at full resolution on Retina displays unless the
+		    {@code NSHighResolutionCapable} key is enabled in the application bundle's {@code Info.plist}. For more information, see
+		    <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High
+		    Resolution Guidelines for OS X</a> in the Mac Developer Library.
+			""",
 		    "<b>X11</b>: There is no mechanism for setting the window icon yet.",
 		    "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows."
 		)}
@@ -1009,12 +1028,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the position, in screen coordinates, of the upper-left corner of the client area of the specified windowed mode window. If the window is a full
 		screen window, this function does nothing.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"It is very rarely a good idea to move an already visible window, as it will confuse and annoy the user.",
-			"The window manager may put limits on what positions are allowed."
-		)}
+		<b>Do not use this function</b> to move an already visible window unless you have very good reasons for doing so, as it will confuse and annoy the
+		user.
+
+		The window manager may put limits on what positions are allowed. GLFW cannot and should not override these limits.
+
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
@@ -1027,8 +1046,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"GetWindowSize",
 		"""
-		Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer in pixels,
-		see #GetFramebufferSize().
+		Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer of the
+		window in pixels, see #GetFramebufferSize().
 
 		Any or all of the size arguments may be $NULL. If an error occurs, all non-$NULL size arguments will be set to zero.
 
@@ -1050,11 +1069,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		For full screen windows, this function selects and switches to the resolution closest to the specified size, without affecting the window's context. As
 		the context is unaffected, the bit depths of the framebuffer remain unchanged.
 
-		Notes:
-		${ul(
-			"This function may only be called from the main thread.",
-			"The window manager may put limits on what window sizes are allowed."
-		)}
+		The window manager may put limits on what sizes are allowed. GLFW cannot and should not override these limits.
+
+		This function may only be called from the main thread.
 		""",
 
 		GLFWwindow.IN("window", "the window to resize"),
@@ -1304,10 +1321,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWwindowfocusfun.func(
 		"SetWindowFocusCallback",
 		"""
-		Sets the focus callback of the specified window, which is called when the window gains or loses focus.
+		Sets the focus callback of the specified window, which is called when the window gains or loses input focus.
 
-		After the focus callback is called for a window that lost focus, synthetic key and mouse button release events will be generated for all such that had
-		been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
+  		After the focus callback is called for a window that lost input focus, synthetic key and mouse button release events will be generated for all such
+  		that had been pressed. For more information, see #SetKeyCallback() and #SetMouseButtonCallback().
 
 		This function may only be called from the main thread.
 		""",
@@ -1391,6 +1408,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		those platforms. You can use the <a href="http://www.glfw.org/docs/latest/window.html\#window_refresh">window refresh callback</a> to redraw the
 		contents of your window when necessary during such operations.
 
+		On some platforms, certain callbacks may be called outside of a call to one of the event processing functions.
+
 		If no windows exist, this function returns immediately. For synchronization of threads in applications that do not create windows, use your threading
 		library of choice.
 
@@ -1443,10 +1462,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		If {@code mode} is #CURSOR, the value must be one of the following cursor modes:
 		${ul(
 			"#CURSOR_NORMAL makes the cursor visible and behaving normally.",
-			"""
-			#CURSOR_HIDDEN makes the cursor invisible when it is over the client area of the window but does not restrict the cursor from leaving. This is
-			useful if you wish to render your own cursor or have no visible cursor at all.
-			""",
+			"#CURSOR_HIDDEN makes the cursor invisible when it is over the client area of the window but does not restrict the cursor from leaving.",
 			"""
 			#CURSOR_DISABLED hides and grabs the cursor, providing virtual and unlimited cursor movement. This is useful for implementing for example 3D camera
 			controls.
@@ -1522,7 +1538,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"GetCursorPos",
 		"""
-		Returns the last reported position of the cursor, in screen coordinates, relative to the upper-left corner of the client area of the specified window.
+		Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the client area of the specified window.
 
 		If the cursor is disabled (with #CURSOR_DISABLED) then the cursor position is unbounded and limited only by the minimum and maximum values of a
 		<b>double</b>.
@@ -1545,11 +1561,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetCursorPos",
 		"""
-		Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the client area of the specified window. The window must be
-		focused. If the window does not have focus when this function is called, it fails silently.
+		Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the client area of the specified window. The window must
+		have input focus. If the window does not have input focus when this function is called, it fails silently.
 
-		If the cursor is disabled (with #CURSOR_DISABLED) then the cursor position is unbounded and limited only by the minimum and maximum values of a
-		<b>double</b>.
+		<b>Do not use this function</b> to implement things like camera controls. GLFW already provides the #CURSOR_DISABLED cursor mode that hides the cursor,
+		transparently re-centers it and provides unconstrained cursor motion. See #SetInputMode() for more information.
+
+  		If the cursor mode is #CURSOR_DISABLED then the cursor position is unconstrained and limited only by the minimum and maximum values of <b>double</b>.
 
 		Notes:
 		${ul(
@@ -1571,10 +1589,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWcursor.func(
 		"CreateCursor",
 	    """
-	    Creates a new cursor that can be made the system cursor for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
-	    cursors are destroyed by #Terminate().
+		Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
+		cursors are destroyed by #Terminate().
 
-	    The image data is 32-bit RGBA, i.e. eight bits per channel. The pixels are arranged canonically as sequental rows, starting from the top-left corner.
+		The pixels are 32-bit little-endian RGBA, i.e. eight bits per channel. They are arranged canonically as packed sequential rows, starting from the
+		top-left corner.
+
+		The cursor hotspot is specified in pixels, relative to the upper-left corner of the cursor image. Like all other coordinate systems in GLFW, the X-axis
+		points to the right and the Y-axis points down.
 
 	    Notes:
 	    ${ul(
@@ -1585,17 +1607,17 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    """,
 
 	    const _ GLFWimage_p.IN("image", "the desired cursor image"),
-	    int.IN("xhot", "the desired x-coordinate of the cursor hotspot"),
-	    int.IN("yhot", "the desired y-coordinate of the cursor hotspot"),
+	    int.IN("xhot", "the desired x-coordinate, in pixels, of the cursor hotspot"),
+	    int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
 
-	    returnDoc = "a new cursor ready to use or $NULL if an error occurred",
+	    returnDoc = "the handle of the created cursor, or $NULL if an error occurred",
 	    since = "GLFW 3.1"
 	)
 
 	GLFWcursor.func(
 		"CreateStandardCursor",
 		"""
-		Returns a cursor with a standard shape, which can be made the system cursor for a window with #SetCursor().
+		Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
 
 	    Notes:
 	    ${ul(
@@ -1631,13 +1653,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetCursor",
 	    """
-	    Sets the system cursor for the specified window.
+	    Sets the cursor image to be used when the cursor is over the client area of the specified window. The set cursor will only be visible when the
+	    <a href="http://www.glfw.org/docs/latest/input.html\#cursor_mode">cursor mode</a> of the window is #CURSOR_NORMAL.
 
-	    This function may only be called from the main thread.
+		On some platforms, the set cursor may not be visible unless the window also has input focus.
+
+  	    This function may only be called from the main thread.
 	    """,
 
 	    GLFWwindow.IN("window", "the window to set the system cursor for"),
-	    nullable _ GLFWcursor.IN("cursor", "the cursor to change to, or $NULL to switch back to the default system cursor"),
+	    nullable _ GLFWcursor.IN("cursor", "the cursor to set, or $NULL to switch back to the default arrow cursor"),
 
 	    since = "GLFW 3.1"
 	)
@@ -1650,9 +1675,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		The key functions deal with physical keys, with layout independent key tokens named after their values in the standard US keyboard layout. If you want
 		to input text, use #SetCharCallback() instead.
 
-		When a window loses focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated events by
-		the fact that the synthetic ones are generated after the window has lost focus, i.e. #FOCUSED will be false and the focus callback will have already
-		been called.
+		When a window loses input focus, it will generate synthetic key release events for all pressed keys. You can tell these events from user-generated
+		events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus callback has been
+		called.
 
 		The scancode of a key is specific to that platform or sometimes even to that machine. Scancodes are intended to allow users to bind keys that don't have
 		a GLFW key token. Such keys have {@code key} set to #KEY_UNKNOWN, their state is not saved and so it cannot be queried with #GetKey().
@@ -1717,9 +1742,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"""
 		Sets the mouse button callback of the specified window, which is called when a mouse button is pressed or released.
 
-		When a window loses focus, it will generate synthetic mouse button release events for all pressed mouse buttons. You can tell these events from
-		user-generated events by the fact that the synthetic ones are generated after the window has lost focus, i.e. #FOCUSED will be false and the focus
-		callback will have already been called.
+		When a window loses input focus, it will generate synthetic mouse button release events for all pressed mouse buttons. You can tell these events from
+		user-generated events by the fact that the synthetic ones are generated after the focus loss event has been processed, i.e. after the window focus
+		callback has been called.
 
 		This function may only be called from the main thread.
 		""",
@@ -1920,12 +1945,16 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	void.func(
 		"SetTime",
 		"""
-		Sets the value of the GLFW timer. It then continues to count up from that value.
+		Sets the value of the GLFW timer. It then continues to count up from that value. The value must be a positive finite number less than or equal to
+		18446744073.0, which is approximately 584.5 years.
+
+		The upper limit of the timer is calculated as ${code("floor((2<sup>64</sup> - 1) / 10<sup>9</sup>)")} and is due to implementations storing nanoseconds
+		in 64 bits. The limit may be increased in the future.
 
 		This function may only be called from the main thread.
 		""",
 
-		double.IN("time", "new value, in seconds"),
+		double.IN("time", "the new value, in seconds"),
 
 		since = "GLFW 2.2"
 	)
@@ -1938,9 +1967,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context can only be made current on a single thread at a
 		time and each thread can have only a single current context at a time.
 
-		 By default, making a context non-current implicitly forces a pipeline flush. On machines that support
-		 <a href="https://www.opengl.org/registry/specs/KHR/context_flush_control.txt">GL_KHR_context_flush_control</a>, you can control whether a context
-		 performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR <a href="http://www.glfw.org/docs/latest/window.html\#window_hints_ctx">window hint</a>.
+		By default, making a context non-current implicitly forces a pipeline flush. On machines that support
+		<a href="https://www.opengl.org/registry/specs/KHR/context_flush_control.txt">GL_KHR_context_flush_control</a>, you can control whether a context
+		performs this flush by setting the #CONTEXT_RELEASE_BEHAVIOR <a href="http://www.glfw.org/docs/latest/window.html\#window_hints_ctx">window hint</a>.
 
 		This function may be called from any thread.
 		""",
@@ -1980,7 +2009,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"SwapInterval",
 		"""
 		Sets the swap interval for the current context, i.e. the number of screen updates to wait from the time #SwapBuffers() was called before swapping the
-		buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or <i>vsync</i>.
+		buffers and returning. This is sometimes called <i>vertical synchronization</i>, <i>vertical retrace synchronization</i> or just <i>vsync</i>.
 
 		Contexts that support either of the <a href="https://www.opengl.org/registry/specs/EXT/wgl_swap_control_tear.txt">WGL_EXT_swap_control_tear</a> and
 		<a href="https://www.opengl.org/registry/specs/EXT/glx_swap_control_tear.txt">GLX_EXT_swap_control_tear</a> extensions also accept negative swap
@@ -1996,7 +2025,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 			This function is not called during window creation, leaving the swap interval set to whatever is the default on that platform. This is done because
 			some swap interval extensions used by GLFW do not allow the swap interval to be reset to zero once it has been set to a non-zero value.
 			""",
-		    "Some GPU drivers do not honor the requested swap interval, either because of user settings that override the request or due to bugs in the driver."
+		    """
+		    Some GPU drivers do not honor the requested swap interval, either because of a user setting that overrides the application's request or due to bugs
+		    in the driver.
+		    """
 		)}
 		""",
 
@@ -2008,8 +2040,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	int.func(
 		"ExtensionSupported",
 		"""
-		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current OpenGL
-		or OpenGL ES context. It searches both for OpenGL and OpenGL ES extension and platform-specific context creation API extensions.
+		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current
+		OpenGL or OpenGL ES context. It searches both for OpenGL and OpenGL ES extension and platform-specific context creation API extensions.
 
 		A context must be current on the calling thread. Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
@@ -2029,17 +2061,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWglproc.func(
 		"GetProcAddress",
 		"""
-		Returns the address of the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">client API or extension function</a>, if it is
+		Returns the address of the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">core or extension function</a>, if it is
 		supported by the current context.
 
 		A context must be current on the calling thread.  Calling this function without a current context will cause a `GLFW_NO_CURRENT_CONTEXT` error.
 
-		The returned function pointer is valid until the context is destroyed or the library is terminated.
-
 		Notes:
 		${ul(
-			"This function may be called from any thread.",
-			"The addresses of a given function is not guaranteed to be the same between contexts."
+			"The addresses of a given function is not guaranteed to be the same between contexts.",
+			"""
+			This function may return a non-$NULL address despite the associated version or extension not being available. Always check the context version or
+			extension string presence first.
+			""",
+			"The returned function pointer is valid until the context is destroyed or the library is terminated.",
+			"This function may be called from any thread."
 		)}
 		""",
 
