@@ -6,4 +6,7 @@
 	#define _MACOSX_LWJGL_INCLUDED
 
 	#include <CoreFoundation/CoreFoundation.h>
+	#include <objc/objc-runtime.h>
+
+	typedef void (*EnumerationMutationHandler)(id);
 #endif
