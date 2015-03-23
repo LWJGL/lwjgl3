@@ -2,7 +2,6 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 120
 
 #define PI 3.14159265359
 

@@ -2,7 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 120
+#if GL_core_profile
+  #version 130
+  #define attribute in
+  #define varying out
+#endif
 
 /* The position of the vertex as two-dimensional vector */
 attribute vec2 vertex;

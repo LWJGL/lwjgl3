@@ -2,7 +2,16 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-#version 120
+#if GL_core_profile
+  #version 130
+  #define varying in
+  #define texture2D texture
+
+  out vec4 color;
+  #define OUT color
+#else
+  #define OUT gl_FragColor
+#endif
 
 /* This comes interpolated from the vertex shader */
 varying vec2 texcoord;
@@ -12,5 +21,5 @@ uniform sampler2D tex;
 
 void main(void) {
   /* Well, simply sample the texture */
-  gl_FragColor = texture2D(tex, texcoord);
+  OUT = texture2D(tex, texcoord);
 }
