@@ -61,12 +61,7 @@
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
-			<fileset dir="${src.native}/system/macosx" includes="*.c"/>
-			<fileset dir="${src.native}/system/macosx" includes="*.m"/>
 			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.native}/glfw" includes="*.c"/>
-			<fileset dir="${src.native}/opencl" includes="*.c"/>
-			<fileset dir="${src.native}/opengl" includes="*.c"/>
 			<fileset dir="${generated.native}/system" includes="*.c"/>
 			<fileset dir="${generated.native}/system/macosx" includes="*.c"/>
 			<fileset dir="${generated.native}/system/macosx" includes="*.m"/>
