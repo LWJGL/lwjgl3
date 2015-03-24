@@ -30,13 +30,13 @@ val ARB_cl_event = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		"""
 
 	IntConstant.block(
-		"Returned in {@code values} for GL32#GetSync() {@code pname} GL32#OBJECT_TYPE.",
+		"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#OBJECT_TYPE.",
 
 		"SYNC_CL_EVENT_ARB" _ 0x8240
 	)
 
 	IntConstant.block(
-		"Returned in {@code values} for GL32#GetSync() {@code pname} GL32#SYNC_CONDITION.",
+		"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#SYNC_CONDITION.",
 
 		"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
 	)

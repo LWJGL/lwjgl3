@@ -62,7 +62,7 @@ val GLFWmonitorfun = CallbackType(callback(
 	GLFW_PACKAGE, void, "GLFWMonitorCallback",
 	"Will be called when a monitor is connected to or disconnected from the system.",
 	GLFWmonitor.IN("monitor", "the monitor that was connected or disconnected"),
-	int.IN("event", "one of {@link GLFW##GLFW_CONNECTED} or {@link GLFW##GLFW_DISCONNECTED}"),
+	int.IN("event", "one of GLFW##GLFW_CONNECTED or GLFW##GLFW_DISCONNECTED"),
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMonitorCallback() method."
@@ -127,7 +127,7 @@ val GLFWwindowiconifyfun = CallbackType(callback(
 	GLFW_PACKAGE, void, "GLFWWindowIconifyCallback",
 	"Will be called when the specified window is iconified or restored.",
 	GLFWwindow.IN("window", "the window that was iconified or restored."),
-	int.IN("iconified", "{@link GL11#GL_TRUE} if the window was iconified, or {@link GL11#GL_FALSE} if it was restored"),
+	int.IN("iconified", "GL11#GL_TRUE if the window was iconified, or GL11#GL_FALSE if it was restored"),
 	samConstructor = "GLFW"
 ) {
 	javaImport("org.lwjgl.opengl.GL11")

@@ -210,7 +210,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	// Closures types
 
-	/** A {@Closure} with no return value. */
+	/** A {@code Closure} with no return value. */
 	public abstract static class Void extends Closure {
 		protected Void(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_VOID);
@@ -219,7 +219,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract void callback(long args);
 	}
 
-	/** A {@Closure} that returns a byte value. */
+	/** A {@code Closure} that returns a byte value. */
 	public abstract static class Byte extends Closure {
 		protected Byte(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_BYTE);
@@ -228,7 +228,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract byte callback(long args);
 	}
 
-	/** A {@Closure} that returns a short value. */
+	/** A {@code Closure} that returns a short value. */
 	public abstract static class Short extends Closure {
 		protected Short(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_SHORT);
@@ -237,7 +237,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract short callback(long args);
 	}
 
-	/** A {@Closure} that returns an int value. */
+	/** A {@code Closure} that returns an int value. */
 	public abstract static class Int extends Closure {
 		protected Int(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_INT);
@@ -246,7 +246,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract int callback(long args);
 	}
 
-	/** A {@Closure} that returns a long value. */
+	/** A {@code Closure} that returns a long value. */
 	public abstract static class Long extends Closure {
 		protected Long(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_LONG);
@@ -255,7 +255,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract int callback(long args);
 	}
 
-	/** A {@Closure} that returns a float value. */
+	/** A {@code Closure} that returns a float value. */
 	public abstract static class Float extends Closure {
 		protected Float(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_FLOAT);
@@ -264,7 +264,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract int callback(long args);
 	}
 
-	/** A {@Closure} that returns a double value. */
+	/** A {@code Closure} that returns a double value. */
 	public abstract static class Double extends Closure {
 		protected Double(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_DOUBLE);
@@ -273,7 +273,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		protected abstract int callback(long args);
 	}
 
-	/** A {@Closure} that returns a pointer value. */
+	/** A {@code Closure} that returns a pointer value. */
 	public abstract static class Ptr extends Closure {
 		protected Ptr(ByteBuffer cif) {
 			super(cif, NATIVE_CALLBACK_PTR);

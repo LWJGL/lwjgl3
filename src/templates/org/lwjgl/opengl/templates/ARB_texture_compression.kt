@@ -72,7 +72,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 	)
 
 	// KHR_texture_compression_astc_ldr formats are only accepted in CompressedTexImage* functions
-	val CompressTexImageFormats = "$SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS @##KHRTextureCompressionAstcLdr"
+	val CompressTexImageFormats = "$SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS @##KHRTextureCompressionASTCLDR"
 
 	GLvoid.func(
 		"CompressedTexImage3DARB",

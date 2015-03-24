@@ -122,7 +122,7 @@ val GLDEBUGPROC = CallbackType(callback(
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ GLvoid_p.IN(
 		"userParam",
-		"the user-specified value that was passed when calling GL43##glDebugMessageCallbackARB() or KHRDebug##glDebugMessageCallback()"
+		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
 	),
 	samConstructor = "GL43,KHRDebug"
 ) {

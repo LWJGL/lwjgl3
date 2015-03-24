@@ -418,8 +418,8 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		<b>LWJGL note</b>: This method comes in 2 flavors:
 		${ol(
-			"##glMapBufferRange(int, long, long, int) - Always returns a new ByteBuffer instance.",
-			"##glMapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if the specified length and returned pointer match the buffer capacity and address, respectively."
+			"#MapBufferRange(int, long, long, int) - Always returns a new ByteBuffer instance.",
+			"#MapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if the specified length and returned pointer match the buffer capacity and address, respectively."
 		)}
 		""",
 
@@ -758,11 +758,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"RenderbufferStorage",
-		"""
-		Establishes data storage, format and dimensions of a renderbuffer object's image.
-
-		This method is equivalent to calling #RenderbufferStorageMultisample() with the samples set to zero.
-		""",
+		"Establishes data storage, format and dimensions of a renderbuffer object's image.",
 
 		GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
 		GLenum.IN("internalformat", "the internal format to use for the renderbuffer object's image. Must be a color-renderable, depth-renderable, or stencil-renderable format."),
@@ -772,7 +768,11 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	GLvoid.func(
 		"RenderbufferStorageMultisample",
-		"Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.",
+		"""
+		Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.
+
+		#RenderbufferStorage() is equivalent to calling this method with the samples set to zero.
+		""",
 
 		GLenum.IN("target", "the target of the allocation", "#RENDERBUFFER"),
 		GLsizei.IN("samples", "the number of samples to be used for the renderbuffer object's storage"),

@@ -108,7 +108,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"""
 		Create an associated context with a specific GL version.
 
-		All capabilities and limitations of WGLARBCreateContext#wglCreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
+		All capabilities and limitations of WGLARBCreateContext#CreateContextAttribsARB() apply to {@code CreateAssociatedContextAttribsAMD}.
 		""",
 
 		UINT.IN("id", "a valid GPU id"),

@@ -46,7 +46,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		is selected for use as a framebuffer-attachable image by specifying the mipmap level, cube map face (for a cube map texture), and layer (for a 3D
 		texture) that identifies the image. The "render to texture" semantics of this extension are similar to performing traditional rendering to the
 		framebuffer, followed immediately by a call to CopyTexSubImage. However, by using this extension instead, an application can achieve the same
-		effect, but with the advantage that the GL can usually eliminate the data copy that would have been incurred by calling GL11#CopyTexSubImage().
+		effect, but with the advantage that the GL can usually eliminate the data copy that would have been incurred by calling CopyTexSubImage.
 
 		This extension also defines a new GL object type, called a "renderbuffer", which encapsulates a single 2D pixel image. The image of renderbuffer can be
 		used as a framebuffer-attachable image for generalized offscreen rendering and it also provides a means to support rendering to GL logical buffer types

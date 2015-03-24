@@ -656,8 +656,6 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"BLEND_EQUATION" _ 0x8009
 	)
 
-	GL14 reuse "BlendEquation"
-
 	// EXT_blend_subtract
 
 	IntConstant.block(
@@ -667,4 +665,5 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		"FUNC_REVERSE_SUBTRACT" _ 0x800B
 	)
 
+	GL14 reuse "BlendEquation"
 }

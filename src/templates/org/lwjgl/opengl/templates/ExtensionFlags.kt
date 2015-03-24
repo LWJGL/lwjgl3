@@ -614,7 +614,7 @@ val AMD_shader_trinary_minmax = EXT_FLAG.nativeClassGL("AMD_shader_trinary_minma
 		performing a trinary operation with a single built-in function, shader compilers and optimizers may be able to generate better instruction sequences for
 		perform sorting and other multi-input functions.
 
-		Requires ${GL20.core} or ${"ARB_shader_object".cap}.
+		Requires ${GL20.core} or ${"ARB_shader_objects".cap}.
 		"""
 }
 val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfix = AMD) {
@@ -627,7 +627,7 @@ val AMD_texture_texture4 = EXT_FLAG.nativeClassGL("AMD_texture_texture4", postfi
 		These texture functions may be used to access one component textures.
 
 		The {@code texture4} built-in function returns a texture value derived from a 2x2 set of texels in the image array of level levelbase is selected. These
-		texels are selected in the same way as when the value of {@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER} is {@GL11#GL_LINEAR LINEAR}, but instead
+		texels are selected in the same way as when the value of {@link GL11#GL_TEXTURE_MIN_FILTER TEXTURE_MIN_FILTER} is {@link GL11#GL_LINEAR LINEAR}, but instead
 		of these texels being filtered to generate the texture value, the R, G, B and A texture values are derived directly from these four texels.
 		"""
 }
@@ -648,7 +648,7 @@ val AMD_vertex_shader_layer = EXT_FLAG.nativeClassGL("AMD_vertex_shader_layer", 
 		"""
 		When true, the $registryLink extension is supported.
 
-		The {@code gl_Layer} built-in shading language variable was introduced with the ${"ARB_geometry_shader".cap} extension and subsequently promoted to core
+		The {@code gl_Layer} built-in shading language variable was introduced with the ${"ARB_geometry_shader4".cap} extension and subsequently promoted to core
 		OpenGL in version 3.2. This variable is an output from the geometry shader stage that allows rendering to be directed to a specific layer of an array
 		texture, slice of a 3D texture or face of a cube map or cube map array attachment of the framebuffer. Thus, this extremely useful functionality is only
 		available if a geometry shader is present - even if the geometry shader is not otherwise required by the application. This adds overhead to the graphics

@@ -23,7 +23,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		Unfortunately, specifying the geometry for these quads can be quite expensive, since it quadruples the amount of geometry required, and it may also
 		require the application to do extra processing to compute the location of each vertex.
 
-		The goal of this extension is to allow such apps to use points rather than quads. When #GL_POINT_SPRITE_NV is enabled, the state of point antialiasing
+		The goal of this extension is to allow such apps to use points rather than quads. When #POINT_SPRITE_NV is enabled, the state of point antialiasing
 		is ignored. For each texture unit, the app can then specify whether to replace the existing texture coordinates with point sprite texture coordinates,
 		which are interpolated across the point. Finally, the app can set a global parameter for the way to generate the R coordinate for point sprites; the R
 		coordinate can either be zero, the input S coordinate, or the input R coordinate. This allows applications to use a 3D texture to represent a point

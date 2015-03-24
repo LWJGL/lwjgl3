@@ -1028,7 +1028,9 @@ void myMethodIMP(id self, SEL _cmd)
 
 	    <h3>Discussion</h3>
 	    One protocol can incorporate other protocols using the same syntax that classes use to adopt a protocol:
-		${codeBlock("""@protocol ProtocolName < protocol list >""")}
+
+		${code("""@protocol ProtocolName < protocol list >""")}
+
 		All the protocols listed between angle brackets are considered part of the {@code ProtocolName} protocol.
 	    """,
 
@@ -1068,7 +1070,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		returnDoc =
 		"""
-		An objc_method_description structure that describes the method specified by {@code aSel}, {@code isRequiredMethod}, and {@code isInstanceMethod} for
+		an objc_method_description structure that describes the method specified by {@code aSel}, {@code isRequiredMethod}, and {@code isInstanceMethod} for
 		the protocol {@code p}.
 
 		If the protocol does not contain the specified method, returns an objc_method_description structure with the value ${code("{NULL, NULL}")}.

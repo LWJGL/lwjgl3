@@ -42,7 +42,7 @@ val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 			"All GL and GLX extension functions supported by the implementation (whether those extensions are supported by the current context or not).",
 			"""
 			All core (non-extension) functions in GL and GLX from version 1.0 up to and including the versions of those specifications supported by the
-			implementation, as determined by GL11##glGetString()(GL11#GL_VERSION) and GLX#QueryVersion() queries.
+			implementation, as determined by GL11##glGetString()(GL11##GL_VERSION) and GLX#QueryVersion() queries.
 			"""
 		)}
 		""",

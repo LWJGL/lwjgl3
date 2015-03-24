@@ -139,7 +139,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 
 	GLvoid.func(
 		"GetQueryObjectuivARB",
-		"Unsigned version of #GetQueryObjectiv().",
+		"Unsigned version of #GetQueryObjectivARB().",
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),

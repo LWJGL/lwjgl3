@@ -93,7 +93,7 @@ public class ALContext extends PointerWrapper {
 	 * @param refresh    the refresh intervals, in Hz
 	 * @param sync       a flag, indicating a synchronous context
 	 *
-	 * @return
+	 * @return the new ALContext
 	 */
 	public static ALContext create(String deviceName, int frequency, int refresh, boolean sync) {
 		ALDevice device = ALDevice.create(deviceName);

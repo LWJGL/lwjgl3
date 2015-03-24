@@ -27,7 +27,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 
 	val WGL_ATTRIBUTES = IntConstant.block(
 		"""
-		Accepted in the {@code attributes} parameter array of #GetPixelFormatAttribARB(), and #GetPixelFormatAttribARB(), and as a type in
+		Accepted in the {@code attributes} parameter array of #GetPixelFormatAttribivARB(), and #GetPixelFormatAttribfvARB(), and as a type in
 		the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB().
 		""",
 
@@ -77,7 +77,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 	IntConstant.block(
 		"""
 		Accepted as a value in the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB(), and returned in the
-		{@code values} parameter array of #GetPixelFormatAttribARB() and #GetPixelFormatAttribARB().
+		{@code values} parameter array of #GetPixelFormatAttribivARB() and #GetPixelFormatAttribfvARB().
 		""",
 
 		"NO_ACCELERATION_ARB" _ 0x2025,

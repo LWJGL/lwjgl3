@@ -217,7 +217,7 @@ val CL10GL = "CL10GL".nativeClassCL("CL10GL") {
 		GLenum.IN(
 			"texture_target",
 			"defines the image type of {@code texture}. No reference to a bound GL texture object is made or implied by this parameter.",
-			"GL12#GL_TEXTURE_3D"
+			"GL12##GL_TEXTURE_3D"
 		),
 		GLint.IN("miplevel", "the mipmap level to be used"),
 		GLuint.IN(

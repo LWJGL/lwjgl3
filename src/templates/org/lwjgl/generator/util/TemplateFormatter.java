@@ -200,7 +200,7 @@ public class TemplateFormatter {
 		Pattern.MULTILINE | Pattern.DOTALL
 	);
 
-	private static final Pattern COMMENT_CLEANUP = Pattern.compile("[\n\n]*(?:\\s*[*])?\\s+", Pattern.MULTILINE);
+	private static final Pattern COMMENT_CLEANUP = Pattern.compile("[\n\r]*(?:\\s*[*])?\\s+", Pattern.MULTILINE);
 	private static final Pattern CODE_CLEANUP    = Pattern.compile("<([^>]+)>");
 	private static final Pattern TOKEN_SPLIT     = Pattern.compile("(?<!@code)\\s+"); // Don't split code fragments
 

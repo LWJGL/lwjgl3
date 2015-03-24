@@ -39,7 +39,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	// ARB_buffer_storage
 
 	IntConstant.block(
-		"Accepted in the {@code flags} parameter of #BufferStorage() and EXTDirectStateAccess#NamedBufferStorageEXT().",
+		"Accepted in the {@code flags} parameter of #BufferStorage() and ARBBufferStorage#NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT" _ 0x0040,
 		"MAP_COHERENT_BIT" _ 0x0080,
@@ -99,9 +99,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 			are as follows:
 			${ul(
 				"""
-				GL44#DYNAMIC_STORAGE_BIT &ndash; The contents of the data store may be updated after creation through calls to
+				#DYNAMIC_STORAGE_BIT &ndash; The contents of the data store may be updated after creation through calls to
 				GL15#BufferSubData(). If this bit is not set, the buffer content may not be directly updated by the client. The {@code data}
-				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the GL44#DYNAMIC_STORAGE_BIT.
+				argument may be used to specify the initial content of the buffer's data store regardless of the presence of the #DYNAMIC_STORAGE_BIT.
 				Regardless of the presence of this bit, buffers may always be updated with server-side calls such as GL31#CopyBufferSubData() and
 				GL43#ClearBufferSubData().
 				""",
@@ -114,22 +114,22 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 				space obtained that may be written to.
 				""",
 				"""
-				GL44#MAP_PERSISTENT_BIT &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
+				#MAP_PERSISTENT_BIT &ndash; The client may request that the server read from or write to the buffer while it is mapped. The client's
 				pointer to the data store remains valid so long as the data store is mapped, even during execution of drawing or dispatch commands.
 				""",
 				"""
-				GL44#MAP_COHERENT_BIT &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
+				#MAP_COHERENT_BIT &ndash; Shared access to buffers that are simultaneously mapped for client access and are used by the server will be
 				coherent, so long as that mapping is performed using MapBufferRange. That is, data written to the store by either the client or server will be
 				immediately visible to the other with no further action taken by the application. In particular:
 				${ul(
 					"""
 					If {@code MAP_COHERENT_BIT} is not set and the client performs a write followed by a call to the GL42#MemoryBarrier() command with
-					the GL44#CLIENT_MAPPED_BUFFER_BARRIER_BIT set, then in subsequent commands the server will see the writes.
+					the #CLIENT_MAPPED_BUFFER_BARRIER_BIT set, then in subsequent commands the server will see the writes.
 					""",
 					"If {@code MAP_COHERENT_BIT} is set and the client performs a write, then in subsequent commands the server will see the writes.",
 					"""
 					If {@code MAP_COHERENT_BIT} is not set and the server performs a write, the application must call GL42#MemoryBarrier() with the
-					GL44#CLIENT_MAPPED_BUFFER_BARRIER_BIT set and then call GL32#FenceSync() with GL32#SYNC_GPU_COMMANDS_COMPLETE (or
+					#CLIENT_MAPPED_BUFFER_BARRIER_BIT set and then call GL32#FenceSync() with GL32#SYNC_GPU_COMMANDS_COMPLETE (or
 					GL11#Finish()). Then the CPU will see the writes after the sync is complete.
 					""",
 					"""
@@ -139,13 +139,13 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 				)}
 				""",
 				"""
-				GL44#CLIENT_STORAGE_BIT &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
+				#CLIENT_STORAGE_BIT &ndash; When all other criteria for the buffer storage allocation are met, this bit may be used by an
 				implementation to determine whether to use storage that is local to the server or to the client to serve as the backing store for the buffer.
 				"""
 			)}
-			If {@code flags} contains GL44#MAP_PERSISTENT_BIT, it must also contain at least one of GL30#MAP_READ_BIT or GL30#MAP_WRITE_BIT.
+			If {@code flags} contains #MAP_PERSISTENT_BIT, it must also contain at least one of GL30#MAP_READ_BIT or GL30#MAP_WRITE_BIT.
 
-			It is an error to specify GL44#MAP_COHERENT_BIT without also specifying GL44#MAP_PERSISTENT_BIT.
+			It is an error to specify #MAP_COHERENT_BIT without also specifying #MAP_PERSISTENT_BIT.
 			"""
 		)
 	)
@@ -238,7 +238,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	// ARB_enhanced_layouts
 
 	IntConstant.block(
-		"Accepted in the {@code props} array of GL43#GetProgramResourcei().",
+		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
 
 		"LOCATION_COMPONENT" _ 0x934A,
 		"TRANSFORM_FEEDBACK_BUFFER_INDEX" _ 0x934B,
@@ -485,7 +485,7 @@ for ( i = 0; i < count; i++ ) {
 		"""
 		Accepted by the {@code param} parameter of TexParameter{if}, SamplerParameter{if} and SamplerParameter{if}v, and by the {@code params} parameter of
 		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or
-		GL11#TEXTURE_WRAP_R,
+		GL12#TEXTURE_WRAP_R,
 		""",
 
 		"MIRROR_CLAMP_TO_EDGE" _ 0x8743

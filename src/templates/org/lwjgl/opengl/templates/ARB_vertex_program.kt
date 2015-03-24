@@ -258,13 +258,13 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	GLvoid.func("VertexAttrib4uivARB", "Unsigned integer version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLuint_p.IN("v", VA_V))
 	GLvoid.func("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB()", VA_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("v", VA_V))
 
-	GLvoid.func("VertexAttrib4NbvARB", "Fixed-point byte version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLbyte_p.IN("v", VA_V))
-	GLvoid.func("VertexAttrib4NsvARB", "Fixed-point short version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLshort_p.IN("v", VA_V))
-	GLvoid.func("VertexAttrib4NivARB", "Fixed-point integer version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLint_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NbvARB", "Fixed-point version of #VertexAttrib4bvARB()", VA_INDEX, mods(const, Check(4)) _ GLbyte_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NsvARB", "Fixed-point version of #VertexAttrib4svARB()", VA_INDEX, mods(const, Check(4)) _ GLshort_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NivARB", "Fixed-point version of #VertexAttrib4ivARB()", VA_INDEX, mods(const, Check(4)) _ GLint_p.IN("v", VA_V))
 
-	GLvoid.func("VertexAttrib4NubvARB", "Pointer version of #VertexAttrib4ubARB()", VA_INDEX, mods(const, Check(4)) _ GLubyte_p.IN("v", VA_V))
-	GLvoid.func("VertexAttrib4NusvARB", "Fixed-point unsigned short version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLushort_p.IN("v", VA_V))
-	GLvoid.func("VertexAttrib4NuivARB", "Fixed-point unsigned integer version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLuint_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NubvARB", "Fixed-point unsigned version of #VertexAttrib4bvARB()", VA_INDEX, mods(const, Check(4)) _ GLubyte_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NusvARB", "Fixed-point unsigned version of #VertexAttrib4svARB()", VA_INDEX, mods(const, Check(4)) _ GLushort_p.IN("v", VA_V))
+	GLvoid.func("VertexAttrib4NuivARB", "Fixed-point unsigned version of #VertexAttrib4ivARB()", VA_INDEX, mods(const, Check(4)) _ GLuint_p.IN("v", VA_V))
 
 	GLvoid.func(
 		"VertexAttribPointerARB",

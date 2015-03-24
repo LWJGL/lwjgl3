@@ -247,7 +247,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		${ol(
 			"GL15##glMapBuffer(int, int) - Calls #GetBufferParameteri() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
 			"GL15##glMapBuffer(int, int, ByteBuffer) - Calls #GetBufferParameteri() to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
-			"GL15##glMapBuffer(int, int, int, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
+			"GL15##glMapBuffer(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
 		)}
 		""",
 
@@ -287,7 +287,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER"),
+		GLenum.IN("pname", "the pointer to be returned", "GL15#BUFFER_MAP_POINTER"),
 		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 

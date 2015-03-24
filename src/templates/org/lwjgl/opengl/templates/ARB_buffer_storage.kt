@@ -32,7 +32,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 		"""
 
 	IntConstant.block(
-		"Accepted in the {@code flags} parameter of #BufferStorage() and EXTDirectStateAccess#NamedBufferStorageEXT().",
+		"Accepted in the {@code flags} parameter of #BufferStorage() and #NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT" _ 0x0040,
 		"MAP_COHERENT_BIT" _ 0x0080,

@@ -574,6 +574,15 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 	)
 
 	int.func(
+		"XGetInputFocus",
+		"Returns the focus window and the current focus state.",
+
+		DISPLAY,
+		Window_p.OUT("focus_return", "returns the focus window, X#PointerRoot or $None"),
+		int_p.OUT("revert_to_return", "returns the current focus state")
+	)
+
+	int.func(
 		"XMoveWindow",
 		"""
 		Moves the specified window to the specified {@code x} and {@code y} coordinates, but it does not change the window's size, raise the window, or change

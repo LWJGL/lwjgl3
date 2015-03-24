@@ -225,7 +225,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		${ol(
 			"ARBVertexBufferObject##glMapBufferARB(int, int) - Calls #GetBufferParameteriARB() to retrieve the buffer size and a new ByteBuffer instance is always returned.",
 			"ARBVertexBufferObject##glMapBufferARB(int, int, ByteBuffer) - Calls #GetBufferParameteriARB() to retrieve the buffer size and the {@code old_buffer} parameter is reused if the returned size and pointer match the buffer capacity and address, respectively.",
-			"ARBVertexBufferObject##glMapBufferARB(int, int, int, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
+			"ARBVertexBufferObject##glMapBufferARB(int, int, long, ByteBuffer) - The buffer size is explicitly specified and the {@code old_buffer} parameter is reused if {@code size} and the returned pointer match the buffer capacity and address, respectively. This is the most efficient method."
 		)}
 		""",
 
