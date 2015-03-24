@@ -378,8 +378,7 @@ public class Demo20 {
 			fb.put(min.x).put(min.y).put(min.z).put(0.0f);
 			fb.put(max.x).put(max.y).put(max.z).put(0.0f);
 		}
-		glTexImage2D(GL_TEXTURE_2D, 0, ARBTextureFloat.GL_RGBA32F_ARB, Demo20.boxes.length, 1, 0, GL_RGBA, GL_FLOAT,
-				(ByteBuffer) bb);
+		glTexImage2D(GL_TEXTURE_2D, 0, ARBTextureFloat.GL_RGBA32F_ARB, Demo20.boxes.length, 1, 0, GL_RGBA, GL_FLOAT, bb);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glBindTexture(GL_TEXTURE_2D, 0);

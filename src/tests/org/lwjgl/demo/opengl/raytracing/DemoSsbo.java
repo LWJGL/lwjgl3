@@ -330,7 +330,7 @@ public class DemoSsbo {
 	private void initComputeProgram() {
 		glUseProgram(computeProgram);
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
-		glGetProgram(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		glGetProgramiv(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
 		workGroupSizeX = workGroupSize.get(0);
 		workGroupSizeY = workGroupSize.get(1);
 		eyeUniform = glGetUniformLocation(computeProgram, "eye");
@@ -351,9 +351,9 @@ public class DemoSsbo {
 		int boxesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Boxes");
 		int outputImageResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "OutputImage");
 		/* Now query the "BUFFER_BINDING" of those resources */
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
+		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, outputImageResourceIndex, props, null, params);
+		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, outputImageResourceIndex, props, null, params);
 		outputImageBinding = params.get(0);
 		glUseProgram(0);
 	}
@@ -383,7 +383,7 @@ public class DemoSsbo {
 	private void createFramebufferBuffer() {
 		this.imageBuffer = glGenBuffers();
 		glBindBuffer(GL_ARRAY_BUFFER, this.imageBuffer);
-		glBufferData(GL_ARRAY_BUFFER, 4 * 4 * width * height, (ByteBuffer) null, GL_STREAM_DRAW);
+		glBufferData(GL_ARRAY_BUFFER, 4 * 4 * width * height, null, GL_STREAM_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 	}
 

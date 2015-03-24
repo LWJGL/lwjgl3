@@ -41,7 +41,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALfloat.IN("value3", "the third value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetListeneriv",
 		"Returns the integer values of the specified listener parameter.",
 
@@ -144,7 +144,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetBufferiv",
 		"Returns the integer values of the specified buffer parameter.",
 
@@ -162,7 +162,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetBufferfv",
 		"Returns the float values of the specified buffer parameter.",
 

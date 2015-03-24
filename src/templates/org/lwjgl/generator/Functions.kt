@@ -4,16 +4,18 @@
  */
 package org.lwjgl.generator
 
+import org.lwjgl.generator.GenerationMode.ALTERNATIVE
+import org.lwjgl.generator.GenerationMode.NORMAL
+import org.lwjgl.generator.ParameterType.IN
+import org.lwjgl.generator.ParameterType.INOUT
+import org.lwjgl.generator.ParameterType.OUT
+import org.lwjgl.generator.opengl.*
+import org.lwjgl.generator.opengl.BufferType.*
 import java.io.PrintWriter
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.LinkedHashMap
 import java.util.regex.Pattern
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.GenerationMode.*
-import org.lwjgl.generator.ParameterType.*
-import org.lwjgl.generator.opengl.BufferType.*
-import kotlin.properties.Delegates
 
 /*
 	****
@@ -109,9 +111,6 @@ class NativeClassFunction(
 		validate();
 	}
 
-	// stripPostfix has modifier dependencies that may be added after the constructor has run.
-	val strippedName: String by Delegates.lazy { stripPostfix(name, false, false) } // TODO: Kotlin bug, fails if we omit the default values
-
 	val addressName: String
 		get() = if ( nativeClass.prefixMethod.isEmpty() )
 			"${simpleName}Address"
@@ -121,8 +120,8 @@ class NativeClassFunction(
 	val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
-	private fun stripPostfix(functionName: String = name, stripType: Boolean = false, stripUnsigned: Boolean = false): String {
-		if ( !hasNativeParams || has(keepPostfix) )
+	private fun stripPostfix(functionName: String = name, stripType: Boolean): String {
+		if ( !hasNativeParams )
 			return functionName
 
 		val param = parameters[parameters.lastIndex]
@@ -130,17 +129,11 @@ class NativeClassFunction(
 			return functionName
 
 		var name = functionName
-		var postfix = ""
-		if ( !nativeClass.postfix.isEmpty() && name.endsWith(nativeClass.postfix) ) {
-			name = name.substring(0, name.length() - nativeClass.postfix.length())
-			postfix = nativeClass.postfix
-		} else if ( has(DependsOn) ) {
-			val dependsOn = this[DependsOn]
-			if ( dependsOn.postfix != null && name.endsWith(dependsOn.postfix) ) {
-				name = name.substring(0, name.length() - dependsOn.postfix.length())
-				postfix = dependsOn.postfix
-			}
-		}
+		var postfix = if ( has(DependsOn) && this[DependsOn].postfix != null ) this[DependsOn].postfix else nativeClass.postfix
+		if ( name.endsWith(postfix) )
+			name = name.substring(0, name.length() - postfix.length())
+		else
+			postfix = ""
 
 		var cutCount = if ( name.endsWith("v") ) {
 			if ( name.endsWith("_v") ) 2 else 1
@@ -163,7 +156,7 @@ class NativeClassFunction(
 				if ( typeChar equals name.substring(offset - typeChar.length(), offset) )
 					cutCount += typeChar.length()
 
-				if ( stripUnsigned && name.charAt(name.length() - cutCount - 1) == 'u' )
+				if ( name.charAt(name.length() - cutCount - 1) == 'u' )
 					cutCount++
 			}
 		}
@@ -174,44 +167,7 @@ class NativeClassFunction(
 	val javaDocLink: String
 		get() = "${nativeClass.className}$methodLink"
 
-	private val methodLink: String
-		get() = if ( strippedName != name || has(keepPostfix) )
-			javaDocLinkWithParams()
-		else
-			"#$simpleName()"
-
-	private fun javaDocLinkWithParams(): String {
-		val builder = StringBuilder()
-
-		val keepPostfix = has(keepPostfix)
-
-		builder append '#'
-		if ( keepPostfix ) {
-			builder append '#'
-			builder append name
-		} else
-			builder append stripPostfix(simpleName, false, false)
-
-		builder append '('
-		if ( !keepPostfix ) {
-			val more = getParams { !it.isAutoSizeResultOut || returns.nativeType is StructType } forEachWithMore { it, more ->
-				if ( more )
-					builder append ", "
-
-				builder append if ( it.isBufferPointer )
-					"ByteBuffer"
-				else
-					it.javaMethodType
-			}
-			if ( returnsStructValue ) {
-				if ( more ) builder append ", "
-				builder append "ByteBuffer"
-			}
-		}
-		builder append ')'
-
-		return builder.toString()
-	}
+	private val methodLink: String get() = "#$simpleName()"
 
 	private val isSimpleFunction: Boolean
 		get() = nativeClass.functionProvider == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
@@ -576,14 +532,14 @@ class NativeClassFunction(
 			val xmlName = if ( this@NativeClassFunction has ReferenceGL )
 				this@NativeClassFunction[ReferenceGL].function
 			else
-				stripPostfix(stripType = true, stripUnsigned = true)
+				stripPostfix(stripType = true)
 			printOpenGLJavaDoc(documentation, xmlName, this@NativeClassFunction has deprecatedGL)
 		} else
 			println(documentation)
 
 		// Step 1: Method signature
 
-		print("\t${accessModifier}static ${returnsJavaMethodType} $strippedName(")
+		print("\t${accessModifier}static ${returnsJavaMethodType} $name(")
 		printList(parameters.sequence()) {
 			if ( it.isAutoSizeResultOut && returns.nativeType !is StructType )
 				null
@@ -777,7 +733,7 @@ class NativeClassFunction(
 		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.PTR } forEach {
 			transforms[it] = BufferOffsetTransform
 			customChecks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, true);"
-			generateAlternativeMethod(strippedName, "Buffer object offset version of:", transforms, customChecks)
+			generateAlternativeMethod(name, "Buffer object offset version of:", transforms, customChecks)
 			customChecks.clear()
 			transforms remove it
 		}
@@ -813,14 +769,14 @@ class NativeClassFunction(
 
 		// Step 2: Check if we have any basic transformation to apply or if we have a multi-byte-per-element buffer parameter
 		if ( !transforms.isEmpty() || parameters any { it.isBufferPointer && (it.nativeType.mapping as PointerMapping).isMultiByte && !(it.isAutoSizeResultOut && returns.nativeType !is StructType) } )
-			generateAlternativeMethod(stripPostfix(stripType = true), "Alternative version of:", transforms, customChecks)
+			generateAlternativeMethod(name, "Alternative version of:", transforms, customChecks)
 
 		// Step 3: Generate more complex alternatives if necessary
 		if ( returns has MapPointer ) {
 			// The size expression may be an existing parameter, in which case we don't need an explicit size alternative.
 			if ( !paramMap.containsKey(returns[MapPointer].sizeExpression) ) {
 				transforms[returns] = MapPointerExplicitTransform("length")
-				generateAlternativeMethod(stripPostfix(stripType = true), "Explicit size alternative version of:", transforms, customChecks)
+				generateAlternativeMethod(name, "Explicit size alternative version of:", transforms, customChecks)
 			}
 		}
 
@@ -838,7 +794,7 @@ class NativeClassFunction(
 				true
 			}
 		} != 0 )
-			generateAlternativeMethod(strippedName, "CharSequence version of:", transforms, customChecks)
+			generateAlternativeMethod(name, "CharSequence version of:", transforms, customChecks)
 
 		fun applyReturnValueTransforms(param: Parameter) {
 			// Transform void to the proper type
@@ -866,7 +822,7 @@ class NativeClassFunction(
 					if ( !hasParam { it has SingleValue || it has PointerArray } ) {
 						// Skip, we inject the Return alternative in these transforms
 						applyReturnValueTransforms(it)
-						generateAlternativeMethod(strippedName, "Single return value version of:", transforms, customChecks)
+						generateAlternativeMethod(stripPostfix(name, stripType = false), "Single return value version of:", transforms, customChecks)
 					}
 				} else {
 					// Generate String return alternative
@@ -899,12 +855,12 @@ class NativeClassFunction(
 						returnType = "Buffer"
 					}
 
-					generateAlternativeMethod(strippedName, "$returnType return version of:", transforms, customChecks)
+					generateAlternativeMethod(name, "$returnType return version of:", transforms, customChecks)
 
 					if ( returnMod.maxLengthExpression != null ) {
 						// Transform maxLength parameter and generate an additional alternative
 						transforms[maxLengthParam] = ExpressionLocalTransform(returnMod.maxLengthExpression)
-						generateAlternativeMethod(strippedName, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
+						generateAlternativeMethod(name, "$returnType return (w/ implicit max length) version of:", transforms, customChecks)
 					}
 				}
 			} else if ( it has MultiType ) {
@@ -929,7 +885,7 @@ class NativeClassFunction(
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
-					generateAlternativeMethod(strippedName, "${autoType.javaMethodType.getSimpleName()} version of:", transforms, customChecks)
+					generateAlternativeMethod(name, "${autoType.javaMethodType.getSimpleName()} version of:", transforms, customChecks)
 				}
 
 				// Generate a SingleValue alternative for each type
@@ -946,7 +902,7 @@ class NativeClassFunction(
 
 							val primitiveType = PointerMapping.primitiveMap[autoType]!!
 							transforms[it] = VectorValueTransform(if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType, singleValue.newName, i)
-							generateAlternativeMethod("${strippedName}$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "${primitiveType}$i" } value version of:", transforms, customChecks)
+							generateAlternativeMethod("$name$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "${primitiveType}$i" } value version of:", transforms, customChecks)
 						}
 					}
 				}
@@ -978,7 +934,7 @@ class NativeClassFunction(
 
 					transforms[it] = AutoTypeParamWithSignTransform("${unsignedType.className}.${unsignedType.name()}", "${autoType.className}.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(strippedName, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks)
+					generateAlternativeMethod(name, "${unsignedType.name()} / ${autoType.name()} version of:", transforms, customChecks)
 
 					types.remove(autoType)
 					types.remove(unsignedType)
@@ -987,7 +943,7 @@ class NativeClassFunction(
 				for ( autoType in types ) {
 					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(strippedName, "${autoType.name()} version of:", transforms, customChecks)
+					generateAlternativeMethod(name, "${autoType.name()} version of:", transforms, customChecks)
 				}
 			} else if ( it has PointerArray ) {
 				val pointerArray = it[PointerArray]
@@ -1013,7 +969,7 @@ class NativeClassFunction(
 				}()
 				transforms[it] = if ( vararg ) PointerArrayTransformVararg else PointerArrayTransformArray
 
-				generateAlternativeMethod(strippedName, "Array version of:", transforms, customChecks)
+				generateAlternativeMethod(name, "Array version of:", transforms, customChecks)
 
 				// Combine PointerArrayTransformSingle with BufferValueReturnTransform
 				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
@@ -1022,7 +978,7 @@ class NativeClassFunction(
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
 				transforms[it] = PointerArrayTransformSingle
-				generateAlternativeMethod(strippedName, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
+				generateAlternativeMethod(name, "Single ${pointerArray.singleName} version of:", transforms, customChecks)
 			}
 		}
 
@@ -1059,7 +1015,7 @@ class NativeClassFunction(
 				true
 			}
 		} != 0 )
-			generateAlternativeMethod(strippedName, "Single value version of:", transforms, customChecks)
+			generateAlternativeMethod(stripPostfix(name, stripType = false), "Single value version of:", transforms, customChecks)
 	}
 
 	private fun PrintWriter.generateAlternativeMethod(

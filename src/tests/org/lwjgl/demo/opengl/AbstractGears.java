@@ -69,7 +69,7 @@ public abstract class AbstractGears {
 		green.flip();
 		blue.flip();
 
-		glLight(GL_LIGHT0, GL_POSITION, pos);
+		glLightfv(GL_LIGHT0, GL_POSITION, pos);
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
@@ -78,19 +78,19 @@ public abstract class AbstractGears {
 		/* make the gears */
 		gear1 = glGenLists(1);
 		glNewList(gear1, GL_COMPILE);
-		glMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, red);
 		gear(1.0f, 4.0f, 1.0f, 20, 0.7f);
 		glEndList();
 
 		gear2 = glGenLists(1);
 		glNewList(gear2, GL_COMPILE);
-		glMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, green);
 		gear(0.5f, 2.0f, 2.0f, 10, 0.7f);
 		glEndList();
 
 		gear3 = glGenLists(1);
 		glNewList(gear3, GL_COMPILE);
-		glMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
+		glMaterialfv(GL_FRONT, GL_AMBIENT_AND_DIFFUSE, blue);
 		gear(1.3f, 2.0f, 0.5f, 10, 0.7f);
 		glEndList();
 

@@ -784,7 +784,7 @@ public class Mandelbrot {
 
 		FloatBuffer projectionMatrix = BufferUtils.createFloatBuffer(4 * 4);
 		glOrtho(0.0f, width, 0.0f, height, 0.0f, 1.0f, projectionMatrix);
-		glUniformMatrix4(projectionUniform, false, projectionMatrix);
+		glUniformMatrix4fv(projectionUniform, false, projectionMatrix);
 
 		shouldInitBuffers = false;
 	}

@@ -256,6 +256,9 @@ public class PhotonMappingBindlessDemo {
 		glfwShowWindow(window);
 		ctx = GLContext.createFromCurrent();
 
+		if ( !ctx.getCapabilities().GL_ARB_bindless_texture )
+			throw new RuntimeException("This demo requires the ARB_bindless_texture extension.");
+
 		/* Create all needed GL resources */
 		createSampler();
 		createImageHandlesUbo();
@@ -459,7 +462,7 @@ public class PhotonMappingBindlessDemo {
 		glUseProgram(photonTraceProgram);
 
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
-		glGetProgram(photonTraceProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		glGetProgramiv(photonTraceProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
 		int staticWorkGroupSizeX = workGroupSize.get(0);
 		int staticWorkGroupSizeY = workGroupSize.get(1);
 		if (ctx.getCapabilities().GL_ARB_compute_variable_group_size) {
@@ -490,10 +493,10 @@ public class PhotonMappingBindlessDemo {
 		IntBuffer props = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
-		glGetProgramResource(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
+		glGetProgramResourceiv(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
 		int imagesResourceIndex = glGetProgramResourceIndex(photonTraceProgram, GL_UNIFORM_BLOCK, "Images");
-		glGetProgramResource(photonTraceProgram, GL_UNIFORM_BLOCK, imagesResourceIndex, props, null, params);
+		glGetProgramResourceiv(photonTraceProgram, GL_UNIFORM_BLOCK, imagesResourceIndex, props, null, params);
 		imagesUboBinding = params.get(0);
 
 		glUseProgram(0);
@@ -678,7 +681,7 @@ public class PhotonMappingBindlessDemo {
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		int samplersResourceIndex = glGetProgramResourceIndex(rasterProgram, GL_UNIFORM_BLOCK, "Samplers");
-		glGetProgramResource(rasterProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
+		glGetProgramResourceiv(rasterProgram, GL_UNIFORM_BLOCK, samplersResourceIndex, props, null, params);
 		samplersUboBinding = params.get(0);
 	}
 
@@ -729,7 +732,7 @@ public class PhotonMappingBindlessDemo {
 				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
 				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
 		matrixByteBufferFloatView.rewind();
-		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
+		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}
 
 	/**

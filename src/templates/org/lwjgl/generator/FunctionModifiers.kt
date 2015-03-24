@@ -23,10 +23,6 @@ val ignoreMissing = object: FunctionModifier() {
 	override val isSpecial = false
 }
 
-val keepPostfix = object: FunctionModifier() {
-	override val isSpecial = false
-}
-
 /** Defines an expression that should be passed to the getInstance() method. */
 class Capabilities(
 	/** The expression to pass to the getInstance() method. */

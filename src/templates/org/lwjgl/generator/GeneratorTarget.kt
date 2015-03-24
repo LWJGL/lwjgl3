@@ -122,8 +122,6 @@ abstract class GeneratorTarget(
 			val NATIVE = """\p{javaJavaIdentifierPart}+""" // Must match tokens like GL_3_BYTES (the link is #3_BYTES)
 			Pattern.compile("""($JAVA)?(?<!&)([@\\]?#{1,2})($NATIVE+(?:\((?:(?:, )?$JAVA)*\))?)""")
 		}()
-
-		private val VECTOR_POSTFIX = Pattern.compile("^(\\w+)_?v([A-Z]+)?$")
 	}
 
 	private fun getSourceFileName(): String {
@@ -249,16 +247,7 @@ abstract class GeneratorTarget(
 				if ( parentheses == -1 )
 					throw IllegalStateException("Invalid method link: $this#$prefix$classElement")
 
-				val name = classElement.substring(0, parentheses).let(fun(it): String {
-					if ( custom )
-						return@let it
-
-					val matcher = VECTOR_POSTFIX.matcher(it)
-					return if ( matcher.matches() )
-						"${matcher.group(1)}${matcher.group(2) ?: ""}"
-					else
-						it
-				})
+				val name = classElement.substring(0, parentheses)
 
 				val hasParams = parentheses < classElement.length() - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( (prefix.isEmpty() && !hasParams) || custom ) "" else " $name"}}"

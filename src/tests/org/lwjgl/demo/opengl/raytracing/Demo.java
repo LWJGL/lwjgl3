@@ -336,7 +336,7 @@ public class Demo {
 	private void initComputeProgram() {
 		glUseProgram(computeProgram);
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
-		glGetProgram(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		glGetProgramiv(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
 		workGroupSizeX = workGroupSize.get(0);
 		workGroupSizeY = workGroupSize.get(1);
 		eyeUniform = glGetUniformLocation(computeProgram, "eye");
@@ -351,7 +351,7 @@ public class Demo {
 		/* Query the "image binding point" of the image uniform */
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
-		glGetUniform(computeProgram, loc, params);
+		glGetUniformiv(computeProgram, loc, params);
 		framebufferImageBinding = params.get(0);
 
 		glUseProgram(0);

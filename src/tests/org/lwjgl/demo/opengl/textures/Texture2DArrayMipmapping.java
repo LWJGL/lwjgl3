@@ -292,7 +292,7 @@ public class Texture2DArrayMipmapping {
 				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
 				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
 		matrixByteBufferFloatView.rewind();
-		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
+		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}
 
 	private void update() {

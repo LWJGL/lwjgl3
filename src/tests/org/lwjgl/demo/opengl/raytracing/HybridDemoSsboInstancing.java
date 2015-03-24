@@ -566,7 +566,7 @@ public class HybridDemoSsboInstancing {
 	private void initComputeProgram() {
 		glUseProgram(computeProgram);
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
-		glGetProgram(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		glGetProgramiv(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
 		workGroupSizeX = workGroupSize.get(0);
 		workGroupSizeY = workGroupSize.get(1);
 		eyeUniform = glGetUniformLocation(computeProgram, "eye");
@@ -587,18 +587,18 @@ public class HybridDemoSsboInstancing {
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		/* Now query the "BUFFER_BINDING" of that resource */
-		glGetProgramResource(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
+		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
 
 		/* Query the "image binding point" of the image uniforms */
 		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
-		glGetUniform(computeProgram, loc, params);
+		glGetUniformiv(computeProgram, loc, params);
 		framebufferImageBinding = params.get(0);
 		loc = glGetUniformLocation(computeProgram, "worldPositionImage");
-		glGetUniform(computeProgram, loc, params);
+		glGetUniformiv(computeProgram, loc, params);
 		worldPositionImageBinding = params.get(0);
 		loc = glGetUniformLocation(computeProgram, "worldNormalImage");
-		glGetUniform(computeProgram, loc, params);
+		glGetUniformiv(computeProgram, loc, params);
 		worldNormalImageBinding = params.get(0);
 
 		glUseProgram(0);
@@ -693,7 +693,7 @@ public class HybridDemoSsboInstancing {
 				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
 				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
 		matrixByteBufferFloatView.rewind();
-		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
+		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}
 
 	/**

@@ -8,7 +8,6 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.FunctionProvider;
 
-import java.nio.ByteBuffer;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;

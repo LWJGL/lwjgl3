@@ -808,7 +808,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetEffectiv",
 		"Returns the integer values of the specified effect parameter.",
 
@@ -826,7 +826,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetEffectfv",
 		"Returns the float values of the specified effect parameter.",
 
@@ -903,7 +903,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetFilteriv",
 		"Returns the integer values of the specified filter parameter.",
 
@@ -921,7 +921,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetFilterfv",
 		"Returns the float values of the specified filter parameter.",
 
@@ -998,7 +998,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetAuxiliaryEffectSlotiv",
 		"Returns the integer values of the specified effect slot parameter.",
 
@@ -1016,7 +1016,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetAuxiliaryEffectSlotfv",
 		"Returns the float values of the specified effect slot parameter.",
 

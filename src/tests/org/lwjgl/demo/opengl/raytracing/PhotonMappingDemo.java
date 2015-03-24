@@ -443,7 +443,7 @@ public class PhotonMappingDemo {
 	private void initPhotonTraceProgram() {
 		glUseProgram(photonTraceProgram);
 		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
-		glGetProgram(photonTraceProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		glGetProgramiv(photonTraceProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
 		workGroupSizeX = workGroupSize.get(0);
 		workGroupSizeY = workGroupSize.get(1);
 		timeUniform = glGetUniformLocation(photonTraceProgram, "time");
@@ -461,12 +461,12 @@ public class PhotonMappingDemo {
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
 		/* Now query the "BUFFER_BINDING" of that resource */
-		glGetProgramResource(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
+		glGetProgramResourceiv(photonTraceProgram, GL_SHADER_STORAGE_BLOCK, boxesResourceIndex, props, null, params);
 		boxesSsboBinding = params.get(0);
 
 		/* Query the "image binding point" of the photonMaps uniform image2D */
 		int loc = glGetUniformLocation(photonTraceProgram, "photonMaps");
-		glGetUniform(photonTraceProgram, loc, params);
+		glGetUniformiv(photonTraceProgram, loc, params);
 		photonMapsBinding = params.get(0);
 
 		glUseProgram(0);
@@ -507,7 +507,7 @@ public class PhotonMappingDemo {
 			int texBuffer = glGenBuffers();
 			glBindBuffer(GL_PIXEL_UNPACK_BUFFER, texBuffer);
 			int size = 2 * 2 * photonMapSize * photonMapSize * 6 * boxes.length / 2;
-			glBufferData(GL_PIXEL_UNPACK_BUFFER, size, (ByteBuffer) null, GL_STATIC_DRAW);
+			glBufferData(GL_PIXEL_UNPACK_BUFFER, size, null, GL_STATIC_DRAW);
 			glClearBufferSubData(GL_PIXEL_UNPACK_BUFFER, GL_RG16F, 0, size, GL_RG, GL_HALF_FLOAT, (ByteBuffer) null);
 			glBindTexture(GL_TEXTURE_CUBE_MAP_ARRAY, photonMapTexture);
 			glTexSubImage3D(GL_TEXTURE_CUBE_MAP_ARRAY, 0, 0, 0, 0, photonMapSize, photonMapSize, 6 * boxes.length / 2,
@@ -622,7 +622,7 @@ public class PhotonMappingDemo {
 				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
 				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
 		matrixByteBufferFloatView.rewind();
-		glUniformMatrix4f(location, 1, transpose, matrixByteBuffer);
+		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}
 
 	/**

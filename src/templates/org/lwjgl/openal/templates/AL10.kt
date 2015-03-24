@@ -398,7 +398,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		Check(1) _ ALfloat_p.OUT("value3", "the third parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetListenerfv",
 		"Returns float values of a listener parameter.",
 
@@ -487,7 +487,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		Check(1) _ ALfloat_p.OUT("v3", "the third parameter value")
 	)
 
-	keepPostfix _ ALvoid.func(
+	ALvoid.func(
 		"GetSourcefv",
 		"Returns the float values of the specified source parameter.",
 
