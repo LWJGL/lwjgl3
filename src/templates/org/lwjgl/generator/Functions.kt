@@ -69,7 +69,7 @@ abstract class Function(
 
 	protected val hasNativeParams: Boolean = getNativeParams().any()
 
-	fun get(paramName: String): Parameter {
+	fun getParam(paramName: String): Parameter {
 		val param = paramMap[paramName]
 		if ( param == null )
 			throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")

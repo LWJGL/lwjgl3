@@ -106,6 +106,9 @@ class NativeClass(
 	val postfix: String,
 	val functionProvider: FunctionProvider?
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
+	companion object {
+		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
+	}
 
 	private val constantBlocks = ArrayList<ConstantBlock<out Comparable<*>>>()
 
@@ -337,7 +340,7 @@ class NativeClass(
 		val func = Reuse(this.className) _ NativeClassFunction(
 			returns = reference.returns,
 			simpleName = functionName,
-			documentation = convertDocumentation(reference.documentation),
+			documentation = this@NativeClass.convertDocumentation(this, reference.name, reference.documentation),
 			nativeClass = this@NativeClass,
 			parameters = *reference.parameters
 		).copyModifiers(reference)
@@ -346,12 +349,21 @@ class NativeClass(
 		return func
 	}
 
-	private val reusePattern: Pattern by Delegates.lazy {
-		Pattern.compile("""${this.className}#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
+	fun NativeClassFunction.get(paramName: String): Parameter {
+		val param = getParam(paramName)
+
+		return Parameter(
+			param.nativeType,
+		    param.name,
+		    param.paramType,
+		    this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
+		    "",
+		    LinkMode.SINGLE
+		).copyModifiers(param)
 	}
 
-	private fun convertDocumentation(documentation: String): String {
-		val matcher = reusePattern.matcher(documentation)
+	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
+		val matcher = JDOC_LINK_PATTERN.matcher(documentation)
 		if ( !matcher.find() )
 			return documentation
 
@@ -361,12 +373,16 @@ class NativeClass(
 			buffer.append(documentation, lastEnd, matcher.start())
 
 			val element = matcher.group(1)
-			if ( this.constantBlocks.any { block -> block.constants.any { it -> it.name == element } }) {
-				buffer.append('#')
-				buffer.append(matcher.group(1))
-			} else {
-				buffer.append(matcher.group(0))
-			}
+
+			if ( referenceClass.prefixConstant.isNotEmpty() && element startsWith referenceClass.prefixConstant ) {
+				if ( element.substring(referenceClass.prefixConstant.length()).let { constant ->
+					!this.constantBlocks.any { block -> block.constants.any { it -> it.name == constant } }
+				} )
+					buffer.append(referenceClass.className)
+			} else if ( !this.functions.any { it -> it.name == element } && referenceFunction != element )
+				buffer.append(referenceClass.className)
+
+			buffer.append(matcher.group(0))
 
 			lastEnd = matcher.end()
 		} while ( matcher.find() )

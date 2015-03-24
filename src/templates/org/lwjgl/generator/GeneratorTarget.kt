@@ -250,7 +250,7 @@ abstract class GeneratorTarget(
 				val name = classElement.substring(0, parentheses)
 
 				val hasParams = parentheses < classElement.length() - 2
-				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( (prefix.isEmpty() && !hasParams) || custom ) "" else " $name"}}"
+				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( prefix.isEmpty() || hasParams || custom ) "" else " $name"}}"
 			}
 		}
 
