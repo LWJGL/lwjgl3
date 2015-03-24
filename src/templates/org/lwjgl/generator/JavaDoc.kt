@@ -70,25 +70,25 @@ fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Sequence<Paramete
 
 	val builder = StringBuilder(javaDoc)
 
+	val returnsStructValue = !returnDoc.isEmpty() && returns is StructType && !returns.includesPointer
+
 	if ( !params.isEmpty() ) {
 		// Find maximum param name length
-		val alignment = params.map { it.name.length() }.fold(0) { left, right -> Math.max(left, right) }
+		var alignment = params.map { it.name.length() }.fold(0) { left, right -> Math.max(left, right) }
+		if ( returnsStructValue )
+			alignment = Math.max(alignment, RESULT.length())
 
-		val paramMultilineAligment = paramMultilineAligment(alignment)
+		val multilineAligment = paramMultilineAligment(alignment)
 
 		builder append "\n\t *"
 		params.forEach {
-			builder append "\n\t * @param ${it.name}"
-
-			// Align
-			for ( i in 0..(alignment - it.name.length()) )
-				builder append ' '
-
-			builder append processDocumentation(it.documentation).cleanup(paramMultilineAligment)
+			printParam(builder, it.name, processDocumentation(it.documentation), alignment, multilineAligment)
 		}
+		if ( returnsStructValue )
+			printParam(builder, RESULT, processDocumentation(returnDoc), alignment, multilineAligment)
 	}
 
-	if ( !returnDoc.isEmpty() ) {
+	if ( !returnDoc.isEmpty() && !returnsStructValue ) {
 		builder append "\n\t *"
 		builder append "\n\t * @return "
 		builder append processDocumentation(returnDoc).cleanup("\t *         ")
@@ -115,6 +115,16 @@ private fun paramMultilineAligment(alignment: Int): String {
 		builder append ' '
 
 	return builder.toString()
+}
+
+private fun printParam(builder: StringBuilder, name: String, documentation: String, alignment: Int, multilineAligment: String) {
+	builder append "\n\t * @param ${name}"
+
+	// Align
+	for ( i in 0..(alignment - name.length()) )
+		builder append ' '
+
+	builder append documentation.cleanup(multilineAligment)
 }
 
 // DSL extensions
