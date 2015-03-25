@@ -872,7 +872,7 @@ class Struct(
 	private fun PrintWriter.generateNativeMembers(members: List<StructMember>, offset: Int = 0, prefix: String = ""): Int {
 		var index = offset
 		members forEach {
-			println("\tbuffer[$index] = (jint)(offsetof($nativeName, $prefix${it.nativeName}));")
+			println("\tbuffer[$index] = (jint)offsetof($nativeName, $prefix${it.nativeName});")
 			index++
 
 			if ( it.isNestedStruct ) {
