@@ -1,3 +1,8 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+
 // Templates module compilation script
 import kotlin.modules.*
 import java.util.ArrayList

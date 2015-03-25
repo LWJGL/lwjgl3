@@ -1,3 +1,7 @@
+<!--
+Copyright LWJGL. All rights reserved.
+License terms: http://lwjgl.org/license.php
+-->
 <project name="lwjgl native code" basedir="../.." default="compile-native-macosx">
 	<import file="../build-definitions.xml"/>
 

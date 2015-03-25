@@ -1,3 +1,7 @@
+<!--
+Copyright LWJGL. All rights reserved.
+License terms: http://lwjgl.org/license.php
+-->
 <project name="LWJGL" basedir="." default="update-dependencies">
 
 	<property name="config" location="config" relative="true"/>
