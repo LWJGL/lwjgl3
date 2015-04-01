@@ -38,22 +38,22 @@ val NV_bindless_multi_draw_indirect = "NVBindlessMultiDrawIndirect".nativeClassG
 		"MultiDrawArraysIndirectBindlessNV",
 		"",
 
-		GLenum.IN("mode", ""),
-		const _ GLvoid_p.IN("indirect", ""),
-		GLintptr.IN("drawCount", ""),
-		GLsizei.IN("stride", ""),
-		GLint.IN("vertexBufferCount", "")
+		GLenum.IN("mode", "the primitive mode, such as LINES or TRIANGLES"),
+		const _ GLvoid_p.IN("indirect", "an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		GLsizei.IN("drawCount", "the number of structures in the <code>indirect</code> array"),
+		GLsizei.IN("stride", "the size of one DrawArraysIndirectBindlessCommandNV structure"),
+		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawArraysIndirectBindlessCommandNV structure")
 	)
 
 	GLvoid.func(
 		"MultiDrawElementsIndirectBindlessNV",
 		"",
 
-		GLenum.IN("mode", ""),
-		GLenum.IN("type", ""),
-		const _ GLvoid_p.IN("indirect", ""),
-		GLintptr.IN("drawCount", ""),
-		GLsizei.IN("stride", ""),
-		GLint.IN("vertexBufferCount", "")
+		GLenum.IN("mode", "the primitive mode, such as LINES or TRIANGLES"),
+		GLenum.IN("type", "the data type of the element indices, such as UNSIGNED_SHORT or UNSIGNED_INT"),
+		const _ GLvoid_p.IN("indirect", "an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		GLsizei.IN("drawCount", "the number of structures in the <code>indirect</code> array"),
+		GLsizei.IN("stride", "the size of one DrawElementsIndirectBindlessCommandNV structure"),
+		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawElementsIndirectBindlessCommandNV structure")
 	)
 }
