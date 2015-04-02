@@ -69,149 +69,216 @@ val NV_command_list = "NVCommandList".nativeClassGL("NV_command_list", postfix =
 
 	GLvoid.func(
 		"CreateStatesNV",
-		"",
+		"""
+		Returns <code>n</code> previously unused state object names in <code>states</code>, and creates
+		a state object in the initial state for each name.
+		""",
 
-		GLsizei.IN("n", ""),
+	GLsizei.IN("n", ""),
 		GLuint_p.OUT("states", "")
 	)
 	
 	GLvoid.func(
-	  "DeleteStatesNV",
-	  "",
-	  
-	  GLsizei.IN("n", ""),
-	  const _ GLuint_p.IN("states", "")
+		"DeleteStatesNV",
+		"""
+		Deletes <code>n</code> names of state objects given by <code>states</code>. Once a state
+		object is deleted it has no contents and its name is again unused. Unused 
+		names in <code>states</code> are silently ignored, as is the value zero.
+		""",
+
+		GLsizei.IN("n", ""),
+		const _ GLuint_p.IN("states", "")
 	)
 	
 	GLboolean.func(
-	  "IsStateNV",
-	  "",
-	  
-	  GLuint.IN("state", "")
+		"IsStateNV",
+		"",
+
+		GLuint.IN("state", "")
 	)
 	
 	GLvoid.func(
-    "StateCaptureNV",
-    "",
-    
-    GLuint.IN("state", ""),
-    GLenum.IN("mode", "")
+		"StateCaptureNV",
+		"""
+		Captures the current state of the rendering pipeline into the object 
+		indicated by <code>state</code>. <code>basicmode</code> indicates the basic Begin mode that this
+		state object must be used with.
+		""",
+
+		GLuint.IN("state", ""),
+		GLenum.IN("mode", "")
 	)
 	
 	GLuint.func(
-	  "GetCommandHeaderNV",
-	  "",
-	  
-	  GLenum.IN("tokenID", ""),
-	  GLuint.IN("size", "")
+		"GetCommandHeaderNV",
+		"""
+		Returns the encoded 32bit header value for a given command; the returned value is implementation specific.
+		The <code>size</code> is only provided as basic consistency check, since the size of each 
+		structure is fixed and no padding is allowed. The value is the sum of the 
+		header and the command specific structure.
+		""",
+
+		GLenum.IN("tokenID", ""),
+		GLuint.IN("size", "")
 	)
 	
 	GLushort.func(
-    "GetStageIndexNV",
-    "",
-    
-    GLenum.IN("shadertype", "")
+		"GetStageIndexNV",
+		"""
+		Returns the 16bit value for a specific shader stage; the returned value
+		is implementation specific. The value is to be used with the stage field
+		within <code>UniformAddressCommandNV</code> tokens.
+		""",
+
+		GLenum.IN("shadertype", "")
 	)
 	
 	GLvoid.func(
-	  "DrawCommandsNV",
-	  "",
-	  
-	  GLenum.IN("primitiveMode", ""),
-	  GLuint.IN("buffer", ""),
-	  const _ GLintptr_p.IN("indirects", ""),
-	  const _ GLsizei_p.IN("sizes", ""),
-	  GLuint.IN("count", "")
+		"DrawCommandsNV",
+		"""
+		Accepts arrays of buffer addresses as an array of 
+		offsets <code>indirects</code> into a buffer named by <code>buffer</code>, an array of command lengths in <code>sizes</code>. 
+		All arrays have <code>count</code> entries.
+		""",
+
+		GLenum.IN("primitiveMode", ""),
+		GLuint.IN("buffer", ""),
+		const _ GLintptr_p.IN("indirects", ""),
+		const _ GLsizei_p.IN("sizes", ""),
+		GLuint.IN("count", "")
 	)
 	
 	GLvoid.func(
-	  "DrawCommandsAddressNV",
-	  "",
-	  
-	  GLenum.IN("primitiveMode", ""),
-	  const _ GLuint64_p.IN("indirects", ""),
-	  const _ GLsizei_p.IN("sizes", ""),
-	  GLuint.IN("count", "")
+		"DrawCommandsAddressNV",
+		"""
+		Accepts arrays of buffer addresses as an array of GPU 
+		addresses <code>indirects</code>, an array of command lengths in <code>sizes</code>. 
+		All arrays have <code>count</code> entries.
+		""",
+
+		GLenum.IN("primitiveMode", ""),
+		const _ GLuint64_p.IN("indirects", ""),
+		const _ GLsizei_p.IN("sizes", ""),
+		GLuint.IN("count", "")
 	)
 	
 	GLvoid.func(
-	  "DrawCommandsStatesNV",
-	  "",
-	  
-	  GLuint.IN("buffer", ""),
-	  const _ GLintptr_p.IN("indirects", ""),
-	  const _ GLsizei_p.IN("sizes", ""),
-	  const _ GLuint_p.IN("states", ""),
-	  const _ GLuint_p.IN("fbos", ""),
-	  GLuint.IN("count", "")
+		"DrawCommandsStatesNV",
+		"""
+		Accepts arrays of buffer addresses as an array of 
+		offsets <code>indirects</code> into a buffer named by <code>buffer</code>,
+		an array of command lengths in <code>sizes</code>, and an 
+		array of state object names in <code>states</code>, of which all names must be non-zero.
+		Frame buffer object names are stored in <code>fbos</code> and can
+		be either zero or non-zero. All arrays have <code>count</code> entries.
+		The residency of textures used as attachment inside the state object's 
+		captured fbo or the passed fbo must managed explicitly. 
+		""",
+
+		GLuint.IN("buffer", ""),
+		const _ GLintptr_p.IN("indirects", ""),
+		const _ GLsizei_p.IN("sizes", ""),
+		const _ GLuint_p.IN("states", ""),
+		const _ GLuint_p.IN("fbos", ""),
+		GLuint.IN("count", "")
 	)
 	
 	GLvoid.func(
-	  "DrawCommandsStatesAddressNV",
-	  "",
-	  
-	  const _ GLuint64_p.IN("indirects", ""),
-	  const _ GLsizei_p.IN("sizes", ""),
-	  const _ GLuint_p.IN("states", ""),
-	  const _ GLuint_p.IN("fbos", ""),
-	  GLuint.IN("count", "")
+		"DrawCommandsStatesAddressNV",
+		"""
+		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>,
+		an array of command lengths in <code>sizes</code>, and an 
+		array of state object names in <code>states</code>, of which all names must be non-zero.
+		Frame buffer object names are stored in <code>fbos</code> and can
+		be either zero or non-zero. All arrays have <code>count</code> entries.
+		The residency of textures used as attachment inside the state object's 
+		captured fbo or the passed fbo must managed explicitly. 
+		""",
+
+		const _ GLuint64_p.IN("indirects", ""),
+		const _ GLsizei_p.IN("sizes", ""),
+		const _ GLuint_p.IN("states", ""),
+		const _ GLuint_p.IN("fbos", ""),
+		GLuint.IN("count", "")
 	)
 	
 	GLvoid.func(
-	  "CreateCommandListsNV",
-	  "",
-	  
-	  GLsizei.IN("n", ""),
-	  GLuint_p.OUT("lists", "")
+		"CreateCommandListsNV",
+		"""
+		Returns <code>n</code> previously unused command list names in <code>lists</code>, and creates
+		a command list in the initial state for each name.
+		""",
+
+		GLsizei.IN("n", ""),
+		GLuint_p.OUT("lists", "")
 	)
 
-  GLvoid.func(
-    "DeleteCommandListsNV",
-    "",
-    
-    GLsizei.IN("n", ""),
-    const _ GLuint_p.IN("lists", "")
-  )
+	GLvoid.func(
+		"DeleteCommandListsNV",
+		"""
+		Deletes <code>n</code> command lists stored in <code>lists</code>. Once a command
+		list is deleted it has no contents and its name is again unused. Unused 
+		names in <code>lists</code> are silently ignored, as is the value zero.
+		""",
+
+		GLsizei.IN("n", ""),
+		const _ GLuint_p.IN("lists", "")
+	)
   
-  GLboolean.func(
-    "IsCommandListNV",
-    "",
-    
-    GLuint.IN("list", "")
-  )
+	GLboolean.func(
+		"IsCommandListNV",
+		"",
+
+		GLuint.IN("list", "")
+	)
   
-  GLvoid.func(
-    "ListDrawCommandsStatesClientNV",
-    "",
-    
-    GLuint.IN("list", ""),
-    GLuint.IN("segment", ""),
-    const _ GLvoid_pp.IN("indirects", ""),
-    const _ sizet_p.IN("sizes", ""),
-    const _ GLuint_p.IN("states", ""),
-    const _ GLuint_p.IN("fbos", ""),
-    GLuint.IN("count", "")
-  )
+	GLvoid.func(
+		"ListDrawCommandsStatesClientNV",
+		"""
+		Enqueues the equivalent of the DrawCommandsStatesClientNV 
+		commands into the list indicated by <code>list</code> on the segment indicated by <code>segment</code>.
+		""",
 
-  GLvoid.func(
-    "CommandListSegmentsNV",
-    "",
-    
-    GLuint.IN("list", ""),
-    GLuint.IN("segments", "")
-  )
+		GLuint.IN("list", ""),
+		GLuint.IN("segment", ""),
+		const _ GLvoid_pp.IN("indirects", ""),
+		const _ sizet_p.IN("sizes", ""),
+		const _ GLuint_p.IN("states", ""),
+		const _ GLuint_p.IN("fbos", ""),
+		GLuint.IN("count", "")
+	)
 
-  GLvoid.func(
-    "CompileCommandListNV",
-    "",
-    
-    GLuint.IN("list", "")
-  )
+	GLvoid.func(
+		"CommandListSegmentsNV",
+		"",
 
-  GLvoid.func(
-    "CallCommandListNV",
-    "",
-    
-    GLuint.IN("list", "")
-  )
+		GLuint.IN("list", ""),
+		GLuint.IN("segments", "")
+	)
+
+	GLvoid.func(
+		"CompileCommandListNV",
+		"""
+		Makes the list indicated by <code>list</code> switch from allowing collection of 
+		commands to allowing its execution. At this time, the implementation may
+		generate optimized commands to transition between states as efficiently
+		as possible.
+		""",
+
+		GLuint.IN("list", "")
+	)
+
+	GLvoid.func(
+		"CallCommandListNV",
+		"""
+		Executes the command list indicated by <code>list</code>, which operates as if
+		the DrawCommandsStates* commands were replayed in the order they were 
+		enqueued on each segment, starting from segment zero and proceeding to the 
+		maximum segment. All buffer or texture resources' residency must be 
+		managed explicitly, including texture attachments of the effective 
+		fbos during list enqueuing.
+		""",
+
+		GLuint.IN("list", "")
+	)
 }
