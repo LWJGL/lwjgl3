@@ -1,17 +1,4 @@
-/*
- * Copyright LWJGL. All rights reserved.
- * License terms: http://lwjgl.org/license.php
- */
-#if GL_core_profile
-  #version 130
-  #define varying in
-  #define texture2D texture
-
-  out vec4 color;
-  #define OUT color
-#else
-  #define OUT gl_FragColor
-#endif
+#version 130
 
 uniform sampler2D framebuffer;
 uniform sampler2D boxes;
@@ -29,7 +16,8 @@ uniform float width;
 uniform float height;
 uniform int bounceCount;
 
-varying vec2 texcoord;
+in vec2 texcoord;
+out vec4 color;
 
 struct box {
   vec3 min;
@@ -167,5 +155,5 @@ void main(void) {
   newColor += trace(eye, dir);
   vec4 oldColor = vec4(0.0);
   oldColor = texture2D(framebuffer, pos);
-  OUT = mix(newColor, oldColor, blendFactor);
+  color = mix(newColor, oldColor, blendFactor);
 }
