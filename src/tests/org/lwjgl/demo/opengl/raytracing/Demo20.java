@@ -5,22 +5,20 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.PointerBuffer;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.ARBTextureFloat;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
@@ -95,13 +93,6 @@ public class Demo20 {
 	GLFWMouseButtonCallback mbCallback;
 
 	Closure debugProc;
-
-	static {
-		/*
-		 * Tell LWJGL that we only want 2.0 functionality.
-		 */
-		System.setProperty("org.lwjgl.opengl.maxVersion", "2.0");
-	}
 
 	private void init() throws IOException {
 		glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
@@ -243,50 +234,16 @@ public class Demo20 {
 	}
 
 	/**
-	 * Create a shader object from the given classpath resource.
-	 *
-	 * @param resource
-	 *            the class path
-	 * @param type
-	 *            the shader type
-	 *
-	 * @return the shader object id
-	 *
-	 * @throws IOException
-	 */
-	private static int createShader(String resource, int type) throws IOException {
-		int shader = glCreateShader(type);
-
-		ByteBuffer source = ioResourceToByteBuffer(resource, 8192);
-
-		PointerBuffer strings = BufferUtils.createPointerBuffer(1);
-		IntBuffer lengths = BufferUtils.createIntBuffer(1);
-
-		strings.put(0, source);
-		lengths.put(0, source.remaining());
-
-		glShaderSource(shader, strings, lengths);
-		glCompileShader(shader);
-		int compiled = glGetShaderi(shader, GL_COMPILE_STATUS);
-		String shaderLog = glGetShaderInfoLog(shader);
-		if (!shaderLog.trim().isEmpty()) {
-			System.err.println(shaderLog);
-		}
-		if (compiled == 0) {
-			throw new AssertionError("Could not compile shader");
-		}
-		return shader;
-	}
-
-	/**
 	 * Create the full-scren quad shader.
 	 *
 	 * @throws IOException
 	 */
 	private void createQuadProgram() throws IOException {
+		String version = GL.getCapabilities().OpenGL30 ? "130" : null;
+
 		int program = glCreateProgram();
-		int vshader = createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER);
-		int fshader = createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER);
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, version);
+		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, version);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");
@@ -310,10 +267,12 @@ public class Demo20 {
 	 * @throws IOException
 	 */
 	private void createRayTracingProgram() throws IOException {
+		String version = GL.getCapabilities().OpenGL30 ? "130" : null;
+
 		int program = glCreateProgram();
-		int vshader = createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER);
-		int fshader = createShader("demo/raytracing/raytracing20.fs", GL_FRAGMENT_SHADER);
-		int rndshader = createShader("demo/raytracing/random20.glsl", GL_FRAGMENT_SHADER);
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, version);
+		int fshader = Demo.createShader("demo/raytracing/raytracing20.fs", GL_FRAGMENT_SHADER, version);
+		int rndshader = Demo.createShader("demo/raytracing/random20.glsl", GL_FRAGMENT_SHADER, null);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glAttachShader(program, rndshader);

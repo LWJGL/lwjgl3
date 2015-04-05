@@ -3,7 +3,6 @@
  * License terms: http://lwjgl.org/license.php
  */
 #if GL_core_profile
-  #version 130
   #define attribute in
   #define varying out
 #endif

@@ -5,7 +5,6 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.PointerBuffer;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
@@ -22,7 +21,6 @@ import java.nio.IntBuffer;
 import java.nio.LongBuffer;
 
 import static java.lang.Math.*;
-import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL12.*;
@@ -404,46 +402,10 @@ public class PhotonMappingBindlessDemo {
 		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
 	}
 
-	/**
-	 * Create a shader object from the given classpath resource.
-	 *
-	 * @param resource
-	 *            the class path
-	 * @param type
-	 *            the shader type
-	 *
-	 * @return the shader object id
-	 *
-	 * @throws IOException
-	 */
-	private static int createShader(String resource, int type) throws IOException {
-		int shader = glCreateShader(type);
-
-		ByteBuffer source = ioResourceToByteBuffer(resource, 8192);
-
-		PointerBuffer strings = BufferUtils.createPointerBuffer(1);
-		IntBuffer lengths = BufferUtils.createIntBuffer(1);
-
-		strings.put(0, source);
-		lengths.put(0, source.remaining());
-
-		glShaderSource(shader, strings, lengths);
-		glCompileShader(shader);
-		int compiled = glGetShaderi(shader, GL_COMPILE_STATUS);
-		String shaderLog = glGetShaderInfoLog(shader);
-		if (!shaderLog.trim().isEmpty()) {
-			System.err.println(shaderLog);
-		}
-		if (compiled == 0) {
-			throw new AssertionError("Could not compile shader");
-		}
-		return shader;
-	}
-
 	private void createPhotonTraceProgram() throws IOException {
 		int program = glCreateProgram();
-		int cshader = createShader("demo/raytracing/photonmapBindless.glsl", GL_COMPUTE_SHADER);
-		int random = createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
+		int cshader = Demo.createShader("demo/raytracing/photonmapBindless.glsl", GL_COMPUTE_SHADER);
+		int random = Demo.createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
 		glLinkProgram(program);
@@ -650,8 +612,8 @@ public class PhotonMappingBindlessDemo {
 	 */
 	private void createRasterProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = createShader("demo/raytracing/rasterPhotonMap.vs", GL_VERTEX_SHADER);
-		int fshader = createShader("demo/raytracing/rasterPhotonMapBindless.fs", GL_FRAGMENT_SHADER);
+		int vshader = Demo.createShader("demo/raytracing/rasterPhotonMap.vs", GL_VERTEX_SHADER);
+		int fshader = Demo.createShader("demo/raytracing/rasterPhotonMapBindless.fs", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertexPosition");
