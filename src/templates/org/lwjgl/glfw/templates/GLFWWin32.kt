@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.windows.templates
+package org.lwjgl.glfw.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
