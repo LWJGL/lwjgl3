@@ -45,15 +45,6 @@ val GLdouble_p = PointerType(GLdouble)
 
 // custom numeric
 
-// size_t type. It is used by the NV_command_list extensions.
-// Question: what primitive mapping type do we use here?
-//           we can neither use 'LONG' nor 'INT' here,
-//           because size_t depends on the architecture.
-//           To avoid having an LongBuffer or IntBuffer overload
-//           I use BYTE here.
-val sizet = IntegerType("size_t", PrimitiveMapping.BYTE)
-val sizet_p = PointerType(sizet)
-
 val GLsizei = IntegerType("GLsizei", PrimitiveMapping.INT)
 val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
 val GLbitfield = IntegerType("GLbitfield", PrimitiveMapping.INT, unsigned = true)

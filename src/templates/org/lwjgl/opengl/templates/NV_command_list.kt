@@ -242,7 +242,7 @@ val NV_command_list = "NVCommandList".nativeClassGL("NV_command_list", postfix =
 		GLuint.IN("list", ""),
 		GLuint.IN("segment", ""),
 		const _ GLvoid_pp.IN("indirects", ""),
-		const _ sizet_p.IN("sizes", ""),
+		const _ size_t_p.IN("sizes", ""),
 		const _ GLuint_p.IN("states", ""),
 		const _ GLuint_p.IN("fbos", ""),
 		GLuint.IN("count", "")
