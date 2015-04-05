@@ -1,10 +1,18 @@
-#version 130
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+#if GL_core_profile
+  #version 130
+  #define attribute in
+  #define varying out
+#endif
 
 /* The position of the vertex as two-dimensional vector */
-in vec2 vertex;
+attribute vec2 vertex;
 
 /* Write interpolated texture coordinate to fragment shader */
-out vec2 texcoord;
+varying vec2 texcoord;
 
 void main(void) {
   gl_Position = vec4(vertex, 0.0, 1.0);
