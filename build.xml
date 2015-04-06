@@ -8,7 +8,6 @@
 
 	<!-- Initialize build -->
 	<target name="-initialize" description="Initializes the directories required by the build process">
-		<mkdir dir="${lib}"/>
 		<mkdir dir="${generated}"/>
 		<mkdir dir="${bin.core}"/>
 		<mkdir dir="${bin.util}"/>
