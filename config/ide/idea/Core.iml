@@ -1,20 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
-    <output url="file://$LWJGL_BUILD_OUTPUT$/bin/Core" />
-    <output-test url="file://$LWJGL_BUILD_OUTPUT$/bin/Core" />
+    <output url="file://$MODULE_DIR$/../../../bin/Core" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/Core" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../..">
       <sourceFolder url="file://$MODULE_DIR$/../../../src/core" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../../generated/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../generated/javadoc" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../generated/tests" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../release" />
       <excludeFolder url="file://$MODULE_DIR$/../../../src/templates" />
       <excludeFolder url="file://$MODULE_DIR$/../../../src/tests" />
       <excludeFolder url="file://$MODULE_DIR$/../../../src/util" />
-    </content>
-    <content url="file://$LWJGL_BUILD_OUTPUT$">
-      <sourceFolder url="file://$LWJGL_BUILD_OUTPUT$/generated/java" isTestSource="false" />
-      <excludeFolder url="file://$LWJGL_BUILD_OUTPUT$/bin" />
-      <excludeFolder url="file://$LWJGL_BUILD_OUTPUT$/generated/javadoc" />
-      <excludeFolder url="file://$LWJGL_BUILD_OUTPUT$/generated/tests" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

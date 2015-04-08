@@ -1,4 +1,4 @@
-<project name="definitions" basedir="../">
+<project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<!-- ================================================================== -->
 	<!-- Global properties for build 																				-->
 	<!-- ================================================================== -->
@@ -28,17 +28,19 @@
 	<!--
 		This is used to override the default output directory. By default, the directories
 		bin, generated and release will be created in the same directory as the main build
-		script. You may want to change that, to keep the main directory clean, or due to the
-		performance characteristics of the storage hardware. Note that these 3 directories
-		will contain thousands of tiny files.
+		script. These 3 directories will contain thousands of tiny files, so you may want
+		to override their location due to performance characteristics of the storage
+		hardware.
+
+		Note that when this property is set, the directories bin, generated and release
+		will be symlinks to the corresponding directories in LWJGL_BUILD_OUTPUT. The ant
+		scripts and IDE projects always work with paths relative to the project root.
 	-->
-	<condition property="build.output" value="${env.LWJGL_BUILD_OUTPUT}" else=".">
-		<isset property="env.LWJGL_BUILD_OUTPUT"/>
-	</condition>
+	<property name="build.output" location="${env.LWJGL_BUILD_OUTPUT}" relative="false" if:set="env.LWJGL_BUILD_OUTPUT"/>
 
 	<property name="src" location="src" relative="true"/>
-	<property name="generated" location="${build.output}/generated" relative="false"/>
-	<property name="bin" location="${build.output}/bin" relative="false"/>
+	<property name="generated" location="generated" relative="false"/>
+	<property name="bin" location="bin" relative="false"/>
 	<property name="lib" location="libs" relative="true"/>
 	<property name="lib.abs" location="${lib}" relative="false"/>
 	<property name="res" location="res" relative="true"/>
@@ -65,7 +67,7 @@
 
 	<property name="doc" location="doc" relative="true"/>
 
-	<property name="release" location="${build.output}/release" relative="false"/>
+	<property name="release" location="release" relative="false"/>
 	<property name="release.jar" location="${release}/jar" relative="false"/>
 	<property name="release.native" location="${release}/native" relative="false"/>
 	<property name="release.doc" location="${release}/doc" relative="false"/>
@@ -74,14 +76,9 @@
 		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM
 		that runs ANT is used, but this can be overriden for cross-compiling to another architecture.
 	-->
-	<condition property="build.arch" value="${env.LWJGL_BUILD_ARCH}">
-		<isset property="env.LWJGL_BUILD_ARCH"/>
-	</condition>
-	<condition property="build.arch" value="x64" else="x86"> <!-- Normalize os.arch -->
-		<and>
-			<not><isset property="build.arch"/></not>
-			<contains string="${os.arch}" substring="64"/>
-		</and>
+	<property name="build.arch" value="${env.LWJGL_BUILD_ARCH}" if:set="env.LWJGL_BUILD_ARCH"/>
+	<condition property="build.arch" value="x64" else="x86" unless:set="build.arch"> <!-- Normalize os.arch -->
+		<contains string="${os.arch}" substring="64"/>
 	</condition>
 
 	<!--
@@ -108,21 +105,11 @@
 		<os name="Mac OS X"/>
 	</condition>
 
-	<condition property="platform" value="windows">
-		<isset property="platform.windows"/>
-	</condition>
-	<condition property="platform" value="linux">
-		<isset property="platform.linux"/>
-	</condition>
-	<condition property="platform" value="freebsd">
-		<isset property="platform.freebsd"/>
-	</condition>
-	<condition property="platform" value="solaris">
-		<isset property="platform.solaris"/>
-	</condition>
-	<condition property="platform" value="macosx">
-		<isset property="platform.macosx"/>
-	</condition>
+	<property name="platform" value="windows" if:set="platform.windows"/>
+	<property name="platform" value="linux" if:set="platform.linux"/>
+	<property name="platform" value="freebsd" if:set="platform.freebsd"/>
+	<property name="platform" value="solaris" if:set="platform.solaris"/>
+	<property name="platform" value="macosx" if:set="platform.macosx"/>
 
 	<!-- Different location per platform/architecture. This is intentional. -->
 	<property name="bin.native" location="${bin}/${platform}/${build.arch}" relative="true"/>
@@ -131,12 +118,73 @@
 		<element name="body" implicit="yes"/>
 		<sequential>
 			<script language="javascript">
-			project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_WARN);
+				project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_WARN);
 			</script>
 			<body/>
 			<script language="javascript">
-			project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_INFO);
+				project.getBuildListeners().firstElement().setMessageOutputLevel(org.apache.tools.ant.Project.MSG_INFO);
 			</script>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="mkdir-symlink">
+		<attribute name="dir"/>
+
+		<sequential>
+			<!-- in the repo root -->
+			<mkdir dir="@{dir}" unless:set="build.output"/>
+
+			<!-- or in LWJGL_BUILD_OUTPUT -->
+			<local name="useSymlink"/>
+			<condition property="useSymlink" value="1">
+				<and>
+					<isset property="build.output"/>
+					<not>
+						<available property="dirExists" file="@{dir}" type="dir"/>
+					</not>
+				</and>
+			</condition>
+
+			<mkdir dir="${build.output}/@{dir}" if:set="useSymlink"/>
+
+			<!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Unix) -->
+			<local name="useSymlinkUnix"/>
+			<condition property="useSymlinkUnix" value="1">
+				<and>
+					<isset property="useSymlink"/>
+					<not>
+						<isset property="platform.windows"/>
+					</not>
+				</and>
+			</condition>
+
+			<symlink link="@{dir}" resource="${build.output}/@{dir}" if:set="useSymlinkUnix"/>
+
+			<!-- Create symlink from root to LWJGL_BUILD_OUTPUT (Windows) -->
+			<local name="useSymlinkWindows"/>
+			<condition property="useSymlinkWindows" value="1">
+				<and>
+					<isset property="useSymlink"/>
+					<isset property="platform.windows"/>
+				</and>
+			</condition>
+
+			<exec executable="cmd" if:set="useSymlinkWindows" failonerror="true">
+				<arg value="/c"/>
+				<arg value="mklink"/>
+				<arg value="/J"/>
+				<arg value="@{dir}"/>
+				<arg value="${build.output}\@{dir}"/>
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="delete-symlink">
+		<attribute name="dir"/>
+
+		<sequential>
+			<delete dir="${build.output}/@{dir}" if:set="build.output"/>
+			<delete dir="@{dir}"/>
 		</sequential>
 	</macrodef>
 

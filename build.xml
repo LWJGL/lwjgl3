@@ -1,4 +1,4 @@
-<project name="LWJGL" basedir="." default="all">
+<project name="LWJGL" basedir="." default="all" xmlns:if="ant:if" xmlns:unless="ant:unless">
 
 	<property name="build.sysclasspath" value="ignore"/>
 
@@ -7,8 +7,12 @@
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
 	<!-- Initialize build -->
-	<target name="-initialize" description="Initializes the directories required by the build process">
-		<mkdir dir="${generated}"/>
+	<target name="init" description="Initializes the directories required by the build process">
+		<!-- These depend on LWJGL_BUILD_OUTPUT and may be symlinks -->
+		<mkdir-symlink dir="bin"/>
+		<mkdir-symlink dir="generated"/>
+		<mkdir-symlink dir="release"/>
+
 		<mkdir dir="${bin.core}"/>
 		<mkdir dir="${bin.util}"/>
 		<mkdir dir="${bin.templates}"/>
@@ -21,8 +25,40 @@
 		<taskdef resource="testngtasks" classpath="libs/testng.jar"/>
 	</target>
 
+	<target name="init-generated" description="Initializes the lwjgl3-generated git repository in /generated. [Optional]">
+		<local name="replace.input"/>
+		<input
+			message="The /generated directory contents will be replaced with a fresh clone of the lwjgl3-generated repository. Continue?"
+			validargs="y,n"
+			defaultvalue="n"
+			addproperty="replace.input"
+			/>
+		<condition property="replace.generated">
+			<equals arg1="y" arg2="${replace.input}"/>
+		</condition>
+		<fail unless="replace.generated">Cancelled</fail>
+
+		<!-- Purge /generated contents -->
+		<antcall target="remove-generated"/>
+		<mkdir-symlink dir="generated"/>
+
+		<!-- Clone repo -->
+		<exec executable="git" failonerror="true">
+			<arg value="clone"/>
+			<arg value="https://github.com/LWJGL/lwjgl3-generated.git"/>
+			<arg value="generated"/>
+		</exec>
+	</target>
+
+	<target name="remove-generated" description="Removes the /generated directory.">
+		<delete-symlink dir="generated"/>
+	</target>
+
 	<target name="clean" description="Cleans all directories controlled by this script" depends="clean-java, clean-native, clean-templates, clean-generated">
-		<delete dir="${bin}"/>
+		<delete-symlink dir="bin"/>
+		<!-- Do not delete /generated, it may contain the lwjgl3-generated git repo -->
+		<delete-symlink dir="release"/>
+		<echo message="Cleanup successful. To also remove the /generated directory, run the  remove-generated  target."/>
 	</target>
 
 	<target name="clean-java" description="Deletes Java binary files produced by this script">
@@ -80,9 +116,7 @@
 		}
 		</script>
 		</sequential>
-		<condition property="env.JAVA6_HOME" value="${env.JAVA_HOME}">
-			<not><isset property="env.JAVA6_HOME"/></not>
-		</condition>
+		<property name="env.JAVA6_HOME" value="${env.JAVA_HOME}" unless:set="env.JAVA6_HOME"/>
 
 		<path id="jdk.boot.classpath.jars">
 			<fileset dir="${env.JAVA6_HOME}/jre/lib">
@@ -100,7 +134,7 @@
 		</condition>
 	</target>
 
-	<target name="compile-templates" description="Compiles the Templates module" depends="-initialize">
+	<target name="compile-templates" description="Compiles the Templates module" depends="init">
 		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
 			<srcfiles dir="${src.templates}" includes="**" />
 		</uptodate>
@@ -140,7 +174,7 @@
 		<touch file="${bin.templates}/touch.txt"/>
 	</target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="-initialize, -init-compile"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+	<target name="formatter" description="Runs the template formatter tool" depends="init, -init-compile"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
 		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
@@ -158,7 +192,7 @@
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="-initialize">
+	<target name="generate" description="Runs the bindings Generator" depends="init">
 		<available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
@@ -202,7 +236,7 @@
 		</javac>
 	</target>
 
-	<target name="compile-native" description="Compiles the native source code" depends="-initialize, compile">
+	<target name="compile-native" description="Compiles the native source code" depends="init, compile">
 		<ant antfile="${config}/${platform}/build.xml" inheritAll="false"/>
 	</target>
 
@@ -234,9 +268,6 @@
 	</target>
 
 	<target name="tests" description="Runs the LWJGL test suite" depends="compile-tests, compile-native, -init-runtime">
-		<condition property="osxargs" value="-XstartOnFirstThread" else="">
-			<isset property="platform.macosx"/>
-		</condition>
 		<testng outputDir="${generated.tests}" classpathref="runtime.classpath" taskname="Tests">
 			<classpath>
 				<pathelement path="${lib}/jcommander.jar"/>
@@ -246,27 +277,14 @@
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Djava.library.path=${library.path}"/>
-			<jvmarg line="${osxargs}"/>
+			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
 		</testng>
 	</target>
 
-	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime">
+	<target name="demo" description="Runs an LWJGL demo" depends="-init-runtime">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
-		<condition property="class" value="${class}" else="">
-			<isset property="class"/>
-		</condition>
-
-		<condition property="osxargs" value="-XstartOnFirstThread" else="">
-			<isset property="platform.macosx"/>
-		</condition>
-		<condition property="jvmargs" value="${jvmargs}" else="">
-			<isset property="jvmargs"/>
-		</condition>
-		<condition property="args" value="${args}" else="">
-			<isset property="args"/>
-		</condition>
 
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
 			<classpath>
@@ -274,10 +292,10 @@
 			</classpath>
 
 			<jvmarg value="-Djava.library.path=${library.path}"/>
-			<jvmarg line="${osxargs}"/>
-			<jvmarg line="${jvmargs}"/>
+			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
+			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
-			<arg line="${args}"/>
+			<arg line="${args}" if:set="args"/>
 		</java>
 	</target>
 
