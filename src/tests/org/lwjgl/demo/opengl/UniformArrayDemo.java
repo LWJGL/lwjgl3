@@ -116,7 +116,7 @@ public class UniformArrayDemo {
 				} else if (key == GLFW_KEY_UP) {
 					chosen = (chosen + 1) % 4;
 				} else if (key == GLFW_KEY_DOWN) {
-					chosen = (chosen + 1) % 4;
+					chosen = (chosen + 3) % 4;
 				}
 			}
 		});
