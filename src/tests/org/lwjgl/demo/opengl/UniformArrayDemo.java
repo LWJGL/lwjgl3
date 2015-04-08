@@ -7,6 +7,7 @@ package org.lwjgl.demo.opengl;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL20;
 import org.lwjgl.opengl.GLContext;
 
 import java.io.IOException;
@@ -22,6 +23,12 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * Simple demo to showcase the use of {@link GL20#glUniform3fv(int, FloatBuffer)}.
+ * 
+ * @author kai
+ *
+ */
 public class UniformArrayDemo {
 
 	private long window;
@@ -35,7 +42,10 @@ public class UniformArrayDemo {
 	private int chosen = 0;
 	private FloatBuffer colors = BufferUtils.createFloatBuffer(3 * 4);
 	{
-		colors.put(new float[] { 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 0 });
+		colors.put(1).put(0).put(0); // red
+		colors.put(0).put(1).put(0); // green
+		colors.put(0).put(0).put(1); // blue
+		colors.put(1).put(1).put(0); // yellow
 		colors.flip();
 	}
 
