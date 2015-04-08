@@ -251,7 +251,6 @@ public class UniformArrayDemo {
 		while (glfwWindowShouldClose(window) == GL_FALSE) {
 			glfwPollEvents();
 			glViewport(0, 0, width, height);
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 			render();
 
