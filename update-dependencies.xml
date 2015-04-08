@@ -39,6 +39,7 @@
 	</target>
 
 	<target name="update-dependencies" description="Updates LWJGL dependencies" unless="${build.offline}">
+		<mkdir dir="${lib}"/>
 		<antcall target="-lib-download"/>
 		<antcall target="-kotlinc-download"/>
 	</target>

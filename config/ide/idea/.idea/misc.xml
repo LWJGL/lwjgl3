@@ -7,7 +7,7 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7 x64" project-jdk-type="JavaSDK">
-    <output url="file://$LWJGL_BUILD_OUTPUT$/bin" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" default="false" assert-keyword="true" jdk-15="true" project-jdk-name="1.7 x64" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/../../../bin" />
   </component>
 </project>

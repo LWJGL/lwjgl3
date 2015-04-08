@@ -1,5 +1,9 @@
 /config/ide/idea/.idea/workspace.xml
 /bin
 /generated
+/release
 /libs
 /wiki
+.DS_Store
+*.bat
+*.sh
