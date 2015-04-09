@@ -169,30 +169,30 @@ public class PhotonMappingDemo {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if (action != GLFW_RELEASE)
+				if ( action != GLFW_RELEASE )
 					return;
 
-				if (key == GLFW_KEY_ESCAPE) {
+				if ( key == GLFW_KEY_ESCAPE ) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				} else if (key == GLFW_KEY_R) {
+				} else if ( key == GLFW_KEY_R ) {
 					PhotonMappingDemo.this.clearPhotonMapTexture = true;
-				} else if (key == GLFW_KEY_UP) {
+				} else if ( key == GLFW_KEY_UP ) {
 					PhotonMappingDemo.this.photonMapSize *= 2;
 					PhotonMappingDemo.this.photonMapSize = Math.min(PhotonMappingDemo.this.photonMapSize,
-							maxPhotonMapSize);
+					                                                maxPhotonMapSize);
 					PhotonMappingDemo.this.recreatePhotonMapTexture = true;
 					System.out.println("Photon map resolution: " + PhotonMappingDemo.this.photonMapSize);
-				} else if (key == GLFW_KEY_DOWN) {
+				} else if ( key == GLFW_KEY_DOWN ) {
 					PhotonMappingDemo.this.photonMapSize /= 2;
 					PhotonMappingDemo.this.photonMapSize = Math.max(PhotonMappingDemo.this.photonMapSize, 4);
 					PhotonMappingDemo.this.recreatePhotonMapTexture = true;
 					System.out.println("Photon map resolution: " + PhotonMappingDemo.this.photonMapSize);
-				} else if (key == GLFW_KEY_RIGHT) {
+				} else if ( key == GLFW_KEY_RIGHT ) {
 					PhotonMappingDemo.this.photonsPerFrame *= 2;
 					PhotonMappingDemo.this.photonsPerFrame = Math.min(PhotonMappingDemo.this.photonsPerFrame,
-							maxPhotonsPerFrame);
+					                                                  maxPhotonsPerFrame);
 					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
-				} else if (key == GLFW_KEY_LEFT) {
+				} else if ( key == GLFW_KEY_LEFT ) {
 					PhotonMappingDemo.this.photonsPerFrame /= 2;
 					PhotonMappingDemo.this.photonsPerFrame = Math.max(PhotonMappingDemo.this.photonsPerFrame, 4);
 					System.out.println("Photons per frame: " + PhotonMappingDemo.this.photonsPerFrame);
@@ -203,8 +203,8 @@ public class PhotonMappingDemo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0
-						&& (PhotonMappingDemo.this.width != width || PhotonMappingDemo.this.height != height)) {
+				if ( width > 0 && height > 0
+				     && (PhotonMappingDemo.this.width != width || PhotonMappingDemo.this.height != height) ) {
 					PhotonMappingDemo.this.width = width;
 					PhotonMappingDemo.this.height = height;
 					PhotonMappingDemo.this.resetFramebuffer = true;
@@ -215,8 +215,8 @@ public class PhotonMappingDemo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				PhotonMappingDemo.this.mouseX = (float) x;
-				if (mouseDown) {
+				PhotonMappingDemo.this.mouseX = (float)x;
+				if ( mouseDown ) {
 				}
 			}
 		});
@@ -224,10 +224,10 @@ public class PhotonMappingDemo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					PhotonMappingDemo.this.mouseDownX = PhotonMappingDemo.this.mouseX;
 					PhotonMappingDemo.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					PhotonMappingDemo.this.mouseDown = false;
 					PhotonMappingDemo.this.rotationAboutY = PhotonMappingDemo.this.currRotationAboutY;
 				}
@@ -239,6 +239,12 @@ public class PhotonMappingDemo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		ctx = GLContext.createFromCurrent();
 
 		/* Create all needed GL resources */

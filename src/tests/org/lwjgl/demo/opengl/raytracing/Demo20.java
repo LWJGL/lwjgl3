@@ -17,6 +17,7 @@ import org.lwjgl.system.libffi.Closure;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -24,6 +25,7 @@ import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Raytracing demo.
@@ -100,7 +102,7 @@ public class Demo20 {
 
 			@Override
 			public void invoke(int error, long description) {
-				if (error == GLFW_VERSION_UNAVAILABLE)
+				if ( error == GLFW_VERSION_UNAVAILABLE )
 					System.err.println("This demo requires OpenGL 2.0 or higher.");
 				delegate.invoke(error, description);
 			}
@@ -131,22 +133,22 @@ public class Demo20 {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if (action != GLFW_RELEASE) {
+				if ( action != GLFW_RELEASE ) {
 					return;
 				}
 
-				if (key == GLFW_KEY_ESCAPE) {
+				if ( key == GLFW_KEY_ESCAPE ) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
+				} else if ( key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP ) {
 					int newBounceCount = Math.min(4, Demo20.this.bounceCount + 1);
-					if (newBounceCount != Demo20.this.bounceCount) {
+					if ( newBounceCount != Demo20.this.bounceCount ) {
 						Demo20.this.bounceCount = newBounceCount;
 						System.out.println("Ray bounce count is now: " + Demo20.this.bounceCount);
 						Demo20.this.frameNumber = 0;
 					}
-				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
+				} else if ( key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN ) {
 					int newBounceCount = Math.max(1, Demo20.this.bounceCount - 1);
-					if (newBounceCount != Demo20.this.bounceCount) {
+					if ( newBounceCount != Demo20.this.bounceCount ) {
 						Demo20.this.bounceCount = newBounceCount;
 						System.out.println("Ray bounce count is now: " + Demo20.this.bounceCount);
 						Demo20.this.frameNumber = 0;
@@ -158,7 +160,7 @@ public class Demo20 {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0 && (Demo20.this.width != width || Demo20.this.height != height)) {
+				if ( width > 0 && height > 0 && (Demo20.this.width != width || Demo20.this.height != height) ) {
 					Demo20.this.width = width;
 					Demo20.this.height = height;
 					Demo20.this.resetFramebuffer = true;
@@ -170,8 +172,8 @@ public class Demo20 {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				Demo20.this.mouseX = (float) x;
-				if (mouseDown) {
+				Demo20.this.mouseX = (float)x;
+				if ( mouseDown ) {
 					Demo20.this.frameNumber = 0;
 				}
 			}
@@ -180,10 +182,10 @@ public class Demo20 {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					Demo20.this.mouseDownX = Demo20.this.mouseX;
 					Demo20.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					Demo20.this.mouseDown = false;
 					Demo20.this.rotationAboutY = Demo20.this.currRotationAboutY;
 				}
@@ -195,6 +197,12 @@ public class Demo20 {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */

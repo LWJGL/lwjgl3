@@ -14,6 +14,7 @@ import org.lwjgl.demo.util.Vector3f;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -160,7 +161,7 @@ public class Demo33Ubo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0 && (Demo33Ubo.this.width != width || Demo33Ubo.this.height != height)) {
+				if ( width > 0 && height > 0 && (Demo33Ubo.this.width != width || Demo33Ubo.this.height != height) ) {
 					Demo33Ubo.this.width = width;
 					Demo33Ubo.this.height = height;
 					Demo33Ubo.this.resetFramebuffer = true;
@@ -172,8 +173,8 @@ public class Demo33Ubo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				Demo33Ubo.this.mouseX = (float) x;
-				if (mouseDown) {
+				Demo33Ubo.this.mouseX = (float)x;
+				if ( mouseDown ) {
 					Demo33Ubo.this.frameNumber = 0;
 				}
 			}
@@ -182,10 +183,10 @@ public class Demo33Ubo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					Demo33Ubo.this.mouseDownX = Demo33Ubo.this.mouseX;
 					Demo33Ubo.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					Demo33Ubo.this.mouseDown = false;
 					Demo33Ubo.this.rotationAboutY = Demo33Ubo.this.currRotationAboutY;
 				}
@@ -197,6 +198,12 @@ public class Demo33Ubo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
@@ -246,8 +253,8 @@ public class Demo33Ubo {
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");
@@ -273,7 +280,7 @@ public class Demo33Ubo {
 	 */
 	private void createRayTracingProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
 		int fshader = Demo.createShader("demo/raytracing/raytracingUbo.fs", GL_FRAGMENT_SHADER);
 		int rndshader = Demo.createShader("demo/raytracing/random.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);

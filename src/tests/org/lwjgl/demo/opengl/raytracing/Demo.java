@@ -159,7 +159,7 @@ public class Demo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0 && (Demo.this.width != width || Demo.this.height != height)) {
+				if ( width > 0 && height > 0 && (Demo.this.width != width || Demo.this.height != height) ) {
 					Demo.this.width = width;
 					Demo.this.height = height;
 					Demo.this.resetFramebuffer = true;
@@ -171,8 +171,8 @@ public class Demo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				Demo.this.mouseX = (float) x;
-				if (mouseDown) {
+				Demo.this.mouseX = (float)x;
+				if ( mouseDown ) {
 					Demo.this.frameNumber = 0;
 				}
 			}
@@ -181,10 +181,10 @@ public class Demo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					Demo.this.mouseDownX = Demo.this.mouseX;
 					Demo.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					Demo.this.mouseDown = false;
 					Demo.this.rotationAboutY = Demo.this.currRotationAboutY;
 				}
@@ -196,6 +196,12 @@ public class Demo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
@@ -313,8 +319,8 @@ public class Demo {
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");

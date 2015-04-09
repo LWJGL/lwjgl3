@@ -177,36 +177,36 @@ public class PhotonMappingBindlessDemo {
 		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
 			@Override
 			public void invoke(long window, int key, int scancode, int action, int mods) {
-				if (action != GLFW_RELEASE)
+				if ( action != GLFW_RELEASE )
 					return;
 
-				if (key == GLFW_KEY_ESCAPE) {
+				if ( key == GLFW_KEY_ESCAPE ) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
-				} else if (key == GLFW_KEY_R) {
+				} else if ( key == GLFW_KEY_R ) {
 					PhotonMappingBindlessDemo.this.clearPhotonMapTexture = true;
-				} else if (key == GLFW_KEY_UP) {
+				} else if ( key == GLFW_KEY_UP ) {
 					PhotonMappingBindlessDemo.this.texelsPerUnit *= 2;
 					PhotonMappingBindlessDemo.this.texelsPerUnit = Math.min(
-							PhotonMappingBindlessDemo.this.texelsPerUnit, MAX_TEXELS_PER_UNIT);
+						PhotonMappingBindlessDemo.this.texelsPerUnit, MAX_TEXELS_PER_UNIT);
 					PhotonMappingBindlessDemo.this.recreatePhotonMapTextures = true;
 					System.out.println("Photon map resolution (texels per unit): "
-							+ PhotonMappingBindlessDemo.this.texelsPerUnit);
-				} else if (key == GLFW_KEY_DOWN) {
+					                   + PhotonMappingBindlessDemo.this.texelsPerUnit);
+				} else if ( key == GLFW_KEY_DOWN ) {
 					PhotonMappingBindlessDemo.this.texelsPerUnit /= 2;
 					PhotonMappingBindlessDemo.this.texelsPerUnit = Math.max(
-							PhotonMappingBindlessDemo.this.texelsPerUnit, 4);
+						PhotonMappingBindlessDemo.this.texelsPerUnit, 4);
 					PhotonMappingBindlessDemo.this.recreatePhotonMapTextures = true;
 					System.out.println("Photon map resolution (texels per unit): "
-							+ PhotonMappingBindlessDemo.this.texelsPerUnit);
-				} else if (key == GLFW_KEY_RIGHT) {
+					                   + PhotonMappingBindlessDemo.this.texelsPerUnit);
+				} else if ( key == GLFW_KEY_RIGHT ) {
 					PhotonMappingBindlessDemo.this.photonsPerFrame *= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.min(
-							PhotonMappingBindlessDemo.this.photonsPerFrame, MAX_PHOTONS_PER_FRAME);
+						PhotonMappingBindlessDemo.this.photonsPerFrame, MAX_PHOTONS_PER_FRAME);
 					System.out.println("Photons per frame: " + PhotonMappingBindlessDemo.this.photonsPerFrame);
-				} else if (key == GLFW_KEY_LEFT) {
+				} else if ( key == GLFW_KEY_LEFT ) {
 					PhotonMappingBindlessDemo.this.photonsPerFrame /= 2;
 					PhotonMappingBindlessDemo.this.photonsPerFrame = Math.max(
-							PhotonMappingBindlessDemo.this.photonsPerFrame, Math.max(workGroupSizeX, workGroupSizeY));
+						PhotonMappingBindlessDemo.this.photonsPerFrame, Math.max(workGroupSizeX, workGroupSizeY));
 					System.out.println("Photons per frame: " + PhotonMappingBindlessDemo.this.photonsPerFrame);
 				}
 			}
@@ -215,9 +215,9 @@ public class PhotonMappingBindlessDemo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0
-						&& height > 0
-						&& (PhotonMappingBindlessDemo.this.width != width || PhotonMappingBindlessDemo.this.height != height)) {
+				if ( width > 0
+				     && height > 0
+				     && (PhotonMappingBindlessDemo.this.width != width || PhotonMappingBindlessDemo.this.height != height) ) {
 					PhotonMappingBindlessDemo.this.width = width;
 					PhotonMappingBindlessDemo.this.height = height;
 					PhotonMappingBindlessDemo.this.resetFramebuffer = true;
@@ -228,8 +228,8 @@ public class PhotonMappingBindlessDemo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				PhotonMappingBindlessDemo.this.mouseX = (float) x;
-				if (mouseDown) {
+				PhotonMappingBindlessDemo.this.mouseX = (float)x;
+				if ( mouseDown ) {
 				}
 			}
 		});
@@ -237,10 +237,10 @@ public class PhotonMappingBindlessDemo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					PhotonMappingBindlessDemo.this.mouseDownX = PhotonMappingBindlessDemo.this.mouseX;
 					PhotonMappingBindlessDemo.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					PhotonMappingBindlessDemo.this.mouseDown = false;
 					PhotonMappingBindlessDemo.this.rotationAboutY = PhotonMappingBindlessDemo.this.currRotationAboutY;
 				}
@@ -252,6 +252,12 @@ public class PhotonMappingBindlessDemo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		ctx = GLContext.createFromCurrent();
 
 		if ( !ctx.getCapabilities().GL_ARB_bindless_texture )

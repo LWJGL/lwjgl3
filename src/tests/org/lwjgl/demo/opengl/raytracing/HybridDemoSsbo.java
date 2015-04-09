@@ -183,8 +183,8 @@ public class HybridDemoSsbo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0
-						&& (HybridDemoSsbo.this.width != width || HybridDemoSsbo.this.height != height)) {
+				if ( width > 0 && height > 0
+				     && (HybridDemoSsbo.this.width != width || HybridDemoSsbo.this.height != height) ) {
 					HybridDemoSsbo.this.width = width;
 					HybridDemoSsbo.this.height = height;
 					HybridDemoSsbo.this.resetFramebuffer = true;
@@ -196,8 +196,8 @@ public class HybridDemoSsbo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				HybridDemoSsbo.this.mouseX = (float) x;
-				if (mouseDown) {
+				HybridDemoSsbo.this.mouseX = (float)x;
+				if ( mouseDown ) {
 					HybridDemoSsbo.this.frameNumber = 0;
 				}
 			}
@@ -206,10 +206,10 @@ public class HybridDemoSsbo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if (action == GLFW_PRESS) {
+				if ( action == GLFW_PRESS ) {
 					HybridDemoSsbo.this.mouseDownX = HybridDemoSsbo.this.mouseX;
 					HybridDemoSsbo.this.mouseDown = true;
-				} else if (action == GLFW_RELEASE) {
+				} else if ( action == GLFW_RELEASE ) {
 					HybridDemoSsbo.this.mouseDown = false;
 					HybridDemoSsbo.this.rotationAboutY = HybridDemoSsbo.this.currRotationAboutY;
 				}
@@ -221,6 +221,12 @@ public class HybridDemoSsbo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
@@ -412,8 +418,8 @@ public class HybridDemoSsbo {
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");

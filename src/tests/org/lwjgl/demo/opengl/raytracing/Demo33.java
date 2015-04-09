@@ -14,6 +14,7 @@ import org.lwjgl.system.libffi.Closure;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.glfw.GLFW.*;
@@ -158,8 +159,8 @@ public class Demo33 {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 && 
-						(Demo33.this.width != width || Demo33.this.height != height)) {
+				if ( width > 0 && height > 0 &&
+				     (Demo33.this.width != width || Demo33.this.height != height) ) {
 					Demo33.this.width = width;
 					Demo33.this.height = height;
 					Demo33.this.resetFramebuffer = true;
@@ -196,6 +197,12 @@ public class Demo33 {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
 
 		/* Create all needed GL resources */
@@ -244,8 +251,8 @@ public class Demo33 {
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");
@@ -271,7 +278,7 @@ public class Demo33 {
 	 */
 	private void createRayTracingProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "130");
+		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
 		int fshader = Demo.createShader("demo/raytracing/raytracing.fs", GL_FRAGMENT_SHADER);
 		int rndshader = Demo.createShader("demo/raytracing/random.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);
