@@ -356,7 +356,7 @@
 		</javadoc>
 	</target>
 
-	<target name="release" description="" depends="compile,javadoc">
+	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc">
 		<!-- Bundle classes -->
 		<mkdir dir="${release.jar}"/>
 		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
