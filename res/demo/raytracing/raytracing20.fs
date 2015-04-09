@@ -62,9 +62,9 @@ struct hitinfo {
 vec3 rand;
 vec3 cameraUp;
 
-box sampleBox(int box) {
-  vec2 minTexel = vec2((2.0 * float(box) + 0.5) / (2.0*numBoxes), 0.5);
-  vec2 maxTexel = vec2((2.0 * float(box) + 1.0 + 0.5) / (2.0*numBoxes), 0.5);
+box sampleBox(int boxIndex) {
+  vec2 minTexel = vec2((2.0 * float(boxIndex) + 0.5) / (2.0*float(numBoxes)), 0.5);
+  vec2 maxTexel = vec2((2.0 * float(boxIndex) + 1.0 + 0.5) / (2.0*float(numBoxes)), 0.5);
   vec4 minVal = texture2D(boxes, minTexel);
   vec4 maxVal = texture2D(boxes, maxTexel);
   vec3 min = minVal.rgb;
