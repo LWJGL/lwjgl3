@@ -46,7 +46,7 @@ Step-by-step:
 
 At this point you're ready to follow the build process explained below.
 
-LWJGL also comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins. There are some Run Configurations defined and you can also call the ant targets directly from the IDE interface.
+LWJGL also comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin, Ant, TestNG and (optionally) Copyright plugins. There are some Run Configurations defined and you can also call the ant targets directly from the IDE interface.
 * File &gt; Open &gt; choose the */config/ide/idea* folder
 * File &gt; Project Structure &gt; Project &gt; choose or create the Project SDK
 * If you haven't used the init-generated and init-wiki targets, either ignore the VCS errors, or go to Settings &gt; Version Control &gt; remove the missing directories from the list of VCS roots.
