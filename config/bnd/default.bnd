@@ -1,0 +1,13 @@
+Bundle-SymbolicName: org.lwjgl.lwjgl
+Bundle-Version: ${build.version}
+Bundle-Name: Lightweight Java Game Library
+Bundle-Description: LWJGL is a Java library that enables cross-platform access to popular native APIs useful in the development of graphics (OpenGL), audio (OpenAL) and parallel computing (OpenCL) applications.
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.lwjgl.*;version=${build.version}
+Include-Resource: native=${release.native}
+Bundle-NativeCode: native/linux/x86/liblwjgl.so; native/linux/x86/libopenal.so;osname=Linux;processor=x86,\
+                   native/linux/x64/liblwjgl.so; native/linux/x64/libopenal.so;osname=Linux;processor=x86-64,\
+                   native/macosx/x64/liblwjgl.dylib; native/macosx/x64/libopenal.dylib;osname=MacOSX;processor=x86-64,\
+                   native/windows/x86/lwjgl.dll; native/windows/x86/OpenAL32.dll;osname=Win32;processor=x86,\
+                   native/windows/x64/lwjgl.dll; native/windows/x64/OpenAL32.dll;osname=Win32;osname=Win64;processor=x86-64
+-removeheaders Include-Resource

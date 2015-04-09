@@ -65,6 +65,7 @@
 	<target name="-lib-download" unless="lib-uptodate">
 		<update-mvn name="JCommander" group="com/beust" artifact="jcommander" version="${jcommander}" dest="${lib}"/>
 		<update-mvn name="TestNG" group="org/testng" artifact="testng" version="${testng}" dest="${lib}"/>
+		<update-mvn name="Bnd" group="biz/aQute/bnd" artifact="bnd" version="2.4.0" dest="${lib}"/>
 
 		<touch file="${lib}/touch.txt" verbose="false"/>
 	</target>
