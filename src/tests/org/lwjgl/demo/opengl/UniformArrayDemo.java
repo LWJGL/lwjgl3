@@ -24,9 +24,10 @@ import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Simple demo to showcase the use of {@link GL20#glUniform3fv(int, FloatBuffer)}.
+ * Simple demo to showcase the use of
+ * {@link GL20#glUniform3fv(int, FloatBuffer)}.
  * 
- * @author kai
+ * @author Kai Burjack
  *
  */
 public class UniformArrayDemo {
@@ -127,6 +128,13 @@ public class UniformArrayDemo {
 		glfwMakeContextCurrent(window);
 		glfwSwapInterval(0);
 		glfwShowWindow(window);
+
+		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
+		nglfwGetFramebufferSize(window, memAddress(framebufferSize),
+				memAddress(framebufferSize) + 4);
+		width = framebufferSize.get(0);
+		height = framebufferSize.get(1);
+
 		ctx = GLContext.createFromCurrent();
 
 		/* Create all needed GL resources */
