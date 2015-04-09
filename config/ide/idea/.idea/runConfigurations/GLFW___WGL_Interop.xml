@@ -1,8 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="GLFW - WGL Interop" type="Application" factoryName="Application" singleton="true">
-    <option name="MAIN_CLASS_NAME" value="org.lwjgl.demo.glfw.WGLInterop" />
-    <option name="VM_PARAMETERS" value="-Djava.library.path=bin;libs" />
-    <option name="PROGRAM_PARAMETERS" value="" />
+    <option name="MAIN_CLASS_NAME" value="org.apache.tools.ant.launch.Launcher" />
+    <option name="VM_PARAMETERS" value="" />
+    <option name="PROGRAM_PARAMETERS" value="demo -Dclass=org.lwjgl.demo.glfw.WGLInterop" />
     <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/../../.." />
     <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
     <option name="ALTERNATIVE_JRE_PATH" value="" />
@@ -22,6 +22,8 @@
     <RunnerSettings RunnerId="Run" />
     <ConfigurationWrapper RunnerId="Debug" />
     <ConfigurationWrapper RunnerId="Run" />
-    <method />
+    <method>
+      <option name="Make" enabled="false" />
+    </method>
   </configuration>
 </component>

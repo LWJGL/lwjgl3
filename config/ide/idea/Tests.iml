@@ -13,5 +13,6 @@
     <orderEntry type="module" module-name="Utilities" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="TestNG" level="project" />
     <orderEntry type="library" scope="TEST" name="Resources" level="project" />
+    <orderEntry type="library" name="Ant Launcher" level="project" />
   </component>
 </module>

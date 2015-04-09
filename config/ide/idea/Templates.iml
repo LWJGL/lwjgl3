@@ -12,5 +12,6 @@
     <orderEntry type="library" scope="RUNTIME" name="Resources" level="project" />
     <orderEntry type="library" name="KotlinRuntime" level="project" />
     <orderEntry type="library" name="JDK Tools" level="application" />
+    <orderEntry type="library" name="Ant Launcher" level="project" />
   </component>
 </module>
