@@ -304,7 +304,7 @@
 		</testng>
 	</target>
 
-	<target name="demo" description="Runs an LWJGL demo" depends="-init-runtime">
+	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">
