@@ -26,20 +26,10 @@
 	</target>
 
 	<target name="init-generated" description="Initializes the lwjgl3-generated git repository in /generated. [Optional]">
-		<local name="replace.input"/>
-		<input
-			message="The /generated directory contents will be replaced with a fresh clone of the lwjgl3-generated repository. Continue?"
-			validargs="y,n"
-			defaultvalue="n"
-			addproperty="replace.input"
-			/>
-		<condition property="replace.generated">
-			<equals arg1="y" arg2="${replace.input}"/>
-		</condition>
-		<fail unless="replace.generated">Cancelled</fail>
+		<confirm-replace dir="generated" msg="The /generated directory contents will be replaced with a fresh clone of the lwjgl3-generated repository. Continue?"/>
 
 		<!-- Purge /generated contents -->
-		<antcall target="remove-generated"/>
+		<delete-symlink dir="generated"/>
 		<mkdir-symlink dir="generated"/>
 
 		<!-- Clone repo -->
@@ -50,15 +40,46 @@
 		</exec>
 	</target>
 
-	<target name="remove-generated" description="Removes the /generated directory.">
+	<target name="init-wiki" description="Initializes the lwjgl3-wiki git repository in /wiki. [Optional]">
+		<confirm-replace dir="${wiki}" msg="The ${wiki} directory contents will be replaced with a fresh clone of the lwjgl3-wiki repository. Continue?"/>
+
+		<delete dir="${wiki}"/>
+		<exec executable="git" failonerror="true">
+			<arg value="clone"/>
+			<arg value="https://github.com/LWJGL/lwjgl3-wiki.wiki.git"/>
+			<arg value="${wiki}"/>
+		</exec>
+	</target>
+
+	<target name="reset" description="Resets the repository to its initial state.">
+		<local name="reset.input"/>
+		<input
+			message="This action will clean everything and also remove libraries and sub-repositories. Continue?"
+			validargs="y,n"
+			defaultvalue="n"
+			addproperty="reset.input"
+			/>
+		<condition property="do.reset">
+			<equals arg1="y" arg2="${reset.input}"/>
+		</condition>
+		<fail unless="do.reset">Cancelled</fail>
+
+		<antcall target="clean"/>
+
 		<delete-symlink dir="generated"/>
+		<delete dir="${wiki}"/>
+		<delete dir="${lib}"/>
+
+		<echo message="Reset successful."/>
 	</target>
 
 	<target name="clean" description="Cleans all directories controlled by this script" depends="clean-java, clean-native, clean-templates, clean-generated">
 		<delete-symlink dir="bin"/>
-		<!-- Do not delete /generated, it may contain the lwjgl3-generated git repo -->
 		<delete-symlink dir="release"/>
-		<echo message="Cleanup successful. To also remove the /generated directory, run the  remove-generated  target."/>
+		<!-- Do not delete /generated, it may contain the lwjgl3-generated git repo -->
+		<!-- Do not delete /wiki, it may contain the lwjgl3-wiki git repo -->
+
+		<echo message="Cleanup successful."/>
 	</target>
 
 	<target name="clean-java" description="Deletes Java binary files produced by this script">

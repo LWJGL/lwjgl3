@@ -66,6 +66,7 @@
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 
 	<property name="doc" location="doc" relative="true"/>
+	<property name="wiki" location="wiki" relative="true"/>
 
 	<property name="release" location="release" relative="false"/>
 	<property name="release.jar" location="${release}/jar" relative="false"/>
@@ -185,6 +186,29 @@
 		<sequential>
 			<delete dir="${build.output}/@{dir}" if:set="build.output"/>
 			<delete dir="@{dir}"/>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="confirm-replace">
+		<attribute name="dir"/>
+		<attribute name="msg"/>
+
+		<sequential>
+			<local name="dir.exists"/>
+			<available file="@{dir}" type="dir" property="dir.exists"/>
+
+			<local name="replace.input"/>
+			<input
+				message="@{msg}"
+				validargs="y,n"
+				defaultvalue="n"
+				addproperty="replace.input"
+				if:set="dir.exists"
+				/>
+			<condition property="replace.dir" if:set="dir.exists">
+				<equals arg1="y" arg2="${replace.input}"/>
+			</condition>
+			<fail unless="replace.dir" if:set="dir.exists">Cancelled</fail>
 		</sequential>
 	</macrodef>
 
