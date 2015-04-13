@@ -8,6 +8,14 @@
 
 	<!-- Initialize build -->
 	<target name="init" description="Initializes the directories required by the build process">
+		<fail message="LWJGL requires Ant version 1.9.1 or higher.">
+			<condition>
+				<not>
+					<antversion atleast="1.9.1"/>
+				</not>
+			</condition>
+		</fail>
+
 		<!-- These depend on LWJGL_BUILD_OUTPUT and may be symlinks -->
 		<mkdir-symlink dir="bin"/>
 		<mkdir-symlink dir="generated"/>
