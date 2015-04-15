@@ -42,15 +42,6 @@ val DISPLAY = Display_p.IN("display", "the connection to the X server") // This 
 val Screen_p = PointerType("Screen") // Screen is a struct, but should be treated as an opaque type by apps
 val Window_p = PointerType(Window)
 
-val XErrorHandler = callback(
-	LINUX_PACKAGE, void, "XErrorHandler",
-	"Will be called with an X error occurs.",
-	DISPLAY,
-	XErrorEvent_p.IN("error_event", "the {@link XErrorEvent} structure describing the error")
-) {
-	documentation = "Instances of this interface may be passed to the Xlib##XSetErrorHandler() method."
-}.nativeType
-
 val XComposeStatus = struct(LINUX_PACKAGE, "XComposeStatus") {
 	documentation = "Compose sequence status structure, used in calling Xutil#XLookupString()."
 	nativeImport (
