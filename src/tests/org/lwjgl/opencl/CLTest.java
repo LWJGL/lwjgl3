@@ -331,8 +331,9 @@ public class CLTest {
 		contextTest(CL11_FILTER, new ContextTest() {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
-				// TODO: Intel has broken reference counting atm
+				// TODO: Intel and NVIDIA CUDA have broken reference counting atm
 				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME));
+				doContextCountChecks &= !"NVIDIA CUDA" .equals(clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME));
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
