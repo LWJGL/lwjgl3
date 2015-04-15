@@ -331,25 +331,15 @@ public class CLTest {
 		contextTest(CL11_FILTER, new ContextTest() {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
-				// TODO: Intel has broken reference counting atm
-				boolean doContextCountChecks = !"Intel(R) OpenCL".equals(clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME));
-
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
 				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
-				if ( doContextCountChecks )
-					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 1);
-
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
-
-				assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
-				if ( doContextCountChecks )
-					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 2);
 
 				ByteBuffer bufferRegion = CLBufferRegion.malloc(0, 64);
 
@@ -357,26 +347,8 @@ public class CLTest {
 				checkCLError(errcode_ret);
 				assertNotNull(subbuffer);
 
-				if ( doContextCountChecks ) {
-					assertEquals(
-						clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT),
-						2,
-						clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_NAME)
-					);
-					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
-				}
-
 				checkCLError(clReleaseMemObject(buffer));
-
-				if ( doContextCountChecks ) {
-					assertEquals(clGetMemObjectInfoInt(buffer, CL_MEM_REFERENCE_COUNT), 1);
-					assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 3);
-				}
-
 				checkCLError(clReleaseMemObject(subbuffer));
-
-				assertEquals(clGetContextInfoInt(context, CL_CONTEXT_REFERENCE_COUNT), 1);
-
 				checkCLError(clReleaseContext(context));
 			}
 		});
