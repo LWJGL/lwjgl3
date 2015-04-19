@@ -16,7 +16,7 @@ fun LibFFIConstants() = "LibFFIConstants".nativeClass(packageName = FFI_PACKAGE)
 	access = Access.INTERNAL
 	documentation = "Defines methods that return platform-specific constant values that are used by {@link LibFFI}."
 
-	macro _ int.func("FFI_TYPE_DOUBLE", "Returns the LibFFI#FFI_TYPE_DOUBLE value.")
+	macro _ short.func("FFI_TYPE_DOUBLE", "Returns the LibFFI#FFI_TYPE_DOUBLE value.")
 	macro _ int.func("FFI_DEFAULT_ABI", "Returns the LibFFI#FFI_DEFAULT_ABI value.")
 
 	macro _ (address _ voidptr).func("ffi_type_void", "Returns the address of the {@code ffi_type_void} struct.")

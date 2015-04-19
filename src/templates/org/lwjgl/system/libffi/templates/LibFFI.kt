@@ -34,24 +34,24 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		<strong>LWJGL note</strong>: The closure and raw APIs are not exposed.
 		"""
 	
-	IntConstant.block(
+	ShortConstant.block(
 		"Types used to create custom ##FFICIF.",
 
-		"TYPE_VOID" _ 0,
-		"TYPE_INT" _ 1,
-		"TYPE_FLOAT" _ 2,
-		"TYPE_DOUBLE" _ 3,
-		"TYPE_LONGDOUBLE".expr<Int>("FFI_TYPE_DOUBLE()"),
-		"TYPE_UINT8" _ 5,
-		"TYPE_SINT8" _ 6,
-		"TYPE_UINT16" _ 7,
-		"TYPE_SINT16" _ 8,
-		"TYPE_UINT32" _ 9,
-		"TYPE_SINT32" _ 10,
-		"TYPE_UINT64" _ 11,
-		"TYPE_SINT64" _ 12,
-		"TYPE_STRUCT" _ 13,
-		"TYPE_POINTER" _ 14
+		"TYPE_VOID" _ 0.s,
+		"TYPE_INT" _ 1.s,
+		"TYPE_FLOAT" _ 2.s,
+		"TYPE_DOUBLE" _ 3.s,
+		"TYPE_LONGDOUBLE".expr<Short>("FFI_TYPE_DOUBLE()"),
+		"TYPE_UINT8" _ 5.s,
+		"TYPE_SINT8" _ 6.s,
+		"TYPE_UINT16" _ 7.s,
+		"TYPE_SINT16" _ 8.s,
+		"TYPE_UINT32" _ 9.s,
+		"TYPE_SINT32" _ 10.s,
+		"TYPE_UINT64" _ 11.s,
+		"TYPE_SINT64" _ 12.s,
+		"TYPE_STRUCT" _ 13.s,
+		"TYPE_POINTER" _ 14.s
 	)
 
 	val ABI = IntConstant.block(
