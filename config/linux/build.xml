@@ -2,7 +2,7 @@
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
 -->
-<project name="lwjgl native code" basedir="../.." default="compile-native-linux">
+<project name="native-linux" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
 	<property name="system_libs" value="-lm -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor"/>
@@ -26,7 +26,7 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib.abs}/linux/${build.arch}/" includes="*.a"/>
 
-	<target name="compile-native-linux">
+	<target name="compile-native-platform">
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
@@ -39,11 +39,11 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/system"/>
 			<arg value="-I${src.native.abs}/system/linux"/>
 			<arg value="-I${src.native.abs}/system/libffi"/>
-			<arg value="-I${src.native.abs}/glfw"/>
-			<arg value="-I${src.native.abs}/openal"/>
-			<arg value="-I${src.native.abs}/opencl"/>
-			<arg value="-I${src.native.abs}/opengl"/>
-			<arg value="-I${src.native.abs}/opengl/glx"/>
+			<arg value="-I${src.native.abs}/glfw" if:true="${build.glfw}"/>
+			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
+			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
+			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
+			<arg value="-I${src.native.abs}/opengl/glx" if:true="${build.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -51,11 +51,12 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/system" includes="*.c"/>
 			<fileset dir="${generated.native}/system/linux" includes="*.c"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c"/>
-			<fileset dir="${generated.native}/openal" includes="*.c"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c"/>
-			<fileset dir="${generated.native}/opengl/glx" includes="*.c"/>
+			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/glfw/linux" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
+			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>
@@ -77,8 +78,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" if:true="${build.openal}"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
 	</target>
 
@@ -86,8 +87,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" if:true="${build.openal}"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
 	</target>
 

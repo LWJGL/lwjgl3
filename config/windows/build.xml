@@ -2,16 +2,20 @@
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
 -->
-<project name="lwjgl native code" basedir="../.." default="compile-native-windows">
+<project name="native-windows" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
-	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib OpenGL32.Lib"/>
+	<property name="core-libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib"/>
+	<condition property="libs" value="${core-libs} OpenGL32.Lib" else="${core-libs}">
+		<istrue value="${build.opengl}"/>
+	</condition>
+
 	<property name="dllname" value="lwjgl.dll"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
 	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/" includes="*.lib"/>
 
-	<target name="compile-native-windows">
+	<target name="compile-native-platform">
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
@@ -24,11 +28,11 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/I${src.native.abs}\system"/>
 			<arg value="/I${src.native.abs}\system\windows"/>
 			<arg value="/I${src.native.abs}\system\libffi"/>
-			<arg value="/I${src.native.abs}\glfw"/>
-			<arg value="/I${src.native.abs}\openal"/>
-			<arg value="/I${src.native.abs}\opencl"/>
-			<arg value="/I${src.native.abs}\opengl"/>
-			<arg value="/I${src.native.abs}\opengl\wgl"/>
+			<arg value="/I${src.native.abs}\glfw" if:true="${build.glfw}"/>
+			<arg value="/I${src.native.abs}\openal" if:true="${build.openal}"/>
+			<arg value="/I${src.native.abs}\opencl" if:true="${build.opencl}"/>
+			<arg value="/I${src.native.abs}\opengl" if:true="${build.opengl}"/>
+			<arg value="/I${src.native.abs}\opengl\wgl" if:true="${build.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -36,11 +40,12 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/system" includes="*.c"/>
 			<fileset dir="${generated.native}/system/windows" includes="*.c"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c"/>
-			<fileset dir="${generated.native}/openal" includes="*.c"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c"/>
-			<fileset dir="${generated.native}/opengl/wgl" includes="*.c"/>
+			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/glfw/windows" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
+			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/opengl/wgl" includes="*.c" if:true="${build.opengl}"/>
 
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
@@ -62,8 +67,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" if:true="${build.openal}"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
 	</target>
 
@@ -71,8 +76,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" if:true="${build.openal}"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
 	</target>
 

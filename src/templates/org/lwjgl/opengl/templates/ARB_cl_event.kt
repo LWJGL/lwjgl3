@@ -8,18 +8,19 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.opencl.*
 
-val ARB_cl_event = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
-	javaImport(
-		"org.lwjgl.opencl.*"
-	)
+val ARB_cl_event = dependsOn(Module.OPENCL) {
+	"ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
+		javaImport(
+			"org.lwjgl.opencl.*"
+		)
 
-	nativeImport (
-		"OpenCL.h",
-		"OpenGL.h"
-	)
+		nativeImport (
+			"OpenCL.h",
+			"OpenGL.h"
+		)
 
-	documentation =
-		"""
+		documentation =
+			"""
 		Native bindings to the $registryLink extension.
 
 		This extension allows creating OpenGL sync objects linked to OpenCL event objects, potentially improving efficiency of sharing images and buffers
@@ -29,21 +30,21 @@ val ARB_cl_event = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		Requires ${GL32.core} or ${ARB_sync.link}. Requires an OpenCL implementation supporting sharing event objects with OpenGL.
 		"""
 
-	IntConstant.block(
-		"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#OBJECT_TYPE.",
+		IntConstant.block(
+			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#OBJECT_TYPE.",
 
-		"SYNC_CL_EVENT_ARB" _ 0x8240
-	)
+			"SYNC_CL_EVENT_ARB" _ 0x8240
+		)
 
-	IntConstant.block(
-		"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#SYNC_CONDITION.",
+		IntConstant.block(
+			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#SYNC_CONDITION.",
 
-		"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
-	)
+			"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
+		)
 
-	GLsync.func(
-		"CreateSyncFromCLeventARB",
-		"""
+		GLsync.func(
+			"CreateSyncFromCLeventARB",
+			"""
 		Creates a linked sync object. {@code context} and {@code event} must be handles to a valid OpenCL context and a valid event in that context,
 		respectively. {@code context} must support sharing with GL, and must have been created with respect to the current GL context, or to a share group
 		including the current GL context.
@@ -56,9 +57,9 @@ val ARB_cl_event = "ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		the event object.
 		""",
 
-		cl_context.IN("context", "a valid OpenCL context"),
-		cl_event.IN("event", "a valid OpenCL event"),
-		GLbitfield.IN("flags", "must be 0 (placeholder for anticipated future extensions of sync object capabilities)")
-	)
-
+			cl_context.IN("context", "a valid OpenCL context"),
+			cl_event.IN("event", "a valid OpenCL event"),
+			GLbitfield.IN("flags", "must be 0 (placeholder for anticipated future extensions of sync object capabilities)")
+		)
+	}
 }

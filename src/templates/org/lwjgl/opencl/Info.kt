@@ -23,10 +23,11 @@ fun info() {
 			javaImport(
 				"org.lwjgl.PointerBuffer",
 				"static org.lwjgl.opencl.CL10.*",
-				"static org.lwjgl.opencl.CL10GL.*",
 				"static org.lwjgl.opencl.CL12.*",
 				"static org.lwjgl.opencl.CL20.*"
 			)
+			if ( Module.OPENGL.enabled )
+				javaImport("static org.lwjgl.opencl.CL10GL.*")
 
 			documentation =
 			"""
@@ -84,7 +85,7 @@ fun info() {
 
 			// Defines the info queries we'll generate and which types will be supported for each one.
 			// This list should be updated whenever a new OpenCL version is released.
-			val objects = array(
+			val objects = arrayListOf(
 				ObjectType("CL10", "Platform", EnumSet.of(STRING_ASCII, STRING_UTF8)),
 				ObjectType("CL10", "Device", EnumSet.allOf(javaClass<InfoQueryType>())),
 				ObjectType("CL10", "Context", EnumSet.of(INT, POINTER)),
@@ -108,9 +109,10 @@ fun info() {
 				),
 				ObjectType("CL10", "Sampler", EnumSet.of(BOOLEAN, INT, POINTER)),
 				ObjectType("CL10", "Event", EnumSet.of(INT, POINTER)),
-				ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event"),
-				ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj")
+				ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event")
 			)
+			if ( Module.OPENGL.enabled )
+				objects add ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj")
 
 			for ( obj in objects ) {
 				val (source, name, types, info) = obj

@@ -2,7 +2,7 @@
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
 -->
-<project name="lwjgl native code" basedir="../.." default="compile-native-macosx">
+<project name="native-macosx" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
 	<property name="libname" value="liblwjgl.dylib"/>
@@ -45,7 +45,7 @@ License terms: http://lwjgl.org/license.php
 
 	<property name="macosx-version-min" value="10.7"/>
 
-	<target name="compile-native-macosx">
+	<target name="compile-native-platform">
 		<echo message="${sdkroot}" taskname="SDK Root"/>
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -58,10 +58,10 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/system"/>
 			<arg value="-I${src.native.abs}/system/macosx"/>
 			<arg value="-I${src.native.abs}/system/libffi"/>
-			<arg value="-I${src.native.abs}/glfw"/>
-			<arg value="-I${src.native.abs}/openal"/>
-			<arg value="-I${src.native.abs}/opencl"/>
-			<arg value="-I${src.native.abs}/opengl"/>
+			<arg value="-I${src.native.abs}/glfw" if:true="${build.glfw}"/>
+			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
+			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
+			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -70,12 +70,12 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/system/macosx" includes="*.c"/>
 			<fileset dir="${generated.native}/system/macosx" includes="*.m"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c"/>
-			<fileset dir="${generated.native}/glfw/macosx" includes="*.c"/>
-			<fileset dir="${generated.native}/openal" includes="*.c"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c"/>
-			<fileset dir="${generated.native}/opengl/cgl" includes="*.c"/>
+			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/glfw/macosx" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c" if:true="${build.opencl}"/>
+			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/opengl/cgl" includes="*.c" if:true="${build.opengl}"/>
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>
@@ -97,8 +97,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib"/>
-		<update-dependency name="glfw3" artifact="x64/libglfw3.a"/>
+		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" if:true="${build.openal}"/>
+		<update-dependency name="glfw3" artifact="x64/libglfw3.a" if:true="${build.glfw}"/>
 		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 	</target>
 
@@ -111,7 +111,7 @@ License terms: http://lwjgl.org/license.php
 			<arg line="-framework CoreVideo"/>
 			<!--<arg line="-framework Cocoa"/>-->
 			<arg line="-framework IOKit"/>
-			<arg line="-framework OpenGL"/>
+			<arg line="-framework OpenGL" if:true="${build.opengl}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

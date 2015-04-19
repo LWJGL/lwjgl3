@@ -3,6 +3,8 @@ Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
 -->
 <project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
+	<import file="build-modules.xml"/>
+
 	<!-- ================================================================== -->
 	<!-- Global properties for build 																				-->
 	<!-- ================================================================== -->

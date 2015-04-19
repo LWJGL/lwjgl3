@@ -16,12 +16,22 @@ import static org.lwjgl.opencl.CL10.*;
 public final class CLUtil {
 
 	/** Maps OpenCL error token values to their String representations. */
-	private static final Map<Integer, String> CL_ERROR_TOKENS = LWJGLUtil.getClassTokens(new LWJGLUtil.TokenFilter() {
-		@Override
-		public boolean accept(Field field, int value) {
-			return value < 0; // Currently, all OpenCL errors have negative values.
-		}
-	}, null, CL10.class, CL11.class, CL12.class, KHRGLSharing.class, KHRICD.class, APPLEGLSharing.class/*, EXTDeviceFission.class*/);
+	private static final Map<Integer, String> CL_ERROR_TOKENS = LWJGLUtil.getClassTokens(
+		new LWJGLUtil.TokenFilter() {
+			@Override
+			public boolean accept(Field field, int value) {
+				return value < 0; // Currently, all OpenCL errors have negative values.
+			}
+		},
+		null,
+		CL10.class,
+		CL11.class,
+		CL12.class,
+		LWJGLUtil.getOptionalClass("org.lwjgl.opencl.KHRGLSharing"),
+		KHRICD.class,
+		LWJGLUtil.getOptionalClass("org.lwjgl.opencl.APPLEGLSharing")
+		/*, EXTDeviceFission.class*/
+	);
 
 	private CLUtil() {}
 

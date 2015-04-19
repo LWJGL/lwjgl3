@@ -8,7 +8,8 @@ License terms: http://lwjgl.org/license.php
 
 	<property name="config" location="config" relative="true"/>
 
-	<import file="${config}/build-definitions.xml" id="defs"/>
+	<import file="${config}/build-definitions.xml"/>
+	<import file="${config}/${platform}/build.xml"/>
 
 	<!-- Initialize build -->
 	<target name="init" description="Initializes the directories required by the build process">
@@ -169,12 +170,13 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="init">
 		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
+			<srcfiles dir="${config}" includes="build-modules.xml"/>
 			<srcfiles dir="${src.templates}" includes="**" />
 		</uptodate>
 		<antcall target="-compile-templates"/>
 	</target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile" unless="templates-uptodate">
+	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile, modules" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
@@ -193,6 +195,7 @@ License terms: http://lwjgl.org/license.php
 			<jvmarg value="-Xverify:none"/>
 
 			<jvmarg value="-Dorg.lwjgl.templates.output=${bin.templates}"/>
+			<jvmarg line="${build.modules}"/>
 
 			<arg line="${kotlinc}/lib/kotlin-compiler.jar${path.separator}${kotlinc}/lib/kotlin-runtime.jar"/>
 			<arg line="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler 4096 notime"/>
@@ -225,7 +228,7 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="init">
+	<target name="generate" description="Runs the bindings Generator" depends="init, modules">
 		<available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
@@ -248,6 +251,7 @@ License terms: http://lwjgl.org/license.php
 			</classpath>
 
 			<jvmarg value="-server"/>
+			<jvmarg line="${build.modules}"/>
 
 			<arg value="${src.templates}"/>
 			<arg value="${generated}"/>
@@ -257,12 +261,30 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
-		<javac debug="yes" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
+		<javac debug="yes" sourcepath="" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.util}"/>
 				<pathelement path="${generated.java}"/>
 			</src>
+
+			<include name="org/lwjgl/*.java"/>
+			<include name="org/lwjgl/system/*.java"/>
+			<include name="org/lwjgl/system/libffi/**"/>
+			<include name="org/lwjgl/system/linux/*.java"/>
+			<include name="org/lwjgl/system/linux/opengl/**" if:true="${build.opengl}"/>
+			<include name="org/lwjgl/system/macosx/*.java"/>
+			<include name="org/lwjgl/system/macosx/opengl/**" if:true="${build.opengl}"/>
+			<include name="org/lwjgl/system/windows/*.java"/>
+			<include name="org/lwjgl/system/windows/opengl/**" if:true="${build.opengl}"/>
+
+			<include name="org/lwjgl/glfw/**" if:true="${build.glfw}"/>
+
+			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
+			<include name="org/lwjgl/opengl/**" if:true="${build.opengl}"/>
+
+			<include name="org/lwjgl/mantle/**" if:true="${build.mantle}"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -270,7 +292,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="compile-native" description="Compiles the native source code" depends="init, compile">
-		<ant antfile="${config}/${platform}/build.xml" inheritAll="false"/>
+		<antcall target="compile-native-platform"/>
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
@@ -282,6 +304,17 @@ License terms: http://lwjgl.org/license.php
 			</classpath>
 
 			<src path="${src.tests}/"/>
+
+			<include name="org/lwjgl/system/**"/>
+
+			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
+
+			<include name="org/lwjgl/demo/glfw/**" if:true="${build.glfw}"/>
+			<include name="org/lwjgl/demo/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${build.opencl}"/>
+			<include name="org/lwjgl/demo/opengl/**" if:true="${build.glfw}"/>
+			<include name="org/lwjgl/demo/mantle/**" if:true="${build.mantle}"/>
 		</javac>
 	</target>
 

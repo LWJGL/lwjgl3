@@ -1,0 +1,62 @@
+<!--
+Copyright LWJGL. All rights reserved.
+License terms: http://lwjgl.org/license.php
+-->
+<project name="modules" basedir="../">
+
+	<!-- // ========== MODULE FLAGS ======== // -->
+
+	<property name="build.glfw" value="true"/>
+
+	<property name="build.openal" value="true"/>
+	<property name="build.opencl" value="true"/>
+	<property name="build.opengl" value="true"/>
+
+	<property name="build.mantle" value="false"/>
+
+	<!-- Set the path to the Oculus SDK to enable. -->
+	<!--<property name="OCULUS_SDK_PATH" value="../OculusSDK"/>-->
+
+	<property name="build.macosx.objc" value="true"/>
+
+	<!-- // ================================ // -->
+
+	<target name="modules">
+		<local name="glfw_opengl_check"/>
+		<condition property="glfw_opengl_check" value="1">
+			<and>
+				<istrue value="${build.glfw}"/>
+				<isfalse value="${build.opengl}"/>
+			</and>
+		</condition>
+		<fail if="glfw_opengl_check" message="GLFW requires OpenGL"/>
+
+		<condition property="build.ovr" value="true" else="false">
+			<isset property="OCULUS_SDK_PATH"/>
+		</condition>
+
+		<local name="build.modules.list"/>
+		<script language="javascript">
+			var jvmargs = [];
+
+			function push(property) {
+				if ( LWJGL.getProperty(property) == "true" )
+					jvmargs.push("-D" + property + "=true");
+			}
+
+			push("build.glfw");
+			push("build.openal");
+			push("build.opencl");
+			push("build.opengl");
+
+			push("build.mantle");
+			push("build.ovr");
+
+			push("build.macosx.objc");
+
+			LWJGL.setProperty("build.modules.list", jvmargs.join(" "));
+		</script>
+		<property name="build.modules" value="${build.modules.list}"/>
+	</target>
+
+</project>

@@ -470,6 +470,9 @@ public final class LWJGLUtil {
 		int TOKEN_MODIFIERS = Modifier.PUBLIC | Modifier.STATIC | Modifier.FINAL;
 
 		for ( Class<?> tokenClass : tokenClasses ) {
+			if ( tokenClass == null )
+				continue;
+
 			for ( Field field : tokenClass.getDeclaredFields() ) {
 				// Get only <public static final int> fields.
 				if ( (field.getModifiers() & TOKEN_MODIFIERS) == TOKEN_MODIFIERS && field.getType() == int.class ) {
@@ -490,6 +493,14 @@ public final class LWJGLUtil {
 		}
 
 		return target;
+	}
+
+	public static Class getOptionalClass(String className) {
+		try {
+			return Class.forName(className);
+		} catch (ClassNotFoundException e) {
+			return null;
+		}
 	}
 
 	/** Simple interface for Field filtering. */

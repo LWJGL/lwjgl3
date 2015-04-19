@@ -5,7 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.*
-import java.lang.Math.*
+import java.lang.Math.max
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
@@ -27,6 +27,23 @@ import java.util.HashMap
 	- Source package -> src/templates/org/lwjgl/opengl/
 	- Target source -> generated/java/org/lwjgl/opengl/ARBCopyBuffer.java
 */
+
+enum class Module(val key: String) {
+	GLFW : Module("build.glfw")
+	OPENAL : Module("build.openal")
+	OPENCL : Module("build.opencl")
+	OPENGL : Module("build.opengl")
+
+	MANTLE : Module("build.mantle")
+	OVR : Module("build.ovr")
+
+	MACOSX_OBJC : Module("build.macosx.objc")
+
+	val enabled: Boolean
+		get() = System.getProperty(key, "false").toBoolean()
+}
+
+fun dependsOn(module: Module, init: () -> NativeClass): NativeClass? = if ( module.enabled ) init() else null
 
 fun main(args: Array<String>) {
 	if ( args.size() < 2 )
@@ -53,11 +70,13 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
-		// TODO: Move these to args[2] or a file in /config to enable build customization
-		generate("org.lwjgl.glfw")
-		generate("org.lwjgl.openal")
-		generate("org.lwjgl.opencl")
-		generate("org.lwjgl.opengl")
+		generate("org.lwjgl.glfw", Module.GLFW)
+		generate("org.lwjgl.openal", Module.OPENAL)
+		generate("org.lwjgl.opencl", Module.OPENCL)
+		generate("org.lwjgl.opengl", Module.OPENGL)
+		generate("org.lwjgl.ovr", Module.OVR)
+		generate("org.lwjgl.mantle", Module.MANTLE)
+
 		generate("org.lwjgl.system.libffi")
 		generate("org.lwjgl.system.linux")
 		generate("org.lwjgl.system.macosx")
@@ -99,7 +118,7 @@ class Generator(
 			}
 		}
 
-		fun <T: CustomClass> register(customClass: T): T {
+		fun <T : CustomClass> register(customClass: T): T {
 			customClasses add customClass
 			return customClass
 		}
@@ -115,10 +134,10 @@ class Generator(
 	private fun methodFilter(method: Method, javaClass: Class<*>) =
 		// static
 		method.getModifiers() and Modifier.STATIC != 0 &&
-			// returns NativeClass
-			method.getReturnType() === javaClass &&
-			// has no arguments
-			method.getParameterTypes().size() == 0
+		// returns NativeClass
+		method.getReturnType() === javaClass &&
+		// has no arguments
+		method.getParameterTypes().size() == 0
 
 	private fun runConfiguration(cp: String) {
 		val dot = cp.lastIndexOf('.')
@@ -151,9 +170,12 @@ class Generator(
 			}
 	}
 
-	fun generate(packageName: String) {
+	fun generate(packageName: String, module: Module? = null) {
 		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", false)
 		packageLastModifiedMap[packageName] = packageLastModified
+
+		if ( module?.enabled == false )
+			return
 
 		// Find and run configuration methods
 		runConfiguration(packageName)
@@ -167,7 +189,10 @@ class Generator(
 
 		// Generate the template code
 		for ( template in templates ) {
-			val nativeClass = template.invoke(null) as NativeClass
+			val nativeClass = template.invoke(null) as NativeClass?
+			if ( nativeClass == null )
+				continue
+
 			if ( !(nativeClass.packageName equals packageName) )
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
 
@@ -203,7 +228,7 @@ class Generator(
 			nativeClass.nativeImportsWarning()
 	}
 
-	fun <T: GeneratorTarget> generate(typeName: String, targets: List<T>) {
+	fun <T : GeneratorTarget> generate(typeName: String, targets: List<T>) {
 		targets.forEach {
 			try {
 				generate(it)
@@ -387,7 +412,7 @@ fun <T> Collection<T>.forEachWithMore(moreOverride: Boolean = false, apply: (T, 
 
 /** Returns the string with the first letter uppercase. */
 val String.upperCaseFirst: String
-	get() = if ( this.length() == 1 )
+	get() = if ( this.length() <= 1 )
 		this.toUpperCase()
 	else
 		"${Character.toUpperCase(this[0])}${this.substring(1)}"

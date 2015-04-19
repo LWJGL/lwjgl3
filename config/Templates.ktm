@@ -13,44 +13,59 @@ private val FILTER_RECURSIVE: (File) -> Boolean = { it.isDirectory() || it.getPa
 private val FILTER_FILES_ONLY: (File) -> Boolean = { it.isFile() && it.getPath().endsWith(".kt") }
 //private val FILTER_JAR: (File) -> Boolean = { it.isDirectory() || it.getPath().endsWith(".jar") }
 
+private val ROOT = "src/templates/org/lwjgl"
+
 fun project() {
 	module("Templates", System.getProperty("org.lwjgl.templates.output")!!) {
-		// Sources
-		for ( source in listFiles("src/templates", FILTER_RECURSIVE) ) sources += source
+		fun addSources(path: String, filter: (File) -> Boolean) {
+			val root = File(path)
+			if ( !root.isDirectory() )
+				throw IllegalArgumentException("Root path is not a directory: $path")
 
-		/*
-		for ( source in listFiles("src/templates/org/lwjgl/generator", FILTER_RECURSIVE) ) sources += source
-		//for ( source in listFiles("src/templates/org/lwjgl/openal", FILTER_RECURSIVE) ) sources += source
-		//for ( source in listFiles("src/templates/org/lwjgl/opencl", FILTER_RECURSIVE) ) sources += source
-		for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_FILES_ONLY) ) sources += source
-		//for ( source in listFiles("src/templates/org/lwjgl/opengl", FILTER_RECURSIVE) ) sources += source
-		for ( source in listFiles("src/templates/org/lwjgl/glfw", FILTER_RECURSIVE) ) sources += source
-		//for ( source in listFiles("src/templates/org/lwjgl/system/windows", FILTER_RECURSIVE) ) sources += source
-		for ( source in listFiles("src/templates/org/lwjgl/system/linux", FILTER_RECURSIVE) ) sources += source
-		*/
+			val files = ArrayList<String>()
+
+			listFiles(File(path), filter, files)
+
+			files forEach {
+				sources += it
+			}
+		}
+
+		fun addOptionalModule(module: String, path: String, registerTypes: Boolean = false) {
+			val active = hasModule(module)
+			if ( !active && !registerTypes )
+				return
+
+			addSources("$ROOT/$path", if ( active ) FILTER_RECURSIVE else FILTER_FILES_ONLY)
+		}
+
+		// Sources
+		addSources("$ROOT/generator", FILTER_RECURSIVE)
+
+		addSources("$ROOT/system/libffi", FILTER_RECURSIVE)
+		addSources("$ROOT/system/linux", FILTER_RECURSIVE)
+		addSources("$ROOT/system/macosx", FILTER_RECURSIVE)
+		addSources("$ROOT/system/windows", FILTER_RECURSIVE)
+
+		addOptionalModule("build.glfw", "glfw")
+		addOptionalModule("build.openal", "openal")
+		addOptionalModule("build.opencl", "opencl", registerTypes = hasModule("build.opengl"))
+		addOptionalModule("build.opengl", "opengl", registerTypes = hasModule("build.opencl"))
+		addOptionalModule("build.mantle", "mantle")
+		addOptionalModule("build.ovr", "ovr")
 
 		// Boot classpath - this is needed if -noJdk is used.
 		//val JAVA_HOME = System.getProperty("java.home")!!.replace('\\', '/')
 		//val jdkJars = listFiles("$JAVA_HOME/lib", FILTER_JAR)
 		//for ( jar in jdkJars )
-			//classpath += jar
+		//classpath += jar
 
 		// Compilation classpath
 		classpath += "src/templates"
 	}
 }
 
-private fun listFiles(path: String, filter: (File) -> Boolean): List<String> {
-	val root = File(path)
-	if ( !root.isDirectory() )
-		throw IllegalArgumentException("Root path is not a directory: $path")
-
-	val files = ArrayList<String>()
-
-	listFiles(File(path), filter, files)
-
-	return files
-}
+private fun hasModule(module: String) = System.getProperty(module, "false").toBoolean()
 
 private fun listFiles(dir: File, filter: (File) -> Boolean, output: MutableList<String>) {
 	val files = dir.listFiles(filter)

@@ -7,20 +7,20 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val khr_gl_depth_images = "KHRGLDepthImages".nativeClassCL("khr_gl_depth_images", KHR) {
+val khr_gl_depth_images = dependsOn(Module.OPENGL) {
+	"KHRGLDepthImages".nativeClassCL("khr_gl_depth_images", KHR) {
+		documentation = "Native bindings to the $extensionName extension."
 
-	documentation = "Native bindings to the $extensionName extension."
+		IntConstant.block(
+			"cl_channel_order",
 
-	IntConstant.block(
-		"cl_channel_order",
+			"DEPTH_STENCIL" _ 0x10BE
+		)
 
-		"DEPTH_STENCIL" _ 0x10BE
-	)
+		IntConstant.block(
+			"cl_channel_type",
 
-	IntConstant.block(
-		"cl_channel_type",
-
-		"UNORM_INT24" _ 0x10DF
-	)
-
+			"UNORM_INT24" _ 0x10DF
+		)
+	}
 }
