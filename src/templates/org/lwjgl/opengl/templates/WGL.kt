@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.windows.templates
+package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
@@ -246,5 +246,4 @@ val WGL = "WGL".nativeClass(packageName = WINDOWS_PACKAGE, prefix = "WGL") {
 			"""
 		)
 	)
-
 }

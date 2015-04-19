@@ -11,10 +11,9 @@ import org.lwjgl.system.DynamicLinkLibrary;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 
 import static org.lwjgl.Pointer.*;
-import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.libffi.LibFFI.*;
 import static org.testng.Assert.*;
@@ -23,39 +22,20 @@ import static org.testng.Assert.*;
 public class LibFFITest {
 
 	public void testLibFFI() {
-		int WIDTH = 300;
-		int HEIGHT = 300;
-
-		long window = createGLFWWindow(WIDTH, HEIGHT);
-
-		// -- Test GLFW window size using JNI
-
-		ByteBuffer width = BufferUtils.createByteBuffer(4);
-		ByteBuffer height = BufferUtils.createByteBuffer(4);
-
-		glfwGetWindowSize(window, width, height);
-
-		assertEquals(width.getInt(0), WIDTH);
-		assertEquals(height.getInt(0), HEIGHT);
-
-		width.putInt(0, -1);
-		height.putInt(0, -1);
-
-		// -- Test GLFW window size using libffi
+		// -- Test MemoryUtil.nMemPutInt using libffi
 
 		// Get the function address. Ignore this particular implementation, normally you'd create
 		// a DynamicLinkLibrary instance here and call getFunctionAddress("<function name>").
-		long glfwGetWindowSize = glfwGetWindowSizeAddress();
+		long memPutInt = getMemPutIntAddress();
 
 		// Prepare the call interface
 		ByteBuffer cif = FFICIF.malloc();
 
-		PointerBuffer argumentTypes = BufferUtils.createPointerBuffer(5); // 5 arguments
+		PointerBuffer argumentTypes = BufferUtils.createPointerBuffer(4); // 4 arguments
 		argumentTypes.put(0, ffi_type_pointer); // JNIEnv*
 		argumentTypes.put(1, ffi_type_pointer); // jclass
-		argumentTypes.put(2, ffi_type_sint64); // GLFWwindow* (jlong)
-		argumentTypes.put(3, ffi_type_sint64); // int* (jlong)
-		argumentTypes.put(4, ffi_type_sint64); // int* (jlong)
+		argumentTypes.put(2, ffi_type_sint64); // void* (jlong)
+		argumentTypes.put(3, ffi_type_sint32); // jint
 
 		int status = ffi_prep_cif(cif, FFI_DEFAULT_ABI, ffi_type_void, argumentTypes);
 		if ( status != FFI_OK )
@@ -68,10 +48,12 @@ public class LibFFITest {
 		ByteBuffer values = BufferUtils.createByteBuffer(
 			POINTER_SIZE +  // JNIEnv*
 			POINTER_SIZE +  // jclass
-			8 +             // GLFWwindow* (jlong)
-			8 +             // int* (jlong)
-			8               // int* (jlong)
+			8 +             // void* (jlong)
+			4               // jint
 		);
+
+		// The memory we'll modify using libffi
+		IntBuffer target = BufferUtils.createIntBuffer(1);
 
 		{
 			// Unsafe, error-prone code. Very easy to crash the JVM.
@@ -87,49 +69,31 @@ public class LibFFITest {
 			arguments.put(1, base + offset);
 			offset += POINTER_SIZE;
 
-			values.putLong(offset, window); // GLFWwindow*
+			values.putLong(offset, memAddress(target)); // void*
 			arguments.put(2, base + offset);
 			offset += 8;
 
-			values.putLong(offset, memAddress(width)); // int*
+			values.putInt(offset, 0xBAADF00D); // jint
 			arguments.put(3, base + offset);
-			offset += 8;
-
-			values.putLong(offset, memAddress(height)); // int*
-			arguments.put(4, base + offset);
 		}
 
 		// Invoke the function
-		ffi_call(cif, glfwGetWindowSize, null, arguments);
+		ffi_call(cif, memPutInt, null, arguments);
 
 		// Validate
-		assertEquals(width.getInt(0), WIDTH);
-		assertEquals(height.getInt(0), HEIGHT);
-
-		glfwDestroyWindow(window);
-		glfwTerminate();
+		assertEquals(target.get(0), 0xBAADF00D);
 	}
 
-	private static long createGLFWWindow(int width, int height) {
-		if ( glfwInit() != GL_TRUE )
-			throw new IllegalStateException("Unable to initialize glfw");
-
-		glfwDefaultWindowHints();
-		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-
-		return glfwCreateWindow(width, height, "LibFFI Demo", NULL, NULL);
-	}
-
-	private static long glfwGetWindowSizeAddress() {
+	private static long getMemPutIntAddress() {
 		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative("lwjgl");
 
-		long glfwGetWindowSize = lib.getFunctionAddress("Java_org_lwjgl_glfw_GLFW_nglfwGetWindowSize");
-		if ( glfwGetWindowSize == NULL )
-			glfwGetWindowSize = lib.getFunctionAddress("_Java_org_lwjgl_glfw_GLFW_nglfwGetWindowSize@32"); // __stdcall (Win32)
+		long nMemPutInt = lib.getFunctionAddress("Java_org_lwjgl_system_MemoryUtil_nMemPutInt");
+		if ( nMemPutInt == NULL )
+			nMemPutInt = lib.getFunctionAddress("_Java_org_lwjgl_system_MemoryUtil_nMemPutInt@20"); // __stdcall (Win32)
 
-		assertTrue(glfwGetWindowSize != NULL);
+		assertTrue(nMemPutInt != NULL);
 
-		return glfwGetWindowSize;
+		return nMemPutInt;
 	}
 
 }

@@ -6,7 +6,6 @@ package org.lwjgl.openal.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.openal.*
-import org.lwjgl.opengl.registryLink
 
 val AL_EXT_source_distance_model = "EXTSourceDistanceModel".nativeClassAL("EXT_source_distance_model") {
 	documentation =

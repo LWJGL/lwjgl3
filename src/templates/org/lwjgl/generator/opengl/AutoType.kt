@@ -5,7 +5,6 @@
 package org.lwjgl.generator.opengl
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.GLenum
 
 enum class BufferType(val mapping: PointerMapping, val className: String = "GL11") {
 
@@ -40,7 +39,7 @@ class AutoType(override val reference: String, vararg val types: BufferType): Pa
 	}
 
 	override fun validate(param: Parameter) {
-		if ( param.nativeType != GLenum )
+		if ( param.nativeType.name != "GLenum" )
 			throw IllegalArgumentException("The AutoType modifier can only be applied on GLenum parameters.")
 	}
 }
