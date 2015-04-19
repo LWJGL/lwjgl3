@@ -5,15 +5,10 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.GLbitfield
-import org.lwjgl.opengl.GLint
-import org.lwjgl.opengl.GLint_p
-import org.lwjgl.opengl.GLuint
+import org.lwjgl.opengl.*
 import org.lwjgl.system.macosx.*
 
-val CGL = "CGL".nativeClass(MACOSX_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
-	javaImport("org.lwjgl.opengl.GL11")
-
+val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
 	nativeImport (
 		"MacOSXLWJGL.h",
 		"<OpenGL/OpenGL.h>"

@@ -17,17 +17,17 @@ import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.GLX.*;
 import static org.lwjgl.opengl.GLX11.*;
 import static org.lwjgl.opengl.GLX12.*;
 import static org.lwjgl.opengl.GLX14.*;
 import static org.lwjgl.opengl.GLXARBGetProcAddress.*;
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.opengl.WGLARBExtensionsString.*;
 import static org.lwjgl.opengl.WGLEXTExtensionsString.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.linux.GLX.*;
-import static org.lwjgl.system.windows.WGL.*;
 
 public final class GL {
 

@@ -71,9 +71,11 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/system/macosx" includes="*.m"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
 			<fileset dir="${generated.native}/glfw" includes="*.c"/>
+			<fileset dir="${generated.native}/glfw/macosx" includes="*.c"/>
 			<fileset dir="${generated.native}/openal" includes="*.c"/>
 			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c"/>
+			<fileset dir="${generated.native}/opengl/cgl" includes="*.c"/>
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>

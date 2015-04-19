@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
-val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = MACOSX_PACKAGE, prefix = "GLFW") {
+val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW") {
 	nativeDefine("GLFW_EXPOSE_NATIVE_COCOA")
 	nativeDefine("GLFW_EXPOSE_NATIVE_NSGL")
 

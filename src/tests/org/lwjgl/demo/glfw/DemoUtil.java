@@ -14,9 +14,9 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.opengl.WGLARBMultisample.*;
 import static org.lwjgl.opengl.WGLARBPixelFormat.*;
-import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinGDI.*;
 import static org.testng.Assert.*;
 

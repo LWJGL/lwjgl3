@@ -8,7 +8,7 @@ import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 
-import static org.lwjgl.system.macosx.CGL.*;
+import static org.lwjgl.opengl.CGL.*;
 
 public class MacOSXGLContext extends GLContext {
 

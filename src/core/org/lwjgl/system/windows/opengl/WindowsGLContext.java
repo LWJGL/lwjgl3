@@ -11,11 +11,11 @@ import org.lwjgl.opengl.GLContext;
 
 import java.nio.IntBuffer;
 
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.opengl.WGLARBCreateContext.*;
 import static org.lwjgl.opengl.WGLARBCreateContextProfile.*;
 import static org.lwjgl.opengl.WGLARBMakeCurrentRead.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsPlatform.*;
 

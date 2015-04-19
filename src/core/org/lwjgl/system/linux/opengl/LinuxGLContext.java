@@ -9,11 +9,11 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.OpenGLException;
 
+import static org.lwjgl.opengl.GLX.*;
 import static org.lwjgl.opengl.GLX12.*;
 import static org.lwjgl.opengl.GLX13.*;
 import static org.lwjgl.opengl.GLXSGIMakeCurrentRead.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.linux.GLX.*;
 import static org.lwjgl.system.linux.Xlib.*;
 
 public class LinuxGLContext extends GLContext {
