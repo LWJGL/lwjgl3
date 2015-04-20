@@ -55,16 +55,28 @@ class StructMemberCharArray(
 
 private val ANONYMOUS = "*"
 
+enum class StructIdentifierType(val keyword: String) {
+	/**
+	 * typedef struct Foo { ... } Bar
+	 * or
+	 * typedef union Foo { ... } Bar
+	 */
+	ALIAS: StructIdentifierType("")
+	/** struct Foo { ... } */
+	STRUCT: StructIdentifierType("struct ")
+	/** union Foo { ... } */
+	UNION: StructIdentifierType("union ")
+}
+
 class Struct(
 	packageName: String,
 	className: String,
 	nativeSubPath: String = "",
 	/** The native struct name. May be different than className. */
 	val structName: String = className,
+	val identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
 	/** when true, a declaration is missing, we need to output one. */
 	val virtual: Boolean = false,
-	/** true: the Struct is a typedef to a struct declaration. false: it is the struct declaration itself, so we need to prepend the struct keyword. */
-	val globalIdentifier: Boolean = true,
 	/** when false, malloc methods will not be generated. */
 	val malloc: Boolean = true
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
@@ -83,7 +95,7 @@ class Struct(
 	}
 
 	val nativeType: StructType get() = StructType(this)
-	val nativeName: String get() = if ( globalIdentifier ) structName else "struct $structName"
+	val nativeName: String get() = "${identifierType.keyword}$structName"
 
 	private val struct = structName.toLowerCase()
 
@@ -115,7 +127,7 @@ class Struct(
 		get() = nativeType is StructType && !nativeType.includesPointer
 
 	val StructMember.isNestedAnonymousStruct: Boolean
-		get() = isNestedStruct && (nativeType as StructType).name === ANONYMOUS
+		get() = isNestedStruct && (nativeType as StructType).name == ANONYMOUS
 
 	val StructMember.nestedMembers: ArrayList<StructMember>
 		get() = (nativeType as StructType).definition.members
@@ -349,14 +361,14 @@ class Struct(
 			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
 			when {
-				it is StructMemberArray -> {
+				it is StructMemberArray                                                        -> {
 					println("long $param,")
 					print("\t\tint ${param}Bytes")
 				}
 				it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 					print("long $param")
 				}
-				else -> {
+				else                                                                           -> {
 					val javaType = it.nativeType.javaMethodType.getSimpleName()
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
@@ -419,7 +431,7 @@ class Struct(
 			val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 
 			when {
-				it is StructMemberArray -> {
+				it is StructMemberArray                                                                 -> {
 					print(
 						if ( it is StructMemberCharArray && mode === ConstructorMode.ALTER2 )
 							"CharSequence $param"
@@ -430,7 +442,7 @@ class Struct(
 				it.nativeType is PointerType && it.nativeType.mapping !== PointerMapping.OPAQUE_POINTER -> {
 					print("ByteBuffer $param")
 				}
-				else -> {
+				else                                                                                    -> {
 					val javaType = it.nativeType.javaMethodType.getSimpleName()
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
@@ -506,13 +518,13 @@ class Struct(
 				var postfix = if ( it is StructMemberArray ) "Set" else "";
 				print("\tpublic static void ${method}$postfix(ByteBuffer $struct, ")
 				when {
-					it is StructMemberArray                                                       -> {
+					it is StructMemberArray                                                        -> {
 						println("long $param, int bytes) { memCopy($param, memAddress($struct) + $field, bytes); }")
 					}
 					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long $param) { PointerBuffer.put($struct, $struct.position() + $field, $param); }")
 					}
-					else                                                                          -> {
+					else                                                                           -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
 						val bufferMethod = getBufferMethod(it, javaType)
 
@@ -551,9 +563,9 @@ class Struct(
 							print("\tpublic static void ${method}Set(ByteBuffer $struct, int index, ${mapping.javaMethodType} element) { ")
 							print(
 								when ( mapping ) {
-									PrimitiveMapping.PTR -> "PointerBuffer.put($struct, $field + index * POINTER_SIZE, element);"
+									PrimitiveMapping.PTR  -> "PointerBuffer.put($struct, $field + index * POINTER_SIZE, element);"
 									PrimitiveMapping.BYTE -> "$struct.put($field + index, element);"
-									else -> "$struct.put${mapping.javaMethodType.getSimpleName().upperCaseFirst}($field + index * $bytesPerElement, element);"
+									else                  -> "$struct.put${mapping.javaMethodType.getSimpleName().upperCaseFirst}($field + index * $bytesPerElement, element);"
 								}
 							)
 							println(" }")
@@ -600,13 +612,13 @@ class Struct(
 
 				print("\tpublic void ${setMethod}(")
 				when {
-					it is StructMemberArray                                                       -> {
+					it is StructMemberArray                                                        -> {
 						println("long $param, int bytes) { ${method}Set(struct, $param, bytes); }")
 					}
 					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long $param) { ${method}(struct, $param); }")
 					}
-					else                                                                          -> {
+					else                                                                           -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
 						println(
 							if ( javaType.equals("byte") || javaType.equals("short") )
@@ -658,7 +670,7 @@ class Struct(
 				print("\tpublic static ")
 
 				when {
-					it is StructMemberArray                                                       -> {
+					it is StructMemberArray                                                        -> {
 						val param = it.name
 						println("void ${method}Get(ByteBuffer $struct, long $param, int bytes) {")
 						println("\t\tmemCopy(memAddress($struct) + $field, $param, bytes);")
@@ -667,7 +679,7 @@ class Struct(
 					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long ${method}(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
 					}
-					else                                                                          -> {
+					else                                                                           -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
 						val bufferMethod = getBufferMethod(it, javaType)
 
@@ -761,14 +773,14 @@ class Struct(
 				print("\tpublic ")
 
 				when {
-					it is StructMemberArray                                                       -> {
+					it is StructMemberArray                                                        -> {
 						val param = it.name
 						println("void ${getMethod}(long $param, int bytes) { ${method}Get(struct, $param, bytes); }")
 					}
 					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
 						println("long ${getMethod}() { return $method(struct); }")
 					}
-					else                                                                          -> {
+					else                                                                           -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
 
 						val convertToInt = javaType.equals("byte") || javaType.equals("short");
@@ -878,7 +890,7 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				// Output anonymous inner structs
 				val structType = it.nativeType as StructType
-				if ( structType.name === ANONYMOUS )
+				if ( structType.name == ANONYMOUS )
 					index = generateNativeMembers(structType.definition.members, index, prefix = "${it.nativeName}.") // recursion
 			}
 		}
@@ -892,12 +904,12 @@ fun struct(
 	className: String,
 	nativeSubPath: String = "",
 	structName: String = className,
+	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
 	virtual: Boolean = false,
-	globalIdentifier: Boolean = true,
 	malloc: Boolean = true,
 	init: Struct.() -> Unit
 ): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, structName, virtual, globalIdentifier, malloc)
+	val struct = Struct(packageName, className, nativeSubPath, structName, identifierType, virtual, malloc)
 	struct.init()
 	Generator.register(struct)
 	return struct

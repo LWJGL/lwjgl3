@@ -13,7 +13,7 @@ val ssize_t = IntegerType("ssize_t", PrimitiveMapping.PTR)
 val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figure this out
 val time_t = PrimitiveType("time_t", PrimitiveMapping.LONG) // TODO: time_t can be any type
 
-val timespec = struct(LINUX_PACKAGE, "timespec", globalIdentifier = false) {
+val timespec = struct(LINUX_PACKAGE, "timespec", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Time structure"
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -25,7 +25,7 @@ val timespec = struct(LINUX_PACKAGE, "timespec", globalIdentifier = false) {
 }.nativeType
 val timespec_p = StructType(timespec)
 
-val timeval = struct(LINUX_PACKAGE, "timeval", globalIdentifier = false) {
+val timeval = struct(LINUX_PACKAGE, "timeval", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Time structure"
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -37,7 +37,7 @@ val timeval = struct(LINUX_PACKAGE, "timeval", globalIdentifier = false) {
 }.nativeType
 val timeval_p = StructType(timeval)
 
-val timezone = struct(LINUX_PACKAGE, "timezone", globalIdentifier = false) {
+val timezone = struct(LINUX_PACKAGE, "timezone", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Timezone structure"
 	nativeImport (
 		"LinuxLWJGL.h",

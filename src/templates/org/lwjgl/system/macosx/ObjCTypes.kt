@@ -38,7 +38,7 @@ val objc_property_attribute_t = StructType(struct(MACOSX_PACKAGE, "ObjCPropertyA
 val objc_property_attribute_t_p = StructType(objc_property_attribute_t)
 
 // Defines a method
-val objc_method_description = StructType(struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", globalIdentifier = false) {
+val objc_method_description = StructType(struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Defines a method."
 	nativeImport ("MacOSXLWJGL.h")
 

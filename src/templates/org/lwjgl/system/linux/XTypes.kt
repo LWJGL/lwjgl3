@@ -286,7 +286,7 @@ val XIDeviceEvent = struct(LINUX_PACKAGE, "XIDeviceEvent") {
 
 // --------------- joystick.h ---------------
 
-val JSEvent = struct(LINUX_PACKAGE, "JSEvent", structName = "js_event", globalIdentifier = false) {
+val JSEvent = struct(LINUX_PACKAGE, "JSEvent", structName = "js_event", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Joystick event."
 	nativeImport (
 		"LinuxLWJGL.h",
