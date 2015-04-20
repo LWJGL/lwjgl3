@@ -25,13 +25,13 @@ class Preamble {
 		)
 
 		private val EMPTY_IMPORTS = ArrayList<String>(0)
-		private val EMPTY_DEFINES = ArrayList<NativeDefine>(0)
+		private val EMPTY_DIRECTIVES = ArrayList<NativeDefine>(0)
 	}
 
 	private var javaImports: MutableList<String> = EMPTY_IMPORTS
 
 	private var nativeImports: MutableList<String> = EMPTY_IMPORTS
-	private var nativeDefines: MutableList<NativeDefine> = EMPTY_DEFINES
+	private var nativeDirectives: MutableList<NativeDefine> = EMPTY_DIRECTIVES
 
 	val hasNativeImports: Boolean get() = nativeImports.isNotEmpty()
 
@@ -56,11 +56,11 @@ class Preamble {
 		}
 	}
 
-	fun nativeDefine(expression: String, afterIncludes: Boolean) {
-		if ( nativeDefines === EMPTY_DEFINES )
-			nativeDefines = ArrayList()
+	fun nativeDirective(expression: String, afterIncludes: Boolean) {
+		if ( nativeDirectives === EMPTY_DIRECTIVES )
+			nativeDirectives = ArrayList()
 
-		nativeDefines.add(NativeDefine(expression, afterIncludes))
+		nativeDirectives.add(NativeDefine(expression, afterIncludes))
 	}
 
 	fun printJava(writer: PrintWriter) {
@@ -82,16 +82,16 @@ class Preamble {
 	}
 
 	fun printNative(writer: PrintWriter) {
-		nativeDefines.filter { !it.afterIncludes }.forEach {
-			writer.println("#define ${it.expression}")
+		nativeDirectives.filter { !it.afterIncludes }.forEach {
+			writer.println("${it.expression}")
 		}
 
 		nativeImports.forEach {
 			writer.println("#include $it")
 		}
 
-		nativeDefines.filter { it.afterIncludes }.forEach {
-			writer.println("#define ${it.expression}")
+		nativeDirectives.filter { it.afterIncludes }.forEach {
+			writer.println("${it.expression}")
 		}
 	}
 
@@ -167,8 +167,8 @@ abstract class GeneratorTarget(
 		return this
 	}
 
-	fun <T: GeneratorTarget> T.nativeDefine(expression: String, afterIncludes: Boolean = false): T {
-		preamble.nativeDefine(expression, afterIncludes)
+	fun <T: GeneratorTarget> T.nativeDirective(expression: String, afterIncludes: Boolean = false): T {
+		preamble.nativeDirective(expression, afterIncludes)
 		return this
 	}
 

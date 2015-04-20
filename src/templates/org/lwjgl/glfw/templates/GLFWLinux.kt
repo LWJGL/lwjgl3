@@ -10,8 +10,8 @@ import org.lwjgl.glfw.*
 import org.lwjgl.system.linux.*
 
 val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW") {
-	nativeDefine("GLFW_EXPOSE_NATIVE_X11")
-	nativeDefine("GLFW_EXPOSE_NATIVE_GLX")
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_X11")
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_GLX")
 
 	nativeImport(
 		"glfw3.h",
