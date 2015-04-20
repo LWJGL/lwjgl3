@@ -83,6 +83,8 @@ class Struct(
 
 	companion object {
 		private val bufferMethodMap = hashMapOf(
+			"boolean" to "",
+
 			"byte" to "",
 			"char" to "Char",
 			"short" to "Short",
@@ -532,7 +534,7 @@ class Struct(
 							if ( javaType.equals("byte") || javaType.equals("short") )
 								"int $param) { $struct.put$bufferMethod($struct.position() + $field, ($javaType)$param); }"
 							else
-								"$javaType $param) { $struct.put$bufferMethod($struct.position() + $field, $param); }"
+								"$javaType $param) { $struct.put$bufferMethod($struct.position() + $field, $param${if ( javaType == "boolean" ) " ? (byte)1 : (byte)0" else ""}); }"
 						)
 					}
 				}
@@ -603,8 +605,8 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println("\tpublic void ${setMethod}(long $param) { ${method}Set(struct, $param); }")
-					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}Set(struct, $param); }")
+					println("\tpublic void $setMethod(long $param) { ${method}Set(struct, $param); }")
+					println("\tpublic void $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); }")
 				}
 				generateSetters(it.nestedMembers, nestedStruct, method, field)
 			} else {
@@ -616,15 +618,15 @@ class Struct(
 						println("long $param, int bytes) { ${method}Set(struct, $param, bytes); }")
 					}
 					it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
-						println("long $param) { ${method}(struct, $param); }")
+						println("long $param) { $method(struct, $param); }")
 					}
 					else                                                                           -> {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
 						println(
 							if ( javaType.equals("byte") || javaType.equals("short") )
-								"int $param) { ${method}(struct, $param); }"
+								"int $param) { $method(struct, $param); }"
 							else
-								"$javaType $param) { ${method}(struct, $param); }"
+								"$javaType $param) { $method(struct, $param); }"
 						)
 					}
 				}
@@ -693,10 +695,13 @@ class Struct(
 						)
 
 						print("$struct.position() + $field)")
-						if ( convertToInt && it.nativeType is IntegerType && it.nativeType.unsigned ) {
-							print(" & 0x")
-							for ( i in 1..(it.nativeType.mapping as PrimitiveMapping).bytes )
-								print("FF")
+						if ( it.nativeType is IntegerType ) {
+							if ( convertToInt && it.nativeType.unsigned ) {
+								print(" & 0x")
+								for ( i in 1..(it.nativeType.mapping as PrimitiveMapping).bytes )
+									print("FF")
+							} else if ( it.nativeType.mapping === PrimitiveMapping.BOOLEAN )
+								print(" != 0")
 						}
 						println("; }")
 					}

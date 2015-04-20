@@ -16,7 +16,7 @@ val ALvoid_pp = PointerType(ALvoid_p)
 
 // numeric
 
-val ALboolean = NativeType("ALboolean", TypeMapping.BOOLEAN)
+val ALboolean = IntegerType("ALboolean", PrimitiveMapping.BOOLEAN)
 val ALbyte = IntegerType("ALbyte", PrimitiveMapping.BYTE)
 val ALubyte = IntegerType("ALubyte", PrimitiveMapping.BYTE, unsigned = true)
 val ALshort = IntegerType("ALshort", PrimitiveMapping.SHORT)

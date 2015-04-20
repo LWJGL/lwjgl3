@@ -4,8 +4,8 @@
  */
 package org.lwjgl.generator
 
-import java.nio.*
 import org.lwjgl.PointerBuffer
+import java.nio.*
 
 open class NativeType(
 	/** The type used in the native API. */
@@ -58,14 +58,15 @@ open class PointerType(
 fun PointerType(primitiveType: PrimitiveType) = PointerType(
 	primitiveType.name,
 	when ( primitiveType.mapping as PrimitiveMapping ) {
-		PrimitiveMapping.BYTE   -> PointerMapping.DATA_BYTE
-		PrimitiveMapping.SHORT  -> PointerMapping.DATA_SHORT
-		PrimitiveMapping.INT    -> PointerMapping.DATA_INT
-		PrimitiveMapping.LONG   -> PointerMapping.DATA_LONG
-		PrimitiveMapping.PTR    -> PointerMapping.DATA_POINTER
-		PrimitiveMapping.FLOAT  -> PointerMapping.DATA_FLOAT
-		PrimitiveMapping.DOUBLE -> PointerMapping.DATA_DOUBLE
-		else                    -> {
+		PrimitiveMapping.BOOLEAN -> PointerMapping.DATA_BYTE
+		PrimitiveMapping.BYTE    -> PointerMapping.DATA_BYTE
+		PrimitiveMapping.SHORT   -> PointerMapping.DATA_SHORT
+		PrimitiveMapping.INT     -> PointerMapping.DATA_INT
+		PrimitiveMapping.LONG    -> PointerMapping.DATA_LONG
+		PrimitiveMapping.PTR     -> PointerMapping.DATA_POINTER
+		PrimitiveMapping.FLOAT   -> PointerMapping.DATA_FLOAT
+		PrimitiveMapping.DOUBLE  -> PointerMapping.DATA_DOUBLE
+		else                     -> {
 			throw IllegalArgumentException()
 		}
 	},
@@ -149,7 +150,6 @@ open class TypeMapping(
 
 	companion object {
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
-		val BOOLEAN = TypeMapping("jboolean", javaClass<Boolean>(), javaClass<Boolean>())
 	}
 
 }
@@ -161,6 +161,8 @@ open class PrimitiveMapping(
 ): TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
 	companion object {
+		val BOOLEAN = PrimitiveMapping("jboolean", javaClass<Boolean>(), 1)
+
 		val BYTE = PrimitiveMapping("jbyte", javaClass<Byte>(), 1)
 		val CHAR = PrimitiveMapping("jchar", javaClass<Char>(), 2)
 		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2)
