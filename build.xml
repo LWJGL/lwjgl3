@@ -285,6 +285,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/opengl/**" if:true="${build.opengl}"/>
 
 			<include name="org/lwjgl/mantle/**" if:true="${build.mantle}"/>
+			<include name="org/lwjgl/ovr/**" if:true="${build.ovr}"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -315,6 +316,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${build.opencl}"/>
 			<include name="org/lwjgl/demo/opengl/**" if:true="${build.glfw}"/>
 			<include name="org/lwjgl/demo/mantle/**" if:true="${build.mantle}"/>
+			<include name="org/lwjgl/demo/ovr/**" if:true="${build.ovr}"/>
 		</javac>
 	</target>
 

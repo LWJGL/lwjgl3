@@ -41,7 +41,11 @@ License terms: http://lwjgl.org/license.php
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib.abs}/macosx/${build.arch}/" includes="*.a"/>
+	<fileset id="link-libraries" dir="${lib.abs}/macosx/${build.arch}/">
+		<include name="libffi.a"/>
+		<include name="libglfw3.a" if:true="${build.glfw}"/>
+	</fileset>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/MacOSX/Release" includes="*.framework" if:true="${build.ovr}"/>
 
 	<property name="macosx-version-min" value="10.7"/>
 
@@ -62,6 +66,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
 			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
 			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
+			<arg value="-I${OCULUS_SDK_PATH}/LibOVR/Include" if:true="${build.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -76,6 +81,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c" if:true="${build.opencl}"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
 			<fileset dir="${generated.native}/opengl/cgl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>
@@ -84,6 +90,7 @@ License terms: http://lwjgl.org/license.php
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
+			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary"/>
@@ -112,6 +119,7 @@ License terms: http://lwjgl.org/license.php
 			<!--<arg line="-framework Cocoa"/>-->
 			<arg line="-framework IOKit"/>
 			<arg line="-framework OpenGL" if:true="${build.opengl}"/>
+			<arg line="-F ${OCULUS_SDK_PATH}/LibOVR/Lib/Mac/Release -framework OVR" if:true="${build.ovr}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

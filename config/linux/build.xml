@@ -24,7 +24,11 @@ License terms: http://lwjgl.org/license.php
 	<property name="libname" value="liblwjgl.so"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib.abs}/linux/${build.arch}/" includes="*.a"/>
+	<fileset id="link-libraries" dir="${lib.abs}/linux/${build.arch}/">
+		<include name="libffi.a"/>
+		<include name="libglfw3.a" if:true="${build.glfw}"/>
+	</fileset>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/Linux/${os.arch}/Release" includes="*.a" if:true="${build.ovr}"/>
 
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
@@ -44,6 +48,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
 			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
 			<arg value="-I${src.native.abs}/opengl/glx" if:true="${build.opengl}"/>
+			<arg value="-I${OCULUS_SDK_PATH}/LibOVR/Include" if:true="${build.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -65,6 +70,7 @@ License terms: http://lwjgl.org/license.php
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
+			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary"/>
@@ -104,6 +110,7 @@ License terms: http://lwjgl.org/license.php
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
+			<fileset refid="link-ovr" if:true="${build.ovr}"/>
 		</apply>
 
 		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">

@@ -13,7 +13,15 @@ License terms: http://lwjgl.org/license.php
 	<property name="dllname" value="lwjgl.dll"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
-	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/" includes="*.lib"/>
+	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/">
+		<include name="libffi.lib"/>
+		<include name="glfw3.lib" if:true="${build.glfw}"/>
+	</fileset>
+
+	<condition property="build.ovr.arch" value="x64" else="Win32" if:true="${build.ovr}">
+		<equals arg1="${build.arch}" arg2="x64"/>
+	</condition>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/lib/Windows/${build.ovr.arch}/Release/VS2013" includes="*.lib" if:true="${build.ovr}"/>
 
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
@@ -33,6 +41,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/I${src.native.abs}\opencl" if:true="${build.opencl}"/>
 			<arg value="/I${src.native.abs}\opengl" if:true="${build.opengl}"/>
 			<arg value="/I${src.native.abs}\opengl\wgl" if:true="${build.opengl}"/>
+			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include" if:true="${build.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -46,6 +55,8 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
 			<fileset dir="${generated.native}/opengl/wgl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
+			<fileset dir="${generated.native}/ovr/windows" includes="*.c" if:true="${build.ovr}"/>
 
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
@@ -54,6 +65,7 @@ License terms: http://lwjgl.org/license.php
 		<uptodate property="link-uptodate" targetfile="${bin.native}/${dllname}">
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
+			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary" />
@@ -93,6 +105,7 @@ License terms: http://lwjgl.org/license.php
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
+			<fileset refid="link-ovr" if:true="${build.ovr}"/>
 		</apply>
 	</target>
 </project>
