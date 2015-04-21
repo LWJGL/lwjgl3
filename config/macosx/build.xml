@@ -45,7 +45,7 @@ License terms: http://lwjgl.org/license.php
 		<include name="libffi.a"/>
 		<include name="libglfw3.a" if:true="${build.glfw}"/>
 	</fileset>
-	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/MacOSX/Release" includes="*.framework" if:true="${build.ovr}"/>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/Mac/Release" includes="*.framework" if:true="${build.ovr}"/>
 
 	<property name="macosx-version-min" value="10.7"/>
 
@@ -119,7 +119,7 @@ License terms: http://lwjgl.org/license.php
 			<!--<arg line="-framework Cocoa"/>-->
 			<arg line="-framework IOKit"/>
 			<arg line="-framework OpenGL" if:true="${build.opengl}"/>
-			<arg line="-F ${OCULUS_SDK_PATH}/LibOVR/Lib/Mac/Release -framework OVR" if:true="${build.ovr}"/>
+			<arg line="-F ${OCULUS_SDK_PATH}/LibOVR/Lib/Mac/Release -framework LibOVR" if:true="${build.ovr}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
