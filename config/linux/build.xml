@@ -28,7 +28,11 @@ License terms: http://lwjgl.org/license.php
 		<include name="libffi.a"/>
 		<include name="libglfw3.a" if:true="${build.glfw}"/>
 	</fileset>
-	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/Linux/${os.arch}/Release" includes="*.a" if:true="${build.ovr}"/>
+
+	<condition property="build.ovr.arch" value="x86_64" else="x86" if:true="${build.ovr}">
+		<equals arg1="${build.arch}" arg2="x64"/>
+	</condition>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/Linux/${build.ovr.arch}/Release" includes="*.a" if:true="${build.ovr}"/>
 
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
@@ -62,6 +66,8 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
 			<fileset dir="${generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
+			<fileset dir="${generated.native}/ovr/linux" includes="*.c" if:true="${build.ovr}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>
@@ -103,10 +109,12 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<dirname property="ant.file.dir" file="${ant.file}"/>
+		<local name="version.script"/>
+		<property name="version.script" location="config/linux/version.script"/>
+
 		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${libname} ${libs} -Xlinker --version-script -Xlinker ${ant.file.dir}/version.script"/>
+			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${libname} ${libs} -Xlinker --version-script -Xlinker ${version.script}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
