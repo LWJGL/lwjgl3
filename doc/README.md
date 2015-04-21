@@ -34,7 +34,7 @@ Library Dependencies: TestNG, JCommander
 Requirements:
 * JDK 6 or newer  
     The **JAVA_HOME** environment variable must be set. Also see *JAVA6_HOME* below for more info.
-* Ant 1.9.1 or newer
+* Ant 1.9.3 or newer
 
 Step-by-step:
 
