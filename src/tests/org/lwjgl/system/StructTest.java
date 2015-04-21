@@ -125,7 +125,7 @@ public class StructTest {
 	}
 
 	public void testStructConstructor() {
-		ByteBuffer s = FFIType.malloc(4, 4, FFI_TYPE_INT, NULL);
+		ByteBuffer s = FFIType.malloc(4, 4, FFI_TYPE_INT, null);
 
 		assertEquals(FFIType.size(s), 4);
 		assertEquals(FFIType.alignment(s), 4);
