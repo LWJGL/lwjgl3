@@ -7,24 +7,24 @@ package org.lwjgl.demo.windows;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLContextWindows;
 import org.lwjgl.system.libffi.Closure;
 import org.lwjgl.system.windows.MSG;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
 import org.lwjgl.system.windows.WindowsDisplay;
-import org.lwjgl.system.windows.opengl.WindowsGLContext;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.opengl.WGLAMDGPUAssociation.*;
 import static org.lwjgl.opengl.WGLARBBufferRegion.*;
 import static org.lwjgl.opengl.WGLARBMultisample.*;
 import static org.lwjgl.opengl.WGLARBPixelFormat.*;
 import static org.lwjgl.opengl.WGLEXTSwapControl.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.windows.WGL.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinGDI.*;
 import static org.lwjgl.system.windows.WinUser.*;
@@ -49,7 +49,7 @@ public final class WGLDemo {
 		int success = SetPixelFormat(window.getHdc(), pixelFormat, pfdOut.buffer());
 		assertTrue(success != 0);
 
-		GLContext context = WindowsGLContext.create(window.getHdc());
+		GLContext context = GLContextWindows.create(window.getHdc());
 		Closure debugProc = context.setupDebugMessageCallback();
 
 		ContextCapabilities caps = context.getCapabilities();
@@ -230,7 +230,7 @@ public final class WGLDemo {
 		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd.buffer());
 		assertTrue(success != 0);
 
-		GLContext context = WindowsGLContext.create(dummy.getHdc());
+		GLContext context = GLContextWindows.create(dummy.getHdc());
 
 		IntBuffer propList = BufferUtils.createIntBuffer(32);
 

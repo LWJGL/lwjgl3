@@ -272,11 +272,8 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/system/*.java"/>
 			<include name="org/lwjgl/system/libffi/**"/>
 			<include name="org/lwjgl/system/linux/*.java"/>
-			<include name="org/lwjgl/system/linux/opengl/**" if:true="${build.opengl}"/>
 			<include name="org/lwjgl/system/macosx/*.java"/>
-			<include name="org/lwjgl/system/macosx/opengl/**" if:true="${build.opengl}"/>
 			<include name="org/lwjgl/system/windows/*.java"/>
-			<include name="org/lwjgl/system/windows/opengl/**" if:true="${build.opengl}"/>
 
 			<include name="org/lwjgl/glfw/**" if:true="${build.glfw}"/>
 

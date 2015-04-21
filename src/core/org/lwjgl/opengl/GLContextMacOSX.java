@@ -2,19 +2,15 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.macosx.opengl;
-
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLContext;
+package org.lwjgl.opengl;
 
 import static org.lwjgl.opengl.CGL.*;
 
-public class MacOSXGLContext extends GLContext {
+public class GLContextMacOSX extends GLContext {
 
 	private final long handle;
 
-	public MacOSXGLContext(ContextCapabilities capabilities, long handle) {
+	public GLContextMacOSX(ContextCapabilities capabilities, long handle) {
 		super(capabilities);
 
 		this.handle = handle;
@@ -40,10 +36,10 @@ public class MacOSXGLContext extends GLContext {
 		return CGLGetCurrentContext() == handle;
 	}
 
-	public static MacOSXGLContext createFromCurrent() {
+	public static GLContextMacOSX createFromCurrent() {
 		ContextCapabilities capabilities = GL.createCapabilities(false);
 
-		return new MacOSXGLContext(capabilities, CGLGetCurrentContext());
+		return new GLContextMacOSX(capabilities, CGLGetCurrentContext());
 	}
 
 	@Override

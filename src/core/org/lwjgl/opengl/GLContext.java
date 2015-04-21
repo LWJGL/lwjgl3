@@ -7,9 +7,6 @@ package org.lwjgl.opengl;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Pointer;
 import org.lwjgl.system.libffi.Closure;
-import org.lwjgl.system.linux.opengl.LinuxGLContext;
-import org.lwjgl.system.macosx.opengl.MacOSXGLContext;
-import org.lwjgl.system.windows.opengl.WindowsGLContext;
 
 import java.io.PrintStream;
 
@@ -36,11 +33,11 @@ public abstract class GLContext implements Pointer {
 	public static GLContext createFromCurrent() {
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS:
-				return WindowsGLContext.createFromCurrent();
+				return GLContextWindows.createFromCurrent();
 			case LINUX:
-				return LinuxGLContext.createFromCurrent();
+				return GLContextLinux.createFromCurrent();
 			case MACOSX:
-				return MacOSXGLContext.createFromCurrent();
+				return GLContextMacOSX.createFromCurrent();
 			default:
 				throw new IllegalStateException();
 		}

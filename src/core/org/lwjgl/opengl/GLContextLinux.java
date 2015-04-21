@@ -2,12 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.linux.opengl;
-
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.OpenGLException;
+package org.lwjgl.opengl;
 
 import static org.lwjgl.opengl.GLX.*;
 import static org.lwjgl.opengl.GLX12.*;
@@ -16,14 +11,14 @@ import static org.lwjgl.opengl.GLXSGIMakeCurrentRead.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.linux.Xlib.*;
 
-public class LinuxGLContext extends GLContext {
+public class GLContextLinux extends GLContext {
 
 	private final long display;
 	private final long ctx;
 
 	private final MakeCurrentAction makeCurrentAction;
 
-	public LinuxGLContext(ContextCapabilities capabilities, long display, long ctx) {
+	public GLContextLinux(ContextCapabilities capabilities, long display, long ctx) {
 		super(capabilities);
 
 		this.display = display;
@@ -59,7 +54,7 @@ public class LinuxGLContext extends GLContext {
 		return glXGetCurrentContext() == ctx;
 	}
 
-	public static LinuxGLContext createFromCurrent() {
+	public static GLContextLinux createFromCurrent() {
 		long glXGetCurrentDisplay = GL.getFunctionProvider().getFunctionAddress("glXGetCurrentDisplay");
 		if ( glXGetCurrentDisplay == NULL )
 			throw new OpenGLException("Failed to retrieve glXGetCurrentDisplay function address.");
@@ -67,7 +62,7 @@ public class LinuxGLContext extends GLContext {
 		return createFromCurrent(nglXGetCurrentDisplay(glXGetCurrentDisplay));
 	}
 
-	public static LinuxGLContext createFromCurrent(long display) {
+	public static GLContextLinux createFromCurrent(long display) {
 		if ( display == NULL )
 			throw new IllegalStateException("Invalid X server connection specified.");
 
@@ -77,7 +72,7 @@ public class LinuxGLContext extends GLContext {
 
 		ContextCapabilities capabilities = GL.createCapabilities(false);
 
-		return new LinuxGLContext(capabilities, display, ctx);
+		return new GLContextLinux(capabilities, display, ctx);
 	}
 
 	@Override
