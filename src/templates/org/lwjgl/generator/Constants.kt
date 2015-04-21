@@ -11,7 +11,7 @@ inline val Int.b: Byte get() = this.toByte()
 inline val Int.s: Short get() = this.toShort()
 inline val Long.i: Int get() = this.toInt()
 
-class ConstantType<T: Comparable<T>>(
+class ConstantType<T: Any>(
 	val javaType: Class<T>,
 	val print: (T) -> String
 )
@@ -23,10 +23,12 @@ val IntConstant = ConstantType(javaClass<Int>()) { "0x%X".format(it) }
 val LongConstant = ConstantType(javaClass<Long>()) { "0x%XL".format(it) }
 val FloatConstant = ConstantType(javaClass<Float>()) { "%sf".format(it) }
 
-open data class Constant<T: Comparable<T>>(val name: String, val value: T?)
-class ConstantExpression<T: Comparable<T>>(name: String, val expression: String): Constant<T>(name, null)
+val StringConstant = ConstantType(javaClass<String>()) { "\"$it\"" }
 
-class ConstantBlock<T: Comparable<T>>(
+open data class Constant<T: Any>(val name: String, val value: T?)
+class ConstantExpression<T: Any>(name: String, val expression: String): Constant<T>(name, null)
+
+class ConstantBlock<T: Any>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
 	val documentation: String,
@@ -100,7 +102,7 @@ class ConstantBlock<T: Comparable<T>>(
 		return builder.toString()
 	}
 
-	private fun <T: Comparable<T>> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
+	private fun <T: Any> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
 		builder append nativeClass.className
 		builder append '#'
 		builder append constant.name

@@ -110,7 +110,7 @@ class NativeClass(
 		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
 	}
 
-	private val constantBlocks = ArrayList<ConstantBlock<out Comparable<*>>>()
+	private val constantBlocks = ArrayList<ConstantBlock<*>>()
 
 	private val _functions = LinkedHashMap<String, NativeClassFunction>()
 	val functions: Iterable<NativeClassFunction>
@@ -300,17 +300,17 @@ class NativeClass(
 
 	// DSL extensions
 
-	fun <T: Comparable<T>> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	fun <T: Any> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
 	}
 
 	/** Adds a new constant. */
-	fun <T: Comparable<T>> String._(value: T) = Constant(this, value)
+	fun <T: Any> String._(value: T) = Constant(this, value)
 
 	/** Adds a new constant whose value is an expression. */
-	fun <T: Comparable<T>> String.expr(expression: String) = ConstantExpression<T>(this, expression)
+	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
 	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
 		ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc, since = since)
