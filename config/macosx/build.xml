@@ -5,7 +5,7 @@ License terms: http://lwjgl.org/license.php
 <project name="native-macosx" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
-	<property name="libname" value="liblwjgl.dylib"/>
+	<property name="LWJGL_LIBRARY" value="liblwjgl.dylib"/>
 
 	<!-- Ask Xcode for correct path to XCode tools -->
 	<!-- Will fail if XCode Command Line Tools are not installed on 10.7+ (Lion) -->
@@ -87,7 +87,7 @@ License terms: http://lwjgl.org/license.php
 		</apply>
 
 		<!-- LINK -->
-		<uptodate property="link-uptodate" targetfile="${bin.native}/${libname}">
+		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
 			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
@@ -104,7 +104,7 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" if:true="${build.openal}"/>
+		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}/libopenal.dylib" if:true="${build.openal}"/>
 		<update-dependency name="glfw3" artifact="x64/libglfw3.a" if:true="${build.glfw}"/>
 		<update-dependency name="libffi" artifact="x64/libffi.a"/>
 	</target>
@@ -112,7 +112,7 @@ License terms: http://lwjgl.org/license.php
 	<target name="-link" depends="-update-dependencies">
 		<apply dir="${bin.native}" executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${libname}'/>
+			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${LWJGL_LIBRARY}'/>
 			<arg line="-framework AppKit"/>
 			<!--<arg line="-framework CoreFoundation"/>-->
 			<arg line="-framework CoreVideo"/>
@@ -124,5 +124,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
 		</apply>
+
+		<move file="${bin.native}/${LWJGL_LIBRARY}" todir="${lib}"/>
 	</target>
 </project>

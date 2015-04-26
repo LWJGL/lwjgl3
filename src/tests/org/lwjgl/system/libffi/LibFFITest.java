@@ -7,6 +7,7 @@ package org.lwjgl.system.libffi;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.testng.annotations.Test;
 
@@ -85,7 +86,7 @@ public class LibFFITest {
 	}
 
 	private static long getMemPutIntAddress() {
-		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative("lwjgl");
+		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative(Sys.JNI_LIBRARY_NAME);
 
 		long nMemPutInt = lib.getFunctionAddress("Java_org_lwjgl_system_MemoryUtil_nMemPutInt");
 		if ( nMemPutInt == NULL )

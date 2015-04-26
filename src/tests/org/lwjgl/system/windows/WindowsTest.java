@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
+import org.lwjgl.Sys;
 import org.testng.annotations.Test;
 
 import java.nio.ByteBuffer;
@@ -40,7 +41,7 @@ public class WindowsTest {
 
 	public void testLWJGLInstance() {
 		assertEquals(
-			GetModuleHandle("lwjgl"),
+			GetModuleHandle(Sys.JNI_LIBRARY_NAME),
 			HINSTANCE
 		);
 	}

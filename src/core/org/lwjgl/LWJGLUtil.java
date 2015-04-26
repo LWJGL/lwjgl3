@@ -27,7 +27,7 @@ public final class LWJGLUtil {
 
 		private final String name;
 
-		private Platform(String name) {
+		Platform(String name) {
 			this.name = name;
 		}
 
@@ -323,17 +323,16 @@ public final class LWJGLUtil {
 		}
 
 		String libName = mapLibraryName(name);
-		String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			if ( loadLibrary(LOADER_SYSTEM, override, platformPath, libName, false) )
+			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) )
 				return;
 		}
 
 		// Then java.library.path
-		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), platformPath, libName, false) )
+		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), libName, false) )
 			return;
 
 		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
@@ -359,18 +358,17 @@ public final class LWJGLUtil {
 			libName = name;
 		else {
 			libName = mapLibraryName(name);
-			String platformPath = getPlatformName() + File.separator + (System.getProperty("os.arch").contains("64") ? "x64" : "x86");
 
 			// Try org.lwjgl.librarypath first
 			String override = System.getProperty("org.lwjgl.librarypath");
 			if ( override != null ) {
-				DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, platformPath, libName, null);
+				DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, libName, null);
 				if ( lib != null )
 					return lib;
 			}
 
 			// Then java.library.path
-			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), platformPath, libName, null);
+			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), libName, null);
 			if ( lib != null )
 				return lib;
 		}
@@ -406,13 +404,9 @@ public final class LWJGLUtil {
 		}
 	};
 
-	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String platformPath, String libName, T onFailure) {
+	private static <T> T loadLibrary(LibraryLoader<T> loader, String path, String libName, T onFailure) {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
 			File f = new File(root + File.separator + libName);
-			if ( f.exists() )
-				return loader.load(f.getPath());
-
-			f = new File(root + File.separator + platformPath + File.separator + libName);
 			if ( f.exists() )
 				return loader.load(f.getPath());
 		}

@@ -331,12 +331,6 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-init-runtime" description="Initializes properties required for running demos and tests">
-		<path id="library.path">
-			<pathelement path="${bin}"/>
-			<pathelement path="${lib}"/>
-		</path>
-		<property name="library.path" refid="library.path"/>
-
 		<path id="runtime.classpath">
 			<pathelement path="${bin.core}"/>
 			<pathelement path="${bin.util}"/>
@@ -354,7 +348,7 @@ License terms: http://lwjgl.org/license.php
 			<jvmarg value="-Xcheck:jni"/>
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
-			<jvmarg value="-Djava.library.path=${library.path}"/>
+			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
@@ -369,7 +363,7 @@ License terms: http://lwjgl.org/license.php
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
-			<jvmarg value="-Djava.library.path=${library.path}"/>
+			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
 			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
@@ -433,23 +427,20 @@ License terms: http://lwjgl.org/license.php
 		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
 
 		<!-- Download binaries from build.lwjgl.org -->
-		<mkdir dir="${release.native}/windows/x64"/>
-		<mkdir dir="${release.native}/windows/x86"/>
-		<update name="LWJGL Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll" dest="${release.native}/windows/x64"/>
-		<update name="LWJGL Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll" dest="${release.native}/windows/x86"/>
-		<update name="OpenAL32 Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/windows/x64"/>
-		<update name="OpenAL32 Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}/windows/x86"/>
+		<mkdir dir="${release.native}"/>
 
-		<mkdir dir="${release.native}/linux/x64"/>
-		<mkdir dir="${release.native}/linux/x86"/>
-		<update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}/linux/x64"/>
-		<update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/linux/x86"/>
-		<update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x64"/>
-		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/linux/x86"/>
+		<update name="LWJGL Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll" dest="${release.native}"/>
+		<update name="LWJGL Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll" dest="${release.native}/lwjgl32.dll"/>
+		<update name="OpenAL32 Win64" url="http://build.lwjgl.org/${build.type}/windows/x64/OpenAL32.dll" dest="${release.native}/OpenAL.dll"/>
+		<update name="OpenAL32 Win32" url="http://build.lwjgl.org/${build.type}/windows/x86/OpenAL32.dll" dest="${release.native}/OpenAL32.dll"/>
 
-		<mkdir dir="${release.native}/macosx/x64"/>
-		<update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}/macosx/x64"/>
-		<update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}/macosx/x64"/>
+		<update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}"/>
+		<update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/liblwjgl32.so"/>
+		<update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}"/>
+		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/libopenal32.so"/>
+
+		<update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}"/>
+		<update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}"/>
 
 		<!-- Bundle javadoc -->
 		<mkdir dir="${release.doc}"/>

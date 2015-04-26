@@ -5,12 +5,14 @@ License terms: http://lwjgl.org/license.php
 <project name="native-windows" basedir="../.." xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="../build-definitions.xml"/>
 
+	<condition property="LWJGL_LIBRARY" value="lwjgl.dll" else="lwjgl32.dll">
+		<equals arg1="${build.arch}" arg2="x64"/>
+	</condition>
+
 	<property name="core-libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib"/>
 	<condition property="libs" value="${core-libs} OpenGL32.Lib" else="${core-libs}">
 		<istrue value="${build.opengl}"/>
 	</condition>
-
-	<property name="dllname" value="lwjgl.dll"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
 	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/">
@@ -62,7 +64,7 @@ License terms: http://lwjgl.org/license.php
 		</apply>
 
 		<!-- LINK -->
-		<uptodate property="link-uptodate" targetfile="${bin.native}/${dllname}">
+		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
 			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
@@ -79,7 +81,7 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" if:true="${build.openal}"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}/OpenAL32.dll" if:true="${build.openal}"/>
 		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
 	</target>
@@ -88,7 +90,7 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" if:true="${build.openal}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${build.openal}"/>
 		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${build.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
 	</target>
@@ -99,7 +101,7 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="-link" depends="-update-dependencies">
 		<apply dir="${bin.native}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line='/LD /WX /nologo /Fe${dllname}'/>
+			<arg line='/LD /WX /nologo /Fe:"${LWJGL_LIBRARY}"'/>
 			<srcfile/>
 			<arg line='/link /OPT:REF,ICF /DLL ${libs}'/>
 
@@ -107,5 +109,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-libraries"/>
 			<fileset refid="link-ovr" if:true="${build.ovr}"/>
 		</apply>
+
+		<move file="${bin.native}/${LWJGL_LIBRARY}" todir="${lib}"/>
 	</target>
 </project>

@@ -255,9 +255,10 @@ License terms: http://lwjgl.org/license.php
 	<macrodef name="update-dependency">
 		<attribute name="name"/>
 		<attribute name="artifact"/>
+		<attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
 		<sequential>
-			<update-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="${lib}/${platform}/@{artifact}"/>
+			<update-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
 		</sequential>
 	</macrodef>
 </project>

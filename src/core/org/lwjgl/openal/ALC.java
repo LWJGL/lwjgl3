@@ -5,6 +5,7 @@
 package org.lwjgl.openal;
 
 import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Pointer;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProviderLocal;
@@ -32,7 +33,7 @@ public final class ALC {
 		String libName;
 		switch ( LWJGLUtil.getPlatform() ) {
 			case WINDOWS:
-				libName = "OpenAL32";
+				libName = "OpenAL";
 				break;
 			case LINUX:
 				libName = "openal";
@@ -44,7 +45,7 @@ public final class ALC {
 				throw new IllegalStateException();
 		}
 
-		create(System.getProperty("org.lwjgl.openal.libname", libName));
+		create(System.getProperty("org.lwjgl.openal.libname", Pointer.BITS64 ? libName : libName + "32"));
 	}
 
 	public static void create(String libName) {
