@@ -126,7 +126,7 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
-	<target name="-init-compile" description="Initializes properties required for compilation">
+	<target name="-init-compile" description="Initializes properties required for compilation" depends="modules">
 		<condition property="java.home.missing">
 			<not>
 				<or>
@@ -166,6 +166,31 @@ License terms: http://lwjgl.org/license.php
 		<condition property="jdk.boot.classpath" value="jdk.boot.classpath.applejars" else="jdk.boot.classpath.jars">
 			<available file="${env.JAVA6_HOME}/bundle/Classes/classes.jar"/>
 		</condition>
+
+		<patternset id="src.core.files">
+			<include name="org/lwjgl/*.java"/>
+			<include name="org/lwjgl/system/*.java"/>
+			<include name="org/lwjgl/system/libffi/**"/>
+			<include name="org/lwjgl/system/linux/**"/>
+			<include name="org/lwjgl/system/macosx/**"/>
+			<exclude name="org/lwjgl/system/macosx/ObjC*.java" unless:true="${build.macosx.objc}"/>
+			<include name="org/lwjgl/system/windows/**"/>
+		</patternset>
+
+		<patternset id="src.util.files">
+			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
+		</patternset>
+
+		<patternset id="generated.java.files">
+			<include name="org/lwjgl/glfw/**" if:true="${build.glfw}"/>
+
+			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
+			<include name="org/lwjgl/opengl/**" if:true="${build.opengl}"/>
+
+			<include name="org/lwjgl/mantle/**" if:true="${build.mantle}"/>
+			<include name="org/lwjgl/ovr/**" if:true="${build.ovr}"/>
+		</patternset>
 	</target>
 
 	<target name="compile-templates" description="Compiles the Templates module" depends="init">
@@ -176,7 +201,7 @@ License terms: http://lwjgl.org/license.php
 		<antcall target="-compile-templates"/>
 	</target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile, modules" unless="templates-uptodate">
+	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
 		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
@@ -228,7 +253,7 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="init, modules">
+	<target name="generate" description="Runs the bindings Generator" depends="init, -init-compile">
 		<available file="${bin.templates}/touch.txt" property="has-compiled-templates"/>
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
@@ -260,7 +285,7 @@ License terms: http://lwjgl.org/license.php
 		<touch file="${generated}/touch.txt" verbose="false"/>
 	</target>
 
-	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
+	<target name="compile" description="Compiles the Java source code" depends="generate">
 		<javac debug="yes" sourcepath="" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
@@ -268,21 +293,9 @@ License terms: http://lwjgl.org/license.php
 				<pathelement path="${generated.java}"/>
 			</src>
 
-			<include name="org/lwjgl/*.java"/>
-			<include name="org/lwjgl/system/*.java"/>
-			<include name="org/lwjgl/system/libffi/**"/>
-			<include name="org/lwjgl/system/linux/*.java"/>
-			<include name="org/lwjgl/system/macosx/*.java"/>
-			<include name="org/lwjgl/system/windows/*.java"/>
-
-			<include name="org/lwjgl/glfw/**" if:true="${build.glfw}"/>
-
-			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
-			<include name="org/lwjgl/opengl/**" if:true="${build.opengl}"/>
-
-			<include name="org/lwjgl/mantle/**" if:true="${build.mantle}"/>
-			<include name="org/lwjgl/ovr/**" if:true="${build.ovr}"/>
+			<patternset refid="src.core.files"/>
+			<patternset refid="src.util.files"/>
+			<patternset refid="generated.java.files"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -394,9 +407,23 @@ License terms: http://lwjgl.org/license.php
 			<doctitle><![CDATA[<h1>Lightweight Java Game Library</h1>]]></doctitle>
 			<bottom><![CDATA[<i>Copyright LWJGL. All Rights Reserved. <a href="http://lwjgl.org/license.php">License terms</a>.</i>]]></bottom>
 
-			<fileset dir="${src.core}" includes="**"/>
-			<fileset dir="${src.util}" includes="**"/>
-			<fileset dir="${generated.java}" includes="**"/>
+			<classpath>
+				<pathelement path="${src.core}"/>
+				<pathelement path="${src.util}"/>
+				<pathelement path="${generated.java}"/>
+			</classpath>
+
+			<fileset dir="${src.core}">
+				<patternset refid="src.core.files"/>
+			</fileset>
+
+			<fileset dir="${src.util}">
+				<patternset refid="src.util.files"/>
+			</fileset>
+
+			<fileset dir="${generated.java}">
+				<patternset refid="generated.java.files"/>
+			</fileset>
 		</javadoc>
 	</target>
 
