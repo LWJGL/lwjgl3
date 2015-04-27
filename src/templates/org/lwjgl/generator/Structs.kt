@@ -94,6 +94,8 @@ class Struct(
 			"float" to "Float",
 			"double" to "Double"
 		)
+
+		private val BUFFER_LEN_PARAM = "byteLen"
 	}
 
 	val nativeType: StructType get() = StructType(this)
@@ -735,7 +737,7 @@ class Struct(
 								val charMapping = array.nativeType.mapping as CharMapping
 								if ( array.nullTerminated ) {
 									println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, memStrLen${charMapping.bytes}($struct, $field), $field); }")
-									println("\tpublic static String ${method}String(ByteBuffer $struct, int size) { return memDecode${charMapping.charset}($struct, size, $field); }")
+									println("\tpublic static String ${method}String(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memDecode${charMapping.charset}($struct, $BUFFER_LEN_PARAM, $field); }")
 								} else
 									println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, ${array.size}, $field); }")
 							} else {
@@ -766,15 +768,15 @@ class Struct(
 							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBufferNT${it.nativeType.charMapping.bytes}(${method}($struct)); }")
 							println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${it.nativeType.charMapping.charset}(${method}($struct)); }")
 						} else {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int size) { return memByteBuffer(${method}($struct), size); }")
-							println("\tpublic static String ${method}String(ByteBuffer $struct, int size) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer(${method}($struct), size)); }")
+							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM); }")
+							println("\tpublic static String ${method}String(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM)); }")
 						}
 					}
 					it.nativeType is StructType                                                            -> {
 						println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBuffer(${method}($struct), ${it.nativeType.definition.className}.SIZEOF); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int size) { return memByteBuffer(${method}($struct), size); }")
+						println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM); }")
 					}
 				}
 			}
@@ -832,7 +834,7 @@ class Struct(
 						if ( array is StructMemberCharArray ) {
 							println("\tpublic String ${getMethod}String() { return ${method}String(struct); }")
 							if ( array.nullTerminated )
-								println("\tpublic String ${getMethod}String(int size) { return ${method}String(struct, size); }")
+								println("\tpublic String ${getMethod}String(int $BUFFER_LEN_PARAM) { return ${method}String(struct, $BUFFER_LEN_PARAM); }")
 						} else if ( array.nativeType is StructType ) {
 							println("\tpublic void ${getMethod}(ByteBuffer $param, int index) { ${method}Get(struct, $param, index); }")
 						}
@@ -842,15 +844,15 @@ class Struct(
 							println("\tpublic ByteBuffer ${getMethod}Buffer() { return ${method}Buffer(struct); }")
 							println("\tpublic String ${getMethod}String() { return ${method}String(struct); }")
 						} else {
-							println("\tpublic ByteBuffer ${getMethod}Buffer(int size) { return ${method}Buffer(struct, size); }")
-							println("\tpublic String ${getMethod}String(int size) { return ${method}String(struct, size); }")
+							println("\tpublic ByteBuffer ${getMethod}Buffer(int $BUFFER_LEN_PARAM) { return ${method}Buffer(struct, $BUFFER_LEN_PARAM); }")
+							println("\tpublic String ${getMethod}String(int $BUFFER_LEN_PARAM) { return ${method}String(struct, $BUFFER_LEN_PARAM); }")
 						}
 					}
 					it.nativeType is StructType                                                            -> {
 						println("\tpublic ByteBuffer ${getMethod}Buffer() { return ${method}Buffer(struct); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic ByteBuffer ${getMethod}(int size) { return ${method}(struct, size); }")
+						println("\tpublic ByteBuffer ${getMethod}(int $BUFFER_LEN_PARAM) { return ${method}(struct, $BUFFER_LEN_PARAM); }")
 					}
 				}
 			}
