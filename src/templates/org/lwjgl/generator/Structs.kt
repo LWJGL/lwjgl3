@@ -593,11 +593,9 @@ class Struct(
 					}
 					it.nativeType is CharSequenceType                                                      -> {
 						print("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ")
-						val buffer = if ( it.nativeType.nullTerminated )
-							"checkNT${it.nativeType.charMapping.bytes}($param)"
-						else
-							param
-						println("${method}($struct, $param == null ? NULL : memAddress($buffer)); }")
+						if ( it.nativeType.nullTerminated )
+							print("if ( $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
+						println("${method}($struct, memAddressSafe($param)); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
 						println("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ${method}($struct, memAddressSafe($param)); }")
@@ -763,18 +761,18 @@ class Struct(
 					}
 					it.nativeType is CharSequenceType                                                      -> {
 						if ( it.nativeType.nullTerminated ) {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memByteBufferNT${it.nativeType.charMapping.bytes}(address); }")
-							println("\tpublic static String ${method}String(ByteBuffer $struct) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(address); }")
+							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBufferNT${it.nativeType.charMapping.bytes}(${method}($struct)); }")
+							println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${it.nativeType.charMapping.charset}(${method}($struct)); }")
 						} else {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
-							println("\tpublic static String ${method}String(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memDecode${it.nativeType.charMapping.charset}(memByteBuffer(address, size)); }")
+							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int size) { return memByteBuffer(${method}($struct), size); }")
+							println("\tpublic static String ${method}String(ByteBuffer $struct, int size) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer(${method}($struct), size)); }")
 						}
 					}
 					it.nativeType is StructType                                                            -> {
 						println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBuffer(${method}($struct), ${it.nativeType.definition.className}.SIZEOF); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int size) { long address = ${method}($struct); return address == NULL ? null : memByteBuffer(address, size); }")
+						println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int size) { return memByteBuffer(${method}($struct), size); }")
 					}
 				}
 			}
