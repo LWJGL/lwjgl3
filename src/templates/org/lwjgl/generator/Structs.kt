@@ -554,11 +554,13 @@ class Struct(
 							val bytesPerElement = if ( mapping === PrimitiveMapping.PTR ) "POINTER_SIZE" else mapping.bytes
 
 							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) {")
+							println("\t\tif ( LWJGLUtil.CHECKS ) {")
 							if ( array is StructMemberCharArray ) {
 								val charMapping = array.nativeType.mapping as CharMapping
-								println("\t\tcheckNT${charMapping.bytes}($param);")
+								println("\t\t\tcheckNT${charMapping.bytes}($param);")
 							}
-							println("\t\tcheckBufferGT($param, ${array.size} * $bytesPerElement);")
+							println("\t\t\tcheckBufferGT($param, ${array.size} * $bytesPerElement);")
+							println("\t\t}")
 							println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field, $param.remaining());")
 							println("\t}")
 
@@ -581,12 +583,12 @@ class Struct(
 							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
 
 							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) {")
-							println("\t\tcheckBufferGT($param, ${array.size} * $SIZEOF);")
+							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
 							println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field, $param.remaining());")
 							println("\t}")
 
 							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param, int index) {")
-							println("\t\tcheckBufferGT($param, $SIZEOF);")
+							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
 							println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field + index * ${nestedStruct.className}.SIZEOF, $param.remaining());")
 							println("\t}")
 						}
@@ -594,7 +596,7 @@ class Struct(
 					it.nativeType is CharSequenceType                                                      -> {
 						print("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ")
 						if ( it.nativeType.nullTerminated )
-							print("if ( $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
+							print("if ( LWJGLUtil.CHECKS && $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
 						println("${method}($struct, memAddressSafe($param)); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
@@ -675,7 +677,7 @@ class Struct(
 				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					val param = it.name.toParam(field)
 					val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
-					println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) { checkBuffer($param, $SIZEOF); memCopy(memAddress($struct) + $field, memAddress($param), $SIZEOF); }")
+					println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) { if ( LWJGLUtil.CHECKS ) checkBuffer($param, $SIZEOF); memCopy(memAddress($struct) + $field, memAddress($param), $SIZEOF); }")
 				}
 				generateStaticGetters(it.nestedMembers, nestedStruct, method, field)
 			} else {
@@ -725,7 +727,7 @@ class Struct(
 							val bytesPerElement = mapping.bytes
 
 							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) {")
-							println("\t\tcheckBufferGT($param, ${array.size} * $bytesPerElement);")
+							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $bytesPerElement);")
 							println("\t\tmemCopy(memAddress($struct) + $field, memAddress($param), $param.remaining());")
 							println("\t}")
 
@@ -749,12 +751,12 @@ class Struct(
 							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
 
 							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) {")
-							println("\t\tcheckBufferGT($param, ${array.size} * $SIZEOF);")
+							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
 							println("\t\tmemCopy(memAddress($struct) + $field, memAddress($param), $param.remaining());")
 							println("\t}")
 
 							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param, int index) {")
-							println("\t\tcheckBufferGT($param, $SIZEOF);")
+							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
 							println("\t\tmemCopy(memAddress($struct) + $field + index * $SIZEOF, memAddress($param), $param.remaining());")
 							println("\t}")
 						}
