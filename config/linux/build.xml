@@ -114,7 +114,7 @@ License terms: http://lwjgl.org/license.php
 		<local name="version.script"/>
 		<property name="version.script" location="config/linux/version.script"/>
 
-		<apply dir="${bin.native}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
+		<apply dir="${lib}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${LWJGL_LIBRARY} ${libs} -Xlinker --version-script -Xlinker ${version.script}"/>
 
@@ -123,10 +123,13 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-ovr" if:true="${build.ovr}"/>
 		</apply>
 
-		<apply dir="${bin.native}" executable="strip" failonerror="true" taskname="Symbol strip">
+		<apply dir="${lib}" executable="strip" failonerror="true" taskname="Symbol strip">
 			<fileset file="${LWJGL_LIBRARY}"/>
 		</apply>
 
-		<move file="${bin.native}/${LWJGL_LIBRARY}" todir="${lib}"/>
+		<apply executable="${org.lwjgl.upx}/upx" failonerror="true" taskname="UPX" if:set="org.lwjgl.upx">
+			<arg value="-9"/>
+			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
+		</apply>
 	</target>
 </project>

@@ -110,7 +110,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<apply dir="${bin.native}" executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
+		<apply dir="${lib}" executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
 			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${LWJGL_LIBRARY}'/>
 			<arg line="-framework AppKit"/>
@@ -124,7 +124,5 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
 		</apply>
-
-		<move file="${bin.native}/${LWJGL_LIBRARY}" todir="${lib}"/>
 	</target>
 </project>
