@@ -17,4 +17,10 @@ public interface Scene {
 			new Vector3f(-1.5f, 1.0f, 2.5f), new Vector3f(1.5f, 0.0f, 1.5f), new Vector3f(2.5f, 1.0f, 2.5f),
 			new Vector3f(1.5f, 0.0f, -2.5f), new Vector3f(2.5f, 1.0f, -1.5f) };
 
+	Vector3f[] boxes2 = { new Vector3f(-5.0f, -0.1f, -5.0f), new Vector3f(5.0f, 0.0f, 5.0f),
+			new Vector3f(-0.5f, 0.0f, -0.5f), new Vector3f(0.5f, 1.0f, 0.5f), new Vector3f(-2.5f, 0.0f, -1.5f),
+			new Vector3f(-1.5f, 1.0f, -0.5f), new Vector3f(-2.5f, 0.0f, 1.5f), new Vector3f(-1.5f, 1.0f, 2.5f),
+			new Vector3f(1.5f, 0.0f, 1.5f), new Vector3f(2.5f, 1.0f, 2.5f), new Vector3f(1.5f, 0.0f, -2.5f),
+			new Vector3f(2.5f, 1.0f, -1.5f) };
+
 }
