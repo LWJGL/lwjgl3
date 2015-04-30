@@ -562,6 +562,21 @@ val ARB_vertex_type_10f_11f_11f_rev = EXT_FLAG.nativeClassGL("ARB_vertex_type_10
 		"""
 }
 
+val EXT_post_depth_coverage = EXT_FLAG.nativeClassGL("EXT_post_depth_coverage", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension allows the fragment shader to control whether values in {@code gl_SampleMaskIn[]} reflect the coverage after application of the early
+		depth and stencil tests.  This feature can be enabled with the following layout qualifier in the fragment shader:
+		${codeBlock("""
+layout(post_depth_coverage) in;""")}
+		To use this feature, early fragment tests must also be enabled in the fragment shader via:
+		${codeBlock("""
+layout(early_fragment_tests) in;""")}
+		"""
+}
+
 val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT) {
 	documentation =
 		"""
@@ -571,6 +586,36 @@ val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT)
 		{@link GL11#GL_LEQUAL LEQUAL} and {@link GL11#GL_GEQUAL GEQUAL}.
 
 		Requires ${"ARB_depth_texture".cap} and ${"ARB_shadow".cap}.
+		"""
+}
+
+val EXT_sparse_texture2 = EXT_FLAG.nativeClassGL("EXT_sparse_texture2", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds on the ${ARB_sparse_texture.link} extension, providing the following new functionality:
+		${ul(
+			"""
+			New built-in GLSL texture lookup and image load functions are provided that return information on whether the texels accessed for the texture
+			lookup accessed uncommitted texture memory.
+
+			New built-in GLSL texture lookup functions are provided that specify a minimum level of detail to use for lookups where the level of detail is
+			computed automatically. This allows shaders to avoid accessing unpopulated portions of high-resolution levels of detail when it knows that the
+			memory accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse"
+			texture lookup functions.
+
+			Reads of uncommitted texture memory will act as though such memory were filled with zeroes; previously, the values returned by reads were undefined.
+
+			Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
+			be requested by leaving ARBSparseTexture#VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
+
+			Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
+			implementation-dependent.
+			"""
+		)}
+
+		Requires ${ARB_sparse_texture.link}.
 		"""
 }
 
