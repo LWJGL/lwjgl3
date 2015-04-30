@@ -18,6 +18,8 @@ val INTEL = "INTEL"
 
 val NV = "NV"
 
+val OVR ="OVR"
+
 val SGI = "SGI"
 val SGIX = "SGIX"
 
@@ -831,6 +833,18 @@ val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = 
 
 		This extension is a superset of the GL_AMD_vertex_shader_layer and GL_AMD_vertex_shader_viewport_index extensions, and thus those extension strings are
 		expected to be exported if GL_NV_viewport_array2 is supported.
+		"""
+}
+
+val OVR_multiview2 = "OVRMultiview2".nativeClassGL("OVR_multiview2", postfix = OVR) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension relaxes the restriction in OVR_multiview that only {@code gl_Position} can depend on {@code ViewID} in the vertex shader.  With this
+		change, view-dependent outputs like reflection vectors and similar are allowed.
+
+		Requires ${GL30.core} and ${OVR_multiview.link}.
 		"""
 }
 
