@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.opengl;
+package org.lwjgl.demo.opengl.shadow;
 
 import static org.lwjgl.demo.util.IOUtil.ioResourceToByteBuffer;
 import static org.lwjgl.glfw.GLFW.*;
@@ -20,6 +20,7 @@ import java.nio.IntBuffer;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
+import org.lwjgl.demo.opengl.DemoUtils;
 import org.lwjgl.demo.opengl.raytracing.Scene;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
@@ -41,11 +42,12 @@ import org.lwjgl.system.libffi.Closure;
 public class ShadowMappingDemo {
 
 	private static Vector3f[] boxes = Scene.boxes2;
+	private static Vector3f UP = new Vector3f(0.0f, 1.0f, 0.0f);
 
 	static int shadowMapSize = 512;
 	static Vector3f lightPosition = new Vector3f(6.0f, 3.0f, 6.0f);
 	static Vector3f lightLookAt = new Vector3f(0.0f, 1.0f, 0.0f);
-	static Vector3f cameraPosition = new Vector3f(-3.0f, 3.0f, 6.0f);
+	static Vector3f cameraPosition = new Vector3f(-3.0f, 6.0f, 6.0f);
 	static Vector3f cameraLookAt = new Vector3f(0.0f, 0.0f, 0.0f);
 
 	long window;
@@ -55,11 +57,11 @@ public class ShadowMappingDemo {
 	int vao;
 	int vbo;
 	int shadowProgram;
-	int shadowProgramMVPUniform;
+	int shadowProgramVPUniform;
 	int normalProgram;
 	int normalProgramBiasUniform;
-	int normalProgramMVPUniform;
-	int normalProgramLMVPUniform;
+	int normalProgramVPUniform;
+	int normalProgramLVPUniform;
 	int normalProgramLightPosition;
 	int normalProgramLightLookAt;
 	int fbo;
@@ -72,8 +74,7 @@ public class ShadowMappingDemo {
 	Camera lightView = new Camera();
 	Camera cameraView = new Camera();
 	Matrix4f lightMatrix = new Matrix4f();
-	Matrix4f biasMatrix = new Matrix4f(0.5f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f, 0.0f, 0.5f, 0.5f, 0.0f,
-			0.0f, 0.0f, 1.0f);
+	Matrix4f biasMatrix = new Matrix4f(0.5f, 0.0f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f, 0.5f, 0.0f, 0.0f, 0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f);
 	Matrix4f cameraMatrix = new Matrix4f();
 
 	GLContext ctx;
@@ -108,16 +109,14 @@ public class ShadowMappingDemo {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, "Uniform array test", NULL, NULL);
+		window = glfwCreateWindow(width, height, "Shadow Mapping Demo", NULL, NULL);
 		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
-		System.out.println("Press 'up' or 'down' to cycle through some colors.");
 
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			public void invoke(long window, int width, int height) {
-				if (width > 0 && height > 0
-						&& (ShadowMappingDemo.this.width != width || ShadowMappingDemo.this.height != height)) {
+				if (width > 0 && height > 0 && (ShadowMappingDemo.this.width != width || ShadowMappingDemo.this.height != height)) {
 					ShadowMappingDemo.this.width = width;
 					ShadowMappingDemo.this.height = height;
 				}
@@ -151,6 +150,12 @@ public class ShadowMappingDemo {
 		initNormalProgram();
 		createDepthTexture();
 		createFbo();
+
+		/* Initialize light MVP matrix */
+		lightView.setFrustumPerspective(45.0f, 1.0f, 0.1f, 30.0f);
+		lightView.setLookAt(lightPosition, lightLookAt, UP);
+		lightMatrix.set(lightView.getProjectionMatrix());
+		lightMatrix.mul(lightView.getViewMatrix());
 	}
 
 	/**
@@ -163,8 +168,8 @@ public class ShadowMappingDemo {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT,
-				GL_UNSIGNED_BYTE, (ByteBuffer) null);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, shadowMapSize, shadowMapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_BYTE,
+				(ByteBuffer) null);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -233,8 +238,8 @@ public class ShadowMappingDemo {
 
 	void createShadowProgram() throws IOException {
 		shadowProgram = glCreateProgram();
-		int vshader = createShader("demo/shadowMapping-vs.glsl", GL_VERTEX_SHADER);
-		int fshader = createShader("demo/shadowMapping-fs.glsl", GL_FRAGMENT_SHADER);
+		int vshader = createShader("demo/shadow/shadowMapping-vs.glsl", GL_VERTEX_SHADER);
+		int fshader = createShader("demo/shadow/shadowMapping-fs.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(shadowProgram, vshader);
 		glAttachShader(shadowProgram, fshader);
 		glBindAttribLocation(shadowProgram, 0, "position");
@@ -251,14 +256,14 @@ public class ShadowMappingDemo {
 
 	void initShadowProgram() {
 		glUseProgram(shadowProgram);
-		shadowProgramMVPUniform = glGetUniformLocation(shadowProgram, "modelViewProjectionMatrix");
+		shadowProgramVPUniform = glGetUniformLocation(shadowProgram, "viewProjectionMatrix");
 		glUseProgram(0);
 	}
 
 	void createNormalProgram() throws IOException {
 		normalProgram = glCreateProgram();
-		int vshader = createShader("demo/shadowMappingShade-vs.glsl", GL_VERTEX_SHADER);
-		int fshader = createShader("demo/shadowMappingShade-fs.glsl", GL_FRAGMENT_SHADER);
+		int vshader = createShader("demo/shadow/shadowMappingShade-vs.glsl", GL_VERTEX_SHADER);
+		int fshader = createShader("demo/shadow/shadowMappingShade-fs.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(normalProgram, vshader);
 		glAttachShader(normalProgram, fshader);
 		glBindAttribLocation(normalProgram, 0, "position");
@@ -278,8 +283,8 @@ public class ShadowMappingDemo {
 		glUseProgram(normalProgram);
 		samplerLocation = glGetUniformLocation(normalProgram, "depthTexture");
 		normalProgramBiasUniform = glGetUniformLocation(normalProgram, "biasMatrix");
-		normalProgramMVPUniform = glGetUniformLocation(normalProgram, "modelViewProjectionMatrix");
-		normalProgramLMVPUniform = glGetUniformLocation(normalProgram, "lightModelViewProjectionMatrix");
+		normalProgramVPUniform = glGetUniformLocation(normalProgram, "viewProjectionMatrix");
+		normalProgramLVPUniform = glGetUniformLocation(normalProgram, "lightViewProjectionMatrix");
 		normalProgramLightPosition = glGetUniformLocation(normalProgram, "lightPosition");
 		normalProgramLightLookAt = glGetUniformLocation(normalProgram, "lightLookAt");
 		glUniform1i(samplerLocation, 0);
@@ -287,15 +292,11 @@ public class ShadowMappingDemo {
 	}
 
 	/**
-	 * Update the camera and light matrices.
+	 * Update the camera MVP matrix.
 	 */
 	void update() {
-		lightView.setFrustumPerspective(45.0f, 1.0f, 0.1f, 30.0f);
-		lightView.setLookAt(lightPosition, lightLookAt, new Vector3f(0.0f, 1.0f, 0.0f));
-		lightMatrix.set(lightView.getProjectionMatrix());
-		lightMatrix.mul(lightView.getViewMatrix());
 		cameraView.setFrustumPerspective(45.0f, (float) width / height, 0.1f, 30.0f);
-		cameraView.setLookAt(cameraPosition, cameraLookAt, new Vector3f(0.0f, 1.0f, 0.0f));
+		cameraView.setLookAt(cameraPosition, cameraLookAt, UP);
 		cameraMatrix.set(cameraView.getProjectionMatrix());
 		cameraMatrix.mul(cameraView.getViewMatrix());
 	}
@@ -307,7 +308,7 @@ public class ShadowMappingDemo {
 		glUseProgram(shadowProgram);
 
 		/* Set MVP matrix of the "light camera" */
-		matrixUniform(shadowProgramMVPUniform, lightMatrix, false);
+		matrixUniform(shadowProgramVPUniform, lightMatrix, false);
 
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glViewport(0, 0, shadowMapSize, shadowMapSize);
@@ -329,14 +330,12 @@ public class ShadowMappingDemo {
 		glUseProgram(normalProgram);
 
 		/* Set MVP matrix of camera */
-		matrixUniform(normalProgramMVPUniform, cameraMatrix, false);
+		matrixUniform(normalProgramVPUniform, cameraMatrix, false);
 		/* Set MVP matrix that was used when doing the light-render */
-		matrixUniform(normalProgramLMVPUniform, lightMatrix, false);
+		matrixUniform(normalProgramLVPUniform, lightMatrix, false);
 		/* The bias-matrix used to convert to NDC coordinates */
 		matrixUniform(normalProgramBiasUniform, biasMatrix, false);
-		/*
-		 * Light position and lookat for normal lambertian computation
-		 */
+		/* Light position and lookat for normal lambertian computation */
 		glUniform3f(normalProgramLightPosition, lightPosition.x, lightPosition.y, lightPosition.z);
 		glUniform3f(normalProgramLightLookAt, lightLookAt.x, lightLookAt.y, lightLookAt.z);
 
@@ -353,9 +352,9 @@ public class ShadowMappingDemo {
 	}
 
 	private void matrixUniform(int location, Matrix4f value, boolean transpose) {
-		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01)
-				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
-				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
+		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01).put(value.m11).put(value.m21)
+				.put(value.m31).put(value.m02).put(value.m12).put(value.m22).put(value.m32).put(value.m03).put(value.m13).put(value.m23)
+				.put(value.m33);
 		matrixByteBufferFloatView.rewind();
 		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}

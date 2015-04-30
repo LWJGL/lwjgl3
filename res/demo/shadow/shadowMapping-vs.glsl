@@ -4,10 +4,10 @@
  */
 #version 130
 
-uniform mat4 modelViewProjectionMatrix;
+uniform mat4 viewProjectionMatrix;
 
 in vec3 position;
 
 void main(void) {
-	gl_Position = modelViewProjectionMatrix * vec4(position, 1.0);
+	gl_Position = viewProjectionMatrix * vec4(position, 1.0);
 }
