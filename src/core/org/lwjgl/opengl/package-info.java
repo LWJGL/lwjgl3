@@ -1,5 +1,5 @@
 /**
- * Provides the classes and interfaces necessary for OpenGL.
+ * Provides the classes necessary for OpenGL.
  *
  * <p>
  * OpenGL (Open Graphics Library) is a cross-language, cross-platform API
@@ -7,4 +7,4 @@
  *
  * @see <a href="https://www.opengl.org/">opengl.org</a>
  */
-package core.org.lwjgl.opengl;
+package org.lwjgl.opengl;

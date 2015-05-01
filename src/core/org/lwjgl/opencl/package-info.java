@@ -8,4 +8,4 @@
  *
  * @see <a href="https://www.khronos.org/opencl/">khronos.org/opencl</a>
  */
-package core.org.lwjgl.opencl;
+package org.lwjgl.opencl;
