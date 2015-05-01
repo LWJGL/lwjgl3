@@ -25,4 +25,4 @@
  *
  * @see <a href="http://www.lwjgl.org/">lwjgl.org</a>
  */
-package core.org.lwjgl;
+package org.lwjgl;
