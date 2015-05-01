@@ -10,11 +10,15 @@ uniform mat4 biasMatrix;
 
 in vec3 position;
 in vec3 normal;
+
 out vec4 lightBiasedClipPosition;
+out vec3 worldPosition;
 out vec3 worldNormal;
 
 void main(void) {
-	/* Pass the normal to the fragment shader (we do lighting computations in world coordinates) */
+	/* Pass the position and normal to the fragment shader
+	   (we do lighting computations in world coordinates) */
+	worldPosition = position;
 	worldNormal = normal;
 
 	/* Compute vertex position as seen from

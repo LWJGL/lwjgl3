@@ -5,6 +5,7 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.demo.opengl.DemoUtils;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
@@ -299,7 +300,7 @@ public class HybridDemo {
 		ByteBuffer bb = BufferUtils.createByteBuffer(boxes.length * 4 * (3 + 3) * 6 * 6);
 		FloatBuffer fv = bb.asFloatBuffer();
 		for (int i = 0; i < boxes.length; i += 2) {
-			triangulateBox(boxes[i], boxes[i + 1], fv);
+			DemoUtils.triangulateBox(boxes[i], boxes[i + 1], fv);
 		}
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
@@ -309,63 +310,6 @@ public class HybridDemo {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		this.vaoScene = vao;
-	}
-
-	/**
-	 * Write the vertices (position and normal) of an axis-aligned box with the
-	 * given corner coordinates into the provided {@link FloatBuffer}.
-	 * 
-	 * @param min
-	 *            the min corner
-	 * @param max
-	 *            the max corner
-	 * @param fv
-	 *            the {@link FloatBuffer} receiving the vertex position and
-	 *            normal
-	 */
-	private static void triangulateBox(Vector3f min, Vector3f max, FloatBuffer fv) {
-		/* Front face */
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(0.0f).put(1.0f);
-		/* Back face */
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(0.0f).put(-1.0f);
-		/* Left face */
-		fv.put(min.x).put(min.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(-1.0f).put(0.0f).put(0.0f);
-		/* Right face */
-		fv.put(max.x).put(min.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(1.0f).put(0.0f).put(0.0f);
-		/* Top face */
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(max.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(min.z).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(min.x).put(max.y).put(max.z).put(0.0f).put(1.0f).put(0.0f);
-		/* Bottom face */
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(max.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
 	}
 
 	/**

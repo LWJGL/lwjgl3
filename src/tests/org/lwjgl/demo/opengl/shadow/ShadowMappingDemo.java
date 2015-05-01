@@ -44,11 +44,13 @@ public class ShadowMappingDemo {
 	private static Vector3f[] boxes = Scene.boxes2;
 	private static Vector3f UP = new Vector3f(0.0f, 1.0f, 0.0f);
 
-	static int shadowMapSize = 512;
+	static int shadowMapSize = 1024;
 	static Vector3f lightPosition = new Vector3f(6.0f, 3.0f, 6.0f);
 	static Vector3f lightLookAt = new Vector3f(0.0f, 1.0f, 0.0f);
 	static Vector3f cameraPosition = new Vector3f(-3.0f, 6.0f, 6.0f);
 	static Vector3f cameraLookAt = new Vector3f(0.0f, 0.0f, 0.0f);
+	static float lightDistance = 10.0f;
+	static float lightHeight = 4.0f;
 
 	long window;
 	int width = 1200;
@@ -140,7 +142,7 @@ public class ShadowMappingDemo {
 		/* Set some GL states */
 		glEnable(GL_CULL_FACE);
 		glEnable(GL_DEPTH_TEST);
-		glClearColor(0.6f, 0.7f, 0.8f, 1.0f);
+		glClearColor(0.2f, 0.3f, 0.4f, 1.0f);
 
 		/* Create all needed GL resources */
 		createVao();
@@ -152,10 +154,7 @@ public class ShadowMappingDemo {
 		createFbo();
 
 		/* Initialize light MVP matrix */
-		lightView.setFrustumPerspective(45.0f, 1.0f, 0.1f, 30.0f);
-		lightView.setLookAt(lightPosition, lightLookAt, UP);
-		lightMatrix.set(lightView.getProjectionMatrix());
-		lightMatrix.mul(lightView.getViewMatrix());
+		lightView.setFrustumPerspective(45.0f, 1.0f, 0.1f, 60.0f);
 	}
 
 	/**
@@ -295,6 +294,16 @@ public class ShadowMappingDemo {
 	 * Update the camera MVP matrix.
 	 */
 	void update() {
+		/* Update light */
+		double alpha = System.currentTimeMillis() / 1000.0 * 0.5;
+		float x = (float) Math.sin(alpha);
+		float z = (float) Math.cos(alpha);
+		lightPosition.set(lightDistance * x, lightHeight, lightDistance * z);
+		lightView.setLookAt(lightPosition, lightLookAt, UP);
+		lightMatrix.set(lightView.getProjectionMatrix());
+		lightMatrix.mul(lightView.getViewMatrix());
+
+		/* Update camera */
 		cameraView.setFrustumPerspective(45.0f, (float) width / height, 0.1f, 30.0f);
 		cameraView.setLookAt(cameraPosition, cameraLookAt, UP);
 		cameraMatrix.set(cameraView.getProjectionMatrix());

@@ -4,28 +4,14 @@
  */
 package org.lwjgl.demo.opengl;
 
-import static org.lwjgl.demo.util.IOUtil.ioResourceToByteBuffer;
-import static org.lwjgl.opengl.GL20.GL_COMPILE_STATUS;
-import static org.lwjgl.opengl.GL20.glCompileShader;
-import static org.lwjgl.opengl.GL20.glCreateShader;
-import static org.lwjgl.opengl.GL20.glGetShaderInfoLog;
-import static org.lwjgl.opengl.GL20.glGetShaderi;
-import static org.lwjgl.opengl.GL20.glShaderSource;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.PointerBuffer;
 import org.lwjgl.demo.util.Vector3f;
 
 /**
  * Utility methods for most of the ray tracing demos.
  * 
  * @author Kai Burjack
- *
  */
 public class DemoUtils {
 
@@ -97,5 +83,5 @@ public class DemoUtils {
 		fv.put(min.x).put(min.y).put(max.z).put(0.0f).put(-1.0f).put(0.0f);
 		fv.put(min.x).put(min.y).put(min.z).put(0.0f).put(-1.0f).put(0.0f);
 	}
-	
+
 }

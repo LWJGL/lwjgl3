@@ -5,6 +5,7 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.demo.opengl.DemoUtils;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
@@ -326,7 +327,7 @@ public class HybridDemoSsboInstancing {
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
 		ByteBuffer bb = BufferUtils.createByteBuffer(4 * (3 + 3) * 6 * 6);
 		FloatBuffer fv = bb.asFloatBuffer();
-		triangulateUnitBox(fv);
+		DemoUtils.triangulateUnitBox(fv);
 		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 4 * (3 + 3), 0L);
@@ -355,59 +356,6 @@ public class HybridDemoSsboInstancing {
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		this.vaoScene = vao;
-	}
-
-	/**
-	 * Write the vertices (position and normal) of an axis-aligned unit box into
-	 * the provided {@link FloatBuffer}.
-	 * 
-	 * @param fv
-	 *            the {@link FloatBuffer} receiving the vertex position and
-	 *            normal
-	 */
-	private static void triangulateUnitBox(FloatBuffer fv) {
-		/* Front face */
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		/* Back face */
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		/* Left face */
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		/* Right face */
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		/* Top face */
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		/* Bottom face */
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
 	}
 
 	/**

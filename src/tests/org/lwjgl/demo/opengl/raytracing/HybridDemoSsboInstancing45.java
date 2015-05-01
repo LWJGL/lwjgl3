@@ -5,6 +5,7 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.demo.opengl.DemoUtils;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
@@ -290,7 +291,7 @@ public class HybridDemoSsboInstancing45 {
 	 */
 	private void createSceneSSBO() {
 		this.ssbo = glCreateBuffers();
-		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4)
+		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 + 4 + 4)
 				* boxes.length / 2);
 		FloatBuffer fv = ssboData.asFloatBuffer();
 		for (int i = 0; i < boxes.length; i += 2) {
@@ -341,7 +342,7 @@ public class HybridDemoSsboInstancing45 {
 		int vbo = glCreateBuffers();
 		ByteBuffer bb = BufferUtils.createByteBuffer(4 * (3 + 3) * 6 * 6);
 		FloatBuffer fv = bb.asFloatBuffer();
-		triangulateUnitBox(fv);
+		DemoUtils.triangulateUnitBox(fv);
 		glNamedBufferData(vbo, bb, GL_STATIC_DRAW);
 		glEnableVertexArrayAttrib(vao, 0);
 		glVertexArrayAttribFormat(vao, 0, 3, GL_FLOAT, false, 0);
@@ -376,59 +377,6 @@ public class HybridDemoSsboInstancing45 {
 		glVertexArrayAttribBinding(vao, 3, 3);
 		glVertexArrayBindingDivisor(vao, 3, 1);
 		this.vaoScene = vao;
-	}
-
-	/**
-	 * Write the vertices (position and normal) of an axis-aligned unit box into
-	 * the provided {@link FloatBuffer}.
-	 * 
-	 * @param fv
-	 *            the {@link FloatBuffer} receiving the vertex position and
-	 *            normal
-	 */
-	private static void triangulateUnitBox(FloatBuffer fv) {
-		/* Front face */
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f).put(1.0f);
-		/* Back face */
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f).put(-1.0f);
-		/* Left face */
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(0.0f);
-		/* Right face */
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(0.0f);
-		/* Top face */
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(-1.0f).put(0.0f).put(1.0f).put(0.0f);
-		fv.put(-1.0f).put(1.0f).put(1.0f).put(0.0f).put(1.0f).put(0.0f);
-		/* Bottom face */
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(1.0f).put(0.0f).put(-1.0f).put(0.0f);
-		fv.put(-1.0f).put(-1.0f).put(-1.0f).put(0.0f).put(-1.0f).put(0.0f);
 	}
 
 	/**
