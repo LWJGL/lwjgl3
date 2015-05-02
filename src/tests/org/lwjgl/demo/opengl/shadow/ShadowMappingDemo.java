@@ -116,6 +116,17 @@ public class ShadowMappingDemo {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
 
+		glfwSetKeyCallback(window, keyCallback = new GLFWKeyCallback() {
+			@Override
+			public void invoke(long window, int key, int scancode, int action, int mods) {
+				if (action != GLFW_RELEASE)
+					return;
+
+				if (key == GLFW_KEY_ESCAPE) {
+					glfwSetWindowShouldClose(window, GL_TRUE);
+				}
+			}
+		});
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			public void invoke(long window, int width, int height) {
 				if (width > 0 && height > 0 && (ShadowMappingDemo.this.width != width || ShadowMappingDemo.this.height != height)) {
@@ -192,7 +203,7 @@ public class ShadowMappingDemo {
 	/**
 	 * Creates a VAO for the scene with some boxes.
 	 */
-	private void createVao() {
+	void createVao() {
 		vao = glGenVertexArrays();
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
@@ -389,6 +400,7 @@ public class ShadowMappingDemo {
 				debugProc.release();
 
 			errCallback.release();
+			keyCallback.release();
 			fbCallback.release();
 			glfwDestroyWindow(window);
 		} catch (Throwable t) {

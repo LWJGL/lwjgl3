@@ -30,7 +30,7 @@ void main(void) {
 	color = vec4(AMBIENT, AMBIENT, AMBIENT, 1.0);
 
 	/* "in shadow" test... */
-	if (dot > 0.0 && depth.z >= lightNDCPosition.z - DEPTH_OFFSET) {
+	if (depth.z >= lightNDCPosition.z - DEPTH_OFFSET) {
 		/* lit */
 		color += vec4(LIGHT_INTENSITY, LIGHT_INTENSITY, LIGHT_INTENSITY, 1.0) * dot;
 	}

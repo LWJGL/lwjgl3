@@ -15,6 +15,9 @@ import org.lwjgl.demo.util.Vector3f;
  */
 public class DemoUtils {
 
+	private static final Vector3f VECTOR_MINUS_ONE = new Vector3f(-1.0f, -1.0f, -1.0f);
+	private static final Vector3f VECTOR_PLUS_ONE = new Vector3f(1.0f, 1.0f, 1.0f);
+
 	/**
 	 * Write the vertices (position and normal) of an axis-aligned unit box into
 	 * the provided {@link FloatBuffer}.
@@ -24,7 +27,7 @@ public class DemoUtils {
 	 *            normal
 	 */
 	public static void triangulateUnitBox(FloatBuffer fv) {
-		triangulateBox(new Vector3f(-1.0f, -1.0f, -1.0f), new Vector3f(1.0f, 1.0f, 1.0f), fv);
+		triangulateBox(VECTOR_MINUS_ONE, VECTOR_PLUS_ONE, fv);
 	}
 
 	/**

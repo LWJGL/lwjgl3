@@ -3,7 +3,7 @@
  * License terms: http://lwjgl.org/license.php
  */
 #version 400
-#extension GL_NV_bindless_texture : require
+#extension GL_ARB_bindless_texture : require
 
 #define MAX_BOXES 128
 
@@ -17,6 +17,6 @@ flat in int level;
 out vec4 color;
 
 void main(void) {
-  float r = texture(samplers[level], normalize(positionOnUnitCube)).r;
+  float r = texture(samplers[level], positionOnUnitCube).r;
   color = vec4(r, r, r, 1.0);
 }
