@@ -191,7 +191,7 @@ public class HybridDemo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 && (HybridDemo.this.width != width || HybridDemo.this.height != height) ) {
+				if (width > 0 && height > 0 && (HybridDemo.this.width != width || HybridDemo.this.height != height)) {
 					HybridDemo.this.width = width;
 					HybridDemo.this.height = height;
 					HybridDemo.this.resetFramebuffer = true;
@@ -203,8 +203,8 @@ public class HybridDemo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				HybridDemo.this.mouseX = (float)x;
-				if ( mouseDown ) {
+				HybridDemo.this.mouseX = (float) x;
+				if (mouseDown) {
 					HybridDemo.this.frameNumber = 0;
 				}
 			}
@@ -213,10 +213,10 @@ public class HybridDemo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if ( action == GLFW_PRESS ) {
+				if (action == GLFW_PRESS) {
 					HybridDemo.this.mouseDownX = HybridDemo.this.mouseX;
 					HybridDemo.this.mouseDown = true;
-				} else if ( action == GLFW_RELEASE ) {
+				} else if (action == GLFW_RELEASE) {
 					HybridDemo.this.mouseDown = false;
 					HybridDemo.this.rotationAboutY = HybridDemo.this.currRotationAboutY;
 				}
@@ -394,8 +394,10 @@ public class HybridDemo {
 		int program = glCreateProgram();
 		int cshader = Demo.createShader("demo/raytracing/hybrid.glsl", GL_COMPUTE_SHADER);
 		int random = Demo.createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
+		int randomCommon = Demo.createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
+		glAttachShader(program, randomCommon);
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);
@@ -546,9 +548,9 @@ public class HybridDemo {
 	 *            that)
 	 */
 	private void matrixUniform(int location, Matrix4f value, boolean transpose) {
-		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01)
-				.put(value.m11).put(value.m21).put(value.m31).put(value.m02).put(value.m12).put(value.m22)
-				.put(value.m32).put(value.m03).put(value.m13).put(value.m23).put(value.m33);
+		matrixByteBufferFloatView.put(value.m00).put(value.m10).put(value.m20).put(value.m30).put(value.m01).put(value.m11).put(value.m21)
+				.put(value.m31).put(value.m02).put(value.m12).put(value.m22).put(value.m32).put(value.m03).put(value.m13).put(value.m23)
+				.put(value.m33);
 		matrixByteBufferFloatView.rewind();
 		glUniformMatrix4fv(location, 1, transpose, matrixByteBuffer);
 	}

@@ -280,10 +280,12 @@ public class Demo33 {
 		int program = glCreateProgram();
 		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
 		int fshader = Demo.createShader("demo/raytracing/raytracing.fs", GL_FRAGMENT_SHADER);
-		int rndshader = Demo.createShader("demo/raytracing/random.glsl", GL_FRAGMENT_SHADER);
+		int random = Demo.createShader("demo/raytracing/random.glsl", GL_FRAGMENT_SHADER);
+		int randomCommon = Demo.createShader("demo/raytracing/randomCommon.glsl", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
-		glAttachShader(program, rndshader);
+		glAttachShader(program, random);
+		glAttachShader(program, randomCommon);
 		glBindAttribLocation(program, 0, "vertex");
 		glBindFragDataLocation(program, 0, "color");
 		glLinkProgram(program);

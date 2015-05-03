@@ -346,8 +346,10 @@ public class Demo {
 		int program = glCreateProgram();
 		int cshader = createShader("demo/raytracing/raytracing.glslcs", GL_COMPUTE_SHADER);
 		int random = createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
+		int randomCommon = createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
+		glAttachShader(program, randomCommon);
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);

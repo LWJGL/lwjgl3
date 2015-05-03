@@ -5,11 +5,13 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.system.libffi.Closure;
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Vector3f;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.ARBShaderAtomicCounters;
+import org.lwjgl.opengl.GLContext;
+import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -17,24 +19,38 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
-import static org.lwjgl.opengl.GL31.*;
 import static org.lwjgl.opengl.GL33.*;
+import static org.lwjgl.opengl.GL42.*;
+import static org.lwjgl.opengl.GL43.*;
+import static org.lwjgl.system.MathUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * Raytracing demo.
- * <p/>
- * Same as {@link Demo33} but with using a Uniform Buffer Object to transfer the
- * camera parameters to the shader.
+ * Same as {@link Demo} but it uses a pseudo-random number generator based on
+ * {@link ARBShaderAtomicCounters}.
+ * <p>
+ * This should showcase the use of atomic counter buffers in GLSL shaders. In
+ * detail, there is a new <code>random()</code> GLSL function which implicitly
+ * takes an atomic counter and increments it everytime the function is called.
+ * What was once the combination of screen coordinate parameterization and time
+ * to achieve variance of the generated random value over each pixel is now a
+ * single atomic counter.
+ * <p>
+ * In later demos (especially with correct "by the book" photon mapping), which
+ * use rays originating from the light source we are going to need this
+ * approach, since otherwise we cannot have different random reflection
+ * directions, since the direction will always depend on constant "random"
+ * values. This will be explained in later demos!
  *
  * @author Kai Burjack
  */
-public class Demo33Ubo {
+public class AtomicDemo {
 
 	private long window;
 	private int width = 1024;
@@ -43,26 +59,22 @@ public class Demo33Ubo {
 
 	private int tex;
 	private int vao;
-	private int fbo;
-	private int rayTracingProgram;
+	private int computeProgram;
 	private int quadProgram;
 	private int sampler;
-	private int cameraSettingsUbo;
-	private ByteBuffer cameraSettingsUboData = BufferUtils.createByteBuffer(4 * 4 * 5);
-	private FloatBuffer cameraSettingsUboDataFb = cameraSettingsUboData.asFloatBuffer();
+	private int atomicBuffer;
 
-	/**
-	 * The UBO binding point that we assign manually. In OpenGL 4.3 this can be
-	 * queried from the linked program via glGetProgramResource.
-	 */
-	private int cameraSettingsUboBinding = 1;
-
-	private int timeUniform;
+	private int eyeUniform;
+	private int ray00Uniform;
+	private int ray10Uniform;
+	private int ray01Uniform;
+	private int ray11Uniform;
 	private int blendFactorUniform;
-	private int framebufferUniform;
-	private int widthUniform;
-	private int heightUniform;
 	private int bounceCountUniform;
+	private int framebufferImageBinding;
+
+	private int workGroupSizeX;
+	private int workGroupSizeY;
 
 	private Camera camera;
 	private float mouseDownX;
@@ -72,7 +84,6 @@ public class Demo33Ubo {
 	private float currRotationAboutY = 0.0f;
 	private float rotationAboutY = 0.8f;
 
-	private long firstTime;
 	private int frameNumber;
 	private int bounceCount = 1;
 
@@ -88,13 +99,6 @@ public class Demo33Ubo {
 
 	Closure debugProc;
 
-	static {
-		/*
-		 * Tell LWJGL that we only want 3.3 functionality.
-		 */
-		System.setProperty("org.lwjgl.opengl.maxVersion", "3.3");
-	}
-
 	private void init() throws IOException {
 		glfwSetErrorCallback(errCallback = new GLFWErrorCallback() {
 			private GLFWErrorCallback delegate = Callbacks.errorCallbackPrint(System.err);
@@ -102,7 +106,7 @@ public class Demo33Ubo {
 			@Override
 			public void invoke(int error, long description) {
 				if (error == GLFW_VERSION_UNAVAILABLE)
-					System.err.println("This demo requires OpenGL 3.3 or higher.");
+					System.err.println("This demo requires OpenGL 4.3 or higher. The Demo33 version works on OpenGL 3.3 or higher.");
 				delegate.invoke(error, description);
 			}
 
@@ -119,12 +123,12 @@ public class Demo33Ubo {
 		glfwDefaultWindowHints();
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, "Raytracing Demo (fragment shader)", NULL, NULL);
+		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader)", NULL, NULL);
 		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
@@ -141,18 +145,18 @@ public class Demo33Ubo {
 				if (key == GLFW_KEY_ESCAPE) {
 					glfwSetWindowShouldClose(window, GL_TRUE);
 				} else if (key == GLFW_KEY_KP_ADD || key == GLFW_KEY_PAGE_UP) {
-					int newBounceCount = Math.min(4, Demo33Ubo.this.bounceCount + 1);
-					if (newBounceCount != Demo33Ubo.this.bounceCount) {
-						Demo33Ubo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + Demo33Ubo.this.bounceCount);
-						Demo33Ubo.this.frameNumber = 0;
+					int newBounceCount = Math.min(4, AtomicDemo.this.bounceCount + 1);
+					if (newBounceCount != AtomicDemo.this.bounceCount) {
+						AtomicDemo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + AtomicDemo.this.bounceCount);
+						AtomicDemo.this.frameNumber = 0;
 					}
 				} else if (key == GLFW_KEY_KP_SUBTRACT || key == GLFW_KEY_PAGE_DOWN) {
-					int newBounceCount = Math.max(1, Demo33Ubo.this.bounceCount - 1);
-					if (newBounceCount != Demo33Ubo.this.bounceCount) {
-						Demo33Ubo.this.bounceCount = newBounceCount;
-						System.out.println("Ray bounce count is now: " + Demo33Ubo.this.bounceCount);
-						Demo33Ubo.this.frameNumber = 0;
+					int newBounceCount = Math.max(1, AtomicDemo.this.bounceCount - 1);
+					if (newBounceCount != AtomicDemo.this.bounceCount) {
+						AtomicDemo.this.bounceCount = newBounceCount;
+						System.out.println("Ray bounce count is now: " + AtomicDemo.this.bounceCount);
+						AtomicDemo.this.frameNumber = 0;
 					}
 				}
 			}
@@ -161,11 +165,11 @@ public class Demo33Ubo {
 		glfwSetFramebufferSizeCallback(window, fbCallback = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				if ( width > 0 && height > 0 && (Demo33Ubo.this.width != width || Demo33Ubo.this.height != height) ) {
-					Demo33Ubo.this.width = width;
-					Demo33Ubo.this.height = height;
-					Demo33Ubo.this.resetFramebuffer = true;
-					Demo33Ubo.this.frameNumber = 0;
+				if (width > 0 && height > 0 && (AtomicDemo.this.width != width || AtomicDemo.this.height != height)) {
+					AtomicDemo.this.width = width;
+					AtomicDemo.this.height = height;
+					AtomicDemo.this.resetFramebuffer = true;
+					AtomicDemo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -173,9 +177,9 @@ public class Demo33Ubo {
 		glfwSetCursorPosCallback(window, cpCallback = new GLFWCursorPosCallback() {
 			@Override
 			public void invoke(long window, double x, double y) {
-				Demo33Ubo.this.mouseX = (float)x;
-				if ( mouseDown ) {
-					Demo33Ubo.this.frameNumber = 0;
+				AtomicDemo.this.mouseX = (float) x;
+				if (mouseDown) {
+					AtomicDemo.this.frameNumber = 0;
 				}
 			}
 		});
@@ -183,12 +187,12 @@ public class Demo33Ubo {
 		glfwSetMouseButtonCallback(window, mbCallback = new GLFWMouseButtonCallback() {
 			@Override
 			public void invoke(long window, int button, int action, int mods) {
-				if ( action == GLFW_PRESS ) {
-					Demo33Ubo.this.mouseDownX = Demo33Ubo.this.mouseX;
-					Demo33Ubo.this.mouseDown = true;
-				} else if ( action == GLFW_RELEASE ) {
-					Demo33Ubo.this.mouseDown = false;
-					Demo33Ubo.this.rotationAboutY = Demo33Ubo.this.currRotationAboutY;
+				if (action == GLFW_PRESS) {
+					AtomicDemo.this.mouseDownX = AtomicDemo.this.mouseX;
+					AtomicDemo.this.mouseDown = true;
+				} else if (action == GLFW_RELEASE) {
+					AtomicDemo.this.mouseDown = false;
+					AtomicDemo.this.rotationAboutY = AtomicDemo.this.currRotationAboutY;
 				}
 			}
 		});
@@ -209,18 +213,15 @@ public class Demo33Ubo {
 		/* Create all needed GL resources */
 		createFramebufferTexture();
 		createSampler();
-		createFrameBufferObject();
-		createCameraSettingsUbo();
 		quadFullScreenVao();
-		createRayTracingProgram();
-		initRayTracingProgram();
+		createComputeProgram();
+		initComputeProgram();
 		createQuadProgram();
 		initQuadProgram();
+		createAtomicBuffer();
 
 		/* Setup camera */
 		camera = new Camera();
-
-		firstTime = System.nanoTime();
 	}
 
 	/**
@@ -247,14 +248,91 @@ public class Demo33Ubo {
 	}
 
 	/**
+	 * Create a shader object from the given classpath resource.
+	 *
+	 * @param resource
+	 *            the class path
+	 * @param type
+	 *            the shader type
+	 *
+	 * @return the shader object id
+	 *
+	 * @throws IOException
+	 */
+	static int createShader(String resource, int type) throws IOException {
+		return createShader(resource, type, null);
+	}
+
+	/**
+	 * Create a shader object from the given classpath resource.
+	 *
+	 * @param resource
+	 *            the class path
+	 * @param type
+	 *            the shader type
+	 * @param version
+	 *            the GLSL version to prepend to the shader source, or null
+	 *
+	 * @return the shader object id
+	 *
+	 * @throws IOException
+	 */
+	static int createShader(String resource, int type, String version) throws IOException {
+		int shader = glCreateShader(type);
+
+		ByteBuffer source = ioResourceToByteBuffer(resource, 8192);
+
+		if (version == null) {
+			PointerBuffer strings = BufferUtils.createPointerBuffer(1);
+			IntBuffer lengths = BufferUtils.createIntBuffer(1);
+
+			strings.put(0, source);
+			lengths.put(0, source.remaining());
+
+			glShaderSource(shader, strings, lengths);
+		} else {
+			PointerBuffer strings = BufferUtils.createPointerBuffer(2);
+			IntBuffer lengths = BufferUtils.createIntBuffer(2);
+
+			ByteBuffer preamble = memEncodeUTF8("#version " + version + "\n", false);
+
+			strings.put(0, preamble);
+			lengths.put(0, preamble.remaining());
+
+			strings.put(1, source);
+			lengths.put(1, source.remaining());
+
+			glShaderSource(shader, strings, lengths);
+		}
+
+		glCompileShader(shader);
+		int compiled = glGetShaderi(shader, GL_COMPILE_STATUS);
+		String shaderLog = glGetShaderInfoLog(shader);
+		if (!shaderLog.trim().isEmpty()) {
+			System.err.println(shaderLog);
+		}
+		if (compiled == 0) {
+			throw new AssertionError("Could not compile shader");
+		}
+		return shader;
+	}
+
+	private void createAtomicBuffer() {
+		atomicBuffer = glGenBuffers();
+		glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, atomicBuffer);
+		glBufferData(GL_ATOMIC_COUNTER_BUFFER, 4, GL_DYNAMIC_COPY);
+		glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, 0);
+	}
+
+	/**
 	 * Create the full-scren quad shader.
 	 *
 	 * @throws IOException
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
+		int vshader = AtomicDemo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = AtomicDemo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");
@@ -272,24 +350,18 @@ public class Demo33Ubo {
 	}
 
 	/**
-	 * Create the ray tracing shader program.
-	 *
-	 * @return that program id
+	 * Create the tracing compute shader program.
 	 *
 	 * @throws IOException
 	 */
-	private void createRayTracingProgram() throws IOException {
+	private void createComputeProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
-		int fshader = Demo.createShader("demo/raytracing/raytracingUbo.fs", GL_FRAGMENT_SHADER);
-		int random = Demo.createShader("demo/raytracing/random.glsl", GL_FRAGMENT_SHADER);
-		int randomCommon = Demo.createShader("demo/raytracing/randomCommon.glsl", GL_FRAGMENT_SHADER);
-		glAttachShader(program, vshader);
-		glAttachShader(program, fshader);
-		glAttachShader(program, random);
+		int cshader = createShader("demo/raytracing/raytracingAtomic.glslcs", GL_COMPUTE_SHADER);
+		int randomCommon = createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
+		int random = createShader("demo/raytracing/randomAtomic.glsl", GL_COMPUTE_SHADER);
+		glAttachShader(program, cshader);
 		glAttachShader(program, randomCommon);
-		glBindAttribLocation(program, 0, "vertex");
-		glBindFragDataLocation(program, 0, "color");
+		glAttachShader(program, random);
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);
@@ -299,7 +371,7 @@ public class Demo33Ubo {
 		if (linked == 0) {
 			throw new AssertionError("Could not link program");
 		}
-		this.rayTracingProgram = program;
+		this.computeProgram = program;
 	}
 
 	/**
@@ -313,19 +385,28 @@ public class Demo33Ubo {
 	}
 
 	/**
-	 * Initialize the ray tracing shader.
+	 * Initialize the compute shader.
 	 */
-	private void initRayTracingProgram() {
-		glUseProgram(rayTracingProgram);
-		timeUniform = glGetUniformLocation(rayTracingProgram, "time");
-		blendFactorUniform = glGetUniformLocation(rayTracingProgram, "blendFactor");
-		framebufferUniform = glGetUniformLocation(rayTracingProgram, "framebuffer");
-		widthUniform = glGetUniformLocation(rayTracingProgram, "width");
-		heightUniform = glGetUniformLocation(rayTracingProgram, "height");
-		bounceCountUniform = glGetUniformLocation(rayTracingProgram, "bounceCount");
-		glUniform1i(framebufferUniform, 0);
-		int cameraSettingsIndex = glGetUniformBlockIndex(rayTracingProgram, "CameraSettings");
-		glUniformBlockBinding(rayTracingProgram, cameraSettingsIndex, this.cameraSettingsUboBinding);
+	private void initComputeProgram() {
+		glUseProgram(computeProgram);
+		IntBuffer workGroupSize = BufferUtils.createIntBuffer(3);
+		glGetProgramiv(computeProgram, GL_COMPUTE_WORK_GROUP_SIZE, workGroupSize);
+		workGroupSizeX = workGroupSize.get(0);
+		workGroupSizeY = workGroupSize.get(1);
+		eyeUniform = glGetUniformLocation(computeProgram, "eye");
+		ray00Uniform = glGetUniformLocation(computeProgram, "ray00");
+		ray10Uniform = glGetUniformLocation(computeProgram, "ray10");
+		ray01Uniform = glGetUniformLocation(computeProgram, "ray01");
+		ray11Uniform = glGetUniformLocation(computeProgram, "ray11");
+		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
+		bounceCountUniform = glGetUniformLocation(computeProgram, "bounceCount");
+
+		/* Query the "image binding point" of the image uniform */
+		IntBuffer params = BufferUtils.createIntBuffer(1);
+		int loc = glGetUniformLocation(computeProgram, "framebufferImage");
+		glGetUniformiv(computeProgram, loc, params);
+		framebufferImageBinding = params.get(0);
+
 		glUseProgram(0);
 	}
 
@@ -335,7 +416,7 @@ public class Demo33Ubo {
 	private void createFramebufferTexture() {
 		this.tex = glGenTextures();
 		glBindTexture(GL_TEXTURE_2D, tex);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA32F, width, height, 0, GL_RGBA, GL_FLOAT, (ByteBuffer) null);
+		glTexStorage2D(GL_TEXTURE_2D, 1, GL_RGBA32F, width, height);
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
 
@@ -348,62 +429,20 @@ public class Demo33Ubo {
 		glSamplerParameteri(this.sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	}
 
+	/**
+	 * Recreate the framebuffer when the window size changes.
+	 */
 	private void resizeFramebufferTexture() {
 		glDeleteTextures(tex);
-		glDeleteFramebuffers(fbo);
-
 		createFramebufferTexture();
-		createFrameBufferObject();
 	}
 
 	/**
-	 * Create the frame buffer object that our ray tracing shader uses to render
-	 * into the framebuffer texture.
-	 */
-	private int createFrameBufferObject() {
-		this.fbo = glGenFramebuffers();
-		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this.tex, 0);
-		int fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-		if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
-			throw new AssertionError("Could not create FBO: " + fboStatus);
-		}
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		return fbo;
-	}
-
-	private void createCameraSettingsUbo() {
-		this.cameraSettingsUbo = glGenBuffers();
-		glBindBuffer(GL_UNIFORM_BUFFER, cameraSettingsUbo);
-		glBufferData(GL_UNIFORM_BUFFER, 4 * 4 * 5, GL_STATIC_DRAW);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	}
-
-	private void updateCameraSettingsUbo() {
-		FloatBuffer fv = cameraSettingsUboDataFb;
-		/* Set viewing frustum corner rays in shader */
-		Vector3f pos = camera.getPosition();
-		fv.put(pos.x).put(pos.y).put(pos.z).put(0.0f);
-		camera.getEyeRay(-1, -1, tmpVector);
-		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.getEyeRay(-1, 1, tmpVector);
-		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.getEyeRay(1, -1, tmpVector);
-		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		camera.getEyeRay(1, 1, tmpVector);
-		fv.put(tmpVector.x).put(tmpVector.y).put(tmpVector.z).put(0.0f);
-		fv.rewind();
-		glBindBuffer(GL_UNIFORM_BUFFER, this.cameraSettingsUbo);
-		glBufferSubData(GL_UNIFORM_BUFFER, 0, 4 * 4 * 5, this.cameraSettingsUboData);
-		glBindBuffer(GL_UNIFORM_BUFFER, 0);
-	}
-
-	/**
-	 * Compute one frame by tracing the scene using our ray tracing shader and
+	 * Compute one frame by tracing the scene using our compute shader and
 	 * presenting that image on the screen.
 	 */
 	private void trace() {
-		glUseProgram(rayTracingProgram);
+		glUseProgram(computeProgram);
 
 		if (mouseDown) {
 			/*
@@ -425,12 +464,8 @@ public class Demo33Ubo {
 			resetFramebuffer = false;
 		}
 
-		/* Update cameraSettings UBO */
-		updateCameraSettingsUbo();
-
-		long thisTime = System.nanoTime();
-		float elapsedSeconds = (thisTime - firstTime) / 1E9f;
-		glUniform1f(timeUniform, elapsedSeconds);
+		/* Bind atomic counter */
+		glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, atomicBuffer);
 
 		/*
 		 * We are going to average multiple successive frames, so here we
@@ -441,29 +476,37 @@ public class Demo33Ubo {
 		glUniform1f(blendFactorUniform, blendFactor);
 		glUniform1i(bounceCountUniform, bounceCount);
 
-		glUniform1f(widthUniform, width);
-		glUniform1f(heightUniform, height);
-		
-		/* Bind UBO for rendering */
-		glBindBufferBase(GL_UNIFORM_BUFFER, this.cameraSettingsUboBinding, this.cameraSettingsUbo);
+		/* Set viewing frustum corner rays in shader */
+		glUniform3f(eyeUniform, camera.getPosition().x, camera.getPosition().y, camera.getPosition().z);
+		camera.getEyeRay(-1, -1, tmpVector);
+		glUniform3f(ray00Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
+		camera.getEyeRay(-1, 1, tmpVector);
+		glUniform3f(ray01Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
+		camera.getEyeRay(1, -1, tmpVector);
+		glUniform3f(ray10Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
+		camera.getEyeRay(1, 1, tmpVector);
+		glUniform3f(ray11Uniform, tmpVector.x, tmpVector.y, tmpVector.z);
 
+		/* Bind level 0 of framebuffer texture as writable image in the shader. */
+		glBindImageTexture(framebufferImageBinding, tex, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+
+		/* Compute appropriate invocation dimension. */
+		int worksizeX = mathRoundPoT(width);
+		int worksizeY = mathRoundPoT(height);
+
+		/* Invoke the compute shader. */
+		glDispatchCompute(worksizeX / workGroupSizeX, worksizeY / workGroupSizeY, 1);
 		/*
-		 * Draw full-screen quad to generate frame with our tracing shader
-		 * program.
+		 * Synchronize all writes to the framebuffer image before we let OpenGL
+		 * source texels from it afterwards when rendering the final image with
+		 * the full-screen quad.
 		 */
-		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glBindVertexArray(vao);
-		glBindTexture(GL_TEXTURE_2D, tex);
-		glBindSampler(0, this.sampler);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindSampler(0, 0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-		glUseProgram(0);
+		glMemoryBarrier(GL_SHADER_IMAGE_ACCESS_BARRIER_BIT);
 
-		/* Unbind UBO */
-		glBindBufferBase(GL_UNIFORM_BUFFER, this.cameraSettingsUboBinding, 0);
+		/* Reset bindings. */
+		glBindImageTexture(framebufferImageBinding, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
+		glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, 0);
+		glUseProgram(0);
 
 		frameNumber++;
 	}
@@ -521,7 +564,7 @@ public class Demo33Ubo {
 	}
 
 	public static void main(String[] args) {
-		new Demo33Ubo().run();
+		new AtomicDemo().run();
 	}
 
 }

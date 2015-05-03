@@ -360,8 +360,10 @@ public class PhotonMappingBindlessDemo {
 		int program = glCreateProgram();
 		int cshader = Demo.createShader("demo/raytracing/photonmapBindless.glsl", GL_COMPUTE_SHADER);
 		int random = Demo.createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
+		int randomCommon = Demo.createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
+		glAttachShader(program, randomCommon);
 		glLinkProgram(program);
 		int linked = glGetProgrami(program, GL_LINK_STATUS);
 		String programLog = glGetProgramInfoLog(program);
