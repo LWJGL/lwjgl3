@@ -8,6 +8,10 @@ import org.lwjgl.generator.*
 
 val LINUX_PACKAGE = "org.lwjgl.system.linux"
 
+val long = IntegerType("long", PrimitiveMapping.PTR)
+val unsigned_long = IntegerType("unsigned long", PrimitiveMapping.PTR, unsigned = true)
+val unsigned_long_p = PointerType(unsigned_long)
+
 val ssize_t = IntegerType("ssize_t", PrimitiveMapping.PTR)
 
 val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figure this out
