@@ -65,8 +65,8 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		IntConstant.block(
 			"Error Codes",
 
-			"INVALID_GL_OBJECT".expr<Int>("-60"),
-			"INVALID_MIP_LEVEL".expr<Int>("-62")
+			"INVALID_GL_OBJECT" expr "-60",
+			"INVALID_MIP_LEVEL" expr "-62"
 		)
 
 		val GLObjectTypes = IntConstant.block(

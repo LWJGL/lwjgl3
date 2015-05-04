@@ -69,7 +69,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"DKGRAY_BRUSH" _ 3,
 		"BLACK_BRUSH" _ 4,
 		"NULL_BRUSH" _ 5,
-		"HOLLOW_BRUSH".expr<Int>("NULL_BRUSH"),
+		"HOLLOW_BRUSH" expr "NULL_BRUSH",
 		"WHITE_PEN" _ 6,
 		"BLACK_PEN" _ 7,
 		"NULL_PEN" _ 8,

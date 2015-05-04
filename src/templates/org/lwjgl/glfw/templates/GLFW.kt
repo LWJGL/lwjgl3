@@ -195,7 +195,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"KEY_RIGHT_ALT" _ 346,
 		"KEY_RIGHT_SUPER" _ 347,
 		"KEY_MENU" _ 348,
-		"KEY_LAST".expr<Int>("GLFW_KEY_MENU")
+		"KEY_LAST" expr "GLFW_KEY_MENU"
 	)
 
 	IntConstant.block(
@@ -233,10 +233,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"MOUSE_BUTTON_6" _ 5,
 		"MOUSE_BUTTON_7" _ 6,
 		"MOUSE_BUTTON_8" _ 7,
-		"MOUSE_BUTTON_LAST".expr<Int>("GLFW_MOUSE_BUTTON_8"),
-		"MOUSE_BUTTON_LEFT".expr<Int>("GLFW_MOUSE_BUTTON_1"),
-		"MOUSE_BUTTON_RIGHT".expr<Int>("GLFW_MOUSE_BUTTON_2"),
-		"MOUSE_BUTTON_MIDDLE".expr<Int>("GLFW_MOUSE_BUTTON_3")
+		"MOUSE_BUTTON_LAST" expr "GLFW_MOUSE_BUTTON_8",
+		"MOUSE_BUTTON_LEFT" expr "GLFW_MOUSE_BUTTON_1",
+		"MOUSE_BUTTON_RIGHT" expr "GLFW_MOUSE_BUTTON_2",
+		"MOUSE_BUTTON_MIDDLE" expr "GLFW_MOUSE_BUTTON_3"
 	)
 
 	IntConstant.block(
@@ -258,7 +258,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"JOYSTICK_14" _ 13,
 		"JOYSTICK_15" _ 14,
 		"JOYSTICK_16" _ 15,
-		"JOYSTICK_LAST".expr<Int>("GLFW_JOYSTICK_16")
+		"JOYSTICK_LAST" expr "GLFW_JOYSTICK_16"
 	)
 
 	IntConstant.block(

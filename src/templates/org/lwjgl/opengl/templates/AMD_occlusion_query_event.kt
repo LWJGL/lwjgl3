@@ -39,7 +39,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		"QUERY_DEPTH_FAIL_EVENT_BIT_AMD" _ 0x00000002,
 		"QUERY_STENCIL_FAIL_EVENT_BIT_AMD" _ 0x00000004,
 		"QUERY_DEPTH_BOUNDS_FAIL_EVENT_BIT_AMD" _ 0x00000008,
-		"QUERY_ALL_EVENT_BITS_AMD".expr<Int>("0xFFFFFFFF")
+		"QUERY_ALL_EVENT_BITS_AMD" expr "0xFFFFFFFF"
 	).javaDocLinks
 
 	GLvoid.func(

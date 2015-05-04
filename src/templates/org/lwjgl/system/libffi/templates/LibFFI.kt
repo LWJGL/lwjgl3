@@ -41,7 +41,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"TYPE_INT" _ 1.s,
 		"TYPE_FLOAT" _ 2.s,
 		"TYPE_DOUBLE" _ 3.s,
-		"TYPE_LONGDOUBLE".expr<Short>("FFI_TYPE_DOUBLE()"),
+		"TYPE_LONGDOUBLE" expr "FFI_TYPE_DOUBLE()",
 		"TYPE_UINT8" _ 5.s,
 		"TYPE_SINT8" _ 6.s,
 		"TYPE_UINT16" _ 7.s,
@@ -72,7 +72,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		// Unix
 		"UNIX64" _ 2,
 
-		"DEFAULT_ABI".expr<Int>("FFI_DEFAULT_ABI()")
+		"DEFAULT_ABI" expr "FFI_DEFAULT_ABI()"
 	).javaDocLinks
 
 	IntConstant.block(
@@ -86,31 +86,31 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	LongConstant.block(
 		"Data types. These are the addresses of libffi's predefined ##FFIType structs.",
 
-		"ffi_type_void".expr<Long>("ffi_type_void()"),
+		"ffi_type_void" expr "ffi_type_void()",
 
-		"ffi_type_uint8".expr<Long>("ffi_type_uint8()"),
-		"ffi_type_sint8".expr<Long>("ffi_type_sint8()"),
-		"ffi_type_uint16".expr<Long>("ffi_type_uint16()"),
-		"ffi_type_sint16".expr<Long>("ffi_type_sint16()"),
-		"ffi_type_uint32".expr<Long>("ffi_type_uint32()"),
-		"ffi_type_sint32".expr<Long>("ffi_type_sint32()"),
-		"ffi_type_uint64".expr<Long>("ffi_type_uint64()"),
-		"ffi_type_sint64".expr<Long>("ffi_type_sint64()"),
+		"ffi_type_uint8" expr "ffi_type_uint8()",
+		"ffi_type_sint8" expr "ffi_type_sint8()",
+		"ffi_type_uint16" expr "ffi_type_uint16()",
+		"ffi_type_sint16" expr "ffi_type_sint16()",
+		"ffi_type_uint32" expr "ffi_type_uint32()",
+		"ffi_type_sint32" expr "ffi_type_sint32()",
+		"ffi_type_uint64" expr "ffi_type_uint64()",
+		"ffi_type_sint64" expr "ffi_type_sint64()",
 
-		"ffi_type_uchar".expr<Long>("ffi_type_uchar()"),
-		"ffi_type_schar".expr<Long>("ffi_type_schar()"),
-		"ffi_type_sshort".expr<Long>("ffi_type_sshort()"),
-		"ffi_type_ushort".expr<Long>("ffi_type_ushort()"),
-		"ffi_type_uint".expr<Long>("ffi_type_uint()"),
-		"ffi_type_sint".expr<Long>("ffi_type_sint()"),
-		"ffi_type_ulong".expr<Long>("ffi_type_ulong()"),
-		"ffi_type_slong".expr<Long>("ffi_type_slong()"),
+		"ffi_type_uchar" expr "ffi_type_uchar()",
+		"ffi_type_schar" expr "ffi_type_schar()",
+		"ffi_type_sshort" expr "ffi_type_sshort()",
+		"ffi_type_ushort" expr "ffi_type_ushort()",
+		"ffi_type_uint" expr "ffi_type_uint()",
+		"ffi_type_sint" expr "ffi_type_sint()",
+		"ffi_type_ulong" expr "ffi_type_ulong()",
+		"ffi_type_slong" expr "ffi_type_slong()",
 
-		"ffi_type_float".expr<Long>("ffi_type_float()"),
-		"ffi_type_double".expr<Long>("ffi_type_double()"),
-		"ffi_type_longdouble".expr<Long>("ffi_type_longdouble()"),
+		"ffi_type_float" expr "ffi_type_float()",
+		"ffi_type_double" expr "ffi_type_double()",
+		"ffi_type_longdouble" expr "ffi_type_longdouble()",
 
-		"ffi_type_pointer".expr<Long>("ffi_type_pointer()")
+		"ffi_type_pointer" expr "ffi_type_pointer()"
 	).noPrefix()
 
 	ffi_status.func(

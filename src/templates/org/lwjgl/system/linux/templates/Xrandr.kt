@@ -18,10 +18,10 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Event selection bits",
 
-		"RRScreenChangeNotifyMask".expr<Int>("1 << 0"),
-		"RRCrtcChangeNotifyMask".expr<Int>("1 << 1"),
-		"RROutputChangeNotifyMask".expr<Int>("1 << 2"),
-		"RROutputPropertyNotifyMask".expr<Int>("1 << 3")
+		"RRScreenChangeNotifyMask" expr "1 << 0",
+		"RRCrtcChangeNotifyMask" expr "1 << 1",
+		"RROutputChangeNotifyMask" expr "1 << 2",
+		"RROutputPropertyNotifyMask" expr "1 << 3"
 	)
 
 	IntConstant.block(

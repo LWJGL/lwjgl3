@@ -19,15 +19,15 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Definition for flags of ##XWMHints",
 
-		"InputHint".expr<Int>("1 << 0"),
-		"StateHint".expr<Int>("1 << 1"),
-		"IconPixmapHint".expr<Int>("1 << 2"),
-		"IconWindowHint".expr<Int>("1 << 3"),
-		"IconPositionHint".expr<Int>("1 << 4"),
-		"IconMaskHint".expr<Int>("1 << 5"),
-		"WindowGroupHint".expr<Int>("1 << 6"),
-		"AllHints".expr<Int>("InputHint|StateHint|IconPixmapHint|IconWindowHint|IconPositionHint|IconMaskHint|WindowGroupHint"),
-		"XUrgencyHint".expr<Int>("1 << 8")
+		"InputHint" expr "1 << 0",
+		"StateHint" expr "1 << 1",
+		"IconPixmapHint" expr "1 << 2",
+		"IconWindowHint" expr "1 << 3",
+		"IconPositionHint" expr "1 << 4",
+		"IconMaskHint" expr "1 << 5",
+		"WindowGroupHint" expr "1 << 6",
+		"AllHints" expr "InputHint|StateHint|IconPixmapHint|IconWindowHint|IconPositionHint|IconMaskHint|WindowGroupHint",
+		"XUrgencyHint" expr "1 << 8"
 	)
 
 	IntConstant.block(
@@ -41,16 +41,16 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"flags argument in size hints",
 
-		"USPosition".expr<Int>("1 << 0"),
-		"USSize".expr<Int>("1 << 1"),
-		"PPosition".expr<Int>("1 << 2"),
-		"PSize".expr<Int>("1 << 3"),
-		"PMinSize".expr<Int>("1 << 4"),
-		"PMaxSize".expr<Int>("1 << 5"),
-		"PResizeInc".expr<Int>("1 << 6"),
-		"PAspect".expr<Int>("1 << 7"),
-		"PBaseSize".expr<Int>("1 << 8"),
-		"PWinGravity".expr<Int>("1 << 9")
+		"USPosition" expr "1 << 0",
+		"USSize" expr "1 << 1",
+		"PPosition" expr "1 << 2",
+		"PSize" expr "1 << 3",
+		"PMinSize" expr "1 << 4",
+		"PMaxSize" expr "1 << 5",
+		"PResizeInc" expr "1 << 6",
+		"PAspect" expr "1 << 7",
+		"PBaseSize" expr "1 << 8",
+		"PWinGravity" expr "1 << 9"
 	)
 
 	int.func(

@@ -51,17 +51,17 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant.block(
 		"cl_command_queue_properties",
 
-		"QUEUE_ON_DEVICE".expr<Int>("1 << 2"),
-		"QUEUE_ON_DEVICE_DEFAULT".expr<Int>("1 << 3")
+		"QUEUE_ON_DEVICE" expr "1 << 2",
+		"QUEUE_ON_DEVICE_DEFAULT" expr "1 << 3"
 	)
 
 	IntConstant.block(
 		"cl_device_svm_capabilities",
 
-		"DEVICE_SVM_COARSE_GRAIN_BUFFER".expr<Int>("1 << 0"),
-		"DEVICE_SVM_FINE_GRAIN_BUFFER".expr<Int>("1 << 1"),
-		"DEVICE_SVM_FINE_GRAIN_SYSTEM".expr<Int>("1 << 2"),
-		"DEVICE_SVM_ATOMICS".expr<Int>("1 << 3")
+		"DEVICE_SVM_COARSE_GRAIN_BUFFER" expr "1 << 0",
+		"DEVICE_SVM_FINE_GRAIN_BUFFER" expr "1 << 1",
+		"DEVICE_SVM_FINE_GRAIN_SYSTEM" expr "1 << 2",
+		"DEVICE_SVM_ATOMICS" expr "1 << 3"
 	)
 
 	IntConstant.block(
@@ -73,8 +73,8 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant.block(
 		"cl_svm_mem_flags",
 
-		"MEM_SVM_FINE_GRAIN_BUFFER".expr<Int>("1 << 10"),
-		"MEM_SVM_ATOMICS".expr<Int>("1 << 11")
+		"MEM_SVM_FINE_GRAIN_BUFFER" expr "1 << 10",
+		"MEM_SVM_ATOMICS" expr "1 << 11"
 	)
 
 	IntConstant.block(
@@ -124,7 +124,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 	IntConstant.block(
 		"cl_kernel_arg_type_qualifer",
 
-		"KERNEL_ARG_TYPE_PIPE".expr<Int>("1 << 3")
+		"KERNEL_ARG_TYPE_PIPE" expr "1 << 3"
 	)
 
 	IntConstant.block(

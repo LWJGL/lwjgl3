@@ -55,11 +55,11 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"XkbNumModifiers" _ 8,
 		"XkbNumVirtualMods" _ 16,
 		"XkbNumIndicators" _ 32,
-		"XkbAllIndicatorsMask".expr<Int>("0xffffffff"),
+		"XkbAllIndicatorsMask" expr "0xffffffff",
 		"XkbMaxRadioGroups" _ 32,
-		"XkbAllRadioGroupsMask".expr<Int>("0xffffffff"),
+		"XkbAllRadioGroupsMask" expr "0xffffffff",
 		"XkbMaxShiftLevel" _ 63,
-		"XkbMaxSymsPerKey".expr<Int>("XkbMaxShiftLevel*XkbNumKbdGroups"),
+		"XkbMaxSymsPerKey" expr "XkbMaxShiftLevel*XkbNumKbdGroups",
 		"XkbRGMaxMembers" _ 12,
 		"XkbActionMessageLength" _ 6,
 		"XkbKeyNameLength" _ 4,
@@ -69,13 +69,13 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Mask bits for ##XkbDescRec.",
 
-		"XkbControlsMask".expr<Int>("1<<0"),
-		"XkbServerMapMask".expr<Int>("1<<1"),
-		"XkbIClientMapMask".expr<Int>("1<<2"),
-		"XkbIndicatorMapMask".expr<Int>("1<<3"),
-		"XkbNamesMask".expr<Int>("1<<4"),
-		"XkbCompatMapMask".expr<Int>("1<<5"),
-		"XkbGeometryMask".expr<Int>("1<<6"),
+		"XkbControlsMask" expr "1<<0",
+		"XkbServerMapMask" expr "1<<1",
+		"XkbIClientMapMask" expr "1<<2",
+		"XkbIndicatorMapMask" expr "1<<3",
+		"XkbNamesMask" expr "1<<4",
+		"XkbCompatMapMask" expr "1<<5",
+		"XkbGeometryMask" expr "1<<6",
 		"XkbAllComponentsMask" _ 0x7F
 	)
 

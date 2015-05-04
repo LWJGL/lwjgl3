@@ -34,7 +34,7 @@ val intel_thread_local_exec = "INTELThreadLocalExec".nativeClassCL("intel_thread
 	IntConstant.block(
 		"cl_command_queue_properties",
 
-		"QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL".expr<Int>("1 << 31")
+		"QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL" expr "1 << 31"
 	)
 
 }

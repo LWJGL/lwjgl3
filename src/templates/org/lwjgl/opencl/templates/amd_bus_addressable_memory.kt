@@ -33,7 +33,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		#MEM_BUS_ADDRESSABLE_AMD, CL10#MEM_ALLOC_HOST_PTR and CL10#MEM_USE_HOST_PTR are mutually exclusive.
 		""",
 
-		"MEM_BUS_ADDRESSABLE_AMD".expr<Int>("1<<30")
+		"MEM_BUS_ADDRESSABLE_AMD" expr "1<<30"
 	)
 
 	IntConstant.block(
@@ -47,7 +47,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		#MEM_EXTERNAL_PHYSICAL_AMD, CL10#MEM_READ_WRITE and CL10#MEM_READ_ONLY are mutually exclusive.
 		""",
 
-		"MEM_EXTERNAL_PHYSICAL_AMD".expr<Int>("1<<31")
+		"MEM_EXTERNAL_PHYSICAL_AMD" expr "1<<31"
 	)
 
 	IntConstant.block(

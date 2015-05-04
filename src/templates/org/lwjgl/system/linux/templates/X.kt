@@ -56,52 +56,52 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Window attributes for CreateWindow and ChangeWindowAttributes",
 
-		"CWBackPixmap".expr<Int>("1 << 0"),
-		"CWBackPixel".expr<Int>("1 << 1"),
-		"CWBorderPixmap".expr<Int>("1 << 2"),
-		"CWBorderPixel".expr<Int>("1 << 3"),
-		"CWBitGravity".expr<Int>("1 << 4"),
-		"CWWinGravity".expr<Int>("1 << 5"),
-		"CWBackingStore".expr<Int>("1 << 6"),
-		"CWBackingPlanes".expr<Int>("1 << 7"),
-		"CWBackingPixel".expr<Int>("1 << 8"),
-		"CWOverrideRedirect".expr<Int>("1 << 9"),
-		"CWSaveUnder".expr<Int>("1 << 10"),
-		"CWEventMask".expr<Int>("1 << 11"),
-		"CWDontPropagate".expr<Int>("1 << 12"),
-		"CWColormap".expr<Int>("1 << 13"),
-		"CWCursor".expr<Int>("1 << 14")
+		"CWBackPixmap" expr "1 << 0",
+		"CWBackPixel" expr "1 << 1",
+		"CWBorderPixmap" expr "1 << 2",
+		"CWBorderPixel" expr "1 << 3",
+		"CWBitGravity" expr "1 << 4",
+		"CWWinGravity" expr "1 << 5",
+		"CWBackingStore" expr "1 << 6",
+		"CWBackingPlanes" expr "1 << 7",
+		"CWBackingPixel" expr "1 << 8",
+		"CWOverrideRedirect" expr "1 << 9",
+		"CWSaveUnder" expr "1 << 10",
+		"CWEventMask" expr "1 << 11",
+		"CWDontPropagate" expr "1 << 12",
+		"CWColormap" expr "1 << 13",
+		"CWCursor" expr "1 << 14"
 	)
 
 	IntConstant.block(
 		"Input Event Masks. Used as event-mask window attribute and as arguments to Grab requests. Not to be confused with event names.",
 
 		"NoEventMask" _ 0,
-		"KeyPressMask".expr<Int>("1 << 0"),
-		"KeyReleaseMask".expr<Int>("1 << 1"),
-		"ButtonPressMask".expr<Int>("1 << 2"),
-		"ButtonReleaseMask".expr<Int>("1 << 3"),
-		"EnterWindowMask".expr<Int>("1 << 4"),
-		"LeaveWindowMask".expr<Int>("1 << 5"),
-		"PointerMotionMask".expr<Int>("1 << 6"),
-		"PointerMotionHintMask".expr<Int>("1 << 7"),
-		"Button1MotionMask".expr<Int>("1 << 8"),
-		"Button2MotionMask".expr<Int>("1 << 9"),
-		"Button3MotionMask".expr<Int>("1 << 10"),
-		"Button4MotionMask".expr<Int>("1 << 11"),
-		"Button5MotionMask".expr<Int>("1 << 12"),
-		"ButtonMotionMask".expr<Int>("1 << 13"),
-		"KeymapStateMask".expr<Int>("1 << 14"),
-		"ExposureMask".expr<Int>("1 << 15"),
-		"VisibilityChangeMask".expr<Int>("1 << 16"),
-		"StructureNotifyMask".expr<Int>("1 << 17"),
-		"ResizeRedirectMask".expr<Int>("1 << 18"),
-		"SubstructureNotifyMask".expr<Int>("1 << 19"),
-		"SubstructureRedirectMask".expr<Int>("1 << 20"),
-		"FocusChangeMask".expr<Int>("1 << 21"),
-		"PropertyChangeMask".expr<Int>("1 << 22"),
-		"ColormapChangeMask".expr<Int>("1 << 23"),
-		"OwnerGrabButtonMask".expr<Int>("1 << 24")
+		"KeyPressMask" expr "1 << 0",
+		"KeyReleaseMask" expr "1 << 1",
+		"ButtonPressMask" expr "1 << 2",
+		"ButtonReleaseMask" expr "1 << 3",
+		"EnterWindowMask" expr "1 << 4",
+		"LeaveWindowMask" expr "1 << 5",
+		"PointerMotionMask" expr "1 << 6",
+		"PointerMotionHintMask" expr "1 << 7",
+		"Button1MotionMask" expr "1 << 8",
+		"Button2MotionMask" expr "1 << 9",
+		"Button3MotionMask" expr "1 << 10",
+		"Button4MotionMask" expr "1 << 11",
+		"Button5MotionMask" expr "1 << 12",
+		"ButtonMotionMask" expr "1 << 13",
+		"KeymapStateMask" expr "1 << 14",
+		"ExposureMask" expr "1 << 15",
+		"VisibilityChangeMask" expr "1 << 16",
+		"StructureNotifyMask" expr "1 << 17",
+		"ResizeRedirectMask" expr "1 << 18",
+		"SubstructureNotifyMask" expr "1 << 19",
+		"SubstructureRedirectMask" expr "1 << 20",
+		"FocusChangeMask" expr "1 << 21",
+		"PropertyChangeMask" expr "1 << 22",
+		"ColormapChangeMask" expr "1 << 23",
+		"OwnerGrabButtonMask" expr "1 << 24"
 	)
 
 	IntConstant.block(
@@ -150,14 +150,14 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events.",
 
-		"ShiftMask".expr<Int>("1<<0"),
-		"LockMask".expr<Int>("1<<1"),
-		"ControlMask".expr<Int>("1<<2"),
-		"Mod1Mask".expr<Int>("1<<3"),
-		"Mod2Mask".expr<Int>("1<<4"),
-		"Mod3Mask".expr<Int>("1<<5"),
-		"Mod4Mask".expr<Int>("1<<6"),
-		"Mod5Mask".expr<Int>("1<<7")
+		"ShiftMask" expr "1<<0",
+		"LockMask" expr "1<<1",
+		"ControlMask" expr "1<<2",
+		"Mod1Mask" expr "1<<3",
+		"Mod2Mask" expr "1<<4",
+		"Mod3Mask" expr "1<<5",
+		"Mod4Mask" expr "1<<6",
+		"Mod5Mask" expr "1<<7"
 	)
 
 	IntConstant.block(
@@ -176,12 +176,12 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"button masks. Used in same manner as Key masks above. Not to be confused with button names below.",
 
-		"Button1Mask".expr<Int>("1<<8"),
-		"Button2Mask".expr<Int>("1<<9"),
-		"Button3Mask".expr<Int>("1<<10"),
-		"Button4Mask".expr<Int>("1<<11"),
-		"Button5Mask".expr<Int>("1<<12"),
-		"AnyModifier".expr<Int>("1<<15")
+		"Button1Mask" expr "1<<8",
+		"Button2Mask" expr "1<<9",
+		"Button3Mask" expr "1<<10",
+		"Button4Mask" expr "1<<11",
+		"Button5Mask" expr "1<<12",
+		"AnyModifier" expr "1<<15"
 	)
 
 	IntConstant.block(
@@ -289,8 +289,8 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"Used in Xlib#XSetInputFocus(), Xlib#XGetInputFocus().",
 
-		"RevertToNone".expr<Int>("None"),
-		"RevertToPointerRoot".expr<Int>("PointerRoot"),
+		"RevertToNone" expr "None",
+		"RevertToPointerRoot" expr "PointerRoot",
 		"RevertToParent" _ 2
 	)
 
@@ -427,29 +427,29 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 	IntConstant.block(
 		"GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges",
 
-		"GCFunction".expr<Int>("1<<0"),
-		"GCPlaneMask".expr<Int>("1<<1"),
-		"GCForeground".expr<Int>("1<<2"),
-		"GCBackground".expr<Int>("1<<3"),
-		"GCLineWidth".expr<Int>("1<<4"),
-		"GCLineStyle".expr<Int>("1<<5"),
-		"GCCapStyle".expr<Int>("1<<6"),
-		"GCJoinStyle".expr<Int>("1<<7"),
-		"GCFillStyle".expr<Int>("1<<8"),
-		"GCFillRule".expr<Int>("1<<9"),
-		"GCTile".expr<Int>("1<<10"),
-		"GCStipple".expr<Int>("1<<11"),
-		"GCTileStipXOrigin".expr<Int>("1<<12"),
-		"GCTileStipYOrigin".expr<Int>("1<<13"),
-		"GCFont".expr<Int>("1<<14"),
-		"GCSubwindowMode".expr<Int>("1<<15"),
-		"GCGraphicsExposures".expr<Int>("1<<16"),
-		"GCClipXOrigin".expr<Int>("1<<17"),
-		"GCClipYOrigin".expr<Int>("1<<18"),
-		"GCClipMask".expr<Int>("1<<19"),
-		"GCDashOffset".expr<Int>("1<<20"),
-		"GCDashList".expr<Int>("1<<21"),
-		"GCArcMode".expr<Int>("1<<22"),
+		"GCFunction" expr "1<<0",
+		"GCPlaneMask" expr "1<<1",
+		"GCForeground" expr "1<<2",
+		"GCBackground" expr "1<<3",
+		"GCLineWidth" expr "1<<4",
+		"GCLineStyle" expr "1<<5",
+		"GCCapStyle" expr "1<<6",
+		"GCJoinStyle" expr "1<<7",
+		"GCFillStyle" expr "1<<8",
+		"GCFillRule" expr "1<<9",
+		"GCTile" expr "1<<10",
+		"GCStipple" expr "1<<11",
+		"GCTileStipXOrigin" expr "1<<12",
+		"GCTileStipYOrigin" expr "1<<13",
+		"GCFont" expr "1<<14",
+		"GCSubwindowMode" expr "1<<15",
+		"GCGraphicsExposures" expr "1<<16",
+		"GCClipXOrigin" expr "1<<17",
+		"GCClipYOrigin" expr "1<<18",
+		"GCClipMask" expr "1<<19",
+		"GCDashOffset" expr "1<<20",
+		"GCDashList" expr "1<<21",
+		"GCArcMode" expr "1<<22",
 		"GCLastBit" _ 22
 	)
 
