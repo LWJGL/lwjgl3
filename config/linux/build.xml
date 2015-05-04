@@ -76,6 +76,7 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
+			<srcfiles file="config/${platform}/build.xml"/>
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
 			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
