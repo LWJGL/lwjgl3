@@ -94,6 +94,7 @@ class AutoSize(
 	override fun validate(param: Parameter) {
 		when ( param.paramType ) {
 			ParameterType.IN -> if ( when ( param.nativeType.mapping ) {
+				PrimitiveMapping.SHORT,
 				PrimitiveMapping.INT,
 				PrimitiveMapping.PTR -> false
 				else -> true

@@ -44,11 +44,13 @@ private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor
 		if ( applyFactor && factor != null )
 			expression += " ${factor.expression()}"
 
-		// Replace with expression
-		return if ( bufferParam has nullable )
-			"${bufferParam.name} == null ? 0 : $expression"
-		else
-			expression
+		if ( bufferParam has nullable )
+			expression = "${bufferParam.name} == null ? 0 : $expression"
+
+		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
+			expression = "(${param.nativeType.javaMethodType})($expression)"
+
+		return expression
 	}
 }
 
@@ -73,11 +75,18 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: Stri
 private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
-		// Replace with expression
-		return if ( bufferParam has nullable )
+		var expression = if ( bufferParam has nullable )
 			"${bufferParam.name} == null ? 0 : ${bufferParam.name}Encoded.remaining()"
 		else
 			"${bufferParam.name}EncodedLen"
+
+		if ( param[AutoSize].factor != null )
+			expression = "$expression ${param[AutoSize].factor!!.expression()}"
+
+		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
+			expression = "(${param.nativeType.javaMethodType})($expression)"
+
+		return expression
 	}
 }
 
