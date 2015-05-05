@@ -56,6 +56,12 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	// EXT_texture3D
 
 	IntConstant.block(
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+
+		"TEXTURE_BINDING_3D" _ 0x806A
+	)
+
+	IntConstant.block(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev, and by the {@code pname} parameter of PixelStore.",
 
 		"PACK_SKIP_IMAGES" _ 0x806B,
