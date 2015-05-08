@@ -193,7 +193,7 @@ public class TemplateFormatter {
 
 	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+):))";
 	private static final String DEFINE         = "(?:#define\\s+)?";
-	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+L?)|(?:\\([^)]+\\))";
+	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+U?L?)|(?:\\([^)]+\\))|[0-9A-Za-z_]+";
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
 		DESCRIPTION + "\\s+((?:\\s*" + DEFINE + "[0-9A-Za-z_]+\\s+(?:" + CONSTANT_VALUE + ")[ \t]*" + BLOCK_COMMENT + "\\s*$)+)\\s*",
@@ -273,15 +273,15 @@ public class TemplateFormatter {
 				String value = constantMatcher.group(2);
 
 				try {
-					String intValue = value.endsWith("L") ? value.substring(0, value.length() - 1) : value;
+					String intValue = value.endsWith("L") ? value.substring(0, value.length() - (value.endsWith("UL") ? 2 : 1)) : value;
 
 					validateInteger(intValue);
 					builder.append("\" _ ");
 					builder.append(intValue);
 				} catch (NumberFormatException e) {
-					builder.append("\".expr<Int>(\"");
-					builder.append(value.substring(1, value.length() - 1));
-					builder.append("\")");
+					builder.append("\" expr \"");
+					builder.append(value.charAt(0) == '(' ? value.substring(1, value.length() - 1) : value);
+					builder.append("\"");
 				}
 			}
 			builder.append("\n\t)\n");
