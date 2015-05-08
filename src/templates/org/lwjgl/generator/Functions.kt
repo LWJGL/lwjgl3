@@ -210,6 +210,8 @@ class NativeClassFunction(
 					}
 					if ( bufferParam has MultiType )
 						autoSize.toBytes = true
+					else if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
+						autoSize shr 1
 				}
 			}
 
