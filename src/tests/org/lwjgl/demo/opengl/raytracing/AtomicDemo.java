@@ -62,7 +62,6 @@ public class AtomicDemo {
 	private int computeProgram;
 	private int quadProgram;
 	private int sampler;
-	private int atomicBuffer;
 
 	private int eyeUniform;
 	private int ray00Uniform;
@@ -72,6 +71,7 @@ public class AtomicDemo {
 	private int blendFactorUniform;
 	private int bounceCountUniform;
 	private int framebufferImageBinding;
+	private int atomicBuffer;
 
 	private int workGroupSizeX;
 	private int workGroupSizeY;
@@ -87,6 +87,7 @@ public class AtomicDemo {
 	private int frameNumber;
 	private int bounceCount = 1;
 
+	private IntBuffer intBuffer = BufferUtils.createIntBuffer(1);
 	private Vector3f tmpVector = new Vector3f();
 	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
@@ -128,7 +129,7 @@ public class AtomicDemo {
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
-		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader)", NULL, NULL);
+		window = glfwCreateWindow(width, height, "Raytracing Demo (compute shader + atomic counter)", NULL, NULL);
 		if (window == NULL) {
 			throw new AssertionError("Failed to create the GLFW window");
 		}
@@ -320,7 +321,7 @@ public class AtomicDemo {
 	private void createAtomicBuffer() {
 		atomicBuffer = glGenBuffers();
 		glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, atomicBuffer);
-		glBufferData(GL_ATOMIC_COUNTER_BUFFER, 4, GL_DYNAMIC_COPY);
+		glBufferData(GL_ATOMIC_COUNTER_BUFFER, 4, GL_DYNAMIC_DRAW);
 		glBindBuffer(GL_ATOMIC_COUNTER_BUFFER, 0);
 	}
 
@@ -464,13 +465,21 @@ public class AtomicDemo {
 			resetFramebuffer = false;
 		}
 
-		/* Bind atomic counter */
+		/* Bind atomic counter buffer */
 		glBindBufferBase(GL_ATOMIC_COUNTER_BUFFER, 0, atomicBuffer);
+		/*
+		 * Initialize the atomic counter with a seed (current time) to avoid
+		 * uint32 wrap-around patterns when 2^32 is divisible by the framebuffer
+		 * pixel count.
+		 */
+		intBuffer.put(0, (int) System.nanoTime());
+		glBufferSubData(GL_ATOMIC_COUNTER_BUFFER, 0, intBuffer);
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame. 0.0 - use
-		 * only the new frame > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame.
+		 * = 0.0 - use only the new frame
+		 * > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);

@@ -4,7 +4,7 @@
  */
 #version 420 core
 
-layout(binding = 0) uniform atomic_uint atomicCounter;
+layout(binding = 0) uniform atomic_uint counter;
 
 /**
  * http://amindforeverprogramming.blogspot.de/2013/07/random-floats-in-glsl-330.html
@@ -26,7 +26,7 @@ uint hash(uint x) {
 float random() {
   const uint mantissaMask = 0x007FFFFFu;
   const uint one = 0x3F800000u;
-  uint h = hash(atomicCounterIncrement(atomicCounter));
+  uint h = hash(atomicCounterIncrement(counter));
   h &= mantissaMask;
   h |= one;
   float r2 = uintBitsToFloat(h);

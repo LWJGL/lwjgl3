@@ -5,7 +5,6 @@
 #version 430 core
 
 layout(binding = 0, rgba32f) uniform image2D framebufferImage;
-layout(binding = 0) uniform atomic_uint counter;
 
 uniform vec3 eye;
 uniform vec3 ray00;
@@ -14,7 +13,6 @@ uniform vec3 ray10;
 uniform vec3 ray11;
 
 uniform float blendFactor;
-uniform float time;
 uniform int bounceCount;
 
 struct box {
