@@ -94,7 +94,7 @@ public class HybridDemoSsboTriangles {
 	private int frameNumber;
 
 	private Vector3f tmpVector = new Vector3f();
-	private Vector3f cameraLookAt = new Vector3f(0.0f, 0.5f, 0.0f);
+	private Vector3f cameraLookAt = new Vector3f(0.0f, 1.5f, 0.0f);
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
@@ -207,7 +207,7 @@ public class HybridDemoSsboTriangles {
 
 		/* Load OBJ model */
 		WavefrontMeshLoader loader = new WavefrontMeshLoader();
-		mesh = loader.loadMesh("demo/raytracing/scene.obj");
+		mesh = loader.loadMesh("demo/raytracing/scene.obj.zip");
 
 		/* Create all needed GL resources */
 		createRaytracingTexture();
@@ -525,7 +525,7 @@ public class HybridDemoSsboTriangles {
 		}
 
 		/* Rotate camera about Y axis. */
-		tmpVector.set((float) sin(-currRotationAboutY) * 5.0f, 3.0f, (float) cos(-currRotationAboutY) * 5.0f);
+		tmpVector.set((float) sin(-currRotationAboutY) * 3.0f, 3.0f, (float) cos(-currRotationAboutY) * 3.0f);
 		camera.setLookAt(tmpVector, cameraLookAt, cameraUp);
 
 		if (resetFramebuffer) {

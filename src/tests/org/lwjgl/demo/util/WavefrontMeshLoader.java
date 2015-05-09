@@ -5,10 +5,13 @@
 package org.lwjgl.demo.util;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.zip.ZipInputStream;
 
 import org.lwjgl.BufferUtils;
 
@@ -55,9 +58,23 @@ public class WavefrontMeshLoader {
 		return info;
 	}
 
+	private byte[] readSingleFileZip(String zipResource) throws IOException {
+		ZipInputStream zipStream = new ZipInputStream(WavefrontMeshLoader.class.getClassLoader().getResourceAsStream(zipResource));
+		zipStream.getNextEntry();
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int read = 0;
+		while ((read = zipStream.read(buffer)) > 0) {
+			baos.write(buffer, 0, read);
+		}
+		zipStream.close();
+		return baos.toByteArray();
+	}
+
 	public Mesh loadMesh(String resource) throws IOException {
-		WavefrontInfo info = getInfo(new BufferedReader(new InputStreamReader(WavefrontMeshLoader.class.getClassLoader()
-				.getResourceAsStream(resource))));
+		byte[] arr = readSingleFileZip(resource);
+		WavefrontInfo info = getInfo(new BufferedReader(new InputStreamReader(new ByteArrayInputStream(arr))));
+
 		// Allocate buffers for all vertices/normal
 		ByteBuffer positionByteBuffer = BufferUtils.createByteBuffer(3 * info.numberOfVertices * 4);
 		ByteBuffer normalByteBuffer = BufferUtils.createByteBuffer(3 * info.numberOfNormals * 4);
@@ -72,8 +89,7 @@ public class WavefrontMeshLoader {
 
 		Mesh mesh = new Mesh();
 
-		BufferedReader reader = new BufferedReader(new InputStreamReader(WavefrontMeshLoader.class.getClassLoader().getResourceAsStream(
-				resource)));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(arr)));
 		String line;
 		while (true) {
 			line = reader.readLine();
@@ -136,5 +152,4 @@ public class WavefrontMeshLoader {
 		mesh.numVertices = positionData.limit() / 3;
 		return mesh;
 	}
-
 }
