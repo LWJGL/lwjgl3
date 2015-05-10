@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.ZipInputStream;
 
 import org.lwjgl.BufferUtils;
@@ -28,12 +30,25 @@ public class WavefrontMeshLoader {
 		public FloatBuffer positions;
 		public FloatBuffer normals;
 		public int numVertices;
+		public List<MeshObject> objects = new ArrayList<MeshObject>();
 	}
 
 	private static class WavefrontInfo {
 		int numberOfVertices;
 		int numberOfFaces;
 		int numberOfNormals;
+	}
+
+	public class MeshObject {
+		public String name;
+		public int first;
+		public int count;
+		public Vector3f min = new Vector3f(Float.MAX_VALUE, Float.MAX_VALUE, Float.MAX_VALUE);
+		public Vector3f max = new Vector3f(Float.MIN_VALUE, Float.MIN_VALUE, Float.MIN_VALUE);
+
+		public String toString() {
+			return name + "(" + min + " " + max + ")";
+		}
 	}
 
 	public WavefrontMeshLoader() {
@@ -88,15 +103,20 @@ public class WavefrontMeshLoader {
 		FloatBuffer normalData = normalDataByteBuffer.asFloatBuffer();
 
 		Mesh mesh = new Mesh();
+		MeshObject object = null;
 
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(arr)));
 		String line;
-		while (true) {
-			line = reader.readLine();
-			if (line == null) {
-				break;
-			}
-			if (line.startsWith("vn ")) {
+		int faceIndex = 0;
+		Vector3f tmp = new Vector3f();
+		while ((line = reader.readLine()) != null) {
+			if (line.startsWith("o ")) {
+				String name = line.substring(2);
+				object = new MeshObject();
+				object.name = name;
+				object.first = faceIndex;
+				mesh.objects.add(object);
+			} else if (line.startsWith("vn ")) {
 				String[] ns = line.split(" +");
 				float x = Float.parseFloat(ns[1]);
 				float y = Float.parseFloat(ns[2]);
@@ -122,12 +142,27 @@ public class WavefrontMeshLoader {
 				float ver1X = positions.get(3 * (v1 - 1) + 0);
 				float ver1Y = positions.get(3 * (v1 - 1) + 1);
 				float ver1Z = positions.get(3 * (v1 - 1) + 2);
+				tmp.set(ver1X, ver1Y, ver1Z);
+				if (object != null) {
+					object.min.min(tmp);
+					object.max.max(tmp);
+				}
 				float ver2X = positions.get(3 * (v2 - 1) + 0);
 				float ver2Y = positions.get(3 * (v2 - 1) + 1);
 				float ver2Z = positions.get(3 * (v2 - 1) + 2);
+				tmp.set(ver2X, ver2Y, ver2Z);
+				if (object != null) {
+					object.min.min(tmp);
+					object.max.max(tmp);
+				}
 				float ver3X = positions.get(3 * (v3 - 1) + 0);
 				float ver3Y = positions.get(3 * (v3 - 1) + 1);
 				float ver3Z = positions.get(3 * (v3 - 1) + 2);
+				tmp.set(ver3X, ver3Y, ver3Z);
+				if (object != null) {
+					object.min.min(tmp);
+					object.max.max(tmp);
+				}
 				positionData.put(ver1X).put(ver1Y).put(ver1Z);
 				positionData.put(ver2X).put(ver2Y).put(ver2Z);
 				positionData.put(ver3X).put(ver3Y).put(ver3Z);
@@ -143,7 +178,16 @@ public class WavefrontMeshLoader {
 				normalData.put(norm1X).put(norm1Y).put(norm1Z);
 				normalData.put(norm2X).put(norm2Y).put(norm2Z);
 				normalData.put(norm3X).put(norm3Y).put(norm3Z);
+				faceIndex++;
+				if (object != null) {
+					object.count++;
+				}
 			}
+		}
+		if (mesh.objects.isEmpty()) {
+			object = new MeshObject();
+			object.count = faceIndex;
+			mesh.objects.add(object);
 		}
 		positionData.flip();
 		normalData.flip();

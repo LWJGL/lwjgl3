@@ -23,13 +23,24 @@ struct triangle {
   vec3 v2;
 };
 
-layout(std430) buffer Triangles {
+struct object {
+  vec3 min;
+  vec3 max;
+  int first;
+  int count;
+};
+
+layout(std430, binding=2) buffer Objects {
+  object[] objects;
+};
+
+layout(std430, binding=1) buffer Triangles {
   triangle[] triangles;
 };
 
 #define MAX_SCENE_BOUNDS 100.0
 #define EPSILON 0.0001
-#define LIGHT_RADIUS 1.2
+#define LIGHT_RADIUS 1.1
 #define LIGHT_BASE_INTENSITY 30.0
 
 const vec3 lightCenterPosition = vec3(3.5, 4.9, 4);
@@ -46,6 +57,22 @@ vec3 randomHemispherePoint(vec3 rand, vec3 n);
  */
 vec3 rand;
 vec3 cameraUp;
+
+vec2 intersectObject(vec3 origin, vec3 dir, const object o) {
+  vec3 tMin = (o.min - origin) / dir;
+  vec3 tMax = (o.max - origin) / dir;
+  vec3 t1 = min(tMin, tMax);
+  vec3 t2 = max(tMin, tMax);
+  float tNear = max(max(t1.x, t1.y), t1.z);
+  float tFar = min(min(t2.x, t2.y), t2.z);
+  return vec2(tNear, tFar);
+}
+
+struct objecthitinfo {
+  float near;
+  float far;
+  int index;
+};
 
 float intersectTriangle(vec3 origin, vec3 ray, vec3 v0, vec3 v1, vec3 v2) {
   vec3 edge1 = v1 - v0;
@@ -65,24 +92,41 @@ float intersectTriangle(vec3 origin, vec3 ray, vec3 v0, vec3 v1, vec3 v2) {
 }
 
 struct hitinfo {
-  int triIndex;
   float t;
 };
 
-bool intersectTriangles(vec3 origin, vec3 dir, out hitinfo info) {
+bool intersectTriangles(vec3 origin, vec3 dir, const object o, out hitinfo info) {
   float smallestT = MAX_SCENE_BOUNDS;
   bool found = false;
-  int numTriangles = triangles.length();
-  for (int i = 0; i < numTriangles; i++) {
+  for (int i = o.first; i < o.first + o.count; i++) {
     const triangle tri = triangles[i];
     float t = intersectTriangle(origin, dir, tri.v0, tri.v1, tri.v2);
     if (t >= 0.0 && t < smallestT) {
       info.t = t;
-      info.triIndex = i;
       found = true;
     }
   }
   return found;
+}
+
+bool intersect(vec3 origin, vec3 dir, out hitinfo info) {
+  hitinfo bestHit;
+  info.t = MAX_SCENE_BOUNDS;
+  bool hit = false;
+  int numObjects = objects.length();
+  for (int i = 0; i < numObjects; i++) {
+    const object o = objects[i];
+    vec2 lambda = intersectObject(origin, dir, o);
+    if (lambda.y > 0.0 && lambda.x <= lambda.y && lambda.x < info.t) {
+      if (intersectTriangles(origin, dir, o, bestHit)) {
+        if (bestHit.t < info.t) {
+          info.t = bestHit.t;
+          hit = true;
+        }
+      }
+    }
+  }
+  return hit;
 }
 
 vec4 trace(vec3 origin, vec3 dir, vec3 hitPoint, vec3 normal) {
@@ -95,13 +139,13 @@ vec4 trace(vec3 origin, vec3 dir, vec3 hitPoint, vec3 normal) {
   vec3 shadowRayDir = lightPosition - hitPoint;
   vec3 shadowRayStart = hitPoint + normal * EPSILON;
   hitinfo shadowRayInfo;
-  bool lightObstructed = intersectTriangles(shadowRayStart, shadowRayDir, shadowRayInfo);
+  
+  bool lightObstructed = intersect(shadowRayStart, shadowRayDir, shadowRayInfo);
   if (!lightObstructed || shadowRayInfo.t >= 1.0) {
     float cosineFallOff = max(0.0, dot(normal, normalize(shadowRayDir)));
     float oneOverR2 = 1.0 / dot(shadowRayDir, shadowRayDir);
     accumulated += attenuation * vec4(lightColor * LIGHT_BASE_INTENSITY * cosineFallOff * oneOverR2);
   }
-  attenuation *= dot(normal, dir);
   return accumulated;
 }
 

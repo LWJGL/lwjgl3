@@ -5,11 +5,13 @@
 package org.lwjgl.demo.opengl.raytracing;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.demo.opengl.DemoUtils;
 import org.lwjgl.demo.util.Camera;
 import org.lwjgl.demo.util.Matrix4f;
 import org.lwjgl.demo.util.Vector3f;
 import org.lwjgl.demo.util.WavefrontMeshLoader;
 import org.lwjgl.demo.util.WavefrontMeshLoader.Mesh;
+import org.lwjgl.demo.util.WavefrontMeshLoader.MeshObject;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
@@ -46,8 +48,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 public class HybridDemoSsboTriangles {
 
 	private long window;
-	private int width = 500;
-	private int height = 500;
+	private int width = 1200;
+	private int height = 800;
 	private boolean resetFramebuffer = true;
 
 	private int raytraceTexture;
@@ -56,11 +58,12 @@ public class HybridDemoSsboTriangles {
 	private int quadProgram;
 	private int rasterProgram;
 	private int fbo;
-	private int depthBuffer;
+	private int depthRenderBuffer;
 	private int vaoScene;
 	private int positionTexture;
 	private int normalTexture;
-	private int ssbo;
+	private int trianglesSsbo;
+	private int objectsSsbo;
 	private int sampler;
 
 	private int eyeUniform;
@@ -71,15 +74,16 @@ public class HybridDemoSsboTriangles {
 	private int timeUniform;
 	private int blendFactorUniform;
 	private int trianglesSsboBinding;
+	private int objectsSsboBinding;
 	private int framebufferImageBinding;
 	private int worldPositionImageBinding;
 	private int worldNormalImageBinding;
 
-	private int viewMatrixUniform;
-	private int projectionMatrixUniform;
-
 	private int workGroupSizeX;
 	private int workGroupSizeY;
+
+	private int viewMatrixUniform;
+	private int projectionMatrixUniform;
 
 	private Mesh mesh;
 	private Camera camera;
@@ -94,12 +98,10 @@ public class HybridDemoSsboTriangles {
 	private int frameNumber;
 
 	private Vector3f tmpVector = new Vector3f();
-	private Vector3f cameraLookAt = new Vector3f(0.0f, 1.5f, 0.0f);
+	private Vector3f cameraLookAt = new Vector3f(0.0f, 1.0f, 0.0f);
 	private Vector3f cameraUp = new Vector3f(0.0f, 1.0f, 0.0f);
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
-
-	private ByteBuffer renderBuffers;
 
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
@@ -136,7 +138,7 @@ public class HybridDemoSsboTriangles {
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
-		glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GL_TRUE);
 
 		window = glfwCreateWindow(width, height, "Raytracing Demo (triangle mesh)", NULL, NULL);
 		if (window == NULL) {
@@ -224,15 +226,7 @@ public class HybridDemoSsboTriangles {
 		createQuadProgram();
 		initQuadProgram();
 
-		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
-
-		/*
-		 * Our rasterizer wants to output color attchment 0 and 1.
-		 */
-		renderBuffers = BufferUtils.createByteBuffer(4 * 2);
-		renderBuffers.putInt(GL_COLOR_ATTACHMENT0).putInt(GL_COLOR_ATTACHMENT1);
-		renderBuffers.flip();
 
 		/* Setup camera */
 		camera = new Camera();
@@ -245,8 +239,8 @@ public class HybridDemoSsboTriangles {
 	 * read by our Compute Shader.
 	 */
 	private void createSceneSSBO() {
-		this.ssbo = glGenBuffers();
-		glBindBuffer(GL_ARRAY_BUFFER, ssbo);
+		this.trianglesSsbo = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, trianglesSsbo);
 		ByteBuffer ssboData = BufferUtils.createByteBuffer(4 * (4 /* + 4 */) * mesh.numVertices);
 		FloatBuffer fv = ssboData.asFloatBuffer();
 		for (int i = 0; i < mesh.numVertices; i++) {
@@ -259,6 +253,29 @@ public class HybridDemoSsboTriangles {
 			// float ny = mesh.normals.get(3 * i + 1);
 			// float nz = mesh.normals.get(3 * i + 2);
 			// fv.put(nx).put(ny).put(nz).put(0.0f);
+		}
+		glBufferData(GL_ARRAY_BUFFER, ssboData, GL_STATIC_DRAW);
+		glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+		this.objectsSsbo = glGenBuffers();
+		glBindBuffer(GL_ARRAY_BUFFER, objectsSsbo);
+		ssboData = BufferUtils.createByteBuffer(4 * (4 * 3) * mesh.objects.size());
+		fv = ssboData.asFloatBuffer();
+		IntBuffer iv = ssboData.asIntBuffer();
+		for (MeshObject o : mesh.objects) {
+			System.err.println(o);
+			/*
+			 * std430 SSBO data layout:
+			 * 
+			 * vec4: min.xyz, 0.0
+			 * vec4: max.xyz, <int>first
+			 * vec4: <int>count, 0, 0, 0
+			 */
+			fv.put(o.min.x).put(o.min.y).put(o.min.z).put(0.0f);
+			fv.put(o.max.x).put(o.max.y).put(o.max.z);
+			iv.position(fv.position());
+			iv.put(o.first).put(o.count);
+			fv.position(iv.position() + 3);
 		}
 		glBufferData(GL_ARRAY_BUFFER, ssboData, GL_STATIC_DRAW);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
@@ -295,15 +312,15 @@ public class HybridDemoSsboTriangles {
 		int vbo = glGenBuffers();
 		glBindVertexArray(vao);
 		glBindBuffer(GL_ARRAY_BUFFER, vbo);
-		ByteBuffer bb = BufferUtils.createByteBuffer(4 * (3 + 3) * mesh.numVertices);
-		FloatBuffer fv = bb.asFloatBuffer();
-		fv.put(mesh.positions);
-		fv.put(mesh.normals);
-		glBufferData(GL_ARRAY_BUFFER, bb, GL_STATIC_DRAW);
+		long bufferSize = 4 * (3 + 3) * mesh.numVertices;
+		long normalsOffset = 4L * 3 * mesh.numVertices;
+		glBufferData(GL_ARRAY_BUFFER, bufferSize, GL_STATIC_DRAW);
+		glBufferSubData(GL_ARRAY_BUFFER, 0L, mesh.positions);
+		glBufferSubData(GL_ARRAY_BUFFER, normalsOffset, mesh.normals);
 		glEnableVertexAttribArray(0);
 		glVertexAttribPointer(0, 3, GL_FLOAT, false, 0, 0L);
 		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, 4L * 3 * mesh.numVertices);
+		glVertexAttribPointer(1, 3, GL_FLOAT, false, 0, normalsOffset);
 		glBindBuffer(GL_ARRAY_BUFFER, 0);
 		glBindVertexArray(0);
 		this.vaoScene = vao;
@@ -311,17 +328,20 @@ public class HybridDemoSsboTriangles {
 
 	/**
 	 * Create the frame buffer object that our rasterizer uses to render the
-	 * view-space position and normal into the textures.
+	 * world-space position and normal into the textures.
 	 */
 	private void createRasterFrameBufferObject() {
 		this.fbo = glGenFramebuffers();
-		this.depthBuffer = glGenRenderbuffers();
+		this.depthRenderBuffer = glGenRenderbuffers();
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
+		IntBuffer renderBuffers = BufferUtils.createIntBuffer(2).put(GL_COLOR_ATTACHMENT0).put(GL_COLOR_ATTACHMENT1);
+		renderBuffers.flip();
+		glDrawBuffers(renderBuffers);
+		glBindRenderbuffer(GL_RENDERBUFFER, depthRenderBuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, positionTexture, 0);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, normalTexture, 0);
-		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthBuffer);
+		glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderBuffer);
 		int fboStatus = glCheckFramebufferStatus(GL_FRAMEBUFFER);
 		if (fboStatus != GL_FRAMEBUFFER_COMPLETE) {
 			throw new AssertionError("Could not create FBO: " + fboStatus);
@@ -337,8 +357,8 @@ public class HybridDemoSsboTriangles {
 	 */
 	private void createQuadProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
-		int fshader = Demo.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
+		int vshader = DemoUtils.createShader("demo/raytracing/quad.vs", GL_VERTEX_SHADER, "330");
+		int fshader = DemoUtils.createShader("demo/raytracing/quad.fs", GL_FRAGMENT_SHADER, "330");
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertex");
@@ -362,8 +382,8 @@ public class HybridDemoSsboTriangles {
 	 */
 	private void createRasterProgram() throws IOException {
 		int program = glCreateProgram();
-		int vshader = Demo.createShader("demo/raytracing/raster.vs", GL_VERTEX_SHADER);
-		int fshader = Demo.createShader("demo/raytracing/raster.fs", GL_FRAGMENT_SHADER);
+		int vshader = DemoUtils.createShader("demo/raytracing/raster.vs", GL_VERTEX_SHADER);
+		int fshader = DemoUtils.createShader("demo/raytracing/raster.fs", GL_FRAGMENT_SHADER);
 		glAttachShader(program, vshader);
 		glAttachShader(program, fshader);
 		glBindAttribLocation(program, 0, "vertexPosition");
@@ -389,9 +409,9 @@ public class HybridDemoSsboTriangles {
 	 */
 	private void createComputeProgram() throws IOException {
 		int program = glCreateProgram();
-		int cshader = Demo.createShader("demo/raytracing/hybridSsboTriangle.glsl", GL_COMPUTE_SHADER);
-		int random = Demo.createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
-		int randomCommon = Demo.createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
+		int cshader = DemoUtils.createShader("demo/raytracing/hybridSsboTriangle.glsl", GL_COMPUTE_SHADER);
+		int random = DemoUtils.createShader("demo/raytracing/random.glsl", GL_COMPUTE_SHADER);
+		int randomCommon = DemoUtils.createShader("demo/raytracing/randomCommon.glsl", GL_COMPUTE_SHADER);
 		glAttachShader(program, cshader);
 		glAttachShader(program, random);
 		glAttachShader(program, randomCommon);
@@ -444,10 +464,14 @@ public class HybridDemoSsboTriangles {
 		timeUniform = glGetUniformLocation(computeProgram, "time");
 		blendFactorUniform = glGetUniformLocation(computeProgram, "blendFactor");
 
-		int trianglesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Triangles");
 		IntBuffer props = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
+		
+		int objectsResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Objects");
+		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, objectsResourceIndex, props, null, params);
+		objectsSsboBinding = params.get(0);
+		int trianglesResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Triangles");
 		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, trianglesResourceIndex, props, null, params);
 		trianglesSsboBinding = params.get(0);
 
@@ -505,7 +529,7 @@ public class HybridDemoSsboTriangles {
 		glDeleteTextures(raytraceTexture);
 		glDeleteTextures(positionTexture);
 		glDeleteTextures(normalTexture);
-		glDeleteRenderbuffers(depthBuffer);
+		glDeleteRenderbuffers(depthRenderBuffer);
 		glDeleteFramebuffers(fbo);
 
 		createRaytracingTexture();
@@ -572,7 +596,6 @@ public class HybridDemoSsboTriangles {
 
 		/* Rasterize the boxes into the FBO */
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glDrawBuffers(2, renderBuffers);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
 		glDrawArrays(GL_TRIANGLES, 0, mesh.numVertices);
@@ -616,8 +639,10 @@ public class HybridDemoSsboTriangles {
 		glBindImageTexture(worldPositionImageBinding, positionTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(worldNormalImageBinding, normalTexture, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
 
+		/* Bind the SSBO containing our objects */
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, objectsSsboBinding, objectsSsbo);
 		/* Bind the SSBO containing our triangles */
-		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, trianglesSsboBinding, ssbo);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, trianglesSsboBinding, trianglesSsbo);
 
 		/* Compute appropriate invocation dimension. */
 		int worksizeX = mathRoundPoT(width);
@@ -635,6 +660,7 @@ public class HybridDemoSsboTriangles {
 
 		/* Reset bindings. */
 		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, trianglesSsboBinding, 0);
+		glBindBufferBase(GL_SHADER_STORAGE_BUFFER, objectsSsboBinding, 0);
 		glBindImageTexture(framebufferImageBinding, 0, 0, false, 0, GL_READ_WRITE, GL_RGBA32F);
 		glBindImageTexture(worldPositionImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA32F);
 		glBindImageTexture(worldNormalImageBinding, 0, 0, false, 0, GL_READ_ONLY, GL_RGBA16F);
