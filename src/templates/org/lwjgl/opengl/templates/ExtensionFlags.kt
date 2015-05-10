@@ -636,6 +636,39 @@ val AMD_conservative_depth = EXT_FLAG.nativeClassGL("AMD_conservative_depth", po
 		Requires ${GL30.core}. ${GL42.promoted}
 		"""
 }
+val AMD_gcn_shader = EXT_FLAG.nativeClassGL("AMD_gcn_shader", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension exposes miscellaneous features of the AMD "Graphics Core Next" shader architecture that do not cleanly fit into other extensions
+		and are not significant enough alone to warrant their own extensions. This includes cross-SIMD lane ballots, cube map query functions and a
+		functionality to query the elapsed shader core time.
+
+		Requires ${"AMD_gpu_shader_int64".cap} or ${"NV_gpu_shader5".cap}.
+		"""
+}
+val AMD_gpu_shader_int64 = EXT_FLAG.nativeClassGL("AMD_gpu_shader_int64", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension was developed based on the ${"NV_gpu_shader5".cap} extension to allow implementations supporting 64-bit integers to expose the feature
+		without the additional requirements that are present in ${"NV_gpu_shader5".cap}.
+
+		Requires ${GL40.core} and GLSL 4.00.
+		"""
+}
+val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_counter_ops", postfix = AMD) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension is written against the OpenGL 4.3 (core) specification and the GLSL 4.30.7 specification.
+
+		Requires ${GL42.core} or ${"ARB_shader_atomic_counters".cap}.
+		"""
+}
 val AMD_shader_stencil_export = EXT_FLAG.nativeClassGL("AMD_shader_stencil_export", postfix = AMD) {
 	documentation =
 		"""
