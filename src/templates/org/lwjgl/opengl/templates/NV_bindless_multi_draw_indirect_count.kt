@@ -18,6 +18,8 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 
 		This extension adds the possibility to define the number of drawcalls within a multi-draw-indirect call from the GPU, as provided by
 		ARB_indirect_parameters, for the functions added in NV_bindless_multi_draw_indirect.
+		
+		Requires ${NV_bindless_multi_draw_indirect.link}, ${ARB_indirect_parameters.link}.
 		"""
 
 	GLvoid.func(

@@ -888,6 +888,15 @@ val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGL("NV_shader_atomic_fp16
 		Requires ${"NV_gpu_shader5".cap}.
 		"""
 }
+val NV_shader_atomic_int64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_int64", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides additional GLSL built-in functions and assembly opcodes allowing shaders to perform additional atomic read-modify-write
+		operations on 64-bit signed and unsigned integers stored in buffer object memory.
+		"""
+}
 val NV_shader_storage_buffer_object = EXT_FLAG.nativeClassGL("NV_shader_storage_buffer_object", postfix = NV) {
 	documentation =
 		"""
