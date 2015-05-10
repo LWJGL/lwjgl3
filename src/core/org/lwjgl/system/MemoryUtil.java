@@ -271,7 +271,7 @@ public final class MemoryUtil {
 
 		ByteBuffer string = ACCESSOR.newByteBuffer(address, maxLength);
 
-		return memSetupBuffer(string, address, memStrLen2(string, 0));
+		return memSetupBuffer(string, address, memStrLen2(string, 0) << 1);
 	}
 
 	/**
@@ -921,25 +921,25 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The null-terminator is
-	 * assumed to be 2 consecutive {@code \0} characters.
+	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at the current {@code buffer} position. The
+	 * null-terminator is assumed to be 2 consecutive {@code \0} characters.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
 	 *
-	 * @return the string length, <strong>in bytes</strong>
+	 * @return the string length, <strong>in UTF16 code units</strong>
 	 */
 	public static int memStrLen2(ByteBuffer buffer) {
 		return memStrLen2(buffer, buffer.position());
 	}
 
 	/**
-	 * Calculates the byte count of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is assumed to be 2
-	 * consecutive {@code \0} characters.
+	 * Calculates the number of UTF16 code units of the null-terminated string in {@code buffer} that starts at index {@code from}. The null-terminator is
+	 * assumed to be 2 consecutive {@code \0} characters.
 	 *
 	 * @param buffer the {@link ByteBuffer} that contains the string
 	 * @param from   the index at which to start the search
 	 *
-	 * @return the string length, <strong>in bytes</strong>
+	 * @return the string length, <strong>in UTF16 code units</strong>
 	 */
 	public static int memStrLen2(ByteBuffer buffer, int from) {
 		int to = from;
@@ -948,7 +948,7 @@ public final class MemoryUtil {
 				break;
 			to += 2;
 		}
-		return to - from;
+		return (to - from) >> 1;
 	}
 
 	/**
@@ -1147,16 +1147,16 @@ public final class MemoryUtil {
 		if ( buffer == null )
 			return null;
 
-		return memDecodeUTF16(buffer, buffer.remaining());
+		return memDecodeUTF16(buffer, buffer.remaining() >> 1);
 	}
 
 	/**
-	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-16 string.
+	 * Decodes the bytes with index {@code [position(), position()+(length*2)}) in {@code buffer}, as a UTF-16 string.
 	 * <p/>
 	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
-	 * @param length the number of bytes to decode
+	 * @param length the number of characters to decode
 	 *
 	 * @return the decoded {@link String}
 	 */
@@ -1165,18 +1165,18 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-16 string.
+	 * Decodes the bytes with index {@code [offset, offset+(length*2)}) in {@code buffer}, as a UTF-16 string.
 	 * <p/>
 	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
-	 * @param length the number of bytes to decode
-	 * @param offset the offset at which to start decoding.
+	 * @param length the number of characters to decode
+	 * @param offset the offset at which to start decoding, in bytes.
 	 *
 	 * @return the decoded {@link String}
 	 */
 	public static String memDecodeUTF16(ByteBuffer buffer, int length, int offset) {
-		char[] chars = new char[length >> 1];
+		char[] chars = new char[length];
 
 		for ( int i = 0; i < chars.length; i++ ) {
 			chars[i] = buffer.getChar(offset + (i << 1));
