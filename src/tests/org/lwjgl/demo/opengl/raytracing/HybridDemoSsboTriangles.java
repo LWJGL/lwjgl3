@@ -13,7 +13,9 @@ import org.lwjgl.demo.util.WavefrontMeshLoader;
 import org.lwjgl.demo.util.WavefrontMeshLoader.Mesh;
 import org.lwjgl.demo.util.WavefrontMeshLoader.MeshObject;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.ContextCapabilities;
 import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.NVDrawTexture;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
@@ -39,9 +41,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * We want to get to a real ray tracer soon, and therefore we want to be able to
  * trace triangle meshes.
  * <p>
- * This demo does not (yet) use a spatial acceleration structure, such as a
- * kd-tree with stackless rope traversal. Instead it iterates through all
- * triangles for every ray intersection test.
+ * This demo uses a simple non-hierarchical AABB spatial acceleration structure,
+ * to first test a ray against the AABB of all triangles of a single object in
+ * the mesh before testing all triangles of the object.
  * 
  * @author Kai Burjack
  */
@@ -109,6 +111,7 @@ public class HybridDemoSsboTriangles {
 	GLFWCursorPosCallback cpCallback;
 	GLFWMouseButtonCallback mbCallback;
 
+	private boolean hasNVDrawTexture;
 	Closure debugProc;
 
 	private void init() throws IOException {
@@ -205,7 +208,12 @@ public class HybridDemoSsboTriangles {
 		width = framebufferSize.get(0);
 		height = framebufferSize.get(1);
 
-		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback(System.err);
+		GLContext ctx = GLContext.createFromCurrent();
+		debugProc = ctx.setupDebugMessageCallback(System.err);
+
+		/* Check optional extensions */
+		ContextCapabilities caps = ctx.getCapabilities();
+		hasNVDrawTexture = caps.GL_NV_draw_texture;
 
 		/* Load OBJ model */
 		WavefrontMeshLoader loader = new WavefrontMeshLoader();
@@ -217,14 +225,16 @@ public class HybridDemoSsboTriangles {
 		createRasterizerTextures();
 		createRasterFrameBufferObject();
 		createSceneSSBO();
-		createFullScreenVao();
 		createSceneVao();
 		createRasterProgram();
 		initRasterProgram();
 		createComputeProgram();
 		initComputeProgram();
-		createQuadProgram();
-		initQuadProgram();
+		if (!hasNVDrawTexture) {
+			createFullScreenVao();
+			createQuadProgram();
+			initQuadProgram();
+		}
 
 		glEnable(GL_CULL_FACE);
 
@@ -235,8 +245,12 @@ public class HybridDemoSsboTriangles {
 	}
 
 	/**
-	 * Create a Shader Storage Buffer Object which will hold our triangles to be
-	 * read by our Compute Shader.
+	 * Create two SSBOs:
+	 * <ul>
+	 * <li>one to hold all our triangles of the mesh
+	 * <li>another to hold the objects of the mesh with their AABBs and triangle
+	 * indexes
+	 * </ul>
 	 */
 	private void createSceneSSBO() {
 		this.trianglesSsbo = glGenBuffers();
@@ -263,7 +277,6 @@ public class HybridDemoSsboTriangles {
 		fv = ssboData.asFloatBuffer();
 		IntBuffer iv = ssboData.asIntBuffer();
 		for (MeshObject o : mesh.objects) {
-			System.err.println(o);
 			/*
 			 * std430 SSBO data layout:
 			 * 
@@ -467,7 +480,7 @@ public class HybridDemoSsboTriangles {
 		IntBuffer props = BufferUtils.createIntBuffer(1);
 		IntBuffer params = BufferUtils.createIntBuffer(1);
 		props.put(0, GL_BUFFER_BINDING);
-		
+
 		int objectsResourceIndex = glGetProgramResourceIndex(computeProgram, GL_SHADER_STORAGE_BLOCK, "Objects");
 		glGetProgramResourceiv(computeProgram, GL_SHADER_STORAGE_BLOCK, objectsResourceIndex, props, null, params);
 		objectsSsboBinding = params.get(0);
@@ -616,8 +629,9 @@ public class HybridDemoSsboTriangles {
 
 		/*
 		 * We are going to average multiple successive frames, so here we
-		 * compute the blend factor between old frame and new frame. 0.0 - use
-		 * only the new frame > 0.0 - blend between old frame and new frame
+		 * compute the blend factor between old frame and new frame.
+		 * = 0.0 - use only the new frame
+		 * > 0.0 - blend between old frame and new frame
 		 */
 		float blendFactor = (float) frameNumber / ((float) frameNumber + 1.0f);
 		glUniform1f(blendFactorUniform, blendFactor);
@@ -673,20 +687,27 @@ public class HybridDemoSsboTriangles {
 	 * Present the final image on the screen/viewport.
 	 */
 	private void present() {
-		/*
-		 * Draw the rendered image on the screen using textured full-screen
-		 * quad.
-		 */
 		glDisable(GL_DEPTH_TEST);
-		glUseProgram(quadProgram);
-		glBindVertexArray(vao);
-		glBindTexture(GL_TEXTURE_2D, raytraceTexture);
-		glBindSampler(0, this.sampler);
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-		glBindSampler(0, 0);
-		glBindTexture(GL_TEXTURE_2D, 0);
-		glBindVertexArray(0);
-		glUseProgram(0);
+		if (hasNVDrawTexture) {
+			/*
+			 * Use some fancy NV extension to draw a screen-aligned textured
+			 * quad without needing a VAO/VBO or a shader.
+			 */
+			NVDrawTexture.glDrawTextureNV(raytraceTexture, sampler, 0.0f, 0.0f, width, height, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f);
+		} else {
+			/*
+			 * Draw a full-screen quad using the VAO and shader.
+			 */
+			glUseProgram(quadProgram);
+			glBindVertexArray(vao);
+			glBindTexture(GL_TEXTURE_2D, raytraceTexture);
+			glBindSampler(0, this.sampler);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+			glBindSampler(0, 0);
+			glBindTexture(GL_TEXTURE_2D, 0);
+			glBindVertexArray(0);
+			glUseProgram(0);
+		}
 	}
 
 	private void loop() {
