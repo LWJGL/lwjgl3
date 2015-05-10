@@ -137,7 +137,7 @@ class CallbackType(
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
 fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
-fun typedef(typedef: PointerType, name: String) = PointerType(name, typedef.mapping as PointerMapping, typedef.includesPointer, typedef.elementType)
+fun typedef(typedef: PointerType, name: String) = PointerType(name, typedef.mapping as PointerMapping, true, typedef.elementType)
 
 // --- [ TYPE MAPPINGS ] ---
 
