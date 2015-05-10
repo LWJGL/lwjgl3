@@ -813,6 +813,25 @@ val NV_geometry_shader4 = EXT_FLAG.nativeClassGL("NV_geometry_shader4", postfix 
 		Requires ${"EXT_geometry_shader4".cap}.
 		"""
 }
+val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGL("NV_geometry_shader_passthrough", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a shading language abstraction to express such shaders without requiring explicit logic to manually copy attributes from input
+		vertices to output vertices.
+		"""
+}
+val NV_gpu_shader5 = EXT_FLAG.nativeClassGL("NV_gpu_shader5", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs.
+		
+		Requires ${GL32.core}, GLSL 1.5 and ${"ARB_gpu_shader5".cap}.
+		"""
+}
 val NV_parameter_buffer_object2 = EXT_FLAG.nativeClassGL("NV_parameter_buffer_object2", postfix = NV) {
 	documentation =
 		"""
@@ -821,6 +840,15 @@ val NV_parameter_buffer_object2 = EXT_FLAG.nativeClassGL("NV_parameter_buffer_ob
 		This extension builds on the ${"NV_parameter_buffer_object".cap} extension to provide additional flexibility in sourcing data from buffer objects.
 
 		Requires ${GL20.core}, ${"NV_gpu_program4".cap} and ${"NV_parameter_buffer_object".cap}.
+		"""
+}
+val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGL("NV_sample_mask_override_coverage", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension allows the fragment shader to control whether the gl_SampleMask output can enable samples that were not covered by the original
+		primitive, or that failed the early depth/stencil tests.
 		"""
 }
 val NV_shader_atomic_counters = EXT_FLAG.nativeClassGL("NV_shader_atomic_counters", postfix = NV) {
@@ -847,6 +875,17 @@ val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", po
 		This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${"ARB_shader_image_load_store".cap}, or
 		${"EXT_shader_image_load_store".cap} is supported) or floating-point pointers (if ${"NV_gpu_shader5".cap} is supported). Additionally, assembly opcodes
 		for these operations is also provided if ${"NV_gpu_program5".cap} is supported.
+		"""
+}
+val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGL("NV_shader_atomic_fp16_vector", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides GLSL built-in functions and assembly opcodes allowing shaders to perform a limited set of atomic read-modify-write operations
+		to buffer or texture memory with 16-bit floating point vector surface formats. 
+
+		Requires ${"NV_gpu_shader5".cap}.
 		"""
 }
 val NV_shader_storage_buffer_object = EXT_FLAG.nativeClassGL("NV_shader_storage_buffer_object", postfix = NV) {
