@@ -111,7 +111,7 @@ public class HybridDemoSsboTriangles {
 	GLFWCursorPosCallback cpCallback;
 	GLFWMouseButtonCallback mbCallback;
 
-	private boolean hasNVDrawTexture;
+	ContextCapabilities caps;
 	Closure debugProc;
 
 	private void init() throws IOException {
@@ -212,8 +212,7 @@ public class HybridDemoSsboTriangles {
 		debugProc = ctx.setupDebugMessageCallback(System.err);
 
 		/* Check optional extensions */
-		ContextCapabilities caps = ctx.getCapabilities();
-		hasNVDrawTexture = caps.GL_NV_draw_texture;
+		caps = ctx.getCapabilities();
 
 		/* Load OBJ model */
 		WavefrontMeshLoader loader = new WavefrontMeshLoader();
@@ -230,7 +229,7 @@ public class HybridDemoSsboTriangles {
 		initRasterProgram();
 		createComputeProgram();
 		initComputeProgram();
-		if (!hasNVDrawTexture) {
+		if (!caps.GL_NV_draw_texture) {
 			createFullScreenVao();
 			createQuadProgram();
 			initQuadProgram();
@@ -688,7 +687,7 @@ public class HybridDemoSsboTriangles {
 	 */
 	private void present() {
 		glDisable(GL_DEPTH_TEST);
-		if (hasNVDrawTexture) {
+		if (caps.GL_NV_draw_texture) {
 			/*
 			 * Use some fancy NV extension to draw a screen-aligned textured
 			 * quad without needing a VAO/VBO or a shader.

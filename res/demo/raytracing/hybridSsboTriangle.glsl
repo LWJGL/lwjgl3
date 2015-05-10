@@ -30,11 +30,11 @@ struct object {
   int count;
 };
 
-layout(std430, binding=2) buffer Objects {
+layout(std430, binding=2) readonly buffer Objects {
   object[] objects;
 };
 
-layout(std430, binding=1) buffer Triangles {
+layout(std430, binding=1) readonly buffer Triangles {
   triangle[] triangles;
 };
 
@@ -95,13 +95,12 @@ struct hitinfo {
   float t;
 };
 
-bool intersectTriangles(vec3 origin, vec3 dir, const object o, out hitinfo info) {
-  float smallestT = MAX_SCENE_BOUNDS;
+bool intersectTriangles(vec3 origin, vec3 dir, const object o, inout hitinfo info) {
   bool found = false;
   for (int i = o.first; i < o.first + o.count; i++) {
     const triangle tri = triangles[i];
     float t = intersectTriangle(origin, dir, tri.v0, tri.v1, tri.v2);
-    if (t >= 0.0 && t < smallestT) {
+    if (t >= 0.0 && t < info.t) {
       info.t = t;
       found = true;
     }
@@ -110,7 +109,6 @@ bool intersectTriangles(vec3 origin, vec3 dir, const object o, out hitinfo info)
 }
 
 bool intersect(vec3 origin, vec3 dir, out hitinfo info) {
-  hitinfo bestHit;
   info.t = MAX_SCENE_BOUNDS;
   bool hit = false;
   int numObjects = objects.length();
@@ -118,11 +116,8 @@ bool intersect(vec3 origin, vec3 dir, out hitinfo info) {
     const object o = objects[i];
     vec2 lambda = intersectObject(origin, dir, o);
     if (lambda.y > 0.0 && lambda.x <= lambda.y && lambda.x < info.t) {
-      if (intersectTriangles(origin, dir, o, bestHit)) {
-        if (bestHit.t < info.t) {
-          info.t = bestHit.t;
-          hit = true;
-        }
+      if (intersectTriangles(origin, dir, o, info)) {
+        hit = true;
       }
     }
   }
