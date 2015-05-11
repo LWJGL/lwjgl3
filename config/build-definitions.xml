@@ -1,6 +1,10 @@
 <!--
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
+
+Defines global properties and useful macros.
+
+This script is included in /build.xml and /config/update-dependencies.xml.
 -->
 <project name="definitions" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
 	<import file="build-modules.xml"/>

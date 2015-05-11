@@ -9,6 +9,7 @@ License terms: http://lwjgl.org/license.php
 	<property name="config" location="config" relative="true"/>
 
 	<import file="${config}/build-definitions.xml"/>
+	<import file="${config}/build-assets.xml"/>
 	<import file="${config}/${platform}/build.xml"/>
 
 	<!-- Initialize build -->
@@ -355,7 +356,7 @@ License terms: http://lwjgl.org/license.php
 		</testng>
 	</target>
 
-	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime">
+	<target name="demo" description="Runs an LWJGL demo" depends="compile-tests, compile-native, -init-runtime, -update-assets">
 		<fail message="Please use -Dclass=&lt;class&gt; to specify the demo main class to run." unless="class"/>
 
 		<java classname="${class}" classpathref="runtime.classpath" fork="true" failonerror="true" taskname="Demo">

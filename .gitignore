@@ -7,3 +7,6 @@
 .DS_Store
 *.bat
 *.sh
+*.zip
+*.wav
+touch.txt

@@ -1,0 +1,33 @@
+<!--
+Copyright LWJGL. All rights reserved.
+License terms: http://lwjgl.org/license.php
+
+Binary assets used in demos are not committed to the git repository.
+This script downloads such assets from S3.
+
+This script is included in /build.xml and depends on /build-definitions.xml
+-->
+<project name="assets" basedir="../" xmlns:if="ant:if" xmlns:unless="ant:unless">
+	<target name="-update-assets" description="Updates the demo assets, if necessary">
+		<uptodate property="refresh-assets" targetfile="${config}/build-assets.xml">
+			<srcfiles dir="${res}/demo" includes="touch.txt"/>
+		</uptodate>
+		<antcall target="update-assets" if:set="refresh-assets"/>
+	</target>
+
+	<target name="update-assets" description="Updates the demo assets">
+		<update-demo-asset path="footsteps.wav"/>
+		<update-demo-asset path="raytracing/scene.obj.zip"/>
+		<!-- Add more assets here -->
+
+		<touch file="${res}/demo/touch.txt"/>
+	</target>
+
+	<macrodef name="update-demo-asset">
+		<attribute name="path"/>
+
+		<sequential>
+			<update name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${res}/demo/@{path}"/>
+		</sequential>
+	</macrodef>
+</project>

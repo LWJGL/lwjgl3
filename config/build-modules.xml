@@ -1,6 +1,10 @@
 <!--
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
+
+Defines which library bindings will be build with LWJGL.
+
+This script is included in /config/build-definitions.xml.
 -->
 <project name="modules" basedir="../">
 

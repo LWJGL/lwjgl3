@@ -1,6 +1,8 @@
 <!--
 Copyright LWJGL. All rights reserved.
 License terms: http://lwjgl.org/license.php
+
+Downloads LWJGL's library dependencies.
 -->
 <project name="LWJGL" basedir="." default="update-dependencies">
 
@@ -10,7 +12,7 @@ License terms: http://lwjgl.org/license.php
 	<!-- *********************************** -->
 	<property name="testng" value="6.8.13"/>
 	<property name="jcommander" value="1.47"/>
-	<property name="kotlinc-build" value="0.11.91"/>
+	<property name="kotlinc-build" value="0.11.91.4"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
