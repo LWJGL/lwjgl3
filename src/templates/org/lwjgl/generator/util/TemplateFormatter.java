@@ -193,7 +193,7 @@ public class TemplateFormatter {
 
 	private static final String DESCRIPTION    = "(?:(?:/[*]+\\s*(.+?)\\s*[*]+/)|(?:([^:]+):))";
 	private static final String DEFINE         = "(?:#define\\s+)?";
-	private static final String CONSTANT_VALUE = "(?:[-x\\p{XDigit}]+U?L?)|(?:\\([^)]+\\))|[0-9A-Za-z_]+";
+	private static final String CONSTANT_VALUE = "[0-9A-Za-z_]+|\\([^)]+\\)|[-x\\p{XDigit}]+U?L?";
 
 	private static final Pattern BLOCK_PATTERN = Pattern.compile(
 		DESCRIPTION + "\\s+((?:\\s*" + DEFINE + "[0-9A-Za-z_]+\\s+(?:" + CONSTANT_VALUE + ")[ \t]*" + COMMENT + "\\s*$)+)\\s*",
