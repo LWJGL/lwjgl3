@@ -16,7 +16,7 @@ val AL_SOFT_loop_points = "SOFTLoopPoints".nativeClassAL("SOFT_loop_points") {
 		or all buffers of a queue, which is not desirable for sounds that may want a lead-in or lead-out along with the looping portion.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alBufferiv and alGetBufferiv.",
 
 		"LOOP_POINTS_SOFT" _ 0x2015

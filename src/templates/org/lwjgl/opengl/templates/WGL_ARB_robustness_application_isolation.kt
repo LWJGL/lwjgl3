@@ -18,7 +18,7 @@ val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsola
 		Requires ${WGL_ARB_extensions_string.link} and ${WGL_ARB_create_context_robustness.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a bit in the attribute value for WGLARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attribList} argument to
 		WGLARBCreateContext#CreateContextAttribsARB().

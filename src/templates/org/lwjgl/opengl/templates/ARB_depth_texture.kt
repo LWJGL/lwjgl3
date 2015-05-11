@@ -20,7 +20,7 @@ val ARB_depth_texture = "ARBDepthTexture".nativeClassGL("ARB_depth_texture", pos
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, CopyTexImage1D and CopyTexImage2D.",
 
 		"DEPTH_COMPONENT16_ARB" _ 0x81A5,
@@ -28,13 +28,13 @@ val ARB_depth_texture = "ARBDepthTexture".nativeClassGL("ARB_depth_texture", pos
 		"DEPTH_COMPONENT32_ARB" _ 0x81A7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
 		"TEXTURE_DEPTH_SIZE_ARB" _ 0x884A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"DEPTH_TEXTURE_MODE_ARB" _ 0x884B

@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_IMA4 = "EXTIma4".nativeClassAL("EXT_IMA4") {
 	documentation = "bindings to AL_EXT_IMA4 extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_IMA4 tokens.",
 
 		"FORMAT_MONO_IMA4" _ 0x1300,

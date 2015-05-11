@@ -35,13 +35,13 @@ val ARB_compute_shader = "ARBComputeShader".nativeClassGL("ARB_compute_shader") 
 		Requires ${GL42.core}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned in the {@code params} parameter by GetShaderiv.",
 
 		"COMPUTE_SHADER" _ 0x91B9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_COMPUTE_UNIFORM_BLOCKS" _ 0x91BB,
@@ -55,44 +55,44 @@ val ARB_compute_shader = "ARBComputeShader".nativeClassGL("ARB_compute_shader") 
 		"MAX_COMPUTE_WORK_GROUP_INVOCATIONS" _ 0x90EB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
 
 		"MAX_COMPUTE_WORK_GROUP_COUNT" _ 0x91BE,
 		"MAX_COMPUTE_WORK_GROUP_SIZE" _ 0x91BF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"COMPUTE_WORK_GROUP_SIZE" _ 0x8267
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
 		"UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER" _ 0x90EC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER" _ 0x90ED
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"DISPATCH_INDIRECT_BUFFER" _ 0x90EE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"DISPATCH_INDIRECT_BUFFER_BINDING" _ 0x90EF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code stages} parameter of UseProgramStages.",
 
 		"COMPUTE_SHADER_BIT" _ 0x00000020

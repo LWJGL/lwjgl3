@@ -37,20 +37,20 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmapEXT, and BindTexture.",
 
 		"TEXTURE_1D_ARRAY_EXT" _ 0x8C18,
 		"TEXTURE_2D_ARRAY_EXT" _ 0x8C1A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CopyTexSubImage3D, CompressedTexImage3D, and CompressedTexSubImage3D.",
 
 		"PROXY_TEXTURE_2D_ARRAY_EXT" _ 0x8C1B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of TexImage2D, TexSubImage2D, CopyTexImage2D, CopyTexSubImage2D, CompressedTexImage2D, and
 		CompressedTexSubImage2D.
@@ -59,7 +59,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"PROXY_TEXTURE_1D_ARRAY_EXT" _ 0x8C19
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
 		"TEXTURE_BINDING_1D_ARRAY_EXT" _ 0x8C1C,
@@ -67,7 +67,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"MAX_ARRAY_TEXTURE_LAYERS_EXT" _ 0x88FF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameterf, TexParameteri, TexParameterfv, and TexParameteriv when the {@code pname} parameter is
 		TEXTURE_COMPARE_MODE_ARB.
@@ -76,7 +76,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"COMPARE_REF_DEPTH_TO_TEXTURE_EXT" _ 0x884E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		COMPARE_REF_DEPTH_TO_TEXTURE_EXT is simply an alias for the existing COMPARE_R_TO_TEXTURE token in OpenGL 2.0; the alternate name reflects the fact that
 		the R coordinate is not always used.) Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameterivEXT.
@@ -85,7 +85,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT" _ 0x8CD4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER is simply an alias for the FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT token provided in EXT_framebuffer_object.
 		This extension generalizes the notion of "{@code zoffset}" to include layers of an array texture.) Returned by the {@code type} parameter of
@@ -98,7 +98,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"SAMPLER_2D_ARRAY_SHADOW_EXT" _ 0x8DC4
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureLayerEXT",
 		"",
 

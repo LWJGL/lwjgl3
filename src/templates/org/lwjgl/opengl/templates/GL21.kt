@@ -23,13 +23,13 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"CURRENT_RASTER_SECONDARY_COLOR" _ 0x845F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"FLOAT_MAT2x3" _ 0x8B65,
@@ -40,7 +40,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		"FLOAT_MAT4x3" _ 0x8B6A
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix2x3fv",
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
@@ -50,7 +50,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix3x2fv",
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
@@ -60,7 +60,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix2x4fv",
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
@@ -70,7 +70,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix4x2fv",
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
@@ -80,7 +80,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix3x4fv",
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
@@ -90,7 +90,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformMatrix4x3fv",
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 
@@ -102,7 +102,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 
 	// ARB_pixel_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferParameteriv, and
 		GetBufferPointerv.
@@ -112,7 +112,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		"PIXEL_UNPACK_BUFFER" _ 0x88EC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"PIXEL_PACK_BUFFER_BINDING" _ 0x88ED,
@@ -121,7 +121,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 
 	// EXT_texture_sRGB
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D.",
 
 		"SRGB" _ 0x8C40,

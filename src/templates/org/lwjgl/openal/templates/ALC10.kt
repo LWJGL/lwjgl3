@@ -14,7 +14,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 
 	documentation = "Native bindings to ALC 1.0 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"General tokens.",
 
 		"INVALID" _ 0xFFFFFFFF.i,
@@ -22,7 +22,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"TRUE" _ 0x1
 	)
 
-	val ContextAttributes = IntConstant.block(
+	val ContextAttributes = IntConstant(
 		"Context creation attributes.",
 
 		"FREQUENCY" _ 0x1007,
@@ -30,7 +30,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"SYNC" _ 0x1009
 	).javaDocLinks + " ALC11#MONO_SOURCES ALC11#STEREO_SOURCES"
 
-	IntConstant.block(
+	IntConstant(
 		"Error conditions.",
 
 		"NO_ERROR" _ 0x0,
@@ -41,7 +41,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"OUT_OF_MEMORY" _ 0xA005
 	)
 
-	val StringQueries = IntConstant.block(
+	val StringQueries = IntConstant(
 		"String queries.",
 
 		"DEFAULT_DEVICE_SPECIFIER" _ 0x1004,
@@ -49,7 +49,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"EXTENSIONS" _ 0x1006
 	).javaDocLinks + " ALC11#CAPTURE_DEFAULT_DEVICE_SPECIFIER ALC11#CAPTURE_DEVICE_SPECIFIER"
 
-	val IntegerQueries = IntConstant.block(
+	val IntegerQueries = IntConstant(
 		"Integer queries.",
 
 		"MAJOR_VERSION" _ 0x1000,
@@ -58,7 +58,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"ALL_ATTRIBUTES" _ 0x1003
 	).javaDocLinks + " ALC11#CAPTURE_SAMPLES"
 
-	ALCdevice_p.func(
+	ALCdevice_p(
 		"OpenDevice",
 		"""
 		Allows the application to connect to a device.
@@ -70,7 +70,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		mods(nullable, const) _ ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"CloseDevice",
 		"""
 		Allows the application to disconnect from a device.
@@ -82,7 +82,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		const _ ALCdevice_p.IN("deviceHandle", "the device to close")
 	)
 
-	ALCcontext_p.func(
+	ALCcontext_p(
 		"CreateContext",
 		"Creates an AL context.",
 
@@ -94,7 +94,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		)
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"MakeContextCurrent",
 		"""
 		Makes a context current with respect to OpenAL operation.
@@ -109,7 +109,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		nullable _ ALCcontext_p.IN("context", "the context to make current")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"ProcessContext",
 		"""
 		The current context is the only context accessible to state changes by AL commands (aside from state changes affecting shared objects). However,
@@ -123,7 +123,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCcontext_p.IN("context", "the context to mark for processing")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"SuspendContext",
 		"""
 		The application can suspend any context from processing (including the current one). To indicate that a context should be suspended from processing
@@ -135,7 +135,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCcontext_p.IN("context", "the context to mark as suspended")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"DestroyContext",
 		"""
 		Destroys a context.
@@ -148,19 +148,19 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCcontext_p.IN("context", "the context to destroy")
 	)
 
-	ALCcontext_p.func(
+	ALCcontext_p(
 		"GetCurrentContext",
 		"Queries for, and obtains a handle to, the current context for the application. If there is no current context, NULL is returned."
 	)
 
-	ALCdevice_p.func(
+	ALCdevice_p(
 		"GetContextsDevice",
 		"Queries for, and obtains a handle to, the device of a given context.",
 
 		ALCcontext_p.IN("context", "the context to query")
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"IsExtensionPresent",
 		"""
 		Verifies that a given extension is available for the current context and the device it is associated with.
@@ -173,7 +173,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		const _ ALCcharASCII_p.IN("extName", "the extension name")
 	)
 
-	ALCvoidptr.func(
+	ALCvoidptr(
 		"GetProcAddress",
 		"""
 		Retrieves extension entry points.
@@ -189,7 +189,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		const _ ALcharASCII_p.IN("funcName", "the function name")
 	)
 
-	ALCenum.func(
+	ALCenum(
 		"GetEnumValue",
 		"""
 		Returns extension enum values.
@@ -202,7 +202,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		const _ ALCcharASCII_p.IN("enumName", "the enum name")
 	)
 
-	ALCenum.func(
+	ALCenum(
 		"GetError",
 		"""
 		Queries ALC errors.
@@ -216,7 +216,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCdevice_p.IN("deviceHandle", "the device to query")
 	)
 
-	(const _ ALCcharUTF8_p).func(
+	(const _ ALCcharUTF8_p)(
 		"GetString",
 		"""
 		Obtains string value(s) from ALC.
@@ -228,7 +228,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCenum.IN("token", "the information to query", StringQueries)
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"GetIntegerv",
 		"Obtains integer value(s) from ALC.",
 

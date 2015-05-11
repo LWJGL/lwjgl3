@@ -14,14 +14,14 @@ val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub
 
 	documentation = "bindings to AL_SOFT_buffer_sub_data extension."
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv.",
 
 		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"BufferSubDataSOFT",
 		"""
 		To update a section of buffered sample data, use the function alBufferSubDataSOFT.

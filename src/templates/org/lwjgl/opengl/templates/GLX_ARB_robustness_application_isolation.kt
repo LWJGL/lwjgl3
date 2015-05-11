@@ -20,7 +20,7 @@ val GLX_ARB_robustness_application_isolation = "GLXARBRobustnessApplicationIsola
 		Requires ${GLX14.glx} and ${GLX_ARB_create_context_robustness.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a bit in the attribute value for GLXARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
 		GLXARBCreateContext#CreateContextAttribsARB().

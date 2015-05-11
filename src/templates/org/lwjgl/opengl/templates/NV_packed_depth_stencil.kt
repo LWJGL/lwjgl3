@@ -16,7 +16,7 @@ val NV_packed_depth_stencil = "NVPackedDepthStencil".nativeClassGL("NV_packed_de
 		textures; this provides a more efficient way to supply data for a 24-bit depth texture.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D,
 		and GetTexImage, and by the {@code type} parameter of CopyPixels.
@@ -25,7 +25,7 @@ val NV_packed_depth_stencil = "NVPackedDepthStencil".nativeClassGL("NV_packed_de
 		"DEPTH_STENCIL_NV" _ 0x84F9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage.

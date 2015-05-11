@@ -10,7 +10,7 @@ import org.lwjgl.opencl.*
 val APPLE_command_queue_select_compute_units = "APPLECommandQueueSelectComputeUnits".nativeClassCL("APPLE_command_queue_select_compute_units", APPLE) {
 	documentation = "Native bindings to the $extensionName extension."
 
-	IntConstant.block(
+	IntConstant(
 		"",
 
 		"QUEUE_NUM_COMPUTE_UNITS_APPLE" _ 0x10000014

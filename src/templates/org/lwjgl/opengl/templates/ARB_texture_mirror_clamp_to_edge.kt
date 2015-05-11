@@ -21,7 +21,7 @@ val ARB_texture_mirror_clamp_to_edge = "ARBTextureMirrorClampToEdge".nativeClass
 		Requires ${GL14.core}. ${GL44.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameter{if}, SamplerParameter{if} and SamplerParameter{if}v, and by the {@code params} parameter of
 		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or

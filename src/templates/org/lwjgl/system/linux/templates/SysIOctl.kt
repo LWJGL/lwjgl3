@@ -15,7 +15,7 @@ val sys_ioctl = "SysIOctl".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <sys/ioctl.h>."
 
-	int.func(
+	int(
 		"ioctl",
 		"""
 		Manipulates the underlying device parameters of special files.  In particular, many operating characteristics of character special files (e.g.,

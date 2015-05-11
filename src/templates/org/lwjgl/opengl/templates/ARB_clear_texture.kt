@@ -30,7 +30,7 @@ val ARB_clear_texture = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
         Requires ${GL13.core}. ${GL44.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
 
 		"CLEAR_TEXTURE" _ 0x9365

@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_LOKI_quadriphonic = "LOKIQuadriphonic".nativeClassAL("LOKI_quadriphonic") {
 	documentation = "bindings to AL_LOKI_quadriphonic extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_LOKI_quadriphonic tokens.",
 
 		"FORMAT_QUAD8_LOKI" _ 0x10004,

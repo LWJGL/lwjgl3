@@ -21,7 +21,7 @@ val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGL("EXT_text
 		value; the reduction mode identifies how these texels are combined.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter to SamplerParameter{i f}{v}, SamplerParameterI{u}iv, GetSamplerParameter{i f}v, GetSamplerParameterI{u}iv,
 		TexParameter{i f}{v}, TexParameterI{u}iv, GetTexParameter{i f}v, GetTexParameterI{u}iv, TextureParameter{i f}{v}EXT, TextureParameterI{u}ivEXT,
@@ -32,7 +32,7 @@ val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGL("EXT_text
 		"TEXTURE_REDUCTION_MODE_EXT" _ 0x9366
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} or {@code params} parameter to SamplerParameter{i f}{v}, SamplerParameterI{u}iv, TexParameter{i f}{v}, TexParameterI{u}iv,
 		TextureParameter{i f}{v}EXT, TextureParameterI{u}ivEXT, MultiTexParameter{i f}{v}EXT, or MultiTexParameterI{u}ivEXT when {@code pname} is

@@ -14,7 +14,7 @@ val APPLE_command_queue_priority = "APPLECommandQueuePriority".nativeClassCL("AP
 
 	documentation = "Native bindings to the $extensionName extension."
 
-	IntConstant.block(
+	IntConstant(
 		"",
 
 		"QUEUE_PRIORITY_APPLE" _ 0x10000013,
@@ -22,7 +22,7 @@ val APPLE_command_queue_priority = "APPLECommandQueuePriority".nativeClassCL("AP
 		"QUEUE_PRIORITY_DEFAULT_APPLE" _ 0x10000017
 	)
 
-	cl_command_queue.func(
+	cl_command_queue(
 		"CreateCommandQueueWithPropertiesAPPLE",
 		"",
 

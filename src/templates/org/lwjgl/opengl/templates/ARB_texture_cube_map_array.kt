@@ -30,25 +30,25 @@ val ARB_texture_cube_map_array = "ARBTextureCubeMapArray".nativeClassGL("ARB_tex
 		${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, BindTexture, and GenerateMipmap.",
 
 		"TEXTURE_CUBE_MAP_ARRAY_ARB" _ 0x9009
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
 		"TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB" _ 0x900A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CompressedTeximage3D, CompressedTexSubImage3D and CopyTexSubImage3D.",
 
 		"PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB" _ 0x900B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"TEXTURE_CUBE_MAP_ARRAY_ARB Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"SAMPLER_CUBE_MAP_ARRAY_ARB" _ 0x900C,

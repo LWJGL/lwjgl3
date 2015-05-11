@@ -14,20 +14,20 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 
 	documentation = "The core OpenCL 2.0 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"OpenCL Version.",
 
 		"VERSION_2_0" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Error Codes",
 
 		"INVALID_PIPE_SIZE" _ -69,
 		"INVALID_DEVICE_QUEUE" _ -70
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_info",
 
 		"DEVICE_QUEUE_ON_HOST_PROPERTIES" _ 0x102A,
@@ -48,14 +48,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"DEVICE_PREFERRED_LOCAL_ATOMIC_ALIGNMENT" _ 0x105A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_queue_properties",
 
 		"QUEUE_ON_DEVICE" expr "1 << 2",
 		"QUEUE_ON_DEVICE_DEFAULT" expr "1 << 3"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_svm_capabilities",
 
 		"DEVICE_SVM_COARSE_GRAIN_BUFFER" expr "1 << 0",
@@ -64,32 +64,32 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"DEVICE_SVM_ATOMICS" expr "1 << 3"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_queue_info",
 
 		"QUEUE_SIZE" _ 0x1094
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_svm_mem_flags",
 
 		"MEM_SVM_FINE_GRAIN_BUFFER" expr "1 << 10",
 		"MEM_SVM_ATOMICS" expr "1 << 11"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_object_type",
 
 		"MEM_OBJECT_PIPE" _ 0x10F7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_info",
 
 		"MEM_USES_SVM_POINTER" _ 0x1109
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_channel_order",
 
 		"sRGB" _ 0x10BF,
@@ -99,14 +99,14 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"ABGR" _ 0x10C3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_pipe_info",
 
 		"PIPE_PACKET_SIZE" _ 0x1120,
 		"PIPE_MAX_PACKETS" _ 0x1121
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_sampler_info",
 
 		"SAMPLER_MIP_FILTER_MODE" _ 0x1155,
@@ -114,27 +114,27 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"SAMPLER_LOD_MAX" _ 0x1157
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_program_build_info",
 
 		"PROGRAM_BUILD_GLOBAL_VARIABLE_TOTAL_SIZE" _ 0x1185
 	)
 
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_arg_type_qualifer",
 
 		"KERNEL_ARG_TYPE_PIPE" expr "1 << 3"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_exec_info",
 
 		"KERNEL_EXEC_INFO_SVM_PTRS" _ 0x11B6,
 		"KERNEL_EXEC_INFO_SVM_FINE_GRAIN_SYSTEM" _ 0x11B7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_type",
 
 		"COMMAND_SVM_FREE" _ 0x1209,
@@ -144,13 +144,13 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"COMMAND_SVM_UNMAP" _ 0x120D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_profiling_info",
 
 		"PROFILING_COMMAND_COMPLETE" _ 0x1284
 	)
 
-	cl_command_queue.func(
+	cl_command_queue(
 		"CreateCommandQueueWithProperties",
 		"""
 		Creates a host or device command-queue on a specific device.
@@ -195,7 +195,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_mem.func(
+	cl_mem(
 		"CreatePipe",
 		"Creates a pipe object.",
 
@@ -237,7 +237,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetPipeInfo",
 		"Queries information specific to a pipe object.",
 
@@ -265,7 +265,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	void_p.func(
+	void_p(
 		"SVMAlloc",
 		"""
 		Allocates a shared virtual memory buffer (referred to as a SVM buffer) that can be shared by the host and all devices in an OpenCL context that support
@@ -327,7 +327,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	void.func(
+	void(
 		"SVMFree",
 		"""
 		Frees a shared virtual memory buffer allocated using #SVMAlloc().
@@ -346,7 +346,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		void_p.IN("svm_pointer", "must be the value returned by a call to #SVMAlloc(). If a $NULL pointer is passed in {@code svm_pointer}, no action occurs.")
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueSVMFree",
 		"Enqueues a command to free the shared virtual memory buffer allocated using #SVMAlloc() or a shared system memory pointer.",
 
@@ -390,7 +390,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueSVMMemcpy",
 		"""
 		Enqueues a command to do a {@code memcpy} operation.
@@ -438,7 +438,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueSVMMemFill",
 		"Enqueues a command to fill a region in memory with a pattern of a given pattern size.",
 
@@ -487,7 +487,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueSVMMap",
 		"""
 		Enqueues a command that will allow the host to update a region of a SVM buffer. Note that since we are enqueuing a command with a SVM buffer, the region
@@ -537,7 +537,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueSVMUnmap",
 		"""
 		Enqueues a command to indicate that the host has completed updating the region given by {@code svm_ptr} and which was specified in a previous call to
@@ -570,7 +570,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetKernelArgSVMPointer",
 		"Set a SVM pointer as the argument value for a specific argument of a kernel.",
 
@@ -607,7 +607,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetKernelExecInfo",
 		"""
 		Can be used to pass additional information other than argument values to a kernel.
@@ -665,7 +665,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"""
 	)
 
-	cl_sampler.func(
+	cl_sampler(
 		"CreateSamplerWithProperties",
 		"Creates a sampler object.",
 

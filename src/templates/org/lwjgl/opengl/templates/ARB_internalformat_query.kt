@@ -21,7 +21,7 @@ val ARB_internalformat_query = "ARBInternalformatQuery".nativeClassGL("ARB_inter
 		Requires ${GL30.core} or ${ARB_framebuffer_object.link}. ${GL42.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ.",
 
 		"NUM_SAMPLE_COUNTS" _ 0x9380

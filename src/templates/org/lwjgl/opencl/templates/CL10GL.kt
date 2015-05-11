@@ -62,14 +62,14 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		been released, will result in undefined behavior.
 		"""
 
-		IntConstant.block(
+		IntConstant(
 			"Error Codes",
 
 			"INVALID_GL_OBJECT" expr "-60",
 			"INVALID_MIP_LEVEL" expr "-62"
 		)
 
-		val GLObjectTypes = IntConstant.block(
+		val GLObjectTypes = IntConstant(
 			"cl_gl_object_type",
 
 			"GL_OBJECT_BUFFER" _ 0x2000,
@@ -78,14 +78,14 @@ val CL10GL = dependsOn(Module.OPENGL) {
 			"GL_OBJECT_RENDERBUFFER" _ 0x2003
 		).javaDocLinks + " CL12GL#GL_OBJECT_TEXTURE_2D_ARRAY CL12GL#GL_OBJECT_TEXTURE1D CL12GL#GL_OBJECT_TEXTURE1D_ARRAY CL12GL#GL_OBJECT_TEXTURE_BUFFER"
 
-		val GLTextureInfo = IntConstant.block(
+		val GLTextureInfo = IntConstant(
 			"cl_gl_texture_info",
 
 			"GL_TEXTURE_TARGET" _ 0x2004,
 			"GL_MIPMAP_LEVEL" _ 0x2005
 		).javaDocLinks + " KHRGLMSAASharing#GL_NUM_SAMPLES"
 
-		cl_mem.func(
+		cl_mem(
 			"CreateFromGLBuffer",
 			"""
 		Creates an OpenCL buffer object from an OpenGL buffer object.
@@ -129,7 +129,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_mem.func(
+		cl_mem(
 			"CreateFromGLTexture2D",
 			"""
 		Creates an OpenCL 2D image object from an OpenGL 2D texture object, or a single face of an OpenGL cubemap texture object.
@@ -197,7 +197,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_mem.func(
+		cl_mem(
 			"CreateFromGLTexture3D",
 			"""
 		Creates an OpenCL 3D image object from an OpenGL 3D texture object.
@@ -261,7 +261,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_mem.func(
+		cl_mem(
 			"CreateFromGLRenderbuffer",
 			"""
 		Creates an OpenCL 2D image object from an OpenGL renderbuffer object.
@@ -305,7 +305,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_int.func(
+		cl_int(
 			"GetGLObjectInfo",
 			"""
 		Queries the OpenGL object used to create the OpenCL memory object and information about the object type i.e. whether it is a texture, renderbuffer or
@@ -332,7 +332,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_int.func(
+		cl_int(
 			"GetGLTextureInfo",
 			"Returns additional information about the GL texture object associated with {@code memobj}.",
 
@@ -365,7 +365,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_int.func(
+		cl_int(
 			"EnqueueAcquireGLObjects",
 			"""
 		Acquire OpenCL memory objects that have been created from OpenGL objects. These objects need to be acquired before they can be used by any OpenCL
@@ -413,7 +413,7 @@ val CL10GL = dependsOn(Module.OPENGL) {
 		"""
 		)
 
-		cl_int.func(
+		cl_int(
 			"EnqueueReleaseGLObjects",
 			"""
 		Releases OpenCL memory objects that have been created from OpenGL objects. These objects need to be released before they can be used by OpenGL. The

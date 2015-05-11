@@ -22,7 +22,7 @@ val intel_simultaneous_sharing = "INTELSimultaneousSharing".nativeClassCL("intel
 		Requires ${CL12.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a property being queried in the {@code param_name} parameter of CL10#GetDeviceInfo().
 
@@ -35,7 +35,7 @@ val intel_simultaneous_sharing = "INTELSimultaneousSharing".nativeClassCL("intel
 		"DEVICE_SIMULTANEOUS_INTEROPS_INTEL" _ 0x4104
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a property being queried in the {@code param_name} parameter of CL10#GetDeviceInfo().
 

@@ -23,7 +23,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		Requires ${GL21.core}.
 		"""
 
-	val accessModes = IntConstant.block(
+	val accessModes = IntConstant(
 		"Accepted by the {@code access} parameters of #DXRegisterObjectNV() and #DXObjectAccessNV().",
 
 		"ACCESS_READ_ONLY_NV" _ 0x0000,
@@ -33,7 +33,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 
 	val void_p = PointerType("void")
 
-	BOOL.func(
+	BOOL(
 		"DXSetResourceShareHandleNV",
 		"",
 
@@ -41,21 +41,21 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		HANDLE.IN("shareHandle", "the share handle that the OS generated for the resource")
 	)
 
-	HANDLE.func(
+	HANDLE(
 		"DXOpenDeviceNV",
 		"Prepares a DirectX device for interoperability and returns a handle to a GL/DirectX interop device.",
 
 		void_p.IN("dxDevice", "a pointer to a supported Direct3D device object")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DXCloseDeviceNV",
 		"",
 
 		HANDLE.IN("device", "")
 	);
 
-	HANDLE.func(
+	HANDLE(
 		"DXRegisterObjectNV",
 		"Prepares a DirectX object for use by the GL and returns a handle to a GL/DirectX interop object.",
 
@@ -70,7 +70,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 	);
 
 
-	BOOL.func(
+	BOOL(
 		"DXUnregisterObjectNV",
 		"",
 
@@ -78,7 +78,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		HANDLE.IN("object", "")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DXObjectAccessNV",
 		"Modifies the access mode of an interop object, if a different access mode is required after the object has been registered.",
 
@@ -86,7 +86,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		GLenum.IN("access", "the new access mode", accessModes)
 	)
 
-	BOOL.func(
+	BOOL(
 		"DXLockObjectsNV",
 		"""
 		Before a GL object which is associated with a DirectX resource may be used, it must be locked with this function.
@@ -104,7 +104,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		HANDLE_p.IN("objects", "an array of {@code count} interop objects")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DXUnlockObjectsNV",
 		"Return control of an object to DirectX.",
 

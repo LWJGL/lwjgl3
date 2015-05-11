@@ -24,7 +24,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		It also offers the reverse operation of specifying a buffer allocated on another device to be used for write access by the GPU.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code flags} parameter of CL10#CreateBuffer().
 
@@ -36,7 +36,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		"MEM_BUS_ADDRESSABLE_AMD" expr "1<<30"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code flags} parameter of CL10#CreateBuffer().
 
@@ -50,7 +50,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		"MEM_EXTERNAL_PHYSICAL_AMD" expr "1<<31"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"New command types for the events returned by the $extensionName functions.",
 
 		"COMMAND_WAIT_SIGNAL_AMD" _ 0x4080,
@@ -58,7 +58,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 		"COMMAND_MAKE_BUFFERS_RESIDENT_AMD" _ 0x4082
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWaitSignalAMD",
 		"Instructs the OpenCL to wait until {@code value} is written to {@code buffer} before issuing the next command.",
 
@@ -84,7 +84,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 	    """
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWriteSignalAMD",
 		"""
 		This command instructs the OpenCL to write {@code value} to the signal address + {@code offset} of {@code buffer} (which must be a buffer created with
@@ -119,7 +119,7 @@ val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bu
 	    """
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueMakeBuffersResidentAMD",
 		"""
 		The application requires the bus address in order to access the buffers from a remote device. As the OS may rearrange buffers to make space for other

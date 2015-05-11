@@ -21,7 +21,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		renderer.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of GLXSGIXFBConfig#GetFBConfigAttribSGIX().",
 
 		"MAX_PBUFFER_WIDTH_SGIX" _ 0x8016,
@@ -31,7 +31,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		"OPTIMAL_PBUFFER_HEIGHT_SGIX" _ 0x801A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by GLXSGIXFBConfig#GetFBConfigAttribSGIX() (when {@code attribute} is set to GLXSGIXFBConfig#DRAWABLE_TYPE_SGIX) and
 		accepted by the {@code attrib_list} parameter of GLXSGIXFBConfig#ChooseFBConfigSGIX() (following the
@@ -41,14 +41,14 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		"PBUFFER_BIT_SGIX" _ 0x00000004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attrib_list} parameter of #CreateGLXPbufferSGIX() and by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
 
 		"PRESERVED_CONTENTS_SGIX" _ 0x801B,
 		"LARGEST_PBUFFER_SGIX" _ 0x801C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of #QueryGLXPbufferSGIX().",
 
 		"WIDTH_SGIX" _ 0x801D,
@@ -56,27 +56,27 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		"EVENT_MASK_SGIX" _ 0x801F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mask} parameter of #SelectEventSGIX() and returned in the {@code mask} parameter of #GetSelectedEventSGIX().",
 
 		"BUFFER_CLOBBER_MASK_SGIX" _ 0x08000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code event_type} field of a \"buffer clobber\" event.",
 
 		"DAMAGED_SGIX" _ 0x8020,
 		"SAVED_SGIX" _ 0x8021
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code draw_type} field of a \"buffer clobber\" event.",
 
 		"WINDOW_SGIX" _ 0x8022,
 		"PBUFFER_SGIX" _ 0x8023
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code mask} field of a \"buffer clobber\" event.",
 
 		"FRONT_LEFT_BUFFER_BIT_SGIX" _ 0x00000001,
@@ -90,7 +90,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		"SAMPLE_BUFFERS_BIT_SGIX" _ 0x00000100
 	)
 
-	GLXPbuffer.func(
+	GLXPbuffer(
 		"CreateGLXPbufferSGIX",
 		"Creates a single GLXPbuffer and returns its XID.",
 
@@ -101,7 +101,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		mods(nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional null-terminated list of attributes")
 	)
 
-	void.func(
+	void(
 		"DestroyGLXPbufferSGIX",
 		"Destroys a GLXPbuffer.",
 
@@ -109,7 +109,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		GLXPbuffer.IN("pbuf", "the pbuffer to destroy")
 	)
 
-	void.func(
+	void(
 		"QueryGLXPbufferSGIX",
 		"Queries an attribute associated with a GLXPbuffer.",
 
@@ -119,7 +119,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		Check(1) _ unsigned_int_p.OUT("value", "returns the attribute value")
 	)
 
-	void.func(
+	void(
 		"SelectEventSGIX",
 		"Selects which GLX events should be received on a GLXdrawable.",
 
@@ -128,7 +128,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		unsigned_long.IN("mask", "the selection mask")
 	)
 
-	void.func(
+	void(
 		"GetSelectedEventSGIX",
 		"Returns which GLX events are selected for a GLXdrawable.",
 

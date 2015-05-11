@@ -32,20 +32,20 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
 		"CONTEXT_PROFILE_MASK" _ 0x9126
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Context profile bits.",
 
 		"CONTEXT_CORE_PROFILE_BIT" _ 0x00000001,
 		"CONTEXT_COMPATIBILITY_PROFILE_BIT" _ 0x00000002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_OUTPUT_COMPONENTS" _ 0x9122,
@@ -54,7 +54,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"MAX_FRAGMENT_INPUT_COMPONENTS" _ 0x9125
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferParameteri64v",
 		"Returns the value of a buffer object parameter.",
 
@@ -65,7 +65,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_draw_elements_base_vertex
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsBaseVertex",
 		"Renders primitives from array data with a per-element offset.",
 
@@ -80,7 +80,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawRangeElementsBaseVertex",
 		"Renders primitives from array data with a per-element offset.",
 
@@ -97,7 +97,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsInstancedBaseVertex",
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
@@ -113,7 +113,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLint.IN("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElementsBaseVertex",
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements and an offset to apply to each index.
@@ -131,21 +131,21 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_provoking_vertex
 
-	val ProvokingVertexModes = IntConstant.block(
+	val ProvokingVertexModes = IntConstant(
 		"Accepted by the {@code mode} parameter of ProvokingVertex.",
 
 		"FIRST_VERTEX_CONVENTION" _ 0x8E4D,
 		"LAST_VERTEX_CONVENTION" _ 0x8E4E
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"PROVOKING_VERTEX" _ 0x8E4F,
 		"QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION" _ 0x8E4C
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProvokingVertex",
 		"Specifies the vertex to be used as the source of data for flat shaded varyings.",
 
@@ -154,7 +154,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_seamless_cube_map
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and
 		GetDoublev.
@@ -165,13 +165,13 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_texture_multisample
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMultisamplefv.",
 
 		"SAMPLE_POSITION" _ 0x8E50
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -180,37 +180,37 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"SAMPLE_MASK" _ 0x8E51
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.",
 
 		"SAMPLE_MASK_VALUE" _ 0x8E52
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.",
 
 		"TEXTURE_2D_MULTISAMPLE" _ 0x9100
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage2DMultisample.",
 
 		"PROXY_TEXTURE_2D_MULTISAMPLE" _ 0x9101
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage3DMultisample.",
 
 		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3DMultisample.",
 
 		"PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9103
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_SAMPLE_MASK_WORDS" _ 0x8E59,
@@ -221,14 +221,14 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY" _ 0x9105
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_SAMPLES" _ 0x9106,
 		"TEXTURE_FIXED_SAMPLE_LOCATIONS" _ 0x9107
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"SAMPLER_2D_MULTISAMPLE" _ 0x9108,
@@ -239,7 +239,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910D
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexImage2DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 2D multisample texture's image.",
 
@@ -263,7 +263,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexImage3DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 3D multisample texture's image.",
 
@@ -288,7 +288,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetMultisamplefv",
 		"Retrieves the location of a sample.",
 
@@ -297,7 +297,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("val", "an array to receive the position of the sample")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"SampleMaski",
 		"Sets the value of a sub-word of the sample mask.",
 
@@ -307,7 +307,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_depth_clamp
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -318,13 +318,13 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_geometry_shader4
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
 
 		"GEOMETRY_SHADER" _ 0x8DD9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
 		"GEOMETRY_VERTICES_OUT" _ 0x8DDA,
@@ -332,7 +332,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"GEOMETRY_OUTPUT_TYPE" _ 0x8DDC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS" _ 0x8C29,
@@ -343,7 +343,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS" _ 0x8DE1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of Begin, DrawArrays, MultiDrawArrays, DrawElements, MultiDrawElements, and DrawRangeElements.",
 
 		"LINES_ADJACENCY" _ 0xA,
@@ -352,20 +352,20 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"TRIANGLE_STRIP_ADJACENCY" _ 0xD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
 		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS" _ 0x8DA8,
 		"FRAMEBUFFER_INCOMPLETE_LAYER_COUNT" _ 0x8DA9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachment- Parameteriv.",
 
 		"FRAMEBUFFER_ATTACHMENT_LAYERED" _ 0x8DA7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetFloatv, GetDoublev, and
 		GetBooleanv.
@@ -374,7 +374,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"PROGRAM_POINT_SIZE" _ 0x8642
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTexture",
 		"Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -386,13 +386,13 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_sync
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as the {@code pname} parameter of GetInteger64v.",
 
 		"MAX_SERVER_WAIT_TIMEOUT" _ 0x9111
 	)
 
-	val SyncProperties = IntConstant.block(
+	val SyncProperties = IntConstant(
 		"Accepted as the {@code pname} parameter of GetSynciv.",
 
 		"OBJECT_TYPE" _ 0x9112,
@@ -401,38 +401,38 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"SYNC_FLAGS" _ 0x9115
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE.",
 
 		"SYNC_FENCE" _ 0x9116
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} SYNC_CONDITION.",
 
 		"SYNC_GPU_COMMANDS_COMPLETE" _ 0x9117
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} SYNC_STATUS.",
 
 		"UNSIGNALED" _ 0x9118,
 		"SIGNALED" _ 0x9119
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code flags} parameter of ClientWaitSync.",
 
 		"SYNC_FLUSH_COMMANDS_BIT" _ 0x00000001
 	)
 
-	LongConstant.block(
+	LongConstant(
 		"Accepted in the {@code timeout} parameter of WaitSync.",
 
 		"TIMEOUT_IGNORED" expr "0xFFFFFFFFFFFFFFFFl" // TODO: http://youtrack.jetbrains.com/issue/KT-2780
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by ClientWaitSync.",
 
 		"ALREADY_SIGNALED" _ 0x911A,
@@ -441,7 +441,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"WAIT_FAILED" _ 0x911D
 	)
 
-	GLsync.func(
+	GLsync(
 		"FenceSync",
 		"Creates a new sync object and inserts it into the GL command stream.",
 
@@ -455,21 +455,21 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsSync",
 		"Determines if a name corresponds to a sync object.",
 
 		GLsync.IN("sync", "a value that may be the name of a sync object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteSync",
 		"Deletes a sync object.",
 
 		GLsync.IN("sync", "the sync object to be deleted")
 	)
 
-	GLenum.func(
+	GLenum(
 		"ClientWaitSync",
 		"""
 		Causes the client to block and wait for a sync object to become signaled. If {@code sync} is signaled when {@code glClientWaitSync} is called,
@@ -489,7 +489,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"WaitSync",
 		"""
 		Causes the GL server to block and wait for a sync object to become signaled.
@@ -506,7 +506,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
 	)
 
-	ReferenceGL("glGet") _ GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid(
 		"GetInteger64v",
 		"Returns the 64bit integer value or values of a selected parameter.",
 
@@ -514,7 +514,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
-	ReferenceGL("glGet") _ GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid(
 		"GetInteger64i_v",
 		"Queries the 64bit integer value of an indexed state variable.",
 
@@ -523,7 +523,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		mods(Check(1), returnValue) _ GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetSynciv",
 		"Queries the properties of a sync object.",
 

@@ -17,7 +17,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 
 	documentation = "Native bindings to GLX 1.3."
 
-	IntConstant.block(
+	IntConstant(
 		"Added in GLX 1.3.",
 
 		"WINDOW_BIT" _ 0x00000001,
@@ -78,7 +78,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		"PBUFFER_WIDTH" _ 0x8041
 	)
 
-	GLXFBConfig_p.func(
+	GLXFBConfig_p(
 		"GetFBConfigs",
 		"Returns the list of all GLXFBConfigs that are available on the specified screen.",
 
@@ -87,7 +87,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		autoSizeResult _ int_p.OUT("nelements", "returns the number of GLXFBConfigs in the returned list")
 	)
 
-	GLXFBConfig_p.func(
+	GLXFBConfig_p(
 		"ChooseFBConfig",
 		"Returns a list of GLXFBConfigs that match a list of attributes.",
 
@@ -97,7 +97,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		autoSizeResult _ int_p.OUT("nelements", "returns the number of GLXFBConfigs matched")
 	)
 
-	int.func(
+	int(
 		"GetFBConfigAttrib",
 		"Queries the value of a GLX attribute for a GLXFBConfig.",
 
@@ -107,7 +107,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		Check(1) _ int_p.OUT("value", "the attribute value")
 	)
 
-	XVisualInfo_p.func(
+	XVisualInfo_p(
 		"GetVisualFromFBConfig",
 		"Retrieves the associated visual of a GLXFBConfig.",
 
@@ -115,7 +115,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		GLXFBConfig.IN("config", "the GLXFBConfig")
 	)
 
-	GLXWindow.func(
+	GLXWindow(
 		"CreateWindow",
 		"Create an onscreen rendering area from an X Window and a desired GLXFBConfig.",
 
@@ -125,7 +125,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
-	GLXPixmap.func(
+	GLXPixmap(
 		"CreatePixmap",
 		"Creates a GLXPixmap offscreen rendering area from an X Pixmap and a desired GLXFBConfig.",
 
@@ -135,7 +135,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
-	void.func(
+	void(
 		"DestroyPixmap",
 		"Destroys a GLXPixmap.",
 
@@ -143,7 +143,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		GLXPixmap.IN("pixmap", "the GLXPixmap to destroy")
 	)
 
-	GLXPbuffer.func(
+	GLXPbuffer(
 		"CreatePbuffer",
 		"Creates a GLXPbuffer from a GLXFBConfig.",
 
@@ -152,7 +152,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None")
 	)
 
-	void.func(
+	void(
 		"DestroyPbuffer",
 		"Destroys a GLXPbuffer.",
 
@@ -160,7 +160,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		GLXPbuffer.IN("pbuf", "the GLXPbuffer to destroy")
 	)
 
-	void.func(
+	void(
 		"QueryDrawable",
 		"Queries an attribute associated with a GLXDrawable.",
 
@@ -170,7 +170,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		Check(1) _ unsigned_int_p.OUT("value", "returns the attribute value")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateNewContext",
 		"Creates an OpenGL rendering context.",
 
@@ -180,7 +180,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		nullable _ GLXContext.IN("share_list", "a GLXContext to share objects with"),
 		Bool.IN("direct", "whether direct rendering is requested")
 	)
-	Bool.func(
+	Bool(
 		"MakeContextCurrent",
 		"Makes a GLXContext current in the current thread.",
 
@@ -190,12 +190,12 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		nullable _ GLXContext.IN("ctx", "the GLXContext")
 	)
 
-	GLXDrawable.func(
+	GLXDrawable(
 		"GetCurrentReadDrawable",
 		"Returns the current GLXDrawable used for reading in the current thread."
 	)
 
-	int.func(
+	int(
 		"QueryContext",
 		"Queries the value of a GLXContext attribute.",
 
@@ -205,7 +205,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		Check(1) _ int_p.OUT("value", "returns the attribute value")
 	)
 
-	void.func(
+	void(
 		"SelectEvent",
 		"Selects which GLX events should be received on a GLXDrawable.",
 
@@ -214,7 +214,7 @@ val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 		unsigned_long.IN("event_mask", "the selection mask")
 	)
 
-	void.func(
+	void(
 		"GetSelectedEvent",
 		"Returns which GLX events are selected for a GLXDrawable.",
 

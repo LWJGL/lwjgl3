@@ -23,7 +23,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 
 	documentation = "Native bindings to GLX."
 
-	IntConstant.block(
+	IntConstant(
 		"Errors.",
 
 		"GLXBadContext" _ 0,
@@ -41,7 +41,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		"GLXBadWindow" _ 12
 	).noPrefix()
 
-	IntConstant.block(
+	IntConstant(
 		"Names for attributes to #GetConfig().",
 
 		"USE_GL" _ 1,
@@ -63,7 +63,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		"ACCUM_ALPHA_SIZE" _ 17
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Error return values from #GetConfig(). Success is indicated by a value of 0.",
 
 		"BAD_SCREEN" _ 1,
@@ -77,7 +77,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 
 	// --------------------------------------------------------
 
-	Bool.func(
+	Bool(
 		"QueryExtension",
 		"Ascertains if the GLX extension is defined for an X server.",
 
@@ -86,7 +86,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		Check(1) _ int_p.OUT("event_base", "returns the value of the first event code")
 	)
 
-	Bool.func(
+	Bool(
 		"QueryVersion",
 		"Queries the GLX version supported.",
 
@@ -95,7 +95,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		Check(1) _ int_p.OUT("minor", "returns the minor version")
 	)
 
-	int.func(
+	int(
 		"GetConfig",
 		"Returns a description of an OpenGL attribute exported by a Visual.",
 
@@ -105,7 +105,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		Check(1) _ int_p.OUT("value", "returns the attribute value")
 	)
 
-	XVisualInfo_p.func(
+	XVisualInfo_p(
 		"ChooseVisual",
 		"Finds a visual that matches the client’s specified attributes.",
 
@@ -120,7 +120,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		"""
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateContext",
 		"Creates an OpenGL context.",
 
@@ -130,7 +130,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		Bool.IN("direct", "whether direct rendering is requested")
 	)
 
-	Bool.func(
+	Bool(
 		"MakeCurrent",
 		"Makes a context current in the current thread",
 
@@ -139,7 +139,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		nullable _ GLXContext.IN("ctx", "the GLXContext to make current")
 	)
 
-	void.func(
+	void(
 		"CopyContext",
 		"Copies OpenGL rendering state from one context to another.",
 
@@ -152,7 +152,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		)
 	)
 
-	Bool.func(
+	Bool(
 		"IsDirect",
 		"Determines if an OpenGL rendering context is direct.",
 
@@ -160,7 +160,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		GLXContext.IN("ctx", "the GLXContext to query")
 	)
 
-	void.func(
+	void(
 		"DestroyContext",
 		"""
 		Destroys an OpenGL context.
@@ -173,17 +173,17 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		GLXContext.IN("ctx", "the GLXContext to destroy")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"GetCurrentContext",
 		"Returns the GLXContext that is current in the current thread."
 	)
 
-	GLXDrawable.func(
+	GLXDrawable(
 		"GetCurrentDrawable",
 		"Returns the XID of the current drawable used for rendering."
 	)
 
-	void.func(
+	void(
 		"WaitGL",
 		"""
 		Prevents X requests from executing until any outstanding OpenGL rendering is done.
@@ -194,7 +194,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		"""
 	)
 
-	void.func(
+	void(
 		"WaitX",
 		"""
 		Prevents the OpenGL command sequence from executing until any outstanding X requests are completed.
@@ -204,7 +204,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		"""
 	)
 
-	void.func(
+	void(
 		"SwapBuffers",
 		"""
 		For drawables that are double buffered, makes the contexts of the back buffer potentially visible (i.e., become the contents of the front buffer).
@@ -217,7 +217,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		GLXDrawable.IN("draw", "a double buffered GLXDrawable")
 	)
 
-	void.func(
+	void(
 		"UseXFont",
 		"Provides a shortcut for using X fonts.",
 
@@ -227,7 +227,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		int.IN("list_base", "the base list number")
 	)
 
-	GLXPixmap.func(
+	GLXPixmap(
 		"CreateGLXPixmap",
 		"Creates a GLXPixmap from a Pixmap.",
 
@@ -236,7 +236,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 		Pixmap.IN("pixmap", "the Pixmap")
 	)
 
-	void.func(
+	void(
 		"DestroyGLXPixmap",
 		"Destroys a GLXPixmap.",
 

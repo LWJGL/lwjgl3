@@ -30,14 +30,14 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		output.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Can be used to retrieve a high-precision source offset and playback latency.",
 
 		"SAMPLE_OFFSET_LATENCY_SOFT" _ 0x1200,
 		"SEC_OFFSET_LATENCY_SOFT" _ 0x1201
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"SourcedSOFT",
 		"Sets the double value of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -45,7 +45,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALdouble.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Source3dSOFT",
 		"Sets the 3 dimensional double values of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -55,7 +55,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALdouble.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"SourcedvSOFT",
 		"pointer version of #SourcedSOFT()",
 		ALuint.IN("source", "the source to modify"),
@@ -63,7 +63,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		const _ ALdouble_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSourcedSOFT",
 		"Gets the double value of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -71,7 +71,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALdouble_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSource3dSOFT",
 		"Gets the 3 dimensional double values of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -81,7 +81,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALdouble_p.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSourcedvSOFT",
 		"Pointer version of #GetSourcedSOFT()",
 		ALuint.IN("source", "the source to query"),
@@ -89,7 +89,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALdouble_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Sourcei64SOFT",
 		"Sets the 64 bit integer value of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -97,7 +97,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALint64SOFT.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Source3i64SOFT",
 		"Sets the 3 dimensional 64 bit integer values of a source parameter.",
 		ALuint.IN("source", "the source to modify"),
@@ -107,7 +107,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALint64SOFT.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Sourcei64vSOFT",
 		"Pointer version of #Sourcei64SOFT()",
 		ALuint.IN("source", "the source to modify"),
@@ -115,7 +115,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		const _ ALint64SOFT_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSourcei64SOFT",
 		"Gets the 64 bit integer value of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -123,7 +123,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALint64SOFT_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSource3i64SOFT",
 		"Gets the 3 dimensional 64 bit integer values of a source parameter.",
 		ALuint.IN("source", "the source to query"),
@@ -133,7 +133,7 @@ val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_late
 		ALint64SOFT_p.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetSourcei64vSOFT",
 		"Pointer version of #GetSourcei64SOFT()",
 		ALuint.IN("source", "the source to query"),

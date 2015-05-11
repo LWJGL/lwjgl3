@@ -17,7 +17,7 @@ val ARB_conditional_render_inverted = "ARBConditionalRenderInverted".nativeClass
 		Requires ${GL30.core}. ${GL45.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of GL30#BeginConditionalRender().",
 
 		"QUERY_WAIT_INVERTED" _ 0x8E17,

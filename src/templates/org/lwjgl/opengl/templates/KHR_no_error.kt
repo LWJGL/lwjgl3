@@ -20,7 +20,7 @@ val KHR_no_error = "KHRNoError".nativeClassGL("KHR_no_error") {
 		Requires ${GL20.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		" If set in GL30#CONTEXT_FLAGS, then no error behavior is enabled for this context.",
 
 		"CONTEXT_FLAG_NO_ERROR_BIT_KHR" _ 0x00000008

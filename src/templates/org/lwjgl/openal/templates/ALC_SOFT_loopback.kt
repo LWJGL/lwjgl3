@@ -20,7 +20,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		OpenAL will output audio to an audio device, with no mechanism to allow an application to divert the audio somewhere else.
 		"""
 
-	val Types = IntConstant.block(
+	val Types = IntConstant(
 		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"BYTE_SOFT" _ 0x1400,
@@ -32,7 +32,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"FLOAT_SOFT" _ 0x1406
 	).javaDocLinks
 
-	val Channels = IntConstant.block(
+	val Channels = IntConstant(
 		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
 
 		"MONO_SOFT" _ 0x1500,
@@ -43,14 +43,14 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		"7POINT1_SOFT" _ 0x1506
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as part of the {@code attrList} parameter of alcCreateContext.",
 
 		"FORMAT_CHANNELS_SOFT" _ 0x1990,
 		"FORMAT_TYPE_SOFT" _ 0x1991
 	)
 
-	ALCdevice_p.func(
+	ALCdevice_p(
 		"LoopbackOpenDeviceSOFT",
 		"""
 		Loopback devices provide a way for applications to "read back" rendered audio without it being sent to an actual audio device. It allows applications to
@@ -75,7 +75,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		)
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"IsRenderFormatSupportedSOFT",
 		"""
 		When creating contexts, the attribute list must specify the format used for rendering. This is done with the #FORMAT_CHANNELS_SOFT, #FORMAT_TYPE_SOFT,
@@ -90,7 +90,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		ALCenum.IN("type", "sample type of the written audio", Types)
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"RenderSamplesSOFT",
 		"""
 		The state of various objects on loopback devices (including processed buffers and source offsets) is processed only when new samples are rendered. To

@@ -34,7 +34,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		Requires ${CL12.link}.
 		"""
 
-	val AcceleratorInfo = IntConstant.block(
+	val AcceleratorInfo = IntConstant(
 		"Possible values for cl_accelerator_info_intel.",
 
 		"ACCELERATOR_DESCRIPTOR_INTEL" _ 0x4090,
@@ -43,7 +43,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		"ACCELERATOR_TYPE_INTEL" _ 0x4093
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Error codes used by functions in this extension.",
 
 		"INVALID_ACCELERATOR_INTEL" _ -1094,
@@ -52,7 +52,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		"ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL" _ -1097
 	)
 
-	cl_accelerator_intel.func(
+	cl_accelerator_intel(
 		"CreateAcceleratorINTEL",
 		"""
 		Accelerator objects represent the programmable state of an acceleration processor, engine, or algorithm. Accelerator objects can be supplied to kernels
@@ -103,7 +103,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 	    """
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainAcceleratorINTEL",
 		"Increments the accelerator reference count. #CreateAcceleratorINTEL() does an implicit retain.",
 
@@ -120,7 +120,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 	    """
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseAcceleratorINTEL",
 		"""
 		Decrements the accelerator reference count. The accelerator object is deleted after the reference count becomes zero and commands queued for execution
@@ -140,7 +140,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetAcceleratorInfoINTEL",
 		"Returns information about the accelerator object.",
 

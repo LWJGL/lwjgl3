@@ -24,7 +24,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		exist.
 		"""
 
-	HANDLE.func(
+	HANDLE(
 		"CreateBufferRegionARB",
 		"Creates a buffer region and returns a handle associated with it.",
 
@@ -43,14 +43,14 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		)
 	)
 
-	VOID.func(
+	VOID(
 		"DeleteBufferRegionARB",
 		"Deletes a buffer region.",
 
 		HANDLE.IN("region", "a handle to a buffer region previously created with #CreateBufferRegionARB().")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SaveBufferRegionARB",
 		"""
 		Saves image, depth, and stencil data into the buffer region.
@@ -70,7 +70,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		int.IN("height", "the source rectangle height")
 	)
 
-	BOOL.func(
+	BOOL(
 		"RestoreBufferRegionARB",
 		"Restores a previously saved buffer region.",
 
@@ -83,7 +83,7 @@ val WGL_ARB_buffer_region = "WGLARBBufferRegion".nativeClassWGL("WGL_ARB_buffer_
 		int.IN("ySrc", "the buffer region y-coordinate for the source of the data")
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of #CreateBufferRegionARB().",
 
 		"FRONT_COLOR_BUFFER_BIT_ARB" _ 0x00000001,

@@ -15,7 +15,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 
 	documentation = "Native bindings to <dlfcn.h>."
 
-	IntConstant.block(
+	IntConstant(
 		"The {@code mode} argument to #dlopen() contains one of the following.",
 
 		"RTLD_LAZY" _ 0x1,
@@ -24,7 +24,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		"RTLD_GLOBAL" _ 0x8
 	)
 
-	LongConstant.block(
+	LongConstant(
 		"Special-handle values for #dlsym().",
 
 		"RTLD_NEXT" _ -1L,
@@ -35,7 +35,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 
 	// skipping dladdr
 
-	voidptr.func(
+	voidptr(
 		"dlopen",
 		"""
 		Loads and links a dynamic library or bundle.
@@ -101,7 +101,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		)
 	)
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"dlerror",
 		"""
 		Provides diagnostic information corresponding to problems with calls to #dlopen(), #dlsym(), and #dlclose() in the same thread.
@@ -114,7 +114,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		"""
 	)
 
-	voidptr.func(
+	voidptr(
 		"dlsym",
 		"""
 		Returns the address of a symbol.
@@ -147,7 +147,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		const _ charASCII_p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
 	)
 
-	int.func(
+	int(
 		"dlclose",
 		"""
 		Closes a dynamic library or bundle.

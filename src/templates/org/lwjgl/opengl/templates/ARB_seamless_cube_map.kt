@@ -26,7 +26,7 @@ val ARB_seamless_cube_map = "ARBSeamlessCubeMap".nativeClassGL("ARB_seamless_cub
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and
 		GetDoublev.

@@ -21,7 +21,7 @@ val AL_SOFT_direct_channels = "SOFTDirectChannels".nativeClassAL("SOFT_direct_ch
 		multi-channel buffers.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alSourcei, alSourceiv, alGetSourcei, and alGetSourceiv.",
 
 		"DIRECT_CHANNELS_SOFT" _ 0x1033

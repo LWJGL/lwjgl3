@@ -19,7 +19,7 @@ val GLFWWin32 = "GLFWWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 
 	documentation = "Native bindings to the GLFW library's Win32 native access functions."
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetWin32Adapter",
 	    """
 	    Returns the adapter device name of the specified monitor.
@@ -32,7 +32,7 @@ val GLFWWin32 = "GLFWWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 	    since = "GLFW 3.1"
 	)
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetWin32Monitor",
 	    """
 	    Returns the display device name of the specified monitor.
@@ -45,7 +45,7 @@ val GLFWWin32 = "GLFWWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		since = "GLFW 3.1"
 	)
 
-	HWND.func(
+	HWND(
 		"GetWin32Window",
 		"""
 		Returns the ${code("HWND")} of the specified window.
@@ -58,7 +58,7 @@ val GLFWWin32 = "GLFWWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		since = "GLFW 3.0"
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"GetWGLContext",
 		"""
 		Returns the ${code("HGLRC")} of the specified window.

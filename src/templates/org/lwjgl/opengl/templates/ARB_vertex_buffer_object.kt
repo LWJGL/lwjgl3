@@ -52,7 +52,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
         ${GL15.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBufferARB, BufferDataARB, BufferSubDataARB, MapBufferARB, UnmapBufferARB, GetBufferSubDataARB,
 		GetBufferParameterivARB, and GetBufferPointervARB.
@@ -62,7 +62,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"ELEMENT_ARRAY_BUFFER_ARB" _ 0x8893
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"ARRAY_BUFFER_BINDING_ARB" _ 0x8894,
@@ -78,13 +78,13 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"WEIGHT_ARRAY_BUFFER_BINDING_ARB" _ 0x889E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetVertexAttribivARB.",
 
 		"VERTEX_ATTRIB_ARRAY_BUFFER_BINDING_ARB" _ 0x889F
 	)
 
-	val BUFFER_OBJECT_USAGE_HINTS = IntConstant.block(
+	val BUFFER_OBJECT_USAGE_HINTS = IntConstant(
 		"Accepted by the {@code usage} parameter of BufferDataARB.",
 
 		"STREAM_DRAW_ARB" _ 0x88E0,
@@ -98,7 +98,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"DYNAMIC_COPY_ARB" _ 0x88EA
 	).javaDocLinks
 
-	val BUFFER_OBJECT_ACCESS_POLICIES = IntConstant.block(
+	val BUFFER_OBJECT_ACCESS_POLICIES = IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferARB.",
 
 		"READ_ONLY_ARB" _ 0x88B8,
@@ -106,7 +106,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"READ_WRITE_ARB" _ 0x88BA
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferParameterivARB.",
 
 		"BUFFER_SIZE_ARB" _ 0x8764,
@@ -115,13 +115,13 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"BUFFER_MAPPED_ARB" _ 0x88BC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferPointervARB.",
 
 		"BUFFER_MAP_POINTER_ARB" _ 0x88BD
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferARB",
 		"Binds a named buffer object.",
 
@@ -129,7 +129,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLuint.IN("buffer", "the name of a buffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteBuffersARB",
 		"Deletes named buffer objects.",
 
@@ -137,7 +137,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		mods(const, SingleValue("buffer")) _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenBuffersARB",
 		"Generates buffer object names.",
 
@@ -145,14 +145,14 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		returnValue _ GLuint_p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsBufferARB",
 		"Determines if a name corresponds to a buffer object.",
 
 		GLuint.IN("buffer", "a value that may be the name of a buffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferDataARB",
 		"""
 		Creates and initializes a buffer object's data store.
@@ -190,7 +190,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferSubDataARB",
 		"Updates a subset of a buffer object's data store.",
 
@@ -200,7 +200,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		const _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferSubDataARB",
 		"Returns a subset of a buffer object's data store.",
 
@@ -216,7 +216,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		) _ GLvoid_p.IN("data", "a pointer to the location where buffer object data is returned")
 	)
 
-	(MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)") _ GLvoid_p).func(
+	(MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)") _ GLvoid_p)(
 		"MapBufferARB",
 		"""
 		Maps a buffer object's data store.
@@ -237,7 +237,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		)
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"UnmapBufferARB",
 		"""
 		Relinquishes the mapping of a buffer object and invalidates the pointer to its data store.
@@ -251,7 +251,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLenum.IN("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferParameterivARB",
 		"Returns the value of a buffer object parameter.",
 
@@ -260,7 +260,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		returnValue _ GLint_p.OUT("params", "the requested parameter")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferPointervARB",
 		"Returns the pointer to a mapped buffer object's data store.",
 

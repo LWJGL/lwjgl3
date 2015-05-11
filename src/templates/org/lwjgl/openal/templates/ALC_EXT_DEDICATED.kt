@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val ALC_EXT_DEDICATED = "EXTDedicated".nativeClassALC("EXT_DEDICATED", prefix = AL) {
 	documentation = "bindings to ALC_EXT_DEDICATED extension."
 
-	IntConstant.block(
+	IntConstant(
 		"ALC_EXT_DEDICATED tokens.",
 
 		"DEDICATED_GAIN " _ 0x1,

@@ -30,7 +30,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Implementation-dependent state which constrains the maximum value of stride parameters to vertex array pointer-setting commands.",
 
 		"MAX_VERTEX_ATTRIB_STRIDE" _ 0x82E5
@@ -38,7 +38,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 	// ARB_buffer_storage
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code flags} parameter of #BufferStorage() and ARBBufferStorage#NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT" _ 0x0040,
@@ -47,20 +47,20 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"CLIENT_STORAGE_BIT" _ 0x0200
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}.",
 
 		"BUFFER_IMMUTABLE_STORAGE" _ 0x821F,
 		"BUFFER_STORAGE_FLAGS" _ 0x8220
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
 
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT" _ 0x00004000
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferStorage",
 		"""
 		Creates the data store of a buffer object.
@@ -152,13 +152,13 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 	// ARB_clear_texture
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
 
 		"CLEAR_TEXTURE" _ 0x9365
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearTexSubImage",
 		"""
 		Fills all or part of a texture image with a constant value.
@@ -204,7 +204,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)
 	)
 
-   	GLvoid.func(
+   	GLvoid(
 		"ClearTexImage",
 		"""
 		Is equivalent to calling #ClearTexSubImage() with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
@@ -237,7 +237,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 	// ARB_enhanced_layouts
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
 
 		"LOCATION_COMPONENT" _ 0x934A,
@@ -247,7 +247,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 	// ARB_multi_bind
 
-	GLvoid.func(
+	GLvoid(
 		"BindBuffersBase",
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -271,7 +271,7 @@ for ( i = 0; i < count; i++ ) {
 		mods (nullable, const) _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBuffersRange",
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -303,7 +303,7 @@ for ( i = 0; i < count; i++ ) {
 		mods(nullable, const) _ GLsizeiptr_p.IN("sizes", "an array of sizes")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindTextures",
 		"""
 		Binds {@code count} existing texture objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not
@@ -346,7 +346,7 @@ for ( i = 0; i < count; i++ ) {
 		mods(nullable, const) _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindSamplers",
 		"""
 		Binds {@code count} existing sampler objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code samplers} is not
@@ -373,7 +373,7 @@ for ( i = 0; i < count; i++ ) {
 		mods(nullable, const) _ GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindImageTextures",
 		"""
 		Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not $NULL, it
@@ -411,7 +411,7 @@ for ( i = 0; i < count; i++ ) {
 		mods(nullable, const) _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindVertexBuffers",
 		"""
 		Binds {@code count} existing buffer objects to vertex buffer binding points numbered {@code first} through {@code first+count-1}. If {@code buffers} is
@@ -447,13 +447,13 @@ for ( i = 0; i < count; i++ ) {
 
 	// ARB_query_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GL15#GetQueryObjecti(), GL15#GetQueryObjectui(), GL33#GetQueryObjecti64() and GL33#GetQueryObjectui64().",
 
 		"QUERY_RESULT_NO_WAIT" _ 0x9194
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of GL15#BindBuffer(), GL15#BufferData(), GL15#BufferSubData(),
 		GL15#MapBuffer(), GL15#UnmapBuffer(), GL30#MapBufferRange(), GL15#GetBufferSubData(),
@@ -464,7 +464,7 @@ for ( i = 0; i < count; i++ ) {
 		"QUERY_BUFFER" _ 0x9192
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of GL11#GetBoolean(), GL11#GetInteger(), GL11#GetFloat(),
 		and GL11#GetDouble().
@@ -473,7 +473,7 @@ for ( i = 0; i < count; i++ ) {
 		"QUERY_BUFFER_BINDING" _ 0x9193
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code barriers} bitfield in GL42#MemoryBarrier().",
 
 		"QUERY_BUFFER_BARRIER_BIT" _ 0x00008000
@@ -481,7 +481,7 @@ for ( i = 0; i < count; i++ ) {
 
 	// ARB_texture_mirror_clamp_to_edge
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameter{if}, SamplerParameter{if} and SamplerParameter{if}v, and by the {@code params} parameter of
 		TexParameter{if}v, TexParameterI{i ui}v and SamplerParameterI{i ui}v when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or

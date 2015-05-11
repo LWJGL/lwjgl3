@@ -15,7 +15,7 @@ val xf86vmode = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to &lt;X11/extensions/xf86vmode.h&gt;."
 
-	Bool.func(
+	Bool(
 		"XF86VidModeQueryExtension",
 		"Returns the lowest numbered error and event values assigned to the extension.",
 
@@ -24,7 +24,7 @@ val xf86vmode = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("error_base", "the lowest numbered error value")
 	)
 
-	Bool.func(
+	Bool(
 		"XF86VidModeGetGammaRampSize",
 		"Returns the gamma ramp size.",
 
@@ -33,7 +33,7 @@ val xf86vmode = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 		int_p.OUT("size", "the gamma ramp size")
 	)
 
-	Bool.func(
+	Bool(
 		"XF86VidModeGetGammaRamp",
 		"Returns the gamma ramp.",
 
@@ -49,7 +49,7 @@ val xf86vmode = "Xf86vmode".nativeClass(LINUX_PACKAGE) {
 		unsigned_short_p.OUT("blue_array", "the blue gamma ramp")
 	)
 
-	Bool.func(
+	Bool(
 		"XF86VidModeSetGammaRamp",
 		"Sets the gamma ramp.",
 

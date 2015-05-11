@@ -11,7 +11,7 @@ val khr_image2d_from_buffer = "KHRImage2DFromBuffer".nativeClassCL("khr_image2d_
 
 	documentation = "Native bindings to the $extensionName extension."
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().
 
@@ -22,7 +22,7 @@ val khr_image2d_from_buffer = "KHRImage2DFromBuffer".nativeClassCL("khr_image2d_
 		"DEVICE_IMAGE_PITCH_ALIGNMENT" _ 0x104A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().
 

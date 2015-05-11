@@ -18,13 +18,13 @@ val GLX_INTEL_swap_event = "GLXINTELSwapEvent".nativeClassGLX("GLX_INTEL_swap_ev
 		Requires ${GLX13.glx}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mask} parameter of GLX13#SelectEvent() and returned in the {@code mask} parameter of GLX13#GetSelectedEvent().",
 
 		"BUFFER_SWAP_COMPLETE_INTEL_MASK" _ 0x04000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code event_type} field of a \"swap complete\" event.",
 
 		"EXCHANGE_COMPLETE_INTEL" _ 0x8180,

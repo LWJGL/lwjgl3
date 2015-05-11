@@ -21,13 +21,13 @@ val ARB_fragment_shader = "ARBFragmentShader".nativeClassGL("ARB_fragment_shader
 		${GL20.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code shaderType} argument of CreateShaderObjectARB and returned by the {@code params} parameter of GetObjectParameter{fi}vARB.",
 
 		"FRAGMENT_SHADER_ARB" _ 0x8B30
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB" _ 0x8B49,
@@ -35,7 +35,7 @@ val ARB_fragment_shader = "ARBFragmentShader".nativeClassGL("ARB_fragment_shader
 		"MAX_TEXTURE_IMAGE_UNITS_ARB" _ 0x8872
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of Hint and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"FRAGMENT_SHADER_DERIVATIVE_HINT_ARB" _ 0x8B8B

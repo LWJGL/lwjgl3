@@ -22,7 +22,7 @@ val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_b
 		Requires ${GLX_SGIX_swap_group.link}.
 		"""
 
-	void.func(
+	void(
 		"BindSwapBarrierSGIX",
 		"""
 		Binds the swap group that contains {@code drawable} to {@code barrier}. Subsequent buffer swaps for that group will be subject to this binding, until
@@ -34,7 +34,7 @@ val GLX_SGIX_swap_barrier = "GLXSGIXSwapBarrier".nativeClassGLX("GLX_SGIX_swap_b
 		int.IN("barrier", "the swap barrier")
 	)
 
-	Bool.func(
+	Bool(
 		"QueryMaxSwapBarriersSGIX",
 		"Returns in {@code max} the maximum number of barriers supported by an implementation on {@code screen}.",
 

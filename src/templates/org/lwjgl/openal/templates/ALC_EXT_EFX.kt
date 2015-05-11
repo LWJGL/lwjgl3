@@ -14,7 +14,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 
 	documentation = "bindings to ALC_EXT_EFX extension."
 
-	IntConstant.block(
+	IntConstant(
 		"ALC tokens.",
 
 		"ALC_EFX_MAJOR_VERSION" _ 0x20001,
@@ -22,13 +22,13 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"ALC_MAX_AUXILIARY_SENDS" _ 0x20003
 	).noPrefix()
 
-	IntConstant.block(
+	IntConstant(
 		"Listener properties.",
 
 		"METERS_PER_UNIT " _ 0x20004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Source properties.",
 
 		"DIRECT_FILTER" _ 0x20005,
@@ -41,7 +41,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"AUXILIARY_SEND_FILTER_GAINHF_AUTO" _ 0x2000C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Auxiliary effect slot properties.",
 
 		"EFFECTSLOT_NULL" _ 0x0000,
@@ -50,7 +50,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EFFECTSLOT_AUXILIARY_SEND_AUTO" _ 0x0003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Reverb effect parameters.",
 
 		"REVERB_DENSITY" _ 0x0001,
@@ -68,7 +68,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"REVERB_DECAY_HFLIMIT" _ 0x000D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"EAX Reverb effect parameters.",
 
 		"EAXREVERB_DENSITY" _ 0x0001,
@@ -96,7 +96,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EAXREVERB_DECAY_HFLIMIT" _ 0x0017
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Chorus effect parameters.",
 
 		"CHORUS_WAVEFORM" _ 0x0001,
@@ -107,7 +107,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"CHORUS_DELAY" _ 0x0006
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Distortion effect parameters.",
 
 		"DISTORTION_EDGE" _ 0x0001,
@@ -117,7 +117,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"DISTORTION_EQBANDWIDTH" _ 0x0005
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Echo effect parameters.",
 
 		"ECHO_DELAY" _ 0x0001,
@@ -127,7 +127,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"ECHO_SPREAD" _ 0x0005
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Flanger effect parameters.",
 
 		"FLANGER_WAVEFORM" _ 0x0001,
@@ -138,7 +138,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FLANGER_DELAY" _ 0x0006
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Frequency shifter effect parameters.",
 
 		"FREQUENCY_SHIFTER_FREQUENCY" _ 0x0001,
@@ -146,7 +146,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FREQUENCY_SHIFTER_RIGHT_DIRECTION" _ 0x0003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Vocal morpher effect parameters.",
 
 		"VOCMORPHER_PHONEMEA" _ 0x0001,
@@ -157,14 +157,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"VOCMORPHER_RATE" _ 0x0006
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Pitch shifter effect parameters.",
 
 		"PITCH_SHIFTER_COARSE_TUNE" _ 0x0001,
 		"PITCH_SHIFTER_FINE_TUNE" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Ring modulator effect parameters.",
 
 		"RING_MODULATOR_FREQUENCY" _ 0x0001,
@@ -172,7 +172,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"RING_MODULATOR_WAVEFORM" _ 0x0003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Autowah effect parameters.",
 
 		"AUTOWAH_ATTACK_TIME" _ 0x0001,
@@ -181,13 +181,13 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"AUTOWAH_PEAK_GAIN" _ 0x0004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Compressor effect parameters.",
 
 		"COMPRESSOR_ONOFF" _ 0x0001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Equalizer effect parameters.",
 
 		"EQUALIZER_LOW_GAIN" _ 0x0001,
@@ -202,7 +202,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EQUALIZER_HIGH_CUTOFF" _ 0x000A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Effect type effect parameters.",
 
 		"EFFECT_FIRST_PARAMETER" _ 0x0000,
@@ -210,7 +210,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EFFECT_TYPE" _ 0x8001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Effect types",
 
 		"EFFECT_NULL" _ 0x0000,
@@ -229,21 +229,21 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EFFECT_EAXREVERB" _ 0x8000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Lowpass filter properties",
 
 		"LOWPASS_GAIN" _ 0x0001,
 		"LOWPASS_GAINHF" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Highpass filter properties",
 
 		"HIGHPASS_GAIN" _ 0x0001,
 		"HIGHPASS_GAINLF" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Bandpass filter properties",
 
 		"BANDPASS_GAIN" _ 0x0001,
@@ -251,7 +251,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"BANDPASS_GAINHF" _ 0x0003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Filter type",
 
 		"FILTER_FIRST_PARAMETER" _ 0x0000,
@@ -259,7 +259,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FILTER_TYPE" _ 0x8001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Filter types.",
 
 		"FILTER_NULL" _ 0x0000,
@@ -268,7 +268,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FILTER_BANDPASS" _ 0x0003
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Source property value ranges and defaults",
 
 		"MIN_AIR_ABSORPTION_FACTOR" _ 0.0f,
@@ -282,7 +282,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"DEFAULT_CONE_OUTER_GAINHF" _ 1.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Source property value ranges and defaults",
 
 		"MIN_DIRECT_FILTER_GAINHF_AUTO" _ 0x0,
@@ -296,7 +296,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"DEFAULT_AUXILIARY_SEND_FILTER_GAINHF_AUTO" _ 0x1
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Listener property value ranges and defaults.",
 
 		"MIN_METERS_PER_UNIT" expr "0x0.000002P-126f",
@@ -304,7 +304,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"DEFAULT_METERS_PER_UNIT" _ 1.0f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Reverb effect parameter ranges and defaults",
 
 		"REVERB_MIN_DENSITY" _ 0.0f,
@@ -345,7 +345,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"REVERB_DEFAULT_ROOM_ROLLOFF_FACTOR" _ 0.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Reverb effect parameter ranges and defaults",
 
 		"REVERB_MIN_DECAY_HFLIMIT" _ 0x0,
@@ -353,7 +353,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"REVERB_DEFAULT_DECAY_HFLIMIT" _ 0x1
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"EAX reverb effect parameter ranges and defaults",
 
 		"EAXREVERB_MIN_DENSITY" _ 0.0f,
@@ -420,7 +420,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EAXREVERB_DEFAULT_ROOM_ROLLOFF_FACTOR" _ 0.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"EAX reverb effect parameter ranges and defaults",
 
 		"EAXREVERB_MIN_DECAY_HFLIMIT" _ 0x0,
@@ -428,7 +428,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EAXREVERB_DEFAULT_DECAY_HFLIMIT" _ 0x1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Chorus effect parameter ranges and defaults",
 
 		"CHORUS_WAVEFORM_SINUSOID" _ 0,
@@ -441,7 +441,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"CHORUS_DEFAULT_PHASE" _ 90
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Chorus effect parameter ranges and defaults",
 
 		"CHORUS_MIN_RATE" _ 0.0f,
@@ -458,7 +458,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"CHORUS_DEFAULT_DELAY" _ 0.016f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Distortion effect parameter ranges and defaults",
 
 		"DISTORTION_MIN_EDGE" _ 0.0f,
@@ -478,7 +478,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"DISTORTION_DEFAULT_EQBANDWIDTH" _ 3600.0f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Echo effect parameter ranges and defaults",
 
 		"ECHO_MIN_DELAY" _ 0.0f,
@@ -498,7 +498,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"ECHO_DEFAULT_SPREAD" _ -1.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Flanger effect parameter ranges and defaults",
 
 		"FLANGER_WAVEFORM_SINUSOID" _ 0,
@@ -511,7 +511,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FLANGER_DEFAULT_PHASE" _ 0
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Flanger effect parameter ranges and defaults",
 
 		"FLANGER_MIN_RATE" _ 0.0f,
@@ -528,7 +528,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FLANGER_DEFAULT_DELAY" _ 0.002f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Frequency shifter effect parameter ranges and defaults",
 
 		"FREQUENCY_SHIFTER_MIN_FREQUENCY" _ 0.0f,
@@ -536,7 +536,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FREQUENCY_SHIFTER_DEFAULT_FREQUENCY" _ 0.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Frequency shifter effect parameter ranges and defaults",
 
 		"FREQUENCY_SHIFTER_MIN_LEFT_DIRECTION" _ 0,
@@ -550,7 +550,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"FREQUENCY_SHIFTER_DEFAULT_RIGHT_DIRECTION" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Vocal morpher effect parameter ranges and defaults",
 
 		"VOCAL_MORPHER_MIN_PHONEMEA" _ 0,
@@ -603,7 +603,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"VOCAL_MORPHER_DEFAULT_WAVEFORM" _ 0
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Vocal morpher effect parameter ranges and defaults",
 
 		"VOCAL_MORPHER_MIN_RATE" _ 0.0f,
@@ -611,7 +611,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"VOCAL_MORPHER_DEFAULT_RATE" _ 1.41f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Pitch shifter effect parameter ranges and defaults",
 
 		"PITCH_SHIFTER_MIN_COARSE_TUNE" _ -12,
@@ -622,7 +622,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"PITCH_SHIFTER_DEFAULT_FINE_TUNE" _ 0
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Ring modulator effect parameter ranges and defaults",
 
 		"RING_MODULATOR_MIN_FREQUENCY" _ 0.0f,
@@ -633,7 +633,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"RING_MODULATOR_DEFAULT_HIGHPASS_CUTOFF" _ 800.0f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Ring modulator effect parameter ranges and defaults",
 
 		"RING_MODULATOR_SINUSOID" _ 0,
@@ -644,7 +644,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"RING_MODULATOR_DEFAULT_WAVEFORM" _ 0
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Autowah effect parameter ranges and defaults",
 
 		"AUTOWAH_MIN_ATTACK_TIME" _ 0.0001f,
@@ -661,7 +661,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"AUTOWAH_DEFAULT_PEAK_GAIN" _ 11.22f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Compressor effect parameter ranges and defaults",
 
 		"COMPRESSOR_MIN_ONOFF" _ 0,
@@ -669,7 +669,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"COMPRESSOR_DEFAULT_ONOFF" _ 1
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Equalizer effect parameter ranges and defaults",
 
 		"EQUALIZER_MIN_LOW_GAIN" _ 0.126f,
@@ -704,7 +704,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"EQUALIZER_DEFAULT_HIGH_CUTOFF" _ 6000.0f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Lowpass filter parameter ranges and defaults",
 
 		"LOWPASS_MIN_GAIN" _ 0.0f,
@@ -715,7 +715,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"LOWPASS_DEFAULT_GAINHF" _ 1.0f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Highpass filter parameter ranges and defaults",
 
 		"HIGHPASS_MIN_GAIN" _ 0.0f,
@@ -726,7 +726,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"HIGHPASS_DEFAULT_GAINLF" _ 1.0f
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Bandpass filter parameter ranges and defaults",
 
 		"BANDPASS_MIN_GAIN" _ 0.0f,
@@ -740,7 +740,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		"BANDPASS_DEFAULT_GAINLF" _ 1.0f
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GenEffects",
 		"Requests a number of effects.",
 
@@ -748,7 +748,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		returnValue _ ALuint_p.OUT("effects", "the buffer that will receive the effects")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"DeleteEffects",
 		"Deletes a number of effects.",
 
@@ -756,14 +756,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		SingleValue("effect") _ ALuint_p.IN("effects", "the effect to delete")
 	)
 
-	ALboolean.func(
+	ALboolean(
 		"IsEffect",
 		"Verifies whether the given object name is an effect.",
 
 		ALuint.IN("effect", "a value that may be a effect name")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Effecti",
 		"Sets the integer value of an effect parameter.",
 
@@ -772,7 +772,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALint.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Effectiv",
 		"Pointer version of #Effecti().",
 
@@ -781,7 +781,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Effectf",
 		"Sets the float value of an effect parameter.",
 
@@ -790,7 +790,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALfloat.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Effectfv",
 		"Pointer version of #Effectf().",
 
@@ -799,7 +799,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALfloat_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetEffecti",
 		"Returns the integer value of the specified effect parameter.",
 
@@ -808,7 +808,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetEffectiv",
 		"Returns the integer values of the specified effect parameter.",
 
@@ -817,7 +817,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1) _ ALint_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetEffectf",
 		"Returns the float value of the specified effect parameter.",
 
@@ -826,7 +826,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetEffectfv",
 		"Returns the float values of the specified effect parameter.",
 
@@ -835,7 +835,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GenFilters",
 		"Requests a number of filters.",
 
@@ -843,7 +843,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		returnValue _ ALuint_p.OUT("filters", "the buffer that will receive the filters")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"DeleteFilters",
 		"Deletes a number of filters.",
 
@@ -851,14 +851,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		SingleValue("filter") _ ALuint_p.IN("filters", "the filter to delete")
 	)
 
-	ALboolean.func(
+	ALboolean(
 		"IsFilter",
 		"Verifies whether the given object name is a filter.",
 
 		ALuint.IN("filter", "a value that may be a filter name")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Filteri",
 		"Sets the integer value of a filter parameter.",
 
@@ -867,7 +867,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALint.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Filteriv",
 		"Pointer version of #Filteri().",
 
@@ -876,7 +876,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Filterf",
 		"Sets the float value of a filter parameter.",
 
@@ -885,7 +885,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALfloat.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Filterfv",
 		"Pointer version of #Filterf().",
 
@@ -894,7 +894,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALfloat_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetFilteri",
 		"Returns the integer value of the specified filter parameter.",
 
@@ -903,7 +903,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetFilteriv",
 		"Returns the integer values of the specified filter parameter.",
 
@@ -912,7 +912,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1) _ ALint_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetFilterf",
 		"Returns the float value of the specified filter parameter.",
 
@@ -921,7 +921,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetFilterfv",
 		"Returns the float values of the specified filter parameter.",
 
@@ -930,7 +930,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GenAuxiliaryEffectSlots",
 		"Requests a number of effect slots.",
 
@@ -938,7 +938,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		returnValue _ ALuint_p.OUT("effectSlots", "the buffer that will receive the effect slots")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"DeleteAuxiliaryEffectSlots",
 		"Deletes a number of effect slots.",
 
@@ -946,14 +946,14 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		SingleValue("effectSlot") _ ALuint_p.IN("effectSlots", "the effectSlot to delete")
 	)
 
-	ALboolean.func(
+	ALboolean(
 		"IsAuxiliaryEffectSlot",
 		"Verifies whether the given object name is an effect slot.",
 
 		ALuint.IN("effectSlot", "a value that may be an effect slot name")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"AuxiliaryEffectSloti",
 		"Sets the integer value of an effect slot parameter.",
 
@@ -962,7 +962,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALint.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"AuxiliaryEffectSlotiv",
 		"Pointer version of #AuxiliaryEffectSloti().",
 
@@ -971,7 +971,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALint_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"AuxiliaryEffectSlotf",
 		"Sets the float value of an effect slot parameter.",
 
@@ -980,7 +980,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		ALfloat.IN("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"AuxiliaryEffectSlotfv",
 		"Pointer version of #AuxiliaryEffectSlotf().",
 
@@ -989,7 +989,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		const _ ALfloat_p.IN("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetAuxiliaryEffectSloti",
 		"Returns the integer value of the specified effect slot parameter.",
 
@@ -998,7 +998,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetAuxiliaryEffectSlotiv",
 		"Returns the integer values of the specified effect slot parameter.",
 
@@ -1007,7 +1007,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		Check(1) _ ALint_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetAuxiliaryEffectSlotf",
 		"Returns the float value of the specified filter parameter.",
 
@@ -1016,7 +1016,7 @@ val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetAuxiliaryEffectSlotfv",
 		"Returns the float values of the specified effect slot parameter.",
 

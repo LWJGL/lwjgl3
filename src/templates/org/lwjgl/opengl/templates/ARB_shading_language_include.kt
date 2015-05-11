@@ -70,20 +70,20 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		Requires GLSL 1.10.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of NamedStringARB.",
 
 		"SHADER_INCLUDE_ARB" _ 0x8DAE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetNamedStringivARB.",
 
 		"NAMED_STRING_LENGTH_ARB" _ 0x8DE9,
 		"NAMED_STRING_TYPE_ARB" _ 0x8DEA
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"NamedStringARB",
 		"""
 		Specifies a string and its name. Such strings can be included by name in shaders during compilation, allowing reuse of the same code segments.
@@ -99,7 +99,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharUTF8_p.IN("string", "an arbitrary string of characters")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteNamedStringARB",
 		"Deletes a named string.",
 
@@ -107,7 +107,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharASCII_p.IN("name", "the name associated with the string")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompileShaderIncludeARB",
 		"""
 		Compiles a shader object.
@@ -128,7 +128,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		)
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsNamedStringARB",
 		"""
 		Returns GL11#TRUE if the tree location corresponding to {@code name} has a string associated with it, and GL11#FALSE if the tree location has no string
@@ -139,7 +139,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharASCII_p.IN("name", "the name associated with the string")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetNamedStringARB",
 		"Returns in {@code string} the string corresponding to the specified {@code name}. The returned string will be null-terminated.",
 
@@ -159,7 +159,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		) _ GLcharUTF8_p.OUT("string", "a buffer in which to place the returned string")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetNamedStringivARB",
 		"Returns properties of the named string whose tree location corresponds to {@code name}.",
 

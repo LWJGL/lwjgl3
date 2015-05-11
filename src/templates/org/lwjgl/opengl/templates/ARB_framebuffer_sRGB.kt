@@ -31,7 +31,7 @@ val ARB_framebuffer_sRGB = "ARBFramebufferSRGB".nativeClassGL("ARB_framebuffer_s
 		Requires ${ARB_framebuffer_object.link}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.

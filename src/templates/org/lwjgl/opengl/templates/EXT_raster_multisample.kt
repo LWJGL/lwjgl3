@@ -30,13 +30,13 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
 		finally "reduced" to a single bit in a new "Coverage Reduction" stage that occurs before blending.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
 		"RASTER_MULTISAMPLE_EXT" _ 0x9327
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"RASTER_SAMPLES_EXT" _ 0x9328,
@@ -46,7 +46,7 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
 		"EFFECTIVE_RASTER_SAMPLES_EXT" _ 0x932C
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"RasterSamplesEXT",
 		"""
 		Selects the number of samples to be used for rasterization. {@code samples} represents a request for a desired minimum number of samples. Since

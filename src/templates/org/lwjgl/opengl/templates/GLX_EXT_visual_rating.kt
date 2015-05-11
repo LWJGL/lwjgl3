@@ -23,13 +23,13 @@ val GLX_EXT_visual_rating = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_
 		to have these visuals selected preferentially.  It is intended to insure that most applications get the "right" visual, not that all applications do.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of GLX#GetConfig() and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
 
 		"VISUAL_CAVEAT_EXT" _ 0x20
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by the {@code value} parameter of GLX#GetConfig() (when {@code attribute} is set to #VISUAL_CAVEAT_EXT) and accepted by the {@code attrib_list}
 		parameter of GLX#ChooseVisual() (following the #VISUAL_CAVEAT_EXT token).

@@ -77,7 +77,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		rather to provide new APIs to ensure a level of robustness commensurate with the expectations of modern applications of OpenGL.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetGraphicsResetStatusARB.",
 
 		"NO_ERROR" _ 0x0000,
@@ -86,26 +86,26 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		"UNKNOWN_CONTEXT_RESET_ARB" _ 0x8255
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"RESET_NOTIFICATION_STRATEGY_ARB" _ 0x8256
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetIntegerv and related simple queries when {@code value} is RESET_NOTIFICATION_STRATEGY_ARB.",
 
 		"LOSE_CONTEXT_ON_RESET_ARB" _ 0x8252,
 		"NO_RESET_NOTIFICATION_ARB" _ 0x8261
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
 		"CONTEXT_FLAG_ROBUST_ACCESS_BIT_ARB" _ 0x00000004
 	)
 
-	GLenum.func(
+	GLenum(
 		"GetGraphicsResetStatusARB",
 		"""
 		The symbolic constant returned indicates if the GL context has been in a reset state at any point since the last call to {@code GetGraphicsResetStatusARB}.
@@ -130,7 +130,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	var src = GL11["GetMapdv"]
-	DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL") _ GLvoid(
 		"GetnMapdvARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -141,7 +141,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetMapfv"]
-	DependsOn("provider.getFunctionAddress(\"glGetMapfv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetMapfv\") != NULL") _ GLvoid(
 		"GetnMapfvARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -152,7 +152,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetMapiv"]
-	DependsOn("provider.getFunctionAddress(\"glGetMapiv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetMapiv\") != NULL") _ GLvoid(
 		"GetnMapivARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -163,7 +163,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetPixelMapfv"]
-	DependsOn("provider.getFunctionAddress(\"glGetPixelMapfv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapfv\") != NULL") _ GLvoid(
 		"GetnPixelMapfvARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -173,7 +173,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetPixelMapuiv"]
-	DependsOn("provider.getFunctionAddress(\"glGetPixelMapuiv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapuiv\") != NULL") _ GLvoid(
 		"GetnPixelMapuivARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -183,7 +183,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetPixelMapusv"]
-	DependsOn("provider.getFunctionAddress(\"glGetPixelMapusv\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapusv\") != NULL") _ GLvoid(
 		"GetnPixelMapusvARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -193,7 +193,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetPolygonStipple"]
-	DependsOn("provider.getFunctionAddress(\"glGetPolygonStipple\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetPolygonStipple\") != NULL") _ GLvoid(
 		"GetnPolygonStippleARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -202,7 +202,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetTexImage"]
-	DependsOn("provider.getFunctionAddress(\"glGetTexImage\") != NULL") _ GLvoid.func(
+	DependsOn("provider.getFunctionAddress(\"glGetTexImage\") != NULL") _ GLvoid(
 		"GetnTexImageARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -218,7 +218,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["ReadPixels"]
-	GLvoid.func(
+	GLvoid(
 		"ReadnPixelsARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -236,7 +236,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = ARB_imaging["GetColorTable"]
-	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL") _ GLvoid(
 		"GetnColorTableARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -251,7 +251,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = ARB_imaging["GetConvolutionFilter"]
-	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetConvolutionFilter\") != NULL") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetConvolutionFilter\") != NULL") _ GLvoid(
 		"GetnConvolutionFilterARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -263,7 +263,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = ARB_imaging["GetSeparableFilter"]
-	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetSeparableFilter\") != NULL") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetSeparableFilter\") != NULL") _ GLvoid(
 		"GetnSeparableFilterARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -278,7 +278,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = ARB_imaging["GetHistogram"]
-	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetHistogram\") != NULL") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetHistogram\") != NULL") _ GLvoid(
 		"GetnHistogramARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -291,7 +291,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = ARB_imaging["GetMinmax"]
-	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetMinmax\") != NULL") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetMinmax\") != NULL") _ GLvoid(
 		"GetnMinmaxARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -304,7 +304,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL13["GetCompressedTexImage"]
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetnCompressedTexImageARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -318,7 +318,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL20["GetUniformfv"]
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"GetnUniformfvARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -329,7 +329,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL20["GetUniformiv"]
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"GetnUniformivARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -340,7 +340,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL30["GetUniformuiv"]
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetnUniformuivARB",
 		"Robust version of ${src.javaDocLink}",
 
@@ -351,7 +351,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL40["GetUniformdv"]
-	DependsOn("OpenGL40") _ GLvoid.func(
+	DependsOn("OpenGL40") _ GLvoid(
 		"GetnUniformdvARB",
 		"Robust version of ${src.javaDocLink}",
 

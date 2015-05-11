@@ -38,13 +38,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// SGIS_generate_mipmap
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
 		"GENERATE_MIPMAP" _ 0x8191
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of Hint, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"GENERATE_MIPMAP_HINT" _ 0x8192
@@ -52,13 +52,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_blend_color
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_COLOR" _ 0x8005
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendColor",
 		"Specifies the constant color C<sub>c</sub> to be used in blending.",
 
@@ -70,7 +70,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_blend_minmax
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation.",
 
 		"FUNC_ADD" _ 0x8006,
@@ -78,13 +78,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"MAX" _ 0x8008
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_EQUATION" _ 0x8009
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendEquation",
 		"Controls the blend equations used for per-fragment blending.",
 
@@ -93,7 +93,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_blend_subtract
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation.",
 
 		"FUNC_SUBTRACT" _ 0x800A,
@@ -102,7 +102,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_depth_texture
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, CopyTexImage1D and CopyTexImage2D.",
 
 		"DEPTH_COMPONENT16" _ 0x81A5,
@@ -110,13 +110,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"DEPTH_COMPONENT32" _ 0x81A7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
 		"TEXTURE_DEPTH_SIZE" _ 0x884A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"DEPTH_TEXTURE_MODE" _ 0x884B
@@ -124,14 +124,14 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_shadow
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"TEXTURE_COMPARE_MODE" _ 0x884C,
 		"TEXTURE_COMPARE_FUNC" _ 0x884D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameterf, TexParameteri, TexParameterfv, and TexParameteriv when the {@code pname} parameter is
 		TEXTURE_COMPARE_MODE.
@@ -142,20 +142,20 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_fog_coord
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of Fogi and Fogf.",
 
 		"FOG_COORDINATE_SOURCE" _ 0x8450
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code param} parameter of Fogi and Fogf.",
 
 		"FOG_COORDINATE" _ 0x8451,
 		"FRAGMENT_DEPTH" _ 0x8452
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"CURRENT_FOG_COORDINATE" _ 0x8453,
@@ -163,47 +163,47 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"FOG_COORDINATE_ARRAY_STRIDE" _ 0x8455
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
 		"FOG_COORDINATE_ARRAY_POINTER" _ 0x8456
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code array} parameter of EnableClientState and DisableClientState.",
 
 		"FOG_COORDINATE_ARRAY" _ 0x8457
 	)
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"FogCoordf",
 		"Sets the current fog coordinate.",
 
 		GLfloat.IN("coord", "the fog coordinate value")
 	)
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"FogCoordd",
 		"Double version of #FogCoordf().",
 
 		GLdouble.IN("coord", "the fog coordinate value")
 	)
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"FogCoordfv",
 		"Pointer version of #FogCoordf().",
 
 		mods(const, Check(1)) _ GLfloat_p.IN("coord", "the fog coordinate value")
 	)
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"FogCoorddv",
 		"Pointer version of #FogCoordd().",
 
 		mods(const, Check(1)) _ GLdouble_p.IN("coord", "the fog coordinate value")
 	)
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"FogCoordPointer",
 		"Specifies the location and organization of a fog coordinate array.",
 
@@ -218,7 +218,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_multi_draw_arrays
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawArrays",
 		"Renders multiple sets of primitives from array data.",
 
@@ -228,7 +228,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		AutoSize("first", "count") _ GLsizei.IN("primcount", "the size of {@code first} and {@code count}")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElements",
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements.
@@ -245,7 +245,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_point_parameters
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of PointParameterfARB, and the {@code pname} of Get.",
 
 		"POINT_SIZE_MIN" _ 0x8126,
@@ -254,7 +254,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"POINT_DISTANCE_ATTENUATION" _ 0x8129
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameterf",
 		"Sets the float value of a pointer parameter.",
 
@@ -262,7 +262,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLfloat.IN("param", "the parameter value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameteri",
 		"Integer version of #PointParameterf().",
 
@@ -270,7 +270,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLint.IN("param", "the parameter value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameterfv",
 		"Pointer version of #PointParameterf().",
 
@@ -278,7 +278,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		mods(const, Check(3)) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameteriv",
 		"Pointer version of #PointParameteri().",
 
@@ -288,7 +288,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_secondary_color
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -297,7 +297,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"COLOR_SUM" _ 0x8458
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"CURRENT_SECONDARY_COLOR" _ 0x8459,
@@ -306,13 +306,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"SECONDARY_COLOR_ARRAY_STRIDE" _ 0x845C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
 		"SECONDARY_COLOR_ARRAY_POINTER" _ 0x845D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code array} parameter of EnableClientState and DisableClientState.",
 
 		"SECONDARY_COLOR_ARRAY" _ 0x845E
@@ -324,7 +324,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 	val colorBlue = "the blue component of the current secondary color"
 	val colorBuffer = "the secondary color buffer"
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"SecondaryColor3b",
 		"Sets the R, G, and B components of the current secondary color. The alpha component is set to 1.0.",
 
@@ -332,24 +332,24 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLbyte.IN("green", colorGreen),
 		GLbyte.IN("blue", colorBlue)
 	)
-	deprecatedGL _ GLvoid.func("SecondaryColor3s", "Short version of #SecondaryColor3b()", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3i", "Integer version of #SecondaryColor3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3f", "Float version of #SecondaryColor3b()", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3d", "Double version of #SecondaryColor3b()", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3ub", "Unsigned version of #SecondaryColor3b()", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3us", "Unsigned short version of #SecondaryColor3b()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
-	deprecatedGL _ GLvoid.func("SecondaryColor3ui", "Unsigned int version of #SecondaryColor3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3s", "Short version of #SecondaryColor3b()", GLshort.IN("red", colorRed), GLshort.IN("green", colorGreen), GLshort.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3i", "Integer version of #SecondaryColor3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3f", "Float version of #SecondaryColor3b()", GLfloat.IN("red", colorRed), GLfloat.IN("green", colorGreen), GLfloat.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3d", "Double version of #SecondaryColor3b()", GLdouble.IN("red", colorRed), GLdouble.IN("green", colorGreen), GLdouble.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3ub", "Unsigned version of #SecondaryColor3b()", GLubyte.IN("red", colorRed), GLubyte.IN("green", colorGreen), GLubyte.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3us", "Unsigned short version of #SecondaryColor3b()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
+	deprecatedGL _ GLvoid("SecondaryColor3ui", "Unsigned int version of #SecondaryColor3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-	deprecatedGL _ GLvoid.func("SecondaryColor3bv", "Byte pointer version of #SecondaryColor3b().", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3sv", "Pointer version of #SecondaryColor3s().", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3iv", "Pointer version of #SecondaryColor3i().", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3fv", "Pointer version of #SecondaryColor3f().", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3dv", "Pointer version of #SecondaryColor3d().", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3ubv", "Pointer version of #SecondaryColor3ub().", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3usv", "Pointer version of #SecondaryColor3us().", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid.func("SecondaryColor3uiv", "Pointer version of #SecondaryColor3ui().", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3bv", "Byte pointer version of #SecondaryColor3b().", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3sv", "Pointer version of #SecondaryColor3s().", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3iv", "Pointer version of #SecondaryColor3i().", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3fv", "Pointer version of #SecondaryColor3f().", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3dv", "Pointer version of #SecondaryColor3d().", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3ubv", "Pointer version of #SecondaryColor3ub().", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3usv", "Pointer version of #SecondaryColor3us().", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("SecondaryColor3uiv", "Pointer version of #SecondaryColor3ui().", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"SecondaryColorPointer",
 		"Specifies the location and organization of a secondary color array.",
 
@@ -368,7 +368,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_blend_func_separate
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_DST_RGB" _ 0x80C8,
@@ -377,7 +377,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"BLEND_SRC_ALPHA" _ 0x80CB
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendFuncSeparate",
 		"Specifies pixel arithmetic for RGB and alpha components separately.",
 
@@ -389,7 +389,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_stencil_wrap
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code sfail}, {@code dpfail}, and {@code dppass} parameter of StencilOp.",
 
 		"INCR_WRAP" _ 0x8507,
@@ -398,13 +398,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// EXT_texture_lod_bias
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of GetTexEnvfv, GetTexEnviv, TexEnvi, TexEnvf, Texenviv, and TexEnvfv.",
 
 		"TEXTURE_FILTER_CONTROL" _ 0x8500
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		When the {@code target} parameter of GetTexEnvfv, GetTexEnviv, TexEnvi, TexEnvf, TexEnviv, and TexEnvfv is TEXTURE_FILTER_CONTROL, then the value of
 		{@code pname} may be.
@@ -413,7 +413,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"TEXTURE_LOD_BIAS" _ 0x8501
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_TEXTURE_LOD_BIAS" _ 0x84FD
@@ -421,7 +421,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_texture_mirrored_repeat
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
@@ -432,7 +432,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 
 	// ARB_window_pos
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"WindowPos2i",
 		"Alternate way to set the current raster position. {@code z} is implictly set to 0.",
 
@@ -440,16 +440,16 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLint.IN("y", "the y value")
 	)
 
-	deprecatedGL _ GLvoid.func("WindowPos2s", "Short version of #WindowPos2i().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"))
-	deprecatedGL _ GLvoid.func("WindowPos2f", "Float version of #WindowPos2i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
-	deprecatedGL _ GLvoid.func("WindowPos2d", "Double version of #WindowPos2i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
+	deprecatedGL _ GLvoid("WindowPos2s", "Short version of #WindowPos2i().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"))
+	deprecatedGL _ GLvoid("WindowPos2f", "Float version of #WindowPos2i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
+	deprecatedGL _ GLvoid("WindowPos2d", "Double version of #WindowPos2i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
 
-	deprecatedGL _ GLvoid.func("WindowPos2iv", "Pointer version of #WindowPos2i().", mods(const, Check(2)) _ GLint_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos2sv", "Pointer version of #WindowPos2s().", mods(const, Check(2)) _ GLshort_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos2fv", "Pointer version of #WindowPos2f().", mods(const, Check(2)) _ GLfloat_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos2dv", "Pointer version of #WindowPos2d().", mods(const, Check(2)) _ GLdouble_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos2iv", "Pointer version of #WindowPos2i().", mods(const, Check(2)) _ GLint_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos2sv", "Pointer version of #WindowPos2s().", mods(const, Check(2)) _ GLshort_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos2fv", "Pointer version of #WindowPos2f().", mods(const, Check(2)) _ GLfloat_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos2dv", "Pointer version of #WindowPos2d().", mods(const, Check(2)) _ GLdouble_p.IN("p", "the position value"))
 
-	deprecatedGL _ GLvoid.func(
+	deprecatedGL _ GLvoid(
 		"WindowPos3i",
 		"Alternate way to set the current raster position.",
 
@@ -458,13 +458,13 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		GLint.IN("z", "the z value")
 	)
 
-	deprecatedGL _ GLvoid.func("WindowPos3s", "Short version of #WindowPos3i().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"), GLshort.IN("z", "the z value"))
-	deprecatedGL _ GLvoid.func("WindowPos3f", "Float version of #WindowPos3i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
-	deprecatedGL _ GLvoid.func("WindowPos3d", "Double version of #WindowPos3i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
+	deprecatedGL _ GLvoid("WindowPos3s", "Short version of #WindowPos3i().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"), GLshort.IN("z", "the z value"))
+	deprecatedGL _ GLvoid("WindowPos3f", "Float version of #WindowPos3i().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
+	deprecatedGL _ GLvoid("WindowPos3d", "Double version of #WindowPos3i().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
 
-	deprecatedGL _ GLvoid.func("WindowPos3iv", "Pointer version of #WindowPos3i().", mods(const, Check(3)) _ GLint_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos3sv", "Pointer version of #WindowPos3s().", mods(const, Check(3)) _ GLshort_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos3fv", "Pointer version of #WindowPos3f().", mods(const, Check(3)) _ GLfloat_p.IN("p", "the position value"))
-	deprecatedGL _ GLvoid.func("WindowPos3dv", "Pointer version of #WindowPos3d().", mods(const, Check(3)) _ GLdouble_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos3iv", "Pointer version of #WindowPos3i().", mods(const, Check(3)) _ GLint_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos3sv", "Pointer version of #WindowPos3s().", mods(const, Check(3)) _ GLshort_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos3fv", "Pointer version of #WindowPos3f().", mods(const, Check(3)) _ GLfloat_p.IN("p", "the position value"))
+	deprecatedGL _ GLvoid("WindowPos3dv", "Pointer version of #WindowPos3d().", mods(const, Check(3)) _ GLdouble_p.IN("p", "the position value"))
 
 }

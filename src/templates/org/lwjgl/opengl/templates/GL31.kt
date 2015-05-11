@@ -29,7 +29,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
 		"RED_SNORM" _ 0x8F90,
@@ -46,7 +46,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"RGBA16_SNORM" _ 0x8F9B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetTexLevelParameter and GetFramebufferAttachmentParameter.",
 
 		"SIGNED_NORMALIZED" _ 0x8F9C
@@ -54,7 +54,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_draw_instanced
 
-	GLvoid.func(
+	GLvoid(
 		"DrawArraysInstanced",
 		"Draw multiple instances of a range of elements.",
 
@@ -64,7 +64,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		GLsizei.IN("primcount", "the number of instances of the specified range of vertices to be rendered")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsInstanced",
 		"Draws multiple instances of a set of elements.",
 
@@ -81,7 +81,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_copy_buffer
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the target parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv, MapBufferRange,
 		FlushMappedBufferRange, GetBufferParameteriv, BindBufferRange, BindBufferBase, and CopyBufferSubData.
@@ -91,7 +91,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"COPY_WRITE_BUFFER" _ 0x8F37
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyBufferSubData",
 		"""
 		Copies all or part of one buffer object's data store to the data store of another buffer object.
@@ -123,19 +123,19 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// NV_primitive_restart
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled.",
 
 		"PRIMITIVE_RESTART" _ 0x8F9D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"PRIMITIVE_RESTART_INDEX" _ 0x8F9E
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PrimitiveRestartIndex",
 		"Specifies the primitive restart index.",
 
@@ -144,7 +144,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_texture_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBuffer, MapBufferRange, BindTexture, UnmapBuffer,
 		GetBufferSubData, GetBufferParameteriv, GetBufferPointerv, and TexBuffer, and the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, and
@@ -154,7 +154,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"TEXTURE_BUFFER" _ 0x8C2A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
 		"MAX_TEXTURE_BUFFER_SIZE" _ 0x8C2B,
@@ -163,7 +163,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"TEXTURE_BUFFER_FORMAT" _ 0x8C2E
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexBuffer",
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found
@@ -196,7 +196,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_texture_rectangle
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled; by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and
 		GetDoublev; and by the {@code target} parameter of BindTexture, GetTexParameterfv, GetTexParameteriv, TexParameterf, TexParameteri, TexParameterfv and
@@ -206,31 +206,31 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"TEXTURE_RECTANGLE" _ 0x84F5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.",
 
 		"TEXTURE_BINDING_RECTANGLE" _ 0x84F6
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D.",
 
 		"PROXY_TEXTURE_RECTANGLE" _ 0x84F7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
 		"MAX_RECTANGLE_TEXTURE_SIZE" _ 0x84F8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of type sampler2DRect.",
 
 		"SAMPLER_2D_RECT" _ 0x8B63
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of type
 		sampler2DRectShadow.
@@ -241,26 +241,26 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_uniform_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"UNIFORM_BUFFER" _ 0x8A11
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"UNIFORM_BUFFER_BINDING" _ 0x8A28
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v.",
 
 		"UNIFORM_BUFFER_START" _ 0x8A29,
 		"UNIFORM_BUFFER_SIZE" _ 0x8A2A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_UNIFORM_BLOCKS" _ 0x8A2B,
@@ -275,14 +275,14 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"UNIFORM_BUFFER_OFFSET_ALIGNMENT" _ 0x8A34
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH" _ 0x8A35,
 		"ACTIVE_UNIFORM_BLOCKS" _ 0x8A36
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformsiv.",
 
 		"UNIFORM_TYPE" _ 0x8A37,
@@ -295,7 +295,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"UNIFORM_IS_ROW_MAJOR" _ 0x8A3E
 	)
 
-	val UniformBlockParameters = IntConstant.block(
+	val UniformBlockParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
 		"UNIFORM_BLOCK_BINDING" _ 0x8A3F,
@@ -308,13 +308,13 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER" _ 0x8A46
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetActiveUniformsiv and GetUniformBlockIndex.",
 
 		"INVALID_INDEX" _ 0xFFFFFFFF.i
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetUniformIndices",
 		"Retrieves the indices of a number of uniforms within a program object",
 
@@ -327,7 +327,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		returnValue _ GLuint_p.OUT("uniformIndices", "an array that will receive the indices of the uniforms")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetActiveUniformsiv",
 		"Returns information about several active uniform variables for the specified program object.",
 
@@ -341,7 +341,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		returnValue _ GLint_p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetActiveUniformName",
 		"Queries the name of an active uniform.",
 
@@ -361,7 +361,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		)
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetUniformBlockIndex",
 		"Retrieves the index of a named uniform block.",
 
@@ -369,7 +369,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		const _ GLcharASCII_p.IN("uniformBlockName", "an array of characters to containing the name of the uniform block whose index to retrieve")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetActiveUniformBlockiv",
 		"Queries information about an active uniform block.",
 
@@ -379,7 +379,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the address of a variable to receive the result of the query")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetActiveUniformBlockName",
 		"Retrieves the name of an active uniform block.",
 
@@ -393,7 +393,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformBlockBinding",
 		"Assigns a binding point to an active uniform block.",
 

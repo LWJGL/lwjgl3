@@ -22,7 +22,7 @@ val ARB_vertex_array_object = "ARBVertexArrayObject".nativeClassGL("ARB_vertex_a
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"VERTEX_ARRAY_BINDING" _ 0x85B5

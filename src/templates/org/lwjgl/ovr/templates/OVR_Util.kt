@@ -12,7 +12,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 
 	documentation = "Native bindings to the libOVR utility functions."
 
-	val ProjectionModifiers = IntConstant.block(
+	val ProjectionModifiers = IntConstant(
 		"Enumerates modifications to the projection matrix based on the application's needs.",
 
 		 /// Use for generating a default projection matrix that is:
@@ -38,7 +38,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 	    "Projection_ClipRangeOpenGL" _ 0x08
 	).javaDocLinks
 
-	ovrMatrix4f.func(
+	ovrMatrix4f(
 		"Matrix4f_Projection",
 		"Used to generate projection from ovrEyeDesc::Fov.",
 
@@ -48,7 +48,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 		unsigned_int.IN("projectionModFlags", "a combination of the ovrProjectionModifier flags", ProjectionModifiers, LinkMode.BITFIELD)
 	)
 
-	ovrMatrix4f.func(
+	ovrMatrix4f(
 		"Matrix4f_OrthoSubProjection",
 		"Used for 2D rendering, Y is down, orthoScale = 1.0f / pixelsPerTanAngleAtCenter, orthoDistance = distance from camera, such as 0.8m",
 
@@ -58,7 +58,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 		float.IN("hmdToEyeViewOffsetX", "")
 	)
 
-	double.func(
+	double(
 		"_WaitTillTime",
 		"Waits until the specified absolute time.",
 

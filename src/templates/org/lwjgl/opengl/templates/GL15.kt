@@ -44,7 +44,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"New token names.",
 
 		"FOG_COORD_SRC" _ 0x8450,
@@ -65,7 +65,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 	// ARB_vertex_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData,
 		GetBufferParameteriv, and GetBufferPointerv.
@@ -75,7 +75,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"ELEMENT_ARRAY_BUFFER" _ 0x8893
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"ARRAY_BUFFER_BINDING" _ 0x8894,
@@ -91,13 +91,13 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"WEIGHT_ARRAY_BUFFER_BINDING" _ 0x889E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetVertexAttribiv.",
 
 		"VERTEX_ATTRIB_ARRAY_BUFFER_BINDING" _ 0x889F
 	)
 
-	val BUFFER_OBJECT_USAGE_HINTS = IntConstant.block(
+	val BUFFER_OBJECT_USAGE_HINTS = IntConstant(
 		"Accepted by the {@code usage} parameter of BufferData.",
 
 		"STREAM_DRAW" _ 0x88E0,
@@ -111,7 +111,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"DYNAMIC_COPY" _ 0x88EA
 	).javaDocLinks
 
-	val BUFFER_OBJECT_ACCESS_POLICIES = IntConstant.block(
+	val BUFFER_OBJECT_ACCESS_POLICIES = IntConstant(
 		"Accepted by the {@code access} parameter of MapBuffer.",
 
 		"READ_ONLY" _ 0x88B8,
@@ -119,7 +119,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"READ_WRITE" _ 0x88BA
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
 
 		"BUFFER_SIZE" _ 0x8764,
@@ -128,13 +128,13 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"BUFFER_MAPPED" _ 0x88BC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferPointerv.",
 
 		"BUFFER_MAP_POINTER" _ 0x88BD
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBuffer",
 		"Binds a named buffer object.",
 
@@ -142,7 +142,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLuint.IN("buffer", "the name of a buffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteBuffers",
 		"Deletes named buffer objects.",
 
@@ -150,7 +150,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(const, SingleValue("buffer")) _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenBuffers",
 		"Generates buffer object names.",
 
@@ -158,14 +158,14 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		returnValue _ GLuint_p.OUT("buffers", "a buffer in which the generated buffer object names are stored")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsBuffer",
 		"Determines if a name corresponds to a buffer object.",
 
 		GLuint.IN("buffer", "a value that may be the name of a buffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferData",
 		"""
 		Creates and initializes a buffer object's data store.
@@ -203,7 +203,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferSubData",
 		"Updates a subset of a buffer object's data store.",
 
@@ -222,7 +222,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		) _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferSubData",
 		"Returns a subset of a buffer object's data store.",
 
@@ -238,7 +238,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		) _ GLvoid_p.IN("data", "a pointer to the location where buffer object data is returned")
 	)
 
-	(MapPointer("glGetBufferParameteri(target, GL_BUFFER_SIZE)") _ GLvoid_p).func(
+	(MapPointer("glGetBufferParameteri(target, GL_BUFFER_SIZE)") _ GLvoid_p)(
 		"MapBuffer",
 		"""
 		Maps a buffer object's data store.
@@ -259,7 +259,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		)
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"UnmapBuffer",
 		"""
 		Relinquishes the mapping of a buffer object and invalidates the pointer to its data store.
@@ -273,7 +273,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferParameteriv",
 		"Returns the value of a buffer object parameter.",
 
@@ -282,7 +282,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested parameter")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferPointerv",
 		"Returns the pointer to a mapped buffer object's data store.",
 
@@ -293,27 +293,27 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 	// ARB_occlusion_query
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
 		"SAMPLES_PASSED" _ 0x8914
 	)
 
-	val QUERY_PARAMETERS = IntConstant.block(
+	val QUERY_PARAMETERS = IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryiv.",
 
 		"QUERY_COUNTER_BITS" _ 0x8864,
 		"CURRENT_QUERY" _ 0x8865
 	).javaDocLinks
 
-	val QUERY_OBJECT_PARAMETERS = IntConstant.block(
+	val QUERY_OBJECT_PARAMETERS = IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv and GetQueryObjectuiv.",
 
 		"QUERY_RESULT" _ 0x8866,
 		"QUERY_RESULT_AVAILABLE" _ 0x8867
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"GenQueries",
 		"Generates query object names.",
 
@@ -321,7 +321,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		returnValue _ GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteQueries",
 		"Deletes named query objects.",
 
@@ -329,14 +329,14 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(const, SingleValue("id")) _ GLuint_p.IN("ids", "an array of query objects to be deleted")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsQuery",
 		"Determine if a name corresponds to a query object.",
 
 		GLuint.IN("id", "a value that may be the name of a query object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginQuery",
 		"Creates a query object and makes it active.",
 
@@ -344,14 +344,14 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	ReferenceGL("glBeginQuery") _ GLvoid.func(
+	ReferenceGL("glBeginQuery") _ GLvoid(
 		"EndQuery",
 		"Marks the end of the sequence of commands to be tracked for the active query specified by {@code target}.",
 
 		GLenum.IN("target", "the query object target", QUERY_TARGETS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryiv",
 		"Returns parameters of a query object target.",
 
@@ -360,7 +360,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryObjectiv",
 		"Returns the integer value of a query object parameter.",
 
@@ -369,7 +369,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryObjectuiv",
 		"Unsigned version of #GetQueryObjectiv().",
 

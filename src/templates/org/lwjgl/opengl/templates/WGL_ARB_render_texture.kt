@@ -48,7 +48,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_pixel_format.link}, ${WGL_ARB_pbuffer.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(), and the {@code attribIList} parameters of
 		WGLARBPixelFormat#ChoosePixelFormatARB().
@@ -61,7 +61,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 	val wglCreatePbufferARB = "WGLARBPbuffer#CreatePbufferARB()"
 	val wglQueryPbufferARB = "WGLARBPbuffer#QueryPbufferARB()"
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribList} parameter of $wglCreatePbufferARB and by the {@code attribute} parameter of $wglQueryPbufferARB.",
 
 		"TEXTURE_FORMAT_ARB" _ 0x2072,
@@ -69,7 +69,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"MIPMAP_TEXTURE_ARB" _ 0x2074
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribList} parameter of $wglCreatePbufferARB and returned in the value parameter of $wglQueryPbufferARB when
 		{@code attribute} is #TEXTURE_FORMAT_ARB.
@@ -80,7 +80,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"NO_TEXTURE_ARB" _ 0x2077
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribList} parameter of $wglCreatePbufferARB and returned in the value parameter of $wglQueryPbufferARB when
 		{@code attribute} is #TEXTURE_TARGET_ARB.
@@ -91,14 +91,14 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"TEXTURE_2D_ARB" _ 0x207A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribList} parameter of #SetPbufferAttribARB() and by the {@code attribute} parameter of $wglQueryPbufferARB.",
 
 		"MIPMAP_LEVEL_ARB" _ 0x207B,
 		"CUBE_MAP_FACE_ARB" _ 0x207C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribList} parameter of #SetPbufferAttribARB() and returned in the value parameter of $wglQueryPbufferARB when
 		{@code attribute} is #CUBE_MAP_FACE_ARB.
@@ -112,7 +112,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB" _ 0x2082
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code buffer} parameter of #BindTexImageARB() and #ReleaseTexImageARB().",
 
 		"FRONT_LEFT_ARB" _ 0x2083,
@@ -131,7 +131,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"AUX9_ARB" _ 0x2090
 	)
 
-	BOOL.func(
+	BOOL(
 		"BindTexImageARB",
 		"""
 		Defines a one-dimensional texture image or two-dimensional texture image or a set of two-dimensional cube map texture images. The texture image or
@@ -143,7 +143,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		int.IN("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
 	)
 
-	BOOL.func(
+	BOOL(
 		"ReleaseTexImageARB",
 		"""
 		Releases the specified color buffer back to the pbuffer. The pbuffer is made available for reading and writing when it no longer has any color buffers
@@ -154,7 +154,7 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		int.IN("buffer", "the target buffer", "#FRONT_LEFT_ARB #FRONT_RIGHT_ARB #BACK_LEFT_ARB #BACK_RIGHT_ARB #AUX0_ARB WGL_AUX[1-9]_ARB")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetPbufferAttribARB",
 		"Sets an attribute to the specified pbuffer.",
 

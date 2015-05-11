@@ -18,7 +18,7 @@ val APPLE_fixed_alpha_channel_orders = "APPLEFixedAlphaChannelOrders".nativeClas
 		available for the CL10#UNORM_INT8 cl_channel_type. They are intended to support legacy image formats.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"",
 
 		"1RGB_APPLE" _ 0x10000006,

@@ -15,7 +15,7 @@ val fcntl = "Fcntl".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <fcntl.h>."
 
-	IntConstant.block(
+	IntConstant(
 		"#open() flags.",
 
 		"O_ACCMODE" _ 0x00000003,
@@ -38,7 +38,7 @@ val fcntl = "Fcntl".nativeClass(LINUX_PACKAGE) {
 		"O_CLOEXEC" _ 0x02000000
 	)
 
-	int.func(
+	int(
 		"open",
 		"""
 		Given a pathname for a file, {@code open()} returns a file descriptor, a small, nonnegative integer for use in subsequent system calls. The file

@@ -28,7 +28,7 @@ val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_del
 		Requires ${GLX11.link} and ${GLX_EXT_swap_control.link}.
 		"""
 
-	Bool.func(
+	Bool(
 		"DelayBeforeSwapNV",
 		"""
 		Blocks the CPU until {@code seconds} seconds before a synchronized swap would occur on a particular GLX window drawable. It also returns a boolean value

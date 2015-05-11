@@ -14,7 +14,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to WinUser.h."
 
-	IntConstant.block(
+	IntConstant(
 		"Window Styles",
 		"WS_OVERLAPPED" _ 0x00000000,
 		"WS_POPUP" _ 0x80000000.i,
@@ -49,7 +49,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"WS_TILEDWINDOW" expr "WS_OVERLAPPEDWINDOW"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Windows messages.",
 		"WM_NULL" _ 0x0000,
 		"WM_CREATE" _ 0x0001,
@@ -324,14 +324,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"WM_USER" _ 0x0400
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"WM_ACTIVATE message {@code wParam} values.",
 		"WA_ACTIVE" _ 1,
 		"WA_CLICKACTIVE" _ 2,
 		"WA_INACTIVE" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"WM_SIZE message {@code wParam} values.",
 		"SIZE_RESTORED" _ 0,
 		"SIZE_MINIMIZED" _ 1,
@@ -340,7 +340,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SIZE_MAXHIDE" _ 4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"WM_DEVICECHANGE message {@code wParam} params.",
 
 		"DBT_APPYBEGIN" _ 0x0000,
@@ -352,7 +352,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"DBT_MONITORCHANGE" _ 0x001B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"System menu command values.",
 		"SC_SIZE" _ 0xF000,
 		"SC_MOVE" _ 0xF010,
@@ -376,7 +376,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SC_SEPARATOR" _ 0xF00F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"#GetSystemMetrics() codes.",
 		"SM_CXSCREEN" _ 0,
 		"SM_CYSCREEN" _ 1,
@@ -493,7 +493,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SM_MAXIMUMTOUCHES" _ 95
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Extended Window Styles",
 		"WS_EX_DLGMODALFRAME" _ 0x00000001,
 		"WS_EX_NOPARENTNOTIFY" _ 0x00000004,
@@ -530,12 +530,12 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"WS_EX_NOACTIVATE" _ 0x08000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"May be used in #CreateWindowEx() for the x, y, width, height parameters.",
 		"CW_USEDEFAULT" _ 0x80000000.i
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Key state masks for mouse messages.",
 		"MK_LBUTTON" _ 0x0001,
 		"MK_RBUTTON" _ 0x0002,
@@ -546,7 +546,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"MK_XBUTTON2" _ 0x0040
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Mouse position codes.",
 		"HTERROR" _ -2,
 		"HTTRANSPARENT" _ -1,
@@ -579,7 +579,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"HTHELP" _ 21
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Class styles",
 		"CS_VREDRAW" _ 0x0001,
 		"CS_HREDRAW" _ 0x0002,
@@ -597,7 +597,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"CS_DROPSHADOW" _ 0x00020000 // _WIN32_WINNT >=" _ 0x0501,
 	)
 
-	val WindowLongOffsets = IntConstant.block(
+	val WindowLongOffsets = IntConstant(
 		"Window field offsets for #GetWindowLongPtr().",
 		"GWL_WNDPROC" _ -4,
 		"GWL_HINSTANCE" _ -6,
@@ -608,7 +608,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GWL_ID" _ -12
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"#ShowWindow() commands.",
 		"SW_HIDE" _ 0,
 		"SW_SHOWNORMAL" _ 1,
@@ -627,7 +627,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SW_MAX" _ 11
 	)
 
-	LongConstant.block(
+	LongConstant(
 		"Virtual window handles used by the #SetWindowPos() insertAfter argument.",
 		"HWND_TOP" _ 0L,
 		"HWND_BOTTOM" _ 1L,
@@ -635,7 +635,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"HWND_NOTOPMOST" _ -2L
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Window sizing and positiong flags used by the #SetWindowPos() flags argument.",
 		"SWP_NOSIZE" _ 0x0001,
 		"SWP_NOMOVE" _ 0x0002,
@@ -656,7 +656,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SWP_ASYNCWINDOWPOS" _ 0x4000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Standard Icon IDs. Use with ##nLoadIcon(long, long).",
 		"IDI_APPLICATION" _ 32512,
 		"IDI_HAND" _ 32513,
@@ -670,7 +670,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"IDI_INFORMATION" expr "IDI_ASTERISK"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Standard Cursor IDs. Use with ##nLoadCursor(long, long).",
 		"IDC_ARROW" _ 32512,
 		"IDC_IBEAM" _ 32513,
@@ -690,7 +690,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"IDC_HELP" _ 32651
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Class field offsets for #GetClassLongPtr().",
 		"GCL_MENUNAME" _ -8,
 		"GCL_HBRBACKGROUND" _ -10,
@@ -705,7 +705,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"GCL_HICONSM" _ -34
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Queue status flags for #GetQueueStatus() and #MsgWaitForMultipleObjects()",
 		"QS_KEY" _ 0x0001,
 		"QS_MOUSEMOVE" _ 0x0002,
@@ -723,7 +723,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"QS_ALLINPUT" expr "QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Remove message flags for #PeekMessage().",
 		"PM_NOREMOVE" _ 0x0000,
 		"PM_REMOVE" _ 0x0001,
@@ -734,14 +734,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"PM_QS_SENDMESSAGE" expr "QS_SENDMESSAGE << 16"
 	)
 
-	val EnumMode = IntConstant.block(
+	val EnumMode = IntConstant(
 		"EnumDisplaySettings mode.",
 
 		"ENUM_CURRENT_SETTINGS" expr "-1",
 		"ENUM_REGISTRY_SETTINGS" expr "-2"
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Flags for #ChangeDisplaySettings().",
 		"CDS_UPDATEREGISTRY" _ 0x00000001,
 		"CDS_TEST" _ 0x00000002,
@@ -758,7 +758,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"CDS_NORESET" _ 0x10000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Return values for #ChangeDisplaySettings().",
 		"DISP_CHANGE_SUCCESSFUL" _ 0,
 		"DISP_CHANGE_RESTART" _ 1,
@@ -771,7 +771,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"DISP_CHANGE_BADDUALVIEW" _ -6 // _WIN32_WINNT >= 0x0501
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Device state flags.",
 		"DISPLAY_DEVICE_ATTACHED_TO_DESKTOP" _ 0x00000001,
 		"DISPLAY_DEVICE_MULTI_DRIVER" _ 0x00000002,
@@ -790,13 +790,13 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"DISPLAY_DEVICE_ATTACHED" _ 0x00000002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Flags for #EnumDisplaySettingsEx().",
 		"EDS_RAWMODE" _ 0x00000002,
 		"EDS_ROTATEDMODE" _ 0x00000004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"#SystemParametersInfo() parameters.",
 
 		"SPI_GETBEEP" _ 0x0001,
@@ -1036,7 +1036,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SPI_SETGESTUREVISUALIZATION" _ 0x201B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"#SystemParametersInfo() flags.",
 
 		"SPIF_UPDATEINIFILE" _ 0x0001,
@@ -1044,7 +1044,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"SPIF_SENDCHANGE" expr "SPIF_SENDWININICHANGE"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Virtual Keys.",
 
 		"VK_LBUTTON" _ 0x01,
@@ -1209,20 +1209,20 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"VK_OEM_CLEAR" _ 0xFE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"XButton values.",
 
 		"XBUTTON1" _ 0x0001,
 		"XBUTTON2" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Value for rolling one detent.",
 
 		"WHEEL_DELTA" _ 120
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"##TRACKMOUSEEVENT flags.",
 
 		"TME_HOVER" _ 0x00000001,
@@ -1232,7 +1232,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"TME_CANCEL" _ 0x80000000.i
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Predefined Clipboard formats.",
 
 		"CF_TEXT" _ 1,
@@ -1257,7 +1257,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 
 	// ------------------------------------------------------------------------------
 
-	ATOM.func(
+	ATOM(
 		"RegisterClassEx",
 		"Registers a window class for subsequent use in calls to the #CreateWindowEx() function.",
 
@@ -1267,7 +1267,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"UnregisterClass",
 		"Unregisters a window class, freeing the memory required for the class.",
 
@@ -1283,7 +1283,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HINSTANCE.IN("instance", "a handle to the instance of the module that created the class")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetClassInfoEx",
 		"Retrieves information about a window class, including a handle to the small icon associated with the window class.",
 
@@ -1305,7 +1305,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPWNDCLASSEX.OUT("classEx", "a ##WNDCLASSEX structure that receives the information about the class.")
 	)
 
-	ULONG_PTR.func(
+	ULONG_PTR(
 		"GetClassLongPtr",
 		"Retrieves the specified value from the WNDCLASSEX structure associated with the specified window.",
 
@@ -1313,7 +1313,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("index", "the value to be retrieved")
 	)
 
-	ULONG_PTR.func(
+	ULONG_PTR(
 		"SetClassLongPtr",
 		"""
 		Replaces the specified value at the specified offset into the extra class memory or the WNDCLASSEX structure for the class to which the specified window
@@ -1325,7 +1325,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LONG_PTR.IN("newLong", "the replacement value")
 	)
 
-	HICON.func(
+	HICON(
 		"LoadIcon",
 		"Loads the specified icon resource from the executable (.exe) file associated with an application instance.",
 
@@ -1339,7 +1339,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPCTSTR.IN("iconName", "the name of the icon resource to be loaded")
 	)
 
-	HCURSOR.func(
+	HCURSOR(
 		"LoadCursor",
 		"Loads the specified cursor resource from the executable (.EXE) file associated with an application instance.",
 
@@ -1347,14 +1347,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPCTSTR.IN("cursorName", "the name of the cursor resource to be loaded")
 	)
 
-	int.func(
+	int(
 		"GetSystemMetrics",
 		"Retrieves the specified system metric or system configuration setting.",
 
 		int.IN("index", "the system metric or configuration setting to be retrieved")
 	)
 
-	HWND.func(
+	HWND(
 		"CreateWindowEx",
 		"Creates an overlapped, pop-up, or child window with an extended window style; otherwise, this function is identical to the CreateWindow function.",
 
@@ -1372,7 +1372,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		nullable _ LPVOID.IN("param", "a value to be passed to the window through the ##CREATESTRUCT structure ({@code createParams} member) pointed to by the {@code lParam} param of the WM_CREATE message.")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DestroyWindow",
 		"""
 		Destroys the specified window. The function sends WM_DESTROY and WM_NCDESTROY messages to the window to deactivate it and remove the keyboard focus from
@@ -1386,7 +1386,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HWND.IN("window", "a handle to the window to be destroyed")
 	)
 
-	BOOL.func(
+	BOOL(
 		"ShowWindow",
 		"Sets the specified window's show state.",
 
@@ -1394,7 +1394,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("cmdShow", "controls how the window is to be shown")
 	)
 
-	BOOL.func(
+	BOOL(
 		"UpdateWindow",
 		"""
 		Updates the client area of the specified window by sending a WM_PAINT message to the window if the window's update region is not empty. The function
@@ -1405,7 +1405,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HWND.IN("window", "handle to the window to be updated")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetWindowPos",
 		"""
 		Changes the size, position, and Z order of a child, pop-up, or top-level window. These windows are ordered according to their appearance on the screen.
@@ -1421,7 +1421,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("flags", "the window sizing and positioning flags")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetWindowText",
 		"""
 		Changes the text of the specified window's title bar (if it has one). If the specified window is a control, the text of the control is changed. However,
@@ -1432,7 +1432,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPCTSTR.IN("string", "the new title or control text")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetMessage",
 		"""
 		Retrieves a message from the calling thread's message queue. The function dispatches incoming sent messages until a posted message is available for
@@ -1445,7 +1445,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("msgFilterMax", "the integer value of the highest message value to be retrieved")
 	)
 
-	BOOL.func(
+	BOOL(
 		"PeekMessage",
 		"Dispatches incoming sent messages, checks the thread message queue for a posted message, and retrieves the message (if any exist).",
 
@@ -1456,7 +1456,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("removeMsg", "specifies how messages are to be handled.", "#PM_NOREMOVE #PM_REMOVE #PM_NOYIELD")
 	)
 
-	BOOL.func(
+	BOOL(
 		"TranslateMessage",
 		"""
 		Translates virtual-key messages into character messages. The character messages are posted to the calling thread's message queue, to be read the next
@@ -1472,7 +1472,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"WaitMessage",
 		"""
 		Yields control to other threads when a thread has no other messages in its message queue. The WaitMessage function suspends the thread and does not
@@ -1480,21 +1480,21 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	LRESULT.func(
+	LRESULT(
 		"DispatchMessage",
 		"Dispatches a message to a window procedure. It is typically used to dispatch a message retrieved by the #GetMessage() function.",
 
 		const _ MSG_p.IN("msg", "a structure that contains the message")
 	)
 
-	DWORD.func(
+	DWORD(
 		"GetQueueStatus",
 		"Retrieves the type of messages found in the calling thread's message queue.",
 
 		UINT.IN("flags", "the types of messages for which to check")
 	)
 
-	LONG.func(
+	LONG(
 		"GetMessageTime",
 		"""
 		Retrieves the message time for the last message retrieved by the GetMessage function. The time is a long integer that specifies the elapsed time, in
@@ -1502,7 +1502,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	LRESULT.func(
+	LRESULT(
 		"DefWindowProc",
 		"""
 		Calls the default window procedure to provide default processing for any window messages that an application does not process. This function ensures
@@ -1515,7 +1515,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPARAM.IN("lParam", "additional message information. The content of this parameter depends on the value of the {@code msg} parameter.")
 	)
 
-	HDC.func(
+	HDC(
 		"GetDC",
 		"""
 		Retrieves a handle to a device context (DC) for the client area of a specified window or for the entire screen. You can use the returned handle in
@@ -1525,7 +1525,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		nullable _ HWND.IN("window", "a handle to the window whose DC is to be retrieved. If this value is $NULL, {@code GetDC} retrieves the DC for the entire screen.")
 	)
 
-	int.func(
+	int(
 		"ReleaseDC",
 		"""
 		Releases a device context (DC), freeing it for use by other applications. The effect of the ReleaseDC function depends on the type of DC. It frees only
@@ -1536,7 +1536,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HDC.IN("hdc", "a handle to the DC to be released")
 	)
 
-	BOOL.func(
+	BOOL(
 		"EnumDisplayDevices",
 		"Obtains information about the display devices in the current session.",
 
@@ -1562,7 +1562,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DWORD.IN("flags", "set this flag to EDD_GET_DEVICE_INTERFACE_NAME (0x00000001) to retrieve the device interface name for GUID_DEVINTERFACE_MONITOR, which is registered by the operating system on a per monitor basis")
 	)
 
-	BOOL.func(
+	BOOL(
 		"EnumDisplaySettings",
 		"""
 		Retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes of a display device, make
@@ -1581,7 +1581,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DEVMODE_p.OUT("devMode", "a ##DEVMODE structure into which the function stores information about the specified graphics mode")
 	)
 
-	BOOL.func(
+	BOOL(
 		"EnumDisplaySettingsEx",
 		"""
 		Retrieves information about one of the graphics modes for a display device. To retrieve information for all the graphics modes for a display device,
@@ -1594,7 +1594,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DWORD.IN("flags", "", "#EDS_RAWMODE #EDS_ROTATEDMODE")
 	)
 
-	LONG.func(
+	LONG(
 		"ChangeDisplaySettings",
 		"Changes the settings of the default display device to the specified graphics mode.",
 
@@ -1609,7 +1609,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DWORD.IN("flags", "indicates how the graphics mode should be changed")
 	)
 
-	LONG.func(
+	LONG(
 		"ChangeDisplaySettingsEx",
 		"Changes the settings of the specified display device to the specified graphics mode.",
 
@@ -1630,7 +1630,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"SystemParametersInfo",
 		"Retrieves or sets the value of one of the system-wide parameters. This function can also update the user profile while setting a parameter.",
 
@@ -1660,7 +1660,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"AdjustWindowRectEx",
 		"""
 		Calculates the required size of the window rectangle, based on the desired size of the client rectangle. The window rectangle can then be passed to the
@@ -1680,14 +1680,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		DWORD.IN("exStyle", "the extended window style of the window whose required size is to be calculated")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetCursorPos",
 		"Retrieves the position of the mouse cursor, in screen coordinates.",
 
 		LPPOINT.OUT("point", "a pointer to a ##POINT structure that receives the screen coordinates of the cursor")
 	)
 
-	BOOL.func(
+	BOOL(
 		"ScreenToClient",
 		"Converts the screen coordinates of a specified point on the screen to client-area coordinates.",
 
@@ -1695,7 +1695,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		LPPOINT.IN("point", "a pointer to a ##POINT structure that specifies the screen coordinates to be converted")
 	)
 
-	BOOL.func(
+	BOOL(
 		"ClientToScreen",
 		"Converts the client-area coordinates of a specified point to screen coordinates.",
 
@@ -1709,7 +1709,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetClientRect",
 		"""
 		Retrieves the coordinates of a window's client area. The client coordinates specify the upper-left and lower-right corners of the client area. Because
@@ -1726,14 +1726,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HWND.func(
+	HWND(
 		"WindowFromPoint",
 		"Retrieves a handle to the window that contains the specified point.",
 
 		POINT.IN("point", "the point to be checked")
 	)
 
-	BOOL.func(
+	BOOL(
 		"BringWindowToTop",
 		"""
 		Brings the specified window to the top of the Z order. If the window is a top-level window, it is activated. If the window is a child window, the
@@ -1743,7 +1743,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HWND.IN("hWnd", "a handle to the window to bring to the top of the Z order")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetForegroundWindow",
 		"""
 		Brings the thread that created the specified window into the foreground and activates the window. Keyboard input is directed to the window, and various
@@ -1754,7 +1754,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		HWND.IN("hWnd", "a handle to the window that should be activated and brought to the foreground")
 	)
 
-	HWND.func(
+	HWND(
 		"SetFocus",
 		"Sets the keyboard focus to the specified window. The window must be attached to the calling thread's message queue.",
 
@@ -1767,7 +1767,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	LONG_PTR.func(
+	LONG_PTR(
 		"SetWindowLongPtr",
 		"Changes an attribute of the specified window. The function also sets a value at the specified offset in the extra window memory.",
 
@@ -1785,7 +1785,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		returnDoc = "the previous value at the given {@code index}"
 	)
 
-	LONG_PTR.func(
+	LONG_PTR(
 		"GetWindowLongPtr",
 		"Retrieves information about the specified window. The function also retrieves the value at a specified offset into the extra window memory.",
 
@@ -1800,14 +1800,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	SHORT.func(
+	SHORT(
 		"GetAsyncKeyState",
 		"Determines whether a key is up or down at the time the function is called, and whether the key was pressed after a previous call to {@code GetAsyncKeyState}.",
 
 		int.IN("key", "the virtual-key code")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetCursorPos",
 		"""
 		Moves the cursor to the specified screen coordinates. If the new coordinates are not within the screen rectangle set by the most recent #ClipCursor()
@@ -1818,7 +1818,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("Y", "the new y-coordinate of the cursor, in screen coordinates.")
 	)
 
-	HWND.func(
+	HWND(
 		"SetCapture",
 		"""
 		Sets the mouse capture to the specified window belonging to the current thread. {@code SetCapture} captures mouse input either when the mouse is over
@@ -1834,7 +1834,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		returnDoc = "a handle to the window that had previously captured the mouse. If there is no such window, the return value is $NULL."
 	)
 
-	BOOL.func(
+	BOOL(
 		"ReleaseCapture",
 		"""
 		Releases the mouse capture from a window in the current thread and restores normal mouse input processing. A window that has captured the mouse receives
@@ -1843,7 +1843,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	BOOL.func(
+	BOOL(
 		"ClipCursor",
 		"""
 		"Confines the cursor to a rectangular area on the screen. If a subsequent cursor position (set by the {@code SetCursorPos} function or the mouse) lies
@@ -1859,7 +1859,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	int.func(
+	int(
 		"ShowCursor",
 		"""
 		Displays or hides the cursor.
@@ -1877,7 +1877,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HCURSOR.func(
+	HCURSOR(
 		"SetCursor",
 		"""
 		Sets the cursor shape.
@@ -1906,7 +1906,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		returnDoc = "the handle to the previous cursor, if there was one"
 	)
 
-	UINT.func(
+	UINT(
 		"MapVirtualKey",
 		"Translates (maps) a virtual-key code into a scan code or character value, or translates a scan code into a virtual-key code.",
 
@@ -1914,14 +1914,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("mapType", "the translation to be performed. The value of this parameter depends on the value of the {@code code} parameter.")
 	)
 
-	BOOL.func(
+	BOOL(
 		"TrackMouseEvent",
 		"Posts messages when the mouse pointer leaves a window or hovers over a window for a specified amount of time.",
 
 		LPTRACKMOUSEEVENT.IN("eventTrack", "a pointer to a {@code TRACKMOUSEEVENT} structure that contains tracking information.")
 	)
 
-	HWND.func(
+	HWND(
 		"GetForegroundWindow",
 		"""
 		Retrieves a handle to the foreground window (the window with which the user is currently working). The system assigns a slightly higher priority to the
@@ -1929,7 +1929,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	BOOL.func(
+	BOOL(
 		"OpenClipboard",
 		"Opens the clipboard for examination and prevents other applications from modifying the clipboard content.",
 
@@ -1939,7 +1939,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"EmptyClipboard",
 		"""
 		Empties the clipboard and frees handles to data in the clipboard. The function then assigns ownership of the clipboard to the window that currently has
@@ -1947,7 +1947,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	HANDLE.func(
+	HANDLE(
 		"SetClipboardData",
 		"""
 		Places data on the clipboard in a specified clipboard format. The window must be the current clipboard owner, and the application must have called the
@@ -1973,14 +1973,14 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		returnDoc = "the handle to the data if the function succeeds. If the function fails, the return value is $NULL."
 	)
 
-	BOOL.func(
+	BOOL(
 		"IsClipboardFormatAvailable",
 		"Determines whether the clipboard contains data in the specified format.",
 
 		UINT.IN("format", "a standard or registered clipboard format")
 	)
 
-	HANDLE.func(
+	HANDLE(
 		"GetClipboardData",
 		"Retrieves data from the clipboard in a specified format. The clipboard must have been opened previously.",
 
@@ -1989,6 +1989,6 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		returnDoc = "the handle to a clipboard object in the specified format if the function succeeds. If the function fails, the return value is $NULL."
 	)
 
-	BOOL.func("CloseClipboard", "Closes the clipboard.")
+	BOOL("CloseClipboard", "Closes the clipboard.")
 
 }

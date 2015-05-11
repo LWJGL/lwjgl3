@@ -18,7 +18,7 @@ val GLX_ARB_create_context_robustness = "GLXARBCreateContextRobustness".nativeCl
 		Requires ${GLX14.glx}, ${GLX_ARB_create_context.link} and ${ARB_robustness.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a bit in the attribute value for GLXARBCreateContext#CONTEXT_FLAGS_ARB in the {@code attrib_list} argument to
 		GLXARBCreateContext#CreateContextAttribsARB().
@@ -27,13 +27,13 @@ val GLX_ARB_create_context_robustness = "GLXARBCreateContextRobustness".nativeCl
 		"CONTEXT_ROBUST_ACCESS_BIT_ARB" _ 0x00000004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute name in the {@code attrib_list} argument to GLXARBCreateContext#CreateContextAttribsARB().",
 
 		"CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB" _ 0x8256
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as an attribute value for #CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB in the {@code attrib_list} argument to
 		GLXARBCreateContext#CreateContextAttribsARB().

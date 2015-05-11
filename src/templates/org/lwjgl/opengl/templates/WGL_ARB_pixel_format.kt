@@ -25,7 +25,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
-	val WGL_ATTRIBUTES = IntConstant.block(
+	val WGL_ATTRIBUTES = IntConstant(
 		"""
 		Accepted in the {@code attributes} parameter array of #GetPixelFormatAttribivARB(), and #GetPixelFormatAttribfvARB(), and as a type in
 		the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB().
@@ -74,7 +74,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		"AUX_BUFFERS_ARB" _ 0x2024
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB(), and returned in the
 		{@code values} parameter array of #GetPixelFormatAttribivARB() and #GetPixelFormatAttribfvARB().
@@ -92,7 +92,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		"TYPE_COLORINDEX_ARB" _ 0x202C
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetPixelFormatAttribivARB",
 		"",
 
@@ -104,7 +104,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		int_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetPixelFormatAttribfvARB",
 		"Float version of #GetPixelFormatAttribivARB().",
 
@@ -116,7 +116,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		FLOAT_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
-	BOOL.func(
+	BOOL(
 		"ChoosePixelFormatARB",
 		"""
 		Selects from among all of the available pixel formats (including both accelerated and generic formats and non-displayable formats). This function

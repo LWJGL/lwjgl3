@@ -34,7 +34,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		<strong>LWJGL note</strong>: The closure and raw APIs are not exposed.
 		"""
 	
-	ShortConstant.block(
+	ShortConstant(
 		"Types used to create custom ##FFICIF.",
 
 		"TYPE_VOID" _ 0.s,
@@ -54,7 +54,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"TYPE_POINTER" _ 14.s
 	)
 
-	val ABI = IntConstant.block(
+	val ABI = IntConstant(
 		"ABI enumeration.",
 
 		// x86
@@ -75,7 +75,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"DEFAULT_ABI" expr "FFI_DEFAULT_ABI()"
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Status codes.",
 
 		"OK" _ 0,
@@ -83,7 +83,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"BAD_ABI" _ 2
 	)
 	
-	LongConstant.block(
+	LongConstant(
 		"Data types. These are the addresses of libffi's predefined ##FFIType structs.",
 
 		"ffi_type_void" expr "ffi_type_void()",
@@ -113,7 +113,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"ffi_type_pointer" expr "ffi_type_pointer()"
 	).noPrefix()
 
-	ffi_status.func(
+	ffi_status(
 		"prep_cif",
 		"Prepares an ##FFICIF structure for use with #call().",
 
@@ -130,7 +130,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"""
 	)
 
-	ffi_status.func(
+	ffi_status(
 		"prep_cif_var",
 		"Prepares an ##FFICIF structure for use with #call() for variadic functions.",
 
@@ -148,7 +148,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"""
 	)
 
-	void.func(
+	void(
 		"call",
 		"Provides a simple mechanism for invoking a function without requiring knowledge of the function's interface at compile time.",
 
@@ -167,7 +167,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		nullable _ void_pp.IN("avalue", "an array of pointers from which the argument values are retrieved")
 	)
 
-	void_p.func(
+	void_p(
 		"closure_alloc",
 	    "Allocates an ##FFIClosure structure.",
 
@@ -177,14 +177,14 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	    returnDoc = "a pointer to the writable address"
 	)
 
-	void.func(
+	void(
 		"closure_free",
 	    "Frees memory allocated using #closure_alloc().",
 
 	    void_p.IN("writable", "the address of an ##FFIClosure structure")
 	)
 
-	ffi_status.func(
+	ffi_status(
 		"prep_closure_loc",
 	    "",
 

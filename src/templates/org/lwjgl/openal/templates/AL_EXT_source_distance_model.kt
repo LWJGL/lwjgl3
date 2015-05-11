@@ -17,7 +17,7 @@ val AL_EXT_source_distance_model = "EXTSourceDistanceModel".nativeClassAL("EXT_s
 		source gain.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of alEnable, alDisable, and alIsEnabled.",
 
 		"SOURCE_DISTANCE_MODEL" _ 0x200

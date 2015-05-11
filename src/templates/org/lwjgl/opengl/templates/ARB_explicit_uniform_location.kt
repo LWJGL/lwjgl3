@@ -19,7 +19,7 @@ val ARB_explicit_uniform_location = "ARBExplicitUniformLocation".nativeClassGL("
 		Requires ${GL33.core} or ${registryLinkTo("ARB", "explicit_attrib_location")}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_UNIFORM_LOCATIONS" _ 0x826E

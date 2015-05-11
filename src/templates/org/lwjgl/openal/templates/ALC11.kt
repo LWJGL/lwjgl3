@@ -14,14 +14,14 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 
 	documentation = "Native bindings to ALC 1.1 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"Context creation attributes.",
 
 		"MONO_SOURCES" _ 0x1010,
 		"STEREO_SOURCES" _ 0x1011
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"String queries.",
 
 		"DEFAULT_ALL_DEVICES_SPECIFIER" _ 0x1012,
@@ -31,13 +31,13 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		"CAPTURE_DEFAULT_DEVICE_SPECIFIER" _ 0x311
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Integer queries.",
 
 		"CAPTURE_SAMPLES" _ 0x312
 	)
 
-	ALCdevice_p.func(
+	ALCdevice_p(
 		"CaptureOpenDevice",
 		"""
 		Allows the application to connect to a capture device.
@@ -52,14 +52,14 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		ALCsizei.IN("buffersize", "the number of sample frame to buffer in the AL")
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"CaptureCloseDevice",
 		"Allows the application to disconnect from a capture device.",
 
 		ALCdevice_p.IN("device", "the capture device to close")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"CaptureStart",
 		"""
 		Starts recording audio on the specific capture device.
@@ -72,7 +72,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		ALCdevice_p.IN("device", "the capture device")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"CaptureStop",
 		"""
 		Halts audio capturing without closing the capture device.
@@ -84,7 +84,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		ALCdevice_p.IN("device", "the capture device")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"CaptureSamples",
 		"""
 		Obtains captured audio samples from the AL.

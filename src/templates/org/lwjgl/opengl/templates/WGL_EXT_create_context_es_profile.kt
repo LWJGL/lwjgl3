@@ -17,7 +17,7 @@ val WGL_EXT_create_context_es_profile = "WGLEXTCreateContextESProfile".nativeCla
 		Requires ${WGL_ARB_extensions_string.link}, ${WGL_ARB_create_context.link}, ${WGL_ARB_create_context_profile.link} and an OpenGL ES implementation.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as a bit in the attribute value for WGLARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attribList}.",
 
 		"CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004

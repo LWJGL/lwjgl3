@@ -15,7 +15,7 @@ val amd_device_topology = "AMDDeviceTopology".nativeClassCL("amd_device_topology
 		This extension enables the developer to get a description of the topology used to connect the device to the host.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo(). Returns a description of the topology used to connect the device to the
 		host, using the following 32-bytes union of structures:
@@ -37,7 +37,7 @@ typedef union
 		"DEVICE_TOPOLOGY_AMD" _ 0x4037
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Indicates the type of the struct returned by #DEVICE_TOPOLOGY_AMD.",
 
 		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD" _ 1

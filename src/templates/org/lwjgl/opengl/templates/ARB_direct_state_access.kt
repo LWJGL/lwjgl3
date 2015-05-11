@@ -25,19 +25,19 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
 		Requires ${GL20.core}. ${GL45.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v.",
 
 		"TEXTURE_TARGET" _ 0x1006
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv.",
 
 		"QUERY_TARGET" _ 0x82EA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v.",
 
 		"TEXTURE_BINDING" _ 0x82EB

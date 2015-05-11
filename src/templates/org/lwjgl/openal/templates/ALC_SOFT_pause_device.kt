@@ -21,7 +21,7 @@ val ALC_SOFT_pause_device = "SOFTPauseDevice".nativeClassALC("SOFT_pause_device"
 		processing when in the background.
 		"""
 
-	ALCvoid.func(
+	ALCvoid(
 		"DevicePauseSOFT",
 		"""
 		Pauses a playback device.
@@ -33,7 +33,7 @@ val ALC_SOFT_pause_device = "SOFTPauseDevice".nativeClassALC("SOFT_pause_device"
 		ALCdevice_p.IN("device", "the device to pause")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"DeviceResumeSOFT",
 		"""
 		Resumes playback of a paused device.

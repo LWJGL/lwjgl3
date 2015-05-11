@@ -24,7 +24,7 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
 		Requires ${ARB_fragment_shader.link} and ${registryLinkTo("EXT", "gpu_shader4")}. ${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code src} and {@code dst} parameters of BlendFunc and BlendFunci, and by the {@code srcRGB}, {@code dstRGB}, {@code srcAlpha} and
 		{@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparatei.
@@ -35,7 +35,7 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
 		"ONE_MINUS_SRC1_ALPHA" _ 0x88FB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.",
 
 		"MAX_DUAL_SOURCE_DRAW_BUFFERS" _ 0x88FC

@@ -33,7 +33,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Renamed tokens.",
 
 		"COPY_READ_BUFFER_BINDING".expr<Int>("GL31.GL_COPY_READ_BUFFER"),
@@ -45,7 +45,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_texture_compression_bptc
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, TexImage3D, CopyTexImage2D, CopyTexImage3D, CompressedTexImage2D, and
 		CompressedTexImage3D and the {@code format} parameter of CompressedTexSubImage2D and CompressedTexSubImage3D.
@@ -59,7 +59,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_compressed_texture_pixel_storage
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of PixelStore[fi], GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"UNPACK_COMPRESSED_BLOCK_WIDTH" _ 0x9127,
@@ -74,13 +74,13 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_shader_atomic_counters
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange.",
 
 		"ATOMIC_COUNTER_BUFFER" _ 0x92C0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, GetInteger64i_v, GetBooleanv, GetIntegerv,
 		GetInteger64v, GetFloatv, GetDoublev, and GetActiveAtomicCounterBufferiv.
@@ -89,14 +89,14 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"ATOMIC_COUNTER_BUFFER_BINDING" _ 0x92C1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_64v.",
 
 		"ATOMIC_COUNTER_BUFFER_START" _ 0x92C2,
 		"ATOMIC_COUNTER_BUFFER_SIZE" _ 0x92C3
 	)
 
-	val AtomicCounterBufferParameters = IntConstant.block(
+	val AtomicCounterBufferParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
 		"ATOMIC_COUNTER_BUFFER_DATA_SIZE" _ 0x92C4,
@@ -109,7 +109,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER" _ 0x92CB
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_ATOMIC_COUNTER_BUFFERS" _ 0x92CC,
@@ -128,25 +128,25 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"MAX_ATOMIC_COUNTER_BUFFER_BINDINGS" _ 0x92DC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"ACTIVE_ATOMIC_COUNTER_BUFFERS" _ 0x92D9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformsiv.",
 
 		"UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX" _ 0x92DA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code params} by GetActiveUniform and GetActiveUniformsiv.",
 
 		"UNSIGNED_INT_ATOMIC_COUNTER" _ 0x92DB
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetActiveAtomicCounterBufferiv",
 		"Obtains information about the set of active atomic counter buffers for a program.",
 
@@ -158,13 +158,13 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_texture_storage
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexParameter{if}v.",
 
 		"TEXTURE_IMMUTABLE_FORMAT" _ 0x912F
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexStorage1D",
 		"Simultaneously specifies storage for all levels of a one-dimensional texture.",
 
@@ -174,7 +174,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("width", "the width of the texture, in texels")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexStorage2D",
 		"Simultaneously specifies storage for all levels of a two-dimensional or one-dimensional array texture.",
 
@@ -185,7 +185,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("height", "the height of the texture, in texels")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexStorage3D",
 		"Simultaneously specifies storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture.",
 
@@ -199,7 +199,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_transform_feedback_instanced
 
-	GLvoid.func(
+	GLvoid(
 		"DrawTransformFeedbackInstanced",
 		"Renders multiple instances of primitives using a count derived from a transform feedback object.",
 
@@ -208,7 +208,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("primcount", "the number of instances of the geometry to render")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawTransformFeedbackStreamInstanced",
 		"Renders multiple instances of primitives using a count derived from a specifed stream of a transform feedback object.",
 
@@ -220,7 +220,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_base_instance
 
-	GLvoid.func(
+	GLvoid(
 		"DrawArraysInstancedBaseInstance",
 		"Draws multiple instances of a range of elements with an offset applied to instanced attributes.",
 
@@ -231,7 +231,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsInstancedBaseInstance",
 		"Draws multiple instances of a set of elements with an offset applied to instanced attributes",
 
@@ -247,7 +247,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsInstancedBaseVertexBaseInstance",
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
@@ -266,7 +266,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_shader_image_load_store
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_IMAGE_UNITS" _ 0x8F38,
@@ -280,7 +280,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"MAX_COMBINED_IMAGE_UNIFORMS" _ 0x90CF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v.",
 
 		"IMAGE_BINDING_NAME" _ 0x8F3A,
@@ -291,7 +291,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"IMAGE_BINDING_FORMAT" _ 0x906E
 	)
 
-	val MemoryBarriers = IntConstant.block(
+	val MemoryBarriers = IntConstant(
 		"Accepted by the {@code barriers} parameter of MemoryBarrier.",
 
 		"VERTEX_ATTRIB_ARRAY_BARRIER_BIT" _ 0x00000001,
@@ -309,7 +309,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"ALL_BARRIER_BITS" _ 0xFFFFFFFF.i
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"IMAGE_1D" _ 0x904C,
@@ -347,13 +347,13 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY" _ 0x906C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv.",
 
 		"IMAGE_FORMAT_COMPATIBILITY_TYPE" _ 0x90C7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned in the {@code data} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv when {@code value} is
 		IMAGE_FORMAT_COMPATIBILITY_TYPE.
@@ -363,7 +363,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"IMAGE_FORMAT_COMPATIBILITY_BY_CLASS" _ 0x90C9
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindImageTexture",
 		"Binds a level of a texture to an image unit.",
 
@@ -376,7 +376,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLenum.IN("format", "the format that the elements of the image will be treated as for the purposes of formatted stores")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MemoryBarrier",
 		"Defines a barrier ordering memory transactions.",
 
@@ -385,13 +385,13 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_internal_format_query
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ.",
 
 		"NUM_SAMPLE_COUNTS" _ 0x9380
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetInternalformativ",
 		"Retrieves information about implementation-dependent support for internal formats.",
 
@@ -411,7 +411,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_map_buffer_alignment
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MIN_MAP_BUFFER_ALIGNMENT" _ 0x90BC

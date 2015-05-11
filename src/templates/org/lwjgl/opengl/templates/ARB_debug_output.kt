@@ -57,7 +57,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		provided by debug contexts through other extensions.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.
 		
@@ -91,7 +91,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_OUTPUT_SYNCHRONOUS_ARB" _ 0x8242
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_DEBUG_MESSAGE_LENGTH_ARB" _ 0x9143,
@@ -100,14 +100,14 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB" _ 0x8243
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
 		"DEBUG_CALLBACK_FUNCTION_ARB" _ 0x8244,
 		"DEBUG_CALLBACK_USER_PARAM_ARB" _ 0x8245
 	)
 
-	val Sources = IntConstant.block(
+	val Sources = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code source} parameters of DebugMessageControlARB, DebugMessageInsertARB and DEBUGPROCARB, and the {@code sources}
 		parameter of GetDebugMessageLogARB.
@@ -121,7 +121,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_SOURCE_OTHER_ARB" _ 0x824B
 	).javaDocLinks
 
-	val Types = IntConstant.block(
+	val Types = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControlARB, DebugMessageInsertARB and DEBUGPROCARB, and the {@code types}
 		parameter of GetDebugMessageLogARB.
@@ -135,7 +135,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_TYPE_OTHER_ARB" _ 0x8251
 	).javaDocLinks
 
-	val Severities = IntConstant.block(
+	val Severities = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code severity} parameters of DebugMessageControlARB, DebugMessageInsertARB and DEBUGPROCARB callback functions, and
 		the {@code severities} parameter of GetDebugMessageLogARB.
@@ -146,7 +146,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_SEVERITY_LOW_ARB" _ 0x9148
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageControlARB",
 		"""
 		Controls the volume of debug output by disabling specific or groups of messages.
@@ -178,7 +178,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		GLboolean.IN("enabled", "whether to enable or disable the references subset of messages")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageInsertARB",
 		"""
 		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
@@ -199,7 +199,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		const _ GLcharUTF8_p.IN("buf", "the string representation of the message")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageCallbackARB",
 		"""
 		Specifies a callback function for receiving debug messages.
@@ -244,7 +244,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		)
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetDebugMessageLogARB",
 		"""
 		When no debug callback is set, debug messages are stored in a debug message log. Messages can be queried from the log by calling this function.

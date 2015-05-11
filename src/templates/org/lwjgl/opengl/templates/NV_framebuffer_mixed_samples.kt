@@ -27,14 +27,14 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
     color samples.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
 		"RASTER_MULTISAMPLE_EXT" _ 0x9327,
 		"COVERAGE_MODULATION_TABLE_NV" _ 0x9331
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"RASTER_SAMPLES_EXT" _ 0x9328,
@@ -53,7 +53,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		"COVERAGE_MODULATION_TABLE_SIZE_NV" _ 0x9333
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"RasterSamplesEXT",
 		"",
 
@@ -61,7 +61,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		GLboolean.IN("fixedsamplelocations", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CoverageModulationTableNV",
 		"",
 
@@ -69,7 +69,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		const _ GLfloat_p.IN("v", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetCoverageModulationTableNV",
 		"",
 
@@ -77,7 +77,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		GLfloat_p.IN("v", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CoverageModulationNV",
 		"",
 

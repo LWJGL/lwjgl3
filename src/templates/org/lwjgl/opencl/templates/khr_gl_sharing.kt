@@ -15,7 +15,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 
 		documentation = "Native bindings to the $extensionLink extension."
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		Returned by CL10#CreateContext(), CL10#CreateContextFromType(), and #GetGLContextInfoKHR() when an invalid OpenGL context or
 		share group object handle is specified in {@code properties}.
@@ -26,7 +26,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 
 		val INVALID_GL_SHAREGROUP_REFERENCE_KHR = "#INVALID_GL_SHAREGROUP_REFERENCE_KHR"
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		Accepted as the {@code param_name} argument of #GetGLContextInfoKHR(). Returns a list of all CL devices which may be associated with the
 		specified OpenGL context.
@@ -35,7 +35,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 			"DEVICES_FOR_GL_CONTEXT_KHR" _ 0x2007
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		Accepted as the {@code param_name} argument of #GetGLContextInfoKHR(). Returns the CL device currently associated with the specified OpenGL
 		context.
@@ -45,7 +45,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 		)
 
 
-		IntConstant.block(
+		IntConstant(
 			"Accepted as an attribute name in the {@code properties} argument of CL10#CreateContext() and CL10#CreateContextFromType().",
 
 			"GL_CONTEXT_KHR" _ 0x2008,
@@ -55,7 +55,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 			"CGL_SHAREGROUP_KHR" _ 0x200C
 		)
 
-		cl_int.func(
+		cl_int(
 			"GetGLContextInfoKHR",
 			"""
 		Queries the OpenCL device currently corresponding to an OpenGL context.

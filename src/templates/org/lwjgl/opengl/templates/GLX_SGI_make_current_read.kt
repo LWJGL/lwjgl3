@@ -22,7 +22,7 @@ val GLX_SGI_make_current_read = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SGI_
 		for direct transfer of video to the GL, by treating the video as a special kind of read drawable (a.k.a, readable).
 		"""
 
-	Bool.func(
+	Bool(
 		"MakeCurrentReadSGI",
 		"Associates two {@code GLXDrawables} with the current rendering context.",
 
@@ -32,7 +32,7 @@ val GLX_SGI_make_current_read = "GLXSGIMakeCurrentRead".nativeClassGLX("GLX_SGI_
 		nullable _ GLXContext.IN("ctx", "the current context")
 	)
 
-	GLXDrawable.func(
+	GLXDrawable(
 		"GetCurrentReadDrawableSGI",
 		"Returns the name of the {@code GLXDrawable} currently being used as a pixel query source."
 	)

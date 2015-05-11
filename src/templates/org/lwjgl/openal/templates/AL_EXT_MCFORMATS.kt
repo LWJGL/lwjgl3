@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_MCFORMATS = "EXTMCFormats".nativeClassAL("EXT_MCFORMATS") {
 	documentation = "bindings to AL_EXT_MCFORMATS extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_MCFORMATS tokens.",
 
 		"FORMAT_QUAD8" _ 0x1204,

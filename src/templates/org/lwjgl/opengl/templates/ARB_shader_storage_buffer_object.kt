@@ -34,13 +34,13 @@ val ARB_shader_storage_buffer_object = "ARBShaderStorageBufferObject".nativeClas
 		Requires ${GL40.core} and ${GL43.core} or ${ARB_program_interface_query.link}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"SHADER_STORAGE_BUFFER" _ 0x90D2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of GetIntegerv, GetIntegeri_v, GetBooleanv, GetInteger64v, GetFloatv, GetDoublev, GetBooleani_v, GetIntegeri_v,
 		GetFloati_v, GetDoublei_v, and GetInteger64i_v.
@@ -49,14 +49,14 @@ val ARB_shader_storage_buffer_object = "ARBShaderStorageBufferObject".nativeClas
 		"SHADER_STORAGE_BUFFER_BINDING" _ 0x90D3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
 		"SHADER_STORAGE_BUFFER_START" _ 0x90D4,
 		"SHADER_STORAGE_BUFFER_SIZE" _ 0x90D5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_SHADER_STORAGE_BLOCKS" _ 0x90D6,
@@ -71,13 +71,13 @@ val ARB_shader_storage_buffer_object = "ARBShaderStorageBufferObject".nativeClas
 		"SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT" _ 0x90DF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code barriers} bitfield in glMemoryBarrier.",
 
 		"SHADER_STORAGE_BARRIER_BIT" _ 0x2000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Also, add a new alias for the existing token MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS.",
 
 		"MAX_COMBINED_SHADER_OUTPUT_RESOURCES" _ 0x8F39

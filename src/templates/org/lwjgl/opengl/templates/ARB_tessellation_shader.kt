@@ -51,26 +51,26 @@ val ARB_tessellation_shader = "ARBTessellationShader".nativeClassGL("ARB_tessell
 		Requires ${GL32.link} and GLSL 1.50. ${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of Begin and all vertex array functions that implicitly call Begin.",
 
 		"PATCHES" _ 0xE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of PatchParameteri, GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
 		"PATCH_VERTICES" _ 0x8E72
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of PatchParameterfv, GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv, and GetInteger64v.",
 
 		"PATCH_DEFAULT_INNER_LEVEL" _ 0x8E73,
 		"PATCH_DEFAULT_OUTER_LEVEL" _ 0x8E74
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"TESS_CONTROL_OUTPUT_VERTICES" _ 0x8E75,
@@ -80,20 +80,20 @@ val ARB_tessellation_shader = "ARBTessellationShader".nativeClassGL("ARB_tessell
 		"TESS_GEN_POINT_MODE" _ 0x8E79
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_MODE.",
 
 		"ISOLINES" _ 0x8E7A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_SPACING.",
 
 		"FRACTIONAL_ODD" _ 0x8E7B,
 		"FRACTIONAL_EVEN" _ 0x8E7C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
 		"MAX_PATCH_VERTICES" _ 0x8E7D,
@@ -114,14 +114,14 @@ val ARB_tessellation_shader = "ARBTessellationShader".nativeClassGL("ARB_tessell
 		"MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS" _ 0x8E1F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
 		"UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER" _ 0x84F0,
 		"UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER" _ 0x84F1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
 
 		"TESS_EVALUATION_SHADER" _ 0x8E87,

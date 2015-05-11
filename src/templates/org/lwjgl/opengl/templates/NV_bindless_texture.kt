@@ -62,7 +62,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		Requires ${GL40.core}.
 		"""
 
-	GLuint64.func(
+	GLuint64(
 		"GetTextureHandleNV",
 		"""
 		Creates a texture handle using the current state of the texture named {@code texture}, including any embedded sampler state. See
@@ -72,7 +72,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint.IN("texture", "the texture object")
 	)
 
-	GLuint64.func(
+	GLuint64(
 		"GetTextureSamplerHandleNV",
 		"""
 		Creates a texture handle using the current non-sampler state from the texture named {@code texture} and the sampler state from the sampler object
@@ -107,7 +107,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint.IN("sampler", "the sampler object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeTextureHandleResidentNV",
 		"""
 		Make a texture handle resident, so that it is accessible to shaders for texture mapping operations.
@@ -121,7 +121,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeTextureHandleNonResidentNV",
 		"""
 		Makes a texture handle inaccessible to shaders.
@@ -133,7 +133,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLuint64.func(
+	GLuint64(
 		"GetImageHandleNV",
 		"""
 		Creates and returns an image handle for level {@code level} of the texture named {@code texture}. If {@code layered} is GL11#TRUE, a handle is created
@@ -177,7 +177,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLenum.IN("format", "the texture format")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeImageHandleResidentNV",
 		"""
 		Makes an image handle resident, so that it is accessible to shaders for image loads, stores, and atomic operations.
@@ -196,7 +196,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLenum.IN("access", "the access type", "GL15#READ_ONLY GL15#WRITE_ONLY GL15#READ_WRITE")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeImageHandleNonResidentNV",
 		"Makes an image handle inaccessible to shaders.",
 
@@ -204,7 +204,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 	)
 
 	val location = GLint.IN("location", "the uniform location")
-	val UniformHandleui64NV = GLvoid.func(
+	val UniformHandleui64NV = GLvoid(
 		"UniformHandleui64NV",
 		"Loads a 64-bit unsigned integer handle into a uniform location corresponding to sampler or image variable types.",
 
@@ -212,7 +212,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint64.IN("value", "the handle value")
 	)
 
-	val UniformHandleui64vNV = GLvoid.func(
+	val UniformHandleui64vNV = GLvoid(
 		"UniformHandleui64vNV",
 		"Loads {@code count} 64-bit unsigned integer handles into a uniform location corresponding to sampler or image variable types.",
 
@@ -221,7 +221,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		const _ GLuint64_p.IN("values", "a buffer from which to load the handles")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformHandleui64NV",
 		"DSA version of #UniformHandleui64NV().",
 
@@ -230,7 +230,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		UniformHandleui64NV["value"]
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformHandleui64vNV",
 		"DSA version of #UniformHandleui64vNV().",
 
@@ -240,14 +240,14 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		UniformHandleui64vNV["values"]
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsTextureHandleResidentNV",
 		"Returns GL11#TRUE if the specified texture handle is resident in the current context.",
 
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsImageHandleResidentNV",
 		"Returns GL11#TRUE if the specified image handle is resident in the current context.",
 

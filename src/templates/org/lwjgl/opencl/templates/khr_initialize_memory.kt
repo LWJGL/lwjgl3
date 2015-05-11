@@ -11,7 +11,7 @@ val khr_initialize_memory = "KHRInitializeMemory".nativeClassCL("khr_initialize_
 
 	documentation = "Native bindings to the $extensionName extension."
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a property name in the {@code properties} parameter of CL10#CreateContext().
 

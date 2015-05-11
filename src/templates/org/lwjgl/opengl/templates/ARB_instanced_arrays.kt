@@ -34,13 +34,13 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
 		${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, and GetVertexAttribiv.",
 
 		"VERTEX_ATTRIB_ARRAY_DIVISOR_ARB" _ 0x88FE
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribDivisorARB",
 		"""
 		Modifies the rate at which generic vertex attributes advance when rendering multiple instances of primitives in a single draw call. If {@code divisor}
@@ -52,7 +52,7 @@ val ARB_instanced_arrays = "ARBInstancedArrays".nativeClassGL("ARB_instanced_arr
 		GLuint.IN("divisor", "the divisor value")
 	)
 
-	mods(DependsOn("GL_EXT_direct_state_access"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("GL_EXT_direct_state_access"), ignoreMissing) _ GLvoid(
 		"VertexArrayVertexAttribDivisorEXT",
 		"""
 		${registryLinkTo("EXT", "direct_state_access")} version of #VertexAttribDivisorARB().

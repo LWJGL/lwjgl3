@@ -30,19 +30,19 @@ val ARB_cl_event = dependsOn(Module.OPENCL) {
 		Requires ${GL32.core} or ${ARB_sync.link}. Requires an OpenCL implementation supporting sharing event objects with OpenGL.
 		"""
 
-		IntConstant.block(
+		IntConstant(
 			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#OBJECT_TYPE.",
 
 			"SYNC_CL_EVENT_ARB" _ 0x8240
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#SYNC_CONDITION.",
 
 			"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
 		)
 
-		GLsync.func(
+		GLsync(
 			"CreateSyncFromCLeventARB",
 			"""
 		Creates a linked sync object. {@code context} and {@code event} must be handles to a valid OpenCL context and a valid event in that context,

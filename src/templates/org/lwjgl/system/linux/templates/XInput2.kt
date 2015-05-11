@@ -15,7 +15,7 @@ val XInput2 = "XInput2".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to XInput2.h."
 
-	IntConstant.block(
+	IntConstant(
 		"Event types",
 
 		"XI_DeviceChanged" _ 1,
@@ -44,7 +44,7 @@ val XInput2 = "XInput2".nativeClass(LINUX_PACKAGE) {
 		"XI_RawTouchEnd" _ 24
 	)
 
-	Status.func(
+	Status(
 		"XIQueryVersion",
 		"Announces and queries the supported XI2 version.",
 
@@ -53,7 +53,7 @@ val XInput2 = "XInput2".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("minor_version_inout", "the client's supported XI2 minor version, and returns the server's supported minor version")
 	)
 
-	int.func(
+	int(
 		"XISelectEvents",
 		"""
 		Selects XI2 events.

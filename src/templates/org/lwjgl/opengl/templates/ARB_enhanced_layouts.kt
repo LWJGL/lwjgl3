@@ -25,7 +25,7 @@ val ARB_enhanced_layouts = "ARBEnhancedLayouts".nativeClassGL("ARB_enhanced_layo
 		Requires ${GL31.core} and GLSL 1.40. ${GL44.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
 
 		"LOCATION_COMPONENT" _ 0x934A,

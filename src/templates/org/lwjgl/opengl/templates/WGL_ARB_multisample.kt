@@ -17,7 +17,7 @@ val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisampl
 		Requires ${WGL_EXT_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(),
 		WGLARBPixelFormat#GetPixelFormatAttribfARB(), and the {@code attribIList} and {@code attribFList} of

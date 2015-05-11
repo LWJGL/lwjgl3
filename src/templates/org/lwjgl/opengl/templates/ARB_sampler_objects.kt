@@ -28,7 +28,7 @@ val ARB_sampler_objects = "ARBSamplerObjects".nativeClassGL("ARB_sampler_objects
 		${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of the GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev functions.",
 
 		"SAMPLER_BINDING" _ 0x8919

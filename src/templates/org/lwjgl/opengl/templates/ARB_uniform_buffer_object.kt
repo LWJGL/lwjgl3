@@ -85,26 +85,26 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		Requires ${GL20.core} or ${ARB_shader_objects.link} and ${GL15.core} or ${ARB_vertex_buffer_object.link}. ${GL31.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"UNIFORM_BUFFER" _ 0x8A11
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"UNIFORM_BUFFER_BINDING" _ 0x8A28
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v.",
 
 		"UNIFORM_BUFFER_START" _ 0x8A29,
 		"UNIFORM_BUFFER_SIZE" _ 0x8A2A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_UNIFORM_BLOCKS" _ 0x8A2B,
@@ -119,14 +119,14 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		"UNIFORM_BUFFER_OFFSET_ALIGNMENT" _ 0x8A34
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"ACTIVE_UNIFORM_BLOCK_MAX_NAME_LENGTH" _ 0x8A35,
 		"ACTIVE_UNIFORM_BLOCKS" _ 0x8A36
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformsiv.",
 
 		"UNIFORM_TYPE" _ 0x8A37,
@@ -139,7 +139,7 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		"UNIFORM_IS_ROW_MAJOR" _ 0x8A3E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
 		"UNIFORM_BLOCK_BINDING" _ 0x8A3F,
@@ -152,7 +152,7 @@ val ARB_uniform_buffer_object = "ARBUniformBufferObject".nativeClassGL("ARB_unif
 		"UNIFORM_BLOCK_REFERENCED_BY_FRAGMENT_SHADER" _ 0x8A46
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetActiveUniformsiv and GetUniformBlockIndex.",
 
 		"INVALID_INDEX" _ 0xFFFFFFFF.i

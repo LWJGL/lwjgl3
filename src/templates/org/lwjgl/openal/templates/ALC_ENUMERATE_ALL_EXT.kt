@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val ALC_ENUMERATE_ALL_EXT = "EnumerateAllExt".nativeClassALC("ENUMERATE_ALL_EXT") {
 	documentation = "bindings to ALC_ENUMERATE_ALL_EXT extension."
 
-	IntConstant.block(
+	IntConstant(
 		"ENUMERATE_ALL_EXT tokens.",
 
 		"DEFAULT_ALL_DEVICES_SPECIFIER" _ 0x1012,

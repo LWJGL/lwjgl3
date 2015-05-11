@@ -36,13 +36,13 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
 
 		"GEOMETRY_SHADER_ARB" _ 0x8DD9
 	)
 
-	val Parameters = IntConstant.block(
+	val Parameters = IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteriARB and GetProgramiv.",
 
 		"GEOMETRY_VERTICES_OUT_ARB" _ 0x8DDA,
@@ -50,7 +50,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"GEOMETRY_OUTPUT_TYPE_ARB" _ 0x8DDC
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_ARB" _ 0x8C29,
@@ -61,7 +61,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_ARB" _ 0x8DE1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of Begin, DrawArrays, MultiDrawArrays, DrawElements, MultiDrawElements, and DrawRangeElements.",
 
 		"LINES_ADJACENCY_ARB" _ 0xA,
@@ -70,21 +70,21 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"TRIANGLE_STRIP_ADJACENCY_ARB" _ 0xD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatusARB.",
 
 		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_ARB" _ 0x8DA8,
 		"FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_ARB" _ 0x8DA9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachment- ParameterivARB.",
 
 		"FRAMEBUFFER_ATTACHMENT_LAYERED_ARB" _ 0x8DA7,
 		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER" _ 0x8CD4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetFloatv, GetDoublev, and
 		GetBooleanv.
@@ -93,7 +93,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"PROGRAM_POINT_SIZE_ARB" _ 0x8642
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramParameteriARB",
 		"""
 		Sets a program object parameter.
@@ -117,7 +117,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("value", "the value being set")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureARB",
 		"""
 		Attaches a specified level of a texture object as one of the logical buffers of the currently bound framebuffer object, to render directly into the
@@ -141,7 +141,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("level", "the texture level")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureLayerARB",
 		"""
 		Operates like #FramebufferTextureARB(), except that only a single layer of the texture level, numbered {@code layer}, is attached to the attachment
@@ -159,7 +159,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("layer", "the texture layer")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureFaceARB",
 		"""
 		Operates like #FramebufferTextureARB(), except that only a single face of a cube map texture, given by {@code face}, is attached to the attachment

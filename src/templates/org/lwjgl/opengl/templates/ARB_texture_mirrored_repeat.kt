@@ -20,7 +20,7 @@ val ARB_texture_mirrored_repeat = "ARBTextureMirroredRepeat".nativeClassGL("ARB_
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.

@@ -28,7 +28,7 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
 		${GL13.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"TRANSPOSE_MODELVIEW_MATRIX_ARB" _ 0x84E3,
@@ -37,7 +37,7 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
 		"TRANSPOSE_COLOR_MATRIX_ARB" _ 0x84E6
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"LoadTransposeMatrixfARB",
 		"""
 		Sets the current matrix to a 4 &times; 4 matrix in row-major order.
@@ -55,21 +55,21 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"LoadTransposeMatrixdARB",
 		"Double version of #LoadTransposeMatrixfARB().",
 
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultTransposeMatrixfARB",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in row-major order. See #LoadTransposeMatrixfARB() for details.",
 
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultTransposeMatrixdARB",
 		"Double version of #MultTransposeMatrixfARB().",
 

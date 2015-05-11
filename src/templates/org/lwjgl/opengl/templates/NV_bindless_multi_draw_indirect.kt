@@ -30,7 +30,7 @@ val NV_bindless_multi_draw_indirect = "NVBindlessMultiDrawIndirect".nativeClassG
 		Requires ${GL43.core}, ${NV_vertex_buffer_unified_memory.link}, 
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawArraysIndirectBindlessNV",
 		"""
 		Behaves similar to GL43#MultiDrawArraysIndirect(), except that {@code indirect} is treated as an array of {@code drawCount}
@@ -57,7 +57,7 @@ typedef struct {
 		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawArraysIndirectBindlessCommandNV structure")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElementsIndirectBindlessNV",
 		"""
 		Behaves similar to GL43#MultiDrawElementsIndirect(), except that {@code indirect} is treated as an array of {@code drawCount}

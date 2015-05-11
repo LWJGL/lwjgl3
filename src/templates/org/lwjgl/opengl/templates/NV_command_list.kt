@@ -153,7 +153,7 @@ typedef struct {
 		Tight packing is used for all structures.
 		"""
 
-	val Commands = IntConstant.block(
+	val Commands = IntConstant(
 		"Used in DrawCommandsStates buffer formats, in GetCommandHeaderNV to return the header.",
 
 		"TERMINATE_SEQUENCE_COMMAND_NV" _ 0x0000,
@@ -177,7 +177,7 @@ typedef struct {
 		"FRONT_FACE_COMMAND_NV" _ 0x0012
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"CreateStatesNV",
 		"Returns <code>n</code> previously unused state object names in <code>states</code>, and creates a state object in the initial state for each name.",
 
@@ -185,7 +185,7 @@ typedef struct {
 		returnValue _ GLuint_p.OUT("states", "the buffer in which to write the created state object names")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"DeleteStatesNV",
 		"""
 		Deletes <code>n</code> names of state objects given by <code>states</code>. Once a state object is deleted it has no contents and its name is again
@@ -196,14 +196,14 @@ typedef struct {
 		mods(SingleValue("state"), const) _ GLuint_p.IN("states", "the buffer from which to read the state object names to delete")
 	)
 	
-	GLboolean.func(
+	GLboolean(
 		"IsStateNV",
 		"Returns true if the specified name corresponds to a state object.",
 
 		GLuint.IN("state", "the object name to test")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"StateCaptureNV",
 		"""
 		Captures the current state of the rendering pipeline into the object indicated by <code>state</code>.
@@ -239,7 +239,7 @@ typedef struct {
 		)
 	)
 	
-	GLuint.func(
+	GLuint(
 		"GetCommandHeaderNV",
 		"Returns the encoded 32bit header value for a given command; the returned value is implementation specific.",
 
@@ -253,7 +253,7 @@ typedef struct {
 		)
 	)
 	
-	GLushort.func(
+	GLushort(
 		"GetStageIndexNV",
 		"""
 		Returns the 16bit value for a specific shader stage; the returned value is implementation specific. The value is to be used with the stage field within
@@ -263,7 +263,7 @@ typedef struct {
 		GLenum.IN("shadertype", "the shader stage type")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"DrawCommandsNV",
 		"""
 		Accepts arrays of buffer addresses as an array of offsets <code>indirects</code> into a buffer named by <code>buffer</code>, an array of command
@@ -277,7 +277,7 @@ typedef struct {
 		AutoSize("indirects", "sizes") _ GLuint.IN("count", "the number of commands")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"DrawCommandsAddressNV",
 		"""
 		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of command lengths in <code>sizes</code>. All arrays
@@ -290,7 +290,7 @@ typedef struct {
 		AutoSize("indirects", "sizes") _ GLuint.IN("count", "the number of commands")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"DrawCommandsStatesNV",
 		"""
 		Accepts arrays of buffer addresses as an array of offsets <code>indirects</code> into a buffer named by <code>buffer</code>, an array of command
@@ -307,7 +307,7 @@ typedef struct {
 		AutoSize("indirects", "sizes", "states", "fbos") _ GLuint.IN("count", "the number of commands")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"DrawCommandsStatesAddressNV",
 		"""
 		Accepts arrays of buffer addresses as an array of GPU addresses <code>indirects</code>, an array of command lengths in <code>sizes</code>, and an array
@@ -323,7 +323,7 @@ typedef struct {
 		AutoSize("indirects", "sizes", "states", "fbos") _ GLuint.IN("count", "the number of commands")
 	)
 	
-	GLvoid.func(
+	GLvoid(
 		"CreateCommandListsNV",
 		"Returns <code>n</code> previously unused command list names in <code>lists</code>, and creates a command list in the initial state for each name.",
 
@@ -331,7 +331,7 @@ typedef struct {
 		returnValue _ GLuint_p.OUT("lists", "the buffer in which to return the created command list names")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteCommandListsNV",
 		"""
 		Deletes <code>n</code> command lists stored in <code>lists</code>. Once a command list is deleted it has no contents and its name is again unused.
@@ -342,14 +342,14 @@ typedef struct {
 		mods(SingleValue("list"), const) _ GLuint_p.IN("lists", "the buffer from which to read the command list names to delete")
 	)
   
-	GLboolean.func(
+	GLboolean(
 		"IsCommandListNV",
 		"Returns true if the specified name corresponds to a command list.",
 
 		GLuint.IN("list", "the object name to query")
 	)
   
-	GLvoid.func(
+	GLvoid(
 		"ListDrawCommandsStatesClientNV",
 		"""
 		A list has multiple segments and each segment enqueues an ordered list of commands. This command enqueues the equivalent of the
@@ -373,7 +373,7 @@ typedef struct {
 		AutoSize("indirects", "sizes", "states", "fbos") _ GLuint.IN("count", "the number of commands")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CommandListSegmentsNV",
 		"""
 		Indicates that {@code list} will have {@code segments} ordered sequences of commands that it enqueues. This must be called before any commands are
@@ -384,7 +384,7 @@ typedef struct {
 		GLuint.IN("segments", "the number of ordered sequences of commands")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompileCommandListNV",
 		"""
 		Makes the list indicated by <code>list</code> switch from allowing collection of commands to allowing its execution. At this time, the implementation
@@ -394,7 +394,7 @@ typedef struct {
 		GLuint.IN("list", "the command list to compile")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CallCommandListNV",
 		"""
 		Executes the command list indicated by <code>list</code>, which operates as if the DrawCommandsStates* commands were replayed in the order they were

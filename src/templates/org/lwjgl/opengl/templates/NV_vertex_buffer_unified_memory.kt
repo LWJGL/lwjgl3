@@ -23,21 +23,21 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		vertex attrib state that alleviates the overhead of object binds and driver memory management.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.",
 
 		"VERTEX_ATTRIB_ARRAY_UNIFIED_NV" _ 0x8F1E,
 		"ELEMENT_ARRAY_UNIFIED_NV" _ 0x8F1F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.",
 
 		"VERTEX_ATTRIB_ARRAY_ADDRESS_NV" _ 0x8F20,
 		"TEXTURE_COORD_ARRAY_ADDRESS_NV" _ 0x8F25
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64vNV.",
 
 		"VERTEX_ARRAY_ADDRESS_NV" _ 0x8F21,
@@ -50,14 +50,14 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		"ELEMENT_ARRAY_ADDRESS_NV" _ 0x8F29
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_vNV.",
 
 		"VERTEX_ATTRIB_ARRAY_LENGTH_NV" _ 0x8F2A,
 		"TEXTURE_COORD_ARRAY_LENGTH_NV" _ 0x8F2F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv.",
 
 		"VERTEX_ARRAY_LENGTH_NV" _ 0x8F2B,
@@ -70,7 +70,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		"ELEMENT_ARRAY_LENGTH_NV" _ 0x8F33
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BufferAddressRangeNV",
 		"",
 
@@ -80,7 +80,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizeiptr.IN("length", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexFormatNV",
 		"",
 
@@ -89,7 +89,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"NormalFormatNV",
 		"",
 
@@ -97,7 +97,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ColorFormatNV",
 		"",
 
@@ -106,7 +106,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"IndexFormatNV",
 		"",
 
@@ -114,7 +114,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexCoordFormatNV",
 		"",
 
@@ -123,14 +123,14 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"EdgeFlagFormatNV",
 		"",
 
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"SecondaryColorFormatNV",
 		"",
 
@@ -139,7 +139,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FogCoordFormatNV",
 		"",
 
@@ -147,7 +147,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribFormatNV",
 		"",
 
@@ -158,7 +158,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribIFormatNV",
 		"",
 
@@ -168,7 +168,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetIntegerui64i_vNV",
 		"",
 

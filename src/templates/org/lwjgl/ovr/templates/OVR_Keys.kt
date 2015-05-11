@@ -10,7 +10,7 @@ import org.lwjgl.ovr.OVR_PACKAGE
 val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") {
 	documentation = "Keys for libOVR's CAPI calls."
 
-	StringConstant.block(
+	StringConstant(
 		"",
 
 		"KEY_USER" _ "User", // string
@@ -28,13 +28,13 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"KEY_CAMERA_POSITION" _ "CenteredFromWorld" // double[7]
 	)
 
-	StringConstant.block(
+	StringConstant(
 		"",
 
 		"DEFAULT_GENDER" _ "Unknown" // string
 	)
 
-	FloatConstant.block(
+	FloatConstant(
 		"Default measurements empirically determined at Oculus.",
 
 		"DEFAULT_PLAYER_HEIGHT" _ 1.778f,
@@ -44,13 +44,13 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"DEFAULT_NECK_TO_EYE_VERTICAL" _ 0.075f
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Default measurements empirically determined at Oculus.",
 
 		"DEFAULT_EYE_RELIEF_DIAL" _ 3
 	)
 
-	ConstantType(javaClass<IntArray>()) { it.sequence().map { it.toString() }.join(separator = ", ", prefix = "{ ", postfix = " }") }.block(
+	ConstantType(javaClass<IntArray>()) { it.sequence().map { it.toString() }.join(separator = ", ", prefix = "{ ", postfix = " }") }(
 		"",
 
 		"DEFAULT_CAMERA_POSITION" _ intArray(0, 0, 0, 1, 0, 0, 0)

@@ -28,7 +28,7 @@ val ARB_map_buffer_range = "ARBMapBufferRange".nativeClassGL("ARB_map_buffer_ran
 		Requires ${GL21.core}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferRange.",
 
 		"MAP_READ_BIT" _ 0x0001,

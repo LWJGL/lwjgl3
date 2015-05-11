@@ -30,7 +30,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		Requires ${WGL_ARB_extensions_string.link} and ${registryLinkTo("EXT", "framebuffer_object")}.
 		"""
 
-	val properties = IntConstant.block(
+	val properties = IntConstant(
 		"Accepted by the {@code property} parameter of #GetGPUInfoAMD().",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
@@ -45,7 +45,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"GPU_NUM_SPI_AMD" _ 0x21A8
 	).javaDocLinks
 
-	UINT.func(
+	UINT(
 		"GetGPUIDsAMD",
 		"""
 		Returns the IDs for available GPUs.
@@ -59,7 +59,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		nullable _ UINT_p.IN("ids", "the array of returned IDs")
 	)
 
-	int.func(
+	int(
 		"GetGPUInfoAMD",
 		"""
 		Each GPU in a system may have different properties, performance characteristics and different supported OpenGL versions. Use this function to determine
@@ -82,7 +82,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		GLvoid_p.IN("data", "the buffer which will be filled with the requested information")
 	)
 
-	UINT.func(
+	UINT(
 		"GetContextGPUIDAMD",
 		"""
 		Determine which GPU a context is attached to.
@@ -96,14 +96,14 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		HGLRC.IN("hglrc", "the context for which the GPU id will be returned")
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"CreateAssociatedContextAMD",
 		"Creates an associated context. Upon successful creation, no pixel format is tied to an associated context.",
 
 		UINT.IN("id", "a valid GPU id")
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"CreateAssociatedContextAttribsAMD",
 		"""
 		Create an associated context with a specific GL version.
@@ -116,23 +116,23 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		mods(const, nullTerminated, nullable) _ int_p.IN("attribList", "a 0-terminated list of attributes for the context")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DeleteAssociatedContextAMD",
 		"Deletes an associated context. An associated context cannot be deleted by calling org.lwjgl.system.windows.WGL#DeleteContext().",
 
 		HGLRC.IN("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
 	)
 
-	BOOL.func(
+	BOOL(
 		"MakeAssociatedContextCurrentAMD",
 		"Makes an associated context current in the current thread.",
 
 		HGLRC.IN("hglrc", "a context handle created by calling #CreateAssociatedContextAMD()")
 	)
 
-	HGLRC.func("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
+	HGLRC("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
 
-	DependsOn("GL_EXT_framebuffer_blit") _ VOID.func(
+	DependsOn("GL_EXT_framebuffer_blit") _ VOID(
 		"BlitContextFramebufferAMD",
 		"""
 		Blits data from one context to another. This facilitates high performance data communication between multiple contexts.

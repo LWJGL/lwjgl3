@@ -15,7 +15,7 @@ val AL_SOFT_MSADPCM = "SOFTMSADPCM".nativeClassAL("SOFT_MSADPCM") {
 		This extension adds support for MSADPCM compressed sample formats.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of alBufferData.",
 
 		"FORMAT_MONO_MSADPCM_SOFT" _ 0x1302,

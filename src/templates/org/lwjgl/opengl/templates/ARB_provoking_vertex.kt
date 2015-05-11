@@ -31,14 +31,14 @@ val ARB_provoking_vertex = "ARBProvokingVertex".nativeClassGL("ARB_provoking_ver
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of ProvokingVertex.",
 
 		"FIRST_VERTEX_CONVENTION" _ 0x8E4D,
 		"LAST_VERTEX_CONVENTION" _ 0x8E4E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"PROVOKING_VERTEX" _ 0x8E4F,

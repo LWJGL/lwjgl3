@@ -28,14 +28,14 @@ val ARB_compute_variable_group_size = "ARBComputeVariableGroupSize".nativeClassG
 		Requires ${GL43.core} or ${ARB_compute_shader.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB" _ 0x9344,
 		"MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB" _ 0x90EB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
 
 		"MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB" _ 0x9345,
@@ -43,7 +43,7 @@ val ARB_compute_variable_group_size = "ARBComputeVariableGroupSize".nativeClassG
 	)
 
 	val src = GL43["DispatchCompute"]
-	GLvoid.func(
+	GLvoid(
 		"DispatchComputeGroupSizeARB",
 		"""
 		Launches one or more compute work groups, with arbitrary dimensions.

@@ -11,13 +11,13 @@ val khr_gl_depth_images = dependsOn(Module.OPENGL) {
 	"KHRGLDepthImages".nativeClassCL("khr_gl_depth_images", KHR) {
 		documentation = "Native bindings to the $extensionName extension."
 
-		IntConstant.block(
+		IntConstant(
 			"cl_channel_order",
 
 			"DEPTH_STENCIL" _ 0x10BE
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"cl_channel_type",
 
 			"UNORM_INT24" _ 0x10DF

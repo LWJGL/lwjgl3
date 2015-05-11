@@ -17,7 +17,7 @@ val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_f
 		Requires ${WGL_EXT_extensions_string.link}, ${WGL_ARB_pixel_format.link} and ${ARB_framebuffer_object.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB() and the {@code attribIList} of
 		WGLARBPixelFormat#ChoosePixelFormatARB().

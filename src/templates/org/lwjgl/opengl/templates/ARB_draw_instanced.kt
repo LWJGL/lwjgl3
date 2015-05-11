@@ -34,7 +34,7 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", 
         Requires ${GL30.core} or ${registryLinkTo("EXT", "gpu_shader4")} or ${registryLinkTo("NV", "vertex_program4")}. ${GL31.promoted}
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"DrawArraysInstancedARB",
 		"Draw multiple instances of a range of elements.",
 
@@ -44,7 +44,7 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", 
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawElementsInstancedARB",
 		"Draws multiple instances of a set of elements.",
 

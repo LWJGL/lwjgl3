@@ -20,14 +20,14 @@ val ARB_shadow = "ARBShadow".nativeClassGL("ARB_shadow", postfix = ARB) {
 		Requires ${ARB_depth_texture.link}. ${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"TEXTURE_COMPARE_MODE_ARB" _ 0x884C,
 		"TEXTURE_COMPARE_FUNC_ARB" _ 0x884D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameterf, TexParameteri, TexParameterfv, and TexParameteriv when the {@code pname} parameter is
 		TEXTURE_COMPARE_MODE_ARB.

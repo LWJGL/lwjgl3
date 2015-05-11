@@ -19,7 +19,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		application.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code properties} argument to CL10#CreateContext().
 
@@ -38,7 +38,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		"PRINTF_CALLBACK_ARM" _ 0x40B0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code properties} argument to CL10#CreateContext().
 

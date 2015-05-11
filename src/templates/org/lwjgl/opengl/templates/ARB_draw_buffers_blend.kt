@@ -27,7 +27,7 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 
 	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 
-	GLvoid.func(
+	GLvoid(
 		"BlendEquationiARB",
 		"""
 		Provides a way to enable blending and set color write masks independently per color output.
@@ -47,7 +47,7 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 		GLenum.IN("mode", "determines both the RGB and alpha blend equations", blendEquations)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendEquationSeparateiARB",
 		"""
 		Provides a way to enable blending and set color write masks independently per color output.
@@ -68,7 +68,7 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 		GLenum.IN("modeAlpha", "the alpha blend equation", blendEquations)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendFunciARB",
 		"""
 		Provides a way to enable blending and set color write masks independently per color output.
@@ -88,7 +88,7 @@ val ARB_draw_buffers_blend = "ARBDrawBuffersBlend".nativeClassGL("ARB_draw_buffe
 		GLenum.IN("dst", "determines both RGB and alpha destination functions")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendFuncSeparateiARB",
 		"""
 		Provides a way to enable blending and set color write masks independently per color output.

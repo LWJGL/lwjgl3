@@ -36,20 +36,20 @@ val OVR_multiview = "OVRMultiview".nativeClassGL("OVR_multiview", postfix = OVR)
 		Requires ${GL30.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
 		"FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR" _ 0x9630,
 		"FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR" _ 0x9632
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
 		"MAX_VIEWS_OVR" _ 0x9631
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
 		"FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR" _ 0x9633
@@ -57,7 +57,7 @@ val OVR_multiview = "OVRMultiview".nativeClassGL("OVR_multiview", postfix = OVR)
 
 	val FramebufferTextureLayer = GL30["FramebufferTextureLayer"]
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureMultiviewOVR",
 		"""
 		Operates similarly to GL30#FramebufferTextureLayer(), except that {@code baseViewIndex} and {@code numViews} selects a range of texture array elements

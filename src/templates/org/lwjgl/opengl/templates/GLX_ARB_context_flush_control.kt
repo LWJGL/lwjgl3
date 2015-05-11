@@ -16,13 +16,13 @@ val GLX_ARB_context_flush_control = "GLXARBContextFlushControl".nativeClassGLX("
 		that is desired when a context is made non-current, and specifically to opt out of the implicit flush behavior.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute name in the {@code *attrib_list} argument to GLXARBCreateContext#CreateContextAttribsARB().",
 
 		"CONTEXT_RELEASE_BEHAVIOR_ARB" _ 0x2097
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as an attribute value for #CONTEXT_RELEASE_BEHAVIOR_ARB in the {@code *attrib_list} argument to
 		GLXARBCreateContext#CreateContextAttribsARB().

@@ -25,7 +25,7 @@ val CL12GL = dependsOn(Module.OPENGL) {
 
 		documentation = "The OpenCL 1.2 OpenGL interoperability functionality."
 
-		IntConstant.block(
+		IntConstant(
 			"cl_gl_object_type",
 
 			"GL_OBJECT_TEXTURE_2D_ARRAY" _ 0x200E,
@@ -34,7 +34,7 @@ val CL12GL = dependsOn(Module.OPENGL) {
 			"GL_OBJECT_TEXTURE_BUFFER" _ 0x2011
 		)
 
-		cl_mem.func(
+		cl_mem(
 			"CreateFromGLTexture",
 			"""
 		Creates one of the following:

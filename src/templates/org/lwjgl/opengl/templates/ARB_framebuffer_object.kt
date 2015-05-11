@@ -214,7 +214,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and
 		GetFramebufferAttachmentParameteriv.
@@ -225,7 +225,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"DRAW_FRAMEBUFFER" _ 0x8CA9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindRenderbuffer, RenderbufferStorage, and GetRenderbufferParameteriv, and returned by
 		GetFramebufferAttachmentParameteriv.
@@ -234,7 +234,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"RENDERBUFFER" _ 0x8D41
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorage.",
 
 		"STENCIL_INDEX1" _ 0x8D46,
@@ -243,7 +243,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"STENCIL_INDEX16" _ 0x8D49
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
 		"RENDERBUFFER_WIDTH" _ 0x8D42,
@@ -258,7 +258,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"RENDERBUFFER_SAMPLES" _ 0x8CAB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
 		"FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE" _ 0x8CD0,
@@ -276,14 +276,14 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE" _ 0x8217
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
 
 		"FRAMEBUFFER_DEFAULT" _ 0x8218,
 		"INDEX" _ 0x8222
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.",
 
 		"COLOR_ATTACHMENT0" _ 0x8CE0,
@@ -307,13 +307,13 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"DEPTH_STENCIL_ATTACHMENT" _ 0x821A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_SAMPLES" _ 0x8D57
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatus().",
 
 		"FRAMEBUFFER_COMPLETE" _ 0x8CD5,
@@ -326,7 +326,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"FRAMEBUFFER_UNDEFINED" _ 0x8219
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv,  and GetDoublev.",
 
 		"FRAMEBUFFER_BINDING" _ 0x8CA6,
@@ -337,13 +337,13 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"MAX_RENDERBUFFER_SIZE" _ 0x84E8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetError().",
 
 		"INVALID_FRAMEBUFFER_OPERATION" _ 0x0506
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage, by the {@code type} parameter of CopyPixels, by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D,
@@ -353,7 +353,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"DEPTH_STENCIL" _ 0x84F9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage.
@@ -362,7 +362,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"UNSIGNED_INT_24_8" _ 0x84FA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage, and
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
@@ -371,7 +371,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 		"DEPTH24_STENCIL8" _ 0x88F0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_STENCIL_SIZE" _ 0x88F1

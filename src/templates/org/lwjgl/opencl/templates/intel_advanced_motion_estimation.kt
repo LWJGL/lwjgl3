@@ -22,13 +22,13 @@ val intel_advanced_motion_estimation = "INTELAdvancedMotionEstimation".nativeCla
 		Requires ${intel_motion_estimation.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as arguments to clGetDeviceInfo.",
 
 		"DEVICE_ME_VERSION_INTEL" _ 0x407E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as flags passed to the kernel.",
 
 		"ME_CHROMA_INTRA_PREDICT_ENABLED_INTEL" _ 0x1,
@@ -43,7 +43,7 @@ val intel_advanced_motion_estimation = "INTELAdvancedMotionEstimation".nativeCla
 		"ME_COST_PRECISION_DPEL_INTEL" _ 0x3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Valid intra-search predictor mode constants.",
 
 		"ME_LUMA_PREDICTOR_MODE_VERTICAL_INTEL" _ 0x0,
@@ -62,13 +62,13 @@ val intel_advanced_motion_estimation = "INTELAdvancedMotionEstimation".nativeCla
 		"ME_CHROMA_PREDICTOR_MODE_PLANE_INTEL" _ 0x3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Valid constant values returned by clGetDeviceInfo.",
 
 		"ME_VERSION_ADVANCED_VER_1_INTEL" _ 0x1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Valid macroblock type constants.",
 
 		"ME_MB_TYPE_16x16_INTEL" _ 0x0,

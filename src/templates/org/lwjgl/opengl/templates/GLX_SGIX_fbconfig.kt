@@ -24,7 +24,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		one-and two-component Windows and GLX Pixmaps.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), and by the {@code attrib_list} parameter of #ChooseFBConfigSGIX().",
 
 		"DRAWABLE_TYPE_SGIX" _ 0x8010,
@@ -32,7 +32,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		"X_RENDERABLE_SGIX" _ 0x8012
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), the {@code attrib_list} parameter of #ChooseFBConfigSGIX(),
 		by the {@code attribute} parameter of GLXSGIXPbuffer#QueryGLXPbufferSGIX() and by the {@code attribute} parameter of
@@ -42,13 +42,13 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		"FBCONFIG_ID_SGIX" _ 0x8013
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX().",
 
 		"SCREEN_EXT" _ 0x800C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #DRAWABLE_TYPE_SGIX) and accepted by the {@code attrib_list}
 		parameter of #ChooseFBConfigSGIX() (following the #DRAWABLE_TYPE_SGIX token).
@@ -58,7 +58,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		"PIXMAP_BIT_SGIX" _ 0x00000002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by #GetFBConfigAttribSGIX() (when {@code attribute} is set to #RENDER_TYPE_SGIX) and accepted by the {@code attrib_list}
 		parameter of #ChooseFBConfigSGIX() (following the #RENDER_TYPE_SGIX token).
@@ -68,14 +68,14 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		"COLOR_INDEX_BIT_SGIX" _ 0x00000002
 	)
 
-	val RenderTypes = IntConstant.block(
+	val RenderTypes = IntConstant(
 		"Accepted by the {@code render_type} parameter of #CreateContextWithConfigSGIX().",
 
 		"RGBA_TYPE_SGIX" _ 0x8014,
 		"COLOR_INDEX_TYPE_SGIX" _ 0x8015
 	).javaDocLinks
 
-	int.func(
+	int(
 		"GetFBConfigAttribSGIX",
 		"Gets the value of a GLX attribute for a {@code GLXFBConfigSGIX}.",
 
@@ -85,7 +85,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		Check(1) _ int_p.OUT("value", "returns the attribute value")
 	)
 
-	GLXFBConfigSGIX_p.func(
+	GLXFBConfigSGIX_p(
 		"ChooseFBConfigSGIX",
 		"Gets {@code GLXFBConfigSGIX}s that match a list of attributes or to get the list of GLXFBConfigSGIXs that are available on the specified screen.",
 
@@ -95,7 +95,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		autoSizeResult _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
 	)
 
-	GLXPixmap.func(
+	GLXPixmap(
 		"CreateGLXPixmapWithConfigSGIX",
 		"Creates a GLX pixmap using a {@code GLXFBConfigSGIX}.",
 
@@ -104,7 +104,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		Pixmap.IN("pixmap", "the pixmap")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateContextWithConfigSGIX",
 		"Creates a GLX context using a {@code GLXFBConfigSGIX}.",
 
@@ -115,7 +115,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		Bool.IN("direct", "direct rendering request")
 	)
 
-	XVisualInfo_p.func(
+	XVisualInfo_p(
 		"GetVisualFromFBConfigSGIX",
 		"Retrieves the associated visual of a {@code GLXFBConfigSGIX}.",
 
@@ -123,7 +123,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		GLXFBConfig.IN("config", "the {@code GLXFBConfigSGIX}")
 	)
 
-	GLXFBConfigSGIX.func(
+	GLXFBConfigSGIX(
 		"GetFBConfigFromVisualSGIX",
 		"Retrieves the {@code GLXFBConfigSGIX} associated with a visual.",
 

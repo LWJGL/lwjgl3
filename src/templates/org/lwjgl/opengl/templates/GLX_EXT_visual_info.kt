@@ -22,7 +22,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 		may or may not have a transparent pixel value.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attrib} parameter of GLX#GetConfig(), and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
 
 		"X_VISUAL_TYPE_EXT" _ 0x22,
@@ -34,7 +34,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 		"TRANSPARENT_ALPHA_VALUE_EXT" _ 0x28
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
 		#X_VISUAL_TYPE_EXT token).
@@ -48,7 +48,7 @@ val GLX_EXT_visual_info = "GLXEXTVisualInfo".nativeClassGLX("GLX_EXT_visual_info
 		"STATIC_GRAY_EXT" _ 0x8007
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by GLX#GetConfig(), and accepted by the {@code attrib_list} parameter of GLX#ChooseVisual() (following the
 		#TRANSPARENT_TYPE_EXT token).

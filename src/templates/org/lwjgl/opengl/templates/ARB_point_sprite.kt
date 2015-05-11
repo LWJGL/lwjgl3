@@ -26,7 +26,7 @@ val ARB_point_sprite = "ARBPointSprite".nativeClassGL("ARB_point_sprite", postfi
         ${GL20.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
@@ -35,7 +35,7 @@ val ARB_point_sprite = "ARBPointSprite".nativeClassGL("ARB_point_sprite", postfi
 		"POINT_SPRITE_ARB" _ 0x8861
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		When the {@code target} parameter of TexEnvf, TexEnvfv, TexEnvi, TexEnviv, GetTexEnvfv, or GetTexEnviv is POINT_SPRITE_ARB, then the value of
 		{@code pname} may be.

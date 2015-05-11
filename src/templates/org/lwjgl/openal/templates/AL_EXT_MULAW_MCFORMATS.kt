@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_MULAW_MCFORMATS = "EXTMulawMCFormats".nativeClassAL("EXT_MULAW_MCFORMATS") {
 	documentation = "bindings to AL_EXT_MULAW_MCFORMATS extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_MULAW_MCFORMATS tokens.",
 
 		"FORMAT_MONO_MULAW" _ 0x10014,

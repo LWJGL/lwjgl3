@@ -34,7 +34,7 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
 		Requires ${GL20.core}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
 		GetProgramResourceLocation, and GetProgramResourceLocationIndex.
@@ -61,7 +61,7 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
 		"TRANSFORM_FEEDBACK_VARYING" _ 0x92F4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
 
 		"ACTIVE_RESOURCES" _ 0x92F5,
@@ -70,7 +70,7 @@ val ARB_program_interface_query = "ARBProgramInterfaceQuery".nativeClassGL("ARB_
 		"MAX_NUM_COMPATIBLE_SUBROUTINES" _ 0x92F8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code props} array of GetProgramResourceiv.",
 
 		"NAME_LENGTH" _ 0x92F9,

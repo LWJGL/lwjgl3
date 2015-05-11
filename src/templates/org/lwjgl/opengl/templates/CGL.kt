@@ -19,7 +19,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 	// -----------------------------------------------
 	// CGLTypes.h
 
-	val PixelFormatAttribs = IntConstant.block(
+	val PixelFormatAttribs = IntConstant(
 		"Attribute names for #ChoosePixelFormat() and #DescribePixelFormat().",
 
 		"PFAAllRenderers" _ 1,
@@ -65,7 +65,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"PFAFullScreen" _ 54
 	).javaDocLinks
 
-	val RendererProperties = IntConstant.block(
+	val RendererProperties = IntConstant(
 		"Property names for #DescribeRenderer().",
 
 		"RPOffScreen" _ 53,
@@ -100,7 +100,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"RPFullScreen" _ 54
 	).javaDocLinks
 
-	val ContextOptions = IntConstant.block(
+	val ContextOptions = IntConstant(
 		"Enable names for #Enable(), #Disable(), and #IsEnabled().",
 
 		"CESwapRectangle" _ 201,
@@ -112,7 +112,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"CEMPEngine" _ 313
 	).javaDocLinks
 
-	val ContextParameters = IntConstant.block(
+	val ContextParameters = IntConstant(
 		"Parameter names for #SetParameter() and #GetParameter().",
 
 		"CPSwapRectangle" _ 200,
@@ -132,7 +132,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"CPMPSwapsInFlight" _ 315
 	).javaDocLinks
 
-	val GlobalOptions = IntConstant.block(
+	val GlobalOptions = IntConstant(
 		"Option names for #SetGlobalOption() and #GetGlobalOption().",
 
 		"GOFormatCacheSize" _ 501,
@@ -143,14 +143,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"GOUseBuildCache" _ 506
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"OpenGL Implementation Profiles.",
 
 		"OGLPVersion_Legacy" _ 0x1000,
 		"OGLPVersion_3_2_Core" _ 0x3200
 	)
 
-	val Errors = IntConstant.block(
+	val Errors = IntConstant(
 		"CGL error return values.",
 
 		"NoError" _ 0,
@@ -174,7 +174,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"BadConnection" _ 10017
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Buffer modes.",
 
 		"MonoscopicBit" _ 0x00000001,
@@ -184,7 +184,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"TripleBufferBit" _ 0x00000010
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Depth and stencil buffer depths.",
 
 		"0Bit" _ 0x00000001,
@@ -206,7 +206,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"128Bit" _ 0x00010000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Color and accumulation buffer formats.",
 
 		"RGB444Bit" _ 0x00000040,
@@ -235,7 +235,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"RGBAFloat256Bit" _ 0x20000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Sampling modes.",
 
 		"SupersampleBit" _ 0x00000001,
@@ -245,12 +245,12 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 	// -----------------------------------------------
 	// CGLCurrent.h
 
-	CGLContextObj.func(
+	CGLContextObj(
 		"GetCurrentContext",
 		"Returns the current rendering context. If there is none, returns $NULL."
 	)
 
-	CGLError.func(
+	CGLError(
 		"SetCurrentContext",
 		"""
 		Sets the specified rendering context as the current rendering context.
@@ -272,7 +272,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 	// -----------------------------------------------
 	// CGLDevice.h
 
-	CGLShareGroupObj.func(
+	CGLShareGroupObj(
 		"GetShareGroup",
 		"Returns the sharegroup of the specified rendering context.",
 
@@ -284,7 +284,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Pixel format functions
 
-	CGLError.func(
+	CGLError(
 		"ChoosePixelFormat",
 		"Creates a pixel format object that satisfies the constraints of the specified buffer and renderer attributes.",
 
@@ -311,14 +311,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLError.func(
+	CGLError(
 		"DestroyPixelFormat",
 		"Frees the memory associated with a pixel format object. Calling this function is equivalent to calling #ReleasePixelFormat().",
 
 		CGLPixelFormatObj.IN("pix", "the pixel format object to destroy")
 	)
 
-	CGLError.func(
+	CGLError(
 		"DescribePixelFormat",
 		"Retrieves the values of an attribute associated with a pixel format object.",
 
@@ -331,7 +331,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLint_p.OUT("value", "on return, points to the value of the attribute")
 	)
 
-	void.func(
+	void(
 		"ReleasePixelFormat",
 		"""
 		Decrements the reference count of a pixel format object.
@@ -345,7 +345,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLPixelFormatObj.IN("pix", "the pixel format object whose reference count should be decremented")
 	)
 
-	CGLPixelFormatObj.func(
+	CGLPixelFormatObj(
 		"RetainPixelFormat",
 		"""
 		Increments the receiver's reference count.
@@ -357,7 +357,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLPixelFormatObj.IN("pix", "the pixel format object whose reference count should be incremented")
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetPixelFormatRetainCount",
 		"Returns the retain count of a pixel format object.",
 
@@ -366,7 +366,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Renderer information functions
 
-	CGLError.func(
+	CGLError(
 		"QueryRendererInfo",
 		"""
 		Creates a renderer information object that contains properties and values for renderers able to drive all the specified displays in a given display
@@ -397,14 +397,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLError.func(
+	CGLError(
 		"DestroyRendererInfo",
 		"Frees resources associated with a renderer information object.",
 
 		CGLRendererInfoObj.IN("rend", "the renderer information object to destroy")
 	)
 
-	CGLError.func(
+	CGLError(
 		"DescribeRenderer",
 		"Obtains the value associated with a renderer property.",
 
@@ -430,7 +430,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Context functions
 
-	CGLError.func(
+	CGLError(
 		"CreateContext",
 		"Creates a CGL rendering context.",
 
@@ -452,7 +452,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLError.func(
+	CGLError(
 		"DestroyContext",
 		"""
 		Frees the resources associated with a rendering context.
@@ -465,7 +465,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLContextObj.IN("ctx", "the rendering context to destroy")
 	)
 
-	CGLError.func(
+	CGLError(
 		"CopyContext",
 		"Copies the specified state variables from one rendering context to another.",
 
@@ -481,7 +481,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLContextObj.func(
+	CGLContextObj(
 		"RetainContext",
 		"""
 		Increments the retain count on a CGL rendering context.
@@ -495,7 +495,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		returnDoc = "the same context that was passed into the function."
 	)
 
-	void.func(
+	void(
 		"ReleaseContext",
 		"""
 		Decrements the retain count on a CGL rendering context.
@@ -511,14 +511,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLContextObj.IN("ctx", "the rendering context to be released")
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetContextRetainCount",
 		"Returns the current retain count of a CGL rendering context.",
 
 		CGLContextObj.IN("ctx", "the CGL rendering context whose retain count you wish to discover")
 	)
 
-	CGLPixelFormatObj.func(
+	CGLPixelFormatObj(
 		"GetPixelFormat",
 		"""
 		Retrieves the current pixel format associated with a CGL rendering context.
@@ -532,7 +532,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	/*// PBuffer functions
 
-	CGLError.func(
+	CGLError(
 		"CreatePBuffer",
 		"reates a pixel buffer of the specified size, compatible with the specified texture target.",
 
@@ -544,14 +544,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLPBufferObj_p.IN("pbuffer", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"DestroyPBuffer",
 		"",
 
 		CGLPBufferObj.IN("pbuffer", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"DescribePBuffer",
 		"",
 
@@ -563,7 +563,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLint_p.OUT("mipmap", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"TexImagePBuffer",
 		"",
 
@@ -572,21 +572,21 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		GLenum.IN("source", "")
 	)
 
-	CGLPBufferObj.func(
+	CGLPBufferObj(
 		"RetainPBuffer",
 		"",
 
 		CGLPBufferObj.IN("pbuffer", "")
 	)
 
-	void.func(
+	void(
 		"ReleasePBuffer",
 		"",
 
 		CGLPBufferObj.IN("pbuffer", "")
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetPBufferRetainCount",
 		"",
 
@@ -595,7 +595,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Drawable Functions
 
-	CGLError.func(
+	CGLError(
 		"SetOffScreen",
 		"",
 
@@ -606,7 +606,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		voidptr.IN("baseaddr", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetOffScreen",
 		"",
 
@@ -617,14 +617,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ voidptr_p.OUT("baseaddr", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"SetFullScreen",
 		"",
 
 		CGLContextObj.IN("ctx", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"SetFullScreenOnDisplay",
 		"",
 
@@ -632,7 +632,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		GLuint.IN("display_mask", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"SetPBuffer",
 		"",
 
@@ -643,7 +643,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		GLint.IN("screen", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetPBuffer",
 		"",
 
@@ -654,14 +654,14 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLint_p.OUT("screen", "")
 	)*/
 
-	CGLError.func(
+	CGLError(
 		"ClearDrawable",
 		"Disassociates a rendering context from any drawable objects attached to it.",
 
 		CGLContextObj.IN("ctx", "a rendering context")
 	)
 
-	CGLError.func(
+	CGLError(
 		"FlushDrawable",
 		"""
 		Copies the back buffer of a double-buffered context to the front buffer.
@@ -681,7 +681,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Per context enables and parameters
 
-	CGLError.func(
+	CGLError(
 		"Enable",
 		"Enables an option for a rendering context.",
 
@@ -689,7 +689,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLContextEnable.IN("pname", "the option to enable", ContextOptions)
 	)
 
-	CGLError.func(
+	CGLError(
 		"Disable",
 		"Disables an option for a rendering context.",
 
@@ -697,7 +697,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLContextEnable.IN("pname", "the option to disable", ContextOptions)
 	)
 
-	CGLError.func(
+	CGLError(
 		"IsEnabled",
 		"Reports whether an option is enabled for a rendering context.",
 
@@ -706,7 +706,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLint_p.OUT("enable", "on return, enable is set to true if the option is enabled")
 	)
 
-	CGLError.func(
+	CGLError(
 		"SetParameter",
 		"Sets the value of a rendering context parameter.",
 
@@ -715,7 +715,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetParameter",
 		"Retrieves the value of a rendering context parameter.",
 
@@ -726,7 +726,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Virtual screen functions
 
-	CGLError.func(
+	CGLError(
 		"SetVirtualScreen",
 		"""
 		Forces subsequent OpenGL commands to the specified virtual screen.
@@ -748,7 +748,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetVirtualScreen",
 		"""
 		Gets the current virtual screen number associated with a rendering context.
@@ -767,7 +767,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		)
 	)
 
-	CGLError.func(
+	CGLError(
 		"UpdateContext",
 		"",
 
@@ -776,7 +776,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Global library options
 
-	CGLError.func(
+	CGLError(
 		"SetGlobalOption",
 		"Sets the value of a global option.",
 
@@ -784,7 +784,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "the value to set the option to")
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetGlobalOption",
 		"Retrieves the value of a global option.",
 
@@ -792,7 +792,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLint_p.OUT("params", "on return, a pointer to the value of the option")
 	)
 
-	/*CGLError.func(
+	/*CGLError(
 		"SetOption",
 		"",
 
@@ -800,7 +800,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		GLint.IN("param", "")
 	)
 
-	CGLError.func(
+	CGLError(
 		"GetOption",
 		"",
 
@@ -810,7 +810,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Locking functions
 
-	CGLError.func(
+	CGLError(
 		"LockContext",
 		"""
 		Locks a CGL rendering context.
@@ -828,7 +828,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		CGLContextObj.IN("context", "a rendering context")
 	)
 
-	CGLError.func(
+	CGLError(
 		"UnlockContext",
 		"Unlocks a CGL rendering context.",
 
@@ -837,7 +837,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Version numbers
 
-	void.func(
+	void(
 		"GetVersion",
 		"Gets the major and minor version numbers of the CGL library.",
 
@@ -847,7 +847,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 	// Convert an error code to a string
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"ErrorString",
 		"Returns a string that describes the specified result code.",
 

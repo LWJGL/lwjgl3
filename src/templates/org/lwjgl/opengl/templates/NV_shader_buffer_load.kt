@@ -85,25 +85,25 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		larger than MAX_BINDABLE_UNIFORM_SIZE.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV.",
 
 		"BUFFER_GPU_ADDRESS_NV" _ 0x8F1D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"GPU_ADDRESS_NV" _ 0x8F34
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerui64vNV.",
 
 		"MAX_SHADER_BUFFER_ADDRESS_NV" _ 0x8F35
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeBufferResidentNV",
 		"",
 
@@ -111,21 +111,21 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		GLenum.IN("access", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeBufferNonResidentNV",
 		"",
 
 		GLenum.IN("target", "")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsBufferResidentNV",
 		"",
 
 		GLenum.IN("target", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeNamedBufferResidentNV",
 		"",
 
@@ -133,21 +133,21 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		GLenum.IN("access", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeNamedBufferNonResidentNV",
 		"",
 
 		GLuint.IN("buffer", "")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsNamedBufferResidentNV",
 		"",
 
 		GLuint.IN("buffer", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBufferParameterui64vNV",
 		"",
 
@@ -156,7 +156,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		mods(Check(1), returnValue) _ GLuint64EXT_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetNamedBufferParameterui64vNV",
 		"",
 
@@ -165,7 +165,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		mods(Check(1), returnValue) _ GLuint64EXT_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetIntegerui64vNV",
 		"",
 
@@ -173,7 +173,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		mods(Check(1), returnValue) _ GLuint64EXT_p.OUT("result", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniformui64NV",
 		"",
 
@@ -181,7 +181,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		GLuint64EXT.IN("value", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniformui64vNV",
 		"",
 
@@ -190,7 +190,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		const _ GLuint64EXT_p.IN("value", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetUniformui64vNV",
 		"",
 
@@ -199,7 +199,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		mods(Check(1), returnValue) _ GLuint64EXT_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformui64NV",
 		"",
 
@@ -208,7 +208,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		GLuint64EXT.IN("value", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformui64vNV",
 		"",
 

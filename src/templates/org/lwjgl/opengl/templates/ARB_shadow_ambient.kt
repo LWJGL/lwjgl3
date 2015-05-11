@@ -19,7 +19,7 @@ val ARB_shadow_ambient = "ARBShadowAmbient".nativeClassGL("ARB_shadow_ambient", 
 		Requires ${ARB_shadow.link} and ${ARB_depth_texture.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"TEXTURE_COMPARE_FAIL_VALUE_ARB" _ 0x80BF

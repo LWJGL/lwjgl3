@@ -44,7 +44,7 @@ val KHR_texture_compression_astc_ldr = "KHRTextureCompressionASTCLDR".nativeClas
 		ASTC has a variable block size, and this is specified as part of the name of the token passed to CompressedImage2D and its related functions.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of CompressedTexImage2D, CompressedTexSubImage2D, TexStorage2D, TextureStorage2D, TexStorage3D, and
 		TextureStorage3D.

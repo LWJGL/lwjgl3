@@ -18,7 +18,7 @@ val GLX_EXT_buffer_age = "GLXEXTBufferAge".nativeClassGLX("GLX_EXT_buffer_age", 
 		Requires ${GLX14.glx}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by GLX13#QueryDrawable().",
 
 		"BACK_BUFFER_AGE_EXT" _ 0x20F4

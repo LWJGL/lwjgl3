@@ -48,13 +48,13 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${registryLinkTo("EXT", "gpu_shader4")}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"RGBA_INTEGER_MODE_EXT" _ 0x8D9E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
 		"RGBA32UI_EXT" _ 0x8D70,
@@ -95,7 +95,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		"LUMINANCE_ALPHA8I_EXT" _ 0x8D93
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
 		""",
@@ -112,7 +112,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		"LUMINANCE_ALPHA_INTEGER_EXT" _ 0x8D9D
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearColorIiEXT",
 		"",
 
@@ -122,7 +122,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		GLint.IN("a", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearColorIuiEXT",
 		"",
 
@@ -132,7 +132,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		GLuint.IN("a", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexParameterIivEXT",
 		"",
 
@@ -141,7 +141,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		mods(Check(1), SingleValue("param")) _ GLint_p.IN("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexParameterIuivEXT",
 		"",
 
@@ -150,7 +150,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		mods(Check(1), SingleValue("param")) _ GLuint_p.IN("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTexParameterIivEXT",
 		"",
 
@@ -159,7 +159,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTexParameterIuivEXT",
 		"",
 

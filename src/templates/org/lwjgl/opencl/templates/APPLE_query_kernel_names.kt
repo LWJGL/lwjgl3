@@ -16,13 +16,13 @@ val APPLE_query_kernel_names = "APPLEQueryKernelNames".nativeClassCL("APPLE_quer
 		must be successfully built with CL10#BuildProgram() for at least one device to succeed. Otherwise $INVALID_PROGRAM_EXECUTABLE is returned.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Returns a cl_uint for number of kernels in program.",
 
 		"PROGRAM_NUM_KERNELS_APPLE" _ 0x10000004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returns a ';' delimited char[] containing the names of kernels in program.",
 
 		"PROGRAM_KERNEL_NAMES_APPLE" _ 0x10000005

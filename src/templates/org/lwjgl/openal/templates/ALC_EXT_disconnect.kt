@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 	documentation = "bindings to ALC_EXT_disconnect extension."
 
-	IntConstant.block(
+	IntConstant(
 		"ALC_EXT_disconnect tokens.",
 
 		"CONNECTED " _ 0x313

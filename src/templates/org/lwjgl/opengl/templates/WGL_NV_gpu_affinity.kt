@@ -31,13 +31,13 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 	val wglMakeCurrent = "org.lwjgl.system.windows.WGL#MakeCurrent()"
 	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()"
 
-	IntConstant.block(
+	IntConstant(
 		"New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",
 
 		"ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV" _ 0x20D0
 	).noPrefix()
 
-	IntConstant.block(
+	IntConstant(
 		"New error code set by $wglMakeCurrent and $wglMakeContextCurrentARB.",
 
 		"ERROR_MISSING_AFFINITY_MASK_NV" _ 0x20D1
@@ -45,7 +45,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 
 	// Functions
 
-	BOOL.func(
+	BOOL(
 		"EnumGpusNV",
 		"""
 		Returns the handles for all GPUs in a system.
@@ -59,7 +59,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		HGPUNV_p.IN("gpu", "returns a handle for GPU number {@code gpuIndex}. The first GPU will be index 0.")
 	)
 
-	BOOL.func(
+	BOOL(
 		"EnumGpuDevicesNV",
 		"Retrieve information about the display devices supported by a GPU.",
 
@@ -68,7 +68,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		PGPU_DEVICE.IN("gpuDevice", "a ##GPU_DEVICE structure which will receive information about the display device at index {@code deviceIndex}.")
 	)
 
-	HDC.func(
+	HDC(
 		"CreateAffinityDCNV",
 		"""
 		Creates an affinity-DC. Affinity-DCs, a new type of DC, can be used to direct OpenGL commands to a specific GPU or set of GPUs. An affinity-DC is a
@@ -82,7 +82,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		mods(const, nullTerminated) _ HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
 	)
 
-	BOOL.func(
+	BOOL(
 		"EnumGpusFromAffinityDCNV",
 		"""
 		Retrieves a list of GPU handles that make up the affinity-mask of an affinity-DC.
@@ -97,7 +97,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		HGPUNV_p.IN("gpu", "returns a handle for  GPU number {@code gpuIndex}. The first GPU will be at index 0.")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DeleteDCNV",
 		"Deletes an affinity-DC.",
 

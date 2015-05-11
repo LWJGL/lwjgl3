@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_EXPONENT_DISTANCE = "EXTExponentDistance".nativeClassAL("EXT_EXPONENT_DISTANCE") {
 	documentation = "bindings to AL_EXT_EXPONENT_DISTANCE extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_EXPONENT_DISTANCE tokens.",
 
 		"EXPONENT_DISTANCE" _ 0xd005,

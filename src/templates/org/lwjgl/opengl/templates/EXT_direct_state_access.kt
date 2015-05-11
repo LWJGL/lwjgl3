@@ -149,7 +149,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		no unintended side-effects for selector or latched state (assuming the client attrib state does not overflow).
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"GetBooleani_v, GetIntegeri_v, GetFloati_vEXT, GetDoublei_vEXT.",
 
 		"PROGRAM_MATRIX_EXT" _ 0x8E2D,
@@ -159,14 +159,14 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// OpenGL 1.1: New client commands
 
-	GLvoid.func(
+	GLvoid(
 		"ClientAttribDefaultEXT",
 		"",
 
 		GLbitfield.IN("mask", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PushClientAttribDefaultEXT",
 		"",
 
@@ -179,7 +179,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter
 	 */
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixLoadfEXT",
 		"",
 
@@ -187,7 +187,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixLoaddEXT",
 		"",
 
@@ -195,7 +195,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixMultfEXT",
 		"",
 
@@ -203,7 +203,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixMultdEXT",
 		"",
 
@@ -211,14 +211,14 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixLoadIdentityEXT",
 		"",
 
 		GLenum.IN("matrixMode", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixRotatefEXT",
 		"",
 
@@ -229,7 +229,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixRotatedEXT",
 		"",
 
@@ -240,7 +240,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixScalefEXT",
 		"",
 
@@ -250,7 +250,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixScaledEXT",
 		"",
 
@@ -260,7 +260,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixTranslatefEXT",
 		"",
 
@@ -270,7 +270,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixTranslatedEXT",
 		"",
 
@@ -280,7 +280,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("z", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixOrthoEXT",
 		"",
 
@@ -293,7 +293,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("f", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixFrustumEXT",
 		"",
 
@@ -306,14 +306,14 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("f", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixPushEXT",
 		"",
 
 		GLenum.IN("matrixMode", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixPopEXT",
 		"",
 
@@ -325,7 +325,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     in name with "Texture" and add initial "uint texture" parameter
 	 */
 
-	GLvoid.func(
+	GLvoid(
 		"TextureParameteriEXT",
 		"",
 
@@ -335,7 +335,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureParameterivEXT",
 		"",
 
@@ -345,7 +345,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureParameterfEXT",
 		"",
 
@@ -355,7 +355,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureParameterfvEXT",
 		"",
 
@@ -365,7 +365,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLfloat_p.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureImage1DEXT",
 		"",
 
@@ -385,7 +385,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureImage2DEXT",
 		"",
 
@@ -406,7 +406,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureSubImage1DEXT",
 		"",
 
@@ -424,7 +424,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureSubImage2DEXT",
 		"",
 
@@ -444,7 +444,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyTextureImage1DEXT",
 		"",
 
@@ -458,7 +458,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("border", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyTextureImage2DEXT",
 		"",
 
@@ -473,7 +473,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("border", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyTextureSubImage1DEXT",
 		"",
 
@@ -486,7 +486,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyTextureSubImage2DEXT",
 		"",
 
@@ -501,7 +501,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTextureImageEXT",
 		"",
 
@@ -516,7 +516,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.OUT("pixels", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTextureParameterfvEXT",
 		"",
 
@@ -526,7 +526,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTextureParameterivEXT",
 		"",
 
@@ -536,7 +536,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTextureLevelParameterfvEXT",
 		"",
 
@@ -547,7 +547,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTextureLevelParameterivEXT",
 		"",
 
@@ -563,7 +563,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     "Texture" and adds initial "uint texture" parameter
 	 */
 
-	DependsOn("OpenGL12") _ GLvoid.func(
+	DependsOn("OpenGL12") _ GLvoid(
 		"TextureImage3DEXT",
 		"",
 
@@ -585,7 +585,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL12") _ GLvoid.func(
+	DependsOn("OpenGL12") _ GLvoid(
 		"TextureSubImage3DEXT",
 		"",
 
@@ -607,7 +607,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL12") _ GLvoid.func(
+	DependsOn("OpenGL12") _ GLvoid(
 		"CopyTextureSubImage3DEXT",
 		"",
 
@@ -629,7 +629,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     the texture unit).
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"BindMultiTextureEXT",
 		"",
 
@@ -638,7 +638,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexCoordPointerEXT",
 		"",
 
@@ -649,7 +649,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexEnvfEXT",
 		"",
 
@@ -659,7 +659,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexEnvfvEXT",
 		"",
 
@@ -669,7 +669,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexEnviEXT",
 		"",
 
@@ -679,7 +679,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexEnvivEXT",
 		"",
 
@@ -689,7 +689,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGendEXT",
 		"",
 
@@ -699,7 +699,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGendvEXT",
 		"",
 
@@ -709,7 +709,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLdouble_p.IN("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGenfEXT",
 		"",
 
@@ -719,7 +719,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGenfvEXT",
 		"",
 
@@ -729,7 +729,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGeniEXT",
 		"",
 
@@ -739,7 +739,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexGenivEXT",
 		"",
 
@@ -749,7 +749,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexEnvfvEXT",
 		"",
 
@@ -759,7 +759,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexEnvivEXT",
 		"",
 
@@ -769,7 +769,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexGendvEXT",
 		"",
 
@@ -779,7 +779,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexGenfvEXT",
 		"",
 
@@ -789,7 +789,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexGenivEXT",
 		"",
 
@@ -799,7 +799,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexParameteriEXT",
 		"",
 
@@ -809,7 +809,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexParameterivEXT",
 		"",
 
@@ -819,7 +819,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexParameterfEXT",
 		"",
 
@@ -829,7 +829,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexParameterfvEXT",
 		"",
 
@@ -839,7 +839,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLfloat_p.IN("param", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexImage1DEXT",
 		"",
 
@@ -859,7 +859,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexImage2DEXT",
 		"",
 
@@ -880,7 +880,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexSubImage1DEXT",
 		"",
 
@@ -898,7 +898,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexSubImage2DEXT",
 		"",
 
@@ -918,7 +918,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CopyMultiTexImage1DEXT",
 		"",
 
@@ -932,7 +932,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("border", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CopyMultiTexImage2DEXT",
 		"",
 
@@ -947,7 +947,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("border", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CopyMultiTexSubImage1DEXT",
 		"",
 
@@ -960,7 +960,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CopyMultiTexSubImage2DEXT",
 		"",
 
@@ -975,7 +975,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexImageEXT",
 		"",
 
@@ -990,7 +990,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.OUT("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexParameterfvEXT",
 		"",
 
@@ -1000,7 +1000,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexParameterivEXT",
 		"",
 
@@ -1010,7 +1010,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexLevelParameterfvEXT",
 		"",
 
@@ -1021,7 +1021,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetMultiTexLevelParameterivEXT",
 		"",
 
@@ -1032,7 +1032,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexImage3DEXT",
 		"",
 
@@ -1054,7 +1054,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MultiTexSubImage3DEXT",
 		"",
 
@@ -1076,7 +1076,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("pixels", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CopyMultiTexSubImage3DEXT",
 		"",
 
@@ -1099,7 +1099,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     state value parameters
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"EnableClientStateIndexedEXT",
 		"",
 
@@ -1107,7 +1107,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"DisableClientStateIndexedEXT",
 		"",
 
@@ -1122,7 +1122,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     value parameters
 	 */
 
-	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid(
 		"EnableClientStateiEXT",
 		"",
 
@@ -1130,7 +1130,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid(
 		"DisableClientStateiEXT",
 		"",
 
@@ -1145,7 +1145,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     before state value parameters
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetFloatIndexedvEXT",
 		"",
 
@@ -1154,7 +1154,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetDoubleIndexedvEXT",
 		"",
 
@@ -1163,7 +1163,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetPointerIndexedvEXT",
 		"",
 
@@ -1179,7 +1179,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and before state value parameters
 	 */
 
-	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid(
 		"GetFloati_vEXT",
 		"",
 
@@ -1188,7 +1188,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "")
 	)
 
-	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid(
 		"GetDoublei_vEXT",
 		"",
 
@@ -1197,7 +1197,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "")
 	)
 
-	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid.func(
+	mods(DependsOn("OpenGL30"), ignoreMissing) _ GLvoid(
 		"GetPointeri_vEXT",
 		"",
 
@@ -1213,7 +1213,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// TODO: Reuse EXT_draw_buffers2 functions
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"EnableIndexedEXT",
 		"",
 
@@ -1221,7 +1221,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"DisableIndexedEXT",
 		"",
 
@@ -1229,7 +1229,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL13") _ GLboolean.func(
+	DependsOn("OpenGL13") _ GLboolean(
 		"IsEnabledIndexedEXT",
 		"",
 
@@ -1237,7 +1237,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetIntegerIndexedvEXT",
 		"",
 
@@ -1246,7 +1246,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetBooleanIndexedvEXT",
 		"",
 
@@ -1260,7 +1260,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     prefix to name and adds initial "uint program" parameter
 	 */
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"NamedProgramStringEXT",
 		"",
 
@@ -1271,7 +1271,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLvoid_p.IN("string", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"NamedProgramLocalParameter4dEXT",
 		"",
 
@@ -1284,7 +1284,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLdouble.IN("w", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"NamedProgramLocalParameter4dvEXT",
 		"",
 
@@ -1294,7 +1294,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLdouble_p.IN("params", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"NamedProgramLocalParameter4fEXT",
 		"",
 
@@ -1307,7 +1307,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("w", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"NamedProgramLocalParameter4fvEXT",
 		"",
 
@@ -1317,7 +1317,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLfloat_p.IN("params", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"GetNamedProgramLocalParameterdvEXT",
 		"",
 
@@ -1327,7 +1327,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		Check(4) _ GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"GetNamedProgramLocalParameterfvEXT",
 		"",
 
@@ -1337,7 +1337,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		Check(4) _ GLfloat_p.OUT("params", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"GetNamedProgramivEXT",
 		"",
 
@@ -1347,7 +1347,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("GL_ARB_vertex_program") _ GLvoid.func(
+	DependsOn("GL_ARB_vertex_program") _ GLvoid(
 		"GetNamedProgramStringEXT",
 		"",
 
@@ -1362,7 +1362,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     in name with "Texture" and add initial "uint texture" parameter
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureImage3DEXT",
 		"",
 
@@ -1378,7 +1378,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureImage2DEXT",
 		"",
 
@@ -1393,7 +1393,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureImage1DEXT",
 		"",
 
@@ -1407,7 +1407,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureSubImage3DEXT",
 		"",
 
@@ -1425,7 +1425,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureSubImage2DEXT",
 		"",
 
@@ -1441,7 +1441,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedTextureSubImage1DEXT",
 		"",
 
@@ -1455,7 +1455,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetCompressedTextureImageEXT",
 		"",
 
@@ -1474,7 +1474,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter (to identify the texture unit).
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexImage3DEXT",
 		"",
 
@@ -1490,7 +1490,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexImage2DEXT",
 		"",
 
@@ -1505,7 +1505,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexImage1DEXT",
 		"",
 
@@ -1519,7 +1519,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexSubImage3DEXT",
 		"",
 
@@ -1537,7 +1537,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexSubImage2DEXT",
 		"",
 
@@ -1553,7 +1553,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"CompressedMultiTexSubImage1DEXT",
 		"",
 
@@ -1567,7 +1567,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"GetCompressedMultiTexImageEXT",
 		"",
 
@@ -1586,7 +1586,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     matrixMode" parameter
 	 */
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MatrixLoadTransposefEXT",
 		"",
 
@@ -1594,7 +1594,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MatrixLoadTransposedEXT",
 		"",
 
@@ -1602,7 +1602,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLdouble_p.IN("m", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MatrixMultTransposefEXT",
 		"",
 
@@ -1610,7 +1610,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(16)) _ GLfloat_p.IN("m", "")
 	)
 
-	DependsOn("OpenGL13") _ GLvoid.func(
+	DependsOn("OpenGL13") _ GLvoid(
 		"MatrixMultTransposedEXT",
 		"",
 
@@ -1624,7 +1624,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     "uint buffer"
 	 */
 
-	DependsOn("OpenGL15") _ GLvoid.func(
+	DependsOn("OpenGL15") _ GLvoid(
 		"NamedBufferDataEXT",
 		"",
 
@@ -1644,7 +1644,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("usage", "")
 	)
 
-	DependsOn("OpenGL15") _ GLvoid.func(
+	DependsOn("OpenGL15") _ GLvoid(
 		"NamedBufferSubDataEXT",
 		"",
 
@@ -1663,7 +1663,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		) _ GLvoid_p.IN("data", "")
 	)
 
-	DependsOn("OpenGL15") _ (MapPointer("glGetNamedBufferParameteriEXT(buffer, GL15.GL_BUFFER_SIZE)") _ GLvoid_p).func(
+	DependsOn("OpenGL15") _ (MapPointer("glGetNamedBufferParameteriEXT(buffer, GL15.GL_BUFFER_SIZE)") _ GLvoid_p)(
 		"MapNamedBufferEXT",
 		"",
 
@@ -1671,14 +1671,14 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("access", "")
 	)
 
-	DependsOn("OpenGL15") _ GLboolean.func(
+	DependsOn("OpenGL15") _ GLboolean(
 		"UnmapNamedBufferEXT",
 		"",
 
 		GLuint.IN("buffer", "")
 	)
 
-	DependsOn("OpenGL15") _ GLvoid.func(
+	DependsOn("OpenGL15") _ GLvoid(
 		"GetNamedBufferParameterivEXT",
 		"",
 
@@ -1687,7 +1687,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("OpenGL15") _ GLvoid.func(
+	DependsOn("OpenGL15") _ GLvoid(
 		"GetNamedBufferSubDataEXT",
 		"",
 
@@ -1708,7 +1708,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     add initial "uint program" parameter
 	 */
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform1fEXT",
 		"",
 
@@ -1717,7 +1717,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("v0", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform2fEXT",
 		"",
 
@@ -1727,7 +1727,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("v1", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform3fEXT",
 		"",
 
@@ -1738,7 +1738,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("v2", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform4fEXT",
 		"",
 
@@ -1750,7 +1750,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLfloat.IN("v3", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform1iEXT",
 		"",
 
@@ -1759,7 +1759,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("v0", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform2iEXT",
 		"",
 
@@ -1769,7 +1769,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("v1", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform3iEXT",
 		"",
 
@@ -1780,7 +1780,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("v2", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform4iEXT",
 		"",
 
@@ -1792,7 +1792,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("v3", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform1fvEXT",
 		"",
 
@@ -1802,7 +1802,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform2fvEXT",
 		"",
 
@@ -1812,7 +1812,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform3fvEXT",
 		"",
 
@@ -1822,7 +1822,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform4fvEXT",
 		"",
 
@@ -1832,7 +1832,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform1ivEXT",
 		"",
 
@@ -1842,7 +1842,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLint_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform2ivEXT",
 		"",
 
@@ -1852,7 +1852,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLint_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform3ivEXT",
 		"",
 
@@ -1862,7 +1862,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLint_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniform4ivEXT",
 		"",
 
@@ -1872,7 +1872,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLint_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniformMatrix2fvEXT",
 		"",
 
@@ -1883,7 +1883,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniformMatrix3fvEXT",
 		"",
 
@@ -1894,7 +1894,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL20") _ GLvoid.func(
+	DependsOn("OpenGL20") _ GLvoid(
 		"ProgramUniformMatrix4fvEXT",
 		"",
 
@@ -1910,7 +1910,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     name and add initial "uint program" parameter
 	 */
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix2x3fvEXT",
 		"",
 
@@ -1921,7 +1921,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix3x2fvEXT",
 		"",
 
@@ -1932,7 +1932,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix2x4fvEXT",
 		"",
 
@@ -1943,7 +1943,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix4x2fvEXT",
 		"",
 
@@ -1954,7 +1954,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix3x4fvEXT",
 		"",
 
@@ -1965,7 +1965,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	DependsOn("OpenGL21") _ GLvoid.func(
+	DependsOn("OpenGL21") _ GLvoid(
 		"ProgramUniformMatrix4x3fvEXT",
 		"",
 
@@ -1982,7 +1982,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter
 	 */
 
-	DependsOn("GL_EXT_texture_buffer_object") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_buffer_object") _ GLvoid(
 		"TextureBufferEXT",
 		"",
 
@@ -1998,7 +1998,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter (to identify the texture unit).
 	 */
 
-	DependsOn("GL_EXT_texture_buffer_object") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_buffer_object") _ GLvoid(
 		"MultiTexBufferEXT",
 		"",
 
@@ -2014,7 +2014,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter
 	 */
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"TextureParameterIivEXT",
 		"",
 
@@ -2024,7 +2024,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"TextureParameterIuivEXT",
 		"",
 
@@ -2034,7 +2034,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLuint_p.IN("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"GetTextureParameterIivEXT",
 		"",
 
@@ -2044,7 +2044,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"GetTextureParameterIuivEXT",
 		"",
 
@@ -2060,7 +2060,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter (to identify the texture unit).
 	 */
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"MultiTexParameterIivEXT",
 		"",
 
@@ -2070,7 +2070,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"MultiTexParameterIuivEXT",
 		"",
 
@@ -2080,7 +2080,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLuint_p.IN("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"GetMultiTexParameterIivEXT",
 		"",
 
@@ -2090,7 +2090,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("GL_EXT_texture_integer") _ GLvoid.func(
+	DependsOn("GL_EXT_texture_integer") _ GLvoid(
 		"GetMultiTexParameterIuivEXT",
 		"",
 
@@ -2105,7 +2105,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     to name and add initial "uint program" parameter
 	 */
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform1uiEXT",
 		"",
 
@@ -2114,7 +2114,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("v0", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform2uiEXT",
 		"",
 
@@ -2124,7 +2124,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("v1", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform3uiEXT",
 		"",
 
@@ -2135,7 +2135,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("v2", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform4uiEXT",
 		"",
 
@@ -2147,7 +2147,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("v3", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform1uivEXT",
 		"",
 
@@ -2157,7 +2157,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLuint_p.IN("value", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform2uivEXT",
 		"",
 
@@ -2167,7 +2167,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLuint_p.IN("value", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform3uivEXT",
 		"",
 
@@ -2177,7 +2177,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLuint_p.IN("value", "")
 	)
 
-	DependsOn("GL_EXT_gpu_shader4") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_shader4") _ GLvoid(
 		"ProgramUniform4uivEXT",
 		"",
 
@@ -2192,7 +2192,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     to name and adds "uint program" parameter
 	 */
 
-	DependsOn("GL_EXT_gpu_program_parameters") _ GLvoid.func(
+	DependsOn("GL_EXT_gpu_program_parameters") _ GLvoid(
 		"NamedProgramLocalParameters4fvEXT",
 		"",
 
@@ -2208,7 +2208,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     prefix to name and replace "enum target" with "uint program"
 	 */
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParameterI4iEXT",
 		"",
 
@@ -2221,7 +2221,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("w", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParameterI4ivEXT",
 		"",
 
@@ -2231,7 +2231,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParametersI4ivEXT",
 		"",
 
@@ -2242,7 +2242,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLint_p.IN("params", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParameterI4uiEXT",
 		"",
 
@@ -2255,7 +2255,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("w", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParameterI4uivEXT",
 		"",
 
@@ -2265,7 +2265,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(const, Check(4)) _ GLuint_p.IN("params", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"NamedProgramLocalParametersI4uivEXT",
 		"",
 
@@ -2276,7 +2276,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLuint_p.IN("params", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"GetNamedProgramLocalParameterIivEXT",
 		"",
 
@@ -2286,7 +2286,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		Check(4) _ GLint_p.OUT("params", "")
 	)
 
-	DependsOn("GL_NV_gpu_program4") _ GLvoid.func(
+	DependsOn("GL_NV_gpu_program4") _ GLvoid(
 		"GetNamedProgramLocalParameterIuivEXT",
 		"",
 
@@ -2301,7 +2301,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and replace "enum target" with "uint renderbuffer"
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedRenderbufferStorageEXT",
 		"",
 
@@ -2311,7 +2311,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetNamedRenderbufferParameterivEXT",
 		"",
 
@@ -2325,7 +2325,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     prefix to name and replace "enum target" with "uint renderbuffer"
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedRenderbufferStorageMultisampleEXT",
 		"",
 
@@ -2342,7 +2342,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     renderbuffer"
 	 */
 
-	DependsOn("GL_NV_framebuffer_multisample_coverage") _ GLvoid.func(
+	DependsOn("GL_NV_framebuffer_multisample_coverage") _ GLvoid(
 		"NamedRenderbufferStorageMultisampleCoverageEXT",
 		"",
 
@@ -2359,7 +2359,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and replace "enum target" with "uint framebuffer"
 	 */
 
-	DependsOn("OpenGL30") _ GLenum.func(
+	DependsOn("OpenGL30") _ GLenum(
 		"CheckNamedFramebufferStatusEXT",
 		"",
 
@@ -2367,7 +2367,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("target", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedFramebufferTexture1DEXT",
 		"",
 
@@ -2378,7 +2378,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("level", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedFramebufferTexture2DEXT",
 		"",
 
@@ -2389,7 +2389,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("level", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedFramebufferTexture3DEXT",
 		"",
 
@@ -2401,7 +2401,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("zoffset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedFramebufferRenderbufferEXT",
 		"",
 
@@ -2411,7 +2411,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("renderbuffer", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetNamedFramebufferAttachmentParameterivEXT",
 		"",
 
@@ -2426,7 +2426,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     replace "enum target" with "uint texture"
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GenerateTextureMipmapEXT",
 		"",
 
@@ -2439,7 +2439,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     replace "enum target" with "enum texunit"
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GenerateMultiTexMipmapEXT",
 		"",
 
@@ -2449,7 +2449,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// OpenGL 3.0: New framebuffer commands
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"FramebufferDrawBufferEXT",
 		"",
 
@@ -2457,7 +2457,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("mode", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"FramebufferDrawBuffersEXT",
 		"",
 
@@ -2466,7 +2466,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		const _ GLenum_p.IN("bufs", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"FramebufferReadBufferEXT",
 		"",
 
@@ -2476,7 +2476,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// OpenGL 3.0: New framebuffer query
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetFramebufferParameterivEXT",
 		"",
 
@@ -2487,7 +2487,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// OpenGL 3.0: New buffer data copy command
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"NamedCopyBufferSubDataEXT",
 		"",
 
@@ -2504,7 +2504,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     framebuffer"
 	 */
 
-	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid(
 		"NamedFramebufferTextureEXT",
 		"",
 
@@ -2514,7 +2514,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("level", "")
 	)
 
-	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid(
 		"NamedFramebufferTextureLayerEXT",
 		"",
 
@@ -2525,7 +2525,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("layer", "")
 	)
 
-	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid.func(
+	DependsOn("ext.contains(\"GL_EXT_geometry_shader4\") || ext.contains(\"GL_NV_gpu_program4\")") _ GLvoid(
 		"NamedFramebufferTextureFaceEXT",
 		"",
 
@@ -2542,7 +2542,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter
 	 */
 
-	DependsOn("GL_NV_explicit_multisample") _ GLvoid.func(
+	DependsOn("GL_NV_explicit_multisample") _ GLvoid(
 		"TextureRenderbufferEXT",
 		"",
 
@@ -2557,7 +2557,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     parameter (to identify the texture unit)
 	 */
 
-	DependsOn("GL_NV_explicit_multisample") _ GLvoid.func(
+	DependsOn("GL_NV_explicit_multisample") _ GLvoid(
 		"MultiTexRenderbufferEXT",
 		"",
 
@@ -2573,7 +2573,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and change the final parameter from "const void *" to "intptr offset"
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayVertexOffsetEXT",
 		"",
 
@@ -2585,7 +2585,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayColorOffsetEXT",
 		"",
 
@@ -2597,7 +2597,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayEdgeFlagOffsetEXT",
 		"",
 
@@ -2607,7 +2607,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayIndexOffsetEXT",
 		"",
 
@@ -2618,7 +2618,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayNormalOffsetEXT",
 		"",
 
@@ -2629,7 +2629,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayTexCoordOffsetEXT",
 		"",
 
@@ -2641,7 +2641,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayMultiTexCoordOffsetEXT",
 		"",
 
@@ -2654,7 +2654,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayFogCoordOffsetEXT",
 		"",
 
@@ -2665,7 +2665,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArraySecondaryColorOffsetEXT",
 		"",
 
@@ -2677,7 +2677,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayVertexAttribOffsetEXT",
 		"",
 
@@ -2691,7 +2691,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"VertexArrayVertexAttribIOffsetEXT",
 		"",
 
@@ -2710,7 +2710,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     "uint vaobj" parameter
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"EnableVertexArrayEXT",
 		"",
 
@@ -2718,7 +2718,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("array", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"DisableVertexArrayEXT",
 		"",
 
@@ -2732,7 +2732,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     and add an initial "uint vaobj" parameter
 	 */
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"EnableVertexArrayAttribEXT",
 		"",
 
@@ -2740,7 +2740,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("index", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"DisableVertexArrayAttribEXT",
 		"",
 
@@ -2750,7 +2750,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 	// OpenGL 3.0: New queries for vertex array objects
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetVertexArrayIntegervEXT",
 		"",
 
@@ -2759,7 +2759,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("param", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetVertexArrayPointervEXT",
 		"",
 
@@ -2768,7 +2768,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLvoid_pp.OUT("param", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetVertexArrayIntegeri_vEXT",
 		"",
 
@@ -2778,7 +2778,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		mods(Check(1), returnValue) _ GLint_p.OUT("param", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"GetVertexArrayPointeri_vEXT",
 		"",
 
@@ -2793,7 +2793,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
     in name and replace "enum target" parameter with "uint buffer"
 	 */
 
-	DependsOn("OpenGL30") _ (MapPointer("length") _ GLvoid_p).func(
+	DependsOn("OpenGL30") _ (MapPointer("length") _ GLvoid_p)(
 		"MapNamedBufferRangeEXT",
 		"",
 
@@ -2803,7 +2803,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLbitfield.IN("access", "")
 	)
 
-	DependsOn("OpenGL30") _ GLvoid.func(
+	DependsOn("OpenGL30") _ GLvoid(
 		"FlushMappedNamedBufferRangeEXT",
 		"",
 

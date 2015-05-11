@@ -15,7 +15,7 @@ val joystick = "Joystick".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to &ltlinux/joystick.h&gt;."
 
-	IntConstant.block(
+	IntConstant(
 		"Types and constants for reading from /dev/js",
 
 		"JS_EVENT_BUTTON" _ 0x01,
@@ -23,10 +23,10 @@ val joystick = "Joystick".nativeClass(LINUX_PACKAGE) {
 		"JS_EVENT_INIT" _ 0x80
 	)
 
-	macro _ int.func("JSIOCGVERSION", "IOCTL command: get driver version.")
-	macro _ int.func("JSIOCGAXES", "IOCTL command: get number of axes.")
-	macro _ int.func("JSIOCGBUTTONS", "IOCTL command: get number of buttons.")
+	macro _ int("JSIOCGVERSION", "IOCTL command: get driver version.")
+	macro _ int("JSIOCGAXES", "IOCTL command: get number of axes.")
+	macro _ int("JSIOCGBUTTONS", "IOCTL command: get number of buttons.")
 
-	int.func("JSIOCGNAME", "IOCTL command: get identifier string.", int.IN("len", "the string length"))
+	int("JSIOCGNAME", "IOCTL command: get identifier string.", int.IN("len", "the string length"))
 
 }

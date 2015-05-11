@@ -31,7 +31,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		Requires ${GL15.core}, ${GLX13.glx}, ${registryLinkTo("EXT", "framebuffer_object")} and ${GLX_ARB_get_proc_address.link}.
 		"""
 
-	val properties = IntConstant.block(
+	val properties = IntConstant(
 		"Accepted by the {@code property} parameter of #GetGPUInfoAMD().",
 
 		"GPU_VENDOR_AMD" _ 0x1F00,
@@ -46,7 +46,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		"GPU_NUM_SPI_AMD" _ 0x21A8
 	).javaDocLinks
 
-	void.func(
+	void(
 		"BlitContextFramebufferAMD",
 		"",
 
@@ -63,7 +63,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		GLenum.IN("filter", "")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateAssociatedContextAMD",
 		"Creates an associated context.",
 
@@ -71,7 +71,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		GLXContext.IN("share_list", "")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateAssociatedContextAttribsAMD",
 		"Creates an associated context and requests a specific GL version.",
 
@@ -80,26 +80,26 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		const _ int_p.IN("attribList", "")
 	)
 
-	Bool.func(
+	Bool(
 		"DeleteAssociatedContextAMD",
 		"Deletes an associated context.",
 
 		GLXContext.IN("ctx", "the GLXContext")
 	)
 
-	unsigned_int.func(
+	unsigned_int(
 		"GetContextGPUIDAMD",
 		"Determines which GPU a context is attached to.",
 
 		GLXContext.IN("ctx", "the GLXContext")
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"GetCurrentAssociatedContextAMD",
 		"Queries the crrent associated context."
 	)
 
-	unsigned_int.func(
+	unsigned_int(
 		"GetGPUIDsAMD",
 		"Queries the IDs for available GPUs.",
 
@@ -107,7 +107,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		unsigned_int.IN("ids", "")
 	)
 
-	int.func(
+	int(
 		"GetGPUInfoAMD",
 		"Queries GPU properties.",
 
@@ -118,7 +118,7 @@ val GLX_AMD_gpu_association = "GLXAMDGPUAssociation".nativeClassGLX("GLX_AMD_gpu
 		void_p.IN("data", "")
 	)
 
-	Bool.func(
+	Bool(
 		"MakeAssociatedContextCurrentAMD",
 		"Makes an associated context current in the current thread.",
 

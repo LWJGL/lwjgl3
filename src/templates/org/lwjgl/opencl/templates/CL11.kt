@@ -16,7 +16,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 
 	documentation = "The core OpenCL 1.1 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"Error Codes.",
 
 		"MISALIGNED_SUB_BUFFER_OFFSET" expr "-13",
@@ -24,13 +24,13 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"INVALID_PROPERTY" expr "-64"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"OpenCL Version.",
 
 		"VERSION_1_1" _ 0x1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_info.",
 
 		"DEVICE_PREFERRED_VECTOR_WIDTH_HALF" _ 0x1034,
@@ -45,19 +45,19 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"DEVICE_OPENCL_C_VERSION" _ 0x103D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_fp_config - bitfield.",
 
 		"FP_SOFT_FLOAT" expr "1 << 6"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_context_info.",
 
 		"CONTEXT_NUM_DEVICES" _ 0x1083
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_channel_order.",
 
 		"Rx" _ 0x10BA,
@@ -65,33 +65,33 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"RGBx" _ 0x10BC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_info.",
 
 		"MEM_ASSOCIATED_MEMOBJECT" _ 0x1107,
 		"MEM_OFFSET" _ 0x1108
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_addressing_mode.",
 
 		"ADDRESS_MIRRORED_REPEAT" _ 0x1134
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_work_group_info.",
 
 		"KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE" _ 0x11B3,
 		"KERNEL_PRIVATE_MEM_SIZE" _ 0x11B4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_event_info.",
 
 		"EVENT_CONTEXT" _ 0x11D4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_type.",
 
 		"COMMAND_READ_BUFFER_RECT" _ 0x1201,
@@ -100,13 +100,13 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"COMMAND_USER" _ 0x1204
 	)
 
-	val BufferCreateType = IntConstant.block(
+	val BufferCreateType = IntConstant(
 		"cl_buffer_create_type.",
 
 		"BUFFER_CREATE_TYPE_REGION" _ 0x1220
 	).javaDocLinks
 
-	cl_mem.func(
+	cl_mem(
 		"CreateSubBuffer",
 		"""
 		Creates a new buffer object (referred to as a sub-buffer object) from an existing buffer object.
@@ -176,7 +176,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetMemObjectDestructorCallback",
 		"""
 		Registers a user callback function with a memory object. Each call to {@code clSetMemObjectDestructorCallback} registers the specified user callback
@@ -258,7 +258,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueReadBufferRect",
 		"""
 		Enqueues a command to read a 2D or 3D rectangular region from a buffer object to host memory.
@@ -337,7 +337,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWriteBufferRect",
 		"""
 		Enqueues a command to write a 2D or 3D rectangular region to a buffer object from host memory.
@@ -415,7 +415,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueCopyBufferRect",
 		"""
 		Enqueues a command to copy a 2D or 3D rectangular region from the buffer object identified by {@code src_buffer} to a 2D or 3D region in the buffer
@@ -533,7 +533,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_event.func(
+	cl_event(
 		"CreateUserEvent",
 		"""
 		Creates a user event object. User events allow applications to enqueue commands that wait on a user event to finish before the command is executed by
@@ -557,7 +557,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetUserEventStatus",
 		"""
 		Sets the execution status of a user event object.
@@ -607,7 +607,7 @@ clReleaseMemObject(buf2);
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetEventCallback",
 		"""
 		Registers a user callback function for a specific command execution status. The registered callback function will be called when the execution status of

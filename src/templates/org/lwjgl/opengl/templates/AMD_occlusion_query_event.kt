@@ -23,7 +23,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		Requires ${GL15.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} argument to #QueryObjectParameteruiAMD(), GL15#GetQueryObjectiv(), GL15#GetQueryObjectuiv(),
 		GL33#GetQueryObjecti64v(), and GL33#GetQueryObjectui64v().
@@ -32,7 +32,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		"OCCLUSION_QUERY_EVENT_MASK_AMD" _ 0x874F
 	)
 
-	val params = IntConstant.block(
+	val params = IntConstant(
 		"Accepted by the {@code param} argument to #QueryObjectParameteruiAMD().",
 
 		"QUERY_DEPTH_PASS_EVENT_BIT_AMD" _ 0x00000001,
@@ -42,7 +42,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		"QUERY_ALL_EVENT_BITS_AMD" expr "0xFFFFFFFF"
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"QueryObjectParameteruiAMD",
 		"Changes the value of a query object parameter.",
 

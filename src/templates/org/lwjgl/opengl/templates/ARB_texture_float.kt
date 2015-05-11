@@ -19,7 +19,7 @@ val ARB_texture_float = "ARBTextureFloat".nativeClassGL("ARB_texture_float", pos
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_RED_TYPE_ARB" _ 0x8C10,
@@ -31,13 +31,13 @@ val ARB_texture_float = "ARBTextureFloat".nativeClassGL("ARB_texture_float", pos
 		"TEXTURE_DEPTH_TYPE_ARB" _ 0x8C16
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code params} parameter of GetTexLevelParameter.",
 
 		"UNSIGNED_NORMALIZED_ARB" _ 0x8C17
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
 		"RGBA32F_ARB" _ 0x8814,

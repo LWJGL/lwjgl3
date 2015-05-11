@@ -18,7 +18,7 @@ val ARB_texture_gather = "ARBTextureGather".nativeClassGL("ARB_texture_gather", 
 		${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB" _ 0x8E5E,

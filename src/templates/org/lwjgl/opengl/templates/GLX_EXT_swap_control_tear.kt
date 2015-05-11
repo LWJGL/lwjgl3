@@ -19,7 +19,7 @@ val GLX_EXT_swap_control_tear = "GLXEXTSwapControlTear".nativeClassGLX("GLX_EXT_
 		Requires ${GLX_EXT_swap_control.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by GLX13#QueryDrawable().",
 
 		"LATE_SWAPS_TEAR_EXT" _ 0x20F3

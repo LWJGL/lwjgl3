@@ -40,7 +40,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		${GL13.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.",
 
 		"COMPRESSED_ALPHA_ARB" _ 0x84E9,
@@ -51,20 +51,20 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		"COMPRESSED_RGBA_ARB" _ 0x84EE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of Hint and the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
 		"TEXTURE_COMPRESSION_HINT_ARB" _ 0x84EF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_COMPRESSED_IMAGE_SIZE_ARB" _ 0x86A0,
 		"TEXTURE_COMPRESSED_ARB" _ 0x86A1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
 		"NUM_COMPRESSED_TEXTURE_FORMATS_ARB" _ 0x86A2,
@@ -74,7 +74,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 	// KHR_texture_compression_astc_ldr formats are only accepted in CompressedTexImage* functions
 	val CompressTexImageFormats = "$SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS @##KHRTextureCompressionASTCLDR"
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexImage3DARB",
 		"Specifies a three-dimensional texture image in a compressed format.",
 
@@ -89,7 +89,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexImage2DARB",
 		"Specifies a two-dimensional texture image in a compressed format.",
 
@@ -103,7 +103,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexImage1DARB",
 		"Specifies a one-dimensional texture image in a compressed format.",
 
@@ -116,7 +116,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexSubImage3DARB",
 		"Respecifies only a cubic subregion of an existing 3D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -133,7 +133,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexSubImage2DARB",
 		"Respecifies only a rectangular subregion of an existing 2D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -148,7 +148,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CompressedTexSubImage1DARB",
 		"Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -161,7 +161,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetCompressedTexImageARB",
 		"Returns a compressed texture image.",
 

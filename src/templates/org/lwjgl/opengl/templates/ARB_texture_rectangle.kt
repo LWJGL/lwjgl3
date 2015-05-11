@@ -31,7 +31,7 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		This extension adds a new texture target and related state (proxy, binding, max texture size).
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable and IsEnabled; by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and
 		GetDoublev; and by the {@code target} parameter of BindTexture, GetTexParameterfv, GetTexParameteriv, TexParameterf, TexParameteri, TexParameterfv and
@@ -41,25 +41,25 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		"TEXTURE_RECTANGLE_ARB" _ 0x84F5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.",
 
 		"TEXTURE_BINDING_RECTANGLE_ARB" _ 0x84F6
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D.",
 
 		"PROXY_TEXTURE_RECTANGLE_ARB" _ 0x84F7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
 		"MAX_RECTANGLE_TEXTURE_SIZE_ARB" _ 0x84F8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		TEXTURE_RECTANGLE_ARB Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of
 		type sampler2DRect.
@@ -68,7 +68,7 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		"SAMPLER_2D_RECT_ARB" _ 0x8B63
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by {@code type} parameter of GetActiveUniform when the location {@code index} for program object {@code program} is of type
 		sampler2DRectShadow.

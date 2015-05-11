@@ -26,19 +26,19 @@ val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassGL("N
     alpha-to-coverage.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
 		"FRAGMENT_COVERAGE_TO_COLOR_NV" _ 0x92DD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"FRAGMENT_COVERAGE_COLOR_NV" _ 0x92DE
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FragmentCoverageColorNV",
 		"",
 

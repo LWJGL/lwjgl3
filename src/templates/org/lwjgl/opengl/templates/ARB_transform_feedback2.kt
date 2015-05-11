@@ -29,13 +29,13 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
 		${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindTransformFeedback.",
 
 		"TRANSFORM_FEEDBACK" _ 0x8E22
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"TRANSFORM_FEEDBACK_BUFFER_PAUSED" _ 0x8E23,

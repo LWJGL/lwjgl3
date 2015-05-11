@@ -28,7 +28,7 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
 		Requires ${GL32.core} or ${registryLinkTo("EXT", "geometry_shader4")} or ${ARB_geometry_shader4.link}. ${GL41.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_VIEWPORTS" _ 0x825B,
@@ -38,7 +38,7 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
 		"VIEWPORT_INDEX_PROVOKING_VERTEX" _ 0x825F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.",
 
 		"UNDEFINED_VERTEX" _ 0x8260

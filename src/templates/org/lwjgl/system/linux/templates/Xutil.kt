@@ -16,7 +16,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to &lt;X11/Xutil.h&gt;."
 
-	IntConstant.block(
+	IntConstant(
 		"Definition for flags of ##XWMHints",
 
 		"InputHint" expr "1 << 0",
@@ -30,7 +30,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"XUrgencyHint" expr "1 << 8"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Definitions for initial window state",
 
 		"WithdrawnState" _ 0,
@@ -38,7 +38,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"IconicState" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"flags argument in size hints",
 
 		"USPosition" expr "1 << 0",
@@ -53,7 +53,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"PWinGravity" expr "1 << 9"
 	)
 
-	int.func(
+	int(
 		"XLookupString",
 		"""
 		Translates a key event to a {@code KeySym} and a string. The {@code KeySym} is obtained by using the standard interpretation of the Shift, Lock, group,
@@ -77,7 +77,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		XComposeStatus_p.IN("status_in_out", "specifies or returns the ##XComposeStatus structure or $NULL.")
 	)
 
-	XWMHints_p.func(
+	XWMHints_p(
 		"XAllocWMHints",
 		"""
 		Allocates and returns a pointer to a ##XWMHints structure. Note that all fields in the ##XWMHints structure are initially set to zero. If
@@ -85,7 +85,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	XSizeHints_p.func(
+	XSizeHints_p(
 		"XAllocSizeHints",
 		"""
 		Allocates and returns a pointer to a ##XSizeHints structure. Note that all fields in the ##XSizeHints structure are initially set to zero.
@@ -93,12 +93,12 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	XContext.func(
+	XContext(
 		"XUniqueContext",
 		"Creates a unique context."
 	)
 
-	int.func(
+	int(
 		"XSaveContext",
 		"Save a data value that corresponds to a resource ID and context type.",
 
@@ -108,7 +108,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		const _ XPointer.IN("data", "the data to be associated with the window and type")
 	)
 
-	int.func(
+	int(
 		"XFindContext",
 		"Returns the data associated with a resource ID and type.",
 
@@ -118,7 +118,7 @@ val Xutil = "Xutil".nativeClass(LINUX_PACKAGE) {
 		XPointer_p.OUT("data_return", "returns the data")
 	)
 
-	int.func(
+	int(
 		"XDeleteContext",
 		"Deletes an entry for the specified resource ID and type.",
 

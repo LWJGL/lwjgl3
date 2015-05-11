@@ -22,7 +22,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 		Requires ${NV_bindless_multi_draw_indirect.link}, ${ARB_indirect_parameters.link}.
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawArraysIndirectBindlessCountNV",
 		"""
 		Behaves similarly to NVBindlessMultiDrawIndirect#MultiDrawArraysIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into
@@ -39,7 +39,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 		GLint.IN("vertexBufferCount", "the number of vertex buffers in the DrawArraysIndirectBindlessCommandNV structure")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElementsIndirectBindlessCountNV",
 		"""
 		Behaves similarly to NVBindlessMultiDrawIndirect#MultiDrawElementsIndirectBindlessNV(), except that {@code drawCount} defines an offset (in bytes) into

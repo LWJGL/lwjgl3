@@ -11,7 +11,7 @@ val WinError = "WinError".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to WinError.h."
 
-	IntConstant.block(
+	IntConstant(
 		"Success codes.",
 
 		"S_OK" _ 0,

@@ -18,7 +18,7 @@ val KHR_blend_equation_advanced_coherent = "KHRBlendEquationAdvancedCoherent".na
 		Requires ${GL20.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv,
 		GetDoublev and GetInteger64v.

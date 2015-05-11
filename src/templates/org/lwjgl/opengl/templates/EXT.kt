@@ -16,7 +16,7 @@ val EXT_abgr = "EXTABGR".nativeClassGL("EXT_abgr", postfix = EXT) {
 		order matches the cpack Iris GL format on big-endian machines.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
 		"ABGR_EXT" _ 0x8000
@@ -34,7 +34,7 @@ val EXT_bgra = "EXTBGRA".nativeClassGL("EXT_bgra", postfix = EXT) {
 		${GL12.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
 		"BGR_EXT" _ 0x80E0,
@@ -63,7 +63,7 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 		'environment uniforms', uniform values that can be shared among multiple program objects.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_BINDABLE_UNIFORMS_EXT" _ 0x8DE2,
@@ -73,13 +73,13 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 		"UNIFORM_BUFFER_BINDING_EXT" _ 0x8DEF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"UNIFORM_BUFFER_EXT" _ 0x8DEE
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"UniformBufferEXT",
 		"",
 
@@ -88,7 +88,7 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 		GLuint.IN("buffer", "")
 	)
 
-	GLint.func(
+	GLint(
 		"GetUniformBufferSizeEXT",
 		"",
 
@@ -96,7 +96,7 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 		GLint.IN("location", "")
 	)
 
-	GLintptr.func(
+	GLintptr(
 		"GetUniformOffsetEXT",
 		"",
 
@@ -120,7 +120,7 @@ val EXT_blend_color = "EXTBlendColor".nativeClassGL("EXT_blend_color", postfix =
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.",
 
 		"CONSTANT_COLOR_EXT" _ 0x8001,
@@ -129,13 +129,13 @@ val EXT_blend_color = "EXTBlendColor".nativeClassGL("EXT_blend_color", postfix =
 		"ONE_MINUS_CONSTANT_ALPHA_EXT" _ 0x8004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_COLOR_EXT" _ 0x8005
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendColorEXT",
 		"",
 
@@ -168,14 +168,14 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
 		${registryLinkTo("EXT_blend_subtract", "blend_subtract")}. ${GL20.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_EQUATION_RGB_EXT" _ 0x8009,
 		"BLEND_EQUATION_ALPHA_EXT" _ 0x883D
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendEquationSeparateEXT",
 		"",
 
@@ -199,7 +199,7 @@ val EXT_blend_func_separate = "EXTBlendFuncSeparate".nativeClassGL("EXT_blend_fu
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_DST_RGB_EXT" _ 0x80C8,
@@ -208,7 +208,7 @@ val EXT_blend_func_separate = "EXTBlendFuncSeparate".nativeClassGL("EXT_blend_fu
 		"BLEND_SRC_ALPHA_EXT" _ 0x80CB
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendFuncSeparateEXT",
 		"",
 
@@ -237,7 +237,7 @@ val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGL("EXT_blend_minmax", postfi
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquationEXT.",
 
 		"FUNC_ADD_EXT" _ 0x8006,
@@ -245,13 +245,13 @@ val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGL("EXT_blend_minmax", postfi
 		"MAX_EXT" _ 0x8008
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"BLEND_EQUATION_EXT" _ 0x8009
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlendEquationEXT",
 		"",
 
@@ -271,7 +271,7 @@ val EXT_blend_subtract = "EXTBlendSubtract".nativeClassGL("EXT_blend_subtract", 
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquationEXT.",
 
 		"FUNC_SUBTRACT_EXT" _ 0x800A,
@@ -312,7 +312,7 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
 		illumination for the pixel is fully attenuated. The depth bounds test can perform this test.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -321,13 +321,13 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
 		"DEPTH_BOUNDS_TEST_EXT" _ 0x8890
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"DEPTH_BOUNDS_EXT" _ 0x8891
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DepthBoundsEXT",
 		"",
 
@@ -352,7 +352,7 @@ val EXT_framebuffer_blit = "EXTFramebufferBlit".nativeClassGL("EXT_framebuffer_b
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindFramebufferEXT, CheckFramebufferStatusEXT, FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT,
 		and GetFramebufferAttachmentParameterivEXT.
@@ -362,14 +362,14 @@ val EXT_framebuffer_blit = "EXTFramebufferBlit".nativeClassGL("EXT_framebuffer_b
 		"DRAW_FRAMEBUFFER_EXT" _ 0x8CA9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"DRAW_FRAMEBUFFER_BINDING_EXT" _ 0x8CA6,
 		"READ_FRAMEBUFFER_BINDING_EXT" _ 0x8CAA
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlitFramebufferEXT",
 		"",
 
@@ -436,7 +436,7 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
 		${GL30.promoted}
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"RenderbufferStorageMultisampleEXT",
 		"",
 
@@ -447,19 +447,19 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
 		GLsizei.IN("height", "")
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
 
 		"RENDERBUFFER_SAMPLES_EXT" _ 0x8CAB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatusEXT.",
 
 		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT" _ 0x8D56
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_SAMPLES_EXT" _ 0x8D57
@@ -490,7 +490,7 @@ val EXT_framebuffer_multisample_blit_scaled = "EXTFramebufferMultisampleBlitScal
 		Requires ${ARB_framebuffer_object.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code filter} parameter of BlitFramebuffer.",
 
 		"SCALED_RESOLVE_FASTEST_EXT" _ 0x90BA,
@@ -522,7 +522,7 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -531,7 +531,7 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 		"FRAMEBUFFER_SRGB_EXT" _ 0x8DB9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x8DBA
@@ -591,7 +591,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		Requires ${EXT_framebuffer_object.link}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage, by the {@code type} parameter of CopyPixels, by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D,
@@ -601,7 +601,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		"DEPTH_STENCIL_EXT" _ 0x84F9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage.
@@ -610,7 +610,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		"UNSIGNED_INT_24_8_EXT" _ 0x84FA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT, and
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
@@ -619,7 +619,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		"DEPTH24_STENCIL8_EXT" _ 0x88F0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_STENCIL_SIZE_EXT" _ 0x88F1
@@ -645,13 +645,13 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
 
 		"R11F_G11F_B10F_EXT" _ 0x8C3A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
@@ -661,7 +661,7 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 		"UNSIGNED_INT_10F_11F_11F_REV_EXT" _ 0x8C3B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"RGBA_SIGNED_COMPONENTS_EXT" _ 0x8C3C
@@ -715,7 +715,7 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		The new point size derivation method applies to all points, while the threshold applies to multisample points only.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of glPointParameterfvEXT, and the {@code pname} of glGet.",
 
 		"POINT_SIZE_MIN_EXT" _ 0x8126,
@@ -724,7 +724,7 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		"DISTANCE_ATTENUATION_EXT" _ 0x8129
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameterfEXT",
 		"",
 
@@ -732,7 +732,7 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		GLfloat.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameterfvEXT",
 		"",
 
@@ -754,7 +754,7 @@ val EXT_shared_texture_palette = "EXTSharedTexturePalette".nativeClassGL("EXT_sh
 		Requires ${registryLinkTo("EXT", "paletted_texture")}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, IsEnabled, Enable, Disable, ColorTableEXT,
 		ColorSubTableEXT, GetColorTableEXT, GetColorTableParameterivEXT, and GetColorTableParameterfd EXT.
@@ -783,7 +783,7 @@ val EXT_stencil_wrap = "EXTStencilWrap".nativeClassGL("EXT_stencil_wrap", postfi
 		${GL14.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code sfail}, {@code dpfail}, and {@code dppass} parameter of StencilOp.",
 
 		"INCR_WRAP_EXT" _ 0x8507,
@@ -807,7 +807,7 @@ val EXT_texture_compression_latc = "EXTTextureCompressionLATC".nativeClassGL("EX
 		Requires ${GL13.core} or ${ARB_texture_compression.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
 		CompressedTexSubImage2D.
@@ -840,7 +840,7 @@ val EXT_texture_compression_rgtc = "EXTTextureCompressionRGTC".nativeClassGL("EX
 		Requires ${GL13.core} or ${ARB_texture_compression.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
 		CompressedTexSubImage2D.
@@ -867,7 +867,7 @@ val EXT_texture_compression_s3tc = "EXTTextureCompressionS3TC".nativeClassGL("EX
 		Requires ${ARB_texture_compression.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
 		CompressedTexSubImage2D.
@@ -909,13 +909,13 @@ val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGL
 		GL11#LINEAR magnification filter, and a large maximum degree of anisotropy.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv, GetTexParameteriv, TexParameterf, TexParameterfv, TexParameteri, and TexParameteriv.",
 
 		"TEXTURE_MAX_ANISOTROPY_EXT" _ 0x84FE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
 		"MAX_TEXTURE_MAX_ANISOTROPY_EXT" _ 0x84FF
@@ -935,7 +935,7 @@ val EXT_texture_mirror_clamp = "EXTTextureMirrorClamp".nativeClassGL("EXT_textur
 		mode allows the texture to be mirrored only once in the negative s, t, and r directions.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
@@ -967,13 +967,13 @@ val EXT_texture_shared_exponent = "EXTTextureSharedExponent".nativeClassGL("EXT_
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
 
 		"RGB9_E5_EXT" _ 0x8C3D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
@@ -983,7 +983,7 @@ val EXT_texture_shared_exponent = "EXTTextureSharedExponent".nativeClassGL("EXT_
 		"UNSIGNED_INT_5_9_9_9_REV_EXT" _ 0x8C3E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
 		"TEXTURE_SHARED_SIZE_EXT" _ 0x8C3F
@@ -1006,7 +1006,7 @@ val EXT_texture_sRGB = "EXTTextureSRGB".nativeClassGL("EXT_texture_sRGB", postfi
 		${GL21.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D.",
 
 		"SRGB_EXT" _ 0x8C40,
@@ -1023,7 +1023,7 @@ val EXT_texture_sRGB = "EXTTextureSRGB".nativeClassGL("EXT_texture_sRGB", postfi
 		"COMPRESSED_SLUMINANCE_ALPHA_EXT" _ 0x8C4B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2DARB and the {@code format} parameter of
 		CompressedTexSubImage2DARB.

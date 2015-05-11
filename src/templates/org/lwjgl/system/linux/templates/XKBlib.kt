@@ -15,7 +15,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to XKBlib.h."
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		XkbUseCoreKbd is used to specify the core keyboard without having to look up its X input extension identifier.
 		XkbUseCorePtr is used to specify the core pointer without having to look up its X input extension identifier.
@@ -43,13 +43,13 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"XkbXINone" _ 0xff00
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"",
 
 		"XkbNumKbdGroups" _ 4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Assorted constants and limits.",
 
 		"XkbNumModifiers" _ 8,
@@ -66,7 +66,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"XkbMaxRedirectCount" _ 8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Mask bits for ##XkbDescRec.",
 
 		"XkbControlsMask" expr "1<<0",
@@ -79,7 +79,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		"XkbAllComponentsMask" _ 0x7F
 	)
 
-	Bool.func(
+	Bool(
 		"XkbQueryExtension",
 		"Determines the compatibility of a library at runtime.",
 
@@ -91,7 +91,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("minorRtrn", "compile time lib min version in, server minor version out")
 	)
 
-	Bool.func(
+	Bool(
 		"XkbSetDetectableAutoRepeat",
 		"Sets DetectableAutorepeat.",
 
@@ -100,7 +100,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		Bool_p.IN("supported", "backefilled with true if DetectableAutorepeat is supported")
 	)
 
-	KeySym.func(
+	KeySym(
 		"XkbKeycodeToKeysym",
 		"Finds the keysym bound to a particular key at a specified group and shift level.",
 
@@ -110,7 +110,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("level", "shift level of interest")
 	)
 
-	XkbDescPtr.func(
+	XkbDescPtr(
 		"XkbGetKeyboard",
 		"Allocates and returns a pointer to a keyboard description.",
 
@@ -119,7 +119,7 @@ val XKBlib = "XKBlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("deviceSpec", "the device to query")
 	)
 
-	void.func(
+	void(
 		"XkbFreeKeyboard",
 		"Destroys either an entire ##XkbDescRec or just some of its members.",
 

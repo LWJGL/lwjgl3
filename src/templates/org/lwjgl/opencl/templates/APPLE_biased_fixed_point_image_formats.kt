@@ -24,7 +24,7 @@ ushort float_to_sfixed14( float x ){
 		The inverse conversion is the reverse process. The formats are currently only available on the CPU with the CL10#RGBA channel layout.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"",
 
 		"SFIXED14_APPLE" _ 0x10000008,

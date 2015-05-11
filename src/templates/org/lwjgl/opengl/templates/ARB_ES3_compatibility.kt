@@ -19,7 +19,7 @@ val ARB_ES3_compatibility = "ARBES3Compatibility".nativeClassGL("ARB_ES3_compati
 		Requires ${GL33.core}, ${ARB_ES2_compatibility.link}, ${ARB_invalidate_subdata.link} and ${ARB_texture_storage.link}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
 
 		"COMPRESSED_RGB8_ETC2" _ 0x9274,
@@ -34,25 +34,25 @@ val ARB_ES3_compatibility = "ARBES3Compatibility".nativeClassGL("ARB_ES3_compati
 		"COMPRESSED_SIGNED_RG11_EAC" _ 0x9273
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of Enable and Disable.",
 
 		"PRIMITIVE_RESTART_FIXED_INDEX" _ 0x8D69
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
 
 		"ANY_SAMPLES_PASSED_CONSERVATIVE" _ 0x8D6A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of the GetInteger functions.",
 
 		"MAX_ELEMENT_INDEX" _ 0x8D6B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.",
 
 		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF

@@ -20,7 +20,7 @@ val ext_atomic_counters_32 = "EXTAtomicCounters32".nativeClassCL("ext_atomic_cou
 		This feature is highly useful for produce/consume to unordered queues.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().
 

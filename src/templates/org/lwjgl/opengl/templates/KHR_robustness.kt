@@ -33,7 +33,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by #GetGraphicsResetStatus().",
 
 		"NO_ERROR" _ 0x0000,
@@ -42,21 +42,21 @@ val KHR_robustness = "KHRRobustness".nativeClassGL("KHR_robustness") {
 		"UNKNOWN_CONTEXT_RESET" _ 0x8255
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
 		"CONTEXT_ROBUST_ACCESS" _ 0x90F3,
 		"RESET_NOTIFICATION_STRATEGY" _ 0x8256
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetIntegerv and related simple queries when {@code value} is #RESET_NOTIFICATION_STRATEGY.",
 
 		"LOSE_CONTEXT_ON_RESET" _ 0x8252,
 		"NO_RESET_NOTIFICATION" _ 0x8261
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GL11#GetError().",
 
 		"CONTEXT_LOST" _ 0x0507

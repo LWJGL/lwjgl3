@@ -28,7 +28,7 @@ val WGL_NV_delay_before_swap = "WGLNVDelayBeforeSwap".nativeClassWGL("WGL_NV_del
 		Requires ${GL21.core}.
 		"""
 
-	BOOL.func(
+	BOOL(
 		"DelayBeforeSwapNV",
 		"""
 		Blocks the CPU until {@code seconds} seconds before a synchronized swap would occur on the window associated with {@code hDC}. It also returns a boolean

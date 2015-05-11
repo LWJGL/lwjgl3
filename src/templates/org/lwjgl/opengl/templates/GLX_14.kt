@@ -16,14 +16,14 @@ val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 
 	documentation = "Native bindings to GLX 1.4."
 
-	IntConstant.block(
+	IntConstant(
 		"Added in GLX 1.4.",
 
 		"SAMPLE_BUFFERS" _ 0x186a0,
 		"SAMPLES" _ 0x186a1
 	)
 
-	voidptr.func(
+	voidptr(
 		"GetProcAddress",
 		"""
 		Returns the address of the extension function named by {@code procName}. The pointer returned should be cast to a function pointer type matching the

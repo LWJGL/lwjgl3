@@ -19,7 +19,7 @@ val NV_shader_thread_group = "NVShaderThreadGroup".nativeClassGL("NV_shader_thre
         Requires ${GL43.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"WARP_SIZE_NV" _ 0x9339,

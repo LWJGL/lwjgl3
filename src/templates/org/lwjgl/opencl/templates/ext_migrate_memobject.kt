@@ -19,19 +19,19 @@ val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_mem
 		This extension defines a mechanism for assigning which device an OpenCL memory object resides.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"This flag specifies that the specified set of memory objects are to be migrated to the host, regardless of the target command queue.",
 
 		"MIGRATE_MEM_OBJECT_HOST_EXT" _ 0x1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code param_value} parameter of the clGetEventInfo when {@code param_name} is CL10#EVENT_COMMAND_TYPE.",
 
 		"COMMAND_MIGRATE_MEM_OBJECT_EXT" _ 0x4040
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueMigrateMemObjectEXT",
 		"""
 		Provides the application with a way to indicate which device a set of memory objects should be associated. Typically, memory objects are implicitly

@@ -42,14 +42,14 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Boolean values",
 
 		"False" _ 0,
 	    "True" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Flags for #_Initialize()",
 
 		// When a debug library is requested, a slower debugging version of the library will
@@ -68,7 +68,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
         "Init_ForceNoDebug" _ 0x00000008
 	)
 
-	val LogLevels = IntConstant.block(
+	val LogLevels = IntConstant(
 		"Logging levels",
 
 		"LogLevel_Debug" _ 0,
@@ -76,7 +76,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"LogLevel_Error" _ 2
 	).javaDocLinks
 
-	val HMDType = IntConstant.block(
+	val HMDType = IntConstant(
 		"HMD types",
 
 		"Hmd_None" _ 0,
@@ -88,7 +88,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Hmd_Other" _ 9
 	).javaDocLinks
 
-	val HmdCaps = IntConstant.block(
+	val HmdCaps = IntConstant(
 		"HMD caps",
 
 		"HmdCap_Present" _ 0x0001, /// (read only) The HMD is plugged in and detected by the system.
@@ -118,7 +118,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)
 	).javaDocLinks
 
-	val TrackingCaps = IntConstant.block(
+	val TrackingCaps = IntConstant(
 		"Tracking capability bits reported by the device. Used with #Hmd_ConfigureTracking().",
 
 		"TrackingCap_Orientation" _ 0x0010,   /// Supports orientation tracking (IMU).
@@ -130,7 +130,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
         "TrackingCap_Idle" _ 0x0100
 	).javaDocLinks
 
-	val DistortionCaps = IntConstant.block(
+	val DistortionCaps = IntConstant(
 		"Distortion capability bits reported by device. Used with #Hmd_ConfigureRendering() and #Hmd_CreateDistortionMesh().",
 
 		"DistortionCap_Chromatic" _ 0x01, /// Supports chromatic aberration correction.
@@ -149,7 +149,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"DistortionCap_ProfileNoTimewarpSpinWaits" _ 0x10000 /// Use when profiling with timewarp to remove false positives
 	).javaDocLinks
 
-	val EyeType = IntConstant.block(
+	val EyeType = IntConstant(
 		"Eye types",
 
 		"Eye_left" _ 0,
@@ -157,7 +157,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Eye_Count" _ 2
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Bit flags describing the current status of sensor tracking.",
 
 		"Status_OrientationTracked" _ 0x0001, /// Orientation is currently tracked (connected and in use).
@@ -167,7 +167,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Status_HmdConnected" _ 0x0080    /// HMD Display is available and connected.
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Render API",
 
 	    "RenderAPI_None" _ 0,
@@ -179,14 +179,14 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"RenderAPI_Count" _ 6
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"_InitializeRenderingShimVersion",
 		"Same as #_InitializeRenderingShim() except it requests to support at least the given minor LibOVR library version.",
 
 	    int.IN("requestedMinorVersion", "the requested minor LibOVR library version")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"_InitializeRenderingShim",
 		"""
 		Initializes the rendering shim apart from everything else in LibOVR. This may be helpful if the application prefers to avoid creating any OVR resources
@@ -198,7 +198,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    """
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"_Initialize",
 		"""
 		Initializes all Oculus functionality. Pass $NULL to initialize with default parameters, suitable for released games.
@@ -221,23 +221,23 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		nullable _ ovrInitParams_const_p.IN("params", "an ##OVRInitParams structure")
 	)
 
-	void.func(
+	void(
 		"_Shutdown",
 		"Shuts down all Oculus functionality."
 	)
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"_GetVersionString",
 		"Returns version string representing libOVR version. Static, so string remains valid for app lifespan."
 	)
 
-	int.func(
+	int(
 		"Hmd_Detect",
 		"Detects or re-detects HMDs and reports the total number detected. Users can get information about each HMD by calling #Hmd_Create() with an index.",
 	    returnDoc = "the number of HMDs detected or -1 when the service is unreachable"
 	)
 
-	ovrHmd.func(
+	ovrHmd(
 		"Hmd_Create",
 		"""
 	    Creates a handle to an HMD which doubles as a description structure. Index can be ${code("[0 .. #Hmd_Detect()-1]")}. Index mappings can cange after each
@@ -247,21 +247,21 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		int.IN("index", "the HMD index")
 	)
 
-	void.func(
+	void(
 		"Hmd_Destroy",
 		"Destroys an HMD handle.",
 
 		ovrHmd.IN("hmd", "the HMD handle to destroy")
 	)
 
-	ovrHmd.func(
+	ovrHmd(
 		"Hmd_CreateDebug",
 		"Creates a 'fake' HMD used for debugging only. This is not tied to specific hardware, but may be used to debug some of the related rendering.",
 
 		ovrHmdType.IN("type", "the HMD type", HMDType)
 	)
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"Hmd_GetLastError",
 		"""
 	    Returns last error for HMD state. Returns null for no error. String is valid until next call of GetLastError or HMD is destroyed. Pass null {@code hmd}
@@ -271,7 +271,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		nullable _ ovrHmd.IN("hmd", "the HMD handle")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_AttachToWindow",
 		"""
 	    Platform specific function to specify the application window whose output will be displayed on the HMD. Only used if the #HmdCap_ExtendDesktop flag is
@@ -293,7 +293,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		mods(nullable, const) _ ovrRecti_p.IN("sourceRenderTargetRect", "")
 	)
 
-	unsigned_int.func(
+	unsigned_int(
 		"Hmd_GetEnabledCaps",
 		"""
 	    Returns capability bits that are enabled at this time as described by ovrHmdCaps. Note that this value is different from ovrHmdDesc::HmdCaps, which
@@ -303,7 +303,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		ovrHmd.IN("hmd", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_SetEnabledCaps",
 		"Modifies capability bits described by ovrHmdCaps that can be modified, such as #HmdCap_LowPersistence.",
 
@@ -311,7 +311,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		unsigned_int.IN("hmdCaps", "", HmdCaps)
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_ConfigureTracking",
 		"""
 		Starts sensor sampling, enabling specified capabilities, described by ovrTrackingCaps. Pass 0 for both {@code supportedTrackingCaps} and
@@ -337,14 +337,14 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)
 	)
 
-	void.func(
+	void(
 		"Hmd_RecenterPose",
 	    "Re-centers the sensor orientation. Normally this will recenter the (x,y,z) translational components and the yaw component of orientation.",
 
 	    ovrHmd.IN("hmd", "")
 	)
 
-	ovrTrackingState.func(
+	ovrTrackingState(
 		"Hmd_GetTrackingState",
 	    """
 		Returns tracking state reading based on the specified absolute system time. Pass an absTime value of 0.0 to request the most recent sensor reading. In
@@ -356,7 +356,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    double.IN("absTime", "")
 	)
 
-	ovrSizei.func(
+	ovrSizei(
 		"Hmd_GetFovTextureSize",
 		"""
 		Calculates the recommended viewport size for rendering a given eye within the HMD with a given FOV cone. Higher FOV will generally require larger
@@ -378,7 +378,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_ConfigureRendering",
 	    """
 	    Configures rendering and fills in computed render parameters. This function can be called multiple times to change rendering settings.
@@ -392,7 +392,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Check(2) _ ovrEyeRenderDesc_p.OUT("eyeRenderDescOut", "")
 	)
 
-	ovrFrameTiming.func(
+	ovrFrameTiming(
 		"Hmd_BeginFrame",
 	    """
 	    Begins a frame, returning timing information. This should be called at the beginning of the game rendering loop (on the render thread). Pass 0 for the
@@ -403,7 +403,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    unsigned_int.IN("frameIndex", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_EndFrame",
 	    """
 	    Ends a frame, submitting the rendered textures to the frame buffer.
@@ -424,7 +424,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		mods(Check(2), const) _ ovrTexture_p.IN("eyeTexture", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_GetEyePoses",
 	    """
 	    Returns predicted head pose in {@code outHmdTrackingState} and offset eye poses in {@code outEyePoses} as an atomic operation. Caller need not worry
@@ -451,7 +451,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    ovrTrackingState_p.OUT("outHmdTrackingState", "")
 	)
 
-	ovrPosef.func(
+	ovrPosef(
 		"Hmd_GetHmdPosePerEye",
 	    """
 		Returns the predicted head pose to use when rendering the specified eye.
@@ -467,7 +467,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    ovrEyeType.IN("eye", "")
 	)
 
-	ovrEyeRenderDesc.func(
+	ovrEyeRenderDesc(
 		"Hmd_GetRenderDesc",
 		"""
 		Computes the distortion viewport, view adjust, and other rendering parameters for the specified eye. This can be used instead of
@@ -479,7 +479,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		ovrFovPort.IN("fov", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_CreateDistortionMesh",
 		"""
 		Generate distortion mesh per eye. Distortion capabilities will depend on 'distortionCaps' flags. Users should render using the appropriate shaders
@@ -496,7 +496,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		ovrDistortionMesh_p.OUT("meshData", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_CreateDistortionMeshDebug",
 		"Debug version of #Hmd_CreateDistortionMesh().",
 
@@ -508,14 +508,14 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		float.IN("debugEyeReliefOverrideInMetres", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_DestroyDistortionMesh",
 		"Used to free the distortion mesh allocated by #Hmd_CreateDistortionMesh(). {@code meshData} elements are set to null and zeroes after the call.",
 
 		ovrDistortionMesh_p.OUT("meshData", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_GetRenderScaleAndOffset",
 		"""
 		Computes updated 'uvScaleOffsetOut' to be used with a distortion if render target size or viewport changes after the fact. This can be used to adjust
@@ -528,7 +528,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Check(2) _ ovrVector2f_p.OUT("uvScaleOffsetOut", "")
 	)
 
-	ovrFrameTiming.func(
+	ovrFrameTiming(
 		"Hmd_GetFrameTiming",
 		"""
 		Thread-safe timing function for the main thread. Caller should increment frameIndex with every frame and pass the index where applicable to functions
@@ -539,7 +539,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		unsigned_int.IN("frameIndex", "")
 	)
 
-	ovrFrameTiming.func(
+	ovrFrameTiming(
 		"Hmd_BeginFrameTiming",
 		"""
 		Called at the beginning of the frame on the rendering thread. Pass frameIndex == 0 if #Hmd_GetFrameTiming() isn't being used. Otherwise, pass the same
@@ -550,7 +550,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		unsigned_int.IN("frameIndex", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_EndFrameTiming",
 		"""
 		Marks the end of client distortion rendered frame, tracking the necessary timing information. This function must be called immediately after
@@ -560,7 +560,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		ovrHmd.IN("hmd", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_ResetFrameTiming",
 		"""
 		Initializes and resets frame time tracking. This is typically not necessary, but is helpful if game changes vsync state or video mode. vsync is assumed
@@ -571,7 +571,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		unsigned_int.IN("frameIndex", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_GetEyeTimewarpMatrices",
 		"""
 		Computes timewarp matrices used by distortion mesh shader, these are used to adjust for head orientation change since the last call to
@@ -589,7 +589,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Check(2) _ ovrMatrix4f_p.OUT("twmOut", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_GetEyeTimewarpMatricesDebug",
 		"Debug version of #Hmd_GetEyeTimewarpMatrices().",
 
@@ -601,12 +601,12 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		double.IN("debugTimingOffsetInSeconds", "")
 	)
 
-	double.func(
+	double(
 		"_GetTimeInSeconds",
 		"Returns global, absolute high-resolution time in seconds. This is the same value as used in sensor messages."
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_ProcessLatencyTest",
 		"Does latency test processing and returns 'TRUE' if specified rgb color should be used to clear the screen.",
 
@@ -614,14 +614,14 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Check(3) _ unsigned_char_p.OUT("rgbColorOut", "")
 	)
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"Hmd_GetLatencyTestResult",
 		"Returns non-null string once with latency test result, when it is available. Buffer is valid until next call.",
 
 		ovrHmd.IN("hmd", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_GetLatencyTest2DrawColor",
 		"""
 		Returns the latency testing color in rgbColorOut to render when using a DK2. Returns false if this feature is disabled or not-applicable (e.g. using a
@@ -632,7 +632,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Check(3) _ unsigned_char_p.OUT("rgbColorOut", "")
 	)
 
-	void.func(
+	void(
 		"Hmd_GetHSWDisplayState",
 		"""
 		Returns the current state of the HSW display. If the application is doing the rendering of the HSW display then this function serves to indicate that
@@ -657,7 +657,7 @@ if (hswDisplayState.Displayed && !HSWDisplayCurrentlyDisplayed) {
 	)
 
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_DismissHSWDisplay",
 		"""
 		Requests a dismissal of the HSWDisplay at the earliest possible time, which may be seconds into the future due to display longevity requirements.
@@ -675,7 +675,7 @@ void ProcessEvent(int key) {
 	    returnDoc = "true if the display is valid, in which case the request can always be honored"
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_GetBool",
 		"Get boolean property. Returns first element if property is a boolean array. Returns defaultValue if property doesn't exist.",
 
@@ -684,7 +684,7 @@ void ProcessEvent(int key) {
 		ovrBool.IN("defaultVal", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_SetBool",
 		"Modify bool property; false if property doesn't exist or is readonly.",
 
@@ -693,7 +693,7 @@ void ProcessEvent(int key) {
 		ovrBool.IN("value", "")
 	)
 
-	int.func(
+	int(
 		"Hmd_GetInt",
 		"Get integer property. Returns first element if property is an integer array. Returns defaultValue if property doesn't exist.",
 
@@ -702,7 +702,7 @@ void ProcessEvent(int key) {
 		int.IN("defaultVal", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_SetInt",
 		"Modify integer property; false if property doesn't exist or is readonly.",
 
@@ -711,7 +711,7 @@ void ProcessEvent(int key) {
 		int.IN("value", "")
 	)
 
-	float.func(
+	float(
 		"Hmd_GetFloat",
 		"Get float property. Returns first element if property is a float array. Returns defaultValue if property doesn't exist.",
 
@@ -720,7 +720,7 @@ void ProcessEvent(int key) {
 		float.IN("defaultVal", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_SetFloat",
 		"Modify float property; false if property doesn't exist or is readonly.",
 
@@ -729,7 +729,7 @@ void ProcessEvent(int key) {
 		float.IN("value", "")
 	)
 
-	unsigned_int.func(
+	unsigned_int(
 		"Hmd_GetFloatArray",
 		"Get float[] property. Returns the number of elements filled in, 0 if property doesn't exist. Maximum of arraySize elements will be written.",
 
@@ -739,7 +739,7 @@ void ProcessEvent(int key) {
 		AutoSize("values") _ unsigned_int.IN("arraySize", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_SetFloatArray",
 		"Modify float[] property; false if property doesn't exist or is readonly.",
 
@@ -749,7 +749,7 @@ void ProcessEvent(int key) {
 		AutoSize("values") _ unsigned_int.IN("arraySize", "")
 	)
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"Hmd_GetString",
 		"""
 		Get string property. Returns first element if property is a string array. Returns defaultValue if property doesn't exist. String memory is guaranteed
@@ -761,7 +761,7 @@ void ProcessEvent(int key) {
 		const _ charASCII_p.IN("defaultVal", "")
 	)
 
-	ovrBool.func(
+	ovrBool(
 		"Hmd_SetString",
 		"Set string property",
 
@@ -770,7 +770,7 @@ void ProcessEvent(int key) {
 		const _ charASCII_p.IN("value", "")
 	)
 
-	int.func(
+	int(
 		"_TraceMessage",
 	    "Sends a message string to the system tracing mechanism if enabled (currently Event Tracing for Windows)",
 

@@ -34,7 +34,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		In addition, unextended OpenAL does not have any methods for updating only a portion of a buffer, nor a method to retrieve the data from a buffer.
 		"""
 
-	val InternalFormatParameters = IntConstant.block(
+	val InternalFormatParameters = IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).
 		""",
@@ -62,7 +62,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"7POINT1_32F_SOFT" _ 0x1212
 	).javaDocLinks
 
-	val ChannelsParameter = IntConstant.block(
+	val ChannelsParameter = IntConstant(
 		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
 
 		"MONO_SOFT" _ 0x1500,
@@ -74,7 +74,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"7POINT1_SOFT" _ 0x1506
 	).javaDocLinks
 
-	val TypeParameters = IntConstant.block(
+	val TypeParameters = IntConstant(
 		"Accepted by the {@code type} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
 
 		"BYTE_SOFT" _ 0x1400,
@@ -89,7 +89,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"UNSIGNED_BYTE3_SOFT" _ 0x1409
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetBufferi and alGetBufferiv.",
 
 		"INTERNAL_FORMAT_SOFT" _ 0x2008,
@@ -97,20 +97,20 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		"SAMPLE_LENGTH_SOFT" _ 0x200A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetBufferf and alGetBufferfv.",
 
 		"SEC_LENGTH_SOFT" _ 0x200B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv (these are the same as in AL_SOFT_buffer_sub_data).",
 
 		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
 		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"BufferSamplesSOFT",
 		"""
 		Removes a buffer's sample data and replaces it with new data. The named {@code buffer} must be a buffer ID returned by AL10#GenBuffers(), and not
@@ -136,7 +136,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		const _ ALCvoid_p.IN("data", "the buffer data")
 	)
 
-	ALCboolean.func(
+	ALCboolean(
 		"IsBufferFormatSupportedSOFT",
 		"Queries if a storage format is supported by the implementation",
 
@@ -148,7 +148,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 	        """
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"BufferSubSamplesSOFT",
 		"""
 		Update a buffer with new data. {@code buffer} is the ID of the buffer to modify. {@code offset} is the first sample frame in the internal storage to be
@@ -169,7 +169,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		const _ ALCvoid_p.IN("data", "the buffer data")
 	)
 
-	ALCvoid.func(
+	ALCvoid(
 		"GetBufferSamplesSOFT",
 		"""
 		Reads the number of sample frames, given by {@code samples}, starting at {@code offset}, and converts them to the channel configuration and sample type

@@ -14,13 +14,13 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to WinBase.h."
 
-	IntConstant.block(
+	IntConstant(
 		"BOOL return values.",
 		"FALSE" _ 0,
 		"TRUE" _ 1
 	)
 
-	val GlobalMemoryFlags = IntConstant.block(
+	val GlobalMemoryFlags = IntConstant(
 		"Global Memory flags.",
 
 		"GMEM_FIXED" _ 0x0000,
@@ -41,7 +41,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GPTR" expr "GMEM_FIXED | GMEM_ZEROINIT"
 	).javaDocLinks
 
-	BOOL.func(
+	BOOL(
 		"GetVersionEx",
 		"Retrieves information about the current operating system.",
 
@@ -54,7 +54,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	DWORD.func(
+	DWORD(
 		"GetLastError",
 		"""
 		Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each
@@ -62,7 +62,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	HMODULE.func(
+	HMODULE(
 		"GetModuleHandle",
 		"Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
@@ -79,7 +79,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HMODULE.func(
+	HMODULE(
 		"LoadLibrary",
 		"Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.",
 
@@ -102,7 +102,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	FARPROC.func(
+	FARPROC(
 		"GetProcAddress",
 		"Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).",
 
@@ -116,7 +116,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"FreeLibrary",
 		"""
 		Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module
@@ -126,7 +126,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		HMODULE.IN("handle", "a handle to the loaded library module")
 	)
 
-	BOOL.func(
+	BOOL(
 		"QueryPerformanceFrequency",
 		"Retrieves the frequency of the high-resolution performance counter, if one exists. The frequency cannot change while the system is running.",
 
@@ -139,7 +139,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"QueryPerformanceCounter",
 		"""
 		Retrieves the current value of the high-resolution performance counter.
@@ -155,7 +155,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HGLOBAL.func(
+	HGLOBAL(
 		"GlobalAlloc",
 		"Allocates the specified number of bytes from the heap.",
 
@@ -169,14 +169,14 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	LPVOID.func(
+	LPVOID(
 		"GlobalLock",
 		"Locks a global memory object and returns a pointer to the first byte of the object's memory block.",
 
 		HGLOBAL.IN("hMem", "a handle to the global memory object")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GlobalUnlock",
 		"""
 		Decrements the lock count associated with a memory object that was allocated with #GMEM_MOVEABLE. This function has no effect on memory objects
@@ -186,7 +186,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		HGLOBAL.IN("hMem", "a handle to the global memory object")
 	)
 
-	HGLOBAL.func(
+	HGLOBAL(
 		"GlobalFree",
 		"Frees the specified global memory object and invalidates its handle.",
 

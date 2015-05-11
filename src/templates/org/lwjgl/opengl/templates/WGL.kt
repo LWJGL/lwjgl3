@@ -19,13 +19,13 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 
 	documentation = "Native bindings to WGL functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"UseFontOutlines format.",
 		"FONT_LINES" _ 0,
 		"FONT_POLYGONS" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"SwapLayerBuffers flags.",
 		"SWAP_MAIN_PLANE" _ 0x00000001,
 		"SWAP_OVERLAY1" _ 0x00000002,
@@ -60,7 +60,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		"SWAP_UNDERLAY15" _ 0x40000000
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"CreateContext",
 		"""
 		Creates a new OpenGL rendering context, which is suitable for drawing on the device referenced by device. The rendering context has the same pixel
@@ -70,7 +70,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		HDC.IN("hdc", "handle to a device context for which the function creates a suitable OpenGL rendering context")
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"CreateLayerContext",
 		"Creates a new OpenGL rendering context for drawing to a specified layer plane on a device context.",
 
@@ -87,7 +87,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"CopyContext",
 		"Copies selected groups of rendering states from one OpenGL rendering context to another.",
 
@@ -103,24 +103,24 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"DeleteContext",
 		"Deletes a specified OpenGL rendering context.",
 
 		HGLRC.IN("context", "handle to an OpenGL rendering context that the function will delete")
 	)
 
-	HGLRC.func(
+	HGLRC(
 		"GetCurrentContext",
 		"Obtains a handle to the current OpenGL rendering context of the calling thread."
 	)
 
-	HDC.func(
+	HDC(
 		"GetCurrentDC",
 		"Obtains a handle to the device context that is associated with the current OpenGL rendering context of the calling thread."
 	)
 
-	PROC.func(
+	PROC(
 		"GetProcAddress",
 		"Returns the address of an OpenGL extension function for use with the current OpenGL rendering context.",
 
@@ -133,7 +133,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"MakeCurrent",
 		"""
 		Makes a specified OpenGL rendering context the calling thread's current rendering context. All subsequent OpenGL calls made by the thread are drawn on
@@ -151,7 +151,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"ShareLists",
 		"Enables multiple OpenGL rendering contexts to share a single display-list space.",
 
@@ -176,7 +176,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 	WINGDIAPI DWORD WINAPI SwapMultipleBuffers(UINT, CONST WGLSWAP *);
 	*/
 
-	BOOL.func(
+	BOOL(
 		"UseFontBitmaps",
 		"""
 		Creates a set of bitmap display lists for use in the current OpenGL rendering context. The set of bitmap display lists is based on the glyphs in the
@@ -191,7 +191,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		DWORD.IN("listBase", "the starting display list")
 	)
 
-	BOOL.func(
+	BOOL(
 		"UseFontOutlines",
 		"""
 		Creates a set of display lists, one for each glyph of the currently selected outline font of a device context, for use with the current rendering

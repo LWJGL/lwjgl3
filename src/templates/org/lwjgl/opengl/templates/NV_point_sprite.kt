@@ -32,7 +32,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
         Requires ${registryLinkTo("EXT", "point_parameters")}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
@@ -41,7 +41,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"POINT_SPRITE_NV" _ 0x8861
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		When the {@code target} parameter of TexEnvf, TexEnvfv, TexEnvi, TexEnviv, GetTexEnvfv, or GetTexEnviv is POINT_SPRITE_NV, then the value of
 		{@code pname} may be.
@@ -50,7 +50,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"COORD_REPLACE_NV" _ 0x8862
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of PointParameteriNV, PointParameterfEXT, PointParameterivNV, PointParameterfvEXT, GetBooleanv, GetIntegerv,
 		GetFloatv, and GetDoublev.
@@ -59,7 +59,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"POINT_SPRITE_R_MODE_NV" _ 0x8863
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameteriNV",
 		"",
 
@@ -67,7 +67,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		GLint.IN("param", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PointParameterivNV",
 		"",
 

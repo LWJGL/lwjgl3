@@ -27,7 +27,7 @@ val ARB_texture_compression_rgtc = "ARBTextureCompressionRGTC".nativeClassGL("AR
         Requires ${GL13.core} or ${ARB_texture_compression.link}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
 		CompressedTexSubImage2D.

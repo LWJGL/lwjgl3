@@ -19,7 +19,7 @@ val ARB_shader_subroutine = "ARBShaderSubroutine".nativeClassGL("ARB_shader_subr
 		Requires ${ARB_gpu_shader5.link}. ${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramStageiv.",
 
 		"ACTIVE_SUBROUTINES" _ 0x8DE5,
@@ -29,14 +29,14 @@ val ARB_shader_subroutine = "ARBShaderSubroutine".nativeClassGL("ARB_shader_subr
 		"ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH" _ 0x8E49
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_SUBROUTINES" _ 0x8DE7,
 		"MAX_SUBROUTINE_UNIFORM_LOCATIONS" _ 0x8DE8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveSubroutineUniformiv.",
 
 		"NUM_COMPATIBLE_SUBROUTINES" _ 0x8E4A,

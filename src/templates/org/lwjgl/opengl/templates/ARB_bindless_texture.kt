@@ -43,13 +43,13 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		Requires ${GL40.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of VertexAttribLPointer.",
 
 		"UNSIGNED_INT64_ARB" _ 0x140F
 	)
 
-	GLuint64.func(
+	GLuint64(
 		"GetTextureHandleARB",
 		"""
 		Creates a texture handle using the current state of the texture named {@code texture}, including any embedded sampler state. See
@@ -59,7 +59,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint.IN("texture", "the texture object")
 	)
 
-	GLuint64.func(
+	GLuint64(
 		"GetTextureSamplerHandleARB",
 		"""
 		Creates a texture handle using the current non-sampler state from the texture named {@code texture} and the sampler state from the sampler object
@@ -94,7 +94,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint.IN("sampler", "the sampler object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeTextureHandleResidentARB",
 		"""
 		Make a texture handle resident, so that it is accessible to shaders for texture mapping operations.
@@ -108,7 +108,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeTextureHandleNonResidentARB",
 		"""
 		Makes a texture handle inaccessible to shaders.
@@ -120,7 +120,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLuint64.func(
+	GLuint64(
 		"GetImageHandleARB",
 		"""
 		Creates and returns an image handle for level {@code level} of the texture named {@code texture}. If {@code layered} is GL11#TRUE, a handle is created
@@ -164,7 +164,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLenum.IN("format", "the texture format")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeImageHandleResidentARB",
 		"""
 		Makes an image handle resident, so that it is accessible to shaders for image loads, stores, and atomic operations.
@@ -183,7 +183,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLenum.IN("access", "the access type", "GL15#READ_ONLY GL15#WRITE_ONLY GL15#READ_WRITE")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MakeImageHandleNonResidentARB",
 		"Makes an image handle inaccessible to shaders.",
 
@@ -191,7 +191,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 	)
 
 	val location = GLint.IN("location", "the uniform location")
-	val UniformHandleui64ARB = GLvoid.func(
+	val UniformHandleui64ARB = GLvoid(
 		"UniformHandleui64ARB",
 		"Loads a 64-bit unsigned integer handle into a uniform location corresponding to sampler or image variable types.",
 
@@ -199,7 +199,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint64.IN("value", "the handle value")
 	)
 
-	val UniformHandleui64vARB = GLvoid.func(
+	val UniformHandleui64vARB = GLvoid(
 		"UniformHandleui64vARB",
 		"Loads {@code count} 64-bit unsigned integer handles into a uniform location corresponding to sampler or image variable types.",
 
@@ -208,7 +208,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		const _ GLuint64_p.IN("values", "a buffer from which to load the handles")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformHandleui64ARB",
 		"DSA version of #UniformHandleui64ARB().",
 
@@ -217,7 +217,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		UniformHandleui64ARB["value"]
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ProgramUniformHandleui64vARB",
 		"DSA version of #UniformHandleui64vARB().",
 
@@ -227,21 +227,21 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		UniformHandleui64vARB["values"]
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsTextureHandleResidentARB",
 		"Returns GL11#TRUE if the specified texture handle is resident in the current context.",
 
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsImageHandleResidentARB",
 		"Returns GL11#TRUE if the specified image handle is resident in the current context.",
 
 		GLuint64.IN("handle", "the image handle")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribL1ui64ARB",
 		"Specifies the 64-bit unsigned integer handle value of a generic vertex attribute.",
 
@@ -249,7 +249,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		GLuint64.IN("x", "the handle value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribL1ui64vARB",
 		"Pointer version of #VertexAttribL1ui64ARB().",
 
@@ -257,7 +257,7 @@ val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_text
 		const _ GLuint64_p.IN("v", "the vertex attribute buffer")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetVertexAttribLui64vARB",
 		"Returns the 64-bit unsigned integer handle value of a generic vertex attribute parameter.",
 

@@ -34,7 +34,7 @@ val ARB_texture_view = "ARBTextureView".nativeClassGL("ARB_texture_view") {
 		Requires ${GL42.core} or ${ARB_texture_storage.link}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.",
 
 		"TEXTURE_VIEW_MIN_LEVEL" _ 0x82DB,

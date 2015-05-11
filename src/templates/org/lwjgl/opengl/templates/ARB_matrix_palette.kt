@@ -28,7 +28,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		A similar procedure is followed for normals. Normals, however, are transformed by the inverse transpose of the modelview matrix.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameters of GetFloatv, GetDoublev, and IsEnabled, by the {@code mode} parameter of MatrixMode, and by the {@code cap}
 		parameters of Enable and Disable.
@@ -37,7 +37,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		"MATRIX_PALETTE_ARB" _ 0x8840
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_MATRIX_PALETTE_STACK_DEPTH_ARB" _ 0x8841,
@@ -45,19 +45,19 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		"CURRENT_PALETTE_MATRIX_ARB" _ 0x8843
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameters of EnableClientState and DisableClientState and by the {@code pname} parameter of IsEnabled.",
 
 		"MATRIX_INDEX_ARRAY_ARB" _ 0x8844
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFloatv.",
 
 		"CURRENT_MATRIX_INDEX_ARB" _ 0x8845
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
 		"MATRIX_INDEX_ARRAY_SIZE_ARB" _ 0x8846,
@@ -65,13 +65,13 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		"MATRIX_INDEX_ARRAY_STRIDE_ARB" _ 0x8848
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
 		"MATRIX_INDEX_ARRAY_POINTER_ARB" _ 0x8849
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CurrentPaletteMatrixARB",
 		"Defines which of the palette's matrices is affected by subsequent matrix operations when the current matrix mode is #MATRIX_PALETTE_ARB,",
 
@@ -80,11 +80,11 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 
 	val size = AutoSize("indices") _ GLint.IN("size", "the number of index values to set. Must be a value between 1 and ARBVertexBlend#MAX_VERTEX_UNITS_ARB.")
 
-	GLvoid.func("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint_p.IN("indices", "the matrix index values"))
-	GLvoid.func("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte_p.IN("indices", "the matrix index values"))
-	GLvoid.func("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort_p.IN("indices", "the matrix index values"))
+	GLvoid("MatrixIndexuivARB", "Sets the current matrix indices.", size, GLuint_p.IN("indices", "the matrix index values"))
+	GLvoid("MatrixIndexubvARB", "Byte version of #MatrixIndexuivARB().", size, GLubyte_p.IN("indices", "the matrix index values"))
+	GLvoid("MatrixIndexusvARB", "Short version of #MatrixIndexuivARB().", size, GLushort_p.IN("indices", "the matrix index values"))
 
-	GLvoid.func(
+	GLvoid(
 		"MatrixIndexPointerARB",
 		"",
 

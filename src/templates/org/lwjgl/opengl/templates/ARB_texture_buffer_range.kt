@@ -24,14 +24,14 @@ val ARB_texture_buffer_range = "ARBTextureBufferRange".nativeClassGL("ARB_textur
 		Requires ${GL15.core}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_BUFFER_OFFSET" _ 0x919D,
 		"TEXTURE_BUFFER_SIZE" _ 0x919E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"TEXTURE_BUFFER_OFFSET_ALIGNMENT" _ 0x919F
@@ -39,7 +39,7 @@ val ARB_texture_buffer_range = "ARBTextureBufferRange".nativeClassGL("ARB_textur
 
 	val src = GL43 reuse "TexBufferRange"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
 		"TextureBufferRangeEXT",
 		"DSA version of #TexBufferRange().",
 

@@ -17,13 +17,13 @@ val ARB_texture_env_combine = "ARBTextureEnvCombine".nativeClassGL("ARB_texture_
 		Requires ${ARB_multitexture.capLink}. ${GL13.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code params} parameter of TexEnvf, TexEnvi, TexEnvfv, and TexEnviv when the {@code pname} parameter value is TEXTURE_ENV_MODE.",
 
 		"COMBINE_ARB" _ 0x8570
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexEnvf, TexEnvi, TexEnvfv, and TexEnviv when the {@code target} parameter value is TEXTURE_ENV.",
 
 		"COMBINE_RGB_ARB" _ 0x8571,
@@ -43,7 +43,7 @@ val ARB_texture_env_combine = "ARBTextureEnvCombine".nativeClassGL("ARB_texture_
 		"RGB_SCALE_ARB" _ 0x8573
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code params} parameter of TexEnvf, TexEnvi, TexEnvfv, and TexEnviv when the {@code pname} parameter value is COMBINE_RGB_ARB or
 		COMBINE_ALPHA_ARB.
@@ -54,7 +54,7 @@ val ARB_texture_env_combine = "ARBTextureEnvCombine".nativeClassGL("ARB_texture_
 		"SUBTRACT_ARB" _ 0x84E7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code params} parameter of TexEnvf, TexEnvi, TexEnvfv, and TexEnviv when the {@code pname} parameter value is SOURCE0_RGB_ARB,
 		SOURCE1_RGB_ARB, SOURCE2_RGB_ARB, SOURCE0_ALPHA_ARB, SOURCE1_ALPHA_ARB, or SOURCE2_ALPHA_ARB.

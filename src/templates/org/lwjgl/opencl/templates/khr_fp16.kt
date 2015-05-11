@@ -11,7 +11,7 @@ val khr_fp16 = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
 
 	documentation = "Native bindings to the $extensionName extension."
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_info",
 
 		"DEVICE_HALF_FP_CONFIG" _ 0x1033

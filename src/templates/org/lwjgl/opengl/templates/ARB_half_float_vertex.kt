@@ -23,7 +23,7 @@ val ARB_half_float_vertex = "ARBHalfFloatVertex".nativeClassGL("ARB_half_float_v
 		${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} argument of VertexPointer, NormalPointer, ColorPointer, SecondaryColorPointer, FogCoordPointer, TexCoordPointer, and
 		VertexAttribPointer.

@@ -15,7 +15,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <X11/extensions/Xrandr.h>."
 
-	IntConstant.block(
+	IntConstant(
 		"Event selection bits",
 
 		"RRScreenChangeNotifyMask" expr "1 << 0",
@@ -24,14 +24,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"RROutputPropertyNotifyMask" expr "1 << 3"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Event codes",
 
 		"RRScreenChangeNotify" _ 0,
 		"RRNotify" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"RRNotify Subcodes",
 
 		"RRNotify_CrtcChange" _ 0,
@@ -39,7 +39,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"RRNotify_OutputProperty" _ 2
 	)
 
-	ShortConstant.block(
+	ShortConstant(
 		"used in the rotation field; rotation and reflection in 0.1 proto.",
 
 		"RR_Rotate_0" _ 1.s,
@@ -48,14 +48,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"RR_Rotate_270" _ 8.s
 	)
 
-	ShortConstant.block(
+	ShortConstant(
 		"new in 1.0 protocol, to allow reflection of screen",
 
 		"RR_Reflect_X" _ 16.s,
 		"RR_Reflect_Y" _ 32.s
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Config status",
 
 		"RRSetConfigSuccess" _ 0,
@@ -64,7 +64,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"RRSetConfigFailed" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Connection status",
 
 		"RR_Connected" _ 0,
@@ -72,7 +72,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"RR_UnknownConnection" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Error codes",
 
 		"BadRROutput" _ 0,
@@ -80,7 +80,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		"BadRRMode" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"new in 1.2 protocol",
 
 		"RR_HSyncPositive" _ 0x00000001,
@@ -101,7 +101,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 
 	// ----------------------------------
 
-	Bool.func(
+	Bool(
 		"XRRQueryExtension",
 		"Returns the event and error base codes.",
 
@@ -110,7 +110,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("error_base_return", "the base error code")
 	)
 
-	Status.func(
+	Status(
 		"XRRQueryVersion",
 		"Returns the current version of the Xrandr extension.",
 
@@ -119,7 +119,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("minor_version_return", "the minor version")
 	)
 
-	XRRScreenResources_p.func(
+	XRRScreenResources_p(
 		"XRRGetScreenResources",
 		"Returns a ##XRRScreenResources structure for the specified window.",
 
@@ -127,14 +127,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	void.func(
+	void(
 		"XRRFreeScreenResources",
 		"Frees the specified ##XRRScreenResources structure.",
 
 		XRRScreenResources_p.IN("resources", "the ##XRRScreenResources structure to free")
 	)
 
-	RROutput.func(
+	RROutput(
 		"XRRGetOutputPrimary",
 		"Returns the primary output for the screen.",
 
@@ -142,7 +142,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	XRRCrtcInfo_p.func(
+	XRRCrtcInfo_p(
 		"XRRGetCrtcInfo",
 		"Returns information about a screen in a ##XRRCrtcInfo structure.",
 
@@ -151,14 +151,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		RRCrtc.IN("crtc", "the screen to query")
 	)
 
-	void.func(
+	void(
 		"XRRFreeCrtcInfo",
 		"Frees a ##XRRCrtcInfo structure.",
 
 		XRRCrtcInfo_p.IN("crtcInfo", "the ##XRRCrtcInfo structure to free")
 	)
 
-	XRROutputInfo_p.func(
+	XRROutputInfo_p(
 		"XRRGetOutputInfo",
 		"Returns output information in a ##XRROutputInfo structure.",
 
@@ -167,14 +167,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		RROutput.IN("output", "the output to query")
 	)
 
-	void.func(
+	void(
 		"XRRFreeOutputInfo",
 		"Frees a ##XRROutputInfo structure.",
 
 		XRROutputInfo_p.IN("outputInfo", "the ##XRROutputInfo structure to free")
 	)
 
-	void.func(
+	void(
 		"XRRSelectInput",
 		"TODO: document",
 
@@ -183,7 +183,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		int.IN("mask", "the mask")
 	)
 
-	Status.func(
+	Status(
 		"XRRSetCrtcConfig",
 		"",
 
@@ -199,14 +199,14 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		AutoSize("outputs") _ int.IN("noutputs", "")
 	)
 
-	int.func(
+	int(
 		"XRRUpdateConfiguration",
 		"Intended to take RRScreenChangeNotify, or ConfigureNotify (on the root window) returns 1 if it is an event type it understands, 0 if not.",
 
 		XEvent_p.IN("event", "the event")
 	)
 
-	int.func(
+	int(
 		"XRRGetCrtcGammaSize",
 		"TODO: document",
 
@@ -214,7 +214,7 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		RRCrtc.IN("crtc", "")
 	)
 
-	XRRCrtcGamma_p.func(
+	XRRCrtcGamma_p(
 		"XRRGetCrtcGamma",
 		"Returns the current display gamma values in a ##XRRCrtcGamma structure.",
 
@@ -222,21 +222,21 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 		RRCrtc.IN("crtc", "")
 	)
 
-	XRRCrtcGamma_p.func(
+	XRRCrtcGamma_p(
 		"XRRAllocGamma",
 		"Allocates a ##XRRCrtcGamma structure of the specified {@code size}.",
 
 		int.IN("size", "the gamma size")
 	)
 
-	void.func(
+	void(
 		"XRRFreeGamma",
 		"Frees the specified ##XRRCrtcGamma structure.",
 
 		XRRCrtcGamma_p.IN("gamma", "the ##XRRCrtcGamma structure to free")
 	)
 
-	void.func(
+	void(
 		"XRRSetCrtcGamma",
 		"Sets the gamma ramp",
 

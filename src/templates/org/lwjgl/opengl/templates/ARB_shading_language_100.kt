@@ -17,7 +17,7 @@ val ARB_shading_language_100 = "ARBShadingLanguage100".nativeClassGL("ARB_shadin
 		Requires ${ARB_shader_objects.link}, ${ARB_fragment_shader.link} and ${ARB_vertex_shader.link}. ${GL20.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code name} parameter of GetString.",
 
 		"SHADING_LANGUAGE_VERSION_ARB" _ 0x8B8C

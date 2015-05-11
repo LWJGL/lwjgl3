@@ -18,7 +18,7 @@ val WGL_EXT_pixel_format_packed_float = "WGLEXTPixelFormatPackedFloat".nativeCla
 		Requires ${WGL_ARB_pixel_format.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribIList} parameter array of WGLARBPixelFormat#ChoosePixelFormatARB(), and returned in the {@code values}
 		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().

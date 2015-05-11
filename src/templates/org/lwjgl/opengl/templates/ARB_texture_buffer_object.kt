@@ -37,7 +37,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
         Requires ${GL20.core} and ${registryLinkTo("NV", "gpu_program4")} or ${registryLinkTo("EXT", "gpu_shader4")}. ${GL31.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindBuffer, BufferData, BufferSubData, MapBuffer, MapBufferRangeARB, BindTexture, UnmapBuffer,
 		GetBufferSubData, GetBufferParameteriv, GetBufferPointerv, and TexBufferARB, and the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, and
@@ -47,7 +47,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		"TEXTURE_BUFFER_ARB" _ 0x8C2A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
 		"MAX_TEXTURE_BUFFER_SIZE_ARB" _ 0x8C2B,
@@ -56,7 +56,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		"TEXTURE_BUFFER_FORMAT_ARB" _ 0x8C2E
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexBufferARB",
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found

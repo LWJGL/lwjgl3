@@ -27,13 +27,13 @@ val khr_gl_event = dependsOn(Module.OPENGL) {
 		guarantee synchronization with an OpenGL context bound in the same thread as the OpenCL context.
 		"""
 
-		IntConstant.block(
+		IntConstant(
 			"Returned by CL10#GetEventInfo() when {@code param_name} is CL10#EVENT_COMMAND_TYPE.",
 
 			"COMMAND_GL_FENCE_SYNC_OBJECT_KHR" _ 0x200D
 		)
 
-		cl_event.func(
+		cl_event(
 			"CreateEventFromGLsyncKHR",
 			"Creates an OpenCL event object from an OpenGL fence sync object.",
 

@@ -38,7 +38,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		Requires ${GL20.core} or ${ARB_shader_objects.link}. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
 		BindBufferRangeEXT, BindBufferOffsetEXT and BindBufferBaseEXT.
@@ -47,14 +47,14 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"TRANSFORM_FEEDBACK_BUFFER_EXT" _ 0x8C8E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegerIndexedvEXT and GetBooleanIndexedvEXT.",
 
 		"TRANSFORM_FEEDBACK_BUFFER_START_EXT" _ 0x8C84,
 		"TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT" _ 0x8C85
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of GetIntegerIndexedvEXT and GetBooleanIndexedvEXT, and by the {@code pname} parameter of GetBooleanv,
 		GetDoublev, GetIntegerv, and GetFloatv.
@@ -63,21 +63,21 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT" _ 0x8C8F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code bufferMode} parameter of TransformFeedbackVaryingsEXT.",
 
 		"INTERLEAVED_ATTRIBS_EXT" _ 0x8C8C,
 		"SEPARATE_ATTRIBS_EXT" _ 0x8C8D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
 		"PRIMITIVES_GENERATED_EXT" _ 0x8C87,
 		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT" _ 0x8C88
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -86,7 +86,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"RASTERIZER_DISCARD_EXT" _ 0x8C89
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT" _ 0x8C8A,
@@ -94,7 +94,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT" _ 0x8C80
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"TRANSFORM_FEEDBACK_VARYINGS_EXT" _ 0x8C83,
@@ -102,7 +102,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT" _ 0x8C76
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferRangeEXT",
 		"",
 
@@ -113,7 +113,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLsizeiptr.IN("size", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferOffsetEXT",
 		"",
 
@@ -123,7 +123,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLintptr.IN("offset", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferBaseEXT",
 		"",
 
@@ -132,19 +132,19 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLuint.IN("buffer", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginTransformFeedbackEXT",
 		"",
 
 		GLenum.IN("primitiveMode", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"EndTransformFeedbackEXT",
 		""
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TransformFeedbackVaryingsEXT",
 		"",
 
@@ -154,7 +154,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLenum.IN("bufferMode", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTransformFeedbackVaryingEXT",
 		"",
 
@@ -169,7 +169,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 			: ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""") _ GLcharASCII_p.OUT("name", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetIntegerIndexedvEXT",
 		"",
 
@@ -178,7 +178,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		mods(Check(1), returnValue) _ GLint_p.OUT("values", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetBooleanIndexedvEXT",
 		"",
 

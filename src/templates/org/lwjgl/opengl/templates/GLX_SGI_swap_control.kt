@@ -22,7 +22,7 @@ val GLX_SGI_swap_control = "GLXSGISwapControl".nativeClassGLX("GLX_SGI_swap_cont
 		This extension allows an application to specify a minimum periodicity of color buffer swaps, measured in video frame periods.
 		"""
 
-	GLint.func(
+	GLint(
 		"SwapIntervalSGI",
 		"""
 		Specifies the minimum number of video frame periods per buffer swap. (e.g. a value of two means that the color buffers will be swapped at most every

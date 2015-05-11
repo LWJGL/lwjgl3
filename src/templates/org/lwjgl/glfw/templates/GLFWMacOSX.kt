@@ -19,7 +19,7 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubP
 
 	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
 
-	CGDirectDisplayID.func(
+	CGDirectDisplayID(
 		"GetCocoaMonitor",
 	    """
 	    Returns the ${code("CGDirectDisplayID")} of the specified monitor.
@@ -33,7 +33,7 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubP
 	    since = "GLFW 3.1"
 	)
 
-	id.func(
+	id(
 		"GetCocoaWindow",
 		"""
 		Returns the ${code("NSWindow")} of the specified GLFW window.
@@ -46,7 +46,7 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubP
 		since = "GLFW 3.0"
 	)
 
-	id.func(
+	id(
 		"GetNSGLContext",
 		"""
 		Returns the ${code("NSOpenGLContext")} of the specified GLFW window.

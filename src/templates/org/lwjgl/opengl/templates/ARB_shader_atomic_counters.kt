@@ -39,13 +39,13 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
 		Requires ${GL30.core}. ${GL42.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindBufferBase and BindBufferRange.",
 
 		"ATOMIC_COUNTER_BUFFER" _ 0x92C0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, GetInteger64i_v, GetBooleanv, GetIntegerv,
 		GetInteger64v, GetFloatv, GetDoublev, and GetActiveAtomicCounterBufferiv.
@@ -54,14 +54,14 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
 		"ATOMIC_COUNTER_BUFFER_BINDING" _ 0x92C1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_64v.",
 
 		"ATOMIC_COUNTER_BUFFER_START" _ 0x92C2,
 		"ATOMIC_COUNTER_BUFFER_SIZE" _ 0x92C3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
 		"ATOMIC_COUNTER_BUFFER_DATA_SIZE" _ 0x92C4,
@@ -74,7 +74,7 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_FRAGMENT_SHADER" _ 0x92CB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_ATOMIC_COUNTER_BUFFERS" _ 0x92CC,
@@ -93,19 +93,19 @@ val ARB_shader_atomic_counters = "ARBShaderAtomicCounters".nativeClassGL("ARB_sh
 		"MAX_ATOMIC_COUNTER_BUFFER_BINDINGS" _ 0x92DC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"ACTIVE_ATOMIC_COUNTER_BUFFERS" _ 0x92D9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformsiv.",
 
 		"UNIFORM_ATOMIC_COUNTER_BUFFER_INDEX" _ 0x92DA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code params} by GetActiveUniform and GetActiveUniformsiv.",
 
 		"UNSIGNED_INT_ATOMIC_COUNTER" _ 0x92DB

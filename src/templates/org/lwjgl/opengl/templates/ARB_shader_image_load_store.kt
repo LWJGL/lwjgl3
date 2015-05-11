@@ -38,7 +38,7 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
 		Requires ${GL30.core} and GLSL 1.30. ${GL42.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_IMAGE_UNITS" _ 0x8F38,
@@ -52,7 +52,7 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
 		"MAX_COMBINED_IMAGE_UNIFORMS" _ 0x90CF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_v and GetBooleani_v.",
 
 		"IMAGE_BINDING_NAME" _ 0x8F3A,
@@ -63,7 +63,7 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
 		"IMAGE_BINDING_FORMAT" _ 0x906E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code barriers} parameter of MemoryBarrier.",
 
 		"VERTEX_ATTRIB_ARRAY_BARRIER_BIT" _ 0x00000001,
@@ -81,7 +81,7 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
 		"ALL_BARRIER_BITS" _ 0xFFFFFFFF.i
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"IMAGE_1D" _ 0x904C,
@@ -119,13 +119,13 @@ val ARB_shader_image_load_store = "ARBShaderImageLoadStore".nativeClassGL("ARB_s
 		"UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY" _ 0x906C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv.",
 
 		"IMAGE_FORMAT_COMPATIBILITY_TYPE" _ 0x90C7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned in the {@code data} parameter of GetTexParameteriv, GetTexParameterfv, GetTexParameterIiv, and GetTexParameterIuiv when {@code value} is
 		IMAGE_FORMAT_COMPATIBILITY_TYPE.

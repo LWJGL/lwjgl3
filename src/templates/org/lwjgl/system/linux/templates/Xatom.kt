@@ -11,7 +11,7 @@ val Xatom = "Xatom".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to Xatom.h."
 
-	LongConstant.block(
+	LongConstant(
 		"Predefined atoms.",
 
 		"XA_PRIMARY" _ 1L,

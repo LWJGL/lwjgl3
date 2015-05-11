@@ -24,7 +24,7 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute name in {@code attribList}.",
 
 		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
@@ -33,20 +33,20 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 		"CONTEXT_FLAGS_ARB" _ 0x2094
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attribList}.",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
 		"ERROR_INVALID_VERSION_ARB" _ 0x2095
 	).noPrefix()
 
-	HGLRC.func(
+	HGLRC(
 		"CreateContextAttribsARB",
 		"""
 		Creates an OpenGL context.

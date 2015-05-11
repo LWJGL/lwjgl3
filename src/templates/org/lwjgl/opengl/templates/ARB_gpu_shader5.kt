@@ -78,13 +78,13 @@ val ARB_gpu_shader5 = "ARBGPUShader5".nativeClassGL("ARB_gpu_shader5") {
 		Requires ${GL32.link} and GLSL 1.50. ${GL40.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"GEOMETRY_SHADER_INVOCATIONS" _ 0x887F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_GEOMETRY_SHADER_INVOCATIONS" _ 0x8E5A,

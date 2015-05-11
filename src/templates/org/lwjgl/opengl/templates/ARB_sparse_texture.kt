@@ -27,20 +27,20 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		paging, on-demand and delayed loading of texture assets and application controlled level of detail.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter to TexParameter{i f}{v}, TexParameterI{u}v, GetTexParameter{if}v and GetTexParameterIi{u}v.",
 
 		"TEXTURE_SPARSE_ARB" _ 0x91A6,
 		"VIRTUAL_PAGE_SIZE_INDEX_ARB" _ 0x91A7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexParameter{if}v and GetTexParameterIi{u}v.",
 
 		"NUM_SPARSE_LEVELS_ARB" _ 0x91AA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter to GetInternalformativ.",
 
 		"NUM_VIRTUAL_PAGE_SIZES_ARB" _ 0x91A8,
@@ -49,7 +49,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		"VIRTUAL_PAGE_SIZE_Z_ARB" _ 0x9197
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv.",
 
 		"MAX_SPARSE_TEXTURE_SIZE_ARB" _ 0x9198,
@@ -59,7 +59,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 	)
 
 	val TexSubImage3D = GL12["TexSubImage3D"]
-	val TexPageCommitmentARB = GLvoid.func(
+	val TexPageCommitmentARB = GLvoid(
 		"TexPageCommitmentARB",
 		"""
 		Makes individual pages of a sparse texture resident or non resident.
@@ -133,7 +133,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		GLboolean.IN("commit", "the commit flag")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
 		"TexturePageCommitmentEXT",
 		"DSA version of #TexPageCommitmentARB().",
 

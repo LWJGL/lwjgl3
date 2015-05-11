@@ -50,7 +50,7 @@ val ARB_vertex_array_bgra = "ARBVertexArrayBGRA".nativeClassGL("ARB_vertex_array
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code size} parameter of ColorPointer, SecondaryColorPointer, and VertexAttribPointer.",
 
 		"BGRA" _ 0x80E1

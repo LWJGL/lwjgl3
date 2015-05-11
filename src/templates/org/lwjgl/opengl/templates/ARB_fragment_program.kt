@@ -45,7 +45,7 @@ val ARB_fragment_program = "ARBFragmentProgram".nativeClassGL("ARB_fragment_prog
 		used together, the common functionality has only been exposed by ${ARB_vertex_program.link}, to avoid static import conflicts.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev, and by the {@code target} parameter of ProgramStringARB, BindProgramARB, ProgramEnvParameter4[df][v]ARB, ProgramLocalParameter4[df][v]ARB,
@@ -55,7 +55,7 @@ val ARB_fragment_program = "ARBFragmentProgram".nativeClassGL("ARB_fragment_prog
 		"FRAGMENT_PROGRAM_ARB" _ 0x8804
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramivARB.",
 
 		"PROGRAM_ALU_INSTRUCTIONS_ARB" _ 0x8805,
@@ -72,7 +72,7 @@ val ARB_fragment_program = "ARBFragmentProgram".nativeClassGL("ARB_fragment_prog
 		"MAX_PROGRAM_NATIVE_TEX_INDIRECTIONS_ARB" _ 0x8810
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_TEXTURE_COORDS_ARB" _ 0x8871,

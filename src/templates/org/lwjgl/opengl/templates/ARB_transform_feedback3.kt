@@ -49,7 +49,7 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
 		Requires ${GL30.core} or ${registryLinkTo("EXT", "transform_feedback")} or ${registryLinkTo("NV", "transform_feedback")}. ${GL40.promoted}
 		"""
 	
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_TRANSFORM_FEEDBACK_BUFFERS" _ 0x8E70,

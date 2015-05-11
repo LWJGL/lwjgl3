@@ -19,7 +19,7 @@ val ARB_cull_distance = "ARBCullDistance".nativeClassGL("ARB_cull_distance") {
 		Requires ${GL30.core}. ${GL45.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
 		"MAX_CULL_DISTANCES" _ 0x82F9,

@@ -11,7 +11,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to keysymdef.h."
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		TTY Functions, cleverly chosen to map to ascii, for convenience of programming, but could have been arbitrary (at the cost of lookup tables in client
 		code.
@@ -29,13 +29,13 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Delete" _ 0xFFFF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"International & multi-key character composition",
 
 		"XK_Multi_key" _ 0xFF20
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Japanese keyboard support",
 
 		"XK_Kanji" _ 0xFF21,
@@ -57,7 +57,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Eisu_toggle" _ 0xFF30
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Cursor control & motion",
 
 		"XK_Home" _ 0xFF50,
@@ -73,7 +73,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Begin" _ 0xFF58
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Misc Functions",
 
 		"XK_Select" _ 0xFF60,
@@ -92,7 +92,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Num_Lock" _ 0xFF7F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Keypad Functions, keypad numbers cleverly chosen to map to ascii",
 
 		"XK_KP_Space" _ 0xFF80,
@@ -134,7 +134,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_KP_9" _ 0xFFB9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Auxilliary Functions; note the duplicate definitions for left and right function keys; Sun keyboards and a few other manufactures have such function key
 		groups on the left and/or right sides of the keyboard. We've not found a keyboard with more than 35 function keys total.
@@ -202,7 +202,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_R15" _ 0xFFE0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Modifiers",
 
 		"XK_Shift_L" _ 0xFFE1,
@@ -221,7 +221,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Hyper_R" _ 0xFFEE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"ISO 9995 Function and Modifier Keys Byte 3 = 0xFE",
 
 		"XK_ISO_Lock" _ 0xFE01,
@@ -313,7 +313,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_Pointer_DfltBtnPrev" _ 0xFEFC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"3270 Terminal Keys Byte 3 = 0xFD",
 
 		"XK_3270_Duplicate" _ 0xFD01,
@@ -348,7 +348,7 @@ val keysymdef = "keysymdef".nativeClass(LINUX_PACKAGE) {
 		"XK_3270_Enter" _ 0xFD1E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Latin 1 Byte 3 = 0",
 
 		"XK_space" _ 0x020,

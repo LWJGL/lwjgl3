@@ -44,7 +44,7 @@ val ARB_internalformat_query2 = "ARBInternalformatQuery2".nativeClassGL("ARB_int
 		Requires ${GL20.core} and ${ARB_internalformat_query.link}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetInternalformativ and GetInternalformati64v.",
 
 		"TEXTURE_1D" _ 0x0DE0,
@@ -61,7 +61,7 @@ val ARB_internalformat_query2 = "ARBInternalformatQuery2".nativeClassGL("ARB_int
 		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.",
 
 		"SAMPLES" _ 0x80A9,
@@ -140,7 +140,7 @@ val ARB_internalformat_query2 = "ARBInternalformatQuery2".nativeClassGL("ARB_int
 		"VIEW_COMPATIBILITY_CLASS" _ 0x82B6
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v.",
 
 		"FULL_SUPPORT" _ 0x82B7,

@@ -28,7 +28,7 @@ val ARB_texture_rg = "ARBTextureRG".nativeClassGL("ARB_texture_rg") {
         ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.",
 
 		"R8" _ 0x8229,
@@ -57,7 +57,7 @@ val ARB_texture_rg = "ARBTextureRG".nativeClassGL("ARB_texture_rg") {
 		"COMPRESSED_RG" _ 0x8226
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and ReadPixels.",
 
 		"RG_INTEGER" _ 0x8228

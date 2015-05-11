@@ -27,7 +27,7 @@ val GLX_SGIX_swap_group = "GLXSGIXSwapGroup".nativeClassGLX("GLX_SGIX_swap_group
 		This extension extends the set of conditions that must be met before a buffer swap can take place.
 		"""
 
-	void.func(
+	void(
 		"JoinSwapGroupSGIX",
 		"""
 		Adds {@code drawable} to the swap group containing {@code member} as a member. If {@code drawable} is already a member of a different group, it is

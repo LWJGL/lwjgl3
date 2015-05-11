@@ -22,7 +22,7 @@ val GLX_ARB_vertex_buffer_object = "GLXARBVertexBufferObject".nativeClassGLX("GL
 		Requires ${GLX_ARB_create_context.link} and ${ARB_vertex_buffer_object.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute name in the {@code attrib_list} parameter of GLXARBCreateContext#CreateContextAttribsARB().",
 
 		"CONTEXT_ALLOW_BUFFER_BYTE_ORDER_MISMATCH_ARB" _ 0x2095

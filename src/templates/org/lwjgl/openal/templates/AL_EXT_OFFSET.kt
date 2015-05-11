@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_OFFSET = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 	documentation = "bindings to AL_EXT_OFFSET extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_OFFSET tokens.",
 
 		"SEC_OFFSET" _ 0x1024,

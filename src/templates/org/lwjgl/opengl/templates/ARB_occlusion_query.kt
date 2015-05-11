@@ -61,27 +61,27 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		${GL15.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQueryARB, EndQueryARB, and GetQueryivARB.",
 
 		"SAMPLES_PASSED_ARB" _ 0x8914
 	)
 
-	val QUERY_PARAMETERS = IntConstant.block(
+	val QUERY_PARAMETERS = IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryivARB.",
 
 		"QUERY_COUNTER_BITS_ARB" _ 0x8864,
 		"CURRENT_QUERY_ARB" _ 0x8865
 	).javaDocLinks
 
-	val QUERY_OBJECT_PARAMETERS = IntConstant.block(
+	val QUERY_OBJECT_PARAMETERS = IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectivARB and GetQueryObjectuivARB.",
 
 		"QUERY_RESULT_ARB" _ 0x8866,
 		"QUERY_RESULT_AVAILABLE_ARB" _ 0x8867
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"GenQueriesARB",
 		"Generates query object names.",
 
@@ -89,7 +89,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		returnValue _ GLuint_p.OUT("ids", "a buffer in which the generated query object names are stored")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteQueriesARB",
 		"Deletes named query objects.",
 
@@ -97,14 +97,14 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		mods(const, SingleValue("id")) _ GLuint_p.IN("ids", "an array of query objects to be deleted")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsQueryARB",
 		"Determine if a name corresponds to a query object.",
 
 		GLuint.IN("id", "a value that may be the name of a query object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginQueryARB",
 		"Creates a query object and makes it active.",
 
@@ -112,14 +112,14 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"EndQueryARB",
 		"Marks the end of the sequence of commands to be tracked for the active query specified by {@code target}.",
 
 		GLenum.IN("target", "the query object target", QUERY_TARGETS)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryivARB",
 		"Returns parameters of a query object target.",
 
@@ -128,7 +128,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryObjectivARB",
 		"Returns the integer value of a query object parameter.",
 
@@ -137,7 +137,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetQueryObjectuivARB",
 		"Unsigned version of #GetQueryObjectivARB().",
 

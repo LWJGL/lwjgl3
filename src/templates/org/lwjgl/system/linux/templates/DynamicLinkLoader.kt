@@ -15,7 +15,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <dlfcn.h>."
 
-	val Modes = IntConstant.block(
+	val Modes = IntConstant(
 		"The {@code mode} argument to #dlopen() contains one of the following.",
 
 		"RTLD_LAZY" _ 0x00001,
@@ -25,7 +25,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_DEEPBIND" _ 0x00008
 	).javaDocLinks + " #RTLD_GLOBAL #RTLD_LOCAL #RTLD_NODELETE"
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		If the following bit is set in the {@code mode} argument to #dlopen(), the symbols of the loaded object and its dependencies are made visible as
 		if the object were linked directly into the program.
@@ -34,7 +34,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_GLOBAL" _ 0x00100
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Unix98 demands the following flag which is the inverse to #RTLD_GLOBAL. The implementation does this by default and so we can define the value
 		to zero.
@@ -43,13 +43,13 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"RTLD_LOCAL" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Do not delete object when closed.",
 
 		"RTLD_NODELETE" _ 0x01000
 	)
 
-	voidptr.func(
+	voidptr(
 		"dlopen",
 		"""
 		Loads the dynamic library file named by the null-terminated string {@code filename} and returns an opaque "handle" for the dynamic library. If
@@ -60,7 +60,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
 	)
 
-	charASCII_p.func(
+	charASCII_p(
 		"dlerror",
 		"""
 		Returns a human readable string describing the most recent error that occurred from #dlopen(), #dlsym() or #dlclose() since
@@ -68,7 +68,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	voidptr.func(
+	voidptr(
 		"dlsym",
 		"""
 		Takes a "handle" of a dynamic library returned by #dlopen() and the null-terminated symbol name, returning the address where that symbol is loaded
@@ -80,7 +80,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		const _ charASCII_p.IN("name", "the symbol name")
 	)
 
-	int.func(
+	int(
 		"dlclose",
 		"""
 		Decrements the reference count on the dynamic library handle handle. If the reference count drops to zero and no other loaded libraries use symbols in

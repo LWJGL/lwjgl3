@@ -32,13 +32,13 @@ val intel_device_partition_by_names = "INTELDevicePartitionByNames".nativeClassC
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code properties} argument of CL12#CreateSubDevices().",
 
 		"DEVICE_PARTITION_BY_NAMES_INTEL" _ 0x4052
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The name list terminator.",
 
 		"PARTITION_BY_NAMES_LIST_END_INTEL" expr "-1"

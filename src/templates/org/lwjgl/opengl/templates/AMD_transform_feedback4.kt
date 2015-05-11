@@ -24,7 +24,7 @@ val AMD_transform_feedback4 = "AMDTransformFeedback4".nativeClassGL("AMD_transfo
 		Requires ${GL40.core} or ${ARB_transform_feedback3.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} argument to Enablei. Disablei and IsEnabledi.
 		""",

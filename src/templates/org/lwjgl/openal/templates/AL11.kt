@@ -14,7 +14,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 	documentation = "Native bindings to AL 1.1 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"General tokens.",
 
 		"SEC_OFFSET" _ 0x1024,
@@ -31,7 +31,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		"EXPONENT_DISTANCE_CLAMPED" _ 0xD006
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Listener3i",
 		"Sets the 3 dimensional integer values of a listener parameter.",
 
@@ -41,7 +41,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALfloat.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetListeneriv",
 		"Returns the integer values of the specified listener parameter.",
 
@@ -49,7 +49,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		Check(1) _ ALint_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Source3i",
 		"Sets the 3 dimensional integer values of a source parameter.",
 
@@ -60,7 +60,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALint.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Listeneriv",
 		"Pointer version.",
 
@@ -68,7 +68,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Sourceiv",
 		"Pointer version.",
 
@@ -77,7 +77,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Bufferf",
 		"Sets the float value of a buffer parameter.",
 
@@ -86,7 +86,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALfloat.IN("value", "the value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Buffer3f",
 		"Sets the the dimensional value of a buffer parameter.",
 
@@ -97,7 +97,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALfloat.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Bufferfv",
 		"the pointer version of #Bufferf()",
 
@@ -106,7 +106,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), const) _ ALfloat_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Bufferi",
 		"Sets the integer value of a buffer parameter.",
 
@@ -115,7 +115,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALint.IN("value", "the value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Buffer3i",
 		"Sets the integer 3 dimensional value of a buffer parameter.",
 
@@ -126,7 +126,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		ALint.IN("value3", "the third value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"Bufferiv",
 		"the pointer version of #Bufferi()",
 
@@ -135,7 +135,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetBufferi",
 		"Returns the integer value of the specified buffer parameter.",
 
@@ -144,7 +144,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetBufferiv",
 		"Returns the integer values of the specified buffer parameter.",
 
@@ -153,7 +153,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		Check(1) _ ALint_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetBufferf",
 		"Returns the float value of the specified buffer parameter.",
 
@@ -162,7 +162,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"GetBufferfv",
 		"Returns the float values of the specified buffer parameter.",
 
@@ -171,7 +171,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"SpeedOfSound",
 		"Sets the speed of sound.",
 

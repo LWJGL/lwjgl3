@@ -19,14 +19,14 @@ val AL_SOFT_source_length = "SOFTSourceLength".nativeClassAL("SOFT_source_length
 		each buffer being queued and unqueued on a given source. This extension aims to ease that and provide a simple query.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourcei and alGetSourceiv (these are the same as in AL_SOFT_buffer_samples).",
 
 		"BYTE_LENGTH_SOFT" _ 0x2009,
 		"SAMPLE_LENGTH_SOFT" _ 0x200A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourcef and alGetSourcefv (these are the same as in AL_SOFT_buffer_samples).",
 
 		"SEC_LENGTH_SOFT" _ 0x200B

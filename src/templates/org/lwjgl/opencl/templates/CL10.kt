@@ -125,7 +125,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	documentation = "The core OpenCL 1.0 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"Error Codes",
 
 		"SUCCESS" _ 0,
@@ -177,20 +177,20 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"INVALID_GLOBAL_WORK_SIZE" expr "-63"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"OpenCL Version",
 
 		"VERSION_1_0" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_bool",
 
 		"FALSE" _ 0,
 		"TRUE" _ 1
 	)
 
-	val PlatformInfo = IntConstant.block(
+	val PlatformInfo = IntConstant(
 		"cl_platform_info",
 
 		"PLATFORM_PROFILE" _ 0x0900,
@@ -200,7 +200,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PLATFORM_EXTENSIONS" _ 0x0904
 	).javaDocLinks
 
-	val DeviceTypes = IntConstant.block(
+	val DeviceTypes = IntConstant(
 		"cl_device_type - bitfield",
 
 		"DEVICE_TYPE_DEFAULT" expr "1 << 0",
@@ -210,7 +210,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"DEVICE_TYPE_ALL" _ 0xFFFFFFFF.i
 	).javaDocLinks + " CL12#DEVICE_TYPE_CUSTOM"
 
-	val DeviceInfo = IntConstant.block(
+	val DeviceInfo = IntConstant(
 		"cl_device_info",
 
 		"DEVICE_TYPE" _ 0x1000,
@@ -267,7 +267,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION"""
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_fp_config - bitfield",
 
 		"FP_DENORM" expr "1 << 0",
@@ -278,7 +278,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"FP_FMA" expr "1 << 5"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_mem_cache_type",
 
 		"NONE" _ 0x0,
@@ -286,28 +286,28 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"READ_WRITE_CACHE" _ 0x2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_local_mem_type",
 
 		"LOCAL" _ 0x1,
 		"GLOBAL" _ 0x2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_exec_capabilities - bitfield",
 
 		"EXEC_KERNEL" expr "1 << 0",
 		"EXEC_NATIVE_KERNEL" expr "1 << 1"
 	)
 
-	val CommandQueueProperties = IntConstant.block(
+	val CommandQueueProperties = IntConstant(
 		"cl_command_queue_properties - bitfield",
 
 		"QUEUE_OUT_OF_ORDER_EXEC_MODE_ENABLE" expr "1 << 0",
 		"QUEUE_PROFILING_ENABLE" expr "1 << 1"
 	).javaDocLinks
 
-	val ContextInfo = IntConstant.block(
+	val ContextInfo = IntConstant(
 		"cl_context_info",
 
 		"CONTEXT_REFERENCE_COUNT" _ 0x1080,
@@ -315,7 +315,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"CONTEXT_PROPERTIES" _ 0x1082
 	).javaDocLinks + " CL11#CONTEXT_NUM_DEVICES"
 
-	val ContextProperties = IntConstant.block(
+	val ContextProperties = IntConstant(
 		"cl_context_info + cl_context_properties",
 
 		"CONTEXT_PLATFORM" _ 0x1084
@@ -323,7 +323,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	KHRGLSharing#WGL_HDC_KHR KHRGLSharing#CGL_SHAREGROUP_KHR
 	"""
 
-	val CommandQueueInfo = IntConstant.block(
+	val CommandQueueInfo = IntConstant(
 		"cl_command_queue_info",
 
 		"QUEUE_CONTEXT" _ 0x1090,
@@ -332,7 +332,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"QUEUE_PROPERTIES" _ 0x1093
 	).javaDocLinks + " CL20#QUEUE_SIZE"
 
-	val MemFlags = IntConstant.block(
+	val MemFlags = IntConstant(
 		"cl_mem_flags - bitfield",
 
 		"MEM_READ_WRITE" expr "1 << 0",
@@ -343,7 +343,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_COPY_HOST_PTR" expr "1 << 5"
 	).javaDocLinks + " CL12#MEM_HOST_WRITE_ONLY CL12#MEM_HOST_READ_ONLY CL12#MEM_HOST_NO_ACCESS"
 
-	IntConstant.block(
+	IntConstant(
 		"cl_channel_order",
 
 		"R" _ 0x10B0,
@@ -358,7 +358,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"LUMINANCE" _ 0x10B9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_channel_type",
 
 		"SNORM_INT8" _ 0x10D0,
@@ -378,7 +378,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"FLOAT" _ 0x10DE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_object_type",
 
 		"MEM_OBJECT_BUFFER" _ 0x10F0,
@@ -386,7 +386,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_OBJECT_IMAGE3D" _ 0x10F2
 	)
 
-	val MemInfo = IntConstant.block(
+	val MemInfo = IntConstant(
 		"cl_mem_info",
 
 		"MEM_TYPE" _ 0x1100,
@@ -398,7 +398,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"MEM_CONTEXT" _ 0x1106
 	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
 
-	val ImageInfo = IntConstant.block(
+	val ImageInfo = IntConstant(
 		"cl_image_info",
 
 		"IMAGE_FORMAT" _ 0x1110,
@@ -410,7 +410,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"IMAGE_DEPTH" _ 0x1116
 	).javaDocLinks + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
 
-	val AddressingModes = IntConstant.block(
+	val AddressingModes = IntConstant(
 		"cl_addressing_mode",
 
 		"ADDRESS_NONE" _ 0x1130,
@@ -419,14 +419,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"ADDRESS_REPEAT" _ 0x1133
 	).javaDocLinks + " CL11#ADDRESS_MIRRORED_REPEAT"
 
-	val FilterModes = IntConstant.block(
+	val FilterModes = IntConstant(
 		"cl_filter_mode",
 
 		"FILTER_NEAREST" _ 0x1140,
 		"FILTER_LINEAR" _ 0x1141
 	).javaDocLinks
 
-	val SamplerInfo = IntConstant.block(
+	val SamplerInfo = IntConstant(
 		"cl_sampler_info",
 
 		"SAMPLER_REFERENCE_COUNT" _ 0x1150,
@@ -436,14 +436,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"SAMPLER_FILTER_MODE" _ 0x1154
 	).javaDocLinks
 
-	val MapFlags = IntConstant.block(
+	val MapFlags = IntConstant(
 		"cl_map_flags - bitfield",
 
 		"MAP_READ" expr "1 << 0",
 		"MAP_WRITE" expr "1 << 1"
 	).javaDocLinks + " CL12#MAP_WRITE_INVALIDATE_REGION"
 
-	val ProgramInfo = IntConstant.block(
+	val ProgramInfo = IntConstant(
 		"cl_program_info",
 
 		"PROGRAM_REFERENCE_COUNT" _ 0x1160,
@@ -455,7 +455,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BINARIES" _ 0x1166
 	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
 
-	val ProgramBuildInfo = IntConstant.block(
+	val ProgramBuildInfo = IntConstant(
 		"cl_program_build_info",
 
 		"PROGRAM_BUILD_STATUS" _ 0x1181,
@@ -463,7 +463,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"PROGRAM_BUILD_LOG" _ 0x1183
 	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE"
 
-	IntConstant.block(
+	IntConstant(
 		"cl_build_status",
 
 		"BUILD_SUCCESS" _ 0,
@@ -472,7 +472,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"BUILD_IN_PROGRESS" _ -3
 	)
 
-	val KernelInfo = IntConstant.block(
+	val KernelInfo = IntConstant(
 		"cl_kernel_info",
 
 		"KERNEL_FUNCTION_NAME" _ 0x1190,
@@ -482,7 +482,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"KERNEL_PROGRAM" _ 0x1194
 	).javaDocLinks + " CL12#KERNEL_ATTRIBUTES"
 
-	val KernelWorkGroupInfo = IntConstant.block(
+	val KernelWorkGroupInfo = IntConstant(
 		"cl_kernel_work_group_info",
 
 		"KERNEL_WORK_GROUP_SIZE" _ 0x11B0,
@@ -490,7 +490,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"KERNEL_LOCAL_MEM_SIZE" _ 0x11B2
 	).javaDocLinks + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
 
-	val EventInfo = IntConstant.block(
+	val EventInfo = IntConstant(
 		"cl_event_info",
 
 		"EVENT_COMMAND_QUEUE" _ 0x11D0,
@@ -499,7 +499,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"EVENT_COMMAND_EXECUTION_STATUS" _ 0x11D3
 	).javaDocLinks + " CL11#EVENT_CONTEXT"
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_type",
 
 		"COMMAND_NDRANGE_KERNEL" _ 0x11F0,
@@ -521,7 +521,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"COMMAND_RELEASE_GL_OBJECTS" _ 0x1200
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"command execution status",
 
 		"COMPLETE" _ 0x0,
@@ -530,7 +530,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"QUEUED" _ 0x3
 	)
 
-	val ProfilingInfo = IntConstant.block(
+	val ProfilingInfo = IntConstant(
 		"cl_profiling_info",
 
 		"PROFILING_COMMAND_QUEUED" _ 0x1280,
@@ -541,7 +541,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Platform Layer ]------------------
 
-	cl_int.func(
+	cl_int(
 		"GetPlatformIDs",
 		"Obtains the list of available platforms.",
 
@@ -578,7 +578,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetPlatformInfo",
 		"Returns information about the specified OpenCL platform.",
 
@@ -602,7 +602,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetDeviceIDs",
 		"Obtains the list of devices available on a platform.",
 
@@ -649,7 +649,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetDeviceInfo",
 		"""
 		Returns specific information about an OpenCL device. {@code device} may be a device returned by #GetDeviceIDs() or a sub-device created by
@@ -685,7 +685,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_context.func(
+	cl_context(
 		"CreateContext",
 		"""
 		Creates an OpenCL context. An OpenCL context is created with one or more devices. Contexts are used by the OpenCL runtime for managing objects such as
@@ -742,7 +742,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_context.func(
+	cl_context(
 		"CreateContextFromType",
 		"Creates a context using devices of the specified type. See #CreateContext() for details.",
 
@@ -759,7 +759,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		ERROR_RET
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainContext",
 		"""
 		Increments the context reference count.
@@ -782,7 +782,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseContext",
 		"""
 		Decrements the context reference count.
@@ -804,7 +804,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetContextInfo",
 		"Queries information about a context.",
 
@@ -834,7 +834,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 	// ------------------[ OPENCL Runtime ]------------------
 
-	cl_command_queue.func(
+	cl_command_queue(
 		"CreateCommandQueue",
 		"""
 		Creates a command-queue on a specific device.
@@ -871,7 +871,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainCommandQueue",
 		"""
 		Increments the {@code command_queue} reference count.
@@ -894,7 +894,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseCommandQueue",
 		"""
 		Decrements the {@code command_queue} reference count.
@@ -918,7 +918,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetCommandQueueInfo",
 		"Queries information about a command-queue.",
 
@@ -946,7 +946,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_mem.func(
+	cl_mem(
 		"CreateBuffer",
 		"Creates a buffer object.",
 
@@ -994,7 +994,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueReadBuffer",
 		"""
 		Enqueues a command to read from a buffer object to host memory.
@@ -1068,7 +1068,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWriteBuffer",
 		"""
 		Enqueues a command to write to a buffer object from host memory.
@@ -1140,7 +1140,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueCopyBuffer",
 		"Enqueues a command to copy a buffer object identified by {@code src_buffer} to another buffer object identified by {@code dst_buffer}.",
 
@@ -1191,7 +1191,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(MapPointer("size") _ void_p).func(
+	(MapPointer("size") _ void_p)(
 		"EnqueueMapBuffer",
 		"""
 		Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
@@ -1270,7 +1270,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_mem.func(
+	cl_mem(
 		"CreateImage2D",
 		"Creates a 2D image object.",
 
@@ -1329,7 +1329,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_mem.func(
+	cl_mem(
 		"CreateImage3D",
 		"Creates a 3D image object.",
 
@@ -1400,7 +1400,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetSupportedImageFormats",
 		"""
 		Can be used to get the list of image formats supported by an OpenCL implementation when the following information about an image memory object is
@@ -1455,7 +1455,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueReadImage",
 		"""
 		Enqueues a command to read from an image or image array object to host memory.
@@ -1579,7 +1579,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWriteImage",
 		"""
 		Enqueues a command to write to an image or image array object from host memory.
@@ -1704,7 +1704,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueCopyImage",
 		"""
 		Enqueues a command to copy image objects. {@code src_image} and {@code dst_image} can be 1D, 2D, 3D image or a 1D, 2D image array objects allowing us to
@@ -1807,7 +1807,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueCopyImageToBuffer",
 		"Enqueues a command to copy an image object to a buffer object.",
 
@@ -1894,7 +1894,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueCopyBufferToImage",
 		"Enqueues a command to copy a buffer object to an image object.",
 
@@ -1972,7 +1972,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p).func(
+	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p)(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.
@@ -2093,7 +2093,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetImageInfo",
 		"Returns information specific to an image object.",
 
@@ -2124,7 +2124,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainMemObject",
 		"""
 		Increments the {@code memobj} reference count.
@@ -2145,7 +2145,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseMemObject",
 		"""
 		Decrements the {@code memobj} reference count.
@@ -2168,7 +2168,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueUnmapMemObject",
 		"""
 		Enqueues a command to unmap a previously mapped region of a memory object. Reads or writes from the host using the pointer returned by
@@ -2205,7 +2205,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetMemObjectInfo",
 		"Returns information that is common to all memory objects (buffer and image objects).",
 
@@ -2237,7 +2237,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_sampler.func(
+	cl_sampler(
 		"CreateSampler",
 		"""
 		Creates a sampler object.
@@ -2273,7 +2273,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainSampler",
 		"Increments the sampler reference count. #CreateSampler() performs an implicit retain.",
 
@@ -2290,7 +2290,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseSampler",
 		"""
 		Decrements the sampler reference count. The sampler object is deleted after the reference count becomes zero and commands queued for execution on a
@@ -2310,7 +2310,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetSamplerInfo",
 		"Returns information about a sampler object.",
 
@@ -2341,7 +2341,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_program.func(
+	cl_program(
 		"CreateProgramWithSource",
 		"""
 		Creates a program object for a context, and loads the source code specified by the text strings in the strings array into the program object. The
@@ -2378,7 +2378,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_program.func(
+	cl_program(
 		"CreateProgramWithBinary",
 		"""
 		Creates a program object for a context, and loads the binary bits specified by {@code binary} into the program object.
@@ -2449,7 +2449,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainProgram",
 		"Increments the {@code program} reference count. {@code clCreateProgram} does an implicit retain.",
 
@@ -2466,7 +2466,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseProgram",
 		"""
 		Decrements the {@code program} reference count. The program object is deleted after all kernel objects associated with program have been deleted and the
@@ -2486,7 +2486,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"BuildProgram",
 		"""
 		Builds (compiles & links) a program executable from the program source or binary for all the devices or a specific device(s) in the OpenCL context
@@ -2559,7 +2559,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"UnloadCompiler",
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler. This is a hint from the application and does not guarantee that the
@@ -2571,7 +2571,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		returnDoc = "always $SUCCESS"
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetProgramInfo",
 		"Returns information about a program object.",
 
@@ -2603,7 +2603,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetProgramBuildInfo",
 		"Returns build information for each device in the program object.",
 
@@ -2633,7 +2633,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_kernel.func(
+	cl_kernel(
 		"CreateKernel",
 		"""
 		Creates a kernel object.
@@ -2673,7 +2673,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"CreateKernelsInProgram",
 		"""
 		Creates kernel objects for all kernel functions in {@code program}. Kernel objects are not created for any {@code __kernel} functions in {@code program}
@@ -2709,7 +2709,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainKernel",
 		"Increments the {@code kernel} reference count. #CreateKernel() or #CreateKernelsInProgram() do an implicit retain.",
 
@@ -2726,7 +2726,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseKernel",
 		"""
 		Decrements the {@code kernel} reference count.
@@ -2748,7 +2748,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"SetKernelArg",
 		"Set the argument value for a specific argument of a kernel.",
 
@@ -2855,7 +2855,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetKernelInfo",
 		"Returns information about a kernel object.",
 
@@ -2883,7 +2883,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetKernelWorkGroupInfo",
 		"Returns information about the kernel object that may be specific to a device.",
 
@@ -2926,7 +2926,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueNDRangeKernel",
 		"Enqueues a command to execute a kernel on a device.",
 
@@ -3047,7 +3047,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueTask",
 		"""
 		Enqueues a command to execute a kernel on a device. The kernel is executed using a single work-item.
@@ -3065,7 +3065,7 @@ kernel void image_filter (
 		returnDoc = "$SUCCESS if the kernel execution was successfully queued. Otherwise, see #EnqueueNDRangeKernel()."
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueNativeKernel",
 		"Enqueues a command to execute a native C/C++ function not compiled using the OpenCL compiler.",
 
@@ -3143,7 +3143,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"WaitForEvents",
 		"""
 		Waits on the host thread for commands identified by event objects in {@code event_list} to complete. A command is considered complete if its execution
@@ -3167,7 +3167,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetEventInfo",
 		"""
 		Returns information about an event object.
@@ -3202,7 +3202,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainEvent",
 		"Increments the event reference count. The OpenCL commands that return an event perform an implicit retain.",
 
@@ -3219,7 +3219,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseEvent",
 		"""
 		Decrements the event reference count.
@@ -3249,7 +3249,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueMarker",
 		"""
 		Enqueues a marker command to {@code command_queue}. The marker command is not completed until all commands enqueued before it have completed. The marker
@@ -3272,7 +3272,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueBarrier",
 		"""
 		Enqueues a barrier operation. The {@code clEnqueueBarrier} command ensures that all queued commands in {@code command_queue} have finished execution
@@ -3292,7 +3292,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueWaitForEvents",
 		"Enqueues a wait for a specific event or a list of events to complete before any future commands queued in the command-queue are executed.",
 
@@ -3314,7 +3314,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetEventProfilingInfo",
 		"Returns profiling information for the command associated with {@code event}.",
 
@@ -3346,7 +3346,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"Flush",
 		"""
 		Issues all previously queued OpenCL commands in {@code command_queue} to the device associated with {@code command_queue}. {@code clFlush} only
@@ -3376,7 +3376,7 @@ kernel void image_filter (
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"Finish",
 		"""
 		Blocks until all previously queued OpenCL commands in {@code command_queue} are issued to the associated device and have completed. {@code clFinish}
@@ -3387,7 +3387,7 @@ kernel void image_filter (
 		cl_command_queue.IN("command_queue", "the command-queue")
 	)
 
-	voidptr.func(
+	voidptr(
 		"GetExtensionFunctionAddress",
 		"""
 		Returns the address of the extension function named by {@code funcname}. The pointer returned should be cast to a function pointer type matching the

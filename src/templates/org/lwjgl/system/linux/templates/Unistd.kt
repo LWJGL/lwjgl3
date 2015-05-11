@@ -15,7 +15,7 @@ val unistd = "Unistd".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <unistd.h>."
 
-	int.func(
+	int(
 		"close",
 		"""
 		Closes a file descriptor, so that it no longer refers to any file and may be reused.  Any record locks held on the file it was associated with, and
@@ -25,7 +25,7 @@ val unistd = "Unistd".nativeClass(LINUX_PACKAGE) {
 		int.IN("fd", "the file descriptor to close")
 	)
 
-	ssize_t.func(
+	ssize_t(
 		"read",
 		"Attempts to read up to {@code count} bytes from file descriptor {@code fd} into the buffer starting at {@code buf}.",
 

@@ -56,7 +56,7 @@ val ARB_pixel_buffer_object = "ARBPixelBufferObject".nativeClassGL("ARB_pixel_bu
 		Requires ${GL15.core} or ${ARB_vertex_buffer_object.link}. ${GL21.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferParameteriv, and
 		GetBufferPointerv.
@@ -66,7 +66,7 @@ val ARB_pixel_buffer_object = "ARBPixelBufferObject".nativeClassGL("ARB_pixel_bu
 		"PIXEL_UNPACK_BUFFER_ARB" _ 0x88EC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"PIXEL_PACK_BUFFER_BINDING_ARB" _ 0x88ED,

@@ -29,7 +29,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 		Requires ${GLX14.glx}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute name in {@code attrib_list}.",
 
 		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
@@ -37,14 +37,14 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 		"CONTEXT_FLAGS_ARB" _ 0x2094
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attrib_list}.",
 
 		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
 		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"CreateContextAttribsARB",
 		"""
 		Creates an OpenGL rendering context.

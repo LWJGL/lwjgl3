@@ -226,7 +226,7 @@ public class TemplateFormatter {
 					COMMENT_CLEANUP.matcher(description).replaceAll(" ").trim()
 				).replaceAll("{@code $1}");
 
-			builder.append("\tIntConstant.block(\n");
+			builder.append("\tIntConstant(\n");
 			if ( description.length() <= 160 - (4 + 4 + 2 + 1) ) {
 				builder.append("\t\t\"");
 				builder.append(description);
@@ -344,7 +344,7 @@ public class TemplateFormatter {
 						writerPointer(builder, paramMatcher);
 					if ( paramMatcher.group(1) != null )
 						builder.append(')');
-					builder.append(".func(\n");
+					builder.append("(\n");
 					builder.append("\t\t\"");
 					builder.append(paramMatcher.group(5));
 					builder.append("\",\n");

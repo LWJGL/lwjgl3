@@ -30,13 +30,13 @@ val KHR_context_flush_control = "KHRContextFlushControl".nativeClassGL("KHR_cont
 		${GL45.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v.",
 
 		"CONTEXT_RELEASE_BEHAVIOR" _ 0x82FB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is #CONTEXT_RELEASE_BEHAVIOR.",
 
 		"CONTEXT_RELEASE_BEHAVIOR_FLUSH" _ 0x82FC

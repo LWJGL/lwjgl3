@@ -18,14 +18,14 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to Xlib.h."
 
-	IntConstant.block(
+	IntConstant(
 		"Boolean values",
 
 		"True" _ 1,
 		"False" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Event queue modes.",
 
 		"QueuedAlready" _ 0,
@@ -33,7 +33,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"QueuedAfterFlush" _ 2
 	)
 
-	Status.func(
+	Status(
 		"XInitThreads",
 		"""
 		Initializes Xlib support for concurrent threads. This function must be the first Xlib function a multi-threaded program calls, and it must complete
@@ -46,7 +46,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		"""
 	)
 
-	XErrorHandler.func(
+	XErrorHandler(
 		"XSetErrorHandler",
 		"""
 		Sets the error handler that will be invoked when a X11 protocol error occurs. If {@code handler} is $NULL, the default error handler is used. The action
@@ -60,7 +60,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		returnDoc = "the previous error handler"
 	)
 
-	int.func(
+	int(
 		"XGetErrorText",
 		"""
 		Copies a null-terminated string describing the specified error code into the specified buffer. The returned text is in the encoding of the current
@@ -74,14 +74,14 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		AutoSize("buffer_return") _ int.IN("length", "the size of the buffer")
 	)
 
-	int.func(
+	int(
 		"XFree",
 		"Free in-memory data that was created by an Xlib function.",
 
 		MultiType(PointerMapping.DATA_POINTER) _ void_p.IN("data", "the data that is to be freed")
 	)
 
-	Display_p.func(
+	Display_p(
 		"XOpenDisplay",
 		"""
 		Returns a Display structure that serves as the connection to the X server and that contains all the information about that X server. {@code XOpenDisplay}
@@ -101,7 +101,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		)
 	)
 
-	int.func(
+	int(
 		"XCloseDisplay",
 		"""
 		Closes the connection to the X server for the display specified in the Display structure and destroys all windows, resource IDs (Window, Font, Pixmap,
@@ -114,7 +114,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		DISPLAY
 	)
 
-	Atom.func(
+	Atom(
 		"XInternAtom",
 		"Returns the atom identifier associated with the specified {@code atom_name} string.",
 
@@ -123,14 +123,14 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Bool.IN("only_if_exists", "a Boolean value that indicates whether the atom must be created")
 	)
 
-	int.func(
+	int(
 		"XDefaultScreen",
 		"Returns a pointer to the default screen.",
 
 		DISPLAY
 	)
 
-	int.func(
+	int(
 		"XDefaultDepth",
 		"Returns the depth (number of planes) of the default root window for the specified screen.",
 
@@ -138,7 +138,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XDisplayWidth",
 		"Returns an integer that describes the width of the screen in pixels.",
 
@@ -146,7 +146,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XDisplayHeight",
 		"Returns an integer that describes the height of the screen in pixels.",
 
@@ -154,7 +154,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XDisplayWidthMM",
 		"Returns an integer that describes the width of the screen in millimeters.",
 
@@ -162,7 +162,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XDisplayHeightMM",
 		"Returns an integer that describes the height of the screen in millimeters.",
 
@@ -170,7 +170,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XSync",
 		"""
 		Flushes the output buffer and then waits until all requests have been received and processed by the X server. Any errors generated must be handled by
@@ -186,7 +186,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Bool.IN("discard", "whether to discard events in the queue")
 	)
 
-	Window.func(
+	Window(
 		"XRootWindow",
 		"Returns the root window of the specified screen.",
 
@@ -194,7 +194,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	Bool.func(
+	Bool(
 		"XQueryExtension",
 		"""
 		Determines if the named extension is present. If the extension is not present, {@code XQueryExtension()} returns #False; otherwise, it returns
@@ -212,7 +212,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int_p.IN("first_error_return", "returns the first error code, if any")
 	)
 
-	int.func(
+	int(
 		"XFlush",
 		"""
 		Flushes the output buffer. Most client applications need not use this function because the output buffer is automatically flushed as needed by calls to
@@ -222,7 +222,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		DISPLAY
 	)
 
-	int.func(
+	int(
 		"XPending",
 		"""
 		Returns the number of events that have been received from the X server but have not been removed from the event queue. {@code XPending()} is identical
@@ -232,7 +232,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		DISPLAY
 	)
 
-	int.func(
+	int(
 		"XNextEvent",
 		"""
 		Copies the first event from the event queue into the specified ##XEvent structure and then removes it from the queue. If the event queue is empty,
@@ -243,7 +243,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XEvent_p.OUT("event_return", "a pointer to a ##XEvent structure that will receive the next event in the queue")
 	)
 
-	Colormap.func(
+	Colormap(
 		"XCreateColormap",
 		"""
 		Creates a colormap of the specified visual type for the screen on which the specified window resides and returns the colormap ID associated with it.
@@ -256,7 +256,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("alloc", "the colormap entries to be allocated. You can pass AllocNone or AllocAll.")
 	)
 
-	int.func(
+	int(
 		"XFreeColormap",
 		"""
 		Deletes the association between the {@code colormap} resource ID and the {@code colormap} and frees the {@code colormap} storage. However, this function
@@ -269,7 +269,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Colormap.IN("colormap", "the colormap to destroy")
 	)
 
-	Screen_p.func(
+	Screen_p(
 		"XScreenOfDisplay",
 		"Return a pointer to the indicated screen.",
 
@@ -277,7 +277,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	unsigned_long.func(
+	unsigned_long(
 		"XBlackPixel",
 		"Return the black pixel value for the specified screen.",
 
@@ -285,14 +285,14 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XConnectionNumber",
 		"Returns a connection number for the specified display. On a POSIX-conformant system, this is the file descriptor of the connection.",
 
 		DISPLAY
 	)
 
-	Window.func(
+	Window(
 		"XCreateWindow",
 		"""
 		Creates an unmapped subwindow for a specified parent window, returns the window ID of the created window, and causes the X server to generate a
@@ -327,7 +327,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XSetWindowAttributes_p.IN("attributes", "the structure from which the values (as specified by the value mask) are to be taken")
 	)
 
-	int.func(
+	int(
 		"XChangeWindowAttributes",
 		"Depending on the {@code valuemask}, uses the window attributes in the #XSetWindowAttributes structure to change the specified window attributes.",
 
@@ -346,7 +346,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		)
 	)
 
-	Status.func(
+	Status(
 		"XSetWMProtocols",
 		"Replaces the {@code WM_PROTOCOLS} property on the specified window with the list of atoms specified by the protocols argument.",
 
@@ -356,7 +356,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		AutoSize("protocols") _ int.IN("count", "the number of protocols in the list")
 	)
 
-	int.func(
+	int(
 		"XSetWMHints",
 		"""
 		Sets the window manager hints that include icon information and location, the initial state of the window, and whether the application relies on the
@@ -368,7 +368,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XWMHints_p.IN("hints", "the ##XWMHints structure to be used")
 	)
 
-	int.func(
+	int(
 		"XSetSizeHints",
 		"Sets the ##XSizeHints structure for the named property and the specified window.",
 
@@ -378,7 +378,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Atom.IN("property", "the property name")
 	)
 
-	void.func(
+	void(
 		"XSetWMNormalHints",
 		"""
 		Replaces the size hints for the {@code WM_NORMAL_HINTS} property on the specified window. If the property does not already exist,
@@ -391,7 +391,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XSizeHints_p.IN("hints", "the ##XSizeHints for the window in its normal state")
 	)
 
-	int.func(
+	int(
 		"XGrabPointer",
 		"""
 		Actively grabs control of the pointer and returns X#GrabSuccess() if the grab was successful. Further pointer events are reported only to the
@@ -417,7 +417,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Time.IN("time", "the time. You can pass either a timestamp or X#CurrentTime")
 	)
 
-	int.func(
+	int(
 		"XUngrabPointer",
 		"""
 		Releases the pointer and any queued events if this client has actively grabbed the pointer from #XGrabPointer(), #XGrabButton(), or from
@@ -431,7 +431,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Time.IN("time", "specifies the time. You can pass either a timestamp or X#CurrentTime.")
 	)
 
-	int.func(
+	int(
 		"XDefineCursor",
 		"If a cursor is set, it will be used when the pointer is in the window. If the cursor is $None, it is equivalent to #XUndefineCursor().",
 
@@ -440,7 +440,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Cursor.IN("cursor", "the cursor that is to be displayed or $None")
 	)
 
-	int.func(
+	int(
 		"XUndefineCursor",
 		"""
 		Undoes the effect of a previous #XDefineCursor() for this window. When the pointer is in the window, the parent's cursor will now be used. On the
@@ -451,7 +451,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	int.func(
+	int(
 		"XFreeCursor",
 		"""
 		Deletes the association between the cursor resource ID and the specified cursor. The cursor storage is freed when no other resource references it. The
@@ -462,7 +462,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Cursor.IN("cursor", "the cursor to free")
 	)
 
-	int.func(
+	int(
 		"XGetScreenSaver",
 		"Gets the current screen saver values.",
 
@@ -473,7 +473,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Check(1) _ int_p.OUT("allow_exposures_return", "the current screen save control value")
 	)
 
-	int.func(
+	int(
 		"XSetScreenSaver",
 		"Sets the current screen saver values.",
 
@@ -484,7 +484,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("allow_exposures_return", "the current screen save control value")
 	)
 
-	Status.func(
+	Status(
 		"XSendEvent",
 		"""
 		Identifies the destination window, determines which clients should receive the specified events, and ignores any active grabs. This function requires
@@ -523,7 +523,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XEvent_p.IN("event_send", "the event that is to be sent")
 	)
 
-	int.func(
+	int(
 		"XRaiseWindow",
 		"""
 		Raises the specified window to the top of the stack so that no sibling window obscures it. If the windows are regarded as overlapping sheets of paper
@@ -535,7 +535,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	int.func(
+	int(
 		"XSetInputFocus",
 		"""
 		Changes the input focus and the last-focus-change time. It has no effect if the specified time is earlier than the current last-focus-change time or is
@@ -573,7 +573,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Time.IN("time", " the time. You can pass either a timestamp or X#CurrentTime.")
 	)
 
-	int.func(
+	int(
 		"XGetInputFocus",
 		"Returns the focus window and the current focus state.",
 
@@ -582,7 +582,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int_p.OUT("revert_to_return", "returns the current focus state")
 	)
 
-	int.func(
+	int(
 		"XMoveWindow",
 		"""
 		Moves the specified window to the specified {@code x} and {@code y} coordinates, but it does not change the window's size, raise the window, or change
@@ -599,7 +599,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("y", "the window y-coordinate")
 	)
 
-	int.func(
+	int(
 		"XResizeWindow",
 		"""
 		Changes the inside dimensions of the specified window, not including its borders. This function does not change the window's upper-left coordinate or
@@ -613,7 +613,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("height", "the window height")
 	)
 
-	Bool.func(
+	Bool(
 		"XGetEventData",
 		"Retrieves extra data from the specified cookie.",
 
@@ -621,7 +621,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XGenericEventCookie_p.OUT("cookie", "a pointer to a ##XGenericEventCookie structure.")
 	)
 
-	void.func(
+	void(
 		"XFreeEventData",
 		"Frees the data associated with a cookie.",
 
@@ -629,7 +629,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XGenericEventCookie_p.IN("cookie", "a pointer to a ##XGenericEventCookie structure.")
 	)
 
-	int.func(
+	int(
 		"XGetWindowProperty",
 		"Retrieves a window property.",
 
@@ -647,7 +647,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_char_pp.OUT("prop_return", "the data in the specified format")
 	)
 
-	int.func(
+	int(
 		"XDeleteProperty",
 		"""
 		Deletes the specified property only if the property was defined on the specified window and causes the X server to generate a {@code PropertyNotify}
@@ -659,7 +659,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Atom.IN("property", "the property atom")
 	)
 
-	int.func(
+	int(
 		"XQueryPointer",
 		"""
 		Returns the root window the pointer is logically on and the pointer coordinates relative to the root window's origin. If {@code XQueryPointer} returns
@@ -683,7 +683,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int_p.OUT("mask_return", "the current state of the modifier keys and pointer buttons")
 	)
 
-	int.func(
+	int(
 		"XUnmapWindow",
 		"""
 		Unmaps the specified window and causes the X server to generate an {@code UnmapNotify} event. If the specified window is already unmapped,
@@ -696,7 +696,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	int.func(
+	int(
 		"XDestroyWindow",
 		"""
 		Destroys the specified window as well as all of its subwindows and causes the X server to generate a {@code DestroyNotify} event for each window. The
@@ -711,7 +711,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	void.func(
+	void(
 		"Xutf8SetWMProperties",
 		"Sets window properties.",
 
@@ -726,7 +726,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		nullable _ XClassHint_p.IN("class_hints", "the ##XClassHint structure to be used")
 	)
 
-	int.func(
+	int(
 		"XChangeProperty",
 		"Alters a property for the specified window and causes the X server to generate a {@code PropertyNotify} event on that window.",
 
@@ -743,7 +743,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		AutoSize("data", autoTyped = true) _ int.IN("nelements", "the number of elements of the specified data format")
 	)
 
-	Bool.func(
+	Bool(
 		"XTranslateCoordinates",
 		"Translates a coordinate in one window to the coordinate space of another window.",
 
@@ -757,7 +757,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Window_p.IN("child_return", "the child if the coordinates are contained in a mapped child of the destination window")
 	)
 
-	Status.func(
+	Status(
 		"XGetWindowAttributes",
 		"Returns the current attributes for the specified window to an ##XWindowAttributes structure.",
 
@@ -766,7 +766,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XWindowAttributes_p.IN("window_attributes_return", "a pointer to a ##XWindowAttributes structure")
 	)
 
-	Status.func(
+	Status(
 		"XIconifyWindow",
 		"""
 		Sends a {@code WM_CHANGE_STATE} {@code ClientMessage} event with a format of 32 and a first data element of {@code IconicState} and a window of {@code w}
@@ -781,7 +781,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("screen_number", "the appropriate screen number on the host server")
 	)
 
-	int.func(
+	int(
 		"XMapWindow",
 		"""
 		Maps the window and all of its subwindows that have had map requests. Mapping a window that has an unmapped ancestor does not display the window but
@@ -793,7 +793,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	int.func(
+	int(
 		"XMapRaised",
 		"""
 		Essentially is similar to #XMapWindow() in that it maps the window and all of its subwindows that have had map requests. However, it also raises
@@ -804,7 +804,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		WINDOW
 	)
 
-	int.func(
+	int(
 		"XWarpPointer",
 		"""
 		If {@code dest_w} is None, {@code XWarpPointer()} moves the pointer by the offsets {@code (dest_x, dest_y)} relative to the current position of the
@@ -833,7 +833,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("dest_y", "the y-coordinate within the destination window")
 	)
 
-	int.func(
+	int(
 		"XSetSelectionOwner",
 		"""
 		changes the owner and last-change time for the specified selection and has no effect if the specified time is earlier than the current last-change time
@@ -854,7 +854,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Time.IN("time", "the time. You can pass either a timestamp or X#CurrentTime")
 	)
 
-	Window.func(
+	Window(
 		"XGetSelectionOwner",
 		"""
 		Returns the window ID associated with the window that currently owns the specified selection. If no selection was specified, the function returns the
@@ -865,7 +865,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Atom.IN("selection", "the selection atom whose owner you want returned")
 	)
 
-	int.func(
+	int(
 		"XConvertSelection",
 		"Requests that the specified selection be converted to the specified target type.",
 
@@ -877,7 +877,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Time.IN("time", "the time. You can pass either a timestamp or X#CurrentTime")
 	)
 
-	Bool.func(
+	Bool(
 		"XCheckTypedEvent",
 		"""
 		Searches the event queue and then any events available on the server connection for the first event that matches the specified type. If it finds a
@@ -891,7 +891,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XEvent_p.OUT("event_return", "the matched event's associated ##XEvent structure")
 	)
 
-	Pixmap.func(
+	Pixmap(
 		"XCreatePixmap",
 		"""
 		Creates a pixmap of the width, height, and depth you specified and returns a pixmap ID that identifies it. It is valid to pass an X#InputOnly
@@ -906,7 +906,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("depth", "the pixmap depth")
 	)
 
-	GC.func(
+	GC(
 		"XCreateGC",
 		"""
 		Creates a graphics context and returns a GC. The GC can be used with any destination drawable having the same root and depth as the specified drawable.
@@ -919,7 +919,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		XGCValues_p.IN("values", "")
 	)
 
-	int.func(
+	int(
 		"XFillRectangle",
 		"Fills the specified rectangle as if a four-point FillPolygon protocol request were specified for each rectangle.",
 
@@ -932,7 +932,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("height", "the rectangle height")
 	)
 
-	Cursor.func(
+	Cursor(
 		"XCreatePixmapCursor",
 		"Creates a cursor and returns the cursor ID associated with it.",
 
@@ -945,7 +945,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		unsigned_int.IN("y", "the hotspot y-coordinate relative to the source's origin")
 	)
 
-	int.func(
+	int(
 		"XFreePixmap",
 		"""
 		First deletes the association between the pixmap ID and the pixmap. Then, the X server frees the pixmap storage when there are no references to it. The
@@ -956,7 +956,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Pixmap.IN("pixmap", "the pixmap to free")
 	)
 
-	int.func(
+	int(
 		"XFreeGC",
 		"Destroys the specified GC as well as all the associated storage.",
 

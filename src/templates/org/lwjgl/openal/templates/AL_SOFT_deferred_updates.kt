@@ -22,13 +22,13 @@ val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferre
 		they will all apply at once.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetBoolean, alGetBooleanv (as well as the Integer, Float, and Double variants).",
 
 		"DEFERRED_UPDATES_SOFT" _ 0xC002
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"DeferUpdatesSOFT",
 		"""
 		Sometimes it is desirable to ensure multiple state changes take effect at the same time. Normally this isn't possible due to the AL processing updates
@@ -41,7 +41,7 @@ val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferre
 		"""
 	)
 
-	ALvoid.func(
+	ALvoid(
 		"ProcessUpdatesSOFT",
 		"""
 		Resumes updates.

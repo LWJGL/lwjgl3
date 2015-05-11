@@ -22,7 +22,7 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 		behavior.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by CL10#GetDeviceInfo(). Returns a space separated list of SPIR versions supported by the device. For example returning “1.2 2.0” in this
 		query implies that SPIR version 1.2 and 2.0 are supported by the implementation.
@@ -31,7 +31,7 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 		"DEVICE_SPIR_VERSIONS" _ 0x40E0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Returned by CL10#GetProgramBuildInfo() when {@code param_name} is CL12#PROGRAM_BINARY_TYPE.
 

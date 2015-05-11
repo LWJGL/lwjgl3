@@ -24,13 +24,13 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMultisamplefv.",
 
 		"SAMPLE_POSITION" _ 0x8E50
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -39,37 +39,37 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 		"SAMPLE_MASK" _ 0x8E51
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.",
 
 		"SAMPLE_MASK_VALUE" _ 0x8E52
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.",
 
 		"TEXTURE_2D_MULTISAMPLE" _ 0x9100
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage2DMultisample.",
 
 		"PROXY_TEXTURE_2D_MULTISAMPLE" _ 0x9101
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage3DMultisample.",
 
 		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3DMultisample.",
 
 		"PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9103
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_SAMPLE_MASK_WORDS" _ 0x8E59,
@@ -80,14 +80,14 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY" _ 0x9105
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_SAMPLES" _ 0x9106,
 		"TEXTURE_FIXED_SAMPLE_LOCATIONS" _ 0x9107
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"SAMPLER_2D_MULTISAMPLE" _ 0x9108,

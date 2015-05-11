@@ -27,13 +27,13 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGL("NV_conservati
 		low-res framebuffer as they do tiles in the sparse texture.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
 		"CONSERVATIVE_RASTERIZATION_NV" _ 0x9346
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"SUBPIXEL_PRECISION_BIAS_X_BITS_NV" _ 0x9347,
@@ -41,7 +41,7 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGL("NV_conservati
 		"MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV" _ 0x9349
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"SubpixelPrecisionBiasNV",
 		"""
 		Sets the #SUBPIXEL_PRECISION_BIAS_X_BITS_NV and #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV values.

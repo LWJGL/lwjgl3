@@ -31,7 +31,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 		${GL44.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code flags} parameter of #BufferStorage() and #NamedBufferStorageEXT().",
 
 		"MAP_PERSISTENT_BIT" _ 0x0040,
@@ -40,14 +40,14 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 		"CLIENT_STORAGE_BIT" _ 0x0200
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}.",
 
 		"BUFFER_IMMUTABLE_STORAGE" _ 0x821F,
 		"BUFFER_STORAGE_FLAGS" _ 0x8220
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
 
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT" _ 0x00004000
@@ -55,7 +55,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 
 	val BufferStorage = GL44 reuse "BufferStorage"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
 		"NamedBufferStorageEXT",
 		"""
 		Behaves similarly to #BufferStorage(), except that the buffer whose storage is to be defined is specified by {@code buffer} rather than by the current

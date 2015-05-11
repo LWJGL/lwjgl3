@@ -14,7 +14,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 
 	val MMSYSERR_BASE = 0
 
-	IntConstant.block(
+	IntConstant(
 		"general error return values.",
 
 		"MMSYSERR_NOERROR" _ 0,
@@ -44,7 +44,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 
 	val JOYERR_BASE = 160
 
-	IntConstant.block(
+	IntConstant(
 		"joystick error return values.",
 
 		"JOYERR_NOERROR" _ 0,
@@ -53,7 +53,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"JOYERR_UNPLUGGED" expr "$JOYERR_BASE + 7"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Constants used with JOYINFO and JOYINFOEX structures and MM_JOY* messages.",
 
 		"JOY_BUTTON1" _ 0x0001,
@@ -65,7 +65,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"JOY_BUTTON3CHG" _ 0x0400
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"constants used with JOYINFOEX.",
 
 		"JOY_BUTTON5" _ 0x00000010,
@@ -98,7 +98,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"JOY_BUTTON32" _ 0x80000000.i
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"constants used with JOYINFOEX structure.",
 
 		"JOY_POVCENTERED" _ -1,
@@ -134,14 +134,14 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		"JOY_CAL_READVONLY" _ 0x08000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"joystick ID constants.",
 
 		"JOYSTICKID1" _ 0,
 		"JOYSTICKID2" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"joystick driver capabilites.",
 
 		"JOYCAPS_HASZ" _ 0x0001,
@@ -155,7 +155,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to Mmsystem.h."
 
-	MMRESULT.func(
+	MMRESULT(
 		"joyGetDevCaps",
 		"Queries a joystick to determine its capabilities.",
 
@@ -170,7 +170,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("bjc", "size, in bytes, of the {@code JOYCAPS} structure.")
 	)
 
-	MMRESULT.func(
+	MMRESULT(
 		"joyGetPos",
 		"Queries a joystick for its position and button status.",
 
@@ -178,7 +178,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		LPJOYINFO.IN("ji", "pointer to a ##JOYINFO structure that contains the position and button status of the joystick")
 	)
 
-	MMRESULT.func(
+	MMRESULT(
 		"joyGetPosEx",
 		"Queries a joystick for its position and button status.",
 
@@ -193,7 +193,7 @@ val Mmsystem = "Mmsystem".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	DWORD.func(
+	DWORD(
 		"timeGetTime",
 		"""
 		retrieves the system time, in milliseconds. The system time is the time elapsed since Windows was started.

@@ -33,14 +33,14 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 		${GL13.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code param} parameters of TexGend, TexGenf, and TexGeni when {@code pname} parameter is TEXTURE_GEN_MODE.",
 
 		"NORMAL_MAP_ARB" _ 0x8511,
 		"REFLECTION_MAP_ARB" _ 0x8512
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		When the {@code pname} parameter of TexGendv, TexGenfv, and TexGeniv is TEXTURE_GEN_MODE, then the array {@code params} may also contain NORMAL_MAP_ARB
 		or REFLECTION_MAP_ARB. Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled, and by the {@code pname} parameter of GetBooleanv,
@@ -51,13 +51,13 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 		"TEXTURE_CUBE_MAP_ARB" _ 0x8513
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"TEXTURE_BINDING_CUBE_MAP_ARB" _ 0x8514
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of GetTexImage, GetTexLevelParameteriv, GetTexLevelParameterfv, TexImage2D, CopyTexImage2D, TexSubImage2D, and
 		CopySubTexImage2D.
@@ -71,13 +71,13 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB" _ 0x851A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv, and TexImage2D.",
 
 		"PROXY_TEXTURE_CUBE_MAP_ARB" _ 0x851B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_CUBE_MAP_TEXTURE_SIZE_ARB" _ 0x851C

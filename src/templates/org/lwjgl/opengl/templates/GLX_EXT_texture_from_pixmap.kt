@@ -22,7 +22,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		Requires ${GLX13.glx}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of GLX13#GetFBConfigAttrib() and the {@code attrib_list} parameter of GLX13#ChooseFBConfig().",
 
 		"BIND_TO_TEXTURE_RGB_EXT" _ 0x20D0,
@@ -32,7 +32,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"Y_INVERTED_EXT" _ 0x20D4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as an attribute in the {@code attrib_list} parameter of GLX13#CreatePixmap(), and by the {@code attribute} parameter of GLX13#QueryDrawable().",
 
 		"TEXTURE_FORMAT_EXT" _ 0x20D5,
@@ -40,7 +40,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"MIPMAP_TEXTURE_EXT" _ 0x20D7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attrib_list} parameter of GLX13#CreatePixmap() and returned in the {@code value} parameter of
 		GLX13#QueryDrawable() when {@code attribute} is #TEXTURE_FORMAT_EXT.
@@ -51,7 +51,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"TEXTURE_FORMAT_RGBA_EXT" _ 0x20DA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as bits in the #BIND_TO_TEXTURE_TARGETS_EXT variable.",
 
 		"TEXTURE_1D_BIT_EXT" _ 0x00000001,
@@ -59,7 +59,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"TEXTURE_RECTANGLE_BIT_EXT" _ 0x00000004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attrib_list} parameter of GLX13#CreatePixmap() and returned in the {@code value} parameter of
 		GLX13#QueryDrawable() when {@code attribute} is #TEXTURE_TARGET_EXT.
@@ -70,7 +70,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"TEXTURE_RECTANGLE_EXT" _ 0x20DD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code buffer} parameter of #BindTexImageEXT() and #ReleaseTexImageEXT().",
 
 		"FRONT_LEFT_EXT" _ 0x20DE,
@@ -91,7 +91,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		"AUX9_EXT" _ 0x20EB
 	)
 
-	void.func(
+	void(
 		"BindTexImageEXT",
 		"""
 		Defines a one- or two-dimensional texture image. The texture image is taken from {@code buffer} and need not be copied. The texture target, the texture
@@ -104,7 +104,7 @@ val GLX_EXT_texture_from_pixmap = "GLXEXTTextureFromPixmap".nativeClassGLX("GLX_
 		mods(const, nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional null-terminated list of attributes")
 	)
 
-	void.func(
+	void(
 		"ReleaseTexImageEXT",
 		"Releases a color buffer that is being used as a texture.",
 

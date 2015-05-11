@@ -15,7 +15,7 @@ val unistd = "Unistd".nativeClass(MACOSX_PACKAGE) {
 
 	documentation = "Native bindings to <unistd.h>."
 
-	pid_t.func(
+	pid_t(
 		"getpid",
 		"Returns the process ID of the calling process."
 	);

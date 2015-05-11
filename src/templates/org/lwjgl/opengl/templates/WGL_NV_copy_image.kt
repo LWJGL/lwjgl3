@@ -22,7 +22,7 @@ val WGL_NV_copy_image = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", NV)
 		different sharelists or even on different physical devices.
 		"""
 
-	BOOL.func(
+	BOOL(
 		"CopyImageSubDataNV",
 		"""
 		Behaves identically to the core function NVCopyImage##glCopyImageSubDataNV(), except that the {@code srcRC} and {@code dstRC} parameters specify

@@ -27,7 +27,7 @@ val ARB_texture_swizzle = "ARBTextureSwizzle".nativeClassGL("ARB_texture_swizzle
 		${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"TEXTURE_SWIZZLE_R" _ 0x8E42,
@@ -36,7 +36,7 @@ val ARB_texture_swizzle = "ARBTextureSwizzle".nativeClassGL("ARB_texture_swizzle
 		"TEXTURE_SWIZZLE_A" _ 0x8E45
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of TexParameteriv, TexParameterfv, GetTexParameterfv, and GetTexParameteriv.",
 
 		"TEXTURE_SWIZZLE_RGBA" _ 0x8E46

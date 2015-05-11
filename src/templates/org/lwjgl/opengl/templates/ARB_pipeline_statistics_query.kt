@@ -25,7 +25,7 @@ val ARB_pipeline_statistics_query = "ARBPipelineStatisticsQuery".nativeClassGL("
 		"""
 
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of GL15#BeginQuery(), GL15#EndQuery(), GL15#GetQueryiv(),
 		GL40#BeginQueryIndexed(), GL40#EndQueryIndexed() and GL40#GetQueryIndexediv().

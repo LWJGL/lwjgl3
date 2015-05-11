@@ -28,13 +28,13 @@ val ARB_sync = "ARBSync".nativeClassGL("ARB_sync") {
 		Requires ${GL31.core}. ${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as the {@code pname} parameter of GetInteger64v.",
 
 		"MAX_SERVER_WAIT_TIMEOUT" _ 0x9111
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as the {@code pname} parameter of GetSynciv.",
 
 		"OBJECT_TYPE" _ 0x9112,
@@ -43,38 +43,38 @@ val ARB_sync = "ARBSync".nativeClassGL("ARB_sync") {
 		"SYNC_FLAGS" _ 0x9115
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE.",
 
 		"SYNC_FENCE" _ 0x9116
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} SYNC_CONDITION.",
 
 		"SYNC_GPU_COMMANDS_COMPLETE" _ 0x9117
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} SYNC_STATUS.",
 
 		"UNSIGNALED" _ 0x9118,
 		"SIGNALED" _ 0x9119
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code flags} parameter of ClientWaitSync.",
 
 		"SYNC_FLUSH_COMMANDS_BIT" _ 0x00000001
 	)
 
-	LongConstant.block(
+	LongConstant(
 		"Accepted in the {@code timeout} parameter of WaitSync.",
 
 		"TIMEOUT_IGNORED" expr "0xFFFFFFFFFFFFFFFFl" // TODO: http://youtrack.jetbrains.com/issue/KT-2780
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by ClientWaitSync.",
 
 		"ALREADY_SIGNALED" _ 0x911A,

@@ -23,7 +23,7 @@ val GLX_EXT_swap_control = "GLXEXTSwapControl".nativeClassGLX("GLX_EXT_swap_cont
 		It also allows an application to query the swap interval and the implementation-dependent maximum swap interval of a drawable.
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"SwapIntervalEXT",
 		"""
 		Specifies the minimum number of video frame periods per buffer swap for a particular GLX drawable (e.g. a value of two means that the color buffers will

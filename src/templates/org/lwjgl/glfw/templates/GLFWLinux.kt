@@ -20,7 +20,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 
 	documentation = "Native bindings to the GLFW library's Linux native access functions."
 
-	Display_p.func(
+	Display_p(
 		"GetX11Display",
 		"""
 		Returns the ${code("Display")} used by GLFW.
@@ -31,7 +31,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 	    since = "GLFW 3.0"
 	)
 
-	RRCrtc.func(
+	RRCrtc(
 		"GetX11Adapter",
 	    """
 	    Returns the ${code("RRCrtc")} of the specified monitor.
@@ -44,7 +44,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 	    since = "GLFW 3.1"
 	)
 
-	RROutput.func(
+	RROutput(
 		"GetX11Monitor",
 		"""
 		Returns the ${code("RROutput")} of the specified monitor.
@@ -57,7 +57,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		since = "GLFW 3.1"
 	)
 
-	Window.func(
+	Window(
 		"GetX11Window",
 		"""
 		Returns the ${code("Window")} of the specified window.
@@ -70,7 +70,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		since = "GLFW 3.0"
 	)
 
-	GLXContext.func(
+	GLXContext(
 		"GetGLXContext",
 		"""
 		Returns the ${code("GLXContext")} of the specified window.

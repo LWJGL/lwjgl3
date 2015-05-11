@@ -19,7 +19,7 @@ val User32 = "User32".nativeClassWin {
 		$DLL_WARNING
 		"""
 
-	DLL_FUNC _ BOOL.func(
+	DLL_FUNC _ BOOL(
 		"SetProcessDPIAware",
 		"Sets the current process as dots per inch (dpi) aware.",
 

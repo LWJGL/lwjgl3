@@ -15,7 +15,7 @@ val sys_select = "SysSelect".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to <sys/select.h>."
 
-	void.func(
+	void(
 		"FD_CLR",
 		"Removes a file descriptor from the set.",
 
@@ -23,7 +23,7 @@ val sys_select = "SysSelect".nativeClass(LINUX_PACKAGE) {
 		fd_set_p.IN("set", "the file descriptor set from which to remvoe")
 	)
 
-	int.func(
+	int(
 		"FD_ISSET",
 		"Tests to see if a file descriptor is part of the set.",
 
@@ -31,7 +31,7 @@ val sys_select = "SysSelect".nativeClass(LINUX_PACKAGE) {
 		fd_set_p.IN("set", "the file descriptor set to test")
 	)
 
-	void.func(
+	void(
 		"FD_SET",
 		"Adds a file descriptor to the set.",
 
@@ -39,14 +39,14 @@ val sys_select = "SysSelect".nativeClass(LINUX_PACKAGE) {
 		fd_set_p.IN("set", "the file descriptor set to which to add")
 	)
 
-	void.func(
+	void(
 		"FD_ZERO",
 		"Clears a file descriptor set.",
 
 		fd_set_p.IN("set", "the file descriptor set to clear")
 	)
 
-	int.func(
+	int(
 		"select",
 		"""
 		Allows a program to monitor multiple file descriptors, waiting until one or more of the file descriptors become "ready" for some class of I/O operation

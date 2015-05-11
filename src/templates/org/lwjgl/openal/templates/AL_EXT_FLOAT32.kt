@@ -10,7 +10,7 @@ import org.lwjgl.openal.*
 val AL_EXT_FLOAT32 = "EXTFloat32".nativeClassAL("EXT_FLOAT32") {
 	documentation = "bindings to AL_EXT_FLOAT32 extension."
 
-	IntConstant.block(
+	IntConstant(
 		"AL_EXT_FLOAT32 tokens.",
 
 		"FORMAT_MONO_FLOAT32" _ 0x10010,

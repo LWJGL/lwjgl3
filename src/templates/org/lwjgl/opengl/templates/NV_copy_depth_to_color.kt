@@ -22,7 +22,7 @@ val NV_copy_depth_to_color = "NVCopyDepthToColor".nativeClassGL("NV_copy_depth_t
 		Requires ${NV_packed_depth_stencil.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of CopyPixels.
 		""",

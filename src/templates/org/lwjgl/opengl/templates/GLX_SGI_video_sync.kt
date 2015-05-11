@@ -20,14 +20,14 @@ val GLX_SGI_video_sync = "GLXSGIVideoSync".nativeClassGLX("GLX_SGI_video_sync", 
 		This extension provides a means for synchronization with the video frame rate of a monitor.
 		"""
 
-	GLint.func(
+	GLint(
 		"GetVideoSyncSGI",
 		"Returns the value of the video sync counter in {@code count}. Zero is returned if the call is successful.",
 
 		Check(1) _ unsigned_int_p.OUT("count", "the video sync counter value")
 	)
 
-	GLint.func(
+	GLint(
 		"WaitVideoSyncSGI",
 		"""
 		Puts the calling process to sleep until

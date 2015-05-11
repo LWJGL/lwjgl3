@@ -45,7 +45,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		Requires ${WGL_ARB_create_context.link} or ${GLX_ARB_create_context.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by GetIntegerv.",
 
 		"MAX_DEBUG_MESSAGE_LENGTH_AMD" _ 0x9143,
@@ -53,7 +53,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		"DEBUG_LOGGED_MESSAGES_AMD" _ 0x9145
 	)
 
-	val Severities = IntConstant.block(
+	val Severities = IntConstant(
 		"Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, DebugMessageInsertAMD, and DEBUGPROCAMD callback function for {@code severity}.",
 
 		"DEBUG_SEVERITY_HIGH_AMD" _ 0x9146,
@@ -61,7 +61,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		"DEBUG_SEVERITY_LOW_AMD" _ 0x9148
 	).javaDocLinks
 
-	val Categories = IntConstant.block(
+	val Categories = IntConstant(
 		"Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}.",
 
 		"DEBUG_CATEGORY_API_ERROR_AMD" _ 0x9149,
@@ -74,7 +74,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		"DEBUG_CATEGORY_OTHER_AMD" _ 0x9150
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageEnableAMD",
 		"""
 		Allows disabling or enabling generation of subsets of messages. If {@code enabled} is GL11#TRUE, the referenced subset of messages is enabled. If
@@ -120,7 +120,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageInsertAMD",
 		"""
 		Injects an application-supplied message into the debug message stream.
@@ -141,7 +141,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		const _ GLcharUTF8_p.IN("buf", "the message characters")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageCallbackAMD",
 		"""
 		Specifies a callback to receive debugging messages from the GL.
@@ -175,7 +175,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		)
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetDebugMessageLogAMD",
 		"""
 		Retrieves messages from the debug message log.

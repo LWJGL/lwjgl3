@@ -25,7 +25,7 @@ val ARB_texture_border_clamp = "ARBTextureBorderClamp".nativeClassGL("ARB_textur
 		${GL13.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of GL11#TexParameteri() and GL11#TexParameterf(), and by the {@code params} parameter of GL11#TexParameteriv()
 		and GL11#TexParameterfv(), when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or GL12#TEXTURE_WRAP_R.

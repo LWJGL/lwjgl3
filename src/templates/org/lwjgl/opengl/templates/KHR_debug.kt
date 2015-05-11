@@ -79,20 +79,20 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.",
 
 		"DEBUG_OUTPUT" _ 0x92E0,
 		"DEBUG_OUTPUT_SYNCHRONOUS" _ 0x8242
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
 		"CONTEXT_FLAG_DEBUG_BIT" _ 0x00000002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_DEBUG_MESSAGE_LENGTH" _ 0x9143,
@@ -104,14 +104,14 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		"MAX_LABEL_LENGTH" _ 0x82E8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
 		"DEBUG_CALLBACK_FUNCTION" _ 0x8244,
 		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted or provided by the {@code source} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code sources} parameter
 		of GetDebugMessageLog (some commands restrict {@code source} to a subset of these parameters; see the specification body for details).
@@ -125,7 +125,7 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		"DEBUG_SOURCE_OTHER" _ 0x824B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code types} parameter of
 		GetDebugMessageLog.
@@ -140,7 +140,7 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		"DEBUG_TYPE_MARKER" _ 0x8268
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
@@ -149,7 +149,7 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		"DEBUG_TYPE_POP_GROUP" _ 0x826A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted or provided by the {@code severity} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC callback functions, and the
 		{@code severities} parameter of GetDebugMessageLog.
@@ -161,7 +161,7 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
 		"BUFFER" _ 0x82E0,

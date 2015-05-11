@@ -23,7 +23,7 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		override.
 		"""
 
-	void.func(
+	void(
 		"LogMessagesToSystemLogAPPLE",
 		"Forwards on all log messages to the Apple System Logger.",
 
@@ -33,7 +33,7 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		void_p.IN("user_data", "")
 	)
 
-	void.func(
+	void(
 		"LogMessagesToStdoutAPPLE",
 		"Forwards on all log messages to the standard output stream.",
 
@@ -43,7 +43,7 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		void_p.IN("user_data", "")
 	)
 
-	void.func(
+	void(
 		"LogMessagesToStderrAPPLE",
 		"Forwards on all log messages to the standard error stream.",
 

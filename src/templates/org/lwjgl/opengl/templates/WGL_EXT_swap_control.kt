@@ -22,7 +22,7 @@ val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_cont
 		Requires ${WGL_EXT_extensions_string.link}.
 		"""
 
-	BOOL.func(
+	BOOL(
 		"SwapIntervalEXT",
 		"""
 		Specifies the minimum number of video frame periods per buffer swap for the window associated with the current context. The interval takes effect when
@@ -41,5 +41,5 @@ val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_cont
 		int.IN("interval", "the minimum number of video frames that are displayed before a buffer swap will occur")
 	)
 
-	int.func("GetSwapIntervalEXT", "Returns the current swap interval for the window associated with the current context.")
+	int("GetSwapIntervalEXT", "Returns the current swap interval for the window associated with the current context.")
 }

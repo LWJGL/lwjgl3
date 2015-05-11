@@ -31,7 +31,7 @@ val intel_thread_local_exec = "INTELThreadLocalExec".nativeClassCL("intel_thread
 		CL10#EnqueueNDRangeKernel() and CL10#EnqueueTask() should have optimized implementations using a single execution thread.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_queue_properties",
 
 		"QUEUE_THREAD_LOCAL_EXEC_ENABLE_INTEL" expr "1 << 31"

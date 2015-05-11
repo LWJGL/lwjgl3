@@ -19,7 +19,7 @@ val ARB_stencil_texturing = "ARBStencilTexturing".nativeClassGL("ARB_stencil_tex
 		Requires ${ARB_depth_texture.link} and ${registryLinkTo("EXT", "packed_depth_stencil")}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameter and GetTexParameter*.",
 
 		"DEPTH_STENCIL_TEXTURE_MODE" _ 0x90EA

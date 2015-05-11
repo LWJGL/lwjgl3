@@ -47,7 +47,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"GetTarget",
 
 		"MAJOR_VERSION" _ 0x821B,
@@ -58,7 +58,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT" _ 0x0001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Renamed tokens.",
 
 		"COMPARE_REF_TO_TEXTURE" expr "GL14.GL_COMPARE_R_TO_TEXTURE",
@@ -77,7 +77,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"MAX_VARYING_COMPONENTS" expr "GL20.GL_MAX_VARYING_FLOATS"
 	)
 
-	(const _ GLubyteString).func(
+	(const _ GLubyteString)(
 		"GetStringi",
 		"Queries indexed string state.",
 
@@ -85,7 +85,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("index", "the index of the particular element being queried")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferiv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -100,7 +100,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferuiv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -109,7 +109,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(4) _ GLint_p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferfv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -124,7 +124,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferfi",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -136,7 +136,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_gpu_shader4
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, GetVertexAttribiv, GetVertexAttribIuiv and GetVertexAttribIiv.
 		""",
@@ -144,7 +144,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"VERTEX_ATTRIB_ARRAY_INTEGER" _ 0x88FD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
 		"SAMPLER_1D_ARRAY" _ 0x8DC0,
@@ -174,7 +174,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"UNSIGNED_INT_SAMPLER_BUFFER" _ 0x8DD8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MIN_PROGRAM_TEXEL_OFFSET" _ 0x8904,
@@ -189,33 +189,33 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	val vertexAttribW = "the vertex attribute w component"
 	val vertexAttribBuffer = "the pure integer vertex attribute buffer"
 
-	GLvoid.func("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
-	GLvoid.func("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
-	GLvoid.func("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-	GLvoid.func("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+	GLvoid("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
+	GLvoid("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
+	GLvoid("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	GLvoid("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid.func("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
-	GLvoid.func("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
-	GLvoid.func("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-	GLvoid.func("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+	GLvoid("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
+	GLvoid("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
+	GLvoid("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	GLvoid("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid.func("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid.func("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribIPointer",
 		"Specifies the location and organization of a pure integer vertex attribute array.",
 
@@ -241,7 +241,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetVertexAttribIiv",
 		"Returns the value of a pure integer generic vertex attribute parameter.",
 
@@ -250,7 +250,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(4), returnValue) _ GLint_p.OUT("params", "returns the requested data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetVertexAttribIuiv",
 		"Unsigned version of #GetVertexAttribIiv().",
 
@@ -266,7 +266,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	val uniformZ = "the uniform z value"
 	val uniformW = "the uniform w value"
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform1ui",
 		"Specifies the value of a uint uniform variable for the current program object.",
 
@@ -274,7 +274,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v0", "the uniform value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform2ui",
 		"Specifies the value of a uvec2 uniform variable for the current program object.",
 
@@ -283,7 +283,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v1", uniformY)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform3ui",
 		"Specifies the value of a uvec3 uniform variable for the current program object.",
 
@@ -293,7 +293,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v2", uniformZ)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform4ui",
 		"Specifies the value of a uvec4 uniform variable for the current program object.",
 
@@ -304,7 +304,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v3", uniformW)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform1uiv",
 		"Specifies the value of a single uint uniform variable or a uint uniform variable array for the current program object.",
 
@@ -313,7 +313,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform2uiv",
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for the current program object.",
 
@@ -322,7 +322,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform3uiv",
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for the current program object.",
 
@@ -331,7 +331,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Uniform4uiv",
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for the current program object.",
 
@@ -340,7 +340,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetUniformuiv",
 		"Returns the uint value(s) of a uniform variable.",
 
@@ -349,7 +349,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "the value of the specified uniform variable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindFragDataLocation",
 		"Binds a user-defined varying out variable to a fragment shader color number.",
 
@@ -358,7 +358,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLcharASCII_p.IN("name", "the name of the user-defined varying out variable whose binding to modify")
 	)
 
-	GLint.func(
+	GLint(
 		"GetFragDataLocation",
 		"Queries the bindings of color numbers to user-defined varying out variables.",
 
@@ -368,7 +368,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// NV_conditional_render
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BeginConditionalRender.",
 
 		"QUERY_WAIT" _ 0x8E13,
@@ -377,7 +377,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"QUERY_BY_REGION_NO_WAIT" _ 0x8E16
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginConditionalRender",
 		"Starts conditional rendering.",
 
@@ -385,14 +385,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", CONDITIONAL_RENDER_MODES)
 	)
 
-	ReferenceGL("glBeginConditionalRender") _ GLvoid.func(
+	ReferenceGL("glBeginConditionalRender") _ GLvoid(
 		"EndConditionalRender",
 		"Ends conditional rendering."
 	)
 
 	// ARB_map_buffer_range
 
-	val MapBufferRangeBits = IntConstant.block(
+	val MapBufferRangeBits = IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferRange.",
 
 		"MAP_READ_BIT" _ 0x0001,
@@ -403,7 +403,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"MAP_UNSYNCHRONIZED_BIT" _ 0x0020
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferParameteriv.",
 
 		"BUFFER_ACCESS_FLAGS " _ 0x911F,
@@ -411,7 +411,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"BUFFER_MAP_OFFSET" _ 0x9121
 	)
 
-	(MapPointer("length") _ GLvoid_p).func(
+	(MapPointer("length") _ GLvoid_p)(
 		"MapBufferRange",
 		"""
 		Maps a section of a buffer object's data store.
@@ -429,7 +429,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLbitfield.IN("access", "a combination of access flags indicating the desired access to the range", MapBufferRangeBits, LinkMode.BITFIELD)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FlushMappedBufferRange",
 		"Indicates modifications to a range of a mapped buffer.",
 
@@ -440,13 +440,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_color_buffer_float
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"RGBA_FLOAT_MODE" _ 0x8820
 	)
 
-	val ClampTargets = IntConstant.block(
+	val ClampTargets = IntConstant(
 		"Accepted by the {@code target} parameter of ClampColor and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"CLAMP_VERTEX_COLOR" _ 0x891A,
@@ -454,13 +454,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"CLAMP_READ_COLOR" _ 0x891C
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code clamp} parameter of ClampColor.",
 
 		"FIXED_ONLY" _ 0x891D
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClampColor",
 		"Controls color clamping.",
 
@@ -470,7 +470,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_depth_buffer_float
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage, and
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
@@ -480,7 +480,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"DEPTH32F_STENCIL8" _ 0x8CAD
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage.
@@ -491,7 +491,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_texture_float
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_RED_TYPE" _ 0x8C10,
@@ -503,13 +503,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"TEXTURE_DEPTH_TYPE" _ 0x8C16
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by the {@code params} parameter of GetTexLevelParameter.",
 
 		"UNSIGNED_NORMALIZED" _ 0x8C17
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
 		"RGBA32F" _ 0x8814,
@@ -520,13 +520,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_packed_float
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage.",
 
 		"R11F_G11F_B10F" _ 0x8C3A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
@@ -538,13 +538,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_texture_shared_exponent
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage.",
 
 		"RGB9_E5" _ 0x8C3D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
@@ -554,7 +554,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"UNSIGNED_INT_5_9_9_9_REV" _ 0x8C3E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
 		"TEXTURE_SHARED_SIZE" _ 0x8C3F
@@ -562,7 +562,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_framebuffer_object
 
-	val FramebufferTargets = IntConstant.block(
+	val FramebufferTargets = IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindFramebuffer, CheckFramebufferStatus, FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and
 		GetFramebufferAttachmentParameteriv.
@@ -573,7 +573,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"DRAW_FRAMEBUFFER" _ 0x8CA9
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of BindRenderbuffer, RenderbufferStorage, and GetRenderbufferParameteriv, and returned by
 		GetFramebufferAttachmentParameteriv.
@@ -582,7 +582,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"RENDERBUFFER" _ 0x8D41
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorage.",
 
 		"STENCIL_INDEX1" _ 0x8D46,
@@ -591,7 +591,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"STENCIL_INDEX16" _ 0x8D49
 	)
 
-	val RenderbufferParameters = IntConstant.block(
+	val RenderbufferParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
 		"RENDERBUFFER_WIDTH" _ 0x8D42,
@@ -606,7 +606,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"RENDERBUFFER_SAMPLES" _ 0x8CAB
 	).javaDocLinks
 
-	val FramebufferParameters = IntConstant.block(
+	val FramebufferParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
 		"FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE" _ 0x8CD0,
@@ -624,14 +624,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE" _ 0x8217
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
 
 		"FRAMEBUFFER_DEFAULT" _ 0x8218,
 		"INDEX" _ 0x8222
 	)
 
-	val FramebufferAttachments = IntConstant.block(
+	val FramebufferAttachments = IntConstant(
 		"Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}, FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.",
 
 		"COLOR_ATTACHMENT0" _ 0x8CE0,
@@ -655,13 +655,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"DEPTH_STENCIL_ATTACHMENT" _ 0x821A
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_SAMPLES" _ 0x8D57
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by CheckFramebufferStatus().",
 
 		"FRAMEBUFFER_COMPLETE" _ 0x8CD5,
@@ -674,7 +674,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"FRAMEBUFFER_UNDEFINED" _ 0x8219
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv,  and GetDoublev.",
 
 		"FRAMEBUFFER_BINDING" _ 0x8CA6,
@@ -685,13 +685,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"MAX_RENDERBUFFER_SIZE" _ 0x84E8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetError().",
 
 		"INVALID_FRAMEBUFFER_OPERATION" _ 0x0506
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage, by the {@code type} parameter of CopyPixels, by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D,
@@ -701,7 +701,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"DEPTH_STENCIL" _ 0x84F9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and
 		GetTexImage.
@@ -710,7 +710,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"UNSIGNED_INT_24_8" _ 0x84FA
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorage, and
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameteriv.
@@ -719,20 +719,20 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"DEPTH24_STENCIL8" _ 0x88F0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_STENCIL_SIZE" _ 0x88F1
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsRenderbuffer",
 		"Determines if a name corresponds to a renderbuffer object.",
 
 		GLuint.IN("renderbuffer", "a value that may be the name of a renderbuffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindRenderbuffer",
 		"Binds a renderbuffer to a renderbuffer target.",
 
@@ -740,7 +740,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("renderbuffer", "the name of the renderbuffer object to bind")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteRenderbuffers",
 		"Deletes renderbuffer objects.",
 
@@ -748,7 +748,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(const, SingleValue("renderbuffer")) _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenRenderbuffers",
 		"Generates renderbuffer object names.",
 
@@ -756,7 +756,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		returnValue _ GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"RenderbufferStorage",
 		"Establishes data storage, format and dimensions of a renderbuffer object's image.",
 
@@ -766,7 +766,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizei.IN("height", "the height of the renderbuffer, in pixels")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"RenderbufferStorageMultisample",
 		"""
 		Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.
@@ -781,7 +781,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizei.IN("height", "the height of the renderbuffer, in pixels")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetRenderbufferParameteriv",
 		"Retrieves information about a bound renderbuffer object.",
 
@@ -790,14 +790,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsFramebuffer",
 		"Determines if a name corresponds to a framebuffer object.",
 
 		GLuint.IN("framebuffer", "a value that may be the name of a framebuffer object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindFramebuffer",
 		"Binds a framebuffer to a framebuffer target.",
 
@@ -805,7 +805,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("framebuffer", "the name of the framebuffer object to bind")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteFramebuffers",
 		"Deletes framebuffer objects.",
 
@@ -813,7 +813,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(const, SingleValue("framebuffer")) _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenFramebuffers",
 		"Generates framebuffer object names.",
 
@@ -821,14 +821,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		returnValue _ GLuint_p.OUT("framebuffers", "a buffer in which the generated framebuffer object names are stored")
 	)
 
-	GLenum.func(
+	GLenum(
 		"CheckFramebufferStatus",
 		"Checks the completeness status of a framebuffer.",
 
 		GLenum.IN("target", "the target of the framebuffer completeness check", FramebufferTargets)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTexture1D",
 		"Attaches a level of a 1D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -839,7 +839,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTexture2D",
 		"Attaches a level of a 2D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -850,7 +850,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTexture3D",
 		"Attaches a layer of a 3D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -862,7 +862,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("layer", "the layer of a 2-dimensional image within the 3-dimensional texture.")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferTextureLayer",
 		"Attaches a single layer of a texture to a framebuffer",
 
@@ -873,7 +873,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("layer", "the layer of {@code texture} to attach.")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferRenderbuffer",
 		"Attaches a renderbuffer as a logical buffer to the currently bound framebuffer object.",
 
@@ -883,7 +883,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("renderbuffer", "the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetFramebufferAttachmentParameteriv",
 		"Retrievees information about attachments of a bound framebuffer object.",
 
@@ -893,7 +893,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BlitFramebuffer",
 		"Copies a block of pixels from the read framebuffer to the draw framebuffer.",
 
@@ -913,7 +913,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("filter", "the interpolation to be applied if the image is stretched", "GL11#NEAREST GL11#LINEAR")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenerateMipmap",
 		"Generate mipmaps for a specified texture target.",
 
@@ -926,7 +926,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_half_float_pixel & ARB_half_float_vertex
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, TexImage3D, GetTexImage, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, GetConvolutionFilter, SeparableFilter2D, GetSeparableFilter,
@@ -941,13 +941,13 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_texture_integer
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"RGBA_INTEGER_MODE" _ 0x8D9E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
 		"RGBA32UI" _ 0x8D70,
@@ -964,7 +964,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"RGB8I" _ 0x8D8F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
 		""",
@@ -979,7 +979,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"BGRA_INTEGER" _ 0x8D9B
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexParameterIiv",
 		"Sets the integer value of a texture parameter.",
 
@@ -988,7 +988,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(const, Check(1), SingleValue("param")) _ GLint_p.IN("params", "the value of {@code pname}")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexParameterIuiv",
 		"Sets the unsigned integer value of a texture parameter.",
 
@@ -997,7 +997,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(const, Check(1), SingleValue("param")) _ GLuint_p.IN("params", "the value of {@code pname}")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTexParameterIiv",
 		"Returns the integer value of a texture parameter.",
 
@@ -1006,7 +1006,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "returns the texture parameter value")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTexParameterIuiv",
 		"Returns the unsigned integer value of a texture parameter.",
 
@@ -1017,20 +1017,20 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_texture_array
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmap, and BindTexture.",
 
 		"TEXTURE_1D_ARRAY" _ 0x8C18,
 		"TEXTURE_2D_ARRAY" _ 0x8C1A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CopyTexSubImage3D, CompressedTexImage3D, and CompressedTexSubImage3D.",
 
 		"PROXY_TEXTURE_2D_ARRAY" _ 0x8C1B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of TexImage2D, TexSubImage2D, CopyTexImage2D, CopyTexSubImage2D, CompressedTexImage2D, and
 		CompressedTexSubImage2D.
@@ -1039,7 +1039,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"PROXY_TEXTURE_1D_ARRAY" _ 0x8C19
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
 		"TEXTURE_BINDING_1D_ARRAY" _ 0x8C1C,
@@ -1049,7 +1049,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_draw_buffers2
 
-	GLvoid.func(
+	GLvoid(
 		"ColorMaski",
 		"Enables and disables writing of frame buffer color components.",
 
@@ -1060,7 +1060,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLboolean.IN("a", "whether A values are written or not")
 	)
 
-	ReferenceGL("glGet") _ GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid(
 		"GetBooleani_v",
 		"Queries the boolean value of an indexed state variable.",
 
@@ -1069,7 +1069,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet") _ GLvoid.func(
+	ReferenceGL("glGet") _ GLvoid(
 		"GetIntegeri_v",
 		"Queries the integer value of an indexed state variable.",
 
@@ -1078,7 +1078,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Enablei",
 		"Enables an indexed capability.",
 
@@ -1086,7 +1086,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("index", "the index to enable")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"Disablei",
 		"Disables an indexed capability.",
 
@@ -1094,7 +1094,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("index", "the index to disable")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsEnabledi",
 		"Tests whether an indexed capability is enabled.",
 
@@ -1104,7 +1104,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_texture_compression_rgtc
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalformat} parameter of TexImage2D, CopyTexImage2D, and CompressedTexImage2D and the {@code format} parameter of
 		CompressedTexSubImage2D.
@@ -1118,7 +1118,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_texture_rg
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.",
 
 		"R8" _ 0x8229,
@@ -1146,7 +1146,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"COMPRESSED_RG" _ 0x8226
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of TexImage3D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, and ReadPixels.",
 
 		"RG_INTEGER" _ 0x8228
@@ -1154,7 +1154,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_transform_feedback
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
 		BindBufferRange, BindBufferOffset and BindBufferBase.
@@ -1163,14 +1163,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"TRANSFORM_FEEDBACK_BUFFER" _ 0x8C8E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegeri_v and GetBooleani_v.",
 
 		"TRANSFORM_FEEDBACK_BUFFER_START" _ 0x8C84,
 		"TRANSFORM_FEEDBACK_BUFFER_SIZE" _ 0x8C85
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of GetIntegeri_v and GetBooleani_v, and by the {@code pname} parameter of GetBooleanv,
 		GetDoublev, GetIntegerv, and GetFloatv.
@@ -1179,21 +1179,21 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"TRANSFORM_FEEDBACK_BUFFER_BINDING" _ 0x8C8F
 	)
 
-	val BufferModes = IntConstant.block(
+	val BufferModes = IntConstant(
 		"Accepted by the {@code bufferMode} parameter of TransformFeedbackVaryings.",
 
 		"INTERLEAVED_ATTRIBS" _ 0x8C8C,
 		"SEPARATE_ATTRIBS" _ 0x8C8D
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
 		"PRIMITIVES_GENERATED" _ 0x8C87,
 		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN" _ 0x8C88
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -1202,7 +1202,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"RASTERIZER_DISCARD" _ 0x8C89
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS" _ 0x8C8A,
@@ -1210,7 +1210,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS" _ 0x8C80
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"TRANSFORM_FEEDBACK_VARYINGS" _ 0x8C83,
@@ -1218,7 +1218,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH" _ 0x8C76
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferRange",
 		"Binds a range within a buffer object to an indexed buffer target.",
 
@@ -1233,7 +1233,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizeiptr.IN("size", "the amount of data in machine units that can be read from the buffer object while used as an indexed target")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindBufferBase",
 		"Binds a buffer object to an indexed buffer target.",
 
@@ -1246,7 +1246,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("buffer", "a buffer object to bind to the specified binding point")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginTransformFeedback",
 		"Starts transform feedback operation.",
 
@@ -1257,9 +1257,9 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	ReferenceGL("glBeginTransformFeedback") _ GLvoid.func("EndTransformFeedback", "Ends transform feedback operation.")
+	ReferenceGL("glBeginTransformFeedback") _ GLvoid("EndTransformFeedback", "Ends transform feedback operation.")
 
-	GLvoid.func(
+	GLvoid(
 		"TransformFeedbackVaryings",
 		"Specifies values to record in transform feedback buffers.",
 
@@ -1272,7 +1272,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("bufferMode", "the mode used to capture the varying variables when transform feedback is active", BufferModes)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetTransformFeedbackVarying",
 		"Retrieves information about varying variables selected for transform feedback.",
 
@@ -1290,20 +1290,20 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_vertex_array_object
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"VERTEX_ARRAY_BINDING" _ 0x85B5
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindVertexArray",
 		"Binds a vertex array object",
 
 		GLuint.IN("array", "the name of the vertex array to bind")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DeleteVertexArrays",
 		"Deletes vertex array objects.",
 
@@ -1311,7 +1311,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		mods(const, SingleValue("array")) _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GenVertexArrays",
 		"Generates vertex array object names.",
 
@@ -1319,7 +1319,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		returnValue _ GLuint_p.OUT("arrays", "a buffer in which the generated vertex array object names are stored")
 	)
 
-	GLboolean.func(
+	GLboolean(
 		"IsVertexArray",
 		"Determines if a name corresponds to a vertex array object.",
 
@@ -1328,7 +1328,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_framebuffer_sRGB
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.

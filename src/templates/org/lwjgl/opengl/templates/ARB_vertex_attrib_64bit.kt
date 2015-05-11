@@ -43,7 +43,7 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 		Requires ${GL30.core}, GLSL 1.30 and ${ARB_gpu_shader_fp64.link}. ${GL41.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Returned in the {@code type} parameter of GetActiveAttrib.",
 
 		"DOUBLE_VEC2" _ 0x8FFC,
@@ -73,7 +73,7 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 
 	GL41 reuse "GetVertexAttribLdv"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
 		"VertexArrayVertexAttribLOffsetEXT",
 		"DSA version of #VertexAttribLPointer().",
 

@@ -28,7 +28,7 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 		This extension implements a new query to check whether a device can terminate an OpenCL context and adds an API to terminate a context.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Describes the termination capability of the OpenCL device. This is a bitfield where a value of {@code CL_DEVICE_TERMINATE_CAPABILITY_CONTEXT_KHR}
 		indicates that context termination is supported.
@@ -37,7 +37,7 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 		"DEVICE_TERMINATE_CAPABILITY_KHR" _ 0x200F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Specifies whether the context can be terminated. The default value is $FALSE.",
 
 		"CONTEXT_TERMINATE_KHR" _ 0x2010
@@ -45,7 +45,7 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 
 	// TODO: Find CL_TERMINATED_KHR & CL_CONTEXT_TERMINATED_KHR values.
 
-	cl_int.func(
+	cl_int(
 		"TerminateContextKHR",
 		"""
 		Terminates all pending work associated with the context and renders all data owned by the context invalid. It is the responsibility of the application

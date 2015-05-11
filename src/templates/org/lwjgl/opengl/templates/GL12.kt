@@ -41,7 +41,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Aliases for smooth points and lines.",
 
 		"ALIASED_POINT_SIZE_RANGE" _ 0x846D,
@@ -55,13 +55,13 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_texture3D
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"TEXTURE_BINDING_3D" _ 0x806A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev, and by the {@code pname} parameter of PixelStore.",
 
 		"PACK_SKIP_IMAGES" _ 0x806B,
@@ -70,7 +70,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"UNPACK_IMAGE_HEIGHT" _ 0x806E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev, and by the {@code target} parameter of TexImage3D, GetTexImage, GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv, and
@@ -80,31 +80,31 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"TEXTURE_3D" _ 0x806F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, GetTexLevelParameteriv, and GetTexLevelParameterfv.",
 
 		"PROXY_TEXTURE_3D" _ 0x8070
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameteriv and GetTexLevelParameterfv.",
 
 		"TEXTURE_DEPTH" _ 0x8071
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
 		"TEXTURE_WRAP_R" _ 0x8072
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_3D_TEXTURE_SIZE" _ 0x8073
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexImage3D",
 		"Specifies a three-dimensional texture image.",
 
@@ -125,7 +125,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		) _ GLvoid_p.IN("pixels", "the texel data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexSubImage3D",
 		"""
 		Respecifies a cubic subregion of an existing 3D texel array. No change is made to the internalformat, width, height, depth, or border parameters of
@@ -149,7 +149,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		) _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"CopyTexSubImage3D",
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
@@ -169,7 +169,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_bgra
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
 		"BGR" _ 0x80E0,
@@ -178,7 +178,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_packed_pixels
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code type} parameter of DrawPixels, ReadPixels, TexImage1D, TexImage2D, GetTexImage, TexImage3D, TexSubImage1D, TexSubImage2D,
 		TexSubImage3D, GetHistogram, GetMinmax, ConvolutionFilter1D, ConvolutionFilter2D, ConvolutionFilter3D, GetConvolutionFilter, SeparableFilter2D,
@@ -201,7 +201,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_rescale_normal
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -212,7 +212,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_separate_specular_color
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of LightModel*, and also by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
 		""",
@@ -220,7 +220,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"LIGHT_MODEL_COLOR_CONTROL" _ 0x81F8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code param} parameter of LightModel* when {@code pname} is  LIGHT_MODEL_COLOR_CONTROL.",
 
 		"SINGLE_COLOR" _ 0x81F9,
@@ -229,7 +229,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// SGIS_texture_edge_clamp
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code param} parameter of TexParameteri and TexParameterf, and by the {@code params} parameter of TexParameteriv and TexParameterfv,
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
@@ -240,7 +240,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// SGIS_texture_lod
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
 		"TEXTURE_MIN_LOD" _ 0x813A,
@@ -251,14 +251,14 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 
 	// EXT_draw_range_elements
 
-	IntConstant.block(
+	IntConstant(
 		"Recommended maximum amounts of vertex and index data.",
 
 		"MAX_ELEMENTS_VERTICES" _ 0x80E8,
 		"MAX_ELEMENTS_INDICES" _ 0x80E9
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawRangeElements",
 		"""
 		A restricted form of GL11#DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional

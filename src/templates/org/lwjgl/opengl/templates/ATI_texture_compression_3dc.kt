@@ -12,7 +12,7 @@ val ATI_texture_compression_3dc = "ATITextureCompression3DC".nativeClassGL("ATI_
 	documentation =
 		"""This extension is undocumented. See <a href="http://www.hardwaresecrets.com/datasheets/3Dc_White_Paper.pdf">3Dc™ White Paper</a> for information."""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage functions.",
 
 		"COMPRESSED_LUMINANCE_ALPHA_3DC_ATI" _ 0x8837

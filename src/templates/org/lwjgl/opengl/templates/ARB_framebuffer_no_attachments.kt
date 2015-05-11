@@ -43,7 +43,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
 		Requires ${GL30.core} or ${ARB_framebuffer_object.link}. ${GL43.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv, NamedFramebufferParameteriEXT, and
 		GetNamedFramebufferParameterivEXT.
@@ -56,7 +56,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
 		"FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS" _ 0x9314
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_FRAMEBUFFER_WIDTH" _ 0x9315,
@@ -69,7 +69,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
 	GL43 reuse "GetFramebufferParameteriv"
 
 	var src = GL43["FramebufferParameteri"]
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
 		"NamedFramebufferParameteriEXT",
 		"DSA version of #FramebufferParameteri().",
 
@@ -79,7 +79,7 @@ val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL
 	)
 
 	src = GL43["GetFramebufferParameteriv"]
-	DependsOn("GL_EXT_direct_state_access", postfix = "EXT") _ GLvoid.func(
+	DependsOn("GL_EXT_direct_state_access", postfix = "EXT") _ GLvoid(
 		"GetNamedFramebufferParameterivEXT",
 		"DSA version of #GetFramebufferParameteriv().",
 

@@ -18,7 +18,7 @@ val GLX_EXT_create_context_es_profile = "GLXEXTCreateContextESProfile".nativeCla
 		Requires ${GLX14.glx}, ${GLX_ARB_create_context.link}, ${GLX_ARB_create_context_profile.link} and an OpenGL ES implemenation.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as a bit in the attribute value for GLXARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
 
 		"CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004

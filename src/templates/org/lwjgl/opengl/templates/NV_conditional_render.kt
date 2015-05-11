@@ -32,7 +32,7 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
 		split-frame SLI, where a frame is divided between multiple GPUs, each of which has its own occlusion query hardware.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of BeginConditionalRenderNV.",
 
 		"QUERY_WAIT_NV" _ 0x8E13,
@@ -41,7 +41,7 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
 		"QUERY_BY_REGION_NO_WAIT_NV" _ 0x8E16
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BeginConditionalRenderNV",
 		"",
 
@@ -49,7 +49,7 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
 		GLenum.IN("mode", "")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"EndConditionalRenderNV",
 		""
 	)

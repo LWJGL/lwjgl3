@@ -25,7 +25,7 @@ val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_f
 		Requires ${ARB_framebuffer_object.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20B2

@@ -21,7 +21,7 @@ val WGL_ARB_extensions_string = "WGLARBExtensionsString".nativeClassWGL("WGL_ARB
 		extensions are built.
 		"""
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"GetExtensionsStringARB",
 		"""
 		Returns a list of supported extensions to WGL. Although the contents of the string is implementation specific, the string will be NULL terminated and

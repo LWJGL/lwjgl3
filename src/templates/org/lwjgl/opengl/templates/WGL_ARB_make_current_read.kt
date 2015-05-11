@@ -23,14 +23,14 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
 		"ERROR_INVALID_PIXEL_TYPE_ARB" _ 0x2043,
 		"ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB" _ 0x2054
 	).noPrefix()
 
-	BOOL.func(
+	BOOL(
 		"MakeContextCurrentARB",
 		"""
 		Associates the context {@code hglrc} with the device {@code drawDC} for draws and the device {@code readDC} for reads. All subsequent OpenGL calls made
@@ -67,6 +67,6 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 		HGLRC.IN("hglrc", "the OpenGL context")
 	)
 
-	HDC.func("GetCurrentReadDCARB", "Returns the \"read\" device context for the current OpenGL context.")
+	HDC("GetCurrentReadDCARB", "Returns the \"read\" device context for the current OpenGL context.")
 
 }

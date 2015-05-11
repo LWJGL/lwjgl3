@@ -23,7 +23,7 @@ val GLX_ARB_get_proc_address = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_ge
 		implementations resulted in the {@code wglGetProcAddress} function.
 		"""
 
-	voidptr.func(
+	voidptr(
 		"GetProcAddressARB",
 		"""
 		Returns the address of the extension function named by procName. The pointer returned should be cast to a function pointer type matching the extension

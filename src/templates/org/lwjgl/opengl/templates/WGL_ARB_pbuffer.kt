@@ -41,7 +41,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 	val wglGetPixelFormatAttribiARB = "WGLARBPixelFormat#GetPixelFormatAttribiARB()"
 
-	HPBUFFERARB.func(
+	HPBUFFERARB(
 		"CreatePbufferARB",
 		"""
 		Creates a pixel buffer (pbuffer) and returns a handle to it.
@@ -60,14 +60,14 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		)
 	)
 
-	HDC.func(
+	HDC(
 		"GetPbufferDCARB",
 		"Creates a device context for the pbuffer.",
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle returned from a previous call to #CreatePbufferARB()")
 	)
 
-	int.func(
+	int(
 		"ReleasePbufferDCARB",
 		"Releases a device context obtained from a previous call to #GetPbufferDCARB().",
 
@@ -75,7 +75,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		HDC.IN("hdc", "a device context handle")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DestroyPbufferARB",
 		"""
 		Destroys a pbuffer.
@@ -87,7 +87,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle")
 	)
 
-	BOOL.func(
+	BOOL(
 		"QueryPbufferARB",
 		"Queries an attribute associated with a specific pbuffer.",
 
@@ -96,7 +96,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		Check(1) _ int_p.IN("value", "the attribute value")
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code attribIList} parameter of WGLARBPixelFormat#ChoosePixelFormatARB() and the {@code attributes} parameter of
 		$wglGetPixelFormatAttribiARB.
@@ -105,7 +105,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		"DRAW_TO_PBUFFER_ARB" _ 0x202D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attributes} parameter of $wglGetPixelFormatAttribiARB.",
 
 		"MAX_PBUFFER_PIXELS_ARB" _ 0x202E,
@@ -113,13 +113,13 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		"MAX_PBUFFER_HEIGHT_ARB" _ 0x2030
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribList} parameter of #CreatePbufferARB().",
 
 		"PBUFFER_LARGEST_ARB" _ 0x2033
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code attribute} parameter of #QueryPbufferARB().",
 
 		"PBUFFER_WIDTH_ARB" _ 0x2034,

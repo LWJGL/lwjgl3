@@ -300,7 +300,7 @@ class NativeClass(
 
 	// DSL extensions
 
-	fun <T: Any> ConstantType<T>.block(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	fun <T: Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
@@ -312,9 +312,9 @@ class NativeClass(
 	/** Adds a new constant whose value is an expression. */
 	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
-	fun NativeType.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
-		ReturnValue(this).func(name, documentation, *parameters, returnDoc = returnDoc, since = since)
-	fun ReturnValue.func(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = ""): NativeClassFunction {
+	fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
+		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since)
+	fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = ""): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,

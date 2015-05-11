@@ -15,21 +15,21 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		documentation = "Native bindings to Objective-C Runtime."
 
-		LongConstant.block(
+		LongConstant(
 			"Nil value.",
 
 			"nil" _ 0L
 		)
 
 
-		ByteConstant.block(
+		ByteConstant(
 			"Boolean values.",
 
 			"YES" _ 1.b,
 			"NO" _ 0.b
 		)
 
-		CharConstant.block(
+		CharConstant(
 			"Types.",
 
 			"_C_ID" _ '@',
@@ -66,7 +66,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		// Working with Instances
 
-		id.func(
+		id(
 			"object_copy",
 			"Returns a copy of a given object.",
 
@@ -76,7 +76,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a copy of obj"
 		)
 
-		id.func(
+		id(
 			"object_dispose",
 			"Frees the memory occupied by a given object.",
 
@@ -85,7 +85,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "#nil"
 		)
 
-		Class.func(
+		Class(
 			"object_getClass",
 			"Returns the class of an object.",
 
@@ -94,7 +94,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the class object of which object is an instance, or Nil if {@code obj} is #nil"
 		)
 
-		Class.func(
+		Class(
 			"object_setClass",
 			"Sets the class of an object.",
 
@@ -104,7 +104,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the previous value of object's class, or Nil if {@code obj} is #nil"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"object_getClassName",
 			"Returns the class name of a given object.",
 
@@ -113,7 +113,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the name of the class of which {@code obj} is an instance"
 		)
 
-		voidptr.func(
+		voidptr(
 			"object_getIndexedIvars",
 			"""
 		This function returns a pointer to any extra bytes allocated with the instance (as specified by #class_createInstance() with extraBytes&gt;0). This
@@ -134,7 +134,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 		"""
 		)
 
-		id.func(
+		id(
 			"object_getIvar",
 			"Reads the value of an instance variable in an object.",
 
@@ -144,7 +144,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the value of the instance variable specified by {@code ivar}, or #nil if {@code obj} is #nil"
 		)
 
-		void.func(
+		void(
 			"object_setIvar",
 			"""
 		Sets the value of an instance variable in an object.
@@ -157,7 +157,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			id.IN("value", "the new value for the instance variable")
 		)
 
-		Ivar.func(
+		Ivar(
 			"object_setInstanceVariable",
 			"Changes the value of an instance variable of a class instance.",
 
@@ -168,7 +168,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
 		)
 
-		Ivar.func(
+		Ivar(
 			"object_getInstanceVariable",
 			"Obtains the value of an instance variable of a class instance.",
 
@@ -181,7 +181,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		// Obtaining Class Definitions
 
-		Class.func(
+		Class(
 			"objc_getClass",
 			"""
 	    Returns the class definition of a specified class.
@@ -195,7 +195,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
 
-		Class.func(
+		Class(
 			"objc_getMetaClass",
 			"""
 	    Returns the metaclass definition of a specified class.
@@ -210,7 +210,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the Class object for the metaclass of the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
 
-		Class.func(
+		Class(
 			"objc_lookUpClass",
 			"""
 	    Returns the class definition of a specified class.
@@ -224,7 +224,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
 
-		Class.func(
+		Class(
 			"objc_getRequiredClass",
 			"""
 	    Returns the class definition of a specified class.
@@ -239,7 +239,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the Class object for the named class"
 		)
 
-		int.func(
+		int(
 			"objc_getClassList",
 			"""
 	    Obtains the list of registered class definitions.
@@ -271,7 +271,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "an integer value indicating the total number of registered classes"
 		)
 
-		Class_p.func(
+		Class_p(
 			"objc_copyClassList",
 			"Creates and returns a list of pointers to all registered class definitions.",
 
@@ -285,7 +285,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		// Working with Classes
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"class_getName",
 			"Returns the name of a class.",
 
@@ -294,7 +294,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the name of the class, or the empty string if cls is Nil"
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_isMetaClass",
 			"Returns a Boolean value that indicates whether a class object is a metaclass.",
 
@@ -303,7 +303,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "#YES if cls is a metaclass, #NO if cls is a non-meta class, #NO if cls is Nil"
 		)
 
-		Class.func(
+		Class(
 			"class_getSuperclass",
 			"Returns the superclass of a class.",
 
@@ -314,7 +314,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		// class_setSuperclass
 
-		int.func(
+		int(
 			"class_getVersion",
 			"""
 	    Returns the version number of a class definition.
@@ -332,7 +332,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "an integer indicating the version number of the class definition"
 		)
 
-		void.func(
+		void(
 			"class_setVersion",
 			"""
 	    Sets the version number of a class definition.
@@ -349,7 +349,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			int.IN("version", "the new version number of the class definition")
 		)
 
-		size_t.func(
+		size_t(
 			"class_getInstanceSize",
 			"Returns the size of instances of a class.",
 
@@ -358,7 +358,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "the size in bytes of instances of the class {@code cls}, or 0 if {@code cls} is Nil"
 		)
 
-		Ivar.func(
+		Ivar(
 			"class_getInstanceVariable",
 			"Returns the Ivar for a specified instance variable of a given class.",
 
@@ -368,7 +368,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a pointer to an Ivar data structure containing information about the instance variable specified by name"
 		)
 
-		Ivar.func(
+		Ivar(
 			"class_getClassVariable",
 			"Returns the Ivar for a specified class variable of a given class.",
 
@@ -378,7 +378,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a pointer to an Ivar data structure containing information about the class variable specified by name"
 		)
 
-		Ivar_p.func(
+		Ivar_p(
 			"class_copyIvarList",
 			"Describes the instance variables declared by a class.",
 
@@ -397,7 +397,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 	    """
 		)
 
-		Method.func(
+		Method(
 			"class_getInstanceMethod",
 			"""
 	    Returns a specified instance method for a given class.
@@ -415,7 +415,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 	    """
 		)
 
-		Method.func(
+		Method(
 			"class_getClassMethod",
 			"""
 		Returns a pointer to the data structure describing a given class method for a given class.
@@ -433,7 +433,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 	    """
 		)
 
-		IMP.func(
+		IMP(
 			"class_getMethodImplementation",
 			"""
 		Returns the function pointer that would be called if a particular message were sent to an instance of a class.
@@ -453,7 +453,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 
 		// class_getMethodImplementation_stret
 
-		BOOL.func(
+		BOOL(
 			"class_respondsToSelector",
 			"""
 	    Returns a Boolean value that indicates whether instances of a class respond to a particular selector.
@@ -467,7 +467,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "#YES if instances of the class respond to the selector, otherwise #NO"
 		)
 
-		Method_p.func(
+		Method_p(
 			"class_copyMethodList",
 			"Describes the instance methods implemented by a class.",
 
@@ -486,7 +486,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 	    """
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_conformsToProtocol",
 			"""
 	    Returns a Boolean value that indicates whether a class conforms to a given protocol.
@@ -500,7 +500,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "#YES if {@code cls} conforms to {@code protocol}, otherwise #NO"
 		)
 
-		Protocol_pp.func(
+		Protocol_pp(
 			"class_copyProtocolList",
 			"Describes the protocols adopted by a class.",
 
@@ -519,7 +519,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 		"""
 		)
 
-		objc_property_t.func(
+		objc_property_t(
 			"class_getProperty",
 			"Returns a property with a given name of a given class.",
 
@@ -533,7 +533,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 		"""
 		)
 
-		objc_property_t_p.func(
+		objc_property_t_p(
 			"class_copyPropertyList",
 			"Describes the properties declared by a class.",
 
@@ -552,7 +552,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 		"""
 		)
 
-		(const _ uint8_tASCII_p).func(
+		(const _ uint8_tASCII_p)(
 			"class_getIvarLayout",
 			"Returns a description of the Ivar layout for a given class.",
 
@@ -561,7 +561,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a description of the Ivar layout for {@code cls}"
 		)
 
-		(const _ uint8_tASCII_p).func(
+		(const _ uint8_tASCII_p)(
 			"class_getWeakIvarLayout",
 			"Returns a description of the layout of weak Ivars for a given class.",
 
@@ -570,7 +570,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			returnDoc = "a description of the layout of the weak Ivars for {@code cls}"
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_addMethod",
 			"""
 	    Adds a new method to a class with a given name and implementation.
@@ -608,7 +608,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if the method was added successfully, otherwise #NO (for example, the class already contains a method implementation with that name)"
 		)
 
-		IMP.func(
+		IMP(
 			"class_replaceMethod",
 			"""
 	    Replaces the implementation of a method for a given class.
@@ -645,7 +645,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the previous implementation of the method identified by {@code name} for the class identified by {@code cls}"
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_addIvar",
 			"""
 	    Adds a new instance variable to a class.
@@ -669,7 +669,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"#YES if the instance variable was added successfully, otherwise #NO (for example, the class already contains an instance variable with that name)"
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_addProtocol",
 			"Adds a protocol to a class.",
 
@@ -679,7 +679,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if the protocol was added successfully, otherwise #NO (for example, the class already conforms to that protocol)"
 		)
 
-		BOOL.func(
+		BOOL(
 			"class_addProperty",
 			"Adds a property to a class.",
 
@@ -691,7 +691,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if the property was added successfully; otherwise #NO (for example, this function returns #NO if the class already has that property)"
 		)
 
-		void.func(
+		void(
 			"class_replaceProperty",
 			"Replaces a property of a class.",
 
@@ -701,7 +701,7 @@ void myMethodIMP(id self, SEL _cmd)
 			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}")
 		)
 
-		void.func(
+		void(
 			"class_setIvarLayout",
 			"Sets the Ivar layout for a given class.",
 
@@ -709,7 +709,7 @@ void myMethodIMP(id self, SEL _cmd)
 			const _ uint8_tASCII_p.IN("layout", "the layout of the Ivars for {@code cls}")
 		)
 
-		void.func(
+		void(
 			"class_setWeakIvarLayout",
 			"Sets the layout for weak Ivars for a given class.",
 
@@ -719,7 +719,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Instantiating Classes
 
-		id.func(
+		id(
 			"class_createInstance",
 			"Creates an instance of a class, allocating memory for the class in the default malloc memory zone.",
 
@@ -734,7 +734,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "an instance of the class {@code cls}"
 		)
 
-		id.func(
+		id(
 			"objc_constructInstance",
 			"Creates an instance of a class at the specified location.",
 
@@ -750,7 +750,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"an instance of the class {@code cls} at {@code bytes}, if successful; otherwise #nil (for example, if {@code cls} or {@code bytes} are themselves #nil)"
 		)
 
-		voidptr.func(
+		voidptr(
 			"objc_destructInstance",
 			"""
 	    Destroys an instance of a class without freeing memory and removes any of its associated references.
@@ -767,7 +767,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Adding Classes
 
-		Class.func(
+		Class(
 			"objc_allocateClassPair",
 			"""
 	    Creates a new class and metaclass.
@@ -787,14 +787,14 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the new class, or Nil if the class could not be created (for example, the desired name is already in use)"
 		)
 
-		void.func(
+		void(
 			"objc_registerClassPair",
 			"Registers a class that was allocated using #objc_allocateClassPair().",
 
 			Class.IN("cls", "the class you want to register")
 		)
 
-		void.func(
+		void(
 			"objc_disposeClassPair",
 			"""
 	    Destroys a class and its associated metaclass.
@@ -807,7 +807,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Methods
 
-		SEL.func(
+		SEL(
 			"method_getName",
 			"""
 	    Returns the name of a method.
@@ -820,7 +820,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a pointer of type SEL"
 		)
 
-		IMP.func(
+		IMP(
 			"method_getImplementation",
 			"Returns the implementation of a method.",
 
@@ -829,7 +829,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a function pointer of type IMP"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"method_getTypeEncoding",
 			"Returns a string describing a method's parameter and return types.",
 
@@ -838,7 +838,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string. The string may be $NULL"
 		)
 
-		unsigned_int.func(
+		unsigned_int(
 			"method_getNumberOfArguments",
 			"Returns the number of arguments accepted by a method.",
 
@@ -847,7 +847,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "an integer containing the number of arguments accepted by the given method"
 		)
 
-		charUTF8_p.func(
+		charUTF8_p(
 			"method_copyReturnType",
 			"Returns a string describing a method's return type.",
 
@@ -856,7 +856,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string describing the return type. You must free the string with free()."
 		)
 
-		charUTF8_p.func(
+		charUTF8_p(
 			"method_copyArgumentType",
 			"Returns a string describing a single parameter type of a method.",
 
@@ -870,7 +870,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		void.func(
+		void(
 			"method_getReturnType",
 			"""
 	    Returns by reference a string describing a method's return type.
@@ -883,7 +883,7 @@ void myMethodIMP(id self, SEL _cmd)
 			AutoSize("dst") _ size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 
-		void.func(
+		void(
 			"method_getArgumentType",
 			"""
 	    Returns by reference a string describing a single parameter type of a method.
@@ -898,7 +898,7 @@ void myMethodIMP(id self, SEL _cmd)
 			AutoSize("dst") _ size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 
-		IMP.func(
+		IMP(
 			"method_setImplementation",
 			"Sets the implementation of a method.",
 
@@ -908,7 +908,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the previous implementation of the method"
 		)
 
-		void.func(
+		void(
 			"method_exchangeImplementations",
 			"Exchanges the implementations of two methods.",
 
@@ -918,7 +918,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Instance Variables
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"ivar_getName",
 			"Returns the name of an instance variable.",
 
@@ -927,7 +927,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the instance variable's name"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"ivar_getTypeEncoding",
 			"Returns the type string of an instance variable.",
 
@@ -936,7 +936,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the instance variable's type encoding"
 		)
 
-		ptrdiff_t.func(
+		ptrdiff_t(
 			"ivar_getOffset",
 			"""
 	    Returns the offset of an instance variable.
@@ -952,7 +952,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Properties
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"property_getName",
 			"Returns the name of a property.",
 
@@ -961,7 +961,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the property's name"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"property_getAttributes",
 			"Returns the attribute string of a property.",
 
@@ -970,7 +970,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the property's attributes"
 		)
 
-		objc_property_attribute_t_p.func(
+		objc_property_attribute_t_p(
 			"property_copyAttributeList",
 			"Returns an array of property attributes for a given property.",
 
@@ -980,7 +980,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "an array of property attributes. You must free the array with free()."
 		)
 
-		charUTF8_p.func(
+		charUTF8_p(
 			"property_copyAttributeValue",
 			"Returns the value of a property attribute given the attribute name.",
 
@@ -996,7 +996,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Protocols
 
-		Protocol_p.func(
+		Protocol_p(
 			"objc_getProtocol",
 			"""
 	    Returns a specified protocol.
@@ -1009,7 +1009,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the protocol named {@code name}{, or $NULL if no protocol named name could be found"
 		)
 
-		Protocol_pp.func(
+		Protocol_pp(
 			"objc_copyProtocolList",
 			"Returns an array of all the protocols known to the runtime.",
 
@@ -1022,7 +1022,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		BOOL.func(
+		BOOL(
 			"protocol_conformsToProtocol",
 			"""
 	    Returns a Boolean value that indicates whether one protocol conforms to another protocol.
@@ -1041,7 +1041,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if {@code proto} conforms to {@code other}, otherwise #NO"
 		)
 
-		BOOL.func(
+		BOOL(
 			"protocol_isEqual",
 			"Returns a Boolean value that indicates whether two protocols are equal.",
 
@@ -1051,7 +1051,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if proto is the same as other, otherwise #NO"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"protocol_getName",
 			"Returns a the name of a protocol.",
 
@@ -1060,7 +1060,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the name of the protocol {@code p} as a C string"
 		)
 
-		objc_method_description.func(
+		objc_method_description(
 			"protocol_getMethodDescription",
 			"Returns a method description structure for a specified method of a given protocol.",
 
@@ -1078,7 +1078,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		objc_method_description_p.func(
+		objc_method_description_p(
 			"protocol_copyMethodDescriptionList",
 			"""
 		Returns an array of method descriptions of methods meeting a given specification for a given protocol.
@@ -1100,7 +1100,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		objc_property_t.func(
+		objc_property_t(
 			"protocol_getProperty",
 			"Returns the specified property of a given protocol.",
 
@@ -1116,7 +1116,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		objc_property_t_p.func(
+		objc_property_t_p(
 			"protocol_copyPropertyList",
 			"Returns an array of the properties declared by a protocol.",
 
@@ -1132,7 +1132,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		Protocol_pp.func(
+		Protocol_pp(
 			"protocol_copyProtocolList",
 			"eturns an array of the protocols adopted by a protocol.",
 
@@ -1148,7 +1148,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		Protocol_p.func(
+		Protocol_p(
 			"objc_allocateProtocol",
 			"""
 	    Creates a new protocol instance.
@@ -1163,7 +1163,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a new protocol instance or #nil if a protocol with the same name as {@code name} already exists"
 		)
 
-		void.func(
+		void(
 			"objc_registerProtocol",
 			"""
 	    Registers a newly created protocol with the Objective-C runtime.
@@ -1175,7 +1175,7 @@ void myMethodIMP(id self, SEL _cmd)
 			Protocol_p.IN("proto", "the protocol you want to register with the Objective-C runtime")
 		)
 
-		void.func(
+		void(
 			"protocol_addMethodDescription",
 			"""
 	    Adds a method to a protocol.
@@ -1200,7 +1200,7 @@ void myMethodIMP(id self, SEL _cmd)
 			)
 		)
 
-		void.func(
+		void(
 			"protocol_addProtocol",
 			"""
 	    Adds a registered protocol to another protocol that is under construction.
@@ -1213,7 +1213,7 @@ void myMethodIMP(id self, SEL _cmd)
 			Protocol_p.IN("addition", "the registered protocol you want to add to {@code proto}")
 		)
 
-		void.func(
+		void(
 			"protocol_addProperty",
 			"""
 	    Adds a property to a protocol that is under construction.
@@ -1244,7 +1244,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Libraries
 
-		(const _ charUTF8_pp).func(
+		(const _ charUTF8_pp)(
 			"objc_copyImageNames",
 			"Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
@@ -1253,7 +1253,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
 		)
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"class_getImageName",
 			"Returns the name of the dynamic library a class originated from.",
 
@@ -1262,7 +1262,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string representing the name of the library containing the {@code cls} class."
 		)
 
-		(const _ charUTF8_pp).func(
+		(const _ charUTF8_pp)(
 			"objc_copyClassNamesForImage",
 			"Returns the names of all the classes within a specified library or framework.",
 
@@ -1274,7 +1274,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Selectors
 
-		(const _ charUTF8_p).func(
+		(const _ charUTF8_p)(
 			"sel_getName",
 			"Returns the name of the method specified by a given selector.",
 
@@ -1283,7 +1283,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string indicating the name of the selector"
 		)
 
-		SEL.func(
+		SEL(
 			"sel_getUid",
 			"""
 	    Registers a method name with the Objective-C runtime system.
@@ -1296,7 +1296,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a pointer of type SEL specifying the selector for the named method"
 		)
 
-		SEL.func(
+		SEL(
 			"sel_registerName",
 			"""
 	    Registers a method with the Objective-C runtime system, maps the method name to a selector, and returns the selector value.
@@ -1310,7 +1310,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a pointer of type SEL specifying the selector for the named method"
 		)
 
-		BOOL.func(
+		BOOL(
 			"sel_isEqual",
 			"""
 	    Returns a Boolean value that indicates whether two selectors are equal.
@@ -1326,7 +1326,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Objective-C Language Features
 
-		void.func(
+		void(
 			"objc_enumerationMutation",
 			"""
 	    Inserted by the compiler when a mutation is detected during a foreach iteration.
@@ -1339,14 +1339,14 @@ void myMethodIMP(id self, SEL _cmd)
 			id.IN("obj", "the object being mutated")
 		)
 
-		void.func(
+		void(
 			"objc_setEnumerationMutationHandler",
 			"Sets the current mutation handler.",
 
 			EnumerationMutationHandler.IN("handler", "a function pointer to the new mutation handler")
 		)
 
-		IMP.func(
+		IMP(
 			"imp_implementationWithBlock",
 			"Creates a pointer to a function that calls the specified block when the method is called.",
 
@@ -1361,7 +1361,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the IMP that calls {@code block}. You must dispose of the returned IMP using the function."
 		)
 
-		id.func(
+		id(
 			"imp_getBlock",
 			"Returns the block associated with an IMP that was created using #imp_implementationWithBlock().",
 
@@ -1370,7 +1370,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the block called by {@code anImp}"
 		)
 
-		BOOL.func(
+		BOOL(
 			"imp_removeBlock",
 			"Disassociates a block from an IMP that was created using #imp_implementationWithBlock(), and releases the copy of the block that was created.",
 
@@ -1383,7 +1383,7 @@ void myMethodIMP(id self, SEL _cmd)
 		"""
 		)
 
-		id.func(
+		id(
 			"objc_loadWeak",
 			"""
 	    Loads the object referenced by a weak pointer and returns it.
@@ -1397,7 +1397,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the object pointed to by location, or #nil if location is #nil"
 		)
 
-		id.func(
+		id(
 			"objc_storeWeak",
 			"""
 	    Stores a new value in a {@code __weak} variable.
@@ -1413,7 +1413,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Associative References
 
-		val AssociationPolicies = IntConstant.block(
+		val AssociationPolicies = IntConstant(
 			"Policies related to associative references.",
 
 			"OBJC_ASSOCIATION_ASSIGN" _ 0,
@@ -1423,7 +1423,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"OBJC_ASSOCIATION_COPY" _ 1403
 		).javaDocLinks
 
-		void.func(
+		void(
 			"objc_setAssociatedObject",
 			"Sets an associated value for a given object using a given key and association policy.",
 
@@ -1433,7 +1433,7 @@ void myMethodIMP(id self, SEL _cmd)
 			objc_AssociationPolicy.IN("policy", "the policy for the association", AssociationPolicies)
 		)
 
-		id.func(
+		id(
 			"objc_getAssociatedObject",
 			"Returns the value associated with a given object for a given key.",
 
@@ -1443,7 +1443,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "the value associated with the key {@code key} for {@code object}."
 		)
 
-		void.func(
+		void(
 			"objc_removeAssociatedObjects",
 			"""
 	    Removes all associations for a given object.

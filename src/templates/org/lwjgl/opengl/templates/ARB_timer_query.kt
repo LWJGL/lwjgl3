@@ -27,13 +27,13 @@ val ARB_timer_query = "ARBTimerQuery".nativeClassGL("ARB_timer_query") {
 		${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
 		"TIME_ELAPSED" _ 0x88BF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameter of GetQueryiv and QueryCounter. Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv,
 		GetInteger64v, GetFloatv, and GetDoublev.

@@ -21,7 +21,7 @@ val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
 		different sharelists or even on different physical devices.
 		"""
 
-	GLvoid.func(
+	GLvoid(
 		"CopyImageSubDataNV",
 		"Copies a region of texel data between two image objects. An image object may be either a texture or a renderbuffer.",
 

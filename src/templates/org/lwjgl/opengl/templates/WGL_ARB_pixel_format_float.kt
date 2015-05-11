@@ -17,7 +17,7 @@ val WGL_ARB_pixel_format_float = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_AR
 		Requires ${WGL_ARB_pixel_format.link} and ${GL15.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a value in the {@code attribIList} parameter array of WGLARBPixelFormat#ChoosePixelFormatARB(), and returned in the {@code values}
 		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().

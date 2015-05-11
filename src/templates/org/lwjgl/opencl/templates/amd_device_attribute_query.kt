@@ -15,7 +15,7 @@ val amd_device_attribute_query = "AMDDeviceAttributeQuery".nativeClassCL("amd_de
 		This extension provides a means to query AMD-specific device attributes.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as the {@code param_name} parameter of CL10#GetDeviceInfo().",
 
 		"DEVICE_PROFILING_TIMER_OFFSET_AMD" _ 0x4036,

@@ -19,7 +19,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 	documentation = "The core OpenCL 1.2 functionality."
 
-	IntConstant.block(
+	IntConstant(
 		"Error Codes.",
 
 		"COMPILE_PROGRAM_FAILURE" expr "-15",
@@ -33,26 +33,26 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"INVALID_DEVICE_PARTITION_COUNT" expr "-68"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"OpenCL Version.",
 
 		"VERSION_1_2" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_bool",
 
 		"BLOCKING" expr "CL10.CL_TRUE",
 		"NON_BLOCKING" expr "CL10.CL_FALSE"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_type - bitfield",
 
 		"DEVICE_TYPE_CUSTOM" expr "1 << 4"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_info",
 
 		"DEVICE_DOUBLE_FP_CONFIG" _ 0x1032,
@@ -71,25 +71,25 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"DEVICE_PRINTF_BUFFER_SIZE" _ 0x1049
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_fp_config - bitfield",
 
 		"FP_CORRECTLY_ROUNDED_DIVIDE_SQRT" expr "1 << 7"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_context_properties",
 
 		"CONTEXT_INTEROP_USER_SYNC" _ 0x1085
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_partition_property list null-terminator",
 
 		"DEVICE_PARTITION_BY_COUNTS_LIST_END" _ 0x0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Split the aggregate device into as many smaller aggregate devices as can be created, each containing {@code n} compute units. The value {@code n} is
 		passed as the value accompanying this property. If {@code n} does not divide evenly into #DEVICE_PARTITION_MAX_COMPUTE_UNITS, then the
@@ -99,7 +99,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"DEVICE_PARTITION_EQUALLY" _ 0x1086
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		This property is followed by a #DEVICE_PARTITION_BY_COUNTS_LIST_END terminated list of compute unit counts. For each nonzero count {@code m}
 		in the list, a sub-device is created with {@code m} compute units in it.
@@ -112,7 +112,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"DEVICE_PARTITION_BY_COUNTS" _ 0x1087
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Split the device into smaller aggregate devices containing one or more compute units that all share part of a cache hierarchy. The value accompanying
 		this property may be drawn from the following list:
@@ -134,7 +134,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN" _ 0x1088
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_affinity_domain",
 
 		"DEVICE_AFFINITY_DOMAIN_NUMA" expr "1 << 0",
@@ -145,7 +145,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"DEVICE_AFFINITY_DOMAIN_NEXT_PARTITIONABLE" expr "1 << 5"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_flags - bitfield",
 
 		"MEM_HOST_WRITE_ONLY" expr "1 << 7",
@@ -153,14 +153,14 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"MEM_HOST_NO_ACCESS" expr "1 << 9"
 	)
 
-	val MigrationFlags = IntConstant.block(
+	val MigrationFlags = IntConstant(
 		"cl_mem_migration_flags - bitfield",
 
 		"MIGRATE_MEM_OBJECT_HOST" expr "1 << 0",
 		"MIGRATE_MEM_OBJECT_CONTENT_UNDEFINED" expr "1 << 1"
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"cl_mem_object_type",
 
 		"MEM_OBJECT_IMAGE2D_ARRAY" _ 0x10F3,
@@ -169,7 +169,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"MEM_OBJECT_IMAGE1D_BUFFER" _ 0x10F6
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_image_info",
 
 		"IMAGE_ARRAY_SIZE" _ 0x1117,
@@ -178,26 +178,26 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"IMAGE_NUM_SAMPLES" _ 0x111A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_map_flags - bitfield",
 
 		"MAP_WRITE_INVALIDATE_REGION" expr "1 << 2"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_program_info",
 
 		"PROGRAM_NUM_KERNELS" _ 0x1167,
 		"PROGRAM_KERNEL_NAMES" _ 0x1168
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_program_build_info",
 
 		"PROGRAM_BINARY_TYPE" _ 0x1184
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_program_binary_type",
 
 		"PROGRAM_BINARY_TYPE_NONE" _ 0x0,
@@ -206,13 +206,13 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"PROGRAM_BINARY_TYPE_EXECUTABLE" _ 0x4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_info",
 
 		"KERNEL_ATTRIBUTES" _ 0x1195
 	)
 
-	val KernelArgInfo = IntConstant.block(
+	val KernelArgInfo = IntConstant(
 		"cl_kernel_arg_info",
 
 		"KERNEL_ARG_ADDRESS_QUALIFIER" _ 0x1196,
@@ -222,7 +222,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"KERNEL_ARG_NAME" _ 0x119A
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_arg_address_qualifier",
 
 		"KERNEL_ARG_ADDRESS_GLOBAL" _ 0x119A,
@@ -231,7 +231,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"KERNEL_ARG_ADDRESS_PRIVATE" _ 0x119D
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_arg_access_qualifier",
 
 		"KERNEL_ARG_ACCESS_READ_ONLY" _ 0x11A0,
@@ -240,7 +240,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"KERNEL_ARG_ACCESS_NONE" _ 0x11A3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_arg_type_qualifier",
 
 		"CL_KERNEL_ARG_TYPE_NONE" _ 0,
@@ -249,13 +249,13 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"CL_KERNEL_ARG_TYPE_VOLATILE" expr "1 << 2"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_kernel_work_group_info",
 
 		"KERNEL_GLOBAL_WORK_SIZE" _ 0x11B5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"cl_command_type",
 
 		"COMMAND_BARRIER" _ 0x1205,
@@ -265,7 +265,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	)
 
 	// TODO: fix
-	voidptr.func(
+	voidptr(
 		"GetExtensionFunctionAddressForPlatform",
 		"",
 
@@ -273,7 +273,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		const _ cl_charASCII_p.IN("func_name", "")
 	)
 
-	cl_int.func(
+	cl_int(
 		"RetainDevice",
 		"""
 		Increments the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
@@ -293,7 +293,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"ReleaseDevice",
 		"""
 		Decrements the device reference count if {@code device} is a valid sub-device created by a call to #CreateSubDevices(). If {@code device} is a
@@ -316,7 +316,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"CreateSubDevices",
 		"""
 		Creates an array of sub-devices that each reference a non-intersecting set of compute units within {@code in_device}, according to a partition scheme
@@ -397,7 +397,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_mem.func(
+	cl_mem(
 		"CreateImage",
 		"""
 		Creates a 1D image, 1D image buffer, 1D image array, 2D image, 2D image array or 3D image object.
@@ -465,7 +465,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		ERROR_RET
 	)
 
-	cl_program.func(
+	cl_program(
 		"CreateProgramWithBuiltInKernels",
 		"Creates a program object for a context, and loads the information related to the built-in kernels into a program object.",
 
@@ -502,7 +502,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"CompileProgram",
 		"""
 		Compiles a program's source for all the devices or a specific device(s) in the OpenCL context associated with {@code program}. The pre-processor runs
@@ -598,7 +598,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_program.func(
+	cl_program(
 		"LinkProgram",
 		"""
 		Links a set of compiled program objects and libraries for all the devices or a specific device(s) in the OpenCL context and creates an executable.
@@ -711,7 +711,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"UnloadPlatformCompiler",
 		"""
 		Allows the implementation to release the resources allocated by the OpenCL compiler for platform. This is a hint from the application and does not
@@ -731,7 +731,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"GetKernelArgInfo",
 		"""
 		Returns information about the arguments of a kernel. Kernel argument information is only available if the program object associated with kernel is
@@ -770,7 +770,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueFillBuffer",
 		"""
 		Enqueues a command to fill a buffer object with a pattern of a given pattern size. The usage information which indicates whether the memory object can
@@ -825,7 +825,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueFillImage",
 		"""
 		Enqueues a command to fill an image object with a specified color. The usage information which indicates whether the memory object can be read or
@@ -893,7 +893,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueMigrateMemObjects",
 		"""
 		Enqueues a command to indicate which device a set of memory objects should be associated with. Typically, memory objects are implicitly migrated to a
@@ -946,7 +946,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueMarkerWithWaitList",
 		"""
 		Enqueues a marker command which waits for either a list of events to complete, or if the list is empty it waits for all commands previously enqueued in
@@ -973,7 +973,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"""
 	)
 
-	cl_int.func(
+	cl_int(
 		"EnqueueBarrierWithWaitList",
 		"""
 		enqueues a barrier command which waits for either a list of events to complete, or if the list is empty it waits for all commands previously enqueued in

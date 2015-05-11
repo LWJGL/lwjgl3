@@ -25,49 +25,49 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		existing applications and does not lay claim to the main loop.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways.",
 
 		"VERSION_MAJOR" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
 
 		"VERSION_MINOR" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
 		"VERSION_REVISION" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The key or button was released.",
 
 		"RELEASE" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The key or button was pressed.",
 
 		"PRESS" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The key was held down until it repeated.",
 
 		"REPEAT" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"The unknown key.",
 
 		"KEY_UNKNOWN" _ -1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Printable keys.",
 
 		"KEY_SPACE" _ 32,
@@ -122,7 +122,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"KEY_WORLD_2" _ 162
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Function keys.",
 
 		"KEY_ESCAPE" _ 256,
@@ -198,31 +198,31 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"KEY_LAST" expr "GLFW_KEY_MENU"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"If this bit is set one or more Shift keys were held down.",
 
 		"MOD_SHIFT" _ 0x0001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"If this bit is set one or more Control keys were held down.",
 
 		"MOD_CONTROL" _ 0x0002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"If this bit is set one or more Alt keys were held down.",
 
 		"MOD_ALT" _ 0x0004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"If this bit is set one or more Super keys were held down.",
 
 		"MOD_SUPER" _ 0x0008
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""Mouse buttons. See <a href="http://www.glfw.org/docs/latest/input.html\#input_mouse_button">mouse button input</a> for how these are used.""",
 
 		"MOUSE_BUTTON_1" _ 0,
@@ -239,7 +239,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"MOUSE_BUTTON_MIDDLE" expr "GLFW_MOUSE_BUTTON_3"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""Joysticks. See <a href="http://www.glfw.org/docs/latest/input.html\#joystick">joystick input</a> for how these are used.""",
 
 		"JOYSTICK_1" _ 0,
@@ -261,7 +261,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"JOYSTICK_LAST" expr "GLFW_JOYSTICK_16"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		GLFW has not been initialized.
 
@@ -271,7 +271,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"NOT_INITIALIZED" _ 0x00010001
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		No context is current for this thread.
 
@@ -282,7 +282,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"NO_CURRENT_CONTEXT" _ 0x00010002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		One of the arguments to the function was an invalid enum value.
 
@@ -292,7 +292,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"INVALID_ENUM" _ 0x00010003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		One of the arguments to the function was an invalid value.
 
@@ -304,7 +304,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"INVALID_VALUE" _ 0x00010004
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		A memory allocation failed.
 
@@ -314,7 +314,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"OUT_OF_MEMORY" _ 0x00010005
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		GLFW could not find support for the requested client API on the system. If emitted by functions other than @ref glfwCreateWindow, no supported client
 		API was found.
@@ -330,7 +330,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"API_UNAVAILABLE" _ 0x00010006
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		The requested OpenGL or OpenGL ES version (including any requested context or framebuffer hints) is not available on this machine.
 
@@ -344,7 +344,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"VERSION_UNAVAILABLE" _ 0x00010007
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		A platform-specific error occurred that does not match any of the more specific categories.
 
@@ -355,7 +355,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"PLATFORM_ERROR" _ 0x00010008
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		The requested format is not supported or available.
 
@@ -368,7 +368,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"FORMAT_UNAVAILABLE" _ 0x00010009
 	)
 
-	val WindowAttributes = IntConstant.block(
+	val WindowAttributes = IntConstant(
 		"Window attributes.",
 
 		"FOCUSED" _ 0x00020001,
@@ -380,7 +380,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"FLOATING" _ 0x00020007
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Input options.",
 
 		"CURSOR" _ 0x00033001,
@@ -388,7 +388,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"STICKY_MOUSE_BUTTONS" _ 0x00033003
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Cursor state.",
 
 		"CURSOR_NORMAL" _ 0x00034001,
@@ -396,7 +396,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"CURSOR_DISABLED" _ 0x00034003
 	)
 
-	val CursorShapes = IntConstant.block(
+	val CursorShapes = IntConstant(
 		"""Standard cursor shapes. See <a href="http://www.glfw.org/docs/latest/input.html\#cursor_standard">standard cursor creation</a> for how these are used.""",
 
 		"ARROW_CURSOR" _ 0x00036001,
@@ -407,14 +407,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"VRESIZE_CURSOR" _ 0x00036006
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Monitor events.",
 
 		"CONNECTED" _ 0x00040001,
 		"DISCONNECTED" _ 0x00040002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Don't care value.",
 
 		"DONT_CARE" _ -1
@@ -422,7 +422,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	// [ OpenGL ]
 
-	val PixelFormatHints = IntConstant.block(
+	val PixelFormatHints = IntConstant(
 		"PixelFormat hints.",
 
 		"RED_BITS" _ 0x00021001,
@@ -443,7 +443,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"DOUBLE_BUFFER" _ 0x00021010
 	).javaDocLinks
 
-	val ClientAPIHints = IntConstant.block(
+	val ClientAPIHints = IntConstant(
 		"Client API hints.",
 
 		"CLIENT_API" _ 0x00022001,
@@ -457,14 +457,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"CONTEXT_RELEASE_BEHAVIOR" _ 0x00022009
 	).javaDocLinks
 
-	val ClientAPIValues = IntConstant.block(
+	val ClientAPIValues = IntConstant(
 		"Values for the #CLIENT_API hint.",
 
 		"OPENGL_API" _ 0x00030001,
 		"OPENGL_ES_API" _ 0x00030002
 	).javaDocLinks
 
-	val ContextRobustnessValues = IntConstant.block(
+	val ContextRobustnessValues = IntConstant(
 		"Values for the #CONTEXT_ROBUSTNESS hint.",
 
 		"NO_ROBUSTNESS" _ 0,
@@ -472,7 +472,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"LOSE_CONTEXT_ON_RESET" _ 0x00031002
 	).javaDocLinks
 
-	val OpenGLProfileValues = IntConstant.block(
+	val OpenGLProfileValues = IntConstant(
 		"Values for the #OPENGL_PROFILE hint.",
 
 		"OPENGL_ANY_PROFILE" _ 0,
@@ -480,7 +480,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"OPENGL_COMPAT_PROFILE" _ 0x00032002
 	).javaDocLinks
 
-	val ContextReleaseBehaviorValues = IntConstant.block(
+	val ContextReleaseBehaviorValues = IntConstant(
 		"Values for the #CONTEXT_RELEASE_BEHAVIOR hint.",
 
 		"ANY_RELEASE_BEHAVIOR" _ 0,
@@ -490,7 +490,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	Code(
 		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.checkFirstThread();")
-	) _ int.func(
+	) _ int(
 		"Init",
 		"""
 		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before an application terminates GLFW should be
@@ -519,7 +519,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"Terminate",
 		"""
 		Destroys all remaining windows and cursors, restores any modified gamma ramps and frees any other allocated resources. Once this function is called, you
@@ -539,7 +539,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"GetVersion",
 		"""
 		Retrieves the major, minor and revision numbers of the GLFW library. It is intended for when you are using GLFW as a shared library and want to ensure
@@ -560,7 +560,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetVersionString",
 		"""
 		Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
@@ -581,7 +581,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWerrorfun.func(
+	GLFWerrorfun(
 		"SetErrorCallback",
 		"""
 		Sets the error callback, which is called with an error code and a human-readable description each time a GLFW error occurs.
@@ -607,7 +607,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWmonitor_p.func(
+	GLFWmonitor_p(
 		"GetMonitors",
 		"""
 		Returns an array of handles for all currently connected monitors.
@@ -624,7 +624,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWmonitor.func(
+	GLFWmonitor(
 		"GetPrimaryMonitor",
 		"""
 		Returns the primary monitor. This is usually the monitor where elements like the Windows task bar or the OS X menu bar is located.
@@ -636,7 +636,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"GetMonitorPos",
 		"""
 		Returns the position, in screen coordinates, of the upper-left corner of the specified monitor.
@@ -652,7 +652,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"GetMonitorPhysicalSize",
 		"""
 		Returns the size, in millimetres, of the display area of the specified monitor.
@@ -678,7 +678,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetMonitorName",
 		"""
 		Returns a human-readable name, encoded as UTF-8, of the specified monitor. The name typically reflects the make and model of the monitor and is not
@@ -696,7 +696,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWmonitorfun.func(
+	GLFWmonitorfun(
 		"SetMonitorCallback",
 		"""
 		Sets the monitor configuration callback, or removes the currently set callback. This is called when a monitor is connected to or disconnected from the
@@ -715,7 +715,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ GLFWvidmode_p).func(
+	(const _ GLFWvidmode_p)(
 		"GetVideoModes",
 		"""
 		Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
@@ -734,7 +734,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	(const _ GLFWvidmode_p).func(
+	(const _ GLFWvidmode_p)(
 		"GetVideoMode",
 		"""
 		Returns the current video mode of the specified monitor. If you have created a full screen window for that monitor, the return value will depend on
@@ -752,7 +752,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetGamma",
 		"""
 		Generates a 256-element gamma ramp from the specified exponent and then calls #SetGammaRamp() with it. The value must be a finite number greater than
@@ -766,7 +766,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ GLFWgammaramp_p).func(
+	(const _ GLFWgammaramp_p)(
 		"GetGammaRamp",
 		"""
 		Returns the current gamma ramp of the specified monitor.
@@ -783,7 +783,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetGammaRamp",
 		"""
 		Sets the current gamma ramp for the specified monitor. The original gamma ramp for that monitor is saved by GLFW the first time this function is called
@@ -803,7 +803,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"DefaultWindowHints",
 		"""
 		Resets all window hints to their default values. See #WindowHint() for details.
@@ -813,7 +813,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"WindowHint",
 		"""
 		Sets hints for the next call to #CreateWindow(). The hints, once set, retain their values until changed by a call to glfwWindowHint or
@@ -866,7 +866,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		since = "GLFW 2.2"
 	)
 
-	GLFWwindow.func(
+	GLFWwindow(
 		"CreateWindow",
 		"""
 		Creates a window and its associated OpenGL or OpenGL ES context. Most of the options controlling how the window and its context should be created are
@@ -943,7 +943,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since ="GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"DestroyWindow",
 		"""
 		Destroys the specified window and its context. On calling this function, no further callbacks will be called for that window.
@@ -962,7 +962,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	int.func(
+	int(
 		"WindowShouldClose",
 		"""
 		Returns the value of the close flag of the specified window.
@@ -976,7 +976,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetWindowShouldClose",
 		"""
 		Sets the value of the close flag of the specified window. This can be used to override the user's attempt to close the window, or to signal that it
@@ -991,7 +991,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetWindowTitle",
 		"""
 		Sets the window title, encoded as UTF-8, of the specified window.
@@ -1005,7 +1005,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"GetWindowPos",
 		"""
 		Retrieves the position, in screen coordinates, of the upper-left corner of the client area of the specified window.
@@ -1022,7 +1022,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetWindowPos",
 		"""
 		Sets the position, in screen coordinates, of the upper-left corner of the client area of the specified windowed mode window. If the window is a full
@@ -1043,7 +1043,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"GetWindowSize",
 		"""
 		Retrieves the size, in screen coordinates, of the client area of the specified window. If you wish to retrieve the size of the framebuffer of the
@@ -1061,7 +1061,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"SetWindowSize",
 		"""
 		Sets the size, in pixels, of the client area of the specified window.
@@ -1081,7 +1081,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"GetFramebufferSize",
 		"""
 		Retrieves the size, in pixels, of the framebuffer of the specified window. If you wish to retrieve the size of the window in screen coordinates, see
@@ -1099,7 +1099,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"GetWindowFrameSize",
 	    """
 	    Retrieves the size, in screen coordinates, of each edge of the frame of the specified window. This size includes the title bar, if the window has one.
@@ -1123,7 +1123,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	void.func(
+	void(
 		"IconifyWindow",
 		"""
 		Iconifies (minimizes) the specified window if it was previously restored. If the window is already iconified, this function does nothing.
@@ -1138,7 +1138,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.1"
 	)
 
-	void.func(
+	void(
 		"RestoreWindow",
 		"""
 		Restores the specified window if it was previously iconified (minimized). If the window is already restored, this function does nothing.
@@ -1153,7 +1153,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.1"
 	)
 
-	void.func(
+	void(
 		"ShowWindow",
 		"""
 		Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
@@ -1166,7 +1166,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"HideWindow",
 		"""
 		Hides the specified window, if it was previously visible. If the window is already hidden or is in full screen mode, this function does nothing.
@@ -1179,7 +1179,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWmonitor.func(
+	GLFWmonitor(
 		"GetWindowMonitor",
 		"""
 		Returns the handle of the monitor that the specified window is in full screen on.
@@ -1193,7 +1193,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	int.func(
+	int(
 		"GetWindowAttrib",
 		"""
 		Returns the value of an attribute of the specified window or its OpenGL or OpenGL ES context.
@@ -1208,7 +1208,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetWindowUserPointer",
 		"""
 		Sets the user-defined pointer of the specified window. The current value is retained until the window is destroyed. The initial value is $NULL.
@@ -1222,7 +1222,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	voidptr.func(
+	voidptr(
 		"GetWindowUserPointer",
 		"""
 		Returns the current value of the user-defined pointer of the specified window. The initial value is $NULL.
@@ -1243,7 +1243,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	val CALLBACK_WINDOW = GLFWwindow.IN("window", "the window whose callback to set")
 
-	GLFWwindowposfun.func(
+	GLFWwindowposfun(
 		"SetWindowPosCallback",
 		"""
 		Sets the position callback of the specified window, which is called when the window is moved. The callback is provided with the screen position of the
@@ -1259,7 +1259,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWwindowsizefun.func(
+	GLFWwindowsizefun(
 		"SetWindowSizeCallback",
 		"""
 		Sets the size callback of the specified window, which is called when the window is resized. The callback is provided with the size, in screen
@@ -1275,7 +1275,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWwindowclosefun.func(
+	GLFWwindowclosefun(
 		"SetWindowCloseCallback",
 		"""
 		Sets the close callback of the specified window, which is called when the user attempts to close the window, for example by clicking the close widget in
@@ -1299,7 +1299,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.5"
 	)
 
-	GLFWwindowrefreshfun.func(
+	GLFWwindowrefreshfun(
 		"SetWindowRefreshCallback",
 		"""
 		Sets the refresh callback of the specified window, which is called when the client area of the window needs to be redrawn, for example if the window has
@@ -1318,7 +1318,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.5"
 	)
 
-	GLFWwindowfocusfun.func(
+	GLFWwindowfocusfun(
 		"SetWindowFocusCallback",
 		"""
 		Sets the focus callback of the specified window, which is called when the window gains or loses input focus.
@@ -1336,7 +1336,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWwindowiconifyfun.func(
+	GLFWwindowiconifyfun(
 		"SetWindowIconifyCallback",
 		"""
 		Sets the iconification callback of the specified window, which is called when the window is iconified or restored.
@@ -1351,7 +1351,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWframebuffersizefun.func(
+	GLFWframebuffersizefun(
 		"SetFramebufferSizeCallback",
 		"""
 		Sets the framebuffer resize callback of the specified window, which is called when the framebuffer of the specified window is resized.
@@ -1366,7 +1366,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"PollEvents",
 		"""
 		Processes all pending events.
@@ -1392,7 +1392,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"WaitEvents",
 		"""
 		Waits until events are queued and processes them.
@@ -1425,7 +1425,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.5"
 	)
 
-	void.func(
+	void(
 		"PostEmptyEvent",
 		"""
 	    Posts an empty event from the current thread to the main thread event queue, causing #WaitEvents() to return.
@@ -1439,7 +1439,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		since = "GLFW 3.1"
 	)
 
-	int.func(
+	int(
 		"GetInputMode",
 		"""
 		Returns the value of an input option for the specified window.
@@ -1454,7 +1454,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetInputMode",
 		"""
 		Sets an input option for the specified window.
@@ -1488,7 +1488,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GFLW 3.0"
 	)
 
-	int.func(
+	int(
 		"GetKey",
 		"""
 		Returns the last state reported for the specified key to the specified window. The returned state is one of #PRESS or #RELEASE. The higher-level action
@@ -1516,7 +1516,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	int.func(
+	int(
 		"GetMouseButton",
 		"""
 		Returns the last state reported for the specified mouse button to the specified window. The returned state is one of #PRESS or #RELEASE. The
@@ -1535,7 +1535,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"GetCursorPos",
 		"""
 		Returns the position of the cursor, in screen coordinates, relative to the upper-left corner of the client area of the specified window.
@@ -1558,7 +1558,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"SetCursorPos",
 		"""
 		Sets the position, in screen coordinates, of the cursor relative to the upper-left corner of the client area of the specified window. The window must
@@ -1586,7 +1586,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWcursor.func(
+	GLFWcursor(
 		"CreateCursor",
 	    """
 		Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
@@ -1614,7 +1614,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	GLFWcursor.func(
+	GLFWcursor(
 		"CreateStandardCursor",
 		"""
 		Returns a cursor with a standard shape, that can be set for a window with #SetCursor().
@@ -1633,7 +1633,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		since = "GLFW 3.1"
 	)
 
-	void.func(
+	void(
 		"DestroyCursor",
 	    """
 	    Destroys a cursor previously created with #CreateCursor(). Any remaining cursors will be destroyed by #Terminate().
@@ -1650,7 +1650,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	void.func(
+	void(
 		"SetCursor",
 	    """
 	    Sets the cursor image to be used when the cursor is over the client area of the specified window. The set cursor will only be visible when the
@@ -1667,7 +1667,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	GLFWkeyfun.func(
+	GLFWkeyfun(
 		"SetKeyCallback",
 		"""
 		Sets the key callback of the specified window, which is called when a key is pressed, repeated or released.
@@ -1694,7 +1694,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWcharfun.func(
+	GLFWcharfun(
 		"SetCharCallback",
 		"""
 		Sets the character callback of the specified window, which is called when a Unicode character is input.
@@ -1716,7 +1716,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.4"
 	)
 
-	GLFWcharmodsfun.func(
+	GLFWcharmodsfun(
 		"SetCharModsCallback",
 		"""
 		Sets the character with modifiers callback of the specified window, which is called when a Unicode character is input regardless of what modifier keys
@@ -1737,7 +1737,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	GLFWmousebuttonfun.func(
+	GLFWmousebuttonfun(
 		"SetMouseButtonCallback",
 		"""
 		Sets the mouse button callback of the specified window, which is called when a mouse button is pressed or released.
@@ -1756,7 +1756,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWcursorposfun.func(
+	GLFWcursorposfun(
 		"SetCursorPosCallback",
 		"""
 		Sets the cursor position callback of the specified window, which is called when the cursor is moved. The callback is provided with the position, in
@@ -1772,7 +1772,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWcursorenterfun.func(
+	GLFWcursorenterfun(
 		"SetCursorEnterCallback",
 		"""
 		Sets the cursor boundary crossing callback of the specified window, which is called when the cursor enters or leaves the client area of the window.
@@ -1787,7 +1787,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWscrollfun.func(
+	GLFWscrollfun(
 		"SetScrollCallback",
 		"""
 		Sets the scroll callback of the specified window, which is called when a scrolling device is used.
@@ -1804,7 +1804,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.1"
 	)
 
-	GLFWdropfun.func(
+	GLFWdropfun(
 		"SetDropCallback",
 	    """
 	    Sets the file drop callback of the specified window, which is called when one or more dragged files are dropped on the window.
@@ -1822,7 +1822,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
-	int.func(
+	int(
 		"JoystickPresent",
 		"""
 		Returns whether the specified joystick is present.
@@ -1836,7 +1836,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ float_p).func(
+	(const _ float_p)(
 		"GetJoystickAxes",
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
@@ -1854,7 +1854,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.2"
 	)
 
-	(const _ unsigned_char_p).func(
+	(const _ unsigned_char_p)(
 		"GetJoystickButtons",
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
@@ -1872,7 +1872,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.2"
 	)
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetJoystickName",
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
@@ -1889,7 +1889,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SetClipboardString",
 		"""
 		Sets the system clipboard to the specified, UTF-8 encoded string.
@@ -1905,7 +1905,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	(const _ charUTF8_p).func(
+	(const _ charUTF8_p)(
 		"GetClipboardString",
 		"""
 		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string.
@@ -1927,7 +1927,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	double.func(
+	double(
 		"GetTime",
 		"""
 		Returns the value of the GLFW timer. Unless the timer has been set using #SetTime(), the timer measures time elapsed since GLFW was initialized.
@@ -1942,7 +1942,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"SetTime",
 		"""
 		Sets the value of the GLFW timer. It then continues to count up from that value. The value must be a positive finite number less than or equal to
@@ -1961,7 +1961,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 	// [ OpenGL ]
 
-	void.func(
+	void(
 		"MakeContextCurrent",
 		"""
 		Makes the OpenGL or OpenGL ES context of the specified window current on the calling thread. A context can only be made current on a single thread at a
@@ -1979,7 +1979,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	GLFWwindow.func(
+	GLFWwindow(
 		"GetCurrentContext",
 		"""
 		Returns the window whose OpenGL or OpenGL ES context is current on the calling thread.
@@ -1991,7 +1991,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void.func(
+	void(
 		"SwapBuffers",
 		"""
 		Swaps the front and back buffers of the specified window. If the swap interval is greater than zero, the GPU driver waits the specified number of screen
@@ -2005,7 +2005,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void.func(
+	void(
 		"SwapInterval",
 		"""
 		Sets the swap interval for the current context, i.e. the number of screen updates to wait from the time #SwapBuffers() was called before swapping the
@@ -2037,7 +2037,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	int.func(
+	int(
 		"ExtensionSupported",
 		"""
 		Returns whether the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">API extension</a> is supported by the current
@@ -2058,7 +2058,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	GLFWglproc.func(
+	GLFWglproc(
 		"GetProcAddress",
 		"""
 		Returns the address of the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">core or extension function</a>, if it is

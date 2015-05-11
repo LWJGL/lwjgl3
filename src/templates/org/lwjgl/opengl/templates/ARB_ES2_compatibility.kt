@@ -18,7 +18,7 @@ val ARB_ES2_compatibility = "ARBES2Compatibility".nativeClassGL("ARB_ES2_compati
 		${GL41.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"SHADER_COMPILER" _ 0x8DFA,
@@ -31,13 +31,13 @@ val ARB_ES2_compatibility = "ARBES2Compatibility".nativeClassGL("ARB_ES2_compati
 		"IMPLEMENTATION_COLOR_READ_FORMAT" _ 0x8B9B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of VertexAttribPointer.",
 
 		"FIXED" _ 0x140C
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat.",
 
 		"LOW_FLOAT" _ 0x8DF0,
@@ -48,7 +48,7 @@ val ARB_ES2_compatibility = "ARBES2Compatibility".nativeClassGL("ARB_ES2_compati
 		"HIGH_INT" _ 0x8DF5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code format} parameter of most commands taking sized internal formats.",
 
 		"RGB565" _ 0x8D62

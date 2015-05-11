@@ -20,7 +20,7 @@ val ARB_texture_rgb10_a2ui = "ARBTextureRGB10_A2UI".nativeClassGL("ARB_texture_r
 		Requires ${GL30.core} or ${registryLinkTo("EXT", "texture_integer")}. ${GL33.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, RenderbufferStorage and
 		RenderbufferStorageMultisample.

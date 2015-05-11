@@ -33,7 +33,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		techniques to be alternated during the rendering of a single scene.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -45,13 +45,13 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		"SAMPLE_COVERAGE_ARB" _ 0x80A0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mask} parameter of PushAttrib.",
 
 		"MULTISAMPLE_BIT_ARB" _ 0x20000000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"SAMPLE_BUFFERS_ARB" _ 0x80A8,
@@ -60,7 +60,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		"SAMPLE_COVERAGE_INVERT_ARB" _ 0x80AB
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"SampleCoverageARB",
 		"""
 		Specifies simultaneously the values of #SAMPLE_COVERAGE_VALUE_ARB and #SAMPLE_COVERAGE_INVERT_ARB.

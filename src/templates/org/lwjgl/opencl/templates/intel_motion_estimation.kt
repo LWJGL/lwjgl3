@@ -22,7 +22,7 @@ val intel_motion_estimation = "INTELMotionEstimation".nativeClassCL("intel_motio
 		Requires ${intel_accelerator.link}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted as a type in the {@code accelerator_type} parameter of INTELAccelerator#CreateAcceleratorINTEL(). Creates a full-frame motion estimation
 		accelerator.
@@ -31,7 +31,7 @@ val intel_motion_estimation = "INTELMotionEstimation".nativeClassCL("intel_motio
 		"ACCELERATOR_TYPE_MOTION_ESTIMATION_INTEL" _ 0x0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted as types to the fields of {@code cl_motion_estimator_desc_intel}.",
 
 		"ME_MB_TYPE_16x16_INTEL" _ 0x0,

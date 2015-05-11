@@ -47,13 +47,13 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		)}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",
 
 		"NUM_SHADING_LANGUAGE_VERSIONS" _ 0x82E9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Vertex attrib array has unconverted doubles. Accepted by the {@code pname} parameter of GetVertexAttribiv.",
 
 		"VERTEX_ATTRIB_ARRAY_LONG" _ 0x874E
@@ -61,7 +61,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 
 	// ARB_ES3_compatibility
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
 
 		"COMPRESSED_RGB8_ETC2" _ 0x9274,
@@ -76,25 +76,25 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		"COMPRESSED_SIGNED_RG11_EAC" _ 0x9273
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of Enable and Disable.",
 
 		"PRIMITIVE_RESTART_FIXED_INDEX" _ 0x8D69
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
 
 		"ANY_SAMPLES_PASSED_CONSERVATIVE" _ 0x8D6A
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of the GetInteger* functions.",
 
 		"MAX_ELEMENT_INDEX" _ 0x8D6B
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
 
 		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
@@ -102,7 +102,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 
 	// ARB_clear_buffer_object
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferData",
 		"Fills a buffer object's data store with a fixed value.",
 
@@ -124,7 +124,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ClearBufferSubData",
 		"Fills all or part of buffer object's data store with a fixed value.",
 
@@ -150,13 +150,13 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 
 	// ARB_compute_shader
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned in the {@code params} parameter by GetShaderiv.",
 
 		"COMPUTE_SHADER" _ 0x91B9
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_COMPUTE_UNIFORM_BLOCKS" _ 0x91BB,
@@ -170,51 +170,51 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		"MAX_COMPUTE_WORK_GROUP_INVOCATIONS" _ 0x90EB
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
 
 		"MAX_COMPUTE_WORK_GROUP_COUNT" _ 0x91BE,
 		"MAX_COMPUTE_WORK_GROUP_SIZE" _ 0x91BF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
 		"COMPUTE_WORK_GROUP_SIZE" _ 0x8267
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
 		"UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER" _ 0x90EC
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
 		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER" _ 0x90ED
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"DISPATCH_INDIRECT_BUFFER" _ 0x90EE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"DISPATCH_INDIRECT_BUFFER_BINDING" _ 0x90EF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code stages} parameter of UseProgramStages.",
 
 		"COMPUTE_SHADER_BIT" _ 0x00000020
 	)
 
 
-	GLvoid.func(
+	GLvoid(
 		"DispatchCompute",
 		"Launches one or more compute work groups.",
 
@@ -223,7 +223,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLuint.IN("num_groups_z", "the number of work groups to be launched in the Z dimension")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DispatchComputeIndirect",
 		"""
 		Launches one or more compute work groups using parameters stored in a buffer.
@@ -255,7 +255,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_copy_image
 
-	GLvoid.func(
+	GLvoid(
 		"CopyImageSubData",
 		"Performs a raw data copy between two images.",
 
@@ -278,20 +278,20 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// KHR_debug
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
 
 		"DEBUG_OUTPUT" _ 0x92E0,
 		"DEBUG_OUTPUT_SYNCHRONOUS" _ 0x8242
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
 		"CONTEXT_FLAG_DEBUG_BIT" _ 0x00000002
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv,  GetFloatv, GetDoublev and GetInteger64v.",
 
 		"MAX_DEBUG_MESSAGE_LENGTH" _ 0x9143,
@@ -303,14 +303,14 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"MAX_LABEL_LENGTH" _ 0x82E8
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
 		"DEBUG_CALLBACK_FUNCTION" _ 0x8244,
 		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
 	)
 
-	val DebugSources = IntConstant.block(
+	val DebugSources = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code source} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code sources} parameter
 		of GetDebugMessageLog.
@@ -324,7 +324,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SOURCE_OTHER" _ 0x824B
 	).javaDocLinks
 
-	val DebugTypes = IntConstant.block(
+	val DebugTypes = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC, and the {@code types} parameter of
 		GetDebugMessageLog.
@@ -339,7 +339,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_TYPE_MARKER" _ 0x8268
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
@@ -348,7 +348,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_TYPE_POP_GROUP" _ 0x826A
 	)
 
-	val DebugSeverities = IntConstant.block(
+	val DebugSeverities = IntConstant(
 		"""
 		Tokens accepted or provided by the {@code severity} parameters of DebugMessageControl, DebugMessageInsert and DEBUGPROC callback functions, and the
 		{@code severities} parameter of GetDebugMessageLog.
@@ -360,7 +360,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
 	).javaDocLinks
 
-	val DebugIdentifiers = IntConstant.block(
+	val DebugIdentifiers = IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
 		"BUFFER" _ 0x82E0,
@@ -372,7 +372,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DISPLAY_LIST" _ 0x82E7
 	).javaDocLinks
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageControl",
 		"""
 		Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
@@ -415,7 +415,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageInsert",
 		"""
 		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
@@ -438,7 +438,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DebugMessageCallback",
 		"""
 		Specifies a callback to receive debugging messages from the GL.
@@ -476,7 +476,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		)
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetDebugMessageLog",
 		"""
 		Retrieves messages from the debug message log.
@@ -513,7 +513,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PushDebugGroup",
 		"""
 		Pushes a debug group described by the string {@code message} into the command stream. The value of {@code id} specifies the ID of messages generated.
@@ -534,7 +534,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"PopDebugGroup",
 		"""
 		Pops the active debug group. When a debug group is popped, the GL will also generate a debug output message describing its cause based on the
@@ -547,7 +547,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"""
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ObjectLabel",
 		"Labels a named object identified within a namespace.",
 
@@ -561,7 +561,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetObjectLabel",
 		"Retrieves the label of a named object identified within a namespace.",
 
@@ -576,7 +576,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ObjectPtrLabel",
 		"Labels a sync object identified by a pointer.",
 
@@ -585,7 +585,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetObjectPtrLabel",
 		"Retrieves the label of a sync object identified by a pointer.",
 
@@ -597,7 +597,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_explicit_uniform_location
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
 		"MAX_UNIFORM_LOCATIONS" _ 0x826E
@@ -605,7 +605,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_framebuffer_no_attachments
 
-	val FramebufferParameters = IntConstant.block(
+	val FramebufferParameters = IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv, NamedFramebufferParameteriEXT, and
 		GetNamedFramebufferParameterivEXT.
@@ -618,7 +618,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS" _ 0x9314
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_FRAMEBUFFER_WIDTH" _ 0x9315,
@@ -627,7 +627,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"MAX_FRAMEBUFFER_SAMPLES" _ 0x9318
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"FramebufferParameteri",
 		"Sets a named parameter of a framebuffer.",
 
@@ -636,7 +636,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLint.IN("param", "the new value for the parameter named {@code pname}")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetFramebufferParameteriv",
 		"Retrieves a named parameter from a framebuffer.",
 
@@ -647,7 +647,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_internalformat_query2
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.",
 
 		"INTERNALFORMAT_SUPPORTED" _ 0x826F,
@@ -722,7 +722,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"VIEW_COMPATIBILITY_CLASS" _ 0x82B6
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v.",
 
 		"FULL_SUPPORT" _ 0x82B7,
@@ -756,7 +756,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"VIEW_CLASS_BPTC_FLOAT" _ 0x82D3
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetInternalformati64v",
 		"Retrieves information about implementation-dependent support for internal formats.",
 
@@ -776,7 +776,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_invalidate_subdata
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateTexSubImage",
 		"Invalidates a region of a texture image.",
 
@@ -790,7 +790,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLsizei.IN("depth", "the depth of the region to be invalidated")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateTexImage",
 		"Invalidates the entirety of a texture image.",
 
@@ -798,7 +798,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLint.IN("level", "the level of detail of the texture object to invalidate")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateBufferSubData",
 		"Invalidates a region of a buffer object's data store.",
 
@@ -807,14 +807,14 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLsizeiptr.IN("length", "the length of the range within the buffer's data store to be invalidated")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateBufferData",
 		"Invalidates the content of a buffer object's data store.",
 
 		GLuint.IN("buffer", "the name of a buffer object whose data store to invalidate")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateFramebuffer",
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
@@ -823,7 +823,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"InvalidateSubFramebuffer",
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
@@ -838,7 +838,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_multi_draw_indirect
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawArraysIndirect",
 		"""
 		Renders multiple sets of primitives from array data, taking parameters from memory.
@@ -877,7 +877,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElementsIndirect",
 		"""
 		Renders multiple indexed primitives from array data, taking parameters from memory.
@@ -920,7 +920,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_program_interface_query
 
-	val ProgramInterfaces = IntConstant.block(
+	val ProgramInterfaces = IntConstant(
 		"""
 		Accepted by the {@code programInterface} parameter of GetProgramInterfaceiv, GetProgramResourceIndex, GetProgramResourceName, GetProgramResourceiv,
 		GetProgramResourceLocation, and GetProgramResourceLocationIndex.
@@ -947,7 +947,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TRANSFORM_FEEDBACK_VARYING" _ 0x92F4
 	).javaDocLinks + " GL42#ATOMIC_COUNTER_BUFFER"
 
-	val ProgramInterfaceParameters = IntConstant.block(
+	val ProgramInterfaceParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
 
 		"ACTIVE_RESOURCES" _ 0x92F5,
@@ -956,7 +956,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"MAX_NUM_COMPATIBLE_SUBROUTINES" _ 0x92F8
 	).javaDocLinks
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code props} array of GetProgramResourceiv.",
 
 		"NAME_LENGTH" _ 0x92F9,
@@ -985,7 +985,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"IS_PER_PATCH" _ 0x92E7
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetProgramInterfaceiv",
 		"Queries a property of an interface in a program.",
 
@@ -995,7 +995,7 @@ for ( i = 0; i < primcount; i++ ) {
 		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
 	)
 
-	GLuint.func(
+	GLuint(
 		"GetProgramResourceIndex",
 		"Queries the index of a named resource within a program.",
 
@@ -1004,7 +1004,7 @@ for ( i = 0; i < primcount; i++ ) {
 		const _ GLcharUTF8_p.IN("name", "the name of the resource to query the index of")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetProgramResourceName",
 		"Queries the name of an indexed resource within a program.",
 
@@ -1019,7 +1019,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"GetProgramResourceiv",
 		"Retrieves values for multiple properties of a single active resource within a program object.",
 
@@ -1033,7 +1033,7 @@ for ( i = 0; i < primcount; i++ ) {
 		Return("length") _ GLint_p.OUT("params", "an array that will receive the property values")
 	)
 
-	GLint.func(
+	GLint(
 		"GetProgramResourceLocation",
 		"Queries the location of a named resource within a program.",
 
@@ -1042,7 +1042,7 @@ for ( i = 0; i < primcount; i++ ) {
 		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
 
-	GLint.func(
+	GLint(
 		"GetProgramResourceLocationIndex",
 		"Queries the fragment color index of a named variable within a program.",
 
@@ -1057,13 +1057,13 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_shader_storage_buffer_object
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
 		"SHADER_STORAGE_BUFFER" _ 0x90D2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of GetIntegerv, GetIntegeri_v, GetBooleanv, GetInteger64v, GetFloatv, GetDoublev, GetBooleani_v, GetIntegeri_v,
 		GetFloati_v, GetDoublei_v, and GetInteger64i_v.
@@ -1072,14 +1072,14 @@ for ( i = 0; i < primcount; i++ ) {
 		"SHADER_STORAGE_BUFFER_BINDING" _ 0x90D3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
 		"SHADER_STORAGE_BUFFER_START" _ 0x90D4,
 		"SHADER_STORAGE_BUFFER_SIZE" _ 0x90D5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_VERTEX_SHADER_STORAGE_BLOCKS" _ 0x90D6,
@@ -1094,19 +1094,19 @@ for ( i = 0; i < primcount; i++ ) {
 		"SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT" _ 0x90DF
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted in the {@code barriers} bitfield in glMemoryBarrier.",
 
 		"SHADER_STORAGE_BARRIER_BIT" _ 0x2000
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Alias for the existing token MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS.",
 
 		"MAX_COMBINED_SHADER_OUTPUT_RESOURCES" _ 0x8F39
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"ShaderStorageBlockBinding",
 		"Changes an active shader storage block binding.",
 
@@ -1117,7 +1117,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_stencil_texturing
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameter* and GetTexParameter*.",
 
 		"DEPTH_STENCIL_TEXTURE_MODE" _ 0x90EA
@@ -1125,20 +1125,20 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_texture_buffer_range
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
 		"TEXTURE_BUFFER_OFFSET" _ 0x919D,
 		"TEXTURE_BUFFER_SIZE" _ 0x919E
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"TEXTURE_BUFFER_OFFSET_ALIGNMENT" _ 0x919F
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexBufferRange",
 		"Binds a range of a buffer's data store to a buffer texture.",
 
@@ -1151,7 +1151,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_texture_storage_multisample
 
-	GLvoid.func(
+	GLvoid(
 		"TexStorage2DMultisample",
 		"Specifies storage for a two-dimensional multisample texture.",
 
@@ -1169,7 +1169,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TexStorage3DMultisample",
 		"Specifies storage for a two-dimensional multisample array texture.",
 
@@ -1190,7 +1190,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_texture_view
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
 
 		"TEXTURE_VIEW_MIN_LEVEL" _ 0x82DB,
@@ -1199,7 +1199,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"TextureView",
 		"Initializes a texture as a data alias of another texture's data store.",
 
@@ -1215,14 +1215,14 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_vertex_attrib_binding
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetVertexAttrib*v.",
 
 		"VERTEX_ATTRIB_BINDING" _ 0x82D4,
 		"VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
 		"VERTEX_BINDING_DIVISOR" _ 0x82D6,
@@ -1231,14 +1231,14 @@ for ( i = 0; i < primcount; i++ ) {
 		"VERTEX_BINDING_BUFFER" _ 0x8F4F
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, ....",
 
 		"MAX_VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D9,
 		"MAX_VERTEX_ATTRIB_BINDINGS" _ 0x82DA
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"BindVertexBuffer",
 		"Binds a buffer to a vertex buffer bind point.",
 
@@ -1248,7 +1248,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLsizei.IN("stride", "the distance between elements within the buffer")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribFormat",
 		"Specifies the organization of data in vertex arrays.",
 
@@ -1268,7 +1268,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribIFormat",
 		"Specifies the organization of pure integer data in vertex arrays.",
 
@@ -1281,7 +1281,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribLFormat",
 		"Specifies the organization of 64-bit double data in vertex arrays.",
 
@@ -1294,7 +1294,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexAttribBinding",
 		"Associate a vertex attribute and a vertex buffer binding.",
 
@@ -1302,7 +1302,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("bindingindex", "the index of the vertex buffer binding with which to associate the generic vertex attribute")
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"VertexBindingDivisor",
 		"Modifies the rate at which generic vertex attributes advance during instanced rendering.",
 

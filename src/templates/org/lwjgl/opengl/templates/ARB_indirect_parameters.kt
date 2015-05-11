@@ -31,7 +31,7 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 		Requires ${GL42.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv,
 		MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
@@ -40,14 +40,14 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 		"PARAMETER_BUFFER_ARB" _ 0x80EE
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
 		"PARAMETER_BUFFER_BINDING_ARB" _ 0x80EF
 	)
 
 	var src = GL43["MultiDrawArraysIndirect"]
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawArraysIndirectCountARB",
 		"""
 		Behaves similarly to GL43#MultiDrawArraysIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the
@@ -69,7 +69,7 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 	)
 
 	src = GL43["MultiDrawElementsIndirect"]
-	GLvoid.func(
+	GLvoid(
 		"MultiDrawElementsIndirectCountARB",
 		"""
 		Behaves similarly to GL43#MultiDrawElementsIndirect(), except that {@code drawcount} defines an offset (in bytes) into the buffer object bound to the

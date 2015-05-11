@@ -22,7 +22,7 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
 		Requires ${GL13.core}. ${GL20.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MAX_DRAW_BUFFERS_ARB" _ 0x8824,
@@ -44,7 +44,7 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
 		"DRAW_BUFFER15_ARB" _ 0x8834
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"DrawBuffersARB",
 		"Defines the draw buffers to which all output colors are written.",
 

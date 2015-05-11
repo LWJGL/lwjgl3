@@ -13,7 +13,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 
 	documentation = "Native bindings to X.h."
 
-	IntConstant.block(
+	IntConstant(
 		"RESERVED RESOURCE AND CONSTANT DEFINITIONS",
 
 		"None" _ 0,
@@ -30,7 +30,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"NoSymbol" _ 0
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"ERROR CODES",
 
 		"Success" _ 0,
@@ -53,7 +53,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"BadImplementation" _ 17
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Window attributes for CreateWindow and ChangeWindowAttributes",
 
 		"CWBackPixmap" expr "1 << 0",
@@ -73,7 +73,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"CWCursor" expr "1 << 14"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Input Event Masks. Used as event-mask window attribute and as arguments to Grab requests. Not to be confused with event names.",
 
 		"NoEventMask" _ 0,
@@ -104,7 +104,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"OwnerGrabButtonMask" expr "1 << 24"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Event names. Used in "type" field in ##XEvent structures. Not to be confused with event masks above. They start from 2 because 0 and 1 are
 		reserved in the protocol for errors and replies.
@@ -147,7 +147,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"LASTEvent" _ 36
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Key masks. Used as modifiers to GrabButton and GrabKey, results of QueryPointer, state in various key-, mouse-, and button-related events.",
 
 		"ShiftMask" expr "1<<0",
@@ -160,7 +160,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"Mod5Mask" expr "1<<7"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"modifier names. Used to build a SetModifierMapping request or to read a GetModifierMapping request. These correspond to the masks defined above.",
 
 		"ShiftMapIndex" _ 0,
@@ -173,7 +173,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"Mod5MapIndex" _ 7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"button masks. Used in same manner as Key masks above. Not to be confused with button names below.",
 
 		"Button1Mask" expr "1<<8",
@@ -184,7 +184,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"AnyModifier" expr "1<<15"
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		button names. Used as arguments to GrabButton and as detail in ButtonPress and ButtonRelease events. Not to be confused with button masks above. Note
 		that 0 is already defined above as "AnyButton".
@@ -197,7 +197,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"Button5" _ 5
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Notify modes",
 
 		"NotifyNormal" _ 0,
@@ -207,7 +207,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"NotifyHint" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Notify detail",
 
 		"NotifyAncestor" _ 0,
@@ -220,7 +220,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"NotifyDetailNone" _ 7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Visibility notify",
 
 		"VisibilityUnobscured" _ 0,
@@ -228,35 +228,35 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"VisibilityFullyObscured" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Circulation request",
 
 		"PlaceOnTop" _ 0,
 		"PlaceOnBottom" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Property notification",
 
 		"PropertyNewValue" _ 0,
 		"PropertyDelete" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Color Map notification",
 
 		"ColormapUninstalled" _ 0,
 		"ColormapInstalled" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"GrabPointer, GrabButton, GrabKeyboard, GrabKey Modes",
 
 		"GrabModeSync" _ 0,
 		"GrabModeAsync" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"GrabPointer, GrabKeyboard reply status",
 
 		"GrabSuccess" _ 0,
@@ -266,7 +266,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"GrabFrozen" _ 4
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"AllowEvents modes",
 
 		"AsyncPointer" _ 0,
@@ -279,14 +279,14 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"SyncBoth" _ 7
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"For Xlib#XCreateColormap().",
 
 		"AllocNone" _ 0,
 		"AllocAll" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Used in Xlib#XSetInputFocus(), Xlib#XGetInputFocus().",
 
 		"RevertToNone" expr "None",
@@ -294,14 +294,14 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"RevertToParent" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Window classes used by Xlib#XCreateWindow().",
 
 		"InputOutput" _ 1,
 		"InputOnly" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"SCREEN SAVER STUFF",
 
 		"DontPreferBlanking" _ 0,
@@ -316,7 +316,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"ScreenSaverActive" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Property modes",
 
 		"PropModeReplace" _ 0,
@@ -324,7 +324,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"PropModeAppend" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"graphics functions, as in GC.alu",
 
 		"GXclear" _ 0x0,
@@ -345,7 +345,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"GXset" _ 0xf
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"LineStyle",
 
 		"LineSolid" _ 0,
@@ -353,7 +353,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"LineDoubleDash" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"capStyle",
 
 		"CapNotLast" _ 0,
@@ -362,7 +362,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"CapProjecting" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"joinStyle",
 
 		"JoinMiter" _ 0,
@@ -370,7 +370,7 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"JoinBevel" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"fillStyle",
 
 		"FillSolid" _ 0,
@@ -379,21 +379,21 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"FillOpaqueStippled" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"fillRule",
 
 		"EvenOddRule" _ 0,
 		"WindingRule" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"subwindow mode",
 
 		"ClipByChildren" _ 0,
 		"IncludeInferiors" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"SetClipRectangles ordering",
 
 		"Unsorted" _ 0,
@@ -402,14 +402,14 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"YXBanded" _ 3
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"CoordinateMode for drawing routines",
 
 		"CoordModeOrigin" _ 0,
 		"CoordModePrevious" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Polygon shapes",
 
 		"Complex" _ 0,
@@ -417,14 +417,14 @@ val X = "X".nativeClass(LINUX_PACKAGE) {
 		"Convex" _ 2
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Arc modes for PolyFillArc",
 
 		"ArcChord" _ 0,
 		"ArcPieSlice" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"GC components: masks used in CreateGC, CopyGC, ChangeGC, OR'ed into GC.stateChanges",
 
 		"GCFunction" expr "1<<0",

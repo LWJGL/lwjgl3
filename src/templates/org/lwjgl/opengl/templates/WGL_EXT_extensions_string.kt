@@ -14,7 +14,7 @@ val WGL_EXT_extensions_string = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT
 
 	documentation = "Native bindings to the ${registryLink("EXT", "wgl_extensions_string")} extension."
 
-	(const _ charASCII_p).func(
+	(const _ charASCII_p)(
 		"GetExtensionsStringEXT",
 		"""
 		Returns a list of supported extensions to WGL. Although the contents of the string is implementation specific, the string will be NULL terminated and

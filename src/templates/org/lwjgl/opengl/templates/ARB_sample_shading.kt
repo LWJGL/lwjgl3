@@ -33,7 +33,7 @@ val ARB_sample_shading = "ARBSampleShading".nativeClassGL("ARB_sample_shading", 
 		Requires ${GL20.core} and GLSL 1.30. ${GL30.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.
@@ -42,13 +42,13 @@ val ARB_sample_shading = "ARBSampleShading".nativeClassGL("ARB_sample_shading", 
 		"SAMPLE_SHADING_ARB" _ 0x8C36
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
 		"MIN_SAMPLE_SHADING_VALUE_ARB" _ 0x8C37
 	)
 
-	GLvoid.func(
+	GLvoid(
 		"MinSampleShadingARB",
 		"Sets the minimum sample shading fraction. {@code value} is clamped to [0,1] when specified.",
 

@@ -28,7 +28,7 @@ val ARB_compressed_texture_pixel_storage = "ARBCompressedTexturePixelStorage".na
 		Requires ${GL21.core}. ${GL42.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code pname} parameter of PixelStore[fi], GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"UNPACK_COMPRESSED_BLOCK_WIDTH" _ 0x9127,

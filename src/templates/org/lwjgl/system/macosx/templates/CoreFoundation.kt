@@ -22,16 +22,16 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFBase.h
 
-	ByteConstant.block(
+	ByteConstant(
 		"Boolean values.",
 
 		"TRUE" _ 1.b,
 		"FALSE" _ 0.b
 	)
 
-	macro _ CFAllocatorRef.func("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
-	macro _ CFAllocatorRef.func("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
-	macro _ CFAllocatorRef.func(
+	macro _ CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
+	macro _ CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
+	macro _ CFAllocatorRef(
 		"kCFAllocatorMalloc",
 		"""
 		This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to #kCFAllocatorDefault()
@@ -39,26 +39,26 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		was obtained as a result of {@code malloc()} type functions.
 		"""
 	)
-	macro _ CFAllocatorRef.func(
+	macro _ CFAllocatorRef(
 		"kCFAllocatorMallocZone",
 		"""
 		This allocator explicitly uses the default malloc zone, returned by {@code malloc_default_zone()}. It should only be used when an object is safe to be
 		allocated in non-scanned memory.
 		"""
 	)
-	macro _ CFAllocatorRef.func(
+	macro _ CFAllocatorRef(
 		"kCFAllocatorNull",
 		"""
 		Null allocator which does nothing and allocates no memory. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator"
 		in {@code CFString} where the memory should not be freed.
 		"""
 	)
-	macro _ CFAllocatorRef.func(
+	macro _ CFAllocatorRef(
 		"kCFAllocatorUseContext",
 		"Special allocator argument to #CFAllocatorCreate() which means \"use the functions given in the context to allocate the allocator itself as well\"."
 	)
 
-	CFTypeRef.func(
+	CFTypeRef(
 		"CFRetain",
 		"""
 		Retains a Core Foundation object.
@@ -70,7 +70,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFTypeRef.IN("cf", "the CFType object to retain")
 	)
 
-	void.func(
+	void(
 		"CFRelease",
 		"""
 		Releases a Core Foundation object.
@@ -85,7 +85,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFBundle.h
 
-	CFBundleRef.func(
+	CFBundleRef(
 		"CFBundleCreate",
 		"Creates a {@code CFBundle} object.",
 
@@ -93,7 +93,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFURLRef.IN("bundleURL", "the location of the bundle for which to create a {@code CFBundle} object")
 	)
 
-	voidptr.func(
+	voidptr(
 		"CFBundleGetFunctionPointerForName",
 		"Returns a pointer to a function in a bundle’s executable code using the function name as the search key.",
 
@@ -104,7 +104,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFString.h
 
-	IntConstant.block(
+	IntConstant(
 		"Platform-independent built-in encodings; always available on all platforms.",
 
 		"kCFStringEncodingMacRoman" _ 0,
@@ -123,7 +123,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"kCFStringEncodingUTF32LE" _ 0x1c000100
 	)
 
-	CFStringRef.func(
+	CFStringRef(
 		"CFStringCreateWithCString",
 		"Creates an immutable string from a C string.",
 
@@ -132,7 +132,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.")
 	)
 
-	CFStringRef.func(
+	CFStringRef(
 		"CFStringCreateWithCStringNoCopy",
 		"Creates a CFString object from an external C string buffer that might serve as the backing store for the object.",
 
@@ -152,7 +152,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	// -----------------------------------------------
 	// CFURL.h
 
-	IntConstant.block(
+	IntConstant(
 		"URL path styles.",
 
 		"kCFURLPOSIXPathStyle" _ 0,
@@ -160,7 +160,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"kCFURLWindowsPathStyle" _ 2
 	)
 
-	CFURLRef.func(
+	CFURLRef(
 		"CFURLCreateWithFileSystemPath",
 		"Creates a {@code CFURL} object using a local file system path string.",
 

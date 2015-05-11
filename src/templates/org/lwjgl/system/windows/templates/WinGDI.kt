@@ -14,7 +14,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 
 	documentation = "Native bindings to WinGDI.h"
 
-	IntConstant.block(
+	IntConstant(
 		"DEVMODE field selection bits.",
 		/*
 		"DM_ORIENTATION" _ 0x00000001,
@@ -61,7 +61,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"DM_DISPLAYFIXEDOUTPUT" _ 0x20000000 // WINVER >=" _ 0x0501,
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Stock logical objects.",
 		"WHITE_BRUSH" _ 0,
 		"LTGRAY_BRUSH" _ 1,
@@ -85,7 +85,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"DC_PEN" _ 19
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Object types for #EnumObjects() and #GetCurrentObject().",
 		"OBJ_PEN" _ 1,
 		"OBJ_BRUSH" _ 2,
@@ -103,7 +103,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"OBJ_COLORSPACE" _ 14
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"Used by the index parameter of #GetDeviceCaps().",
 		"DRIVERVERSION" _ 0, // Device driver version
 		"TECHNOLOGY" _ 2, // Device classification
@@ -159,7 +159,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"COLORMGMTCAPS" _ 121  // Color Management caps
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"##PIXELFORMATDESCRIPTOR flags.",
 		"PFD_DOUBLEBUFFER" _ 0x00000001,
 		"PFD_STEREO" _ 0x00000002,
@@ -184,27 +184,27 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		"PFD_STEREO_DONTCARE" _ 0x80000000.i
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"##PIXELFORMATDESCRIPTOR pixel types.",
 		"PFD_TYPE_RGBA" _ 0,
 		"PFD_TYPE_COLORINDEX" _ 1
 	)
 
-	IntConstant.block(
+	IntConstant(
 		"##PIXELFORMATDESCRIPTOR layer types.",
 		"PFD_MAIN_PLANE" _ 0,
 		"PFD_OVERLAY_PLANE" _ 1,
 		"PFD_UNDERLAY_PLANE" _ -1
 	)
 
-	HGDIOBJ.func(
+	HGDIOBJ(
 		"GetStockObject",
 		"Retrieves a handle to one of the stock pens, brushes, fonts, or palettes.",
 
 		int.IN("object", "the type of stock object")
 	)
 
-	int.func(
+	int(
 		"EnumObjects",
 		"""
 		Enumerates the pens or brushes available for the specified device context (DC). This function calls the application-defined callback function once for
@@ -218,7 +218,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		LPARAM.IN("param", "the data passed to the callback function along with the object information.")
 	)
 
-	HGDIOBJ.func(
+	HGDIOBJ(
 		"SelectObject",
 		"Selects an object into the specified device context (DC). The new object replaces the previous object of the same type.",
 
@@ -226,7 +226,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		HGDIOBJ.IN("object", "a handle to the object to be selected")
 	)
 
-	HGDIOBJ.func(
+	HGDIOBJ(
 		"GetCurrentObject",
 		"Retrieves a handle to an object of the specified type that has been selected into the specified device context (DC).",
 
@@ -234,14 +234,14 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		UINT.IN("objectType", "the object type to be queried")
 	)
 
-	DWORD.func(
+	DWORD(
 		"GetObjectType",
 		"Retrieves the type of the specified object.",
 
 		HGDIOBJ.IN("object", "a handle to the graphics object")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DeleteObject",
 		"""
 		Deletes a logical pen, brush, font, bitmap, region, or palette, freeing all system resources associated with the object. After the object is deleted,
@@ -251,7 +251,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		HGDIOBJ.IN("object", "a handle to a logical pen, brush, font, bitmap, region, or palette")
 	)
 
-	HDC.func(
+	HDC(
 		"CreateDC",
 		"Creates a device context (DC) for a device using the specified name.",
 
@@ -289,28 +289,28 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HDC.func(
+	HDC(
 		"CreateCompatibleDC",
 		"Creates a memory device context (DC) compatible with the specified device.",
 
 		nullable _ HDC.IN("hdc", "a handle to an existing DC. If this handle is $NULL, the function creates a memory DC compatible with the application's current screen.")
 	)
 
-	BOOL.func(
+	BOOL(
 		"DeleteDC",
 		"Deletes the specified device context (DC).",
 
 		HDC.IN("hdc", "a handle to the device context")
 	)
 
-	BOOL.func(
+	BOOL(
 		"CancelDC",
 		"Cancels any pending operation on the specified device context (DC).",
 
 		HDC.IN("hdc", "a handle to the DC")
 	)
 
-	int.func(
+	int(
 		"SaveDC",
 		"""
 		Saves the current state of the specified device context (DC) by copying data describing selected objects and graphic modes (such as the bitmap, brush,
@@ -320,7 +320,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		HDC.IN("hdc", "a handle to the DC whose state is to be saved")
 	)
 
-	BOOL.func(
+	BOOL(
 		"RestoreDC",
 		"""
 		Restores a device context (DC) to the specified state. The DC is restored by popping state information off a stack created by earlier calls to the
@@ -337,7 +337,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetDCOrgEx",
 		"""
 		Retrieves the final translation origin for a specified device context (DC). The final translation origin specifies an offset that the system uses to
@@ -348,7 +348,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		LPPOINT.OUT("point", "a ##POINT structure that receives the final translation origin, in device coordinates")
 	)
 
-	int.func(
+	int(
 		"GetDeviceCaps",
 		"Retrieves device-specific information for the specified device.",
 
@@ -356,7 +356,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		int.IN("index", "the item to be returned")
 	)
 
-	BOOL.func(
+	BOOL(
 		"GetDeviceGammaRamp",
 		"Sets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
 
@@ -371,7 +371,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetDeviceGammaRamp",
 		"Gets the gamma ramp on direct color display boards having drivers that support downloadable gamma ramps in hardware.",
 
@@ -386,7 +386,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	int.func(
+	int(
 		"ChoosePixelFormat",
 		"Attempts to match an appropriate pixel format supported by a device context to a given pixel format specification.",
 
@@ -394,7 +394,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		const _ PIXELFORMATDESCRIPTOR_p.IN("pixelFormatDescriptor", "a ##PIXELFORMATDESCRIPTOR structure that specifies the requested pixel format")
 	)
 
-	int.func(
+	int(
 		"DescribePixelFormat",
 		"""
 		Obtains information about the pixel format identified by pixelFormat of the device associated with dc. The function sets the members of the
@@ -421,14 +421,14 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	int.func(
+	int(
 		"GetPixelFormat",
 		"Obtains the index of the currently selected pixel format of the specified device context.",
 
 		HDC.IN("hdc", "the device context of the currently selected pixel format index returned by the function")
 	)
 
-	BOOL.func(
+	BOOL(
 		"SetPixelFormat",
 		"Sets the pixel format of the specified device context to the format specified by the pixelFormat index.",
 
@@ -443,7 +443,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL.func(
+	BOOL(
 		"SwapBuffers",
 		"Exchanges the front and back buffers if the current pixel format for the window referenced by the specified device context includes a back buffer.",
 

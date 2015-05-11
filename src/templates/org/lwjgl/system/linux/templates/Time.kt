@@ -17,7 +17,7 @@ val time = "Time".nativeClass(LINUX_PACKAGE) {
 	documentation = "Native bindings to <time.h>."
 
 	// TODO: Is this portable? What's the type of clockid_t?
-	IntConstant.block(
+	IntConstant(
 		"The IDs of the various system clocks (for POSIX.1b interval timers).",
 
 		"CLOCK_REALTIME" _ 0,
@@ -32,7 +32,7 @@ val time = "Time".nativeClass(LINUX_PACKAGE) {
 		"CLOCK_BOOTTIME_ALARM" _ 9
 	)
 
-	int.func(
+	int(
 		"clock_getres",
 		"""
 		Finds the resolution (precision) of the specified clock {@code clk_id}, and, if res is non-$NULL, stores it in the ##timespec struct pointed to by
@@ -43,7 +43,7 @@ val time = "Time".nativeClass(LINUX_PACKAGE) {
 		nullable _ timespec_p.OUT("res", "a pointer to a ##timespec structure")
 	)
 
-	int.func(
+	int(
 		"clock_gettime",
 		"Retrieves the time of the specified clock {@code clk_id} and stores it in the ##timespec struct pointed to by {@code res}.",
 
@@ -51,7 +51,7 @@ val time = "Time".nativeClass(LINUX_PACKAGE) {
 		timespec_p.OUT("tp", "a pointer to a ##timespec structure")
 	)
 
-	int.func(
+	int(
 		"gettimeofday",
 		"Returns the time and the timezone",
 

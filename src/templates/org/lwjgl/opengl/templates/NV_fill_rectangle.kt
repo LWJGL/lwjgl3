@@ -24,7 +24,7 @@ val NV_fill_rectangle = "NVFillRectangle".nativeClassGL("NV_fill_rectangle", pos
     that need to be drawn, particularly for a user-interface.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"Accepted by the {@code mode} parameter of PolygonMode.",
 
 		"FILL_RECTANGLE_NV" _ 0x933C

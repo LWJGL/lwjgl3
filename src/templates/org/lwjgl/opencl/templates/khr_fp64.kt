@@ -11,7 +11,7 @@ val khr_fp64 = "KHRFP64".nativeClassCL("khr_fp64", KHR) {
 
 	documentation = "Native bindings to the $extensionLink  extension."
 
-	IntConstant.block(
+	IntConstant(
 		"cl_device_info",
 
 		"DEVICE_DOUBLE_FP_CONFIG" _ 0x1032

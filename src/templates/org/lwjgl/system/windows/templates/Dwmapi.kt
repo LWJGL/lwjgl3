@@ -19,7 +19,7 @@ val Dwmapi = "Dwmapi".nativeClassWin {
 		$DLL_WARNING
 		"""
 
-	DLL_FUNC _ HRESULT.func(
+	DLL_FUNC _ HRESULT(
 		"DwmIsCompositionEnabled",
 		"Sets the current process as dots per inch (dpi) aware.",
 

@@ -29,7 +29,7 @@ val ARB_depth_clamp = "ARBDepthClamp".nativeClassGL("ARB_depth_clamp") {
 		${GL32.promoted}
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and
 		GetDoublev.

@@ -29,7 +29,7 @@ val ARB_seamless_cubemap_per_texture = "ARBSeamlessCubemapPerTexture".nativeClas
 		Requires ${GL32.core}.
 		"""
 
-	IntConstant.block(
+	IntConstant(
 		"""
 		Accepted by the {@code pname} parameter of TexParameter{if}, TexParameter{if}v, GetTexParameter{if}v, SamplerParameter{if}, SamplerParameter{if}v, and
 		GetSamplerParameter{if}v.

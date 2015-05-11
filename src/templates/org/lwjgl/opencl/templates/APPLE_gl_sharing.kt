@@ -15,13 +15,13 @@ val apple_gl_sharing = dependsOn(Module.OPENGL) {
 
 		documentation = "Native bindings to the $extensionName extension."
 
-		IntConstant.block(
+		IntConstant(
 			"Error code returned by #GetGLContextInfoAPPLE() if an invalid {@code platform_gl_ctx} is provided.",
 
 			"INVALID_GL_CONTEXT_APPLE" _ -1000
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		This enumerated value can be specified as part of the {@code properties} argument passed to CL10#CreateContext() to allow OpenCL compliant
 		devices in an existing CGL share group to be used as the devices in the newly created CL context. GL objects that were allocated in the specified CGL share
@@ -31,7 +31,7 @@ val apple_gl_sharing = dependsOn(Module.OPENGL) {
 			"CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE" _ 0x10000000
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		Accepted as the {@code param_name} argument of #GetGLContextInfoAPPLE(). Returns an array of {@code cl_device_ids} for the CL device(s)
 		corresponding to the virtual screen(s) for the specified CGL context.
@@ -40,7 +40,7 @@ val apple_gl_sharing = dependsOn(Module.OPENGL) {
 			"CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE" _ 0x10000003
 		)
 
-		IntConstant.block(
+		IntConstant(
 			"""
 		Accepted as the {@code param_name} argument of #GetGLContextInfoAPPLE(). Returns a {@code cl_device_id} for the CL device associated with the
 		virtual screen for the specified CGL context.
@@ -49,7 +49,7 @@ val apple_gl_sharing = dependsOn(Module.OPENGL) {
 			"CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE" _ 0x10000002
 		)
 
-		cl_int.func(
+		cl_int(
 			"GetGLContextInfoAPPLE",
 			"""
 		Provides a query mechanism to retrieve OpenGL context specific information from an OpenCL context to help identify device specific mappings and usage.
