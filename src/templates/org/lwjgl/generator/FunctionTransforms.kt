@@ -65,10 +65,15 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: Stri
 			expression = "($expression ${factor.expression()})"
 
 		// Replace with expression
-		return if ( bufferParam has nullable )
+		expression = if ( bufferParam has nullable )
 			"(${bufferParam.name} == null ? 0 : $expression) << $byteShift"
 		else
 			"$expression << $byteShift"
+
+		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
+			expression = "(${param.nativeType.javaMethodType})($expression)"
+
+		return expression
 	}
 }
 
