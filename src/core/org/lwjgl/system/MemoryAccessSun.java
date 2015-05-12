@@ -11,6 +11,7 @@ import java.lang.reflect.Modifier;
 import java.nio.*;
 
 import sun.misc.Unsafe;
+import sun.nio.ch.DirectBuffer;
 
 import static org.lwjgl.system.MemoryAccess.*;
 
@@ -78,7 +79,7 @@ final class MemoryAccessSun {
 
 		@Override
 		public long getAddress(Buffer buffer) {
-			return unsafe.getLong(buffer, address);
+			return ((DirectBuffer)buffer).address();
 		}
 
 		@Override
