@@ -855,6 +855,17 @@ val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGL("NV_geometry_shader_
 		vertices to output vertices.
 		"""
 }
+val NV_gpu_program5_mem_extended = EXT_FLAG.nativeClassGL("NV_gpu_program5_mem_extended", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides a new set of storage modifiers that can be used by NV_gpu_program5 assembly program instructions loading from or storing to various
+		forms of GPU memory.
+		
+		Requires ${"NV_gpu_program5".cap}.
+		"""
+}
 val NV_gpu_shader5 = EXT_FLAG.nativeClassGL("NV_gpu_shader5", postfix = NV) {
 	documentation =
 		"""
@@ -940,6 +951,20 @@ val NV_shader_storage_buffer_object = EXT_FLAG.nativeClassGL("NV_shader_storage_
 
 		Assembly programs using this extension can read and write to the memory of buffer objects bound to the binding points provided by
 		${"ARB_shader_storage_buffer_object".cap}.
+
+		Requires ${GL40.core}, ${"NV_gpu_program4".cap}, ${"NV_gpu_program5".cap}, ${ARB_shader_storage_buffer_object.link}.
+		"""
+}
+val NV_shader_thread_shuffle = EXT_FLAG.nativeClassGL("NV_shader_thread_shuffle", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		Implementations of the OpenGL Shading Language may, but are not required, to run multiple shader threads for a single stage as a SIMD thread group,
+		where individual execution threads are assigned to thread groups in an undefined, implementation-dependent order.  This extension provides a set of
+		new features to the OpenGL Shading Language to share data between multiple threads within a thread group.
+
+		Requires ${GL43.core} and GLSL 4.3.
 		"""
 }
 val NV_vertex_program1_1 = EXT_FLAG.nativeClassGL("NV_vertex_program1_1", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
