@@ -197,7 +197,7 @@ License terms: http://lwjgl.org/license.php
 	<target name="compile-templates" description="Compiles the Templates module" depends="init">
 		<uptodate targetfile="${bin}/Templates/touch.txt" property="templates-uptodate">
 			<srcfiles dir="${config}" includes="build-modules.xml"/>
-			<srcfiles dir="${src.templates}" includes="**" />
+			<srcfiles dir="${src.templates}" includes="**"/>
 		</uptodate>
 		<antcall target="-compile-templates"/>
 	</target>
@@ -259,6 +259,7 @@ License terms: http://lwjgl.org/license.php
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
 		<uptodate property="generated-uptodate" targetfile="${generated}/touch.txt">
+			<srcfiles dir="${config}" includes="build-modules.xml"/>
 			<srcfiles dir="${bin.templates}" includes="**/*.class"/>
 		</uptodate>
 		<antcall target="-generate"/>
@@ -392,9 +393,9 @@ License terms: http://lwjgl.org/license.php
 			useexternalfile="true"
 			nohelp="true"
 			notree="true"
-		    stylesheetfile="${config}/javadoc.css"
-		    doclet="org.lwjgl.system.ExcludeDoclet"
-		    docletpath="${bin.templates}"
+			stylesheetfile="${config}/javadoc.css"
+			doclet="org.lwjgl.system.ExcludeDoclet"
+			docletpath="${bin.templates}"
 			>
 
 			<!-- TODO: Add package-info documentation -->
@@ -447,7 +448,7 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Bundle javadoc -->
 		<mkdir dir="${release.doc}"/>
-		<zip destfile="${release.doc}/javadoc.zip" basedir="${generated.javadoc}" includes="**" level="9" />
+		<zip destfile="${release.doc}/javadoc.zip" basedir="${generated.javadoc}" includes="**" level="9"/>
 
 		<!-- Copy license files -->
 		<copy todir="${release.doc}">
