@@ -300,7 +300,7 @@ public class TemplateFormatter {
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
 		// This is a little funny because we can have whitespace on either side of *
-		"(?:const\\s+)?(?:unsigned\\s+)?[0-9a-zA-Z_]+(?:(?:\\s*[*]+\\s*)|\\s+)(?:/[*]\\s*)?[0-9a-zA-Z_]+(?:\\s*[*]/)?"
+		"(?:const\\s+)?(?:(?:un)signed\\s+)?[0-9a-zA-Z_]+(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)(?:/[*]\\s*)?[0-9a-zA-Z_]+(?:\\s*[*]/)?"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
@@ -310,7 +310,7 @@ public class TemplateFormatter {
 
 	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
-		"(const\\s+)?(unsigned\\s+)?([0-9a-zA-Z_]+)\\s*([*]+)?\\s*(?:/[*]\\s*)?([0-9a-zA-Z_]+)(?:\\s*[*]/)?",
+		"(const\\s+)?((?:un)?signed\\s+)?([0-9a-zA-Z_]+)(\\s+const)?\\s*([*]+)?\\s*(?:/[*]\\s*)?([0-9a-zA-Z_]+)(?:\\s*[*]/)?",
 		Pattern.MULTILINE
 	);
 
@@ -332,21 +332,21 @@ public class TemplateFormatter {
 				if ( paramCount == -1 ) {
 					// Return type + function name
 					builder.append('\t');
-					if ( paramMatcher.group(1) != null )
+					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null )
 						builder.append("(const _ ");
 
 					if ( paramMatcher.group(2) != null )
-						builder.append("unsigned_");
+						builder.append(paramMatcher.group(2).trim() + "_");
 					if ( !paramMatcher.group(3).startsWith(prefix) )
 						builder.append(prefix);
 					builder.append(paramMatcher.group(3));
-					if ( paramMatcher.group(4) != null ) // pointer
+					if ( paramMatcher.group(5) != null ) // pointer
 						writerPointer(builder, paramMatcher);
 					if ( paramMatcher.group(1) != null )
 						builder.append(')');
 					builder.append("(\n");
 					builder.append("\t\t\"");
-					builder.append(paramMatcher.group(5));
+					builder.append(paramMatcher.group(6));
 					builder.append("\",\n");
 					builder.append("\t\t\"\"");
 
@@ -360,23 +360,23 @@ public class TemplateFormatter {
 						builder.append('\n');
 
 					builder.append("\t\t");
-					if ( paramMatcher.group(1) != null ) // const
+					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null ) // const
 						builder.append("const _ ");
 					if ( paramMatcher.group(2) != null )
-						builder.append("unsigned_");
+						builder.append(paramMatcher.group(2).trim() + "_");
 					if ( !paramMatcher.group(3).startsWith(prefix) )
 						builder.append(prefix);
 					builder.append(paramMatcher.group(3));
-					if ( paramMatcher.group(4) != null ) { // pointer
+					if ( paramMatcher.group(5) != null ) { // pointer
 						writerPointer(builder, paramMatcher);
 						builder.append(
-							paramMatcher.group(1) != null // const
+							paramMatcher.group(1) != null || paramMatcher.group(4) != null // const
 								? ".IN(\""
 								: ".OUT(\""
 						);
 					} else
 						builder.append(".IN(\"");
-					builder.append(paramMatcher.group(5));
+					builder.append(paramMatcher.group(6));
 					builder.append("\", \"\")");
 				}
 			}
@@ -389,7 +389,7 @@ public class TemplateFormatter {
 
 	private static void writerPointer(StringBuilder builder, Matcher paramMatcher) {
 		builder.append('_');
-		for ( int i = 0; i < paramMatcher.group(4).length(); i++ )
+		for ( int i = 0; i < paramMatcher.group(5).length(); i++ )
 			builder.append('p');
 	}
 
