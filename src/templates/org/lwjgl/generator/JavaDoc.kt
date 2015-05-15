@@ -62,7 +62,8 @@ fun String.toJavaDoc(indentation: String = "\t", allowSingleLine: Boolean = true
 /** Specialized conversion for methods. */
 fun GeneratorTarget.toJavaDoc(documentation: String, paramsIn: Sequence<Parameter>, returns: NativeType, returnDoc: String, since: String): String {
 	// TODO: This is shit, optimize
-	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !it.isAutoSizeResultOut || returns is StructType }
+	val hideAutoSizeResult = returns !is StructType && paramsIn.filter { it.isAutoSizeResultOut }.count() == 1
+	val params = paramsIn.filterTo(ArrayList<Parameter>()) { !(it.isAutoSizeResultOut && hideAutoSizeResult) }
 	if ( params.isEmpty() && returnDoc.isEmpty() )
 		return documentation.toJavaDoc()
 

@@ -156,7 +156,7 @@ class Parameter(
 	// Data pointer
 		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.OPAQUE_POINTER
 		                         -> {
-			if ( isAutoSizeResultOut && (func.returns.nativeType !is StructType || func.returnsStructValue) )
+			if ( isAutoSizeResultOut && func.hideAutoSizeResultParam )
 				"$API_BUFFER.address($name)"
 			else if ( has(nullable) || (has(optional) && mode === GenerationMode.NORMAL) )
 				"memAddressSafe($name)"

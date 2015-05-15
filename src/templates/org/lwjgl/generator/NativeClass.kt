@@ -147,12 +147,13 @@ class NativeClass(
 					println("import static org.lwjgl.Pointer.*;")
 				println("import static org.lwjgl.system.MemoryUtil.*;")
 				if ( functions.any {
-					it.hasParam {
+					val func = it
+					func.hasParam {
 						it.nativeType is PointerType &&
 						(
 							it has Return ||
 							it has SingleValue ||
-							it.isAutoSizeResultOut ||
+							(it.isAutoSizeResultOut && func.hideAutoSizeResultParam) ||
 							it has PointerArray ||
 							it.nativeType is CharSequenceType
 						)
