@@ -1424,7 +1424,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			CL12#MEM_OBJECT_IMAGE2D_ARRAY
 			"""
 		),
-		(AutoSize("image_formats") / "CLImageFormat.SIZEOF") _ cl_uint.IN(
+		AutoSize("image_formats") _ cl_uint.IN(
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
 		),
