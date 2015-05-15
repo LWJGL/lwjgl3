@@ -30,7 +30,7 @@ val objc_property_t_p = PointerType(objc_property_t)
 // Defines a property attribute
 val objc_property_attribute_t = StructType(struct(MACOSX_PACKAGE, "ObjCPropertyAttribute", structName = "objc_property_attribute_t") {
 	documentation = "Defines a property attribute."
-	nativeImport ("MacOSXLWJGL.h")
+	nativeImport ("<objc/objc-runtime.h>")
 
 	charUTF8_p.member("name")
 	charUTF8_p.member("value")
@@ -40,7 +40,7 @@ val objc_property_attribute_t_p = StructType(objc_property_attribute_t)
 // Defines a method
 val objc_method_description = StructType(struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Defines a method."
-	nativeImport ("MacOSXLWJGL.h")
+	nativeImport ("<objc/objc-runtime.h>")
 
 	SEL.member("name")
 	charUTF8_p.member("types")

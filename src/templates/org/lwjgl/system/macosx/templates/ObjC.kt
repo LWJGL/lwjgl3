@@ -9,9 +9,8 @@ import org.lwjgl.system.macosx.*
 
 val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 	"ObjCRuntime".nativeClass(MACOSX_PACKAGE) {
-		nativeImport (
-			"MacOSXLWJGL.h"
-		)
+		nativeImport("<objc/objc-runtime.h>")
+		nativeDirective ("typedef void (*EnumerationMutationHandler)(id);", afterIncludes = true)
 
 		documentation = "Native bindings to Objective-C Runtime."
 
