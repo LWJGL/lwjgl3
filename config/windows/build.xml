@@ -9,10 +9,7 @@ License terms: http://lwjgl.org/license.php
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<property name="core-libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib"/>
-	<condition property="libs" value="${core-libs} OpenGL32.Lib" else="${core-libs}">
-		<istrue value="${build.opengl}"/>
-	</condition>
+	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
 	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/">
@@ -29,7 +26,7 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
-			<arg line="/c /Wall /WX /wd4996 /EHsc /Ox /Gy /MT /MP /nologo /DLWJGL_WINDOWS"/>
+			<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS"/>
 
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
@@ -104,7 +101,8 @@ License terms: http://lwjgl.org/license.php
 		<apply dir="${lib}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
 			<arg line='/LD /WX /nologo /Fe:"${LWJGL_LIBRARY}"'/>
 			<srcfile/>
-			<arg line='/link /OPT:REF,ICF /DLL ${libs}'/>
+			<arg line="/link /OPT:REF,ICF /DLL ${libs}"/>
+			<arg value="OpenGL32.lib" if:true="${build.opengl}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

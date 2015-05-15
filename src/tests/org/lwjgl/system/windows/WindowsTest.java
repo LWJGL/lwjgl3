@@ -56,22 +56,6 @@ public class WindowsTest {
 		assertEquals(dwp, DEF_WINDOW_PROC);
 	}
 
-	public void testOSVERSIONINFOEX() {
-		OSVERSIONINFOEX versionInfo = new OSVERSIONINFOEX();
-
-		versionInfo.setOsVersionInfoSize(OSVERSIONINFOEX.SIZEOF);
-
-		int success = GetVersionEx(versionInfo.buffer());
-		assertTrue(success != 0);
-
-		// We support Windows 2000 or higher
-		assertTrue(versionInfo.getMajorVersion() >= 5);
-
-		// Tests char array struct members
-		versionInfo.setCsdVersion("Service Pack X");
-		assertEquals(versionInfo.getCsdVersionString(), "Service Pack X");
-	}
-
 	public void testWNDCLASSEX() {
 		String className = "LWJGL";
 		ByteBuffer classNameEncoded = memEncodeUTF16(className);

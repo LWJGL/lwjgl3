@@ -160,30 +160,6 @@ val WNDCLASSEX = StructType(WNDCLASSEX_STRUCT)
 val LPWNDCLASSEX = StructType(name = "LPWNDCLASSEX", definition = WNDCLASSEX_STRUCT, includesPointer = true)
 val WNDCLASSEX_p = StructType(WNDCLASSEX)
 
-val LPOSVERSIONINFO = StructType(
-	name = "LPOSVERSIONINFO",
-	includesPointer = true,
-	definition = struct(WINDOWS_PACKAGE, "OSVERSIONINFOEX") {
-		documentation = """
-			Contains operating system version information. The information includes major and minor
-			version numbers, a build number, a platform identifier, and information about product
-			suites and the latest Service Pack installed on the system.
-		"""
-		nativeImport ("WindowsLWJGL.h")
-		DWORD.member("dwOSVersionInfoSize", "osVersionInfoSize")
-		DWORD.member("dwMajorVersion", "majorVersion")
-		DWORD.member("dwMinorVersion", "minorVersion")
-		DWORD.member("dwBuildNumber", "buildNumber")
-		DWORD.member("dwPlatformId", "platformId")
-		TCHAR.member("szCSDVersion", "csdVersion", 128, true)
-		WORD.member("wServicePackMajor", "servicePackMajor")
-		WORD.member("wServicePackMinor", "servicePackMinor")
-		WORD.member("wSuiteMask", "suiteMask")
-		BYTE.member("wProductType", "productType")
-		//BYTE.member("wReserved", "reserved")
-	}
-)
-
 private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	documentation = "Defines the x- and y- coordinates of a point."
 	nativeImport ("WindowsLWJGL.h")

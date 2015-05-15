@@ -41,19 +41,6 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"GPTR" expr "GMEM_FIXED | GMEM_ZEROINIT"
 	).javaDocLinks
 
-	BOOL(
-		"GetVersionEx",
-		"Retrieves information about the current operating system.",
-
-		LPOSVERSIONINFO.INOUT(
-			"versionInfo",
-			"""
-			an ##OSVERSIONINFOEX structure that receives the operating system information. Before calling the {@code GetVersionEx} function, set the
-			{@code OSVersionInfoSize} member of the structure as appropriate to indicate which data structure is being passed to this function.
-			"""
-		)
-	)
-
 	DWORD(
 		"GetLastError",
 		"""
