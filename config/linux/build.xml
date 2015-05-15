@@ -31,11 +31,6 @@ License terms: http://lwjgl.org/license.php
 		<include name="libglfw3.a" if:true="${build.glfw}"/>
 	</fileset>
 
-	<condition property="build.ovr.arch" value="x86_64" else="x86" if:true="${build.ovr}">
-		<equals arg1="${build.arch}" arg2="x64"/>
-	</condition>
-	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/Lib/Linux/${build.ovr.arch}/Release" includes="*.a" if:true="${build.ovr}"/>
-
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -54,7 +49,6 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
 			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
 			<arg value="-I${src.native.abs}/opengl/glx" if:true="${build.opengl}"/>
-			<arg value="-I${OCULUS_SDK_PATH}/LibOVR/Include" if:true="${build.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -68,8 +62,6 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
 			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
 			<fileset dir="${generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
-			<fileset dir="${generated.native}/ovr/linux" includes="*.c" if:true="${build.ovr}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>
@@ -79,7 +71,6 @@ License terms: http://lwjgl.org/license.php
 			<srcfiles file="config/${platform}/build.xml"/>
 			<srcfiles refid="link-objects"/>
 			<srcfiles refid="link-libraries"/>
-			<srcfiles refid="link-ovr" if:true="${build.ovr}"/>
 		</uptodate>
 
 		<antcall target="-link-if-necessary"/>
@@ -121,7 +112,6 @@ License terms: http://lwjgl.org/license.php
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
-			<fileset refid="link-ovr" if:true="${build.ovr}"/>
 		</apply>
 
 		<apply dir="${lib}" executable="strip" failonerror="true" taskname="Symbol strip">
