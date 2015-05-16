@@ -26,18 +26,21 @@ This script is included in /config/build-definitions.xml.
 	<!-- // ================================ // -->
 
 	<target name="modules">
-		<local name="glfw_opengl_check"/>
-		<condition property="glfw_opengl_check" value="1">
-			<and>
-				<istrue value="${build.glfw}"/>
-				<isfalse value="${build.opengl}"/>
-			</and>
-		</condition>
-		<fail if="glfw_opengl_check" message="GLFW requires OpenGL"/>
-
 		<condition property="build.ovr" value="true" else="false">
 			<isset property="OCULUS_SDK_PATH"/>
 		</condition>
+
+		<local name="glfw_opengl_check"/>
+		<condition property="glfw_opengl_check" value="1">
+			<and>
+				<or>
+					<istrue value="${build.glfw}"/>
+					<istrue value="${build.ovr}"/>
+				</or>
+				<isfalse value="${build.opengl}"/>
+			</and>
+		</condition>
+		<fail if="glfw_opengl_check" message="The OpenGL module is required"/>
 
 		<local name="build.modules.list"/>
 		<script language="javascript">
