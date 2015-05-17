@@ -17,6 +17,7 @@ val ATI = "ATI"
 val INTEL = "INTEL"
 
 val NV = "NV"
+val NVX = "NVX"
 
 val OVR ="OVR"
 
