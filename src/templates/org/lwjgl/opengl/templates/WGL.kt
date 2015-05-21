@@ -243,7 +243,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 			""",
 			"#FONT_LINES #FONT_POLYGONS"
 		),
-		mods(Check("count * GLYPHMETRICSFLOAT.SIZEOF"), nullable) _ LPGLYPHMETRICSFLOAT.OUT(
+		Check("count * GLYPHMETRICSFLOAT.SIZEOF") _ nullable _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
 			an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no

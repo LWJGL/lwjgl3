@@ -211,10 +211,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["format"],
 		src["type"],
 		AutoSize("img") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code img}"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("img", "a buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("img", "a buffer in which to place the returned data")
 	)
 
 	src = GL11["ReadPixels"]
@@ -229,10 +226,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["format"],
 		src["type"],
 		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("data", "a buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	src = ARB_imaging["GetColorTable"]
@@ -244,10 +238,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["format"],
 		src["type"],
 		AutoSize("table") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code table}"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("table", "a buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("table", "a buffer in which to place the returned data")
 	)
 
 	src = ARB_imaging["GetConvolutionFilter"]
@@ -311,10 +302,9 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		src["target"],
 		src["level"],
 		AutoSize("img") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code img}"),
-		mods(
-			Check(expression = "GL11.glGetTexLevelParameteri(target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("img", "a buffer in which to place the returned data")
+		Check(
+			expression = "GL11.glGetTexLevelParameteri(target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
+		) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("img", "a buffer in which to place the returned data")
 	)
 
 	src = GL20["GetUniformfv"]

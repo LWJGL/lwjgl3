@@ -117,12 +117,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER,
-			nullable
-		) _ GLvoid_p.IN("pixels", "the texel data")
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the texel data")
 	)
 
 	GLvoid(
@@ -142,11 +139,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLsizei.IN("depth", "the subregion depth"),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("pixels", "the pixel data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
 	GLvoid(
@@ -303,7 +298,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", " a pointer to the location where the indices are stored")
+		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", " a pointer to the location where the indices are stored")
 	)
 
 }

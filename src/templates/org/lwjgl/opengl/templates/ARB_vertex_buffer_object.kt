@@ -134,7 +134,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"Deletes named buffer objects.",
 
 		AutoSize("buffers") _ GLsizei.IN("n", "the number of buffer objects to be deleted"),
-		mods(const, SingleValue("buffer")) _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
+		const _ SingleValue("buffer") _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
 	GLvoid(
@@ -176,17 +176,13 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptrARB.IN("size", " the size in bytes of the buffer object's new data store"),
-		mods(
-			const,
-			optional,
-			MultiType(
-				PointerMapping.DATA_BYTE,
-				PointerMapping.DATA_SHORT,
-				PointerMapping.DATA_INT,
-				PointerMapping.DATA_FLOAT,
-				PointerMapping.DATA_DOUBLE
-			)
-		) _ GLvoid_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
+		optional _ MultiType(
+			PointerMapping.DATA_BYTE,
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 

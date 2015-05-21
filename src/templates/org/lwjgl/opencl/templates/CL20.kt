@@ -244,10 +244,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		cl_mem.IN("pipe", "the pipe object being queried"),
 		cl_pipe_info.IN("param_name", "the information to query"),
 		PARAM_VALUE_SIZE,
-		mods(
-			MultiType(PointerMapping.DATA_INT),
-			nullable
-		) _ void_p.IN("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT) _ nullable _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -644,10 +641,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		cl_kernel.IN("kernel", "the kernel object being queried"),
 		cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}"),
 		AutoSize("param_value") _ size_t.IN("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT)
-		) _ void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
+		const _ MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT) _ void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 
 		returnDoc =
 		"""
@@ -670,11 +664,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		"Creates a sampler object.",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		mods(
-			const,
-			nullable,
-			nullTerminated
-		) _ cl_sampler_properties_p.IN(
+		nullable _ nullTerminated _ const _ cl_sampler_properties_p.IN(
 			"sampler_properties",
 			"""
 			a list of sampler property names and their corresponding values. Each sampler property name is immediately followed by the corresponding desired

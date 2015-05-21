@@ -63,6 +63,6 @@ val NV_path_rendering_shared_edge = "NVPathRenderingSharedEdge".nativeClassGL("N
 		"",
 
 		GLenum.IN("pname", ""),
-		mods(const, Check(1)) _ GLint_p.IN("params", "")
+		const _ Check(1) _ GLint_p.IN("params", "")
 	)
 }

@@ -116,12 +116,11 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		mods(
-			const,
-			Check(expression = "4 * 4", bytes = true),
-			MultiType(PointerMapping.DATA_INT),
-			DRAW_INDIRECT_BUFFER
-		) _ GLvoid_p.IN("indirect", "a structure containing the draw parameters")
+		Check(
+			expression = "4 * 4", bytes = true
+		) _ MultiType(
+			PointerMapping.DATA_INT
+		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "a structure containing the draw parameters")
 	)
 
 	GLvoid(
@@ -166,12 +165,11 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the type of data in the buffer bound to the GL15#ELEMENT_ARRAY_BUFFER binding",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		mods(
-			const,
-			Check(expression = "5 * 4", bytes = true),
-			MultiType(PointerMapping.DATA_INT),
-			DRAW_INDIRECT_BUFFER
-		)_ GLvoid_p.IN("indirect", "the address of a structure containing the draw parameters")
+		Check(
+			expression = "5 * 4", bytes = true
+		) _ MultiType(
+			PointerMapping.DATA_INT
+		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "the address of a structure containing the draw parameters")
 	)
 
 	// ARB_gpu_shader5
@@ -399,7 +397,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "the value of the specified uniform variable")
+		Check(1) _ returnValue _ GLdouble_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	// ARB_sample_shading
@@ -482,7 +480,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the parameter of the shader subroutine uniform to query",
 			"#NUM_COMPATIBLE_SUBROUTINES #COMPATIBLE_SUBROUTINES GL31#UNIFORM_SIZE GL31#UNIFORM_NAME_LENGTH"
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
+		Check(1) _ returnValue _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
 
 	GLvoid(
@@ -493,9 +491,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
 		GLuint.IN("index", "the index of the shader subroutine uniform"),
 		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
-		mods(
-			Return("length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)")
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
+		Return(
+			"length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)"
 		) _ GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
 	)
 
@@ -507,9 +505,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("shadertype", "the shader stage from which to query the subroutine name", SHADER_TYPES),
 		GLuint.IN("index", "the index of the shader subroutine uniform"),
 		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
-		mods(
-			Return("length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)")
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
+		Return(
+			"length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)"
 		) _ GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
 	)
 
@@ -519,7 +517,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLenum.IN("shadertype", "the shader stage to update", SHADER_TYPES),
 		AutoSize("indices") _ GLsizei.IN("count", "the number of uniform indices stored in {@code indices}"),
-		mods(const, SingleValue("index")) _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
+		const _ SingleValue("index") _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
 	)
 
 	GLvoid(
@@ -528,7 +526,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
 		GLint.IN("location", "the location of the subroutine uniform"),
-		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
+		Check(1) _ returnValue _ GLuint_p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
 	)
 
 	GLvoid(
@@ -538,7 +536,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
 		GLenum.IN("pname", " the parameter of the shader to query", ProgramStageProperties),
-		mods(Check(1), returnValue) _ GLint_p.OUT("values", " a variable into which the queried value or values will be placed")
+		Check(1) _ returnValue _ GLint_p.OUT("values", " a variable into which the queried value or values will be placed")
 	)
 
 	// ARB_tesselation_shader
@@ -633,10 +631,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies an array of float values for the specified parameter for patch primitives.",
 
 		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
-		mods(
-			Check(expression = "GL11.glGetInteger(GL_PATCH_VERTICES)", debug = true),
-			const
-		) _ GLfloat_p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
+		Check(
+			expression = "GL11.glGetInteger(GL_PATCH_VERTICES)", debug = true
+		) _ const _ GLfloat_p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
 	)
 
 	// ARB_texture_cube_map_array
@@ -707,7 +704,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Deletes transform feedback objects.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of transform feedback objects to delete"),
-		mods(const, SingleValue("id")) _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
+		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
 	)
 
 	GLvoid(
@@ -805,7 +802,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("target", "a query object target", QUERY_TARGETS),
 		GLuint.IN("index", "the index of the query object target"),
 		GLenum.IN("pname", "the symbolic name of a query object target parameter"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "the requested data")
 	)
 
 }

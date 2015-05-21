@@ -237,34 +237,34 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 	val VA_V = "a buffer from which to read the attribute value"
 
-	GLvoid("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB()", VA_INDEX, mods(const, Check(1)) _ GLshort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB()", VA_INDEX, mods(const, Check(1)) _ GLfloat_p.IN("v", VA_V))
-	GLvoid("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB()", VA_INDEX, mods(const, Check(1)) _ GLdouble_p.IN("v", VA_V))
+	GLvoid("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB()", VA_INDEX, const _ Check(1) _ GLshort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB()", VA_INDEX, const _ Check(1) _ GLfloat_p.IN("v", VA_V))
+	GLvoid("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB()", VA_INDEX, const _ Check(1) _ GLdouble_p.IN("v", VA_V))
 
-	GLvoid("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB()", VA_INDEX, mods(const, Check(2)) _ GLshort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB()", VA_INDEX, mods(const, Check(2)) _ GLfloat_p.IN("v", VA_V))
-	GLvoid("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB()", VA_INDEX, mods(const, Check(2)) _ GLdouble_p.IN("v", VA_V))
+	GLvoid("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB()", VA_INDEX, const _ Check(2) _ GLshort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB()", VA_INDEX, const _ Check(2) _ GLfloat_p.IN("v", VA_V))
+	GLvoid("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB()", VA_INDEX, const _ Check(2) _ GLdouble_p.IN("v", VA_V))
 
-	GLvoid("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB()", VA_INDEX, mods(const, Check(3)) _ GLshort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB()", VA_INDEX, mods(const, Check(3)) _ GLfloat_p.IN("v", VA_V))
-	GLvoid("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB()", VA_INDEX, mods(const, Check(3)) _ GLdouble_p.IN("v", VA_V))
+	GLvoid("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB()", VA_INDEX, const _ Check(3) _ GLshort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB()", VA_INDEX, const _ Check(3) _ GLfloat_p.IN("v", VA_V))
+	GLvoid("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB()", VA_INDEX, const _ Check(3) _ GLdouble_p.IN("v", VA_V))
 
-	GLvoid("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB()", VA_INDEX, mods(const, Check(4)) _ GLfloat_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4bvARB", "Byte version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLbyte_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB()", VA_INDEX, mods(const, Check(4)) _ GLshort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4ivARB", "Integer version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLint_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4ubvARB", "Unsigned byte version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLubyte_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4usvARB", "Unsigned short version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLushort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4uivARB", "Unsigned integer version of #VertexAttrib4fvARB()", VA_INDEX, mods(const, Check(4)) _ GLuint_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB()", VA_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB()", VA_INDEX, const _ Check(4) _ GLfloat_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4bvARB", "Byte version of #VertexAttrib4fvARB()", VA_INDEX, const _ Check(4) _ GLbyte_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB()", VA_INDEX, const _ Check(4) _ GLshort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4ivARB", "Integer version of #VertexAttrib4fvARB()", VA_INDEX, const _ Check(4) _ GLint_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4ubvARB", "Unsigned byte version of #VertexAttrib4fvARB()", VA_INDEX, const _ Check(4) _ GLubyte_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4usvARB", "Unsigned short version of #VertexAttrib4fvARB()", VA_INDEX, const _ Check(4) _ GLushort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4uivARB", "Unsigned integer version of #VertexAttrib4fvARB()", VA_INDEX, const _ Check(4) _ GLuint_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB()", VA_INDEX, const _ Check(4) _ GLdouble_p.IN("v", VA_V))
 
-	GLvoid("VertexAttrib4NbvARB", "Fixed-point version of #VertexAttrib4bvARB()", VA_INDEX, mods(const, Check(4)) _ GLbyte_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4NsvARB", "Fixed-point version of #VertexAttrib4svARB()", VA_INDEX, mods(const, Check(4)) _ GLshort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4NivARB", "Fixed-point version of #VertexAttrib4ivARB()", VA_INDEX, mods(const, Check(4)) _ GLint_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NbvARB", "Fixed-point version of #VertexAttrib4bvARB()", VA_INDEX, const _ Check(4) _ GLbyte_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NsvARB", "Fixed-point version of #VertexAttrib4svARB()", VA_INDEX, const _ Check(4) _ GLshort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NivARB", "Fixed-point version of #VertexAttrib4ivARB()", VA_INDEX, const _ Check(4) _ GLint_p.IN("v", VA_V))
 
-	GLvoid("VertexAttrib4NubvARB", "Fixed-point unsigned version of #VertexAttrib4bvARB()", VA_INDEX, mods(const, Check(4)) _ GLubyte_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4NusvARB", "Fixed-point unsigned version of #VertexAttrib4svARB()", VA_INDEX, mods(const, Check(4)) _ GLushort_p.IN("v", VA_V))
-	GLvoid("VertexAttrib4NuivARB", "Fixed-point unsigned version of #VertexAttrib4ivARB()", VA_INDEX, mods(const, Check(4)) _ GLuint_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NubvARB", "Fixed-point unsigned version of #VertexAttrib4bvARB()", VA_INDEX, const _ Check(4) _ GLubyte_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NusvARB", "Fixed-point unsigned version of #VertexAttrib4svARB()", VA_INDEX, const _ Check(4) _ GLushort_p.IN("v", VA_V))
+	GLvoid("VertexAttrib4NuivARB", "Fixed-point unsigned version of #VertexAttrib4ivARB()", VA_INDEX, const _ Check(4) _ GLuint_p.IN("v", VA_V))
 
 	GLvoid(
 		"VertexAttribPointerARB",
@@ -366,7 +366,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 	val VP_V = "a buffer from which to read the parameter value"
 
 	GLvoid("ProgramEnvParameter4dARB", "Double version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, GLdouble.IN("x", VP_X), GLdouble.IN("y", VP_Y), GLdouble.IN("z", VP_Z), GLdouble.IN("w", VP_W))
-	GLvoid("ProgramEnvParameter4dvARB", "Pointer version of #ProgramEnvParameter4dARB()", TARGET, VP_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("params", VP_V))
+	GLvoid("ProgramEnvParameter4dvARB", "Pointer version of #ProgramEnvParameter4dARB()", TARGET, VP_INDEX, const _ Check(4) _ GLdouble_p.IN("params", VP_V))
 	GLvoid(
 		"ProgramEnvParameter4fARB",
 		"Updates the values of the program environment parameter numbered {@code index} for the specified program target {@code target}.",
@@ -378,10 +378,10 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		GLfloat.IN("z", VP_Z),
 		GLfloat.IN("w", VP_W)
 	)
-	GLvoid("ProgramEnvParameter4fvARB", "Pointer version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, mods(const, Check(4)) _ GLfloat_p.IN("params", VP_V))
+	GLvoid("ProgramEnvParameter4fvARB", "Pointer version of #ProgramEnvParameter4fARB().", TARGET, VP_INDEX, const _ Check(4) _ GLfloat_p.IN("params", VP_V))
 
 	GLvoid("ProgramLocalParameter4dARB", "Double version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, GLdouble.IN("x", VP_X), GLdouble.IN("y", VP_Y), GLdouble.IN("z", VP_Z), GLdouble.IN("w", VP_W))
-	GLvoid("ProgramLocalParameter4dvARB", "Pointer version of #ProgramLocalParameter4dARB().", TARGET, VP_INDEX, mods(const, Check(4)) _ GLdouble_p.IN("params", VP_V))
+	GLvoid("ProgramLocalParameter4dvARB", "Pointer version of #ProgramLocalParameter4dARB().", TARGET, VP_INDEX, const _ Check(4) _ GLdouble_p.IN("params", VP_V))
 	GLvoid(
 		"ProgramLocalParameter4fARB",
 		"Updates the values of the program local parameter numbered {@code index} for the specified program target {@code target}.",
@@ -393,7 +393,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		GLfloat.IN("z", VP_Z),
 		GLfloat.IN("w", VP_W)
 	)
-	GLvoid("ProgramLocalParameter4fvARB", "Pointer version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, mods(const, Check(4)) _ GLfloat_p.IN("params", VP_V))
+	GLvoid("ProgramLocalParameter4fvARB", "Pointer version of #ProgramLocalParameter4fARB().", TARGET, VP_INDEX, const _ Check(4) _ GLfloat_p.IN("params", VP_V))
 
 	GLvoid(
 		"GetProgramEnvParameterfvARB",
@@ -446,7 +446,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		TARGET,
 		GLenum.IN("pname", "the parameter to query", PARAMS),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to place the parameter value")
+		returnValue _ Check(1) _ GLint_p.OUT("params", "an array in which to place the parameter value")
 	)
 
 	GLvoid(
@@ -497,7 +497,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 			#VERTEX_ATTRIB_ARRAY_NORMALIZED_ARB #CURRENT_VERTEX_ATTRIB_ARB
 			"""
 		),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "an array in which to place the parameter value")
+		returnValue _ Check(1) _ GLint_p.OUT("params", "an array in which to place the parameter value")
 	)
 
 	GLvoid(
@@ -506,7 +506,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		VA_INDEX,
 		GLenum.IN("pname", "the parameter to query", "#VERTEX_ATTRIB_ARRAY_POINTER_ARB"),
-		mods(returnValue, Check(1)) _ GLvoid_pp.OUT("pointer", "an array in which to place the vertex attribute array pointer")
+		returnValue _ Check(1) _ GLvoid_pp.OUT("pointer", "an array in which to place the vertex attribute array pointer")
 	)
 
 	GLboolean(

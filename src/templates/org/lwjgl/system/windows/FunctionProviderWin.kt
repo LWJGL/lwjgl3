@@ -29,7 +29,4 @@ private val DLL_WARNING =
 		function is not supported in the Windows version we're running."""
 
 private val DLL_FUNC = Capabilities(expression = FUNCTION_ADDRESS, override = true)
-private val DLL_ADDRESS = mods(
-	virtual,
-	nullable // the generator emits checkFunctionAddress, no need to check again
-) _ voidptr.IN(FUNCTION_ADDRESS, "the DLL function address")
+private val DLL_ADDRESS = virtual _ nullable _ voidptr.IN(FUNCTION_ADDRESS, "the DLL function address") // nullable: the generator emits checkFunctionAddress, no need to check again

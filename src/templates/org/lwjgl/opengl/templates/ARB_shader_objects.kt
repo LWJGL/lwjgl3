@@ -145,8 +145,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("shaderObj", "the shader object"),
 		AutoSize("string", "length") _ GLsizei.IN("count", "the number of strings in the array"),
-		mods(const, PointerArray(GLcharARB_p, "string", "length")) _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
-		mods(const, nullable) _ GLint_p.IN(
+		const _ PointerArray(GLcharARB_p, "string", "length") _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
+		const _ nullable _ GLint_p.IN(
 			"length",
 			"""
 			an array with the number of charARBs in each string (the string length). Each element in this array can be set to negative one (or smaller),
@@ -455,7 +455,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the object to query"),
 		GLenum.IN("pname", "the parameter to query", Parameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	GLvoid(
@@ -477,7 +477,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the shader object to query"),
 		AutoSize("infoLog") _ GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code infoLog}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT(
+		Check(1) _ nullable _ GLsizei_p.OUT(
 			"length",
 			"""
 			the actual number of characters written by the GL into {@code infoLog} is returned in {@code length}, excluding the null termination. If
@@ -500,7 +500,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("containerObj", "the container object to query"),
 		AutoSize("obj") _ GLsizei.IN("maxCount", "the maximum number of handles the GL is allowed to write into {@code obj}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT(
+		Check(1) _ nullable _ GLsizei_p.OUT(
 			"count",
 			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If $NULL then the GL ignores this parameter."
 		),
@@ -565,7 +565,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		),
 		GLuint.IN("index", "the uniform index"),
 		AutoSize("name") _ GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code name}."),
-		mods(Check(1), nullable) _ GLsizei_p.IN(
+		Check(1) _ nullable _ GLsizei_p.IN(
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code name}. This count excludes the null termination. If
@@ -586,7 +586,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	GLvoid(
@@ -595,7 +595,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	GLvoid(
@@ -610,7 +610,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the shader object to query"),
 		AutoSize("source") _  GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT(
+		Check(1) _ nullable _ GLsizei_p.OUT(
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If {@code length} is NULL

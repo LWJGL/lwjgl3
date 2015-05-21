@@ -150,7 +150,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLuint.IN("program", ""),
 		AutoSize("varyings") _ GLsizei.IN("count", ""),
-		mods(const, PointerArray(GLcharASCII_p, "varying")) _ GLcharASCII_p_const_p.IN("varyings", ""),
+		const _ PointerArray(GLcharASCII_p, "varying") _ GLcharASCII_p_const_p.IN("varyings", ""),
 		GLenum.IN("bufferMode", "")
 	)
 
@@ -161,7 +161,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLuint.IN("program", ""),
 		GLuint.IN("index", ""),
 		AutoSize("name") _ GLsizei.IN("bufSize", ""),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", ""),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", ""),
 		Check(1) _ GLsizei_p.OUT("size", ""),
 		Check(1) _ GLenum_p.OUT("type", ""),
 		Return("length", """GL.getCapabilities().OpenGL20
@@ -175,7 +175,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		mods(Check(1), returnValue) _ GLint_p.OUT("values", "")
+		Check(1) _ returnValue _ GLint_p.OUT("values", "")
 	)
 
 	GLvoid(
@@ -184,6 +184,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		mods(Check(1), returnValue) _ GLboolean_p.OUT("values", "")
+		Check(1) _ returnValue _ GLboolean_p.OUT("values", "")
 	)
 }

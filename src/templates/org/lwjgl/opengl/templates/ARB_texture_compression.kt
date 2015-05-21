@@ -86,7 +86,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("depth", "the depth of the texture image"),
 		Expression("0") _ GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -100,7 +100,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("height", "the height of the texture image"),
 		Expression("0") _ GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -113,7 +113,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("width", "the width of the texture image"),
 		Expression("0") _ GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -130,7 +130,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("depth", "the depth of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -145,7 +145,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("height", "the height of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -158,7 +158,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("width", "the width of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	GLvoid(
@@ -167,10 +167,9 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 
 		GLenum.IN("target", "the target texture", "GL11#TEXTURE_1D $TEXTURE_2D_FACE_TARGETS $TEXTURE_3D_TARGETS"),
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
-		mods(
-			Check(expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+		Check(
+			expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true
+		) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 }

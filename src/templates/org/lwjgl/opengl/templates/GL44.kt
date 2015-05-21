@@ -75,17 +75,13 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size of the data store in basic machine units"),
-		mods(
-			const,
-			optional,
-			MultiType(
-				PointerMapping.DATA_BYTE,
-				PointerMapping.DATA_SHORT,
-				PointerMapping.DATA_INT,
-				PointerMapping.DATA_FLOAT,
-				PointerMapping.DATA_DOUBLE
-			)
-		) _ GLvoid_p.IN(
+		optional _ MultiType(
+			PointerMapping.DATA_BYTE,
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN(
 			"data",
 			"""
 			the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is $NULL, the data store of the
@@ -191,11 +187,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLsizei.IN("depth", "the subregion depth"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			nullable,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)
-		) _ GLvoid_p.IN(
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -222,11 +216,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLint.IN("level", "the texture level to clear"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			nullable,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)
-		) _ GLvoid_p.IN(
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -268,7 +260,7 @@ for ( i = 0; i < count; i++ ) {
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		GLuint.IN("first", "the first binding"),
 		AutoSize("buffers") _ GLsizei.IN("count", "the number of bindings"),
-		mods (nullable, const) _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
+		nullable _ const _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
 	)
 
 	GLvoid(
@@ -298,9 +290,9 @@ for ( i = 0; i < count; i++ ) {
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		GLuint.IN("first", "the first binding"),
 		AutoSize("buffers", "offsets", "sizes") _ GLsizei.IN("count", "the number of bindings"),
-		mods(nullable, const) _ GLuint_p.IN("buffers", "an array of names of existing buffers objects"),
-		mods(nullable, const) _ GLintptr_p.IN("offsets", "an array of offsets"),
-		mods(nullable, const) _ GLsizeiptr_p.IN("sizes", "an array of sizes")
+		nullable _ const _ GLuint_p.IN("buffers", "an array of names of existing buffers objects"),
+		nullable _ const _ GLintptr_p.IN("offsets", "an array of offsets"),
+		nullable _ const _ GLsizeiptr_p.IN("sizes", "an array of sizes")
 	)
 
 	GLvoid(
@@ -343,7 +335,7 @@ for ( i = 0; i < count; i++ ) {
 
 		GLuint.IN("first", "the first texture objects"),
 		AutoSize("textures") _ GLsizei.IN("count", "the number of texture objects"),
-		mods(nullable, const) _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
 	GLvoid(
@@ -370,7 +362,7 @@ for ( i = 0; i < count; i++ ) {
 
 		GLuint.IN("first", "the first sampler object"),
 		AutoSize("samplers") _ GLsizei.IN("count", "the number of sampler objects"),
-		mods(nullable, const) _ GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
+		nullable _ const _ GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
 	)
 
 	GLvoid(
@@ -408,7 +400,7 @@ for ( i = 0; i < count; i++ ) {
 
 		GLuint.IN("first", "the first image unit"),
 		AutoSize("textures") _ GLsizei.IN("count", "the number of image units"),
-		mods(nullable, const) _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
 	GLvoid(
@@ -440,9 +432,9 @@ for ( i = 0; i < count; i++ ) {
 
 		GLuint.IN("first", "the first vertex buffer binding point"),
 		AutoSize("buffers", "offsets", "strides") _ GLsizei.IN("count", "the number of vertex buffer binding points"),
-		mods(nullable, const) _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects"),
-		mods(nullable, const) _ GLintptr_p.IN("offsets", "an array of offses"),
-		mods(nullable, const) _ GLsizei_p.IN("strides", "an array of stride values")
+		nullable _ const _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects"),
+		nullable _ const _ GLintptr_p.IN("offsets", "an array of offses"),
+		nullable _ const _ GLsizei_p.IN("strides", "an array of stride values")
 	)
 
 	// ARB_query_buffer_object

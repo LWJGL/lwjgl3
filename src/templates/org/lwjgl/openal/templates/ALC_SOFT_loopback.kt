@@ -66,7 +66,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		error.
 		""",
 
-		mods(const, nullable) _ ALCcharUTF8_p.IN(
+		const _ nullable _ ALCcharUTF8_p.IN(
 			"deviceName",
 			"""
 			which device or device driver to use for subsequent rendering. This may be $NULL for an implementation-defined default, otherwise it must be a valid

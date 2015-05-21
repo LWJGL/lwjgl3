@@ -110,11 +110,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("internalformat", "the internal format with which the data will be stored in the buffer object"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		mods(
-		  nullable,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			const
-		) _ GLvoid_p.IN("data",
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		) _ const _ GLvoid_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -134,11 +132,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLsizeiptr.IN("size", "the size, in basic machine units of the range of the data store to fill"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		mods(
-			nullable,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			const
-		) _ GLvoid_p.IN("data",
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		) _ const _ GLvoid_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -411,7 +407,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
 		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		mods(SingleValue("id"), const) _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
@@ -470,7 +466,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		""",
 
 		nullable _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		mods(nullable, const) _ voidptr.IN(
+		nullable _ const _ voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -505,11 +501,11 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
 		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-		mods(Check("count"), nullable) _ GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
+		Check("count") _ nullable _ GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
+		Check("count") _ nullable _ GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
+		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+		Check("count") _ nullable _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
+		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
 		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
@@ -572,7 +568,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
 		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
@@ -591,7 +587,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
 		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
 		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
@@ -642,7 +638,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
 
 	// ARB_internalformat_query2
@@ -820,7 +816,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
+		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
 
 	GLvoid(
@@ -829,7 +825,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-		mods(SingleValue("attachment"), const) _ GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
+		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
 		GLint.IN("x", "the X offset of the region to be invalidated"),
 		GLint.IN("y", "the Y offset of the region to be invalidated"),
 		GLsizei.IN("width", "the width of the region to be invalidated"),
@@ -867,12 +863,11 @@ for ( i = 0; i < primcount; i++ ) {
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		mods(
-			const,
-			Check(expression = "primcount * (stride == 0 ? (4 * 4) : stride)", bytes = true),
-			MultiType(PointerMapping.DATA_INT),
-			DRAW_INDIRECT_BUFFER
-		) _ GLvoid_p.IN("indirect", "an array of structures containing the draw parameters"),
+		Check(
+			expression = "primcount * (stride == 0 ? (4 * 4) : stride)", bytes = true
+		) _ MultiType(
+			PointerMapping.DATA_INT
+		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
@@ -908,12 +903,11 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		mods(
-			const,
-			Check(expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true),
-			MultiType(PointerMapping.DATA_INT),
-			DRAW_INDIRECT_BUFFER
-		) _ GLvoid_p.IN("indirect", "a structure containing an array of draw parameters"),
+		Check(
+			expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true
+		) _ MultiType(
+			PointerMapping.DATA_INT
+		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
@@ -992,7 +986,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("program", "the name of a program object whose interface to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} to query", ProgramInterfaces),
 		GLenum.IN("pname", "the name of the parameter within {@code programInterface} to query", ProgramInterfaceParameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
 	)
 
 	GLuint(
@@ -1012,7 +1006,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the indexed resource", ProgramInterfaces),
 		GLuint.IN("index", "the index of the resource within {@code programInterface} of {@code program}"),
 		AutoSize("name") _ GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
 		Return("length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"name",
 			"a character array into which will be written the name of the resource"
@@ -1029,7 +1023,7 @@ for ( i = 0; i < primcount; i++ ) {
 		AutoSize("props") _ GLsizei.IN("propCount", "the number of properties in {@code props}"),
 		const _ GLenum_p.IN("props", "an array that will receive the active resource properties"),
 		AutoSize("params") _ GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
 		Return("length") _ GLint_p.OUT("params", "an array that will receive the property values")
 	)
 

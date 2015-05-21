@@ -99,11 +99,9 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the color table width"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("table", "the color table data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("table", "the color table data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -123,7 +121,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("pname", "the parameter to set", COLOR_TABLE_PARAMS),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -132,7 +130,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -142,10 +140,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("table", "the color table data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("table", "the color table data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -154,7 +149,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
-		mods(Check(4), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4) _ returnValue _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -163,7 +158,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4) _ returnValue _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_color_subtable
@@ -177,10 +172,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("count", "the number of colors in the subregion to respecify"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("data", "the color table data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "the color table data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -286,10 +278,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the filter width"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("data", "the filter data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "the filter data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -302,10 +291,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("data", "the filter data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "the filter data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -357,14 +343,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("row", "the horizontal filter data"),
-		mods(
-			const,
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("column", "the vertical filter data")
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("row", "the horizontal filter data"),
+		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("column", "the vertical filter data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -394,7 +374,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -412,7 +392,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -421,7 +401,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
-		mods(returnValue, Check(4)) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		returnValue _ Check(4) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -430,7 +410,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(4)) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
+		returnValue _ Check(4) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	// HP_convolution_border_modes
@@ -564,7 +544,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to return the parameter values")
+		returnValue _ Check(1) _ GLint_p.OUT("params", "a buffer in which to return the parameter values")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -573,7 +553,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the histogram target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue _ Check(1) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -618,7 +598,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue _ Check(1) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -627,7 +607,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(returnValue, Check(1)) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue _ Check(1) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_blend_color

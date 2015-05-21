@@ -150,33 +150,33 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 	GLvoid("VertexAttrib4dARB", "Double version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), GLdouble.IN("v0", vertexAttribX), GLdouble.IN("v1", vertexAttribY), GLdouble.IN("v2", vertexAttribZ), GLdouble.IN("v3", vertexAttribW))
 	GLvoid("VertexAttrib4NubARB", "Normalized unsigned byte version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), GLubyte.IN("x", vertexAttribX), GLubyte.IN("y", vertexAttribY), GLubyte.IN("z", vertexAttribZ), GLubyte.IN("w", vertexAttribW))
 
-	GLvoid("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib1fvARB", "Pointer version of #VertexAttrib1fARB().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib1svARB", "Pointer version of #VertexAttrib1sARB().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib1dvARB", "Pointer version of #VertexAttrib1dARB().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib2fvARB", "Pointer version of #VertexAttrib2fARB().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib2svARB", "Pointer version of #VertexAttrib2sARB().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib2dvARB", "Pointer version of #VertexAttrib2dARB().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib3fvARB", "Pointer version of #VertexAttrib3fARB().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib3svARB", "Pointer version of #VertexAttrib3sARB().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib3dvARB", "Pointer version of #VertexAttrib3dARB().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLfloat_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4fvARB", "Pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLfloat_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4svARB", "Pointer version of #VertexAttrib4sARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4dvARB", "Pointer version of #VertexAttrib4dARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLdouble_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttrib4ivARB", "Integer pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4bvARB", "Byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4ubvARB", "Pointer version of #VertexAttrib4NubARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4usvARB", "Unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4uivARB", "Unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NbvARB", "Normalized byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NsvARB", "Normalized short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLshort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NivARB", "Normalized int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NubvARB", "Normalized unsigned byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLubyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NusvARB", "Normalized unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLushort_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttrib4NuivARB", "Normalized unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), mods(Check(4), const) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4ivARB", "Integer pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4bvARB", "Byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4ubvARB", "Pointer version of #VertexAttrib4NubARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLubyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4usvARB", "Unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLushort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4uivARB", "Unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NbvARB", "Normalized byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NsvARB", "Normalized short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NivARB", "Normalized int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NubvARB", "Normalized unsigned byte pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLubyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NusvARB", "Normalized unsigned short pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLushort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttrib4NuivARB", "Normalized unsigned int pointer version of #VertexAttrib4fARB().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
 
 	GLvoid(
 		"VertexAttribPointerARB",
@@ -200,7 +200,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			the array. The initial value is 0.
 			"""
 		),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN(
+		const _ ARRAY_BUFFER _ GLvoid_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -269,7 +269,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			"the symbolic name of the vertex attribute parameter to be queried",
 			"GL15#VERTEX_ATTRIB_ARRAY_BUFFER_BINDING $VERTEX_ATTRIBUTES GL30#VERTEX_ATTRIB_ARRAY_INTEGER GL33#VERTEX_ATTRIB_ARRAY_DIVISOR"
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "returns the requested data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "returns the requested data")
 	)
 
 	GLvoid(
@@ -297,6 +297,6 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
 		GLuint.IN("index", "the generic vertex attribute parameter to be queried"),
 		GLenum.IN("pname", "the symbolic name of the generic vertex attribute parameter to be returned", "#VERTEX_ATTRIB_ARRAY_POINTER_ARB"),
-		mods(Check(1), returnValue) _ GLvoid_pp.OUT("pointer", "the pointer value")
+		Check(1) _ returnValue _ GLvoid_pp.OUT("pointer", "the pointer value")
 	)
 }

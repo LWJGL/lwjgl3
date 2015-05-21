@@ -116,7 +116,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		GLenum.IN("category", "the message category", Categories),
 		GLenum.IN("severity", "the message severity", Severities),
 		AutoSize("ids") _ GLsizei.IN("count", "the number of values in the {@code ids} array"),
-		mods(nullable, const) _ GLuint_p.IN("ids", "an array of message ids"),
+		nullable _ const _ GLuint_p.IN("ids", "an array of message ids"),
 		GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
 	)
 
@@ -197,10 +197,10 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
 		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
-		mods(Check("count"), nullable) _ GLenum_p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLuint_p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLuint_p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
-		mods(Check("count"), nullable) _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
+		Check("count") _ nullable _ GLenum_p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
+		Check("count") _ nullable _ GLuint_p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
+		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
+		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
 		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 

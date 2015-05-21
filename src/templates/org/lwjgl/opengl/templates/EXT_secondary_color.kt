@@ -74,14 +74,14 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 	GLvoid("SecondaryColor3usEXT", "Unsigned short version of #SecondaryColor3bEXT()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
 	GLvoid("SecondaryColor3uiEXT", "Unsigned int version of #SecondaryColor3bEXT()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-	GLvoid("SecondaryColor3bvEXT", "Byte pointer version of #SecondaryColor3bEXT().", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
-	GLvoid("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3bvEXT", "Byte pointer version of #SecondaryColor3bEXT().", const _ Check(3) _ GLbyte_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", const _ Check(3) _ GLshort_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", const _ Check(3) _ GLint_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", const _ Check(3) _ GLfloat_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", const _ Check(3) _ GLdouble_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", const _ Check(3) _ GLubyte_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", const _ Check(3) _ GLushort_p.IN("v", colorBuffer))
+	GLvoid("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", const _ Check(3) _ GLuint_p.IN("v", colorBuffer))
 
 	GLvoid(
 		"SecondaryColorPointerEXT",
@@ -94,6 +94,6 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the secondary color array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the secondary color array data")
 	)
 }

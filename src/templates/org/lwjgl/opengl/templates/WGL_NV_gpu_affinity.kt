@@ -79,7 +79,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		If successful, the function returns an affinity-DC handle. If it fails, NULL will be returned.
 		""",
 
-		mods(const, nullTerminated) _ HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+		const _ nullTerminated _ HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
 	)
 
 	BOOL(

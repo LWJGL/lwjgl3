@@ -75,7 +75,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
+		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
 	)
 
@@ -320,7 +320,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 		GLuint.IN("program", "the name of a program containing uniforms whose indices to query"),
 		AutoSize("uniformNames", "uniformIndices") _ GLsizei.IN("uniformCount", "the number of uniforms whose indices to query"),
-		mods(const, PointerArray(GLcharASCII_p, "uniformName")) _ GLcharASCII_pp.IN(
+		const _ PointerArray(GLcharASCII_p, "uniformName") _ GLcharASCII_pp.IN(
 			"uniformNames",
 			"an array of pointers to buffers containing the names of the queried uniforms"
 		),
@@ -336,7 +336,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"uniformCount",
 			"the number of elements in the array of indices {@code uniformIndices} and the number of parameters written to {@code params} upon successful return"
 		),
-		mods(const, SingleValue("uniformIndex")) _ GLuint_p.IN("uniformIndices", "an array of {@code uniformCount} integers containing the indices of uniforms within {@code program}"),
+		const _ SingleValue("uniformIndex") _ GLuint_p.IN("uniformIndices", "an array of {@code uniformCount} integers containing the indices of uniforms within {@code program}"),
 		GLenum.IN("pname", "the property of the each uniform in {@code uniformIndices} that should be written into the corresponding element of {@code params}"),
 		returnValue _ GLint_p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
 	)
@@ -351,7 +351,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"bufSize",
 			"the size of the buffer, in units of {@code GLchar}, of the buffer whose address is specified in {@code uniformName}"
 		),
-		mods(Check(1), nullable) _ GLsizei_p.OUT(
+		Check(1) _ nullable _ GLsizei_p.OUT(
 			"length",
 			"the address of a variable that will receive the number of characters that were or would have been written to the buffer addressed by {@code uniformName}"
 		),
@@ -376,7 +376,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		GLuint.IN("program", "the name of a program containing the uniform block"),
 		GLuint.IN("uniformBlockIndex", "the index of the uniform block within {@code program}"),
 		GLenum.IN("pname", "the name of the parameter to query", UniformBlockParameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the address of a variable to receive the result of the query")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "the address of a variable to receive the result of the query")
 	)
 
 	GLvoid(
@@ -386,7 +386,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		GLuint.IN("program", "the name of a program containing the uniform block"),
 		GLuint.IN("uniformBlockIndex", " the index of the uniform block within {@code program}"),
 		AutoSize("uniformBlockName") _ GLsizei.IN("bufSize", "the size of the buffer addressed by {@code uniformBlockName}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
 		Return("length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)") _ GLcharASCII_p.OUT(
 			"uniformBlockName",
 			"an array of characters to receive the name of the uniform block at {@code uniformBlockIndex}"

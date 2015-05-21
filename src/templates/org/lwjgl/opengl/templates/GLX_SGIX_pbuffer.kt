@@ -98,7 +98,7 @@ val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX)
 		GLXFBConfig.IN("config", "the {@code GLXFBConfig}"),
 		unsigned_int.IN("width", "the pbuffer width"),
 		unsigned_int.IN("height", "the pbuffer height"),
-		mods(nullable, nullTerminated) _ int_p.IN("attrib_list", "an optional null-terminated list of attributes")
+		nullable _ nullTerminated _ int_p.IN("attrib_list", "an optional null-terminated list of attributes")
 	)
 
 	void(

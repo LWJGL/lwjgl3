@@ -100,7 +100,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
 		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		mods(const, SingleValue("attribute")) _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
+		const _ SingleValue("attribute") _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
 		int_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
@@ -112,7 +112,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
 		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		mods(const, SingleValue("attribute")) _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
+		const _ SingleValue("attribute") _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
 		FLOAT_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
@@ -125,8 +125,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		""",
 
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
-		mods(const, nullTerminated, nullable) _ int_p.IN("attribIList", " a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-		mods(const, nullTerminated, nullable) _ FLOAT_p.IN("attribFList", " a list of attribute {type, value} pairs containing floating point attribute values"),
+		const _ nullTerminated _ nullable _ int_p.IN("attribIList", " a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
+		const _ nullTerminated _ nullable _ FLOAT_p.IN("attribFList", " a list of attribute {type, value} pairs containing floating point attribute values"),
 		AutoSize("formats") _ UINT.IN("maxFormats", "the number of attributes being queried"),
 		int_p.IN(
 			"formats",

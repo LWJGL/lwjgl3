@@ -343,7 +343,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_device_id.IN("in_device", "the device to be partitioned"),
-		mods(const, nullTerminated) _ cl_device_partition_property.IN(
+		const _ nullTerminated _ cl_device_partition_property.IN(
 			"properties",
 			"""
 			specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
@@ -363,7 +363,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			partitioning scheme specified in {@code properties}.
 			"""
 		),
-		mods(Check(1), nullable) _ cl_uint_p.OUT(
+		Check(1) _ nullable _ cl_uint_p.OUT(
 			"num_devices_ret",
 			"""
 			the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
@@ -442,10 +442,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"image_desc",
 			"a pointer to a ##CLImageDesc structure that describes type and dimensions of the image to be allocated"
 		),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			nullable
-		) _ void_p.IN(
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ nullable _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
@@ -471,7 +468,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		mods(const, SingleValue("device")) _ cl_device_id_p.IN(
+		const _ SingleValue("device") _ cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
@@ -513,10 +510,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		cl_program.IN("program", "the program object that is the compilation target"),
 		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		mods(
-			const,
-			nullable
-		) _ cl_device_id_p.IN(
+		const _ nullable _ cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the compile is performed for all devices
@@ -531,15 +525,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"num_input_headers",
 			"the number of programs that describe headers in the array referenced by {@code input_headers}"
 		),
-		mods(
-			const, nullable, SingleValue("input_header")
-		) _ cl_program_p.IN(
+		const _ nullable _ SingleValue("input_header") _ cl_program_p.IN(
 			"input_headers",
 			"an array of program embedded headers created with CL10#CreateProgramWithSource()"
 		),
-		mods(
-			const, nullable, SingleValue("header_include_name")
-		) _ cl_charASCII_pp.IN(
+		const _ nullable _ SingleValue("header_include_name") _ cl_charASCII_pp.IN(
 			"header_include_names",
 			"""
 			an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
@@ -612,10 +602,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		mods(
-			const,
-			nullable
-		) _ cl_device_id_p.IN(
+		const _ nullable _ cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices that are in {@code context}. If {@code device_list} is a $NULL value, the link is performed for all devices
@@ -631,9 +618,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"num_input_programs",
 			"the number of programs in array referenced by {@code input_programs}"
 		),
-		mods(
-			const, nullable, SingleValue("input_program")
-		) _ cl_program_p.IN(
+		const _ nullable _ SingleValue("input_program") _ cl_program_p.IN(
 			"input_programs",
 			"""
 			an array of program objects that are compiled binaries or libraries that are to be linked to create the program executable. For each device in
@@ -749,10 +734,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		),
 		cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
 		PARAM_VALUE_SIZE,
-		mods(
-			MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG),
-			nullable
-		) _ void_p.IN("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG) _ nullable _ void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =

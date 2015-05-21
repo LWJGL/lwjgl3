@@ -193,7 +193,7 @@ typedef struct {
 		""",
 
 		AutoSize("states") _ GLsizei.IN("n", "the number of state object names to delete"),
-		mods(SingleValue("state"), const) _ GLuint_p.IN("states", "the buffer from which to read the state object names to delete")
+		SingleValue("state") _ const _ GLuint_p.IN("states", "the buffer from which to read the state object names to delete")
 	)
 	
 	GLboolean(
@@ -339,7 +339,7 @@ typedef struct {
 		""",
 
 		AutoSize("lists") _ GLsizei.IN("n", "the number of command list names to delete"),
-		mods(SingleValue("list"), const) _ GLuint_p.IN("lists", "the buffer from which to read the command list names to delete")
+		SingleValue("list") _ const _ GLuint_p.IN("lists", "the buffer from which to read the command list names to delete")
 	)
   
 	GLboolean(

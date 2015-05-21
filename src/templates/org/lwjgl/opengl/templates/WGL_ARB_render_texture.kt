@@ -159,6 +159,6 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"Sets an attribute to the specified pbuffer.",
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-		mods(const, nullTerminated, nullable) _ int_p.IN("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
+		const _ nullTerminated _ nullable _ int_p.IN("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
 	)
 }

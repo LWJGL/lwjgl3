@@ -65,7 +65,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 		faster on a command queue corresponding to this device than on command queues corresponding to other devices available to an OpenCL context.
 		""",
 
-			mods(Check(5), const) _ cl_context_properties_p.IN(
+			Check(5) _ const _ cl_context_properties_p.IN(
 				"properties",
 				"""
 			points to an attribute list whose format and valid contents are identical to the {code properties} argument of CL10#CreateContext().
@@ -78,10 +78,7 @@ val khr_gl_sharing = dependsOn(Module.OPENGL) {
 				"#DEVICES_FOR_GL_CONTEXT_KHR #CURRENT_DEVICE_FOR_GL_CONTEXT_KHR"
 			),
 			PARAM_VALUE_SIZE,
-			mods(
-				MultiType(PointerMapping.DATA_POINTER),
-				nullable
-			) _ void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_POINTER) _ nullable _ void_p.IN("param_value", param_value),
 			PARAM_VALUE_SIZE_RET,
 
 			returnDoc =

@@ -46,7 +46,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		will provide an implementation specific default.
 		""",
 
-		mods(nullable, const) _ ALCcharUTF8_p.IN("devicename", "the device or device configuration"),
+		nullable _ const _ ALCcharUTF8_p.IN("devicename", "the device or device configuration"),
 		ALCuint.IN("frequency", "the audio frequency"),
 		ALCenum.IN("format", "the audio format"),
 		ALCsizei.IN("buffersize", "the number of sample frame to buffer in the AL")

@@ -297,7 +297,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 			""",
 			PixelFormatAttribs
 		),
-		mods(nullable, Check(1)) _ CGLPixelFormatObj_p.OUT(
+		nullable _ Check(1) _ CGLPixelFormatObj_p.OUT(
 			"pix",
 			"""
 			the memory address of a pixel format object. On return, points to a new pixel format object that contains pixel format information and a list of
@@ -712,7 +712,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 		CGLContextObj.IN("ctx", "a rendering context"),
 		CGLContextParameter.IN("pname", "the parameter whose value you want to set", ContextParameters),
-		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
+		SingleValue("param") _ Check(1) _ const _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
 	)
 
 	CGLError(
@@ -781,7 +781,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		"Sets the value of a global option.",
 
 		CGLGlobalOption.IN("pname", "the name of the option whose value you want to set", GlobalOptions),
-		mods(SingleValue("param"), Check(1), const) _ GLint_p.IN("params", "the value to set the option to")
+		SingleValue("param") _ Check(1) _ const _ GLint_p.IN("params", "the value to set the option to")
 	)
 
 	CGLError(

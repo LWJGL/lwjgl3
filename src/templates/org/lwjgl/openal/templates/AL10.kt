@@ -369,7 +369,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Pointer version of #Listenerf().",
 
 		ALenum.IN("paramName", "the parameter to modify"),
-		mods(Check(1), const) _ ALfloat_p.IN("values", "the parameter values")
+		Check(1) _ const _ ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -377,7 +377,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the float value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -385,7 +385,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the integer value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -455,7 +455,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		mods(Check(1), const) _ ALfloat_p.IN("values", "the parameter values")
+		Check(1) _ const _ ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -473,7 +473,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -502,7 +502,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -636,7 +636,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Requests the deletion of a number of buffers.",
 
 		AutoSize("bufferNames") _ ALsizei.IN("n", "the number of buffers to delete"),
-		mods(SingleValue("bufferName"), const) _ ALuint_p.IN("bufferNames", "the buffers to delete")
+		SingleValue("bufferName") _ const _ ALuint_p.IN("bufferNames", "the buffers to delete")
 	)
 
 	ALboolean(
@@ -652,7 +652,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -661,7 +661,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -685,10 +685,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to modify"),
 		ALenum.IN("format", "the data format", BufferFormats),
-		mods(
-			MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT),
-			const
-		)_ ALvoid_p.IN("data", "the sample data"),
+		MultiType(
+			PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ ALvoid_p.IN("data", "the sample data"),
 		AutoSize("data") _ ALsizei.IN("size", "the data buffer size, in bytes"),
 		ALsizei.IN("frequency", "the data frequency")
 	)

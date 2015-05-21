@@ -67,10 +67,7 @@ val apple_gl_sharing = dependsOn(Module.OPENGL) {
 				"#CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE #CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE"
 			),
 			PARAM_VALUE_SIZE,
-			mods(
-				MultiType(PointerMapping.DATA_POINTER),
-				nullable
-			) _ void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_POINTER) _ nullable _ void_p.IN("param_value", param_value),
 			PARAM_VALUE_SIZE_RET
 		)
 

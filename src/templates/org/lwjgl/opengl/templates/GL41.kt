@@ -91,7 +91,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		GLenum.IN("shadertype", "the type of shader whose precision to query", "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER"),
 		GLenum.IN("precisiontype", "the numeric format whose precision and range to query"),
 		Check(2) _ GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
+		Check(1) _ returnValue _ GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
 	)
 
 	ReferenceGL("DepthRange") _ GLvoid(
@@ -136,7 +136,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
 		GLuint.IN("program", "the name of a program object whose binary representation to retrieve"),
 		AutoSize("binary") _ GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
 		Check(1) _ GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
 		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)") _ GLvoid_p.OUT(
 			"binary",
@@ -245,7 +245,7 @@ if (shader) {
 
 		GLenum.IN("type", "the type of shader to create"),
 		AutoSize("strings") _ GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-		mods(const, PointerArray(GLcharUTF8_p, "string")) _ GLcharUTF8_pp.IN(
+		const _ PointerArray(GLcharUTF8_p, "string") _ GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to source code strings from which to create the program object"
 		)
@@ -263,7 +263,7 @@ if (shader) {
 		"Deletes program pipeline objects.",
 
 		AutoSize("pipelines") _ GLsizei.IN("n", "the number of program pipeline objects to delete"),
-		mods(const, SingleValue("pipeline")) _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
+		const _ SingleValue("pipeline") _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
 	)
 
 	GLvoid(
@@ -291,7 +291,7 @@ if (shader) {
 			"the name of the parameter to retrieve",
 			"#ACTIVE_PROGRAM GL20#INFO_LOG_LENGTH $SHADER_TYPES"
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
 	)
 
 	// ProgramUniform JavaDoc
@@ -850,7 +850,7 @@ if (shader) {
 
 		GLuint.IN("pipeline", "the name of a program pipeline object from which to retrieve the info log"),
 		AutoSize("infoLog") _ GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
 		Return("length", "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)") _ GLcharUTF8_p.OUT(
 			"infoLog",
 			" an array of characters into which will be written the info log for {@code pipeline}"
@@ -907,10 +907,10 @@ if (shader) {
 		GLdouble.IN("w", attribW)
 	)
 
-	VertexAttribRef _ GLvoid("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), mods(Check(1), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), mods(Check(2), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), mods(Check(3), const) _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), mods(Check(4), const) _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ GLvoid("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4) _ const _ GLdouble_p.IN("v", attribBuffer))
 
 	ReferenceGL("glVertexAttribPointer") _ GLvoid(
 		"VertexAttribLPointer",
@@ -926,7 +926,7 @@ if (shader) {
 			the array. The initial value is 0.
 			"""
 		),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN(
+		const _ ARRAY_BUFFER _ GLvoid_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -987,7 +987,7 @@ if (shader) {
 		"Pointer version of #ViewportIndexedf().",
 
 		GLuint.IN("index", "the viewport to set"),
-		mods(Check(4), const) _ GLfloat_p.IN("v", "the viewport parameters")
+		Check(4) _ const _ GLfloat_p.IN("v", "the viewport parameters")
 	)
 
 	GLvoid(
@@ -1015,7 +1015,7 @@ if (shader) {
 		"Pointer version of #ScissorIndexed().",
 
 		GLuint.IN("index", "the index of the viewport whose scissor box to modify"),
-		mods(Check(4), const) _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
+		Check(4) _ const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
 	GLvoid(
@@ -1042,7 +1042,7 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1051,6 +1051,6 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 }

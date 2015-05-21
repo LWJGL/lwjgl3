@@ -213,7 +213,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)}
 	    """,
 
-		mods(nullable, const) _ ovrInitParams_p.IN(
+		nullable _ const _ ovrInitParams_p.IN(
 			"params",
 			"an ##OVRInitParams struct that cpecifies custom initialization options. May be $NULL to indicate default options."
 		),
@@ -539,7 +539,7 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
 		unsigned_int.IN("frameIndex", "the targeted frame index, or 0, to refer to one frame after the last time #Hmd_SubmitFrame() was called"),
-		mods(nullable, const) _ ovrViewScaleDesc_p.IN(
+		nullable _ const _ ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
 			provides additional information needed only if {@code layerPtrList} contains a #LayerType_QuadInWorld or #LayerType_QuadHeadLocked. If $NULL, a
@@ -733,7 +733,7 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-		mods(nullable, const) _ charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
+		nullable _ const _ charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 	    returnDoc =
 		"""

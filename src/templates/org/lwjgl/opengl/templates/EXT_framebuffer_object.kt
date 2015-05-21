@@ -182,7 +182,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"",
 
 		AutoSize("renderbuffers") _ GLsizei.IN("n", ""),
-		mods(const, SingleValue("renderbuffer")) _ GLuint_p.IN("renderbuffers", "")
+		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "")
 	)
 
 	GLvoid(
@@ -209,7 +209,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "")
 	)
 
 	GLboolean(
@@ -232,7 +232,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"",
 
 		AutoSize("framebuffers") _ GLsizei.IN("n", ""),
-		mods(const, SingleValue("framebuffer")) _ GLuint_p.IN("framebuffers", "")
+		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "")
 	)
 
 	GLvoid(
@@ -301,7 +301,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLenum.IN("target", ""),
 		GLenum.IN("attachment", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "")
 	)
 
 	GLvoid(

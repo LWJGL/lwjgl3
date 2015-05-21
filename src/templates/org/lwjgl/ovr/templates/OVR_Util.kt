@@ -95,7 +95,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 	    "Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
 	    ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-	    mods(Check(2), const) _ ovrVector3f_p.IN(
+	    Check(2) _ const _ ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#Hmd_GetRenderDesc(). For monoscopic rendering, use a vector that is the
@@ -123,7 +123,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 
 	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Hmd_Create()"),
 	    unsigned_int.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#Hmd_SubmitFrame() was called"),
-	    mods(Check(2), const) _ ovrVector3f_p.IN(
+	    Check(2) _ const _ ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#Hmd_GetRenderDesc(). For monoscopic rendering, use a vector that is the

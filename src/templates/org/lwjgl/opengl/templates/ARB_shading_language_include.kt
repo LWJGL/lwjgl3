@@ -119,7 +119,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		GLuint.IN("shader", "the shader object compile"),
 		AutoSize("path", "length") _ GLsizei.IN("count", ""),
 		const _ GLcharASCII_p_const_p.IN("path", "an ordered array of {@code count} pointers to optionally null-terminated character strings defining search paths"),
-		mods(nullable, const) _ GLint_p.IN(
+		nullable _ const _ GLint_p.IN(
 			"length",
 			"""
 			an array {@code count} values with the number of characters in each string (the string length). If an element in {@code length} is negative, its
@@ -146,7 +146,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		AutoSize("name") _ GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
 		const _ GLcharASCII_p.IN("name", "the name associated with the string"),
 		AutoSize("string") _ GLsizei.IN("bufSize", "the maximum number of characters that may be written into {@code string}, including the null terminator"),
-		mods(nullable, Check(1)) _ GLint_p.OUT(
+		nullable _ Check(1) _ GLint_p.OUT(
 			"stringlen",
 			"""
 			a buffer in which to place the actual number of characters written into {@code string}, excluding the null terminator. If $NULL, no length is
@@ -166,6 +166,6 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		AutoSize("name") _ GLint.IN("namelen", "the number of characters in {@code name}. If negative, {@code name} is considered to be a null-terminated string."),
 		const _ GLcharASCII_p.IN("name", "the name associated with the string"),
 		GLenum.IN("pname", "the parameter to query", "#NAMED_STRING_LENGTH_ARB #NAMED_STRING_TYPE_ARB"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 }

@@ -113,7 +113,7 @@ stbir_resize_uint8_srgb_edgemode(
 		This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
 		""",
 
-		mods(Check("input_w * input_h * num_channels"), const) _ unsigned_char_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels") _ const _ unsigned_char_p.IN("input_pixels", "the source image data"),
 		int.IN("input_w", "the source image width"),
 		int.IN("input_h", "the source image height"),
 		int.IN(
@@ -136,7 +136,7 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_float",
 		"Float version of #resize_uint8().",
 
-		mods(Check("input_w * input_h * num_channels"), const) _ float_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels") _ const _ float_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
@@ -246,7 +246,7 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_uint16_generic",
 		"Short version of #resize_uint8_generic().",
 
-		mods(Check("input_w * input_h * num_channels"), const) _ stbir_uint16_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels") _ const _ stbir_uint16_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],

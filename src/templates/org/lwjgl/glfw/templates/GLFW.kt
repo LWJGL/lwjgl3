@@ -554,9 +554,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		)}
 		""",
 
-		mods(nullable, Check(1)) _ int_p.OUT("major", "where to store the major version number, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("minor", "where to store the minor version number, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("rev", "where to store the revision number, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("major", "where to store the major version number, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("minor", "where to store the minor version number, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("rev", "where to store the revision number, or $NULL"),
 	    since = "GLFW 1.0"
 	)
 
@@ -647,8 +647,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		mods(nullable, Check(1)) _ int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
 	    since = "GLFW 3.0"
 	)
 
@@ -673,8 +673,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		mods(nullable, Check(1)) _ int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
 	    since = "GLFW 3.0"
 	)
 
@@ -728,7 +728,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+		Check(1) _ autoSizeResult _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
 	    returnDoc = "an array of video modes, or $NULL if an error occured",
 	    since = "GLFW 1.0"
@@ -1016,8 +1016,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
-		mods(nullable, Check(1)) _ int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
 
 	    since = "GLFW 3.0"
 	)
@@ -1055,8 +1055,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose size to retrieve"),
-		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
 
 	    since = "GLFW 1.0"
 	)
@@ -1093,8 +1093,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the window whose framebuffer to query"),
-		mods(nullable, Check(1)) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
-		mods(nullable, Check(1)) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
+		nullable _ Check(1) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
 
 	    since = "GLFW 3.0"
 	)
@@ -1115,10 +1115,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    """,
 
 	    GLFWwindow.IN("window", "the window whose frame size to query"),
-	    mods(Check(1), nullable) _ int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
-		mods(Check(1), nullable) _ int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
-		mods(Check(1), nullable) _ int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
-		mods(Check(1), nullable) _ int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
+	    Check(1) _ nullable _ int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
+		Check(1) _ nullable _ int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
+		Check(1) _ nullable _ int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
+		Check(1) _ nullable _ int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
 
 	    since = "GLFW 3.1"
 	)
@@ -1552,8 +1552,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
-		mods(nullable, Check(1)) _ double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
-		mods(nullable, Check(1)) _ double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
+		nullable _ Check(1) _ double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
+		nullable _ Check(1) _ double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
 
 	    since = "GLFW 1.0"
 	)

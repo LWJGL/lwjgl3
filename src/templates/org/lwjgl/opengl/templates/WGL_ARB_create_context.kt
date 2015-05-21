@@ -57,7 +57,7 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 
 		HDC.IN("hdc", ""),
 		nullable _ HGLRC.IN("shareContext", ""),
-		mods(const, nullTerminated, nullable) _ int_p.IN(
+		const _ nullTerminated _ nullable _ int_p.IN(
 			"attribList",
 			"""
 			a list of attributes for the context. The list consists of a sequence of &lt;name, value&gt; pairs terminated by the value 0. If an attribute is not

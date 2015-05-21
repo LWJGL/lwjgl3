@@ -208,21 +208,21 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	val BufferRectBufferOffset = mods(const, Check(3)) _ size_t_p.IN(
+	val BufferRectBufferOffset = const _ Check(3) _ size_t_p.IN(
 		"buffer_offset",
 		"""
 		the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
 		should be 0. The offset in bytes is computed as ${code("buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]")}.
 		"""
 	)
-	val BufferRectHostOffset = mods(const, Check(3)) _ size_t_p.IN(
+	val BufferRectHostOffset = const _ Check(3) _ size_t_p.IN(
 		"host_offset",
 		"""
 		the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
 		should be 0. The offset in bytes is computed as ${code("host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]")}.
 		"""
 	)
-	val BufferRectRegion = mods(const, Check(3)) _ size_t_p.IN(
+	val BufferRectRegion = const _ Check(3) _ size_t_p.IN(
 		"region",
 		"""
 		the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
@@ -379,10 +379,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		BufferRectBufferSlicePitch,
 		BufferRectHostRowPitch,
 		BufferRectHostSlicePitch,
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			const
-		) _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,

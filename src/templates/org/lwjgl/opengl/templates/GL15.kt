@@ -147,7 +147,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Deletes named buffer objects.",
 
 		AutoSize("buffers") _ GLsizei.IN("n", "the number of buffer objects to be deleted"),
-		mods(const, SingleValue("buffer")) _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
+		const _ SingleValue("buffer") _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
 	GLvoid(
@@ -189,17 +189,13 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptr.IN("size", " the size in bytes of the buffer object's new data store"),
-		mods(
-			const,
-			optional,
-			MultiType(
-				PointerMapping.DATA_BYTE,
-				PointerMapping.DATA_SHORT,
-				PointerMapping.DATA_INT,
-				PointerMapping.DATA_FLOAT,
-				PointerMapping.DATA_DOUBLE
-			)
-		) _ GLvoid_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
+		optional _ MultiType(
+			PointerMapping.DATA_BYTE,
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 
@@ -210,16 +206,13 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLintptr.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the data store region being replaced"),
-		mods(
-			const,
-			MultiType(
-				PointerMapping.DATA_BYTE,
-				PointerMapping.DATA_SHORT,
-				PointerMapping.DATA_INT,
-				PointerMapping.DATA_FLOAT,
-				PointerMapping.DATA_DOUBLE
-			)
-		) _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
+		MultiType(
+			PointerMapping.DATA_BYTE,
+			PointerMapping.DATA_SHORT,
+			PointerMapping.DATA_INT,
+			PointerMapping.DATA_FLOAT,
+			PointerMapping.DATA_DOUBLE
+		) _ const _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
 	GLvoid(
@@ -279,7 +272,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a buffer object parameter", BUFFER_OBJECT_PARAMETERS),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested parameter")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "the requested parameter")
 	)
 
 	GLvoid(
@@ -288,7 +281,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the pointer to be returned", "GL15#BUFFER_MAP_POINTER"),
-		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
+		Check(1) _ returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 
 	// ARB_occlusion_query
@@ -326,7 +319,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Deletes named query objects.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of query objects to be deleted"),
-		mods(const, SingleValue("id")) _ GLuint_p.IN("ids", "an array of query objects to be deleted")
+		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of query objects to be deleted")
 	)
 
 	GLboolean(
@@ -357,7 +350,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLenum.IN("target", "the query object target", QUERY_TARGETS),
 		GLenum.IN("pname", "the symbolic name of a query object target parameter", QUERY_PARAMETERS),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "the requested data")
 	)
 
 	GLvoid(
@@ -366,7 +359,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "the requested data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "the requested data")
 	)
 
 	GLvoid(
@@ -375,7 +368,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 
 		GLuint.IN("id", "the name of a query object"),
 		GLenum.IN("pname", "the symbolic name of a query object parameter", QUERY_OBJECT_PARAMETERS),
-		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "the requested data")
+		Check(1) _ returnValue _ GLuint_p.OUT("params", "the requested data")
 	)
 
 }

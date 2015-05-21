@@ -111,7 +111,7 @@ val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		mods(nullable, nullTerminated) _ int_p.IN("attrib_list", "a list of attributes terminated with X##None"),
+		nullable _ nullTerminated _ int_p.IN("attrib_list", "a list of attributes terminated with X##None"),
 
 		returnDoc =
 		"""

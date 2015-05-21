@@ -978,7 +978,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		AutoSize("textures", "residences") _ (GLsizei.IN("n", "the number of texture objects in {@code textures}")),
-		mods(const, SingleValue("texture")) _ GLuint_p.IN("textures", "an array of texture objects"),
+		const _ SingleValue("texture") _ GLuint_p.IN("textures", "an array of texture objects"),
 		GLboolean_p.OUT("residences", "returns the residences of each texture object")
 	)
 
@@ -1027,7 +1027,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("yOrig", "the bitmap origin y coordinate"),
 		GLfloat.IN("xInc", "the x increment added to the raster position"),
 		GLfloat.IN("yInc", "the y increment added to the raster position"),
-		mods(const, PIXEL_UNPACK_BUFFER, nullable) _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
+		const _ PIXEL_UNPACK_BUFFER _ nullable _ GLubyte_p.IN("data", "the buffer containing the bitmap data.")
 	)
 
 	GLvoid(
@@ -1157,14 +1157,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Color3us", "Unsigned short version of #Color3b()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
 	deprecatedGL _ GLvoid("Color3ui", "Unsigned int version of #Color3b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-	deprecatedGL _ GLvoid("Color3bv", "Byte pointer version of #Color3b().", mods(const, Check(3)) _ GLbyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3sv", "Pointer version of #Color3s().", mods(const, Check(3)) _ GLshort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3iv", "Pointer version of #Color3i().", mods(const, Check(3)) _ GLint_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3fv", "Pointer version of #Color3f().", mods(const, Check(3)) _ GLfloat_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3dv", "Pointer version of #Color3d().", mods(const, Check(3)) _ GLdouble_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3ubv", "Pointer version of #Color3ub().", mods(const, Check(3)) _ GLubyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3usv", "Pointer version of #Color3us().", mods(const, Check(3)) _ GLushort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color3uiv", "Pointer version of #Color3ui().", mods(const, Check(3)) _ GLuint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3bv", "Byte pointer version of #Color3b().", const _ Check(3) _ GLbyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3sv", "Pointer version of #Color3s().", const _ Check(3) _ GLshort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3iv", "Pointer version of #Color3i().", const _ Check(3) _ GLint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3fv", "Pointer version of #Color3f().", const _ Check(3) _ GLfloat_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3dv", "Pointer version of #Color3d().", const _ Check(3) _ GLdouble_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3ubv", "Pointer version of #Color3ub().", const _ Check(3) _ GLubyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3usv", "Pointer version of #Color3us().", const _ Check(3) _ GLushort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color3uiv", "Pointer version of #Color3ui().", const _ Check(3) _ GLuint_p.IN("v", colorBuffer))
 
 	deprecatedGL _ GLvoid(
 		"Color4b",
@@ -1184,14 +1184,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Color4us", "Unsigned short version of #Color4b()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue), GLushort.IN("alpha", colorAlpha))
 	deprecatedGL _ GLvoid("Color4ui", "Unsigned int version of #Color4b()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue), GLint.IN("alpha", colorAlpha))
 
-	deprecatedGL _ GLvoid("Color4bv", "Pointer version of #Color4b().", mods(const, Check(4)) _ GLbyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4sv", "Pointer version of #Color4s().", mods(const, Check(4)) _ GLshort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4iv", "Pointer version of #Color4i().", mods(const, Check(4)) _ GLint_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4fv", "Pointer version of #Color4f().", mods(const, Check(4)) _ GLfloat_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4dv", "Pointer version of #Color4d().", mods(const, Check(4)) _ GLdouble_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4ubv", "Pointer version of #Color4ub().", mods(const, Check(4)) _ GLubyte_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4usv", "Pointer version of #Color4us().", mods(const, Check(4)) _ GLushort_p.IN("v", colorBuffer))
-	deprecatedGL _ GLvoid("Color4uiv", "Pointer version of #Color4ui().", mods(const, Check(4)) _ GLuint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4bv", "Pointer version of #Color4b().", const _ Check(4) _ GLbyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4sv", "Pointer version of #Color4s().", const _ Check(4) _ GLshort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4iv", "Pointer version of #Color4i().", const _ Check(4) _ GLint_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4fv", "Pointer version of #Color4f().", const _ Check(4) _ GLfloat_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4dv", "Pointer version of #Color4d().", const _ Check(4) _ GLdouble_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4ubv", "Pointer version of #Color4ub().", const _ Check(4) _ GLubyte_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4usv", "Pointer version of #Color4us().", const _ Check(4) _ GLushort_p.IN("v", colorBuffer))
+	deprecatedGL _ GLvoid("Color4uiv", "Pointer version of #Color4ui().", const _ Check(4) _ GLuint_p.IN("v", colorBuffer))
 
 	GLvoid(
 		"ColorMask",
@@ -1227,7 +1227,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the color array data")
 	)
 
 	GLvoid(
@@ -1345,7 +1345,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"indicates the type of index values in {@code indices}",
 			"#UNSIGNED_BYTE #UNSIGNED_SHORT #UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "the index values")
+		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "the index values")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1356,11 +1356,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("height", "the pixel rectangle height"),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("pixels", "the pixel data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1382,7 +1380,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"EdgeFlagv",
 		"Pointer version of #EdgeFlag().",
 
-		mods(const, Check(1)) _ GLboolean_p.IN("flag", "the edge flag buffer")
+		const _ Check(1) _ GLboolean_p.IN("flag", "the edge flag buffer")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1390,7 +1388,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Specifies the location and organization of an edge flag array.",
 
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLboolean_p.IN("pointer", "the edge flag array data")
+		const _ ARRAY_BUFFER _ GLboolean_p.IN("pointer", "the edge flag array data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1533,7 +1531,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Pointer version of #Fogi().",
 
 		GLenum.IN("pname", "the fog parameter", "#FOG_MODE GL15#FOG_COORD_SRC"),
-		mods (const, Check(1)) _ GLint_p.IN("params", "the fog parameter buffer")
+		const _ Check(1) _ GLint_p.IN("params", "the fog parameter buffer")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1549,7 +1547,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Pointer version of #Fogf().",
 
 		GLenum.IN("pname", "the fog parameter", "#FOG_DENSITY #FOG_START #FOG_END"),
-		mods (const, Check(1)) _ GLfloat_p.IN("params", "the fog parameter buffer")
+		const _ Check(1) _ GLfloat_p.IN("params", "the fog parameter buffer")
 	)
 
 	GLvoid(
@@ -1599,7 +1597,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		AutoSize("textures") _ GLsizei.IN("n", "the number of texture names in the {@code textures} parameter"),
-		mods(const, SingleValue("texture")) _  GLuint_p.IN("textures", "contains {@code n} names of texture objects to be deleted")
+		const _ SingleValue("texture") _  GLuint_p.IN("textures", "contains {@code n} names of texture objects to be deleted")
 	)
 
 	GLvoid(
@@ -1624,7 +1622,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLboolean_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid(
@@ -1638,7 +1636,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid(
@@ -1652,7 +1650,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid(
@@ -1666,7 +1664,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		""",
 
 		GLenum.IN("pname", "the state variable"),
-		mods(Check(1), returnValue) _ GLdouble_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLdouble_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLenum(
@@ -1692,7 +1690,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			#SPOT_DIRECTION #SPOT_EXPONENT #SPOT_CUTOFF
 			"""
 		),
-		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1701,7 +1699,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("light", "the light for which to return information"),
 		GLenum.IN("pname", "the light parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 
@@ -1711,7 +1709,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator target", "$MAP1_TARGETS $MAP2_TARGETS"),
 		GLenum.IN("query", "the information to query", "GL11#ORDER GL11#COEFF GL11#DOMAIN"),
-		mods(Check(4), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1720,7 +1718,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1729,7 +1727,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the evaluator map"),
 		GLenum.IN("query", "the information to query"),
-		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1755,7 +1753,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Returns all float values in the pixel map {@code map} in {@code data}.",
 
 		GLenum.IN("map", "the pixel map parameter to query", PIXEL_MAP_NAMES),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLfloat_p.OUT("data", "a buffer in which to place the returned data")
+		Check(32) _ PIXEL_PACK_BUFFER _ GLfloat_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1763,7 +1761,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Unsigned short version of #GetPixelMapfv().",
 
 		GLenum.IN("map", "the pixel map parameter to query"),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLushort_p.OUT("data", "a buffer in which to place the returned data")
+		Check(32) _ PIXEL_PACK_BUFFER _ GLushort_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1771,7 +1769,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Unsigned integer version of #GetPixelMapfv().",
 
 		GLenum.IN("map", "the pixel map parameter to query"),
-		mods(Check(32), PIXEL_PACK_BUFFER) _ GLuint_p.OUT("data", "a buffer in which to place the returned data")
+		Check(32) _ PIXEL_PACK_BUFFER _ GLuint_p.OUT("data", "a buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1788,14 +1786,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL43#DEBUG_CALLBACK_FUNCTION GL43#DEBUG_CALLBACK_USER_PARAM
 			"""
 		),
-		mods(Check(1), returnValue) _ GLvoid_pp.OUT("params", "a buffer in which to place the returned pointer")
+		Check(1) _ returnValue _ GLvoid_pp.OUT("params", "a buffer in which to place the returned pointer")
 	)
 
 	deprecatedGL _ GLvoid(
 		"GetPolygonStipple",
 		"Obtains the polygon stipple.",
 
-		mods(Check(128), PIXEL_PACK_BUFFER) _ GLvoid_p.OUT("pattern", "a buffer in which to place the returned data")
+		Check(128) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pattern", "a buffer in which to place the returned data")
 	)
 
 	(const _ GLubyteString)(
@@ -1819,7 +1817,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL13#OPERAND2_RGB GL13#OPERAND0_ALPHA GL13#OPERAND1_ALPHA GL13#OPERAND2_ALPHA GL13#RGB_SCALE #ALPHA_SCALE
 			"""
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1828,7 +1826,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("env", "the texture environment to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1837,7 +1835,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
 		GLenum.IN("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1846,7 +1844,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(4), returnValue) _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -1855,7 +1853,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coord to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(4), returnValue) _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(4) _ returnValue _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1870,10 +1868,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1903,7 +1898,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL31#TEXTURE_BUFFER_DATA_STORE_BINDING GL43#TEXTURE_BUFFER_OFFSET GL43#TEXTURE_BUFFER_SIZE
 			"""
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1913,7 +1908,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLenum.IN("target", "the texture image target"),
 		GLint.IN("level", "the level-of-detail number"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1936,7 +1931,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			GL43#TEXTURE_VIEW_NUM_LEVELS GL43#TEXTURE_VIEW_MIN_LAYER GL43#TEXTURE_VIEW_NUM_LAYERS GL11#TEXTURE_RESIDENT
 			"""
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1945,7 +1940,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the parameter to query"),
-		mods(Check(1), returnValue) _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1983,13 +1978,13 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Indexiv",
 		"Pointer version of #Indexi()",
 
-		mods(const, Check(1)) _ GLint_p.IN("index", index)
+		const _ Check(1) _ GLint_p.IN("index", index)
 	)
 
-	deprecatedGL _ GLvoid("Indexubv", "Pointer version of #Indexub().", mods(const, Check(1)) _ GLubyte_p.IN("index", index))
-	deprecatedGL _ GLvoid("Indexsv", "Pointer version of #Indexs().", mods(const, Check(1)) _ GLshort_p.IN("index", index))
-	deprecatedGL _ GLvoid("Indexfv", "Pointer version of #Indexf().", mods(const, Check(1)) _ GLfloat_p.IN("index", index))
-	deprecatedGL _ GLvoid("Indexdv", "Pointer version of #Indexd().", mods(const, Check(1)) _ GLdouble_p.IN("index", index))
+	deprecatedGL _ GLvoid("Indexubv", "Pointer version of #Indexub().", const _ Check(1) _ GLubyte_p.IN("index", index))
+	deprecatedGL _ GLvoid("Indexsv", "Pointer version of #Indexs().", const _ Check(1) _ GLshort_p.IN("index", index))
+	deprecatedGL _ GLvoid("Indexfv", "Pointer version of #Indexf().", const _ Check(1) _ GLfloat_p.IN("index", index))
+	deprecatedGL _ GLvoid("Indexdv", "Pointer version of #Indexd().", const _ Check(1) _ GLdouble_p.IN("index", index))
 
 	deprecatedGL _ GLvoid(
 		"IndexMask",
@@ -2012,7 +2007,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		    "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
 	     ),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the color index array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the color index array data")
 	)
 
 	deprecatedGL _ GLvoid("InitNames", "Clears the selection name stack.")
@@ -2030,11 +2025,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"""
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			ARRAY_BUFFER
-		) _ GLvoid_p.IN("pointer", "the vertex array data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ ARRAY_BUFFER _ const _ GLvoid_p.IN("pointer", "the vertex array data")
 	)
 
 	GLboolean(
@@ -2083,7 +2076,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Pointer version of #LightModeli().",
 
 		GLenum.IN("pname", "the lighting model parameter to set"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2091,7 +2084,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Pointer version of #LightModelf().",
 
 		GLenum.IN("pname", "the lighting model parameter to set"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2125,7 +2118,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("light", "the light for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2134,7 +2127,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("light", "the light for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2186,14 +2179,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		are transposed, and the columns representing vectors become rows.
 		""",
 
-		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
+		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
 	deprecatedGL _ GLvoid(
 		"LoadMatrixd",
 		"Double version of #LoadMatrixf().",
 
-		mods(const, Check(16)) _ GLdouble_p.IN("m", "the matrix data")
+		const _ Check(16) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2245,7 +2238,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("u2", "the second endpoint of the pre-image of the map"),
 		GLint.IN("stride", "the number of values in each block of storage"),
 		GLint.IN("order", "the polynomial order"),
-		mods (const, Check("order * stride")) _ GLfloat_p.IN("points", "a set of {@code order} blocks of storage containing control points")
+		const _ Check("order * stride") _ GLfloat_p.IN("points", "a set of {@code order} blocks of storage containing control points")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2257,7 +2250,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("u2", "the second endpoint of the pre-image of the map"),
 		GLint.IN("stride", "the number of values in each block of storage"),
 		GLint.IN("order", "the polynomial order"),
-		mods (const, Check("stride * order")) _ GLdouble_p.IN("points", "a set of {@code order} blocks of storage containing control points")
+		const _ Check("stride * order") _ GLdouble_p.IN("points", "a set of {@code order} blocks of storage containing control points")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2273,7 +2266,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLfloat.IN("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
 		GLint.IN("vstride", "the number of values in the v-dimension in each block of storage"),
 		GLint.IN("vorder", "the polynomial order in the v-dimension"),
-		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLfloat_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
+		const _ Check("ustride * uorder * vstride * vorder") _ GLfloat_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2289,7 +2282,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLdouble.IN("v2", "the second v-dimension endpoint of the pre-image rectangle of the map"),
 		GLint.IN("vstride", "the number of values in the v-dimension in each block of storage"),
 		GLint.IN("vorder", "the polynomial order in the v-dimension"),
-		mods(const, Check("ustride * uorder * vstride * vorder")) _ GLdouble_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
+		const _ Check("ustride * uorder * vstride * vorder") _ GLdouble_p.IN("points", "a set of ${code("uorder &times; vorder")} blocks of storage containing control points")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2358,7 +2351,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("face", "the material face for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set", "#AMBIENT #DIFFUSE #AMBIENT_AND_DIFFUSE #SPECULAR #EMISSION"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2367,7 +2360,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("face", "the material face for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2381,14 +2374,14 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"MultMatrixf",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in column-major order. See #LoadMatrixf() for details.",
 
-		mods(const, Check(16)) _ GLfloat_p.IN("m", "the matrix data")
+		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
 	deprecatedGL _ GLvoid(
 		"MultMatrixd",
 		"Double version of #MultMatrixf().",
 
-		mods(const, Check(16)) _ GLdouble_p.IN("m", "the matrix data")
+		const _ Check(16) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2445,11 +2438,11 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Normal3i", "Integer version of #Normal3f().", GLint.IN("nx", normalX), GLint.IN("ny", normalY), GLint.IN("nz", normalZ))
 	deprecatedGL _ GLvoid("Normal3d", "Double version of #Normal3f().", GLdouble.IN("nx", normalX), GLdouble.IN("ny", normalY), GLdouble.IN("nz", normalZ))
 
-	deprecatedGL _ GLvoid("Normal3fv", "Pointer version of #Normal3f().", mods(const, Check(3)) _ GLfloat_p.IN("v", normalBuffer))
-	deprecatedGL _ GLvoid("Normal3bv", "Pointer version of #Normal3b().", mods(const, Check(3)) _ GLbyte_p.IN("v", normalBuffer))
-	deprecatedGL _ GLvoid("Normal3sv", "Pointer version of #Normal3s().", mods(const, Check(3)) _ GLshort_p.IN("v", normalBuffer))
-	deprecatedGL _ GLvoid("Normal3iv", "Pointer version of #Normal3i().", mods(const, Check(3)) _ GLint_p.IN("v", normalBuffer))
-	deprecatedGL _ GLvoid("Normal3dv", "Pointer version of #Normal3d().", mods(const, Check(3)) _ GLdouble_p.IN("v", normalBuffer))
+	deprecatedGL _ GLvoid("Normal3fv", "Pointer version of #Normal3f().", const _ Check(3) _ GLfloat_p.IN("v", normalBuffer))
+	deprecatedGL _ GLvoid("Normal3bv", "Pointer version of #Normal3b().", const _ Check(3) _ GLbyte_p.IN("v", normalBuffer))
+	deprecatedGL _ GLvoid("Normal3sv", "Pointer version of #Normal3s().", const _ Check(3) _ GLshort_p.IN("v", normalBuffer))
+	deprecatedGL _ GLvoid("Normal3iv", "Pointer version of #Normal3i().", const _ Check(3) _ GLint_p.IN("v", normalBuffer))
+	deprecatedGL _ GLvoid("Normal3dv", "Pointer version of #Normal3d().", const _ Check(3) _ GLdouble_p.IN("v", normalBuffer))
 
 	deprecatedGL _ GLvoid(
 		"NormalPointer",
@@ -2462,7 +2455,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#BYTE #SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the normal array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the normal array data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2508,7 +2501,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("map", "the map to set", PIXEL_MAP_NAMES),
 		AutoSize("values") _ GLsizei.IN("size", "the map size"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLfloat_p.IN("values", "the map values")
+		const _ PIXEL_UNPACK_BUFFER _ GLfloat_p.IN("values", "the map values")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2517,7 +2510,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("map", "the map to set"),
 		AutoSize("values") _ GLsizei.IN("size", "the map size"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLushort_p.IN("values", "the map values")
+		const _ PIXEL_UNPACK_BUFFER _ GLushort_p.IN("values", "the map values")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2526,7 +2519,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("map", "the map to set"),
 		AutoSize("values") _ GLsizei.IN("size", "the map size"),
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLuint_p.IN("values", "the map values")
+		const _ PIXEL_UNPACK_BUFFER _ GLuint_p.IN("values", "the map values")
 	)
 
 	GLvoid(
@@ -2648,7 +2641,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		it is as if the stipple pattern were all ones.
 		""",
 
-		mods(const, PIXEL_UNPACK_BUFFER) _ GLubyte_p.IN("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
+		const _ PIXEL_UNPACK_BUFFER _ GLubyte_p.IN("pattern", "a pointer to memory into which a 32 &times; 32 pattern is packed")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -2757,10 +2750,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("RasterPos2f", "Float version of #RasterPos2i().", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY))
 	deprecatedGL _ GLvoid("RasterPos2d", "Double version of #RasterPos2i().", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY))
 
-	deprecatedGL _ GLvoid("RasterPos2iv", "Pointer version of #RasterPos2i().", mods(const, Check(2)) _ GLint_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos2sv", "Pointer version of #RasterPos2s().", mods(const, Check(2)) _ GLshort_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos2fv", "Pointer version of #RasterPos2f().", mods(const, Check(2)) _ GLfloat_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos2dv", "Pointer version of #RasterPos2d().", mods(const, Check(2)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos2iv", "Pointer version of #RasterPos2i().", const _ Check(2) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos2sv", "Pointer version of #RasterPos2s().", const _ Check(2) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos2fv", "Pointer version of #RasterPos2f().", const _ Check(2) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos2dv", "Pointer version of #RasterPos2d().", const _ Check(2) _ GLdouble_p.IN("coords", rasterBuffer))
 
 	deprecatedGL _ GLvoid(
 		"RasterPos3i",
@@ -2775,10 +2768,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("RasterPos3f", "Float version of #RasterPos3i().", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ))
 	deprecatedGL _ GLvoid("RasterPos3d", "Double version of #RasterPos3i().", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ))
 
-	deprecatedGL _ GLvoid("RasterPos3iv", "Pointer version of #RasterPos3i().", mods(const, Check(3)) _ GLint_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos3sv", "Pointer version of #RasterPos3s().", mods(const, Check(3)) _ GLshort_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos3fv", "Pointer version of #RasterPos3f().", mods(const, Check(3)) _ GLfloat_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos3dv", "Pointer version of #RasterPos3d().", mods(const, Check(3)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos3iv", "Pointer version of #RasterPos3i().", const _ Check(3) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos3sv", "Pointer version of #RasterPos3s().", const _ Check(3) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos3fv", "Pointer version of #RasterPos3f().", const _ Check(3) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos3dv", "Pointer version of #RasterPos3d().", const _ Check(3) _ GLdouble_p.IN("coords", rasterBuffer))
 
 	deprecatedGL _ GLvoid(
 		"RasterPos4i",
@@ -2794,10 +2787,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("RasterPos4f", "Float version of RasterPos4i.", GLfloat.IN("x", rasterX), GLfloat.IN("y", rasterY), GLfloat.IN("z", rasterZ), GLfloat.IN("w", rasterW))
 	deprecatedGL _ GLvoid("RasterPos4d", "Double version of #RasterPos4i().", GLdouble.IN("x", rasterX), GLdouble.IN("y", rasterY), GLdouble.IN("z", rasterZ), GLdouble.IN("w", rasterW))
 
-	deprecatedGL _ GLvoid("RasterPos4iv", "Pointer version of #RasterPos4i().", mods(const, Check(4)) _ GLint_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos4sv", "Pointer version of #RasterPos4s().", mods(const, Check(4)) _ GLshort_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos4fv", "Pointer version of #RasterPos4f().", mods(const, Check(4)) _ GLfloat_p.IN("coords", rasterBuffer))
-	deprecatedGL _ GLvoid("RasterPos4dv", "Pointer version of #RasterPos4d().", mods(const, Check(4)) _ GLdouble_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos4iv", "Pointer version of #RasterPos4i().", const _ Check(4) _ GLint_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos4sv", "Pointer version of #RasterPos4s().", const _ Check(4) _ GLshort_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos4fv", "Pointer version of #RasterPos4f().", const _ Check(4) _ GLfloat_p.IN("coords", rasterBuffer))
+	deprecatedGL _ GLvoid("RasterPos4dv", "Pointer version of #RasterPos4d().", const _ Check(4) _ GLdouble_p.IN("coords", rasterBuffer))
 
 	GLvoid(
 		"ReadBuffer",
@@ -2827,10 +2820,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
 	// Rect functions javadoc
@@ -2870,10 +2860,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Rectf", "Float version of #Recti().", GLfloat.IN("x1", rectX1), GLfloat.IN("y1", rectY1), GLfloat.IN("x2", rectX2), GLfloat.IN("y2", rectY2))
 	deprecatedGL _ GLvoid("Rectd", "Double version of #Recti().", GLdouble.IN("x1", rectX1), GLdouble.IN("y1", rectY1), GLdouble.IN("x2", rectX2), GLdouble.IN("y2", rectY2))
 
-	deprecatedGL _ GLvoid("Rectiv", "Pointer version of #Recti().", mods(const, Check(2)) _ GLint_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLint_p.IN("v2", rectBuffer2))
-	deprecatedGL _ GLvoid("Rectsv", "Pointer version of #Rects().", mods(const, Check(2)) _ GLshort_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLshort_p.IN("v2", rectBuffer2))
-	deprecatedGL _ GLvoid("Rectfv", "Pointer version of #Rectf().", mods(const, Check(2)) _ GLfloat_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLfloat_p.IN("v2", rectBuffer2))
-	deprecatedGL _ GLvoid("Rectdv", "Pointer version of #Rectd().", mods(const, Check(2)) _ GLdouble_p.IN("v1", rectBuffer1), mods(const, Check(2)) _ GLdouble_p.IN("v2", rectBuffer2))
+	deprecatedGL _ GLvoid("Rectiv", "Pointer version of #Recti().", const _ Check(2) _ GLint_p.IN("v1", rectBuffer1), const _ Check(2) _ GLint_p.IN("v2", rectBuffer2))
+	deprecatedGL _ GLvoid("Rectsv", "Pointer version of #Rects().", const _ Check(2) _ GLshort_p.IN("v1", rectBuffer1), const _ Check(2) _ GLshort_p.IN("v2", rectBuffer2))
+	deprecatedGL _ GLvoid("Rectfv", "Pointer version of #Rectf().", const _ Check(2) _ GLfloat_p.IN("v1", rectBuffer1), const _ Check(2) _ GLfloat_p.IN("v2", rectBuffer2))
+	deprecatedGL _ GLvoid("Rectdv", "Pointer version of #Rectd().", const _ Check(2) _ GLdouble_p.IN("v1", rectBuffer1), const _ Check(2) _ GLdouble_p.IN("v2", rectBuffer2))
 
 	deprecatedGL _ GLint(
 		"RenderMode",
@@ -3055,10 +3045,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("TexCoord1i", "Integer version of #TexCoord1f().", GLint.IN("s", texCoordS))
 	deprecatedGL _ GLvoid("TexCoord1d", "Double version of #TexCoord1f().", GLdouble.IN("s", texCoordS))
 
-	deprecatedGL _ GLvoid("TexCoord1fv", "Pointer version of #TexCoord1f().", mods(const, Check(1)) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord1sv", "Pointer version of #TexCoord1s().", mods(const, Check(1)) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord1iv", "Pointer version of #TexCoord1i().", mods(const, Check(1)) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord1dv", "Pointer version of #TexCoord1d().", mods(const, Check(1)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord1fv", "Pointer version of #TexCoord1f().", const _ Check(1) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord1sv", "Pointer version of #TexCoord1s().", const _ Check(1) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord1iv", "Pointer version of #TexCoord1i().", const _ Check(1) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord1dv", "Pointer version of #TexCoord1d().", const _ Check(1) _ GLdouble_p.IN("v", texCoordBuffer))
 
 	deprecatedGL _ GLvoid(
 		"TexCoord2f",
@@ -3072,10 +3062,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("TexCoord2i", "Integer version of #TexCoord2f().", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))
 	deprecatedGL _ GLvoid("TexCoord2d", "Double version of #TexCoord2f().", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))
 
-	deprecatedGL _ GLvoid("TexCoord2fv", "Pointer version of #TexCoord2f().", mods(const, Check(2)) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord2sv", "Pointer version of #TexCoord2s().", mods(const, Check(2)) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord2iv", "Pointer version of #TexCoord2i().", mods(const, Check(2)) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord2dv", "Pointer version of #TexCoord2d().", mods(const, Check(2)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord2fv", "Pointer version of #TexCoord2f().", const _ Check(2) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord2sv", "Pointer version of #TexCoord2s().", const _ Check(2) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord2iv", "Pointer version of #TexCoord2i().", const _ Check(2) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord2dv", "Pointer version of #TexCoord2d().", const _ Check(2) _ GLdouble_p.IN("v", texCoordBuffer))
 
 	deprecatedGL _ GLvoid(
 		"TexCoord3f",
@@ -3090,10 +3080,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("TexCoord3i", "Integer version of #TexCoord3f().", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))
 	deprecatedGL _ GLvoid("TexCoord3d", "Double version of #TexCoord3f().", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))
 
-	deprecatedGL _ GLvoid("TexCoord3fv", "Pointer version of #TexCoord3f().", mods(const, Check(3)) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord3sv", "Pointer version of #TexCoord3s().", mods(const, Check(3)) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord3iv", "Pointer version of #TexCoord3i().", mods(const, Check(3)) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord3dv", "Pointer version of #TexCoord3d().", mods(const, Check(3)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord3fv", "Pointer version of #TexCoord3f().", const _ Check(3) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord3sv", "Pointer version of #TexCoord3s().", const _ Check(3) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord3iv", "Pointer version of #TexCoord3i().", const _ Check(3) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord3dv", "Pointer version of #TexCoord3d().", const _ Check(3) _ GLdouble_p.IN("v", texCoordBuffer))
 
 	deprecatedGL _ GLvoid(
 		"TexCoord4f",
@@ -3109,10 +3099,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("TexCoord4i", "Integer version of #TexCoord4f().", GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))
 	deprecatedGL _ GLvoid("TexCoord4d", "Double version of #TexCoord4f().", GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))
 
-	deprecatedGL _ GLvoid("TexCoord4fv", "Pointer version of #TexCoord4f().", mods(const, Check(4)) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord4sv", "Pointer version of #TexCoord4s().", mods(const, Check(4)) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord4iv", "Pointer version of #TexCoord4i().", mods(const, Check(4)) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("TexCoord4dv", "Pointer version of #TexCoord4d().", mods(const, Check(4)) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord4fv", "Pointer version of #TexCoord4f().", const _ Check(4) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord4sv", "Pointer version of #TexCoord4s().", const _ Check(4) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord4iv", "Pointer version of #TexCoord4i().", const _ Check(4) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ GLvoid("TexCoord4dv", "Pointer version of #TexCoord4d().", const _ Check(4) _ GLdouble_p.IN("v", texCoordBuffer))
 
 	deprecatedGL _ GLvoid(
 		"TexCoordPointer",
@@ -3125,7 +3115,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the texture coordinate array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the texture coordinate array data")
 	)
 
 	GLvoid(
@@ -3162,7 +3152,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture environment target", "#TEXTURE_ENV"),
 		GLenum.IN("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 
@@ -3181,7 +3171,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture environment target", "#TEXTURE_ENV"),
 		GLenum.IN("pname", "the parameter to set", "#TEXTURE_ENV_COLOR"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -3209,7 +3199,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -3227,7 +3217,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set", "#OBJECT_PLANE #EYE_PLANE"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -3245,7 +3235,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("coord", "the coordinate for which to set the parameter"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLdouble_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLdouble_p.IN("params", "the parameter value")
 	)
 
 	GLvoid(
@@ -3260,12 +3250,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER,
-			nullable
-		) _ GLvoid_p.IN("pixels", "the texel data")
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the texel data")
 	)
 
 	GLvoid(
@@ -3279,12 +3266,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format"),
 		GLenum.IN("type", "the texel data type"),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER,
-			nullable
-		) _ GLvoid_p.IN("pixels", "the texel data")
+		nullable _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the texel data")
 	)
 
 	GLvoid(
@@ -3391,7 +3375,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLint_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
 	)
 
 	GLvoid(
@@ -3409,7 +3393,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the parameter to set"),
-		mods(const, Check(4)) _ GLfloat_p.IN("params", "the parameter value")
+		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	GLvoid(
@@ -3422,11 +3406,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("width", "the subregion width"),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("pixels", "the pixel data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
 	GLvoid(
@@ -3444,11 +3426,9 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		GLsizei.IN("height", "the subregion height"),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		mods(
-			const,
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_UNPACK_BUFFER
-		) _ GLvoid_p.IN("pixels", "the pixel data")
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the pixel data")
 	)
 
 	deprecatedGL _ GLvoid(
@@ -3502,10 +3482,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Vertex2i", "Integer version of #Vertex2f().", GLint.IN("x", vertexX), GLint.IN("y", vertexY))
 	deprecatedGL _ GLvoid("Vertex2d", "Double version of #Vertex2f().", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY))
 
-	deprecatedGL _ GLvoid("Vertex2fv", "Pointer version of #Vertex2f().", mods(const, Check(2)) _ GLfloat_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex2sv", "Pointer version of #Vertex2s().", mods(const, Check(2)) _ GLshort_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex2iv", "Pointer version of #Vertex2i().", mods(const, Check(2)) _ GLint_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex2dv", "Pointer version of #Vertex2d().", mods(const, Check(2)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex2fv", "Pointer version of #Vertex2f().", const _ Check(2) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex2sv", "Pointer version of #Vertex2s().", const _ Check(2) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex2iv", "Pointer version of #Vertex2i().", const _ Check(2) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex2dv", "Pointer version of #Vertex2d().", const _ Check(2) _ GLdouble_p.IN("coords", vertexBuffer))
 
 	deprecatedGL _ GLvoid(
 		"Vertex3f",
@@ -3523,10 +3503,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Vertex3i", "Integer version of #Vertex3f().", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ))
 	deprecatedGL _ GLvoid("Vertex3d", "Double version of #Vertex3f().", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ))
 
-	deprecatedGL _ GLvoid("Vertex3fv", "Pointer version of #Vertex3f().", mods(const, Check(3)) _ GLfloat_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex3sv", "Pointer version of #Vertex3s().", mods(const, Check(3)) _ GLshort_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex3iv", "Pointer version of #Vertex3i().", mods(const, Check(3)) _ GLint_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex3dv", "Pointer version of #Vertex3d().", mods(const, Check(3)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex3fv", "Pointer version of #Vertex3f().", const _ Check(3) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex3sv", "Pointer version of #Vertex3s().", const _ Check(3) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex3iv", "Pointer version of #Vertex3i().", const _ Check(3) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex3dv", "Pointer version of #Vertex3d().", const _ Check(3) _ GLdouble_p.IN("coords", vertexBuffer))
 
 	deprecatedGL _ GLvoid(
 		"Vertex4f",
@@ -3542,10 +3522,10 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 	deprecatedGL _ GLvoid("Vertex4i", "Integer version of #Vertex4f().", GLint.IN("x", vertexX), GLint.IN("y", vertexY), GLint.IN("z", vertexZ), GLint.IN("w", vertexW))
 	deprecatedGL _ GLvoid("Vertex4d", "Double version of #Vertex4f().", GLdouble.IN("x", vertexX), GLdouble.IN("y", vertexY), GLdouble.IN("z", vertexZ), GLdouble.IN("w", vertexW))
 
-	deprecatedGL _ GLvoid("Vertex4fv", "Pointer version of #Vertex4f().", mods(const, Check(4)) _ GLfloat_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex4sv", "Pointer version of #Vertex4s().", mods(const, Check(4)) _ GLshort_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex4iv", "Pointer version of #Vertex4i().", mods(const, Check(4)) _ GLint_p.IN("coords", vertexBuffer))
-	deprecatedGL _ GLvoid("Vertex4dv", "Pointer version of #Vertex4d().", mods(const, Check(4)) _ GLdouble_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex4fv", "Pointer version of #Vertex4f().", const _ Check(4) _ GLfloat_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex4sv", "Pointer version of #Vertex4s().", const _ Check(4) _ GLshort_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex4iv", "Pointer version of #Vertex4i().", const _ Check(4) _ GLint_p.IN("coords", vertexBuffer))
+	deprecatedGL _ GLvoid("Vertex4dv", "Pointer version of #Vertex4d().", const _ Check(4) _ GLdouble_p.IN("coords", vertexBuffer))
 
 	deprecatedGL _ GLvoid(
 		"VertexPointer",
@@ -3558,7 +3538,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		mods(const, ARRAY_BUFFER) _ GLvoid_p.IN("pointer", "the vertex array data")
+		const _ ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the vertex array data")
 	)
 
 	GLvoid(

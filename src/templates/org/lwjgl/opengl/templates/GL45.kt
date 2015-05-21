@@ -147,7 +147,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL42#TRANSFORM_FEEDBACK_PAUSED GL42#TRANSFORM_FEEDBACK_ACTIVE"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
+		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid(
@@ -157,7 +157,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_BINDING"),
 		GLuint.IN("index", "the transform feedback stream index"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
+		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid(
@@ -167,7 +167,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("xfb", "zero or the name of an existing transform feedback object"),
 		GLenum.IN("pname", "the parameter to query", "GL30#TRANSFORM_FEEDBACK_BUFFER_START GL30#TRANSFORM_FEEDBACK_BUFFER_SIZE"),
 		GLuint.IN("index", "the transform feedback stream index"),
-		mods(Check(1), returnValue) _ GLint64_p.OUT("param", "the buffer in which to return the parameter value")
+		Check(1) _ returnValue _ GLint64_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
 	GLvoid(
@@ -915,10 +915,9 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		TEXTURE,
 		src["level"],
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-		mods(
-			Check(expression = "glGetTextureLevelParameteri(texture, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+		Check(
+			expression = "glGetTextureLevelParameteri(texture, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
+		) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 	src = GL11["GetTexLevelParameterfv"]
@@ -1105,7 +1104,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		GLuint.IN("vaobj", "the vertex array object name"),
 		GLenum.IN("pname", "the parameter to query", "GL15#ELEMENT_ARRAY_BUFFER_BINDING"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
+		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid(
@@ -1123,7 +1122,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		    GL43#VERTEX_ATTRIB_RELATIVE_OFFSET
 		    """
 		),
-		mods(Check(1), returnValue) _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
+		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid(
@@ -1133,7 +1132,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("vaobj", "the vertex array object name"),
 		GLuint.IN("index", "the attribute to query"),
 		GLenum.IN("pname", "the parameter to query", "GL43#VERTEX_BINDING_OFFSET"),
-		mods(Check(1), returnValue) _ GLint64_p.OUT("param", "the buffer in which to return the parameter values")
+		Check(1) _ returnValue _ GLint64_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
 	GLvoid(
@@ -1209,10 +1208,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1228,10 +1224,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLsizei.IN("height", "the subregion height"),
 		GLsizei.IN("depth", "the subregion depth"),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	// ARB_texture_barrier
@@ -1337,10 +1330,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		mods(
-			MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT),
-			PIXEL_PACK_BUFFER
-		) _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
 	GLvoid(

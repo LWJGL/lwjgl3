@@ -65,7 +65,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 		"Pointer version.",
 
 		ALenum.IN("listener", "the parameter to modify"),
-		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
+		Check(1) _ const _ ALint_p.IN("value", "the parameter values")
 	)
 
 	ALvoid(
@@ -74,7 +74,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
-		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
+		Check(1) _ const _ ALint_p.IN("value", "the parameter values")
 	)
 
 	ALvoid(
@@ -103,7 +103,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
-		mods(Check(1), const) _ ALfloat_p.IN("value", "the parameter values")
+		Check(1) _ const _ ALfloat_p.IN("value", "the parameter values")
 	)
 
 	ALvoid(
@@ -132,7 +132,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to modify"),
 		ALenum.IN("paramName", "the parameter to modify"),
-		mods(Check(1), const) _ ALint_p.IN("value", "the parameter values")
+		Check(1) _ const _ ALint_p.IN("value", "the parameter values")
 	)
 
 	ALvoid(
@@ -141,7 +141,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to query"),
 		ALenum.IN("param", "the parameter to query"),
-		mods(Check(1), returnValue) _ ALint_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -159,7 +159,7 @@ val AL11 = "AL11".nativeClassAL("AL11") {
 
 		ALuint.IN("buffer", "the buffer to query"),
 		ALenum.IN("param", "the parameter to query"),
-		mods(Check(1), returnValue) _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(

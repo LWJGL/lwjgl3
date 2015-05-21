@@ -67,7 +67,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		device configuration. If NULL is specified, the implementation will provide an implementation specific default.
 		""",
 
-		mods(nullable, const) _ ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
+		nullable _ const _ ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
 	)
 
 	ALCboolean(
@@ -87,7 +87,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"Creates an AL context.",
 
 		const _ ALCdevice_p.IN("deviceHandle", "a valid device"),
-		mods(nullable, nullTerminated, const) _ ALCint_p.IN(
+		nullable _ nullTerminated _ const _ ALCint_p.IN(
 			"attrList",
 			"null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values",
 			ContextAttributes
@@ -169,7 +169,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		will convert the name to all upper-case internally (and will express extension names in upper-case).
 		""",
 
-		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
+		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
 		const _ ALCcharASCII_p.IN("extName", "the extension name")
 	)
 
@@ -185,7 +185,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		if available for one of the available devices.
 		""",
 
-		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
+		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
 		const _ ALcharASCII_p.IN("funcName", "the function name")
 	)
 
@@ -198,7 +198,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		legal, but only the tokens defined by the AL core are guaranteed. Availability of extension tokens depends on the ALC extension.
 		""",
 
-		mods(nullable, const) _ ALCdevice_p.IN("deviceHandle", "the device to query"),
+		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
 		const _ ALCcharASCII_p.IN("enumName", "the enum name")
 	)
 

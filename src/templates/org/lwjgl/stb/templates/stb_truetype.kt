@@ -292,7 +292,7 @@ int main(int arg, char **argv)
 			"padding",
 			"the amount of padding to leave between each character (normally you want '1' for bitmaps you'll use as textures with bilinear filtering)"
 		),
-		mods(Expression("0L"), nullable) _ void_p.IN("alloc_context", "a pointer to an allocation context"),
+		Expression("0L") _ nullable _ void_p.IN("alloc_context", "a pointer to an allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -631,8 +631,8 @@ int main(int arg, char **argv)
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
 		int.IN("codepoint", "the unicode codepoint to render"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("width", "returns the bitmap width"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("height", "returns the bitmap height"),
+		Check(1) _ autoSizeResult _ int_p.OUT("width", "returns the bitmap width"),
+		Check(1) _ autoSizeResult _ int_p.OUT("height", "returns the bitmap height"),
 		Check(1) _ int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1) _ int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -647,8 +647,8 @@ int main(int arg, char **argv)
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
 		int.IN("codepoint", "the unicode codepoint to render"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("width", "returns the bitmap width"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("height", "returns the bitmap height"),
+		Check(1) _ autoSizeResult _ int_p.OUT("width", "returns the bitmap width"),
+		Check(1) _ autoSizeResult _ int_p.OUT("height", "returns the bitmap height"),
 		Check(1) _ int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1) _ int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -729,8 +729,8 @@ int main(int arg, char **argv)
 		float.IN("scale_x", "the horizontal scale"),
 		float.IN("scale_y", "the vertical scale"),
 		int.IN("glyph", "the glyph index to render"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("width", "returns the bitmap width"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("height", "returns the bitmap height"),
+		Check(1) _ autoSizeResult _ int_p.OUT("width", "returns the bitmap width"),
+		Check(1) _ autoSizeResult _ int_p.OUT("height", "returns the bitmap height"),
 		Check(1) _ int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1) _ int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)
@@ -745,8 +745,8 @@ int main(int arg, char **argv)
 		float.IN("shift_x", "the horizontal subpixel shift"),
 		float.IN("shift_y", "the vertical subpixel shift"),
 		int.IN("glyph", "the glyph index to render"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("width", "returns the bitmap width"),
-		mods(Check(1), autoSizeResult) _ int_p.OUT("height", "returns the bitmap height"),
+		Check(1) _ autoSizeResult _ int_p.OUT("width", "returns the bitmap width"),
+		Check(1) _ autoSizeResult _ int_p.OUT("height", "returns the bitmap height"),
 		Check(1) _ int_p.OUT("xoff", "returns the horizontal offset in pixel space from the glyph origin to the left of the bitmap"),
 		Check(1) _ int_p.OUT("yoff", "returns the vertical offset in pixel space from the glyph origin to the top of the bitmap")
 	)

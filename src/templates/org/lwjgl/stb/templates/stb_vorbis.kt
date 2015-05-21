@@ -299,7 +299,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		""",
 
 		DECODER,
-		mods(Check(1), nullable) _ int_p.OUT(
+		Check(1) _ nullable _ int_p.OUT(
 			"channels",
 			"returns the number of channels. Can be $NULL -- it is always the same as the number of channels reported by #get_info()."
 		),

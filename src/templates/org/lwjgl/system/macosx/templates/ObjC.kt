@@ -274,7 +274,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			"objc_copyClassList",
 			"Creates and returns a list of pointers to all registered class definitions.",
 
-			mods(nullable, autoSizeResult) _ unsigned_int_p.OUT(
+			nullable _ autoSizeResult _ unsigned_int_p.OUT(
 				"outCount",
 				"an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
 			),
@@ -382,7 +382,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			"Describes the instance variables declared by a class.",
 
 			nullable _ Class.IN("cls", "the class to inspect"),
-			mods(nullable, autoSizeResult) _ unsigned_int_p.OUT(
+			nullable _ autoSizeResult _ unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -471,7 +471,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			"Describes the instance methods implemented by a class.",
 
 			nullable _ Class.IN("cls", "the class you want to inspect"),
-			mods(nullable, autoSizeResult) _ unsigned_int_p.OUT(
+			nullable _ autoSizeResult _ unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -504,7 +504,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			"Describes the protocols adopted by a class.",
 
 			nullable _ Class.IN("cls", "the class you want to inspect"),
-			mods(nullable, autoSizeResult) _ unsigned_int_p.OUT(
+			nullable _ autoSizeResult _ unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -537,7 +537,7 @@ val objc_runtime = dependsOn(Module.MACOSX_OBJC) {
 			"Describes the properties declared by a class.",
 
 			nullable _ Class.IN("cls", "the class you want to inspect"),
-			mods(nullable, autoSizeResult) _ unsigned_int_p.OUT(
+			nullable _ autoSizeResult _ unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),

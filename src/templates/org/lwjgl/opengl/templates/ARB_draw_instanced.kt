@@ -55,7 +55,7 @@ val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", 
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		mods(const, ELEMENT_ARRAY_BUFFER) _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
 	)
 }

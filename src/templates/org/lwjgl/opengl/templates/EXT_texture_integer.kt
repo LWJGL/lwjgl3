@@ -138,7 +138,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), SingleValue("param")) _ GLint_p.IN("params", "")
+		Check(1) _ SingleValue("param") _ GLint_p.IN("params", "")
 	)
 
 	GLvoid(
@@ -147,7 +147,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), SingleValue("param")) _ GLuint_p.IN("params", "")
+		Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "")
 	)
 
 	GLvoid(
@@ -156,7 +156,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "")
 	)
 
 	GLvoid(
@@ -165,6 +165,6 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "")
+		Check(1) _ returnValue _ GLuint_p.OUT("params", "")
 	)
 }

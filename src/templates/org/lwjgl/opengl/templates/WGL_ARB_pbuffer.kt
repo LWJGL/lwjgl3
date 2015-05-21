@@ -54,7 +54,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		int.IN("pixelFormat", "a non-generic pixel format descriptor index"),
 		int.IN("width", "the pixel width of the rectangular pbuffer"),
 		int.IN("height", "the pixel height of the rectangular pbuffer"),
-		mods(const, nullTerminated, nullable) _ int_p.IN(
+		const _ nullTerminated _ nullable _ int_p.IN(
 			"attribList",
 			"a 0-terminated list of attributes {type, value} pairs containing integer attribute values"
 		)

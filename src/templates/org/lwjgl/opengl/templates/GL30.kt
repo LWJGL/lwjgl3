@@ -199,21 +199,21 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	GLvoid("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
 	GLvoid("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(1)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(2)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(3)) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLuint_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), mods(const, Check(4)) _ GLshort_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	GLvoid("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
 
 	GLvoid(
 		"VertexAttribIPointer",
@@ -232,7 +232,9 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 			the byte offset between consecutive generic vertex attributes. If stride is 0, the generic vertex attributes are understood to be tightly packed in
 			the array. The initial value is 0.
 			"""),
-		mods(const, ARRAY_BUFFER, MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT)) _ GLvoid_p.IN(
+		MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ ARRAY_BUFFER _ const _ GLvoid_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -247,7 +249,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
-		mods(Check(4), returnValue) _ GLint_p.OUT("params", "returns the requested data")
+		Check(4) _ returnValue _ GLint_p.OUT("params", "returns the requested data")
 	)
 
 	GLvoid(
@@ -256,7 +258,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried", "GL20#CURRENT_VERTEX_ATTRIB"),
-		mods(Check(4), returnValue) _ GLuint_p.OUT("params", "returns the requested data")
+		Check(4) _ returnValue _ GLuint_p.OUT("params", "returns the requested data")
 	)
 
 	// Uniform functions javadoc
@@ -346,7 +348,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "the value of the specified uniform variable")
+		Check(1) _ returnValue _ GLuint_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	GLvoid(
@@ -745,7 +747,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes renderbuffer objects.",
 
 		AutoSize("renderbuffers") _ GLsizei.IN("n", "the number of renderbuffer objects to be deleted"),
-		mods(const, SingleValue("renderbuffer")) _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
+		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
 	)
 
 	GLvoid(
@@ -787,7 +789,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the target of the query operation", "#RENDERBUFFER"),
 		GLenum.IN("pname", "the parameter whose value to retrieve from the renderbuffer bound to {@code target}", RenderbufferParameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
 	GLboolean(
@@ -810,7 +812,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes framebuffer objects.",
 
 		AutoSize("framebuffers") _ GLsizei.IN("n", "the number of framebuffer objects to be deleted"),
-		mods(const, SingleValue("framebuffer")) _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
+		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
 	)
 
 	GLvoid(
@@ -890,7 +892,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "the target of the query operation", FramebufferTargets),
 		GLenum.IN("attachment", "the attachment within {@code target}", FramebufferAttachments),
 		GLenum.IN("pname", "the parameter of {@code attachment} to query", FramebufferParameters),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
 	GLvoid(
@@ -985,7 +987,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		mods(const, Check(1), SingleValue("param")) _ GLint_p.IN("params", "the value of {@code pname}")
+		const _ Check(1) _ SingleValue("param") _ GLint_p.IN("params", "the value of {@code pname}")
 	)
 
 	GLvoid(
@@ -994,7 +996,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		mods(const, Check(1), SingleValue("param")) _ GLuint_p.IN("params", "the value of {@code pname}")
+		const _ Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "the value of {@code pname}")
 	)
 
 	GLvoid(
@@ -1003,7 +1005,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a texture parameter"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("params", "returns the texture parameter value")
+		Check(1) _ returnValue _ GLint_p.OUT("params", "returns the texture parameter value")
 	)
 
 	GLvoid(
@@ -1012,7 +1014,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a texture parameter"),
-		mods(Check(1), returnValue) _ GLuint_p.OUT("params", "returns the texture parameter value")
+		Check(1) _ returnValue _ GLuint_p.OUT("params", "returns the texture parameter value")
 	)
 
 	// EXT_texture_array
@@ -1066,7 +1068,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	ReferenceGL("glGet") _ GLvoid(
@@ -1075,7 +1077,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		mods(Check(1), returnValue) _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	GLvoid(
@@ -1265,7 +1267,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the target program object"),
 		AutoSize("varyings") _ GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-		mods(const, PointerArray(GLcharASCII_p, "varying")) _ GLcharASCII_pp.IN(
+		const _ PointerArray(GLcharASCII_p, "varying") _ GLcharASCII_pp.IN(
 			"varyings",
 			"an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
 		),
@@ -1279,7 +1281,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("program", "the target program object"),
 		GLuint.IN("index", "the index of the varying variable whose information to retrieve"),
 		AutoSize("name") _ GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code name}"),
-		mods(Check(1), nullable) _ GLsizei_p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
+		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which will receive the number of characters written into {@code name}, excluding the null-terminator. If {@code length} is NULL no length is returned."),
 		Check(1) _ GLsizei_p.OUT("size", "a variable that will receive the size of the varying"),
 		Check(1) _ GLenum_p.OUT("type", "a variable that will receive the type of the varying"),
 		Return("length", "GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH)") _ GLcharASCII_p.OUT(
@@ -1308,7 +1310,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes vertex array objects.",
 
 		AutoSize("arrays") _ GLsizei.IN("n", "the number of vertex array objects to be deleted"),
-		mods(const, SingleValue("array")) _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
+		const _ SingleValue("array") _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
 	)
 
 	GLvoid(

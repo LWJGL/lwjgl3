@@ -53,7 +53,7 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		int.IN("w", "the image width, in pixels"),
 		int.IN("h", "the image height, in pixels"),
 		int.IN("comp", "the number of channels in each pixel"),
-		mods(Check("w * h * comp"), const) _ void_p.IN("data", "the image data"),
+		Check("w * h * comp") _ const _ void_p.IN("data", "the image data"),
 		int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
 	    returnDoc = "1 on success, 0 on failure"
@@ -98,6 +98,6 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		write["w"],
 		write["h"],
 		write["comp"],
-		mods(Check("w * h * comp"), const) _ float_p.IN("data", "the image data")
+		Check("w * h * comp") _ const _ float_p.IN("data", "the image data")
 	)
 }
