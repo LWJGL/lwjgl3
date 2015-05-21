@@ -6,7 +6,9 @@
 /wiki
 .DS_Store
 *.bat
+*.ogg
 *.sh
-*.zip
+*.ttf
 *.wav
+*.zip
 touch.txt

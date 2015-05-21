@@ -17,7 +17,9 @@ This script is included in /build.xml and depends on /build-definitions.xml
 
 	<target name="update-assets" description="Updates the demo assets">
 		<update-demo-asset path="footsteps.wav"/>
+		<update-demo-asset path="phero.ogg"/>
 		<update-demo-asset path="raytracing/scene.obj.zip"/>
+		<update-quiet name="Asset FiraSans" url="https://github.com/google/fonts/raw/master/ofl/firasans/FiraSans-Regular.ttf" dest="${res}/demo/FiraSans.ttf"/>
 		<!-- Add more assets here -->
 
 		<touch file="${res}/demo/touch.txt"/>
@@ -27,7 +29,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 		<attribute name="path"/>
 
 		<sequential>
-			<update name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${res}/demo/@{path}"/>
+			<update-quiet name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${res}/demo/@{path}"/>
 		</sequential>
 	</macrodef>
 </project>

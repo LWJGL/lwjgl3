@@ -10,6 +10,8 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ========== MODULE FLAGS ======== // -->
 
+	<property name="build.stb" value="true"/>
+
 	<property name="build.glfw" value="true"/>
 
 	<property name="build.openal" value="true"/>
@@ -22,6 +24,15 @@ This script is included in /config/build-definitions.xml.
 	<!--<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>-->
 
 	<property name="build.macosx.objc" value="true"/>
+
+	<!-- // ================================ // -->
+
+	<condition property="build.glfw_stb" value="true" else="false">
+		<and>
+			<istrue value="${build.glfw}"/>
+			<istrue value="${build.stb}"/>
+		</and>
+	</condition>
 
 	<!-- // ================================ // -->
 
@@ -50,6 +61,8 @@ This script is included in /config/build-definitions.xml.
 				if ( LWJGL.getProperty(property) == "true" )
 					jvmargs.push("-D" + property + "=true");
 			}
+
+			push("build.stb");
 
 			push("build.glfw");
 			push("build.openal");

@@ -29,6 +29,8 @@ import java.util.HashMap
 */
 
 enum class Module(val key: String) {
+	STB: Module("build.stb")
+
 	GLFW : Module("build.glfw")
 	OPENAL : Module("build.openal")
 	OPENCL : Module("build.opencl")
@@ -69,6 +71,8 @@ fun main(args: Array<String>) {
 		// Note: For a Kotlin package X.Y.Z, <Z>Package is the class Kotlin generates that contains
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
+
+		generate("org.lwjgl.stb", Module.STB)
 
 		generate("org.lwjgl.glfw", Module.GLFW)
 		generate("org.lwjgl.openal", Module.OPENAL)

@@ -44,6 +44,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.native.abs}/system"/>
 			<arg value="-I${src.native.abs}/system/linux"/>
 			<arg value="-I${src.native.abs}/system/libffi"/>
+			<arg value="-isystem${src.native.abs}/stb" if:true="${build.stb}"/>
 			<arg value="-I${src.native.abs}/glfw" if:true="${build.glfw}"/>
 			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
 			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
@@ -56,6 +57,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${generated.native}/system" includes="*.c"/>
 			<fileset dir="${generated.native}/system/linux" includes="*.c"/>
 			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
+			<fileset dir="${generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
 			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
 			<fileset dir="${generated.native}/glfw/linux" includes="*.c" if:true="${build.glfw}"/>
 			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>

@@ -47,6 +47,8 @@ fun project() {
 		addSources("$ROOT/system/macosx", FILTER_RECURSIVE)
 		addSources("$ROOT/system/windows", FILTER_RECURSIVE)
 
+		addOptionalModule("build.stb", "stb")
+
 		addOptionalModule("build.glfw", "glfw")
 		addOptionalModule("build.openal", "openal")
 		addOptionalModule("build.opencl", "opencl", registerTypes = hasModule("build.opengl"))

@@ -31,6 +31,7 @@ val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.PTR, unsigned = true)
 
 val char_p = PointerType(char)
 val short_p = PointerType(short)
+val short_pp = PointerType(short_p)
 val int_p = PointerType(int)
 val float_p = PointerType(float)
 val float_pp = PointerType(float_p)
