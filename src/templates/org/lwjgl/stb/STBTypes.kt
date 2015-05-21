@@ -11,7 +11,7 @@ val STB_PACKAGE = "org.lwjgl.stb"
 private fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
 	"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4242 4244 4702 4711 4820 4996))
+	__pragma(warning(disable : 4242 4244 4702 4711 4738 4820 4996))
 #endif
 $directives
 ENABLE_WARNINGS()""")
@@ -55,7 +55,7 @@ val STBIEOFCallback = CallbackType(callback(
 
 val stbi_io_callbacks = struct(STB_PACKAGE, "STBIIOCallbacks", structName = "stbi_io_callbacks") {
 	documentation = "Image IO callbacks, used by STBImage##stb_load_from_callbacks()."
-	nativeImport("stb_image.h")
+	includeSTBAPI("#include \"stb_image.h\"")
 	STBIReadCallback.member("read")
 	STBISkipCallback.member("skip")
 	STBIEOFCallback.member("eof")
