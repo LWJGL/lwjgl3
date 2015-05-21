@@ -304,7 +304,7 @@ public class TemplateFormatter {
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
-		TYPE_PATTERN + "\\s*[(]((?:void)?(?:,?\\s*" + TYPE_PATTERN + ")*\\s*)[)]",
+		TYPE_PATTERN + "\\s*[(]((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*\\s*)[)]",
 		Pattern.MULTILINE
 	);
 
