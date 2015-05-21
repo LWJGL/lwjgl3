@@ -34,6 +34,13 @@ This script is included in /config/build-definitions.xml.
 		</and>
 	</condition>
 
+	<condition property="build.glfw_opencl" value="true" else="false">
+		<and>
+			<istrue value="${build.glfw}"/>
+			<istrue value="${build.opencl}"/>
+		</and>
+	</condition>
+
 	<!-- // ================================ // -->
 
 	<target name="modules">

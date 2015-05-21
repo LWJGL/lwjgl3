@@ -26,21 +26,21 @@ import java.util.concurrent.CountDownLatch;
 import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.glfw.GLFWLinux.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.opencl.KHRGLSharing.*;
 import static org.lwjgl.opengl.ARBCLEvent.*;
+import static org.lwjgl.opengl.CGL.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
+import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.MemoryUtil.*;
-import static org.lwjgl.system.linux.GLFWLinux.*;
-import static org.lwjgl.system.macosx.CGL.*;
-import static org.lwjgl.system.windows.WGL.*;
 
 public class Mandelbrot {
 
@@ -105,8 +105,12 @@ public class Mandelbrot {
 	// VIEWPORT
 
 	private int
-		width,
-		height;
+		ww,
+		wh;
+
+	private int
+		fbw,
+		fbh;
 
 	private double
 		offsetX = -0.5,
@@ -149,11 +153,15 @@ public class Mandelbrot {
 		this.window = window;
 		this.maxIterations = maxIterations;
 
-		IntBuffer windowSize = BufferUtils.createIntBuffer(2);
-		nglfwGetWindowSize(window.handle, memAddress(windowSize), memAddress(windowSize) + 4);
+		IntBuffer size = BufferUtils.createIntBuffer(2);
 
-		width = windowSize.get(0);
-		height = windowSize.get(1);
+		nglfwGetWindowSize(window.handle, memAddress(size), memAddress(size) + 4);
+		ww = size.get(0);
+		wh = size.get(1);
+
+		nglfwGetFramebufferSize(window.handle, memAddress(size), memAddress(size) + 4);
+		fbw = size.get(0);
+		fbh = size.get(1);
 
 		glfwMakeContextCurrent(window.handle);
 		GLContext glContext = GLContext.createFromCurrent();
@@ -261,7 +269,7 @@ public class Mandelbrot {
 				log("OpenCL Device Type: CPU");
 
 			log("Max Iterations: " + maxIterations + " (Use -iterations <count> to change)");
-			log("Display resolution: " + width + "x" + height + " (Use -res <width> <height> to change)");
+			log("Display resolution: " + ww + "x" + wh + " (Use -res <width> <height> to change)");
 
 			log("OpenGL glCaps.GL_ARB_sync = " + glCaps.GL_ARB_sync);
 			log("OpenGL glCaps.GL_ARB_cl_event = " + glCaps.GL_ARB_cl_event);
@@ -380,8 +388,26 @@ public class Mandelbrot {
 				events.add(new Runnable() {
 					@Override
 					public void run() {
-						Mandelbrot.this.width = width;
-						Mandelbrot.this.height = height;
+						Mandelbrot.this.ww = width;
+						Mandelbrot.this.wh = height;
+
+						shouldInitBuffers = true;
+					}
+				});
+			}
+		});
+
+		glfwSetFramebufferSizeCallback(window.handle, window.framebuffersizefun = new GLFWFramebufferSizeCallback() {
+			@Override
+			public void invoke(long window, final int width, final int height) {
+				if ( width == 0 || height == 0 )
+					return;
+
+				events.add(new Runnable() {
+					@Override
+					public void run() {
+						Mandelbrot.this.fbw = width;
+						Mandelbrot.this.fbh = height;
 
 						shouldInitBuffers = true;
 					}
@@ -454,7 +480,7 @@ public class Mandelbrot {
 			@Override
 			public void invoke(long window, double xpos, double ypos) {
 				mouseX = xpos;
-				mouseY = height - ypos;
+				mouseY = wh - ypos;
 
 				if ( dragging ) {
 					offsetX = dragOffsetX + transformX(dragX - mouseX);
@@ -469,8 +495,8 @@ public class Mandelbrot {
 				if ( yoffset == 0 )
 					return;
 
-				double scrollX = mouseX - width * 0.5;
-				double scrollY = mouseY - height * 0.5;
+				double scrollX = mouseX - ww * 0.5;
+				double scrollY = mouseY - wh * 0.5;
 
 				double zoomX = transformX(scrollX);
 				double zoomY = transformY(scrollY);
@@ -608,28 +634,28 @@ public class Mandelbrot {
 	// OpenCL
 
 	private double transformX(double x) {
-		return x * zoom * (WIDTH / width);
+		return x * zoom * (WIDTH / ww);
 	}
 
 	private double transformY(double y) {
-		return y * zoom * (HEIGHT / height);
+		return y * zoom * (HEIGHT / wh);
 	}
 
 	private void computeCL(boolean is64bit) {
-		double minX = transformX(-width * 0.5) + offsetX;
-		double maxX = transformX(width * 0.5) + offsetX;
-		double minY = transformY(-height * 0.5) + offsetY;
-		double maxY = transformY(height * 0.5) + offsetY;
+		double minX = transformX(-ww * 0.5) + offsetX;
+		double maxX = transformX(ww * 0.5) + offsetX;
+		double minY = transformY(-wh * 0.5) + offsetY;
+		double maxY = transformY(wh * 0.5) + offsetY;
 
 		double rangeX = maxX - minX;
 		double rangeY = maxY - minY;
 
-		kernel2DGlobalWorkSize.put(0, width).put(1, height);
+		kernel2DGlobalWorkSize.put(0, ww).put(1, wh);
 
 		// start computation
 
-		clSetKernelArg1i(clKernel, 0, width);
-		clSetKernelArg1i(clKernel, 1, height);
+		clSetKernelArg1i(clKernel, 0, ww);
+		clSetKernelArg1i(clKernel, 1, wh);
 		if ( !is64bit || !isDoubleFPAvailable(device) ) {
 			clSetKernelArg1f(clKernel, 2, (float)minX);
 			clSetKernelArg1f(clKernel, 3, (float)minY);
@@ -769,7 +795,7 @@ public class Mandelbrot {
 
 		// Init textures
 		glBindTexture(GL_TEXTURE_2D, glTexture);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI, width, height, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, (ByteBuffer)null);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI, ww, wh, 0, GL_RGBA_INTEGER, GL_UNSIGNED_BYTE, (ByteBuffer)null);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -778,12 +804,12 @@ public class Mandelbrot {
 		checkCLError(errcode_ret);
 		glBindTexture(GL_TEXTURE_2D, 0);
 
-		glViewport(0, 0, width, height);
+		glViewport(0, 0, fbw, fbh);
 
-		glUniform2f(sizeUniform, width, height);
+		glUniform2f(sizeUniform, ww, wh);
 
 		FloatBuffer projectionMatrix = BufferUtils.createFloatBuffer(4 * 4);
-		glOrtho(0.0f, width, 0.0f, height, 0.0f, 1.0f, projectionMatrix);
+		glOrtho(0.0f, ww, 0.0f, wh, 0.0f, 1.0f, projectionMatrix);
 		glUniformMatrix4fv(projectionUniform, false, projectionMatrix);
 
 		shouldInitBuffers = false;

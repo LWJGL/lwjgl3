@@ -329,6 +329,7 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/demo/glfw/**" if:true="${build.glfw}"/>
 			<include name="org/lwjgl/demo/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/demo/opencl/**" if:true="${build.glfw_opencl}"/>
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${build.opencl}"/>
 			<include name="org/lwjgl/demo/opengl/**" if:true="${build.glfw}"/>
 			<include name="org/lwjgl/demo/mantle/**" if:true="${build.mantle}"/>

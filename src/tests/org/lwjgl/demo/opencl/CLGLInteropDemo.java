@@ -278,11 +278,12 @@ public final class CLGLInteropDemo {
 		/** Used to signal that the rendering thread has completed. */
 		final CountDownLatch signal;
 
-		GLFWWindowSizeCallback  windowsizefun;
-		GLFWKeyCallback         keyfun;
-		GLFWMouseButtonCallback mousebuttonfun;
-		GLFWCursorPosCallback   cursorposfun;
-		GLFWScrollCallback      scrollfun;
+		GLFWWindowSizeCallback      windowsizefun;
+		GLFWFramebufferSizeCallback framebuffersizefun;
+		GLFWKeyCallback             keyfun;
+		GLFWMouseButtonCallback     mousebuttonfun;
+		GLFWCursorPosCallback       cursorposfun;
+		GLFWScrollCallback          scrollfun;
 
 		private GLFWWindow(long handle, String ID, CountDownLatch signal) {
 			this.handle = handle;
