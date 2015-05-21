@@ -45,6 +45,68 @@ public final class MemoryUtil {
 	}
 
 	/**
+	 * The standard C malloc function.
+	 *
+	 * <p>Allocates a block of {@code size} bytes of memory, returning a pointer to the beginning of the block. The content of the newly allocated block of
+	 * memory is not initialized, remaining with indeterminate values.</p>
+	 *
+	 * @param size the size of the memory block to allocate, in bytes. If {@code size} is zero, the return value depends on the particular library
+	 *             implementation (it may or may not be a null pointer), but the returned pointer shall not be dereferenced.
+	 *
+	 * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
+	 * #NULL} pointer is returned.
+	 */
+	public static native long memAlloc(long size);
+
+	/**
+	 * The standard C free function.
+	 *
+	 * <p>A block of memory previously allocated by a call to {@code malloc}, {@code calloc} or {@code realloc} is deallocated, making it available again for
+	 * further allocations.</p>
+	 *
+	 * @param ptr pointer to a memory block previously allocated with {@code malloc}, {@code calloc} or {@code realloc}. If {@code ptr} does not point to a
+	 *            block of
+	 *            memory allocated with the above functions, it causes undefined behavior. If {@code ptr} is a {@link #NULL} pointer, the function does
+	 *            nothing.
+	 */
+	public static native void memFree(long ptr);
+
+	/**
+	 * The standard C calloc function.
+	 *
+	 * <p>Allocates a block of memory for an array of {@code num} elements, each of them {@code size} bytes long, and initializes all its bits to zero. The
+	 * effective result is the allocation of a zero-initialized memory block of {@code (num*size)} bytes.</p>
+	 *
+	 * @param num  the number of elements to allocate.
+	 * @param size the size of each element. If {@code size} is zero, the return value depends on the particular library implementation (it may or may not be
+	 *             a null pointer), but the returned pointer shall not be dereferenced.
+	 *
+	 * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
+	 * #NULL} pointer is returned.
+	 */
+	public static native long memCalloc(long num, long size);
+
+	/**
+	 * The standard C realloc function.
+	 *
+	 * <p>Changes the size of the memory block pointed to by {@code ptr}. The function may move the memory block to a new location (whose address is returned
+	 * by the function). The content of the memory block is preserved up to the lesser of the new and old sizes, even if the block is moved to a new location.
+	 * If the new size is larger, the value of the newly allocated portion is indeterminate.</p>
+	 *
+	 * <p>In case that {@code ptr} is a {@link #NULL} pointer, the function behaves like {@code malloc}, assigning a new block of size bytes and returning a
+	 * pointer to its beginning.</p>
+	 *
+	 * @param ptr  a pointer to a memory block previously allocated with {@code malloc}, {@code calloc} or {@code realloc}. Alternatively, this can be a
+	 *             {@link #NULL} pointer, in which case a new block is allocated (as if {@code malloc} was called).
+	 * @param size the new size for the memory block, in bytes.
+	 *
+	 * @return a pointer to the reallocated memory block, which may be either the same as {@code ptr} or a new location. If the function fails to allocate the
+	 * requested block of memory, a {@link #NULL} pointer is returned, and the memory block pointed to by argument {@code ptr} is not deallocated (it is still
+	 * valid, and with its contents unchanged).
+	 */
+	public static native long memRealloc(long ptr, long size);
+
+	/**
 	 * Returns the memory address of the specified buffer. [INTERNAL USE ONLY]
 	 *
 	 * @param buffer the buffer
