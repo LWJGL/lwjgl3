@@ -70,12 +70,19 @@ fun PointerType(primitiveType: PrimitiveType) = PointerType(
 	elementType = primitiveType
 )
 /** pointer to pointer. */
-fun PointerType(pointerType: PointerType, const: Boolean = false) =
-	PointerType(
-		"${pointerType.name}${if ( pointerType.includesPointer ) "" else " *"}${if ( const ) " const" else ""}",
-		PointerMapping.DATA_POINTER,
-		elementType = pointerType
-	)
+private fun PointerType.pointerTo(const: Boolean): String {
+	val builder = StringBuilder(name)
+	if ( !includesPointer ) {
+		if ( !name.endsWith('*') )
+			builder append ' '
+		builder append '*'
+	}
+	if ( const )
+		builder append " const"
+
+	return builder.toString()
+}
+fun PointerType(pointerType: PointerType, const: Boolean = false) = PointerType(pointerType.pointerTo(const), PointerMapping.DATA_POINTER, elementType = pointerType)
 
 // Objects (pointer wrappers)
 open class ObjectType(
@@ -99,12 +106,7 @@ class StructType(
 	includesPointer: Boolean = false
 ): PointerType(name, mapping, includesPointer)
 /** Converts a struct value to a pointer to a struct value. */
-fun StructType(structType: StructType) =
-	StructType(
-		name = "${structType.name} *",
-		includesPointer = true,
-		definition = structType.definition
-	)
+fun StructType(structType: StructType) = StructType(name = structType.pointerTo(const = false), includesPointer = true, definition = structType.definition)
 
 // Strings
 class CharSequenceType(

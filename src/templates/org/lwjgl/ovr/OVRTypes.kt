@@ -73,12 +73,8 @@ val ovrInitParams = struct(OVR_PACKAGE, "OVRInitParams", structName = "ovrInitPa
 	/// Number of milliseconds to wait for a connection to the server.
 	/// Pass 0 for the default timeout.
 	uint32_t.member("ConnectionTimeoutMS") ///< Timeout in Milliseconds or 0
-}
-val ovrInitParams_const_p = StructType(
-	name = "ovrInitParams const *",
-	includesPointer = true,
-	definition = ovrInitParams.nativeType.definition
-)
+}.nativeType
+val ovrInitParams_p = StructType(ovrInitParams)
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", structName = "ovrVector2i") {
 	documentation = "A 2D vector with integer components."

@@ -213,7 +213,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		)}
 	    """,
 
-		nullable _ ovrInitParams_const_p.IN(
+		mods(nullable, const) _ ovrInitParams_p.IN(
 			"params",
 			"an ##OVRInitParams struct that cpecifies custom initialization options. May be $NULL to indicate default options."
 		),
