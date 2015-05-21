@@ -313,12 +313,13 @@ class NativeClass(
 	/** Adds a new constant whose value is an expression. */
 	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
-	fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "") =
-		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since)
-	fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = ""): NativeClassFunction {
+	fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
+		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
+	fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
+			name = if ( noPrefix ) name else "$prefixMethod$name",
 			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.sequence(), this.nativeType, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
@@ -340,7 +341,8 @@ class NativeClass(
 
 		val func = Reuse(this.className) _ NativeClassFunction(
 			returns = reference.returns,
-			simpleName = functionName,
+			simpleName = reference.simpleName,
+			name = reference.name,
 			documentation = this@NativeClass.convertDocumentation(this, reference.name, reference.documentation),
 			nativeClass = this@NativeClass,
 			parameters = *reference.parameters

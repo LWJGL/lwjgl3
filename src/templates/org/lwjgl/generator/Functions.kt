@@ -102,10 +102,11 @@ private fun <T> PrintWriter.printList(items: Sequence<T>, itemPrint: (item: T) -
 class NativeClassFunction(
 	returns: ReturnValue,
 	simpleName: String,
+	name: String,
 	documentation: String,
 	val nativeClass: NativeClass,
 	vararg parameters: Parameter
-): Function(returns, simpleName, "${nativeClass.prefixMethod}$simpleName", documentation, *parameters) {
+): Function(returns, simpleName, name, documentation, *parameters) {
 
 	init {
 		validate();
