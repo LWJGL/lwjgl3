@@ -8,16 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NVX_gpu_memory_info = "NVXGpuMemoryInfo".nativeClassGL("NVX_gpu_memory_info", postfix = NVX) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
 
-		GL_NVX_gpu_memory_info provides applications visibility into GPU hardware memory utilization in order to allow the application
-		to effectively manage its resource allocations in the scope of the current available GPU memory.
+		GL_NVX_gpu_memory_info provides applications visibility into GPU hardware memory utilization in order to allow the application to effectively manage
+		its resource allocations in the scope of the current available GPU memory.
     
 		Requires ${GL20.core}
 		"""

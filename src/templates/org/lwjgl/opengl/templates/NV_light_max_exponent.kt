@@ -8,16 +8,12 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_light_max_exponent = "NVLightMaxExponent".nativeClassGL("NV_light_max_exponent", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
 		
-		Default OpenGL does not permit a shininess or spot exponent over 128.0.  This extension permits implementations to support and
-		advertise a maximum shininess and spot exponent beyond 128.0.
+		Default OpenGL does not permit a shininess or spot exponent over 128.0.  This extension permits implementations to support and advertise a maximum
+		shininess and spot exponent beyond 128.0.
 		"""
 
 	IntConstant(

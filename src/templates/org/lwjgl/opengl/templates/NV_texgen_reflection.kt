@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_texgen_reflection = "NVTexgenReflection".nativeClassGL("NV_texgen_reflection", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

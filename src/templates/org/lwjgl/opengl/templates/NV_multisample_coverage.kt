@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_multisample_coverage = "NVMultisampleCoverage".nativeClassGL("NV_multisample_coverage", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_compute_program5 = "NVComputeProgram5".nativeClassGL("NV_compute_program5", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
