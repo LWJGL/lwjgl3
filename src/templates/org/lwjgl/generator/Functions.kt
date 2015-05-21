@@ -349,7 +349,7 @@ class NativeClassFunction(
 
 					if ( check.bytes )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
-					else if ( mode === NORMAL )
+					else if ( mode === NORMAL || it.nativeType is StructType )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"
 					else
 						checks add "${prefix}checkBuffer(${it.name}, ${check.expression});"
