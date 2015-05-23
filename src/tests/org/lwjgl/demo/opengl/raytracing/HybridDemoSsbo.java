@@ -102,8 +102,6 @@ public class HybridDemoSsbo {
 	private ByteBuffer matrixByteBuffer = BufferUtils.createByteBuffer(4 * 16);
 	private FloatBuffer matrixByteBufferFloatView = matrixByteBuffer.asFloatBuffer();
 
-	private ByteBuffer renderBuffers;
-
 	GLFWErrorCallback errCallback;
 	GLFWKeyCallback keyCallback;
 	GLFWFramebufferSizeCallback fbCallback;
@@ -248,13 +246,6 @@ public class HybridDemoSsbo {
 		glEnable(GL_DEPTH_TEST);
 		glEnable(GL_CULL_FACE);
 
-		/*
-		 * Our rasterizer wants to output color attchment 0 and 1.
-		 */
-		renderBuffers = BufferUtils.createByteBuffer(4 * 2);
-		renderBuffers.putInt(GL_COLOR_ATTACHMENT0).putInt(GL_COLOR_ATTACHMENT1);
-		renderBuffers.flip();
-
 		/* Setup camera */
 		camera = new Camera();
 
@@ -342,6 +333,9 @@ public class HybridDemoSsbo {
 		this.fbo = glGenFramebuffers();
 		this.depthBuffer = glGenRenderbuffers();
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
+		IntBuffer renderBuffers = BufferUtils.createIntBuffer(2).put(GL_COLOR_ATTACHMENT0).put(GL_COLOR_ATTACHMENT1);
+		renderBuffers.flip();
+		glDrawBuffers(renderBuffers);
 		glBindRenderbuffer(GL_RENDERBUFFER, depthBuffer);
 		glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, width, height);
 		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, positionTexture, 0);
@@ -605,10 +599,9 @@ public class HybridDemoSsbo {
 
 		/* Rasterize the boxes into the FBO */
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
-		glDrawBuffers(2, renderBuffers);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
-		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
+		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length / 2);
 		glBindVertexArray(0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);

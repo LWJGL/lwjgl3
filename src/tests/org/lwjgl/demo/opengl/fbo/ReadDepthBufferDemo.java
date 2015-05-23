@@ -354,7 +354,7 @@ public class ReadDepthBufferDemo {
 		glBindFramebuffer(GL_FRAMEBUFFER, fbo);
 		glClear(GL_DEPTH_BUFFER_BIT);
 		glBindVertexArray(vaoScene);
-		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length);
+		glDrawArrays(GL_TRIANGLES, 0, 6 * 6 * boxes.length / 2);
 		glBindVertexArray(0);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		glUseProgram(0);
