@@ -4,8 +4,8 @@
  */
 package org.lwjgl.demo.glfw;
 
+import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.demo.util.ClosureGC;
 import org.lwjgl.glfw.*;
@@ -14,12 +14,14 @@ import org.lwjgl.opengl.GLContext;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
+import java.nio.IntBuffer;
 import java.util.Map;
 
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** GLFW events demo. */
@@ -63,17 +65,28 @@ public final class Events {
 
 		System.out.println("Window opened.");
 
-		if ( LWJGLUtil.getPlatform() != Platform.MACOSX ) {
+		try {
+			Class.forName("STBImage"); // Skip if the stb bindings are not available
+
+			ByteBuffer png;
 			try {
-				ImageData pixels = ioImageResourceToByteBuffer("demo/cursor.png");
-
-				ByteBuffer img = GLFWimage.malloc(pixels.width, pixels.height, pixels.data);
-				long cursor = glfwCreateCursor(img, 0, 8);
-
-				glfwSetCursor(window, cursor);
+				png = ioResourceToByteBuffer("demo/cursor.png", 1024);
 			} catch (IOException e) {
-				e.printStackTrace();
+				throw new RuntimeException(e);
 			}
+
+			IntBuffer w = BufferUtils.createIntBuffer(1);
+			IntBuffer h = BufferUtils.createIntBuffer(1);
+			IntBuffer comp = BufferUtils.createIntBuffer(1);
+
+			ByteBuffer pixels = stbi_load_from_memory(png, w, h, comp, 0);
+
+			ByteBuffer img = GLFWimage.malloc(w.get(0), h.get(0), pixels);
+			long cursor = glfwCreateCursor(img, 0, 8);
+
+			glfwSetCursor(window, cursor);
+		} catch (ClassNotFoundException e) {
+			// ignore
 		}
 
 		glfwSetMonitorCallback(new GLFWMonitorCallback() {

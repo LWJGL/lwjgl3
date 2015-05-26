@@ -10,10 +10,12 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -49,22 +51,29 @@ public final class Image {
 	private Closure debugProc;
 
 	private Image(String imagePath) {
+		ByteBuffer imageBuffer;
+		try {
+			imageBuffer = ioResourceToByteBuffer(imagePath, 8 * 1024);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
 		IntBuffer w = BufferUtils.createIntBuffer(1);
 		IntBuffer h = BufferUtils.createIntBuffer(1);
 		IntBuffer comp = BufferUtils.createIntBuffer(1);
 
 		// Use info to read image metadata without decoding the entire image.
 		// We don't need this for this demo, just testing the API.
-		if ( stbi_info(imagePath, w, h, comp) == 0 )
+		if ( stbi_info_from_memory(imageBuffer, w, h, comp) == 0 )
 			throw new RuntimeException("Failed to read image information: " + stbi_failure_reason());
 
 		System.out.println("Image width: " + w.get(0));
 		System.out.println("Image height: " + h.get(0));
 		System.out.println("Image components: " + comp.get(0));
-		System.out.println("Image HDR: " + (stbi_is_hdr(imagePath) == 1));
+		System.out.println("Image HDR: " + (stbi_is_hdr_from_memory(imageBuffer) == 1));
 
 		// Decode the image
-		image = stbi_load(imagePath, w, h, comp, 0);
+		image = stbi_load_from_memory(imageBuffer, w, h, comp, 0);
 		if ( image == null )
 			throw new RuntimeException("Failed to load image: " + stbi_failure_reason());
 
@@ -133,7 +142,7 @@ public final class Image {
 		String imagePath;
 		if ( args.length == 0 ) {
 			System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.Image -Dargs=<path>' to load a different image.\n");
-			imagePath = "res/lwjgl32.png";
+			imagePath = "lwjgl32.png";
 		} else
 			imagePath = args[0];
 		new Image(imagePath).run();

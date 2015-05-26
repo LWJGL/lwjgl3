@@ -10,15 +10,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
-import java.nio.channels.FileChannel;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -61,12 +60,7 @@ abstract class FontDemo {
 		int lc;
 
 		try {
-			FileChannel fc = new FileInputStream(filePath).getChannel();
-			ByteBuffer source = BufferUtils.createByteBuffer((int)fc.size() + 1);
-			while ( fc.read(source) != -1 ) ;
-			fc.close();
-
-			source.flip();
+			ByteBuffer source = ioResourceToByteBuffer(filePath, 4 * 1024);
 			t = memDecodeUTF8(source).replaceAll("\t", "    "); // Replace tabs
 
 			lc = 0;

@@ -8,12 +8,11 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.stb.STBTTAlignedQuad;
 import org.lwjgl.stb.STBTTBakedChar;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.channels.FileChannel;
 
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBTruetype.*;
@@ -29,7 +28,7 @@ public final class Truetype extends FontDemo {
 		String filePath;
 		if ( args.length == 0 ) {
 			System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.Truetype -Dargs=<path>' to load a different text file (must be UTF8-encoded).\n");
-			filePath = "doc/README.md";
+			filePath = "demo/raytracing/hybrid.glsl";
 		} else
 			filePath = args[0];
 
@@ -45,11 +44,7 @@ public final class Truetype extends FontDemo {
 		ByteBuffer cdata = BufferUtils.createByteBuffer(96 * STBTTBakedChar.SIZEOF);
 
 		try {
-			FileChannel fc = new FileInputStream("res/demo/FiraSans.ttf").getChannel();
-			ByteBuffer ttf = BufferUtils.createByteBuffer((int)fc.size() + 1);
-			while ( fc.read(ttf) != -1 ) ;
-			fc.close();
-			ttf.flip();
+			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
 
 			ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 			stbtt_BakeFontBitmap(ttf, getFontHeight(), bitmap, BITMAP_W, BITMAP_H, 32, cdata);

@@ -15,13 +15,12 @@ import org.lwjgl.stb.STBTTPackContext;
 import org.lwjgl.stb.STBTTPackedchar;
 import org.lwjgl.system.libffi.Closure;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import java.nio.channels.FileChannel;
 
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
@@ -167,11 +166,7 @@ public final class TruetypeOversample {
 		chardata = BufferUtils.createByteBuffer(6 * 128 * STBTTPackedchar.SIZEOF);
 
 		try {
-			FileChannel fc = new FileInputStream("res/demo/FiraSans.ttf").getChannel();
-			ByteBuffer ttf = BufferUtils.createByteBuffer((int)fc.size() + 1);
-			while ( fc.read(ttf) != -1 ) ;
-			fc.close();
-			ttf.flip();
+			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
 
 			ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 

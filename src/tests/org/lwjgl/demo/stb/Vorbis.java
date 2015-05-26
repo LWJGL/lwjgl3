@@ -16,10 +16,12 @@ import org.lwjgl.opengl.GLContext;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.system.libffi.Closure;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static java.lang.Math.*;
+import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.openal.AL10.*;
@@ -42,7 +44,7 @@ public final class Vorbis {
 		String filePath;
 		if ( args.length == 0 ) {
 			System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.Vorbis -Dargs=<path>' to load a different Ogg Vorbis file.\n");
-			filePath = "res/demo/phero.ogg";
+			filePath = "demo/phero.ogg";
 		} else
 			filePath = args[0];
 
@@ -107,8 +109,15 @@ public final class Vorbis {
 		int samplesLeft;
 
 		Decoder(String filePath) {
+			ByteBuffer vorbis;
+			try {
+				vorbis = ioResourceToByteBuffer(filePath, 256 * 1024);
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
 			IntBuffer error = BufferUtils.createIntBuffer(1);
-			handle = stb_vorbis_open_filename(filePath, error, null);
+			handle = stb_vorbis_open_memory(vorbis, error, null);
 			if ( handle == NULL )
 				throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
 
