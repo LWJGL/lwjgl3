@@ -321,6 +321,8 @@ License terms: http://lwjgl.org/license.php
 			<src path="${src.tests}/"/>
 
 			<include name="org/lwjgl/system/**"/>
+			<include name="org/lwjgl/demo/util/**"/>
+			<include name="org/lwjgl/demo/windows/**"/>
 
 			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
