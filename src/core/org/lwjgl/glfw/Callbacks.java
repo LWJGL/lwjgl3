@@ -6,6 +6,7 @@ package org.lwjgl.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.TokenFilter;
+import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.PrintStream;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -264,6 +266,27 @@ public final class Callbacks {
 	public static void dropCallbackNamesApply(int count, long names, DropConsumerString consumer) {
 		for ( int i = 0; i < count; i++ )
 			consumer.accept(i, memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i)));
+	}
+
+	/**
+	 * Invokes the specified callbacks using the current window and framebuffer sizes of the specified GLFW window.
+	 *
+	 * @param window             the GLFW window
+	 * @param windowsizefun      the window size callback, may be null
+	 * @param framebuffersizefun the framebuffer size callback, may be null
+	 */
+	public static void glfwInvoke(long window, GLFWWindowSizeCallback windowsizefun, GLFWFramebufferSizeCallback framebuffersizefun) {
+		APIBuffer buffer = apiBuffer();
+
+		if ( framebuffersizefun != null ) {
+			nglfwGetFramebufferSize(window, buffer.address() + 0, buffer.address() + 4);
+			framebuffersizefun.invoke(window, buffer.intValue(0), buffer.intValue(4));
+		}
+
+		if ( windowsizefun != null ) {
+			nglfwGetWindowSize(window, buffer.address() + 0, buffer.address() + 4);
+			windowsizefun.invoke(window, buffer.intValue(0), buffer.intValue(4));
+		}
 	}
 
 }
