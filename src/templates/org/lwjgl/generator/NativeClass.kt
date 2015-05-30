@@ -245,14 +245,14 @@ class NativeClass(
 		if ( functionProvider != null ) {
 			// Generate typedefs for casting the function pointers
 			println()
-			functions.sequence().filter { !it.has(Reuse) }.forEach {
+			functions.asSequence().filter { !it.has(Reuse) }.forEach {
 				it.generateFunctionDefinition(this)
 			}
 		}
 
 		println("\nEXTERN_C_ENTER")
 
-		functions.sequence().filter { !it.has(Reuse) }.forEach {
+		functions.asSequence().filter { !it.has(Reuse) }.forEach {
 			println()
 			it.generateFunction(this)
 		}
@@ -320,7 +320,7 @@ class NativeClass(
 			returns = this,
 			simpleName = name,
 			name = if ( noPrefix ) name else "$prefixMethod$name",
-			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.sequence(), this.nativeType, returnDoc, since),
+			documentation = this@NativeClass.toJavaDoc(processDocumentation(documentation), parameters.asSequence(), this.nativeType, returnDoc, since),
 			nativeClass = this@NativeClass,
 			parameters = *parameters
 		)
@@ -329,12 +329,7 @@ class NativeClass(
 		return func
 	}
 
-	fun NativeClass.get(functionName: String): NativeClassFunction {
-		val func = _functions[functionName]
-		if ( func == null )
-			throw IllegalArgumentException("Referenced function does not exist: ${templateName}.$functionName")
-		return func
-	}
+	fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: ${templateName}.$functionName")
 
 	fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]

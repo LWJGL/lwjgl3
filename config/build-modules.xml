@@ -41,6 +41,20 @@ This script is included in /config/build-definitions.xml.
 		</and>
 	</condition>
 
+	<condition property="build.opencl_nogl" value="true" else="false">
+		<and>
+			<istrue value="${build.opencl}"/>
+			<isfalse value="${build.opengl}"/>
+		</and>
+	</condition>
+
+	<condition property="build.opengl_nocl" value="true" else="false">
+		<and>
+			<istrue value="${build.opengl}"/>
+			<isfalse value="${build.opencl}"/>
+		</and>
+	</condition>
+
 	<!-- // ================================ // -->
 
 	<target name="modules">

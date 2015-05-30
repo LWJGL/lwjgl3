@@ -20,7 +20,7 @@ val virtual = object: ParameterModifier() {
 	override val isSpecial = false
 }
 
-private trait AutoSizeFactor {
+private interface AutoSizeFactor {
 	fun expression(): String
 	fun expressionInv(): String
 }
@@ -162,7 +162,7 @@ class Check(
 }
 fun Check(value: Int) = Check(Integer.toString(value))
 
-class Nullable internal(val optional: Boolean): ParameterModifier() {
+class Nullable internal constructor(val optional: Boolean): ParameterModifier() {
 	companion object: ModifierKey<Nullable>
 
 	override val isSpecial = optional

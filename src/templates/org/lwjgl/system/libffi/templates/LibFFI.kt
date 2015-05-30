@@ -6,7 +6,6 @@ package org.lwjgl.system.libffi.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.system.libffi.*
-import org.lwjgl.opengl.*
 
 fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") {
 	javaImport (

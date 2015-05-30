@@ -6,7 +6,6 @@ package org.lwjgl.glfw.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
-import org.lwjgl.opengl.*
 
 val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	javaImport (

@@ -54,8 +54,8 @@ class Code(
 	}
 
 	enum class ApplyTo {
-		NORMAL
-		ALTERNATIVE
+		NORMAL,
+		ALTERNATIVE,
 		BOTH
 	}
 

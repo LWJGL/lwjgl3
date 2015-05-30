@@ -31,8 +31,8 @@ abstract class TemplateElement {
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
 	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.getDeclaringClass())
-	fun <T : TemplateModifier> get(modClass: Class<T>) = [suppress("UNCHECKED_CAST")](modifiers[modClass] as T)
-	fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = [suppress("UNCHECKED_CAST")](modifiers[modKey.javaClass.getDeclaringClass()] as T)
+	fun <T : TemplateModifier> get(modClass: Class<T>) = @suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
+	fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.getDeclaringClass()] as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
@@ -51,7 +51,7 @@ abstract class TemplateElement {
 }
 
 /** A template modifier. Replaces the annotations in the pre-3.0 generator. */
-trait TemplateModifier {
+interface TemplateModifier {
 	/** When true, this modifier requires special Java-side handling. */
 	val isSpecial: Boolean
 
@@ -59,7 +59,7 @@ trait TemplateModifier {
 	fun validate(element: TemplateElement)
 }
 
-trait ModifierKey<T : TemplateModifier>
+interface ModifierKey<T : TemplateModifier>
 
 /** A modifier that can be applied on functions */
 abstract class FunctionModifier : TemplateModifier {
@@ -114,7 +114,7 @@ abstract class ReturnValueModifier : TemplateModifier {
 }
 
 /** A TemplateModifier with a reference to another TemplateElement. */
-trait ReferenceModifier {
+interface ReferenceModifier {
 	val reference: String
 }
 
@@ -127,11 +127,11 @@ fun FunctionModifier._(func: NativeClassFunction): NativeClassFunction {
 
 // Used with multiple FunctionModifiers
 fun FunctionModifier._(other: FunctionModifier): Array<FunctionModifier> {
-	return array(this, other)
+	return arrayOf(this, other)
 }
 
 fun Array<FunctionModifier>._(other: FunctionModifier): Array<FunctionModifier> {
-	return array(*this, other)
+	return arrayOf(*this, other)
 }
 
 fun Array<FunctionModifier>._(function: NativeClassFunction): NativeClassFunction {
@@ -172,7 +172,7 @@ class ModifierList<M : TemplateModifier, Q : QualifiedType>(
 	}
 
 	fun _(qtype: Q): Q {
-		qtype.setModifiers(*list.copyToArray())
+		qtype.setModifiers(*list.toTypedArray())
 		return qtype
 	}
 }

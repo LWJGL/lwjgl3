@@ -8,23 +8,23 @@ import org.lwjgl.generator.*
 
 enum class BufferType(val mapping: PointerMapping, val className: String = "GL11") {
 
-	GL_UNSIGNED_BYTE: BufferType(PointerMapping.DATA_BYTE)
-	GL_UNSIGNED_SHORT: BufferType(PointerMapping.DATA_SHORT)
-	GL_UNSIGNED_INT: BufferType(PointerMapping.DATA_INT)
-	GL_UNSIGNED_LONG: BufferType(PointerMapping.DATA_LONG)
+	GL_UNSIGNED_BYTE(PointerMapping.DATA_BYTE),
+	GL_UNSIGNED_SHORT(PointerMapping.DATA_SHORT),
+	GL_UNSIGNED_INT(PointerMapping.DATA_INT),
+	GL_UNSIGNED_LONG(PointerMapping.DATA_LONG),
 
-	GL_BYTE: BufferType(PointerMapping.DATA_BYTE)
-	GL_SHORT: BufferType(PointerMapping.DATA_SHORT)
-	GL_INT: BufferType(PointerMapping.DATA_INT)
-	GL_LONG: BufferType(PointerMapping.DATA_LONG)
+	GL_BYTE(PointerMapping.DATA_BYTE),
+	GL_SHORT(PointerMapping.DATA_SHORT),
+	GL_INT(PointerMapping.DATA_INT),
+	GL_LONG(PointerMapping.DATA_LONG),
 
-	GL_HALF_FLOAT: BufferType(PointerMapping.DATA_SHORT, "GL30")
-	GL_FLOAT: BufferType(PointerMapping.DATA_FLOAT)
-	GL_DOUBLE: BufferType(PointerMapping.DATA_DOUBLE)
+	GL_HALF_FLOAT(PointerMapping.DATA_SHORT, "GL30"),
+	GL_FLOAT(PointerMapping.DATA_FLOAT),
+	GL_DOUBLE(PointerMapping.DATA_DOUBLE),
 
-	GL_2_BYTES: BufferType(PointerMapping.DATA_BYTE)
-	GL_3_BYTES: BufferType(PointerMapping.DATA_BYTE)
-	GL_4_BYTES: BufferType(PointerMapping.DATA_BYTE)
+	GL_2_BYTES(PointerMapping.DATA_BYTE),
+	GL_3_BYTES(PointerMapping.DATA_BYTE),
+	GL_4_BYTES(PointerMapping.DATA_BYTE)
 
 }
 

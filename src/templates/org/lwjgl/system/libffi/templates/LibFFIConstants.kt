@@ -6,7 +6,6 @@ package org.lwjgl.system.libffi.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.system.libffi.*
-import org.lwjgl.opengl.*
 
 fun LibFFIConstants() = "LibFFIConstants".nativeClass(packageName = FFI_PACKAGE) {
 	nativeImport (
@@ -44,5 +43,4 @@ fun LibFFIConstants() = "LibFFIConstants".nativeClass(packageName = FFI_PACKAGE)
 	macro _ (address _ voidptr)("ffi_type_longdouble", "Returns the address of the {@code ffi_type_longdouble} struct.")
 
 	macro _ (address _ voidptr)("ffi_type_pointer", "Returns the address of the {@code ffi_type_pointer} struct.")
-
 }

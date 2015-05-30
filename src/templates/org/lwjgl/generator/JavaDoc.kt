@@ -112,7 +112,7 @@ private fun paramMultilineAligment(alignment: Int): String {
 	val builder = StringBuilder("\t *".length() + whitespace)
 
 	builder append "\t *"
-	for ( i in whitespace.indices )
+	for ( i in 0..whitespace - 1 )
 		builder append ' '
 
 	return builder.toString()

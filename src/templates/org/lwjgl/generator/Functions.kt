@@ -48,7 +48,7 @@ private val JNIENV = "__env"
 private val GLCore_PATTERN = Pattern.compile("GL[1-9][0-9]")
 
 enum class GenerationMode {
-	NORMAL
+	NORMAL,
 	ALTERNATIVE
 }
 
@@ -69,14 +69,8 @@ abstract class Function(
 
 	protected val hasNativeParams: Boolean = getNativeParams().any()
 
-	fun getParam(paramName: String): Parameter {
-		val param = paramMap[paramName]
-		if ( param == null )
-			throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")
-		return param
-	}
-
-	fun getParams(predicate: (Parameter) -> Boolean) = parameters.sequence().filter(predicate)
+	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")
+	fun getParams(predicate: (Parameter) -> Boolean) = parameters.asSequence().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
 
@@ -546,7 +540,7 @@ class NativeClassFunction(
 		// Step 1: Method signature
 
 		print("\t${accessModifier}static ${returnsJavaMethodType} $name(")
-		printList(parameters.sequence()) {
+		printList(parameters.asSequence()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else if ( it.isBufferPointer )
@@ -769,7 +763,7 @@ class NativeClassFunction(
 					// We do this here in case another transform applies too.
 					// We overwrite the value with the expression but use the type of the other transform.
 					val expression = it[Expression]
-					transforms[it] = ExpressionTransform(expression.value, expression.keepParam, [suppress("UNCHECKED_CAST")](transforms[it] as FunctionTransform<Parameter>?))
+					transforms[it] = ExpressionTransform(expression.value, expression.keepParam, @suppress("UNCHECKED_CAST")(transforms[it] as FunctionTransform<Parameter>?))
 				}
 			}
 		}
@@ -1051,7 +1045,7 @@ class NativeClassFunction(
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
 		print("\t${accessModifier}static $retType $name(")
-		printList(parameters.sequence()) {
+		printList(parameters.asSequence()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
 			else
@@ -1086,7 +1080,7 @@ class NativeClassFunction(
 
 		for ( (qtype, transform) in transforms ) {
 			if ( transform is PreFunctionTransform<*> ) {
-				[suppress("UNCHECKED_CAST")]
+				@suppress("UNCHECKED_CAST")
 				when ( qtype ) {
 					is Parameter   -> (transform as PreFunctionTransform<Parameter>).preprocess(qtype, this)
 					is ReturnValue -> (transform as PreFunctionTransform<ReturnValue>).preprocess(qtype, this)
@@ -1111,7 +1105,7 @@ class NativeClassFunction(
 					apiBufferSet = true
 				}
 
-				[suppress("UNCHECKED_CAST")]
+				@suppress("UNCHECKED_CAST")
 				when ( qtype ) {
 					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
 					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(this@NativeClassFunction, qtype, this)

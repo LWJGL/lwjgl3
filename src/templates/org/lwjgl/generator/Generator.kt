@@ -29,17 +29,17 @@ import java.util.HashMap
 */
 
 enum class Module(val key: String) {
-	STB: Module("build.stb")
+	STB("build.stb"),
 
-	GLFW : Module("build.glfw")
-	OPENAL : Module("build.openal")
-	OPENCL : Module("build.opencl")
-	OPENGL : Module("build.opengl")
+	GLFW("build.glfw"),
+	OPENAL("build.openal"),
+	OPENCL("build.opencl"),
+	OPENGL("build.opengl"),
 
-	MANTLE : Module("build.mantle")
-	OVR : Module("build.ovr")
+	MANTLE("build.mantle"),
+	OVR("build.ovr"),
 
-	MACOSX_OBJC : Module("build.macosx.objc")
+	MACOSX_OBJC("build.macosx.objc");
 
 	val enabled: Boolean
 		get() = System.getProperty(key, "false").toBoolean()
@@ -115,7 +115,7 @@ class Generator(
 			if ( samConstructor == null )
 				return
 
-			samConstructor.split(",") forEach {
+			",".toRegex() split samConstructor forEach {
 				callbacksSAM.getOrPut("${callback.packageName}.$it") {
 					ArrayList<CallbackFunction>()
 				}.add(callback)
@@ -168,7 +168,7 @@ class Generator(
 		val methods = packageClass.getMethods()
 
 		return methods
-			.sequence()
+			.asSequence()
 			.filterTo(ArrayList<Method>(methods.size())) {
 				methodFilter(it, javaClass<NativeClass>())
 			}
@@ -193,9 +193,7 @@ class Generator(
 
 		// Generate the template code
 		for ( template in templates ) {
-			val nativeClass = template.invoke(null) as NativeClass?
-			if ( nativeClass == null )
-				continue
+			val nativeClass = template.invoke(null) as NativeClass? ?: continue
 
 			if ( !(nativeClass.packageName equals packageName) )
 				throw IllegalStateException("NativeClass ${nativeClass.className} has invalid package [${nativeClass.packageName}]. Should be: [$packageName]")
@@ -305,9 +303,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 }
 
 private fun ensurePath(path: File) {
-	val parent = path.getParentFile()
-	if ( parent == null )
-		throw IllegalArgumentException("The given path has no parent directory.")
+	val parent = path.getParentFile() ?: throw IllegalArgumentException("The given path has no parent directory.")
 
 	if ( !parent.exists() ) {
 		ensurePath(parent)
@@ -390,17 +386,6 @@ inline fun <T> Array<out T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolea
 	for ( i in 0..this.lastIndex )
 		apply(this[i], 0 < i)
 	return this.size() == 0
-}
-
-/** Returns true if the stream was empty. */
-fun <T> Sequence<T>.forEachWithMore(apply: (T, Boolean) -> Unit): Boolean {
-	var more = false
-	for ( item in this ) {
-		apply(item, more)
-		if ( !more )
-			more = true
-	}
-	return more
 }
 
 /** Returns true if the collection was empty. */

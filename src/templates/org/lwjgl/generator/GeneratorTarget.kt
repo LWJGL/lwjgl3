@@ -106,9 +106,9 @@ val String.asJNIName: String
 		this.replaceAll(JNI_UNDERSCORE_ESCAPE_PATTERN, "_1")
 
 enum class Access(internal val modifier: String) {
-	PUBLIC: Access("public ")
-	INTERNAL: Access("")
-	PRIVATE: Access("private ")
+	PUBLIC("public "),
+	INTERNAL(""),
+	PRIVATE("private ")
 }
 
 abstract class GeneratorTarget(
@@ -131,7 +131,7 @@ abstract class GeneratorTarget(
 		try {
 			throw RuntimeException()
 		} catch (t: Throwable) {
-			return t.getStackTrace().sequence()
+			return t.getStackTrace().asSequence()
 				.map { it.getFileName() }
 				.filterNotNull()
 				.filter {
@@ -230,15 +230,15 @@ abstract class GeneratorTarget(
 	}
 
 	protected enum class LinkType {
-		FIELD: LinkType() {
+		FIELD {
 			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
 				val source = if ( className == null || className == sourceName ) "" else className
 				val prefix = if ( custom ) "" else sourcePrefix
 
 				return "{@link $source#$prefix$classElement${if ( prefix.isEmpty() ) "" else " $classElement"}}"
 			}
-		}
-		METHOD: LinkType() {
+		},
+		METHOD {
 			override fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String {
 				val source = if ( className == null || className == sourceName ) "" else className
 				val prefix = if ( custom ) "" else sourcePrefix
@@ -252,7 +252,7 @@ abstract class GeneratorTarget(
 				val hasParams = parentheses < classElement.length() - 2
 				return "{@link $source#$prefix$name${if ( hasParams ) classElement.substring(parentheses) else ""}${if ( prefix.isEmpty() || hasParams || custom ) "" else " $name"}}"
 			}
-		}
+		};
 
 		abstract fun create(sourceName: String, sourcePrefix: String, className: String?, classElement: String, postfix: String, custom: Boolean): String
 	}

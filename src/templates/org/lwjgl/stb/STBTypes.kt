@@ -206,4 +206,3 @@ val stb_vorbis_info = struct(STB_PACKAGE, "STBVorbisInfo", structName = "stb_vor
 	unsigned_int.member("temp_memory_required")
 	int.member("max_frame_size")
 }.nativeType
-val stb_vorbis_info_p = StructType(stb_vorbis_info)

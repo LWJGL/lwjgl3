@@ -61,11 +61,11 @@ enum class StructIdentifierType(val keyword: String) {
 	 * or
 	 * typedef union Foo { ... } Bar
 	 */
-	ALIAS: StructIdentifierType("")
+	ALIAS(""),
 	/** struct Foo { ... } */
-	STRUCT: StructIdentifierType("struct ")
+	STRUCT("struct "),
 	/** union Foo { ... } */
-	UNION: StructIdentifierType("union ")
+	UNION("union ")
 }
 
 class Struct(
@@ -303,7 +303,7 @@ class Struct(
 
 	private fun getMemberCount(members: List<StructMember>): Int {
 		var count = members.size()
-		for ( member in members.sequence().filter { it.isNestedAnonymousStruct } )
+		for ( member in members.asSequence().filter { it.isNestedAnonymousStruct } )
 			count += getMemberCount(member.nestedMembers) // recursion
 		return count
 	}
@@ -329,8 +329,8 @@ class Struct(
 	}
 
 	enum class ConstructorMode {
-		NORMAL
-		ALTER1
+		NORMAL,
+		ALTER1,
 		ALTER2
 	}
 

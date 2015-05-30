@@ -2,30 +2,31 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 
-private trait FunctionTransform<T: QualifiedType> {
+private interface FunctionTransform<T: QualifiedType> {
 	fun transformDeclaration(param: T, original: String): String?
 	fun transformCall(param: T, original: String): String
 }
 
 /** A function transform that must perform some pre-processing. */
-private trait PreFunctionTransform<T: QualifiedType> {
+private interface PreFunctionTransform<T: QualifiedType> {
 	fun preprocess(qtype: T, writer: PrintWriter)
 }
 
 /** A function transform that makes use of the APIBuffer. */
-private trait APIBufferFunctionTransform<T: QualifiedType> {
+private interface APIBufferFunctionTransform<T: QualifiedType> {
 	fun setupAPIBuffer(func: Function, qtype: T, writer: PrintWriter)
 }
 
 /** Marker trait to indicate that buffer checks should be skipped. */
-private trait SkipCheckFunctionTransform
+private interface SkipCheckFunctionTransform
 
 private fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
 	val transform = transforms[this]
 	if ( transform == null )
 		return original
 	else
-		return [suppress("UNCHECKED_CAST")](transform as FunctionTransform<T>).transformDeclaration(this, original)
+		@suppress("UNCHECKED_CAST")
+		return (transform as FunctionTransform<T>).transformDeclaration(this, original)
 }
 
 private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
@@ -33,7 +34,8 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 	if ( transform == null )
 		return original
 	else
-		return [suppress("UNCHECKED_CAST")](transform as FunctionTransform<T>).transformCall(this, original)
+		@suppress("UNCHECKED_CAST")
+		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
 private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor: Boolean = true): FunctionTransform<Parameter> {
@@ -203,7 +205,7 @@ private class VectorValueTransform(
 	val newName: String,
 	val size: Int
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String) = size.indices.map { "$paramType ${newName}$it" }.reduce { a, b -> "$a, $b" } // Replace with vector elements
+	override fun transformDeclaration(param: Parameter, original: String) = (0..size - 1).map { "$paramType ${newName}$it" }.reduce { a, b -> "$a, $b" } // Replace with vector elements
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")

@@ -51,7 +51,7 @@ private val FunctionProviderAL = Generator.register(object : FunctionProvider(OP
 			if ( isAL1 xor isAL2 )
 				(if ( isAL1 ) -1 else 1)
 			else
-				o1.templateName compareToIgnoreCase o2.templateName
+				o1.templateName.compareTo(o2.templateName, ignoreCase = true)
 		}
 
 		val classesWithFunctions = classes.filter { it.hasNativeFunctions }

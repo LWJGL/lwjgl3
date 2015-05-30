@@ -4,7 +4,6 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.PointerBuffer
 import java.nio.*
 
 open class NativeType(
@@ -21,11 +20,11 @@ open class NativeType(
 		get() = mapping.jniFunctionType
 
 	/** The native method argument type. */
-	val nativeMethodType: Class<out Any>
+	val nativeMethodType: Class<*>
 		get() = mapping.nativeMethodType
 
 	/** The Java method argument type. */
-	val javaMethodType: Class<out Any>
+	val javaMethodType: Class<*>
 		get() = mapping.javaMethodType
 
 	override fun toString(): String =
@@ -147,9 +146,9 @@ open class TypeMapping(
 	/** The JNI function argument type. */
 	val jniFunctionType: String,
 	/** The native method argument type. */
-	val nativeMethodType: Class<out Any>,
+	val nativeMethodType: Class<*>,
 	/** The Java method argument type. */
-	val javaMethodType: Class<out Any>
+	val javaMethodType: Class<*>
 ) {
 
 	companion object {
@@ -198,7 +197,7 @@ class CharMapping(
 }
 
 open class PointerMapping(
-	javaMethodType: Class<out Any>,
+	javaMethodType: Class<*>,
 	val byteShift: String? = null
 ): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {
 
@@ -208,7 +207,7 @@ open class PointerMapping(
 		/** Useful for void * params that will be AutoTyped. */
 		val DATA = PointerMapping(javaClass<ByteBuffer>())
 
-		val DATA_POINTER = PointerMapping(javaClass<PointerBuffer>(), "POINTER_SHIFT")
+		val DATA_POINTER = PointerMapping(Class.forName("org.lwjgl.PointerBuffer"), "POINTER_SHIFT")
 
 		fun PointerMapping(javaMethodType: Class<out Any>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
 

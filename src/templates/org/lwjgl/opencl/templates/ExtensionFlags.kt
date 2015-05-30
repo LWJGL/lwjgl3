@@ -6,7 +6,6 @@ package org.lwjgl.opencl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
-import org.lwjgl.opengl.registryLink
 
 val KHR = "KHR"
 val EXT = "EXT"

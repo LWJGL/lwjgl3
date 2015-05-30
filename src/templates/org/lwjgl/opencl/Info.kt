@@ -9,11 +9,11 @@ import org.lwjgl.opencl.InfoQueryType.*
 import java.util.EnumSet
 
 enum class InfoQueryType {
-	BOOLEAN
-	INT
-	LONG
-	POINTER
-	STRING_ASCII
+	BOOLEAN,
+	INT,
+	LONG,
+	POINTER,
+	STRING_ASCII,
 	STRING_UTF8
 }
 
@@ -44,7 +44,7 @@ fun info() {
 """
 			)
 
-			open [data] class ObjectType(
+			open @data class ObjectType(
 				val source: String,
 				val name: String,
 				val types: EnumSet<InfoQueryType>,

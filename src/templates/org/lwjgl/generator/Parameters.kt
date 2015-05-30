@@ -63,27 +63,27 @@ class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
 }
 
 enum class ParameterType {
-	IN
-	OUT
+	IN,
+	OUT,
 	INOUT
 }
 
 enum class LinkMode {
-	SINGLE: LinkMode() {
+	SINGLE {
 		override fun print(multi: Boolean): String = if ( multi ) " One of:" else " Must be:"
-	}
+	},
 
-	SINGLE_CNT: LinkMode() {
+	SINGLE_CNT {
 		override fun print(multi: Boolean): String = if ( multi ) " one of:" else " must be:"
-	}
+	},
 
-	BITFIELD: LinkMode() {
+	BITFIELD {
 		override fun print(multi: Boolean): String = " One or more of:"
-	}
+	},
 
-	BITFIELD_CNT: LinkMode() {
+	BITFIELD_CNT {
 		override fun print(multi: Boolean): String = " one or more of:"
-	}
+	};
 
 	abstract fun print(multi: Boolean): String
 }
@@ -154,7 +154,7 @@ class Parameter(
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
 	// Data pointer
-		nativeType is PointerType && (nativeType : PointerType).mapping != PointerMapping.OPAQUE_POINTER
+		nativeType is PointerType && nativeType.mapping != PointerMapping.OPAQUE_POINTER
 		                         -> {
 			if ( isAutoSizeResultOut && func.hideAutoSizeResultParam )
 				"$API_BUFFER.address($name)"
