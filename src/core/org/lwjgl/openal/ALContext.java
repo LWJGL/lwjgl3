@@ -81,29 +81,46 @@ public class ALContext extends PointerWrapper {
 		alcDestroyContext(getPointer());
 	}
 
-	public static ALContext create() {
-		return create(null, 44100, 60, false);
-	}
-
 	/**
-	 * Creates an ALContext.
-	 *
-	 * @param deviceName the device name. May be null, in which case the default device will be used.
-	 * @param frequency  the frequency for mixing output buffer, in Hz
-	 * @param refresh    the refresh intervals, in Hz
-	 * @param sync       a flag, indicating a synchronous context
+	 * Creates an asynchronous ALContext, using the default device and default attributes.
 	 *
 	 * @return the new ALContext
 	 */
-	public static ALContext create(String deviceName, int frequency, int refresh, boolean sync) {
-		ALDevice device = ALDevice.create(deviceName);
-		IntBuffer attribs = BufferUtils.createIntBuffer(16);
+	public static ALContext create() {
+		return create(ALDevice.create(null), 0, 0, false);
+	}
 
-		attribs.put(ALC_FREQUENCY);
-		attribs.put(frequency);
+	/**
+	 * Creates an asynchronous ALContext, using the specified device and default attributes.
+	 *
+	 * @return the new ALContext
+	 */
+	public static ALContext create(ALDevice device) {
+		return create(device, 0, 0, false);
+	}
 
-		attribs.put(ALC_REFRESH);
-		attribs.put(refresh);
+	/**
+	 * Creates an ALContext, using the specified device and attributes.
+	 *
+	 * @param device    the device
+	 * @param frequency the frequency for mixing output buffer, in units of Hz. Set to 0 to use the default.
+	 * @param refresh   the refresh intervals, in units of Hz. Set to 0 to use the default.
+	 * @param sync      a flag, indicating a synchronous context
+	 *
+	 * @return the new ALContext
+	 */
+	public static ALContext create(ALDevice device, int frequency, int refresh, boolean sync) {
+		IntBuffer attribs = BufferUtils.createIntBuffer(8);
+
+		if ( frequency != 0 ) {
+			attribs.put(ALC_FREQUENCY);
+			attribs.put(frequency);
+		}
+
+		if ( refresh != 0 ) {
+			attribs.put(ALC_REFRESH);
+			attribs.put(refresh);
+		}
 
 		attribs.put(ALC_SYNC);
 		attribs.put(sync ? ALC10.ALC_TRUE : ALC10.ALC_FALSE);
@@ -111,7 +128,19 @@ public class ALContext extends PointerWrapper {
 		attribs.put(0);
 		attribs.flip();
 
-		long contextHandle = alcCreateContext(device.getPointer(), attribs);
+		return ALContext.create(device, attribs);
+	}
+
+	/**
+	 * Creates an ALContext, using the specified device and attributes.
+	 *
+	 * @param device     the device
+	 * @param attributes null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values
+	 *
+	 * @return the new ALContext
+	 */
+	public static ALContext create(ALDevice device, IntBuffer attributes) {
+		long contextHandle = alcCreateContext(device.getPointer(), attributes);
 		return new ALContext(device, contextHandle);
 	}
 

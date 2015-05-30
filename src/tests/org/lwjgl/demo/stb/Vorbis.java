@@ -48,7 +48,7 @@ public final class Vorbis {
 		} else
 			filePath = args[0];
 
-		ALContext al = ALContext.create(null, 48000, 60, false);
+		ALContext al = ALContext.create();
 
 		int source = alGenSources();
 

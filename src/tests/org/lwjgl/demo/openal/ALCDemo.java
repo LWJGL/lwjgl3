@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.openal;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.openal.ALC;
 import org.lwjgl.openal.ALCCapabilities;
 import org.lwjgl.openal.ALContext;
@@ -17,7 +16,6 @@ import java.io.InputStream;
 import java.net.URL;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
-import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 import java.util.List;
 import javax.sound.sampled.AudioFormat;
@@ -59,24 +57,13 @@ public class ALCDemo {
 		assertTrue(defaultDeviceSpecifier != null);
 		System.out.println("Default device: " + defaultDeviceSpecifier);
 
-		IntBuffer attribs = BufferUtils.createIntBuffer(16);
+		ALContext context = ALContext.create(device);
 
-		attribs.put(ALC_FREQUENCY);
-		attribs.put(44100);
-
-		attribs.put(ALC_REFRESH);
-		attribs.put(60);
-
-		attribs.put(ALC_SYNC);
-		attribs.put(ALC_FALSE);
-
-		attribs.put(0);
-		attribs.flip();
-
-		long contextHandle = alcCreateContext(device.getPointer(), attribs);
-		assertTrue(contextHandle != 0L);
-
-		ALContext context = new ALContext(device, contextHandle);
+		System.out.println("ALC_FREQUENCY: " + alcGetInteger(device.getPointer(), ALC_FREQUENCY) + "Hz");
+		System.out.println("ALC_REFRESH: " + alcGetInteger(device.getPointer(), ALC_REFRESH) + "Hz");
+		System.out.println("ALC_SYNC: " + (alcGetInteger(device.getPointer(), ALC_SYNC) == ALC_TRUE));
+		System.out.println("ALC_MONO_SOURCES: " + alcGetInteger(device.getPointer(), ALC_MONO_SOURCES));
+		System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device.getPointer(), ALC_STEREO_SOURCES));
 
 		try {
 			testPlayback();
