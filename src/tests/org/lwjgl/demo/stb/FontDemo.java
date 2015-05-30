@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.stb;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -12,7 +11,6 @@ import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.nio.IntBuffer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,9 +36,6 @@ abstract class FontDemo {
 	private long window;
 	private int ww = 800;
 	private int wh = 600;
-
-	private int fbw = ww;
-	private int fbh = wh;
 
 	private boolean ctrlDown;
 
@@ -84,17 +79,20 @@ abstract class FontDemo {
 			public void invoke(long window, int width, int height) {
 				FontDemo.this.ww = width;
 				FontDemo.this.wh = height;
+
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(0.0, width, height, 0.0, -1.0, 1.0);
+				glMatrixMode(GL_MODELVIEW);
+
+				setLineOffset(lineOffset);
 			}
 		};
 
 		framebufferSizefun = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				FontDemo.this.fbw = width;
-				FontDemo.this.fbh = height;
-
-				updateViewport();
-				setLineOffset(0);
+				glViewport(0, 0, width, height);
 			}
 		};
 
@@ -172,7 +170,6 @@ abstract class FontDemo {
 	protected void run(String title) {
 		try {
 			init(title);
-			updateViewport();
 
 			loop();
 		} finally {
@@ -185,7 +182,7 @@ abstract class FontDemo {
 	}
 
 	private void init(String title) {
-		glfwSetErrorCallback(errorfun);
+		glfwSetCallback(errorfun);
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -197,8 +194,9 @@ abstract class FontDemo {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetKeyCallback(window, keyfun);
-		glfwSetFramebufferSizeCallback(window, framebufferSizefun);
+		glfwSetCallback(window, windowSizefun);
+		glfwSetCallback(window, framebufferSizefun);
+		glfwSetCallback(window, keyfun);
 		glfwSetScrollCallback(window, scrollfun);
 
 		// Center window
@@ -216,27 +214,7 @@ abstract class FontDemo {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-
-		// Handle HiDPI displays
-		IntBuffer w = BufferUtils.createIntBuffer(1);
-		IntBuffer h = BufferUtils.createIntBuffer(1);
-		glfwGetFramebufferSize(window, w, h);
-
-		framebufferSizefun.invoke(window, w.get(0), h.get(0));
-	}
-
-	private void updateViewport() {
-		if ( fbw == 0 || fbh == 0 )
-			return;
-
-		glViewport(0, 0, fbw, fbh);
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+		glfwInvoke(window, windowSizefun, framebufferSizefun);
 	}
 
 	private void setScale(int scale) {
@@ -259,8 +237,9 @@ abstract class FontDemo {
 		if ( debugProc != null )
 			debugProc.release();
 		scrollfun.release();
-		framebufferSizefun.release();
 		keyfun.release();
+		framebufferSizefun.release();
+		windowSizefun.release();
 		glfwTerminate();
 		errorfun.release();
 	}

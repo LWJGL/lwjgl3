@@ -41,9 +41,6 @@ public final class Image {
 	private int ww = 800;
 	private int wh = 600;
 
-	private int fbw = ww;
-	private int fbh = wh;
-
 	private boolean ctrlDown;
 
 	private int scale;
@@ -88,16 +85,18 @@ public final class Image {
 			public void invoke(long window, int width, int height) {
 				Image.this.ww = width;
 				Image.this.wh = height;
+
+				glMatrixMode(GL_PROJECTION);
+				glLoadIdentity();
+				glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
+				glMatrixMode(GL_MODELVIEW);
 			}
 		};
 
 		framebufferSizefun = new GLFWFramebufferSizeCallback() {
 			@Override
 			public void invoke(long window, int width, int height) {
-				Image.this.fbw = width;
-				Image.this.fbh = height;
-
-				updateViewport();
+				glViewport(0, 0, width, height);
 			}
 		};
 
@@ -151,7 +150,6 @@ public final class Image {
 	private void run() {
 		try {
 			init();
-			updateViewport();
 
 			loop();
 		} finally {
@@ -164,7 +162,7 @@ public final class Image {
 	}
 
 	private void init() {
-		glfwSetErrorCallback(errorfun);
+		glfwSetCallback(errorfun);
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -178,9 +176,10 @@ public final class Image {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetKeyCallback(window, keyfun);
-		glfwSetFramebufferSizeCallback(window, framebufferSizefun);
-		glfwSetScrollCallback(window, scrollfun);
+		glfwSetCallback(window, windowSizefun);
+		glfwSetCallback(window, framebufferSizefun);
+		glfwSetCallback(window, keyfun);
+		glfwSetCallback(window, scrollfun);
 
 		// Center window
 		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
@@ -197,24 +196,7 @@ public final class Image {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-
-		IntBuffer framebufferSize = BufferUtils.createIntBuffer(2);
-		nglfwGetFramebufferSize(window, memAddress(framebufferSize), memAddress(framebufferSize) + 4);
-		framebufferSizefun.invoke(window, framebufferSize.get(0), framebufferSize.get(1));
-	}
-
-	private void updateViewport() {
-		if ( fbw == 0 || fbh == 0 )
-			return;
-
-		glViewport(0, 0, fbw, fbh);
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		glOrtho(0.0, ww, wh, 0.0, -1.0, 1.0);
-
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
+		glfwInvoke(window, windowSizefun, framebufferSizefun);
 	}
 
 	private void setScale(int scale) {
@@ -281,8 +263,9 @@ public final class Image {
 		if ( debugProc != null )
 			debugProc.release();
 		scrollfun.release();
-		framebufferSizefun.release();
 		keyfun.release();
+		framebufferSizefun.release();
+		windowSizefun.release();
 		glfwTerminate();
 		errorfun.release();
 	}

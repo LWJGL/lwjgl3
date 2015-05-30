@@ -255,12 +255,10 @@ public final class Vorbis {
 
 		private final ByteBuffer charBuffer;
 
-		private int width, height;
-
 		private boolean paused;
 
 		Renderer(final Decoder decoder, String title) {
-			glfwSetErrorCallback(errorfun = errorCallbackPrint(System.err));
+			glfwSetCallback(errorfun = errorCallbackPrint(System.err));
 			if ( glfwInit() != GL11.GL_TRUE )
 				throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -268,13 +266,18 @@ public final class Vorbis {
 			glfwWindowHint(GLFW_VISIBLE, GL_FALSE);
 			glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-			width = WIDTH;
-			height = HEIGHT;
-			window = glfwCreateWindow(width, height, title, NULL, NULL);
+			window = glfwCreateWindow(WIDTH, HEIGHT, title, NULL, NULL);
 			if ( window == NULL )
 				throw new RuntimeException("Failed to create the GLFW window");
 
-			glfwSetKeyCallback(window, keyfun = new GLFWKeyCallback() {
+			glfwSetCallback(window, framebufferSizefun = new GLFWFramebufferSizeCallback() {
+				@Override
+				public void invoke(long window, int width, int height) {
+					glViewport(0, 0, width, height);
+				}
+			});
+
+			glfwSetCallback(window, keyfun = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( action == GLFW_RELEASE )
@@ -293,23 +296,14 @@ public final class Vorbis {
 					}
 				}
 			});
-			glfwSetFramebufferSizeCallback(window, framebufferSizefun = new GLFWFramebufferSizeCallback() {
-				@Override
-				public void invoke(long window, int width, int height) {
-					Renderer.this.width = width;
-					Renderer.this.height = height;
-
-					updateViewport();
-				}
-			});
 
 			// Center window
 			GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
 
 			glfwSetWindowPos(
 				window,
-				(vidmode.getWidth() - width) / 2,
-				(vidmode.getHeight() - height) / 2
+				(vidmode.getWidth() - WIDTH) / 2,
+				(vidmode.getHeight() - HEIGHT) / 2
 			);
 
 			// Create context
@@ -318,14 +312,12 @@ public final class Vorbis {
 
 			glfwSwapInterval(1);
 			glfwShowWindow(window);
+			glfwInvoke(window, null, framebufferSizefun);
 
-			// Handle HiDPI displays
-			IntBuffer w = BufferUtils.createIntBuffer(1);
-			IntBuffer h = BufferUtils.createIntBuffer(1);
-			glfwGetFramebufferSize(window, w, h);
-
-			if ( w.get(0) != width || h.get(0) != height )
-				framebufferSizefun.invoke(window, w.get(0), h.get(0));
+			glMatrixMode(GL_PROJECTION);
+			glLoadIdentity();
+			glOrtho(0.0, WIDTH, HEIGHT, 0.0, -1.0, 1.0);
+			glMatrixMode(GL_MODELVIEW);
 
 			charBuffer = BufferUtils.createByteBuffer(256 * 270);
 
@@ -333,20 +325,6 @@ public final class Vorbis {
 			glVertexPointer(2, GL_FLOAT, 16, charBuffer);
 
 			glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
-		}
-
-		private void updateViewport() {
-			if ( width == 0 || height == 0 )
-				return;
-
-			glViewport(0, 0, width, height);
-
-			glMatrixMode(GL_PROJECTION);
-			glLoadIdentity();
-			glOrtho(0.0, WIDTH, HEIGHT, 0.0, -1.0, 1.0);
-
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
 		}
 
 		void render(float progress, float time) {
@@ -397,8 +375,8 @@ public final class Vorbis {
 
 			if ( debugProc != null )
 				debugProc.release();
-			framebufferSizefun.release();
 			keyfun.release();
+			framebufferSizefun.release();
 			glfwTerminate();
 			errorfun.release();
 		}

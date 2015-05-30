@@ -18,7 +18,6 @@ import org.lwjgl.system.libffi.Closure;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
@@ -342,8 +341,9 @@ public final class TruetypeOversample {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
+		glfwSetCallback(window, windowSizefun);
+		glfwSetCallback(window, framebufferSizefun);
 		glfwSetKeyCallback(window, keyfun);
-		glfwSetFramebufferSizeCallback(window, framebufferSizefun);
 
 		// Center window
 		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
@@ -360,13 +360,7 @@ public final class TruetypeOversample {
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);
-
-		// Handle HiDPI displays
-		IntBuffer w = BufferUtils.createIntBuffer(1);
-		IntBuffer h = BufferUtils.createIntBuffer(1);
-		glfwGetFramebufferSize(window, w, h);
-
-		framebufferSizefun.invoke(window, w.get(0), h.get(0));
+		glfwInvoke(window, windowSizefun, framebufferSizefun);
 
 		// Detect sRGB support
 		ContextCapabilities caps = GL.getCapabilities();
