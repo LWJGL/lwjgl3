@@ -15,12 +15,11 @@ import static org.lwjgl.Pointer.*;
 
 /**
  * This class provides functionality for managing native memory.
- * <p/>
- * All methods in this class will make use of {@link sun.misc.Unsafe} if it's available,
- * for performance. If Unsafe is not available, the fallback implementations make use
- * of reflection and, in the worst-case, JNI.
- * <p/>
- * Method names in this class are prefixed with {@code mem} to avoid ambiguities when used with static imports.
+ *
+ * <p>All methods in this class will make use of {@link sun.misc.Unsafe} if it's available, for performance. If Unsafe is not available, the fallback
+ * implementations make use of reflection and, in the worst-case, JNI.</p>
+ *
+ * <p>Method names in this class are prefixed with {@code mem} to avoid ambiguities when used with static imports.</p>
  */
 public final class MemoryUtil {
 
@@ -124,18 +123,19 @@ public final class MemoryUtil {
 	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
 	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer.getBuffer()); }
 
-	// --- [ Buffer address utilities ] ---
+	// --- [ Buffer address ] ---
 
 	/**
 	 * Returns the memory address at the current position of the specified buffer. This is effectively a pointer value that can be used in native function
 	 * calls.
-	 * <p/>
-	 * <b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that the
-	 * memory backing the specified buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:
+	 *
+	 * <p><b>WARNING</b>: Direct use of pointer values is inherently unsafe. In addition to the dangers of pointer arithmetic, the user must also ensure that
+	 * the memory backing the specified buffer is not deallocated before the returned address is used. For example, this code may lead to a crash:</p>
 	 * <pre><code>
-	 * nativeFunction(memAddress(memEncodeASCII("test"));</code></pre>
-	 * because a GC execution between <code>memAddress</code> and <code>nativeFunction</code> might deallocate the ByteBuffer returned by
-	 * <code>memEncodeASCII</code>. On the other hand, this code is safe on current JVMs:
+	 * nativeFunction(memAddress(memEncodeASCII("test"));
+	 * </code></pre>
+	 * <p>because a GC execution between <code>memAddress</code> and <code>nativeFunction</code> might deallocate the ByteBuffer returned by
+	 * <code>memEncodeASCII</code>. On the other hand, this code is safe on current JVMs:</p>
 	 * <pre><code>
 	 * ByteBuffer encoded = memEncodeASCII("test");
 	 * nativeFunction(memAddress(encoded));</code><pre>
@@ -200,7 +200,7 @@ public final class MemoryUtil {
 	/** PointerBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position * POINTER_SIZE); }
 
-	// --- [ Buffer address utilities - Safe ] ---
+	// --- [ Buffer address - Safe ] ---
 
 	/** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the specified buffer is null. */
 	public static long memAddressSafe(ByteBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
@@ -250,12 +250,11 @@ public final class MemoryUtil {
 	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
-	// --- [ Buffer allocation utilities ] ---
+	// --- [ Buffer allocation ] ---
 
 	/**
-	 * Creates a new direct ByteBuffer that starts at the specified memory
-	 * address and has the specified capacity. The returned ByteBuffer instance
-	 * will be set to the native ByteOrder.
+	 * Creates a new direct ByteBuffer that starts at the specified memory address and has the specified capacity. The returned ByteBuffer instance will be set
+	 * to the native ByteOrder.
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -272,8 +271,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
 	 * address. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
-	 * <p/>
-	 * This method is useful for reading ASCII and UTF8 encoded text.
+	 *
+	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
 	 *
 	 * @param address the starting memory address
 	 *
@@ -286,8 +285,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
 	 * address, up to a maximum of {@code maxLength} bytes. A single \0 character will terminate the string. The returned buffer will NOT include the \0 byte.
-	 * <p/>
-	 * This method is useful for reading ASCII and UTF8 encoded text.
+	 *
+	 * <p>This method is useful for reading ASCII and UTF8 encoded text.</p>
 	 *
 	 * @param address   the starting memory address
 	 * @param maxLength the maximum string length, in bytes
@@ -306,8 +305,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
 	 * address. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
-	 * <p/>
-	 * This method is useful for reading UTF16 encoded text.
+	 *
+	 * <p>This method is useful for reading UTF16 encoded text.</p>
 	 *
 	 * @param address the starting memory address
 	 *
@@ -320,8 +319,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new direct ByteBuffer that starts at the specified memory address and has capacity equal to the null-terminated string starting at that
 	 * address, up to a maximum of {@code maxLength} bytes. Two \0 characters will terminate the string. The returned buffer will NOT include the \0 bytes.
-	 * <p/>
-	 * This method is useful for reading UTF16 encoded text.
+	 *
+	 * <p>This method is useful for reading UTF16 encoded text.</p>
 	 *
 	 * @param address the starting memory address
 	 *
@@ -439,14 +438,13 @@ public final class MemoryUtil {
 	}
 
 	/**
-	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance.
-	 * It modifies that instance so that it starts at the specified memory address and has the specified capacity. The instance passed
-	 * to this method should not own native memory, i.e. it should not be an instance created using {@link ByteBuffer#allocateDirect}.
-	 * Using such an instance will cause an exception to be thrown. Other instances are allowed and their parent reference will be
-	 * cleared before this method returns.
-	 * <p/>
-	 * ByteBuffer instance modification might not be possible. In that case this method behaves exactly like {@link #memByteBuffer},
-	 * so the returned instance should always replace the input one.
+	 * This method is an alternative to {@link #memByteBuffer} that allows the reuse of an existing direct ByteBuffer instance. It modifies that instance so
+	 * that it starts at the specified memory address and has the specified capacity. The instance passed to this method should not own native memory, i.e. it
+	 * should not be an instance created using {@link ByteBuffer#allocateDirect}. Using such an instance will cause an exception to be thrown. Other instances
+	 * are allowed and their parent reference will be cleared before this method returns.
+	 *
+	 * <p>ByteBuffer instance modification might not be possible. In that case this method behaves exactly like {@link #memByteBuffer}, so the returned
+	 * instance should always replace the input one.</p>
 	 *
 	 * @param buffer   the ByteBuffer to modify
 	 * @param address  the starting memory address
@@ -507,6 +505,63 @@ public final class MemoryUtil {
 			return null;
 
 		return ACCESSOR.setupBuffer(buffer, address, capacity);
+	}
+
+	// --- [ Buffer slicing ] ---
+
+	/**
+	 * Slices the specified buffer. The returned buffer will have the same {@link ByteOrder} as the source buffer.
+	 *
+	 * @param buffer the buffer to slice
+	 *
+	 * @return the sliced buffer
+	 *
+	 * @see ByteBuffer#slice()
+	 */
+	public static ByteBuffer memSlice(ByteBuffer buffer) {
+		return buffer.slice().order(buffer.order());
+	}
+
+	/**
+	 * Returns a slice of the specified buffer, starting at the buffer's current position and ending at {@code buffer.position() + capacity}. The returned
+	 * buffer will have the same {@link ByteOrder} as the source buffer.
+	 *
+	 * <p>The position and limit of the source buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - buffer.position()}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static ByteBuffer memSlice(ByteBuffer buffer, int capacity) {
+		return memSlice(buffer, 0, capacity);
+	}
+
+	/**
+	 * Returns a slice of the specified buffer, starting at {@code buffer.position() + offset} and ending at {@code buffer.position() + offset + capacity}. The
+	 * returned buffer will have the same {@link ByteOrder} as the original buffer.
+	 *
+	 * <p>The position and limit of the original buffer are preserved after a call to this method.</p>
+	 *
+	 * @param buffer   the buffer to slice
+	 * @param offset   the slice offset, it must be &le; {@code buffer.remaining()}
+	 * @param capacity the slice length, it must be &le; {@code buffer.capacity() - (buffer.position() + offset)}
+	 *
+	 * @return the sliced buffer
+	 */
+	public static ByteBuffer memSlice(ByteBuffer buffer, int offset, int capacity) {
+		int position = buffer.position();
+		int limit = buffer.limit();
+
+		try {
+			buffer.position(position + offset);
+			buffer.limit(position + offset + capacity);
+
+			return memSlice(buffer);
+		} finally {
+			buffer.position(position);
+			buffer.limit(limit);
+		}
 	}
 
 	// --- [ Direct memory access ] ---
@@ -595,12 +650,12 @@ public final class MemoryUtil {
 		ACCESSOR.memPutAddress(ptr, value);
 	}
 
-	// --- [ JNI utilities ] ---
+	// --- [ JNI ] ---
 
 	/**
 	 * Returns the pointer size in bytes for the process that loaded LWJGL.
-	 * <p/>
-	 * This call is expensive, use {@link org.lwjgl.Pointer#POINTER_SIZE} instead.
+	 *
+	 * <p>This call is expensive, use {@link org.lwjgl.Pointer#POINTER_SIZE} instead.</p>
 	 *
 	 * @return the process pointer size in bytes.
 	 */
@@ -692,7 +747,7 @@ public final class MemoryUtil {
 	// Returns a new direct ByteBuffer instance
 	static native ByteBuffer nNewBuffer(long address, int capacity);
 
-	// --- [ String utilities ] ---
+	// --- [ Text codecs ] ---
 
 	/**
 	 * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated. If text is null, null is returned.
@@ -1026,8 +1081,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as an ASCII string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
@@ -1042,8 +1097,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as an ASCII string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -1056,8 +1111,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as an ASCII string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -1087,8 +1142,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-8 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
@@ -1100,8 +1155,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+length}) in {@code buffer}, as a UTF-8 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -1114,8 +1169,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+length}) in {@code buffer}, as a UTF-8 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of bytes to decode
@@ -1198,8 +1253,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+remaining()}) in {@code buffer}, as a UTF-16 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode, or null
 	 *
@@ -1214,8 +1269,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [position(), position()+(length*2)}) in {@code buffer}, as a UTF-16 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.></p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of characters to decode
@@ -1228,8 +1283,8 @@ public final class MemoryUtil {
 
 	/**
 	 * Decodes the bytes with index {@code [offset, offset+(length*2)}) in {@code buffer}, as a UTF-16 string.
-	 * <p/>
-	 * The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.
+	 *
+	 * <p>The current {@code position} and {@code limit} of the specified {@code buffer} are not affected by this operation.</p>
 	 *
 	 * @param buffer the {@link ByteBuffer} to decode
 	 * @param length the number of characters to decode
