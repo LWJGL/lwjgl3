@@ -448,6 +448,8 @@ class Struct(
 					print(
 						if ( it is StructMemberCharArray && mode === ConstructorMode.ALTER2 )
 							"CharSequence $param"
+						else if ( it.nativeType is StructType && it.nativeType.includesPointer )
+							"PointerBuffer $param"
 						else
 							"ByteBuffer $param"
 					)
@@ -581,18 +583,30 @@ class Struct(
 								println(" }")
 							}
 						} else {
-							val nestedStruct = (array.nativeType as StructType).definition
+							val nestedStructType = array.nativeType as StructType
+							val nestedStruct = nestedStructType.definition
 							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
 
-							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
-							println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field, $param.remaining());")
-							println("\t}")
+							if ( nestedStructType.includesPointer ) {
+								println("\tpublic static void ${method}Set(ByteBuffer $struct, PointerBuffer $param) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size});")
+								println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field, $param.remaining() * POINTER_SIZE);")
+								println("\t}")
 
-							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param, int index) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
-							println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field + index * ${nestedStruct.className}.SIZEOF, $param.remaining());")
-							println("\t}")
+								println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param, int index) {")
+								println("\t\tPointerBuffer.put($struct, $field + index * POINTER_SIZE, memAddress($param));")
+								println("\t}")
+							} else {
+								println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
+								println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field, $param.remaining());")
+								println("\t}")
+
+								println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param, int index) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
+								println("\t\tmemCopy(memAddress($param), memAddress($struct) + $field + index * ${nestedStruct.className}.SIZEOF, $param.remaining());")
+								println("\t}")
+							}
 						}
 					}
 					it.nativeType is CharSequenceType                                                      -> {
@@ -651,13 +665,18 @@ class Struct(
 				if ( it.nativeType is CharSequenceType ) {
 					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}(struct, $param); }")
 				} else if ( it is StructMemberArray ) {
-					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}Set(struct, $param); }")
-					if ( it is StructMemberCharArray )
-						println("\tpublic void ${setMethod}(CharSequence $param) { ${method}(struct, $param); }")
-					else if ( it.nativeType is PrimitiveType )
-						println("\tpublic void ${setMethod}(int index, ${it.nativeType.mapping.javaMethodType} $param) { ${method}(struct, index, $param); }")
-					else if ( it.nativeType is StructType )
+					if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
+						println("\tpublic void ${setMethod}(PointerBuffer $param) { ${method}Set(struct, $param); }")
 						println("\tpublic void ${setMethod}(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+					} else {
+						println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}Set(struct, $param); }")
+						if ( it is StructMemberCharArray )
+							println("\tpublic void ${setMethod}(CharSequence $param) { ${method}(struct, $param); }")
+						else if ( it.nativeType is PrimitiveType )
+							println("\tpublic void ${setMethod}(int index, ${it.nativeType.mapping.javaMethodType} $param) { ${method}(struct, index, $param); }")
+						else if ( it.nativeType is StructType )
+							println("\tpublic void ${setMethod}(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+					}
 				} else if ( it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
 					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}(struct, $param); }")
 			}
@@ -749,18 +768,30 @@ class Struct(
 								println("\t}")
 							}
 						} else {
-							val nestedStruct = (array.nativeType as StructType).definition
+							val nestedStructType = array.nativeType as StructType
+							val nestedStruct = nestedStructType.definition
 							val SIZEOF = getNestedStructSizeOf(nestedStruct, field)
 
-							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
-							println("\t\tmemCopy(memAddress($struct) + $field, memAddress($param), $param.remaining());")
-							println("\t}")
+							if ( nestedStructType.includesPointer ) {
+								println("\tpublic static void ${method}Get(ByteBuffer $struct, PointerBuffer $param) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size});")
+								println("\t\tmemCopy(memAddress($struct) + $field, memAddress($param), $param.remaining() * POINTER_SIZE);")
+								println("\t}")
 
-							println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param, int index) {")
-							println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
-							println("\t\tmemCopy(memAddress($struct) + $field + index * $SIZEOF, memAddress($param), $param.remaining());")
-							println("\t}")
+								println("\tpublic static long ${method}Get(ByteBuffer $struct, int index) {")
+								println("\t\treturn PointerBuffer.get($struct, $field + index * POINTER_SIZE);")
+								println("\t}")
+							} else {
+								println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, ${array.size} * $SIZEOF);")
+								println("\t\tmemCopy(memAddress($struct) + $field, memAddress($param), $param.remaining());")
+								println("\t}")
+
+								println("\tpublic static void ${method}Get(ByteBuffer $struct, ByteBuffer $param, int index) {")
+								println("\t\tif ( LWJGLUtil.CHECKS ) checkBufferGT($param, $SIZEOF);")
+								println("\t\tmemCopy(memAddress($struct) + $field + index * $SIZEOF, memAddress($param), $param.remaining());")
+								println("\t}")
+							}
 						}
 					}
 					it.nativeType is CharSequenceType                                                      -> {
@@ -830,13 +861,18 @@ class Struct(
 						val array: StructMemberArray = it
 						val param = it.name.toParam(field)
 
-						println("\tpublic void ${getMethod}(ByteBuffer $param) { ${method}Get(struct, $param); }")
-						if ( array is StructMemberCharArray ) {
-							println("\tpublic String ${getMethod}String() { return ${method}String(struct); }")
-							if ( array.nullTerminated )
-								println("\tpublic String ${getMethod}String(int $BUFFER_LEN_PARAM) { return ${method}String(struct, $BUFFER_LEN_PARAM); }")
-						} else if ( array.nativeType is StructType ) {
-							println("\tpublic void ${getMethod}(ByteBuffer $param, int index) { ${method}Get(struct, $param, index); }")
+						if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
+							println("\tpublic void ${getMethod}(PointerBuffer $param) { ${method}Get(struct, $param); }")
+							println("\tpublic long ${getMethod}(int index) { return ${method}Get(struct, index); }")
+						} else {
+							println("\tpublic void ${getMethod}(ByteBuffer $param) { ${method}Get(struct, $param); }")
+							if ( array is StructMemberCharArray ) {
+								println("\tpublic String ${getMethod}String() { return ${method}String(struct); }")
+								if ( array.nullTerminated )
+									println("\tpublic String ${getMethod}String(int $BUFFER_LEN_PARAM) { return ${method}String(struct, $BUFFER_LEN_PARAM); }")
+							} else if ( array.nativeType is StructType ) {
+								println("\tpublic void ${getMethod}(ByteBuffer $param, int index) { ${method}Get(struct, $param, index); }")
+							}
 						}
 					}
 					it.nativeType is CharSequenceType                                                      -> {
