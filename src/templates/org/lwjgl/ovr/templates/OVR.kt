@@ -319,7 +319,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    """,
 
 		int.IN("index", "a value in the range of {@code [0 .. ovrHmd_Detect()-1]]}."),
-	    ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+	    Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
 
 	    returnDoc = "an {@code ovrResult} indicating success or failure"
 	)
@@ -333,7 +333,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		""",
 
 		ovrHmdType.IN("type", "indicates the HMD type to emulate", HMDType),
-		ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+		Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
 
 		returnDoc = "an {@code ovrResult} indicating success or failure"
 	)
