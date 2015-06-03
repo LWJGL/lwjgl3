@@ -272,7 +272,7 @@ class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
+		if ( (has(DependsOn) || has(ignoreMissing) || !(nativeClass.functionProvider?.hasCurrentCapabilities ?: true)) && !hasUnsafeMethod )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -492,19 +492,22 @@ class NativeClassFunction(
 
 		// Basic checks
 		val checks = ArrayList<String>(4)
-		checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
+		if ( has(DependsOn) || has(ignoreMissing) )
+			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 		parameters forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
 				checks add "checkPointer(${it.name});"
 		}
 
-		println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
-		checks.forEach {
-			print("\t\t\t")
-			println(it)
+		if ( checks.isNotEmpty() ) {
+			println("\t\tif ( LWJGLUtil.CHECKS )${if ( checks.size() == 1) "" else " {" }")
+			checks.forEach {
+				print("\t\t\t")
+				println(it)
+			}
+			if ( 1 < checks.size() )
+				println("\t\t}")
 		}
-		if ( 1 < checks.size() )
-			println("\t\t}")
 
 		// Native method call
 		print("\t\t")

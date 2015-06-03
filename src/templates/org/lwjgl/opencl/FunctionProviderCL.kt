@@ -24,7 +24,7 @@ private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPE
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the currently loaded ICD. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn CL.getICD().__${nativeClass.className};")
+		println("\t\treturn checkFunctionality(CL.getICD().__${nativeClass.className});")
 		println("\t}")
 
 		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")

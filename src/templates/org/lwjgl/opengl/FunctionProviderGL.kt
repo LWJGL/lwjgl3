@@ -44,7 +44,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn GL.getCapabilities().__${nativeClass.className};")
+		println("\t\treturn checkFunctionality(GL.getCapabilities().__${nativeClass.className});")
 		println("\t}")
 
 		val functions = nativeClass.functions

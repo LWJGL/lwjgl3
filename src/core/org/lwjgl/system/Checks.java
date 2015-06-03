@@ -14,15 +14,28 @@ import java.nio.IntBuffer;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * A class to check buffer boundaries in general. If there is insufficient space
- * in the buffer when the call is made then a buffer overflow would otherwise
+ * A class to check buffer boundaries in general. If there is insufficient space in the buffer when the call is made then a buffer overflow would otherwise
  * occur and cause unexpected behaviour, a crash, or worse, a security risk.
- * <p/>
- * Internal class, don't use.
+ *
+ * <p>Internal class, don't use.</p>
  */
 public final class Checks {
 
 	private Checks() {
+	}
+
+	/**
+	 * Checks if the specified function provider instance is {@code null}.
+	 *
+	 * @param functionProvider the functionality to check
+	 *
+	 * @return the function provider instance
+	 */
+	public static <T> T checkFunctionality(T functionProvider) {
+		if ( functionProvider == null )
+			throw new IllegalStateException("This functionality is not available.");
+
+		return functionProvider;
 	}
 
 	/**
@@ -49,7 +62,7 @@ public final class Checks {
 	 */
 	public static long checkFunctionAddress(long pointer) {
 		if ( pointer == NULL )
-			throw new IllegalStateException("Function is not supported");
+			throw new IllegalStateException("This function is not available.");
 
 		return pointer;
 	}

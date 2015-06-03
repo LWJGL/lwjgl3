@@ -38,7 +38,7 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 
 		println("\t/** Returns the {@link ${nativeClass.className}} instance for the current context. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
-		println("\t\treturn ALC.getCapabilities().__${nativeClass.className};")
+		println("\t\treturn checkFunctionality(ALC.getCapabilities().__${nativeClass.className});")
 		println("\t}")
 
 		val capName = nativeClass.capName("ALC")
