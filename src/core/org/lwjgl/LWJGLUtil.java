@@ -310,9 +310,13 @@ public final class LWJGLUtil {
 	}
 
 	/**
-	 * Loads a native library using the {@link System#load} and {@link System#loadLibrary}.
+	 * Loads a native library using {@link System}.
 	 *
-	 * @param name the library name, without an OS specific prefix or file extension (e.g. GL, not libGL.so)
+	 * <p>If {@code name} is an absolute path or {@code org.lwjgl.librarypath} is set, {@link System#load} will be used. Otherwise, {@link System#loadLibrary}
+	 * will be used.</p>
+	 *
+	 * @param name the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
+	 *             libGL.so)
 	 *
 	 * @throws UnsatisfiedLinkError if the library could not be loaded
 	 */
@@ -322,20 +326,15 @@ public final class LWJGLUtil {
 			return;
 		}
 
-		String libName = mapLibraryName(name);
-
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) )
+			if ( loadLibrary(LOADER_SYSTEM, override, mapLibraryName(name), false) )
 				return;
 		}
 
 		// Then java.library.path
-		if ( loadLibrary(LOADER_SYSTEM, System.getProperty("java.library.path"), libName, false) )
-			return;
-
-		throw new UnsatisfiedLinkError("Failed to load the native library: " + name);
+		System.loadLibrary(name);
 	}
 
 	/**
@@ -386,21 +385,21 @@ public final class LWJGLUtil {
 	}
 
 	private interface LibraryLoader<T> {
-		T load(String library);
+		T load(File library);
 	}
 
 	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
 		@Override
-		public Boolean load(String library) {
-			System.load(new File(library).getAbsolutePath());
+		public Boolean load(File library) {
+			System.load(library.getAbsolutePath());
 			return true;
 		}
 	};
 
 	private static final LibraryLoader<DynamicLinkLibrary> LOADER_NATIVE = new LibraryLoader<DynamicLinkLibrary>() {
 		@Override
-		public DynamicLinkLibrary load(String library) {
-			return apiCreateLibrary(library);
+		public DynamicLinkLibrary load(File library) {
+			return apiCreateLibrary(library.getPath());
 		}
 	};
 
@@ -408,7 +407,7 @@ public final class LWJGLUtil {
 		for ( String root : Pattern.compile(File.pathSeparator).split(path) ) {
 			File f = new File(root + File.separator + libName);
 			if ( f.exists() )
-				return loader.load(f.getPath());
+				return loader.load(f);
 		}
 
 		return onFailure;
