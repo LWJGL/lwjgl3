@@ -22,3 +22,17 @@ val GLXPixmap = PointerType("GLXPixmap", includesPointer = true)
 val GLXContextID = typedef(XID, "GLXContextID")
 
 val GLXPbuffer = PointerType("GLXPbuffer", includesPointer = true)
+
+fun config() {
+	struct(OPENGL_PACKAGE, "GLXStereoNotifyEventEXT", "glx") {
+		nativeImport ("<GL/glx.h>")
+		int.member("type")
+		unsigned_long.member("serial")
+		Bool.member("send_event")
+		Display_p.member("display")
+		int.member("extension")
+		int.member("evtype")
+		GLXDrawable.member("window")
+		Bool.member("stereo_tree")
+	}
+}

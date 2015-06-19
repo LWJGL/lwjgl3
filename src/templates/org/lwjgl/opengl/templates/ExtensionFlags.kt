@@ -578,6 +578,29 @@ layout(early_fragment_tests) in;""")}
 		"""
 }
 
+val EXT_shader_image_load_formatted = EXT_FLAG.nativeClassGL("EXT_shader_image_load_formatted", postfix = EXT) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		${ARB_shader_image_load_store.link} (and OpenGL 4.2) added support for random access load and store from/to texture images, but due to hardware
+		limitations, loads were required to declare the image format in the shader source. This extension relaxes that requirement, and the return values from
+		{@code imageLoad} can be format-converted based on the format of the image binding.
+		"""
+}
+
+val EXT_shader_integer_mix = "EXTShaderIntegerMix".nativeClassGL("EXT_shader_integer_mix", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		GLSL 1.30 (and GLSL ES 3.00) expanded the mix() built-in function to operate on a boolean third argument that does not interpolate but selects. This
+		extension extends mix() to select between int, uint, and bool components.
+
+		Requires ${GL30.core}.
+		"""
+}
+
 val EXT_shadow_funcs = EXT_FLAG.nativeClassGL("EXT_shadow_funcs", postfix = EXT) {
 	documentation =
 		"""

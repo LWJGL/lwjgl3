@@ -10,7 +10,7 @@ import org.lwjgl.opengl.*
 val WGL_EXT_create_context_es_profile = "WGLEXTCreateContextESProfile".nativeClassWGL("WGL_EXT_create_context_es_profile", EXT) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
+		Native bindings to the ${registryLink("EXT", "wgl_create_context_es2_profile")} extension.
 
 		This extension allows creating an OpenGL ES context.
 

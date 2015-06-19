@@ -279,6 +279,87 @@ val EXT_blend_subtract = "EXTBlendSubtract".nativeClassGL("EXT_blend_subtract", 
 	)
 }
 
+val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix = EXT) {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension defines a mechanism for OpenGL and OpenGL ES applications to label their objects (textures, buffers, shaders, etc.) with a descriptive
+		string.
+
+		When profiling or debugging such an application within a debugger or profiler it is difficult to identify resources from their object names. Even when
+		the resource itself is viewed it can be problematic to differentiate between similar resources. Attaching a label to an object helps obviate this
+		difficulty.
+
+		The intended purpose of this is purely to improve the user experience within OpenGL and OpenGL ES development tools.
+		"""
+
+	GLvoid(
+		"LabelObjectEXT",
+		"",
+
+		GLenum.IN("type", ""),
+		GLuint.IN("object", ""),
+		AutoSize("label") _ GLsizei.IN("length", ""),
+		const _ GLcharUTF8_p.IN("label", "")
+	)
+
+	GLvoid(
+		"GetObjectLabelEXT",
+		"",
+
+		GLenum.IN("type", ""),
+		GLuint.IN("object", ""),
+		AutoSize("label") _ GLsizei.IN("bufSize", ""),
+		Check(1) _ GLsizei_p.OUT("length", ""),
+		Return("length") _ GLcharUTF8_p.OUT("label", "")
+	)
+}
+
+val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfix = EXT) {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension defines a mechanism for OpenGL and OpenGL ES applications to annotate their command stream with markers for discrete events and groups
+		of commands using descriptive text markers.
+
+		When profiling or debugging such an application within a debugger or profiler it is difficult to relate the commands within the command stream to the
+		elements of the scene or parts of the program code to which they correspond. Markers help obviate this by allowing applications to specify this link.
+
+		The intended purpose of this is purely to improve the user experience within OpenGL and OpenGL ES development tools.
+		"""
+
+	GLvoid(
+		"InsertEventMarkerEXT",
+		"",
+
+		AutoSize("marker") _ GLsizei.IN("length", ""),
+		const _ GLcharUTF8_p.IN("marker", "")
+	)
+
+	GLvoid(
+		"PushGroupMarkerEXT",
+		"",
+
+		AutoSize("marker") _ GLsizei.IN("length", ""),
+		const _ GLcharUTF8_p.IN("marker", "")
+	)
+
+	GLvoid(
+		"PopGroupMarkerEXT",
+		""
+	)
+}
+
 val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds_test", postfix = EXT) {
 	nativeImport (
 		"OpenGL.h"
@@ -1033,5 +1114,93 @@ val EXT_texture_sRGB = "EXTTextureSRGB".nativeClassGL("EXT_texture_sRGB", postfi
 		"COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT" _ 0x8C4D,
 		"COMPRESSED_SRGB_ALPHA_S3TC_DXT3_EXT" _ 0x8C4E,
 		"COMPRESSED_SRGB_ALPHA_S3TC_DXT5_EXT" _ 0x8C4F
+	)
+}
+
+val EXT_texture_sRGB_decode = "EXTTextureSRGBDecode".nativeClassGL("EXT_texture_sRGB_decode", postfix = EXT) {
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		The EXT_texture_sRGB extension (promoted to core in OpenGL 2.1) provides a texture format stored in the sRGB color space. Sampling one of these
+		textures will always return the color value decoded into a linear color space. However, an application may wish to sample and retrieve the undecoded
+		sRGB data from the texture and manipulate that directly.
+
+		This extension adds a Texture Parameter and Sampler Object parameter to allow sRGB textures to be read directly, without decoding.
+
+		The new parameter, #TEXTURE_SRGB_DECODE_EXT controls whether the decoding happens at sample time. It only applies to textures with an internal format
+		that is sRGB and is ignored for all other textures. This value defaults to #DECODE_EXT, which indicates the texture should be decoded to linear color
+		space.
+
+		Requires ${GL21.core} or ${EXT_texture_sRGB.link}.
+		"""
+
+	IntConstant(
+		"""
+		Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, TexParameterIiv, TexParameterIuiv,
+		TexParameterIivEXT, TexParameterIuivEXT, TextureParameterfEXT, TextureParameterfvEXT, TextureParameteriEXT, TextureParameterivEXT,
+		TextureParameterIivEXT, TextureParameterIuivEXT, MultiTexParameterfEXT, MultiTexParameterfvEXT, MultiTexParameteriEXT, MultiTexParameterivEXT,
+		MultiTexParameterIivEXT, MultiTexParameterIuivEXT, GetTexParameterfv, GetTexParameteriv, GetTexParameterIiv, GetTexParameterIuiv, GetTexParameterIivEXT,
+		GetTexParameterIuivEXT, GetTextureParameterfEXT, GetTextureParameterfvEXT, GetTextureParameteriEXT, GetTextureParameterivEXT, GetTextureParameterIivEXT,
+		GetTextureParameterIuivEXT, GetMultiTexParameterfEXT, GetMultiTexParameterfvEXT, GetMultiTexParameteriEXT, GetMultiTexParameterivEXT,
+		GetMultiTexParameterIivEXT, GetMultiTexParameterIuivEXT, SamplerParameteri, SamplerParameterf, SamplerParameteriv, SamplerParameterfv,
+		SamplerParameterIiv, SamplerParameterIuiv, GetSamplerParameteriv, GetSamplerParameterfv, GetSamplerParameterIiv, and GetSamplerParameterIuiv.
+		""",
+
+		"TEXTURE_SRGB_DECODE_EXT" _ 0x8A48
+	)
+
+	IntConstant(
+		"""
+		Accepted by the {@code param} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, TexParameterIiv, TexParameterIuiv,
+		TexParameterIivEXT, TexParameterIuivEXT, TextureParameterfEXT, TextureParameterfvEXT, TextureParameteriEXT, TextureParameterivEXT,
+		TextureParameterIivEXT, TextureParameterIuivEXT, MultiTexParameterfEXT, MultiTexParameterfvEXT, MultiTexParameteriEXT, MultiTexParameterivEXT,
+		MultiTexParameterIivEXT, MultiTexParameterIuivEXT, SamplerParameteri, SamplerParameterf, SamplerParameteriv, SamplerParameterfv, SamplerParameterIiv,
+		and SamplerParameterIuiv.
+		""",
+
+		"DECODE_EXT" _ 0x8A49,
+		"SKIP_DECODE_EXT" _ 0x8A4A
+	)
+}
+
+val EXT_x11_sync_object = "EXTX11SyncObject".nativeClassGL("EXT_x11_sync_object", postfix = EXT) {
+	nativeImport (
+		"OpenGL.h"
+	)
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		Synchronization objects added the ability to better coordinate operations between multiple GL command streams. However, it is desirable to have the
+		same level of coordination between GL command streams and external rendering APIs. This extension introduces two new concepts to build upon the
+		synchronization infrastructure provided by ${ARB_sync.link}:
+		${ol(
+			"A means to import an X Synchronization Fence object into the GL and use it as a sync object.",
+			"The concept of a reusable sync object."
+		)}
+		The latter is necessary because the import operation is expensive and performing it every time a synchronization point was reached would make the
+		synchronization prohibitively slow.
+
+		This extension stops short of allowing the GL to change the state of imported/reusable sync objects, but does not add any language that would prohibit
+		such functionality from being added in a subsequent extension.
+
+		Requires ${GL32.core} or ${ARB_sync.link}.
+		"""
+
+	IntConstant(
+		"Accepted by the {@code external_sync_type} parameter of ImportSyncEXT.",
+
+		"SYNC_X11_FENCE_EXT" _ 0x90E1
+	)
+
+	GLsync(
+		"ImportSyncEXT",
+		"Creates a GL sync object of the type {@code external_sync_type} based on the object referred to by {@code external_sync}.",
+
+		GLenum.IN("external_sync_type", "the external sync object type", "#SYNC_X11_FENCE_EXT"),
+		GLintptr.IN("external_sync", "the external sync object. Must be the XID of a valid X11 Synchronization Fence object"),
+		GLbitfield.IN("flags", "Must be 0.")
 	)
 }
