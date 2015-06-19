@@ -25,7 +25,7 @@ val GLXPbuffer = PointerType("GLXPbuffer", includesPointer = true)
 
 fun config() {
 	struct(OPENGL_PACKAGE, "GLXStereoNotifyEventEXT", "glx") {
-		nativeImport ("<GL/glx.h>")
+		nativeImport ("<GL/glx.h>", "GLX.h")
 		int.member("type")
 		unsigned_long.member("serial")
 		Bool.member("send_event")

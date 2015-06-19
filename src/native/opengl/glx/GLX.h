@@ -8,6 +8,7 @@
 #ifndef __LWJGL_GLX_H__
 #define __LWJGL_GLX_H__
 
+#ifndef GLX_EXT_stereo_tree
 typedef struct {
 	int type;
 	unsigned long serial;
@@ -18,5 +19,6 @@ typedef struct {
 	GLXDrawable window;
 	Bool stereo_tree;
 } GLXStereoNotifyEventEXT;
+#endif
 
 #endif
