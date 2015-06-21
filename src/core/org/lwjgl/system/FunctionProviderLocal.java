@@ -27,12 +27,10 @@ public interface FunctionProviderLocal extends FunctionProvider {
 	/** A {@code FunctionProviderLocal} implementation that always returns {@code NULL}. */
 	FunctionProviderLocal DUMMY = new Default() {
 
-		@Override
 		public long getFunctionAddress(CharSequence functionName) {
 			return NULL;
 		}
 
-		@Override
 		public long getFunctionAddress(long handle, CharSequence functionName) {
 			return NULL;
 		}

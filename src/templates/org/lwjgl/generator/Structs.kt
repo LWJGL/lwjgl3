@@ -221,7 +221,6 @@ class Struct(
 		return struct;
 	}
 
-	@Override
 	public long getPointer() {
 		return memAddress(struct);
 	}

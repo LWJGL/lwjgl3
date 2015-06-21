@@ -16,7 +16,6 @@ public class GLContextMacOSX extends GLContext {
 		this.handle = handle;
 	}
 
-	@Override
 	public long getPointer() {
 		return handle;
 	}

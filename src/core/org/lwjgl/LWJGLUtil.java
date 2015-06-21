@@ -389,7 +389,6 @@ public final class LWJGLUtil {
 	}
 
 	private static final LibraryLoader<Boolean> LOADER_SYSTEM = new LibraryLoader<Boolean>() {
-		@Override
 		public Boolean load(File library) {
 			System.load(library.getAbsolutePath());
 			return true;
@@ -397,7 +396,6 @@ public final class LWJGLUtil {
 	};
 
 	private static final LibraryLoader<DynamicLinkLibrary> LOADER_NATIVE = new LibraryLoader<DynamicLinkLibrary>() {
-		@Override
 		public DynamicLinkLibrary load(File library) {
 			return apiCreateLibrary(library.getPath());
 		}

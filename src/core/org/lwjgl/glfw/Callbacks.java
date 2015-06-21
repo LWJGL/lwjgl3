@@ -128,7 +128,6 @@ public final class Callbacks {
 	public static GLFWErrorCallback errorCallbackPrint(final PrintStream stream) {
 		return new GLFWErrorCallback() {
 			private final Map<Integer, String> ERROR_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
-				@Override
 				public boolean accept(Field field, int value) {
 					return 0x10000 < value && value < 0x20000;
 				}

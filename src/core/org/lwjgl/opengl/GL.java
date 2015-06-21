@@ -75,7 +75,6 @@ public final class GL {
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
 			abstract long getExtensionAddress(long name);
 
-			@Override
 			public long getFunctionAddress(CharSequence functionName) {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);

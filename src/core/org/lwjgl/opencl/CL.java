@@ -118,7 +118,6 @@ public final class CL {
 				return 1 < version.major || 2 <= version.minor;
 			}
 
-			@Override
 			public long getFunctionAddress(CharSequence functionName) {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);
@@ -133,7 +132,6 @@ public final class CL {
 				return address;
 			}
 
-			@Override
 			public long getFunctionAddress(long handle, CharSequence functionName) {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);

@@ -902,7 +902,6 @@ public class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return A negative integer, zero, or a positive integer as this buffer
 	 * is less than, equal to, or greater than the specified buffer
 	 */
-	@Override
 	public int compareTo(PointerBuffer that) {
 		int n = this.position() + Math.min(this.remaining(), that.remaining());
 		for ( int i = this.position(), j = that.position(); i < n; i++, j++ ) {

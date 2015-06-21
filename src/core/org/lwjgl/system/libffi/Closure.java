@@ -147,7 +147,6 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			registry.register(this);
 	}
 
-	@Override
 	public long getPointer() {
 		if ( isDestroyed() )
 			throw new IllegalStateException("This closure instance has been destroyed.");

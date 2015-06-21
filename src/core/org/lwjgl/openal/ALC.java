@@ -65,7 +65,6 @@ public final class ALC {
 				}
 			}
 
-			@Override
 			public long getFunctionAddress(CharSequence functionName) {
 				long address = OPENAL.getFunctionAddress(functionName);
 				if ( address == NULL )
@@ -74,7 +73,6 @@ public final class ALC {
 				return address;
 			}
 
-			@Override
 			public long getFunctionAddress(long handle, CharSequence functionName) {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);

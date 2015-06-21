@@ -31,7 +31,6 @@ public final class Sys {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
 
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			@Override
 			public Object run() {
 				LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
 				return null;

@@ -31,17 +31,14 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 		this.handle = handle;
 	}
 
-	@Override
 	public long getPointer() {
 		return handle;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}
 
-	@Override
 	public long getFunctionAddress(CharSequence name) {
 		return dlsym(handle, name);
 	}

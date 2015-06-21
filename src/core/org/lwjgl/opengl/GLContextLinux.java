@@ -32,7 +32,6 @@ public class GLContextLinux extends GLContext {
 			makeCurrentAction = null;
 	}
 
-	@Override
 	public long getPointer() {
 		return ctx;
 	}
@@ -89,7 +88,6 @@ public class GLContextLinux extends GLContext {
 
 	private static class MakeCurrentActionSGI implements MakeCurrentAction {
 
-		@Override
 		public int invoke(long display, long draw, long read, long ctx) {
 			return glXMakeCurrentReadSGI(display, draw, read, ctx);
 		}
@@ -97,7 +95,6 @@ public class GLContextLinux extends GLContext {
 
 	private static class MakeCurrentActionARB implements MakeCurrentAction {
 
-		@Override
 		public int invoke(long display, long draw, long read, long ctx) {
 			return glXMakeContextCurrent(display, draw, read, ctx);
 		}

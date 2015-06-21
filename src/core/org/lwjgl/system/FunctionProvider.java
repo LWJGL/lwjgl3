@@ -25,7 +25,6 @@ public interface FunctionProvider extends Retainable {
 	/** A {@code FunctionProvider} implementation that always returns {@code NULL}. */
 	FunctionProvider DUMMY = new Default() {
 
-		@Override
 		public long getFunctionAddress(CharSequence functionName) {
 			return NULL;
 		}

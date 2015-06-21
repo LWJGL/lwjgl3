@@ -29,7 +29,6 @@ import static org.testng.Assert.*;
 public class CLTest {
 
 	private static final Filter<CLPlatform> CL11_FILTER = new Filter<CLPlatform>() {
-		@Override
 		public boolean accept(CLPlatform platform) {
 			return platform.getCapabilities().OpenCL11;
 
@@ -37,7 +36,6 @@ public class CLTest {
 	};
 
 	private static final Filter<CLPlatform> CL12_FILTER = new Filter<CLPlatform>() {
-		@Override
 		public boolean accept(CLPlatform platform) {
 			return platform.getCapabilities().OpenCL12;
 
@@ -111,7 +109,6 @@ public class CLTest {
 
 	public void testContext() {
 		contextTest(new ContextTest() {
-			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
@@ -136,7 +133,6 @@ public class CLTest {
 
 	public void testNativeKernel() {
 		contextTest(new ContextTest() {
-			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				if ( (clGetDeviceInfoLong(device.getPointer(), CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
 					return;
@@ -235,7 +231,6 @@ public class CLTest {
 
 	public void testMemObjectDestructor() {
 		contextTest(CL11_FILTER, new ContextTest() {
-			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
@@ -284,7 +279,6 @@ public class CLTest {
 
 	public void testEventCallback() {
 		contextTest(CL11_FILTER, new ContextTest() {
-			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
@@ -329,7 +323,6 @@ public class CLTest {
 
 	public void testSubBuffer() {
 		contextTest(CL11_FILTER, new ContextTest() {
-			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 

@@ -179,7 +179,6 @@ public class Mandelbrot {
 		try {
 			// Find devices with GL sharing support
 			Filter<CLDevice> glSharingFilter = new Filter<CLDevice>() {
-				@Override
 				public boolean accept(CLDevice device) {
 					CLCapabilities caps = device.getCapabilities();
 					return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
@@ -323,7 +322,7 @@ public class Mandelbrot {
 			                    "}");
 			glCompileShader(vsh);
 			String log = glGetShaderInfoLog(vsh, glGetShaderi(vsh, GL_INFO_LOG_LENGTH));
-			if ( !log.isEmpty() )
+			if ( log.length() > 0 )
 				System.err.println("VERTEX SHADER LOG: " + log);
 
 			fsh = glCreateShader(GL_FRAGMENT_SHADER);
@@ -340,7 +339,7 @@ public class Mandelbrot {
 			                    "}");
 			glCompileShader(fsh);
 			log = glGetShaderInfoLog(fsh, glGetShaderi(fsh, GL_INFO_LOG_LENGTH));
-			if ( !log.isEmpty() )
+			if ( log.length() > 0 )
 				System.err.println("FRAGMENT SHADER LOG: " + log);
 
 			glProgram = glCreateProgram();
@@ -348,7 +347,7 @@ public class Mandelbrot {
 			glAttachShader(glProgram, fsh);
 			glLinkProgram(glProgram);
 			log = glGetProgramInfoLog(glProgram, glGetProgrami(glProgram, GL_INFO_LOG_LENGTH));
-			if ( !log.isEmpty() )
+			if ( log.length() > 0 )
 				System.err.println("PROGRAM LOG: " + log);
 
 			int posIN = glGetAttribLocation(glProgram, "posIN");
@@ -386,7 +385,6 @@ public class Mandelbrot {
 					return;
 
 				events.add(new Runnable() {
-					@Override
 					public void run() {
 						Mandelbrot.this.ww = width;
 						Mandelbrot.this.wh = height;
@@ -404,7 +402,6 @@ public class Mandelbrot {
 					return;
 
 				events.add(new Runnable() {
-					@Override
 					public void run() {
 						Mandelbrot.this.fbw = width;
 						Mandelbrot.this.fbh = height;
@@ -434,7 +431,6 @@ public class Mandelbrot {
 						break;
 					case GLFW_KEY_D:
 						events.offer(new Runnable() {
-							@Override
 							public void run() {
 								doublePrecision = !doublePrecision;
 								log("DOUBLE PRECISION IS NOW: " + (doublePrecision ? "ON" : "OFF"));
@@ -444,7 +440,6 @@ public class Mandelbrot {
 						break;
 					case GLFW_KEY_HOME:
 						events.offer(new Runnable() {
-							@Override
 							public void run() {
 								offsetX = -0.5;
 								offsetY = 0.0;
@@ -565,7 +560,6 @@ public class Mandelbrot {
 
 	private void cleanup() {
 		CLCleaner memObjCleaner = new CLCleaner() {
-			@Override
 			public int release(long object) {
 				return clReleaseMemObject(object);
 			}
@@ -575,28 +569,24 @@ public class Mandelbrot {
 		release(clColorMap, memObjCleaner);
 
 		release(clKernel, new CLCleaner() {
-			@Override
 			public int release(long object) {
 				return clReleaseKernel(object);
 			}
 		});
 
 		release(clProgram, new CLCleaner() {
-			@Override
 			public int release(long object) {
 				return clReleaseProgram(object);
 			}
 		});
 
 		release(clQueue, new CLCleaner() {
-			@Override
 			public int release(long object) {
 				return clReleaseCommandQueue(object);
 			}
 		});
 
 		release(clContext, new CLCleaner() {
-			@Override
 			public int release(long object) {
 				return clReleaseContext(object);
 			}
@@ -763,7 +753,7 @@ public class Mandelbrot {
 					clGetProgramBuildInfoInt(program, cl_device_id, CL_PROGRAM_BUILD_STATUS) == CL_SUCCESS ? "successfully" : "unsuccessfully"
 				);
 				String log = clGetProgramBuildInfoStringASCII(program, cl_device_id, CL_PROGRAM_BUILD_LOG);
-				if ( !log.isEmpty() )
+				if ( log.length() > 0 )
 					System.err.printf("BUILD LOG:\n----\n%s\n-----\n", log);
 
 				latch.countDown();

@@ -15,7 +15,6 @@ public abstract class MacOSXLibrary extends DynamicLinkLibrary.Default {
 		this.name = name;
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}

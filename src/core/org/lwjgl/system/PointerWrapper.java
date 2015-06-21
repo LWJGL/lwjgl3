@@ -21,7 +21,6 @@ public abstract class PointerWrapper implements Pointer {
 		this.pointer = pointer;
 	}
 
-	@Override
 	public final long getPointer() {
 		return pointer;
 	}

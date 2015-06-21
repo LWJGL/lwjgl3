@@ -28,7 +28,6 @@ public interface Retainable {
 
 		private int refCount = 1;
 
-		@Override
 		public void retain() {
 			if ( LWJGLUtil.DEBUG && refCount == 0 )
 				throw new IllegalStateException("This object has been released already.");
@@ -36,7 +35,6 @@ public interface Retainable {
 			refCount++;
 		}
 
-		@Override
 		public void release() {
 			if ( LWJGLUtil.DEBUG && refCount == 0 )
 				throw new IllegalStateException("This object has been released already.");

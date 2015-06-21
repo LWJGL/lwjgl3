@@ -76,7 +76,7 @@ public class OpenALInfo {
 		System.out.println("ALC extensions:");
 		String[] extensions = alcGetString(alContext.getDevice().getPointer(), ALC_EXTENSIONS).split(" ");
 		for ( String extension : extensions ) {
-			if ( extension.trim().isEmpty() ) {
+			if ( extension.trim().length() == 0 ) {
 				continue;
 			}
 			System.out.println("    " + extension);
@@ -91,7 +91,7 @@ public class OpenALInfo {
 		System.out.println("AL extensions:");
 		String[] extensions = alGetString(AL_EXTENSIONS).split(" ");
 		for ( String extension : extensions ) {
-			if ( extension.trim().isEmpty() ) {
+			if ( extension.trim().length() == 0 ) {
 				continue;
 			}
 			System.out.println("    " + extension);
