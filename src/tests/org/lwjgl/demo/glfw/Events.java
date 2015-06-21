@@ -147,7 +147,6 @@ public final class Events {
 
 		glfwSetKeyCallback(window, new GLFWKeyCallback() {
 			private final Map<Integer, String> KEY_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
-				@Override
 				public boolean accept(Field field, int value) {
 					return field.getName().startsWith("GLFW_KEY_");
 				}
@@ -236,7 +235,6 @@ public final class Events {
 				printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
 
 				dropCallbackNamesApply(count, names, new DropConsumerString() {
-					@Override
 					public void accept(int index, String name) {
 						System.out.format("\t%d: %s%n", index + 1, name);
 					}

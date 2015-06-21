@@ -109,7 +109,6 @@ public final class CLGLInteropDemo {
 		final String vendorGL = getOpenGLVendor();
 
 		final Filter<CLPlatform> platformFilter = new Filter<CLPlatform>() {
-			@Override
 			public boolean accept(CLPlatform platform) {
 				CLCapabilities caps = platform.getCapabilities();
 				return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
@@ -118,7 +117,6 @@ public final class CLGLInteropDemo {
 
 		// Try to match GL_VENDOR and CL_PLATFORM_VENDOR
 		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
-			@Override
 			public boolean accept(CLPlatform platform) {
 				return platformFilter.accept(platform) && clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR).contains(vendorGL);
 			}

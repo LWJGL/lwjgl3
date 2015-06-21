@@ -26,7 +26,6 @@ public class GLContextWindows extends GLContext {
 		this.hglrc = hglrc;
 	}
 
-	@Override
 	public long getPointer() {
 		return hglrc;
 	}

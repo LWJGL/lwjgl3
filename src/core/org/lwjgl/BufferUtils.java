@@ -54,7 +54,6 @@ public final class BufferUtils {
 
 		if ( "page".equals(alignment) )
 			return new BufferAllocator() {
-				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferPage(capacity);
 				}
@@ -62,7 +61,6 @@ public final class BufferUtils {
 
 		if ( "cache-line".equals(alignment) )
 			return new BufferAllocator() {
-				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createAlignedByteBufferCacheLine(capacity);
 				}
@@ -70,7 +68,6 @@ public final class BufferUtils {
 
 		if ( "default".equals(alignment) )
 			return new BufferAllocator() {
-				@Override
 				public ByteBuffer malloc(int capacity) {
 					return createUnalignedByteBuffer(capacity);
 				}
@@ -80,7 +77,6 @@ public final class BufferUtils {
 			final int bytes = Integer.parseInt(alignment);
 			if ( mathIsPoT(bytes) && 8 < bytes )
 				return new BufferAllocator() {
-					@Override
 					public ByteBuffer malloc(int capacity) {
 						return createAlignedByteBuffer(capacity, bytes);
 					}

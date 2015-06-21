@@ -35,7 +35,6 @@ public final class AL {
 			// the OpenAL native library.
 			private final long alGetProcAddress = ALC.getFunctionProvider().getFunctionAddress("alGetProcAddress");
 
-			@Override
 			public long getFunctionAddress(CharSequence functionName) {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);

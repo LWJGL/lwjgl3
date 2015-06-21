@@ -8,7 +8,6 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 
 import java.nio.ByteBuffer;
-import java.util.Arrays;
 
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MathUtil.*;
@@ -36,6 +35,13 @@ public class APIBuffer {
 		address = memAddress(buffer);
 	}
 
+    private static int[] copyOf(int[] original, int newLength) {
+        int[] copy = new int[newLength];
+        System.arraycopy(original, 0, copy, 0,
+                         Math.min(original.length, newLength));
+        return copy;
+    }
+
 	/** Resets the parameter offset to 0. */
 	public APIBuffer reset() {
 		offset = 0;
@@ -45,7 +51,7 @@ public class APIBuffer {
 	/** Pushes the current parameter offset to a stack. */
 	public APIBuffer push() {
 		if ( stackDepth == stack.length )
-			stack = Arrays.copyOf(stack, stack.length << 1);
+			stack = copyOf(stack, stack.length << 1);
 
 		stack[stackDepth++] = offset;
 

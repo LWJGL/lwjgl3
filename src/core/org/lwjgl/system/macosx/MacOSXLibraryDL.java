@@ -19,12 +19,10 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 			throw new RuntimeException("Failed to dynamically load library: " + name);
 	}
 
-	@Override
 	public long getPointer() {
 		return handle;
 	}
 
-	@Override
 	public long getFunctionAddress(CharSequence name) {
 		return dlsym(handle, name);
 	}

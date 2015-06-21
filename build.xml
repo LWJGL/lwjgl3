@@ -132,40 +132,40 @@ License terms: http://lwjgl.org/license.php
 			<not>
 				<or>
 					<isset property="env.JAVA_HOME"/>
-					<isset property="env.JAVA6_HOME"/>
+					<isset property="env.JAVA5_HOME"/>
 				</or>
 			</not>
 		</condition>
 		<fail if="java.home.missing" message="Please set the JAVA_HOME environment variable."/>
 		<!--
-			JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail
-			if a Java 7+ API is used by mistake. Do not fail if it is not set, try to use
+			JAVA5_HOME will be used for the bootclasspath. This will cause compilation to fail
+			if a Java 6+ API is used by mistake. Do not fail if it is not set, try to use
 			JAVA_HOME instead and issue a warning if that's not a Java 6 SDK.
 		-->
 		<sequential>
 		<script language="javascript">
-		if ( !java.lang.System.getenv().containsKey("JAVA6_HOME") ) {
+		if ( !java.lang.System.getenv().containsKey("JAVA5_HOME") ) {
 			var version = java.lang.System.getProperty("java.specification.version");
-			if ( !version.equals("1.6") )
-				print("The environment variable JAVA6_HOME has not been set. Using JAVA_HOME (version " + version + ").");
+			if ( !version.equals("1.5") )
+				print("The environment variable JAVA5_HOME has not been set. Using JAVA_HOME (version " + version + ").");
 		}
 		</script>
 		</sequential>
-		<property name="env.JAVA6_HOME" value="${env.JAVA_HOME}" unless:set="env.JAVA6_HOME"/>
+		<property name="env.JAVA5_HOME" value="${env.JAVA_HOME}" unless:set="env.JAVA5_HOME"/>
 
 		<path id="jdk.boot.classpath.jars">
-			<fileset dir="${env.JAVA6_HOME}/jre/lib">
+			<fileset dir="${env.JAVA5_HOME}/jre/lib">
 				<include name="*.jar"/>
 			</fileset>
-			<fileset file="${env.JAVA6_HOME}/lib/tools.jar"/>
+			<fileset file="${env.JAVA5_HOME}/lib/tools.jar"/>
 		</path>
 		<path id="jdk.boot.classpath.applejars">
-			<fileset dir="${env.JAVA6_HOME}/bundle/Classes">
+			<fileset dir="${env.JAVA5_HOME}/bundle/Classes">
 				<include name="*.jar"/>
 			</fileset>
 		</path>
 		<condition property="jdk.boot.classpath" value="jdk.boot.classpath.applejars" else="jdk.boot.classpath.jars">
-			<available file="${env.JAVA6_HOME}/bundle/Classes/classes.jar"/>
+			<available file="${env.JAVA5_HOME}/bundle/Classes/classes.jar"/>
 		</condition>
 
 		<patternset id="src.core.files">
@@ -206,7 +206,7 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
-		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
+		<javac debug="yes" destdir="${bin}/Templates" encoding="utf8" source="1.5" target="1.5" bootclasspathref="${jdk.boot.classpath}" taskname="Java dependencies">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -247,7 +247,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="formatter" description="Runs the template formatter tool" depends="init, -init-compile"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
-		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}">
+		<javac debug="yes" destdir="${bin.templates}" encoding="utf8" source="1.5" target="1.5" bootclasspathref="${jdk.boot.classpath}">
 			<src path="${src.templates}"/>
 			<include name="org/lwjgl/**"/>
 		</javac>
@@ -298,7 +298,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate">
-		<javac debug="yes" sourcepath="" destdir="${bin.core}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
+		<javac debug="yes" sourcepath="" destdir="${bin.core}" encoding="utf8" source="1.5" target="1.5" bootclasspathref="${jdk.boot.classpath}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.util}"/>
@@ -319,7 +319,7 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="compile-tests" description="Compiles the LWJGL test suite" depends="compile">
-		<javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.6" target="1.6" bootclasspathref="${jdk.boot.classpath}" taskname="Tests">
+		<javac debug="yes" destdir="${bin.tests}" encoding="utf8" source="1.5" target="1.5" bootclasspathref="${jdk.boot.classpath}" taskname="Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
 				<pathelement path="${bin.util}"/>
@@ -398,7 +398,7 @@ License terms: http://lwjgl.org/license.php
 		<delete dir="${generated.javadoc}"/>
 		<javadoc
 			destdir="${generated.javadoc}"
-			source="1.6"
+			source="1.5"
 			bootclasspathref="${jdk.boot.classpath}"
 			windowtitle="LWJGL ${build.version}"
 			encoding="utf8"

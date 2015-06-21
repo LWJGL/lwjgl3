@@ -33,17 +33,14 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 			windowsThrowException("Failed to load library: " + name);
 	}
 
-	@Override
 	public String getName() {
 		return name;
 	}
 
-	@Override
 	public long getPointer() {
 		return handle;
 	}
 
-	@Override
 	public long getFunctionAddress(CharSequence name) {
 		return GetProcAddress(handle, name);
 	}

@@ -41,12 +41,10 @@ public class MacOSXLibraryBundle extends MacOSXLibrary {
 		}
 	}
 
-	@Override
 	public long getPointer() {
 		return bundleRef;
 	}
 
-	@Override
 	public long getFunctionAddress(CharSequence functionName) {
 		APIBuffer __buffer = apiBuffer();
 		__buffer.stringParamASCII(functionName, true);

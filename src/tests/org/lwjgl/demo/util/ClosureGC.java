@@ -31,7 +31,6 @@ public class ClosureGC implements ClosureRegistry {
 		return ClosureGCLoader.INSTANCE;
 	}
 
-	@Override
 	public void register(Closure closure) {
 		stacks.get().register(closure);
 	}

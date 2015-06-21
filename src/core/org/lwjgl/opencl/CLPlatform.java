@@ -121,7 +121,6 @@ public class CLPlatform extends PointerWrapper {
 			platformIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
 		return filterObjects(platformIDs, filter, new Factory<CLPlatform>() {
-			@Override
 			public CLPlatform create(long object_id) {
 				return new CLPlatform(object_id);
 			}
@@ -168,7 +167,6 @@ public class CLPlatform extends PointerWrapper {
 			deviceIDs[i] = __buffer.pointerValue(i << POINTER_SHIFT);
 
 		return filterObjects(deviceIDs, filter, new Factory<CLDevice>() {
-			@Override
 			public CLDevice create(long object_id) {
 				return new CLDevice(object_id, getCapabilities());
 			}
