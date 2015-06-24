@@ -21,7 +21,7 @@ if(hasProperty("release")) {
     println "Performing release build"
 } else if (hasProperty("snapshot")) {
     isCiBuild = true
-    version += "-SNAPSHOT"
+    project.version += "-SNAPSHOT"
     repositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
     repositoryUser = sonatypeUsername
 	repositoryPassword = sonatypePassword
