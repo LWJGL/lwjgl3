@@ -1,0 +1,125 @@
+apply plugin: "maven"
+apply plugin: "signing"
+
+project.group = "org.lwjgl"
+project.version = "3.0.0a"
+
+def isDevBuild
+def isCiBuild
+def isReleaseBuild
+
+def repositoryUrl
+def repositoryUser
+def repositoryPassword
+
+//set build variables based on build type (release, continuous integration, development)
+if(hasProperty("release")) {
+    isReleaseBuild = true
+    repositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"                             
+    repositoryUser = sonatypeUsername
+	repositoryPassword = sonatypePassword
+    println "Performing release build"
+} else if (hasProperty("snapshot")) {
+    isCiBuild = true
+    version += "-SNAPSHOT"
+    repositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+    repositoryUser = sonatypeUsername
+	repositoryPassword = sonatypePassword
+    println "Performing snapshot build"
+} else {
+    isDevBuild = true
+    repositoryUrl = repositories.mavenLocal().url
+    repositoryUser = ""
+	repositoryPassword = ""
+    println "Performing local build"
+}
+
+artifacts {
+  archives file: file("release/jar/lwjgl.jar"), name: "lwjgl", type: "jar"
+  archives file: file("release/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
+  archives file: file("release/jar/lwjgl-natives-windows.jar"), name: "lwjgl-windows", type: "jar", classifier: "natives-windows"
+  archives file: file("release/jar/lwjgl-natives-macosx.jar"), name: "lwjgl-macosx", type: "jar", classifier: "natives-osx"
+  archives file: file("release/jar/lwjgl-natives-linux.jar"), name: "lwjgl-linux", type: "jar", classifier: "natives-linux"
+}
+
+if(isReleaseBuild) {
+    signing {
+        sign configurations.archives
+    }
+} else {
+    task signArchives {
+        // do nothing
+    }
+}
+
+Closure defaultPom = {
+	project {
+		packaging "jar"        
+		description 'LWJGL'
+		url 'http://www.lwjgl.org'
+
+		scm {
+		   url 'scm:git@github.com:LWJGL/lwjgl3.git'
+		   connection 'scm:git@github.com:LWJGL/lwjgl3.git'
+		   developerConnection 'scm:git@github.com:LWJGL/lwjgl3.git'
+		}
+
+		licenses {
+		   license {
+		       name 'BSD'
+		       url 'http://www.lwjgl.org/license'
+		       distribution 'repo'
+		   }
+		}
+	}
+}
+
+uploadArchives {
+	repositories {
+		mavenDeployer {
+			repository(url: repositoryUrl) {
+            	authentication(userName: repositoryUser, password: repositoryPassword)
+			}			
+      		
+      		addFilter("lwjgl") {artifact, file -> 
+      			artifact.name == "lwjgl"
+      		}
+      		addFilter("lwjgl-windows") {artifact, file ->
+      			artifact.name == "lwjgl-windows"
+      		}      		
+      		addFilter("lwjgl-macosx") {artifact, file ->
+      			artifact.name == "lwjgl-macosx"
+      		}
+      		addFilter("lwjgl-linux") {artifact, file ->
+      			artifact.name == "lwjgl-linux"
+      		}
+
+      		pom("lwjgl", defaultPom);
+      		pom("lwjgl-windows", defaultPom).artifactId = "lwjgl-platform"
+      		pom("lwjgl-macosx", defaultPom).artifactId = "lwjgl-platform"
+      		pom("lwjgl-linux", defaultPom).artifactId = "lwjgl-platform"
+		}
+    }
+}
+
+task zipNativesWindows(type: Zip) {
+    from "release/native"    
+    include "*.dll"
+    archiveName "lwjgl-natives-windows.jar"
+    destinationDir file("release/jar")
+}
+task zipNativesLinux(type: Zip) {
+    from "release/native"    
+    include "*.so"
+    archiveName "lwjgl-natives-linux.jar"
+    destinationDir file("release/jar")
+}
+task zipNativesMacOSX(type: Zip) {
+    from "release/native"    
+    include "*.dylib"
+    archiveName "lwjgl-natives-macosx.jar"
+    destinationDir file("release/jar")
+}
+uploadArchives.dependsOn(zipNativesWindows)
+uploadArchives.dependsOn(zipNativesLinux)
+uploadArchives.dependsOn(zipNativesMacOSX)
