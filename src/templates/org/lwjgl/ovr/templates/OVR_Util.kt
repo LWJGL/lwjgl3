@@ -47,6 +47,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 		""",
 		"Projection_ClipRangeOpenGL" _ 0x08
 	)
+	val ProjectionModifiers = "#Projection_None #Projection_RightHanded #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
 
 	ovrMatrix4f(
 		"Matrix4f_Projection",
@@ -70,6 +71,7 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 	    "Extracts the required data from the result of #Matrix4f_Projection().",
 
 	    ovrMatrix4f.IN("projection", "the project matrix from which to extract ##OVRTimewarpProjectionDesc"),
+		unsigned_int.IN("projectionModFlags", "a combination of the ovrProjectionModifier flags", ProjectionModifiers, LinkMode.BITFIELD),
 
 	    returnDoc = "the extracted ovrTimewarpProjectionDesc"
 	)

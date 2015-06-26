@@ -35,8 +35,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 			""",
 			"""
 			Call #Hmd_SubmitFrame() to render the distorted layers to the back buffer and present them on the HMD. If #Hmd_SubmitFrame() returns
-			#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #Hmd_SubmitFrame() again until it returns
-			#Success.
+			OVRErrorCode#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #Hmd_SubmitFrame() again
+			until it returns OVRErrorCode#Success.
 			"""
 		)}
 
@@ -53,40 +53,6 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"False" _ 0,
 		"True" _ 1
 	)
-
-	IntConstant("This is a general success result.", "Success" _ 0)
-	IntConstant(
-		"""
-		Returned from a call to #Hmd_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should continue
-		calling #Hmd_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
-		""",
-		"Success_NotVisible" _ 1000
-	)
-	// General errors
-	IntConstant("Failure to allocate memory.", "Error_MemoryAllocationFailure" expr "-1000")
-	IntConstant("Failure to create a socket.", "Error_SocketCreationFailure" expr "-1001")
-	IntConstant("Invalid HMD parameter provided.", "Error_InvalidHmd" expr "-1002")
-	IntConstant("The operation timed out.", "Error_Timeout" expr "-1003")
-	IntConstant("The system or component has not been initialized.", "Error_NotInitialized" expr "-1004")
-	IntConstant("Invalid parameter provided. See error info or log for details.", "Error_InvalidParameter" expr "-1005")
-	IntConstant("Generic service error. See error info or log for details.", "Error_ServiceError" expr "-1006")
-	IntConstant("The given HMD doesn't exist.", "Error_NoHmd" expr "-1007")
-	// Audio error range, reserved for Audio errors.
-	IntConstant("First Audio error.", "Error_AudioReservedBegin" expr "-2000")
-	IntConstant("Last Audio error.", "Error_AudioReservedEnd" expr "-2999")
-	// Initialization errors.
-	IntConstant("Generic initialization error.", "Error_Initialize" expr "-3000")
-	IntConstant("Couldn't load LibOVRRT.", "Error_LibLoad" expr "-3001")
-	IntConstant("LibOVRRT version incompatibility.", "Error_LibVersion" expr "-3002")
-	IntConstant("Couldn't connect to the OVR Service.", "Error_ServiceConnection" expr "-3003")
-	IntConstant("OVR Service version incompatibility.", "Error_ServiceVersion" expr "-3004")
-	IntConstant("The operating system version is incompatible.", "Error_IncompatibleOS" expr "-3005")
-	IntConstant("Unable to initialize the HMD display.", "Error_DisplayInit" expr "-3006")
-	IntConstant("Unable to start the server. Is it already running?", "Error_ServerStart" expr "-3007")
-	IntConstant("Attempting to re-initialize with a different version.", "Error_Reinitialization" expr "-3008")
-	// Hardware Errors
-	IntConstant("Headset has no bundle adjustment data.", "Error_InvalidBundleAdjustment" expr "-4000")
-	IntConstant("The USB hub cannot handle the camera frame bandwidth.", "Error_USBBandwidth" expr "-4001")
 
 	IntConstant(
 		"""
@@ -126,7 +92,6 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Hmd_DK1" _ 3,
 		"Hmd_DKHD" _ 4,
 		"Hmd_DK2" _ 6,
-		"Hmd_BlackStar" _ 7,
 		"Hmd_CB" _ 8,
 		"Hmd_Other" _ 9
 	).javaDocLinks
@@ -144,16 +109,15 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"HmdCap_LowPersistence" _ 0x0080
 	)
 	IntConstant("(read/write) Adjusts prediction dynamically based on internally measured latency.", "HmdCap_DynamicPrediction" _ 0x0200)
-	IntConstant("(read/write) Supports rendering without VSync for debugging.", "HmdCap_NoVSync" _ 0x1000)
 	IntConstant(
 		"Indicates to the developer what caps they can and cannot modify. These are processed by the client.",
-		"HmdCap_Writable_Mask" expr "ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction | ovrHmdCap_NoVSync"
+		"HmdCap_Writable_Mask" expr "ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction"
 	)
 	IntConstant(
 		"Indicates to the developer what caps they can and cannot modify. These are processed by the service.",
 		"HmdCap_Service_Mask" expr "ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction"
 	)
-	val HmdCaps = "#HmdCap_DebugDevice #HmdCap_LowPersistence #HmdCap_DynamicPrediction #HmdCap_NoVSync"
+	val HmdCaps = "#HmdCap_DebugDevice #HmdCap_LowPersistence #HmdCap_DynamicPrediction"
 
 	// ovrTrackingCaps enum
 	IntConstant("Supports orientation tracking (IMU).", "TrackingCap_Orientation" _ 0x0010)
@@ -201,7 +165,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		Initialize LibOVR for application usage. This includes finding and loading the LibOVRRT shared library. No LibOVR API functions, other than
 		#_GetLastErrorInfo(), can be called unless ovr_Initialize succeeds. A successful call to ovr_Initialize must be eventually followed by a call to
 		#_Shutdown(). ovr_Initialize calls are idempotent. Calling ovr_Initialize twice does not require two matching calls to #_Shutdown(). If already
-		initialized, the return value is #Success.
+		initialized, the return value is OVRErrorCode#Success.
 
 		LibOVRRT shared library search order:
 		${ol(
@@ -223,15 +187,15 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		an {@code ovrResult} indicating success or failure. In the case of failure, use #_GetLastErrorInfo() to get more information. Example failed results
 		include:
 		${ul(
-			"#Error_Initialize: Generic initialization error.",
-		    "#Error_LibLoad: Couldn't load LibOVRRT.",
-		    "#Error_LibVersion: LibOVRRT version incompatibility.",
-		    "#Error_ServiceConnection: Couldn't connect to the OVR Service.",
-		    "#Error_ServiceVersion: OVR Service version incompatibility.",
-		    "#Error_IncompatibleOS: The operating system version is incompatible.",
-		    "#Error_DisplayInit: Unable to initialize the HMD display.",
-		    "#Error_ServerStart:  Unable to start the server. Is it already running?",
-		    "#Error_Reinitialization: Attempted to re-initialize with a different version."
+			"OVRErrorCode#Error_Initialize: Generic initialization error.",
+		    "OVRErrorCode#Error_LibLoad: Couldn't load LibOVRRT.",
+		    "OVRErrorCode#Error_LibVersion: LibOVRRT version incompatibility.",
+		    "OVRErrorCode#Error_ServiceConnection: Couldn't connect to the OVR Service.",
+		    "OVRErrorCode#Error_ServiceVersion: OVR Service version incompatibility.",
+		    "OVRErrorCode#Error_IncompatibleOS: The operating system version is incompatible.",
+		    "OVRErrorCode#Error_DisplayInit: Unable to initialize the HMD display.",
+		    "OVRErrorCode#Error_ServerStart:  Unable to start the server. Is it already running?",
+		    "OVRErrorCode#Error_Reinitialization: Attempted to re-initialize with a different version."
 		)}
 		"""
 	)
@@ -305,6 +269,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		If one or more HMDs are present, an integer value is returned which indicates the number present. The number present indicates the range of valid
 		indexes that can be passed to #Hmd_Create(). If no HMDs are present, the return value is zero. If there is an error, a negative error {@code ovrResult}
 		value is returned.
+
+		ovrHmd_Detect can be called at any time between ovrInitialize and ovrShutdown and can be called multiple times or from multiple threads.
 		""",
 		returnDoc = "an integer that specifies the number of HMDs currently present. Upon failure, {@code OVR_SUCCESS(result)} is false."
 	)
@@ -314,8 +280,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"""
 	    Creates a handle to an HMD which doubles as a description structure.
 
-		Upon success the returned ovrHmd* must be freed with #Hmd_Destroy(). A second call to #Hmd_Create() with the same index as a previously successful call
-		will result in an error return value.
+		Upon success the returned ovrHmd* must be freed with #Hmd_Destroy(). A second call to #Hmd_Create() or #Hmd_CreateDebug() with the same index as a
+		previously successful call will result in an error return value if the previous Hmd has not been destroyed.
 	    """,
 
 		int.IN("index", "a value in the range of {@code [0 .. ovrHmd_Detect()-1]]}."),
@@ -329,7 +295,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"""
 		Creates a fake HMD used for debugging only.
 
-		 This is not tied to specific hardware, but may be used to debug some of the related rendering.
+		Upon success the returned ovrHmd* must be freed with #Hmd_Destroy(). A second call to #Hmd_Create() or #Hmd_CreateDebug() with the same index as a
+		previously successful call will result in an error return value if the previous Hmd has not been destroyed.
 		""",
 
 		ovrHmdType.IN("type", "indicates the HMD type to emulate", HMDType),
@@ -376,7 +343,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"""
 		Starts sensor sampling, enabling specified capabilities, described by {@code ovrTrackingCaps}.
 
-		Use 0 for both {@code supportedTrackingCaps} and {@code requiredTrackingCaps} to disable tracking.
+		Use 0 for both {@code supportedTrackingCaps} and {@code requiredTrackingCaps} to disable tracking. ovrHmd_ConfigureTracking can be called multiple
+		times with the same or different values for a given {@code ovrHmd}.
 		""",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
@@ -460,7 +428,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	    "Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
 
 	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
-	    ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy")
+	    nullable _ ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	void(
@@ -468,7 +436,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
-		ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy")
+		nullable _ ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	ovrSizei(
@@ -538,7 +506,7 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	    """,
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
-		unsigned_int.IN("frameIndex", "the targeted frame index, or 0, to refer to one frame after the last time #Hmd_SubmitFrame() was called"),
+		unsigned_int.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #Hmd_SubmitFrame() was called"),
 		nullable _ const _ ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
@@ -566,11 +534,11 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	    """
 	    an {@code ovrResult} for which {@code OVR_SUCCESS(result)} is false upon error and true upon one of the possible success values:
 	    ${ul(
-			"#Success: rendering completed successfully.",
+			"OVRErrorCode#Success: rendering completed successfully.",
 	        """
-	        #Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently has ownership
-	        of the HMD. Applications receiving this result should stop rendering new content, but continue to call ovrHmd_SubmitFrame periodically until it
-	        returns a value other than #Success_NotVisible.
+	        OVRErrorCode#Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
+	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call ovrHmd_SubmitFrame
+	        periodically until it returns a value other than OVRErrorCode#Success_NotVisible.
 	        """
 	    )}
 	    """
@@ -616,6 +584,22 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 		""",
 
 	    returnDoc = "seconds as a floating point value"
+	)
+
+	IntConstant(
+		"""
+		Performance HUD enables the HMD user to see information critical to the real-time operation of the VR application such as latency timing, and CPU & GPU
+		performance metrics.
+
+		App can toggle performance HUD modes as such:
+		${codeBlock("""
+ovrPerfHudMode PerfHudMode = ovrPerfHud_LatencyTiming;
+ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
+		""",
+
+		"PerfHud_Off" _ 0,
+		"PerfHud_LatencyTiming" _ 1,
+	    "PerfHud_RenderTiming" _ 2
 	)
 
 	// ----------------
