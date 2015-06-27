@@ -12,3 +12,5 @@
 *.wav
 *.zip
 touch.txt
+.gradle/
+build/
