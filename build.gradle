@@ -36,7 +36,7 @@ if(hasProperty("release")) {
 
 artifacts {
   archives file: file("release/jar/lwjgl.jar"), name: "lwjgl", type: "jar"
-  archives file: file("release/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
+  archives file: file("release/jar/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
   archives file: file("release/jar/javadoc.jar"), name: "lwjgl", type: "jar", classifier: "javadoc"
   archives file: file("build.gradle"), name: "lwjgl-platform", type: "pom"
   archives file: file("release/jar/lwjgl-natives-windows.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-windows"
