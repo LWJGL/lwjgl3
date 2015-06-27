@@ -2,7 +2,7 @@ apply plugin: "maven"
 apply plugin: "signing"
 
 project.group = "org.lwjgl"
-project.version = "3.0.0a"
+project.version = "3.0.0b"
 
 def isDevBuild
 def isCiBuild
