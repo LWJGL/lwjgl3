@@ -25,7 +25,7 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"KEY_MAX_EYE_TO_PLATE_DISTANCE" _ "MaxEyeToPlateDist", // float[2]
 		"KEY_EYE_CUP" _ "EyeCup", // char[16]
 		"KEY_CUSTOM_EYE_RENDER" _ "CustomEyeRender", // bool
-		"KEY_CAMERA_POSITION" _ "CenteredFromWorld" // double[7]
+		"KEY_CAMERA_POSITION" _ "CenteredFromWorld2" // double[7]
 	)
 
 	StringConstant(
