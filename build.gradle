@@ -37,9 +37,11 @@ if(hasProperty("release")) {
 artifacts {
   archives file: file("release/jar/lwjgl.jar"), name: "lwjgl", type: "jar"
   archives file: file("release/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
-  archives file: file("release/jar/lwjgl-natives-windows.jar"), name: "lwjgl-windows", type: "jar", classifier: "natives-windows"
-  archives file: file("release/jar/lwjgl-natives-macosx.jar"), name: "lwjgl-macosx", type: "jar", classifier: "natives-osx"
-  archives file: file("release/jar/lwjgl-natives-linux.jar"), name: "lwjgl-linux", type: "jar", classifier: "natives-linux"
+  archives file: file("release/jar/javadoc.jar"), name: "lwjgl", type: "jar", classifier: "javadoc"
+  archives file: file("build.gradle"), name: "lwjgl-platform", type: "pom"
+  archives file: file("release/jar/lwjgl-natives-windows.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-windows"
+  archives file: file("release/jar/lwjgl-natives-macosx.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-osx"
+  archives file: file("release/jar/lwjgl-natives-linux.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-linux"
 }
 
 if(isReleaseBuild) {
@@ -71,6 +73,13 @@ Closure defaultPom = {
 		       distribution 'repo'
 		   }
 		}
+
+    developers {
+      developer {
+        id "spasi"
+        name "Ioannis Tsakpinis"
+      }    
+    }
 	}
 }
 
@@ -78,28 +87,34 @@ uploadArchives {
 	repositories {
 		mavenDeployer {
 			repository(url: repositoryUrl) {
-            	authentication(userName: repositoryUser, password: repositoryPassword)
-			}			
-      		
-      		addFilter("lwjgl") {artifact, file -> 
-      			artifact.name == "lwjgl"
-      		}
-      		addFilter("lwjgl-windows") {artifact, file ->
-      			artifact.name == "lwjgl-windows"
-      		}      		
-      		addFilter("lwjgl-macosx") {artifact, file ->
-      			artifact.name == "lwjgl-macosx"
-      		}
-      		addFilter("lwjgl-linux") {artifact, file ->
-      			artifact.name == "lwjgl-linux"
-      		}
+        authentication(userName: repositoryUser, password: repositoryPassword)
+			}
 
-      		pom("lwjgl", defaultPom);
-      		pom("lwjgl-windows", defaultPom).artifactId = "lwjgl-platform"
-      		pom("lwjgl-macosx", defaultPom).artifactId = "lwjgl-platform"
-      		pom("lwjgl-linux", defaultPom).artifactId = "lwjgl-platform"
+      if(isReleaseBuild) {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+      }		
+      		
+  		addFilter("lwjgl") {artifact, file -> 
+  			artifact.name == "lwjgl"
+  		} 
+      addFilter("lwjgl-platform") {artifact, file -> 
+        artifact.name == "lwjgl-platform"
+      }     		
+
+  		pom("lwjgl", defaultPom).name = "LWJGL"
+  		def platformpom = pom("lwjgl-platform", defaultPom)
+      platformpom.packaging = "pom"
+      platformpom.name = "LWJGL Platform"
 		}
-    }
+  }
+}
+
+task copyJavadocs(type: Copy) {
+  from "release/doc/javadoc.zip"
+  destinationDir file("release/jar")
+  rename { String fileName ->
+    fileName.replace(".zip", ".jar")
+  }
 }
 
 task zipNativesWindows(type: Zip) {
@@ -120,6 +135,13 @@ task zipNativesMacOSX(type: Zip) {
     archiveName "lwjgl-natives-macosx.jar"
     destinationDir file("release/jar")
 }
-uploadArchives.dependsOn(zipNativesWindows)
+
+signArchives.mustRunAfter(copyJavadocs)
+signArchives.mustRunAfter(zipNativesLinux)
+signArchives.mustRunAfter(zipNativesWindows)
+signArchives.mustRunAfter(zipNativesMacOSX)
+
+uploadArchives.dependsOn(copyJavadocs)
 uploadArchives.dependsOn(zipNativesLinux)
+uploadArchives.dependsOn(zipNativesWindows)
 uploadArchives.dependsOn(zipNativesMacOSX)
