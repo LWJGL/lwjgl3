@@ -109,6 +109,14 @@ uploadArchives {
   }
 }
 
+task copySources(type: Copy) {
+  from "release/src.zip"
+  destinationDir file("release/jar")
+  rename { String fileName ->
+    fileName.replace(".zip", ".jar")
+  }
+}
+
 task copyJavadocs(type: Copy) {
   from "release/doc/javadoc.zip"
   destinationDir file("release/jar")
@@ -135,7 +143,7 @@ task zipNativesMacOSX(type: Zip) {
     archiveName "lwjgl-natives-macosx.jar"
     destinationDir file("release/jar")
 }
-
+copyJavadocs.dependsOn(copySources)
 signArchives.mustRunAfter(copyJavadocs)
 signArchives.mustRunAfter(zipNativesLinux)
 signArchives.mustRunAfter(zipNativesWindows)
