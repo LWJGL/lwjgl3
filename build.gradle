@@ -143,12 +143,13 @@ task zipNativesMacOSX(type: Zip) {
     archiveName "lwjgl-natives-macosx.jar"
     destinationDir file("release/jar")
 }
-copyJavadocs.dependsOn(copySources)
+signArchives.mustRunAfter(copySources)
 signArchives.mustRunAfter(copyJavadocs)
 signArchives.mustRunAfter(zipNativesLinux)
 signArchives.mustRunAfter(zipNativesWindows)
 signArchives.mustRunAfter(zipNativesMacOSX)
 
+uploadArchives.dependsOn(copySources)
 uploadArchives.dependsOn(copyJavadocs)
 uploadArchives.dependsOn(zipNativesLinux)
 uploadArchives.dependsOn(zipNativesWindows)
