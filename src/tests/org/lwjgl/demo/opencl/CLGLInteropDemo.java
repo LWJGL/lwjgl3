@@ -14,9 +14,7 @@ import org.lwjgl.opencl.CLPlatform;
 import org.lwjgl.opencl.CLPlatform.Filter;
 import org.lwjgl.opengl.GLContext;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
@@ -106,31 +104,32 @@ public final class CLGLInteropDemo {
 		if ( debugGL )
 			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
 
-		final String vendorGL = getOpenGLVendor();
-
-		final Filter<CLPlatform> platformFilter = new Filter<CLPlatform>() {
+		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
 			@Override
 			public boolean accept(CLPlatform platform) {
 				CLCapabilities caps = platform.getCapabilities();
 				return caps.cl_khr_gl_sharing || caps.cl_APPLE_gl_sharing;
 			}
-		};
-
-		// Try to match GL_VENDOR and CL_PLATFORM_VENDOR
-		List<CLPlatform> platforms = CLPlatform.getPlatforms(new Filter<CLPlatform>() {
-			@Override
-			public boolean accept(CLPlatform platform) {
-				return platformFilter.accept(platform) && clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR).contains(vendorGL);
-			}
 		});
 
-		if ( platforms.isEmpty() ) {
-			// Nope, try again without the filter.
-			platforms = CLPlatform.getPlatforms(platformFilter);
-		}
-
 		if ( platforms.isEmpty() )
-			throw new IllegalStateException("No OpenCL platforms found that support KHR_gl_sharing.");
+			throw new IllegalStateException("No OpenCL platform found that supports OpenGL context sharing.");
+
+		Collections.sort(platforms, new Comparator<CLPlatform>() {
+			@Override
+			public int compare(CLPlatform p1, CLPlatform p2) {
+				// Prefer platforms that support GPU devices
+				boolean gpu1 = !p1.getDevices(CL_DEVICE_TYPE_GPU).isEmpty();
+				boolean gpu2 = !p2.getDevices(CL_DEVICE_TYPE_GPU).isEmpty();
+				int cmp = gpu1 == gpu2 ? 0 : (gpu1 ? -1 : 1);
+				if ( cmp != 0 )
+					return cmp;
+
+				return clGetPlatformInfoStringUTF8(p1.getPointer(), CL_PLATFORM_VENDOR).compareTo(
+					clGetPlatformInfoStringUTF8(p1.getPointer(), CL_PLATFORM_VENDOR)
+				);
+			}
+		});
 
 		final CLPlatform platform = platforms.get(0);
 
