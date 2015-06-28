@@ -152,6 +152,8 @@ public class CLPlatform extends PointerWrapper {
 	public List<CLDevice> getDevices(int device_type, Filter<CLDevice> filter) {
 		APIBuffer __buffer = apiBuffer();
 		int errcode = clGetDeviceIDs(getPointer(), device_type, 0, null, __buffer.buffer());
+		if ( errcode == CL_DEVICE_NOT_FOUND )
+			return Collections.emptyList();
 		checkCLError(errcode);
 
 		int num_devices = __buffer.intValue(0);
