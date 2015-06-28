@@ -18,6 +18,10 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		"glfw3native.h"
 	)
 
+	javaImport(
+		"org.lwjgl.system.linux.X"
+	)
+
 	documentation = "Native bindings to the GLFW library's Linux native access functions."
 
 	Display_p(

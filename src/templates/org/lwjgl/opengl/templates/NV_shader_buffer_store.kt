@@ -18,7 +18,7 @@ val NV_shader_buffer_store = "NVShaderBufferStore".nativeClassGL("NV_shader_buff
 		shaders to access a large number of buffer objects without needing to repeatedly bind buffers to a limited number of fixed-functionality binding
 		points.
 
-        Requires ${GL30.core}, GLSL 1.30, ${NV_shader_buffer_load.link}, ${"NV_gpu_program5".cap} and/or ${"NV_gpu_shader5".cap}.
+        Requires ${GL30.core}, GLSL 1.30, ${NV_shader_buffer_load.link}, ${registryLinkTo("NV", "gpu_program5")} and/or ${registryLinkTo("NV", "gpu_shader5")}.
 		"""
 
 	IntConstant(

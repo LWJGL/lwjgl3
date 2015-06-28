@@ -67,18 +67,18 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		Note: to guarantee best results, either:
 		${ol(
 			"make sure {@code num_nodes &ge; width}",
-		    "or, call #allow_out_of_mem() with {@code allow_out_of_mem = 1}"
+		    "or, call #setup_allow_out_of_mem() with {@code allow_out_of_mem = 1}"
 		)}
 		If you don't do either of the above things, widths will be quantized to multiples of small integers to guarantee the algorithm doesn't run out of
 		temporary storage.
 
-		If you do #2, then the non-quantized algorithm will be used, but the algorithm may run out of temporary storage and be unable to pack some rectangles.
+		If you do \#2, then the non-quantized algorithm will be used, but the algorithm may run out of temporary storage and be unable to pack some rectangles.
 		""",
 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
 		int.IN("width", "the rectangle width"),
 		int.IN("height", "the rectangle height"),
-		stbrp_node_p.IN("nodes", "an array of ##STBRTNode structs"),
+		stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
 		AutoSize("nodes") _ int.IN("num_nodes", "the number of structs in {@code nodes}")
 	)
 

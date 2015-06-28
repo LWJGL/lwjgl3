@@ -87,10 +87,9 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		"""
 		Determine which GPU a context is attached to.
 
-		Unassociated contexts are created by calling org.lwjgl.system.windows.WGL#CreateContext(). Although these contexts are unassociated, their use
-		will still be tied to a single GPU in most cases. For this reason it is advantageous to be able to query the GPU an existing unassociated context
-		resides on. If multiple GPUs are available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for
-		off-screen rendering.
+		Unassociated contexts are created by calling WGL#CreateContext(). Although these contexts are unassociated, their use will still be tied to a single
+		GPU in most cases. For this reason it is advantageous to be able to query the GPU an existing unassociated context resides on. If multiple GPUs are
+		available, it would be undesirable to use one for rendering to visible surfaces and then chose the same one for off-screen rendering.
 		""",
 
 		HGLRC.IN("hglrc", "the context for which the GPU id will be returned")
@@ -118,7 +117,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 	BOOL(
 		"DeleteAssociatedContextAMD",
-		"Deletes an associated context. An associated context cannot be deleted by calling org.lwjgl.system.windows.WGL#DeleteContext().",
+		"Deletes an associated context. An associated context cannot be deleted by calling WGL#DeleteContext().",
 
 		HGLRC.IN("hglrc", "a valid associated context created by calling #CreateAssociatedContextAMD()")
 	)

@@ -15,8 +15,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	IntConstant("This is a general success result.", "Success" _ 0)
 	IntConstant(
 		"""
-		Returned from a call to #Hmd_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should continue
-		calling #Hmd_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
+		Returned from a call to OVR#Hmd_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
+		continue calling OVR#Hmd_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 		""",
 		"Success_NotVisible" _ 1000
 	)

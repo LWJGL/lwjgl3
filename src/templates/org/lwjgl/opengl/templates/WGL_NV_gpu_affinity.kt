@@ -28,7 +28,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		Requires ${WGL_ARB_extensions_string.link}.
 		"""
 
-	val wglMakeCurrent = "org.lwjgl.system.windows.WGL#MakeCurrent()"
+	val wglMakeCurrent = "WGL#MakeCurrent()"
 	val wglMakeContextCurrentARB = "WGLARBMakeCurrentRead#MakeContextCurrentARB()"
 
 	IntConstant(

@@ -146,7 +146,7 @@ N=\#comp     components
 		end).
 		""",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIOCallbacks struct"),
+		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
 		nullable _ void_p.IN("user", "a pointer to user data"),
 		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
@@ -167,7 +167,7 @@ N=\#comp     components
 
 	float_p(
 		"loadf_from_memory",
-		"Floating-point version of #load_memory().",
+		"Floating-point version of #load_from_memory().",
 
 		const _ stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
 		AutoSize("buffer") _ int.IN("len", "the buffer length, in bytes"),
@@ -181,7 +181,7 @@ N=\#comp     components
 		"loadf_from_callbacks",
 		"Floating-point version of #load_from_callbacks().",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIOCallbacks struct"),
+		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
 		nullable _ void_p.IN("user", "a pointer to user data"),
 		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
 		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
@@ -238,7 +238,7 @@ N=\#comp     components
 		"is_hdr_from_callbacks",
 		"Callback version of #is_hdr().",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIOCallbacks struct"),
+		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
 		nullable _ void_p.IN("user", "a pointer to user data")
 	)
 

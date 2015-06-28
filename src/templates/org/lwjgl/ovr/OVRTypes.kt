@@ -41,7 +41,7 @@ val ovrLogCallback = CallbackType(callback(
 	const _ charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
 	samConstructor = "OVR"
 ) {
-	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitFlags struct."
+	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
 }, "ovrLogCallback")
 
 val ovrErrorInfo = struct(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo") {
@@ -248,9 +248,9 @@ val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", structName = "ovr
 val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc", structName = "ovrTimewarpProjectionDesc") {
 	documentation =
 		"""
-		Projection information for OVR#ovrLayerEyeFovDepth().
+		Projection information for ##OVRLayerEyeFovDepth.
 
-		Use the utility function OVR#ovrTimewarpProjectionDesc_FromProjection() to generate this structure from the application's projection matrix.
+		Use the utility function OVRUtil#ovrTimewarpProjectionDesc_FromProjection() to generate this structure from the application's projection matrix.
 		"""
 	includeOVRCAPI()
 
@@ -304,8 +304,8 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 		An ovrSwapTextureSet per layer is passed to OVR#ovrHmd_SubmitFrame() via one of the ovrLayer types. The {@code TextureCount} refers to the flip chain
 		count and not an eye count. See the layer structs and functions for information about how to use ovrSwapTextureSet.
 
-		ovrSwapTextureSets must be created by either the ovrHmd_CreateSwapTextureSetD3D11 or OVR#ovrHmd_CreateSwapTextureSetGL() factory function, and must be
-		destroyed by OVR#ovrHmd_DestroySwapTextureSet().
+		ovrSwapTextureSets must be created by either the ovrHmd_CreateSwapTextureSetD3D11 or OVRGL#ovrHmd_CreateSwapTextureSetGL() factory function, and must
+		be destroyed by OVR#ovrHmd_DestroySwapTextureSet().
 		"""
 	includeOVRCAPI()
 

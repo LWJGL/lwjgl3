@@ -14,7 +14,7 @@ val NV_compute_program5 = "NVComputeProgram5".nativeClassGL("NV_compute_program5
 
 		This extension builds on the ARB_compute_shader extension to provide new assembly compute program capability for OpenGL.
 
-		Requires ${GL40.core}, ${"NV_gpu_program4".cap}, ${"NV_gpu_program5".cap}, ${ARB_compute_shader.link}.
+		Requires ${GL40.core}, ${registryLinkTo("NV", "gpu_program4")}, ${registryLinkTo("NV", "gpu_program5")}, ${ARB_compute_shader.link}.
 		"""
 
 	IntConstant(

@@ -16,7 +16,8 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		"""
 		Native bindings to the $registryLink extension.
 
-		This specification extends ${"NV_gpu_program4".cap} to support per-sample fetching from multisample textures described in ARB_texture_multisample.
+		This specification extends ${registryLinkTo("NV", "gpu_program4")} to support per-sample fetching from multisample textures described in
+		${ARB_texture_multisample.link}.
     
         Requires ${GL20.core}, ${ARB_texture_multisample.link}.
 		"""

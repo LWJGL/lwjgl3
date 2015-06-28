@@ -54,7 +54,7 @@ val STBIEOFCallback = CallbackType(callback(
 }, "stbi_io_callbacks.read")
 
 val stbi_io_callbacks = struct(STB_PACKAGE, "STBIIOCallbacks", structName = "stbi_io_callbacks") {
-	documentation = "Image IO callbacks, used by STBImage##stb_load_from_callbacks()."
+	documentation = "Image IO callbacks, used by STBImage##stbi_load_from_callbacks()."
 	includeSTBAPI("#include \"stb_image.h\"")
 	STBIReadCallback.member("read")
 	STBISkipCallback.member("skip")
@@ -82,7 +82,7 @@ val stbrp_context = struct(STB_PACKAGE, "STBRPContext", structName = "stbrp_cont
 }.nativeType
 val stbrp_context_p = StructType(stbrp_context)
 
-val stbrp_rect = struct(STB_PACKAGE, "STBRPContext", structName = "stbrp_rect") {
+val stbrp_rect = struct(STB_PACKAGE, "STBRPRect", structName = "stbrp_rect") {
 	documentation = "A packed rectangle."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
 	int.member("id")
@@ -130,7 +130,7 @@ val stbtt_aligned_quad = struct(STB_PACKAGE, "STBTTAlignedQuad", structName = "s
 val stbtt_aligned_quad_p = StructType(stbtt_aligned_quad)
 
 val stbtt_pack_context = struct(STB_PACKAGE, "STBTTPackContext", structName = "stbtt_pack_context") {
-	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_STBPackEnd."
+	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_PackEnd."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 }.nativeType
 val stbtt_pack_context_p = StructType(stbtt_pack_context)
