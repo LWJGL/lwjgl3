@@ -9,6 +9,8 @@ import org.lwjgl.LWJGLUtil;
 import java.lang.reflect.Field;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.lwjgl.opencl.CL10.*;
@@ -18,9 +20,11 @@ public final class CLUtil {
 	/** Maps OpenCL error token values to their String representations. */
 	private static final Map<Integer, String> CL_ERROR_TOKENS = LWJGLUtil.getClassTokens(
 		new LWJGLUtil.TokenFilter() {
+			private final List<String> EXCLUDE = Arrays.asList("CL_DEVICE_TYPE_ALL", "CL_BUILD_NONE", "CL_BUILD_ERROR", "CL_BUILD_IN_PROGRESS");
+
 			@Override
 			public boolean accept(Field field, int value) {
-				return value < 0; // Currently, all OpenCL errors have negative values.
+				return value < 0 && !EXCLUDE.contains(field.getName()); // OpenCL errors have negative values.
 			}
 		},
 		null,
@@ -68,7 +72,7 @@ public final class CLUtil {
 	 */
 	public static void checkCLError(int errcode) {
 		if ( errcode != CL_SUCCESS )
-			throw new OpenCLException("Error Code: " + getErrcodeName(errcode));
+			throw new OpenCLException(getErrcodeName(errcode));
 	}
 
 	/**
