@@ -474,10 +474,8 @@ public final class LWJGLUtil {
 						if ( filter != null && !filter.accept(field, value) )
 							continue;
 
-						if ( target.containsKey(value) ) // Print colliding tokens in their hex representation.
-							target.put(value, String.format("0x%X", value));
-						else
-							target.put(value, field.getName());
+						String name = target.get(value);
+						target.put(value, name == null ? field.getName() : name + "|" + field.getName());
 					} catch (IllegalAccessException e) {
 						// Ignore
 					}
