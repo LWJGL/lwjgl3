@@ -41,7 +41,7 @@ License terms: http://lwjgl.org/license.php
 	<fail unless="sdkroot" message="Failed to find the MacOS X SDK."/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib.abs}/macosx/${build.arch}/">
+	<fileset id="link-libraries" dir="${lib}/macosx/${build.arch}/">
 		<include name="libffi.a"/>
 		<include name="libglfw3.a" if:true="${build.glfw}"/>
 	</fileset>
@@ -53,34 +53,36 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
+		<local name="src.include.rel"/>
+		<property name="src.include.rel" value="../../../${src.include}"/> <!-- src.include relative to bin.native -->
 		<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 			<arg value="-I${sdkroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
 
 			<!-- Paths relative to dir -->
-			<arg value="-I${src.native.abs}/system"/>
-			<arg value="-I${src.native.abs}/system/macosx"/>
-			<arg value="-I${src.native.abs}/system/libffi"/>
-			<arg value="-isystem${src.native.abs}/stb" if:true="${build.stb}"/>
-			<arg value="-I${src.native.abs}/glfw" if:true="${build.glfw}"/>
-			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
-			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
-			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
+			<arg value="-I${src.include.rel}/system"/>
+			<arg value="-I${src.include.rel}/system/macosx"/>
+			<arg value="-I${src.include.rel}/system/libffi"/>
+			<arg value="-isystem${src.include.rel}/stb" if:true="${build.stb}"/>
+			<arg value="-I${src.include.rel}/glfw" if:true="${build.glfw}"/>
+			<arg value="-I${src.include.rel}/openal" if:true="${build.openal}"/>
+			<arg value="-I${src.include.rel}/opencl" if:true="${build.opencl}"/>
+			<arg value="-I${src.include.rel}/opengl" if:true="${build.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/system" includes="*.c"/>
-			<fileset dir="${generated.native}/system/macosx" includes="*.c"/>
-			<fileset dir="${generated.native}/system/macosx" includes="*.m"/>
-			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/glfw/macosx" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c" excludes="*CL20.c" if:true="${build.opencl}"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${generated.native}/opengl/cgl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/system" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/macosx" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/macosx" includes="*.m"/>
+			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
+			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
+			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/glfw/macosx" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${src.generated.native}/opencl" includes="*.c" excludes="*CL20.c" if:true="${build.opencl}"/>
+			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/opengl/cgl" includes="*.c" if:true="${build.opengl}"/>
 
 			<regexpmapper from="^(.*)\.(c|m)" to="\1.o"/>
 		</apply>
@@ -109,9 +111,9 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<apply dir="${lib}" executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
+		<apply executable="${compiler}" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${LWJGL_LIBRARY}'/>
+			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
 			<arg line="-framework AppKit"/>
 			<!--<arg line="-framework CoreFoundation"/>-->
 			<arg line="-framework CoreVideo"/>

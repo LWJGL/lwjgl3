@@ -12,7 +12,7 @@ License terms: http://lwjgl.org/license.php
 	<property name="libs" value="Kernel32.lib user32.lib Gdi32.lib winmm.lib shell32.lib"/>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
-	<fileset id="link-libraries" dir="${lib.abs}/windows/${build.arch}/">
+	<fileset id="link-libraries" dir="${lib}/windows/${build.arch}/">
 		<include name="libffi.lib"/>
 		<include name="glfw3.lib" if:true="${build.glfw}"/>
 	</fileset>
@@ -24,46 +24,48 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
-		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
+		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
 			<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS"/>
+			<arg value="/Fo${bin.native}\"/>
 
 			<arg value="/I${java.home}\..\include"/>
 			<arg value="/I${java.home}\..\include\win32"/>
 
 			<!-- Paths relative to dir -->
-			<arg value="/I${src.native.abs}\system"/>
-			<arg value="/I${src.native.abs}\system\windows"/>
-			<arg value="/I${src.native.abs}\system\libffi"/>
-			<arg value="-I${src.native.abs}\stb" if:true="${build.stb}"/>
-			<arg value="/I${src.native.abs}\glfw" if:true="${build.glfw}"/>
-			<arg value="/I${src.native.abs}\openal" if:true="${build.openal}"/>
-			<arg value="/I${src.native.abs}\opencl" if:true="${build.opencl}"/>
-			<arg value="/I${src.native.abs}\opengl" if:true="${build.opengl}"/>
-			<arg value="/I${src.native.abs}\opengl\wgl" if:true="${build.opengl}"/>
+			<arg value="/I${src.include}\system"/>
+			<arg value="/I${src.include}\system\windows"/>
+			<arg value="/I${src.include}\system\libffi"/>
+			<arg value="/I${src.include}\stb" if:true="${build.stb}"/>
+			<arg value="/I${src.include}\glfw" if:true="${build.glfw}"/>
+			<arg value="/I${src.include}\openal" if:true="${build.openal}"/>
+			<arg value="/I${src.include}\opencl" if:true="${build.opencl}"/>
+			<arg value="/I${src.include}\opengl" if:true="${build.opengl}"/>
+			<arg value="/I${src.include}\opengl\wgl" if:true="${build.opengl}"/>
 			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include" if:true="${build.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/system" includes="*.c"/>
-			<fileset dir="${generated.native}/system/windows" includes="*.c"/>
-			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/glfw/windows" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${generated.native}/opengl/wgl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
+			<fileset dir="${src.generated.native}/system" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/windows" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
+			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
+			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/glfw/windows" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
+			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/opengl/wgl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
 
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
 
 		<!-- Compile the LibOVR CAPI shim -->
-		<apply dir="${bin.native}" executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${build.ovr}">
+		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${build.ovr}">
 			<arg line="/c /W4 /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
+			<arg value="/Fo${bin.native}\"/>
 
 			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>
 			<fileset dir="${OCULUS_SDK_PATH}/LibOVR/Src" includes="*"/>
@@ -108,8 +110,8 @@ License terms: http://lwjgl.org/license.php
 	</target>
 
 	<target name="-link" depends="-update-dependencies">
-		<apply dir="${lib}" executable="cl" failonerror="true" parallel="true" taskname="Linker">
-			<arg line='/LD /WX /nologo /Fe:"${LWJGL_LIBRARY}"'/>
+		<apply executable="cl" failonerror="true" parallel="true" taskname="Linker">
+			<arg line='/LD /WX /nologo /Fe:"${lib}\${LWJGL_LIBRARY}"'/>
 			<srcfile/>
 			<arg line="/link /OPT:REF,ICF /DLL ${libs}"/>
 			<arg value="OpenGL32.lib" if:true="${build.opengl}"/>

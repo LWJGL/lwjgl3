@@ -6,7 +6,7 @@ Defines which library bindings will be build with LWJGL.
 
 This script is included in /config/build-definitions.xml.
 -->
-<project name="modules" basedir="../">
+<project name="bindings" basedir="../">
 
 	<!-- // ========== MODULE FLAGS ======== // -->
 
@@ -21,7 +21,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="build.mantle" value="false"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
-	<!--<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>-->
+	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
 
 	<property name="build.macosx.objc" value="true"/>
 
@@ -57,7 +57,7 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ================================ // -->
 
-	<target name="modules">
+	<target name="bindings">
 		<condition property="build.ovr" value="true" else="false">
 			<isset property="OCULUS_SDK_PATH"/>
 		</condition>
@@ -72,9 +72,9 @@ This script is included in /config/build-definitions.xml.
 				<isfalse value="${build.opengl}"/>
 			</and>
 		</condition>
-		<fail if="glfw_opengl_check" message="The OpenGL module is required"/>
+		<fail if="glfw_opengl_check" message="The OpenGL bindings are required"/>
 
-		<local name="build.modules.list"/>
+		<local name="bindings.list"/>
 		<script language="javascript">
 			var jvmargs = [];
 
@@ -95,9 +95,9 @@ This script is included in /config/build-definitions.xml.
 
 			push("build.macosx.objc");
 
-			LWJGL.setProperty("build.modules.list", jvmargs.join(" "));
+			LWJGL.setProperty("bindings.list", jvmargs.join(" "));
 		</script>
-		<property name="build.modules" value="${build.modules.list}"/>
+		<property name="build.bindings" value="${bindings.list}"/>
 	</target>
 
 </project>

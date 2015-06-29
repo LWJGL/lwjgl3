@@ -123,6 +123,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		println("\n\tContextCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {")
 		for ( extension in classes ) {
+			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
 			if ( extension.hasNativeFunctions ) {
 				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")
 				if ( extension.functions.hasDeprecated ) print(", fc")

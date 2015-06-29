@@ -1,6 +1,6 @@
 /config/ide/idea/.idea/workspace.xml
 /bin
-/generated
+/modules/core/src/generated
 /release
 /libs
 /wiki

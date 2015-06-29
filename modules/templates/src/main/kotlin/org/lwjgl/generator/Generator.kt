@@ -20,12 +20,14 @@ import java.util.HashMap
 	- Any file in the source package has later timestamp than the target.
 	- Any file in the generator itself has later timestamp than the target. (implies re-generation of all templates)
 
-	Example template: src/templates/org/lwjgl/opengl/templates/ARB_copy_buffer.kt
+	Example template: /src/main/kotlin/org/lwjgl/opengl/templates/ARB_imaging.kt
 
-	- Generator source -> src/templates/org/lwjgl/generator/
-	- Source template -> src/templates/org/lwjgl/opengl/templates/ARB_copy_buffer.kt
-	- Source package -> src/templates/org/lwjgl/opengl/
-	- Target source -> generated/java/org/lwjgl/opengl/ARBCopyBuffer.java
+	- Generator source      -> /src/main/kotlin/org/lwjgl/generator/
+	- Source package        -> /src/main/kotlin/org/lwjgl/opengl/
+	- Source template       -> /src/main/kotlin/org/lwjgl/opengl/templates/ARB_imaging.kt
+
+	- Target source (Java)  -> modules/core/src/generated/java/org/lwjgl/opengl/ARBImaging.java
+	- Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
 enum class Module(val key: String) {
@@ -214,7 +216,7 @@ class Generator(
 			return
 		}
 
-		println("GENERATING: ${nativeClass.packageName}.${nativeClass.className}")
+		//println("GENERATING: ${nativeClass.packageName}.${nativeClass.className}")
 
 		generateOutput(nativeClass, outputJava, touchTimestamp) {
 			it.generateJava()
@@ -251,7 +253,7 @@ class Generator(
 			return
 		}
 
-		println("GENERATING: ${target.packageName}.${target.className}")
+		//println("GENERATING: ${target.packageName}.${target.className}")
 
 		generateOutput(target, outputJava, touchTimestamp) {
 			it.generateJava()
@@ -271,7 +273,7 @@ class Generator(
 		if ( !target.nativeSubPath.isEmpty() )
 			subPackagePath = "$subPackagePath/${target.nativeSubPath}"
 
-		generate(File("$trgPath/native/$subPackagePath/${target.nativeFileName}.c"))
+		generate(File("$trgPath/c/$subPackagePath/${target.nativeFileName}.c"))
 	}
 
 }

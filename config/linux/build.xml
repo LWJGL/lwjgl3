@@ -26,7 +26,7 @@ License terms: http://lwjgl.org/license.php
 	</condition>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
-	<fileset id="link-libraries" dir="${lib.abs}/linux/${build.arch}/">
+	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
 		<include name="libffi.a"/>
 		<include name="libglfw3.a" if:true="${build.glfw}"/>
 	</fileset>
@@ -35,35 +35,37 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
+		<local name="src.include.rel"/>
+		<property name="src.include.rel" value="../../../${src.include}"/> <!-- src.include relative to bin.native -->
 		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 			<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
 			<arg value="-I${java.home}/../include"/>
 			<arg value="-I${java.home}/../include/linux"/>
 
 			<!-- Paths relative to dir -->
-			<arg value="-I${src.native.abs}/system"/>
-			<arg value="-I${src.native.abs}/system/linux"/>
-			<arg value="-I${src.native.abs}/system/libffi"/>
-			<arg value="-isystem${src.native.abs}/stb" if:true="${build.stb}"/>
-			<arg value="-I${src.native.abs}/glfw" if:true="${build.glfw}"/>
-			<arg value="-I${src.native.abs}/openal" if:true="${build.openal}"/>
-			<arg value="-I${src.native.abs}/opencl" if:true="${build.opencl}"/>
-			<arg value="-I${src.native.abs}/opengl" if:true="${build.opengl}"/>
-			<arg value="-I${src.native.abs}/opengl/glx" if:true="${build.opengl}"/>
+			<arg value="-I${src.include.rel}/system"/>
+			<arg value="-I${src.include.rel}/system/linux"/>
+			<arg value="-I${src.include.rel}/system/libffi"/>
+			<arg value="-isystem${src.include.rel}/stb" if:true="${build.stb}"/>
+			<arg value="-I${src.include.rel}/glfw" if:true="${build.glfw}"/>
+			<arg value="-I${src.include.rel}/openal" if:true="${build.openal}"/>
+			<arg value="-I${src.include.rel}/opencl" if:true="${build.opencl}"/>
+			<arg value="-I${src.include.rel}/opengl" if:true="${build.opengl}"/>
+			<arg value="-I${src.include.rel}/opengl/glx" if:true="${build.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
 			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/system" includes="*.c"/>
-			<fileset dir="${generated.native}/system/linux" includes="*.c"/>
-			<fileset dir="${generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
-			<fileset dir="${generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/glfw/linux" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
-			<fileset dir="${generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
-			<fileset dir="${generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/system" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/linux" includes="*.c"/>
+			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
+			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
+			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/glfw/linux" includes="*.c" if:true="${build.glfw}"/>
+			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
+			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
+			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>
@@ -108,9 +110,9 @@ License terms: http://lwjgl.org/license.php
 		<local name="version.script"/>
 		<property name="version.script" location="config/linux/version.script"/>
 
-		<apply dir="${lib}" executable="gcc" failonerror="true" parallel="true" taskname="Linker">
+		<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${LWJGL_LIBRARY} ${libs} -Xlinker --version-script -Xlinker ${version.script}"/>
+			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${lib}/${LWJGL_LIBRARY} ${libs} -Xlinker --version-script -Xlinker ${version.script}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
