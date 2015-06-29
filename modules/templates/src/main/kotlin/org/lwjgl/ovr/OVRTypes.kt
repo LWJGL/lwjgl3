@@ -13,7 +13,7 @@ import org.lwjgl.system.windows.HWND
 // We include the OVR headers from the Oculus SDK directly, so handle warnings on use-site
 private fun GeneratorTargetNative.includeOVRCAPI() = nativeDirective(
 	"""DISABLE_WARNINGS()
-#include "OVR_CAPI_0_6_0.h"
+#include "OVR_CAPI.h"
 ENABLE_WARNINGS()""")
 
 private fun GeneratorTargetNative.includeOVRCAPI_GL() = nativeDirective(

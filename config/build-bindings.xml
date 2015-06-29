@@ -59,7 +59,10 @@ This script is included in /config/build-definitions.xml.
 
 	<target name="bindings">
 		<condition property="build.ovr" value="true" else="false">
-			<isset property="OCULUS_SDK_PATH"/>
+			<and>
+				<isset property="OCULUS_SDK_PATH"/>
+				<available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
+			</and>
 		</condition>
 
 		<local name="glfw_opengl_check"/>
