@@ -10,9 +10,9 @@ Downloads LWJGL's library dependencies.
 	<import file="${config}/build-definitions.xml" id="defs"/>
 
 	<!-- *********************************** -->
-	<property name="testng" value="6.8.13"/>
-	<property name="jcommander" value="1.47"/>
-	<property name="kotlinc-build" value="0.12.200"/>
+	<property name="testng" value="6.8.21"/>
+	<property name="jcommander" value="1.48"/>
+	<property name="kotlinc-build" value="0.12.613"/>
 	<!-- *********************************** -->
 
 	<target name="-dependencies-uptodate">
