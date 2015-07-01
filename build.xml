@@ -421,7 +421,7 @@ License terms: http://lwjgl.org/license.php
 		<update name="LWJGL Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so" dest="${release.native}"/>
 		<update name="LWJGL Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so" dest="${release.native}/liblwjgl32.so"/>
 		<update name="OpenAL32 Linux64" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}"/>
-		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so" dest="${release.native}/libopenal32.so"/>
+		<update name="OpenAL32 Linux32" url="http://build.lwjgl.org/${build.type}/linux/x86/libopenal.so" dest="${release.native}/libopenal32.so"/>
 
 		<update name="LWJGL OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib" dest="${release.native}"/>
 		<update name="OpenAL32 OSX" url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib" dest="${release.native}"/>
