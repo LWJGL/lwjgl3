@@ -132,6 +132,19 @@
             <option name="SMART_TABS" value="true" />
           </indentOptions>
         </codeStyleSettings>
+        <codeStyleSettings language="Groovy">
+          <option name="SPACE_WITHIN_IF_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_WHILE_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_FOR_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_CATCH_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_SWITCH_PARENTHESES" value="true" />
+          <option name="SPACE_WITHIN_SYNCHRONIZED_PARENTHESES" value="true" />
+          <indentOptions>
+            <option name="CONTINUATION_INDENT_SIZE" value="4" />
+            <option name="USE_TAB_CHARACTER" value="true" />
+            <option name="SMART_TABS" value="true" />
+          </indentOptions>
+        </codeStyleSettings>
         <codeStyleSettings language="HTML">
           <indentOptions>
             <option name="CONTINUATION_INDENT_SIZE" value="4" />

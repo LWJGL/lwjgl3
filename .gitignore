@@ -4,6 +4,7 @@
 /release
 /libs
 /wiki
+.gradle
 .DS_Store
 *.bat
 *.ogg
@@ -12,5 +13,3 @@
 *.wav
 *.zip
 touch.txt
-.gradle/
-build/

@@ -1,156 +1,146 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+buildDir = 'bin/MAVEN'
+
 apply plugin: "maven"
 apply plugin: "signing"
 
 project.group = "org.lwjgl"
-project.version = "3.0.0b"
+project.version = lwjglVersion
 
-def isDevBuild
-def isCiBuild
-def isReleaseBuild
-
-def repositoryUrl
-def repositoryUser
-def repositoryPassword
-
-//set build variables based on build type (release, continuous integration, development)
-if(hasProperty("release")) {
-    isReleaseBuild = true
-    repositoryUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"                             
-    repositoryUser = sonatypeUsername
-	repositoryPassword = sonatypePassword
-    println "Performing release build"
-} else if (hasProperty("snapshot")) {
-    isCiBuild = true
-    project.version += "-SNAPSHOT"
-    repositoryUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-    repositoryUser = sonatypeUsername
-	repositoryPassword = sonatypePassword
-    println "Performing snapshot build"
-} else {
-    isDevBuild = true
-    repositoryUrl = repositories.mavenLocal().url
-    repositoryUser = ""
-	repositoryPassword = ""
-    println "Performing local build"
+// Set build variables based on build type (release, continuous integration, development)
+enum BuildType {
+	LOCAL,
+	SNAPSHOT,
+	RELEASE
 }
+
+class Deployment {
+	BuildType type
+	String repo
+	String user
+	String password
+}
+
+Deployment deployment;
+if ( hasProperty("release") ) {
+	buildRepo.isRelease = true
+	deployment = new Deployment(
+		type: BuildType.RELEASE,
+		repo: "https://oss.sonatype.org/service/local/staging/deploy/maven2/",
+		user: sonatypeUsername,
+		password: sonatypePassword
+	)
+	println "Performing release build"
+} else if ( hasProperty("snapshot") ) {
+	project.version += "-SNAPSHOT"
+	deployment = new Deployment(
+		type: BuildType.SNAPSHOT,
+		repo: "https://oss.sonatype.org/content/repositories/snapshots/",
+		user: sonatypeUsername,
+		password: sonatypePassword
+	)
+	println "Performing snapshot build"
+} else {
+	deployment = new Deployment(
+		type: BuildType.LOCAL,
+		repo: repositories.mavenLocal().url
+	)
+}
+println "${deployment.type.name()} BUILD"
 
 artifacts {
-  archives file: file("release/jar/lwjgl.jar"), name: "lwjgl", type: "jar"
-  archives file: file("release/jar/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
-  archives file: file("release/jar/javadoc.jar"), name: "lwjgl", type: "jar", classifier: "javadoc"
-  archives file: file("build.gradle"), name: "lwjgl-platform", type: "pom"
-  archives file: file("release/jar/lwjgl-natives-windows.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-windows"
-  archives file: file("release/jar/lwjgl-natives-macosx.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-osx"
-  archives file: file("release/jar/lwjgl-natives-linux.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-linux"
+	archives file: file("$buildDir/lwjgl.jar"), name: "lwjgl", type: "jar"
+	archives file: file("$buildDir/src.jar"), name: "lwjgl", type: "jar", classifier: "sources"
+	archives file: file("$buildDir/javadoc.jar"), name: "lwjgl", type: "jar", classifier: "javadoc"
+	archives file: file("$buildDir/lwjgl-natives-windows.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-windows"
+	archives file: file("$buildDir/lwjgl-natives-macosx.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-osx"
+	archives file: file("$buildDir/lwjgl-natives-linux.jar"), name: "lwjgl-platform", type: "jar", classifier: "natives-linux"
 }
 
-if(isReleaseBuild) {
-    signing {
-        sign configurations.archives
-    }
+if ( deployment.type == BuildType.RELEASE ) {
+	signing {
+		sign configurations.archives
+	}
 } else {
-    task signArchives {
-        // do nothing
-    }
+	task signArchives {
+		// do nothing
+	}
 }
 
-Closure defaultPom = {
-	project {
-		packaging "jar"        
-		description 'LWJGL'
-		url 'http://www.lwjgl.org'
+def lwjglPOM = { String projectName, String packagingMethod ->
+	return {
+		project {
+			name projectName
+			packaging packagingMethod
+			description 'LWJGL'
+			url 'http://www.lwjgl.org'
 
-		scm {
-		   url 'scm:git@github.com:LWJGL/lwjgl3.git'
-		   connection 'scm:git@github.com:LWJGL/lwjgl3.git'
-		   developerConnection 'scm:git@github.com:LWJGL/lwjgl3.git'
+			scm {
+				url 'scm:git@github.com:LWJGL/lwjgl3.git'
+				connection 'scm:git@github.com:LWJGL/lwjgl3.git'
+				developerConnection 'scm:git@github.com:LWJGL/lwjgl3.git'
+			}
+
+			licenses {
+				license {
+					name 'BSD'
+					url 'http://www.lwjgl.org/license'
+					distribution 'repo'
+				}
+			}
+
+			developers {
+				developer {
+					id "spasi"
+					name "Ioannis Tsakpinis"
+				}
+			}
 		}
-
-		licenses {
-		   license {
-		       name 'BSD'
-		       url 'http://www.lwjgl.org/license'
-		       distribution 'repo'
-		   }
-		}
-
-    developers {
-      developer {
-        id "spasi"
-        name "Ioannis Tsakpinis"
-      }    
-    }
 	}
 }
 
 uploadArchives {
 	repositories {
 		mavenDeployer {
-			repository(url: repositoryUrl) {
-        authentication(userName: repositoryUser, password: repositoryPassword)
+			repository(url: deployment.repo) {
+				authentication(userName: deployment.user, password: deployment.password)
 			}
 
-      if(isReleaseBuild) {
-        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
-      }		
-      		
-  		addFilter("lwjgl") {artifact, file -> 
-  			artifact.name == "lwjgl"
-  		} 
-      addFilter("lwjgl-platform") {artifact, file -> 
-        artifact.name == "lwjgl-platform"
-      }     		
+			if ( deployment.type == BuildType.RELEASE ) {
+				beforeDeployment { signing.signPom(it) }
+			}
 
-  		pom("lwjgl", defaultPom).name = "LWJGL"
-  		def platformpom = pom("lwjgl-platform", defaultPom)
-      platformpom.packaging = "pom"
-      platformpom.name = "LWJGL Platform"
+			addFilter("lwjgl") { artifact, file -> artifact.name == "lwjgl" }
+			addFilter("lwjgl-platform") { artifact, file -> artifact.name == "lwjgl-platform" }
+
+			pom("lwjgl", lwjglPOM("LWJGL", "jar"))
+			pom("lwjgl-platform", lwjglPOM("LWJGL Platform", "pom"))
 		}
-  }
+	}
 }
 
-task copySources(type: Copy) {
-  from "release/src.zip"
-  destinationDir file("release/jar")
-  rename { String fileName ->
-    fileName.replace(".zip", ".jar")
-  }
+task copyArchives(type: Copy) {
+	from "release/jar/lwjgl.jar", "release/src.zip", "release/doc/javadoc.zip"
+	destinationDir file(buildDir)
+	rename { it.replace(".zip", ".jar") }
 }
+signArchives.mustRunAfter copyArchives
+uploadArchives.dependsOn copyArchives
 
-task copyJavadocs(type: Copy) {
-  from "release/doc/javadoc.zip"
-  destinationDir file("release/jar")
-  rename { String fileName ->
-    fileName.replace(".zip", ".jar")
-  }
+[
+	[include: "*.dll", name: "Windows"],
+	[include: "*.so", name: "Linux"],
+	[include: "*.dylib", name: "MacOSX"]
+].each { archive ->
+	def zipNatives = task("zipNatives$archive.name", type: Zip) {
+		from "release/native"
+		include archive.include
+		archiveName "lwjgl-natives-${archive.name.toLowerCase()}.jar"
+		destinationDir file(buildDir)
+	}
+	signArchives.mustRunAfter zipNatives
+	uploadArchives.dependsOn zipNatives
 }
-
-task zipNativesWindows(type: Zip) {
-    from "release/native"    
-    include "*.dll"
-    archiveName "lwjgl-natives-windows.jar"
-    destinationDir file("release/jar")
-}
-task zipNativesLinux(type: Zip) {
-    from "release/native"    
-    include "*.so"
-    archiveName "lwjgl-natives-linux.jar"
-    destinationDir file("release/jar")
-}
-task zipNativesMacOSX(type: Zip) {
-    from "release/native"    
-    include "*.dylib"
-    archiveName "lwjgl-natives-macosx.jar"
-    destinationDir file("release/jar")
-}
-signArchives.mustRunAfter(copySources)
-signArchives.mustRunAfter(copyJavadocs)
-signArchives.mustRunAfter(zipNativesLinux)
-signArchives.mustRunAfter(zipNativesWindows)
-signArchives.mustRunAfter(zipNativesMacOSX)
-
-uploadArchives.dependsOn(copySources)
-uploadArchives.dependsOn(copyJavadocs)
-uploadArchives.dependsOn(zipNativesLinux)
-uploadArchives.dependsOn(zipNativesWindows)
-uploadArchives.dependsOn(zipNativesMacOSX)
