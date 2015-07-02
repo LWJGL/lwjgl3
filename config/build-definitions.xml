@@ -82,10 +82,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
 	<property name="test.resources" location="${module.core}/src/test/resources" relative="true"/>
 
-	<property name="release" location="release" relative="false"/>
-	<property name="release.jar" location="${release}/jar" relative="false"/>
-	<property name="release.native" location="${release}/native" relative="false"/>
-	<property name="release.doc" location="${release}/doc" relative="false"/>
+	<property name="release" location="${bin}/RELEASE" relative="true"/>
+	<property name="release.jar" location="${release}/jar" relative="true"/>
+	<property name="release.native" location="${release}/native" relative="true"/>
+	<property name="release.doc" location="${release}/doc" relative="true"/>
 
 	<!--
 		The target native architecture. Must be either x86 or x64. By default, os.arch of the JVM

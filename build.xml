@@ -25,7 +25,6 @@ License terms: http://lwjgl.org/license.php
 		<!-- These depend on LWJGL_BUILD_OUTPUT and may be symlinks -->
 		<mkdir-symlink dir="bin"/>
 		<mkdir-symlink dir="${src.generated}"/>
-		<mkdir-symlink dir="release"/>
 
 		<mkdir dir="${bin.core}"/>
 		<mkdir dir="${bin.util}"/>
@@ -89,7 +88,6 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="clean" description="Cleans all directories controlled by this script" depends="clean-java, clean-native, clean-templates, clean-generated">
 		<delete-symlink dir="bin"/>
-		<delete-symlink dir="release"/>
 		<!-- Do not delete /generated, it may contain the lwjgl3-generated git repo -->
 		<!-- Do not delete /wiki, it may contain the lwjgl3-wiki git repo -->
 

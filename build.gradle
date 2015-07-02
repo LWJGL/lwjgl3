@@ -2,13 +2,17 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-buildDir = 'bin/MAVEN'
+project.buildDir = 'bin/MAVEN'
 
 apply plugin: "maven"
 apply plugin: "signing"
 
 project.group = "org.lwjgl"
 project.version = lwjglVersion
+
+def PATHS = [
+	release: 'bin/RELEASE'
+]
 
 // Set build variables based on build type (release, continuous integration, development)
 enum BuildType {
@@ -123,7 +127,7 @@ uploadArchives {
 }
 
 task copyArchives(type: Copy) {
-	from "release/jar/lwjgl.jar", "release/src.zip", "release/doc/javadoc.zip"
+	from "$PATHS.release/jar/lwjgl.jar", "$PATHS.release/src.zip", "$PATHS.release/doc/javadoc.zip"
 	destinationDir file(buildDir)
 	rename { it.replace(".zip", ".jar") }
 }
@@ -136,7 +140,7 @@ uploadArchives.dependsOn copyArchives
 	[include: "*.dylib", name: "MacOSX"]
 ].each { archive ->
 	def zipNatives = task("zipNatives$archive.name", type: Zip) {
-		from "release/native"
+		from "$PATHS.release/native"
 		include archive.include
 		archiveName "lwjgl-natives-${archive.name.toLowerCase()}.jar"
 		destinationDir file(buildDir)
