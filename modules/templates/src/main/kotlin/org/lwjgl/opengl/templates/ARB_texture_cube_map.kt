@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.deprecatedGL
 
 val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_map", postfix = ARB) {
 	documentation =

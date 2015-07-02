@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.deprecatedGL
 
 val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_matrix", postfix = ARB) {
 	nativeImport (
