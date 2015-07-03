@@ -33,22 +33,27 @@ inline JNIEnv *attachCurrentThread(void) {
 }
 
 inline void detachCurrentThread(void) {
-    (*jvm)->DetachCurrentThread(jvm);
+	if ( (*jvm)->DetachCurrentThread(jvm) != JNI_OK ) {
+		fprintf(stderr, "[LWJGL] Failed to detach native thread from the JVM.");
+		fflush(stderr);
+	}
 }
 
 // Put JNIEnv in thread-local storage. getEnv() is ~2x faster than getThreadEnv().
 
-// If getThreadEnv() returns NULL, we are in a foreign thread and we fall-back to attachCurrentThreadAsDaemon(). We never detach such threads. This is ok
-// because daemon threads don't block the JVM from shutting down normally. Even though this looks like a memory leak, it won't be an issue for our usage
-// scenarios. We're expecting that foreign threads will be few in numbers and as long lived as the Java application (OpenGL async debug output, OpenCL
-// callbacks, etc).
-
-// If the above assumptions do not hold for some cases, we'll need to add a cleanup function below, that calls DetachCurrentThread and also clears the
-// thread-local value.
+// If getThreadEnv() returns NULL, getEnv() has been called in a foreign thread that must attach to the JVM to access JNI. Such threads are detached
+// automatically using DllMain notifications (on Windows) or a pthread destructor (on Linux/OSX).
 
 #ifdef LWJGL_WINDOWS
 	#include <WindowsLWJGL.h>
 	DWORD envTLS = TLS_OUT_OF_INDEXES;
+
+	BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
+		UNUSED_PARAMS(hDLL, lpvReserved)
+		if ( fdwReason == DLL_THREAD_DETACH && getThreadEnv() != NULL )
+			detachCurrentThread();
+		return TRUE;
+	}
 
 	static inline void envTLSInit(void) {
 		envTLS = TlsAlloc();
@@ -79,8 +84,14 @@ inline void detachCurrentThread(void) {
 	#include <pthread.h>
 	pthread_key_t envTLS = 0;
 
+	static void autoDetach(void* value) {
+		UNUSED_PARAM(value)
+		if ( getThreadEnv() != NULL )
+            detachCurrentThread();
+	}
+
 	static inline void envTLSInit(void) {
-		if ( pthread_key_create(&envTLS, NULL) != 0 )
+		if ( pthread_key_create(&envTLS, autoDetach) != 0 )
 			fprintf(stderr, "Failed to allocate TLS for JNIEnv.");
 	}
 
@@ -102,7 +113,7 @@ inline void detachCurrentThread(void) {
 
 	inline JNIEnv* getEnv(void) {
 		JNIEnv* env = (JNIEnv*)pthread_getspecific(envTLS);
-		if ( !env )
+		if ( env == NULL )
 			env = envTLSGet();
 		return env;
 	}
