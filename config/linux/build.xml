@@ -9,7 +9,7 @@ License terms: http://lwjgl.org/license.php
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<property name="system_libs" value="-lm -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor"/>
+	<property name="system_libs" value="-lm -lrt -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor"/>
 
 	<condition
 		property="libs"
