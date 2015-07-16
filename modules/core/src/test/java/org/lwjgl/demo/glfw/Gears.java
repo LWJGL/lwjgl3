@@ -62,6 +62,9 @@ public class Gears extends AbstractGears {
 						if ( glfwGetWindowMonitor(window) != NULL )
 							toggleMode = false;
 						break;
+					case GLFW_KEY_G:
+						glfwSetInputMode(window, GLFW_CURSOR, glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+						break;
 				}
 			}
 		};
