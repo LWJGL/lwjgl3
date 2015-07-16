@@ -28,7 +28,7 @@ public final class Truetype extends FontDemo {
 		String filePath;
 		if ( args.length == 0 ) {
 			System.out.println("Use 'ant demo -Dclass=org.lwjgl.demo.stb.Truetype -Dargs=<path>' to load a different text file (must be UTF8-encoded).\n");
-			filePath = "demo/raytracing/hybrid.glsl";
+			filePath = "doc/README.md";
 		} else
 			filePath = args[0];
 
