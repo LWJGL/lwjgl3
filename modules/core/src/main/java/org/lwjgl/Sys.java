@@ -25,7 +25,7 @@ public final class Sys {
 		VERSION_REVISION = 0;
 
 	/** The development state of the current build. */
-	public static final BuildType BUILD_TYPE = BuildType.ALPHA;
+	public static final BuildType BUILD_TYPE = BuildType.BETA;
 
 	static {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
