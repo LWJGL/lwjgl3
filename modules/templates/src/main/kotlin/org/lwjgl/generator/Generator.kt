@@ -54,7 +54,7 @@ fun main(args: Array<String>) {
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = { name: String, path: String ->
-		if ( File(path) let { !it.exists() || !it.isDirectory() } )
+		if ( !File(path).isDirectory() )
 			throw IllegalArgumentException("Invalid $name path: $path")
 	}
 
