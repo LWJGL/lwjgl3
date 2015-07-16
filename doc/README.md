@@ -3,37 +3,36 @@ LWJGL is organized in modules, described below:
 
 ### Core
 The LWJGL core.
-* src/core
-* src/native
-* generated/java
-* generated/native
+* modules/core/src/main/c
+* modules/core/src/main/include
+* modules/core/src/main/java
+* modules/core/src/generated/c
+* modules/core/src/generated/java
+* modules/core/src/test/java (unit tests and demo/tutorial code)
 
 Dependencies: n/a (but the Generator has to execute successfully first)
+Library Dependencies: n/a
+Test Library Dependencies: TestNG, JCommander
 
 ### Utilities
 Optional LWJGL components and helper functionality.
-* src/util
+* modules/util/src/main/java
 
 Dependencies: Core
+Library Dependencies: n/a
 
 ### Templates
 The source code Generator and the templates it uses to define the native bindings.
-* src/templates
+* modules/templates/src/main/java
+* modules/templates/src/main/kotlin
 
-Dependencies: Core
+Dependencies: n/a (except a copy org.lwjgl.PointerBuffer)
 Library Dependencies: Kotlin runtime
-
-### Tests
-Unit tests and demo/tutorial code.
-* src/tests
-
-Module Dependencies: Core, Util, Templates  
-Library Dependencies: TestNG, JCommander
 
 # INSTALLATION
 Requirements:
 * JDK 6 or newer  
-    The **JAVA_HOME** environment variable must be set. Also see *JAVA6_HOME* below for more info.
+    See *JAVA6_HOME* below for more info.
 * Ant 1.9.3 or newer
 
 Step-by-step:
@@ -46,7 +45,7 @@ Step-by-step:
 
 At this point you're ready to follow the build process explained below.
 
-LWJGL also comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins and, optionally, the TestNG and Copyright plugins. There are some Run Configurations defined and you can also call the ant targets directly from the IDE interface.
+LWJGL also comes with a preconfigured **IntelliJ IDEA** project. You can use the Community Edition with the Kotlin and Ant plugins and, optionally, the TestNG and Copyright plugins.
 * File &gt; Open &gt; choose the */config/ide/idea* folder
 * File &gt; Project Structure &gt; Project &gt; choose or create the Project SDK
 * If you haven't used the init-generated and init-wiki targets, either ignore the VCS errors, or go to Settings &gt; Version Control &gt; remove the missing directories from the list of VCS roots.
@@ -65,9 +64,9 @@ LWJGL uses Ant for the build process, which goes like so:
 # GENERATOR
 LWJGL uses the **Generator** in the Templates module to automatically generate native code bindings. The Generator uses template files as input. Both the Generator itself and the template files are written in Kotlin, which is a new JVM-based language, more info [here](http://kotlinlang.org/). The Generator defines a handy DSL that the templates use to define the native code structure.
 
-* Generator source: src/templates/org/lwjgl/generator
-* Template configuration: src/templates/org/lwjgl/&lt;**PACKAGE**&gt;
-* Template source: src/templates/org.lwjgl/&lt;**PACKAGE**&gt;/templates
+* Generator source: modules/templates/src/main/kotlin/org/lwjgl/generator
+* Template configuration: modules/templates/src/main/kotlin/org/lwjgl/&lt;**PACKAGE**&gt;
+* Template source: modules/templates/src/main/kotlin/org.lwjgl/&lt;**PACKAGE**&gt;/templates
 
 The Generator is very aggressive with skipping work during the generation process. It does that by comparing timestamps of the input template source and the output Java source files. The output file timestamp is also compared against the timestamp of the latest change in the Generator source. Even when all attemps to skip generation fail, the generation happens in-memory and the output file contents are compared against the new content. Only when something has changed is the file overwritten.
 
@@ -76,13 +75,13 @@ The benefit of all that is reduced native code compilation times. If, for any re
 # BUILD CONFIGURATION
 The config folder contains the LWJGL configuration.
 * ANT
-	- Basic definitions: config/build-definitions.xml
-	- Platform-specific definitions: A folder per platform
+	- config/build-assets.xml: Demo assets
+	- config/build-bindings.xml: Bindings configuration
+	- config/build-definitions.xml: Reusable definitions and utilities
+	- config/<platform>/build.xml: Platform-specific definitions
 * TestNG
 	- config/tests.xml
 	- a config/tests_<platform>.xml per platform
-* Kotlin
-	- config/Templates.kts is the build script used by the Kotlin compiler
 
 The ANT build can be configured with the following environment variables:
 * JAVA6_HOME (optional, recommended)  
