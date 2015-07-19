@@ -60,7 +60,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		"DOUBLE_MAT4x3_EXT" _ 0x8F4E
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL1dEXT",
 		"",
 
@@ -68,7 +68,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble.IN("x", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL2dEXT",
 		"",
 
@@ -77,7 +77,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble.IN("y", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL3dEXT",
 		"",
 
@@ -87,7 +87,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble.IN("z", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL4dEXT",
 		"",
 
@@ -98,7 +98,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble.IN("w", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL1dvEXT",
 		"",
 
@@ -106,7 +106,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		const _ GLdouble_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL2dvEXT",
 		"",
 
@@ -114,7 +114,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		const _ GLdouble_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL3dvEXT",
 		"",
 
@@ -122,7 +122,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		const _ GLdouble_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribL4dvEXT",
 		"",
 
@@ -130,7 +130,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		const _ GLdouble_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribLPointerEXT",
 		"",
 
@@ -138,10 +138,10 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLint.IN("size", ""),
 		AutoType("pointer", BufferType.GL_DOUBLE) _ GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
-		ARRAY_BUFFER _ const _ GLvoid_p.IN("pointer", "")
+		ARRAY_BUFFER _ const _ void_p.IN("pointer", "")
 	)
 
-	GLvoid(
+	void(
 		"GetVertexAttribLdvEXT",
 		"",
 
@@ -150,7 +150,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"VertexArrayVertexAttribLOffsetEXT",
 		"",
 

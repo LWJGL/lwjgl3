@@ -73,7 +73,7 @@ val ARB_vertex_attrib_64bit = "ARBVertexAttrib64Bit".nativeClassGL("ARB_vertex_a
 
 	GL41 reuse "GetVertexAttribLdv"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"VertexArrayVertexAttribLOffsetEXT",
 		"DSA version of #VertexAttribLPointer().",
 

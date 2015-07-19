@@ -146,7 +146,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"UNSIGNED_INT_ATOMIC_COUNTER" _ 0x92DB
 	)
 
-	GLvoid(
+	void(
 		"GetActiveAtomicCounterBufferiv",
 		"Obtains information about the set of active atomic counter buffers for a program.",
 
@@ -164,7 +164,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"TEXTURE_IMMUTABLE_FORMAT" _ 0x912F
 	)
 
-	GLvoid(
+	void(
 		"TexStorage1D",
 		"Simultaneously specifies storage for all levels of a one-dimensional texture.",
 
@@ -174,7 +174,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("width", "the width of the texture, in texels")
 	)
 
-	GLvoid(
+	void(
 		"TexStorage2D",
 		"Simultaneously specifies storage for all levels of a two-dimensional or one-dimensional array texture.",
 
@@ -185,7 +185,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("height", "the height of the texture, in texels")
 	)
 
-	GLvoid(
+	void(
 		"TexStorage3D",
 		"Simultaneously specifies storage for all levels of a three-dimensional, two-dimensional array or cube-map array texture.",
 
@@ -199,7 +199,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_transform_feedback_instanced
 
-	GLvoid(
+	void(
 		"DrawTransformFeedbackInstanced",
 		"Renders multiple instances of primitives using a count derived from a transform feedback object.",
 
@@ -208,7 +208,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLsizei.IN("primcount", "the number of instances of the geometry to render")
 	)
 
-	GLvoid(
+	void(
 		"DrawTransformFeedbackStreamInstanced",
 		"Renders multiple instances of primitives using a count derived from a specifed stream of a transform feedback object.",
 
@@ -220,7 +220,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 
 	// ARB_base_instance
 
-	GLvoid(
+	void(
 		"DrawArraysInstancedBaseInstance",
 		"Draws multiple instances of a range of elements with an offset applied to instanced attributes.",
 
@@ -231,7 +231,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
 	)
 
-	GLvoid(
+	void(
 		"DrawElementsInstancedBaseInstance",
 		"Draws multiple instances of a set of elements with an offset applied to instanced attributes",
 
@@ -242,12 +242,12 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
 	)
 
-	GLvoid(
+	void(
 		"DrawElementsInstancedBaseVertexBaseInstance",
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
@@ -258,7 +258,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
@@ -363,7 +363,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"IMAGE_FORMAT_COMPATIBILITY_BY_CLASS" _ 0x90C9
 	)
 
-	GLvoid(
+	void(
 		"BindImageTexture",
 		"Binds a level of a texture to an image unit.",
 
@@ -376,7 +376,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		GLenum.IN("format", "the format that the elements of the image will be treated as for the purposes of formatted stores")
 	)
 
-	GLvoid(
+	void(
 		"MemoryBarrier",
 		"Defines a barrier ordering memory transactions.",
 
@@ -391,7 +391,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"NUM_SAMPLE_COUNTS" _ 0x9380
 	)
 
-	GLvoid(
+	void(
 		"GetInternalformativ",
 		"Retrieves information about implementation-dependent support for internal formats.",
 

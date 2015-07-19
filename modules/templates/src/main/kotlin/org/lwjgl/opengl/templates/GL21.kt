@@ -40,7 +40,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		"FLOAT_MAT4x3" _ 0x8B6A
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix2x3fv",
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
@@ -50,7 +50,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3x2fv",
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
@@ -60,7 +60,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix2x4fv",
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
@@ -70,7 +70,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4x2fv",
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
@@ -80,7 +80,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3x4fv",
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
@@ -90,7 +90,7 @@ val GL21 = "GL21".nativeClassGL("GL21") {
 		const _ GLfloat_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4x3fv",
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 

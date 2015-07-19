@@ -39,7 +39,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 
-	ReferenceGL("glBlendEquation") _ GLvoid(
+	ReferenceGL("glBlendEquation") _ void(
 		"BlendEquationi",
 		"Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the specified draw buffer.",
 
@@ -47,7 +47,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		GLenum.IN("mode", "how source and destination colors are combined", blendEquations)
 	)
 
-	ReferenceGL("glBlendEquationSeparate") _ GLvoid(
+	ReferenceGL("glBlendEquationSeparate") _ void(
 		"BlendEquationSeparatei",
 		"Sets the RGB blend equation and the alpha blend equation separately for the specified draw buffer.",
 
@@ -56,7 +56,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		GLenum.IN("modeAlpha", "the alpha blend equation, how the alpha component of the source and destination colors are combined", blendEquations)
 	)
 
-	GLvoid(
+	void(
 		"BlendFunci",
 		"Specifies pixel arithmetic for the specified draw buffer.",
 
@@ -65,7 +65,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		GLenum.IN("dfactor", "how the red, green, blue, and alpha destination blending factors are computed")
 	)
 
-	GLvoid(
+	void(
 		"BlendFuncSeparatei",
 		"Specifies pixel arithmetic for RGB and alpha components separately for the specified draw buffer.",
 
@@ -93,7 +93,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		"DRAW_INDIRECT_BUFFER_BINDING" _ 0x8F43
 	)
 
-	GLvoid(
+	void(
 		"DrawArraysIndirect",
 		"""
 		Renders primitives from array data, taking parameters from memory.
@@ -120,10 +120,10 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 			expression = "4 * 4", bytes = true
 		) _ MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "a structure containing the draw parameters")
+		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing the draw parameters")
 	)
 
-	GLvoid(
+	void(
 		"DrawElementsIndirect",
 		"""
 		Renders indexed primitives from array data, taking parameters from memory.
@@ -169,7 +169,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			expression = "5 * 4", bytes = true
 		) _ MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "the address of a structure containing the draw parameters")
+		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "the address of a structure containing the draw parameters")
 	)
 
 	// ARB_gpu_shader5
@@ -223,7 +223,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	val uniformMatrixTranspose = "whether to transpose the matrix as the values are loaded into the uniform variable"
 	val uniformMatrixValue = "a pointer to an array of {@code count} values that will be used to update the specified uniform matrix variable"
 
-	GLvoid(
+	void(
 		"Uniform1d",
 		"Specifies the value of a double uniform variable for the current program object.",
 
@@ -231,7 +231,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLdouble.IN("x", uniformX)
 	)
 
-	GLvoid(
+	void(
 		"Uniform2d",
 		"Specifies the value of a dvec2 uniform variable for the current program object.",
 
@@ -240,7 +240,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLdouble.IN("y", uniformY)
 	)
 
-	GLvoid(
+	void(
 		"Uniform3d",
 		"Specifies the value of a dvec3 uniform variable for the current program object.",
 
@@ -250,7 +250,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLdouble.IN("z", uniformZ)
 	)
 
-	GLvoid(
+	void(
 		"Uniform4d",
 		"Specifies the value of a dvec4 uniform variable for the current program object.",
 
@@ -261,7 +261,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLdouble.IN("w", uniformW)
 	)
 
-	GLvoid(
+	void(
 		"Uniform1dv",
 		"Specifies the value of a single double uniform variable or a double uniform variable array for the current program object.",
 
@@ -270,7 +270,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
-	GLvoid(
+	void(
 		"Uniform2dv",
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for the current program object.",
 
@@ -279,7 +279,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
-	GLvoid(
+	void(
 		"Uniform3dv",
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for the current program object.",
 
@@ -288,7 +288,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
-	GLvoid(
+	void(
 		"Uniform4dv",
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for the current program object.",
 
@@ -297,7 +297,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformArrayValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix2dv",
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
@@ -307,7 +307,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3dv",
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
@@ -317,7 +317,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4dv",
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
@@ -327,7 +327,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix2x3dv",
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
@@ -337,7 +337,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix2x4dv",
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
@@ -347,7 +347,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3x2dv",
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
@@ -358,7 +358,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3x4dv",
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
@@ -369,7 +369,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4x2dv",
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
@@ -380,7 +380,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4x3dv",
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
@@ -391,7 +391,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 	)
 
-	GLvoid(
+	void(
 		"GetUniformdv",
 		"Returns the double value(s) of a uniform variable.",
 
@@ -417,7 +417,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"MIN_SAMPLE_SHADING_VALUE" _ 0x8C37
 	)
 
-	GLvoid(
+	void(
 		"MinSampleShading",
 		"Specifies the minimum rate at which sample shading takes place.",
 
@@ -468,7 +468,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ GLcharASCII_p.IN("name", "the name of the subroutine function whose index to query")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveSubroutineUniformiv",
 		"Queries a property of an active shader subroutine uniform.",
 
@@ -483,7 +483,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		Check(1) _ returnValue _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveSubroutineUniformName",
 		"Queries the name of an active shader subroutine uniform.",
 
@@ -497,7 +497,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		) _ GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveSubroutineName",
 		"Queries the name of an active shader subroutine.",
 
@@ -511,7 +511,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		) _ GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
 	)
 
-	GLvoid(
+	void(
 		"UniformSubroutinesuiv",
 		"Loads active subroutine uniforms.",
 
@@ -520,7 +520,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ SingleValue("index") _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
 	)
 
-	GLvoid(
+	void(
 		"GetUniformSubroutineuiv",
 		"Retrieves the value of a subroutine uniform of a given shader stage of the current program.",
 
@@ -529,7 +529,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		Check(1) _ returnValue _ GLuint_p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
 	)
 
-	GLvoid(
+	void(
 		"GetProgramStageiv",
 		"Retrieves properties of a program object corresponding to a specified shader stage.",
 
@@ -618,7 +618,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"TESS_CONTROL_SHADER" _ 0x8E88
 	)
 
-	GLvoid(
+	void(
 		"PatchParameteri",
 		"Specifies the integer value of the specified parameter for patch primitives.",
 
@@ -626,7 +626,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLint.IN("value", "the new value for the parameter given by {@code pname}")
 	)
 
-	GLvoid(
+	void(
 		"PatchParameterfv",
 		"Specifies an array of float values for the specified parameter for patch primitives.",
 
@@ -691,7 +691,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"TRANSFORM_FEEDBACK_BINDING" _ 0x8E25
 	)
 
-	GLvoid(
+	void(
 		"BindTransformFeedback",
 		"Binds a transform feedback object.",
 
@@ -699,7 +699,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("id", "the name of a transform feedback object")
 	)
 
-	GLvoid(
+	void(
 		"DeleteTransformFeedbacks",
 		"Deletes transform feedback objects.",
 
@@ -707,7 +707,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
 	)
 
-	GLvoid(
+	void(
 		"GenTransformFeedbacks",
 		"Reserves transform feedback object names.",
 
@@ -722,7 +722,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("id", "a value that may be the name of a transform feedback object")
 	)
 
-	GLvoid(
+	void(
 		"PauseTransformFeedback",
 		"""
 		Pauses transform feedback operations for the currently bound transform feedback object.
@@ -739,7 +739,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"""
 	)
 
-	GLvoid(
+	void(
 		"ResumeTransformFeedback",
 		"""
 		Resumes transform feedback operations for the currently bound transform feedback object.
@@ -748,7 +748,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"""
 	)
 
-	GLvoid(
+	void(
 		"DrawTransformFeedback",
 		"Render primitives using a count derived from a transform feedback object.",
 
@@ -765,7 +765,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"MAX_VERTEX_STREAMS" _ 0x8E71
 	)
 
-	GLvoid(
+	void(
 		"DrawTransformFeedbackStream",
 		"Renders primitives using a count derived from a specifed stream of a transform feedback object.",
 
@@ -774,7 +774,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("stream", "the index of the transform feedback stream from which to retrieve a primitive count")
 	)
 
-	GLvoid(
+	void(
 		"BeginQueryIndexed",
 		"Begins a query object on an indexed target",
 
@@ -787,7 +787,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	ReferenceGL("glBeginQueryIndexed") _ GLvoid(
+	ReferenceGL("glBeginQueryIndexed") _ void(
 		"EndQueryIndexed",
 		"Ends a query object on an indexed target",
 
@@ -795,7 +795,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("index", "the index of the query target upon which to end the query")
 	)
 
-	GLvoid(
+	void(
 		"GetQueryIndexediv",
 		"Returns parameters of an indexed query object target.",
 

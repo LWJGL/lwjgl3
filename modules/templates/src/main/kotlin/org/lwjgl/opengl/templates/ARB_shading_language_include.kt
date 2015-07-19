@@ -83,7 +83,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		"NAMED_STRING_TYPE_ARB" _ 0x8DEA
 	)
 
-	GLvoid(
+	void(
 		"NamedStringARB",
 		"""
 		Specifies a string and its name. Such strings can be included by name in shaders during compilation, allowing reuse of the same code segments.
@@ -99,7 +99,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharUTF8_p.IN("string", "an arbitrary string of characters")
 	)
 
-	GLvoid(
+	void(
 		"DeleteNamedStringARB",
 		"Deletes a named string.",
 
@@ -107,7 +107,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharASCII_p.IN("name", "the name associated with the string")
 	)
 
-	GLvoid(
+	void(
 		"CompileShaderIncludeARB",
 		"""
 		Compiles a shader object.
@@ -139,7 +139,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		const _ GLcharASCII_p.IN("name", "the name associated with the string")
 	)
 
-	GLvoid(
+	void(
 		"GetNamedStringARB",
 		"Returns in {@code string} the string corresponding to the specified {@code name}. The returned string will be null-terminated.",
 
@@ -159,7 +159,7 @@ val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("AR
 		) _ GLcharUTF8_p.OUT("string", "a buffer in which to place the returned string")
 	)
 
-	GLvoid(
+	void(
 		"GetNamedStringivARB",
 		"Returns properties of the named string whose tree location corresponds to {@code name}.",
 

@@ -85,7 +85,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("index", "the index of the particular element being queried")
 	)
 
-	GLvoid(
+	void(
 		"ClearBufferiv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -100,7 +100,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"ClearBufferuiv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -109,7 +109,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(4) _ GLint_p.IN("value", "a pointer to a four-element vector specifying R, G, B and A values to clear the buffer to")
 	)
 
-	GLvoid(
+	void(
 		"ClearBufferfv",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -124,7 +124,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"ClearBufferfi",
 		"Clears an individual buffer of the currently bound framebuffer object to the #DRAW_FRAMEBUFFER binding.",
 
@@ -189,33 +189,33 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	val vertexAttribW = "the vertex attribute w component"
 	val vertexAttribBuffer = "the pure integer vertex attribute buffer"
 
-	GLvoid("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
-	GLvoid("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
-	GLvoid("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-	GLvoid("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+	void("VertexAttribI1i", "Specifies the value of a pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX))
+	void("VertexAttribI2i", "Specifies the value of a pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY))
+	void("VertexAttribI3i", "Specifies the value of a pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	void("VertexAttribI4i", "Specifies the value of a pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
-	GLvoid("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
-	GLvoid("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
-	GLvoid("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
+	void("VertexAttribI1ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The y and z components are implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX))
+	void("VertexAttribI2ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The z component is implicitly set to 0 and w to 1.", GLuint.IN("index", vertexAttribIndex), GLuint.IN("x", vertexAttribX), GLuint.IN("y", vertexAttribY))
+	void("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
+	void("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	GLvoid("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLuint_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	GLvoid("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	GLvoid(
+	void(
 		"VertexAttribIPointer",
 		"Specifies the location and organization of a pure integer vertex attribute array.",
 
@@ -234,7 +234,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 			"""),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-		) _ ARRAY_BUFFER _ const _ GLvoid_p.IN(
+		) _ ARRAY_BUFFER _ const _ void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -243,7 +243,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"GetVertexAttribIiv",
 		"Returns the value of a pure integer generic vertex attribute parameter.",
 
@@ -252,7 +252,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(4) _ returnValue _ GLint_p.OUT("params", "returns the requested data")
 	)
 
-	GLvoid(
+	void(
 		"GetVertexAttribIuiv",
 		"Unsigned version of #GetVertexAttribIiv().",
 
@@ -268,7 +268,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	val uniformZ = "the uniform z value"
 	val uniformW = "the uniform w value"
 
-	GLvoid(
+	void(
 		"Uniform1ui",
 		"Specifies the value of a uint uniform variable for the current program object.",
 
@@ -276,7 +276,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v0", "the uniform value")
 	)
 
-	GLvoid(
+	void(
 		"Uniform2ui",
 		"Specifies the value of a uvec2 uniform variable for the current program object.",
 
@@ -285,7 +285,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v1", uniformY)
 	)
 
-	GLvoid(
+	void(
 		"Uniform3ui",
 		"Specifies the value of a uvec3 uniform variable for the current program object.",
 
@@ -295,7 +295,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v2", uniformZ)
 	)
 
-	GLvoid(
+	void(
 		"Uniform4ui",
 		"Specifies the value of a uvec4 uniform variable for the current program object.",
 
@@ -306,7 +306,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("v3", uniformW)
 	)
 
-	GLvoid(
+	void(
 		"Uniform1uiv",
 		"Specifies the value of a single uint uniform variable or a uint uniform variable array for the current program object.",
 
@@ -315,7 +315,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"Uniform2uiv",
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for the current program object.",
 
@@ -324,7 +324,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"Uniform3uiv",
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for the current program object.",
 
@@ -333,7 +333,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"Uniform4uiv",
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for the current program object.",
 
@@ -342,7 +342,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"GetUniformuiv",
 		"Returns the uint value(s) of a uniform variable.",
 
@@ -351,7 +351,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1) _ returnValue _ GLuint_p.OUT("params", "the value of the specified uniform variable")
 	)
 
-	GLvoid(
+	void(
 		"BindFragDataLocation",
 		"Binds a user-defined varying out variable to a fragment shader color number.",
 
@@ -379,7 +379,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"QUERY_BY_REGION_NO_WAIT" _ 0x8E16
 	)
 
-	GLvoid(
+	void(
 		"BeginConditionalRender",
 		"Starts conditional rendering.",
 
@@ -387,7 +387,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("mode", "how {@code glBeginConditionalRender} interprets the results of the occlusion query", CONDITIONAL_RENDER_MODES)
 	)
 
-	ReferenceGL("glBeginConditionalRender") _ GLvoid(
+	ReferenceGL("glBeginConditionalRender") _ void(
 		"EndConditionalRender",
 		"Ends conditional rendering."
 	)
@@ -413,7 +413,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"BUFFER_MAP_OFFSET" _ 0x9121
 	)
 
-	(MapPointer("length") _ GLvoid_p)(
+	(MapPointer("length") _ void_p)(
 		"MapBufferRange",
 		"""
 		Maps a section of a buffer object's data store.
@@ -431,7 +431,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLbitfield.IN("access", "a combination of access flags indicating the desired access to the range", MapBufferRangeBits, LinkMode.BITFIELD)
 	)
 
-	GLvoid(
+	void(
 		"FlushMappedBufferRange",
 		"Indicates modifications to a range of a mapped buffer.",
 
@@ -462,7 +462,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"FIXED_ONLY" _ 0x891D
 	)
 
-	GLvoid(
+	void(
 		"ClampColor",
 		"Controls color clamping.",
 
@@ -734,7 +734,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("renderbuffer", "a value that may be the name of a renderbuffer object")
 	)
 
-	GLvoid(
+	void(
 		"BindRenderbuffer",
 		"Binds a renderbuffer to a renderbuffer target.",
 
@@ -742,7 +742,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("renderbuffer", "the name of the renderbuffer object to bind")
 	)
 
-	GLvoid(
+	void(
 		"DeleteRenderbuffers",
 		"Deletes renderbuffer objects.",
 
@@ -750,7 +750,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
 	)
 
-	GLvoid(
+	void(
 		"GenRenderbuffers",
 		"Generates renderbuffer object names.",
 
@@ -758,7 +758,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		returnValue _ GLuint_p.OUT("renderbuffers", "a buffer in which the generated renderbuffer object names are stored")
 	)
 
-	GLvoid(
+	void(
 		"RenderbufferStorage",
 		"Establishes data storage, format and dimensions of a renderbuffer object's image.",
 
@@ -768,7 +768,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizei.IN("height", "the height of the renderbuffer, in pixels")
 	)
 
-	GLvoid(
+	void(
 		"RenderbufferStorageMultisample",
 		"""
 		Establishes data storage, format, dimensions and sample count of a renderbuffer object's image.
@@ -783,7 +783,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizei.IN("height", "the height of the renderbuffer, in pixels")
 	)
 
-	GLvoid(
+	void(
 		"GetRenderbufferParameteriv",
 		"Retrieves information about a bound renderbuffer object.",
 
@@ -799,7 +799,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("framebuffer", "a value that may be the name of a framebuffer object")
 	)
 
-	GLvoid(
+	void(
 		"BindFramebuffer",
 		"Binds a framebuffer to a framebuffer target.",
 
@@ -807,7 +807,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("framebuffer", "the name of the framebuffer object to bind")
 	)
 
-	GLvoid(
+	void(
 		"DeleteFramebuffers",
 		"Deletes framebuffer objects.",
 
@@ -815,7 +815,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
 	)
 
-	GLvoid(
+	void(
 		"GenFramebuffers",
 		"Generates framebuffer object names.",
 
@@ -830,7 +830,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("target", "the target of the framebuffer completeness check", FramebufferTargets)
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture1D",
 		"Attaches a level of a 1D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -841,7 +841,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture2D",
 		"Attaches a level of a 2D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -852,7 +852,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("level", "the mipmap level of {@code texture} to attach")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture3D",
 		"Attaches a layer of a 3D texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -864,7 +864,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("layer", "the layer of a 2-dimensional image within the 3-dimensional texture.")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTextureLayer",
 		"Attaches a single layer of a texture to a framebuffer",
 
@@ -875,7 +875,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLint.IN("layer", "the layer of {@code texture} to attach.")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferRenderbuffer",
 		"Attaches a renderbuffer as a logical buffer to the currently bound framebuffer object.",
 
@@ -885,7 +885,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("renderbuffer", "the name of an existing renderbuffer object of type {@code renderbuffertarget} to attach")
 	)
 
-	GLvoid(
+	void(
 		"GetFramebufferAttachmentParameteriv",
 		"Retrievees information about attachments of a bound framebuffer object.",
 
@@ -895,7 +895,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1) _ returnValue _ GLint_p.OUT("params", "an array to receive the value of the queried parameter")
 	)
 
-	GLvoid(
+	void(
 		"BlitFramebuffer",
 		"Copies a block of pixels from the read framebuffer to the draw framebuffer.",
 
@@ -915,7 +915,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("filter", "the interpolation to be applied if the image is stretched", "GL11#NEAREST GL11#LINEAR")
 	)
 
-	GLvoid(
+	void(
 		"GenerateMipmap",
 		"Generate mipmaps for a specified texture target.",
 
@@ -981,7 +981,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"BGRA_INTEGER" _ 0x8D9B
 	)
 
-	GLvoid(
+	void(
 		"TexParameterIiv",
 		"Sets the integer value of a texture parameter.",
 
@@ -990,7 +990,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ Check(1) _ SingleValue("param") _ GLint_p.IN("params", "the value of {@code pname}")
 	)
 
-	GLvoid(
+	void(
 		"TexParameterIuiv",
 		"Sets the unsigned integer value of a texture parameter.",
 
@@ -999,7 +999,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "the value of {@code pname}")
 	)
 
-	GLvoid(
+	void(
 		"GetTexParameterIiv",
 		"Returns the integer value of a texture parameter.",
 
@@ -1008,7 +1008,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1) _ returnValue _ GLint_p.OUT("params", "returns the texture parameter value")
 	)
 
-	GLvoid(
+	void(
 		"GetTexParameterIuiv",
 		"Returns the unsigned integer value of a texture parameter.",
 
@@ -1051,7 +1051,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// EXT_draw_buffers2
 
-	GLvoid(
+	void(
 		"ColorMaski",
 		"Enables and disables writing of frame buffer color components.",
 
@@ -1062,7 +1062,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLboolean.IN("a", "whether A values are written or not")
 	)
 
-	ReferenceGL("glGet") _ GLvoid(
+	ReferenceGL("glGet") _ void(
 		"GetBooleani_v",
 		"Queries the boolean value of an indexed state variable.",
 
@@ -1071,7 +1071,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1) _ returnValue _ GLboolean_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	ReferenceGL("glGet") _ GLvoid(
+	ReferenceGL("glGet") _ void(
 		"GetIntegeri_v",
 		"Queries the integer value of an indexed state variable.",
 
@@ -1080,7 +1080,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		Check(1) _ returnValue _ GLint_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	GLvoid(
+	void(
 		"Enablei",
 		"Enables an indexed capability.",
 
@@ -1088,7 +1088,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("index", "the index to enable")
 	)
 
-	GLvoid(
+	void(
 		"Disablei",
 		"Disables an indexed capability.",
 
@@ -1220,7 +1220,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH" _ 0x8C76
 	)
 
-	GLvoid(
+	void(
 		"BindBufferRange",
 		"Binds a range within a buffer object to an indexed buffer target.",
 
@@ -1235,7 +1235,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLsizeiptr.IN("size", "the amount of data in machine units that can be read from the buffer object while used as an indexed target")
 	)
 
-	GLvoid(
+	void(
 		"BindBufferBase",
 		"Binds a buffer object to an indexed buffer target.",
 
@@ -1248,7 +1248,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLuint.IN("buffer", "a buffer object to bind to the specified binding point")
 	)
 
-	GLvoid(
+	void(
 		"BeginTransformFeedback",
 		"Starts transform feedback operation.",
 
@@ -1259,9 +1259,9 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		)
 	)
 
-	ReferenceGL("glBeginTransformFeedback") _ GLvoid("EndTransformFeedback", "Ends transform feedback operation.")
+	ReferenceGL("glBeginTransformFeedback") _ void("EndTransformFeedback", "Ends transform feedback operation.")
 
-	GLvoid(
+	void(
 		"TransformFeedbackVaryings",
 		"Specifies values to record in transform feedback buffers.",
 
@@ -1274,7 +1274,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		GLenum.IN("bufferMode", "the mode used to capture the varying variables when transform feedback is active", BufferModes)
 	)
 
-	GLvoid(
+	void(
 		"GetTransformFeedbackVarying",
 		"Retrieves information about varying variables selected for transform feedback.",
 
@@ -1298,14 +1298,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"VERTEX_ARRAY_BINDING" _ 0x85B5
 	)
 
-	GLvoid(
+	void(
 		"BindVertexArray",
 		"Binds a vertex array object",
 
 		GLuint.IN("array", "the name of the vertex array to bind")
 	)
 
-	GLvoid(
+	void(
 		"DeleteVertexArrays",
 		"Deletes vertex array objects.",
 
@@ -1313,7 +1313,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		const _ SingleValue("array") _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
 	)
 
-	GLvoid(
+	void(
 		"GenVertexArrays",
 		"Generates vertex array object names.",
 

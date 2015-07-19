@@ -57,7 +57,7 @@ val OVR_multiview = "OVRMultiview".nativeClassGL("OVR_multiview", postfix = OVR)
 
 	val FramebufferTextureLayer = GL30["FramebufferTextureLayer"]
 
-	GLvoid(
+	void(
 		"FramebufferTextureMultiviewOVR",
 		"""
 		Operates similarly to GL30#FramebufferTextureLayer(), except that {@code baseViewIndex} and {@code numViews} selects a range of texture array elements

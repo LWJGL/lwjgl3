@@ -38,7 +38,7 @@ val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassGL("N
 		"FRAGMENT_COVERAGE_COLOR_NV" _ 0x92DE
 	)
 
-	GLvoid(
+	void(
 		"FragmentCoverageColorNV",
 		"",
 

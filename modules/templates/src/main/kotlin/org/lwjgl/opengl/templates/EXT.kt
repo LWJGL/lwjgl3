@@ -79,7 +79,7 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 		"UNIFORM_BUFFER_EXT" _ 0x8DEE
 	)
 
-	GLvoid(
+	void(
 		"UniformBufferEXT",
 		"",
 
@@ -135,7 +135,7 @@ val EXT_blend_color = "EXTBlendColor".nativeClassGL("EXT_blend_color", postfix =
 		"BLEND_COLOR_EXT" _ 0x8005
 	)
 
-	GLvoid(
+	void(
 		"BlendColorEXT",
 		"",
 
@@ -175,7 +175,7 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
 		"BLEND_EQUATION_ALPHA_EXT" _ 0x883D
 	)
 
-	GLvoid(
+	void(
 		"BlendEquationSeparateEXT",
 		"",
 
@@ -208,7 +208,7 @@ val EXT_blend_func_separate = "EXTBlendFuncSeparate".nativeClassGL("EXT_blend_fu
 		"BLEND_SRC_ALPHA_EXT" _ 0x80CB
 	)
 
-	GLvoid(
+	void(
 		"BlendFuncSeparateEXT",
 		"",
 
@@ -251,7 +251,7 @@ val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGL("EXT_blend_minmax", postfi
 		"BLEND_EQUATION_EXT" _ 0x8009
 	)
 
-	GLvoid(
+	void(
 		"BlendEquationEXT",
 		"",
 
@@ -298,7 +298,7 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
 		The intended purpose of this is purely to improve the user experience within OpenGL and OpenGL ES development tools.
 		"""
 
-	GLvoid(
+	void(
 		"LabelObjectEXT",
 		"",
 
@@ -308,7 +308,7 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
 		const _ GLcharUTF8_p.IN("label", "")
 	)
 
-	GLvoid(
+	void(
 		"GetObjectLabelEXT",
 		"",
 
@@ -338,7 +338,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
 		The intended purpose of this is purely to improve the user experience within OpenGL and OpenGL ES development tools.
 		"""
 
-	GLvoid(
+	void(
 		"InsertEventMarkerEXT",
 		"",
 
@@ -346,7 +346,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
 		const _ GLcharUTF8_p.IN("marker", "")
 	)
 
-	GLvoid(
+	void(
 		"PushGroupMarkerEXT",
 		"",
 
@@ -354,7 +354,7 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
 		const _ GLcharUTF8_p.IN("marker", "")
 	)
 
-	GLvoid(
+	void(
 		"PopGroupMarkerEXT",
 		""
 	)
@@ -408,7 +408,7 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
 		"DEPTH_BOUNDS_EXT" _ 0x8891
 	)
 
-	GLvoid(
+	void(
 		"DepthBoundsEXT",
 		"",
 
@@ -450,7 +450,7 @@ val EXT_framebuffer_blit = "EXTFramebufferBlit".nativeClassGL("EXT_framebuffer_b
 		"READ_FRAMEBUFFER_BINDING_EXT" _ 0x8CAA
 	)
 
-	GLvoid(
+	void(
 		"BlitFramebufferEXT",
 		"",
 
@@ -517,7 +517,7 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
 		${GL30.promoted}
 		"""
 
-	GLvoid(
+	void(
 		"RenderbufferStorageMultisampleEXT",
 		"",
 
@@ -805,7 +805,7 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		"DISTANCE_ATTENUATION_EXT" _ 0x8129
 	)
 
-	GLvoid(
+	void(
 		"PointParameterfEXT",
 		"",
 
@@ -813,7 +813,7 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		GLfloat.IN("param", "")
 	)
 
-	GLvoid(
+	void(
 		"PointParameterfvEXT",
 		"",
 

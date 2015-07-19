@@ -102,7 +102,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT" _ 0x8C76
 	)
 
-	GLvoid(
+	void(
 		"BindBufferRangeEXT",
 		"",
 
@@ -113,7 +113,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLsizeiptr.IN("size", "")
 	)
 
-	GLvoid(
+	void(
 		"BindBufferOffsetEXT",
 		"",
 
@@ -123,7 +123,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLintptr.IN("offset", "")
 	)
 
-	GLvoid(
+	void(
 		"BindBufferBaseEXT",
 		"",
 
@@ -132,19 +132,19 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLuint.IN("buffer", "")
 	)
 
-	GLvoid(
+	void(
 		"BeginTransformFeedbackEXT",
 		"",
 
 		GLenum.IN("primitiveMode", "")
 	)
 
-	GLvoid(
+	void(
 		"EndTransformFeedbackEXT",
 		""
 	)
 
-	GLvoid(
+	void(
 		"TransformFeedbackVaryingsEXT",
 		"",
 
@@ -154,7 +154,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GLenum.IN("bufferMode", "")
 	)
 
-	GLvoid(
+	void(
 		"GetTransformFeedbackVaryingEXT",
 		"",
 
@@ -169,7 +169,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 			: ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""") _ GLcharASCII_p.OUT("name", "")
 	)
 
-	GLvoid(
+	void(
 		"GetIntegerIndexedvEXT",
 		"",
 
@@ -178,7 +178,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		Check(1) _ returnValue _ GLint_p.OUT("values", "")
 	)
 
-	GLvoid(
+	void(
 		"GetBooleanIndexedvEXT",
 		"",
 

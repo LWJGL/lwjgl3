@@ -44,7 +44,7 @@ val ARB_texture_storage = "ARBTextureStorage".nativeClassGL("ARB_texture_storage
 
 	var src = GL42["TexStorage1D"]
 	val texture = GLuint.IN("texture", "the texture object to update")
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"TextureStorage1DEXT",
 		"DSA version of #TexStorage1D().",
 
@@ -56,7 +56,7 @@ val ARB_texture_storage = "ARBTextureStorage".nativeClassGL("ARB_texture_storage
 	)
 
 	src = GL42["TexStorage2D"]
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"TextureStorage2DEXT",
 		"DSA version of #TexStorage2D().",
 
@@ -69,7 +69,7 @@ val ARB_texture_storage = "ARBTextureStorage".nativeClassGL("ARB_texture_storage
 	)
 
 	src = GL42["TexStorage3D"]
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"TextureStorage3DEXT",
 		"DSA version of #TexStorage3D().",
 

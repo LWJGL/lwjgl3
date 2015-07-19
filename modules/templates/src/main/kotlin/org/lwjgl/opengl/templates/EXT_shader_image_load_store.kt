@@ -118,7 +118,7 @@ val EXT_shader_image_load_store = "EXTShaderImageLoadStore".nativeClassGL("EXT_s
 		"UNSIGNED_INT_IMAGE_2D_MULTISAMPLE_ARRAY_EXT" _ 0x906C
 	)
 
-	GLvoid(
+	void(
 		"BindImageTextureEXT",
 		"",
 
@@ -131,7 +131,7 @@ val EXT_shader_image_load_store = "EXTShaderImageLoadStore".nativeClassGL("EXT_s
 		GLint.IN("format", "")
 	)
 
-	GLvoid(
+	void(
 		"MemoryBarrierEXT",
 		"",
 

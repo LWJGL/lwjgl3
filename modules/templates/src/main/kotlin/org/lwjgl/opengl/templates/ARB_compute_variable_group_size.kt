@@ -43,7 +43,7 @@ val ARB_compute_variable_group_size = "ARBComputeVariableGroupSize".nativeClassG
 	)
 
 	val src = GL43["DispatchCompute"]
-	GLvoid(
+	void(
 		"DispatchComputeGroupSizeARB",
 		"""
 		Launches one or more compute work groups, with arbitrary dimensions.

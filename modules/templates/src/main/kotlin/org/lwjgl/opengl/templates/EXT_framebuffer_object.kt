@@ -169,7 +169,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLuint.IN("renderbuffer", "")
 	)
 
-	GLvoid(
+	void(
 		"BindRenderbufferEXT",
 		"",
 
@@ -177,7 +177,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLuint.IN("renderbuffer", "")
 	)
 
-	GLvoid(
+	void(
 		"DeleteRenderbuffersEXT",
 		"",
 
@@ -185,7 +185,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "")
 	)
 
-	GLvoid(
+	void(
 		"GenRenderbuffersEXT",
 		"",
 
@@ -193,7 +193,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		returnValue _ GLuint_p.OUT("renderbuffers", "")
 	)
 
-	GLvoid(
+	void(
 		"RenderbufferStorageEXT",
 		"",
 
@@ -203,7 +203,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLsizei.IN("height", "")
 	)
 
-	GLvoid(
+	void(
 		"GetRenderbufferParameterivEXT",
 		"",
 
@@ -219,7 +219,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLuint.IN("framebuffer", "")
 	)
 
-	GLvoid(
+	void(
 		"BindFramebufferEXT",
 		"",
 
@@ -227,7 +227,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLuint.IN("framebuffer", "")
 	)
 
-	GLvoid(
+	void(
 		"DeleteFramebuffersEXT",
 		"",
 
@@ -235,7 +235,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "")
 	)
 
-	GLvoid(
+	void(
 		"GenFramebuffersEXT",
 		"",
 
@@ -250,7 +250,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLenum.IN("target", "")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture1DEXT",
 		"",
 
@@ -261,7 +261,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLint.IN("level", "")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture2DEXT",
 		"",
 
@@ -272,7 +272,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLint.IN("level", "")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture3DEXT",
 		"",
 
@@ -284,7 +284,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLint.IN("zoffset", "")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferRenderbufferEXT",
 		"",
 
@@ -294,7 +294,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLuint.IN("renderbuffer", "")
 	)
 
-	GLvoid(
+	void(
 		"GetFramebufferAttachmentParameterivEXT",
 		"",
 
@@ -304,7 +304,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		Check(1) _ returnValue _ GLint_p.OUT("params", "")
 	)
 
-	GLvoid(
+	void(
 		"GenerateMipmapEXT",
 		"",
 

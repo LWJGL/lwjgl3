@@ -121,7 +121,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"BUFFER_MAP_POINTER_ARB" _ 0x88BD
 	)
 
-	GLvoid(
+	void(
 		"BindBufferARB",
 		"Binds a named buffer object.",
 
@@ -129,7 +129,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLuint.IN("buffer", "the name of a buffer object")
 	)
 
-	GLvoid(
+	void(
 		"DeleteBuffersARB",
 		"Deletes named buffer objects.",
 
@@ -137,7 +137,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		const _ SingleValue("buffer") _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
-	GLvoid(
+	void(
 		"GenBuffersARB",
 		"Generates buffer object names.",
 
@@ -152,7 +152,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLuint.IN("buffer", "a value that may be the name of a buffer object")
 	)
 
-	GLvoid(
+	void(
 		"BufferDataARB",
 		"""
 		Creates and initializes a buffer object's data store.
@@ -182,21 +182,21 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		) _ const _ GLvoid_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
+		) _ const _ void_p.IN("data", "a pointer to data that will be copied into the data store for initialization, or NULL if no data is to be copied"),
 		GLenum.IN("usage", "the expected usage pattern of the data store", BUFFER_OBJECT_USAGE_HINTS)
 	)
 
-	GLvoid(
+	void(
 		"BufferSubDataARB",
 		"Updates a subset of a buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLintptrARB.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
 		AutoSize("data") _ GLsizeiptrARB.IN("size", "the size in bytes of the data store region being replaced"),
-		const _ GLvoid_p.IN("data", "a pointer to the new data that will be copied into the data store")
+		const _ void_p.IN("data", "a pointer to the new data that will be copied into the data store")
 	)
 
-	GLvoid(
+	void(
 		"GetBufferSubDataARB",
 		"Returns a subset of a buffer object's data store.",
 
@@ -209,10 +209,10 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		) _ GLvoid_p.IN("data", "a pointer to the location where buffer object data is returned")
+		) _ void_p.IN("data", "a pointer to the location where buffer object data is returned")
 	)
 
-	(MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)") _ GLvoid_p)(
+	(MapPointer("glGetBufferParameteriARB(target, GL_BUFFER_SIZE_ARB)") _ void_p)(
 		"MapBufferARB",
 		"""
 		Maps a buffer object's data store.
@@ -247,7 +247,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLenum.IN("target", "the target buffer object being unmapped", BUFFER_OBJECT_TARGETS)
 	)
 
-	GLvoid(
+	void(
 		"GetBufferParameterivARB",
 		"Returns the value of a buffer object parameter.",
 
@@ -256,12 +256,12 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		returnValue _ GLint_p.OUT("params", "the requested parameter")
 	)
 
-	GLvoid(
+	void(
 		"GetBufferPointervARB",
 		"Returns the pointer to a mapped buffer object's data store.",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		GLenum.IN("pname", "the pointer to be returned", "#BUFFER_MAP_POINTER_ARB"),
-		returnValue _ GLvoid_pp.OUT("params", "the pointer value specified by {@code pname}")
+		returnValue _ void_pp.OUT("params", "the pointer value specified by {@code pname}")
 	)
 }

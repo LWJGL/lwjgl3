@@ -29,7 +29,7 @@ val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = AR
         ${GL14.promoted}
 		"""
 
-	GLvoid(
+	void(
 		"WindowPos2iARB",
 		"Alternate way to set the current raster position. {@code z} is implictly set to 0.",
 
@@ -37,16 +37,16 @@ val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = AR
 		GLint.IN("y", "the y value")
 	)
 
-	GLvoid("WindowPos2sARB", "Short version of #WindowPos2iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"))
-	GLvoid("WindowPos2fARB", "Float version of #WindowPos2iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
-	GLvoid("WindowPos2dARB", "Double version of #WindowPos2iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
+	void("WindowPos2sARB", "Short version of #WindowPos2iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"))
+	void("WindowPos2fARB", "Float version of #WindowPos2iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"))
+	void("WindowPos2dARB", "Double version of #WindowPos2iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"))
 
-	GLvoid("WindowPos2ivARB", "Pointer version of #WindowPos2iARB().", const _ Check(2) _ GLint_p.IN("p", "the position value"))
-	GLvoid("WindowPos2svARB", "Pointer version of #WindowPos2sARB().", const _ Check(2) _ GLshort_p.IN("p", "the position value"))
-	GLvoid("WindowPos2fvARB", "Pointer version of #WindowPos2fARB().", const _ Check(2) _ GLfloat_p.IN("p", "the position value"))
-	GLvoid("WindowPos2dvARB", "Pointer version of #WindowPos2dARB().", const _ Check(2) _ GLdouble_p.IN("p", "the position value"))
+	void("WindowPos2ivARB", "Pointer version of #WindowPos2iARB().", const _ Check(2) _ GLint_p.IN("p", "the position value"))
+	void("WindowPos2svARB", "Pointer version of #WindowPos2sARB().", const _ Check(2) _ GLshort_p.IN("p", "the position value"))
+	void("WindowPos2fvARB", "Pointer version of #WindowPos2fARB().", const _ Check(2) _ GLfloat_p.IN("p", "the position value"))
+	void("WindowPos2dvARB", "Pointer version of #WindowPos2dARB().", const _ Check(2) _ GLdouble_p.IN("p", "the position value"))
 
-	GLvoid(
+	void(
 		"WindowPos3iARB",
 		"Alternate way to set the current raster position.",
 
@@ -55,12 +55,12 @@ val ARB_window_pos = "ARBWindowPos".nativeClassGL("ARB_window_pos", postfix = AR
 		GLint.IN("z", "the z value")
 	)
 
-	GLvoid("WindowPos3sARB", "Short version of #WindowPos3iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"), GLshort.IN("z", "the z value"))
-	GLvoid("WindowPos3fARB", "Float version of #WindowPos3iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
-	GLvoid("WindowPos3dARB", "Double version of #WindowPos3iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
+	void("WindowPos3sARB", "Short version of #WindowPos3iARB().", GLshort.IN("x", "the x value"), GLshort.IN("y", "the y value"), GLshort.IN("z", "the z value"))
+	void("WindowPos3fARB", "Float version of #WindowPos3iARB().", GLfloat.IN("x", "the x value"), GLfloat.IN("y", "the y value"), GLfloat.IN("z", "the z value"))
+	void("WindowPos3dARB", "Double version of #WindowPos3iARB().", GLdouble.IN("x", "the x value"), GLdouble.IN("y", "the y value"), GLdouble.IN("z", "the z value"))
 
-	GLvoid("WindowPos3ivARB", "Pointer version of #WindowPos3iARB().", const _ Check(3) _ GLint_p.IN("p", "the position value"))
-	GLvoid("WindowPos3svARB", "Pointer version of #WindowPos3sARB().", const _ Check(3) _ GLshort_p.IN("p", "the position value"))
-	GLvoid("WindowPos3fvARB", "Pointer version of #WindowPos3fARB().", const _ Check(3) _ GLfloat_p.IN("p", "the position value"))
-	GLvoid("WindowPos3dvARB", "Pointer version of #WindowPos3dARB().", const _ Check(3) _ GLdouble_p.IN("p", "the position value"))
+	void("WindowPos3ivARB", "Pointer version of #WindowPos3iARB().", const _ Check(3) _ GLint_p.IN("p", "the position value"))
+	void("WindowPos3svARB", "Pointer version of #WindowPos3sARB().", const _ Check(3) _ GLshort_p.IN("p", "the position value"))
+	void("WindowPos3fvARB", "Pointer version of #WindowPos3fARB().", const _ Check(3) _ GLfloat_p.IN("p", "the position value"))
+	void("WindowPos3dvARB", "Pointer version of #WindowPos3dARB().", const _ Check(3) _ GLdouble_p.IN("p", "the position value"))
 }

@@ -146,7 +146,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		"DEBUG_SEVERITY_LOW_ARB" _ 0x9148
 	).javaDocLinks
 
-	GLvoid(
+	void(
 		"DebugMessageControlARB",
 		"""
 		Controls the volume of debug output by disabling specific or groups of messages.
@@ -178,7 +178,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		GLboolean.IN("enabled", "whether to enable or disable the references subset of messages")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageInsertARB",
 		"""
 		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
@@ -199,7 +199,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		const _ GLcharUTF8_p.IN("buf", "the string representation of the message")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageCallbackARB",
 		"""
 		Specifies a callback function for receiving debug messages.

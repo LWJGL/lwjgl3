@@ -76,7 +76,7 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGL("KHR_
 		"HSL_LUMINOSITY_KHR" _ 0x92B0
 	)
 
-	GLvoid(
+	void(
 		"BlendBarrierKHR",
 		"""
 		Specifies a boundary between passes when using advanced blend equations.

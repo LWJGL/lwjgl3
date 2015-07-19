@@ -42,7 +42,7 @@ val AMD_occlusion_query_event = "AMDOcclusionQueryEvent".nativeClassGL("AMD_occl
 		"QUERY_ALL_EVENT_BITS_AMD" expr "0xFFFFFFFF"
 	).javaDocLinks
 
-	GLvoid(
+	void(
 		"QueryObjectParameteruiAMD",
 		"Changes the value of a query object parameter.",
 

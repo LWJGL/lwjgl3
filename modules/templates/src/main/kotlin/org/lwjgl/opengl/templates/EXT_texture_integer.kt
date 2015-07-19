@@ -112,7 +112,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		"LUMINANCE_ALPHA_INTEGER_EXT" _ 0x8D9D
 	)
 
-	GLvoid(
+	void(
 		"ClearColorIiEXT",
 		"",
 
@@ -122,7 +122,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		GLint.IN("a", "")
 	)
 
-	GLvoid(
+	void(
 		"ClearColorIuiEXT",
 		"",
 
@@ -132,7 +132,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		GLuint.IN("a", "")
 	)
 
-	GLvoid(
+	void(
 		"TexParameterIivEXT",
 		"",
 
@@ -141,7 +141,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		Check(1) _ SingleValue("param") _ GLint_p.IN("params", "")
 	)
 
-	GLvoid(
+	void(
 		"TexParameterIuivEXT",
 		"",
 
@@ -150,7 +150,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "")
 	)
 
-	GLvoid(
+	void(
 		"GetTexParameterIivEXT",
 		"",
 
@@ -159,7 +159,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		Check(1) _ returnValue _ GLint_p.OUT("params", "")
 	)
 
-	GLvoid(
+	void(
 		"GetTexParameterIuivEXT",
 		"",
 

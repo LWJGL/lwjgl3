@@ -35,7 +35,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		"SPARSE_BUFFER_PAGE_SIZE_ARB" _ 0x82F8
 	)
 
-	GLvoid(
+	void(
 		"BufferPageCommitmentARB",
 		"Commit and de-commits regions of sparse buffer storage.",
 
@@ -52,7 +52,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		)
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"NamedBufferPageCommitmentEXT",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 
@@ -62,7 +62,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		GLboolean.IN("commit", "the commit state")
 	)
 
-	DependsOn("GL_ARB_direct_state_access") _ GLvoid(
+	DependsOn("GL_ARB_direct_state_access") _ void(
 		"NamedBufferPageCommitmentARB",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 

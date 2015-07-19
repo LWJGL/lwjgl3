@@ -102,7 +102,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 
 	// ARB_clear_buffer_object
 
-	GLvoid(
+	void(
 		"ClearBufferData",
 		"Fills a buffer object's data store with a fixed value.",
 
@@ -112,7 +112,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		nullable _ MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ GLvoid_p.IN("data",
+		) _ const _ void_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -122,7 +122,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"ClearBufferSubData",
 		"Fills all or part of buffer object's data store with a fixed value.",
 
@@ -134,7 +134,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
 		nullable _ MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ GLvoid_p.IN("data",
+		) _ const _ void_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -210,7 +210,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 	)
 
 
-	GLvoid(
+	void(
 		"DispatchCompute",
 		"Launches one or more compute work groups.",
 
@@ -219,7 +219,7 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLuint.IN("num_groups_z", "the number of work groups to be launched in the Z dimension")
 	)
 
-	GLvoid(
+	void(
 		"DispatchComputeIndirect",
 		"""
 		Launches one or more compute work groups using parameters stored in a buffer.
@@ -251,7 +251,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_copy_image
 
-	GLvoid(
+	void(
 		"CopyImageSubData",
 		"Performs a raw data copy between two images.",
 
@@ -368,7 +368,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"DISPLAY_LIST" _ 0x82E7
 	).javaDocLinks
 
-	GLvoid(
+	void(
 		"DebugMessageControl",
 		"""
 		Controls the volume of debug output in the active debug group, by disabling specific or groups of messages.
@@ -411,7 +411,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageInsert",
 		"""
 		This function can be called by applications and third-party libraries to generate their own messages, such as ones containing timestamp information or
@@ -434,7 +434,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageCallback",
 		"""
 		Specifies a callback to receive debugging messages from the GL.
@@ -509,7 +509,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
-	GLvoid(
+	void(
 		"PushDebugGroup",
 		"""
 		Pushes a debug group described by the string {@code message} into the command stream. The value of {@code id} specifies the ID of messages generated.
@@ -530,7 +530,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
-	GLvoid(
+	void(
 		"PopDebugGroup",
 		"""
 		Pops the active debug group. When a debug group is popped, the GL will also generate a debug output message describing its cause based on the
@@ -543,7 +543,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"""
 	)
 
-	GLvoid(
+	void(
 		"ObjectLabel",
 		"Labels a named object identified within a namespace.",
 
@@ -557,7 +557,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
-	GLvoid(
+	void(
 		"GetObjectLabel",
 		"Retrieves the label of a named object identified within a namespace.",
 
@@ -572,7 +572,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
-	GLvoid(
+	void(
 		"ObjectPtrLabel",
 		"Labels a sync object identified by a pointer.",
 
@@ -581,7 +581,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
-	GLvoid(
+	void(
 		"GetObjectPtrLabel",
 		"Retrieves the label of a sync object identified by a pointer.",
 
@@ -623,7 +623,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"MAX_FRAMEBUFFER_SAMPLES" _ 0x9318
 	)
 
-	GLvoid(
+	void(
 		"FramebufferParameteri",
 		"Sets a named parameter of a framebuffer.",
 
@@ -632,7 +632,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLint.IN("param", "the new value for the parameter named {@code pname}")
 	)
 
-	GLvoid(
+	void(
 		"GetFramebufferParameteriv",
 		"Retrieves a named parameter from a framebuffer.",
 
@@ -752,7 +752,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"VIEW_CLASS_BPTC_FLOAT" _ 0x82D3
 	)
 
-	GLvoid(
+	void(
 		"GetInternalformati64v",
 		"Retrieves information about implementation-dependent support for internal formats.",
 
@@ -772,7 +772,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_invalidate_subdata
 
-	GLvoid(
+	void(
 		"InvalidateTexSubImage",
 		"Invalidates a region of a texture image.",
 
@@ -786,7 +786,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLsizei.IN("depth", "the depth of the region to be invalidated")
 	)
 
-	GLvoid(
+	void(
 		"InvalidateTexImage",
 		"Invalidates the entirety of a texture image.",
 
@@ -794,7 +794,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLint.IN("level", "the level of detail of the texture object to invalidate")
 	)
 
-	GLvoid(
+	void(
 		"InvalidateBufferSubData",
 		"Invalidates a region of a buffer object's data store.",
 
@@ -803,14 +803,14 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLsizeiptr.IN("length", "the length of the range within the buffer's data store to be invalidated")
 	)
 
-	GLvoid(
+	void(
 		"InvalidateBufferData",
 		"Invalidates the content of a buffer object's data store.",
 
 		GLuint.IN("buffer", "the name of a buffer object whose data store to invalidate")
 	)
 
-	GLvoid(
+	void(
 		"InvalidateFramebuffer",
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
@@ -819,7 +819,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
 
-	GLvoid(
+	void(
 		"InvalidateSubFramebuffer",
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
@@ -834,7 +834,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 	// ARB_multi_draw_indirect
 
-	GLvoid(
+	void(
 		"MultiDrawArraysIndirect",
 		"""
 		Renders multiple sets of primitives from array data, taking parameters from memory.
@@ -867,12 +867,12 @@ for ( i = 0; i < primcount; i++ ) {
 			expression = "primcount * (stride == 0 ? (4 * 4) : stride)", bytes = true
 		) _ MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "an array of structures containing the draw parameters"),
+		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
 
-	GLvoid(
+	void(
 		"MultiDrawElementsIndirect",
 		"""
 		Renders multiple indexed primitives from array data, taking parameters from memory.
@@ -907,7 +907,7 @@ for ( i = 0; i < primcount; i++ ) {
 			expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true
 		) _ MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ GLvoid_p.IN("indirect", "a structure containing an array of draw parameters"),
+		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
@@ -979,7 +979,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"IS_PER_PATCH" _ 0x92E7
 	)
 
-	GLvoid(
+	void(
 		"GetProgramInterfaceiv",
 		"Queries a property of an interface in a program.",
 
@@ -998,7 +998,7 @@ for ( i = 0; i < primcount; i++ ) {
 		const _ GLcharUTF8_p.IN("name", "the name of the resource to query the index of")
 	)
 
-	GLvoid(
+	void(
 		"GetProgramResourceName",
 		"Queries the name of an indexed resource within a program.",
 
@@ -1013,7 +1013,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"GetProgramResourceiv",
 		"Retrieves values for multiple properties of a single active resource within a program object.",
 
@@ -1100,7 +1100,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"MAX_COMBINED_SHADER_OUTPUT_RESOURCES" _ 0x8F39
 	)
 
-	GLvoid(
+	void(
 		"ShaderStorageBlockBinding",
 		"Changes an active shader storage block binding.",
 
@@ -1132,7 +1132,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TEXTURE_BUFFER_OFFSET_ALIGNMENT" _ 0x919F
 	)
 
-	GLvoid(
+	void(
 		"TexBufferRange",
 		"Binds a range of a buffer's data store to a buffer texture.",
 
@@ -1145,7 +1145,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 	// ARB_texture_storage_multisample
 
-	GLvoid(
+	void(
 		"TexStorage2DMultisample",
 		"Specifies storage for a two-dimensional multisample texture.",
 
@@ -1163,7 +1163,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"TexStorage3DMultisample",
 		"Specifies storage for a two-dimensional multisample array texture.",
 
@@ -1193,7 +1193,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE
 	)
 
-	GLvoid(
+	void(
 		"TextureView",
 		"Initializes a texture as a data alias of another texture's data store.",
 
@@ -1232,7 +1232,7 @@ for ( i = 0; i < primcount; i++ ) {
 		"MAX_VERTEX_ATTRIB_BINDINGS" _ 0x82DA
 	)
 
-	GLvoid(
+	void(
 		"BindVertexBuffer",
 		"Binds a buffer to a vertex buffer bind point.",
 
@@ -1242,7 +1242,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLsizei.IN("stride", "the distance between elements within the buffer")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribFormat",
 		"Specifies the organization of data in vertex arrays.",
 
@@ -1262,7 +1262,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribIFormat",
 		"Specifies the organization of pure integer data in vertex arrays.",
 
@@ -1275,7 +1275,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribLFormat",
 		"Specifies the organization of 64-bit double data in vertex arrays.",
 
@@ -1288,7 +1288,7 @@ for ( i = 0; i < primcount; i++ ) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribBinding",
 		"Associate a vertex attribute and a vertex buffer binding.",
 
@@ -1296,7 +1296,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("bindingindex", "the index of the vertex buffer binding with which to associate the generic vertex attribute")
 	)
 
-	GLvoid(
+	void(
 		"VertexBindingDivisor",
 		"Modifies the rate at which generic vertex attributes advance during instanced rendering.",
 

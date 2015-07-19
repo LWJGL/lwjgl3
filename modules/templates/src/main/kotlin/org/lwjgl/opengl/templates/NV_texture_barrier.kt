@@ -20,7 +20,7 @@ val NV_texture_barrier = "NVTextureBarrier".nativeClassGL("NV_texture_barrier", 
 		read-after-write hazards.
 		"""
 
-	GLvoid(
+	void(
 		"TextureBarrierNV",
 		""
 	)

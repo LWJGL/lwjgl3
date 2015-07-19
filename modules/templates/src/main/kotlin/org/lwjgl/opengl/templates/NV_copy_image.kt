@@ -4,7 +4,7 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.IN
+import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
@@ -21,7 +21,7 @@ val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
 		different sharelists or even on different physical devices.
 		"""
 
-	GLvoid(
+	void(
 		"CopyImageSubDataNV",
 		"Copies a region of texel data between two image objects. An image object may be either a texture or a renderbuffer.",
 

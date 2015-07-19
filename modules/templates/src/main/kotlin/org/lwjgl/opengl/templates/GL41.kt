@@ -68,23 +68,23 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"RGB565" _ 0x8D62
 	)
 
-	GLvoid(
+	void(
 		"ReleaseShaderCompiler",
 	    "Releases resources allocated by the shader compiler. This is a hint from the application, and does not prevent later use of the shader compiler."
 	)
 
-	GLvoid(
+	void(
 		"ShaderBinary",
 		"Loads pre-compiled shader binaries.",
 
 		AutoSize("shaders") _ GLsizei.IN("count", "the number of shader object handles contained in {@code shaders}"),
 		const _ GLuint_p.IN("shaders", "an array of shader handles into which to load pre-compiled shader binaries"),
 		GLenum.IN("binaryformat", "the format of the shader binaries contained in {@code binary}"),
-		const _ GLvoid_p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
+		const _ void_p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
 		AutoSize("binary") _ GLsizei.IN("length", "the length of the array whose address is given in binary")
 	)
 
-	GLvoid(
+	void(
 		"GetShaderPrecisionFormat",
 		"Retrieves the range and precision for numeric formats supported by the shader compiler.",
 
@@ -94,7 +94,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		Check(1) _ returnValue _ GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
 	)
 
-	ReferenceGL("DepthRange") _ GLvoid(
+	ReferenceGL("DepthRange") _ void(
 		"DepthRangef",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates",
 
@@ -102,7 +102,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		GLfloat.IN("zFar", "the mapping of the far clipping plane to window coordinates. The initial value is 1.0f.")
 	)
 
-	GLvoid(
+	void(
 		"ClearDepthf",
 		"Specifies the clear value for the depth buffer",
 
@@ -130,7 +130,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"PROGRAM_BINARY_FORMATS" _ 0x87FF
 	)
 
-	GLvoid(
+	void(
 		"GetProgramBinary",
 		"Returns a binary representation of a program object's compiled and linked executable source.",
 
@@ -138,23 +138,23 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		AutoSize("binary") _ GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
 		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
 		Check(1) _ GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
-		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)") _ GLvoid_p.OUT(
+		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)") _ void_p.OUT(
 			"binary",
 			"an array into which the GL will return {@code program}'s binary representation"
 		)
 	)
 
-	GLvoid(
+	void(
 		"ProgramBinary",
 		"Loads a program object with a program binary.",
 
 		GLuint.IN("program", "the name of a program object into which to load a program binary"),
 		GLenum.IN("binaryFormat", "the format of the binary data in binary"),
-		const _ GLvoid_p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
+		const _ void_p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
 		AutoSize("binary") _ GLsizei.IN("length", "the number of bytes contained in {@code binary}")
 	)
 
-	ReferenceGL("glProgramParameter") _ GLvoid(
+	ReferenceGL("glProgramParameter") _ void(
 		"ProgramParameteri",
 		"Specifies the integer value of a program object parameter.",
 
@@ -194,7 +194,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"PROGRAM_PIPELINE_BINDING" _ 0x825A
 	)
 
-	GLvoid(
+	void(
 		"UseProgramStages",
 		"Binds stages of a program object to a program pipeline.",
 
@@ -203,7 +203,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		GLuint.IN("program", "the program object containing the shader executables to use in {@code pipeline}")
 	)
 
-	GLvoid(
+	void(
 		"ActiveShaderProgram",
 		"Sets the active program object for a program pipeline object.",
 
@@ -251,14 +251,14 @@ if (shader) {
 		)
 	)
 
-	GLvoid(
+	void(
 		"BindProgramPipeline",
 		"Binds a program pipeline to the current context.",
 
 		GLuint.IN("pipeline", "the name of the pipeline object to bind to the context")
 	)
 
-	GLvoid(
+	void(
 		"DeleteProgramPipelines",
 		"Deletes program pipeline objects.",
 
@@ -266,7 +266,7 @@ if (shader) {
 		const _ SingleValue("pipeline") _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
 	)
 
-	GLvoid(
+	void(
 		"GenProgramPipelines",
 		"Reserves program pipeline object names.",
 
@@ -281,7 +281,7 @@ if (shader) {
 		GLuint.IN("pipeline", "a value that may be the name of a program pipeline object")
 	)
 
-	GLvoid(
+	void(
 		"GetProgramPipelineiv",
 		"Retrieves properties of a program pipeline object.",
 
@@ -311,7 +311,7 @@ if (shader) {
 
 	val ProgramUniformRef = ReferenceGL("glProgramUniform")
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1i",
 		"Specifies the value of an int uniform variable for a specified program object.",
 
@@ -320,7 +320,7 @@ if (shader) {
 		GLint.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2i",
 		"Specifies the value of an ivec2 uniform variable for a specified program object.",
 
@@ -330,7 +330,7 @@ if (shader) {
 		GLint.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3i",
 		"Specifies the value of an ivec3 uniform variable for a specified program object.",
 
@@ -341,7 +341,7 @@ if (shader) {
 		GLint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4i",
 		"Specifies the value of an ivec4 uniform variable for a specified program object.",
 
@@ -353,7 +353,7 @@ if (shader) {
 		GLint.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1ui",
 		"Specifies the value of a uint uniform variable for a specified program object.",
 
@@ -362,7 +362,7 @@ if (shader) {
 		GLuint.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2ui",
 		"Specifies the value of a uvec2 uniform variable for a specified program object.",
 
@@ -372,7 +372,7 @@ if (shader) {
 		GLuint.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3ui",
 		"Specifies the value of a uvec3 uniform variable for a specified program object.",
 
@@ -383,7 +383,7 @@ if (shader) {
 		GLuint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4ui",
 		"Specifies the value of a uvec4 uniform variable for a specified program object.",
 
@@ -395,7 +395,7 @@ if (shader) {
 		GLuint.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1f",
 		"Specifies the value of a float uniform variable for a specified program object.",
 
@@ -404,7 +404,7 @@ if (shader) {
 		GLfloat.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2f",
 		"Specifies the value of a vec2 uniform variable for a specified program object.",
 
@@ -414,7 +414,7 @@ if (shader) {
 		GLfloat.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3f",
 		"Specifies the value of a vec3 uniform variable for a specified program object.",
 
@@ -425,7 +425,7 @@ if (shader) {
 		GLfloat.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4f",
 		"Specifies the value of a vec4 uniform variable for a specified program object.",
 
@@ -437,7 +437,7 @@ if (shader) {
 		GLfloat.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1d",
 		"Specifies the value of a double uniform variable for a specified program object.",
 
@@ -446,7 +446,7 @@ if (shader) {
 		GLdouble.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2d",
 		"Specifies the value of a dvec2 uniform variable for a specified program object.",
 
@@ -456,7 +456,7 @@ if (shader) {
 		GLdouble.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3d",
 		"Specifies the value of a dvec3 uniform variable for a specified program object.",
 
@@ -467,7 +467,7 @@ if (shader) {
 		GLdouble.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4d",
 		"Specifies the value of a dvec4 uniform variable for a specified program object.",
 
@@ -479,7 +479,7 @@ if (shader) {
 		GLdouble.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1iv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
@@ -489,7 +489,7 @@ if (shader) {
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2iv",
 		"Specifies the value of a single ivec2 uniform variable or a ivec2 uniform variable array for a specified program object.",
 
@@ -499,7 +499,7 @@ if (shader) {
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3iv",
 		"Specifies the value of a single ivec3 uniform variable or a ivec3 uniform variable array for a specified program object.",
 
@@ -509,7 +509,7 @@ if (shader) {
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4iv",
 		"Specifies the value of a single ivec4 uniform variable or a ivec4 uniform variable array for a specified program object.",
 
@@ -519,7 +519,7 @@ if (shader) {
 		const _ GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1uiv",
 		"Specifies the value of a single uint uniform variable or a uint uniform variable array for a specified program object.",
 
@@ -529,7 +529,7 @@ if (shader) {
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2uiv",
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for a specified program object.",
 
@@ -539,7 +539,7 @@ if (shader) {
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3uiv",
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for a specified program object.",
 
@@ -549,7 +549,7 @@ if (shader) {
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4uiv",
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for a specified program object.",
 
@@ -559,7 +559,7 @@ if (shader) {
 		const _ GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1fv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
@@ -569,7 +569,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2fv",
 		"Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for a specified program object.",
 
@@ -579,7 +579,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3fv",
 		"Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for a specified program object.",
 
@@ -589,7 +589,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4fv",
 		"Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for a specified program object.",
 
@@ -599,7 +599,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform1dv",
 		"Specifies the value of a single double uniform variable or a double uniform variable array for a specified program object.",
 
@@ -609,7 +609,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform2dv",
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for a specified program object.",
 
@@ -619,7 +619,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform3dv",
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for a specified program object.",
 
@@ -629,7 +629,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniform4dv",
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for a specified program object.",
 
@@ -639,7 +639,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2fv",
 		"Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.",
 
@@ -650,7 +650,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3fv",
 		"Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.",
 
@@ -661,7 +661,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4fv",
 		"Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.",
 
@@ -672,7 +672,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2dv",
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
@@ -683,7 +683,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3dv",
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
@@ -694,7 +694,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4dv",
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
@@ -705,7 +705,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2x3fv",
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
@@ -716,7 +716,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3x2fv",
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
@@ -727,7 +727,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2x4fv",
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
@@ -738,7 +738,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4x2fv",
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
@@ -749,7 +749,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3x4fv",
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
@@ -760,7 +760,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4x3fv",
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 
@@ -771,7 +771,7 @@ if (shader) {
 		const _ GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2x3dv",
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
@@ -782,7 +782,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3x2dv",
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
@@ -793,7 +793,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix2x4dv",
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
@@ -804,7 +804,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4x2dv",
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
@@ -815,7 +815,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix3x4dv",
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
@@ -826,7 +826,7 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ GLvoid(
+	ProgramUniformRef _ void(
 		"ProgramUniformMatrix4x3dv",
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
@@ -837,14 +837,14 @@ if (shader) {
 		const _ GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	GLvoid(
+	void(
 		"ValidateProgramPipeline",
 		"Validates a program pipeline object against current GL state.",
 
 		GLuint.IN("pipeline", "the name of a program pipeline object to validate")
 	)
 
-	GLvoid(
+	void(
 		"GetProgramPipelineInfoLog",
 		"Retrieves the info log string from a program pipeline object.",
 
@@ -869,7 +869,7 @@ if (shader) {
 
 	val VertexAttribRef = ReferenceGL("glVertexAttrib")
 
-	VertexAttribRef _ GLvoid(
+	VertexAttribRef _ void(
 		"VertexAttribL1d",
 		"Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0 and w to 1.0.",
 
@@ -877,7 +877,7 @@ if (shader) {
 		GLdouble.IN("x", attribX)
 	)
 
-	VertexAttribRef _ GLvoid(
+	VertexAttribRef _ void(
 		"VertexAttribL2d",
 		"Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0 and w to 1.0.",
 
@@ -886,7 +886,7 @@ if (shader) {
 		GLdouble.IN("y", attribY)
 	)
 
-	VertexAttribRef _ GLvoid(
+	VertexAttribRef _ void(
 		"VertexAttribL3d",
 		"Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0.",
 
@@ -896,7 +896,7 @@ if (shader) {
 		GLdouble.IN("z", attribZ)
 	)
 
-	VertexAttribRef _ GLvoid(
+	VertexAttribRef _ void(
 		"VertexAttribL4d",
 		"Specifies the value of a generic vertex attribute.",
 
@@ -907,12 +907,12 @@ if (shader) {
 		GLdouble.IN("w", attribW)
 	)
 
-	VertexAttribRef _ GLvoid("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ GLvoid("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef _ void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4) _ const _ GLdouble_p.IN("v", attribBuffer))
 
-	ReferenceGL("glVertexAttribPointer") _ GLvoid(
+	ReferenceGL("glVertexAttribPointer") _ void(
 		"VertexAttribLPointer",
 		"Specifies the location and organization of a 64-bit vertex attribute array.",
 
@@ -926,7 +926,7 @@ if (shader) {
 			the array. The initial value is 0.
 			"""
 		),
-		const _ ARRAY_BUFFER _ GLvoid_p.IN(
+		const _ ARRAY_BUFFER _ void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -935,7 +935,7 @@ if (shader) {
 		)
 	)
 
-	ReferenceGL("glGetVertexAttrib") _ GLvoid(
+	ReferenceGL("glGetVertexAttrib") _ void(
 		"GetVertexAttribLdv",
 		"Double version of GL20#GetVertexAttribi().",
 
@@ -962,7 +962,7 @@ if (shader) {
 		"UNDEFINED_VERTEX" _ 0x8260
 	)
 
-	GLvoid(
+	void(
 		"ViewportArrayv",
 		"Sets multiple viewports.",
 
@@ -971,7 +971,7 @@ if (shader) {
 		const _ GLfloat_p.IN("v", "an array containing the viewport parameters")
 	)
 
-	ReferenceGL("glViewportIndexed") _ GLvoid(
+	ReferenceGL("glViewportIndexed") _ void(
 		"ViewportIndexedf",
 		"Sets a specified viewport.",
 
@@ -982,7 +982,7 @@ if (shader) {
 		GLfloat.IN("h", "the viewport height")
 	)
 
-	GLvoid(
+	void(
 		"ViewportIndexedfv",
 		"Pointer version of #ViewportIndexedf().",
 
@@ -990,7 +990,7 @@ if (shader) {
 		Check(4) _ const _ GLfloat_p.IN("v", "the viewport parameters")
 	)
 
-	GLvoid(
+	void(
 		"ScissorArrayv",
 		"Defines the scissor box for multiple viewports.",
 
@@ -999,7 +999,7 @@ if (shader) {
 		const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
-	GLvoid(
+	void(
 		"ScissorIndexed",
 		"Defines the scissor box for a specific viewport.",
 
@@ -1010,7 +1010,7 @@ if (shader) {
 		GLsizei.IN("height", "the scissor box height")
 	)
 
-	GLvoid(
+	void(
 		"ScissorIndexedv",
 		"Pointer version of #ScissorIndexed().",
 
@@ -1018,7 +1018,7 @@ if (shader) {
 		Check(4) _ const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
-	GLvoid(
+	void(
 		"DepthRangeArrayv",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified set of viewports.",
 
@@ -1027,7 +1027,7 @@ if (shader) {
 		const _ GLdouble_p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
 	)
 
-	GLvoid(
+	void(
 		"DepthRangeIndexed",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified viewport.",
 
@@ -1036,7 +1036,7 @@ if (shader) {
 		GLdouble.IN("zFar", "the mapping of the far clipping plane to window coordinates. The initial value is 1.")
 	)
 
-	GLvoid(
+	void(
 		"GetFloati_v",
 		"Queries the float value of an indexed state variable.",
 
@@ -1045,7 +1045,7 @@ if (shader) {
 		Check(1) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
-	GLvoid(
+	void(
 		"GetDoublei_v",
 		"Queries the double value of an indexed state variable.",
 

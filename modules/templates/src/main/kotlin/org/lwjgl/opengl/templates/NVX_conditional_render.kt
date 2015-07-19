@@ -26,14 +26,14 @@ val NVX_conditional_render = "NVXConditionalRender".nativeClassGL("NVX_condition
 		Requires ${GL15.core} or ${ARB_occlusion_query.link}
 		"""
 
-	GLvoid(
+	void(
 		"BeginConditionalRenderNVX",
 		"",
 		
 		GLuint.IN("id", "")
 	)
 
-	GLvoid(
+	void(
 		"EndConditionalRenderNVX",
 		""
 	)

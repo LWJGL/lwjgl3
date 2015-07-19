@@ -59,7 +59,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"POINT_SPRITE_R_MODE_NV" _ 0x8863
 	)
 
-	GLvoid(
+	void(
 		"PointParameteriNV",
 		"",
 
@@ -67,7 +67,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		GLint.IN("param", "")
 	)
 
-	GLvoid(
+	void(
 		"PointParameterivNV",
 		"",
 

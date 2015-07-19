@@ -54,7 +54,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"MAX_FRAGMENT_INPUT_COMPONENTS" _ 0x9125
 	)
 
-	GLvoid(
+	void(
 		"GetBufferParameteri64v",
 		"Returns the value of a buffer object parameter.",
 
@@ -65,7 +65,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 
 	// ARB_draw_elements_base_vertex
 
-	GLvoid(
+	void(
 		"DrawElementsBaseVertex",
 		"Renders primitives from array data with a per-element offset.",
 
@@ -76,11 +76,11 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid(
+	void(
 		"DrawRangeElementsBaseVertex",
 		"Renders primitives from array data with a per-element offset.",
 
@@ -93,11 +93,11 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid(
+	void(
 		"DrawElementsInstancedBaseVertex",
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
@@ -108,12 +108,12 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
 		GLint.IN("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
 	)
 
-	GLvoid(
+	void(
 		"MultiDrawElementsBaseVertex",
 		"""
 		Renders multiple sets of primitives by specifying indices of array data elements and an offset to apply to each index.
@@ -124,7 +124,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		const _ GLsizei_p.IN("count", "an array of the elements counts"),
 		GLenum.IN("type", "the type of the values in {@code indices}", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		const _ GLvoid_pp.IN("indices", "a pointer to the location where the indices are stored"),
+		const _ void_pp.IN("indices", "a pointer to the location where the indices are stored"),
 		AutoSize("count", "indices", "basevertex") _ GLsizei.IN("primcount", "the size of the {@code count} array"),
 		GLint_p.IN("basevertex", "a pointer to the location where the base vertices are stored")
 	)
@@ -145,7 +145,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION" _ 0x8E4C
 	)
 
-	GLvoid(
+	void(
 		"ProvokingVertex",
 		"Specifies the vertex to be used as the source of data for flat shaded varyings.",
 
@@ -239,7 +239,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910D
 	)
 
-	GLvoid(
+	void(
 		"TexImage2DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 2D multisample texture's image.",
 
@@ -263,7 +263,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"TexImage3DMultisample",
 		"Establishes the data storage, format, dimensions, and number of samples of a 3D multisample texture's image.",
 
@@ -288,7 +288,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"GetMultisamplefv",
 		"Retrieves the location of a sample.",
 
@@ -297,7 +297,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		Check(1) _ returnValue _ GLfloat_p.OUT("val", "an array to receive the position of the sample")
 	)
 
-	GLvoid(
+	void(
 		"SampleMaski",
 		"Sets the value of a sub-word of the sample mask.",
 
@@ -374,7 +374,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		"PROGRAM_POINT_SIZE" _ 0x8642
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTexture",
 		"Attaches a level of a texture object as a logical buffer to the currently bound framebuffer object.",
 
@@ -462,7 +462,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLsync.IN("sync", "a value that may be the name of a sync object")
 	)
 
-	GLvoid(
+	void(
 		"DeleteSync",
 		"Deletes a sync object.",
 
@@ -489,7 +489,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLuint64.IN("timeout", "the timeout, specified in nanoseconds, for which the implementation should wait for {@code sync} to become signaled")
 	)
 
-	GLvoid(
+	void(
 		"WaitSync",
 		"""
 		Causes the GL server to block and wait for a sync object to become signaled.
@@ -506,7 +506,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		GLuint64.IN("timeout", "the timeout that the server should wait before continuing", "#TIMEOUT_IGNORED")
 	)
 
-	ReferenceGL("glGet") _ GLvoid(
+	ReferenceGL("glGet") _ void(
 		"GetInteger64v",
 		"Returns the 64bit integer value or values of a selected parameter.",
 
@@ -514,7 +514,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		Check(1) _ returnValue _ GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
-	ReferenceGL("glGet") _ GLvoid(
+	ReferenceGL("glGet") _ void(
 		"GetInteger64i_v",
 		"Queries the 64bit integer value of an indexed state variable.",
 
@@ -523,7 +523,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 		Check(1) _ returnValue _ GLint64_p.OUT("params", "the value or values of the specified parameter")
 	)
 
-	GLvoid(
+	void(
 		"GetSynciv",
 		"Queries the properties of a sync object.",
 

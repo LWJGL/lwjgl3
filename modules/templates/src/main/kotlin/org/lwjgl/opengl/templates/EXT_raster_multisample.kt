@@ -4,9 +4,7 @@
  */
 package org.lwjgl.opengl.templates
 
-import org.lwjgl.generator.IN
-import org.lwjgl.generator.IntConstant
-import org.lwjgl.generator.ul
+import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_multisample", postfix = EXT) {
@@ -46,7 +44,7 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
 		"EFFECTIVE_RASTER_SAMPLES_EXT" _ 0x932C
 	)
 
-	GLvoid(
+	void(
 		"RasterSamplesEXT",
 		"""
 		Selects the number of samples to be used for rasterization. {@code samples} represents a request for a desired minimum number of samples. Since

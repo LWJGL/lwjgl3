@@ -44,7 +44,7 @@ val ARB_draw_buffers = "ARBDrawBuffers".nativeClassGL("ARB_draw_buffers", postfi
 		"DRAW_BUFFER15_ARB" _ 0x8834
 	)
 
-	GLvoid(
+	void(
 		"DrawBuffersARB",
 		"Defines the draw buffers to which all output colors are written.",
 

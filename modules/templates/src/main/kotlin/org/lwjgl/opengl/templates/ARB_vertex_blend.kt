@@ -110,20 +110,20 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 
 	val size = AutoSize("weights") _ GLint.IN("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
-	GLvoid("WeightfvARB", "Sets the current vertex weights.", size, GLfloat_p.IN("weights", "the vertex weights"))
+	void("WeightfvARB", "Sets the current vertex weights.", size, GLfloat_p.IN("weights", "the vertex weights"))
 
-	GLvoid("WeightbvARB", "Byte version of #WeightfvARB().", size, GLbyte_p.IN("weights", "the vertex weights"))
-	GLvoid("WeightubvARB", "Unsigned byte version of #WeightfvARB().", size, GLubyte_p.IN("weights", "the vertex weights"))
+	void("WeightbvARB", "Byte version of #WeightfvARB().", size, GLbyte_p.IN("weights", "the vertex weights"))
+	void("WeightubvARB", "Unsigned byte version of #WeightfvARB().", size, GLubyte_p.IN("weights", "the vertex weights"))
 
-	GLvoid("WeightsvARB", "Short version of #WeightfvARB().", size, GLshort_p.IN("weights", "the vertex weights"))
-	GLvoid("WeightusvARB", "Unsigned short version of #WeightfvARB().", size, GLushort_p.IN("weights", "the vertex weights"))
+	void("WeightsvARB", "Short version of #WeightfvARB().", size, GLshort_p.IN("weights", "the vertex weights"))
+	void("WeightusvARB", "Unsigned short version of #WeightfvARB().", size, GLushort_p.IN("weights", "the vertex weights"))
 
-	GLvoid("WeightivARB", "Integer version of #WeightfvARB().", size, GLint_p.IN("weights", "the vertex weights"))
-	GLvoid("WeightuivARB", "Unsigned integer version of #WeightfvARB().", size, GLuint_p.IN("weights", "the vertex weights"))
+	void("WeightivARB", "Integer version of #WeightfvARB().", size, GLint_p.IN("weights", "the vertex weights"))
+	void("WeightuivARB", "Unsigned integer version of #WeightfvARB().", size, GLuint_p.IN("weights", "the vertex weights"))
 
-	GLvoid("WeightdvARB", "Double version of #WeightfvARB().", size, GLdouble_p.IN("weights", "the vertex weights"))
+	void("WeightdvARB", "Double version of #WeightfvARB().", size, GLdouble_p.IN("weights", "the vertex weights"))
 
-	GLvoid(
+	void(
 		"WeightPointerARB",
 		"Specifies the location and organization of a weight array.",
 
@@ -134,10 +134,10 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		    "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ GLvoid_p.IN("pointer", "the weight data")
+		ARRAY_BUFFER _ void_p.IN("pointer", "the weight data")
 	)
 
-	GLvoid(
+	void(
 		"VertexBlendARB",
 		"Sets the number of active transformations applied.",
 

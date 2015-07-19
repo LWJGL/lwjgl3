@@ -104,7 +104,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"MAX_3D_TEXTURE_SIZE" _ 0x8073
 	)
 
-	GLvoid(
+	void(
 		"TexImage3D",
 		"Specifies a three-dimensional texture image.",
 
@@ -119,10 +119,10 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
 		nullable _ MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the texel data")
+		) _ PIXEL_UNPACK_BUFFER _ const _ void_p.IN("pixels", "the texel data")
 	)
 
-	GLvoid(
+	void(
 		"TexSubImage3D",
 		"""
 		Respecifies a cubic subregion of an existing 3D texel array. No change is made to the internalformat, width, height, depth, or border parameters of
@@ -141,10 +141,10 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ PIXEL_UNPACK_BUFFER _ const _ GLvoid_p.IN("pixels", "the pixel data")
+		) _ PIXEL_UNPACK_BUFFER _ const _ void_p.IN("pixels", "the pixel data")
 	)
 
-	GLvoid(
+	void(
 		"CopyTexSubImage3D",
 		"""
 		Respecifies a rectangular subregion of a slice of an existing 3D texel array. No change is made to the {@code internalformat}, {@code width},
@@ -253,7 +253,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		"MAX_ELEMENTS_INDICES" _ 0x80E9
 	)
 
-	GLvoid(
+	void(
 		"DrawRangeElements",
 		"""
 		A restricted form of GL11#DrawElements(). mode, start, end, and count match the corresponding arguments to glDrawElements, with the additional
@@ -298,7 +298,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", " a pointer to the location where the indices are stored")
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", " a pointer to the location where the indices are stored")
 	)
 
 }

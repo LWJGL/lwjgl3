@@ -48,7 +48,7 @@ val ARB_sample_shading = "ARBSampleShading".nativeClassGL("ARB_sample_shading", 
 		"MIN_SAMPLE_SHADING_VALUE_ARB" _ 0x8C37
 	)
 
-	GLvoid(
+	void(
 		"MinSampleShadingARB",
 		"Sets the minimum sample shading fraction. {@code value} is clamped to [0,1] when specified.",
 

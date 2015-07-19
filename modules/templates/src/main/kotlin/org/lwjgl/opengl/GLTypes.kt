@@ -8,13 +8,6 @@ import org.lwjgl.generator.*
 
 val OPENGL_PACKAGE = "org.lwjgl.opengl"
 
-// void
-
-val GLvoid = NativeType("GLvoid", TypeMapping.VOID)
-
-val GLvoid_p = PointerType("GLvoid", PointerMapping.DATA)
-val GLvoid_pp = PointerType(GLvoid_p)
-
 // numeric
 
 val GLboolean = IntegerType("GLboolean", PrimitiveMapping.BOOLEAN, unsigned = true)
@@ -81,7 +74,7 @@ val GLDEBUGPROCAMD = CallbackType(callback(
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	GLvoid_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
+	void_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
 	samConstructor = "AMDDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
@@ -97,7 +90,7 @@ val GLDEBUGPROCARB = CallbackType(callback(
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ GLvoid_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
+	const _ void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
 	samConstructor = "ARBDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
@@ -120,7 +113,7 @@ val GLDEBUGPROC = CallbackType(callback(
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ GLvoid_p.IN(
+	const _ void_p.IN(
 		"userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
 	),

@@ -58,7 +58,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 		"FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV" _ 0x9343
 	)
 
-	GLvoid(
+	void(
 		"FramebufferSampleLocationsfvNV",
 		"Updates the programmable sample locations",
 
@@ -68,7 +68,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 		const _ GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
 	)
 
-	GLvoid(
+	void(
 		"NamedFramebufferSampleLocationsfvNV",
 		"Updates the programmable sample locations",
 
@@ -78,7 +78,7 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 		const _ GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
 	)
 
-	GLvoid(
+	void(
 		"ResolveDepthValuesNV",
 		"""
 		Evaluates depth values for all samples in the current depth buffer (subject to the pixel ownership and scissor tests) and stores each value in the

@@ -54,7 +54,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 	// ARB_draw_instanced
 
-	GLvoid(
+	void(
 		"DrawArraysInstanced",
 		"Draw multiple instances of a range of elements.",
 
@@ -64,7 +64,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		GLsizei.IN("primcount", "the number of instances of the specified range of vertices to be rendered")
 	)
 
-	GLvoid(
+	void(
 		"DrawElementsInstanced",
 		"Draws multiple instances of a set of elements.",
 
@@ -75,7 +75,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ GLvoid_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "the ByteBuffer containing the indices to be rendered"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered")
 	)
 
@@ -91,7 +91,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"COPY_WRITE_BUFFER" _ 0x8F37
 	)
 
-	GLvoid(
+	void(
 		"CopyBufferSubData",
 		"""
 		Copies all or part of one buffer object's data store to the data store of another buffer object.
@@ -135,7 +135,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"PRIMITIVE_RESTART_INDEX" _ 0x8F9E
 	)
 
-	GLvoid(
+	void(
 		"PrimitiveRestartIndex",
 		"Specifies the primitive restart index.",
 
@@ -163,7 +163,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"TEXTURE_BUFFER_FORMAT" _ 0x8C2E
 	)
 
-	GLvoid(
+	void(
 		"TexBuffer",
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found
@@ -314,7 +314,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"INVALID_INDEX" _ 0xFFFFFFFF.i
 	)
 
-	GLvoid(
+	void(
 		"GetUniformIndices",
 		"Retrieves the indices of a number of uniforms within a program object",
 
@@ -327,7 +327,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		returnValue _ GLuint_p.OUT("uniformIndices", "an array that will receive the indices of the uniforms")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveUniformsiv",
 		"Returns information about several active uniform variables for the specified program object.",
 
@@ -341,7 +341,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		returnValue _ GLint_p.OUT("params", "an array of {@code uniformCount} integers which are to receive the value of {@code pname} for each uniform in {@code uniformIndices}")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveUniformName",
 		"Queries the name of an active uniform.",
 
@@ -369,7 +369,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		const _ GLcharASCII_p.IN("uniformBlockName", "an array of characters to containing the name of the uniform block whose index to retrieve")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveUniformBlockiv",
 		"Queries information about an active uniform block.",
 
@@ -379,7 +379,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		Check(1) _ returnValue _ GLint_p.OUT("params", "the address of a variable to receive the result of the query")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveUniformBlockName",
 		"Retrieves the name of an active uniform block.",
 
@@ -393,7 +393,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		)
 	)
 
-	GLvoid(
+	void(
 		"UniformBlockBinding",
 		"Assigns a binding point to an active uniform block.",
 

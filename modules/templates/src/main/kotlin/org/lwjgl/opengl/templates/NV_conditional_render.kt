@@ -41,7 +41,7 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
 		"QUERY_BY_REGION_NO_WAIT_NV" _ 0x8E16
 	)
 
-	GLvoid(
+	void(
 		"BeginConditionalRenderNV",
 		"",
 
@@ -49,7 +49,7 @@ val NV_conditional_render = "NVConditionalRender".nativeClassGL("NV_conditional_
 		GLenum.IN("mode", "")
 	)
 
-	GLvoid(
+	void(
 		"EndConditionalRenderNV",
 		""
 	)

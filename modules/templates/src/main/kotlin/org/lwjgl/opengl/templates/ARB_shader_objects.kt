@@ -92,7 +92,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"SAMPLER_2D_RECT_SHADOW_ARB" _ 0x8B64
 	)
 
-	GLvoid(
+	void(
 		"DeleteObjectARB",
 		"""
 		Either deletes the object, or flags it for deletion. An object that is attached to a container object is not deleted until it is no longer attached to
@@ -118,7 +118,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLenum.IN("pname", "the state item for which the current object is to be returned", "#PROGRAM_OBJECT_ARB")
 	)
 
-	GLvoid(
+	void(
 		"DetachObjectARB",
 		"Detaches an object from the container object it is attached to.",
 
@@ -133,7 +133,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLenum.IN("shaderType", "the type of the shader object to be created", "ARBVertexShader#VERTEX_SHADER_ARB ARBFragmentShader#FRAGMENT_SHADER_ARB")
 	)
 
-	GLvoid(
+	void(
 		"ShaderSourceARB",
 		"""
 		Sets the source code for the specified shader object {@code shaderObj} to the text strings in the {@code string} array. If the object previously had
@@ -156,7 +156,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		)
 	)
 
-	GLvoid(
+	void(
 		"CompileShaderARB",
 		"""
 		Compiles a shader object. Each shader object has a Boolean status, #OBJECT_COMPILE_STATUS_ARB, that is modified as a result of compilation. This status
@@ -186,7 +186,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"""
 	)
 
-	GLvoid(
+	void(
 		"AttachObjectARB",
 		"Attaches an object to a container object.",
 
@@ -194,7 +194,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLhandleARB.IN("obj", "the object to attach")
 	)
 
-	GLvoid(
+	void(
 		"LinkProgramARB",
 		"""
 		Links a program object.
@@ -213,7 +213,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLhandleARB.IN("programObj", "the program object to link")
 	)
 
-	GLvoid(
+	void(
 		"UseProgramObjectARB",
 		"""
 		Installs the executable code as part of current rendering state if the program object {@code programObj} contains valid executable code, i.e. has been
@@ -233,7 +233,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLhandleARB.IN("programObj", "the program object to use")
 	)
 
-	GLvoid(
+	void(
 		"ValidateProgramARB",
 		"""
 		Validates the program object {@code programObj} against the GL state at that moment. Each program object has a Boolean status,
@@ -260,7 +260,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 	val uniformZ = "the uniform z value"
 	val uniformW = "the uniform w value"
 
-	GLvoid(
+	void(
 		"Uniform1fARB",
 		"float version of #Uniform4fARB().",
 
@@ -268,7 +268,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLfloat.IN("v0", uniformX)
 	)
 
-	GLvoid(
+	void(
 		"Uniform2fARB",
 		"vec2 version of #Uniform4fARB().",
 
@@ -277,7 +277,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLfloat.IN("v1", uniformY)
 	)
 
-	GLvoid(
+	void(
 		"Uniform3fARB",
 		"vec3 version of #Uniform4fARB().",
 
@@ -287,7 +287,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLfloat.IN("v2", uniformZ)
 	)
 
-	GLvoid(
+	void(
 		"Uniform4fARB",
 		"Loads a vec4 value into a uniform variable of the program object that is currently in use.",
 
@@ -298,7 +298,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLfloat.IN("v3", uniformW)
 	)
 
-	GLvoid(
+	void(
 		"Uniform1iARB",
 		"int version of #Uniform1fARB().",
 
@@ -306,7 +306,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLint.IN("v0", uniformX)
 	)
 
-	GLvoid(
+	void(
 		"Uniform2iARB",
 		"ivec2 version of #Uniform2fARB().",
 
@@ -315,7 +315,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLint.IN("v1", uniformY)
 	)
 
-	GLvoid(
+	void(
 		"Uniform3iARB",
 		"ivec3 version of #Uniform3fARB().",
 
@@ -325,7 +325,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLint.IN("v2", uniformZ)
 	)
 
-	GLvoid(
+	void(
 		"Uniform4iARB",
 		"ivec4 version of #Uniform4fARB().",
 
@@ -336,7 +336,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		GLint.IN("v3", uniformW)
 	)
 
-	GLvoid(
+	void(
 		"Uniform1fvARB",
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of float values.",
 
@@ -345,7 +345,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform2fvARB",
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec2 vectors.",
 
@@ -354,7 +354,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform3fvARB",
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec3 vectors.",
 
@@ -363,7 +363,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform4fvARB",
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec4 vectors.",
 
@@ -372,7 +372,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform1ivARB",
 		"Loads integer values {@code count} times into a uniform location defined as an array of integer values.",
 
@@ -381,7 +381,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform2ivARB",
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec2 vectors.",
 
@@ -390,7 +390,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform3ivARB",
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec3 vectors.",
 
@@ -399,7 +399,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLint_p.IN("value", "the values to load")
 	)
 
-	GLvoid(
+	void(
 		"Uniform4ivARB",
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec4 vectors.",
 
@@ -410,7 +410,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 	val transpose = GLboolean.IN("transpose", "if GL11#FALSE, the matrix is specified in column major order, otherwise in row major order")
 
-	GLvoid(
+	void(
 		"UniformMatrix2fvARB",
 		"Loads a 2x2 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
@@ -420,7 +420,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the matrix values to load")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix3fvARB",
 		"Loads a 3x3 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
@@ -430,7 +430,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the matrix values to load")
 	)
 
-	GLvoid(
+	void(
 		"UniformMatrix4fvARB",
 		"Loads a 4x4 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
@@ -440,7 +440,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLfloat_p.IN("value", "the matrix values to load")
 	)
 
-	GLvoid(
+	void(
 		"GetObjectParameterfvARB",
 		"Returns object specific parameter values.",
 
@@ -449,7 +449,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"GetObjectParameterivARB",
 		"Returns object specific parameter values.",
 
@@ -458,7 +458,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"GetInfoLogARB",
 		"""
 		A string that contains information about the last link or validation attempt and last compilation attempt are kept per program or shader object. This
@@ -490,7 +490,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		) _ GLcharARB_p.OUT("infoLog", "a buffer in which to return the info log")
 	)
 
-	GLvoid(
+	void(
 		"GetAttachedObjectsARB",
 		"""
 		Returns the handles of objects attached to {@code containerObj} in {@code obj}. . The number of objects attached to {@code containerObj} is given by
@@ -530,7 +530,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		const _ GLcharARB_p.IN("name", "the name of the uniform variable whose location is to be queried")
 	)
 
-	GLvoid(
+	void(
 		"GetActiveUniformARB",
 		"""
 		Determines which of the declared uniform variables are active and their sizes and types.
@@ -580,7 +580,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		) _ GLcharARB_p.OUT("name", "a buffer in which to return the uniform name")
 	)
 
-	GLvoid(
+	void(
 		"GetUniformfvARB",
 		"Returns the floating-point value or values of a uniform.",
 
@@ -589,7 +589,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
-	GLvoid(
+	void(
 		"GetUniformivARB",
 		"Returns the integer value or values of a uniform.",
 
@@ -598,7 +598,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
-	GLvoid(
+	void(
 		"GetShaderSourceARB",
 		"""
 		Returns the string making up the source code for a shader object.

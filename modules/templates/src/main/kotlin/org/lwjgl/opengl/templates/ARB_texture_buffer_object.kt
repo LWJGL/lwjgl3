@@ -56,7 +56,7 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		"TEXTURE_BUFFER_FORMAT_ARB" _ 0x8C2E
 	)
 
-	GLvoid(
+	void(
 		"TexBufferARB",
 		"""
 		Attaches the storage for the buffer object named {@code buffer} to the active buffer texture, and specifies an internal format for the texel array found

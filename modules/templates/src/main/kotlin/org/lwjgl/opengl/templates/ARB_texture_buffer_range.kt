@@ -39,7 +39,7 @@ val ARB_texture_buffer_range = "ARBTextureBufferRange".nativeClassGL("ARB_textur
 
 	val src = GL43 reuse "TexBufferRange"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"TextureBufferRangeEXT",
 		"DSA version of #TexBufferRange().",
 

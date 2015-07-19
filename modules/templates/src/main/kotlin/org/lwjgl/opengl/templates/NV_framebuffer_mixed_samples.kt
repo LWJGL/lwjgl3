@@ -53,7 +53,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		"COVERAGE_MODULATION_TABLE_SIZE_NV" _ 0x9333
 	)
 
-	GLvoid(
+	void(
 		"RasterSamplesEXT",
 		"",
 
@@ -61,7 +61,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		GLboolean.IN("fixedsamplelocations", "")
 	)
 
-	GLvoid(
+	void(
 		"CoverageModulationTableNV",
 		"",
 
@@ -69,7 +69,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		const _ GLfloat_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"GetCoverageModulationTableNV",
 		"",
 
@@ -77,7 +77,7 @@ val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGL("NV
 		GLfloat_p.IN("v", "")
 	)
 
-	GLvoid(
+	void(
 		"CoverageModulationNV",
 		"",
 

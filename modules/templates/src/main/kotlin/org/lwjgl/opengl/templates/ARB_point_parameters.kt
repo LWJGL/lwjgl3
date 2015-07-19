@@ -42,7 +42,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 		"POINT_DISTANCE_ATTENUATION_ARB" _ 0x8129
 	)
 
-	GLvoid(
+	void(
 		"PointParameterfARB",
 		"Sets the float value of a pointer parameter.",
 
@@ -50,7 +50,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 		GLfloat.IN("param", "the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"PointParameterfvARB",
 		"Pointer version of #PointParameterfARB().",
 

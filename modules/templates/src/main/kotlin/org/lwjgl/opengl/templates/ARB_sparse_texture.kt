@@ -59,7 +59,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 	)
 
 	val TexSubImage3D = GL12["TexSubImage3D"]
-	val TexPageCommitmentARB = GLvoid(
+	val TexPageCommitmentARB = void(
 		"TexPageCommitmentARB",
 		"""
 		Makes individual pages of a sparse texture resident or non resident.
@@ -133,7 +133,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		GLboolean.IN("commit", "the commit flag")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"TexturePageCommitmentEXT",
 		"DSA version of #TexPageCommitmentARB().",
 

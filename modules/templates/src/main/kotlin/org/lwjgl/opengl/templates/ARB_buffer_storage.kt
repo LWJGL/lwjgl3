@@ -55,7 +55,7 @@ val ARB_buffer_storage = "ARBBufferStorage".nativeClassGL("ARB_buffer_storage") 
 
 	val BufferStorage = GL44 reuse "BufferStorage"
 
-	DependsOn("GL_EXT_direct_state_access") _ GLvoid(
+	DependsOn("GL_EXT_direct_state_access") _ void(
 		"NamedBufferStorageEXT",
 		"""
 		Behaves similarly to #BufferStorage(), except that the buffer whose storage is to be defined is specified by {@code buffer} rather than by the current

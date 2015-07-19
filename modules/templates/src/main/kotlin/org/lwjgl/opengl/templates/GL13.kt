@@ -67,7 +67,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 	// KHR_texture_compression_astc_ldr formats are only accepted in CompressedTexImage* functions
 	val CompressTexImageFormats = "$SPECIFIC_COMPRESSED_TEXTURE_INTERNAL_FORMATS @##KHRTextureCompressionASTCLDR"
 
-	GLvoid(
+	void(
 		"CompressedTexImage3D",
 		"Specifies a three-dimensional texture image in a compressed format.",
 
@@ -79,10 +79,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("depth", "the depth of the texture image"),
 		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"CompressedTexImage2D",
 		"Specifies a two-dimensional texture image in a compressed format.",
 
@@ -93,10 +93,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("height", "the height of the texture image"),
 		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"CompressedTexImage1D",
 		"Specifies a one-dimensional texture image in a compressed format.",
 
@@ -106,10 +106,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("width", "the width of the texture image"),
 		GLint.IN("border", "must be 0"),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"CompressedTexSubImage3D",
 		"Respecifies only a cubic subregion of an existing 3D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -123,10 +123,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("depth", "the depth of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"CompressedTexSubImage2D",
 		"Respecifies only a rectangular subregion of an existing 2D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -138,10 +138,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("height", "the height of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"CompressedTexSubImage1D",
 		"Respecifies only a subregion of an existing 1D texel array, with incoming data stored in a specific compressed image format.",
 
@@ -151,10 +151,10 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLsizei.IN("width", "the width of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
 		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		const _ PIXEL_UNPACK_BUFFER _ GLvoid_p.IN("data", "a pointer to the compressed image data")
+		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "a pointer to the compressed image data")
 	)
 
-	GLvoid(
+	void(
 		"GetCompressedTexImage",
 		"Returns a compressed texture image.",
 
@@ -162,7 +162,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		Check(
 			expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-		) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+		) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 	// ARB_texture_cube_map
@@ -246,7 +246,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		"SAMPLE_COVERAGE_INVERT" _ 0x80AB
 	)
 
-	GLvoid(
+	void(
 		"SampleCoverage",
 		"""
 		Specifies multisample coverage parameters.
@@ -316,7 +316,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		"MAX_TEXTURE_UNITS" _ 0x84E2
 	)
 
-	GLvoid(
+	void(
 		"ActiveTexture",
 		"""
 		Selects which texture unit subsequent texture state calls will affect. The number of texture units an implementation supports is implementation
@@ -326,7 +326,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLenum.IN("texture", "which texture unit to make active", "#TEXTURE0 GL_TEXTURE[1-31]")
 	)
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"ClientActiveTexture",
 		"""
 		Selects the vertex array client state parameters to be modified by the TexCoordPointer command and the array affected by EnableClientState and
@@ -344,7 +344,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 	val texCoordQ = "the q component of the current texture coordinates"
 	val texCoordBuffer = "the texture coordinate buffer"
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultiTexCoord1f",
 		"Sets the current one-dimensional texture coordinate for the specified texture coordinate set. {@code t} and {@code r} are implicitly set to 0 and {@code q} to 1.",
 
@@ -352,16 +352,16 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLfloat.IN("s", texCoordS)
 	)
 
-	deprecatedGL _ GLvoid("MultiTexCoord1s", "Short version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS))
-	deprecatedGL _ GLvoid("MultiTexCoord1i", "Integer version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS))
-	deprecatedGL _ GLvoid("MultiTexCoord1d", "Double version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS))
+	deprecatedGL _ void("MultiTexCoord1s", "Short version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS))
+	deprecatedGL _ void("MultiTexCoord1i", "Integer version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS))
+	deprecatedGL _ void("MultiTexCoord1d", "Double version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS))
 
-	deprecatedGL _ GLvoid("MultiTexCoord1fv", "Pointer version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord1sv", "Pointer version of #MultiTexCoord1s().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord1iv", "Pointer version of #MultiTexCoord1i().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord1dv", "Pointer version of #MultiTexCoord1d().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord1fv", "Pointer version of #MultiTexCoord1f().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord1sv", "Pointer version of #MultiTexCoord1s().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord1iv", "Pointer version of #MultiTexCoord1i().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord1dv", "Pointer version of #MultiTexCoord1d().", GLenum.IN("texture", texCoordTex), const _ Check(1) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultiTexCoord2f",
 		"Sets the current two-dimensional texture coordinate for the specified texture coordinate set. {@code r} is implicitly set to 0 and {@code q} to 1.",
 
@@ -370,16 +370,16 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLfloat.IN("t", texCoordT)
 	)
 
-	deprecatedGL _ GLvoid("MultiTexCoord2s", "Short version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT))
-	deprecatedGL _ GLvoid("MultiTexCoord2i", "Integer version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))
-	deprecatedGL _ GLvoid("MultiTexCoord2d", "Double version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))
+	deprecatedGL _ void("MultiTexCoord2s", "Short version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT))
+	deprecatedGL _ void("MultiTexCoord2i", "Integer version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT))
+	deprecatedGL _ void("MultiTexCoord2d", "Double version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT))
 
-	deprecatedGL _ GLvoid("MultiTexCoord2fv", "Pointer version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord2sv", "Pointer version of #MultiTexCoord2s().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord2iv", "Pointer version of #MultiTexCoord2i().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord2dv", "Pointer version of #MultiTexCoord2d().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord2fv", "Pointer version of #MultiTexCoord2f().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord2sv", "Pointer version of #MultiTexCoord2s().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord2iv", "Pointer version of #MultiTexCoord2i().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord2dv", "Pointer version of #MultiTexCoord2d().", GLenum.IN("texture", texCoordTex), const _ Check(2) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultiTexCoord3f",
 		"Sets the current three-dimensional texture coordinate for the specified texture coordinate set. {@code q} is implicitly set to 1.",
 
@@ -389,16 +389,16 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLfloat.IN("r", texCoordR)
 	)
 
-	deprecatedGL _ GLvoid("MultiTexCoord3s", "Short version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR))
-	deprecatedGL _ GLvoid("MultiTexCoord3i", "Integer version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))
-	deprecatedGL _ GLvoid("MultiTexCoord3d", "Double version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))
+	deprecatedGL _ void("MultiTexCoord3s", "Short version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR))
+	deprecatedGL _ void("MultiTexCoord3i", "Integer version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR))
+	deprecatedGL _ void("MultiTexCoord3d", "Double version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR))
 
-	deprecatedGL _ GLvoid("MultiTexCoord3fv", "Pointer version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord3sv", "Pointer version of #MultiTexCoord3s().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord3iv", "Pointer version of #MultiTexCoord3i().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord3dv", "Pointer version of #MultiTexCoord3d().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord3fv", "Pointer version of #MultiTexCoord3f().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord3sv", "Pointer version of #MultiTexCoord3s().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord3iv", "Pointer version of #MultiTexCoord3i().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord3dv", "Pointer version of #MultiTexCoord3d().", GLenum.IN("texture", texCoordTex), const _ Check(3) _ GLdouble_p.IN("v", texCoordBuffer))
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultiTexCoord4f",
 		"Sets the current four-dimensional texture coordinate for the specified texture coordinate set.",
 
@@ -409,14 +409,14 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		GLfloat.IN("q", texCoordQ)
 	)
 
-	deprecatedGL _ GLvoid("MultiTexCoord4s", "Short version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ))
-	deprecatedGL _ GLvoid("MultiTexCoord4i", "Integer version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))
-	deprecatedGL _ GLvoid("MultiTexCoord4d", "Double version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))
+	deprecatedGL _ void("MultiTexCoord4s", "Short version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLshort.IN("s", texCoordS), GLshort.IN("t", texCoordT), GLshort.IN("r", texCoordR), GLshort.IN("q", texCoordQ))
+	deprecatedGL _ void("MultiTexCoord4i", "Integer version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLint.IN("s", texCoordS), GLint.IN("t", texCoordT), GLint.IN("r", texCoordR), GLint.IN("q", texCoordQ))
+	deprecatedGL _ void("MultiTexCoord4d", "Double version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), GLdouble.IN("s", texCoordS), GLdouble.IN("t", texCoordT), GLdouble.IN("r", texCoordR), GLdouble.IN("q", texCoordQ))
 
-	deprecatedGL _ GLvoid("MultiTexCoord4fv", "Pointer version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLfloat_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord4sv", "Pointer version of #MultiTexCoord4s().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLshort_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord4iv", "Pointer version of #MultiTexCoord4i().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLint_p.IN("v", texCoordBuffer))
-	deprecatedGL _ GLvoid("MultiTexCoord4dv", "Pointer version of #MultiTexCoord4d().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLdouble_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord4fv", "Pointer version of #MultiTexCoord4f().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLfloat_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord4sv", "Pointer version of #MultiTexCoord4s().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLshort_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord4iv", "Pointer version of #MultiTexCoord4i().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLint_p.IN("v", texCoordBuffer))
+	deprecatedGL _ void("MultiTexCoord4dv", "Pointer version of #MultiTexCoord4d().", GLenum.IN("texture", texCoordTex), const _ Check(4) _ GLdouble_p.IN("v", texCoordBuffer))
 
 	// ARB_texture_env_combine
 
@@ -499,7 +499,7 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		"TRANSPOSE_COLOR_MATRIX" _ 0x84E6
 	)
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"LoadTransposeMatrixf",
 		"""
 		Sets the current matrix to a 4 &times; 4 matrix in row-major order.
@@ -517,21 +517,21 @@ val GL13 = "GL13".nativeClassGL("GL13") {
 		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"LoadTransposeMatrixd",
 		"Double version of #LoadTransposeMatrixf().",
 
 		const _ Check(16) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultTransposeMatrixf",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in row-major order. See #LoadTransposeMatrixf() for details.",
 
 		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	deprecatedGL _ GLvoid(
+	deprecatedGL _ void(
 		"MultTransposeMatrixd",
 		"Double version of #MultTransposeMatrixf().",
 

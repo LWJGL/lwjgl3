@@ -48,15 +48,15 @@ val NV_vertex_array_range = "NVVertexArrayRange".nativeClassGL("NV_vertex_array_
 		"VERTEX_ARRAY_RANGE_POINTER_NV" _ 0x8521
 	)
 
-	GLvoid(
+	void(
 		"VertexArrayRangeNV",
 		"",
 
 		GLsizei.IN("length", ""),
-		GLvoid_p.IN("pointer", "")
+		void_p.IN("pointer", "")
 	)
 
-	GLvoid(
+	void(
 		"FlushVertexArrayRangeNV",
 		""
 	)

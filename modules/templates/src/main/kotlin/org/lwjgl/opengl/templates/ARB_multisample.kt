@@ -59,7 +59,7 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		"SAMPLE_COVERAGE_INVERT_ARB" _ 0x80AB
 	)
 
-	GLvoid(
+	void(
 		"SampleCoverageARB",
 		"""
 		Specifies simultaneously the values of #SAMPLE_COVERAGE_VALUE_ARB and #SAMPLE_COVERAGE_INVERT_ARB.

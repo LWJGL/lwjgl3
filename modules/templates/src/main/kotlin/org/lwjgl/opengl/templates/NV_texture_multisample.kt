@@ -31,7 +31,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		"TEXTURE_COLOR_SAMPLES_NV" _ 0x9046
 	)
 
-	GLvoid(
+	void(
 		"TexImage2DMultisampleCoverageNV",
 		"",
 
@@ -44,7 +44,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		GLboolean.IN("fixedSampleLocations", "")
 	)
 
-	GLvoid(
+	void(
 		"TexImage3DMultisampleCoverageNV",
 		"",
 
@@ -58,7 +58,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		GLboolean.IN("fixedSampleLocations", "")
 	)
 
-	GLvoid(
+	void(
 		"TextureImage2DMultisampleNV",
 		"",
 
@@ -71,7 +71,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		GLboolean.IN("fixedSampleLocations", "")
 	)
 
-	GLvoid(
+	void(
 		"TextureImage3DMultisampleNV",
 		"",
 
@@ -85,7 +85,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		GLboolean.IN("fixedSampleLocations", "")
 	)
 
-	GLvoid(
+	void(
 		"TextureImage2DMultisampleCoverageNV",
 		"",
 
@@ -99,7 +99,7 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		GLboolean.IN("fixedSampleLocations", "")
 	)
 
-	GLvoid(
+	void(
 		"TextureImage3DMultisampleCoverageNV",
 		"",
 

@@ -93,7 +93,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		"PROGRAM_POINT_SIZE_ARB" _ 0x8642
 	)
 
-	GLvoid(
+	void(
 		"ProgramParameteriARB",
 		"""
 		Sets a program object parameter.
@@ -117,7 +117,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("value", "the value being set")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTextureARB",
 		"""
 		Attaches a specified level of a texture object as one of the logical buffers of the currently bound framebuffer object, to render directly into the
@@ -141,7 +141,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("level", "the texture level")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTextureLayerARB",
 		"""
 		Operates like #FramebufferTextureARB(), except that only a single layer of the texture level, numbered {@code layer}, is attached to the attachment
@@ -159,7 +159,7 @@ val ARB_geometry_shader4 = "ARBGeometryShader4".nativeClassGL("ARB_geometry_shad
 		GLint.IN("layer", "the texture layer")
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTextureFaceARB",
 		"""
 		Operates like #FramebufferTextureARB(), except that only a single face of a cube map texture, given by {@code face}, is attached to the attachment

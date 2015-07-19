@@ -104,7 +104,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 		"BLUE_NV" _ 0x1905
 	)
 
-	GLvoid(
+	void(
 		"BlendParameteriNV",
 		"",
 
@@ -112,7 +112,7 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 		GLint.IN("value", "")
 	)
 
-	GLvoid(
+	void(
 		"BlendBarrierNV",
 		""
 	)

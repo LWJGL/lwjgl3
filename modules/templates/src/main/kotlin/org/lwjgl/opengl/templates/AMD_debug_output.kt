@@ -74,7 +74,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		"DEBUG_CATEGORY_OTHER_AMD" _ 0x9150
 	).javaDocLinks
 
-	GLvoid(
+	void(
 		"DebugMessageEnableAMD",
 		"""
 		Allows disabling or enabling generation of subsets of messages. If {@code enabled} is GL11#TRUE, the referenced subset of messages is enabled. If
@@ -120,7 +120,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageInsertAMD",
 		"""
 		Injects an application-supplied message into the debug message stream.
@@ -141,7 +141,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		const _ GLcharUTF8_p.IN("buf", "the message characters")
 	)
 
-	GLvoid(
+	void(
 		"DebugMessageCallbackAMD",
 		"""
 		Specifies a callback to receive debugging messages from the GL.

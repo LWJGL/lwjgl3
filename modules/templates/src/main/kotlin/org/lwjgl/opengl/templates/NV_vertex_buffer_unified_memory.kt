@@ -70,7 +70,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		"ELEMENT_ARRAY_LENGTH_NV" _ 0x8F33
 	)
 
-	GLvoid(
+	void(
 		"BufferAddressRangeNV",
 		"",
 
@@ -80,7 +80,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizeiptr.IN("length", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexFormatNV",
 		"",
 
@@ -89,7 +89,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"NormalFormatNV",
 		"",
 
@@ -97,7 +97,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"ColorFormatNV",
 		"",
 
@@ -106,7 +106,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"IndexFormatNV",
 		"",
 
@@ -114,7 +114,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"TexCoordFormatNV",
 		"",
 
@@ -123,14 +123,14 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"EdgeFlagFormatNV",
 		"",
 
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"SecondaryColorFormatNV",
 		"",
 
@@ -139,7 +139,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"FogCoordFormatNV",
 		"",
 
@@ -147,7 +147,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribFormatNV",
 		"",
 
@@ -158,7 +158,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"VertexAttribIFormatNV",
 		"",
 
@@ -168,7 +168,7 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 		GLsizei.IN("stride", "")
 	)
 
-	GLvoid(
+	void(
 		"GetIntegerui64i_vNV",
 		"",
 

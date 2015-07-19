@@ -56,7 +56,7 @@ val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buff
 		"FIXED_ONLY_ARB" _ 0x891D
 	)
 
-	GLvoid(
+	void(
 		"ClampColorARB",
 		"Controls color clamping.",
 

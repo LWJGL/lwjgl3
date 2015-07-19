@@ -98,7 +98,7 @@ val EXT_texture_array = "EXTTextureArray".nativeClassGL("EXT_texture_array", pos
 		"SAMPLER_2D_ARRAY_SHADOW_EXT" _ 0x8DC4
 	)
 
-	GLvoid(
+	void(
 		"FramebufferTextureLayerEXT",
 		"",
 

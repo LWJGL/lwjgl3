@@ -26,7 +26,7 @@ val NV_draw_texture = "NVDrawTexture".nativeClassGL("NV_draw_texture", postfix =
     the texture result as the fragment color.
 		"""
 
-	GLvoid(
+	void(
 		"DrawTextureNV",
 		"",
 

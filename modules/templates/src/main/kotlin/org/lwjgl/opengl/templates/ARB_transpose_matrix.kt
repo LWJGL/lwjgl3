@@ -36,7 +36,7 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
 		"TRANSPOSE_COLOR_MATRIX_ARB" _ 0x84E6
 	)
 
-	GLvoid(
+	void(
 		"LoadTransposeMatrixfARB",
 		"""
 		Sets the current matrix to a 4 &times; 4 matrix in row-major order.
@@ -54,21 +54,21 @@ val ARB_transpose_matrix = "ARBTransposeMatrix".nativeClassGL("ARB_transpose_mat
 		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	GLvoid(
+	void(
 		"LoadTransposeMatrixdARB",
 		"Double version of #LoadTransposeMatrixfARB().",
 
 		const _ Check(16) _ GLdouble_p.IN("m", "the matrix data")
 	)
 
-	GLvoid(
+	void(
 		"MultTransposeMatrixfARB",
 		"Multiplies the current matrix with a 4 &times; 4 matrix in row-major order. See #LoadTransposeMatrixfARB() for details.",
 
 		const _ Check(16) _ GLfloat_p.IN("m", "the matrix data")
 	)
 
-	GLvoid(
+	void(
 		"MultTransposeMatrixdARB",
 		"Double version of #MultTransposeMatrixfARB().",
 

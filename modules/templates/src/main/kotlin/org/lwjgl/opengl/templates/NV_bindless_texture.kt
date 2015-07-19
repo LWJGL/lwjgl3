@@ -107,7 +107,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint.IN("sampler", "the sampler object")
 	)
 
-	GLvoid(
+	void(
 		"MakeTextureHandleResidentNV",
 		"""
 		Make a texture handle resident, so that it is accessible to shaders for texture mapping operations.
@@ -121,7 +121,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint64.IN("handle", "the texture handle")
 	)
 
-	GLvoid(
+	void(
 		"MakeTextureHandleNonResidentNV",
 		"""
 		Makes a texture handle inaccessible to shaders.
@@ -177,7 +177,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLenum.IN("format", "the texture format")
 	)
 
-	GLvoid(
+	void(
 		"MakeImageHandleResidentNV",
 		"""
 		Makes an image handle resident, so that it is accessible to shaders for image loads, stores, and atomic operations.
@@ -196,7 +196,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLenum.IN("access", "the access type", "GL15#READ_ONLY GL15#WRITE_ONLY GL15#READ_WRITE")
 	)
 
-	GLvoid(
+	void(
 		"MakeImageHandleNonResidentNV",
 		"Makes an image handle inaccessible to shaders.",
 
@@ -204,7 +204,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 	)
 
 	val location = GLint.IN("location", "the uniform location")
-	val UniformHandleui64NV = GLvoid(
+	val UniformHandleui64NV = void(
 		"UniformHandleui64NV",
 		"Loads a 64-bit unsigned integer handle into a uniform location corresponding to sampler or image variable types.",
 
@@ -212,7 +212,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		GLuint64.IN("value", "the handle value")
 	)
 
-	val UniformHandleui64vNV = GLvoid(
+	val UniformHandleui64vNV = void(
 		"UniformHandleui64vNV",
 		"Loads {@code count} 64-bit unsigned integer handles into a uniform location corresponding to sampler or image variable types.",
 
@@ -221,7 +221,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		const _ GLuint64_p.IN("values", "a buffer from which to load the handles")
 	)
 
-	GLvoid(
+	void(
 		"ProgramUniformHandleui64NV",
 		"DSA version of #UniformHandleui64NV().",
 
@@ -230,7 +230,7 @@ val NV_bindless_texture = "NVBindlessTexture".nativeClassGL("NV_bindless_texture
 		UniformHandleui64NV["value"]
 	)
 
-	GLvoid(
+	void(
 		"ProgramUniformHandleui64vNV",
 		"DSA version of #UniformHandleui64vNV().",
 

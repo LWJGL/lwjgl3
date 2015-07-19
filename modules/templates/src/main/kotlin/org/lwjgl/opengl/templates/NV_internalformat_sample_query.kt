@@ -51,7 +51,7 @@ val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGL
 		"CONFORMANT_NV" _ 0x9374
 	)
 
-	GLvoid(
+	void(
 		"GetInternalformatSampleivNV",
 		"",
 

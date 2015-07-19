@@ -404,7 +404,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PATH_TRANSPOSE_PROJECTION_MATRIX_NV" _ 0x84E4
 	)
 
-	GLvoid(
+	void(
 		"PathCommandsNV",
 		"",
 
@@ -413,10 +413,10 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ GLubyte_p.IN("commands", ""),
 		AutoSize("coords") _ GLsizei.IN("numCoords", ""),
 		AutoType("coords", GL_BYTE, GL_SHORT, GL_FLOAT) _ GLenum.IN("coordType", "", "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#FLOAT"),
-		const _ GLvoid_p.IN("coords", "")
+		const _ void_p.IN("coords", "")
 	)
 
-	GLvoid(
+	void(
 		"PathCoordsNV",
 		"",
 
@@ -426,7 +426,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathCommandsNV"]["coords"]
 	)
 
-	GLvoid(
+	void(
 		"PathSubCommandsNV",
 		"",
 
@@ -440,7 +440,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathCommandsNV"]["coords"]
 	)
 
-	GLvoid(
+	void(
 		"PathSubCoordsNV",
 		"",
 
@@ -451,33 +451,33 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathCommandsNV"]["coords"]
 	)
 
-	GLvoid(
+	void(
 		"PathStringNV",
 		"",
 
 		GLuint.IN("path", ""),
 		GLenum.IN("format", "", "#PATH_FORMAT_SVG_NV #PATH_FORMAT_PS_NV"),
 		AutoSize("pathString") _ GLsizei.IN("length", ""),
-		const _ GLvoid_p.IN("pathString", "")
+		const _ void_p.IN("pathString", "")
 	)
 
-	GLvoid(
+	void(
 		"PathGlyphsNV",
 		"",
 
 		GLuint.IN("firstPathName", ""),
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
-		nullTerminated _ const _ GLvoid_p.IN("fontName", ""),
+		nullTerminated _ const _ void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
 		GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV GL11#2_BYTES GL11#3_BYTES GL11#4_BYTES"),
-		Check("numGlyphs") _ const _ GLvoid_p.IN("charcodes", ""),
+		Check("numGlyphs") _ const _ void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", "")
 	)
 
-	GLvoid(
+	void(
 		"PathGlyphRangeNV",
 		"",
 
@@ -513,7 +513,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathGlyphsNV"]["firstPathName"],
 		this["PathGlyphsNV"]["fontTarget"],
 		AutoSize("fontData") _ GLsizeiptr.IN("fontSize", ""),
-		const _ GLvoid_p.IN("fontData", ""),
+		const _ void_p.IN("fontData", ""),
 		GLsizei.IN("faceIndex", ""),
 		this["PathGlyphIndexArrayNV"]["firstGlyphIndex"],
 		this["PathGlyphsNV"]["numGlyphs"],
@@ -521,7 +521,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathGlyphsNV"]["emScale"]
 	)
 
-	GLvoid(
+	void(
 		"CopyPathNV",
 		"",
 
@@ -529,7 +529,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("srcPath", "")
 	)
 
-	GLvoid(
+	void(
 		"InterpolatePathsNV",
 		"",
 
@@ -539,7 +539,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat.IN("weight", "")
 	)
 
-	GLvoid(
+	void(
 		"TransformPathNV",
 		"",
 
@@ -549,7 +549,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(16) _ const _ GLfloat_p.IN("transformValues", "")
 	)
 
-	GLvoid(
+	void(
 		"PathParameterivNV",
 		"",
 
@@ -558,7 +558,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(1) _ const _ GLint_p.IN("value", "")
 	)
 
-	GLvoid(
+	void(
 		"PathParameteriNV",
 		"",
 
@@ -567,7 +567,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLint.IN("value", "")
 	)
 
-	GLvoid(
+	void(
 		"PathParameterfvNV",
 		"",
 
@@ -576,7 +576,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ GLfloat_p.IN("value", "")
 	)
 
-	GLvoid(
+	void(
 		"PathParameterfNV",
 		"",
 
@@ -585,7 +585,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat.IN("value", "")
 	)
 
-	GLvoid(
+	void(
 		"PathDashArrayNV",
 		"",
 
@@ -601,7 +601,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLsizei.IN("range", "")
 	)
 
-	GLvoid(
+	void(
 		"DeletePathsNV",
 		"",
 
@@ -616,7 +616,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("path", "")
 	)
 
-	GLvoid(
+	void(
 		"PathStencilFuncNV",
 		"",
 
@@ -625,7 +625,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("mask", "")
 	)
 
-	GLvoid(
+	void(
 		"PathStencilDepthOffsetNV",
 		"",
 
@@ -633,7 +633,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat.IN("units", "")
 	)
 
-	GLvoid(
+	void(
 		"StencilFillPathNV",
 		"",
 
@@ -642,7 +642,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("mask", "")
 	)
 
-	GLvoid(
+	void(
 		"StencilStrokePathNV",
 		"",
 
@@ -651,7 +651,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("mask", "")
 	)
 
-	GLvoid(
+	void(
 		"StencilFillPathInstancedNV",
 		"",
 
@@ -661,7 +661,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 			"",
 			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT #UTF8_NV #UTF16_NV GL11#2_BYTES GL11#3_BYTES GL11#4_BYTES"
 		),
-		Check("numPaths") _ const _ GLvoid_p.IN("paths", ""),
+		Check("numPaths") _ const _ void_p.IN("paths", ""),
 		GLuint.IN("pathBase", ""),
 		this["StencilFillPathNV"]["fillMode"],
 		GLuint.IN("mask", ""),
@@ -669,7 +669,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["TransformPathNV"]["transformValues"]
 	)
 
-	GLvoid(
+	void(
 		"StencilStrokePathInstancedNV",
 		"",
 
@@ -683,14 +683,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["StencilFillPathInstancedNV"]["transformValues"]
 	)
 
-	GLvoid(
+	void(
 		"PathCoverDepthFuncNV",
 		"",
 
 		GLenum.IN("zfunc", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"PathColorGenNV",
 		"",
 
@@ -700,7 +700,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ GLfloat_p.IN("coeffs", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"PathTexGenNV",
 		"",
 
@@ -710,14 +710,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ GLfloat_p.IN("coeffs", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"PathFogGenNV",
 		"",
 
 		GLenum.IN("genMode", "")
 	)
 
-	GLvoid(
+	void(
 		"CoverFillPathNV",
 		"",
 
@@ -725,7 +725,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN("coverMode", "", "#CONVEX_HULL_NV #BOUNDING_BOX_NV")
 	)
 
-	GLvoid(
+	void(
 		"CoverStrokePathNV",
 		"",
 
@@ -733,7 +733,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	GLvoid(
+	void(
 		"CoverFillPathInstancedNV",
 		"",
 
@@ -746,7 +746,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["TransformPathNV"]["transformValues"]
 	)
 
-	GLvoid(
+	void(
 		"CoverStrokePathInstancedNV",
 		"",
 
@@ -759,7 +759,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["TransformPathNV"]["transformValues"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"StencilThenCoverFillPathNV",
 		"",
 
@@ -769,7 +769,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"StencilThenCoverStrokePathNV",
 		"",
 
@@ -779,7 +779,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"StencilThenCoverFillPathInstancedNV",
 		"",
 
@@ -794,7 +794,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["TransformPathNV"]["transformValues"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"StencilThenCoverStrokePathInstancedNV",
 		"",
 
@@ -814,14 +814,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLenum.IN("fontTarget", ""),
-		const _ GLvoid_p.IN("fontName", ""),
+		const _ void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", ""),
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", ""),
 		GLuint.IN("baseAndCount", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"ProgramPathFragmentInputGenNV",
 		"",
 
@@ -832,7 +832,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ GLfloat_p.IN("coeffs", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathParameterivNV",
 		"",
 
@@ -841,7 +841,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		returnValue _ Check(1) _ GLint_p.OUT("value", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathParameterfvNV",
 		"",
 
@@ -850,7 +850,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		returnValue _ Check(1) _ GLfloat_p.OUT("value", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathCommandsNV",
 		"",
 
@@ -858,7 +858,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLubyte_p.OUT("commands", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathCoordsNV",
 		"",
 
@@ -866,7 +866,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat_p.OUT("coords", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathDashArrayNV",
 		"",
 
@@ -874,7 +874,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat_p.OUT("dashArray", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathMetricsNV",
 		"",
 
@@ -887,7 +887,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat_p.OUT("metrics", "")
 	)
 
-	GLvoid(
+	void(
 		"GetPathMetricRangeNV",
 		"",
 
@@ -898,7 +898,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["GetPathMetricsNV"]["metrics"]
 	)
 
-	GLvoid(
+	void(
 		"GetPathSpacingNV",
 		"",
 
@@ -913,7 +913,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLfloat_p.OUT("returnedSpacing", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"GetPathColorGenivNV",
 		"",
 
@@ -922,7 +922,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		returnValue _ GLint_p.OUT("value", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"GetPathColorGenfvNV",
 		"",
 
@@ -931,7 +931,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		returnValue _ GLfloat_p.OUT("value", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"GetPathTexGenivNV",
 		"",
 
@@ -940,7 +940,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		returnValue _ GLint_p.OUT("value", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"GetPathTexGenfvNV",
 		"",
 
@@ -991,7 +991,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		nullable _ Check(1) _ GLfloat_p.OUT("tangentY", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixLoad3x2fNV",
 		"",
 
@@ -999,7 +999,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(3 * 2) _ const _ GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixLoad3x3fNV",
 		"",
 
@@ -1007,7 +1007,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(3 * 3) _ const _ GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixLoadTranspose3x3fNV",
 		"",
 
@@ -1015,7 +1015,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixMult3x2fNV",
 		"",
 
@@ -1023,7 +1023,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(3 * 2) _ const _ GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixMult3x3fNV",
 		"",
 
@@ -1031,7 +1031,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"MatrixMultTranspose3x3fNV",
 		"",
 
@@ -1039,7 +1039,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ GLvoid(
+	ignoreMissing _ void(
 		"GetProgramResourcefvNV",
 		"",
 

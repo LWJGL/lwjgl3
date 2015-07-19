@@ -41,7 +41,7 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGL("NV_conservati
 		"MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV" _ 0x9349
 	)
 
-	GLvoid(
+	void(
 		"SubpixelPrecisionBiasNV",
 		"""
 		Sets the #SUBPIXEL_PRECISION_BIAS_X_BITS_NV and #SUBPIXEL_PRECISION_BIAS_Y_BITS_NV values.

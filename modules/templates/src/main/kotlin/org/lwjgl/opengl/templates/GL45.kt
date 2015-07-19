@@ -57,7 +57,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"CLIP_DEPTH_MODE" _ 0x935D
 	)
 
-	GLvoid(
+	void(
 		"ClipControl",
 		"""
 		Controls the clipping volume behavior.
@@ -113,7 +113,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"TEXTURE_BINDING" _ 0x82EB
 	)
 
-	GLvoid(
+	void(
 		"CreateTransformFeedbacks",
 		"Returns {@code n} previously unused transform feedback object names in {@code ids}, each representing a new state vector.",
 
@@ -121,7 +121,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		returnValue _ GLuint_p.OUT("ids", "the buffer in which to return the names")
 	)
 
-	GLvoid(
+	void(
 		"TransformFeedbackBufferBase",
 		"Binds a buffer object to a transform feedback object.",
 
@@ -130,7 +130,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("buffer", "the name of an existing buffer object")
 	)
 
-	GLvoid(
+	void(
 		"TransformFeedbackBufferRange",
 		"Binds a region of a buffer object to a transform feedback object.",
 
@@ -141,7 +141,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLsizeiptr.IN("size", "the amount of data in machine units")
 	)
 
-	GLvoid(
+	void(
 		"GetTransformFeedbackiv",
 		"Returns information about a transform feedback object.",
 
@@ -150,7 +150,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"GetTransformFeedbacki_v",
 		"Returns information about a transform feedback object.",
 
@@ -160,7 +160,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"GetTransformFeedbacki64_v",
 		"Returns information about a transform feedback object.",
 
@@ -170,7 +170,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint64_p.OUT("param", "the buffer in which to return the parameter value")
 	)
 
-	GLvoid(
+	void(
 		"CreateBuffers",
 		"""
 		Returns {@code n} previously unused buffer names in {@code buffers}, each representing a new buffer object initialized as if it had been bound to an
@@ -182,7 +182,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	var src = GL44["BufferStorage"]
-	GLvoid(
+	void(
 		"NamedBufferStorage",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -193,7 +193,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["BufferData"]
-	GLvoid(
+	void(
 		"NamedBufferData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -204,7 +204,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["BufferSubData"]
-	GLvoid(
+	void(
 		"NamedBufferSubData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -215,7 +215,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL31["CopyBufferSubData"]
-	GLvoid(
+	void(
 		"CopyNamedBufferSubData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -227,7 +227,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["ClearBufferData"]
-	GLvoid(
+	void(
 		"ClearNamedBufferData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -239,7 +239,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["ClearBufferSubData"]
-	GLvoid(
+	void(
 		"ClearNamedBufferSubData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -253,7 +253,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["MapBuffer"]
-	(MapPointer("glGetNamedBufferParameteri(buffer, GL15.GL_BUFFER_SIZE)") _ GLvoid_p)(
+	(MapPointer("glGetNamedBufferParameteri(buffer, GL15.GL_BUFFER_SIZE)") _ void_p)(
 		"MapNamedBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -262,7 +262,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["MapBufferRange"]
-	(MapPointer("length") _ GLvoid_p)(
+	(MapPointer("length") _ void_p)(
 		"MapNamedBufferRange",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -281,7 +281,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["FlushMappedBufferRange"]
-	GLvoid(
+	void(
 		"FlushMappedNamedBufferRange",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -291,7 +291,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["GetBufferParameteriv"]
-	GLvoid(
+	void(
 		"GetNamedBufferParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -301,7 +301,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL32["GetBufferParameteri64v"]
-	GLvoid(
+	void(
 		"GetNamedBufferParameteri64v",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -311,7 +311,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["GetBufferPointerv"]
-	GLvoid(
+	void(
 		"GetNamedBufferPointerv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -322,7 +322,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL15["GetBufferSubData"]
-	GLvoid(
+	void(
 		"GetNamedBufferSubData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -332,7 +332,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["data"]
 	)
 
-	GLvoid(
+	void(
 		"CreateFramebuffers",
 		"Returns {@code n} previously unused framebuffer names in {@code framebuffers}, each representing a new framebuffer object.",
 
@@ -343,7 +343,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	val FRAMEBUFFER = GLuint.IN("framebuffer", "the framebuffer name")
 
 	src = GL30["FramebufferRenderbuffer"]
-	GLvoid(
+	void(
 		"NamedFramebufferRenderbuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -354,7 +354,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["FramebufferParameteri"]
-	GLvoid(
+	void(
 		"NamedFramebufferParameteri",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -364,7 +364,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL32["FramebufferTexture"]
-	GLvoid(
+	void(
 		"NamedFramebufferTexture",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -375,7 +375,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["FramebufferTextureLayer"]
-	GLvoid(
+	void(
 		"NamedFramebufferTextureLayer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -387,7 +387,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["DrawBuffer"]
-	GLvoid(
+	void(
 		"NamedFramebufferDrawBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -396,7 +396,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL20["DrawBuffers"]
-	GLvoid(
+	void(
 		"NamedFramebufferDrawBuffers",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -406,7 +406,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["ReadBuffer"]
-	GLvoid(
+	void(
 		"NamedFramebufferReadBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -415,7 +415,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["InvalidateFramebuffer"]
-	GLvoid(
+	void(
 		"InvalidateNamedFramebufferData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -425,7 +425,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["InvalidateSubFramebuffer"]
-	GLvoid(
+	void(
 		"InvalidateNamedFramebufferSubData",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -439,7 +439,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["ClearBufferiv"]
-	GLvoid(
+	void(
 		"ClearNamedFramebufferiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -450,7 +450,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["ClearBufferuiv"]
-	GLvoid(
+	void(
 		"ClearNamedFramebufferuiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -461,7 +461,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["ClearBufferfv"]
-	GLvoid(
+	void(
 		"ClearNamedFramebufferfv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -472,7 +472,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["ClearBufferfi"]
-	GLvoid(
+	void(
 		"ClearNamedFramebufferfi",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -483,7 +483,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["BlitFramebuffer"]
-	GLvoid(
+	void(
 		"BlitNamedFramebuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -511,7 +511,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["GetFramebufferParameteriv"]
-	GLvoid(
+	void(
 		"GetNamedFramebufferParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -521,7 +521,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["GetFramebufferAttachmentParameteriv"]
-	GLvoid(
+	void(
 		"GetNamedFramebufferAttachmentParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -531,7 +531,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["params"]
 	)
 
-	GLvoid(
+	void(
 		"CreateRenderbuffers",
 		"Returns {@code n} previously unused renderbuffer names in {@code renderbuffers}, each representing a new renderbuffer object.",
 
@@ -540,7 +540,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["RenderbufferStorage"]
-	GLvoid(
+	void(
 		"NamedRenderbufferStorage",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -551,7 +551,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["RenderbufferStorageMultisample"]
-	GLvoid(
+	void(
 		"NamedRenderbufferStorageMultisample",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -563,7 +563,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["GetRenderbufferParameteriv"]
-	GLvoid(
+	void(
 		"GetNamedRenderbufferParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -572,7 +572,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["params"]
 	)
 
-	GLvoid(
+	void(
 		"CreateTextures",
 		"Returns {@code n} previously unused texture names in {@code textures}, each representing a new texture object.",
 
@@ -588,7 +588,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	val TEXTURE = GLuint.IN("texture", "the texture name")
 
 	src = GL31["TexBuffer"]
-	GLvoid(
+	void(
 		"TextureBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -598,7 +598,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["TexBufferRange"]
-	GLvoid(
+	void(
 		"TextureBufferRange",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -610,7 +610,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL42["TexStorage1D"]
-	GLvoid(
+	void(
 		"TextureStorage1D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -621,7 +621,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL42["TexStorage2D"]
-	GLvoid(
+	void(
 		"TextureStorage2D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -633,7 +633,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL42["TexStorage3D"]
-	GLvoid(
+	void(
 		"TextureStorage3D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -646,7 +646,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["TexStorage2DMultisample"]
-	GLvoid(
+	void(
 		"TextureStorage2DMultisample",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -659,7 +659,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["TexStorage3DMultisample"]
-	GLvoid(
+	void(
 		"TextureStorage3DMultisample",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -673,7 +673,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexSubImage1D"]
-	GLvoid(
+	void(
 		"TextureSubImage1D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -687,7 +687,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexSubImage2D"]
-	GLvoid(
+	void(
 		"TextureSubImage2D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -703,7 +703,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL12["TexSubImage3D"]
-	GLvoid(
+	void(
 		"TextureSubImage3D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -721,7 +721,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL13["CompressedTexSubImage1D"]
-	GLvoid(
+	void(
 		"CompressedTextureSubImage1D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -735,7 +735,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL13["CompressedTexSubImage2D"]
-	GLvoid(
+	void(
 		"CompressedTextureSubImage2D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -751,7 +751,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL13["CompressedTexSubImage3D"]
-	GLvoid(
+	void(
 		"CompressedTextureSubImage3D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -769,7 +769,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["CopyTexSubImage1D"]
-	GLvoid(
+	void(
 		"CopyTextureSubImage1D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -782,7 +782,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["CopyTexSubImage2D"]
-	GLvoid(
+	void(
 		"CopyTextureSubImage2D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -797,7 +797,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL12["CopyTexSubImage3D"]
-	GLvoid(
+	void(
 		"CopyTextureSubImage3D",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -813,7 +813,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexParameterf"]
-	GLvoid(
+	void(
 		"TextureParameterf",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -823,7 +823,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexParameterfv"]
-	GLvoid(
+	void(
 		"TextureParameterfv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -833,7 +833,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexParameteri"]
-	GLvoid(
+	void(
 		"TextureParameteri",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -843,7 +843,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["TexParameterIiv"]
-	GLvoid(
+	void(
 		"TextureParameterIiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -853,7 +853,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["TexParameterIuiv"]
-	GLvoid(
+	void(
 		"TextureParameterIuiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -863,7 +863,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["TexParameteriv"]
-	GLvoid(
+	void(
 		"TextureParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -873,14 +873,14 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["GenerateMipmap"]
-	GLvoid(
+	void(
 		"GenerateTextureMipmap",
 		"DSA version of ${src.javaDocLink}.",
 
 		TEXTURE
 	)
 
-	GLvoid(
+	void(
 		"BindTextureUnit",
 		"""
 		Binds an existing texture object to the texture unit numbered {@code unit}.
@@ -895,7 +895,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["GetTexImage"]
-	GLvoid(
+	void(
 		"GetTextureImage",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -908,7 +908,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL13["GetCompressedTexImage"]
-	GLvoid(
+	void(
 		"GetCompressedTextureImage",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -917,11 +917,11 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
 		Check(
 			expression = "glGetTextureLevelParameteri(texture, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
-		) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+		) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 	src = GL11["GetTexLevelParameterfv"]
-	GLvoid(
+	void(
 		"GetTextureLevelParameterfv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -932,7 +932,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["GetTexLevelParameteriv"]
-	GLvoid(
+	void(
 		"GetTextureLevelParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -943,7 +943,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["GetTexParameterfv"]
-	GLvoid(
+	void(
 		"GetTextureParameterfv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -953,7 +953,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["GetTexParameterIiv"]
-	GLvoid(
+	void(
 		"GetTextureParameterIiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -963,7 +963,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL30["GetTexParameterIuiv"]
-	GLvoid(
+	void(
 		"GetTextureParameterIuiv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -973,7 +973,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL11["GetTexParameteriv"]
-	GLvoid(
+	void(
 		"GetTextureParameteriv",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -982,7 +982,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["params"]
 	)
 
-	GLvoid(
+	void(
 		"CreateVertexArrays",
 		"Returns {@code n} previously unused vertex array object names in {@code arrays}.",
 
@@ -991,7 +991,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL20["DisableVertexAttribArray"]
-	GLvoid(
+	void(
 		"DisableVertexArrayAttrib",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1000,7 +1000,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL20["EnableVertexAttribArray"]
-	GLvoid(
+	void(
 		"EnableVertexArrayAttrib",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1008,7 +1008,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["index"]
 	)
 
-	GLvoid(
+	void(
 		"VertexArrayElementBuffer",
 		"Binds a buffer object to the element array buffer bind point of a vertex array object.",
 
@@ -1017,7 +1017,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["BindVertexBuffer"]
-	GLvoid(
+	void(
 		"VertexArrayVertexBuffer",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1029,7 +1029,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL44["BindVertexBuffers"]
-	GLvoid(
+	void(
 		"VertexArrayVertexBuffers",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1042,7 +1042,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["VertexAttribFormat"]
-	GLvoid(
+	void(
 		"VertexArrayAttribFormat",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1055,7 +1055,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["VertexAttribIFormat"]
-	GLvoid(
+	void(
 		"VertexArrayAttribIFormat",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1067,7 +1067,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["VertexAttribLFormat"]
-	GLvoid(
+	void(
 		"VertexArrayAttribLFormat",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1079,7 +1079,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["VertexAttribBinding"]
-	GLvoid(
+	void(
 		"VertexArrayAttribBinding",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1089,7 +1089,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	)
 
 	src = GL43["VertexBindingDivisor"]
-	GLvoid(
+	void(
 		"VertexArrayBindingDivisor",
 		"DSA version of ${src.javaDocLink}.",
 
@@ -1098,7 +1098,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		src["divisor"]
 	)
 
-	GLvoid(
+	void(
 		"GetVertexArrayiv",
 		"Queries parameters of a vertex array object.",
 
@@ -1107,7 +1107,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
-	GLvoid(
+	void(
 		"GetVertexArrayIndexediv",
 		"Queries parameters of an attribute of a vertex array object.",
 
@@ -1125,7 +1125,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
-	GLvoid(
+	void(
 		"GetVertexArrayIndexed64iv",
 		"Queries parameters of an attribute of a vertex array object.",
 
@@ -1135,7 +1135,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		Check(1) _ returnValue _ GLint64_p.OUT("param", "the buffer in which to return the parameter values")
 	)
 
-	GLvoid(
+	void(
 		"CreateSamplers",
 		"Returns {@code n} previously unused sampler names in {@code samplers}, each representing a new sampler object.",
 
@@ -1143,7 +1143,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		returnValue _ GLuint_p.OUT("samplers", "the buffer in which to return the created sampler object names")
 	)
 
-	GLvoid(
+	void(
 		"CreateProgramPipelines",
 		"Returns {@code n} previously unused program pipeline names in {@code pipelines}, each representing a new program pipeline object.",
 
@@ -1151,7 +1151,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		returnValue _ GLuint_p.OUT("pipelines", "the buffer in which to return the created program pipeline names")
 	)
 
-	GLvoid(
+	void(
 		"CreateQueries",
 		"Returns {@code n} previously unused query object names in {@code ids}, each representing a new query object with the specified {@code target}.",
 
@@ -1162,7 +1162,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 	// ARB_ES3_1_compatibility
 
-	GLvoid(
+	void(
 		"MemoryBarrierByRegion",
 		"""
 		Behaves like GL42#MemoryBarrier(), with two differences:
@@ -1193,7 +1193,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 	// ARB_get_texture_sub_image
 
-	GLvoid(
+	void(
 		"GetTextureSubImage",
 		"Obtains sub-regions of a texture image from a texture object.",
 
@@ -1208,10 +1208,10 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
-	GLvoid(
+	void(
 		"GetCompressedTextureSubImage",
 		"Obtains a sub-region of a compressed texture image.",
 
@@ -1224,12 +1224,12 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLsizei.IN("height", "the subregion height"),
 		GLsizei.IN("depth", "the subregion depth"),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the size of the buffer to receive the retrieved pixel data"),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "the buffer in which to place the returned data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "the buffer in which to place the returned data")
 	)
 
 	// ARB_texture_barrier
 
-	GLvoid(
+	void(
 		"TextureBarrier",
 		"Guarantees that writes have completed and caches have been invalidated before subsequent Draws are executed."
 	)
@@ -1319,7 +1319,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 	)
 
-	GLvoid(
+	void(
 		"ReadnPixels",
 		"Behaves identically to GL11#ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
 
@@ -1330,10 +1330,10 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLenum.IN("format", "the pixel format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel type", PIXEL_DATA_TYPES),
 		AutoSize("pixels") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ GLvoid_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
-	GLvoid(
+	void(
 		"GetnUniformfv",
 		"Returns the value or values of a uniform of the default uniform block.",
 
@@ -1343,7 +1343,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
-	GLvoid(
+	void(
 		"GetnUniformiv",
 		"Integer version of #GetnUniformfv().",
 
@@ -1353,7 +1353,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
-	GLvoid(
+	void(
 		"GetnUniformuiv",
 		"Unsigned version of #GetnUniformiv().",
 

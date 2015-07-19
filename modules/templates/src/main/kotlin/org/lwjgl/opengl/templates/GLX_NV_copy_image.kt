@@ -26,7 +26,7 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 		sharelists or even on different physical devices.
 		"""
 
-	GLvoid(
+	void(
 		"CopyImageSubDataNV",
 		"""
 		Behaves identically to the core function NVCopyImage##glCopyImageSubDataNV(), except that the {@code srcCtx} and {@code dstCtx} parameters specify

@@ -60,7 +60,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"CLIENT_MAPPED_BUFFER_BARRIER_BIT" _ 0x00004000
 	)
 
-	GLvoid(
+	void(
 		"BufferStorage",
 		"""
 		Creates the data store of a buffer object.
@@ -81,7 +81,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		) _ const _ GLvoid_p.IN(
+		) _ const _ void_p.IN(
 			"data",
 			"""
 			the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is $NULL, the data store of the
@@ -154,7 +154,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"CLEAR_TEXTURE" _ 0x9365
 	)
 
-	GLvoid(
+	void(
 		"ClearTexSubImage",
 		"""
 		Fills all or part of a texture image with a constant value.
@@ -189,7 +189,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
 		nullable _ MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ const _ GLvoid_p.IN(
+		) _ const _ void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -198,7 +198,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		)
 	)
 
-   	GLvoid(
+   	void(
 		"ClearTexImage",
 		"""
 		Is equivalent to calling #ClearTexSubImage() with {@code xoffset}, {@code yoffset}, and {@code zoffset} equal to -{@code b} and {@code width},
@@ -218,7 +218,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
 		nullable _ MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ const _ GLvoid_p.IN(
+		) _ const _ void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -239,7 +239,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 
 	// ARB_multi_bind
 
-	GLvoid(
+	void(
 		"BindBuffersBase",
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -263,7 +263,7 @@ for ( i = 0; i < count; i++ ) {
 		nullable _ const _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
 	)
 
-	GLvoid(
+	void(
 		"BindBuffersRange",
 		"""
 		Binds {@code count} existing buffer objects to bindings numbered {@code first} through {@code first+count-1} in the array of buffer binding points
@@ -295,7 +295,7 @@ for ( i = 0; i < count; i++ ) {
 		nullable _ const _ GLsizeiptr_p.IN("sizes", "an array of sizes")
 	)
 
-	GLvoid(
+	void(
 		"BindTextures",
 		"""
 		Binds {@code count} existing texture objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not
@@ -338,7 +338,7 @@ for ( i = 0; i < count; i++ ) {
 		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
-	GLvoid(
+	void(
 		"BindSamplers",
 		"""
 		Binds {@code count} existing sampler objects to texture image units numbered {@code first} through {@code first+count-1}. If {@code samplers} is not
@@ -365,7 +365,7 @@ for ( i = 0; i < count; i++ ) {
 		nullable _ const _ GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
 	)
 
-	GLvoid(
+	void(
 		"BindImageTextures",
 		"""
 		Binds {@code count} existing texture objects to image units numbered {@code first} through {@code first+count-1}. If {@code textures} is not $NULL, it
@@ -403,7 +403,7 @@ for ( i = 0; i < count; i++ ) {
 		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
-	GLvoid(
+	void(
 		"BindVertexBuffers",
 		"""
 		Binds {@code count} existing buffer objects to vertex buffer binding points numbered {@code first} through {@code first+count-1}. If {@code buffers} is
