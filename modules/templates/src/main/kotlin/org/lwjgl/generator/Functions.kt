@@ -610,7 +610,7 @@ class NativeClassFunction(
 					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 				print("($RESULT")
 				if ( returns has MapPointer )
-					print(", (int)${returns[MapPointer].sizeExpression}")
+					print(", ${if ( paramMap[returns[MapPointer].sizeExpression]?.nativeType?.mapping == PrimitiveMapping.PTR ) "(int)" else ""}${returns[MapPointer].sizeExpression}")
 				else if ( !isNullTerminated ) {
 					if ( returns.nativeType is StructType ) {
 						print(
