@@ -36,6 +36,22 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		"MAX_VERTEX_ATTRIB_STRIDE" _ 0x82E5
 	)
 
+	IntConstant(
+		"""
+		Implementations are not required to support primitive restart for separate patch primitives (primitive type PATCHES). Support can be queried by calling
+		GetBooleanv with the symbolic constant PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED. A value of FALSE indicates that primitive restart is treated as
+		disabled when drawing patches, no matter the value of the enables. A value of TRUE indicates that primitive restart behaves normally for patches.
+		""",
+
+	    "PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED" _ 0x8221
+	)
+
+	IntConstant(
+		"Equivalent to ARBTextureBufferObject#TEXTURE_BUFFER_ARB query, but named more consistently.",
+
+		"TEXTURE_BUFFER_BINDING" _ 0x8C2A
+	)
+
 	// ARB_buffer_storage
 
 	IntConstant(

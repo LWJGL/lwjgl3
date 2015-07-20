@@ -30,9 +30,7 @@ val ARB_fragment_shader = "ARBFragmentShader".nativeClassGL("ARB_fragment_shader
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB" _ 0x8B49,
-		"MAX_TEXTURE_COORDS_ARB" _ 0x8871,
-		"MAX_TEXTURE_IMAGE_UNITS_ARB" _ 0x8872
+		"MAX_FRAGMENT_UNIFORM_COMPONENTS_ARB" _ 0x8B49
 	)
 
 	IntConstant(

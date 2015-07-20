@@ -40,3 +40,38 @@ val ARB_framebuffer_sRGB = "ARBFramebufferSRGB".nativeClassGL("ARB_framebuffer_s
 		"FRAMEBUFFER_SRGB" _ 0x8DB9
 	)
 }
+
+val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_framebuffer_sRGB", ARB) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("ARB", "framebuffer_sRGB")} extension.
+
+		GLX functionality for ${ARB_framebuffer_sRGB.link}.
+		"""
+
+	IntConstant(
+		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
+
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20B2
+	)
+}
+
+val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_framebuffer_sRGB", ARB) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("ARB", "framebuffer_sRGB")} extension.
+
+		WGL functionality for ${ARB_framebuffer_sRGB.link}.
+
+		Requires ${WGL_EXT_extensions_string.link}, ${WGL_ARB_pixel_format.link} and ${ARB_framebuffer_object.link}.
+		"""
+
+	IntConstant(
+		"""
+		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB() and the {@code attribIList} of
+		WGLARBPixelFormat#ChoosePixelFormatARB().
+		""",
+
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
+	)
+}

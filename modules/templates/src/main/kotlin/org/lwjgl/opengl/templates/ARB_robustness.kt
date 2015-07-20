@@ -80,7 +80,6 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	IntConstant(
 		"Returned by GetGraphicsResetStatusARB.",
 
-		"NO_ERROR" _ 0x0000,
 		"GUILTY_CONTEXT_RESET_ARB" _ 0x8253,
 		"INNOCENT_CONTEXT_RESET_ARB" _ 0x8254,
 		"UNKNOWN_CONTEXT_RESET_ARB" _ 0x8255
@@ -202,7 +201,7 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 	)
 
 	src = GL11["GetTexImage"]
-	DependsOn("provider.getFunctionAddress(\"glGetTexImage\") != NULL") _ void(
+	void(
 		"GetnTexImageARB",
 		"Robust version of ${src.javaDocLink}",
 

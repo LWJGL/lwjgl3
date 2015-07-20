@@ -298,6 +298,17 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGL("EXT_debug_label", postfix =
 		The intended purpose of this is purely to improve the user experience within OpenGL and OpenGL ES development tools.
 		"""
 
+	IntConstant(
+		"Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT.",
+
+		"BUFFER_OBJECT_EXT" _ 0x9151,
+		"SHADER_OBJECT_EXT" _ 0x8B48,
+		"PROGRAM_OBJECT_EXT" _ 0x8B40,
+		"VERTEX_ARRAY_OBJECT_EXT" _ 0x9154,
+		"QUERY_OBJECT_EXT" _ 0x9153,
+		"PROGRAM_PIPELINE_OBJECT_EXT" _ 0x8A4F
+	)
+
 	void(
 		"LabelObjectEXT",
 		"",
@@ -616,6 +627,41 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x8DBA
+	)
+}
+
+val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassWGL("GLX_EXT_framebuffer_sRGB", EXT) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
+
+		GLX functionality for ${EXT_framebuffer_sRGB.link}.
+		"""
+
+	IntConstant(
+		"Accepted by the {@code attribList} parameter of glXChooseVisual, and by the {@code attrib} parameter of glXGetConfig.",
+
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x20B2
+	)
+}
+
+val WGL_EXT_framebuffer_sRGB = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_framebuffer_sRGB", EXT) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("EXT", "framebuffer_sRGB")} extension.
+
+		WGL functionality for ${EXT_framebuffer_sRGB.link}.
+
+		Requires ${WGL_EXT_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
+		"""
+
+	IntConstant(
+		"""
+		Accepted by the {@code piAttributes} parameter of wglGetPixelFormatAttribivEXT, wglGetPixelFormatAttribfvEXT, and the {@code piAttribIList} and
+		{@code pfAttribIList} of wglChoosePixelFormatEXT.
+		""",
+
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x20A9
 	)
 }
 

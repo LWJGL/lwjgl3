@@ -279,6 +279,7 @@ val ARB_framebuffer_object = "ARBFramebufferObject".nativeClassGL("ARB_framebuff
 	IntConstant(
 		"Returned in {@code params} by GetFramebufferAttachmentParameteriv.",
 
+		"UNSIGNED_NORMALIZED" _ 0x8C17,
 		"FRAMEBUFFER_DEFAULT" _ 0x8218,
 		"INDEX" _ 0x8222
 	)

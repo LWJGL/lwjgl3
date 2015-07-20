@@ -51,10 +51,4 @@ val ARB_ES3_compatibility = "ARBES3Compatibility".nativeClassGL("ARB_ES3_compati
 
 		"MAX_ELEMENT_INDEX" _ 0x8D6B
 	)
-
-	IntConstant(
-		"Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.",
-
-		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
-	)
 }

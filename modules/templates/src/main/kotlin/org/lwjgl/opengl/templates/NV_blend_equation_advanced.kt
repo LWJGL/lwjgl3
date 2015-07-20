@@ -16,21 +16,14 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 		"""
 		Native bindings to the $registryLink extension.
 
-		This extension adds a number of "advanced" blending equations that can be
-    used to perform new color blending operations, many of which are more
-    complex than the standard blend modes provided by unextended OpenGL.
+		This extension adds a number of "advanced" blending equations that can be used to perform new color blending operations, many of which are more complex
+		than the standard blend modes provided by unextended OpenGL.
+
+		Provides the new blending equations, but guarantees defined results only if each sample is touched no more than once in any single rendering pass. The
+		command #BlendBarrierNV() is provided to indicate a boundary between passes.
     
 		Requires ${GL20.core}.
 		"""
-
-	IntConstant(
-		"""
-		Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev
-		and GetInteger64v.
-		""",
-
-		"BLEND_ADVANCED_COHERENT_NV" _ 0x9285
-	)
 
 	IntConstant(
 		"""
@@ -115,5 +108,26 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGL("NV_ble
 	void(
 		"BlendBarrierNV",
 		""
+	)
+}
+
+val NV_blend_equation_advanced_coherent = "NVBlendEquationAdvancedCoherent".nativeClassGL("NV_blend_equation_advanced_coherent", postfix = NV) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("NV", "blend_equation_advanced")} extension.
+
+		Similar to NV_blend_equation_advanced, but guarantees that blending is done coherently and in API primitive ordering. An enable is provided to allow
+		implementations to opt out of fully coherent blending and instead behave as though only NV_blend_equation_advanced were supported.
+
+		Requires ${GL20.core} and ${NV_blend_equation_advanced.link}.
+		"""
+
+	IntConstant(
+		"""
+		Accepted by the {@code cap} parameter of Disable, Enable, and IsEnabled, and by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev
+		and GetInteger64v.
+		""",
+
+		"BLEND_ADVANCED_COHERENT_NV" _ 0x9285
 	)
 }

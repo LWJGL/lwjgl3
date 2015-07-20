@@ -32,10 +32,6 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
-		"RED_SNORM" _ 0x8F90,
-		"RG_SNORM" _ 0x8F91,
-		"RGB_SNORM" _ 0x8F92,
-		"RGBA_SNORM" _ 0x8F93,
 		"R8_SNORM" _ 0x8F94,
 		"RG8_SNORM" _ 0x8F95,
 		"RGB8_SNORM" _ 0x8F96,
@@ -50,6 +46,16 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"Returned by GetTexLevelParameter and GetFramebufferAttachmentParameter.",
 
 		"SIGNED_NORMALIZED" _ 0x8F9C
+	)
+
+	IntConstant(
+		"Returned by the {@code type} parameter of GetActiveUniform.",
+
+		"SAMPLER_BUFFER" _ 0x8DC2,
+		"INT_SAMPLER_2D_RECT" _ 0x8DCD,
+		"INT_SAMPLER_BUFFER" _ 0x8DD0,
+		"UNSIGNED_INT_SAMPLER_2D_RECT" _ 0x8DD5,
+		"UNSIGNED_INT_SAMPLER_BUFFER" _ 0x8DD8
 	)
 
 	// ARB_draw_instanced
@@ -159,8 +165,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 
 		"MAX_TEXTURE_BUFFER_SIZE" _ 0x8C2B,
 		"TEXTURE_BINDING_BUFFER" _ 0x8C2C,
-		"TEXTURE_BUFFER_DATA_STORE_BINDING" _ 0x8C2D,
-		"TEXTURE_BUFFER_FORMAT" _ 0x8C2E
+		"TEXTURE_BUFFER_DATA_STORE_BINDING" _ 0x8C2D
 	)
 
 	void(

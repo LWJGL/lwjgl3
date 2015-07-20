@@ -51,7 +51,6 @@ val ARB_texture_rg = "ARBTextureRG".nativeClassGL("ARB_texture_rg") {
 		"RG16UI" _ 0x823A,
 		"RG32I" _ 0x823B,
 		"RG32UI" _ 0x823C,
-		"RED" _ 0x1903,
 		"RG" _ 0x8227,
 		"COMPRESSED_RED" _ 0x8225,
 		"COMPRESSED_RG" _ 0x8226

@@ -149,7 +149,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		"SAMPLER_1D_ARRAY" _ 0x8DC0,
 		"SAMPLER_2D_ARRAY" _ 0x8DC1,
-		"SAMPLER_BUFFER" _ 0x8DC2,
 		"SAMPLER_1D_ARRAY_SHADOW" _ 0x8DC3,
 		"SAMPLER_2D_ARRAY_SHADOW" _ 0x8DC4,
 		"SAMPLER_CUBE_SHADOW" _ 0x8DC5,
@@ -160,18 +159,14 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"INT_SAMPLER_2D" _ 0x8DCA,
 		"INT_SAMPLER_3D" _ 0x8DCB,
 		"INT_SAMPLER_CUBE" _ 0x8DCC,
-		"INT_SAMPLER_2D_RECT" _ 0x8DCD,
 		"INT_SAMPLER_1D_ARRAY" _ 0x8DCE,
 		"INT_SAMPLER_2D_ARRAY" _ 0x8DCF,
-		"INT_SAMPLER_BUFFER" _ 0x8DD0,
 		"UNSIGNED_INT_SAMPLER_1D" _ 0x8DD1,
 		"UNSIGNED_INT_SAMPLER_2D" _ 0x8DD2,
 		"UNSIGNED_INT_SAMPLER_3D" _ 0x8DD3,
 		"UNSIGNED_INT_SAMPLER_CUBE" _ 0x8DD4,
-		"UNSIGNED_INT_SAMPLER_2D_RECT" _ 0x8DD5,
 		"UNSIGNED_INT_SAMPLER_1D_ARRAY" _ 0x8DD6,
-		"UNSIGNED_INT_SAMPLER_2D_ARRAY" _ 0x8DD7,
-		"UNSIGNED_INT_SAMPLER_BUFFER" _ 0x8DD8
+		"UNSIGNED_INT_SAMPLER_2D_ARRAY" _ 0x8DD7
 	)
 
 	IntConstant(
@@ -442,12 +437,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 	// ARB_color_buffer_float
 
-	IntConstant(
-		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
-		"RGBA_FLOAT_MODE" _ 0x8820
-	)
-
 	val ClampTargets = IntConstant(
 		"Accepted by the {@code target} parameter of ClampColor and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
@@ -652,6 +641,22 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"COLOR_ATTACHMENT13" _ 0x8CED,
 		"COLOR_ATTACHMENT14" _ 0x8CEE,
 		"COLOR_ATTACHMENT15" _ 0x8CEF,
+		"COLOR_ATTACHMENT16" _ 0x8CF0,
+        "COLOR_ATTACHMENT17" _ 0x8CF1,
+        "COLOR_ATTACHMENT18" _ 0x8CF2,
+        "COLOR_ATTACHMENT19" _ 0x8CF3,
+        "COLOR_ATTACHMENT20" _ 0x8CF4,
+        "COLOR_ATTACHMENT21" _ 0x8CF5,
+        "COLOR_ATTACHMENT22" _ 0x8CF6,
+        "COLOR_ATTACHMENT23" _ 0x8CF7,
+        "COLOR_ATTACHMENT24" _ 0x8CF8,
+        "COLOR_ATTACHMENT25" _ 0x8CF9,
+        "COLOR_ATTACHMENT26" _ 0x8CFA,
+        "COLOR_ATTACHMENT27" _ 0x8CFB,
+        "COLOR_ATTACHMENT28" _ 0x8CFC,
+        "COLOR_ATTACHMENT29" _ 0x8CFD,
+        "COLOR_ATTACHMENT30" _ 0x8CFE,
+        "COLOR_ATTACHMENT31" _ 0x8CFF,
 		"DEPTH_ATTACHMENT" _ 0x8D00,
 		"STENCIL_ATTACHMENT" _ 0x8D20,
 		"DEPTH_STENCIL_ATTACHMENT" _ 0x821A
@@ -942,12 +947,6 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	)
 
 	// EXT_texture_integer
-
-	IntConstant(
-		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
-		"RGBA_INTEGER_MODE" _ 0x8D9E
-	)
 
 	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",

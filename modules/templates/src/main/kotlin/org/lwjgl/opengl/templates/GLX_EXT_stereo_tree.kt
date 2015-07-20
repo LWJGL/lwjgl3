@@ -26,7 +26,7 @@ val GLX_EXT_stereo_tree = "GLXEXTStereoTree".nativeClassGLX("GLX_EXT_stereo_tree
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of glXQueryDrawable and glXQueryGLXPbufferSGIX.",
 
-		"GLX_STEREO_TREE_EXT" _ 0x20F5
+		"STEREO_TREE_EXT" _ 0x20F5
 	)
 
 	IntConstant(
@@ -35,12 +35,12 @@ val GLX_EXT_stereo_tree = "GLXEXTStereoTree".nativeClassGLX("GLX_EXT_stereo_tree
 		glXGetSelectedEvent and glXGetSelectedEventSGIX.
 		""",
 
-		"GLX_STEREO_NOTIFY_MASK_EXT" _ 0x00000001
+		"STEREO_NOTIFY_MASK_EXT" _ 0x00000001
 	)
 
 	IntConstant(
 		"Returned in the {@code evtype} field of XGenericEventCookie events.",
 
-		"GLX_STEREO_NOTIFY_EXT" _ 0x00000000
+		"STEREO_NOTIFY_EXT" _ 0x00000000
 	)
 }

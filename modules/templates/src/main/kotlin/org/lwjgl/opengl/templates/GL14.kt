@@ -53,9 +53,12 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 	// EXT_blend_color
 
 	IntConstant(
-		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
+		"Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.",
 
-		"BLEND_COLOR" _ 0x8005
+		"CONSTANT_COLOR" _ 0x8001,
+		"ONE_MINUS_CONSTANT_COLOR" _ 0x8002,
+		"CONSTANT_ALPHA" _ 0x8003,
+		"ONE_MINUS_CONSTANT_ALPHA" _ 0x8004
 	)
 
 	void(
@@ -76,12 +79,6 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"FUNC_ADD" _ 0x8006,
 		"MIN" _ 0x8007,
 		"MAX" _ 0x8008
-	)
-
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
-
-		"BLEND_EQUATION" _ 0x8009
 	)
 
 	void(

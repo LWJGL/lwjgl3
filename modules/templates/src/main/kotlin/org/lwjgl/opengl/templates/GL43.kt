@@ -688,7 +688,6 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"COLOR_ENCODING" _ 0x8296,
 		"SRGB_READ" _ 0x8297,
 		"SRGB_WRITE" _ 0x8298,
-		"SRGB_DECODE_ARB" _ 0x8299,
 		"FILTER" _ 0x829A,
 		"VERTEX_TEXTURE" _ 0x829B,
 		"TESS_CONTROL_TEXTURE" _ 0x829C,

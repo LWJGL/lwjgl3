@@ -271,7 +271,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PATH_COMPUTED_LENGTH_NV" _ 0x90A0,
 		"PATH_FILL_BOUNDING_BOX_NV" _ 0x90A1,
 		"PATH_STROKE_BOUNDING_BOX_NV" _ 0x90A2
-	)
+	).javaDocLinks
 
 	IntConstant(
 		"""
@@ -404,6 +404,17 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PATH_TRANSPOSE_PROJECTION_MATRIX_NV" _ 0x84E4
 	)
 
+	IntConstant(
+		"The following types are defined as alias to the GL tokens.",
+
+		"2_BYTES_NV" _ 0x1407,
+		"3_BYTES_NV" _ 0x1408,
+		"4_BYTES_NV" _ 0x1409,
+		"EYE_LINEAR_NV" _ 0x2400,
+		"OBJECT_LINEAR_NV" _ 0x2401,
+		"CONSTANT_NV" _ 0x8576
+	)
+
 	void(
 		"PathCommandsNV",
 		"",
@@ -470,7 +481,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		nullTerminated _ const _ void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
 		GLsizei.IN("numGlyphs", ""),
-		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV GL11#2_BYTES GL11#3_BYTES GL11#4_BYTES"),
+		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
 		Check("numGlyphs") _ const _ void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
 		GLuint.IN("pathParameterTemplate", ""),
@@ -527,6 +538,16 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLuint.IN("resultPath", ""),
 		GLuint.IN("srcPath", "")
+	)
+
+	ignoreMissing _ void(
+		"WeightPathsNV",
+	    "",
+
+		GLuint.IN("resultPath", ""),
+		AutoSize("paths", "weights") _ GLsizei.IN("numPaths", ""),
+		const _ GLuint_p.IN("paths", ""),
+		const _ GLfloat_p.IN("weights", "")
 	)
 
 	void(
@@ -659,7 +680,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN(
 			"pathNameType",
 			"",
-			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT #UTF8_NV #UTF16_NV GL11#2_BYTES GL11#3_BYTES GL11#4_BYTES"
+			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"
 		),
 		Check("numPaths") _ const _ void_p.IN("paths", ""),
 		GLuint.IN("pathBase", ""),
@@ -695,7 +716,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLenum.IN("color", "", "GL13#PRIMARY_COLOR #PRIMARY_COLOR_NV #SECONDARY_COLOR_NV"),
-		GLenum.IN("genMode", "", "GL11#NONE GL11#OBJECT_LINEAR #PATH_OBJECT_BOUNDING_BOX_NV GL11#EYE_LINEAR GL13#CONSTANT"),
+		GLenum.IN("genMode", "", "GL11#NONE #OBJECT_LINEAR_NV #PATH_OBJECT_BOUNDING_BOX_NV #EYE_LINEAR_NV #CONSTANT_NV"),
 		GLenum.IN("colorFormat", ""),
 		const _ GLfloat_p.IN("coeffs", "")
 	)

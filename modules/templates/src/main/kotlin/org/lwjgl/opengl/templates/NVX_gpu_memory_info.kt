@@ -7,7 +7,7 @@ package org.lwjgl.opengl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
-val NVX_gpu_memory_info = "NVXGpuMemoryInfo".nativeClassGL("NVX_gpu_memory_info", postfix = NVX) {
+val NVX_gpu_memory_info = "NVXGPUMemoryInfo".nativeClassGL("NVX_gpu_memory_info", postfix = NVX) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

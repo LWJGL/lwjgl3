@@ -671,8 +671,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
 		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET" _ 0x8E5E,
-		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET" _ 0x8E5F,
-		"MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS" _ 0x8F9F
+		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET" _ 0x8E5F
 	)
 
 	// ARB_transform_feedback2

@@ -67,11 +67,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniformARB.",
 
-		"FLOAT" _ 0x1406,
 		"FLOAT_VEC2_ARB" _ 0x8B50,
 		"FLOAT_VEC3_ARB" _ 0x8B51,
 		"FLOAT_VEC4_ARB" _ 0x8B52,
-		"INT" _ 0x1404,
 		"INT_VEC2_ARB" _ 0x8B53,
 		"INT_VEC3_ARB" _ 0x8B54,
 		"INT_VEC4_ARB" _ 0x8B55,

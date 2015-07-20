@@ -37,12 +37,6 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
 		"QUERY_TARGET" _ 0x82EA
 	)
 
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetIntegeri_v.",
-
-		"TEXTURE_BINDING" _ 0x82EB
-	)
-
 	GL45 reuse "CreateTransformFeedbacks"
 	GL45 reuse "TransformFeedbackBufferBase"
 	GL45 reuse "TransformFeedbackBufferRange"
@@ -136,4 +130,8 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
 	GL45 reuse "CreateSamplers"
 	GL45 reuse "CreateProgramPipelines"
 	GL45 reuse "CreateQueries"
+	GL45 reuse "GetQueryBufferObjecti64v"
+	GL45 reuse "GetQueryBufferObjectiv"
+    GL45 reuse "GetQueryBufferObjectui64v"
+    GL45 reuse "GetQueryBufferObjectuiv"
 }

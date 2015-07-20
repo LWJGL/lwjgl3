@@ -122,6 +122,8 @@ val GLDEBUGPROC = CallbackType(callback(
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	CALL_CONVENTION_SYSTEM
 }, "GLDEBUGPROC")
-// EXT_timer_query
+// NV_gpu_shader5
+val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
+val GLint64EXT_p = PointerType(GLint64EXT)
 val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
 val GLuint64EXT_p = PointerType(GLuint64EXT)

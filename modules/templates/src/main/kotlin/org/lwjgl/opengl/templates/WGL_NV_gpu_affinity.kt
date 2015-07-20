@@ -41,7 +41,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		"New error code set by $wglMakeCurrent and $wglMakeContextCurrentARB.",
 
 		"ERROR_MISSING_AFFINITY_MASK_NV" _ 0x20D1
-	)
+	).noPrefix()
 
 	// Functions
 

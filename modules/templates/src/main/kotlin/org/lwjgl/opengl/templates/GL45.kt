@@ -36,13 +36,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 	// ARB_clip_control
 
-	val origins = IntConstant(
-		"Accepted by the {@code origin} parameter of #ClipControl().",
-
-		"LOWER_LEFT" _ 0x8CA1,
-		"UPPER_LEFT" _ 0x8CA2
-	).javaDocLinks
-
 	val depths = IntConstant(
 		"Accepted by the {@code depth} parameter of #ClipControl().",
 
@@ -69,7 +62,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		execution of GL11#End().
 		""",
 
-		GLenum.IN("origin", "the clip origin", origins),
+		GLenum.IN("origin", "the clip origin", "GL20#LOWER_LEFT GL20#UPPER_LEFT"),
 		GLenum.IN("depth", "the clip depth mode", depths)
 	)
 
@@ -105,12 +98,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv.",
 
 		"QUERY_TARGET" _ 0x82EA
-	)
-
-	IntConstant(
-		"Accepted by the {@code pname} parameter of GetIntegeri_v.",
-
-		"TEXTURE_BINDING" _ 0x82EB
 	)
 
 	void(
@@ -1160,6 +1147,46 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		returnValue _ GLuint_p.OUT("ids", "the buffer in which to return the created query object names")
 	)
 
+	void(
+		"GetQueryBufferObjectiv",
+		"Queries the state of a query object.",
+
+		GLuint.IN("id", "the name of a query object"),
+		GLuint.IN("buffer", "the name of a buffer object"),
+		GLenum.IN("pname", "the state to query"),
+		GLintptr.IN("offset", "the offset into {@code buffer} at which the queried value is written")
+	)
+
+	void(
+		"GetQueryBufferObjectuiv",
+		"Unsigned version of #GetQueryBufferObjectiv().",
+
+		this["GetQueryBufferObjectiv"]["id"],
+		this["GetQueryBufferObjectiv"]["buffer"],
+		this["GetQueryBufferObjectiv"]["pname"],
+		this["GetQueryBufferObjectiv"]["offset"]
+	)
+
+	void(
+		"GetQueryBufferObjecti64v",
+		"64bit version of #GetQueryBufferObjectiv().",
+
+		this["GetQueryBufferObjectiv"]["id"],
+		this["GetQueryBufferObjectiv"]["buffer"],
+		this["GetQueryBufferObjectiv"]["pname"],
+		this["GetQueryBufferObjectiv"]["offset"]
+	)
+
+	void(
+		"GetQueryBufferObjectui64v",
+		"64bit version of #GetQueryBufferObjectuiv().",
+
+		this["GetQueryBufferObjectiv"]["id"],
+		this["GetQueryBufferObjectiv"]["buffer"],
+		this["GetQueryBufferObjectiv"]["pname"],
+		this["GetQueryBufferObjectiv"]["offset"]
+	)
+
 	// ARB_ES3_1_compatibility
 
 	void(
@@ -1253,7 +1280,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	IntConstant(
 		"Returned by #GetGraphicsResetStatus().",
 
-		"NO_ERROR" _ 0x0000,
 		"GUILTY_CONTEXT_RESET" _ 0x8253,
 		"INNOCENT_CONTEXT_RESET" _ 0x8254,
 		"UNKNOWN_CONTEXT_RESET" _ 0x8255
@@ -1262,7 +1288,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"CONTEXT_ROBUST_ACCESS" _ 0x90F3,
 		"RESET_NOTIFICATION_STRATEGY" _ 0x8256
 	)
 
@@ -1271,6 +1296,12 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 
 		"LOSE_CONTEXT_ON_RESET" _ 0x8252,
 		"NO_RESET_NOTIFICATION" _ 0x8261
+	)
+
+	IntConstant(
+		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
+
+		"CONTEXT_FLAG_ROBUST_ACCESS_BIT" _ 0x00000004
 	)
 
 	IntConstant(
@@ -1319,6 +1350,91 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 	)
 
+	src = GL11["GetMapdv"]
+	DependsOn("provider.getFunctionAddress(\"glGetMapdv\") != NULL") _ ignoreMissing _ void(
+		"GetnMapdv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["query"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		returnValue _ GLdouble_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetMapfv"]
+	DependsOn("provider.getFunctionAddress(\"glGetMapfv\") != NULL") _ ignoreMissing _ void(
+		"GetnMapfv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["query"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		returnValue _ GLfloat_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetMapiv"]
+	DependsOn("provider.getFunctionAddress(\"glGetMapiv\") != NULL") _ ignoreMissing _ void(
+		"GetnMapiv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["query"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		returnValue _ GLint_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetPixelMapfv"]
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapfv\") != NULL") _ ignoreMissing _ void(
+		"GetnPixelMapfv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["map"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		GLfloat_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetPixelMapuiv"]
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapuiv\") != NULL") _ ignoreMissing _ void(
+		"GetnPixelMapuiv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["map"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		GLuint_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetPixelMapusv"]
+	DependsOn("provider.getFunctionAddress(\"glGetPixelMapusv\") != NULL") _ ignoreMissing _ void(
+		"GetnPixelMapusv",
+		"Robust version of ${src.javaDocLink}",
+
+		src["map"],
+		AutoSize("data") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		GLushort_p.OUT("data", "a buffer in which to place the returned data")
+	)
+
+	src = GL11["GetPolygonStipple"]
+	DependsOn("provider.getFunctionAddress(\"glGetPolygonStipple\") != NULL") _ ignoreMissing _ void(
+		"GetnPolygonStipple",
+		"Robust version of ${src.javaDocLink}",
+
+		AutoSize("pattern") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code pattern}"),
+		PIXEL_PACK_BUFFER _ GLubyte_p.OUT("pattern", "a buffer in which to place the returned pattern")
+	)
+
+	src = GL11["GetTexImage"]
+	ignoreMissing _ void(
+		"GetnTexImage",
+		"Robust version of ${src.javaDocLink}",
+
+		src["tex"],
+		src["level"],
+		src["format"],
+		src["type"],
+		AutoSize("img") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code img}"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ PIXEL_PACK_BUFFER _ void_p.OUT("img", "a buffer in which to place the returned data")
+	)
+
 	void(
 		"ReadnPixels",
 		"Behaves identically to GL11#ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
@@ -1333,6 +1449,84 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
+	src = ARB_imaging["GetColorTable"]
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetColorTable\") != NULL") _ ignoreMissing _ void(
+		"GetnColorTable",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["format"],
+		src["type"],
+		AutoSize("table") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code table}"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ void_p.OUT("table", "a buffer in which to place the returned data")
+	)
+
+	src = ARB_imaging["GetConvolutionFilter"]
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetConvolutionFilter\") != NULL") _ ignoreMissing _ void(
+		"GetnConvolutionFilter",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["format"],
+		src["type"],
+		AutoSize("image") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code image}"),
+		PIXEL_PACK_BUFFER _ void_p.OUT("image", "a buffer in which to place the returned data")
+	)
+
+	src = ARB_imaging["GetSeparableFilter"]
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetSeparableFilter\") != NULL") _ ignoreMissing _ void(
+		"GetnSeparableFilter",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["format"],
+		src["type"],
+		AutoSize("row") _ GLsizei.IN("rowBufSize", "the maximum number of bytes to write into {@code row}"),
+		PIXEL_PACK_BUFFER _ void_p.OUT("row", "a buffer in which to return the filter row"),
+		AutoSize("column") _ GLsizei.IN("columnBufSize", "the maximum number of bytes to write into {@code column}"),
+		PIXEL_PACK_BUFFER _ void_p.OUT("column", "a buffer in which to return the filter column"),
+		nullable _ void_p.IN("span", "")
+	)
+
+	src = ARB_imaging["GetHistogram"]
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetHistogram\") != NULL") _ ignoreMissing _ void(
+		"GetnHistogram",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["reset"],
+		src["format"],
+		src["type"],
+		AutoSize("values") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code values}"),
+		PIXEL_PACK_BUFFER _ void_p.OUT("values", "a buffer in which to place the returned data")
+	)
+
+	src = ARB_imaging["GetMinmax"]
+	DependsOn("ext.contains(\"GL_ARB_imaging\") && provider.getFunctionAddress(\"glGetMinmax\") != NULL") _ ignoreMissing _ void(
+		"GetnMinmax",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["reset"],
+		src["format"],
+		src["type"],
+		AutoSize("values") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code values}"),
+		PIXEL_PACK_BUFFER _ void_p.OUT("values", "a buffer in which to place the returned data")
+	)
+
+	src = GL13["GetCompressedTexImage"]
+	DependsOn("OpenGL13") _ ignoreMissing _ void(
+		"GetnCompressedTexImage",
+		"Robust version of ${src.javaDocLink}",
+
+		src["target"],
+		src["level"],
+		AutoSize("img") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code img}"),
+		Check(
+			expression = "GL11.glGetTexLevelParameteri(target, level, GL13.GL_TEXTURE_COMPRESSED_IMAGE_SIZE)", debug = true
+		) _ PIXEL_PACK_BUFFER _ void_p.OUT("img", "a buffer in which to place the returned data")
+	)
+
 	void(
 		"GetnUniformfv",
 		"Returns the value or values of a uniform of the default uniform block.",
@@ -1340,7 +1534,17 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+	)
+
+	ignoreMissing _ void(
+		"GetnUniformdv",
+		"Double version of #GetnUniformfv().",
+
+		GLuint.IN("program", "the program object"),
+		GLint.IN("location", "the uniform location"),
+		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue _ GLdouble_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -1350,7 +1554,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -1360,6 +1564,6 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
 		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 }

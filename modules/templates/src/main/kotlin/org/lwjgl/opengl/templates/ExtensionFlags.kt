@@ -890,16 +890,6 @@ val NV_gpu_program5_mem_extended = EXT_FLAG.nativeClassGL("NV_gpu_program5_mem_e
 		Requires ${"NV_gpu_program5".cap}.
 		"""
 }
-val NV_gpu_shader5 = EXT_FLAG.nativeClassGL("NV_gpu_shader5", postfix = NV) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs.
-		
-		Requires ${GL32.core}, GLSL 1.5 and ${"ARB_gpu_shader5".cap}.
-		"""
-}
 val NV_parameter_buffer_object2 = EXT_FLAG.nativeClassGL("NV_parameter_buffer_object2", postfix = NV) {
 	documentation =
 		"""
@@ -1043,29 +1033,5 @@ val WGL_NV_DX_interop2 = EXT_FLAG.nativeClassWGL("WGL_NV_DX_interop2", postfix =
 		This extension expands on the specification of ${registryLinkTo("NV", "DX_interop")} to add support for DirectX version 10, 10.1 and 11 resources.
 
 		Requires ${GL20.core} and ${registryLinkTo("NV", "DX_interop")}.
-		"""
-}
-
-val GLX_ARB_robustness_share_group_isolation = EXT_FLAG.nativeClassGLX("GLX_ARB_robustness_share_group_isolation", postfix = ARB) {
-	documentation =
-		"""
-		When true, the ${registryLink("ARB", "glx_robustness_isolation")} extension is supported.
-
-		If the graphics driver advertises the GLX_ARB_robustness_share_group_isolation extension string, then the driver guarantees that if a context in a
-		particular share group causes a graphics reset to occur:
-		${ol(
-			"No other share group within the application, nor any other application on the system, is affected by the graphics reset.",
-		    "No other share group within the application, nor any other application on the system, receives any notification that the graphics reset occurred."
-		)}
-		Requires ${GLX14.glx} and ${GLX_ARB_create_context_robustness.link}.
-		"""
-}
-
-val GLX_EXT_framebuffer_sRGB = EXT_FLAG.nativeClassGLX("GLX_EXT_framebuffer_sRGB", postfix = EXT) {
-	documentation =
-		"""
-		When true, the ${registryLink("EXT", "framebuffer_sRGB")} extension is supported.
-
-		This extension adds a framebuffer capability for sRGB framebuffer update and blending.
 		"""
 }

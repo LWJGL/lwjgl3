@@ -198,11 +198,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		/*	  ONE */
 		"DST_COLOR" _ 0x0306,
 		"ONE_MINUS_DST_COLOR" _ 0x0307,
-		"SRC_ALPHA_SATURATE" _ 0x0308,
-		"CONSTANT_COLOR" _ 0x8001,
-		"ONE_MINUS_CONSTANT_COLOR" _ 0x8002,
-		"CONSTANT_ALPHA" _ 0x8003,
-		"ONE_MINUS_CONSTANT_ALPHA" _ 0x8004
+		"SRC_ALPHA_SATURATE" _ 0x0308
 	)
 
 	IntConstant(
@@ -390,6 +386,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"BLEND" _ 0x0BE2,
 		"LOGIC_OP_MODE" _ 0x0BF0,
 		"INDEX_LOGIC_OP" _ 0x0BF1,
+		"LOGIC_OP" _ 0x0BF1,
 		"COLOR_LOGIC_OP" _ 0x0BF2,
 		"AUX_BUFFERS" _ 0x0C00,
 		"DRAW_BUFFER" _ 0x0C01,
@@ -528,6 +525,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"TEXTURE_WIDTH" _ 0x1000,
 		"TEXTURE_HEIGHT" _ 0x1001,
 		"TEXTURE_INTERNAL_FORMAT" _ 0x1003,
+		"TEXTURE_COMPONENTS" _ 0x1003,
 		"TEXTURE_BORDER_COLOR" _ 0x1004,
 		"TEXTURE_BORDER" _ 0x1005
 		/*	  TEXTURE_RED_SIZE */
@@ -1679,7 +1677,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	deprecatedGL _ void(
 		"GetLightiv",
-		"Returns integer information about light parameter {@code value} for {@code light} in {@code data}.",
+		"Returns integer information about light parameter {@code pname} for {@code light} in {@code data}.",
 
 		GLenum.IN("light", "the light for which to return information", "#LIGHT0 GL_LIGHT[1-7]"),
 		GLenum.IN(
@@ -1732,7 +1730,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	deprecatedGL _ void(
 		"GetMaterialiv",
-		"Returns integer information about material property {@code value} for {@code face} in {@code data}.",
+		"Returns integer information about material property {@code pname} for {@code face} in {@code data}.",
 
 		GLenum.IN("face", "the material face for which to return information", "#FRONT #BACK"),
 		GLenum.IN("pname", "the information to query", "#AMBIENT #DIFFUSE #SPECULAR #EMISSION #SHININESS"),
@@ -1805,7 +1803,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	void(
 		"GetTexEnviv",
-		"Returns integer information about {@code value} for {@code env} in {@code data}.",
+		"Returns integer information about {@code pname} for {@code env} in {@code data}.",
 
 		GLenum.IN("env", "the texture environment to query", "GL20#POINT_SPRITE #TEXTURE_ENV GL14#TEXTURE_FILTER_CONTROL"),
 		GLenum.IN(
@@ -1831,7 +1829,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	deprecatedGL _ void(
 		"GetTexGeniv",
-		"Returns integer information about {@code value} for {@code coord} in {@code data}.",
+		"Returns integer information about {@code pname} for {@code coord} in {@code data}.",
 
 		GLenum.IN("coord", "the coord to query", TEX_COORDS),
 		GLenum.IN("pname", "the parameter to query", "#EYE_PLANE #OBJECT_PLANE #TEXTURE_GEN_MODE"),
@@ -1873,7 +1871,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	void(
 		"GetTexLevelParameteriv",
-		"Places integer information about texture image parameter {@code value} for level-of-detail {@code lod} of the specified {@code target} into {@code data}.",
+		"Places integer information about texture image parameter {@code pname} for level-of-detail {@code level} of the specified {@code target} into {@code params}.",
 
 		GLenum.IN(
 			"target",
@@ -1913,7 +1911,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 	void(
 		"GetTexParameteriv",
-		"Place integer information about texture parameter {@code value} for the specified {@code target} into {@code data}.",
+		"Place integer information about texture parameter {@code pname} for the specified {@code target} into {@code params}.",
 
 		GLenum.IN(
 			"target",

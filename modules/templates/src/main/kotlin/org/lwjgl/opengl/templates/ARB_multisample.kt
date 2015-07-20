@@ -76,5 +76,46 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 			"GL11#TRUE GL11#FALSE"
 		)
 	)
+}
 
+val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisample", ARB) {
+	javaImport(
+		"org.lwjgl.system.linux.*"
+	)
+
+	documentation =
+		"""
+		Native bindings to the ${registryLink("ARB", "multisample")} extension.
+
+		See ##ARBMultisample for details.
+		"""
+
+	IntConstant(
+		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
+
+		"SAMPLE_BUFFERS_ARB" _ 100000,
+		"SAMPLES_ARB" _ 100001
+	)
+}
+
+val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisample", ARB) {
+	documentation =
+		"""
+		Native bindings to the ${registryLink("ARB", "multisample")} extension.
+
+		See ##ARBMultisample for details.
+
+		Requires ${WGL_EXT_extensions_string.link} and ${WGL_ARB_pixel_format.link}.
+		"""
+
+	IntConstant(
+		"""
+		Accepted by the {@code attributes} parameter of WGLARBPixelFormat#GetPixelFormatAttribiARB(),
+		WGLARBPixelFormat#GetPixelFormatAttribfARB(), and the {@code attribIList} and {@code attribFList} of
+		WGLARBPixelFormat#ChoosePixelFormatARB().
+		""",
+
+		"SAMPLE_BUFFERS_ARB" _ 0x2041,
+		"SAMPLES_ARB" _ 0x2042
+	)
 }
