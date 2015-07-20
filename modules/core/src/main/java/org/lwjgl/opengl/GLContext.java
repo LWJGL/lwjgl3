@@ -168,7 +168,7 @@ public abstract class GLContext implements Pointer {
 			log("[GL] Using KHR_debug for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			KHRDebug.glDebugMessageCallback(proc, NULL);
-			if ( (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
+			if ( capabilities.OpenGL30 && (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
 				log("[GL] Warning: A non-debug context may not produce any debug output.");
 				glEnable(GL_DEBUG_OUTPUT);
 			}
