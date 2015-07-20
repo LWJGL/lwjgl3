@@ -672,17 +672,6 @@ val AMD_gcn_shader = EXT_FLAG.nativeClassGL("AMD_gcn_shader", postfix = AMD) {
 		Requires ${"AMD_gpu_shader_int64".cap} or ${"NV_gpu_shader5".cap}.
 		"""
 }
-val AMD_gpu_shader_int64 = EXT_FLAG.nativeClassGL("AMD_gpu_shader_int64", postfix = AMD) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension was developed based on the ${"NV_gpu_shader5".cap} extension to allow implementations supporting 64-bit integers to expose the feature
-		without the additional requirements that are present in ${"NV_gpu_shader5".cap}.
-
-		Requires ${GL40.core} and GLSL 4.00.
-		"""
-}
 val AMD_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("AMD_shader_atomic_counter_ops", postfix = AMD) {
 	documentation =
 		"""
