@@ -108,4 +108,28 @@ final class GLChecks {
 		}
 	}
 
+	/**
+	 * Queries the specified parameter of the specified texture object level. If direct-state-access functionality is not available, the texture must be
+	 * currently bound to the specified texture target.
+	 *
+	 * @param texture the texture object
+	 * @param target  the texture target
+	 * @param level   the texture level
+	 * @param pname   the parameter to query
+	 *
+	 * @return the parameter value
+	 */
+	static int getTexLevelParameteri(int texture, int target, int level, int pname) {
+		ContextCapabilities caps = GL.getCapabilities();
+
+		if ( caps.OpenGL45 )
+			return GL45.glGetTextureLevelParameteri(texture, level, pname);
+		if ( caps.GL_ARB_direct_state_access )
+			return ARBDirectStateAccess.glGetTextureLevelParameteri(texture, level, pname);
+		if ( caps.GL_EXT_direct_state_access )
+			return EXTDirectStateAccess.glGetTextureLevelParameteriEXT(texture, target, level, pname);
+
+		return glGetTexLevelParameteri(target, level, pname);
+	}
+
 }

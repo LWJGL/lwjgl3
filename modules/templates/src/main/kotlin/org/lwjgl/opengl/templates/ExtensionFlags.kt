@@ -815,6 +815,21 @@ val AMD_vertex_shader_viewport_index = EXT_FLAG.nativeClassGL("AMD_vertex_shader
 
 val ATI_shader_texture_lod = EXT_FLAG.nativeClassGL("ATI_shader_texture_lod", postfix = ATI) { documentation =  "When true, the $registryLink extension is supported." }
 
+val INTEL_fragment_shader_ordering = EXT_FLAG.nativeClassGL("INTEL_fragment_shader_ordering", postfix = ATI) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		Graphics devices may execute in parallel fragment shaders referring to the same window xy coordinates. Framebuffer writes are guaranteed to be
+		processed in primitive rasterization order, but there is no order guarantee for other instructions and image or buffer object accesses in particular.
+
+		The extension introduces a new GLSL built-in function, beginFragmentShaderOrderingINTEL(), which blocks execution of a fragment shader invocation until
+		invocations from previous primitives that map to the same xy window coordinates (and same sample when per-sample shading is active) complete their
+		execution. All memory transactions from previous fragment shader invocations are made visible to the fragment shader invocation that called
+		beginFragmentShaderOrderingINTEL() when the function returns.
+		"""
+}
+
 val KHR_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("KHR_robust_buffer_access_behavior", postfix = ARB) {
 	documentation =
 		"""
@@ -1009,6 +1024,16 @@ val NV_shader_thread_shuffle = EXT_FLAG.nativeClassGL("NV_shader_thread_shuffle"
 		new features to the OpenGL Shading Language to share data between multiple threads within a thread group.
 
 		Requires ${GL43.core} and GLSL 4.3.
+		"""
+}
+val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_vtc", postfix = NV) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension adds support for the VTC 3D texture compression formats, which are analogous to the S3TC texture compression formats, with the addition
+		of some retiling in the Z direction. VTC has the same compression ratio as S3TC and uses 4x4x1, 4x4x2, (4x4x3 when non-power-of-two textures are
+		supported), or 4x4x4 blocks.
 		"""
 }
 val NV_vertex_program1_1 = EXT_FLAG.nativeClassGL("NV_vertex_program1_1", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
