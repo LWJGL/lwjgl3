@@ -1036,9 +1036,6 @@ val NV_texture_compression_vtc = EXT_FLAG.nativeClassGL("NV_texture_compression_
 		supported), or 4x4x4 blocks.
 		"""
 }
-val NV_vertex_program1_1 = EXT_FLAG.nativeClassGL("NV_vertex_program1_1", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
-val NV_vertex_program2 = EXT_FLAG.nativeClassGL("NV_vertex_program2", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
-val NV_vertex_program4 = EXT_FLAG.nativeClassGL("NV_vertex_program4", postfix = NV) { documentation = "When true, the $registryLink extension is supported." }
 val NV_viewport_array2 = EXT_FLAG.nativeClassGL("NV_viewport_array2", postfix = NV) {
 	documentation =
 		"""
