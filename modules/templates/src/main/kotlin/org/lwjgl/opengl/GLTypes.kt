@@ -127,3 +127,6 @@ val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
 val GLint64EXT_p = PointerType(GLint64EXT)
 val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
 val GLuint64EXT_p = PointerType(GLuint64EXT)
+// NV_half_float
+val GLhalfNV = IntegerType("GLhalfNV", PrimitiveMapping.SHORT)
+val GLhalfNV_p = PointerType(GLhalfNV)
