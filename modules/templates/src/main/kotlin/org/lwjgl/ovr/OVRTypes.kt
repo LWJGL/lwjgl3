@@ -171,7 +171,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", structName = "ovrFovPort") {
 }.nativeType
 
 val ovrHmd = PointerType("ovrHmd", includesPointer = true) // const ovrHmdDesc *
-val ovrHmd_p = PointerType(ovrHmd)
+val ovrHmd_p = ovrHmd.p
 
 val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensorData") {
 	documentation = "Specifies a reading we can query from the sensor."
@@ -294,7 +294,7 @@ val ovrTexture = struct(OVR_PACKAGE, "OVRTexture", structName = "ovrTexture") {
 	uintptr_t.member("PlatformData", size = 8) // Specialized in ovrGLTextureData, ovrD3D11TextureData etc.
 }.nativeType
 val ovrTexture_p = StructType(ovrTexture)
-val ovrTexture_pp = PointerType(ovrTexture_p)
+val ovrTexture_pp = ovrTexture_p.p
 
 val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "ovrSwapTextureSet") {
 	documentation =
@@ -337,7 +337,7 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 	int.member("CurrentIndex")
 }.nativeType
 val ovrSwapTextureSet_p = StructType(ovrSwapTextureSet)
-val ovrSwapTextureSet_pp = PointerType(ovrSwapTextureSet_p)
+val ovrSwapTextureSet_pp = ovrSwapTextureSet_p.p
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", structName = "ovrLayerHeader") {
 	documentation = "Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov."

@@ -10,10 +10,10 @@ import org.lwjgl.system.linux.*
 val GLXContext = PointerType("GLXContext", includesPointer = true)
 
 val GLXFBConfig = PointerType("GLXFBConfig", includesPointer = true)
-val GLXFBConfig_p = PointerType(GLXFBConfig)
+val GLXFBConfig_p = GLXFBConfig.p
 
 val GLXFBConfigSGIX = PointerType("GLXFBConfigSGIX", includesPointer = true)
-val GLXFBConfigSGIX_p = PointerType(GLXFBConfigSGIX)
+val GLXFBConfigSGIX_p = GLXFBConfigSGIX.p
 
 val GLXWindow = PointerType("GLXWindow", includesPointer = true)
 val GLXDrawable = PointerType("GLXDrawable", includesPointer = true)

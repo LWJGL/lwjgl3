@@ -11,10 +11,10 @@ val CGLRendererInfoObj = PointerType("CGLRendererInfoObj", includesPointer = tru
 val CGLContextObj = PointerType("CGLContextObj", includesPointer = true)
 val CGLPBufferObj = PointerType("CGLPBufferObj", includesPointer = true)
 
-val CGLPixelFormatObj_p = PointerType(CGLPixelFormatObj)
-val CGLRendererInfoObj_p = PointerType(CGLRendererInfoObj)
-val CGLContextObj_p = PointerType(CGLContextObj)
-val CGLPBufferObj_p = PointerType(CGLPBufferObj)
+val CGLPixelFormatObj_p = CGLPixelFormatObj.p
+val CGLRendererInfoObj_p = CGLRendererInfoObj.p
+val CGLContextObj_p = CGLContextObj.p
+val CGLPBufferObj_p = CGLPBufferObj.p
 
 val CGLShareGroupObj = PointerType("CGLShareGroupObj", includesPointer = true)
 
@@ -25,4 +25,4 @@ val CGLRendererProperty = EnumType("CGLRendererProperty")
 val CGLContextParameter = EnumType("CGLContextParameter")
 val CGLGlobalOption = EnumType("CGLGlobalOption")
 
-val CGLPixelFormatAttribute_p = PointerType(CGLPixelFormatAttribute)
+val CGLPixelFormatAttribute_p = CGLPixelFormatAttribute.p

@@ -33,7 +33,7 @@ class CallbackFunction(
 		get() = when ( this ) {
 			is PointerType   -> "ffi_type_pointer"
 			is PrimitiveType -> when ( mapping ) {
-				PrimitiveMapping.PTR    -> "ffi_type_pointer"
+				PrimitiveMapping.POINTER -> "ffi_type_pointer"
 				PrimitiveMapping.FLOAT  -> "ffi_type_float"
 				PrimitiveMapping.DOUBLE -> "ffi_type_double"
 				else                    -> "ffi_type_${if ( (this as IntegerType).unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
@@ -45,14 +45,14 @@ class CallbackFunction(
 		get() = when ( this ) {
 			is PointerType   -> "Ptr"
 			is PrimitiveType -> when ( mapping ) {
-				PrimitiveMapping.PTR -> "Ptr"
+				PrimitiveMapping.POINTER -> "Ptr"
 				else                 -> mapping.javaMethodType.getSimpleName().upperCaseFirst
 			}
 			else             -> if ( mapping === TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
 
 	val NativeType.memType: String
-		get() = if ( this is PointerType || mapping === PrimitiveMapping.PTR)
+		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Address"
 		else
 			(mapping as PrimitiveMapping).javaMethodType.getSimpleName().upperCaseFirst

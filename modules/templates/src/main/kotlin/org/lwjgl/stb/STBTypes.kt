@@ -19,7 +19,7 @@ ENABLE_WARNINGS()""")
 // stb_image.h
 
 val stbi_uc = typedef(unsigned_char, "stbi_uc")
-val stbi_uc_p = PointerType(stbi_uc)
+val stbi_uc_p = stbi_uc.p
 
 val STBIReadCallback = CallbackType(callback(
 	STB_PACKAGE, int, "STBIReadCallback",
@@ -65,7 +65,7 @@ val stbi_io_callbacks_p = StructType(stbi_io_callbacks)
 // stb_image_resize.h
 
 val stbir_uint16 = typedef(unsigned_short, "stbir_uint16")
-val stbir_uint16_p = PointerType(stbir_uint16)
+val stbir_uint16_p = stbir_uint16.p
 
 val stbir_edge = typedef(int, "stbir_edge")
 val stbir_filter = typedef(int, "stbir_filter")
@@ -178,13 +178,13 @@ val stbtt_vertex = struct(STB_PACKAGE, "STBTTVertex", structName = "stbtt_vertex
 	unsigned_char.member("type")
 }.nativeType
 val stbtt_vertex_p = StructType(stbtt_vertex)
-val stbtt_vertex_pp = PointerType(stbtt_vertex_p)
+val stbtt_vertex_pp = stbtt_vertex_p.p
 
 // stb_vorbis.c
 
 val stb_vorbis_p = PointerType("stb_vorbis")
 
-val float_ppp = PointerType(float_pp)
+val float_ppp = float_pp.p
 
 val stb_vorbis_alloc = struct(STB_PACKAGE, "STBVorbisAlloc", structName = "stb_vorbis_alloc") {
 	documentation = "A buffer to use for allocations by ##STBVorbis"

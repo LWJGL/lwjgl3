@@ -22,16 +22,16 @@ val cl_half = PrimitiveType("cl_half", PrimitiveMapping.SHORT)
 val cl_float = PrimitiveType("cl_float", PrimitiveMapping.FLOAT)
 val cl_double = PrimitiveType("cl_double", PrimitiveMapping.DOUBLE)
 
-val cl_uchar_p = PointerType(cl_uchar)
-val cl_int_p = PointerType(cl_int)
-val cl_uint_p = PointerType(cl_uint)
-val cl_long_p = PointerType(cl_long)
-val cl_ulong_p = PointerType(cl_ulong)
-val cl_half_p = PointerType(cl_half)
-val cl_float_p = PointerType(cl_float)
-val cl_double_p = PointerType(cl_double)
+val cl_uchar_p = cl_uchar.p
+val cl_int_p = cl_int.p
+val cl_uint_p = cl_uint.p
+val cl_long_p = cl_long.p
+val cl_ulong_p = cl_ulong.p
+val cl_half_p = cl_half.p
+val cl_float_p = cl_float.p
+val cl_double_p = cl_double.p
 
-val cl_uchar_pp = PointerType(cl_uchar_p)
+val cl_uchar_pp = cl_uchar_p.p
 
 // objects
 
@@ -45,15 +45,15 @@ val cl_kernel = PointerType("cl_kernel", includesPointer = true)
 val cl_event = PointerType("cl_event", includesPointer = true)
 val cl_sampler = PointerType("cl_sampler", includesPointer = true)
 
-val cl_platform_id_p = PointerType(cl_platform_id)
-val cl_device_id_p = PointerType(cl_device_id)
-val cl_context_p = PointerType(cl_context)
-val cl_command_queue_p = PointerType(cl_command_queue)
-val cl_mem_p = PointerType(cl_mem)
-val cl_program_p = PointerType(cl_program)
-val cl_kernel_p = PointerType(cl_kernel)
-val cl_event_p = PointerType(cl_event)
-val cl_sampler_p = PointerType(cl_sampler)
+val cl_platform_id_p = cl_platform_id.p
+val cl_device_id_p = cl_device_id.p
+val cl_context_p = cl_context.p
+val cl_command_queue_p = cl_command_queue.p
+val cl_mem_p = cl_mem.p
+val cl_program_p = cl_program.p
+val cl_kernel_p = cl_kernel.p
+val cl_event_p = cl_event.p
+val cl_sampler_p = cl_sampler.p
 
 // typedefs
 
@@ -70,7 +70,7 @@ val cl_command_queue_properties = typedef(cl_bitfield, "cl_command_queue_propert
 val cl_device_partition_property = PointerType("cl_device_partition_property", PointerMapping.DATA_POINTER)
 val cl_device_affinity_domain = typedef(cl_bitfield, "cl_device_affinity_domain")
 
-val cl_context_properties = PrimitiveType("cl_context_properties", PrimitiveMapping.PTR)
+val cl_context_properties = PrimitiveType("cl_context_properties", PrimitiveMapping.POINTER)
 val cl_context_info = typedef(cl_uint, "cl_context_info")
 val cl_command_queue_info = typedef(cl_uint, "cl_command_queue_info")
 val cl_channel_order = typedef(cl_uint, "cl_channel_order")
@@ -99,16 +99,16 @@ val cl_event_info = typedef(cl_uint, "cl_event_info")
 val cl_command_type = typedef(cl_uint, "cl_command_type")
 val cl_profiling_info = typedef(cl_uint, "cl_profiling_info")
 
-val cl_context_properties_p = PointerType(cl_context_properties)
+val cl_context_properties_p = cl_context_properties.p
 
 // OpenCL 2.0
-val cl_command_queue_properties_p = PointerType(cl_command_queue_properties)
+val cl_command_queue_properties_p = cl_command_queue_properties.p
 
 val cl_sampler_properties = typedef(cl_uint, "cl_sampler_properties")
-val cl_sampler_properties_p = PointerType(cl_sampler_properties)
+val cl_sampler_properties_p = cl_sampler_properties.p
 
 val cl_pipe_properties = typedef(cl_uint, "cl_pipe_properties")
-val cl_pipe_properties_p = PointerType(cl_pipe_properties)
+val cl_pipe_properties_p = cl_pipe_properties.p
 val cl_pipe_info = typedef(cl_uint, "cl_pipe_info")
 
 val cl_kernel_exec_info = typedef(cl_uint, "cl_kernel_exec_info")
@@ -117,10 +117,10 @@ val cl_svm_mem_flags = typedef(cl_bitfield, "cl_svm_mem_flags")
 // strings
 
 val cl_charASCII_p = CharSequenceType(name = "cl_char", charMapping = CharMapping.ASCII)
-val cl_charASCII_pp = PointerType(cl_charASCII_p)
+val cl_charASCII_pp = cl_charASCII_p.p
 
 val cl_charUTF8_p = CharSequenceType(name = "cl_char", charMapping = CharMapping.UTF8)
-val cl_charUTF8_pp = PointerType(cl_charUTF8_p)
+val cl_charUTF8_pp = cl_charUTF8_p.p
 
 // structs
 
@@ -288,15 +288,15 @@ val cl_gl_context_info = IntegerType("cl_gl_context_info", PrimitiveMapping.INT)
 val cl_gl_platform_info = IntegerType("cl_gl_platform_info", PrimitiveMapping.INT)
 
 val cl_gl_object_type = IntegerType("cl_gl_object_type", PrimitiveMapping.INT)
-val cl_gl_object_type_p = PointerType(cl_gl_object_type)
+val cl_gl_object_type_p = cl_gl_object_type.p
 
 val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)
 
 // APPLE
 
-val intptr_t = PrimitiveType("intptr_t", PrimitiveMapping.PTR)
+val intptr_t = PrimitiveType("intptr_t", PrimitiveMapping.POINTER)
 val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
-val cl_queue_properties_APPLE_p = PointerType(cl_queue_properties_APPLE)
+val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 
 // EXT
 

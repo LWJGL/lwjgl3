@@ -14,10 +14,10 @@ val VOID = NativeType("VOID", TypeMapping.VOID)
 val PVOID = PointerType("PVOID", includesPointer = true) // A pointer to any type
 
 val HANDLE = PointerType("HANDLE", includesPointer = true)
-val HANDLE_p = PointerType(HANDLE)
+val HANDLE_p = HANDLE.p
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
-val BOOL_p = PointerType(BOOL)
+val BOOL_p = BOOL.p
 
 val BYTE = IntegerType("BYTE", PrimitiveMapping.BYTE)
 val WORD = IntegerType("WORD", PrimitiveMapping.SHORT)
@@ -28,14 +28,14 @@ val LONG = IntegerType("LONG", PrimitiveMapping.INT)
 val FLOAT = PrimitiveType("FLOAT", PrimitiveMapping.FLOAT)
 private val LONGLONG = PrimitiveType("LONGLONG", PrimitiveMapping.LONG) // Only LARGE_INTEGER uses this
 
-val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.PTR)
-val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.PTR)
-val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.PTR)
-val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.PTR)
+val UINT_PTR = PrimitiveType("UINT_PTR", PrimitiveMapping.POINTER)
+val LONG_PTR = PrimitiveType("LONG_PTR", PrimitiveMapping.POINTER)
+val ULONG_PTR = PrimitiveType("ULONG_PTR", PrimitiveMapping.POINTER)
+val DWORD_PTR = PrimitiveType("DWORD_PTR", PrimitiveMapping.POINTER)
 val SIZE_T = typedef(ULONG_PTR, "SIZE_T")
 
-val UINT_p = PointerType(UINT)
-val FLOAT_p = PointerType(FLOAT)
+val UINT_p = UINT.p
+val FLOAT_p = FLOAT.p
 
 val LRESULT = typedef(LONG_PTR, "LRESULT")
 val WPARAM = typedef(UINT_PTR, "WPARAM")

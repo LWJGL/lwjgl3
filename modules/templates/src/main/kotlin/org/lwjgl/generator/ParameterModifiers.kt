@@ -96,7 +96,7 @@ class AutoSize(
 			ParameterType.IN -> if ( when ( param.nativeType.mapping ) {
 				PrimitiveMapping.SHORT,
 				PrimitiveMapping.INT,
-				PrimitiveMapping.PTR -> false
+				PrimitiveMapping.POINTER -> false
 				else -> true
 			} )
 				throw IllegalArgumentException("IN parameters with the AutoSize modifier must be integer primitive types.")
@@ -120,7 +120,7 @@ val autoSizeResult = object: ParameterModifier() {
 		if ( param.paramType === ParameterType.IN )
 			when ( param.nativeType.mapping ) {
 				PrimitiveMapping.INT,
-				PrimitiveMapping.PTR -> {
+				PrimitiveMapping.POINTER -> {
 				}
 				else                 -> {
 					throw IllegalArgumentException("The autoSizeResult modifier on input parameters can only be applied on integer primitive types.")

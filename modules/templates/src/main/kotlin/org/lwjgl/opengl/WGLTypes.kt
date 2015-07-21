@@ -11,7 +11,7 @@ val HPBUFFERARB = PointerType(name = "HPBUFFERARB", includesPointer = true)
 
 // WGL_NV_gpu_affinity
 val HGPUNV = PointerType(name = "HGPUNV", includesPointer = true)
-val HGPUNV_p = PointerType(HGPUNV)
+val HGPUNV_p = HGPUNV.p
 val PGPU_DEVICE = StructType(
 	name = "PGPU_DEVICE",
 	includesPointer = true,

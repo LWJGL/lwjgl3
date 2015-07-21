@@ -356,7 +356,7 @@ class NativeClassFunction(
 			}
 
 			if ( mode === NORMAL && it has BufferObject ) {
-				checks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, ${it.nativeType.mapping === PrimitiveMapping.PTR});"
+				checks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, ${it.nativeType.mapping === PrimitiveMapping.POINTER});"
 			}
 
 			if ( it has AutoSize ) {
@@ -610,7 +610,7 @@ class NativeClassFunction(
 					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 				print("($RESULT")
 				if ( returns has MapPointer )
-					print(", ${if ( paramMap[returns[MapPointer].sizeExpression]?.nativeType?.mapping == PrimitiveMapping.PTR ) "(int)" else ""}${returns[MapPointer].sizeExpression}")
+					print(", ${if ( paramMap[returns[MapPointer].sizeExpression]?.nativeType?.mapping == PrimitiveMapping.POINTER ) "(int)" else ""}${returns[MapPointer].sizeExpression}")
 				else if ( !isNullTerminated ) {
 					if ( returns.nativeType is StructType ) {
 						print(
@@ -740,7 +740,7 @@ class NativeClassFunction(
 				MapPointerTransform
 		}
 
-		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.PTR } forEach {
+		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER } forEach {
 			transforms[it] = BufferOffsetTransform
 			customChecks add "GLChecks.ensureBufferObject(${it[BufferObject].binding}, true);"
 			generateAlternativeMethod(name, "Buffer object offset version of:", transforms, customChecks)
@@ -771,7 +771,7 @@ class NativeClassFunction(
 			}
 		}
 
-		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.PTR }.map { it[BufferObject].binding } forEach {
+		getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }.map { it[BufferObject].binding } forEach {
 			val c = "GLChecks.ensureBufferObject($it, false);"
 			if ( !customChecks.contains(c) )
 				customChecks add c
@@ -1259,7 +1259,7 @@ class NativeClassFunction(
 		if ( !has(macro) ) print('(')
 		printList(getNativeParams()) {
 			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
-			if ( it.nativeType.mapping === PrimitiveMapping.PTR )
+			if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
 				"(${it.nativeType.name})${it.name}"
 			else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
 				"*${it.name}"

@@ -51,22 +51,10 @@ open class PointerType(
 	val elementType: NativeType? = null
 ): NativeType(name, mapping)
 /** Converts primitive to array */
-fun PointerType(primitiveType: PrimitiveType) = PointerType(
-	primitiveType.name,
-	when ( primitiveType.mapping as PrimitiveMapping ) {
-		PrimitiveMapping.BOOLEAN -> PointerMapping.DATA_BYTE
-		PrimitiveMapping.BYTE    -> PointerMapping.DATA_BYTE
-		PrimitiveMapping.SHORT   -> PointerMapping.DATA_SHORT
-		PrimitiveMapping.INT     -> PointerMapping.DATA_INT
-		PrimitiveMapping.LONG    -> PointerMapping.DATA_LONG
-		PrimitiveMapping.PTR     -> PointerMapping.DATA_POINTER
-		PrimitiveMapping.FLOAT   -> PointerMapping.DATA_FLOAT
-		PrimitiveMapping.DOUBLE  -> PointerMapping.DATA_DOUBLE
-		else                     -> {
-			throw IllegalArgumentException()
-		}
-	},
-	elementType = primitiveType
+val PrimitiveType.p: PointerType get() = PointerType(
+	this.name,
+	(this.mapping as PrimitiveMapping).toPointer,
+	elementType = this
 )
 /** pointer to pointer. */
 private fun PointerType.pointerTo(const: Boolean): String {
@@ -81,7 +69,8 @@ private fun PointerType.pointerTo(const: Boolean): String {
 
 	return builder.toString()
 }
-fun PointerType(pointerType: PointerType, const: Boolean = false) = PointerType(pointerType.pointerTo(const), PointerMapping.DATA_POINTER, elementType = pointerType)
+val PointerType.p: PointerType get() = PointerType(this.pointerTo(false), PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(true), PointerMapping.DATA_POINTER, elementType = this)
 
 // Objects (pointer wrappers)
 open class ObjectType(
@@ -160,23 +149,24 @@ open class TypeMapping(
 open class PrimitiveMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
-	val bytes: Int
+	val bytes: Int,
+    val toPointer: PointerMapping
 ): TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
 	companion object {
-		val BOOLEAN = PrimitiveMapping("jboolean", javaClass<Boolean>(), 1)
+		val BOOLEAN = PrimitiveMapping("jboolean", javaClass<Boolean>(), 1, PointerMapping.DATA_BOOLEAN)
 
-		val BYTE = PrimitiveMapping("jbyte", javaClass<Byte>(), 1)
-		val CHAR = PrimitiveMapping("jchar", javaClass<Char>(), 2)
-		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2)
-		val INT = PrimitiveMapping("jint", javaClass<Int>(), 4)
-		val LONG = PrimitiveMapping("jlong", javaClass<Long>(), 8)
+		val BYTE = PrimitiveMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE)
+		val CHAR = PrimitiveMapping("jchar", javaClass<Char>(), 2, PointerMapping.DATA_SHORT)
+		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2, PointerMapping.DATA_SHORT)
+		val INT = PrimitiveMapping("jint", javaClass<Int>(), 4, PointerMapping.DATA_INT)
+		val LONG = PrimitiveMapping("jlong", javaClass<Long>(), 8, PointerMapping.DATA_LONG)
 
 		// Integer type with enough precision to store a pointer
-		val PTR = PrimitiveMapping("jlong", javaClass<Long>(), 8)
+		val POINTER = PrimitiveMapping("jlong", javaClass<Long>(), 8, PointerMapping.DATA_POINTER)
 
-		val FLOAT = PrimitiveMapping("jfloat", javaClass<Float>(), 4)
-		val DOUBLE = PrimitiveMapping("jdouble", javaClass<Double>(), 8)
+		val FLOAT = PrimitiveMapping("jfloat", javaClass<Float>(), 4, PointerMapping.DATA_FLOAT)
+		val DOUBLE = PrimitiveMapping("jdouble", javaClass<Double>(), 8, PointerMapping.DATA_DOUBLE)
 	}
 
 }
@@ -185,13 +175,14 @@ class CharMapping(
 	jniFunctionType: String,
 	javaMethodType: Class<out Any>,
 	bytes: Int,
+	toPointer: PointerMapping,
 	val charset: String
-): PrimitiveMapping(jniFunctionType, javaMethodType, bytes) {
+): PrimitiveMapping(jniFunctionType, javaMethodType, bytes, toPointer) {
 
 	companion object {
-		val ASCII = CharMapping("jbyte", javaClass<Byte>(), 1, "ASCII")
-		val UTF8 = CharMapping("jbyte", javaClass<Byte>(), 1, "UTF8")
-		val UTF16 = CharMapping("jchar", javaClass<Char>(), 2, "UTF16")
+		val ASCII = CharMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE, "ASCII")
+		val UTF8 = CharMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE, "UTF8")
+		val UTF16 = CharMapping("jchar", javaClass<Char>(), 2, PointerMapping.DATA_SHORT, "UTF16")
 	}
 
 }
@@ -237,6 +228,6 @@ open class PointerMapping(
 }
 
 val TypeMapping.isSizeType: Boolean
-	get() = this === PrimitiveMapping.INT || this === PrimitiveMapping.PTR
+	get() = this === PrimitiveMapping.INT || this === PrimitiveMapping.POINTER
 val TypeMapping.isSizePointer: Boolean
 	get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER

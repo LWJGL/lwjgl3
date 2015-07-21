@@ -378,7 +378,7 @@ class Struct(
 					println("long $param,")
 					print("\t\tint ${param}Bytes")
 				}
-				it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR -> {
+				it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER -> {
 					print("long $param")
 				}
 				else                                                                           -> {
@@ -532,7 +532,7 @@ class Struct(
 					var postfix = if ( it is StructMemberArray ) "Set" else "";
 					print("\tpublic static void ${method}$postfix(ByteBuffer $struct, ")
 
-					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR ) {
+					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long $param) { PointerBuffer.put($struct, $struct.position() + $field, $param); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
@@ -555,7 +555,7 @@ class Struct(
 
 						if ( array.nativeType is PrimitiveType ) {
 							val mapping = array.nativeType.mapping as PrimitiveMapping
-							val bytesPerElement = if ( mapping === PrimitiveMapping.PTR ) "POINTER_SIZE" else mapping.bytes
+							val bytesPerElement = if ( mapping === PrimitiveMapping.POINTER ) "POINTER_SIZE" else mapping.bytes
 
 							println("\tpublic static void ${method}Set(ByteBuffer $struct, ByteBuffer $param) {")
 							println("\t\tif ( LWJGLUtil.CHECKS ) {")
@@ -575,7 +575,7 @@ class Struct(
 								print("\tpublic static void ${method}(ByteBuffer $struct, int index, ${mapping.javaMethodType} $param) { ")
 								print(
 									when ( mapping ) {
-										PrimitiveMapping.PTR  -> "PointerBuffer.put($struct, $field + index * POINTER_SIZE, $param);"
+										PrimitiveMapping.POINTER -> "PointerBuffer.put($struct, $field + index * POINTER_SIZE, $param);"
 										PrimitiveMapping.BYTE -> "$struct.put($field + index, $param);"
 										else                  -> "$struct.put${mapping.javaMethodType.getSimpleName().upperCaseFirst}($field + index * $bytesPerElement, $param);"
 									}
@@ -647,7 +647,7 @@ class Struct(
 				if ( it !is StructMemberArray ) {
 					print("\tpublic void ${setMethod}(")
 
-					if (it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR ) {
+					if (it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long $param) { $method(struct, $param); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
@@ -707,7 +707,7 @@ class Struct(
 				if ( it !is StructMemberArray ) {
 					print("\tpublic static ")
 
-					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR ) {
+					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long ${method}(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()
@@ -838,7 +838,7 @@ class Struct(
 				if ( it !is StructMemberArray ) {
 					print("\tpublic ")
 
-					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.PTR ) {
+					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long ${getMethod}() { return $method(struct); }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.getSimpleName()

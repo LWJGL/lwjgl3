@@ -6,9 +6,9 @@ package org.lwjgl.generator
 
 val void = NativeType("void", TypeMapping.VOID)
 val voidptr = PointerType("void") // Naked pointer
-val voidptr_p = PointerType(voidptr)
+val voidptr_p = voidptr.p
 val void_p = PointerType("void", PointerMapping.DATA)
-val void_pp = PointerType(void_p)
+val void_pp = void_p.p
 
 val char = IntegerType("char", PrimitiveMapping.BYTE)
 val short = IntegerType("short", PrimitiveMapping.SHORT)
@@ -25,37 +25,37 @@ val uint32_t = IntegerType("uint32_t", PrimitiveMapping.INT, unsigned = true)
 val int64_t = IntegerType("int64_t", PrimitiveMapping.LONG)
 val uint64_t = IntegerType("uint64_t", PrimitiveMapping.LONG, unsigned = true)
 
-val size_t = IntegerType("size_t", PrimitiveMapping.PTR, unsigned = true)
-val ptrdiff_t = IntegerType("ptrdiff_t", PrimitiveMapping.PTR)
-val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.PTR, unsigned = true)
+val size_t = IntegerType("size_t", PrimitiveMapping.POINTER, unsigned = true)
+val ptrdiff_t = IntegerType("ptrdiff_t", PrimitiveMapping.POINTER)
+val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.POINTER, unsigned = true)
 
-val char_p = PointerType(char)
-val short_p = PointerType(short)
-val short_pp = PointerType(short_p)
-val int_p = PointerType(int)
-val float_p = PointerType(float)
-val float_pp = PointerType(float_p)
-val double_p = PointerType(double)
-val size_t_p = PointerType(size_t)
+val char_p = char.p
+val short_p = short.p
+val short_pp = short_p.p
+val int_p = int.p
+val float_p = float.p
+val float_pp = float_p.p
+val double_p = double.p
+val size_t_p = size_t.p
 
-val char_pp = PointerType(char_p)
+val char_pp = char_p.p
 
 val unsigned_char = IntegerType("unsigned char", PrimitiveMapping.BYTE, unsigned = true)
 val unsigned_short = IntegerType("unsigned short", PrimitiveMapping.SHORT, unsigned = true)
 val unsigned_int = IntegerType("unsigned int", PrimitiveMapping.INT, unsigned = true)
 
-val unsigned_char_p = PointerType(unsigned_char)
-val unsigned_short_p = PointerType(unsigned_short)
-val unsigned_int_p = PointerType(unsigned_int)
+val unsigned_char_p = unsigned_char.p
+val unsigned_short_p = unsigned_short.p
+val unsigned_int_p = unsigned_int.p
 
-val unsigned_char_pp = PointerType(unsigned_char_p)
+val unsigned_char_pp = unsigned_char_p.p
 
 // strings
 
 val charASCII = CharType("char", CharMapping.ASCII) // for struct members
 val charASCII_p = CharSequenceType(name = "char", charMapping = CharMapping.ASCII)
-val charASCII_pp = PointerType(charASCII_p)
+val charASCII_pp = charASCII_p.p
 
 val charUTF8 = CharType("char", CharMapping.UTF8) // for struct members
 val charUTF8_p = CharSequenceType(name = "char", charMapping = CharMapping.UTF8)
-val charUTF8_pp = PointerType(charUTF8_p)
+val charUTF8_pp = charUTF8_p.p

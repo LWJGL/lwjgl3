@@ -16,7 +16,7 @@ val ffi_status = typedef(int, "ffi_abi")
 val FFI_FN_TYPE = PointerType("FFI_FN_TYPE", includesPointer = true)
 
 val ffi_type_p = PointerType("ffi_type")
-val ffi_type_pp = PointerType(ffi_type_p)
+val ffi_type_pp = ffi_type_p.p
 val ffi_type = struct(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
 	nativeImport("ffi.h")

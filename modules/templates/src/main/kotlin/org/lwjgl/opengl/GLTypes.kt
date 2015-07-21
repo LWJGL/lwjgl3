@@ -25,16 +25,16 @@ val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
 val GLclampd = typedef(GLdouble, "GLclampd")
 
 val GLboolean_p = PointerType("GLboolean", PointerMapping.DATA_BOOLEAN)
-val GLbyte_p = PointerType(GLbyte)
-val GLubyte_p = PointerType(GLubyte)
-val GLshort_p = PointerType(GLshort)
-val GLushort_p = PointerType(GLushort)
-val GLint_p = PointerType(GLint)
-val GLuint_p = PointerType(GLuint)
-val GLint64_p = PointerType(GLint64)
-val GLuint64_p = PointerType(GLuint64)
-val GLfloat_p = PointerType(GLfloat)
-val GLdouble_p = PointerType(GLdouble)
+val GLbyte_p = GLbyte.p
+val GLubyte_p = GLubyte.p
+val GLshort_p = GLshort.p
+val GLushort_p = GLushort.p
+val GLint_p = GLint.p
+val GLuint_p = GLuint.p
+val GLint64_p = GLint64.p
+val GLuint64_p = GLuint64.p
+val GLfloat_p = GLfloat.p
+val GLdouble_p = GLdouble.p
 
 // custom numeric
 
@@ -42,26 +42,26 @@ val GLsizei = IntegerType("GLsizei", PrimitiveMapping.INT)
 val GLenum = IntegerType("GLenum", PrimitiveMapping.INT, unsigned = true)
 val GLbitfield = IntegerType("GLbitfield", PrimitiveMapping.INT, unsigned = true)
 
-val GLsizei_p = PointerType(GLsizei)
-val GLenum_p = PointerType(GLenum)
+val GLsizei_p = GLsizei.p
+val GLenum_p = GLenum.p
 
-val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.PTR)
-val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.PTR)
+val GLintptr = PrimitiveType("GLintptr", PrimitiveMapping.POINTER)
+val GLsizeiptr = PrimitiveType("GLsizeiptr", PrimitiveMapping.POINTER)
 
-val GLintptrARB = PrimitiveType("GLintptrARB", PrimitiveMapping.PTR)
-val GLsizeiptrARB = PrimitiveType("GLsizeiptrARB", PrimitiveMapping.PTR)
+val GLintptrARB = PrimitiveType("GLintptrARB", PrimitiveMapping.POINTER)
+val GLsizeiptrARB = PrimitiveType("GLsizeiptrARB", PrimitiveMapping.POINTER)
 
-val GLintptr_p = PointerType(GLintptr)
-val GLsizeiptr_p = PointerType(GLsizeiptr)
+val GLintptr_p = GLintptr.p
+val GLsizeiptr_p = GLsizeiptr.p
 
 // strings
 
 val GLcharASCII_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.ASCII)
-val GLcharASCII_pp = PointerType(GLcharASCII_p)
-val GLcharASCII_p_const_p = PointerType(GLcharASCII_p, const = true)
+val GLcharASCII_pp = GLcharASCII_p.p
+val GLcharASCII_p_const_p = GLcharASCII_p.const_p
 
 val GLcharUTF8_p = CharSequenceType(name = "GLchar", charMapping = CharMapping.UTF8)
-val GLcharUTF8_pp = PointerType(GLcharUTF8_p)
+val GLcharUTF8_pp = GLcharUTF8_p.p
 
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
@@ -98,9 +98,9 @@ val GLDEBUGPROCARB = CallbackType(callback(
 }, "GLDEBUGPROCARB")
 // ARB_shader_objects
 val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
-val GLcharARB_pp = PointerType(GLcharARB_p)
+val GLcharARB_pp = GLcharARB_p.p
 val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = true)
-val GLhandleARB_p = PointerType(GLhandleARB)
+val GLhandleARB_p = GLhandleARB.p
 // ARB_sync
 val GLsync = PointerType(name = "GLsync", includesPointer = true)
 // KHR_debug
@@ -113,8 +113,7 @@ val GLDEBUGPROC = CallbackType(callback(
 	GLenum.IN("severity", "the message severity"),
 	GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ void_p.IN(
-		"userParam",
+	const _ void_p.IN("userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
 	),
 	samConstructor = "GL43,KHRDebug"
@@ -124,9 +123,9 @@ val GLDEBUGPROC = CallbackType(callback(
 }, "GLDEBUGPROC")
 // NV_gpu_shader5
 val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
-val GLint64EXT_p = PointerType(GLint64EXT)
+val GLint64EXT_p = GLint64EXT.p
 val GLuint64EXT = IntegerType("GLuint64EXT", PrimitiveMapping.LONG, unsigned = true)
-val GLuint64EXT_p = PointerType(GLuint64EXT)
+val GLuint64EXT_p = GLuint64EXT.p
 // NV_half_float
 val GLhalfNV = IntegerType("GLhalfNV", PrimitiveMapping.SHORT)
-val GLhalfNV_p = PointerType(GLhalfNV)
+val GLhalfNV_p = GLhalfNV.p

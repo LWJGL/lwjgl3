@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 val MACOSX_PACKAGE = "org.lwjgl.system.macosx"
 
 val id = PointerType("id", includesPointer = true) // Opaque object pointer
-val id_p = PointerType(id)
+val id_p = id.p
 
 val Boolean = IntegerType("Boolean", PrimitiveMapping.BYTE, unsigned = true)
 val BOOL = IntegerType("BOOL", PrimitiveMapping.BYTE)

@@ -29,18 +29,18 @@ val KeySym = typedef(XID, "KeySym")
 val KeyCode = typedef(unsigned_char, "KeyCode")
 
 val XContext = typedef(int, "XContext")
-val XPointer = PointerType(char)
-val XPointer_p = PointerType(XPointer)
+val XPointer = char.p
+val XPointer_p = XPointer.p
 
-val Bool_p = PointerType(Bool)
-val Atom_p = PointerType(Atom)
-val KeySym_p = PointerType(KeySym)
+val Bool_p = Bool.p
+val Atom_p = Atom.p
+val KeySym_p = KeySym.p
 
 val Display_p = PointerType("Display") // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
 val Screen_p = PointerType("Screen") // Screen is a struct, but should be treated as an opaque type by apps
-val Window_p = PointerType(Window)
+val Window_p = Window.p
 
 val XComposeStatus = struct(LINUX_PACKAGE, "XComposeStatus") {
 	documentation = "Compose sequence status structure, used in calling Xutil#XLookupString()."
@@ -315,11 +315,11 @@ val RRCrtc = typedef(XID, "RRCrtc")
 val RRMode = typedef(XID, "RRMode")
 val RRProvider = typedef(XID, "RRProvider")
 
-val XRRModeFlags_p = PointerType(XRRModeFlags)
+val XRRModeFlags_p = XRRModeFlags.p
 
-val RROutput_p = PointerType(RROutput)
-val RRCrtc_p = PointerType(RRCrtc)
-val RRMode_p = PointerType(RRMode)
+val RROutput_p = RROutput.p
+val RRCrtc_p = RRCrtc.p
+val RRMode_p = RRMode.p
 
 val XRRModeInfo = struct(LINUX_PACKAGE, "XRRModeInfo") {
 	documentation = "Xrandr mode info struct."
