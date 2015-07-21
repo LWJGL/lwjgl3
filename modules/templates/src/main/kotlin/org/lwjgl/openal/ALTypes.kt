@@ -55,4 +55,4 @@ val ALcharASCII_pp = ALcharASCII_p.p
 val ALcharUTF8_p = CharSequenceType(name = "ALchar", charMapping = CharMapping.UTF8)
 val ALcharUTF8_pp = ALcharUTF8_p.p
 
-val ALvoidptr = PointerType("void") // see alGetProcAddress
+val ALvoidptr = "void".p // see alGetProcAddress

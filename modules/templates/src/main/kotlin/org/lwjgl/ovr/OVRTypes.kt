@@ -170,7 +170,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", structName = "ovrFovPort") {
 	float.member("RightTan") /// The tangent of the angle between the viewing vector and the right edge of the field of view.
 }.nativeType
 
-val ovrHmd = PointerType("ovrHmd", includesPointer = true) // const ovrHmdDesc *
+val ovrHmd = "ovrHmd".opaque_p // const ovrHmdDesc *
 val ovrHmd_p = ovrHmd.p
 
 val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensorData") {

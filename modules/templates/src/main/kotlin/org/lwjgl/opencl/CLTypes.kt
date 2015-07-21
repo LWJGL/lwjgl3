@@ -35,15 +35,15 @@ val cl_uchar_pp = cl_uchar_p.p
 
 // objects
 
-val cl_platform_id = PointerType("cl_platform_id", includesPointer = true)
-val cl_device_id = PointerType("cl_device_id", includesPointer = true)
-val cl_context = PointerType("cl_context", includesPointer = true)
-val cl_command_queue = PointerType("cl_command_queue", includesPointer = true)
-val cl_mem = PointerType("cl_mem", includesPointer = true)
-val cl_program = PointerType("cl_program", includesPointer = true)
-val cl_kernel = PointerType("cl_kernel", includesPointer = true)
-val cl_event = PointerType("cl_event", includesPointer = true)
-val cl_sampler = PointerType("cl_sampler", includesPointer = true)
+val cl_platform_id = "cl_platform_id".opaque_p
+val cl_device_id = "cl_device_id".opaque_p
+val cl_context = "cl_context".opaque_p
+val cl_command_queue = "cl_command_queue".opaque_p
+val cl_mem = "cl_mem".opaque_p
+val cl_program = "cl_program".opaque_p
+val cl_kernel = "cl_kernel".opaque_p
+val cl_event = "cl_event".opaque_p
+val cl_sampler = "cl_sampler".opaque_p
 
 val cl_platform_id_p = cl_platform_id.p
 val cl_device_id_p = cl_device_id.p
@@ -304,6 +304,6 @@ val cl_mem_migration_flags_ext = typedef(cl_bitfield, "cl_mem_migration_flags_ex
 
 // INTEL
 
-val cl_accelerator_intel = PointerType("cl_accelerator_intel", includesPointer = true)
+val cl_accelerator_intel = "cl_accelerator_intel".opaque_p
 val cl_accelerator_type_intel = typedef(cl_uint, "cl_accelerator_type_intel")
 val cl_accelerator_info_intel = typedef(cl_uint, "cl_accelerator_info_intel")

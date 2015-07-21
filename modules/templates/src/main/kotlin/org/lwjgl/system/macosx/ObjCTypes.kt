@@ -7,24 +7,24 @@ package org.lwjgl.system.macosx
 import org.lwjgl.generator.*
 
 // An opaque type that represents a method in a class definition.
-val Class = PointerType("Class", includesPointer = true)
+val Class = "Class".opaque_p
 val Class_p = Class.p
 // An opaque type that represents an instance variable.
-val Ivar = PointerType("Ivar", includesPointer = true)
+val Ivar = "Ivar".opaque_p
 val Ivar_p = Ivar.p
 // An opaque type that represents a method in a class definition.
-val Method = PointerType("Method", includesPointer = true)
+val Method = "Method".opaque_p
 val Method_p = Method.p
 // An opaque type that represents a method selector.
-val SEL = PointerType("SEL", includesPointer = true)
+val SEL = "SEL".opaque_p
 // A pointer to the function of a method implementation.
-val IMP = PointerType("IMP", includesPointer = true)
+val IMP = "IMP".opaque_p
 
-val Protocol_p = PointerType("Protocol")
+val Protocol_p = "Protocol".p
 val Protocol_pp = Protocol_p.p
 
 // An opaque type that represents an Objective-C declared property.
-val objc_property_t = PointerType("objc_property_t", includesPointer = true)
+val objc_property_t = "objc_property_t".opaque_p
 val objc_property_t_p = objc_property_t.p
 
 // Defines a property attribute

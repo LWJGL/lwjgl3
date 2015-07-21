@@ -7,10 +7,10 @@ package org.lwjgl.opengl
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val HPBUFFERARB = PointerType(name = "HPBUFFERARB", includesPointer = true)
+val HPBUFFERARB = "HPBUFFERARB".opaque_p
 
 // WGL_NV_gpu_affinity
-val HGPUNV = PointerType(name = "HGPUNV", includesPointer = true)
+val HGPUNV = "HGPUNV".opaque_p
 val HGPUNV_p = HGPUNV.p
 val PGPU_DEVICE = StructType(
 	name = "PGPU_DEVICE",

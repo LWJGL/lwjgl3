@@ -13,9 +13,9 @@ val unsigned = IntegerType("unsigned", PrimitiveMapping.INT, unsigned = true)
 val ffi_abi = typedef(int, "ffi_abi")
 val ffi_status = typedef(int, "ffi_abi")
 
-val FFI_FN_TYPE = PointerType("FFI_FN_TYPE", includesPointer = true)
+val FFI_FN_TYPE = "FFI_FN_TYPE".opaque_p
 
-val ffi_type_p = PointerType("ffi_type")
+val ffi_type_p = "ffi_type".p
 val ffi_type_pp = ffi_type_p.p
 val ffi_type = struct(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 	documentation = "Contains information about a libffi type."
@@ -50,4 +50,4 @@ val ffi_closure = struct(FFI_PACKAGE, "FFIClosure", structName = "ffi_closure", 
 	voidptr.member("user_data")
 }.nativeType
 val ffi_closure_p = StructType(ffi_closure)
-val FFI_CLOSURE_FUN = PointerType(name = "FFI_CLOSURE_FUN", includesPointer = true)
+val FFI_CLOSURE_FUN = "FFI_CLOSURE_FUN".opaque_p

@@ -31,7 +31,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		"ACCESS_WRITE_DISCARD_NV" _ 0x0002
 	).javaDocLinks
 
-	val void_p = PointerType("void")
+	val void_p = "void".p
 
 	BOOL(
 		"DXSetResourceShareHandleNV",

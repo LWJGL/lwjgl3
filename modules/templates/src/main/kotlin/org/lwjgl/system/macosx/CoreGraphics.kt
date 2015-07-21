@@ -4,6 +4,6 @@
  */
 package org.lwjgl.system.macosx
 
-import org.lwjgl.generator.PointerType
+import org.lwjgl.generator.*
 
-val CGDirectDisplayID = PointerType("CGDirectDisplayID", includesPointer = true)
+val CGDirectDisplayID = "CGDirectDisplayID".opaque_p

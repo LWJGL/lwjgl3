@@ -8,10 +8,10 @@ import org.lwjgl.generator.*
 
 val GLFW_PACKAGE = "org.lwjgl.glfw"
 
-val GLFWmonitor = PointerType("GLFWmonitor")
+val GLFWmonitor = "GLFWmonitor".p
 val GLFWmonitor_p = GLFWmonitor.p
 
-val GLFWwindow = PointerType("GLFWwindow")
+val GLFWwindow = "GLFWwindow".p
 
 val GLFWvidmode = struct(GLFW_PACKAGE, "GLFWvidmode") {
 	documentation = "Video mode."
@@ -35,7 +35,7 @@ val GLFWgammaramp = struct(GLFW_PACKAGE, "GLFWgammaramp") {
 }.nativeType
 val GLFWgammaramp_p = StructType(GLFWgammaramp)
 
-val GLFWcursor = PointerType("GLFWcursor")
+val GLFWcursor = "GLFWcursor".p
 
 val GLFWimage = struct(GLFW_PACKAGE, "GLFWimage") {
 	documentation = "Image data."
@@ -237,4 +237,4 @@ val GLFWdropfun = CallbackType(callback(
 
 // OpenGL
 
-val GLFWglproc = PointerType("GLFWglproc")
+val GLFWglproc = "GLFWglproc".p

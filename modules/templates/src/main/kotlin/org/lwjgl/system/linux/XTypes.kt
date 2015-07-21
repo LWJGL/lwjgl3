@@ -36,10 +36,10 @@ val Bool_p = Bool.p
 val Atom_p = Atom.p
 val KeySym_p = KeySym.p
 
-val Display_p = PointerType("Display") // Display is a struct, but should be treated as an opaque type by apps
+val Display_p = "Display".p // Display is a struct, but should be treated as an opaque type by apps
 val DISPLAY = Display_p.IN("display", "the connection to the X server") // This is here so that GLX extensions can use it
 
-val Screen_p = PointerType("Screen") // Screen is a struct, but should be treated as an opaque type by apps
+val Screen_p = "Screen".p // Screen is a struct, but should be treated as an opaque type by apps
 val Window_p = Window.p
 
 val XComposeStatus = struct(LINUX_PACKAGE, "XComposeStatus") {
@@ -536,7 +536,7 @@ val XGCValues = struct(LINUX_PACKAGE, "XGCValues") {
 }.nativeType
 val XGCValues_p = StructType(XGCValues)
 
-val GC = PointerType("GC", includesPointer = true) // GC is a struct, but should be treated as an opaque type by apps
+val GC = "GC".opaque_p // GC is a struct, but should be treated as an opaque type by apps
 
 val XColor = struct(LINUX_PACKAGE, "XColor") {
 	documentation = "Data structure used by color operations."

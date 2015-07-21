@@ -53,4 +53,4 @@ val timezone = struct(LINUX_PACKAGE, "timezone", identifierType = StructIdentifi
 }.nativeType
 val timezone_p = StructType(timezone)
 
-val fd_set_p = PointerType("fd_set") // fd_set for select and pselect. A struct, but we use macros to access.
+val fd_set_p = "fd_set".p // fd_set for select and pselect. A struct, but we use macros to access.

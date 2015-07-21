@@ -182,7 +182,7 @@ val stbtt_vertex_pp = stbtt_vertex_p.p
 
 // stb_vorbis.c
 
-val stb_vorbis_p = PointerType("stb_vorbis")
+val stb_vorbis_p = "stb_vorbis".p
 
 val float_ppp = float_pp.p
 

@@ -7,21 +7,21 @@ package org.lwjgl.opengl
 import org.lwjgl.generator.*
 import org.lwjgl.system.linux.*
 
-val GLXContext = PointerType("GLXContext", includesPointer = true)
+val GLXContext = "GLXContext".opaque_p
 
-val GLXFBConfig = PointerType("GLXFBConfig", includesPointer = true)
+val GLXFBConfig = "GLXFBConfig".opaque_p
 val GLXFBConfig_p = GLXFBConfig.p
 
-val GLXFBConfigSGIX = PointerType("GLXFBConfigSGIX", includesPointer = true)
+val GLXFBConfigSGIX = "GLXFBConfigSGIX".opaque_p
 val GLXFBConfigSGIX_p = GLXFBConfigSGIX.p
 
-val GLXWindow = PointerType("GLXWindow", includesPointer = true)
-val GLXDrawable = PointerType("GLXDrawable", includesPointer = true)
-val GLXPixmap = PointerType("GLXPixmap", includesPointer = true)
+val GLXWindow = "GLXWindow".opaque_p
+val GLXDrawable = "GLXDrawable".opaque_p
+val GLXPixmap = "GLXPixmap".opaque_p
 
 val GLXContextID = typedef(XID, "GLXContextID")
 
-val GLXPbuffer = PointerType("GLXPbuffer", includesPointer = true)
+val GLXPbuffer = "GLXPbuffer".opaque_p
 
 fun config() {
 	struct(OPENGL_PACKAGE, "GLXStereoNotifyEventEXT", "glx") {

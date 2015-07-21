@@ -102,7 +102,7 @@ val GLcharARB_pp = GLcharARB_p.p
 val GLhandleARB = IntegerType("GLhandleARB", PrimitiveMapping.INT, unsigned = true)
 val GLhandleARB_p = GLhandleARB.p
 // ARB_sync
-val GLsync = PointerType(name = "GLsync", includesPointer = true)
+val GLsync = "GLsync".opaque_p
 // KHR_debug
 val GLDEBUGPROC = CallbackType(callback(
 	OPENGL_PACKAGE, void, "GLDebugMessageCallback",

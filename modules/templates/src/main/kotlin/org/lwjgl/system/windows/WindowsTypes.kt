@@ -11,9 +11,9 @@ val WINDOWS_PACKAGE = "org.lwjgl.system.windows"
 // UNICODE is defined WindowsLWJGL.h, so all T* types below are UTF16.
 
 val VOID = NativeType("VOID", TypeMapping.VOID)
-val PVOID = PointerType("PVOID", includesPointer = true) // A pointer to any type
+val PVOID = "PVOID".opaque_p // A pointer to any type
 
-val HANDLE = PointerType("HANDLE", includesPointer = true)
+val HANDLE = "HANDLE".opaque_p
 val HANDLE_p = HANDLE.p
 
 val BOOL = PrimitiveType("BOOL", PrimitiveMapping.INT) // Not boolean because of WinUser#GetMessage
@@ -54,17 +54,17 @@ val LPCTSTR = CharSequenceType(
 )
 
 val LPCSTR = CharSequenceType("LPCSTR", includesPointer = true)
-val HMODULE = PointerType("HMODULE", includesPointer = true)
-val FARPROC = PointerType("FARPROC", includesPointer = true)
-val HWND = PointerType("HWND", includesPointer = true)
-val HMENU = PointerType("HMENU", includesPointer = true)
-val HINSTANCE = PointerType("HINSTANCE", includesPointer = true)
-val LPVOID = PointerType("LPVOID", includesPointer = true)
-val HDC = PointerType("HDC", includesPointer = true)
-val HGLRC = PointerType("HGLRC", includesPointer = true)
-val HGDIOBJ = PointerType("HGDIOBJ", includesPointer = true)
-val PROC = PointerType("PROC", includesPointer = true)
-val HGLOBAL = PointerType("HGLOBAL", includesPointer = true)
+val HMODULE = "HMODULE".opaque_p
+val FARPROC = "FARPROC".opaque_p
+val HWND = "HWND".opaque_p
+val HMENU = "HMENU".opaque_p
+val HINSTANCE = "HINSTANCE".opaque_p
+val LPVOID = "LPVOID".opaque_p
+val HDC = "HDC".opaque_p
+val HGLRC = "HGLRC".opaque_p
+val HGDIOBJ = "HGDIOBJ".opaque_p
+val PROC = "PROC".opaque_p
+val HGLOBAL = "HGLOBAL".opaque_p
 
 val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 	nativeImport ("WindowsLWJGL.h")
@@ -133,9 +133,9 @@ val WNDPROC = CallbackType(callback(
 	CALL_CONVENTION_SYSTEM
 }, "WNDPROC")
 
-val HICON = PointerType("HICON", includesPointer = true)
-val HCURSOR = PointerType("HCURSOR", includesPointer = true)
-val HBRUSH = PointerType("HBRUSH", includesPointer = true)
+val HICON = "HICON".opaque_p
+val HCURSOR = "HCURSOR".opaque_p
+val HBRUSH = "HBRUSH".opaque_p
 
 val ATOM = PrimitiveType("ATOM", PrimitiveMapping.SHORT)
 

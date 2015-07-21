@@ -6,13 +6,13 @@ package org.lwjgl.system.macosx
 
 import org.lwjgl.generator.*
 
-val CFTypeRef = PointerType("CFTypeRef", includesPointer = true)
-val CFAllocatorRef = PointerType("CFAllocatorRef", includesPointer = true)
+val CFTypeRef = "CFTypeRef".opaque_p
+val CFAllocatorRef = "CFAllocatorRef".opaque_p
 
 val CFStringEncoding = typedef(UInt32, "CFStringEncoding")
-val CFStringRef = PointerType("CFStringRef", includesPointer = true)
+val CFStringRef = "CFStringRef".opaque_p
 
-val CFBundleRef = PointerType("CFBundleRef", includesPointer = true)
+val CFBundleRef = "CFBundleRef".opaque_p
 
 val CFURLPathStyle = typedef(CFIndex, "CFURLPathStyle")
-val CFURLRef = PointerType("CFURLRef", includesPointer = true)
+val CFURLRef = "CFURLRef".opaque_p

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 
 val MACOSX_PACKAGE = "org.lwjgl.system.macosx"
 
-val id = PointerType("id", includesPointer = true) // Opaque object pointer
+val id = "id".opaque_p // Opaque object pointer
 val id_p = id.p
 
 val Boolean = IntegerType("Boolean", PrimitiveMapping.BYTE, unsigned = true)
@@ -37,4 +37,4 @@ val CFOptionFlags = IntegerType("CFOptionFlags", PrimitiveMapping.LONG, unsigned
 val CFHashCode = IntegerType("CFHashCode", PrimitiveMapping.LONG, unsigned = true)
 val CFIndex = IntegerType("CFIndex", PrimitiveMapping.LONG)
 
-val pid_t = PointerType("pid_t")
+val pid_t = "pid_t".p

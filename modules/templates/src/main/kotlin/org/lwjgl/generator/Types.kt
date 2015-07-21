@@ -72,6 +72,9 @@ private fun PointerType.pointerTo(const: Boolean): String {
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(false), PointerMapping.DATA_POINTER, elementType = this)
 val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(true), PointerMapping.DATA_POINTER, elementType = this)
 
+val String.p: PointerType get() = PointerType(this, includesPointer = false)
+val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
+
 // Objects (pointer wrappers)
 open class ObjectType(
 	/** The Java wrapper class. */

@@ -6,17 +6,17 @@ package org.lwjgl.system.macosx
 
 import org.lwjgl.generator.*
 
-val CGLPixelFormatObj = PointerType("CGLPixelFormatObj", includesPointer = true)
-val CGLRendererInfoObj = PointerType("CGLRendererInfoObj", includesPointer = true)
-val CGLContextObj = PointerType("CGLContextObj", includesPointer = true)
-val CGLPBufferObj = PointerType("CGLPBufferObj", includesPointer = true)
+val CGLPixelFormatObj = "CGLPixelFormatObj".opaque_p
+val CGLRendererInfoObj = "CGLRendererInfoObj".opaque_p
+val CGLContextObj = "CGLContextObj".opaque_p
+val CGLPBufferObj = "CGLPBufferObj".opaque_p
 
 val CGLPixelFormatObj_p = CGLPixelFormatObj.p
 val CGLRendererInfoObj_p = CGLRendererInfoObj.p
 val CGLContextObj_p = CGLContextObj.p
 val CGLPBufferObj_p = CGLPBufferObj.p
 
-val CGLShareGroupObj = PointerType("CGLShareGroupObj", includesPointer = true)
+val CGLShareGroupObj = "CGLShareGroupObj".opaque_p
 
 val CGLError = EnumType("CGLError")
 val CGLPixelFormatAttribute = EnumType("CGLPixelFormatAttribute")
