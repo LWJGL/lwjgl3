@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val khr_gl_depth_images = dependsOn(Module.OPENGL) {
+val khr_gl_depth_images = dependsOn(Binding.OPENGL) {
 	"KHRGLDepthImages".nativeClassCL("khr_gl_depth_images", KHR) {
 		documentation = "Native bindings to the $extensionName extension."
 

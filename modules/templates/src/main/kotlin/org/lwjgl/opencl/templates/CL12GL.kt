@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-val CL12GL = dependsOn(Module.OPENGL) {
+val CL12GL = dependsOn(Binding.OPENGL) {
 	"CL12GL".nativeClassCL("CL12GL") {
 		javaImport (
 			"org.lwjgl.opengl.GL11",

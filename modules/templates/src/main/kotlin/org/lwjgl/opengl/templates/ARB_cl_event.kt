@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.opencl.*
 
-val ARB_cl_event = dependsOn(Module.OPENCL) {
+val ARB_cl_event = dependsOn(Binding.OPENCL) {
 	"ARBCLEvent".nativeClassGL("ARB_cl_event", postfix = ARB) {
 		javaImport(
 			"org.lwjgl.opencl.*"

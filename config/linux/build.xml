@@ -28,7 +28,7 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
 		<include name="libffi.a"/>
-		<include name="libglfw3.a" if:true="${build.glfw}"/>
+		<include name="libglfw3.a" if:true="${binding.glfw}"/>
 	</fileset>
 
 	<target name="compile-native-platform">
@@ -46,12 +46,12 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.include.rel}/system"/>
 			<arg value="-I${src.include.rel}/system/linux"/>
 			<arg value="-I${src.include.rel}/system/libffi"/>
-			<arg value="-isystem${src.include.rel}/stb" if:true="${build.stb}"/>
-			<arg value="-I${src.include.rel}/glfw" if:true="${build.glfw}"/>
-			<arg value="-I${src.include.rel}/openal" if:true="${build.openal}"/>
-			<arg value="-I${src.include.rel}/opencl" if:true="${build.opencl}"/>
-			<arg value="-I${src.include.rel}/opengl" if:true="${build.opengl}"/>
-			<arg value="-I${src.include.rel}/opengl/glx" if:true="${build.opengl}"/>
+			<arg value="-isystem${src.include.rel}/stb" if:true="${binding.stb}"/>
+			<arg value="-I${src.include.rel}/glfw" if:true="${binding.glfw}"/>
+			<arg value="-I${src.include.rel}/openal" if:true="${binding.openal}"/>
+			<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
+			<arg value="-I${src.include.rel}/opengl" if:true="${binding.opengl}"/>
+			<arg value="-I${src.include.rel}/opengl/glx" if:true="${binding.opengl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -59,13 +59,13 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${src.generated.native}/system" includes="*.c"/>
 			<fileset dir="${src.generated.native}/system/linux" includes="*.c"/>
 			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
-			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${src.generated.native}/glfw/linux" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
-			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
-			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${src.generated.native}/opengl/glx" includes="*.c" if:true="${build.opengl}"/>
+			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${binding.stb}"/>
+			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${binding.glfw}"/>
+			<fileset dir="${src.generated.native}/glfw/linux" includes="*.c" if:true="${binding.glfw}"/>
+			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${binding.openal}"/>
+			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${binding.opencl}"/>
+			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${binding.opengl}"/>
+			<fileset dir="${src.generated.native}/opengl/glx" includes="*.c" if:true="${binding.opengl}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>
@@ -88,8 +88,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${build.openal}"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${build.glfw}"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
 	</target>
 
@@ -97,8 +97,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}/libopenal.so" if:true="${build.openal}"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${build.glfw}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}/libopenal.so" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
 	</target>
 

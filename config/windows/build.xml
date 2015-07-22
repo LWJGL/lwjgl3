@@ -14,13 +14,13 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.obj"/>
 	<fileset id="link-libraries" dir="${lib}/windows/${build.arch}/">
 		<include name="libffi.lib"/>
-		<include name="glfw3.lib" if:true="${build.glfw}"/>
+		<include name="glfw3.lib" if:true="${binding.glfw}"/>
 	</fileset>
 
-	<condition property="build.ovr.arch" value="x64" else="Win32" if:true="${build.ovr}">
+	<condition property="build.ovr.arch" value="x64" else="Win32" if:true="${binding.ovr}">
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
-	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/lib/Windows/${build.ovr.arch}/Release/VS2013" includes="*.lib" if:true="${build.ovr}"/>
+	<fileset id="link-ovr" dir="${OCULUS_SDK_PATH}/LibOVR/lib/Windows/${build.ovr.arch}/Release/VS2013" includes="*.lib" if:true="${binding.ovr}"/>
 
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
@@ -36,13 +36,13 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/I${src.include}\system"/>
 			<arg value="/I${src.include}\system\windows"/>
 			<arg value="/I${src.include}\system\libffi"/>
-			<arg value="/I${src.include}\stb" if:true="${build.stb}"/>
-			<arg value="/I${src.include}\glfw" if:true="${build.glfw}"/>
-			<arg value="/I${src.include}\openal" if:true="${build.openal}"/>
-			<arg value="/I${src.include}\opencl" if:true="${build.opencl}"/>
-			<arg value="/I${src.include}\opengl" if:true="${build.opengl}"/>
-			<arg value="/I${src.include}\opengl\wgl" if:true="${build.opengl}"/>
-			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include" if:true="${build.ovr}"/>
+			<arg value="/I${src.include}\stb" if:true="${binding.stb}"/>
+			<arg value="/I${src.include}\glfw" if:true="${binding.glfw}"/>
+			<arg value="/I${src.include}\openal" if:true="${binding.openal}"/>
+			<arg value="/I${src.include}\opencl" if:true="${binding.opencl}"/>
+			<arg value="/I${src.include}\opengl" if:true="${binding.opengl}"/>
+			<arg value="/I${src.include}\opengl\wgl" if:true="${binding.opengl}"/>
+			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include" if:true="${binding.ovr}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -50,20 +50,20 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${src.generated.native}/system" includes="*.c"/>
 			<fileset dir="${src.generated.native}/system/windows" includes="*.c"/>
 			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${build.stb}"/>
-			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${src.generated.native}/glfw/windows" includes="*.c" if:true="${build.glfw}"/>
-			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${build.openal}"/>
-			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${build.opencl}"/>
-			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${src.generated.native}/opengl/wgl" includes="*.c" if:true="${build.opengl}"/>
-			<fileset dir="${src.generated.native}/ovr" includes="*.c" if:true="${build.ovr}"/>
+			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${binding.stb}"/>
+			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${binding.glfw}"/>
+			<fileset dir="${src.generated.native}/glfw/windows" includes="*.c" if:true="${binding.glfw}"/>
+			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${binding.openal}"/>
+			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${binding.opencl}"/>
+			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${binding.opengl}"/>
+			<fileset dir="${src.generated.native}/opengl/wgl" includes="*.c" if:true="${binding.opengl}"/>
+			<fileset dir="${src.generated.native}/ovr" includes="*.c" if:true="${binding.ovr}"/>
 
 			<mapper type="glob" from="*.c" to="*.obj"/>
 		</apply>
 
 		<!-- Compile the LibOVR CAPI shim -->
-		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${build.ovr}">
+		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${binding.ovr}">
 			<arg line="/c /W4 /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
 			<arg value="/Fo${bin.native}\"/>
 
@@ -91,8 +91,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}/OpenAL32.dll" if:true="${build.openal}"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${build.glfw}"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}/OpenAL32.dll" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
 	</target>
 
@@ -100,8 +100,8 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${build.openal}"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${build.glfw}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
 	</target>
 
@@ -114,7 +114,7 @@ License terms: http://lwjgl.org/license.php
 			<arg line='/LD /WX /nologo /Fe:"${lib}\${LWJGL_LIBRARY}"'/>
 			<srcfile/>
 			<arg line="/link /OPT:REF,ICF /DLL ${libs}"/>
-			<arg value="OpenGL32.lib" if:true="${build.opengl}"/>
+			<arg value="OpenGL32.lib" if:true="${binding.opengl}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

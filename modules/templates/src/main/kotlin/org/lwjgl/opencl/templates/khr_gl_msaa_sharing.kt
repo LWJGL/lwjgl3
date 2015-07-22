@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val khr_gl_msaa_sharing = dependsOn(Module.OPENGL) {
+val khr_gl_msaa_sharing = dependsOn(Binding.OPENGL) {
 	"KHRGLMSAASharing".nativeClassCL("khr_gl_msaa_sharing", KHR) {
 		documentation = "Native bindings to the $extensionName extension."
 

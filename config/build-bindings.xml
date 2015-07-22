@@ -10,55 +10,55 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ========== MODULE FLAGS ======== // -->
 
-	<property name="build.stb" value="true"/>
+	<property name="binding.stb" value="true"/>
 
-	<property name="build.glfw" value="true"/>
+	<property name="binding.glfw" value="true"/>
 
-	<property name="build.openal" value="true"/>
-	<property name="build.opencl" value="true"/>
-	<property name="build.opengl" value="true"/>
+	<property name="binding.openal" value="true"/>
+	<property name="binding.opencl" value="true"/>
+	<property name="binding.opengl" value="true"/>
 
-	<property name="build.mantle" value="false"/>
+	<property name="binding.mantle" value="false"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
 
-	<property name="build.macosx.objc" value="true"/>
+	<property name="binding.macosx.objc" value="true"/>
 
 	<!-- // ================================ // -->
 
-	<condition property="build.glfw_stb" value="true" else="false">
+	<condition property="binding.glfw_stb" value="true" else="false">
 		<and>
-			<istrue value="${build.glfw}"/>
-			<istrue value="${build.stb}"/>
+			<istrue value="${binding.glfw}"/>
+			<istrue value="${binding.stb}"/>
 		</and>
 	</condition>
 
-	<condition property="build.glfw_opencl" value="true" else="false">
+	<condition property="binding.glfw_opencl" value="true" else="false">
 		<and>
-			<istrue value="${build.glfw}"/>
-			<istrue value="${build.opencl}"/>
+			<istrue value="${binding.glfw}"/>
+			<istrue value="${binding.opencl}"/>
 		</and>
 	</condition>
 
-	<condition property="build.opencl_nogl" value="true" else="false">
+	<condition property="binding.opencl_nogl" value="true" else="false">
 		<and>
-			<istrue value="${build.opencl}"/>
-			<isfalse value="${build.opengl}"/>
+			<istrue value="${binding.opencl}"/>
+			<isfalse value="${binding.opengl}"/>
 		</and>
 	</condition>
 
-	<condition property="build.opengl_nocl" value="true" else="false">
+	<condition property="binding.opengl_nocl" value="true" else="false">
 		<and>
-			<istrue value="${build.opengl}"/>
-			<isfalse value="${build.opencl}"/>
+			<istrue value="${binding.opengl}"/>
+			<isfalse value="${binding.opencl}"/>
 		</and>
 	</condition>
 
 	<!-- // ================================ // -->
 
 	<target name="bindings">
-		<condition property="build.ovr" value="true" else="false">
+		<condition property="binding.ovr" value="true" else="false">
 			<and>
 				<isset property="OCULUS_SDK_PATH"/>
 				<available file="${OCULUS_SDK_PATH}/LibOVR/Include/OVR_CAPI.h"/>
@@ -69,10 +69,10 @@ This script is included in /config/build-definitions.xml.
 		<condition property="glfw_opengl_check" value="1">
 			<and>
 				<or>
-					<istrue value="${build.glfw}"/>
-					<istrue value="${build.ovr}"/>
+					<istrue value="${binding.glfw}"/>
+					<istrue value="${binding.ovr}"/>
 				</or>
-				<isfalse value="${build.opengl}"/>
+				<isfalse value="${binding.opengl}"/>
 			</and>
 		</condition>
 		<fail if="glfw_opengl_check" message="The OpenGL bindings are required"/>
@@ -81,26 +81,17 @@ This script is included in /config/build-definitions.xml.
 		<script language="javascript">
 			var jvmargs = [];
 
-			function push(property) {
-				if ( LWJGL.getProperty(property) == "true" )
-					jvmargs.push("-D" + property + "=true");
+			var props = LWJGL.getProperties().entrySet().iterator();
+			while ( props.hasNext() ) {
+				var prop = props.next();
+				var name = prop.getKey();
+				if ( name.startsWith("binding.") &amp;&amp; name.indexOf('_') === -1 &amp;&amp; prop.getValue() == "true" )
+					jvmargs.push("-D" + name + "=true");
 			}
-
-			push("build.stb");
-
-			push("build.glfw");
-			push("build.openal");
-			push("build.opencl");
-			push("build.opengl");
-
-			push("build.mantle");
-			push("build.ovr");
-
-			push("build.macosx.objc");
 
 			LWJGL.setProperty("bindings.list", jvmargs.join(" "));
 		</script>
-		<property name="build.bindings" value="${bindings.list}"/>
+		<property name="bindings" value="${bindings.list}"/>
 	</target>
 
 </project>

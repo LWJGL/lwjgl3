@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 import org.lwjgl.opengl.*
 
-val khr_gl_event = dependsOn(Module.OPENGL) {
+val khr_gl_event = dependsOn(Binding.OPENGL) {
 	"KHRGLEvent".nativeClassCL("khr_gl_event", KHR) {
 		nativeImport (
 			"OpenCL.h",

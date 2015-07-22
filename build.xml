@@ -132,25 +132,21 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/system/libffi/**"/>
 			<include name="org/lwjgl/system/linux/**"/>
 			<include name="org/lwjgl/system/macosx/**"/>
-			<exclude name="org/lwjgl/system/macosx/ObjC*.java" unless:true="${build.macosx.objc}"/>
+			<exclude name="org/lwjgl/system/macosx/ObjC*.java" unless:true="${binding.macosx.objc}"/>
 			<include name="org/lwjgl/system/windows/**"/>
 		</patternset>
 
 		<patternset id="src.util.files">
-			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 		</patternset>
 
 		<patternset id="generated.java.files">
-			<include name="org/lwjgl/stb/**" if:true="${build.stb}"/>
-
-			<include name="org/lwjgl/glfw/**" if:true="${build.glfw}"/>
-
-			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
-			<include name="org/lwjgl/opengl/**" if:true="${build.opengl}"/>
-
-			<include name="org/lwjgl/mantle/**" if:true="${build.mantle}"/>
-			<include name="org/lwjgl/ovr/**" if:true="${build.ovr}"/>
+			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
+			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
+			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
 		</patternset>
 	</target>
 
@@ -189,14 +185,14 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/generator"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system"/>
 
-			<arg value="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${build.glfw}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/openal" if:true="${build.openal}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${build.opencl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" if:true="${build.opengl_nocl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" if:true="${build.opencl_nogl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${build.opengl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${build.ovr}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${build.stb}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" if:true="${binding.opengl_nocl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" if:true="${binding.opencl_nogl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<!--
 			<arg value="-Xno-call-assertions"/>
 			<arg value="-Xno-param-assertions"/>
@@ -246,7 +242,7 @@ License terms: http://lwjgl.org/license.php
 			</classpath>
 
 			<jvmarg value="-server"/>
-			<jvmarg line="${build.bindings}"/>
+			<jvmarg line="${bindings}"/>
 
 			<arg value="${src.templates}/kotlin"/>
 			<arg value="${src.generated}"/>
@@ -290,16 +286,16 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/util/**"/>
 			<include name="org/lwjgl/demo/windows/**"/>
 
-			<include name="org/lwjgl/openal/**" if:true="${build.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${build.opencl}"/>
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 
-			<include name="org/lwjgl/demo/glfw/**" if:true="${build.glfw}"/>
-			<include name="org/lwjgl/demo/openal/**" if:true="${build.openal}"/>
-			<include name="org/lwjgl/demo/opencl/**" if:true="${build.glfw_opencl}"/>
-			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${build.opencl}"/>
-			<include name="org/lwjgl/demo/opengl/**" if:true="${build.glfw}"/>
-			<include name="org/lwjgl/demo/ovr/**" if:true="${build.ovr}"/>
-			<include name="org/lwjgl/demo/stb/**" if:true="${build.glfw_stb}"/>
+			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
+			<include name="org/lwjgl/demo/opencl/**" if:true="${binding.glfw_opencl}"/>
+			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${binding.opencl}"/>
+			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
+			<include name="org/lwjgl/demo/stb/**" if:true="${binding.glfw_stb}"/>
 		</lwjgl.javac>
 	</target>
 

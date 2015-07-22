@@ -26,7 +26,7 @@ fun info() {
 				"static org.lwjgl.opencl.CL12.*",
 				"static org.lwjgl.opencl.CL20.*"
 			)
-			if ( Module.OPENGL.enabled )
+			if ( Binding.OPENGL.enabled )
 				javaImport("static org.lwjgl.opencl.CL10GL.*")
 
 			documentation =
@@ -111,7 +111,7 @@ fun info() {
 				ObjectType("CL10", "Event", EnumSet.of(INT, POINTER)),
 				ObjectType("CL10", "Event Profiling", EnumSet.of(LONG), "EventProfiling", "event")
 			)
-			if ( Module.OPENGL.enabled )
+			if ( Binding.OPENGL.enabled )
 				objects add ObjectType("CL10GL", "GL Texture", EnumSet.of(INT), "GLTexture", "memobj")
 
 			for ( obj in objects ) {

@@ -30,24 +30,24 @@ import java.util.HashMap
 	- Target source (C)     -> modules/core/src/generated/c/opengl/org_lwjgl_opengl_ARBImaging.c
 */
 
-enum class Module(val key: String) {
-	STB("build.stb"),
+enum class Binding(val key: String) {
+	STB("binding.stb"),
 
-	GLFW("build.glfw"),
-	OPENAL("build.openal"),
-	OPENCL("build.opencl"),
-	OPENGL("build.opengl"),
+	GLFW("binding.glfw"),
+	OPENAL("binding.openal"),
+	OPENCL("binding.opencl"),
+	OPENGL("binding.opengl"),
 
-	MANTLE("build.mantle"),
-	OVR("build.ovr"),
+	MANTLE("binding.mantle"),
+	OVR("binding.ovr"),
 
-	MACOSX_OBJC("build.macosx.objc");
+	MACOSX_OBJC("binding.macosx.objc");
 
 	val enabled: Boolean
 		get() = System.getProperty(key, "false").toBoolean()
 }
 
-fun dependsOn(module: Module, init: () -> NativeClass): NativeClass? = if ( module.enabled ) init() else null
+fun dependsOn(binding: Binding, init: () -> NativeClass): NativeClass? = if ( binding.enabled ) init() else null
 
 fun main(args: Array<String>) {
 	if ( args.size() < 2 )
@@ -74,14 +74,14 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
-		generate("org.lwjgl.stb", Module.STB)
+		generate("org.lwjgl.stb", Binding.STB)
 
-		generate("org.lwjgl.glfw", Module.GLFW)
-		generate("org.lwjgl.openal", Module.OPENAL)
-		generate("org.lwjgl.opencl", Module.OPENCL)
-		generate("org.lwjgl.opengl", Module.OPENGL)
-		generate("org.lwjgl.ovr", Module.OVR)
-		generate("org.lwjgl.mantle", Module.MANTLE)
+		generate("org.lwjgl.glfw", Binding.GLFW)
+		generate("org.lwjgl.openal", Binding.OPENAL)
+		generate("org.lwjgl.opencl", Binding.OPENCL)
+		generate("org.lwjgl.opengl", Binding.OPENGL)
+		generate("org.lwjgl.ovr", Binding.OVR)
+		generate("org.lwjgl.mantle", Binding.MANTLE)
 
 		generate("org.lwjgl.system.libffi")
 		generate("org.lwjgl.system.linux")
@@ -176,11 +176,11 @@ class Generator(
 			}
 	}
 
-	fun generate(packageName: String, module: Module? = null) {
+	fun generate(packageName: String, binding: Binding? = null) {
 		val packageLastModified = getDirectoryLastModified("$srcPath/${packageName.replace('.', '/')}", false)
 		packageLastModifiedMap[packageName] = packageLastModified
 
-		if ( module?.enabled == false )
+		if ( binding?.enabled == false )
 			return
 
 		// Find and run configuration methods

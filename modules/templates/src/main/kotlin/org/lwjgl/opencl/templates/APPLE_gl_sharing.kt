@@ -7,7 +7,7 @@ package org.lwjgl.opencl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
-val apple_gl_sharing = dependsOn(Module.OPENGL) {
+val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 	"APPLEGLSharing".nativeClassCL("APPLE_gl_sharing", APPLE) {
 		nativeImport (
 			"OpenCL.h"

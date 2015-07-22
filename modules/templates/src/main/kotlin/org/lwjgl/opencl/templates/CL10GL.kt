@@ -11,7 +11,7 @@ import org.lwjgl.opengl.*
 val INVALID_GL_OBJECT = "CL10GL#INVALID_GL_OBJECT"
 val INVALID_MIP_LEVEL = "CL10GL#INVALID_MIP_LEVEL"
 
-val CL10GL = dependsOn(Module.OPENGL) {
+val CL10GL = dependsOn(Binding.OPENGL) {
 	"CL10GL".nativeClassCL("CL10GL") {
 		javaImport (
 			"org.lwjgl.opengl.GL11",
