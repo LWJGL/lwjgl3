@@ -27,6 +27,7 @@ val uint64_t = IntegerType("uint64_t", PrimitiveMapping.LONG, unsigned = true)
 
 val size_t = IntegerType("size_t", PrimitiveMapping.POINTER, unsigned = true)
 val ptrdiff_t = IntegerType("ptrdiff_t", PrimitiveMapping.POINTER)
+val intptr_t = IntegerType("intptr_t", PrimitiveMapping.POINTER)
 val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.POINTER, unsigned = true)
 
 val char_p = char.p

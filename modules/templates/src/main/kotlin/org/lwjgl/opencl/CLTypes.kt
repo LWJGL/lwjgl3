@@ -294,7 +294,6 @@ val cl_gl_texture_info = IntegerType("cl_gl_texture_info", PrimitiveMapping.INT)
 
 // APPLE
 
-val intptr_t = PrimitiveType("intptr_t", PrimitiveMapping.POINTER)
 val cl_queue_properties_APPLE = typedef(intptr_t, "cl_queue_properties_APPLE")
 val cl_queue_properties_APPLE_p = cl_queue_properties_APPLE.p
 
