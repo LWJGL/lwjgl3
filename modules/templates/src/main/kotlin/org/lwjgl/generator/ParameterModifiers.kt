@@ -176,8 +176,10 @@ val nullable = Nullable(false)
 /** Marks a pointer parameter as optional. Similar to nullable, but the parameter either doesn't exist or it exists and is not null. */
 val optional = Nullable(true)
 
-/** Marks a buffer parameter as null-terminated. */
-val nullTerminated = object: ParameterModifier() {
+/** Marks a buffer parameter as terminated by the specified value. */
+class Terminated(val value: String): ParameterModifier() {
+	companion object: ModifierKey<Terminated>
+
 	override val isSpecial = true
 	override protected fun validate(param: Parameter) {
 		if ( param.nativeType !is PointerType )
@@ -187,6 +189,8 @@ val nullTerminated = object: ParameterModifier() {
 			throw IllegalArgumentException("The NullTerminated modifier cannot be applied on opaque pointer types.")
 	}
 }
+/** Marks a buffer parameter as null-terminated. */
+val nullTerminated = Terminated("")
 
 /** Marks a parameter to be replaced with an expression. */
 class Expression(

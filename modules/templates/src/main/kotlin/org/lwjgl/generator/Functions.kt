@@ -320,19 +320,18 @@ class NativeClassFunction(
 					checks add "${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});"
 			}
 
-			if ( it.paramType === IN && it has nullTerminated ) {
-				if ( mode === NORMAL ) {
-					val ntBytes = when ( it.nativeType.mapping ) {
-						PointerMapping.DATA_SHORT  -> 2
-						PointerMapping.DATA_INT    -> 4
-						PointerMapping.DATA_LONG   -> 8
-						PointerMapping.DATA_FLOAT  -> 4
-						PointerMapping.DATA_DOUBLE -> 8
-						else                       -> 1
+			if ( it.paramType === IN && it has Terminated ) {
+				val postfix = if ( mode !== NORMAL ) "" else
+					when ( it.nativeType.mapping ) {
+						PointerMapping.DATA_SHORT   -> "2"
+						PointerMapping.DATA_INT,
+						PointerMapping.DATA_FLOAT   -> "4"
+						PointerMapping.DATA_LONG,
+						PointerMapping.DATA_DOUBLE  -> "8"
+						PointerMapping.DATA_POINTER -> "P"
+						else                        -> "1"
 					}
-					checks add "${prefix}checkNT$ntBytes(${it.name});"
-				} else
-					checks add "${prefix}checkNT(${it.name});"
+				checks add "${prefix}checkNT${postfix}(${it.name}${it[Terminated] let { if ( it === nullTerminated ) "" else ", ${it.value}" }});"
 			}
 
 			if ( it has Check ) {

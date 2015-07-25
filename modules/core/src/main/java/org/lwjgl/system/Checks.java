@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
+import static org.lwjgl.Pointer.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -108,10 +109,33 @@ public final class Checks {
 		return buf;
 	}
 
+	/** Ensures that the specified ByteBuffer is terminated with the specified terminator (last 4 bytes equal to {@code terminator}). */
+	public static ByteBuffer checkNT4(ByteBuffer buf, int terminator) {
+		checkBuffer(buf, 4);
+		if ( buf.getInt(buf.limit() - 4) != terminator )
+			throw new IllegalArgumentException("Missing termination");
+
+		return buf;
+	}
+
 	/** Ensures that the specified ByteBuffer is null-terminated (last 8 bytes equal to 0). */
 	public static ByteBuffer checkNT8(ByteBuffer buf) {
 		checkBuffer(buf, 8);
 		if ( buf.getLong(buf.limit() - 8) != 0 )
+			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified ByteBuffer is null-terminated (last 4 or 8 bytes equal to 0). */
+	public static ByteBuffer checkNTP(ByteBuffer buf) {
+		return checkNTP(buf, NULL);
+	}
+
+	/** Ensures that the specified ByteBuffer is terminated with the specified terminator (last 4 or 8 bytes equal to {@code terminator}). */
+	public static ByteBuffer checkNTP(ByteBuffer buf, long terminator) {
+		checkBuffer(buf, POINTER_SIZE);
+		if ( PointerBuffer.get(buf, buf.limit() - POINTER_SIZE) != terminator )
 			throw new IllegalArgumentException("Missing null termination");
 
 		return buf;
@@ -122,6 +146,15 @@ public final class Checks {
 		checkBuffer(buf, 1);
 		if ( buf.get(buf.limit() - 1) != 0 )
 			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified IntBuffer is terminated with the specified terminator. */
+	public static IntBuffer checkNT(IntBuffer buf, int terminator) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != terminator )
+			throw new IllegalArgumentException("Missing termination");
 
 		return buf;
 	}
@@ -140,6 +173,15 @@ public final class Checks {
 		checkBuffer(buf, 1);
 		if ( buf.get(buf.limit() - 1) != NULL )
 			throw new IllegalArgumentException("Missing null termination");
+
+		return buf;
+	}
+
+	/** Ensures that the specified PointerBuffer is terminated with the specified terminator. */
+	public static PointerBuffer checkNT(PointerBuffer buf, long terminator) {
+		checkBuffer(buf, 1);
+		if ( buf.get(buf.limit() - 1) != terminator )
+			throw new IllegalArgumentException("Missing termination");
 
 		return buf;
 	}
