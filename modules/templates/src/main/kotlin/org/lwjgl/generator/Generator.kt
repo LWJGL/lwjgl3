@@ -378,8 +378,14 @@ private fun <T> generateOutput(
 		println("\tWRITING: $file")
 		// Generate to file
 		val writer = PrintWriter(BufferedWriter(OutputStreamWriter(FileOutputStream(file), Charsets.UTF_8)))
-		target.generate(writer)
-		writer.close();
+		try {
+			target.generate(writer)
+		} catch(e: Exception) {
+			file.deleteOnExit()
+			throw e
+		} finally {
+			writer.close()
+		}
 	}
 }
 
