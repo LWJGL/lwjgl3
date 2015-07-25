@@ -123,13 +123,14 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 		println("\n\tContextCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {")
 		for ( extension in classes ) {
+			val capName = extension.capName
 			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
 			if ( extension.hasNativeFunctions ) {
-				print("\t\t${extension.capName} = (__${extension.className} = ${extension.className}.create(ext, provider")
+				print("\t\t$capName = (__${extension.className} = ${if ( capName == extension.className ) "$OPENGL_PACKAGE.${extension.className}" else extension.className}.create(ext, provider")
 				if ( extension.functions.hasDeprecated ) print(", fc")
 				println(")) != null;")
 			} else
-				println("\t\t${extension.capName} = ext.contains(\"${extension.capName}\");")
+				println("\t\t$capName = ext.contains(\"${extension.capName}\");")
 		}
 		println("\t}")
 		print("}")

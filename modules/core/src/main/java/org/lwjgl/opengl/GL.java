@@ -339,7 +339,7 @@ public final class GL {
 			int[] minors = GLX_VERSIONS[major - 1];
 			for ( int minor : minors ) {
 				if ( major < majorVersion || (major == majorVersion && minor <= minorVersion) )
-					supportedExtensions.add("GLX_" + Integer.toString(major) + Integer.toString(minor));
+					supportedExtensions.add("GLX" + Integer.toString(major) + Integer.toString(minor));
 			}
 		}
 
