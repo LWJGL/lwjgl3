@@ -13,8 +13,6 @@ class CallbackFunction(
 	vararg val signature: Parameter
 ): GeneratorTarget(packageName, className) {
 
-	val nativeType: CallbackType get() = CallbackType(this)
-
 	var functionDoc: String = ""
 
 	private var callConventionSystem: Boolean = false
@@ -149,7 +147,7 @@ ${signature.asSequence().withIndex().map {
 	}
 }
 
-fun callback(
+fun String.callback(
 	packageName: String,
 	returns: NativeType,
 	className: String,
@@ -159,11 +157,11 @@ fun callback(
 	since: String = "",
 	samConstructor: String? = null,
 	init: (CallbackFunction.() -> Unit)? = null
-): CallbackFunction {
+): CallbackType {
 	val callback = CallbackFunction(packageName, className, returns, *signature)
 	if ( init != null )
 		callback.init()
 	callback.functionDoc = callback.toJavaDoc(functionDoc, signature.asSequence(), returns, returnDoc, since)
 	Generator.register(callback, samConstructor)
-	return callback
+	return CallbackType(callback, this)
 }

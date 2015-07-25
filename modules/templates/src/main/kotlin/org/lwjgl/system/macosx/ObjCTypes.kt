@@ -46,13 +46,13 @@ val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", st
 }.nativeType
 val objc_method_description_p = objc_method_description.p
 
-val EnumerationMutationHandler = CallbackType(callback(
+val EnumerationMutationHandler = "EnumerationMutationHandler".callback(
 	MACOSX_PACKAGE, void, "EnumerationMutationHandler",
 	"Will be called when an object is mutated during a foreach iteration.",
 	id.IN("id", "the object that was mutated"),
 	samConstructor = "ObjCRuntime"
 ) {
 	documentation = "A mutation handler."
-}, "EnumerationMutationHandler")
+}
 
 val objc_AssociationPolicy = typedef(uintptr_t, "objc_AssociationPolicy")

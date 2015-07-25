@@ -66,7 +66,7 @@ val GLcharUTF8_pp = GLcharUTF8_p.p
 val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping.UTF8)
 
 // AMD_debug_output
-val GLDEBUGPROCAMD = CallbackType(callback(
+val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	OPENGL_PACKAGE, void, "GLDebugMessageAMDCallback",
 	"Will be called when a debug message is generated.",
 	GLuint.IN("id", "the message ID"),
@@ -79,9 +79,9 @@ val GLDEBUGPROCAMD = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
 	CALL_CONVENTION_SYSTEM
-}, "GLDEBUGPROCAMD")
+}
 // ARB_debug_output
-val GLDEBUGPROCARB = CallbackType(callback(
+val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	OPENGL_PACKAGE, void, "GLDebugMessageARBCallback",
 	"Will be called when a debug message is generated.",
 	GLenum.IN("source", "the message source"),
@@ -95,7 +95,7 @@ val GLDEBUGPROCARB = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
 	CALL_CONVENTION_SYSTEM
-}, "GLDEBUGPROCARB")
+}
 // ARB_shader_objects
 val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
 val GLcharARB_pp = GLcharARB_p.p
@@ -104,7 +104,7 @@ val GLhandleARB_p = GLhandleARB.p
 // ARB_sync
 val GLsync = "GLsync".opaque_p
 // KHR_debug
-val GLDEBUGPROC = CallbackType(callback(
+val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	OPENGL_PACKAGE, void, "GLDebugMessageCallback",
 	"Will be called when a debug message is generated.",
 	GLenum.IN("source", "the message source"),
@@ -120,7 +120,7 @@ val GLDEBUGPROC = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	CALL_CONVENTION_SYSTEM
-}, "GLDEBUGPROC")
+}
 // NV_gpu_shader5
 val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)
 val GLint64EXT_p = GLint64EXT.p

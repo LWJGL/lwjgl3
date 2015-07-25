@@ -177,14 +177,14 @@ val XErrorEvent = struct(LINUX_PACKAGE, "XErrorEvent") {
 }.nativeType
 val XErrorEvent_p = XErrorEvent.p
 
-val XErrorHandler = callback(
+val XErrorHandler = "XErrorHandler".callback(
 	LINUX_PACKAGE, void, "XErrorHandler",
 	"Will be called with an X error occurs.",
 	DISPLAY,
 	XErrorEvent_p.IN("error_event", "the {@link XErrorEvent} structure describing the error")
 ) {
 	documentation = "Instances of this interface may be passed to the Xlib##XSetErrorHandler() method."
-}.nativeType
+}
 
 val XGenericEventCookie = struct(LINUX_PACKAGE, "XGenericEventCookie") {
 	documentation = "Additional information for an {@code XGenericEvent}."

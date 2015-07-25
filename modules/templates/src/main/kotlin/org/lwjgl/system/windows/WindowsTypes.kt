@@ -120,7 +120,7 @@ val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
 val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 
-val WNDPROC = CallbackType(callback(
+val WNDPROC = "WNDPROC".callback(
 	WINDOWS_PACKAGE, LRESULT, "WindowProc",
 	"Will be called for each message sent to the window.",
 	HWND.IN("hwnd", "a handle to the window procedure that received the message"),
@@ -131,7 +131,7 @@ val WNDPROC = CallbackType(callback(
 ) {
 	documentation = "An application-defined function that processes messages sent to a window."
 	CALL_CONVENTION_SYSTEM
-}, "WNDPROC")
+}
 
 val HICON = "HICON".opaque_p
 val HCURSOR = "HCURSOR".opaque_p
@@ -281,7 +281,7 @@ val PDISPLAY_DEVICE = StructType(
 	}
 )
 
-val GOBJENUMPROC = CallbackType(callback(
+val GOBJENUMPROC = "GOBJENUMPROC".callback(
 	WINDOWS_PACKAGE, int, "EnumObjectsCallback",
 	"Will be called for each available object.",
 	LPVOID.IN("logObject", "a pointer to a {@link LOGPEN} or {@link LOGBRUSH} structure describing the attributes of the object"),
@@ -290,7 +290,7 @@ val GOBJENUMPROC = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the WinGDI##EnumObjects() method."
 	CALL_CONVENTION_SYSTEM
-}, "GOBJENUMPROC")
+}
 
 val LPTRACKMOUSEEVENT = StructType(
 	name = "LPTRACKMOUSEEVENT",

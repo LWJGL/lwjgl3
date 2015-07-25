@@ -34,7 +34,7 @@ val ovrLayerType = typedef(int, "ovrLayerType")
 
 val ovrEye_Count = 2
 
-val ovrLogCallback = CallbackType(callback(
+val ovrLogCallback = "ovrLogCallback".callback(
 	OVR_PACKAGE, void, "OVRLogCallback",
 	"The logging callback.",
 	int.IN("level", "one of the ovrLogLevel constants"),
@@ -42,7 +42,7 @@ val ovrLogCallback = CallbackType(callback(
 	samConstructor = "OVR"
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
-}, "ovrLogCallback")
+}
 
 val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo") {
 	documentation = "Provides information about the last error."

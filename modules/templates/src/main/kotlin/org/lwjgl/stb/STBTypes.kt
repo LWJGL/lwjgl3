@@ -21,7 +21,7 @@ ENABLE_WARNINGS()""")
 val stbi_uc = typedef(unsigned_char, "stbi_uc")
 val stbi_uc_p = stbi_uc.p
 
-val STBIReadCallback = CallbackType(callback(
+val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	STB_PACKAGE, int, "STBIReadCallback",
 	"The {@code stbi_io_callbacks.read} callback.",
 	void_p.IN("user", "a pointer to user data"),
@@ -31,9 +31,9 @@ val STBIReadCallback = CallbackType(callback(
 	samConstructor = "STBImage"
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
-}, "stbi_io_callbacks.read")
+}
 
-val STBISkipCallback = CallbackType(callback(
+val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(
 	STB_PACKAGE, int, "STBISkipCallback",
 	"The {@code stbi_io_callbacks.skip} callback.",
 	void_p.IN("user", "a pointer to user data"),
@@ -41,9 +41,9 @@ val STBISkipCallback = CallbackType(callback(
 	samConstructor = "STBImage"
 ) {
 	documentation = "Instances of this interface may be set to the {@code skip} field of the ##STBIIOCallbacks struct."
-}, "stbi_io_callbacks.read")
+}
 
-val STBIEOFCallback = CallbackType(callback(
+val stbi_io_callbacks_eof = "stbi_io_callbacks.eof".callback(
 	STB_PACKAGE, int, "STBIEOFCallback",
 	"The {@code stbi_io_callbacks.eof} callback.",
 	void_p.IN("user", "a pointer to user data"),
@@ -51,14 +51,14 @@ val STBIEOFCallback = CallbackType(callback(
 	samConstructor = "STBImage"
 ) {
 	documentation = "Instances of this interface may be set to the {@code eof} field of the ##STBIIOCallbacks struct."
-}, "stbi_io_callbacks.read")
+}
 
 val stbi_io_callbacks_p = struct_p(STB_PACKAGE, "STBIIOCallbacks", structName = "stbi_io_callbacks") {
 	documentation = "Image IO callbacks, used by STBImage##stbi_load_from_callbacks()."
 	includeSTBAPI("#include \"stb_image.h\"")
-	STBIReadCallback.member("read")
-	STBISkipCallback.member("skip")
-	STBIEOFCallback.member("eof")
+	stbi_io_callbacks_read.member("read")
+	stbi_io_callbacks_skip.member("skip")
+	stbi_io_callbacks_eof.member("eof")
 }
 
 // stb_image_resize.h

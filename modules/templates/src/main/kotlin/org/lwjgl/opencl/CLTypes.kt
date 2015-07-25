@@ -192,7 +192,7 @@ fun config() {
 }
 
 // callback functions
-val cl_create_context_callback = CallbackType(callback(
+val cl_create_context_callback = "cl_create_context_callback".callback(
 	OPENCL_PACKAGE, void, "CLCreateContextCallback",
 	"Will be called when a debug message is generated.",
 	const _ cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
@@ -206,9 +206,9 @@ val cl_create_context_callback = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
 	CALL_CONVENTION_SYSTEM
-}, "cl_create_context_callback")
+}
 
-val cl_program_callback = CallbackType(callback(
+val cl_program_callback = "cl_program_callback".callback(
 	OPENCL_PACKAGE, void, "CLProgramCallback",
 	"Will be called when the program is built, compiled or linked.",
 	cl_program.IN("program", "the program that was built, compiled or linked"),
@@ -220,9 +220,9 @@ val cl_program_callback = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clBuildProgram(), CL12##clCompileProgram() and CL12##clLinkProgram() methods."
 	CALL_CONVENTION_SYSTEM
-}, "cl_program_callback")
+}
 
-val cl_native_kernel = CallbackType(callback(
+val cl_native_kernel = "cl_native_kernel".callback(
 	OPENCL_PACKAGE, void, "CLNativeKernel",
 	"Will be called by the OpenCL using CL10##clEnqueueNativeKernel().",
 	void_p.IN("args", "a pointer to the arguments list"),
@@ -230,9 +230,9 @@ val cl_native_kernel = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clEnqueueNativeKernel() method."
 	CALL_CONVENTION_SYSTEM
-}, "cl_native_kernel")
+}
 
-val cl_mem_object_destructor_callback = CallbackType(callback(
+val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".callback(
 	OPENCL_PACKAGE, void, "CLMemObjectDestructorCallback",
 	"Will be called when a memory object is deleted.",
 	cl_mem.IN("memobj", "the memory object that was deleted"),
@@ -241,9 +241,9 @@ val cl_mem_object_destructor_callback = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetMemObjectDestructorCallback() method."
 	CALL_CONVENTION_SYSTEM
-}, "cl_mem_object_destructor_callback")
+}
 
-val cl_event_callback = CallbackType(callback(
+val cl_event_callback = "cl_event_callback".callback(
 	OPENCL_PACKAGE, void, "CLEventCallback",
 	"""
 	Will be called when the execution status of the command associated with {@code event} changes to an execution status equal or past the status specified by
@@ -263,9 +263,9 @@ val cl_event_callback = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetEventCallback() method."
 	CALL_CONVENTION_SYSTEM
-}, "cl_event_callback")
+}
 
-val cl_svmfree_callback = CallbackType(callback(
+val cl_svmfree_callback = "cl_svmfree_callback".callback(
 	OPENCL_PACKAGE, void, "CLSVMFreeCallback",
 	"Will be called to free shared virtual memory pointers.",
 	cl_command_queue.IN("queue", "a valid host command-queue"),
@@ -276,8 +276,7 @@ val cl_svmfree_callback = CallbackType(callback(
 ) {
 	documentation = "Instances of this interface may be passed to the CL20##clEnqueueSVMFree() method."
 	CALL_CONVENTION_SYSTEM
-}, "cl_svmfree_callback")
-
+}
 
 // OpenGL interop
 

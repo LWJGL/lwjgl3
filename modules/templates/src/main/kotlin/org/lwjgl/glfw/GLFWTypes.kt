@@ -45,7 +45,7 @@ val GLFWimage_p = struct_p(GLFW_PACKAGE, "GLFWimage") {
 
 // callback functions
 
-val GLFWerrorfun = CallbackType(callback(
+val GLFWerrorfun = "GLFWerrorfun".callback(
 	GLFW_PACKAGE, void, "GLFWErrorCallback",
 	"Will be called with an error code and a human-readable description when a GLFW error occurs.",
 	int.IN("error", "the error code"),
@@ -53,9 +53,9 @@ val GLFWerrorfun = CallbackType(callback(
     samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetErrorCallback() method."
-}, "GLFWerrorfun")
+}
 
-val GLFWmonitorfun = CallbackType(callback(
+val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	GLFW_PACKAGE, void, "GLFWMonitorCallback",
 	"Will be called when a monitor is connected to or disconnected from the system.",
 	GLFWmonitor.IN("monitor", "the monitor that was connected or disconnected"),
@@ -63,9 +63,9 @@ val GLFWmonitorfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMonitorCallback() method."
-}, "GLFWmonitorfun")
+}
 
-val GLFWwindowposfun = CallbackType(callback(
+val GLFWwindowposfun = "GLFWwindowposfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowPosCallback",
 	"Will be called when the specified window moves.",
 	GLFWwindow.IN("window", "the window that was moved"),
@@ -74,10 +74,10 @@ val GLFWwindowposfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowPosCallback() method."
-}, "GLFWwindowposfun")
+}
 
 
-val GLFWwindowsizefun = CallbackType(callback(
+val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowSizeCallback",
 	"Will be called when the specified window is resized.",
 	GLFWwindow.IN("window", "the window that was resized"),
@@ -86,18 +86,18 @@ val GLFWwindowsizefun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowSizeCallback() method."
-}, "GLFWwindowsizefun")
+}
 
-val GLFWwindowclosefun = CallbackType(callback(
+val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowCloseCallback",
 	"Will be called when the user attempts to close the specified window, for example by clicking the close widget in the title bar.",
 	GLFWwindow.IN("window", "the window that the user attempted to close"),
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowCloseCallback() method."
-}, "GLFWwindowclosefun")
+}
 
-val GLFWwindowrefreshfun = CallbackType(callback(
+val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowRefreshCallback",
 	"""
 	Will be called when the client area of the specified window needs to be redrawn, for example if the window has been exposed after having been covered by
@@ -107,9 +107,9 @@ val GLFWwindowrefreshfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowRefreshCallback() method."
-}, "GLFWwindowrefreshfun")
+}
 
-val GLFWwindowfocusfun = CallbackType(callback(
+val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowFocusCallback",
 	"Will be called when the specified window gains or loses focus.",
 	GLFWwindow.IN("window", "the window that was focused or defocused"),
@@ -118,9 +118,9 @@ val GLFWwindowfocusfun = CallbackType(callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowFocusCallback() method."
-}, "GLFWwindowfocusfun")
+}
 
-val GLFWwindowiconifyfun = CallbackType(callback(
+val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 	GLFW_PACKAGE, void, "GLFWWindowIconifyCallback",
 	"Will be called when the specified window is iconified or restored.",
 	GLFWwindow.IN("window", "the window that was iconified or restored."),
@@ -129,9 +129,9 @@ val GLFWwindowiconifyfun = CallbackType(callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowIconifyCallback() method."
-}, "GLFWwindowiconifyfun")
+}
 
-val GLFWframebuffersizefun = CallbackType(callback(
+val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	GLFW_PACKAGE, void, "GLFWFramebufferSizeCallback",
 	"Will be called when the framebuffer of the specified window is resized.",
 	GLFWwindow.IN("window", "the window whose framebuffer was resized"),
@@ -140,9 +140,9 @@ val GLFWframebuffersizefun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetFramebufferSizeCallback() method."
-}, "GLFWframebuffersizefun")
+}
 
-val GLFWkeyfun = CallbackType(callback(
+val GLFWkeyfun = "GLFWkeyfun".callback(
 	GLFW_PACKAGE, void, "GLFWKeyCallback",
 	"Will be called when a key is pressed, repeated or released.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -153,9 +153,9 @@ val GLFWkeyfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetKeyCallback() method."
-}, "GLFWkeyfun")
+}
 
-val GLFWcharfun = CallbackType(callback(
+val GLFWcharfun = "GLFWcharfun".callback(
 	GLFW_PACKAGE, void, "GLFWCharCallback",
 	"Will be called when a Unicode character is input.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -163,9 +163,9 @@ val GLFWcharfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharCallback() method."
-}, "GLFWcharfun")
+}
 
-val GLFWcharmodsfun = CallbackType(callback(
+val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
 	GLFW_PACKAGE, void, "GLFWCharModsCallback",
 	"Will be called when a Unicode character is input regardless of what modifier keys are used.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -174,9 +174,9 @@ val GLFWcharmodsfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharModsCallback() method."
-}, "GLFWcharmodsfun")
+}
 
-val GLFWmousebuttonfun = CallbackType(callback(
+val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 	GLFW_PACKAGE, void, "GLFWMouseButtonCallback",
 	"Will be called when a mouse button is pressed or released.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -186,9 +186,9 @@ val GLFWmousebuttonfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMouseButtonCallback() method."
-}, "GLFWmousebuttonfun")
+}
 
-val GLFWcursorposfun = CallbackType(callback(
+val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	GLFW_PACKAGE, void, "GLFWCursorPosCallback",
 	"Will be called when the cursor is moved.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -197,9 +197,9 @@ val GLFWcursorposfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorPosCallback() method."
-}, "GLFWcursorposfun")
+}
 
-val GLFWcursorenterfun = CallbackType(callback(
+val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 	GLFW_PACKAGE, void, "GLFWCursorEnterCallback",
 	"Will be called when the cursor enters or leaves the client area of the window.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -208,9 +208,9 @@ val GLFWcursorenterfun = CallbackType(callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorEnterCallback() method."
-}, "GLFWcursorenterfun")
+}
 
-val GLFWscrollfun = CallbackType(callback(
+val GLFWscrollfun = "GLFWscrollfun".callback(
 	GLFW_PACKAGE, void, "GLFWScrollCallback",
 	"Will be called when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -219,9 +219,9 @@ val GLFWscrollfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetScrollCallback() method."
-}, "GLFWscrollfun")
+}
 
-val GLFWdropfun = CallbackType(callback(
+val GLFWdropfun = "GLFWdropfun".callback(
 	GLFW_PACKAGE, void, "GLFWDropCallback",
 	"Will be called when one or more dragged files are dropped on the window.",
 	GLFWwindow.IN("window", "the window that received the event"),
@@ -230,7 +230,7 @@ val GLFWdropfun = CallbackType(callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetDropCallback() method."
-}, "GLFWdropfun")
+}
 
 // OpenGL
 
