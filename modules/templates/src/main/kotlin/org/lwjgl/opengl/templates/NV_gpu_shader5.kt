@@ -19,10 +19,10 @@ val NV_gpu_shader5 = "NVGPUShader5".nativeClassGL("NV_gpu_shader5", postfix = NV
 		This extension provides a set of new features to the OpenGL Shading Language and related APIs to support capabilities of new GPUs. Shaders using the
 		new functionality provided by this extension should enable this functionality via the construct
 		${codeBlock("""
-#extension GL_NV_gpu_shader5 : require (or enable)""")}
+\\#extension GL_NV_gpu_shader5 : require (or enable)""")}
 		This extension was developed concurrently with the ARB_gpu_shader5 extension, and provides a superset of the features provided there. The features
 		common to both extensions are documented in the ARB_gpu_shader5 specification; this document describes only the addition language features not
-		available via ARB_gpu_shader5. A shader that enables this extension via an #extension directive also implicitly enables the common capabilities
+		available via ARB_gpu_shader5. A shader that enables this extension via an \\#extension directive also implicitly enables the common capabilities
 		provided by ARB_gpu_shader5.
 
 		In addition to the capabilities of ARB_gpu_shader5, this extension provides a variety of new features for all shader types, including:

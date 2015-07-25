@@ -53,7 +53,7 @@ public final class Sys {
 	}
 
 	/** The development state of the current build. */
-	public static enum BuildType {
+	public enum BuildType {
 		/** Work in progress, unstable. */
 		ALPHA("a"),
 		/** Feature complete, unstable. */

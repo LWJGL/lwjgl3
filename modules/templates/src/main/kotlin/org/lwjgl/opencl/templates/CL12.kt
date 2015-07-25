@@ -264,13 +264,23 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		"COMMAND_FILL_IMAGE" _ 0x1208
 	)
 
-	// TODO: fix
 	voidptr(
 		"GetExtensionFunctionAddressForPlatform",
-		"",
+		"""
+		Returns the address of the extension function named by {@code funcname} for a given {@code platform}. The pointer returned should be cast to a function
+		pointer type matching the extension function's definition defined in the appropriate extension specification and header file. A return value of $NULL
+		indicates that the specified function does not exist for the implementation or platform is not a valid platform. A non-$NULL return value for
+		{@code clGetExtensionFunctionAddressForPlatform} does not guarantee that an extension function is actually supported by the platform. The application
+		must also make a corresponding query using ${code("clGetPlatformInfo(platform, CL_PLATFORM_EXTENSIONS, &hellip; )")} or
+		${code("clGetDeviceInfo(device, CL_DEVICE_EXTENSIONS, &hellip; )")} to determine if an extension is supported by the OpenCL implementation.
 
-		cl_platform_id.IN("platform", ""),
-		const _ cl_charASCII_p.IN("func_name", "")
+		{@code clGetExtensionFunctionAddressForPlatform} may not be queried for core (non-extension) functions in OpenCL. For functions that are queryable with
+		{@code clGetExtensionFunctionAddressForPlatform}, implementations may choose to also export those functions statically from the object libraries
+		implementing those functions. However, portable applications cannot rely on this behavior.
+		""",
+
+		cl_platform_id.IN("platform", "the platform to query"),
+		const _ cl_charASCII_p.IN("funcname", "the extension function name")
 	)
 
 	cl_int(
@@ -459,7 +469,45 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			)}
 			"""
 		),
-		ERROR_RET
+		ERROR_RET,
+
+	    returnDoc =
+		"""
+		a valid non-zero image object and the $errcode_ret is set to $SUCCESS if the image object is created successfully. Otherwise, it returns a $NULL
+		value with one of the following error values returned in $errcode_ret:
+		${ul(
+			ICE,
+			"$INVALID_VALUE if values specified in {@code flags} are not valid.",
+			"CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if values specified in {@code image_format} are not valid or if {@code image_format} is $NULL.",
+			"""
+			CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a buffer and the row pitch and base address alignment does not follow the rules
+			described for creating a 2D image from a buffer.
+			""",
+			"CL10#INVALID_IMAGE_FORMAT_DESCRIPTOR if a 2D image is created from a 2D image object and the rules described above are not followed.",
+			"#INVALID_IMAGE_DESCRIPTOR if values specified in {@code image_desc} are not valid or if {@code image_desc} is $NULL.",
+			"CL10#INVALID_IMAGE_SIZE if image dimensions specified in {@code image_desc} exceed the maximum image dimensions for all devices in context.",
+			"""
+			$INVALID_HOST_PTR if {@code host_ptr} is $NULL and CL10#MEM_USE_HOST_PTR or CL10#MEM_COPY_HOST_PTR are set in flags or if {@code host_ptr} is not
+			$NULL but CL10#MEM_COPY_HOST_PTR or CL10#MEM_USE_HOST_PTR are not set in flags.
+			""",
+			"""
+			CL10#INVALID_VALUE if an image buffer is being created and the buffer object was created with CL10#MEM_WRITE_ONLY and flags specifies
+			CL10#MEM_READ_WRITE or CL10#MEM_READ_ONLY, or if the buffer object was created with CL10#MEM_READ_ONLY and flags specifies CL10#MEM_READ_WRITE or
+			CL10#MEM_WRITE_ONLY, or if flags specifies CL10#MEM_USE_HOST_PTR or CL10#MEM_ALLOC_HOST_PTR or CL10#MEM_COPY_HOST_PTR.
+			""",
+			"""
+			CL10#INVALID_VALUE if an image buffer is being created or an image is being created from another memory object (image or buffer) and the
+			{@code mem_object} object was created with #MEM_HOST_WRITE_ONLY and flags specifies #MEM_HOST_READ_ONLY, or if {@code mem_object} was created with
+			#MEM_HOST_READ_ONLY and flags specifies #MEM_HOST_WRITE_ONLY, or if {@code mem_object} was created with #MEM_HOST_NO_ACCESS and flags specifies
+			#MEM_HOST_READ_ONLY or #MEM_HOST_WRITE_ONLY.
+			""",
+			"CL10#IMAGE_FORMAT_NOT_SUPPORTED if the {@code image_format} is not supported.",
+			"CL10#MEM_OBJECT_ALLOCATION_FAILURE if there is a failure to allocate memory for image object.",
+			"CL10#INVALID_OPERATION if there are no devices in context that support images.",
+			OORE,
+			OOHME
+		)}
+		"""
 	)
 
 	cl_program(

@@ -466,7 +466,7 @@ val ovrLayerDirect = struct(OVR_PACKAGE, "OVRLayerDirect", structName = "ovrLaye
 // OVR_CAPI_GL.h
 
 val ovrGLTextureData = 	struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ovrGLTextureData") {
-	documentation = "Used to pass GL eye texture data to OVR#ovrHmd_EndFrame()."
+	documentation = "OpenGL texture data."
 	includeOVRCAPI_GL()
 
 	ovrTextureHeader.member("Header") /// General device settings.

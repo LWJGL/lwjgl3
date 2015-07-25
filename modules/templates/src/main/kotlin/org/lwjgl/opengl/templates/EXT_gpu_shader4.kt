@@ -206,7 +206,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 	void(
 		"GetVertexAttribIuivEXT",
-		"Unsigned version of #GetVertexAttribIiv().",
+		"Unsigned version of #GetVertexAttribIivEXT().",
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),

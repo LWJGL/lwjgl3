@@ -108,18 +108,18 @@ val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = A
 		"GetGraphicsResetStatusARB",
 		"""
 		The symbolic constant returned indicates if the GL context has been in a reset state at any point since the last call to {@code GetGraphicsResetStatusARB}.
-		#NO_ERROR indicates that the GL context has not been in a reset state since the last call. #GUILTY_CONTEXT_RESET_ARB indicates that a reset has been
-		detected that is attributable to the current GL context. #INNOCENT_CONTEXT_RESET_ARB indicates a reset has been detected that is not attributable to the
-		current GL context. #UNKNOWN_CONTEXT_RESET_ARB indicates a detected graphics reset whose cause is unknown.
+		GL11#NO_ERROR indicates that the GL context has not been in a reset state since the last call. #GUILTY_CONTEXT_RESET_ARB indicates that a reset has
+		been detected that is attributable to the current GL context. #INNOCENT_CONTEXT_RESET_ARB indicates a reset has been detected that is not attributable
+		to the current GL context. #UNKNOWN_CONTEXT_RESET_ARB indicates a detected graphics reset whose cause is unknown.
 
-		If a reset status other than #NO_ERROR is returned and subsequent calls return #NO_ERROR, the context reset was encountered and completed. If a reset
+		If a reset status other than NO_ERROR is returned and subsequent calls return NO_ERROR, the context reset was encountered and completed. If a reset
 		status is repeatedly returned, the context may be in the process of resetting.
 
 		Reset notification behavior is determined at context creation time, and may be queried by calling GL11#GetIntegerv() with the symbolic constant
 		#RESET_NOTIFICATION_STRATEGY_ARB.
 
 		If the reset notification behavior is #NO_RESET_NOTIFICATION_ARB, then the implementation will never deliver notification of reset events, and
-		{@code GetGraphicsResetStatusARB} will always return #NO_ERROR.
+		{@code GetGraphicsResetStatusARB} will always return NO_ERROR.
 
 		If the behavior is #LOSE_CONTEXT_ON_RESET_ARB, a graphics reset will result in the loss of all context state, requiring the recreation of all associated
 		objects. In this case {@code GetGraphicsResetStatusARB}. may return any of the values described above.

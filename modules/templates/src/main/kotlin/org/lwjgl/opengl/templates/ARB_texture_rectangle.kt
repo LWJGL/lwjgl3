@@ -22,8 +22,8 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		However, non-power-of-two sized textures have limitations that do not apply to power-of-two sized textures. NPOTS textures may not use mipmap filtering;
 		POTS textures support both mipmapped and non-mipmapped filtering. NPOTS textures support only the GL11#CLAMP, GL12#CLAMP_TO_EDGE, and
 		GL13#CLAMP_TO_BORDER wrap modes; POTS textures support GL12#CLAMP_TO_EDGE, GL11#REPEAT, GL11#CLAMP, GL14#MIRRORED_REPEAT, and GL13#CLAMP_TO_BORDER
-		(and ATITextureMirrorOnce#MIRROR_CLAMP_ATI and ATITextureMirrorOnce#MIRROR_CLAMP_TO_EDGE_ATI if ${registryLinkTo("ATI", "texture_mirror_once")} is
-		supported). NPOTS textures do not support an optional 1-texel border; POTS textures do support an optional 1-texel border.
+		(and GL_MIRROR_CLAMP_ATI and GL_MIRROR_CLAMP_TO_EDGE_ATI if ${registryLinkTo("ATI", "texture_mirror_once")} is supported). NPOTS textures do not
+		support an optional 1-texel border; POTS textures do support an optional 1-texel border.
 
 		NPOTS textures are accessed by dimension-dependent (aka non-normalized) texture coordinates. So instead of thinking of the texture image lying in a
 		[0..1]x[0..1] range, the NPOTS texture image lies in a [0..w]x[0..h] range.

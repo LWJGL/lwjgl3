@@ -55,8 +55,8 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 		Controls the clipping volume behavior.
 
-		These parameters update the clip control origin and depth mode respectively. The initial value of the clip control origin is #LOWER_LEFT and
-		the initial value of the depth mode is #NEGATIVE_ONE_TO_ONE.
+		These parameters update the clip control origin and depth mode respectively. The initial value of the clip control origin is GL20#LOWER_LEFT and the
+		initial value of the depth mode is #NEGATIVE_ONE_TO_ONE.
 
 		The error GL11#INVALID_OPERATION is generated if ClipControl is executed between the execution of GL11#Begin() and the corresponding
 		execution of GL11#End().
@@ -1315,7 +1315,7 @@ val GL45 = "GL45".nativeClassGL("GL45") {
 		"""
 		Indicates if the GL context has been in a reset state at any point since the last call to GetGraphicsResetStatus:
 		${ul(
-			"#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
+			"GL11#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
 			"#GUILTY_CONTEXT_RESET indicates that a reset has been detected that is attributable to the current GL context.",
 			"#INNOCENT_CONTEXT_RESET indicates a reset has been detected that is not attributable to the current GL context.",
 			"#UNKNOWN_CONTEXT_RESET indicates a detected graphics reset whose cause is unknown."

@@ -15,7 +15,7 @@ val ARB_fragment_program = "ARBFragmentProgram".nativeClassGL("ARB_fragment_prog
 		Unextended OpenGL mandates a certain set of configurable per- fragment computations defining texture application, texture environment, color sum, and
 		fog operations. Several extensions have added further per-fragment computations to OpenGL. For example, extensions have defined new texture environment
 		capabilities (ARB_texture_env_add, ${ARB_texture_env_combine.link}, ${ARB_texture_env_dot3.link}, ARB_texture_env_crossbar), per-fragment depth
-		comparisons (${ARB_depth_texture.link}, ${ARB_shadow.link}, ${ARB_shadow_ambient.link}, ${EXT_shadow_funcs.link}), per-fragment lighting
+		comparisons (${ARB_depth_texture.link}, ${ARB_shadow.link}, ${ARB_shadow_ambient.link}, ${registryLinkTo("EXT", "shadow_funcs")}), per-fragment lighting
 		(${registryLinkTo("EXT", "fragment_lighting")}, ${registryLinkTo("EXT", "light_texture")}), and environment mapped bump mapping
 		(${registryLinkTo("ATI", "envmap_bumpmap")}).
 

@@ -945,7 +945,7 @@ val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", po
 
 		This extension provides GLSL support for atomics targeting image uniforms (if GLSL 4.20, ${"ARB_shader_image_load_store".cap}, or
 		${"EXT_shader_image_load_store".cap} is supported) or floating-point pointers (if ${"NV_gpu_shader5".cap} is supported). Additionally, assembly opcodes
-		for these operations is also provided if ${"NV_gpu_program5".cap} is supported.
+		for these operations is also provided if ${registryLink("NV", "gpu_program5")} is supported.
 		"""
 }
 val NV_shader_atomic_fp16_vector = EXT_FLAG.nativeClassGL("NV_shader_atomic_fp16_vector", postfix = NV) {

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-val GLX_SGIX_pbuffer = "GLXSGIXPBuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
+val GLX_SGIX_pbuffer = "GLXSGIXPbuffer".nativeClassGLX("GLX_SGIX_pbuffer", SGIX) {
 	nativeImport (
 		"<GL/glx.h>"
 	)
