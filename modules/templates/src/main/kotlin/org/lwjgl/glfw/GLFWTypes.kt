@@ -13,7 +13,7 @@ val GLFWmonitor_p = GLFWmonitor.p
 
 val GLFWwindow = "GLFWwindow".p
 
-val GLFWvidmode = struct(GLFW_PACKAGE, "GLFWvidmode") {
+val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWvidmode") {
 	documentation = "Video mode."
 	nativeImport("glfw3.h")
 	int.member("width")
@@ -22,29 +22,26 @@ val GLFWvidmode = struct(GLFW_PACKAGE, "GLFWvidmode") {
 	int.member("greenBits")
 	int.member("blueBits")
 	int.member("refreshRate")
-}.nativeType
-val GLFWvidmode_p = StructType(GLFWvidmode)
+}
 
-val GLFWgammaramp = struct(GLFW_PACKAGE, "GLFWgammaramp") {
+val GLFWgammaramp_p = struct_p(GLFW_PACKAGE, "GLFWgammaramp") {
 	documentation = "Gamma ramp."
 	nativeImport("glfw3.h")
 	unsigned_short_p.member("red")
 	unsigned_short_p.member("green")
 	unsigned_short_p.member("blue")
 	unsigned_int.member("size")
-}.nativeType
-val GLFWgammaramp_p = StructType(GLFWgammaramp)
+}
 
 val GLFWcursor = "GLFWcursor".p
 
-val GLFWimage = struct(GLFW_PACKAGE, "GLFWimage") {
+val GLFWimage_p = struct_p(GLFW_PACKAGE, "GLFWimage") {
 	documentation = "Image data."
 	nativeImport("glfw3.h")
 	int.member("width")
 	int.member("height")
 	unsigned_char_p.member("pixels")
-}.nativeType
-val GLFWimage_p = StructType(GLFWimage)
+}
 
 // callback functions
 

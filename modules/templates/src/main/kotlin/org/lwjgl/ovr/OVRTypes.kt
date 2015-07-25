@@ -44,16 +44,15 @@ val ovrLogCallback = CallbackType(callback(
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."
 }, "ovrLogCallback")
 
-val ovrErrorInfo = struct(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo") {
+val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo") {
 	documentation = "Provides information about the last error."
 	includeOVRCAPI()
 
 	ovrResult.member("Result") ///< The result from the last API call that generated an error ovrResult.
 	char.member("ErrorString", size = 512) ///< A UTF8-encoded null-terminated English string describing the problem. The format of this string is subject to change in future versions.
-}.nativeType
-val ovrErrorInfo_p = StructType(ovrErrorInfo)
+}
 
-val ovrInitParams = struct(OVR_PACKAGE, "OVRInitParams", structName = "ovrInitParams") {
+val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", structName = "ovrInitParams") {
 	documentation = "Parameters for OVR#ovr_Initialize()."
 	includeOVRCAPI()
 
@@ -73,8 +72,7 @@ val ovrInitParams = struct(OVR_PACKAGE, "OVRInitParams", structName = "ovrInitPa
 	/// Number of milliseconds to wait for a connection to the server.
 	/// Pass 0 for the default timeout.
 	uint32_t.member("ConnectionTimeoutMS") ///< Timeout in Milliseconds or 0
-}.nativeType
-val ovrInitParams_p = StructType(ovrInitParams)
+}
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", structName = "ovrVector2i") {
 	documentation = "A 2D vector with integer components."
@@ -126,7 +124,7 @@ val ovrVector3f = struct(OVR_PACKAGE, "OVRVector3f", structName = "ovrVector3f")
 	float.member("y")
 	float.member("z")
 }.nativeType
-val ovrVector3f_p = StructType(ovrVector3f)
+val ovrVector3f_p = ovrVector3f.p
 
 val ovrMatrix4f = struct(OVR_PACKAGE, "OVRMatrix4f", structName = "ovrMatrix4f") {
 	documentation = "A 4x4 matrix with float components."
@@ -142,7 +140,7 @@ val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", structName = "ovrPosef") {
 	ovrQuatf.member("Orientation");
 	ovrVector3f.member("Position");
 }.nativeType
-val ovrPosef_p = StructType(ovrPosef)
+val ovrPosef_p = ovrPosef.p
 
 val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", structName = "ovrPoseStatef") {
 	documentation = "A full pose (rigid body) configuration with first and second derivatives."
@@ -206,7 +204,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovr
 
 	uint32_t.member("LastCameraFrameCounter") /// Tag the vision processing results to a certain frame counter number.
 }.nativeType
-val ovrTrackingState_p = StructType(ovrTrackingState)
+val ovrTrackingState_p = ovrTrackingState.p
 
 val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFrameTiming") {
 	documentation = "Frame timing data reported by OVR#ovrHmd_GetFrameTiming()."
@@ -259,7 +257,7 @@ val ovrTimewarpProjectionDesc = struct(OVR_PACKAGE, "OVRTimewarpProjectionDesc",
 	float.member("Projection32") ///< Projection matrix element [3][2].
 }.nativeType
 
-val ovrViewScaleDesc = struct(OVR_PACKAGE, "OVRViewScaleDesc", structName = "ovrViewScaleDesc") {
+val ovrViewScaleDesc_p = struct_p(OVR_PACKAGE, "OVRViewScaleDesc", structName = "ovrViewScaleDesc") {
 	documentation =
 		"""
 		Contains the data necessary to properly calculate position info for various layer types.
@@ -275,8 +273,7 @@ val ovrViewScaleDesc = struct(OVR_PACKAGE, "OVRViewScaleDesc", structName = "ovr
 
 	ovrVector3f.member("HmdToEyeViewOffset", size = ovrEye_Count) ///< Translation of each eye.
 	float.member("HmdSpaceToWorldScaleInMeters") ///< Ratio of viewer units to meter units.
-}.nativeType
-val ovrViewScaleDesc_p = StructType(ovrViewScaleDesc)
+}
 
 val ovrTextureHeader = struct(OVR_PACKAGE, "OVRTextureHeader", structName = "ovrTextureHeader") {
 	documentation = "API-independent part of a texture descriptor."
@@ -293,7 +290,7 @@ val ovrTexture = struct(OVR_PACKAGE, "OVRTexture", structName = "ovrTexture") {
 	ovrTextureHeader.member("Header") // API-independent header.
 	uintptr_t.member("PlatformData", size = 8) // Specialized in ovrGLTextureData, ovrD3D11TextureData etc.
 }.nativeType
-val ovrTexture_p = StructType(ovrTexture)
+val ovrTexture_p = ovrTexture.p
 val ovrTexture_pp = ovrTexture_p.p
 
 val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "ovrSwapTextureSet") {
@@ -336,7 +333,7 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 	/// different CurrentIndex value, or with a different ovrSwapTextureSet, or disabling the layer).
 	int.member("CurrentIndex")
 }.nativeType
-val ovrSwapTextureSet_p = StructType(ovrSwapTextureSet)
+val ovrSwapTextureSet_p = ovrSwapTextureSet.p
 val ovrSwapTextureSet_pp = ovrSwapTextureSet_p.p
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", structName = "ovrLayerHeader") {
@@ -346,13 +343,8 @@ val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", structName = "ovrLaye
 	ovrLayerType.member("Type") ///< Described by ovrLayerType.
 	unsigned_int.member("Flags") ///< Described by ovrLayerFlags.
 }.nativeType
-val ovrLayerHeader_p = StructType(ovrLayerHeader)
-val ovrLayerHeader_p_const_p = PointerType(
-	"ovrLayerHeader * const *",
-	mapping = PointerMapping.DATA_POINTER,
-	includesPointer = true,
-	elementType = ovrLayerHeader_p
-)
+val ovrLayerHeader_p = ovrLayerHeader.p
+val ovrLayerHeader_p_const_p = ovrLayerHeader_p.const_p
 
 val ovrLayerEyeFov = struct(OVR_PACKAGE, "OVRLayerEyeFov", structName = "ovrLayerEyeFov") {
 	documentation =

@@ -17,7 +17,7 @@ val ssize_t = IntegerType("ssize_t", PrimitiveMapping.POINTER)
 val clockid_t = PrimitiveType("clock_id_t", PrimitiveMapping.INT) // TODO: figure this out
 val time_t = PrimitiveType("time_t", PrimitiveMapping.LONG) // TODO: time_t can be any type
 
-val timespec = struct(LINUX_PACKAGE, "timespec", identifierType = StructIdentifierType.STRUCT) {
+val timespec_p = struct_p(LINUX_PACKAGE, "timespec", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Time structure"
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -26,10 +26,9 @@ val timespec = struct(LINUX_PACKAGE, "timespec", identifierType = StructIdentifi
 
 	time_t.member("tv_sec", "sec")
 	long.member("tv_nsec", "nsec")
-}.nativeType
-val timespec_p = StructType(timespec)
+}
 
-val timeval = struct(LINUX_PACKAGE, "timeval", identifierType = StructIdentifierType.STRUCT) {
+val timeval_p = struct_p(LINUX_PACKAGE, "timeval", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Time structure"
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -38,10 +37,9 @@ val timeval = struct(LINUX_PACKAGE, "timeval", identifierType = StructIdentifier
 
 	long.member("tv_sec", "sec")
 	long.member("tv_usec", "usec")
-}.nativeType
-val timeval_p = StructType(timeval)
+}
 
-val timezone = struct(LINUX_PACKAGE, "timezone", identifierType = StructIdentifierType.STRUCT) {
+val timezone_p = struct_p(LINUX_PACKAGE, "timezone", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Timezone structure"
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -50,7 +48,6 @@ val timezone = struct(LINUX_PACKAGE, "timezone", identifierType = StructIdentifi
 
 	int.member("tz_minuteswest")
 	int.member("tz_dsttime")
-}.nativeType
-val timezone_p = StructType(timezone)
+}
 
 val fd_set_p = "fd_set".p // fd_set for select and pselect. A struct, but we use macros to access.

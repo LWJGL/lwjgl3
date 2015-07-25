@@ -118,7 +118,7 @@ val PIXELFORMATDESCRIPTOR_STRUCT = struct(WINDOWS_PACKAGE, "PIXELFORMATDESCRIPTO
 }
 val PIXELFORMATDESCRIPTOR = StructType(PIXELFORMATDESCRIPTOR_STRUCT)
 val LPPIXELFORMATDESCRIPTOR = StructType(name = "LPPIXELFORMATDESCRIPTOR", definition = PIXELFORMATDESCRIPTOR_STRUCT, includesPointer = true)
-val PIXELFORMATDESCRIPTOR_p = StructType(PIXELFORMATDESCRIPTOR)
+val PIXELFORMATDESCRIPTOR_p = PIXELFORMATDESCRIPTOR.p
 
 val WNDPROC = CallbackType(callback(
 	WINDOWS_PACKAGE, LRESULT, "WindowProc",
@@ -156,9 +156,9 @@ private val WNDCLASSEX_STRUCT = struct(WINDOWS_PACKAGE, "WNDCLASSEX") {
 	HICON.member("hIconSm", "iconSm")
 }
 
-val WNDCLASSEX = StructType(WNDCLASSEX_STRUCT)
+val WNDCLASSEX = WNDCLASSEX_STRUCT.nativeType
 val LPWNDCLASSEX = StructType(name = "LPWNDCLASSEX", definition = WNDCLASSEX_STRUCT, includesPointer = true)
-val WNDCLASSEX_p = StructType(WNDCLASSEX)
+val WNDCLASSEX_p = WNDCLASSEX.p
 
 private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	documentation = "Defines the x- and y- coordinates of a point."
@@ -166,7 +166,7 @@ private val POINT_STRUCT = struct(WINDOWS_PACKAGE, "POINT") {
 	LONG.member("x")
 	LONG.member("y")
 }
-val POINT = StructType(POINT_STRUCT)
+val POINT = POINT_STRUCT.nativeType
 val LPPOINT = StructType (name = "LPPOINT", definition = POINT_STRUCT, includesPointer = true)
 
 private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
@@ -177,9 +177,9 @@ private val RECT_STRUCT = struct(WINDOWS_PACKAGE, "RECT") {
 	LONG.member("right")
 	LONG.member("bottom")
 }
-val RECT = StructType(RECT_STRUCT)
+val RECT = RECT_STRUCT.nativeType
 val LPRECT = StructType(name = "LPRECT", definition = RECT_STRUCT, includesPointer = true)
-val RECT_p = StructType(RECT)
+val RECT_p = RECT.p
 
 private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	documentation = "Contains message information from a thread's message queue."
@@ -191,9 +191,9 @@ private val MSG_STRUCT = struct(WINDOWS_PACKAGE, "MSG") {
 	DWORD.member("time")
 	POINT.member("pt", "point")
 }
-val MSG = StructType(MSG_STRUCT)
+val MSG = MSG_STRUCT.nativeType
 val LPMSG = StructType(name = "LPMSG", definition = MSG_STRUCT, includesPointer = true)
-val MSG_p = StructType(MSG)
+val MSG_p = MSG.p
 
 val POINTL = StructType (
 	name = "POINTL",
@@ -205,7 +205,7 @@ val POINTL = StructType (
 	}
 )
 
-val DEVMODE = struct(WINDOWS_PACKAGE, "DEVMODE") {
+val DEVMODE_p = struct_p(WINDOWS_PACKAGE, "DEVMODE") {
 	documentation = "Contains information about the initialization and environment of a printer or a display device."
 	nativeImport("WindowsLWJGL.h")
 	TCHAR.member("dmDeviceName", "deviceName", 32, true)
@@ -264,8 +264,7 @@ val DEVMODE = struct(WINDOWS_PACKAGE, "DEVMODE") {
 	DWORD.member("dmPanningWidth", "panningWidth")
 	DWORD.member("dmPanningHeight", "panningHeight")
 	*/
-}.nativeType
-val DEVMODE_p = StructType(DEVMODE)
+}
 
 val PDISPLAY_DEVICE = StructType(
 	name = "PDISPLAY_DEVICE",
@@ -310,12 +309,11 @@ val LPTRACKMOUSEEVENT = StructType(
 	}
 )
 
-val LARGE_INTEGER = struct(WINDOWS_PACKAGE, "LARGE_INTEGER") {
+val LARGE_INTEGER_p = struct_p(WINDOWS_PACKAGE, "LARGE_INTEGER") {
 	nativeImport ("WindowsLWJGL.h")
 	// LARGE_INTEGER is a union really, but we don't care about the other stuff.
 	LONGLONG.member("QuadPart")
-}.nativeType
-val LARGE_INTEGER_p = StructType(LARGE_INTEGER)
+}
 
 val LPJOYCAPS = StructType(
 	name = "LPJOYCAPS",

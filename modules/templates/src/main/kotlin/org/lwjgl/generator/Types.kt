@@ -57,7 +57,7 @@ val PrimitiveType.p: PointerType get() = PointerType(
 	elementType = this
 )
 /** pointer to pointer. */
-private fun PointerType.pointerTo(const: Boolean): String {
+private fun PointerType.pointerTo(const: Boolean = false): String {
 	val builder = StringBuilder(name)
 	if ( !includesPointer ) {
 		if ( !name.endsWith('*') )
@@ -69,8 +69,8 @@ private fun PointerType.pointerTo(const: Boolean): String {
 
 	return builder.toString()
 }
-val PointerType.p: PointerType get() = PointerType(this.pointerTo(false), PointerMapping.DATA_POINTER, elementType = this)
-val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(true), PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
+val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(const = true), PointerMapping.DATA_POINTER, elementType = this)
 
 val String.p: PointerType get() = PointerType(this, includesPointer = false)
 val String.opaque_p: PointerType get() = PointerType(this, includesPointer = true)
@@ -85,7 +85,24 @@ open class ObjectType(
 	includesPointer: Boolean = true
 ): PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
 
-// Structs
+// Structs, 3 cases:
+//
+//     1) struct value
+//         * val foo = struct(...).nativeType
+//         * foo is <StructType with includesPointer = false>
+//         * mapped to ByteBuffer
+//     2) pointer to struct value(s), i.e. array of struct values
+//         * val foo_p = foo.p
+//         * foo_p is <StructType with includesPointer = true>
+//         * mapped to ByteBuffer
+//     3) pointer to pointer to struct value(s):
+//         * val foo_pp = foo_p.p
+//         * foo_pp is <PointerType with includesPointer = false>
+//         * mapped to PointerBuffer
+//
+// The special case is #2. One would normally expect a PointerBuffer there (#1 is a ByteBuffer),
+// but since struct arrays are packed, there's no need for an extra indirection. The difference
+// between #2 and #3 is handled in the StructType.p extension property below.
 class StructType(
 	/** The struct size in bytes. */
 	val definition: Struct,
@@ -97,7 +114,10 @@ class StructType(
 	includesPointer: Boolean = false
 ): PointerType(name, mapping, includesPointer)
 /** Converts a struct value to a pointer to a struct value. */
-fun StructType(structType: StructType) = StructType(name = structType.pointerTo(const = false), includesPointer = true, definition = structType.definition)
+val StructType.p: PointerType get() = if ( this.includesPointer )
+	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
+else
+	StructType(name = this.pointerTo(), includesPointer = true, definition = this.definition)
 
 // Strings
 class CharSequenceType(

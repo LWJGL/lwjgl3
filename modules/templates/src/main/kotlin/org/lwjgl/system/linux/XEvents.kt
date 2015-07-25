@@ -37,7 +37,7 @@ val XKeyEvent = struct(LINUX_PACKAGE, "XKeyEvent") {
 	unsigned_int.member("keycode")
 	Bool.member("same_screen")
 }.nativeType
-val XKeyEvent_p = StructType(XKeyEvent)
+val XKeyEvent_p = XKeyEvent.p
 
 val XButtonEvent = struct(LINUX_PACKAGE, "XButtonEvent") {
 	documentation = "Button event."
@@ -129,7 +129,6 @@ val XSelectionRequestEvent = struct(LINUX_PACKAGE, "XSelectionRequestEvent") {
 	Atom.member("property")
 	Time.member("time")
 }.nativeType
-val XSelectionRequestEvent_p = StructType(XSelectionRequestEvent)
 
 val XSelectionEvent = struct(LINUX_PACKAGE, "XSelectionEvent") {
 	documentation = "Selection event structure."
@@ -176,7 +175,7 @@ val XErrorEvent = struct(LINUX_PACKAGE, "XErrorEvent") {
 	unsigned_char.member("minor_code")
 	XID.member("resourceid")
 }.nativeType
-val XErrorEvent_p = StructType(XErrorEvent)
+val XErrorEvent_p = XErrorEvent.p
 
 val XErrorHandler = callback(
 	LINUX_PACKAGE, void, "XErrorHandler",
@@ -200,7 +199,7 @@ val XGenericEventCookie = struct(LINUX_PACKAGE, "XGenericEventCookie") {
 	unsigned_int.member("cookie")
 	void_p.member("data")
 }.nativeType
-val XGenericEventCookie_p = StructType(XGenericEventCookie)
+val XGenericEventCookie_p = XGenericEventCookie.p
 
 val XEvent = struct(LINUX_PACKAGE, "XEvent") {
 	documentation = "This union is defined so Xlib can always use the same sized event structure internally, to avoid memory fragmentation."
@@ -244,7 +243,7 @@ val XEvent = struct(LINUX_PACKAGE, "XEvent") {
 
 	//long.member("pad", size = 24)
 }.nativeType
-val XEvent_p = StructType(XEvent)
+val XEvent_p = XEvent.p
 
 fun config() {
 	struct(LINUX_PACKAGE, "PropertyWMState", virtual = true) {

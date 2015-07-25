@@ -105,31 +105,19 @@ class Struct(
 
 	private val members = ArrayList<StructMember>()
 
-	// We allow primitives as members
-	fun PrimitiveType.member(nativeName: String, name: String = nativeName) {
+	// Plain field
+	fun NativeType.member(nativeName: String, name: String = nativeName) {
 		members add StructMember(this, nativeName, name)
 	}
 
-	// We allow primitive arrays as members
-	fun PrimitiveType.member(nativeName: String, name: String = nativeName, size: Int) {
+	// Array field
+	fun NativeType.member(nativeName: String, name: String = nativeName, size: Int) {
 		members add StructMemberArray(this, nativeName, name, size)
 	}
 
-	// TODO: Kotlin bug - Removed nullTerminated = false default. If nullTerminated is omitted on the call site, the above function will be called instead.
-	// TODO: Is nullTerminated ever false?
-	// We allow character arrays as members
+	// CharSequence special-case
 	fun CharType.member(nativeName: String, name: String = nativeName, size: Int, nullTerminated: Boolean) {
 		members add StructMemberCharArray(this, nativeName, name, size, nullTerminated)
-	}
-
-	// We allow pointers as members
-	fun PointerType.member(nativeName: String, name: String = nativeName) {
-		members add StructMember(this, nativeName, name)
-	}
-
-	// We allow struct arrays
-	fun StructType.member(nativeName: String, name: String = nativeName, size: Int) {
-		members add StructMemberArray(this, nativeName, name, size)
 	}
 
 	val StructMember.isNestedStruct: Boolean
@@ -981,6 +969,17 @@ fun struct(
 	Generator.register(struct)
 	return struct
 }
+
+fun struct_p(
+	packageName: String,
+	className: String,
+	nativeSubPath: String = "",
+	structName: String = className,
+	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
+	virtual: Boolean = false,
+	malloc: Boolean = true,
+	init: Struct.() -> Unit
+) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, malloc, init).nativeType.p
 
 /** Anonymous member struct definition. Mostly useful for union of structs. */
 fun Struct.struct(init: Struct.() -> Unit): StructType {

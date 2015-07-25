@@ -28,24 +28,23 @@ val objc_property_t = "objc_property_t".opaque_p
 val objc_property_t_p = objc_property_t.p
 
 // Defines a property attribute
-val objc_property_attribute_t = StructType(struct(MACOSX_PACKAGE, "ObjCPropertyAttribute", structName = "objc_property_attribute_t") {
+val objc_property_attribute_t_p = struct_p(MACOSX_PACKAGE, "ObjCPropertyAttribute", structName = "objc_property_attribute_t") {
 	documentation = "Defines a property attribute."
 	nativeImport ("<objc/objc-runtime.h>")
 
 	charUTF8_p.member("name")
 	charUTF8_p.member("value")
-})
-val objc_property_attribute_t_p = StructType(objc_property_attribute_t)
+}
 
 // Defines a method
-val objc_method_description = StructType(struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT) {
+val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT) {
 	documentation = "Defines a method."
 	nativeImport ("<objc/objc-runtime.h>")
 
 	SEL.member("name")
 	charUTF8_p.member("types")
-})
-val objc_method_description_p = StructType(objc_method_description)
+}.nativeType
+val objc_method_description_p = objc_method_description.p
 
 val EnumerationMutationHandler = CallbackType(callback(
 	MACOSX_PACKAGE, void, "EnumerationMutationHandler",

@@ -42,7 +42,7 @@ val DISPLAY = Display_p.IN("display", "the connection to the X server") // This 
 val Screen_p = "Screen".p // Screen is a struct, but should be treated as an opaque type by apps
 val Window_p = Window.p
 
-val XComposeStatus = struct(LINUX_PACKAGE, "XComposeStatus") {
+val XComposeStatus_p = struct_p(LINUX_PACKAGE, "XComposeStatus") {
 	documentation = "Compose sequence status structure, used in calling Xutil#XLookupString()."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -50,10 +50,9 @@ val XComposeStatus = struct(LINUX_PACKAGE, "XComposeStatus") {
 	)
 	XPointer.member("compose_ptr")
 	int.member("chars_matched")
-}.nativeType
-val XComposeStatus_p = StructType(XComposeStatus)
+}
 
-val XSetWindowAttributes = struct(LINUX_PACKAGE, "XSetWindowAttributes") {
+val XSetWindowAttributes_p = struct_p(LINUX_PACKAGE, "XSetWindowAttributes") {
 	documentation = "Data structure for setting window attributes."
 	nativeImport ("LinuxLWJGL.h")
 
@@ -72,10 +71,9 @@ val XSetWindowAttributes = struct(LINUX_PACKAGE, "XSetWindowAttributes") {
 	Bool.member("override_redirect")
 	Colormap.member("colormap")
 	Cursor.member("cursor")
-}.nativeType
-val XSetWindowAttributes_p = StructType(XSetWindowAttributes)
+}
 
-val Visual = struct(LINUX_PACKAGE, "Visual") {
+val Visual_p = struct_p(LINUX_PACKAGE, "Visual") {
 	documentation = "Visual structure; contains information about colormapping possible."
 	nativeImport ("LinuxLWJGL.h")
 
@@ -87,10 +85,9 @@ val Visual = struct(LINUX_PACKAGE, "Visual") {
 	unsigned_long.member("blue_mask")
 	int.member("bits_per_rgb")
 	int.member("map_entries")
-}.nativeType
-val Visual_p = StructType(Visual)
+}
 
-val XWindowAttributes = struct(LINUX_PACKAGE, "XWindowAttributes") {
+val XWindowAttributes_p = struct_p(LINUX_PACKAGE, "XWindowAttributes") {
 	documentation = "Data structure for window attributes."
 	nativeImport ("LinuxLWJGL.h")
 
@@ -117,10 +114,9 @@ val XWindowAttributes = struct(LINUX_PACKAGE, "XWindowAttributes") {
 	long.member("do_not_propagate_mask")
 	Bool.member("override_redirect")
 	Screen_p.member("screen")
-}.nativeType
-val XWindowAttributes_p = StructType(XWindowAttributes)
+}
 
-val XVisualInfo = struct(LINUX_PACKAGE, "XVisualInfo") {
+val XVisualInfo_p = struct_p(LINUX_PACKAGE, "XVisualInfo") {
 	documentation = "Information used by the visual utility routines to find desired visual type from the many visuals a display may support."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -137,10 +133,9 @@ val XVisualInfo = struct(LINUX_PACKAGE, "XVisualInfo") {
 	unsigned_long.member("blue_mask")
 	int.member("colormap_size")
 	int.member("bits_per_rgb")
-}.nativeType
-val XVisualInfo_p = StructType(XVisualInfo)
+}
 
-val XSizeHints = struct(LINUX_PACKAGE, "XSizeHints") {
+val XSizeHints_p = struct_p(LINUX_PACKAGE, "XSizeHints") {
 	documentation = "Used by Xlib#XSetSizeHints()."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -168,10 +163,9 @@ val XSizeHints = struct(LINUX_PACKAGE, "XSizeHints") {
 	int.member("base_width")
 	int.member("base_height")
 	int.member("win_gravity")
-}.nativeType
-val XSizeHints_p = StructType(XSizeHints)
+}
 
-val XWMHints = struct(LINUX_PACKAGE, "XWMHints") {
+val XWMHints_p = struct_p(LINUX_PACKAGE, "XWMHints") {
 	documentation = "Used by Xlib#XSetWMHints()."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -187,10 +181,9 @@ val XWMHints = struct(LINUX_PACKAGE, "XWMHints") {
 	int.member("icon_y")
 	Pixmap.member("icon_mask")
 	XID.member("window_group")
-}.nativeType
-val XWMHints_p = StructType(XWMHints)
+}
 
-val XClassHint = struct(LINUX_PACKAGE, "XClassHint") {
+val XClassHint_p = struct_p(LINUX_PACKAGE, "XClassHint") {
 	documentation = "Used by Xlib#XSetClassHint()."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -199,12 +192,11 @@ val XClassHint = struct(LINUX_PACKAGE, "XClassHint") {
 
 	charASCII_p.member("res_name")
 	charASCII_p.member("res_class")
-}.nativeType
-val XClassHint_p = StructType(XClassHint)
+}
 
 // --------------- XInput2.h ---------------
 
-val XIEventMask = struct(LINUX_PACKAGE, "XIEventMask") {
+val XIEventMask_p = struct_p(LINUX_PACKAGE, "XIEventMask") {
 	documentation = "XInput2 event mask."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -214,8 +206,7 @@ val XIEventMask = struct(LINUX_PACKAGE, "XIEventMask") {
 	int.member("deviceid")
 	unsigned_char_p.member("mask")
 	int.member("mask_len")
-}.nativeType
-val XIEventMask_p = StructType(XIEventMask)
+}
 
 val XIButtonState = struct(LINUX_PACKAGE, "XIButtonState") {
 	documentation = "XInput2 button state."
@@ -321,7 +312,7 @@ val RROutput_p = RROutput.p
 val RRCrtc_p = RRCrtc.p
 val RRMode_p = RRMode.p
 
-val XRRModeInfo = struct(LINUX_PACKAGE, "XRRModeInfo") {
+val XRRModeInfo_p = struct_p(LINUX_PACKAGE, "XRRModeInfo") {
 	documentation = "Xrandr mode info struct."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -342,10 +333,9 @@ val XRRModeInfo = struct(LINUX_PACKAGE, "XRRModeInfo") {
 	char_p.member("name");
 	unsigned_int.member("nameLength");
 	XRRModeFlags.member("modeFlags");
-}.nativeType
-val XRRModeInfo_p = StructType(XRRModeInfo)
+}
 
-val XRRScreenResources = struct(LINUX_PACKAGE, "XRRScreenResources") {
+val XRRScreenResources_p = struct_p(LINUX_PACKAGE, "XRRScreenResources") {
 	documentation = "Xrandr screen resources struct."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -360,10 +350,9 @@ val XRRScreenResources = struct(LINUX_PACKAGE, "XRRScreenResources") {
 	RROutput_p.member("outputs")
 	int.member("nmode")
 	XRRModeInfo_p.member("modes")
-}.nativeType
-val XRRScreenResources_p = StructType(XRRScreenResources)
+}
 
-val XRRCrtcInfo = struct(LINUX_PACKAGE, "XRRCrtcInfo") {
+val XRRCrtcInfo_p = struct_p(LINUX_PACKAGE, "XRRCrtcInfo") {
 	documentation = "Xrandr Crtc info struct."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -382,10 +371,9 @@ val XRRCrtcInfo = struct(LINUX_PACKAGE, "XRRCrtcInfo") {
 	Rotation.member("rotations")
 	int.member("npossible")
 	RROutput_p.member("possible")
-}.nativeType
-val XRRCrtcInfo_p = StructType(XRRCrtcInfo)
+}
 
-val XRROutputInfo = struct(LINUX_PACKAGE, "XRROutputInfo") {
+val XRROutputInfo_p = struct_p(LINUX_PACKAGE, "XRROutputInfo") {
 	documentation = "Xrandr output info struct."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -407,10 +395,9 @@ val XRROutputInfo = struct(LINUX_PACKAGE, "XRROutputInfo") {
 	int.member("nmode")
 	int.member("npreferred")
 	RRMode_p.member("modes")
-}.nativeType
-val XRROutputInfo_p = StructType(XRROutputInfo)
+}
 
-val XRRCrtcGamma = struct(LINUX_PACKAGE, "XRRCrtcGamma") {
+val XRRCrtcGamma_p = struct_p(LINUX_PACKAGE, "XRRCrtcGamma") {
 	documentation = "Xrandr CrtcGamma struct."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -421,8 +408,7 @@ val XRRCrtcGamma = struct(LINUX_PACKAGE, "XRRCrtcGamma") {
 	unsigned_short_p.member("red")
 	unsigned_short_p.member("green")
 	unsigned_short_p.member("blue")
-}.nativeType
-val XRRCrtcGamma_p = StructType(XRRCrtcGamma)
+}
 
 // --------------- XKBlib.h ---------------
 
@@ -432,7 +418,7 @@ val XkbNumVirtualMods = 16
 val XkbNumIndicators = 32
 val XkbNumKbdGroups = 4
 
-val XkbKeyNameRec = struct(LINUX_PACKAGE, "XkbKeyNameRec") {
+val XkbKeyNamePtr = struct_p(LINUX_PACKAGE, "XkbKeyNameRec") {
 	documentation = "Xkb key name record."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -440,10 +426,9 @@ val XkbKeyNameRec = struct(LINUX_PACKAGE, "XkbKeyNameRec") {
 	)
 
 	charASCII.member("name", size = XkbKeyNameLength, nullTerminated = false)
-}.nativeType
-val XkbKeyNamePtr = StructType(XkbKeyNameRec)
+}
 
-val XkbKeyAliasRec = struct(LINUX_PACKAGE, "XkbKeyAliasRec") {
+val XkbKeyAliasPtr = struct_p(LINUX_PACKAGE, "XkbKeyAliasRec") {
 	documentation = "Xkb key alias record."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -452,10 +437,9 @@ val XkbKeyAliasRec = struct(LINUX_PACKAGE, "XkbKeyAliasRec") {
 
 	charASCII.member("real", size = XkbKeyNameLength, nullTerminated = false)
 	charASCII.member("alias", size = XkbKeyNameLength, nullTerminated = false)
-}.nativeType
-val XkbKeyAliasPtr = StructType(XkbKeyAliasRec)
+}
 
-val XkbNamesRec = struct(LINUX_PACKAGE, "XkbNamesRec") {
+val XkbNamesPtr = struct_p(LINUX_PACKAGE, "XkbNamesRec") {
 	documentation = "Describes an Xkb keyboard."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -478,10 +462,9 @@ val XkbNamesRec = struct(LINUX_PACKAGE, "XkbNamesRec") {
 	unsigned_char.member("num_keys")
 	unsigned_char.member("num_key_aliases")
 	unsigned_short.member("num_rg")
-}.nativeType
-val XkbNamesPtr = StructType(XkbNamesRec)
+}
 
-val XkbDescRec = struct(LINUX_PACKAGE, "XkbDescRec") {
+val XkbDescPtr = struct_p(LINUX_PACKAGE, "XkbDescRec") {
 	documentation = "Describes an Xkb keyboard."
 	nativeImport (
 		"LinuxLWJGL.h",
@@ -501,12 +484,11 @@ val XkbDescRec = struct(LINUX_PACKAGE, "XkbDescRec") {
 	XkbNamesPtr.member("names")
 	//XkbCompatMapPtr.member("compat")
 	//XkbGeometryPtr.member("geom")
-}.nativeType
-val XkbDescPtr = StructType(XkbDescRec)
+}
 
 // ------------- Graphics --------------
 
-val XGCValues = struct(LINUX_PACKAGE, "XGCValues") {
+val XGCValues_p = struct_p(LINUX_PACKAGE, "XGCValues") {
 	documentation = "Data structure for setting graphics context."
 	nativeImport ("LinuxLWJGL.h")
 
@@ -533,12 +515,11 @@ val XGCValues = struct(LINUX_PACKAGE, "XGCValues") {
 	Pixmap.member("clip_mask")
 	int.member("dash_offset")
 	char.member("dashes")
-}.nativeType
-val XGCValues_p = StructType(XGCValues)
+}
 
 val GC = "GC".opaque_p // GC is a struct, but should be treated as an opaque type by apps
 
-val XColor = struct(LINUX_PACKAGE, "XColor") {
+val XColor_p = struct_p(LINUX_PACKAGE, "XColor") {
 	documentation = "Data structure used by color operations."
 	nativeImport ("LinuxLWJGL.h")
 
@@ -548,5 +529,4 @@ val XColor = struct(LINUX_PACKAGE, "XColor") {
 	unsigned_short.member("blue")
 	char.member("flags")
 	char.member("pad")
-}.nativeType
-val XColor_p = StructType(XColor)
+}
