@@ -447,9 +447,10 @@ class NativeClassFunction(
 	}
 
 	private fun PrintWriter.generateNativeMethod(nativeOnly: Boolean) {
-		if ( nativeOnly )
-			println(documentation)
-		else {
+		if ( nativeOnly ) {
+			if ( documentation.isNotEmpty() )
+				println(documentation)
+		} else {
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 			println("\t@JavadocExclude")
 		}
@@ -537,7 +538,7 @@ class NativeClassFunction(
 			else
 				stripPostfix(stripType = true)
 			printOpenGLJavaDoc(documentation, xmlName, this@NativeClassFunction has deprecatedGL)
-		} else
+		} else if ( documentation.isNotEmpty() )
 			println(documentation)
 
 		// Step 1: Method signature
@@ -1038,9 +1039,11 @@ class NativeClassFunction(
 
 		// Step 0: JavaDoc
 
-		if ( returnTransform === StringReturnTransform ) // Special-case, we skipped the normal method
-			println(documentation)
-		else
+		if ( returnTransform === StringReturnTransform ) {
+			// Special-case, we skipped the normal method
+			if ( documentation.isNotEmpty() )
+				println(documentation)
+		} else
 			generateJavaDocLink(description, this@NativeClassFunction)
 
 		// Step 1: Method signature
