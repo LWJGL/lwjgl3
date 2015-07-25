@@ -924,27 +924,6 @@ val NV_geometry_shader_passthrough = EXT_FLAG.nativeClassGL("NV_geometry_shader_
 		vertices to output vertices.
 		"""
 }
-val NV_gpu_program5_mem_extended = EXT_FLAG.nativeClassGL("NV_gpu_program5_mem_extended", postfix = NV) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension provides a new set of storage modifiers that can be used by NV_gpu_program5 assembly program instructions loading from or storing to various
-		forms of GPU memory.
-		
-		Requires ${"NV_gpu_program5".cap}.
-		"""
-}
-val NV_parameter_buffer_object2 = EXT_FLAG.nativeClassGL("NV_parameter_buffer_object2", postfix = NV) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension builds on the ${"NV_parameter_buffer_object".cap} extension to provide additional flexibility in sourcing data from buffer objects.
-
-		Requires ${GL20.core}, ${"NV_gpu_program4".cap} and ${"NV_parameter_buffer_object".cap}.
-		"""
-}
 val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGL("NV_sample_mask_override_coverage", postfix = NV) {
 	documentation =
 		"""
@@ -952,17 +931,6 @@ val NV_sample_mask_override_coverage = EXT_FLAG.nativeClassGL("NV_sample_mask_ov
 
 		This extension allows the fragment shader to control whether the gl_SampleMask output can enable samples that were not covered by the original
 		primitive, or that failed the early depth/stencil tests.
-		"""
-}
-val NV_shader_atomic_counters = EXT_FLAG.nativeClassGL("NV_shader_atomic_counters", postfix = NV) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension builds upon the ${"ARB_shader_atomic_counters".cap} and ${"NV_gpu_program5".cap} extensions to provide assembly language support for
-		incrementing, decrementing, and querying the values of atomic counters stored in buffer object memory.
-
-		Requires ${"ARB_shader_atomic_counters".cap} and ${"NV_gpu_program5".cap}.
 		"""
 }
 val NV_shader_atomic_float = EXT_FLAG.nativeClassGL("NV_shader_atomic_float", postfix = NV) {
@@ -998,20 +966,6 @@ val NV_shader_atomic_int64 = EXT_FLAG.nativeClassGL("NV_shader_atomic_int64", po
 
 		This extension provides additional GLSL built-in functions and assembly opcodes allowing shaders to perform additional atomic read-modify-write
 		operations on 64-bit signed and unsigned integers stored in buffer object memory.
-		"""
-}
-val NV_shader_storage_buffer_object = EXT_FLAG.nativeClassGL("NV_shader_storage_buffer_object", postfix = NV) {
-	documentation =
-		"""
-		When true, the $registryLink extension is supported.
-
-		This extension provides assembly language support for shader storage buffers (from the ${"ARB_shader_storage_buffer_object".cap} extension) for all
-		program types supported by ${"NV_gpu_program5".cap}, including compute programs added by the ${"NV_compute_program5".cap} extension.
-
-		Assembly programs using this extension can read and write to the memory of buffer objects bound to the binding points provided by
-		${"ARB_shader_storage_buffer_object".cap}.
-
-		Requires ${GL40.core}, ${"NV_gpu_program4".cap}, ${"NV_gpu_program5".cap}, ${ARB_shader_storage_buffer_object.link}.
 		"""
 }
 val NV_shader_thread_shuffle = EXT_FLAG.nativeClassGL("NV_shader_thread_shuffle", postfix = NV) {
