@@ -52,6 +52,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
 			<arg value="-I${src.include.rel}/opengl" if:true="${binding.opengl}"/>
 			<arg value="-I${src.include.rel}/opengl/glx" if:true="${binding.opengl}"/>
+			<arg value="-I${src.include.rel}/egl" if:true="${binding.egl}"/>
 
 			<!-- Paths relative to basedir -->
 			<fileset dir="${src.native}/system" includes="*.c"/>
@@ -66,6 +67,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${binding.opencl}"/>
 			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${binding.opengl}"/>
 			<fileset dir="${src.generated.native}/opengl/glx" includes="*.c" if:true="${binding.opengl}"/>
+			<fileset dir="${src.generated.native}/egl" includes="*.c" if:true="${binding.egl}"/>
 
 			<globmapper from="*.c" to="*.o"/>
 		</apply>

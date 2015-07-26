@@ -38,6 +38,8 @@ enum class Binding(val key: String) {
 	OPENCL("binding.opencl"),
 	OPENGL("binding.opengl"),
 
+	EGL("binding.egl"),
+
 	MANTLE("binding.mantle"),
 	OVR("binding.ovr"),
 
@@ -80,6 +82,7 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.openal", Binding.OPENAL)
 		generate("org.lwjgl.opencl", Binding.OPENCL)
 		generate("org.lwjgl.opengl", Binding.OPENGL)
+		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.ovr", Binding.OVR)
 		generate("org.lwjgl.mantle", Binding.MANTLE)
 

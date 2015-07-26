@@ -1,0 +1,38 @@
+/*
+ * Copyright LWJGL. All rights reserved.
+ * License terms: http://lwjgl.org/license.php
+ */
+package org.lwjgl.egl.templates
+
+import org.lwjgl.generator.*
+import org.lwjgl.egl.*
+
+val KHR_stream_producer_eglsurface = "KHRStreamProducerEglsurface".nativeClassEGL("KHR_stream_producer_eglsurface", postfix = KHR) {
+	includeEGLEXT()
+
+	documentation =
+		"""
+		Native bindings to the $registryLink extension.
+
+		This extension allows an EGLSurface to be created as a producer of images to an EGLStream. Each call to eglSwapBuffers posts a new image frame into the
+		EGLStream.
+
+		Requires ${EGL12.core}.
+		"""
+
+	IntConstant(
+		"",
+
+		"STREAM_BIT_KHR" _ 0x0800
+	)
+
+	EGLSurface(
+		"CreateStreamProducerSurfaceKHR",
+		"",
+
+		EGLDisplay.IN("dpy", ""),
+		EGLConfig.IN("config", ""),
+		EGLStreamKHR.IN("stream", ""),
+		nullable _ noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+	)
+}

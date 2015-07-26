@@ -145,6 +145,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
 		</patternset>
@@ -191,6 +192,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" if:true="${binding.opengl_nocl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" if:true="${binding.opencl_nogl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<!--
@@ -294,6 +296,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/demo/opencl/**" if:true="${binding.glfw_opencl}"/>
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${binding.glfw_stb}"/>
 		</lwjgl.javac>

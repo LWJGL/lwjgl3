@@ -42,6 +42,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="/I${src.include}\opencl" if:true="${binding.opencl}"/>
 			<arg value="/I${src.include}\opengl" if:true="${binding.opengl}"/>
 			<arg value="/I${src.include}\opengl\wgl" if:true="${binding.opengl}"/>
+			<arg value="/I${src.include}\egl" if:true="${binding.egl}"/>
 			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include" if:true="${binding.ovr}"/>
 
 			<!-- Paths relative to basedir -->
@@ -57,6 +58,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${binding.opencl}"/>
 			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${binding.opengl}"/>
 			<fileset dir="${src.generated.native}/opengl/wgl" includes="*.c" if:true="${binding.opengl}"/>
+			<fileset dir="${src.generated.native}/egl" includes="*.c" if:true="${binding.egl}"/>
 			<fileset dir="${src.generated.native}/ovr" includes="*.c" if:true="${binding.ovr}"/>
 
 			<mapper type="glob" from="*.c" to="*.obj"/>
