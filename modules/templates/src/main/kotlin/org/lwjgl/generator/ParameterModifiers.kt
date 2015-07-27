@@ -41,8 +41,6 @@ class AutoSize(
 
 	/** If not null, the expression will be appended to the parameter. */
 	var factor: AutoSizeFactor? = null
-	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
-	var toBytes: Boolean = false
 
 	fun shr(value: Int) = shr("$value")
 	fun shr(expression: String): AutoSize {

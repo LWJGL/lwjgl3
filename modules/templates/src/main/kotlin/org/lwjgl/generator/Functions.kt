@@ -207,9 +207,7 @@ class NativeClassFunction(
 						bufferParam.nativeType !is PointerType -> param.error("Buffer reference must be a pointer type: AutoSize(${autoSize.reference})")
 						!bufferParam.isBufferPointer           -> param.error("Buffer reference must not be a opaque pointer: AutoSize(${autoSize.reference})")
 					}
-					if ( bufferParam has MultiType )
-						autoSize.toBytes = true
-					else if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
+					if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
 						autoSize shr 1
 				}
 			}
@@ -885,15 +883,10 @@ class NativeClassFunction(
 
 				val multiTypes = it[MultiType]
 				for ( autoType in multiTypes.types ) {
-					// Transform the AutoSize parameter, if there is one and it's expressed in bytes
-					getParams {
-						if ( it has AutoSize ) {
-							val autoSize = it[AutoSize]
-							autoSize.hasReference(param.name) && autoSize.toBytes
-						} else
-							false
-					}.forEach {
-						transforms[it] = AutoSizeTransform(param, ApplyTo.BOTH, autoType.byteShift!!)
+					// Transform the AutoSize parameter, if there is one
+					getReferenceParam(AutoSize, param.name) let {
+						if ( it != null )
+							transforms[it] = AutoSizeTransform(param, ApplyTo.BOTH, autoType.byteShift!!)
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
