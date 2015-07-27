@@ -12,6 +12,7 @@ import org.lwjgl.generator.ParameterType.OUT
 import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
 import java.io.PrintWriter
+import java.nio.ByteBuffer
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.LinkedHashMap
@@ -315,13 +316,13 @@ class NativeClassFunction(
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && !it.has(Callback) )
 				checks add "checkPointer(${it.name});"
 
-			if ( mode === NORMAL && it.paramType === IN && it.nativeType is CharSequenceType ) {
+			if ( mode === NORMAL && it.nativeType is CharSequenceType && it.paramType === IN ) {
 				if ( it.nativeType.nullTerminated && getReferenceParam(AutoSize, it.name) == null )
 					checks add "${prefix}checkNT${it.nativeType.charMapping.bytes}(${it.name});"
 			}
 
 			if ( it.paramType === IN && it has Terminated ) {
-				val postfix = if ( mode !== NORMAL ) "" else
+				val postfix = if ( mode !== NORMAL && it.nativeType.javaMethodType !== javaClass<ByteBuffer>() ) "" else
 					when ( it.nativeType.mapping ) {
 						PointerMapping.DATA_SHORT   -> "2"
 						PointerMapping.DATA_INT,
