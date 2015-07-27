@@ -116,9 +116,7 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		Check(
-			expression = "4 * 4", bytes = true
-		) _ MultiType(
+		Check("4 * 4") _ MultiType(
 			PointerMapping.DATA_INT
 		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing the draw parameters")
 	)
@@ -165,9 +163,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the type of data in the buffer bound to the GL15#ELEMENT_ARRAY_BUFFER binding",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		Check(
-			expression = "5 * 4", bytes = true
-		) _ MultiType(
+		Check("5 * 4") _ MultiType(
 			PointerMapping.DATA_INT
 		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "the address of a structure containing the draw parameters")
 	)

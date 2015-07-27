@@ -342,7 +342,7 @@ class NativeClassFunction(
 
 					if ( check.debug ) prefix = "if ( LWJGLUtil.DEBUG )\n\t\t\t\t$prefix"
 
-					if ( check.bytes )
+					if ( it.nativeType.javaMethodType === javaClass<ByteBuffer>() )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
 					else if ( mode === NORMAL || it.nativeType is StructType )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"

@@ -862,9 +862,7 @@ for ( i = 0; i < primcount; i++ ) {
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		Check(
-			expression = "primcount * (stride == 0 ? (4 * 4) : stride)", bytes = true
-		) _ MultiType(
+		Check("primcount * (stride == 0 ? (4 * 4) : stride)") _ MultiType(
 			PointerMapping.DATA_INT
 		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
@@ -902,9 +900,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		Check(
-			expression = "primcount * (stride == 0 ? (5 * 4) : stride)", bytes = true
-		) _ MultiType(
+		Check("primcount * (stride == 0 ? (5 * 4) : stride)") _ MultiType(
 			PointerMapping.DATA_INT
 		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),

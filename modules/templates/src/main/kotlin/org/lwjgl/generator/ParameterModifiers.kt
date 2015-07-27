@@ -120,8 +120,6 @@ val autoSizeResult = object: ParameterModifier() {
 class Check(
 	/** An integer expression to validate against the buffer capacity. */
 	val expression: String,
-	/** If the expression value is in bytes rather in elements (of the buffer type). */
-	val bytes: Boolean = false,
 	/** If true, the check will only be performed in debug mode. Useful for expensive checks. */
 	val debug: Boolean = false
 ): ParameterModifier() {
