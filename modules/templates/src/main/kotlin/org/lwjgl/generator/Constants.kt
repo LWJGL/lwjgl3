@@ -16,9 +16,19 @@ class ConstantType<T: Any>(
 	val print: (T) -> String
 )
 
-val ByteConstant = ConstantType(javaClass<Byte>()) { "0x%X".format(it.toInt()) }
+val ByteConstant = ConstantType(javaClass<Byte>()) {
+	val i = it.toInt() and 0xFF
+	"0x%X".format(i) let {
+		if ( i < 0x80 ) it else "(byte)$it"
+	}
+}
 val CharConstant = ConstantType(javaClass<Char>()) { "'$it'" }
-val ShortConstant = ConstantType(javaClass<Short>()) { "0x%X".format(it.toInt()) }
+val ShortConstant = ConstantType(javaClass<Short>()) {
+	val i = it.toInt() and 0xFFFF
+	"0x%X".format(i) let {
+		if ( i < 0x8000 ) it else "(short)$it"
+	}
+}
 val IntConstant = ConstantType(javaClass<Int>()) { "0x%X".format(it) }
 val LongConstant = ConstantType(javaClass<Long>()) { "0x%XL".format(it) }
 val FloatConstant = ConstantType(javaClass<Float>()) { "%sf".format(it) }

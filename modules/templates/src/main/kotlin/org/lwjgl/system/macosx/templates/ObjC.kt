@@ -24,8 +24,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		ByteConstant(
 			"Boolean values.",
 
-			"YES" _ 1.b,
-			"NO" _ 0.b
+			"YES" expr "1",
+			"NO" expr "0"
 		)
 
 		CharConstant(

@@ -25,8 +25,8 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	ByteConstant(
 		"Boolean values.",
 
-		"TRUE" _ 1.b,
-		"FALSE" _ 0.b
+		"TRUE" expr "1",
+		"FALSE" expr "0"
 	)
 
 	macro _ CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")

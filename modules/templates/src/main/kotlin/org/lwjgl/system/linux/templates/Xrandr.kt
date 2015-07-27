@@ -42,17 +42,17 @@ val Xrandr = "Xrandr".nativeClass(LINUX_PACKAGE) {
 	ShortConstant(
 		"used in the rotation field; rotation and reflection in 0.1 proto.",
 
-		"RR_Rotate_0" _ 1.s,
-		"RR_Rotate_90" _ 2.s,
-		"RR_Rotate_180" _ 4.s,
-		"RR_Rotate_270" _ 8.s
+		"RR_Rotate_0" expr "1",
+		"RR_Rotate_90" expr "2",
+		"RR_Rotate_180" expr "4",
+		"RR_Rotate_270" expr "8"
 	)
 
 	ShortConstant(
 		"new in 1.0 protocol, to allow reflection of screen",
 
-		"RR_Reflect_X" _ 16.s,
-		"RR_Reflect_Y" _ 32.s
+		"RR_Reflect_X" expr "16",
+		"RR_Reflect_Y" expr "32"
 	)
 
 	IntConstant(

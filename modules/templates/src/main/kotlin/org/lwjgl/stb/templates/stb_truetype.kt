@@ -566,9 +566,9 @@ int main(int arg, char **argv)
 	ByteConstant(
 		"Vertex type.",
 
-		"vmove" _ 1.b,
-		"vline" _ 2.b,
-		"vcurve" _ 3.b
+		"vmove" expr "1",
+		"vline" expr "2",
+		"vcurve" expr "3"
 	)
 
 	int(
