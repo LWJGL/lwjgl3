@@ -188,7 +188,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		""",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		AutoSize("data") _ GLsizeiptr.IN("size", " the size in bytes of the buffer object's new data store"),
+		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the buffer object's new data store"),
 		optional _ MultiType(
 			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,

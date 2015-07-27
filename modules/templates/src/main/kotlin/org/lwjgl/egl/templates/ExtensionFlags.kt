@@ -26,7 +26,7 @@ private val NativeClass.cap: String get() = "{@link #${capName} ${templateName}}
 val EXT_client_extensions = EXT_FLAG.nativeClassEGL("EXT_client_extensions", postfix = EXT) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		This extension introduces the concept of *extension type*, requires that each EGL extension belong to exactly one type, and defines two types: display
 		and client. It also provides a method to query, without initializing a display, the set of supported client extensions.
@@ -55,7 +55,7 @@ val EXT_client_extensions = EXT_FLAG.nativeClassEGL("EXT_client_extensions", pos
 val KHR_client_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_client_get_all_proc_addresses", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the ${registryLink("EXT", "EGL_KHR_get_all_proc_addresses")} extension.
+		When true, the ${registryLink("EXT", "EGL_KHR_get_all_proc_addresses")} extension is supported.
 
 		eglGetProcAddress is currently defined to not support the querying of non-extension EGL or client API functions. Non-extension functions are expected
 		to be exposed as library symbols that can be resolved statically at link time, or dynamically at run time using OS-specific runtime linking mechanisms.
@@ -82,7 +82,7 @@ val KHR_client_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_client_get_
 val KHR_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_get_all_proc_addresses", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		eglGetProcAddress is currently defined to not support the querying of non-extension EGL or client API functions. Non-extension functions are expected
 		to be exposed as library symbols that can be resolved statically at link time, or dynamically at run time using OS-specific runtime linking mechanisms.
@@ -109,15 +109,15 @@ val KHR_get_all_proc_addresses = EXT_FLAG.nativeClassEGL("KHR_get_all_proc_addre
 val KHR_stream_producer_aldatalocator = EXT_FLAG.nativeClassEGL("KHR_stream_producer_aldatalocator", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		This extension (in conjunction with the OpenMAX_AL_EGLStream_DataLocator extension to OpenMAX AL) allows an OpenMAX AL MediaPlayer object to be
 		connected as the producer of an EGLStream.
 
-		After the EGLStream is created and connected to a consumer, the OpenMAX AL MediaPlayer object is created by calling <pEngine>'s CreateMediaPlayer()
-		method. The <pImageVideoSnk> argument points to an XADataLocator_EGLStream containing the EGLStreamKHR handle of the stream. The CreateMediaPlayer()
-		method creates a MediaPlayer object and connects it as the producer of the EGLStream. (Note that the pFormat member of the XADataSink structure is
-		ignored in this case and may be NULL.)
+		After the EGLStream is created and connected to a consumer, the OpenMAX AL MediaPlayer object is created by calling &lt;pEngine&gt;'s
+		CreateMediaPlayer() method. The &lt;pImageVideoSnk&gt; argument points to an XADataLocator_EGLStream containing the EGLStreamKHR handle of the stream.
+		The CreateMediaPlayer() method creates a MediaPlayer object and connects it as the producer of the EGLStream. (Note that the pFormat member of the
+		XADataSink structure is ignored in this case and may be $NULL.)
 
 		Once connected the MediaPlayer inserts image frames into the EGLStream.
 
@@ -128,7 +128,7 @@ val KHR_stream_producer_aldatalocator = EXT_FLAG.nativeClassEGL("KHR_stream_prod
 val KHR_surfaceless_context = EXT_FLAG.nativeClassEGL("KHR_surfaceless_context", postfix = KHR) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		These extensions allows an application to make a context current by passing EGL_NO_SURFACE for the write and read surface in the call to
 		eglMakeCurrent. The motivation is that applications that only want to render to client API targets (such as OpenGL framebuffer objects) should not need
@@ -141,7 +141,7 @@ val KHR_surfaceless_context = EXT_FLAG.nativeClassEGL("KHR_surfaceless_context",
 val NV_post_convert_rounding = EXT_FLAG.nativeClassEGL("NV_post_convert_rounding", postfix = NV) {
 	documentation =
 		"""
-		Native bindings to the $registryLink extension.
+		When true, the $registryLink extension is supported.
 
 		This extension defines the conversions for posting operations when the destination's number of components or component sizes do not match the color
 		buffer. This extension supports posting a 24 bit (888) color buffer to a 16 bit (565) destination buffer, posting a 16 bit (565) color buffer to a 24

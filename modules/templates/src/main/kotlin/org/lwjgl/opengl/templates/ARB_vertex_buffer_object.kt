@@ -175,7 +175,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		""",
 
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
-		AutoSize("data") _ GLsizeiptrARB.IN("size", " the size in bytes of the buffer object's new data store"),
+		AutoSize("data") _ GLsizeiptrARB.IN("size", "the size in bytes of the buffer object's new data store"),
 		optional _ MultiType(
 			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,

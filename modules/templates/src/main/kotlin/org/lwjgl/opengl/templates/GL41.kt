@@ -198,7 +198,7 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"UseProgramStages",
 		"Binds stages of a program object to a program pipeline.",
 
-		GLuint.IN("pipeline", " the program pipeline object to which to bind stages from {@code program}"),
+		GLuint.IN("pipeline", "the program pipeline object to which to bind stages from {@code program}"),
 		GLbitfield.IN("stages", "a set of program stages to bind to the program pipeline object"),
 		GLuint.IN("program", "the program object containing the shader executables to use in {@code pipeline}")
 	)
@@ -995,7 +995,7 @@ if (shader) {
 		"Defines the scissor box for multiple viewports.",
 
 		GLuint.IN("first", "the index of the first viewport whose scissor box to modify"),
-		(AutoSize("v") shr 2) _ GLsizei.IN("count", " the number of scissor boxes to modify"),
+		(AutoSize("v") shr 2) _ GLsizei.IN("count", "the number of scissor boxes to modify"),
 		const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 

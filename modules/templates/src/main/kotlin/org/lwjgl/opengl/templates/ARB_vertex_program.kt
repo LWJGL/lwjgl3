@@ -5,9 +5,9 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
+import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
+import org.lwjgl.opengl.*
 
 val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", postfix = ARB) {
 	nativeImport (
@@ -279,7 +279,7 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 		),
 		GLboolean.IN("normalized", "if GL11#TRUE, fixed-point types are normalized when converted to floating-point"),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		const _ void_p.IN("pointer", "the vertex attribute array data")
+		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the vertex attribute array data")
 	)
 
 	void(

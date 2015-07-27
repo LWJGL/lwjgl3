@@ -5,9 +5,9 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
+import org.lwjgl.generator.opengl.*
 import org.lwjgl.generator.opengl.BufferType.*
+import org.lwjgl.opengl.*
 
 val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", postfix = ARB) {
 	nativeImport (
@@ -95,7 +95,7 @@ val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", 
 		    "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		void_p.IN("pointer", "the matrix index data")
+		ARRAY_BUFFER _ void_p.IN("pointer", "the matrix index data")
 	)
 
 }

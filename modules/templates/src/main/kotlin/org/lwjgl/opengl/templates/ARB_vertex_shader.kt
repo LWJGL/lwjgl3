@@ -82,7 +82,6 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveAttribARB.",
 
-		"FLOAT" _ 0x1406,
 		"FLOAT_VEC2_ARB" _ 0x8B50,
 		"FLOAT_VEC3_ARB" _ 0x8B51,
 		"FLOAT_VEC4_ARB" _ 0x8B52,

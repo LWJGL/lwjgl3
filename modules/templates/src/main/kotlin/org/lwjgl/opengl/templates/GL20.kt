@@ -880,7 +880,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			"the RGB blend equation, how the red, green, and blue components of the source and destination colors are combined",
 			"GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 		),
-		GLenum.IN("modeAlpha", " the alpha blend equation, how the alpha component of the source and destination colors are combined")
+		GLenum.IN("modeAlpha", "the alpha blend equation, how the alpha component of the source and destination colors are combined")
 	)
 
 	// ATI_separate_stencil

@@ -535,8 +535,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
-		GLenum.IN("pname", " the parameter of the shader to query", ProgramStageProperties),
-		Check(1) _ returnValue _ GLint_p.OUT("values", " a variable into which the queried value or values will be placed")
+		GLenum.IN("pname", "the parameter of the shader to query", ProgramStageProperties),
+		Check(1) _ returnValue _ GLint_p.OUT("values", "a variable into which the queried value or values will be placed")
 	)
 
 	// ARB_tesselation_shader
