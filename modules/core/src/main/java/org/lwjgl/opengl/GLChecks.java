@@ -11,7 +11,9 @@ import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL21.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL40.*;
+import static org.lwjgl.opengl.GL41.*;
 import static org.lwjgl.opengl.GL43.*;
+import static org.lwjgl.opengl.NVGPUShader5.*;
 
 final class GLChecks {
 
@@ -71,8 +73,11 @@ final class GLChecks {
 			case GL_UNSIGNED_INT:
 			case GL_FLOAT:
 			case GL_4_BYTES:
+			case GL_FIXED:
 				return 4;
 			case GL_DOUBLE:
+			case GL_INT64_NV:
+			case GL_UNSIGNED_INT64_NV:
 				return 8;
 			default:
 				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
@@ -100,8 +105,11 @@ final class GLChecks {
 			case GL_UNSIGNED_INT:
 			case GL_FLOAT:
 			case GL_4_BYTES:
+			case GL_FIXED:
 				return 2;
 			case GL_DOUBLE:
+			case GL_INT64_NV:
+			case GL_UNSIGNED_INT64_NV:
 				return 3;
 			default:
 				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
