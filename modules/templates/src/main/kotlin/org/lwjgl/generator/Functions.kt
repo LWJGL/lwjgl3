@@ -568,7 +568,7 @@ class NativeClassFunction(
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.a: Generate checks
-		printCode(code.javaInit, Code.ApplyTo.NORMAL)
+		printCode(code.javaInit, ApplyTo.NORMAL)
 		generateChecks(NORMAL);
 
 		// Step 3.b: Prepare APIBuffer parameters.
@@ -582,9 +582,9 @@ class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
-		generateCodeBeforeNative(code, Code.ApplyTo.NORMAL)
+		generateCodeBeforeNative(code, ApplyTo.NORMAL)
 
-		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.NORMAL)) {
+		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
 			printList(getNativeParams()) {
 				it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
 			}
@@ -595,7 +595,7 @@ class NativeClassFunction(
 			}
 		}
 
-		generateCodeAfterNative(code, Code.ApplyTo.NORMAL)
+		generateCodeAfterNative(code, ApplyTo.NORMAL)
 
 		if ( !(returns.isVoid || returnsStructValue) ) {
 			// TODO: optimize condition?
@@ -643,23 +643,23 @@ class NativeClassFunction(
 						throw IllegalStateException("No autoSizeResult parameter could be found.")
 				}
 				println(");")
-			} else if ( code.hasStatements(code.javaAfterNative, Code.ApplyTo.NORMAL) )
+			} else if ( code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL) )
 				println("\t\treturn $RESULT;")
 		}
 
 		println("\t}\n")
 	}
 
-	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: Code.ApplyTo) {
+	private fun PrintWriter.printCode(statements: List<Code.Statement>, applyTo: ApplyTo) {
 		if ( statements.isEmpty() )
 			return
 
-		statements.filter { it.applyTo === Code.ApplyTo.BOTH || it.applyTo === applyTo }.forEach {
+		statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }.forEach {
 			println(it.code)
 		}
 	}
 
-	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: Code.ApplyTo) {
+	private fun PrintWriter.generateCodeBeforeNative(code: Code, applyTo: ApplyTo) {
 		printCode(code.javaBeforeNative, applyTo)
 
 		if ( code.hasStatements(code.javaFinally, applyTo) ) {
@@ -668,7 +668,7 @@ class NativeClassFunction(
 		}
 	}
 
-	private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: Code.ApplyTo) {
+	private fun PrintWriter.generateCodeAfterNative(code: Code, applyTo: ApplyTo) {
 		val finally = code.getStatements(code.javaFinally, applyTo)
 		if ( finally.isNotEmpty() )
 			print('\t')
@@ -757,7 +757,7 @@ class NativeClassFunction(
 					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
 					// Check if there's also a MultiType on the referenced parameter. Skip if so.
 					if ( !(param has MultiType) )
-						transforms[it] = AutoSizeTransform(param)
+						transforms[it] = AutoSizeTransform(param, autoSize.applyTo)
 				} else if ( it has optional )
 					transforms[it] = ExpressionTransform("0L")
 				else if ( it has Callback )
@@ -879,7 +879,8 @@ class NativeClassFunction(
 
 				// Add the AutoSize transformation if we skipped it above
 				getParams { it has AutoSize } forEach {
-					transforms[it] = AutoSizeTransform(paramMap[it[AutoSize].reference]!!)
+					val autoSize = it[AutoSize]
+					transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
 				}
 
 				val multiTypes = it[MultiType]
@@ -892,7 +893,7 @@ class NativeClassFunction(
 						} else
 							false
 					}.forEach {
-						transforms[it] = AutoSizeTransform(param, autoType.byteShift!!)
+						transforms[it] = AutoSizeTransform(param, ApplyTo.BOTH, autoType.byteShift!!)
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
@@ -926,7 +927,7 @@ class NativeClassFunction(
 				// Disable AutoSize factor
 				val autoSizeParam = getReferenceParam(AutoSize, bufferParam.name)
 				if ( autoSizeParam != null )
-					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, false)
+					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, autoSizeParam[AutoSize].applyTo, applyFactor = false)
 
 				val types = ArrayList<BufferType>(autoTypes.types.size())
 				autoTypes.types.forEach { types add it }
@@ -1079,7 +1080,7 @@ class NativeClassFunction(
 			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.A: Generate checks
-		printCode(code.javaInit, Code.ApplyTo.ALTERNATIVE)
+		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
 		generateChecks(ALTERNATIVE, customChecks, transforms);
 
 		// Step 3.B: Transform pre-processing.
@@ -1120,15 +1121,15 @@ class NativeClassFunction(
 		}
 
 		// Step 4: Call the native method
-		generateCodeBeforeNative(code, Code.ApplyTo.ALTERNATIVE)
+		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE)
 
-		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, Code.ApplyTo.ALTERNATIVE)) {
+		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE)) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
 			}
 		}
 
-		generateCodeAfterNative(code, Code.ApplyTo.ALTERNATIVE)
+		generateCodeAfterNative(code, ApplyTo.ALTERNATIVE)
 
 		if ( returns.isVoid || returnsStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
@@ -1187,7 +1188,7 @@ class NativeClassFunction(
 					println("return $returnExpression;")
 				else // Multiple statements, assumes the transformation includes the return statement.
 					println(returnExpression)
-			} else if ( code.hasStatements(code.javaAfterNative, Code.ApplyTo.ALTERNATIVE) )
+			} else if ( code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) )
 				println("\t\treturn $RESULT;")
 		}
 

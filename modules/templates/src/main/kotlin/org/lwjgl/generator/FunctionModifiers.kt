@@ -53,26 +53,20 @@ class Code(
 		val NO_CODE = Code()
 	}
 
-	enum class ApplyTo {
-		NORMAL,
-		ALTERNATIVE,
-		BOTH
-	}
-
 	data class Statement(
 		val code: String,
-		val applyTo: Code.ApplyTo = Code.ApplyTo.BOTH
+		val applyTo: ApplyTo = ApplyTo.BOTH
 	)
 
 	override val isSpecial = true
 
-	fun hasStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
-		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === Code.ApplyTo.BOTH || it.applyTo === applyTo }
-	fun getStatements(statements: List<Code.Statement>, applyTo: Code.ApplyTo) =
-		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === Code.ApplyTo.BOTH || it.applyTo === applyTo }
+	fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
+		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+	fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
+		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
 }
-fun NativeClass.statement(code: String, applyTo: Code.ApplyTo = Code.ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
+fun NativeClass.statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
 val macro = object: FunctionModifier() {

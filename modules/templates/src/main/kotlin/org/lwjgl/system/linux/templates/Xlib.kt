@@ -737,7 +737,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		int.IN("format", "whether the data should be viewed as a list of 8-bit, 16-bit, or 32-bit quantities", "8 16 32"),
 		int.IN("mode", "the mode of the operation", "X#PropModeReplace X#PropModePrepend X#PropModeAppend"),
 		const _ MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT) _ unsigned_char_p.IN("data", "the property data"),
-		AutoSize("data", autoTyped = true) _ int.IN("nelements", "the number of elements of the specified data format")
+		AutoSize("data") shr "(format >> 4)" _ int.IN("nelements", "the number of elements of the specified data format")
 	)
 
 	Bool(

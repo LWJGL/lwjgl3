@@ -75,7 +75,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"Draws multiple instances of a set of elements.",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-		(AutoSize("indices") * "GLChecks.typeToBytes(type)") _ GLsizei.IN("count", "the number of elements to be rendered"),
+		AutoSize("indices") shr "GLChecks.typeToByteShift(type)" _ GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
@@ -389,7 +389,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"Retrieves the name of an active uniform block.",
 
 		GLuint.IN("program", "the name of a program containing the uniform block"),
-		GLuint.IN("uniformBlockIndex", " the index of the uniform block within {@code program}"),
+		GLuint.IN("uniformBlockIndex", "the index of the uniform block within {@code program}"),
 		AutoSize("uniformBlockName") _ GLsizei.IN("bufSize", "the size of the buffer addressed by {@code uniformBlockName}"),
 		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the number of characters that were written to {@code uniformBlockName}"),
 		Return("length", "glGetActiveUniformBlocki(program, uniformBlockIndex, GL_UNIFORM_BLOCK_NAME_LENGTH)") _ GLcharASCII_p.OUT(

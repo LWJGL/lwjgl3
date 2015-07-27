@@ -25,32 +25,15 @@ private interface AutoSizeFactor {
 	fun expressionInv(): String
 }
 
-private class AutoSizeFactorShift(
-	val left: Boolean,
-	val expression: String
-): AutoSizeFactor {
-	override fun expression() = getExpression(left)
-	override fun expressionInv() = getExpression(!left)
-
-	private fun getExpression(left: Boolean) = if ( left ) "<< $expression" else ">> $expression"
-}
-
-private class AutoSizeFactorScale(
-	val multiply: Boolean,
-	val expression: String
-): AutoSizeFactor {
-	override fun expression() = getExpression(multiply)
-	override fun expressionInv() = getExpression(!multiply)
-
-	private fun getExpression(multiply: Boolean) = if ( multiply ) "* $expression" else "/ $expression"
-}
-
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
 class AutoSize(
 	override val reference: String,
 	vararg val dependent: String,
-	/** When true, there exists a parameter that specifies the element type, so ignore any toBytes() call. */
-	val autoTyped: Boolean = false
+	/**
+	 * Can be set to ApplyTo.NORMAL to skip the expression and use the parameter name directly in the alternative method.
+	 * The parameter name can then be a local variable created by a Code modifier.
+	 */
+	val applyTo: ApplyTo = ApplyTo.BOTH
 ): ParameterModifier(), ReferenceModifier {
 	companion object: ModifierKey<AutoSize>
 
@@ -60,32 +43,22 @@ class AutoSize(
 	var factor: AutoSizeFactor? = null
 	/** If true, the parameter expects a size in bytes, so proper scaling will be applied based on the referenced buffer type. */
 	var toBytes: Boolean = false
-		set(toBytes: Boolean) {
-			if ( !autoTyped )
-				$toBytes = toBytes
-		}
-
-	fun shl(value: Int) = shl("$value")
-	fun shl(expression: String): AutoSize {
-		this.factor = AutoSizeFactorShift(true, expression)
-		return this
-	}
 
 	fun shr(value: Int) = shr("$value")
 	fun shr(expression: String): AutoSize {
-		this.factor = AutoSizeFactorShift(false, expression)
-		return this
-	}
-
-	fun times(value: Int) = times("$value")
-	fun times(expression: String): AutoSize {
-		this.factor = AutoSizeFactorScale(true, expression)
+		this.factor = object : AutoSizeFactor {
+			override fun expression() = ">> $expression"
+			override fun expressionInv() = "<< $expression"
+		}
 		return this
 	}
 
 	fun div(value: Int) = div("$value")
 	fun div(expression: String): AutoSize {
-		this.factor = AutoSizeFactorScale(false, expression)
+		this.factor = object : AutoSizeFactor {
+			override fun expression() = "/ $expression"
+			override fun expressionInv() = "* $expression"
+		}
 		return this
 	}
 
@@ -111,6 +84,9 @@ class AutoSize(
 			else ->
 				throw IllegalArgumentException("The AutoSize modifier can only be applied on IN or INOUT parameters.")
 		}
+
+		if ( applyTo === ApplyTo.ALTERNATIVE )
+			throw IllegalArgumentException("ApplyTo.ALTERNATIVE is not supported.")
 	}
 }
 

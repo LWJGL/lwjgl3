@@ -38,9 +38,16 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
-private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor: Boolean = true): FunctionTransform<Parameter> {
+private open class AutoSizeTransform(
+	val bufferParam: Parameter,
+	val applyTo: ApplyTo,
+	val applyFactor: Boolean = true
+): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
+		if ( applyTo === ApplyTo.NORMAL )
+			return param.name
+
 		var expression = "${bufferParam.name}.remaining()"
 		val factor = param[AutoSize].factor
 		if ( applyFactor && factor != null )
@@ -59,11 +66,14 @@ private open class AutoSizeTransform(val bufferParam: Parameter, val applyFactor
 	}
 }
 
-private fun AutoSizeTransform(bufferParam: Parameter, byteShift: String) =
-	if ( byteShift == "0" ) AutoSizeTransform(bufferParam) else AutoSizeBytesTransform(bufferParam, byteShift)
+private fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
+	if ( byteShift == "0" ) AutoSizeTransform(bufferParam, applyTo) else AutoSizeBytesTransform(bufferParam, applyTo, byteShift)
 
-private class AutoSizeBytesTransform(bufferParam: Parameter, val byteShift: String): AutoSizeTransform(bufferParam) {
+private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, val byteShift: String): AutoSizeTransform(bufferParam, applyTo) {
 	override fun transformCall(param: Parameter, original: String): String {
+		if ( applyTo === ApplyTo.NORMAL )
+			return param.name
+
 		var expression = "${bufferParam.name}.remaining()"
 		val factor = param[AutoSize].factor
 		if ( factor != null )

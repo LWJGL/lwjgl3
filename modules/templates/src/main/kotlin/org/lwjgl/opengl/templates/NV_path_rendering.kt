@@ -14,6 +14,10 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"OpenGL.h"
 	)
 
+	javaImport (
+		"static org.lwjgl.opengl.GL11.*"
+	)
+
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
@@ -422,7 +426,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("path", ""),
 		AutoSize("commands") _ GLsizei.IN("numCommands", ""),
 		const _ GLubyte_p.IN("commands", ""),
-		AutoSize("coords") _ GLsizei.IN("numCoords", ""),
+		AutoSize("coords") shr "GLChecks.typeToByteShift(coordType)" _ GLsizei.IN("numCoords", ""),
 		AutoType("coords", GL_BYTE, GL_SHORT, GL_FLOAT) _ GLenum.IN("coordType", "", "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#FLOAT"),
 		const _ void_p.IN("coords", "")
 	)
@@ -480,9 +484,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
 		nullTerminated _ const _ void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
-		GLsizei.IN("numGlyphs", ""),
+		AutoSize("charcodes") / "charcodeTypeToBytes(type)" _ GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
-		Check("numGlyphs") _ const _ void_p.IN("charcodes", ""),
+		const _ void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", "")
@@ -497,7 +501,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathGlyphsNV"]["fontName"],
 		this["PathGlyphsNV"]["fontStyle"],
 		GLuint.IN("firstGlyph", ""),
-		this["PathGlyphsNV"]["numGlyphs"],
+		GLsizei.IN("numGlyphs", ""),
 		this["PathGlyphsNV"]["handleMissingGlyphs"],
 		this["PathGlyphsNV"]["pathParameterTemplate"],
 		this["PathGlyphsNV"]["emScale"]
@@ -512,7 +516,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["PathGlyphsNV"]["fontName"],
 		this["PathGlyphsNV"]["fontStyle"],
 		GLuint.IN("firstGlyphIndex", ""),
-		this["PathGlyphsNV"]["numGlyphs"],
+		this["PathGlyphRangeNV"]["numGlyphs"],
 		this["PathGlyphsNV"]["pathParameterTemplate"],
 		this["PathGlyphsNV"]["emScale"]
 	)
@@ -527,7 +531,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ void_p.IN("fontData", ""),
 		GLsizei.IN("faceIndex", ""),
 		this["PathGlyphIndexArrayNV"]["firstGlyphIndex"],
-		this["PathGlyphsNV"]["numGlyphs"],
+		this["PathGlyphRangeNV"]["numGlyphs"],
 		this["PathGlyphsNV"]["pathParameterTemplate"],
 		this["PathGlyphsNV"]["emScale"]
 	)
@@ -567,7 +571,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("resultPath", ""),
 		GLuint.IN("srcPath", ""),
 		GLenum.IN("transformType", "", TransformTypes),
-		Check(16) _ const _ GLfloat_p.IN("transformValues", "")
+		Check("transformTypeToElements(transformType)") _ const _ GLfloat_p.IN("transformValues", "")
 	)
 
 	void(
@@ -594,7 +598,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", "$PathParameters $PathParametersf"),
-		const _ GLfloat_p.IN("value", "")
+		Check(1) _ const _ GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -676,13 +680,13 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"StencilFillPathInstancedNV",
 		"",
 
-		GLsizei.IN("numPaths", ""),
+		AutoSize("paths") / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
 		GLenum.IN(
 			"pathNameType",
 			"",
 			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"
 		),
-		Check("numPaths") _ const _ void_p.IN("paths", ""),
+		const _ void_p.IN("paths", ""),
 		GLuint.IN("pathBase", ""),
 		this["StencilFillPathNV"]["fillMode"],
 		GLuint.IN("mask", ""),
@@ -717,8 +721,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		GLenum.IN("color", "", "GL13#PRIMARY_COLOR #PRIMARY_COLOR_NV #SECONDARY_COLOR_NV"),
 		GLenum.IN("genMode", "", "GL11#NONE #OBJECT_LINEAR_NV #PATH_OBJECT_BOUNDING_BOX_NV #EYE_LINEAR_NV #CONSTANT_NV"),
-		GLenum.IN("colorFormat", ""),
-		const _ GLfloat_p.IN("coeffs", "")
+		GLenum.IN("colorFormat", "GL11#LUMINANCE GL11#ALPHA GL11#INTENSITY GL11#LUMINANCE_ALPHA GL11#RGB GL11#RGBA"),
+		Check("genModeToElements(genMode) * colorFormatToComponents(colorFormat)") _ const _ GLfloat_p.IN("coeffs", "")
 	)
 
 	ignoreMissing _ void(
@@ -728,7 +732,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN("texCoordSet", ""),
 		GLenum.IN("genMode", ""),
 		GLint.IN("components", ""),
-		const _ GLfloat_p.IN("coeffs", "")
+		Check("genModeToElements(genMode) * components") _ const _ GLfloat_p.IN("coeffs", "")
 	)
 
 	ignoreMissing _ void(
@@ -834,9 +838,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PathGlyphIndexRangeNV",
 		"",
 
-		GLenum.IN("fontTarget", ""),
-		const _ void_p.IN("fontName", ""),
-		GLbitfield.IN("fontStyle", ""),
+		this["PathGlyphsNV"]["fontTarget"],
+		this["PathGlyphsNV"]["fontName"],
+		this["PathGlyphsNV"]["fontStyle"],
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", ""),
 		GLuint.IN("baseAndCount", "")
@@ -850,7 +854,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLint.IN("location", ""),
 		GLenum.IN("genMode", ""),
 		GLint.IN("components", ""),
-		const _ GLfloat_p.IN("coeffs", "")
+		Check("genModeToElements(genMode) * components") _ const _ GLfloat_p.IN("coeffs", "")
 	)
 
 	void(
@@ -876,7 +880,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLuint.IN("path", ""),
-		GLubyte_p.OUT("commands", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_COMMAND_COUNT_NV)", debug = true) _ GLubyte_p.OUT("commands", "")
 	)
 
 	void(
@@ -884,7 +888,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLuint.IN("path", ""),
-		GLfloat_p.OUT("coords", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_COORD_COUNT_NV)", debug = true) _ GLfloat_p.OUT("coords", "")
 	)
 
 	void(
@@ -892,20 +896,22 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLuint.IN("path", ""),
-		GLfloat_p.OUT("dashArray", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true) _ GLfloat_p.OUT("dashArray", "")
 	)
 
-	void(
+	Code(
+		javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE)
+	) _ void(
 		"GetPathMetricsNV",
 		"",
 
 		GLbitfield.IN("metricQueryMask", "", MetricQueryMask, LinkMode.BITFIELD),
-		this["StencilFillPathInstancedNV"]["numPaths"],
+		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
 		this["StencilFillPathInstancedNV"]["pathNameType"],
 		this["StencilFillPathInstancedNV"]["paths"],
 		this["StencilFillPathInstancedNV"]["pathBase"],
 		GLsizei.IN("stride", ""),
-		GLfloat_p.OUT("metrics", "")
+		Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))") _ GLfloat_p.OUT("metrics", "")
 	)
 
 	void(
@@ -919,19 +925,21 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["GetPathMetricsNV"]["metrics"]
 	)
 
-	void(
+	Code(
+		javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE)
+	) _ void(
 		"GetPathSpacingNV",
 		"",
 
 		GLenum.IN("pathListMode", "", PathListModes),
-		this["StencilFillPathInstancedNV"]["numPaths"],
+		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
 		this["StencilFillPathInstancedNV"]["pathNameType"],
 		this["StencilFillPathInstancedNV"]["paths"],
 		this["StencilFillPathInstancedNV"]["pathBase"],
 		GLfloat.IN("advanceScale", ""),
 		GLfloat.IN("kerningScale", ""),
-		GLenum.IN("transformType", "", TransformTypes),
-		GLfloat_p.OUT("returnedSpacing", "")
+		GLenum.IN("transformType", "", "#TRANSLATE_X_NV #TRANSLATE_2D_NV"),
+		Check("(numPaths - 1) * (transformType == GL_TRANSLATE_X_NV ? 1 : 2)") _ GLfloat_p.OUT("returnedSpacing", "")
 	)
 
 	ignoreMissing _ void(
@@ -939,8 +947,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		this["PathColorGenNV"]["color"],
-		GLenum.IN("pname", "", "#PATH_GEN_MODE_NV #PATH_GEN_COLOR_FORMAT_NV #PATH_GEN_COEFF_NV"),
-		returnValue _ GLint_p.OUT("value", "")
+		GLenum.IN("pname", "", "#PATH_GEN_MODE_NV #PATH_GEN_COEFF_NV #PATH_GEN_COLOR_FORMAT_NV"),
+		returnValue _ Check(1) _ GLint_p.OUT("value", "")
 	)
 
 	ignoreMissing _ void(
@@ -949,7 +957,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 
 		this["PathColorGenNV"]["color"],
 		this["GetPathColorGenivNV"]["pname"],
-		returnValue _ GLfloat_p.OUT("value", "")
+		returnValue _ Check(1) _ GLfloat_p.OUT("value", "")
 	)
 
 	ignoreMissing _ void(
@@ -957,8 +965,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLenum.IN("texCoordSet", ""),
-		GLenum.IN("pname", ""),
-		returnValue _ GLint_p.OUT("value", "")
+		GLenum.IN("pname", "#PATH_GEN_MODE_NV #PATH_GEN_COEFF_NV #PATH_GEN_COMPONENTS_NV"),
+		returnValue _ Check(1) _ GLint_p.OUT("value", "")
 	)
 
 	ignoreMissing _ void(
@@ -966,7 +974,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"",
 
 		GLenum.IN("texCoordSet", ""),
-		GLenum.IN("pname", ""),
+		this["GetPathTexGenivNV"]["pname"],
 		returnValue _ GLfloat_p.OUT("value", "")
 	)
 
@@ -1073,4 +1081,110 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check(1) _ nullable _ GLsizei_p.OUT("length", ""),
 		Return("length") _ GLfloat_p.OUT("params", "")
 	)
+
+	customMethod("""
+	private static int charcodeTypeToBytes(int type) {
+		switch ( type ) {
+			case GL_UNSIGNED_BYTE:
+			case GL_UTF8_NV:
+				return 1;
+			case GL_UNSIGNED_SHORT:
+			case GL_2_BYTES_NV:
+			case GL_UTF16_NV:
+				return 2;
+			case GL_3_BYTES_NV:
+				return 3;
+			case GL_UNSIGNED_INT:
+			case GL_4_BYTES_NV:
+				return 4;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported charcode type: 0x%X", type));
+		}
+	}
+	""")
+
+	customMethod("""
+	private static int pathNameTypeToBytes(int type) {
+		switch ( type ) {
+			case GL_BYTE:
+			case GL_UNSIGNED_BYTE:
+			case GL_UTF8_NV:
+				return 1;
+			case GL_SHORT:
+			case GL_UNSIGNED_SHORT:
+			case GL_2_BYTES_NV:
+			case GL_UTF16_NV:
+				return 2;
+			case GL_3_BYTES_NV:
+				return 3;
+			case GL_INT:
+			case GL_UNSIGNED_INT:
+			case GL_4_BYTES_NV:
+				return 4;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported path name type: 0x%X", type));
+		}
+	}
+	""")
+
+	customMethod("""
+	private static int transformTypeToElements(int type) {
+		switch ( type ) {
+			case GL_NONE:
+				return 0;
+			case GL_TRANSLATE_X_NV:
+			case GL_TRANSLATE_Y_NV:
+				return 1;
+			case GL_TRANSLATE_2D_NV:
+				return 2;
+			case GL_TRANSLATE_3D_NV:
+				return 3;
+			case GL_AFFINE_2D_NV:
+			case GL_TRANSPOSE_AFFINE_2D_NV:
+				return 6;
+			case GL_AFFINE_3D_NV:
+			case GL_TRANSPOSE_AFFINE_3D_NV:
+				return 12;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported transform type: 0x%X", type));
+		}
+	}
+	""")
+
+	customMethod("""
+	private static int colorFormatToComponents(int colorFormat) {
+		switch ( colorFormat ) {
+			case GL_LUMINANCE:
+			case GL_INTENSITY:
+			case GL_ALPHA:
+				return 1;
+			case GL_LUMINANCE_ALPHA:
+				return 2;
+			case GL_RGB:
+				return 3;
+			case GL_RGBA:
+				return 4;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported colorFormat specified: 0x%X", colorFormat));
+		}
+	}
+	""")
+
+	customMethod("""
+	private static int genModeToElements(int genMode) {
+		switch ( genMode ) {
+			case GL_NONE:
+				return 0;
+			case GL_CONSTANT_NV:
+				return 1;
+			case GL_OBJECT_LINEAR_NV:
+			case GL_PATH_OBJECT_BOUNDING_BOX_NV:
+				return 3;
+			case GL_EYE_LINEAR_NV:
+				return 4;
+			default:
+				throw new IllegalArgumentException(String.format("Unsupported genMode specified: 0x%X", genMode));
+		}
+	}
+	""")
 }

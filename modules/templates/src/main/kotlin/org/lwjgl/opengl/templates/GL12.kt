@@ -292,13 +292,13 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		GLuint.IN("start", "the minimum array index contained in {@code indices}"),
 		GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-		(AutoSize("indices") * "GLChecks.typeToBytes(type)") _ GLsizei.IN("count", " the number of elements to be rendered"),
+		AutoSize("indices") shr "GLChecks.typeToByteShift(type)" _ GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", " a pointer to the location where the indices are stored")
+		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored")
 	)
 
 }

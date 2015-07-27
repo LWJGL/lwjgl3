@@ -6,6 +6,12 @@ package org.lwjgl.generator
 
 import java.util.HashMap
 
+enum class ApplyTo {
+	NORMAL,
+	ALTERNATIVE,
+	BOTH
+}
+
 abstract class TemplateElement {
 
 	companion object {
