@@ -116,11 +116,13 @@ class NativeClass(
 	val functions: Iterable<NativeClassFunction>
 		get() = _functions.values()
 
+	private val customMethods = ArrayList<String>()
+
 	val hasBody: Boolean
-		get() = !constantBlocks.isEmpty() || hasNativeFunctions
+		get() = !constantBlocks.isEmpty() || hasNativeFunctions || customMethods.isNotEmpty()
 
 	val hasNativeFunctions: Boolean
-		get() = !_functions.isEmpty()
+		get() = _functions.isNotEmpty()
 
 	public val link: String get() = "{@link ${this.className} ${this.templateName}}"
 
@@ -197,6 +199,10 @@ class NativeClass(
 		val samConstructors = Generator.callbacksSAM["$packageName.$className"]
 		if ( samConstructors != null ) {
 			samConstructors forEach { it.generateCallbackSAM(this) }
+		}
+
+		customMethods forEach {
+			println("\t${it.trim()}\n")
 		}
 
 		print("}")
@@ -327,6 +333,10 @@ class NativeClass(
 
 		_functions.put(name, func)
 		return func
+	}
+
+	fun customMethod(method: String) {
+		customMethods add method
 	}
 
 	fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: ${templateName}.$functionName")
