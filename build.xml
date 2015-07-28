@@ -360,6 +360,11 @@ License terms: http://lwjgl.org/license.php
 			</classpath>
 		</lwjgl.javac>
 
+		<java classname="org.lwjgl.Sys" fork="true" failonerror="true" outputproperty="build.version">
+			<classpath path="${bin.core}"/>
+			<jvmarg value="-Djava.library.path=${lib}"/>
+		</java>
+
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
 			destdir="${bin.html.javadoc}"

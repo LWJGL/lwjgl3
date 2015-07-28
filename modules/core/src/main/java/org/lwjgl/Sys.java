@@ -4,9 +4,6 @@
  */
 package org.lwjgl;
 
-import java.security.AccessController;
-import java.security.PrivilegedAction;
-
 import static org.lwjgl.LWJGLUtil.*;
 
 /**
@@ -29,14 +26,7 @@ public final class Sys {
 
 	static {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
-
-		AccessController.doPrivileged(new PrivilegedAction<Object>() {
-			@Override
-			public Object run() {
-				LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
-				return null;
-			}
-		});
+		LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
 	}
 
 	private Sys() {
@@ -50,6 +40,10 @@ public final class Sys {
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
 		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix;
+	}
+
+	public static void main(String[] args) {
+		System.out.println(getVersion());
 	}
 
 	/** The development state of the current build. */

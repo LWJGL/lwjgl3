@@ -15,11 +15,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 	<property environment="env"/>
 
 	<!--
-		MAJOR.MINOR.REVISION
-		[0-9].[0-9].[0-9]+[ab]?
-	-->
-	<property name="build.version" value="3.0.0a"/>
-	<!--
 		This is used as the source of binary dependencies. Valid values:
 		- nightly
 			the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
