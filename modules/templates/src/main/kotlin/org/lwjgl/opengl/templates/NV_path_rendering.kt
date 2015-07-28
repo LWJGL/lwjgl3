@@ -85,8 +85,6 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		information written to the stencil buffer in the first step so that only fragments covered by the path are written during this second step. Also during
 		this second step written pixels typically have their stencil value reset (so there's no need for clearing the stencil buffer between rendering each
 		path).
-
-        Requires ${registryLinkTo("NV", "path_rendering")}.
 		"""
 
 	ByteConstant(
@@ -476,7 +474,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		const _ void_p.IN("pathString", "")
 	)
 
-	void(
+	val PathGlyphsNV = void(
 		"PathGlyphsNV",
 		"",
 
@@ -496,44 +494,44 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"PathGlyphRangeNV",
 		"",
 
-		this["PathGlyphsNV"]["firstPathName"],
-		this["PathGlyphsNV"]["fontTarget"],
-		this["PathGlyphsNV"]["fontName"],
-		this["PathGlyphsNV"]["fontStyle"],
+		PathGlyphsNV["firstPathName"],
+		PathGlyphsNV["fontTarget"],
+		PathGlyphsNV["fontName"],
+		PathGlyphsNV["fontStyle"],
 		GLuint.IN("firstGlyph", ""),
 		GLsizei.IN("numGlyphs", ""),
-		this["PathGlyphsNV"]["handleMissingGlyphs"],
-		this["PathGlyphsNV"]["pathParameterTemplate"],
-		this["PathGlyphsNV"]["emScale"]
+		PathGlyphsNV["handleMissingGlyphs"],
+		PathGlyphsNV["pathParameterTemplate"],
+		PathGlyphsNV["emScale"]
 	)
 
 	ignoreMissing _ GLenum(
 		"PathGlyphIndexArrayNV",
 		"",
 
-		this["PathGlyphsNV"]["firstPathName"],
-		this["PathGlyphsNV"]["fontTarget"],
-		this["PathGlyphsNV"]["fontName"],
-		this["PathGlyphsNV"]["fontStyle"],
+		PathGlyphsNV["firstPathName"],
+		PathGlyphsNV["fontTarget"],
+		PathGlyphsNV["fontName"],
+		PathGlyphsNV["fontStyle"],
 		GLuint.IN("firstGlyphIndex", ""),
 		this["PathGlyphRangeNV"]["numGlyphs"],
-		this["PathGlyphsNV"]["pathParameterTemplate"],
-		this["PathGlyphsNV"]["emScale"]
+		PathGlyphsNV["pathParameterTemplate"],
+		PathGlyphsNV["emScale"]
 	)
 
 	ignoreMissing _ GLenum(
 		"PathMemoryGlyphIndexArrayNV",
 		"",
 
-		this["PathGlyphsNV"]["firstPathName"],
-		this["PathGlyphsNV"]["fontTarget"],
+		PathGlyphsNV["firstPathName"],
+		PathGlyphsNV["fontTarget"],
 		AutoSize("fontData") _ GLsizeiptr.IN("fontSize", ""),
 		const _ void_p.IN("fontData", ""),
 		GLsizei.IN("faceIndex", ""),
 		this["PathGlyphIndexArrayNV"]["firstGlyphIndex"],
 		this["PathGlyphRangeNV"]["numGlyphs"],
-		this["PathGlyphsNV"]["pathParameterTemplate"],
-		this["PathGlyphsNV"]["emScale"]
+		PathGlyphsNV["pathParameterTemplate"],
+		PathGlyphsNV["emScale"]
 	)
 
 	void(
@@ -676,11 +674,12 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("mask", "")
 	)
 
-	void(
+	val numPathsExpression = Code(javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE))
+	val StencilFillPathInstancedNV = numPathsExpression _ void(
 		"StencilFillPathInstancedNV",
 		"",
 
-		AutoSize("paths") / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
+		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
 		GLenum.IN(
 			"pathNameType",
 			"",
@@ -691,21 +690,21 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["StencilFillPathNV"]["fillMode"],
 		GLuint.IN("mask", ""),
 		this["TransformPathNV"]["transformType"],
-		this["TransformPathNV"]["transformValues"]
+		Check("numPaths * transformTypeToElements(transformType)") _ const _ GLfloat_p.IN("transformValues", "")
 	)
 
-	void(
+	numPathsExpression _ void(
 		"StencilStrokePathInstancedNV",
 		"",
 
-		this["StencilFillPathInstancedNV"]["numPaths"],
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		GLint.IN("reference", ""),
-		this["StencilFillPathInstancedNV"]["mask"],
-		this["StencilFillPathInstancedNV"]["transformType"],
-		this["StencilFillPathInstancedNV"]["transformValues"]
+		StencilFillPathInstancedNV["mask"],
+		StencilFillPathInstancedNV["transformType"],
+		StencilFillPathInstancedNV["transformValues"]
 	)
 
 	void(
@@ -758,30 +757,30 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	void(
+	numPathsExpression _ void(
 		"CoverFillPathInstancedNV",
 		"",
 
-		this["StencilFillPathInstancedNV"]["numPaths"],
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		GLenum.IN("coverMode", "", "#CONVEX_HULL_NV #BOUNDING_BOX_NV #BOUNDING_BOX_OF_BOUNDING_BOXES_NV"),
-		this["TransformPathNV"]["transformType"],
-		this["TransformPathNV"]["transformValues"]
+		StencilFillPathInstancedNV["transformType"],
+		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	void(
+	numPathsExpression _ void(
 		"CoverStrokePathInstancedNV",
 		"",
 
-		this["StencilFillPathInstancedNV"]["numPaths"],
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		this["CoverFillPathInstancedNV"]["coverMode"],
-		this["TransformPathNV"]["transformType"],
-		this["TransformPathNV"]["transformValues"]
+		StencilFillPathInstancedNV["transformType"],
+		StencilFillPathInstancedNV["transformValues"]
 	)
 
 	ignoreMissing _ void(
@@ -804,43 +803,43 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing _ numPathsExpression _ void(
 		"StencilThenCoverFillPathInstancedNV",
 		"",
 
-		this["StencilFillPathInstancedNV"]["numPaths"],
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		this["StencilFillPathNV"]["fillMode"],
 		GLuint.IN("mask", ""),
 		this["CoverFillPathInstancedNV"]["coverMode"],
-		this["TransformPathNV"]["transformType"],
-		this["TransformPathNV"]["transformValues"]
+		StencilFillPathInstancedNV["transformType"],
+		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing _ numPathsExpression _ void(
 		"StencilThenCoverStrokePathInstancedNV",
 		"",
 
-		this["StencilFillPathInstancedNV"]["numPaths"],
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		GLint.IN("reference", ""),
 		GLuint.IN("mask", ""),
 		this["CoverFillPathInstancedNV"]["coverMode"],
-		this["TransformPathNV"]["transformType"],
-		this["TransformPathNV"]["transformValues"]
+		StencilFillPathInstancedNV["transformType"],
+		StencilFillPathInstancedNV["transformValues"]
 	)
 
 	ignoreMissing _ GLenum(
 		"PathGlyphIndexRangeNV",
 		"",
 
-		this["PathGlyphsNV"]["fontTarget"],
-		this["PathGlyphsNV"]["fontName"],
-		this["PathGlyphsNV"]["fontStyle"],
+		PathGlyphsNV["fontTarget"],
+		PathGlyphsNV["fontName"],
+		PathGlyphsNV["fontStyle"],
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", ""),
 		GLuint.IN("baseAndCount", "")
@@ -899,17 +898,15 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true) _ GLfloat_p.OUT("dashArray", "")
 	)
 
-	Code(
-		javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE)
-	) _ void(
+	numPathsExpression _ void(
 		"GetPathMetricsNV",
 		"",
 
 		GLbitfield.IN("metricQueryMask", "", MetricQueryMask, LinkMode.BITFIELD),
-		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		GLsizei.IN("stride", ""),
 		Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))") _ GLfloat_p.OUT("metrics", "")
 	)
@@ -925,17 +922,15 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		this["GetPathMetricsNV"]["metrics"]
 	)
 
-	Code(
-		javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE)
-	) _ void(
+	numPathsExpression _ void(
 		"GetPathSpacingNV",
 		"",
 
 		GLenum.IN("pathListMode", "", PathListModes),
-		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
-		this["StencilFillPathInstancedNV"]["pathNameType"],
-		this["StencilFillPathInstancedNV"]["paths"],
-		this["StencilFillPathInstancedNV"]["pathBase"],
+		StencilFillPathInstancedNV["numPaths"],
+		StencilFillPathInstancedNV["pathNameType"],
+		StencilFillPathInstancedNV["paths"],
+		StencilFillPathInstancedNV["pathBase"],
 		GLfloat.IN("advanceScale", ""),
 		GLfloat.IN("kerningScale", ""),
 		GLenum.IN("transformType", "", "#TRANSLATE_X_NV #TRANSLATE_2D_NV"),
