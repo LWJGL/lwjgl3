@@ -88,7 +88,7 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.stb}">
 			<arguments>
-				<arg value="-I${src.include}/stb"/>
+				<arg value="-isystem${src.include}/stb"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</compile>
