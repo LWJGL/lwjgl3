@@ -67,9 +67,11 @@ License terms: http://lwjgl.org/license.php
 		<cl if:true="${binding.glfw}">
 			<arguments>
 				<arg value="/I${src.include}\glfw"/>
+				<arg value="/I${src.include}\egl" if:true="${binding.egl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
 					<include name="${src.generated.native}/glfw/windows/*.c"/>
+					<include name="${src.generated.native}/glfw/egl/*.c" if:true="${binding.egl}"/>
 				</fileset>
 			</arguments>
 		</cl>
