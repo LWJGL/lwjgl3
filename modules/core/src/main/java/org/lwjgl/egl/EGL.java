@@ -250,7 +250,7 @@ public final class EGL {
 			case KHRStream.EGL_BAD_STREAM_KHR:
 				return "An EGLStreamKHR argument does not refer to a valid EGLStreamKHR.";
 			default:
-				return String.format("Unknown (0x%X)", errorCode);
+				return apiUnknownToken(errorCode);
 		}
 	}
 

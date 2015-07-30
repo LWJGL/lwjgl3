@@ -17,6 +17,7 @@ import static org.lwjgl.opengl.ARBImaging.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL43.*;
+import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper over an OS-specific OpenGL context handle and provides basic functionality related to OpenGL contexts. */
@@ -130,12 +131,8 @@ public abstract class GLContext implements Pointer {
 			case GL_TABLE_TOO_LARGE:
 				return "The specified table is too large";
 			default:
-				return getUnknownToken(errorCode);
+				return apiUnknownToken(errorCode);
 		}
-	}
-
-	private static String getUnknownToken(int token) {
-		return String.format("Unknown (0x%X)", token);
 	}
 
 	/**
@@ -224,7 +221,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_SOURCE_OTHER:
 						return "OTHER";
 					default:
-						return getUnknownToken(source);
+						return apiUnknownToken(source);
 				}
 			}
 
@@ -245,7 +242,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_TYPE_MARKER:
 						return "MARKER";
 					default:
-						return getUnknownToken(type);
+						return apiUnknownToken(type);
 				}
 			}
 
@@ -260,7 +257,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_SEVERITY_NOTIFICATION:
 						return "NOTIFICATION";
 					default:
-						return getUnknownToken(severity);
+						return apiUnknownToken(severity);
 				}
 			}
 		};
@@ -293,7 +290,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_SOURCE_OTHER_ARB:
 						return "OTHER";
 					default:
-						return getUnknownToken(source);
+						return apiUnknownToken(source);
 				}
 			}
 
@@ -312,7 +309,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_TYPE_OTHER_ARB:
 						return "OTHER";
 					default:
-						return getUnknownToken(type);
+						return apiUnknownToken(type);
 				}
 			}
 
@@ -325,7 +322,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_SEVERITY_LOW_ARB:
 						return "LOW";
 					default:
-						return getUnknownToken(severity);
+						return apiUnknownToken(severity);
 				}
 			}
 		};
@@ -361,7 +358,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_CATEGORY_OTHER_AMD:
 						return "OTHER";
 					default:
-						return getUnknownToken(category);
+						return apiUnknownToken(category);
 				}
 			}
 
@@ -374,7 +371,7 @@ public abstract class GLContext implements Pointer {
 					case GL_DEBUG_SEVERITY_LOW_AMD:
 						return "LOW";
 					default:
-						return getUnknownToken(severity);
+						return apiUnknownToken(severity);
 				}
 			}
 		};

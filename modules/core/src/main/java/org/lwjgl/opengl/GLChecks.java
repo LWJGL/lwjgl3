@@ -14,6 +14,7 @@ import static org.lwjgl.opengl.GL40.*;
 import static org.lwjgl.opengl.GL41.*;
 import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.opengl.NVGPUShader5.*;
+import static org.lwjgl.system.APIUtil.*;
 
 final class GLChecks {
 
@@ -46,7 +47,7 @@ final class GLChecks {
 				return "dispatch indirect";
 			default:
 				// TODO: Add more?
-				throw new IllegalArgumentException(String.format("Unsupported buffer binding: 0x%X", binding));
+				throw new IllegalArgumentException(apiUnknownToken("Unsupported buffer binding", binding));
 		}
 	}
 
@@ -80,7 +81,7 @@ final class GLChecks {
 			case GL_UNSIGNED_INT64_NV:
 				return 8;
 			default:
-				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
+				throw new IllegalArgumentException(apiUnknownToken("Unsupported OpenGL type", type));
 		}
 	}
 
@@ -112,7 +113,7 @@ final class GLChecks {
 			case GL_UNSIGNED_INT64_NV:
 				return 3;
 			default:
-				throw new IllegalArgumentException(String.format("Unsupported OpenGL type: 0x%X", type));
+				throw new IllegalArgumentException(apiUnknownToken("Unsupported OpenGL type", type));
 		}
 	}
 

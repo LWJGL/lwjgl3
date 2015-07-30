@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.lwjgl.opencl.CL10.*;
+import static org.lwjgl.system.APIUtil.*;
 
 public final class CLUtil {
 
@@ -85,7 +86,7 @@ public final class CLUtil {
 	public static String getErrcodeName(int errcode) {
 		String errname = CL_ERROR_TOKENS.get(errcode);
 		if ( errname == null )
-			errname = String.format("UNKNOWN [0x%X]", errcode);
+			errname = apiUnknownToken(errcode);
 
 		return errname;
 	}

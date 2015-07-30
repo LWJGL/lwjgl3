@@ -123,4 +123,12 @@ public final class APIUtil {
 		);
 	}
 
+	public static String apiUnknownToken(int token) {
+		return apiUnknownToken("Unknown", token);
+	}
+
+	public static String apiUnknownToken(String description, int token) {
+		return String.format("%s [0x%X]", description, token);
+	}
+
 }
