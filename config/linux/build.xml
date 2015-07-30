@@ -31,46 +31,101 @@ License terms: http://lwjgl.org/license.php
 		<include name="libglfw3.a" if:true="${binding.glfw}"/>
 	</fileset>
 
+	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+
+	<macrodef name="compile">
+		<element name="arguments"/>
+		<sequential>
+			<apply executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
+				<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
+
+				<arg value="-I${java.home}/../include"/>
+				<arg value="-I${java.home}/../include/linux"/>
+
+				<arg value="-I${src.include}/system"/>
+				<arg value="-I${src.include}/system/linux"/>
+
+				<arguments/>
+
+				<regexpmapper from="(\w+)\.c" to="\1.o"/>
+			</apply>
+		</sequential>
+	</macrodef>
+
 	<target name="compile-native-platform">
 		<!-- COMPILE -->
-		<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
+		<compile>
+			<arguments>
+				<arg value="-I${src.include}/system/libffi"/>
+				<fileset dir=".">
+					<include name="${src.native}/system/*.c"/>
+					<include name="${src.native}/system/libffi/*.c"/>
+					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/libffi/*.c"/>
+					<include name="${src.generated.native}/system/linux/*.c"/>
+				</fileset>
+			</arguments>
+		</compile>
 
-		<local name="src.include.rel"/>
-		<property name="src.include.rel" value="../../../${src.include}"/> <!-- src.include relative to bin.native -->
-		<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-			<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
-			<arg value="-I${java.home}/../include"/>
-			<arg value="-I${java.home}/../include/linux"/>
+		<!-- Each binding is compiled separately -->
 
-			<!-- Paths relative to dir -->
-			<arg value="-I${src.include.rel}/system"/>
-			<arg value="-I${src.include.rel}/system/linux"/>
-			<arg value="-I${src.include.rel}/system/libffi"/>
-			<arg value="-isystem${src.include.rel}/stb" if:true="${binding.stb}"/>
-			<arg value="-I${src.include.rel}/glfw" if:true="${binding.glfw}"/>
-			<arg value="-I${src.include.rel}/openal" if:true="${binding.openal}"/>
-			<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
-			<arg value="-I${src.include.rel}/opengl" if:true="${binding.opengl}"/>
-			<arg value="-I${src.include.rel}/opengl/glx" if:true="${binding.opengl}"/>
-			<arg value="-I${src.include.rel}/egl" if:true="${binding.egl}"/>
+		<compile if:true="${binding.stb}">
+			<arguments>
+				<arg value="-I${src.include}/stb"/>
+				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
+			</arguments>
+		</compile>
 
-			<!-- Paths relative to basedir -->
-			<fileset dir="${src.native}/system" includes="*.c"/>
-			<fileset dir="${src.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.generated.native}/system" includes="*.c"/>
-			<fileset dir="${src.generated.native}/system/linux" includes="*.c"/>
-			<fileset dir="${src.generated.native}/system/libffi" includes="*.c"/>
-			<fileset dir="${src.generated.native}/stb" includes="*.c" if:true="${binding.stb}"/>
-			<fileset dir="${src.generated.native}/glfw" includes="*.c" if:true="${binding.glfw}"/>
-			<fileset dir="${src.generated.native}/glfw/linux" includes="*.c" if:true="${binding.glfw}"/>
-			<fileset dir="${src.generated.native}/openal" includes="*.c" if:true="${binding.openal}"/>
-			<fileset dir="${src.generated.native}/opencl" includes="*.c" if:true="${binding.opencl}"/>
-			<fileset dir="${src.generated.native}/opengl" includes="*.c" if:true="${binding.opengl}"/>
-			<fileset dir="${src.generated.native}/opengl/glx" includes="*.c" if:true="${binding.opengl}"/>
-			<fileset dir="${src.generated.native}/egl" includes="*.c" if:true="${binding.egl}"/>
+		<compile if:true="${binding.glfw}">
+			<arguments>
+				<arg value="-I${src.include}/glfw"/>
+				<fileset dir=".">
+					<include name="${src.generated.native}/glfw/*.c"/>
+					<include name="${src.generated.native}/glfw/linux/*.c"/>
+				</fileset>
+			</arguments>
+		</compile>
 
-			<globmapper from="*.c" to="*.o"/>
-		</apply>
+		<compile if:true="${binding.openal}">
+			<arguments>
+				<arg value="-I${src.include}/openal"/>
+				<fileset dir="." includes="${src.generated.native}/openal/*.c"/>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.opencl}">
+			<arguments>
+				<arg value="-I${src.include}/opencl"/>
+				<arg value="-I${src.include}/opengl" if:true="${binding.opengl}"/>
+				<fileset dir="." includes="${src.generated.native}/opencl/*.c"/>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.opengl}">
+			<arguments>
+				<arg value="-I${src.include}/opengl"/>
+				<arg value="-I${src.include}/opengl/glx"/>
+				<arg value="-I${src.include}/opencl" if:true="${binding.opencl}"/>
+				<fileset dir=".">
+					<include name="${src.generated.native}/opengl/*.c"/>
+					<include name="${src.generated.native}/opengl/glx/*.c"/>
+				</fileset>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.opengles}">
+			<arguments>
+				<arg value="-I${src.include}/opengles"/>
+				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
+			</arguments>
+		</compile>
+
+		<compile if:true="${binding.egl}">
+			<arguments>
+				<arg value="-I${src.include}/egl"/>
+				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
+			</arguments>
+		</compile>
 
 		<!-- LINK -->
 		<uptodate property="link-uptodate" targetfile="${lib}/${LWJGL_LIBRARY}">
