@@ -33,17 +33,18 @@ License terms: http://lwjgl.org/license.php
 
 	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
+	<property name="src.include.rel" value="../../../${src.include}"/>
 	<macrodef name="compile">
 		<element name="arguments"/>
 		<sequential>
-			<apply executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
+			<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
 				<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
 
 				<arg value="-I${java.home}/../include"/>
 				<arg value="-I${java.home}/../include/linux"/>
 
-				<arg value="-I${src.include}/system"/>
-				<arg value="-I${src.include}/system/linux"/>
+				<arg value="-I${src.include.rel}/system"/>
+				<arg value="-I${src.include.rel}/system/linux"/>
 
 				<arguments/>
 
@@ -56,7 +57,7 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<compile>
 			<arguments>
-				<arg value="-I${src.include}/system/libffi"/>
+				<arg value="-I${src.include.rel}/system/libffi"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
@@ -71,15 +72,15 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.stb}">
 			<arguments>
-				<arg value="-isystem${src.include}/stb"/>
+				<arg value="-isystem${src.include.rel}/stb"/>
 				<fileset dir="." includes="${src.generated.native}/stb/*.c"/>
 			</arguments>
 		</compile>
 
 		<compile if:true="${binding.glfw}">
 			<arguments>
-				<arg value="-I${src.include}/glfw"/>
-				<arg value="-I${src.include}/egl" if:true="${binding.egl}"/>
+				<arg value="-I${src.include.rel}/glfw"/>
+				<arg value="-I${src.include.rel}/egl" if:true="${binding.egl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
 					<include name="${src.generated.native}/glfw/linux/*.c"/>
@@ -90,24 +91,24 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.openal}">
 			<arguments>
-				<arg value="-I${src.include}/openal"/>
+				<arg value="-I${src.include.rel}/openal"/>
 				<fileset dir="." includes="${src.generated.native}/openal/*.c"/>
 			</arguments>
 		</compile>
 
 		<compile if:true="${binding.opencl}">
 			<arguments>
-				<arg value="-I${src.include}/opencl"/>
-				<arg value="-I${src.include}/opengl" if:true="${binding.opengl}"/>
+				<arg value="-I${src.include.rel}/opencl"/>
+				<arg value="-I${src.include.rel}/opengl" if:true="${binding.opengl}"/>
 				<fileset dir="." includes="${src.generated.native}/opencl/*.c"/>
 			</arguments>
 		</compile>
 
 		<compile if:true="${binding.opengl}">
 			<arguments>
-				<arg value="-I${src.include}/opengl"/>
-				<arg value="-I${src.include}/opengl/glx"/>
-				<arg value="-I${src.include}/opencl" if:true="${binding.opencl}"/>
+				<arg value="-I${src.include.rel}/opengl"/>
+				<arg value="-I${src.include.rel}/opengl/glx"/>
+				<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/opengl/*.c"/>
 					<include name="${src.generated.native}/opengl/glx/*.c"/>
@@ -117,14 +118,14 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.opengles}">
 			<arguments>
-				<arg value="-I${src.include}/opengles"/>
+				<arg value="-I${src.include.rel}/opengles"/>
 				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
 			</arguments>
 		</compile>
 
 		<compile if:true="${binding.egl}">
 			<arguments>
-				<arg value="-I${src.include}/egl"/>
+				<arg value="-I${src.include.rel}/egl"/>
 				<fileset dir="." includes="${src.generated.native}/egl/*.c"/>
 			</arguments>
 		</compile>
