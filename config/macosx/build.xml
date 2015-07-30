@@ -121,6 +121,7 @@ License terms: http://lwjgl.org/license.php
 
 		<compile if:true="${binding.opengl}">
 			<arguments>
+				<arg value="-Wno-deprecated-declarations"/>
 				<arg value="-I${src.include.rel}/opengl"/>
 				<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
 				<fileset dir=".">
