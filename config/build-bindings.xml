@@ -29,36 +29,6 @@ This script is included in /config/build-definitions.xml.
 
 	<!-- // ================================ // -->
 
-	<condition property="binding.glfw_stb" value="true" else="false">
-		<and>
-			<istrue value="${binding.glfw}"/>
-			<istrue value="${binding.stb}"/>
-		</and>
-	</condition>
-
-	<condition property="binding.glfw_opencl" value="true" else="false">
-		<and>
-			<istrue value="${binding.glfw}"/>
-			<istrue value="${binding.opencl}"/>
-		</and>
-	</condition>
-
-	<condition property="binding.opencl_nogl" value="true" else="false">
-		<and>
-			<istrue value="${binding.opencl}"/>
-			<isfalse value="${binding.opengl}"/>
-		</and>
-	</condition>
-
-	<condition property="binding.opengl_nocl" value="true" else="false">
-		<and>
-			<istrue value="${binding.opengl}"/>
-			<isfalse value="${binding.opencl}"/>
-		</and>
-	</condition>
-
-	<!-- // ================================ // -->
-
 	<target name="bindings">
 		<condition property="binding.ovr" value="true" else="false">
 			<and>
