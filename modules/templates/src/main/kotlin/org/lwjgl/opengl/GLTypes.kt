@@ -20,9 +20,7 @@ val GLuint = IntegerType("GLuint", PrimitiveMapping.INT, unsigned = true)
 val GLint64 = IntegerType("GLint64", PrimitiveMapping.LONG)
 val GLuint64 = IntegerType("GLuint64", PrimitiveMapping.LONG, unsigned = true)
 val GLfloat = PrimitiveType("GLfloat", PrimitiveMapping.FLOAT)
-val GLclampf = typedef(GLfloat, "GLclampf")
 val GLdouble = PrimitiveType("GLdouble", PrimitiveMapping.DOUBLE)
-val GLclampd = typedef(GLdouble, "GLclampd")
 
 val GLboolean_p = PointerType("GLboolean", PointerMapping.DATA_BOOLEAN)
 val GLbyte_p = GLbyte.p

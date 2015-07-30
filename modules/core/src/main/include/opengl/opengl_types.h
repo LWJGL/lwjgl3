@@ -41,9 +41,7 @@
 	typedef unsigned short  GLushort;
 	typedef unsigned long   GLuint;
 	typedef float           GLfloat;
-	typedef float           GLclampf;
 	typedef double          GLdouble;
-	typedef double          GLclampd;
 	typedef void            GLvoid;
 #else
 	typedef unsigned int    GLenum;
@@ -58,9 +56,7 @@
 	typedef unsigned int    GLuint;
 	typedef unsigned short  GLhalf;
 	typedef float           GLfloat;
-	typedef float           GLclampf;
 	typedef double          GLdouble;
-	typedef double          GLclampd;
 	typedef void            GLvoid;
 #endif
 
