@@ -7,7 +7,7 @@ package org.lwjgl.egl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
-val KHR_stream_consumer_gltexture = "KHRStreamConsumerGltexture".nativeClassEGL("KHR_stream_consumer_gltexture", postfix = KHR) {
+val KHR_stream_consumer_gltexture = "KHRStreamConsumerGLTexture".nativeClassEGL("KHR_stream_consumer_gltexture", postfix = KHR) {
 	includeEGLEXT()
 
 	documentation =

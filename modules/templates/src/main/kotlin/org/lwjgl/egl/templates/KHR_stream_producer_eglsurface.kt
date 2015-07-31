@@ -7,7 +7,7 @@ package org.lwjgl.egl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
-val KHR_stream_producer_eglsurface = "KHRStreamProducerEglsurface".nativeClassEGL("KHR_stream_producer_eglsurface", postfix = KHR) {
+val KHR_stream_producer_eglsurface = "KHRStreamProducerEGLSurface".nativeClassEGL("KHR_stream_producer_eglsurface", postfix = KHR) {
 	includeEGLEXT()
 
 	documentation =

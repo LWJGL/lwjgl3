@@ -21,17 +21,6 @@ private val FunctionProviderEGL = Generator.register(object : FunctionProvider(E
 		println("\t/** Returns the {@link ${nativeClass.className}} instance. */")
 		println("\tpublic static ${nativeClass.className} getInstance() {")
 		println("\t\treturn checkFunctionality(EGL.getCapabilities().__${nativeClass.className});")
-		println("\t}")
-
-		println("\n\tstatic ${nativeClass.className} create(FunctionProvider provider) {")
-
-		println("\t\t${nativeClass.className} funcs = new ${nativeClass.className}(provider);")
-
-		print("\n\t\tboolean supported = checkFunctions(")
-		nativeClass.printPointers(this)
-		println(");")
-
-		println("\n\t\treturn supported ? funcs : null;")
 		println("\t}\n")
 	}
 
@@ -74,33 +63,42 @@ private val FunctionProviderEGL = Generator.register(object : FunctionProvider(E
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		// Client constructor
 		println("""
 	/**
 	 * Creates an EGLCapabilities instance for the EGL client.
 	 *
 	 * <p>The function instances created here will be reused by EGLCapabilities instances for EGLDisplays.</p>
 	 *
-	 * <p>The capability flags in this instance are only set for the core EGL versions and client extensions. This may only happen if EGL 1.5 or the
-	 * {@link #EGL_EXT_client_extensions} extension are supported. If not, all flags will be false and the version fields zero.</p>
+	 * <p>Querying EGL client library extensions depends on EGL 1.5 or the {@link #EGL_EXT_client_extensions} extension. If neither is supported, all flags
+	 * will be false and the version fields zero.</p>
 	 *
 	 * @param majorVersion the EGL client major version
 	 * @param minorVersion the EGL client minor version
-	 * @param ext          the EGL client extensions string
+	 * @param ext          the available EGL client extensions
 	 * @param provider     the EGL client function provider
 	 */
 	EGLCapabilities(int majorVersion, int minorVersion, Set<String> ext, FunctionProvider provider) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
-		for ( capability in classes.asSequence().filter { it.hasNativeFunctions } )
-			println("\t\t__${capability.className} = ${if ( capability.capName == capability.className ) "$EGL_PACKAGE.${capability.className}" else capability.className}.create(provider);")
+		for ( capability in classes.asSequence().filter { it.hasNativeFunctions } ) {
+			val className = if ( capability.capName == capability.className )
+				"$EGL_PACKAGE.${capability.className}"
+			else
+				capability.className
+			println("\t\t__${capability.className} = new $className(provider);")
+		}
 
 		println()
 
 		for ( capability in classes ) {
 			val capName = capability.capName
-			println("\t\t$capName = EGL.checkCapability(ext, \"$capName\");")
+			println(
+				if ( capability.hasNativeFunctions ) {
+					"\t\t$capName = EGL.checkCapability(ext, \"$capName\", __${capability.className}) != null;"
+				} else
+					"\t\t$capName = ext.contains(\"$capName\");"
+			)
 		}
 		println("\t}")
 

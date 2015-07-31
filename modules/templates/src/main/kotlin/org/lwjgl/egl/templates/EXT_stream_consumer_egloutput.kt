@@ -7,7 +7,7 @@ package org.lwjgl.egl.templates
 import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
-val EXT_stream_consumer_egloutput = "EXTStreamConsumerEgloutput".nativeClassEGL("EXT_stream_consumer_egloutput", postfix = EXT) {
+val EXT_stream_consumer_egloutput = "EXTStreamConsumerEGLOutput".nativeClassEGL("EXT_stream_consumer_egloutput", postfix = EXT) {
 	includeEGLEXT()
 
 	documentation =

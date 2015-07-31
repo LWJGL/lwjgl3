@@ -10,6 +10,7 @@ import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProvider;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +22,24 @@ import static org.lwjgl.egl.EGL11.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * This class must be used before any EGL function is called. It has the following responsibilities:
+ * <ul>
+ * <li>Loads the EGL native library into the JVM process.</li>
+ * <li>Creates instances of {@link EGLCapabilities} classes. An {@code EGLCapabilities} instance contains flags for functionality that is available in an
+ * EGLDisplay or the EGL client library. Internally, it also contains function pointers that are only valid in that specific EGLDisplay or client library.</li>
+ *
+ * <h3>Library lifecycle</h3>
+ * <p>The EGL library is loaded automatically when this class is initialized. Set the {@code org.lwjgl.egl.explicitInit=true} system property to
+ * override this behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can
+ * be overridden with the {@code org.lwjgl.egl.libname} system property.</p>
+ *
+ * <h3>EGLCapabilities creation</h3>
+ * <p>Instances of {@code EGLCapabilities} for an EGLDisplay can be created with the {@link #createDisplayCapabilities} method. Calling this method is
+ * expensive, so the {@code EGLCapabilities} instance should be associated with the EGLDisplay and reused as necessary.</p>
+ *
+ * <p>The {@code EGLCapabilities} instance for the client library is created automatically when the EGL native library is loaded.</p>
+ */
 public final class EGL {
 
 	private static final Map<Integer, String> EGL_ERROR_TOKENS = LWJGLUtil.getClassTokens(
@@ -49,6 +68,7 @@ public final class EGL {
 
 	private EGL() {}
 
+	/** Loads the EGL native library, using the default library name. */
 	public static void create() {
 		String libName = System.getProperty("org.lwjgl.egl.libname");
 		if ( libName == null ) {
@@ -66,6 +86,11 @@ public final class EGL {
 		create(libName);
 	}
 
+	/**
+	 * Loads the EGL native library, using the specified library name.
+	 *
+	 * @param libName the native library name
+	 */
 	public static void create(String libName) {
 		if ( functionProvider != null )
 			throw new IllegalStateException("EGL has already been created.");
@@ -81,11 +106,8 @@ public final class EGL {
 				__buffer.stringParamASCII(functionName, true);
 
 				long address = neglGetProcAddress(__buffer.address(), eglGetProcAddress);
-				if ( address == NULL ) {
+				if ( address == NULL )
 					address = EGL.getFunctionAddress(functionName);
-					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for EGL function " + functionName);
-				}
 
 				return address;
 			}
@@ -99,6 +121,7 @@ public final class EGL {
 		caps = createClientCapabilities();
 	}
 
+	/** Unloads the EGL native library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
@@ -109,6 +132,7 @@ public final class EGL {
 		functionProvider = null;
 	}
 
+	/** Returns the {@link FunctionProvider} for the EGL native library. */
 	public static FunctionProvider getFunctionProvider() {
 		return functionProvider;
 	}
@@ -127,19 +151,17 @@ public final class EGL {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
 		long versionString = org.lwjgl.egl.EGL10.neglQueryString(EGL_NO_DISPLAY, EGL_VERSION, QueryString);
 
-		Set<String> ext;
+		Set<String> ext = new HashSet<String>(32);
+
 		APIVersion version;
 		if ( versionString == NULL ) {
+			version = new APIVersion(0, 0, null, null);
+
 			long GetError = functionProvider.getFunctionAddress("eglGetError");
 			neglGetError(GetError); // clear error
-
-			version = new APIVersion(0, 0, null, null);
-			ext = null;
 		} else {
 			version = apiParseVersion(memDecodeASCII(versionString), "EGL");
-			ext = new HashSet<String>(32);
 
-			addEGLVersions(version.major, version.minor, ext);
 			addExtensions(memDecodeASCII(org.lwjgl.egl.EGL10.neglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS, QueryString)), ext);
 		}
 
@@ -148,8 +170,8 @@ public final class EGL {
 
 	/**
 	 * Creates an {@link EGLCapabilities} instance for the specified EGLDisplay handle.
-	 * <p/>
-	 * This method call is relatively expensive. The result should be cached and reused.
+	 *
+	 * <p>This method call is relatively expensive. The result should be cached and reused.</p>
 	 *
 	 * @param dpy          the EGLDisplay to query
 	 * @param majorVersion the major EGL version supported by the EGLDisplay, as returned by {@link EGL10#eglInitialize}
@@ -165,7 +187,7 @@ public final class EGL {
 		// Parse display EGL_EXTENSIONS string
 		addExtensions(eglQueryString(dpy, EGL_EXTENSIONS), supportedExtensions);
 
-		return new EGLCapabilities(majorVersion, minorVersion, supportedExtensions, EGL.getCapabilities());
+		return new EGLCapabilities(majorVersion, minorVersion, supportedExtensions, functionProvider);
 	}
 
 	private static void addEGLVersions(int MAJOR, int MINOR, Set<String> supportedExtensions) {
@@ -189,24 +211,40 @@ public final class EGL {
 			supportedExtensions.add(tokenizer.nextToken());
 	}
 
-	static boolean checkCapability(Set<String> ext, String extension) {
-		if ( ext == null ) // This can happen in the client EGLCapabilities constructor, if EGL 1.5 and EGL_EXT_client_extensions are not available
-			return false;
+	static <T> T checkCapability(java.util.Set<String> ext, String capability, T functions) {
+		if ( !ext.contains(capability) )
+			return null;
 
-		return ext.contains(extension);
-	}
-
-	static <T> T checkCapability(Set<String> ext, String extension, T functions) {
-		if ( ext.contains(extension) ) {
-			if ( functions != null )
-				return functions;
-
-			LWJGLUtil.log("[EGL] " + extension + " was reported as available but an entry point is missing.");
+		boolean missingFunction = false;
+		try {
+			for ( Field f : functions.getClass().getFields() ) {
+				if ( !Modifier.isStatic(f.getModifiers()) && f.getLong(functions) == NULL ) {
+					LWJGLUtil.log("Failed to locate address for EGL function egl" + f.getName());
+					missingFunction = true;
+					break;
+				}
+			}
+		} catch (IllegalAccessException e) {
+			LWJGLUtil.log("[EGL] Failed to retrieve " + capability + " function pointer fields.");
+			return null;
 		}
-		return null;
+
+		if ( missingFunction ) {
+			LWJGLUtil.log("[EGL] " + capability + " was reported as available but an entry point is missing.");
+			return null;
+		}
+
+		return functions;
 	}
 
-	public static String getEGLErrorDescription(int errorCode) {
+	/**
+	 * Translates an EGL error code to a String describing the error.
+	 *
+	 * @param errorCode the EGL error code, as returned by {@link EGL10#eglGetError}
+	 *
+	 * @return a string with the error description
+	 */
+	public static String getErrorString(int errorCode) {
 		switch ( errorCode ) {
 			case EGL_SUCCESS:
 				return "Function succeeded.";
