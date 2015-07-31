@@ -9,7 +9,15 @@ import org.lwjgl.glfw.*
 import org.lwjgl.egl.*
 
 val GLFWEGL = "GLFWEGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "egl", prefix = "GLFW") {
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_EGL")
+	nativeDirective(
+"""#ifdef LWJGL_WINDOWS
+	#define GLFW_EXPOSE_NATIVE_WIN32
+#endif
+#ifdef LWJGL_LINUX
+	#define GLFW_EXPOSE_NATIVE_X11
+#endif
+#define GLFW_EXPOSE_NATIVE_EGL"""
+	)
 
 	nativeImport(
 		"glfw3.h",
