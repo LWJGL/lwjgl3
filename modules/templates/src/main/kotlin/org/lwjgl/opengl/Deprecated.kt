@@ -2,12 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.generator.opengl
+package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 
 /** Marks an OpenGL function as deprecated; its function address will not be loaded in a forward-compatible context. */
-class DeprecatedGL internal constructor(): FunctionModifier() {
+private class DeprecatedGL internal constructor(): FunctionModifier() {
 	companion object: ModifierKey<DeprecatedGL>
 
 	override val isSpecial = false

@@ -86,6 +86,7 @@ abstract class FunctionProvider(
 
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
 	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
+	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = !hasCurrentCapabilities
 	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)

@@ -43,6 +43,8 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 			writer.print(", boolean fc")
 	}
 
+	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(deprecatedGL)
+
 	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		// Do the fc check here, because getFunctionAddress will return an address
 		// even if the current context is forward compatible. We don't want that because

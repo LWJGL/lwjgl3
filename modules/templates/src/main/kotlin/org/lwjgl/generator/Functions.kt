@@ -269,7 +269,7 @@ class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if ( (has(DependsOn) || has(ignoreMissing) || has(deprecatedGL) || !(nativeClass.functionProvider?.hasCurrentCapabilities ?: true)) && !hasUnsafeMethod )
+		if ( (has(DependsOn) || has(ignoreMissing) || (nativeClass.functionProvider?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -489,7 +489,7 @@ class NativeClassFunction(
 
 		// Basic checks
 		val checks = ArrayList<String>(4)
-		if ( has(DependsOn) || has(ignoreMissing) || has(deprecatedGL) )
+		if ( has(DependsOn) || has(ignoreMissing) || nativeClass.functionProvider.shouldCheckFunctionAddress(this@NativeClassFunction) )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 		parameters forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
