@@ -8,7 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.generator.opengl.AutoType
 import org.lwjgl.generator.opengl.BufferType.*
-import org.lwjgl.generator.opengl.ARRAY_BUFFER
 
 val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color", postfix = EXT) {
 	nativeImport (

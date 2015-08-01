@@ -84,9 +84,20 @@ abstract class FunctionProvider(
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
 	}
 
+	open fun generateAlternativeMethods(
+		writer: PrintWriter,
+		function: NativeClassFunction,
+		transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>
+	) = Unit
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
 	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
 	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = !hasCurrentCapabilities
+	open fun addParameterChecks(
+		checks: MutableList<String>,
+		mode: GenerationMode,
+		parameter: Parameter,
+		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
+	) = Unit
 	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)

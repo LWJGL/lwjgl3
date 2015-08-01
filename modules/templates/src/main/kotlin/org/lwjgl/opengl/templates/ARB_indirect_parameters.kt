@@ -6,7 +6,6 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.DRAW_INDIRECT_BUFFER
 
 val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirect_parameters", postfix = ARB) {
 	nativeImport (

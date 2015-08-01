@@ -2,23 +2,23 @@ package org.lwjgl.generator
 
 import java.io.PrintWriter
 
-private interface FunctionTransform<T: QualifiedType> {
+interface FunctionTransform<T: QualifiedType> {
 	fun transformDeclaration(param: T, original: String): String?
 	fun transformCall(param: T, original: String): String
 }
 
 /** A function transform that must perform some pre-processing. */
-private interface PreFunctionTransform<T: QualifiedType> {
+interface PreFunctionTransform<T: QualifiedType> {
 	fun preprocess(qtype: T, writer: PrintWriter)
 }
 
 /** A function transform that makes use of the APIBuffer. */
-private interface APIBufferFunctionTransform<T: QualifiedType> {
+interface APIBufferFunctionTransform<T: QualifiedType> {
 	fun setupAPIBuffer(func: Function, qtype: T, writer: PrintWriter)
 }
 
 /** Marker trait to indicate that buffer checks should be skipped. */
-private interface SkipCheckFunctionTransform
+interface SkipCheckFunctionTransform
 
 private fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
 	val transform = transforms[this]
@@ -123,11 +123,6 @@ private class AutoTypeParamWithSignTransform(val unsignedType: String, val signe
 private class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.getSimpleName()} ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = original
-}
-
-private val BufferOffsetTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
-	override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 }
 
 private open class ExpressionTransform(

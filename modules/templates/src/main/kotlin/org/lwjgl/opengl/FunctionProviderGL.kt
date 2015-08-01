@@ -26,6 +26,20 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
+	private val BufferOffsetTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
+		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
+	}
+
+	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
+		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
+		if ( boParams.any() ) {
+			boParams forEach { transforms[it] = BufferOffsetTransform }
+			function.generateAlternativeMethod(writer, function.name, "Buffer object offset version of:", transforms)
+			boParams forEach { transforms remove it }
+		}
+	}
+
 	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
 		if ( GLCorePattern.matcher(function.nativeClass.className).matches() ) {
 			val xmlName = if ( function has ReferenceGL )
@@ -44,6 +58,25 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 	}
 
 	override fun shouldCheckFunctionAddress(function: NativeClassFunction): Boolean = function.has(deprecatedGL)
+
+	override fun addParameterChecks(
+		checks: MutableList<String>,
+		mode: GenerationMode,
+		parameter: Parameter,
+		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
+	) {
+		if ( !parameter.has(BufferObject) )
+			return
+
+		when {
+			mode === GenerationMode.NORMAL -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.nativeType.mapping === PrimitiveMapping.POINTER});"
+			parameter.nativeType.mapping !== PrimitiveMapping.POINTER -> "GLChecks.ensureBufferObject(${parameter[BufferObject].binding}, ${parameter.hasTransform(BufferOffsetTransform)});"
+			else -> null
+		}?.let {
+			if ( !checks.contains(it) )
+				checks add it
+		}
+	}
 
 	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		// Do the fc check here, because getFunctionAddress will return an address

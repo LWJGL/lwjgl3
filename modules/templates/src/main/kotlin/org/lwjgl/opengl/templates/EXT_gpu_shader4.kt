@@ -5,7 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.ARRAY_BUFFER
 import org.lwjgl.opengl.*
 
 val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix = EXT) {

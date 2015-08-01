@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.generator.opengl
+package org.lwjgl.opengl
 
 import org.lwjgl.generator.*
 
@@ -40,6 +40,5 @@ val SHADER_STORAGE_BUFFER = BufferObject("GL43.GL_SHADER_STORAGE_BUFFER_BINDING"
 val ATOMIC_COUNTER_BUFFER = BufferObject("GL42.GL_ATOMIC_COUNTER_BUFFER_BINDING")
 val DISPATCH_INDIRECT_BUFFER = BufferObject("GL43.GL_DISPATCH_INDIRECT_BUFFER_BINDING")
 
-// TODO: Convert to tokens
 val QUERY_BUFFER_AMD = BufferObject("AMDQueryBufferObject.GL_QUERY_BUFFER_BINDING_AMD")
-val VIDEO_BUFFER_NV = BufferObject("0x9021")
+val VIDEO_BUFFER_NV = BufferObject("0x9021") // TODO: Convert to token

@@ -351,17 +351,6 @@ class NativeClassFunction(
 					checks add "${prefix}checkBuffer(${it.name}, ${it.nativeType.definition.className}.SIZEOF);"
 			}
 
-			if ( it has BufferObject ) {
-				when {
-					mode === NORMAL -> "GLChecks.ensureBufferObject(${it[BufferObject].binding}, ${it.nativeType.mapping === PrimitiveMapping.POINTER});"
-					it.nativeType.mapping !== PrimitiveMapping.POINTER -> "GLChecks.ensureBufferObject(${it[BufferObject].binding}, ${transforms?.get(it) === BufferOffsetTransform});"
-					else -> null
-				}?.let {
-					if ( !checks.contains(it) )
-						checks add it
-				}
-			}
-
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
 				if ( mode === NORMAL || it.nativeType is PointerType ) {
@@ -405,6 +394,8 @@ class NativeClassFunction(
 					}
 				}
 			}
+
+			nativeClass.functionProvider?.addParameterChecks(checks, mode, it) { transforms?.get(this) === it }
 		}
 
 		if ( checks.isEmpty() )
@@ -723,6 +714,8 @@ class NativeClassFunction(
 	private fun PrintWriter.generateAlternativeMethods() {
 		val transforms = LinkedHashMap<QualifiedType, FunctionTransform<out QualifiedType>>()
 
+		nativeClass.functionProvider?.generateAlternativeMethods(this, this@NativeClassFunction, transforms)
+
 		if ( returns.nativeType is CharSequenceType )
 			transforms[returns] = StringReturnTransform
 		else if ( returns has MapPointer ) {
@@ -732,13 +725,6 @@ class NativeClassFunction(
 				MapPointerExplicitTransform(lengthParam = mapPointer.sizeExpression, addParam = false)
 			else
 				MapPointerTransform
-		}
-
-		val boParams = getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
-		if ( boParams.any() ) {
-			boParams forEach { transforms[it] = BufferOffsetTransform }
-			generateAlternativeMethod(name, "Buffer object offset version of:", transforms)
-			boParams forEach { transforms remove it }
 		}
 
 		// Step 1: Apply basic transformations
@@ -1011,7 +997,7 @@ class NativeClassFunction(
 			generateAlternativeMethod(stripPostfix(name, stripType = false), "Single value version of:", transforms)
 	}
 
-	private fun PrintWriter.generateAlternativeMethod(
+	fun PrintWriter.generateAlternativeMethod(
 		name: String,
 		description: String,
 		transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>
@@ -1257,3 +1243,10 @@ class NativeClassFunction(
 	}
 
 }
+
+// TODO: Remove if KT-457 or KT-1183 are fixed.
+fun NativeClassFunction.generateAlternativeMethod(
+	writer: PrintWriter, name: String,
+    description: String,
+    transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>
+) = writer.generateAlternativeMethod(name, description, transforms)
