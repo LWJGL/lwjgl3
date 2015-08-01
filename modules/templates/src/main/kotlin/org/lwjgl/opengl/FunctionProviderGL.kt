@@ -6,7 +6,6 @@ package org.lwjgl.opengl
 
 import java.io.PrintWriter
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
 import java.util.regex.Pattern
 
 private val NativeClass.capName: String

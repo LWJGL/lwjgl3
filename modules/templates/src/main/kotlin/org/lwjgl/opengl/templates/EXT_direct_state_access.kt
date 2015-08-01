@@ -6,8 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
+import org.lwjgl.opengl.BufferType.*
 
 val EXT_direct_state_access = "EXTDirectStateAccess".nativeClassGL("EXT_direct_state_access", postfix = EXT) {
 	nativeImport (

@@ -176,6 +176,33 @@ class Expression(
 	override val isSpecial = true
 }
 
+interface AutoTypeToken {
+	fun name(): String
+	val mapping: PointerMapping
+	val className: String
+	val unsigned: AutoTypeToken?
+}
+
+/**
+ * Replaces a parameter with specific type tokens and the referenced pointer parameter with the typed NIO buffer that corresponds to the token value. See
+ * GL20#glVertexAttribPointer for an example.
+ */
+class AutoType(override val reference: String, vararg val types: AutoTypeToken): ParameterModifier(), ReferenceModifier {
+	companion object: ModifierKey<AutoType>
+
+	override val isSpecial = false
+
+	init {
+		if ( types.isEmpty() )
+			throw IllegalArgumentException("No types specified.")
+	}
+
+	override fun validate(param: Parameter) {
+		if ( param.nativeType !is IntegerType || !param.nativeType.unsigned )
+			throw IllegalArgumentException("The AutoType modifier can only be applied on unsigned integer parameters.")
+	}
+}
+
 /** Like AutoType, but with a hard-coded list of types. See glTexImage2D for an example. */
 class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 	companion object: ModifierKey<MultiType>

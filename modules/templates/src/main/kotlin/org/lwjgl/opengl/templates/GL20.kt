@@ -5,9 +5,8 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
+import org.lwjgl.opengl.BufferType.*
 
 val SHADER_TYPES = "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER GL32#GEOMETRY_SHADER GL40#TESS_CONTROL_SHADER GL40#TESS_EVALUATION_SHADER"
 

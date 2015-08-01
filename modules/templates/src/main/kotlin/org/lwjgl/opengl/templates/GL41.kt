@@ -5,9 +5,8 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
+import org.lwjgl.opengl.BufferType.*
 
 val GL41 = "GL41".nativeClassGL("GL41") {
 	nativeImport (

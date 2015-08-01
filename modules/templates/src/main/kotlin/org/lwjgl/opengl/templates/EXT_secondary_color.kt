@@ -6,8 +6,7 @@ package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
-import org.lwjgl.generator.opengl.AutoType
-import org.lwjgl.generator.opengl.BufferType.*
+import org.lwjgl.opengl.BufferType.*
 
 val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color", postfix = EXT) {
 	nativeImport (

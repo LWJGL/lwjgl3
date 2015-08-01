@@ -5,7 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
 val ARB_robustness = "ARBRobustness".nativeClassGL("ARB_robustness", postfix = ARB) {

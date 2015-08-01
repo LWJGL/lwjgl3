@@ -5,9 +5,8 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.AutoType
-import org.lwjgl.generator.opengl.BufferType.*
 import org.lwjgl.opengl.*
+import org.lwjgl.opengl.BufferType.*
 
 val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", postfix = NV) {
 	nativeImport (

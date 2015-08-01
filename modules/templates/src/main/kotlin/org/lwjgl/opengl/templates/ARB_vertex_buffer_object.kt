@@ -5,7 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
 val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex_buffer_object", postfix = ARB) {

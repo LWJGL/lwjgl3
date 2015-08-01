@@ -5,7 +5,6 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.generator.opengl.*
 import org.lwjgl.opengl.*
 
 val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture_compression", postfix = ARB) {

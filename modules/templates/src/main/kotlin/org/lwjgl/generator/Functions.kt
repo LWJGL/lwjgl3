@@ -9,8 +9,6 @@ import org.lwjgl.generator.GenerationMode.NORMAL
 import org.lwjgl.generator.ParameterType.IN
 import org.lwjgl.generator.ParameterType.INOUT
 import org.lwjgl.generator.ParameterType.OUT
-import org.lwjgl.generator.opengl.*
-import org.lwjgl.generator.opengl.BufferType.*
 import java.io.PrintWriter
 import java.nio.ByteBuffer
 import java.util.ArrayList
@@ -896,18 +894,11 @@ class NativeClassFunction(
 				if ( autoSizeParam != null )
 					transforms[autoSizeParam] = AutoSizeTransform(bufferParam, autoSizeParam[AutoSize].applyTo, applyFactor = false)
 
-				val types = ArrayList<BufferType>(autoTypes.types.size())
+				val types = ArrayList<AutoTypeToken>(autoTypes.types.size())
 				autoTypes.types.forEach { types add it }
 
 				for ( autoType in autoTypes.types ) {
-					val unsignedType = when ( autoType ) {
-						GL_BYTE  -> GL_UNSIGNED_BYTE
-						GL_SHORT -> GL_UNSIGNED_SHORT
-						GL_INT   -> GL_UNSIGNED_INT
-						GL_LONG  -> GL_UNSIGNED_LONG
-						else     -> null
-					}
-
+					val unsignedType = autoType.unsigned
 					if ( unsignedType == null || !types.contains(unsignedType) )
 						continue
 
