@@ -46,8 +46,6 @@ val FUNCTION_ADDRESS = "__functionAddress"
 private val API_BUFFER = "__buffer"
 private val JNIENV = "__env"
 
-private val GLCore_PATTERN = Pattern.compile("GL[1-9][0-9]")
-
 enum class GenerationMode {
 	NORMAL,
 	ALTERNATIVE
@@ -116,7 +114,7 @@ class NativeClassFunction(
 	val accessModifier: String
 		get() = (if ( has(AccessModifier) ) this[AccessModifier].access else nativeClass.access).modifier
 
-	private fun stripPostfix(functionName: String = name, stripType: Boolean): String {
+	fun stripPostfix(functionName: String = name, stripType: Boolean): String {
 		if ( !hasNativeParams )
 			return functionName
 
@@ -530,13 +528,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
-		if ( GLCore_PATTERN.matcher(nativeClass.className).matches() ) {
-			val xmlName = if ( this@NativeClassFunction has ReferenceGL )
-				this@NativeClassFunction[ReferenceGL].function
-			else
-				stripPostfix(stripType = true)
-			printOpenGLJavaDoc(documentation, xmlName, this@NativeClassFunction has deprecatedGL)
-		} else if ( documentation.isNotEmpty() )
+		if ( !(nativeClass.functionProvider?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
 			println(documentation)
 
 		// Step 1: Method signature

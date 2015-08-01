@@ -24,6 +24,20 @@ private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
 
 private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
 
+	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
+
+	override fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String): Boolean {
+		if ( GLCorePattern.matcher(function.nativeClass.className).matches() ) {
+			val xmlName = if ( function has ReferenceGL )
+				function[ReferenceGL].function
+			else
+				function.stripPostfix(stripType = true)
+			writer.printOpenGLJavaDoc(documentation, xmlName, function has deprecatedGL)
+			return true
+		}
+		return false
+	}
+
 	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
 			writer.print(", boolean fc")

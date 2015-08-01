@@ -2,7 +2,7 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.generator.opengl
+package org.lwjgl.opengl
 
 import java.io.PrintWriter
 import org.lwjgl.generator.*
@@ -18,7 +18,7 @@ class ReferenceGL(val function: String): FunctionModifier() {
 	}
 }
 
-fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
+private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
 	val link = url("http://www.opengl.org/sdk/docs/man${if ( deprecated ) "2" else ""}/html/$function.xhtml", "OpenGL SDK Reference")
 	val injectedJavaDoc =
 		if ( deprecated )

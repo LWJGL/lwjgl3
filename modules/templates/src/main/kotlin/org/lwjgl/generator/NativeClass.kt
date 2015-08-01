@@ -84,8 +84,8 @@ abstract class FunctionProvider(
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
 	}
 
-	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
-	}
+	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
+	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
 	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
