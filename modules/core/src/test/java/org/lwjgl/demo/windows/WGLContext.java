@@ -2,9 +2,12 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.opengl;
+package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
+import org.lwjgl.Pointer;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GLCapabilities;
 
 import java.nio.IntBuffer;
 
@@ -16,14 +19,17 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WindowsPlatform.*;
 
-public class GLContextWindows extends GLContext {
+/** Simple WGL context wrapper. */
+public class WGLContext implements Pointer {
 
 	private final long hglrc;
 
-	public GLContextWindows(GLCapabilities capabilities, long hglrc) {
-		super(capabilities);
+	private final GLCapabilities capabilities;
 
+	public WGLContext(long hglrc) {
 		this.hglrc = hglrc;
+
+		this.capabilities = GL.createCapabilities();
 	}
 
 	@Override
@@ -31,38 +37,37 @@ public class GLContextWindows extends GLContext {
 		return hglrc;
 	}
 
-	@Override
-	protected void makeCurrentImpl(long target) {
+	public GLCapabilities getCapabilities() {
+		return capabilities;
+	}
+
+	public void makeCurrent(long target) {
 		if ( wglMakeCurrent(target, hglrc) == FALSE )
 			windowsThrowException("Failed to make the OpenGL context current.");
 	}
 
-	@Override
-	protected void makeCurrentImpl(long targetDraw, long targetRead) {
+	public void makeCurrent(long targetDraw, long targetRead) {
 		if ( wglMakeContextCurrentARB(targetDraw, targetRead, hglrc) == FALSE )
 			windowsThrowException("Failed to make the OpenGL context current.");
 	}
 
-	@Override
 	public boolean isCurrent() {
 		return wglGetCurrentContext() == hglrc;
 	}
 
 	/**
-	 * Creates a {@link GLContextWindows} from the current OpenGL context of the current thread.
+	 * Creates a {@link WGLContext} from the current OpenGL context of the current thread.
 	 *
-	 * @return the new {@link GLContextWindows}
+	 * @return the new {@link WGLContext}
 	 *
 	 * @throws IllegalStateException if no OpenGL context is current in the current thread.
 	 */
-	public static GLContextWindows createFromCurrent() {
+	public static WGLContext createFromCurrent() {
 		long hglrc = wglGetCurrentContext();
 		if ( hglrc == NULL )
 			throw new IllegalStateException("No OpenGL context is current in the current thread.");
 
-		GLCapabilities capabilities = GL.createCapabilities(false);
-
-		return new GLContextWindows(capabilities, hglrc);
+		return new WGLContext(hglrc);
 	}
 
 	/**
@@ -72,8 +77,8 @@ public class GLContextWindows extends GLContext {
 	 *
 	 * @return the new WindowsContext
 	 */
-	public static GLContextWindows create(long hdc) {
-		GLContextWindows context = createLegacy(hdc);
+	public static WGLContext create(long hdc) {
+		WGLContext context = createLegacy(hdc);
 		try {
 			return createARB(hdc);
 		} finally {
@@ -81,7 +86,7 @@ public class GLContextWindows extends GLContext {
 		}
 	}
 
-	private static GLContextWindows createLegacy(long hdc) {
+	private static WGLContext createLegacy(long hdc) {
 		long hglrc = wglCreateContext(hdc);
 		if ( hglrc == NULL )
 			throw new RuntimeException("Failed to create OpenGL context.");
@@ -98,7 +103,7 @@ public class GLContextWindows extends GLContext {
 		}
 	}
 
-	private static GLContextWindows createARB(long hdc) {
+	private static WGLContext createARB(long hdc) {
 		IntBuffer attribs = BufferUtils.createIntBuffer(16);
 
 		/*attribs.put(WGL_CONTEXT_MAJOR_VERSION_ARB);
@@ -132,10 +137,10 @@ public class GLContextWindows extends GLContext {
 		}
 	}
 
-	@Override
-	protected void destroyImpl() {
+	public void destroy() {
 		int result = wglDeleteContext(hglrc);
 		if ( result == FALSE )
 			throw new RuntimeException("Failed to delete OpenGL context.");
 	}
+
 }

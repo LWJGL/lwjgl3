@@ -13,7 +13,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 import static org.lwjgl.system.windows.WinGDI.*;
 import static org.lwjgl.system.windows.WinUser.*;
-import static org.lwjgl.system.windows.WindowsDisplay.*;
+import static org.lwjgl.demo.windows.WindowsDisplay.*;
 import static org.lwjgl.system.windows.WindowsLibrary.*;
 import static org.testng.Assert.*;
 

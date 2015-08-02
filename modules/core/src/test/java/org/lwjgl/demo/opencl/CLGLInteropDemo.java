@@ -12,7 +12,7 @@ import org.lwjgl.opencl.CLCapabilities;
 import org.lwjgl.opencl.CLDevice;
 import org.lwjgl.opencl.CLPlatform;
 import org.lwjgl.opencl.CLPlatform.Filter;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GL;
 
 import java.util.*;
 import java.util.concurrent.CountDownLatch;
@@ -260,7 +260,7 @@ public final class CLGLInteropDemo {
 
 		try {
 			glfwMakeContextCurrent(window);
-			GLContext.createFromCurrent();
+			GL.createCapabilities();
 
 			return glGetString(GL_VENDOR);
 		} finally {

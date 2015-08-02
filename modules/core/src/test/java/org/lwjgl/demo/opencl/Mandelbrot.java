@@ -10,8 +10,9 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
@@ -27,6 +28,8 @@ import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWLinux.*;
+import static org.lwjgl.glfw.GLFWMacOSX.*;
+import static org.lwjgl.glfw.GLFWWin32.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
 import static org.lwjgl.opencl.CLUtil.*;
@@ -164,13 +167,11 @@ public class Mandelbrot {
 		fbh = size.get(1);
 
 		glfwMakeContextCurrent(window.handle);
-		GLContext glContext = GLContext.createFromCurrent();
-
-		GLCapabilities glCaps = glContext.getCapabilities();
+		GLCapabilities glCaps = GL.createCapabilities();
 		if ( !glCaps.OpenGL30 )
 			throw new RuntimeException("OpenGL 3.0 is required to run this demo.");
 
-		debugProc = debugGL ? glContext.setupDebugMessageCallback() : null;
+		debugProc = debugGL ? GLUtil.setupDebugMessageCallback() : null;
 
 		glfwSwapInterval(0);
 
@@ -214,27 +215,30 @@ public class Mandelbrot {
 			if ( useAPPLEGLSharing ) {
 				ctxProps
 					.put(2, APPLEGLSharing.CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE)
-					.put(3, CGLGetShareGroup(glContext.getPointer()));
+					.put(3, CGLGetShareGroup(glfwGetNSGLContext(window.handle)));
 			} else {
-				ctxProps
-					.put(2, CL_GL_CONTEXT_KHR)
-					.put(3, glContext);
-
 				switch ( LWJGLUtil.getPlatform() ) {
 					case WINDOWS:
 						ctxProps
+							.put(2, CL_GL_CONTEXT_KHR)
+							.put(3, glfwGetWGLContext(window.handle))
 							.put(4, CL_WGL_HDC_KHR)
 							.put(5, wglGetCurrentDC());
 						break;
 					case LINUX:
 						ctxProps
+							.put(2, CL_GL_CONTEXT_KHR)
+							.put(3, GLFWLinux.glfwGetGLXContext(window.handle))
 							.put(4, CL_GLX_DISPLAY_KHR)
 							.put(5, glfwGetX11Display());
 						break;
 					case MACOSX:
+						long ctx = glfwGetNSGLContext(window.handle);
 						ctxProps
+							.put(2, CL_GL_CONTEXT_KHR)
+							.put(3, ctx)
 							.put(4, CL_CGL_SHAREGROUP_KHR)
-							.put(5, CGLGetShareGroup(glContext.getPointer()));
+							.put(5, CGLGetShareGroup(ctx));
 						break;
 				}
 			}

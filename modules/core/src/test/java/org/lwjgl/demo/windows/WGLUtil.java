@@ -2,15 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.demo.glfw;
+package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.GLContext;
-import org.lwjgl.opengl.GLContextWindows;
 import org.lwjgl.system.windows.PIXELFORMATDESCRIPTOR;
-import org.lwjgl.system.windows.WindowsDisplay;
 
-import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -25,12 +21,12 @@ import static org.testng.Assert.*;
  *
  * @author Brian Matzon <brian@matzon.dk>
  */
-public final class DemoUtil {
+public final class WGLUtil {
 
-	private DemoUtil() {
+	private WGLUtil() {
 	}
 
-	private static int findPixelFormatLegacy(long dc, ByteBuffer pfdOut) {
+	static int findPixelFormatLegacy(long dc, PIXELFORMATDESCRIPTOR pfdOut) {
 		PIXELFORMATDESCRIPTOR pfdIn = new PIXELFORMATDESCRIPTOR();
 
 		pfdIn.setSize(PIXELFORMATDESCRIPTOR.SIZEOF);
@@ -45,19 +41,19 @@ public final class DemoUtil {
 		int pixelFormat = ChoosePixelFormat(dc, pfdIn.buffer());
 		assertTrue(pixelFormat != 0);
 
-		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut);
+		int describePF = DescribePixelFormat(dc, pixelFormat, pfdOut.buffer());
 		assertTrue(describePF != 0);
 
-		int flagsOut = PIXELFORMATDESCRIPTOR.flags(pfdOut);
+		int flagsOut = pfdOut.getFlags();
 
 		assertEquals(flagsOut & PFD_DRAW_TO_WINDOW, PFD_DRAW_TO_WINDOW);
 		assertEquals(flagsOut & PFD_SUPPORT_OPENGL, PFD_SUPPORT_OPENGL);
 		assertEquals(flagsOut & PFD_DOUBLEBUFFER, PFD_DOUBLEBUFFER);
 		assertEquals(flagsOut & PFD_GENERIC_FORMAT, 0); // software mode
-		assertTrue(pfdIn.getColorBits() <= PIXELFORMATDESCRIPTOR.colorBits(pfdOut));
-		assertTrue(pfdIn.getAlphaBits() <= PIXELFORMATDESCRIPTOR.alphaBits(pfdOut));
-		assertTrue(pfdIn.getDepthBits() <= PIXELFORMATDESCRIPTOR.depthBits(pfdOut));
-		assertTrue(pfdIn.getStencilBits() <= PIXELFORMATDESCRIPTOR.stencilBits(pfdOut));
+		assertTrue(pfdIn.getColorBits() <= pfdOut.getColorBits());
+		assertTrue(pfdIn.getAlphaBits() <= pfdOut.getAlphaBits());
+		assertTrue(pfdIn.getDepthBits() <= pfdOut.getDepthBits());
+		assertTrue(pfdIn.getStencilBits() <= pfdOut.getStencilBits());
 
 		return pixelFormat;
 	}
@@ -67,16 +63,16 @@ public final class DemoUtil {
 		properties.put(value);
 	}
 
-	private static int findPixelFormatARB(int pixelFormat, ByteBuffer pfd) {
+	static int findPixelFormatARB(int pixelFormat, PIXELFORMATDESCRIPTOR pfd) {
 		long pushDC = wglGetCurrentDC();
 		long pushGLRC = wglGetCurrentContext();
 
 		WindowsDisplay dummy = new WindowsDisplay();
 
-		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd);
+		int success = SetPixelFormat(dummy.getHdc(), pixelFormat, pfd.buffer());
 		assertTrue(success != 0);
 
-		GLContext context = GLContextWindows.create(dummy.getHdc());
+		WGLContext context = WGLContext.create(dummy.getHdc());
 
 		IntBuffer propList = BufferUtils.createIntBuffer(32);
 
@@ -120,22 +116,4 @@ public final class DemoUtil {
 		return pixelFormat;
 	}
 
-	public static GLContext initializeOpenGLContext(long HDC) {
-		ByteBuffer pfdOut = PIXELFORMATDESCRIPTOR.malloc();
-
-		int pixelFormat = findPixelFormatLegacy(HDC, pfdOut);
-		pixelFormat = findPixelFormatARB(pixelFormat, pfdOut);
-
-		SetPixelFormat(HDC, pixelFormat, pfdOut);
-
-		return GLContextWindows.create(HDC);
-	}
-
-	public static void pause(long pause) {
-		try {
-			Thread.sleep(pause);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

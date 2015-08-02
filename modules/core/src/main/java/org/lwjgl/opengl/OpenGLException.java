@@ -8,7 +8,7 @@ package org.lwjgl.opengl;
 public class OpenGLException extends RuntimeException {
 
 	public OpenGLException(int gl_error_code) {
-		this(String.format("%s [0x%X]", GLContext.translateGLErrorString(gl_error_code), gl_error_code));
+		this(String.format("%s [0x%X]", GLUtil.getErrorString(gl_error_code), gl_error_code));
 	}
 
 	public OpenGLException(String message) {

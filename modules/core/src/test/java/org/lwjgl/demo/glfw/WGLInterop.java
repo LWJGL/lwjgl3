@@ -8,8 +8,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GLCapabilities;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import java.nio.ByteBuffer;
@@ -87,12 +88,9 @@ public final class WGLInterop {
 		// Make the GLFW context current in the current thread
 		glfwMakeContextCurrent(window);
 
-		// Creates an LWJGL GLContext from the GLFW context.
-		GLContext context = GLContext.createFromCurrent();
-		Closure debugProc = context.setupDebugMessageCallback();
-
-		// Now we can retrieve the GLFW context's capabilities
-		GLCapabilities caps = context.getCapabilities();
+		// Creates GLCapabilities from the GLFW context.
+		GLCapabilities caps = GL.createCapabilities();
+		Closure debugProc = GLUtil.setupDebugMessageCallback();
 
 		int success;
 

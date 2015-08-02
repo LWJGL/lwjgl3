@@ -8,7 +8,7 @@ import org.lwjgl.glfw.GLFWCursorEnterCallback;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.opengl.GL;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLCapabilities;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -71,7 +71,7 @@ public final class MultipleWindows {
 			});
 
 			glfwMakeContextCurrent(handle);
-			window.context = GLContext.createFromCurrent();
+			window.capabilities = GL.createCapabilities();
 
 			glClearColor((i & 1), (i >> 1), (i == 1) ? 0.f : 1.f, 0.f);
 
@@ -90,7 +90,7 @@ public final class MultipleWindows {
 					continue;
 
 				glfwMakeContextCurrent(window.handle);
-				GL.setCurrent(window.context);
+				GL.setCapabilities(window.capabilities);
 
 				glClear(GL_COLOR_BUFFER_BIT);
 				glfwSwapBuffers(window.handle);
@@ -114,7 +114,7 @@ public final class MultipleWindows {
 	private static class Window {
 		final long handle;
 
-		GLContext context;
+		GLCapabilities capabilities;
 
 		GLFWCursorEnterCallback cursorenterfun;
 		GLFWKeyCallback         keyfun;

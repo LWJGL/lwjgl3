@@ -4,8 +4,6 @@
  */
 package org.lwjgl.opengl;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.Pointer;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.PrintStream;
@@ -20,97 +18,31 @@ import static org.lwjgl.opengl.GL43.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** This class is a wrapper over an OS-specific OpenGL context handle and provides basic functionality related to OpenGL contexts. */
-public abstract class GLContext implements Pointer {
+/** OpenGL utilities. */
+public final class GLUtil {
 
-	final GLCapabilities capabilities;
-
-	protected GLContext(GLCapabilities capabilities) {
-		this.capabilities = capabilities;
-
-		GL.setCurrent(this);
-	}
-
-	public static GLContext createFromCurrent() {
-		switch ( LWJGLUtil.getPlatform() ) {
-			case WINDOWS:
-				return GLContextWindows.createFromCurrent();
-			case LINUX:
-				return GLContextLinux.createFromCurrent();
-			case MACOSX:
-				return GLContextMacOSX.createFromCurrent();
-			default:
-				throw new IllegalStateException();
-		}
+	private GLUtil() {
 	}
 
 	/**
-	 * Returns the {@code GLCapabilities} instance that describes the capabilities of this context.
+	 * Checks the current context for OpenGL errors.
 	 *
-	 * @return the {@code GLCapabilities} instance associated with this context
-	 */
-	public GLCapabilities getCapabilities() {
-		return capabilities;
-	}
-
-	/**
-	 * Makes the context current in the current thread and associates with the device/drawable specified by the {@code target} handle for both draw and read
-	 * operations.
-	 * <p/>
-	 * The {@code target} handle is OS-specific.
-	 *
-	 * @param target the device/drawable to associate the context with
-	 *
-	 * @see GL#setCurrent(GLContext)
-	 */
-	public void makeCurrent(long target) {
-		makeCurrentImpl(target);
-		GL.setCurrent(this);
-	}
-
-	/**
-	 * Makes the context current in the current thread and associates with the device/drawable specified by the {@code targetDraw} handle for draw operations
-	 * and the device/drawable specified by the {@code targetRead} handle for read operations. This functionality is optional as it may not be supported by
-	 * the OpenGL implementation. The user must check the availability of the corresponding OpenGL extension before calling this method.
-	 * <p/>
-	 * The {@code targetDraw} and {@code targetRead} handles are OS-specific.
-	 *
-	 * @param targetDraw the device/drawable to associate the context with for draw operations
-	 * @param targetRead the device/drawable to associate the context with for read operations
-	 *
-	 * @throws OpenGLException if separate associations are not supported
-	 */
-	public void makeCurrent(long targetDraw, long targetRead) {
-		makeCurrentImpl(targetDraw, targetRead);
-		GL.setCurrent(this);
-	}
-
-	protected abstract void makeCurrentImpl(long target);
-
-	protected abstract void makeCurrentImpl(long targetDraw, long targetRead);
-
-	/** Returns true if this {@code GLContext} is current in the current thread. */
-	public abstract boolean isCurrent();
-
-	/** Destroys this {@code GLContext} and releases any resources associated with it. */
-	public void destroy() {
-		destroyImpl();
-	}
-
-	protected abstract void destroyImpl();
-
-	/**
-	 * Checks the current context for OpenGL errors and throws an {@link OpenGLException} if {@link GL11#glGetError GetError} returns anything else than {@link
-	 * GL11#GL_NO_ERROR NO_ERROR}.
+	 * @throws OpenGLException if {@link GL11#glGetError GetError} returns anything other than {@link GL11#GL_NO_ERROR NO_ERROR}
 	 */
 	public void checkGLError() throws OpenGLException {
-		int err = nglGetError(capabilities.__GL11.GetError);
+		int err = glGetError();
 		if ( err != GL_NO_ERROR )
 			throw new OpenGLException(err);
 	}
 
-	/** Translates an OpenGL error code to a String describing the error. */
-	public static String translateGLErrorString(int errorCode) {
+	/**
+	 * Translates an OpenGL error code to a String describing the error.
+	 *
+	 * @param errorCode the error code, as returned by {@link GL11#glGetError GetError}.
+	 *
+	 * @return the error description
+	 */
+	public static String getErrorString(int errorCode) {
 		switch ( errorCode ) {
 			case GL_NO_ERROR:
 				return "No error";
@@ -139,7 +71,7 @@ public abstract class GLContext implements Pointer {
 	 * Detects the best debug output functionality to use and creates a callback that prints information to the standard error stream. The callback function is
 	 * returned as a {@link Closure}, that should be {@link Closure#release released} when no longer needed.
 	 */
-	public Closure setupDebugMessageCallback() {
+	public static Closure setupDebugMessageCallback() {
 		return setupDebugMessageCallback(System.err);
 	}
 
@@ -149,8 +81,10 @@ public abstract class GLContext implements Pointer {
 	 *
 	 * @param stream the output PrintStream
 	 */
-	public Closure setupDebugMessageCallback(PrintStream stream) {
-		if ( capabilities.OpenGL43 ) {
+	public static Closure setupDebugMessageCallback(PrintStream stream) {
+		GLCapabilities caps = GL.getCapabilities();
+
+		if ( caps.OpenGL43 ) {
 			log("[GL] Using OpenGL 4.3 for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			glDebugMessageCallback(proc, NULL);
@@ -161,25 +95,25 @@ public abstract class GLContext implements Pointer {
 			return proc;
 		}
 
-		if ( capabilities.GL_KHR_debug ) {
+		if ( caps.GL_KHR_debug ) {
 			log("[GL] Using KHR_debug for error logging.");
 			GLDebugMessageCallback proc = createDEBUGPROC(stream);
 			KHRDebug.glDebugMessageCallback(proc, NULL);
-			if ( capabilities.OpenGL30 && (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
+			if ( caps.OpenGL30 && (glGetInteger(GL_CONTEXT_FLAGS) & GL_CONTEXT_FLAG_DEBUG_BIT) == 0 ) {
 				log("[GL] Warning: A non-debug context may not produce any debug output.");
 				glEnable(GL_DEBUG_OUTPUT);
 			}
 			return proc;
 		}
 
-		if ( capabilities.GL_ARB_debug_output ) {
+		if ( caps.GL_ARB_debug_output ) {
 			log("[GL] Using ARB_debug_output for error logging.");
 			GLDebugMessageARBCallback proc = createDEBUGPROCARB(stream);
 			glDebugMessageCallbackARB(proc, NULL);
 			return proc;
 		}
 
-		if ( capabilities.GL_AMD_debug_output ) {
+		if ( caps.GL_AMD_debug_output ) {
 			log("[GL] Using AMD_debug_output for error logging.");
 			GLDebugMessageAMDCallback proc = createDEBUGPROCAMD(stream);
 			glDebugMessageCallbackAMD(proc, NULL);

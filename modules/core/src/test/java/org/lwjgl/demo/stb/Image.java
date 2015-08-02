@@ -6,8 +6,9 @@ package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import java.io.IOException;
@@ -192,7 +193,8 @@ public final class Image {
 
 		// Create context
 		glfwMakeContextCurrent(window);
-		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback();
+		GL.createCapabilities();
+		debugProc = GLUtil.setupDebugMessageCallback();
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);

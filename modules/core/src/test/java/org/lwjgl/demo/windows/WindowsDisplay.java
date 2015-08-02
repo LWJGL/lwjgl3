@@ -2,7 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.system.windows;
+package org.lwjgl.demo.windows;
+
+import org.lwjgl.system.windows.WINDOWPOS;
+import org.lwjgl.system.windows.WNDCLASSEX;
+import org.lwjgl.system.windows.WindowProc;
 
 import java.nio.ByteBuffer;
 import java.util.concurrent.atomic.AtomicInteger;

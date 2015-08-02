@@ -9,7 +9,7 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.demo.util.ClosureGC;
 import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GL;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -245,7 +245,7 @@ public final class Events {
 		});
 
 		glfwMakeContextCurrent(window);
-		GLContext.createFromCurrent();
+		GL.createCapabilities();
 
 		glfwShowWindow(window);
 		glfwSwapInterval(1);

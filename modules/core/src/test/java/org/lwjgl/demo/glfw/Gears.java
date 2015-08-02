@@ -8,8 +8,9 @@ import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWvidmode;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
 import static org.lwjgl.glfw.Callbacks.*;
@@ -63,7 +64,9 @@ public class Gears extends AbstractGears {
 							toggleMode = false;
 						break;
 					case GLFW_KEY_G:
-						glfwSetInputMode(window, GLFW_CURSOR, glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+						glfwSetInputMode(window,
+						                 GLFW_CURSOR,
+						                 glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
 						break;
 				}
 			}
@@ -108,7 +111,8 @@ public class Gears extends AbstractGears {
 		}
 
 		glfwMakeContextCurrent(window);
-		debugProc = GLContext.createFromCurrent().setupDebugMessageCallback();
+		GL.createCapabilities();
+		debugProc = GLUtil.setupDebugMessageCallback();
 
 		glfwSwapInterval(1);
 		glfwShowWindow(window);

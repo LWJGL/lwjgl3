@@ -11,8 +11,9 @@ import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWvidmode;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALContext;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
+import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.stb.STBVorbisInfo;
 import org.lwjgl.system.libffi.Closure;
 
@@ -308,7 +309,8 @@ public final class Vorbis {
 
 			// Create context
 			glfwMakeContextCurrent(window);
-			debugProc = GLContext.createFromCurrent().setupDebugMessageCallback();
+			GL.createCapabilities();
+			debugProc = GLUtil.setupDebugMessageCallback();
 
 			glfwSwapInterval(1);
 			glfwShowWindow(window);

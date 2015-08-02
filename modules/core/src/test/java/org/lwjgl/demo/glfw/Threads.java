@@ -6,8 +6,8 @@ package org.lwjgl.demo.glfw;
 
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GLContext;
 
 import java.util.concurrent.CountDownLatch;
 
@@ -123,7 +123,7 @@ public final class Threads {
 		@Override
 		public void run() {
 			glfwMakeContextCurrent(window);
-			GLContext.createFromCurrent();
+			GL.createCapabilities();
 
 			glfwSwapInterval(1);
 

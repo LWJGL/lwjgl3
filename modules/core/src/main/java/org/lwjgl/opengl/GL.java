@@ -29,13 +29,41 @@ import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+/**
+ * This class must be used before any OpenGL function is called. It has the following responsibilities:
+ * <ul>
+ * <li>Loads the OpenGL native library into the JVM process.</li>
+ * <li>Creates instances of {@link GLCapabilities} classes. A {@code GLCapabilities} instance contains flags for functionality that is available in an OpenGL
+ * context. Internally, it also contains function pointers that are only valid in that specific OpenGL context.</li>
+ * <li>Maintains thread-local state for {@code GLCapabilities} instances, corresponding to OpenGL contexts that are current in those threads.</li>
+ * </ul>
+ *
+ * <h3>Library lifecycle</h3>
+ * <p>The OpenGL library is loaded automatically when this class is initialized. Set the {@code org.lwjgl.opengl.explicitInit=true} system property to override
+ * this behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can
+ * be overridden with the {@code org.lwjgl.opengl.libname} system property. The maximum OpenGL version loaded can be set with the
+ * {@code org.lwjgl.opengl.maxVersion=M.n} system property. This can be useful to ensure that no functionality above a specific version is used during
+ * development.</p>
+ *
+ * <h3>GLCapabilities creation</h3>
+ * <p>Instances of {@code GLCapabilities} can be created with the {@link #createCapabilities} method. An OpenGL context must be current in the current thread
+ * before it is called. Calling this method is expensive, so the {@code GLCapabilities} instance should be associated with the OpenGL context and reused as
+ * necessary.</p>
+ *
+ * <h3>Thread-local state</h3>
+ * <p>Before a function for a given OpenGL context can be called, the corresponding {@code GLCapabilities} instance must be passed to the
+ * {@link #setCapabilities} method. The user is also responsible for clearing the current {@code GLCapabilities} instance when the context is destroyed or made
+ * current in another thread.</p>
+ *
+ * <p>Note that the {@link #createCapabilities} method implicitly calls {@link #setCapabilities} with the newly created instance.</p>
+ */
 public final class GL {
 
-	private static FunctionProvider functionProvider;
-
-	private static final ThreadLocal<GLContext> contextTL = new ThreadLocal<GLContext>();
+	private static final ThreadLocal<GLCapabilities> capsTL = new ThreadLocal<GLCapabilities>();
 
 	private static final APIVersion MAX_VERSION;
+
+	private static FunctionProvider functionProvider;
 
 	static {
 		String max = System.getProperty("org.lwjgl.opengl.maxVersion");
@@ -47,6 +75,7 @@ public final class GL {
 
 	private GL() {}
 
+	/** Loads the OpenGL native library, using the default library name. */
 	public static void create() {
 		String libName;
 		switch ( LWJGLUtil.getPlatform() ) {
@@ -66,6 +95,11 @@ public final class GL {
 		create(System.getProperty("org.lwjgl.opengl.libname", libName));
 	}
 
+	/**
+	 * Loads the OpenGL native library, using the specified library name.
+	 *
+	 * @param libName the native library name
+	 */
 	public static void create(String libName) {
 		if ( functionProvider != null )
 			throw new IllegalStateException("OpenGL has already been created.");
@@ -135,6 +169,7 @@ public final class GL {
 		}
 	}
 
+	/** Unloads the OpenGL native library. */
 	public static void destroy() {
 		if ( functionProvider == null )
 			return;
@@ -143,156 +178,179 @@ public final class GL {
 		functionProvider = null;
 	}
 
+	/** Returns the {@link FunctionProvider} for the OpenGL native library. */
 	public static FunctionProvider getFunctionProvider() {
 		return functionProvider;
 	}
 
-	/** Sets the current {@link GLContext} in the current thread. */
-	public static void setCurrent(GLContext context) {
-		contextTL.set(context);
-	}
-
-	/** Returns the current {@link GLContext} in the current thread. */
-	public static GLContext getCurrent() {
-		return contextTL.get();
-	}
-
-	/** Returns the {@link GLCapabilities} of the {@link GLContext} that is current in the current thread. */
-	public static GLCapabilities getCapabilities() {
-		GLContext currentContext = contextTL.get();
-		if ( currentContext == null )
-			throw new IllegalStateException("There is no OpenGL context current in the current thread.");
-
-		return currentContext.capabilities;
+	/**
+	 * Sets the {@link GLCapabilities} of the OpenGL context that is current in the current thread.
+	 *
+	 * <p>This {@code GLCapabilities} instance will be used by any OpenGL ES call in the current thread, until {@code setCapabilities} is called again with
+	 * a different value.</p>
+	 */
+	public static void setCapabilities(GLCapabilities caps) {
+		capsTL.set(caps);
 	}
 
 	/**
-	 * Creates a new GLCapabilities instance for the current OpenGL context.
-	 * <p/>
-	 * Depending on the current context, the instance returned may or may not contain the
-	 * deprecated functionality removed since OpenGL version 3.1. The {@code forwardCompatible}
-	 * flag will force LWJGL to not load the deprecated functions, even if the current context
-	 * exposes them.
+	 * Returns the {@link GLCapabilities} of the OpenGL ES context that is current in the current thread.
+	 *
+	 * @throws IllegalStateException if {@link #setCapabilities} has never been called in the current thread or was last called with a {@code null} value
+	 */
+	public static GLCapabilities getCapabilities() {
+		GLCapabilities caps = capsTL.get();
+		if ( caps == null )
+			throw new IllegalStateException("No GLCapabilities instance has been set for the current thread.");
+
+		return caps;
+	}
+
+	/**
+	 * Creates a new {@link GLCapabilities} instance for the OpenGL context that is current in the current thread.
+	 *
+	 * <p>Depending on the current context, the instance returned may or may not contain the deprecated functionality removed since OpenGL version 3.1.</p>
+	 *
+	 * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
+	 *
+	 * @return the GLCapabilities instance
+	 */
+	public static GLCapabilities createCapabilities() {
+		return createCapabilities(false);
+	}
+
+	/**
+	 * Creates a new {@link GLCapabilities} instance for the OpenGL context that is current in the current thread.
+	 *
+	 * <p>Depending on the current context, the instance returned may or may not contain the deprecated functionality removed since OpenGL version 3.1. The
+	 * {@code forwardCompatible} flag will force LWJGL to not load the deprecated functions, even if the current context exposes them.</p>
+	 *
+	 * <p>This method calls {@link #setCapabilities(GLCapabilities)} with the new instance before returning.</p>
 	 *
 	 * @param forwardCompatible if true, LWJGL will create forward compatible capabilities
 	 *
 	 * @return the GLCapabilities instance
 	 */
 	public static GLCapabilities createCapabilities(boolean forwardCompatible) {
-		// We don't have a current ContextCapabilities when this method is called
-		// so we have to use the native bindings directly.
-		long GetError = functionProvider.getFunctionAddress("glGetError");
-		long GetString = functionProvider.getFunctionAddress("glGetString");
-		long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
+		GLCapabilities caps = null;
 
-		if ( GetError == NULL || GetString == NULL || GetIntegerv == NULL )
-			throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
+		try {
+			// We don't have a current ContextCapabilities when this method is called
+			// so we have to use the native bindings directly.
+			long GetError = functionProvider.getFunctionAddress("glGetError");
+			long GetString = functionProvider.getFunctionAddress("glGetString");
+			long GetIntegerv = functionProvider.getFunctionAddress("glGetIntegerv");
 
-		int errorCode = nglGetError(GetError);
-		if ( errorCode != GL_NO_ERROR )
-			LWJGLUtil.log(
-				"A GL context was in an error state before the creation of its capabilities instance. Error: " + GLContext.translateGLErrorString(errorCode)
-			);
+			if ( GetError == NULL || GetString == NULL || GetIntegerv == NULL )
+				throw new IllegalStateException("Core OpenGL functions could not be found. Make sure that a GL context is current in the current thread.");
 
-		APIBuffer __buffer = apiBuffer();
+			int errorCode = nglGetError(GetError);
+			if ( errorCode != GL_NO_ERROR )
+				LWJGLUtil.log(
+					"A GL context was in an error state before the creation of its capabilities instance. Error: " + GLUtil.getErrorString(errorCode)
+				);
 
-		int majorVersion;
-		int minorVersion;
+			APIBuffer __buffer = apiBuffer();
 
-		// Try the 3.0+ version query first
-		__buffer.intParam(0, 0, 0);
-		nglGetIntegerv(GL_MAJOR_VERSION, __buffer.address(), GetIntegerv);
-		if ( nglGetError(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
-			// We're on an 3.0+ context.
-			nglGetIntegerv(GL_MINOR_VERSION, __buffer.address(), GetIntegerv);
-			minorVersion = __buffer.intValue(0);
-		} else {
-			// Fallback to the string query.
-			APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(nglGetString(GL_VERSION, GetString))));
+			int majorVersion;
+			int minorVersion;
 
-			majorVersion = version.major;
-			minorVersion = version.minor;
-		}
+			// Try the 3.0+ version query first
+			__buffer.intParam(0, 0, 0);
+			nglGetIntegerv(GL_MAJOR_VERSION, __buffer.address(), GetIntegerv);
+			if ( nglGetError(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
+				// We're on an 3.0+ context.
+				nglGetIntegerv(GL_MINOR_VERSION, __buffer.address(), GetIntegerv);
+				minorVersion = __buffer.intValue(0);
+			} else {
+				// Fallback to the string query.
+				APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(nglGetString(GL_VERSION, GetString))));
 
-		if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
-			throw new IllegalStateException("OpenGL 1.1 is required.");
+				majorVersion = version.major;
+				minorVersion = version.minor;
+			}
 
-		int[] GL_VERSIONS = {
-			5, // OpenGL 1.1 to 1.5
-			1, // OpenGL 2.0 to 2.1
-			3, // OpenGL 3.0 to 3.3
-			5, // OpenGL 4.0 to 4.5
-		};
+			if ( majorVersion < 1 || (majorVersion == 1 && minorVersion < 1) )
+				throw new IllegalStateException("OpenGL 1.1 is required.");
 
-		Set<String> supportedExtensions = new HashSet<String>(128);
+			int[] GL_VERSIONS = {
+				5, // OpenGL 1.1 to 1.5
+				1, // OpenGL 2.0 to 2.1
+				3, // OpenGL 3.0 to 3.3
+				5, // OpenGL 4.0 to 4.5
+			};
 
-		int maxMajor = min(majorVersion, GL_VERSIONS.length);
-		if ( MAX_VERSION != null )
-			maxMajor = min(MAX_VERSION.major, maxMajor);
-		for ( int M = 1; M <= maxMajor; M++ ) {
-			int maxMinor = GL_VERSIONS[M - 1];
-			if ( M == majorVersion )
-				maxMinor = min(minorVersion, maxMinor);
-			if ( MAX_VERSION != null && M == MAX_VERSION.major )
-				maxMinor = min(MAX_VERSION.minor, maxMinor);
+			Set<String> supportedExtensions = new HashSet<String>(128);
 
-			for ( int m = M == 1 ? 1 : 0; m <= maxMinor; m++ )
-				supportedExtensions.add(String.format("OpenGL%d%d", M, m));
-		}
+			int maxMajor = min(majorVersion, GL_VERSIONS.length);
+			if ( MAX_VERSION != null )
+				maxMajor = min(MAX_VERSION.major, maxMajor);
+			for ( int M = 1; M <= maxMajor; M++ ) {
+				int maxMinor = GL_VERSIONS[M - 1];
+				if ( M == majorVersion )
+					maxMinor = min(minorVersion, maxMinor);
+				if ( MAX_VERSION != null && M == MAX_VERSION.major )
+					maxMinor = min(MAX_VERSION.minor, maxMinor);
 
-		if ( majorVersion < 3 ) {
-			// Parse EXTENSIONS string
-			String extensionsString = memDecodeASCII(checkPointer(nglGetString(GL_EXTENSIONS, GetString)));
+				for ( int m = M == 1 ? 1 : 0; m <= maxMinor; m++ )
+					supportedExtensions.add(String.format("OpenGL%d%d", M, m));
+			}
 
-			StringTokenizer tokenizer = new StringTokenizer(extensionsString);
-			while ( tokenizer.hasMoreTokens() )
-				supportedExtensions.add(tokenizer.nextToken());
-		} else {
-			// Use forward compatible indexed EXTENSIONS
+			if ( majorVersion < 3 ) {
+				// Parse EXTENSIONS string
+				String extensionsString = memDecodeASCII(checkPointer(nglGetString(GL_EXTENSIONS, GetString)));
 
-			nglGetIntegerv(GL_NUM_EXTENSIONS, __buffer.address(), GetIntegerv);
-			int extensionCount = __buffer.intValue(0);
+				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
+				while ( tokenizer.hasMoreTokens() )
+					supportedExtensions.add(tokenizer.nextToken());
+			} else {
+				// Use indexed EXTENSIONS
+				nglGetIntegerv(GL_NUM_EXTENSIONS, __buffer.address(), GetIntegerv);
+				int extensionCount = __buffer.intValue(0);
 
-			long GetStringi = checkPointer(checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi")));
-			for ( int i = 0; i < extensionCount; i++ )
-				supportedExtensions.add(memDecodeASCII(nglGetStringi(GL_EXTENSIONS, i, GetStringi)));
+				long GetStringi = checkPointer(checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi")));
+				for ( int i = 0; i < extensionCount; i++ )
+					supportedExtensions.add(memDecodeASCII(nglGetStringi(GL_EXTENSIONS, i, GetStringi)));
 
-			// In real drivers, we may encounter the following weird scenarios:
-			// - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
-			// - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
-			// We ignore these and go by the spec.
+				// In real drivers, we may encounter the following weird scenarios:
+				// - 3.1 context without GL_ARB_compatibility but with deprecated functionality exposed and working.
+				// - Core or forward-compatible context with GL_ARB_compatibility exposed, but not working when used.
+				// We ignore these and go by the spec.
 
-			// Force forwardCompatible to true if the context is a forward-compatible context.
-			nglGetIntegerv(GL_CONTEXT_FLAGS, __buffer.address(), GetIntegerv);
-			if ( (__buffer.intValue(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0 )
-				forwardCompatible = true;
-			else {
-				// Force forwardCompatible to true if the context is a core profile context.
-				if ( (3 < majorVersion || 1 <= minorVersion) ) { // OpenGL 3.1+
-					if ( 3 < majorVersion || 2 <= minorVersion ) { // OpenGL 3.2+
-						nglGetIntegerv(GL_CONTEXT_PROFILE_MASK, __buffer.address(), GetIntegerv);
-						if ( (__buffer.intValue(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0 )
-							forwardCompatible = true;
-					} else
-						forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
+				// Force forwardCompatible to true if the context is a forward-compatible context.
+				nglGetIntegerv(GL_CONTEXT_FLAGS, __buffer.address(), GetIntegerv);
+				if ( (__buffer.intValue(0) & GL_CONTEXT_FLAG_FORWARD_COMPATIBLE_BIT) != 0 )
+					forwardCompatible = true;
+				else {
+					// Force forwardCompatible to true if the context is a core profile context.
+					if ( (3 < majorVersion || 1 <= minorVersion) ) { // OpenGL 3.1+
+						if ( 3 < majorVersion || 2 <= minorVersion ) { // OpenGL 3.2+
+							nglGetIntegerv(GL_CONTEXT_PROFILE_MASK, __buffer.address(), GetIntegerv);
+							if ( (__buffer.intValue(0) & GL_CONTEXT_CORE_PROFILE_BIT) != 0 )
+								forwardCompatible = true;
+						} else
+							forwardCompatible = !supportedExtensions.contains("GL_ARB_compatibility");
+					}
 				}
 			}
-		}
 
-		switch ( LWJGLUtil.getPlatform() ) {
-			case WINDOWS:
-				addWGLExtensions(supportedExtensions);
-				break;
-			case LINUX:
-				addGLXExtensions(supportedExtensions);
-				break;
-			case MACOSX:
-				break;
-			default:
-				throw new UnsupportedOperationException();
-		}
+			switch ( LWJGLUtil.getPlatform() ) {
+				case WINDOWS:
+					addWGLExtensions(supportedExtensions);
+					break;
+				case LINUX:
+					addGLXExtensions(supportedExtensions);
+					break;
+				case MACOSX:
+					break;
+				default:
+					throw new UnsupportedOperationException();
+			}
 
-		return new GLCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
+			return caps = new GLCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
+		} finally {
+			setCapabilities(caps);
+		}
 	}
 
 	private static void addWGLExtensions(Set<String> supportedExtensions) {
