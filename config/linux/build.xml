@@ -9,20 +9,8 @@ License terms: http://lwjgl.org/license.php
 		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
-	<property name="system_libs" value="-lm -lrt -lpthread -lX11 -lGL -lXi -lXrandr -lXxf86vm -lXinerama -lXcursor"/>
-
-	<condition
-		property="libs"
-		value=
-			"-L/usr/X11R6/lib -L/usr/X11/lib ${system_libs}"
-		else=
-			"-L/usr/X11R6/lib64 -L/usr/X11/lib64 ${system_libs}"
-		>
-		<equals arg1="${build.arch}" arg2="x86"/>
-	</condition>
-
-	<condition property="compiler.arch" value="-m32" else="-m64">
-		<equals arg1="${build.arch}" arg2="x86"/>
+	<condition property="build.arch.x64" value="true" else="false">
+		<equals arg1="${build.arch}" arg2="x64"/>
 	</condition>
 
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
@@ -38,7 +26,10 @@ License terms: http://lwjgl.org/license.php
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="gcc" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c11 ${compiler.arch} -O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
+				<arg line="-c -std=c11"/>
+				<arg line="-m64" if:true="${build.arch.x64}"/>
+				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
+				<arg line="-O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
 
 				<arg value="-I${java.home}/../include"/>
 				<arg value="-I${java.home}/../include/linux"/>
@@ -180,9 +171,31 @@ License terms: http://lwjgl.org/license.php
 		<local name="version.script"/>
 		<property name="version.script" location="config/linux/version.script"/>
 
+		<local name="arch.postfix"/>
+		<property name="arch.postfix" value="64" if:true="${build.arch.x64}"/>
+		<property name="arch.postfix" value="" unless:true="${build.arch.x64}"/>
+
 		<apply executable="gcc" failonerror="true" parallel="true" taskname="Linker">
 			<srcfile/>
-			<arg line="-shared ${compiler.arch} -fPIC -pthread -o ${lib}/${LWJGL_LIBRARY} ${libs} -Xlinker --version-script -Xlinker ${version.script}"/>
+			<arg value="-shared"/>
+			<arg value="-m64" if:true="${build.arch.x64}"/>
+			<arg value="-m32" unless:true="${build.arch.x64}"/>
+
+			<arg line="-fPIC -pthread -o ${lib}/${LWJGL_LIBRARY}"/>
+
+			<arg line="-L/usr/X11R6/lib${arch.postfix} -L/usr/X11/lib${arch.postfix}"/>
+			<arg value="-lm"/>
+			<arg value="-lrt"/>
+			<arg value="-lpthread"/>
+			<arg value="-lX11"/>
+			<arg value="-lGL"/>
+			<arg value="-lXi"/>
+			<arg value="-lXrandr"/>
+			<arg value="-lXxf86vm"/>
+			<arg value="-lXinerama"/>
+			<arg value="-lXcursor"/>
+
+			<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
