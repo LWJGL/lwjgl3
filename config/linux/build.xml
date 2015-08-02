@@ -64,7 +64,16 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/simd/*.c"/>
+					<exclude name="${src.generated.native}/system/simd/*SSE3.c"/>
 					<include name="${src.generated.native}/system/linux/*.c"/>
+				</fileset>
+			</arguments>
+		</compile>
+		<compile>
+			<arguments>
+				<arg value="-msse3"/>
+				<fileset dir=".">
+					<include name="${src.generated.native}/system/simd/*SSE3.c"/>
 				</fileset>
 			</arguments>
 		</compile>
