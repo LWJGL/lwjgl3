@@ -50,6 +50,7 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
+					<include name="${src.generated.native}/system/simd/*.c"/>
 					<include name="${src.generated.native}/system/windows/*.c"/>
 				</fileset>
 			</arguments>

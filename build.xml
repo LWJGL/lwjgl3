@@ -130,6 +130,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/*.java"/>
 			<include name="org/lwjgl/system/*.java"/>
 			<include name="org/lwjgl/system/libffi/**"/>
+			<include name="org/lwjgl/system/simd/**"/>
 			<include name="org/lwjgl/system/linux/**"/>
 			<include name="org/lwjgl/system/macosx/**"/>
 			<exclude name="org/lwjgl/system/macosx/ObjC*.java" unless:true="${binding.macosx.objc}"/>
