@@ -8,6 +8,7 @@
 			<package name="org.lwjgl.opencl"/>
 			<package name="org.lwjgl.system"/>
 			<package name="org.lwjgl.system.libffi"/>
+			<package name="org.lwjgl.system.simd"/>
 		</packages>
 	</test>
 </suite>

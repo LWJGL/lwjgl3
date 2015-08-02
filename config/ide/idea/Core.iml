@@ -2,7 +2,7 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/../../../bin/Core" />
-    <output-test url="file://$MODULE_DIR$/../../../bin/Core" />
+    <output-test url="file://$MODULE_DIR$/../../../bin/Tests" />
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../modules/core">
       <sourceFolder url="file://$MODULE_DIR$/../../../modules/core/src/main/java" isTestSource="false" />

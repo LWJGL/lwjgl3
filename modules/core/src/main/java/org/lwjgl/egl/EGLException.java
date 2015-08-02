@@ -8,7 +8,7 @@ package org.lwjgl.egl;
 public class EGLException extends RuntimeException {
 
 	public EGLException(int errorCode) {
-		this(String.format("%s [0x%X]", EGL.getErrorString(errorCode), errorCode));
+		this(String.format("%s [0x%X]", EGLUtil.getErrorString(errorCode), errorCode));
 	}
 
 	public EGLException(String message) {

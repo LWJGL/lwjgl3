@@ -23,7 +23,14 @@ val SSE3 = "SSE3".nativeClass("org.lwjgl.system.simd", prefix = "_MM", prefixMet
 
 	void(
 		"SET_DENORMALS_ZERO_MODE",
-		"Causes the \"denormals are zero\" mode to be turned ON or OFF by setting the appropriate bit of the control register.",
+		"""
+		Causes the \"denormals are zero\" mode to be turned ON or OFF by setting the appropriate bit of the control register. DAZ treats denormal values used
+		as input to floating-point instructions as zero.
+
+		DAZ is very similar to FTZ in many ways. DAZ mode is a method of bypassing IEEE 754 methods of dealing with denormal floating-point numbers. This mode
+		is less precise, but much faster and is typically used in applications like streaming media when minute differences in quality are essentially
+		undetectable.
+		""",
 
 		unsigned_int.IN("mode", "the denormals are zero mode", DenormalsZeroMode)
 	)

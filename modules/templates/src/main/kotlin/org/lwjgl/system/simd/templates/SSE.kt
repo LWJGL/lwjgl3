@@ -57,37 +57,42 @@ val SSE = "SSE".nativeClass("org.lwjgl.system.simd", prefix = "_MM", prefixMetho
 
 	void(
 		"SET_EXCEPTION_STATE",
-		"Writes to the six least significant control register bits.",
+		"Sets the exception state bits of the MXCSR control and status register.",
 
 		unsigned_int.IN("mask", "the exception state", ExceptionState)
 	)
-	unsigned_int("GET_EXCEPTION_STATE", "Reads from the six least significant control register bits.")
+	unsigned_int("GET_EXCEPTION_STATE", "Returns the exception state bits from the MXCSR control and status register.")
 
 	void(
 		"SET_EXCEPTION_MASK",
 	    """
-	    Writes to bit 7 – 12 control register bits.
+	    Sets the exception mask bits of the MXCSR control and status register.
 
 	    All six exception mask bits are always affected. Bits not set explicitly are cleared.
 	    """,
 
 	    unsigned_int.IN("mask", "the exception mask", ExceptionMask, LinkMode.BITFIELD)
 	)
-	unsigned_int("GET_EXCEPTION_MASK", "Reads from bit 7 – 12 control register bits.")
+	unsigned_int("GET_EXCEPTION_MASK", "Returns the exception mask bits from the MXCSR control and status register.")
 
 	void(
 		"SET_ROUNDING_MODE",
-		"Writes to bits 13 and 14 of the control register.",
+		"Sets the rounding mode bits of the MXCSR control and status register.",
 
 		unsigned_int.IN("mode", "the rounding mode", RoundMode)
 	)
-	unsigned_int("GET_ROUNDING_MODE", "Reads from bits 13 and 14 of the control register.")
+	unsigned_int("GET_ROUNDING_MODE", "Returns the rounding mode bits from the MXCSR control and status register.")
 
 	void(
 		"SET_FLUSH_ZERO_MODE",
-		"Writes to bit 15 of the control register.",
+		"""
+		Sets the flush zero bits of the MXCSR control and status register. FTZ sets denormal results from floating-point calculations to zero.
+
+		FTZ is a method of bypassing IEEE 754 methods of dealing with invalid floating-point numbers due to underflows. This mode is less precise, but much
+		faster.
+		""",
 
 		unsigned_int.IN("mode", "the flush-to-zero mode", FlushZeroMode)
 	)
-	unsigned_int("GET_FLUSH_ZERO_MODE", "Reads from bit 15 of the control register.")
+	unsigned_int("GET_FLUSH_ZERO_MODE", "Returns the flush zero bits from the MXCSR control and status register.")
 }
