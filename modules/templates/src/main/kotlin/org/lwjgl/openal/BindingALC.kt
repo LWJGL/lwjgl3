@@ -18,11 +18,11 @@ private fun NativeClass.capName(core: String) =
 		"${prefixTemplate}_$templateName"
 	}
 
-private val FunctionProviderALC = Generator.register(object : FunctionProvider(OPENAL_PACKAGE, "ALCCapabilities") {
+private val BindingALC = Generator.register(object : APIBinding(OPENAL_PACKAGE, "ALCCapabilities") {
 
 	override val isLocal = true
 
-	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
+	override fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( !nativeClass.templateName.startsWith("ALC") )
 			writer.print(", long device")
 	}
@@ -114,4 +114,4 @@ private val FunctionProviderALC = Generator.register(object : FunctionProvider(O
 // DSL Extensions
 
 private fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, functionProvider = FunctionProviderALC, init = init)
+	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, binding = BindingALC, init = init)

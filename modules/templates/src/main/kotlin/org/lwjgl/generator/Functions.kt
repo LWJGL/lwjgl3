@@ -162,10 +162,10 @@ class NativeClassFunction(
 	private val methodLink: String get() = "#$simpleName()"
 
 	private val isSimpleFunction: Boolean
-		get() = nativeClass.functionProvider == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
+		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
 	private val hasUnsafeMethod: Boolean
-		get() = nativeClass.functionProvider != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !has(Capabilities)
+		get() = nativeClass.binding != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !has(Capabilities)
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -267,7 +267,7 @@ class NativeClassFunction(
 		val checks = ArrayList<String>()
 
 		// Validate function address
-		if ( (has(DependsOn) || has(ignoreMissing) || (nativeClass.functionProvider?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod )
+		if ( (has(DependsOn) || has(ignoreMissing) || (nativeClass.binding?.shouldCheckFunctionAddress(this@NativeClassFunction) ?: false)) && !hasUnsafeMethod )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 
 		// We convert multi-byte-per-element buffers to ByteBuffer for NORMAL generation.
@@ -393,7 +393,7 @@ class NativeClassFunction(
 				}
 			}
 
-			nativeClass.functionProvider?.addParameterChecks(checks, mode, it) { transforms?.get(this) === it }
+			nativeClass.binding?.addParameterChecks(checks, mode, it) { transforms?.get(this) === it }
 		}
 
 		if ( checks.isEmpty() )
@@ -456,7 +456,7 @@ class NativeClassFunction(
 			if ( hasNativeParams ) print(", ") else hasNativeParams = true
 			print("long $RESULT")
 		}
-		if ( nativeClass.functionProvider != null ) {
+		if ( nativeClass.binding != null ) {
 			if ( hasNativeParams ) print(", ")
 			print("long $FUNCTION_ADDRESS")
 		}
@@ -478,11 +478,11 @@ class NativeClassFunction(
 		println(") {")
 
 		// Get function address
-		nativeClass.functionProvider!!.generateFunctionAddress(this, this@NativeClassFunction)
+		nativeClass.binding!!.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Basic checks
 		val checks = ArrayList<String>(4)
-		if ( has(DependsOn) || has(ignoreMissing) || nativeClass.functionProvider.shouldCheckFunctionAddress(this@NativeClassFunction) )
+		if ( has(DependsOn) || has(ignoreMissing) || nativeClass.binding.shouldCheckFunctionAddress(this@NativeClassFunction) )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 		parameters forEach {
 			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
@@ -521,7 +521,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateJavaMethod() {
 		// Step 0: JavaDoc
 
-		if ( !(nativeClass.functionProvider?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
+		if ( !(nativeClass.binding?.printCustomJavadoc(this, this@NativeClassFunction, documentation) ?: false) && documentation.isNotEmpty() )
 			println(documentation)
 
 		// Step 1: Method signature
@@ -547,8 +547,8 @@ class NativeClassFunction(
 
 		// Step 2: Get function address
 
-		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
-			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
+		if ( nativeClass.binding != null && !hasUnsafeMethod )
+			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.a: Generate checks
 		printCode(code.javaInit, ApplyTo.NORMAL)
@@ -690,7 +690,7 @@ class NativeClassFunction(
 			print("${get(Reuse).reference}.")
 		print("n$name(")
 		printParams()
-		if ( nativeClass.functionProvider != null && !hasUnsafeMethod ) {
+		if ( nativeClass.binding != null && !hasUnsafeMethod ) {
 			if ( hasNativeParams ) print(", ")
 			print("$FUNCTION_ADDRESS")
 		}
@@ -712,7 +712,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateAlternativeMethods() {
 		val transforms = LinkedHashMap<QualifiedType, FunctionTransform<out QualifiedType>>()
 
-		nativeClass.functionProvider?.generateAlternativeMethods(this, this@NativeClassFunction, transforms)
+		nativeClass.binding?.generateAlternativeMethods(this, this@NativeClassFunction, transforms)
 
 		if ( returns.nativeType is CharSequenceType )
 			transforms[returns] = StringReturnTransform
@@ -1033,8 +1033,8 @@ class NativeClassFunction(
 
 		// Step 2: Get function address
 
-		if ( nativeClass.functionProvider != null && !hasUnsafeMethod )
-			nativeClass.functionProvider.generateFunctionAddress(this, this@NativeClassFunction)
+		if ( nativeClass.binding != null && !hasUnsafeMethod )
+			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
 		// Step 3.A: Generate checks
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
@@ -1180,7 +1180,7 @@ class NativeClassFunction(
 		getNativeParams() forEach {
 			print(", ${it.asJNIFunctionParam}")
 		}
-		if ( nativeClass.functionProvider != null )
+		if ( nativeClass.binding != null )
 			print(", jlong $FUNCTION_ADDRESS")
 		if ( returnsStructValue )
 			print(", jlong $RESULT")
@@ -1197,7 +1197,7 @@ class NativeClassFunction(
 
 		// Step 2: Cast function address to pointer
 
-		if ( nativeClass.functionProvider != null )
+		if ( nativeClass.binding != null )
 			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
 		// Step 3: Unused parameter macro

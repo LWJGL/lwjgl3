@@ -140,7 +140,7 @@ abstract class GeneratorTarget(
 						&& !it.equals("NativeClass.kt")
 						&& !it.equals("Structs.kt")
 						&& !it.equals("CallbackFunction.kt")
-						&& !(this is NativeClass && it.startsWith("FunctionProvider"))
+						&& !(this is NativeClass && it.startsWith("Binding"))
 				}.first()
 		}
 	}

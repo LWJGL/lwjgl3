@@ -21,7 +21,7 @@ private val NativeClass.capName: String
 private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
 	get() = this.any { it has deprecatedGL }
 
-private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPENGL_PACKAGE, "ContextCapabilities") {
+private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, "ContextCapabilities") {
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
@@ -51,7 +51,7 @@ private val FunctionProviderGL = Generator.register(object: FunctionProvider(OPE
 		return false
 	}
 
-	override fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) {
+	override fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) {
 		if ( nativeClass.functions.hasDeprecated )
 			writer.print(", boolean fc")
 	}
@@ -202,7 +202,7 @@ private fun String.nativeClassGL(
 	prefix = prefix,
 	prefixMethod = prefixMethod,
 	postfix = postfix,
-	functionProvider = FunctionProviderGL,
+	binding = BindingGL,
 	init = init
 )
 

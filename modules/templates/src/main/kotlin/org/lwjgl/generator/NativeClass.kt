@@ -15,7 +15,11 @@ val EXT_FLAG = ""
 
 val NULL = "{@code NULL}"
 
-abstract class FunctionProvider(
+/**
+ * The Generator can be customized with binding-specific overrides using this class. This class must implemented for bindings that are loaded dynamically. It
+ * is not necessary for libraries that are static compiled/linked into the LWJGL natives.
+ */
+abstract class APIBinding(
 	packageName: String,
 	className: String
 ): CustomClass(packageName, className) {
@@ -84,27 +88,37 @@ abstract class FunctionProvider(
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
 	}
 
+	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
+
+	// OVERRIDES
+
+	/** Can be overriden to generate additional parameters for the NativeClass constructor. */
+	open fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
+	/** Can be overriden to implement custom function address retrieval. */
+	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
+
+	/** Can be overriden to generate binding-specific alternative methods. */
 	open fun generateAlternativeMethods(
 		writer: PrintWriter,
 		function: NativeClassFunction,
 		transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>
 	) = Unit
+
+	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
-	open fun printFunctionsParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
+	/** Can be overriden to implement a custom condition for checking the function address. */
 	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = !hasCurrentCapabilities
+	/** Can be overriden to add custom parameter checks. */
 	open fun addParameterChecks(
 		checks: MutableList<String>,
 		mode: GenerationMode,
 		parameter: Parameter,
 		hasTransform: Parameter.(FunctionTransform<Parameter>) -> Boolean
 	) = Unit
-	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
-
-	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
 
 }
 // TODO: Remove if KT-457 or KT-1183 are fixed.
-private fun FunctionProvider.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
+private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
 
 class NativeClass(
 	packageName: String,
@@ -116,7 +130,7 @@ class NativeClass(
 	val prefixConstant: String,
 	val prefixTemplate: String,
 	val postfix: String,
-	val functionProvider: FunctionProvider?
+	val binding: APIBinding?
 ): GeneratorTargetNative(packageName, className, nativeSubPath) {
 	companion object {
 		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
@@ -189,9 +203,9 @@ class NativeClass(
 			it.generate(this)
 		}
 
-		if ( functionProvider != null && !_functions.isEmpty() ) {
-			generateFunctionAddresses(functionProvider)
-			functionProvider.generateFunctionGetters(this, this@NativeClass)
+		if ( binding != null && !_functions.isEmpty() ) {
+			generateFunctionAddresses(binding)
+			binding.generateFunctionGetters(this, this@NativeClass)
 		} else {
 			if ( !_functions.isEmpty() )
 				println("\tstatic { LWJGLUtil.initialize(); }\n")
@@ -220,7 +234,7 @@ class NativeClass(
 		print("}")
 	}
 
-	private fun PrintWriter.generateFunctionAddresses(functionProvider: FunctionProvider) {
+	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding) {
 		println("\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
@@ -245,11 +259,11 @@ class NativeClass(
 		}
 
 		println("\n\t@JavadocExclude")
-		print("\t${access.modifier}$className(FunctionProvider${if ( functionProvider.isLocal ) "Local" else ""} provider")
-		functionProvider.printFunctionsParams(this, this@NativeClass)
+		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal ) "Local" else ""} provider")
+		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")
 		functions.forEach {
-			println("\t\t${it.addressName} = ${functionProvider.getFunctionAddressCall(it)};")
+			println("\t\t${it.addressName} = ${binding.getFunctionAddressCall(it)};")
 		}
 		println("\t}\n")
 	}
@@ -260,7 +274,7 @@ class NativeClass(
 
 		preamble.printNative(this)
 
-		if ( functionProvider != null ) {
+		if ( binding != null ) {
 			// Generate typedefs for casting the function pointers
 			println()
 			functions.asSequence().filter { !it.has(Reuse) }.forEach {
@@ -424,14 +438,14 @@ fun String.nativeClass(
 	prefixConstant: String = if ( prefix.isEmpty() || prefix.endsWith('_') ) prefix else "${prefix}_",
 	prefixTemplate: String = prefix,
 	postfix: String = "",
-	functionProvider: FunctionProvider? = null,
+	binding: APIBinding? = null,
 	init: (NativeClass.() -> Unit)? = null
 ): NativeClass {
-	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, functionProvider)
+	val ext = NativeClass(packageName, this, nativeSubPath, templateName, prefix, prefixMethod, prefixConstant, prefixTemplate, postfix, binding)
 	if ( init != null )
 		ext.init()
 
-	functionProvider?.addCapabilities(ext)
+	binding?.addCapabilities(ext)
 
 	return ext
 }

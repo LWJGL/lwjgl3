@@ -17,7 +17,7 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPENCL_PACKAGE, "CLCapabilities") {
+private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PACKAGE, "CLCapabilities") {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -142,7 +142,7 @@ private val FunctionProviderCL = Generator.register(object: FunctionProvider(OPE
 // DSL Extensions
 
 private fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", functionProvider = FunctionProviderCL, init = init)
+	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = FunctionProviderCL, init = init)
 
 private val NativeClass.extensionLink: String
 	get() = url("http://www.khronos.org/registry/cl/extensions/${templateName.substring(0, templateName.indexOf('_'))}/cl_$templateName.txt", templateName)
