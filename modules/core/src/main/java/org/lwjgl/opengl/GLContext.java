@@ -23,9 +23,9 @@ import static org.lwjgl.system.MemoryUtil.*;
 /** This class is a wrapper over an OS-specific OpenGL context handle and provides basic functionality related to OpenGL contexts. */
 public abstract class GLContext implements Pointer {
 
-	final ContextCapabilities capabilities;
+	final GLCapabilities capabilities;
 
-	protected GLContext(ContextCapabilities capabilities) {
+	protected GLContext(GLCapabilities capabilities) {
 		this.capabilities = capabilities;
 
 		GL.setCurrent(this);
@@ -45,11 +45,11 @@ public abstract class GLContext implements Pointer {
 	}
 
 	/**
-	 * Returns the {@code ContextCapabilities} instance that describes the capabilities of this context.
+	 * Returns the {@code GLCapabilities} instance that describes the capabilities of this context.
 	 *
-	 * @return the {@code ContextCapabilities} instance associated with this context
+	 * @return the {@code GLCapabilities} instance associated with this context
 	 */
-	public ContextCapabilities getCapabilities() {
+	public GLCapabilities getCapabilities() {
 		return capabilities;
 	}
 

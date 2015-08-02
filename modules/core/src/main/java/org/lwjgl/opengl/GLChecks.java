@@ -129,7 +129,7 @@ final class GLChecks {
 	 * @return the parameter value
 	 */
 	static int getTexLevelParameteri(int texture, int target, int level, int pname) {
-		ContextCapabilities caps = GL.getCapabilities();
+		GLCapabilities caps = GL.getCapabilities();
 
 		if ( caps.OpenGL45 )
 			return GL45.glGetTextureLevelParameteri(texture, level, pname);

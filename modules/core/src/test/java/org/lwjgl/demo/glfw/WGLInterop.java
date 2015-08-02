@@ -8,7 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
-import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
 
@@ -92,7 +92,7 @@ public final class WGLInterop {
 		Closure debugProc = context.setupDebugMessageCallback();
 
 		// Now we can retrieve the GLFW context's capabilities
-		ContextCapabilities caps = context.getCapabilities();
+		GLCapabilities caps = context.getCapabilities();
 
 		int success;
 

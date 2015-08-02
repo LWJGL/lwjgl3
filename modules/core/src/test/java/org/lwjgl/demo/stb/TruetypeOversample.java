@@ -6,7 +6,7 @@ package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
-import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLContext;
@@ -363,7 +363,7 @@ public final class TruetypeOversample {
 		glfwInvoke(window, windowSizefun, framebufferSizefun);
 
 		// Detect sRGB support
-		ContextCapabilities caps = GL.getCapabilities();
+		GLCapabilities caps = GL.getCapabilities();
 		supportsSRGB = caps.OpenGL30 || caps.GL_ARB_framebuffer_sRGB || caps.GL_EXT_framebuffer_sRGB;
 	}
 

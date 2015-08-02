@@ -5,7 +5,7 @@
 package org.lwjgl.demo.windows;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.opengl.GLContextWindows;
 import org.lwjgl.system.libffi.Closure;
@@ -52,7 +52,7 @@ public final class WGLDemo {
 		GLContext context = GLContextWindows.create(window.getHdc());
 		Closure debugProc = context.setupDebugMessageCallback();
 
-		ContextCapabilities caps = context.getCapabilities();
+		GLCapabilities caps = context.getCapabilities();
 		if ( caps.WGL_AMD_gpu_association ) {
 			int GPUs = wglGetGPUIDsAMD(null);
 

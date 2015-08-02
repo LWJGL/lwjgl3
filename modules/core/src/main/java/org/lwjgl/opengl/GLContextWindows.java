@@ -20,7 +20,7 @@ public class GLContextWindows extends GLContext {
 
 	private final long hglrc;
 
-	public GLContextWindows(ContextCapabilities capabilities, long hglrc) {
+	public GLContextWindows(GLCapabilities capabilities, long hglrc) {
 		super(capabilities);
 
 		this.hglrc = hglrc;
@@ -60,7 +60,7 @@ public class GLContextWindows extends GLContext {
 		if ( hglrc == NULL )
 			throw new IllegalStateException("No OpenGL context is current in the current thread.");
 
-		ContextCapabilities capabilities = GL.createCapabilities(false);
+		GLCapabilities capabilities = GL.createCapabilities(false);
 
 		return new GLContextWindows(capabilities, hglrc);
 	}

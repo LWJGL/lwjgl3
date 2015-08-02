@@ -10,7 +10,7 @@ import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.*;
 import org.lwjgl.opencl.*;
 import org.lwjgl.opencl.CLPlatform.Filter;
-import org.lwjgl.opengl.ContextCapabilities;
+import org.lwjgl.opengl.GLCapabilities;
 import org.lwjgl.opengl.GLContext;
 import org.lwjgl.system.libffi.Closure;
 
@@ -166,7 +166,7 @@ public class Mandelbrot {
 		glfwMakeContextCurrent(window.handle);
 		GLContext glContext = GLContext.createFromCurrent();
 
-		ContextCapabilities glCaps = glContext.getCapabilities();
+		GLCapabilities glCaps = glContext.getCapabilities();
 		if ( !glCaps.OpenGL30 )
 			throw new RuntimeException("OpenGL 3.0 is required to run this demo.");
 

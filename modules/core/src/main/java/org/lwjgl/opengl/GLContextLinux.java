@@ -18,7 +18,7 @@ public class GLContextLinux extends GLContext {
 
 	private final MakeCurrentAction makeCurrentAction;
 
-	public GLContextLinux(ContextCapabilities capabilities, long display, long ctx) {
+	public GLContextLinux(GLCapabilities capabilities, long display, long ctx) {
 		super(capabilities);
 
 		this.display = display;
@@ -70,7 +70,7 @@ public class GLContextLinux extends GLContext {
 		if ( ctx == NULL )
 			throw new IllegalStateException("No OpenGL context is current in the current thread.");
 
-		ContextCapabilities capabilities = GL.createCapabilities(false);
+		GLCapabilities capabilities = GL.createCapabilities(false);
 
 		return new GLContextLinux(capabilities, display, ctx);
 	}

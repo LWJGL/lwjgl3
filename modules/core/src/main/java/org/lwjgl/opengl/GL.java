@@ -157,8 +157,8 @@ public final class GL {
 		return contextTL.get();
 	}
 
-	/** Returns the {@link ContextCapabilities} of the {@link GLContext} that is current in the current thread. */
-	public static ContextCapabilities getCapabilities() {
+	/** Returns the {@link GLCapabilities} of the {@link GLContext} that is current in the current thread. */
+	public static GLCapabilities getCapabilities() {
 		GLContext currentContext = contextTL.get();
 		if ( currentContext == null )
 			throw new IllegalStateException("There is no OpenGL context current in the current thread.");
@@ -167,7 +167,7 @@ public final class GL {
 	}
 
 	/**
-	 * Creates a new ContextCapabilities instance for the current OpenGL context.
+	 * Creates a new GLCapabilities instance for the current OpenGL context.
 	 * <p/>
 	 * Depending on the current context, the instance returned may or may not contain the
 	 * deprecated functionality removed since OpenGL version 3.1. The {@code forwardCompatible}
@@ -176,9 +176,9 @@ public final class GL {
 	 *
 	 * @param forwardCompatible if true, LWJGL will create forward compatible capabilities
 	 *
-	 * @return the ContextCapabilities instance
+	 * @return the GLCapabilities instance
 	 */
-	public static ContextCapabilities createCapabilities(boolean forwardCompatible) {
+	public static GLCapabilities createCapabilities(boolean forwardCompatible) {
 		// We don't have a current ContextCapabilities when this method is called
 		// so we have to use the native bindings directly.
 		long GetError = functionProvider.getFunctionAddress("glGetError");
@@ -292,7 +292,7 @@ public final class GL {
 				throw new UnsupportedOperationException();
 		}
 
-		return new ContextCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
+		return new GLCapabilities(getFunctionProvider(), supportedExtensions, forwardCompatible);
 	}
 
 	private static void addWGLExtensions(Set<String> supportedExtensions) {

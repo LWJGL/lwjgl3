@@ -10,7 +10,7 @@ public class GLContextMacOSX extends GLContext {
 
 	private final long handle;
 
-	public GLContextMacOSX(ContextCapabilities capabilities, long handle) {
+	public GLContextMacOSX(GLCapabilities capabilities, long handle) {
 		super(capabilities);
 
 		this.handle = handle;
@@ -37,7 +37,7 @@ public class GLContextMacOSX extends GLContext {
 	}
 
 	public static GLContextMacOSX createFromCurrent() {
-		ContextCapabilities capabilities = GL.createCapabilities(false);
+		GLCapabilities capabilities = GL.createCapabilities(false);
 
 		return new GLContextMacOSX(capabilities, CGLGetCurrentContext());
 	}

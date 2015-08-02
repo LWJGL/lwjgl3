@@ -18,10 +18,9 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
-	get() = this.any { it has deprecatedGL }
+private val CAPABILITIES_CLASS = "GLCapabilities"
 
-private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, "ContextCapabilities") {
+private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
@@ -29,6 +28,9 @@ private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, "C
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
 		override fun transformCall(param: Parameter, original: String) = "${param.name}Offset"
 	}
+
+	private val Iterable<NativeClassFunction>.hasDeprecated: Boolean
+		get() = this.any { it has deprecatedGL }
 
 	override fun generateAlternativeMethods(writer: PrintWriter, function: NativeClassFunction, transforms: MutableMap<QualifiedType, FunctionTransform<out QualifiedType>>) {
 		val boParams = function.getParams { it has BufferObject && it.nativeType.mapping != PrimitiveMapping.POINTER }
@@ -139,7 +141,7 @@ private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, "C
 
 	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of an OpenGL context. */")
-		println("public final class ContextCapabilities {\n")
+		println("public final class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -169,7 +171,7 @@ private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, "C
 			println("\tpublic final boolean ${it.capName};")
 		}
 
-		println("\n\tContextCapabilities(FunctionProvider provider, Set<String> ext, boolean fc) {")
+		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext, boolean fc) {")
 		for ( extension in classes ) {
 			val capName = extension.capName
 			// TODO: Do not call create if the extension is not present. Reduces number of classes loaded (test with static init)
@@ -224,7 +226,7 @@ private fun NativeClass.registryLink(prefix: String, name: String): String = reg
 private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_${name}"): String =
 	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", extensionName)
 
-private val NativeClass.capLink: String get() = "ContextCapabilities##${capName}"
+private val NativeClass.capLink: String get() = "$CAPABILITIES_CLASS##${capName}"
 private val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
 private val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
 private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
