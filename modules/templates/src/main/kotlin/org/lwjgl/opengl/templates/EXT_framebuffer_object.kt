@@ -182,7 +182,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"",
 
 		AutoSize("renderbuffers") _ GLsizei.IN("n", ""),
-		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "")
+		SingleValue("renderbuffer") _ const _ GLuint_p.IN("renderbuffers", "")
 	)
 
 	void(
@@ -232,7 +232,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"",
 
 		AutoSize("framebuffers") _ GLsizei.IN("n", ""),
-		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "")
+		SingleValue("framebuffer") _ const _ GLuint_p.IN("framebuffers", "")
 	)
 
 	void(

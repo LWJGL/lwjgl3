@@ -1850,7 +1850,7 @@ val WinUser = "WinUser".nativeClass(WINDOWS_PACKAGE) {
 		outside the rectangle, the system automatically adjusts the position to keep the cursor inside the rectangular area.
 		""",
 
-		const _ nullable _ RECT_p.IN(
+		nullable _ const _ RECT_p.IN(
 			"rect",
 			"""
 			a pointer to the structure that contains the screen coordinates of the upper-left and lower-right corners of the confining rectangle. If this

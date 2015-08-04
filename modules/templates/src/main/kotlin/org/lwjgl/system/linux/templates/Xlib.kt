@@ -92,7 +92,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		mechanisms simultaneously. A particular Xlib implementation can support many more of these transport mechanisms.
 		""",
 
-		const _ nullable _ charASCII_p.IN(
+		nullable _ const _ charASCII_p.IN(
 			"display_name",
 			"""
 			the hardware display name, which determines the display and communications domain to be used. On a POSIX-conformant system, if the
@@ -736,7 +736,7 @@ val Xlib = "Xlib".nativeClass(LINUX_PACKAGE) {
 		Atom.IN("type", "the type of the property"),
 		int.IN("format", "whether the data should be viewed as a list of 8-bit, 16-bit, or 32-bit quantities", "8 16 32"),
 		int.IN("mode", "the mode of the operation", "X#PropModeReplace X#PropModePrepend X#PropModeAppend"),
-		const _ MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT) _ unsigned_char_p.IN("data", "the property data"),
+		MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT) _ const _ unsigned_char_p.IN("data", "the property data"),
 		AutoSize("data") shr "(format >> 4)" _ int.IN("nelements", "the number of elements of the specified data format")
 	)
 

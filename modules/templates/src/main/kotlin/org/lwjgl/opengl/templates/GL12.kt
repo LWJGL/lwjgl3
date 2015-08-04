@@ -297,7 +297,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored")
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored")
 	)
 
 }

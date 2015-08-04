@@ -149,21 +149,21 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 	void("VertexAttribI3uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
 	void("VertexAttribI4uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
 
 	void(
 		"VertexAttribIPointerEXT",

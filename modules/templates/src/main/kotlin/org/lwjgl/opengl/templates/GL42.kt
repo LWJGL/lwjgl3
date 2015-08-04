@@ -241,7 +241,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the specified range of indices to be rendered"),
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")
 	)
@@ -257,7 +257,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays"),
 		GLuint.IN("baseinstance", "the base instance for use in fetching instanced vertex attributes")

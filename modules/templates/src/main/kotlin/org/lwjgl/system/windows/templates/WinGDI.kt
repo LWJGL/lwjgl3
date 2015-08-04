@@ -277,7 +277,7 @@ val WinGDI = "WinGDI".nativeClass(WINDOWS_PACKAGE) {
 			"""
 		),
 		nullable _ LPCTSTR.OUT("lpszOutput", "this parameter is ignored and should be set to $NULL"),
-		const _ nullable _ DEVMODE_p.IN(
+		nullable _ const _ DEVMODE_p.IN(
 			"lpInitData",
 			"""
 			A pointer to a ##DEVMODE structure containing device-specific initialization data for the device driver. The {@code DocumentProperties}

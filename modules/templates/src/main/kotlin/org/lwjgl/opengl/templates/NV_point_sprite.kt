@@ -72,6 +72,6 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"",
 
 		GLenum.IN("pname", ""),
-		const _ Check(1) _ GLint_p.IN("params", "")
+		Check(1) _ const _ GLint_p.IN("params", "")
 	)
 }

@@ -183,7 +183,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLfloat_p.IN("m", "")
+		Check(16) _ const _ GLfloat_p.IN("m", "")
 	)
 
 	void(
@@ -191,7 +191,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLdouble_p.IN("m", "")
+		Check(16) _ const _ GLdouble_p.IN("m", "")
 	)
 
 	void(
@@ -199,7 +199,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLfloat_p.IN("m", "")
+		Check(16) _ const _ GLfloat_p.IN("m", "")
 	)
 
 	void(
@@ -207,7 +207,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLdouble_p.IN("m", "")
+		Check(16) _ const _ GLdouble_p.IN("m", "")
 	)
 
 	void(
@@ -341,7 +341,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("param", "")
+		Check(4) _ const _ GLint_p.IN("param", "")
 	)
 
 	void(
@@ -361,7 +361,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLfloat_p.IN("param", "")
+		Check(4) _ const _ GLfloat_p.IN("param", "")
 	)
 
 	void(
@@ -627,7 +627,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLint.IN("size", ""),
 		AutoType("pointer", GL_HALF_FLOAT, GL_FLOAT) _ GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
-		const _ ARRAY_BUFFER _ void_p.IN("pointer", "")
+		ARRAY_BUFFER _ const _ void_p.IN("pointer", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -647,7 +647,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLfloat_p.IN("params", "")
+		Check(4) _ const _ GLfloat_p.IN("params", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -667,7 +667,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("params", "")
+		Check(4) _ const _ GLint_p.IN("params", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -687,7 +687,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLdouble_p.IN("params", "")
+		Check(4) _ const _ GLdouble_p.IN("params", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -707,7 +707,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLfloat_p.IN("params", "")
+		Check(4) _ const _ GLfloat_p.IN("params", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -727,7 +727,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("coord", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("params", "")
+		Check(4) _ const _ GLint_p.IN("params", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -797,7 +797,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("param", "")
+		Check(4) _ const _ GLint_p.IN("param", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -817,7 +817,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLfloat_p.IN("param", "")
+		Check(4) _ const _ GLfloat_p.IN("param", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1254,7 +1254,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		const _ Check(4) _ GLdouble_p.IN("params", "")
+		Check(4) _ const _ GLdouble_p.IN("params", "")
 	)
 
 	DependsOn("GL_ARB_vertex_program") _ void(
@@ -1277,7 +1277,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		const _ Check(4) _ GLfloat_p.IN("params", "")
+		Check(4) _ const _ GLfloat_p.IN("params", "")
 	)
 
 	DependsOn("GL_ARB_vertex_program") _ void(
@@ -1338,7 +1338,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("depth", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1353,7 +1353,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1367,7 +1367,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1385,7 +1385,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1401,7 +1401,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1415,7 +1415,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1449,7 +1449,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("depth", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1464,7 +1464,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1478,7 +1478,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", ""),
 		GLint.IN("border", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ nullable _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1496,7 +1496,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1512,7 +1512,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("height", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1526,7 +1526,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLsizei.IN("width", ""),
 		GLenum.IN("format", ""),
 		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1552,7 +1552,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLfloat_p.IN("m", "")
+		Check(16) _ const _ GLfloat_p.IN("m", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1560,7 +1560,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLdouble_p.IN("m", "")
+		Check(16) _ const _ GLdouble_p.IN("m", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1568,7 +1568,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLfloat_p.IN("m", "")
+		Check(16) _ const _ GLfloat_p.IN("m", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1576,7 +1576,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		"",
 
 		GLenum.IN("matrixMode", ""),
-		const _ Check(16) _ GLdouble_p.IN("m", "")
+		Check(16) _ const _ GLdouble_p.IN("m", "")
 	)
 
 	/*
@@ -1975,7 +1975,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("params", "")
+		Check(4) _ const _ GLint_p.IN("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer") _ void(
@@ -1985,7 +1985,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("texture", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLuint_p.IN("params", "")
+		Check(4) _ const _ GLuint_p.IN("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer") _ void(
@@ -2021,7 +2021,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLint_p.IN("params", "")
+		Check(4) _ const _ GLint_p.IN("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer") _ void(
@@ -2031,7 +2031,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLenum.IN("texunit", ""),
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		const _ Check(4) _ GLuint_p.IN("params", "")
+		Check(4) _ const _ GLuint_p.IN("params", "")
 	)
 
 	DependsOn("GL_EXT_texture_integer") _ void(
@@ -2182,7 +2182,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		const _ Check(4) _ GLint_p.IN("params", "")
+		Check(4) _ const _ GLint_p.IN("params", "")
 	)
 
 	DependsOn("GL_NV_gpu_program4") _ void(
@@ -2216,7 +2216,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		const _ Check(4) _ GLuint_p.IN("params", "")
+		Check(4) _ const _ GLuint_p.IN("params", "")
 	)
 
 	DependsOn("GL_NV_gpu_program4") _ void(

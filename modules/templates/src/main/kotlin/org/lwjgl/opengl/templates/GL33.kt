@@ -97,7 +97,7 @@ val GL33 = "GL33".nativeClassGL("GL33") {
 		"Deletes named sampler objects.",
 
 		AutoSize("samplers") _ GLsizei.IN("count", "the number of sampler objects to be deleted"),
-		const _ SingleValue("sampler") _ GLuint_p.IN("samplers", "an array of sampler objects to be deleted")
+		SingleValue("sampler") _ const _ GLuint_p.IN("samplers", "an array of sampler objects to be deleted")
 	)
 
 	GLboolean(

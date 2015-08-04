@@ -641,7 +641,7 @@ val CL20 = "CL20".nativeClassCL("CL20") {
 		cl_kernel.IN("kernel", "the kernel object being queried"),
 		cl_kernel_exec_info.IN("param_name", "the information to be passed to {@code kernel}"),
 		AutoSize("param_value") _ size_t.IN("param_value_size", "the size in bytes of the memory pointed to by {@code param_value}"),
-		const _ MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT) _ void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
+		MultiType(PointerMapping.DATA_POINTER, PointerMapping.DATA_INT) _ const _ void_p.IN("param_value", "a pointer to memory where the appropriate values determined by {@code param_name} are specified"),
 
 		returnDoc =
 		"""

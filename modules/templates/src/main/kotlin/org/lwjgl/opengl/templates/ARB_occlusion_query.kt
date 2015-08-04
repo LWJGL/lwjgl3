@@ -94,7 +94,7 @@ val ARB_occlusion_query = "ARBOcclusionQuery".nativeClassGL("ARB_occlusion_query
 		"Deletes named query objects.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of query objects to be deleted"),
-		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of query objects to be deleted")
+		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of query objects to be deleted")
 	)
 
 	GLboolean(

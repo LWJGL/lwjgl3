@@ -173,11 +173,11 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 		GLuint.IN("shader", "the shader object whose source code is to be replaced"),
 		AutoSize("strings", "length") _ GLsizei.IN("count", "the number of elements in the string and length arrays"),
-		const _ PointerArray(GLcharUTF8_p, "string", "length") _ GLcharUTF8_pp.IN(
+		PointerArray(GLcharUTF8_p, "string", "length") _ const _ GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to strings containing the source code to be loaded into the shader"
 		),
-		const _ nullable _ GLint_p.IN("length", "an array of string lengths")
+		nullable _ const _ GLint_p.IN("length", "an array of string lengths")
 	)
 
 	void(
@@ -669,7 +669,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 			the array. The initial value is 0.
 			"""
 		),
-		const _ ARRAY_BUFFER _ void_p.IN(
+		ARRAY_BUFFER _ const _ void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -818,7 +818,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		"Specifies a list of color buffers to be drawn into.",
 
 		AutoSize("bufs") _ GLsizei.IN("n", "the number of buffers in {@code bufs}"),
-		const _ SingleValue("buf") _ GLenum_p.IN(
+		SingleValue("buf") _ const _ GLenum_p.IN(
 			"bufs",
 			"an array of symbolic constants specifying the buffers into which fragment colors or data values will be written",
 			"""

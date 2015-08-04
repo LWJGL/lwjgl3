@@ -244,7 +244,7 @@ if (shader) {
 
 		GLenum.IN("type", "the type of shader to create"),
 		AutoSize("strings") _ GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-		const _ PointerArray(GLcharUTF8_p, "string") _ GLcharUTF8_pp.IN(
+		PointerArray(GLcharUTF8_p, "string") _ const _ GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to source code strings from which to create the program object"
 		)
@@ -262,7 +262,7 @@ if (shader) {
 		"Deletes program pipeline objects.",
 
 		AutoSize("pipelines") _ GLsizei.IN("n", "the number of program pipeline objects to delete"),
-		const _ SingleValue("pipeline") _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
+		SingleValue("pipeline") _ const _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
 	)
 
 	void(
@@ -925,7 +925,7 @@ if (shader) {
 			the array. The initial value is 0.
 			"""
 		),
-		const _ ARRAY_BUFFER _ void_p.IN(
+		ARRAY_BUFFER _ const _ void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer

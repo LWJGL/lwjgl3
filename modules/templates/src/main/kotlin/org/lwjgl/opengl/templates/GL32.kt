@@ -75,7 +75,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
@@ -92,7 +92,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLint.IN("basevertex", "a constant that should be added to each element of {@code indices} when choosing elements from the enabled vertex arrays")
 	)
 
@@ -107,7 +107,7 @@ val GL32 = "GL32".nativeClassGL("GL32") {
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		const _ ELEMENT_ARRAY_BUFFER _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
+		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored"),
 		GLsizei.IN("primcount", "the number of instances of the indexed geometry that should be drawn"),
 		GLint.IN("basevertex", "a constant that should be added to each element of indices when chosing elements from the enabled vertex arrays")
 	)

@@ -80,7 +80,7 @@ val param_value = "a pointer to memory where the appropriate result being querie
 
 val NEWL = AutoSize("event_wait_list") _ cl_uint.IN("num_events_in_wait_list", "the number of events in {@code event_wait_list}")
 
-val EWL = const _ nullable _ cl_event_p.IN(
+val EWL = nullable _ const _ cl_event_p.IN(
 	"event_wait_list",
 	"""
 	a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is $NULL, then this particular command
@@ -691,7 +691,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		command-queues, memory, program and kernel objects and for executing kernels on one or more devices specified in the context.
 		""",
 
-		const _ Check(3) _ cl_context_properties_p.IN(
+		Check(3) _ const _ cl_context_properties_p.IN(
 			"properties",
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -700,7 +700,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			ContextProperties
 		),
 		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
-		const _ SingleValue("device") _ cl_device_id_p.IN(
+		SingleValue("device") _ const _ cl_device_id_p.IN(
 			"devices",
 			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by CL12#CreateSubDevices() for a platform"
 		),
@@ -745,7 +745,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"CreateContextFromType",
 		"Creates a context using devices of the specified type. See #CreateContext() for details.",
 
-		const _ Check(3) _ cl_context_properties_p.IN(
+		Check(3) _ const _ cl_context_properties_p.IN(
 			"properties",
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -1472,7 +1472,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			the buffer that {@code ptr} points to can be used by the application.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"origin",
 			"""
 			defines the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1482,7 +1482,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			defines the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and
@@ -1596,7 +1596,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			completed, the memory pointed to by {@code ptr} can then be reused by the application.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"origin",
 			"""
 			defines the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1606,7 +1606,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			defines the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and
@@ -1710,7 +1710,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		cl_mem.IN("src_image", ""),
 		cl_mem.IN("dst_image", ""),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"src_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1720,7 +1720,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			array. If {@code src_image} is a 2D image array object, {@code src_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"dst_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1730,7 +1730,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			index in the 1D image array. If {@code dst_image} is a 2D image array object, {@code dst_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1795,7 +1795,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		cl_mem.IN("src_image", "a valid image object"),
 		cl_mem.IN("dst_buffer", "a valid buffer object"),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"src_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1805,7 +1805,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			array. If {@code src_image} is a 2D image array object, {@code src_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1883,7 +1883,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_mem.IN("src_buffer", "a valid buffer object"),
 		cl_mem.IN("dst_image", "a valid image object"),
 		size_t.IN("src_offset", "the offset where to begin copying data from {@code src_buffer}"),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"dst_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1893,7 +1893,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			index in the 1D image array. If {@code dst_image} is a 2D image array object, {@code dst_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1987,7 +1987,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		cl_map_flags.IN("map_flags", "a bit-field", MapFlags),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1997,7 +1997,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		const _ Check(3) _ size_t_p.IN(
+		Check(3) _ const _ size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -2320,11 +2320,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		AutoSize("strings", "lengths") _ cl_uint.IN("count", "the number of elements in the {@code strings} and {@code lengths} arrays"),
-		const _ PointerArray(cl_charUTF8_p, "string", "lengths") _ cl_charUTF8_pp.IN(
+		PointerArray(cl_charUTF8_p, "string", "lengths") _ const _ cl_charUTF8_pp.IN(
 			"strings",
 			"an array of {@code count} pointers to optionally null-terminated character strings that make up the source code"
 		),
-		const _ nullable _ size_t_p.IN(
+		nullable _ const _ size_t_p.IN(
 			"lengths",
 			"""
 			an array with the number of chars in each string (the string length). If an element in {@code lengths} is zero, its accompanying string is
@@ -2383,7 +2383,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"lengths",
 			"an array of the size in bytes of the program binaries to be loaded for devices specified by {@code device_list}."
 		),
-		const _ PointerArray(cl_uchar_p, "binary", "lengths") _ cl_uchar_pp.IN(
+		PointerArray(cl_uchar_p, "binary", "lengths") _ const _ cl_uchar_pp.IN(
 			"binaries",
 			"""
 			an array of pointers to program binaries to be loaded for devices specified by {@code device_list}. For each device given by {@code device_list[i]},
@@ -2469,14 +2469,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_program.IN("program", "the program object"),
 		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		const _ nullable _ SingleValue("device") _ cl_device_id_p.IN(
-		"device_list",
-		"""
+		SingleValue("device") _ nullable _ const _ cl_device_id_p.IN(
+			"device_list",
+			"""
 			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the program executable is built for all
 			devices associated with {@code program} for which a source or binary has been loaded. If {@code device_list} is a non-$NULL value, the program
 			executable is built for devices specified in this list for which a source or binary has been loaded.
 			"""
-	),
+		),
 		const _ cl_charASCII_p.IN(
 			"options",
 			"a pointer to a null-terminated string of characters that describes the build options to be used for building the program executable"
@@ -2894,23 +2894,23 @@ kernel void image_filter (
 			than or equal to #DEVICE_MAX_WORK_ITEM_DIMENSIONS.
 			"""
 		),
-		const _ Check("work_dim") _ nullable _ size_t_p.IN(
-		"global_work_offset",
-		"""
+		Check("work_dim") _ nullable _ const _ size_t_p.IN(
+			"global_work_offset",
+			"""
 			can be used to specify an array of {@code work_dim} unsigned values that describe the offset used to calculate the global ID of a work-item. If
 			{@code global_work_offset} is $NULL, the global IDs start at offset ${code("(0, 0, &hellip; 0)")}.
 			"""
-	),
-		const _ Check("work_dim") _ nullable _ size_t_p.IN(
-		"global_work_size",
-		"""
+		),
+		Check("work_dim") _ nullable _ const _ size_t_p.IN(
+			"global_work_size",
+			"""
 			points to an array of {@code work_dim} unsigned values that describe the number of global work-items in {@code work_dim} dimensions that will
 			execute the kernel function. The total number of global work-items is computed as ${code("global_work_size[0] * &hellip; * global_work_size[work_dim – 1]")}.
 			"""
-	),
+		),
 		const _ Check("work_dim") _ nullable _ size_t_p.IN(
-		"local_work_size",
-		"""
+			"local_work_size",
+			"""
 			points to an array of {@code work_dim} unsigned values that describe the number of work-items that make up a work-group (also referred to as the
 			size of the work-group) that will execute the kernel specified by {@code kernel}. The total number of work-items in a work-group is computed as
 			${code("local_work_size[0] * &hellip; * local_work_size[work_dim – 1]")}. The total number of work-items in the work-group must be less than or equal to
@@ -2928,7 +2928,7 @@ kernel void image_filter (
 			{@code local_work_size} can also be a $NULL value in which case the OpenCL implementation will determine how to be break the global work-items into
 			appropriate work-group instances.
 			"""
-	),
+		),
 		NEWL,
 		EWL,
 		EVENT,
@@ -3045,20 +3045,20 @@ kernel void image_filter (
 			"""
 		),
 		AutoSize("mem_list", "args_mem_loc") _ cl_uint.IN("num_mem_objects", "the number of buffer objects that are passed in {@code args}"),
-		const _ nullable _ SingleValue("memobj") _ cl_mem_p.IN(
-		"mem_list",
-		"""
+		SingleValue("memobj") _ nullable _ const _ cl_mem_p.IN(
+			"mem_list",
+			"""
 			a list of valid buffer objects, if {@code num_mem_objects} &gt; 0. The buffer object values specified in {@code mem_list} are memory object handles
 			(cl_mem values) returned by #CreateBuffer() or $NULL.
 			"""
-	),
-		const _ nullable _ SingleValue("memobj_loc") _ void_pp.IN(
-		"args_mem_loc",
-		"""
+		),
+		SingleValue("memobj_loc") _ nullable _ const _ void_pp.IN(
+			"args_mem_loc",
+			"""
 			a pointer to appropriate locations that {@code args} points to where memory object handles (cl_mem values) are stored. Before the user function is
 			executed, the memory object handles are replaced by pointers to global memory.
 			"""
-	),
+		),
 		NEWL,
 		EWL,
 		EVENT,
@@ -3102,7 +3102,7 @@ kernel void image_filter (
 		""",
 
 		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
-		const _ SingleValue("event") _ cl_event_p.IN("event_list", "the list of events"),
+		SingleValue("event") _ const _ cl_event_p.IN("event_list", "the list of events"),
 
 		returnDoc =
 		"""
@@ -3246,7 +3246,7 @@ kernel void image_filter (
 
 		cl_command_queue.IN("command_queue", "the command-queue"),
 		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
-		const _ SingleValue("event") _ cl_event_p.IN("event_list", "the list of events"),
+		SingleValue("event") _ const _ cl_event_p.IN("event_list", "the list of events"),
 
 		returnDoc =
 		"""

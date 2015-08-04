@@ -146,7 +146,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Deletes named buffer objects.",
 
 		AutoSize("buffers") _ GLsizei.IN("n", "the number of buffer objects to be deleted"),
-		const _ SingleValue("buffer") _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
+		SingleValue("buffer") _ const _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
 	void(
@@ -318,7 +318,7 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		"Deletes named query objects.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of query objects to be deleted"),
-		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of query objects to be deleted")
+		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of query objects to be deleted")
 	)
 
 	GLboolean(

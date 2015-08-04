@@ -174,7 +174,7 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		GLenum.IN("type", "the message type", Types),
 		GLenum.IN("severity", "the message severity level", Severities),
 		GLsizei.IN("count", "the number of message IDs in {@code ids}"),
-		const _ nullable _ GLuint_p.IN("ids", "the message IDs to enable or disable"),
+		nullable _ const _ GLuint_p.IN("ids", "the message IDs to enable or disable"),
 		GLboolean.IN("enabled", "whether to enable or disable the references subset of messages")
 	)
 

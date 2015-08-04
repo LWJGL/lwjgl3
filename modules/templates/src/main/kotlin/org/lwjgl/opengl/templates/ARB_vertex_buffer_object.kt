@@ -133,7 +133,7 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		"Deletes named buffer objects.",
 
 		AutoSize("buffers") _ GLsizei.IN("n", "the number of buffer objects to be deleted"),
-		const _ SingleValue("buffer") _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
+		SingleValue("buffer") _ const _ GLuint_p.IN("buffers", "an array of buffer objects to be deleted")
 	)
 
 	void(

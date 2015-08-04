@@ -385,7 +385,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 			"""
 			),
 			AutoSize("mem_objects") _ cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
-			const _ SingleValue("mem_object") _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
+			SingleValue("mem_object") _ const _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
 			NEWL,
 			EWL,
 			EVENT,
@@ -424,7 +424,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 
 			cl_command_queue.IN("command_queue", "a valid command-queue"),
 			AutoSize("mem_objects") _ cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-			const _ SingleValue("mem_object") _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
+			SingleValue("mem_object") _ const _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
 			NEWL,
 			EWL,
 			EVENT,

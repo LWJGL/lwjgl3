@@ -193,21 +193,21 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 	void("VertexAttribI3ui", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
 	void("VertexAttribI4ui", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1iv", "Pointer version of #VertexAttribI1i().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2iv", "Pointer version of #VertexAttribI2i().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3iv", "Pointer version of #VertexAttribI3i().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4iv", "Pointer version of #VertexAttribI4i().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(1) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(2) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(3) _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1uiv", "Pointer version of #VertexAttribI1ui().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2uiv", "Pointer version of #VertexAttribI2ui().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3uiv", "Pointer version of #VertexAttribI3ui().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4uiv", "Pointer version of #VertexAttribI4ui().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4bv", "Byte version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4sv", "Short version of #VertexAttribI4iv().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), const _ Check(4) _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ubv", "Byte version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4usv", "Short version of #VertexAttribI4uiv().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
 
 	void(
 		"VertexAttribIPointer",
@@ -751,7 +751,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes renderbuffer objects.",
 
 		AutoSize("renderbuffers") _ GLsizei.IN("n", "the number of renderbuffer objects to be deleted"),
-		const _ SingleValue("renderbuffer") _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
+		SingleValue("renderbuffer") _ const _ GLuint_p.IN("renderbuffers", "an array containing {@code n} renderbuffer objects to be deleted")
 	)
 
 	void(
@@ -816,7 +816,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes framebuffer objects.",
 
 		AutoSize("framebuffers") _ GLsizei.IN("n", "the number of framebuffer objects to be deleted"),
-		const _ SingleValue("framebuffer") _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
+		SingleValue("framebuffer") _ const _ GLuint_p.IN("framebuffers", "an array containing {@code n} framebuffer objects to be deleted")
 	)
 
 	void(
@@ -985,7 +985,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		const _ Check(1) _ SingleValue("param") _ GLint_p.IN("params", "the value of {@code pname}")
+		Check(1) _ SingleValue("param") _ const _ GLint_p.IN("params", "the value of {@code pname}")
 	)
 
 	void(
@@ -994,7 +994,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLenum.IN("target", "the texture target"),
 		GLenum.IN("pname", "the symbolic name of a single-valued texture parameter"),
-		const _ Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "the value of {@code pname}")
+		Check(1) _ SingleValue("param") _ const _ GLuint_p.IN("params", "the value of {@code pname}")
 	)
 
 	void(
@@ -1265,7 +1265,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 
 		GLuint.IN("program", "the target program object"),
 		AutoSize("varyings") _ GLsizei.IN("count", "the number of varying variables used for transform feedback"),
-		const _ PointerArray(GLcharASCII_p, "varying") _ GLcharASCII_pp.IN(
+		PointerArray(GLcharASCII_p, "varying") _ const _ GLcharASCII_pp.IN(
 			"varyings",
 			"an array of {@code count} zero-terminated strings specifying the names of the varying variables to use for transform feedback"
 		),
@@ -1308,7 +1308,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Deletes vertex array objects.",
 
 		AutoSize("arrays") _ GLsizei.IN("n", "the number of vertex array objects to be deleted"),
-		const _ SingleValue("array") _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
+		SingleValue("array") _ const _ GLuint_p.IN("arrays", "an array containing the n names of the objects to be deleted")
 	)
 
 	void(

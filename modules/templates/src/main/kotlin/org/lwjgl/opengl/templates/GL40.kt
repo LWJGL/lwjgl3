@@ -512,7 +512,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLenum.IN("shadertype", "the shader stage to update", SHADER_TYPES),
 		AutoSize("indices") _ GLsizei.IN("count", "the number of uniform indices stored in {@code indices}"),
-		const _ SingleValue("index") _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
+		SingleValue("index") _ const _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
 	)
 
 	void(
@@ -698,7 +698,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Deletes transform feedback objects.",
 
 		AutoSize("ids") _ GLsizei.IN("n", "the number of transform feedback objects to delete"),
-		const _ SingleValue("id") _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
+		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
 	)
 
 	void(

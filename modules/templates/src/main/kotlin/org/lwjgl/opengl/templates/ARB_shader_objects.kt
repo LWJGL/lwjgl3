@@ -143,8 +143,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("shaderObj", "the shader object"),
 		AutoSize("string", "length") _ GLsizei.IN("count", "the number of strings in the array"),
-		const _ PointerArray(GLcharARB_p, "string", "length") _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
-		const _ nullable _ GLint_p.IN(
+		PointerArray(GLcharARB_p, "string", "length") _ const _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
+		nullable _ const _ GLint_p.IN(
 			"length",
 			"""
 			an array with the number of charARBs in each string (the string length). Each element in this array can be set to negative one (or smaller),

@@ -72,7 +72,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		)}
 		""",
 
-		const _ nullable _ charASCII_p.IN("path", "path to the image to open"),
+		nullable _ const _ charASCII_p.IN("path", "path to the image to open"),
 		int.IN(
 			"mode",
 			"""

@@ -120,7 +120,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("pname", "the parameter to set", COLOR_TABLE_PARAMS),
-		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
+		Check(4) _ const _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ void(
@@ -129,7 +129,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to set"),
-		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
+		Check(4) _ const _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ void(
@@ -171,7 +171,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("count", "the number of colors in the subregion to respecify"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "the color table data")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the color table data")
 	)
 
 	deprecatedGL _ void(
@@ -277,7 +277,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the filter width"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "the filter data")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the filter data")
 	)
 
 	deprecatedGL _ void(
@@ -290,7 +290,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("data", "the filter data")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the filter data")
 	)
 
 	deprecatedGL _ void(
@@ -342,8 +342,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("row", "the horizontal filter data"),
-		const _ PIXEL_UNPACK_BUFFER _ void_p.IN("column", "the vertical filter data")
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("row", "the horizontal filter data"),
+		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("column", "the vertical filter data")
 	)
 
 	deprecatedGL _ void(
@@ -373,7 +373,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		const _ Check(4) _ GLint_p.IN("params", "the parameter value")
+		Check(4) _ const _ GLint_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ void(
@@ -391,7 +391,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		const _ Check(4) _ GLfloat_p.IN("params", "the parameter value")
+		Check(4) _ const _ GLfloat_p.IN("params", "the parameter value")
 	)
 
 	deprecatedGL _ void(
