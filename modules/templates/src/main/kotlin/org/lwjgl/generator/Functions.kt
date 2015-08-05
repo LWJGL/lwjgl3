@@ -883,6 +883,8 @@ class NativeClassFunction(
 						}
 					}
 				}
+
+				transforms remove it
 			} else if ( it has AutoType ) {
 				// Generate AutoType alternatives
 
@@ -915,6 +917,9 @@ class NativeClassFunction(
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(name, "${autoType.name()} version of:", transforms)
 				}
+
+				transforms remove bufferParam
+				transforms remove it
 			} else if ( it has PointerArray ) {
 				val pointerArray = it[PointerArray]
 
@@ -949,6 +954,9 @@ class NativeClassFunction(
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
 				transforms[it] = PointerArrayTransformSingle
 				generateAlternativeMethod(name, "Single ${pointerArray.singleName} version of:", transforms)
+
+				transforms remove countParam
+				transforms remove it
 			}
 		}
 
