@@ -953,7 +953,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			MemFlags
 		),
 		AutoSize("host_ptr") _ size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
-		MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ optional _ void_p.IN(
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ optional _ void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the buffer data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be
@@ -1024,7 +1024,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		size_t.IN("offset", "the offset in bytes in the buffer object to read from"),
 		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being read"),
 		MultiType(
-			PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
 		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
@@ -1094,7 +1094,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		size_t.IN("offset", "the offset in bytes in the buffer object to write to"),
 		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being written"),
-		MultiType(PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -2753,7 +2753,6 @@ kernel void image_filter (
 		// MultiType generates clSetKernalArg(long kernel, int arg_index, <type>Buffer arg_value)
 		// SingleValue generates clSetKernelArg<xp>(long kernel, int arg_index, <p> arg<x-1>, ...), where x = 1..4
 		optional _ MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_LONG,

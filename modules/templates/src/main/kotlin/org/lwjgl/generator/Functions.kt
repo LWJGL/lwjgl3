@@ -731,8 +731,8 @@ class NativeClassFunction(
 				if ( it has AutoSize ) {
 					val autoSize = it[AutoSize]
 					val param = paramMap[autoSize.reference]!! // TODO: Check dependent too?
-					// Check if there's also a MultiType on the referenced parameter. Skip if so.
-					if ( !(param has MultiType) )
+					// Check if there's also an optional on the referenced parameter. Skip if so.
+					if ( !(param has optional) )
 						transforms[it] = AutoSizeTransform(param, autoSize.applyTo)
 				} else if ( it has optional )
 					transforms[it] = ExpressionTransform("0L")
@@ -853,16 +853,24 @@ class NativeClassFunction(
 					transforms[it] = AutoSizeTransform(paramMap[autoSize.reference]!!, autoSize.applyTo)
 				}
 
-				val multiTypes = it[MultiType]
-				for ( autoType in multiTypes.types ) {
+				var multiTypes = it[MultiType].types.asSequence()
+				if ( it has optional )
+					multiTypes = sequenceOf(PointerMapping.DATA_BYTE) + multiTypes
+
+				for ( autoType in multiTypes ) {
 					// Transform the AutoSize parameter, if there is one
 					getReferenceParam(AutoSize, param.name) let {
 						if ( it != null )
-							transforms[it] = AutoSizeTransform(param, ApplyTo.BOTH, autoType.byteShift!!)
+							transforms[it] = AutoSizeTransform(param, ApplyTo.ALTERNATIVE, autoType.byteShift!!)
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
 					generateAlternativeMethod(name, "${autoType.javaMethodType.getSimpleName()} version of:", transforms)
+				}
+
+				getReferenceParam(AutoSize, param.name) let {
+					if ( it != null )
+						transforms remove it
 				}
 
 				// Generate a SingleValue alternative for each type
@@ -870,7 +878,7 @@ class NativeClassFunction(
 					val autoSizeParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) } // required
 
 					val singleValue = param[SingleValue]
-					for ( autoType in multiTypes.types ) {
+					for ( autoType in multiTypes ) {
 						// Generate type1, type2, type3, type4 versions
 						// TODO: Make customizable? New modifier?
 						for ( i in 1..4 ) {
@@ -882,6 +890,8 @@ class NativeClassFunction(
 							generateAlternativeMethod("$name$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "${primitiveType}$i" } value version of:", transforms)
 						}
 					}
+
+					transforms remove autoSizeParam
 				}
 
 				transforms remove it
@@ -898,19 +908,6 @@ class NativeClassFunction(
 
 				val types = ArrayList<AutoTypeToken>(autoTypes.types.size())
 				autoTypes.types.forEach { types add it }
-
-				for ( autoType in autoTypes.types ) {
-					val unsignedType = autoType.unsigned
-					if ( unsignedType == null || !types.contains(unsignedType) )
-						continue
-
-					transforms[it] = AutoTypeParamWithSignTransform("${unsignedType.className}.${unsignedType.name()}", "${autoType.className}.${autoType.name()}")
-					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
-					generateAlternativeMethod(name, "${unsignedType.name()} / ${autoType.name()} version of:", transforms)
-
-					types.remove(autoType)
-					types.remove(unsignedType)
-				}
 
 				for ( autoType in types ) {
 					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name()}")

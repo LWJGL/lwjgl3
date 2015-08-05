@@ -686,7 +686,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		ALuint.IN("bufferName", "the buffer to modify"),
 		ALenum.IN("format", "the data format", BufferFormats),
 		MultiType(
-			PointerMapping.DATA_BYTE, PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
 		) _ const _ ALvoid_p.IN("data", "the sample data"),
 		AutoSize("data") _ ALsizei.IN("size", "the data buffer size, in bytes"),
 		ALsizei.IN("frequency", "the data frequency")

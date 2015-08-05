@@ -180,7 +180,6 @@ interface AutoTypeToken {
 	fun name(): String
 	val mapping: PointerMapping
 	val className: String
-	val unsigned: AutoTypeToken?
 }
 
 /**
@@ -211,8 +210,13 @@ class MultiType(vararg val types: PointerMapping): ParameterModifier() {
 		if ( types.isEmpty() )
 			throw IllegalArgumentException("No buffer types specified.")
 
-		if ( types.any { it.byteShift == null } )
-			throw IllegalArgumentException("The MultiType modifier can only be applied with concrete PointerMappings.")
+		for ( t in types ) {
+			if ( t === PointerMapping.DATA_BYTE )
+				throw IllegalArgumentException("The DATA_BYTE mapping cannot be used with the MultiType modifier.")
+
+			if ( t.byteShift == null )
+				throw IllegalArgumentException("The MultiType modifier can only be applied with concrete PointerMappings.")
+		}
 	}
 
 	override val isSpecial = true

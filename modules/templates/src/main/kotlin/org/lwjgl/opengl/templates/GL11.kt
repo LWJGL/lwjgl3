@@ -1218,13 +1218,15 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3 4 GL12#BGRA"),
 		// Removed GL_DOUBLE
-		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#BYTE #UNSIGNED_BYTE #SHORT #UNSIGNED_SHORT #INT #UNSIGNED_INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the color array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the color array data")
 	)
 
 	void(
@@ -1998,7 +2000,7 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"IndexPointer",
 	    "Specifies the location and organization of a color index array.",
 
-	    AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
+	    AutoType("pointer", GL_UNSIGNED_BYTE, GL_SHORT, GL_INT) _ GLenum.IN(
 		    "type",
 		    "the data type of the values stored in the array",
 		    "#UNSIGNED_BYTE #SHORT #INT #FLOAT #DOUBLE"
@@ -2445,14 +2447,15 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"NormalPointer",
 		"Specifies the location and organization of a normal array.",
 
-		// Remove GL_INT and GL_DOUBLE, added SHORT. TODO: Replace SHORT with GL_HALF?
-		AutoType("pointer", GL_BYTE, GL_SHORT, GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#BYTE #SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the normal array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the normal array data")
 	)
 
 	deprecatedGL _ void(
@@ -3106,13 +3109,15 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Specifies the location and organization of a texture coordinate array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array", "1 2 3 4"),
-		AutoType("pointer", GL_HALF_FLOAT, GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the texture coordinate array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the texture coordinate array data")
 	)
 
 	void(
@@ -3529,13 +3534,15 @@ val GL11 = "GL11".nativeClassGL("GL11") {
 		"Specifies the location and organization of a vertex array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array", "2 3 4"),
-		AutoType("pointer", GL_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"#SHORT #INT GL30#HALF_FLOAT #FLOAT #DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the vertex array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the vertex array data")
 	)
 
 	void(

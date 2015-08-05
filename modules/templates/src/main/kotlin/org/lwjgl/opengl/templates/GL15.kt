@@ -189,7 +189,6 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the buffer object's new data store"),
 		optional _ MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
@@ -206,7 +205,6 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLintptr.IN("offset", "the offset into the buffer object's data store where data replacement will begin, measured in bytes"),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the data store region being replaced"),
 		MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
@@ -222,7 +220,6 @@ val GL15 = "GL15".nativeClassGL("GL15") {
 		GLintptr.IN("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size in bytes of the data store region being returned"),
 		MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,

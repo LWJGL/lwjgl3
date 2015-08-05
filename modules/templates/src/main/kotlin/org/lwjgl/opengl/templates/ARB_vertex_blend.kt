@@ -133,7 +133,9 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		    "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ void_p.IN("pointer", "the weight data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ void_p.IN("pointer", "the weight data")
 	)
 
 	void(

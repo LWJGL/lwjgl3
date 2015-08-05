@@ -76,14 +76,13 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 
 		var expression = "${bufferParam.name}.remaining()"
 		val factor = param[AutoSize].factor
-		if ( factor != null )
-			expression = "($expression ${factor.expression()})"
+		if ( factor == null )
+			expression = "$expression << $byteShift"
+		else if ( applyTo !== ApplyTo.ALTERNATIVE ) // Hack to skip the expression with MultiType
+			expression = "($expression ${factor.expression()}) << $byteShift"
 
-		// Replace with expression
-		expression = if ( bufferParam has nullable )
-			"(${bufferParam.name} == null ? 0 : $expression) << $byteShift"
-		else
-			"$expression << $byteShift"
+		if ( bufferParam has nullable )
+			expression = "(${bufferParam.name} == null ? 0 : $expression)"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
 			expression = "(${param.nativeType.javaMethodType})($expression)"
@@ -113,11 +112,6 @@ private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): Fu
 private class AutoTypeParamTransform(val autoType: String): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
-}
-
-private class AutoTypeParamWithSignTransform(val unsignedType: String, val signedType: String): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String) = "boolean unsigned" // Replace with unsigned flag
-	override fun transformCall(param: Parameter, original: String) = "unsigned ? $unsignedType : $signedType" // Replace with unsigned check
 }
 
 private class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {

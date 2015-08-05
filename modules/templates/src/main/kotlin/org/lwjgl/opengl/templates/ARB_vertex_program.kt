@@ -271,14 +271,16 @@ val ARB_vertex_program = "ARBVertexProgram".nativeClassGL("ARB_vertex_program", 
 
 		VA_INDEX,
 		GLint.IN("size", "the vertex attribute number of components", "1 2 3 4"),
-		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_INT, GL_FLOAT, GL_DOUBLE) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"GL11#BYTE GL11#SHORT GL11#INT GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT GL30#HALF_FLOAT NVHalfFloat#HALF_FLOAT_NV GL11#FLOAT GL11#DOUBLE"
 		),
 		GLboolean.IN("normalized", "if GL11#TRUE, fixed-point types are normalized when converted to floating-point"),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the vertex attribute array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the vertex attribute array data")
 	)
 
 	void(

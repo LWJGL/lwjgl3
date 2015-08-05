@@ -625,9 +625,11 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("texunit", ""),
 		GLint.IN("size", ""),
-		AutoType("pointer", GL_HALF_FLOAT, GL_FLOAT) _ GLenum.IN("type", ""),
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "")
 	)
 
 	DependsOn("OpenGL13") _ void(
@@ -1592,7 +1594,6 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("buffer", ""),
 		AutoSize("data") _ GLsizeiptr.IN("size", ""),
 		optional _ MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
@@ -1609,7 +1610,6 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", ""),
 		AutoSize("data") _ GLsizeiptr.IN("size", ""),
 		MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
@@ -1649,7 +1649,6 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLintptr.IN("offset", ""),
 		AutoSize("data") _ GLsizeiptr.IN("size", ""),
 		MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,

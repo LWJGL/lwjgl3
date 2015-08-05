@@ -86,12 +86,14 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 		"Specifies the location and organization of a secondary color array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3"),
-		AutoType("pointer", GL_BYTE, GL_UNSIGNED_BYTE, GL_SHORT, GL_UNSIGNED_SHORT, GL_FLOAT) _ GLenum.IN(
+		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the secondary color array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+		) _ const _ void_p.IN("pointer", "the secondary color array data")
 	)
 }

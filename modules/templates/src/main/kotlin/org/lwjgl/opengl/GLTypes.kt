@@ -131,19 +131,16 @@ val GLhalfNV_p = GLhalfNV.p
 // AutoType tokens
 enum class BufferType(
 	type: PointerType,
-	override val className: String = "GL11",
-	override val unsigned: AutoTypeToken? = null
+	override val className: String = "GL11"
 ): AutoTypeToken {
 
 	GL_UNSIGNED_BYTE(GLubyte_p),
 	GL_UNSIGNED_SHORT(GLushort_p),
 	GL_UNSIGNED_INT(GLuint_p),
-	GL_UNSIGNED_INT64(GLuint64_p),
 
-	GL_BYTE(GLbyte_p, unsigned = GL_UNSIGNED_BYTE),
-	GL_SHORT(GLshort_p, unsigned = GL_UNSIGNED_SHORT),
-	GL_INT(GLint_p, unsigned = GL_UNSIGNED_INT),
-	GL_INT64(GLint64_p, unsigned = GL_UNSIGNED_INT64),
+	GL_BYTE(GLbyte_p),
+	GL_SHORT(GLshort_p),
+	GL_INT(GLint_p),
 
 	GL_HALF_FLOAT(GLushort_p, className = "GL30"),
 	GL_FLOAT(GLfloat_p),

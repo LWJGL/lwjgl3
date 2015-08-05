@@ -176,7 +176,6 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLenum.IN("target", "the target buffer object", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptrARB.IN("size", "the size in bytes of the buffer object's new data store"),
 		optional _ MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
@@ -203,7 +202,6 @@ val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex
 		GLintptrARB.IN("offset", "the offset into the buffer object's data store from which data will be returned, measured in bytes"),
 		AutoSize("data") _ GLsizeiptrARB.IN("size", "the size in bytes of the data store region being returned"),
 		MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,

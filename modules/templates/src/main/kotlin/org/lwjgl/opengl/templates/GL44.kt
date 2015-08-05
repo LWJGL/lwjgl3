@@ -91,7 +91,6 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		AutoSize("data") _ GLsizeiptr.IN("size", "the size of the data store in basic machine units"),
 		optional _ MultiType(
-			PointerMapping.DATA_BYTE,
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
