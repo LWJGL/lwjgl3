@@ -256,15 +256,10 @@ private class BufferReturnTransform(
 
 	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) bufferType else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
-		val builder = StringBuilder(64)
-
-		builder append "\t\treturn "
-		if ( encoding != null ) builder append "memDecode$encoding("
-		builder append "mem${bufferType}($API_BUFFER.address(${outParam.name}), $API_BUFFER.intValue($lengthParam))"
-		if ( encoding != null ) builder append ")"
-		builder append ";"
-
-		return builder.toString()
+		return if ( encoding != null )
+			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
+		else
+			"\t\treturn mem${bufferType}($API_BUFFER.address(${outParam.name}), $API_BUFFER.intValue($lengthParam));"
 	}
 }
 
