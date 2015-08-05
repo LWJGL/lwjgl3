@@ -125,34 +125,6 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="all" description="Build LWJGL and runs the tests" depends="compile-templates,tests"/>
 
-	<target name="-init-compile" description="Initializes properties required for compilation" depends="bindings">
-		<patternset id="src.core.files">
-			<include name="org/lwjgl/*.java"/>
-			<include name="org/lwjgl/system/*.java"/>
-			<include name="org/lwjgl/system/libffi/**"/>
-			<include name="org/lwjgl/system/simd/**"/>
-			<include name="org/lwjgl/system/linux/**"/>
-			<include name="org/lwjgl/system/macosx/**"/>
-			<exclude name="org/lwjgl/system/macosx/ObjC*.java" unless:true="${binding.macosx.objc}"/>
-			<include name="org/lwjgl/system/windows/**"/>
-		</patternset>
-
-		<patternset id="src.util.files">
-			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
-		</patternset>
-
-		<patternset id="generated.java.files">
-			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
-			<exclude name="org/lwjgl/glfw/GLFWEGL.java" unless:true="${binding.egl}"/>
-			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
-			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
-			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
-			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
-			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
-			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
-		</patternset>
-	</target>
-
 	<target name="compile-templates" description="Compiles the Templates module" depends="init">
 		<uptodate targetfile="${bin.templates}/org/lwjgl/generator/Generator.class" property="templates-uptodate">
 			<srcfiles dir="${config}" includes="build-bindings.xml"/>
@@ -161,7 +133,7 @@ License terms: http://lwjgl.org/license.php
 		<antcall target="-compile-templates"/>
 	</target>
 
-	<target name="-compile-templates" description="Compiles the Templates module" depends="-init-compile" unless="templates-uptodate">
+	<target name="-compile-templates" description="Compiles the Templates module" depends="bindings" unless="templates-uptodate">
 		<!-- Compile Java dependencies -->
 		<lwjgl.javac destdir="${bin}/Templates" taskname="Java dependencies">
 			<src path="${src.templates}/java"/>
@@ -188,14 +160,14 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/generator"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/system"/>
 
+			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/glfw" if:true="${binding.glfw}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/openal" if:true="${binding.openal}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl" if:true="${binding.opencl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" unless:true="${binding.opengl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/egl" if:true="${binding.egl}"/>
-			<arg value="${src.templates.kotlin}/org/lwjgl/egl/EGLTypes.kt" unless:true="${binding.egl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<!--
@@ -205,7 +177,7 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="formatter" description="Runs the template formatter tool" depends="init, -init-compile"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
+	<target name="formatter" description="Runs the template formatter tool" depends="init"> <!-- Removed "compile-templates" until Kotlin adds support for incremental compilation -->
 		<lwjgl.javac destdir="${bin.templates}" taskname="Compile formatter">
 			<src path="${src.templates}/java"/>
 			<include name="org/lwjgl/generator/util/**"/>
@@ -223,7 +195,7 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
-	<target name="generate" description="Runs the bindings Generator" depends="init, -init-compile">
+	<target name="generate" description="Runs the bindings Generator" depends="init">
 		<available file="${bin.templates}/org/lwjgl/generator/Generator.class" property="has-compiled-templates"/>
 		<fail unless="has-compiled-templates" message="Please invoke the compile-templates target first."/>
 
@@ -234,7 +206,7 @@ License terms: http://lwjgl.org/license.php
 		<antcall target="-generate"/>
 	</target>
 
-	<target name="-generate" description="Runs the code Generator" unless="generated-uptodate">
+	<target name="-generate" description="Runs the code Generator" depends="bindings" unless="generated-uptodate">
 		<java
 			classname="org.lwjgl.generator.GeneratorPackage"
 			fork="true"
@@ -256,17 +228,46 @@ License terms: http://lwjgl.org/license.php
 		<touch file="${src.generated}/touch.txt" verbose="false"/>
 	</target>
 
-	<target name="compile" description="Compiles the Java source code" depends="generate">
-		<lwjgl.javac sourcepath="" destdir="${bin.core}" taskname="Core">
+	<target name="-init-compile" description="Initializes properties required for compilation" depends="bindings">
+		<patternset id="core.main.files">
+			<include name="org/lwjgl/*.java"/>
+			<include name="org/lwjgl/system/**"/>
+
+			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
+			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
+			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+		</patternset>
+
+		<patternset id="core.generated.files">
+			<include name="org/lwjgl/system/**"/>
+
+			<include name="org/lwjgl/egl/**" if:true="${binding.egl}"/>
+			<include name="org/lwjgl/glfw/**" if:true="${binding.glfw}"/>
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
+			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
+			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
+			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
+		</patternset>
+
+		<patternset id="util.main.files">
+			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
+		</patternset>
+	</target>
+
+	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
+		<lwjgl.javac destdir="${bin.core}" taskname="Core">
 			<src>
 				<pathelement path="${src.core}"/>
-				<pathelement path="${src.util}"/>
 				<pathelement path="${src.generated.java}"/>
+				<pathelement path="${src.util}"/>
 			</src>
 
-			<patternset refid="src.core.files"/>
-			<patternset refid="src.util.files"/>
-			<patternset refid="generated.java.files"/>
+			<patternset refid="core.main.files"/>
+			<patternset refid="core.generated.files"/>
+			<patternset refid="util.main.files"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -305,17 +306,17 @@ License terms: http://lwjgl.org/license.php
 
 			<include name="org/lwjgl/system/**"/>
 			<include name="org/lwjgl/demo/util/**"/>
-			<include name="org/lwjgl/demo/windows/**"/>
+			<include name="org/lwjgl/demo/windows/**" if:set="platform.windows"/>
 
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 
+			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>
 			<include name="org/lwjgl/demo/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/demo/opencl/**" if:true="${glfw_opencl}"/>
 			<include name="org/lwjgl/demo/opencl/CLDemo.java" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/demo/opengl/**" if:true="${binding.glfw}"/>
-			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/demo/stb/**" if:true="${glfw_stb}"/>
 		</lwjgl.javac>
@@ -336,7 +337,7 @@ License terms: http://lwjgl.org/license.php
 				<pathelement path="${lib}/jcommander.jar"/>
 			</classpath>
 
-			<jvmarg value="-Xcheck:jni"/>
+			<!--<jvmarg value="-Xcheck:jni"/>--> <!-- SIMD fails with this (see -XX:+RestoreMXCSROnJNICall) -->
 			<jvmarg value="-ea"/>
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
@@ -406,21 +407,24 @@ License terms: http://lwjgl.org/license.php
 
 			<classpath>
 				<pathelement path="${src.core}"/>
-				<pathelement path="${src.util}"/>
 				<pathelement path="${src.generated.java}"/>
+				<pathelement path="${src.util}"/>
 			</classpath>
 
 			<fileset dir="${src.core}">
-				<patternset refid="src.core.files"/>
-			</fileset>
-
-			<fileset dir="${src.util}">
-				<patternset refid="src.util.files"/>
+				<patternset refid="core.main.files"/>
 			</fileset>
 
 			<fileset dir="${src.generated.java}">
-				<patternset refid="generated.java.files"/>
+				<patternset refid="core.generated.files"/>
 			</fileset>
+
+			<fileset dir="${src.util}">
+				<patternset refid="util.main.files"/>
+			</fileset>
+
+			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
+			<arg value="-XDignore.symbol.file=true"/>
 		</javadoc>
 	</target>
 

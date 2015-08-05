@@ -558,7 +558,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		GLsizei.IN("height", "the height, in pixels, of the pixel buffer"),
 		GLenum.IN(
 			"target",
-			"a constant that specifies the type of the pixel buffer target texture", "GL11#TEXTURE_2D GL13#TEXTURE_CUBE_MAP GL31#TEXTURE_RECTANGLE"
+			"a constant that specifies the type of the pixel buffer target texture", "GL11##GL_TEXTURE_2D GL13##GL_TEXTURE_CUBE_MAP GL31##GL_TEXTURE_RECTANGLE"
 		),
 		GLenum.IN(
 			"internalFormat",
@@ -566,7 +566,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 			a constant that specifies the internal color format of the pixel buffer. The format controls whether the alpha channel of the pixel buffer is used
 			for texturing operations.
 			""",
-		    "GL11#RGB GL11#RGBA"
+		    "GL11##GL_RGB GL11##GL_RGBA"
 		),
 		GLint.IN(
 			"max_level",
@@ -839,7 +839,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 
 		CGLContextObj.IN("ctx", "the rendering context to attach the pixel buffer to"),
 		CGLPBufferObj.IN("pbuffer", "a pixel buffer object"),
-		GLenum.IN("face", "the cube map face to draw if the pixel buffer texture target type is GL13#TEXTURE_CUBE_MAP; otherwise pass 0."),
+		GLenum.IN("face", "the cube map face to draw if the pixel buffer texture target type is GL13##GL_TEXTURE_CUBE_MAP; otherwise pass 0."),
 		GLint.IN(
 			"level",
 			"""
@@ -869,7 +869,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL
 		Check(1) _ GLenum_p.OUT(
 			"face",
 			"""
-			on return, points to the cube map face that is set if the pixel buffer texture target type is GL13#TEXTURE_CUBE_MAP; otherwise 0 for all other
+			on return, points to the cube map face that is set if the pixel buffer texture target type is GL13##GL_TEXTURE_CUBE_MAP; otherwise 0 for all other
 			texture target types.
 			"""
 		),

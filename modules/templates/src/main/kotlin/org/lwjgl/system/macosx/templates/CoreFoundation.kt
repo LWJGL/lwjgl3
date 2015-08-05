@@ -55,7 +55,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	)
 	macro _ CFAllocatorRef(
 		"kCFAllocatorUseContext",
-		"Special allocator argument to #CFAllocatorCreate() which means \"use the functions given in the context to allocate the allocator itself as well\"."
+		"Special allocator argument to CFAllocatorCreate which means \"use the functions given in the context to allocate the allocator itself as well\"."
 	)
 
 	CFTypeRef(
