@@ -233,15 +233,20 @@ private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: 
 
 private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = if ( param.nativeType is CharSequenceType )
+		"$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
+	else
+		"memAddress(${param.name})" // Replace with address of allocated buffer
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
-		val mapping = qtype.nativeType.mapping as PointerMapping
+		if ( qtype.nativeType is CharSequenceType ) {
+			writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(")
+		} else {
+			val bufferType = qtype.nativeType.mapping.javaMethodType.getSimpleName()
+			writer.print("\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType(")
+		}
 
 		val autoSizeParam = func.getParam { it has AutoSize && it[AutoSize].hasReference(qtype.name) }
-		writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(${if ( 4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name}")
-		if ( mapping.isMultiByte )
-			writer.print(" << ${mapping.byteShift}")
-		writer.println(");")
+		writer.println("${if ( 4 < (autoSizeParam.nativeType.mapping as PrimitiveMapping).bytes) "(int)" else ""}${autoSizeParam.name});")
 	}
 }
 
@@ -259,7 +264,8 @@ private class BufferReturnTransform(
 		return if ( encoding != null )
 			"\t\treturn memDecode$encoding($API_BUFFER.buffer(), $API_BUFFER.intValue($lengthParam), ${outParam.name});"
 		else
-			"\t\treturn mem${bufferType}($API_BUFFER.address(${outParam.name}), $API_BUFFER.intValue($lengthParam));"
+			"\t\t${outParam.name}.limit($API_BUFFER.intValue($lengthParam));\n" +
+			"\t\treturn ${outParam.name};"
 	}
 }
 
