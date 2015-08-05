@@ -138,12 +138,12 @@ enum class BufferType(
 	GL_UNSIGNED_BYTE(GLubyte_p),
 	GL_UNSIGNED_SHORT(GLushort_p),
 	GL_UNSIGNED_INT(GLuint_p),
-	GL_UNSIGNED_LONG(GLuint64_p),
+	GL_UNSIGNED_INT64(GLuint64_p),
 
 	GL_BYTE(GLbyte_p, unsigned = GL_UNSIGNED_BYTE),
 	GL_SHORT(GLshort_p, unsigned = GL_UNSIGNED_SHORT),
 	GL_INT(GLint_p, unsigned = GL_UNSIGNED_INT),
-	GL_LONG(GLint64_p, unsigned = GL_UNSIGNED_LONG),
+	GL_INT64(GLint64_p, unsigned = GL_UNSIGNED_INT64),
 
 	GL_HALF_FLOAT(GLushort_p, className = "GL30"),
 	GL_FLOAT(GLfloat_p),
@@ -151,7 +151,7 @@ enum class BufferType(
 
 	GL_2_BYTES(GLubyte_p),
 	GL_3_BYTES(GLubyte_p),
-	GL_4_BYTES(GLubyte_p)
+	GL_4_BYTES(GLubyte_p);
 
 	override val mapping = type.mapping as PointerMapping
 

@@ -708,12 +708,12 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 		GLuint.IN("program", "the program object to be queried"),
 		GLuint.IN("index", "the index of the attribute variable to be queried"),
 		AutoSize("name") _ GLsizei.IN("maxLength", "the maximum number of characters OpenGL is allowed to write in the character buffer indicated by {@code name}"),
-		GLsizei_p.OUT(
+		Check(1) _ nullable _ GLsizei_p.OUT(
 			"length",
 			"the number of characters actually written by OpenGL in the string indicated by {@code name} (excluding the null terminator) if a value other than NULL is passed"
 		),
-		GLint_p.OUT("size", "the size of the attribute variable"),
-		GLenum_p.OUT("type", "the data type of the attribute variable"),
+		Check(1) _ GLint_p.OUT("size", "the size of the attribute variable"),
+		Check(1) _ GLenum_p.OUT("type", "the data type of the attribute variable"),
 		Return(
 			"length",
 			"glGetProgrami(program, GL_ACTIVE_ATTRIBUTE_MAX_LENGTH)"

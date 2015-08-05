@@ -92,7 +92,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
 		GLuint.IN("group", ""),
 		GLuint.IN("counter", ""),
 		GLenum.IN("pname", ""),
-		void_p.OUT("data", "")
+		Check(4) _ MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ void_p.OUT("data", "")
 	)
 
 	void(
@@ -119,7 +119,7 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
 		GLboolean.IN("enable", ""),
 		GLuint.IN("group", ""),
 		AutoSize("counterList") _ GLint.IN("numCounters", ""),
-		GLuint_p.OUT("counterList", "")
+		GLuint_p.IN("counterList", "")
 	)
 
 	void(
@@ -144,6 +144,6 @@ val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGL("AMD_perform
 		GLenum.IN("pname", ""),
 		AutoSize("data") _ GLsizei.IN("dataSize", ""),
 		GLuint_p.OUT("data", ""),
-		Check(1) _ GLint_p.OUT("bytesWritten", "")
+		Check(1) _ nullable _ GLint_p.OUT("bytesWritten", "")
 	)
 }
