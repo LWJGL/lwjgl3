@@ -17,6 +17,7 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.openal" value="true"/>
 	<property name="binding.opencl" value="true"/>
 	<property name="binding.opengl" value="true"/>
+	<property name="binding.opengles" value="false"/>
 
 	<property name="binding.egl" value="false"/>
 

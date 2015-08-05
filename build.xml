@@ -168,6 +168,7 @@ License terms: http://lwjgl.org/license.php
 			<arg value="${src.templates.kotlin}/org/lwjgl/opencl/CLTypes.kt" unless:true="${binding.opencl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl" if:true="${binding.opengl}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/opengl/GLTypes.kt" unless:true="${binding.opengl}"/>
+			<arg value="${src.templates.kotlin}/org/lwjgl/opengles" if:true="${binding.opengles}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/ovr" if:true="${binding.ovr}"/>
 			<arg value="${src.templates.kotlin}/org/lwjgl/stb" if:true="${binding.stb}"/>
 			<!--
@@ -238,6 +239,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
 		</patternset>
 
 		<patternset id="core.generated.files">
@@ -248,6 +250,7 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
 			<include name="org/lwjgl/opencl/**" if:true="${binding.opencl}"/>
 			<include name="org/lwjgl/opengl/**" if:true="${binding.opengl}"/>
+			<include name="org/lwjgl/opengles/**" if:true="${binding.opengles}"/>
 			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
 		</patternset>
