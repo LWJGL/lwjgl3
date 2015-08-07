@@ -1174,7 +1174,7 @@ class NativeClassFunction(
 
 	fun generateFunction(writer: PrintWriter) = writer.generateFunctionImpl()
 	private fun PrintWriter.generateFunctionImpl() {
-		// Step 0: Function signature
+		// Function signature
 
 		print("JNIEXPORT ${returnsJniFunctionType} JNICALL Java_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
@@ -1191,7 +1191,7 @@ class NativeClassFunction(
 			print(", jlong $RESULT")
 		println(") {")
 
-		// Step 1: Cast addresses to pointers
+		// Cast addresses to pointers
 
 		getNativeParams().filter { it.nativeType is PointerType }.forEach {
 			val pointerType = it.toNativeType
@@ -1200,22 +1200,39 @@ class NativeClassFunction(
 			println("${it.name} = ($pointerType)(intptr_t)${it.name}$POINTER_POSTFIX;")
 		}
 
-		// Step 2: Cast function address to pointer
+		// Cast function address to pointer
 
 		if ( nativeClass.binding != null )
 			println("\t${name}PROC $name = (${name}PROC)(intptr_t)$FUNCTION_ADDRESS;")
 
-		// Step 3: Unused parameter macro
+		// Custom code
+
+		var hasCodeAfterNativeCall = false
+		if ( has(Code) ) {
+			val code = this@NativeClassFunction[Code]
+
+			if ( code.nativeAfterCall != null ) {
+				hasCodeAfterNativeCall = true
+				if ( !returns.isVoid )
+					println("\t${returnsJniFunctionType} $RESULT;")
+			}
+
+			if ( code.nativeBeforeCall != null )
+				println(this@NativeClassFunction[Code].nativeBeforeCall)
+		}
+
+		// Unused parameter macro
 
 		println("\tUNUSED_PARAMS($JNIENV, clazz)")
 
-		// Step 4: Call native function
+		// Call native function
 
 		print('\t')
 		if ( returnsStructValue ) {
 			print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
 		} else if ( !returns.isVoid ) {
-			print("return (${returnsJniFunctionType})")
+			print(if ( hasCodeAfterNativeCall ) "$RESULT =" else "return")
+			print(" (${returnsJniFunctionType})")
 			if ( returns.nativeType is PointerType )
 				print("(intptr_t)")
 			if ( returns.has(address) )
@@ -1234,6 +1251,11 @@ class NativeClassFunction(
 		}
 		if ( !has(macro) ) print(')')
 		println(';')
+		if ( hasCodeAfterNativeCall ) {
+			println(this@NativeClassFunction[Code].nativeAfterCall)
+			if ( !returns.isVoid )
+				println("\treturn $RESULT;")
+		}
 
 		println("}")
 	}
