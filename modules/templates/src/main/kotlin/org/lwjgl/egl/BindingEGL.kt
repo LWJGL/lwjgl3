@@ -65,9 +65,9 @@ private val BindingEGL = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 
 		println("""
 	/**
-	 * Creates an EGLCapabilities instance for the EGL client.
+	 * Creates an $CAPABILITIES_CLASS instance for the EGL client.
 	 *
-	 * <p>The function instances created here will be reused by EGLCapabilities instances for EGLDisplays.</p>
+	 * <p>The function instances created here will be reused by $CAPABILITIES_CLASS instances for EGLDisplays.</p>
 	 *
 	 * <p>Querying EGL client library extensions depends on EGL 1.5 or the {@link #EGL_EXT_client_extensions} extension. If neither is supported, all flags
 	 * will be false and the version fields zero.</p>
@@ -77,7 +77,7 @@ private val BindingEGL = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 	 * @param ext          the available EGL client extensions
 	 * @param provider     the EGL client function provider
 	 */
-	EGLCapabilities(int majorVersion, int minorVersion, Set<String> ext, FunctionProvider provider) {
+	$CAPABILITIES_CLASS(int majorVersion, int minorVersion, Set<String> ext, FunctionProvider provider) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
@@ -105,14 +105,14 @@ private val BindingEGL = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 		// Display constructor
 		println("""
 	/**
-	 * Creates an EGLCapabilities instance for an EGLDisplay.
+	 * Creates an $CAPABILITIES_CLASS instance for an EGLDisplay.
 	 *
 	 * @param majorVersion the EGL major version
 	 * @param minorVersion the EGL minor version
 	 * @param ext          the extensions string
 	 * @param caps         an EGL client capabilities instance
 	 */
-	EGLCapabilities(int majorVersion, int minorVersion, Set<String> ext, EGLCapabilities caps) {
+	$CAPABILITIES_CLASS(int majorVersion, int minorVersion, Set<String> ext, $CAPABILITIES_CLASS caps) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
