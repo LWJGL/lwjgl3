@@ -27,7 +27,7 @@ import com.sun.media.sound.WaveFileReader;
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.openal.ALC11.*;
-import static org.lwjgl.openal.Util.*;
+import static org.lwjgl.openal.ALUtil.*;
 import static org.testng.Assert.*;
 
 public class ALCDemo {
