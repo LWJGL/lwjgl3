@@ -8,9 +8,9 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 
 /** Simple OpenAL utility class. */
-public final class Util {
+public final class ALUtil {
 
-	private Util() {
+	private ALUtil() {
 	}
 
 	public static void checkALCError(ALDevice device) {
