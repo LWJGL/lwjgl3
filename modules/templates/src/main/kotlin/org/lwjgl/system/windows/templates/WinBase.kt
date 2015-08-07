@@ -20,27 +20,6 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"TRUE" _ 1
 	)
 
-	val GlobalMemoryFlags = IntConstant(
-		"Global Memory flags.",
-
-		"GMEM_FIXED" _ 0x0000,
-		"GMEM_MOVEABLE" _ 0x0002,
-		"GMEM_NOCOMPACT" _ 0x0010,
-		"GMEM_NODISCARD" _ 0x0020,
-		"GMEM_ZEROINIT" _ 0x0040,
-		"GMEM_MODIFY" _ 0x0080,
-		"GMEM_DISCARDABLE" _ 0x0100,
-		"GMEM_NOT_BANKED" _ 0x1000,
-		"GMEM_SHARE" _ 0x2000,
-		"GMEM_DDESHARE" _ 0x2000,
-		"GMEM_NOTIFY" _ 0x4000,
-		"GMEM_LOWER" expr "GMEM_NOT_BANKED",
-		"GMEM_VALID_FLAGS" _ 0x7F72,
-		"GMEM_INVALID_HANDLE" _ 0x8000,
-		"GHND" expr "GMEM_MOVEABLE | GMEM_ZEROINIT",
-		"GPTR" expr "GMEM_FIXED | GMEM_ZEROINIT"
-	).javaDocLinks
-
 	DWORD(
 		"GetLastError",
 		"""
@@ -141,45 +120,4 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 			"a pointer to a variable that receives the current performance-counter value, in counts."
 		)
 	)
-
-	HGLOBAL(
-		"GlobalAlloc",
-		"Allocates the specified number of bytes from the heap.",
-
-		UINT.IN("flags", "the memory allocation attributes. If zero is specified, the default is #GMEM_FIXED.", GlobalMemoryFlags),
-		SIZE_T.IN(
-			"bytes",
-			"""
-			the number of bytes to allocate. If this parameter is zero and the {@code flags} parameter specifies #GMEM_MOVEABLE, the function returns a
-			handle to a memory object that is marked as discarded.
-			"""
-		)
-	)
-
-	LPVOID(
-		"GlobalLock",
-		"Locks a global memory object and returns a pointer to the first byte of the object's memory block.",
-
-		HGLOBAL.IN("hMem", "a handle to the global memory object")
-	)
-
-	BOOL(
-		"GlobalUnlock",
-		"""
-		Decrements the lock count associated with a memory object that was allocated with #GMEM_MOVEABLE. This function has no effect on memory objects
-		allocated with #GMEM_FIXED.
-		""",
-
-		HGLOBAL.IN("hMem", "a handle to the global memory object")
-	)
-
-	HGLOBAL(
-		"GlobalFree",
-		"Frees the specified global memory object and invalidates its handle.",
-
-		HGLOBAL.IN("hMem", "a handle to the global memory object."),
-
-		returnDoc = "$NULL if the function succeeds. If the function fails, the return value is equal to a handle to the global memory object."
-	)
-
 }

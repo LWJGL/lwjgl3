@@ -18,10 +18,6 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		"glfw3native.h"
 	)
 
-	javaImport(
-		"org.lwjgl.system.linux.X"
-	)
-
 	documentation = "Native bindings to the GLFW library's Linux native access functions."
 
 	Display_p(
@@ -44,7 +40,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 	    """,
 
 	    GLFWmonitor.IN("monitor", "the GLFW monitor"),
-	    returnDoc = "The ${code("RRCrtc")} of the specified monitor, or X##None if an error occurred.",
+	    returnDoc = "The ${code("RRCrtc")} of the specified monitor, or {@code None} if an error occurred.",
 	    since = "GLFW 3.1"
 	)
 
@@ -57,7 +53,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		""",
 
 		GLFWmonitor.IN("monitor", "the GLFW monitor"),
-		returnDoc = "The ${code("RROutput")} of the specified monitor, or X##None if an error occurred.",
+		returnDoc = "The ${code("RROutput")} of the specified monitor, or {@code None} if an error occurred.",
 		since = "GLFW 3.1"
 	)
 
@@ -70,7 +66,7 @@ val GLFWLinux = "GLFWLinux".nativeClass(packageName = GLFW_PACKAGE, nativeSubPat
 		""",
 
 		GLFWwindow.IN("window", "a GLFW window"),
-		returnDoc = " The ${code("Window")} of the specified window, or X##None if an error occurred.",
+		returnDoc = " The ${code("Window")} of the specified window, or {@code None} if an error occurred.",
 		since = "GLFW 3.0"
 	)
 

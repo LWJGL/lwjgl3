@@ -91,7 +91,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		nullable _ const _ int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.X##None"),
+		nullable _ const _ int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
 		autoSizeResult _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
 	)
 
