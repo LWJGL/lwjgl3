@@ -981,7 +981,7 @@ class NativeClassFunction(
 						is CharSequenceType -> "CharSequence"
 						is ObjectType       -> pointerType.elementType.className
 						is PointerType      -> "long"
-						else                -> pointerType.elementType.javaMethodType.toString()
+						else                -> pointerType.elementType.javaMethodType.simpleName
 					},
 					primitiveType,
 					singleValue.newName

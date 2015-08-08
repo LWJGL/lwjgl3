@@ -60,7 +60,7 @@ private open class AutoSizeTransform(
 			expression = "${bufferParam.name} == null ? 0 : $expression"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType})($expression)"
+			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
 
 		return expression
 	}
@@ -85,7 +85,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 			expression = "(${bufferParam.name} == null ? 0 : $expression)"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType})($expression)"
+			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
 
 		return expression
 	}
@@ -103,7 +103,7 @@ private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): Fu
 			expression = "$expression ${param[AutoSize].factor!!.expression()}"
 
 		if ( (param.nativeType.mapping as PrimitiveMapping).bytes < 4 )
-			expression = "(${param.nativeType.javaMethodType})($expression)"
+			expression = "(${param.nativeType.javaMethodType.simpleName})($expression)"
 
 		return expression
 	}

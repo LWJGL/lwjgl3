@@ -32,9 +32,9 @@ class CallbackFunction(
 			is PointerType   -> "ffi_type_pointer"
 			is PrimitiveType -> when ( mapping ) {
 				PrimitiveMapping.POINTER -> "ffi_type_pointer"
-				PrimitiveMapping.FLOAT  -> "ffi_type_float"
-				PrimitiveMapping.DOUBLE -> "ffi_type_double"
-				else                    -> "ffi_type_${if ( this !is IntegerType || this.unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
+				PrimitiveMapping.FLOAT   -> "ffi_type_float"
+				PrimitiveMapping.DOUBLE  -> "ffi_type_double"
+				else                     -> "ffi_type_${if ( this !is IntegerType || this.unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
 			}
 			else             -> if ( mapping === TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
@@ -44,7 +44,7 @@ class CallbackFunction(
 			is PointerType   -> "Ptr"
 			is PrimitiveType -> when ( mapping ) {
 				PrimitiveMapping.POINTER -> "Ptr"
-				else                 -> mapping.javaMethodType.simpleName.upperCaseFirst
+				else                     -> mapping.javaMethodType.simpleName.upperCaseFirst
 			}
 			else             -> if ( mapping === TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
@@ -99,7 +99,7 @@ ${signature.asSequence().withIndex().map {
 	 * @param args pointer to an array of jvalues
 	 */
 	@Override
-	protected ${returns.javaMethodType} callback(long args) {
+	protected ${returns.nativeMethodType.simpleName} callback(long args) {
 		""")
 		if ( returns.mapping != TypeMapping.VOID )
 			print("return ")
@@ -112,11 +112,11 @@ ${signature.asSequence().withIndex().map {
 """)
 		print(functionDoc)
 		print("""
-	public abstract ${returns.javaMethodType} invoke($signatureJava);
+	public abstract ${returns.nativeMethodType.simpleName} invoke($signatureJava);
 
 	/** A functional interface for {@link $className}. */
 	public interface SAM {
-		${returns.javaMethodType} invoke($signatureJava);
+		${returns.nativeMethodType.simpleName} invoke($signatureJava);
 	}
 
 }""")
@@ -134,7 +134,7 @@ ${signature.asSequence().withIndex().map {
 	public static $className $className(final $className.SAM sam) {
 		return new $className() {
 			@Override
-			public ${returns.javaMethodType} invoke($signatureJava) {
+			public ${returns.nativeMethodType.simpleName} invoke($signatureJava) {
 				""")
 		if ( returns.mapping != TypeMapping.VOID )
 			writer.print("return ")
