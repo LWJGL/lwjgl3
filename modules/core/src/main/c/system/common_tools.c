@@ -149,7 +149,7 @@ inline void detachCurrentThread(void) {
 		return getEnvData()->env;
 	}
 
-	void setErrno(jint errnum) { return getEnvData()->errnum = errnum; }
+	void setErrno(jint errnum) { getEnvData()->errnum = errnum; }
 	inline jint getErrno(void) { return getEnvData()->errnum; }
 #endif
 
