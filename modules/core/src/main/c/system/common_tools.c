@@ -48,6 +48,12 @@ inline void detachCurrentThread(void) {
 	#include <WindowsLWJGL.h>
 	DWORD envTLS = TLS_OUT_OF_INDEXES;
 
+	typedef struct {
+		JNIEnv* env;
+		jint errnum;
+		jint lastError;
+	} EnvData;
+
 	BOOL WINAPI DllMain(HINSTANCE hDLL, DWORD fdwReason, LPVOID lpvReserved) {
 		UNUSED_PARAMS(hDLL, lpvReserved)
 		if ( fdwReason == DLL_THREAD_DETACH && getThreadEnv() != NULL )
@@ -65,24 +71,42 @@ inline void detachCurrentThread(void) {
 		TlsFree(envTLS);
 	}
 
-	JNIEnv* envTLSGet(void) {
+	EnvData* envTLSGet(void) {
+		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
+
 		JNIEnv* env = getThreadEnv();
     	if ( env == NULL )
     	    env = attachCurrentThreadAsDaemon();
 
-		TlsSetValue(envTLS, (LPVOID)env);
-		return env;
+		data->env = env;
+		TlsSetValue(envTLS, (LPVOID)data);
+		return data;
+	}
+
+	inline EnvData* getEnvData(void) {
+		EnvData* data = (EnvData*)TlsGetValue(envTLS);
+		if ( data == NULL )
+			data = envTLSGet();
+		return data;
 	}
 
 	inline JNIEnv* getEnv(void) {
-		JNIEnv* env = (JNIEnv*)TlsGetValue(envTLS);
-		if ( env == NULL )
-			env = envTLSGet();
-		return env;
+		return getEnvData()->env;
 	}
+
+	inline void setErrno(jint errnum) { getEnvData()->errnum = errnum; }
+	inline jint getErrno(void) { return getEnvData()->errnum; }
+
+	void setLastError(jint lastError) { getEnvData()->lastError = lastError; }
+	inline jint getLastError(void) { return getEnvData()->lastError; }
 #else
 	#include <pthread.h>
 	pthread_key_t envTLS = 0;
+
+	typedef struct {
+		JNIEnv* env;
+		jint errnum;
+	} EnvData;
 
 	static void autoDetach(void* value) {
 		UNUSED_PARAM(value)
@@ -102,21 +126,31 @@ inline void detachCurrentThread(void) {
 		}
 	}
 
-	JNIEnv* envTLSGet(void) {
+	EnvData* envTLSGet(void) {
+		EnvData* data = (EnvData*)malloc(sizeof(EnvData));
+
 		JNIEnv* env = getThreadEnv();
     	if ( env == NULL )
             env = attachCurrentThreadAsDaemon();
 
-    	pthread_setspecific(envTLS, env);
-    	return env;
+		data->env = env;
+    	pthread_setspecific(envTLS, data);
+    	return data;
+	}
+
+	inline EnvData* getEnvData(void) {
+		EnvData* data = (EnvData*)pthread_getspecific(envTLS);
+		if ( data == NULL )
+			data = envTLSGet();
+		return data;
 	}
 
 	inline JNIEnv* getEnv(void) {
-		JNIEnv* env = (JNIEnv*)pthread_getspecific(envTLS);
-		if ( env == NULL )
-			env = envTLSGet();
-		return env;
+		return getEnvData()->env;
 	}
+
+	void setErrno(jint errnum) { return getEnvData()->errnum = errnum; }
+	inline jint getErrno(void) { return getEnvData()->errnum; }
 #endif
 
 EXTERN_C_ENTER

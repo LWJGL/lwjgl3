@@ -26,7 +26,7 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 			handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
 
 		if ( handle == NULL ) // TODO: better error handling
-			throw new RuntimeException("Failed to dynamically load library: " + name);
+			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 
 		this.handle = handle;
 	}

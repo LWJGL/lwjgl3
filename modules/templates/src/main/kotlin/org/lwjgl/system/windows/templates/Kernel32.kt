@@ -19,7 +19,7 @@ val Kernel32 = "Kernel32".nativeClassWin {
 		$DLL_WARNING
 		"""
 
-	DLL_FUNC _ DWORD_PTR(
+	GetLastError _ DLL_FUNC _ DWORD_PTR(
 		"SetThreadAffinityMask",
 		"""
 		Sets a processor affinity mask for the specified thread.

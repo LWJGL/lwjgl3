@@ -5,19 +5,13 @@
 package org.lwjgl.system.windows;
 
 import org.lwjgl.LWJGLUtil;
-import org.lwjgl.system.Platform;
 
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
 
-public class WindowsPlatform implements Platform {
+public final class WindowsUtil {
 
-	public WindowsPlatform() {
-	}
-
-	@Override
-	public boolean has64Bit() {
-		return true;
+	private WindowsUtil() {
 	}
 
 	public static void windowsCheckHandle(long handle, String msg) {
@@ -27,11 +21,11 @@ public class WindowsPlatform implements Platform {
 
 	public static void windowsCheckResult(int result, String action) {
 		if ( LWJGLUtil.DEBUG && result == 0 )
-			throw new RuntimeException(action + " failed (error code = " + GetLastError() + ")");
+			throw new RuntimeException(action + " failed (error code = " + getLastError() + ")");
 	}
 
 	public static void windowsThrowException(String msg) {
-		throw new RuntimeException(msg + " (error code = " + GetLastError() + ")");
+		throw new RuntimeException(msg + " (error code = " + getLastError() + ")");
 	}
 
 }

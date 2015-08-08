@@ -7,8 +7,9 @@ package org.lwjgl.system.windows;
 import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
 
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.windows.WinBase.*;
-import static org.lwjgl.system.windows.WindowsPlatform.*;
+import static org.lwjgl.system.windows.WindowsUtil.*;
 
 /** Implements a {@link DynamicLinkLibrary} on the Windows OS. */
 public class WindowsLibrary extends DynamicLinkLibrary.Default {
@@ -17,7 +18,7 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 	public static final long HINSTANCE = GetModuleHandle(Sys.JNI_LIBRARY_NAME);
 
 	static {
-		if ( HINSTANCE == 0 )
+		if ( HINSTANCE == NULL )
 			throw new RuntimeException("Failed to retrieve LWJGL module handle.");
 	}
 
@@ -29,7 +30,7 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 		this.name = name;
 
 		handle = LoadLibrary(name);
-		if ( handle == 0 )
+		if ( handle == NULL )
 			windowsThrowException("Failed to load library: " + name);
 	}
 

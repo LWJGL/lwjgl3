@@ -31,18 +31,15 @@ import java.util.HashMap
 */
 
 enum class Binding(val key: String) {
-	STB("binding.stb"),
-
+	EGL("binding.egl"),
 	GLFW("binding.glfw"),
 	OPENAL("binding.openal"),
 	OPENCL("binding.opencl"),
 	OPENGL("binding.opengl"),
 	OPENGLES("binding.opengles"),
 
-	EGL("binding.egl"),
-
-	MANTLE("binding.mantle"),
 	OVR("binding.ovr"),
+	STB("binding.stb"),
 
 	MACOSX_OBJC("binding.macosx.objc");
 
@@ -86,8 +83,8 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.opengles", Binding.OPENGLES)
 		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.ovr", Binding.OVR)
-		generate("org.lwjgl.mantle", Binding.MANTLE)
-
+		
+		generate("org.lwjgl.system.libc")
 		generate("org.lwjgl.system.libffi")
 		generate("org.lwjgl.system.simd")
 		generate("org.lwjgl.system.linux")

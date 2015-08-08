@@ -25,10 +25,24 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"""
 		Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each
 		other's last-error code.
+
+		<b>LWJGL note</b>: This function cannot be used after another JNI call to a Windows function, because the last error resets before that call returns.
+		For this reason, LWJGL stores the last error in thread-local storage, you can use #getLastError() to access it.
 		"""
 	)
 
-	HMODULE(
+	DWORD(
+		"getLastError",
+		"""
+		Retrieves the calling thread's last-error code value. The last-error code is maintained on a per-thread basis. Multiple threads do not overwrite each
+		other's last-error code.
+
+		<b>LWJGL note</b>: This method has a meaningful value only after another LWJGL JNI call. It does not call {@code GetLastError()} from WinBase.h, it
+		returns the thread-local error code stored by a previous JNI call.
+		"""
+	)
+
+	GetLastError _ HMODULE(
 		"GetModuleHandle",
 		"Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
@@ -45,7 +59,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	HMODULE(
+	GetLastError _ HMODULE(
 		"LoadLibrary",
 		"Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.",
 
@@ -68,7 +82,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	FARPROC(
+	GetLastError _ FARPROC(
 		"GetProcAddress",
 		"Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).",
 
@@ -82,7 +96,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	BOOL(
+	GetLastError _ BOOL(
 		"FreeLibrary",
 		"""
 		Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module

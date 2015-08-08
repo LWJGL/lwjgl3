@@ -6,6 +6,7 @@
 #define __LWJGL_COMMON_TOOLS_H__
 
 #ifdef LWJGL_WINDOWS
+	#define _CRT_SECURE_NO_WARNINGS
 	#include "WindowsConfig.h"
 #endif
 #ifdef LWJGL_LINUX
@@ -29,6 +30,12 @@ ENABLE_WARNINGS()
 
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
 extern JNIEnv *getEnv(void);
+extern void setErrno(jint);
+extern jint getErrno(void);
+#ifdef LWJGL_WINDOWS
+	extern void setLastError(jint lastError);
+	extern jint getLastError(void);
+#endif
 
 // Sync
 extern JNIEnv *getThreadEnv(void);
