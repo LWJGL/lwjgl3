@@ -415,7 +415,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		<b>LWJGL note</b>: This method comes in 2 flavors:
 		${ol(
 			"#MapBufferRange(int, long, long, int) - Always returns a new ByteBuffer instance.",
-			"#MapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if the specified length and returned pointer match the buffer capacity and address, respectively."
+			"#MapBufferRange(int, long, long, int, ByteBuffer) - The {@code old_buffer} parameter is reused if not null."
 		)}
 		""",
 

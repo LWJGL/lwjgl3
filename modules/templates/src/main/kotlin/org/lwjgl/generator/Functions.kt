@@ -38,6 +38,7 @@ val RESULT = "__result"
 val POINTER_POSTFIX = "Address"
 val BUFFERS_POSTFIX = "Buffers"
 val LENGTHS_POSTFIX = "Lengths"
+val MAP_OLD = "old_buffer"
 val MAP_LENGTH = "length"
 val FUNCTION_ADDRESS = "__functionAddress"
 
@@ -1023,14 +1024,14 @@ class NativeClassFunction(
 		if ( returnTransform === MapPointerTransform ) {
 			if ( !parameters.isEmpty() )
 				print(", ")
-			print("ByteBuffer old_buffer")
+			print("ByteBuffer $MAP_OLD")
 		} else if ( returnTransform != null && returnTransform.javaClass === javaClass<MapPointerExplicitTransform>() ) {
 			if ( !parameters.isEmpty() )
 				print(", ")
 			val mapPointerExplicit = returnTransform as MapPointerExplicitTransform
 			if ( mapPointerExplicit.addParam )
 				print("long ${mapPointerExplicit.lengthParam}, ")
-			print("ByteBuffer old_buffer")
+			print("ByteBuffer $MAP_OLD")
 		}
 		println(") {")
 
