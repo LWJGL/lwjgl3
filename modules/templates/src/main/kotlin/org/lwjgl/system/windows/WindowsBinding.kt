@@ -21,14 +21,14 @@ private val WindowsBinding = object : APIBinding(WINDOWS_PACKAGE, "*DUMMY*") {
 
 // DSL Extensions
 
-private fun String.nativeClassWin(init: (NativeClass.() -> Unit)? = null) =
+fun String.nativeClassWin(init: (NativeClass.() -> Unit)? = null) =
 	nativeClass(WINDOWS_PACKAGE, this, binding = WindowsBinding, init = init)
 
-private val DLL_WARNING =
+val DLL_WARNING =
 	"""Features must be detected on a function-by-function basis. A function pointer will have a $NULL (0L) value when the corresponding
 		function is not supported in the Windows version we're running."""
 
-private val DLL_FUNC = Capabilities(expression = FUNCTION_ADDRESS, override = true)
-private val DLL_ADDRESS = virtual _ nullable _ voidptr.IN(FUNCTION_ADDRESS, "the DLL function address") // nullable: the generator emits checkFunctionAddress, no need to check again
+val DLL_FUNC = Capabilities(expression = FUNCTION_ADDRESS, override = true)
+val DLL_ADDRESS = virtual _ nullable _ voidptr.IN(FUNCTION_ADDRESS, "the DLL function address") // nullable: the generator emits checkFunctionAddress, no need to check again
 
-private val GetLastError = Code(nativeAfterCall = "\tsetLastError((jint)GetLastError());")
+val GetLastError = Code(nativeAfterCall = "\tsetLastError((jint)GetLastError());")

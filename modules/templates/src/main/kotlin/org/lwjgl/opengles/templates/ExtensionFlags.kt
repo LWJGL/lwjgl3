@@ -25,7 +25,7 @@ val OVR = "OVR"
 val QCOM = "QCOM"
 val VIV = "VIV"
 
-private val NativeClass.cap: String get() = "{@link #${capName} ${templateName}}"
+private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
 
 val ANDROID_extension_pack_es31a = EXT_FLAG.nativeClassGLES("ANDROID_extension_pack_es31a", postfix = ANDROID) {
 	documentation =

@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import java.io.PrintWriter
 import java.util.regex.Pattern
 
-private val NativeClass.capName: String
+val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefixTemplate) ) templateName else "${prefixTemplate}_$templateName"
 
 private val CAPABILITIES_CLASS = "EGLCapabilities"
@@ -131,7 +131,7 @@ private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAP
 
 })
 
-private fun String.nativeClassEGL(
+fun String.nativeClassEGL(
 	templateName: String,
 	nativeSubPath: String = "",
 	prefix: String = "EGL",
@@ -150,16 +150,16 @@ private fun String.nativeClassEGL(
 )
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
-private val NativeClass.registryLink: String get() {
+val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
 	if ( !matcher.matches() )
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("https://www.khronos.org/registry/egl/extensions/${matcher.group(1)}/EGL_$templateName.txt", templateName)
 }
 
-private fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
-private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_${name}"): String =
+fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
+private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
 	url("https://www.khronos.org/registry/egl/extensions/$prefix/$name.txt", extensionName)
 
-private val NativeClass.core: String get() = "{@link ${this.className} EGL ${this.className[2]}.${this.className[3]}}"
-private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
+val NativeClass.core: String get() = "{@link ${this.className} EGL ${this.className[2]}.${this.className[3]}}"
+val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

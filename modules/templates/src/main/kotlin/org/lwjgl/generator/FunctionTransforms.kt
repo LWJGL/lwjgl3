@@ -115,7 +115,7 @@ private class AutoTypeParamTransform(val autoType: String): FunctionTransform<Pa
 }
 
 private class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.getSimpleName()} ${param.name}"
+	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.simpleName} ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = original
 }
 
@@ -204,12 +204,12 @@ private class VectorValueTransform(
 	val newName: String,
 	val size: Int
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
-	override fun transformDeclaration(param: Parameter, original: String) = (0..size - 1).map { "$paramType ${newName}$it" }.reduce { a, b -> "$a, $b" } // Replace with vector elements
+	override fun transformDeclaration(param: Parameter, original: String) = (0..size - 1).map { "$paramType $newName$it" }.reduce { a, b -> "$a, $b" } // Replace with vector elements
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) {
 		writer.println("\t\tint ${qtype.name} = $API_BUFFER.${elementType}Param(${newName}0);")
 		for ( i in 1..(size - 1) )
-			writer.println("\t\t$API_BUFFER.${elementType}Param(${newName}$i);")
+			writer.println("\t\t$API_BUFFER.${elementType}Param($newName$i);")
 	}
 }
 
@@ -241,7 +241,7 @@ private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: F
 		if ( qtype.nativeType is CharSequenceType ) {
 			writer.print("\t\tint ${qtype.name} = $API_BUFFER.bufferParam(")
 		} else {
-			val bufferType = qtype.nativeType.mapping.javaMethodType.getSimpleName()
+			val bufferType = qtype.nativeType.mapping.javaMethodType.simpleName
 			writer.print("\t\t$bufferType ${qtype.name} = BufferUtils.create$bufferType(")
 		}
 
@@ -257,7 +257,7 @@ private class BufferReturnTransform(
 ): FunctionTransform<ReturnValue> {
 
 	private val bufferType: String
-		get() = (outParam.nativeType.mapping as PointerMapping).javaMethodType.getSimpleName()
+		get() = (outParam.nativeType.mapping as PointerMapping).javaMethodType.simpleName
 
 	override fun transformDeclaration(param: ReturnValue, original: String) = if ( encoding == null) bufferType else "String"
 	override fun transformCall(param: ReturnValue, original: String): String {

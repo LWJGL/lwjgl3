@@ -8,7 +8,6 @@ import java.io.PrintWriter
 import java.lang.Math.*
 import java.util.*
 import java.util.regex.Pattern
-import kotlin.properties.Delegates
 
 val INSTANCE = "__instance"
 val EXT_FLAG = ""
@@ -365,7 +364,7 @@ class NativeClass(
 		customMethods add method
 	}
 
-	fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: ${templateName}.$functionName")
+	fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
 
 	fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]

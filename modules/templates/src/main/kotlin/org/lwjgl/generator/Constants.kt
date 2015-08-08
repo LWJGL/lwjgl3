@@ -61,7 +61,7 @@ class ConstantBlock<T: Any>(
 	private fun PrintWriter.generateBlock() {
 		println(documentation)
 
-		print("\tpublic static final ${constantType.javaType.getSimpleName()}")
+		print("\tpublic static final ${constantType.javaType.simpleName}")
 
 		val indent: String
 		if ( constants.size() == 1 ) {

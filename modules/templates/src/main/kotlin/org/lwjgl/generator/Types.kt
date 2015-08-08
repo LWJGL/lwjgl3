@@ -28,7 +28,7 @@ open class NativeType(
 		get() = mapping.javaMethodType
 
 	override fun toString(): String =
-		"${this.javaClass.getSimpleName()}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
+		"${this.javaClass.simpleName}: $name | ${mapping.jniFunctionType} | ${mapping.nativeMethodType} | ${mapping.javaMethodType}"
 }
 
 // Specialization for primitives.

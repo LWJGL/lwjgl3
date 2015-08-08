@@ -14,7 +14,6 @@ import java.nio.ByteBuffer
 import java.util.ArrayList
 import java.util.HashMap
 import java.util.LinkedHashMap
-import java.util.regex.Pattern
 
 /*
 	****
@@ -67,7 +66,7 @@ abstract class Function(
 
 	protected val hasNativeParams: Boolean = getNativeParams().any()
 
-	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: ${simpleName}.$paramName")
+	fun getParam(paramName: String) = paramMap[paramName] ?: throw IllegalArgumentException("Referenced parameter does not exist: $simpleName.$paramName")
 	fun getParams(predicate: (Parameter) -> Boolean) = parameters.asSequence().filter(predicate)
 	fun getParam(predicate: (Parameter) -> Boolean) = getParams(predicate).single()
 	fun hasParam(predicate: (Parameter) -> Boolean) = getParams(predicate).any()
@@ -283,7 +282,7 @@ class NativeClassFunction(
 
 			if ( !mapping.isMultiByte ) {
 				return if ( nativeType is StructType )
-					"${expression} * ${nativeType.definition.className}.SIZEOF"
+					"$expression * ${nativeType.definition.className}.SIZEOF"
 				else
 					expression
 			}
@@ -327,7 +326,7 @@ class NativeClassFunction(
 						PointerMapping.DATA_POINTER -> "P"
 						else                        -> "1"
 					}
-				checks add "${prefix}checkNT${postfix}(${it.name}${it[Terminated] let { if ( it === nullTerminated ) "" else ", ${it.value}" }});"
+				checks add "${prefix}checkNT$postfix(${it.name}${it[Terminated] let { if ( it === nullTerminated ) "" else ", ${it.value}" }});"
 			}
 
 			if ( it has Check ) {
@@ -444,7 +443,7 @@ class NativeClassFunction(
 			generateJavaDocLink("JNI method for", this@NativeClassFunction)
 			println("\t@JavadocExclude")
 		}
-		print("\t${accessModifier}static native ${returnsNativeMethodType} ")
+		print("\t${accessModifier}static native $returnsNativeMethodType ")
 		if ( !nativeOnly ) print('n')
 		print(name)
 		print("(")
@@ -467,7 +466,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateUnsafeMethod() {
 		generateJavaDocLink("Unsafe version of", this@NativeClassFunction)
 		println("\t@JavadocExclude")
-		print("\t${accessModifier}static ${returnsNativeMethodType} n$name(")
+		print("\t${accessModifier}static $returnsNativeMethodType n$name(")
 		printList(getNativeParams()) {
 			it.asNativeMethodParam
 		}
@@ -527,7 +526,7 @@ class NativeClassFunction(
 
 		// Step 1: Method signature
 
-		print("\t${accessModifier}static ${returnsJavaMethodType} $name(")
+		print("\t${accessModifier}static $returnsJavaMethodType $name(")
 		printList(parameters.asSequence()) {
 			if ( it.isAutoSizeResultOut && hideAutoSizeResultParam )
 				null
@@ -588,9 +587,9 @@ class NativeClassFunction(
 				val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
 					"ByteBuffer"
 				else
-					returns.nativeType.mapping.javaMethodType.getSimpleName()
+					returns.nativeType.mapping.javaMethodType.simpleName
 
-				print("\t\treturn mem${bufferType}")
+				print("\t\treturn mem$bufferType")
 				if ( isNullTerminated )
 					print("NT${(returns.nativeType as CharSequenceType).charMapping.bytes}")
 				print("($RESULT")
@@ -816,7 +815,7 @@ class NativeClassFunction(
 					// Hide length parameter and use APIBuffer
 					val lengthParam = returnMod.lengthParam
 					if ( lengthParam != null )
-						transforms[paramMap[lengthParam]] = BufferReturnLengthTransform
+						transforms[paramMap[lengthParam]!!] = BufferReturnLengthTransform
 
 					// Hide target parameter and use APIBuffer
 					transforms[it] = BufferReturnParamTransform
@@ -866,7 +865,7 @@ class NativeClassFunction(
 					}
 
 					transforms[it] = AutoTypeTargetTransform(autoType)
-					generateAlternativeMethod(name, "${autoType.javaMethodType.getSimpleName()} version of:", transforms)
+					generateAlternativeMethod(name, "${autoType.javaMethodType.simpleName} version of:", transforms)
 				}
 
 				getReferenceParam(AutoSize, param.name) let {
@@ -888,7 +887,7 @@ class NativeClassFunction(
 
 							val primitiveType = PointerMapping.primitiveMap[autoType]!!
 							transforms[it] = VectorValueTransform(if ( primitiveType == "pointer" ) "long" else primitiveType, primitiveType, singleValue.newName, i)
-							generateAlternativeMethod("$name$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "${primitiveType}$i" } value version of:", transforms)
+							generateAlternativeMethod("$name$i${primitiveType[0]}", "${if ( i == 1 ) "Single $primitiveType" else "$primitiveType$i" } value version of:", transforms)
 						}
 					}
 
@@ -1106,10 +1105,10 @@ class NativeClassFunction(
 				val bufferType = if ( isNullTerminated || returns.nativeType.mapping === PointerMapping.DATA )
 					"ByteBuffer"
 				else
-					returns.nativeType.mapping.javaMethodType.getSimpleName()
+					returns.nativeType.mapping.javaMethodType.simpleName
 
 				val builder = StringBuilder()
-				builder append "mem${bufferType}"
+				builder append "mem$bufferType"
 				if ( isNullTerminated )
 					builder append "NT${(returns.nativeType as CharSequenceType).charMapping.bytes}"
 				builder append "($RESULT"
@@ -1177,7 +1176,7 @@ class NativeClassFunction(
 	private fun PrintWriter.generateFunctionImpl() {
 		// Function signature
 
-		print("JNIEXPORT ${returnsJniFunctionType} JNICALL Java_${nativeClass.nativeFileNameJNI}_")
+		print("JNIEXPORT $returnsJniFunctionType JNICALL Java_${nativeClass.nativeFileNameJNI}_")
 		if ( !isSimpleFunction )
 			print('n')
 		print(name.asJNIName)
@@ -1215,7 +1214,7 @@ class NativeClassFunction(
 			if ( code.nativeAfterCall != null ) {
 				hasCodeAfterNativeCall = true
 				if ( !returns.isVoid )
-					println("\t${returnsJniFunctionType} $RESULT;")
+					println("\t$returnsJniFunctionType $RESULT;")
 			}
 
 			if ( code.nativeBeforeCall != null )
@@ -1233,7 +1232,7 @@ class NativeClassFunction(
 			print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
 		} else if ( !returns.isVoid ) {
 			print(if ( hasCodeAfterNativeCall ) "$RESULT =" else "return")
-			print(" (${returnsJniFunctionType})")
+			print(" ($returnsJniFunctionType)")
 			if ( returns.nativeType is PointerType )
 				print("(intptr_t)")
 			if ( returns.has(address) )

@@ -120,7 +120,7 @@ private fun paramMultilineAligment(alignment: Int): String {
 }
 
 private fun printParam(builder: StringBuilder, name: String, documentation: String, alignment: Int, multilineAligment: String) {
-	builder append "\n\t * @param ${name}"
+	builder append "\n\t * @param $name"
 
 	// Align
 	for ( i in 0..(alignment - name.length()) )

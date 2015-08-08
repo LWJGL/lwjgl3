@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import org.lwjgl.generator.*
 import java.util.regex.Pattern
 
-private val NativeClass.capName: String
+val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == "GL" )
 			"OpenGL${templateName.substring(2)}"
@@ -190,7 +190,7 @@ private val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CA
 
 // DSL Extensions
 
-private fun String.nativeClassGL(
+fun String.nativeClassGL(
 	templateName: String,
 	nativeSubPath: String = "",
 	prefix: String = "GL",
@@ -208,25 +208,25 @@ private fun String.nativeClassGL(
 	init = init
 )
 
-private fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
+fun String.nativeClassWGL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "wgl", "WGL", postfix = postfix, init = init)
 
-private fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
+fun String.nativeClassGLX(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClassGL(templateName, "glx", "GLX", "glX", postfix, init)
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
-private val NativeClass.registryLink: String get() {
+val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
 	if ( !matcher.matches() )
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("http://www.opengl.org/registry/specs/${matcher.group(1)}/${matcher.group(2)}.txt", templateName)
 }
 
-private fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
-private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_${name}"): String =
+fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
+fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
 	url("http://www.opengl.org/registry/specs/$prefix/$name.txt", extensionName)
 
-private val NativeClass.capLink: String get() = "$CAPABILITIES_CLASS##${capName}"
-private val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
-private val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
-private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
+val NativeClass.capLink: String get() = "$CAPABILITIES_CLASS##$capName"
+val NativeClass.core: String get() = "{@link ${this.className} OpenGL ${this.className[2]}.${this.className[3]}}"
+val NativeClass.glx: String get() = "{@link ${this.className} GLX ${this.className[3]}.${this.className[4]}}"
+val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."

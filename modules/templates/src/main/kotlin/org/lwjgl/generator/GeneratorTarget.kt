@@ -132,7 +132,7 @@ abstract class GeneratorTarget(
 			throw RuntimeException()
 		} catch (t: Throwable) {
 			return t.getStackTrace().asSequence()
-				.map { it.getFileName() }
+				.map { it.fileName }
 				.filterNotNull()
 				.filter {
 					it.endsWith(".kt")

@@ -8,12 +8,12 @@ import org.lwjgl.generator.*
 
 val EGL_PACKAGE = "org.lwjgl.egl"
 
-private fun GeneratorTargetNative.includeEGL() = nativeDirective(
+fun GeneratorTargetNative.includeEGL() = nativeDirective(
 	"""DISABLE_WARNINGS()
 #include "EGL/egl.h"
 ENABLE_WARNINGS()""")
 
-private fun GeneratorTargetNative.includeEGLEXT() = nativeDirective(
+fun GeneratorTargetNative.includeEGLEXT() = nativeDirective(
 	"""DISABLE_WARNINGS()
 #include "EGL/egl.h"
 #include "EGL/eglext.h"

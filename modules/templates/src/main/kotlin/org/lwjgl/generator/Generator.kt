@@ -54,7 +54,7 @@ fun main(args: Array<String>) {
 		throw IllegalArgumentException("The code Generator requires 2 paths as arguments: a) the template source path and b) the generation target path")
 
 	val validateDirectory = { name: String, path: String ->
-		if ( !File(path).isDirectory() )
+		if ( !File(path).isDirectory )
 			throw IllegalArgumentException("Invalid $name path: $path")
 	}
 
@@ -142,11 +142,11 @@ class Generator(
 
 	private fun methodFilter(method: Method, javaClass: Class<*>) =
 		// static
-		method.getModifiers() and Modifier.STATIC != 0 &&
+		method.modifiers and Modifier.STATIC != 0 &&
 		// returns NativeClass
-		method.getReturnType() === javaClass &&
+		method.returnType === javaClass &&
 		// has no arguments
-		method.getParameterTypes().size() == 0
+		method.parameterTypes.size() == 0
 
 	private fun runConfiguration(cp: String) {
 		val dot = cp.lastIndexOf('.')
@@ -154,7 +154,7 @@ class Generator(
 
 		try {
 			Class.forName(packageClass)
-				.getMethods()
+				.methods
 				.filter { methodFilter(it, Void.TYPE) }
 				.forEach { it.invoke(null) }
 		} catch (e: ClassNotFoundException) {
@@ -170,7 +170,7 @@ class Generator(
 			return null
 		}
 
-		val methods = packageClass.getMethods()
+		val methods = packageClass.methods
 
 		return methods
 			.asSequence()
@@ -287,18 +287,18 @@ private val packageLastModifiedMap: MutableMap<String, Long> = HashMap()
 
 private fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
-	if ( !pck.exists() || !pck.isDirectory() )
+	if ( !pck.exists() || !pck.isDirectory )
 		return 0
 
 	val classes = pck.listFiles {
-		(it.isDirectory() && recursive) || (it.isFile() && it.getName().endsWith(".kt"))
+		(it.isDirectory && recursive) || (it.isFile && it.getName().endsWith(".kt"))
 	}
 
 	if ( classes == null || classes.size() == 0 )
 		return 0
 
 	return classes.map {
-		if ( it.isDirectory() )
+		if ( it.isDirectory )
 			getDirectoryLastModified(it, true)
 		else
 			it.lastModified()
@@ -308,7 +308,7 @@ private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 }
 
 private fun ensurePath(path: File) {
-	val parent = path.getParentFile() ?: throw IllegalArgumentException("The given path has no parent directory.")
+	val parent = path.parentFile ?: throw IllegalArgumentException("The given path has no parent directory.")
 
 	if ( !parent.exists() ) {
 		ensurePath(parent)
@@ -318,7 +318,7 @@ private fun ensurePath(path: File) {
 }
 
 private fun readFile(file: File): ByteBuffer {
-	val channel = FileInputStream(file).getChannel()
+	val channel = FileInputStream(file).channel
 	val bytesTotal = channel.size().toInt()
 	val buffer = ByteBuffer.allocateDirect(bytesTotal)
 

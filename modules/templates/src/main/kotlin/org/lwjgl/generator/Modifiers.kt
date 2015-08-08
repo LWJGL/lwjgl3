@@ -31,18 +31,18 @@ abstract class TemplateElement {
 		modifiers.forEach {
 			val old = this.modifiers.put(it.javaClass, it)
 			if ( old != null )
-				throw IllegalArgumentException("Template modifier ${it.javaClass.getSimpleName()} specified more than once.")
+				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
 		}
 	}
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
-	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.getDeclaringClass())
+	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass)
 	fun <T : TemplateModifier> get(modClass: Class<T>) = @suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
-	fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.getDeclaringClass()] as T)
+	fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
-		val mod = modifiers[modKey.javaClass.getDeclaringClass()]
+		val mod = modifiers[modKey.javaClass.declaringClass]
 		return mod != null && (mod as ReferenceModifier).reference equals reference
 	}
 
@@ -73,7 +73,7 @@ abstract class FunctionModifier : TemplateModifier {
 		if ( element is NativeClassFunction )
 			validate(element)
 		else
-			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on functions.")
+			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on functions.")
 	}
 
 	protected open fun validate(func: NativeClassFunction) {
@@ -86,7 +86,7 @@ abstract class QualifiedTypeModifier : TemplateModifier {
 		if ( element is QualifiedType )
 			validate(element)
 		else
-			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on parameters or return values.")
+			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters or return values.")
 	}
 
 	protected open fun validate(qtype: QualifiedType) {
@@ -99,7 +99,7 @@ abstract class ParameterModifier : TemplateModifier {
 		if ( element is Parameter )
 			validate(element)
 		else
-			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on parameters.")
+			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on parameters.")
 	}
 
 	protected open fun validate(param: Parameter) {
@@ -112,7 +112,7 @@ abstract class ReturnValueModifier : TemplateModifier {
 		if ( element is ReturnValue )
 			validate(element)
 		else
-			throw IllegalArgumentException("The ${this.javaClass.getSimpleName()} modifier can only be applied on return values.")
+			throw IllegalArgumentException("The ${this.javaClass.simpleName} modifier can only be applied on return values.")
 	}
 
 	protected open fun validate(returns: ReturnValue) {

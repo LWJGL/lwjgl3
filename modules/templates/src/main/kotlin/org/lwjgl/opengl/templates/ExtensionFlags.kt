@@ -24,7 +24,7 @@ val OVR ="OVR"
 val SGI = "SGI"
 val SGIX = "SGIX"
 
-private val NativeClass.cap: String get() = "{@link #${capName} ${templateName}}"
+private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
 private val String.cap: String get() = "{@link #GL_$this $this}" // TODO: remove when all extensions have been added
 
 val ARB_arrays_of_arrays = EXT_FLAG.nativeClassGL("ARB_arrays_of_arrays", postfix = ARB) {

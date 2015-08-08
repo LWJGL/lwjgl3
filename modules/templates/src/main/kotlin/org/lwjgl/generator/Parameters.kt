@@ -23,11 +23,11 @@ abstract class QualifiedType(
 		get() = when {
 			nativeType is ObjectType                  -> nativeType.className
 			nativeType.mapping === PointerMapping.DATA -> "ByteBuffer"
-			else                                      -> nativeType.javaMethodType.getSimpleName()
+			else                                      -> nativeType.javaMethodType.simpleName
 		}
 
 	val nativeMethodType: String
-		get() = nativeType.nativeMethodType.getSimpleName()
+		get() = nativeType.nativeMethodType.simpleName
 
 	val jniFunctionType: String
 		get() = nativeType.jniFunctionType
@@ -121,12 +121,9 @@ class Parameter(
 		} else {
 			effectiveLinkMode = linkMode
 			builder append trimmed
-			when ( linkMode ) {
-				SINGLE,
-				BITFIELD -> {
-					if ( !trimmed.endsWith('.') )
-						builder append '.'
-				}
+			if ( linkMode == SINGLE || linkMode == BITFIELD ) {
+				if ( !trimmed.endsWith('.') )
+					builder append '.'
 			}
 		}
 

@@ -21,7 +21,7 @@ val NV = "NV"
 val OVR = "OVR"
 val TIZEN = "TIZEN"
 
-private val NativeClass.cap: String get() = "{@link #${capName} ${templateName}}"
+private val NativeClass.cap: String get() = "{@link #$capName $templateName}"
 
 val EXT_client_extensions = EXT_FLAG.nativeClassEGL("EXT_client_extensions", postfix = EXT) {
 	documentation =

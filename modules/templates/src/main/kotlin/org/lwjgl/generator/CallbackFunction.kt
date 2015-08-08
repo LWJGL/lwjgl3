@@ -44,7 +44,7 @@ class CallbackFunction(
 			is PointerType   -> "Ptr"
 			is PrimitiveType -> when ( mapping ) {
 				PrimitiveMapping.POINTER -> "Ptr"
-				else                 -> mapping.javaMethodType.getSimpleName().upperCaseFirst
+				else                 -> mapping.javaMethodType.simpleName.upperCaseFirst
 			}
 			else             -> if ( mapping === TypeMapping.VOID) "Void" else throw IllegalArgumentException("Unsupported callback return type: $this")
 		}
@@ -53,7 +53,7 @@ class CallbackFunction(
 		get() = if ( this is PointerType || mapping === PrimitiveMapping.POINTER)
 			"Address"
 		else
-			(mapping as PrimitiveMapping).javaMethodType.getSimpleName().upperCaseFirst
+			(mapping as PrimitiveMapping).javaMethodType.simpleName.upperCaseFirst
 
 	override fun PrintWriter.generateJava() {
 		print(HEADER)

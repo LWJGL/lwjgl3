@@ -143,11 +143,11 @@ private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CA
 
 // DSL Extensions
 
-private fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
+fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
 	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
 
-private val NativeClass.extensionLink: String
+val NativeClass.extensionLink: String
 	get() = url("http://www.khronos.org/registry/cl/extensions/${templateName.substring(0, templateName.indexOf('_'))}/cl_$templateName.txt", templateName)
 
-private val NativeClass.extensionName: String
+val NativeClass.extensionName: String
 	get() = "<strong>$templateName</strong>"

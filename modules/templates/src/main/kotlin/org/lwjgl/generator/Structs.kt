@@ -25,7 +25,7 @@ open class StructMember(
 		return if ( parentField.isEmpty() )
 			offsetField
 		else
-			"${parentField}_${offsetField}"
+			"${parentField}_$offsetField"
 	}
 
 	fun method(parentMember: String): String {
@@ -370,7 +370,7 @@ class Struct(
 					print("long $param")
 				}
 				else                                                                           -> {
-					val javaType = it.nativeType.javaMethodType.getSimpleName()
+					val javaType = it.nativeType.javaMethodType.simpleName
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
 							"int $param"
@@ -399,7 +399,7 @@ class Struct(
 						println("\t\t${method}Set($struct, $param);")
 					}
 					else                    -> {
-						println("\t\t${method}($struct, $param);")
+						println("\t\t$method($struct, $param);")
 					}
 				}
 			}
@@ -446,7 +446,7 @@ class Struct(
 					print("ByteBuffer $param")
 				}
 				else                                                                                    -> {
-					val javaType = it.nativeType.javaMethodType.getSimpleName()
+					val javaType = it.nativeType.javaMethodType.simpleName
 					print(
 						if ( javaType.equals("byte") || javaType.equals("short") )
 							"int $param"
@@ -467,7 +467,7 @@ class Struct(
 			} else {
 				val param = if ( parentMember.isEmpty() ) it.name else "${parentMember}_${it.name}"
 				val postfix = if ( (it is StructMemberArray && (mode === ConstructorMode.ALTER1 || it !is StructMemberCharArray)) || it.isNestedStruct ) "Set" else "";
-				println("\t\t${method}$postfix($struct, $param);")
+				println("\t\t$method$postfix($struct, $param);")
 			}
 		}
 	}
@@ -518,12 +518,12 @@ class Struct(
 
 				if ( it !is StructMemberArray ) {
 					var postfix = if ( it is StructMemberArray ) "Set" else "";
-					print("\tpublic static void ${method}$postfix(ByteBuffer $struct, ")
+					print("\tpublic static void $method$postfix(ByteBuffer $struct, ")
 
 					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long $param) { PointerBuffer.put($struct, $struct.position() + $field, $param); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.getSimpleName()
+						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						println(
@@ -558,14 +558,14 @@ class Struct(
 
 							if ( array is StructMemberCharArray ) {
 								var charMapping = array.nativeType.mapping as CharMapping
-								println("\tpublic static void ${method}(ByteBuffer $struct, CharSequence $param) { memEncode${charMapping.charset}($param, ${array.nullTerminated}, $struct, $field); }")
+								println("\tpublic static void $method(ByteBuffer $struct, CharSequence $param) { memEncode${charMapping.charset}($param, ${array.nullTerminated}, $struct, $field); }")
 							} else /*if ( bytesPerElement != 1 )*/ {
-								print("\tpublic static void ${method}(ByteBuffer $struct, int index, ${mapping.javaMethodType} $param) { ")
+								print("\tpublic static void $method(ByteBuffer $struct, int index, ${mapping.javaMethodType} $param) { ")
 								print(
 									when ( mapping ) {
 										PrimitiveMapping.POINTER -> "PointerBuffer.put($struct, $field + index * POINTER_SIZE, $param);"
 										PrimitiveMapping.BYTE -> "$struct.put($field + index, $param);"
-										else                  -> "$struct.put${mapping.javaMethodType.getSimpleName().upperCaseFirst}($field + index * $bytesPerElement, $param);"
+										else                  -> "$struct.put${mapping.javaMethodType.simpleName.upperCaseFirst}($field + index * $bytesPerElement, $param);"
 									}
 								)
 								println(" }")
@@ -598,13 +598,13 @@ class Struct(
 						}
 					}
 					it.nativeType is CharSequenceType                                                      -> {
-						print("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ")
+						print("\tpublic static void $method(ByteBuffer $struct, ByteBuffer $param) { ")
 						if ( it.nativeType.nullTerminated )
 							print("if ( LWJGLUtil.CHECKS && $param != null ) checkNT${it.nativeType.charMapping.bytes}($param); ")
-						println("${method}($struct, memAddressSafe($param)); }")
+						println("$method($struct, memAddressSafe($param)); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic static void ${method}(ByteBuffer $struct, ByteBuffer $param) { ${method}($struct, memAddressSafe($param)); }")
+						println("\tpublic static void $method(ByteBuffer $struct, ByteBuffer $param) { $method($struct, memAddressSafe($param)); }")
 					}
 				}
 			}
@@ -633,12 +633,12 @@ class Struct(
 				// Setter
 
 				if ( it !is StructMemberArray ) {
-					print("\tpublic void ${setMethod}(")
+					print("\tpublic void $setMethod(")
 
 					if (it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
 						println("long $param) { $method(struct, $param); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.getSimpleName()
+						val javaType = it.nativeType.javaMethodType.simpleName
 						println(
 							if ( javaType.equals("byte") || javaType.equals("short") )
 								"int $param) { $method(struct, $param); }"
@@ -651,22 +651,22 @@ class Struct(
 				// Alternative setters
 
 				if ( it.nativeType is CharSequenceType ) {
-					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}(struct, $param); }")
+					println("\tpublic void $setMethod(ByteBuffer $param) { $method(struct, $param); }")
 				} else if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-						println("\tpublic void ${setMethod}(PointerBuffer $param) { ${method}Set(struct, $param); }")
-						println("\tpublic void ${setMethod}(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+						println("\tpublic void $setMethod(PointerBuffer $param) { ${method}Set(struct, $param); }")
+						println("\tpublic void $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
 					} else {
-						println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}Set(struct, $param); }")
+						println("\tpublic void $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); }")
 						if ( it is StructMemberCharArray )
-							println("\tpublic void ${setMethod}(CharSequence $param) { ${method}(struct, $param); }")
+							println("\tpublic void $setMethod(CharSequence $param) { $method(struct, $param); }")
 						else if ( it.nativeType is PrimitiveType )
-							println("\tpublic void ${setMethod}(int index, ${it.nativeType.mapping.javaMethodType} $param) { ${method}(struct, index, $param); }")
+							println("\tpublic void $setMethod(int index, ${it.nativeType.mapping.javaMethodType} $param) { $method(struct, index, $param); }")
 						else if ( it.nativeType is StructType )
-							println("\tpublic void ${setMethod}(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+							println("\tpublic void $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
 					}
 				} else if ( it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-					println("\tpublic void ${setMethod}(ByteBuffer $param) { ${method}(struct, $param); }")
+					println("\tpublic void $setMethod(ByteBuffer $param) { $method(struct, $param); }")
 			}
 		}
 	}
@@ -696,18 +696,18 @@ class Struct(
 					print("\tpublic static ")
 
 					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
-						println("long ${method}(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
+						println("long $method(ByteBuffer $struct) { return PointerBuffer.get($struct, $struct.position() + $field); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.getSimpleName()
+						val javaType = it.nativeType.javaMethodType.simpleName
 						val bufferMethod = getBufferMethod(it, javaType)
 
 						val convertToInt = javaType.equals("byte") || javaType.equals("short");
 
 						print(
 							if ( convertToInt )
-								"int ${method}(ByteBuffer $struct) { return $struct.get$bufferMethod("
+								"int $method(ByteBuffer $struct) { return $struct.get$bufferMethod("
 							else
-								"$javaType ${method}(ByteBuffer $struct) { return $struct.get$bufferMethod("
+								"$javaType $method(ByteBuffer $struct) { return $struct.get$bufferMethod("
 						)
 
 						print("$struct.position() + $field)")
@@ -748,11 +748,11 @@ class Struct(
 								} else
 									println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${charMapping.charset}($struct, ${array.size}, $field); }")
 							} else {
-								val javaType = mapping.javaMethodType.getSimpleName()
+								val javaType = mapping.javaMethodType.simpleName
 								val bufferMethod = getBufferMethod(it, javaType)
 
-								println("\tpublic static $javaType ${method}(ByteBuffer $struct, int index) {")
-								println("\t\treturn $struct.get${bufferMethod}($field + index * $bytesPerElement);")
+								println("\tpublic static $javaType $method(ByteBuffer $struct, int index) {")
+								println("\t\treturn $struct.get$bufferMethod($field + index * $bytesPerElement);")
 								println("\t}")
 							}
 						} else {
@@ -784,18 +784,18 @@ class Struct(
 					}
 					it.nativeType is CharSequenceType                                                      -> {
 						if ( it.nativeType.nullTerminated ) {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBufferNT${it.nativeType.charMapping.bytes}(${method}($struct)); }")
-							println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${it.nativeType.charMapping.charset}(${method}($struct)); }")
+							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBufferNT${it.nativeType.charMapping.bytes}($method($struct)); }")
+							println("\tpublic static String ${method}String(ByteBuffer $struct) { return memDecode${it.nativeType.charMapping.charset}($method($struct)); }")
 						} else {
-							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM); }")
-							println("\tpublic static String ${method}String(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM)); }")
+							println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer($method($struct), $BUFFER_LEN_PARAM); }")
+							println("\tpublic static String ${method}String(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memDecode${it.nativeType.charMapping.charset}(memByteBuffer($method($struct), $BUFFER_LEN_PARAM)); }")
 						}
 					}
 					it.nativeType is StructType                                                            -> {
-						println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBuffer(${method}($struct), ${it.nativeType.definition.className}.SIZEOF); }")
+						println("\tpublic static ByteBuffer ${method}Buffer(ByteBuffer $struct) { return memByteBuffer($method($struct), ${it.nativeType.definition.className}.SIZEOF); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic static ByteBuffer ${method}(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer(${method}($struct), $BUFFER_LEN_PARAM); }")
+						println("\tpublic static ByteBuffer $method(ByteBuffer $struct, int $BUFFER_LEN_PARAM) { return memByteBuffer($method($struct), $BUFFER_LEN_PARAM); }")
 					}
 				}
 			}
@@ -817,7 +817,7 @@ class Struct(
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) ) {
 					val param = it.name.toParam(field)
-					println("\tpublic void ${getMethod}(ByteBuffer $param) { ${method}Get(struct, $param); }")
+					println("\tpublic void $getMethod(ByteBuffer $param) { ${method}Get(struct, $param); }")
 				}
 				generateGetters(it.nestedMembers, nestedStruct, method, field)
 			} else {
@@ -827,17 +827,17 @@ class Struct(
 					print("\tpublic ")
 
 					if ( it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
-						println("long ${getMethod}() { return $method(struct); }")
+						println("long $getMethod() { return $method(struct); }")
 					} else {
-						val javaType = it.nativeType.javaMethodType.getSimpleName()
+						val javaType = it.nativeType.javaMethodType.simpleName
 
 						val convertToInt = javaType.equals("byte") || javaType.equals("short");
 
 						println(
 							if ( convertToInt )
-								"int ${getMethod}() { return ${method}(struct); }"
+								"int $getMethod() { return $method(struct); }"
 							else
-								"$javaType ${getMethod}() { return ${method}(struct); }"
+								"$javaType $getMethod() { return $method(struct); }"
 						)
 					}
 				}
@@ -850,16 +850,16 @@ class Struct(
 						val param = it.name.toParam(field)
 
 						if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-							println("\tpublic void ${getMethod}(PointerBuffer $param) { ${method}Get(struct, $param); }")
-							println("\tpublic long ${getMethod}(int index) { return ${method}Get(struct, index); }")
+							println("\tpublic void $getMethod(PointerBuffer $param) { ${method}Get(struct, $param); }")
+							println("\tpublic long $getMethod(int index) { return ${method}Get(struct, index); }")
 						} else {
-							println("\tpublic void ${getMethod}(ByteBuffer $param) { ${method}Get(struct, $param); }")
+							println("\tpublic void $getMethod(ByteBuffer $param) { ${method}Get(struct, $param); }")
 							if ( array is StructMemberCharArray ) {
 								println("\tpublic String ${getMethod}String() { return ${method}String(struct); }")
 								if ( array.nullTerminated )
 									println("\tpublic String ${getMethod}String(int $BUFFER_LEN_PARAM) { return ${method}String(struct, $BUFFER_LEN_PARAM); }")
 							} else if ( array.nativeType is StructType ) {
-								println("\tpublic void ${getMethod}(ByteBuffer $param, int index) { ${method}Get(struct, $param, index); }")
+								println("\tpublic void $getMethod(ByteBuffer $param, int index) { ${method}Get(struct, $param, index); }")
 							}
 						}
 					}
@@ -876,20 +876,15 @@ class Struct(
 						println("\tpublic ByteBuffer ${getMethod}Buffer() { return ${method}Buffer(struct); }")
 					}
 					it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER -> {
-						println("\tpublic ByteBuffer ${getMethod}(int $BUFFER_LEN_PARAM) { return ${method}(struct, $BUFFER_LEN_PARAM); }")
+						println("\tpublic ByteBuffer $getMethod(int $BUFFER_LEN_PARAM) { return $method(struct, $BUFFER_LEN_PARAM); }")
 					}
 				}
 			}
 		}
 	}
 
-	private fun getBufferMethod(member: StructMember, javaType: String): String {
-		val bufferMethod = bufferMethodMap[javaType]
-		if ( bufferMethod == null )
-			throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
-
-		return bufferMethod
-	}
+	private fun getBufferMethod(member: StructMember, javaType: String) =
+			bufferMethodMap[javaType] ?: throw UnsupportedOperationException("Unsupported struct member java type: $className.${member.name} ($javaType)")
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
@@ -922,7 +917,7 @@ class Struct(
 				}
 				println(" ${m.nativeName};")
 			}
-			println("\t} ${structName};\n")
+			println("\t} $structName;\n")
 		}
 
 		if ( members.isNotEmpty() ) {

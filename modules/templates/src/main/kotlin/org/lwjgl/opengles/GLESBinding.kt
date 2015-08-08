@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import java.io.PrintWriter
 import java.util.regex.Pattern
 
-private val NativeClass.capName: String
+val NativeClass.capName: String
 	get() = if ( templateName.startsWith(prefixTemplate) ) templateName else "${prefixTemplate}_$templateName"
 
 private val CAPABILITIES_CLASS = "GLESCapabilities"
@@ -108,7 +108,7 @@ private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CA
 
 })
 
-private fun String.nativeClassGLES(
+fun String.nativeClassGLES(
 	templateName: String,
 	nativeSubPath: String = "",
 	prefix: String = "GL",
@@ -127,16 +127,16 @@ private fun String.nativeClassGLES(
 )
 
 private val REGISTRY_PATTERN = Pattern.compile("([A-Z]+)_(\\w+)")
-private val NativeClass.registryLink: String get() {
+val NativeClass.registryLink: String get() {
 	val matcher = REGISTRY_PATTERN.matcher(templateName)
 	if ( !matcher.matches() )
 		throw IllegalStateException("Non-standard extension name: $templateName")
 	return url("https://www.khronos.org/registry/gles/extensions/${matcher.group(1)}/$templateName.txt", templateName)
 }
 
-private fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
-private fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_${name}"): String =
+fun NativeClass.registryLink(prefix: String, name: String): String = registryLinkTo(prefix, name, templateName)
+fun registryLinkTo(prefix: String, name: String, extensionName: String = "${prefix}_$name"): String =
 	url("https://www.khronos.org/registry/gles/extensions/$prefix/$name.txt", extensionName)
 
-private val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[2]}.${this.className[3]}}"
-private val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
+val NativeClass.core: String get() = "{@link ${this.className} GLES ${this.className[2]}.${this.className[3]}}"
+val NativeClass.promoted: String get() = "Promoted to core in ${this.core}."
