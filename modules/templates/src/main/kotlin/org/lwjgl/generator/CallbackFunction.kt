@@ -34,7 +34,7 @@ class CallbackFunction(
 				PrimitiveMapping.POINTER -> "ffi_type_pointer"
 				PrimitiveMapping.FLOAT  -> "ffi_type_float"
 				PrimitiveMapping.DOUBLE -> "ffi_type_double"
-				else                    -> "ffi_type_${if ( (this as IntegerType).unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
+				else                    -> "ffi_type_${if ( this !is IntegerType || this.unsigned ) "u" else "s" }int${(mapping as PrimitiveMapping).bytes * 8}"
 			}
 			else             -> if ( mapping === TypeMapping.VOID) "ffi_type_void" else throw IllegalArgumentException("Unsupported callback native type: $this")
 		}
