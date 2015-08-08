@@ -351,22 +351,22 @@ class NativeClassFunction(
 
 			if ( it has AutoSize ) {
 				val autoSize = it[AutoSize]
-				if ( mode === NORMAL || it.nativeType is PointerType ) {
-					var length = it.name
-					if ( it.nativeType is PointerType ) {
+				if ( mode === NORMAL || it.paramType === ParameterType.INOUT ) {
+					var expression = it.name
+					if ( it.paramType === ParameterType.INOUT ) {
 						if ( mode !== NORMAL )
-							length += ".get($length.position())"
+							expression += ".get($expression.position())"
 						else if ( it.nativeType.mapping === PointerMapping.DATA_INT )
-							length += ".getInt($length.position())"
+							expression += ".getInt($expression.position())"
 						else
-							length = "PointerBuffer.get($length, $length.position())"
+							expression = "PointerBuffer.get($expression, $expression.position())"
 					}
 					if ( autoSize.factor != null )
-						length += " ${autoSize.factor!!.expressionInv()}"
+						expression += " ${autoSize.factor!!.expressionInv()}"
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""
-						checks add "${prefix}checkBuffer($it, ${bufferShift(length, it, "<<", null)});"
+						checks add "${prefix}checkBuffer($it, ${if ( mode === NORMAL ) bufferShift(expression, it, "<<", null) else expression});"
 					}
 				}
 
