@@ -49,49 +49,63 @@ public final class ALC {
 	}
 
 	public static void create(String libName) {
-		if ( functionProvider != null )
-			throw new IllegalStateException("OpenAL has already been created.");
-
 		final DynamicLinkLibrary OPENAL = LWJGLUtil.loadLibraryNative(libName);
 
-		functionProvider = new FunctionProviderLocal.Default() {
+		try {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
 
-			private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
+				private final long alcGetProcAddress = getFunctionAddress("alcGetProcAddress");
 
-			{
-				if ( alcGetProcAddress == NULL ) {
-					OPENAL.release();
-					throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
+				{
+					if ( alcGetProcAddress == NULL ) {
+						OPENAL.release();
+						throw new RuntimeException("A core ALC function is missing. Make sure that OpenAL has been loaded.");
+					}
 				}
-			}
 
-			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				long address = OPENAL.getFunctionAddress(functionName);
-				if ( address == NULL )
-					LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
+				@Override
+				public long getFunctionAddress(CharSequence functionName) {
+					long address = OPENAL.getFunctionAddress(functionName);
+					if ( address == NULL )
+						LWJGLUtil.log("Failed to locate address for ALC function " + functionName);
 
-				return address;
-			}
+					return address;
+				}
 
-			@Override
-			public long getFunctionAddress(long handle, CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+				@Override
+				public long getFunctionAddress(long handle, CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
 
-				long address = nalcGetProcAddress(handle, __buffer.address(), alcGetProcAddress);
-				if ( address == NULL )
-					LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
+					long address = nalcGetProcAddress(handle, __buffer.address(), alcGetProcAddress);
+					if ( address == NULL )
+						LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
 
-				return address;
-			}
+					return address;
+				}
 
-			@Override
-			protected void destroy() {
-				OPENAL.release();
-			}
-		};
+				@Override
+				protected void destroy() {
+					OPENAL.release();
+				}
+			};
+			create(functionProvider);
+		} catch (RuntimeException e) {
+			OPENAL.release();
+			throw e;
+		}
+	}
 
+	/**
+	 * Initializes ALC with the specified {@link FunctionProviderLocal}. This method can be used to implement custom ALC library loading.
+	 *
+	 * @param functionProvider the provider of ALC function addresses
+	 */
+	public static void create(FunctionProviderLocal functionProvider) {
+		if ( ALC.functionProvider != null )
+			throw new IllegalStateException("ALC has already been created.");
+
+		ALC.functionProvider = functionProvider;
 		AL.init();
 	}
 

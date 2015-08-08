@@ -90,34 +90,48 @@ public final class GLES {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		if ( functionProvider != null )
-			throw new IllegalStateException("OpenGL ES has already been created.");
-
 		final DynamicLinkLibrary GLES = LWJGLUtil.loadLibraryNative(libName);
 
-		functionProvider = new FunctionProvider.Default() {
-			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+		try {
+			FunctionProvider functionProvider = new FunctionProvider.Default() {
+				@Override
+				public long getFunctionAddress(CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
 
-				long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
-				if ( address == NULL ) {
-					address = GLES.getFunctionAddress(functionName);
-					if ( address == NULL )
-						LWJGLUtil.log("Failed to locate address for GLES function " + functionName);
+					long address = EGL.getFunctionProvider().getFunctionAddress(functionName);
+					if ( address == NULL ) {
+						address = GLES.getFunctionAddress(functionName);
+						if ( address == NULL )
+							LWJGLUtil.log("Failed to locate address for GLES function " + functionName);
+					}
+
+					return address;
 				}
 
-				return address;
-			}
-
-			@Override
-			protected void destroy() {
-				GLES.release();
-			}
-		};
+				@Override
+				protected void destroy() {
+					GLES.release();
+				}
+			};
+			create(functionProvider);
+		} catch (RuntimeException e) {
+			GLES.release();
+			throw e;
+		}
 	}
 
+	/**
+	 * Initializes OpenGL ES with the specified {@link FunctionProvider}. This method can be used to implement custom OpenGL ES library loading.
+	 *
+	 * @param functionProvider the provider of OpenGL ES function addresses
+	 */
+	public static void create(FunctionProvider functionProvider) {
+		if ( GLES.functionProvider != null )
+			throw new IllegalStateException("OpenGL ES has already been created.");
+
+		GLES.functionProvider = functionProvider;
+	}
 	/** Unloads the OpenGL ES native library. */
 	public static void destroy() {
 		if ( functionProvider == null )

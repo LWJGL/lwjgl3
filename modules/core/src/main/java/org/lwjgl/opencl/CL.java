@@ -37,115 +37,130 @@ public final class CL {
 	}
 
 	public static void create(final String libName) {
-		if ( functionProvider != null )
+		final DynamicLinkLibrary OPENCL;
+
+		{
+			DynamicLinkLibrary dll;
+			try {
+				dll = LWJGLUtil.loadLibraryNative(libName);
+			} catch (Throwable t) {
+				if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
+					dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
+				else
+					throw new RuntimeException(t);
+			}
+			OPENCL = dll;
+		}
+
+		try {
+			FunctionProviderLocal functionProvider = new FunctionProviderLocal.Default() {
+
+				private final long clGetExtensionFunctionAddress;
+				private final long clGetExtensionFunctionAddressForPlatform;
+
+				// NULL if multiple platforms are available.
+				private final long platform;
+
+				{
+					clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
+					clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
+					if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
+						OPENCL.release();
+						throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+					}
+
+					/*
+					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless when the
+					ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports OpenCL
+					1.2 or higher.
+					*/
+					long platform = NULL;
+					if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
+						long clGetPlatformIDs = OPENCL.getFunctionAddress("clGetPlatformIDs");
+						if ( clGetPlatformIDs == NULL )
+							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
+
+						APIBuffer __buffer = apiBuffer();
+						nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
+
+						int platforms = __buffer.intValue(0);
+
+						if ( platforms == 1 ) {
+							nclGetPlatformIDs(1, __buffer.address(), NULL, clGetPlatformIDs);
+							long cl_platform_id = __buffer.pointerValue(0);
+							if ( supportsOpenCL12(__buffer, cl_platform_id) )
+								platform = cl_platform_id;
+						} else if ( clGetExtensionFunctionAddress == NULL )
+							throw new IllegalStateException();
+					}
+					this.platform = platform;
+				}
+
+				private boolean supportsOpenCL12(APIBuffer __buffer, long platform) {
+					long clGetPlatformInfo = OPENCL.getFunctionAddress("clGetPlatformInfo");
+					if ( clGetPlatformInfo == NULL )
+						return false;
+
+					int errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address(), clGetPlatformInfo);
+					if ( errcode != CL_SUCCESS )
+						return false;
+
+					long bytes = __buffer.pointerValue(0);
+					__buffer.bufferParam((int)bytes);
+
+					errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL, clGetPlatformInfo);
+					if ( errcode != CL_SUCCESS )
+						return false;
+
+					APIVersion version = apiParseVersion(__buffer.stringValueASCII(0, (int)bytes - 1), "OpenCL");
+					return 1 < version.major || 2 <= version.minor;
+				}
+
+				@Override
+				public long getFunctionAddress(CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
+
+					long address = platform == NULL
+						? nclGetExtensionFunctionAddress(__buffer.address(), clGetExtensionFunctionAddress)
+						: nclGetExtensionFunctionAddressForPlatform(platform, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
+
+					if ( address == NULL )
+						address = OPENCL.getFunctionAddress(functionName);
+
+					return address;
+				}
+
+				@Override
+				public long getFunctionAddress(long handle, CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
+
+					return nclGetExtensionFunctionAddressForPlatform(handle, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
+				}
+
+				@Override
+				protected void destroy() {
+					OPENCL.release();
+				}
+			};
+			create(functionProvider);
+		} catch (RuntimeException e) {
+			OPENCL.release();
+			throw e;
+		}
+	}
+
+	/**
+	 * Initializes OpenCL with the specified {@link FunctionProviderLocal}. This method can be used to implement custom OpenCL library loading.
+	 *
+	 * @param functionProvider the provider of OpenCL function addresses
+	 */
+	public static void create(FunctionProviderLocal functionProvider) {
+		if ( CL.functionProvider != null )
 			throw new IllegalStateException("OpenCL has already been created.");
 
-		functionProvider = new FunctionProviderLocal.Default() {
-
-			private final DynamicLinkLibrary OPENCL;
-
-			{
-				DynamicLinkLibrary dll;
-				try {
-					dll = LWJGLUtil.loadLibraryNative(libName);
-				} catch (Throwable t) {
-					if ( LWJGLUtil.getPlatform() == Platform.MACOSX )
-						dll = apiCreateLibrary("/System/Library/Frameworks/OpenCL.framework");
-					else
-						throw new RuntimeException(t);
-				}
-				OPENCL = dll;
-			}
-
-			private final long clGetExtensionFunctionAddress;
-			private final long clGetExtensionFunctionAddressForPlatform;
-
-			// NULL if multiple platforms are available.
-			private final long platform;
-
-			{
-				clGetExtensionFunctionAddress = OPENCL.getFunctionAddress("clGetExtensionFunctionAddress");
-				clGetExtensionFunctionAddressForPlatform = OPENCL.getFunctionAddress("clGetExtensionFunctionAddressForPlatform");
-				if ( clGetExtensionFunctionAddress == NULL && clGetExtensionFunctionAddressForPlatform == NULL ) {
-					OPENCL.release();
-					throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
-				}
-
-				/*
-				We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless when the
-				ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports OpenCL
-				1.2 or higher.
-				*/
-				long platform = NULL;
-				if ( clGetExtensionFunctionAddressForPlatform != NULL ) {
-					long clGetPlatformIDs = OPENCL.getFunctionAddress("clGetPlatformIDs");
-					if ( clGetPlatformIDs == NULL )
-						throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
-
-					APIBuffer __buffer = apiBuffer();
-					nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
-
-					int platforms = __buffer.intValue(0);
-
-					if ( platforms == 1 ) {
-						nclGetPlatformIDs(1, __buffer.address(), NULL, clGetPlatformIDs);
-						long cl_platform_id = __buffer.pointerValue(0);
-						if ( supportsOpenCL12(__buffer, cl_platform_id) )
-							platform = cl_platform_id;
-					} else if ( clGetExtensionFunctionAddress == NULL )
-						throw new IllegalStateException();
-				}
-				this.platform = platform;
-			}
-
-			private boolean supportsOpenCL12(APIBuffer __buffer, long platform) {
-				long clGetPlatformInfo = OPENCL.getFunctionAddress("clGetPlatformInfo");
-				if ( clGetPlatformInfo == NULL )
-					return false;
-
-				int errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address(), clGetPlatformInfo);
-				if ( errcode != CL_SUCCESS )
-					return false;
-
-				long bytes = __buffer.pointerValue(0);
-				__buffer.bufferParam((int)bytes);
-
-				errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL, clGetPlatformInfo);
-				if ( errcode != CL_SUCCESS )
-					return false;
-
-				APIVersion version = apiParseVersion(__buffer.stringValueASCII(0, (int)bytes - 1), "OpenCL");
-				return 1 < version.major || 2 <= version.minor;
-			}
-
-			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
-
-				long address = platform == NULL
-					? nclGetExtensionFunctionAddress(__buffer.address(), clGetExtensionFunctionAddress)
-					: nclGetExtensionFunctionAddressForPlatform(platform, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
-
-				if ( address == NULL )
-					address = OPENCL.getFunctionAddress(functionName);
-
-				return address;
-			}
-
-			@Override
-			public long getFunctionAddress(long handle, CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
-
-				return nclGetExtensionFunctionAddressForPlatform(handle, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
-			}
-
-			@Override
-			protected void destroy() {
-				OPENCL.release();
-			}
-		};
+		CL.functionProvider = functionProvider;
 
 		icd = new CLCapabilities(functionProvider);
 		if ( icd.__CL10 == null )

@@ -75,31 +75,46 @@ public final class EGL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		if ( functionProvider != null )
-			throw new IllegalStateException("EGL has already been created.");
-
 		final DynamicLinkLibrary EGL = LWJGLUtil.loadLibraryNative(libName);
 
-		functionProvider = new FunctionProvider.Default() {
-			private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
+		try {
+			FunctionProvider functionProvider = new FunctionProvider.Default() {
+				private final long eglGetProcAddress = EGL.getFunctionAddress("eglGetProcAddress");
 
-			@Override
-			public long getFunctionAddress(CharSequence functionName) {
-				APIBuffer __buffer = apiBuffer();
-				__buffer.stringParamASCII(functionName, true);
+				@Override
+				public long getFunctionAddress(CharSequence functionName) {
+					APIBuffer __buffer = apiBuffer();
+					__buffer.stringParamASCII(functionName, true);
 
-				long address = neglGetProcAddress(__buffer.address(), eglGetProcAddress);
-				if ( address == NULL )
-					address = EGL.getFunctionAddress(functionName);
+					long address = neglGetProcAddress(__buffer.address(), eglGetProcAddress);
+					if ( address == NULL )
+						address = EGL.getFunctionAddress(functionName);
 
-				return address;
-			}
+					return address;
+				}
 
-			@Override
-			protected void destroy() {
-				EGL.release();
-			}
-		};
+				@Override
+				protected void destroy() {
+					EGL.release();
+				}
+			};
+			create(functionProvider);
+		} catch (RuntimeException e) {
+			EGL.release();
+			throw e;
+		}
+	}
+
+	/**
+	 * Initializes EGL with the specified {@link FunctionProvider}. This method can be used to implement custom EGL library loading.
+	 *
+	 * @param functionProvider the provider of EGL function addresses
+	 */
+	public static void create(FunctionProvider functionProvider) {
+		if ( EGL.functionProvider != null )
+			throw new IllegalStateException("EGL has already been created.");
+
+		EGL.functionProvider = functionProvider;
 
 		caps = createClientCapabilities();
 	}

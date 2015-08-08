@@ -101,9 +101,6 @@ public final class GL {
 	 * @param libName the native library name
 	 */
 	public static void create(String libName) {
-		if ( functionProvider != null )
-			throw new IllegalStateException("OpenGL has already been created.");
-
 		final DynamicLinkLibrary OPENGL = LWJGLUtil.loadLibraryNative(libName);
 
 		abstract class FunctionProviderGL extends FunctionProvider.Default {
@@ -130,43 +127,62 @@ public final class GL {
 			}
 		}
 
-		switch ( LWJGLUtil.getPlatform() ) {
-			case WINDOWS:
-				functionProvider = new FunctionProviderGL() {
-					@Override
-					long getExtensionAddress(long name) {
-						return nwglGetProcAddress(name);
-					}
-				};
-				break;
-			case LINUX:
-				functionProvider = new FunctionProviderGL() {
-					final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
-					final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+		FunctionProvider functionProvider;
+		try {
+			switch ( LWJGLUtil.getPlatform() ) {
+				case WINDOWS:
+					functionProvider = new FunctionProviderGL() {
+						@Override
+						long getExtensionAddress(long name) {
+							return nwglGetProcAddress(name);
+						}
+					};
+					break;
+				case LINUX:
+					functionProvider = new FunctionProviderGL() {
+						final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
+						final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
 
-					@Override
-					long getExtensionAddress(long name) {
-						if ( glXGetProcAddress != NULL )
-							return nglXGetProcAddress(name, glXGetProcAddress);
+						@Override
+						long getExtensionAddress(long name) {
+							if ( glXGetProcAddress != NULL )
+								return nglXGetProcAddress(name, glXGetProcAddress);
 
-						if ( glXGetProcAddressARB != NULL )
-							return nglXGetProcAddressARB(name, glXGetProcAddressARB);
+							if ( glXGetProcAddressARB != NULL )
+								return nglXGetProcAddressARB(name, glXGetProcAddressARB);
 
-						return NULL;
-					}
-				};
-				break;
-			case MACOSX:
-				functionProvider = new FunctionProviderGL() {
-					@Override
-					long getExtensionAddress(long name) {
-						return NULL;
-					}
-				};
-				break;
-			default:
-				throw new IllegalStateException();
+							return NULL;
+						}
+					};
+					break;
+				case MACOSX:
+					functionProvider = new FunctionProviderGL() {
+						@Override
+						long getExtensionAddress(long name) {
+							return NULL;
+						}
+					};
+					break;
+				default:
+					throw new IllegalStateException();
+			}
+			create(functionProvider);
+		} catch (RuntimeException e) {
+			OPENGL.release();
+			throw e;
 		}
+	}
+
+	/**
+	 * Initializes OpenGL with the specified {@link FunctionProvider}. This method can be used to implement custom OpenGL library loading.
+	 *
+	 * @param functionProvider the provider of OpenGL function addresses
+	 */
+	public static void create(FunctionProvider functionProvider) {
+		if ( GL.functionProvider != null )
+			throw new IllegalStateException("OpenGL has already been created.");
+
+		GL.functionProvider = functionProvider;
 	}
 
 	/** Unloads the OpenGL native library. */
