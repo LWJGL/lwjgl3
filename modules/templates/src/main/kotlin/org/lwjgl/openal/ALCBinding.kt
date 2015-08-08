@@ -18,7 +18,9 @@ private fun NativeClass.capName(core: String) =
 		"${prefixTemplate}_$templateName"
 	}
 
-private val BindingALC = Generator.register(object : APIBinding(OPENAL_PACKAGE, "ALCCapabilities") {
+private val ALC_CAP_CLASS = "ALCCapabilities"
+
+private val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_CLASS) {
 
 	override val isLocal = true
 
@@ -68,7 +70,7 @@ private val BindingALC = Generator.register(object : APIBinding(OPENAL_PACKAGE, 
 
 	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of the OpenAL Context API. */")
-		println("public final class ALCCapabilities {\n")
+		println("public final class $ALC_CAP_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -97,7 +99,7 @@ private val BindingALC = Generator.register(object : APIBinding(OPENAL_PACKAGE, 
 			println(if ( i == classes.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCCapabilities(FunctionProviderLocal provider, long device, Set<String> ext) {")
+		println("\n\t$ALC_CAP_CLASS(FunctionProviderLocal provider, long device, Set<String> ext) {")
 		for ( extension in classes ) {
 			val capName = extension.capName("ALC")
 			if ( extension.hasNativeFunctions && extension.prefix == "ALC" ) {
@@ -114,4 +116,4 @@ private val BindingALC = Generator.register(object : APIBinding(OPENAL_PACKAGE, 
 // DSL Extensions
 
 private fun String.nativeClassALC(templateName: String, prefix: String = "ALC", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, binding = BindingALC, init = init)
+	nativeClass(OPENAL_PACKAGE, templateName, prefix = prefix, prefixTemplate = "ALC", postfix = postfix, binding = ALCBinding, init = init)

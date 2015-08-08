@@ -13,7 +13,7 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "EGLCapabilities"
 
-private val BindingEGL = Generator.register(object : APIBinding(EGL_PACKAGE, CAPABILITIES_CLASS) {
+private val EGLBinding = Generator.register(object : APIBinding(EGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -145,7 +145,7 @@ private fun String.nativeClassEGL(
 	prefix = prefix,
 	prefixMethod = prefixMethod,
 	postfix = postfix,
-	binding = BindingEGL,
+	binding = EGLBinding,
 	init = init
 )
 

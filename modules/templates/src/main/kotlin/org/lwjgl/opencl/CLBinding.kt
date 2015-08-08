@@ -17,7 +17,9 @@ private val NativeClass.capName: String
 		"${prefixTemplate}_$templateName"
 	}
 
-private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PACKAGE, "CLCapabilities") {
+private val CAPABILITIES_CLASS = "CLCapabilities"
+
+private val CLBinding = Generator.register(object: APIBinding(OPENCL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -48,7 +50,7 @@ private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PA
  *
  * <p>The instance returned by {@link CLDevice#createCapabilities} exposes only the functionality available on that particular device.</p>
  */""")
-		println("public class CLCapabilities {\n")
+		println("public class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
 			// Core functionality first, extensions after
@@ -87,7 +89,7 @@ private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PA
 
 		// ICD constructor
 		println("""
-	CLCapabilities(FunctionProvider provider) {
+	$CAPABILITIES_CLASS(FunctionProvider provider) {
 		this.majorVersion = 0;
 		this.minorVersion = 0;
 """)
@@ -102,7 +104,7 @@ private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PA
 
 		// Platform/Device constructor
 		println("""
-	CLCapabilities(int majorVersion, int minorVersion, Set<String> ext, CLCapabilities caps) {
+	$CAPABILITIES_CLASS(int majorVersion, int minorVersion, Set<String> ext, $CAPABILITIES_CLASS caps) {
 		this.majorVersion = majorVersion;
 		this.minorVersion = minorVersion;
 """)
@@ -142,7 +144,7 @@ private val FunctionProviderCL = Generator.register(object: APIBinding(OPENCL_PA
 // DSL Extensions
 
 private fun String.nativeClassCL(templateName: String, postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = FunctionProviderCL, init = init)
+	nativeClass("org.lwjgl.opencl", templateName, prefix = "CL", postfix = postfix, prefixTemplate = "cl", binding = CLBinding, init = init)
 
 private val NativeClass.extensionLink: String
 	get() = url("http://www.khronos.org/registry/cl/extensions/${templateName.substring(0, templateName.indexOf('_'))}/cl_$templateName.txt", templateName)

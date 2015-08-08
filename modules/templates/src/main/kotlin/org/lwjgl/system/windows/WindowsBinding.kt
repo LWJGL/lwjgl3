@@ -8,7 +8,7 @@ import java.io.PrintWriter
 import org.lwjgl.generator.*
 
 /** Dummy binding for dynamically loaded Windows functions. Nothing to do here, we use Functions instances directly. */
-private val BindingWin = object : APIBinding(WINDOWS_PACKAGE, "*DUMMY*") {
+private val WindowsBinding = object : APIBinding(WINDOWS_PACKAGE, "*DUMMY*") {
 
 	override val hasCurrentCapabilities = false
 
@@ -22,7 +22,7 @@ private val BindingWin = object : APIBinding(WINDOWS_PACKAGE, "*DUMMY*") {
 // DSL Extensions
 
 private fun String.nativeClassWin(init: (NativeClass.() -> Unit)? = null) =
-	nativeClass(WINDOWS_PACKAGE, this, binding = BindingWin, init = init)
+	nativeClass(WINDOWS_PACKAGE, this, binding = WindowsBinding, init = init)
 
 private val DLL_WARNING =
 	"""Features must be detected on a function-by-function basis. A function pointer will have a $NULL (0L) value when the corresponding

@@ -8,7 +8,9 @@ import java.io.PrintWriter
 import java.util.Comparator
 import org.lwjgl.generator.*
 
-private val BindingAL = Generator.register(object : APIBinding(OPENAL_PACKAGE, "ALCapabilities") {
+private val CAPABILITIES_CLASS = "ALCapabilities"
+
+private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, CAPABILITIES_CLASS) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
@@ -42,7 +44,7 @@ private val BindingAL = Generator.register(object : APIBinding(OPENAL_PACKAGE, "
 
 	override fun PrintWriter.generateContent() {
 		println("/** Defines the capabilities of an OpenAL context. */")
-		println("public final class ALCapabilities {\n")
+		println("public final class $CAPABILITIES_CLASS {\n")
 
 		val classes = super.getClasses { o1, o2 ->
 			val isAL1 = o1.templateName.startsWith("AL")
@@ -71,7 +73,7 @@ private val BindingAL = Generator.register(object : APIBinding(OPENAL_PACKAGE, "
 			println(if ( i == capClasses.lastIndex ) ";" else ",")
 		}
 
-		println("\n\tALCapabilities(FunctionProvider provider, Set<String> ext) {")
+		println("\n\t$CAPABILITIES_CLASS(FunctionProvider provider, Set<String> ext) {")
 		for ( extension in classes ) {
 			val hasCap = extension.prefixTemplate == "AL"
 			val capName = extension.capName(extension.prefixTemplate)
@@ -101,6 +103,6 @@ private val BindingAL = Generator.register(object : APIBinding(OPENAL_PACKAGE, "
 // DSL Extensions
 
 private fun String.nativeClassAL(templateName: String, prefixTemplate: String = "AL", postfix: String = "", init: (NativeClass.() -> Unit)? = null) =
-	nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = BindingAL, init = init)
+	nativeClass(OPENAL_PACKAGE, templateName, prefix = "AL", prefixTemplate = prefixTemplate, postfix = postfix, binding = ALBinding, init = init)
 
 private val NativeClass.specLinkOpenALSoft: String get() = url("http://kcat.strangesoft.net/openal-extensions/$templateName.txt", templateName)

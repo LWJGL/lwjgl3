@@ -13,7 +13,7 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLESCapabilities"
 
-private val BindingGLES = Generator.register(object: APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
+private val GLESBinding = Generator.register(object: APIBinding(GLES_PACKAGE, CAPABILITIES_CLASS) {
 
 	private val BufferOffsetTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 		override fun transformDeclaration(param: Parameter, original: String) = "long ${param.name}Offset"
@@ -122,7 +122,7 @@ private fun String.nativeClassGLES(
 	prefix = prefix,
 	prefixMethod = prefixMethod,
 	postfix = postfix,
-	binding = BindingGLES,
+	binding = GLESBinding,
 	init = init
 )
 

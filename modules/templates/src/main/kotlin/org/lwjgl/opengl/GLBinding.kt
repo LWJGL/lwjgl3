@@ -20,7 +20,7 @@ private val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLCapabilities"
 
-private val BindingGL = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
+private val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
@@ -204,7 +204,7 @@ private fun String.nativeClassGL(
 	prefix = prefix,
 	prefixMethod = prefixMethod,
 	postfix = postfix,
-	binding = BindingGL,
+	binding = GLBinding,
 	init = init
 )
 
