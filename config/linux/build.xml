@@ -208,8 +208,8 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-libraries"/>
 		</apply>
 
-		<apply dir="${lib}" executable="strip" failonerror="true" taskname="Symbol strip">
-			<fileset file="${LWJGL_LIBRARY}"/>
+		<apply executable="strip" failonerror="true" taskname="Symbol strip">
+			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
 		</apply>
 
 		<apply executable="${org.lwjgl.upx}/upx" failonerror="true" taskname="UPX" if:set="org.lwjgl.upx">
