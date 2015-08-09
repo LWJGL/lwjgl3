@@ -27,7 +27,10 @@ public class SSETest {
 			float f = Float.MIN_VALUE;
 			assertEquals(_MM_GET_EXCEPTION_STATE() & _MM_EXCEPT_DENORM, 0);
 
-			f *= nextAfter(1.0f, 0.0);
+			for ( int i = 0; i < 100000; i++ ) {
+				f *= nextAfter(1.0f, 0.0);
+			}
+
 			assertEquals(_MM_GET_EXCEPTION_STATE() & _MM_EXCEPT_DENORM, _MM_EXCEPT_DENORM);
 			assertEquals(f, Float.MIN_VALUE);
 
@@ -38,7 +41,10 @@ public class SSETest {
 			_MM_SET_FLUSH_ZERO_MODE(_MM_FLUSH_ZERO_ON);
 			_MM_SET_DENORMALS_ZERO_MODE(_MM_DENORMALS_ZERO_ON);
 
-			f *= nextAfter(1.0f, 0.0);
+			for ( int i = 0; i < 100000; i++ ) {
+				f *= nextAfter(1.0f, 0.0);
+			}
+
 			assertEquals(_MM_GET_EXCEPTION_STATE() & _MM_EXCEPT_DENORM, 0);
 			assertEquals(f, 0.0f);
 		} finally {
