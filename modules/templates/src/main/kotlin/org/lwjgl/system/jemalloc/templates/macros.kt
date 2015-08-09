@@ -33,7 +33,7 @@ ENABLE_WARNINGS()""")
 		valid range.
 		""",
 
-		unsigned_int.IN("la", "the aligment shift")
+		unsigned_int.IN("la", "the alignment shift")
 	)
 
 	unsigned_int(
@@ -43,7 +43,7 @@ ENABLE_WARNINGS()""")
 		that {@code a} is a power of 2.
 		""",
 
-		unsigned_int.IN("a", "the aligment")
+		size_t.IN("a", "the alignment")
 	)
 
 	macro _ unsigned_int(
