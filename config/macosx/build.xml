@@ -170,5 +170,11 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>
 		</apply>
+
+		<apply dir="${lib}" executable="strip" failonerror="true" taskname="Symbol strip">
+			<arg value="-u"/>
+			<arg value="-r"/>
+			<fileset file="${LWJGL_LIBRARY}"/>
+		</apply>
 	</target>
 </project>
