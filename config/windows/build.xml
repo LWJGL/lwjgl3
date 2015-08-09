@@ -201,7 +201,7 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Compress -->
 		<apply executable="${org.lwjgl.upx}/upx" failonerror="true" taskname="UPX" if:set="org.lwjgl.upx">
-			<arg value="-9"/>
+			<arg value="--best"/>
 			<filelist dir="${lib}" files="${LWJGL_LIBRARY}"/>
 		</apply>
 	</target>
