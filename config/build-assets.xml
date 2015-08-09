@@ -18,7 +18,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 	<target name="update-assets" description="Updates the demo assets">
 		<update-demo-asset path="footsteps.wav"/>
 		<update-demo-asset path="phero.ogg"/>
-		<update-quiet name="Asset FiraSans" url="https://github.com/google/fonts/raw/master/ofl/firasans/FiraSans-Regular.ttf" dest="${test.resources}/demo/FiraSans.ttf"/>
+		<get-quiet name="Asset FiraSans" url="https://github.com/google/fonts/raw/master/ofl/firasans/FiraSans-Regular.ttf" dest="${test.resources}/demo/FiraSans.ttf"/>
 		<!-- Add more assets here -->
 
 		<touch file="${test.resources}/demo/touch.txt"/>
@@ -28,7 +28,7 @@ This script is included in /build.xml and depends on /build-definitions.xml
 		<attribute name="path"/>
 
 		<sequential>
-			<update-quiet name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${test.resources}/demo/@{path}"/>
+			<get-quiet name="Asset @{path}" url="http://s3.amazonaws.com/build.lwjgl.org/res/demo/@{path}" dest="${test.resources}/demo/@{path}"/>
 		</sequential>
 	</macrodef>
 </project>

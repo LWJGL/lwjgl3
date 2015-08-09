@@ -29,7 +29,7 @@ License terms: http://lwjgl.org/license.php
 				<arg line="-c -std=c11"/>
 				<arg line="-m64" if:true="${build.arch.x64}"/>
 				<arg line="-m32 -mfpmath=sse -msse -msse2" unless:true="${build.arch.x64}"/>
-				<arg line="-O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX"/>
+				<arg line="-O3 -fPIC ${warnings} -pthread -D_XOPEN_SOURCE=700 -DLWJGL_LINUX -DLWJGL_${build.arch}"/>
 
 				<arg value="-I${java.home}/../include"/>
 				<arg value="-I${java.home}/../include/linux"/>
@@ -48,11 +48,13 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<compile>
 			<arguments>
+				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/simd/*.c"/>
@@ -150,18 +152,22 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${binding.glfw}"/>
+
+		<update-dependency name="jemalloc (x86)" artifact="x86/libjemalloc.so" dest="${lib}/libjemalloc32.so"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-update-dependencies-x64">
 		<mkdir dir="${lib}/linux"/>
 		<mkdir dir="${lib}/linux/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}/libopenal.so" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
+
+		<update-dependency name="jemalloc (x64)" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-update-dependencies" unless="${build.offline}">

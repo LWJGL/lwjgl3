@@ -211,7 +211,7 @@ public final class Checks {
 		}
 	}
 
-	/** @see #checkBuffer(java.nio.Buffer, int) */
+	/** @see #checkBuffer(Buffer, int) */
 	public static void checkBuffer(Buffer buf, long size) {
 		checkBuffer(buf, (int)size);
 	}
@@ -228,6 +228,11 @@ public final class Checks {
 		if ( buf.remaining() < size ) {
 			throwBufferSizeException(buf, size);
 		}
+	}
+
+	/** @see #checkBuffer(PointerBuffer, int) */
+	public static void checkBuffer(PointerBuffer buf, long size) {
+		checkBuffer(buf, (int)size);
 	}
 
 	public static void checkArray(Object[] array, int size) {

@@ -54,7 +54,7 @@ License terms: http://lwjgl.org/license.php
 		<element name="arguments"/>
 		<sequential>
 			<apply dir="${bin.native}" executable="${compiler}" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler">
-				<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
+				<arg line="-c -std=c99 -O3 -fPIC ${warnings} -DLWJGL_MACOSX -DLWJGL_${build.arch} -isysroot ${sdkroot} -mmacosx-version-min=${macosx-version-min}"/>
 
 				<arg value="-I${sdkroot}/System/Library/Frameworks/JavaVM.framework/Versions/A/Headers"/>
 
@@ -74,11 +74,13 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<compile>
 			<arguments>
+				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/simd/*.c"/>
@@ -151,9 +153,11 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/macosx"/>
 		<mkdir dir="${lib}/macosx/x64"/>
 
-		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}/libopenal.dylib" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi" artifact="x64/libffi.a"/>
+		<update-dependency name="glfw3" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
+
+		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}"/>
+		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-link" depends="-update-dependencies">

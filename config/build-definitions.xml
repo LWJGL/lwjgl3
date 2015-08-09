@@ -239,24 +239,14 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		</sequential>
 	</macrodef>
 
-	<macrodef name="update">
-		<attribute name="name"/>
-		<attribute name="url"/>
-		<attribute name="dest"/>
-
-		<sequential>
-			<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
-		</sequential>
-	</macrodef>
-
-	<macrodef name="update-quiet">
+	<macrodef name="get-quiet">
 		<attribute name="name"/>
 		<attribute name="url"/>
 		<attribute name="dest"/>
 
 		<sequential>
 			<quiet>
-				<update name="@{name}" url="@{url}" dest="@{dest}"/>
+				<get taskname="@{name}" src="@{url}" dest="@{dest}" verbose="false" usetimestamp="true"/>
 			</quiet>
 		</sequential>
 	</macrodef>
@@ -269,7 +259,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="dest"/>
 
 		<sequential>
-			<update-quiet name="@{name}" url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
+			<get-quiet name="@{name}" url="http://repo1.maven.org/maven2/@{group}/@{artifact}/@{version}/@{artifact}-@{version}.jar" dest="@{dest}/@{artifact}.jar"/>
 		</sequential>
 	</macrodef>
 
@@ -279,7 +269,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		<attribute name="dest" default="${lib}/${platform}/@{artifact}"/>
 
 		<sequential>
-			<update-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
+			<get-quiet name="@{name}" url="http://s3.amazonaws.com/build.lwjgl.org/${build.type}/${platform}/@{artifact}" dest="@{dest}"/>
 		</sequential>
 	</macrodef>
 </project>

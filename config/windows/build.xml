@@ -24,7 +24,7 @@ License terms: http://lwjgl.org/license.php
 		<sequential>
 			<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
 				<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
-				<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS"/>
+				<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
 				<arg value="/Fo${bin.native}\"/>
 
 				<arg value="/I${java.home}\..\include"/>
@@ -44,11 +44,14 @@ License terms: http://lwjgl.org/license.php
 		<!-- COMPILE -->
 		<cl>
 			<arguments>
+				<arg value="/I${src.include}\system\jemalloc"/>
+				<arg value="/I${src.include}\system\jemalloc\msvc_compat"/>
 				<arg value="/I${src.include}\system\libffi"/>
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/*.c"/>
+					<include name="${src.generated.native}/system/jemalloc/*.c"/>
 					<include name="${src.generated.native}/system/libc/*.c"/>
 					<include name="${src.generated.native}/system/libffi/*.c"/>
 					<include name="${src.generated.native}/system/simd/*.c"/>
@@ -155,18 +158,22 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x86"/>
 
-		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}/OpenAL32.dll" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.lib"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/glfw3.lib" if:true="${binding.glfw}"/>
+
+		<update-dependency name="jemalloc (x86)" artifact="x86/jemalloc.dll" dest="${lib}/jemalloc32.dll"/>
+		<update-dependency name="OpenAL32 (x86)" artifact="x86/OpenAL32.dll" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-update-dependencies-x64">
 		<mkdir dir="${lib}/windows"/>
 		<mkdir dir="${lib}/windows/x64"/>
 
-		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${binding.openal}"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${binding.glfw}"/>
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.lib"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/glfw3.lib" if:true="${binding.glfw}"/>
+
+		<update-dependency name="jemalloc (x64)" artifact="x64/jemalloc.dll" dest="${lib}"/>
+		<update-dependency name="OpenAL32 (x64)" artifact="x64/OpenAL32.dll" dest="${lib}/OpenAL.dll" if:true="${binding.openal}"/>
 	</target>
 
 	<target name="-update-dependencies" unless="${build.offline}">

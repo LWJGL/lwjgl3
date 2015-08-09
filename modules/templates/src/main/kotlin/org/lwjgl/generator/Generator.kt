@@ -83,7 +83,8 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.opengles", Binding.OPENGLES)
 		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.ovr", Binding.OVR)
-		
+
+		generate("org.lwjgl.system.jemalloc")
 		generate("org.lwjgl.system.libc")
 		generate("org.lwjgl.system.libffi")
 		generate("org.lwjgl.system.simd")

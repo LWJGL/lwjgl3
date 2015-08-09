@@ -11,6 +11,7 @@ val void_p = PointerType("void", PointerMapping.DATA)
 val void_pp = void_p.p
 val void_p_const_p = void_p.const_p
 
+val bool = PrimitiveType("bool", PrimitiveMapping.BYTE)
 val char = IntegerType("char", PrimitiveMapping.BYTE)
 val short = IntegerType("short", PrimitiveMapping.SHORT)
 val int = IntegerType("int", PrimitiveMapping.INT)
@@ -31,6 +32,7 @@ val ptrdiff_t = IntegerType("ptrdiff_t", PrimitiveMapping.POINTER)
 val intptr_t = IntegerType("intptr_t", PrimitiveMapping.POINTER)
 val uintptr_t = IntegerType("uintptr_t", PrimitiveMapping.POINTER, unsigned = true)
 
+val bool_p = bool.p
 val char_p = char.p
 val short_p = short.p
 val short_pp = short_p.p
