@@ -89,9 +89,9 @@ The ANT build can be configured with the following environment variables:
 * LWJGL_BUILD_TYPE (optional)  
 	This is used as the source of binary dependencies. Valid values:
    - *nightly*  
-       the latest successful build. Dependency repos can be found [here](https://github.com/LWJGL-CI).
+       the latest successful build. Dependency repos can be found [here](https://github.com/LWJGL-CI). This is the default.
    - *stable*  
-       the latest nightly build that has been verified to work with LWJGL. This is the default.
+       the latest nightly build that has been verified to work with LWJGL.
    - *release/latest*  
        the latest stable build that has been promoted to an official LWJGL release.
    - *release/{build.version}*  

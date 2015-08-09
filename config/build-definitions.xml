@@ -18,15 +18,15 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 		This is used as the source of binary dependencies. Valid values:
 		- nightly
 			the latest successful build. Dependency repos can be found here: https://github.com/LWJGL-CI
+			this is the default, set the LWJGL_BUILD_TYPE environment variable to override.
 		- stable
 			the latest nightly build that has been verified to work with LWJGL.
-			this is the default, set the LWJGL_BUILD_TYPE environment variable to override.
 		- release/latest
 			the latest stable build that has been promoted to an official LWJGL release.
 		- release/{build.version}
 			a specific previously released build.
 	 -->
-	<condition property="build.type" value="${env.LWJGL_BUILD_TYPE}" else="stable">
+	<condition property="build.type" value="${env.LWJGL_BUILD_TYPE}" else="nightly">
 		<isset property="env.LWJGL_BUILD_TYPE"/>
 	</condition>
 
