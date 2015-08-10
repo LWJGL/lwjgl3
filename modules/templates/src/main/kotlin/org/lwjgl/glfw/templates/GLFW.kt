@@ -487,9 +487,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		"RELEASE_BEHAVIOR_NONE" _ 0x00035002
 	).javaDocLinks
 
-	Code(
-		javaInit = statement("\t\tif ( LWJGLUtil.getPlatform() == LWJGLUtil.Platform.MACOSX ) org.lwjgl.system.macosx.EventLoop.checkFirstThread();")
-	) _ int(
+	int(
 		"Init",
 		"""
 		Initializes the GLFW library. Before most GLFW functions can be used, GLFW must be initialized, and before an application terminates GLFW should be
@@ -1152,7 +1150,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 2.1"
 	)
 
-	void(
+	Code(
+		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+	) _ void(
 		"ShowWindow",
 		"""
 		Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
@@ -1365,7 +1365,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.0"
 	)
 
-	void(
+	Code(
+		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+	) _ void(
 		"PollEvents",
 		"""
 		Processes all pending events.
@@ -1391,7 +1393,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 1.0"
 	)
 
-	void(
+	Code(
+		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
+	) _ void(
 		"WaitEvents",
 		"""
 		Waits until events are queued and processes them.

@@ -4,20 +4,24 @@
  */
 package org.lwjgl.system.macosx;
 
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.LWJGLUtil.Platform;
+
 import static org.lwjgl.system.macosx.Unistd.*;
 
 /** MacOSX event loop utility class. */
 public final class EventLoop {
 
-	public static final boolean STARTED_ON_FIRST_THREAD =
-		"1".equals(System.getenv().get("JAVA_STARTED_ON_FIRST_THREAD_" + getpid()));
+	static {
+		if ( LWJGLUtil.getPlatform() == Platform.MACOSX && !"1".equals(System.getenv().get("JAVA_STARTED_ON_FIRST_THREAD_" + getpid())) )
+			throw new IllegalStateException("Please run the JVM with -XstartOnFirstThread.");
+	}
 
 	private EventLoop() {
 	}
 
 	public static void checkFirstThread() {
-		if ( !STARTED_ON_FIRST_THREAD )
-			throw new IllegalStateException("Please run the JVM with -XstartOnFirstThread.");
+		// intentionally empty to trigger the static initializer
 	}
 
 }
