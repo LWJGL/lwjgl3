@@ -8,6 +8,10 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locations") {
+	nativeImport (
+		"OpenGL.h"
+	)
+
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
