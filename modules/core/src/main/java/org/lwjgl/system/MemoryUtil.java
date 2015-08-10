@@ -1076,7 +1076,7 @@ public final class MemoryUtil {
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memDecodeASCII(long address) {
-		return memDecodeASCII(memByteBufferNT1(address));
+		return address == NULL ? null : memDecodeASCII(memByteBufferNT1(address));
 	}
 
 	/**
@@ -1137,7 +1137,7 @@ public final class MemoryUtil {
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memDecodeUTF8(long address) {
-		return memDecodeUTF8(memByteBufferNT1(address));
+		return address == NULL ? null : memDecodeUTF8(memByteBufferNT1(address));
 	}
 
 	/**
@@ -1248,7 +1248,7 @@ public final class MemoryUtil {
 	 * @return the decode {@link String} or null if the specified {@code address} is null
 	 */
 	public static String memDecodeUTF16(long address) {
-		return memDecodeUTF16(memByteBufferNT2(address));
+		return address == NULL ? null : memDecodeUTF16(memByteBufferNT2(address));
 	}
 
 	/**
