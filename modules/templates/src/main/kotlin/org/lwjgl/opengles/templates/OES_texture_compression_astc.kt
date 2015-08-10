@@ -20,6 +20,25 @@ val OES_texture_compression_astc = "OESTextureCompressionAstc".nativeClassGLES("
 
 		ASTC-compressed textures are handled in OpenGL ES and OpenGL by adding new supported formats to the existing mechanisms for handling compressed
 		textures.
+
+		<h3>What is ASTC</h3>
+
+		ASTC stands for Adaptive Scalable Texture Compression. The ASTC formats form a family of related compressed texture image formats. They are all derived
+		from a common set of definitions.
+
+		ASTC textures may be either 2D or 3D.
+
+		ASTC textures may be encoded using either high or low dynamic range. Low dynamic range images may optionally be specified using the sRGB color space.
+
+		Two sub-profiles ("LDR Profile" and "HDR Profile") may be implemented, which support only 2D images at low or high dynamic range respectively. The LDR
+		profile is indicated by the presence of only the extension string "GL_KHR_texture_compression_astc_ldr". If the HDR profile is implemented, both
+		"GL_KHR_texture_compression_astc_ldr" and "GL_KHR_texture_compression_astc_hdr" must be published. If the full profile (including 3D textures) is
+		implemented, then all three extension strings "GL_KHR_texture_compression_astc_ldr", "GL_KHR_texture_compression_astc_hdr" and
+		"GL_OES_texture_compression_astc" must be published.
+
+		ASTC textures may be encoded as 1, 2, 3 or 4 components, but they are all decoded into RGBA.
+
+		ASTC has a variable block size, and this is specified as part of the name of the token passed to CompressedImage2D and its related functions.
 		"""
 
 	IntConstant(

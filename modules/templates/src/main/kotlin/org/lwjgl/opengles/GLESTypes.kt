@@ -60,6 +60,23 @@ val GLubyteString = CharSequenceType(name = "GLubyte", charMapping = CharMapping
 // GLES 3.0
 val GLsync = "GLsync".opaque_p
 
+// GLES 3.2
+val GLDEBUGPROC = "GLDEBUGPROC".callback(
+	GLES_PACKAGE, void, "GLDebugMessageCallback",
+	"Will be called when a debug message is generated.",
+	GLenum.IN("source", "the message source"),
+	GLenum.IN("type", "the message type"),
+	GLuint.IN("id", "the message ID"),
+	GLenum.IN("severity", "the message severity"),
+	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	const _ void_p.IN("userParam", "the user-specified value that was passed when calling GLES32##glDebugMessageCallback()"),
+	samConstructor = "GLES32"
+) {
+	documentation = "Instances of this interface may be passed to the GLES32##glDebugMessageCallback() method."
+	CALL_CONVENTION_SYSTEM
+}
+
 // KHR_debug
 val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	GLES_PACKAGE, void, "GLDebugMessageKHRCallback",

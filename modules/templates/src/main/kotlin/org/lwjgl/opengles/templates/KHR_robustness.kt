@@ -57,32 +57,31 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 		"""
 
 	IntConstant(
-		"Returned by #GetGraphicsResetStatus().",
+		"Returned by #GetGraphicsResetStatusKHR().",
 
-		"NO_ERROR" _ 0x0000,
-		"GUILTY_CONTEXT_RESET" _ 0x8253,
-		"INNOCENT_CONTEXT_RESET" _ 0x8254,
-		"UNKNOWN_CONTEXT_RESET" _ 0x8255
+		"GUILTY_CONTEXT_RESET_KHR" _ 0x8253,
+		"INNOCENT_CONTEXT_RESET_KHR" _ 0x8254,
+		"UNKNOWN_CONTEXT_RESET_KHR" _ 0x8255
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"CONTEXT_ROBUST_ACCESS" _ 0x90F3,
-		"RESET_NOTIFICATION_STRATEGY" _ 0x8256
+		"CONTEXT_ROBUST_ACCESS_KHR" _ 0x90F3,
+		"RESET_NOTIFICATION_STRATEGY_KHR" _ 0x8256
 	)
 
 	IntConstant(
-		"Returned by GetIntegerv and related simple queries when {@code value} is #RESET_NOTIFICATION_STRATEGY.",
+		"Returned by GetIntegerv and related simple queries when {@code value} is #RESET_NOTIFICATION_STRATEGY_KHR.",
 
-		"LOSE_CONTEXT_ON_RESET" _ 0x8252,
-		"NO_RESET_NOTIFICATION" _ 0x8261
+		"LOSE_CONTEXT_ON_RESET_KHR" _ 0x8252,
+		"NO_RESET_NOTIFICATION_KHR" _ 0x8261
 	)
 
 	IntConstant(
 		"Returned by GLES20#GetError().",
 
-		"CONTEXT_LOST" _ 0x0507
+		"CONTEXT_LOST_KHR" _ 0x0507
 	)
 
 	GLenum(
@@ -91,34 +90,34 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 		Indicates if the GL context has been in a reset state at any point since the last call to GetGraphicsResetStatus:
 		${ul(
 			"GLES20#NO_ERROR indicates that the GL context has not been in a reset state since the last call.",
-			"#GUILTY_CONTEXT_RESET indicates that a reset has been detected that is attributable to the current GL context.",
-			"#INNOCENT_CONTEXT_RESET indicates a reset has been detected that is not attributable to the current GL context.",
-			"#UNKNOWN_CONTEXT_RESET indicates a detected graphics reset whose cause is unknown."
+			"#GUILTY_CONTEXT_RESET_KHR indicates that a reset has been detected that is attributable to the current GL context.",
+			"#INNOCENT_CONTEXT_RESET_KHR indicates a reset has been detected that is not attributable to the current GL context.",
+			"#UNKNOWN_CONTEXT_RESET_KHR indicates a detected graphics reset whose cause is unknown."
 		)}
 		If a reset status other than NO_ERROR is returned and subsequent calls return NO_ERROR, the context reset was encountered and completed. If a reset
 		status is repeatedly returned, the context may be in the process of resetting.
 
 		Reset notification behavior is determined at context creation time, and may be queried by calling GetIntegerv with the symbolic constant
-		#RESET_NOTIFICATION_STRATEGY.
+		#RESET_NOTIFICATION_STRATEGY_KHR.
 
-		If the reset notification behavior is #NO_RESET_NOTIFICATION, then the implementation will never deliver notification of reset events, and
+		If the reset notification behavior is #NO_RESET_NOTIFICATION_KHR, then the implementation will never deliver notification of reset events, and
 		GetGraphicsResetStatus will always return NO_ERROR.
 
-		If the behavior is #LOSE_CONTEXT_ON_RESET, a graphics reset will result in a lost context and require creating a new context as described
+		If the behavior is #LOSE_CONTEXT_ON_RESET_KHR, a graphics reset will result in a lost context and require creating a new context as described
 		above. In this case GetGraphicsResetStatus will return an appropriate value from those described above.
 
 		If a graphics reset notification occurs in a context, a notification must also occur in all other contexts which share objects with that context.
 
 		After a graphics reset has occurred on a context, subsequent GL commands on that context (or any context which shares with that context) will generate a
-		#CONTEXT_LOST error. Such commands will not have side effects (in particular, they will not modify memory passed by pointer for query results,
+		#CONTEXT_LOST_KHR error. Such commands will not have side effects (in particular, they will not modify memory passed by pointer for query results,
 		and may not block indefinitely or cause termination of the application. Exceptions to this behavior include:
 		${ul(
 			"""
-			GLES20#GetError() and GetGraphicsResetStatus behave normally following a graphics reset, so that the application can determine a reset has
+			GLES20#GetError() and #GetGraphicsResetStatusKHR() behave normally following a graphics reset, so that the application can determine a reset has
 			occurred, and when it is safe to destroy and recreate the context.
 			""",
 			"""
-		    Any commands which might cause a polling application to block indefinitely will generate a CONTEXT_LOST error, but will also return a value
+		    Any commands which might cause a polling application to block indefinitely will generate a #CONTEXT_LOST_KHR error, but will also return a value
 		    indicating completion to the application.
 		    """
 		)}
@@ -126,7 +125,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 	)
 
 	void(
-		"ReadnPixels",
+		"ReadnPixelsKHR",
 		"Behaves identically to GLES20#ReadPixels() except that it does not write more than {@code bufSize} bytes into {@code data}",
 
 		GLint.IN("x", "the left pixel coordinate"),

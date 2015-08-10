@@ -58,6 +58,9 @@ typedef khronos_uint8_t GLubyte;
 // GLES30
 typedef unsigned short GLhalf;
 
+// GLES32
+typedef void (APIENTRY *GLDEBUGPROC)(GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void*);
+
 // KHR_debug
 typedef void (APIENTRY *GLDEBUGPROCKHR)(GLenum, GLenum, GLuint, GLenum, GLsizei, const GLchar*, const void*);
 
