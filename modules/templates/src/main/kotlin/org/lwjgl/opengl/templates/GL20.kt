@@ -264,7 +264,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform2i",
-		"Specifies the value of a ivec2 uniform variable for the current program object.",
+		"Specifies the value of an ivec2 uniform variable for the current program object.",
 
 		uniformLocation,
 		GLint.IN("v0", uniformX),
@@ -273,7 +273,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform3i",
-		"Specifies the value of a ivec3 uniform variable for the current program object.",
+		"Specifies the value of an ivec3 uniform variable for the current program object.",
 
 		uniformLocation,
 		GLint.IN("v0", uniformX),
@@ -283,7 +283,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform4i",
-		"Specifies the value of a ivec4 uniform variable for the current program object.",
+		"Specifies the value of an ivec4 uniform variable for the current program object.",
 
 		uniformLocation,
 		GLint.IN("v0", uniformX),
@@ -339,7 +339,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform2iv",
-		"Specifies the value of a single ivec2 uniform variable or a ivec2 uniform variable array for the current program object.",
+		"Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for the current program object.",
 
 		uniformLocation,
 		(AutoSize("value") shr 1) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
@@ -348,7 +348,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform3iv",
-		"Specifies the value of a single ivec3 uniform variable or a ivec3 uniform variable array for the current program object.",
+		"Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for the current program object.",
 
 		uniformLocation,
 		(AutoSize("value") / 3) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
@@ -357,7 +357,7 @@ val GL20 = "GL20".nativeClassGL("GL20") {
 
 	void(
 		"Uniform4iv",
-		"Specifies the value of a single ivec4 uniform variable or a ivec4 uniform variable array for the current program object.",
+		"Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for the current program object.",
 
 		uniformLocation,
 		(AutoSize("value") shr 2) _ GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),

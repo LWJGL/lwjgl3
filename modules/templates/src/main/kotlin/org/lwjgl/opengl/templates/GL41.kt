@@ -490,7 +490,7 @@ if (shader) {
 
 	ProgramUniformRef _ void(
 		"ProgramUniform2iv",
-		"Specifies the value of a single ivec2 uniform variable or a ivec2 uniform variable array for a specified program object.",
+		"Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
@@ -500,7 +500,7 @@ if (shader) {
 
 	ProgramUniformRef _ void(
 		"ProgramUniform3iv",
-		"Specifies the value of a single ivec3 uniform variable or a ivec3 uniform variable array for a specified program object.",
+		"Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
@@ -510,7 +510,7 @@ if (shader) {
 
 	ProgramUniformRef _ void(
 		"ProgramUniform4iv",
-		"Specifies the value of a single ivec4 uniform variable or a ivec4 uniform variable array for a specified program object.",
+		"Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),

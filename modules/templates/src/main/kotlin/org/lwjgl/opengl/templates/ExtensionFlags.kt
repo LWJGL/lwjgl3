@@ -170,6 +170,56 @@ val ARB_fragment_program_shadow = EXT_FLAG.nativeClassGL("ARB_fragment_program_s
 		Requires ${"ARB_fragment_program".cap} and ${"ARB_shadow".cap}.
 		"""
 }
+val ARB_fragment_shader_interlock = EXT_FLAG.nativeClassGL("ARB_fragment_shader_interlock", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		In unextended OpenGL 4.5, applications may produce a large number of fragment shader invocations that perform loads and stores to memory using image
+		uniforms, atomic counter uniforms, buffer variables, or pointers. The order in which loads and stores to common addresses are performed by different
+		fragment shader invocations is largely undefined. For algorithms that use shader writes and touch the same pixels more than once, one or more of the
+		following techniques may be required to ensure proper execution ordering:
+		${ul(
+			"inserting Finish or WaitSync commands to drain the pipeline between different \"passes\" or \"layers\";",
+			"using only atomic memory operations to write to shader memory (which may be relatively slow and limits how memory may be updated); or",
+			"injecting spin loops into shaders to prevent multiple shader invocations from touching the same memory concurrently."
+		)}
+		This extension provides new GLSL built-in functions beginInvocationInterlockARB() and endInvocationInterlockARB() that delimit a critical section of
+		fragment shader code. For pairs of shader invocations with "overlapping" coverage in a given pixel, the OpenGL implementation will guarantee that the
+		critical section of the fragment shader will be executed for only one fragment at a time.
+
+		There are four different interlock modes supported by this extension, which are identified by layout qualifiers. The qualifiers
+		"pixel_interlock_ordered" and "pixel_interlock_unordered" provides mutual exclusion in the critical section for any pair of fragments corresponding to
+		the same pixel. When using multisampling, the qualifiers "sample_interlock_ordered" and "sample_interlock_unordered" only provide mutual exclusion for
+		pairs of fragments that both cover at least one common sample in the same pixel; these are recommended for performance if shaders use per-sample data
+		structures.
+
+		Additionally, when the "pixel_interlock_ordered" or "sample_interlock_ordered" layout qualifier is used, the interlock also guarantees that the
+		critical section for multiple shader invocations with "overlapping" coverage will be executed in the order in which the primitives were processed by
+		the GL. Such a guarantee is useful for applications like blending in the fragment shader, where an application requires that fragment values to be
+		composited in the framebuffer in primitive order.
+
+		This extension can be useful for algorithms that need to access per-pixel data structures via shader loads and stores. Such algorithms using this
+		extension can access such data structures in the critical section without worrying about other invocations for the same pixel accessing the data
+		structures concurrently. Additionally, the ordering guarantees are useful for cases where the API ordering of fragments is meaningful. For example,
+		applications may be able to execute programmable blending operations in the fragment shader, where the destination buffer is read via image loads and
+		the final value is written via image stores.
+
+		Requires ${GL42.core} or ${ARB_shader_image_load_store.link}.
+		"""
+}
+val ARB_post_depth_coverage = EXT_FLAG.nativeClassGL("ARB_post_depth_coverage", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension allows the fragment shader to control whether values in {@code gl_SampleMaskIn[]} reflect the coverage after application of the early
+		depth and stencil tests. This feature can be enabled with the following layout qualifier in the fragment shader:
+		${codeBlock("""
+		layout(post_depth_coverage) in;""")}
+		Use of this feature implicitly enables early fragment tests.
+		"""
+}
 val ARB_robust_buffer_access_behavior = EXT_FLAG.nativeClassGL("ARB_robust_buffer_access_behavior", postfix = ARB) {
 	documentation =
 		"""
@@ -200,6 +250,34 @@ val ARB_robustness_isolation = EXT_FLAG.nativeClassGL("ARB_robustness_isolation"
 		Requires ${ARB_robustness.link}. ${GL43.promoted}
 		"""
 }
+val ARB_shader_atomic_counter_ops = EXT_FLAG.nativeClassGL("ARB_shader_atomic_counter_ops", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The ${ARB_shader_atomic_counters.link} extension introduced atomic counters, but it limits list of potential operations that can be performed on them
+		to increment, decrement, and query. This extension extends the list of GLSL built-in functions that can operate on atomic counters. The list of new
+		operations include:
+		${ul(
+			"Addition and subtraction",
+			"Minimum and maximum",
+			"Bitwise operators (AND, OR, XOR, etc.)",
+			"Exchange, and compare and exchange operators"
+		)}
+		Requires ${GL42.core} or ${ARB_shader_atomic_counters.link}.
+		"""
+}
+val ARB_shader_ballot = EXT_FLAG.nativeClassGL("ARB_shader_ballot", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension provides the ability for a group of invocations which execute in lockstep to do limited forms of cross-invocation communication via a
+		group broadcast of a invocation value, or broadcast of a bitarray representing a predicate value from each invocation in the group.
+
+		Requires ${ARB_gpu_shader_int64.link}.
+		"""
+}
 val ARB_shader_bit_encoding = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", postfix = ARB) {
 	documentation =
 		"""
@@ -208,6 +286,15 @@ val ARB_shader_bit_encoding = EXT_FLAG.nativeClassGL("ARB_shader_bit_encoding", 
 		This extension trivially adds built-in functions for getting/setting the bit encoding for floating-point values in the OpenGL Shading Language.
 
 		${GL33.promoted}
+		"""
+}
+val ARB_shader_clock = EXT_FLAG.nativeClassGL("ARB_shader_clock", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension exposes a 64-bit monotonically incrementing shader counter which may be used to derive local timing information within a single shader
+		invocation.
 		"""
 }
 val ARB_shader_draw_parameters = EXT_FLAG.nativeClassGL("ARB_shader_draw_parameters", postfix = ARB) {
@@ -414,6 +501,25 @@ shadow2DRectProjGradARB(
 		Requires ${"ARB_shader_objects".cap}. ${GL30.promoted}
 		"""
 }
+val ARB_shader_viewport_layer_array = EXT_FLAG.nativeClassGL("ARB_shader_viewport_layer_array", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		The gl_ViewportIndex and gl_Layer built-in variables were introduced by the in OpenGL 4.1. These variables are available in un-extended OpenGL only to
+		the geometry shader. When written in the geometry shader, they cause geometry to be directed to one of an array of several independent viewport
+		rectangles or framebuffer attachment layers, respectively.
+
+		In order to use any viewport or attachment layer other than zero, a geometry shader must be present. Geometry shaders introduce processing overhead and
+		potential performance issues. The AMD_vertex_shader_layer and AMD_vertex_shader_viewport_index extensions allowed the gl_Layer and gl_ViewportIndex
+		outputs to be written directly from the vertex shader with no geometry shader present.
+
+		This extension effectively merges the AMD_vertex_shader_layer and AMD_vertex_shader_viewport_index extensions together and extends them further to
+		allow both outputs to be written from tessellation evaluation shaders.
+
+		Requires ${GL41.core}.
+		"""
+}
 val ARB_shading_language_420pack = EXT_FLAG.nativeClassGL("ARB_shading_language_420pack", postfix = ARB) {
 	documentation =
 		"""
@@ -461,6 +567,54 @@ val ARB_shading_language_packing = EXT_FLAG.nativeClassGL("ARB_shading_language_
 		In addition to the packing functions from ARB_gpu_shader5 this extension also adds the missing {@code [un]packSnorm2x16} for completeness.
 
 		${GL42.promoted}
+		"""
+}
+val ARB_sparse_texture2 = EXT_FLAG.nativeClassGL("ARB_sparse_texture2", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds on the ${ARB_sparse_texture.link} extension, providing the following new functionality:
+		${ul(
+			"""
+			New built-in GLSL texture lookup and image load functions are provided that return information on whether the texels accessed for the texture
+			lookup accessed uncommitted texture memory.
+			""",
+		    """
+		    New built-in GLSL texture lookup functions are provided that specify a minimum level of detail to use for lookups where the level of detail is
+			computed automatically. This allows shaders to avoid accessing unpopulated portions of high-resolution levels of detail when it knows that the
+			memory accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse"
+			texture lookup functions.
+		    """,
+		    """
+		    Reads of uncommitted texture memory will act as though such memory were filled with zeroes; previously, the values returned by reads were
+		    undefined.
+		    """,
+		    """
+		    Standard implementation-independent virtual page sizes for internal formats required to be supported with sparse textures. These standard sizes can
+			be requested by leaving ARBSparseTexture#VIRTUAL_PAGE_SIZE_INDEX_ARB at its initial value (0).
+		    """,
+		    """
+		    Support for creating sparse multisample and multisample array textures is added. However, the virtual page sizes for such textures remain fully
+			implementation-dependent.
+		    """
+		)}
+		Requires ${ARB_sparse_texture.link}
+		"""
+}
+val ARB_sparse_texture_clamp = EXT_FLAG.nativeClassGL("ARB_sparse_texture_clamp", postfix = ARB) {
+	documentation =
+		"""
+		When true, the $registryLink extension is supported.
+
+		This extension builds on the ${ARB_sparse_texture2.cap} extension, providing the following new functionality:
+
+		New built-in GLSL texture lookup functions are provided that specify a minimum level of detail to use for lookups where the level of detail is
+		computed automatically. This allows shaders to avoid accessing unpopulated portions of high-resolution levels of detail when it knows that the memory
+		accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse" texture lookup
+		functions.
+
+		Requires ${ARB_sparse_texture2.link}
 		"""
 }
 val ARB_texture_buffer_object_rgb32 = EXT_FLAG.nativeClassGL("ARB_texture_buffer_object_rgb32", postfix = ARB) {
