@@ -31,11 +31,15 @@ public final class MemoryUtil {
 	/** The memory page size, in bytes. This value is always a power-of-two. */
 	public static final int PAGE_SIZE;
 
+	/** The cache-line size, in bytes. This value is always a power-of-two. */
+	public static final int CACHE_LINE_SIZE;
+
 	static {
 		LWJGLUtil.initialize();
 
 		ACCESSOR = MemoryAccess.getInstance();
 		PAGE_SIZE = ACCESSOR.getPageSize();
+		CACHE_LINE_SIZE = ACCESSOR.getCacheLineSize();
 
 		LWJGLUtil.log("MemoryUtil MemoryAccessor: " + ACCESSOR.getClass().getSimpleName());
 	}

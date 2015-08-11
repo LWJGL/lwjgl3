@@ -122,9 +122,7 @@ The supported properties are:
 	Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but may they be disabled for released applications.
 * org.lwjgl.util.BufferAlign [STATIC]  
 	Sets the alignment of buffers allocated by BufferUtils. By default, buffer allocations will be unaligned (whatever ByteBuffer.allocateDirect returns). Supported values:
-	- *page*  
-		Page alignment (usually 4 kilobytes)
-	- *cache-line*  
+	- *cache-line*
 		Cache-line alignment (usually 64 bytes)
 	- *default*  
 		Default alignment. The JDK uses 8 byte alignment for all direct ByteBuffers.
