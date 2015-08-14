@@ -6,9 +6,6 @@ package org.lwjgl.ovr
 
 import org.lwjgl.generator.*
 import org.lwjgl.opengl.GLuint
-import org.lwjgl.system.linux.Display_p
-import org.lwjgl.system.windows.HDC
-import org.lwjgl.system.windows.HWND
 
 // We include the OVR headers from the Oculus SDK directly, so handle warnings on use-site
 fun GeneratorTargetNative.includeOVRCAPI() = nativeDirective(

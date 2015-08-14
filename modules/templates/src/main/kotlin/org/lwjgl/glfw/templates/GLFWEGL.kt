@@ -17,8 +17,7 @@ val GLFWEGL = dependsOn(Binding.EGL) {
 #ifdef LWJGL_LINUX
 	#define GLFW_EXPOSE_NATIVE_X11
 #endif
-#define GLFW_EXPOSE_NATIVE_EGL"""
-		)
+#define GLFW_EXPOSE_NATIVE_EGL""", beforeIncludes = true)
 
 		nativeImport(
 			"glfw3.h",

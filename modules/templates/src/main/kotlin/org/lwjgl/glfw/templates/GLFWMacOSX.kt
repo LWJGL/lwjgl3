@@ -9,8 +9,8 @@ import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
 val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW") {
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_COCOA")
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_NSGL")
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_COCOA", beforeIncludes = true)
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_NSGL", beforeIncludes = true)
 
 	nativeImport(
 		"glfw3.h",

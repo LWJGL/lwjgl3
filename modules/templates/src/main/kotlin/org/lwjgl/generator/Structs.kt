@@ -888,9 +888,7 @@ class Struct(
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
-		println("#include \"common_tools.h\"")
 		println("#include <stddef.h>")
-
 		preamble.printNative(this)
 
 		println("\nEXTERN_C_EXIT\n")

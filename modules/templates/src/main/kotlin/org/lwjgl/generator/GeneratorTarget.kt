@@ -21,7 +21,7 @@ class Preamble {
 	companion object {
 		data class NativeDefine(
 			val expression: String,
-			val afterIncludes: Boolean
+			val beforeIncludes: Boolean
 		)
 
 		private val EMPTY_IMPORTS = ArrayList<String>(0)
@@ -56,11 +56,11 @@ class Preamble {
 		}
 	}
 
-	fun nativeDirective(expression: String, afterIncludes: Boolean) {
+	fun nativeDirective(expression: String, beforeIncludes: Boolean) {
 		if ( nativeDirectives === EMPTY_DIRECTIVES )
 			nativeDirectives = ArrayList()
 
-		nativeDirectives.add(NativeDefine(expression, afterIncludes))
+		nativeDirectives.add(NativeDefine(expression, beforeIncludes))
 	}
 
 	fun printJava(writer: PrintWriter) {
@@ -82,15 +82,16 @@ class Preamble {
 	}
 
 	fun printNative(writer: PrintWriter) {
-		nativeDirectives.filter { !it.afterIncludes }.forEach {
+		nativeDirectives.filter { it.beforeIncludes }.forEach {
 			writer.println("${it.expression}")
 		}
 
+		writer.println("#include \"common_tools.h\"")
 		nativeImports.forEach {
 			writer.println("#include $it")
 		}
 
-		nativeDirectives.filter { it.afterIncludes }.forEach {
+		nativeDirectives.filter { !it.beforeIncludes }.forEach {
 			writer.println("${it.expression}")
 		}
 	}
@@ -167,8 +168,8 @@ abstract class GeneratorTarget(
 		return this
 	}
 
-	fun <T: GeneratorTarget> T.nativeDirective(expression: String, afterIncludes: Boolean = false): T {
-		preamble.nativeDirective(expression, afterIncludes)
+	fun <T: GeneratorTarget> T.nativeDirective(expression: String, beforeIncludes: Boolean = false): T {
+		preamble.nativeDirective(expression, beforeIncludes)
 		return this
 	}
 

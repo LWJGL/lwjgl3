@@ -6,7 +6,6 @@
 #define __LWJGL_COMMON_TOOLS_H__
 
 #ifdef LWJGL_WINDOWS
-	#define _CRT_SECURE_NO_WARNINGS
 	#include "WindowsConfig.h"
 #endif
 #ifdef LWJGL_LINUX

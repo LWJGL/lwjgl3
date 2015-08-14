@@ -2,6 +2,9 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
+#ifdef LWJGL_WINDOWS
+	#define _NO_CRT_STDIO_INLINE
+#endif
 #include "common_tools.h"
 
 JavaVM *jvm;

@@ -269,8 +269,6 @@ class NativeClass(
 
 	override fun PrintWriter.generateNative() {
 		print(HEADER)
-		println("#include \"common_tools.h\"")
-
 		preamble.printNative(this)
 
 		if ( binding != null ) {

@@ -23,7 +23,6 @@ License terms: http://lwjgl.org/license.php
 		<element name="arguments"/>
 		<sequential>
 			<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" relative="true" parallel="true" taskname="Compiler">
-				<!-- TODO: Fix deprecated API usages and remove C4996 ignore -->
 				<arg line="/c /Wall /WX /EHsc /Ox /Gy /GR- /MT /MP /nologo /DLWJGL_WINDOWS /DLWJGL_${build.arch}"/>
 				<arg value="/Fo${bin.native}\"/>
 
@@ -75,7 +74,7 @@ License terms: http://lwjgl.org/license.php
 				<arg value="/I${src.include}\egl" if:true="${binding.egl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
-					<include name="${src.generated.native}/glfw/windows/*.c"/>
+					<include name="${src.generated.native}/glfw/windows/*.c" unless:true="${binding.egl}"/>
 					<include name="${src.generated.native}/glfw/egl/*.c" if:true="${binding.egl}"/>
 				</fileset>
 			</arguments>
@@ -110,6 +109,7 @@ License terms: http://lwjgl.org/license.php
 
 		<cl if:true="${binding.opengles}">
 			<arguments>
+				<arg value="/I${src.include}\egl"/>
 				<arg value="/I${src.include}\opengles"/>
 				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
 			</arguments>
@@ -131,7 +131,7 @@ License terms: http://lwjgl.org/license.php
 
 		<!-- Compile the LibOVR CAPI shim -->
 		<apply executable="cl" dest="${bin.native}" skipemptyfilesets="true" failonerror="true" parallel="true" taskname="Compiler" if:true="${binding.ovr}">
-			<arg line="/c /W4 /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
+			<arg line="/c /EHsc /Ox /Gy /GR- /MT /MP /nologo"/>
 			<arg value="/Fo${bin.native}\"/>
 
 			<arg value="/I${OCULUS_SDK_PATH}\LibOVR\Include"/>

@@ -7,6 +7,11 @@ package org.lwjgl.system.libc.templates
 import org.lwjgl.generator.*
 
 val string = "StringH".nativeClass(packageName = "org.lwjgl.system.libc") {
+	nativeDirective(
+		"""#ifdef LWJGL_WINDOWS
+	#define _CRT_SECURE_NO_WARNINGS
+#endif""", beforeIncludes = true)
+
 	nativeImport (
 	    "<string.h>"
 	)

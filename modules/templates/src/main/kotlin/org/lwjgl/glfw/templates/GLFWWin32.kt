@@ -9,8 +9,8 @@ import org.lwjgl.glfw.*
 import org.lwjgl.system.windows.*
 
 val GLFWWin32 = "GLFWWin32".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "windows", prefix = "GLFW") {
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_WIN32")
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_WGL")
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_WIN32", beforeIncludes = true)
+	nativeDirective("#define GLFW_EXPOSE_NATIVE_WGL", beforeIncludes = true)
 
 	nativeImport(
 		"glfw3.h",

@@ -8,6 +8,11 @@ import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
 val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_") {
+	nativeDirective(
+			"""#ifdef LWJGL_WINDOWS
+	#define _NO_CRT_STDIO_INLINE
+#endif""", beforeIncludes = true)
+
 	includeSTBAPI(
 		"""#define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"""")
