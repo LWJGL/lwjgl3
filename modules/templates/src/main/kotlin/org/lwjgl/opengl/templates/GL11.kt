@@ -99,10 +99,6 @@ val OUT_OF_MEMORY = "GL11#OUT_OF_MEMORY"
 val INVALID_FRAMEBUFFER_OPERATION = "GL30#INVALID_FRAMEBUFFER_OPERATION"
 
 val GL11 = "GL11".nativeClassGL("GL11") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 1.1 functionality.

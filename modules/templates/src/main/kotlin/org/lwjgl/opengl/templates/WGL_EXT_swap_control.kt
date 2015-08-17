@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 val WGL_EXT_swap_control = "WGLEXTSwapControl".nativeClassWGL("WGL_EXT_swap_control", EXT) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "wgl_swap_control")} extension.

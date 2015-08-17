@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfix = AMD) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
@@ -203,5 +199,4 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
 		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
-
 }

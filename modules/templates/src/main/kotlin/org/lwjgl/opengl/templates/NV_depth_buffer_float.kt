@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_depth_buffer_float = "NVDepthBufferFloat".nativeClassGL("NV_depth_buffer_float", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT_framebuffer_multisample", postfix = EXT) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

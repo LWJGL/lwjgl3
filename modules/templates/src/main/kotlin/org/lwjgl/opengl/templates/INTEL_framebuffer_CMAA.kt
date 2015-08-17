@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val INTEL_framebuffer_CMAA = "INTELFramebufferCMAA".nativeClassGL("INTEL_framebuffer_CMAA", postfix = INTEL) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

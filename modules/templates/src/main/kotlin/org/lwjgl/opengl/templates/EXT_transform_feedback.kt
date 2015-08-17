@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform_feedback", postfix = EXT) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

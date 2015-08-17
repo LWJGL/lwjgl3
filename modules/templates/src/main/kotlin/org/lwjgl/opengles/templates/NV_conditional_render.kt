@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_conditional_render = "NVConditionalRender".nativeClassGLES("NV_conditional_render", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "conditional_render")} extension.

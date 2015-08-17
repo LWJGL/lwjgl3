@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val EXT_platform_base = "EXTPlatformBase".nativeClassEGL("EXT_platform_base", postfix = EXT) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

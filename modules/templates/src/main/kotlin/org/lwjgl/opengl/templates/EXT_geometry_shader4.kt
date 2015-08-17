@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shader4", postfix = EXT) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

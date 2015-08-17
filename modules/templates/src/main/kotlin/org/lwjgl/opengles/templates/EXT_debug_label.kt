@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val EXT_debug_label = "EXTDebugLabel".nativeClassGLES("EXT_debug_label", postfix = EXT) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

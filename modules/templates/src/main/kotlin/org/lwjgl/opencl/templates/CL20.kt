@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val CL20 = "CL20".nativeClassCL("CL20") {
-	nativeImport (
-		"OpenCL.h"
-	)
-
 	documentation = "The core OpenCL 2.0 functionality."
 
 	IntConstant(

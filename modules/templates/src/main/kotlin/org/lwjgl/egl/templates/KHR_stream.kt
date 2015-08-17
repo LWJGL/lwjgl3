@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

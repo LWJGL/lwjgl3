@@ -10,10 +10,6 @@ import org.lwjgl.system.linux.*
 import org.lwjgl.system.windows.*
 
 val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
@@ -48,10 +44,6 @@ val NV_copy_image = "NVCopyImage".nativeClassGL("NV_copy_image", postfix = NV) {
 val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV) {
 	javaImport(
 		"org.lwjgl.system.linux.*"
-	)
-
-	nativeImport (
-		"<GL/glx.h>"
 	)
 
 	documentation =
@@ -93,10 +85,6 @@ val GLX_NV_copy_image = "GLXNVCopyImage".nativeClassGLX("GLX_NV_copy_image", NV)
 }
 
 val WGL_NV_copy_image = "WGLNVCopyImage".nativeClassWGL("WGL_NV_copy_image", NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "copy_image")} extension.

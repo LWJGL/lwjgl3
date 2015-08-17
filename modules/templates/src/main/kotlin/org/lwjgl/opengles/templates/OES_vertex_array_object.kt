@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val OES_vertex_array_object = "OESVertexArrayObject".nativeClassGLES("OES_vertex_array_object", postfix = OES) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

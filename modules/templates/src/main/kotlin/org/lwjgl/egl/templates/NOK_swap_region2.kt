@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val NOK_swap_region2 = "NOKSwapRegion2".nativeClassEGL("NOK_swap_region2", postfix = NOK) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

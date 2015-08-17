@@ -10,11 +10,6 @@ import org.lwjgl.opengl.BufferType.*
 import org.lwjgl.system.windows.*
 
 val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu_association", AMD) {
-	nativeImport (
-		"OpenGL.h",
-		"WGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("AMD", "wgl_gpu_association")} extension.

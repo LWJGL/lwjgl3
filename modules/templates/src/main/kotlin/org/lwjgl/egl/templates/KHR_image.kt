@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val KHR_image = "KHRImage".nativeClassEGL("KHR_image", postfix = KHR) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

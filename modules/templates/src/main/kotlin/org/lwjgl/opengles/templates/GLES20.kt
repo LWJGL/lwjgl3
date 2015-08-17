@@ -9,10 +9,6 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"The core OpenGL ES 2.0 functionality."
 

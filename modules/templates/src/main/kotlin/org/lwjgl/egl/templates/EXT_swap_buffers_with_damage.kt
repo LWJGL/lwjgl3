@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val EXT_swap_buffers_with_damage = "EXTSwapBuffersWithDamage".nativeClassEGL("EXT_swap_buffers_with_damage", postfix = EXT) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

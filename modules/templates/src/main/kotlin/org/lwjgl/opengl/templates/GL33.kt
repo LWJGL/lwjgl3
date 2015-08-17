@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GL33 = "GL33".nativeClassGL("GL33") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 3.3 functionality. OpenGL 3.3 implementations support revision 3.30 of the OpenGL Shading Language.

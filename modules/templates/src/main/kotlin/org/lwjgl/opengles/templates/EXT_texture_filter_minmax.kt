@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_texture_filter_minmax", postfix = EXT) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("EXT", "texture_filter_minmax")} extension.

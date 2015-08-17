@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val ARB_draw_instanced = "ARBDrawInstanced".nativeClassGL("ARB_draw_instanced", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

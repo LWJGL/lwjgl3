@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val ANGLE_framebuffer_blit = "ANGLEFramebufferBlit".nativeClassGLES("ANGLE_framebuffer_blit", postfix = ANGLE) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

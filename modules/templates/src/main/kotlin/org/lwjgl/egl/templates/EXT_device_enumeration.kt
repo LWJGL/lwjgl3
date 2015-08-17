@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val EXT_device_enumeration = "EXTDeviceEnumeration".nativeClassEGL("EXT_device_enumeration", postfix = EXT) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

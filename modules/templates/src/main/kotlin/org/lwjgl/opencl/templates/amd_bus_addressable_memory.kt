@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val amd_bus_addressable_memory = "AMDBusAddressableMemory".nativeClassCL("amd_bus_addressable_memory", AMD) {
-	nativeImport(
-		"OpenCL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $extensionLink extension.

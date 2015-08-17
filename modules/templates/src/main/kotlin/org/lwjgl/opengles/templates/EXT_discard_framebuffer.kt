@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val EXT_discard_framebuffer = "EXTDiscardFramebuffer".nativeClassGLES("EXT_discard_framebuffer", postfix = EXT) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val IMG_multisampled_render_to_texture = "IMGMultisampledRenderToTexture".nativeClassGLES("IMG_multisampled_render_to_texture", postfix = IMG) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

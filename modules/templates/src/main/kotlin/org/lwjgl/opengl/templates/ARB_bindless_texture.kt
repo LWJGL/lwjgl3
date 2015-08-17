@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_bindless_texture = "ARBBindlessTexture".nativeClassGL("ARB_bindless_texture", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

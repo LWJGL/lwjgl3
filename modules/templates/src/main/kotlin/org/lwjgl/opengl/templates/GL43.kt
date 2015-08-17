@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val GL43 = "GL43".nativeClassGL("GL43") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 4.3 functionality. OpenGL 4.3 implementations support revision 4.30 of the OpenGL Shading Language.

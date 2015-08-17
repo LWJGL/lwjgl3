@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_vertex_buffer_object = "ARBVertexBufferObject".nativeClassGL("ARB_vertex_buffer_object", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

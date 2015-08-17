@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_EXT_EFX = "EXTEfx".nativeClassAL("EXT_EFX", prefixTemplate = ALC) {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to ALC_EXT_EFX extension."
 
 	IntConstant(

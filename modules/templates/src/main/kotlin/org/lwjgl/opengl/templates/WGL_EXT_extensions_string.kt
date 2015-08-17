@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val WGL_EXT_extensions_string = "WGLEXTExtensionsString".nativeClassWGL("WGL_EXT_extensions_string", EXT) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation = "Native bindings to the ${registryLink("EXT", "wgl_extensions_string")} extension."
 
 	(const _ charASCII_p)(

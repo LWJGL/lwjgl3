@@ -9,10 +9,6 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val NV_draw_instanced = "NVDrawInstanced".nativeClassGLES("NV_draw_instanced", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

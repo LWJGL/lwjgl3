@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 val WGL_NV_delay_before_swap = "WGLNVDelayBeforeSwap".nativeClassWGL("WGL_NV_delay_before_swap", NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	javaImport(
 		"org.lwjgl.system.windows.WinBase"
 	)

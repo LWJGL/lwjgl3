@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val GL32 = "GL32".nativeClassGL("GL32") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 3.2 functionality. OpenGL 3.2 implementations support revision 1.50 of the OpenGL Shading Language.

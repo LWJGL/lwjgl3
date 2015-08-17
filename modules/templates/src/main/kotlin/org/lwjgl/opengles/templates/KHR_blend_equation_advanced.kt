@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGLES("KHR_blend_equation_advanced", postfix = KHR) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("KHR", "blend_equation_advanced")} extension.

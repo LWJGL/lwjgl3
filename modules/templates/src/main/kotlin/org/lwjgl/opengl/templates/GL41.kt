@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val GL41 = "GL41".nativeClassGL("GL41") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 4.1 functionality. OpenGL 4.1 implementations support revision 4.10 of the OpenGL Shading Language.

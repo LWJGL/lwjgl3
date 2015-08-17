@@ -18,11 +18,6 @@ val CL12GL = dependsOn(Binding.OPENGL) {
 			"org.lwjgl.opengl.GL31"
 		)
 
-		nativeImport (
-			"OpenCL.h",
-			"opengl_types.h"
-		)
-
 		documentation = "The OpenCL 1.2 OpenGL interoperability functionality."
 
 		IntConstant(

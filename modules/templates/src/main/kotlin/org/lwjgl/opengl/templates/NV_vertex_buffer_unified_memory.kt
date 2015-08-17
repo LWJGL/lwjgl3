@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassGL("NV_vertex_buffer_unified_memory", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

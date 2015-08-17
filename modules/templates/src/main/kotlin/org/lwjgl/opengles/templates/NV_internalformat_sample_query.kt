@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGLES("NV_internalformat_sample_query", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

@@ -9,11 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
-	nativeImport (
-		"OpenGL.h",
-		"WGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "wgl_pbuffer")} extension.

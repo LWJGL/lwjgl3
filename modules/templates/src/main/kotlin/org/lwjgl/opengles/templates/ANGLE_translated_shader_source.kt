@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val ANGLE_translated_shader_source = "ANGLETranslatedShaderSource".nativeClassGLES("ANGLE_translated_shader_source", postfix = ANGLE) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

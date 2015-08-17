@@ -11,10 +11,6 @@ import org.lwjgl.opengl.*
 val GLX13 = "GLX13".nativeClassGLX("GLX_13") {
 	javaImport("org.lwjgl.system.linux.*")
 
-	nativeImport (
-		"<GL/glx.h>"
-	)
-
 	documentation = "Native bindings to GLX 1.3."
 
 	IntConstant(

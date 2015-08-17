@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val ANGLE_query_surface_pointer = "ANGLEQuerySurfacePointer".nativeClassEGL("ANGLE_query_surface_pointer", postfix = ANGLE) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

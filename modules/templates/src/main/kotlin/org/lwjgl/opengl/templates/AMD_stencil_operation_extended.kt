@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val AMD_stencil_operation_extended = "AMDStencilOperationExtended".nativeClassGL("AMD_stencil_operation_extended", postfix = AMD) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

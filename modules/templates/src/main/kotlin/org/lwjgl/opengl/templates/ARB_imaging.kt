@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation = "Native bindings to the OpenGL 1.2 optional imaging subset."
 
 	val IMAGING_INTERNAL_FORMATS =

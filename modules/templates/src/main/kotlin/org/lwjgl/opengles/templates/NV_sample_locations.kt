@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_sample_locations = "NVSampleLocations".nativeClassGLES("NV_sample_locations", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "sample_locations")} extension.

@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val ANDROID_blob_cache = "ANDROIDBlobCache".nativeClassEGL("ANDROID_blob_cache", postfix = ANDROID) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

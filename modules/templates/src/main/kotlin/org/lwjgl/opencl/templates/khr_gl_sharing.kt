@@ -9,11 +9,7 @@ import org.lwjgl.opencl.*
 
 val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 	"KHRGLSharing".nativeClassCL("khr_gl_sharing", KHR) {
-		nativeImport (
-			"OpenCL.h"
-		)
-
-		documentation = "Native bindings to the $extensionLink extension."
+	documentation = "Native bindings to the $extensionLink extension."
 
 		IntConstant(
 			"""

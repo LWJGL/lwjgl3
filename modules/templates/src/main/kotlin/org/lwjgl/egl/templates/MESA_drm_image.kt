@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = MESA) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

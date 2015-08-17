@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val AMD_performance_monitor = "AMDPerformanceMonitor".nativeClassGLES("AMD_performance_monitor", postfix = AMD) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("AMD", "performance_monitor")} extension.

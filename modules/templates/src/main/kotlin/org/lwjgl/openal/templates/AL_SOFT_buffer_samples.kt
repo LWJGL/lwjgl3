@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samples") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $specLinkOpenALSoft extension.

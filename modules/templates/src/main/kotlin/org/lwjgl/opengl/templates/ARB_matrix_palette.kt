@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val ARB_matrix_palette = "ARBMatrixPalette".nativeClassGL("ARB_matrix_palette", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

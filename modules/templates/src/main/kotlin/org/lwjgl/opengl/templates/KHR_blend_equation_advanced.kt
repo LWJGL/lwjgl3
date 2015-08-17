@@ -8,9 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGL("KHR_blend_equation_advanced", postfix = KHR) {
-	nativeImport (
-		"OpenGL.h"
-	)
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

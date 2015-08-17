@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", INTEL) {
-	nativeImport (
-		"OpenCL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $extensionLink extension.

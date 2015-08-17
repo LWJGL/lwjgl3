@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2dArray".nativeClassGLES("OES_texture_storage_multisample_2d_array", postfix = OES) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

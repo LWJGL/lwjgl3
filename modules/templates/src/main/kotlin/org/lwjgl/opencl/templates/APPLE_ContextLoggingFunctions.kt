@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL("APPLE_ContextLoggingFunctions", APPLE) {
-	nativeImport(
-		"OpenCL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $extensionName extension.

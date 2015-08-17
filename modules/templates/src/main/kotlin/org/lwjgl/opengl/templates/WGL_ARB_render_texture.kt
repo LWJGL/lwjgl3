@@ -9,11 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_render_texture", ARB) {
-	nativeImport (
-		"OpenGL.h",
-		"WGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("ARB", "wgl_render_texture")} extension.

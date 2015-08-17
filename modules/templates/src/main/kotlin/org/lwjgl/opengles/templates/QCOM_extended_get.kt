@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val QCOM_extended_get = "QCOMExtendedGet".nativeClassGLES("QCOM_extended_get", postfix = QCOM) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

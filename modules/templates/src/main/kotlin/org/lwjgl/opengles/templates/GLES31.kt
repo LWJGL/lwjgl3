@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val GLES31 = "GLES31".nativeClassGLES("GLES31", postfix = "") {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"The core OpenGL ES 3.1 functionality."
 

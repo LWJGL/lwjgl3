@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_memobject", EXT) {
-	nativeImport (
-		"OpenCL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $extensionLink extension.

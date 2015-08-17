@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGL("INTEL_performance_query", postfix = INTEL) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

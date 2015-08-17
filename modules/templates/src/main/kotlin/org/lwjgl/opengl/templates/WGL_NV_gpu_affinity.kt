@@ -9,11 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
 val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity", NV) {
-	nativeImport (
-		"OpenGL.h",
-		"WGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "gpu_affinity")} extension.

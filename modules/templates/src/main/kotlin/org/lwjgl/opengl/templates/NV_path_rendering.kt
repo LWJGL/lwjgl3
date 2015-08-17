@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.opengl.BufferType.*
 
 val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	javaImport (
 		"static org.lwjgl.opengl.GL11.*"
 	)

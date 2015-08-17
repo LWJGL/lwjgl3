@@ -119,10 +119,6 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"static org.lwjgl.opencl.Info.*"
 	)
 
-	nativeImport (
-		"OpenCL.h"
-	)
-
 	documentation = "The core OpenCL 1.0 functionality."
 
 	IntConstant(

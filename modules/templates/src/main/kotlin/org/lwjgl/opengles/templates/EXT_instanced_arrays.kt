@@ -9,10 +9,6 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val EXT_instanced_arrays = "EXTInstancedArrays".nativeClassGLES("EXT_instanced_arrays", postfix = EXT) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

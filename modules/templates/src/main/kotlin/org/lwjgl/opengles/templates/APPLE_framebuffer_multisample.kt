@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val APPLE_framebuffer_multisample = "APPLEFramebufferMultisample".nativeClassGLES("APPLE_framebuffer_multisample", postfix = APPLE) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

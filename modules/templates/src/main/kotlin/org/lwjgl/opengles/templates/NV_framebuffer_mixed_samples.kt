@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_framebuffer_mixed_samples = "NVFramebufferMixedSamples".nativeClassGLES("NV_framebuffer_mixed_samples", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "framebuffer_mixed_samples")} extension.

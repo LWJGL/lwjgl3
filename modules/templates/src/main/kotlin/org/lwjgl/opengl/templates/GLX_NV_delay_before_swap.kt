@@ -13,10 +13,6 @@ val GLX_NV_delay_before_swap = "GLXNVDelayBeforeSwap".nativeClassGLX("GLX_NV_del
 		"org.lwjgl.system.linux.*"
 	)
 
-	nativeImport (
-		"<GL/glx.h>"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "glx_delay_before_swap")} extension.

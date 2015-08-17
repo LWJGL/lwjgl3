@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_coverage_sample = "NVCoverageSample".nativeClassGLES("NV_coverage_sample", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "EGL_NV_coverage_sample")} extension.

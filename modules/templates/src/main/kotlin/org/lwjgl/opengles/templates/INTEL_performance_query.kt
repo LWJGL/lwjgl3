@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val INTEL_performance_query = "INTELPerformanceQuery".nativeClassGLES("INTEL_performance_query", postfix = INTEL) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("INTEL", "performance_query")} extension.

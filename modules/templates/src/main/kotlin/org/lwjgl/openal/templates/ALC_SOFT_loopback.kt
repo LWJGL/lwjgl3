@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $specLinkOpenALSoft extension.

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_deferred_updates = "SOFTDeferredUpdates".nativeClassAL("SOFT_deferred_updates") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $specLinkOpenALSoft extension.

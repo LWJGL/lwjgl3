@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_conservative_raster = "NVConservativeRaster".nativeClassGLES("NV_conservative_raster", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "conservative_raster")} extension.

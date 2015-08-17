@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGLES("NV_blend_equation_advanced", postfix = NV) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "blend_equation_advanced")} extension.

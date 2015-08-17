@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val HI_clientpixmap = "HIClientpixmap".nativeClassEGL("HI_clientpixmap", postfix = HI) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

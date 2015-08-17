@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val APPLE_copy_texture_levels = "APPLECopyTextureLevels".nativeClassGLES("APPLE_copy_texture_levels", postfix = APPLE) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

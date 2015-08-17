@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_SOFT_pause_device = "SOFTPauseDevice".nativeClassALC("SOFT_pause_device") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $specLinkOpenALSoft extension.

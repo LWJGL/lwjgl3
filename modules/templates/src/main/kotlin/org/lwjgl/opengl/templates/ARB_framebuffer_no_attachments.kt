@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_framebuffer_no_attachments = "ARBFramebufferNoAttachments".nativeClassGL("ARB_framebuffer_no_attachments") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

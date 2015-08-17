@@ -7,7 +7,7 @@ package org.lwjgl.system.windows.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.windows.*
 
-val Kernel32 = "Kernel32".nativeClassWin {
+val Kernel32 = "Kernel32".nativeClass(WINDOWS_PACKAGE) {
 	nativeImport(
 		"WindowsLWJGL.h"
 	)

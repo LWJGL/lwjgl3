@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix = KHR) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("KHR", "robustness")} extension.

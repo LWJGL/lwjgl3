@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val WGL_NV_vertex_array_range = "WGLNVVertexArrayRange".nativeClassWGL("WGL_NV_vertex_array_range", postfix = NV) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	void_p(
 		"AllocateMemoryNV",
 		"",

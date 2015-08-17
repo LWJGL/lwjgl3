@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val KHR_stream_consumer_gltexture = "KHRStreamConsumerGLTexture".nativeClassEGL("KHR_stream_consumer_gltexture", postfix = KHR) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

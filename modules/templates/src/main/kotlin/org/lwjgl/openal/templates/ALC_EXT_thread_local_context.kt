@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC_EXT_thread_local_context = "EXTThreadLocalContext".nativeClassALC("EXT_thread_local_context") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $specLinkOpenALSoft extension.

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val AMD_interleaved_elements = "AMDInterleavedElements".nativeClassGL("AMD_interleaved_elements", postfix = AMD) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

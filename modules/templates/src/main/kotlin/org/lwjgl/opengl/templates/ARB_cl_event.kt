@@ -14,11 +14,6 @@ val ARB_cl_event = dependsOn(Binding.OPENCL) {
 			"org.lwjgl.opencl.*"
 		)
 
-		nativeImport (
-			"OpenCL.h",
-			"OpenGL.h"
-		)
-
 		documentation =
 			"""
 		Native bindings to the $registryLink extension.

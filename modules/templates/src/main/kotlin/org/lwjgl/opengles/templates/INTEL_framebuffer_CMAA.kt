@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val INTEL_framebuffer_CMAA = "INTELFramebufferCMAA".nativeClassGLES("INTEL_framebuffer_CMAA", postfix = INTEL) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

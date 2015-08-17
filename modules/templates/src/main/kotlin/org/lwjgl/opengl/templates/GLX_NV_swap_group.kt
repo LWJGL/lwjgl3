@@ -9,10 +9,6 @@ import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
 val GLX_NV_swap_group = "GLXNVSwapGroup".nativeClassGLX("GLX_NV_swap_group", postfix = NV) {
-	nativeImport (
-		"<GL/glx.h>"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("NV", "glx_swap_group")} extension.

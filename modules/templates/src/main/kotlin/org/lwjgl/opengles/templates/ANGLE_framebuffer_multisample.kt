@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val ANGLE_framebuffer_multisample = "ANGLEFramebufferMultisample".nativeClassGLES("ANGLE_framebuffer_multisample", postfix = ANGLE) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

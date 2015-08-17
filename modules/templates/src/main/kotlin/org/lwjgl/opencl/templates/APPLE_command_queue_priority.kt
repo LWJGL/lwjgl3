@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val APPLE_command_queue_priority = "APPLECommandQueuePriority".nativeClassCL("APPLE_command_queue_priority", APPLE) {
-	nativeImport(
-		"OpenCL.h"
-	)
-
 	documentation = "Native bindings to the $extensionName extension."
 
 	IntConstant(

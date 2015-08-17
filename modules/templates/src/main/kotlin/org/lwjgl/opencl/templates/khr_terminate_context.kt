@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opencl.*
 
 val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_context", KHR) {
-	nativeImport(
-		"OpenCL.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $extensionName extension.

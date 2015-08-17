@@ -9,10 +9,6 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val OES_draw_elements_base_vertex = "OESDrawElementsBaseVertex".nativeClassGLES("OES_draw_elements_base_vertex", postfix = OES) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

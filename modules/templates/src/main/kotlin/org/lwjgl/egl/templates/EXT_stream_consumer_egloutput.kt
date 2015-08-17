@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val EXT_stream_consumer_egloutput = "EXTStreamConsumerEGLOutput".nativeClassEGL("EXT_stream_consumer_egloutput", postfix = EXT) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

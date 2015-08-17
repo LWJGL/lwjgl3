@@ -27,10 +27,6 @@ val QUERY_TARGETS =
 	"""
 
 val GL15 = "GL15".nativeClassGL("GL15") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 1.5 functionality.

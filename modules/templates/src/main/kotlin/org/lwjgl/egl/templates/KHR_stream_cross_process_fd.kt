@@ -8,8 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.egl.*
 
 val KHR_stream_cross_process_fd = "KHRStreamCrossProcessFD".nativeClassEGL("KHR_stream_cross_process_fd", postfix = KHR) {
-	includeEGLEXT()
-
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

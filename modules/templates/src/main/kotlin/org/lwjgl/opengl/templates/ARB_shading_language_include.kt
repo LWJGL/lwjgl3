@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 
 val ARB_shading_language_include = "ARBShadingLanguageInclude".nativeClassGL("ARB_shading_language_include", postfix = ARB) {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	val include = "{@code &#35;include}"
 
 	documentation =

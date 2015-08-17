@@ -14,10 +14,6 @@ val CONDITIONAL_RENDER_MODES =
 	"""
 
 val GL30 = "GL30".nativeClassGL("GL30") {
-	nativeImport (
-		"OpenGL.h"
-	)
-
 	documentation =
 		"""
 		The core OpenGL 3.0 functionality. OpenGL 3.0 implementations are guaranteed to support at least versions 1.10, 1.20 and 1.30 of the shading language,

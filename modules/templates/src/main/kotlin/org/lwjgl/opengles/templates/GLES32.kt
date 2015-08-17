@@ -9,10 +9,6 @@ import org.lwjgl.opengles.*
 import org.lwjgl.opengles.BufferType.*
 
 val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"The core OpenGL ES 3.2 functionality."
 

@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub_data") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "bindings to AL_SOFT_buffer_sub_data extension."
 
 	IntConstant(

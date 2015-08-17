@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val AL_SOFT_source_latency = "SOFTSourceLatency".nativeClassAL("SOFT_source_latency") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = """
 		Native bindings to the $specLinkOpenALSoft extension.
 

@@ -11,10 +11,6 @@ import org.lwjgl.system.linux.*
 val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SGIX) {
 	javaImport("org.lwjgl.system.linux.*")
 
-	nativeImport(
-		"<GL/glx.h>"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("SGIX", "fbconfig")} extension.

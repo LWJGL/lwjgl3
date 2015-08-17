@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
 val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
-	nativeImport (
-		"OpenGLES.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the ${registryLink("KHR", "debug")} extension.

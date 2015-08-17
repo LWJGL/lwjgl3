@@ -8,10 +8,6 @@ import org.lwjgl.generator.*
 import org.lwjgl.openal.*
 
 val ALC10 = "ALC10".nativeClassALC("ALC10") {
-	nativeImport (
-		"OpenAL.h"
-	)
-
 	documentation = "Native bindings to ALC 1.0 functionality."
 
 	IntConstant(
