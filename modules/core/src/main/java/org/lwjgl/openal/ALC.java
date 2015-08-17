@@ -16,6 +16,7 @@ import java.util.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class ALC {
@@ -77,7 +78,7 @@ public final class ALC {
 					APIBuffer __buffer = apiBuffer();
 					__buffer.stringParamASCII(functionName, true);
 
-					long address = nalcGetProcAddress(handle, __buffer.address(), alcGetProcAddress);
+					long address = invokePPP(alcGetProcAddress, handle, __buffer.address());
 					if ( address == NULL )
 						LWJGLUtil.log("Failed to locate address for ALC extension function " + functionName);
 
@@ -189,8 +190,8 @@ public final class ALC {
 
 		APIBuffer __buffer = apiBuffer();
 
-		nalcGetIntegerv(device, ALC_MAJOR_VERSION, 1, __buffer.address(), GetIntegerv);
-		nalcGetIntegerv(device, ALC_MINOR_VERSION, 1, __buffer.address(4), GetIntegerv);
+		invokePIIPV(GetIntegerv, device, ALC_MAJOR_VERSION, 1, __buffer.address());
+		invokePIIPV(GetIntegerv, device, ALC_MINOR_VERSION, 1, __buffer.address(4));
 
 		int majorVersion = __buffer.intValue(0);
 		int minorVersion = __buffer.intValue(4);
@@ -210,13 +211,13 @@ public final class ALC {
 		}
 
 		// Parse EXTENSIONS string
-		String extensionsString = memDecodeUTF8(checkPointer(nalcGetString(device, ALC_EXTENSIONS, GetString)));
+		String extensionsString = memDecodeUTF8(checkPointer(invokePIP(GetString, device, ALC_EXTENSIONS)));
 
 		StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
 			__buffer.reset().stringParamASCII(extName, true);
-			if ( nalcIsExtensionPresent(device, __buffer.address(), IsExtensionPresent) )
+			if ( invokePPZ(IsExtensionPresent, device, __buffer.address()) )
 				supportedExtensions.add(extName);
 		}
 

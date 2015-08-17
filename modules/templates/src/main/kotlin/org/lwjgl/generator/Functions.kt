@@ -101,6 +101,8 @@ class NativeClassFunction(
 
 	init {
 		validate();
+		if ( nativeClass.binding != null )
+			JNI.register(this)
 	}
 
 	val addressName: String
@@ -412,7 +414,7 @@ class NativeClassFunction(
 	fun generateMethods(writer: PrintWriter) {
 		val simpleFunction = isSimpleFunction
 
-		if ( !has(Reuse) )
+		if ( nativeClass.binding == null )
 			writer.generateNativeMethod(simpleFunction)
 
 		if ( !simpleFunction ) {
@@ -504,15 +506,12 @@ class NativeClassFunction(
 		if ( !returns.isVoid )
 			print("return ")
 
-		if ( has(Reuse) )
-			print("${get(Reuse).reference}.")
-		print("n$name(")
+		print("invoke${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
+		print("$FUNCTION_ADDRESS")
+		if ( hasNativeParams ) print(", ")
 		printList(getNativeParams()) {
 			it.name
 		}
-
-		if ( hasNativeParams ) print(", ")
-		print("$FUNCTION_ADDRESS")
 		println(");")
 
 		println("\t}\n")
@@ -686,14 +685,16 @@ class NativeClassFunction(
 			}
 		}
 
-		if ( has(Reuse) && !hasUnsafeMethod )
-			print("${get(Reuse).reference}.")
-		print("n$name(")
-		printParams()
-		if ( nativeClass.binding != null && !hasUnsafeMethod ) {
-			if ( hasNativeParams ) print(", ")
+		if ( nativeClass.binding == null || hasUnsafeMethod ) {
+			if ( has(Reuse) )
+				print("${get(Reuse).reference}.")
+			print("n$name(")
+		} else {
+			print("invoke${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
 			print("$FUNCTION_ADDRESS")
+			if ( hasNativeParams ) print(", ")
 		}
+		printParams()
 		print(")")
 
 		if ( hasConstructor ) {

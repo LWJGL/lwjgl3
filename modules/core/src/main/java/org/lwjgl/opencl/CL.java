@@ -15,8 +15,8 @@ import java.util.StringTokenizer;
 
 import static java.lang.Math.*;
 import static org.lwjgl.opencl.CL10.*;
-import static org.lwjgl.opencl.CL12.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class CL {
@@ -70,8 +70,10 @@ public final class CL {
 					}
 
 					/*
-					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless when the
-					ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports OpenCL
+					We'll use clGetExtensionFunctionAddress, even if it has been deprecated, because clGetExtensionFunctionAddressForPlatform is pointless
+					when the
+					ICD is used. clGetExtensionFunctionAddressForPlatform will be used only if there is just 1 platform available and that platform supports
+					OpenCL
 					1.2 or higher.
 					*/
 					long platform = NULL;
@@ -81,12 +83,12 @@ public final class CL {
 							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 						APIBuffer __buffer = apiBuffer();
-						nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
+						invokeIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
 
 						int platforms = __buffer.intValue(0);
 
 						if ( platforms == 1 ) {
-							nclGetPlatformIDs(1, __buffer.address(), NULL, clGetPlatformIDs);
+							invokeIPPI(clGetPlatformIDs, 1, __buffer.address(), NULL);
 							long cl_platform_id = __buffer.pointerValue(0);
 							if ( supportsOpenCL12(__buffer, cl_platform_id) )
 								platform = cl_platform_id;
@@ -101,14 +103,14 @@ public final class CL {
 					if ( clGetPlatformInfo == NULL )
 						return false;
 
-					int errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address(), clGetPlatformInfo);
+					int errcode = invokePIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address());
 					if ( errcode != CL_SUCCESS )
 						return false;
 
 					long bytes = __buffer.pointerValue(0);
 					__buffer.bufferParam((int)bytes);
 
-					errcode = nclGetPlatformInfo(platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL, clGetPlatformInfo);
+					errcode = invokePIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL);
 					if ( errcode != CL_SUCCESS )
 						return false;
 
@@ -122,8 +124,8 @@ public final class CL {
 					__buffer.stringParamASCII(functionName, true);
 
 					long address = platform == NULL
-						? nclGetExtensionFunctionAddress(__buffer.address(), clGetExtensionFunctionAddress)
-						: nclGetExtensionFunctionAddressForPlatform(platform, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
+						? invokePP(clGetExtensionFunctionAddress, __buffer.address())
+						: invokePPP(clGetExtensionFunctionAddressForPlatform, platform, __buffer.address());
 
 					if ( address == NULL )
 						address = OPENCL.getFunctionAddress(functionName);
@@ -136,7 +138,7 @@ public final class CL {
 					APIBuffer __buffer = apiBuffer();
 					__buffer.stringParamASCII(functionName, true);
 
-					return nclGetExtensionFunctionAddressForPlatform(handle, __buffer.address(), clGetExtensionFunctionAddressForPlatform);
+					return invokePPP(clGetExtensionFunctionAddressForPlatform, handle, __buffer.address());
 				}
 
 				@Override
@@ -204,7 +206,7 @@ public final class CL {
 				MAJOR, MINOR, supportedExtensions, "GL",
 				new int[][] {
 					{ 0, 2 },    // 10GL, 12GL
-					{ }
+					{}
 				}
 			);
 	}

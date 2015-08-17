@@ -14,6 +14,7 @@ import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CLUtil.*;
 import static org.lwjgl.opencl.Info.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** This class is a wrapper around a cl_platform_id pointer. */
@@ -104,7 +105,7 @@ public class CLPlatform extends PointerWrapper {
 		long clGetPlatformIDs = CL10.getInstance().GetPlatformIDs;
 
 		APIBuffer __buffer = apiBuffer();
-		int errcode = nclGetPlatformIDs(0, NULL, __buffer.address(), clGetPlatformIDs);
+		int errcode = invokeIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
 		checkCLError(errcode);
 
 		int num_platforms = __buffer.intValue(0);
@@ -113,7 +114,7 @@ public class CLPlatform extends PointerWrapper {
 
 		__buffer.bufferParam(num_platforms << POINTER_SHIFT);
 
-		errcode = nclGetPlatformIDs(num_platforms, __buffer.address(), NULL, clGetPlatformIDs);
+		errcode = invokeIPPI(clGetPlatformIDs, num_platforms, __buffer.address(), NULL);
 		checkCLError(errcode);
 
 		long[] platformIDs = new long[num_platforms];

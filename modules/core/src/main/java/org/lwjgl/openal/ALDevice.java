@@ -11,6 +11,7 @@ import java.nio.ByteBuffer;
 
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -73,7 +74,7 @@ public class ALDevice extends PointerWrapper {
 			checkFunctionAddress(alcOpenDevice);
 
 		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName);
-		long device = nalcOpenDevice(memAddressSafe(nameBuffer), alcOpenDevice);
+		long device = invokePP(alcOpenDevice, memAddressSafe(nameBuffer));
 		if ( device == NULL )
 			throw new RuntimeException("Failed to open the device.");
 

@@ -108,17 +108,9 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</compile>
 
-		<compile if:true="${binding.openal}">
-			<arguments>
-				<arg value="-I${src.include.rel}/openal"/>
-				<fileset dir="." includes="${src.generated.native}/openal/*.c"/>
-			</arguments>
-		</compile>
-
 		<compile if:true="${binding.opencl}">
 			<arguments>
 				<arg value="-I${src.include.rel}/opencl"/>
-				<arg value="-I${src.include.rel}/opengl" if:true="${binding.opengl}"/>
 				<fileset dir="." includes="${src.generated.native}/opencl/*.c" excludes="**/*CL20.c"/>
 			</arguments>
 		</compile>
@@ -126,10 +118,7 @@ License terms: http://lwjgl.org/license.php
 		<compile if:true="${binding.opengl}">
 			<arguments>
 				<arg value="-Wno-deprecated-declarations"/>
-				<arg value="-I${src.include.rel}/opengl"/>
-				<arg value="-I${src.include.rel}/opencl" if:true="${binding.opencl}"/>
 				<fileset dir=".">
-					<include name="${src.generated.native}/opengl/*.c"/>
 					<include name="${src.generated.native}/opengl/cgl/*.c"/>
 				</fileset>
 			</arguments>

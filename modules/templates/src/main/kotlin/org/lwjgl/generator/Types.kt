@@ -167,6 +167,19 @@ open class TypeMapping(
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
+	val jniSignature: String get() = when ( this.nativeMethodType ) {
+		javaClass<Boolean>() -> "Z"
+		javaClass<Byte>()    -> "B"
+		javaClass<Char>()    -> "C"
+		javaClass<Double>()  -> "D"
+		javaClass<Float>()   -> "F"
+		javaClass<Int>()     -> "I"
+		javaClass<Long>()    -> if ( this === PrimitiveMapping.LONG ) "J" else "P"
+		javaClass<Short>()   -> "S"
+		Void.TYPE            -> "V"
+		else                 -> throw IllegalStateException()
+	}
+
 }
 
 open class PrimitiveMapping(

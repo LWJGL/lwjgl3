@@ -16,6 +16,7 @@ import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 public final class AL {
@@ -40,7 +41,7 @@ public final class AL {
 				APIBuffer __buffer = apiBuffer();
 				__buffer.stringParamASCII(functionName, true);
 
-				long address = nalGetProcAddress(__buffer.address(), alGetProcAddress);
+				long address = invokePP(alGetProcAddress, __buffer.address());
 				if ( address == NULL )
 					LWJGLUtil.log("Failed to locate address for AL function " + functionName);
 
@@ -113,7 +114,7 @@ public final class AL {
 			throw new IllegalStateException("Core OpenAL functions could not be found. Make sure that OpenAL has been loaded.");
 
 		// Parse EXTENSIONS string
-		String extensionsString = memDecodeUTF8(checkPointer(nalGetString(AL_EXTENSIONS, GetString)));
+		String extensionsString = memDecodeUTF8(checkPointer(invokeIP(GetString, AL_EXTENSIONS)));
 
 		/*
 		OpenALSoft: AL_EXT_ALAW AL_EXT_DOUBLE AL_EXT_EXPONENT_DISTANCE AL_EXT_FLOAT32 AL_EXT_IMA4 AL_EXT_LINEAR_DISTANCE AL_EXT_MCFORMATS AL_EXT_MULAW
@@ -127,7 +128,7 @@ public final class AL {
 		while ( tokenizer.hasMoreTokens() ) {
 			String extName = tokenizer.nextToken();
 			__buffer.reset().stringParamASCII(extName, true);
-			if ( nalIsExtensionPresent(__buffer.address(), IsExtensionPresent) )
+			if ( invokePZ(IsExtensionPresent, __buffer.address()) )
 				supportedExtensions.add(extName);
 		}
 

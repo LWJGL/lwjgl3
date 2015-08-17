@@ -96,6 +96,8 @@ fun main(args: Array<String>) {
 		generate("struct", Generator.structs)
 		generate("callback", Generator.callbacks)
 		generate("custom class", Generator.customClasses)
+
+		generate(JNI)
 	}
 }
 
@@ -226,7 +228,7 @@ class Generator(
 			it.generateJava()
 		}
 
-		if ( nativeClass.functions.any { !it.has(Reuse) } ) {
+		if ( nativeClass.binding == null && nativeClass.functions.any() ) {
 			generateNative(nativeClass) {
 				generateOutput(nativeClass, it) {
 					it.generateNative()
@@ -251,11 +253,15 @@ class Generator(
 
 		val outputJava = File("$trgPath/java/$packagePath/${target.className}.java")
 
-		val touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
-		if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
-			println("SKIPPED: ${target.packageName}.${target.className}")
-			return
-		}
+		val touchTimestamp: Long?
+		if ( target !== JNI ) {
+			touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
+			if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
+				println("SKIPPED: ${target.packageName}.${target.className}")
+				return
+			}
+		} else
+			touchTimestamp = null
 
 		//println("GENERATING: ${target.packageName}.${target.className}")
 
@@ -337,7 +343,7 @@ private fun readFile(file: File): ByteBuffer {
 private fun <T> generateOutput(
 	target: T,
 	file: File,
-	/** If not null, the file timestamp will be updated if no changed occured since last generation. */
+	/** If not null, the file timestamp will be updated if no change occured since last generation. */
 	touchTimestamp: Long? = null,
 	generate: T.(PrintWriter) -> Unit
 ) {

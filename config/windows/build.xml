@@ -80,38 +80,19 @@ License terms: http://lwjgl.org/license.php
 			</arguments>
 		</cl>
 
-		<cl if:true="${binding.openal}">
-			<arguments>
-				<arg value="/I${src.include}\openal"/>
-				<fileset dir="." includes="${src.generated.native}/openal/*.c"/>
-			</arguments>
-		</cl>
-
 		<cl if:true="${binding.opencl}">
 			<arguments>
 				<arg value="/I${src.include}\opencl"/>
-				<arg value="/I${src.include}\opengl" if:true="${binding.opengl}"/>
 				<fileset dir="." includes="${src.generated.native}/opencl/*.c"/>
 			</arguments>
 		</cl>
 
 		<cl if:true="${binding.opengl}">
 			<arguments>
-				<arg value="/I${src.include}\opengl"/>
 				<arg value="/I${src.include}\opengl\wgl"/>
-				<arg value="/I${src.include}\opencl" if:true="${binding.opencl}"/>
 				<fileset dir=".">
-					<include name="${src.generated.native}/opengl/*.c"/>
 					<include name="${src.generated.native}/opengl/wgl/*.c"/>
 				</fileset>
-			</arguments>
-		</cl>
-
-		<cl if:true="${binding.opengles}">
-			<arguments>
-				<arg value="/I${src.include}\egl"/>
-				<arg value="/I${src.include}\opengles"/>
-				<fileset dir="." includes="${src.generated.native}/opengles/*.c"/>
 			</arguments>
 		</cl>
 
@@ -198,10 +179,8 @@ License terms: http://lwjgl.org/license.php
 			<fileset refid="link-libraries"/>
 
 			<arg line="/link /OPT:REF,ICF /DLL"/>
-			<arg value="Kernel32.lib"/>
 			<arg value="user32.lib"/>
 			<arg value="Gdi32.lib"/>
-			<arg value="winmm.lib"/>
 			<arg value="shell32.lib"/>
 			<arg value="OpenGL32.lib" if:true="${binding.opengl}"/>
 		</apply>

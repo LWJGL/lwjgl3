@@ -169,6 +169,8 @@ class NativeClass(
 				println("import java.nio.*;\n")
 
 			println("import static org.lwjgl.system.Checks.*;")
+			if ( binding != null )
+				println("import static org.lwjgl.system.JNI.*;")
 			if ( hasNIO ) {
 				if ( functions.any { it.hasParam { it.nativeType.mapping === PointerMapping.DATA_POINTER } } )
 					println("import static org.lwjgl.Pointer.*;")

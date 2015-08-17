@@ -18,6 +18,7 @@ import java.util.StringTokenizer;
 import static java.lang.Math.*;
 import static org.lwjgl.egl.EGL10.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -86,7 +87,7 @@ public final class EGL {
 					APIBuffer __buffer = apiBuffer();
 					__buffer.stringParamASCII(functionName, true);
 
-					long address = neglGetProcAddress(__buffer.address(), eglGetProcAddress);
+					long address = invokePP(eglGetProcAddress, __buffer.address());
 					if ( address == NULL )
 						address = EGL.getFunctionAddress(functionName);
 
@@ -147,7 +148,7 @@ public final class EGL {
 
 	private static EGLCapabilities createClientCapabilities() {
 		long QueryString = functionProvider.getFunctionAddress("eglQueryString");
-		long versionString = org.lwjgl.egl.EGL10.neglQueryString(EGL_NO_DISPLAY, EGL_VERSION, QueryString);
+		long versionString = invokePIP(QueryString, EGL_NO_DISPLAY, EGL_VERSION);
 
 		Set<String> ext = new HashSet<String>(32);
 
@@ -156,11 +157,11 @@ public final class EGL {
 			version = new APIVersion(0, 0, null, null);
 
 			long GetError = functionProvider.getFunctionAddress("eglGetError");
-			neglGetError(GetError); // clear error
+			invokeI(GetError); // clear error
 		} else {
 			version = apiParseVersion(memDecodeASCII(versionString), "EGL");
 
-			addExtensions(memDecodeASCII(org.lwjgl.egl.EGL10.neglQueryString(EGL_NO_DISPLAY, EGL_EXTENSIONS, QueryString)), ext);
+			addExtensions(memDecodeASCII(invokePIP(QueryString, EGL_NO_DISPLAY, EGL_EXTENSIONS)), ext);
 		}
 
 		return new EGLCapabilities(version.major, version.minor, ext, functionProvider);

@@ -19,6 +19,7 @@ import static org.lwjgl.opengles.GLES20.*;
 import static org.lwjgl.opengles.GLES30.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
@@ -193,7 +194,7 @@ public final class GLES {
 					"Core OpenGL ES functions could not be found. Make sure that a GLES context is current in the current thread."
 				);
 
-			int errorCode = nglGetError(GetError);
+			int errorCode = invokeI(GetError);
 			if ( errorCode != GL_NO_ERROR )
 				LWJGLUtil.log(
 					"A GLES context was in an error state before the creation of its capabilities instance. Error: " + GLESUtil.getErrorString(errorCode)
@@ -206,14 +207,14 @@ public final class GLES {
 
 			// Try the 3.0+ version query first
 			__buffer.intParam(0, 0, 0);
-			nglGetIntegerv(GL_MAJOR_VERSION, __buffer.address(), GetIntegerv);
-			if ( nglGetError(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
+			invokeIPV(GetIntegerv, GL_MAJOR_VERSION, __buffer.address());
+			if ( invokeI(GetError) == GL_NO_ERROR && 3 <= (majorVersion = __buffer.intValue(0)) ) {
 				// We're on an 3.0+ context.
-				nglGetIntegerv(GL_MINOR_VERSION, __buffer.address(), GetIntegerv);
+				invokeIPV(GetIntegerv, GL_MINOR_VERSION, __buffer.address());
 				minorVersion = __buffer.intValue(0);
 			} else {
 				// Fallback to the string query.
-				APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(nglGetString(GL_VERSION, GetString))), "OpenGL ES");
+				APIVersion version = apiParseVersion(memDecodeUTF8(checkPointer(invokeIP(GetString, GL_VERSION))), "OpenGL ES");
 
 				majorVersion = version.major;
 				minorVersion = version.minor;
@@ -246,19 +247,19 @@ public final class GLES {
 
 			if ( majorVersion < 3 ) {
 				// Parse EXTENSIONS string
-				String extensionsString = memDecodeASCII(checkPointer(nglGetString(GL_EXTENSIONS, GetString)));
+				String extensionsString = memDecodeASCII(checkPointer(invokeIP(GetString, GL_EXTENSIONS)));
 
 				StringTokenizer tokenizer = new StringTokenizer(extensionsString);
 				while ( tokenizer.hasMoreTokens() )
 					supportedExtensions.add(tokenizer.nextToken());
 			} else {
 				// Use indexed EXTENSIONS
-				nglGetIntegerv(GL_NUM_EXTENSIONS, __buffer.address(), GetIntegerv);
+				invokeIPV(GetIntegerv, GL_NUM_EXTENSIONS, __buffer.address());
 				int extensionCount = __buffer.intValue(0);
 
 				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
 				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memDecodeASCII(checkPointer(nglGetStringi(GL_EXTENSIONS, i, GetStringi))));
+					supportedExtensions.add(memDecodeASCII(checkPointer(invokeIIP(GetStringi, GL_EXTENSIONS, i))));
 			}
 
 			caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);
