@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2008 - 2012 The Khronos Group Inc.
+ * Copyright (c) 2008 - 2013 The Khronos Group Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a
  * copy of this software and/or associated documentation files (the
@@ -27,8 +27,12 @@
 #ifdef __APPLE__
 #include <OpenCL/cl_platform.h>
 #else
-#include "CL/cl_platform.h"
-#endif	
+#include <CL/cl_platform.h>
+#endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /******************************************************************************/
 
@@ -42,7 +46,7 @@ typedef struct _cl_kernel *         cl_kernel;
 typedef struct _cl_event *          cl_event;
 typedef struct _cl_sampler *        cl_sampler;
 
-typedef cl_uint             cl_bool;                     /* WARNING!  Unlike cl_ types in cl_platform.h, cl_bool is not guaranteed to be the same size as the bool in kernels. */ 
+typedef cl_uint             cl_bool;                     /* WARNING!  Unlike cl_ types in cl_platform.h, cl_bool is not guaranteed to be the same size as the bool in kernels. */
 typedef cl_ulong            cl_bitfield;
 typedef cl_bitfield         cl_device_type;
 typedef cl_uint             cl_platform_info;
@@ -106,6 +110,9 @@ typedef struct _cl_image_desc {
     size_t                  image_slice_pitch;
     cl_uint                 num_mip_levels;
     cl_uint                 num_samples;
+#ifdef __GNUC__
+    __extension__   /* Prevents warnings about anonymous union in -pedantic builds */
+#endif
     union {
       cl_mem                  buffer;
       cl_mem                  mem_object;
@@ -116,5 +123,9 @@ typedef struct _cl_buffer_region {
     size_t                  origin;
     size_t                  size;
 } cl_buffer_region;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif  /* __OPENCL_CL_H */

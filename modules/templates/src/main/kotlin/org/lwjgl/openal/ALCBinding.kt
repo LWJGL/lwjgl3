@@ -5,7 +5,6 @@
 package org.lwjgl.openal
 
 import java.io.PrintWriter
-import java.util.Comparator
 import org.lwjgl.generator.*
 
 private fun NativeClass.capName(core: String) =
