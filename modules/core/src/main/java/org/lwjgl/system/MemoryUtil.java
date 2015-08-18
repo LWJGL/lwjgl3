@@ -116,16 +116,16 @@ public final class MemoryUtil {
 	 *
 	 * @return the memory address
 	 */
-	public static long memAddress0(Buffer buffer) { return ACCESSOR.getAddress(buffer); }
+	public static long memAddress0(Buffer buffer) { return ACCESSOR.memAddress0(buffer); }
 
 	/** Null-safe version of {@link #memAddress0(Buffer)}. Returns {@link #NULL} if the specified buffer is null. */
-	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer); }
+	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer); }
 
 	/** PointerBuffer version of {@link #memAddress0(Buffer)}. */
-	public static long memAddress0(PointerBuffer buffer) { return ACCESSOR.getAddress(buffer.getBuffer()); }
+	public static long memAddress0(PointerBuffer buffer) { return ACCESSOR.memAddress0(buffer.getBuffer()); }
 
 	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
-	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.getAddress(buffer.getBuffer()); }
+	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer.getBuffer()); }
 
 	// --- [ Buffer address ] ---
 
@@ -269,7 +269,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newByteBuffer(address, capacity);
+		return ACCESSOR.memByteBuffer(address, capacity);
 	}
 
 	/**
@@ -301,7 +301,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		ByteBuffer string = ACCESSOR.newByteBuffer(address, maxLength);
+		ByteBuffer string = ACCESSOR.memByteBuffer(address, maxLength);
 
 		return memSetupBuffer(string, address, memStrLen1(string, 0));
 	}
@@ -334,7 +334,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		ByteBuffer string = ACCESSOR.newByteBuffer(address, maxLength);
+		ByteBuffer string = ACCESSOR.memByteBuffer(address, maxLength);
 
 		return memSetupBuffer(string, address, memStrLen2(string, 0) << 1);
 	}
@@ -351,7 +351,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newShortBuffer(address, capacity);
+		return ACCESSOR.memShortBuffer(address, capacity);
 	}
 
 	/**
@@ -366,7 +366,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newCharBuffer(address, capacity);
+		return ACCESSOR.memCharBuffer(address, capacity);
 	}
 
 	/**
@@ -381,7 +381,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newIntBuffer(address, capacity);
+		return ACCESSOR.memIntBuffer(address, capacity);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newLongBuffer(address, capacity);
+		return ACCESSOR.memLongBuffer(address, capacity);
 	}
 
 	/**
@@ -411,7 +411,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newFloatBuffer(address, capacity);
+		return ACCESSOR.memFloatBuffer(address, capacity);
 	}
 
 	/**
@@ -426,7 +426,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.newDoubleBuffer(address, capacity);
+		return ACCESSOR.memDoubleBuffer(address, capacity);
 	}
 
 	/**
@@ -460,7 +460,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** ShortBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -468,7 +468,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** CharBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -476,7 +476,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** IntBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -484,7 +484,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** LongBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -492,7 +492,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** FloatBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -500,7 +500,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	/** DoubleBuffer version of: {@link #memSetupBuffer(java.nio.ByteBuffer, long, int)} */
@@ -508,7 +508,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		return ACCESSOR.setupBuffer(buffer, address, capacity);
+		return ACCESSOR.memSetupBuffer(buffer, address, capacity);
 	}
 
 	// --- [ Buffer slicing ] ---
@@ -706,50 +706,6 @@ public final class MemoryUtil {
 	 * @param globalRef the memory address of the weak global reference to delete
 	 */
 	public static native void memDeleteWeakGlobalRef(long globalRef);
-
-	// The standard C memset function
-	static native void nMemSet(long ptr, int value, long bytes);
-
-	// The standard C memcpy function
-	static native void nMemCopy(long dst, long src, long bytes);
-
-	// Primitive getters
-
-	static native byte nMemGetByte(long ptr);
-
-	static native short nMemGetShort(long ptr);
-
-	static native int nMemGetInt(long ptr);
-
-	static native long nMemGetLong(long ptr);
-
-	static native float nMemGetFloat(long ptr);
-
-	static native double nMemGetDouble(long ptr);
-
-	static native long nMemGetAddress(long ptr);
-
-	// Primitive setters
-
-	static native void nMemPutByte(long ptr, byte value);
-
-	static native void nMemPutShort(long ptr, short value);
-
-	static native void nMemPutInt(long ptr, int value);
-
-	static native void nMemPutLong(long ptr, long value);
-
-	static native void nMemPutFloat(long ptr, float value);
-
-	static native void nMemPutDouble(long ptr, double value);
-
-	static native void nMemPutAddress(long ptr, long value);
-
-	// Returns the buffer memory address
-	static native long nGetAddress(Buffer buffer);
-
-	// Returns a new direct ByteBuffer instance
-	static native ByteBuffer nNewBuffer(long address, int capacity);
 
 	// --- [ Text codecs ] ---
 

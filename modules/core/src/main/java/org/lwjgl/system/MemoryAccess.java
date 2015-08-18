@@ -13,12 +13,10 @@ import java.nio.*;
 import sun.misc.Unsafe;
 import sun.nio.ch.DirectBuffer;
 
-import static org.lwjgl.system.MemoryUtil.*;
-
 /**
- * Provides 3 MemoryAccessor implementations. The fastest available will be used by MemoryUtil.
+ * Provides 3 {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}.
  * <p/>
- * On non-Oracle VMs, Unsafe should be the fastest implementation as well. In the absence of Unsafe, performance will depend on how reflection and JNI are
+ * Unsafe should be the most efficient implementation, even on non-Oracle VMs. In the absence of Unsafe, performance will depend on how reflection and JNI are
  * implemented. For now we'll go with what we see on the Oracle VM (that is, we'll prefer reflection over JNI).
  */
 final class MemoryAccess {
@@ -48,6 +46,51 @@ final class MemoryAccess {
 		return (MemoryAccessor)Class.forName(className).newInstance();
 	}
 
+	// The standard C memset function
+	private static native void memset(long ptr, int value, long bytes);
+
+	// The standard C memcpy function
+	private static native void memcpy(long dst, long src, long bytes);
+
+	// Primitive getters
+
+	private static native byte getByte(long ptr);
+
+	private static native short getShort(long ptr);
+
+	private static native int getInt(long ptr);
+
+	private static native long getLong(long ptr);
+
+	private static native float getFloat(long ptr);
+
+	private static native double getDouble(long ptr);
+
+	private static native long getAddress(long ptr);
+
+	// Primitive setters
+
+	private static native void putByte(long ptr, byte value);
+
+	private static native void putShort(long ptr, short value);
+
+	private static native void putInt(long ptr, int value);
+
+	private static native void putLong(long ptr, long value);
+
+	private static native void putFloat(long ptr, float value);
+
+	private static native void putDouble(long ptr, double value);
+
+	private static native void putAddress(long ptr, long value);
+
+	// Returns the buffer memory address
+	private static native long getDirectBufferAddress(Buffer buffer);
+
+	// Returns a new direct ByteBuffer instance
+	private static native ByteBuffer newDirectByteBuffer(long address, int capacity);
+
+	/** Implements functionality for {@link MemoryUtil}. */
 	abstract static class MemoryAccessor {
 
 		int getPageSize() {
@@ -60,69 +103,69 @@ final class MemoryAccess {
 			return 64;
 		}
 
-		abstract long getAddress(Buffer buffer);
+		abstract long memAddress0(Buffer buffer);
 
-		abstract ByteBuffer newByteBuffer(long address, int capacity);
+		abstract ByteBuffer memByteBuffer(long address, int capacity);
 
-		final ShortBuffer newShortBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asShortBuffer(); }
+		final ShortBuffer memShortBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 1).asShortBuffer(); }
 
-		final CharBuffer newCharBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 1).asCharBuffer(); }
+		final CharBuffer memCharBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 1).asCharBuffer(); }
 
-		final IntBuffer newIntBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asIntBuffer(); }
+		final IntBuffer memIntBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 2).asIntBuffer(); }
 
-		final LongBuffer newLongBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asLongBuffer(); }
+		final LongBuffer memLongBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 3).asLongBuffer(); }
 
-		final FloatBuffer newFloatBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 2).asFloatBuffer(); }
+		final FloatBuffer memFloatBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 2).asFloatBuffer(); }
 
-		final DoubleBuffer newDoubleBuffer(long address, int capacity) { return newByteBuffer(address, capacity << 3).asDoubleBuffer(); }
+		final DoubleBuffer memDoubleBuffer(long address, int capacity) { return memByteBuffer(address, capacity << 3).asDoubleBuffer(); }
 
-		abstract ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity);
+		abstract ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity);
 
-		abstract ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity);
+		abstract ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity);
 
-		abstract CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity);
+		abstract CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity);
 
-		abstract IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity);
+		abstract IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity);
 
-		abstract LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity);
+		abstract LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity);
 
-		abstract FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity);
+		abstract FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity);
 
-		abstract DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity);
+		abstract DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity);
 
-		void memSet(long dst, int value, int bytes) { nMemSet(dst, value, bytes); }
+		void memSet(long dst, int value, int bytes) { memset(dst, value, bytes); }
 
 		void memCopy(long src, long dst, int bytes) {
-			nMemCopy(dst, src, bytes); // Note the swapped src & dst
+			memcpy(dst, src, bytes); // Note the swapped src & dst
 		}
 
-		byte memGetByte(long ptr) { return nMemGetByte(ptr); }
+		byte memGetByte(long ptr) { return getByte(ptr); }
 
-		short memGetShort(long ptr) { return nMemGetShort(ptr); }
+		short memGetShort(long ptr) { return getShort(ptr); }
 
-		int memGetInt(long ptr) { return nMemGetInt(ptr); }
+		int memGetInt(long ptr) { return getInt(ptr); }
 
-		long memGetLong(long ptr) { return nMemGetLong(ptr); }
+		long memGetLong(long ptr) { return getLong(ptr); }
 
-		float memGetFloat(long ptr) { return nMemGetFloat(ptr); }
+		float memGetFloat(long ptr) { return getFloat(ptr); }
 
-		double memGetDouble(long ptr) { return nMemGetDouble(ptr); }
+		double memGetDouble(long ptr) { return getDouble(ptr); }
 
-		long memGetAddress(long ptr) { return nMemGetAddress(ptr); }
+		long memGetAddress(long ptr) { return getAddress(ptr); }
 
-		void memPutByte(long ptr, byte value) { nMemPutByte(ptr, value); }
+		void memPutByte(long ptr, byte value) { putByte(ptr, value); }
 
-		void memPutShort(long ptr, short value) { nMemPutShort(ptr, value); }
+		void memPutShort(long ptr, short value) { putShort(ptr, value); }
 
-		void memPutInt(long ptr, int value) { nMemPutInt(ptr, value); }
+		void memPutInt(long ptr, int value) { putInt(ptr, value); }
 
-		void memPutLong(long ptr, long value) { nMemPutLong(ptr, value); }
+		void memPutLong(long ptr, long value) { putLong(ptr, value); }
 
-		void memPutFloat(long ptr, float value) { nMemPutFloat(ptr, value); }
+		void memPutFloat(long ptr, float value) { putFloat(ptr, value); }
 
-		void memPutDouble(long ptr, double value) { nMemPutDouble(ptr, value); }
+		void memPutDouble(long ptr, double value) { putDouble(ptr, value); }
 
-		void memPutAddress(long ptr, long value) { nMemPutAddress(ptr, value); }
+		void memPutAddress(long ptr, long value) { putAddress(ptr, value); }
 
 	}
 
@@ -130,35 +173,35 @@ final class MemoryAccess {
 	private static final class MemoryAccessorJNI extends MemoryAccessor {
 
 		@Override
-		long getAddress(Buffer buffer) {
-			return nGetAddress(buffer);
+		long memAddress0(Buffer buffer) {
+			return getDirectBufferAddress(buffer);
 		}
 
 		@Override
-		ByteBuffer newByteBuffer(long address, int capacity) {
-			return nNewBuffer(address, capacity).order(ByteOrder.nativeOrder());
+		ByteBuffer memByteBuffer(long address, int capacity) {
+			return newDirectByteBuffer(address, capacity).order(ByteOrder.nativeOrder());
 		}
 
 		@Override
-		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) { return newByteBuffer(address, capacity); }
+		ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) { return memByteBuffer(address, capacity); }
 
 		@Override
-		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) { return newShortBuffer(address, capacity); }
+		ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) { return memShortBuffer(address, capacity); }
 
 		@Override
-		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) { return newCharBuffer(address, capacity); }
+		CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) { return memCharBuffer(address, capacity); }
 
 		@Override
-		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) { return newIntBuffer(address, capacity); }
+		IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) { return memIntBuffer(address, capacity); }
 
 		@Override
-		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) { return newLongBuffer(address, capacity); }
+		LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) { return memLongBuffer(address, capacity); }
 
 		@Override
-		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) { return newFloatBuffer(address, capacity); }
+		FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) { return memFloatBuffer(address, capacity); }
 
 		@Override
-		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) { return newDoubleBuffer(address, capacity); }
+		DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) { return memDoubleBuffer(address, capacity); }
 
 	}
 
@@ -211,7 +254,7 @@ final class MemoryAccess {
 		}
 
 		@Override
-		public long getAddress(Buffer buffer) {
+		public long memAddress0(Buffer buffer) {
 			try {
 				return address.getLong(buffer);
 			} catch (IllegalAccessException e) {
@@ -220,7 +263,7 @@ final class MemoryAccess {
 		}
 
 		@Override
-		ByteBuffer newByteBuffer(long address, int capacity) {
+		ByteBuffer memByteBuffer(long address, int capacity) {
 			ByteBuffer buffer = newByteBuffer();
 
 			try {
@@ -253,7 +296,7 @@ final class MemoryAccess {
 		}
 
 		@Override
-		ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
+		ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			if ( LWJGLUtil.DEBUG ) {
 				try {
 					// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
@@ -268,32 +311,32 @@ final class MemoryAccess {
 		}
 
 		@Override
-		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
+		ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
 		@Override
-		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
+		CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
 		@Override
-		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
+		IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
 		@Override
-		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
+		LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
 		@Override
-		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
+		FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
 		@Override
-		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
+		DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
@@ -352,12 +395,12 @@ final class MemoryAccess {
 		}
 
 		@Override
-		public long getAddress(Buffer buffer) {
+		public long memAddress0(Buffer buffer) {
 			return ((DirectBuffer)buffer).address();
 		}
 
 		@Override
-		ByteBuffer newByteBuffer(long address, int capacity) {
+		ByteBuffer memByteBuffer(long address, int capacity) {
 			ByteBuffer buffer = newByteBuffer();
 
 			unsafe.putLong(buffer, this.address, address);
@@ -382,7 +425,7 @@ final class MemoryAccess {
 		}
 
 		@Override
-		public ByteBuffer setupBuffer(ByteBuffer buffer, long address, int capacity) {
+		public ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
 			if ( LWJGLUtil.DEBUG && unsafe.getObject(buffer, cleaner) != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
@@ -391,32 +434,32 @@ final class MemoryAccess {
 		}
 
 		@Override
-		ShortBuffer setupBuffer(ShortBuffer buffer, long address, int capacity) {
+		ShortBuffer memSetupBuffer(ShortBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, shortBufferParent);
 		}
 
 		@Override
-		CharBuffer setupBuffer(CharBuffer buffer, long address, int capacity) {
+		CharBuffer memSetupBuffer(CharBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, charBufferParent);
 		}
 
 		@Override
-		IntBuffer setupBuffer(IntBuffer buffer, long address, int capacity) {
+		IntBuffer memSetupBuffer(IntBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, intBufferParent);
 		}
 
 		@Override
-		LongBuffer setupBuffer(LongBuffer buffer, long address, int capacity) {
+		LongBuffer memSetupBuffer(LongBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, longBufferParent);
 		}
 
 		@Override
-		FloatBuffer setupBuffer(FloatBuffer buffer, long address, int capacity) {
+		FloatBuffer memSetupBuffer(FloatBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, floatBufferParent);
 		}
 
 		@Override
-		DoubleBuffer setupBuffer(DoubleBuffer buffer, long address, int capacity) {
+		DoubleBuffer memSetupBuffer(DoubleBuffer buffer, long address, int capacity) {
 			return setup(buffer, address, capacity, doubleBufferParent);
 		}
 
