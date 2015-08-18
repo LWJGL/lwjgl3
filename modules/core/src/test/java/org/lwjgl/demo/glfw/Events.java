@@ -13,6 +13,7 @@ import org.lwjgl.opengl.GL;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.Map;
@@ -21,7 +22,6 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
-import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /** GLFW events demo. */
@@ -66,7 +66,7 @@ public final class Events {
 		System.out.println("Window opened.");
 
 		try {
-			Class.forName("org.lwjgl.stb.STBImage"); // Skip if the stb bindings are not available
+			Class STBImage = Class.forName("org.lwjgl.stb.STBImage"); // Skip if the stb bindings are not available
 
 			ByteBuffer png;
 			try {
@@ -79,12 +79,20 @@ public final class Events {
 			IntBuffer h = BufferUtils.createIntBuffer(1);
 			IntBuffer comp = BufferUtils.createIntBuffer(1);
 
-			ByteBuffer pixels = stbi_load_from_memory(png, w, h, comp, 0);
+			try {
+				Method stbi_load_from_memory = STBImage.getMethod(
+					"stbi_load_from_memory",
+					ByteBuffer.class, IntBuffer.class, IntBuffer.class, IntBuffer.class, int.class
+				);
+				ByteBuffer pixels = (ByteBuffer)stbi_load_from_memory.invoke(null, png, w, h, comp, 0);
 
-			ByteBuffer img = GLFWimage.malloc(w.get(0), h.get(0), pixels);
-			long cursor = glfwCreateCursor(img, 0, 8);
+				ByteBuffer img = GLFWimage.malloc(w.get(0), h.get(0), pixels);
+				long cursor = glfwCreateCursor(img, 0, 8);
 
-			glfwSetCursor(window, cursor);
+				glfwSetCursor(window, cursor);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		} catch (ClassNotFoundException e) {
 			// ignore
 		}
