@@ -10,6 +10,8 @@ package org.lwjgl.system.libffi;
  */
 public class ClosureError extends Error {
 
+	private static final long serialVersionUID = 1L;
+
 	public ClosureError() {
 		super("Callback failed because the closure instance has been garbage collected.");
 	}

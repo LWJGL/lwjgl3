@@ -66,7 +66,7 @@ public final class Events {
 		System.out.println("Window opened.");
 
 		try {
-			Class STBImage = Class.forName("org.lwjgl.stb.STBImage"); // Skip if the stb bindings are not available
+			Class<?> STBImage = Class.forName("org.lwjgl.stb.STBImage"); // Skip if the stb bindings are not available
 
 			ByteBuffer png;
 			try {

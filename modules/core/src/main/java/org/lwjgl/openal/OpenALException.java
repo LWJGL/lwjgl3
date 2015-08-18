@@ -7,6 +7,8 @@ package org.lwjgl.openal;
 /** A runtime exception thrown by LWJGL when it encounters an OpenAL error. */
 public class OpenALException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public OpenALException() {
 		super();
 	}
@@ -24,4 +26,3 @@ public class OpenALException extends RuntimeException {
 	}
 
 }
-

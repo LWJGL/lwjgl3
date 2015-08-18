@@ -7,6 +7,8 @@ package org.lwjgl.opengles;
 /** A runtime exception thrown by LWJGL when it encounters an OpenGL ES error. */
 public class OpenGLESException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public OpenGLESException(int errorCode) {
 		this(String.format("%s [0x%X]", GLESUtil.getErrorString(errorCode), errorCode));
 	}
@@ -20,4 +22,3 @@ public class OpenGLESException extends RuntimeException {
 	}
 
 }
-

@@ -135,6 +135,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 					<include name="*.jar"/>
 				</fileset>
 			</bootclasspath>
+			<compilerarg value="-Xlint:all"/>
 			<compilerarg value="-Xlint:-options" unless:set="env.JAVA6_HOME"/>
 		</javac>
 	</presetdef>

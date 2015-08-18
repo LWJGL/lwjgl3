@@ -274,7 +274,7 @@ public final class LWJGLUtil {
 		return target;
 	}
 
-	public static Class getOptionalClass(String className) {
+	public static Class<?> getOptionalClass(String className) {
 		try {
 			return Class.forName(className);
 		} catch (ClassNotFoundException e) {

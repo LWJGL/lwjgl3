@@ -7,6 +7,8 @@ package org.lwjgl.opencl;
 /** A runtime exception thrown by LWJGL when it encounters an OpenCL error. */
 public class OpenCLException extends RuntimeException {
 
+	private static final long serialVersionUID = 1L;
+
 	public OpenCLException() {
 		super();
 	}
@@ -24,4 +26,3 @@ public class OpenCLException extends RuntimeException {
 	}
 
 }
-
