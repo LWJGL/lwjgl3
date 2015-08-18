@@ -27,7 +27,6 @@ License terms: http://lwjgl.org/license.php
 		<mkdir-symlink dir="${src.generated}"/>
 
 		<mkdir dir="${bin.core}"/>
-		<mkdir dir="${bin.util}"/>
 		<mkdir dir="${bin.templates}"/>
 		<mkdir dir="${bin.tests}"/>
 		<mkdir dir="${bin.native}"/>
@@ -96,7 +95,6 @@ License terms: http://lwjgl.org/license.php
 
 	<target name="clean-java" description="Deletes Java binary files produced by this script">
 		<delete dir="${bin.core}"/>
-		<delete dir="${bin.util}"/>
 		<delete dir="${bin.tests}"/>
 	</target>
 
@@ -254,10 +252,6 @@ License terms: http://lwjgl.org/license.php
 			<include name="org/lwjgl/ovr/**" if:true="${binding.ovr}"/>
 			<include name="org/lwjgl/stb/**" if:true="${binding.stb}"/>
 		</patternset>
-
-		<patternset id="util.main.files">
-			<include name="org/lwjgl/openal/**" if:true="${binding.openal}"/>
-		</patternset>
 	</target>
 
 	<target name="compile" description="Compiles the Java source code" depends="generate, -init-compile">
@@ -265,12 +259,10 @@ License terms: http://lwjgl.org/license.php
 			<src>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.generated.java}"/>
-				<pathelement path="${src.util}"/>
 			</src>
 
 			<patternset refid="core.main.files"/>
 			<patternset refid="core.generated.files"/>
-			<patternset refid="util.main.files"/>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->
 			<compilerarg value="-XDignore.symbol.file=true"/>
@@ -301,7 +293,6 @@ License terms: http://lwjgl.org/license.php
 		<lwjgl.javac destdir="${bin.tests}" taskname="Tests">
 			<classpath>
 				<pathelement path="${bin.core}"/>
-				<pathelement path="${bin.util}"/>
 				<pathelement path="${lib}/testng.jar"/>
 			</classpath>
 
@@ -328,7 +319,6 @@ License terms: http://lwjgl.org/license.php
 	<target name="-init-runtime" description="Initializes properties required for running demos and tests">
 		<path id="runtime.classpath">
 			<pathelement path="${bin.core}"/>
-			<pathelement path="${bin.util}"/>
 			<pathelement path="${test.resources}"/>
 			<pathelement path="${bin.tests}"/>
 		</path>
@@ -411,7 +401,6 @@ License terms: http://lwjgl.org/license.php
 			<classpath>
 				<pathelement path="${src.core}"/>
 				<pathelement path="${src.generated.java}"/>
-				<pathelement path="${src.util}"/>
 			</classpath>
 
 			<fileset dir="${src.core}">
@@ -420,10 +409,6 @@ License terms: http://lwjgl.org/license.php
 
 			<fileset dir="${src.generated.java}">
 				<patternset refid="core.generated.files"/>
-			</fileset>
-
-			<fileset dir="${src.util}">
-				<patternset refid="util.main.files"/>
 			</fileset>
 
 			<!-- Supresses internal API (e.g. Unsafe) usage warnings -->

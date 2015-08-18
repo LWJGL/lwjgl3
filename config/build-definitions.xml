@@ -53,12 +53,10 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
 	<property name="module.templates" location="${modules}/templates" relative="true"/>
 	<property name="module.core" location="${modules}/core" relative="true"/>
-	<property name="module.util" location="${modules}/util" relative="true"/>
 
 	<property name="src.templates" location="${module.templates}/src/main" relative="true"/>
 	<property name="src.templates.kotlin" location="${src.templates}/kotlin" relative="true"/>
 	<property name="src.core" location="${module.core}/src/main/java" relative="true"/>
-	<property name="src.util" location="${module.util}/src/main/java" relative="true"/>
 	<property name="src.tests" location="${module.core}/src/test/java" relative="true"/>
 
 	<property name="src.include" location="${module.core}/src/main/include" relative="true"/>
@@ -70,7 +68,6 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
 	<property name="bin.templates" location="${bin}/Templates" relative="true"/>
 	<property name="bin.core" location="${bin}/Core" relative="true"/>
-	<property name="bin.util" location="${bin}/Utilities" relative="true"/>
 	<property name="bin.tests" location="${bin}/Tests" relative="true"/>
 	<property name="bin.html.tests" location="${bin}/HTML/tests" relative="true"/>
 	<property name="bin.html.javadoc" location="${bin}/HTML/javadoc" relative="true"/>
