@@ -30,7 +30,7 @@ public class OpenALInfo {
 	protected void execute(String[] args) {
 		ALContext alContext = null;
 		try {
-			alContext = ALContext.create(null, 44100, 60, false);
+			alContext = ALContext.create(ALDevice.create(args.length == 0 ? null : args[0]), 0, 60, false);
 			checkForErrors(alContext);
 		} catch (Exception e) {
 			die("Init", e.getMessage());
