@@ -2,7 +2,11 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl.openal;
+package org.lwjgl.demo.openal;
+
+import org.lwjgl.openal.AL10;
+import org.lwjgl.openal.ALC;
+import org.lwjgl.openal.OpenALException;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.EXTEfx.*;
