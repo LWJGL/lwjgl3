@@ -20,6 +20,17 @@ import static org.lwjgl.Pointer.*;
  * implementations make use of reflection and, in the worst-case, JNI.</p>
  *
  * <p>Method names in this class are prefixed with {@code mem} to avoid ambiguities when used with static imports.</p>
+ *
+ * <h3>Text encoding/decoding</h3>
+ *
+ * Three codecs are available, each with a different postfix:
+ * <ul>
+ * <li>UTF16 - Direct mapping of 2 bytes to Java char and vice versa</li>
+ * <li>UTF8 - custom UTF-8 codec without intermediate allocations</li>
+ * <li>ASCII - Not the original 7bit ASCII, but any character set with a single byte encoding (ISO 8859-1, Windows-1252, etc.)</li>
+ * </ul>
+ *
+ * <p>Methods in bindings that accept/return {@code CharSequence}/{@code String} also support {@code ByteBuffer}, so custom codecs can be used if necessary.</p>
  */
 public final class MemoryUtil {
 
