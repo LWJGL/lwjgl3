@@ -199,13 +199,15 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"FogCoordPointer",
 		"Specifies the location and organization of a fog coordinate array.",
 
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
+		GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "the fog coordinate array data")
+		ARRAY_BUFFER _ MultiType(
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
+		) _ const _ void_p.IN("pointer", "the fog coordinate array data")
 	)
 
 	// EXT_multi_draw_arrays
@@ -346,7 +348,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		"Specifies the location and organization of a secondary color array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array, as well as their component ordering", "3"),
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
+		GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 			"""
@@ -356,7 +358,7 @@ val GL14 = "GL14".nativeClassGL("GL14") {
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		ARRAY_BUFFER _ MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		) _ const _ void_p.IN("pointer", "the secondary color array data")
 	)
 

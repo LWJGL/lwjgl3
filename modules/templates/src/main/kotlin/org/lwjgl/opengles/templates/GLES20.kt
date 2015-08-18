@@ -1577,11 +1577,11 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 
 		GLuint.IN("index", ""),
 		GLint.IN("size", ""),
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN("type", ""),
+		GLenum.IN("type", ""),
 		GLboolean.IN("normalized", ""),
 		GLsizei.IN("stride", ""),
 		ARRAY_BUFFER _ MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		) _ const _ void_p.IN("pointer", "")
 	)
 

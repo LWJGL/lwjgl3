@@ -393,9 +393,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		AutoSize("commands") _ GLsizei.IN("numCommands", ""),
 		const _ GLubyte_p.IN("commands", ""),
 		AutoSize("coords") shr "GLESChecks.typeToByteShift(coordType)" _ GLsizei.IN("numCoords", ""),
-		AutoType("coords", GL_FLOAT) _ GLenum.IN("coordType", "", "GLES20#BYTE GLES20#UNSIGNED_BYTE GLES20#SHORT GLES20#UNSIGNED_SHORT GLES20#FLOAT"),
+		GLenum.IN("coordType", "", "GLES20#BYTE GLES20#UNSIGNED_BYTE GLES20#SHORT GLES20#UNSIGNED_SHORT GLES20#FLOAT"),
 		MultiType(
-			PointerMapping.DATA_SHORT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
 		) _ const _ void_p.IN("coords", "")
 	)
 

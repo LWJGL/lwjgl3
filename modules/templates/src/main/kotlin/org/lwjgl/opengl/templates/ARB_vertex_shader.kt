@@ -178,7 +178,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
+		GLenum.IN(
 			"type",
 			"the data type of each component in the array. The initial value is GL_FLOAT",
 			"""
@@ -195,7 +195,7 @@ val ARB_vertex_shader = "ARBVertexShader".nativeClassGL("ARB_vertex_shader", pos
 			"""
 		),
 		ARRAY_BUFFER _ MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		) _ const _ void_p.IN(
 			"pointer",
 			"""

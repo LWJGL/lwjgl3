@@ -67,13 +67,15 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 		UINT.IN("id", "a GPU id obtained from calling #GetGPUIDsAMD()"),
 		int.IN("property", "the information being queried", properties),
-		AutoType("data", GL_UNSIGNED_BYTE, GL_UNSIGNED_INT) _ GLenum.IN(
+		GLenum.IN(
 			"dataType",
 			"the data type to be returned",
 			"GL11##GL_UNSIGNED_INT GL11##GL_INT GL11##GL_FLOAT GL11##GL_UNSIGNED_BYTE"
 		),
 		AutoSize("data") shr "GLChecks.typeToByteShift(dataType)" _ UINT.IN("size", "the size of the {@code data} buffer"),
-		void_p.IN("data", "the buffer which will be filled with the requested information")
+		MultiType(
+			PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
+		) _ void_p.IN("data", "the buffer which will be filled with the requested information")
 	)
 
 	UINT(

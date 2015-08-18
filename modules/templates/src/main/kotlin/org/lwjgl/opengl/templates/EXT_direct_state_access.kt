@@ -621,10 +621,10 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLenum.IN("texunit", ""),
 		GLint.IN("size", ""),
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN("type", ""),
+		GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
 		ARRAY_BUFFER _ MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		) _ const _ void_p.IN("pointer", "")
 	)
 

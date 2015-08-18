@@ -123,14 +123,14 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		"Specifies the location and organization of a weight array.",
 
 		GLint.IN("size", "the number of values per vertex that are stored in the array. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB."),
-		AutoType("pointer", GL_FLOAT) _ GLenum.IN(
+		GLenum.IN(
 			"type",
 			"the data type of the values stored in the array",
 		    "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
 		ARRAY_BUFFER _ MultiType(
-			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
+			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		) _ void_p.IN("pointer", "the weight data")
 	)
 
