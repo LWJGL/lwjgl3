@@ -48,7 +48,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 	    """,
 
 		autoSizeResult _ size_t.IN("num", "the number of objects to allocate"),
-		autoSizeResult _ size_t.IN("size", "the size of each object, in bytes") // TODO:
+		autoSizeResult _ size_t.IN("size", "the size of each object, in bytes")
 	)
 
 	int(
@@ -84,7 +84,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		specified size.
 		""",
 
-		void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate")
 	)
 
@@ -92,10 +92,12 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"free",
 		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
 
-		void_p.IN("ptr", "the allocated memory to free")
+		nullable _ void_p.IN("ptr", "the allocated memory to free")
 	)
 
 	// Non-standard API
+
+	val flags = int.IN("flags", "a bitfield of zero or more of the {@code MALLOCX} macros in ##JEmacros")
 
 	void_p(
 		"mallocx",
@@ -105,7 +107,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
-		int.IN("flags", "")
+		flags
 	)
 
 	void_p(
@@ -116,9 +118,9 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		alignment constraints.
 		""",
 
-		void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
-		int.IN("flags", "")
+		flags
 	)
 
 	size_t(
@@ -129,10 +131,10 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		result in failure to resize. Behavior is undefined if {@code size} is 0, or if {@code (size + extra > SIZE_T_MAX)}.
 		""",
 
-		void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		size_t.IN("size", "the number of bytes to allocate"),
 		size_t.IN("extra", "the number of extra bytes to allocate"),
-		int.IN("flags", "")
+		flags
 	)
 
 	size_t(
@@ -140,7 +142,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"Returns the real size of the allocation at {@code ptr}.",
 
 		const _ void_p.IN("ptr", "the allocated memory to query"),
-		int.IN("flags", "")
+		flags
 	)
 
 	void(
@@ -148,7 +150,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"Causes the memory referenced by {@code ptr} to be made available for future allocations.",
 
 		void_p.IN("ptr", "the allocated memory to deallocate"),
-		int.IN("flags", "")
+		flags
 	)
 
 	void(
@@ -157,7 +159,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 
 		void_p.IN("ptr", "the allocated memory to deallocate"),
 		size_t.IN("size", "the number of bytes in {@code ptr}"),
-		int.IN("flags", "")
+		flags
 	)
 
 	void_p(
@@ -169,7 +171,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
-		int.IN("flags", "")
+		flags
 	)
 
 	int(
