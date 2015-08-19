@@ -686,8 +686,6 @@ class NativeClassFunction(
 		}
 
 		if ( nativeClass.binding == null || hasUnsafeMethod ) {
-			if ( has(Reuse) )
-				print("${get(Reuse).reference}.")
 			print("n$name(")
 		} else {
 			print("invoke${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
