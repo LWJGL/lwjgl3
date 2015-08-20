@@ -65,8 +65,38 @@ class Code(
 	fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
+	private fun List<Code.Statement>.append(other: List<Code.Statement>) =
+		if ( this === Code.NO_STATEMENTS && other === Code.NO_STATEMENTS ) Code.NO_STATEMENTS else this + other
+
+	private fun String?.append(other: String?) =
+		if ( this == null )
+			other
+		else if ( other == null )
+			this
+		else
+			"$this\n$other"
+
+	fun append(
+		javaInit: List<Code.Statement> = Code.NO_STATEMENTS,
+
+		javaBeforeNative: List<Code.Statement> = Code.NO_STATEMENTS,
+		javaAfterNative: List<Code.Statement> = Code.NO_STATEMENTS,
+		javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
+
+		nativeBeforeCall: String? = null,
+		nativeAfterCall: String? = null
+	) = Code(
+		this.javaInit append javaInit,
+
+		this.javaBeforeNative append javaBeforeNative,
+		this.javaAfterNative append javaAfterNative,
+		this.javaFinally append javaFinally,
+
+		this.nativeBeforeCall append nativeBeforeCall,
+		this.nativeAfterCall append nativeAfterCall
+	)
 }
-fun NativeClass.statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
+fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
 val macro = object: FunctionModifier() {

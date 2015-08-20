@@ -7,9 +7,9 @@ interface FunctionTransform<T: QualifiedType> {
 	fun transformCall(param: T, original: String): String
 }
 
-/** A function transform that must perform some pre-processing. */
-interface PreFunctionTransform<T: QualifiedType> {
-	fun preprocess(qtype: T, writer: PrintWriter)
+/** A function transform that must generate additional code. */
+interface CodeFunctionTransform<T: QualifiedType> {
+	fun generate(qtype: T, code: Code): Code
 }
 
 /** A function transform that makes use of the APIBuffer. */
@@ -132,9 +132,11 @@ private open class ExpressionTransform(
 private class ExpressionLocalTransform(
 	expression: String,
 	keepParam: Boolean = false
-): ExpressionTransform(expression, keepParam), PreFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+): ExpressionTransform(expression, keepParam), CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformCall(param: Parameter, original: String) = original
-	override fun preprocess(qtype: Parameter, writer: PrintWriter) = writer.println("\t\t${qtype.asJavaMethodParam} = $expression;")
+	override fun generate(qtype: Parameter, code: Code) = code.append(
+		javaInit = statement("\t\t${qtype.asJavaMethodParam} = $expression;", ApplyTo.ALTERNATIVE)
+	)
 }
 
 private class CharSequenceTransform(

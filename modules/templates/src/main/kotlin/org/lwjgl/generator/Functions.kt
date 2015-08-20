@@ -992,7 +992,7 @@ class NativeClassFunction(
 	) {
 		val returnTransform = transforms[returns]
 
-		// Step 0: JavaDoc
+		// JavaDoc
 
 		if ( returnTransform === StringReturnTransform ) {
 			// Special-case, we skipped the normal method
@@ -1001,7 +1001,7 @@ class NativeClassFunction(
 		} else
 			generateJavaDocLink(description, this@NativeClassFunction)
 
-		// Step 1: Method signature
+		// Method signature
 
 		val retType = returns.transformDeclarationOrElse(transforms, returnsJavaMethodType)
 
@@ -1026,30 +1026,28 @@ class NativeClassFunction(
 		}
 		println(") {")
 
-		val code = if ( this@NativeClassFunction.has(Code) ) this@NativeClassFunction[Code] else Code.NO_CODE
+		// Append CodeFunctionTransform statements to Code
 
-		// Step 2: Get function address
+		val code = transforms
+			.asSequence()
+			.filter { it.value is CodeFunctionTransform<*> }
+			.fold(if ( has(Code) ) get(Code) else Code.NO_CODE) { code, entry ->
+				val (qtype, transform) = entry
+				@suppress("UNCHECKED_CAST")
+				(transform as CodeFunctionTransform<QualifiedType>).generate(qtype, code)
+			}
+
+		// Get function address
 
 		if ( nativeClass.binding != null && !hasUnsafeMethod )
 			nativeClass.binding.generateFunctionAddress(this, this@NativeClassFunction)
 
-		// Step 3.A: Generate checks
+		// Generate checks
+
 		printCode(code.javaInit, ApplyTo.ALTERNATIVE)
 		generateChecks(ALTERNATIVE, transforms);
 
-		// Step 3.B: Transform pre-processing.
-
-		for ( (qtype, transform) in transforms ) {
-			if ( transform is PreFunctionTransform<*> ) {
-				@suppress("UNCHECKED_CAST")
-				when ( qtype ) {
-					is Parameter   -> (transform as PreFunctionTransform<Parameter>).preprocess(qtype, this)
-					is ReturnValue -> (transform as PreFunctionTransform<ReturnValue>).preprocess(qtype, this)
-				}
-			}
-		}
-
-		// Step 3.C: Prepare APIBuffer parameters.
+		// Prepare APIBuffer parameters
 
 		var apiBufferSet = hideAutoSizeResultParam
 		if ( apiBufferSet ) {
@@ -1074,16 +1072,20 @@ class NativeClassFunction(
 			}
 		}
 
-		// Step 4: Call the native method
+		// Call the native method
+
 		generateCodeBeforeNative(code, ApplyTo.ALTERNATIVE)
 
-		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE)) {
+		val returnLater = code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE)
+		generateNativeMethodCall(returnLater) {
 			printList(getNativeParams()) {
 				it.transformCallOrElse(transforms, it.asNativeMethodCallParam(this@NativeClassFunction, ALTERNATIVE))
 			}
 		}
 
 		generateCodeAfterNative(code, ApplyTo.ALTERNATIVE)
+
+		// Return
 
 		if ( returns.isVoid || returnsStructValue ) {
 			val result = returns.transformCallOrElse(transforms, "")
@@ -1142,7 +1144,7 @@ class NativeClassFunction(
 					println("return $returnExpression;")
 				else // Multiple statements, assumes the transformation includes the return statement.
 					println(returnExpression)
-			} else if ( code.hasStatements(code.javaAfterNative, ApplyTo.ALTERNATIVE) )
+			} else if ( returnLater )
 				println("\t\treturn $RESULT;")
 		}
 
