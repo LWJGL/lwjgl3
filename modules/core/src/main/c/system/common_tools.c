@@ -6,6 +6,7 @@
 	#define _NO_CRT_STDIO_INLINE
 #endif
 #include "common_tools.h"
+#include <stdlib.h>
 
 JavaVM *jvm;
 

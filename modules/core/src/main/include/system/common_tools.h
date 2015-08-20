@@ -24,7 +24,6 @@
 
 DISABLE_WARNINGS()
 #include <jni.h>
-#include <stdlib.h>
 ENABLE_WARNINGS()
 
 // Cached JNIEnv, using TLS. Will use attachCurrentThreadAsDaemon in foreign threads.
