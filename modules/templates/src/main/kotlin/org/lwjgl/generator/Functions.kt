@@ -926,19 +926,9 @@ class NativeClassFunction(
 				val countParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) }
 				transforms[countParam] = ExpressionTransform("${it.name}.length")
 
-				val vararg = {
-					var isLast = true;
-					for ( i in parameters.indices.reversed() ) {
-						val p = parameters[i]
-						if ( p === lengthsParam || p === countParam ) // these will be hidden, ignore
-							continue;
-
-						isLast = p === it
-						break;
-					}
-					isLast
-				}()
-				transforms[it] = if ( vararg ) PointerArrayTransformVararg else PointerArrayTransformArray
+				transforms[it] = if ( it === parameters.last() {
+					it !== lengthsParam && it !== countParam // these will be hidden, ignore
+				} ) PointerArrayTransformVararg else PointerArrayTransformArray
 
 				generateAlternativeMethod(name, "Array version of:", transforms)
 
