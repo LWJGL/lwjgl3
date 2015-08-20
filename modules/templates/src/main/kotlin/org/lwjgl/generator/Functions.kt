@@ -607,9 +607,12 @@ class NativeClassFunction(
 						val params = getParams { it has autoSizeResult }
 						val single = params.count() == 1
 						print(", ${params.map {
-							if ( it.paramType === IN )
-								"(int)${it.name}"
-							else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
+							if ( it.paramType === IN ) {
+								if ( it.nativeType.mapping === PrimitiveMapping.INT )
+									"${it.name}"
+								else
+									"(int)${it.name}"
+							} else if ( it.nativeType.mapping === PointerMapping.DATA_INT ) {
 								if ( single )
 									"$API_BUFFER.intValue(${it.name})"
 								else
