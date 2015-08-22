@@ -20,7 +20,7 @@ public class MemoryUtilTest {
 		for ( int i = 0; i < buffer.capacity(); i++ )
 			buffer.put(i, (byte)i);
 
-		memSet(nGetAddress(buffer), 0x7F, buffer.capacity());
+		memSet(memAddress(buffer), 0x7F, buffer.capacity());
 
 		for ( int i = 0; i < buffer.capacity(); i++ )
 			assertEquals(buffer.get(i), 0x7F);
@@ -44,10 +44,10 @@ public class MemoryUtilTest {
 		for ( int i = 0; i < buffer.capacity(); i++ )
 			buffer.put(i, (byte)i);
 
-		long address = nGetAddress(buffer);
-		assertTrue(address != 0L);
+		long address = MemoryAccess.getDirectBufferAddress(buffer);
+		assertTrue(address != NULL);
 
-		ByteBuffer view = nNewBuffer(address + 8, 16);
+		ByteBuffer view = MemoryAccess.newDirectByteBuffer(address + 8, 16);
 		assertEquals(view.order(), ByteOrder.BIG_ENDIAN);
 		for ( int i = 0; i < view.capacity(); i++ )
 			assertEquals(view.get(i), buffer.get(i + 8));
@@ -59,7 +59,7 @@ public class MemoryUtilTest {
 			buffer.put(i, (byte)i);
 
 		long address = memAddress(buffer);
-		assertTrue(address != 0L);
+		assertTrue(address != NULL);
 
 		buffer.position(8);
 		buffer.limit(8 + 16);
@@ -108,7 +108,7 @@ public class MemoryUtilTest {
 			buffer.put(i, (byte)i);
 
 		long address = memAddress(buffer);
-		assertTrue(address != 0L);
+		assertTrue(address != NULL);
 
 		ByteBuffer view = memByteBuffer(address + 8, 16);
 		assertEquals(view.order(), ByteOrder.nativeOrder());

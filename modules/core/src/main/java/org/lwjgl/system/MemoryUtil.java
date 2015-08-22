@@ -8,6 +8,7 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
+import org.lwjgl.system.MemoryManage.MemoryAllocator;
 
 import java.nio.*;
 
@@ -37,7 +38,8 @@ public final class MemoryUtil {
 	/** Alias for the null pointer address. */
 	public static final long NULL = 0L;
 
-	private static final MemoryAccessor ACCESSOR;
+	private static final MemoryAccessor  ACCESSOR;
+	private static final MemoryAllocator ALLOCATOR;
 
 	/** The memory page size, in bytes. This value is always a power-of-two. */
 	public static final int PAGE_SIZE;
@@ -49,13 +51,25 @@ public final class MemoryUtil {
 		LWJGLUtil.initialize();
 
 		ACCESSOR = MemoryAccess.getInstance();
+
 		PAGE_SIZE = ACCESSOR.getPageSize();
 		CACHE_LINE_SIZE = ACCESSOR.getCacheLineSize();
 
-		LWJGLUtil.log("MemoryUtil MemoryAccessor: " + ACCESSOR.getClass().getSimpleName());
+		LWJGLUtil.log("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
+
+		ALLOCATOR = MemoryManage.getInstance();
+
+		LWJGLUtil.log("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 	}
 
 	private MemoryUtil() {
+	}
+
+	// --- [ memAlloc ] ---
+
+	/** Unsafe version of {@link #memAlloc}. */
+	public static long nmemAlloc(long size) {
+		return ALLOCATOR.malloc(size);
 	}
 
 	/**
@@ -64,32 +78,110 @@ public final class MemoryUtil {
 	 * <p>Allocates a block of {@code size} bytes of memory, returning a pointer to the beginning of the block. The content of the newly allocated block of
 	 * memory is not initialized, remaining with indeterminate values.</p>
 	 *
+	 * <p>Memory allocated with this method must be freed with {@link #memFree}.</p>
+	 *
 	 * @param size the size of the memory block to allocate, in bytes. If {@code size} is zero, the return value depends on the particular library
 	 *             implementation (it may or may not be a null pointer), but the returned pointer shall not be dereferenced.
 	 *
 	 * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
 	 * #NULL} pointer is returned.
 	 */
-	public static native long memAlloc(long size);
+	public static ByteBuffer memAlloc(int size) {
+		return memByteBuffer(nmemAlloc(size), size);
+	}
+
+	/**
+	 * ShortBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of short values to allocate.
+	 */
+	public static ShortBuffer memAllocShort(int size) {
+		return memShortBuffer(nmemAlloc(size << 1), size);
+	}
+
+	/**
+	 * IntBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of int values to allocate.
+	 */
+	public static IntBuffer memAllocInt(int size) {
+		return memIntBuffer(nmemAlloc(size << 2), size);
+	}
+
+	/**
+	 * FloatBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of float values to allocate.
+	 */
+	public static FloatBuffer memAllocFloat(int size) {
+		return memFloatBuffer(nmemAlloc(size << 2), size);
+	}
+
+	/**
+	 * LongBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of long values to allocate.
+	 */
+	public static LongBuffer memAllocLong(int size) {
+		return memLongBuffer(nmemAlloc(size << 3), size);
+	}
+
+	/**
+	 * DoubleBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of double values to allocate.
+	 */
+	public static DoubleBuffer memAllocDouble(int size) {
+		return memDoubleBuffer(nmemAlloc(size << 3), size);
+	}
+
+	/**
+	 * PointerBuffer version of {@link #memAlloc}.
+	 *
+	 * @param size the number of pointer values to allocate.
+	 */
+	public static PointerBuffer memAllocPointer(int size) {
+		return memPointerBuffer(nmemAlloc(size << POINTER_SHIFT), size);
+	}
+
+	/** Unsafe version of {@link #memFree}. */
+	public static void nmemFree(long ptr) {
+		ALLOCATOR.free(ptr);
+	}
 
 	/**
 	 * The standard C free function.
 	 *
-	 * <p>A block of memory previously allocated by a call to {@code malloc}, {@code calloc} or {@code realloc} is deallocated, making it available again for
-	 * further allocations.</p>
+	 * <p>A block of memory previously allocated by a call to {@link #memAlloc}, {@link #memCalloc} or {@link #memRealloc} is deallocated, making it available
+	 * again for further allocations.</p>
 	 *
-	 * @param ptr pointer to a memory block previously allocated with {@code malloc}, {@code calloc} or {@code realloc}. If {@code ptr} does not point to a
-	 *            block of
-	 *            memory allocated with the above functions, it causes undefined behavior. If {@code ptr} is a {@link #NULL} pointer, the function does
-	 *            nothing.
+	 * @param ptr pointer to a memory block previously allocated with {@link #memAlloc}, {@link #memCalloc} or {@link #memRealloc}. If {@code ptr} does not
+	 *            point to a block of memory allocated with the above functions, it causes undefined behavior. If {@code ptr} is a {@link #NULL} pointer, the
+	 *            function does nothing.
 	 */
-	public static native void memFree(long ptr);
+	public static void memFree(Buffer ptr) {
+		nmemFree(memAddress0Safe(ptr));
+	}
+
+	/** PointerBuffer version of {@link #memFree}. */
+	public static void memFree(PointerBuffer ptr) {
+		nmemFree(memAddress0Safe(ptr));
+	}
+
+	// --- [ memCalloc ] ---
+
+	/** Unsafe version of {@link #memCalloc}. */
+	public static long nmemCalloc(long num, long size) {
+		return ALLOCATOR.calloc(num, size);
+	}
 
 	/**
 	 * The standard C calloc function.
 	 *
 	 * <p>Allocates a block of memory for an array of {@code num} elements, each of them {@code size} bytes long, and initializes all its bits to zero. The
 	 * effective result is the allocation of a zero-initialized memory block of {@code (num*size)} bytes.</p>
+	 *
+	 * <p>Memory allocated with this method must be freed with {@link #memFree}.</p>
 	 *
 	 * @param num  the number of elements to allocate.
 	 * @param size the size of each element. If {@code size} is zero, the return value depends on the particular library implementation (it may or may not be
@@ -98,7 +190,79 @@ public final class MemoryUtil {
 	 * @return on success, a pointer to the memory block allocated by the function. If the function failed to allocate the requested block of memory, a {@link
 	 * #NULL} pointer is returned.
 	 */
-	public static native long memCalloc(long num, long size);
+	public static ByteBuffer memCalloc(int num, int size) {
+		return memByteBuffer(nmemCalloc(num, size), num * size);
+	}
+
+	/**
+	 * Alternative version of {@link #memCalloc}.
+	 *
+	 * @param num the number of bytes to allocate.
+	 */
+	public static ByteBuffer memCalloc(int num) {
+		return memByteBuffer(nmemCalloc(num, 1), num);
+	}
+
+	/**
+	 * ShortBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of short values to allocate.
+	 */
+	public static ShortBuffer memCallocShort(int num) {
+		return memShortBuffer(nmemCalloc(num, 2), num);
+	}
+
+	/**
+	 * IntBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of int values to allocate.
+	 */
+	public static IntBuffer memCallocInt(int num) {
+		return memIntBuffer(nmemCalloc(num, 4), num);
+	}
+
+	/**
+	 * FloatBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of float values to allocate.
+	 */
+	public static FloatBuffer memCallocFloat(int num) {
+		return memFloatBuffer(nmemCalloc(num, 4), num);
+	}
+
+	/**
+	 * LongBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of long values to allocate.
+	 */
+	public static LongBuffer memCallocLong(int num) {
+		return memLongBuffer(nmemCalloc(num, 8), num);
+	}
+
+	/**
+	 * DoubleBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of double values to allocate.
+	 */
+	public static DoubleBuffer memCallocDouble(int num) {
+		return memDoubleBuffer(nmemCalloc(num, 8), num);
+	}
+
+	/**
+	 * PointerBuffer version of {@link #memCalloc}.
+	 *
+	 * @param num the number of pointer values to allocate.
+	 */
+	public static PointerBuffer memCallocPointer(int num) {
+		return memPointerBuffer(nmemCalloc(num, POINTER_SIZE), num);
+	}
+
+	// --- [ memRealloc] ---
+
+	/** Unsafe version of {@link #memRealloc}. */
+	public static long nmemRealloc(long ptr, long size) {
+		return ALLOCATOR.realloc(ptr, size);
+	}
 
 	/**
 	 * The standard C realloc function.
@@ -107,18 +271,112 @@ public final class MemoryUtil {
 	 * by the function). The content of the memory block is preserved up to the lesser of the new and old sizes, even if the block is moved to a new location.
 	 * If the new size is larger, the value of the newly allocated portion is indeterminate.</p>
 	 *
-	 * <p>In case that {@code ptr} is a {@link #NULL} pointer, the function behaves like {@code malloc}, assigning a new block of size bytes and returning a
+	 * <p>In case that {@code ptr} is a {@link #NULL} pointer, the function behaves like {@link #memAlloc}, assigning a new block of size bytes and returning a
 	 * pointer to its beginning.</p>
 	 *
-	 * @param ptr  a pointer to a memory block previously allocated with {@code malloc}, {@code calloc} or {@code realloc}. Alternatively, this can be a
-	 *             {@link #NULL} pointer, in which case a new block is allocated (as if {@code malloc} was called).
+	 * @param ptr  a pointer to a memory block previously allocated with {@link #memAlloc}, {@link #memCalloc} or {@link #memRealloc}. Alternatively, this can
+	 *             be a {@link #NULL} pointer, in which case a new block is allocated (as if {@link #memAlloc} was called).
 	 * @param size the new size for the memory block, in bytes.
 	 *
 	 * @return a pointer to the reallocated memory block, which may be either the same as {@code ptr} or a new location. If the function fails to allocate the
 	 * requested block of memory, a {@link #NULL} pointer is returned, and the memory block pointed to by argument {@code ptr} is not deallocated (it is still
 	 * valid, and with its contents unchanged).
 	 */
-	public static native long memRealloc(long ptr, long size);
+	public static ByteBuffer memRealloc(ByteBuffer ptr, int size) {
+		return memByteBuffer(nmemRealloc(memAddress0Safe(ptr), size), size);
+	}
+
+	/**
+	 * ShortBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of short values to allocate.
+	 */
+	public static ShortBuffer memRealloc(ShortBuffer ptr, int size) {
+		return memShortBuffer(nmemRealloc(memAddress0Safe(ptr), size << 1), size);
+	}
+
+	/**
+	 * IntBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of int values to allocate.
+	 */
+	public static IntBuffer memRealloc(IntBuffer ptr, int size) {
+		return memIntBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size);
+	}
+
+	/**
+	 * FloatBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of float values to allocate.
+	 */
+	public static FloatBuffer memRealloc(FloatBuffer ptr, int size) {
+		return memFloatBuffer(nmemRealloc(memAddress0Safe(ptr), size << 2), size);
+	}
+
+	/**
+	 * LongBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of long values to allocate.
+	 */
+	public static LongBuffer memRealloc(LongBuffer ptr, int size) {
+		return memLongBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size);
+	}
+
+	/**
+	 * DoubleBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of double values to allocate.
+	 */
+	public static DoubleBuffer memRealloc(DoubleBuffer ptr, int size) {
+		return memDoubleBuffer(nmemRealloc(memAddress0Safe(ptr), size << 3), size);
+	}
+
+	/**
+	 * PointerBuffer version of {@link #memRealloc}.
+	 *
+	 * @param size the number of pointer values to allocate.
+	 */
+	public static PointerBuffer memRealloc(PointerBuffer ptr, int size) {
+		return memPointerBuffer(nmemRealloc(memAddress0Safe(ptr), size << POINTER_SHIFT), size);
+	}
+
+	// --- [ memAlignedAlloc ] ---
+
+	/** Unsafe version of {@link #memAlignedAlloc}. */
+	public static long nmemAlignedAlloc(long alignment, long size) {
+		return ALLOCATOR.aligned_alloc(alignment, size);
+	}
+
+	/**
+	 * The standard C aligned_alloc function.
+	 *
+	 * <p>Allocate {@code size} bytes of uninitialized storage whose alignment is specified by {@code alignment}. The size parameter must be an integral
+	 * multiple of alignment. Memory allocated with memAlignedAlloc() must be freed with {@link #memAlignedFree}.</p>
+	 *
+	 * @param alignment the alignment. Must be a power of two value and a multiple of {@code sizeof(void *)}.
+	 * @param size      the number of bytes to allocate. Must be a multiple of {@code alignment}.
+	 */
+	public static ByteBuffer memAlignedAlloc(int alignment, int size) {
+		return memByteBuffer(ALLOCATOR.aligned_alloc(alignment, size), size);
+	}
+
+	// --- [ memAlignedFree ] ---
+
+	/** Unsafe version of {@link #memAlignedFree}. */
+	public static void nmemAlignedFree(long ptr) {
+		ALLOCATOR.aligned_free(ptr);
+	}
+
+	/**
+	 * Frees a block of memory that was allocated with {@link #memAlignedAlloc}. If ptr is {@code NULL}, no operation is performed.
+	 *
+	 * @param ptr the aligned block of memory to free
+	 */
+	public static void memAlignedFree(ByteBuffer ptr) {
+		nmemAlignedFree(memAddress0Safe(ptr));
+	}
+
+	// --- [ memAddress0 ] ---
 
 	/**
 	 * Returns the memory address of the specified buffer. [INTERNAL USE ONLY]

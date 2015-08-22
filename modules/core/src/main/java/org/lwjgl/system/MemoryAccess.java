@@ -28,7 +28,7 @@ final class MemoryAccess {
 		MemoryAccessor accessor;
 		try {
 			// Depends on java.nio.Buffer#address and sun.misc.Unsafe
-			accessor = loadAccessor("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe");
+			accessor = (MemoryAccessor)Class.forName("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe").newInstance();
 		} catch (Exception e0) {
 			try {
 				// Depends on java.nio.Buffer#address
@@ -40,10 +40,6 @@ final class MemoryAccess {
 		}
 
 		return accessor;
-	}
-
-	private static MemoryAccessor loadAccessor(String className) throws Exception {
-		return (MemoryAccessor)Class.forName(className).newInstance();
 	}
 
 	// The standard C memset function
@@ -85,10 +81,10 @@ final class MemoryAccess {
 	private static native void putAddress(long ptr, long value);
 
 	// Returns the buffer memory address
-	private static native long getDirectBufferAddress(Buffer buffer);
+	static native long getDirectBufferAddress(Buffer buffer);
 
 	// Returns a new direct ByteBuffer instance
-	private static native ByteBuffer newDirectByteBuffer(long address, int capacity);
+	static native ByteBuffer newDirectByteBuffer(long address, int capacity);
 
 	/** Implements functionality for {@link MemoryUtil}. */
 	abstract static class MemoryAccessor {

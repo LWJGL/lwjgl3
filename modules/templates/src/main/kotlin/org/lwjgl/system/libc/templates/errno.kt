@@ -5,7 +5,6 @@
 package org.lwjgl.system.libc.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.system.libffi.*
 
 val errno = "Errno".nativeClass(packageName = "org.lwjgl.system.libc") {
 	nativeImport (

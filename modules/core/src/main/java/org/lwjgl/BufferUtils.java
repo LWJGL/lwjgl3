@@ -40,11 +40,21 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  * The system property will be read only once, when this class is loaded. Hence, the automatic alignment size cannot change at runtime, but there are additional
  * methods that can be used when special alignment is required.</p>
+ *
+ * <h3>Memory management</h3>
+ * <p>Using NIO buffers for off-heap memory has some drawbacks:
+ * <ul>
+ * <li>Memory blocks bigger than {@link Integer#MAX_VALUE} bytes cannot be allocated.</li>
+ * <li>Memory blocks are zeroed-out on allocation, for safety. This has (sometimes unwanted) performance implications.</li>
+ * <li>There is no way to free a buffer explicitly (without JVM specific reflection). Buffer objects are subject to GC and it usually takes two GC cycles to
+ * free the off-heap memory after the buffer object becomes unreachable.</li>
+ * </ul>
+ * An alternative API for allocating off-heap memory can be found in the {@link org.lwjgl.system.MemoryUtil} class. This has none of the above drawbacks, but
+ * requires allocated memory to be explictly freed when not used anymore.</p>
  */
 public final class BufferUtils {
 
 	private interface BufferAllocator {
-
 		ByteBuffer malloc(int capacity);
 	}
 
