@@ -611,6 +611,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new direct ShortBuffer that starts at the specified memory address and has the specified capacity.
 	 *
+	 * <p>The {@code address} specified must be aligned to 2 bytes. If not, use {@code memByteBuffer(address, capacity * 2).asShortBuffer()}.</p>
+	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
 	 *
@@ -620,11 +622,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (2 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memShortBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new direct CharBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to 2 bytes. If not, use {@code memByteBuffer(address, capacity * 2).asCharBuffer()}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -635,11 +642,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (2 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memCharBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new direct IntBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to 4 bytes. If not, use {@code memByteBuffer(address, capacity * 4).asIntBuffer()}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -650,11 +662,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (4 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memIntBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new direct LongBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to 8 bytes. If not, use {@code memByteBuffer(address, capacity * 8).asLongBuffer()}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -665,11 +682,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (8 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memLongBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new direct FloatBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to 4 bytes. If not, use {@code memByteBuffer(address, capacity * 4).asFloatBuffer()}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -680,11 +702,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (4 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memFloatBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new direct DoubleBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to 8 bytes. If not, use {@code memByteBuffer(address, capacity * 8).asDoubleBuffer()}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
@@ -695,11 +722,16 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
+		if ( LWJGLUtil.DEBUG && (address & (8 - 1) ) != 0L )
+			throw new IllegalArgumentException("Unaligned memory address");
+
 		return ACCESSOR.memDoubleBuffer(address, capacity);
 	}
 
 	/**
 	 * Creates a new PointerBuffer that starts at the specified memory address and has the specified capacity.
+	 *
+	 * <p>The {@code address} specified must be aligned to the pointer size. If not, use {@code PointerBuffer.create(memByteBuffer(address, capacity * POINTER_SIZE))}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
