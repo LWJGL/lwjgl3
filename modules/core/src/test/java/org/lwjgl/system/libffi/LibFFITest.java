@@ -4,10 +4,8 @@
  */
 package org.lwjgl.system.libffi;
 
-import org.lwjgl.BufferUtils;
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.PointerBuffer;
-import org.lwjgl.Sys;
+import org.lwjgl.*;
+import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.testng.annotations.Test;
 
@@ -88,13 +86,15 @@ public class LibFFITest {
 	private static long getMemPutIntAddress() {
 		DynamicLinkLibrary lib = LWJGLUtil.loadLibraryNative(Sys.JNI_LIBRARY_NAME);
 
-		long nMemPutInt = lib.getFunctionAddress("Java_org_lwjgl_system_MemoryUtil_nMemPutInt");
-		if ( nMemPutInt == NULL )
-			nMemPutInt = lib.getFunctionAddress("_Java_org_lwjgl_system_MemoryUtil_nMemPutInt@20"); // __stdcall (Win32)
+		long putInt = lib.getFunctionAddress(
+			LWJGLUtil.getPlatform() == Platform.WINDOWS && Pointer.BITS32
+				? "_Java_org_lwjgl_system_MemoryAccess_putInt@20" // __stdcall (Win32)
+				: "Java_org_lwjgl_system_MemoryAccess_putInt"
+		);
 
-		assertTrue(nMemPutInt != NULL);
+		assertTrue(putInt != NULL);
 
-		return nMemPutInt;
+		return putInt;
 	}
 
 }
