@@ -33,7 +33,7 @@ public final class APIUtil {
 	private APIUtil() {
 	}
 
-	/** Returns a resetted thread-local {@link APIBuffer}. */
+	/** Returns a thread-local {@link APIBuffer} that has been reset. */
 	public static APIBuffer apiBuffer() {
 		return API_BUFFERS.get().reset();
 	}

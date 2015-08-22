@@ -21,7 +21,7 @@ import static org.lwjgl.system.MemoryUtil.*;
  */
 public class APIBuffer {
 
-	private static final int DEFAULT_CAPACITY = 1024;
+	private static final int DEFAULT_CAPACITY = 128;
 
 	private ByteBuffer buffer;
 	private long       address;
@@ -32,7 +32,7 @@ public class APIBuffer {
 	private int[] stack = new int[4];
 
 	public APIBuffer() {
-		buffer = BufferUtils.createAlignedByteBufferPage(DEFAULT_CAPACITY);
+		buffer = BufferUtils.createAlignedByteBufferCacheLine(DEFAULT_CAPACITY);
 		address = memAddress(buffer);
 	}
 
@@ -98,7 +98,7 @@ public class APIBuffer {
 		if ( capacity <= buffer.capacity() )
 			return;
 
-		ByteBuffer resized = BufferUtils.createAlignedByteBufferPage(mathRoundPoT(capacity));
+		ByteBuffer resized = BufferUtils.createAlignedByteBufferCacheLine(mathRoundPoT(capacity));
 
 		resized.put(buffer);
 		resized.clear();
