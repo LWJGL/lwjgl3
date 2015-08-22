@@ -391,10 +391,10 @@ public final class MemoryUtil {
 	public static long memAddress0Safe(Buffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer); }
 
 	/** PointerBuffer version of {@link #memAddress0(Buffer)}. */
-	public static long memAddress0(PointerBuffer buffer) { return ACCESSOR.memAddress0(buffer.getBuffer()); }
+	public static long memAddress0(PointerBuffer buffer) { return buffer.address0(); }
 
 	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
-	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : ACCESSOR.memAddress0(buffer.getBuffer()); }
+	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : buffer.address0(); }
 
 	// --- [ Buffer address ] ---
 
@@ -471,7 +471,7 @@ public final class MemoryUtil {
 	public static long memAddress(PointerBuffer buffer) { return memAddress(buffer, buffer.position()); }
 
 	/** PointerBuffer version of {@link #memAddress(ByteBuffer, int)}. */
-	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position * POINTER_SIZE); }
+	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position << POINTER_SHIFT); }
 
 	// --- [ Buffer address - Safe ] ---
 
@@ -707,7 +707,10 @@ public final class MemoryUtil {
 	 * @return the new PointerBuffer
 	 */
 	public static PointerBuffer memPointerBuffer(long address, int capacity) {
-		return new PointerBuffer(address, capacity);
+		if ( address == NULL )
+			return null;
+
+		return PointerBuffer.create(address, capacity);
 	}
 
 	/**

@@ -8,10 +8,10 @@ import java.nio.*;
 
 /** Interface version of PointerBuffer, used for compiling the Templates module before the Core module. */
 public interface PointerBuffer extends Comparable<PointerBuffer> {
-	ByteBuffer getBuffer();
+	long address();
+	long address0();
 	int capacity();
 	int position();
-	int positionByte();
 	PointerBuffer position(int newPosition);
 	int limit();
 	PointerBuffer limit(int newLimit);
@@ -21,16 +21,15 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	PointerBuffer flip();
 	PointerBuffer rewind();
 	int remaining();
-	int remainingByte();
 	boolean hasRemaining();
 	PointerBuffer slice();
 	PointerBuffer duplicate();
 	PointerBuffer asReadOnlyBuffer();
 	boolean isReadOnly();
 	long get();
-	PointerBuffer put(long l);
+	PointerBuffer put(long p);
 	long get(int index);
-	PointerBuffer put(int index, long l);
+	PointerBuffer put(int index, long p);
 	//PointerBuffer put(Pointer wrapper);
 	//PointerBuffer put(int index, Pointer wrapper);
 	PointerBuffer put(ByteBuffer buffer);
@@ -40,13 +39,13 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	PointerBuffer put(FloatBuffer buffer);
 	PointerBuffer put(DoubleBuffer buffer);
 	PointerBuffer putAddressOf(PointerBuffer buffer);
-	void put(int index, ByteBuffer buffer);
-	void put(int index, ShortBuffer buffer);
-	void put(int index, IntBuffer buffer);
-	void put(int index, LongBuffer buffer);
-	void put(int index, FloatBuffer buffer);
-	void put(int index, DoubleBuffer buffer);
-	void putAddressOf(int index, PointerBuffer buffer);
+	PointerBuffer put(int index, ByteBuffer buffer);
+	PointerBuffer put(int index, ShortBuffer buffer);
+	PointerBuffer put(int index, IntBuffer buffer);
+	PointerBuffer put(int index, LongBuffer buffer);
+	PointerBuffer put(int index, FloatBuffer buffer);
+	PointerBuffer put(int index, DoubleBuffer buffer);
+	PointerBuffer putAddressOf(int index, PointerBuffer buffer);
 	ByteBuffer getByteBuffer(int size);
 	ShortBuffer getShortBuffer(int size);
 	IntBuffer getIntBuffer(int size);
@@ -64,8 +63,8 @@ public interface PointerBuffer extends Comparable<PointerBuffer> {
 	PointerBuffer get(long[] dst, int offset, int length);
 	PointerBuffer get(long[] dst);
 	PointerBuffer put(PointerBuffer src);
-	PointerBuffer put(long[] src, int offset, int length);
 	PointerBuffer put(long[] src);
+	PointerBuffer put(long[] src, int offset, int length);
 	PointerBuffer compact();
 	ByteOrder order();
 }
