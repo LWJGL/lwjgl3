@@ -4,7 +4,6 @@
  */
 package org.lwjgl.openal;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.system.PointerWrapper;
 
 import java.nio.IntBuffer;
@@ -110,25 +109,29 @@ public class ALContext extends PointerWrapper {
 	 * @return the new ALContext
 	 */
 	public static ALContext create(ALDevice device, int frequency, int refresh, boolean sync) {
-		IntBuffer attribs = BufferUtils.createIntBuffer(8);
+		IntBuffer attribs = memAllocInt(8);
 
-		if ( frequency != 0 ) {
-			attribs.put(ALC_FREQUENCY);
-			attribs.put(frequency);
+		try {
+			if ( frequency != 0 ) {
+				attribs.put(ALC_FREQUENCY);
+				attribs.put(frequency);
+			}
+
+			if ( refresh != 0 ) {
+				attribs.put(ALC_REFRESH);
+				attribs.put(refresh);
+			}
+
+			attribs.put(ALC_SYNC);
+			attribs.put(sync ? ALC10.ALC_TRUE : ALC10.ALC_FALSE);
+
+			attribs.put(0);
+			attribs.flip();
+
+			return ALContext.create(device, attribs);
+		} finally {
+			memFree(attribs);
 		}
-
-		if ( refresh != 0 ) {
-			attribs.put(ALC_REFRESH);
-			attribs.put(refresh);
-		}
-
-		attribs.put(ALC_SYNC);
-		attribs.put(sync ? ALC10.ALC_TRUE : ALC10.ALC_FALSE);
-
-		attribs.put(0);
-		attribs.flip();
-
-		return ALContext.create(device, attribs);
 	}
 
 	/**
