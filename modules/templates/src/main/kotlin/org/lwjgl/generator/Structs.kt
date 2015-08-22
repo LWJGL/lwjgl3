@@ -169,13 +169,16 @@ class Struct(
 
 			print("""
 	static {
-		IntBuffer offsets = BufferUtils.createIntBuffer(${getMemberCount(members)});
+		IntBuffer offsets = memAllocInt(${getMemberCount(members)});
 
 		SIZEOF = offsets(memAddress(offsets));
 
 """)
 			generateOffsetInit(members)
-			println("\t}")
+			print("""
+		memFree(offsets);
+	}
+""")
 		} else {
 			print("""
 	static {
