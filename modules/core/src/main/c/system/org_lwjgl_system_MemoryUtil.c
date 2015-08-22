@@ -37,13 +37,6 @@ JNIEXPORT jlong JNICALL Java_org_lwjgl_system_MemoryUtil_memRealloc(JNIEnv *env,
 	return (jlong)(intptr_t)realloc((void *)(intptr_t)ptr, (size_t)size);
 }
 
-// memPointerSize()I
-JNIEXPORT jint JNICALL Java_org_lwjgl_system_MemoryUtil_memPointerSize(JNIEnv *env, jclass clazz)
-{
-	UNUSED_PARAMS(env, clazz);
-	return (jint)sizeof(void *);
-}
-
 // memGlobalRefToObject(J)Ljava/lang/Object;
 JNIEXPORT jobject JNICALL Java_org_lwjgl_system_MemoryUtil_memGlobalRefToObject(JNIEnv *env, jclass clazz,
 	jlong globalRef

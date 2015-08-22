@@ -668,15 +668,6 @@ public final class MemoryUtil {
 	// --- [ JNI ] ---
 
 	/**
-	 * Returns the pointer size in bytes for the process that loaded LWJGL.
-	 *
-	 * <p>This call is expensive, use {@link org.lwjgl.Pointer#POINTER_SIZE} instead.</p>
-	 *
-	 * @return the process pointer size in bytes.
-	 */
-	public static native int memPointerSize();
-
-	/**
 	 * Returns the object that the specified global reference points to.
 	 *
 	 * @param globalRef the global reference

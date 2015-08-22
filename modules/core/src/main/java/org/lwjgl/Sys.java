@@ -37,6 +37,9 @@ public final class Sys {
 		// Intentionally empty
 	}
 
+	// Returns sizeof(void *)
+	static native int getPointerSize();
+
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
 		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix;

@@ -4,8 +4,6 @@
  */
 package org.lwjgl;
 
-import static org.lwjgl.system.MemoryUtil.*;
-
 /**
  * Pointer interface.
  * <p/>
@@ -19,7 +17,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 public interface Pointer {
 
 	/** The pointer size in bytes. Will be 4 on a 32bit JVM and 8 on a 64bit one. */
-	int POINTER_SIZE = memPointerSize();
+	int POINTER_SIZE = Sys.getPointerSize();
 
 	/** The pointer size power-of-two. Will be 2 on a 32bit JVM and 3 on a 64bit one. */
 	int POINTER_SHIFT = POINTER_SIZE == 8 ? 3 : 2;
