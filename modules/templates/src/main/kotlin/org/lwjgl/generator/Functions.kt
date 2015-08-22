@@ -507,7 +507,7 @@ class NativeClassFunction(
 		if ( !returns.isVoid )
 			print("return ")
 
-		print("invoke${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
+		print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
 		print("$FUNCTION_ADDRESS")
 		if ( hasNativeParams ) print(", ")
 		printList(getNativeParams()) {
@@ -692,7 +692,7 @@ class NativeClassFunction(
 		if ( nativeClass.binding == null || hasUnsafeMethod ) {
 			print("n$name(")
 		} else {
-			print("invoke${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
+			print("${nativeClass.binding.callingConvention.method}${getNativeParams().map { it.nativeType.mapping.jniSignature }.join("")}${returns.nativeType.mapping.jniSignature}(")
 			print("$FUNCTION_ADDRESS")
 			if ( hasNativeParams ) print(", ")
 		}

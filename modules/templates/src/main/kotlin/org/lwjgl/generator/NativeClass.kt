@@ -14,13 +14,19 @@ val EXT_FLAG = ""
 
 val NULL = "{@code NULL}"
 
+enum class CallingConvention(val method: String) {
+	DEFAULT("invoke"),
+	STDCALL("call") // __stdcall on Windows, default on other systems
+}
+
 /**
  * The Generator can be customized with binding-specific overrides using this class. This class must implemented for bindings that are loaded dynamically. It
  * is not necessary for libraries that are static compiled/linked into the LWJGL natives.
  */
 abstract class APIBinding(
 	packageName: String,
-	className: String
+	className: String,
+    val callingConvention: CallingConvention = CallingConvention.STDCALL
 ): CustomClass(packageName, className) {
 
 	init {

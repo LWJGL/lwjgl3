@@ -105,7 +105,7 @@ public class CLPlatform extends PointerWrapper {
 		long clGetPlatformIDs = CL10.getInstance().GetPlatformIDs;
 
 		APIBuffer __buffer = apiBuffer();
-		int errcode = invokeIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
+		int errcode = callIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
 		checkCLError(errcode);
 
 		int num_platforms = __buffer.intValue(0);
@@ -114,7 +114,7 @@ public class CLPlatform extends PointerWrapper {
 
 		__buffer.bufferParam(num_platforms << POINTER_SHIFT);
 
-		errcode = invokeIPPI(clGetPlatformIDs, num_platforms, __buffer.address(), NULL);
+		errcode = callIPPI(clGetPlatformIDs, num_platforms, __buffer.address(), NULL);
 		checkCLError(errcode);
 
 		long[] platformIDs = new long[num_platforms];

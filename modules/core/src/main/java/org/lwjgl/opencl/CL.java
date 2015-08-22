@@ -83,12 +83,12 @@ public final class CL {
 							throw new OpenCLException("A core OpenCL function is missing. Make sure that OpenCL is available.");
 
 						APIBuffer __buffer = apiBuffer();
-						invokeIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
+						callIPPI(clGetPlatformIDs, 0, NULL, __buffer.address());
 
 						int platforms = __buffer.intValue(0);
 
 						if ( platforms == 1 ) {
-							invokeIPPI(clGetPlatformIDs, 1, __buffer.address(), NULL);
+							callIPPI(clGetPlatformIDs, 1, __buffer.address(), NULL);
 							long cl_platform_id = __buffer.pointerValue(0);
 							if ( supportsOpenCL12(__buffer, cl_platform_id) )
 								platform = cl_platform_id;
@@ -103,14 +103,14 @@ public final class CL {
 					if ( clGetPlatformInfo == NULL )
 						return false;
 
-					int errcode = invokePIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address());
+					int errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, 0, NULL, __buffer.address());
 					if ( errcode != CL_SUCCESS )
 						return false;
 
 					long bytes = __buffer.pointerValue(0);
 					__buffer.bufferParam((int)bytes);
 
-					errcode = invokePIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL);
+					errcode = callPIPPPI(clGetPlatformInfo, platform, CL_PLATFORM_VERSION, bytes, __buffer.address(), NULL);
 					if ( errcode != CL_SUCCESS )
 						return false;
 
@@ -124,8 +124,8 @@ public final class CL {
 					__buffer.stringParamASCII(functionName, true);
 
 					long address = platform == NULL
-						? invokePP(clGetExtensionFunctionAddress, __buffer.address())
-						: invokePPP(clGetExtensionFunctionAddressForPlatform, platform, __buffer.address());
+						? callPP(clGetExtensionFunctionAddress, __buffer.address())
+						: callPPP(clGetExtensionFunctionAddressForPlatform, platform, __buffer.address());
 
 					if ( address == NULL )
 						address = OPENCL.getFunctionAddress(functionName);
@@ -138,7 +138,7 @@ public final class CL {
 					APIBuffer __buffer = apiBuffer();
 					__buffer.stringParamASCII(functionName, true);
 
-					return invokePPP(clGetExtensionFunctionAddressForPlatform, handle, __buffer.address());
+					return callPPP(clGetExtensionFunctionAddressForPlatform, handle, __buffer.address());
 				}
 
 				@Override

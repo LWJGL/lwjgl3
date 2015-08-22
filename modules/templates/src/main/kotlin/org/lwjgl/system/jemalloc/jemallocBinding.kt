@@ -7,7 +7,7 @@ package org.lwjgl.system.jemalloc
 import org.lwjgl.generator.*
 import java.io.PrintWriter
 
-val jemallocBinding = object : APIBinding(JEMALLOC_PACKAGE, "*DUMMY*") {
+val jemallocBinding = object : APIBinding(JEMALLOC_PACKAGE, "*DUMMY*", callingConvention = CallingConvention.DEFAULT) {
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
 

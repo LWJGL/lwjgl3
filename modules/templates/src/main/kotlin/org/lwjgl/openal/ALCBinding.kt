@@ -19,7 +19,7 @@ private fun NativeClass.capName(core: String) =
 
 private val ALC_CAP_CLASS = "ALCCapabilities"
 
-val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_CLASS) {
+val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_CLASS, callingConvention = CallingConvention.DEFAULT) {
 
 	override val isLocal = true
 

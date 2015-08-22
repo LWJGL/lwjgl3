@@ -28,6 +28,9 @@ object JNI : GeneratorTargetNative("org.lwjgl.system", "JNI") {
  * <a href="http://docs.oracle.com/javase/8/docs/technotes/guides/jni/spec/types.html#type_signatures">JNI type signature</a> it supports. Only the primitive
  * type signatures are used, plus a 'P' type that corresponds to a pointer value. Pointer values are mapped to Java longs, but are properly converted in native
  * code on 32bit architectures.</p>
+ *
+ * <p>Methods with the {@code invoke} prefix will invoke the native function with the default calling convention. Methods with the {@code call} prefix will
+ * invoke the native function with the {@code __stdcall} calling convention on Windows and the default calling convention on other systems.</p>
  */
 public final class JNI {
 
@@ -35,7 +38,7 @@ public final class JNI {
 
 """)
 		signatures.forEach {
-			print("\tpublic static native ${it.returnType.nativeMethodType.simpleName} invoke${it.signature}(long $FUNCTION_ADDRESS")
+			print("\tpublic static native ${it.returnType.nativeMethodType.simpleName} ${it.signature}(long $FUNCTION_ADDRESS")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.nativeMethodType.simpleName} param${it.index}" }.join(", ", prefix = ", "))
 			println(");")
@@ -59,7 +62,7 @@ public final class JNI {
 		preamble.printNative(this)
 
 		signatures.forEach {
-			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_invoke${it.signature}(JNIEnv *__env, jclass clazz, jlong __functionAddress")
+			print("JNIEXPORT ${it.returnType.jniFunctionType} JNICALL Java_org_lwjgl_system_JNI_${it.signature}(JNIEnv *__env, jclass clazz, jlong __functionAddress")
 			if ( it.arguments.isNotEmpty() )
 				print(it.arguments.withIndex().map { "${it.value.jniFunctionType} param${it.index}" }.join(", ", prefix = ", "))
 			print(""") {
@@ -70,7 +73,7 @@ public final class JNI {
 				if ( it.returnType.isPointerType )
 					print("(jlong)(intptr_t)")
 			}
-			print("((${it.returnType.nativeType} (APIENTRY *) (")
+			print("((${it.returnType.nativeType} (${if ( it.callingConvention === CallingConvention.STDCALL ) "APIENTRY " else ""}*) (")
 			print(it.arguments.map { it.nativeType }.join(", "))
 			print("))(intptr_t)__functionAddress)(")
 			print(it.arguments.withIndex().map { if ( it.value.isPointerType ) "(void *)(intptr_t)param${it.index}" else "param${it.index}" }.join(", "))
@@ -85,10 +88,11 @@ public final class JNI {
 
 private class Signature(function: NativeClassFunction) : Comparable<Signature> {
 
-	val returnType: TypeMapping = function.returns.nativeType.mapping
-	val arguments: List<TypeMapping> = function.parameters.map { it.nativeType.mapping }
+	val callingConvention = function.nativeClass.binding!!.callingConvention
+	val returnType = function.returns.nativeType.mapping
+	val arguments = function.parameters.map { it.nativeType.mapping }
 
-	val signature = "${arguments.map { it.jniSignature }.join("")}${returnType.jniSignature}"
+	val signature = "${callingConvention.method}${arguments.map { it.jniSignature }.join("")}${returnType.jniSignature}"
 
 	override fun equals(other: Any?) = other is Signature && this.signature == other.signature
 

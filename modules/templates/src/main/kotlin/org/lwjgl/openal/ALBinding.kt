@@ -9,7 +9,7 @@ import org.lwjgl.generator.*
 
 private val CAPABILITIES_CLASS = "ALCapabilities"
 
-private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, CAPABILITIES_CLASS) {
+private val ALBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, CAPABILITIES_CLASS, callingConvention = CallingConvention.DEFAULT) {
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
