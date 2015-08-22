@@ -4,7 +4,6 @@
  */
 package org.lwjgl.system.libffi;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.Pointer;
@@ -42,7 +41,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 
 	static {
 		// Setup native callbacks
-		PointerBuffer callbacks = BufferUtils.createPointerBuffer(8);
+		PointerBuffer callbacks = memAllocPointer(8);
 
 		try {
 			Class<?>[] params = new Class<?>[] { long.class };
@@ -68,6 +67,8 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 		NATIVE_CALLBACK_FLOAT = callbacks.get(5);
 		NATIVE_CALLBACK_DOUBLE = callbacks.get(6);
 		NATIVE_CALLBACK_PTR = callbacks.get(7);
+
+		memFree(callbacks);
 	}
 
 	/** The default calling convention. */

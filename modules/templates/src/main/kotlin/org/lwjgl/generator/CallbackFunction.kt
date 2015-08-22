@@ -76,8 +76,8 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		print("""
 ${access.modifier}abstract class $className extends Closure.${returns.callbackType} {
 
-	private static final ByteBuffer    CIF  = FFICIF.malloc();
-	private static final PointerBuffer ARGS = BufferUtils.createPointerBuffer(${signature.size()});
+	private static final ByteBuffer    CIF  = memAlloc(FFICIF.SIZEOF);
+	private static final PointerBuffer ARGS = memAllocPointer(${signature.size()});
 
 	static {
 ${signature.asSequence().withIndex().map {
