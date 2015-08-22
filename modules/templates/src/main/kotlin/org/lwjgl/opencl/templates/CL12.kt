@@ -569,11 +569,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"num_input_headers",
 			"the number of programs that describe headers in the array referenced by {@code input_headers}"
 		),
-		SingleValue("input_header") _ nullable _ const _ cl_program_p.IN(
+		PointerArray(cl_program, "input_header") _ nullable _ const _ cl_program_p.IN(
 			"input_headers",
 			"an array of program embedded headers created with CL10#CreateProgramWithSource()"
 		),
-		SingleValue("header_include_name") _ nullable _ const _ cl_charASCII_pp.IN(
+		PointerArray(cl_charASCII_p, "header_include_name") _ nullable _ const _ cl_charASCII_pp.IN(
 			"header_include_names",
 			"""
 			an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used

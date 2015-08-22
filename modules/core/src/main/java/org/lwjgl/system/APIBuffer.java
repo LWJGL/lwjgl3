@@ -210,6 +210,79 @@ public class APIBuffer {
 		return pointerParam(value.getPointer());
 	}
 
+	// ----
+
+	/** Ensures space for an additional pointer buffer, sets the memory addresses of the specified buffers and returns the address offset. */
+	public int pointerArrayParam(ByteBuffer... buffers) {
+		int buffersAddress = bufferParam(buffers.length << POINTER_SHIFT);
+		for ( int i = 0; i < buffers.length; i++ )
+			pointerParam(buffersAddress, i, memAddress(buffers[i]));
+
+		return buffersAddress;
+	}
+
+	/** Ensures space for an additional pointer buffer, sets the specified memory addresses and returns the address offset. */
+	public int pointerArrayParam(long... pointers) {
+		int buffersAddress = bufferParam(pointers.length << POINTER_SHIFT);
+		for ( int i = 0; i < pointers.length; i++ )
+			pointerParam(buffersAddress, i, pointers[i]);
+
+		return buffersAddress;
+	}
+
+	/** Optimized version of {@link #pointerArrayParam(ByteBuffer...)} for a single buffer. */
+	public int pointerArrayParam(ByteBuffer buffer) {
+		return pointerParam(memAddress(buffer));
+	}
+
+	/**
+	 * Ensures space for an additional pointer buffer and integer buffer, sets the memory addresses and remaining bytes of the specified buffers and returns
+	 * the address offset.
+	 */
+	public int pointerArrayParami(ByteBuffer... buffers) {
+		int buffersAddress = pointerArrayParam(buffers);
+
+		int buffersLengths = bufferParam(buffers.length << 2);
+		for ( int i = 0; i < buffers.length; i++ )
+			intParam(buffersLengths, i, buffers[i].remaining());
+
+		return buffersAddress;
+	}
+
+	/** Optimized version of {@link #pointerArrayParami(ByteBuffer...)} for a single buffer. */
+	public int pointerArrayParami(ByteBuffer buffer) {
+		int buffersAddress = pointerArrayParam(buffer);
+		intParam(buffer.remaining());
+		return buffersAddress;
+	}
+
+	/**
+	 * Ensures space for two additional pointer buffers, sets the memory addresses and remaining bytes of the specified buffers and returns the address
+	 * offset.
+	 */
+	public int pointerArrayParamp(ByteBuffer... buffers) {
+		int buffersAddress = pointerArrayParam(buffers);
+
+		int buffersLengths = bufferParam(buffers.length << POINTER_SHIFT);
+		for ( int i = 0; i < buffers.length; i++ )
+			pointerParam(buffersLengths, i, buffers[i].remaining());
+
+		return buffersAddress;
+	}
+
+	/** Optimized version of {@link #pointerArrayParamp(ByteBuffer...)} for a single buffer. */
+	public int pointerArrayParamp(ByteBuffer buffer) {
+		int buffersAddress = pointerArrayParam(buffer);
+		pointerParam(buffer.remaining());
+		return buffersAddress;
+	}
+
+	/** Frees {@code length} memory blocks stored in the APIBuffer, starting at the specified {@code offset}. */
+	public void pointerArrayFree(int offset, int length) {
+		for ( int i = 0; i < length; i++ )
+			nmemFree(pointerValue(offset + (i << POINTER_SHIFT)));
+	}
+
 	// ---------------------------------------------------------------------------------------------------------------------
 
 	/** Sets an int value at the specified index of the int buffer that starts at the specified offset. */
@@ -221,6 +294,8 @@ public class APIBuffer {
 	public void pointerParam(int offset, int index, long value) {
 		PointerBuffer.put(buffer, offset + (index << POINTER_SHIFT), value);
 	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
 
 	/** Ensures space for the specified string encoded in ASCII, encodes the string at the allocated offset and returns that offset. */
 	public int stringParamASCII(CharSequence value, boolean nullTerminated) {
@@ -251,6 +326,62 @@ public class APIBuffer {
 		int offset = bufferParam((value.length() + (nullTerminated ? 1 : 0)) << 1);
 		memEncodeUTF16(value, nullTerminated, buffer, offset);
 		return offset;
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
+
+	/** Encodes the specified ASCII strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
+	public static ByteBuffer[] stringArrayASCII(boolean nullTerminated, CharSequence... strings) {
+		ByteBuffer[] buffers = new ByteBuffer[strings.length];
+		for ( int i = 0; i < strings.length; i++ )
+			buffers[i] = stringArrayASCII(nullTerminated, strings[i]);
+		return buffers;
+	}
+
+	/** Optimized version of {@link #stringArrayASCII(boolean, CharSequence...)} for a single string. */
+	public static ByteBuffer stringArrayASCII(boolean nullTerminated, CharSequence string) {
+		int size = string.length() + (nullTerminated ? 1 : 0);
+
+		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
+		memEncodeASCII(string, nullTerminated, buffer);
+
+		return buffer;
+	}
+
+	/** Encodes the specified UTF-8 strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
+	public static ByteBuffer[] stringArrayUTF8(boolean nullTerminated, CharSequence... strings) {
+		ByteBuffer[] buffers = new ByteBuffer[strings.length];
+		for ( int i = 0; i < strings.length; i++ )
+			buffers[i] = stringArrayUTF8(nullTerminated, strings[i]);
+		return buffers;
+	}
+
+	/** Optimized version of {@link #stringArrayUTF8(boolean, CharSequence...)} for a single string. */
+	public static ByteBuffer stringArrayUTF8(boolean nullTerminated, CharSequence string) {
+		int size = memEncodedLengthUTF8(string) + (nullTerminated ? 1 : 0);
+
+		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
+		memEncodeUTF8(string, nullTerminated, buffer);
+
+		return buffer;
+	}
+
+	/** Encodes the specified UTF-16 strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
+	public static ByteBuffer[] stringArrayUTF16(boolean nullTerminated, CharSequence... strings) {
+		ByteBuffer[] buffers = new ByteBuffer[strings.length];
+		for ( int i = 0; i < strings.length; i++ )
+			buffers[i] = stringArrayUTF16(nullTerminated, strings[i]);
+		return buffers;
+	}
+
+	/** Optimized version of {@link #stringArrayUTF16(boolean, CharSequence...)} for a single string. */
+	public static ByteBuffer stringArrayUTF16(boolean nullTerminated, CharSequence string) {
+		int size = (string.length() + (nullTerminated ? 1 : 0)) << 1;
+
+		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
+		memEncodeUTF16(string, nullTerminated, buffer);
+
+		return buffer;
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------

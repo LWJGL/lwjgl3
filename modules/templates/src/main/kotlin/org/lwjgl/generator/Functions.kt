@@ -35,8 +35,6 @@ import java.util.LinkedHashMap
 
 val RESULT = "__result"
 val POINTER_POSTFIX = "Address"
-val BUFFERS_POSTFIX = "Buffers"
-val LENGTHS_POSTFIX = "Lengths"
 val MAP_OLD = "old_buffer"
 val MAP_LENGTH = "length"
 val FUNCTION_ADDRESS = "__functionAddress"
@@ -384,10 +382,13 @@ class NativeClassFunction(
 
 					autoSize.dependent forEach {
 						val param = paramMap[it]!!
-						if ( transforms[param] !is SkipCheckFunctionTransform ) {
-							prefix = if ( param has Nullable ) "if ( $it != null ) " else ""
+						val transform = transforms[param]
+						if ( transform !is SkipCheckFunctionTransform ) {
+							prefix = if ( param has Nullable && transform !is PointerArrayTransform ) "if ( $it != null ) " else ""
 							checks add if ( param.nativeType is StructType )
 								"${prefix}checkBuffer($it, $expression * ${param.nativeType.definition.className}.SIZEOF);"
+							else if ( transform === PointerArrayTransformArray )
+								"${prefix}checkArray($it, $expression);"
 							else
 								"${prefix}checkBuffer($it, $expression);"
 						}
@@ -919,32 +920,62 @@ class NativeClassFunction(
 
 				transforms remove bufferParam
 				transforms remove it
-			} else if ( it has PointerArray ) {
+			}
+		}
+
+		// Apply any PointerArray transformations.
+		parameters.filter { it has PointerArray }.let {
+			if ( it.isEmpty() )
+				return@let
+
+			fun Parameter.getAutoSizeReference(): Parameter? = getParams {
+				it has AutoSize && it[AutoSize].reference == this.name
+			}.firstOrNull()
+
+			// Array version
+			it.forEach {
 				val pointerArray = it[PointerArray]
 
 				val lengthsParam = paramMap[pointerArray.lengthsParam]
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, true)
 
-				val countParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) }
-				transforms[countParam] = ExpressionTransform("${it.name}.length")
+				val countParam = it.getAutoSizeReference()
+				if ( countParam != null )
+					transforms[countParam] = ExpressionTransform("${it.name}.length")
 
 				transforms[it] = if ( it === parameters.last() {
 					it !== lengthsParam && it !== countParam // these will be hidden, ignore
 				} ) PointerArrayTransformVararg else PointerArrayTransformArray
+			}
+			generateAlternativeMethod(name, "Array version of:", transforms)
 
-				generateAlternativeMethod(name, "Array version of:", transforms)
+			// Combine PointerArrayTransformSingle with BufferValueReturnTransform
+			getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
 
-				// Combine PointerArrayTransformSingle with BufferValueReturnTransform
-				getParams { it has returnValue } forEach { applyReturnValueTransforms(it) }
+			// Single value version
+			val names = it.map {
+				val pointerArray = it[PointerArray]
 
-				transforms[countParam] = ExpressionTransform("1")
+				val lengthsParam = paramMap[pointerArray.lengthsParam]
 				if ( lengthsParam != null )
 					transforms[lengthsParam] = PointerArrayLengthsTransform(it, false)
-				transforms[it] = PointerArrayTransformSingle
-				generateAlternativeMethod(name, "Single ${pointerArray.singleName} version of:", transforms)
 
-				transforms remove countParam
+				val countParam = it.getAutoSizeReference()
+				if ( countParam != null )
+					transforms[countParam] = ExpressionTransform("1")
+
+				transforms[it] = PointerArrayTransformSingle
+
+				pointerArray.singleName
+			}.join(" &amp; ")
+			generateAlternativeMethod(name, "Single $names version of:", transforms)
+
+			// Cleanup
+			it.forEach {
+				val countParam = it.getAutoSizeReference()
+				if ( countParam != null )
+					transforms remove countParam
 				transforms remove it
 			}
 		}

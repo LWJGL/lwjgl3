@@ -281,10 +281,17 @@ private class BufferReturnNTTransform(
 		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address(${outParam.name}), $maxLengthParam));"
 }
 
-private class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
+private open class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
 		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
-		val paramClass = if ( param[PointerArray].elementType is CharSequenceType ) "CharSequence" else "ByteBuffer"
+		val paramClass = param[PointerArray].elementType.let {
+			if ( it.mapping === PointerMapping.OPAQUE_POINTER )
+				"long"
+			else if ( it is CharSequenceType )
+				"CharSequence"
+			else
+				"ByteBuffer"
+		}
 		return "$paramClass$paramType $name"
 	}
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name}$POINTER_POSTFIX)" // Replace with APIBuffer address + offset
@@ -292,37 +299,34 @@ private class PointerArrayTransform(val paramType: String): FunctionTransform<Pa
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
 		val pointerArray = param[PointerArray]
-		val elementType = pointerArray.elementType
-		val nullTerminate = pointerArray.lengthsParam == null
+		if ( pointerArray.lengthsParam != null )
+			return
 
-		if ( !paramType.isEmpty() ) {
-			println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.bufferParam(${param.name}.length << POINTER_SHIFT);")
-
-			// Create a local array that will hold the encoded CharSequences. We need this to avoid premature GC of the passed buffers.
-			if ( elementType is CharSequenceType )
-				println("\t\tByteBuffer[] ${param.name}$BUFFERS_POSTFIX = new ByteBuffer[${param.name}.length];")
-
-			println("\t\tfor ( int i = 0; i < ${param.name}.length; i++ )")
-			print("\t\t\t$API_BUFFER.pointerParam(${param.name}$POINTER_POSTFIX, i, memAddress(")
-			if ( elementType is CharSequenceType )
-				print("${param.name}$BUFFERS_POSTFIX[i] = memEncode${elementType.charMapping.charset}(") // Encode and store
-			print("${param.name}[i]")
-			if ( elementType is CharSequenceType )
-				print(", $nullTerminate)")
-			println("));")
-		} else {
-			// Store the encoded CharSequence buffer in a local var to avoid premature GC.
-			if ( elementType is CharSequenceType )
-				println("\t\tByteBuffer ${pointerArray.singleName}$BUFFERS_POSTFIX = memEncode${elementType.charMapping.charset}(${param[PointerArray].singleName}, $nullTerminate);") // Encode and store
-
-			print("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerParam(memAddress(${pointerArray.singleName}")
-			if ( elementType is CharSequenceType )
-				print(BUFFERS_POSTFIX)
-			println("));")
+		val paramName = (if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName) let {
+			if ( pointerArray.elementType is CharSequenceType )
+				"APIBuffer.stringArray${pointerArray.elementType.charMapping.charset}(true, $it)"
+			else
+				it
 		}
+
+		println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam($paramName);")
+	}
+
+	override fun generate(qtype: Parameter, code: Code): Code {
+		val pointerArray = qtype[PointerArray]
+		val elementType = pointerArray.elementType
+
+		if ( elementType is CharSequenceType ) {
+			return code.append(javaFinally = statement(
+				"\t\t\t$API_BUFFER.pointerArrayFree(${qtype.name}$POINTER_POSTFIX, ${if ( paramType.isEmpty() ) "1" else "${qtype.name}.length"});",
+				ApplyTo.ALTERNATIVE
+			))
+		}
+
+		return code
 	}
 }
-private val PointerArrayTransformSingle = PointerArrayTransform("")
+private object PointerArrayTransformSingle: PointerArrayTransform(""), SkipCheckFunctionTransform
 private val PointerArrayTransformArray = PointerArrayTransform("[]")
 private val PointerArrayTransformVararg = PointerArrayTransform("...")
 
@@ -331,38 +335,25 @@ private class PointerArrayLengthsTransform(
 	val multi: Boolean
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${arrayParam.name}$LENGTHS_POSTFIX)" // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = // Replace with APIBuffer address + offset
+		if ( multi )
+			"$API_BUFFER.address(${arrayParam.name}$POINTER_POSTFIX + (${arrayParam.name}.length << POINTER_SHIFT))"
+		else
+			"$API_BUFFER.address(${arrayParam.name}$POINTER_POSTFIX + POINTER_SIZE)"
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.setupAPIBufferImpl(qtype)
 
 	private fun PrintWriter.setupAPIBufferImpl(param: Parameter) {
 		val pointerArray = arrayParam[PointerArray]
-		val elementType = pointerArray.elementType
 
-		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping]
-
-		if ( multi ) {
-			val byteShift = (param.nativeType.mapping as PointerMapping).byteShift
-			println("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.bufferParam(${arrayParam.name}.length << $byteShift);")
-
-			println("\t\tfor ( int i = 0; i < ${arrayParam.name}.length; i++ )")
-			print("\t\t\t$API_BUFFER.${lengthType}Param(${arrayParam.name}$LENGTHS_POSTFIX, i, ${arrayParam.name}[i]")
-			print(
-				if ( elementType is CharSequenceType )
-					".length()"
-				else
-					".remaining()"
-			)
-			println(");")
-		} else {
-			print("\t\tint ${arrayParam.name}$LENGTHS_POSTFIX = $API_BUFFER.${lengthType}Param(${pointerArray.singleName}")
-			print(
-				if ( elementType is CharSequenceType )
-					".length()"
-				else
-					".remaining()"
-			)
-			println(");")
+		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping]!![0]
+		val paramName = (if ( multi ) arrayParam.name else pointerArray.singleName) let {
+			if ( pointerArray.elementType is CharSequenceType )
+				"APIBuffer.stringArray${pointerArray.elementType.charMapping.charset}(false, $it)"
+			else
+				it
 		}
+
+		println("\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam$lengthType($paramName);")
 	}
 }
 
