@@ -630,23 +630,23 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) )
-					println("\tpublic void $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); }")
+					println("\tpublic $className $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); return this; }")
 				generateSetters(it.nestedMembers, nestedStruct, method, field)
 			} else {
 				// Setter
 
 				if ( it !is StructMemberArray ) {
-					print("\tpublic void $setMethod(")
+					print("\tpublic $className $setMethod(")
 
 					if (it.nativeType is PointerType || it.nativeType.mapping === PrimitiveMapping.POINTER ) {
-						println("long $param) { $method(struct, $param); }")
+						println("long $param) { $method(struct, $param); return this; }")
 					} else {
 						val javaType = it.nativeType.javaMethodType.simpleName
 						println(
 							if ( javaType.equals("byte") || javaType.equals("short") )
-								"int $param) { $method(struct, $param); }"
+								"int $param) { $method(struct, $param); return this; }"
 							else
-								"$javaType $param) { $method(struct, $param); }"
+								"$javaType $param) { $method(struct, $param); return this; }"
 						)
 					}
 				}
@@ -654,22 +654,22 @@ class Struct(
 				// Alternative setters
 
 				if ( it.nativeType is CharSequenceType ) {
-					println("\tpublic void $setMethod(ByteBuffer $param) { $method(struct, $param); }")
+					println("\tpublic $className $setMethod(ByteBuffer $param) { $method(struct, $param); return this; }")
 				} else if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-						println("\tpublic void $setMethod(PointerBuffer $param) { ${method}Set(struct, $param); }")
-						println("\tpublic void $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+						println("\tpublic $className $setMethod(PointerBuffer $param) { ${method}Set(struct, $param); return this; }")
+						println("\tpublic $className $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); return this; }")
 					} else {
-						println("\tpublic void $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); }")
+						println("\tpublic $className $setMethod(ByteBuffer $param) { ${method}Set(struct, $param); return this; }")
 						if ( it is StructMemberCharArray )
-							println("\tpublic void $setMethod(CharSequence $param) { $method(struct, $param); }")
+							println("\tpublic $className $setMethod(CharSequence $param) { $method(struct, $param); return this; }")
 						else if ( it.nativeType is PrimitiveType )
-							println("\tpublic void $setMethod(int index, ${it.nativeType.mapping.javaMethodType} $param) { $method(struct, index, $param); }")
+							println("\tpublic $className $setMethod(int index, ${it.nativeType.mapping.javaMethodType} $param) { $method(struct, index, $param); return this; }")
 						else if ( it.nativeType is StructType )
-							println("\tpublic void $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); }")
+							println("\tpublic $className $setMethod(ByteBuffer $param, int index) { ${method}Set(struct, $param, index); return this; }")
 					}
 				} else if ( it.nativeType is PointerType && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-					println("\tpublic void $setMethod(ByteBuffer $param) { $method(struct, $param); }")
+					println("\tpublic $className $setMethod(ByteBuffer $param) { $method(struct, $param); return this; }")
 			}
 		}
 	}

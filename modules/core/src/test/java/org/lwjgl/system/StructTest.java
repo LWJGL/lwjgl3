@@ -49,10 +49,10 @@ public class StructTest {
 	}
 
 	public void testStructInstance() {
-		FFIType type = new FFIType();
-		type.setSize(4);
-		type.setAlignment(4);
-		type.setType(FFI_TYPE_INT);
+		FFIType type = new FFIType()
+			.setSize(4)
+			.setAlignment(4)
+			.setType(FFI_TYPE_INT);
 
 		ByteBuffer s = type.buffer();
 
