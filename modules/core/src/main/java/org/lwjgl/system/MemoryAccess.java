@@ -6,11 +6,7 @@ package org.lwjgl.system;
 
 import org.lwjgl.LWJGLUtil;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 import java.nio.*;
-
-import sun.misc.Unsafe;
 
 /**
  * Provides 3 {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}.
@@ -26,11 +22,11 @@ final class MemoryAccess {
 	static MemoryAccessor getInstance() {
 		MemoryAccessor accessor;
 		try {
-			// Depends on java.nio.Buffer#address and sun.misc.Unsafe
+			// Depends on sun.nio.ch.DirectBuffer and sun.misc.Unsafe
 			accessor = (MemoryAccessor)Class.forName("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe").newInstance();
 		} catch (Exception e0) {
 			try {
-				// Depends on java.nio.Buffer#address
+				// Depends on sun.nio.ch.DirectBuffer
 				accessor = new MemoryAccessorReflect();
 			} catch (Exception e1) {
 				LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
@@ -282,12 +278,10 @@ final class MemoryAccess {
 	/** Implementation using reflection. */
 	private static final class MemoryAccessorReflect extends MemoryAccessorJava {
 
-		private static final Field ADDRESS;
-		private static final Field CAPACITY;
+		private static final java.lang.reflect.Field ADDRESS;
+		private static final java.lang.reflect.Field CAPACITY;
 
-		private static final Field CLEANER;
-
-		private static final Field
+		private static final java.lang.reflect.Field
 			PARENT_BYTE,
 			PARENT_SHORT,
 			PARENT_CHAR,
@@ -297,13 +291,13 @@ final class MemoryAccess {
 			PARENT_DOUBLE;
 
 		static {
+			ByteBuffer parent = BYTE_BUFFER;
+			if ( !(parent instanceof sun.nio.ch.DirectBuffer) )
+				throw new UnsupportedOperationException();
+
 			try {
 				ADDRESS = getDeclaredField(Buffer.class, "address");
 				CAPACITY = getDeclaredField(Buffer.class, "capacity");
-
-				ByteBuffer parent = BYTE_BUFFER;
-
-				CLEANER = getDeclaredField(parent.getClass(), "cleaner");
 
 				PARENT_BYTE = getField(parent.slice(), parent);
 				PARENT_SHORT = getField(SHORT_BUFFER, parent);
@@ -322,14 +316,10 @@ final class MemoryAccess {
 
 		@Override
 		public long memAddress0(Buffer buffer) {
-			try {
-				return ADDRESS.getLong(buffer);
-			} catch (IllegalAccessException e) {
-				throw new UnsupportedOperationException(e);
-			}
+			return ((sun.nio.ch.DirectBuffer)buffer).address();
 		}
 
-		private static <T extends Buffer> T setup(T buffer, long address, int capacity, Field parentField) {
+		private static <T extends Buffer> T setup(T buffer, long address, int capacity, java.lang.reflect.Field parentField) {
 			try {
 				ADDRESS.setLong(buffer, address);
 				CAPACITY.setInt(buffer, capacity);
@@ -345,15 +335,9 @@ final class MemoryAccess {
 
 		@Override
 		ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
-			if ( LWJGLUtil.DEBUG ) {
-				try {
-					// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-					if ( CLEANER.get(buffer) != null )
-						throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
-				} catch (IllegalAccessException e) {
-					throw new UnsupportedOperationException(e);
-				}
-			}
+			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
+			if ( LWJGLUtil.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
+				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
 			return setup(buffer, address, capacity, PARENT_BYTE);
 		}
@@ -399,12 +383,10 @@ final class MemoryAccess {
 		 */
 		private static final long BULK_OP_THRESHOLD = 0x100000; // 1 MB
 
-		private static final Unsafe UNSAFE;
+		private static final sun.misc.Unsafe UNSAFE;
 
 		private static final long ADDRESS;
 		private static final long CAPACITY;
-
-		private static final long CLEANER;
 
 		private static final long
 			PARENT_BYTE,
@@ -416,15 +398,15 @@ final class MemoryAccess {
 			PARENT_DOUBLE;
 
 		static {
+			ByteBuffer parent = BYTE_BUFFER;
+			if ( !(parent instanceof sun.nio.ch.DirectBuffer) )
+				throw new UnsupportedOperationException();
+
 			try {
 				UNSAFE = getUnsafeInstance();
 
 				ADDRESS = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "address"));
 				CAPACITY = UNSAFE.objectFieldOffset(getDeclaredField(Buffer.class, "capacity"));
-
-				ByteBuffer parent = BYTE_BUFFER;
-
-				CLEANER = UNSAFE.objectFieldOffset(getDeclaredField(parent.getClass(), "cleaner"));
 
 				PARENT_BYTE = UNSAFE.objectFieldOffset(getField(BYTE_BUFFER.slice(), parent));
 				PARENT_SHORT = UNSAFE.objectFieldOffset(getField(SHORT_BUFFER, parent));
@@ -464,7 +446,7 @@ final class MemoryAccess {
 		@Override
 		public ByteBuffer memSetupBuffer(ByteBuffer buffer, long address, int capacity) {
 			// If we allowed this, the ByteBuffer's malloc'ed memory might never be freed.
-			if ( LWJGLUtil.DEBUG && UNSAFE.getObject(buffer, CLEANER) != null )
+			if ( LWJGLUtil.DEBUG && ((sun.nio.ch.DirectBuffer)buffer).cleaner() != null )
 				throw new IllegalArgumentException("Instances created through ByteBuffer.allocateDirect cannot be modified.");
 
 			return setup(buffer, address, capacity, PARENT_BYTE);
@@ -602,8 +584,8 @@ final class MemoryAccess {
 			UNSAFE.putAddress(ptr, value);
 		}
 
-		private static Unsafe getUnsafeInstance() {
-			Field[] fields = Unsafe.class.getDeclaredFields();
+		private static sun.misc.Unsafe getUnsafeInstance() {
+			java.lang.reflect.Field[] fields = sun.misc.Unsafe.class.getDeclaredFields();
 
 			/*
 			Different runtimes use different names for the Unsafe singleton,
@@ -613,17 +595,17 @@ final class MemoryAccess {
 			PERC : m_unsafe_instance
 			Android: THE_ONE
 			*/
-			for ( Field field : fields ) {
-				if ( !field.getType().equals(Unsafe.class) )
+			for ( java.lang.reflect.Field field : fields ) {
+				if ( !field.getType().equals(sun.misc.Unsafe.class) )
 					continue;
 
 				int modifiers = field.getModifiers();
-				if ( !(Modifier.isStatic(modifiers) && Modifier.isFinal(modifiers)) )
+				if ( !(java.lang.reflect.Modifier.isStatic(modifiers) && java.lang.reflect.Modifier.isFinal(modifiers)) )
 					continue;
 
 				field.setAccessible(true);
 				try {
-					return (Unsafe)field.get(null);
+					return (sun.misc.Unsafe)field.get(null);
 				} catch (IllegalAccessException e) {
 					// ignore
 				}
@@ -634,12 +616,12 @@ final class MemoryAccess {
 		}
 	}
 
-	static Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
+	static java.lang.reflect.Field getDeclaredField(Class<?> root, String fieldName) throws NoSuchFieldException {
 		Class<?> type = root;
 
 		do {
 			try {
-				Field field = type.getDeclaredField(fieldName);
+				java.lang.reflect.Field field = type.getDeclaredField(fieldName);
 				field.setAccessible(true);
 				return field;
 			} catch (NoSuchFieldException e) {
@@ -650,12 +632,12 @@ final class MemoryAccess {
 		throw new NoSuchFieldException(fieldName + " does not exist in " + root.getSimpleName() + " or any of its superclasses.");
 	}
 
-	static Field getField(Buffer buffer, Object value) throws NoSuchFieldException {
+	static java.lang.reflect.Field getField(Buffer buffer, Object value) throws NoSuchFieldException {
 		Class<?> type = buffer.getClass();
 
 		do {
-			for ( Field field : type.getDeclaredFields() ) {
-				if ( Modifier.isStatic(field.getModifiers()) )
+			for ( java.lang.reflect.Field field : type.getDeclaredFields() ) {
+				if ( java.lang.reflect.Modifier.isStatic(field.getModifiers()) )
 					continue;
 
 				if ( !field.getType().isAssignableFrom(value.getClass()) )
