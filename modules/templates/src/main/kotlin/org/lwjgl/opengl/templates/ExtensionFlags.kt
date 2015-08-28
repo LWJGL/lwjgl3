@@ -614,7 +614,7 @@ val ARB_sparse_texture_clamp = EXT_FLAG.nativeClassGL("ARB_sparse_texture_clamp"
 		accessed is unpopulated, either from a priori knowledge or from feedback provided by the return value of previously executed "sparse" texture lookup
 		functions.
 
-		Requires ${ARB_sparse_texture2.link}
+		Requires ${ARB_sparse_texture2.cap}
 		"""
 }
 val ARB_texture_buffer_object_rgb32 = EXT_FLAG.nativeClassGL("ARB_texture_buffer_object_rgb32", postfix = ARB) {

@@ -123,7 +123,7 @@ This script is included in /build.xml and /config/update-dependencies.xml.
 
 	<available property="jdk.apple" file="${env.JAVA6_HOME}/bundle/Classes/classes.jar" if:set="env.JAVA6_HOME"/>
 	<presetdef name="lwjgl.javac">
-		<javac sourcepath="" debug="yes" encoding="utf8" source="1.6" target="1.6">
+		<javac sourcepath="" debug="yes" encoding="UTF-8" source="1.6" target="1.6">
 			<!-- JAVA6_HOME will be used for the bootclasspath. This will cause compilation to fail if a Java 7+ API is used by mistake. -->
 			<bootclasspath if:set="env.JAVA6_HOME">
 				<!-- OpenJDK -->
