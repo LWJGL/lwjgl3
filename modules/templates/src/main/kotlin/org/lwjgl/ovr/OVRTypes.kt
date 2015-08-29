@@ -34,6 +34,7 @@ val ovrEye_Count = 2
 val ovrLogCallback = "ovrLogCallback".callback(
 	OVR_PACKAGE, void, "OVRLogCallback",
 	"The logging callback.",
+	uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
 	int.IN("level", "one of the ovrLogLevel constants"),
 	const _ charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
 	samConstructor = "OVR"
@@ -66,9 +67,21 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", structName = "ovrIn
 	/// Pass 0 for no log callback.
 	ovrLogCallback.member("LogCallback") ///< Function pointer or 0
 
+	/// User-supplied data which is passed as-is to LogCallback. Typically this
+	/// is used to store an application-specific pointer which is read in the
+	/// callback function.
+	uintptr_t.member("UserData")
+
 	/// Number of milliseconds to wait for a connection to the server.
 	/// Pass 0 for the default timeout.
 	uint32_t.member("ConnectionTimeoutMS") ///< Timeout in Milliseconds or 0
+}
+
+val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", structName = "ovrGraphicsLuid") {
+	documentation = "A system specific graphics adapter identifier."
+	includeOVRCAPI()
+
+	char.member("Reserved", size = 8)
 }
 
 val ovrVector2i = struct(OVR_PACKAGE, "OVRVector2i", structName = "ovrVector2i") {
@@ -165,7 +178,38 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", structName = "ovrFovPort") {
 	float.member("RightTan") /// The tangent of the angle between the viewing vector and the right edge of the field of view.
 }.nativeType
 
-val ovrHmd = "ovrHmd".opaque_p // const ovrHmdDesc *
+val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc") {
+	documentation = "A complete descriptor of the HMD."
+	includeOVRCAPI()
+
+	ovrHmdType.member("Type") // This HMD's type.
+	charUTF8.member("ProductName", size = 64, nullTerminated = true) // Name string describing the product: "Oculus Rift DK1", etc.
+	charUTF8.member("Manufacturer", size = 64, nullTerminated = true) // String describing the manufacturer. Usually "Oculus".
+	short.member("VendorId") // HID Vendor ID of the device.
+	short.member("ProductId") // HID Product ID of the device.
+	charASCII.member("SerialNumber", size = 24, nullTerminated = true) // Sensor (and display) serial number.
+	short.member("FirmwareMajor") // Sensor firmware major version number.
+	short.member("FirmwareMinor") // Sensor firmware minor version number.
+
+	// External tracking camera frustum dimensions (if present).
+	float.member("CameraFrustumHFovInRadians") // Horizontal field-of-view
+	float.member("CameraFrustumVFovInRadians") // Vertical field-of-view
+	float.member("CameraFrustumNearZInMeters") // Near clip distance
+	float.member("CameraFrustumFarZInMeters") // Far clip distance
+
+	unsigned_int.member("AvailableHmdCaps") // Capability bits described by ovrHmdCaps which the HMD currently supports.
+	unsigned_int.member("DefaultHmdCaps") // Capability bits described by ovrHmdCaps which are default for the current Hmd.
+	unsigned_int.member("AvailableTrackingCaps") // Capability bits described by ovrTrackingCaps which the system currently supports.
+	unsigned_int.member("DefaultTrackingCaps") // Capability bits described by ovrTrackingCaps which are default for the current system.
+
+	ovrFovPort.member("DefaultEyeFov", size = ovrEye_Count) // The recommended optical FOV for the HMD.
+	ovrFovPort.member("MaxEyeFov", size = ovrEye_Count) // The maximum optical FOV for the HMD.
+
+	ovrSizei.member("Resolution") // Resolution of the full HMD screen (both eyes) in pixels.
+	float.member("DisplayRefreshRate") // Nominal refresh rate of the display in cycles per second at the time of HMD creation.
+}.nativeType
+
+val ovrHmd = "ovrHmd".opaque_p // struct ovrHmdStruct *
 val ovrHmd_p = ovrHmd.p
 
 val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensorData") {
@@ -196,6 +240,12 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovr
 	/// This value includes position and yaw of the camera, but not roll and pitch.
 	/// It can be used as a reference point to render real-world objects in the correct location.
 	ovrPosef.member("LeveledCameraPose")
+
+	/// The most recent calculated pose for each hand when hand controller tracking is present.
+	/// HandPoses[ovrHand_Left] refers to the left hand and HandPoses[ovrHand_Right] to the right hand.
+	/// These values can be combined with ovrInputState for complete hand controller information.
+	ovrPoseStatef.member("HandPoses", size = 2)
+
 	ovrSensorData.member("RawSensorData") /// The most recent sensor data received from the HMD.
 	unsigned_int.member("StatusFlags") /// Tracking status described by ovrStatusBits.
 
@@ -332,6 +382,36 @@ val ovrSwapTextureSet = struct(OVR_PACKAGE, "OVRSwapTextureSet", structName = "o
 }.nativeType
 val ovrSwapTextureSet_p = ovrSwapTextureSet.p
 val ovrSwapTextureSet_pp = ovrSwapTextureSet_p.p
+
+val ovrInputState_p = struct_p(OVR_PACKAGE, "OVRInputState", structName = "ovrInputState") {
+	documentation =
+		"""
+		Describes the complete controller input state, including Oculus Touch, and XBox gamepad. If multiple inputs are connected and used at the same time,
+		their inputs are combined.
+		"""
+	includeOVRCAPI()
+
+	 // System type when the controller state was last updated.
+    double.member("TimeInSeconds")
+
+    // Described by ovrControllerType. Indicates which ControllerTypes are present.
+    unsigned_int.member("ConnectedControllerTypes")
+
+    // Values for buttons described by ovrButton.
+    unsigned_int.member("Buttons")
+
+    // Touch values for buttons and sensors as described by ovrTouch.
+    unsigned_int.member("Touches")
+
+    // Left and right finger trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
+    float.member("IndexTrigger", size = 2)
+
+    // Left and right hand trigger values (ovrHand_Left and ovrHand_Right), in the range 0.0 to 1.0f.
+    float.member("HandTrigger", size = 2)
+
+    // Horizontal and vertical thumbstick axis values (ovrHand_Left and ovrHand_Right), in the range -1.0f to 1.0f.
+    ovrVector2f.member("Thumbstick", size = 2)
+}
 
 val ovrLayerHeader = struct(OVR_PACKAGE, "OVRLayerHeader", structName = "ovrLayerHeader") {
 	documentation = "Defines properties shared by all ovrLayer structs, such as ##OVRLayerEyeFov."
@@ -471,38 +551,6 @@ val ovrGLTextureData = 	struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ov
 }.nativeType
 
 fun config() {
-	struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc") {
-		documentation = "A complete descriptor of the HMD."
-		includeOVRCAPI()
-
-		ovrHmdType.member("Type") // This HMD's type.
-		/*const*/ charUTF8_p.member("ProductName") // Name string describing the product: "Oculus Rift DK1", etc.
-		/*const*/ charUTF8_p.member("Manufacturer") // String describing the manufacturer. Usually "Oculus".
-		short.member("VendorId") // HID Vendor ID of the device.
-		short.member("ProductId") // HID Product ID of the device.
-		charASCII.member("SerialNumber", size = 24, nullTerminated = true) // Sensor (and display) serial number.
-		short.member("FirmwareMajor") // Sensor firmware major version number.
-		short.member("FirmwareMinor") // Sensor firmware minor version number.
-
-		// External tracking camera frustum dimensions (if present).
-		float.member("CameraFrustumHFovInRadians") // Horizontal field-of-view
-		float.member("CameraFrustumVFovInRadians") // Vertical field-of-view
-		float.member("CameraFrustumNearZInMeters") // Near clip distance
-		float.member("CameraFrustumFarZInMeters") // Far clip distance
-
-		unsigned_int.member("HmdCaps") // Capability bits described by ovrHmdCaps.
-		unsigned_int.member("TrackingCaps") // Capability bits described by ovrTrackingCaps.
-
-		ovrFovPort.member("DefaultEyeFov", size = ovrEye_Count) // The recommended optical FOV for the HMD.
-		ovrFovPort.member("MaxEyeFov", size = ovrEye_Count) // The maximum optical FOV for the HMD.
-
-		/// Preferred eye rendering order for best performance.
-		/// Can help reduce latency on sideways-scanned screens.
-		ovrEyeType.member("EyeRenderOrder", size = ovrEye_Count)
-
-		ovrSizei.member("Resolution") // Resolution of the full HMD screen (both eyes) in pixels.
-	}
-
 	struct(OVR_PACKAGE, "OVRLayer_Union", structName = "ovrLayer_Union") {
 		documentation = "Union that combines ovrLayer types in a way that allows them to be used in a polymorphic way."
 		includeOVRCAPI()

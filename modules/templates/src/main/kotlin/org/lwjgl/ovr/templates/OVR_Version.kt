@@ -14,9 +14,9 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
 		"",
 
 	    "PRODUCT_VERSION" _ 0,
-		"MAJOR_VERSION" _ 6,
+		"MAJOR_VERSION" _ 7,
 		"MINOR_VERSION" _ 0,
-		"PATCH_VERSION" _ 1,
+		"PATCH_VERSION" _ 0,
 		"BUILD_NUMBER" _ 0
 	)
 
@@ -29,12 +29,12 @@ val OVR_Version = "OVRVersion".nativeClass(packageName = OVR_PACKAGE, prefix = "
 	StringConstant(
 		"The product version for the Oculus Display Driver.",
 
-	    "DISPLAY_DRIVER_PRODUCT_VERSION" _ "1.2.6.0"
+	    "DISPLAY_DRIVER_PRODUCT_VERSION" _ "1.2.7.0"
 	)
 
 	StringConstant(
 		"The product version for the Oculus Position Tracker Driver.",
 
-		"POSITIONAL_TRACKER_DRIVER_PRODUCT_VERSION" _ "1.0.10.0"
+		"POSITIONAL_TRACKER_DRIVER_PRODUCT_VERSION" _ "1.0.11.0"
 	)
 }

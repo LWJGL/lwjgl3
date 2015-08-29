@@ -22,6 +22,7 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	)
 	IntConstant("The HMD Firmware is out of date but is acceptable.", "Success_HMDFirmwareMismatch" expr "4100")
 	IntConstant("The Tracker Firmware is out of date but is acceptable.", "Success_TrackerFirmwareMismatch" expr "4101")
+	IntConstant("The controller firmware is out of date but is acceptable.", "Success_ControllerFirmwareMismatch" expr "4104")
 	// General errors
 	IntConstant("Failure to allocate memory.", "Error_MemoryAllocationFailure" expr "-1000")
 	IntConstant("Failure to create a socket.", "Error_SocketCreationFailure" expr "-1001")
@@ -45,6 +46,8 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	IntConstant("Unable to start the server. Is it already running?", "Error_ServerStart" expr "-3007")
 	IntConstant("Attempting to re-initialize with a different version.", "Error_Reinitialization" expr "-3008")
 	IntConstant("Chosen rendering adapters between client and service do not match.", "Error_MismatchedAdapters" expr "-3009")
+	IntConstant("Calling application has leaked resources.", "Error_LeakingResources" expr "-3010")
+	IntConstant("Client version too old to connect to service.", "Error_ClientVersion" expr "-3011")
 	// Hardware Errors
 	IntConstant("Headset has no bundle adjustment data.", "Error_InvalidBundleAdjustment" expr "-4000")
 	IntConstant("The USB hub cannot handle the camera frame bandwidth.", "Error_USBBandwidth" expr "-4001")
@@ -54,9 +57,18 @@ val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix
 	IntConstant("A more than acceptable number of frames are coming back truncated.", "Error_ExcessiveFrameTruncation" expr "-4005")
 	IntConstant("A more than acceptable number of frames have been skipped.", "Error_ExcessiveFrameSkipping" expr "-4006")
 	IntConstant("The tracker is not receiving the sync signal (cable disconnected?)", "Error_SyncDisconnected" expr "-4007")
+    IntConstant("Failed to read memory from the tracker.", "Error_TrackerMemoryReadFailure" expr "-4008")
+    IntConstant("Failed to write memory from the tracker.", "Error_TrackerMemoryWriteFailure" expr "-4009")
+    IntConstant("Timed out waiting for a camera frame.", "Error_TrackerFrameTimeout" expr "-4010")
+    IntConstant("Truncated frame returned from tracker.", "Error_TrackerTruncatedFrame" expr "-4011")
 	IntConstant("The HMD Firmware is out of date and is unacceptable.", "Error_HMDFirmwareMismatch" expr "-4100")
 	IntConstant("The Tracker Firmware is out of date and is unacceptable.", "Error_TrackerFirmwareMismatch" expr "-4101")
+	IntConstant("A bootloader HMD is detected by the service.", "Error_BootloaderDeviceDetected" expr "-4102")
+    IntConstant("The tracker calibration is missing or incorrect.", "Error_TrackerCalibrationError" expr "-4103")
+    IntConstant("The controller firmware is out of date and is unacceptable.", "Error_ControllerFirmwareMismatch" expr "-4104")
 	// Synchronization Errors
 	IntConstant("Requested async work not yet complete.", "Error_Incomplete" expr "-5000")
 	IntConstant("Requested async work was abandoned and result is incomplete.", "Error_Abandoned" expr "-5001")
+	// Rendering Errors
+	IntConstant("In the event of a system-wide graphics reset or cable unplug this is returned to the app.", "Error_DisplayLost" expr "-6000")
 }

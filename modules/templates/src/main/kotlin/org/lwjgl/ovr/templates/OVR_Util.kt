@@ -7,7 +7,7 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixConstant = "ovr") {
+val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr", prefixConstant = "ovr") {
 	includeOVRCAPI()
 
 	documentation = "Native bindings to the libOVR utility functions."
@@ -100,21 +100,21 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 	    Check(2) _ const _ ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
-		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#Hmd_GetRenderDesc(). For monoscopic rendering, use a vector that is the
+		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 	    ),
 		Check(2) _ ovrPosef_p.OUT(
 			"outEyePoses",
 			"""
-			if {@code outEyePoses} are used for rendering, they should be passed to OVR#Hmd_SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
+			if {@code outEyePoses} are used for rendering, they should be passed to OVR#_SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
 			##OVRLayerEyeFovDepth{@code ::RenderPose}
 			"""
 		)
 	)
 
 	void(
-		"Hmd_GetEyePoses",
+		"_GetEyePoses",
 	    """
 	    Returns the predicted head pose in {@code outHmdTrackingState} and offset eye poses in {@code outEyePoses}.
 
@@ -123,12 +123,12 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", 
 		not need to worry about applying {@code hmdToEyeViewOffset} to the returned {@code outEyePoses} variables.
 	    """,
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#Hmd_Create()"),
-	    unsigned_int.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#Hmd_SubmitFrame() was called"),
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#_Create()"),
+	    unsigned_int.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#_SubmitFrame() was called"),
 	    Check(2) _ const _ ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
-		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#Hmd_GetRenderDesc(). For monoscopic rendering, use a vector that is the
+		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 	    ),

@@ -7,7 +7,7 @@ package org.lwjgl.ovr.templates
 import org.lwjgl.generator.*
 import org.lwjgl.ovr.*
 
-val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixConstant = "ovr") {
+val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", prefixConstant = "ovr") {
 	includeOVRCAPI()
 
 	documentation =
@@ -18,32 +18,32 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 
 		<h3>Setup</h3>
 		${ul(
-			"#_Initialize()",
-			"#Hmd_Create(0, &hmd)",
-			"Call #Hmd_ConfigureTracking() to configure and initialize tracking.",
-			"Use hmd members and #Hmd_GetFovTextureSize() to determine graphics configuration and #Hmd_GetRenderDesc() to get per-eye rendering parameters.",
-			"Allocate render target texture sets with ovrHmd_CreateSwapTextureSetD3D11() or OVRGL#Hmd_CreateSwapTextureSetGL()."
+			"#Initialize()",
+			"#Create()(&hmd, &graphicsId)",
+			"Call #ConfigureTracking() to configure and initialize tracking.",
+			"Use hmd members and #GetFovTextureSize() to determine graphics configuration and #GetRenderDesc() to get per-eye rendering parameters.",
+			"Allocate render target texture sets with ovr_CreateSwapTextureSetD3D11() or OVRGL#CreateSwapTextureSetGL()."
 		)}
 
 		<h3>Application Loop</h3>
 		${ul(
-			"Call #Hmd_GetFrameTiming() to get the current frame timing information.",
-			"Call #Hmd_GetTrackingState() and OVRUtil#_CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
+			"Call #GetFrameTiming() to get the current frame timing information.",
+			"Call #GetTrackingState() and OVRUtil#CalcEyePoses() to obtain the predicted rendering pose for each eye based on timing.",
 			"""
 			Render the scene content into {@code CurrentIndex} of ovrTextureSet for each eye and layer you plan to update this frame. Increment texture set
 			{@code CurrentIndex}.
 			""",
 			"""
-			Call #Hmd_SubmitFrame() to render the distorted layers to the back buffer and present them on the HMD. If #Hmd_SubmitFrame() returns
-			OVRErrorCode#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #Hmd_SubmitFrame() again
+			Call #SubmitFrame() to render the distorted layers to the back buffer and present them on the HMD. If #SubmitFrame() returns
+			OVRErrorCode#Success_NotVisible, there is no need to render the scene for the next loop iteration. Instead, just call #SubmitFrame() again
 			until it returns OVRErrorCode#Success.
 			"""
 		)}
 
 		<h3>Shutdown</h3>
 		${ul(
-			"#Hmd_Destroy()",
-			"#_Shutdown()"
+			"#Destroy()",
+			"#Shutdown()"
 		)}
 		"""
 
@@ -63,7 +63,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 	IntConstant(
 		"""
-		When {@code ServerOptional} is set, the #_Initialize() call not will block waiting for the server to respond. If the server is not reachable, it might
+		When {@code ServerOptional} is set, the #Initialize() call not will block waiting for the server to respond. If the server is not reachable, it might
 		still succeed.
 		""",
 		"Init_ServerOptional" _ 0x00000002
@@ -75,7 +75,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		""",
 		"Init_RequestVersion" _ 0x00000004
 	)
-	IntConstant("Forces debug features of LibOVR off explicitly, even if it is built in debug mode.", "Init_ForceNoDebug" _ 0x00000008)
+	IntConstant("These bits are writable by user code.", "Init_WritableBits" _ 0x00ffffff)
 
 	val LogLevels = IntConstant(
 		"Logging levels",
@@ -93,31 +93,16 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"Hmd_DKHD" _ 4,
 		"Hmd_DK2" _ 6,
 		"Hmd_CB" _ 8,
-		"Hmd_Other" _ 9
+		"Hmd_Other" _ 9,
+		"Hmd_E3_2015" _ 10,
+	    "Hmd_ES06" _ 11
 	).javaDocLinks
 
 	// ovrHmdCaps enum
 	IntConstant("(read only) Specifies that the HMD is a virtual debug device.", "HmdCap_DebugDevice" _ 0x0010)
-	IntConstant(
-		"""
-		Toggles low persistence mode on or off.
-
-		This setting reduces eye-tracking based motion blur. Eye-tracking based motion blur is caused by the viewer's focal point moving more pixels than have
-		refreshed in the same period of time. The disadvantage of this setting is that this reduces the average brightness of the display and causes some users
-		to perceive flicker. <i>There is no performance cost for this option. Oculus recommends exposing it to the user as an optional setting.</i>
-		""",
-		"HmdCap_LowPersistence" _ 0x0080
-	)
-	IntConstant("(read/write) Adjusts prediction dynamically based on internally measured latency.", "HmdCap_DynamicPrediction" _ 0x0200)
-	IntConstant(
-		"Indicates to the developer what caps they can and cannot modify. These are processed by the client.",
-		"HmdCap_Writable_Mask" expr "ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction"
-	)
-	IntConstant(
-		"Indicates to the developer what caps they can and cannot modify. These are processed by the service.",
-		"HmdCap_Service_Mask" expr "ovrHmdCap_LowPersistence | ovrHmdCap_DynamicPrediction"
-	)
-	val HmdCaps = "#HmdCap_DebugDevice #HmdCap_LowPersistence #HmdCap_DynamicPrediction"
+	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the client.", "HmdCap_Writable_Mask" _ 0x0000)
+	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the service.", "HmdCap_Service_Mask" _ 0x0000)
+	val HmdCaps = "#HmdCap_DebugDevice"
 
 	// ovrTrackingCaps enum
 	IntConstant("Supports orientation tracking (IMU).", "TrackingCap_Orientation" _ 0x0010)
@@ -125,7 +110,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	IntConstant("Supports positional tracking.", "TrackingCap_Position" _ 0x0040)
 	IntConstant(
 		"""
-		Overriding the other flags, this causes the application to ignore tracking settings. This is the internal default before #Hmd_ConfigureTracking() is
+		Overriding the other flags, this causes the application to ignore tracking settings. This is the internal default before #ConfigureTracking() is
 		called.
 		""",
 		"TrackingCap_Idle" _ 0x0100
@@ -153,18 +138,72 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		"RenderAPI_None" _ 0,
 		"RenderAPI_OpenGL" _ 1,
 		"RenderAPI_Android_GLES" _ 2,
-		//"RenderAPI_D3D9_Obsolete" _ 3,
-		//"RenderAPI_D3D10_Obsolete" _ 4,
-		"RenderAPI_D3D11" _ 5,
-		"RenderAPI_Count" _ 6
+		"RenderAPI_D3D11" _ 5
+	)
+
+	IntConstant(
+		"Button input types.",
+
+		"Button_A" _ 0x00000001,
+		"Button_B" _ 0x00000002,
+		"Button_RThumb" _ 0x00000004,
+		"Button_RShoulder" _ 0x00000008,
+		"Button_X" _ 0x00000100,
+		"Button_Y" _ 0x00000200,
+		"Button_LThumb" _ 0x00000400,
+		"Button_LShoulder" _ 0x00000800,
+
+		// Navigation through DPad.
+		"Button_Up" _ 0x00010000,
+		"Button_Down" _ 0x00020000,
+		"Button_Left" _ 0x00040000,
+		"Button_Right" _ 0x00080000,
+		"Button_Enter" _ 0x00100000, // Start on XBox controller.
+		"Button_Back" _ 0x00200000 // Back on Xbox controller.
+	)
+
+	IntConstant(
+		"Touch input types.",
+
+		"Touch_A" expr "ovrButton_A",
+	    "Touch_B" expr "ovrButton_B",
+	    "Touch_RThumb" expr "ovrButton_RThumb",
+	    "Touch_RIndexTrigger" _ 0x00000010,
+	    "Touch_X" expr "ovrButton_X",
+	    "Touch_Y" expr "ovrButton_Y",
+	    "Touch_LThumb" expr "ovrButton_LThumb",
+	    "Touch_LIndexTrigger" _ 0x00001000,
+
+	    // Finger pose state
+	    // Derived internally based on distance, proximity to sensors and filtering.
+	    "Touch_RIndexPointing" _ 0x00000020,
+	    "Touch_RThumbUp" _ 0x00000040,
+	    "Touch_LIndexPointing" _ 0x00002000,
+	    "Touch_LThumbUp" _ 0x00004000
+	)
+
+	IntConstant(
+		"Which controller is connected; multiple can be connected at once.",
+
+		"ControllerType_LTouch" _ 0x01,
+		"ControllerType_RTouch" _ 0x02,
+		"ControllerType_Touch" _ 0x03,
+		"ControllerType_All" _ 0xff
+	)
+
+	IntConstant(
+		"Names for the left and right hand array indexes.",
+
+		"Hand_Left" _ 0,
+		"Hand_Right" _ 1
 	)
 
 	ovrResult(
-		"_Initialize",
+		"Initialize",
 		"""
 		Initialize LibOVR for application usage. This includes finding and loading the LibOVRRT shared library. No LibOVR API functions, other than
-		#_GetLastErrorInfo(), can be called unless ovr_Initialize succeeds. A successful call to ovr_Initialize must be eventually followed by a call to
-		#_Shutdown(). ovr_Initialize calls are idempotent. Calling ovr_Initialize twice does not require two matching calls to #_Shutdown(). If already
+		#GetLastErrorInfo(), can be called unless ovr_Initialize succeeds. A successful call to ovr_Initialize must be eventually followed by a call to
+		#Shutdown(). ovr_Initialize calls are idempotent. Calling ovr_Initialize twice does not require two matching calls to #Shutdown(). If already
 		initialized, the return value is OVRErrorCode#Success.
 
 		LibOVRRT shared library search order:
@@ -184,7 +223,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 
 	    returnDoc =
 		"""
-		an {@code ovrResult} indicating success or failure. In the case of failure, use #_GetLastErrorInfo() to get more information. Example failed results
+		an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information. Example failed results
 		include:
 		${ul(
 			"OVRErrorCode#Error_Initialize: Generic initialization error.",
@@ -201,24 +240,24 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	void(
-		"_Shutdown",
+		"Shutdown",
 		"""
 		Shuts down LibOVR.
 
-		A successful call to #_Initialize() must be eventually matched by a call to ovr_Shutdown. After calling ovr_Shutdown, no LibOVR functions can be called
-		except #_GetLastErrorInfo() or another #_Initialize(). ovr_Shutdown invalidates all pointers, references, and created objects previously returned by
+		A successful call to #Initialize() must be eventually matched by a call to ovr_Shutdown. After calling ovr_Shutdown, no LibOVR functions can be called
+		except #GetLastErrorInfo() or another #Initialize(). ovr_Shutdown invalidates all pointers, references, and created objects previously returned by
 		LibOVR functions. The LibOVRRT shared library can be unloaded by ovr_Shutdown.
 		"""
 	)
 
 	void(
-		"_GetLastErrorInfo",
+		"GetLastErrorInfo",
 		"""
 	    Returns information about the most recent failed return value by the current thread for this library.
 
 	    This function itself can never generate an error. The last error is never cleared by LibOVR, but will be overwritten by new errors. Do not use this
 	    call to determine if there was an error in the last API call as successful API calls don't clear the last ##OVRErrorInfo. To avoid any inconsistency,
-	    #_GetLastErrorInfo() should be called immediately after an API function that returned a failed {@code ovrResult}, with no other API functions called in
+	    #GetLastErrorInfo() should be called immediately after an API function that returned a failed {@code ovrResult}, with no other API functions called in
 	    the interim.
 	    """,
 
@@ -226,11 +265,11 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	(const _ charUTF8_p)(
-		"_GetVersionString",
+		"GetVersionString",
 		"""
 		Returns the version string representing the LibOVRRT version.
 
-		The returned string pointer is valid until the next call to #_Shutdown().
+		The returned string pointer is valid until the next call to #Shutdown().
 
 		Note that the returned version string doesn't necessarily match the current OVR_MAJOR_VERSION, etc., as the returned string refers to the LibOVRRT
 		shared library version and not the locally compiled interface version.
@@ -242,7 +281,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	(const _ charUTF8_p)(
-		"_TraceMessage",
+		"TraceMessage",
 		"""
 		Writes a message string to the LibOVR tracing mechanism (if enabled).
 
@@ -258,80 +297,74 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	// ----------------
 	// HMD Management
 
-	ovrResult(
-		"Hmd_Detect",
-		"""
-		Detects or re-detects HMDs and reports the total number detected.
+	ovrHmdDesc(
+		"GetHmdDesc",
+        """
+        Returns information about the given HMD.
 
-		This function is useful to determine if an HMD can be created without committing to creating it. For example, an application can use this information
-		to present an HMD selection GUI.
+        #Initialize() must have first been called in order for this to succeed, otherwise ovrHmdDesc::Type will be reported as #Hmd_None.
+        """,
 
-		If one or more HMDs are present, an integer value is returned which indicates the number present. The number present indicates the range of valid
-		indexes that can be passed to #Hmd_Create(). If no HMDs are present, the return value is zero. If there is an error, a negative error {@code ovrResult}
-		value is returned.
+        nullable _ ovrHmd.IN(
+	        "hmd",
+	        """
+	        an {@code ovrHmd} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its info if
+	        so.
+	        """
+        ),
 
-		ovrHmd_Detect can be called at any time between ovrInitialize and ovrShutdown and can be called multiple times or from multiple threads.
-		""",
-		returnDoc = "an integer that specifies the number of HMDs currently present. Upon failure, {@code OVR_SUCCESS(result)} is false."
+	    returnDoc = "an ##OVRHmdDesc. If the {@code hmd} is $NULL and ovrHmdDesc::Type is #Hmd_None then no HMD is present."
 	)
 
 	ovrResult(
-		"Hmd_Create",
+		"Create",
 		"""
-	    Creates a handle to an HMD which doubles as a description structure.
+	    Creates a handle to an HMD.
 
-		Upon success the returned ovrHmd* must be freed with #Hmd_Destroy(). A second call to #Hmd_Create() or #Hmd_CreateDebug() with the same index as a
-		previously successful call will result in an error return value if the previous Hmd has not been destroyed.
+		Upon success the returned {@code ovrHmd} must be eventually freed with #Destroy() when it is no longer needed. A second call to #Create() will result
+		in an error return value if the previous {@code Hmd} has not been destroyed.
 	    """,
 
-		int.IN("index", "a value in the range of {@code [0 .. ovrHmd_Detect()-1]]}."),
 	    Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+	    Check(1) _ ovrGraphicsLuid_p.OUT(
+		    "luid",
+		    """
+		    a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the
+		    application or no rendering output will be possible. This is important for stability on multi-adapter systems. An application that simply chooses
+		    the default adapter will not run reliably on multi-adapter systems.
+			"""
+	    ),
 
-	    returnDoc = "an {@code ovrResult} indicating success or failure"
-	)
-
-	ovrResult(
-		"Hmd_CreateDebug",
-		"""
-		Creates a fake HMD used for debugging only.
-
-		Upon success the returned ovrHmd* must be freed with #Hmd_Destroy(). A second call to #Hmd_Create() or #Hmd_CreateDebug() with the same index as a
-		previously successful call will result in an error return value if the previous Hmd has not been destroyed.
-		""",
-
-		ovrHmdType.IN("type", "indicates the HMD type to emulate", HMDType),
-		Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
-
-		returnDoc = "an {@code ovrResult} indicating success or failure"
+	    returnDoc = "an {@code ovrResult} indicating success or failure. Upon failure the returned {@code pHmd} will be $NULL."
 	)
 
 	void(
-		"Hmd_Destroy",
+		"Destroy",
 		"Destroys the HMD.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()")
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
 	)
 
 	unsigned_int(
-		"Hmd_GetEnabledCaps",
+		"GetEnabledCaps",
 		"""
 	    Returns ovrHmdCaps bits that are currently enabled.
 
-		Note that this value is different from ##OVRHmdDesc{@code ::HmdCaps}, which describes what capabilities are available for that HMD.
+		Note that this value is different from ##OVRHmdDesc{@code ::AvailableHmdCaps}, which describes what capabilities are available for that HMD.
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 
 	    returnDoc = "a combination of zero or more {@code ovrHmdCaps}"
 	)
 
 	void(
-		"Hmd_SetEnabledCaps",
+		"SetEnabledCaps",
 		"""
-		Modifies capability bits described by {@code ovrHmdCaps} that can be modified, such as #HmdCap_LowPersistence.
+		Modifies capability bits described by {@code ovrHmdCaps} that can be modified.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		unsigned_int.IN("hmdCaps", "a combination of 0 or more {@code ovrHmdCaps}", HmdCaps, LinkMode.BITFIELD)
 	)
 
@@ -339,17 +372,17 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	// Tracking
 
 	ovrResult(
-		"Hmd_ConfigureTracking",
+		"ConfigureTracking",
 		"""
 		Starts sensor sampling, enabling specified capabilities, described by {@code ovrTrackingCaps}.
 
-		Use 0 for both {@code supportedTrackingCaps} and {@code requiredTrackingCaps} to disable tracking. ovrHmd_ConfigureTracking can be called multiple
+		Use 0 for both {@code requestedTrackingCaps} and {@code requiredTrackingCaps} to disable tracking. ovr_ConfigureTracking can be called multiple
 		times with the same or different values for a given {@code ovrHmd}.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		unsigned_int.IN(
-			"supportedTrackingCaps",
+			"requestedTrackingCaps",
 			"""
 			specifies support that is requested. The function will succeed even if these caps are not available (i.e. sensor or camera is unplugged). Support
 			will automatically be enabled if such device is plugged in later. Software should check ##OVRTrackingState{@code .StatusFlags} for real-time status.
@@ -361,17 +394,17 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 			"requiredTrackingCaps",
 			"""
 			specify sensor capabilities required at the time of the call. If they are not available, the function will fail. Pass 0 if only specifying
-			{@code supportedTrackingCaps}.
+			{@code requestedTrackingCaps}.
 			""",
 			TrackingCaps,
 			LinkMode.BITFIELD
 		),
 
-	    returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #_GetLastErrorInfo() to get more information."
+	    returnDoc = "an {@code ovrResult} indicating success or failure. In the case of failure, use #GetLastErrorInfo() to get more information."
 	)
 
 	void(
-		"Hmd_RecenterPose",
+		"RecenterPose",
 		"""
 		Re-centers the sensor position and orientation.
 
@@ -379,11 +412,11 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		gravity and cannot be redefined. All future tracking will report values relative to this new reference position.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()")
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
 	)
 
 	ovrTrackingState(
-		"Hmd_GetTrackingState",
+		"GetTrackingState",
 		"""
 		Returns tracking state reading based on the specified absolute system time.
 
@@ -393,17 +426,54 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		This may also be used for more refined timing of front buffer rendering logic, and so on.
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		double.IN("absTime", "the absolute future time to predict the return ##OVRTrackingState value. Use 0 to request the most recent tracking state."),
 
 	    returnDoc = "the ##OVRTrackingState that is predicted for the given {@code absTime}"
 	)
 
+	ovrResult(
+		"GetInputState",
+        """
+        Returns the most recent input state for controllers, without positional tracking info. Developers can tell whether the same state was returned by
+        checking the {@code PacketNumber}.
+        """,
+
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+	    unsigned_int.IN("controllerTypeMask", "which controllers the input will be returned for"),
+	    ovrInputState_p.IN("inputState", "the input state that will be filled in"),
+
+	    returnDoc = "OVRErrorCode#Success if the new state was successfully obtained"
+	)
+
+	ovrResult(
+		"SetControllerVibration",
+        """
+        Turns on vibration of the given controller.
+
+		To disable vibration, call ovr_SetControllerVibration with an amplitude of 0. Vibration automatically stops after a nominal amount of time, so if you
+		want vibration to be continuous over multiple seconds then you need to call this function periodically.
+        """,
+
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		unsigned_int.IN("controllerTypeMask", "the controllers to apply the vibration to"),
+		float.IN(
+			"frequency",
+			"""
+			a vibration frequency in the range of 0.0 to 1.0. Currently the only valid values are 0.0, 0.5, and 1.0 and other values will be clamped to one of
+			these.
+			"""),
+		float.IN("amplitude", "a vibration amplitude in the range of 0.0 to 1.0."),
+
+	    returnDoc = "OVRErrorCode#Success upon success"
+	)
+
+
 	// ----------------
 	// Layers
 
 	IntConstant(
-		"Describes layer types that can be passed to #Hmd_SubmitFrame(). Each layer type has an associated struct, such as ##OVRLayerEyeFov.",
+		"Describes layer types that can be passed to #SubmitFrame(). Each layer type has an associated struct, such as ##OVRLayerEyeFov.",
 
 		"LayerType_Disabled" _ 0,
 		"LayerType_EyeFov" _ 1,
@@ -414,7 +484,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	IntConstant(
-		"Identifies flags used by ##OVRLayerHeader and which are passed to #Hmd_SubmitFrame().",
+		"Identifies flags used by ##OVRLayerHeader and which are passed to #SubmitFrame().",
 
 		"LayerFlag_HighQuality" _ 0x01,
 		"LayerFlag_TextureOriginAtBottomLeft" _ 0x02
@@ -424,23 +494,23 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	// SDK Distortion Rendering
 
 	void(
-		"Hmd_DestroySwapTextureSet",
+		"DestroySwapTextureSet",
 	    "Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
 
-	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 	    nullable _ ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	void(
-		"Hmd_DestroyMirrorTexture",
+		"DestroyMirrorTexture",
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		nullable _ ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	ovrSizei(
-		"Hmd_GetFovTextureSize",
+		"GetFovTextureSize",
 		"""
 		Calculates the recommended viewport size for rendering a given eye within the HMD with a given FOV cone.
 
@@ -448,7 +518,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 		are at least 8 pixels of padding between them to prevent texture filtering and chromatic aberration causing images to leak between the two eye views.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		ovrEyeType.IN("eye", "which eye (left or right) to calculate for", EyeType),
 		ovrFovPort.IN("fov", "the ##OVRFovPort to use"),
 		float.IN(
@@ -463,10 +533,10 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	ovrEyeRenderDesc(
-		"Hmd_GetRenderDesc",
+		"GetRenderDesc",
 		"Computes the distortion viewport, view adjust, and other rendering parameters for the specified eye.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		ovrEyeType.IN("eyeType", "which eye (left or right) for which to perform calculations", EyeType),
 		ovrFovPort.IN("fov", "the ##OVRFovPort to use."),
 
@@ -474,20 +544,20 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixCon
 	)
 
 	ovrResult(
-		"Hmd_SubmitFrame",
+		"SubmitFrame",
 		"""
 	    Submits layers for distortion and display.
 
-	    ovrHmd_SubmitFrame triggers distortion and processing which might happen asynchronously. The function will return when there is room in the submission
+	    ovr_SubmitFrame triggers distortion and processing which might happen asynchronously. The function will return when there is room in the submission
 	    queue and surfaces are available. Distortion might or might not have completed.
 		${ul(
 			"Layers are drawn in the order they are specified in the array, regardless of the layer type.",
 		    """
-		    Layers are not remembered between successive calls to ovrHmd_SubmitFrame. A layer must be specified in every call to ovrHmd_SubmitFrame or it won't
+		    Layers are not remembered between successive calls to ovr_SubmitFrame. A layer must be specified in every call to ovr_SubmitFrame or it won't
 		    be displayed.
 		    """,
 		    """
-		    If a {@code layerPtrList} entry that was specified in a previous call to ovrHmd_SubmitFrame is passed as $NULL or is of type #LayerType_Disabled,
+		    If a {@code layerPtrList} entry that was specified in a previous call to ovr_SubmitFrame is passed as $NULL or is of type #LayerType_Disabled,
 		    that layer is no longer displayed.
 		    """,
 		    """
@@ -502,11 +572,11 @@ ovrLayerEyeFov  layer0;
 ovrLayerQuad    layer1;
 ...
 ovrLayerHeader* layers[2] = { &layer0.Header, &layer1.Header };
-ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
+ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	    """,
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
-		unsigned_int.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #Hmd_SubmitFrame() was called"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
+		unsigned_int.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
 		nullable _ const _ ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
@@ -537,8 +607,14 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 			"OVRErrorCode#Success: rendering completed successfully.",
 	        """
 	        OVRErrorCode#Success_NotVisible: rendering completed successfully but was not displayed on the HMD, usually because another application currently
-	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call ovrHmd_SubmitFrame
+	        has ownership of the HMD. Applications receiving this result should stop rendering new content, but continue to call ovr_SubmitFrame
 	        periodically until it returns a value other than OVRErrorCode#Success_NotVisible.
+	        """,
+	        """
+	        OVRErrorCode#Error_DisplayLost: The session has become invalid (such as due to a device removal) and the shared resources need to be released
+	        (#DestroySwapTextureSet()), the session needs to destroyed (#Destroy()) and recreated (#Create()), and new resources need to be created
+	        ({@code ovr_CreateSwapTextureSetXXX}). The application's existing private graphics resources do not need to be recreated unless the new #Create()
+	        call returns a different {@code GraphicsLuid}.
 	        """
 	    )}
 	    """
@@ -548,7 +624,7 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 	// Frame Timing
 
 	ovrFrameTiming(
-		"Hmd_GetFrameTiming",
+		"GetFrameTiming",
 		"""
 		Gets the ##OVRFrameTiming for the given frame index.
 
@@ -558,25 +634,12 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 		This function is thread-safe and allows for multiple application threads to target their processing to the same displayed frame.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		unsigned_int.IN("frameIndex", "the frame the caller wishes to target")
 	)
 
-	void(
-		"Hmd_ResetFrameTiming",
-		"""
-		Initializes and resets frame time tracking.
-
-		This is typically not necessary, but is helpful if the application changes vsync state or video mode. vsync is assumed to be on if this isn't called.
-		Resets internal frame index to the specified number.
-		""",
-
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
-		unsigned_int.IN("frameIndex", "the frame the caller wishes to target.")
-	)
-
 	double(
-		"_GetTimeInSeconds",
+		"GetTimeInSeconds",
 		"""
 		Returns global, absolute high-resolution time in seconds.
 
@@ -594,22 +657,47 @@ ovrResult result = ovrHmd_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 		App can toggle performance HUD modes as such:
 		${codeBlock("""
 ovrPerfHudMode PerfHudMode = ovrPerfHud_LatencyTiming;
-ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
+ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		"PerfHud_Off" _ 0,
 		"PerfHud_LatencyTiming" _ 1,
-	    "PerfHud_RenderTiming" _ 2
+	    "PerfHud_RenderTiming" _ 2,
+		"PerfHud_PerfHeadroom" _ 3,
+		"PerfHud_VersionInfo" _ 4
+	)
+
+	IntConstant(
+		"Visual properties of the stereo guide.",
+
+	    "DebugHudStereo_Off" _ 0,  ///< Turns off the Stereo Debug HUD
+		"DebugHudStereo_Quad" _ 1,  ///< Renders Quad in world for Stereo Debugging
+        "DebugHudStereo_QuadWithCrosshair" _ 2,  ///< Renders Quad+crosshair in world for Stereo Debugging
+        "DebugHudStereo_CrosshairAtInfinity" _ 3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
+	)
+
+	void(
+		"ResetBackOfHeadTracking",
+	    "Should be called when the headset is placed on a new user.",
+
+	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
+	)
+
+	void(
+		"ResetMulticameraTracking",
+		"Should be called when a tracking camera is moved.",
+
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()")
 	)
 
 	// ----------------
 	// Property Access
 
 	ovrBool(
-		"Hmd_GetBool",
+		"GetBool",
 		"Reads a boolean property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
 		ovrBool.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -617,14 +705,14 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	ovrBool(
-		"Hmd_SetBool",
+		"SetBool",
 		"""
 		Writes or creates a boolean property.
 
 		If the property wasn't previously a boolean property, it is changed to a boolean property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		ovrBool.IN("value", "the value to write"),
 
@@ -632,10 +720,10 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	int(
-		"Hmd_GetInt",
+		"GetInt",
 		"Reads an integer property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -643,14 +731,14 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	ovrBool(
-		"Hmd_SetInt",
+		"SetInt",
 		"""
 		Writes or creates an integer property.
 
 		If the property wasn't previously an integer property, it is changed to an integer property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("value", "the value to write"),
 
@@ -658,10 +746,10 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	float(
-		"Hmd_GetFloat",
+		"GetFloat",
 		"Reads a float property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
@@ -669,14 +757,14 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	ovrBool(
-		"Hmd_SetFloat",
+		"SetFloat",
 		"""
 		Writes or creates a float property.
 
 		If the property wasn't previously a float property, it's changed to a float property.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("value", "the value to write"),
 
@@ -684,10 +772,10 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	unsigned_int(
-		"Hmd_GetFloatArray",
+		"GetFloatArray",
 		"Reads a float array property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write to"),
 		AutoSize("values") _ unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
@@ -696,10 +784,10 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	ovrBool(
-		"Hmd_SetFloatArray",
+		"SetFloatArray",
 		"Writes or creates a float array property.",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write from"),
 		AutoSize("values") _ unsigned_int.IN("valuesSize", "the number of elements to write"),
@@ -708,33 +796,33 @@ ovrHmd_SetInt(Hmd, "PerfHudMode", (int)PerfHudMode);""")}
 	)
 
 	(const _ charUTF8_p)(
-		"Hmd_GetString",
+		"GetString",
 		"""
 		Reads a string property.
 
 		Strings are UTF8-encoded and null-terminated.
 		""",
 
-		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		nullable _ const _ charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 	    returnDoc =
 		"""
 		the string property if it exists. Otherwise returns {@code defaultVal}, which can be specified as $NULL. The return memory is guaranteed to be valid
-		until next call to ovrHmd_GetString or until the HMD is destroyed, whichever occurs first.
+		until next call to ovr_GetString or until the HMD is destroyed, whichever occurs first.
 		"""
 	)
 
 	ovrBool(
-		"Hmd_SetString",
+		"SetString",
 		"""
 		Writes or creates a string property.
 
 		Strings are UTF8-encoded and null-terminated.
 		""",
 
-		ovrHmd.IN("hmddesc", "an {@code ovrHmd} previously returned by #Hmd_Create()"),
+		ovrHmd.IN("hmddesc", "an {@code ovrHmd} previously returned by #Create()"),
 		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		const _ charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 

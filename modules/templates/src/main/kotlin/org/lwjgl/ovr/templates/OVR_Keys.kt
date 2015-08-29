@@ -56,4 +56,19 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"DEFAULT_CAMERA_POSITION" _ intArrayOf(0, 0, 0, 1, 0, 0, 0)
 	)
 
+	StringConstant(
+		"",
+
+		"PERF_HUDE_MODE" _ "PerfHudMode"
+	)
+
+	StringConstant(
+		"",
+
+		"DEBUG_HUD_STEREO_MODE" _ "DebugHudStereoMode", // allowed values are defined in enum ovrDebugHudStereoMode
+		"DEBUG_HUD_STEREO_GUIDE_SIZE" _ "DebugHudStereoGuideSize2f", // float[2]
+		"DEBUG_HUD_STEREO_GUIDE_POSITION" _ "DebugHudStereoGuidePosition3f", // float[3]
+		"DEBUG_HUD_STEREO_GUIDE_YAWPITCHROLL" _ "DebugHudStereoGuideYawPitchRoll3f", // float[3]
+		"DEBUG_HUD_STEREO_GUIDE_COLOR" _ "DebugHudStereoGuideColor4f" // float[4]
+	)
 }
