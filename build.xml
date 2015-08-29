@@ -355,6 +355,7 @@ License terms: http://lwjgl.org/license.php
 			<jvmarg value="-Dorg.lwjgl.util.Debug=true"/>
 			<jvmarg value="-Djava.library.path=${lib}"/>
 			<jvmarg value="-XstartOnFirstThread" if:set="platform.macosx"/>
+			<jvmarg line="${jvmargs}" if:set="jvmargs"/>
 
 			<xmlfileset dir="${config}" includes="tests.xml,tests_${platform}.xml"/>
 		</testng>
