@@ -22,6 +22,11 @@ License terms: http://lwjgl.org/license.php
 			</condition>
 		</fail>
 
+		<echo taskname="override" message="Build type: ${build.type}" if:set="env.LWJGL_BUILD_TYPE"/>
+		<echo taskname="override" message="Build output: ${build.output}" if:set="env.LWJGL_BUILD_OUTPUT"/>
+		<echo taskname="override" message="Build architecture: ${build.arch}" if:set="env.LWJGL_BUILD_ARCH"/>
+		<echo taskname="override" message="Build offline: ${build.offline}" if:set="env.LWJGL_BUILD_OFFLINE"/>
+
 		<!-- These depend on LWJGL_BUILD_OUTPUT and may be symlinks -->
 		<mkdir-symlink dir="bin"/>
 		<mkdir-symlink dir="${src.generated}"/>
