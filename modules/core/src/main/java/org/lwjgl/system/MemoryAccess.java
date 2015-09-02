@@ -29,7 +29,7 @@ final class MemoryAccess {
 				// Depends on sun.nio.ch.DirectBuffer
 				accessor = new MemoryAccessorReflect();
 			} catch (Exception e1) {
-				LWJGLUtil.log("Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
+				LWJGLUtil.log("[MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
 				accessor = new MemoryAccessorJNI();
 			}
 		}
