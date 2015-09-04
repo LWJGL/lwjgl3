@@ -11,7 +11,7 @@ val STB_PACKAGE = "org.lwjgl.stb"
 fun GeneratorTargetNative.includeSTBAPI(directives: String) = nativeDirective(
 	"""DISABLE_WARNINGS()
 #ifdef LWJGL_WINDOWS
-	__pragma(warning(disable : 4242 4244 4702 4711 4738 4820 4996))
+	__pragma(warning(disable : 4242 4244 4701 4702 4711 4996))
 #endif
 $directives
 ENABLE_WARNINGS()""")
