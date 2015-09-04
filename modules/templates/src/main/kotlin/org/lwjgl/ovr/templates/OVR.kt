@@ -85,7 +85,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"LogLevel_Error" _ 2
 	).javaDocLinks
 
-	val HMDType = IntConstant(
+	IntConstant(
 		"HMD types",
 
 		"Hmd_None" _ 0,
@@ -96,7 +96,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"Hmd_Other" _ 9,
 		"Hmd_E3_2015" _ 10,
 	    "Hmd_ES06" _ 11
-	).javaDocLinks
+	)
 
 	// ovrHmdCaps enum
 	IntConstant("(read only) Specifies that the HMD is a virtual debug device.", "HmdCap_DebugDevice" _ 0x0010)

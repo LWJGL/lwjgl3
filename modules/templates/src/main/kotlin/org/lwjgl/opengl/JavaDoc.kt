@@ -18,7 +18,7 @@ class ReferenceGL(val function: String): FunctionModifier() {
 	}
 }
 
-private fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
+fun PrintWriter.printOpenGLJavaDoc(documentation: String, function: String, deprecated: Boolean) {
 	val link = url("http://www.opengl.org/sdk/docs/man${if ( deprecated ) "2" else ""}/html/$function.xhtml", "OpenGL SDK Reference")
 	val injectedJavaDoc =
 		if ( deprecated )

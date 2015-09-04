@@ -154,8 +154,10 @@ License terms: http://lwjgl.org/license.php
 			<jvmarg value="-Xms1024m"/>
 			<jvmarg value="-Xverify:none"/>
 
-			<arg path="${kotlinc}/lib/kotlin-compiler.jar:${kotlinc}/lib/kotlin-runtime.jar"/>
-			<arg line="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler 4096 notime"/>
+			<arg value="-measure"/>
+			<arg value="-classpath"/>
+			<arg path="${kotlinc}/lib/kotlin-compiler.jar:${kotlinc}/lib/kotlin-runtime.jar:${kotlinc}/lib/kotlin-reflect.jar"/>
+			<arg line="org.jetbrains.kotlin.cli.jvm.K2JVMCompiler"/>
 
 			<arg line="-kotlin-home ${kotlinc}"/>
 			<arg line="-d ${bin.templates}"/>

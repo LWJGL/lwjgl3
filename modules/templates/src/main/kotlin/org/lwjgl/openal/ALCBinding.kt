@@ -7,7 +7,7 @@ package org.lwjgl.openal
 import java.io.PrintWriter
 import org.lwjgl.generator.*
 
-private fun NativeClass.capName(core: String) =
+fun NativeClass.capName(core: String) =
 	if ( templateName.startsWith(prefixTemplate) ) {
 		if ( prefix == core )
 			"Open$core${templateName.substring(core.length())}"

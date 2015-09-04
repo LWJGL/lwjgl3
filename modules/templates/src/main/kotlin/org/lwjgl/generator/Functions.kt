@@ -39,8 +39,8 @@ val MAP_OLD = "old_buffer"
 val MAP_LENGTH = "length"
 val FUNCTION_ADDRESS = "__functionAddress"
 
-private val API_BUFFER = "__buffer"
-private val JNIENV = "__env"
+val API_BUFFER = "__buffer"
+val JNIENV = "__env"
 
 enum class GenerationMode {
 	NORMAL,
@@ -316,7 +316,7 @@ class NativeClassFunction(
 			}
 
 			if ( it.paramType === IN && it has Terminated ) {
-				val postfix = if ( mode !== NORMAL && it.nativeType.javaMethodType !== javaClass<ByteBuffer>() ) "" else
+				val postfix = if ( mode !== NORMAL && it.nativeType.javaMethodType !== ByteBuffer::class.java ) "" else
 					when ( it.nativeType.mapping ) {
 						PointerMapping.DATA_SHORT   -> "2"
 						PointerMapping.DATA_INT,
@@ -336,7 +336,7 @@ class NativeClassFunction(
 
 					if ( check.debug ) prefix = "if ( LWJGLUtil.DEBUG )\n\t\t\t\t$prefix"
 
-					if ( it.nativeType.javaMethodType === javaClass<ByteBuffer>() )
+					if ( it.nativeType.javaMethodType === ByteBuffer::class.java )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, ">>", transform)});"
 					else if ( mode === NORMAL || it.nativeType is StructType )
 						checks add "${prefix}checkBuffer(${it.name}, ${bufferShift(check.expression, it.name, "<<", transform)});"
@@ -373,7 +373,7 @@ class NativeClassFunction(
 				if ( mode !== NORMAL ) {
 					val referenceTransform = transforms!![paramMap[autoSize.reference]!!]
 					val expression =
-						if ( referenceTransform != null && (referenceTransform.javaClass === javaClass<SingleValueTransform>() || referenceTransform === PointerArrayTransformSingle) )
+						if ( referenceTransform != null && (referenceTransform.javaClass === SingleValueTransform::class.java || referenceTransform === PointerArrayTransformSingle) )
 							"1"
 						else if ( referenceTransform != null && referenceTransform != PointerArrayTransformSingle )
 							"${autoSize.reference}.length"
@@ -1047,7 +1047,7 @@ class NativeClassFunction(
 			if ( !parameters.isEmpty() )
 				print(", ")
 			print("ByteBuffer $MAP_OLD")
-		} else if ( returnTransform != null && returnTransform.javaClass === javaClass<MapPointerExplicitTransform>() ) {
+		} else if ( returnTransform != null && returnTransform.javaClass === MapPointerExplicitTransform::class.java ) {
 			if ( !parameters.isEmpty() )
 				print(", ")
 			val mapPointerExplicit = returnTransform as MapPointerExplicitTransform

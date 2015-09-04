@@ -178,7 +178,7 @@ class Generator(
 		return methods
 			.asSequence()
 			.filterTo(ArrayList<Method>(methods.size())) {
-				methodFilter(it, javaClass<NativeClass>())
+				methodFilter(it, NativeClass::class.java)
 			}
 	}
 
@@ -257,7 +257,7 @@ class Generator(
 		if ( target !== JNI ) {
 			touchTimestamp = max(target.getLastModified("$srcPath/$packagePath"), max(packageLastModifiedMap[target.packageName]!!, GENERATOR_LAST_MODIFIED))
 			if ( outputJava.exists() && touchTimestamp < outputJava.lastModified() ) {
-				println("SKIPPED: ${target.packageName}.${target.className}")
+				//println("SKIPPED: ${target.packageName}.${target.className}")
 				return
 			}
 		} else
@@ -292,13 +292,13 @@ class Generator(
 
 private val packageLastModifiedMap: MutableMap<String, Long> = HashMap()
 
-private fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
+fun getDirectoryLastModified(path: String, recursive: Boolean = false) = getDirectoryLastModified(File(path), recursive)
 private fun getDirectoryLastModified(pck: File, recursive: Boolean): Long {
 	if ( !pck.exists() || !pck.isDirectory )
 		return 0
 
 	val classes = pck.listFiles {
-		(it.isDirectory && recursive) || (it.isFile && it.getName().endsWith(".kt"))
+		(it.isDirectory && recursive) || (it.isFile && it.name.endsWith(".kt"))
 	}
 
 	if ( classes == null || classes.size() == 0 )

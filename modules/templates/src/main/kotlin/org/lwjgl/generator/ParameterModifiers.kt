@@ -20,7 +20,7 @@ val virtual = object: ParameterModifier() {
 	override val isSpecial = false
 }
 
-private interface AutoSizeFactor {
+interface AutoSizeFactor {
 	fun expression(): String
 	fun expressionInv(): String
 }

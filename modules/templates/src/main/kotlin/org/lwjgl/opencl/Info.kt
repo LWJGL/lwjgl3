@@ -4,9 +4,11 @@
  */
 package org.lwjgl.opencl
 
-import org.lwjgl.generator.*
+import org.lwjgl.generator.Binding
+import org.lwjgl.generator.CustomClass
+import org.lwjgl.generator.Generator
 import org.lwjgl.opencl.InfoQueryType.*
-import java.util.EnumSet
+import java.util.*
 
 enum class InfoQueryType {
 	BOOLEAN,
@@ -87,7 +89,7 @@ fun info() {
 			// This list should be updated whenever a new OpenCL version is released.
 			val objects = arrayListOf(
 				ObjectType("CL10", "Platform", EnumSet.of(STRING_ASCII, STRING_UTF8)),
-				ObjectType("CL10", "Device", EnumSet.allOf(javaClass<InfoQueryType>())),
+				ObjectType("CL10", "Device", EnumSet.allOf(InfoQueryType::class.java)),
 				ObjectType("CL10", "Context", EnumSet.of(INT, POINTER)),
 				ObjectType("CL10", "Command Queue", EnumSet.of(INT, POINTER), "CommandQueue", "command_queue"),
 				ObjectType("CL10", "Mem Object", EnumSet.of(BOOLEAN, INT, LONG, POINTER), "MemObject", "memobj"),
@@ -101,7 +103,7 @@ fun info() {
 				ObjectType("CL10", "Kernel", EnumSet.of(INT, POINTER, STRING_ASCII, STRING_UTF8)),
 				ObjectTypeCustom(
 					"CL10", "Kernel WorkGroup", EnumSet.of(LONG, POINTER), "KernelWorkGroup", "kernel",
-				    argName = "device", argType = "long", queryType = "InfoQueryObject"
+					argName = "device", argType = "long", queryType = "InfoQueryObject"
 				),
 				ObjectTypeCustom(
 					"CL12", "Kernel Arg", EnumSet.of(INT, LONG, STRING_ASCII, STRING_UTF8), "KernelArg", "kernel",

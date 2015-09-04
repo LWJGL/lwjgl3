@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
+import kotlin.reflect.KClass
 
 // Extension properties for numeric literals.
 inline val Int.b: Byte get() = this.toByte()
@@ -12,28 +13,30 @@ inline val Int.s: Short get() = this.toShort()
 inline val Long.i: Int get() = this.toInt()
 
 class ConstantType<T: Any>(
-	val javaType: Class<T>,
+	type: KClass<T>,
 	val print: (T) -> String
-)
+) {
+	val javaType = type.java
+}
 
-val ByteConstant = ConstantType(javaClass<Byte>()) {
+val ByteConstant = ConstantType(Byte::class) {
 	val i = it.toInt() and 0xFF
 	"0x%X".format(i) let {
 		if ( i < 0x80 ) it else "(byte)$it"
 	}
 }
-val CharConstant = ConstantType(javaClass<Char>()) { "'$it'" }
-val ShortConstant = ConstantType(javaClass<Short>()) {
+val CharConstant = ConstantType(Char::class) { "'$it'" }
+val ShortConstant = ConstantType(Short::class) {
 	val i = it.toInt() and 0xFFFF
 	"0x%X".format(i) let {
 		if ( i < 0x8000 ) it else "(short)$it"
 	}
 }
-val IntConstant = ConstantType(javaClass<Int>()) { "0x%X".format(it) }
-val LongConstant = ConstantType(javaClass<Long>()) { "0x%XL".format(it) }
-val FloatConstant = ConstantType(javaClass<Float>()) { "%sf".format(it) }
+val IntConstant = ConstantType(Int::class) { "0x%X".format(it) }
+val LongConstant = ConstantType(Long::class) { "0x%XL".format(it) }
+val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
-val StringConstant = ConstantType(javaClass<String>()) { "\"$it\"" }
+val StringConstant = ConstantType(String::class) { "\"$it\"" }
 
 open data class Constant<T: Any>(val name: String, val value: T?)
 class ConstantExpression<T: Any>(name: String, val expression: String): Constant<T>(name, null)
@@ -48,7 +51,6 @@ class ConstantBlock<T: Any>(
 	private var noPrefix = false
 
 	fun noPrefix() {
-		javaClass<Int>()
 		noPrefix = true
 	}
 

@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.nio.*
+import kotlin.reflect.KClass
 
 open class NativeType(
 	/** The type used in the native API. */
@@ -32,12 +33,14 @@ open class NativeType(
 }
 
 // Specialization for primitives.
-open class PrimitiveType(name: String, mapping: PrimitiveMapping): NativeType(name, mapping)
+open class PrimitiveType(name: String, mapping: PrimitiveMapping) : NativeType(name, mapping)
+
 // Specialization for integers.
-open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false): PrimitiveType(name, mapping)
-open class EnumType(name: String): IntegerType(name, PrimitiveMapping.INT, unsigned = true)
+open class IntegerType(name: String, mapping: PrimitiveMapping, val unsigned: Boolean = false) : PrimitiveType(name, mapping)
+
+open class EnumType(name: String) : IntegerType(name, PrimitiveMapping.INT, unsigned = true)
 // Specialization for string characters.
-class CharType(name: String, mapping: CharMapping): PrimitiveType(name, mapping)
+class CharType(name: String, mapping: CharMapping) : PrimitiveType(name, mapping)
 
 // Pointers
 open class PointerType(
@@ -49,13 +52,15 @@ open class PointerType(
 	val includesPointer: Boolean = false,
 	/** Optional element type. See the secondary constructors below. */
 	val elementType: NativeType? = null
-): NativeType(name, mapping)
+) : NativeType(name, mapping)
+
 /** Converts primitive to array */
 val PrimitiveType.p: PointerType get() = PointerType(
 	this.name,
 	(this.mapping as PrimitiveMapping).toPointer,
 	elementType = this
 )
+
 /** pointer to pointer. */
 private fun PointerType.pointerTo(const: Boolean = false): String {
 	val builder = StringBuilder(name)
@@ -69,6 +74,7 @@ private fun PointerType.pointerTo(const: Boolean = false): String {
 
 	return builder.toString()
 }
+
 val PointerType.p: PointerType get() = PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
 val PointerType.const_p: PointerType get() = PointerType(this.pointerTo(const = true), PointerMapping.DATA_POINTER, elementType = this)
 
@@ -83,7 +89,7 @@ open class ObjectType(
 	name: String = className,
 	/** If true, the nativeType typedef includes a pointer. */
 	includesPointer: Boolean = true
-): PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
+) : PointerType(name, PointerMapping.OPAQUE_POINTER, includesPointer)
 
 // Structs, 3 cases:
 //
@@ -112,7 +118,8 @@ class StructType(
 	mapping: PointerMapping = PointerMapping.DATA_BYTE,
 	/** If true, the nativeType typedef includes a pointer. If false, the argument will be passed-by-value. */
 	includesPointer: Boolean = false
-): PointerType(name, mapping, includesPointer)
+) : PointerType(name, mapping, includesPointer)
+
 /** Converts a struct value to a pointer to a struct value. */
 val StructType.p: PointerType get() = if ( this.includesPointer )
 	PointerType(this.pointerTo(), PointerMapping.DATA_POINTER, elementType = this)
@@ -131,7 +138,8 @@ class CharSequenceType(
 	val charMapping: CharMapping = CharMapping.ASCII,
 	/** If true, the nativeType typedef includes a pointer. */
 	val nullTerminated: Boolean = true
-): PointerType(name, mapping, includesPointer)
+) : PointerType(name, mapping, includesPointer)
+
 /** Converts CharType to CharSequenceType. */
 fun CharSequenceType(
 	charType: CharType,
@@ -144,11 +152,12 @@ fun CharSequenceType(
 // Callbacks
 class CallbackType(
 	val signature: CallbackFunction,
-    name: String = signature.className
-): ObjectType(signature.className, name)
+	name: String = signature.className
+) : ObjectType(signature.className, name)
 
 // typedefs
 fun typedef(typedef: PrimitiveType, name: String) = PrimitiveType(name, typedef.mapping as PrimitiveMapping)
+
 fun typedef(typedef: IntegerType, name: String) = IntegerType(name, typedef.mapping as PrimitiveMapping, typedef.unsigned)
 fun typedef(typedef: PointerType, name: String) = PointerType(name, typedef.mapping as PointerMapping, true, typedef.elementType)
 
@@ -163,88 +172,97 @@ open class TypeMapping(
 	val javaMethodType: Class<*>
 ) {
 
+	constructor(
+		/** The JNI function argument type. */
+		jniFunctionType: String,
+		/** The native method argument type. */
+		nativeMethodClass: KClass<*>,
+		/** The Java method argument type. */
+		javaMethodClass: KClass<*>
+	) : this(jniFunctionType, nativeMethodClass.java, javaMethodClass.java)
+
 	companion object {
 		val VOID = TypeMapping("void", Void.TYPE, Void.TYPE)
 	}
 
 	val jniSignature: String get() = when ( this.nativeMethodType ) {
-		javaClass<Boolean>() -> "Z"
-		javaClass<Byte>()    -> "B"
-		javaClass<Char>()    -> "C"
-		javaClass<Double>()  -> "D"
-		javaClass<Float>()   -> "F"
-		javaClass<Int>()     -> "I"
-		javaClass<Long>()    -> if ( this === PrimitiveMapping.LONG ) "J" else "P"
-		javaClass<Short>()   -> "S"
-		Void.TYPE            -> "V"
-		else                 -> throw IllegalStateException()
+		Boolean::class.java -> "Z"
+		Byte::class.java    -> "B"
+		Char::class.java    -> "C"
+		Double::class.java  -> "D"
+		Float::class.java   -> "F"
+		Int::class.java     -> "I"
+		Long::class.java    -> if ( this === PrimitiveMapping.LONG ) "J" else "P"
+		Short::class.java   -> "S"
+		Void.TYPE           -> "V"
+		else                -> throw IllegalStateException()
 	}
 
 }
 
 open class PrimitiveMapping(
 	jniFunctionType: String,
-	javaMethodType: Class<out Any>,
+	javaMethodType: KClass<*>,
 	val bytes: Int,
-    val toPointer: PointerMapping
-): TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
+	val toPointer: PointerMapping
+) : TypeMapping(jniFunctionType, javaMethodType, javaMethodType) {
 
 	companion object {
-		val BOOLEAN = PrimitiveMapping("jboolean", javaClass<Boolean>(), 1, PointerMapping.DATA_BOOLEAN)
+		val BOOLEAN = PrimitiveMapping("jboolean", Boolean::class, 1, PointerMapping.DATA_BOOLEAN)
 
-		val BYTE = PrimitiveMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE)
-		val CHAR = PrimitiveMapping("jchar", javaClass<Char>(), 2, PointerMapping.DATA_SHORT)
-		val SHORT = PrimitiveMapping("jshort", javaClass<Short>(), 2, PointerMapping.DATA_SHORT)
-		val INT = PrimitiveMapping("jint", javaClass<Int>(), 4, PointerMapping.DATA_INT)
-		val LONG = PrimitiveMapping("jlong", javaClass<Long>(), 8, PointerMapping.DATA_LONG)
+		val BYTE = PrimitiveMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE)
+		val CHAR = PrimitiveMapping("jchar", Char::class, 2, PointerMapping.DATA_SHORT)
+		val SHORT = PrimitiveMapping("jshort", Short::class, 2, PointerMapping.DATA_SHORT)
+		val INT = PrimitiveMapping("jint", Int::class, 4, PointerMapping.DATA_INT)
+		val LONG = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_LONG)
 
 		// Integer type with enough precision to store a pointer
-		val POINTER = PrimitiveMapping("jlong", javaClass<Long>(), 8, PointerMapping.DATA_POINTER)
+		val POINTER = PrimitiveMapping("jlong", Long::class, 8, PointerMapping.DATA_POINTER)
 
-		val FLOAT = PrimitiveMapping("jfloat", javaClass<Float>(), 4, PointerMapping.DATA_FLOAT)
-		val DOUBLE = PrimitiveMapping("jdouble", javaClass<Double>(), 8, PointerMapping.DATA_DOUBLE)
+		val FLOAT = PrimitiveMapping("jfloat", Float::class, 4, PointerMapping.DATA_FLOAT)
+		val DOUBLE = PrimitiveMapping("jdouble", Double::class, 8, PointerMapping.DATA_DOUBLE)
 	}
 
 }
 
 class CharMapping(
 	jniFunctionType: String,
-	javaMethodType: Class<out Any>,
+	javaMethodType: KClass<*>,
 	bytes: Int,
 	toPointer: PointerMapping,
 	val charset: String
-): PrimitiveMapping(jniFunctionType, javaMethodType, bytes, toPointer) {
+) : PrimitiveMapping(jniFunctionType, javaMethodType, bytes, toPointer) {
 
 	companion object {
-		val ASCII = CharMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE, "ASCII")
-		val UTF8 = CharMapping("jbyte", javaClass<Byte>(), 1, PointerMapping.DATA_BYTE, "UTF8")
-		val UTF16 = CharMapping("jchar", javaClass<Char>(), 2, PointerMapping.DATA_SHORT, "UTF16")
+		val ASCII = CharMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE, "ASCII")
+		val UTF8 = CharMapping("jbyte", Byte::class, 1, PointerMapping.DATA_BYTE, "UTF8")
+		val UTF16 = CharMapping("jchar", Char::class, 2, PointerMapping.DATA_SHORT, "UTF16")
 	}
 
 }
 
 open class PointerMapping(
-	javaMethodType: Class<*>,
+	javaMethodType: KClass<*>,
 	val byteShift: String? = null
-): TypeMapping("jlong", javaClass<Long>(), javaMethodType) {
+) : TypeMapping("jlong", Long::class, javaMethodType) {
 
 	companion object {
-		val OPAQUE_POINTER = PointerMapping(javaClass<Long>())
+		val OPAQUE_POINTER = PointerMapping(Long::class)
 
 		/** Useful for void * params that will be AutoTyped. */
-		val DATA = PointerMapping(javaClass<ByteBuffer>())
+		val DATA = PointerMapping(ByteBuffer::class)
 
-		val DATA_POINTER = PointerMapping(Class.forName("org.lwjgl.PointerBuffer"), "POINTER_SHIFT")
+		val DATA_POINTER = PointerMapping(Class.forName("org.lwjgl.PointerBuffer").kotlin, "POINTER_SHIFT")
 
-		fun PointerMapping(javaMethodType: Class<out Any>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
+		fun PointerMapping(javaMethodType: KClass<*>, byteShift: Int) = PointerMapping(javaMethodType, Integer.toString(byteShift))
 
-		val DATA_BOOLEAN = PointerMapping(javaClass<ByteBuffer>(), 0)
-		val DATA_BYTE = PointerMapping(javaClass<ByteBuffer>(), 0)
-		val DATA_SHORT = PointerMapping(javaClass<ShortBuffer>(), 1)
-		val DATA_INT = PointerMapping(javaClass<IntBuffer>(), 2)
-		val DATA_LONG = PointerMapping(javaClass<LongBuffer>(), 3)
-		val DATA_FLOAT = PointerMapping(javaClass<FloatBuffer>(), 2)
-		val DATA_DOUBLE = PointerMapping(javaClass<DoubleBuffer>(), 3)
+		val DATA_BOOLEAN = PointerMapping(ByteBuffer::class, 0)
+		val DATA_BYTE = PointerMapping(ByteBuffer::class, 0)
+		val DATA_SHORT = PointerMapping(ShortBuffer::class, 1)
+		val DATA_INT = PointerMapping(IntBuffer::class, 2)
+		val DATA_LONG = PointerMapping(LongBuffer::class, 3)
+		val DATA_FLOAT = PointerMapping(FloatBuffer::class, 2)
+		val DATA_DOUBLE = PointerMapping(DoubleBuffer::class, 3)
 
 		val primitiveMap = hashMapOf(
 			DATA_POINTER to "pointer",

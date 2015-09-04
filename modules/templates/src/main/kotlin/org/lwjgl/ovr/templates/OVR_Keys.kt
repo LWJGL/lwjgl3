@@ -50,7 +50,7 @@ val OVR_Keys = "OVRKeys".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR") 
 		"DEFAULT_EYE_RELIEF_DIAL" _ 3
 	)
 
-	ConstantType(javaClass<IntArray>()) { it.asSequence().map { it.toString() }.join(separator = ", ", prefix = "{ ", postfix = " }") }(
+	ConstantType(IntArray::class) { it.asSequence().map { it.toString() }.join(separator = ", ", prefix = "{ ", postfix = " }") }(
 		"",
 
 		"DEFAULT_CAMERA_POSITION" _ intArrayOf(0, 0, 0, 1, 0, 0, 0)

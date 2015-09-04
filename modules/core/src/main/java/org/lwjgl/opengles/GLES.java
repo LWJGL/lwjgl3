@@ -259,7 +259,7 @@ public final class GLES {
 
 				long GetStringi = checkFunctionAddress(functionProvider.getFunctionAddress("glGetStringi"));
 				for ( int i = 0; i < extensionCount; i++ )
-					supportedExtensions.add(memDecodeASCII(checkPointer(invokeIIP(GetStringi, GL_EXTENSIONS, i))));
+					supportedExtensions.add(memDecodeASCII(checkPointer(callIIP(GetStringi, GL_EXTENSIONS, i))));
 			}
 
 			caps = new GLESCapabilities(getFunctionProvider(), supportedExtensions);

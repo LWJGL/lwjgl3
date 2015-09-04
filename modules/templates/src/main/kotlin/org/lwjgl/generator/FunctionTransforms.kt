@@ -20,7 +20,7 @@ interface APIBufferFunctionTransform<T: QualifiedType> {
 /** Marker trait to indicate that buffer checks should be skipped. */
 interface SkipCheckFunctionTransform
 
-private fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
+fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String? {
 	val transform = transforms[this]
 	if ( transform == null )
 		return original
@@ -29,7 +29,7 @@ private fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<Qual
 		return (transform as FunctionTransform<T>).transformDeclaration(this, original)
 }
 
-private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
+fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>, original: String): String {
 	val transform = transforms[this]
 	if ( transform == null )
 		return original
@@ -38,7 +38,7 @@ private fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedTy
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
-private open class AutoSizeTransform(
+open class AutoSizeTransform(
 	val bufferParam: Parameter,
 	val applyTo: ApplyTo,
 	val applyFactor: Boolean = true
@@ -66,7 +66,7 @@ private open class AutoSizeTransform(
 	}
 }
 
-private fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
+fun AutoSizeTransform(bufferParam: Parameter, applyTo: ApplyTo, byteShift: String) =
 	if ( byteShift == "0" ) AutoSizeTransform(bufferParam, applyTo) else AutoSizeBytesTransform(bufferParam, applyTo, byteShift)
 
 private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, val byteShift: String): AutoSizeTransform(bufferParam, applyTo) {
@@ -91,7 +91,7 @@ private class AutoSizeBytesTransform(bufferParam: Parameter, applyTo: ApplyTo, v
 	}
 }
 
-private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
+open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String): String {
 		var expression = if ( bufferParam has nullable )
@@ -109,17 +109,17 @@ private open class AutoSizeCharSequenceTransform(val bufferParam: Parameter): Fu
 	}
 }
 
-private class AutoTypeParamTransform(val autoType: String): FunctionTransform<Parameter> {
+class AutoTypeParamTransform(val autoType: String): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = autoType // Replace with hard-coded type
 }
 
-private class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {
+class AutoTypeTargetTransform(val autoType: PointerMapping): FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "${autoType.javaMethodType.simpleName} ${param.name}"
 	override fun transformCall(param: Parameter, original: String) = original
 }
 
-private open class ExpressionTransform(
+open class ExpressionTransform(
 	val expression: String,
 	val keepParam: Boolean = false,
 	val paramTransform: FunctionTransform<Parameter>? = null
@@ -129,7 +129,7 @@ private open class ExpressionTransform(
 	override fun transformCall(param: Parameter, original: String) = expression
 }
 
-private class ExpressionLocalTransform(
+class ExpressionLocalTransform(
 	expression: String,
 	keepParam: Boolean = false
 ): ExpressionTransform(expression, keepParam), CodeFunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -139,7 +139,7 @@ private class ExpressionLocalTransform(
 	)
 }
 
-private class CharSequenceTransform(
+class CharSequenceTransform(
 	val nullTerminated: Boolean
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "CharSequence ${param.name}"
@@ -154,7 +154,7 @@ private class CharSequenceTransform(
 	}
 }
 
-private val StringReturnTransform = object: FunctionTransform<ReturnValue> {
+val StringReturnTransform = object: FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "String"
 	override fun transformCall(param: ReturnValue, original: String): String {
 		val expression = if ( original.startsWith("memByteBufferNT") )
@@ -165,7 +165,7 @@ private val StringReturnTransform = object: FunctionTransform<ReturnValue> {
 	}
 }
 
-private class BufferValueReturnTransform(
+class BufferValueReturnTransform(
 	val bufferType: String,
 	val paramName: String
 ): FunctionTransform<ReturnValue>, APIBufferFunctionTransform<ReturnValue> {
@@ -174,17 +174,17 @@ private class BufferValueReturnTransform(
 	override fun setupAPIBuffer(func: Function, qtype: ReturnValue, writer: PrintWriter) = writer.println("\t\tint $paramName = $API_BUFFER.${bufferType}Param();")
 }
 
-private val BufferValueParameterTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferValueParameterTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 }
 
-private val BufferValueSizeTransform = object: FunctionTransform<Parameter> {
+val BufferValueSizeTransform = object: FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "1" // Replace with 1
 }
 
-private class SingleValueTransform(
+class SingleValueTransform(
 	val paramType: String,
 	val elementType: String,
 	val newName: String
@@ -200,7 +200,7 @@ private class SingleValueTransform(
 	}
 }
 
-private class VectorValueTransform(
+class VectorValueTransform(
 	val paramType: String,
 	val elementType: String,
 	val newName: String,
@@ -215,25 +215,25 @@ private class VectorValueTransform(
 	}
 }
 
-private val MapPointerTransform = object: FunctionTransform<ReturnValue> {
+val MapPointerTransform = object: FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) = """int $MAP_LENGTH = ${param[MapPointer].sizeExpression};
 		return $MAP_OLD == null ? memByteBuffer($RESULT, $MAP_LENGTH) : memSetupBuffer($MAP_OLD, $RESULT, $MAP_LENGTH);"""
 }
 
-private class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
+class MapPointerExplicitTransform(val lengthParam: String, val addParam: Boolean = true): FunctionTransform<ReturnValue> {
 	override fun transformDeclaration(param: ReturnValue, original: String) = "ByteBuffer" // Return a ByteBuffer
 	override fun transformCall(param: ReturnValue, original: String) =
 		"$MAP_OLD == null ? memByteBuffer($RESULT, (int)$lengthParam) : memSetupBuffer($MAP_OLD, $RESULT, (int)$lengthParam)"
 }
 
-private val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferReturnLengthTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = "$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
 	override fun setupAPIBuffer(func: Function, qtype: Parameter, writer: PrintWriter) = writer.println("\t\tint ${qtype.name} = $API_BUFFER.intParam();")
 }
 
-private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
+val BufferReturnParamTransform: FunctionTransform<Parameter> = object: FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
 	override fun transformCall(param: Parameter, original: String) = if ( param.nativeType is CharSequenceType )
 		"$API_BUFFER.address(${param.name})" // Replace with APIBuffer address + offset
@@ -252,7 +252,7 @@ private val BufferReturnParamTransform: FunctionTransform<Parameter> = object: F
 	}
 }
 
-private class BufferReturnTransform(
+class BufferReturnTransform(
 	val outParam: Parameter,
 	val lengthParam: String,
 	val encoding: String? = null
@@ -271,7 +271,7 @@ private class BufferReturnTransform(
 	}
 }
 
-private class BufferReturnNTTransform(
+class BufferReturnNTTransform(
 	val outParam: Parameter,
 	val maxLengthParam: String,
 	val encoding: String
@@ -281,7 +281,7 @@ private class BufferReturnNTTransform(
 		"\t\treturn memDecode$encoding(memByteBufferNT${(outParam.nativeType as CharSequenceType).charMapping.bytes}($API_BUFFER.address(${outParam.name}), $maxLengthParam));"
 }
 
-private open class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
+open class PointerArrayTransform(val paramType: String): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, CodeFunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String): String? {
 		val name = if ( paramType.isEmpty() ) param[PointerArray].singleName else param.name
 		val paramClass = param[PointerArray].elementType.let {
@@ -326,11 +326,11 @@ private open class PointerArrayTransform(val paramType: String): FunctionTransfo
 		return code
 	}
 }
-private object PointerArrayTransformSingle: PointerArrayTransform(""), SkipCheckFunctionTransform
-private val PointerArrayTransformArray = PointerArrayTransform("[]")
-private val PointerArrayTransformVararg = PointerArrayTransform("...")
+object PointerArrayTransformSingle: PointerArrayTransform(""), SkipCheckFunctionTransform
+val PointerArrayTransformArray = PointerArrayTransform("[]")
+val PointerArrayTransformVararg = PointerArrayTransform("...")
 
-private class PointerArrayLengthsTransform(
+class PointerArrayLengthsTransform(
 	val arrayParam: Parameter,
 	val multi: Boolean
 ): FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
@@ -357,7 +357,7 @@ private class PointerArrayLengthsTransform(
 	}
 }
 
-private val CallbackTransform = object: FunctionTransform<Parameter> {
+val CallbackTransform = object: FunctionTransform<Parameter> {
 	override fun transformDeclaration(param: Parameter, original: String) = "${param[Callback].procClass} ${param.name}" // Replace type with the callback class
 	override fun transformCall(param: Parameter, original: String): String {
 		// Replace with callback function address
