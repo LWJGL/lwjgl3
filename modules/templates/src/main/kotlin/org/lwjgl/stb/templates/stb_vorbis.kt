@@ -246,8 +246,6 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 	int(
 		"seek_frame",
 		"""
-		<h3>NOT WORKING YET</h3>
-
 		Seeks in the Vorbis file to (approximately) {@code sample_number}. After calling seek_frame(), the next call to {@code get_frame_*()} will include the
 		specified sample.
 		""",
@@ -259,8 +257,6 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 	int(
 		"seek",
 		"""
-		<h3>NOT WORKING YET</h3>
-
 		Seeks in the Vorbis file to (approximately) {@code sample_number}. After calling stb_vorbis_seek(), the next call to {@code stb_vorbis_get_samples_*}
 		will start with the specified sample.
 		""",

@@ -349,7 +349,7 @@ int main(int arg, char **argv)
 		"PackFontRanges",
 		"""
 		Creates character bitmaps from multiple ranges of characters stored in ranges. This will usually create a better-packed bitmap than multiple calls to
-		#PackFontRange().
+		#PackFontRange(). Note that you can call this multiple times within a single #PackBegin()/#PackEnd().
 		""",
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
@@ -366,10 +366,13 @@ int main(int arg, char **argv)
 		"""
 		Oversampling a font increases the quality by allowing higher-quality subpixel positioning, and is especially valuable at smaller text sizes.
 
-		This function sets the amount of oversampling for all following calls to #PackFontRange(). The default (no oversampling) is achieved by
-		{@code h_oversample=1, v_oversample=1}. The total number of pixels required is {@code h_oversample*v_oversample} larger than the default; for example,
-		2x2 oversampling requires 4x the storage of 1x1. For best results, render oversampled textures with bilinear filtering. Look at the readme in
+		This function sets the amount of oversampling for all following calls to #PackFontRange() or #PackFontRangesGatherRects() for a given pack context. The
+		default (no oversampling) is achieved by {@code h_oversample=1, v_oversample=1}. The total number of pixels required is
+		{@code h_oversample*v_oversample} larger than the default; for example, 2x2 oversampling requires 4x the storage of 1x1. For best results, render
+		oversampled textures with bilinear filtering. Look at the readme in
 		<a href="https://github.com/nothings/stb/blob/master/tests/oversample/README.md">stb/tests/oversample</a> for information about oversampled fonts.
+
+		To use with PackFontRangesGather etc., you must set it before calls to #PackFontRangesGatherRects().
 		""",
 
 		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
@@ -394,6 +397,42 @@ int main(int arg, char **argv)
 		Check(1) _ float_p.INOUT("ypos", "the current y position, in screen pixel space"),
 		stbtt_aligned_quad_p.OUT("q", "an ##STBTTAlignedQuad struct in which to return the quad to draw"),
 		int.IN("align_to_integer", "1 to align the quad to integer coordinates")
+	)
+
+	int(
+		"PackFontRangesGatherRects",
+		"""
+		Calling these functions in sequence is roughly equivalent to calling #PackFontRanges(). If you want more control over the packing of multiple fonts, or
+		if you want to pack custom data into a font texture, take a look at the source of #PackFontRanges() and create a custom version using these functions,
+		e.g. call #PackFontRangesGatherRects() multiple times, building up a single array of rects, then call #PackFontRangesPackRects() once, then call
+		#PackFontRangesRenderIntoRects() repeatedly. This may result in a better packing than calling #PackFontRanges() multiple times (or it may not).
+		""",
+
+		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
+		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
+		stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
+		AutoSize("ranges") _ int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
+		stbrp_rect_p.IN("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
+	)
+
+	void(
+		"PackFontRangesPackRects",
+		"See #PackFontRangesGatherRects().",
+
+		stbtt_pack_context_p.OUT("spc", "an ##STBTTPackContext struct"),
+		stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
+		AutoSize("rects") _ int.IN("num_rects", "the number of structs in {@code rects}")
+	)
+
+	int(
+		"PackFontRangesRenderIntoRects",
+		"See #PackFontRangesGatherRects().",
+
+		stbtt_pack_context_p.IN("spc", "an ##STBTTPackContext struct"),
+		stbtt_fontinfo_p.IN("info", "an ##STBTTFontinfo struct"),
+		stbtt_pack_range_p.IN("ranges", "an array of ##STBTTPackRange structs"),
+		AutoSize("ranges") _ int.IN("num_ranges", "the number of ##STBTTPackRange structs in {@code ranges}"),
+		stbrp_rect_p.OUT("rects", "an array of ##STBRPRect structs. It must be big enough to accommodate all characters in the given ranges.")
 	)
 
 	// FONT LOADING

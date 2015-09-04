@@ -68,6 +68,12 @@
 //    Here's sample code for old OpenGL; it's a lot more complicated
 //    to make work on modern APIs, and that's your problem.
 //
+// LICENSE
+//
+//   This software is in the public domain. Where that dedication is not
+//   recognized, you are granted a perpetual, irrevocable license to copy,
+//   distribute, and modify this file as you see fit.
+//
 #if 0
 void print_string(float x, float y, char *text, float r, float g, float b)
 {
@@ -182,7 +188,7 @@ static int stb_easy_font_print(float x, float y, char *text, unsigned char color
     float start_x = x;
     int offset = 0;
 
-    stb_easy_font_color c = { {255,255,255,255} }; // use structure copying to avoid needing depending on memcpy()
+    stb_easy_font_color c = { 255,255,255,255 }; // use structure copying to avoid needing depending on memcpy()
     if (color) { c.c[0] = color[0]; c.c[1] = color[1]; c.c[2] = color[2]; c.c[3] = color[3]; }
 
     while (*text && offset < vbuf_size) {

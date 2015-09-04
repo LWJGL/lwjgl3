@@ -34,7 +34,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 }
 
 val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(
-	STB_PACKAGE, int, "STBISkipCallback",
+	STB_PACKAGE, void, "STBISkipCallback",
 	"The {@code stbi_io_callbacks.skip} callback.",
 	void_p.IN("user", "a pointer to user data"),
 	int.IN("n", "the number of bytes to skip if positive, or <em>unget</em> the last {@code -n} bytes if negative"),
@@ -146,8 +146,9 @@ val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", structName = "s
 	documentation = "A range of packed character data, returned by STBTruetype#stbtt_PackFontRanges()"
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	float.member("font_size")
-	int.member("first_unicode_char_in_range")
-	int.member("num_chars_in_range")
+	int.member("first_unicode_codepoint_in_range")
+	int_p.member("array_of_unicode_codepoints")
+	int.member("num_chars")
 	stbtt_packedchar_p.member("chardata_for_range")
 }
 

@@ -20,7 +20,7 @@ val ARB_parallel_shader_compile = "ARBParallelShaderCompile".nativeClassGL("ARB_
 		"""
 
 	IntConstant(
-		"Accepted as part of the {@code pname} parameter to GetIntegerv().",
+		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
 		"MAX_SHADER_COMPILER_THREADS_ARB" _ 0x91B0
 	)
