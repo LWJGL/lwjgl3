@@ -5,10 +5,7 @@
 package org.lwjgl.demo.stb;
 
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFWErrorCallback;
-import org.lwjgl.glfw.GLFWFramebufferSizeCallback;
-import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWvidmode;
+import org.lwjgl.glfw.*;
 import org.lwjgl.openal.AL;
 import org.lwjgl.openal.ALContext;
 import org.lwjgl.opengl.GL;
@@ -181,13 +178,13 @@ public final class Vorbis {
 
 			pcm.position(0);
 			alBufferData(buffer, format, pcm, size * 2, sampleRate);
-			samplesLeft -= size;
+			samplesLeft -= size / channels;
 
 			return true;
 		}
 
 		float getProgress() {
-			return 1.0f - samplesLeft / (float)(lengthSamples * channels);
+			return 1.0f - samplesLeft / (float)(lengthSamples);
 		}
 
 		float getProgressTime(float progress) {
@@ -196,7 +193,20 @@ public final class Vorbis {
 
 		void rewind() {
 			stb_vorbis_seek_start(handle);
-			samplesLeft = stb_vorbis_stream_length_in_samples(handle) * channels;
+			samplesLeft = lengthSamples;
+		}
+
+		void skip(int direction) {
+			seek(min(max(0, stb_vorbis_get_sample_offset(handle) + direction * sampleRate), lengthSamples));
+		}
+
+		void skipTo(float offset0to1) {
+			seek(round(lengthSamples * offset0to1));
+		}
+
+		private void seek(int sample_number) {
+			stb_vorbis_seek(handle, sample_number);
+			samplesLeft = lengthSamples - sample_number;
 		}
 
 		boolean play(int source, IntBuffer buffers) {
@@ -208,7 +218,7 @@ public final class Vorbis {
 			alSourceQueueBuffers(source, buffers);
 			alSourcePlay(source);
 
-			samplesLeft = stb_vorbis_stream_length_in_samples(handle) * channels;
+			samplesLeft = stb_vorbis_stream_length_in_samples(handle);
 
 			return true;
 		}
@@ -246,9 +256,11 @@ public final class Vorbis {
 		private static final int WIDTH  = 640;
 		private static final int HEIGHT = 320;
 
-		private final GLFWErrorCallback           errorfun;
-		private final GLFWFramebufferSizeCallback framebufferSizefun;
-		private final GLFWKeyCallback             keyfun;
+		private final GLFWErrorCallback           errorCallback;
+		private final GLFWFramebufferSizeCallback framebufferSizeCallback;
+		private final GLFWKeyCallback             keyCallback;
+		private final GLFWCursorPosCallback       cursorPosCallback;
+		private final GLFWMouseButtonCallback     mouseButtonCallback;
 
 		private final Closure debugProc;
 
@@ -258,8 +270,12 @@ public final class Vorbis {
 
 		private boolean paused;
 
+		private double cursorX, cursorY;
+
+		private boolean buttonPressed;
+
 		Renderer(final Decoder decoder, String title) {
-			glfwSetCallback(errorfun = errorCallbackPrint(System.err));
+			glfwSetCallback(errorCallback = errorCallbackPrint(System.err));
 			if ( glfwInit() != GL11.GL_TRUE )
 				throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -271,14 +287,14 @@ public final class Vorbis {
 			if ( window == NULL )
 				throw new RuntimeException("Failed to create the GLFW window");
 
-			glfwSetCallback(window, framebufferSizefun = new GLFWFramebufferSizeCallback() {
+			glfwSetCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
 				@Override
 				public void invoke(long window, int width, int height) {
 					glViewport(0, 0, width, height);
 				}
 			});
 
-			glfwSetCallback(window, keyfun = new GLFWKeyCallback() {
+			glfwSetCallback(window, keyCallback = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( action == GLFW_RELEASE )
@@ -288,13 +304,44 @@ public final class Vorbis {
 						case GLFW_KEY_ESCAPE:
 							glfwSetWindowShouldClose(window, GL_TRUE);
 							break;
-						case GLFW_KEY_R:
+						case GLFW_KEY_HOME:
 							decoder.rewind();
+							break;
+						case GLFW_KEY_LEFT:
+							decoder.skip(-1);
+							break;
+						case GLFW_KEY_RIGHT:
+							decoder.skip(1);
 							break;
 						case GLFW_KEY_SPACE:
 							paused = !paused;
 							break;
 					}
+				}
+			});
+
+			glfwSetCallback(window, mouseButtonCallback = new GLFWMouseButtonCallback() {
+				@Override
+				public void invoke(long window, int button, int action, int mods) {
+					if ( button != GLFW_MOUSE_BUTTON_LEFT )
+						return;
+
+					buttonPressed = action == GLFW_PRESS;
+					if ( !buttonPressed )
+						return;
+
+					seek(decoder);
+				}
+			});
+
+			glfwSetCallback(window, cursorPosCallback = new GLFWCursorPosCallback() {
+				@Override
+				public void invoke(long window, double xpos, double ypos) {
+					cursorX = xpos - WIDTH * 0.5f;
+					cursorY = ypos - HEIGHT * 0.5f;
+
+					if ( buttonPressed )
+						seek(decoder);
 				}
 			});
 
@@ -314,7 +361,7 @@ public final class Vorbis {
 
 			glfwSwapInterval(1);
 			glfwShowWindow(window);
-			glfwInvoke(window, null, framebufferSizefun);
+			glfwInvoke(window, null, framebufferSizeCallback);
 
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
@@ -327,6 +374,16 @@ public final class Vorbis {
 			glVertexPointer(2, GL_FLOAT, 16, charBuffer);
 
 			glClearColor(43f / 255f, 43f / 255f, 43f / 255f, 0f); // BG color
+		}
+
+		private void seek(Decoder decoder) {
+			if ( cursorX < -254.0 || 254.0 < cursorX )
+				return;
+
+			if ( cursorY < -30.0 || 30.0 < cursorY )
+				return;
+
+			decoder.skipTo((float)((cursorX + 254.0) / 508.0));
 		}
 
 		void render(float progress, float time) {
@@ -363,10 +420,13 @@ public final class Vorbis {
 			glDrawArrays(GL_QUADS, 0, quads * 4);
 
 			// HUD
-			quads = stb_easy_font_print(4, 4, "Press R to rewind", null, charBuffer);
+			quads = stb_easy_font_print(4, 4, "Press HOME to rewind", null, charBuffer);
 			glDrawArrays(GL_QUADS, 0, quads * 4);
 
-			quads = stb_easy_font_print(4, 20, "Press SPACE to pause/resume", null, charBuffer);
+			quads = stb_easy_font_print(4, 20, "Press LEFT/RIGHT or LMB to seek", null, charBuffer);
+			glDrawArrays(GL_QUADS, 0, quads * 4);
+
+			quads = stb_easy_font_print(4, 36, "Press SPACE to pause/resume", null, charBuffer);
 			glDrawArrays(GL_QUADS, 0, quads * 4);
 
 			glfwSwapBuffers(window);
@@ -377,10 +437,10 @@ public final class Vorbis {
 
 			if ( debugProc != null )
 				debugProc.release();
-			keyfun.release();
-			framebufferSizefun.release();
+
+			releaseAllCallbacks(window);
 			glfwTerminate();
-			errorfun.release();
+			errorCallback.release();
 		}
 
 	}

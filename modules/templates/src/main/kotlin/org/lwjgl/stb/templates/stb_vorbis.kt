@@ -17,8 +17,8 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		Ogg Vorbis audio decoder.
 
 		<h3>Limitations</h3>
+
 		${ul(
-			"seeking not supported except manually via PUSHDATA api",
 			"floor 0 not supported (used in old ogg vorbis files pre-2004)",
 			"lossless sample-truncation at beginning ignored",
 			"cannot concatenate multiple vorbis streams",
@@ -267,7 +267,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 
 	void(
 		"seek_start",
-		"This function is equivalent to #seek()(f,0), but it actually works.",
+		"This function is equivalent to #seek()(f,0).",
 
 		DECODER
 	)
