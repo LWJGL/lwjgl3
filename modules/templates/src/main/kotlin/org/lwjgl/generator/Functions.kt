@@ -307,7 +307,7 @@ class NativeClassFunction(
 		parameters.forEach {
 			var prefix = if ( it has Nullable && it.nativeType.mapping != PointerMapping.OPAQUE_POINTER ) "if ( ${it.name} != null ) " else ""
 
-			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType && !it.has(Callback) )
+			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && !hasUnsafeMethod && it.nativeType !is ObjectType )
 				checks add "checkPointer(${it.name});"
 
 			if ( mode === NORMAL && it.nativeType is CharSequenceType && it.paramType === IN ) {
@@ -488,7 +488,7 @@ class NativeClassFunction(
 		if ( has(DependsOn) || has(ignoreMissing) || nativeClass.binding.shouldCheckFunctionAddress(this@NativeClassFunction) )
 			checks add "checkFunctionAddress($FUNCTION_ADDRESS);"
 		parameters forEach {
-			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType && !it.has(Callback) )
+			if ( it.nativeType.mapping === PointerMapping.OPAQUE_POINTER && !it.has(nullable) && it.nativeType !is ObjectType )
 				checks add "checkPointer(${it.name});"
 		}
 
@@ -739,8 +739,6 @@ class NativeClassFunction(
 						transforms[it] = AutoSizeTransform(param, autoSize.applyTo)
 				} else if ( it has optional )
 					transforms[it] = ExpressionTransform("0L")
-				else if ( it has Callback )
-					transforms[it] = CallbackTransform
 
 				if ( it has Expression ) {
 					// We do this here in case another transform applies too.

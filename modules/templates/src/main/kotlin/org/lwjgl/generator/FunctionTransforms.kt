@@ -356,16 +356,3 @@ class PointerArrayLengthsTransform(
 		println("\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam$lengthType($paramName);")
 	}
 }
-
-val CallbackTransform = object: FunctionTransform<Parameter> {
-	override fun transformDeclaration(param: Parameter, original: String) = "${param[Callback].procClass} ${param.name}" // Replace type with the callback class
-	override fun transformCall(param: Parameter, original: String): String {
-		// Replace with callback function address
-		val procClass = param[Callback].procClass;
-
-		return if ( param has nullable )
-			"${param.name} == null ? NULL : $procClass.Util.CALLBACK"
-		else
-			"$procClass.Util.CALLBACK"
-	}
-}

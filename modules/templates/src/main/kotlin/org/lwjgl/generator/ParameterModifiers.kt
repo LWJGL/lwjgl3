@@ -295,19 +295,6 @@ class PointerArray(
 	}
 }
 
-class Callback(val procClass: String, val storeInFunctions: Boolean = false): ParameterModifier() {
-	companion object: ModifierKey<Callback>
-
-	override val isSpecial = true
-	override protected fun validate(param: Parameter) {
-		if ( param.nativeType !is PointerType || param.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The Callback modifier can only be applied on opaque pointer types.")
-
-		if ( param.paramType != ParameterType.IN )
-			throw IllegalArgumentException("The Callback modifier can only be applied on input parameters.")
-	}
-}
-
 // ReturnValue
 
 /** Marks a return value as a pointer that should be mapped (wrapped in a ByteBuffer of some capacity). */

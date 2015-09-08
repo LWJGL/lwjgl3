@@ -86,9 +86,6 @@ abstract class APIBinding(
 		if ( function has Capabilities && function[Capabilities].override ) {
 			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
 				writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
-		} else if ( function.hasParam { it has Callback && it[Callback].storeInFunctions } ) {
-			writer.println("\t\t${function.nativeClass.className} $INSTANCE = getInstance($instanceParameter);")
-			writer.println("\t\tlong $FUNCTION_ADDRESS = $INSTANCE.${function.addressName};")
 		} else
 			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
 	}
@@ -255,14 +252,6 @@ class NativeClass(
 				print("\t\t${func.addressName}")
 			}
 			println(";")
-		}
-
-		for ( func in functions ) {
-			func.getParams { it has Callback }.forEach {
-				val cb = it[Callback]
-				if ( cb.storeInFunctions )
-					println("\n\tlong ref${cb.procClass};")
-			}
 		}
 
 		println("\n\t@JavadocExclude")
