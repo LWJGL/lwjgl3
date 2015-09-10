@@ -7,7 +7,7 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS") {
+val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS_") {
 	includeSTBAPI(
 """#ifdef LWJGL_LINUX
 	#include <alloca.h>
