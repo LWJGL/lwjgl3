@@ -129,6 +129,8 @@ public final class Vorbis {
 			this.lengthSeconds = stb_vorbis_stream_length_in_seconds(handle);
 
 			this.pcm = BufferUtils.createByteBuffer(BUFFER_SIZE * 2);
+
+			samplesLeft = lengthSamples;
 		}
 
 		private static STBVorbisInfo getInfo(long decoder) {
@@ -162,23 +164,23 @@ public final class Vorbis {
 		}
 
 		private boolean stream(int buffer) {
-			int size = 0;
+			int samples = 0;
 
-			while ( size < BUFFER_SIZE ) {
-				pcm.position(size * 2);
-				int result = stb_vorbis_get_samples_short_interleaved(handle, channels, pcm, BUFFER_SIZE - size);
-				if ( result == 0 )
+			while ( samples < BUFFER_SIZE ) {
+				pcm.position(samples * 2);
+				int samplesPerChannel = stb_vorbis_get_samples_short_interleaved(handle, channels, pcm, BUFFER_SIZE - samples);
+				if ( samplesPerChannel == 0 )
 					break;
 
-				size += result * channels;
+				samples += samplesPerChannel * channels;
 			}
 
-			if ( size == 0 )
+			if ( samples == 0 )
 				return false;
 
 			pcm.position(0);
-			alBufferData(buffer, format, pcm, size * 2, sampleRate);
-			samplesLeft -= size / channels;
+			alBufferData(buffer, format, pcm, samples * 2, sampleRate);
+			samplesLeft -= samples / channels;
 
 			return true;
 		}
@@ -217,8 +219,6 @@ public final class Vorbis {
 
 			alSourceQueueBuffers(source, buffers);
 			alSourcePlay(source);
-
-			samplesLeft = stb_vorbis_stream_length_in_samples(handle);
 
 			return true;
 		}
