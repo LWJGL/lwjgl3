@@ -94,6 +94,8 @@ public final class Vorbis {
 
 		private static final int BUFFER_SIZE = 1024 * 4;
 
+		final ByteBuffer vorbis;
+
 		final long handle;
 		final int  channels;
 		final int  sampleRate;
@@ -107,7 +109,6 @@ public final class Vorbis {
 		int samplesLeft;
 
 		Decoder(String filePath) {
-			ByteBuffer vorbis;
 			try {
 				vorbis = ioResourceToByteBuffer(filePath, 256 * 1024);
 			} catch (IOException e) {
