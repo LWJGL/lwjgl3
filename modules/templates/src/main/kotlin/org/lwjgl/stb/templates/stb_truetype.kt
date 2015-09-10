@@ -11,6 +11,7 @@ val stb_truetype = "STBTruetype".nativeClass(packageName = STB_PACKAGE, prefix =
 	includeSTBAPI(
 		"""#define STB_TRUETYPE_IMPLEMENTATION
 #define STBTT_STATIC
+#define STBTT_assert
 #include "stb_rect_pack.h"
 #include "stb_truetype.h"""")
 

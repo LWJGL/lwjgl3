@@ -12,6 +12,7 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 """#ifdef LWJGL_LINUX
 	#include <alloca.h>
 #endif
+#define NDEBUG
 #include "stb_vorbis.c"""")
 
 	documentation =

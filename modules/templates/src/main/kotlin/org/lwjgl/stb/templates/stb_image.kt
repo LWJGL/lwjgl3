@@ -12,6 +12,7 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 		"""#define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
 #define STBI_FAILURE_USERMSG
+#define STBI_ASSERT(x)
 #include "stb_image.h"""")
 
 	documentation =

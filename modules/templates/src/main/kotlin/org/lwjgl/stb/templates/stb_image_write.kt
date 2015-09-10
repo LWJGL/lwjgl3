@@ -11,7 +11,8 @@ val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, pre
 	nativeDirective(
 			"""#ifdef LWJGL_WINDOWS
 	#define _NO_CRT_STDIO_INLINE
-#endif""", beforeIncludes = true)
+#endif
+#define STBIW_ASSERT(x)""", beforeIncludes = true)
 
 	includeSTBAPI(
 		"""#define STB_IMAGE_WRITE_IMPLEMENTATION

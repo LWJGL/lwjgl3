@@ -11,6 +11,7 @@ val stb_image_resize = "STBImageResize".nativeClass(packageName = STB_PACKAGE, p
 	includeSTBAPI(
 		"""#define STB_IMAGE_RESIZE_IMPLEMENTATION
 #define STB_IMAGE_RESIZE_STATIC
+#define STBIR_ASSERT(x)
 #include "stb_image_resize.h"""")
 
 	documentation =

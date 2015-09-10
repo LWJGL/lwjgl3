@@ -10,6 +10,7 @@ import org.lwjgl.stb.*
 val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix = "STBRP", prefixMethod = "stbrp_") {
 	includeSTBAPI(
 		"""#define STB_RECT_PACK_IMPLEMENTATION
+#define STBRP_ASSERT
 #include "stb_rect_pack.h"""")
 
 	documentation =
