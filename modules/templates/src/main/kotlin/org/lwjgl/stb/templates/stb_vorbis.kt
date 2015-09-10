@@ -8,7 +8,11 @@ import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
 val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod = "stb_vorbis_", prefixConstant = "VORBIS") {
-	includeSTBAPI("#include \"stb_vorbis.c\"")
+	includeSTBAPI(
+"""#ifdef LWJGL_LINUX
+	#include <alloca.h>
+#endif
+#include "stb_vorbis.c"""")
 
 	documentation =
 		"""
