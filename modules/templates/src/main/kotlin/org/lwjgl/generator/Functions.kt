@@ -1230,19 +1230,12 @@ class NativeClassFunction(
 
 		// Custom code
 
-		var hasCodeAfterNativeCall = false
-		if ( has(Code) ) {
-			val code = this@NativeClassFunction[Code]
+		val code = if ( has(Code) ) this@NativeClassFunction[Code] else null
 
-			if ( code.nativeAfterCall != null ) {
-				hasCodeAfterNativeCall = true
-				if ( !returns.isVoid )
-					println("\t$returnsJniFunctionType $RESULT;")
-			}
+		if ( code?.nativeAfterCall != null && !returns.isVoid )
+			println("\t$returnsJniFunctionType $RESULT;")
 
-			if ( code.nativeBeforeCall != null )
-				println(this@NativeClassFunction[Code].nativeBeforeCall)
-		}
+		code?.nativeBeforeCall.let { if ( it != null ) println(it) }
 
 		// Unused parameter macro
 
@@ -1250,32 +1243,41 @@ class NativeClassFunction(
 
 		// Call native function
 
-		print('\t')
-		if ( returnsStructValue ) {
-			print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
-		} else if ( !returns.isVoid ) {
-			print(if ( hasCodeAfterNativeCall ) "$RESULT =" else "return")
-			print(" ($returnsJniFunctionType)")
-			if ( returns.nativeType is PointerType )
-				print("(intptr_t)")
-			if ( returns.has(address) )
-				print('&')
+		code?.nativeCall.let {
+			if ( it != null )
+				println(it)
+			else {
+				print('\t')
+				if ( returnsStructValue ) {
+					print("*((${returns.nativeType.name}*)(intptr_t)$RESULT) = ")
+				} else if ( !returns.isVoid ) {
+					print(if ( code?.nativeAfterCall != null ) "$RESULT =" else "return")
+					print(" ($returnsJniFunctionType)")
+					if ( returns.nativeType is PointerType )
+						print("(intptr_t)")
+					if ( returns.has(address) )
+						print('&')
+				}
+				print("$name")
+				if ( !has(macro) ) print('(')
+				printList(getNativeParams()) {
+					// Avoids warning when implicitly casting from jlong to 32-bit pointer.
+					if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
+						"(${it.nativeType.name})${it.name}"
+					else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
+						"*${it.name}"
+					else
+						it.name
+				}
+				if ( !has(macro) ) print(')')
+				println(';')
+			}
 		}
-		print("$name")
-		if ( !has(macro) ) print('(')
-		printList(getNativeParams()) {
-			// Avoids warning when implicitly casting from jlong to 32-bit pointer.
-			if ( it.nativeType.mapping === PrimitiveMapping.POINTER )
-				"(${it.nativeType.name})${it.name}"
-			else if ( it.nativeType is StructType && !it.nativeType.includesPointer )
-				"*${it.name}"
-			else
-				it.name
-		}
-		if ( !has(macro) ) print(')')
-		println(';')
-		if ( hasCodeAfterNativeCall ) {
-			println(this@NativeClassFunction[Code].nativeAfterCall)
+
+		code?.nativeAfterCall.let {
+			if ( it == null ) return@let
+
+			println(it)
 			if ( !returns.isVoid )
 				println("\treturn $RESULT;")
 		}

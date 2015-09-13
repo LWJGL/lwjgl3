@@ -45,6 +45,7 @@ class Code(
 	val javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
 
 	val nativeBeforeCall: String? = null,
+	val nativeCall: String? = null,
 	val nativeAfterCall: String? = null
 ): FunctionModifier() {
 	companion object: ModifierKey<Code> {
@@ -58,7 +59,11 @@ class Code(
 		val applyTo: ApplyTo = ApplyTo.BOTH
 	)
 
-	override val isSpecial = true
+	override val isSpecial: Boolean get() =
+	Code.NO_STATEMENTS !== javaInit ||
+	Code.NO_STATEMENTS !== javaBeforeNative ||
+	Code.NO_STATEMENTS !== javaAfterNative ||
+	Code.NO_STATEMENTS !== javaFinally
 
 	fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
@@ -84,6 +89,7 @@ class Code(
 		javaFinally: List<Code.Statement> = Code.NO_STATEMENTS,
 
 		nativeBeforeCall: String? = null,
+		nativeCall: String? = null,
 		nativeAfterCall: String? = null
 	) = Code(
 		this.javaInit append javaInit,
@@ -93,6 +99,7 @@ class Code(
 		this.javaFinally append javaFinally,
 
 		this.nativeBeforeCall append nativeBeforeCall,
+		this.nativeCall append nativeCall,
 		this.nativeAfterCall append nativeAfterCall
 	)
 }
