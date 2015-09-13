@@ -281,7 +281,5 @@ open class PointerMapping(
 
 }
 
-val TypeMapping.isSizeType: Boolean
-	get() = this === PrimitiveMapping.INT || this === PrimitiveMapping.POINTER
 val TypeMapping.isSizePointer: Boolean
 	get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER

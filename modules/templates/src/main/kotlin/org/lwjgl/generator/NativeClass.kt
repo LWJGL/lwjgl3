@@ -43,7 +43,7 @@ abstract class APIBinding(
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
 		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
-			suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
+			@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
 		})
 		return classes

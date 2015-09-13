@@ -121,7 +121,7 @@ class NativeClassFunction(
 			return functionName
 
 		var name = functionName
-		var postfix = if ( has(DependsOn) && this[DependsOn].postfix != null ) this[DependsOn].postfix else nativeClass.postfix
+		var postfix = (if ( has(DependsOn) ) this[DependsOn].postfix else null) ?: nativeClass.postfix
 		if ( name.endsWith(postfix) )
 			name = name.substring(0, name.length() - postfix.length())
 		else
@@ -744,7 +744,7 @@ class NativeClassFunction(
 					// We do this here in case another transform applies too.
 					// We overwrite the value with the expression but use the type of the other transform.
 					val expression = it[Expression]
-					transforms[it] = ExpressionTransform(expression.value, expression.keepParam, @suppress("UNCHECKED_CAST")(transforms[it] as FunctionTransform<Parameter>?))
+					transforms[it] = ExpressionTransform(expression.value, expression.keepParam, @Suppress("UNCHECKED_CAST")(transforms[it] as FunctionTransform<Parameter>?))
 				}
 			}
 		}
@@ -1062,7 +1062,7 @@ class NativeClassFunction(
 			.filter { it.value is CodeFunctionTransform<*> }
 			.fold(if ( has(Code) ) get(Code) else Code.NO_CODE) { code, entry ->
 				val (qtype, transform) = entry
-				@suppress("UNCHECKED_CAST")
+				@Suppress("UNCHECKED_CAST")
 				(transform as CodeFunctionTransform<QualifiedType>).generate(qtype, code)
 			}
 
@@ -1093,7 +1093,7 @@ class NativeClassFunction(
 					apiBufferSet = true
 				}
 
-				@suppress("UNCHECKED_CAST")
+				@Suppress("UNCHECKED_CAST")
 				when ( qtype ) {
 					is Parameter   -> (transform as APIBufferFunctionTransform<Parameter>).setupAPIBuffer(this@NativeClassFunction, qtype, this)
 					is ReturnValue -> (transform as APIBufferFunctionTransform<ReturnValue>).setupAPIBuffer(this@NativeClassFunction, qtype, this)

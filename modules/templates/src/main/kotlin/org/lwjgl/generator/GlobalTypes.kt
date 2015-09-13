@@ -52,8 +52,6 @@ val unsigned_char_p = unsigned_char.p
 val unsigned_short_p = unsigned_short.p
 val unsigned_int_p = unsigned_int.p
 
-val unsigned_char_pp = unsigned_char_p.p
-
 // strings
 
 val charASCII = CharType("char", CharMapping.ASCII) // for struct members

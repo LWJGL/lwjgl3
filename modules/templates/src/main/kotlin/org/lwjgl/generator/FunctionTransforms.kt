@@ -25,7 +25,7 @@ fun <T: QualifiedType> T.transformDeclarationOrElse(transforms: Map<QualifiedTyp
 	if ( transform == null )
 		return original
 	else
-		@suppress("UNCHECKED_CAST")
+		@Suppress("UNCHECKED_CAST")
 		return (transform as FunctionTransform<T>).transformDeclaration(this, original)
 }
 
@@ -34,7 +34,7 @@ fun <T: QualifiedType> T.transformCallOrElse(transforms: Map<QualifiedType, Func
 	if ( transform == null )
 		return original
 	else
-		@suppress("UNCHECKED_CAST")
+		@Suppress("UNCHECKED_CAST")
 		return (transform as FunctionTransform<T>).transformCall(this, original)
 }
 
