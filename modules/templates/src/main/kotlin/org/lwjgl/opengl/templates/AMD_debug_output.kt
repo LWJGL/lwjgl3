@@ -112,7 +112,7 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		GLenum.IN("category", "the message category", Categories),
 		GLenum.IN("severity", "the message severity", Severities),
 		AutoSize("ids") _ GLsizei.IN("count", "the number of values in the {@code ids} array"),
-		nullable _ const _ GLuint_p.IN("ids", "an array of message ids"),
+		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of message ids"),
 		GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
 	)
 

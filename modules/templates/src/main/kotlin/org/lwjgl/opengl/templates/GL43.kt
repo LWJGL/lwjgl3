@@ -388,7 +388,6 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		    """
 		)}
 
-
 		Unrecognized message IDs in {@code ids} are ignored. If {@code count} is zero, the value if {@code ids} is ignored.
 
 		Although messages are grouped into an implicit hierarchy by their sources and types, there is no explicit per-source, per-type or per-severity enabled
@@ -402,7 +401,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
 		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 

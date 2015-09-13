@@ -213,7 +213,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
 		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
