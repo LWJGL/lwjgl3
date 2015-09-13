@@ -27,12 +27,15 @@ val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI
 			"PNG 1/2/4/8-bit-per-channel (16 bpc not supported)",
 			"TGA (not sure what subset, if a subset)",
 			"BMP non-1bpp, non-RLE",
-			"PSD (composited view only, no extra channels)",
+			"PSD (composited view only, no extra channels, 8/16 bit-per-channel)",
 			"GIF (*comp always reports as 4-channel)",
 			"HDR (radiance rgbE format)",
 			"PIC (Softimage PIC)",
 			"PNM (PPM and PGM binary only)"
 		)}
+
+		Animated GIF still needs a proper API, but <a href="http://gist.github.com/urraka/685d9a6340b26b830d49">here</a>'s one way to do it.
+
 		Features:
 		${ul(
 			"decode from memory <s>or through FILE (define STBI_NO_STDIO to remove code)</s>",

@@ -8,9 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
 val stb_easy_font = "STBEasyFont".nativeClass(packageName = STB_PACKAGE, prefix = "STB", prefixMethod = "stb_") {
-	includeSTBAPI(
-		"""#include <math.h>
-#include "stb_easy_font.h"""")
+	includeSTBAPI("#include \"stb_easy_font.h\"")
 
 	documentation =
 		"""

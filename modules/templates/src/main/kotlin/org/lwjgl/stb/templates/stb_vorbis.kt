@@ -22,7 +22,6 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		Ogg Vorbis audio decoder.
 
 		<h3>Limitations</h3>
-
 		${ul(
 			"floor 0 not supported (used in old ogg vorbis files pre-2004)",
 			"lossless sample-truncation at beginning ignored",

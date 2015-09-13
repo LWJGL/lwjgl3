@@ -82,13 +82,27 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 
 	int(
 		"write_tga",
-		"Writes a TGA image file.",
+		"""
+		Writes a TGA image file.
+
+		TGA supports RLE or non-RLE compressed data. To use non-RLE-compressed data, set the global variable {@code stbi_write_tga_with_rle} to 0 by calling
+		#write_tga_with_rle().
+		""",
 
 		write["filename"],
 		write["w"],
 		write["h"],
 		write["comp"],
 		write["data"]
+	)
+
+	Code(
+		nativeCall = "\tstbi_write_tga_with_rle = value;"
+	) _ void(
+		"write_tga_with_rle",
+        "Sets the global variable {@code stbi_write_tga_with_rle}.",
+
+	    int.IN("value", "the variable value")
 	)
 
 	int(
