@@ -9,15 +9,8 @@ import org.lwjgl.system.DynamicLinkLibrary;
 /** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X. */
 public abstract class MacOSXLibrary extends DynamicLinkLibrary.Default {
 
-	private final String name;
-
 	protected MacOSXLibrary(String name) {
-		this.name = name;
-	}
-
-	@Override
-	public String getName() {
-		return name;
+		super(name);
 	}
 
 	public static MacOSXLibrary create(String name) {

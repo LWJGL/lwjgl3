@@ -22,21 +22,14 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 			throw new RuntimeException("Failed to retrieve LWJGL module handle.");
 	}
 
-	private final String name;
-
 	private final long handle;
 
 	public WindowsLibrary(String name) {
-		this.name = name;
+		super(name);
 
 		handle = LoadLibrary(name);
 		if ( handle == NULL )
 			windowsThrowException("Failed to load library: " + name);
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 	@Override
@@ -52,7 +45,7 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 	@Override
 	protected void destroy() {
 		if ( FreeLibrary(handle) == FALSE )
-			windowsThrowException("Failed to unload library: " + name);
+			windowsThrowException("Failed to unload library: " + getName());
 	}
 
 }

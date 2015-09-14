@@ -12,6 +12,18 @@ public interface DynamicLinkLibrary extends FunctionProvider, Pointer {
 	String getName();
 
 	abstract class Default extends Retainable.Default implements DynamicLinkLibrary {
+
+		private final String name;
+
+		protected Default(String name) {
+			this.name = name;
+		}
+
+		@Override
+		public String getName() {
+			return name;
+		}
+
 	}
 
 }

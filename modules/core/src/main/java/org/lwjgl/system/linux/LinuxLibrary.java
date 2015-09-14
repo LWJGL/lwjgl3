@@ -12,12 +12,10 @@ import static org.lwjgl.system.linux.DynamicLinkLoader.*;
 /** Implements a {@link DynamicLinkLibrary} on the Linux OS. */
 public class LinuxLibrary extends DynamicLinkLibrary.Default {
 
-	private final String name;
-
 	private final long handle;
 
 	public LinuxLibrary(String name) {
-		this.name = name;
+		super(name);
 
 		long handle = NULL;
 		if ( name.endsWith(".so") )
@@ -34,11 +32,6 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 	@Override
 	public long getPointer() {
 		return handle;
-	}
-
-	@Override
-	public String getName() {
-		return name;
 	}
 
 	@Override
