@@ -6,62 +6,24 @@ package org.lwjgl.system.jemalloc;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Pointer;
-import org.lwjgl.system.FunctionProvider;
+import org.lwjgl.system.DynamicLinkLibrary;
 
-public final class LibJEmalloc {
+/**
+ * This class initializes the jemalloc native library on first access. The library instance is intentionally {@code static final} to improve JIT constant
+ * propagation. The expectation is that if this class is accessed, jemalloc will be used extensivelly and never unloaded, so performance is prioritized over
+ * flexibility.
+ */
+final class LibJEmalloc {
 
-	private static FunctionProvider functionProvider;
+	private static final DynamicLinkLibrary jemalloc;
 
-	static JEmalloc __JEmalloc;
+	static final JEmalloc __JEmalloc;
 
 	static {
-		if ( !Boolean.getBoolean("org.lwjgl.system.jemalloc.explicitInit") )
-			create();
+		jemalloc = LWJGLUtil.loadLibraryNative(System.getProperty("org.lwjgl.system.jemalloc.libname", Pointer.BITS64 ? "jemalloc" : "jemalloc32"));
+		__JEmalloc = new JEmalloc(jemalloc);
 	}
 
 	private LibJEmalloc() {}
-
-	/** Loads the jemalloc native library, using the default library name. */
-	public static void create() {
-		create(System.getProperty("org.lwjgl.system.jemalloc.libname", Pointer.BITS64 ? "jemalloc" : "jemalloc32"));
-	}
-
-	/**
-	 * Loads the jemalloc native library, using the specified library name.
-	 *
-	 * @param libName the native library name
-	 */
-	public static void create(String libName) {
-		create(LWJGLUtil.loadLibraryNative(libName));
-	}
-
-	/**
-	 * Initializes jemalloc with the specified {@link FunctionProvider}. This method can be used to implement custom jemalloc library loading.
-	 *
-	 * @param functionProvider the provider of jemalloc function addresses
-	 */
-	public static void create(FunctionProvider functionProvider) {
-		if ( LibJEmalloc.functionProvider != null )
-			throw new IllegalStateException("jemalloc has already been created.");
-
-		LibJEmalloc.functionProvider = functionProvider;
-		__JEmalloc = new JEmalloc(functionProvider);
-	}
-
-	/** Unloads the jemalloc native library. */
-	public static void destroy() {
-		if ( functionProvider == null )
-			return;
-
-		__JEmalloc = null;
-
-		functionProvider.release();
-		functionProvider = null;
-	}
-
-	/** Returns the {@link FunctionProvider} for the jemalloc native library. */
-	public static FunctionProvider getFunctionProvider() {
-		return functionProvider;
-	}
 
 }
