@@ -433,6 +433,71 @@ final class MemoryAccess {
 			return UNSAFE.getLong(buffer, ADDRESS);
 		}
 
+		@Override
+		ByteBuffer memByteBuffer(long address, int capacity) {
+			try {
+				ByteBuffer buffer = (ByteBuffer)UNSAFE.allocateInstance(BYTE_BUFFER.getClass());
+				buffer.order(ByteOrder.nativeOrder());
+				return memSetupBuffer(buffer, address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		ShortBuffer memShortBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((ShortBuffer)UNSAFE.allocateInstance(SHORT_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		CharBuffer memCharBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((CharBuffer)UNSAFE.allocateInstance(CHAR_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		IntBuffer memIntBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((IntBuffer)UNSAFE.allocateInstance(INT_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		LongBuffer memLongBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((LongBuffer)UNSAFE.allocateInstance(LONG_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		FloatBuffer memFloatBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((FloatBuffer)UNSAFE.allocateInstance(FLOAT_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
+		@Override
+		DoubleBuffer memDoubleBuffer(long address, int capacity) {
+			try {
+				return memSetupBuffer((DoubleBuffer)UNSAFE.allocateInstance(DOUBLE_BUFFER.getClass()), address, capacity);
+			} catch (InstantiationException e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+
 		private static <T extends Buffer> T setup(T buffer, long address, int capacity, long parentField) {
 			UNSAFE.putLong(buffer, ADDRESS, address);
 			UNSAFE.putInt(buffer, CAPACITY, capacity);
