@@ -26,7 +26,7 @@ final class MemoryAccess {
 			accessor = (MemoryAccessor)Class.forName("org.lwjgl.system.MemoryAccess$MemoryAccessorUnsafe").newInstance();
 		} catch (Exception e0) {
 			try {
-				// Depends on sun.nio.ch.DirectBuffer
+				// Depends on sun.nio.ch.DirectBuffer and sun.reflect.FieldAccessor
 				accessor = new MemoryAccessorReflect();
 			} catch (Exception e1) {
 				LWJGLUtil.log("[MemoryAccessor] Unsupported JVM detected, this will likely result in low performance. Please inform LWJGL developers.");
@@ -278,10 +278,10 @@ final class MemoryAccess {
 	/** Implementation using reflection. */
 	private static final class MemoryAccessorReflect extends MemoryAccessorJava {
 
-		private static final java.lang.reflect.Field ADDRESS;
-		private static final java.lang.reflect.Field CAPACITY;
+		private static final sun.reflect.FieldAccessor ADDRESS;
+		private static final sun.reflect.FieldAccessor CAPACITY;
 
-		private static final java.lang.reflect.Field
+		private static final sun.reflect.FieldAccessor
 			PARENT_BYTE,
 			PARENT_SHORT,
 			PARENT_CHAR,
@@ -296,16 +296,16 @@ final class MemoryAccess {
 				throw new UnsupportedOperationException();
 
 			try {
-				ADDRESS = getDeclaredField(Buffer.class, "address");
-				CAPACITY = getDeclaredField(Buffer.class, "capacity");
+				ADDRESS = getFieldAccessor(getDeclaredField(Buffer.class, "address"));
+				CAPACITY = getFieldAccessor(getDeclaredField(Buffer.class, "capacity"));
 
-				PARENT_BYTE = getField(parent.slice(), parent);
-				PARENT_SHORT = getField(SHORT_BUFFER, parent);
-				PARENT_CHAR = getField(CHAR_BUFFER, parent);
-				PARENT_INT = getField(INT_BUFFER, parent);
-				PARENT_LONG = getField(LONG_BUFFER, parent);
-				PARENT_FLOAT = getField(FLOAT_BUFFER, parent);
-				PARENT_DOUBLE = getField(DOUBLE_BUFFER, parent);
+				PARENT_BYTE = getFieldAccessor(getField(parent.slice(), parent));
+				PARENT_SHORT = getFieldAccessor(getField(SHORT_BUFFER, parent));
+				PARENT_CHAR = getFieldAccessor(getField(CHAR_BUFFER, parent));
+				PARENT_INT = getFieldAccessor(getField(INT_BUFFER, parent));
+				PARENT_LONG = getFieldAccessor(getField(LONG_BUFFER, parent));
+				PARENT_FLOAT = getFieldAccessor(getField(FLOAT_BUFFER, parent));
+				PARENT_DOUBLE = getFieldAccessor(getField(DOUBLE_BUFFER, parent));
 			} catch (Exception e) {
 				throw new UnsupportedOperationException(e);
 			}
@@ -319,7 +319,7 @@ final class MemoryAccess {
 			return ((sun.nio.ch.DirectBuffer)buffer).address();
 		}
 
-		private static <T extends Buffer> T setup(T buffer, long address, int capacity, java.lang.reflect.Field parentField) {
+		private static <T extends Buffer> T setup(T buffer, long address, int capacity, sun.reflect.FieldAccessor parentField) {
 			try {
 				ADDRESS.setLong(buffer, address);
 				CAPACITY.setInt(buffer, capacity);
@@ -660,6 +660,16 @@ final class MemoryAccess {
 			"The specified value does not exist as a field in %s or any of its superclasses.",
 			buffer.getClass().getSimpleName()
 		));
+	}
+
+	static sun.reflect.FieldAccessor getFieldAccessor(java.lang.reflect.Field field) {
+		try {
+			java.lang.reflect.Method getFieldAccessor = java.lang.reflect.Field.class.getDeclaredMethod("getFieldAccessor", Object.class);
+			getFieldAccessor.setAccessible(true);
+			return (sun.reflect.FieldAccessor)getFieldAccessor.invoke(field, (Object)null);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }
