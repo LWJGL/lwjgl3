@@ -240,37 +240,37 @@ final class MemoryAccess {
 
 		@Override
 		ByteBuffer memByteBuffer(long address, int capacity) {
-			return memSetupBuffer(BYTE_BUFFER.duplicate().order(ByteOrder.nativeOrder()), address, capacity);
+			return memSetupBuffer(BYTE_BUFFER.slice().order(ByteOrder.nativeOrder()), address, capacity);
 		}
 
 		@Override
 		ShortBuffer memShortBuffer(long address, int capacity) {
-			return memSetupBuffer(SHORT_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(SHORT_BUFFER.slice(), address, capacity);
 		}
 
 		@Override
 		CharBuffer memCharBuffer(long address, int capacity) {
-			return memSetupBuffer(CHAR_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(CHAR_BUFFER.slice(), address, capacity);
 		}
 
 		@Override
 		IntBuffer memIntBuffer(long address, int capacity) {
-			return memSetupBuffer(INT_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(INT_BUFFER.slice(), address, capacity);
 		}
 
 		@Override
 		LongBuffer memLongBuffer(long address, int capacity) {
-			return memSetupBuffer(LONG_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(LONG_BUFFER.slice(), address, capacity);
 		}
 
 		@Override
 		FloatBuffer memFloatBuffer(long address, int capacity) {
-			return memSetupBuffer(FLOAT_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(FLOAT_BUFFER.slice(), address, capacity);
 		}
 
 		@Override
 		DoubleBuffer memDoubleBuffer(long address, int capacity) {
-			return memSetupBuffer(DOUBLE_BUFFER.duplicate(), address, capacity);
+			return memSetupBuffer(DOUBLE_BUFFER.slice(), address, capacity);
 		}
 
 	}
