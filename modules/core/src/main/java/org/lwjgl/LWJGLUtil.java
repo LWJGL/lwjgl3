@@ -111,18 +111,23 @@ public final class LWJGLUtil {
 	public static void loadLibrarySystem(String name) throws UnsatisfiedLinkError {
 		if ( new File(name).isAbsolute() ) {
 			System.load(name);
+			LWJGLUtil.log("Loaded library: " + name);
 			return;
 		}
 
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			if ( loadLibrary(LOADER_SYSTEM, override, mapLibraryName(name), false) )
+			String libName = mapLibraryName(name);
+			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) ) {
+				LWJGLUtil.log("Loaded library: " + libName);
 				return;
+			}
 		}
 
 		// Then java.library.path
 		System.loadLibrary(name);
+		LWJGLUtil.log("Loaded library: " + name);
 	}
 
 	/**

@@ -4,6 +4,9 @@
  */
 package org.lwjgl.system.macosx;
 
+import org.lwjgl.LWJGLUtil;
+
+import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.macosx.DynamicLinkLoader.*;
 
 /** Implements a {@link org.lwjgl.system.DynamicLinkLibrary} on the MacOS X using dlopen. */
@@ -15,8 +18,10 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 		super(name);
 
 		this.handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
-		if ( handle == 0 ) // TODO: better error handling
+		if ( handle == NULL )
 			throw new RuntimeException("Failed to dynamically load library: " + name);
+
+		LWJGLUtil.log("Loaded native library: " + name);
 	}
 
 	@Override

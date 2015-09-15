@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system.windows;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Sys;
 import org.lwjgl.system.DynamicLinkLibrary;
 
@@ -30,6 +31,8 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 		handle = LoadLibrary(name);
 		if ( handle == NULL )
 			windowsThrowException("Failed to load library: " + name);
+
+		LWJGLUtil.log("Loaded native library: " + name);
 	}
 
 	@Override

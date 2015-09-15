@@ -4,6 +4,7 @@
  */
 package org.lwjgl.system.linux;
 
+import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.DynamicLinkLibrary;
 
 import static org.lwjgl.system.MemoryUtil.*;
@@ -20,11 +21,15 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 		long handle = NULL;
 		if ( name.endsWith(".so") )
 			handle = dlopen(name + ".1", RTLD_LAZY | RTLD_GLOBAL);
-		if ( handle == NULL )
+		if ( handle != NULL )
+			LWJGLUtil.log("Loaded native library: " + name + ".1");
+		else {
 			handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
+			if ( handle == NULL ) // TODO: better error handling
+				throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 
-		if ( handle == NULL ) // TODO: better error handling
-			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
+			LWJGLUtil.log("Loaded native library: " + name);
+		}
 
 		this.handle = handle;
 	}
