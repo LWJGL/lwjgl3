@@ -125,3 +125,9 @@ class AccessModifier(val access: Access): FunctionModifier() {
 val private = AccessModifier(Access.PUBLIC)
 /** Makes the generated methods package private. */
 val internal = AccessModifier(Access.INTERNAL)
+
+class NativeName(val name: String): FunctionModifier() {
+	companion object: ModifierKey<NativeName>
+
+	override val isSpecial = false
+}

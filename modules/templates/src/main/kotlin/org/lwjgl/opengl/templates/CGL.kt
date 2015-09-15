@@ -8,12 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.system.macosx.*
 
-val CGL = "CGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "cgl", prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL") {
-	nativeImport (
-		"MacOSXLWJGL.h",
-		"<OpenGL/OpenGL.h>"
-	)
-
+val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL", prefixConstant = "kCGL", binding = GLBinding) {
 	documentation = "Native bindings to CGL."
 
 	// -----------------------------------------------

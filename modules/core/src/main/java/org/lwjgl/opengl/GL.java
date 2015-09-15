@@ -17,8 +17,6 @@ import static java.lang.Math.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL30.*;
 import static org.lwjgl.opengl.GL32.*;
-import static org.lwjgl.opengl.GLX.*;
-import static org.lwjgl.opengl.WGL.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.JNI.*;
@@ -127,16 +125,18 @@ public final class GL {
 			switch ( LWJGLUtil.getPlatform() ) {
 				case WINDOWS:
 					functionProvider = new FunctionProviderGL() {
+						private final long wglGetProcAddress = OPENGL.getFunctionAddress("wglGetProcAddress");
+
 						@Override
 						long getExtensionAddress(long name) {
-							return nwglGetProcAddress(name);
+							return callPP(wglGetProcAddress, name);
 						}
 					};
 					break;
 				case LINUX:
 					functionProvider = new FunctionProviderGL() {
-						final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
-						final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
+						private final long glXGetProcAddress = OPENGL.getFunctionAddress("glXGetProcAddress");
+						private final long glXGetProcAddressARB = OPENGL.getFunctionAddress("glXGetProcAddressARB");
 
 						@Override
 						long getExtensionAddress(long name) {
@@ -291,7 +291,7 @@ public final class GL {
 				5, // OpenGL 4.0 to 4.5
 			};
 
-			Set<String> supportedExtensions = new HashSet<String>(128);
+			Set<String> supportedExtensions = new HashSet<String>(512);
 
 			int maxMajor = min(majorVersion, GL_VERSIONS.length);
 			if ( MAX_VERSION != null )
@@ -347,12 +347,15 @@ public final class GL {
 
 			switch ( LWJGLUtil.getPlatform() ) {
 				case WINDOWS:
+					supportedExtensions.add("WGL");
 					addWGLExtensions(supportedExtensions);
 					break;
 				case LINUX:
+					supportedExtensions.add("GLX");
 					addGLXExtensions(supportedExtensions);
 					break;
 				case MACOSX:
+					supportedExtensions.add("CGL");
 					break;
 				default:
 					throw new UnsupportedOperationException();
@@ -369,7 +372,10 @@ public final class GL {
 
 		long wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringARB");
 		if ( wglGetExtensionsString != NULL ) {
-			wglExtensions = memDecodeASCII(callPP(wglGetExtensionsString, wglGetCurrentDC()));
+			long dc = callP(functionProvider.getFunctionAddress("wglGetCurrentDC"));
+			if ( dc == NULL )
+				throw new IllegalStateException("Failed to retrieve the device context of the current thread.");
+			wglExtensions = memDecodeASCII(callPP(wglGetExtensionsString, dc));
 		} else {
 			wglGetExtensionsString = functionProvider.getFunctionAddress("wglGetExtensionsStringEXT");
 			if ( wglGetExtensionsString == NULL )
@@ -392,7 +398,8 @@ public final class GL {
 
 		APIBuffer __buffer = apiBuffer();
 
-		if ( nglXQueryVersion(display, __buffer.address(), __buffer.address(4)) == 0 )
+		long glXQueryVersion = functionProvider.getFunctionAddress("glXQueryVersion");
+		if ( callPPPI(glXQueryVersion, display, __buffer.address(), __buffer.address(4)) == 0 )
 			throw new OpenGLException("GLX is not available."); // TODO: can't happen, right?
 
 		int majorVersion = __buffer.intValue(0);

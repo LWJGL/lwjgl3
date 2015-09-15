@@ -14,10 +14,6 @@ License terms: http://lwjgl.org/license.php
 		<include name="libffi.lib"/>
 		<include name="glfw3.lib" if:true="${binding.glfw}"/>
 	</fileset>
-	<!--<fileset id="link-libraries-egl" dir="C:/PROJECTS/LWJGL Project/gles_sdk/x86-64">
-		<include name="libEGL.lib"/>
-		<include name="libGLESv2.lib"/>
-	</fileset>-->
 
 	<macrodef name="cl">
 		<element name="arguments"/>
@@ -182,7 +178,6 @@ License terms: http://lwjgl.org/license.php
 			<arg value="user32.lib"/>
 			<arg value="Gdi32.lib"/>
 			<arg value="shell32.lib"/>
-			<arg value="OpenGL32.lib" if:true="${binding.opengl}"/>
 		</apply>
 
 		<!-- Compress -->

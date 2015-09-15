@@ -103,6 +103,8 @@ class NativeClassFunction(
 			JNI.register(this)
 	}
 
+	val nativeName: String get() = if ( has(NativeName) ) this[NativeName].name else name
+
 	val addressName: String
 		get() = if ( nativeClass.prefixMethod.isEmpty() )
 			"${simpleName}Address"
@@ -1258,7 +1260,7 @@ class NativeClassFunction(
 					if ( returns.has(address) )
 						print('&')
 				}
-				print("$name")
+				print("$nativeName")
 				if ( !has(macro) ) print('(')
 				printList(getNativeParams()) {
 					// Avoids warning when implicitly casting from jlong to 32-bit pointer.

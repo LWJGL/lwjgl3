@@ -177,7 +177,6 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-lrt"/>
 			<arg value="-lpthread"/>
 			<arg value="-lX11"/>
-			<arg value="-lGL"/>
 			<arg value="-lXi"/>
 			<arg value="-lXrandr"/>
 			<arg value="-lXxf86vm"/>

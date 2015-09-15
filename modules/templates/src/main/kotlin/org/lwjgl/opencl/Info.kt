@@ -46,7 +46,7 @@ fun info() {
 """
 			)
 
-			open @data class ObjectType(
+			open data class ObjectType(
 				val source: String,
 				val name: String,
 				val types: EnumSet<InfoQueryType>,

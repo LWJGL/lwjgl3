@@ -97,7 +97,7 @@ abstract class APIBinding(
 	/** Can be overriden to generate additional parameters for the NativeClass constructor. */
 	open fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
 	/** Can be overriden to implement custom function address retrieval. */
-	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.name}\")"
+	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.nativeName}\")"
 
 	/** Can be overriden to generate binding-specific alternative methods. */
 	open fun generateAlternativeMethods(

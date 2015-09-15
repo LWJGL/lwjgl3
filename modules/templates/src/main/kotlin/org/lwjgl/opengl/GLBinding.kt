@@ -20,7 +20,7 @@ val NativeClass.capName: String
 
 private val CAPABILITIES_CLASS = "GLCapabilities"
 
-private val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
+val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITIES_CLASS) {
 
 	private val GLCorePattern = Pattern.compile("GL[1-9][0-9]")
 
@@ -85,9 +85,9 @@ private val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CA
 		// we prefer to throw an exception instead of letting GL raise an error and it's
 		// also the only way to support the pseudo-fc mode.
 		if ( function has deprecatedGL )
-			"GL.getFunctionAddress(provider, \"${function.name}\", fc)"
+			"GL.getFunctionAddress(provider, \"${function.nativeName}\", fc)"
 		else
-			"provider.getFunctionAddress(\"${function.name}\")"
+			"provider.getFunctionAddress(\"${function.nativeName}\")"
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")

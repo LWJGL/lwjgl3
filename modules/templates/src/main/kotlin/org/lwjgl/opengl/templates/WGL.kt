@@ -5,16 +5,12 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.OPENGL_PACKAGE
+import org.lwjgl.opengl.*
 import org.lwjgl.system.windows.*
 
-val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL") {
+val WGL = "WGL".nativeClassWGL("WGL") {
 	javaImport(
 		"org.lwjgl.system.windows.*"
-	)
-
-	nativeImport (
-		"WindowsLWJGL.h"
 	)
 
 	documentation = "Native bindings to WGL functionality."
@@ -176,7 +172,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 	WINGDIAPI DWORD WINAPI SwapMultipleBuffers(UINT, CONST WGLSWAP *);
 	*/
 
-	BOOL(
+	NativeName("wglUseFontBitmapsW") _ BOOL(
 		"UseFontBitmaps",
 		"""
 		Creates a set of bitmap display lists for use in the current OpenGL rendering context. The set of bitmap display lists is based on the glyphs in the
@@ -191,7 +187,7 @@ val WGL = "WGL".nativeClass(OPENGL_PACKAGE, nativeSubPath = "wgl", prefix = "WGL
 		DWORD.IN("listBase", "the starting display list")
 	)
 
-	BOOL(
+	NativeName("wglUseFontOutlinesW") _ BOOL(
 		"UseFontOutlines",
 		"""
 		Creates a set of display lists, one for each glyph of the currently selected outline font of a device context, for use with the current rendering

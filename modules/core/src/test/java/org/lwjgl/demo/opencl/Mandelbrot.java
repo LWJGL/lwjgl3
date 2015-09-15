@@ -28,7 +28,6 @@ import static org.lwjgl.demo.opencl.CLGLInteropDemo.*;
 import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.glfw.GLFWLinux.*;
-import static org.lwjgl.glfw.GLFWMacOSX.*;
 import static org.lwjgl.glfw.GLFWWin32.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.CL10GL.*;
@@ -194,58 +193,34 @@ public class Mandelbrot {
 			}
 			this.device = devices.get(0);
 
-			PointerBuffer deviceBuffer = BufferUtils.createPointerBuffer(devices.size());
-			for ( int i = 0; i < devices.size(); i++ )
-				deviceBuffer.put(i, devices.get(i));
-
 			// Create the context
-			boolean useAPPLEGLSharing = false;
-			for ( int i = 0; i < devices.size(); i++ ) {
-				CLCapabilities caps = devices.get(i).getCapabilities();
-				if ( !caps.cl_khr_gl_sharing && caps.cl_APPLE_gl_sharing ) {
-					useAPPLEGLSharing = true;
+			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(7);
+			switch ( LWJGLUtil.getPlatform() ) {
+				case WINDOWS:
+					ctxProps
+						.put(CL_GL_CONTEXT_KHR)
+						.put(glfwGetWGLContext(window.handle))
+						.put(CL_WGL_HDC_KHR)
+						.put(wglGetCurrentDC());
 					break;
-				}
+				case LINUX:
+					ctxProps
+						.put(CL_GL_CONTEXT_KHR)
+						.put(glfwGetGLXContext(window.handle))
+						.put(CL_GLX_DISPLAY_KHR)
+						.put(glfwGetX11Display());
+					break;
+				case MACOSX:
+					ctxProps
+						.put(APPLEGLSharing.CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE)
+						.put(CGLGetShareGroup(CGLGetCurrentContext()));
 			}
-
-			PointerBuffer ctxProps = BufferUtils.createPointerBuffer(useAPPLEGLSharing ? 5 : 7)
-				.put(0, CL_CONTEXT_PLATFORM)
-				.put(1, platform);
-
-			if ( useAPPLEGLSharing ) {
-				ctxProps
-					.put(2, APPLEGLSharing.CL_CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE)
-					.put(3, CGLGetShareGroup(glfwGetNSGLContext(window.handle)));
-			} else {
-				switch ( LWJGLUtil.getPlatform() ) {
-					case WINDOWS:
-						ctxProps
-							.put(2, CL_GL_CONTEXT_KHR)
-							.put(3, glfwGetWGLContext(window.handle))
-							.put(4, CL_WGL_HDC_KHR)
-							.put(5, wglGetCurrentDC());
-						break;
-					case LINUX:
-						ctxProps
-							.put(2, CL_GL_CONTEXT_KHR)
-							.put(3, GLFWLinux.glfwGetGLXContext(window.handle))
-							.put(4, CL_GLX_DISPLAY_KHR)
-							.put(5, glfwGetX11Display());
-						break;
-					case MACOSX:
-						long ctx = glfwGetNSGLContext(window.handle);
-						ctxProps
-							.put(2, CL_GL_CONTEXT_KHR)
-							.put(3, ctx)
-							.put(4, CL_CGL_SHAREGROUP_KHR)
-							.put(5, CGLGetShareGroup(ctx));
-						break;
-				}
-			}
-
-			ctxProps.put(useAPPLEGLSharing ? 4 : 6, 0);
-
-			clContext = clCreateContext(ctxProps, deviceBuffer, new CLCreateContextCallback() {
+			ctxProps
+				.put(CL_CONTEXT_PLATFORM)
+				.put(platform)
+				.put(NULL)
+				.flip();
+			clContext = clCreateContext(ctxProps, device.getPointer(), new CLCreateContextCallback() {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
 					System.err.println("[LWJGL] cl_create_context_callback");
@@ -262,7 +237,7 @@ public class Mandelbrot {
 			clColorMap = clCreateBuffer(clContext, CL_MEM_READ_ONLY | CL_MEM_COPY_HOST_PTR, colorMapBuffer, errcode_ret);
 			checkCLError(errcode_ret);
 
-			// create command queue and upload color map buffer on each used device
+			// create command queue and upload color map buffer
 			clQueue = clCreateCommandQueue(clContext, device.getPointer(), 0L, errcode_ret);
 			checkCLError(errcode_ret);
 
@@ -304,7 +279,7 @@ public class Mandelbrot {
 				0.0f, 0.0f, 0.0f, 0.0f,
 				1.0f, 0.0f, 1.0f, 0.0f,
 				0.0f, 1.0f, 0.0f, 1.0f,
-				1.0f, 1.0f, 1.0f, 1.0f,
+				1.0f, 1.0f, 1.0f, 1.0f
 			});
 			quad.flip();
 			glBufferData(GL_ARRAY_BUFFER, quad, GL_STATIC_DRAW);
@@ -825,7 +800,7 @@ public class Mandelbrot {
 			0.0f, 1.0f, 0.0f, 0.0f,
 			0.0f, 0.0f, 1.0f, 0.0f,
 			0.0f, 0.0f, 0.0f, 1.0f,
-		});
+			});
 		m.flip();
 
 		m.put(0 * 4 + 0, 2.0f / (r - l));

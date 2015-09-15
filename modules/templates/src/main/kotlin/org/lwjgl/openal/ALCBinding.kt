@@ -30,9 +30,9 @@ val ALCBinding = Generator.register(object : APIBinding(OPENAL_PACKAGE, ALC_CAP_
 
 	override fun getFunctionAddressCall(function: NativeClassFunction) =
 		if ( function.nativeClass.templateName.startsWith("ALC") )
-			"provider.getFunctionAddress(\"${function.name}\")"
+			"provider.getFunctionAddress(\"${function.nativeName}\")"
 		else
-			"provider.getFunctionAddress(device, \"${function.name}\")"
+			"provider.getFunctionAddress(device, \"${function.nativeName}\")"
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")

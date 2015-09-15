@@ -158,7 +158,6 @@ License terms: http://lwjgl.org/license.php
 			<arg line="-framework CoreVideo"/>
 			<!--<arg line="-framework Cocoa"/>-->
 			<arg line="-framework IOKit"/>
-			<arg line="-framework OpenGL" if:true="${binding.opengl}"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

@@ -5,20 +5,12 @@
 package org.lwjgl.opengl.templates
 
 import org.lwjgl.generator.*
-import org.lwjgl.opengl.GLXContext
-import org.lwjgl.opengl.GLXDrawable
-import org.lwjgl.opengl.GLXPixmap
-import org.lwjgl.opengl.OPENGL_PACKAGE
+import org.lwjgl.opengl.*
 import org.lwjgl.system.linux.*
 
-val GLX = "GLX".nativeClass(OPENGL_PACKAGE, nativeSubPath = "glx", prefix = "GLX", prefixMethod = "glX") {
+val GLX = "GLX".nativeClassGLX("GLX") {
 	javaImport(
 		"org.lwjgl.system.linux.*"
-	)
-
-	nativeImport (
-		"LinuxLWJGL.h",
-		"<GL/glx.h>"
 	)
 
 	documentation = "Native bindings to GLX."
