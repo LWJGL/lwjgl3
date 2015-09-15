@@ -41,11 +41,14 @@ public final class IOUtil {
 
 		File file = new File(resource);
 		if ( file.isFile() ) {
-			FileChannel fc = new FileInputStream(file).getChannel();
+			FileInputStream fis = new FileInputStream(file);
+			FileChannel fc = fis.getChannel();
+			
 			buffer = BufferUtils.createByteBuffer((int)fc.size() + 1);
 
 			while ( fc.read(buffer) != -1 ) ;
-
+			
+			fis.close();
 			fc.close();
 		} else {
 			buffer = createByteBuffer(bufferSize);
