@@ -733,7 +733,8 @@ public class Mandelbrot {
 		log("OpenCL COMPILER OPTIONS: " + options);
 
 		final long cl_device_id = device.getPointer();
-		int errcode = clBuildProgram(clProgram, cl_device_id, options, new CLProgramCallback() {
+		final CLProgramCallback buildCallback;
+		int errcode = clBuildProgram(clProgram, cl_device_id, options, buildCallback = new CLProgramCallback() {
 			@Override
 			public void invoke(long program, long user_data) {
 				System.err.printf(
@@ -757,6 +758,7 @@ public class Mandelbrot {
 			throw new RuntimeException(e);
 		}
 
+		buildCallback.release();
 		rebuild = false;
 
 		// init kernel with constants
@@ -821,7 +823,7 @@ public class Mandelbrot {
 		clSetKernelArg1i(clKernel, 9, maxIterations);
 	}
 
-	private static enum Color {
+	private enum Color {
 
 		RED(255, 0, 0),
 		GREEN(0, 255, 0),
