@@ -87,7 +87,7 @@ val GLBinding = Generator.register(object: APIBinding(OPENGL_PACKAGE, CAPABILITI
 		if ( function has deprecatedGL )
 			"GL.getFunctionAddress(provider, \"${function.nativeName}\", fc)"
 		else
-			"provider.getFunctionAddress(\"${function.nativeName}\")"
+			super.getFunctionAddressCall(function);
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")

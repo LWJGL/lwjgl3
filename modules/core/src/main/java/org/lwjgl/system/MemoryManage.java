@@ -24,7 +24,9 @@ final class MemoryManage {
 				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getInstance").invoke(null);
 				return new JEmallocAllocator();
 			} catch (Exception e) {
-				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library: " + e.getMessage());
+				if ( LWJGLUtil.DEBUG )
+					e.printStackTrace();
+				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library.");
 			}
 		}
 
