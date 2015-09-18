@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.egl.*
 
-val GLFWEGL = "GLFWEGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "egl", prefix = "GLFW", binding = GLFWBinding) {
+val GLFWNativeEGL = "GLFWNativeEGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "egl", prefix = "GLFW", binding = GLFWBinding) {
 	javaImport(
 		"org.lwjgl.egl.EGL10"
 	)
