@@ -85,22 +85,23 @@ public final class Callbacks {
 	 * @param window the GLFW window
 	 */
 	public static void releaseAllCallbacks(long window) {
+		GLFW glfw = GLFW.getInstance();
 		long[] callbacks = {
-			nglfwSetWindowPosCallback(window, NULL),
-			nglfwSetWindowSizeCallback(window, NULL),
-			nglfwSetWindowCloseCallback(window, NULL),
-			nglfwSetWindowRefreshCallback(window, NULL),
-			nglfwSetWindowFocusCallback(window, NULL),
-			nglfwSetWindowIconifyCallback(window, NULL),
-			nglfwSetFramebufferSizeCallback(window, NULL),
-			nglfwSetKeyCallback(window, NULL),
-			nglfwSetCharCallback(window, NULL),
-			nglfwSetCharModsCallback(window, NULL),
-			nglfwSetMouseButtonCallback(window, NULL),
-			nglfwSetCursorPosCallback(window, NULL),
-			nglfwSetCursorEnterCallback(window, NULL),
-			nglfwSetScrollCallback(window, NULL),
-			nglfwSetDropCallback(window, NULL)
+			invokePPP(glfw.SetWindowPosCallback, window, NULL),
+			invokePPP(glfw.SetWindowSizeCallback, window, NULL),
+			invokePPP(glfw.SetWindowCloseCallback, window, NULL),
+			invokePPP(glfw.SetWindowRefreshCallback, window, NULL),
+			invokePPP(glfw.SetWindowFocusCallback, window, NULL),
+			invokePPP(glfw.SetWindowIconifyCallback, window, NULL),
+			invokePPP(glfw.SetFramebufferSizeCallback, window, NULL),
+			invokePPP(glfw.SetKeyCallback, window, NULL),
+			invokePPP(glfw.SetCharCallback, window, NULL),
+			invokePPP(glfw.SetCharModsCallback, window, NULL),
+			invokePPP(glfw.SetMouseButtonCallback, window, NULL),
+			invokePPP(glfw.SetCursorPosCallback, window, NULL),
+			invokePPP(glfw.SetCursorEnterCallback, window, NULL),
+			invokePPP(glfw.SetScrollCallback, window, NULL),
+			invokePPP(glfw.SetDropCallback, window, NULL)
 		};
 
 		for ( long callback : callbacks ) {
