@@ -55,20 +55,20 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 				Double.class.getDeclaredMethod("callback", params),
 				Ptr.class.getDeclaredMethod("callback", params)
 			}, memAddress(callbacks));
+
+			NATIVE_CALLBACK_VOID = callbacks.get(0);
+			NATIVE_CALLBACK_BYTE = callbacks.get(1);
+			NATIVE_CALLBACK_SHORT = callbacks.get(2);
+			NATIVE_CALLBACK_INT = callbacks.get(3);
+			NATIVE_CALLBACK_LONG = callbacks.get(4);
+			NATIVE_CALLBACK_FLOAT = callbacks.get(5);
+			NATIVE_CALLBACK_DOUBLE = callbacks.get(6);
+			NATIVE_CALLBACK_PTR = callbacks.get(7);
 		} catch (NoSuchMethodException e) {
 			throw new IllegalStateException("Failed to initialize closure callbacks.", e);
+		} finally {
+			memFree(callbacks);
 		}
-
-		NATIVE_CALLBACK_VOID = callbacks.get(0);
-		NATIVE_CALLBACK_BYTE = callbacks.get(1);
-		NATIVE_CALLBACK_SHORT = callbacks.get(2);
-		NATIVE_CALLBACK_INT = callbacks.get(3);
-		NATIVE_CALLBACK_LONG = callbacks.get(4);
-		NATIVE_CALLBACK_FLOAT = callbacks.get(5);
-		NATIVE_CALLBACK_DOUBLE = callbacks.get(6);
-		NATIVE_CALLBACK_PTR = callbacks.get(7);
-
-		memFree(callbacks);
 	}
 
 	/** The default calling convention. */
