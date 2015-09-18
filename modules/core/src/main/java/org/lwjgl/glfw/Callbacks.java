@@ -17,6 +17,7 @@ import java.util.Map;
 import static org.lwjgl.Pointer.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.APIUtil.*;
+import static org.lwjgl.system.JNI.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 /**
