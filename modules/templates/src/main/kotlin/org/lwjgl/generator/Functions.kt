@@ -627,7 +627,9 @@ class NativeClassFunction(
 									"(int)${it.name}.getLong(${it.name}.position())"
 							}
 						}.join(" * ")}")
-					} else
+					} else if ( returns has address )
+						print(", 1")
+					else
 						throw IllegalStateException("No autoSizeResult parameter could be found.")
 				}
 				println(");")

@@ -330,8 +330,4 @@ class Construct(
 /** Returns the address of the return value, instead of the return value itself. */
 val address = object: ReturnValueModifier() {
 	override val isSpecial = false
-	override protected fun validate(returns: ReturnValue) {
-		if ( returns.nativeType.mapping != PointerMapping.OPAQUE_POINTER )
-			throw IllegalArgumentException("The address modifier can only be applied on opaque pointer types.")
-	}
 }
