@@ -130,9 +130,11 @@ The supported properties are:
 		The allocator provided by the jemalloc library
 	- *system*
 		The default system memory allocator
-* org.lwjgl.util.Debug [STATIC]  
+* org.lwjgl.util.Debug [STATIC]
 	Set to true to enable LWJGL's debug mode. There will be logged messages on stderr and extra runtime checks (some potentially expensive, performance-wise).
-* org.lwjgl.util.NoChecks [STATIC]  
+* org.lwjgl.util.DebugAllocator [STATIC]
+	Set to true to enable LWJGL's debug mode for the MemoryUtil explicit memory management API (memAlloc/memFree/etc). All memory allocations through that API will be tracked and leaks will be reported on JVM exit. The memReport methods can also be used.
+* org.lwjgl.util.NoChecks [STATIC]
 	Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but may they be disabled for released applications.
 * org.lwjgl.egl.libname [DYNAMIC]
 * org.lwjgl.glfw.libname [DYNAMIC]

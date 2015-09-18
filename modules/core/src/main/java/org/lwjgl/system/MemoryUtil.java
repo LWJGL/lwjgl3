@@ -8,7 +8,9 @@ import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
+import org.lwjgl.system.MemoryManage.DebugAllocator;
 import org.lwjgl.system.MemoryManage.MemoryAllocator;
+import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 
 import java.nio.*;
 
@@ -57,7 +59,10 @@ public final class MemoryUtil {
 
 		LWJGLUtil.log("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
 
-		ALLOCATOR = MemoryManage.getInstance();
+		MemoryAllocator allocator = MemoryManage.getInstance();
+		if ( Boolean.getBoolean("org.lwjgl.util.DebugAllocator") )
+			allocator = new DebugAllocator(allocator);
+		ALLOCATOR = allocator;
 
 		LWJGLUtil.log("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 	}
@@ -376,6 +381,59 @@ public final class MemoryUtil {
 		nmemAlignedFree(memAddress0Safe(ptr));
 	}
 
+	// --- [ DebugAllocator ] ---
+
+	/** The memory allocation report callback. */
+	public interface MemoryAllocationReport {
+
+		/**
+		 * Reports allocated memory.
+		 *
+		 * @param memory     the amount of memory allocated, in bytes
+		 * @param threadId   id of the thread that allocated the memory. May be {@link #NULL}.
+		 * @param threadName name of the thread that allocated the memory. May be {@code null}.
+		 * @param stacktrace the allocation stacktrace. May be null.
+		 */
+		void invoke(long memory, long threadId, String threadName, StackTraceElement... stacktrace);
+
+		/** Specifies how to aggregate the reported allocations. */
+		enum Aggregate {
+			/** Allocations are aggregated over the whole process or thread. */
+			ALL,
+			/**
+			 * Allocations are aggregated based on the first stack trace element. This will return an allocation aggregate per method/line number, regardless
+			 * of how many different code paths lead to that specific method and line number.
+			 */
+			GROUP_BY_METHOD,
+			/** The allocations are aggregated based on the full stack trace chain. */
+			GROUP_BY_STACKTRACE
+		}
+	}
+
+	/**
+	 * Reports all live allocations.
+	 *
+	 * <p>This method can only be used if the {@code org.lwjgl.util.DebugAllocator} system property has been set to true.</p>
+	 *
+	 * @param report the report callback
+	 */
+	public static void memReport(MemoryAllocationReport report) {
+		DebugAllocator.report(report);
+	}
+
+	/**
+	 * Reports aggregates for the live allocations.
+	 *
+	 * <p>This method can only be used if the {@code org.lwjgl.util.DebugAllocator} system property has been set to true.</p>
+	 *
+	 * @param report            the report callback
+	 * @param groupByStackTrace how to aggregate the reported allocations
+	 * @param groupByThread     if the reported allocations should be grouped by thread
+	 */
+	public static void memReport(MemoryAllocationReport report, Aggregate groupByStackTrace, boolean groupByThread) {
+		DebugAllocator.report(report, groupByStackTrace, groupByThread);
+	}
+
 	// --- [ memAddress0 ] ---
 
 	/**
@@ -622,7 +680,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (2 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (2 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memShortBuffer(address, capacity);
@@ -642,7 +700,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (2 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (2 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memCharBuffer(address, capacity);
@@ -662,7 +720,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (4 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (4 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memIntBuffer(address, capacity);
@@ -682,7 +740,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (8 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (8 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memLongBuffer(address, capacity);
@@ -702,7 +760,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (4 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (4 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memFloatBuffer(address, capacity);
@@ -722,7 +780,7 @@ public final class MemoryUtil {
 		if ( address == NULL )
 			return null;
 
-		if ( LWJGLUtil.DEBUG && (address & (8 - 1) ) != 0L )
+		if ( LWJGLUtil.DEBUG && (address & (8 - 1)) != 0L )
 			throw new IllegalArgumentException("Unaligned memory address");
 
 		return ACCESSOR.memDoubleBuffer(address, capacity);
@@ -731,7 +789,8 @@ public final class MemoryUtil {
 	/**
 	 * Creates a new PointerBuffer that starts at the specified memory address and has the specified capacity.
 	 *
-	 * <p>The {@code address} specified must be aligned to the pointer size. If not, use {@code PointerBuffer.create(memByteBuffer(address, capacity * POINTER_SIZE))}.</p>
+	 * <p>The {@code address} specified must be aligned to the pointer size. If not, use {@code PointerBuffer.create(memByteBuffer(address, capacity *
+	 * POINTER_SIZE))}.</p>
 	 *
 	 * @param address  the starting memory address
 	 * @param capacity the buffer capacity
