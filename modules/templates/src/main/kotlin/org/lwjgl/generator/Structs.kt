@@ -182,6 +182,8 @@ class Struct(
 		} else {
 			print("""
 	static {
+		LWJGLUtil.initialize();
+
 		SIZEOF = offsets();
 	}
 """)
