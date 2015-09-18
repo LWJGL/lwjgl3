@@ -607,7 +607,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	GLFWmonitor_p(
 		"GetMonitors",
 		"""
-		Returns an array of handles for all currently connected monitors.
+		Returns an array of handles for all currently connected monitors. The primary monitor is always first in the returned array. If no monitors were found,
+		this function returns $NULL.
 
 		The returned array is allocated and freed by GLFW. You should not free it yourself. It is guaranteed to be valid only until the monitor configuration
 		changes or the library is terminated.
@@ -617,19 +618,21 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		autoSizeResult _ int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
-	    returnDoc = "an array of monitor handlers, or $NULL if an error occured",
+	    returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
 	    since = "GLFW 3.0"
 	)
 
 	GLFWmonitor(
 		"GetPrimaryMonitor",
 		"""
-		Returns the primary monitor. This is usually the monitor where elements like the Windows task bar or the OS X menu bar is located.
+		Returns the primary monitor. This is usually the monitor where elements like the task bar or global menu bar are located.
 
 		This function may only be called from the main thread.
+
+		The primary monitor is always first in the array returned by #GetMonitors().
 		""",
 
-	    returnDoc = "the primary monitor, or $NULL if an error occured",
+	    returnDoc = "the primary monitor, or $NULL if no monitors were found or if an error occured",
 	    since = "GLFW 3.0"
 	)
 
@@ -874,7 +877,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		The created window, framebuffer and context may differ from what you requested, as not all parameters and hints are hard constraints. This includes the
 		size of the window, especially for full screen windows. To query the actual attributes of the created window, framebuffer and context, use queries like
-		#GetWindowAttrib() and #GetWindowSize().
+		#GetWindowAttrib() and #GetWindowSize() and #GetFramebufferSize().
 
 		To create a full screen window, you need to specify the monitor the window will cover. If no monitor is specified, windowed mode will be used. Unless
 		you have a way for the user to choose a specific monitor, it is recommended that you pick the primary monitor. For more information on how to query
@@ -926,7 +929,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		    Resolution Guidelines for OS X</a> in the Mac Developer Library.
 			""",
 		    "<b>X11</b>: There is no mechanism for setting the window icon yet.",
-		    "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows."
+		    "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
+			"""
+			<b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
+			to query the final size, position or other attributes directly after window creation.
+			"""
 		)}
 		""",
 
@@ -994,6 +1001,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Sets the window title, encoded as UTF-8, of the specified window.
 
 		This function may only be called from the main thread.
+
+		<b>OS X</b>: The window title will not be updated until the next time you process events.
 		""",
 
 		GLFWwindow.IN("window", "the window whose title to change"),
@@ -1120,6 +1129,24 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	    since = "GLFW 3.1"
 	)
 
+	/*void(
+		"SetWindowIcons",
+		"""
+		Sets the icons to be used by the specified window.
+
+		From all the given icons GLFW will automatically pick the most appropriate size for the different locations in which the application icon can occur.
+		For example on Windows, if a larger and a smaller icon are given the larger icon will be used for the Alt+Tab screen and the smaller for the taskbar.
+
+		If the icon does not exactly fit the operating systems requirements for the icon size the icon will be automatically resized.
+
+		This function may only be called from the main thread.
+		""",
+
+		GLFWwindow.IN("window", "the window to set the icons for"),
+	    GLFWimage_p.IN("icons", "an array of ##GLFWimage structs"),
+	    AutoSize("icons") _ int.IN("count", "the number of icons in the array")
+	)*/
+
 	void(
 		"IconifyWindow",
 		"""
@@ -1198,6 +1225,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Returns the value of an attribute of the specified window or its OpenGL or OpenGL ES context.
 
 		This function may only be called from the main thread.
+
+		Framebuffer related hints are not window attributes.
+
+        Zero is a valid value for many window and context related attributes so you cannot use a return value of zero as an indication of errors. However, this
+        function should not fail as long as it is passed valid arguments and the library has been initialized.
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
@@ -1576,8 +1608,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		${ul(
 			"This function may only be called from the main thread.",
 		    """
-		    <b>X11:</b> Due to the asynchronous nature of a modern X desktop, it may take a moment for the window focus event to arrive. This means you will not
-		    be able to set the cursor position directly after window creation.
+		    <b>X11:</b> Due to the asynchronous nature of X11, it may take a moment for the window focus event to arrive. This means you may not be able to set
+		    the cursor position directly after window creation.
 		    """
 		)}
 		""",
@@ -1595,8 +1627,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
 		cursors are destroyed by #Terminate().
 
-		The pixels are 32-bit little-endian RGBA, i.e. eight bits per channel. They are arranged canonically as packed sequential rows, starting from the
-		top-left corner.
+		The pixels are 32-bit, little-endian, non-premultiplied RGBA, i.e. eight bits per channel. They are arranged canonically as packed sequential rows,
+		starting from the top-left corner.
 
 		The cursor hotspot is specified in pixels, relative to the upper-left corner of the cursor image. Like all other coordinate systems in GLFW, the X-axis
 		points to the right and the Y-axis points down.
@@ -1911,7 +1943,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 	(const _ charUTF8_p)(
 		"GetClipboardString",
 		"""
-		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string.
+		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents
+		cannot be converted, $NULL is returned and a #FORMAT_UNAVAILABLE error is generated.
 
 		The returned string is allocated and freed by GLFW. You should not free it yourself. It is valid until the next call to #GetClipboardString() or
 		#SetClipboardString(), or until the library is terminated.
@@ -2067,14 +2100,14 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 		Returns the address of the specified <a href="http://www.glfw.org/docs/latest/context.html\#context_glext">core or extension function</a>, if it is
 		supported by the current context.
 
-		A context must be current on the calling thread.  Calling this function without a current context will cause a `GLFW_NO_CURRENT_CONTEXT` error.
+		A context must be current on the calling thread.  Calling this function without a current context will cause a #NO_CURRENT_CONTEXT error.
 
 		Notes:
 		${ul(
-			"The addresses of a given function is not guaranteed to be the same between contexts.",
+			"The address of a given function is not guaranteed to be the same between contexts.",
 			"""
 			This function may return a non-$NULL address despite the associated version or extension not being available. Always check the context version or
-			extension string presence first.
+			extension string first.
 			""",
 			"The returned function pointer is valid until the context is destroyed or the library is terminated.",
 			"This function may be called from any thread."
@@ -2083,7 +2116,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
 
 		const _ charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
-	    returnDoc = "the address of the function, or $NULL if the function is unavailable",
+	    returnDoc = "the address of the function, or $NULL if an error occured",
 	    since = "GLFW 1.0"
 	)
 
