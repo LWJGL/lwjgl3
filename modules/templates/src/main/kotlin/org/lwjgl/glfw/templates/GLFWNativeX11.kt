@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.linux.*
 
-val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW") {
+val GLFWNativeX11 = "GLFWNativeX11".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW", binding = GLFWBinding) {
 	documentation = "Native bindings to the GLFW library's X11 native access functions."
 
 	Display_p(

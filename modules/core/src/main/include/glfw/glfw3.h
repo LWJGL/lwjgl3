@@ -31,10 +31,159 @@
 
 EXTERN_C_ENTER
 
-// LWJGL Note: Cleaned-up, only kept stuff we need to statically link.
 DISABLE_WARNINGS()
 
-#define GLFWAPI
+/*************************************************************************
+ * Doxygen documentation
+ *************************************************************************/
+
+/*! @defgroup context Context handling
+ *
+ *  This is the reference documentation for context related functions.  For more
+ *  information, see the @ref context.
+ */
+/*! @defgroup init Initialization, version and errors
+ *
+ *  This is the reference documentation for initialization and termination of
+ *  the library, version management and error handling.  For more information,
+ *  see the @ref intro.
+ */
+/*! @defgroup input Input handling
+ *
+ *  This is the reference documentation for input related functions and types.
+ *  For more information, see the @ref input.
+ */
+/*! @defgroup monitor Monitor handling
+ *
+ *  This is the reference documentation for monitor related functions and types.
+ *  For more information, see the @ref monitor.
+ */
+/*! @defgroup window Window handling
+ *
+ *  This is the reference documentation for window related functions and types,
+ *  including creation, deletion and event polling.  For more information, see
+ *  the @ref window.
+ */
+
+
+/*************************************************************************
+ * Compiler- and platform-specific preprocessor work
+ *************************************************************************/
+
+/* If we are we on Windows, we want a single define for it.
+ */
+#if !defined(_WIN32) && (defined(__WIN32__) || defined(WIN32) || defined(__MINGW32__))
+ #define _WIN32
+#endif /* _WIN32 */
+
+/* It is customary to use APIENTRY for OpenGL function pointer declarations on
+ * all platforms.  Additionally, the Windows OpenGL header needs APIENTRY.
+ */
+#ifndef APIENTRY
+ #ifdef _WIN32
+  #define APIENTRY __stdcall
+ #else
+  #define APIENTRY
+ #endif
+#endif /* APIENTRY */
+
+/* Some Windows OpenGL headers need this.
+ */
+#if !defined(WINGDIAPI) && defined(_WIN32)
+ #define WINGDIAPI __declspec(dllimport)
+ #define GLFW_WINGDIAPI_DEFINED
+#endif /* WINGDIAPI */
+
+/* Some Windows GLU headers need this.
+ */
+#if !defined(CALLBACK) && defined(_WIN32)
+ #define CALLBACK __stdcall
+ #define GLFW_CALLBACK_DEFINED
+#endif /* CALLBACK */
+
+/* Most Windows GLU headers need wchar_t.
+ * The OS X OpenGL header blocks the definition of ptrdiff_t by glext.h.
+ */
+#if !defined(GLFW_INCLUDE_NONE)
+ #include <stddef.h>
+#endif
+
+/* Include the chosen client API headers.
+ */
+#if defined(__APPLE_CC__)
+ #if defined(GLFW_INCLUDE_GLCOREARB)
+  #include <OpenGL/gl3.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <OpenGL/gl3ext.h>
+  #endif
+ #elif !defined(GLFW_INCLUDE_NONE)
+  #if !defined(GLFW_INCLUDE_GLEXT)
+   #define GL_GLEXT_LEGACY
+  #endif
+  #include <OpenGL/gl.h>
+ #endif
+ #if defined(GLFW_INCLUDE_GLU)
+  #include <OpenGL/glu.h>
+ #endif
+#else
+ #if defined(GLFW_INCLUDE_GLCOREARB)
+  #include <GL/glcorearb.h>
+ #elif defined(GLFW_INCLUDE_ES1)
+  #include <GLES/gl.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <GLES/glext.h>
+  #endif
+ #elif defined(GLFW_INCLUDE_ES2)
+  #include <GLES2/gl2.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <GLES2/gl2ext.h>
+  #endif
+ #elif defined(GLFW_INCLUDE_ES3)
+  #include <GLES3/gl3.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <GLES3/gl2ext.h>
+  #endif
+ #elif defined(GLFW_INCLUDE_ES31)
+  #include <GLES3/gl31.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <GLES3/gl2ext.h>
+  #endif
+ #elif !defined(GLFW_INCLUDE_NONE)
+  #include <GL/gl.h>
+  #if defined(GLFW_INCLUDE_GLEXT)
+   #include <GL/glext.h>
+  #endif
+ #endif
+ #if defined(GLFW_INCLUDE_GLU)
+  #include <GL/glu.h>
+ #endif
+#endif
+
+#if defined(GLFW_DLL) && defined(_GLFW_BUILD_DLL)
+ /* GLFW_DLL must be defined by applications that are linking against the DLL
+  * version of the GLFW library.  _GLFW_BUILD_DLL is defined by the GLFW
+  * configuration header when compiling the DLL version of the library.
+  */
+ #error "You may not have both GLFW_DLL and _GLFW_BUILD_DLL defined"
+#endif
+
+/* GLFWAPI is used to declare public API functions for export
+ * from the DLL / shared library / dynamic library.
+ */
+#if defined(_WIN32) && defined(_GLFW_BUILD_DLL)
+ /* We are building GLFW as a Win32 DLL */
+ #define GLFWAPI __declspec(dllexport)
+#elif defined(_WIN32) && defined(GLFW_DLL)
+ /* We are calling GLFW as a Win32 DLL */
+ #define GLFWAPI __declspec(dllimport)
+#elif defined(__GNUC__) && defined(_GLFW_BUILD_DLL)
+ /* We are building GLFW as a shared / dynamic library */
+ #define GLFWAPI __attribute__((visibility("default")))
+#else
+ /* We are building or calling GLFW as a static library */
+ #define GLFWAPI
+#endif
+
 
 /*************************************************************************
  * GLFW API tokens
@@ -381,7 +530,7 @@ DISABLE_WARNINGS()
  *
  *  @par
  *  Some pre-installed Windows graphics drivers do not support OpenGL.  AMD only
- *  supports OpenGL ES via EGL, while Nvidia and Intel only supports it via
+ *  supports OpenGL ES via EGL, while Nvidia and Intel only support it via
  *  a WGL or GLX extension.  OS X does not provide OpenGL ES at all.  The Mesa
  *  EGL, OpenGL and OpenGL ES libraries do not interface with the Nvidia binary
  *  driver.
@@ -1062,12 +1211,13 @@ GLFWAPI GLFWerrorfun glfwSetErrorCallback(GLFWerrorfun cbfun);
 /*! @brief Returns the currently connected monitors.
  *
  *  This function returns an array of handles for all currently connected
- *  monitors.
+ *  monitors.  The primary monitor is always first in the returned array.  If no
+ *  monitors were found, this function returns `NULL`.
  *
  *  @param[out] count Where to store the number of monitors in the returned
  *  array.  This is set to zero if an error occurred.
- *  @return An array of monitor handles, or `NULL` if an
- *  [error](@ref error_handling) occurred.
+ *  @return An array of monitor handles, or `NULL` if no monitors were found or
+ *  if an [error](@ref error_handling) occurred.
  *
  *  @par Pointer Lifetime
  *  The returned array is allocated and freed by GLFW.  You should not free it
@@ -1090,13 +1240,16 @@ GLFWAPI GLFWmonitor** glfwGetMonitors(int* count);
 /*! @brief Returns the primary monitor.
  *
  *  This function returns the primary monitor.  This is usually the monitor
- *  where elements like the Windows task bar or the OS X menu bar is located.
+ *  where elements like the task bar or global menu bar are located.
  *
- *  @return The primary monitor, or `NULL` if an [error](@ref error_handling)
- *  occurred.
+ *  @return The primary monitor, or `NULL` if no monitors were found or if an
+ *  [error](@ref error_handling) occurred.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
+ *
+ *  @remarks The primary monitor is always first in the array returned by @ref
+ *  glfwGetMonitors.
  *
  *  @sa @ref monitor_monitors
  *  @sa glfwGetMonitors
@@ -1401,8 +1554,8 @@ GLFWAPI void glfwWindowHint(int target, int hint);
  *  requested, as not all parameters and hints are
  *  [hard constraints](@ref window_hints_hard).  This includes the size of the
  *  window, especially for full screen windows.  To query the actual attributes
- *  of the created window, framebuffer and context, use queries like @ref
- *  glfwGetWindowAttrib and @ref glfwGetWindowSize.
+ *  of the created window, framebuffer and context, see @ref
+ *  glfwGetWindowAttrib, @ref glfwGetWindowSize and @ref glfwGetFramebufferSize.
  *
  *  To create a full screen window, you need to specify the monitor the window
  *  will cover.  If no monitor is specified, windowed mode will be used.  Unless
@@ -1472,12 +1625,19 @@ GLFWAPI void glfwWindowHint(int target, int hint);
  *  `NSHighResolutionCapable` key is enabled in the application bundle's
  *  `Info.plist`.  For more information, see
  *  [High Resolution Guidelines for OS X](https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html)
- *  in the Mac Developer Library.
+ *  in the Mac Developer Library.  The GLFW test and example programs use
+ *  a custom `Info.plist` template for this, which can be found as
+ *  `CMake/MacOSXBundleInfo.plist.in` in the source tree.
  *
  *  @remarks __X11:__ There is no mechanism for setting the window icon yet.
  *
  *  @remarks __X11:__ Some window managers will not respect the placement of
  *  initially hidden windows.
+ *
+ *  @remarks __X11:__ Due to the asynchronous nature of X11, it may take
+ *  a moment for a window to reach its requested state.  This means you may not
+ *  be able to query the final size, position or other attributes directly after
+ *  window creation.
  *
  *  @par Reentrancy
  *  This function may not be called from a callback.
@@ -1567,6 +1727,9 @@ GLFWAPI void glfwSetWindowShouldClose(GLFWwindow* window, int value);
  *
  *  @param[in] window The window whose title to change.
  *  @param[in] title The UTF-8 encoded window title.
+ *
+ *  @remarks __OS X:__ The window title will not be updated until the next time
+ *  you process events.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -1763,6 +1926,29 @@ GLFWAPI void glfwGetFramebufferSize(GLFWwindow* window, int* width, int* height)
  */
 GLFWAPI void glfwGetWindowFrameSize(GLFWwindow* window, int* left, int* top, int* right, int* bottom);
 
+/*! @brief Sets the icons for the specified window.
+ *
+ *  This function sets the icons to be used by the specified window.
+ *
+ *  @param[in] window The window to set the icons for.
+ *  @param[in] icons An array of @ref GLFWimage structs.
+ *  @param[in] count The number of icons in the array.
+ *
+ *  @note This function may only be called from the main thread.
+ *
+ *  @note From all the given icons GLFW will automatically pick the most
+ *  appropriate size for the different locations in which the application icon
+ *  can occur. For example on Windows, if a larger and a smaller icon are given
+ *  the larger icon will be used for the Alt+Tab screen and the smaller for the
+ *  taskbar.
+ *
+ *  @note If the icon does not exactly fit the operating systems requirements
+ *  for the icon size the icon will be automatically resized.
+ *
+ *  @ingroup window
+ */
+GLFWAPI void glfwSetWindowIcons(GLFWwindow* window, GLFWimage* icons, int count);
+
 /*! @brief Iconifies the specified window.
  *
  *  This function iconifies (minimizes) the specified window if it was
@@ -1884,6 +2070,14 @@ GLFWAPI GLFWmonitor* glfwGetWindowMonitor(GLFWwindow* window);
  *  return.
  *  @return The value of the attribute, or zero if an
  *  [error](@ref error_handling) occurred.
+ *
+ *  @remarks Framebuffer related hints are not window attributes.  See @ref
+ *  window_attribs_fb for more information.
+ *
+ *  @remarks Zero is a valid value for many window and context related
+ *  attributes so you cannot use a return value of zero as an indication of
+ *  errors.  However, this function should not fail as long as it is passed
+ *  valid arguments and the library has been [initialized](@ref intro_init).
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -2411,9 +2605,9 @@ GLFWAPI void glfwGetCursorPos(GLFWwindow* window, double* xpos, double* ypos);
  *  @param[in] ypos The desired y-coordinate, relative to the top edge of the
  *  client area.
  *
- *  @remarks __X11:__ Due to the asynchronous nature of a modern X desktop, it
- *  may take a moment for the window focus event to arrive.  This means you will
- *  not be able to set the cursor position directly after window creation.
+ *  @remarks __X11:__ Due to the asynchronous nature of X11, it may take
+ *  a moment for the window focus event to arrive.  This means you may not be
+ *  able to set the cursor position directly after window creation.
  *
  *  @par Thread Safety
  *  This function may only be called from the main thread.
@@ -2433,9 +2627,9 @@ GLFWAPI void glfwSetCursorPos(GLFWwindow* window, double xpos, double ypos);
  *  glfwSetCursor.  The cursor can be destroyed with @ref glfwDestroyCursor.
  *  Any remaining cursors are destroyed by @ref glfwTerminate.
  *
- *  The pixels are 32-bit little-endian RGBA, i.e. eight bits per channel.  They
- *  are arranged canonically as packed sequential rows, starting from the
- *  top-left corner.
+ *  The pixels are 32-bit, little-endian, non-premultiplied RGBA, i.e. eight
+ *  bits per channel.  They are arranged canonically as packed sequential rows,
+ *  starting from the top-left corner.
  *
  *  The cursor hotspot is specified in pixels, relative to the upper-left corner
  *  of the cursor image.  Like all other coordinate systems in GLFW, the X-axis
@@ -2911,7 +3105,9 @@ GLFWAPI void glfwSetClipboardString(GLFWwindow* window, const char* string);
 /*! @brief Returns the contents of the clipboard as a string.
  *
  *  This function returns the contents of the system clipboard, if it contains
- *  or is convertible to a UTF-8 encoded string.
+ *  or is convertible to a UTF-8 encoded string.  If the clipboard is empty or
+ *  if its contents cannot be converted, `NULL` is returned and a @ref
+ *  GLFW_FORMAT_UNAVAILABLE error is generated.
  *
  *  @param[in] window The window that will request the clipboard contents.
  *  @return The contents of the clipboard as a UTF-8 encoded string, or `NULL`
@@ -3136,15 +3332,15 @@ GLFWAPI int glfwExtensionSupported(const char* extension);
  *  without a current context will cause a @ref GLFW_NO_CURRENT_CONTEXT error.
  *
  *  @param[in] procname The ASCII encoded name of the function.
- *  @return The address of the function, or `NULL` if the function is
- *  unavailable or an [error](@ref error_handling) occurred.
+ *  @return The address of the function, or `NULL` if an [error](@ref
+ *  error_handling) occurred.
  *
- *  @remarks The addresses of a given function is not guaranteed to be the same
+ *  @remarks The address of a given function is not guaranteed to be the same
  *  between contexts.
  *
  *  @remarks This function may return a non-`NULL` address despite the
  *  associated version or extension not being available.  Always check the
- *  context version or extension string presence first.
+ *  context version or extension string first.
  *
  *  @par Pointer Lifetime
  *  The returned function pointer is valid until the context is destroyed or the
@@ -3162,6 +3358,24 @@ GLFWAPI int glfwExtensionSupported(const char* extension);
  */
 GLFWAPI GLFWglproc glfwGetProcAddress(const char* procname);
 
+
+/*************************************************************************
+ * Global definition cleanup
+ *************************************************************************/
+
+/* ------------------- BEGIN SYSTEM/COMPILER SPECIFIC -------------------- */
+
+#ifdef GLFW_WINGDIAPI_DEFINED
+ #undef WINGDIAPI
+ #undef GLFW_WINGDIAPI_DEFINED
+#endif
+
+#ifdef GLFW_CALLBACK_DEFINED
+ #undef CALLBACK
+ #undef GLFW_CALLBACK_DEFINED
+#endif
+
+/* -------------------- END SYSTEM/COMPILER SPECIFIC --------------------- */
 
 ENABLE_WARNINGS()
 

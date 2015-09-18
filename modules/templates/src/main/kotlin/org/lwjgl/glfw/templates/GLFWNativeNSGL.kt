@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
-val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW") {
+val GLFWNativeNSGL = "GLFWNativeNSGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW", binding = GLFWBinding) {
 	documentation = "Native bindings to the GLFW library's NSGL native access functions."
 
 	id(

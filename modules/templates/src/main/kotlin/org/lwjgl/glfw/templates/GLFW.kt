@@ -7,7 +7,7 @@ package org.lwjgl.glfw.templates
 import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 
-val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW") {
+val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", binding = GLFWBinding) {
 	javaImport (
 		"org.lwjgl.opengl.GL11"
 	)

@@ -70,8 +70,6 @@ License terms: http://lwjgl.org/license.php
 				<arg value="/I${src.include}\egl" if:true="${binding.egl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
-					<include name="${src.generated.native}/glfw/windows/*.c" unless:true="${binding.egl}"/>
-					<include name="${src.generated.native}/glfw/egl/*.c" if:true="${binding.egl}"/>
 				</fileset>
 			</arguments>
 		</cl>
@@ -124,7 +122,7 @@ License terms: http://lwjgl.org/license.php
 			<srcfiles refid="link-libraries"/>
 		</uptodate>
 
-		<antcall target="-link-if-necessary" />
+		<antcall target="-link-if-necessary"/>
 	</target>
 
 	<target name="-link-if-necessary" unless="link-uptodate">
@@ -166,6 +164,26 @@ License terms: http://lwjgl.org/license.php
 		</pathconvert>
 		<echo file="${bin.native}/objects.ant">${objects}</echo>
 
+		<!-- Export GLFW functions -->
+		<exec executable="dumpbin" failonerror="true" outputproperty="binding.glfw.dumpbin" taskname="GLFW dumpbin" if:set="binding.glfw">
+			<arg line="/LINKERMEMBER:2 ${lib}\windows\${build.arch}\glfw3.lib"/>
+		</exec>
+
+		<script language="javascript" if:set="binding.glfw">
+			var dumpbin = LWJGL.getProperty("binding.glfw.dumpbin");
+
+			var matches = dumpbin.match(/. glfw\w+/gm);
+			var exports = "";
+			for ( m in matches ) {
+			exports += "\n\t" + matches[m].substring(2);
+			}
+			LWJGL.setProperty("binding.exports", exports);
+		</script>
+
+		<echo file="${bin.native}/exports.def" if:set="binding.exports">LIBRARY LWJGL
+			EXPORTS${binding.exports}
+		</echo>
+
 		<!-- Link -->
 		<apply executable="cl" failonerror="true" parallel="true" taskname="Linker">
 			<arg line='/LD /WX /nologo /Fe:"${lib}\${LWJGL_LIBRARY}"'/>
@@ -174,7 +192,10 @@ License terms: http://lwjgl.org/license.php
 			<srcfile/>
 			<fileset refid="link-libraries"/>
 
-			<arg line="/link /OPT:REF,ICF /DLL"/>
+			<arg value="/link"/>
+			<arg value="/OPT:REF,ICF"/>
+			<arg value="/DLL"/>
+			<arg value="/DEF:${bin.native}\exports.def" if:set="binding.exports"/>
 			<arg value="user32.lib"/>
 			<arg value="Gdi32.lib"/>
 			<arg value="shell32.lib"/>

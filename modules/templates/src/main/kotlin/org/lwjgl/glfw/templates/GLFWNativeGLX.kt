@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.opengl.*
 import org.lwjgl.glfw.*
 
-val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW") {
+val GLFWNativeGLX = "GLFWNativeGLX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "linux", prefix = "GLFW", binding = GLFWBinding) {
 	documentation = "Native bindings to the GLFW library's GLX native access functions."
 
 	GLXContext(

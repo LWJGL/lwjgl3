@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
-val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW") {
+val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW", binding = GLFWBinding) {
 	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
 
 	CGDirectDisplayID(

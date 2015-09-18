@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import org.lwjgl.glfw.*
 import org.lwjgl.system.windows.*
 
-val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "windows", prefix = "GLFW") {
+val GLFWNativeWGL = "GLFWNativeWGL".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "windows", prefix = "GLFW", binding = GLFWBinding) {
 	documentation = "Native bindings to the GLFW library's WGL native access functions."
 
 	HGLRC(
