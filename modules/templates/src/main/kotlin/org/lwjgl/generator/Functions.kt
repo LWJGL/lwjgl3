@@ -11,9 +11,7 @@ import org.lwjgl.generator.ParameterType.INOUT
 import org.lwjgl.generator.ParameterType.OUT
 import java.io.PrintWriter
 import java.nio.ByteBuffer
-import java.util.ArrayList
-import java.util.HashMap
-import java.util.LinkedHashMap
+import java.util.*
 
 /*
 	****
@@ -53,11 +51,11 @@ abstract class Function(
 	val name: String = simpleName,
 	val documentation: String,
 	vararg val parameters: Parameter
-): TemplateElement() {
+) : TemplateElement() {
 
 	protected val paramMap: Map<String, Parameter> = {
 		val map = HashMap<String, Parameter>()
-		for ( param in parameters )
+		for (param in parameters)
 			map.put(param.name, param)
 		map
 	}();
@@ -95,7 +93,7 @@ class NativeClassFunction(
 	documentation: String,
 	val nativeClass: NativeClass,
 	vararg parameters: Parameter
-): Function(returns, simpleName, name, documentation, *parameters) {
+) : Function(returns, simpleName, name, documentation, *parameters) {
 
 	init {
 		validate();
@@ -707,7 +705,7 @@ class NativeClassFunction(
 			if ( returns has Construct ) {
 				val construct = returns[Construct]
 				print(", ${construct.firstArg}")
-				for ( arg in construct.otherArgs )
+				for (arg in construct.otherArgs)
 					print(", $arg")
 			}
 			print(")")
@@ -862,7 +860,7 @@ class NativeClassFunction(
 				if ( it has optional )
 					multiTypes = sequenceOf(PointerMapping.DATA_BYTE) + multiTypes
 
-				for ( autoType in multiTypes ) {
+				for (autoType in multiTypes) {
 					// Transform the AutoSize parameter, if there is one
 					getReferenceParam(AutoSize, param.name) let {
 						if ( it != null )
@@ -883,10 +881,10 @@ class NativeClassFunction(
 					val autoSizeParam = getParam { it has AutoSize && it[AutoSize].hasReference(param.name) } // required
 
 					val singleValue = param[SingleValue]
-					for ( autoType in multiTypes ) {
+					for (autoType in multiTypes) {
 						// Generate type1, type2, type3, type4 versions
 						// TODO: Make customizable? New modifier?
-						for ( i in 1..4 ) {
+						for (i in 1..4) {
 							// Transform the AutoSize parameter
 							transforms[autoSizeParam] = ExpressionTransform("(1 << ${autoType.byteShift}) * $i")
 
@@ -914,7 +912,7 @@ class NativeClassFunction(
 				val types = ArrayList<AutoTypeToken>(autoTypes.types.size())
 				autoTypes.types.forEach { types add it }
 
-				for ( autoType in types ) {
+				for (autoType in types) {
 					transforms[it] = AutoTypeParamTransform("${autoType.className}.${autoType.name()}")
 					transforms[bufferParam] = AutoTypeTargetTransform(autoType.mapping)
 					generateAlternativeMethod(name, "${autoType.name()} version of:", transforms)
@@ -1090,7 +1088,7 @@ class NativeClassFunction(
 			val autoSizeType = if ( autoSizeParam.nativeType.mapping === PointerMapping.DATA_INT ) "int" else "long"
 			println("\t\tint ${autoSizeParam.name} = $API_BUFFER.${autoSizeType}Param();")
 		}
-		for ( (qtype, transform) in transforms ) {
+		for ((qtype, transform) in transforms) {
 			if ( transform is APIBufferFunctionTransform<*> ) {
 				if ( !apiBufferSet ) {
 					println("\t\tAPIBuffer $API_BUFFER = apiBuffer();")
@@ -1294,6 +1292,6 @@ class NativeClassFunction(
 // TODO: Remove if KT-457 or KT-1183 are fixed.
 fun NativeClassFunction.generateAlternativeMethod(
 	writer: PrintWriter, name: String,
-    description: String,
-    transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>
+	description: String,
+	transforms: Map<QualifiedType, FunctionTransform<out QualifiedType>>
 ) = writer.generateAlternativeMethod(name, description, transforms)

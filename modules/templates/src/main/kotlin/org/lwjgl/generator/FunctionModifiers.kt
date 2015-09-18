@@ -1,15 +1,15 @@
 package org.lwjgl.generator
 
-import java.util.ArrayList
+import java.util.*
 
-class DependsOn(override val reference: String, val postfix: String? = null): FunctionModifier(), ReferenceModifier {
-	companion object: ModifierKey<DependsOn>
+class DependsOn(override val reference: String, val postfix: String? = null) : FunctionModifier(), ReferenceModifier {
+	companion object : ModifierKey<DependsOn>
 
 	override val isSpecial = false
 }
 
-class Reuse(override val reference: String): FunctionModifier(), ReferenceModifier {
-	companion object: ModifierKey<Reuse>
+class Reuse(override val reference: String) : FunctionModifier(), ReferenceModifier {
+	companion object : ModifierKey<Reuse>
 
 	override val isSpecial = true
 }
@@ -19,7 +19,7 @@ class Reuse(override val reference: String): FunctionModifier(), ReferenceModifi
  * This is useful for functions that have been added long after the initial release of a particular extension, or
  * as a workaround for buggy drivers.
  */
-val ignoreMissing = object: FunctionModifier() {
+object ignoreMissing : FunctionModifier() {
 	override val isSpecial = false
 }
 
@@ -31,8 +31,8 @@ class Capabilities(
 	val statement: String? = null,
 	/** If true, getInstance() will not be called and the expression will be assigned to the FUNCTION_ADDRESS variable directly. */
 	val override: Boolean = false
-): FunctionModifier() {
-	companion object: ModifierKey<Capabilities>
+) : FunctionModifier() {
+	companion object : ModifierKey<Capabilities>
 
 	override val isSpecial = true
 }
@@ -47,8 +47,8 @@ class Code(
 	val nativeBeforeCall: String? = null,
 	val nativeCall: String? = null,
 	val nativeAfterCall: String? = null
-): FunctionModifier() {
-	companion object: ModifierKey<Code> {
+) : FunctionModifier() {
+	companion object : ModifierKey<Code> {
 		// Used to avoid null checks
 		private val NO_STATEMENTS: List<Statement> = ArrayList(0)
 		val NO_CODE = Code()
@@ -67,6 +67,7 @@ class Code(
 
 	fun hasStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) false else statements.any { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
+
 	fun getStatements(statements: List<Code.Statement>, applyTo: ApplyTo) =
 		if ( statements === NO_STATEMENTS ) statements else statements.filter { it.applyTo === ApplyTo.BOTH || it.applyTo === applyTo }
 
@@ -103,10 +104,11 @@ class Code(
 		this.nativeAfterCall append nativeAfterCall
 	)
 }
+
 fun statement(code: String, applyTo: ApplyTo = ApplyTo.BOTH): List<Code.Statement> = arrayListOf(Code.Statement(code, applyTo))
 
 /** Marks a function without arguments as a macro. */
-val macro = object: FunctionModifier() {
+object macro : FunctionModifier() {
 	override val isSpecial = false
 
 	protected override fun validate(func: NativeClassFunction) {
@@ -115,8 +117,8 @@ val macro = object: FunctionModifier() {
 	}
 }
 
-class AccessModifier(val access: Access): FunctionModifier() {
-	companion object: ModifierKey<AccessModifier>
+class AccessModifier(val access: Access) : FunctionModifier() {
+	companion object : ModifierKey<AccessModifier>
 
 	override val isSpecial = false
 }
@@ -126,8 +128,8 @@ val private = AccessModifier(Access.PUBLIC)
 /** Makes the generated methods package private. */
 val internal = AccessModifier(Access.INTERNAL)
 
-class NativeName(val name: String): FunctionModifier() {
-	companion object: ModifierKey<NativeName>
+class NativeName(val name: String) : FunctionModifier() {
+	companion object : ModifierKey<NativeName>
 
 	override val isSpecial = false
 }
