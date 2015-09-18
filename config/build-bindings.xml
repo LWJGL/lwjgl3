@@ -17,9 +17,9 @@ This script is included in /config/build-definitions.xml.
 	<property name="binding.openal" value="true"/>
 	<property name="binding.opencl" value="true"/>
 	<property name="binding.opengl" value="true"/>
-	<property name="binding.opengles" value="false"/>
+	<property name="binding.opengles" value="true"/>
 
-	<property name="binding.egl" value="false"/>
+	<property name="binding.egl" value="true"/>
 
 	<!-- Set the path to the Oculus SDK to enable. -->
 	<property name="OCULUS_SDK_PATH" location="../OculusSDK" relative="false"/>
