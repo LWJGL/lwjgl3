@@ -71,6 +71,19 @@ val stbir_filter = typedef(int, "stbir_filter")
 val stbir_colorspace = typedef(int, "stbir_colorspace")
 val stbir_datatype = typedef(int, "stbir_datatype")
 
+// stb_image_write.h
+
+val stbi_write_func = "stbi_write_func_p".callback(
+	STB_PACKAGE, void, "STBIWriteCallback",
+	"The {@code stbi_write_func} callback.",
+	void_p.IN("context", "the context passed to the write function"),
+	void_p.IN("data", "the data to write"),
+	AutoSize("data") _ int.IN("size", "the number of bytes in {@code data}"),
+	samConstructor = "STBImageWrite"
+) {
+	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
+}
+
 // stb_rect_pack.h
 
 val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined

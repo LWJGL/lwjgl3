@@ -9,14 +9,15 @@ import org.lwjgl.stb.*
 
 val stb_image_write = "STBImageWrite".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_") {
 	nativeDirective(
-			"""#ifdef LWJGL_WINDOWS
-	#define _NO_CRT_STDIO_INLINE
+"""#ifdef LWJGL_WINDOWS
+	__pragma(warning(disable : 4710))
 #endif
 #define STBIW_ASSERT(x)""", beforeIncludes = true)
 
 	includeSTBAPI(
 		"""#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"""")
+#include "stb_image_write.h"
+#define stbi_write_func_p stbi_write_func *""")
 
 	documentation =
 		"""
@@ -37,6 +38,16 @@ int stbi_write_png(char const *filename, int w, int h, int comp, const void *dat
 int stbi_write_bmp(char const *filename, int w, int h, int comp, const void *data);
 int stbi_write_tga(char const *filename, int w, int h, int comp, const void *data);
 int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *data);""")}
+		There are also four equivalent functions that use an arbitrary write function. You are expected to open/close your file-equivalent before and after
+		calling these:
+		${codeBlock("""
+int stbi_write_png_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data, int stride_in_bytes);
+int stbi_write_bmp_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data);
+int stbi_write_tga_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const void  *data);
+int stbi_write_hdr_to_func(stbi_write_func *func, void *context, int w, int h, int comp, const float *data);""")}
+		where the callback is:
+		${codeBlock("""
+void stbi_write_func(void *context, void *data, int size);""")}
 		The functions create an image file defined by the parameters. The image is a rectangle of pixels stored from left-to-right, top-to-bottom. Each pixel
 		contains {@code comp} channels of data stored interleaved with 8-bits per channel, in the following order: 1=Y, 2=YA, 3=RGB, 4=RGBA. (Y is monochrome
 		color.) The rectangle is {@code w} pixels wide and {@code h} pixels tall. The {@code *data} pointer points to the first byte of the top-left-most
@@ -62,7 +73,7 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		Check("w * h * comp") _ const _ void_p.IN("data", "the image data"),
 		int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
-	    returnDoc = "1 on success, 0 on failure"
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	int(
@@ -77,7 +88,9 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		write["w"],
 		write["h"],
 		write["comp"],
-		write["data"]
+		write["data"],
+
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	int(
@@ -93,7 +106,9 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		write["w"],
 		write["h"],
 		write["comp"],
-		write["data"]
+		write["data"],
+
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	macro _ (address _ int_p)(
@@ -101,7 +116,7 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		"Returns the address of the global variable {@code stbi_write_tga_with_rle}."
 	)
 
-	int(
+	val write_hdr = int(
 		"write_hdr",
 		"""
 		Writes an HDR image file.
@@ -114,6 +129,65 @@ int stbi_write_hdr(char const *filename, int w, int h, int comp, const void *dat
 		write["w"],
 		write["h"],
 		write["comp"],
-		Check("w * h * comp") _ const _ float_p.IN("data", "the image data")
+		Check("w * h * comp") _ const _ float_p.IN("data", "the image data"),
+
+		returnDoc = "1 on success, 0 on failure"
+	)
+
+	val write_to_func = int(
+		"write_png_to_func",
+		"Callback version of #write_png().",
+
+		stbi_write_func.IN("func", "the callback function"),
+		nullable _ void_p.IN("context", "a context that will be passed to {@code func}"),
+		write["w"],
+		write["h"],
+		write["comp"],
+		write["data"],
+		write["stride_in_bytes"],
+
+		returnDoc = "1 on success, 0 on failure"
+	)
+
+	int(
+		"write_bmp_to_func",
+		"Callback version of #write_bmp().",
+
+		write_to_func["func"],
+		write_to_func["context"],
+		write["w"],
+		write["h"],
+		write["comp"],
+		write["data"],
+
+		returnDoc = "1 on success, 0 on failure"
+	)
+
+	int(
+		"write_tga_to_func",
+		"Callback version of #write_tga().",
+
+		write_to_func["func"],
+		write_to_func["context"],
+		write["w"],
+		write["h"],
+		write["comp"],
+		write["data"],
+
+		returnDoc = "1 on success, 0 on failure"
+	)
+
+	int(
+		"write_hdr_to_func",
+		"Callback version of #write_hdr().",
+
+		write_to_func["func"],
+		write_to_func["context"],
+		write["w"],
+		write["h"],
+		write["comp"],
+		write_hdr["data"],
+
+		returnDoc = "1 on success, 0 on failure"
 	)
 }

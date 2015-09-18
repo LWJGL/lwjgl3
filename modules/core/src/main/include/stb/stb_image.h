@@ -1,4 +1,4 @@
-/* stb_image - v2.07 - public domain image loader - http://nothings.org/stb_image.h
+/* stb_image - v2.08 - public domain image loader - http://nothings.org/stb_image.h
                                      no warranty implied; use at your own risk
 
    Do this:
@@ -146,6 +146,7 @@
 
 
    Latest revision history:
+      2.08  (2015-09-13) fix to 2.07 cleanup, reading RGB PSD as RGBA
       2.07  (2015-09-13) partial animated GIF support
                          limited 16-bit PSD support
                          minor bugs, code cleanup, and compiler warnings
@@ -211,6 +212,7 @@
                                                  Phil Jordan
                                                  Nathan Reed
                                                  Michaelangel007@github
+                                                 Nick Verigakis
 
 LICENSE
 
@@ -1300,7 +1302,8 @@ static stbi__uint32 stbi__get32be(stbi__context *s)
    return (z << 16) + stbi__get16be(s);
 }
 
-#if defined (STBI_NO_BMP) && (STBI_NO_TGA) && (STBI_NO_GIF)
+#if defined(STBI_NO_BMP) && defined(STBI_NO_TGA) && defined(STBI_NO_GIF)
+// nothing
 #else
 static int stbi__get16le(stbi__context *s)
 {
@@ -5214,15 +5217,16 @@ static stbi_uc *stbi__psd_load(stbi__context *s, int *x, int *y, int *comp, int 
          stbi_uc *p;
 
          p = out + channel;
-         if (channel > channelCount) {
+         if (channel >= channelCount) {
             // Fill this channel with default data.
+            stbi_uc val = channel == 3 ? 255 : 0;
             for (i = 0; i < pixelCount; i++, p += 4)
-               *p = channel == 3 ? 255 : 0;
+               *p = val;
          } else {
             // Read the data.
             if (bitdepth == 16) {
                for (i = 0; i < pixelCount; i++, p += 4)
-                  *p = stbi__get16be(s) >> 8;
+                  *p = (stbi_uc) (stbi__get16be(s) >> 8);
             } else {
                for (i = 0; i < pixelCount; i++, p += 4)
                   *p = stbi__get8(s);
@@ -5764,7 +5768,7 @@ static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, i
             if (o == NULL) return NULL;
 
             if (prev_trans != -1)
-               g->pal[g->transparent][3] = prev_trans;
+               g->pal[g->transparent][3] = (stbi_uc) prev_trans;
 
             return o;
          }
@@ -5795,6 +5799,8 @@ static stbi_uc *stbi__gif_load_next(stbi__context *s, stbi__gif *g, int *comp, i
             return stbi__errpuc("unknown code", "Corrupt GIF");
       }
    }
+
+   STBI_NOTUSED(req_comp);
 }
 
 static stbi_uc *stbi__gif_load(stbi__context *s, int *x, int *y, int *comp, int req_comp)
@@ -6355,6 +6361,7 @@ STBIDEF int stbi_info_from_callbacks(stbi_io_callbacks const *c, void *user, int
 
 /*
    revision history:
+      2.08  (2015-09-13) fix to 2.07 cleanup, reading RGB PSD as RGBA
       2.07  (2015-09-13) fix compiler warnings
                          partial animated GIF support
                          limited 16-bit PSD support
