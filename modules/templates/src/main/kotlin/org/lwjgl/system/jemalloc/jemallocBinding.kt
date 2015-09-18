@@ -8,7 +8,7 @@ import org.lwjgl.generator.*
 import java.io.PrintWriter
 
 object jemallocBinding : APIBinding(JEMALLOC_PACKAGE, "*DUMMY*", callingConvention = CallingConvention.DEFAULT) {
-	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)});"
+	override fun getFunctionAddressCall(function: NativeClassFunction) = "checkFunctionAddress(${super.getFunctionAddressCall(function)})"
 
 	override fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass) {
 		println("\t// --- [ Function Addresses ] ---\n")
