@@ -116,11 +116,7 @@ The supported properties are:
 	Can be used to override the LWJGL library name. It can also be an absolute path.
 * org.lwjgl.librarypath [DYNAMIC]  
     Takes priority over java.library.path. It may contain one or more directory paths, separated by the platform path separator (: or ;).
-* org.lwjgl.util.Debug [STATIC]  
-	Set to true to enable LWJGL's debug mode. There will be logged messages on stderr and extra runtime checks (some potentially expensive, performance-wise).
-* org.lwjgl.util.NoChecks [STATIC]  
-	Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but may they be disabled for released applications.
-* org.lwjgl.util.BufferAlign [STATIC]  
+* org.lwjgl.util.BufferAlign [STATIC]
 	Sets the alignment of buffers allocated by BufferUtils. By default, buffer allocations will be unaligned (whatever ByteBuffer.allocateDirect returns). Supported values:
 	- *cache-line*
 		Cache-line alignment (usually 64 bytes)
@@ -128,16 +124,35 @@ The supported properties are:
 		Default alignment. The JDK uses 8 byte alignment for all direct ByteBuffers.
 	- &lt;*number*&gt;  
 		Custom alignment. Must be a power-of-two integer, greater than 8.
+* org.lwjgl.system.allocator [STATIC]
+	Sets the allocator used for the MemoryUtil explicit memory management API (memAlloc/memFree/etc). Supported values:
+	- *jemalloc*
+		The allocator provided by the jemalloc library
+	- *system*
+		The default system memory allocator
+* org.lwjgl.util.Debug [STATIC]  
+	Set to true to enable LWJGL's debug mode. There will be logged messages on stderr and extra runtime checks (some potentially expensive, performance-wise).
+* org.lwjgl.util.NoChecks [STATIC]  
+	Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but may they be disabled for released applications.
+* org.lwjgl.egl.libname [DYNAMIC]
+* org.lwjgl.glfw.libname [DYNAMIC]
 * org.lwjgl.openal.libname [DYNAMIC]
 * org.lwjgl.opencl.libname [DYNAMIC]
-* org.lwjgl.opengl.libname [DYNAMIC]  
+* org.lwjgl.opengl.libname [DYNAMIC]
+* org.lwjgl.opengles.libname [DYNAMIC]
+* org.lwjgl.system.jemalloc.libname [DYNAMIC]
 	Can be used to override the library name of the corresponding library. It can also be an absolute path.
-* org.lwjgl.opengl.maxVersion [STATIC]  
-	Can be used to limit the maximum available OpenGL version. This can be useful to ensure that an application has not accidentally used features only available in a higher OpenGL version.
+* org.lwjgl.opengl.maxVersion [STATIC]
+* org.lwjgl.opengles.maxVersion [STATIC]
+	Can be used to limit the maximum available OpenGL (ES) version. This can be useful to ensure that an application has not accidentally used features only available in a higher OpenGL version.
+* org.lwjgl.egl.explicitInit [STATIC]
 * org.lwjgl.openal.explicitInit [STATIC]
 * org.lwjgl.opencl.explicitInit [STATIC]
-* org.lwjgl.opengl.explicitInit [STATIC]  
+* org.lwjgl.opengl.explicitInit [STATIC]
+* org.lwjgl.opengles.explicitInit [STATIC]
 	By default, LWJGL will automatically initialize the corresponding library, when it is first accessed. Set this property to disable this behavior.
+* org.lwjgl.glfw.EGL [STATIC]
+	Set to true to use the EGL context API. The *org.lwjgl.glfw.libname* property must also be set to a GLFW implementation that supports EGL.
 
 # LIBRARY DEPENDENCIES
 * Kotlin
