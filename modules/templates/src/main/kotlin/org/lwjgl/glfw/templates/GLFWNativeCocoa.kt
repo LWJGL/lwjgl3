@@ -9,14 +9,6 @@ import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
 val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW") {
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_COCOA", beforeIncludes = true)
-	nativeDirective("#define GLFW_EXPOSE_NATIVE_NSGL", beforeIncludes = true)
-
-	nativeImport(
-		"glfw3.h",
-		"glfw3native.h"
-	)
-
 	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
 
 	CGDirectDisplayID(
@@ -43,19 +35,6 @@ val GLFWMacOSX = "GLFWMacOSX".nativeClass(packageName = GLFW_PACKAGE, nativeSubP
 
 		GLFWwindow.IN("window", "the GLFW window"),
 		returnDoc = "The ${code("NSWindow")} of the specified window, or nil if an error occurred.",
-		since = "GLFW 3.0"
-	)
-
-	id(
-		"GetNSGLContext",
-		"""
-		Returns the ${code("NSOpenGLContext")} of the specified GLFW window.
-
-		Note: This function may be called from any thread. Access is not synchronized.
-		""",
-
-		GLFWwindow.IN("window", "the GLFW window"),
-		returnDoc = "The ${code("NSOpenGLContext")} of the specified window, or nil if an error occurred.",
 		since = "GLFW 3.0"
 	)
 }
