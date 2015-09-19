@@ -172,17 +172,18 @@ License terms: http://lwjgl.org/license.php
 		<script language="javascript" if:set="binding.glfw">
 			var dumpbin = LWJGL.getProperty("binding.glfw.dumpbin");
 
-			var matches = dumpbin.match(/. glfw\w+/gm);
+			var x64 = LWJGL.getProperty("build.arch") == "x64";
+			var prefix = x64 ? '' : '_';
+
+			var matches = dumpbin.match(new RegExp(". " + prefix + "glfw\\w+", "gm"));
 			var exports = "";
-			for ( m in matches ) {
-			exports += "\n\t" + matches[m].substring(2);
-			}
+			for ( m in matches )
+				exports += "\n\t" + matches[m].substring(2 + prefix.length);
+
 			LWJGL.setProperty("binding.exports", exports);
 		</script>
 
-		<echo file="${bin.native}/exports.def" if:set="binding.exports">LIBRARY LWJGL
-			EXPORTS${binding.exports}
-		</echo>
+		<echo file="${bin.native}/exports.def" if:set="binding.exports">EXPORTS${binding.exports}</echo>
 
 		<!-- Link -->
 		<apply executable="cl" failonerror="true" parallel="true" taskname="Linker">
