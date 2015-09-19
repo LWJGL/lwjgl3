@@ -44,7 +44,6 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/macosx/${build.arch}/">
 		<include name="libffi.a"/>
-		<include name="libglfw3.a" if:true="${binding.glfw}"/>
 	</fileset>
 
 	<property name="macosx-version-min" value="10.7"/>
@@ -104,7 +103,6 @@ License terms: http://lwjgl.org/license.php
 				<arg value="-I${src.include.rel}/glfw"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
-					<include name="${src.generated.native}/glfw/macosx/*.c"/>
 				</fileset>
 			</arguments>
 		</compile>
@@ -144,9 +142,9 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/macosx/x64"/>
 
 		<update-dependency name="libffi" artifact="x64/libffi.a"/>
-		<update-dependency name="glfw3" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
 
 		<update-dependency name="jemalloc" artifact="x64/libjemalloc.dylib" dest="${lib}"/>
+		<update-dependency name="glfw3" artifact="x64/libglfw.dylib" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32" artifact="x64/libopenal.dylib" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
@@ -155,10 +153,6 @@ License terms: http://lwjgl.org/license.php
 			<srcfile/>
 			<arg line='-dynamiclib -Wl,-no_compact_unwind -mmacosx-version-min=${macosx-version-min} -o ${lib}/${LWJGL_LIBRARY}'/>
 			<arg line="-framework AppKit"/>
-			<!--<arg line="-framework CoreFoundation"/>-->
-			<arg line="-framework CoreVideo"/>
-			<!--<arg line="-framework Cocoa"/>-->
-			<arg line="-framework IOKit"/>
 
 			<fileset refid="link-objects"/>
 			<fileset refid="link-libraries"/>

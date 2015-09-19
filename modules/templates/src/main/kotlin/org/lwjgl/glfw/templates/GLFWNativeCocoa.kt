@@ -9,7 +9,7 @@ import org.lwjgl.glfw.*
 import org.lwjgl.system.macosx.*
 
 val GLFWNativeCocoa = "GLFWNativeCocoa".nativeClass(packageName = GLFW_PACKAGE, nativeSubPath = "macosx", prefix = "GLFW", binding = GLFWBinding) {
-	documentation = "Native bindings to the GLFW library's MacOS X native access functions."
+	documentation = "Native bindings to the GLFW library's Cocoa native access functions."
 
 	CGDirectDisplayID(
 		"GetCocoaMonitor",

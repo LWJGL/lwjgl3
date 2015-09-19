@@ -12,10 +12,6 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		"org.lwjgl.opengl.GL11"
 	)
 
-	nativeImport (
-		"glfw3.h"
-	)
-
 	documentation =
 		"""
 		Native bindings to the <a href="http://www.glfw.org/docs/latest/">GLFW</a> library.

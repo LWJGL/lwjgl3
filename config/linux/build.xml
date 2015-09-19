@@ -16,7 +16,6 @@ License terms: http://lwjgl.org/license.php
 	<fileset id="link-objects" dir="${bin.native}" includes="*.o"/>
 	<fileset id="link-libraries" dir="${lib}/linux/${build.arch}/">
 		<include name="libffi.a"/>
-		<include name="libglfw3.a" if:true="${binding.glfw}"/>
 	</fileset>
 
 	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
@@ -84,11 +83,8 @@ License terms: http://lwjgl.org/license.php
 		<compile if:true="${binding.glfw}">
 			<arguments>
 				<arg value="-I${src.include.rel}/glfw"/>
-				<arg value="-I${src.include.rel}/egl" if:true="${binding.egl}"/>
 				<fileset dir=".">
 					<include name="${src.generated.native}/glfw/*.c"/>
-					<include name="${src.generated.native}/glfw/linux/*.c"/>
-					<include name="${src.generated.native}/glfw/egl/*.c" if:true="${binding.egl}"/>
 				</fileset>
 			</arguments>
 		</compile>
@@ -135,9 +131,9 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux/x86"/>
 
 		<update-dependency name="libffi (x86)" artifact="x86/libffi.a"/>
-		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw3.a" if:true="${binding.glfw}"/>
 
 		<update-dependency name="jemalloc (x86)" artifact="x86/libjemalloc.so" dest="${lib}/libjemalloc32.so"/>
+		<update-dependency name="glfw3 (x86)" artifact="x86/libglfw.so" dest="${lib}/libglfw32.so" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x86)" artifact="x86/libopenal.so" dest="${lib}/libopenal32.so" if:true="${binding.openal}"/>
 	</target>
 
@@ -146,9 +142,9 @@ License terms: http://lwjgl.org/license.php
 		<mkdir dir="${lib}/linux/x64"/>
 
 		<update-dependency name="libffi (x64)" artifact="x64/libffi.a"/>
-		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw3.a" if:true="${binding.glfw}"/>
 
 		<update-dependency name="jemalloc (x64)" artifact="x64/libjemalloc.so" dest="${lib}" if:true="${binding.openal}"/>
+		<update-dependency name="glfw3 (x64)" artifact="x64/libglfw.so" dest="${lib}" if:true="${binding.glfw}"/>
 		<update-dependency name="OpenAL32 (x64)" artifact="x64/libopenal.so" dest="${lib}" if:true="${binding.openal}"/>
 	</target>
 
@@ -176,12 +172,6 @@ License terms: http://lwjgl.org/license.php
 			<arg value="-lm"/>
 			<arg value="-lrt"/>
 			<arg value="-lpthread"/>
-			<arg value="-lX11"/>
-			<arg value="-lXi"/>
-			<arg value="-lXrandr"/>
-			<arg value="-lXxf86vm"/>
-			<arg value="-lXinerama"/>
-			<arg value="-lXcursor"/>
 
 			<arg line="-Xlinker --version-script -Xlinker ${version.script}"/>
 

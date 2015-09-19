@@ -6,7 +6,6 @@ package org.lwjgl.glfw;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
-import org.lwjgl.Sys;
 import org.lwjgl.system.FunctionProvider;
 
 /**
@@ -29,7 +28,7 @@ final class LibGLFW {
 
 	// TODO: Refactor when GLFW adds client library selection
 	static {
-		FunctionProvider functionProvider = LWJGLUtil.loadLibraryNative(System.getProperty("org.lwjgl.glfw.libname", Sys.JNI_LIBRARY_NAME));
+		FunctionProvider functionProvider = LWJGLUtil.loadLibraryNative(System.getProperty("org.lwjgl.glfw.libname", "glfw"));
 
 		__GLFW = new GLFW(functionProvider);
 
