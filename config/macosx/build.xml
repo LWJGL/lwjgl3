@@ -31,6 +31,7 @@ License terms: http://lwjgl.org/license.php
 		</sequential>
 	</macrodef>
 
+	<find-sdkroot version="10.11"/>
 	<find-sdkroot version="10.10"/>
 	<find-sdkroot version="10.9"/>
 	<find-sdkroot version="10.8"/>
