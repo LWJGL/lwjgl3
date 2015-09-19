@@ -26,7 +26,14 @@ public final class Sys {
 
 	static {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
-		LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+		try {
+			LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+		} catch (Throwable t) {
+			// Failed, attempt to extract the natives from the classpath
+			SharedLibraryLoader.load();
+			// and try again
+			LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+		}
 	}
 
 	private Sys() {

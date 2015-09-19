@@ -116,6 +116,8 @@ The supported properties are:
 	Can be used to override the LWJGL library name. It can also be an absolute path.
 * org.lwjgl.librarypath [DYNAMIC]  
     Takes priority over java.library.path. It may contain one or more directory paths, separated by the platform path separator (: or ;).
+* org.lwjgl.SLLTempDirectory [DYNAMIC]
+	Changes the default temporary directory name created by the SharedLibraryLoader.
 * org.lwjgl.util.BufferAlign [STATIC]
 	Sets the alignment of buffers allocated by BufferUtils. By default, buffer allocations will be unaligned (whatever ByteBuffer.allocateDirect returns). Supported values:
 	- *cache-line*

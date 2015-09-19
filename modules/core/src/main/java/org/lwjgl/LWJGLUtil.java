@@ -120,14 +120,14 @@ public final class LWJGLUtil {
 		if ( override != null ) {
 			String libName = mapLibraryName(name);
 			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) ) {
-				LWJGLUtil.log("Loaded library: " + libName);
+				LWJGLUtil.log("Loaded library from org.lwjgl.librarypath: " + libName);
 				return;
 			}
 		}
 
 		// Then java.library.path
 		System.loadLibrary(name);
-		LWJGLUtil.log("Loaded library: " + name);
+		LWJGLUtil.log("Loaded library from java.library.path: " + name);
 	}
 
 	/**
