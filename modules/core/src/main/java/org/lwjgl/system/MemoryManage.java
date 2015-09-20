@@ -36,10 +36,17 @@ final class MemoryManage {
 				if ( LWJGLUtil.DEBUG )
 					e.printStackTrace();
 				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library.");
+				return new StdlibAllocator();
+			}
+		} else if ( "system".equals(allocator) ) {
+			return new StdlibAllocator();
+		} else {
+			try {
+				return (MemoryAllocator)Class.forName(allocator).newInstance();
+			} catch (Exception e) {
+				throw new RuntimeException("Failed to instantiate custom memory allocator: " + allocator);
 			}
 		}
-
-		return new StdlibAllocator();
 	}
 
 	/** stdlib memory allocator. */
