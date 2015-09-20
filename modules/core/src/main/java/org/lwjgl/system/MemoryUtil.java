@@ -77,14 +77,21 @@ public final class MemoryUtil {
 		-------------------------------------
 	    ------------------------------------- */
 
+	/** The interface implemented by the memory allocator used by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc). */
 	public interface MemoryAllocator {
 
+		/** Called by {@link MemoryUtil#memAlloc}. */
 		long malloc(long size);
+		/** Called by {@link MemoryUtil#memCalloc}. */
 		long calloc(long num, long size);
+		/** Called by {@link MemoryUtil#memRealloc}. */
 		long realloc(long ptr, long size);
+		/** Called by {@link MemoryUtil#memFree}. */
 		void free(long ptr);
 
+		/** Called by {@link MemoryUtil#memAlignedAlloc}. */
 		long aligned_alloc(long alignment, long size);
+		/** Called by {@link MemoryUtil#memAlignedFree}. */
 		void aligned_free(long ptr);
 
 	}
