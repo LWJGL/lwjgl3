@@ -174,7 +174,7 @@ final class MemoryManage {
 		@Override
 		public long realloc(long ptr, long size) {
 			long address = allocator.realloc(ptr, size);
-			if ( address != NULL && ptr != NULL )
+			if ( address != NULL )
 				untrack(ptr);
 			return track(address, size);
 		}
@@ -219,6 +219,9 @@ final class MemoryManage {
 		}
 
 		private static void untrack(long address) {
+			if ( address == NULL )
+				return;
+
 			Allocation allocation = ALLOCATIONS.remove(address);
 			if ( allocation == null )
 				throw new IllegalStateException("The memory address specified is not being tracked");
