@@ -70,6 +70,12 @@ public final class MemoryUtil {
 	private MemoryUtil() {
 	}
 
+	/*  -------------------------------------
+		-------------------------------------
+			EXPLICIT MEMORY MANAGEMENT API
+		-------------------------------------
+	    ------------------------------------- */
+
 	// --- [ memAlloc ] ---
 
 	/** Unsafe version of {@link #memAlloc}. */
@@ -433,6 +439,12 @@ public final class MemoryUtil {
 	public static void memReport(MemoryAllocationReport report, Aggregate groupByStackTrace, boolean groupByThread) {
 		DebugAllocator.report(report, groupByStackTrace, groupByThread);
 	}
+
+	/*  -------------------------------------
+		-------------------------------------
+				BUFFER MANAGEMENT API
+		-------------------------------------
+	    ------------------------------------- */
 
 	// --- [ memAddress0 ] ---
 
@@ -931,7 +943,11 @@ public final class MemoryUtil {
 		}
 	}
 
-	// --- [ Direct memory access ] ---
+	/*  -------------------------------------
+		-------------------------------------
+				UNSAFE MEMORY ACCESS API
+		-------------------------------------
+	    ------------------------------------- */
 
 	/**
 	 * Sets all bytes in a specified block of memory to a fixed value (usually zero).
@@ -1017,7 +1033,11 @@ public final class MemoryUtil {
 		ACCESSOR.memPutAddress(ptr, value);
 	}
 
-	// --- [ JNI ] ---
+	/*  -------------------------------------
+		-------------------------------------
+				JNI UTILITIES API
+		-------------------------------------
+	    ------------------------------------- */
 
 	/**
 	 * Returns the object that the specified global reference points to.
@@ -1061,7 +1081,11 @@ public final class MemoryUtil {
 	 */
 	public static native void memDeleteWeakGlobalRef(long globalRef);
 
-	// --- [ Text codecs ] ---
+	/*  -------------------------------------
+		-------------------------------------
+			TEXT ENCODING/DECODING API
+		-------------------------------------
+	    ------------------------------------- */
 
 	/**
 	 * Returns a ByteBuffer containing the specified text ASCII encoded and null-terminated. If text is null, null is returned.
