@@ -73,12 +73,16 @@ public class ALDevice extends PointerWrapper {
 		if ( LWJGLUtil.CHECKS )
 			checkFunctionAddress(alcOpenDevice);
 
-		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName);
-		long device = invokePP(alcOpenDevice, memAddressSafe(nameBuffer));
-		if ( device == NULL )
-			throw new RuntimeException("Failed to open the device.");
+		ByteBuffer nameBuffer = deviceName == null ? null : memEncodeUTF8(deviceName, BufferAllocator.MALLOC);
+		try {
+			long device = invokePP(alcOpenDevice, memAddressSafe(nameBuffer));
+			if ( device == NULL )
+				throw new RuntimeException("Failed to open the device.");
 
-		return new ALDevice(device);
+			return new ALDevice(device);
+		} finally {
+			memFree(nameBuffer);
+		}
 	}
 
 }

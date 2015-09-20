@@ -96,6 +96,29 @@ public final class MemoryUtil {
 
 	}
 
+	/** This enum can be passed to APIs that support configurable memory allocators. */
+	public enum BufferAllocator {
+		/** Allocate memory using {@link BufferUtils}, i.e. {@link ByteBuffer#allocateDirect}. */
+		NIO {
+			@Override
+			public ByteBuffer allocate(int size) {
+				return BufferUtils.createByteBuffer(size);
+			}
+		},
+		/**
+		 * Allocate memory using {@link MemoryUtil#memAlloc}. {@link ByteBuffer} instances allocated using this allocator must be explicitly freed using
+		 * {@link MemoryUtil#memFree}.
+		 */
+		MALLOC {
+			@Override
+			public ByteBuffer allocate(int size) {
+				return MemoryUtil.memAlloc(size);
+			}
+		};
+
+		public abstract ByteBuffer allocate(int size);
+	}
+
 	/**
 	 * Returns the {@link MemoryAllocator} instance used internally by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc).
 	 *
@@ -1130,7 +1153,19 @@ public final class MemoryUtil {
 	 * @return the encoded text or null
 	 */
 	public static ByteBuffer memEncodeASCII(CharSequence text) {
-		return memEncodeASCII(text, true);
+		return memEncodeASCII(text, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeASCII(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text      the text to encode
+	 * @param allocator the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeASCII(CharSequence text, BufferAllocator allocator) {
+		return memEncodeASCII(text, true, allocator);
 	}
 
 	/**
@@ -1142,10 +1177,23 @@ public final class MemoryUtil {
 	 * @return the encoded text or null
 	 */
 	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated) {
+		return memEncodeASCII(text, nullTerminated, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeASCII(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param allocator      the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeASCII(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = BufferUtils.createByteBuffer(text.length() + (nullTerminated ? 1 : 0));
+		ByteBuffer target = allocator.allocate(text.length() + (nullTerminated ? 1 : 0));
 		memEncodeASCII(text, nullTerminated, target);
 		return target;
 	}
@@ -1195,7 +1243,19 @@ public final class MemoryUtil {
 	 * @return the encoded text or null
 	 */
 	public static ByteBuffer memEncodeUTF8(CharSequence text) {
-		return memEncodeUTF8(text, true);
+		return memEncodeUTF8(text, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeUTF8(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text      the text to encode
+	 * @param allocator the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeUTF8(CharSequence text, BufferAllocator allocator) {
+		return memEncodeUTF8(text, true, allocator);
 	}
 
 	/**
@@ -1207,10 +1267,23 @@ public final class MemoryUtil {
 	 * @return the encoded text or null
 	 */
 	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated) {
+		return memEncodeUTF8(text, nullTerminated, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeUTF8(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param allocator      the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeUTF8(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = BufferUtils.createByteBuffer(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
+		ByteBuffer target = allocator.allocate(memEncodedLengthUTF8(text) + (nullTerminated ? 1 : 0));
 		memEncodeUTF8(text, nullTerminated, target);
 		return target;
 	}
@@ -1320,7 +1393,19 @@ public final class MemoryUtil {
 	 * @return the encoded text
 	 */
 	public static ByteBuffer memEncodeUTF16(CharSequence text) {
-		return memEncodeUTF16(text, true);
+		return memEncodeUTF16(text, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeUTF16(CharSequence)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text      the text to encode
+	 * @param allocator the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeUTF16(CharSequence text, BufferAllocator allocator) {
+		return memEncodeUTF16(text, true, allocator);
 	}
 
 	/**
@@ -1332,10 +1417,23 @@ public final class MemoryUtil {
 	 * @return the encoded text
 	 */
 	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated) {
+		return memEncodeUTF16(text, nullTerminated, BufferAllocator.NIO);
+	}
+
+	/**
+	 * Same as {@link #memEncodeUTF16(CharSequence, boolean)}, with an explicit allocator to use for allocating the returned buffer.
+	 *
+	 * @param text           the text to encode
+	 * @param nullTerminated if true, the text will be terminated with a '\0'.
+	 * @param allocator      the allocator to use
+	 *
+	 * @return the encoded text or null
+	 */
+	public static ByteBuffer memEncodeUTF16(CharSequence text, boolean nullTerminated, BufferAllocator allocator) {
 		if ( text == null )
 			return null;
 
-		ByteBuffer target = BufferUtils.createByteBuffer((text.length() + (nullTerminated ? 1 : 0)) << 1);
+		ByteBuffer target = allocator.allocate((text.length() + (nullTerminated ? 1 : 0)) << 1);
 		memEncodeUTF16(text, nullTerminated, target);
 		return target;
 	}
