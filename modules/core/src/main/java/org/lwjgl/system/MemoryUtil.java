@@ -9,7 +9,6 @@ import org.lwjgl.LWJGLUtil;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.system.MemoryAccess.MemoryAccessor;
 import org.lwjgl.system.MemoryManage.DebugAllocator;
-import org.lwjgl.system.MemoryManage.MemoryAllocator;
 import org.lwjgl.system.MemoryUtil.MemoryAllocationReport.Aggregate;
 
 import java.nio.*;
@@ -40,7 +39,9 @@ public final class MemoryUtil {
 	/** Alias for the null pointer address. */
 	public static final long NULL = 0L;
 
-	private static final MemoryAccessor  ACCESSOR;
+	private static final MemoryAccessor ACCESSOR;
+
+	private static final MemoryAllocator ALLOCATOR_IMPL;
 	private static final MemoryAllocator ALLOCATOR;
 
 	/** The memory page size, in bytes. This value is always a power-of-two. */
@@ -59,10 +60,10 @@ public final class MemoryUtil {
 
 		LWJGLUtil.log("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
 
-		MemoryAllocator allocator = MemoryManage.getInstance();
-		if ( Boolean.getBoolean("org.lwjgl.util.DebugAllocator") )
-			allocator = new DebugAllocator(allocator);
-		ALLOCATOR = allocator;
+		ALLOCATOR_IMPL = MemoryManage.getInstance();
+		ALLOCATOR = Boolean.getBoolean("org.lwjgl.util.DebugAllocator")
+			? new DebugAllocator(ALLOCATOR_IMPL)
+			: ALLOCATOR_IMPL;
 
 		LWJGLUtil.log("MemoryUtil allocator: " + ALLOCATOR.getClass().getSimpleName());
 	}
@@ -75,6 +76,33 @@ public final class MemoryUtil {
 			EXPLICIT MEMORY MANAGEMENT API
 		-------------------------------------
 	    ------------------------------------- */
+
+	public interface MemoryAllocator {
+
+		long malloc(long size);
+		long calloc(long num, long size);
+		long realloc(long ptr, long size);
+		void free(long ptr);
+
+		long aligned_alloc(long alignment, long size);
+		void aligned_free(long ptr);
+
+	}
+
+	/**
+	 * Returns the {@link MemoryAllocator} instance used internally by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc).
+	 *
+	 * <p>Allocations made through the returned instance will not be tracked for memory leaks, even if {@code org.lwjgl.util.DebugAllocator} is enabled. This
+	 * can be useful for {@code static final} allocations that live throughout the application's lifetime and will never be freed until the process is
+	 * terminated. Normally such allocations would be reported as memory leaks by the debug allocator.</p>
+	 *
+	 * <p>The expectation is that this method will rarely be used, so it does not have the {@code mem} prefix to avoid pollution of auto-complete lists.</p>
+	 *
+	 * @return the {@link MemoryAllocator} instance
+	 */
+	public static MemoryAllocator getAllocator() {
+		return ALLOCATOR_IMPL;
+	}
 
 	// --- [ memAlloc ] ---
 

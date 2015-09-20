@@ -76,17 +76,16 @@ import static org.lwjgl.system.libffi.LibFFI.*;
 		print("""
 ${access.modifier}abstract class $className extends Closure.${returns.callbackType} {
 
-	private static final ByteBuffer    CIF  = memAlloc(FFICIF.SIZEOF);
-	private static final PointerBuffer ARGS = memAllocPointer(${signature.size()});
+	private static final ByteBuffer    CIF  = staticAlloc(FFICIF.SIZEOF);
+	private static final PointerBuffer ARGS = staticAllocPointer(${signature.size()});
 
 	static {
-${signature.asSequence().withIndex().map {
-			"\t\tARGS.put(${it.index}, ${it.value.nativeType.ffi});"
-		}.join("\n")}
-
-		int status = ffi_prep_cif(CIF, CALL_CONVENTION_${if ( $callConventionSystem ) "SYSTEM" else "DEFAULT"}, ${returns.ffi}, ARGS);
-		if ( status != FFI_OK )
-			throw new IllegalStateException(String.format("Failed to prepare $className callback interface. Status: 0x%X", status));
+		prepareCIF(
+			"$className",
+			CALL_CONVENTION_${if ( $callConventionSystem ) "SYSTEM" else "DEFAULT"},
+			CIF, ${returns.ffi},
+			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.join()}
+		);
 	}
 
 	protected $className() {
@@ -109,6 +108,7 @@ ${signature.asSequence().withIndex().map {
 		}.join(",\n")}
 		);
 	}
+
 """)
 		print(functionDoc)
 		print("""

@@ -207,6 +207,23 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			clojure.release();
 	}
 
+	protected static ByteBuffer staticAlloc(int size) {
+		return memByteBuffer(getAllocator().malloc(size), size);
+	}
+
+	protected static PointerBuffer staticAllocPointer(int size) {
+		return memPointerBuffer(getAllocator().malloc(size * POINTER_SIZE), size);
+	}
+
+	protected static void prepareCIF(String name, int ABI, ByteBuffer CIF, long rtype, PointerBuffer ARGS, long... atypes) {
+		for ( int i = 0; i < atypes.length; i++ )
+			ARGS.put(i, atypes[i]);
+
+		int status = ffi_prep_cif(CIF, ABI, rtype, ARGS);
+		if ( status != FFI_OK )
+			throw new IllegalStateException(String.format("Failed to prepare %s callback interface. Status: 0x%X", name, status));
+	}
+
 	private static native long getNativeCallbacks(Method[] methods, long callbacks);
 
 	// Closures types
