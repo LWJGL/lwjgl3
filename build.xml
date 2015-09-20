@@ -454,23 +454,28 @@ License terms: http://lwjgl.org/license.php
 			<!-- Linux -->
 			<url url="http://build.lwjgl.org/${build.type}/linux/x64/liblwjgl.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libjemalloc.so"/>
+			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libglfw.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x64/libopenal.so"/>
 
 			<url url="http://build.lwjgl.org/${build.type}/linux/x86/liblwjgl.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libjemalloc.so"/>
+			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libglfw.so"/>
 			<url url="http://build.lwjgl.org/${build.type}/linux/x86/libopenal.so"/>
 
 			<!-- Mac OS X -->
 			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/liblwjgl.dylib"/>
 			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libjemalloc.dylib"/>
+			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libglfw.dylib"/>
 			<url url="http://build.lwjgl.org/${build.type}/macosx/x64/libopenal.dylib"/>
 
 			<!-- Windows -->
 			<url url="http://build.lwjgl.org/${build.type}/windows/x64/lwjgl.dll"/>
 			<url url="http://build.lwjgl.org/${build.type}/windows/x64/jemalloc.dll"/>
+			<url url="http://build.lwjgl.org/${build.type}/windows/x64/glfw.dll"/>
 
 			<url url="http://build.lwjgl.org/${build.type}/windows/x86/lwjgl.dll"/>
 			<url url="http://build.lwjgl.org/${build.type}/windows/x86/jemalloc.dll"/>
+			<url url="http://build.lwjgl.org/${build.type}/windows/x86/glfw.dll"/>
 
 			<firstmatchmapper>
 				<regexpmapper from="x86/(\w+)[.](\w+)" to="\132.\2"/> <!-- Append "32" -->
