@@ -11,7 +11,16 @@ For a quick overview of the project structure, installation instructions and con
 
 For migrating LWJGL 2 code to LWJGL 3, see the [Migration Guide](https://github.com/LWJGL/lwjgl3-wiki/wiki/2.6.6-LWJGL3-migration).
 
-If you'd like to use LWJGL 3 with Maven/Gradle, see [this sample project](https://github.com/badlogic/lwjgl3-maven-gradle).
+LWJGL 3 can be used with Maven/Gradle/Ivy, with the following dependencies:
+
+```
+org.lwjgl:lwjgl:${version}
+org.lwjgl:lwjgl-platform:${version}:natives-windows
+org.lwjgl:lwjgl-platform:${version}:natives-linux
+org.lwjgl:lwjgl-platform:${version}:natives-osx
+```
+
+where `${version}` is a version (e.g. `3.0.0a`) released on Maven Central. Nightly builds are also available from the Sonatype Nexus repository (`https://oss.sonatype.org/content/repositories/snapshots`), with a snapshot build version (e.g. `3.0.0b-SNAPSHOT`).
 
 Example code:
 
