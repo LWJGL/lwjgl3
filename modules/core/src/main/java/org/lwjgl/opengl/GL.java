@@ -76,7 +76,7 @@ public final class GL {
 				libName = "opengl32";
 				break;
 			case LINUX:
-				libName = "GL";
+				libName = "libGL.so.1";
 				break;
 			case MACOSX:
 				libName = "/System/Library/Frameworks/OpenGL.framework";

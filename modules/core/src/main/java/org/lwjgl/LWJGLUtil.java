@@ -20,9 +20,41 @@ import static org.lwjgl.system.APIUtil.*;
 public final class LWJGLUtil {
 
 	public enum Platform {
-		LINUX("linux"),
-		MACOSX("macosx"),
-		WINDOWS("windows");
+		LINUX("linux") {
+			private final Pattern SO = Pattern.compile("lib\\w+[.]so(?:[.]\\d+){0,3}");
+
+			@Override
+			String mapLibraryName(String name) {
+				if ( SO.matcher(name).matches() )
+					return name;
+
+				return System.mapLibraryName(name);
+			}
+		},
+		MACOSX("macosx") {
+			private final Pattern SO = Pattern.compile("lib\\w+[.]dylib");
+
+			@Override
+			String mapLibraryName(String name) {
+				if ( SO.matcher(name).matches() )
+					return name;
+
+				// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
+				String libName = System.mapLibraryName(name);
+				return libName.endsWith(".jnilib")
+					? libName.substring(0, libName.length() - ".jnilib".length()) + ".dylib"
+					: libName;
+			}
+		},
+		WINDOWS("windows") {
+			@Override
+			String mapLibraryName(String name) {
+				if ( name.endsWith(".dll") )
+					return name;
+
+				return System.mapLibraryName(name);
+			}
+		};
 
 		private final String name;
 
@@ -33,6 +65,8 @@ public final class LWJGLUtil {
 		public String getName() {
 			return name;
 		}
+
+		abstract String mapLibraryName(String name);
 	}
 
 	/**
@@ -118,7 +152,7 @@ public final class LWJGLUtil {
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
 		if ( override != null ) {
-			String libName = mapLibraryName(name);
+			String libName = PLATFORM.mapLibraryName(name);
 			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) ) {
 				LWJGLUtil.log("Loaded library from org.lwjgl.librarypath: " + libName);
 				return;
@@ -142,14 +176,11 @@ public final class LWJGLUtil {
 	 */
 
 	public static DynamicLinkLibrary loadLibraryNative(String name) {
-		if ( getPlatform() == Platform.MACOSX && name.endsWith(".framework") )
-			return apiCreateLibrary(name);
-
 		String libName;
 		if ( new File(name).isAbsolute() )
 			libName = name;
 		else {
-			libName = mapLibraryName(name);
+			libName = PLATFORM.mapLibraryName(name);
 
 			// Try org.lwjgl.librarypath first
 			String override = System.getProperty("org.lwjgl.librarypath");
@@ -167,14 +198,6 @@ public final class LWJGLUtil {
 
 		// Then the OS paths
 		return apiCreateLibrary(libName);
-	}
-
-	// Work around for System.mapLibraryName on OS X + JDK 6, which maps to .jnilib instead of .dylib
-	private static String mapLibraryName(String name) {
-		String libName = System.mapLibraryName(name);
-		return PLATFORM == Platform.MACOSX && libName.endsWith(".jnilib")
-			? libName.substring(0, libName.length() - ".jnilib".length()) + ".dylib"
-			: libName;
 	}
 
 	private interface LibraryLoader<T> {

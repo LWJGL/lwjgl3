@@ -18,20 +18,11 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 	public LinuxLibrary(String name) {
 		super(name);
 
-		long handle = NULL;
-		if ( name.endsWith(".so") )
-			handle = dlopen(name + ".1", RTLD_LAZY | RTLD_GLOBAL);
-		if ( handle != NULL )
-			LWJGLUtil.log("Loaded native library: " + name + ".1");
-		else {
-			handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
-			if ( handle == NULL ) // TODO: better error handling
-				throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
+		handle = dlopen(name, RTLD_LAZY | RTLD_GLOBAL);
+		if ( handle == NULL ) // TODO: better error handling
+			throw new RuntimeException("Failed to dynamically load library: " + name + "(error = " + dlerror() + ")");
 
-			LWJGLUtil.log("Loaded native library: " + name);
-		}
-
-		this.handle = handle;
+		LWJGLUtil.log("Loaded native library: " + name);
 	}
 
 	@Override
