@@ -75,7 +75,7 @@ License terms: http://lwjgl.org/license.php
 			validargs="y,n"
 			defaultvalue="n"
 			addproperty="reset.input"
-			/>
+		/>
 		<condition property="do.reset">
 			<equals arg1="y" arg2="${reset.input}"/>
 		</condition>
@@ -149,7 +149,7 @@ License terms: http://lwjgl.org/license.php
 			classpath="${kotlinc}/lib/kotlin-preloader.jar"
 			classname="org.jetbrains.kotlin.preloading.Preloader"
 			fork="true" failonerror="true" taskname="Templates"
-			>
+		>
 			<jvmarg value="-server"/>
 			<jvmarg value="-Xms1024m"/>
 			<jvmarg value="-Xverify:none"/>
@@ -193,7 +193,7 @@ License terms: http://lwjgl.org/license.php
 			classname="org.lwjgl.generator.util.TemplateFormatter"
 			fork="true"
 			spawn="true"
-			>
+		>
 			<classpath>
 				<pathelement path="${bin.templates}"/>
 				<pathelement path="${test.resources}"/>
@@ -218,7 +218,7 @@ License terms: http://lwjgl.org/license.php
 			fork="true"
 			failonerror="true"
 			taskname="Generator"
-			>
+		>
 			<classpath>
 				<pathelement path="${bin.templates}"/>
 				<pathelement path="${kotlinc}/lib/kotlin-runtime.jar"/>
@@ -379,6 +379,13 @@ License terms: http://lwjgl.org/license.php
 		</java>
 	</target>
 
+	<target name="-build-version" description="Retrieves the LWJGL version from org.lwjgl.Sys">
+		<java classname="org.lwjgl.Sys" fork="true" failonerror="true" outputproperty="build.version">
+			<classpath path="${bin.core}"/>
+			<jvmarg value="-Djava.library.path=${lib}"/>
+		</java>
+	</target>
+
 	<target name="javadoc" description="Generates the LWJGL JavaDoc" depends="generate">
 		<uptodate targetfile="${bin.html.javadoc}/index.html" property="javadoc-uptodate">
 			<srcfiles dir="${src.core}" includes="**"/>
@@ -387,7 +394,7 @@ License terms: http://lwjgl.org/license.php
 		<antcall target="-javadoc"/>
 	</target>
 
-	<target name="-javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile" unless="javadoc-uptodate">
+	<target name="-javadoc" description="Generates the LWJGL JavaDoc" depends="-init-compile,-build-version" unless="javadoc-uptodate">
 		<lwjgl.javac destdir="${bin.templates}" taskname="Compile doclets">
 			<src path="${src.templates}/java"/>
 			<include name="org/lwjgl/system/**"/>
@@ -395,11 +402,6 @@ License terms: http://lwjgl.org/license.php
 				<pathelement location="${env.JAVA_HOME}/lib/tools.jar" unless:set="jdk.apple"/>
 			</classpath>
 		</lwjgl.javac>
-
-		<java classname="org.lwjgl.Sys" fork="true" failonerror="true" outputproperty="build.version">
-			<classpath path="${bin.core}"/>
-			<jvmarg value="-Djava.library.path=${lib}"/>
-		</java>
 
 		<delete dir="${bin.html.javadoc}"/>
 		<javadoc
@@ -415,7 +417,7 @@ License terms: http://lwjgl.org/license.php
 			stylesheetfile="${config}/javadoc.css"
 			doclet="org.lwjgl.system.ExcludeDoclet"
 			docletpath="${bin.templates}"
-			>
+		>
 
 			<!-- TODO: Add package-info documentation -->
 
@@ -440,12 +442,22 @@ License terms: http://lwjgl.org/license.php
 		</javadoc>
 	</target>
 
-	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc">
-		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} build ${build.revision}</echo>
-
+	<target name="release" description="Creates the LWJGL binary redistributable" depends="compile,javadoc,-build-version">
 		<!-- Bundle classes -->
 		<mkdir dir="${release.jar}"/>
-		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true"/>
+		<jar destfile="${release.jar}/lwjgl.jar" basedir="${bin.core}" includes="**" level="9" index="true">
+			<manifest>
+				<section name="org/lwjgl/">
+					<attribute name="Specification-Title" value="Lightweight Java Game Library"/>
+					<attribute name="Specification-Version" value="${build.version}"/>
+					<attribute name="Specification-Vendor" value="lwjgl.org"/>
+					<attribute name="Implementation-Title" value="lwjgl"/>
+					<attribute name="Implementation-Version" value="build ${build.revision}" if:set="build.revision"/>
+					<attribute name="Implementation-Version" value="SNAPSHOT" unless:set="build.revision"/>
+					<attribute name="Implementation-Vendor" value="lwjgl.org"/>
+				</section>
+			</manifest>
+		</jar>
 
 		<!-- Download binaries from build.lwjgl.org -->
 		<mkdir dir="${release.native}"/>
@@ -501,5 +513,7 @@ License terms: http://lwjgl.org/license.php
 			<fileset dir="${src.core}" includes="**"/>
 			<fileset dir="${src.generated.java}" includes="**"/>
 		</zip>
+
+		<echo file="${release}/build.txt" if:set="build.revision">LWJGL ${build.version} build ${build.revision}</echo>
 	</target>
 </project>
