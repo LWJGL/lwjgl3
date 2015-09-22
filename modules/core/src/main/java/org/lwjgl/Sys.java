@@ -4,6 +4,11 @@
  */
 package org.lwjgl;
 
+import java.io.InputStream;
+import java.net.URL;
+import java.util.jar.JarFile;
+import java.util.jar.Manifest;
+
 import static org.lwjgl.LWJGLUtil.*;
 
 /**
@@ -49,7 +54,33 @@ public final class Sys {
 
 	/** Returns the LWJGL version. */
 	public static String getVersion() {
-		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix;
+		return String.valueOf(VERSION_MAJOR) + '.' + VERSION_MINOR + '.' + VERSION_REVISION + BUILD_TYPE.postfix + ' ' + getVersionImpl();
+	}
+
+	private static String getVersionImpl() {
+		URL url = Sys.class.getClassLoader().getResource("org/lwjgl/Sys.class");
+		if ( url != null ) {
+			String classURL = url.toString();
+			if ( classURL.startsWith("jar:") ) {
+				try {
+					InputStream stream = new URL(
+						classURL.substring(0, classURL.lastIndexOf("!") + 1) + '/' + JarFile.MANIFEST_NAME
+					).openStream();
+
+					try {
+						return new Manifest(stream)
+							.getAttributes("org/lwjgl/")
+							.getValue("Implementation-Version");
+					} finally {
+						stream.close();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		return "SNAPSHOT";
 	}
 
 	public static void main(String[] args) {
