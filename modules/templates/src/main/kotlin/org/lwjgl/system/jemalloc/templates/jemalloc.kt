@@ -28,6 +28,13 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		weaknesses that have practical repercussions for real world applications.
 		"""
 
+	// Error & stats output
+
+	(address _ voidptr_p)(
+		"malloc_message",
+	    "Returns the {@code je_malloc_message} variable."
+	)
+
 	// Standard API
 
 	void_p(

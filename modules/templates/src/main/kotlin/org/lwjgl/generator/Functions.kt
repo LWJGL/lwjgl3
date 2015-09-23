@@ -165,7 +165,7 @@ class NativeClassFunction(
 		get() = nativeClass.binding == null && !(isSpecial || returns.isSpecial || hasParam { it.isSpecial })
 
 	private val hasUnsafeMethod: Boolean
-		get() = nativeClass.binding != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !has(Capabilities)
+		get() = nativeClass.binding != null && (returns.isBufferPointer || hasParam { it.isBufferPointer }) && !returns.has(address)
 
 	private val ReturnValue.isStructValue: Boolean
 		get() = nativeType is StructType && !nativeType.includesPointer
@@ -567,14 +567,16 @@ class NativeClassFunction(
 		// Step 4: Call the native method
 		generateCodeBeforeNative(code, ApplyTo.NORMAL)
 
-		generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
-			printList(getNativeParams()) {
-				it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
-			}
+		if ( nativeClass.binding == null || !returns.has(address) ) {
+			generateNativeMethodCall(code.hasStatements(code.javaAfterNative, ApplyTo.NORMAL)) {
+				printList(getNativeParams()) {
+					it.asNativeMethodCallParam(this@NativeClassFunction, NORMAL)
+				}
 
-			if ( returnsStructValue ) {
-				if ( hasNativeParams ) print(", ")
-				print("memAddress($RESULT)")
+				if ( returnsStructValue ) {
+					if ( hasNativeParams ) print(", ")
+					print("memAddress($RESULT)")
+				}
 			}
 		}
 

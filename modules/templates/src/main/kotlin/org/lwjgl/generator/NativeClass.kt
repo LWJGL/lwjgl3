@@ -83,11 +83,13 @@ abstract class APIBinding(
 			}
 		}
 
+		val variable = if ( function.returns.has(address) ) RESULT else FUNCTION_ADDRESS
+
 		if ( function has Capabilities && function[Capabilities].override ) {
 			if ( !instanceParameter.equals(FUNCTION_ADDRESS) ) // Skip if we have an explicit FUNCTION_ADDRESS parameter.
-				writer.println("\t\tlong $FUNCTION_ADDRESS = $instanceParameter;")
+				writer.println("\t\tlong $variable = $instanceParameter;")
 		} else
-			writer.println("\t\tlong $FUNCTION_ADDRESS = getInstance($instanceParameter).${function.addressName};")
+			writer.println("\t\tlong $variable = getInstance($instanceParameter).${function.addressName};")
 	}
 
 	abstract fun PrintWriter.generateFunctionGetters(nativeClass: NativeClass)
