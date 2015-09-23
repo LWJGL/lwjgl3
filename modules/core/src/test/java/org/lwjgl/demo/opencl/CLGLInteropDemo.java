@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opencl.CL10.*;
 import static org.lwjgl.opencl.Info.*;
@@ -86,7 +85,7 @@ public final class CLGLInteropDemo {
 		parseArgs(args);
 
 		GLFWErrorCallback errorfun;
-		glfwSetErrorCallback(errorfun = errorCallbackPrint(System.err));
+		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
 		if ( glfwInit() != GL_TRUE ) {
 			System.out.println("Unable to initialize glfw");
 			System.exit(-1);
@@ -291,7 +290,7 @@ public final class CLGLInteropDemo {
 		}
 
 		void destroy() {
-			Callbacks.releaseAllCallbacks(handle);
+			Callbacks.glfwReleaseCallbacks(handle);
 			glfwDestroyWindow(handle);
 		}
 

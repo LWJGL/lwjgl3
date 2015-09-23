@@ -19,7 +19,6 @@ import java.nio.IntBuffer;
 import java.util.Map;
 
 import static org.lwjgl.demo.util.IOUtil.*;
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -36,7 +35,7 @@ public final class Events {
 			"org.lwjgl.demo.util.ClosureGC"
 		);
 
-		glfwSetErrorCallback(errorCallbackPrint(System.out));
+		glfwSetErrorCallback(GLFWErrorCallback.createPrint(System.out));
 
 		System.out.println("---- [ Error callback test ] ----");
 		glfwDefaultWindowHints();
@@ -243,7 +242,7 @@ public final class Events {
 			public void invoke(long window, int count, long names) {
 				printEvent("drop %d file%s", window, count, count == 1 ? "" : "s");
 
-				dropCallbackNamesApply(count, names, new DropConsumerString() {
+				GLFWDropCallback.apply(count, names, new ConsumerString() {
 					@Override
 					public void accept(int index, String name) {
 						System.out.format("\t%d: %s%n", index + 1, name);

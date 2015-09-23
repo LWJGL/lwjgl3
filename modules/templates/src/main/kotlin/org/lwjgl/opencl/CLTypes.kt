@@ -195,17 +195,39 @@ fun config() {
 val cl_create_context_callback = "cl_create_context_callback".callback(
 	OPENCL_PACKAGE, void, "CLCreateContextCallback",
 	"Will be called when a debug message is generated.",
-	const _ cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
+	nullTerminated _ const _ cl_charUTF8_p.IN("errinfo", "a pointer to the message string representation"),
 	const _ void_p.IN(
 		"private_info",
 		"a pointer to binary data that is returned by the OpenCL implementation that can be used to log additional information helpful in debugging the error"
 	),
-	size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
+	AutoSize("private_info") _ size_t.IN("cb", "the number of bytes in the {@code private_info} pointer"),
 	void_p.IN("user_data", "the user-specified value that was passed when calling CL10##clCreateContext() or CL10##clCreateContextFromType()"),
 	samConstructor = "CL10"
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link CLCreateContextCallback}. */
+	public interface SAMString {
+		void invoke(String errinfo, ByteBuffer private_info, long user_data);
+	}
+
+	/**
+	 * Creates a {@link CLCreateContextCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link CLCreateContextCallback} instance
+	 */
+	public static CLCreateContextCallback createString(final SAMString sam) {
+		return new CLCreateContextCallback() {
+			@Override
+			public void invoke(long errinfo, long private_info, long cb, long user_data) {
+				sam.invoke(memDecodeUTF8(errinfo), memByteBuffer(private_info, (int)cb), user_data);
+			}
+		};
+	}
+	"""
 }
 
 val cl_program_callback = "cl_program_callback".callback(
@@ -269,13 +291,35 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 	OPENCL_PACKAGE, void, "CLSVMFreeCallback",
 	"Will be called to free shared virtual memory pointers.",
 	cl_command_queue.IN("queue", "a valid host command-queue"),
-	cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
+	AutoSize("svm_pointers") _ cl_uint.IN("num_svm_pointers", "the number of pointers in the {@code svm_pointers} array"),
 	void_pp.IN("svm_pointers", "an array of shared virtual memory pointers to be freed"),
 	void_p.IN("user_data", "the user-specified value that was passed when calling CL20##clEnqueueSVMFree()"),
 	samConstructor = "CL20"
 ) {
 	documentation = "Instances of this interface may be passed to the CL20##clEnqueueSVMFree() method."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link CLSVMFreeCallback}. */
+	public interface SAMBuffer {
+		void invoke(long queue, PointerBuffer svm_pointers, long user_data);
+	}
+
+	/**
+	 * Creates a {@link CLSVMFreeCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link CLSVMFreeCallback} instance
+	 */
+	public static CLSVMFreeCallback createBuffer(final SAMBuffer sam) {
+		return new CLSVMFreeCallback() {
+			@Override
+			public void invoke(long queue, int num_svm_pointers, long svm_pointers, long user_data) {
+				sam.invoke(queue, memPointerBuffer(svm_pointers, num_svm_pointers), user_data);
+			}
+		};
+	}
+	"""
 }
 
 // OpenGL interop

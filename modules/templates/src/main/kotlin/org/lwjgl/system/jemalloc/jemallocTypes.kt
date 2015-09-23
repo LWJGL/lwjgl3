@@ -13,10 +13,32 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	"Will be called by the JEmalloc##je_malloc_usable_size() method.",
 
 	void_p.IN("cbopaque", "the opaque pointer passed to JEmalloc##je_malloc_usable_size()"),
-	const _ charASCII_p.IN("s", "the message"),
+	nullTerminated _ const _ charASCII_p.IN("s", "the message"),
 	samConstructor = "JEmalloc"
 ) {
 	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."
+	additionalCode = """
+	/** A functional interface for {@link MallocMessageCallback}. */
+	public interface SAMString {
+		void invoke(long cbopaque, String s);
+	}
+
+	/**
+	 * Creates a {@link MallocMessageCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link MallocMessageCallback} instance
+	 */
+	public static MallocMessageCallback createString(final SAMString sam) {
+		return new MallocMessageCallback() {
+			@Override
+			public void invoke(long cbopaque, long s) {
+				sam.invoke(cbopaque, memDecodeASCII(s));
+			}
+		};
+	}
+	"""
 }
 
 val chunk_alloc_t = "chunk_alloc_t".callback(

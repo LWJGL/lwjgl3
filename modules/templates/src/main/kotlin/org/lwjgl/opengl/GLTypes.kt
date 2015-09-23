@@ -70,13 +70,36 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("category", "the message category"),
 	GLenum.IN("severity", "the message severity"),
-	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	void_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
 	samConstructor = "AMDDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link GLDebugMessageAMDCallback}. */
+	public interface SAMString {
+		void invoke(int id, int category, int severity, String message, long userParam);
+	}
+
+	/**
+	 * Creates a {@link GLDebugMessageAMDCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link GLDebugMessageAMDCallback} instance
+	 */
+	public static GLDebugMessageAMDCallback createString(final SAMString sam) {
+		return new GLDebugMessageAMDCallback() {
+			@Override
+			public void invoke(int id, int category, int severity, int length, long message, long userParam) {
+				sam.invoke(id, category, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+			}
+		};
+	}
+	"""
+
 }
 // ARB_debug_output
 val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
@@ -86,13 +109,35 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
 	samConstructor = "ARBDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link GLDebugMessageARBCallback}. */
+	public interface SAMString {
+		void invoke(int source, int type, int id, int severity, String message, long userParam);
+	}
+
+	/**
+	 * Creates a {@link GLDebugMessageARBCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link GLDebugMessageARBCallback} instance
+	 */
+	public static GLDebugMessageARBCallback createString(final SAMString sam) {
+		return new GLDebugMessageARBCallback() {
+			@Override
+			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+			}
+		};
+	}
+	"""
 }
 // ARB_shader_objects
 val GLcharARB_p = CharSequenceType(name = "GLcharARB", charMapping = CharMapping.UTF8)
@@ -109,7 +154,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ void_p.IN("userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
@@ -118,6 +163,28 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link GLDebugMessageCallback}. */
+	public interface SAMString {
+		void invoke(int source, int type, int id, int severity, String message, long userParam);
+	}
+
+	/**
+	 * Creates a {@link GLDebugMessageCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link GLDebugMessageCallback} instance
+	 */
+	public static GLDebugMessageCallback createString(final SAMString sam) {
+		return new GLDebugMessageCallback() {
+			@Override
+			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+			}
+		};
+	}
+	"""
 }
 // NV_gpu_shader5
 val GLint64EXT = IntegerType("GLint64EXT", PrimitiveMapping.LONG)

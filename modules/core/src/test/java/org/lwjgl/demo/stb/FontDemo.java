@@ -73,7 +73,7 @@ abstract class FontDemo {
 		text = t;
 		lineCount = lc;
 
-		errorfun = errorCallbackPrint(System.err);
+		errorfun = GLFWErrorCallback.createPrint();
 
 		windowSizefun = new GLFWWindowSizeCallback() {
 			@Override

@@ -45,7 +45,7 @@ public final class TruetypeOversample {
 
 	private static final int[] sf = {
 		0, 1, 2,
-		0, 1, 2,
+		0, 1, 2
 	};
 
 	// ----
@@ -90,7 +90,7 @@ public final class TruetypeOversample {
 	private boolean show_tex;
 
 	private TruetypeOversample() {
-		errorfun = errorCallbackPrint(System.err);
+		errorfun = GLFWErrorCallback.createPrint();
 
 		windowSizefun = new GLFWWindowSizeCallback() {
 			@Override

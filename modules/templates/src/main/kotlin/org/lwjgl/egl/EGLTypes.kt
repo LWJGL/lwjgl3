@@ -83,6 +83,28 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	samConstructor = "ANDROIDBlobCache"
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
+	additionalCode = """
+	/** A functional interface for {@link EGLSetBlobFuncANDROID}. */
+	public interface SAMBuffer {
+		void invoke(ByteBuffer key, ByteBuffer value);
+	}
+
+	/**
+	 * Creates a {@link EGLSetBlobFuncANDROID} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link EGLSetBlobFuncANDROID} instance
+	 */
+	public static EGLSetBlobFuncANDROID createBuffer(final SAMBuffer sam) {
+		return new EGLSetBlobFuncANDROID() {
+			@Override
+			public void invoke(long key, long keySize, long value, long valueSize) {
+				sam.invoke(memByteBuffer(key, (int)keySize), memByteBuffer(value, (int)valueSize));
+			}
+		};
+	}
+	"""
 }
 val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	EGL_PACKAGE, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
@@ -93,6 +115,28 @@ val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	samConstructor = "ANDROIDBlobCache"
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
+	additionalCode = """
+	/** A functional interface for {@link EGLGetBlobFuncANDROID}. */
+	public interface SAMBuffer {
+		long invoke(ByteBuffer key, ByteBuffer value);
+	}
+
+	/**
+	 * Creates a {@link EGLGetBlobFuncANDROID} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link EGLGetBlobFuncANDROID} instance
+	 */
+	public static EGLGetBlobFuncANDROID createBuffer(final SAMBuffer sam) {
+		return new EGLGetBlobFuncANDROID() {
+			@Override
+			public long invoke(long key, long keySize, long value, long valueSize) {
+				return sam.invoke(memByteBuffer(key, (int)keySize), memByteBuffer(value, (int)valueSize));
+			}
+		};
+	}
+	"""
 }
 
 // EXT_device_base

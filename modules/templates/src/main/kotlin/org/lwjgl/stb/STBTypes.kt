@@ -26,11 +26,33 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	"The {@code stbi_io_callbacks.read} callback.",
 	void_p.IN("user", "a pointer to user data"),
 	char_p.IN("data", "the data buffer to fill"),
-	int.IN("size", "the number of bytes to read"),
+	AutoSize("data") _ int.IN("size", "the number of bytes to read"),
 	returnDoc = "the number of bytes actually read",
 	samConstructor = "STBImage"
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
+	additionalCode = """
+	/** A functional interface for {@link STBIReadCallback}. */
+	public interface SAMBuffer {
+		int invoke(long user, ByteBuffer data);
+	}
+
+	/**
+	 * Creates a {@link STBIReadCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link STBIReadCallback} instance
+	 */
+	public static STBIReadCallback createBuffer(final SAMBuffer sam) {
+		return new STBIReadCallback() {
+			@Override
+			public int invoke(long user, long data, int size) {
+				return sam.invoke(user, memByteBuffer(data, size));
+			}
+		};
+	}
+	"""
 }
 
 val stbi_io_callbacks_skip = "stbi_io_callbacks.skip".callback(

@@ -68,13 +68,35 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ void_p.IN("userParam", "the user-specified value that was passed when calling GLES32##glDebugMessageCallback()"),
 	samConstructor = "GLES32"
 ) {
 	documentation = "Instances of this interface may be passed to the GLES32##glDebugMessageCallback() method."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link GLDebugMessageCallback}. */
+	public interface SAMString {
+		void invoke(int source, int type, int id, int severity, String message, long userParam);
+	}
+
+	/**
+	 * Creates a {@link GLDebugMessageCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link GLDebugMessageCallback} instance
+	 */
+	public static GLDebugMessageCallback createString(final SAMString sam) {
+		return new GLDebugMessageCallback() {
+			@Override
+			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+			}
+		};
+	}
+	"""
 }
 
 // KHR_debug
@@ -85,13 +107,35 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
 	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	const _ void_p.IN("userParam", "the user-specified value that was passed when calling KHRDebug##glDebugMessageCallbackKHR()"),
 	samConstructor = "KHRDebug"
 ) {
 	documentation = "Instances of this interface may be passed to the KHRDebug##glDebugMessageCallbackKHR() method."
 	CALL_CONVENTION_SYSTEM
+	additionalCode = """
+	/** A functional interface for {@link GLDebugMessageKHRCallback}. */
+	public interface SAMString {
+		void invoke(int source, int type, int id, int severity, String message, long userParam);
+	}
+
+	/**
+	 * Creates a {@link GLDebugMessageKHRCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link GLDebugMessageKHRCallback} instance
+	 */
+	public static GLDebugMessageKHRCallback createString(final SAMString sam) {
+		return new GLDebugMessageKHRCallback() {
+			@Override
+			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
+				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+			}
+		};
+	}
+	"""
 }
 
 // OES_EGL_image

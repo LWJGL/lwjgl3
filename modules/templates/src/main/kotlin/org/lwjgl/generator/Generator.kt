@@ -110,7 +110,6 @@ class Generator(
 	companion object {
 		val structs = ArrayList<Struct>()
 		val callbacks = ArrayList<CallbackFunction>()
-		val callbacksSAM = HashMap<String, MutableList<CallbackFunction>>()
 		val customClasses = ArrayList<CustomClass>()
 
 		fun register(struct: Struct): Struct {
@@ -122,12 +121,6 @@ class Generator(
 			callbacks add callback
 			if ( samConstructor == null )
 				return
-
-			",".toRegex() split samConstructor forEach {
-				callbacksSAM.getOrPut("${callback.packageName}.$it") {
-					ArrayList<CallbackFunction>()
-				}.add(callback)
-			}
 		}
 
 		fun <T : CustomClass> register(customClass: T): T {

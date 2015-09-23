@@ -79,7 +79,7 @@ public final class Image {
 		this.h = h.get(0);
 		this.comp = comp.get(0);
 
-		errorfun = errorCallbackPrint(System.err);
+		errorfun = GLFWErrorCallback.createPrint();
 
 		windowSizefun = new GLFWWindowSizeCallback() {
 			@Override

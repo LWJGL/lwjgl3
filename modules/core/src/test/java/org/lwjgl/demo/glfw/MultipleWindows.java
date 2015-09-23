@@ -12,7 +12,6 @@ import org.lwjgl.opengl.GLCapabilities;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -24,7 +23,7 @@ public final class MultipleWindows {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorfun = errorCallbackPrint(System.err);
+		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() == 0 )
 			throw new IllegalStateException("Failed to initialize GLFW.");

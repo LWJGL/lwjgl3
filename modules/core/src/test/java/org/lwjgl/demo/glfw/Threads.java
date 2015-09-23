@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.concurrent.CountDownLatch;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -35,7 +34,7 @@ public final class Threads {
 	}
 
 	public static void main(String[] args) {
-		GLFWErrorCallback errorfun = errorCallbackPrint(System.err);
+		GLFWErrorCallback errorfun = GLFWErrorCallback.createPrint();
 		glfwSetErrorCallback(errorfun);
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Failed to initialize GLFW.");

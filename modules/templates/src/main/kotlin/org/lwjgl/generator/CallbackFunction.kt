@@ -14,6 +14,7 @@ class CallbackFunction(
 ): GeneratorTarget(packageName, className) {
 
 	var functionDoc: String = ""
+	var additionalCode: String = ""
 
 	private var callConventionSystem: Boolean = false
 	val CALL_CONVENTION_SYSTEM: Boolean
@@ -118,32 +119,32 @@ ${signature.asSequence().withIndex().map {
 	public interface SAM {
 		${returns.nativeMethodType.simpleName} invoke($signatureJava);
 	}
+""")
 
-}""")
-	}
-
-	fun generateCallbackSAM(writer: PrintWriter) {
-		writer.print(
-			"""     /**
+		print("""
+	/**
 	 * Creates a {@link $className} that delegates the callback to the specified functional interface.
 	 *
 	 * @param sam the delegation target
 	 *
 	 * @return the {@link $className} instance
 	 */
-	public static $className $className(final $className.SAM sam) {
+	public static $className create(final SAM sam) {
 		return new $className() {
 			@Override
 			public ${returns.nativeMethodType.simpleName} invoke($signatureJava) {
 				""")
 		if ( returns.mapping != TypeMapping.VOID )
-			writer.print("return ")
-		writer.print("""sam.invoke(${signature.asSequence().map { it.name }.join(", ")});
+			print("return ")
+		print("""sam.invoke(${signature.asSequence().map { it.name }.join(", ")});
 			}
 		};
 	}
-
 """)
+		if ( additionalCode.isNotEmpty() )
+			print(additionalCode)
+
+		print("\n}")
 	}
 }
 

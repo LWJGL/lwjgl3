@@ -9,7 +9,6 @@ import java.lang.Math.*
 import java.util.*
 import java.util.regex.Pattern
 
-val INSTANCE = "__instance"
 val EXT_FLAG = ""
 
 val NULL = "{@code NULL}"
@@ -43,7 +42,6 @@ abstract class APIBinding(
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
 		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
-			@Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
 			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
 		})
 		return classes
@@ -226,11 +224,6 @@ class NativeClass(
 			} catch (e: Exception) {
 				throw RuntimeException("Uncaught exception while generating method: $className.${it.name}", e)
 			}
-		}
-
-		val samConstructors = Generator.callbacksSAM["$packageName.$className"]
-		if ( samConstructors != null ) {
-			samConstructors forEach { it.generateCallbackSAM(this) }
 		}
 
 		customMethods forEach {

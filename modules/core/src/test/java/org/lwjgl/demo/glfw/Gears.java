@@ -13,7 +13,6 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
 import org.lwjgl.system.libffi.Closure;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -36,7 +35,7 @@ public class Gears extends AbstractGears {
 
 	@Override
 	protected void init() {
-		glfwSetErrorCallback(errorfun = errorCallbackPrint(System.err));
+		glfwSetErrorCallback(errorfun = GLFWErrorCallback.createPrint());
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize glfw");
 
@@ -158,9 +157,11 @@ public class Gears extends AbstractGears {
 	protected void destroy() {
 		if ( debugProc != null )
 			debugProc.release();
-		keyfun.release();
+		if ( keyfun != null )
+			keyfun.release();
 		glfwTerminate();
-		errorfun.release();
+		if ( errorfun != null )
+			errorfun.release();
 	}
 
 }

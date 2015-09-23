@@ -4,17 +4,9 @@
  */
 package org.lwjgl.glfw;
 
-import org.lwjgl.LWJGLUtil;
-import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.system.APIBuffer;
 import org.lwjgl.system.libffi.Closure;
 
-import java.io.PrintStream;
-import java.lang.reflect.Field;
-import java.nio.ByteBuffer;
-import java.util.Map;
-
-import static org.lwjgl.Pointer.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.APIUtil.*;
 import static org.lwjgl.system.JNI.*;
@@ -85,7 +77,7 @@ public final class Callbacks {
 	 *
 	 * @param window the GLFW window
 	 */
-	public static void releaseAllCallbacks(long window) {
+	public static void glfwReleaseCallbacks(long window) {
 		GLFW glfw = GLFW.getInstance();
 		long[] callbacks = {
 			invokePPP(glfw.SetWindowPosCallback, window, NULL),
@@ -109,165 +101,6 @@ public final class Callbacks {
 			if ( callback != NULL )
 				Closure.release(callback);
 		}
-	}
-
-	/**
-	 * Returns a {@link GLFWErrorCallback} instance that prints the error in the standard error stream.
-	 *
-	 * @return the GLFWerrorCallback
-	 */
-	public static GLFWErrorCallback errorCallbackPrint() {
-		return errorCallbackPrint(System.err);
-	}
-
-	/**
-	 * Returns a {@link GLFWErrorCallback} instance that prints the error in the specified {@link PrintStream}.
-	 *
-	 * @param stream the PrintStream to use
-	 *
-	 * @return the GLFWerrorCallback
-	 */
-	public static GLFWErrorCallback errorCallbackPrint(final PrintStream stream) {
-		return new GLFWErrorCallback() {
-			private final Map<Integer, String> ERROR_CODES = LWJGLUtil.getClassTokens(new TokenFilter() {
-				@Override
-				public boolean accept(Field field, int value) {
-					return 0x10000 < value && value < 0x20000;
-				}
-			}, null, GLFW.class);
-
-			@Override
-			public void invoke(int error, long description) {
-				String msg = errorCallbackDescriptionString(description);
-
-				stream.printf("[LWJGL] %s error\n", ERROR_CODES.get(error));
-				stream.println("\tDescription : " + msg);
-				stream.println("\tStacktrace  :");
-				StackTraceElement[] stack = Thread.currentThread().getStackTrace();
-				for ( int i = 4; i < stack.length; i++ ) {
-					stream.print("\t\t");
-					stream.println(stack[i].toString());
-				}
-			}
-		};
-	}
-
-	/**
-	 * Returns a {@link GLFWErrorCallback} instance that throws an {@link IllegalStateException} when an error occurs.
-	 *
-	 * @return the GLFWerrorCallback
-	 */
-	public static GLFWErrorCallback errorCallbackThrow() {
-		return new GLFWErrorCallback() {
-			@Override
-			public void invoke(int error, long description) {
-				throw new IllegalStateException(String.format("GLFW error [0x%X]: %s", error, errorCallbackDescriptionString(description)));
-			}
-		};
-	}
-
-	/**
-	 * Converts the specified {@link GLFWErrorCallback} description string pointer to a {@link ByteBuffer}, with a capacity equal to the UTF-8 encoded string.
-	 * <p/>
-	 * This method may only be used inside a GLFWerrorCallback invocation. If you wish to use the ByteBuffer after the callback returns, you need to make a
-	 * copy.
-	 *
-	 * @param description a pointer to the UTF-8 encoded description string
-	 *
-	 * @return the description string, as a ByteBuffer
-	 */
-	public static ByteBuffer errorCallbackDescriptionBuffer(long description) {
-		return memByteBufferNT1(description);
-	}
-
-	/**
-	 * Converts the specified {@link GLFWErrorCallback} description string pointer to a String.
-	 * <p/>
-	 * This method may only be used inside a GLFWerrorCallback invocation.
-	 *
-	 * @param description a pointer to the UTF-8 encoded description string
-	 *
-	 * @return the description string
-	 */
-	public static String errorCallbackDescriptionString(long description) {
-		return memDecodeUTF8(description);
-	}
-
-	/**
-	 * Converts the specified {@link GLFWDropCallback} arguments to a ByteBuffer array.
-	 * <p/>
-	 * This method may only be used inside a GLFWdropCallback invocation. If you wish to use the array after the callback returns, you need to make a deep
-	 * copy.
-	 *
-	 * @param count the number of dropped files
-	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
-	 *
-	 * @return the array of names, as ByteBuffers
-	 */
-	public static ByteBuffer[] dropCallbackNamesBuffer(int count, long names) {
-		ByteBuffer[] buffers = new ByteBuffer[count];
-
-		for ( int i = 0; i < count; i++ )
-			buffers[i] = memByteBufferNT1(memGetAddress(names + POINTER_SIZE * i));
-
-		return buffers;
-	}
-
-	/**
-	 * Converts the specified {@link GLFWDropCallback} arguments to a String array.
-	 * <p/>
-	 * This method may only be used inside a GLFWdropCallback invocation.
-	 *
-	 * @param count the number of dropped files
-	 * @param names pointer to the array of UTF-8 encoded path names of the dropped files
-	 *
-	 * @return the array of names, as Strings
-	 */
-	public static String[] dropCallbackNamesString(int count, long names) {
-		String[] strings = new String[count];
-
-		for ( int i = 0; i < count; i++ )
-			strings[i] = memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i));
-
-		return strings;
-	}
-
-	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerBuffer) dropCallbackNamesApply}. */
-	public interface DropConsumerBuffer {
-		void accept(int index, ByteBuffer name);
-	}
-
-	/** A functional interface that can be used with {@link #dropCallbackNamesApply(int, long, DropConsumerString) dropCallbackNamesApply}. */
-	public interface DropConsumerString {
-		void accept(int index, String name);
-	}
-
-	/**
-	 * Applies the specified {@link DropConsumerBuffer} to the specified {@link GLFWDropCallback} arguments.
-	 * <p/>
-	 * This method may only be used inside a GLFWdropCallback invocation.
-	 *
-	 * @param count    the number of dropped files
-	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
-	 * @param consumer the DropConsumerBuffer to apply
-	 */
-	public static void dropCallbackNamesApply(int count, long names, DropConsumerBuffer consumer) {
-		for ( int i = 0; i < count; i++ )
-			consumer.accept(i, memByteBufferNT1(memGetAddress(names + POINTER_SIZE * i)));
-	}
-
-	/**
-	 * Applies the specified {@link DropConsumerString} to the specified {@link GLFWDropCallback} arguments.
-	 * <p/>
-	 * This method may only be used inside a GLFWdropCallback invocation.
-	 *
-	 * @param count    the number of dropped files
-	 * @param names    pointer to the array of UTF-8 encoded path names of the dropped files
-	 * @param consumer the DropConsumerString to apply
-	 */
-	public static void dropCallbackNamesApply(int count, long names, DropConsumerString consumer) {
-		for ( int i = 0; i < count; i++ )
-			consumer.accept(i, memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i)));
 	}
 
 	/**
