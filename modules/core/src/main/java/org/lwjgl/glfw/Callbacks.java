@@ -21,57 +21,6 @@ public final class Callbacks {
 
 	private Callbacks() {}
 
-	/** @see GLFW#glfwSetErrorCallback */
-	public static void glfwSetCallback(GLFWErrorCallback cbfun) { glfwSetErrorCallback(cbfun); }
-
-	/** @see GLFW#glfwSetMonitorCallback */
-	public static void glfwSetCallback(GLFWMonitorCallback cbfun) { glfwSetMonitorCallback(cbfun); }
-
-	/** @see GLFW#glfwSetWindowPosCallback */
-	public static void glfwSetCallback(long window, GLFWWindowPosCallback cbfun) { glfwSetWindowPosCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetWindowSizeCallback */
-	public static void glfwSetCallback(long window, GLFWWindowSizeCallback cbfun) { glfwSetWindowSizeCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetWindowCloseCallback */
-	public static void glfwSetCallback(long window, GLFWWindowCloseCallback cbfun) { glfwSetWindowCloseCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetWindowRefreshCallback */
-	public static void glfwSetCallback(long window, GLFWWindowRefreshCallback cbfun) { glfwSetWindowRefreshCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetWindowFocusCallback */
-	public static void glfwSetCallback(long window, GLFWWindowFocusCallback cbfun) { glfwSetWindowFocusCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetWindowIconifyCallback */
-	public static void glfwSetCallback(long window, GLFWWindowIconifyCallback cbfun) { glfwSetWindowIconifyCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetFramebufferSizeCallback */
-	public static void glfwSetCallback(long window, GLFWFramebufferSizeCallback cbfun) { glfwSetFramebufferSizeCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetKeyCallback */
-	public static void glfwSetCallback(long window, GLFWKeyCallback cbfun) { glfwSetKeyCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetCharCallback */
-	public static void glfwSetCallback(long window, GLFWCharCallback cbfun) { glfwSetCharCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetCharModsCallback */
-	public static void glfwSetCallback(long window, GLFWCharModsCallback cbfun) { glfwSetCharModsCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetMouseButtonCallback */
-	public static void glfwSetCallback(long window, GLFWMouseButtonCallback cbfun) { glfwSetMouseButtonCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetCursorPosCallback */
-	public static void glfwSetCallback(long window, GLFWCursorPosCallback cbfun) { glfwSetCursorPosCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetCursorEnterCallback */
-	public static void glfwSetCallback(long window, GLFWCursorEnterCallback cbfun) { glfwSetCursorEnterCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetScrollCallback */
-	public static void glfwSetCallback(long window, GLFWScrollCallback cbfun) { glfwSetScrollCallback(window, cbfun); }
-
-	/** @see GLFW#glfwSetDropCallback */
-	public static void glfwSetCallback(long window, GLFWDropCallback cbfun) { glfwSetDropCallback(window, cbfun); }
-
 	/**
 	 * Resets all callbacks for the specified GLFW window to {@code NULL} and {@link Closure#release releases} all previously set callbacks.
 	 *

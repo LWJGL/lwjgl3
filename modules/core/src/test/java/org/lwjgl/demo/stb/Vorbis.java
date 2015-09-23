@@ -276,7 +276,7 @@ public final class Vorbis {
 		private boolean buttonPressed;
 
 		Renderer(final Decoder decoder, String title) {
-			glfwSetCallback(errorCallback = GLFWErrorCallback.createPrint());
+			errorCallback = GLFWErrorCallback.createPrint().set();
 			if ( glfwInit() != GL11.GL_TRUE )
 				throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -288,14 +288,14 @@ public final class Vorbis {
 			if ( window == NULL )
 				throw new RuntimeException("Failed to create the GLFW window");
 
-			glfwSetCallback(window, framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
+			framebufferSizeCallback = new GLFWFramebufferSizeCallback() {
 				@Override
 				public void invoke(long window, int width, int height) {
 					glViewport(0, 0, width, height);
 				}
-			});
+			}.set(window);
 
-			glfwSetCallback(window, keyCallback = new GLFWKeyCallback() {
+			keyCallback = new GLFWKeyCallback() {
 				@Override
 				public void invoke(long window, int key, int scancode, int action, int mods) {
 					if ( action == GLFW_RELEASE )
@@ -319,9 +319,9 @@ public final class Vorbis {
 							break;
 					}
 				}
-			});
+			}.set(window);
 
-			glfwSetCallback(window, mouseButtonCallback = new GLFWMouseButtonCallback() {
+			mouseButtonCallback = new GLFWMouseButtonCallback() {
 				@Override
 				public void invoke(long window, int button, int action, int mods) {
 					if ( button != GLFW_MOUSE_BUTTON_LEFT )
@@ -333,9 +333,9 @@ public final class Vorbis {
 
 					seek(decoder);
 				}
-			});
+			}.set(window);
 
-			glfwSetCallback(window, cursorPosCallback = new GLFWCursorPosCallback() {
+			cursorPosCallback = new GLFWCursorPosCallback() {
 				@Override
 				public void invoke(long window, double xpos, double ypos) {
 					cursorX = xpos - WIDTH * 0.5f;
@@ -344,7 +344,7 @@ public final class Vorbis {
 					if ( buttonPressed )
 						seek(decoder);
 				}
-			});
+			}.set(window);
 
 			// Center window
 			GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));

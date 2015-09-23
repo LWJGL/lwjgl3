@@ -57,7 +57,8 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		"java.io.PrintStream",
 		"java.lang.reflect.Field",
 		"java.util.Map",
-        "org.lwjgl.LWJGLUtil.TokenFilter"
+        "org.lwjgl.LWJGLUtil.TokenFilter",
+	    "static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """
 	/** A functional interface for {@link GLFWErrorCallback}. */
@@ -135,6 +136,12 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 			}
 		};
 	}
+
+	/** See {@link GLFW#glfwSetErrorCallback SetErrorCallback}. */
+	public GLFWErrorCallback set() {
+		glfwSetErrorCallback(this);
+		return this;
+	}
 """
 }
 
@@ -146,6 +153,14 @@ val GLFWmonitorfun = "GLFWmonitorfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMonitorCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetMonitorCallback SetMonitorCallback}. */
+	public GLFWMonitorCallback set() {
+		glfwSetMonitorCallback(this);
+		return this;
+	}
+	"""
 }
 
 val GLFWwindowposfun = "GLFWwindowposfun".callback(
@@ -157,6 +172,14 @@ val GLFWwindowposfun = "GLFWwindowposfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowPosCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowPosCallback SetWindowPosCallback}. */
+	public GLFWWindowPosCallback set(long window) {
+		glfwSetWindowPosCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 
@@ -169,6 +192,14 @@ val GLFWwindowsizefun = "GLFWwindowsizefun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowSizeCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowSizeCallback SetWindowSizeCallback}. */
+	public GLFWWindowSizeCallback set(long window) {
+		glfwSetWindowSizeCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
@@ -178,6 +209,14 @@ val GLFWwindowclosefun = "GLFWwindowclosefun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowCloseCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowCloseCallback SetWindowCloseCallback}. */
+	public GLFWWindowCloseCallback set(long window) {
+		glfwSetWindowCloseCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
@@ -190,6 +229,14 @@ val GLFWwindowrefreshfun = "GLFWwindowrefreshfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowRefreshCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowRefreshCallback SetWindowRefreshCallback}. */
+	public GLFWWindowRefreshCallback set(long window) {
+		glfwSetWindowRefreshCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
@@ -201,6 +248,14 @@ val GLFWwindowfocusfun = "GLFWwindowfocusfun".callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowFocusCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowFocusCallback SetWindowFocusCallback}. */
+	public GLFWWindowFocusCallback set(long window) {
+		glfwSetWindowFocusCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
@@ -212,6 +267,14 @@ val GLFWwindowiconifyfun = "GLFWwindowiconifyfun".callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetWindowIconifyCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetWindowIconifyCallback SetWindowIconifyCallback}. */
+	public GLFWWindowIconifyCallback set(long window) {
+		glfwSetWindowIconifyCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
@@ -223,6 +286,14 @@ val GLFWframebuffersizefun = "GLFWframebuffersizefun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetFramebufferSizeCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetFramebufferSizeCallback SetFramebufferSizeCallback}. */
+	public GLFWFramebufferSizeCallback set(long window) {
+		glfwSetFramebufferSizeCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWkeyfun = "GLFWkeyfun".callback(
@@ -236,6 +307,14 @@ val GLFWkeyfun = "GLFWkeyfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetKeyCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetKeyCallback SetKeyCallback}. */
+	public GLFWKeyCallback set(long window) {
+		glfwSetKeyCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWcharfun = "GLFWcharfun".callback(
@@ -246,6 +325,14 @@ val GLFWcharfun = "GLFWcharfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetCharCallback SetCharCallback}. */
+	public GLFWCharCallback set(long window) {
+		glfwSetCharCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
@@ -257,6 +344,14 @@ val GLFWcharmodsfun = "GLFWcharmodsfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCharModsCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetCharModsCallback SetCharModsCallback}. */
+	public GLFWCharModsCallback set(long window) {
+		glfwSetCharModsCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
@@ -269,6 +364,14 @@ val GLFWmousebuttonfun = "GLFWmousebuttonfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetMouseButtonCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetMouseButtonCallback SetMouseButtonCallback}. */
+	public GLFWMouseButtonCallback set(long window) {
+		glfwSetMouseButtonCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWcursorposfun = "GLFWcursorposfun".callback(
@@ -280,6 +383,14 @@ val GLFWcursorposfun = "GLFWcursorposfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorPosCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetCursorPosCallback SetCursorPosCallback}. */
+	public GLFWCursorPosCallback set(long window) {
+		glfwSetCursorPosCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
@@ -291,6 +402,14 @@ val GLFWcursorenterfun = "GLFWcursorenterfun".callback(
 ) {
 	javaImport("org.lwjgl.opengl.GL11")
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetCursorEnterCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetCursorEnterCallback SetCursorEnterCallback}. */
+	public GLFWCursorEnterCallback set(long window) {
+		glfwSetCursorEnterCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWscrollfun = "GLFWscrollfun".callback(
@@ -302,6 +421,14 @@ val GLFWscrollfun = "GLFWscrollfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetScrollCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
+	additionalCode = """
+	/** See {@link GLFW#glfwSetScrollCallback SetScrollCallback}. */
+	public GLFWScrollCallback set(long window) {
+		glfwSetScrollCallback(window, this);
+		return this;
+	}
+	"""
 }
 
 val GLFWdropfun = "GLFWdropfun".callback(
@@ -313,6 +440,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetDropCallback() method."
+	preamble.javaImport("static org.lwjgl.glfw.GLFW.*")
 	additionalCode = """
 	/** A functional interface for {@link GLFWDropCallback}. */
 	public interface SAMBuffer {
@@ -431,6 +559,12 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	public static void apply(int count, long names, ConsumerString consumer) {
 		for ( int i = 0; i < count; i++ )
 			consumer.accept(i, memDecodeUTF8(memGetAddress(names + POINTER_SIZE * i)));
+	}
+
+	/** See {@link GLFW#glfwSetDropCallback SetDropCallback}. */
+	public GLFWDropCallback set(long window) {
+		glfwSetDropCallback(window, this);
+		return this;
 	}
 """
 }

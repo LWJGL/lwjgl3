@@ -183,7 +183,7 @@ abstract class FontDemo {
 	}
 
 	private void init(String title) {
-		glfwSetCallback(errorfun);
+		errorfun.set();
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -195,10 +195,10 @@ abstract class FontDemo {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetCallback(window, windowSizefun);
-		glfwSetCallback(window, framebufferSizefun);
-		glfwSetCallback(window, keyfun);
-		glfwSetScrollCallback(window, scrollfun);
+		windowSizefun.set(window);
+		framebufferSizefun.set(window);
+		keyfun.set(window);
+		scrollfun.set(window);
 
 		// Center window
 		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));

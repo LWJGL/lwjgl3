@@ -163,7 +163,7 @@ public final class Image {
 	}
 
 	private void init() {
-		glfwSetCallback(errorfun);
+		errorfun.set();
 		if ( glfwInit() != GL11.GL_TRUE )
 			throw new IllegalStateException("Unable to initialize GLFW");
 
@@ -177,10 +177,10 @@ public final class Image {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetCallback(window, windowSizefun);
-		glfwSetCallback(window, framebufferSizefun);
-		glfwSetCallback(window, keyfun);
-		glfwSetCallback(window, scrollfun);
+		windowSizefun.set(window);
+		framebufferSizefun.set(window);
+		keyfun.set(window);
+		scrollfun.set(window);
 
 		// Center window
 		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));

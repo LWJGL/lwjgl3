@@ -341,9 +341,9 @@ public final class TruetypeOversample {
 		if ( window == NULL )
 			throw new RuntimeException("Failed to create the GLFW window");
 
-		glfwSetCallback(window, windowSizefun);
-		glfwSetCallback(window, framebufferSizefun);
-		glfwSetKeyCallback(window, keyfun);
+		windowSizefun.set(window);
+		framebufferSizefun.set(window);
+		keyfun.set(window);
 
 		// Center window
 		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
