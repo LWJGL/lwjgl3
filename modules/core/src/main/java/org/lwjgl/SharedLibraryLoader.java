@@ -106,9 +106,8 @@ final class SharedLibraryLoader {
 		try {
 			// Extract the lwjgl shared library and get the library path
 			extractPath = extractFile(libraries[0].file, null).getParentFile();
-
-		} catch (Throwable t) {
-			throw new RuntimeException("Unable to extract LWJGL natives.", t);
+		} catch (Exception e) {
+			throw new RuntimeException("Unable to extract LWJGL natives", e);
 		}
 
 		// Extract the other shared libraries in the same path
@@ -116,7 +115,7 @@ final class SharedLibraryLoader {
 			try {
 				extractFile(libraries[i].file, extractPath);
 			} catch (Exception e) {
-				LWJGLUtil.log("Failed to extract " + libraries[i].name() + " library.");
+				LWJGLUtil.log("Failed to extract " + libraries[i].name() + " library");
 			}
 		}
 
@@ -248,9 +247,6 @@ final class SharedLibraryLoader {
 	 * @return the CRC as a hex String
 	 */
 	private static String crc(InputStream input) {
-		if ( input == null )
-			throw new IllegalArgumentException("input cannot be null.");
-
 		CRC32 crc = new CRC32();
 		byte[] buffer = new byte[4096];
 		try {

@@ -33,11 +33,17 @@ public final class Sys {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
 		try {
 			LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
-		} catch (Throwable t) {
-			// Failed, attempt to extract the natives from the classpath
-			SharedLibraryLoader.load();
-			// and try again
-			LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+		} catch (UnsatisfiedLinkError ule) {
+			try {
+				// Failed, attempt to extract the natives from the classpath
+				SharedLibraryLoader.load();
+				// and try again
+				LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+			} catch (Throwable t) {
+				if ( LWJGLUtil.DEBUG )
+					t.printStackTrace();
+				throw ule;
+			}
 		}
 	}
 

@@ -41,8 +41,8 @@ public abstract class AbstractGears {
 		} finally {
 			try {
 				destroy();
-			} catch (Exception e) {
-				e.printStackTrace();
+			} catch (Throwable t) {
+				t.printStackTrace();
 			}
 		}
 	}
