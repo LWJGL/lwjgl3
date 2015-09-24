@@ -19,6 +19,9 @@ import static org.lwjgl.system.APIUtil.*;
 /** Internal library methods */
 public final class LWJGLUtil {
 
+	private static final String LWJGL_LIBRARY_PATH = "org.lwjgl.librarypath";
+	private static final String JAVA_LIBRARY_PATH = "java.library.path";
+
 	public enum Platform {
 		LINUX("linux") {
 			private final Pattern SO = Pattern.compile("lib\\w+[.]so(?:[.]\\d+){0,3}");
@@ -150,16 +153,16 @@ public final class LWJGLUtil {
 		}
 
 		// Try org.lwjgl.librarypath first
-		String override = System.getProperty("org.lwjgl.librarypath");
+		String override = System.getProperty(LWJGL_LIBRARY_PATH);
 		if ( override != null && loadLibrary(LOADER_SYSTEM, override, PLATFORM.mapLibraryName(name), false) ) {
-			LWJGLUtil.log("Loaded library from org.lwjgl.librarypath: " + name);
+			LWJGLUtil.log("Loaded library from " + LWJGL_LIBRARY_PATH + ": " + name);
 			return;
 		}
 
 		// Then java.library.path
 		try {
 			System.loadLibrary(name);
-			LWJGLUtil.log("Loaded library from java.library.path: " + name);
+			LWJGLUtil.log("Loaded library from " + JAVA_LIBRARY_PATH + ": " + name);
 		} catch (UnsatisfiedLinkError t) {
 			try {
 				// Then the current working directory
@@ -189,7 +192,7 @@ public final class LWJGLUtil {
 		String libName = PLATFORM.mapLibraryName(name);
 
 		// Try org.lwjgl.librarypath first
-		String override = System.getProperty("org.lwjgl.librarypath");
+		String override = System.getProperty(LWJGL_LIBRARY_PATH);
 		if ( override != null ) {
 			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, libName, null);
 			if ( lib != null )
@@ -197,7 +200,7 @@ public final class LWJGLUtil {
 		}
 
 		// Then java.library.path
-		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), libName, null);
+		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty(JAVA_LIBRARY_PATH), libName, null);
 		if ( lib != null )
 			return lib;
 
