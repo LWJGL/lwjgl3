@@ -151,17 +151,24 @@ public final class LWJGLUtil {
 
 		// Try org.lwjgl.librarypath first
 		String override = System.getProperty("org.lwjgl.librarypath");
-		if ( override != null ) {
-			String libName = PLATFORM.mapLibraryName(name);
-			if ( loadLibrary(LOADER_SYSTEM, override, libName, false) ) {
-				LWJGLUtil.log("Loaded library from org.lwjgl.librarypath: " + libName);
-				return;
-			}
+		if ( override != null && loadLibrary(LOADER_SYSTEM, override, PLATFORM.mapLibraryName(name), false) ) {
+			LWJGLUtil.log("Loaded library from org.lwjgl.librarypath: " + name);
+			return;
 		}
 
 		// Then java.library.path
-		System.loadLibrary(name);
-		LWJGLUtil.log("Loaded library from java.library.path: " + name);
+		try {
+			System.loadLibrary(name);
+			LWJGLUtil.log("Loaded library from java.library.path: " + name);
+		} catch (UnsatisfiedLinkError t) {
+			try {
+				// Then the current working directory
+				System.load(new File("./" + PLATFORM.mapLibraryName(name)).getAbsolutePath());
+				LWJGLUtil.log("Loaded library from the working directory: " + name);
+			} catch (UnsatisfiedLinkError ignored) {
+				throw t;
+			}
+		}
 	}
 
 	/**
@@ -176,28 +183,35 @@ public final class LWJGLUtil {
 	 */
 
 	public static DynamicLinkLibrary loadLibraryNative(String name) {
-		String libName;
 		if ( new File(name).isAbsolute() )
-			libName = name;
-		else {
-			libName = PLATFORM.mapLibraryName(name);
+			return apiCreateLibrary(name);
 
-			// Try org.lwjgl.librarypath first
-			String override = System.getProperty("org.lwjgl.librarypath");
-			if ( override != null ) {
-				DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, libName, null);
-				if ( lib != null )
-					return lib;
-			}
+		String libName = PLATFORM.mapLibraryName(name);
 
-			// Then java.library.path
-			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), libName, null);
+		// Try org.lwjgl.librarypath first
+		String override = System.getProperty("org.lwjgl.librarypath");
+		if ( override != null ) {
+			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, libName, null);
 			if ( lib != null )
 				return lib;
 		}
 
+		// Then java.library.path
+		DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, System.getProperty("java.library.path"), libName, null);
+		if ( lib != null )
+			return lib;
+
 		// Then the OS paths
-		return apiCreateLibrary(libName);
+		try {
+			return apiCreateLibrary(libName);
+		} catch (RuntimeException e) {
+			try {
+				// Then the current working directory
+				return apiCreateLibrary("./" + libName);
+			} catch (Exception ignored) {
+				throw e;
+			}
+		}
 	}
 
 	private interface LibraryLoader<T> {
