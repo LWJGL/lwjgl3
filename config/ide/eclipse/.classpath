@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="org/lwjgl/egl/|org/lwjgl/opengles/|org/lwjgl/glfw/GLFWNativeEGL.java" kind="src" path="modules/core/src/generated/java"/>
+	<classpathentry excluding="org/lwjgl/egl/|org/lwjgl/opengles/" kind="src" path="modules/core/src/main/java">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="lwjgl3/libs"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="org/lwjgl/demo/ovr/" kind="src" path="modules/core/src/test/java"/>
+	<classpathentry excluding="org/lwjgl/system/|org/lwjgl/PointerBuffer.java" kind="src" path="modules/templates/src/main/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="libs/testng.jar"/>
+	<classpathentry kind="output" path="bin/Tests"/>
+</classpath>
