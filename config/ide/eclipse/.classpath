@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="modules/core/src/generated/java"/>
-	<classpathentry kind="src" path="modules/core/src/main/java">
+	<classpathentry kind="src" path="modules/core/src/main/java" />
+	<classpathentry excluding="org/lwjgl/demo/ovr/" kind="src" path="modules/core/src/test/java"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
 		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="libs"/>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="lwjgl3/libs"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="org/lwjgl/demo/ovr/" kind="src" path="modules/core/src/test/java"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="libs/testng.jar"/>
 	<classpathentry kind="output" path="bin/eclipse"/>
 </classpath>
