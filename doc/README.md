@@ -117,14 +117,14 @@ The supported properties are:
 * org.lwjgl.librarypath [DYNAMIC]  
     Takes priority over java.library.path. It may contain one or more directory paths, separated by the platform path separator (: or ;).
 * org.lwjgl.SLLTempDirectory [DYNAMIC]
-	Changes the default temporary directory name created by the SharedLibraryLoader.
+	Changes the default temporary directory name created by the [SharedLibraryLoader](https://github.com/LWJGL/lwjgl3/blob/master/modules/core/src/main/java/org/lwjgl/SharedLibraryLoader.java).
 * org.lwjgl.util.BufferAlign [STATIC]
 	Sets the alignment of buffers allocated by BufferUtils. By default, buffer allocations will be unaligned (whatever ByteBuffer.allocateDirect returns). Supported values:
 	- *cache-line*
 		Cache-line alignment (usually 64 bytes)
-	- *default*  
+	- *default*
 		Default alignment. The JDK uses 8 byte alignment for all direct ByteBuffers.
-	- &lt;*number*&gt;  
+	- &lt;*number*&gt;
 		Custom alignment. Must be a power-of-two integer, greater than 8.
 * org.lwjgl.system.allocator [STATIC]
 	Sets the allocator used for the MemoryUtil explicit memory management API (memAlloc/memFree/etc). Supported values:
@@ -136,6 +136,7 @@ The supported properties are:
 	Set to true to enable LWJGL's debug mode. There will be logged messages on stderr and extra runtime checks (some potentially expensive, performance-wise).
 * org.lwjgl.util.DebugAllocator [STATIC]
 	Set to true to enable LWJGL's debug mode for the MemoryUtil explicit memory management API (memAlloc/memFree/etc). All memory allocations through that API will be tracked and leaks will be reported on JVM exit. The memReport methods can also be used.
+	The debug allocator generates stack traces on every allocation, which may negatively impact performance. If this becomes a serious issue, the JVM options `-XX:-StackTraceInThrowable` and `-XX:MaxJavaStackTraceDepth=d` (where `d >= 6`) can be used to reduce the overhead.
 * org.lwjgl.util.NoChecks [STATIC]
 	Set to true to disable LWJGL's basic checks. These are trivial checks that LWJGL performs to avoid JVM crashes, very useful during development. Their performance impact is usually minimal, but may they be disabled for released applications.
 * org.lwjgl.egl.libname [DYNAMIC]

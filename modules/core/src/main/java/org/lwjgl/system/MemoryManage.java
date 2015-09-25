@@ -199,7 +199,7 @@ final class MemoryManage {
 					THREADS.put(threadId, t.getName());
 
 				StackTraceElement[] stackTrace = t.getStackTrace();
-				int depth = 3;
+				int depth = Math.min(stackTrace.length, 4);
 				for (; depth < stackTrace.length; depth++ ) {
 					if ( !"org.lwjgl.system.MemoryUtil".equals(stackTrace[depth].getClassName()) )
 						break;
