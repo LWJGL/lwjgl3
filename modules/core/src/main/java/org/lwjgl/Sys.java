@@ -34,16 +34,16 @@ public final class Sys {
 	static {
 		log("Version " + getVersion() + " | " + System.getProperty("os.name") + " | " + System.getProperty("os.arch"));
 		try {
-			LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+			loadLibrarySystem(JNI_LIBRARY_NAME);
 		} catch (UnsatisfiedLinkError ule) {
 			try {
 				// Failed, attempt to extract the natives from the classpath
 				SharedLibraryLoader.load();
 				// and try again
-				LWJGLUtil.loadLibrarySystem(JNI_LIBRARY_NAME);
+				loadLibrarySystem(JNI_LIBRARY_NAME);
 			} catch (Throwable t) {
-				if ( LWJGLUtil.DEBUG )
-					t.printStackTrace();
+				if ( DEBUG )
+					t.printStackTrace(DEBUG_STREAM);
 				throw ule;
 			}
 		}
@@ -83,7 +83,7 @@ public final class Sys {
 						stream.close();
 					}
 				} catch (Exception e) {
-					e.printStackTrace();
+					e.printStackTrace(DEBUG_STREAM);
 				}
 			}
 		}

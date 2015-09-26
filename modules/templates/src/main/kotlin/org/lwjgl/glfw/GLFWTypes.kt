@@ -83,12 +83,12 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	}
 
 	/**
-	 * Returns a {@link GLFWErrorCallback} instance that prints the error in the standard error stream.
+	 * Returns a {@link GLFWErrorCallback} instance that prints the error to the {@link LWJGLUtil#DEBUG_STREAM}.
 	 *
 	 * @return the GLFWerrorCallback
 	 */
 	public static GLFWErrorCallback createPrint() {
-		return createPrint(System.err);
+		return createPrint(LWJGLUtil.DEBUG_STREAM);
 	}
 
 	/**

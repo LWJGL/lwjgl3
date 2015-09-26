@@ -7,9 +7,12 @@ package org.lwjgl.system;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.MemoryUtil.MemoryAllocator;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 
 import static org.lwjgl.system.APIUtil.*;
 
@@ -129,7 +132,8 @@ public enum Configuration {
 	 * {@link DebugStreamFactory DebugStreamFactory} interface. The class will be instantiated using reflection and the result of
 	 * {@link DebugStreamFactory#create DebugStreamFactory.create} will become the {@link #DEBUG_STREAM} used by LWJGL.
 	 *
-	 * <p>When set programmatically, it can also be a {@link PrintStream} instance.</p>
+	 * <p>When set programmatically, it can also be a {@link PrintStream} instance. The {@link #setDebugStreamConsumer} can be used to forward debug messages
+	 * to any consumer.</p>
 	 *
 	 * <p style="font-family: monospace">
 	 * Property: <b>org.lwjgl.util.DebugStream</b><br>
@@ -281,10 +285,74 @@ public enum Configuration {
 		return version;
 	}
 
+	/**
+	 * Configures the {@link #DEBUG_STREAM} to forward all messages to the specified consumer.
+	 *
+	 * @param consumer the debug message consumer
+	 */
+	public static void setDebugStreamConsumer(DebugStreamConsumer consumer) {
+		setDebugStreamConsumer(consumer, Charset.forName("UTF-8"));
+	}
+
+	/**
+	 * Configures the {@link #DEBUG_STREAM} to forward all messages to the specified consumer.
+	 *
+	 * @param consumer the debug message consumer
+	 * @param charset  the message charset
+	 */
+	public static void setDebugStreamConsumer(final DebugStreamConsumer consumer, final Charset charset) {
+		final ByteArrayOutputStream buffer = new ByteArrayOutputStream() {
+			@Override
+			public void flush() throws IOException {
+				if ( count == 0 )
+					return;
+
+				consumer.accept(new String(buf, 0, count - 1, charset));
+				this.reset();
+			}
+		};
+
+		DEBUG_STREAM.set(new PrintStream(buffer, true) {
+			@Override
+			public void write(byte[] b, int off, int len) {
+				// The default implementation flushes unconditionally.
+				// We flush on a newline only.
+				buffer.write(b, off, len);
+				if ( b[off + len - 1] == '\n' ) // TODO: search the entire string?
+					flush();
+			}
+		});
+	}
+
+	/** Implementations of this interface may used with {@link #setDebugStreamConsumer} to receive debug messages. */
+	public interface DebugStreamConsumer {
+		void accept(String message);
+	}
+
 	/** An implementation of this interface may be set to the {@link #DEBUG_STREAM} option. */
 	public interface DebugStreamFactory {
 		/** Returns a {@link PrintStream} instance. */
 		PrintStream create();
+	}
+
+	/** Creates the {@link LWJGLUtil#DEBUG_STREAM}. [INTERNAL USE ONLY]. */
+	public static PrintStream createDebugStream() {
+		PrintStream debugStream = System.err;
+
+		Object state = Configuration.DEBUG_STREAM.get();
+		if ( state instanceof String ) {
+			try {
+				Configuration.DebugStreamFactory factory = (Configuration.DebugStreamFactory)Class.forName((String)state).newInstance();
+				debugStream = factory.create();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} else if ( state instanceof Configuration.DebugStreamFactory ) {
+			debugStream = ((Configuration.DebugStreamFactory)state).create();
+		} else if ( state instanceof PrintStream )
+			debugStream = (PrintStream)state;
+
+		return debugStream;
 	}
 
 }

@@ -8,6 +8,7 @@ import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -93,6 +94,13 @@ public final class LWJGLUtil {
 	 * @see org.lwjgl.opengl.OpenGLException
 	 */
 	public static final boolean DEBUG = Configuration.DEBUG.<Boolean>get();
+
+	/**
+	 * The {@link PrintStream} used by LWJGL to print debug information and non-fatal errors. Defaults to {@link System#err} which can be changed with
+	 * {@link Configuration#DEBUG_STREAM}.
+	 */
+	public static final PrintStream DEBUG_STREAM = Configuration.createDebugStream();
+
 	private static final Platform PLATFORM;
 
 	static {
@@ -245,14 +253,14 @@ public final class LWJGLUtil {
 	}
 
 	/**
-	 * Prints the specified message to System.err if DEBUG is true.
+	 * Prints the specified message to the {@link #DEBUG_STREAM} if {@link #DEBUG} is true.
 	 *
-	 * @param msg Message to print
+	 * @param msg the message to print
 	 */
 	public static void log(CharSequence msg) {
 		if ( DEBUG ) {
-			System.err.print("[LWJGL] ");
-			System.err.println(msg);
+			DEBUG_STREAM.print("[LWJGL] ");
+			DEBUG_STREAM.println(msg);
 		}
 	}
 

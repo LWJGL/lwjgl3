@@ -14,6 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
+import static org.lwjgl.LWJGLUtil.*;
 import static org.lwjgl.system.MemoryUtil.*;
 import static org.lwjgl.system.jemalloc.JEmalloc.*;
 import static org.lwjgl.system.libc.Stdlib.*;
@@ -35,8 +36,8 @@ final class MemoryManage {
 				Class.forName("org.lwjgl.system.jemalloc.JEmalloc").getMethod("getInstance").invoke(null);
 				return new JEmallocAllocator();
 			} catch (Exception e) {
-				if ( LWJGLUtil.DEBUG )
-					e.printStackTrace();
+				if ( DEBUG )
+					e.printStackTrace(DEBUG_STREAM);
 				LWJGLUtil.log("[MemoryAllocator] Failed to load the jemalloc library.");
 				return new StdlibAllocator();
 			}
@@ -144,7 +145,7 @@ final class MemoryManage {
 						Long address = entry.getKey();
 						Allocation allocation = entry.getValue();
 
-						System.err.format(
+						DEBUG_STREAM.format(
 							"[LWJGL] %d bytes leaked, thread %d (%s), address: 0x%s\n",
 							allocation.size,
 							allocation.threadId,
@@ -152,7 +153,7 @@ final class MemoryManage {
 							Long.toHexString(address).toUpperCase()
 						);
 						for ( StackTraceElement el : allocation.stackTrace )
-							System.err.println("\t" + el.toString());
+							DEBUG_STREAM.println("\t" + el.toString());
 					}
 				}
 			});
