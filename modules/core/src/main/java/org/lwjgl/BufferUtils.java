@@ -4,6 +4,8 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.Configuration;
+
 import java.nio.*;
 
 import static org.lwjgl.system.MathUtil.*;
@@ -31,15 +33,8 @@ import static org.lwjgl.system.MemoryUtil.*;
  * parameter).</p>
  *
  * <h3>Memory alignment</h3>
- * <p>This class also supports automatically aligned buffer allocations. The {@code org.lwjgl.util.BufferAlign} system property can be used to control the
- * alignment size. Note that the JVM guarantees a minimum alignment size of 8 bytes, which is the default. Supported values:
- * <ul>
- * <li><b>cache-line</b> &ndash; CPU cache-line alignment (usually 64 bytes)</li>
- * <li><b>default</b> &ndash; the default alignment (8 bytes)</li>
- * <li><em>&lt;custom&gt;</em> &ndash; user-specified alignment, must be a power-of-two integer greater than 8</li>
- * </ul>
- * The system property will be read only once, when this class is loaded. Hence, the automatic alignment size cannot change at runtime, but there are additional
- * methods that can be used when special alignment is required.</p>
+ * <p>This class also supports automatically aligned buffer allocations. It can be configured using the {@link Configuration#MEMORY_DEFAULT_ALIGNMENT}. Note
+ * that the JVM guarantees a minimum alignment size of 8 bytes, which is the default.</p>
  *
  * <h3>Memory management</h3>
  * <p>Using NIO buffers for off-heap memory has some drawbacks:
@@ -63,7 +58,7 @@ public final class BufferUtils {
 	private BufferUtils() {}
 
 	private static BufferAllocator getDefaultAllocator() {
-		String alignment = System.getProperty("org.lwjgl.util.BufferAlign", "default");
+		String alignment = Configuration.MEMORY_DEFAULT_ALIGNMENT.get("default");
 
 		if ( "cache-line".equals(alignment) )
 			return new BufferAllocator() {
@@ -95,8 +90,8 @@ public final class BufferUtils {
 		}
 
 		throw new IllegalArgumentException(String.format(
-			"Invalid org.lwjgl.util.BufferAlign value: \"%s\". It must be one of [cache-line, default, a power-of-two integer > 8].",
-			alignment
+			"Invalid %s value: \"%s\". It must be one of [cache-line, default, a power-of-two integer > 8].",
+			Configuration.MEMORY_DEFAULT_ALIGNMENT.getProperty(), alignment
 		));
 	}
 

@@ -7,6 +7,7 @@ package org.lwjgl.opencl;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProviderLocal;
 
@@ -26,14 +27,14 @@ public final class CL {
 	private static CLCapabilities icd;
 
 	static {
-		if ( !Boolean.getBoolean("org.lwjgl.opencl.explicitInit") )
+		if ( !Configuration.EXPLICIT_INIT_OPENCL.<Boolean>get() )
 			create();
 	}
 
 	private CL() {}
 
 	public static void create() {
-		create(System.getProperty("org.lwjgl.opencl.libname", "OpenCL"));
+		create(Configuration.LIBRARY_NAME_OPENCL.get("OpenCL"));
 	}
 
 	public static void create(final String libName) {

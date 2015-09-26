@@ -4,6 +4,7 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 
 import java.io.File;
@@ -19,7 +20,6 @@ import static org.lwjgl.system.APIUtil.*;
 /** Internal library methods */
 public final class LWJGLUtil {
 
-	private static final String LWJGL_LIBRARY_PATH = "org.lwjgl.librarypath";
 	private static final String JAVA_LIBRARY_PATH = "java.library.path";
 
 	public enum Platform {
@@ -73,28 +73,26 @@ public final class LWJGLUtil {
 	}
 
 	/**
-	 * Checks flag. When enabled, LWJGL will perform basic checks during its operation, mainly to avoid crashes in native code. Examples
-	 * of such checks are: context-specific function address validation, buffer capacity checks, null-termination checks, etc.
-	 * These checks are generally low-overhead and should not have a measurable effect on performance, so its recommended to have them
-	 * enabled both during development and in production releases.
-	 * <p/>
-	 * If maximum performance is required, they can be disabled by setting the system property {@code org.lwjgl.util.NoChecks} to true.
+	 * Checks flag. When enabled, LWJGL will perform basic checks during its operation, mainly to avoid crashes in native code. Examples of such checks are:
+	 * context-specific function address validation, buffer capacity checks, null-termination checks, etc. These checks are generally low-overhead and should
+	 * not have a measurable effect on performance, so its recommended to have them enabled both during development and in production releases.
+	 *
+	 * <p>If maximum performance is required, they can be disabled by setting {@link Configuration#DISABLE_CHECKS} to true.</p>
 	 */
-	public static final boolean CHECKS = !Boolean.getBoolean("org.lwjgl.util.NoChecks");
+	public static final boolean CHECKS = !Configuration.DISABLE_CHECKS.<Boolean>get();
 
 	/**
-	 * Debug flag. When enabled, LWJGL will perform additional checks during its operation. These checks are less trivial than the ones
-	 * enabled with {@link #CHECKS} and will have a noticeable effect on performance, so they are disabled by default. Examples of such
-	 * checks are: a GetError call after SwapBuffers, buffer object binding state check (GL), buffer capacity checks for texture images (GL & CL), etc.
-	 * LWJGL will also print additional information in stdout, mainly during start-up.
-	 * <p/>
-	 * Can be enabled by setting the system property {@code org.lwjgl.util.Debug} to true.
+	 * Debug flag. When enabled, LWJGL will perform additional checks during its operation. These checks are less trivial than the ones enabled with
+	 * {@link #CHECKS} and will have a noticeable effect on performance, so they are disabled by default. Examples of such checks are: a GetError call after
+	 * SwapBuffers, buffer object binding state check (GL), buffer capacity checks for texture images (GL & CL), etc. LWJGL will also print additional
+	 * information in stdout, mainly during start-up.
+	 *
+	 * <p>Can be enabled by setting {@link Configuration#DEBUG} to true.</p>
 	 *
 	 * @see org.lwjgl.opencl.OpenCLException
 	 * @see org.lwjgl.opengl.OpenGLException
 	 */
-	public static final boolean DEBUG = Boolean.getBoolean("org.lwjgl.util.Debug");
-
+	public static final boolean DEBUG = Configuration.DEBUG.<Boolean>get();
 	private static final Platform PLATFORM;
 
 	static {
@@ -137,8 +135,8 @@ public final class LWJGLUtil {
 	/**
 	 * Loads a native library using {@link System}.
 	 *
-	 * <p>If {@code name} is an absolute path or {@code org.lwjgl.librarypath} is set, {@link System#load} will be used. Otherwise, {@link System#loadLibrary}
-	 * will be used.</p>
+	 * <p>If {@code name} is an absolute path or {@link Configuration#LIBRARY_PATH} is set, {@link System#load} will be used. Otherwise,
+	 * {@link System#loadLibrary} will be used.</p>
 	 *
 	 * @param name the library name. If not an absolute path, it must be the plain library name, without an OS specific prefix or file extension (e.g. GL, not
 	 *             libGL.so)
@@ -153,9 +151,9 @@ public final class LWJGLUtil {
 		}
 
 		// Try org.lwjgl.librarypath first
-		String override = System.getProperty(LWJGL_LIBRARY_PATH);
+		String override = Configuration.LIBRARY_PATH.get();
 		if ( override != null && loadLibrary(LOADER_SYSTEM, override, PLATFORM.mapLibraryName(name), false) ) {
-			LWJGLUtil.log("Loaded library from " + LWJGL_LIBRARY_PATH + ": " + name);
+			LWJGLUtil.log("Loaded library from " + Configuration.LIBRARY_PATH.getProperty() + ": " + name);
 			return;
 		}
 
@@ -192,7 +190,7 @@ public final class LWJGLUtil {
 		String libName = PLATFORM.mapLibraryName(name);
 
 		// Try org.lwjgl.librarypath first
-		String override = System.getProperty(LWJGL_LIBRARY_PATH);
+		String override = Configuration.LIBRARY_PATH.get();
 		if ( override != null ) {
 			DynamicLinkLibrary lib = loadLibrary(LOADER_NATIVE, override, libName, null);
 			if ( lib != null )

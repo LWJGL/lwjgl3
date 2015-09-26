@@ -6,6 +6,7 @@ package org.lwjgl.system.jemalloc;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Pointer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 
 /**
@@ -20,7 +21,7 @@ final class LibJEmalloc {
 	static final JEmalloc __JEmalloc;
 
 	static {
-		jemalloc = LWJGLUtil.loadLibraryNative(System.getProperty("org.lwjgl.system.jemalloc.libname", Pointer.BITS64 ? "jemalloc" : "jemalloc32"));
+		jemalloc = LWJGLUtil.loadLibraryNative(Configuration.LIBRARY_NAME_JEMALLOC.get(Pointer.BITS64 ? "jemalloc" : "jemalloc32"));
 		__JEmalloc = new JEmalloc(jemalloc);
 	}
 

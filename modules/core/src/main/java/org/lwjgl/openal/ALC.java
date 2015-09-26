@@ -7,6 +7,7 @@ package org.lwjgl.openal;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.Pointer;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProviderLocal;
 
@@ -24,7 +25,7 @@ public final class ALC {
 	private static FunctionProviderLocal functionProvider;
 
 	static {
-		if ( !Boolean.getBoolean("org.lwjgl.openal.explicitInit") )
+		if ( !Configuration.EXPLICIT_INIT_OPENAL.<Boolean>get() )
 			create();
 	}
 
@@ -46,7 +47,7 @@ public final class ALC {
 				throw new IllegalStateException();
 		}
 
-		create(System.getProperty("org.lwjgl.openal.libname", Pointer.BITS64 ? libName : libName + "32"));
+		create(Configuration.LIBRARY_NAME_OPENAL.get(Pointer.BITS64 ? libName : libName + "32"));
 	}
 
 	public static void create(String libName) {

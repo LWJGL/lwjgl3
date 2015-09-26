@@ -25,7 +25,9 @@ final class MemoryManage {
 	}
 
 	static MemoryAllocator getInstance() {
-		String allocator = System.getProperty("org.lwjgl.system.allocator", "jemalloc");
+		Object allocator = Configuration.MEMORY_ALLOCATOR.<Object>get("jemalloc");
+		if ( allocator instanceof MemoryAllocator )
+			return (MemoryAllocator)allocator;
 
 		if ( "jemalloc".equals(allocator) ) {
 			try {
@@ -42,7 +44,7 @@ final class MemoryManage {
 			return new StdlibAllocator();
 		} else {
 			try {
-				return (MemoryAllocator)Class.forName(allocator).newInstance();
+				return (MemoryAllocator)Class.forName(allocator.toString()).newInstance();
 			} catch (Exception e) {
 				throw new RuntimeException("Failed to instantiate custom memory allocator: " + allocator);
 			}

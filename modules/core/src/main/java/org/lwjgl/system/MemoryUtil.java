@@ -61,7 +61,7 @@ public final class MemoryUtil {
 		LWJGLUtil.log("MemoryUtil accessor: " + ACCESSOR.getClass().getSimpleName());
 
 		ALLOCATOR_IMPL = MemoryManage.getInstance();
-		ALLOCATOR = Boolean.getBoolean("org.lwjgl.util.DebugAllocator")
+		ALLOCATOR = Configuration.DEBUG_MEMORY_ALLOCATOR.<Boolean>get()
 			? new DebugAllocator(ALLOCATOR_IMPL)
 			: ALLOCATOR_IMPL;
 
@@ -122,8 +122,8 @@ public final class MemoryUtil {
 	/**
 	 * Returns the {@link MemoryAllocator} instance used internally by the explicit memory management API ({@link #memAlloc}, {@link #memFree}, etc).
 	 *
-	 * <p>Allocations made through the returned instance will not be tracked for memory leaks, even if {@code org.lwjgl.util.DebugAllocator} is enabled. This
-	 * can be useful for {@code static final} allocations that live throughout the application's lifetime and will never be freed until the process is
+	 * <p>Allocations made through the returned instance will not be tracked for memory leaks, even if {@link Configuration#DEBUG_MEMORY_ALLOCATOR} is enabled.
+	 * This can be useful for {@code static final} allocations that live throughout the application's lifetime and will never be freed until the process is
 	 * terminated. Normally such allocations would be reported as memory leaks by the debug allocator.</p>
 	 *
 	 * <p>The expectation is that this method will rarely be used, so it does not have the {@code mem} prefix to avoid pollution of auto-complete lists.</p>
@@ -477,7 +477,7 @@ public final class MemoryUtil {
 	/**
 	 * Reports all live allocations.
 	 *
-	 * <p>This method can only be used if the {@code org.lwjgl.util.DebugAllocator} system property has been set to true.</p>
+	 * <p>This method can only be used if the {@link Configuration#DEBUG_MEMORY_ALLOCATOR} option has been set to true.</p>
 	 *
 	 * @param report the report callback
 	 */
@@ -488,7 +488,7 @@ public final class MemoryUtil {
 	/**
 	 * Reports aggregates for the live allocations.
 	 *
-	 * <p>This method can only be used if the {@code org.lwjgl.util.DebugAllocator} system property has been set to true.</p>
+	 * <p>This method can only be used if the {@link Configuration#DEBUG_MEMORY_ALLOCATOR} option has been set to true.</p>
 	 *
 	 * @param report            the report callback
 	 * @param groupByStackTrace how to aggregate the reported allocations

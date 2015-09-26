@@ -4,6 +4,8 @@
  */
 package org.lwjgl;
 
+import org.lwjgl.system.Configuration;
+
 import java.io.*;
 import java.lang.reflect.Method;
 import java.util.EnumSet;
@@ -12,9 +14,9 @@ import java.util.zip.CRC32;
 
 /**
  * Loads shared libraries from the classpath. The libraries may be packed in JAR files, in which case they will be extracted to a temporary directory and that
- * directory will be prepended to {@code org.lwjgl.librarypath}
+ * directory will be prepended to {@link Configuration#LIBRARY_PATH}.
  *
- * The temporary directory name defaults to {@code lwjgl&lt;user name&gt;}. To change it, set the {@code org.lwjgl.SLLTempDirectory} system property.
+ * The temporary directory name defaults to {@code lwjgl&lt;user name&gt;}. To change it, set the {@link Configuration#SHARED_LIBRARY_TEMP_DIRECTORY} option.
  *
  * @author Mario Zechner (https://github.com/badlogic)
  * @author Nathan Sweet (https://github.com/NathanSweet)
@@ -86,7 +88,8 @@ final class SharedLibraryLoader {
 	}
 
 	/**
-	 * Extracts the LWJGL native libraries from the classpath and sets the {@code org.lwjgl.librarypath} system property.
+	 * Extracts the LWJGL native libraries from the classpath to a temporary directory and prepends the path to that directory to the
+	 * {@link Configuration#LIBRARY_PATH} option.
 	 */
 	static void load() {
 		if ( AOT || !loadedLibraries.isEmpty() )
@@ -120,12 +123,12 @@ final class SharedLibraryLoader {
 		}
 
 		// Prepend the path in which the libraries were extracted to org.lwjgl.librarypath
-		String libraryPath = System.getProperty("org.lwjgl.librarypath");
+		String libraryPath = Configuration.LIBRARY_PATH.get();
 		if ( libraryPath == null || libraryPath.isEmpty() )
 			libraryPath = extractPath.getAbsolutePath();
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
-		System.setProperty("org.lwjgl.librarypath", libraryPath);
+		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
 	}
 
 	/**
@@ -164,12 +167,12 @@ final class SharedLibraryLoader {
 		// The first time libraryPath will be a relative path (the lwjgl shared library CRC)
 
 		// Temp directory with username in path
-		String tempDirectory = System.getProperty("org.lwjgl.SLLTempDirectory", "lwjgl" + System.getProperty("user.name"));
+		String tempDirectory = Configuration.SHARED_LIBRARY_TEMP_DIRECTORY.get("lwjgl" + System.getProperty("user.name"));
 		File file = new File(System.getProperty("java.io.tmpdir") + "/" + tempDirectory + "/" + libraryPath, fileName);
 		if ( canWrite(file) ) return file;
 
 		// User home
-		tempDirectory = System.getProperty("org.lwjgl.SLLTempDirectory", "lwjgl");
+		tempDirectory = Configuration.SHARED_LIBRARY_TEMP_DIRECTORY.get("lwjgl");
 		file = new File(System.getProperty("user.home") + "/." + tempDirectory + "/" + libraryPath, fileName);
 		if ( canWrite(file) ) return file;
 

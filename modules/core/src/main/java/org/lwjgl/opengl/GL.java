@@ -6,6 +6,7 @@ package org.lwjgl.opengl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProvider;
 
@@ -32,11 +33,10 @@ import static org.lwjgl.system.MemoryUtil.*;
  * </ul>
  *
  * <h3>Library lifecycle</h3>
- * <p>The OpenGL library is loaded automatically when this class is initialized. Set the {@code org.lwjgl.opengl.explicitInit=true} system property to override
- * this behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can
- * be overridden with the {@code org.lwjgl.opengl.libname} system property. The maximum OpenGL version loaded can be set with the
- * {@code org.lwjgl.opengl.maxVersion=M.n} system property. This can be useful to ensure that no functionality above a specific version is used during
- * development.</p>
+ * <p>The OpenGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_OPENGL} option to override this
+ * behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden
+ * with the {@link Configuration#LIBRARY_NAME_OPENGL} option. The maximum OpenGL version loaded can be set with the {@link Configuration#MAXVERSION_OPENGL}
+ * option. This can be useful to ensure that no functionality above a specific version is used during development.</p>
  *
  * <h3>GLCapabilities creation</h3>
  * <p>Instances of {@code GLCapabilities} can be created with the {@link #createCapabilities} method. An OpenGL context must be current in the current thread
@@ -59,10 +59,9 @@ public final class GL {
 	private static FunctionProvider functionProvider;
 
 	static {
-		String max = System.getProperty("org.lwjgl.opengl.maxVersion");
-		MAX_VERSION = max == null ? null : apiParseVersion(max, null);
+		MAX_VERSION = Configuration.getAPIVersion(Configuration.MAXVERSION_OPENGL);
 
-		if ( !Boolean.getBoolean("org.lwjgl.opengl.explicitInit") )
+		if ( !Configuration.EXPLICIT_INIT_OPENGL.<Boolean>get() )
 			create();
 	}
 
@@ -85,7 +84,7 @@ public final class GL {
 				throw new IllegalStateException();
 		}
 
-		create(System.getProperty("org.lwjgl.opengl.libname", libName));
+		create(Configuration.LIBRARY_NAME_OPENGL.get(libName));
 	}
 
 	/**

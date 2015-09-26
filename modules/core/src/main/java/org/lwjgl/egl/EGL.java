@@ -6,6 +6,7 @@ package org.lwjgl.egl;
 
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.system.APIBuffer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.DynamicLinkLibrary;
 import org.lwjgl.system.FunctionProvider;
 
@@ -29,9 +30,9 @@ import static org.lwjgl.system.MemoryUtil.*;
  * EGLDisplay or the EGL client library. Internally, it also contains function pointers that are only valid in that specific EGLDisplay or client library.</li>
  *
  * <h3>Library lifecycle</h3>
- * <p>The EGL library is loaded automatically when this class is initialized. Set the {@code org.lwjgl.egl.explicitInit=true} system property to
- * override this behavior. Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can
- * be overridden with the {@code org.lwjgl.egl.libname} system property.</p>
+ * <p>The EGL library is loaded automatically when this class is initialized. Set the {@link Configuration#EXPLICIT_INIT_EGL} option to override this behavior.
+ * Manual loading/unloading can be achieved with the {@link #create} and {@link #destroy} functions. The name of the library loaded can be overridden with the
+ * {@link Configuration#LIBRARY_NAME_EGL} option.</p>
  *
  * <h3>EGLCapabilities creation</h3>
  * <p>Instances of {@code EGLCapabilities} for an EGLDisplay can be created with the {@link #createDisplayCapabilities} method. Calling this method is
@@ -46,7 +47,7 @@ public final class EGL {
 	private static EGLCapabilities caps;
 
 	static {
-		if ( !Boolean.getBoolean("org.lwjgl.egl.explicitInit") )
+		if ( !Configuration.EXPLICIT_INIT_EGL.<Boolean>get() )
 			create();
 	}
 
@@ -54,7 +55,7 @@ public final class EGL {
 
 	/** Loads the EGL native library, using the default library name. */
 	public static void create() {
-		String libName = System.getProperty("org.lwjgl.egl.libname");
+		String libName = Configuration.LIBRARY_NAME_EGL.get();
 		if ( libName == null ) {
 			switch ( LWJGLUtil.getPlatform() ) {
 				case WINDOWS:

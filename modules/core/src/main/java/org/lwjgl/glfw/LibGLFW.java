@@ -7,6 +7,7 @@ package org.lwjgl.glfw;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.Platform;
 import org.lwjgl.Pointer;
+import org.lwjgl.system.Configuration;
 import org.lwjgl.system.FunctionProvider;
 
 /**
@@ -29,7 +30,9 @@ final class LibGLFW {
 
 	// TODO: Refactor when GLFW adds client library selection
 	static {
-		FunctionProvider functionProvider = LWJGLUtil.loadLibraryNative(System.getProperty("org.lwjgl.glfw.libname", Pointer.BITS64 ? "glfw" : "glfw32"));
+		FunctionProvider functionProvider = LWJGLUtil.loadLibraryNative(
+			Configuration.LIBRARY_NAME_GLFW.get(Pointer.BITS64 ? "glfw" : "glfw32")
+		);
 
 		__GLFW = new GLFW(functionProvider);
 
@@ -37,7 +40,7 @@ final class LibGLFW {
 		__GLFWNativeWin32 = LWJGLUtil.getPlatform() == Platform.WINDOWS ? new GLFWNativeWin32(functionProvider) : null;
 		__GLFWNativeX11 = LWJGLUtil.getPlatform() == Platform.LINUX ? new GLFWNativeX11(functionProvider) : null;
 
-		boolean EGL = Boolean.getBoolean("org.lwjgl.glfw.EGL");
+		boolean EGL = Configuration.GLFW_EGL.<Boolean>get();
 
 		if ( EGL ) {
 			__GLFWNativeEGL = new GLFWNativeEGL(functionProvider);
