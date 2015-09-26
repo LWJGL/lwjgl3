@@ -32,6 +32,20 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 ) {
 	documentation = "Instances of this interface may be set to the {@code read} field of the ##STBIIOCallbacks struct."
 	additionalCode = """
+	/**
+	 * Converts the specified {@link STBIReadCallback} arguments to a ByteBuffer.
+	 *
+	 * <p>This method may only be used inside a STBIReadCallback invocation.</p>
+	 *
+	 * @param data the the STBIReadCallback {@code data} argument
+	 * @param size the STBIReadCallback {@code size} argument
+	 *
+	 * @return the data as a ByteBuffer
+	 */
+	public static ByteBuffer getData(long data, int size) {
+		return memByteBuffer(data, size);
+	}
+
 	/** A functional interface for {@link STBIReadCallback}. */
 	public interface SAMBuffer {
 		int invoke(long user, ByteBuffer data);
@@ -48,7 +62,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 		return new STBIReadCallback() {
 			@Override
 			public int invoke(long user, long data, int size) {
-				return sam.invoke(user, memByteBuffer(data, size));
+				return sam.invoke(user, getData(data, size));
 			}
 		};
 	}
@@ -104,6 +118,42 @@ val stbi_write_func = "stbi_write_func_p".callback(
 	samConstructor = "STBImageWrite"
 ) {
 	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."
+	additionalCode = """
+	/**
+	 * Converts the specified {@link STBIWriteCallback} arguments to a ByteBuffer.
+	 *
+	 * <p>This method may only be used inside a STBIWriteCallback invocation.</p>
+	 *
+	 * @param data the the STBIWriteCallback {@code data} argument
+	 * @param size the STBIWriteCallback {@code size} argument
+	 *
+	 * @return the data as a ByteBuffer
+	 */
+	public static ByteBuffer getData(long data, int size) {
+		return memByteBuffer(data, size);
+	}
+
+	/** A functional interface for {@link STBIWriteCallback}. */
+	public interface SAMBuffer {
+		int invoke(long context, ByteBuffer data);
+	}
+
+	/**
+	 * Creates a {@link STBIWriteCallback} that delegates the callback to the specified functional interface.
+	 *
+	 * @param sam the delegation target
+	 *
+	 * @return the {@link STBIWriteCallback} instance
+	 */
+	public static STBIWriteCallback createBuffer(final SAMBuffer sam) {
+		return new STBIWriteCallback() {
+			@Override
+			public void invoke(long context, long data, int size) {
+				sam.invoke(context, getData(data, size));
+			}
+		};
+	}
+	"""
 }
 
 // stb_rect_pack.h

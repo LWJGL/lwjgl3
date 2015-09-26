@@ -78,6 +78,20 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
 	CALL_CONVENTION_SYSTEM
 	additionalCode = """
+	/**
+	 * Converts the specified {@link GLDebugMessageAMDCallback} arguments to a String.
+	 *
+	 * <p>This method may only be used inside a GLDebugMessageAMDCallback invocation.</p>
+	 *
+	 * @param length  the GLDebugMessageAMDCallback {@code length} argument
+	 * @param message the the GLDebugMessageAMDCallback {@code message} argument
+	 *
+	 * @return the message as a String
+	 */
+	public static String getMessage(int length, long message) {
+		return memDecodeUTF8(memByteBuffer(message, length));
+	}
+
 	/** A functional interface for {@link GLDebugMessageAMDCallback}. */
 	public interface SAMString {
 		void invoke(int id, int category, int severity, String message, long userParam);
@@ -94,7 +108,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 		return new GLDebugMessageAMDCallback() {
 			@Override
 			public void invoke(int id, int category, int severity, int length, long message, long userParam) {
-				sam.invoke(id, category, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+				sam.invoke(id, category, severity, getMessage(length, message), userParam);
 			}
 		};
 	}
@@ -117,6 +131,20 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
 	CALL_CONVENTION_SYSTEM
 	additionalCode = """
+	/**
+	 * Converts the specified {@link GLDebugMessageARBCallback} arguments to a String.
+	 *
+	 * <p>This method may only be used inside a GLDebugMessageARBCallback invocation.</p>
+	 *
+	 * @param length  the GLDebugMessageARBCallback {@code length} argument
+	 * @param message the the GLDebugMessageARBCallback {@code message} argument
+	 *
+	 * @return the message as a String
+	 */
+	public static String getMessage(int length, long message) {
+		return memDecodeUTF8(memByteBuffer(message, length));
+	}
+
 	/** A functional interface for {@link GLDebugMessageARBCallback}. */
 	public interface SAMString {
 		void invoke(int source, int type, int id, int severity, String message, long userParam);
@@ -133,7 +161,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 		return new GLDebugMessageARBCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+				sam.invoke(source, type, id, severity, getMessage(length, message), userParam);
 			}
 		};
 	}
@@ -164,6 +192,20 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
 	CALL_CONVENTION_SYSTEM
 	additionalCode = """
+	/**
+	 * Converts the specified {@link GLDebugMessageCallback} arguments to a String.
+	 *
+	 * <p>This method may only be used inside a GLDebugMessageCallback invocation.</p>
+	 *
+	 * @param length  the GLDebugMessageCallback {@code length} argument
+	 * @param message the the GLDebugMessageCallback {@code message} argument
+	 *
+	 * @return the message as a String
+	 */
+	public static String getMessage(int length, long message) {
+		return memDecodeUTF8(memByteBuffer(message, length));
+	}
+
 	/** A functional interface for {@link GLDebugMessageCallback}. */
 	public interface SAMString {
 		void invoke(int source, int type, int id, int severity, String message, long userParam);
@@ -180,7 +222,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 		return new GLDebugMessageCallback() {
 			@Override
 			public void invoke(int source, int type, int id, int severity, int length, long message, long userParam) {
-				sam.invoke(source, type, id, severity, memDecodeUTF8(memByteBuffer(message, length)), userParam);
+				sam.invoke(source, type, id, severity, getMessage(length, message), userParam);
 			}
 		};
 	}

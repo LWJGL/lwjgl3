@@ -18,6 +18,19 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 ) {
 	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."
 	additionalCode = """
+	/**
+	 * Converts the specified {@link MallocMessageCallback} arguments to a String.
+	 *
+	 * <p>This method may only be used inside a MallocMessageCallback invocation.</p>
+	 *
+	 * @param s the MallocMessageCallback {@code s} argument
+	 *
+	 * @return the message as a String
+	 */
+	public static String getMessage(long message) {
+		return memDecodeASCII(message);
+	}
+
 	/** A functional interface for {@link MallocMessageCallback}. */
 	public interface SAMString {
 		void invoke(long cbopaque, String s);
@@ -34,7 +47,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 		return new MallocMessageCallback() {
 			@Override
 			public void invoke(long cbopaque, long s) {
-				sam.invoke(cbopaque, memDecodeASCII(s));
+				sam.invoke(cbopaque, getMessage(s));
 			}
 		};
 	}

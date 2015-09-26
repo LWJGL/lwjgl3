@@ -61,6 +61,19 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	    "static org.lwjgl.glfw.GLFW.*"
 	)
 	additionalCode = """
+	/**
+	 * Converts the specified {@link GLFWErrorCallback} argument to a String.
+	 *
+	 * <p>This method may only be used inside a GLFWErrorCallback invocation.</p>
+	 *
+	 * @param description pointer to the UTF-8 encoded description string
+	 *
+	 * @return the description as a String
+	 */
+	public static String getDescription(long description) {
+		return memDecodeUTF8(description);
+	}
+
 	/** A functional interface for {@link GLFWErrorCallback}. */
 	public interface SAMString {
 		void invoke(int error, String description);
@@ -77,7 +90,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 		return new GLFWErrorCallback() {
 			@Override
 			public void invoke(int error, long description) {
-				sam.invoke(error, memDecodeUTF8(description));
+				sam.invoke(error, getDescription(description));
 			}
 		};
 	}
@@ -528,7 +541,7 @@ val GLFWdropfun = "GLFWdropfun".callback(
 		void accept(int index, ByteBuffer name);
 	}
 
-	/** A functional interface that can be used with {@link #apply(int, long, Consumer) apply}. */
+	/** A functional interface that can be used with {@link #apply(int, long, ConsumerString) apply}. */
 	public interface ConsumerString {
 		void accept(int index, String name);
 	}
