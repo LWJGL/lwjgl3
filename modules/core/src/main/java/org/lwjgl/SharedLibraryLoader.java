@@ -128,7 +128,10 @@ final class SharedLibraryLoader {
 			libraryPath = extractPath.getAbsolutePath();
 		else
 			libraryPath = extractPath.getAbsolutePath() + File.pathSeparator + libraryPath;
+
+		LWJGLUtil.log("Extracted shared libraries to: " + libraryPath);
 		System.setProperty(Configuration.LIBRARY_PATH.getProperty(), libraryPath);
+		Configuration.LIBRARY_PATH.set(libraryPath);
 	}
 
 	/**
