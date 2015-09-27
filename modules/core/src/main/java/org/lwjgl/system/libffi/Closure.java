@@ -270,7 +270,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			super(cif, NATIVE_CALLBACK_LONG);
 		}
 
-		protected abstract int callback(long args);
+		protected abstract long callback(long args);
 	}
 
 	/** A {@code Closure} that returns a float value. */
@@ -279,7 +279,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			super(cif, NATIVE_CALLBACK_FLOAT);
 		}
 
-		protected abstract int callback(long args);
+		protected abstract float callback(long args);
 	}
 
 	/** A {@code Closure} that returns a double value. */
@@ -288,7 +288,7 @@ public abstract class Closure extends Retainable.Default implements Pointer {
 			super(cif, NATIVE_CALLBACK_DOUBLE);
 		}
 
-		protected abstract int callback(long args);
+		protected abstract double callback(long args);
 	}
 
 	/** A {@code Closure} that returns a pointer value. */
