@@ -74,6 +74,10 @@ public final class APIUtil {
 		/** Returns the API implementation-specific versioning information. May be null. */
 		public final String implementation;
 
+		public APIVersion(int major, int minor) {
+			this(major, minor, null, null);
+		}
+
 		public APIVersion(int major, int minor, String revision, String implementation) {
 			this.major = major;
 			this.minor = minor;
