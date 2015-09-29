@@ -115,22 +115,22 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		voidptr(
 			"object_getIndexedIvars",
 			"""
-		This function returns a pointer to any extra bytes allocated with the instance (as specified by #class_createInstance() with extraBytes&gt;0). This
-		memory follows the object's ordinary ivars, but may not be adjacent to the last ivar.
+			This function returns a pointer to any extra bytes allocated with the instance (as specified by #class_createInstance() with extraBytes&gt;0). This
+			memory follows the object's ordinary ivars, but may not be adjacent to the last ivar.
 
-		The returned pointer is guaranteed to be pointer-size aligned, even if the area following the object's last ivar is less aligned than that. Alignment
-		greater than pointer-size is never guaranteed, even if the area following the object's last ivar is more aligned than that.
+			The returned pointer is guaranteed to be pointer-size aligned, even if the area following the object's last ivar is less aligned than that. Alignment
+			greater than pointer-size is never guaranteed, even if the area following the object's last ivar is more aligned than that.
 
-		In a garbage-collected environment, the memory is scanned conservatively.
-	    """,
+			In a garbage-collected environment, the memory is scanned conservatively.
+			""",
 
 			id.IN("obj", "an Objective-C object"),
 
 			returnDoc =
 			"""
-		a pointer to any extra bytes allocated with {@code obj}. If {@code obj} was not allocated with any extra bytes, then dereferencing the returned pointer
-		is undefined.
-		"""
+			a pointer to any extra bytes allocated with {@code obj}. If {@code obj} was not allocated with any extra bytes, then dereferencing the returned pointer
+			is undefined.
+			"""
 		)
 
 		id(
@@ -146,10 +146,10 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		void(
 			"object_setIvar",
 			"""
-		Sets the value of an instance variable in an object.
+			Sets the value of an instance variable in an object.
 
-		object_setIvar is faster than #object_setInstanceVariable() if the Ivar for the instance variable is already known.
-		""",
+			object_setIvar is faster than #object_setInstanceVariable() if the Ivar for the instance variable is already known.
+			""",
 
 			id.IN("obj", "the object containing the instance variable whose value you want to set"),
 			Ivar.IN("ivar", "the Ivar describing the instance variable whose value you want to set"),
@@ -183,11 +183,11 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		Class(
 			"objc_getClass",
 			"""
-	    Returns the class definition of a specified class.
+			Returns the class definition of a specified class.
 
-	    objc_getClass is different from #objc_lookUpClass() in that if the class is not registered, objc_getClass calls the class handler callback and then
-	    checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.
-	    """,
+			objc_getClass is different from #objc_lookUpClass() in that if the class is not registered, objc_getClass calls the class handler callback and then
+			checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of the class to look up"),
 
@@ -197,12 +197,12 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		Class(
 			"objc_getMetaClass",
 			"""
-	    Returns the metaclass definition of a specified class.
+			Returns the metaclass definition of a specified class.
 
-	    If the definition for the named class is not registered, this function calls the class handler callback and then checks a second time to see if the
-	    class is registered. However, every class definition must have a valid metaclass definition, and so the metaclass definition is always returned,
-	    whether it’s valid or not.
-	    """,
+			If the definition for the named class is not registered, this function calls the class handler callback and then checks a second time to see if the
+			class is registered. However, every class definition must have a valid metaclass definition, and so the metaclass definition is always returned,
+			whether it’s valid or not.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of the class to look up"),
 
@@ -212,11 +212,11 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		Class(
 			"objc_lookUpClass",
 			"""
-	    Returns the class definition of a specified class.
+			Returns the class definition of a specified class.
 
-	    #objc_getClass() is different from this function in that if the class is not registered, objc_getClass calls the class handler callback and then checks
-	    a second time to see whether the class is registered. This function does not call the class handler callback.
-	    """,
+			#objc_getClass() is different from this function in that if the class is not registered, objc_getClass calls the class handler callback and then checks
+			a second time to see whether the class is registered. This function does not call the class handler callback.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of the class to look up"),
 
@@ -226,12 +226,12 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		Class(
 			"objc_getRequiredClass",
 			"""
-	    Returns the class definition of a specified class.
+			Returns the class definition of a specified class.
 
-	    This function is the same as #objc_getClass(), but kills the process if the class is not found.
+			This function is the same as #objc_getClass(), but kills the process if the class is not found.
 
-		This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.
-	    """,
+			This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of the class to look up"),
 
@@ -241,30 +241,30 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		int(
 			"objc_getClassList",
 			"""
-	    Obtains the list of registered class definitions.
+			Obtains the list of registered class definitions.
 
-	    The Objective-C runtime library automatically registers all the classes defined in your source code. You can create class definitions at runtime and
-	    register them with the #objc_addClass() function.
+			The Objective-C runtime library automatically registers all the classes defined in your source code. You can create class definitions at runtime and
+			register them with the #objc_addClass() function.
 
-		<h3>Special Considerations</h3>
-	    You cannot assume that class objects you get from this function are classes that inherit from NSObject, so you cannot safely call any methods on such
-	    classes without detecting that the method is implemented first.
-	    """,
+			<h3>Special Considerations</h3>
+			You cannot assume that class objects you get from this function are classes that inherit from NSObject, so you cannot safely call any methods on such
+			classes without detecting that the method is implemented first.
+			""",
 
 			nullable _ Class_p.OUT(
 				"buffer",
 				"""
-		    an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
-		    registered classes, whichever is less. You can pass $NULL to obtain the total number of registered class definitions without actually retrieving
-		    any class definitions.
-		    """
+				an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
+				registered classes, whichever is less. You can pass $NULL to obtain the total number of registered class definitions without actually retrieving
+				any class definitions.
+				"""
 			),
 			AutoSize("buffer") _ int.IN(
 				"bufferCount",
 				"""
-		    the number of pointers for which you have allocated space in buffer. On return, this function fills in only this number of elements. If this number
-		    is less than the number of registered classes, this function returns an arbitrary subset of the registered classes.
-		    """
+				the number of pointers for which you have allocated space in buffer. On return, this function fills in only this number of elements. If this number
+				is less than the number of registered classes, this function returns an arbitrary subset of the registered classes.
+				"""
 			),
 
 			returnDoc = "an integer value indicating the total number of registered classes"
@@ -316,15 +316,15 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		int(
 			"class_getVersion",
 			"""
-	    Returns the version number of a class definition.
+			Returns the version number of a class definition.
 
-	    You can use the version number of the class definition to provide versioning of the interface that your class represents to other classes. This is
-	    especially useful for object serialization (that is, archiving of the object in a flattened form), where it is important to recognize changes to the
-	    layout of the instance variables in different class-definition versions.
+			You can use the version number of the class definition to provide versioning of the interface that your class represents to other classes. This is
+			especially useful for object serialization (that is, archiving of the object in a flattened form), where it is important to recognize changes to the
+			layout of the instance variables in different class-definition versions.
 
-		Classes derived from the Foundation framework NSObject class can obtain the class-definition version number using the getVersion class method, which is
-		implemented using the class_getVersion function.
-	    """,
+			Classes derived from the Foundation framework NSObject class can obtain the class-definition version number using the getVersion class method, which is
+			implemented using the class_getVersion function.
+			""",
 
 			Class.IN("cls", "a pointer to an Class data structure. Pass the class definition for which you wish to obtain the version"),
 
@@ -334,15 +334,15 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		void(
 			"class_setVersion",
 			"""
-	    Sets the version number of a class definition.
+			Sets the version number of a class definition.
 
-	    You can use the version number of the class definition to provide versioning of the interface that your class represents to other classes. This is
-	    especially useful for object serialization (that is, archiving of the object in a flattened form), where it is important to recognize changes to the
-	    layout of the instance variables in different class-definition versions.
+			You can use the version number of the class definition to provide versioning of the interface that your class represents to other classes. This is
+			especially useful for object serialization (that is, archiving of the object in a flattened form), where it is important to recognize changes to the
+			layout of the instance variables in different class-definition versions.
 
-		Classes derived from the Foundation framework NSObject class can set the class-definition version number using the setVersion: class method, which is
-		implemented using the class_setVersion function.
-	    """,
+			Classes derived from the Foundation framework NSObject class can set the class-definition version number using the setVersion: class method, which is
+			implemented using the class_setVersion function.
+			""",
 
 			Class.IN("cls", "a pointer to an Class data structure. Pass the class definition for which you wish to set the version"),
 			int.IN("version", "the new version number of the class definition")
@@ -389,59 +389,59 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 			returnDoc =
 			"""
-	    an array of pointers of type Ivar describing the instance variables declared by the class. Any instance variables declared by superclasses are not
-	    included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+			an array of pointers of type Ivar describing the instance variables declared by the class. Any instance variables declared by superclasses are not
+			included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
 
-		If the class declares no instance variables, or {@code cls} is Nil, $NULL is returned and {@code *outCount} is 0.
-	    """
+			If the class declares no instance variables, or {@code cls} is Nil, $NULL is returned and {@code *outCount} is 0.
+			"""
 		)
 
 		Method(
 			"class_getInstanceMethod",
 			"""
-	    Returns a specified instance method for a given class.
+			Returns a specified instance method for a given class.
 
-	    Note that this function searches superclasses for implementations, whereas #class_copyMethodList() does not.
-	    """,
+			Note that this function searches superclasses for implementations, whereas #class_copyMethodList() does not.
+			""",
 
 			Class.IN("cls", "the class you want to inspect"),
 			SEL.IN("name", "the selector of the method you want to retrieve"),
 
 			returnDoc =
 			"""
-	    the method that corresponds to the implementation of the selector specified by aSelector for the class specified by {@code cls}, or $NULL if the
-	    specified class or its superclasses do not contain an instance method with the specified selector.
-	    """
+			the method that corresponds to the implementation of the selector specified by aSelector for the class specified by {@code cls}, or $NULL if the
+			specified class or its superclasses do not contain an instance method with the specified selector.
+			"""
 		)
 
 		Method(
 			"class_getClassMethod",
 			"""
-		Returns a pointer to the data structure describing a given class method for a given class.
+			Returns a pointer to the data structure describing a given class method for a given class.
 
-		Note that this function searches superclasses for implementations, whereas #class_copyMethodList() does not.
-		""",
+			Note that this function searches superclasses for implementations, whereas #class_copyMethodList() does not.
+			""",
 
 			Class.IN("cls", "a pointer to a class definition. Pass the class that contains the method you want to retrieve"),
 			SEL.IN("name", "a pointer of type SEL. Pass the selector of the method you want to retrieve"),
 
 			returnDoc =
 			"""
-	    a pointer to the Method data structure that corresponds to the implementation of the selector specified by {@code name} for the class specified by
-	    {@code cls}, or $NULL if the specified class or its superclasses do not contain a class method with the specified selector.
-	    """
+			a pointer to the Method data structure that corresponds to the implementation of the selector specified by {@code name} for the class specified by
+			{@code cls}, or $NULL if the specified class or its superclasses do not contain a class method with the specified selector.
+			"""
 		)
 
 		IMP(
 			"class_getMethodImplementation",
 			"""
-		Returns the function pointer that would be called if a particular message were sent to an instance of a class.
+			Returns the function pointer that would be called if a particular message were sent to an instance of a class.
 
-		class_getMethodImplementation may be faster than ${code("method_getImplementation(class_getInstanceMethod(cls, name))")}.
+			class_getMethodImplementation may be faster than ${code("method_getImplementation(class_getInstanceMethod(cls, name))")}.
 
-		The function pointer returned may be a function internal to the runtime instead of an actual method implementation. For example, if instances of the
-		class do not respond to the selector, the function pointer returned will be part of the runtime's message forwarding machinery.
-		""",
+			The function pointer returned may be a function internal to the runtime instead of an actual method implementation. For example, if instances of the
+			class do not respond to the selector, the function pointer returned will be part of the runtime's message forwarding machinery.
+			""",
 
 			nullable _ Class.IN("cls", "the class you want to inspect"),
 			SEL.IN("name", "a selector"),
@@ -455,10 +455,10 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		BOOL(
 			"class_respondsToSelector",
 			"""
-	    Returns a Boolean value that indicates whether instances of a class respond to a particular selector.
+			Returns a Boolean value that indicates whether instances of a class respond to a particular selector.
 
-	    You should usually use NSObject's respondsToSelector: or instancesRespondToSelector: methods instead of this function.
-	    """,
+			You should usually use NSObject's respondsToSelector: or instancesRespondToSelector: methods instead of this function.
+			""",
 
 			Class.IN("cls", "the class you want to inspect"),
 			SEL.IN("name", "a selector"),
@@ -478,20 +478,20 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 			returnDoc =
 			"""
-	    an array of pointers of type Method describing the instance methods implemented by the class—any instance methods implemented by superclasses are not
-	    included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+			an array of pointers of type Method describing the instance methods implemented by the class—any instance methods implemented by superclasses are not
+			included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
 
-	    If {@code cls} implements no instance methods, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
-	    """
+			If {@code cls} implements no instance methods, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+			"""
 		)
 
 		BOOL(
 			"class_conformsToProtocol",
 			"""
-	    Returns a Boolean value that indicates whether a class conforms to a given protocol.
+			Returns a Boolean value that indicates whether a class conforms to a given protocol.
 
-	    You should usually use NSObject's conformsToProtocol: method instead of this function.
-	    """,
+			You should usually use NSObject's conformsToProtocol: method instead of this function.
+			""",
 
 			Class.IN("cls", "the class you want to inspect"),
 			Protocol_p.IN("protocol", "a protocol"),
@@ -511,11 +511,11 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 			returnDoc =
 			"""
-		an array of pointers of type Protocol* describing the protocols adopted by the class. Any protocols adopted by superclasses or other protocols are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+			an array of pointers of type Protocol* describing the protocols adopted by the class. Any protocols adopted by superclasses or other protocols are not
+			included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
 
-		If {@code cls} adopts no protocols, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
-		"""
+			If {@code cls} adopts no protocols, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+			"""
 		)
 
 		objc_property_t(
@@ -527,9 +527,9 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 			returnDoc =
 			"""
-		a pointer of type {@code objc_property_t} describing the property, or $NULL if the class does not declare a property with that name, or $NULL if
-		{@code cls} is Nil.
-		"""
+			a pointer of type {@code objc_property_t} describing the property, or $NULL if the class does not declare a property with that name, or $NULL if
+			{@code cls} is Nil.
+			"""
 		)
 
 		objc_property_t_p(
@@ -544,11 +544,11 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 			returnDoc =
 			"""
-		an array of pointers of type {@code objc_property_t} describing the properties declared by the class. Any properties declared by superclasses are not
-		included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+			an array of pointers of type {@code objc_property_t} describing the properties declared by the class. Any properties declared by superclasses are not
+			included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
 
-		If {@code cls} declares no properties, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
-		"""
+			If {@code cls} declares no properties, or {@code cls} is Nil, returns $NULL and {@code *outCount} is 0.
+			"""
 		)
 
 		(const _ uint8_tASCII_p)(
@@ -572,22 +572,22 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		BOOL(
 			"class_addMethod",
 			"""
-	    Adds a new method to a class with a given name and implementation.
+			Adds a new method to a class with a given name and implementation.
 
-	    <h3>Discussion</h3>
-	    class_addMethod will add an override of a superclass's implementation, but will not replace an existing implementation in this class. To change an
-	    existing implementation, use #method_setImplementation().
+			<h3>Discussion</h3>
+			class_addMethod will add an override of a superclass's implementation, but will not replace an existing implementation in this class. To change an
+			existing implementation, use #method_setImplementation().
 
-		An Objective-C method is simply a C function that takes at least two arguments &ndash; {@code self} and {@code _cmd}. For example, given the following
-		function:
-		${codeBlock("""
+			An Objective-C method is simply a C function that takes at least two arguments &ndash; {@code self} and {@code _cmd}. For example, given the following
+			function:
+			${codeBlock("""
 void myMethodIMP(id self, SEL _cmd)
 {
-    // implementation ....
+	// implementation ....
 }""")}
-		you can dynamically add it to a class as a method (called {@code resolveThisMethodDynamically}) like this:
-		${codeBlock("""class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");""")}
-	    """,
+			you can dynamically add it to a class as a method (called {@code resolveThisMethodDynamically}) like this:
+			${codeBlock("""class_addMethod([self class], @selector(resolveThisMethodDynamically), (IMP) myMethodIMP, "v@:");""")}
+			""",
 
 			Class.IN("cls", "the class to which to add a method"),
 			SEL.IN("name", "a selector that specifies the name of the method being added"),
@@ -598,10 +598,10 @@ void myMethodIMP(id self, SEL _cmd)
 			const _ charUTF8_p.IN(
 				"types",
 				"""
-			an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-			&gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-			{@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
-			"""
+				an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
+				&gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
+				{@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+				"""
 			),
 
 			returnDoc = "#YES if the method was added successfully, otherwise #NO (for example, the class already contains a method implementation with that name)"
@@ -610,21 +610,21 @@ void myMethodIMP(id self, SEL _cmd)
 		IMP(
 			"class_replaceMethod",
 			"""
-	    Replaces the implementation of a method for a given class.
+			Replaces the implementation of a method for a given class.
 
-	    <h3>Discussion</h3>
-	    This function behaves in two different ways:
-		${ul(
+			<h3>Discussion</h3>
+			This function behaves in two different ways:
+			${ul(
 				"""
-			If the method identified by name does not yet exist, it is added as if class_addMethod were called. The type encoding specified by types is used as
-			given.
-			""",
+				If the method identified by name does not yet exist, it is added as if class_addMethod were called. The type encoding specified by types is used as
+				given.
+				""",
 				"""
-		    If the method identified by name does exist, its IMP is replaced as if method_setImplementation were called. The type encoding specified by types
-		    is ignored.
-		    """
+				If the method identified by name does exist, its IMP is replaced as if method_setImplementation were called. The type encoding specified by types
+				is ignored.
+				"""
 			)}
-	    """,
+			""",
 
 			Class.IN("cls", "the class you want to modify"),
 			SEL.IN("name", "a selector that identifies the method whose implementation you want to replace"),
@@ -635,10 +635,10 @@ void myMethodIMP(id self, SEL _cmd)
 			const _ charUTF8_p.IN(
 				"types",
 				"""
-			an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
-			&gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
-			{@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
-			"""
+				an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
+				&gt; Type Encodings in Objective-C Runtime Programming Guide. Since the function must take at least two arguments &ndash; {@code self} and
+				{@code _cmd}, the second and third characters must be “@:” (the first character is the return type).
+				"""
 			),
 
 			returnDoc = "the previous implementation of the method identified by {@code name} for the class identified by {@code cls}"
@@ -647,16 +647,16 @@ void myMethodIMP(id self, SEL _cmd)
 		BOOL(
 			"class_addIvar",
 			"""
-	    Adds a new instance variable to a class.
+			Adds a new instance variable to a class.
 
-	    This function may only be called after #objc_allocateClassPair() and before #objc_registerClassPair(). Adding an instance variable to an existing class
-	    is not supported.
+			This function may only be called after #objc_allocateClassPair() and before #objc_registerClassPair(). Adding an instance variable to an existing class
+			is not supported.
 
-		The class must not be a metaclass. Adding an instance variable to a metaclass is not supported.
+			The class must not be a metaclass. Adding an instance variable to a metaclass is not supported.
 
-		The instance variable's minimum alignment in bytes is ${code("1<<align")}. The minimum alignment of an instance variable depends on the ivar's type and
-		the machine architecture. For variables of any pointer type, pass ${code("log2(sizeof(pointer_type))")}.
-	    """,
+			The instance variable's minimum alignment in bytes is ${code("1<<align")}. The minimum alignment of an instance variable depends on the ivar's type and
+			the machine architecture. For variables of any pointer type, pass ${code("log2(sizeof(pointer_type))")}.
+			""",
 
 			Class.IN("cls", ""),
 			const _ charUTF8_p.IN("name", ""),
@@ -726,9 +726,10 @@ void myMethodIMP(id self, SEL _cmd)
 			size_t.IN(
 				"extraBytes",
 				"""
-		    an integer indicating the number of extra bytes to allocate. The additional bytes can be used to store additional instance variables beyond those
-		    defined in the class definition.
-		    """),
+				an integer indicating the number of extra bytes to allocate. The additional bytes can be used to store additional instance variables beyond those
+				defined in the class definition.
+				"""
+			),
 
 			returnDoc = "an instance of the class {@code cls}"
 		)
@@ -741,9 +742,10 @@ void myMethodIMP(id self, SEL _cmd)
 			nullable _ void_p.IN(
 				"bytes",
 				"""
-		    the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least ${code("class_getInstanceSize(cls)")}
-		    bytes of well-aligned, zero-filled memory.
-		    """),
+				the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least ${code("class_getInstanceSize(cls)")}
+				bytes of well-aligned, zero-filled memory.
+				"""
+			),
 
 			returnDoc =
 			"an instance of the class {@code cls} at {@code bytes}, if successful; otherwise #nil (for example, if {@code cls} or {@code bytes} are themselves #nil)"
@@ -752,14 +754,14 @@ void myMethodIMP(id self, SEL _cmd)
 		voidptr(
 			"objc_destructInstance",
 			"""
-	    Destroys an instance of a class without freeing memory and removes any of its associated references.
+			Destroys an instance of a class without freeing memory and removes any of its associated references.
 
-	    This method does nothing if obj is #nil.
+			This method does nothing if obj is #nil.
 
-	    <h3>Important</h3>
-	    The garbage collector does not call this function. As a result, if you edit this function, you should also edit finalize. That said, Core Foundation
-	    and other clients do call this function under garbage collection.
-	    """,
+			<h3>Important</h3>
+			The garbage collector does not call this function. As a result, if you edit this function, you should also edit finalize. That said, Core Foundation
+			and other clients do call this function under garbage collection.
+			""",
 
 			id.IN("obj", "the instance to destroy")
 		)
@@ -769,15 +771,15 @@ void myMethodIMP(id self, SEL _cmd)
 		Class(
 			"objc_allocateClassPair",
 			"""
-	    Creates a new class and metaclass.
+			Creates a new class and metaclass.
 
-	    You can get a pointer to the new metaclass by calling ${code("object_getClass(newClass)")}.
+			You can get a pointer to the new metaclass by calling ${code("object_getClass(newClass)")}.
 
-		To create a new class, start by calling objc_allocateClassPair. Then set the class's attributes with functions like #class_addMethod() and
-		#class_addIvar(). When you are done building the class, call #objc_registerClassPair(). The new class is now ready for use.
+			To create a new class, start by calling objc_allocateClassPair. Then set the class's attributes with functions like #class_addMethod() and
+			#class_addIvar(). When you are done building the class, call #objc_registerClassPair(). The new class is now ready for use.
 
-		Instance methods and instance variables should be added to the class itself. Class methods should be added to the metaclass.
-	    """,
+			Instance methods and instance variables should be added to the class itself. Class methods should be added to the metaclass.
+			""",
 
 			nullable _ Class.IN("superclass", "the class to use as the new class's superclass, or Nil to create a new root class"),
 			const _ charUTF8_p.IN("name", "the string to use as the new class's name. The string will be copied."),
@@ -796,10 +798,10 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"objc_disposeClassPair",
 			"""
-	    Destroys a class and its associated metaclass.
+			Destroys a class and its associated metaclass.
 
-	    Do not call this function if instances of the {@code cls} class or any subclass exist.
-	    """,
+			Do not call this function if instances of the {@code cls} class or any subclass exist.
+			""",
 
 			Class.IN("cls", "the class to be destroyed. This class must have been allocated using #objc_allocateClassPair().")
 		)
@@ -809,10 +811,10 @@ void myMethodIMP(id self, SEL _cmd)
 		SEL(
 			"method_getName",
 			"""
-	    Returns the name of a method.
+			Returns the name of a method.
 
-		To get the method name as a C string, call ${code("sel_getName(method_getName(method))")}.
-	    """,
+			To get the method name as a C string, call ${code("sel_getName(method_getName(method))")}.
+			""",
 
 			Method.IN("m", "the method to inspect"),
 
@@ -864,18 +866,18 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		a C string describing the type of the parameter at index {@code index}, or $NULL if method has no parameter index {@code index}. You must free the
-		string with free().
-		"""
+			a C string describing the type of the parameter at index {@code index}, or $NULL if method has no parameter index {@code index}. You must free the
+			string with free().
+			"""
 		)
 
 		void(
 			"method_getReturnType",
 			"""
-	    Returns by reference a string describing a method's return type.
+			Returns by reference a string describing a method's return type.
 
-	    The method's return type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called.
-	    """,
+			The method's return type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called.
+			""",
 
 			Method.IN("m", "the method to inspect"),
 			Return(null) _ charUTF8_p.OUT("dst", "the reference string to store the description"),
@@ -885,11 +887,11 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"method_getArgumentType",
 			"""
-	    Returns by reference a string describing a single parameter type of a method.
+			Returns by reference a string describing a single parameter type of a method.
 
-	    The parameter type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called. If the
-	    method contains no parameter with that index, {@code dst} is filled as if ${code("""strncpy(dst, "", dst_len)""")} were called.
-	    """,
+			The parameter type string is copied to {@code dst}. {@code dst} is filled as if ${code("strncpy(dst, parameter_type, dst_len)")} were called. If the
+			method contains no parameter with that index, {@code dst} is filled as if ${code("""strncpy(dst, "", dst_len)""")} were called.
+			""",
 
 			Method.IN("m", "the method you want to inquire about"),
 			unsigned_int.IN("index", "the index of the parameter you want to inquire about"),
@@ -938,11 +940,11 @@ void myMethodIMP(id self, SEL _cmd)
 		ptrdiff_t(
 			"ivar_getOffset",
 			"""
-	    Returns the offset of an instance variable.
+			Returns the offset of an instance variable.
 
-	    For instance variables of type {@code id} or other object types, call #object_getIvar() and #object_setIvar() instead of using this offset to access
-	    the instance variable data directly.
-	    """,
+			For instance variables of type {@code id} or other object types, call #object_getIvar() and #object_setIvar() instead of using this offset to access
+			the instance variable data directly.
+			""",
 
 			Ivar.IN("v", "the instance variable"),
 
@@ -988,9 +990,9 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		The value string of the {@code attributeName} attribute, if one exists in {@code property}; otherwise, #nil. You must free the returned value string
-		with free().
-		"""
+			The value string of the {@code attributeName} attribute, if one exists in {@code property}; otherwise, #nil. You must free the returned value string
+			with free().
+			"""
 		)
 
 		// Working with Protocols
@@ -998,10 +1000,10 @@ void myMethodIMP(id self, SEL _cmd)
 		Protocol_p(
 			"objc_getProtocol",
 			"""
-	    Returns a specified protocol.
+			Returns a specified protocol.
 
-	    This function acquires the runtime lock.
-	    """,
+			This function acquires the runtime lock.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of a protocol"),
 
@@ -1016,23 +1018,23 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		a C array of all the protocols known to the runtime. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the
-		list with free().
-		"""
+			a C array of all the protocols known to the runtime. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the
+			list with free().
+			"""
 		)
 
 		BOOL(
 			"protocol_conformsToProtocol",
 			"""
-	    Returns a Boolean value that indicates whether one protocol conforms to another protocol.
+			Returns a Boolean value that indicates whether one protocol conforms to another protocol.
 
-	    <h3>Discussion</h3>
-	    One protocol can incorporate other protocols using the same syntax that classes use to adopt a protocol:
+			<h3>Discussion</h3>
+			One protocol can incorporate other protocols using the same syntax that classes use to adopt a protocol:
 
-		${code("""@protocol ProtocolName < protocol list >""")}
+			${code("""@protocol ProtocolName < protocol list >""")}
 
-		All the protocols listed between angle brackets are considered part of the {@code ProtocolName} protocol.
-	    """,
+			All the protocols listed between angle brackets are considered part of the {@code ProtocolName} protocol.
+			""",
 
 			Protocol_p.IN("proto", "a protocol"),
 			Protocol_p.IN("other", "a protocol"),
@@ -1070,20 +1072,20 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		an objc_method_description structure that describes the method specified by {@code aSel}, {@code isRequiredMethod}, and {@code isInstanceMethod} for
-		the protocol {@code p}.
+			an objc_method_description structure that describes the method specified by {@code aSel}, {@code isRequiredMethod}, and {@code isInstanceMethod} for
+			the protocol {@code p}.
 
-		If the protocol does not contain the specified method, returns an objc_method_description structure with the value ${code("{NULL, NULL}")}.
-		"""
+			If the protocol does not contain the specified method, returns an objc_method_description structure with the value ${code("{NULL, NULL}")}.
+			"""
 		)
 
 		objc_method_description_p(
 			"protocol_copyMethodDescriptionList",
 			"""
-		Returns an array of method descriptions of methods meeting a given specification for a given protocol.
+			Returns an array of method descriptions of methods meeting a given specification for a given protocol.
 
-		Methods in other protocols adopted by this protocol are not included.
-		""",
+			Methods in other protocols adopted by this protocol are not included.
+			""",
 
 			Protocol_p.IN("p", "a protocol"),
 			BOOL.IN("isRequiredMethod", "a Boolean value that indicates whether returned methods should be required methods (pass #YES to specify required methods)"),
@@ -1092,11 +1094,11 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		a C array of objc_method_description structures containing the names and types of {@code p}'s methods specified by {@code isRequiredMethod} and
-		{@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the list with free().
+			a C array of objc_method_description structures containing the names and types of {@code p}'s methods specified by {@code isRequiredMethod} and
+			{@code isInstanceMethod}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the list with free().
 
-		If the protocol declares no methods that meet the specification, $NULL is returned and {@code *outCount} is 0.
-		"""
+			If the protocol declares no methods that meet the specification, $NULL is returned and {@code *outCount} is 0.
+			"""
 		)
 
 		objc_property_t(
@@ -1110,9 +1112,9 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or $NULL if none of
-		{@code proto}'s properties meets the specification
-		"""
+			the property specified by {@code name}, {@code isRequiredProperty}, and {@code isInstanceProperty} for {@code proto}, or $NULL if none of
+			{@code proto}'s properties meets the specification
+			"""
 		)
 
 		objc_property_t_p(
@@ -1124,11 +1126,11 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		a C array of pointers of type objc_property_t describing the properties declared by {@code proto}. Any properties declared by other protocols adopted
-		by this protocol are not included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
+			a C array of pointers of type objc_property_t describing the properties declared by {@code proto}. Any properties declared by other protocols adopted
+			by this protocol are not included. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array with free().
 
-		If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
-		"""
+			If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
+			"""
 		)
 
 		Protocol_pp(
@@ -1140,22 +1142,22 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array
-		with free().
+			a C array of protocols adopted by {@code proto}. The array contains {@code *outCount} pointers followed by a $NULL terminator. You must free the array
+			with free().
 
-		If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
-		"""
+			If the protocol declares no properties, $NULL is returned and {@code *outCount} is 0.
+			"""
 		)
 
 		Protocol_p(
 			"objc_allocateProtocol",
 			"""
-	    Creates a new protocol instance.
+			Creates a new protocol instance.
 
-	    You must register the returned protocol instance with the #objc_registerProtocol() function before you can use it.
+			You must register the returned protocol instance with the #objc_registerProtocol() function before you can use it.
 
-		There is no dispose method associated with this function.
-	    """,
+			There is no dispose method associated with this function.
+			""",
 
 			const _ charUTF8_p.IN("name", "the name of the protocol you want to create"),
 
@@ -1165,11 +1167,11 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"objc_registerProtocol",
 			"""
-	    Registers a newly created protocol with the Objective-C runtime.
+			Registers a newly created protocol with the Objective-C runtime.
 
-	    When you create a new protocol using the #objc_allocateProtocol(), you then register it with the Objective-C runtime by calling this function. After a
-	    protocol is successfully registered, it is immutable and ready to use.
-	    """,
+			When you create a new protocol using the #objc_allocateProtocol(), you then register it with the Objective-C runtime by calling this function. After a
+			protocol is successfully registered, it is immutable and ready to use.
+			""",
 
 			Protocol_p.IN("proto", "the protocol you want to register with the Objective-C runtime")
 		)
@@ -1177,11 +1179,11 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"protocol_addMethodDescription",
 			"""
-	    Adds a method to a protocol.
+			Adds a method to a protocol.
 
-	    To add a method to a protocol using this function, the protocol must be under construction. That is, you must add any methods to proto before you
-	    register it with the Objective-C runtime (via the #objc_registerProtocol() function).
-	    """,
+			To add a method to a protocol using this function, the protocol must be under construction. That is, you must add any methods to proto before you
+			register it with the Objective-C runtime (via the #objc_registerProtocol() function).
+			""",
 
 			Protocol_p.IN("proto", "the protocol you want to add a method to"),
 			SEL.IN("name", "the name of the method you want to add"),
@@ -1189,9 +1191,9 @@ void myMethodIMP(id self, SEL _cmd)
 			BOOL.IN(
 				"isRequiredMethod",
 				"""
-	        a Boolean indicating whether the method is a required method of the {@code proto} protocol. If #YES, the method is a required method; if #NO, the
-	        method is an optional method.
-	        """
+				a Boolean indicating whether the method is a required method of the {@code proto} protocol. If #YES, the method is a required method; if #NO, the
+				method is an optional method.
+				"""
 			),
 			BOOL.IN(
 				"isInstanceMethod",
@@ -1202,11 +1204,11 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"protocol_addProtocol",
 			"""
-	    Adds a registered protocol to another protocol that is under construction.
+			Adds a registered protocol to another protocol that is under construction.
 
-	    The protocol you want to add to ({@code proto}) must be under construction &ndash; allocated but not yet registered with the Objective-C runtime. The
-	    protocol you want to add ({@code addition}) must be registered already.
-	    """,
+			The protocol you want to add to ({@code proto}) must be under construction &ndash; allocated but not yet registered with the Objective-C runtime. The
+			protocol you want to add ({@code addition}) must be registered already.
+			""",
 
 			Protocol_p.IN("proto", "the protocol you want to add the registered protocol to"),
 			Protocol_p.IN("addition", "the registered protocol you want to add to {@code proto}")
@@ -1215,11 +1217,11 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"protocol_addProperty",
 			"""
-	    Adds a property to a protocol that is under construction.
+			Adds a property to a protocol that is under construction.
 
-	    The protocol you want to add the property to must be under construction &ndash; allocated but not yet registered with the Objective-C runtime (via the
-	    #objc_registerProtocol() function).
-	    """,
+			The protocol you want to add the property to must be under construction &ndash; allocated but not yet registered with the Objective-C runtime (via the
+			#objc_registerProtocol() function).
+			""",
 
 			Protocol_p.IN("proto", "the protocol you want to add a property to"),
 			const _ charUTF8_p.IN("name", "the name of the property you want to add."),
@@ -1228,16 +1230,16 @@ void myMethodIMP(id self, SEL _cmd)
 			BOOL.IN(
 				"isRequiredProperty",
 				"""
-		    a Boolean indicating whether the property's accessor methods are required methods of the {@code proto} protocol. If #YES, the property's accessor
-		    methods are required methods; if #NO, the property's accessor methods are optional methods.
-		    """
+				a Boolean indicating whether the property's accessor methods are required methods of the {@code proto} protocol. If #YES, the property's accessor
+				methods are required methods; if #NO, the property's accessor methods are optional methods.
+				"""
 			),
 			BOOL.IN(
 				"isInstanceProperty",
 				"""
-			a Boolean indicating whether the property's accessor methods are instance methods. If #YES, the property's accessor methods are instance methods.
-			#YES is the only value allowed for a property. As a result, if you set this value to #NO, the property will not be added to the protocol.
-			"""
+				a Boolean indicating whether the property's accessor methods are instance methods. If #YES, the property's accessor methods are instance methods.
+				#YES is the only value allowed for a property. As a result, if you set this value to #NO, the property will not be added to the protocol.
+				"""
 			)
 		)
 
@@ -1285,10 +1287,10 @@ void myMethodIMP(id self, SEL _cmd)
 		SEL(
 			"sel_getUid",
 			"""
-	    Registers a method name with the Objective-C runtime system.
+			Registers a method name with the Objective-C runtime system.
 
-	    The implementation of this method is identical to the implementation of #sel_registerName().
-	    """,
+			The implementation of this method is identical to the implementation of #sel_registerName().
+			""",
 
 			const _ charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
@@ -1298,11 +1300,11 @@ void myMethodIMP(id self, SEL _cmd)
 		SEL(
 			"sel_registerName",
 			"""
-	    Registers a method with the Objective-C runtime system, maps the method name to a selector, and returns the selector value.
+			Registers a method with the Objective-C runtime system, maps the method name to a selector, and returns the selector value.
 
-	    You must register a method name with the Objective-C runtime system to obtain the method’s selector before you can add the method to a class
-	    definition. If the method name has already been registered, this function simply returns the selector.
-	    """,
+			You must register a method name with the Objective-C runtime system to obtain the method’s selector before you can add the method to a class
+			definition. If the method name has already been registered, this function simply returns the selector.
+			""",
 
 			const _ charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
@@ -1312,10 +1314,10 @@ void myMethodIMP(id self, SEL _cmd)
 		BOOL(
 			"sel_isEqual",
 			"""
-	    Returns a Boolean value that indicates whether two selectors are equal.
+			Returns a Boolean value that indicates whether two selectors are equal.
 
-	    sel_isEqual is equivalent to {@code ==}.
-	    """,
+			sel_isEqual is equivalent to {@code ==}.
+			""",
 
 			SEL.IN("lhs", "the selector to compare with {@code rhs}"),
 			SEL.IN("rhs", "the selector to compare with {@code lhs}"),
@@ -1328,12 +1330,12 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"objc_enumerationMutation",
 			"""
-	    Inserted by the compiler when a mutation is detected during a foreach iteration.
+			Inserted by the compiler when a mutation is detected during a foreach iteration.
 
-	    The compiler inserts this function when it detects that an object is mutated during a foreach iteration. The function is called when a mutation occurs,
-	    and the enumeration mutation handler is enacted if it is set up (via the #objc_setEnumerationMutationHandler() function). If the handler is not set up,
-	    a fatal error occurs.
-	    """,
+			The compiler inserts this function when it detects that an object is mutated during a foreach iteration. The function is called when a mutation occurs,
+			and the enumeration mutation handler is enacted if it is set up (via the #objc_setEnumerationMutationHandler() function). If the handler is not set up,
+			a fatal error occurs.
+			""",
 
 			id.IN("obj", "the object being mutated")
 		)
@@ -1352,9 +1354,9 @@ void myMethodIMP(id self, SEL _cmd)
 			id.IN(
 				"block",
 				"""
-		    the block that implements this method. The signature of {@code block} should be ${code("method_return_type ^(id self, self, method_args …)")}. The
-		    selector of the method is not available to {@code block}. {@code block} is copied with ${code("Block_copy()")}.
-		    """
+				the block that implements this method. The signature of {@code block} should be ${code("method_return_type ^(id self, self, method_args …)")}. The
+				selector of the method is not available to {@code block}. {@code block} is copied with ${code("Block_copy()")}.
+				"""
 			),
 
 			returnDoc = "the IMP that calls {@code block}. You must dispose of the returned IMP using the function."
@@ -1377,19 +1379,19 @@ void myMethodIMP(id self, SEL _cmd)
 
 			returnDoc =
 			"""
-		#YES if the block was released successfully; otherwise, #NO (for example, the function returns #NO if the block was not used to create {@code anImp}
-		previously).
-		"""
+			#YES if the block was released successfully; otherwise, #NO (for example, the function returns #NO if the block was not used to create {@code anImp}
+			previously).
+			"""
 		)
 
 		id(
 			"objc_loadWeak",
 			"""
-	    Loads the object referenced by a weak pointer and returns it.
+			Loads the object referenced by a weak pointer and returns it.
 
-	    This function loads the object referenced by a weak pointer and returns it after retaining and autoreleasing the object. As a result, the object stays
-	    alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.
-	    """,
+			This function loads the object referenced by a weak pointer and returns it after retaining and autoreleasing the object. As a result, the object stays
+			alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.
+			""",
 
 			nullable _ id_p.IN("location", "the address of the weak pointer"),
 
@@ -1399,10 +1401,10 @@ void myMethodIMP(id self, SEL _cmd)
 		id(
 			"objc_storeWeak",
 			"""
-	    Stores a new value in a {@code __weak} variable.
+			Stores a new value in a {@code __weak} variable.
 
-	    This function is typically used anywhere a {@code __weak} variable is the target of an assignment.
-	    """,
+			This function is typically used anywhere a {@code __weak} variable is the target of an assignment.
+			""",
 
 			id_p.IN("location", "the address of the weak pointer"),
 			id.IN("obj", "the new object you want the weak pointer to now point to"),
@@ -1445,12 +1447,12 @@ void myMethodIMP(id self, SEL _cmd)
 		void(
 			"objc_removeAssociatedObjects",
 			"""
-	    Removes all associations for a given object.
+			Removes all associations for a given object.
 
-	    The main purpose of this function is to make it easy to return an object to a "pristine state". You should not use this function for general removal of
-	    associations from objects, since it also removes associations that other clients may have added to the object. Typically you should use
-	    #objc_setAssociatedObject() with a #nil value to clear an association.
-	    """,
+			The main purpose of this function is to make it easy to return an object to a "pristine state". You should not use this function for general removal of
+			associations from objects, since it also removes associations that other clients may have added to the object. Typically you should use
+			#objc_setAssociatedObject() with a #nil value to clear an association.
+			""",
 
 			id.IN("object", "an object that maintains associated objects")
 		)
