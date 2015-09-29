@@ -281,5 +281,11 @@ open class PointerMapping(
 
 }
 
-val TypeMapping.isSizePointer: Boolean
+val NativeType.isPointer: Boolean
+	get() = this is PointerType || this.mapping === PrimitiveMapping.POINTER
+
+val NativeType.isPointerData: Boolean
+	get() = this is PointerType && this.mapping !== PointerMapping.OPAQUE_POINTER
+
+val TypeMapping.isPointerSize: Boolean
 	get() = this === PointerMapping.DATA_INT || this === PointerMapping.DATA_POINTER

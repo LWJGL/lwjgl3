@@ -4,26 +4,32 @@
  */
 package org.lwjgl.generator
 
-import org.lwjgl.generator.ParameterType.*
-import org.lwjgl.generator.LinkMode.*
+import org.lwjgl.generator.LinkMode.BITFIELD
+import org.lwjgl.generator.LinkMode.BITFIELD_CNT
+import org.lwjgl.generator.LinkMode.SINGLE
+import org.lwjgl.generator.LinkMode.SINGLE_CNT
+import org.lwjgl.generator.ParameterType.IN
+import org.lwjgl.generator.ParameterType.OUT
 import java.util.regex.Pattern
 
 /** Super class of Parameter and ReturnValue with common helper properties. */
 abstract class QualifiedType(
 	val nativeType: NativeType
-): TemplateElement() {
+) : TemplateElement() {
 
 	override val isSpecial: Boolean
 		get() = isBufferPointer || super.isSpecial
 
 	val isBufferPointer: Boolean
-		get() = nativeType is PointerType && nativeType.mapping != PointerMapping.OPAQUE_POINTER
+		get() = nativeType.isPointerData
 
 	val javaMethodType: String
 		get() = when {
-			nativeType is ObjectType                  -> nativeType.className
-			nativeType.mapping === PointerMapping.DATA -> "ByteBuffer"
-			else                                      -> nativeType.javaMethodType.simpleName
+			nativeType is ObjectType -> nativeType.className
+			nativeType is StructType -> if ( has(StructBuffer) ) "${nativeType.definition.className}.Buffer" else nativeType.definition.className
+			nativeType.mapping === PointerMapping.DATA
+			                         -> "ByteBuffer"
+			else                     -> nativeType.javaMethodType.simpleName
 		}
 
 	val nativeMethodType: String
@@ -49,7 +55,7 @@ abstract class QualifiedType(
 
 }
 
-class ReturnValue(nativeType: NativeType): QualifiedType(nativeType) {
+class ReturnValue(nativeType: NativeType) : QualifiedType(nativeType) {
 
 	override fun hashCode() = RESULT.hashCode()
 
@@ -95,7 +101,7 @@ class Parameter(
 	documentation: String,
 	links: String,
 	linkMode: LinkMode
-): QualifiedType(nativeType) {
+) : QualifiedType(nativeType) {
 
 	companion object {
 		val LINK_SPLIT = Pattern.compile("\\s+")
@@ -150,9 +156,12 @@ class Parameter(
 		get() = "$nativeMethodType $name"
 
 	fun asNativeMethodCallParam(func: NativeClassFunction, mode: GenerationMode) = when {
+	// Object parameter
+		nativeType is StructType || nativeType is ObjectType
+		                         -> if ( has(nullable) ) "$name == null ? NULL : $name.$ADDRESS" else "$name.$ADDRESS"
+
 	// Data pointer
-		nativeType is PointerType && nativeType.mapping != PointerMapping.OPAQUE_POINTER
-		                         -> {
+		nativeType.isPointerData -> {
 			if ( isAutoSizeResultOut && func.hideAutoSizeResultParam )
 				"$API_BUFFER.address($name)"
 			else if ( has(nullable) || (has(optional) && mode === GenerationMode.NORMAL) )
@@ -160,9 +169,6 @@ class Parameter(
 			else
 				"memAddress($name)"
 		}
-
-	// Object parameter
-		nativeType is ObjectType -> if ( has(nullable) ) "$name == null ? NULL : $name.getPointer()" else "$name.getPointer()"
 
 	// Normal parameter
 		else                     -> name

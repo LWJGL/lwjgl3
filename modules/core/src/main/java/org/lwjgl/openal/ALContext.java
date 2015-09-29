@@ -30,10 +30,10 @@ public class ALContext extends PointerWrapper {
 
 		makeCurrent();
 
-		if ( device.getPointer() != alcGetContextsDevice(handle) )
+		if ( device.address() != alcGetContextsDevice(handle) )
 			throw new IllegalArgumentException("The specified device does not match with the context device.");
 
-		this.capabilities = AL.createCapabilities(device.getPointer());
+		this.capabilities = AL.createCapabilities(device.address());
 	}
 
 	public ALDevice getDevice() {
@@ -48,7 +48,7 @@ public class ALContext extends PointerWrapper {
 	 * Makes this context the current process-wide OpenAL context.
 	 */
 	public void makeCurrent() {
-		if ( !alcMakeContextCurrent(getPointer()) )
+		if ( !alcMakeContextCurrent(address()) )
 			throw new RuntimeException("Failed to make AL context current in process.");
 
 		AL.setCurrentProcess(this);
@@ -58,7 +58,7 @@ public class ALContext extends PointerWrapper {
 	 * Makes this context the current thread-local OpenAL context.
 	 */
 	public void makeCurrentThread() {
-		if ( !alcSetThreadContext(getPointer()) )
+		if ( !alcSetThreadContext(address()) )
 			throw new RuntimeException("Failed to make AL context current in thread.");
 
 		AL.setCurrentThread(this);
@@ -66,18 +66,18 @@ public class ALContext extends PointerWrapper {
 
 	public boolean isCurrent() {
 		if ( device.getCapabilities().ALC_EXT_thread_local_context ) {
-			if ( alcGetThreadContext() == getPointer() )
+			if ( alcGetThreadContext() == address() )
 				return true;
 		}
 
-		return alcGetCurrentContext() == getPointer();
+		return alcGetCurrentContext() == address();
 	}
 
 	public void destroy() {
 		if ( isCurrent() )
 			alcMakeContextCurrent(NULL);
 
-		alcDestroyContext(getPointer());
+		alcDestroyContext(address());
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ALContext extends PointerWrapper {
 	 * @return the new ALContext
 	 */
 	public static ALContext create(ALDevice device, IntBuffer attributes) {
-		long contextHandle = alcCreateContext(device.getPointer(), attributes);
+		long contextHandle = alcCreateContext(device.address(), attributes);
 		return new ALContext(device, contextHandle);
 	}
 

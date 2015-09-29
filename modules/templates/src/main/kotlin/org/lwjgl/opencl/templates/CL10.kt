@@ -1405,7 +1405,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
 		),
-		nullable _ cl_image_format_p.OUT(
+		nullable _ StructBuffer _ cl_image_format_p.OUT(
 			"image_formats",
 			"""
 			a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##CLImageFormat structure

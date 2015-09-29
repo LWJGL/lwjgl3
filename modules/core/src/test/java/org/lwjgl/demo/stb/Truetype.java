@@ -16,6 +16,7 @@ import static org.lwjgl.demo.util.IOUtil.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.stb.STBTruetype.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 /** STB Truetype demo. */
 public final class Truetype extends FontDemo {
@@ -41,7 +42,7 @@ public final class Truetype extends FontDemo {
 		int BITMAP_H = 512;
 
 		int texID = glGenTextures();
-		ByteBuffer cdata = BufferUtils.createByteBuffer(96 * STBTTBakedChar.SIZEOF);
+		STBTTBakedChar.Buffer cdata = STBTTBakedChar.mallocBuffer(96);
 
 		try {
 			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
@@ -66,7 +67,7 @@ public final class Truetype extends FontDemo {
 
 		FloatBuffer x = BufferUtils.createFloatBuffer(1);
 		FloatBuffer y = BufferUtils.createFloatBuffer(1);
-		STBTTAlignedQuad q = new STBTTAlignedQuad();
+		STBTTAlignedQuad q = STBTTAlignedQuad.malloc();
 
 		while ( glfwWindowShouldClose(getWindow()) == GL_FALSE ) {
 			glfwPollEvents();
@@ -93,7 +94,7 @@ public final class Truetype extends FontDemo {
 				} else if ( c < 32 || 128 <= c )
 					continue;
 
-				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q.buffer(), 1);
+				stbtt_GetBakedQuad(cdata, BITMAP_W, BITMAP_H, c - 32, x, y, q, 1);
 
 				glTexCoord2f(q.getS0(), q.getT0());
 				glVertex2f(q.getX0(), q.getY0());
@@ -113,6 +114,9 @@ public final class Truetype extends FontDemo {
 
 			glfwSwapBuffers(getWindow());
 		}
+
+		q.free();
+		memFree(cdata);
 
 		glfwDestroyWindow(getWindow());
 	}

@@ -47,7 +47,7 @@ public class ALDevice extends PointerWrapper {
 	}
 
 	public void destroy() {
-		alcCloseDevice(getPointer());
+		alcCloseDevice(address());
 		if ( lastDevice == this )
 			lastDevice = null;
 	}

@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.ovr;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.ovr.OVRGraphicsLuid;
 import org.lwjgl.ovr.OVRHmdDesc;
@@ -27,23 +26,29 @@ public final class HelloLibOVR {
 			}
 		};
 
-		OVRInitParams initParams = new OVRInitParams();
-		initParams.setLogCallback(callback.getPointer());
+		OVRInitParams initParams = OVRInitParams.calloc();
+		initParams.setLogCallback(callback.address());
 		initParams.setFlags(ovrInit_Debug);
 
-		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams.buffer()));
+		System.out.println("ovr_Initialize = " + ovr_Initialize(initParams));
+		initParams.free();
+
 		System.out.println("ovr_GetVersionString = " + ovr_GetVersionString());
 
-		PointerBuffer hmd_p = BufferUtils.createPointerBuffer(1);
-		OVRGraphicsLuid luid = new OVRGraphicsLuid();
-		System.out.println("ovr_Create = " + ovr_Create(hmd_p, luid.buffer()));
+		PointerBuffer hmd_p = memAllocPointer(1);
+		OVRGraphicsLuid luid = OVRGraphicsLuid.calloc();
+		System.out.println("ovr_Create = " + ovr_Create(hmd_p, luid));
 
 		long hmd = hmd_p.get(0);
 
-		OVRHmdDesc desc = new OVRHmdDesc();
-		ovr_GetHmdDesc(hmd, desc.buffer());
+		OVRHmdDesc desc = OVRHmdDesc.malloc();
+		ovr_GetHmdDesc(hmd, desc);
 
 		System.out.println("ovr_GetHmdDesc = " + desc.getManufacturerString() + " " + desc.getProductNameString() + " " + desc.getSerialNumberString());
+
+		desc.free();
+		luid.free();
+		memFree(hmd_p);
 
 		ovr_Shutdown();
 	}

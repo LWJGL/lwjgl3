@@ -14,9 +14,9 @@ public final class ALUtil {
 	}
 
 	public static void checkALCError(ALDevice device) {
-		int err = alcGetError(device.getPointer());
+		int err = alcGetError(device.address());
 		if ( err != ALC_NO_ERROR )
-			throw new OpenALException(alcGetString(device.getPointer(), err));
+			throw new OpenALException(alcGetString(device.address(), err));
 	}
 
 	public static void checkALError() {

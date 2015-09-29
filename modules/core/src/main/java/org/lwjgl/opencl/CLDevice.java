@@ -22,7 +22,7 @@ public class CLDevice extends PointerWrapper {
 	public CLDevice(long cl_device_id, CLPlatform platform) {
 		this(cl_device_id, platform.getCapabilities());
 
-		if ( LWJGLUtil.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.getPointer() )
+		if ( LWJGLUtil.DEBUG && clGetDeviceInfoPointer(cl_device_id, CL_DEVICE_PLATFORM) != platform.address() )
 			throw new IllegalArgumentException("The specified device does not belong to the specified platform.");
 	}
 

@@ -63,9 +63,10 @@ public class Gears extends AbstractGears {
 							toggleMode = false;
 						break;
 					case GLFW_KEY_G:
-						glfwSetInputMode(window,
-						                 GLFW_CURSOR,
-						                 glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+						glfwSetInputMode(window, GLFW_CURSOR, glfwGetInputMode(window, GLFW_CURSOR) == GLFW_CURSOR_NORMAL
+							? GLFW_CURSOR_DISABLED
+							: GLFW_CURSOR_NORMAL
+						);
 						break;
 				}
 			}
@@ -79,7 +80,7 @@ public class Gears extends AbstractGears {
 		int HEIGHT = 300;
 
 		long monitor = glfwGetPrimaryMonitor();
-		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(monitor));
+		GLFWvidmode vidmode = glfwGetVideoMode(monitor);
 
 		long window = fullscreen
 			? glfwCreateWindow(vidmode.getWidth(), vidmode.getHeight(), "GLFW Gears Demo", monitor, this.window)

@@ -26,7 +26,7 @@ public class LinuxLibrary extends DynamicLinkLibrary.Default {
 	}
 
 	@Override
-	public long getPointer() {
+	public long address() {
 		return handle;
 	}
 

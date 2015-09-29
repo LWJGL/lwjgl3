@@ -36,7 +36,7 @@ public class WindowsLibrary extends DynamicLinkLibrary.Default {
 	}
 
 	@Override
-	public long getPointer() {
+	public long address() {
 		return handle;
 	}
 

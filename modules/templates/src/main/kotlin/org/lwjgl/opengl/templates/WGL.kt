@@ -209,7 +209,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 			"""
 		),
 		DWORD.IN("first", "the first of the set of glyphs that form the font outline display lists"),
-		DWORD.IN(
+		AutoSize("glyphMetrics") _ DWORD.IN(
 			"count",
 			"""
 			the number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display
@@ -239,7 +239,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 			""",
 			"#FONT_LINES #FONT_POLYGONS"
 		),
-		Check("count * GLYPHMETRICSFLOAT.SIZEOF") _ nullable _ LPGLYPHMETRICSFLOAT.OUT(
+		nullable _ StructBuffer _ LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
 			an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no

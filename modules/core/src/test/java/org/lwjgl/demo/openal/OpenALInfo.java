@@ -74,7 +74,7 @@ public class OpenALInfo {
 		System.out.println("ALC version: " + majorVersion + "." + minorVersion);
 
 		System.out.println("ALC extensions:");
-		String[] extensions = alcGetString(alContext.getDevice().getPointer(), ALC_EXTENSIONS).split(" ");
+		String[] extensions = alcGetString(alContext.getDevice().address(), ALC_EXTENSIONS).split(" ");
 		for ( String extension : extensions ) {
 			if ( extension.trim().isEmpty() ) {
 				continue;
@@ -105,7 +105,7 @@ public class OpenALInfo {
 			return;
 		}
 
-		long device = alContext.getDevice().getPointer();
+		long device = alContext.getDevice().address();
 
 		int efxMajor = alcGetInteger(device, ALC_EFX_MAJOR_VERSION);
 		int efxMinor = alcGetInteger(device, ALC_EFX_MINOR_VERSION);
@@ -169,7 +169,7 @@ public class OpenALInfo {
 
 	private void checkForErrors(ALContext alContext) {
 		{
-			long device = alContext.getDevice().getPointer();
+			long device = alContext.getDevice().address();
 
 			int error = alcGetError(device);
 			if ( error != ALC_NO_ERROR ) {

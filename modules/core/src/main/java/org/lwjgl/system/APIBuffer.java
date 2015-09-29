@@ -207,7 +207,7 @@ public class APIBuffer {
 
 	/** Ensures space for an additional pointer value, sets the specified value at the allocated offset and returns that offset. */
 	public int pointerParam(PointerWrapper value) {
-		return pointerParam(value.getPointer());
+		return pointerParam(value.address());
 	}
 
 	// ----

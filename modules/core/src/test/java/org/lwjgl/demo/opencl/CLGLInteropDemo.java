@@ -124,8 +124,8 @@ public final class CLGLInteropDemo {
 				if ( cmp != 0 )
 					return cmp;
 
-				return clGetPlatformInfoStringUTF8(p1.getPointer(), CL_PLATFORM_VENDOR).compareTo(
-					clGetPlatformInfoStringUTF8(p1.getPointer(), CL_PLATFORM_VENDOR)
+				return clGetPlatformInfoStringUTF8(p1.address(), CL_PLATFORM_VENDOR).compareTo(
+					clGetPlatformInfoStringUTF8(p1.address(), CL_PLATFORM_VENDOR)
 				);
 			}
 		});
@@ -134,14 +134,14 @@ public final class CLGLInteropDemo {
 
 		String platformID;
 		if ( platform.getCapabilities().cl_khr_icd )
-			platformID = clGetPlatformInfoStringASCII(platform.getPointer(), CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
+			platformID = clGetPlatformInfoStringASCII(platform.address(), CL_PLATFORM_ICD_SUFFIX_KHR); // less spammy
 		else
-			platformID = clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR);
+			platformID = clGetPlatformInfoStringUTF8(platform.address(), CL_PLATFORM_VENDOR);
 
 		boolean hasCPU = false;
 		boolean hasGPU = false;
 		for ( CLDevice device : platform.getDevices(CL_DEVICE_TYPE_ALL) ) {
-			long type = clGetDeviceInfoLong(device.getPointer(), CL_DEVICE_TYPE);
+			long type = clGetDeviceInfoLong(device.address(), CL_DEVICE_TYPE);
 			if ( type == CL_DEVICE_TYPE_CPU )
 				hasCPU = true;
 			else if ( type == CL_DEVICE_TYPE_GPU )

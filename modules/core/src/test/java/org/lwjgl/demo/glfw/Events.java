@@ -74,9 +74,9 @@ public final class Events {
 				throw new RuntimeException(e);
 			}
 
-			IntBuffer w = BufferUtils.createIntBuffer(1);
-			IntBuffer h = BufferUtils.createIntBuffer(1);
-			IntBuffer comp = BufferUtils.createIntBuffer(1);
+			IntBuffer w = memAllocInt(1);
+			IntBuffer h = memAllocInt(1);
+			IntBuffer comp = memAllocInt(1);
 
 			try {
 				Method stbi_load_from_memory = STBImage.getMethod(
@@ -85,13 +85,18 @@ public final class Events {
 				);
 				ByteBuffer pixels = (ByteBuffer)stbi_load_from_memory.invoke(null, png, w, h, comp, 0);
 
-				ByteBuffer img = GLFWimage.malloc(w.get(0), h.get(0), pixels);
+				GLFWimage img = GLFWimage.malloc().set(w.get(0), h.get(0), pixels);
 				long cursor = glfwCreateCursor(img, 0, 8);
+				img.free();
 
 				glfwSetCursor(window, cursor);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+
+			memFree(comp);
+			memFree(h);
+			memFree(w);
 		} catch (ClassNotFoundException e) {
 			// ignore
 		}

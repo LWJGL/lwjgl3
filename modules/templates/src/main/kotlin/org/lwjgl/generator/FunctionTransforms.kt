@@ -53,9 +53,6 @@ open class AutoSizeTransform(
 		if ( applyFactor && factor != null )
 			expression += " ${factor.expression()}"
 
-		if ( bufferParam.nativeType is StructType )
-			expression += " / ${bufferParam.nativeType.definition.className}.SIZEOF"
-
 		if ( bufferParam has nullable )
 			expression = "${bufferParam.name} == null ? 0 : $expression"
 

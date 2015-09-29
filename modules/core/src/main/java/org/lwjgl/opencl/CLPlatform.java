@@ -152,7 +152,7 @@ public class CLPlatform extends PointerWrapper {
 	 */
 	public List<CLDevice> getDevices(int device_type, Filter<CLDevice> filter) {
 		APIBuffer __buffer = apiBuffer();
-		int errcode = clGetDeviceIDs(getPointer(), device_type, 0, null, __buffer.buffer());
+		int errcode = clGetDeviceIDs(address(), device_type, 0, null, __buffer.buffer());
 		if ( errcode == CL_DEVICE_NOT_FOUND )
 			return Collections.emptyList();
 		checkCLError(errcode);
@@ -163,7 +163,7 @@ public class CLPlatform extends PointerWrapper {
 
 		__buffer.bufferParam(num_devices << POINTER_SHIFT);
 
-		errcode = clGetDeviceIDs(getPointer(), device_type, num_devices, __buffer.buffer(), null);
+		errcode = clGetDeviceIDs(address(), device_type, num_devices, __buffer.buffer(), null);
 		checkCLError(errcode);
 
 		long[] deviceIDs = new long[num_devices];

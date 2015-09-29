@@ -586,7 +586,7 @@ val ovrGLTextureData = 	struct(OVR_PACKAGE, "OVRGLTextureData", structName = "ov
 }.nativeType
 
 fun config() {
-	struct(OVR_PACKAGE, "OVRLayer_Union", structName = "ovrLayer_Union") {
+	struct(OVR_PACKAGE, "OVRLayerUnion", structName = "ovrLayer_Union") {
 		documentation = "Union that combines ovrLayer types in a way that allows them to be used in a polymorphic way."
 		includeOVRCAPI()
 

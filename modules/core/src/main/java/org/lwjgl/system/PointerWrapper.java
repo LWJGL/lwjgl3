@@ -15,14 +15,14 @@ public abstract class PointerWrapper implements Pointer {
 	protected final long pointer;
 
 	protected PointerWrapper(long pointer) {
-		if ( LWJGLUtil.DEBUG && pointer == NULL )
+		if ( LWJGLUtil.CHECKS && pointer == NULL )
 			throw new NullPointerException();
 
 		this.pointer = pointer;
 	}
 
 	@Override
-	public final long getPointer() {
+	public final long address() {
 		return pointer;
 	}
 

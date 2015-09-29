@@ -72,23 +72,23 @@ public final class EFXTest {
 		contextAttribList.put(0);
 		contextAttribList.flip();
 
-		long contextHandle = alcCreateContext(device.getPointer(), contextAttribList);
+		long contextHandle = alcCreateContext(device.address(), contextAttribList);
 		ALContext newContext = new ALContext(device, contextHandle);
 
-		boolean makeCurrentFailed = !alcMakeContextCurrent(newContext.getPointer());
+		boolean makeCurrentFailed = !alcMakeContextCurrent(newContext.address());
 		if ( makeCurrentFailed ) {
 			throw new Exception("Failed to make context current.");
 		}
 
 		// Query EFX ALC values
 		System.out.println("AL_VERSION: " + alGetString(AL_VERSION));
-		int efxMajor = ALC10.alcGetInteger(device.getPointer(), ALC_EFX_MAJOR_VERSION);
+		int efxMajor = ALC10.alcGetInteger(device.address(), ALC_EFX_MAJOR_VERSION);
 		System.out.println("ALC_EFX_MAJOR_VERSION: " + efxMajor);
 
-		int efxMinor = ALC10.alcGetInteger(device.getPointer(), ALC_EFX_MINOR_VERSION);
+		int efxMinor = ALC10.alcGetInteger(device.address(), ALC_EFX_MINOR_VERSION);
 		System.out.println("ALC_EFX_MINOR_VERSION: " + efxMinor);
 
-		int auxSends = ALC10.alcGetInteger(device.getPointer(), ALC_MAX_AUXILIARY_SENDS);
+		int auxSends = ALC10.alcGetInteger(device.address(), ALC_MAX_AUXILIARY_SENDS);
 		System.out.println("ALC_MAX_AUXILIARY_SENDS: " + auxSends);
 
 		// Try to create 4 Auxiliary Effect Slots
@@ -258,10 +258,11 @@ public final class EFXTest {
 		int source = alGenSources();
 		int buffer = alGenBuffers();
 
-		STBVorbisInfo info = new STBVorbisInfo();
+		STBVorbisInfo info = STBVorbisInfo.malloc();
 		ByteBuffer pcm = ALCDemo.readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
 		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.getSampleRate());
+		info.free();
 		alSourcei(source, AL_BUFFER, buffer);
 		alSourcei(source, AL_LOOPING, AL_TRUE);
 

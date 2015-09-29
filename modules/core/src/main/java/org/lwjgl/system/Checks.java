@@ -217,7 +217,7 @@ public final class Checks {
 	}
 
 	/**
-	 * Helper method to ensure a Pointer buffer has enough capacity.
+	 * Helper method to ensure a {@link PointerBuffer} has enough capacity.
 	 *
 	 * @param buf  the buffer to check
 	 * @param size the minimum buffer capacity
@@ -232,6 +232,25 @@ public final class Checks {
 
 	/** @see #checkBuffer(PointerBuffer, int) */
 	public static void checkBuffer(PointerBuffer buf, long size) {
+		checkBuffer(buf, (int)size);
+	}
+
+	/**
+	 * Helper method to ensure a {@link StructBuffer} has enough capacity.
+	 *
+	 * @param buf  the buffer to check
+	 * @param size the minimum buffer capacity
+	 *
+	 * @throws IllegalArgumentException
+	 */
+	public static void checkBuffer(StructBuffer buf, int size) {
+		if ( buf.container.remaining() < size * buf.sizeof() ) {
+			throwBufferSizeException(buf, size);
+		}
+	}
+
+	/** @see #checkBuffer(StructBuffer, int) */
+	public static void checkBuffer(StructBuffer buf, long size) {
 		checkBuffer(buf, (int)size);
 	}
 
@@ -262,7 +281,11 @@ public final class Checks {
 	}
 
 	private static void throwBufferSizeException(PointerBuffer buf, int size) {
-		throw new IllegalArgumentException("Number of remaining pointer buffer elements is " + buf.remaining() + ", must be at least " + size);
+		throw new IllegalArgumentException("Number of remaining pointer values in buffer is " + buf.remaining() + ", must be at least " + size);
+	}
+
+	private static void throwBufferSizeException(StructBuffer buf, int size) {
+		throw new IllegalArgumentException("Number of remaining struct values in buffer is " + buf.remaining() + ", must be at least " + size);
 	}
 
 	private static void throwArraySizeException(Object[] array, int size) {

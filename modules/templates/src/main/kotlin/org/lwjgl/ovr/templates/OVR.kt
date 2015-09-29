@@ -326,7 +326,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	    """,
 
 	    Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
-	    Check(1) _ ovrGraphicsLuid_p.OUT(
+	    ovrGraphicsLuid_p.OUT(
 		    "luid",
 		    """
 		    a system specific graphics adapter identifier that locates which graphics adapter has the HMD attached. This must match the adapter used by the

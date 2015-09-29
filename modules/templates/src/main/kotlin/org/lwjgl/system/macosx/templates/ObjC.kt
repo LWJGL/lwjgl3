@@ -684,7 +684,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Class.IN("cls", "the class to modify"),
 			const _ charUTF8_p.IN("name", "the name of the property"),
-			const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes"),
+			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
 			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}"),
 
 			returnDoc = "#YES if the property was added successfully; otherwise #NO (for example, this function returns #NO if the class already has that property)"
@@ -696,7 +696,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Class.IN("cls", "the class to modify"),
 			const _ charUTF8_p.IN("name", "the name of the property"),
-			const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes"),
+			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
 			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}")
 		)
 
@@ -971,7 +971,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the property's attributes"
 		)
 
-		objc_property_attribute_t_p(
+		(StructBuffer _ objc_property_attribute_t_p)(
 			"property_copyAttributeList",
 			"Returns an array of property attributes for a given property.",
 
@@ -1079,7 +1079,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"""
 		)
 
-		objc_method_description_p(
+		(StructBuffer _ objc_method_description_p)(
 			"protocol_copyMethodDescriptionList",
 			"""
 			Returns an array of method descriptions of methods meeting a given specification for a given protocol.
@@ -1225,7 +1225,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Protocol_p.IN("proto", "the protocol you want to add a property to"),
 			const _ charUTF8_p.IN("name", "the name of the property you want to add."),
-			const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes"),
+			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
 			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of properties in {@code attributes}"),
 			BOOL.IN(
 				"isRequiredProperty",

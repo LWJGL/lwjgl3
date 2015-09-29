@@ -8,7 +8,6 @@ import java.nio.*;
 
 /** Interface version of PointerBuffer, used for compiling the Templates module before the Core module. */
 public interface PointerBuffer extends Comparable<PointerBuffer> {
-	long address();
 	long address0();
 	int capacity();
 	int position();

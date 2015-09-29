@@ -2,75 +2,50 @@
  * Copyright LWJGL. All rights reserved.
  * License terms: http://lwjgl.org/license.php
  */
-package org.lwjgl;
+package org.lwjgl.system;
 
-import java.nio.*;
+import org.lwjgl.LWJGLUtil;
+import org.lwjgl.Pointer;
 
+import java.nio.BufferOverflowException;
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+
+import static org.lwjgl.system.Checks.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-/** This class is a container for architecture-independent pointer data. Its interface mirrors the {@link LongBuffer} API for convenience. */
-public abstract class PointerBuffer implements Comparable<PointerBuffer> {
+/** This is the base class of struct data container implementations. Its interface mirrors the NIO API for convenience. */
+public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T, SELF>> implements Comparable<SELF>, Pointer {
 
-	// We use a (static) factory instance to create the concrete implementation, to avoid
-	// type profiling in hot methods (cheaper for the JVM to inline).
-	private interface Factory {
-		PointerBuffer allocateDirect(int capacity);
-		PointerBuffer create(long address, int capacity);
-		PointerBuffer create(ByteBuffer source);
+	protected final ByteBuffer container;
 
-		long get(ByteBuffer source);
-		long get(ByteBuffer source, int index);
+	protected StructBuffer(ByteBuffer container, int SIZEOF) {
+		if ( LWJGLUtil.CHECKS )
+			checkBuffer(container, SIZEOF);
 
-		void put(ByteBuffer source, long p);
-		void put(ByteBuffer source, int index, long p);
+		this.container = container;
 	}
 
-	private static final Factory factory = Pointer.BITS64 ? x64.FACTORY : x32.FACTORY;
+	// --------------------------------------
 
-	// disallow other implementations
-	PointerBuffer() {
-	}
+	protected abstract SELF self();
 
-	/**
-	 * Allocates a new pointer buffer.
-	 *
-	 * <p>The new buffer's position will be zero, its limit will be its capacity, and its mark will be undefined.</p>
-	 *
-	 * @param capacity the new buffer's capacity, in pointers
-	 *
-	 * @return the new pointer buffer
-	 *
-	 * @throws IllegalArgumentException If the <tt>capacity</tt> is a negative integer
-	 */
-	public static PointerBuffer allocateDirect(int capacity) {
-		return factory.allocateDirect(capacity);
-	}
+	protected abstract SELF newBufferInstance(ByteBuffer buffer);
 
-	/**
-	 * Creates a new PointerBuffer that starts at the specified memory address and has the specified capacity.
-	 *
-	 * @param address  the starting memory address
-	 * @param capacity the buffer capacity, in number of pointers
-	 */
-	public static PointerBuffer create(long address, int capacity) {
-		return factory.create(address, capacity);
-	}
+	protected abstract T newInstance(long address);
 
-	/**
-	 * Creates a new PointerBuffer using the specified ByteBuffer as its pointer data source. This is useful for users that do their own memory management over
-	 * a big ByteBuffer, instead of allocating many small ones.
-	 *
-	 * @param source the source buffer
-	 */
-	public static PointerBuffer create(ByteBuffer source) {
-		return factory.create(source);
-	}
-
-	protected abstract Buffer buffer();
+	protected abstract int sizeof();
 
 	/** Returns the buffer's base address. [INTERNAL USE ONLY] */
 	public long address0() {
-		return memAddress0(buffer());
+		return memAddress0(container);
+	}
+
+	/** Returns the memory address at the current buffer position. */
+	@Override
+	public long address() {
+		return memAddress(container);
 	}
 
 	/**
@@ -79,7 +54,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the capacity of this buffer
 	 */
 	public int capacity() {
-		return buffer().capacity();
+		return container.capacity() / sizeof();
 	}
 
 	/**
@@ -88,7 +63,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the position of this buffer
 	 */
 	public int position() {
-		return buffer().position();
+		return container.position() / sizeof();
 	}
 
 	/**
@@ -100,9 +75,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws IllegalArgumentException If the preconditions on <tt>newPosition</tt> do not hold
 	 */
-	public PointerBuffer position(int newPosition) {
-		buffer().position(newPosition);
-		return this;
+	public SELF position(int newPosition) {
+		container.position(newPosition * sizeof());
+		return self();
 	}
 
 	/**
@@ -111,7 +86,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the limit of this buffer
 	 */
 	public int limit() {
-		return buffer().limit();
+		return container.limit() / sizeof();
 	}
 
 	/**
@@ -124,9 +99,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws IllegalArgumentException If the preconditions on <tt>newLimit</tt> do not hold
 	 */
-	public PointerBuffer limit(int newLimit) {
-		buffer().limit(newLimit);
-		return this;
+	public SELF limit(int newLimit) {
+		container.limit(newLimit * sizeof());
+		return self();
 	}
 
 	/**
@@ -134,9 +109,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return This buffer
 	 */
-	public PointerBuffer mark() {
-		buffer().mark();
-		return this;
+	public SELF mark() {
+		container.mark();
+		return self();
 	}
 
 	/**
@@ -148,9 +123,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws java.nio.InvalidMarkException If the mark has not been set
 	 */
-	public PointerBuffer reset() {
-		buffer().reset();
-		return this;
+	public SELF reset() {
+		container.reset();
+		return self();
 	}
 
 	/**
@@ -167,9 +142,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return This buffer
 	 */
-	public PointerBuffer clear() {
-		buffer().clear();
-		return this;
+	public SELF clear() {
+		container.clear();
+		return self();
 	}
 
 	/**
@@ -188,9 +163,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return This buffer
 	 */
-	public PointerBuffer flip() {
-		buffer().flip();
-		return this;
+	public SELF flip() {
+		container.flip();
+		return self();
 	}
 
 	/**
@@ -206,9 +181,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return This buffer
 	 */
-	public PointerBuffer rewind() {
-		buffer().rewind();
-		return this;
+	public SELF rewind() {
+		container.rewind();
+		return self();
 	}
 
 	/**
@@ -217,7 +192,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the number of elements remaining in this buffer
 	 */
 	public int remaining() {
-		return buffer().remaining();
+		return container.remaining() / sizeof();
 	}
 
 	/**
@@ -226,7 +201,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return <tt>true</tt> if, and only if, there is at least one element remaining in this buffer
 	 */
 	public boolean hasRemaining() {
-		return buffer().hasRemaining();
+		return container.hasRemaining();
 	}
 
 	/**
@@ -240,7 +215,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return the new pointer buffer
 	 */
-	public abstract PointerBuffer slice();
+	public SELF slice() {
+		return newBufferInstance(container.slice());
+	}
 
 	/**
 	 * Creates a new pointer buffer that shares this buffer's content.
@@ -252,7 +229,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return the new pointer buffer
 	 */
-	public abstract PointerBuffer duplicate();
+	public SELF duplicate() {
+		return newBufferInstance(container.duplicate());
+	}
 
 	/**
 	 * Creates a new, read-only pointer buffer that shares this buffer's content.
@@ -266,7 +245,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return the new, read-only pointer buffer
 	 */
-	public abstract PointerBuffer asReadOnlyBuffer();
+	public SELF asReadOnlyBuffer() {
+		return newBufferInstance(container.asReadOnlyBuffer());
+	}
 
 	/**
 	 * Tells whether or not this buffer is read-only.
@@ -274,7 +255,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return <tt>true</tt> if, and only if, this buffer is read-only
 	 */
 	public boolean isReadOnly() {
-		return buffer().isReadOnly();
+		return container.isReadOnly();
 	}
 
 	/**
@@ -284,15 +265,20 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
-	public abstract long get();
+	public T get() {
+		return newInstance(address0() + nextGetIndex());
+	}
 
 	/**
-	 * Convenience relative get from a source ByteBuffer.
+	 * Relative <i>get</i> method. Reads the pointer at this buffer's current position into the specified struct, and then increments the position.
 	 *
-	 * @param source the source ByteBuffer
+	 * @return the pointer at the buffer's current position
+	 *
+	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
-	public static long get(ByteBuffer source) {
-		return factory.get(source);
+	public SELF get(T value) {
+		memCopy(address0() + nextGetIndex(), value.address(), sizeof());
+		return self();
 	}
 
 	/**
@@ -300,23 +286,16 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * <p>Writes the specified pointer into this buffer at the current position, and then increments the position.</p>
 	 *
-	 * @param p the pointer to be written
+	 * @param value the pointer to be written
 	 *
 	 * @return This buffer
 	 *
 	 * @throws java.nio.BufferOverflowException If this buffer's current position is not smaller than its limit
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public abstract PointerBuffer put(long p);
-
-	/**
-	 * Convenience relative put on a target ByteBuffer.
-	 *
-	 * @param target the target ByteBuffer
-	 * @param p      the pointer value to be written
-	 */
-	public static void put(ByteBuffer target, long p) {
-		factory.put(target, p);
+	public SELF put(T value) {
+		memCopy(value.address(), address0() + nextPutIndex(), sizeof());
+		return self();
 	}
 
 	/**
@@ -328,16 +307,22 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
-	public abstract long get(int index);
+	public T get(int index) {
+		return newInstance(address0() + checkIndex(index));
+	}
 
 	/**
-	 * Convenience absolute get from a source ByteBuffer.
+	 * Absolute <i>get</i> method. Reads the pointer at the specified index into the specified struct.
 	 *
-	 * @param source the source ByteBuffer
-	 * @param index  the index at which the pointer will be read
+	 * @param index the index from which the pointer will be read
+	 *
+	 * @return the pointer at the specified index
+	 *
+	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
-	public static long get(ByteBuffer source, int index) {
-		return factory.get(source, index);
+	public SELF get(int index, T value) {
+		memCopy(address0() + checkIndex(index), value.address(), sizeof());
+		return self();
 	}
 
 	/**
@@ -346,173 +331,17 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * <p>Writes the specified pointer into this buffer at the specified index.</p>
 	 *
 	 * @param index the index at which the pointer will be written
-	 * @param p     the pointer value to be written
+	 * @param value the pointer value to be written
 	 *
 	 * @return This buffer
 	 *
 	 * @throws IndexOutOfBoundsException        If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public abstract PointerBuffer put(int index, long p);
-
-	/**
-	 * Convenience absolute put on a target ByteBuffer.
-	 *
-	 * @param target the target ByteBuffer
-	 * @param index  the index at which the pointer will be written
-	 * @param p      the pointer value to be written
-	 */
-	public static void put(ByteBuffer target, int index, long p) {
-		factory.put(target, index, p);
+	public SELF put(int index, T value) {
+		memCopy(value.address(), address0() + checkIndex(index), sizeof());
+		return self();
 	}
-
-	// -- PointerWrapper operations --
-
-	/** Puts the pointer value of the specified {@link Pointer} at the current position and then increments the position. */
-	public PointerBuffer put(Pointer wrapper) {
-		put(wrapper.address());
-		return this;
-	}
-
-	/** Puts the pointer value of the specified {@link Pointer} at the specified index. */
-	public PointerBuffer put(int index, Pointer wrapper) {
-		put(index, wrapper.address());
-		return this;
-	}
-
-	// -- Buffer address operations --
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(ByteBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(ShortBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(IntBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(LongBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(FloatBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer put(DoubleBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the current position and then increments the position. */
-	public PointerBuffer putAddressOf(PointerBuffer buffer) {
-		put(memAddress(buffer));
-		return this;
-	}
-
-	// ---
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, ByteBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, ShortBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, IntBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, LongBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, FloatBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer put(int index, DoubleBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	/** Puts the address of the specified buffer at the specified index. */
-	public PointerBuffer putAddressOf(int index, PointerBuffer buffer) {
-		put(index, memAddress(buffer));
-		return this;
-	}
-
-	// ---
-
-	/** Returns a ByteBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public ByteBuffer getByteBuffer(int size) { return memByteBuffer(get(), size); }
-
-	/** Returns a ShortBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public ShortBuffer getShortBuffer(int size) { return memShortBuffer(get(), size); }
-
-	/** Returns a IntBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public IntBuffer getIntBuffer(int size) { return memIntBuffer(get(), size); }
-
-	/** Returns a LongBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public LongBuffer getLongBuffer(int size) { return memLongBuffer(get(), size); }
-
-	/** Returns a FloatBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public FloatBuffer getFloatBuffer(int size) { return memFloatBuffer(get(), size); }
-
-	/** Returns a DoubleBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public DoubleBuffer getDoubleBuffer(int size) { return memDoubleBuffer(get(), size); }
-
-	/** Returns a PointerBuffer instance that starts at the address found at the current position and has capacity equal to the specified size. */
-	public PointerBuffer getPointerBuffer(int size) { return memPointerBuffer(get(), size); }
-
-	// ---
-
-	/** Returns a ByteBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public ByteBuffer getByteBuffer(int index, int size) { return memByteBuffer(get(index), size); }
-
-	/** Returns a ShortBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public ShortBuffer getShortBuffer(int index, int size) { return memShortBuffer(get(index), size); }
-
-	/** Returns a IntBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public IntBuffer getIntBuffer(int index, int size) { return memIntBuffer(get(index), size); }
-
-	/** Returns a LongBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public LongBuffer getLongBuffer(int index, int size) { return memLongBuffer(get(index), size); }
-
-	/** Returns a FloatBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public FloatBuffer getFloatBuffer(int index, int size) { return memFloatBuffer(get(index), size); }
-
-	/** Returns a DoubleBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public DoubleBuffer getDoubleBuffer(int index, int size) { return memDoubleBuffer(get(index), size); }
-
-	/** Returns a PointerBuffer instance that starts at the address found at the specified index and has capacity equal to the specified size. */
-	public PointerBuffer getPointerBuffer(int index, int size) { return memPointerBuffer(get(index), size); }
 
 	// -- Bulk get operations --
 
@@ -529,8 +358,8 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
 	 */
-	public PointerBuffer get(long[] dst) {
-		return get(dst, 0, dst.length);
+	public SELF get(byte[] dst) {
+		return get(dst, 0, dst.length / sizeof());
 	}
 
 	/**
@@ -560,7 +389,10 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
 	 * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
 	 */
-	public abstract PointerBuffer get(long[] dst, int offset, int length);
+	public SELF get(byte[] dst, int offset, int length) {
+		container.get(dst, offset, length * sizeof());
+		return self();
+	}
 
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
@@ -588,7 +420,10 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws IllegalArgumentException         If the source buffer is this buffer
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public abstract PointerBuffer put(PointerBuffer src);
+	public SELF put(SELF src) {
+		container.put(src.container);
+		return self();
+	}
 
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
@@ -604,8 +439,8 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public PointerBuffer put(long[] src) {
-		return put(src, 0, src.length);
+	public SELF put(byte[] src) {
+		return put(src, 0, src.length / sizeof());
 	}
 
 	/**
@@ -636,7 +471,10 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @throws IndexOutOfBoundsException        If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public abstract PointerBuffer put(long[] src, int offset, int length);
+	public SELF put(byte[] src, int offset, int length) {
+		container.put(src, offset, length * sizeof());
+		return self();
+	}
 
 	/**
 	 * Compacts this buffer&nbsp;&nbsp;<i>(optional operation)</i>.
@@ -654,7 +492,10 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
-	public abstract PointerBuffer compact();
+	public SELF compact() {
+		container.compact();
+		return self();
+	}
 
 	/**
 	 * Retrieves this buffer's byte order.
@@ -665,7 +506,9 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 *
 	 * @return This buffer's byte order
 	 */
-	public abstract ByteOrder order();
+	public ByteOrder order() {
+		return container.order();
+	}
 
 	/**
 	 * Returns a string summarizing the state of this buffer.
@@ -688,11 +531,7 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return the current hash code of this buffer
 	 */
 	public int hashCode() {
-		int h = 1;
-		int p = position();
-		for ( int i = limit() - 1; i >= p; i-- )
-			h = 31 * h + (int)get(i);
-		return h;
+		return container.hashCode();
 	}
 
 	/**
@@ -715,20 +554,10 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * given object
 	 */
 	public boolean equals(Object ob) {
-		if ( !(ob instanceof PointerBuffer) )
+		if ( !(ob instanceof StructBuffer) )
 			return false;
-		PointerBuffer that = (PointerBuffer)ob;
-		if ( this.remaining() != that.remaining() )
-			return false;
-		int p = this.position();
-		for ( int i = this.limit() - 1, j = that.limit() - 1; i >= p; i--, j-- ) {
-			long v1 = this.get(i);
-			long v2 = that.get(j);
-			if ( v1 != v2 ) {
-				return false;
-			}
-		}
-		return true;
+		StructBuffer<?, ?> that = (StructBuffer<?, ?>)ob;
+		return this.container.equals(that.container);
 	}
 
 	/**
@@ -742,266 +571,42 @@ public abstract class PointerBuffer implements Comparable<PointerBuffer> {
 	 * @return A negative integer, zero, or a positive integer as this buffer is less than, equal to, or greater than the specified buffer
 	 */
 	@Override
-	public int compareTo(PointerBuffer that) {
-		int n = this.position() + Math.min(this.remaining(), that.remaining());
-		for ( int i = this.position(), j = that.position(); i < n; i++, j++ ) {
-			long v1 = this.get(i);
-			long v2 = that.get(j);
-			if ( v1 == v2 )
-				continue;
-			if ( v1 < v2 )
-				return -1;
-			return +1;
-		}
-		return this.remaining() - that.remaining();
+	public int compareTo(SELF that) {
+		return this.container.compareTo(that.container);
 	}
 
-	private static void checkBounds(int off, int len, int size) {
-		if ( (off | len | (off + len) | (size - (off + len))) < 0 )
+	// -----------------------------
+
+	private int nextGetIndex() {
+		return nextGetIndex(1);
+	}
+
+	private int nextGetIndex(int nb) {
+		int curr = container.position();
+		int next = curr + nb * sizeof();
+		if ( container.limit() < next )
+			throw new BufferUnderflowException();
+		container.position(next);
+		return curr;
+	}
+
+	private int nextPutIndex() {
+		return nextPutIndex(1);
+	}
+
+	private int nextPutIndex(int nb) {
+		int curr = container.position();
+		int next = curr + nb * sizeof();
+		if ( container.limit() < next )
+			throw new BufferOverflowException();
+		container.position(next);
+		return curr;
+	}
+
+	private int checkIndex(int i) {
+		if ( (i < 0) || (container.limit() < i * sizeof()) )
 			throw new IndexOutOfBoundsException();
-	}
-
-	private static class x32 extends PointerBuffer {
-
-		private static final Factory FACTORY = new Factory() {
-			@Override
-			public PointerBuffer allocateDirect(int capacity) {
-				return new x32(BufferUtils.createIntBuffer(capacity));
-			}
-			@Override
-			public PointerBuffer create(long address, int capacity) {
-				return new x32(memIntBuffer(address, capacity));
-			}
-			@Override
-			public PointerBuffer create(ByteBuffer source) {
-				return new x32(source.slice().order(source.order()).asIntBuffer());
-			}
-
-			@Override
-			public long get(ByteBuffer source) {
-				return source.getInt() & 0xFFFFFFFFL;
-
-			}
-			@Override
-			public long get(ByteBuffer source, int index) {
-				return source.getInt(index) & 0xFFFFFFFFL;
-			}
-
-			@Override
-			public void put(ByteBuffer target, long p) {
-				target.putInt((int)p);
-			}
-
-			@Override
-			public void put(ByteBuffer target, int index, long p) {
-				target.putInt(index, (int)p);
-			}
-		};
-
-		private final IntBuffer buffer;
-
-		private x32(IntBuffer buffer) {
-			this.buffer = buffer;
-		}
-
-		@Override
-		public Buffer buffer() {
-			return buffer;
-		}
-
-		@Override
-		public PointerBuffer slice() {
-			return new x32(buffer.slice());
-		}
-
-		@Override
-		public PointerBuffer duplicate() {
-			return new x32(buffer.duplicate());
-		}
-
-		@Override
-		public PointerBuffer asReadOnlyBuffer() {
-			return new x32(buffer.asReadOnlyBuffer());
-		}
-
-		@Override
-		public long get() {
-			return buffer.get() & 0xFFFFFFFFL;
-		}
-
-		@Override
-		public PointerBuffer put(long p) {
-			buffer.put((int)p);
-			return this;
-		}
-
-		@Override
-		public long get(int index) {
-			return buffer.get(index) & 0xFFFFFFFFL;
-		}
-
-		@Override
-		public PointerBuffer put(int index, long p) {
-			buffer.put(index, (int)p);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer get(long[] dst, int offset, int length) {
-			checkBounds(offset, length, dst.length);
-			if ( length > remaining() )
-				throw new BufferUnderflowException();
-
-			int end = offset + length;
-			for ( int i = offset; i < end; i++ )
-				dst[i] = get();
-
-			return this;
-		}
-
-		@Override
-		public PointerBuffer put(PointerBuffer src) {
-			buffer.put(((x32)src).buffer);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer put(long[] src, int offset, int length) {
-			checkBounds(offset, length, src.length);
-			if ( length > remaining() )
-				throw new BufferOverflowException();
-			int end = offset + length;
-			for ( int i = offset; i < end; i++ )
-				put(src[i]);
-
-			return this;
-		}
-
-		@Override
-		public PointerBuffer compact() {
-			buffer.compact();
-			return this;
-		}
-
-		@Override
-		public ByteOrder order() {
-			return buffer.order();
-		}
-	}
-
-	private static class x64 extends PointerBuffer {
-
-		private static final Factory FACTORY = new Factory() {
-			@Override
-			public PointerBuffer allocateDirect(int capacity) {
-				return new x64(BufferUtils.createLongBuffer(capacity));
-			}
-			@Override
-			public PointerBuffer create(long address, int capacity) {
-				return new x64(memLongBuffer(address, capacity));
-			}
-			@Override
-			public PointerBuffer create(ByteBuffer source) {
-				return new x64(source.slice().order(source.order()).asLongBuffer());
-			}
-
-			@Override
-			public long get(ByteBuffer source) {
-				return source.getLong();
-			}
-
-			@Override
-			public long get(ByteBuffer source, int index) {
-				return source.getLong(index);
-			}
-
-			@Override
-			public void put(ByteBuffer target, long p) {
-				target.putLong(p);
-			}
-
-			@Override
-			public void put(ByteBuffer target, int index, long p) {
-				target.putLong(index, p);
-			}
-		};
-
-		private final LongBuffer buffer;
-
-		private x64(LongBuffer buffer) {
-			this.buffer = buffer;
-		}
-
-		@Override
-		public Buffer buffer() {
-			return buffer;
-		}
-
-		@Override
-		public PointerBuffer slice() {
-			return new x64(buffer.slice());
-		}
-
-		@Override
-		public PointerBuffer duplicate() {
-			return new x64(buffer.duplicate());
-		}
-
-		@Override
-		public PointerBuffer asReadOnlyBuffer() {
-			return new x64(buffer.asReadOnlyBuffer());
-		}
-
-		@Override
-		public long get() {
-			return buffer.get();
-		}
-
-		@Override
-		public PointerBuffer put(long p) {
-			buffer.put(p);
-			return this;
-		}
-
-		@Override
-		public long get(int index) {
-			return buffer.get(index);
-		}
-
-		@Override
-		public PointerBuffer put(int index, long p) {
-			buffer.put(index, p);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer get(long[] dst, int offset, int length) {
-			buffer.get(dst, offset, length);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer put(PointerBuffer src) {
-			buffer.put(((x64)src).buffer);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer put(long[] src, int offset, int length) {
-			buffer.put(src, offset, length);
-			return this;
-		}
-
-		@Override
-		public PointerBuffer compact() {
-			buffer.compact();
-			return this;
-		}
-
-		@Override
-		public ByteOrder order() {
-			return buffer.order();
-		}
+		return i;
 	}
 
 }

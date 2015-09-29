@@ -237,6 +237,11 @@ public final class MemoryUtil {
 		nmemFree(memAddress0Safe(ptr));
 	}
 
+	/** StructBuffer version of {@link #memFree}. */
+	public static void memFree(StructBuffer ptr) {
+		nmemFree(memAddress0Safe(ptr));
+	}
+
 	// --- [ memCalloc ] ---
 
 	/** Unsafe version of {@link #memCalloc}. */
@@ -524,6 +529,12 @@ public final class MemoryUtil {
 	/** PointerBuffer version of {@link #memAddress0Safe(Buffer)}. */
 	public static long memAddress0Safe(PointerBuffer buffer) { return buffer == null ? NULL : buffer.address0(); }
 
+	/** StructBuffer version of {@link #memAddress0(Buffer)}. */
+	public static long memAddress0(StructBuffer buffer) { return buffer.address0(); }
+
+	/** StructBuffer version of {@link #memAddress0Safe(Buffer)}. */
+	public static long memAddress0Safe(StructBuffer buffer) { return buffer == null ? NULL : buffer.address0(); }
+
 	// --- [ Buffer address ] ---
 
 	/**
@@ -601,6 +612,12 @@ public final class MemoryUtil {
 	/** PointerBuffer version of {@link #memAddress(ByteBuffer, int)}. */
 	public static long memAddress(PointerBuffer buffer, int position) { return memAddress0(buffer) + (position << POINTER_SHIFT); }
 
+	/** StructBuffer version of {@link #memAddress(ByteBuffer)}. */
+	public static long memAddress(StructBuffer buffer) { return memAddress(buffer, buffer.position()); }
+
+	/** StructBuffer version of {@link #memAddress(ByteBuffer, int)}. */
+	public static long memAddress(StructBuffer buffer, int position) { return memAddress0(buffer) + position * buffer.sizeof(); }
+
 	// --- [ Buffer address - Safe ] ---
 
 	/** Null-safe version of {@link #memAddress(ByteBuffer)}. Returns {@link #NULL} if the specified buffer is null. */
@@ -650,6 +667,12 @@ public final class MemoryUtil {
 
 	/** PointerBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
 	public static long memAddressSafe(PointerBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
+
+	/** StructBuffer version of {@link #memAddressSafe(ByteBuffer)}. */
+	public static long memAddressSafe(StructBuffer buffer) { return buffer == null ? NULL : memAddress(buffer); }
+
+	/** StructBuffer version of {@link #memAddressSafe(ByteBuffer, int)}. */
+	public static long memAddressSafe(StructBuffer buffer, int position) { return buffer == null ? NULL : memAddress(buffer, position); }
 
 	// --- [ Buffer allocation ] ---
 

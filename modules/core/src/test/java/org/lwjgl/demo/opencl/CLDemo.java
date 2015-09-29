@@ -43,7 +43,7 @@ public final class CLDemo {
 
 		for ( CLPlatform platform : platforms ) {
 			System.out.println("\n-------------------------");
-			System.out.printf("NEW PLATFORM: [0x%X]\n", platform.getPointer());
+			System.out.printf("NEW PLATFORM: [0x%X]\n", platform.address());
 
 			CLCapabilities platformCaps = platform.getCapabilities();
 
@@ -61,7 +61,7 @@ public final class CLDemo {
 
 			List<CLDevice> devices = platform.getDevices(CL_DEVICE_TYPE_ALL);
 			for ( CLDevice device : devices ) {
-				long cl_device_id = device.getPointer();
+				long cl_device_id = device.address();
 				CLCapabilities caps = device.getCapabilities();
 
 				System.out.printf("\n\t** NEW DEVICE: [0x%X]\n", cl_device_id);
@@ -88,7 +88,7 @@ public final class CLDemo {
 				if ( caps.OpenCL11 )
 					printDeviceInfo(device, "CL_DEVICE_OPENCL_C_VERSION", CL_DEVICE_OPENCL_C_VERSION);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), new CLCreateContextCallback() {
+				long context = clCreateContext(ctxProps, device.address(), new CLCreateContextCallback() {
 					@Override
 					public void invoke(long errinfo, long private_info, long cb, long user_data) {
 						System.err.println("[LWJGL] cl_create_context_callback");
@@ -122,10 +122,16 @@ public final class CLDemo {
 
 				long subbuffer = NULL;
 				if ( caps.OpenCL11 ) {
-					ByteBuffer buffer_region = CLBufferRegion.malloc(0, 64);
+					ByteBuffer buffer_region = memAlloc(CLBufferRegion.SIZEOF);
+					CLBufferRegion.setOrigin(buffer_region, 0);
+					CLBufferRegion.setSize(buffer_region, 64);
 
-					subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region, errcode_ret);
-					checkCLError(errcode_ret);
+					try {
+						subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, buffer_region, errcode_ret);
+						checkCLError(errcode_ret);
+					} finally {
+						memFree(buffer_region);
+					}
 
 					errcode = clSetMemObjectDestructorCallback(subbuffer, new CLMemObjectDestructorCallback() {
 						@Override
@@ -141,7 +147,7 @@ public final class CLDemo {
 					ClosureGC.get().push();
 
 					System.out.println("\t\t-TRYING TO EXEC NATIVE KERNEL-");
-					long queue = clCreateCommandQueue(context, device.getPointer(), 0L, errcode_ret);
+					long queue = clCreateCommandQueue(context, device.address(), 0L, errcode_ret);
 
 					PointerBuffer ev = BufferUtils.createPointerBuffer(1);
 
@@ -225,11 +231,11 @@ public final class CLDemo {
 	}
 
 	private static void printPlatformInfo(CLPlatform platform, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + clGetPlatformInfoStringUTF8(platform.getPointer(), param));
+		System.out.println("\t" + param_name + " = " + clGetPlatformInfoStringUTF8(platform.address(), param));
 	}
 
 	private static void printDeviceInfo(CLDevice device, String param_name, int param) {
-		System.out.println("\t" + param_name + " = " + clGetDeviceInfoStringUTF8(device.getPointer(), param));
+		System.out.println("\t" + param_name + " = " + clGetDeviceInfoStringUTF8(device.address(), param));
 	}
 
 	private static String getEventStatusName(int status) {

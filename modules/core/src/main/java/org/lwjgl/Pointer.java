@@ -33,6 +33,6 @@ public interface Pointer {
 	 *
 	 * @return the pointer address
 	 */
-	long getPointer();
+	long address();
 
 }

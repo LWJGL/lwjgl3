@@ -120,10 +120,14 @@ public final class Vorbis {
 			if ( handle == NULL )
 				throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
 
-			STBVorbisInfo info = Decoder.getInfo(handle);
+			STBVorbisInfo info = STBVorbisInfo.malloc();
 
+			Decoder.getInfo(handle, info);
 			this.channels = info.getChannels();
 			this.sampleRate = info.getSampleRate();
+
+			info.free();
+
 			this.format = getFormat(channels);
 
 			this.lengthSamples = stb_vorbis_stream_length_in_samples(handle);
@@ -134,14 +138,13 @@ public final class Vorbis {
 			samplesLeft = lengthSamples;
 		}
 
-		private static STBVorbisInfo getInfo(long decoder) {
+		private static void getInfo(long decoder, STBVorbisInfo info) {
 			System.out.println("stream length, samples: " + stb_vorbis_stream_length_in_samples(decoder));
 			System.out.println("stream length, seconds: " + stb_vorbis_stream_length_in_seconds(decoder));
 
 			System.out.println();
 
-			STBVorbisInfo info = new STBVorbisInfo();
-			stb_vorbis_get_info(decoder, info.buffer());
+			stb_vorbis_get_info(decoder, info);
 
 			System.out.println("channels = " + info.getChannels());
 			System.out.println("sampleRate = " + info.getSampleRate());
@@ -149,8 +152,6 @@ public final class Vorbis {
 			System.out.println("setupMemoryRequired = " + info.getSetupMemoryRequired());
 			System.out.println("setupTempMemoryRequired() = " + info.getSetupTempMemoryRequired());
 			System.out.println("tempMemoryRequired = " + info.getTempMemoryRequired());
-
-			return info;
 		}
 
 		private static int getFormat(int channels) {
@@ -347,7 +348,7 @@ public final class Vorbis {
 			}.set(window);
 
 			// Center window
-			GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
+			GLFWvidmode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
 			glfwSetWindowPos(
 				window,

@@ -183,7 +183,7 @@ public final class Image {
 		scrollfun.set(window);
 
 		// Center window
-		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
+		GLFWvidmode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
 		glfwSetWindowPos(
 			window,

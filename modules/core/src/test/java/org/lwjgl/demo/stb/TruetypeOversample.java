@@ -50,9 +50,9 @@ public final class TruetypeOversample {
 
 	// ----
 
-	private static final STBTTAlignedQuad q  = new STBTTAlignedQuad();
-	private static final FloatBuffer      xb = BufferUtils.createFloatBuffer(1);
-	private static final FloatBuffer      yb = BufferUtils.createFloatBuffer(1);
+	private final STBTTAlignedQuad q  = STBTTAlignedQuad.malloc();
+	private final FloatBuffer      xb = memAllocFloat(1);
+	private final FloatBuffer      yb = memAllocFloat(1);
 
 	private final GLFWErrorCallback           errorfun;
 	private final GLFWWindowSizeCallback      windowSizefun;
@@ -73,7 +73,7 @@ public final class TruetypeOversample {
 
 	private int font_tex;
 
-	private ByteBuffer chardata;
+	private STBTTPackedchar.Buffer chardata;
 
 	private int font = 3;
 
@@ -162,29 +162,30 @@ public final class TruetypeOversample {
 
 	private void load_fonts() {
 		font_tex = glGenTextures();
-		chardata = BufferUtils.createByteBuffer(6 * 128 * STBTTPackedchar.SIZEOF);
+		chardata = STBTTPackedchar.mallocBuffer(6 * 128);
 
 		try {
 			ByteBuffer ttf = ioResourceToByteBuffer("demo/FiraSans.ttf", 160 * 1024);
 
 			ByteBuffer bitmap = BufferUtils.createByteBuffer(BITMAP_W * BITMAP_H);
 
-			ByteBuffer pc = BufferUtils.createByteBuffer(STBTTPackContext.SIZEOF);
+			STBTTPackContext pc = STBTTPackContext.malloc();
 			stbtt_PackBegin(pc, bitmap, BITMAP_W, BITMAP_H, 0, 1, null);
 			for ( int i = 0; i < 2; i++ ) {
-				chardata.position(((i * 3 + 0) * 128 + 32) * STBTTPackedchar.SIZEOF);
+				chardata.position((i * 3 + 0) * 128 + 32);
 				stbtt_PackSetOversampling(pc, 1, 1);
 				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
 
-				chardata.position(((i * 3 + 1) * 128 + 32) * STBTTPackedchar.SIZEOF);
+				chardata.position((i * 3 + 1) * 128 + 32);
 				stbtt_PackSetOversampling(pc, 2, 2);
 				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
 
-				chardata.position(((i * 3 + 2) * 128 + 32) * STBTTPackedchar.SIZEOF);
+				chardata.position((i * 3 + 2) * 128 + 32);
 				stbtt_PackSetOversampling(pc, 3, 1);
 				stbtt_PackFontRange(pc, ttf, 0, scale[i], 32, 95, chardata);
 			}
 			stbtt_PackEnd(pc);
+			pc.free();
 
 			glBindTexture(GL_TEXTURE_2D, font_tex);
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, BITMAP_W, BITMAP_H, 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);
@@ -230,14 +231,14 @@ public final class TruetypeOversample {
 		xb.put(0, x);
 		yb.put(0, y);
 
-		chardata.position(font * 128 * STBTTPackedchar.SIZEOF);
+		chardata.position(font * 128);
 
 		glEnable(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, font_tex);
 
 		glBegin(GL_QUADS);
 		for ( int i = 0; i < text.length(); i++ ) {
-			stbtt_GetPackedQuad(chardata, BITMAP_W, BITMAP_H, text.charAt(i), xb, yb, q.buffer(), font == 0 && integer_align ? 1 : 0);
+			stbtt_GetPackedQuad(chardata, BITMAP_W, BITMAP_H, text.charAt(i), xb, yb, q, font == 0 && integer_align ? 1 : 0);
 			drawBoxTC(
 				q.getX0(), q.getY0(), q.getX1(), q.getY1(),
 				q.getS0(), q.getT0(), q.getS1(), q.getT1()
@@ -346,7 +347,7 @@ public final class TruetypeOversample {
 		keyfun.set(window);
 
 		// Center window
-		GLFWvidmode vidmode = new GLFWvidmode(glfwGetVideoMode(glfwGetPrimaryMonitor()));
+		GLFWvidmode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
 		glfwSetWindowPos(
 			window,
@@ -393,6 +394,8 @@ public final class TruetypeOversample {
 	}
 
 	private void destroy() {
+		memFree(chardata);
+
 		if ( debugProc != null )
 			debugProc.release();
 		keyfun.release();
@@ -400,5 +403,10 @@ public final class TruetypeOversample {
 		windowSizefun.release();
 		glfwTerminate();
 		errorfun.release();
+
+		memFree(yb);
+		memFree(xb);
+
+		q.free();
 	}
 }

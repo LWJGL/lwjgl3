@@ -25,7 +25,7 @@ public class MacOSXLibraryDL extends MacOSXLibrary {
 	}
 
 	@Override
-	public long getPointer() {
+	public long address() {
 		return handle;
 	}
 

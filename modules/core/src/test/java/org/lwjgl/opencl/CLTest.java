@@ -115,11 +115,11 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device.address(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
-				long queue = clCreateCommandQueue(context, device.getPointer(), 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device.address(), 0, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(queue);
 
@@ -138,15 +138,15 @@ public class CLTest {
 		contextTest(new ContextTest() {
 			@Override
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
-				if ( (clGetDeviceInfoLong(device.getPointer(), CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
+				if ( (clGetDeviceInfoLong(device.address(), CL_DEVICE_EXECUTION_CAPABILITIES) & CL_EXEC_NATIVE_KERNEL) == 0 )
 					return;
 
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device.address(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
-				long queue = clCreateCommandQueue(context, device.getPointer(), 0, errcode_ret);
+				long queue = clCreateCommandQueue(context, device.address(), 0, errcode_ret);
 				checkCLError(errcode_ret);
 
 				// Create a buffer
@@ -239,7 +239,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device.address(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 
 				long buffer = clCreateBuffer(context, CL_MEM_READ_ONLY, 128, errcode_ret);
@@ -288,7 +288,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device.address(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -333,7 +333,7 @@ public class CLTest {
 			public void test(CLPlatform platform, PointerBuffer ctxProps, CLDevice device) {
 				IntBuffer errcode_ret = BufferUtils.createIntBuffer(1);
 
-				long context = clCreateContext(ctxProps, device.getPointer(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
+				long context = clCreateContext(ctxProps, device.address(), CREATE_CONTEXT_CALLBACK, NULL, errcode_ret);
 				checkCLError(errcode_ret);
 				assertNotNull(context);
 
@@ -341,10 +341,17 @@ public class CLTest {
 				checkCLError(errcode_ret);
 				assertNotNull(buffer);
 
-				ByteBuffer bufferRegion = CLBufferRegion.malloc(0, 64);
+				ByteBuffer bufferRegion = memAlloc(CLBufferRegion.SIZEOF);
+				CLBufferRegion.setOrigin(bufferRegion, 0);
+				CLBufferRegion.setSize(bufferRegion, 64);
 
-				long subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
-				checkCLError(errcode_ret);
+				long subbuffer;
+				try {
+					subbuffer = clCreateSubBuffer(buffer, CL_MEM_READ_ONLY, CL_BUFFER_CREATE_TYPE_REGION, bufferRegion, errcode_ret);
+					checkCLError(errcode_ret);
+				} finally {
+					memFree(bufferRegion);
+				}
 				assertNotNull(subbuffer);
 
 				checkCLError(clReleaseMemObject(buffer));

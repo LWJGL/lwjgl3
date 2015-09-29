@@ -21,10 +21,6 @@ abstract class TemplateElement {
 	private var modifiers = EMPTY_MODIFIERS
 
 	fun setModifiers(vararg modifiers: TemplateModifier) {
-		modifiers forEach {
-			it.validate(this)
-		}
-
 		if ( this.modifiers === EMPTY_MODIFIERS )
 			this.modifiers = HashMap(modifiers.size())
 
@@ -32,6 +28,10 @@ abstract class TemplateElement {
 			val old = this.modifiers.put(it.javaClass, it)
 			if ( old != null )
 				throw IllegalArgumentException("Template modifier ${it.javaClass.simpleName} specified more than once.")
+		}
+
+		modifiers forEach {
+			it.validate(this)
 		}
 	}
 
@@ -120,7 +120,7 @@ abstract class ReturnValueModifier : TemplateModifier {
 }
 
 /** A TemplateModifier with a reference to another TemplateElement. */
-interface ReferenceModifier {
+interface ReferenceModifier : TemplateModifier {
 	val reference: String
 }
 

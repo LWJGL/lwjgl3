@@ -50,7 +50,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		""",
 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
-		stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
+		StructBuffer _ stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
 		AutoSize("rects") _ int.IN("num_rects", "the number of structs in {@code rects}")
 	)
 
@@ -79,7 +79,7 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
 		int.IN("width", "the rectangle width"),
 		int.IN("height", "the rectangle height"),
-		stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
+		StructBuffer _ stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
 		AutoSize("nodes") _ int.IN("num_nodes", "the number of structs in {@code nodes}")
 	)
 

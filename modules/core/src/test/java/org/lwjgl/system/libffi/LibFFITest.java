@@ -28,7 +28,7 @@ public class LibFFITest {
 		long memPutInt = getMemPutIntAddress();
 
 		// Prepare the call interface
-		ByteBuffer cif = FFICIF.malloc();
+		FFICIF cif = FFICIF.malloc();
 
 		PointerBuffer argumentTypes = BufferUtils.createPointerBuffer(4); // 4 arguments
 		argumentTypes.put(0, ffi_type_pointer); // JNIEnv*
@@ -81,6 +81,8 @@ public class LibFFITest {
 
 		// Validate
 		assertEquals(target.get(0), 0xBAADF00D);
+
+		cif.free();
 	}
 
 	private static long getMemPutIntAddress() {

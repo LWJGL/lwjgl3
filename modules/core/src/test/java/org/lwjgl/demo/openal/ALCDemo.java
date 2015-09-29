@@ -54,11 +54,11 @@ public final class ALCDemo {
 
 		ALContext context = ALContext.create(device);
 
-		System.out.println("ALC_FREQUENCY: " + alcGetInteger(device.getPointer(), ALC_FREQUENCY) + "Hz");
-		System.out.println("ALC_REFRESH: " + alcGetInteger(device.getPointer(), ALC_REFRESH) + "Hz");
-		System.out.println("ALC_SYNC: " + (alcGetInteger(device.getPointer(), ALC_SYNC) == ALC_TRUE));
-		System.out.println("ALC_MONO_SOURCES: " + alcGetInteger(device.getPointer(), ALC_MONO_SOURCES));
-		System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device.getPointer(), ALC_STEREO_SOURCES));
+		System.out.println("ALC_FREQUENCY: " + alcGetInteger(device.address(), ALC_FREQUENCY) + "Hz");
+		System.out.println("ALC_REFRESH: " + alcGetInteger(device.address(), ALC_REFRESH) + "Hz");
+		System.out.println("ALC_SYNC: " + (alcGetInteger(device.address(), ALC_SYNC) == ALC_TRUE));
+		System.out.println("ALC_MONO_SOURCES: " + alcGetInteger(device.address(), ALC_MONO_SOURCES));
+		System.out.println("ALC_STEREO_SOURCES: " + alcGetInteger(device.address(), ALC_STEREO_SOURCES));
 
 		try {
 			testPlayback();
@@ -69,7 +69,7 @@ public final class ALCDemo {
 	}
 
 	private static void testPlayback() {
-		STBVorbisInfo info = new STBVorbisInfo();
+		STBVorbisInfo info = STBVorbisInfo.malloc();
 		ByteBuffer pcm = readVorbis("demo/footsteps.ogg", 32 * 1024, info);
 
 		// generate buffers and sources
@@ -82,6 +82,8 @@ public final class ALCDemo {
 		//copy to buffer
 		alBufferData(buffer, AL_FORMAT_MONO16, pcm, info.getSampleRate());
 		checkALError();
+
+		info.free();
 
 		//set up source input
 		alSourcei(source, AL_BUFFER, buffer);
@@ -127,7 +129,7 @@ public final class ALCDemo {
 		if ( decoder == NULL )
 			throw new RuntimeException("Failed to open Ogg Vorbis file. Error: " + error.get(0));
 
-		stb_vorbis_get_info(decoder, info.buffer());
+		stb_vorbis_get_info(decoder, info);
 
 		int channels = info.getChannels();
 

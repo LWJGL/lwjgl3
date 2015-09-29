@@ -221,7 +221,7 @@ public class Mandelbrot {
 				.put(platform)
 				.put(NULL)
 				.flip();
-			clContext = clCreateContext(ctxProps, device.getPointer(), new CLCreateContextCallback() {
+			clContext = clCreateContext(ctxProps, device.address(), new CLCreateContextCallback() {
 				@Override
 				public void invoke(long errinfo, long private_info, long cb, long user_data) {
 					System.err.println("[LWJGL] cl_create_context_callback");
@@ -239,7 +239,7 @@ public class Mandelbrot {
 			checkCLError(errcode_ret);
 
 			// create command queue and upload color map buffer
-			clQueue = clCreateCommandQueue(clContext, device.getPointer(), 0L, errcode_ret);
+			clQueue = clCreateCommandQueue(clContext, device.address(), 0L, errcode_ret);
 			checkCLError(errcode_ret);
 
 			// load program(s)
@@ -518,7 +518,7 @@ public class Mandelbrot {
 				startTime = System.currentTimeMillis() + 5000;
 				log(String.format(
 					"%s: %d frames in 5 seconds = %.2f",
-					clGetPlatformInfoStringUTF8(platform.getPointer(), CL_PLATFORM_VENDOR),
+					clGetPlatformInfoStringUTF8(platform.address(), CL_PLATFORM_VENDOR),
 					fps,
 					fps / (timeUsed / 1000f)
 				));
@@ -733,7 +733,7 @@ public class Mandelbrot {
 
 		log("OpenCL COMPILER OPTIONS: " + options);
 
-		final long cl_device_id = device.getPointer();
+		final long cl_device_id = device.address();
 		final CLProgramCallback buildCallback;
 		int errcode = clBuildProgram(clProgram, cl_device_id, options, buildCallback = new CLProgramCallback() {
 			@Override
