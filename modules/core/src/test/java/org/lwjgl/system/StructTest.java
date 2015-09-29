@@ -39,30 +39,69 @@ public class StructTest {
 		}
 	}
 
-	public void testStructBuffer() {
-		ByteBuffer s = memAlloc(FFIType.SIZEOF);
-		FFIType.setSize(s, 4);
-		FFIType.setAlignment(s, 8);
-		FFIType.setType(s, FFI_TYPE_INT);
-		FFIType.setElements(s, null);
+	public void testStructContainer() {
+		ByteBuffer c = memAlloc(FFIType.SIZEOF);
+		FFIType.setSize(c, 4);
+		FFIType.setAlignment(c, 8);
+		FFIType.setType(c, FFI_TYPE_INT);
+		FFIType.setElements(c, null);
 
-		assertEquals(FFIType.getSize(s), 4);
-		assertEquals(FFIType.getAlignment(s), 8);
-		assertEquals(FFIType.getType(s), FFI_TYPE_INT);
-		assertEquals(FFIType.getElements(s, 0), null);
+		assertEquals(FFIType.getSize(c), 4);
+		assertEquals(FFIType.getAlignment(c), 8);
+		assertEquals(FFIType.getType(c), FFI_TYPE_INT);
+		assertEquals(FFIType.getElements(c, 0), null);
 
-		memFree(s);
+		memFree(c);
 	}
 
 	public void testStructInstance() {
-		FFIType type = FFIType.malloc().set(4, 8, FFI_TYPE_INT, null);
+		FFIType s = FFIType.malloc().set(4, 8, FFI_TYPE_INT, null);
 
-		assertEquals(type.getSize(), 4);
-		assertEquals(type.getAlignment(), 8);
-		assertEquals(type.getType(), FFI_TYPE_INT);
-		assertEquals(type.getElements(0), null);
+		assertEquals(s.getSize(), 4);
+		assertEquals(s.getAlignment(), 8);
+		assertEquals(s.getType(), FFI_TYPE_INT);
+		assertEquals(s.getElements(0), null);
 
-		type.free();
+		s.free();
+	}
+
+	public void testStructBuffer() {
+		FFIType.Buffer b = FFIType.callocBuffer(1);
+
+		// copy
+		FFIType copy = FFIType.malloc();
+		memSet(copy.address(), 0xFF, FFIType.SIZEOF); // garbage
+		b.get(0, copy); // calloc above has filled with zeroes
+
+		// view
+		FFIType view = b.get(0);
+
+		// flyweight API
+		b
+			.setSize(4)
+			.setAlignment(8)
+			.setType(FFI_TYPE_INT)
+			.setElements(null);
+
+		// buffer changed
+		assertEquals(b.getSize(), 4);
+		assertEquals(b.getAlignment(), 8);
+		assertEquals(b.getType(), FFI_TYPE_INT);
+		assertEquals(b.getElements(0), null);
+
+		// view changed
+		assertEquals(view.getSize(), 4);
+		assertEquals(view.getAlignment(), 8);
+		assertEquals(view.getType(), FFI_TYPE_INT);
+		assertEquals(view.getElements(0), null);
+
+		// copy not changed
+		assertEquals(copy.getSize(), 0);
+		assertEquals(copy.getAlignment(), 0);
+		assertEquals(copy.getType(), NULL);
+		assertEquals(copy.getElements(0), null);
+
+		memFree(b);
 	}
 
 }
