@@ -226,9 +226,9 @@ class Struct(
 					val javadoc = "Initializes this struct with the specified values."
 					// Factory constructors
 					if ( generateAlternativeMultiSetter(members) ) {
-						generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, ConstructorMode.ALTER1)
+						generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER1)
 						if ( members any { it is StructMemberCharArray } )
-							generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, ConstructorMode.ALTER2)
+							generateMultiSetter(javadoc, members, generateAlternativeMultiSetterParameters, generateAlternativeMultiSetterSetters, MultiSetterMode.ALTER2)
 					} else
 						generateMultiSetter(javadoc, members, generateMultiSetterParameters, generateMultiSetterSetters)
 
@@ -417,7 +417,7 @@ class Struct(
 		return index
 	}
 
-	private enum class ConstructorMode {
+	private enum class MultiSetterMode {
 		NORMAL,
 		ALTER1,
 		ALTER2
@@ -426,9 +426,9 @@ class Struct(
 	private fun PrintWriter.generateMultiSetter(
 		javaDoc: String,
 		members: List<StructMember>,
-		generateParameters: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit,
-		generateSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit,
-		mode: ConstructorMode = ConstructorMode.NORMAL
+		generateParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit,
+		generateSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit,
+		mode: MultiSetterMode = MultiSetterMode.NORMAL
 	) {
 		print("""
 	/** $javaDoc */
@@ -444,7 +444,7 @@ class Struct(
 """)
 	}
 
-	private val generateMultiSetterParameters: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+	private val generateMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
 			val method = it.method(parentMember)
 
@@ -481,7 +481,7 @@ class Struct(
 		}
 	}
 
-	private val generateMultiSetterSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = { members, parentMember, mode ->
+	private val generateMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val setter = it.method(parentMember)
 			val method = "set$setter"
@@ -515,7 +515,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeMultiSetterParameters: PrintWriter.(List<StructMember>, String, ConstructorMode, Boolean) -> Unit = { members, parentMember, mode, more ->
+	private val generateAlternativeMultiSetterParameters: PrintWriter.(List<StructMember>, String, MultiSetterMode, Boolean) -> Unit = { members, parentMember, mode, more ->
 		members.forEachWithMore(more) { it, more ->
 			val method = it.method(parentMember)
 
@@ -534,7 +534,7 @@ class Struct(
 			when {
 				it is StructMemberArray     -> {
 					print(
-						if ( it is StructMemberCharArray && mode === ConstructorMode.ALTER2 )
+						if ( it is StructMemberCharArray && mode === MultiSetterMode.ALTER2 )
 							"CharSequence $param"
 						else if ( it.nativeType is StructType && it.nativeType.includesPointer )
 							"PointerBuffer $param"
@@ -561,7 +561,7 @@ class Struct(
 		}
 	}
 
-	private val generateAlternativeMultiSetterSetters: PrintWriter.(List<StructMember>, String, ConstructorMode) -> Unit = { members, parentMember, mode ->
+	private val generateAlternativeMultiSetterSetters: PrintWriter.(List<StructMember>, String, MultiSetterMode) -> Unit = { members, parentMember, mode ->
 		members.forEach {
 			val method = it.method(parentMember)
 
