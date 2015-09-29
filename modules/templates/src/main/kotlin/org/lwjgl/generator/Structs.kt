@@ -69,6 +69,17 @@ enum class StructIdentifierType(val keyword: String) {
 	UNION("union ")
 }
 
+private enum class MultiSetterMode {
+	NORMAL,
+	ALTER1,
+	ALTER2
+}
+
+private enum class AccessMode(val indent: String) {
+	INSTANCE("\t"),
+	FLYWEIGHT("\t\t");
+}
+
 class Struct(
 	packageName: String,
 	className: String,
@@ -216,11 +227,11 @@ class Struct(
 
 		if ( members.isNotEmpty() ) {
 			println()
-			generateGetters(members)
+			generateGetters(AccessMode.INSTANCE, members)
 
 			if ( mutable ) {
 				println()
-				generateSetters(members)
+				generateSetters(AccessMode.INSTANCE, members)
 
 				if ( members.size() > 1 ) {
 					val javadoc = "Initializes this struct with the specified values."
@@ -360,7 +371,18 @@ class Struct(
 		protected int sizeof() {
 			return SIZEOF;
 		}
+""")
+		if ( members.isNotEmpty() ) {
+			println()
+			generateGetters(AccessMode.FLYWEIGHT, members)
 
+			if ( mutable ) {
+				println()
+				generateSetters(AccessMode.FLYWEIGHT, members)
+			}
+		}
+
+		print("""
 	}
 
 }""")
@@ -413,12 +435,6 @@ class Struct(
 				index = generateOffsetInit(it.nestedMembers, "$indentation\t", field, index) // recursion
 		}
 		return index
-	}
-
-	private enum class MultiSetterMode {
-		NORMAL,
-		ALTER1,
-		ALTER2
 	}
 
 	private fun PrintWriter.generateMultiSetter(
@@ -740,6 +756,7 @@ class Struct(
 	}
 
 	private fun PrintWriter.generateSetters(
+		accessMode: AccessMode,
 		members: List<StructMember>,
 		parentStruct: Struct? = null,
 		parentMember: String = "",
@@ -750,18 +767,24 @@ class Struct(
 			val method = "set$setter"
 			val field = getFieldOffset(it, parentStruct, parentField)
 
+			val indent = accessMode.indent;
+			val returnType = if ( accessMode === AccessMode.INSTANCE )
+				className
+			else
+				"$className.Buffer"
+
 			val param = it.name.toParam(field)
 
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) )
-					println("\tpublic $className $method(${nestedStruct.className} $param) { n$method($ADDRESS, $param); return this; }")
-				generateSetters(it.nestedMembers, nestedStruct, setter, field)
+					println("${indent}public $returnType $method(${nestedStruct.className} $param) { n$method($ADDRESS, $param); return this; }")
+				generateSetters(accessMode, it.nestedMembers, nestedStruct, setter, field)
 			} else {
 				// Setter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					print("\tpublic $className $method(")
+					print("${indent}public $returnType $method(")
 
 					val javaType = it.nativeType.javaMethodType.simpleName
 					println(
@@ -775,26 +798,26 @@ class Struct(
 				// Alternative setters
 
 				if ( it.nativeType is CharSequenceType ) {
-					println("\tpublic $className $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
-					println("\tpublic $className $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
+					println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
+					println("${indent}public $returnType $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
 				} else if ( it is StructMemberArray ) {
 					if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-						println("\tpublic $className $method(PointerBuffer $param) { n$method($ADDRESS, $param); return this; }")
-						println("\tpublic $className $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
+						println("${indent}public $returnType $method(PointerBuffer $param) { n$method($ADDRESS, $param); return this; }")
+						println("${indent}public $returnType $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
 					} else {
-						println("\tpublic $className $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
+						println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
 						if ( it is StructMemberCharArray )
-							println("\tpublic $className $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
+							println("${indent}public $returnType $method(CharSequence $param) { n$method($ADDRESS, $param); return this; }")
 						else if ( it.nativeType is PrimitiveType )
-							println("\tpublic $className $method(int index, ${it.nativeType.mapping.javaMethodType} $param) { n$method($ADDRESS, index, $param); return this; }")
+							println("${indent}public $returnType $method(int index, ${it.nativeType.mapping.javaMethodType} $param) { n$method($ADDRESS, index, $param); return this; }")
 						else if ( it.nativeType is StructType )
-							println("\tpublic $className $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
+							println("${indent}public $returnType $method(int index, ${it.nativeType.definition.className} $param) { n$method($ADDRESS, index, $param); return this; }")
 					}
 				} else if ( it.nativeType.isPointerData )
 					if ( it.nativeType is StructType )
-						println("\tpublic $className $method(${it.nativeType.definition.className} $param) { n$method($ADDRESS, $param); return this; }")
+						println("${indent}public $returnType $method(${it.nativeType.definition.className} $param) { n$method($ADDRESS, $param); return this; }")
 					else
-						println("\tpublic $className $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
+						println("${indent}public $returnType $method(ByteBuffer $param) { n$method($ADDRESS, $param); return this; }")
 			}
 		}
 	}
@@ -968,6 +991,7 @@ class Struct(
 	}
 
 	private fun PrintWriter.generateGetters(
+		accessMode: AccessMode,
 		members: List<StructMember>,
 		parentStruct: Struct? = null,
 		parentMember: String = "",
@@ -978,17 +1002,19 @@ class Struct(
 			val method = "get$getter"
 			val field = getFieldOffset(it, parentStruct, parentField)
 
+			val indent = accessMode.indent
+
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println("\tpublic ${nestedStruct.className} $method() { return n$method($ADDRESS); }")
+					println("${indent}public ${nestedStruct.className} $method() { return n$method($ADDRESS); }")
 				}
-				generateGetters(it.nestedMembers, nestedStruct, getter, field)
+				generateGetters(accessMode, it.nestedMembers, nestedStruct, getter, field)
 			} else {
 				// Getter
 
 				if ( it !is StructMemberArray && !it.nativeType.isPointerData ) {
-					print("\tpublic ")
+					print("${indent}public ")
 
 					val javaType = it.nativeType.javaMethodType.simpleName
 
@@ -1008,33 +1034,33 @@ class Struct(
 						val param = it.name.toParam(field)
 
 						if ( it.nativeType is StructType && it.nativeType.includesPointer ) {
-							println("\tpublic void $method(PointerBuffer $param) { n$method($ADDRESS, $param); }")
-							println("\tpublic ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
+							println("${indent}public void $method(PointerBuffer $param) { n$method($ADDRESS, $param); }")
+							println("${indent}public ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
 						} else {
-							println("\tpublic void $method(ByteBuffer $param) { n$method($ADDRESS, $param); }")
+							println("${indent}public void $method(ByteBuffer $param) { n$method($ADDRESS, $param); }")
 							if ( it is StructMemberCharArray ) {
-								println("\tpublic String ${method}String() { return n${method}String($ADDRESS); }")
+								println("${indent}public String ${method}String() { return n${method}String($ADDRESS); }")
 								if ( it.nullTerminated )
-									println("\tpublic String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
+									println("${indent}public String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
 							} else if ( it.nativeType is StructType ) {
-								println("\tpublic ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
+								println("${indent}public ${it.nativeType.definition.className} $method(int index) { return n$method($ADDRESS, index); }")
 							}
 						}
 					}
 					it.nativeType is CharSequenceType -> {
 						if ( it.nativeType.nullTerminated ) {
-							println("\tpublic ByteBuffer ${method}Buffer() { return n${method}Buffer($ADDRESS); }")
-							println("\tpublic String ${method}String() { return n${method}String($ADDRESS); }")
+							println("${indent}public ByteBuffer ${method}Buffer() { return n${method}Buffer($ADDRESS); }")
+							println("${indent}public String ${method}String() { return n${method}String($ADDRESS); }")
 						} else {
-							println("\tpublic ByteBuffer ${method}Buffer(int $BUFFER_LEN_PARAM) { return n${method}Buffer($ADDRESS, $BUFFER_LEN_PARAM); }")
-							println("\tpublic String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
+							println("${indent}public ByteBuffer ${method}Buffer(int $BUFFER_LEN_PARAM) { return n${method}Buffer($ADDRESS, $BUFFER_LEN_PARAM); }")
+							println("${indent}public String ${method}String(int $BUFFER_LEN_PARAM) { return n${method}String($ADDRESS, $BUFFER_LEN_PARAM); }")
 						}
 					}
 					it.nativeType is StructType       -> {
-						println("\tpublic ${it.nativeType.definition.className} $method() { return n${method}Struct($ADDRESS); }")
+						println("${indent}public ${it.nativeType.definition.className} $method() { return n${method}Struct($ADDRESS); }")
 					}
 					it.nativeType.isPointerData       -> {
-						println("\tpublic ByteBuffer $method(int $BUFFER_LEN_PARAM) { return n$method($ADDRESS, $BUFFER_LEN_PARAM); }")
+						println("${indent}public ByteBuffer $method(int $BUFFER_LEN_PARAM) { return n$method($ADDRESS, $BUFFER_LEN_PARAM); }")
 					}
 				}
 			}
