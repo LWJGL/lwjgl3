@@ -243,14 +243,14 @@ public final class Checks {
 	 *
 	 * @throws IllegalArgumentException
 	 */
-	public static void checkBuffer(StructBuffer buf, int size) {
+	public static void checkBuffer(StructBuffer<?, ?> buf, int size) {
 		if ( buf.container.remaining() < size * buf.sizeof() ) {
 			throwBufferSizeException(buf, size);
 		}
 	}
 
 	/** @see #checkBuffer(StructBuffer, int) */
-	public static void checkBuffer(StructBuffer buf, long size) {
+	public static void checkBuffer(StructBuffer<?, ?> buf, long size) {
 		checkBuffer(buf, (int)size);
 	}
 
@@ -284,7 +284,7 @@ public final class Checks {
 		throw new IllegalArgumentException("Number of remaining pointer values in buffer is " + buf.remaining() + ", must be at least " + size);
 	}
 
-	private static void throwBufferSizeException(StructBuffer buf, int size) {
+	private static void throwBufferSizeException(StructBuffer<?, ?> buf, int size) {
 		throw new IllegalArgumentException("Number of remaining struct values in buffer is " + buf.remaining() + ", must be at least " + size);
 	}
 
