@@ -205,36 +205,36 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
-	 * Creates a new pointer buffer whose content is a shared subsequence of this buffer's content.
+	 * Creates a new struct buffer whose content is a shared subsequence of this buffer's content.
 	 *
 	 * <p>The content of the new buffer will start at this buffer's current position. Changes to this buffer's content will be visible in the new buffer, and
 	 * vice versa; the two buffers' position, limit, and mark values will be independent.</p>
 	 *
-	 * <p>The new buffer's position will be zero, its capacity and its limit will be the number of pointers remaining in this buffer, and its mark will be
-	 * undefined. The new buffer will be direct if, and only if, this buffer is direct, and it will be read-only if, and only if, this buffer is read-only.</p>
+	 * <p>The new buffer's position will be zero, its capacity and its limit will be the number of structs remaining in this buffer, and its mark will be
+	 * undefined. The new buffer will be read-only if, and only if, this buffer is read-only.</p>
 	 *
-	 * @return the new pointer buffer
+	 * @return the new struct buffer
 	 */
 	public SELF slice() {
 		return newBufferInstance(container.slice());
 	}
 
 	/**
-	 * Creates a new pointer buffer that shares this buffer's content.
+	 * Creates a new struct buffer that shares this buffer's content.
 	 *
 	 * <p>The content of the new buffer will be that of this buffer. Changes to this buffer's content will be visible in the new buffer, and vice versa; the
 	 * two buffers' position, limit, and mark values will be independent.
 	 *
 	 * <p>The new buffer's capacity, limit and position will be identical to those of this buffer.</p>
 	 *
-	 * @return the new pointer buffer
+	 * @return the new struct buffer
 	 */
 	public SELF duplicate() {
 		return newBufferInstance(container.duplicate());
 	}
 
 	/**
-	 * Creates a new, read-only pointer buffer that shares this buffer's content.
+	 * Creates a new, read-only struct buffer that shares this buffer's content.
 	 *
 	 * <p>The content of the new buffer will be that of this buffer. Changes to this buffer's content will be visible in the new buffer; the new buffer itself,
 	 * however, will be read-only and will not allow the shared content to be modified. The two buffers' position, limit, and mark values will be independent.
@@ -243,7 +243,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 *
 	 * <p>If this buffer is itself read-only then this method behaves in exactly the same way as the {@link #duplicate duplicate} method.</p>
 	 *
-	 * @return the new, read-only pointer buffer
+	 * @return the new, read-only struct buffer
 	 */
 	public SELF asReadOnlyBuffer() {
 		return newBufferInstance(container.asReadOnlyBuffer());
@@ -259,9 +259,12 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
-	 * Relative <i>get</i> method. Reads the pointer at this buffer's current position, and then increments the position.
+	 * Relative <i>get</i> method. Reads the struct at this buffer's current position, and then increments the position.
 	 *
-	 * @return the pointer at the buffer's current position
+	 * <p>The struct instance returned is a view of the buffer at the current position. Changes to this buffer's content will be visible in the struct instance
+	 * and vice versa.</p>
+	 *
+	 * @return the struct at the buffer's current position
 	 *
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
@@ -270,9 +273,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
-	 * Relative <i>get</i> method. Reads the pointer at this buffer's current position into the specified struct, and then increments the position.
+	 * Relative <i>get</i> method. Reads the struct data at this buffer's current position into the specified struct, and then increments the position.
 	 *
-	 * @return the pointer at the buffer's current position
+	 * @return the struct at the buffer's current position
 	 *
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
@@ -284,9 +287,9 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>Writes the specified pointer into this buffer at the current position, and then increments the position.</p>
+	 * <p>Writes the specified struct into this buffer at the current position, and then increments the position.</p>
 	 *
-	 * @param value the pointer to be written
+	 * @param value the struct to be written
 	 *
 	 * @return This buffer
 	 *
@@ -299,11 +302,14 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
-	 * Absolute <i>get</i> method. Reads the pointer at the specified index.
+	 * Absolute <i>get</i> method. Reads the struct at the specified index.
 	 *
-	 * @param index the index from which the pointer will be read
+	 * <p>The struct instance returned is a view of the buffer at the specified position. Changes to this buffer's content will be visible in the struct
+	 * instance and vice versa.</p>
 	 *
-	 * @return the pointer at the specified index
+	 * @param index the index from which the struct will be read
+	 *
+	 * @return the struct at the specified index
 	 *
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
@@ -312,11 +318,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	}
 
 	/**
-	 * Absolute <i>get</i> method. Reads the pointer at the specified index into the specified struct.
+	 * Absolute <i>get</i> method. Reads the struct data at the specified index into the specified struct.
 	 *
-	 * @param index the index from which the pointer will be read
+	 * @param index the index from which the struct will be read
 	 *
-	 * @return the pointer at the specified index
+	 * @return the struct at the specified index
 	 *
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
@@ -328,10 +334,10 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Absolute <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>Writes the specified pointer into this buffer at the specified index.</p>
+	 * <p>Writes the specified struct into this buffer at the specified index.</p>
 	 *
-	 * @param index the index at which the pointer will be written
-	 * @param value the pointer value to be written
+	 * @param index the index at which the struct will be written
+	 * @param value the struct value to be written
 	 *
 	 * @return This buffer
 	 *
@@ -348,15 +354,14 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative bulk <i>get</i> method.
 	 *
-	 * <p>This method transfers pointers from this buffer into the specified destination array. An invocation of this method of the form <tt>src.get(a)</tt>
+	 * <p>This method transfers structs from this buffer into the specified destination array. An invocation of this method of the form <tt>src.get(a)</tt>
 	 * behaves in exactly the same way as the invocation
 	 *
-	 * <pre>
-	 *     src.get(a, 0, a.length) </pre>
+	 * <pre>src.get(a, 0, a.length / src.sizeof())</pre>
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
+	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> structs remaining in this buffer
 	 */
 	public SELF get(byte[] dst) {
 		return get(dst, 0, dst.length / sizeof());
@@ -365,28 +370,21 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative bulk <i>get</i> method.
 	 *
-	 * <p>This method transfers pointers from this buffer into the specified destination array. If there are fewer pointers remaining in the buffer than are
-	 * required to satisfy the request, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
+	 * <p>This method transfers structs from this buffer into the specified destination array. If there are fewer structs remaining in the buffer than are
+	 * required to satisfy the request, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no structs are transferred and a
 	 * {@link java.nio.BufferUnderflowException} is thrown.
 	 *
-	 * <p>Otherwise, this method copies <tt>length</tt> pointers from this buffer into the specified array, starting at the current position of this buffer and
+	 * <p>Otherwise, this method copies <tt>length</tt> structs from this buffer into the specified array, starting at the current position of this buffer and
 	 * at the specified offset in the array. The position of this buffer is then incremented by <tt>length</tt>.
 	 *
-	 * <p>In other words, an invocation of this method of the form <tt>src.get(dst,&nbsp;off,&nbsp;len)</tt> has exactly the same effect as the loop</p>
-	 *
-	 * <pre>
-	 *     for (int i = off; i < off + len; i++)
-	 *         dst[i] = src.get(); </pre>
-	 *
-	 * <p>except that it first checks that there are sufficient pointers in this buffer and it is potentially much more efficient. </p>
-	 *
-	 * @param dst    the array into which pointers are to be written
-	 * @param offset the offset within the array of the first pointer to be written; must be non-negative and no larger than <tt>dst.length</tt>
-	 * @param length the maximum number of pointers to be written to the specified array; must be non-negative and no larger than <tt>dst.length - offset</tt>
+	 * @param dst    the array into which structs are to be written
+	 * @param offset the offset within the array of the first struct to be written; must be non-negative and no larger than <tt>dst.length</tt>
+	 * @param length the maximum number of structs to be written to the specified array; must be non-negative and no larger than
+	 *               <tt>(dst.length - offset) / src.sizeof()</tt>
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> pointers remaining in this buffer
+	 * @throws java.nio.BufferUnderflowException If there are fewer than <tt>length</tt> structs remaining in this buffer
 	 * @throws IndexOutOfBoundsException         If the preconditions on the <tt>offset</tt> and <tt>length</tt> parameters do not hold
 	 */
 	public SELF get(byte[] dst, int offset, int length) {
@@ -397,11 +395,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>This method transfers the pointers remaining in the specified source buffer into this buffer. If there are more pointers remaining in the source
-	 * buffer than in this buffer, that is, if <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
+	 * <p>This method transfers the structs remaining in the specified source buffer into this buffer. If there are more structs remaining in the source
+	 * buffer than in this buffer, that is, if <tt>src.remaining()</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no structs are transferred and a
 	 * {@link java.nio.BufferOverflowException} is thrown.
 	 *
-	 * <p>Otherwise, this method copies <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> pointers from the specified buffer into this buffer, starting at each
+	 * <p>Otherwise, this method copies <i>n</i>&nbsp;=&nbsp;<tt>src.remaining()</tt> structs from the specified buffer into this buffer, starting at each
 	 * buffer's current position. The positions of both buffers are then incremented by <i>n</i>.</p>
 	 *
 	 * <p>In other words, an invocation of this method of the form <tt>dst.put(src)</tt> has exactly the same effect as the loop</p>
@@ -412,11 +410,11 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 *
 	 * <p>except that it first checks that there is sufficient space in this buffer and it is potentially much more efficient. </p>
 	 *
-	 * @param src the source buffer from which pointers are to be read; must not be this buffer
+	 * @param src the source buffer from which structs are to be read; must not be this buffer
 	 *
 	 * @return This buffer
 	 *
-	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer for the remaining pointers in the source buffer
+	 * @throws java.nio.BufferOverflowException If there is insufficient space in this buffer for the remaining structs in the source buffer
 	 * @throws IllegalArgumentException         If the source buffer is this buffer
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
@@ -428,7 +426,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>This method transfers the entire content of the specified source pointer array into this buffer. An invocation of this method of the form
+	 * <p>This method transfers the entire content of the specified source struct array into this buffer. An invocation of this method of the form
 	 * <tt>dst.put(a)</tt> behaves in exactly the same way as the invocation</p>
 	 *
 	 * <pre>
@@ -446,24 +444,17 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Relative bulk <i>put</i> method&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>This method transfers pointers into this buffer from the specified source array. If there are more pointers to be copied from the array than remain
-	 * in this buffer, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no pointers are transferred and a
+	 * <p>This method transfers structs into this buffer from the specified source array. If there are more structs to be copied from the array than remain
+	 * in this buffer, that is, if <tt>length</tt>&nbsp;<tt>&gt;</tt>&nbsp;<tt>remaining()</tt>, then no structs are transferred and a
 	 * {@link java.nio.BufferOverflowException} is thrown.
 	 *
-	 * <p>Otherwise, this method copies <tt>length</tt> pointers from the specified array into this buffer, starting at the specified offset in the array and
+	 * <p>Otherwise, this method copies <tt>length</tt> structs from the specified array into this buffer, starting at the specified offset in the array and
 	 * at the current position of this buffer. The position of this buffer is then incremented by <tt>length</tt>.</p>
 	 *
-	 * <p>In other words, an invocation of this method of the form <tt>dst.put(src,&nbsp;off,&nbsp;len)</tt> has exactly the same effect as the loop</p>
-	 *
-	 * <pre>
-	 *     for (int i = off; i < off + len; i++)
-	 *         dst.put(a[i]); </pre>
-	 *
-	 * <p>except that it first checks that there is sufficient space in this buffer and it is potentially much more efficient.</p>
-	 *
-	 * @param src    the array from which pointers are to be read
-	 * @param offset the offset within the array of the first pointer to be read; must be non-negative and no larger than <tt>array.length</tt>
-	 * @param length the number of pointers to be read from the specified array; must be non-negative and no larger than <tt>array.length - offset</tt>
+	 * @param src    the array from which structs are to be read
+	 * @param offset the offset within the array of the first struct to be read; must be non-negative and no larger than <tt>array.length</tt>
+	 * @param length the number of structs to be read from the specified array; must be non-negative and no larger than
+	 *               <tt>(array.length - offset) / dst.sizeof()</tt>
 	 *
 	 * @return This buffer
 	 *
@@ -479,13 +470,13 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Compacts this buffer&nbsp;&nbsp;<i>(optional operation)</i>.
 	 *
-	 * <p>The pointers between the buffer's current position and its limit, if any, are copied to the beginning of the buffer. That is, the pointer at index
-	 * <i>p</i>&nbsp;=&nbsp;<tt>position()</tt> is copied to index zero, the pointer at index <i>p</i>&nbsp;+&nbsp;1 is copied to index one, and so forth until
-	 * the pointer at index <tt>limit()</tt>&nbsp;-&nbsp;1 is copied to index <i>n</i>&nbsp;=&nbsp;<tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>&nbsp;-&nbsp;
+	 * <p>The structs between the buffer's current position and its limit, if any, are copied to the beginning of the buffer. That is, the struct at index
+	 * <i>p</i>&nbsp;=&nbsp;<tt>position()</tt> is copied to index zero, the struct at index <i>p</i>&nbsp;+&nbsp;1 is copied to index one, and so forth until
+	 * the struct at index <tt>limit()</tt>&nbsp;-&nbsp;1 is copied to index <i>n</i>&nbsp;=&nbsp;<tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>&nbsp;-&nbsp;
 	 * <i>p</i>.
 	 * The buffer's position is then set to <i>n+1</i> and its limit is set to its capacity. The mark, if defined, is discarded.
 	 *
-	 * <p>The buffer's position is set to the number of pointers copied, rather than to zero, so that an invocation of this method can be followed
+	 * <p>The buffer's position is set to the number of structs copied, rather than to zero, so that an invocation of this method can be followed
 	 * immediately by an invocation of another relative <i>put</i> method.</p>
 	 *
 	 * @return This buffer
@@ -499,10 +490,6 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
 	/**
 	 * Retrieves this buffer's byte order.
-	 *
-	 * <p>The byte order of a pointer buffer created by allocation or by wrapping an existing <tt>pointer</tt> array is the
-	 * {@link java.nio.ByteOrder#nativeOrder </code>native order<code>} of the underlying hardware. The byte order of a pointer buffer created as a
-	 * <a href="ByteBuffer.html#views">view</a> of a byte buffer is that of the byte buffer at the moment that the view is created.</p>
 	 *
 	 * @return This buffer's byte order
 	 */
@@ -522,7 +509,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Returns the current hash code of this buffer.
 	 *
-	 * <p>The hash code of a pointer buffer depends only upon its remaining elements; that is, upon the elements from <tt>position()</tt> up to, and including,
+	 * <p>The hash code of a struct buffer depends only upon its remaining elements; that is, upon the elements from <tt>position()</tt> up to, and including,
 	 * the element at <tt>limit()</tt>&nbsp;-&nbsp;<tt>1</tt>.</p>
 	 *
 	 * <p>Because buffer hash codes are content-dependent, it is inadvisable to use buffers as keys in hash maps or similar data structures unless it is known
@@ -537,16 +524,14 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Tells whether or not this buffer is equal to another object.
 	 *
-	 * <p>Two pointer buffers are equal if, and only if,</p>
+	 * <p>Two struct buffers are equal if, and only if,</p>
 	 *
 	 * <ol>
-	 * <li>They have the same element type,</li>
 	 * <li>They have the same number of remaining elements, and</li>
-	 * <li>The two sequences of remaining elements, considered
-	 * independently of their starting positions, are pointwise equal.</li>
+	 * <li>The two sequences of remaining elements, considered independently of their starting positions, are pointwise equal.</li>
 	 * </ol>
 	 *
-	 * <p>A pointer buffer is not equal to any other type of object.</p>
+	 * <p>A struct buffer is not equal to any other type of object.</p>
 	 *
 	 * @param ob the object to which this buffer is to be compared
 	 *
@@ -563,10 +548,10 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	/**
 	 * Compares this buffer to another.
 	 *
-	 * <p>Two pointer buffers are compared by comparing their sequences of remaining elements lexicographically, without regard to the starting position of
+	 * <p>Two struct buffers are compared by comparing their sequences of remaining elements lexicographically, without regard to the starting position of
 	 * each sequence within its corresponding buffer.</p>
 	 *
-	 * <p>A pointer buffer is not comparable to any other type of object.</p>
+	 * <p>A struct buffer is not comparable to any other type of object.</p>
 	 *
 	 * @return A negative integer, zero, or a positive integer as this buffer is less than, equal to, or greater than the specified buffer
 	 */
