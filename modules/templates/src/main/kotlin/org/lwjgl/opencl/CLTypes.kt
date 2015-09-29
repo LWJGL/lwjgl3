@@ -164,7 +164,7 @@ fun config() {
 		size_t.member("size")
 	}
 
-	struct(OPENCL_PACKAGE, "CLDeviceTopologyAMD", structName = "cl_device_topology_amd") {
+	struct(OPENCL_PACKAGE, "CLDeviceTopologyAMD", structName = "cl_device_topology_amd", mutable = false) {
 		documentation =
 			"The struct returned by CL10##clGetDeviceInfo() with {@code param_name} set to AMDDeviceTopology##CL_DEVICE_TOPOLOGY_AMD."
 		nativeImport("OpenCL.h")

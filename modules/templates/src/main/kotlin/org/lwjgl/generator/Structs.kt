@@ -261,9 +261,8 @@ class Struct(
 			}
 		}
 
-		if ( mutable ) {
-			// Factory constructors
-			println("""
+		// Factory constructors
+		println("""
 	// -----------------------------------
 
 	/** Returns a new {@link $className} instance allocated with {@link MemoryUtil#memAlloc}. The instance must be explicitly freed. */
@@ -308,7 +307,6 @@ class Struct(
 		return new Buffer(BufferUtils.createByteBuffer(capacity * SIZEOF), SIZEOF);
 	}
 """)
-		}
 
 		if ( members.isNotEmpty() ) {
 			generateStaticGetters(members)
@@ -815,7 +813,12 @@ class Struct(
 			if ( it.isNestedStruct ) {
 				val nestedStruct = (it.nativeType as StructType).definition
 				if ( !(nestedStruct.className === ANONYMOUS) ) {
-					println("\tpublic static ${nestedStruct.className} n$method(long $STRUCT) { return ${nestedStruct.className}.malloc().nset($STRUCT + $field); }")
+					println(
+						if ( !this@Struct.mutable && !nestedStruct.mutable )
+							"\tpublic static ${nestedStruct.className} n$method(long $STRUCT) { return new ${nestedStruct.className}($STRUCT + $field); }"
+						else
+							"\tpublic static ${nestedStruct.className} n$method(long $STRUCT) { return ${nestedStruct.className}.malloc().nset($STRUCT + $field); }"
+					)
 					println("\t/** Returns a copy of the {@code ${it.name.toParam(field)}} {@link ${nestedStruct.className}} struct. */")
 					println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT) { return n$method(memAddress($STRUCT)); }")
 				}
@@ -929,7 +932,12 @@ class Struct(
 								println("\tpublic static void $method(ByteBuffer $STRUCT, ByteBuffer $param) { n$method(memAddress($STRUCT), $param); }")
 
 								println("\tpublic static ${nestedStruct.className} n$method(long $STRUCT, int index) {")
-								println("\t\treturn ${nestedStruct.className}.malloc().nset($STRUCT + $field + index * $SIZEOF);")
+								println(
+									if ( !this@Struct.mutable && !nestedStruct.mutable )
+										"\t\treturn new ${nestedStruct.className}($STRUCT + $field + index * $SIZEOF);"
+									else
+										"\t\treturn ${nestedStruct.className}.malloc().nset($STRUCT + $field + index * $SIZEOF);"
+								)
 								println("\t}")
 								println("\tpublic static ${nestedStruct.className} $method(ByteBuffer $STRUCT, int index) { return n$method(memAddress($STRUCT), index); }")
 							}
@@ -1106,10 +1114,10 @@ fun struct(
 	structName: String = className,
 	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
 	virtual: Boolean = false,
-	malloc: Boolean = true,
+	mutable: Boolean = true,
 	init: Struct.() -> Unit
 ): Struct {
-	val struct = Struct(packageName, className, nativeSubPath, structName, identifierType, virtual, malloc)
+	val struct = Struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable)
 	struct.init()
 	Generator.register(struct)
 	return struct
@@ -1122,9 +1130,9 @@ fun struct_p(
 	structName: String = className,
 	identifierType: StructIdentifierType = StructIdentifierType.ALIAS,
 	virtual: Boolean = false,
-	malloc: Boolean = true,
+	mutable: Boolean = true,
 	init: Struct.() -> Unit
-) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, malloc, init).nativeType.p
+) = struct(packageName, className, nativeSubPath, structName, identifierType, virtual, mutable, init).nativeType.p
 
 /** Anonymous member struct definition. Mostly useful for union of structs. */
 fun Struct.struct(init: Struct.() -> Unit): StructType {

@@ -24,7 +24,7 @@ val GLXContextID = typedef(XID, "GLXContextID")
 val GLXPbuffer = "GLXPbuffer".opaque_p
 
 fun config() {
-	struct(OPENGL_PACKAGE, "GLXStereoNotifyEventEXT", "glx") {
+	struct(OPENGL_PACKAGE, "GLXStereoNotifyEventEXT", "glx", mutable = false) {
 		nativeImport ("<GL/glx.h>", "GLX.h")
 		int.member("type")
 		unsigned_long.member("serial")

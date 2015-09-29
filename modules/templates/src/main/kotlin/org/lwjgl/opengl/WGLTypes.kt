@@ -15,7 +15,7 @@ val HGPUNV_p = HGPUNV.p
 val PGPU_DEVICE = StructType(
 	name = "PGPU_DEVICE",
 	includesPointer = true,
-	definition = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl") {
+	definition = struct(OPENGL_PACKAGE, "GPU_DEVICE", "wgl", mutable = false) {
 		documentation =
 			"""
 			Receives information about the display device specified by the {@code deviceIndex} parameter of the WGLNVGPUAffinity##wglEnumGpuDevicesNV()

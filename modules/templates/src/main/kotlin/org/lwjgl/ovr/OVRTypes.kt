@@ -77,7 +77,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	"""
 }
 
-val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo") {
+val ovrErrorInfo_p = struct_p(OVR_PACKAGE, "OVRErrorInfo", structName = "ovrErrorInfo", mutable = false) {
 	documentation = "Provides information about the last error."
 	includeOVRCAPI()
 
@@ -112,7 +112,7 @@ val ovrInitParams_p = struct_p(OVR_PACKAGE, "OVRInitParams", structName = "ovrIn
 	uint32_t.member("ConnectionTimeoutMS") ///< Timeout in Milliseconds or 0
 }
 
-val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", structName = "ovrGraphicsLuid") {
+val ovrGraphicsLuid_p = struct_p(OVR_PACKAGE, "OVRGraphicsLuid", structName = "ovrGraphicsLuid", mutable = false) {
 	documentation = "A system specific graphics adapter identifier."
 	includeOVRCAPI()
 
@@ -187,7 +187,7 @@ val ovrPosef = struct(OVR_PACKAGE, "OVRPosef", structName = "ovrPosef") {
 }.nativeType
 val ovrPosef_p = ovrPosef.p
 
-val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", structName = "ovrPoseStatef") {
+val ovrPoseStatef = struct(OVR_PACKAGE, "OVRPoseStatef", structName = "ovrPoseStatef", mutable = false) {
 	documentation = "A full pose (rigid body) configuration with first and second derivatives."
 	includeOVRCAPI()
 
@@ -213,7 +213,7 @@ val ovrFovPort = struct(OVR_PACKAGE, "OVRFovPort", structName = "ovrFovPort") {
 	float.member("RightTan") /// The tangent of the angle between the viewing vector and the right edge of the field of view.
 }.nativeType
 
-val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc") {
+val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc", mutable = false) {
 	documentation = "A complete descriptor of the HMD."
 	includeOVRCAPI()
 
@@ -247,7 +247,7 @@ val ovrHmdDesc = struct(OVR_PACKAGE, "OVRHmdDesc", structName = "ovrHmdDesc") {
 val ovrHmd = "ovrHmd".opaque_p // struct ovrHmdStruct *
 val ovrHmd_p = ovrHmd.p
 
-val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensorData") {
+val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensorData", mutable = false) {
 	documentation = "Specifies a reading we can query from the sensor."
 	includeOVRCAPI()
 
@@ -258,7 +258,7 @@ val ovrSensorData = struct(OVR_PACKAGE, "OVRSensorData", structName = "ovrSensor
 	float.member("TimeInSeconds") /// Time when the reported IMU reading took place, in seconds.
 }.nativeType
 
-val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovrTrackingState") {
+val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovrTrackingState", mutable = false) {
 	documentation = "Tracking state at a given absolute time (describes predicted HMD pose etc). Returned by OVR#ovrHmd_GetTrackingState()."
 	includeOVRCAPI()
 
@@ -288,7 +288,7 @@ val ovrTrackingState = struct(OVR_PACKAGE, "OVRTrackingState", structName = "ovr
 }.nativeType
 val ovrTrackingState_p = ovrTrackingState.p
 
-val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFrameTiming") {
+val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFrameTiming", mutable = false) {
 	documentation = "Frame timing data reported by OVR#ovrHmd_GetFrameTiming()."
 	includeOVRCAPI()
 
@@ -310,7 +310,7 @@ val ovrFrameTiming = struct(OVR_PACKAGE, "OVRFrameTiming", structName = "ovrFram
     double.member("DisplayFrameIndex")
 }.nativeType
 
-val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", structName = "ovrEyeRenderDesc") {
+val ovrEyeRenderDesc = struct(OVR_PACKAGE, "OVREyeRenderDesc", structName = "ovrEyeRenderDesc", mutable = false) {
 	documentation =
 		"""
 		Rendering information for each eye. Computed by either OVR#ovrHmd_GetRenderDesc() based on the specified FOV. Note that the rendering viewport is not

@@ -160,7 +160,7 @@ val stbi_write_func = "stbi_write_func_p".callback(
 
 val stbrp_coord = typedef(unsigned_short, "stbrp_coord") // int is also supported if STBRP_LARGE_RECTS is defined
 
-val stbrp_context_p = struct_p(STB_PACKAGE, "STBRPContext", structName = "stbrp_context") {
+val stbrp_context_p = struct_p(STB_PACKAGE, "STBRPContext", structName = "stbrp_context", mutable = false) {
 	documentation = "The opaque {@code stbrp_context} struct."
 	includeSTBAPI("#include \"stb_rect_pack.h\"")
 }
@@ -183,7 +183,7 @@ val stbrp_node_p = struct_p(STB_PACKAGE, "STBRPNode", structName = "stbrp_node")
 
 // stb_truetype.h
 
-val stbtt_bakedchar_p = struct_p(STB_PACKAGE, "STBTTBakedChar", structName = "stbtt_bakedchar") {
+val stbtt_bakedchar_p = struct_p(STB_PACKAGE, "STBTTBakedChar", structName = "stbtt_bakedchar", mutable = false) {
 	documentation = "Baked character data, returned by STBTruetype#stbtt_BakeFontBitmap()."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	unsigned_short.member("x0")
@@ -195,7 +195,7 @@ val stbtt_bakedchar_p = struct_p(STB_PACKAGE, "STBTTBakedChar", structName = "st
 	float.member("xadvance")
 }
 
-val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", structName = "stbtt_aligned_quad") {
+val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", structName = "stbtt_aligned_quad", mutable = false) {
 	documentation = "Quad used for drawing a baked character, returned by STBTruetype#stbtt_GetBakedQuad()."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	float.member("x0")
@@ -208,12 +208,12 @@ val stbtt_aligned_quad_p = struct_p(STB_PACKAGE, "STBTTAlignedQuad", structName 
 	float.member("t1")
 }
 
-val stbtt_pack_context_p = struct_p(STB_PACKAGE, "STBTTPackContext", structName = "stbtt_pack_context") {
+val stbtt_pack_context_p = struct_p(STB_PACKAGE, "STBTTPackContext", structName = "stbtt_pack_context", mutable = false) {
 	documentation = "An opaque structure which holds all the context needed from STBTruetype#stbtt_PackBegin to STBTruetype#stbtt_PackEnd."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 }
 
-val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", structName = "stbtt_packedchar") {
+val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", structName = "stbtt_packedchar", mutable = false) {
 	documentation = "Packed character data, returned by STBTruetype#stbtt_PackFontRange()"
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	unsigned_short.member("x0")
@@ -227,7 +227,7 @@ val stbtt_packedchar_p = struct_p(STB_PACKAGE, "STBTTPackedchar", structName = "
 	float.member("yoff2")
 }
 
-val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", structName = "stbtt_pack_range") {
+val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", structName = "stbtt_pack_range", mutable = false) {
 	documentation = "A range of packed character data, returned by STBTruetype#stbtt_PackFontRanges()"
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	float.member("font_size")
@@ -237,14 +237,14 @@ val stbtt_pack_range_p = struct_p(STB_PACKAGE, "STBTTPackRange", structName = "s
 	stbtt_packedchar_p.member("chardata_for_range")
 }
 
-val stbtt_fontinfo_p = struct_p(STB_PACKAGE, "STBTTFontinfo", structName = "stbtt_fontinfo") {
+val stbtt_fontinfo_p = struct_p(STB_PACKAGE, "STBTTFontinfo", structName = "stbtt_fontinfo", mutable = false) {
 	documentation = "An opaque structure that contains font information."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 }
 
 val stbtt_vertex_type = PrimitiveType("stbtt_vertex_type", PrimitiveMapping.SHORT)
 
-val stbtt_vertex_p = struct_p(STB_PACKAGE, "STBTTVertex", structName = "stbtt_vertex") {
+val stbtt_vertex_p = struct_p(STB_PACKAGE, "STBTTVertex", structName = "stbtt_vertex", mutable = false) {
 	documentation = "Vertex data."
 	includeSTBAPI("#include \"stb_truetype.h\"")
 	stbtt_vertex_type.member("x")
@@ -269,7 +269,7 @@ val stb_vorbis_alloc_p = struct_p(STB_PACKAGE, "STBVorbisAlloc", structName = "s
 	int.member("alloc_buffer_length_in_bytes")
 }
 
-val stb_vorbis_info = struct(STB_PACKAGE, "STBVorbisInfo", structName = "stb_vorbis_info") {
+val stb_vorbis_info = struct(STB_PACKAGE, "STBVorbisInfo", structName = "stb_vorbis_info", mutable = false) {
 	documentation = "Information about a Vorbis stream."
 	includeSTBAPI("""#define STB_VORBIS_HEADER_ONLY
 #include "stb_vorbis.c"""")

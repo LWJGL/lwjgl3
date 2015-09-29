@@ -55,7 +55,7 @@ val POINTFLOAT = struct(WINDOWS_PACKAGE, "POINTFLOAT") {
 val LPGLYPHMETRICSFLOAT = StructType(
 	name = "LPGLYPHMETRICSFLOAT",
 	includesPointer = true,
-	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT") {
+	definition = struct(WINDOWS_PACKAGE, "GLYPHMETRICSFLOAT", mutable = false) {
 		documentation = "Contains information about the placement and orientation of a glyph in a character cell."
 		nativeImport ("WindowsLWJGL.h")
 		FLOAT.member("gmfBlackBoxX", "blackBoxX")

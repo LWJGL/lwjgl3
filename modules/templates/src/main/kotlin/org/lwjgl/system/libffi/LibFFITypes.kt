@@ -26,7 +26,7 @@ val ffi_type = struct(FFI_PACKAGE, "FFIType", structName = "ffi_type") {
 	ffi_type_pp.member("elements") // TODO: self-reference here...
 }.nativeType
 
-val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif") {
+val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif", mutable = false) {
 	documentation = "Contains information about a libffi call interface."
 	nativeImport("ffi.h")
 
@@ -40,7 +40,7 @@ val ffi_cif_p = struct_p(FFI_PACKAGE, "FFICIF", structName = "ffi_cif") {
 
 // Closures
 
-val ffi_closure_p = struct_p(FFI_PACKAGE, "FFIClosure", structName = "ffi_closure", malloc = false) {
+val ffi_closure_p = struct_p(FFI_PACKAGE, "FFIClosure", structName = "ffi_closure", mutable = false) {
 	documentation = "The libffi closure structure."
 	nativeImport("ffi.h")
 

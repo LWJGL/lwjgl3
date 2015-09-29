@@ -37,7 +37,7 @@ val objc_property_attribute_t_p = struct_p(MACOSX_PACKAGE, "ObjCPropertyAttribut
 }
 
 // Defines a method
-val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT) {
+val objc_method_description = struct(MACOSX_PACKAGE, "ObjCMethodDescription", structName = "objc_method_description", identifierType = StructIdentifierType.STRUCT, mutable = false) {
 	documentation = "Defines a method."
 	nativeImport ("<objc/objc-runtime.h>")
 

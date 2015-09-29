@@ -13,7 +13,7 @@ val GLFWmonitor_p = GLFWmonitor.p
 
 val GLFWwindow = "GLFWwindow".p
 
-val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWvidmode") {
+val GLFWvidmode_p = struct_p(GLFW_PACKAGE, "GLFWvidmode", mutable = false) {
 	documentation = "Video mode."
 	nativeImport("glfw3.h")
 	int.member("width")
