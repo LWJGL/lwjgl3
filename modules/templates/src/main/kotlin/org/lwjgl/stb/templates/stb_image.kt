@@ -7,7 +7,7 @@ package org.lwjgl.stb.templates
 import org.lwjgl.generator.*
 import org.lwjgl.stb.*
 
-val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI", prefixMethod = "stbi_") {
+val stb_image = "STBImage".nativeClass(packageName = STB_PACKAGE, prefix = "STBI_") {
 	includeSTBAPI(
 		"""#define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_STATIC
@@ -93,6 +93,21 @@ stbi_is_hdr(char *filename);""")}
 		Call #set_unpremultiply_on_load()(1) as well to force a divide per pixel to remove any premultiplied alpha *only* if the image file explicitly says
 		there's premultiplied data (currently only happens in iPhone images, and only if iPhone convert-to-rgb processing is on).
 		"""
+
+	IntConstant(
+		"Default component count, used as an argument to {@code req_comp}.",
+
+		"default" _ 0
+	)
+
+	IntConstant(
+		"Component count.",
+
+		"grey" _ 1,
+		"grey_alpha" _ 2,
+		"rgb" _ 3,
+		"rgb_alpha" _ 4
+	)
 
 	stbi_uc_p(
 		"load",
