@@ -724,7 +724,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		Check(1) _ autoSizeResult _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+		autoSizeResult _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
 	    returnDoc = "an array of video modes, or $NULL if an error occured",
 	    since = "GLFW 1.0"

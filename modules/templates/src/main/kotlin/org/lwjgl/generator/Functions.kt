@@ -189,7 +189,7 @@ class NativeClassFunction(
 	private fun hasAutoSizeFor(reference: Parameter) = hasParam(hasAutoSizePredicate(reference))
 
 	val hideAutoSizeResultParam: Boolean
-		get() = returns.nativeType is PointerType && returns.nativeType !is StructType && getParams { it.isAutoSizeResultOut }.count() == 1
+		get() = returns.nativeType is PointerType && getParams { it.isAutoSizeResultOut }.count() == 1
 
 	private fun Parameter.error(msg: String) {
 		throw IllegalArgumentException("$msg [${nativeClass.className}.${this@NativeClassFunction.name}, parameter: ${this.name}]")
@@ -593,7 +593,7 @@ class NativeClassFunction(
 				if ( returns.nativeType is StructType ) {
 					if ( returns has StructBuffer ) {
 						val autoSizeParam = getParam { it has autoSizeResult }
-						println("return new ${returns.nativeType.definition.className}.Buffer(memByteBuffer($RESULT, ${autoSizeParam.name}.getInt(${autoSizeParam.name}.position()) * ${returns.nativeType.definition.className}.SIZEOF));")
+						println("return new ${returns.nativeType.definition.className}.Buffer(memByteBuffer($RESULT, $API_BUFFER.intValue(${autoSizeParam.name}) * ${returns.nativeType.definition.className}.SIZEOF));")
 					} else {
 						println("return new ${returns.nativeType.definition.className}($RESULT);")
 					}
