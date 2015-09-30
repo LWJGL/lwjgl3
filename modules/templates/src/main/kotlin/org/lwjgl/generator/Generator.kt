@@ -9,8 +9,7 @@ import java.lang.Math.max
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import java.nio.ByteBuffer
-import java.util.ArrayList
-import java.util.HashMap
+import java.util.*
 
 /*
 	A template will be generated in the following cases:
@@ -158,7 +157,7 @@ class Generator(
 		}
 	}
 
-	private fun discoverTemplates(packageClassPath: String): List<Method>? {
+	private fun discoverTemplates(packageClassPath: String): Set<Method>? {
 		val packageClass: Class<*>
 		try {
 			packageClass = Class.forName(packageClassPath)
@@ -170,7 +169,9 @@ class Generator(
 
 		return methods
 			.asSequence()
-			.filterTo(ArrayList<Method>(methods.size())) {
+			.filterTo(TreeSet<Method>(object : Comparator<Method> {
+				override fun compare(o1: Method, o2: Method): Int = o1.name compareTo o2.name
+			})) {
 				methodFilter(it, NativeClass::class.java)
 			}
 	}
