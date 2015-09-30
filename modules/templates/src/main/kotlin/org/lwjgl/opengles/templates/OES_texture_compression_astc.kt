@@ -7,7 +7,7 @@ package org.lwjgl.opengles.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
-val OES_texture_compression_astc = "OESTextureCompressionAstc".nativeClassGLES("OES_texture_compression_astc", postfix = OES) {
+val OES_texture_compression_astc = "OESTextureCompressionASTC".nativeClassGLES("OES_texture_compression_astc", postfix = OES) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.

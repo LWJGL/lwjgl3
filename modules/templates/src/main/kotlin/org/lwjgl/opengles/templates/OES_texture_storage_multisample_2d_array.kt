@@ -7,7 +7,7 @@ package org.lwjgl.opengles.templates
 import org.lwjgl.generator.*
 import org.lwjgl.opengles.*
 
-val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2dArray".nativeClassGLES("OES_texture_storage_multisample_2d_array", postfix = OES) {
+val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2DArray".nativeClassGLES("OES_texture_storage_multisample_2d_array", postfix = OES) {
 	documentation =
 		"""
 		Native bindings to the $registryLink extension.
