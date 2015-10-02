@@ -307,7 +307,12 @@ public enum Configuration {
 				if ( count == 0 )
 					return;
 
-				consumer.accept(new String(buf, 0, count - 1, charset));
+				if (buf[count - 1] == '\n')
+					count--;
+				if (buf[count - 1] == '\r')
+					count--;
+
+				consumer.accept(new String(buf, 0, count, charset));
 				this.reset();
 			}
 		};
