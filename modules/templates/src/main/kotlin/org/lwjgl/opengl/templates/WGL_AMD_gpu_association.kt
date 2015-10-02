@@ -72,7 +72,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 			"the data type to be returned",
 			"GL11##GL_UNSIGNED_INT GL11##GL_INT GL11##GL_FLOAT GL11##GL_UNSIGNED_BYTE"
 		),
-		AutoSize("data") shr "GLChecks.typeToByteShift(dataType)"..UINT.IN("size", "the size of the {@code data} buffer"),
+		AutoSizeShr("GLChecks.typeToByteShift(dataType)", "data")..UINT.IN("size", "the size of the {@code data} buffer"),
 		MultiType(
 			PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
 		)..void_p.IN("data", "the buffer which will be filled with the requested information")

@@ -70,7 +70,7 @@ val GL31 = "GL31".nativeClassGL("GL31") {
 		"Draws multiple instances of a set of elements.",
 
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
-		AutoSize("indices") shr "GLChecks.typeToByteShift(type)"..GLsizei.IN("count", "the number of elements to be rendered"),
+		AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",

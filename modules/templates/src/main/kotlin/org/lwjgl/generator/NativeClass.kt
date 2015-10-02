@@ -385,6 +385,8 @@ class NativeClass(
 		).copyModifiers(param)
 	}
 
+	fun Int.x(other: Int) = this * other
+
 	private fun convertDocumentation(referenceClass: NativeClass, referenceFunction: String, documentation: String): String {
 		val matcher = JDOC_LINK_PATTERN.matcher(documentation)
 		if ( !matcher.find() )

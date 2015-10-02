@@ -419,7 +419,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLuint.IN("path", ""),
 		AutoSize("commands")..GLsizei.IN("numCommands", ""),
 		const..GLubyte_p.IN("commands", ""),
-		AutoSize("coords") shr "GLChecks.typeToByteShift(coordType)"..GLsizei.IN("numCoords", ""),
+		AutoSizeShr("GLChecks.typeToByteShift(coordType)", "coords")..GLsizei.IN("numCoords", ""),
 		GLenum.IN("coordType", "", "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#FLOAT"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
@@ -479,7 +479,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
 		nullTerminated..const..void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
-		AutoSize("charcodes") / "charcodeTypeToBytes(type)"..GLsizei.IN("numGlyphs", ""),
+		AutoSizeDiv("charcodeTypeToBytes(type)", "charcodes")..GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
 		const..void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
@@ -676,7 +676,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGL("NV_path_rendering", pos
 		"StencilFillPathInstancedNV",
 		"",
 
-		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)"..GLsizei.IN("numPaths", ""),
+		AutoSizeDiv("pathNameTypeToBytes(pathNameType)", "paths", applyTo = ApplyTo.NORMAL)..GLsizei.IN("numPaths", ""),
 		GLenum.IN(
 			"pathNameType",
 			"",

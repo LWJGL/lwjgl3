@@ -42,7 +42,7 @@ val EXT_base_instance = "EXTBaseInstance".nativeClassGLES("EXT_base_instance", p
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("instancecount", ""),
@@ -54,7 +54,7 @@ val EXT_base_instance = "EXTBaseInstance".nativeClassGLES("EXT_base_instance", p
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("instancecount", ""),

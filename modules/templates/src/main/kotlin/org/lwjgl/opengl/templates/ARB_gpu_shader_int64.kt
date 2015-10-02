@@ -50,10 +50,10 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 	)
 
 	val autoSizes = arrayOf(
-		AutoSize("value"),
-		AutoSize("value") shr 1,
-		AutoSize("value") / 3,
-		AutoSize("value") shr 2
+		AutoSize(1, "value"),
+		AutoSize(2, "value"),
+		AutoSize(3, "value"),
+		AutoSize(4, "value")
 	)
 	val autoSizeDoc = "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."
 

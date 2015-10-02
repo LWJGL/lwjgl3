@@ -344,7 +344,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec2 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 1..GLsizei.IN("count", "the number of vec2 vectors to load"),
+		AutoSize(2, "value")..GLsizei.IN("count", "the number of vec2 vectors to load"),
 		const..GLfloat_p.IN("value", "the values to load")
 	)
 
@@ -353,7 +353,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec3 vectors.",
 
 		uniformLocation,
-		AutoSize("value") / 3..GLsizei.IN("count", "the number of vec3 vectors to load"),
+		AutoSize(3, "value")..GLsizei.IN("count", "the number of vec3 vectors to load"),
 		const..GLfloat_p.IN("value", "the values to load")
 	)
 
@@ -362,7 +362,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec4 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 2..GLsizei.IN("count", "the number of vec4 vectors to load"),
+		AutoSize(4, "value")..GLsizei.IN("count", "the number of vec4 vectors to load"),
 		const..GLfloat_p.IN("value", "the values to load")
 	)
 
@@ -380,7 +380,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec2 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 1..GLsizei.IN("count", "the number of ivec2 vectors to load"),
+		AutoSize(2, "value")..GLsizei.IN("count", "the number of ivec2 vectors to load"),
 		const..GLint_p.IN("value", "the values to load")
 	)
 
@@ -389,7 +389,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec3 vectors.",
 
 		uniformLocation,
-		AutoSize("value") / 3..GLsizei.IN("count", "the number of ivec3 vectors to load"),
+		AutoSize(3, "value")..GLsizei.IN("count", "the number of ivec3 vectors to load"),
 		const..GLint_p.IN("value", "the values to load")
 	)
 
@@ -398,7 +398,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec4 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 2..GLsizei.IN("count", "the number of ivec4 vectors to load"),
+		AutoSize(4, "value")..GLsizei.IN("count", "the number of ivec4 vectors to load"),
 		const..GLint_p.IN("value", "the values to load")
 	)
 
@@ -409,7 +409,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 2x2 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") shr 2..GLsizei.IN("count", "the number of 2x2 matrices to load"),
+		AutoSize(2 x 2, "value")..GLsizei.IN("count", "the number of 2x2 matrices to load"),
 		transpose,
 		const..GLfloat_p.IN("value", "the matrix values to load")
 	)
@@ -419,7 +419,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 3x3 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") / (3 * 3)..GLsizei.IN("count", "the number of 3x3 matrices to load"),
+		AutoSize(3 x 3, "value")..GLsizei.IN("count", "the number of 3x3 matrices to load"),
 		transpose,
 		const..GLfloat_p.IN("value", "the matrix values to load")
 	)
@@ -429,7 +429,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 4x4 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") shr 4..GLsizei.IN("count", "the number of 4x4 matrices to load"),
+		AutoSize(4 x 4, "value")..GLsizei.IN("count", "the number of 4x4 matrices to load"),
 		transpose,
 		const..GLfloat_p.IN("value", "the matrix values to load")
 	)

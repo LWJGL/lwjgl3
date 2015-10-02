@@ -285,7 +285,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 1..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 
@@ -294,7 +294,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 3..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 
@@ -303,7 +303,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 2..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 }

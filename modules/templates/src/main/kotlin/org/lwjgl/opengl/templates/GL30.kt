@@ -310,7 +310,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 1)..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		AutoSize(2, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -319,7 +319,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / 3)..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		AutoSize(3, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 
@@ -328,7 +328,7 @@ val GL30 = "GL30".nativeClassGL("GL30") {
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 2)..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
+		AutoSize(4, "value")..GLsizei.IN("count", "the number of elements that are to be modified. This should be 1 if the targeted uniform variable is not an array, and 1 or more if it is an array."),
 		const..GLuint_p.IN("value", "a pointer to an array of {@code count} values that will be used to update the specified uniform variable")
 	)
 

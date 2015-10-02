@@ -1757,7 +1757,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 1)..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1767,7 +1767,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / 3)..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1777,7 +1777,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1797,7 +1797,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 1)..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1807,7 +1807,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / 3)..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1817,7 +1817,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1827,7 +1827,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(2 x 2, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1838,7 +1838,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", ""),
+		AutoSize(3 x 3, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1849,7 +1849,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 4)..GLsizei.IN("count", ""),
+		AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1865,7 +1865,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / (2 * 3))..GLsizei.IN("count", ""),
+		AutoSize(2 x 3, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1876,7 +1876,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / (3 * 2))..GLsizei.IN("count", ""),
+		AutoSize(3 x 2, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1887,7 +1887,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 3)..GLsizei.IN("count", ""),
+		AutoSize(2 x 4, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1898,7 +1898,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 3)..GLsizei.IN("count", ""),
+		AutoSize(4 x 2, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1909,7 +1909,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / (3 * 4))..GLsizei.IN("count", ""),
+		AutoSize(3 x 4, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1920,7 +1920,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / (4 * 3))..GLsizei.IN("count", ""),
+		AutoSize(4 x 3, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -2112,7 +2112,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 1)..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 
@@ -2122,7 +2122,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") / 3)..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 
@@ -2132,7 +2132,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		(AutoSize("value") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("value", "")
 	)
 
@@ -2148,7 +2148,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		(AutoSize("params") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "params")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("params", "")
 	)
 
@@ -2187,7 +2187,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		(AutoSize("params") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "params")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("params", "")
 	)
 
@@ -2221,7 +2221,7 @@ void loadTexture(GLint texobj, GLint width, GLint height, void *data)
 		GLuint.IN("program", ""),
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		(AutoSize("params") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "params")..GLsizei.IN("count", ""),
 		const..GLuint_p.IN("params", "")
 	)
 

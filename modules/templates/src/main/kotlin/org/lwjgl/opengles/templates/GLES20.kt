@@ -680,7 +680,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "")
 	)
@@ -1357,7 +1357,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 1..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1375,7 +1375,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 1..GLsizei.IN("count", ""),
+		AutoSize(2, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1394,7 +1394,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 3..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1413,7 +1413,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 3..GLsizei.IN("count", ""),
+		AutoSize(3, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1433,7 +1433,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 2..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("value", "")
 	)
 
@@ -1453,7 +1453,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 2..GLsizei.IN("count", ""),
+		AutoSize(4, "value")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("value", "")
 	)
 
@@ -1462,7 +1462,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 2..GLsizei.IN("count", ""),
+		AutoSize(2 x 2, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1472,7 +1472,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 9..GLsizei.IN("count", ""),
+		AutoSize(3 x 3, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)
@@ -1482,7 +1482,7 @@ val GLES20 = "GLES20".nativeClassGLES("GLES20", postfix = "") {
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 4..GLsizei.IN("count", ""),
+		AutoSize(4 x 4, "value")..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
 		const..GLfloat_p.IN("value", "")
 	)

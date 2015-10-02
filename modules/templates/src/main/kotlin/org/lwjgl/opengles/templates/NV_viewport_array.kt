@@ -42,7 +42,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "v")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("v", "")
 	)
 
@@ -70,7 +70,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 2)..GLsizei.IN("count", ""),
+		AutoSize(4, "v")..GLsizei.IN("count", ""),
 		const..GLint_p.IN("v", "")
 	)
 
@@ -98,7 +98,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 1)..GLsizei.IN("count", ""),
+		AutoSize(2, "v")..GLsizei.IN("count", ""),
 		const..GLfloat_p.IN("v", "")
 	)
 

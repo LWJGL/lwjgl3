@@ -215,7 +215,7 @@ class NativeClassFunction(
 						}
 
 						if ( bufferParam.nativeType is CharSequenceType && bufferParam.nativeType.charMapping == CharMapping.UTF16 )
-							autoSize shr 1
+							it.replaceModifier(AutoSize(2, autoSize.reference, *autoSize.dependent, applyTo = autoSize.applyTo))
 					}
 				}
 			}

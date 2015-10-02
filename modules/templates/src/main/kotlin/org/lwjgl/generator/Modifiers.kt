@@ -35,6 +35,11 @@ abstract class TemplateElement {
 		}
 	}
 
+	fun replaceModifier(modifier: TemplateModifier) {
+		modifiers[modifier.javaClass] = modifier
+		modifier.validate(this)
+	}
+
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
 	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass)
 	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modClass] as T)

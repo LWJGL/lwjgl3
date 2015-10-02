@@ -231,7 +231,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"Draws multiple instances of a set of elements with an offset applied to instanced attributes",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		AutoSize("indices") shr "GLChecks.typeToByteShift(type)"..GLsizei.IN("count", "the number of elements to be rendered"),
+		AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
@@ -247,7 +247,7 @@ val GL42 = "GL42".nativeClassGL("GL42") {
 		"Renders multiple instances of a set of primitives from array data with a per-element offset.",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		AutoSize("indices") shr "GLChecks.typeToByteShift(type)"..GLsizei.IN("count", "the number of elements to be rendered"),
+		AutoSizeShr("GLChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", "the number of elements to be rendered"),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",

@@ -63,7 +63,7 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
 
 		GLenum.IN("target", "the framebuffer target", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		GLuint.IN("start", "the first sample location to update"),
-		AutoSize("v") shr 1..GLsizei.IN("count", "the number of sample locations to update"),
+		AutoSize(2, "v")..GLsizei.IN("count", "the number of sample locations to update"),
 		const..GLfloat_p.IN("v", "a pair of values for each sample location to update")
 	)
 

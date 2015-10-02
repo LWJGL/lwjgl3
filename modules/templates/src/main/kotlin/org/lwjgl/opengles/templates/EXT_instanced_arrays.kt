@@ -49,7 +49,7 @@ val EXT_instanced_arrays = "EXTInstancedArrays".nativeClassGLES("EXT_instanced_a
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoSizeShr("GLESChecks.typeToByteShift(type)", "indices")..GLsizei.IN("count", ""),
 		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
 		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("primcount", "")

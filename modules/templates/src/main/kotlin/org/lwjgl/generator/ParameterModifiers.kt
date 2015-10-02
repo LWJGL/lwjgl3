@@ -26,6 +26,28 @@ interface AutoSizeFactor {
 }
 
 /** Marks the parameter to be replaced with .remaining() on the buffer parameter specified by reference. */
+fun AutoSize(div: Int, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
+	if ( div < 1 )
+		throw IllegalArgumentException()
+	else if ( div == 1 )
+		AutoSize(reference, *dependent, applyTo = applyTo)
+	else if ( Integer.bitCount(div) == 1 )
+		AutoSizeShr(Integer.numberOfTrailingZeros(div).toString(), reference, *dependent, applyTo = applyTo)
+	else
+		AutoSizeDiv(div.toString(), reference, dependent = *dependent, applyTo = applyTo)
+
+fun AutoSizeDiv(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
+		override fun expression() = "/ $expression"
+		override fun expressionInv() = "* $expression"
+	})
+
+fun AutoSizeShr(expression: String, reference: String, vararg dependent: String, applyTo: ApplyTo = ApplyTo.BOTH) =
+	AutoSize(reference, *dependent, applyTo = applyTo, factor = object : AutoSizeFactor {
+		override fun expression() = ">> $expression"
+		override fun expressionInv() = "<< $expression"
+	})
+
 class AutoSize(
 	override val reference: String,
 	vararg val dependent: String,
@@ -33,32 +55,13 @@ class AutoSize(
 	 * Can be set to ApplyTo.NORMAL to skip the expression and use the parameter name directly in the alternative method.
 	 * The parameter name can then be a local variable created by a Code modifier.
 	 */
-	val applyTo: ApplyTo = ApplyTo.BOTH
+	val applyTo: ApplyTo = ApplyTo.BOTH,
+	/** If not null, the expression will be appended to the parameter. */
+	val factor: AutoSizeFactor? = null
 ) : ParameterModifier(), ReferenceModifier {
 	companion object : ModifierKey<AutoSize>
 
 	override val isSpecial = true
-
-	/** If not null, the expression will be appended to the parameter. */
-	var factor: AutoSizeFactor? = null
-
-	fun shr(value: Int) = shr("$value")
-	fun shr(expression: String): AutoSize {
-		this.factor = object : AutoSizeFactor {
-			override fun expression() = ">> $expression"
-			override fun expressionInv() = "<< $expression"
-		}
-		return this
-	}
-
-	operator fun div(value: Int) = div("$value")
-	operator fun div(expression: String): AutoSize {
-		this.factor = object : AutoSizeFactor {
-			override fun expression() = "/ $expression"
-			override fun expressionInv() = "* $expression"
-		}
-		return this
-	}
 
 	fun hasReference(reference: String) = this.reference == reference || dependent.any { it == reference }
 
