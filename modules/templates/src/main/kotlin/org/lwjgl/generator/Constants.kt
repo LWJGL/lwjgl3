@@ -38,7 +38,7 @@ val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
 val StringConstant = ConstantType(String::class) { "\"$it\"" }
 
-open data class Constant<T: Any>(val name: String, val value: T?)
+open class Constant<T: Any>(val name: String, val value: T?)
 class ConstantExpression<T: Any>(name: String, val expression: String): Constant<T>(name, null)
 
 class ConstantBlock<T: Any>(
@@ -89,17 +89,15 @@ class ConstantBlock<T: Any>(
 	}
 
 	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
-		val (name, value) = constant
-
-		print("$indent${getConstantName(name)}")
-		for ( i in 0..(alignment - name.length() - 1) )
+		print("$indent${getConstantName(constant.name)}")
+		for ( i in 0..(alignment - constant.name.length() - 1) )
 			print(' ')
 
 		print(" = ")
 		if ( constant is ConstantExpression )
 			print(constant.expression)
 		else
-			print(constantType.print(value!!))
+			print(constantType.print(constant.value!!))
 	}
 
 	val javaDocLinks: String get() {

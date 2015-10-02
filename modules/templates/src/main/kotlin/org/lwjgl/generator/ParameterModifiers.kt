@@ -51,8 +51,8 @@ class AutoSize(
 		return this
 	}
 
-	fun div(value: Int) = div("$value")
-	fun div(expression: String): AutoSize {
+	operator fun div(value: Int) = div("$value")
+	operator fun div(expression: String): AutoSize {
 		this.factor = object : AutoSizeFactor {
 			override fun expression() = "/ $expression"
 			override fun expressionInv() = "* $expression"

@@ -322,7 +322,7 @@ class NativeClass(
 
 	// DSL extensions
 
-	fun <T: Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	operator fun <T: Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
@@ -334,9 +334,9 @@ class NativeClass(
 	/** Adds a new constant whose value is an expression. */
 	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
-	fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
+	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
-	fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): NativeClassFunction {
+	operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
 			simpleName = name,
@@ -354,7 +354,7 @@ class NativeClass(
 		customMethods add method
 	}
 
-	fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
+	operator fun NativeClass.get(functionName: String) = _functions[functionName] ?: throw IllegalArgumentException("Referenced function does not exist: $templateName.$functionName")
 
 	fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]
@@ -372,7 +372,7 @@ class NativeClass(
 		return func
 	}
 
-	fun NativeClassFunction.get(paramName: String): Parameter {
+	operator fun NativeClassFunction.get(paramName: String): Parameter {
 		val param = getParam(paramName)
 
 		return Parameter(

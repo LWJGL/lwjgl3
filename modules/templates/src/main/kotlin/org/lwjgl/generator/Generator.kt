@@ -73,22 +73,21 @@ fun main(args: Array<String>) {
 		// all top-level functions/properties in that package. Example:
 		// org.lwjgl.opengl -> org.lwjgl.opengl.OpenglPackage (the first letter is capitalized)
 
-		generate("org.lwjgl.stb", Binding.STB)
-
+		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.glfw", Binding.GLFW)
 		generate("org.lwjgl.openal", Binding.OPENAL)
 		generate("org.lwjgl.opencl", Binding.OPENCL)
 		generate("org.lwjgl.opengl", Binding.OPENGL)
 		generate("org.lwjgl.opengles", Binding.OPENGLES)
-		generate("org.lwjgl.egl", Binding.EGL)
 		generate("org.lwjgl.ovr", Binding.OVR)
+		generate("org.lwjgl.stb", Binding.STB)
 
 		generate("org.lwjgl.system.jemalloc")
 		generate("org.lwjgl.system.libc")
 		generate("org.lwjgl.system.libffi")
-		generate("org.lwjgl.system.simd")
 		generate("org.lwjgl.system.linux")
 		generate("org.lwjgl.system.macosx")
+		generate("org.lwjgl.system.simd")
 		generate("org.lwjgl.system.windows")
 
 		// Generate utility classes. These are auto-registered during the process above.
@@ -361,7 +360,7 @@ private fun <T> generateOutput(
 				return true
 
 			for ( i in 0..before.limit() - 1 ) {
-				if ( before[i] != after[i] )
+				if ( before.get(i) != after[i] )
 					return true
 			}
 

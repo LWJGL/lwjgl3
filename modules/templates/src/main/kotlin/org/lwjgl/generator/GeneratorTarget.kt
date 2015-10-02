@@ -156,7 +156,7 @@ abstract class GeneratorTarget(
 		set(access: Access) {
 			if ( access === Access.PRIVATE )
 				throw IllegalArgumentException("The private access modifier is illegal on top-level classes.")
-			$access = access
+			field = access
 		}
 
 	var documentation: String? = null
@@ -284,7 +284,7 @@ abstract class GeneratorTargetNative(
 
 		fileName append className.asJNIName
 
-		$nativeFileNameJNI = fileName.toString()
+		nativeFileNameJNI = fileName.toString()
 	}
 
 	abstract fun PrintWriter.generateNative()

@@ -37,8 +37,8 @@ abstract class TemplateElement {
 
 	fun has(modifier: TemplateModifier) = modifiers[modifier.javaClass] === modifier
 	fun has(modKey: ModifierKey<*>) = modifiers.containsKey(modKey.javaClass.declaringClass)
-	fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
-	fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
+	operator fun <T : TemplateModifier> get(modClass: Class<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modClass] as T)
+	operator fun <T : TemplateModifier> get(modKey: ModifierKey<T>) = @Suppress("UNCHECKED_CAST")(modifiers[modKey.javaClass.declaringClass] as T)
 
 	/** Returns true if the parameter has a ReferenceModifier with the specified reference. */
 	fun hasRef(modKey: ModifierKey<*>, reference: String): Boolean {
