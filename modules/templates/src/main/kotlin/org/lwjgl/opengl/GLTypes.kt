@@ -76,7 +76,7 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	samConstructor = "AMDDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the AMDDebugOutput##glDebugMessageCallbackAMD() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageAMDCallback} arguments to a String.
@@ -129,7 +129,7 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	samConstructor = "ARBDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageARBCallback} arguments to a String.
@@ -190,7 +190,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	samConstructor = "GL43,KHRDebug"
 ) {
 	documentation = "Instances of this interface may be passed to the GL43##glDebugMessageCallback() and KHRDebug##glDebugMessageCallback() methods."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageCallback} arguments to a String.

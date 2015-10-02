@@ -16,13 +16,10 @@ class CallbackFunction(
 	var functionDoc: String = ""
 	var additionalCode: String = ""
 
-	private var callConventionSystem: Boolean = false
-	val CALL_CONVENTION_SYSTEM: Boolean
-		get() {
-			// warning: getter with side-effects
-			$callConventionSystem = true
-			return true
-		}
+	private var callConvention = "DEFAULT"
+	fun useSystemCallConvention() {
+		callConvention = "SYSTEM"
+	}
 
 	private val signatureJava: String = signature.asSequence().map {
 		"${it.nativeMethodType} ${it.name}"
@@ -83,7 +80,7 @@ ${access.modifier}abstract class $className extends Closure.${returns.callbackTy
 	static {
 		prepareCIF(
 			"$className",
-			CALL_CONVENTION_${if ( $callConventionSystem ) "SYSTEM" else "DEFAULT"},
+			CALL_CONVENTION_$callConvention,
 			CIF, ${returns.ffi},
 			ARGS, ${signature.asSequence().map { it.nativeType.ffi }.join()}
 		);

@@ -205,7 +205,7 @@ val cl_create_context_callback = "cl_create_context_callback".callback(
 	samConstructor = "CL10"
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clCreateContext() and CL10##clCreateContextFromType() methods."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/** A functional interface for {@link CLCreateContextCallback}. */
 	public interface SAMString {
@@ -241,7 +241,7 @@ val cl_program_callback = "cl_program_callback".callback(
 	samConstructor = "CL10"
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clBuildProgram(), CL12##clCompileProgram() and CL12##clLinkProgram() methods."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 }
 
 val cl_native_kernel = "cl_native_kernel".callback(
@@ -251,7 +251,7 @@ val cl_native_kernel = "cl_native_kernel".callback(
 	samConstructor = "CL10"
 ) {
 	documentation = "Instances of this interface may be passed to the CL10##clEnqueueNativeKernel() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 }
 
 val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".callback(
@@ -262,7 +262,7 @@ val cl_mem_object_destructor_callback = "cl_mem_object_destructor_callback".call
 	samConstructor = "CL11"
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetMemObjectDestructorCallback() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 }
 
 val cl_event_callback = "cl_event_callback".callback(
@@ -284,7 +284,7 @@ val cl_event_callback = "cl_event_callback".callback(
 	samConstructor = "CL11"
 ) {
 	documentation = "Instances of this interface may be passed to the CL11##clSetEventCallback() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 }
 
 val cl_svmfree_callback = "cl_svmfree_callback".callback(
@@ -297,7 +297,7 @@ val cl_svmfree_callback = "cl_svmfree_callback".callback(
 	samConstructor = "CL20"
 ) {
 	documentation = "Instances of this interface may be passed to the CL20##clEnqueueSVMFree() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/** A functional interface for {@link CLSVMFreeCallback}. */
 	public interface SAMBuffer {

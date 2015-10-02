@@ -74,7 +74,7 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	samConstructor = "GLES32"
 ) {
 	documentation = "Instances of this interface may be passed to the GLES32##glDebugMessageCallback() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageCallback} arguments to a String.
@@ -127,7 +127,7 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	samConstructor = "KHRDebug"
 ) {
 	documentation = "Instances of this interface may be passed to the KHRDebug##glDebugMessageCallbackKHR() method."
-	CALL_CONVENTION_SYSTEM
+	useSystemCallConvention()
 	additionalCode = """
 	/**
 	 * Converts the specified {@link GLDebugMessageKHRCallback} arguments to a String.
