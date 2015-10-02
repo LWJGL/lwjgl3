@@ -25,8 +25,8 @@ enum class CallingConvention(val method: String) {
 abstract class APIBinding(
 	packageName: String,
 	className: String,
-    val callingConvention: CallingConvention = CallingConvention.STDCALL
-): CustomClass(packageName, className) {
+	val callingConvention: CallingConvention = CallingConvention.STDCALL
+) : CustomClass(packageName, className) {
 
 	init {
 		javaImport(
@@ -41,7 +41,7 @@ abstract class APIBinding(
 		comparator: (NativeClass, NativeClass) -> Int = { o1, o2 -> o1.templateName compareTo o2.templateName }
 	): List<NativeClass> {
 		val classes = ArrayList(_classes)
-		Collections.sort(classes, object: Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
+		Collections.sort(classes, object : Comparator<NativeClass> { // TODO: Kotlin bug: Can't use SAM conversion on JDK 8
 			override fun compare(o1: NativeClass, o2: NativeClass) = comparator(o1, o2)
 		})
 		return classes
@@ -96,6 +96,7 @@ abstract class APIBinding(
 
 	/** Can be overriden to generate additional parameters for the NativeClass constructor. */
 	open fun printConstructorParams(writer: PrintWriter, nativeClass: NativeClass) = Unit
+
 	/** Can be overriden to implement custom function address retrieval. */
 	open fun getFunctionAddressCall(function: NativeClassFunction) = "provider.getFunctionAddress(\"${function.nativeName}\")"
 
@@ -108,8 +109,10 @@ abstract class APIBinding(
 
 	/** Can be overriden to generate binding-specific javadoc. If this function returns false, the default javadoc will be generated. */
 	open fun printCustomJavadoc(writer: PrintWriter, function: NativeClassFunction, documentation: String) = false
+
 	/** Can be overriden to implement a custom condition for checking the function address. */
 	open fun shouldCheckFunctionAddress(function: NativeClassFunction) = !hasCurrentCapabilities
+
 	/** Can be overriden to add custom parameter checks. */
 	open fun addParameterChecks(
 		checks: MutableList<String>,
@@ -119,6 +122,7 @@ abstract class APIBinding(
 	) = Unit
 
 }
+
 // TODO: Remove if KT-457 or KT-1183 are fixed.
 private fun APIBinding.generateFunctionGetters(writer: PrintWriter, nativeClass: NativeClass) = writer.generateFunctionGetters(nativeClass)
 
@@ -133,7 +137,7 @@ class NativeClass(
 	val prefixTemplate: String,
 	val postfix: String,
 	val binding: APIBinding?
-): GeneratorTargetNative(packageName, className, nativeSubPath) {
+) : GeneratorTargetNative(packageName, className, nativeSubPath) {
 	companion object {
 		private val JDOC_LINK_PATTERN = Pattern.compile("""(?<!\p{javaJavaIdentifierPart}|[@#])#(\p{javaJavaIdentifierStart}\p{javaJavaIdentifierPart}*)""")
 	}
@@ -160,7 +164,8 @@ class NativeClass(
 		print(HEADER)
 		println("package $packageName;\n")
 
-		if ( !_functions.isEmpty() ) {
+		val hasFunctions = !_functions.isEmpty()
+		if ( hasFunctions ) {
 			println("import org.lwjgl.*;")
 			println("import org.lwjgl.system.*;\n")
 
@@ -201,20 +206,28 @@ class NativeClass(
 		val documentation = super.documentation
 		if ( documentation != null )
 			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
-		println("${access.modifier}final class $className {\n")
+		println("${access.modifier}${if ( hasFunctions ) "" else "final "}class $className {")
 
 		constantBlocks.forEach {
 			it.generate(this)
 		}
 
-		if ( binding != null && !_functions.isEmpty() ) {
-			generateFunctionAddresses(binding)
-			binding.generateFunctionGetters(this, this@NativeClass)
-		} else {
-			if ( !_functions.isEmpty() )
-				println("\tstatic { LWJGLUtil.initialize(); }\n")
+		if ( hasFunctions ) {
+			if ( binding != null ) {
+				generateFunctionAddresses(binding)
+				binding.generateFunctionGetters(this, this@NativeClass)
+			} else {
+				println("\n\tstatic { LWJGLUtil.initialize(); }")
 
-			println("\tprivate $className() {}\n")
+				println("""
+	@JavadocExclude
+	protected $className() {
+		throw new UnsupportedOperationException();
+	}
+""")
+			}
+		} else {
+			println("\n\tprivate $className() {}\n")
 		}
 
 		functions.forEach {
@@ -234,7 +247,7 @@ class NativeClass(
 	}
 
 	private fun PrintWriter.generateFunctionAddresses(binding: APIBinding) {
-		println("\t/** Function address. */")
+		println("\n\t/** Function address. */")
 		println("\t@JavadocExclude")
 		print("\tpublic final long")
 		if ( _functions.size() == 1 ) {
@@ -248,8 +261,13 @@ class NativeClass(
 			}
 			println(";")
 		}
-
-		println("\n\t@JavadocExclude")
+		println("""
+	@JavadocExclude
+	protected $className() {
+		throw new UnsupportedOperationException();
+	}
+""")
+		println("\t@JavadocExclude")
 		print("\t${access.modifier}$className(FunctionProvider${if ( binding.isLocal ) "Local" else ""} provider")
 		binding.printConstructorParams(this, this@NativeClass)
 		println(") {")
@@ -322,20 +340,21 @@ class NativeClass(
 
 	// DSL extensions
 
-	operator fun <T: Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
 	}
 
 	/** Adds a new constant. */
-	operator fun <T: Any> String.rangeTo(value: T) = Constant(this, value)
+	operator fun <T : Any> String.rangeTo(value: T) = Constant(this, value)
 
 	/** Adds a new constant whose value is an expression. */
-	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
+	fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 
 	operator fun NativeType.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false) =
 		ReturnValue(this)(name, documentation, *parameters, returnDoc = returnDoc, since = since, noPrefix = noPrefix)
+
 	operator fun ReturnValue.invoke(name: String, documentation: String, vararg parameters: Parameter, returnDoc: String = "", since: String = "", noPrefix: Boolean = false): NativeClassFunction {
 		val func = NativeClassFunction(
 			returns = this,
@@ -377,11 +396,11 @@ class NativeClass(
 
 		return Parameter(
 			param.nativeType,
-		    param.name,
-		    param.paramType,
-		    this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
-		    "",
-		    LinkMode.SINGLE
+			param.name,
+			param.paramType,
+			this@NativeClass.convertDocumentation(this.nativeClass, this.name, param.documentation),
+			"",
+			LinkMode.SINGLE
 		).copyModifiers(param)
 	}
 

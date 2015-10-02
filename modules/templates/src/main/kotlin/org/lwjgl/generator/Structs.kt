@@ -160,7 +160,7 @@ class Struct(
 		val documentation = super.documentation
 		if ( documentation != null )
 			println(processDocumentation(documentation).toJavaDoc(indentation = ""))
-		println("${access.modifier}final class $className extends Struct {")
+		println("${access.modifier}class $className extends Struct {")
 
 		print("""
 	/** The struct size in bytes. */

@@ -61,6 +61,7 @@ class ConstantBlock<T: Any>(
 	}
 
 	private fun PrintWriter.generateBlock() {
+		println();
 		println(documentation)
 
 		print("\tpublic static final ${constantType.javaType.simpleName}")
@@ -85,7 +86,7 @@ class ConstantBlock<T: Any>(
 				println(',')
 			printConstant(it, indent, alignment)
 		}
-		println(";\n")
+		println(";")
 	}
 
 	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
