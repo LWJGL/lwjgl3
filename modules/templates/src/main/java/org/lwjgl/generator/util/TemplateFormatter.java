@@ -92,7 +92,7 @@ public class TemplateFormatter {
 			ClassLoader cl = Thread.currentThread().getContextClassLoader();
 			frame.setIconImages(Arrays.asList(new Image[] {
 				ImageIO.read(cl.getResource("lwjgl16.png")),
-				ImageIO.read(cl.getResource("lwjgl32.png")),
+				ImageIO.read(cl.getResource("lwjgl32.png"))
 			}));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -276,7 +276,7 @@ public class TemplateFormatter {
 					String intValue = value.endsWith("L") ? value.substring(0, value.length() - (value.endsWith("UL") ? 2 : 1)) : value;
 
 					validateInteger(intValue);
-					builder.append("\" _ ");
+					builder.append("\"..");
 					builder.append(intValue);
 				} catch (NumberFormatException e) {
 					builder.append("\" expr \"");
@@ -299,20 +299,46 @@ public class TemplateFormatter {
 	// ---[ FUNCTION FORMATTING ]----
 
 	private static final Pattern TYPE_PATTERN = Pattern.compile(
-		// This is a little funny because we can have whitespace on either side of *
-		"(?:const\\s+)?(?:(?:un)signed\\s+)?[0-9a-zA-Z_]+(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)(?:/[*]\\s*)?[0-9a-zA-Z_]+(?:\\s*[*]/)?"
+		"(?:const\\s+)?" + // const
+		"(?:(?:un)signed\\s+)?" + // (un)signed
+		"[0-9a-zA-Z_]++" + // type
+		"(?:\\s+const)?(?:\\s*[*]+\\s*|\\s+)" + // pointer. This is a little funny because we can have whitespace on either side of *
+		"(?:/[*]\\s*)?" + // name may be wrapped in comments /*
+		"[0-9a-zA-Z_]+" + // function or parameter name
+		"(?:\\s*[*]/)?"
 	);
 
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile(
-		TYPE_PATTERN + "\\s*[(]((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*\\s*)[)]",
+		TYPE_PATTERN + // return type + function name
+		"\\s*[(]" + // opening parenthesis
+		"((?:void)?(?:(?:\\s*,)?\\s*" + TYPE_PATTERN + ")*)" + // void or parameter list
+		"\\s*[)]", // closing parenthesis
 		Pattern.MULTILINE
 	);
 
 	// Same as TYPE_PATTERN, with capturing groups and without the whitespace stuff (we've already verified correct syntax)
 	private static final Pattern PARAM_PATTERN = Pattern.compile(
-		"(const\\s+)?((?:un)?signed\\s+)?([0-9a-zA-Z_]+)(\\s+const)?\\s*([*]+)?\\s*(?:/[*]\\s*)?([0-9a-zA-Z_]+)(?:\\s*[*]/)?",
+		"(const\\s+)?" +
+		"((?:un)?signed\\s+)?" +
+		"([0-9a-zA-Z_]++)" +
+		"(\\s+const)?\\s*([*]+)?\\s*" +
+		"(?:/[*]\\s*)?" +
+		"([0-9a-zA-Z_]+)" +
+		"(?:\\s*[*]/)?",
 		Pattern.MULTILINE
 	);
+
+	private static void formatType(Matcher paramMatcher, StringBuilder builder, String prefix) {
+		// (un)signed
+		if ( paramMatcher.group(2) != null )
+			builder.append(paramMatcher.group(2).trim() + "_");
+		// type
+		if ( !paramMatcher.group(3).startsWith(prefix) )
+			builder.append(prefix);
+		builder.append(paramMatcher.group(3));
+		if ( "unsigned".equals(paramMatcher.group(3)) || "signed".equals(paramMatcher.group(3)) )
+			builder.append("_int");
+	}
 
 	private static String formatFunctions(String input, String prefix) {
 		StringBuilder builder = new StringBuilder(input.length());
@@ -332,15 +358,13 @@ public class TemplateFormatter {
 				if ( paramCount == -1 ) {
 					// Return type + function name
 					builder.append('\t');
+					// const
 					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null )
-						builder.append("(const _ ");
-
-					if ( paramMatcher.group(2) != null )
-						builder.append(paramMatcher.group(2).trim() + "_");
-					if ( !paramMatcher.group(3).startsWith(prefix) )
-						builder.append(prefix);
-					builder.append(paramMatcher.group(3));
-					if ( paramMatcher.group(5) != null ) // pointer
+						builder.append("(const..");
+					// type
+					formatType(paramMatcher, builder, prefix);
+					// pointer
+					if ( paramMatcher.group(5) != null )
 						writerPointer(builder, paramMatcher);
 					if ( paramMatcher.group(1) != null )
 						builder.append(')');
@@ -360,14 +384,13 @@ public class TemplateFormatter {
 						builder.append('\n');
 
 					builder.append("\t\t");
+					// const
 					if ( paramMatcher.group(1) != null || paramMatcher.group(4) != null ) // const
-						builder.append("const _ ");
-					if ( paramMatcher.group(2) != null )
-						builder.append(paramMatcher.group(2).trim() + "_");
-					if ( !paramMatcher.group(3).startsWith(prefix) )
-						builder.append(prefix);
-					builder.append(paramMatcher.group(3));
-					if ( paramMatcher.group(5) != null ) { // pointer
+						builder.append("const..");
+					// type
+					formatType(paramMatcher, builder, prefix);
+					// pointer
+					if ( paramMatcher.group(5) != null ) {
 						writerPointer(builder, paramMatcher);
 						builder.append(
 							paramMatcher.group(1) != null || paramMatcher.group(4) != null // const
