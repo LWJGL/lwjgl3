@@ -12,7 +12,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
 import java.nio.charset.Charset;
+import java.nio.charset.CharsetDecoder;
 
 import static org.lwjgl.system.APIUtil.*;
 
@@ -301,27 +303,67 @@ public enum Configuration {
 	 * @param charset  the message charset
 	 */
 	public static void setDebugStreamConsumer(final DebugStreamConsumer consumer, final Charset charset) {
-		final ByteArrayOutputStream buffer = new ByteArrayOutputStream() {
+		final ByteArrayOutputStream buffer = new ByteArrayOutputStream(128) {
+
+			private final CharsetDecoder decoder = charset.newDecoder();
+
+			private byte[] tmp;
+			private ByteBuffer in;
+			private CharBuffer out;
+
 			@Override
 			public void flush() throws IOException {
-				if ( count == 0 )
-					return;
+				if ( buf != tmp ) {
+					tmp = buf;
 
-				consumer.accept(new String(buf, 0, count - 1, charset));
+					out = CharBuffer.allocate(tmp.length);
+					in = ByteBuffer.wrap(tmp);
+				} else {
+					out.clear();
+					in.position(0);
+				}
+
+				in.limit(count);
+
+				decoder.reset();
+				decoder.decode(in, out, true);
+
+				out.flip();
+				consumer.accept(out.toString());
+
 				this.reset();
 			}
 		};
 
-		DEBUG_STREAM.set(new PrintStream(buffer, true) {
-			@Override
-			public void write(byte[] b, int off, int len) {
-				// The default implementation flushes unconditionally.
-				// We flush on a newline only.
-				buffer.write(b, off, len);
-				if ( b[off + len - 1] == '\n' ) // TODO: search the entire string?
-					flush();
-			}
-		});
+		DEBUG_STREAM.set(
+			// The default implementation flushes unconditionally.
+			// We flush on a newline only.
+			// TODO: search the entire string?
+			System.getProperty("line.separator").length() == 2 ?
+				// \r\n
+				new PrintStream(buffer, false) {
+					@Override
+					public void write(byte[] b, int off, int len) {
+						int last = off + len - 1;
+						if ( b[last] == '\n' ) {
+							buffer.write(b, off, len - (off < last && b[last - 1] == '\r' ? 2 : 1));
+							flush();
+						} else
+							buffer.write(b, off, len);
+					}
+				} :
+				// \n
+				new PrintStream(buffer, false) {
+					@Override
+					public void write(byte[] b, int off, int len) {
+						if ( b[off + len - 1] == '\n' ) {
+							buffer.write(b, off, len - 1);
+							flush();
+						} else
+							buffer.write(b, off, len);
+					}
+				}
+		);
 	}
 
 	/** Implementations of this interface may used with {@link #setDebugStreamConsumer} to receive debug messages. */
