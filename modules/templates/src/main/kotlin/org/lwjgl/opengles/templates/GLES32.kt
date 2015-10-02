@@ -15,8 +15,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"MULTISAMPLE_LINE_WIDTH_RANGE_ARB" _ 0x9381,
-		"MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB" _ 0x9382
+		"MULTISAMPLE_LINE_WIDTH_RANGE_ARB"..0x9381,
+		"MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB"..0x9382
 	)
 	
 	// KHR_blend_equation_advanced
@@ -25,21 +25,21 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.",
 
-		"MULTIPLY" _ 0x9294,
-		"SCREEN" _ 0x9295,
-		"OVERLAY" _ 0x9296,
-		"DARKEN" _ 0x9297,
-		"LIGHTEN" _ 0x9298,
-		"COLORDODGE" _ 0x9299,
-		"COLORBURN" _ 0x929A,
-		"HARDLIGHT" _ 0x929B,
-		"SOFTLIGHT" _ 0x929C,
-		"DIFFERENCE" _ 0x929E,
-		"EXCLUSION" _ 0x92A0,
-		"HSL_HUE" _ 0x92AD,
-		"HSL_SATURATION" _ 0x92AE,
-		"HSL_COLOR" _ 0x92AF,
-		"HSL_LUMINOSITY" _ 0x92B0
+		"MULTIPLY"..0x9294,
+		"SCREEN"..0x9295,
+		"OVERLAY"..0x9296,
+		"DARKEN"..0x9297,
+		"LIGHTEN"..0x9298,
+		"COLORDODGE"..0x9299,
+		"COLORBURN"..0x929A,
+		"HARDLIGHT"..0x929B,
+		"SOFTLIGHT"..0x929C,
+		"DIFFERENCE"..0x929E,
+		"EXCLUSION"..0x92A0,
+		"HSL_HUE"..0x92AD,
+		"HSL_SATURATION"..0x92AE,
+		"HSL_COLOR"..0x92AF,
+		"HSL_LUMINOSITY"..0x92B0
 	)
 
 	void(
@@ -82,33 +82,33 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
 
-		"DEBUG_OUTPUT" _ 0x92E0,
-		"DEBUG_OUTPUT_SYNCHRONOUS" _ 0x8242
+		"DEBUG_OUTPUT"..0x92E0,
+		"DEBUG_OUTPUT_SYNCHRONOUS"..0x8242
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
-		"CONTEXT_FLAG_DEBUG_BIT" _ 0x00000002
+		"CONTEXT_FLAG_DEBUG_BIT"..0x00000002
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv,  GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES" _ 0x9145,
-		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH" _ 0x8243,
-		"MAX_DEBUG_GROUP_STACK_DEPTH" _ 0x826C,
-		"DEBUG_GROUP_STACK_DEPTH" _ 0x826D,
-		"MAX_LABEL_LENGTH" _ 0x82E8
+		"MAX_DEBUG_MESSAGE_LENGTH"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES"..0x9144,
+		"DEBUG_LOGGED_MESSAGES"..0x9145,
+		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH"..0x8243,
+		"MAX_DEBUG_GROUP_STACK_DEPTH"..0x826C,
+		"DEBUG_GROUP_STACK_DEPTH"..0x826D,
+		"MAX_LABEL_LENGTH"..0x82E8
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
-		"DEBUG_CALLBACK_FUNCTION" _ 0x8244,
-		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
+		"DEBUG_CALLBACK_FUNCTION"..0x8244,
+		"DEBUG_CALLBACK_USER_PARAM"..0x8245
 	)
 
 	val DebugSources = IntConstant(
@@ -117,12 +117,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SOURCE_API" _ 0x8246,
-		"DEBUG_SOURCE_WINDOW_SYSTEM" _ 0x8247,
-		"DEBUG_SOURCE_SHADER_COMPILER" _ 0x8248,
-		"DEBUG_SOURCE_THIRD_PARTY" _ 0x8249,
-		"DEBUG_SOURCE_APPLICATION" _ 0x824A,
-		"DEBUG_SOURCE_OTHER" _ 0x824B
+		"DEBUG_SOURCE_API"..0x8246,
+		"DEBUG_SOURCE_WINDOW_SYSTEM"..0x8247,
+		"DEBUG_SOURCE_SHADER_COMPILER"..0x8248,
+		"DEBUG_SOURCE_THIRD_PARTY"..0x8249,
+		"DEBUG_SOURCE_APPLICATION"..0x824A,
+		"DEBUG_SOURCE_OTHER"..0x824B
 	).javaDocLinks
 
 	val DebugTypes = IntConstant(
@@ -131,13 +131,13 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_ERROR" _ 0x824C,
-		"DEBUG_TYPE_DEPRECATED_BEHAVIOR" _ 0x824D,
-		"DEBUG_TYPE_UNDEFINED_BEHAVIOR" _ 0x824E,
-		"DEBUG_TYPE_PORTABILITY" _ 0x824F,
-		"DEBUG_TYPE_PERFORMANCE" _ 0x8250,
-		"DEBUG_TYPE_OTHER" _ 0x8251,
-		"DEBUG_TYPE_MARKER" _ 0x8268
+		"DEBUG_TYPE_ERROR"..0x824C,
+		"DEBUG_TYPE_DEPRECATED_BEHAVIOR"..0x824D,
+		"DEBUG_TYPE_UNDEFINED_BEHAVIOR"..0x824E,
+		"DEBUG_TYPE_PORTABILITY"..0x824F,
+		"DEBUG_TYPE_PERFORMANCE"..0x8250,
+		"DEBUG_TYPE_OTHER"..0x8251,
+		"DEBUG_TYPE_MARKER"..0x8268
 	).javaDocLinks
 
 	IntConstant(
@@ -145,8 +145,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_PUSH_GROUP" _ 0x8269,
-		"DEBUG_TYPE_POP_GROUP" _ 0x826A
+		"DEBUG_TYPE_PUSH_GROUP"..0x8269,
+		"DEBUG_TYPE_POP_GROUP"..0x826A
 	)
 
 	val DebugSeverities = IntConstant(
@@ -155,28 +155,28 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		{@code severities} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SEVERITY_HIGH" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM" _ 0x9147,
-		"DEBUG_SEVERITY_LOW" _ 0x9148,
-		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
+		"DEBUG_SEVERITY_HIGH"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM"..0x9147,
+		"DEBUG_SEVERITY_LOW"..0x9148,
+		"DEBUG_SEVERITY_NOTIFICATION"..0x826B
 	).javaDocLinks
 
 	IntConstant(
 		"Returned by GetError.",
 
-		"STACK_UNDERFLOW" _ 0x0504,
-		"STACK_OVERFLOW" _ 0x0503
+		"STACK_UNDERFLOW"..0x0504,
+		"STACK_OVERFLOW"..0x0503
 	)
 
 	val DebugIdentifiers = IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
-		"BUFFER" _ 0x82E0,
-		"SHADER" _ 0x82E1,
-		"PROGRAM" _ 0x82E2,
-		"QUERY" _ 0x82E3,
-		"PROGRAM_PIPELINE" _ 0x82E4,
-		"SAMPLER" _ 0x82E6
+		"BUFFER"..0x82E0,
+		"SHADER"..0x82E1,
+		"PROGRAM"..0x82E2,
+		"QUERY"..0x82E3,
+		"PROGRAM_PIPELINE"..0x82E4,
+		"SAMPLER"..0x82E6
 	).javaDocLinks
 
 	void(
@@ -216,8 +216,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
+		SingleValue("id")..const..GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
@@ -240,8 +240,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLenum.IN("type", "the type of the debug message insert", DebugTypes),
 		GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
 		GLenum.IN("severity", "the severity of the debug messages to insert"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
+		AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+		const..GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
 	void(
@@ -275,8 +275,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
 		""",
 
-		nullable _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable _ const _ voidptr.IN(
+		nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable..const..voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -310,13 +310,13 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-		Check("count") _ nullable _ GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+		AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+		Check("count")..nullable..GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
+		Check("count")..nullable..GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
+		Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
+		nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
 	void(
@@ -324,7 +324,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ void_pp.OUT("params", "")
+		returnValue..Check(1)..void_pp.OUT("params", "")
 	)
 
 	void(
@@ -345,8 +345,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
 		GLuint.IN("id", "the identifier of the message"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
+		AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
+		const..GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
 	void(
@@ -373,8 +373,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -387,9 +387,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
+		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	void(
@@ -397,8 +397,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"Labels a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "a pointer identifying a sync object"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -406,9 +406,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"Retrieves the label of a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
+		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 	
 	// OES_draw_buffers_indexed
@@ -492,9 +492,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)" _ GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", ""),
+		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLint.IN("basevertex", "")
 	)
 
@@ -505,9 +505,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLenum.IN("mode", ""),
 		GLuint.IN("start", ""),
 		GLuint.IN("end", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)" _ GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", ""),
+		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLint.IN("basevertex", "")
 	)
 
@@ -516,9 +516,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)" _ GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", ""),
+		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("instancecount", ""),
 		GLint.IN("basevertex", "")
 	)
@@ -531,94 +531,94 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		the {@code params} parameter of GetShaderiv when {@code pname} is SHADER_TYPE.
 		""",
 
-		"GEOMETRY_SHADER" _ 0x8DD9
+		"GEOMETRY_SHADER"..0x8DD9
 	)
 
 	IntConstant(
 		"Accepted by the {@code stages} parameter of UseProgramStages.",
 
-		"GEOMETRY_SHADER_BIT" _ 0x00000004
+		"GEOMETRY_SHADER_BIT"..0x00000004
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"GEOMETRY_LINKED_VERTICES_OUT" _ 0x8916,
-		"GEOMETRY_LINKED_INPUT_TYPE" _ 0x8917,
-		"GEOMETRY_LINKED_OUTPUT_TYPE" _ 0x8918,
-		"GEOMETRY_SHADER_INVOCATIONS" _ 0x887F
+		"GEOMETRY_LINKED_VERTICES_OUT"..0x8916,
+		"GEOMETRY_LINKED_INPUT_TYPE"..0x8917,
+		"GEOMETRY_LINKED_OUTPUT_TYPE"..0x8918,
+		"GEOMETRY_SHADER_INVOCATIONS"..0x887F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v.",
 
-		"LAYER_PROVOKING_VERTEX" _ 0x825E,
-		"MAX_GEOMETRY_UNIFORM_COMPONENTS" _ 0x8DDF,
-		"MAX_GEOMETRY_UNIFORM_BLOCKS" _ 0x8A2C,
-		"MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS" _ 0x8A32,
-		"MAX_GEOMETRY_INPUT_COMPONENTS" _ 0x9123,
-		"MAX_GEOMETRY_OUTPUT_COMPONENTS" _ 0x9124,
-		"MAX_GEOMETRY_OUTPUT_VERTICES" _ 0x8DE0,
-		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS" _ 0x8DE1,
-		"MAX_GEOMETRY_SHADER_INVOCATIONS" _ 0x8E5A,
-		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS" _ 0x8C29,
-		"MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS" _ 0x92CF,
-		"MAX_GEOMETRY_ATOMIC_COUNTERS" _ 0x92D5,
-		"MAX_GEOMETRY_IMAGE_UNIFORMS" _ 0x90CD,
-		"MAX_GEOMETRY_SHADER_STORAGE_BLOCKS" _ 0x90D7
+		"LAYER_PROVOKING_VERTEX"..0x825E,
+		"MAX_GEOMETRY_UNIFORM_COMPONENTS"..0x8DDF,
+		"MAX_GEOMETRY_UNIFORM_BLOCKS"..0x8A2C,
+		"MAX_COMBINED_GEOMETRY_UNIFORM_COMPONENTS"..0x8A32,
+		"MAX_GEOMETRY_INPUT_COMPONENTS"..0x9123,
+		"MAX_GEOMETRY_OUTPUT_COMPONENTS"..0x9124,
+		"MAX_GEOMETRY_OUTPUT_VERTICES"..0x8DE0,
+		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS"..0x8DE1,
+		"MAX_GEOMETRY_SHADER_INVOCATIONS"..0x8E5A,
+		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS"..0x8C29,
+		"MAX_GEOMETRY_ATOMIC_COUNTER_BUFFERS"..0x92CF,
+		"MAX_GEOMETRY_ATOMIC_COUNTERS"..0x92D5,
+		"MAX_GEOMETRY_IMAGE_UNIFORMS"..0x90CD,
+		"MAX_GEOMETRY_SHADER_STORAGE_BLOCKS"..0x90D7
 	)
 
 	IntConstant(
 		"Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX.",
 
-		"FIRST_VERTEX_CONVENTION" _ 0x8E4D,
-		"LAST_VERTEX_CONVENTION" _ 0x8E4E,
-		"UNDEFINED_VERTEX" _ 0x8260
+		"FIRST_VERTEX_CONVENTION"..0x8E4D,
+		"LAST_VERTEX_CONVENTION"..0x8E4E,
+		"UNDEFINED_VERTEX"..0x8260
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryiv, and GetQueryObjectuiv.",
 
-		"PRIMITIVES_GENERATED" _ 0x8C87
+		"PRIMITIVES_GENERATED"..0x8C87
 	)
 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of DrawArrays, DrawElements, and other commands which draw primitives.",
 
-		"LINES_ADJACENCY" _ 0xA,
-		"LINE_STRIP_ADJACENCY" _ 0xB,
-		"TRIANGLES_ADJACENCY" _ 0xC,
-		"TRIANGLE_STRIP_ADJACENCY" _ 0xD
+		"LINES_ADJACENCY"..0xA,
+		"LINE_STRIP_ADJACENCY"..0xB,
+		"TRIANGLES_ADJACENCY"..0xC,
+		"TRIANGLE_STRIP_ADJACENCY"..0xD
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of FramebufferParameteri, and GetFramebufferParameteriv.",
 
-		"FRAMEBUFFER_DEFAULT_LAYERS" _ 0x9312
+		"FRAMEBUFFER_DEFAULT_LAYERS"..0x9312
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, and GetFloatv.",
 
-		"MAX_FRAMEBUFFER_LAYERS" _ 0x9317
+		"MAX_FRAMEBUFFER_LAYERS"..0x9317
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS" _ 0x8DA8
+		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS"..0x8DA8
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_LAYERED" _ 0x8DA7
+		"FRAMEBUFFER_ATTACHMENT_LAYERED"..0x8DA7
 	)
 
 	IntConstant(
 		"Accepted by the {@code props} parameter of GetProgramResourceiv.",
 
-		"REFERENCED_BY_GEOMETRY_SHADER" _ 0x9309
+		"REFERENCED_BY_GEOMETRY_SHADER"..0x9309
 	)
 
 	void(
@@ -636,7 +636,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PRIMITIVE_BOUNDING_BOX_ARB" _ 0x92BE
+		"PRIMITIVE_BOUNDING_BOX_ARB"..0x92BE
 	)
 
 	void(
@@ -664,30 +664,30 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Returned by #GetGraphicsResetStatus().",
 
-		"NO_ERROR" _ 0x0000,
-		"GUILTY_CONTEXT_RESET" _ 0x8253,
-		"INNOCENT_CONTEXT_RESET" _ 0x8254,
-		"UNKNOWN_CONTEXT_RESET" _ 0x8255
+		"NO_ERROR"..0x0000,
+		"GUILTY_CONTEXT_RESET"..0x8253,
+		"INNOCENT_CONTEXT_RESET"..0x8254,
+		"UNKNOWN_CONTEXT_RESET"..0x8255
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"CONTEXT_ROBUST_ACCESS" _ 0x90F3,
-		"RESET_NOTIFICATION_STRATEGY" _ 0x8256
+		"CONTEXT_ROBUST_ACCESS"..0x90F3,
+		"RESET_NOTIFICATION_STRATEGY"..0x8256
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv and related simple queries when {@code value} is #RESET_NOTIFICATION_STRATEGY.",
 
-		"LOSE_CONTEXT_ON_RESET" _ 0x8252,
-		"NO_RESET_NOTIFICATION" _ 0x8261
+		"LOSE_CONTEXT_ON_RESET"..0x8252,
+		"NO_RESET_NOTIFICATION"..0x8261
 	)
 
 	IntConstant(
 		"Returned by GLES20#GetError().",
 
-		"CONTEXT_LOST" _ 0x0507
+		"CONTEXT_LOST"..0x0507
 	)
 
 	GLenum(
@@ -740,12 +740,12 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
 		GLenum.IN("format", "the pixel format"),
 		GLenum.IN("type", "the pixel type"),
-		AutoSize("pixels") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		PIXEL_PACK_BUFFER _ MultiType(
+		AutoSize("pixels")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		PIXEL_PACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		) _ void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		)..void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
 	void(
@@ -754,8 +754,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -764,8 +764,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -774,8 +774,8 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 	
 	// OES_sample_shading
@@ -786,13 +786,13 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GetInteger64v.
 		""",
 
-		"SAMPLE_SHADING" _ 0x8C36
+		"SAMPLE_SHADING"..0x8C36
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, and GetFloatv.",
 
-		"MIN_SAMPLE_SHADING_VALUE" _ 0x8C37
+		"MIN_SAMPLE_SHADING_VALUE"..0x8C37
 	)
 
 	void(
@@ -807,9 +807,9 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v.",
 
-		"MIN_FRAGMENT_INTERPOLATION_OFFSET" _ 0x8E5B,
-		"MAX_FRAGMENT_INTERPOLATION_OFFSET" _ 0x8E5C,
-		"FRAGMENT_INTERPOLATION_OFFSET_BITS" _ 0x8E5D
+		"MIN_FRAGMENT_INTERPOLATION_OFFSET"..0x8E5B,
+		"MAX_FRAGMENT_INTERPOLATION_OFFSET"..0x8E5C,
+		"FRAGMENT_INTERPOLATION_OFFSET_BITS"..0x8E5D
 	)
 	
 	// OES_tessellation_shader
@@ -817,75 +817,75 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 	IntConstant(
 		"Accepted by the {@code mode} parameter of DrawArrays, DrawElements, and other commands which draw primitives.",
 
-		"PATCHES" _ 0xE
+		"PATCHES"..0xE
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PatchParameteri, GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PATCH_VERTICES" _ 0x8E72
+		"PATCH_VERTICES"..0x8E72
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"TESS_CONTROL_OUTPUT_VERTICES" _ 0x8E75,
-		"TESS_GEN_MODE" _ 0x8E76,
-		"TESS_GEN_SPACING" _ 0x8E77,
-		"TESS_GEN_VERTEX_ORDER" _ 0x8E78,
-		"TESS_GEN_POINT_MODE" _ 0x8E79
+		"TESS_CONTROL_OUTPUT_VERTICES"..0x8E75,
+		"TESS_GEN_MODE"..0x8E76,
+		"TESS_GEN_SPACING"..0x8E77,
+		"TESS_GEN_VERTEX_ORDER"..0x8E78,
+		"TESS_GEN_POINT_MODE"..0x8E79
 	)
 
 	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_MODE.",
 
-		"ISOLINES" _ 0x8E7A,
-		"QUADS" _ 0x0007
+		"ISOLINES"..0x8E7A,
+		"QUADS"..0x0007
 	)
 
 	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_SPACING.",
 
-		"FRACTIONAL_ODD" _ 0x8E7B,
-		"FRACTIONAL_EVEN" _ 0x8E7C
+		"FRACTIONAL_ODD"..0x8E7B,
+		"FRACTIONAL_EVEN"..0x8E7C
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"MAX_PATCH_VERTICES" _ 0x8E7D,
-		"MAX_TESS_GEN_LEVEL" _ 0x8E7E,
-		"MAX_TESS_CONTROL_UNIFORM_COMPONENTS" _ 0x8E7F,
-		"MAX_TESS_EVALUATION_UNIFORM_COMPONENTS" _ 0x8E80,
-		"MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS" _ 0x8E81,
-		"MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS" _ 0x8E82,
-		"MAX_TESS_CONTROL_OUTPUT_COMPONENTS" _ 0x8E83,
-		"MAX_TESS_PATCH_COMPONENTS" _ 0x8E84,
-		"MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS" _ 0x8E85,
-		"MAX_TESS_EVALUATION_OUTPUT_COMPONENTS" _ 0x8E86,
-		"MAX_TESS_CONTROL_UNIFORM_BLOCKS" _ 0x8E89,
-		"MAX_TESS_EVALUATION_UNIFORM_BLOCKS" _ 0x8E8A,
-		"MAX_TESS_CONTROL_INPUT_COMPONENTS" _ 0x886C,
-		"MAX_TESS_EVALUATION_INPUT_COMPONENTS" _ 0x886D,
-		"MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS" _ 0x8E1E,
-		"MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS" _ 0x8E1F,
-		"MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS" _ 0x92CD,
-		"MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS" _ 0x92CE,
-		"MAX_TESS_CONTROL_ATOMIC_COUNTERS" _ 0x92D3,
-		"MAX_TESS_EVALUATION_ATOMIC_COUNTERS" _ 0x92D4,
-		"MAX_TESS_CONTROL_IMAGE_UNIFORMS" _ 0x90CB,
-		"MAX_TESS_EVALUATION_IMAGE_UNIFORMS" _ 0x90CC,
-		"MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS" _ 0x90D8,
-		"MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS" _ 0x90D9,
-		"PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED" _ 0x8221
+		"MAX_PATCH_VERTICES"..0x8E7D,
+		"MAX_TESS_GEN_LEVEL"..0x8E7E,
+		"MAX_TESS_CONTROL_UNIFORM_COMPONENTS"..0x8E7F,
+		"MAX_TESS_EVALUATION_UNIFORM_COMPONENTS"..0x8E80,
+		"MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS"..0x8E81,
+		"MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS"..0x8E82,
+		"MAX_TESS_CONTROL_OUTPUT_COMPONENTS"..0x8E83,
+		"MAX_TESS_PATCH_COMPONENTS"..0x8E84,
+		"MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS"..0x8E85,
+		"MAX_TESS_EVALUATION_OUTPUT_COMPONENTS"..0x8E86,
+		"MAX_TESS_CONTROL_UNIFORM_BLOCKS"..0x8E89,
+		"MAX_TESS_EVALUATION_UNIFORM_BLOCKS"..0x8E8A,
+		"MAX_TESS_CONTROL_INPUT_COMPONENTS"..0x886C,
+		"MAX_TESS_EVALUATION_INPUT_COMPONENTS"..0x886D,
+		"MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS"..0x8E1E,
+		"MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS"..0x8E1F,
+		"MAX_TESS_CONTROL_ATOMIC_COUNTER_BUFFERS"..0x92CD,
+		"MAX_TESS_EVALUATION_ATOMIC_COUNTER_BUFFERS"..0x92CE,
+		"MAX_TESS_CONTROL_ATOMIC_COUNTERS"..0x92D3,
+		"MAX_TESS_EVALUATION_ATOMIC_COUNTERS"..0x92D4,
+		"MAX_TESS_CONTROL_IMAGE_UNIFORMS"..0x90CB,
+		"MAX_TESS_EVALUATION_IMAGE_UNIFORMS"..0x90CC,
+		"MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS"..0x90D8,
+		"MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS"..0x90D9,
+		"PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED"..0x8221
 	)
 
 	IntConstant(
 		"Accepted by the {@code props} parameter of GetProgramResourceiv.",
 
-		"IS_PER_PATCH" _ 0x92E7,
-		"REFERENCED_BY_TESS_CONTROL_SHADER" _ 0x9307,
-		"REFERENCED_BY_TESS_EVALUATION_SHADER" _ 0x9308
+		"IS_PER_PATCH"..0x92E7,
+		"REFERENCED_BY_TESS_CONTROL_SHADER"..0x9307,
+		"REFERENCED_BY_TESS_EVALUATION_SHADER"..0x9308
 	)
 
 	IntConstant(
@@ -894,15 +894,15 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		parameter of GetShaderiv.
 		""",
 
-		"TESS_EVALUATION_SHADER" _ 0x8E87,
-		"TESS_CONTROL_SHADER" _ 0x8E88
+		"TESS_EVALUATION_SHADER"..0x8E87,
+		"TESS_CONTROL_SHADER"..0x8E88
 	)
 
 	IntConstant(
 		"Accepted by the {@code stages} parameter of UseProgramStages.",
 
-		"TESS_CONTROL_SHADER_BIT" _ 0x00000008,
-		"TESS_EVALUATION_SHADER_BIT" _ 0x00000010
+		"TESS_CONTROL_SHADER_BIT"..0x00000008,
+		"TESS_EVALUATION_SHADER_BIT"..0x00000010
 	)
 
 	void(
@@ -922,7 +922,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GetTexParameterIuiv, GetSamplerParameteriv, GetSamplerParameterfv, GetSamplerParameterIiv, and GetSamplerParameterIuiv.
 		""",
 
-		"TEXTURE_BORDER_COLOR" _ 0x1004
+		"TEXTURE_BORDER_COLOR"..0x1004
 	)
 
 	IntConstant(
@@ -934,7 +934,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		or TEXTURE_WRAP_R.
 		""",
 
-		"CLAMP_TO_BORDER" _ 0x812D
+		"CLAMP_TO_BORDER"..0x812D
 	)
 
 	void(
@@ -943,7 +943,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param") _ const _ GLint_p.IN("params", "")
+		SingleValue("param")..const..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -952,7 +952,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param") _ const _ GLuint_p.IN("params", "")
+		SingleValue("param")..const..GLuint_p.IN("params", "")
 	)
 
 	void(
@@ -961,7 +961,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "")
+		returnValue..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -970,7 +970,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("params", "")
+		returnValue..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -979,7 +979,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param") _ const _ GLint_p.IN("params", "")
+		SingleValue("param")..const..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -988,7 +988,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		SingleValue("param") _ const _ GLuint_p.IN("params", "")
+		SingleValue("param")..const..GLuint_p.IN("params", "")
 	)
 
 	void(
@@ -997,7 +997,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "")
+		returnValue..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -1006,7 +1006,7 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("params", "")
+		returnValue..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	// OES_texture_buffer
@@ -1017,13 +1017,13 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GetBufferPointerv, TexBuffer, and TexBufferRange.
 		""",
 
-		"TEXTURE_BUFFER" _ 0x8C2A
+		"TEXTURE_BUFFER"..0x8C2A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetFloatv, and GetIntegerv.",
 
-		"TEXTURE_BUFFER_BINDING" _ 0x8C2A
+		"TEXTURE_BUFFER_BINDING"..0x8C2A
 	)
 
 	IntConstant(
@@ -1034,20 +1034,20 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		GetProgramResourceiv when the TYPE property is queried on the UNIFORM interface.
 		""",
 
-		"SAMPLER_BUFFER" _ 0x8DC2,
-		"INT_SAMPLER_BUFFER" _ 0x8DD0,
-		"UNSIGNED_INT_SAMPLER_BUFFER" _ 0x8DD8,
-		"IMAGE_BUFFER" _ 0x9051,
-		"INT_IMAGE_BUFFER" _ 0x905C,
-		"UNSIGNED_INT_IMAGE_BUFFER" _ 0x9067
+		"SAMPLER_BUFFER"..0x8DC2,
+		"INT_SAMPLER_BUFFER"..0x8DD0,
+		"UNSIGNED_INT_SAMPLER_BUFFER"..0x8DD8,
+		"IMAGE_BUFFER"..0x9051,
+		"INT_IMAGE_BUFFER"..0x905C,
+		"UNSIGNED_INT_IMAGE_BUFFER"..0x9067
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_BUFFER_DATA_STORE_BINDING" _ 0x8C2D,
-		"TEXTURE_BUFFER_OFFSET" _ 0x919D,
-		"TEXTURE_BUFFER_SIZE" _ 0x919E
+		"TEXTURE_BUFFER_DATA_STORE_BINDING"..0x8C2D,
+		"TEXTURE_BUFFER_OFFSET"..0x919D,
+		"TEXTURE_BUFFER_SIZE"..0x919E
 	)
 
 	void(
@@ -1078,34 +1078,34 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		TextureStorage3D.
 		""",
 
-		"COMPRESSED_RGBA_ASTC_4x4" _ 0x93B0,
-		"COMPRESSED_RGBA_ASTC_5x4" _ 0x93B1,
-		"COMPRESSED_RGBA_ASTC_5x5" _ 0x93B2,
-		"COMPRESSED_RGBA_ASTC_6x5" _ 0x93B3,
-		"COMPRESSED_RGBA_ASTC_6x6" _ 0x93B4,
-		"COMPRESSED_RGBA_ASTC_8x5" _ 0x93B5,
-		"COMPRESSED_RGBA_ASTC_8x6" _ 0x93B6,
-		"COMPRESSED_RGBA_ASTC_8x8" _ 0x93B7,
-		"COMPRESSED_RGBA_ASTC_10x5" _ 0x93B8,
-		"COMPRESSED_RGBA_ASTC_10x6" _ 0x93B9,
-		"COMPRESSED_RGBA_ASTC_10x8" _ 0x93BA,
-		"COMPRESSED_RGBA_ASTC_10x10" _ 0x93BB,
-		"COMPRESSED_RGBA_ASTC_12x10" _ 0x93BC,
-		"COMPRESSED_RGBA_ASTC_12x12" _ 0x93BD,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_4x4" _ 0x93D0,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_5x4" _ 0x93D1,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_5x5" _ 0x93D2,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_6x5" _ 0x93D3,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_6x6" _ 0x93D4,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x5" _ 0x93D5,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x6" _ 0x93D6,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x8" _ 0x93D7,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x5" _ 0x93D8,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x6" _ 0x93D9,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x8" _ 0x93DA,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x10" _ 0x93DB,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_12x10" _ 0x93DC,
-		"COMPRESSED_SRGB8_ALPHA8_ASTC_12x12" _ 0x93DD
+		"COMPRESSED_RGBA_ASTC_4x4"..0x93B0,
+		"COMPRESSED_RGBA_ASTC_5x4"..0x93B1,
+		"COMPRESSED_RGBA_ASTC_5x5"..0x93B2,
+		"COMPRESSED_RGBA_ASTC_6x5"..0x93B3,
+		"COMPRESSED_RGBA_ASTC_6x6"..0x93B4,
+		"COMPRESSED_RGBA_ASTC_8x5"..0x93B5,
+		"COMPRESSED_RGBA_ASTC_8x6"..0x93B6,
+		"COMPRESSED_RGBA_ASTC_8x8"..0x93B7,
+		"COMPRESSED_RGBA_ASTC_10x5"..0x93B8,
+		"COMPRESSED_RGBA_ASTC_10x6"..0x93B9,
+		"COMPRESSED_RGBA_ASTC_10x8"..0x93BA,
+		"COMPRESSED_RGBA_ASTC_10x10"..0x93BB,
+		"COMPRESSED_RGBA_ASTC_12x10"..0x93BC,
+		"COMPRESSED_RGBA_ASTC_12x12"..0x93BD,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_4x4"..0x93D0,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_5x4"..0x93D1,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_5x5"..0x93D2,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_6x5"..0x93D3,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_6x6"..0x93D4,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x5"..0x93D5,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x6"..0x93D6,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_8x8"..0x93D7,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x5"..0x93D8,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x6"..0x93D9,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x8"..0x93DA,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_10x10"..0x93DB,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_12x10"..0x93DC,
+		"COMPRESSED_SRGB8_ALPHA8_ASTC_12x12"..0x93DD
 	)
 
 	// OES_texture_cube_map_array
@@ -1117,25 +1117,25 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		and CopyTexSubImage3D.
 		""",
 
-		"TEXTURE_CUBE_MAP_ARRAY" _ 0x9009
+		"TEXTURE_CUBE_MAP_ARRAY"..0x9009
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv and GetFloatv.",
 
-		"TEXTURE_BINDING_CUBE_MAP_ARRAY" _ 0x900A
+		"TEXTURE_BINDING_CUBE_MAP_ARRAY"..0x900A
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform, and by the {@code params} parameter of GetProgramResourceiv when {@code props} is TYPE.",
 
-		"SAMPLER_CUBE_MAP_ARRAY" _ 0x900C,
-		"SAMPLER_CUBE_MAP_ARRAY_SHADOW" _ 0x900D,
-		"INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900E,
-		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900F,
-		"IMAGE_CUBE_MAP_ARRAY" _ 0x9054,
-		"INT_IMAGE_CUBE_MAP_ARRAY" _ 0x905F,
-		"UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY" _ 0x906A
+		"SAMPLER_CUBE_MAP_ARRAY"..0x900C,
+		"SAMPLER_CUBE_MAP_ARRAY_SHADOW"..0x900D,
+		"INT_SAMPLER_CUBE_MAP_ARRAY"..0x900E,
+		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY"..0x900F,
+		"IMAGE_CUBE_MAP_ARRAY"..0x9054,
+		"INT_IMAGE_CUBE_MAP_ARRAY"..0x905F,
+		"UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY"..0x906A
 	)
 
 	// OES_texture_storage_multisample_2d_array
@@ -1147,21 +1147,21 @@ val GLES32 = "GLES32".nativeClassGLES("GLES32", postfix = "") {
 		TEXTURE_2D_MULTISAMPLE_ARRAY.
 		""",
 
-		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
+		"TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9102
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY" _ 0x9105
+		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY"..0x9105
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910B,
-		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910C,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910D
+		"SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910B,
+		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910C,
+		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
 	)
 
 	void(

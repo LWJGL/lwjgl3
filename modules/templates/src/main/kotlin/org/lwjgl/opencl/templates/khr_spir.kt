@@ -28,7 +28,7 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 		query implies that SPIR version 1.2 and 2.0 are supported by the implementation.
 		""",
 
-		"DEVICE_SPIR_VERSIONS" _ 0x40E0
+		"DEVICE_SPIR_VERSIONS"..0x40E0
 	)
 
 	IntConstant(
@@ -40,6 +40,6 @@ val khr_spir = "KHRSPIR".nativeClassCL("khr_spir", KHR) {
 		CL12#PROGRAM_BINARY_TYPE_LIBRARY. If processed with CL10#BuildProgram(), the result will be a binary of type CL12#PROGRAM_BINARY_TYPE_EXECUTABLE.
 		""",
 
-		"PROGRAM_BINARY_TYPE_INTERMEDIATE" _ 0x40E1
+		"PROGRAM_BINARY_TYPE_INTERMEDIATE"..0x40E1
 	)
 }

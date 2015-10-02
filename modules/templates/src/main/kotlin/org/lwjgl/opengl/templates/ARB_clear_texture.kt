@@ -33,7 +33,7 @@ val ARB_clear_texture = "ARBClearTexture".nativeClassGL("ARB_clear_texture") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
 
-		"CLEAR_TEXTURE" _ 0x9365
+		"CLEAR_TEXTURE"..0x9365
 	)
 
 	GL44 reuse "ClearTexSubImage"

@@ -30,15 +30,15 @@ val ARB_blend_func_extended = "ARBBlendFuncExtended".nativeClassGL("ARB_blend_fu
 		{@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparatei.
 		""",
 
-		"SRC1_COLOR" _ 0x88F9,
-		"ONE_MINUS_SRC1_COLOR" _ 0x88FA,
-		"ONE_MINUS_SRC1_ALPHA" _ 0x88FB
+		"SRC1_COLOR"..0x88F9,
+		"ONE_MINUS_SRC1_COLOR"..0x88FA,
+		"ONE_MINUS_SRC1_ALPHA"..0x88FB
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.",
 
-		"MAX_DUAL_SOURCE_DRAW_BUFFERS" _ 0x88FC
+		"MAX_DUAL_SOURCE_DRAW_BUFFERS"..0x88FC
 	)
 
 	GL33 reuse "BindFragDataLocationIndexed"

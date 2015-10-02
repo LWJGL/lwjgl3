@@ -35,55 +35,55 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 	IntConstant(
 		"Accepted by the {@code pname} argument of GetHandleARB.",
 
-		"PROGRAM_OBJECT_ARB" _ 0x8B40
+		"PROGRAM_OBJECT_ARB"..0x8B40
 	)
 
 	val Parameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetObjectParameter{fi}vARB.",
 
-		"OBJECT_TYPE_ARB" _ 0x8B4E,
-		"OBJECT_SUBTYPE_ARB" _ 0x8B4F,
-		"OBJECT_DELETE_STATUS_ARB" _ 0x8B80,
-		"OBJECT_COMPILE_STATUS_ARB" _ 0x8B81,
-		"OBJECT_LINK_STATUS_ARB" _ 0x8B82,
-		"OBJECT_VALIDATE_STATUS_ARB" _ 0x8B83,
-		"OBJECT_INFO_LOG_LENGTH_ARB" _ 0x8B84,
-		"OBJECT_ATTACHED_OBJECTS_ARB" _ 0x8B85,
-		"OBJECT_ACTIVE_UNIFORMS_ARB" _ 0x8B86,
-		"OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB" _ 0x8B87,
-		"OBJECT_SHADER_SOURCE_LENGTH_ARB" _ 0x8B88
+		"OBJECT_TYPE_ARB"..0x8B4E,
+		"OBJECT_SUBTYPE_ARB"..0x8B4F,
+		"OBJECT_DELETE_STATUS_ARB"..0x8B80,
+		"OBJECT_COMPILE_STATUS_ARB"..0x8B81,
+		"OBJECT_LINK_STATUS_ARB"..0x8B82,
+		"OBJECT_VALIDATE_STATUS_ARB"..0x8B83,
+		"OBJECT_INFO_LOG_LENGTH_ARB"..0x8B84,
+		"OBJECT_ATTACHED_OBJECTS_ARB"..0x8B85,
+		"OBJECT_ACTIVE_UNIFORMS_ARB"..0x8B86,
+		"OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB"..0x8B87,
+		"OBJECT_SHADER_SOURCE_LENGTH_ARB"..0x8B88
 	).javaDocLinks
 
 	IntConstant(
 		"Returned by the {@code params} parameter of GetObjectParameter{fi}vARB.",
 
-		"SHADER_OBJECT_ARB" _ 0x8B48
+		"SHADER_OBJECT_ARB"..0x8B48
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniformARB.",
 
-		"FLOAT_VEC2_ARB" _ 0x8B50,
-		"FLOAT_VEC3_ARB" _ 0x8B51,
-		"FLOAT_VEC4_ARB" _ 0x8B52,
-		"INT_VEC2_ARB" _ 0x8B53,
-		"INT_VEC3_ARB" _ 0x8B54,
-		"INT_VEC4_ARB" _ 0x8B55,
-		"BOOL_ARB" _ 0x8B56,
-		"BOOL_VEC2_ARB" _ 0x8B57,
-		"BOOL_VEC3_ARB" _ 0x8B58,
-		"BOOL_VEC4_ARB" _ 0x8B59,
-		"FLOAT_MAT2_ARB" _ 0x8B5A,
-		"FLOAT_MAT3_ARB" _ 0x8B5B,
-		"FLOAT_MAT4_ARB" _ 0x8B5C,
-		"SAMPLER_1D_ARB" _ 0x8B5D,
-		"SAMPLER_2D_ARB" _ 0x8B5E,
-		"SAMPLER_3D_ARB" _ 0x8B5F,
-		"SAMPLER_CUBE_ARB" _ 0x8B60,
-		"SAMPLER_1D_SHADOW_ARB" _ 0x8B61,
-		"SAMPLER_2D_SHADOW_ARB" _ 0x8B62,
-		"SAMPLER_2D_RECT_ARB" _ 0x8B63,
-		"SAMPLER_2D_RECT_SHADOW_ARB" _ 0x8B64
+		"FLOAT_VEC2_ARB"..0x8B50,
+		"FLOAT_VEC3_ARB"..0x8B51,
+		"FLOAT_VEC4_ARB"..0x8B52,
+		"INT_VEC2_ARB"..0x8B53,
+		"INT_VEC3_ARB"..0x8B54,
+		"INT_VEC4_ARB"..0x8B55,
+		"BOOL_ARB"..0x8B56,
+		"BOOL_VEC2_ARB"..0x8B57,
+		"BOOL_VEC3_ARB"..0x8B58,
+		"BOOL_VEC4_ARB"..0x8B59,
+		"FLOAT_MAT2_ARB"..0x8B5A,
+		"FLOAT_MAT3_ARB"..0x8B5B,
+		"FLOAT_MAT4_ARB"..0x8B5C,
+		"SAMPLER_1D_ARB"..0x8B5D,
+		"SAMPLER_2D_ARB"..0x8B5E,
+		"SAMPLER_3D_ARB"..0x8B5F,
+		"SAMPLER_CUBE_ARB"..0x8B60,
+		"SAMPLER_1D_SHADOW_ARB"..0x8B61,
+		"SAMPLER_2D_SHADOW_ARB"..0x8B62,
+		"SAMPLER_2D_RECT_ARB"..0x8B63,
+		"SAMPLER_2D_RECT_SHADOW_ARB"..0x8B64
 	)
 
 	void(
@@ -138,9 +138,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("shaderObj", "the shader object"),
-		AutoSize("string", "length") _ GLsizei.IN("count", "the number of strings in the array"),
-		PointerArray(GLcharARB_p, "string", "length") _ const _ GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
-		nullable _ const _ GLint_p.IN(
+		AutoSize("string", "length")..GLsizei.IN("count", "the number of strings in the array"),
+		PointerArray(GLcharARB_p, "string", "length")..const..GLcharARB_pp.IN("string", "an array of pointers to one or more, optionally null terminated, character strings that make up the source code"),
+		nullable..const..GLint_p.IN(
 			"length",
 			"""
 			an array with the number of charARBs in each string (the string length). Each element in this array can be set to negative one (or smaller),
@@ -335,8 +335,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of float values.",
 
 		uniformLocation,
-		AutoSize("value") _ GLsizei.IN("count", "the number of float values to load"),
-		const _ GLfloat_p.IN("value", "the values to load")
+		AutoSize("value")..GLsizei.IN("count", "the number of float values to load"),
+		const..GLfloat_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -344,8 +344,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec2 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 1 _ GLsizei.IN("count", "the number of vec2 vectors to load"),
-		const _ GLfloat_p.IN("value", "the values to load")
+		AutoSize("value") shr 1..GLsizei.IN("count", "the number of vec2 vectors to load"),
+		const..GLfloat_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -353,8 +353,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec3 vectors.",
 
 		uniformLocation,
-		AutoSize("value") / 3 _ GLsizei.IN("count", "the number of vec3 vectors to load"),
-		const _ GLfloat_p.IN("value", "the values to load")
+		AutoSize("value") / 3..GLsizei.IN("count", "the number of vec3 vectors to load"),
+		const..GLfloat_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -362,8 +362,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads floating-point values {@code count} times into a uniform location defined as an array of vec4 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 2 _ GLsizei.IN("count", "the number of vec4 vectors to load"),
-		const _ GLfloat_p.IN("value", "the values to load")
+		AutoSize("value") shr 2..GLsizei.IN("count", "the number of vec4 vectors to load"),
+		const..GLfloat_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -371,8 +371,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of integer values.",
 
 		uniformLocation,
-		AutoSize("value") _ GLsizei.IN("count", "the number of integer values to load"),
-		const _ GLint_p.IN("value", "the values to load")
+		AutoSize("value")..GLsizei.IN("count", "the number of integer values to load"),
+		const..GLint_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -380,8 +380,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec2 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 1 _ GLsizei.IN("count", "the number of ivec2 vectors to load"),
-		const _ GLint_p.IN("value", "the values to load")
+		AutoSize("value") shr 1..GLsizei.IN("count", "the number of ivec2 vectors to load"),
+		const..GLint_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -389,8 +389,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec3 vectors.",
 
 		uniformLocation,
-		AutoSize("value") / 3 _ GLsizei.IN("count", "the number of ivec3 vectors to load"),
-		const _ GLint_p.IN("value", "the values to load")
+		AutoSize("value") / 3..GLsizei.IN("count", "the number of ivec3 vectors to load"),
+		const..GLint_p.IN("value", "the values to load")
 	)
 
 	void(
@@ -398,8 +398,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads integer values {@code count} times into a uniform location defined as an array of ivec4 vectors.",
 
 		uniformLocation,
-		AutoSize("value") shr 2 _ GLsizei.IN("count", "the number of ivec4 vectors to load"),
-		const _ GLint_p.IN("value", "the values to load")
+		AutoSize("value") shr 2..GLsizei.IN("count", "the number of ivec4 vectors to load"),
+		const..GLint_p.IN("value", "the values to load")
 	)
 
 	val transpose = GLboolean.IN("transpose", "if GL11#FALSE, the matrix is specified in column major order, otherwise in row major order")
@@ -409,9 +409,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 2x2 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") shr 2 _ GLsizei.IN("count", "the number of 2x2 matrices to load"),
+		AutoSize("value") shr 2..GLsizei.IN("count", "the number of 2x2 matrices to load"),
 		transpose,
-		const _ GLfloat_p.IN("value", "the matrix values to load")
+		const..GLfloat_p.IN("value", "the matrix values to load")
 	)
 
 	void(
@@ -419,9 +419,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 3x3 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") / (3 * 3) _ GLsizei.IN("count", "the number of 3x3 matrices to load"),
+		AutoSize("value") / (3 * 3)..GLsizei.IN("count", "the number of 3x3 matrices to load"),
 		transpose,
-		const _ GLfloat_p.IN("value", "the matrix values to load")
+		const..GLfloat_p.IN("value", "the matrix values to load")
 	)
 
 	void(
@@ -429,9 +429,9 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		"Loads a 4x4 matrix of floating-point values {@code count} times into a uniform location defined as a matrix or an array of matrices.",
 
 		uniformLocation,
-		AutoSize("value") shr 4 _ GLsizei.IN("count", "the number of 4x4 matrices to load"),
+		AutoSize("value") shr 4..GLsizei.IN("count", "the number of 4x4 matrices to load"),
 		transpose,
-		const _ GLfloat_p.IN("value", "the matrix values to load")
+		const..GLfloat_p.IN("value", "the matrix values to load")
 	)
 
 	void(
@@ -440,7 +440,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the object to query"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(1) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
+		Check(1)..GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	void(
@@ -449,7 +449,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("obj", "the object to query"),
 		GLenum.IN("pname", "the parameter to query", Parameters),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		Check(1)..returnValue..GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	void(
@@ -470,8 +470,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("obj", "the shader object to query"),
-		AutoSize("infoLog") _ GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code infoLog}"),
-		Check(1) _ nullable _ GLsizei_p.OUT(
+		AutoSize("infoLog")..GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code infoLog}"),
+		Check(1)..nullable..GLsizei_p.OUT(
 			"length",
 			"""
 			the actual number of characters written by the GL into {@code infoLog} is returned in {@code length}, excluding the null termination. If
@@ -481,7 +481,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Return(
 			"length",
 			"glGetObjectParameteriARB(obj, GL_OBJECT_INFO_LOG_LENGTH_ARB)"
-		) _ GLcharARB_p.OUT("infoLog", "a buffer in which to return the info log")
+		)..GLcharARB_p.OUT("infoLog", "a buffer in which to return the info log")
 	)
 
 	void(
@@ -493,15 +493,15 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("containerObj", "the container object to query"),
-		AutoSize("obj") _ GLsizei.IN("maxCount", "the maximum number of handles the GL is allowed to write into {@code obj}"),
-		Check(1) _ nullable _ GLsizei_p.OUT(
+		AutoSize("obj")..GLsizei.IN("maxCount", "the maximum number of handles the GL is allowed to write into {@code obj}"),
+		Check(1)..nullable..GLsizei_p.OUT(
 			"count",
 			"a buffer in which to return the actual number of object handles written by the GL into {@code obj}. If $NULL then the GL ignores this parameter."
 		),
 		Return(
 			"count",
 			"glGetObjectParameteriARB(containerObj, GL_OBJECT_ATTACHED_OBJECTS_ARB)"
-		) _ GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
+		)..GLhandleARB_p.OUT("obj", "a buffer in which to return the attached object handles")
 	)
 
 	GLint(
@@ -521,7 +521,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("programObj", "the program object to query"),
-		const _ GLcharARB_p.IN("name", "the name of the uniform variable whose location is to be queried")
+		const..GLcharARB_p.IN("name", "the name of the uniform variable whose location is to be queried")
 	)
 
 	void(
@@ -558,20 +558,20 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 			"""
 		),
 		GLuint.IN("index", "the uniform index"),
-		AutoSize("name") _ GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code name}."),
-		Check(1) _ nullable _ GLsizei_p.IN(
+		AutoSize("name")..GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code name}."),
+		Check(1)..nullable..GLsizei_p.IN(
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code name}. This count excludes the null termination. If
 			{@code length} is $NULL then the GL ignores this parameter.
 			"""
 		),
-		Check(1) _ GLint_p.OUT("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
-		Check(1) _ GLenum_p.OUT("type", "a buffer in which to return the uniform type"),
+		Check(1)..GLint_p.OUT("size", "a buffer in which to return the uniform size. The size is in units of the type returned in {@code type}."),
+		Check(1)..GLenum_p.OUT("type", "a buffer in which to return the uniform type"),
 		Return(
 			"length",
 			"glGetObjectParameteriARB(programObj, GL_OBJECT_ACTIVE_UNIFORM_MAX_LENGTH_ARB)"
-		) _ GLcharARB_p.OUT("name", "a buffer in which to return the uniform name")
+		)..GLcharARB_p.OUT("name", "a buffer in which to return the uniform name")
 	)
 
 	void(
@@ -580,7 +580,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		Check(1) _ returnValue _ GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1)..returnValue..GLfloat_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	void(
@@ -589,7 +589,7 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 
 		GLhandleARB.IN("programObj", "the program object to query"),
 		uniformLocation,
-		Check(1) _ returnValue _ GLint_p.OUT("params", "a buffer in which to return the uniform values")
+		Check(1)..returnValue..GLint_p.OUT("params", "a buffer in which to return the uniform values")
 	)
 
 	void(
@@ -603,8 +603,8 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		""",
 
 		GLhandleARB.IN("obj", "the shader object to query"),
-		AutoSize("source") _  GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
-		Check(1) _ nullable _ GLsizei_p.OUT(
+		AutoSize("source").. GLsizei.IN("maxLength", "the maximum number of characters the GL is allowed to write into {@code source}"),
+		Check(1)..nullable..GLsizei_p.OUT(
 			"length",
 			"""
 			a buffer in which to return the actual number of characters written by the GL into {@code source}, excluding the null termination. If {@code length} is NULL
@@ -614,6 +614,6 @@ val ARB_shader_objects = "ARBShaderObjects".nativeClassGL("ARB_shader_objects", 
 		Return(
 			"length",
 			"glGetObjectParameteriARB(obj, GL_OBJECT_SHADER_SOURCE_LENGTH_ARB)"
-		) _ GLcharARB_p.OUT("source", "a buffer in which to return the shader object source")
+		)..GLcharARB_p.OUT("source", "a buffer in which to return the shader object source")
 	)
 }

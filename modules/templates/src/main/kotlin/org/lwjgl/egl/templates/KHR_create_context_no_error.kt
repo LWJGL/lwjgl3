@@ -21,6 +21,6 @@ val KHR_create_context_no_error = "KHRCreateContextNoError".nativeClassEGL("KHR_
 	IntConstant(
 		"",
 
-		"CONTEXT_OPENGL_NO_ERROR_KHR" _ 0x31B3
+		"CONTEXT_OPENGL_NO_ERROR_KHR"..0x31B3
 	)
 }

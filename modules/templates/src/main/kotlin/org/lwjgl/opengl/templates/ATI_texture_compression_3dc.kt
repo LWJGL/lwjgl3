@@ -15,6 +15,6 @@ val ATI_texture_compression_3dc = "ATITextureCompression3DC".nativeClassGL("ATI_
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage functions.",
 
-		"COMPRESSED_LUMINANCE_ALPHA_3DC_ATI" _ 0x8837
+		"COMPRESSED_LUMINANCE_ALPHA_3DC_ATI"..0x8837
 	)
 }

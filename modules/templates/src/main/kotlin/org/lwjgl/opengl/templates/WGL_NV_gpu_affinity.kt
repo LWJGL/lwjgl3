@@ -29,13 +29,13 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 	IntConstant(
 		"New error code set by wglShareLists, wglMakeCurrent and $wglMakeContextCurrentARB.",
 
-		"ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV" _ 0x20D0
+		"ERROR_INCOMPATIBLE_AFFINITY_MASKS_NV"..0x20D0
 	).noPrefix()
 
 	IntConstant(
 		"New error code set by $wglMakeCurrent and $wglMakeContextCurrentARB.",
 
-		"ERROR_MISSING_AFFINITY_MASK_NV" _ 0x20D1
+		"ERROR_MISSING_AFFINITY_MASK_NV"..0x20D1
 	).noPrefix()
 
 	// Functions
@@ -74,7 +74,7 @@ val WGL_NV_gpu_affinity = "WGLNVGPUAffinity".nativeClassWGL("WGL_NV_gpu_affinity
 		If successful, the function returns an affinity-DC handle. If it fails, NULL will be returned.
 		""",
 
-		nullTerminated _ const _ HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
+		nullTerminated..const..HGPUNV_p.IN("gpuList", "a NULL-terminated array of GPU handles to which the affinity-DC will be restricted")
 	)
 
 	BOOL(

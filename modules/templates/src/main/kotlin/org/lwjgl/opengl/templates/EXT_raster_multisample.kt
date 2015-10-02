@@ -27,17 +27,17 @@ val EXT_raster_multisample = "EXTRasterMultisample".nativeClassGL("EXT_raster_mu
 	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
-		"RASTER_MULTISAMPLE_EXT" _ 0x9327
+		"RASTER_MULTISAMPLE_EXT"..0x9327
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"RASTER_SAMPLES_EXT" _ 0x9328,
-		"MAX_RASTER_SAMPLES_EXT" _ 0x9329,
-		"RASTER_FIXED_SAMPLE_LOCATIONS_EXT" _ 0x932A,
-		"MULTISAMPLE_RASTERIZATION_ALLOWED_EXT" _ 0x932B,
-		"EFFECTIVE_RASTER_SAMPLES_EXT" _ 0x932C
+		"RASTER_SAMPLES_EXT"..0x9328,
+		"MAX_RASTER_SAMPLES_EXT"..0x9329,
+		"RASTER_FIXED_SAMPLE_LOCATIONS_EXT"..0x932A,
+		"MULTISAMPLE_RASTERIZATION_ALLOWED_EXT"..0x932B,
+		"EFFECTIVE_RASTER_SAMPLES_EXT"..0x932C
 	)
 
 	void(

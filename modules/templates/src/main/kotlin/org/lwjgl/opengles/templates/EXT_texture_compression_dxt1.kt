@@ -31,7 +31,7 @@ val EXT_texture_compression_dxt1 = "EXTTextureCompressionDXT1".nativeClassGLES("
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",
 
-		"COMPRESSED_RGB_S3TC_DXT1_EXT" _ 0x83F0,
-		"COMPRESSED_RGBA_S3TC_DXT1_EXT" _ 0x83F1
+		"COMPRESSED_RGB_S3TC_DXT1_EXT"..0x83F0,
+		"COMPRESSED_RGBA_S3TC_DXT1_EXT"..0x83F1
 	)
 }

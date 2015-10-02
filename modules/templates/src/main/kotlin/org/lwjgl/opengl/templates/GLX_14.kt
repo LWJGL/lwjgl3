@@ -15,8 +15,8 @@ val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 	IntConstant(
 		"Added in GLX 1.4.",
 
-		"SAMPLE_BUFFERS" _ 0x186a0,
-		"SAMPLES" _ 0x186a1
+		"SAMPLE_BUFFERS"..0x186a0,
+		"SAMPLES"..0x186a1
 	)
 
 	voidptr(
@@ -43,7 +43,7 @@ val GLX14 = "GLX14".nativeClassGLX("GLX_14") {
 		)}
 		""",
 
-		const _ GLubyte_p.IN("procName", "the function name to query")
+		const..GLubyte_p.IN("procName", "the function name to query")
 	)
 
 }

@@ -30,37 +30,37 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"SHADER_COMPILER" _ 0x8DFA,
-		"SHADER_BINARY_FORMATS" _ 0x8DF8,
-		"NUM_SHADER_BINARY_FORMATS" _ 0x8DF9,
-		"MAX_VERTEX_UNIFORM_VECTORS" _ 0x8DFB,
-		"MAX_VARYING_VECTORS" _ 0x8DFC,
-		"MAX_FRAGMENT_UNIFORM_VECTORS" _ 0x8DFD,
-		"IMPLEMENTATION_COLOR_READ_TYPE" _ 0x8B9A,
-		"IMPLEMENTATION_COLOR_READ_FORMAT" _ 0x8B9B
+		"SHADER_COMPILER"..0x8DFA,
+		"SHADER_BINARY_FORMATS"..0x8DF8,
+		"NUM_SHADER_BINARY_FORMATS"..0x8DF9,
+		"MAX_VERTEX_UNIFORM_VECTORS"..0x8DFB,
+		"MAX_VARYING_VECTORS"..0x8DFC,
+		"MAX_FRAGMENT_UNIFORM_VECTORS"..0x8DFD,
+		"IMPLEMENTATION_COLOR_READ_TYPE"..0x8B9A,
+		"IMPLEMENTATION_COLOR_READ_FORMAT"..0x8B9B
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of VertexAttribPointer.",
 
-		"FIXED" _ 0x140C
+		"FIXED"..0x140C
 	)
 
 	IntConstant(
 		"Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat.",
 
-		"LOW_FLOAT" _ 0x8DF0,
-		"MEDIUM_FLOAT" _ 0x8DF1,
-		"HIGH_FLOAT" _ 0x8DF2,
-		"LOW_INT" _ 0x8DF3,
-		"MEDIUM_INT" _ 0x8DF4,
-		"HIGH_INT" _ 0x8DF5
+		"LOW_FLOAT"..0x8DF0,
+		"MEDIUM_FLOAT"..0x8DF1,
+		"HIGH_FLOAT"..0x8DF2,
+		"LOW_INT"..0x8DF3,
+		"MEDIUM_INT"..0x8DF4,
+		"HIGH_INT"..0x8DF5
 	)
 
 	IntConstant(
 		"Accepted by the {@code format} parameter of most commands taking sized internal formats.",
 
-		"RGB565" _ 0x8D62
+		"RGB565"..0x8D62
 	)
 
 	void(
@@ -72,11 +72,11 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"ShaderBinary",
 		"Loads pre-compiled shader binaries.",
 
-		AutoSize("shaders") _ GLsizei.IN("count", "the number of shader object handles contained in {@code shaders}"),
-		const _ GLuint_p.IN("shaders", "an array of shader handles into which to load pre-compiled shader binaries"),
+		AutoSize("shaders")..GLsizei.IN("count", "the number of shader object handles contained in {@code shaders}"),
+		const..GLuint_p.IN("shaders", "an array of shader handles into which to load pre-compiled shader binaries"),
 		GLenum.IN("binaryformat", "the format of the shader binaries contained in {@code binary}"),
-		const _ void_p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
-		AutoSize("binary") _ GLsizei.IN("length", "the length of the array whose address is given in binary")
+		const..void_p.IN("binary", "an array of bytes containing pre-compiled binary shader code"),
+		AutoSize("binary")..GLsizei.IN("length", "the length of the array whose address is given in binary")
 	)
 
 	void(
@@ -85,11 +85,11 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
 		GLenum.IN("shadertype", "the type of shader whose precision to query", "GL20#VERTEX_SHADER GL20#FRAGMENT_SHADER"),
 		GLenum.IN("precisiontype", "the numeric format whose precision and range to query"),
-		Check(2) _ GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
-		Check(1) _ returnValue _ GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
+		Check(2)..GLint_p.OUT("range", "the address of array of two integers into which encodings of the implementation's numeric range are returned"),
+		Check(1)..returnValue..GLint_p.OUT("precision", "the address of an integer into which the numeric precision of the implementation is written")
 	)
 
-	ReferenceGL("DepthRange") _ void(
+	ReferenceGL("DepthRange")..void(
 		"DepthRangef",
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates",
 
@@ -109,20 +109,20 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
-		"PROGRAM_BINARY_RETRIEVABLE_HINT" _ 0x8257
+		"PROGRAM_BINARY_RETRIEVABLE_HINT"..0x8257
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"PROGRAM_BINARY_LENGTH" _ 0x8741
+		"PROGRAM_BINARY_LENGTH"..0x8741
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev.",
 
-		"NUM_PROGRAM_BINARY_FORMATS" _ 0x87FE,
-		"PROGRAM_BINARY_FORMATS" _ 0x87FF
+		"NUM_PROGRAM_BINARY_FORMATS"..0x87FE,
+		"PROGRAM_BINARY_FORMATS"..0x87FF
 	)
 
 	void(
@@ -130,10 +130,10 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 		"Returns a binary representation of a program object's compiled and linked executable source.",
 
 		GLuint.IN("program", "the name of a program object whose binary representation to retrieve"),
-		AutoSize("binary") _ GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
-		Check(1) _ GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
-		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)") _ void_p.OUT(
+		AutoSize("binary")..GLsizei.IN("bufSize", "the size of the buffer whose address is given by {@code binary}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the number of bytes written into {@code binary}"),
+		Check(1)..GLenum_p.OUT("binaryFormat", "a variable to receive a token indicating the format of the binary data returned by the GL"),
+		Return("length", "GL20.glGetProgrami(program, GL_PROGRAM_BINARY_LENGTH)")..void_p.OUT(
 			"binary",
 			"an array into which the GL will return {@code program}'s binary representation"
 		)
@@ -145,11 +145,11 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 
 		GLuint.IN("program", "the name of a program object into which to load a program binary"),
 		GLenum.IN("binaryFormat", "the format of the binary data in binary"),
-		const _ void_p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
-		AutoSize("binary") _ GLsizei.IN("length", "the number of bytes contained in {@code binary}")
+		const..void_p.IN("binary", "an array containing the binary to be loaded into {@code program}"),
+		AutoSize("binary")..GLsizei.IN("length", "the number of bytes contained in {@code binary}")
 	)
 
-	ReferenceGL("glProgramParameter") _ void(
+	ReferenceGL("glProgramParameter")..void(
 		"ProgramParameteri",
 		"Specifies the integer value of a program object parameter.",
 
@@ -163,30 +163,30 @@ val GL41 = "GL41".nativeClassGL("GL41") {
 	IntConstant(
 		"Accepted by {@code stages} parameter to UseProgramStages.",
 
-		"VERTEX_SHADER_BIT" _ 0x00000001,
-		"FRAGMENT_SHADER_BIT" _ 0x00000002,
-		"GEOMETRY_SHADER_BIT" _ 0x00000004,
-		"TESS_CONTROL_SHADER_BIT" _ 0x00000008,
-		"TESS_EVALUATION_SHADER_BIT" _ 0x00000010,
-		"ALL_SHADER_BITS" _ 0xFFFFFFFF.i
+		"VERTEX_SHADER_BIT"..0x00000001,
+		"FRAGMENT_SHADER_BIT"..0x00000002,
+		"GEOMETRY_SHADER_BIT"..0x00000004,
+		"TESS_CONTROL_SHADER_BIT"..0x00000008,
+		"TESS_EVALUATION_SHADER_BIT"..0x00000010,
+		"ALL_SHADER_BITS"..0xFFFFFFFF.i
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
-		"PROGRAM_SEPARABLE" _ 0x8258
+		"PROGRAM_SEPARABLE"..0x8258
 	)
 
 	IntConstant(
 		"Accepted by {@code type} parameter to GetProgramPipelineiv.",
 
-		"ACTIVE_PROGRAM" _ 0x8259
+		"ACTIVE_PROGRAM"..0x8259
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"PROGRAM_PIPELINE_BINDING" _ 0x825A
+		"PROGRAM_PIPELINE_BINDING"..0x825A
 	)
 
 	void(
@@ -239,8 +239,8 @@ if (shader) {
 		""",
 
 		GLenum.IN("type", "the type of shader to create"),
-		AutoSize("strings") _ GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
-		PointerArray(GLcharUTF8_p, "string") _ const _ GLcharUTF8_pp.IN(
+		AutoSize("strings")..GLsizei.IN("count", "the number of source code strings in the array {@code strings}"),
+		PointerArray(GLcharUTF8_p, "string")..const..GLcharUTF8_pp.IN(
 			"strings",
 			"an array of pointers to source code strings from which to create the program object"
 		)
@@ -257,16 +257,16 @@ if (shader) {
 		"DeleteProgramPipelines",
 		"Deletes program pipeline objects.",
 
-		AutoSize("pipelines") _ GLsizei.IN("n", "the number of program pipeline objects to delete"),
-		SingleValue("pipeline") _ const _ GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
+		AutoSize("pipelines")..GLsizei.IN("n", "the number of program pipeline objects to delete"),
+		SingleValue("pipeline")..const..GLuint_p.IN("pipelines", "an array of names of program pipeline objects to delete")
 	)
 
 	void(
 		"GenProgramPipelines",
 		"Reserves program pipeline object names.",
 
-		AutoSize("pipelines") _ GLsizei.IN("n", "the number of program pipeline object names to reserve"),
-		returnValue _ GLuint_p.OUT("pipelines", "an array of into which the reserved names will be written")
+		AutoSize("pipelines")..GLsizei.IN("n", "the number of program pipeline object names to reserve"),
+		returnValue..GLuint_p.OUT("pipelines", "an array of into which the reserved names will be written")
 	)
 
 	GLboolean(
@@ -286,7 +286,7 @@ if (shader) {
 			"the name of the parameter to retrieve",
 			"#ACTIVE_PROGRAM GL20#INFO_LOG_LENGTH $SHADER_TYPES"
 		),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
+		Check(1)..returnValue..GLint_p.OUT("params", "a variable into which will be written the value or values of {@code pname} for {@code pipeline}")
 	)
 
 	// ProgramUniform JavaDoc
@@ -306,7 +306,7 @@ if (shader) {
 
 	val ProgramUniformRef = ReferenceGL("glProgramUniform")
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1i",
 		"Specifies the value of an int uniform variable for a specified program object.",
 
@@ -315,7 +315,7 @@ if (shader) {
 		GLint.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2i",
 		"Specifies the value of an ivec2 uniform variable for a specified program object.",
 
@@ -325,7 +325,7 @@ if (shader) {
 		GLint.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3i",
 		"Specifies the value of an ivec3 uniform variable for a specified program object.",
 
@@ -336,7 +336,7 @@ if (shader) {
 		GLint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4i",
 		"Specifies the value of an ivec4 uniform variable for a specified program object.",
 
@@ -348,7 +348,7 @@ if (shader) {
 		GLint.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1ui",
 		"Specifies the value of a uint uniform variable for a specified program object.",
 
@@ -357,7 +357,7 @@ if (shader) {
 		GLuint.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2ui",
 		"Specifies the value of a uvec2 uniform variable for a specified program object.",
 
@@ -367,7 +367,7 @@ if (shader) {
 		GLuint.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3ui",
 		"Specifies the value of a uvec3 uniform variable for a specified program object.",
 
@@ -378,7 +378,7 @@ if (shader) {
 		GLuint.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4ui",
 		"Specifies the value of a uvec4 uniform variable for a specified program object.",
 
@@ -390,7 +390,7 @@ if (shader) {
 		GLuint.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1f",
 		"Specifies the value of a float uniform variable for a specified program object.",
 
@@ -399,7 +399,7 @@ if (shader) {
 		GLfloat.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2f",
 		"Specifies the value of a vec2 uniform variable for a specified program object.",
 
@@ -409,7 +409,7 @@ if (shader) {
 		GLfloat.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3f",
 		"Specifies the value of a vec3 uniform variable for a specified program object.",
 
@@ -420,7 +420,7 @@ if (shader) {
 		GLfloat.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4f",
 		"Specifies the value of a vec4 uniform variable for a specified program object.",
 
@@ -432,7 +432,7 @@ if (shader) {
 		GLfloat.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1d",
 		"Specifies the value of a double uniform variable for a specified program object.",
 
@@ -441,7 +441,7 @@ if (shader) {
 		GLdouble.IN("x", uniX)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2d",
 		"Specifies the value of a dvec2 uniform variable for a specified program object.",
 
@@ -451,7 +451,7 @@ if (shader) {
 		GLdouble.IN("y", uniY)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3d",
 		"Specifies the value of a dvec3 uniform variable for a specified program object.",
 
@@ -462,7 +462,7 @@ if (shader) {
 		GLdouble.IN("z", uniZ)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4d",
 		"Specifies the value of a dvec4 uniform variable for a specified program object.",
 
@@ -474,362 +474,362 @@ if (shader) {
 		GLdouble.IN("w", uniW)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1iv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value") _ GLsizei.IN("count", uniArrayCount),
-		const _ GLint_p.IN("value", uniArrayValue)
+		AutoSize("value")..GLsizei.IN("count", uniArrayCount),
+		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2iv",
 		"Specifies the value of a single ivec2 uniform variable or an ivec2 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLint_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 1)..GLsizei.IN("count", uniArrayCount),
+		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3iv",
 		"Specifies the value of a single ivec3 uniform variable or an ivec3 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLint_p.IN("value", uniArrayValue)
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniArrayCount),
+		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4iv",
 		"Specifies the value of a single ivec4 uniform variable or an ivec4 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLint_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniArrayCount),
+		const..GLint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1uiv",
 		"Specifies the value of a single uint uniform variable or a uint uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value") _ GLsizei.IN("count", uniArrayCount),
-		const _ GLuint_p.IN("value", uniArrayValue)
+		AutoSize("value")..GLsizei.IN("count", uniArrayCount),
+		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2uiv",
 		"Specifies the value of a single uvec2 uniform variable or a uvec2 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLuint_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 1)..GLsizei.IN("count", uniArrayCount),
+		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3uiv",
 		"Specifies the value of a single uvec3 uniform variable or a uvec3 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLuint_p.IN("value", uniArrayValue)
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniArrayCount),
+		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4uiv",
 		"Specifies the value of a single uvec4 uniform variable or a uvec4 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLuint_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniArrayCount),
+		const..GLuint_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1fv",
 		"Specifies the value of a single float uniform variable or a float uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value") _ GLsizei.IN("count", uniArrayCount),
-		const _ GLfloat_p.IN("value", uniArrayValue)
+		AutoSize("value")..GLsizei.IN("count", uniArrayCount),
+		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2fv",
 		"Specifies the value of a single vec2 uniform variable or a vec2 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLfloat_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 1)..GLsizei.IN("count", uniArrayCount),
+		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3fv",
 		"Specifies the value of a single vec3 uniform variable or a vec3 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLfloat_p.IN("value", uniArrayValue)
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniArrayCount),
+		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4fv",
 		"Specifies the value of a single vec4 uniform variable or a vec4 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLfloat_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniArrayCount),
+		const..GLfloat_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform1dv",
 		"Specifies the value of a single double uniform variable or a double uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		AutoSize("value") _ GLsizei.IN("count", uniArrayCount),
-		const _ GLdouble_p.IN("value", uniArrayValue)
+		AutoSize("value")..GLsizei.IN("count", uniArrayCount),
+		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform2dv",
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLdouble_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 1)..GLsizei.IN("count", uniArrayCount),
+		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform3dv",
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLdouble_p.IN("value", uniArrayValue)
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniArrayCount),
+		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniform4dv",
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for a specified program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniArrayCount),
-		const _ GLdouble_p.IN("value", uniArrayValue)
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniArrayCount),
+		const..GLdouble_p.IN("value", uniArrayValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2fv",
 		"Specifies the value of a single mat2 uniform variable or a mat2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3fv",
 		"Specifies the value of a single mat3 uniform variable or a mat3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4fv",
 		"Specifies the value of a single mat4 uniform variable or a mat4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 4)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2dv",
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3dv",
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4dv",
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 4)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2x3fv",
 		"Specifies the value of a single mat2x3 uniform variable or a mat2x3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (2 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3x2fv",
 		"Specifies the value of a single mat3x2 uniform variable or a mat3x2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 2))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2x4fv",
 		"Specifies the value of a single mat2x4 uniform variable or a mat2x4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4x2fv",
 		"Specifies the value of a single mat4x2 uniform variable or a mat4x2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3x4fv",
 		"Specifies the value of a single mat3x4 uniform variable or a mat3x4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 4))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4x3fv",
 		"Specifies the value of a single mat4x3 uniform variable or a mat4x3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (4 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLfloat_p.IN("value", uniMatrixValue)
+		const..GLfloat_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2x3dv",
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (2 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3x2dv",
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 2))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix2x4dv",
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4x2dv",
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix3x4dv",
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (3 * 4))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
-	ProgramUniformRef _ void(
+	ProgramUniformRef..void(
 		"ProgramUniformMatrix4x3dv",
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
 		GLuint.IN("program", uniProgram),
 		GLint.IN("location", uniLocation),
-		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniMatrixCount),
+		(AutoSize("value") / (4 * 3))..GLsizei.IN("count", uniMatrixCount),
 		GLboolean.IN("transpose", uniMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniMatrixValue)
+		const..GLdouble_p.IN("value", uniMatrixValue)
 	)
 
 	void(
@@ -844,9 +844,9 @@ if (shader) {
 		"Retrieves the info log string from a program pipeline object.",
 
 		GLuint.IN("pipeline", "the name of a program pipeline object from which to retrieve the info log"),
-		AutoSize("infoLog") _ GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
-		Return("length", "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)") _ GLcharUTF8_p.OUT(
+		AutoSize("infoLog")..GLsizei.IN("bufSize", "the maximum number of characters, including the null terminator, that may be written into {@code infoLog}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable into which will be written the number of characters written into {@code infoLog}"),
+		Return("length", "glGetProgramPipelinei(pipeline, GL20.GL_INFO_LOG_LENGTH)")..GLcharUTF8_p.OUT(
 			"infoLog",
 			" an array of characters into which will be written the info log for {@code pipeline}"
 		)
@@ -864,7 +864,7 @@ if (shader) {
 
 	val VertexAttribRef = ReferenceGL("glVertexAttrib")
 
-	VertexAttribRef _ void(
+	VertexAttribRef..void(
 		"VertexAttribL1d",
 		"Specifies the value of a generic vertex attribute. The y and z components are implicitly set to 0.0 and w to 1.0.",
 
@@ -872,7 +872,7 @@ if (shader) {
 		GLdouble.IN("x", attribX)
 	)
 
-	VertexAttribRef _ void(
+	VertexAttribRef..void(
 		"VertexAttribL2d",
 		"Specifies the value of a generic vertex attribute. The y component is implicitly set to 0.0 and w to 1.0.",
 
@@ -881,7 +881,7 @@ if (shader) {
 		GLdouble.IN("y", attribY)
 	)
 
-	VertexAttribRef _ void(
+	VertexAttribRef..void(
 		"VertexAttribL3d",
 		"Specifies the value of a generic vertex attribute. The w is implicitly set to 1.0.",
 
@@ -891,7 +891,7 @@ if (shader) {
 		GLdouble.IN("z", attribZ)
 	)
 
-	VertexAttribRef _ void(
+	VertexAttribRef..void(
 		"VertexAttribL4d",
 		"Specifies the value of a generic vertex attribute.",
 
@@ -902,18 +902,18 @@ if (shader) {
 		GLdouble.IN("w", attribW)
 	)
 
-	VertexAttribRef _ void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3) _ const _ GLdouble_p.IN("v", attribBuffer))
-	VertexAttribRef _ void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4) _ const _ GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef..void("VertexAttribL1dv", "Pointer version of #VertexAttribL1d().", GLuint.IN("index", attribIndex), Check(1)..const..GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef..void("VertexAttribL2dv", "Pointer version of #VertexAttribL2d().", GLuint.IN("index", attribIndex), Check(2)..const..GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef..void("VertexAttribL3dv", "Pointer version of #VertexAttribL3d().", GLuint.IN("index", attribIndex), Check(3)..const..GLdouble_p.IN("v", attribBuffer))
+	VertexAttribRef..void("VertexAttribL4dv", "Pointer version of #VertexAttribL4d().", GLuint.IN("index", attribIndex), Check(4)..const..GLdouble_p.IN("v", attribBuffer))
 
-	ReferenceGL("glVertexAttribPointer") _ void(
+	ReferenceGL("glVertexAttribPointer")..void(
 		"VertexAttribLPointer",
 		"Specifies the location and organization of a 64-bit vertex attribute array.",
 
 		GLuint.IN("index", attribIndex),
 		GLint.IN("size", "the number of values per vertex that are stored in the array. The initial value is 4", "1 2 3 4 GL12#BGRA"),
-		AutoType("pointer", GL_DOUBLE) _ GLenum.IN("type", "the data type of each component in the array", "GL11#DOUBLE"),
+		AutoType("pointer", GL_DOUBLE)..GLenum.IN("type", "the data type of each component in the array", "GL11#DOUBLE"),
 		GLsizei.IN(
 			"stride",
 			"""
@@ -921,7 +921,7 @@ if (shader) {
 			the array. The initial value is 0.
 			"""
 		),
-		ARRAY_BUFFER _ const _ void_p.IN(
+		ARRAY_BUFFER..const..void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -930,7 +930,7 @@ if (shader) {
 		)
 	)
 
-	ReferenceGL("glGetVertexAttrib") _ void(
+	ReferenceGL("glGetVertexAttrib")..void(
 		"GetVertexAttribLdv",
 		"Double version of GL20#GetVertexAttribi().",
 
@@ -944,17 +944,17 @@ if (shader) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_VIEWPORTS" _ 0x825B,
-		"VIEWPORT_SUBPIXEL_BITS" _ 0x825C,
-		"VIEWPORT_BOUNDS_RANGE" _ 0x825D,
-		"LAYER_PROVOKING_VERTEX" _ 0x825E,
-		"VIEWPORT_INDEX_PROVOKING_VERTEX" _ 0x825F
+		"MAX_VIEWPORTS"..0x825B,
+		"VIEWPORT_SUBPIXEL_BITS"..0x825C,
+		"VIEWPORT_BOUNDS_RANGE"..0x825D,
+		"LAYER_PROVOKING_VERTEX"..0x825E,
+		"VIEWPORT_INDEX_PROVOKING_VERTEX"..0x825F
 	)
 
 	IntConstant(
 		"Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.",
 
-		"UNDEFINED_VERTEX" _ 0x8260
+		"UNDEFINED_VERTEX"..0x8260
 	)
 
 	void(
@@ -962,11 +962,11 @@ if (shader) {
 		"Sets multiple viewports.",
 
 		GLuint.IN("first", "the first viewport to set"),
-		(AutoSize("v") shr 2) _ GLsizei.IN("count", "the number of viewports to set"),
-		const _ GLfloat_p.IN("v", "an array containing the viewport parameters")
+		(AutoSize("v") shr 2)..GLsizei.IN("count", "the number of viewports to set"),
+		const..GLfloat_p.IN("v", "an array containing the viewport parameters")
 	)
 
-	ReferenceGL("glViewportIndexed") _ void(
+	ReferenceGL("glViewportIndexed")..void(
 		"ViewportIndexedf",
 		"Sets a specified viewport.",
 
@@ -982,7 +982,7 @@ if (shader) {
 		"Pointer version of #ViewportIndexedf().",
 
 		GLuint.IN("index", "the viewport to set"),
-		Check(4) _ const _ GLfloat_p.IN("v", "the viewport parameters")
+		Check(4)..const..GLfloat_p.IN("v", "the viewport parameters")
 	)
 
 	void(
@@ -990,8 +990,8 @@ if (shader) {
 		"Defines the scissor box for multiple viewports.",
 
 		GLuint.IN("first", "the index of the first viewport whose scissor box to modify"),
-		(AutoSize("v") shr 2) _ GLsizei.IN("count", "the number of scissor boxes to modify"),
-		const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
+		(AutoSize("v") shr 2)..GLsizei.IN("count", "the number of scissor boxes to modify"),
+		const..GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
 	void(
@@ -1010,7 +1010,7 @@ if (shader) {
 		"Pointer version of #ScissorIndexed().",
 
 		GLuint.IN("index", "the index of the viewport whose scissor box to modify"),
-		Check(4) _ const _ GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
+		Check(4)..const..GLint_p.IN("v", "an array containing the left, bottom, width and height of each scissor box, in that order")
 	)
 
 	void(
@@ -1018,8 +1018,8 @@ if (shader) {
 		"Specifies mapping of depth values from normalized device coordinates to window coordinates for a specified set of viewports.",
 
 		GLuint.IN("first", "the index of the first viewport whose depth range to update"),
-		(AutoSize("v") shr 1) _ GLsizei.IN("count", "the number of viewports whose depth range to update"),
-		const _ GLdouble_p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
+		(AutoSize("v") shr 1)..GLsizei.IN("count", "the number of viewports whose depth range to update"),
+		const..GLdouble_p.IN("v", "n array containing the near and far values for the depth range of each modified viewport")
 	)
 
 	void(
@@ -1037,7 +1037,7 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1) _ returnValue _ GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..returnValue..GLfloat_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 
 	void(
@@ -1046,6 +1046,6 @@ if (shader) {
 
 		GLenum.IN("target", "the indexed state to query"),
 		GLuint.IN("index", "the index of the element being queried"),
-		Check(1) _ returnValue _ GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
+		Check(1)..returnValue..GLdouble_p.OUT("data", "a scalar or buffer in which to place the returned data")
 	)
 }

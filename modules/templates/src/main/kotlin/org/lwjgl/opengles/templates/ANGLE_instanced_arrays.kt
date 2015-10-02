@@ -31,7 +31,7 @@ val ANGLE_instanced_arrays = "ANGLEInstancedArrays".nativeClassGLES("ANGLE_insta
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetVertexAttribfv and GetVertexAttribiv.",
 
-		"VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE" _ 0x88FE
+		"VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE"..0x88FE
 	)
 
 	void(
@@ -49,9 +49,9 @@ val ANGLE_instanced_arrays = "ANGLEInstancedArrays".nativeClassGLES("ANGLE_insta
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)" _ GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN("type", ""),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", ""),
+		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN("type", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("primcount", "")
 	)
 

@@ -87,44 +87,44 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		Accepted by the {@code pname} parameters of GetVertexAttribdv, GetVertexAttribfv, GetVertexAttribiv, GetVertexAttribIuivEXT and GetVertexAttribIivEXT.
 		""",
 
-		"VERTEX_ATTRIB_ARRAY_INTEGER_EXT" _ 0x88FD
+		"VERTEX_ATTRIB_ARRAY_INTEGER_EXT"..0x88FD
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_1D_ARRAY_EXT" _ 0x8DC0,
-		"SAMPLER_2D_ARRAY_EXT" _ 0x8DC1,
-		"SAMPLER_BUFFER_EXT" _ 0x8DC2,
-		"SAMPLER_1D_ARRAY_SHADOW_EXT" _ 0x8DC3,
-		"SAMPLER_2D_ARRAY_SHADOW_EXT" _ 0x8DC4,
-		"SAMPLER_CUBE_SHADOW_EXT" _ 0x8DC5,
-		"UNSIGNED_INT_VEC2_EXT" _ 0x8DC6,
-		"UNSIGNED_INT_VEC3_EXT" _ 0x8DC7,
-		"UNSIGNED_INT_VEC4_EXT" _ 0x8DC8,
-		"INT_SAMPLER_1D_EXT" _ 0x8DC9,
-		"INT_SAMPLER_2D_EXT" _ 0x8DCA,
-		"INT_SAMPLER_3D_EXT" _ 0x8DCB,
-		"INT_SAMPLER_CUBE_EXT" _ 0x8DCC,
-		"INT_SAMPLER_2D_RECT_EXT" _ 0x8DCD,
-		"INT_SAMPLER_1D_ARRAY_EXT" _ 0x8DCE,
-		"INT_SAMPLER_2D_ARRAY_EXT" _ 0x8DCF,
-		"INT_SAMPLER_BUFFER_EXT" _ 0x8DD0,
-		"UNSIGNED_INT_SAMPLER_1D_EXT" _ 0x8DD1,
-		"UNSIGNED_INT_SAMPLER_2D_EXT" _ 0x8DD2,
-		"UNSIGNED_INT_SAMPLER_3D_EXT" _ 0x8DD3,
-		"UNSIGNED_INT_SAMPLER_CUBE_EXT" _ 0x8DD4,
-		"UNSIGNED_INT_SAMPLER_2D_RECT_EXT" _ 0x8DD5,
-		"UNSIGNED_INT_SAMPLER_1D_ARRAY_EXT" _ 0x8DD6,
-		"UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT" _ 0x8DD7,
-		"UNSIGNED_INT_SAMPLER_BUFFER_EXT" _ 0x8DD8
+		"SAMPLER_1D_ARRAY_EXT"..0x8DC0,
+		"SAMPLER_2D_ARRAY_EXT"..0x8DC1,
+		"SAMPLER_BUFFER_EXT"..0x8DC2,
+		"SAMPLER_1D_ARRAY_SHADOW_EXT"..0x8DC3,
+		"SAMPLER_2D_ARRAY_SHADOW_EXT"..0x8DC4,
+		"SAMPLER_CUBE_SHADOW_EXT"..0x8DC5,
+		"UNSIGNED_INT_VEC2_EXT"..0x8DC6,
+		"UNSIGNED_INT_VEC3_EXT"..0x8DC7,
+		"UNSIGNED_INT_VEC4_EXT"..0x8DC8,
+		"INT_SAMPLER_1D_EXT"..0x8DC9,
+		"INT_SAMPLER_2D_EXT"..0x8DCA,
+		"INT_SAMPLER_3D_EXT"..0x8DCB,
+		"INT_SAMPLER_CUBE_EXT"..0x8DCC,
+		"INT_SAMPLER_2D_RECT_EXT"..0x8DCD,
+		"INT_SAMPLER_1D_ARRAY_EXT"..0x8DCE,
+		"INT_SAMPLER_2D_ARRAY_EXT"..0x8DCF,
+		"INT_SAMPLER_BUFFER_EXT"..0x8DD0,
+		"UNSIGNED_INT_SAMPLER_1D_EXT"..0x8DD1,
+		"UNSIGNED_INT_SAMPLER_2D_EXT"..0x8DD2,
+		"UNSIGNED_INT_SAMPLER_3D_EXT"..0x8DD3,
+		"UNSIGNED_INT_SAMPLER_CUBE_EXT"..0x8DD4,
+		"UNSIGNED_INT_SAMPLER_2D_RECT_EXT"..0x8DD5,
+		"UNSIGNED_INT_SAMPLER_1D_ARRAY_EXT"..0x8DD6,
+		"UNSIGNED_INT_SAMPLER_2D_ARRAY_EXT"..0x8DD7,
+		"UNSIGNED_INT_SAMPLER_BUFFER_EXT"..0x8DD8
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MIN_PROGRAM_TEXEL_OFFSET_EXT" _ 0x8904,
-		"MAX_PROGRAM_TEXEL_OFFSET_EXT" _ 0x8905
+		"MIN_PROGRAM_TEXEL_OFFSET_EXT"..0x8904,
+		"MAX_PROGRAM_TEXEL_OFFSET_EXT"..0x8905
 	)
 
 	// Vertex attrib functions javadoc
@@ -145,21 +145,21 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 	void("VertexAttribI3uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute. The w component is implicitly set to 1.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ))
 	void("VertexAttribI4uiEXT", "Specifies the value of an unsigned pure integer generic vertex attribute.", GLuint.IN("index", vertexAttribIndex), GLint.IN("x", vertexAttribX), GLint.IN("y", vertexAttribY), GLint.IN("z", vertexAttribZ), GLint.IN("w", vertexAttribW))
 
-	void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1ivEXT", "Pointer version of #VertexAttribI1iEXT().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2ivEXT", "Pointer version of #VertexAttribI2iEXT().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3ivEXT", "Pointer version of #VertexAttribI3iEXT().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ivEXT", "Pointer version of #VertexAttribI4iEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(1) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(2) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(3) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI1uivEXT", "Pointer version of #VertexAttribI1uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(1)..const..GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI2uivEXT", "Pointer version of #VertexAttribI2uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(2)..const..GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI3uivEXT", "Pointer version of #VertexAttribI3uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(3)..const..GLuint_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4uivEXT", "Pointer version of #VertexAttribI4uiEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLuint_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4bvEXT", "Byte version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4svEXT", "Short version of #VertexAttribI4ivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
 
-	void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLbyte_p.IN("v", vertexAttribBuffer))
-	void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4) _ const _ GLshort_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4ubvEXT", "Byte version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLbyte_p.IN("v", vertexAttribBuffer))
+	void("VertexAttribI4usvEXT", "Short version of #VertexAttribI4uivEXT().", GLuint.IN("index", vertexAttribIndex), Check(4)..const..GLshort_p.IN("v", vertexAttribBuffer))
 
 	void(
 		"VertexAttribIPointerEXT",
@@ -180,7 +180,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 			"""),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-		) _ ARRAY_BUFFER _ const _ void_p.IN(
+		)..ARRAY_BUFFER..const..void_p.IN(
 			"pointer",
 			"""
 			the vertex attribute data or the offset of the first component of the first generic vertex attribute in the array in the data store of the buffer
@@ -195,7 +195,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-		Check(4) _ returnValue _ GLint_p.OUT("params", "returns the requested data")
+		Check(4)..returnValue..GLint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -204,7 +204,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("index", vertexAttribIndex),
 		GLenum.IN("pname", "the symbolic name of the vertex attribute parameter to be queried"),
-		Check(4) _ returnValue _ GLuint_p.OUT("params", "returns the requested data")
+		Check(4)..returnValue..GLuint_p.OUT("params", "returns the requested data")
 	)
 
 	void(
@@ -213,7 +213,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1) _ returnValue _ GLuint_p.OUT("params", "")
+		Check(1)..returnValue..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -222,7 +222,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 
 		GLuint.IN("program", ""),
 		GLuint.IN("color", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	GLint(
@@ -230,7 +230,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLuint.IN("program", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	void(
@@ -276,8 +276,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") _ GLsizei.IN("count", ""),
-		const _ GLuint_p.IN("value", "")
+		AutoSize("value")..GLsizei.IN("count", ""),
+		const..GLuint_p.IN("value", "")
 	)
 
 	void(
@@ -285,8 +285,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 1 _ GLsizei.IN("count", ""),
-		const _ GLuint_p.IN("value", "")
+		AutoSize("value") shr 1..GLsizei.IN("count", ""),
+		const..GLuint_p.IN("value", "")
 	)
 
 	void(
@@ -294,8 +294,8 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 3 _ GLsizei.IN("count", ""),
-		const _ GLuint_p.IN("value", "")
+		AutoSize("value") / 3..GLsizei.IN("count", ""),
+		const..GLuint_p.IN("value", "")
 	)
 
 	void(
@@ -303,7 +303,7 @@ val EXT_gpu_shader4 = "EXTGPUShader4".nativeClassGL("EXT_gpu_shader4", postfix =
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 2 _ GLsizei.IN("count", ""),
-		const _ GLuint_p.IN("value", "")
+		AutoSize("value") shr 2..GLsizei.IN("count", ""),
+		const..GLuint_p.IN("value", "")
 	)
 }

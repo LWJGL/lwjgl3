@@ -34,25 +34,25 @@ val ARB_multisample = "ARBMultisample".nativeClassGL("ARB_multisample", postfix 
 		GetDoublev.
 		""",
 
-		"MULTISAMPLE_ARB" _ 0x809D,
-		"SAMPLE_ALPHA_TO_COVERAGE_ARB" _ 0x809E,
-		"SAMPLE_ALPHA_TO_ONE_ARB" _ 0x809F,
-		"SAMPLE_COVERAGE_ARB" _ 0x80A0
+		"MULTISAMPLE_ARB"..0x809D,
+		"SAMPLE_ALPHA_TO_COVERAGE_ARB"..0x809E,
+		"SAMPLE_ALPHA_TO_ONE_ARB"..0x809F,
+		"SAMPLE_COVERAGE_ARB"..0x80A0
 	)
 
 	IntConstant(
 		"Accepted by the {@code mask} parameter of PushAttrib.",
 
-		"MULTISAMPLE_BIT_ARB" _ 0x20000000
+		"MULTISAMPLE_BIT_ARB"..0x20000000
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"SAMPLE_BUFFERS_ARB" _ 0x80A8,
-		"SAMPLES_ARB" _ 0x80A9,
-		"SAMPLE_COVERAGE_VALUE_ARB" _ 0x80AA,
-		"SAMPLE_COVERAGE_INVERT_ARB" _ 0x80AB
+		"SAMPLE_BUFFERS_ARB"..0x80A8,
+		"SAMPLES_ARB"..0x80A9,
+		"SAMPLE_COVERAGE_VALUE_ARB"..0x80AA,
+		"SAMPLE_COVERAGE_INVERT_ARB"..0x80AB
 	)
 
 	void(
@@ -89,8 +89,8 @@ val GLX_ARB_multisample = "GLXARBMultisample".nativeClassGLX("GLX_ARB_multisampl
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
-		"SAMPLE_BUFFERS_ARB" _ 100000,
-		"SAMPLES_ARB" _ 100001
+		"SAMPLE_BUFFERS_ARB"..100000,
+		"SAMPLES_ARB"..100001
 	)
 }
 
@@ -111,7 +111,7 @@ val WGL_ARB_multisample = "WGLARBMultisample".nativeClassWGL("WGL_ARB_multisampl
 		WGLARBPixelFormat#ChoosePixelFormatARB().
 		""",
 
-		"SAMPLE_BUFFERS_ARB" _ 0x2041,
-		"SAMPLES_ARB" _ 0x2042
+		"SAMPLE_BUFFERS_ARB"..0x2041,
+		"SAMPLES_ARB"..0x2042
 	)
 }

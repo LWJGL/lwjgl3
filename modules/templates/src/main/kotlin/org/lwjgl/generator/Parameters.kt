@@ -188,19 +188,19 @@ class Parameter(
 
 // DSL extensions
 
-fun ReturnValueModifier._(returnType: NativeType): ReturnValue {
+operator fun ReturnValueModifier.rangeTo(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(this)
 	return returns
 }
 
-fun QualifiedTypeModifier._(returnType: NativeType): ReturnValue {
+operator fun QualifiedTypeModifier.rangeTo(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(this)
 	return returns
 }
 
-fun Array<TemplateModifier>._(returnType: NativeType): ReturnValue {
+operator fun Array<TemplateModifier>.rangeTo(returnType: NativeType): ReturnValue {
 	val returns = ReturnValue(returnType)
 	returns.setModifiers(*this)
 	return returns

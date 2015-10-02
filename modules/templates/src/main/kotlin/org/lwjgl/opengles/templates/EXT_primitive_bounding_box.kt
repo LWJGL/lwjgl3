@@ -33,7 +33,7 @@ val EXT_primitive_bounding_box = "EXTPrimitiveBoundingBox".nativeClassGLES("EXT_
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PRIMITIVE_BOUNDING_BOX_EXT" _ 0x92BE
+		"PRIMITIVE_BOUNDING_BOX_EXT"..0x92BE
 	)
 
 	void(

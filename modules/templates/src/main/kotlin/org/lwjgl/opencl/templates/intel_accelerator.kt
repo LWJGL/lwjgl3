@@ -33,19 +33,19 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 	val AcceleratorInfo = IntConstant(
 		"Possible values for cl_accelerator_info_intel.",
 
-		"ACCELERATOR_DESCRIPTOR_INTEL" _ 0x4090,
-		"ACCELERATOR_REFERENCE_COUNT_INTEL" _ 0x4091,
-		"ACCELERATOR_CONTEXT_INTEL" _ 0x4092,
-		"ACCELERATOR_TYPE_INTEL" _ 0x4093
+		"ACCELERATOR_DESCRIPTOR_INTEL"..0x4090,
+		"ACCELERATOR_REFERENCE_COUNT_INTEL"..0x4091,
+		"ACCELERATOR_CONTEXT_INTEL"..0x4092,
+		"ACCELERATOR_TYPE_INTEL"..0x4093
 	).javaDocLinks
 
 	IntConstant(
 		"Error codes used by functions in this extension.",
 
-		"INVALID_ACCELERATOR_INTEL" _ -1094,
-		"INVALID_ACCELERATOR_TYPE_INTEL" _ -1095,
-		"INVALID_ACCELERATOR_DESCRIPTOR_INTEL" _ -1096,
-		"ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL" _ -1097
+		"INVALID_ACCELERATOR_INTEL"..-1094,
+		"INVALID_ACCELERATOR_TYPE_INTEL"..-1095,
+		"INVALID_ACCELERATOR_DESCRIPTOR_INTEL"..-1096,
+		"ACCELERATOR_TYPE_NOT_SUPPORTED_INTEL"..-1097
 	)
 
 	cl_accelerator_intel(
@@ -68,8 +68,8 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 			extensions follow the naming scheme of CL_ACCELERATOR_TYPE_{name}_INTEL where {name} is a descriptive acceleration engine string.
 		    """
 		),
-		AutoSize("descriptor") _ size_t.IN("descriptor_size", "a value which specifies of the size, in bytes, of the immediately following descriptor structure"),
-		const _ void_p.IN(
+		AutoSize("descriptor")..size_t.IN("descriptor_size", "a value which specifies of the size, in bytes, of the immediately following descriptor structure"),
+		const..void_p.IN(
 			"descriptor",
 			"""
 			a pointer to a structure that defines the parameter set of the accelerator object. This parameter set describes the configurable state of the
@@ -143,7 +143,7 @@ val intel_accelerator = "INTELAccelerator".nativeClassCL("intel_accelerator", IN
 		cl_accelerator_intel.IN("accelerator", "the accelerator object being queried"),
 		cl_accelerator_info_intel.IN("param_name", "the information to query", AcceleratorInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 	    returnDoc =

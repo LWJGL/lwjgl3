@@ -23,23 +23,23 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 	IntConstant(
 		"Accepted as an attribute name in {@code attribList}.",
 
-		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
-		"CONTEXT_MINOR_VERSION_ARB" _ 0x2092,
-		"CONTEXT_LAYER_PLANE_ARB" _ 0x2093,
-		"CONTEXT_FLAGS_ARB" _ 0x2094
+		"CONTEXT_MAJOR_VERSION_ARB"..0x2091,
+		"CONTEXT_MINOR_VERSION_ARB"..0x2092,
+		"CONTEXT_LAYER_PLANE_ARB"..0x2093,
+		"CONTEXT_FLAGS_ARB"..0x2094
 	)
 
 	IntConstant(
 		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attribList}.",
 
-		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
-		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
+		"CONTEXT_DEBUG_BIT_ARB"..0x0001,
+		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB"..0x0002
 	)
 
 	IntConstant(
 		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
-		"ERROR_INVALID_VERSION_ARB" _ 0x2095
+		"ERROR_INVALID_VERSION_ARB"..0x2095
 	).noPrefix()
 
 	HGLRC(
@@ -52,8 +52,8 @@ val WGL_ARB_create_context = "WGLARBCreateContext".nativeClassWGL("WGL_ARB_creat
 		""",
 
 		HDC.IN("hdc", ""),
-		nullable _ HGLRC.IN("shareContext", ""),
-		nullTerminated _ nullable _ const _ int_p.IN(
+		nullable..HGLRC.IN("shareContext", ""),
+		nullTerminated..nullable..const..int_p.IN(
 			"attribList",
 			"""
 			a list of attributes for the context. The list consists of a sequence of &lt;name, value&gt; pairs terminated by the value 0. If an attribute is not

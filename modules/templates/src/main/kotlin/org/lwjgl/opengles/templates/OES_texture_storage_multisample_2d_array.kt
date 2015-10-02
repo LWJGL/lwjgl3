@@ -23,21 +23,21 @@ val OES_texture_storage_multisample_2d_array = "OESTextureStorageMultisample2DAr
 		TEXTURE_2D_MULTISAMPLE_ARRAY_OES.
 		""",
 
-		"TEXTURE_2D_MULTISAMPLE_ARRAY_OES" _ 0x9102
+		"TEXTURE_2D_MULTISAMPLE_ARRAY_OES"..0x9102
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY_OES" _ 0x9105
+		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY_OES"..0x9105
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_2D_MULTISAMPLE_ARRAY_OES" _ 0x910B,
-		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES" _ 0x910C,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES" _ 0x910D
+		"SAMPLER_2D_MULTISAMPLE_ARRAY_OES"..0x910B,
+		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES"..0x910C,
+		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY_OES"..0x910D
 	)
 
 	void(

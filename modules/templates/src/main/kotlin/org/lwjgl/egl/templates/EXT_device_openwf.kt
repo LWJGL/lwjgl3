@@ -29,7 +29,7 @@ val EXT_device_openwf = "EXTDeviceOpenWF".nativeClassEGL("EXT_device_openwf", po
 	IntConstant(
 		"",
 
-		"OPENWF_DEVICE_ID_EXT" _ 0x3237
+		"OPENWF_DEVICE_ID_EXT"..0x3237
 	)
 }
 
@@ -55,7 +55,7 @@ val EXT_output_openwf = "EXTOutputOpenWF".nativeClassEGL("EXT_output_openwf", po
 	IntConstant(
 		"",
 
-		"OPENWF_PIPELINE_ID_EXT" _ 0x3238,
-		"OPENWF_PORT_ID_EXT" _ 0x3239
+		"OPENWF_PIPELINE_ID_EXT"..0x3238,
+		"OPENWF_PORT_ID_EXT"..0x3239
 	)
 }

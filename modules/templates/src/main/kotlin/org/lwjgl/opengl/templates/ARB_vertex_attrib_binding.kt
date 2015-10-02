@@ -45,24 +45,24 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetVertexAttrib*v.",
 
-		"VERTEX_ATTRIB_BINDING" _ 0x82D4,
-		"VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D5
+		"VERTEX_ATTRIB_BINDING"..0x82D4,
+		"VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D5
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
-		"VERTEX_BINDING_DIVISOR" _ 0x82D6,
-		"VERTEX_BINDING_OFFSET" _ 0x82D7,
-		"VERTEX_BINDING_STRIDE" _ 0x82D8,
-		"VERTEX_BINDING_BUFFER" _ 0x8F4F
+		"VERTEX_BINDING_DIVISOR"..0x82D6,
+		"VERTEX_BINDING_OFFSET"..0x82D7,
+		"VERTEX_BINDING_STRIDE"..0x82D8,
+		"VERTEX_BINDING_BUFFER"..0x8F4F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, ....",
 
-		"MAX_VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D9,
-		"MAX_VERTEX_ATTRIB_BINDINGS" _ 0x82DA
+		"MAX_VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D9,
+		"MAX_VERTEX_ATTRIB_BINDINGS"..0x82DA
 	)
 
 	GL43 reuse "BindVertexBuffer"
@@ -74,7 +74,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 
 	val vaobj = GLuint.IN("vaobj", "the vertex array object")
 	var src = GL43["BindVertexBuffer"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayBindVertexBufferEXT",
 		"DSA version of #BindVertexBuffer().",
 
@@ -86,7 +86,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	)
 
 	src = GL43["VertexAttribFormat"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexAttribFormatEXT",
 		"DSA version of #VertexAttribFormat().",
 
@@ -99,7 +99,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	)
 
 	src = GL43["VertexAttribIFormat"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexAttribIFormatEXT",
 		"DSA version of #VertexAttribIFormat().",
 
@@ -111,7 +111,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	)
 
 	src = GL43["VertexAttribLFormat"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexAttribLFormatEXT",
 		"DSA version of #VertexAttribLFormat().",
 
@@ -123,7 +123,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	)
 
 	src = GL43["VertexAttribBinding"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexAttribBindingEXT",
 		"DSA version of #VertexAttribBinding().",
 
@@ -133,7 +133,7 @@ val ARB_vertex_attrib_binding = "ARBVertexAttribBinding".nativeClassGL("ARB_vert
 	)
 
 	src = GL43["VertexBindingDivisor"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexBindingDivisorEXT",
 		"DSA version of #VertexBindingDivisor().",
 

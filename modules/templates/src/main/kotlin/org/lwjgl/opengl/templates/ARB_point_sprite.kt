@@ -32,7 +32,7 @@ val ARB_point_sprite = "ARBPointSprite".nativeClassGL("ARB_point_sprite", postfi
 		GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
 		""",
 
-		"POINT_SPRITE_ARB" _ 0x8861
+		"POINT_SPRITE_ARB"..0x8861
 	)
 
 	IntConstant(
@@ -41,6 +41,6 @@ val ARB_point_sprite = "ARBPointSprite".nativeClassGL("ARB_point_sprite", postfi
 		{@code pname} may be.
 		""",
 
-		"COORD_REPLACE_ARB" _ 0x8862
+		"COORD_REPLACE_ARB"..0x8862
 	)
 }

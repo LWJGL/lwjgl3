@@ -23,7 +23,7 @@ val KHR_platform_x11 = "KHRPlatformX11".nativeClassEGL("KHR_platform_x11", postf
 	IntConstant(
 		"",
 
-		"PLATFORM_X11_KHR" _ 0x31D5,
-		"PLATFORM_X11_SCREEN_KHR" _ 0x31D6
+		"PLATFORM_X11_KHR"..0x31D5,
+		"PLATFORM_X11_SCREEN_KHR"..0x31D6
 	)
 }

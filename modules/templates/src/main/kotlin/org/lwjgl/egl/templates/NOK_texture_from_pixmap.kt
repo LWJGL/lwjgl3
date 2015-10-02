@@ -40,6 +40,6 @@ val NOK_texture_from_pixmap = "NOKTextureFromPixmap".nativeClassEGL("NOK_texture
 	IntConstant(
 		"",
 
-		"Y_INVERTED_NOK" _ 0x307F
+		"Y_INVERTED_NOK"..0x307F
 	)
 }

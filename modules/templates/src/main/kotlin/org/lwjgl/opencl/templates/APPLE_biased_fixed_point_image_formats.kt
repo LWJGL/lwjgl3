@@ -27,7 +27,7 @@ ushort float_to_sfixed14( float x ){
 	IntConstant(
 		"",
 
-		"SFIXED14_APPLE" _ 0x10000008,
-		"BIASED_HALF_APPLE" _ 0x10000009
+		"SFIXED14_APPLE"..0x10000008,
+		"BIASED_HALF_APPLE"..0x10000009
 	)
 }

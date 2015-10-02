@@ -25,6 +25,6 @@ val NV_multisample_filter_hint = "NVMultisampleFilterHint".nativeClassGL("NV_mul
 	IntConstant(
 		"Accepted by the {@code target} parameter of Hint and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MULTISAMPLE_FILTER_HINT_NV" _ 0x8534
+		"MULTISAMPLE_FILTER_HINT_NV"..0x8534
 	)
 }

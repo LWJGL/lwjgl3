@@ -18,6 +18,6 @@ val ANGLE_window_fixed_size = "ANGLEWindowFixedSize".nativeClassEGL("ANGLE_windo
 	IntConstant(
 		"",
 
-		"FIXED_SIZE_ANGLE" _ 0x3201
+		"FIXED_SIZE_ANGLE"..0x3201
 	)
 }

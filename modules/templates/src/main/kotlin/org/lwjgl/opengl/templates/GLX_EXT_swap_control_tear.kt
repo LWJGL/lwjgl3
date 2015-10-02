@@ -22,7 +22,7 @@ val GLX_EXT_swap_control_tear = "GLXEXTSwapControlTear".nativeClassGLX("GLX_EXT_
 	IntConstant(
 		"Accepted by GLX13#QueryDrawable().",
 
-		"LATE_SWAPS_TEAR_EXT" _ 0x20F3
+		"LATE_SWAPS_TEAR_EXT"..0x20F3
 	)
 
 }

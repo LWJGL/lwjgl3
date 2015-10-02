@@ -21,6 +21,6 @@ val AMD_transform_feedback4 = "AMDTransformFeedback4".nativeClassGL("AMD_transfo
 	IntConstant(
 		"Accepted by the {@code pname} argument to Enablei. Disablei and IsEnabledi.",
 
-		"STREAM_RASTERIZATION_AMD" _ 0x91A0
+		"STREAM_RASTERIZATION_AMD"..0x91A0
 	)
 }

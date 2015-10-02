@@ -43,13 +43,13 @@ val OES_texture_buffer = "OESTextureBuffer".nativeClassGLES("OES_texture_buffer"
 		GetBufferPointerv, TexBufferOES, and TexBufferRangeOES.
 		""",
 
-		"TEXTURE_BUFFER_OES" _ 0x8C2A
+		"TEXTURE_BUFFER_OES"..0x8C2A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetFloatv, and GetIntegerv.",
 
-		"TEXTURE_BUFFER_BINDING_OES" _ 0x8C2A
+		"TEXTURE_BUFFER_BINDING_OES"..0x8C2A
 	)
 
 	IntConstant(
@@ -60,20 +60,20 @@ val OES_texture_buffer = "OESTextureBuffer".nativeClassGLES("OES_texture_buffer"
 		GetProgramResourceiv when the TYPE property is queried on the UNIFORM interface.
 		""",
 
-		"SAMPLER_BUFFER_OES" _ 0x8DC2,
-		"INT_SAMPLER_BUFFER_OES" _ 0x8DD0,
-		"UNSIGNED_INT_SAMPLER_BUFFER_OES" _ 0x8DD8,
-		"IMAGE_BUFFER_OES" _ 0x9051,
-		"INT_IMAGE_BUFFER_OES" _ 0x905C,
-		"UNSIGNED_INT_IMAGE_BUFFER_OES" _ 0x9067
+		"SAMPLER_BUFFER_OES"..0x8DC2,
+		"INT_SAMPLER_BUFFER_OES"..0x8DD0,
+		"UNSIGNED_INT_SAMPLER_BUFFER_OES"..0x8DD8,
+		"IMAGE_BUFFER_OES"..0x9051,
+		"INT_IMAGE_BUFFER_OES"..0x905C,
+		"UNSIGNED_INT_IMAGE_BUFFER_OES"..0x9067
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_BUFFER_DATA_STORE_BINDING_OES" _ 0x8C2D,
-		"TEXTURE_BUFFER_OFFSET_OES" _ 0x919D,
-		"TEXTURE_BUFFER_SIZE_OES" _ 0x919E
+		"TEXTURE_BUFFER_DATA_STORE_BINDING_OES"..0x8C2D,
+		"TEXTURE_BUFFER_OFFSET_OES"..0x919D,
+		"TEXTURE_BUFFER_SIZE_OES"..0x919E
 	)
 
 	void(

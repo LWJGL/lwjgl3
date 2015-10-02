@@ -23,13 +23,13 @@ val EXT_stencil_two_side = "EXTStencilTwoSide".nativeClassGL("EXT_stencil_two_si
 		GetDoublev.
 		""",
 
-		"STENCIL_TEST_TWO_SIDE_EXT" _ 0x8910
+		"STENCIL_TEST_TWO_SIDE_EXT"..0x8910
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"ACTIVE_STENCIL_FACE_EXT" _ 0x8911
+		"ACTIVE_STENCIL_FACE_EXT"..0x8911
 	)
 
 	void(

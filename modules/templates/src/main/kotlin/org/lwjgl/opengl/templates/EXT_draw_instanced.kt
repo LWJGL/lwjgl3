@@ -35,7 +35,7 @@ val EXT_draw_instanced = "EXTDrawInstanced".nativeClassGL("EXT_draw_instanced", 
 		GLenum.IN("mode", ""),
 		GLsizei.IN("count", ""),
 		GLenum.IN("type", ""),
-		const _ void_p.IN("indices", ""),
+		const..void_p.IN("indices", ""),
 		GLsizei.IN("primcount", "")
 	)
 }

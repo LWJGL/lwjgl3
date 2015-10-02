@@ -18,13 +18,13 @@ val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_mem
 	IntConstant(
 		"This flag specifies that the specified set of memory objects are to be migrated to the host, regardless of the target command queue.",
 
-		"MIGRATE_MEM_OBJECT_HOST_EXT" _ 0x1
+		"MIGRATE_MEM_OBJECT_HOST_EXT"..0x1
 	)
 
 	IntConstant(
 		"Returned in the {@code param_value} parameter of the clGetEventInfo when {@code param_name} is CL10#EVENT_COMMAND_TYPE.",
 
-		"COMMAND_MIGRATE_MEM_OBJECT_EXT" _ 0x4040
+		"COMMAND_MIGRATE_MEM_OBJECT_EXT"..0x4040
 	)
 
 	cl_int(
@@ -44,8 +44,8 @@ val ext_migrate_memobject = "EXTMigrateMemobject".nativeClassCL("ext_migrate_mem
 		""",
 
 		cl_command_queue.IN("command_queue", "a valid command queue"),
-		AutoSize("mem_objects") _ cl_uint.IN("num_mem_objects", "the number of memory objects specified in the {@code mem_objects} argument"),
-		const _ cl_mem_p.IN("mem_objects", "the memory objects to migrate to the OpenCL device associated with {@code command_queue}"),
+		AutoSize("mem_objects")..cl_uint.IN("num_mem_objects", "the number of memory objects specified in the {@code mem_objects} argument"),
+		const..cl_mem_p.IN("mem_objects", "the memory objects to migrate to the OpenCL device associated with {@code command_queue}"),
 		cl_mem_migration_flags_ext.IN("flags", "a bitfield that is used to specify migration options", "0 #MIGRATE_MEM_OBJECT_HOST_EXT"),
 		NEWL,
 		EWL,

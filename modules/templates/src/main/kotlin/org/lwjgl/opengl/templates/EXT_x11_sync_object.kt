@@ -31,7 +31,7 @@ val EXT_x11_sync_object = "EXTX11SyncObject".nativeClassGL("EXT_x11_sync_object"
 	IntConstant(
 		"Accepted by the {@code external_sync_type} parameter of ImportSyncEXT.",
 
-		"SYNC_X11_FENCE_EXT" _ 0x90E1
+		"SYNC_X11_FENCE_EXT"..0x90E1
 	)
 
 	GLsync(

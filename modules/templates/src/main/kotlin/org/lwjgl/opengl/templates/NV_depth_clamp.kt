@@ -34,6 +34,6 @@ val NV_depth_clamp = "NVDepthClamp".nativeClassGL("NV_depth_clamp", postfix = NV
 		and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
 		""",
 
-		"DEPTH_CLAMP_NV" _ 0x864F
+		"DEPTH_CLAMP_NV"..0x864F
 	)
 }

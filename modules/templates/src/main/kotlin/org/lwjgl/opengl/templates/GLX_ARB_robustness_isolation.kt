@@ -31,7 +31,7 @@ val GLX_ARB_robustness_application_isolation = "GLXARBRobustnessApplicationIsola
 		GLXARBCreateContext#CreateContextAttribsARB().
 		""",
 
-		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008
+		"CONTEXT_RESET_ISOLATION_BIT_ARB"..0x00000008
 	)
 }
 

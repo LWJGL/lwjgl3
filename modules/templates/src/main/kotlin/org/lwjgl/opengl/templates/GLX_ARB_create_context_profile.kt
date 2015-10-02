@@ -21,20 +21,20 @@ val GLX_ARB_create_context_profile = "GLXARBCreateContextProfile".nativeClassGLX
 	IntConstant(
 		"Accepted as an attribute name in {@code attrib_list}.",
 
-		"CONTEXT_PROFILE_MASK_ARB" _ 0x9126
+		"CONTEXT_PROFILE_MASK_ARB"..0x9126
 	)
 
 	IntConstant(
 		"Accepted as bits in the attribute value for #CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
 
-		"CONTEXT_CORE_PROFILE_BIT_ARB" _ 0x00000001,
-		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB" _ 0x00000002
+		"CONTEXT_CORE_PROFILE_BIT_ARB"..0x00000001,
+		"CONTEXT_COMPATIBILITY_PROFILE_BIT_ARB"..0x00000002
 	)
 
 	IntConstant(
 		"GLX error.",
 
-		"GLXBadProfileARB" _ 13
+		"GLXBadProfileARB"..13
 	).noPrefix()
 
 }

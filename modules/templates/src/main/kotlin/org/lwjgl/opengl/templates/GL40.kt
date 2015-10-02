@@ -34,7 +34,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 
 	val blendEquations = "GL14#FUNC_ADD GL14#FUNC_SUBTRACT GL14#FUNC_REVERSE_SUBTRACT GL14#MIN GL14#MAX"
 
-	ReferenceGL("glBlendEquation") _ void(
+	ReferenceGL("glBlendEquation")..void(
 		"BlendEquationi",
 		"Specifies the equation used for both the RGB blend equation and the Alpha blend equation for the specified draw buffer.",
 
@@ -42,7 +42,7 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		GLenum.IN("mode", "how source and destination colors are combined", blendEquations)
 	)
 
-	ReferenceGL("glBlendEquationSeparate") _ void(
+	ReferenceGL("glBlendEquationSeparate")..void(
 		"BlendEquationSeparatei",
 		"Sets the RGB blend equation and the alpha blend equation separately for the specified draw buffer.",
 
@@ -79,13 +79,13 @@ val GL40 = "GL40".nativeClassGL("GL40") {
 		MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
 		""",
 
-		"DRAW_INDIRECT_BUFFER" _ 0x8F3F
+		"DRAW_INDIRECT_BUFFER"..0x8F3F
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
-		"DRAW_INDIRECT_BUFFER_BINDING" _ 0x8F43
+		"DRAW_INDIRECT_BUFFER_BINDING"..0x8F43
 	)
 
 	void(
@@ -111,9 +111,9 @@ glDrawArraysInstancedBaseInstance(mode, cmd->first, cmd->count, cmd->primCount, 
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		Check("4 * 4") _ MultiType(
+		Check("4 * 4")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing the draw parameters")
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "a structure containing the draw parameters")
 	)
 
 	void(
@@ -158,9 +158,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the type of data in the buffer bound to the GL15#ELEMENT_ARRAY_BUFFER binding",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		Check("5 * 4") _ MultiType(
+		Check("5 * 4")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "the address of a structure containing the draw parameters")
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "the address of a structure containing the draw parameters")
 	)
 
 	// ARB_gpu_shader5
@@ -168,16 +168,16 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"GEOMETRY_SHADER_INVOCATIONS" _ 0x887F
+		"GEOMETRY_SHADER_INVOCATIONS"..0x887F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
-		"MAX_GEOMETRY_SHADER_INVOCATIONS" _ 0x8E5A,
-		"MIN_FRAGMENT_INTERPOLATION_OFFSET" _ 0x8E5B,
-		"MAX_FRAGMENT_INTERPOLATION_OFFSET" _ 0x8E5C,
-		"FRAGMENT_INTERPOLATION_OFFSET_BITS" _ 0x8E5D
+		"MAX_GEOMETRY_SHADER_INVOCATIONS"..0x8E5A,
+		"MIN_FRAGMENT_INTERPOLATION_OFFSET"..0x8E5B,
+		"MAX_FRAGMENT_INTERPOLATION_OFFSET"..0x8E5C,
+		"FRAGMENT_INTERPOLATION_OFFSET_BITS"..0x8E5D
 	)
 
 	// ARB_gpu_shader_fp64
@@ -185,18 +185,18 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Returned in the {@code type} parameter of GetActiveUniform, and GetTransformFeedbackVarying.",
 
-		"DOUBLE_VEC2" _ 0x8FFC,
-		"DOUBLE_VEC3" _ 0x8FFD,
-		"DOUBLE_VEC4" _ 0x8FFE,
-		"DOUBLE_MAT2" _ 0x8F46,
-		"DOUBLE_MAT3" _ 0x8F47,
-		"DOUBLE_MAT4" _ 0x8F48,
-		"DOUBLE_MAT2x3" _ 0x8F49,
-		"DOUBLE_MAT2x4" _ 0x8F4A,
-		"DOUBLE_MAT3x2" _ 0x8F4B,
-		"DOUBLE_MAT3x4" _ 0x8F4C,
-		"DOUBLE_MAT4x2" _ 0x8F4D,
-		"DOUBLE_MAT4x3" _ 0x8F4E
+		"DOUBLE_VEC2"..0x8FFC,
+		"DOUBLE_VEC3"..0x8FFD,
+		"DOUBLE_VEC4"..0x8FFE,
+		"DOUBLE_MAT2"..0x8F46,
+		"DOUBLE_MAT3"..0x8F47,
+		"DOUBLE_MAT4"..0x8F48,
+		"DOUBLE_MAT2x3"..0x8F49,
+		"DOUBLE_MAT2x4"..0x8F4A,
+		"DOUBLE_MAT3x2"..0x8F4B,
+		"DOUBLE_MAT3x4"..0x8F4C,
+		"DOUBLE_MAT4x2"..0x8F4D,
+		"DOUBLE_MAT4x3"..0x8F4E
 	)
 
 	// Uniform functions javadoc
@@ -257,8 +257,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single double uniform variable or a double uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		AutoSize("value") _ GLsizei.IN("count", uniformArrayCount),
-		const _ GLdouble_p.IN("value", uniformArrayValue)
+		AutoSize("value")..GLsizei.IN("count", uniformArrayCount),
+		const..GLdouble_p.IN("value", uniformArrayValue)
 	)
 
 	void(
@@ -266,8 +266,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec2 uniform variable or a dvec2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 1) _ GLsizei.IN("count", uniformArrayCount),
-		const _ GLdouble_p.IN("value", uniformArrayValue)
+		(AutoSize("value") shr 1)..GLsizei.IN("count", uniformArrayCount),
+		const..GLdouble_p.IN("value", uniformArrayValue)
 	)
 
 	void(
@@ -275,8 +275,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec3 uniform variable or a dvec3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / 3) _ GLsizei.IN("count", uniformArrayCount),
-		const _ GLdouble_p.IN("value", uniformArrayValue)
+		(AutoSize("value") / 3)..GLsizei.IN("count", uniformArrayCount),
+		const..GLdouble_p.IN("value", uniformArrayValue)
 	)
 
 	void(
@@ -284,8 +284,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dvec4 uniform variable or a dvec4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniformArrayCount),
-		const _ GLdouble_p.IN("value", uniformArrayValue)
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniformArrayCount),
+		const..GLdouble_p.IN("value", uniformArrayValue)
 	)
 
 	void(
@@ -293,9 +293,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2 uniform variable or a dmat2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 2) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 2)..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
 	void(
@@ -303,9 +303,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3 uniform variable or a dmat3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / (3 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 3))..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
 	void(
@@ -313,9 +313,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4 uniform variable or a dmat4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 4) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 4)..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
 	void(
@@ -323,9 +323,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2x3 uniform variable or a dmat2x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / (2 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (2 * 3))..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
 	void(
@@ -333,9 +333,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat2x4 uniform variable or a dmat2x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 	)
 
 	void(
@@ -343,9 +343,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3x2 uniform variable or a dmat3x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / (3 * 2)) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 2))..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 
 	)
 
@@ -354,9 +354,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat3x4 uniform variable or a dmat3x4 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / (3 * 4)) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (3 * 4))..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 
 	)
 
@@ -365,9 +365,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4x2 uniform variable or a dmat4x2 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") shr 3) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") shr 3)..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 
 	)
 
@@ -376,9 +376,9 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Specifies the value of a single dmat4x3 uniform variable or a dmat4x3 uniform variable array for the current program object.",
 
 		GLint.IN("location", uniformLocation),
-		(AutoSize("value") / (4 * 3)) _ GLsizei.IN("count", uniformMatrixCount),
+		(AutoSize("value") / (4 * 3))..GLsizei.IN("count", uniformMatrixCount),
 		GLboolean.IN("transpose", uniformMatrixTranspose),
-		const _ GLdouble_p.IN("value", uniformMatrixValue)
+		const..GLdouble_p.IN("value", uniformMatrixValue)
 
 	)
 
@@ -388,7 +388,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		Check(1) _ returnValue _ GLdouble_p.OUT("params", "the value of the specified uniform variable")
+		Check(1)..returnValue..GLdouble_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	// ARB_sample_shading
@@ -399,13 +399,13 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GetDoublev.
 		""",
 
-		"SAMPLE_SHADING" _ 0x8C36
+		"SAMPLE_SHADING"..0x8C36
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MIN_SAMPLE_SHADING_VALUE" _ 0x8C37
+		"MIN_SAMPLE_SHADING_VALUE"..0x8C37
 	)
 
 	void(
@@ -420,25 +420,25 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	val ProgramStageProperties = IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramStageiv.",
 
-		"ACTIVE_SUBROUTINES" _ 0x8DE5,
-		"ACTIVE_SUBROUTINE_UNIFORMS" _ 0x8DE6,
-		"ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS" _ 0x8E47,
-		"ACTIVE_SUBROUTINE_MAX_LENGTH" _ 0x8E48,
-		"ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH" _ 0x8E49
+		"ACTIVE_SUBROUTINES"..0x8DE5,
+		"ACTIVE_SUBROUTINE_UNIFORMS"..0x8DE6,
+		"ACTIVE_SUBROUTINE_UNIFORM_LOCATIONS"..0x8E47,
+		"ACTIVE_SUBROUTINE_MAX_LENGTH"..0x8E48,
+		"ACTIVE_SUBROUTINE_UNIFORM_MAX_LENGTH"..0x8E49
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
-		"MAX_SUBROUTINES" _ 0x8DE7,
-		"MAX_SUBROUTINE_UNIFORM_LOCATIONS" _ 0x8DE8
+		"MAX_SUBROUTINES"..0x8DE7,
+		"MAX_SUBROUTINE_UNIFORM_LOCATIONS"..0x8DE8
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveSubroutineUniformiv.",
 
-		"NUM_COMPATIBLE_SUBROUTINES" _ 0x8E4A,
-		"COMPATIBLE_SUBROUTINES" _ 0x8E4B
+		"NUM_COMPATIBLE_SUBROUTINES"..0x8E4A,
+		"COMPATIBLE_SUBROUTINES"..0x8E4B
 	)
 
 	GLint(
@@ -447,7 +447,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
-		const _ GLcharASCII_p.IN("name", "the name of the subroutine uniform whose index to query.")
+		const..GLcharASCII_p.IN("name", "the name of the subroutine uniform whose index to query.")
 	)
 
 	GLuint(
@@ -456,7 +456,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine function index", SHADER_TYPES),
-		const _ GLcharASCII_p.IN("name", "the name of the subroutine function whose index to query")
+		const..GLcharASCII_p.IN("name", "the name of the subroutine function whose index to query")
 	)
 
 	void(
@@ -471,7 +471,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 			"the parameter of the shader subroutine uniform to query",
 			"#NUM_COMPATIBLE_SUBROUTINES #COMPATIBLE_SUBROUTINES GL31#UNIFORM_SIZE GL31#UNIFORM_NAME_LENGTH"
 		),
-		Check(1) _ returnValue _ GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
+		Check(1)..returnValue..GLint_p.OUT("values", "the address of a buffer into which the queried value or values will be placed")
 	)
 
 	void(
@@ -481,11 +481,11 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("program", "the name of the program containing the subroutine"),
 		GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
 		GLuint.IN("index", "the index of the shader subroutine uniform"),
-		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
+		AutoSize("name")..GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable into which is written the number of characters copied into {@code name}"),
 		Return(
 			"length", "glGetActiveSubroutineUniformi(program, shadertype, index, GL31.GL_UNIFORM_NAME_LENGTH)"
-		) _ GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
+		)..GLcharASCII_p.OUT("name", "the address of a buffer that will receive the name of the specified shader subroutine uniform")
 	)
 
 	void(
@@ -495,11 +495,11 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("program", "the name of the program containing the subroutine"),
 		GLenum.IN("shadertype", "the shader stage from which to query the subroutine name", SHADER_TYPES),
 		GLuint.IN("index", "the index of the shader subroutine uniform"),
-		AutoSize("name") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
+		AutoSize("name")..GLsizei.IN("bufsize", "the size of the buffer whose address is given in {@code name}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable which is to receive the length of the shader subroutine uniform name"),
 		Return(
 			"length", "glGetProgramStagei(program, shadertype, GL_ACTIVE_SUBROUTINE_MAX_LENGTH)"
-		) _ GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
+		)..GLcharASCII_p.OUT("name", "an array into which the name of the shader subroutine uniform will be written")
 	)
 
 	void(
@@ -507,8 +507,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"Loads active subroutine uniforms.",
 
 		GLenum.IN("shadertype", "the shader stage to update", SHADER_TYPES),
-		AutoSize("indices") _ GLsizei.IN("count", "the number of uniform indices stored in {@code indices}"),
-		SingleValue("index") _ const _ GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
+		AutoSize("indices")..GLsizei.IN("count", "the number of uniform indices stored in {@code indices}"),
+		SingleValue("index")..const..GLuint_p.IN("indices", "an array holding the indices to load into the shader subroutine variables")
 	)
 
 	void(
@@ -517,7 +517,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 
 		GLenum.IN("shadertype", "the shader stage from which to query for subroutine uniform index", SHADER_TYPES),
 		GLint.IN("location", "the location of the subroutine uniform"),
-		Check(1) _ returnValue _ GLuint_p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
+		Check(1)..returnValue..GLuint_p.OUT("params", "a variable to receive the value or values of the subroutine uniform")
 	)
 
 	void(
@@ -527,7 +527,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("program", "the name of the program containing shader stage"),
 		GLenum.IN("shadertype", "the shader stage from which to query for the subroutine parameter", SHADER_TYPES),
 		GLenum.IN("pname", "the parameter of the shader to query", ProgramStageProperties),
-		Check(1) _ returnValue _ GLint_p.OUT("values", "a variable into which the queried value or values will be placed")
+		Check(1)..returnValue..GLint_p.OUT("values", "a variable into which the queried value or values will be placed")
 	)
 
 	// ARB_tesselation_shader
@@ -535,78 +535,78 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code mode} parameter of Begin and all vertex array functions that implicitly call Begin.",
 
-		"PATCHES" _ 0xE
+		"PATCHES"..0xE
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PatchParameteri, GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PATCH_VERTICES" _ 0x8E72
+		"PATCH_VERTICES"..0x8E72
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PatchParameterfv, GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv, and GetInteger64v.",
 
-		"PATCH_DEFAULT_INNER_LEVEL" _ 0x8E73,
-		"PATCH_DEFAULT_OUTER_LEVEL" _ 0x8E74
+		"PATCH_DEFAULT_INNER_LEVEL"..0x8E73,
+		"PATCH_DEFAULT_OUTER_LEVEL"..0x8E74
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"TESS_CONTROL_OUTPUT_VERTICES" _ 0x8E75,
-		"TESS_GEN_MODE" _ 0x8E76,
-		"TESS_GEN_SPACING" _ 0x8E77,
-		"TESS_GEN_VERTEX_ORDER" _ 0x8E78,
-		"TESS_GEN_POINT_MODE" _ 0x8E79
+		"TESS_CONTROL_OUTPUT_VERTICES"..0x8E75,
+		"TESS_GEN_MODE"..0x8E76,
+		"TESS_GEN_SPACING"..0x8E77,
+		"TESS_GEN_VERTEX_ORDER"..0x8E78,
+		"TESS_GEN_POINT_MODE"..0x8E79
 	)
 
 	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_MODE.",
 
-		"ISOLINES" _ 0x8E7A
+		"ISOLINES"..0x8E7A
 	)
 
 	IntConstant(
 		"Returned by GetProgramiv when {@code pname} is TESS_GEN_SPACING.",
 
-		"FRACTIONAL_ODD" _ 0x8E7B,
-		"FRACTIONAL_EVEN" _ 0x8E7C
+		"FRACTIONAL_ODD"..0x8E7B,
+		"FRACTIONAL_EVEN"..0x8E7C
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"MAX_PATCH_VERTICES" _ 0x8E7D,
-		"MAX_TESS_GEN_LEVEL" _ 0x8E7E,
-		"MAX_TESS_CONTROL_UNIFORM_COMPONENTS" _ 0x8E7F,
-		"MAX_TESS_EVALUATION_UNIFORM_COMPONENTS" _ 0x8E80,
-		"MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS" _ 0x8E81,
-		"MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS" _ 0x8E82,
-		"MAX_TESS_CONTROL_OUTPUT_COMPONENTS" _ 0x8E83,
-		"MAX_TESS_PATCH_COMPONENTS" _ 0x8E84,
-		"MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS" _ 0x8E85,
-		"MAX_TESS_EVALUATION_OUTPUT_COMPONENTS" _ 0x8E86,
-		"MAX_TESS_CONTROL_UNIFORM_BLOCKS" _ 0x8E89,
-		"MAX_TESS_EVALUATION_UNIFORM_BLOCKS" _ 0x8E8A,
-		"MAX_TESS_CONTROL_INPUT_COMPONENTS" _ 0x886C,
-		"MAX_TESS_EVALUATION_INPUT_COMPONENTS" _ 0x886D,
-		"MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS" _ 0x8E1E,
-		"MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS" _ 0x8E1F
+		"MAX_PATCH_VERTICES"..0x8E7D,
+		"MAX_TESS_GEN_LEVEL"..0x8E7E,
+		"MAX_TESS_CONTROL_UNIFORM_COMPONENTS"..0x8E7F,
+		"MAX_TESS_EVALUATION_UNIFORM_COMPONENTS"..0x8E80,
+		"MAX_TESS_CONTROL_TEXTURE_IMAGE_UNITS"..0x8E81,
+		"MAX_TESS_EVALUATION_TEXTURE_IMAGE_UNITS"..0x8E82,
+		"MAX_TESS_CONTROL_OUTPUT_COMPONENTS"..0x8E83,
+		"MAX_TESS_PATCH_COMPONENTS"..0x8E84,
+		"MAX_TESS_CONTROL_TOTAL_OUTPUT_COMPONENTS"..0x8E85,
+		"MAX_TESS_EVALUATION_OUTPUT_COMPONENTS"..0x8E86,
+		"MAX_TESS_CONTROL_UNIFORM_BLOCKS"..0x8E89,
+		"MAX_TESS_EVALUATION_UNIFORM_BLOCKS"..0x8E8A,
+		"MAX_TESS_CONTROL_INPUT_COMPONENTS"..0x886C,
+		"MAX_TESS_EVALUATION_INPUT_COMPONENTS"..0x886D,
+		"MAX_COMBINED_TESS_CONTROL_UNIFORM_COMPONENTS"..0x8E1E,
+		"MAX_COMBINED_TESS_EVALUATION_UNIFORM_COMPONENTS"..0x8E1F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
-		"UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER" _ 0x84F0,
-		"UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER" _ 0x84F1
+		"UNIFORM_BLOCK_REFERENCED_BY_TESS_CONTROL_SHADER"..0x84F0,
+		"UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER"..0x84F1
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
 
-		"TESS_EVALUATION_SHADER" _ 0x8E87,
-		"TESS_CONTROL_SHADER" _ 0x8E88
+		"TESS_EVALUATION_SHADER"..0x8E87,
+		"TESS_CONTROL_SHADER"..0x8E88
 	)
 
 	void(
@@ -624,7 +624,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("pname", "the name of the parameter to set", "#PATCH_DEFAULT_OUTER_LEVEL #PATCH_DEFAULT_INNER_LEVEL"),
 		Check(
 			expression = "GL11.glGetInteger(GL_PATCH_VERTICES)", debug = true
-		) _ const _ GLfloat_p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
+		)..const..GLfloat_p.IN("values", "an array containing the new values for the parameter given by {@code pname}")
 	)
 
 	// ARB_texture_cube_map_array
@@ -632,28 +632,28 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, BindTexture, and GenerateMipmap.",
 
-		"TEXTURE_CUBE_MAP_ARRAY" _ 0x9009
+		"TEXTURE_CUBE_MAP_ARRAY"..0x9009
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
-		"TEXTURE_BINDING_CUBE_MAP_ARRAY" _ 0x900A
+		"TEXTURE_BINDING_CUBE_MAP_ARRAY"..0x900A
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CompressedTeximage3D, CompressedTexSubImage3D and CopyTexSubImage3D.",
 
-		"PROXY_TEXTURE_CUBE_MAP_ARRAY" _ 0x900B
+		"PROXY_TEXTURE_CUBE_MAP_ARRAY"..0x900B
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_CUBE_MAP_ARRAY" _ 0x900C,
-		"SAMPLER_CUBE_MAP_ARRAY_SHADOW" _ 0x900D,
-		"INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900E,
-		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY" _ 0x900F
+		"SAMPLER_CUBE_MAP_ARRAY"..0x900C,
+		"SAMPLER_CUBE_MAP_ARRAY_SHADOW"..0x900D,
+		"INT_SAMPLER_CUBE_MAP_ARRAY"..0x900E,
+		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY"..0x900F
 	)
 
 	// ARB_texture_gather
@@ -661,8 +661,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET" _ 0x8E5E,
-		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET" _ 0x8E5F
+		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET"..0x8E5E,
+		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET"..0x8E5F
 	)
 
 	// ARB_transform_feedback2
@@ -670,15 +670,15 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTransformFeedback.",
 
-		"TRANSFORM_FEEDBACK" _ 0x8E22
+		"TRANSFORM_FEEDBACK"..0x8E22
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_PAUSED" _ 0x8E23,
-		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE" _ 0x8E24,
-		"TRANSFORM_FEEDBACK_BINDING" _ 0x8E25
+		"TRANSFORM_FEEDBACK_BUFFER_PAUSED"..0x8E23,
+		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE"..0x8E24,
+		"TRANSFORM_FEEDBACK_BINDING"..0x8E25
 	)
 
 	void(
@@ -693,16 +693,16 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		"DeleteTransformFeedbacks",
 		"Deletes transform feedback objects.",
 
-		AutoSize("ids") _ GLsizei.IN("n", "the number of transform feedback objects to delete"),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
+		AutoSize("ids")..GLsizei.IN("n", "the number of transform feedback objects to delete"),
+		SingleValue("id")..const..GLuint_p.IN("ids", "an array of names of transform feedback objects to delete")
 	)
 
 	void(
 		"GenTransformFeedbacks",
 		"Reserves transform feedback object names.",
 
-		AutoSize("ids") _ GLsizei.IN("n", "the number of transform feedback object names to reserve"),
-		returnValue _ GLuint_p.OUT("ids", "an array of into which the reserved names will be written")
+		AutoSize("ids")..GLsizei.IN("n", "the number of transform feedback object names to reserve"),
+		returnValue..GLuint_p.OUT("ids", "an array of into which the reserved names will be written")
 	)
 
 	GLboolean(
@@ -751,8 +751,8 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_TRANSFORM_FEEDBACK_BUFFERS" _ 0x8E70,
-		"MAX_VERTEX_STREAMS" _ 0x8E71
+		"MAX_TRANSFORM_FEEDBACK_BUFFERS"..0x8E70,
+		"MAX_VERTEX_STREAMS"..0x8E71
 	)
 
 	void(
@@ -777,7 +777,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLuint.IN("id", "the name of a query object")
 	)
 
-	ReferenceGL("glBeginQueryIndexed") _ void(
+	ReferenceGL("glBeginQueryIndexed")..void(
 		"EndQueryIndexed",
 		"Ends a query object on an indexed target",
 
@@ -792,7 +792,7 @@ void glDrawElementsIndirect(GLenum mode, GLenum type, const void *indirect) {
 		GLenum.IN("target", "a query object target", QUERY_TARGETS),
 		GLuint.IN("index", "the index of the query object target"),
 		GLenum.IN("pname", "the symbolic name of a query object target parameter"),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "the requested data")
+		Check(1)..returnValue..GLint_p.OUT("params", "the requested data")
 	)
 
 }

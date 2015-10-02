@@ -18,6 +18,6 @@ val OES_stencil4 = "OESStencil4".nativeClassGLES("OES_stencil4", postfix = OES) 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageOES.",
 
-		"STENCIL_INDEX4_OES" _ 0x8D47
+		"STENCIL_INDEX4_OES"..0x8D47
 	)
 }

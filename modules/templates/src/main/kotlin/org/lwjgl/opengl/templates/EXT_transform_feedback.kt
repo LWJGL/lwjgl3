@@ -39,14 +39,14 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		BindBufferRangeEXT, BindBufferOffsetEXT and BindBufferBaseEXT.
 		""",
 
-		"TRANSFORM_FEEDBACK_BUFFER_EXT" _ 0x8C8E
+		"TRANSFORM_FEEDBACK_BUFFER_EXT"..0x8C8E
 	)
 
 	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegerIndexedvEXT and GetBooleanIndexedvEXT.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_START_EXT" _ 0x8C84,
-		"TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT" _ 0x8C85
+		"TRANSFORM_FEEDBACK_BUFFER_START_EXT"..0x8C84,
+		"TRANSFORM_FEEDBACK_BUFFER_SIZE_EXT"..0x8C85
 	)
 
 	IntConstant(
@@ -55,21 +55,21 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GetDoublev, GetIntegerv, and GetFloatv.
 		""",
 
-		"TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT" _ 0x8C8F
+		"TRANSFORM_FEEDBACK_BUFFER_BINDING_EXT"..0x8C8F
 	)
 
 	IntConstant(
 		"Accepted by the {@code bufferMode} parameter of TransformFeedbackVaryingsEXT.",
 
-		"INTERLEAVED_ATTRIBS_EXT" _ 0x8C8C,
-		"SEPARATE_ATTRIBS_EXT" _ 0x8C8D
+		"INTERLEAVED_ATTRIBS_EXT"..0x8C8C,
+		"SEPARATE_ATTRIBS_EXT"..0x8C8D
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
-		"PRIMITIVES_GENERATED_EXT" _ 0x8C87,
-		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT" _ 0x8C88
+		"PRIMITIVES_GENERATED_EXT"..0x8C87,
+		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_EXT"..0x8C88
 	)
 
 	IntConstant(
@@ -78,23 +78,23 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		GetDoublev.
 		""",
 
-		"RASTERIZER_DISCARD_EXT" _ 0x8C89
+		"RASTERIZER_DISCARD_EXT"..0x8C89
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT" _ 0x8C8A,
-		"MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT" _ 0x8C8B,
-		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT" _ 0x8C80
+		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_EXT"..0x8C8A,
+		"MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_EXT"..0x8C8B,
+		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_EXT"..0x8C80
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"TRANSFORM_FEEDBACK_VARYINGS_EXT" _ 0x8C83,
-		"TRANSFORM_FEEDBACK_BUFFER_MODE_EXT" _ 0x8C7F,
-		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT" _ 0x8C76
+		"TRANSFORM_FEEDBACK_VARYINGS_EXT"..0x8C83,
+		"TRANSFORM_FEEDBACK_BUFFER_MODE_EXT"..0x8C7F,
+		"TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT"..0x8C76
 	)
 
 	void(
@@ -144,8 +144,8 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 		"",
 
 		GLuint.IN("program", ""),
-		AutoSize("varyings") _ GLsizei.IN("count", ""),
-		PointerArray(GLcharASCII_p, "varying") _ const _ GLcharASCII_p_const_p.IN("varyings", ""),
+		AutoSize("varyings")..GLsizei.IN("count", ""),
+		PointerArray(GLcharASCII_p, "varying")..const..GLcharASCII_p_const_p.IN("varyings", ""),
 		GLenum.IN("bufferMode", "")
 	)
 
@@ -155,13 +155,13 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLuint.IN("program", ""),
 		GLuint.IN("index", ""),
-		AutoSize("name") _ GLsizei.IN("bufSize", ""),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", ""),
-		Check(1) _ GLsizei_p.OUT("size", ""),
-		Check(1) _ GLenum_p.OUT("type", ""),
+		AutoSize("name")..GLsizei.IN("bufSize", ""),
+		Check(1)..nullable..GLsizei_p.OUT("length", ""),
+		Check(1)..GLsizei_p.OUT("size", ""),
+		Check(1)..GLenum_p.OUT("type", ""),
 		Return("length", """GL.getCapabilities().OpenGL20
 			? GL20.glGetProgrami(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)
-			: ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""") _ GLcharASCII_p.OUT("name", "")
+			: ARBShaderObjects.glGetObjectParameteriARB(program, GL_TRANSFORM_FEEDBACK_VARYING_MAX_LENGTH_EXT)""")..GLcharASCII_p.OUT("name", "")
 	)
 
 	void(
@@ -170,7 +170,7 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		Check(1) _ returnValue _ GLint_p.OUT("values", "")
+		Check(1)..returnValue..GLint_p.OUT("values", "")
 	)
 
 	void(
@@ -179,6 +179,6 @@ val EXT_transform_feedback = "EXTTransformFeedback".nativeClassGL("EXT_transform
 
 		GLenum.IN("param", ""),
 		GLuint.IN("index", ""),
-		Check(1) _ returnValue _ GLboolean_p.OUT("values", "")
+		Check(1)..returnValue..GLboolean_p.OUT("values", "")
 	)
 }

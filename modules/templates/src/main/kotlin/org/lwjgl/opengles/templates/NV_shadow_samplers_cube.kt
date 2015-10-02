@@ -20,6 +20,6 @@ val NV_shadow_samplers_cube = "NVShadowSamplersCube".nativeClassGLES("NV_shadow_
 	IntConstant(
 		"Returned in {@code type} by glGetActiveUniform.",
 
-		"SAMPLER_CUBE_SHADOW_NV" _ 0x8DC5
+		"SAMPLER_CUBE_SHADOW_NV"..0x8DC5
 	)
 }

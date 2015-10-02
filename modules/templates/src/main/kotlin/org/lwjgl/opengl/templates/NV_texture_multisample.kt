@@ -23,8 +23,8 @@ val NV_texture_multisample = "NVTextureMultisample".nativeClassGL("NV_texture_mu
 		Accepted by the {@code pname} parameter of GetTexLevelParameter.
 		""",
 
-		"TEXTURE_COVERAGE_SAMPLES_NV" _ 0x9045,
-		"TEXTURE_COLOR_SAMPLES_NV" _ 0x9046
+		"TEXTURE_COVERAGE_SAMPLES_NV"..0x9045,
+		"TEXTURE_COLOR_SAMPLES_NV"..0x9046
 	)
 
 	void(

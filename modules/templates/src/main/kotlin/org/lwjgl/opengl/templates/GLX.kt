@@ -18,53 +18,53 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 	IntConstant(
 		"Errors.",
 
-		"GLXBadContext" _ 0,
-		"GLXBadContextState" _ 1,
-		"GLXBadDrawable" _ 2,
-		"GLXBadPixmap" _ 3,
-		"GLXBadContextTag" _ 4,
-		"GLXBadCurrentWindow" _ 5,
-		"GLXBadRenderRequest" _ 6,
-		"GLXBadLargeRequest" _ 7,
-		"GLXUnsupportedPrivateRequest" _ 8,
-		"GLXBadFBConfig" _ 9,
-		"GLXBadPbuffer" _ 10,
-		"GLXBadCurrentDrawable" _ 11,
-		"GLXBadWindow" _ 12
+		"GLXBadContext"..0,
+		"GLXBadContextState"..1,
+		"GLXBadDrawable"..2,
+		"GLXBadPixmap"..3,
+		"GLXBadContextTag"..4,
+		"GLXBadCurrentWindow"..5,
+		"GLXBadRenderRequest"..6,
+		"GLXBadLargeRequest"..7,
+		"GLXUnsupportedPrivateRequest"..8,
+		"GLXBadFBConfig"..9,
+		"GLXBadPbuffer"..10,
+		"GLXBadCurrentDrawable"..11,
+		"GLXBadWindow"..12
 	).noPrefix()
 
 	IntConstant(
 		"Names for attributes to #GetConfig().",
 
-		"USE_GL" _ 1,
-		"BUFFER_SIZE" _ 2,
-		"LEVEL" _ 3,
-		"RGBA" _ 4,
-		"DOUBLEBUFFER" _ 5,
-		"STEREO" _ 6,
-		"AUX_BUFFERS" _ 7,
-		"RED_SIZE" _ 8,
-		"GREEN_SIZE" _ 9,
-		"BLUE_SIZE" _ 10,
-		"ALPHA_SIZE" _ 11,
-		"DEPTH_SIZE" _ 12,
-		"STENCIL_SIZE" _ 13,
-		"ACCUM_RED_SIZE" _ 14,
-		"ACCUM_GREEN_SIZE" _ 15,
-		"ACCUM_BLUE_SIZE" _ 16,
-		"ACCUM_ALPHA_SIZE" _ 17
+		"USE_GL"..1,
+		"BUFFER_SIZE"..2,
+		"LEVEL"..3,
+		"RGBA"..4,
+		"DOUBLEBUFFER"..5,
+		"STEREO"..6,
+		"AUX_BUFFERS"..7,
+		"RED_SIZE"..8,
+		"GREEN_SIZE"..9,
+		"BLUE_SIZE"..10,
+		"ALPHA_SIZE"..11,
+		"DEPTH_SIZE"..12,
+		"STENCIL_SIZE"..13,
+		"ACCUM_RED_SIZE"..14,
+		"ACCUM_GREEN_SIZE"..15,
+		"ACCUM_BLUE_SIZE"..16,
+		"ACCUM_ALPHA_SIZE"..17
 	)
 
 	IntConstant(
 		"Error return values from #GetConfig(). Success is indicated by a value of 0.",
 
-		"BAD_SCREEN" _ 1,
-		"BAD_ATTRIBUTE" _ 2,
-		"NO_EXTENSION" _ 3,
-		"BAD_VISUAL" _ 4,
-		"BAD_CONTEXT" _ 5,
-		"BAD_VALUE" _ 6,
-		"BAD_ENUM" _ 7
+		"BAD_SCREEN"..1,
+		"BAD_ATTRIBUTE"..2,
+		"NO_EXTENSION"..3,
+		"BAD_VISUAL"..4,
+		"BAD_CONTEXT"..5,
+		"BAD_VALUE"..6,
+		"BAD_ENUM"..7
 	)
 
 	// --------------------------------------------------------
@@ -74,8 +74,8 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 		"Ascertains if the GLX extension is defined for an X server.",
 
 		DISPLAY,
-		Check(1) _ int_p.OUT("error_base", "returns the value of the first error code"),
-		Check(1) _ int_p.OUT("event_base", "returns the value of the first event code")
+		Check(1)..int_p.OUT("error_base", "returns the value of the first error code"),
+		Check(1)..int_p.OUT("event_base", "returns the value of the first event code")
 	)
 
 	Bool(
@@ -83,8 +83,8 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 		"Queries the GLX version supported.",
 
 		DISPLAY,
-		Check(1) _ int_p.OUT("major", "returns the major version"),
-		Check(1) _ int_p.OUT("minor", "returns the minor version")
+		Check(1)..int_p.OUT("major", "returns the major version"),
+		Check(1)..int_p.OUT("minor", "returns the minor version")
 	)
 
 	int(
@@ -94,7 +94,7 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 		DISPLAY,
 		XVisualInfo_p.IN("visual", "a pointer to an ##XVisualInfo structure"),
 		int.IN("attribute", "the attribute to query"),
-		Check(1) _ int_p.OUT("value", "returns the attribute value")
+		Check(1)..int_p.OUT("value", "returns the attribute value")
 	)
 
 	XVisualInfo_p(
@@ -103,7 +103,7 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		nullable _ nullTerminated _ int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
+		nullable..nullTerminated..int_p.IN("attrib_list", "a list of attributes terminated with {@code None}"),
 
 		returnDoc =
 		"""
@@ -118,7 +118,7 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 
 		DISPLAY,
 		XVisualInfo_p.IN("visual", "a pointer to an ##XVisualInfo structure"),
-		nullable _ GLXContext.IN("share_list", "the GLXContext to share objects with"),
+		nullable..GLXContext.IN("share_list", "the GLXContext to share objects with"),
 		Bool.IN("direct", "whether direct rendering is requested")
 	)
 
@@ -127,8 +127,8 @@ val GLX = "GLX".nativeClassGLX("GLX") {
 		"Makes a context current in the current thread",
 
 		DISPLAY,
-		nullable _ GLXDrawable.IN("draw", "the draw GLXdrawable"),
-		nullable _ GLXContext.IN("ctx", "the GLXContext to make current")
+		nullable..GLXDrawable.IN("draw", "the draw GLXdrawable"),
+		nullable..GLXContext.IN("ctx", "the GLXContext to make current")
 	)
 
 	void(

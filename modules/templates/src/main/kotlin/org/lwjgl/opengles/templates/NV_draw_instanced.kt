@@ -44,12 +44,12 @@ val NV_draw_instanced = "NVDrawInstanced".nativeClassGLES("NV_draw_instanced", p
 		"",
 
 		GLenum.IN("mode", ""),
-		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)" _ GLsizei.IN("count", ""),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
+		AutoSize("indices") shr "GLESChecks.typeToByteShift(type)"..GLsizei.IN("count", ""),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"GLES20#UNSIGNED_BYTE GLES20#UNSIGNED_SHORT GLES20#UNSIGNED_INT"
 		),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", ""),
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", ""),
 		GLsizei.IN("primcount", "")
 	)
 }

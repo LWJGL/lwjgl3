@@ -21,9 +21,9 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of #QueryContextInfoEXT().",
 
-		"SHARE_CONTEXT_EXT" _ 0x800A,
-		"VISUAL_ID_EXT" _ 0x800B,
-		"SCREEN_EXT" _ 0x800C
+		"SHARE_CONTEXT_EXT"..0x800A,
+		"VISUAL_ID_EXT"..0x800B,
+		"SCREEN_EXT"..0x800C
 	)
 
 	Display_p(
@@ -38,14 +38,14 @@ val GLX_EXT_import_context = "GLXEXTImportContext".nativeClassGLX("GLX_EXT_impor
 		DISPLAY,
 		GLXContext.IN("context", "the context being queried"),
 		int.IN("attribute", "the attribute to query"),
-		Check(1) _ int_p.OUT("value", "returns the attribute value")
+		Check(1)..int_p.OUT("value", "returns the attribute value")
 	)
 
 	GLXContextID(
 		"GetContextIDEXT",
 		"Returns the XID of a GLXContext.",
 
-		const _ GLXContext.IN("context", "the context")
+		const..GLXContext.IN("context", "the context")
 	)
 
 	GLXContext(

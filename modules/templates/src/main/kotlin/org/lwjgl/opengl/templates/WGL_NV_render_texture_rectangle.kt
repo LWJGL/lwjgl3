@@ -23,8 +23,8 @@ val WGL_NV_render_texture_rectangle = "WGLNVRenderTextureRectangle".nativeClassW
 		{@code pfAttribIList} parameters of wglChoosePixelFormatARB.
 		""",
 
-		"BIND_TO_TEXTURE_RECTANGLE_RGB_NV" _ 0x20A0,
-		"BIND_TO_TEXTURE_RECTANGLE_RGBA_NV" _ 0x20A1
+		"BIND_TO_TEXTURE_RECTANGLE_RGB_NV"..0x20A0,
+		"BIND_TO_TEXTURE_RECTANGLE_RGBA_NV"..0x20A1
 	)
 
 	IntConstant(
@@ -33,6 +33,6 @@ val WGL_NV_render_texture_rectangle = "WGLNVRenderTextureRectangle".nativeClassW
 		{@code iAttribute} is WGL_TEXTURE_TARGET_ARB.
 		""",
 
-		"TEXTURE_RECTANGLE_NV" _ 0x20A2
+		"TEXTURE_RECTANGLE_NV"..0x20A2
 	)
 }

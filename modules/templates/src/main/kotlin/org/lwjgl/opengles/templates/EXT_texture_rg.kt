@@ -33,14 +33,14 @@ val EXT_texture_rg = "EXTTextureRG".nativeClassGLES("EXT_texture_rg", postfix = 
 		ReadPixels.
 		""",
 
-		"RED_EXT" _ 0x1903,
-		"RG_EXT" _ 0x8227
+		"RED_EXT"..0x1903,
+		"RG_EXT"..0x8227
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorage and RenderbufferStorageMultisampleAPPLE.",
 
-		"R8_EXT" _ 0x8229,
-		"RG8_EXT" _ 0x822B
+		"R8_EXT"..0x8229,
+		"RG8_EXT"..0x822B
 	)
 }

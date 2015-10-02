@@ -67,7 +67,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		CopyTexImage2D, and RenderbufferStorageEXT, and returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
 		""",
 
-		"DEPTH_STENCIL_EXT" _ 0x84F9
+		"DEPTH_STENCIL_EXT"..0x84F9
 	)
 
 	IntConstant(
@@ -76,7 +76,7 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		GetTexImage.
 		""",
 
-		"UNSIGNED_INT_24_8_EXT" _ 0x84FA
+		"UNSIGNED_INT_24_8_EXT"..0x84FA
 	)
 
 	IntConstant(
@@ -85,12 +85,12 @@ val EXT_packed_depth_stencil = "EXTPackedDepthStencil".nativeClassGL("EXT_packed
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
 		""",
 
-		"DEPTH24_STENCIL8_EXT" _ 0x88F0
+		"DEPTH24_STENCIL8_EXT"..0x88F0
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_STENCIL_SIZE_EXT" _ 0x88F1
+		"TEXTURE_STENCIL_SIZE_EXT"..0x88F1
 	)
 }

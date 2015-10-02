@@ -26,6 +26,6 @@ val ARB_texture_rgb10_a2ui = "ARBTextureRGB10_A2UI".nativeClassGL("ARB_texture_r
 		RenderbufferStorageMultisample.
 		""",
 
-		"RGB10_A2UI" _ 0x906F
+		"RGB10_A2UI"..0x906F
 	)
 }

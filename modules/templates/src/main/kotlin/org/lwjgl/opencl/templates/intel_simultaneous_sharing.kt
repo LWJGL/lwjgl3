@@ -32,7 +32,7 @@ val intel_simultaneous_sharing = "INTELSimultaneousSharing".nativeClassCL("intel
         The minimum value is 1.
 		""",
 
-		"DEVICE_SIMULTANEOUS_INTEROPS_INTEL" _ 0x4104
+		"DEVICE_SIMULTANEOUS_INTEROPS_INTEL"..0x4104
 	)
 
 	IntConstant(
@@ -47,6 +47,6 @@ val intel_simultaneous_sharing = "INTELSimultaneousSharing".nativeClassCL("intel
 		{@code n} is the value returned by the query for #DEVICE_NUM_SIMULTANEOUS_INTEROPS_INTEL.
 		""",
 
-		"DEVICE_NUM_SIMULTANEOUS_INTEROPS_INTEL" _ 0x4105
+		"DEVICE_NUM_SIMULTANEOUS_INTEROPS_INTEL"..0x4105
 	)
 }

@@ -24,7 +24,7 @@ val ARB_transform_feedback_overflow_query = "ARBTransformFeedbackOverflowQuery".
 		GL40#BeginQueryIndexed(), GL40#EndQueryIndexed() and GL40#GetQueryIndexediv().
 		""",
 
-		"TRANSFORM_FEEDBACK_OVERFLOW_ARB" _ 0x82EC,
-		"TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB" _ 0x82ED
+		"TRANSFORM_FEEDBACK_OVERFLOW_ARB"..0x82EC,
+		"TRANSFORM_FEEDBACK_STREAM_OVERFLOW_ARB"..0x82ED
 	)
 }

@@ -26,7 +26,7 @@ val ARB_clear_buffer_object = "ARBClearBufferObject".nativeClassGL("ARB_clear_bu
 	val ClearBufferData = GL43 reuse "ClearBufferData"
 	val ClearBufferSubData = GL43 reuse "ClearBufferSubData"
 
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"ClearNamedBufferDataEXT",
 		"DSA version of #ClearBufferData().",
 
@@ -37,7 +37,7 @@ val ARB_clear_buffer_object = "ARBClearBufferObject".nativeClassGL("ARB_clear_bu
 		ClearBufferData["data"]
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"ClearNamedBufferSubDataEXT",
 		"DSA version of #ClearBufferSubData().",
 

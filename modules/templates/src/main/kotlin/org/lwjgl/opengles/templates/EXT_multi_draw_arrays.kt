@@ -21,9 +21,9 @@ val EXT_multi_draw_arrays = "EXTMultiDrawArrays".nativeClassGLES("EXT_multi_draw
 		"",
 
 		GLenum.IN("mode", ""),
-		const _ GLint_p.IN("first", ""),
-		const _ GLsizei_p.IN("count", ""),
-		AutoSize("first", "count") _ GLsizei.IN("primcount", "")
+		const..GLint_p.IN("first", ""),
+		const..GLsizei_p.IN("count", ""),
+		AutoSize("first", "count")..GLsizei.IN("primcount", "")
 	)
 
 	void(
@@ -31,9 +31,9 @@ val EXT_multi_draw_arrays = "EXTMultiDrawArrays".nativeClassGLES("EXT_multi_draw
 		"",
 
 		GLenum.IN("mode", ""),
-		const _ GLsizei_p.IN("count", ""),
+		const..GLsizei_p.IN("count", ""),
 		GLenum.IN("type", ""),
-		const _ void_p_const_p.IN("indices", ""),
-		AutoSize("count", "indices") _ GLsizei.IN("primcount", "")
+		const..void_p_const_p.IN("indices", ""),
+		AutoSize("count", "indices")..GLsizei.IN("primcount", "")
 	)
 }

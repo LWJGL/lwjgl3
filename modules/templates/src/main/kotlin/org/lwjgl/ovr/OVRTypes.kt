@@ -36,7 +36,7 @@ val ovrLogCallback = "ovrLogCallback".callback(
 	"The logging callback.",
 	uintptr_t.IN("userData", "an arbitrary value specified by the user of ovrInitParams"),
 	int.IN("level", "one of the ovrLogLevel constants"),
-	nullTerminated _ const _ charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
+	nullTerminated..const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
 	samConstructor = "OVR"
 ) {
 	documentation = "Instances of this interface may be passed to the {@code LogCallback} member of the ##OVRInitParams struct."

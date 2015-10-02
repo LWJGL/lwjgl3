@@ -23,14 +23,14 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
 	IntConstant(
 		"",
 
-		"BAD_DEVICE_EXT" _ 0x322B,
-		"DEVICE_EXT" _ 0x322C
+		"BAD_DEVICE_EXT"..0x322B,
+		"DEVICE_EXT"..0x322C
 	)
 
 	LongConstant(
 		"",
 
-		"NO_DEVICE_EXT" _ 0L
+		"NO_DEVICE_EXT"..0L
 	)
 
 	EGLBoolean(
@@ -39,7 +39,7 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
 
 		EGLDeviceEXT.IN("device", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLAttrib_p.OUT("value", "")
+		Check(1)..EGLAttrib_p.OUT("value", "")
 	)
 
 	charASCII_p(
@@ -56,6 +56,6 @@ val EXT_device_query = "EXTDeviceQuery".nativeClassEGL("EXT_device_query", postf
 
 		EGLDisplay.IN("dpy", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLAttrib_p.OUT("value", "")
+		Check(1)..EGLAttrib_p.OUT("value", "")
 	)
 }

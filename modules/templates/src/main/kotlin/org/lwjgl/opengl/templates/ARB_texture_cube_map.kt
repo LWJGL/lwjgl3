@@ -35,8 +35,8 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 	IntConstant(
 		"Accepted by the {@code param} parameters of TexGend, TexGenf, and TexGeni when {@code pname} parameter is TEXTURE_GEN_MODE.",
 
-		"NORMAL_MAP_ARB" _ 0x8511,
-		"REFLECTION_MAP_ARB" _ 0x8512
+		"NORMAL_MAP_ARB"..0x8511,
+		"REFLECTION_MAP_ARB"..0x8512
 	)
 
 	IntConstant(
@@ -47,13 +47,13 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 		TexParameteri, TexParameterfv, and TexParameteriv.
 		""",
 
-		"TEXTURE_CUBE_MAP_ARB" _ 0x8513
+		"TEXTURE_CUBE_MAP_ARB"..0x8513
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"TEXTURE_BINDING_CUBE_MAP_ARB" _ 0x8514
+		"TEXTURE_BINDING_CUBE_MAP_ARB"..0x8514
 	)
 
 	IntConstant(
@@ -62,24 +62,24 @@ val ARB_texture_cube_map = "ARBTextureCubeMap".nativeClassGL("ARB_texture_cube_m
 		CopySubTexImage2D.
 		""",
 
-		"TEXTURE_CUBE_MAP_POSITIVE_X_ARB" _ 0x8515,
-		"TEXTURE_CUBE_MAP_NEGATIVE_X_ARB" _ 0x8516,
-		"TEXTURE_CUBE_MAP_POSITIVE_Y_ARB" _ 0x8517,
-		"TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB" _ 0x8518,
-		"TEXTURE_CUBE_MAP_POSITIVE_Z_ARB" _ 0x8519,
-		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB" _ 0x851A
+		"TEXTURE_CUBE_MAP_POSITIVE_X_ARB"..0x8515,
+		"TEXTURE_CUBE_MAP_NEGATIVE_X_ARB"..0x8516,
+		"TEXTURE_CUBE_MAP_POSITIVE_Y_ARB"..0x8517,
+		"TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB"..0x8518,
+		"TEXTURE_CUBE_MAP_POSITIVE_Z_ARB"..0x8519,
+		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB"..0x851A
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv, and TexImage2D.",
 
-		"PROXY_TEXTURE_CUBE_MAP_ARB" _ 0x851B
+		"PROXY_TEXTURE_CUBE_MAP_ARB"..0x851B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_CUBE_MAP_TEXTURE_SIZE_ARB" _ 0x851C
+		"MAX_CUBE_MAP_TEXTURE_SIZE_ARB"..0x851C
 	)
 
 }

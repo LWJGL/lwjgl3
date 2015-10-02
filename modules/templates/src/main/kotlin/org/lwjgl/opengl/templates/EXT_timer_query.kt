@@ -30,7 +30,7 @@ val EXT_timer_query = "EXTTimerQuery".nativeClassGL("EXT_timer_query", postfix =
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
-		"TIME_ELAPSED_EXT" _ 0x88BF
+		"TIME_ELAPSED_EXT"..0x88BF
 	)
 
 	void(
@@ -39,7 +39,7 @@ val EXT_timer_query = "EXTTimerQuery".nativeClassGL("EXT_timer_query", postfix =
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint64_p.OUT("params", "")
+		returnValue..Check(1)..GLint64_p.OUT("params", "")
 	)
 
 	void(
@@ -48,6 +48,6 @@ val EXT_timer_query = "EXTTimerQuery".nativeClassGL("EXT_timer_query", postfix =
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint64_p.OUT("params", "")
+		returnValue..Check(1)..GLuint64_p.OUT("params", "")
 	)
 }

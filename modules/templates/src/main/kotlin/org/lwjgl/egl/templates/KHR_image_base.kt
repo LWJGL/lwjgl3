@@ -22,13 +22,13 @@ val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = K
 	IntConstant(
 		"",
 
-		"IMAGE_PRESERVED_KHR" _ 0x30D2
+		"IMAGE_PRESERVED_KHR"..0x30D2
 	)
 
 	LongConstant(
 		"",
 
-		"NO_IMAGE_KHR" _ 0L
+		"NO_IMAGE_KHR"..0L
 	)
 
 	EGLImageKHR(
@@ -39,7 +39,7 @@ val KHR_image_base = "KHRImageBase".nativeClassEGL("KHR_image_base", postfix = K
 		EGLContext.IN("ctx", ""),
 		EGLenum.IN("target", ""),
 		EGLClientBuffer.IN("buffer", ""),
-		nullable _ noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
 	EGLBoolean(

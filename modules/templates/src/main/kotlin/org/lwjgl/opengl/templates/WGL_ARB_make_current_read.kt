@@ -22,8 +22,8 @@ val WGL_ARB_make_current_read = "WGLARBMakeCurrentRead".nativeClassWGL("WGL_ARB_
 	IntConstant(
 		"New errors returned by org.lwjgl.system.windows.WinBase##GetLastError().",
 
-		"ERROR_INVALID_PIXEL_TYPE_ARB" _ 0x2043,
-		"ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB" _ 0x2054
+		"ERROR_INVALID_PIXEL_TYPE_ARB"..0x2043,
+		"ERROR_INCOMPATIBLE_DEVICE_CONTEXTS_ARB"..0x2054
 	).noPrefix()
 
 	BOOL(

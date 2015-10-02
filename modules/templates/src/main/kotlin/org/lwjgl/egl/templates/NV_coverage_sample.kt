@@ -41,7 +41,7 @@ val NV_coverage_sample = "NVCoverageSample".nativeClassEGL("NV_coverage_sample",
 	IntConstant(
 		"",
 
-		"COVERAGE_BUFFERS_NV" _ 0x30E0,
-		"COVERAGE_SAMPLES_NV" _ 0x30E1
+		"COVERAGE_BUFFERS_NV"..0x30E0,
+		"COVERAGE_SAMPLES_NV"..0x30E1
 	)
 }

@@ -20,7 +20,7 @@ val OES_vertex_array_object = "OESVertexArrayObject".nativeClassGLES("OES_vertex
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv.",
 
-		"VERTEX_ARRAY_BINDING_OES" _ 0x85B5
+		"VERTEX_ARRAY_BINDING_OES"..0x85B5
 	)
 
 	void(
@@ -34,16 +34,16 @@ val OES_vertex_array_object = "OESVertexArrayObject".nativeClassGLES("OES_vertex
 		"DeleteVertexArraysOES",
 		"",
 
-		AutoSize("arrays") _ GLsizei.IN("n", ""),
-		SingleValue("array") _ const _ GLuint_p.IN("arrays", "")
+		AutoSize("arrays")..GLsizei.IN("n", ""),
+		SingleValue("array")..const..GLuint_p.IN("arrays", "")
 	)
 
 	void(
 		"GenVertexArraysOES",
 		"",
 
-		AutoSize("arrays") _ GLsizei.IN("n", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("arrays", "")
+		AutoSize("arrays")..GLsizei.IN("n", ""),
+		returnValue..Check(1)..GLuint_p.OUT("arrays", "")
 	)
 
 	GLboolean(

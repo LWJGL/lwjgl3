@@ -126,36 +126,36 @@ interface ReferenceModifier : TemplateModifier {
 
 // DSL extensions (Per TemplateModifier sub-class to avoid IAEs. Too verbose but may catch more errors at compile time)
 
-fun FunctionModifier._(func: NativeClassFunction): NativeClassFunction {
+operator fun FunctionModifier.rangeTo(func: NativeClassFunction): NativeClassFunction {
 	func.setModifiers(this)
 	return func
 }
 
 // Used with multiple FunctionModifiers
-fun FunctionModifier._(other: FunctionModifier): Array<FunctionModifier> {
+operator fun FunctionModifier.rangeTo(other: FunctionModifier): Array<FunctionModifier> {
 	return arrayOf(this, other)
 }
 
-fun Array<FunctionModifier>._(other: FunctionModifier): Array<FunctionModifier> {
+operator fun Array<FunctionModifier>.rangeTo(other: FunctionModifier): Array<FunctionModifier> {
 	return arrayOf(*this, other)
 }
 
-fun Array<FunctionModifier>._(function: NativeClassFunction): NativeClassFunction {
+operator fun Array<FunctionModifier>.rangeTo(function: NativeClassFunction): NativeClassFunction {
 	function.setModifiers(*this)
 	return function
 }
 
-fun ParameterModifier._(param: Parameter): Parameter {
+operator fun ParameterModifier.rangeTo(param: Parameter): Parameter {
 	param.setModifiers(this)
 	return param
 }
 
-fun ReturnValueModifier._(retValue: ReturnValue): ReturnValue {
+operator fun ReturnValueModifier.rangeTo(retValue: ReturnValue): ReturnValue {
 	retValue.setModifiers(this)
 	return retValue
 }
 
-fun <T : QualifiedType> QualifiedTypeModifier._(qtype: T): T {
+operator fun <T : QualifiedType> QualifiedTypeModifier.rangeTo(qtype: T): T {
 	qtype.setModifiers(this)
 	return qtype
 }
@@ -167,26 +167,26 @@ class ModifierList<M : TemplateModifier, Q : QualifiedType>(
 ) {
 	val list = arrayListOf(modA, modB)
 
-	fun _(other: QualifiedTypeModifier): ModifierList<M, Q> {
+	operator fun rangeTo(other: QualifiedTypeModifier): ModifierList<M, Q> {
 		list add other
 		return this
 	}
 
-	fun _(other: M): ModifierList<M, Q> {
+	operator fun rangeTo(other: M): ModifierList<M, Q> {
 		list add other
 		return this
 	}
 
-	fun _(qtype: Q): Q {
+	operator fun rangeTo(qtype: Q): Q {
 		qtype.setModifiers(*list.toTypedArray())
 		return qtype
 	}
 }
 
-fun ParameterModifier._(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
-fun ParameterModifier._(other: QualifiedTypeModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
-fun QualifiedTypeModifier._(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(other, this)
+operator fun ParameterModifier.rangeTo(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
+operator fun ParameterModifier.rangeTo(other: QualifiedTypeModifier) = ModifierList<ParameterModifier, Parameter>(this, other)
+operator fun QualifiedTypeModifier.rangeTo(other: ParameterModifier) = ModifierList<ParameterModifier, Parameter>(other, this)
 
-fun ReturnValueModifier._(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
-fun ReturnValueModifier._(other: QualifiedTypeModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
-fun QualifiedTypeModifier._(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(other, this)
+operator fun ReturnValueModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
+operator fun ReturnValueModifier.rangeTo(other: QualifiedTypeModifier) = ModifierList<ReturnValueModifier, ReturnValue>(this, other)
+operator fun QualifiedTypeModifier.rangeTo(other: ReturnValueModifier) = ModifierList<ReturnValueModifier, ReturnValue>(other, this)

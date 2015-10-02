@@ -47,48 +47,48 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"RGBA_INTEGER_MODE_EXT" _ 0x8D9E
+		"RGBA_INTEGER_MODE_EXT"..0x8D9E
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of TexImage1D, TexImage2D, and TexImage3D.",
 
-		"RGBA32UI_EXT" _ 0x8D70,
-		"RGB32UI_EXT" _ 0x8D71,
-		"ALPHA32UI_EXT" _ 0x8D72,
-		"INTENSITY32UI_EXT" _ 0x8D73,
-		"LUMINANCE32UI_EXT" _ 0x8D74,
-		"LUMINANCE_ALPHA32UI_EXT" _ 0x8D75,
-		"RGBA16UI_EXT" _ 0x8D76,
-		"RGB16UI_EXT" _ 0x8D77,
-		"ALPHA16UI_EXT" _ 0x8D78,
-		"INTENSITY16UI_EXT" _ 0x8D79,
-		"LUMINANCE16UI_EXT" _ 0x8D7A,
-		"LUMINANCE_ALPHA16UI_EXT" _ 0x8D7B,
-		"RGBA8UI_EXT" _ 0x8D7C,
-		"RGB8UI_EXT" _ 0x8D7D,
-		"ALPHA8UI_EXT" _ 0x8D7E,
-		"INTENSITY8UI_EXT" _ 0x8D7F,
-		"LUMINANCE8UI_EXT" _ 0x8D80,
-		"LUMINANCE_ALPHA8UI_EXT" _ 0x8D81,
-		"RGBA32I_EXT" _ 0x8D82,
-		"RGB32I_EXT" _ 0x8D83,
-		"ALPHA32I_EXT" _ 0x8D84,
-		"INTENSITY32I_EXT" _ 0x8D85,
-		"LUMINANCE32I_EXT" _ 0x8D86,
-		"LUMINANCE_ALPHA32I_EXT" _ 0x8D87,
-		"RGBA16I_EXT" _ 0x8D88,
-		"RGB16I_EXT" _ 0x8D89,
-		"ALPHA16I_EXT" _ 0x8D8A,
-		"INTENSITY16I_EXT" _ 0x8D8B,
-		"LUMINANCE16I_EXT" _ 0x8D8C,
-		"LUMINANCE_ALPHA16I_EXT" _ 0x8D8D,
-		"RGBA8I_EXT" _ 0x8D8E,
-		"RGB8I_EXT" _ 0x8D8F,
-		"ALPHA8I_EXT" _ 0x8D90,
-		"INTENSITY8I_EXT" _ 0x8D91,
-		"LUMINANCE8I_EXT" _ 0x8D92,
-		"LUMINANCE_ALPHA8I_EXT" _ 0x8D93
+		"RGBA32UI_EXT"..0x8D70,
+		"RGB32UI_EXT"..0x8D71,
+		"ALPHA32UI_EXT"..0x8D72,
+		"INTENSITY32UI_EXT"..0x8D73,
+		"LUMINANCE32UI_EXT"..0x8D74,
+		"LUMINANCE_ALPHA32UI_EXT"..0x8D75,
+		"RGBA16UI_EXT"..0x8D76,
+		"RGB16UI_EXT"..0x8D77,
+		"ALPHA16UI_EXT"..0x8D78,
+		"INTENSITY16UI_EXT"..0x8D79,
+		"LUMINANCE16UI_EXT"..0x8D7A,
+		"LUMINANCE_ALPHA16UI_EXT"..0x8D7B,
+		"RGBA8UI_EXT"..0x8D7C,
+		"RGB8UI_EXT"..0x8D7D,
+		"ALPHA8UI_EXT"..0x8D7E,
+		"INTENSITY8UI_EXT"..0x8D7F,
+		"LUMINANCE8UI_EXT"..0x8D80,
+		"LUMINANCE_ALPHA8UI_EXT"..0x8D81,
+		"RGBA32I_EXT"..0x8D82,
+		"RGB32I_EXT"..0x8D83,
+		"ALPHA32I_EXT"..0x8D84,
+		"INTENSITY32I_EXT"..0x8D85,
+		"LUMINANCE32I_EXT"..0x8D86,
+		"LUMINANCE_ALPHA32I_EXT"..0x8D87,
+		"RGBA16I_EXT"..0x8D88,
+		"RGB16I_EXT"..0x8D89,
+		"ALPHA16I_EXT"..0x8D8A,
+		"INTENSITY16I_EXT"..0x8D8B,
+		"LUMINANCE16I_EXT"..0x8D8C,
+		"LUMINANCE_ALPHA16I_EXT"..0x8D8D,
+		"RGBA8I_EXT"..0x8D8E,
+		"RGB8I_EXT"..0x8D8F,
+		"ALPHA8I_EXT"..0x8D90,
+		"INTENSITY8I_EXT"..0x8D91,
+		"LUMINANCE8I_EXT"..0x8D92,
+		"LUMINANCE_ALPHA8I_EXT"..0x8D93
 	)
 
 	IntConstant(
@@ -96,16 +96,16 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 		Accepted by the {@code format} parameter of TexImage1D, TexImage2D, TexImage3D, TexSubImage1D, TexSubImage2D, TexSubImage3D, DrawPixels and ReadPixels.
 		""",
 
-		"RED_INTEGER_EXT" _ 0x8D94,
-		"GREEN_INTEGER_EXT" _ 0x8D95,
-		"BLUE_INTEGER_EXT" _ 0x8D96,
-		"ALPHA_INTEGER_EXT" _ 0x8D97,
-		"RGB_INTEGER_EXT" _ 0x8D98,
-		"RGBA_INTEGER_EXT" _ 0x8D99,
-		"BGR_INTEGER_EXT" _ 0x8D9A,
-		"BGRA_INTEGER_EXT" _ 0x8D9B,
-		"LUMINANCE_INTEGER_EXT" _ 0x8D9C,
-		"LUMINANCE_ALPHA_INTEGER_EXT" _ 0x8D9D
+		"RED_INTEGER_EXT"..0x8D94,
+		"GREEN_INTEGER_EXT"..0x8D95,
+		"BLUE_INTEGER_EXT"..0x8D96,
+		"ALPHA_INTEGER_EXT"..0x8D97,
+		"RGB_INTEGER_EXT"..0x8D98,
+		"RGBA_INTEGER_EXT"..0x8D99,
+		"BGR_INTEGER_EXT"..0x8D9A,
+		"BGRA_INTEGER_EXT"..0x8D9B,
+		"LUMINANCE_INTEGER_EXT"..0x8D9C,
+		"LUMINANCE_ALPHA_INTEGER_EXT"..0x8D9D
 	)
 
 	void(
@@ -134,7 +134,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ SingleValue("param") _ GLint_p.IN("params", "")
+		Check(1)..SingleValue("param")..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -143,7 +143,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ SingleValue("param") _ GLuint_p.IN("params", "")
+		Check(1)..SingleValue("param")..GLuint_p.IN("params", "")
 	)
 
 	void(
@@ -152,7 +152,7 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "")
+		Check(1)..returnValue..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -161,6 +161,6 @@ val EXT_texture_integer = "EXTTextureInteger".nativeClassGL("EXT_texture_integer
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLuint_p.OUT("params", "")
+		Check(1)..returnValue..GLuint_p.OUT("params", "")
 	)
 }

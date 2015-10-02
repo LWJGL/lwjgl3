@@ -26,8 +26,8 @@ val AMD_compressed_ATC_texture = "AMDCompressedATCTexture".nativeClassGLES("AMD_
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D and CompressedTexImage3DOES.",
 
-		"ATC_RGB_AMD" _ 0x8C92,
-		"ATC_RGBA_EXPLICIT_ALPHA_AMD" _ 0x8C93,
-		"ATC_RGBA_INTERPOLATED_ALPHA_AMD" _ 0x87EE
+		"ATC_RGB_AMD"..0x8C92,
+		"ATC_RGBA_EXPLICIT_ALPHA_AMD"..0x8C93,
+		"ATC_RGBA_INTERPOLATED_ALPHA_AMD"..0x87EE
 	)
 }

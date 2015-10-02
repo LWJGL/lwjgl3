@@ -31,6 +31,6 @@ val ARB_half_float_pixel = "ARBHalfFloatPixel".nativeClassGL("ARB_half_float_pix
 		ColorTable, ColorSubTable, and GetColorTable.
 		""",
 
-		"HALF_FLOAT_ARB" _ 0x140B
+		"HALF_FLOAT_ARB"..0x140B
 	)
 }

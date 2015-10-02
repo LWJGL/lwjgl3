@@ -28,16 +28,16 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 	IntConstant(
 		"Accepted as an attribute name in {@code attrib_list}.",
 
-		"CONTEXT_MAJOR_VERSION_ARB" _ 0x2091,
-		"CONTEXT_MINOR_VERSION_ARB" _ 0x2092,
-		"CONTEXT_FLAGS_ARB" _ 0x2094
+		"CONTEXT_MAJOR_VERSION_ARB"..0x2091,
+		"CONTEXT_MINOR_VERSION_ARB"..0x2092,
+		"CONTEXT_FLAGS_ARB"..0x2094
 	)
 
 	IntConstant(
 		"Accepted as bits in the attribute value for #CONTEXT_FLAGS_ARB in {@code attrib_list}.",
 
-		"CONTEXT_DEBUG_BIT_ARB" _ 0x0001,
-		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB" _ 0x0002
+		"CONTEXT_DEBUG_BIT_ARB"..0x0001,
+		"CONTEXT_FORWARD_COMPATIBLE_BIT_ARB"..0x0002
 	)
 
 	GLXContext(
@@ -56,7 +56,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 
 		DISPLAY,
 		GLXFBConfig.IN("config", "the {@code GLXFBConfig}"),
-		nullable _ GLXContext.IN(
+		nullable..GLXContext.IN(
 			"share_context",
 			"""
 			if not $NULL, then all shareable data (excluding OpenGL texture objects named 0) will be shared by {@code share_context}, all other contexts
@@ -77,7 +77,7 @@ val GLX_ARB_create_context = "GLXARBCreateContext".nativeClassGLX("GLX_ARB_creat
 			Use GLX#IsDirect() to determine whether or not a request for a direct rendering context succeeded.
 			"""
 		),
-		nullable _ nullTerminated _ const _ int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
+		nullable..nullTerminated..const..int_p.IN("attrib_list", "an optional list of attributes for the context, terminated with {@code None}")
 	)
 
 }

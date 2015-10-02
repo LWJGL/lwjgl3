@@ -28,13 +28,13 @@ val ARB_direct_state_access = "ARBDirectStateAccess".nativeClassGL("ARB_direct_s
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTextureParameter{if}v and GetTextureParameterI{i ui}v.",
 
-		"TEXTURE_TARGET" _ 0x1006
+		"TEXTURE_TARGET"..0x1006
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv.",
 
-		"QUERY_TARGET" _ 0x82EA
+		"QUERY_TARGET"..0x82EA
 	)
 
 	GL45 reuse "CreateTransformFeedbacks"

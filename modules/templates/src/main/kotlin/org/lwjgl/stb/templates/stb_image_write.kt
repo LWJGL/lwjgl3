@@ -66,11 +66,11 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		writer, both because it is in BGR order and because it may have padding at the end of the line.)
 		""",
 
-		const _ charASCII_p.IN("filename", "the image file path"),
+		const..charASCII_p.IN("filename", "the image file path"),
 		int.IN("w", "the image width, in pixels"),
 		int.IN("h", "the image height, in pixels"),
 		int.IN("comp", "the number of channels in each pixel"),
-		Check("w * h * comp") _ const _ void_p.IN("data", "the image data"),
+		Check("w * h * comp")..const..void_p.IN("data", "the image data"),
 		int.IN("stride_in_bytes", "the distance in bytes from the first byte of a row of pixels to the first byte of the next row of pixels"),
 
 		returnDoc = "1 on success, 0 on failure"
@@ -111,7 +111,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		returnDoc = "1 on success, 0 on failure"
 	)
 
-	macro _ (address _ int_p)(
+	macro..(address..int_p)(
 		"write_tga_with_rle",
 		"Returns the address of the global variable {@code stbi_write_tga_with_rle}."
 	)
@@ -129,7 +129,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		write["w"],
 		write["h"],
 		write["comp"],
-		Check("w * h * comp") _ const _ float_p.IN("data", "the image data"),
+		Check("w * h * comp")..const..float_p.IN("data", "the image data"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -139,7 +139,7 @@ void stbi_write_func(void *context, void *data, int size);""")}
 		"Callback version of #write_png().",
 
 		stbi_write_func.IN("func", "the callback function"),
-		nullable _ void_p.IN("context", "a context that will be passed to {@code func}"),
+		nullable..void_p.IN("context", "a context that will be passed to {@code func}"),
 		write["w"],
 		write["h"],
 		write["comp"],

@@ -29,6 +29,6 @@ val AMD_program_binary_Z400 = "AMDProgramBinaryZ400".nativeClassGLES("AMD_progra
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ProgramBinaryOES.",
 
-		"Z400_BINARY_AMD" _ 0x8740
+		"Z400_BINARY_AMD"..0x8740
 	)
 }

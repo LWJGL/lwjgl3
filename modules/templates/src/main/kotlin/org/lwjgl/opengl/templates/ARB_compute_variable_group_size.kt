@@ -27,15 +27,15 @@ val ARB_compute_variable_group_size = "ARBComputeVariableGroupSize".nativeClassG
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB" _ 0x9344,
-		"MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB" _ 0x90EB
+		"MAX_COMPUTE_VARIABLE_GROUP_INVOCATIONS_ARB"..0x9344,
+		"MAX_COMPUTE_FIXED_GROUP_INVOCATIONS_ARB"..0x90EB
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
 
-		"MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB" _ 0x9345,
-		"MAX_COMPUTE_FIXED_GROUP_SIZE_ARB" _ 0x91BF
+		"MAX_COMPUTE_VARIABLE_GROUP_SIZE_ARB"..0x9345,
+		"MAX_COMPUTE_FIXED_GROUP_SIZE_ARB"..0x91BF
 	)
 
 	val src = GL43["DispatchCompute"]

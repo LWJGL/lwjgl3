@@ -25,6 +25,6 @@ val ARM_mali_program_binary = "ARMMaliProgramBinary".nativeClassGLES("ARM_mali_p
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ProgramBinaryOES.",
 
-		"MALI_PROGRAM_BINARY_ARM" _ 0x8F61
+		"MALI_PROGRAM_BINARY_ARM"..0x8F61
 	)
 }

@@ -30,9 +30,9 @@ val ARB_ES3_2_compatibility = "ARBES32Compatibility".nativeClassGL("ARB_ES3_2_co
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PRIMITIVE_BOUNDING_BOX_ARB" _ 0x92BE,
-		"MULTISAMPLE_LINE_WIDTH_RANGE_ARB" _ 0x9381,
-		"MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB" _ 0x9382
+		"PRIMITIVE_BOUNDING_BOX_ARB"..0x92BE,
+		"MULTISAMPLE_LINE_WIDTH_RANGE_ARB"..0x9381,
+		"MULTISAMPLE_LINE_WIDTH_GRANULARITY_ARB"..0x9382
 	)
 
 	void(

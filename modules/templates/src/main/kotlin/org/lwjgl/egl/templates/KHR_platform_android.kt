@@ -20,6 +20,6 @@ val KHR_platform_android = "KHRPlatformAndroid".nativeClassEGL("KHR_platform_and
 	IntConstant(
 		"",
 
-		"PLATFORM_ANDROID_KHR" _ 0x3141
+		"PLATFORM_ANDROID_KHR"..0x3141
 	)
 }

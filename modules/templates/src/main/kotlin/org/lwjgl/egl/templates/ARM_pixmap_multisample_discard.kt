@@ -27,6 +27,6 @@ val ARM_pixmap_multisample_discard = "ARMPixmapMultisampleDiscard".nativeClassEG
 	IntConstant(
 		"",
 
-		"DISCARD_SAMPLES_ARM" _ 0x3286
+		"DISCARD_SAMPLES_ARM"..0x3286
 	)
 }

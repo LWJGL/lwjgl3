@@ -25,15 +25,15 @@ val NV_framebuffer_blit = "NVFramebufferBlit".nativeClassGLES("NV_framebuffer_bl
 		GetFramebufferAttachmentParameteriv.
 		""",
 
-		"READ_FRAMEBUFFER_NV" _ 0x8CA8,
-		"DRAW_FRAMEBUFFER_NV" _ 0x8CA9
+		"READ_FRAMEBUFFER_NV"..0x8CA8,
+		"DRAW_FRAMEBUFFER_NV"..0x8CA9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv and GetFloatv.",
 
-		"DRAW_FRAMEBUFFER_BINDING_NV" _ 0x8CA6,
-		"READ_FRAMEBUFFER_BINDING_NV" _ 0x8CAA
+		"DRAW_FRAMEBUFFER_BINDING_NV"..0x8CA6,
+		"READ_FRAMEBUFFER_BINDING_NV"..0x8CAA
 	)
 
 	void(

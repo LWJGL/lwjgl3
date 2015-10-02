@@ -29,6 +29,6 @@ val OES_vertex_half_float = "OESVertexHalfFloat".nativeClassGLES("OES_vertex_hal
 		TexCoordPointer, and VertexAttribPointer.
 		""",
 
-		"HALF_FLOAT_OES" _ 0x8D61
+		"HALF_FLOAT_OES"..0x8D61
 	)
 }

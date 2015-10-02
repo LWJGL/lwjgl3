@@ -25,7 +25,7 @@ val NV_read_buffer = "NVReadBuffer".nativeClassGLES("NV_read_buffer", postfix = 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
-		"READ_BUFFER_NV" _ 0x0C02
+		"READ_BUFFER_NV"..0x0C02
 	)
 
 	void(

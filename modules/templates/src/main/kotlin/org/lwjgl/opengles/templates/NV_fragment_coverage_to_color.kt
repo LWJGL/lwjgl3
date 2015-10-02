@@ -24,13 +24,13 @@ val NV_fragment_coverage_to_color = "NVFragmentCoverageToColor".nativeClassGLES(
 	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
-		"FRAGMENT_COVERAGE_TO_COLOR_NV" _ 0x92DD
+		"FRAGMENT_COVERAGE_TO_COLOR_NV"..0x92DD
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"FRAGMENT_COVERAGE_COLOR_NV" _ 0x92DE
+		"FRAGMENT_COVERAGE_COLOR_NV"..0x92DE
 	)
 
 	void(

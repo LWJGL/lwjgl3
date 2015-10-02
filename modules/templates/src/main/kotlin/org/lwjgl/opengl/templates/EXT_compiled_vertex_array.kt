@@ -25,8 +25,8 @@ val EXT_compiled_vertex_array = "EXTCompiledVertexArray".nativeClassGL("EXT_comp
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"ARRAY_ELEMENT_LOCK_FIRST_EXT" _ 0x81A8,
-		"ARRAY_ELEMENT_LOCK_COUNT_EXT" _ 0x81A9
+		"ARRAY_ELEMENT_LOCK_FIRST_EXT"..0x81A8,
+		"ARRAY_ELEMENT_LOCK_COUNT_EXT"..0x81A9
 	)
 
 	void(

@@ -34,7 +34,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		either $NULL, or a unique pointer value that can later be successfully passed to #free().
 		""",
 
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate")
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -45,8 +45,8 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		#free().
 		""",
 
-		autoSizeResult _ size_t.IN("nmemb", "the number of elements to allocate"),
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate per element")
+		autoSizeResult..size_t.IN("nmemb", "the number of elements to allocate"),
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate per element")
 	)
 
 	void_p(
@@ -59,8 +59,8 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		to #malloc(), #calloc() or #realloc(). If the area pointed to was moved, a {@code free(ptr)} is done.
 		""",
 
-		nullable _ void_p.IN("ptr", "the memory block to reallocate"),
-		autoSizeResult _ size_t.IN("size", "the new memory block size, in bytes")
+		nullable..void_p.IN("ptr", "the memory block to reallocate"),
+		autoSizeResult..size_t.IN("size", "the new memory block size, in bytes")
 	)
 
 	void(
@@ -70,7 +70,7 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		or if {@code free(ptr)} has already been called before, undefined behavior occurs. If ptr is $NULL, no operation is performed.
 		""",
 
-		nullable _ void_p.IN("ptr", "the memory space to free")
+		nullable..void_p.IN("ptr", "the memory space to free")
 	)
 
 	void_p(
@@ -81,13 +81,13 @@ val stdlib = "Stdlib".nativeClass(packageName = "org.lwjgl.system.libc") {
 		""",
 
 		size_t.IN("alignment", "the alignment. Must be a power of two value."),
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate. Must be a multiple of {@code alignment}.")
 	)
 
 	void(
 		"aligned_free",
 		"Frees a block of memory that was allocated with #aligned_alloc(). If ptr is $NULL, no operation is performed.",
 
-		nullable _ void_p.IN("ptr", "the aligned block of memory to free")
+		nullable..void_p.IN("ptr", "the aligned block of memory to free")
 	)
 }

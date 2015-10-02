@@ -22,14 +22,14 @@ val EXT_pixel_buffer_object = "EXTPixelBufferObject".nativeClassGL("EXT_pixel_bu
 		GetBufferPointerv.
 		""",
 
-		"PIXEL_PACK_BUFFER_EXT" _ 0x88EB,
-		"PIXEL_UNPACK_BUFFER_EXT" _ 0x88EC
+		"PIXEL_PACK_BUFFER_EXT"..0x88EB,
+		"PIXEL_UNPACK_BUFFER_EXT"..0x88EC
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"PIXEL_PACK_BUFFER_BINDING_EXT" _ 0x88ED,
-		"PIXEL_UNPACK_BUFFER_BINDING_EXT" _ 0x88EF
+		"PIXEL_PACK_BUFFER_BINDING_EXT"..0x88ED,
+		"PIXEL_UNPACK_BUFFER_BINDING_EXT"..0x88EF
 	)
 }

@@ -28,7 +28,7 @@ val EXT_YUV_target = "EXTYUVTarget".nativeClassGLES("EXT_YUV_target", postfix = 
 	IntConstant(
 		"Returned in the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_EXTERNAL_2D_Y2Y_EXT" _ 0x8BE7
+		"SAMPLER_EXTERNAL_2D_Y2Y_EXT"..0x8BE7
 	)
 
 	IntConstant(
@@ -37,18 +37,18 @@ val EXT_YUV_target = "EXTYUVTarget".nativeClassGLES("EXT_YUV_target", postfix = 
 		and FramebufferTexture2D.
 		""",
 
-		"TEXTURE_EXTERNAL_OES" _ 0x8D65
+		"TEXTURE_EXTERNAL_OES"..0x8D65
 	)
 
 	IntConstant(
 		"Accepted as {@code value} in GetIntegerv() and GetFloatv() queries.",
 
-		"TEXTURE_BINDING_EXTERNAL_OES" _ 0x8D67
+		"TEXTURE_BINDING_EXTERNAL_OES"..0x8D67
 	)
 
 	IntConstant(
 		"Accepted as {@code value} in GetTexParameter*() queries.",
 
-		"REQUIRED_TEXTURE_IMAGE_UNITS_OES" _ 0x8D68
+		"REQUIRED_TEXTURE_IMAGE_UNITS_OES"..0x8D68
 	)
 }

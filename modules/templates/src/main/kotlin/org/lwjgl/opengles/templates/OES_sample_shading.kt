@@ -32,13 +32,13 @@ val OES_sample_shading = "OESSampleShading".nativeClassGLES("OES_sample_shading"
 		GetInteger64v.
 		""",
 
-		"SAMPLE_SHADING_OES" _ 0x8C36
+		"SAMPLE_SHADING_OES"..0x8C36
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, and GetFloatv.",
 
-		"MIN_SAMPLE_SHADING_VALUE_OES" _ 0x8C37
+		"MIN_SAMPLE_SHADING_VALUE_OES"..0x8C37
 	)
 
 	void(

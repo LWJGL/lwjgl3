@@ -32,6 +32,6 @@ val AMD_seamless_cubemap_per_texture = "AMDSeamlessCubemapPerTexture".nativeClas
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_CUBE_MAP_SEAMLESS" _ 0x884F
+		"TEXTURE_CUBE_MAP_SEAMLESS"..0x884F
 	)
 }

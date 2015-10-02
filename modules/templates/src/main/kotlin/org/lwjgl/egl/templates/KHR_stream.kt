@@ -47,24 +47,24 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 	LongConstant(
 		"",
 
-		"NO_STREAM_KHR" _ 0L
+		"NO_STREAM_KHR"..0L
 	)
 
 	IntConstant(
 		"",
 
-		"CONSUMER_LATENCY_USEC_KHR" _ 0x3210,
-		"PRODUCER_FRAME_KHR" _ 0x3212,
-		"CONSUMER_FRAME_KHR" _ 0x3213,
-		"STREAM_STATE_KHR" _ 0x3214,
-		"STREAM_STATE_CREATED_KHR" _ 0x3215,
-		"STREAM_STATE_CONNECTING_KHR" _ 0x3216,
-		"STREAM_STATE_EMPTY_KHR" _ 0x3217,
-		"STREAM_STATE_NEW_FRAME_AVAILABLE_KHR" _ 0x3218,
-		"STREAM_STATE_OLD_FRAME_AVAILABLE_KHR" _ 0x3219,
-		"STREAM_STATE_DISCONNECTED_KHR" _ 0x321A,
-		"BAD_STREAM_KHR" _ 0x321B,
-		"BAD_STATE_KHR" _ 0x321C
+		"CONSUMER_LATENCY_USEC_KHR"..0x3210,
+		"PRODUCER_FRAME_KHR"..0x3212,
+		"CONSUMER_FRAME_KHR"..0x3213,
+		"STREAM_STATE_KHR"..0x3214,
+		"STREAM_STATE_CREATED_KHR"..0x3215,
+		"STREAM_STATE_CONNECTING_KHR"..0x3216,
+		"STREAM_STATE_EMPTY_KHR"..0x3217,
+		"STREAM_STATE_NEW_FRAME_AVAILABLE_KHR"..0x3218,
+		"STREAM_STATE_OLD_FRAME_AVAILABLE_KHR"..0x3219,
+		"STREAM_STATE_DISCONNECTED_KHR"..0x321A,
+		"BAD_STREAM_KHR"..0x321B,
+		"BAD_STATE_KHR"..0x321C
 	)
 
 	EGLStreamKHR(
@@ -72,7 +72,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 		"",
 
 		EGLDisplay.IN("dpy", ""),
-		nullable _ noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
 	EGLBoolean(
@@ -100,7 +100,7 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 		EGLDisplay.IN("dpy", ""),
 		EGLStreamKHR.IN("stream", ""),
 		EGLenum.IN("attribute", ""),
-		Check(1) _ EGLint_p.OUT("value", "")
+		Check(1)..EGLint_p.OUT("value", "")
 	)
 
 	EGLBoolean(
@@ -110,6 +110,6 @@ val KHR_stream = "KHRStream".nativeClassEGL("KHR_stream", postfix = KHR) {
 		EGLDisplay.IN("dpy", ""),
 		EGLStreamKHR.IN("stream", ""),
 		EGLenum.IN("attribute", ""),
-		Check(1) _ EGLuint64KHR_p.OUT("value", "")
+		Check(1)..EGLuint64KHR_p.OUT("value", "")
 	)
 }

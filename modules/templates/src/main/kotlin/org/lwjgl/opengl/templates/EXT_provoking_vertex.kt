@@ -34,15 +34,15 @@ val EXT_provoking_vertex = "EXTProvokingVertex".nativeClassGL("EXT_provoking_ver
 	IntConstant(
 		"Accepted by the {@code mode} parameter of ProvokingVertexEXT.",
 
-		"FIRST_VERTEX_CONVENTION_EXT" _ 0x8E4D,
-		"LAST_VERTEX_CONVENTION_EXT" _ 0x8E4E
+		"FIRST_VERTEX_CONVENTION_EXT"..0x8E4D,
+		"LAST_VERTEX_CONVENTION_EXT"..0x8E4E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"PROVOKING_VERTEX_EXT" _ 0x8E4F,
-		"QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT" _ 0x8E4C
+		"PROVOKING_VERTEX_EXT"..0x8E4F,
+		"QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT"..0x8E4C
 	)
 
 	void(

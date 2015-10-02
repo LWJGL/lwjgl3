@@ -49,8 +49,8 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		WGLARBPixelFormat#ChoosePixelFormatARB().
 		""",
 
-		"BIND_TO_TEXTURE_RGB_ARB" _ 0x2070,
-		"BIND_TO_TEXTURE_RGBA_ARB" _ 0x2071
+		"BIND_TO_TEXTURE_RGB_ARB"..0x2070,
+		"BIND_TO_TEXTURE_RGBA_ARB"..0x2071
 	)
 
 	val wglCreatePbufferARB = "WGLARBPbuffer#CreatePbufferARB()"
@@ -59,9 +59,9 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of $wglCreatePbufferARB and by the {@code attribute} parameter of $wglQueryPbufferARB.",
 
-		"TEXTURE_FORMAT_ARB" _ 0x2072,
-		"TEXTURE_TARGET_ARB" _ 0x2073,
-		"MIPMAP_TEXTURE_ARB" _ 0x2074
+		"TEXTURE_FORMAT_ARB"..0x2072,
+		"TEXTURE_TARGET_ARB"..0x2073,
+		"MIPMAP_TEXTURE_ARB"..0x2074
 	)
 
 	IntConstant(
@@ -70,9 +70,9 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		{@code attribute} is #TEXTURE_FORMAT_ARB.
 		""",
 
-		"TEXTURE_RGB_ARB" _ 0x2075,
-		"TEXTURE_RGBA_ARB" _ 0x2076,
-		"NO_TEXTURE_ARB" _ 0x2077
+		"TEXTURE_RGB_ARB"..0x2075,
+		"TEXTURE_RGBA_ARB"..0x2076,
+		"NO_TEXTURE_ARB"..0x2077
 	)
 
 	IntConstant(
@@ -81,16 +81,16 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		{@code attribute} is #TEXTURE_TARGET_ARB.
 		""",
 
-		"TEXTURE_CUBE_MAP_ARB" _ 0x2078,
-		"TEXTURE_1D_ARB" _ 0x2079,
-		"TEXTURE_2D_ARB" _ 0x207A
+		"TEXTURE_CUBE_MAP_ARB"..0x2078,
+		"TEXTURE_1D_ARB"..0x2079,
+		"TEXTURE_2D_ARB"..0x207A
 	)
 
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of #SetPbufferAttribARB() and by the {@code attribute} parameter of $wglQueryPbufferARB.",
 
-		"MIPMAP_LEVEL_ARB" _ 0x207B,
-		"CUBE_MAP_FACE_ARB" _ 0x207C
+		"MIPMAP_LEVEL_ARB"..0x207B,
+		"CUBE_MAP_FACE_ARB"..0x207C
 	)
 
 	IntConstant(
@@ -99,31 +99,31 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		{@code attribute} is #CUBE_MAP_FACE_ARB.
 		""",
 
-		"TEXTURE_CUBE_MAP_POSITIVE_X_ARB" _ 0x207D,
-		"TEXTURE_CUBE_MAP_NEGATIVE_X_ARB" _ 0x207E,
-		"TEXTURE_CUBE_MAP_POSITIVE_Y_ARB" _ 0x207F,
-		"TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB" _ 0x2080,
-		"TEXTURE_CUBE_MAP_POSITIVE_Z_ARB" _ 0x2081,
-		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB" _ 0x2082
+		"TEXTURE_CUBE_MAP_POSITIVE_X_ARB"..0x207D,
+		"TEXTURE_CUBE_MAP_NEGATIVE_X_ARB"..0x207E,
+		"TEXTURE_CUBE_MAP_POSITIVE_Y_ARB"..0x207F,
+		"TEXTURE_CUBE_MAP_NEGATIVE_Y_ARB"..0x2080,
+		"TEXTURE_CUBE_MAP_POSITIVE_Z_ARB"..0x2081,
+		"TEXTURE_CUBE_MAP_NEGATIVE_Z_ARB"..0x2082
 	)
 
 	IntConstant(
 		"Accepted by the {@code buffer} parameter of #BindTexImageARB() and #ReleaseTexImageARB().",
 
-		"FRONT_LEFT_ARB" _ 0x2083,
-		"FRONT_RIGHT_ARB" _ 0x2084,
-		"BACK_LEFT_ARB" _ 0x2085,
-		"BACK_RIGHT_ARB" _ 0x2086,
-		"AUX0_ARB" _ 0x2087,
-		"AUX1_ARB" _ 0x2088,
-		"AUX2_ARB" _ 0x2089,
-		"AUX3_ARB" _ 0x208A,
-		"AUX4_ARB" _ 0x208B,
-		"AUX5_ARB" _ 0x208C,
-		"AUX6_ARB" _ 0x208D,
-		"AUX7_ARB" _ 0x208E,
-		"AUX8_ARB" _ 0x208F,
-		"AUX9_ARB" _ 0x2090
+		"FRONT_LEFT_ARB"..0x2083,
+		"FRONT_RIGHT_ARB"..0x2084,
+		"BACK_LEFT_ARB"..0x2085,
+		"BACK_RIGHT_ARB"..0x2086,
+		"AUX0_ARB"..0x2087,
+		"AUX1_ARB"..0x2088,
+		"AUX2_ARB"..0x2089,
+		"AUX3_ARB"..0x208A,
+		"AUX4_ARB"..0x208B,
+		"AUX5_ARB"..0x208C,
+		"AUX6_ARB"..0x208D,
+		"AUX7_ARB"..0x208E,
+		"AUX8_ARB"..0x208F,
+		"AUX9_ARB"..0x2090
 	)
 
 	BOOL(
@@ -154,6 +154,6 @@ val WGL_ARB_render_texture = "WGLARBRenderTexture".nativeClassWGL("WGL_ARB_rende
 		"Sets an attribute to the specified pbuffer.",
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
-		nullTerminated _ nullable _ const _ int_p.IN("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
+		nullTerminated..nullable..const..int_p.IN("attribList", "a 0-terminated list of attribute {type, value} pairs containing integer values")
 	)
 }

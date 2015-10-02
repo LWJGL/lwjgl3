@@ -19,7 +19,7 @@ val khr_image2d_from_buffer = "KHRImage2DFromBuffer".nativeClassCL("khr_image2d_
 		images, this value should be 0.
 		""",
 
-		"DEVICE_IMAGE_PITCH_ALIGNMENT" _ 0x104A
+		"DEVICE_IMAGE_PITCH_ALIGNMENT"..0x104A
 	)
 
 	IntConstant(
@@ -33,7 +33,7 @@ val khr_image2d_from_buffer = "KHRImage2DFromBuffer".nativeClassCL("khr_image2d_
 		images, this value should be 0.
 		""",
 
-		"DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT" _ 0x104B
+		"DEVICE_IMAGE_BASE_ADDRESS_ALIGNMENT"..0x104B
 	)
 
 }

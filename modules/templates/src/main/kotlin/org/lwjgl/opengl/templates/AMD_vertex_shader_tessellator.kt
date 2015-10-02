@@ -68,28 +68,28 @@ val AMD_vertex_shader_tessellator = "AMDVertexShaderTessellator".nativeClassGL("
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_BUFFER_AMD" _ 0x9001,
-		"INT_SAMPLER_BUFFER_AMD" _ 0x9002,
-		"UNSIGNED_INT_SAMPLER_BUFFER_AMD" _ 0x9003
+		"SAMPLER_BUFFER_AMD"..0x9001,
+		"INT_SAMPLER_BUFFER_AMD"..0x9002,
+		"UNSIGNED_INT_SAMPLER_BUFFER_AMD"..0x9003
 	)
 
 	IntConstant(
 		"Accepted by TessellationModeAMD.",
 
-		"DISCRETE_AMD" _ 0x9006,
-		"CONTINUOUS_AMD" _ 0x9007
+		"DISCRETE_AMD"..0x9006,
+		"CONTINUOUS_AMD"..0x9007
 	)
 
 	IntConstant(
 		"Accepted by GetIntegerv.",
 
-		"TESSELLATION_MODE_AMD" _ 0x9004
+		"TESSELLATION_MODE_AMD"..0x9004
 	)
 
 	IntConstant(
 		"Accepted by GetFloatv.",
 
-		"TESSELLATION_FACTOR_AMD" _ 0x9005
+		"TESSELLATION_FACTOR_AMD"..0x9005
 	)
 
 	void(

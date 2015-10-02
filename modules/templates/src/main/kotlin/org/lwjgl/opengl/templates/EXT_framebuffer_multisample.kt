@@ -67,18 +67,18 @@ val EXT_framebuffer_multisample = "EXTFramebufferMultisample".nativeClassGL("EXT
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
 
-		"RENDERBUFFER_SAMPLES_EXT" _ 0x8CAB
+		"RENDERBUFFER_SAMPLES_EXT"..0x8CAB
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatusEXT.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT" _ 0x8D56
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT"..0x8D56
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_SAMPLES_EXT" _ 0x8D57
+		"MAX_SAMPLES_EXT"..0x8D57
 	)
 }

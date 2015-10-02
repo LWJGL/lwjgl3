@@ -28,7 +28,7 @@ val NV_explicit_multisample = "NVExplicitMultisample".nativeClassGL("NV_explicit
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMultisamplefvNV.",
 
-		"SAMPLE_POSITION_NV" _ 0x8E50
+		"SAMPLE_POSITION_NV"..0x8E50
 	)
 
 	IntConstant(
@@ -37,35 +37,35 @@ val NV_explicit_multisample = "NVExplicitMultisample".nativeClassGL("NV_explicit
 		GetDoublev.
 		""",
 
-		"SAMPLE_MASK_NV" _ 0x8E51
+		"SAMPLE_MASK_NV"..0x8E51
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanIndexedvEXT and GetIntegerIndexedvEXT.",
 
-		"SAMPLE_MASK_VALUE_NV" _ 0x8E52
+		"SAMPLE_MASK_VALUE_NV"..0x8E52
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"TEXTURE_BINDING_RENDERBUFFER_NV" _ 0x8E53,
-		"TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV" _ 0x8E54,
-		"MAX_SAMPLE_MASK_WORDS_NV" _ 0x8E59
+		"TEXTURE_BINDING_RENDERBUFFER_NV"..0x8E53,
+		"TEXTURE_RENDERBUFFER_DATA_STORE_BINDING_NV"..0x8E54,
+		"MAX_SAMPLE_MASK_WORDS_NV"..0x8E59
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture, and TexRenderbufferNV.",
 
-		"TEXTURE_RENDERBUFFER_NV" _ 0x8E55
+		"TEXTURE_RENDERBUFFER_NV"..0x8E55
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_RENDERBUFFER_NV" _ 0x8E56,
-		"INT_SAMPLER_RENDERBUFFER_NV" _ 0x8E57,
-		"UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV" _ 0x8E58
+		"SAMPLER_RENDERBUFFER_NV"..0x8E56,
+		"INT_SAMPLER_RENDERBUFFER_NV"..0x8E57,
+		"UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV"..0x8E58
 	)
 
 	void(
@@ -74,7 +74,7 @@ val NV_explicit_multisample = "NVExplicitMultisample".nativeClassGL("NV_explicit
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		Check(2) _ GLfloat_p.OUT("val", "")
+		Check(2)..GLfloat_p.OUT("val", "")
 	)
 
 	void(

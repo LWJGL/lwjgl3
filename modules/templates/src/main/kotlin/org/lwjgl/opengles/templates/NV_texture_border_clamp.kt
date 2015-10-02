@@ -26,7 +26,7 @@ val NV_texture_border_clamp = "NVTextureBorderClamp".nativeClassGLES("NV_texture
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, and TexParameterfv.",
 
-		"TEXTURE_BORDER_COLOR_NV" _ 0x1004
+		"TEXTURE_BORDER_COLOR_NV"..0x1004
 	)
 
 	IntConstant(
@@ -36,6 +36,6 @@ val NV_texture_border_clamp = "NVTextureBorderClamp".nativeClassGLES("NV_texture
 		TEXTURE_WRAP_T, or TEXTURE_WRAP_R_OES.
 		""",
 
-		"CLAMP_TO_BORDER_NV" _ 0x812D
+		"CLAMP_TO_BORDER_NV"..0x812D
 	)
 }

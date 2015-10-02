@@ -36,11 +36,11 @@ val EXT_texture_view = "EXTTextureView".nativeClassGLES("EXT_texture_view", post
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.",
 
-		"TEXTURE_VIEW_MIN_LEVEL_EXT" _ 0x82DB,
-		"TEXTURE_VIEW_NUM_LEVELS_EXT" _ 0x82DC,
-		"TEXTURE_VIEW_MIN_LAYER_EXT" _ 0x82DD,
-		"TEXTURE_VIEW_NUM_LAYERS_EXT" _ 0x82DE,
-		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
+		"TEXTURE_VIEW_MIN_LEVEL_EXT"..0x82DB,
+		"TEXTURE_VIEW_NUM_LEVELS_EXT"..0x82DC,
+		"TEXTURE_VIEW_MIN_LAYER_EXT"..0x82DD,
+		"TEXTURE_VIEW_NUM_LAYERS_EXT"..0x82DE,
+		"TEXTURE_IMMUTABLE_LEVELS"..0x82DF
 	)
 
 	void(

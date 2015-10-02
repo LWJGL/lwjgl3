@@ -20,8 +20,8 @@ val DMP_program_binary = "DMPProgramBinary".nativeClassGLES("DMP_program_binary"
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ProgramBinaryOES.",
 
-		"SMAPHS30_PROGRAM_BINARY_DMP" _ 0x9251,
-		"SMAPHS_PROGRAM_BINARY_DMP" _ 0x9252,
-		"DMP_PROGRAM_BINARY_DMP" _ 0x9253
+		"SMAPHS30_PROGRAM_BINARY_DMP"..0x9251,
+		"SMAPHS_PROGRAM_BINARY_DMP"..0x9252,
+		"DMP_PROGRAM_BINARY_DMP"..0x9253
 	)
 }

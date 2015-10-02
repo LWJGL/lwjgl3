@@ -29,7 +29,7 @@ val EXT_stencil_wrap = "EXTStencilWrap".nativeClassGL("EXT_stencil_wrap", postfi
 	IntConstant(
 		"Accepted by the {@code sfail}, {@code dpfail}, and {@code dppass} parameter of StencilOp.",
 
-		"INCR_WRAP_EXT" _ 0x8507,
-		"DECR_WRAP_EXT" _ 0x8508
+		"INCR_WRAP_EXT"..0x8507,
+		"DECR_WRAP_EXT"..0x8508
 	)
 }

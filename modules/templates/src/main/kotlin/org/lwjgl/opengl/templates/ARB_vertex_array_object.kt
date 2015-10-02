@@ -25,7 +25,7 @@ val ARB_vertex_array_object = "ARBVertexArrayObject".nativeClassGL("ARB_vertex_a
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"VERTEX_ARRAY_BINDING" _ 0x85B5
+		"VERTEX_ARRAY_BINDING"..0x85B5
 	)
 
 	GL30 reuse "BindVertexArray"

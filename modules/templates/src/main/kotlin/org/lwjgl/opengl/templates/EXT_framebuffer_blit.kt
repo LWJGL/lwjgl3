@@ -25,15 +25,15 @@ val EXT_framebuffer_blit = "EXTFramebufferBlit".nativeClassGL("EXT_framebuffer_b
 		and GetFramebufferAttachmentParameterivEXT.
 		""",
 
-		"READ_FRAMEBUFFER_EXT" _ 0x8CA8,
-		"DRAW_FRAMEBUFFER_EXT" _ 0x8CA9
+		"READ_FRAMEBUFFER_EXT"..0x8CA8,
+		"DRAW_FRAMEBUFFER_EXT"..0x8CA9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"DRAW_FRAMEBUFFER_BINDING_EXT" _ 0x8CA6,
-		"READ_FRAMEBUFFER_BINDING_EXT" _ 0x8CAA
+		"DRAW_FRAMEBUFFER_BINDING_EXT"..0x8CA6,
+		"READ_FRAMEBUFFER_BINDING_EXT"..0x8CAA
 	)
 
 	void(

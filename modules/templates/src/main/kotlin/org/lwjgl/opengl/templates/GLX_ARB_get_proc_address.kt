@@ -43,6 +43,6 @@ val GLX_ARB_get_proc_address = "GLXARBGetProcAddress".nativeClassGLX("GLX_ARB_ge
 		)}
 		""",
 
-		const _ GLubyte_p.IN("procName", "the function name to query")
+		const..GLubyte_p.IN("procName", "the function name to query")
 	)
 }

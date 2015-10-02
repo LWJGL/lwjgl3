@@ -24,7 +24,7 @@ val IMG_texture_compression_pvrtc2 = "IMGTextureCompressionPVRTC2".nativeClassGL
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",
 
-		"COMPRESSED_RGBA_PVRTC_2BPPV2_IMG" _ 0x9137,
-		"COMPRESSED_RGBA_PVRTC_4BPPV2_IMG" _ 0x9138
+		"COMPRESSED_RGBA_PVRTC_2BPPV2_IMG"..0x9137,
+		"COMPRESSED_RGBA_PVRTC_4BPPV2_IMG"..0x9138
 	)
 }

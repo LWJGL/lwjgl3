@@ -23,28 +23,28 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 		GetDoublev.
 		""",
 
-		"COLOR_SUM_EXT" _ 0x8458
+		"COLOR_SUM_EXT"..0x8458
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"CURRENT_SECONDARY_COLOR_EXT" _ 0x8459,
-		"SECONDARY_COLOR_ARRAY_SIZE_EXT" _ 0x845A,
-		"SECONDARY_COLOR_ARRAY_TYPE_EXT" _ 0x845B,
-		"SECONDARY_COLOR_ARRAY_STRIDE_EXT" _ 0x845C
+		"CURRENT_SECONDARY_COLOR_EXT"..0x8459,
+		"SECONDARY_COLOR_ARRAY_SIZE_EXT"..0x845A,
+		"SECONDARY_COLOR_ARRAY_TYPE_EXT"..0x845B,
+		"SECONDARY_COLOR_ARRAY_STRIDE_EXT"..0x845C
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
-		"SECONDARY_COLOR_ARRAY_POINTER_EXT" _ 0x845D
+		"SECONDARY_COLOR_ARRAY_POINTER_EXT"..0x845D
 	)
 
 	IntConstant(
 		"Accepted by the {@code array} parameter of EnableClientState and DisableClientState.",
 
-		"SECONDARY_COLOR_ARRAY_EXT" _ 0x845E
+		"SECONDARY_COLOR_ARRAY_EXT"..0x845E
 	)
 
 	val colorRed = "the red component of the current secondary color"
@@ -68,14 +68,14 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 	void("SecondaryColor3usEXT", "Unsigned short version of #SecondaryColor3bEXT()", GLushort.IN("red", colorRed), GLushort.IN("green", colorGreen), GLushort.IN("blue", colorBlue))
 	void("SecondaryColor3uiEXT", "Unsigned int version of #SecondaryColor3bEXT()", GLint.IN("red", colorRed), GLint.IN("green", colorGreen), GLint.IN("blue", colorBlue))
 
-	void("SecondaryColor3bvEXT", "Byte pointer version of #SecondaryColor3bEXT().", Check(3) _ const _ GLbyte_p.IN("v", colorBuffer))
-	void("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", Check(3) _ const _ GLshort_p.IN("v", colorBuffer))
-	void("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", Check(3) _ const _ GLint_p.IN("v", colorBuffer))
-	void("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", Check(3) _ const _ GLfloat_p.IN("v", colorBuffer))
-	void("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", Check(3) _ const _ GLdouble_p.IN("v", colorBuffer))
-	void("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", Check(3) _ const _ GLubyte_p.IN("v", colorBuffer))
-	void("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", Check(3) _ const _ GLushort_p.IN("v", colorBuffer))
-	void("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", Check(3) _ const _ GLuint_p.IN("v", colorBuffer))
+	void("SecondaryColor3bvEXT", "Byte pointer version of #SecondaryColor3bEXT().", Check(3)..const..GLbyte_p.IN("v", colorBuffer))
+	void("SecondaryColor3svEXT", "Pointer version of #SecondaryColor3sEXT().", Check(3)..const..GLshort_p.IN("v", colorBuffer))
+	void("SecondaryColor3ivEXT", "Pointer version of #SecondaryColor3iEXT().", Check(3)..const..GLint_p.IN("v", colorBuffer))
+	void("SecondaryColor3fvEXT", "Pointer version of #SecondaryColor3fEXT().", Check(3)..const..GLfloat_p.IN("v", colorBuffer))
+	void("SecondaryColor3dvEXT", "Pointer version of #SecondaryColor3dEXT().", Check(3)..const..GLdouble_p.IN("v", colorBuffer))
+	void("SecondaryColor3ubvEXT", "Pointer version of #SecondaryColor3ubEXT().", Check(3)..const..GLubyte_p.IN("v", colorBuffer))
+	void("SecondaryColor3usvEXT", "Pointer version of #SecondaryColor3usEXT().", Check(3)..const..GLushort_p.IN("v", colorBuffer))
+	void("SecondaryColor3uivEXT", "Pointer version of #SecondaryColor3uiEXT().", Check(3)..const..GLuint_p.IN("v", colorBuffer))
 
 	void(
 		"SecondaryColorPointerEXT",
@@ -88,8 +88,8 @@ val EXT_secondary_color = "EXTSecondaryColor".nativeClassGL("EXT_secondary_color
 			"GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL30#HALF_FLOAT GL11#FLOAT GL11#DOUBLE GL12#UNSIGNED_INT_2_10_10_10_REV GL33#INT_2_10_10_10_REV"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ MultiType(
+		ARRAY_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("pointer", "the secondary color array data")
+		)..const..void_p.IN("pointer", "the secondary color array data")
 	)
 }

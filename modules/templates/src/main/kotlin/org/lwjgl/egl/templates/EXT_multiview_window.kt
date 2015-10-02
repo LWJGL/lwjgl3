@@ -22,6 +22,6 @@ val EXT_multiview_window = "EXTMultiviewWindow".nativeClassEGL("EXT_multiview_wi
 	IntConstant(
 		"",
 
-		"MULTIVIEW_VIEW_COUNT_EXT" _ 0x3134
+		"MULTIVIEW_VIEW_COUNT_EXT"..0x3134
 	)
 }

@@ -21,6 +21,6 @@ val ARB_map_buffer_alignment = "ARBMapBufferAlignment".nativeClassGL("ARB_map_bu
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"MIN_MAP_BUFFER_ALIGNMENT" _ 0x90BC
+		"MIN_MAP_BUFFER_ALIGNMENT"..0x90BC
 	)
 }

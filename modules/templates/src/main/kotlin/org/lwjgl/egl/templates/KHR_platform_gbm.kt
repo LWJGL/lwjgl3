@@ -21,6 +21,6 @@ val KHR_platform_gbm = "KHRPlatformGBM".nativeClassEGL("KHR_platform_gbm", postf
 	IntConstant(
 		"",
 
-		"PLATFORM_GBM_KHR" _ 0x31D7
+		"PLATFORM_GBM_KHR"..0x31D7
 	)
 }

@@ -30,33 +30,33 @@ val NV_texture_array = "NVTextureArray".nativeClassGLES("NV_texture_array", post
 		TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, GenerateMipmap, and BindTexture.
 		""",
 
-		"TEXTURE_2D_ARRAY_NV" _ 0x8C1A
+		"TEXTURE_2D_ARRAY_NV"..0x8C1A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv and GetFloatv.",
 
-		"TEXTURE_BINDING_2D_ARRAY_NV" _ 0x8C1D,
-		"MAX_ARRAY_TEXTURE_LAYERS_NV" _ 0x88FF
+		"TEXTURE_BINDING_2D_ARRAY_NV"..0x8C1D,
+		"MAX_ARRAY_TEXTURE_LAYERS_NV"..0x88FF
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_NV" _ 0x8CD4
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_NV"..0x8CD4
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_2D_ARRAY_NV" _ 0x8DC1
+		"SAMPLER_2D_ARRAY_NV"..0x8DC1
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PixelStorei, GetBooleanv, GetIntegerv and GetFloatv.",
 
-		"UNPACK_SKIP_IMAGES_NV" _ 0x806D,
-		"UNPACK_IMAGE_HEIGHT_NV" _ 0x806E
+		"UNPACK_SKIP_IMAGES_NV"..0x806D,
+		"UNPACK_IMAGE_HEIGHT_NV"..0x806E
 	)
 
 	void(
@@ -72,9 +72,9 @@ val NV_texture_array = "NVTextureArray".nativeClassGLES("NV_texture_array", post
 		GLint.IN("border", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER _ MultiType(
+		PIXEL_UNPACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ nullable _ const _ void_p.IN("pixels", "")
+		)..nullable..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -91,9 +91,9 @@ val NV_texture_array = "NVTextureArray".nativeClassGLES("NV_texture_array", post
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER _ MultiType(
+		PIXEL_UNPACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("pixels", "")
+		)..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -123,7 +123,7 @@ val NV_texture_array = "NVTextureArray".nativeClassGLES("NV_texture_array", post
 		GLsizei.IN("depth", ""),
 		GLint.IN("border", ""),
 		GLsizei.IN("imageSize", ""),
-		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("data", "")
 	)
 
 	void(
@@ -140,7 +140,7 @@ val NV_texture_array = "NVTextureArray".nativeClassGLES("NV_texture_array", post
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		GLsizei.IN("imageSize", ""),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "")
 	)
 
 	void(

@@ -26,6 +26,6 @@ val EXT_shared_texture_palette = "EXTSharedTexturePalette".nativeClassGL("EXT_sh
 		ColorSubTableEXT, GetColorTableEXT, GetColorTableParameterivEXT, and GetColorTableParameterfd EXT.
 		""",
 
-		"SHARED_TEXTURE_PALETTE_EXT" _ 0x81FB
+		"SHARED_TEXTURE_PALETTE_EXT"..0x81FB
 	)
 }

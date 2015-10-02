@@ -16,9 +16,9 @@ val SSE3 = "SSE3".nativeClass("org.lwjgl.system.simd", prefix = "_MM", prefixMet
 	val DenormalsZeroMode = IntConstant(
 		"Denormals are zero mode.",
 
-		"DENORMALS_ZERO_MASK" _ 0x0040,
-		"DENORMALS_ZERO_ON" _ 0x0040,
-		"DENORMALS_ZERO_OFF" _ 0x0000
+		"DENORMALS_ZERO_MASK"..0x0040,
+		"DENORMALS_ZERO_ON"..0x0040,
+		"DENORMALS_ZERO_OFF"..0x0000
 	).javaDocLinks
 
 	void(

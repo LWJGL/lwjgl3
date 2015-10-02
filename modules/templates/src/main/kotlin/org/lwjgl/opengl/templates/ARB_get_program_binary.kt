@@ -30,20 +30,20 @@ val ARB_get_program_binary = "ARBGetProgramBinary".nativeClassGL("ARB_get_progra
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
-		"PROGRAM_BINARY_RETRIEVABLE_HINT" _ 0x8257
+		"PROGRAM_BINARY_RETRIEVABLE_HINT"..0x8257
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"PROGRAM_BINARY_LENGTH" _ 0x8741
+		"PROGRAM_BINARY_LENGTH"..0x8741
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev.",
 
-		"NUM_PROGRAM_BINARY_FORMATS" _ 0x87FE,
-		"PROGRAM_BINARY_FORMATS" _ 0x87FF
+		"NUM_PROGRAM_BINARY_FORMATS"..0x87FE,
+		"PROGRAM_BINARY_FORMATS"..0x87FF
 	)
 
 	GL41 reuse "GetProgramBinary"

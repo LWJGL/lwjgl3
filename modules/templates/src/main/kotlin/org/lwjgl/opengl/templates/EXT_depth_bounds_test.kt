@@ -42,13 +42,13 @@ val EXT_depth_bounds_test = "EXTDepthBoundsTest".nativeClassGL("EXT_depth_bounds
 		GetDoublev.
 		""",
 
-		"DEPTH_BOUNDS_TEST_EXT" _ 0x8890
+		"DEPTH_BOUNDS_TEST_EXT"..0x8890
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"DEPTH_BOUNDS_EXT" _ 0x8891
+		"DEPTH_BOUNDS_EXT"..0x8891
 	)
 
 	void(

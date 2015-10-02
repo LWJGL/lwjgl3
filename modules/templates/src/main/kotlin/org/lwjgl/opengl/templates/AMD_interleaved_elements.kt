@@ -33,13 +33,13 @@ val AMD_interleaved_elements = "AMDInterleavedElements".nativeClassGL("AMD_inter
 	IntConstant(
 		"Accepted by the {@code pname} parameter of VertexAttribParameteriAMD and GetVertexAttrib{iv|dv|fv|Iiv|Iuiv|Ldv}.",
 
-		"VERTEX_ELEMENT_SWIZZLE_AMD" _ 0x91A4
+		"VERTEX_ELEMENT_SWIZZLE_AMD"..0x91A4
 	)
 
 	IntConstant(
 		"Selected by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
-		"VERTEX_ID_SWIZZLE_AMD" _ 0x91A5
+		"VERTEX_ID_SWIZZLE_AMD"..0x91A5
 	)
 
 	void(

@@ -23,8 +23,8 @@ val ATI_meminfo = "ATIMeminfo".nativeClassGL("ATI_meminfo", postfix = ATI) {
 	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegerv.",
 
-		"VBO_FREE_MEMORY_ATI" _ 0x87FB,
-		"TEXTURE_FREE_MEMORY_ATI" _ 0x87FC,
-		"RENDERBUFFER_FREE_MEMORY_ATI" _ 0x87FD
+		"VBO_FREE_MEMORY_ATI"..0x87FB,
+		"TEXTURE_FREE_MEMORY_ATI"..0x87FC,
+		"RENDERBUFFER_FREE_MEMORY_ATI"..0x87FD
 	)
 }

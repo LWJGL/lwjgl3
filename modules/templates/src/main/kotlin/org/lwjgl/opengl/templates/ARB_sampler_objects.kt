@@ -31,7 +31,7 @@ val ARB_sampler_objects = "ARBSamplerObjects".nativeClassGL("ARB_sampler_objects
 	IntConstant(
 		"Accepted by the {@code value} parameter of the GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv and GetDoublev functions.",
 
-		"SAMPLER_BINDING" _ 0x8919
+		"SAMPLER_BINDING"..0x8919
 	)
 
 	GL33 reuse "GenSamplers"

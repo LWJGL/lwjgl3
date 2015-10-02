@@ -35,6 +35,6 @@ val ARB_seamless_cubemap_per_texture = "ARBSeamlessCubemapPerTexture".nativeClas
 		GetSamplerParameter{if}v.
 		""",
 
-		"TEXTURE_CUBE_MAP_SEAMLESS" _ 0x884F
+		"TEXTURE_CUBE_MAP_SEAMLESS"..0x884F
 	)
 }

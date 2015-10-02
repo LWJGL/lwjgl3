@@ -39,6 +39,6 @@ val OES_texture_half_float = "OESTextureHalfFloat".nativeClassGLES("OES_texture_
 	IntConstant(
 		"Accepted by the {@code type} parameter of TexImage2D, TexSubImage2D, TexImage3D, and TexSubImage3D.",
 
-		"HALF_FLOAT_OES" _ 0x8D61
+		"HALF_FLOAT_OES"..0x8D61
 	)
 }

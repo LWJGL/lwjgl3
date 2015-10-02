@@ -13,7 +13,7 @@ val AL_LOKI_quadriphonic = "LOKIQuadriphonic".nativeClassAL("LOKI_quadriphonic")
 	IntConstant(
 		"AL_LOKI_quadriphonic tokens.",
 
-		"FORMAT_QUAD8_LOKI" _ 0x10004,
-		"FORMAT_QUAD16_LOKI" _ 0x10005
+		"FORMAT_QUAD8_LOKI"..0x10004,
+		"FORMAT_QUAD16_LOKI"..0x10005
 	)
 }

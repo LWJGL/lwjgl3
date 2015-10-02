@@ -36,10 +36,10 @@ val KHR_stream_fifo = "KHRStreamFIFO".nativeClassEGL("KHR_stream_fifo", postfix 
 	IntConstant(
 		"",
 
-		"STREAM_FIFO_LENGTH_KHR" _ 0x31FC,
-		"STREAM_TIME_NOW_KHR" _ 0x31FD,
-		"STREAM_TIME_CONSUMER_KHR" _ 0x31FE,
-		"STREAM_TIME_PRODUCER_KHR" _ 0x31FF
+		"STREAM_FIFO_LENGTH_KHR"..0x31FC,
+		"STREAM_TIME_NOW_KHR"..0x31FD,
+		"STREAM_TIME_CONSUMER_KHR"..0x31FE,
+		"STREAM_TIME_PRODUCER_KHR"..0x31FF
 	)
 
 	EGLBoolean(
@@ -49,6 +49,6 @@ val KHR_stream_fifo = "KHRStreamFIFO".nativeClassEGL("KHR_stream_fifo", postfix 
 		EGLDisplay.IN("dpy", ""),
 		EGLStreamKHR.IN("stream", ""),
 		EGLenum.IN("attribute", ""),
-		Check(1) _ EGLTimeKHR_p.OUT("value", "")
+		Check(1)..EGLTimeKHR_p.OUT("value", "")
 	)
 }

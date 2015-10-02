@@ -14,7 +14,7 @@ val khr_depth_images = "KHRDepthImages".nativeClassCL("khr_depth_images", KHR) {
 	IntConstant(
 		"cl_channel_order",
 
-		"DEPTH" _ 0x10BD
+		"DEPTH"..0x10BD
 	)
 
 }

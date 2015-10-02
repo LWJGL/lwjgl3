@@ -53,23 +53,23 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 	IntConstant(
 		"Returned by GetGraphicsResetStatusEXT.",
 
-		"GUILTY_CONTEXT_RESET_EXT" _ 0x8253,
-		"INNOCENT_CONTEXT_RESET_EXT" _ 0x8254,
-		"UNKNOWN_CONTEXT_RESET_EXT" _ 0x8255
+		"GUILTY_CONTEXT_RESET_EXT"..0x8253,
+		"INNOCENT_CONTEXT_RESET_EXT"..0x8254,
+		"UNKNOWN_CONTEXT_RESET_EXT"..0x8255
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"CONTEXT_ROBUST_ACCESS_EXT" _ 0x90F3,
-		"RESET_NOTIFICATION_STRATEGY_EXT" _ 0x8256
+		"CONTEXT_ROBUST_ACCESS_EXT"..0x90F3,
+		"RESET_NOTIFICATION_STRATEGY_EXT"..0x8256
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv and related simple queries when {@code value} is RESET_NOTIFICATION_STRATEGY_EXT .",
 
-		"LOSE_CONTEXT_ON_RESET_EXT" _ 0x8252,
-		"NO_RESET_NOTIFICATION_EXT" _ 0x8261
+		"LOSE_CONTEXT_ON_RESET_EXT"..0x8252,
+		"NO_RESET_NOTIFICATION_EXT"..0x8261
 	)
 
 	GLenum(
@@ -87,12 +87,12 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 		GLsizei.IN("height", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		AutoSize("data") _ GLsizei.IN("bufSize", ""),
-		PIXEL_PACK_BUFFER _ MultiType(
+		AutoSize("data")..GLsizei.IN("bufSize", ""),
+		PIXEL_PACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		) _ void_p.OUT("data", "")
+		)..void_p.OUT("data", "")
 	)
 
 	void(
@@ -101,8 +101,8 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		AutoSize("params") _ GLsizei.IN("bufSize", ""),
-		returnValue _ GLfloat_p.OUT("params", "")
+		AutoSize("params")..GLsizei.IN("bufSize", ""),
+		returnValue..GLfloat_p.OUT("params", "")
 	)
 
 	void(
@@ -111,7 +111,7 @@ val EXT_robustness = "EXTRobustness".nativeClassGLES("EXT_robustness", postfix =
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		AutoSize("params") _ GLsizei.IN("bufSize", ""),
-		returnValue _ GLint_p.OUT("params", "")
+		AutoSize("params")..GLsizei.IN("bufSize", ""),
+		returnValue..GLint_p.OUT("params", "")
 	)
 }

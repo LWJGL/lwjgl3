@@ -23,6 +23,6 @@ val ANGLE_pack_reverse_row_order = "ANGLEPackReverseRowOrder".nativeClassGLES("A
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PixelStore{if}, GetIntegerv(), GetBooleanv(), and GetFloatv().",
 
-		"PACK_REVERSE_ROW_ORDER_ANGLE" _ 0x93A4
+		"PACK_REVERSE_ROW_ORDER_ANGLE"..0x93A4
 	)
 }

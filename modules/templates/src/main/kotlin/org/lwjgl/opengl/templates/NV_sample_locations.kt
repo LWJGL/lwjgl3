@@ -34,24 +34,24 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"SAMPLE_LOCATION_SUBPIXEL_BITS_NV" _ 0x933D,
-		"SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV" _ 0x933E,
-		"SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV" _ 0x933F,
-		"PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV" _ 0x9340
+		"SAMPLE_LOCATION_SUBPIXEL_BITS_NV"..0x933D,
+		"SAMPLE_LOCATION_PIXEL_GRID_WIDTH_NV"..0x933E,
+		"SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_NV"..0x933F,
+		"PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_NV"..0x9340
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMultisamplefv.",
 
-		"SAMPLE_LOCATION_NV" _ 0x8E50,
-		"PROGRAMMABLE_SAMPLE_LOCATION_NV" _ 0x9341
+		"SAMPLE_LOCATION_NV"..0x8E50,
+		"PROGRAMMABLE_SAMPLE_LOCATION_NV"..0x9341
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv.",
 
-		"FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV" _ 0x9342,
-		"FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV" _ 0x9343
+		"FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_NV"..0x9342,
+		"FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_NV"..0x9343
 	)
 
 	void(
@@ -60,8 +60,8 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 
 		GLenum.IN("target", "the framebuffer whose programmable sample locations are modified"),
 		GLuint.IN("start", "the index of the first sample location to modify"),
-		AutoSize("v") shr 1 _ GLsizei.IN("count", "the number of sample locations to modify"),
-		const _ GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
+		AutoSize("v") shr 1..GLsizei.IN("count", "the number of sample locations to modify"),
+		const..GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
 	)
 
 	void(
@@ -70,8 +70,8 @@ val NV_sample_locations = "NVSampleLocations".nativeClassGL("NV_sample_locations
 
 		GLuint.IN("framebuffer", "the framebuffer whose programmable sample locations are modified"),
 		GLuint.IN("start", "the index of the first sample location to modify"),
-		AutoSize("v") shr 1 _ GLsizei.IN("count", "the number of sample locations to modify"),
-		const _ GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
+		AutoSize("v") shr 1..GLsizei.IN("count", "the number of sample locations to modify"),
+		const..GLfloat_p.IN("v", "a pair of floating point values in the range [0,1] for each sample location")
 	)
 
 	void(

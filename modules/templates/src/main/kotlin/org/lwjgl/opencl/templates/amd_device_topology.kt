@@ -34,12 +34,12 @@ typedef union
 		device ID and the physical PCI connection of the card.
 		""",
 
-		"DEVICE_TOPOLOGY_AMD" _ 0x4037
+		"DEVICE_TOPOLOGY_AMD"..0x4037
 	)
 
 	IntConstant(
 		"Indicates the type of the struct returned by #DEVICE_TOPOLOGY_AMD.",
 
-		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD" _ 1
+		"DEVICE_TOPOLOGY_TYPE_PCIE_AMD"..1
 	)
 }

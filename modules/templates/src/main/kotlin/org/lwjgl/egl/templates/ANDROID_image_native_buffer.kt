@@ -20,6 +20,6 @@ val ANDROID_image_native_buffer = "ANDROIDImageNativeBuffer".nativeClassEGL("AND
 	IntConstant(
 		"",
 
-		"NATIVE_BUFFER_ANDROID" _ 0x3140
+		"NATIVE_BUFFER_ANDROID"..0x3140
 	)
 }

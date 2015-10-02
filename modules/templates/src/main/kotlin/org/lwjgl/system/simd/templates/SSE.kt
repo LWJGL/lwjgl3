@@ -16,43 +16,43 @@ val SSE = "SSE".nativeClass("org.lwjgl.system.simd", prefix = "_MM", prefixMetho
 	val ExceptionState = IntConstant(
 		"Exception state.",
 
-		"EXCEPT_MASK" _ 0x003f,
-		"EXCEPT_INVALID" _ 0x0001,
-		"EXCEPT_DENORM" _ 0x0002,
-		"EXCEPT_DIV_ZERO" _ 0x0004,
-		"EXCEPT_OVERFLOW" _ 0x0008,
-		"EXCEPT_UNDERFLOW" _ 0x0010,
-		"EXCEPT_INEXACT" _ 0x0020
+		"EXCEPT_MASK"..0x003f,
+		"EXCEPT_INVALID"..0x0001,
+		"EXCEPT_DENORM"..0x0002,
+		"EXCEPT_DIV_ZERO"..0x0004,
+		"EXCEPT_OVERFLOW"..0x0008,
+		"EXCEPT_UNDERFLOW"..0x0010,
+		"EXCEPT_INEXACT"..0x0020
 	).javaDocLinks
 
 	val ExceptionMask = IntConstant(
 		"Exception mask.",
 
-		"MASK_MASK" _ 0x1f80,
-		"MASK_INVALID" _ 0x0080,
-		"MASK_DENORM" _ 0x0100,
-		"MASK_DIV_ZERO" _ 0x0200,
-		"MASK_OVERFLOW" _ 0x0400,
-		"MASK_UNDERFLOW" _ 0x0800,
-		"MASK_INEXACT" _ 0x1000
+		"MASK_MASK"..0x1f80,
+		"MASK_INVALID"..0x0080,
+		"MASK_DENORM"..0x0100,
+		"MASK_DIV_ZERO"..0x0200,
+		"MASK_OVERFLOW"..0x0400,
+		"MASK_UNDERFLOW"..0x0800,
+		"MASK_INEXACT"..0x1000
 	).javaDocLinks
 
 	val RoundMode = IntConstant(
 		"Round mode.",
 
-		"ROUND_MASK" _ 0x6000,
-		"ROUND_NEAREST" _ 0x0000,
-		"ROUND_DOWN" _ 0x2000,
-		"ROUND_UP" _ 0x4000,
-		"ROUND_TOWARD_ZERO" _ 0x6000
+		"ROUND_MASK"..0x6000,
+		"ROUND_NEAREST"..0x0000,
+		"ROUND_DOWN"..0x2000,
+		"ROUND_UP"..0x4000,
+		"ROUND_TOWARD_ZERO"..0x6000
 	).javaDocLinks
 
 	val FlushZeroMode = IntConstant(
 		"Flush zero mask.",
 
-		"FLUSH_ZERO_MASK" _ 0x8000,
-		"FLUSH_ZERO_ON" _ 0x8000,
-		"FLUSH_ZERO_OFF" _ 0x0000
+		"FLUSH_ZERO_MASK"..0x8000,
+		"FLUSH_ZERO_ON"..0x8000,
+		"FLUSH_ZERO_OFF"..0x0000
 	).javaDocLinks
 
 	void(

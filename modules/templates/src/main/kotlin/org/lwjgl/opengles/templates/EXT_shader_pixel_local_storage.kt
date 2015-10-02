@@ -33,13 +33,13 @@ val EXT_shader_pixel_local_storage = "EXTShaderPixelLocalStorage".nativeClassGLE
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, or GetFloatv.",
 
-		"MAX_SHADER_PIXEL_LOCAL_STORAGE_FAST_SIZE_EXT" _ 0x8F63,
-		"MAX_SHADER_PIXEL_LOCAL_STORAGE_SIZE_EXT" _ 0x8F67
+		"MAX_SHADER_PIXEL_LOCAL_STORAGE_FAST_SIZE_EXT"..0x8F63,
+		"MAX_SHADER_PIXEL_LOCAL_STORAGE_SIZE_EXT"..0x8F67
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of IsEnabled, GetBooleanv, GetIntegerv, GetInteger64v, or GetFloatv.",
 
-		"SHADER_PIXEL_LOCAL_STORAGE_EXT" _ 0x8F64
+		"SHADER_PIXEL_LOCAL_STORAGE_EXT"..0x8F64
 	)
 }

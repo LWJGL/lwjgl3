@@ -20,6 +20,6 @@ val EXT_texture_sRGB_RG8 = "EXTTextureSRGBRG8".nativeClassGLES("EXT_texture_sRGB
 	IntConstant(
 		"",
 
-		"SRG8_EXT" _ 0x8FBE
+		"SRG8_EXT"..0x8FBE
 	)
 }

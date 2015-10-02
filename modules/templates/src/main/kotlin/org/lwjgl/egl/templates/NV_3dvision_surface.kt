@@ -25,6 +25,6 @@ val NV_3dvision_surface = "NV3dvisionSurface".nativeClassEGL("NV_3dvision_surfac
 	IntConstant(
 		"",
 
-		"AUTO_STEREO_NV" _ 0x3136
+		"AUTO_STEREO_NV"..0x3136
 	)
 }

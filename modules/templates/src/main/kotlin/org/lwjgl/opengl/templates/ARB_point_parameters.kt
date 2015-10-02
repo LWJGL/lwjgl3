@@ -32,10 +32,10 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PointParameterfvARB, and the {@code pname} of Get.",
 
-		"POINT_SIZE_MIN_ARB" _ 0x8126,
-		"POINT_SIZE_MAX_ARB" _ 0x8127,
-		"POINT_FADE_THRESHOLD_SIZE_ARB" _ 0x8128,
-		"POINT_DISTANCE_ATTENUATION_ARB" _ 0x8129
+		"POINT_SIZE_MIN_ARB"..0x8126,
+		"POINT_SIZE_MAX_ARB"..0x8127,
+		"POINT_FADE_THRESHOLD_SIZE_ARB"..0x8128,
+		"POINT_DISTANCE_ATTENUATION_ARB"..0x8129
 	)
 
 	void(
@@ -51,7 +51,7 @@ val ARB_point_parameters = "ARBPointParameters".nativeClassGL("ARB_point_paramet
 		"Pointer version of #PointParameterfARB().",
 
 		GLenum.IN("pname", "the parameter to set", "#POINT_DISTANCE_ATTENUATION_ARB"),
-		Check(3) _ const _ GLfloat_p.IN("params", "the parameter value")
+		Check(3)..const..GLfloat_p.IN("params", "the parameter value")
 	)
 
 }

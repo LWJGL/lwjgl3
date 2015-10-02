@@ -18,19 +18,19 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 	IntConstant(
 		"The {@code mode} argument to #dlopen() contains one of the following.",
 
-		"RTLD_LAZY" _ 0x1,
-		"RTLD_NOW" _ 0x2,
-		"RTLD_LOCAL" _ 0x4,
-		"RTLD_GLOBAL" _ 0x8
+		"RTLD_LAZY"..0x1,
+		"RTLD_NOW"..0x2,
+		"RTLD_LOCAL"..0x4,
+		"RTLD_GLOBAL"..0x8
 	)
 
 	LongConstant(
 		"Special-handle values for #dlsym().",
 
-		"RTLD_NEXT" _ -1L,
-		"RTLD_DEFAULT" _ -2L,
-		"RTLD_SELF" _ -3L,
-		"RTLD_MAIN_ONLY" _ -5L
+		"RTLD_NEXT"..-1L,
+		"RTLD_DEFAULT"..-2L,
+		"RTLD_SELF"..-3L,
+		"RTLD_MAIN_ONLY"..-5L
 	)
 
 	// skipping dladdr
@@ -72,7 +72,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		)}
 		""",
 
-		nullable _ const _ charASCII_p.IN("path", "path to the image to open"),
+		nullable..const..charASCII_p.IN("path", "path to the image to open"),
 		int.IN(
 			"mode",
 			"""
@@ -101,7 +101,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 		)
 	)
 
-	(const _ charASCII_p)(
+	(const..charASCII_p)(
 		"dlerror",
 		"""
 		Provides diagnostic information corresponding to problems with calls to #dlopen(), #dlsym(), and #dlclose() in the same thread.
@@ -144,7 +144,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(MACOSX_PACKAGE) {
 			closed with a call to #dlclose(). These are the possible special-handle values: #RTLD_DEFAULT, and #RTLD_NEXT.
 			"""
 		),
-		const _ charASCII_p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
+		const..charASCII_p.IN("name", "the null-terminated character string containing the C name of the symbol being sought")
 	)
 
 	int(

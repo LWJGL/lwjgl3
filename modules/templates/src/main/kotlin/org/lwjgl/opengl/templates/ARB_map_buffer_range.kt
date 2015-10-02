@@ -31,12 +31,12 @@ val ARB_map_buffer_range = "ARBMapBufferRange".nativeClassGL("ARB_map_buffer_ran
 	IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferRange.",
 
-		"MAP_READ_BIT" _ 0x0001,
-		"MAP_WRITE_BIT" _ 0x0002,
-		"MAP_INVALIDATE_RANGE_BIT" _ 0x0004,
-		"MAP_INVALIDATE_BUFFER_BIT" _ 0x0008,
-		"MAP_FLUSH_EXPLICIT_BIT" _ 0x0010,
-		"MAP_UNSYNCHRONIZED_BIT" _ 0x0020
+		"MAP_READ_BIT"..0x0001,
+		"MAP_WRITE_BIT"..0x0002,
+		"MAP_INVALIDATE_RANGE_BIT"..0x0004,
+		"MAP_INVALIDATE_BUFFER_BIT"..0x0008,
+		"MAP_FLUSH_EXPLICIT_BIT"..0x0010,
+		"MAP_UNSYNCHRONIZED_BIT"..0x0020
 	)
 
 	GL30 reuse "MapBufferRange"

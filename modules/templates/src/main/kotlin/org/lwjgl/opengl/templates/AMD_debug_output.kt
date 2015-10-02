@@ -44,30 +44,30 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 	IntConstant(
 		"Tokens accepted by GetIntegerv.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH_AMD" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES_AMD" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES_AMD" _ 0x9145
+		"MAX_DEBUG_MESSAGE_LENGTH_AMD"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES_AMD"..0x9144,
+		"DEBUG_LOGGED_MESSAGES_AMD"..0x9145
 	)
 
 	val Severities = IntConstant(
 		"Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, DebugMessageInsertAMD, and DEBUGPROCAMD callback function for {@code severity}.",
 
-		"DEBUG_SEVERITY_HIGH_AMD" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM_AMD" _ 0x9147,
-		"DEBUG_SEVERITY_LOW_AMD" _ 0x9148
+		"DEBUG_SEVERITY_HIGH_AMD"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM_AMD"..0x9147,
+		"DEBUG_SEVERITY_LOW_AMD"..0x9148
 	).javaDocLinks
 
 	val Categories = IntConstant(
 		"Tokens accepted by DebugMessageEnableAMD, GetDebugMessageLogAMD, and DEBUGPROCAMD callback function for {@code category}.",
 
-		"DEBUG_CATEGORY_API_ERROR_AMD" _ 0x9149,
-		"DEBUG_CATEGORY_WINDOW_SYSTEM_AMD" _ 0x914A,
-		"DEBUG_CATEGORY_DEPRECATION_AMD" _ 0x914B,
-		"DEBUG_CATEGORY_UNDEFINED_BEHAVIOR_AMD" _ 0x914C,
-		"DEBUG_CATEGORY_PERFORMANCE_AMD" _ 0x914D,
-		"DEBUG_CATEGORY_SHADER_COMPILER_AMD" _ 0x914E,
-		"DEBUG_CATEGORY_APPLICATION_AMD" _ 0x914F,
-		"DEBUG_CATEGORY_OTHER_AMD" _ 0x9150
+		"DEBUG_CATEGORY_API_ERROR_AMD"..0x9149,
+		"DEBUG_CATEGORY_WINDOW_SYSTEM_AMD"..0x914A,
+		"DEBUG_CATEGORY_DEPRECATION_AMD"..0x914B,
+		"DEBUG_CATEGORY_UNDEFINED_BEHAVIOR_AMD"..0x914C,
+		"DEBUG_CATEGORY_PERFORMANCE_AMD"..0x914D,
+		"DEBUG_CATEGORY_SHADER_COMPILER_AMD"..0x914E,
+		"DEBUG_CATEGORY_APPLICATION_AMD"..0x914F,
+		"DEBUG_CATEGORY_OTHER_AMD"..0x9150
 	).javaDocLinks
 
 	void(
@@ -111,8 +111,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 
 		GLenum.IN("category", "the message category", Categories),
 		GLenum.IN("severity", "the message severity", Severities),
-		AutoSize("ids") _ GLsizei.IN("count", "the number of values in the {@code ids} array"),
-		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of message ids"),
+		AutoSize("ids")..GLsizei.IN("count", "the number of values in the {@code ids} array"),
+		SingleValue("id")..nullable..const..GLuint_p.IN("ids", "an array of message ids"),
 		GLboolean.IN("enabled", "whether to enable or disable the referenced subset of messages")
 	)
 
@@ -133,8 +133,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		GLenum.IN("category", "the message category", "#DEBUG_CATEGORY_APPLICATION_AMD"),
 		GLenum.IN("severity", "the message severity", Severities),
 		GLuint.IN("id", "the message id"),
-		AutoSize("buf") _ GLsizei.IN("length", "the number of character in the message"),
-		const _ GLcharUTF8_p.IN("buf", "the message characters")
+		AutoSize("buf")..GLsizei.IN("length", "the number of character in the message"),
+		const..GLcharUTF8_p.IN("buf", "the message characters")
 	)
 
 	void(
@@ -164,8 +164,8 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		application can query the number of messages currently in the log by obtaining the value of #DEBUG_LOGGED_MESSAGES_AMD.
 		""",
 
-		nullable _ GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable _ voidptr.IN(
+		nullable..GLDEBUGPROCAMD.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable..voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -192,11 +192,11 @@ val AMD_debug_output = "AMDDebugOutput".nativeClassGL("AMD_debug_output", postfi
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
-		Check("count") _ nullable _ GLenum_p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
-		Check("count") _ nullable _ GLuint_p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
-		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
-		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
-		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+		AutoSize("messageLog")..GLsizei.IN("bufsize", "the maximum number of characters that can be written in the {@code message} array"),
+		Check("count")..nullable..GLenum_p.OUT("categories", "an array of variables to receive the categories of the retrieved messages"),
+		Check("count")..nullable..GLuint_p.OUT("severities", "an array of variables to receive the severities of the retrieved messages"),
+		Check("count")..nullable..GLuint_p.OUT("ids", "an array of variables to receive the ids of the retrieved messages"),
+		Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the retrieved messages"),
+		nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 }

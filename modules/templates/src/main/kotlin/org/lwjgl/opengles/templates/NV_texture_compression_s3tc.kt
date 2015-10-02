@@ -19,9 +19,9 @@ val NV_texture_compression_s3tc = "NVTextureCompressionS3TC".nativeClassGLES("NV
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D and CompressedTexSubImage2D.",
 
-		"COMPRESSED_RGB_S3TC_DXT1_NV" _ 0x83F0,
-		"COMPRESSED_RGBA_S3TC_DXT1_NV" _ 0x83F1,
-		"COMPRESSED_RGBA_S3TC_DXT3_NV" _ 0x83F2,
-		"COMPRESSED_RGBA_S3TC_DXT5_NV" _ 0x83F3
+		"COMPRESSED_RGB_S3TC_DXT1_NV"..0x83F0,
+		"COMPRESSED_RGBA_S3TC_DXT1_NV"..0x83F1,
+		"COMPRESSED_RGBA_S3TC_DXT3_NV"..0x83F2,
+		"COMPRESSED_RGBA_S3TC_DXT5_NV"..0x83F3
 	)
 }

@@ -26,32 +26,32 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to TexParameter{i f}{v}, TexParameterI{u}v, GetTexParameter{if}v and GetTexParameterIi{u}v.",
 
-		"TEXTURE_SPARSE_ARB" _ 0x91A6,
-		"VIRTUAL_PAGE_SIZE_INDEX_ARB" _ 0x91A7
+		"TEXTURE_SPARSE_ARB"..0x91A6,
+		"VIRTUAL_PAGE_SIZE_INDEX_ARB"..0x91A7
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexParameter{if}v and GetTexParameterIi{u}v.",
 
-		"NUM_SPARSE_LEVELS_ARB" _ 0x91AA
+		"NUM_SPARSE_LEVELS_ARB"..0x91AA
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetInternalformativ.",
 
-		"NUM_VIRTUAL_PAGE_SIZES_ARB" _ 0x91A8,
-		"VIRTUAL_PAGE_SIZE_X_ARB" _ 0x9195,
-		"VIRTUAL_PAGE_SIZE_Y_ARB" _ 0x9196,
-		"VIRTUAL_PAGE_SIZE_Z_ARB" _ 0x9197
+		"NUM_VIRTUAL_PAGE_SIZES_ARB"..0x91A8,
+		"VIRTUAL_PAGE_SIZE_X_ARB"..0x9195,
+		"VIRTUAL_PAGE_SIZE_Y_ARB"..0x9196,
+		"VIRTUAL_PAGE_SIZE_Z_ARB"..0x9197
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv.",
 
-		"MAX_SPARSE_TEXTURE_SIZE_ARB" _ 0x9198,
-		"MAX_SPARSE_3D_TEXTURE_SIZE_ARB" _ 0x9199,
-		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB" _ 0x919A,
-		"SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB" _ 0x91A9
+		"MAX_SPARSE_TEXTURE_SIZE_ARB"..0x9198,
+		"MAX_SPARSE_3D_TEXTURE_SIZE_ARB"..0x9199,
+		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS_ARB"..0x919A,
+		"SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_ARB"..0x91A9
 	)
 
 	val TexSubImage3D = GL12["TexSubImage3D"]
@@ -129,7 +129,7 @@ val ARB_sparse_texture = "ARBSparseTexture".nativeClassGL("ARB_sparse_texture", 
 		GLboolean.IN("commit", "the commit flag")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"TexturePageCommitmentEXT",
 		"DSA version of #TexPageCommitmentARB().",
 

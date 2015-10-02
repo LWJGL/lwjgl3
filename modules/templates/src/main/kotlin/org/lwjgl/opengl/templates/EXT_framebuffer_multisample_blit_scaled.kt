@@ -34,7 +34,7 @@ val EXT_framebuffer_multisample_blit_scaled = "EXTFramebufferMultisampleBlitScal
 	IntConstant(
 		"Accepted by the {@code filter} parameter of BlitFramebuffer.",
 
-		"SCALED_RESOLVE_FASTEST_EXT" _ 0x90BA,
-		"SCALED_RESOLVE_NICEST_EXT" _ 0x90BB
+		"SCALED_RESOLVE_FASTEST_EXT"..0x90BA,
+		"SCALED_RESOLVE_NICEST_EXT"..0x90BB
 	)
 }

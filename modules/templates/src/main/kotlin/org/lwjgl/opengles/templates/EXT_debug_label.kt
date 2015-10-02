@@ -25,12 +25,12 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGLES("EXT_debug_label", postfix
 	IntConstant(
 		"Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT.",
 
-		"BUFFER_OBJECT_EXT" _ 0x9151,
-		"SHADER_OBJECT_EXT" _ 0x8B48,
-		"PROGRAM_OBJECT_EXT" _ 0x8B40,
-		"VERTEX_ARRAY_OBJECT_EXT" _ 0x9154,
-		"QUERY_OBJECT_EXT" _ 0x9153,
-		"PROGRAM_PIPELINE_OBJECT_EXT" _ 0x8A4F
+		"BUFFER_OBJECT_EXT"..0x9151,
+		"SHADER_OBJECT_EXT"..0x8B48,
+		"PROGRAM_OBJECT_EXT"..0x8B40,
+		"VERTEX_ARRAY_OBJECT_EXT"..0x9154,
+		"QUERY_OBJECT_EXT"..0x9153,
+		"PROGRAM_PIPELINE_OBJECT_EXT"..0x8A4F
 	)
 
 	void(
@@ -39,8 +39,8 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGLES("EXT_debug_label", postfix
 
 		GLenum.IN("type", ""),
 		GLuint.IN("object", ""),
-		AutoSize("label") _ GLsizei.IN("length", ""),
-		const _ GLcharUTF8_p.IN("label", "")
+		AutoSize("label")..GLsizei.IN("length", ""),
+		const..GLcharUTF8_p.IN("label", "")
 	)
 
 	void(
@@ -49,8 +49,8 @@ val EXT_debug_label = "EXTDebugLabel".nativeClassGLES("EXT_debug_label", postfix
 
 		GLenum.IN("type", ""),
 		GLuint.IN("object", ""),
-		AutoSize("label") _ GLsizei.IN("bufSize", ""),
-		Check(1) _ GLsizei_p.OUT("length", ""),
-		Return("length") _ GLcharUTF8_p.OUT("label", "")
+		AutoSize("label")..GLsizei.IN("bufSize", ""),
+		Check(1)..GLsizei_p.OUT("length", ""),
+		Return("length")..GLcharUTF8_p.OUT("label", "")
 	)
 }

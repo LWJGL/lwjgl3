@@ -26,7 +26,7 @@ val EXT_multisample_compatibility = "EXTMultisampleCompatibility".nativeClassGLE
 		GetInteger64v.
 		""",
 
-		"MULTISAMPLE_EXT" _ 0x809D,
-		"SAMPLE_ALPHA_TO_ONE_EXT" _ 0x809F
+		"MULTISAMPLE_EXT"..0x809D,
+		"SAMPLE_ALPHA_TO_ONE_EXT"..0x809F
 	)
 }

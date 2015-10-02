@@ -49,7 +49,7 @@ val GLFWerrorfun = "GLFWerrorfun".callback(
 	GLFW_PACKAGE, void, "GLFWErrorCallback",
 	"Will be called with an error code and a human-readable description when a GLFW error occurs.",
 	int.IN("error", "the error code"),
-	nullTerminated _ charUTF8_p.IN("description", "a pointer to a UTF-8 encoded string describing the error"),
+	nullTerminated..charUTF8_p.IN("description", "a pointer to a UTF-8 encoded string describing the error"),
     samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetErrorCallback() method."
@@ -448,8 +448,8 @@ val GLFWdropfun = "GLFWdropfun".callback(
 	GLFW_PACKAGE, void, "GLFWDropCallback",
 	"Will be called when one or more dragged files are dropped on the window.",
 	GLFWwindow.IN("window", "the window that received the event"),
-	AutoSize("names") _ int.IN("count", "the number of dropped files"),
-	const _ char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files"),
+	AutoSize("names")..int.IN("count", "the number of dropped files"),
+	const..char_pp.IN("names", "pointer to the array of UTF-8 encoded path names of the dropped files"),
 	samConstructor = "GLFW"
 ) {
 	documentation = "Instances of this interface may be passed to the GLFW##glfwSetDropCallback() method."

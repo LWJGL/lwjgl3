@@ -33,7 +33,7 @@ val NV_multisample_coverage = "NVMultisampleCoverage".nativeClassGL("NV_multisam
 		Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.
 		""",
 
-		"COLOR_SAMPLES_NV" _ 0x8E20
+		"COLOR_SAMPLES_NV"..0x8E20
 	)
 }
 
@@ -51,8 +51,8 @@ val GLX_NV_multisample_coverage = "GLXNVMultisampleCoverage".nativeClassGLX("GLX
 		{@code attrib_list} parameter of glXChooseFBConfig, and the {@code attribute} parameter of glXGetFBConfigAttrib.
 		""",
 
-		"COVERAGE_SAMPLES_NV" _ 100001,
-		"COLOR_SAMPLES_NV" _ 0x20B3
+		"COVERAGE_SAMPLES_NV"..100001,
+		"COLOR_SAMPLES_NV"..0x20B3
 	)
 }
 
@@ -70,7 +70,7 @@ val WGL_NV_multisample_coverage = "WGLNVMultisampleCoverage".nativeClassWGL("WGL
 		{@code piAttribIList} and {@code pfAttribIList} of wglChoosePixelFormatEXT.
 		""",
 
-		"COVERAGE_SAMPLES_NV" _ 0x2042,
-		"COLOR_SAMPLES_NV" _ 0x20B9
+		"COVERAGE_SAMPLES_NV"..0x2042,
+		"COLOR_SAMPLES_NV"..0x20B9
 	)
 }

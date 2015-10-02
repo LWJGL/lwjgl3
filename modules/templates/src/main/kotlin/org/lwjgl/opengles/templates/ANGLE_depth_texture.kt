@@ -24,19 +24,19 @@ val ANGLE_depth_texture = "ANGLEDepthTexture".nativeClassGLES("ANGLE_depth_textu
 	IntConstant(
 		"Accepted by the {@code format} parameter of TexImage2D and TexSubImage2D and {@code internalformat} parameter of TexImage2D.",
 
-		"DEPTH_STENCIL_OES" _ 0x84F9
+		"DEPTH_STENCIL_OES"..0x84F9
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of TexImage2D, TexSubImage2D.",
 
-		"UNSIGNED_INT_24_8_OES" _ 0x84FA
+		"UNSIGNED_INT_24_8_OES"..0x84FA
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexStorage2DEXT.",
 
-		"DEPTH_COMPONENT32_OES" _ 0x81A7,
-		"DEPTH24_STENCIL8_OES" _ 0x88F0
+		"DEPTH_COMPONENT32_OES"..0x81A7,
+		"DEPTH24_STENCIL8_OES"..0x88F0
 	)
 }

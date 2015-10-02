@@ -33,50 +33,50 @@ val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shad
 	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned by the {@code params} parameter of GetShaderiv.",
 
-		"GEOMETRY_SHADER_EXT" _ 0x8DD9
+		"GEOMETRY_SHADER_EXT"..0x8DD9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteriEXT and GetProgramiv.",
 
-		"GEOMETRY_VERTICES_OUT_EXT" _ 0x8DDA,
-		"GEOMETRY_INPUT_TYPE_EXT" _ 0x8DDB,
-		"GEOMETRY_OUTPUT_TYPE_EXT" _ 0x8DDC
+		"GEOMETRY_VERTICES_OUT_EXT"..0x8DDA,
+		"GEOMETRY_INPUT_TYPE_EXT"..0x8DDB,
+		"GEOMETRY_OUTPUT_TYPE_EXT"..0x8DDC
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT" _ 0x8C29,
-		"MAX_GEOMETRY_VARYING_COMPONENTS_EXT" _ 0x8DDD,
-		"MAX_VERTEX_VARYING_COMPONENTS_EXT" _ 0x8DDE,
-		"MAX_VARYING_COMPONENTS_EXT" _ 0x8B4B,
-		"MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT" _ 0x8DDF,
-		"MAX_GEOMETRY_OUTPUT_VERTICES_EXT" _ 0x8DE0,
-		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT" _ 0x8DE1
+		"MAX_GEOMETRY_TEXTURE_IMAGE_UNITS_EXT"..0x8C29,
+		"MAX_GEOMETRY_VARYING_COMPONENTS_EXT"..0x8DDD,
+		"MAX_VERTEX_VARYING_COMPONENTS_EXT"..0x8DDE,
+		"MAX_VARYING_COMPONENTS_EXT"..0x8B4B,
+		"MAX_GEOMETRY_UNIFORM_COMPONENTS_EXT"..0x8DDF,
+		"MAX_GEOMETRY_OUTPUT_VERTICES_EXT"..0x8DE0,
+		"MAX_GEOMETRY_TOTAL_OUTPUT_COMPONENTS_EXT"..0x8DE1
 	)
 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of Begin, DrawArrays, MultiDrawArrays, DrawElements, MultiDrawElements, and DrawRangeElements.",
 
-		"LINES_ADJACENCY_EXT" _ 0xA,
-		"LINE_STRIP_ADJACENCY_EXT" _ 0xB,
-		"TRIANGLES_ADJACENCY_EXT" _ 0xC,
-		"TRIANGLE_STRIP_ADJACENCY_EXT" _ 0xD
+		"LINES_ADJACENCY_EXT"..0xA,
+		"LINE_STRIP_ADJACENCY_EXT"..0xB,
+		"TRIANGLES_ADJACENCY_EXT"..0xC,
+		"TRIANGLE_STRIP_ADJACENCY_EXT"..0xD
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatusEXT.",
 
-		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT" _ 0x8DA8,
-		"FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT" _ 0x8DA9
+		"FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS_EXT"..0x8DA8,
+		"FRAMEBUFFER_INCOMPLETE_LAYER_COUNT_EXT"..0x8DA9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachment- ParameterivEXT.",
 
-		"FRAMEBUFFER_ATTACHMENT_LAYERED_EXT" _ 0x8DA7,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT" _ 0x8CD4
+		"FRAMEBUFFER_ATTACHMENT_LAYERED_EXT"..0x8DA7,
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LAYER_EXT"..0x8CD4
 	)
 
 	IntConstant(
@@ -85,7 +85,7 @@ val EXT_geometry_shader4 = "EXTGeometryShader4".nativeClassGL("EXT_geometry_shad
 		GetBooleanv.
 		""",
 
-		"PROGRAM_POINT_SIZE_EXT" _ 0x8642
+		"PROGRAM_POINT_SIZE_EXT"..0x8642
 	)
 
 	void(

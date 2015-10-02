@@ -34,10 +34,10 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
 		IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"SAMPLE_LOCATION_SUBPIXEL_BITS_ARB" _ 0x933D,
-		"SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB" _ 0x933E,
-		"SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB" _ 0x933F,
-		"PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB" _ 0x9340
+		"SAMPLE_LOCATION_SUBPIXEL_BITS_ARB"..0x933D,
+		"SAMPLE_LOCATION_PIXEL_GRID_WIDTH_ARB"..0x933E,
+		"SAMPLE_LOCATION_PIXEL_GRID_HEIGHT_ARB"..0x933F,
+		"PROGRAMMABLE_SAMPLE_LOCATION_TABLE_SIZE_ARB"..0x9340
 	)
 
 	IntConstant(
@@ -46,8 +46,8 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
 		the {@code pname} parameter of FramebufferParameteri, GetFramebufferParameteriv.
 		""",
 
-		"FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB" _ 0x9342,
-		"FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB" _ 0x9343
+		"FRAMEBUFFER_PROGRAMMABLE_SAMPLE_LOCATIONS_ARB"..0x9342,
+		"FRAMEBUFFER_SAMPLE_LOCATION_PIXEL_GRID_ARB"..0x9343
 	)
 
 	void(
@@ -63,8 +63,8 @@ val ARB_sample_locations = "ARBSampleLocations".nativeClassGL("ARB_sample_locati
 
 		GLenum.IN("target", "the framebuffer target", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
 		GLuint.IN("start", "the first sample location to update"),
-		AutoSize("v") shr 1 _ GLsizei.IN("count", "the number of sample locations to update"),
-		const _ GLfloat_p.IN("v", "a pair of values for each sample location to update")
+		AutoSize("v") shr 1..GLsizei.IN("count", "the number of sample locations to update"),
+		const..GLfloat_p.IN("v", "a pair of values for each sample location to update")
 	)
 
 	void(

@@ -24,15 +24,15 @@ val EXT_blend_minmax = "EXTBlendMinmax".nativeClassGL("EXT_blend_minmax", postfi
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquationEXT.",
 
-		"FUNC_ADD_EXT" _ 0x8006,
-		"MIN_EXT" _ 0x8007,
-		"MAX_EXT" _ 0x8008
+		"FUNC_ADD_EXT"..0x8006,
+		"MIN_EXT"..0x8007,
+		"MAX_EXT"..0x8008
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"BLEND_EQUATION_EXT" _ 0x8009
+		"BLEND_EQUATION_EXT"..0x8009
 	)
 
 	void(

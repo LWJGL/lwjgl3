@@ -14,7 +14,7 @@ val khr_fp16 = "KHRFP16".nativeClassCL("khr_fp16", KHR) {
 	IntConstant(
 		"cl_device_info",
 
-		"DEVICE_HALF_FP_CONFIG" _ 0x1033
+		"DEVICE_HALF_FP_CONFIG"..0x1033
 	)
 
 }

@@ -21,37 +21,37 @@ val ARB_ES2_compatibility = "ARBES2Compatibility".nativeClassGL("ARB_ES2_compati
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"SHADER_COMPILER" _ 0x8DFA,
-		"SHADER_BINARY_FORMATS" _ 0x8DF8,
-		"NUM_SHADER_BINARY_FORMATS" _ 0x8DF9,
-		"MAX_VERTEX_UNIFORM_VECTORS" _ 0x8DFB,
-		"MAX_VARYING_VECTORS" _ 0x8DFC,
-		"MAX_FRAGMENT_UNIFORM_VECTORS" _ 0x8DFD,
-		"IMPLEMENTATION_COLOR_READ_TYPE" _ 0x8B9A,
-		"IMPLEMENTATION_COLOR_READ_FORMAT" _ 0x8B9B
+		"SHADER_COMPILER"..0x8DFA,
+		"SHADER_BINARY_FORMATS"..0x8DF8,
+		"NUM_SHADER_BINARY_FORMATS"..0x8DF9,
+		"MAX_VERTEX_UNIFORM_VECTORS"..0x8DFB,
+		"MAX_VARYING_VECTORS"..0x8DFC,
+		"MAX_FRAGMENT_UNIFORM_VECTORS"..0x8DFD,
+		"IMPLEMENTATION_COLOR_READ_TYPE"..0x8B9A,
+		"IMPLEMENTATION_COLOR_READ_FORMAT"..0x8B9B
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of VertexAttribPointer.",
 
-		"FIXED" _ 0x140C
+		"FIXED"..0x140C
 	)
 
 	IntConstant(
 		"Accepted by the {@code precisiontype} parameter of GetShaderPrecisionFormat.",
 
-		"LOW_FLOAT" _ 0x8DF0,
-		"MEDIUM_FLOAT" _ 0x8DF1,
-		"HIGH_FLOAT" _ 0x8DF2,
-		"LOW_INT" _ 0x8DF3,
-		"MEDIUM_INT" _ 0x8DF4,
-		"HIGH_INT" _ 0x8DF5
+		"LOW_FLOAT"..0x8DF0,
+		"MEDIUM_FLOAT"..0x8DF1,
+		"HIGH_FLOAT"..0x8DF2,
+		"LOW_INT"..0x8DF3,
+		"MEDIUM_INT"..0x8DF4,
+		"HIGH_INT"..0x8DF5
 	)
 
 	IntConstant(
 		"Accepted by the {@code format} parameter of most commands taking sized internal formats.",
 
-		"RGB565" _ 0x8D62
+		"RGB565"..0x8D62
 	)
 
 	GL41 reuse "ReleaseShaderCompiler"

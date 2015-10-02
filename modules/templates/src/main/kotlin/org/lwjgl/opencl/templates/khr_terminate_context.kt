@@ -30,13 +30,13 @@ val khr_terminate_context = "KHRTerminateContext".nativeClassCL("khr_terminate_c
 		indicates that context termination is supported.
 		""",
 
-		"DEVICE_TERMINATE_CAPABILITY_KHR" _ 0x200F
+		"DEVICE_TERMINATE_CAPABILITY_KHR"..0x200F
 	)
 
 	IntConstant(
 		"Specifies whether the context can be terminated. The default value is $FALSE.",
 
-		"CONTEXT_TERMINATE_KHR" _ 0x2010
+		"CONTEXT_TERMINATE_KHR"..0x2010
 	)
 
 	// TODO: Find CL_TERMINATED_KHR & CL_CONTEXT_TERMINATED_KHR values.

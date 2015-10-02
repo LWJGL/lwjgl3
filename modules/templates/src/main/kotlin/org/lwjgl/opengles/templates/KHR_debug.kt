@@ -78,33 +78,33 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
 
-		"DEBUG_OUTPUT_KHR" _ 0x92E0,
-		"DEBUG_OUTPUT_SYNCHRONOUS_KHR" _ 0x8242
+		"DEBUG_OUTPUT_KHR"..0x92E0,
+		"DEBUG_OUTPUT_SYNCHRONOUS_KHR"..0x8242
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
-		"CONTEXT_FLAG_DEBUG_BIT_KHR" _ 0x00000002
+		"CONTEXT_FLAG_DEBUG_BIT_KHR"..0x00000002
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv,  GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH_KHR" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES_KHR" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES_KHR" _ 0x9145,
-		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR" _ 0x8243,
-		"MAX_DEBUG_GROUP_STACK_DEPTH_KHR" _ 0x826C,
-		"DEBUG_GROUP_STACK_DEPTH_KHR" _ 0x826D,
-		"MAX_LABEL_LENGTH_KHR" _ 0x82E8
+		"MAX_DEBUG_MESSAGE_LENGTH_KHR"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES_KHR"..0x9144,
+		"DEBUG_LOGGED_MESSAGES_KHR"..0x9145,
+		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_KHR"..0x8243,
+		"MAX_DEBUG_GROUP_STACK_DEPTH_KHR"..0x826C,
+		"DEBUG_GROUP_STACK_DEPTH_KHR"..0x826D,
+		"MAX_LABEL_LENGTH_KHR"..0x82E8
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
-		"DEBUG_CALLBACK_FUNCTION_KHR" _ 0x8244,
-		"DEBUG_CALLBACK_USER_PARAM_KHR" _ 0x8245
+		"DEBUG_CALLBACK_FUNCTION_KHR"..0x8244,
+		"DEBUG_CALLBACK_USER_PARAM_KHR"..0x8245
 	)
 
 	val DebugSources = IntConstant(
@@ -113,12 +113,12 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SOURCE_API_KHR" _ 0x8246,
-		"DEBUG_SOURCE_WINDOW_SYSTEM_KHR" _ 0x8247,
-		"DEBUG_SOURCE_SHADER_COMPILER_KHR" _ 0x8248,
-		"DEBUG_SOURCE_THIRD_PARTY_KHR" _ 0x8249,
-		"DEBUG_SOURCE_APPLICATION_KHR" _ 0x824A,
-		"DEBUG_SOURCE_OTHER_KHR" _ 0x824B
+		"DEBUG_SOURCE_API_KHR"..0x8246,
+		"DEBUG_SOURCE_WINDOW_SYSTEM_KHR"..0x8247,
+		"DEBUG_SOURCE_SHADER_COMPILER_KHR"..0x8248,
+		"DEBUG_SOURCE_THIRD_PARTY_KHR"..0x8249,
+		"DEBUG_SOURCE_APPLICATION_KHR"..0x824A,
+		"DEBUG_SOURCE_OTHER_KHR"..0x824B
 	).javaDocLinks
 
 	val DebugTypes = IntConstant(
@@ -127,13 +127,13 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_ERROR_KHR" _ 0x824C,
-		"DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR" _ 0x824D,
-		"DEBUG_TYPE_UNDEFINED_BEHAVIOR_KHR" _ 0x824E,
-		"DEBUG_TYPE_PORTABILITY_KHR" _ 0x824F,
-		"DEBUG_TYPE_PERFORMANCE_KHR" _ 0x8250,
-		"DEBUG_TYPE_OTHER_KHR" _ 0x8251,
-		"DEBUG_TYPE_MARKER_KHR" _ 0x8268
+		"DEBUG_TYPE_ERROR_KHR"..0x824C,
+		"DEBUG_TYPE_DEPRECATED_BEHAVIOR_KHR"..0x824D,
+		"DEBUG_TYPE_UNDEFINED_BEHAVIOR_KHR"..0x824E,
+		"DEBUG_TYPE_PORTABILITY_KHR"..0x824F,
+		"DEBUG_TYPE_PERFORMANCE_KHR"..0x8250,
+		"DEBUG_TYPE_OTHER_KHR"..0x8251,
+		"DEBUG_TYPE_MARKER_KHR"..0x8268
 	).javaDocLinks
 
 	IntConstant(
@@ -141,8 +141,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_PUSH_GROUP_KHR" _ 0x8269,
-		"DEBUG_TYPE_POP_GROUP_KHR" _ 0x826A
+		"DEBUG_TYPE_PUSH_GROUP_KHR"..0x8269,
+		"DEBUG_TYPE_POP_GROUP_KHR"..0x826A
 	)
 
 	val DebugSeverities = IntConstant(
@@ -151,28 +151,28 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		{@code severities} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SEVERITY_HIGH_KHR" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM_KHR" _ 0x9147,
-		"DEBUG_SEVERITY_LOW_KHR" _ 0x9148,
-		"DEBUG_SEVERITY_NOTIFICATION_KHR" _ 0x826B
+		"DEBUG_SEVERITY_HIGH_KHR"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM_KHR"..0x9147,
+		"DEBUG_SEVERITY_LOW_KHR"..0x9148,
+		"DEBUG_SEVERITY_NOTIFICATION_KHR"..0x826B
 	).javaDocLinks
 
 	IntConstant(
 		"Returned by GetError.",
 
-		"STACK_UNDERFLOW_KHR" _ 0x0504,
-		"STACK_OVERFLOW_KHR" _ 0x0503
+		"STACK_UNDERFLOW_KHR"..0x0504,
+		"STACK_OVERFLOW_KHR"..0x0503
 	)
 
 	val DebugIdentifiers = IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
-		"BUFFER_KHR" _ 0x82E0,
-		"SHADER_KHR" _ 0x82E1,
-		"PROGRAM_KHR" _ 0x82E2,
-		"QUERY_KHR" _ 0x82E3,
-		"PROGRAM_PIPELINE_KHR" _ 0x82E4,
-		"SAMPLER_KHR" _ 0x82E6
+		"BUFFER_KHR"..0x82E0,
+		"SHADER_KHR"..0x82E1,
+		"PROGRAM_KHR"..0x82E2,
+		"QUERY_KHR"..0x82E3,
+		"PROGRAM_PIPELINE_KHR"..0x82E4,
+		"SAMPLER_KHR"..0x82E6
 	).javaDocLinks
 
 	void(
@@ -212,8 +212,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
+		SingleValue("id")..nullable..const..GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
@@ -236,8 +236,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		GLenum.IN("type", "the type of the debug message insert", DebugTypes),
 		GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
 		GLenum.IN("severity", "the severity of the debug messages to insert"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
+		AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+		const..GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
 	void(
@@ -271,8 +271,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		If the #DEBUG_OUTPUT_KHR state is disabled then the GL will not call the callback function.
 		""",
 
-		nullable _ GLDEBUGPROCKHR.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable _ const _ voidptr.IN(
+		nullable..GLDEBUGPROCKHR.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable..const..voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -306,13 +306,13 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-		Check("count") _ nullable _ GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+		AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+		Check("count")..nullable..GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
+		Check("count")..nullable..GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
+		Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
+		nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
 	void(
@@ -320,7 +320,7 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ void_pp.OUT("params", "")
+		returnValue..Check(1)..void_pp.OUT("params", "")
 	)
 
 	void(
@@ -341,8 +341,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 
 		GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION_KHR #DEBUG_SOURCE_THIRD_PARTY_KHR"),
 		GLuint.IN("id", "the identifier of the message"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
+		AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
+		const..GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
 	void(
@@ -369,8 +369,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -383,9 +383,9 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 			DebugIdentifiers + " GLES20#TEXTURE GLES20#RENDERBUFFER GLES20#FRAMEBUFFER GLES30#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
+		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	void(
@@ -393,8 +393,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		"Labels a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "a pointer identifying a sync object"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -402,8 +402,8 @@ val KHR_debug = "KHRDebug".nativeClassGLES("KHR_debug", postfix = KHR) {
 		"Retrieves the label of a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
+		Return("length", "GLES20.glGetInteger(GL_MAX_LABEL_LENGTH_KHR)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 }

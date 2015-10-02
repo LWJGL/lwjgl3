@@ -22,7 +22,7 @@ val EXT_blend_subtract = "EXTBlendSubtract".nativeClassGL("EXT_blend_subtract", 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquationEXT.",
 
-		"FUNC_SUBTRACT_EXT" _ 0x800A,
-		"FUNC_REVERSE_SUBTRACT_EXT" _ 0x800B
+		"FUNC_SUBTRACT_EXT"..0x800A,
+		"FUNC_REVERSE_SUBTRACT_EXT"..0x800B
 	)
 }

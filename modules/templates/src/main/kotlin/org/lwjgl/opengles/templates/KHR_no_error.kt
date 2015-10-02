@@ -23,6 +23,6 @@ val KHR_no_error = "KHRNoError".nativeClassGLES("KHR_no_error", postfix = KHR) {
 	IntConstant(
 		"",
 
-		"CONTEXT_FLAG_NO_ERROR_BIT_KHR" _ 0x00000008
+		"CONTEXT_FLAG_NO_ERROR_BIT_KHR"..0x00000008
 	)
 }

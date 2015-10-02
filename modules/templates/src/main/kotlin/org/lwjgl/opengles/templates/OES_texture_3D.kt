@@ -26,20 +26,20 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		CompressedTexSubImage3DOES, GetTexParameteriv, and GetTexParameterfv.
 		""",
 
-		"TEXTURE_3D_OES" _ 0x806F
+		"TEXTURE_3D_OES"..0x806F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
-		"TEXTURE_WRAP_R_OES" _ 0x8072
+		"TEXTURE_WRAP_R_OES"..0x8072
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_3D_TEXTURE_SIZE_OES" _ 0x8073,
-		"TEXTURE_BINDING_3D_OES" _ 0x806A
+		"MAX_3D_TEXTURE_SIZE_OES"..0x8073,
+		"TEXTURE_BINDING_3D_OES"..0x806A
 	)
 
 	// TODO:
@@ -56,9 +56,9 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLint.IN("border", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER _ MultiType(
+		PIXEL_UNPACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ nullable _ const _ void_p.IN("pixels", "")
+		)..nullable..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -75,9 +75,9 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
 		GLenum.IN("type", ""),
-		PIXEL_UNPACK_BUFFER _ MultiType(
+		PIXEL_UNPACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ const _ void_p.IN("pixels", "")
+		)..const..void_p.IN("pixels", "")
 	)
 
 	void(
@@ -106,8 +106,8 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLsizei.IN("height", ""),
 		GLsizei.IN("depth", ""),
 		GLint.IN("border", ""),
-		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		PIXEL_UNPACK_BUFFER _ nullable _ const _ void_p.IN("data", "")
+		AutoSize("data")..GLsizei.IN("imageSize", ""),
+		PIXEL_UNPACK_BUFFER..nullable..const..void_p.IN("data", "")
 	)
 
 	void(
@@ -123,8 +123,8 @@ val OES_texture_3D = "OESTexture3D".nativeClassGLES("OES_texture_3D", postfix = 
 		GLsizei.IN("height", ""),
 		GLsizei.IN("depth", ""),
 		GLenum.IN("format", ""),
-		AutoSize("data") _ GLsizei.IN("imageSize", ""),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "")
+		AutoSize("data")..GLsizei.IN("imageSize", ""),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "")
 	)
 
 	void(

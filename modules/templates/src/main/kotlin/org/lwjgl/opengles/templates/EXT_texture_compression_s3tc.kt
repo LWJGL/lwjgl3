@@ -26,9 +26,9 @@ val EXT_texture_compression_s3tc = "EXTTextureCompressionS3TC".nativeClassGLES("
 		parameter of TexImage3D, CompressedTexImage3D, TexStorage2D, TexStorage3D and the {@code format} parameter of CompressedTexSubImage3D.
 		""",
 
-		"COMPRESSED_RGB_S3TC_DXT1_EXT" _ 0x83F0,
-		"COMPRESSED_RGBA_S3TC_DXT1_EXT" _ 0x83F1,
-		"COMPRESSED_RGBA_S3TC_DXT3_EXT" _ 0x83F2,
-		"COMPRESSED_RGBA_S3TC_DXT5_EXT" _ 0x83F3
+		"COMPRESSED_RGB_S3TC_DXT1_EXT"..0x83F0,
+		"COMPRESSED_RGBA_S3TC_DXT1_EXT"..0x83F1,
+		"COMPRESSED_RGBA_S3TC_DXT3_EXT"..0x83F2,
+		"COMPRESSED_RGBA_S3TC_DXT5_EXT"..0x83F3
 	)
 }

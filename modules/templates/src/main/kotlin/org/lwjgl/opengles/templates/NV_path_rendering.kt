@@ -85,88 +85,88 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 	ByteConstant(
 		"Accepted in elements of the {@code commands} array parameter of PathCommandsNV and PathSubCommandsNV.",
 
-		"CLOSE_PATH_NV" _ (0x00).b,
-		"MOVE_TO_NV" _ (0x02).b,
-		"RELATIVE_MOVE_TO_NV" _ (0x03).b,
-		"LINE_TO_NV" _ (0x04).b,
-		"RELATIVE_LINE_TO_NV" _ (0x05).b,
-		"HORIZONTAL_LINE_TO_NV" _ (0x06).b,
-		"RELATIVE_HORIZONTAL_LINE_TO_NV" _ (0x07).b,
-		"VERTICAL_LINE_TO_NV" _ (0x08).b,
-		"RELATIVE_VERTICAL_LINE_TO_NV" _ (0x09).b,
-		"QUADRATIC_CURVE_TO_NV" _ (0x0A).b,
-		"RELATIVE_QUADRATIC_CURVE_TO_NV" _ (0x0B).b,
-		"CUBIC_CURVE_TO_NV" _ (0x0C).b,
-		"RELATIVE_CUBIC_CURVE_TO_NV" _ (0x0D).b,
-		"SMOOTH_QUADRATIC_CURVE_TO_NV" _ (0x0E).b,
-		"RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV" _ (0x0F).b,
-		"SMOOTH_CUBIC_CURVE_TO_NV" _ (0x10).b,
-		"RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV" _ (0x11).b,
-		"SMALL_CCW_ARC_TO_NV" _ (0x12).b,
-		"RELATIVE_SMALL_CCW_ARC_TO_NV" _ (0x13).b,
-		"SMALL_CW_ARC_TO_NV" _ (0x14).b,
-		"RELATIVE_SMALL_CW_ARC_TO_NV" _ (0x15).b,
-		"LARGE_CCW_ARC_TO_NV" _ (0x16).b,
-		"RELATIVE_LARGE_CCW_ARC_TO_NV" _ (0x17).b,
-		"LARGE_CW_ARC_TO_NV" _ (0x18).b,
-		"RELATIVE_LARGE_CW_ARC_TO_NV" _ (0x19).b,
-		"CONIC_CURVE_TO_NV" _ (0x1A).b,
-		"RELATIVE_CONIC_CURVE_TO_NV" _ (0x1B).b,
-		"ROUNDED_RECT_NV" _ (0xE8).b,
-		"RELATIVE_ROUNDED_RECT_NV" _ (0xE9).b,
-		"ROUNDED_RECT2_NV" _ (0xEA).b,
-		"RELATIVE_ROUNDED_RECT2_NV" _ (0xEB).b,
-		"ROUNDED_RECT4_NV" _ (0xEC).b,
-		"RELATIVE_ROUNDED_RECT4_NV" _ (0xED).b,
-		"ROUNDED_RECT8_NV" _ (0xEE).b,
-		"RELATIVE_ROUNDED_RECT8_NV" _ (0xEF).b,
-		"RESTART_PATH_NV" _ (0xF0).b,
-		"DUP_FIRST_CUBIC_CURVE_TO_NV" _ (0xF2).b,
-		"DUP_LAST_CUBIC_CURVE_TO_NV" _ (0xF4).b,
-		"RECT_NV" _ (0xF6).b,
-		"RELATIVE_RECT_NV" _ (0xF7).b,
-		"CIRCULAR_CCW_ARC_TO_NV" _ (0xF8).b,
-		"CIRCULAR_CW_ARC_TO_NV" _ (0xFA).b,
-		"CIRCULAR_TANGENT_ARC_TO_NV" _ (0xFC).b,
-		"ARC_TO_NV" _ (0xFE).b,
-		"RELATIVE_ARC_TO_NV" _ (0xFF).b
+		"CLOSE_PATH_NV"..(0x00).b,
+		"MOVE_TO_NV"..(0x02).b,
+		"RELATIVE_MOVE_TO_NV"..(0x03).b,
+		"LINE_TO_NV"..(0x04).b,
+		"RELATIVE_LINE_TO_NV"..(0x05).b,
+		"HORIZONTAL_LINE_TO_NV"..(0x06).b,
+		"RELATIVE_HORIZONTAL_LINE_TO_NV"..(0x07).b,
+		"VERTICAL_LINE_TO_NV"..(0x08).b,
+		"RELATIVE_VERTICAL_LINE_TO_NV"..(0x09).b,
+		"QUADRATIC_CURVE_TO_NV"..(0x0A).b,
+		"RELATIVE_QUADRATIC_CURVE_TO_NV"..(0x0B).b,
+		"CUBIC_CURVE_TO_NV"..(0x0C).b,
+		"RELATIVE_CUBIC_CURVE_TO_NV"..(0x0D).b,
+		"SMOOTH_QUADRATIC_CURVE_TO_NV"..(0x0E).b,
+		"RELATIVE_SMOOTH_QUADRATIC_CURVE_TO_NV"..(0x0F).b,
+		"SMOOTH_CUBIC_CURVE_TO_NV"..(0x10).b,
+		"RELATIVE_SMOOTH_CUBIC_CURVE_TO_NV"..(0x11).b,
+		"SMALL_CCW_ARC_TO_NV"..(0x12).b,
+		"RELATIVE_SMALL_CCW_ARC_TO_NV"..(0x13).b,
+		"SMALL_CW_ARC_TO_NV"..(0x14).b,
+		"RELATIVE_SMALL_CW_ARC_TO_NV"..(0x15).b,
+		"LARGE_CCW_ARC_TO_NV"..(0x16).b,
+		"RELATIVE_LARGE_CCW_ARC_TO_NV"..(0x17).b,
+		"LARGE_CW_ARC_TO_NV"..(0x18).b,
+		"RELATIVE_LARGE_CW_ARC_TO_NV"..(0x19).b,
+		"CONIC_CURVE_TO_NV"..(0x1A).b,
+		"RELATIVE_CONIC_CURVE_TO_NV"..(0x1B).b,
+		"ROUNDED_RECT_NV"..(0xE8).b,
+		"RELATIVE_ROUNDED_RECT_NV"..(0xE9).b,
+		"ROUNDED_RECT2_NV"..(0xEA).b,
+		"RELATIVE_ROUNDED_RECT2_NV"..(0xEB).b,
+		"ROUNDED_RECT4_NV"..(0xEC).b,
+		"RELATIVE_ROUNDED_RECT4_NV"..(0xED).b,
+		"ROUNDED_RECT8_NV"..(0xEE).b,
+		"RELATIVE_ROUNDED_RECT8_NV"..(0xEF).b,
+		"RESTART_PATH_NV"..(0xF0).b,
+		"DUP_FIRST_CUBIC_CURVE_TO_NV"..(0xF2).b,
+		"DUP_LAST_CUBIC_CURVE_TO_NV"..(0xF4).b,
+		"RECT_NV"..(0xF6).b,
+		"RELATIVE_RECT_NV"..(0xF7).b,
+		"CIRCULAR_CCW_ARC_TO_NV"..(0xF8).b,
+		"CIRCULAR_CW_ARC_TO_NV"..(0xFA).b,
+		"CIRCULAR_TANGENT_ARC_TO_NV"..(0xFC).b,
+		"ARC_TO_NV"..(0xFE).b,
+		"RELATIVE_ARC_TO_NV"..(0xFF).b
 	)
 
 	IntConstant(
 		"Accepted by the {@code format} parameter of PathStringNV.",
 
-		"PATH_FORMAT_SVG_NV" _ 0x9070,
-		"PATH_FORMAT_PS_NV" _ 0x9071
+		"PATH_FORMAT_SVG_NV"..0x9070,
+		"PATH_FORMAT_PS_NV"..0x9071
 	)
 
 	IntConstant(
 		"Accepted by the {@code fontTarget} parameter of PathGlyphsNV, PathGlyphRangeNV, and PathGlyphIndexRangeNV.",
 
-		"STANDARD_FONT_NAME_NV" _ 0x9072,
-		"SYSTEM_FONT_NAME_NV" _ 0x9073,
-		"FILE_NAME_NV" _ 0x9074
+		"STANDARD_FONT_NAME_NV"..0x9072,
+		"SYSTEM_FONT_NAME_NV"..0x9073,
+		"FILE_NAME_NV"..0x9074
 	)
 
 	IntConstant(
 		"Accepted by the {@code fontTarget} parameter of PathMemoryGlyphIndexArrayNV.",
 
-		"STANDARD_FONT_FORMAT_NV" _ 0x936C
+		"STANDARD_FONT_FORMAT_NV"..0x936C
 	)
 
 	IntConstant(
 		"Accepted by the {@code handleMissingGlyph} parameter of PathGlyphsNV and PathGlyphRangeNV.",
 
-		"SKIP_MISSING_GLYPH_NV" _ 0x90A9,
-		"USE_MISSING_GLYPH_NV" _ 0x90AA
+		"SKIP_MISSING_GLYPH_NV"..0x90A9,
+		"USE_MISSING_GLYPH_NV"..0x90AA
 	)
 
 	IntConstant(
 		"Returned by PathGlyphIndexRangeNV.",
 
-		"FONT_GLYPHS_AVAILABLE_NV" _ 0x9368,
-		"FONT_TARGET_UNAVAILABLE_NV" _ 0x9369,
-		"FONT_UNAVAILABLE_NV" _ 0x936A,
-		"FONT_UNINTELLIGIBLE_NV" _ 0x936B
+		"FONT_GLYPHS_AVAILABLE_NV"..0x9368,
+		"FONT_TARGET_UNAVAILABLE_NV"..0x9369,
+		"FONT_UNAVAILABLE_NV"..0x936A,
+		"FONT_UNINTELLIGIBLE_NV"..0x936B
 	)
 
 	val PathParameters = IntConstant(
@@ -175,49 +175,49 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GetPathParameterivNV.
 		""",
 
-		"PATH_STROKE_WIDTH_NV" _ 0x9075,
-		"PATH_INITIAL_END_CAP_NV" _ 0x9077,
-		"PATH_TERMINAL_END_CAP_NV" _ 0x9078,
-		"PATH_JOIN_STYLE_NV" _ 0x9079,
-		"PATH_MITER_LIMIT_NV" _ 0x907A,
-		"PATH_INITIAL_DASH_CAP_NV" _ 0x907C,
-		"PATH_TERMINAL_DASH_CAP_NV" _ 0x907D,
-		"PATH_DASH_OFFSET_NV" _ 0x907E,
-		"PATH_CLIENT_LENGTH_NV" _ 0x907F,
-		"PATH_DASH_OFFSET_RESET_NV" _ 0x90B4,
-		"PATH_FILL_MODE_NV" _ 0x9080,
-		"PATH_FILL_MASK_NV" _ 0x9081,
-		"PATH_FILL_COVER_MODE_NV" _ 0x9082,
-		"PATH_STROKE_COVER_MODE_NV" _ 0x9083,
-		"PATH_STROKE_MASK_NV" _ 0x9084,
-		"PATH_STROKE_BOUND_NV" _ 0x9086
+		"PATH_STROKE_WIDTH_NV"..0x9075,
+		"PATH_INITIAL_END_CAP_NV"..0x9077,
+		"PATH_TERMINAL_END_CAP_NV"..0x9078,
+		"PATH_JOIN_STYLE_NV"..0x9079,
+		"PATH_MITER_LIMIT_NV"..0x907A,
+		"PATH_INITIAL_DASH_CAP_NV"..0x907C,
+		"PATH_TERMINAL_DASH_CAP_NV"..0x907D,
+		"PATH_DASH_OFFSET_NV"..0x907E,
+		"PATH_CLIENT_LENGTH_NV"..0x907F,
+		"PATH_DASH_OFFSET_RESET_NV"..0x90B4,
+		"PATH_FILL_MODE_NV"..0x9080,
+		"PATH_FILL_MASK_NV"..0x9081,
+		"PATH_FILL_COVER_MODE_NV"..0x9082,
+		"PATH_STROKE_COVER_MODE_NV"..0x9083,
+		"PATH_STROKE_MASK_NV"..0x9084,
+		"PATH_STROKE_BOUND_NV"..0x9086
 	).javaDocLinks
 
 	val PathParametersf = IntConstant(
 		"Accepted by the {@code pname} parameter of PathParameterfNV and PathParameterfvNV.",
 
-		"PATH_END_CAPS_NV" _ 0x9076,
-		"PATH_DASH_CAPS_NV" _ 0x907B
+		"PATH_END_CAPS_NV"..0x9076,
+		"PATH_DASH_CAPS_NV"..0x907B
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted by the {@code fillMode} parameter of StencilFillPathNV and StencilFillPathInstancedNV.",
 
-		"COUNT_UP_NV" _ 0x9088,
-		"COUNT_DOWN_NV" _ 0x9089
+		"COUNT_UP_NV"..0x9088,
+		"COUNT_DOWN_NV"..0x9089
 	)
 
 	IntConstant(
 		"Accepted by the {@code genMode} parameter of PathColorGenNV, PathTexGenNV, ProgramPathFragmentInputGenNV.",
 
-		"PATH_OBJECT_BOUNDING_BOX_NV" _ 0x908A
+		"PATH_OBJECT_BOUNDING_BOX_NV"..0x908A
 	)
 
 	IntConstant(
 		"Accepted by the {@code coverMode} parameter of CoverFillPathNV and CoverFillPathInstancedNV.",
 
-		"CONVEX_HULL_NV" _ 0x908B,
-		"BOUNDING_BOX_NV" _ 0x908D
+		"CONVEX_HULL_NV"..0x908B,
+		"BOUNDING_BOX_NV"..0x908D
 	)
 
 	val TransformTypes = IntConstant(
@@ -226,14 +226,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		CoverStrokePathInstancedNV.
 		""",
 
-		"TRANSLATE_X_NV" _ 0x908E,
-		"TRANSLATE_Y_NV" _ 0x908F,
-		"TRANSLATE_2D_NV" _ 0x9090,
-		"TRANSLATE_3D_NV" _ 0x9091,
-		"AFFINE_2D_NV" _ 0x9092,
-		"AFFINE_3D_NV" _ 0x9094,
-		"TRANSPOSE_AFFINE_2D_NV" _ 0x9096,
-		"TRANSPOSE_AFFINE_3D_NV" _ 0x9098
+		"TRANSLATE_X_NV"..0x908E,
+		"TRANSLATE_Y_NV"..0x908F,
+		"TRANSLATE_2D_NV"..0x9090,
+		"TRANSLATE_3D_NV"..0x9091,
+		"AFFINE_2D_NV"..0x9092,
+		"AFFINE_3D_NV"..0x9094,
+		"TRANSPOSE_AFFINE_2D_NV"..0x9096,
+		"TRANSPOSE_AFFINE_3D_NV"..0x9098
 	).javaDocLinks
 
 	IntConstant(
@@ -242,25 +242,25 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		CoverStrokePathInstancedNV, GetPathMetricsNV, and GetPathSpacingNV.
 		""",
 
-		"UTF8_NV" _ 0x909A,
-		"UTF16_NV" _ 0x909B
+		"UTF8_NV"..0x909A,
+		"UTF16_NV"..0x909B
 	)
 
 	IntConstant(
 		"Accepted by the {@code coverMode} parameter of CoverFillPathInstancedNV.",
 
-		"BOUNDING_BOX_OF_BOUNDING_BOXES_NV" _ 0x909C
+		"BOUNDING_BOX_OF_BOUNDING_BOXES_NV"..0x909C
 	)
 
 	val GetPathParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetPathParameterfvNV and GetPathParameterivNV.",
 
-		"PATH_COMMAND_COUNT_NV" _ 0x909D,
-		"PATH_COORD_COUNT_NV" _ 0x909E,
-		"PATH_DASH_ARRAY_COUNT_NV" _ 0x909F,
-		"PATH_COMPUTED_LENGTH_NV" _ 0x90A0,
-		"PATH_FILL_BOUNDING_BOX_NV" _ 0x90A1,
-		"PATH_STROKE_BOUNDING_BOX_NV" _ 0x90A2
+		"PATH_COMMAND_COUNT_NV"..0x909D,
+		"PATH_COORD_COUNT_NV"..0x909E,
+		"PATH_DASH_ARRAY_COUNT_NV"..0x909F,
+		"PATH_COMPUTED_LENGTH_NV"..0x90A0,
+		"PATH_FILL_BOUNDING_BOX_NV"..0x90A1,
+		"PATH_STROKE_BOUNDING_BOX_NV"..0x90A2
 	).javaDocLinks
 
 	IntConstant(
@@ -269,9 +269,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PATH_END_CAPS_NV, PATH_INTIAL_END_CAP_NV, PATH_TERMINAL_END_CAP_NV, PATH_DASH_CAPS_NV, PATH_INITIAL_DASH_CAP_NV, and PATH_TERMINAL_DASH_CAP_NV.
 		""",
 
-		"SQUARE_NV" _ 0x90A3,
-		"ROUND_NV" _ 0x90A4,
-		"TRIANGULAR_NV" _ 0x90A5
+		"SQUARE_NV"..0x90A3,
+		"ROUND_NV"..0x90A4,
+		"TRIANGULAR_NV"..0x90A5
 	)
 
 	IntConstant(
@@ -280,9 +280,9 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PATH_JOIN_STYLE_NV.
 		""",
 
-		"BEVEL_NV" _ 0x90A6,
-		"MITER_REVERT_NV" _ 0x90A7,
-		"MITER_TRUNCATE_NV" _ 0x90A8
+		"BEVEL_NV"..0x90A6,
+		"MITER_REVERT_NV"..0x90A7,
+		"MITER_TRUNCATE_NV"..0x90A8
 	)
 
 	IntConstant(
@@ -291,63 +291,63 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PATH_DASH_OFFSET_RESET_NV.
 		""",
 
-		"MOVE_TO_RESETS_NV" _ 0x90B5,
-		"MOVE_TO_CONTINUES_NV" _ 0x90B6
+		"MOVE_TO_RESETS_NV"..0x90B5,
+		"MOVE_TO_CONTINUES_NV"..0x90B6
 	)
 
 	IntConstant(
 		"Accepted by the {@code fontStyle} parameter of PathGlyphsNV, PathGlyphRangeNV, and PathGlyphIndexRangeNV.",
 
-		"BOLD_BIT_NV" _ 0x01,
-		"ITALIC_BIT_NV" _ 0x02
+		"BOLD_BIT_NV"..0x01,
+		"ITALIC_BIT_NV"..0x02
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"PATH_ERROR_POSITION_NV" _ 0x90AB,
-		"PATH_STENCIL_FUNC_NV" _ 0x90B7,
-		"PATH_STENCIL_REF_NV" _ 0x90B8,
-		"PATH_STENCIL_VALUE_MASK_NV" _ 0x90B9,
-		"PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV" _ 0x90BD,
-		"PATH_STENCIL_DEPTH_OFFSET_UNITS_NV" _ 0x90BE,
-		"PATH_COVER_DEPTH_FUNC_NV" _ 0x90BF
+		"PATH_ERROR_POSITION_NV"..0x90AB,
+		"PATH_STENCIL_FUNC_NV"..0x90B7,
+		"PATH_STENCIL_REF_NV"..0x90B8,
+		"PATH_STENCIL_VALUE_MASK_NV"..0x90B9,
+		"PATH_STENCIL_DEPTH_OFFSET_FACTOR_NV"..0x90BD,
+		"PATH_STENCIL_DEPTH_OFFSET_UNITS_NV"..0x90BE,
+		"PATH_COVER_DEPTH_FUNC_NV"..0x90BF
 	)
 
 	val MetricQueryMask = IntConstant(
 		"Accepted as a bit within the {@code metricQueryMask} parameter of GetPathMetricRangeNV or GetPathMetricsNV.",
 
-		"GLYPH_WIDTH_BIT_NV" _ 0x01,
-		"GLYPH_HEIGHT_BIT_NV" _ 0x02,
-		"GLYPH_HORIZONTAL_BEARING_X_BIT_NV" _ 0x04,
-		"GLYPH_HORIZONTAL_BEARING_Y_BIT_NV" _ 0x08,
-		"GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV" _ 0x10,
-		"GLYPH_VERTICAL_BEARING_X_BIT_NV" _ 0x20,
-		"GLYPH_VERTICAL_BEARING_Y_BIT_NV" _ 0x40,
-		"GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV" _ 0x80,
-		"GLYPH_HAS_KERNING_BIT_NV" _ 0x100,
-		"FONT_X_MIN_BOUNDS_BIT_NV" _ 0x00010000,
-		"FONT_Y_MIN_BOUNDS_BIT_NV" _ 0x00020000,
-		"FONT_X_MAX_BOUNDS_BIT_NV" _ 0x00040000,
-		"FONT_Y_MAX_BOUNDS_BIT_NV" _ 0x00080000,
-		"FONT_UNITS_PER_EM_BIT_NV" _ 0x00100000,
-		"FONT_ASCENDER_BIT_NV" _ 0x00200000,
-		"FONT_DESCENDER_BIT_NV" _ 0x00400000,
-		"FONT_HEIGHT_BIT_NV" _ 0x00800000,
-		"FONT_MAX_ADVANCE_WIDTH_BIT_NV" _ 0x01000000,
-		"FONT_MAX_ADVANCE_HEIGHT_BIT_NV" _ 0x02000000,
-		"FONT_UNDERLINE_POSITION_BIT_NV" _ 0x04000000,
-		"FONT_UNDERLINE_THICKNESS_BIT_NV" _ 0x08000000,
-		"FONT_HAS_KERNING_BIT_NV" _ 0x10000000,
-		"FONT_NUM_GLYPH_INDICES_BIT_NV" _ 0x20000000
+		"GLYPH_WIDTH_BIT_NV"..0x01,
+		"GLYPH_HEIGHT_BIT_NV"..0x02,
+		"GLYPH_HORIZONTAL_BEARING_X_BIT_NV"..0x04,
+		"GLYPH_HORIZONTAL_BEARING_Y_BIT_NV"..0x08,
+		"GLYPH_HORIZONTAL_BEARING_ADVANCE_BIT_NV"..0x10,
+		"GLYPH_VERTICAL_BEARING_X_BIT_NV"..0x20,
+		"GLYPH_VERTICAL_BEARING_Y_BIT_NV"..0x40,
+		"GLYPH_VERTICAL_BEARING_ADVANCE_BIT_NV"..0x80,
+		"GLYPH_HAS_KERNING_BIT_NV"..0x100,
+		"FONT_X_MIN_BOUNDS_BIT_NV"..0x00010000,
+		"FONT_Y_MIN_BOUNDS_BIT_NV"..0x00020000,
+		"FONT_X_MAX_BOUNDS_BIT_NV"..0x00040000,
+		"FONT_Y_MAX_BOUNDS_BIT_NV"..0x00080000,
+		"FONT_UNITS_PER_EM_BIT_NV"..0x00100000,
+		"FONT_ASCENDER_BIT_NV"..0x00200000,
+		"FONT_DESCENDER_BIT_NV"..0x00400000,
+		"FONT_HEIGHT_BIT_NV"..0x00800000,
+		"FONT_MAX_ADVANCE_WIDTH_BIT_NV"..0x01000000,
+		"FONT_MAX_ADVANCE_HEIGHT_BIT_NV"..0x02000000,
+		"FONT_UNDERLINE_POSITION_BIT_NV"..0x04000000,
+		"FONT_UNDERLINE_THICKNESS_BIT_NV"..0x08000000,
+		"FONT_HAS_KERNING_BIT_NV"..0x10000000,
+		"FONT_NUM_GLYPH_INDICES_BIT_NV"..0x20000000
 	).javaDocLinks
 
 	val PathListModes = IntConstant(
 		"Accepted by the {@code pathListMode} parameter of GetPathSpacingNV.",
 
-		"ACCUM_ADJACENT_PAIRS_NV" _ 0x90AD,
-		"ADJACENT_PAIRS_NV" _ 0x90AE,
-		"FIRST_TO_REST_NV" _ 0x90AF
+		"ACCUM_ADJACENT_PAIRS_NV"..0x90AD,
+		"ADJACENT_PAIRS_NV"..0x90AE,
+		"FIRST_TO_REST_NV"..0x90AF
 	).javaDocLinks
 
 	IntConstant(
@@ -356,33 +356,33 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GetProgramResourcefvNV, and GetProgramResourceLocation.
 		""",
 
-		"FRAGMENT_INPUT_NV" _ 0x936D
+		"FRAGMENT_INPUT_NV"..0x936D
 	)
 
 	IntConstant(
 		"Token values for matrices.",
 
-		"PATH_PROJECTION_NV" _ 0x1701,
-		"PATH_MODELVIEW_NV" _ 0x1700,
-		"PATH_MODELVIEW_STACK_DEPTH_NV" _ 0x0BA3,
-		"PATH_MODELVIEW_MATRIX_NV" _ 0x0BA6,
-		"PATH_MAX_MODELVIEW_STACK_DEPTH_NV" _ 0x0D36,
-		"PATH_TRANSPOSE_MODELVIEW_MATRIX_NV" _ 0x84E3,
-		"PATH_PROJECTION_STACK_DEPTH_NV" _ 0x0BA4,
-		"PATH_PROJECTION_MATRIX_NV" _ 0x0BA7,
-		"PATH_MAX_PROJECTION_STACK_DEPTH_NV" _ 0x0D38,
-		"PATH_TRANSPOSE_PROJECTION_MATRIX_NV" _ 0x84E4
+		"PATH_PROJECTION_NV"..0x1701,
+		"PATH_MODELVIEW_NV"..0x1700,
+		"PATH_MODELVIEW_STACK_DEPTH_NV"..0x0BA3,
+		"PATH_MODELVIEW_MATRIX_NV"..0x0BA6,
+		"PATH_MAX_MODELVIEW_STACK_DEPTH_NV"..0x0D36,
+		"PATH_TRANSPOSE_MODELVIEW_MATRIX_NV"..0x84E3,
+		"PATH_PROJECTION_STACK_DEPTH_NV"..0x0BA4,
+		"PATH_PROJECTION_MATRIX_NV"..0x0BA7,
+		"PATH_MAX_PROJECTION_STACK_DEPTH_NV"..0x0D38,
+		"PATH_TRANSPOSE_PROJECTION_MATRIX_NV"..0x84E4
 	)
 
 	IntConstant(
 		"The following types are defined as alias to the GL tokens.",
 
-		"2_BYTES_NV" _ 0x1407,
-		"3_BYTES_NV" _ 0x1408,
-		"4_BYTES_NV" _ 0x1409,
-		"EYE_LINEAR_NV" _ 0x2400,
-		"OBJECT_LINEAR_NV" _ 0x2401,
-		"CONSTANT_NV" _ 0x8576
+		"2_BYTES_NV"..0x1407,
+		"3_BYTES_NV"..0x1408,
+		"4_BYTES_NV"..0x1409,
+		"EYE_LINEAR_NV"..0x2400,
+		"OBJECT_LINEAR_NV"..0x2401,
+		"CONSTANT_NV"..0x8576
 	)
 
 	void(
@@ -390,13 +390,13 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		"",
 
 		GLuint.IN("path", ""),
-		AutoSize("commands") _ GLsizei.IN("numCommands", ""),
-		const _ GLubyte_p.IN("commands", ""),
-		AutoSize("coords") shr "GLESChecks.typeToByteShift(coordType)" _ GLsizei.IN("numCoords", ""),
+		AutoSize("commands")..GLsizei.IN("numCommands", ""),
+		const..GLubyte_p.IN("commands", ""),
+		AutoSize("coords") shr "GLESChecks.typeToByteShift(coordType)"..GLsizei.IN("numCoords", ""),
 		GLenum.IN("coordType", "", "GLES20#BYTE GLES20#UNSIGNED_BYTE GLES20#SHORT GLES20#UNSIGNED_SHORT GLES20#FLOAT"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("coords", "")
+		)..const..void_p.IN("coords", "")
 	)
 
 	void(
@@ -416,8 +416,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("path", ""),
 		GLsizei.IN("commandStart", ""),
 		GLsizei.IN("commandsToDelete", ""),
-		AutoSize("commands") _ GLsizei.IN("numCommands", ""),
-		const _ GLubyte_p.IN("commands", ""),
+		AutoSize("commands")..GLsizei.IN("numCommands", ""),
+		const..GLubyte_p.IN("commands", ""),
 		this["PathCommandsNV"]["numCoords"],
 		this["PathCommandsNV"]["coordType"],
 		this["PathCommandsNV"]["coords"]
@@ -440,8 +440,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		GLenum.IN("format", "", "#PATH_FORMAT_SVG_NV #PATH_FORMAT_PS_NV"),
-		AutoSize("pathString") _ GLsizei.IN("length", ""),
-		const _ void_p.IN("pathString", "")
+		AutoSize("pathString")..GLsizei.IN("length", ""),
+		const..void_p.IN("pathString", "")
 	)
 
 	val PathGlyphsNV = void(
@@ -450,11 +450,11 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("firstPathName", ""),
 		GLenum.IN("fontTarget", "", "#STANDARD_FONT_NAME_NV #SYSTEM_FONT_NAME_NV #FILE_NAME_NV"),
-		nullTerminated _ const _ void_p.IN("fontName", ""),
+		nullTerminated..const..void_p.IN("fontName", ""),
 		GLbitfield.IN("fontStyle", "", "#BOLD_BIT_NV #ITALIC_BIT_NV", LinkMode.BITFIELD),
-		AutoSize("charcodes") / "charcodeTypeToBytes(type)" _ GLsizei.IN("numGlyphs", ""),
+		AutoSize("charcodes") / "charcodeTypeToBytes(type)"..GLsizei.IN("numGlyphs", ""),
 		GLenum.IN("type", "", "GLES20#UNSIGNED_BYTE GLES20#UNSIGNED_SHORT GLES20#UNSIGNED_INT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"),
-		const _ void_p.IN("charcodes", ""),
+		const..void_p.IN("charcodes", ""),
 		GLenum.IN("handleMissingGlyphs", "", "#SKIP_MISSING_GLYPH_NV #USE_MISSING_GLYPH_NV"),
 		GLuint.IN("pathParameterTemplate", ""),
 		GLfloat.IN("emScale", "")
@@ -475,7 +475,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PathGlyphsNV["emScale"]
 	)
 
-	ignoreMissing _ GLenum(
+	ignoreMissing..GLenum(
 		"PathGlyphIndexArrayNV",
 		"",
 
@@ -489,14 +489,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		PathGlyphsNV["emScale"]
 	)
 
-	ignoreMissing _ GLenum(
+	ignoreMissing..GLenum(
 		"PathMemoryGlyphIndexArrayNV",
 		"",
 
 		PathGlyphsNV["firstPathName"],
 		PathGlyphsNV["fontTarget"],
-		AutoSize("fontData") _ GLsizeiptr.IN("fontSize", ""),
-		const _ void_p.IN("fontData", ""),
+		AutoSize("fontData")..GLsizeiptr.IN("fontSize", ""),
+		const..void_p.IN("fontData", ""),
 		GLsizei.IN("faceIndex", ""),
 		this["PathGlyphIndexArrayNV"]["firstGlyphIndex"],
 		this["PathGlyphRangeNV"]["numGlyphs"],
@@ -512,14 +512,14 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("srcPath", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"WeightPathsNV",
 		"",
 
 		GLuint.IN("resultPath", ""),
-		AutoSize("paths", "weights") _ GLsizei.IN("numPaths", ""),
-		const _ GLuint_p.IN("paths", ""),
-		const _ GLfloat_p.IN("weights", "")
+		AutoSize("paths", "weights")..GLsizei.IN("numPaths", ""),
+		const..GLuint_p.IN("paths", ""),
+		const..GLfloat_p.IN("weights", "")
 	)
 
 	void(
@@ -539,7 +539,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("resultPath", ""),
 		GLuint.IN("srcPath", ""),
 		GLenum.IN("transformType", "", TransformTypes),
-		Check("transformTypeToElements(transformType)") _ const _ GLfloat_p.IN("transformValues", "")
+		Check("transformTypeToElements(transformType)")..const..GLfloat_p.IN("transformValues", "")
 	)
 
 	void(
@@ -548,7 +548,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", PathParameters),
-		Check(1) _ const _ GLint_p.IN("value", "")
+		Check(1)..const..GLint_p.IN("value", "")
 	)
 
 	void(
@@ -566,7 +566,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", "$PathParameters $PathParametersf"),
-		Check(1) _ const _ GLfloat_p.IN("value", "")
+		Check(1)..const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -583,8 +583,8 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		"",
 
 		GLuint.IN("path", ""),
-		AutoSize("dashArray") _ GLsizei.IN("dashCount", ""),
-		const _ GLfloat_p.IN("dashArray", "")
+		AutoSize("dashArray")..GLsizei.IN("dashCount", ""),
+		const..GLfloat_p.IN("dashArray", "")
 	)
 
 	GLuint(
@@ -645,25 +645,25 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 	)
 
 	val numPathsExpression = Code(javaInit = statement("\t\tint numPaths = paths.remaining() / pathNameTypeToBytes(pathNameType);", ApplyTo.ALTERNATIVE))
-	val StencilFillPathInstancedNV = numPathsExpression _ void(
+	val StencilFillPathInstancedNV = numPathsExpression..void(
 		"StencilFillPathInstancedNV",
 		"",
 
-		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)" _ GLsizei.IN("numPaths", ""),
+		AutoSize("paths", applyTo = ApplyTo.NORMAL) / "pathNameTypeToBytes(pathNameType)"..GLsizei.IN("numPaths", ""),
 		GLenum.IN(
 			"pathNameType",
 			"",
 			"GLES20#BYTE GLES20#UNSIGNED_BYTE GLES20#SHORT GLES20#UNSIGNED_SHORT GLES20#INT GLES20#UNSIGNED_INT GLES20#FLOAT #UTF8_NV #UTF16_NV #2_BYTES_NV #3_BYTES_NV #4_BYTES_NV"
 		),
-		const _ void_p.IN("paths", ""),
+		const..void_p.IN("paths", ""),
 		GLuint.IN("pathBase", ""),
 		this["StencilFillPathNV"]["fillMode"],
 		GLuint.IN("mask", ""),
 		this["TransformPathNV"]["transformType"],
-		Check("numPaths * transformTypeToElements(transformType)") _ const _ GLfloat_p.IN("transformValues", "")
+		Check("numPaths * transformTypeToElements(transformType)")..const..GLfloat_p.IN("transformValues", "")
 	)
 
-	numPathsExpression _ void(
+	numPathsExpression..void(
 		"StencilStrokePathInstancedNV",
 		"",
 
@@ -700,7 +700,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	numPathsExpression _ void(
+	numPathsExpression..void(
 		"CoverFillPathInstancedNV",
 		"",
 
@@ -713,7 +713,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	numPathsExpression _ void(
+	numPathsExpression..void(
 		"CoverStrokePathInstancedNV",
 		"",
 
@@ -726,7 +726,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"StencilThenCoverFillPathNV",
 		"",
 
@@ -736,7 +736,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"StencilThenCoverStrokePathNV",
 		"",
 
@@ -746,7 +746,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["CoverFillPathNV"]["coverMode"]
 	)
 
-	ignoreMissing _ numPathsExpression _ void(
+	ignoreMissing..numPathsExpression..void(
 		"StencilThenCoverFillPathInstancedNV",
 		"",
 
@@ -761,7 +761,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing _ numPathsExpression _ void(
+	ignoreMissing..numPathsExpression..void(
 		"StencilThenCoverStrokePathInstancedNV",
 		"",
 
@@ -776,7 +776,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["transformValues"]
 	)
 
-	ignoreMissing _ GLenum(
+	ignoreMissing..GLenum(
 		"PathGlyphIndexRangeNV",
 		"",
 
@@ -788,7 +788,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLuint.IN("baseAndCount", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"ProgramPathFragmentInputGenNV",
 		"",
 
@@ -796,7 +796,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLint.IN("location", ""),
 		GLenum.IN("genMode", ""),
 		GLint.IN("components", ""),
-		Check("genModeToElements(genMode) * components") _ const _ GLfloat_p.IN("coeffs", "")
+		Check("genModeToElements(genMode) * components")..const..GLfloat_p.IN("coeffs", "")
 	)
 
 	void(
@@ -805,7 +805,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		GLenum.IN("pname", "", "$PathParameters $GetPathParameters"),
-		returnValue _ Check(1) _ GLint_p.OUT("value", "")
+		returnValue..Check(1)..GLint_p.OUT("value", "")
 	)
 
 	void(
@@ -814,7 +814,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 
 		GLuint.IN("path", ""),
 		this["GetPathParameterivNV"]["pname"],
-		returnValue _ Check(1) _ GLfloat_p.OUT("value", "")
+		returnValue..Check(1)..GLfloat_p.OUT("value", "")
 	)
 
 	void(
@@ -822,7 +822,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		"",
 
 		GLuint.IN("path", ""),
-		Check("glGetPathParameteriNV(path, GL_PATH_COMMAND_COUNT_NV)", debug = true) _ GLubyte_p.OUT("commands", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_COMMAND_COUNT_NV)", debug = true)..GLubyte_p.OUT("commands", "")
 	)
 
 	void(
@@ -830,7 +830,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		"",
 
 		GLuint.IN("path", ""),
-		Check("glGetPathParameteriNV(path, GL_PATH_COORD_COUNT_NV)", debug = true) _ GLfloat_p.OUT("coords", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_COORD_COUNT_NV)", debug = true)..GLfloat_p.OUT("coords", "")
 	)
 
 	void(
@@ -838,10 +838,10 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		"",
 
 		GLuint.IN("path", ""),
-		Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true) _ GLfloat_p.OUT("dashArray", "")
+		Check("glGetPathParameteriNV(path, GL_PATH_DASH_ARRAY_COUNT_NV)", debug = true)..GLfloat_p.OUT("dashArray", "")
 	)
 
-	numPathsExpression _ void(
+	numPathsExpression..void(
 		"GetPathMetricsNV",
 		"",
 
@@ -851,7 +851,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		StencilFillPathInstancedNV["paths"],
 		StencilFillPathInstancedNV["pathBase"],
 		GLsizei.IN("stride", ""),
-		Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))") _ GLfloat_p.OUT("metrics", "")
+		Check("numPaths * (stride == 0 ? Integer.bitCount(metricQueryMask) : (stride >> 2))")..GLfloat_p.OUT("metrics", "")
 	)
 
 	void(
@@ -865,7 +865,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["GetPathMetricsNV"]["metrics"]
 	)
 
-	numPathsExpression _ void(
+	numPathsExpression..void(
 		"GetPathSpacingNV",
 		"",
 
@@ -877,7 +877,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLfloat.IN("advanceScale", ""),
 		GLfloat.IN("kerningScale", ""),
 		GLenum.IN("transformType", "", "#TRANSLATE_X_NV #TRANSLATE_2D_NV"),
-		Check("(numPaths - 1) * (transformType == GL_TRANSLATE_X_NV ? 1 : 2)") _ GLfloat_p.OUT("returnedSpacing", "")
+		Check("(numPaths - 1) * (transformType == GL_TRANSLATE_X_NV ? 1 : 2)")..GLfloat_p.OUT("returnedSpacing", "")
 	)
 
 	GLboolean(
@@ -916,29 +916,29 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		GLsizei.IN("startSegment", ""),
 		GLsizei.IN("numSegments", ""),
 		GLfloat.IN("distance", ""),
-		nullable _ Check(1) _ GLfloat_p.OUT("x", ""),
-		nullable _ Check(1) _ GLfloat_p.OUT("y", ""),
-		nullable _ Check(1) _ GLfloat_p.OUT("tangentX", ""),
-		nullable _ Check(1) _ GLfloat_p.OUT("tangentY", "")
+		nullable..Check(1)..GLfloat_p.OUT("x", ""),
+		nullable..Check(1)..GLfloat_p.OUT("y", ""),
+		nullable..Check(1)..GLfloat_p.OUT("tangentX", ""),
+		nullable..Check(1)..GLfloat_p.OUT("tangentY", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixLoad3x2fNV",
 		"",
 
 		GLenum.IN("matrixMode", "", "#PATH_PROJECTION_NV #PATH_MODELVIEW_NV"),
-		Check(3 * 2) _ const _ GLfloat_p.IN("m", "")
+		Check(3 * 2)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixLoad3x3fNV",
 		"",
 
 		this["MatrixLoad3x2fNV"]["matrixMode"],
-		Check(3 * 3) _ const _ GLfloat_p.IN("m", "")
+		Check(3 * 3)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixLoadTranspose3x3fNV",
 		"",
 
@@ -946,15 +946,15 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixMult3x2fNV",
 		"",
 
 		this["MatrixLoad3x2fNV"]["matrixMode"],
-		Check(3 * 2) _ const _ GLfloat_p.IN("m", "")
+		Check(3 * 2)..const..GLfloat_p.IN("m", "")
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixMult3x3fNV",
 		"",
 
@@ -962,7 +962,7 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"MatrixMultTranspose3x3fNV",
 		"",
 
@@ -970,18 +970,18 @@ val NV_path_rendering = "NVPathRendering".nativeClassGLES("NV_path_rendering", p
 		this["MatrixLoad3x3fNV"]["m"]
 	)
 
-	ignoreMissing _ void(
+	ignoreMissing..void(
 		"GetProgramResourcefvNV",
 		"",
 
 		GLuint.IN("program", ""),
 		GLenum.IN("programInterface", ""),
 		GLuint.IN("index", ""),
-		AutoSize("props") _ GLsizei.IN("propCount", ""),
-		const _ GLenum_p.IN("props", ""),
-		AutoSize("params") _ GLsizei.IN("bufSize", ""),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", ""),
-		Return("length") _ GLfloat_p.OUT("params", "")
+		AutoSize("props")..GLsizei.IN("propCount", ""),
+		const..GLenum_p.IN("props", ""),
+		AutoSize("params")..GLsizei.IN("bufSize", ""),
+		Check(1)..nullable..GLsizei_p.OUT("length", ""),
+		Return("length")..GLfloat_p.OUT("params", "")
 	)
 
 	customMethod("""

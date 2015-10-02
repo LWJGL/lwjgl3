@@ -49,8 +49,8 @@ val EXT_stencil_clear_tag = "EXTStencilClearTag".nativeClassGL("EXT_stencil_clea
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"STENCIL_TAG_BITS_EXT" _ 0x88F2,
-		"STENCIL_CLEAR_TAG_VALUE_EXT" _ 0x88F3
+		"STENCIL_TAG_BITS_EXT"..0x88F2,
+		"STENCIL_CLEAR_TAG_VALUE_EXT"..0x88F3
 	)
 
 	void(

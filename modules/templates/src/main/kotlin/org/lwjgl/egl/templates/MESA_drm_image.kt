@@ -21,13 +21,13 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
 	IntConstant(
 		"",
 
-		"DRM_BUFFER_FORMAT_MESA" _ 0x31D0,
-		"DRM_BUFFER_USE_MESA" _ 0x31D1,
-		"DRM_BUFFER_FORMAT_ARGB32_MESA" _ 0x31D2,
-		"DRM_BUFFER_MESA" _ 0x31D3,
-		"DRM_BUFFER_STRIDE_MESA" _ 0x31D4,
-		"DRM_BUFFER_USE_SCANOUT_MESA" _ 0x00000001,
-		"DRM_BUFFER_USE_SHARE_MESA" _ 0x00000002
+		"DRM_BUFFER_FORMAT_MESA"..0x31D0,
+		"DRM_BUFFER_USE_MESA"..0x31D1,
+		"DRM_BUFFER_FORMAT_ARGB32_MESA"..0x31D2,
+		"DRM_BUFFER_MESA"..0x31D3,
+		"DRM_BUFFER_STRIDE_MESA"..0x31D4,
+		"DRM_BUFFER_USE_SCANOUT_MESA"..0x00000001,
+		"DRM_BUFFER_USE_SHARE_MESA"..0x00000002
 	)
 
 	EGLImageKHR(
@@ -35,7 +35,7 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
 		"",
 
 		EGLDisplay.IN("dpy", ""),
-		nullable _ noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
 	EGLBoolean(
@@ -44,8 +44,8 @@ val MESA_drm_image = "MESADRMImage".nativeClassEGL("MESA_drm_image", postfix = M
 
 		EGLDisplay.IN("dpy", ""),
 		EGLImageKHR.IN("image", ""),
-		nullable _ Check(1) _ EGLint_p.OUT("name", ""),
-		nullable _ Check(1) _ EGLint_p.OUT("handle", ""),
-		nullable _ Check(1) _ EGLint_p.OUT("stride", "")
+		nullable..Check(1)..EGLint_p.OUT("name", ""),
+		nullable..Check(1)..EGLint_p.OUT("handle", ""),
+		nullable..Check(1)..EGLint_p.OUT("stride", "")
 	)
 }

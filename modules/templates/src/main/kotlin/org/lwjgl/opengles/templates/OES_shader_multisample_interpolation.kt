@@ -28,8 +28,8 @@ val OES_shader_multisample_interpolation = "OESShaderMultisampleInterpolation".n
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v.",
 
-		"MIN_FRAGMENT_INTERPOLATION_OFFSET_OES" _ 0x8E5B,
-		"MAX_FRAGMENT_INTERPOLATION_OFFSET_OES" _ 0x8E5C,
-		"FRAGMENT_INTERPOLATION_OFFSET_BITS_OES" _ 0x8E5D
+		"MIN_FRAGMENT_INTERPOLATION_OFFSET_OES"..0x8E5B,
+		"MAX_FRAGMENT_INTERPOLATION_OFFSET_OES"..0x8E5C,
+		"FRAGMENT_INTERPOLATION_OFFSET_BITS_OES"..0x8E5D
 	)
 }

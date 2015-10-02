@@ -23,6 +23,6 @@ val EXT_protected_surface = "EXTProtectedSurface".nativeClassEGL("EXT_protected_
 	IntConstant(
 		"",
 
-		"PROTECTED_CONTENT_EXT" _ 0x32C0
+		"PROTECTED_CONTENT_EXT"..0x32C0
 	)
 }

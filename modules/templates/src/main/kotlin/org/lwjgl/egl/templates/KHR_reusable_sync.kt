@@ -26,21 +26,21 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
 	IntConstant(
 		"",
 
-		"SYNC_STATUS_KHR" _ 0x30F1,
-		"SIGNALED_KHR" _ 0x30F2,
-		"UNSIGNALED_KHR" _ 0x30F3,
-		"TIMEOUT_EXPIRED_KHR" _ 0x30F5,
-		"CONDITION_SATISFIED_KHR" _ 0x30F6,
-		"SYNC_TYPE_KHR" _ 0x30F7,
-		"SYNC_REUSABLE_KHR" _ 0x30FA,
-		"SYNC_FLUSH_COMMANDS_BIT_KHR" _ 0x0001
+		"SYNC_STATUS_KHR"..0x30F1,
+		"SIGNALED_KHR"..0x30F2,
+		"UNSIGNALED_KHR"..0x30F3,
+		"TIMEOUT_EXPIRED_KHR"..0x30F5,
+		"CONDITION_SATISFIED_KHR"..0x30F6,
+		"SYNC_TYPE_KHR"..0x30F7,
+		"SYNC_REUSABLE_KHR"..0x30FA,
+		"SYNC_FLUSH_COMMANDS_BIT_KHR"..0x0001
 	)
 
 	LongConstant(
 		"",
 
 		"FOREVER_KHR" expr "0xFFFFFFFFFFFFFFFFL",
-		"NO_SYNC_KHR" _ 0L
+		"NO_SYNC_KHR"..0L
 	)
 
 	EGLSyncKHR(
@@ -49,7 +49,7 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
 
 		EGLDisplay.IN("dpy", ""),
 		EGLenum.IN("type", ""),
-		nullable _ noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+		nullable..noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
 	EGLBoolean(
@@ -86,6 +86,6 @@ val KHR_reusable_sync = "KHRReusableSync".nativeClassEGL("KHR_reusable_sync", po
 		EGLDisplay.IN("dpy", ""),
 		EGLSyncKHR.IN("sync", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLint_p.OUT("value", "")
+		Check(1)..EGLint_p.OUT("value", "")
 	)
 }

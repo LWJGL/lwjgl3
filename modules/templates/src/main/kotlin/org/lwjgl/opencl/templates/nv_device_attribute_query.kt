@@ -19,37 +19,37 @@ val nv_device_attribute_query = "NVDeviceAttributeQuery".nativeClassCL("nv_devic
 
 	IntConstant(
 		"Returns the major revision number that defines the CUDA compute capability of the device.",
-		"DEVICE_COMPUTE_CAPABILITY_MAJOR_NV" _ 0x4000
+		"DEVICE_COMPUTE_CAPABILITY_MAJOR_NV"..0x4000
 	)
 
 	IntConstant(
 		"Returns the minor revision number that defines the CUDA compute capability of the device.",
-		"DEVICE_COMPUTE_CAPABILITY_MINOR_NV" _ 0x4001
+		"DEVICE_COMPUTE_CAPABILITY_MINOR_NV"..0x4001
 	)
 
 	IntConstant(
 		"Maximum number of 32-bit registers available to a work-group; this number is shared by all work-groups simultaneously resident on a multiprocessor.",
-		"DEVICE_REGISTERS_PER_BLOCK_NV" _ 0x4002
+		"DEVICE_REGISTERS_PER_BLOCK_NV"..0x4002
 	)
 
 	IntConstant(
 		"Warp size in work-items.",
-		"DEVICE_WARP_SIZE_NV" _ 0x4003
+		"DEVICE_WARP_SIZE_NV"..0x4003
 	)
 
 	IntConstant(
 		"Returns $TRUE if the device can concurrently copy memory between host and device while executing a kernel, or $FALSE if not.",
-		"DEVICE_GPU_OVERLAP_NV" _ 0x4004
+		"DEVICE_GPU_OVERLAP_NV"..0x4004
 	)
 
 	IntConstant(
 		"Returns $TRUE if there is a run time limit for kernels executed on the device, or $FALSE if not.",
-		"DEVICE_KERNEL_EXEC_TIMEOUT_NV" _ 0x4005
+		"DEVICE_KERNEL_EXEC_TIMEOUT_NV"..0x4005
 	)
 
 	IntConstant(
 		"Returns $TRUE if the device is integrated with the memory subsystem, or $FALSE if not.",
-		"DEVICE_INTEGRATED_MEMORY_NV" _ 0x4006
+		"DEVICE_INTEGRATED_MEMORY_NV"..0x4006
 	)
 
 }

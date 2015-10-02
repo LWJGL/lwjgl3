@@ -30,9 +30,9 @@ val EXT_422_pixels = "EXT422Pixels".nativeClassGL("EXT_422_pixels", postfix = EX
 		SeparableFilter3D, GetSeparableFilter, ColorTable, and GetColorTable.
 		""",
 
-		"422_EXT" _ 0x80CC,
-		"422_REV_EXT" _ 0x80CD,
-		"422_AVERAGE_EXT" _ 0x80CE,
-		"422_REV_AVERAGE_EXT" _ 0x80CF
+		"422_EXT"..0x80CC,
+		"422_REV_EXT"..0x80CD,
+		"422_AVERAGE_EXT"..0x80CE,
+		"422_REV_AVERAGE_EXT"..0x80CF
 	)
 }

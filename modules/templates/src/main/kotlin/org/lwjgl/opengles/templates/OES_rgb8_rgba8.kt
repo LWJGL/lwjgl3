@@ -18,7 +18,7 @@ val OES_rgb8_rgba8 = "OESRGB8RGBA8".nativeClassGLES("OES_rgb8_rgba8", postfix = 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageOES.",
 
-		"RGB8_OES" _ 0x8051,
-		"RGBA8_OES" _ 0x8058
+		"RGB8_OES"..0x8051,
+		"RGBA8_OES"..0x8058
 	)
 }

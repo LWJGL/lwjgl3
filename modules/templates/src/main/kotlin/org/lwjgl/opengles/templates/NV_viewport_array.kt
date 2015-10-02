@@ -31,10 +31,10 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetInteger64v.",
 
-		"MAX_VIEWPORTS_NV" _ 0x825B,
-		"VIEWPORT_SUBPIXEL_BITS_NV" _ 0x825C,
-		"VIEWPORT_BOUNDS_RANGE_NV" _ 0x825D,
-		"VIEWPORT_INDEX_PROVOKING_VERTEX_NV" _ 0x825F
+		"MAX_VIEWPORTS_NV"..0x825B,
+		"VIEWPORT_SUBPIXEL_BITS_NV"..0x825C,
+		"VIEWPORT_BOUNDS_RANGE_NV"..0x825D,
+		"VIEWPORT_INDEX_PROVOKING_VERTEX_NV"..0x825F
 	)
 
 	void(
@@ -42,8 +42,8 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 2) _ GLsizei.IN("count", ""),
-		const _ GLfloat_p.IN("v", "")
+		(AutoSize("v") shr 2)..GLsizei.IN("count", ""),
+		const..GLfloat_p.IN("v", "")
 	)
 
 	void(
@@ -62,7 +62,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("index", ""),
-		Check(4) _ const _ GLfloat_p.IN("v", "")
+		Check(4)..const..GLfloat_p.IN("v", "")
 	)
 
 	void(
@@ -70,8 +70,8 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 2) _ GLsizei.IN("count", ""),
-		const _ GLint_p.IN("v", "")
+		(AutoSize("v") shr 2)..GLsizei.IN("count", ""),
+		const..GLint_p.IN("v", "")
 	)
 
 	void(
@@ -90,7 +90,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("index", ""),
-		Check(4) _ const _ GLint_p.IN("v", "")
+		Check(4)..const..GLint_p.IN("v", "")
 	)
 
 	void(
@@ -98,8 +98,8 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 		"",
 
 		GLuint.IN("first", ""),
-		(AutoSize("v") shr 1) _ GLsizei.IN("count", ""),
-		const _ GLfloat_p.IN("v", "")
+		(AutoSize("v") shr 1)..GLsizei.IN("count", ""),
+		const..GLfloat_p.IN("v", "")
 	)
 
 	void(
@@ -117,7 +117,7 @@ val NV_viewport_array = "NVViewportArray".nativeClassGLES("NV_viewport_array", p
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue _ Check(1) _ GLfloat_p.OUT("data", "")
+		returnValue..Check(1)..GLfloat_p.OUT("data", "")
 	)
 
 	void(

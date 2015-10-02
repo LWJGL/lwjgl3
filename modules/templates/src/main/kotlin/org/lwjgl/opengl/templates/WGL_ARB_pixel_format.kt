@@ -27,47 +27,47 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		the {@code attribIList} and {@code attribFList} parameter arrays of #ChoosePixelFormatARB().
 		""",
 
-		"NUMBER_PIXEL_FORMATS_ARB" _ 0x2000,
-		"DRAW_TO_WINDOW_ARB" _ 0x2001,
-		"DRAW_TO_BITMAP_ARB" _ 0x2002,
-		"ACCELERATION_ARB" _ 0x2003,
-		"NEED_PALETTE_ARB" _ 0x2004,
-		"NEED_SYSTEM_PALETTE_ARB" _ 0x2005,
-		"SWAP_LAYER_BUFFERS_ARB" _ 0x2006,
-		"SWAP_METHOD_ARB" _ 0x2007,
-		"NUMBER_OVERLAYS_ARB" _ 0x2008,
-		"NUMBER_UNDERLAYS_ARB" _ 0x2009,
-		"TRANSPARENT_ARB" _ 0x200A,
-		"TRANSPARENT_RED_VALUE_ARB" _ 0x2037,
-		"TRANSPARENT_GREEN_VALUE_ARB" _ 0x2038,
-		"TRANSPARENT_BLUE_VALUE_ARB" _ 0x2039,
-		"TRANSPARENT_ALPHA_VALUE_ARB" _ 0x203A,
-		"TRANSPARENT_INDEX_VALUE_ARB" _ 0x203B,
-		"SHARE_DEPTH_ARB" _ 0x200C,
-		"SHARE_STENCIL_ARB" _ 0x200D,
-		"SHARE_ACCUM_ARB" _ 0x200E,
-		"SUPPORT_GDI_ARB" _ 0x200F,
-		"SUPPORT_OPENGL_ARB" _ 0x2010,
-		"DOUBLE_BUFFER_ARB" _ 0x2011,
-		"STEREO_ARB" _ 0x2012,
-		"PIXEL_TYPE_ARB" _ 0x2013,
-		"COLOR_BITS_ARB" _ 0x2014,
-		"RED_BITS_ARB" _ 0x2015,
-		"RED_SHIFT_ARB" _ 0x2016,
-		"GREEN_BITS_ARB" _ 0x2017,
-		"GREEN_SHIFT_ARB" _ 0x2018,
-		"BLUE_BITS_ARB" _ 0x2019,
-		"BLUE_SHIFT_ARB" _ 0x201A,
-		"ALPHA_BITS_ARB" _ 0x201B,
-		"ALPHA_SHIFT_ARB" _ 0x201C,
-		"ACCUM_BITS_ARB" _ 0x201D,
-		"ACCUM_RED_BITS_ARB" _ 0x201E,
-		"ACCUM_GREEN_BITS_ARB" _ 0x201F,
-		"ACCUM_BLUE_BITS_ARB" _ 0x2020,
-		"ACCUM_ALPHA_BITS_ARB" _ 0x2021,
-		"DEPTH_BITS_ARB" _ 0x2022,
-		"STENCIL_BITS_ARB" _ 0x2023,
-		"AUX_BUFFERS_ARB" _ 0x2024
+		"NUMBER_PIXEL_FORMATS_ARB"..0x2000,
+		"DRAW_TO_WINDOW_ARB"..0x2001,
+		"DRAW_TO_BITMAP_ARB"..0x2002,
+		"ACCELERATION_ARB"..0x2003,
+		"NEED_PALETTE_ARB"..0x2004,
+		"NEED_SYSTEM_PALETTE_ARB"..0x2005,
+		"SWAP_LAYER_BUFFERS_ARB"..0x2006,
+		"SWAP_METHOD_ARB"..0x2007,
+		"NUMBER_OVERLAYS_ARB"..0x2008,
+		"NUMBER_UNDERLAYS_ARB"..0x2009,
+		"TRANSPARENT_ARB"..0x200A,
+		"TRANSPARENT_RED_VALUE_ARB"..0x2037,
+		"TRANSPARENT_GREEN_VALUE_ARB"..0x2038,
+		"TRANSPARENT_BLUE_VALUE_ARB"..0x2039,
+		"TRANSPARENT_ALPHA_VALUE_ARB"..0x203A,
+		"TRANSPARENT_INDEX_VALUE_ARB"..0x203B,
+		"SHARE_DEPTH_ARB"..0x200C,
+		"SHARE_STENCIL_ARB"..0x200D,
+		"SHARE_ACCUM_ARB"..0x200E,
+		"SUPPORT_GDI_ARB"..0x200F,
+		"SUPPORT_OPENGL_ARB"..0x2010,
+		"DOUBLE_BUFFER_ARB"..0x2011,
+		"STEREO_ARB"..0x2012,
+		"PIXEL_TYPE_ARB"..0x2013,
+		"COLOR_BITS_ARB"..0x2014,
+		"RED_BITS_ARB"..0x2015,
+		"RED_SHIFT_ARB"..0x2016,
+		"GREEN_BITS_ARB"..0x2017,
+		"GREEN_SHIFT_ARB"..0x2018,
+		"BLUE_BITS_ARB"..0x2019,
+		"BLUE_SHIFT_ARB"..0x201A,
+		"ALPHA_BITS_ARB"..0x201B,
+		"ALPHA_SHIFT_ARB"..0x201C,
+		"ACCUM_BITS_ARB"..0x201D,
+		"ACCUM_RED_BITS_ARB"..0x201E,
+		"ACCUM_GREEN_BITS_ARB"..0x201F,
+		"ACCUM_BLUE_BITS_ARB"..0x2020,
+		"ACCUM_ALPHA_BITS_ARB"..0x2021,
+		"DEPTH_BITS_ARB"..0x2022,
+		"STENCIL_BITS_ARB"..0x2023,
+		"AUX_BUFFERS_ARB"..0x2024
 	).javaDocLinks
 
 	IntConstant(
@@ -76,16 +76,16 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		{@code values} parameter array of #GetPixelFormatAttribivARB() and #GetPixelFormatAttribfvARB().
 		""",
 
-		"NO_ACCELERATION_ARB" _ 0x2025,
-		"GENERIC_ACCELERATION_ARB" _ 0x2026,
-		"FULL_ACCELERATION_ARB" _ 0x2027,
+		"NO_ACCELERATION_ARB"..0x2025,
+		"GENERIC_ACCELERATION_ARB"..0x2026,
+		"FULL_ACCELERATION_ARB"..0x2027,
 
-		"SWAP_EXCHANGE_ARB" _ 0x2028,
-		"SWAP_COPY_ARB" _ 0x2029,
-		"SWAP_UNDEFINED_ARB" _ 0x202A,
+		"SWAP_EXCHANGE_ARB"..0x2028,
+		"SWAP_COPY_ARB"..0x2029,
+		"SWAP_UNDEFINED_ARB"..0x202A,
 
-		"TYPE_RGBA_ARB" _ 0x202B,
-		"TYPE_COLORINDEX_ARB" _ 0x202C
+		"TYPE_RGBA_ARB"..0x202B,
+		"TYPE_COLORINDEX_ARB"..0x202C
 	)
 
 	BOOL(
@@ -95,8 +95,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
-		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		SingleValue("attribute") _ const _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
+		AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
+		SingleValue("attribute")..const..int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried", WGL_ATTRIBUTES),
 		int_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
@@ -107,8 +107,8 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
 		int.IN("pixelFormat", "an index that specifies the pixel format"),
 		int.IN("layerPlane", "the plane being queried"),
-		AutoSize("attributes", "values") _ UINT.IN("n", "the number of attributes being queried"),
-		SingleValue("attribute") _ const _ int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
+		AutoSize("attributes", "values")..UINT.IN("n", "the number of attributes being queried"),
+		SingleValue("attribute")..const..int_p.IN("attributes", "an array of pixel format attribute identifiers which specify the attributes to be queried"),
 		FLOAT_p.OUT("values", "a buffer into which the results of the query will be placed")
 	)
 
@@ -121,9 +121,9 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 		""",
 
 		HDC.IN("hdc", "the device context on which the pixel format is supported"),
-		nullTerminated _ nullable _ const _ int_p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
-		nullTerminated _ nullable _ const _ FLOAT_p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
-		AutoSize("formats") _ UINT.IN("maxFormats", "the number of attributes being queried"),
+		nullTerminated..nullable..const..int_p.IN("attribIList", "a list of attribute {type, value} pairs containing integer attribute values", WGL_ATTRIBUTES),
+		nullTerminated..nullable..const..FLOAT_p.IN("attribFList", "a list of attribute {type, value} pairs containing floating point attribute values"),
+		AutoSize("formats")..UINT.IN("maxFormats", "the number of attributes being queried"),
 		int_p.IN(
 			"formats",
 			"""
@@ -131,7 +131,7 @@ val WGL_ARB_pixel_format = "WGLARBPixelFormat".nativeClassWGL("WGL_ARB_pixel_for
 			head of the list.
 			"""
 		),
-		Check(1) _ UINT_p.OUT("numFormats", "returns the number of matching formats")
+		Check(1)..UINT_p.OUT("numFormats", "returns the number of matching formats")
 	)
 
 }

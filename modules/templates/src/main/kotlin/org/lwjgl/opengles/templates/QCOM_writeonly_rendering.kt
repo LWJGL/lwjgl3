@@ -37,6 +37,6 @@ val QCOM_writeonly_rendering = "QCOMWriteonlyRendering".nativeClassGLES("QCOM_wr
 	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable.",
 
-		"WRITEONLY_RENDERING_QCOM" _ 0x8823
+		"WRITEONLY_RENDERING_QCOM"..0x8823
 	)
 }

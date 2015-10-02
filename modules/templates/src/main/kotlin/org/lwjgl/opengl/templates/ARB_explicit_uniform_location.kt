@@ -22,6 +22,6 @@ val ARB_explicit_uniform_location = "ARBExplicitUniformLocation".nativeClassGL("
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
-		"MAX_UNIFORM_LOCATIONS" _ 0x826E
+		"MAX_UNIFORM_LOCATIONS"..0x826E
 	)
 }

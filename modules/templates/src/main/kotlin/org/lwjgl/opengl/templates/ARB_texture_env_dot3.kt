@@ -20,8 +20,8 @@ val ARB_texture_env_dot3 = "ARBTextureEnvDot3".nativeClassGL("ARB_texture_env_do
 	IntConstant(
 		"Accepted by the {@code params} parameter of TexEnvf, TexEnvi, TexEnvfv, and TexEnviv when the {@code pname} parameter value is COMBINE_RGB_ARB.",
 
-		"DOT3_RGB_ARB" _ 0x86AE,
-		"DOT3_RGBA_ARB" _ 0x86AF
+		"DOT3_RGB_ARB"..0x86AE,
+		"DOT3_RGBA_ARB"..0x86AF
 	)
 
 }

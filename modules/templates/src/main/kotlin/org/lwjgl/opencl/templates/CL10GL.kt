@@ -67,17 +67,17 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 		val GLObjectTypes = IntConstant(
 			"cl_gl_object_type",
 
-			"GL_OBJECT_BUFFER" _ 0x2000,
-			"GL_OBJECT_TEXTURE2D" _ 0x2001,
-			"GL_OBJECT_TEXTURE3D" _ 0x2002,
-			"GL_OBJECT_RENDERBUFFER" _ 0x2003
+			"GL_OBJECT_BUFFER"..0x2000,
+			"GL_OBJECT_TEXTURE2D"..0x2001,
+			"GL_OBJECT_TEXTURE3D"..0x2002,
+			"GL_OBJECT_RENDERBUFFER"..0x2003
 		).javaDocLinks + " CL12GL#GL_OBJECT_TEXTURE_2D_ARRAY CL12GL#GL_OBJECT_TEXTURE1D CL12GL#GL_OBJECT_TEXTURE1D_ARRAY CL12GL#GL_OBJECT_TEXTURE_BUFFER"
 
 		val GLTextureInfo = IntConstant(
 			"cl_gl_texture_info",
 
-			"GL_TEXTURE_TARGET" _ 0x2004,
-			"GL_MIPMAP_LEVEL" _ 0x2005
+			"GL_TEXTURE_TARGET"..0x2004,
+			"GL_MIPMAP_LEVEL"..0x2005
 		).javaDocLinks + " KHRGLMSAASharing#GL_NUM_SAMPLES"
 
 		cl_mem(
@@ -308,12 +308,12 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 		""",
 
 			cl_mem.IN("memobj", "the memory object being queried"),
-			nullable _ cl_gl_object_type_p.OUT(
+			nullable..cl_gl_object_type_p.OUT(
 				"gl_object_type",
 				"returns the type of GL object attached to {@code memobj}. If {@code gl_object_type} is $NULL, it is ignored.",
 				GLObjectTypes
 			),
-			nullable _ GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
+			nullable..GLuint_p.OUT("gl_object_name", "the GL object name used to create {@code memobj}. If {@code gl_object_name} is $NULL, it is ignored."),
 
 			returnDoc =
 			"""
@@ -338,7 +338,7 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 				GLTextureInfo
 			),
 			PARAM_VALUE_SIZE,
-			MultiType(PointerMapping.DATA_INT) _ nullable _ void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_INT)..nullable..void_p.IN("param_value", param_value),
 			PARAM_VALUE_SIZE_RET,
 
 			returnDoc =
@@ -379,8 +379,8 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 			objects. This constraint is enforced at context creation time.
 			"""
 			),
-			AutoSize("mem_objects") _ cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
-			SingleValue("mem_object") _ const _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
+			AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be acquired in {@code mem_objects}"),
+			SingleValue("mem_object")..const..cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correspond to GL objects"),
 			NEWL,
 			EWL,
 			EVENT,
@@ -418,8 +418,8 @@ val CL10GL = dependsOn(Binding.OPENGL) {
 		""",
 
 			cl_command_queue.IN("command_queue", "a valid command-queue"),
-			AutoSize("mem_objects") _ cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
-			SingleValue("mem_object") _ const _ cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
+			AutoSize("mem_objects")..cl_uint.IN("num_objects", "the number of memory objects to be released in {@code mem_objects}"),
+			SingleValue("mem_object")..const..cl_mem_p.IN("mem_objects", "a pointer to a list of CL memory objects that correpond to GL objects"),
 			NEWL,
 			EWL,
 			EVENT,

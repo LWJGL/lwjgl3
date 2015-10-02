@@ -50,8 +50,8 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	IntConstant(
 		"Boolean values",
 
-		"False" _ 0,
-		"True" _ 1
+		"False"..0,
+		"True"..1
 	)
 
 	IntConstant(
@@ -59,107 +59,107 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		When a debug library is requested, a slower debugging version of the library will run which can be used to help solve problems in the library and debug
 		application code.
 		""",
-		"Init_Debug" _ 0x00000001
+		"Init_Debug"..0x00000001
 	)
 	IntConstant(
 		"""
 		When {@code ServerOptional} is set, the #Initialize() call not will block waiting for the server to respond. If the server is not reachable, it might
 		still succeed.
 		""",
-		"Init_ServerOptional" _ 0x00000002
+		"Init_ServerOptional"..0x00000002
 	)
 	IntConstant(
 		"""
 		When a version is requested, the LibOVR runtime respects the {@code RequestedMinorVersion} field and verifies that the {@code RequestedMinorVersion} is
 		supported.
 		""",
-		"Init_RequestVersion" _ 0x00000004
+		"Init_RequestVersion"..0x00000004
 	)
-	IntConstant("These bits are writable by user code.", "Init_WritableBits" _ 0x00ffffff)
+	IntConstant("These bits are writable by user code.", "Init_WritableBits"..0x00ffffff)
 
 	val LogLevels = IntConstant(
 		"Logging levels",
 
-		"LogLevel_Debug" _ 0,
-		"LogLevel_Info" _ 1,
-		"LogLevel_Error" _ 2
+		"LogLevel_Debug"..0,
+		"LogLevel_Info"..1,
+		"LogLevel_Error"..2
 	).javaDocLinks
 
 	IntConstant(
 		"HMD types",
 
-		"Hmd_None" _ 0,
-		"Hmd_DK1" _ 3,
-		"Hmd_DKHD" _ 4,
-		"Hmd_DK2" _ 6,
-		"Hmd_CB" _ 8,
-		"Hmd_Other" _ 9,
-		"Hmd_E3_2015" _ 10,
-	    "Hmd_ES06" _ 11
+		"Hmd_None"..0,
+		"Hmd_DK1"..3,
+		"Hmd_DKHD"..4,
+		"Hmd_DK2"..6,
+		"Hmd_CB"..8,
+		"Hmd_Other"..9,
+		"Hmd_E3_2015"..10,
+	    "Hmd_ES06"..11
 	)
 
 	// ovrHmdCaps enum
-	IntConstant("(read only) Specifies that the HMD is a virtual debug device.", "HmdCap_DebugDevice" _ 0x0010)
-	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the client.", "HmdCap_Writable_Mask" _ 0x0000)
-	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the service.", "HmdCap_Service_Mask" _ 0x0000)
+	IntConstant("(read only) Specifies that the HMD is a virtual debug device.", "HmdCap_DebugDevice"..0x0010)
+	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the client.", "HmdCap_Writable_Mask"..0x0000)
+	IntConstant("Indicates to the developer what caps they can and cannot modify. These are processed by the service.", "HmdCap_Service_Mask"..0x0000)
 	val HmdCaps = "#HmdCap_DebugDevice"
 
 	// ovrTrackingCaps enum
-	IntConstant("Supports orientation tracking (IMU).", "TrackingCap_Orientation" _ 0x0010)
-	IntConstant("Supports yaw drift correction via a magnetometer or other means.", "TrackingCap_MagYawCorrection" _ 0x0020)
-	IntConstant("Supports positional tracking.", "TrackingCap_Position" _ 0x0040)
+	IntConstant("Supports orientation tracking (IMU).", "TrackingCap_Orientation"..0x0010)
+	IntConstant("Supports yaw drift correction via a magnetometer or other means.", "TrackingCap_MagYawCorrection"..0x0020)
+	IntConstant("Supports positional tracking.", "TrackingCap_Position"..0x0040)
 	IntConstant(
 		"""
 		Overriding the other flags, this causes the application to ignore tracking settings. This is the internal default before #ConfigureTracking() is
 		called.
 		""",
-		"TrackingCap_Idle" _ 0x0100
+		"TrackingCap_Idle"..0x0100
 	)
 	val TrackingCaps = "#TrackingCap_Orientation #TrackingCap_MagYawCorrection #TrackingCap_Position #TrackingCap_Idle"
 
 	val EyeType = IntConstant(
 		"ovrEyeType",
 
-		"Eye_Left" _ 0,
-		"Eye_Right" _ 1,
-		"Eye_Count" _ 2
+		"Eye_Left"..0,
+		"Eye_Right"..1,
+		"Eye_Count"..2
 	).javaDocLinks
 
 	// ovrStatusBits enum
-	IntConstant("Orientation is currently tracked (connected and in use).", "Status_OrientationTracked" _ 0x0001)
-	IntConstant("Position is currently tracked (false if out of range).", "Status_PositionTracked" _ 0x0002)
-	IntConstant("Camera pose is currently tracked.", "Status_CameraPoseTracked" _ 0x0004)
-	IntConstant("Position tracking hardware is connected.", "Status_PositionConnected" _ 0x0020)
-	IntConstant("HMD Display is available and connected.", "Status_HmdConnected" _ 0x0080)
+	IntConstant("Orientation is currently tracked (connected and in use).", "Status_OrientationTracked"..0x0001)
+	IntConstant("Position is currently tracked (false if out of range).", "Status_PositionTracked"..0x0002)
+	IntConstant("Camera pose is currently tracked.", "Status_CameraPoseTracked"..0x0004)
+	IntConstant("Position tracking hardware is connected.", "Status_PositionConnected"..0x0020)
+	IntConstant("HMD Display is available and connected.", "Status_HmdConnected"..0x0080)
 
 	IntConstant(
 		"Render API",
 
-		"RenderAPI_None" _ 0,
-		"RenderAPI_OpenGL" _ 1,
-		"RenderAPI_Android_GLES" _ 2,
-		"RenderAPI_D3D11" _ 5
+		"RenderAPI_None"..0,
+		"RenderAPI_OpenGL"..1,
+		"RenderAPI_Android_GLES"..2,
+		"RenderAPI_D3D11"..5
 	)
 
 	IntConstant(
 		"Button input types.",
 
-		"Button_A" _ 0x00000001,
-		"Button_B" _ 0x00000002,
-		"Button_RThumb" _ 0x00000004,
-		"Button_RShoulder" _ 0x00000008,
-		"Button_X" _ 0x00000100,
-		"Button_Y" _ 0x00000200,
-		"Button_LThumb" _ 0x00000400,
-		"Button_LShoulder" _ 0x00000800,
+		"Button_A"..0x00000001,
+		"Button_B"..0x00000002,
+		"Button_RThumb"..0x00000004,
+		"Button_RShoulder"..0x00000008,
+		"Button_X"..0x00000100,
+		"Button_Y"..0x00000200,
+		"Button_LThumb"..0x00000400,
+		"Button_LShoulder"..0x00000800,
 
 		// Navigation through DPad.
-		"Button_Up" _ 0x00010000,
-		"Button_Down" _ 0x00020000,
-		"Button_Left" _ 0x00040000,
-		"Button_Right" _ 0x00080000,
-		"Button_Enter" _ 0x00100000, // Start on XBox controller.
-		"Button_Back" _ 0x00200000 // Back on Xbox controller.
+		"Button_Up"..0x00010000,
+		"Button_Down"..0x00020000,
+		"Button_Left"..0x00040000,
+		"Button_Right"..0x00080000,
+		"Button_Enter"..0x00100000, // Start on XBox controller.
+		"Button_Back"..0x00200000 // Back on Xbox controller.
 	)
 
 	IntConstant(
@@ -168,34 +168,34 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"Touch_A" expr "ovrButton_A",
 	    "Touch_B" expr "ovrButton_B",
 	    "Touch_RThumb" expr "ovrButton_RThumb",
-	    "Touch_RIndexTrigger" _ 0x00000010,
+	    "Touch_RIndexTrigger"..0x00000010,
 	    "Touch_X" expr "ovrButton_X",
 	    "Touch_Y" expr "ovrButton_Y",
 	    "Touch_LThumb" expr "ovrButton_LThumb",
-	    "Touch_LIndexTrigger" _ 0x00001000,
+	    "Touch_LIndexTrigger"..0x00001000,
 
 	    // Finger pose state
 	    // Derived internally based on distance, proximity to sensors and filtering.
-	    "Touch_RIndexPointing" _ 0x00000020,
-	    "Touch_RThumbUp" _ 0x00000040,
-	    "Touch_LIndexPointing" _ 0x00002000,
-	    "Touch_LThumbUp" _ 0x00004000
+	    "Touch_RIndexPointing"..0x00000020,
+	    "Touch_RThumbUp"..0x00000040,
+	    "Touch_LIndexPointing"..0x00002000,
+	    "Touch_LThumbUp"..0x00004000
 	)
 
 	IntConstant(
 		"Which controller is connected; multiple can be connected at once.",
 
-		"ControllerType_LTouch" _ 0x01,
-		"ControllerType_RTouch" _ 0x02,
-		"ControllerType_Touch" _ 0x03,
-		"ControllerType_All" _ 0xff
+		"ControllerType_LTouch"..0x01,
+		"ControllerType_RTouch"..0x02,
+		"ControllerType_Touch"..0x03,
+		"ControllerType_All"..0xff
 	)
 
 	IntConstant(
 		"Names for the left and right hand array indexes.",
 
-		"Hand_Left" _ 0,
-		"Hand_Right" _ 1
+		"Hand_Left"..0,
+		"Hand_Right"..1
 	)
 
 	ovrResult(
@@ -216,7 +216,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		)}
 	    """,
 
-		nullable _ const _ ovrInitParams_p.IN(
+		nullable..const..ovrInitParams_p.IN(
 			"params",
 			"an ##OVRInitParams struct that cpecifies custom initialization options. May be $NULL to indicate default options."
 		),
@@ -264,7 +264,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		ovrErrorInfo_p.OUT("errorInfo", "The last ##OVRErrorInfo for the current thread")
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetVersionString",
 		"""
 		Returns the version string representing the LibOVRRT version.
@@ -280,7 +280,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	    returnDoc = "a UTF8-encoded null-terminated version string"
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"TraceMessage",
 		"""
 		Writes a message string to the LibOVR tracing mechanism (if enabled).
@@ -289,7 +289,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		""",
 
 		int.IN("level", "an {@code ovrLogLevel} constant", LogLevels),
-		const _ charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
+		const..charUTF8_p.IN("message", "a UTF8-encoded null-terminated string"),
 
 		returnDoc = "the {@code strlen} of the message or a negative value if the message is too large"
 	)
@@ -305,7 +305,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
         #Initialize() must have first been called in order for this to succeed, otherwise ovrHmdDesc::Type will be reported as #Hmd_None.
         """,
 
-        nullable _ ovrHmd.IN(
+        nullable..ovrHmd.IN(
 	        "hmd",
 	        """
 	        an {@code ovrHmd} previously returned by #Create(), else $NULL in which case this function detects whether an HMD is present and returns its info if
@@ -325,7 +325,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		in an error return value if the previous {@code Hmd} has not been destroyed.
 	    """,
 
-	    Check(1) _ ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
+	    Check(1)..ovrHmd_p.OUT("pHmd", "a pointer to an {@code ovrHmd} which will be written to upon success."),
 	    ovrGraphicsLuid_p.OUT(
 		    "luid",
 		    """
@@ -475,19 +475,19 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	IntConstant(
 		"Describes layer types that can be passed to #SubmitFrame(). Each layer type has an associated struct, such as ##OVRLayerEyeFov.",
 
-		"LayerType_Disabled" _ 0,
-		"LayerType_EyeFov" _ 1,
-		"LayerType_EyeFovDepth" _ 2,
-		"LayerType_QuadInWorld" _ 3,
-		"LayerType_QuadHeadLocked" _ 4,
-		"LayerType_Direct" _ 6
+		"LayerType_Disabled"..0,
+		"LayerType_EyeFov"..1,
+		"LayerType_EyeFovDepth"..2,
+		"LayerType_QuadInWorld"..3,
+		"LayerType_QuadHeadLocked"..4,
+		"LayerType_Direct"..6
 	)
 
 	IntConstant(
 		"Identifies flags used by ##OVRLayerHeader and which are passed to #SubmitFrame().",
 
-		"LayerFlag_HighQuality" _ 0x01,
-		"LayerFlag_TextureOriginAtBottomLeft" _ 0x02
+		"LayerFlag_HighQuality"..0x01,
+		"LayerFlag_TextureOriginAtBottomLeft"..0x02
 	)
 
 	// ----------------
@@ -498,7 +498,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 	    "Destroys an ##OVRSwapTextureSet and frees all the resources associated with it.",
 
 	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-	    nullable _ ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
+	    nullable..ovrSwapTextureSet_p.IN("textureSet", "the ##OVRSwapTextureSet to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	void(
@@ -506,7 +506,7 @@ val OVR = "OVR".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_", pr
 		"Destroys a mirror texture previously created by one of the mirror texture creation functions.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		nullable _ ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
+		nullable..ovrTexture_p.IN("mirrorTexture", "the ##OVRTexture to destroy. If it is $NULL then this function has no effect.")
 	)
 
 	ovrSizei(
@@ -577,14 +577,14 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
 		unsigned_int.IN("frameIndex", "the targeted application frame index, or 0 to refer to one frame after the last time #SubmitFrame() was called"),
-		nullable _ const _ ovrViewScaleDesc_p.IN(
+		nullable..const..ovrViewScaleDesc_p.IN(
 			"viewScaleDesc",
 			"""
 			provides additional information needed only if {@code layerPtrList} contains a #LayerType_QuadInWorld or #LayerType_QuadHeadLocked. If $NULL, a
 			default version is used based on the current configuration and a 1.0 world scale.
 			"""
 		),
-		const _ ovrLayerHeader_p_const_p.IN(
+		const..ovrLayerHeader_p_const_p.IN(
 			"layerPtrList",
 			"""
 			a list of {@code ovrLayer} pointers, which can include $NULL entries to indicate that any previously shown layer at that index is to not be
@@ -592,7 +592,7 @@ ovrResult result = ovr_SubmitFrame(hmd, frameIndex, nullptr, layers, 2);""")}
 			its type. A $NULL {@code layerPtrList} entry in the array indicates the absence of the given layer.
 			"""
 		),
-		AutoSize("layerPtrList") _ unsigned_int.IN(
+		AutoSize("layerPtrList")..unsigned_int.IN(
 			"layerCount",
 			"""
 			the number of valid elements in {@code layerPtrList}. The maximum supported {@code layerCount} is not currently specified, but may be specified in
@@ -660,20 +660,20 @@ ovrPerfHudMode PerfHudMode = ovrPerfHud_LatencyTiming;
 ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
-		"PerfHud_Off" _ 0,
-		"PerfHud_LatencyTiming" _ 1,
-	    "PerfHud_RenderTiming" _ 2,
-		"PerfHud_PerfHeadroom" _ 3,
-		"PerfHud_VersionInfo" _ 4
+		"PerfHud_Off"..0,
+		"PerfHud_LatencyTiming"..1,
+	    "PerfHud_RenderTiming"..2,
+		"PerfHud_PerfHeadroom"..3,
+		"PerfHud_VersionInfo"..4
 	)
 
 	IntConstant(
 		"Visual properties of the stereo guide.",
 
-	    "DebugHudStereo_Off" _ 0,  ///< Turns off the Stereo Debug HUD
-		"DebugHudStereo_Quad" _ 1,  ///< Renders Quad in world for Stereo Debugging
-        "DebugHudStereo_QuadWithCrosshair" _ 2,  ///< Renders Quad+crosshair in world for Stereo Debugging
-        "DebugHudStereo_CrosshairAtInfinity" _ 3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
+	    "DebugHudStereo_Off"..0,  ///< Turns off the Stereo Debug HUD
+		"DebugHudStereo_Quad"..1,  ///< Renders Quad in world for Stereo Debugging
+        "DebugHudStereo_QuadWithCrosshair"..2,  ///< Renders Quad+crosshair in world for Stereo Debugging
+        "DebugHudStereo_CrosshairAtInfinity"..3  ///< Renders screen-space crosshair at infinity for Stereo Debugging
 	)
 
 	void(
@@ -698,7 +698,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"Reads a boolean property.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid for only the call"),
 		ovrBool.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 	    returnDoc = "the property interpreted as a boolean value. Returns {@code defaultVal} if the property doesn't exist."
@@ -713,7 +713,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		ovrBool.IN("value", "the value to write"),
 
 	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -724,7 +724,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"Reads an integer property.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 	    returnDoc = "the property interpreted as an integer value. Returns {@code defaultVal} if the property doesn't exist."
@@ -739,7 +739,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		int.IN("value", "the value to write"),
 
 	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -750,7 +750,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"Reads a float property.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 		returnDoc = "the property interpreted as a float value. Returns {@code defaultVal} if the property doesn't exist."
@@ -765,7 +765,7 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float.IN("value", "the value to write"),
 
 		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
@@ -776,9 +776,9 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"Reads a float array property.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write to"),
-		AutoSize("values") _ unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
+		AutoSize("values")..unsigned_int.IN("valuesCapacity", "the maximum number of elements to write to the values array"),
 
 	    returnDoc = "the number of elements read, or 0 if property doesn't exist or is empty"
 	)
@@ -788,14 +788,14 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		"Writes or creates a float array property.",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
 		float_p.OUT("values", "an array of float to write from"),
-		AutoSize("values") _ unsigned_int.IN("valuesSize", "the number of elements to write"),
+		AutoSize("values")..unsigned_int.IN("valuesSize", "the number of elements to write"),
 
 		returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetString",
 		"""
 		Reads a string property.
@@ -804,8 +804,8 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-		nullable _ const _ charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		nullable..const..charUTF8_p.IN("defaultVal", "specifes the value to return if the property couldn't be read"),
 
 	    returnDoc =
 		"""
@@ -823,8 +823,8 @@ ovr_SetInt(Hmd, OVR_PERF_HUD_MODE, (int)PerfHudMode);""")}
 		""",
 
 		ovrHmd.IN("hmddesc", "an {@code ovrHmd} previously returned by #Create()"),
-		const _ charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
-		const _ charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
+		const..charASCII_p.IN("propertyName", "the name of the property, which needs to be valid only for the call"),
+		const..charASCII_p.IN("value", "the string property, which only needs to be valid for the duration of the call"),
 
 	    returnDoc = "true if successful, otherwise false. A false result should only occur if the property name is empty or if the property is read-only."
 	)

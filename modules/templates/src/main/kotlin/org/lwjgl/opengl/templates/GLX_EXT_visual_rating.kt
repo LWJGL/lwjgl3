@@ -26,7 +26,7 @@ val GLX_EXT_visual_rating = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of GLX#GetConfig() and by the {@code attrib_list} parameter of GLX#ChooseVisual().",
 
-		"VISUAL_CAVEAT_EXT" _ 0x20
+		"VISUAL_CAVEAT_EXT"..0x20
 	)
 
 	IntConstant(
@@ -35,9 +35,9 @@ val GLX_EXT_visual_rating = "GLXEXTVisualRating".nativeClassGLX("GLX_EXT_visual_
 		parameter of GLX#ChooseVisual() (following the #VISUAL_CAVEAT_EXT token).
 		""",
 
-		"NONE_EXT" _ 0x8000,
-		"SLOW_VISUAL_EXT" _ 0x8001,
-		"NON_CONFORMANT_VISUAL_EXT" _ 0x800D
+		"NONE_EXT"..0x8000,
+		"SLOW_VISUAL_EXT"..0x8001,
+		"NON_CONFORMANT_VISUAL_EXT"..0x800D
 	)
 
 }

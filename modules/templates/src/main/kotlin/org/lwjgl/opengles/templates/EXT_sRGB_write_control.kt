@@ -26,6 +26,6 @@ val EXT_sRGB_write_control = "EXTSRGBWriteControl".nativeClassGLES("EXT_sRGB_wri
 		GetInteger64v.
 		""",
 
-		"FRAMEBUFFER_SRGB_EXT" _ 0x8DB9
+		"FRAMEBUFFER_SRGB_EXT"..0x8DB9
 	)
 }

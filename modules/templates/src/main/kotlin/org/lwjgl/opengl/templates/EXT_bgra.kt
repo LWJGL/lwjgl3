@@ -21,7 +21,7 @@ val EXT_bgra = "EXTBGRA".nativeClassGL("EXT_bgra", postfix = EXT) {
 	IntConstant(
 		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
-		"BGR_EXT" _ 0x80E0,
-		"BGRA_EXT" _ 0x80E1
+		"BGR_EXT"..0x80E0,
+		"BGRA_EXT"..0x80E1
 	)
 }

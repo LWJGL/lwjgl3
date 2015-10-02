@@ -17,43 +17,43 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 
 	IntConstant(
 		"UseFontOutlines format.",
-		"FONT_LINES" _ 0,
-		"FONT_POLYGONS" _ 1
+		"FONT_LINES"..0,
+		"FONT_POLYGONS"..1
 	)
 
 	IntConstant(
 		"SwapLayerBuffers flags.",
-		"SWAP_MAIN_PLANE" _ 0x00000001,
-		"SWAP_OVERLAY1" _ 0x00000002,
-		"SWAP_OVERLAY2" _ 0x00000004,
-		"SWAP_OVERLAY3" _ 0x00000008,
-		"SWAP_OVERLAY4" _ 0x00000010,
-		"SWAP_OVERLAY5" _ 0x00000020,
-		"SWAP_OVERLAY6" _ 0x00000040,
-		"SWAP_OVERLAY7" _ 0x00000080,
-		"SWAP_OVERLAY8" _ 0x00000100,
-		"SWAP_OVERLAY9" _ 0x00000200,
-		"SWAP_OVERLAY10" _ 0x00000400,
-		"SWAP_OVERLAY11" _ 0x00000800,
-		"SWAP_OVERLAY12" _ 0x00001000,
-		"SWAP_OVERLAY13" _ 0x00002000,
-		"SWAP_OVERLAY14" _ 0x00004000,
-		"SWAP_OVERLAY15" _ 0x00008000,
-		"SWAP_UNDERLAY1" _ 0x00010000,
-		"SWAP_UNDERLAY2" _ 0x00020000,
-		"SWAP_UNDERLAY3" _ 0x00040000,
-		"SWAP_UNDERLAY4" _ 0x00080000,
-		"SWAP_UNDERLAY5" _ 0x00100000,
-		"SWAP_UNDERLAY6" _ 0x00200000,
-		"SWAP_UNDERLAY7" _ 0x00400000,
-		"SWAP_UNDERLAY8" _ 0x00800000,
-		"SWAP_UNDERLAY9" _ 0x01000000,
-		"SWAP_UNDERLAY10" _ 0x02000000,
-		"SWAP_UNDERLAY11" _ 0x04000000,
-		"SWAP_UNDERLAY12" _ 0x08000000,
-		"SWAP_UNDERLAY13" _ 0x10000000,
-		"SWAP_UNDERLAY14" _ 0x20000000,
-		"SWAP_UNDERLAY15" _ 0x40000000
+		"SWAP_MAIN_PLANE"..0x00000001,
+		"SWAP_OVERLAY1"..0x00000002,
+		"SWAP_OVERLAY2"..0x00000004,
+		"SWAP_OVERLAY3"..0x00000008,
+		"SWAP_OVERLAY4"..0x00000010,
+		"SWAP_OVERLAY5"..0x00000020,
+		"SWAP_OVERLAY6"..0x00000040,
+		"SWAP_OVERLAY7"..0x00000080,
+		"SWAP_OVERLAY8"..0x00000100,
+		"SWAP_OVERLAY9"..0x00000200,
+		"SWAP_OVERLAY10"..0x00000400,
+		"SWAP_OVERLAY11"..0x00000800,
+		"SWAP_OVERLAY12"..0x00001000,
+		"SWAP_OVERLAY13"..0x00002000,
+		"SWAP_OVERLAY14"..0x00004000,
+		"SWAP_OVERLAY15"..0x00008000,
+		"SWAP_UNDERLAY1"..0x00010000,
+		"SWAP_UNDERLAY2"..0x00020000,
+		"SWAP_UNDERLAY3"..0x00040000,
+		"SWAP_UNDERLAY4"..0x00080000,
+		"SWAP_UNDERLAY5"..0x00100000,
+		"SWAP_UNDERLAY6"..0x00200000,
+		"SWAP_UNDERLAY7"..0x00400000,
+		"SWAP_UNDERLAY8"..0x00800000,
+		"SWAP_UNDERLAY9"..0x01000000,
+		"SWAP_UNDERLAY10"..0x02000000,
+		"SWAP_UNDERLAY11"..0x04000000,
+		"SWAP_UNDERLAY12"..0x08000000,
+		"SWAP_UNDERLAY13"..0x10000000,
+		"SWAP_UNDERLAY14"..0x20000000,
+		"SWAP_UNDERLAY15"..0x40000000
 	)
 
 	HGLRC(
@@ -136,8 +136,8 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 		the device identified by device. You can also use MakeCurrent to change the calling thread's current rendering context so it's no longer current.
 		""",
 
-		nullable _ HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
-		nullable _ HGLRC.IN(
+		nullable..HDC.IN("hdc", "handle to a device context. Subsequent OpenGL calls made by the calling thread are drawn on the device identified by {@code dc}."),
+		nullable..HGLRC.IN(
 			"context",
 			"""
 			handle to an OpenGL rendering context that the function sets as the calling thread's rendering context. If {@code context} is $NULL, the function
@@ -172,7 +172,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 	WINGDIAPI DWORD WINAPI SwapMultipleBuffers(UINT, CONST WGLSWAP *);
 	*/
 
-	NativeName("wglUseFontBitmapsW") _ BOOL(
+	NativeName("wglUseFontBitmapsW")..BOOL(
 		"UseFontBitmaps",
 		"""
 		Creates a set of bitmap display lists for use in the current OpenGL rendering context. The set of bitmap display lists is based on the glyphs in the
@@ -187,7 +187,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 		DWORD.IN("listBase", "the starting display list")
 	)
 
-	NativeName("wglUseFontOutlinesW") _ BOOL(
+	NativeName("wglUseFontOutlinesW")..BOOL(
 		"UseFontOutlines",
 		"""
 		Creates a set of display lists, one for each glyph of the currently selected outline font of a device context, for use with the current rendering
@@ -209,7 +209,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 			"""
 		),
 		DWORD.IN("first", "the first of the set of glyphs that form the font outline display lists"),
-		AutoSize("glyphMetrics") _ DWORD.IN(
+		AutoSize("glyphMetrics")..DWORD.IN(
 			"count",
 			"""
 			the number of glyphs in the set of glyphs used to form the font outline display lists. The {@code wglUseFontOutlines} function creates count display
@@ -239,7 +239,7 @@ val WGL = "WGL".nativeClassWGL("WGL") {
 			""",
 			"#FONT_LINES #FONT_POLYGONS"
 		),
-		nullable _ StructBuffer _ LPGLYPHMETRICSFLOAT.OUT(
+		nullable..StructBuffer..LPGLYPHMETRICSFLOAT.OUT(
 			"glyphMetrics",
 			"""
 			an array of {@code count} ##GLYPHMETRICSFLOAT structures that is to receive the metrics of the glyphs. When {@code glyphMetrics} is $NULL, no

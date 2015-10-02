@@ -28,35 +28,35 @@ val AMD_sparse_texture = "AMDSparseTexture".nativeClassGL("AMD_sparse_texture", 
 	IntConstant(
 		"Accepted by the {@code flags} parameter to TexStorageSparseAMD and TextureStorageSparseAMD.",
 
-		"TEXTURE_STORAGE_SPARSE_BIT_AMD" _ 0x00000001
+		"TEXTURE_STORAGE_SPARSE_BIT_AMD"..0x00000001
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetInternalformativ.",
 
-		"VIRTUAL_PAGE_SIZE_X_AMD" _ 0x9195,
-		"VIRTUAL_PAGE_SIZE_Y_AMD" _ 0x9196,
-		"VIRTUAL_PAGE_SIZE_Z_AMD" _ 0x9197
+		"VIRTUAL_PAGE_SIZE_X_AMD"..0x9195,
+		"VIRTUAL_PAGE_SIZE_Y_AMD"..0x9196,
+		"VIRTUAL_PAGE_SIZE_Z_AMD"..0x9197
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetDoublev, GetInteger64v, and GetBooleanv.",
 
-		"MAX_SPARSE_TEXTURE_SIZE_AMD" _ 0x9198,
-		"MAX_SPARSE_3D_TEXTURE_SIZE_AMD" _ 0x9199,
-		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS" _ 0x919A
+		"MAX_SPARSE_TEXTURE_SIZE_AMD"..0x9198,
+		"MAX_SPARSE_3D_TEXTURE_SIZE_AMD"..0x9199,
+		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS"..0x919A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexParameter{if}v.",
 
-		"MIN_SPARSE_LEVEL_AMD" _ 0x919B
+		"MIN_SPARSE_LEVEL_AMD"..0x919B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameter{if}{v} and GetTexParameter{if}v.",
 
-		"MIN_LOD_WARNING_AMD" _ 0x919C
+		"MIN_LOD_WARNING_AMD"..0x919C
 	)
 
 	void(

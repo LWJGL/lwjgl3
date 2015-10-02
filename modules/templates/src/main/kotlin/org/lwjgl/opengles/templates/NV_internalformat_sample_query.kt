@@ -36,10 +36,10 @@ val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGL
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformatSampleivNV.",
 
-		"MULTISAMPLES_NV" _ 0x9371,
-		"SUPERSAMPLE_SCALE_X_NV" _ 0x9372,
-		"SUPERSAMPLE_SCALE_Y_NV" _ 0x9373,
-		"CONFORMANT_NV" _ 0x9374
+		"MULTISAMPLES_NV"..0x9371,
+		"SUPERSAMPLE_SCALE_X_NV"..0x9372,
+		"SUPERSAMPLE_SCALE_Y_NV"..0x9373,
+		"CONFORMANT_NV"..0x9374
 	)
 
 	void(
@@ -50,7 +50,7 @@ val NV_internalformat_sample_query = "NVInternalformatSampleQuery".nativeClassGL
 		GLenum.IN("internalformat", ""),
 		GLsizei.IN("samples", ""),
 		GLenum.IN("pname", ""),
-		AutoSize("params") _ GLsizei.IN("bufSize", ""),
+		AutoSize("params")..GLsizei.IN("bufSize", ""),
 		GLint_p.OUT("params", "")
 	)
 }

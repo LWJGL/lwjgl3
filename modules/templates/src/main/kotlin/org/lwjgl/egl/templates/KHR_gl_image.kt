@@ -21,7 +21,7 @@ val KHR_gl_renderbuffer_image = "KHRGLRenderbufferImage".nativeClassEGL("KHR_gl_
 	IntConstant(
 		"",
 
-		"GL_RENDERBUFFER_KHR" _ 0x30B9
+		"GL_RENDERBUFFER_KHR"..0x30B9
 	)
 }
 
@@ -39,8 +39,8 @@ val KHR_gl_texture_2D_image = "KHRGLTexture2DImage".nativeClassEGL("KHR_gl_textu
 	IntConstant(
 		"",
 
-		"GL_TEXTURE_2D_KHR" _ 0x30B1,
-		"GL_TEXTURE_LEVEL_KHR" _ 0x30BC
+		"GL_TEXTURE_2D_KHR"..0x30B1,
+		"GL_TEXTURE_LEVEL_KHR"..0x30BC
 	)
 }
 
@@ -58,8 +58,8 @@ val KHR_gl_texture_3D_image = "KHRGLTexture3DImage".nativeClassEGL("KHR_gl_textu
 	IntConstant(
 		"",
 
-		"GL_TEXTURE_3D_KHR" _ 0x30B2,
-		"GL_TEXTURE_ZOFFSET_KHR" _ 0x30BD
+		"GL_TEXTURE_3D_KHR"..0x30B2,
+		"GL_TEXTURE_ZOFFSET_KHR"..0x30BD
 	)
 }
 
@@ -76,11 +76,11 @@ val KHR_gl_texture_cubemap_image = "KHRGLTextureCubemapImage".nativeClassEGL("KH
 	IntConstant(
 		"",
 
-		"GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR" _ 0x30B3,
-		"GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR" _ 0x30B4,
-		"GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR" _ 0x30B5,
-		"GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR" _ 0x30B6,
-		"GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR" _ 0x30B7,
-		"GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR" _ 0x30B8
+		"GL_TEXTURE_CUBE_MAP_POSITIVE_X_KHR"..0x30B3,
+		"GL_TEXTURE_CUBE_MAP_NEGATIVE_X_KHR"..0x30B4,
+		"GL_TEXTURE_CUBE_MAP_POSITIVE_Y_KHR"..0x30B5,
+		"GL_TEXTURE_CUBE_MAP_NEGATIVE_Y_KHR"..0x30B6,
+		"GL_TEXTURE_CUBE_MAP_POSITIVE_Z_KHR"..0x30B7,
+		"GL_TEXTURE_CUBE_MAP_NEGATIVE_Z_KHR"..0x30B8
 	)
 }

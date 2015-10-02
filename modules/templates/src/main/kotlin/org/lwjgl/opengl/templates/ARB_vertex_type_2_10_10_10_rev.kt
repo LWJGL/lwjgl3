@@ -25,7 +25,7 @@ val ARB_vertex_type_2_10_10_10_rev = "ARBVertexType2_10_10_10_REV".nativeClassGL
 		VertexAttribP{1234}ui, VertexP*, TexCoordP*, MultiTexCoordP*, NormalP3ui, ColorP*, SecondaryColorP and VertexAttribP*.
 		""",
 
-		"INT_2_10_10_10_REV" _ 0x8D9F
+		"INT_2_10_10_10_REV"..0x8D9F
 	)
 
 	GL33 reuse "VertexP2ui"

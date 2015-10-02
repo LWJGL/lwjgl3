@@ -27,9 +27,9 @@ val EXT_multi_draw_indirect = "EXTMultiDrawIndirect".nativeClassGLES("EXT_multi_
 		"",
 
 		GLenum.IN("mode", ""),
-		DRAW_INDIRECT_BUFFER _ MultiType(
+		DRAW_INDIRECT_BUFFER..MultiType(
 			PointerMapping.DATA_INT
-		) _ Check("drawcount * (stride == 0 ? (4 * 4) : stride)") _ const _ void_p.IN("indirect", ""),
+		)..Check("drawcount * (stride == 0 ? (4 * 4) : stride)")..const..void_p.IN("indirect", ""),
 		GLsizei.IN("drawcount", ""),
 		GLsizei.IN("stride", "")
 	)
@@ -40,9 +40,9 @@ val EXT_multi_draw_indirect = "EXTMultiDrawIndirect".nativeClassGLES("EXT_multi_
 
 		GLenum.IN("mode", ""),
 		GLenum.IN("type", ""),
-		DRAW_INDIRECT_BUFFER _ MultiType(
+		DRAW_INDIRECT_BUFFER..MultiType(
 			PointerMapping.DATA_INT
-		) _ Check("drawcount * (stride == 0 ? (5 * 4) : stride)") _ const _ void_p.IN("indirect", ""),
+		)..Check("drawcount * (stride == 0 ? (5 * 4) : stride)")..const..void_p.IN("indirect", ""),
 		GLsizei.IN("drawcount", ""),
 		GLsizei.IN("stride", "")
 	)

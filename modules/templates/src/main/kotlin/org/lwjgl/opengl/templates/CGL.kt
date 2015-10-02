@@ -17,224 +17,224 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 	val PixelFormatAttribs = IntConstant(
 		"Attribute names for #ChoosePixelFormat() and #DescribePixelFormat().",
 
-		"PFAAllRenderers" _ 1,
-		"PFATripleBuffer" _ 3,
-		"PFADoubleBuffer" _ 5,
-		"PFAStereo" _ 6,
-		"PFAColorSize" _ 8,
-		"PFAAlphaSize" _ 11,
-		"PFADepthSize" _ 12,
-		"PFAStencilSize" _ 13,
-		"PFAMinimumPolicy" _ 51,
-		"PFAMaximumPolicy" _ 52,
-		"PFASampleBuffers" _ 55,
-		"PFASamples" _ 56,
-		"PFAColorFloat" _ 58,
-		"PFAMultisample" _ 59,
-		"PFASupersample" _ 60,
-		"PFASampleAlpha" _ 61,
-		"PFARendererID" _ 70,
-		"PFASingleRenderer" _ 71,
-		"PFANoRecovery" _ 72,
-		"PFAAccelerated" _ 73,
-		"PFAClosestPolicy" _ 74,
-		"PFABackingStore" _ 76,
-		"PFABackingVolatile" _ 77,
-		"PFADisplayMask" _ 84,
-		"PFAAllowOfflineRenderers" _ 96,
-		"PFAAcceleratedCompute" _ 97,
-		"PFAOpenGLProfile" _ 99,
-		"PFASupportsAutomaticGraphicsSwitching" _ 101,
-		"PFAVirtualScreenCount" _ 128,
-		"PFAAuxBuffers" _ 7,
-		"PFAAccumSize" _ 14,
-		"PFAOffScreen" _ 53,
-		"PFAAuxDepthStencil" _ 57,
-		"PFAWindow" _ 80,
-		"PFACompliant" _ 83,
-		"PFAPBuffer" _ 90,
-		"PFARemotePBuffer" _ 91,
-		"PFARobust" _ 75,
-		"PFAMPSafe" _ 78,
-		"PFAMultiScreen" _ 81,
-		"PFAFullScreen" _ 54
+		"PFAAllRenderers"..1,
+		"PFATripleBuffer"..3,
+		"PFADoubleBuffer"..5,
+		"PFAStereo"..6,
+		"PFAColorSize"..8,
+		"PFAAlphaSize"..11,
+		"PFADepthSize"..12,
+		"PFAStencilSize"..13,
+		"PFAMinimumPolicy"..51,
+		"PFAMaximumPolicy"..52,
+		"PFASampleBuffers"..55,
+		"PFASamples"..56,
+		"PFAColorFloat"..58,
+		"PFAMultisample"..59,
+		"PFASupersample"..60,
+		"PFASampleAlpha"..61,
+		"PFARendererID"..70,
+		"PFASingleRenderer"..71,
+		"PFANoRecovery"..72,
+		"PFAAccelerated"..73,
+		"PFAClosestPolicy"..74,
+		"PFABackingStore"..76,
+		"PFABackingVolatile"..77,
+		"PFADisplayMask"..84,
+		"PFAAllowOfflineRenderers"..96,
+		"PFAAcceleratedCompute"..97,
+		"PFAOpenGLProfile"..99,
+		"PFASupportsAutomaticGraphicsSwitching"..101,
+		"PFAVirtualScreenCount"..128,
+		"PFAAuxBuffers"..7,
+		"PFAAccumSize"..14,
+		"PFAOffScreen"..53,
+		"PFAAuxDepthStencil"..57,
+		"PFAWindow"..80,
+		"PFACompliant"..83,
+		"PFAPBuffer"..90,
+		"PFARemotePBuffer"..91,
+		"PFARobust"..75,
+		"PFAMPSafe"..78,
+		"PFAMultiScreen"..81,
+		"PFAFullScreen"..54
 	).javaDocLinks
 
 	val RendererProperties = IntConstant(
 		"Property names for #DescribeRenderer().",
 
-		"RPOffScreen" _ 53,
-		"RPRendererID" _ 70,
-		"RPAccelerated" _ 73,
-		"RPBackingStore" _ 76,
-		"RPWindow" _ 80,
-		"RPCompliant" _ 83,
-		"RPDisplayMask" _ 84,
-		"RPBufferModes" _ 100,
-		"RPColorModes" _ 103,
-		"RPAccumModes" _ 104,
-		"RPDepthModes" _ 105,
-		"RPStencilModes" _ 106,
-		"RPMaxAuxBuffers" _ 107,
-		"RPMaxSampleBuffers" _ 108,
-		"RPMaxSamples" _ 109,
-		"RPSampleModes" _ 110,
-		"RPSampleAlpha" _ 111,
-		"RPVideoMemory" _ 120,
-		"RPTextureMemory" _ 121,
-		"RPGPUVertProcCapable" _ 122,
-		"RPGPUFragProcCapable" _ 123,
-		"RPRendererCount" _ 128,
-		"RPOnline" _ 129,
-		"RPAcceleratedCompute" _ 130,
-		"RPVideoMemoryMegabytes" _ 131,
-		"RPTextureMemoryMegabytes" _ 132,
-		"RPRobust" _ 75,
-		"RPMPSafe" _ 78,
-		"RPMultiScreen" _ 81,
-		"RPFullScreen" _ 54
+		"RPOffScreen"..53,
+		"RPRendererID"..70,
+		"RPAccelerated"..73,
+		"RPBackingStore"..76,
+		"RPWindow"..80,
+		"RPCompliant"..83,
+		"RPDisplayMask"..84,
+		"RPBufferModes"..100,
+		"RPColorModes"..103,
+		"RPAccumModes"..104,
+		"RPDepthModes"..105,
+		"RPStencilModes"..106,
+		"RPMaxAuxBuffers"..107,
+		"RPMaxSampleBuffers"..108,
+		"RPMaxSamples"..109,
+		"RPSampleModes"..110,
+		"RPSampleAlpha"..111,
+		"RPVideoMemory"..120,
+		"RPTextureMemory"..121,
+		"RPGPUVertProcCapable"..122,
+		"RPGPUFragProcCapable"..123,
+		"RPRendererCount"..128,
+		"RPOnline"..129,
+		"RPAcceleratedCompute"..130,
+		"RPVideoMemoryMegabytes"..131,
+		"RPTextureMemoryMegabytes"..132,
+		"RPRobust"..75,
+		"RPMPSafe"..78,
+		"RPMultiScreen"..81,
+		"RPFullScreen"..54
 	).javaDocLinks
 
 	val ContextOptions = IntConstant(
 		"Enable names for #Enable(), #Disable(), and #IsEnabled().",
 
-		"CESwapRectangle" _ 201,
-		"CESwapLimit" _ 203,
-		"CERasterization" _ 221,
-		"CEStateValidation" _ 301,
-		"CESurfaceBackingSize" _ 305,
-		"CEDisplayListOptimization" _ 307,
-		"CEMPEngine" _ 313
+		"CESwapRectangle"..201,
+		"CESwapLimit"..203,
+		"CERasterization"..221,
+		"CEStateValidation"..301,
+		"CESurfaceBackingSize"..305,
+		"CEDisplayListOptimization"..307,
+		"CEMPEngine"..313
 	).javaDocLinks
 
 	val ContextParameters = IntConstant(
 		"Parameter names for #SetParameter() and #GetParameter().",
 
-		"CPSwapRectangle" _ 200,
-		"CPSwapInterval" _ 222,
-		"CPDispatchTableSize" _ 224,
-		"CPClientStorage" _ 226,
-		"CPSurfaceTexture" _ 228,
-		"CPSurfaceOrder" _ 235,
-		"CPSurfaceOpacity" _ 236,
-		"CPSurfaceBackingSize" _ 304,
-		"CPSurfaceSurfaceVolatile" _ 306,
-		"CPReclaimResources" _ 308,
-		"CPCurrentRendererID" _ 309,
-		"CPGPUVertexProcessing" _ 310,
-		"CPGPUFragmentProcessing" _ 311,
-		"CPHasDrawable" _ 314,
-		"CPMPSwapsInFlight" _ 315
+		"CPSwapRectangle"..200,
+		"CPSwapInterval"..222,
+		"CPDispatchTableSize"..224,
+		"CPClientStorage"..226,
+		"CPSurfaceTexture"..228,
+		"CPSurfaceOrder"..235,
+		"CPSurfaceOpacity"..236,
+		"CPSurfaceBackingSize"..304,
+		"CPSurfaceSurfaceVolatile"..306,
+		"CPReclaimResources"..308,
+		"CPCurrentRendererID"..309,
+		"CPGPUVertexProcessing"..310,
+		"CPGPUFragmentProcessing"..311,
+		"CPHasDrawable"..314,
+		"CPMPSwapsInFlight"..315
 	).javaDocLinks
 
 	val GlobalOptions = IntConstant(
 		"Option names for #SetGlobalOption() and #GetGlobalOption().",
 
-		"GOFormatCacheSize" _ 501,
-		"GOClearFormatCache" _ 502,
-		"GORetainRenderers" _ 503,
-		"GOResetLibrary" _ 504,
-		"GOUseErrorHandler" _ 505,
-		"GOUseBuildCache" _ 506
+		"GOFormatCacheSize"..501,
+		"GOClearFormatCache"..502,
+		"GORetainRenderers"..503,
+		"GOResetLibrary"..504,
+		"GOUseErrorHandler"..505,
+		"GOUseBuildCache"..506
 	).javaDocLinks
 
 	IntConstant(
 		"OpenGL Implementation Profiles.",
 
-		"OGLPVersion_Legacy" _ 0x1000,
-		"OGLPVersion_3_2_Core" _ 0x3200
+		"OGLPVersion_Legacy"..0x1000,
+		"OGLPVersion_3_2_Core"..0x3200
 	)
 
 	val Errors = IntConstant(
 		"CGL error return values.",
 
-		"NoError" _ 0,
-		"BadAttribute" _ 10000,
-		"BadProperty" _ 10001,
-		"BadPixelFormat" _ 10002,
-		"BadRendererInfo" _ 10003,
-		"BadContext" _ 10004,
-		"BadDrawable" _ 10005,
-		"BadDisplay" _ 10006,
-		"BadState" _ 10007,
-		"BadValue" _ 10008,
-		"BadMatch" _ 10009,
-		"BadEnumeration" _ 10010,
-		"BadOffScreen" _ 10011,
-		"BadFullScreen" _ 10012,
-		"BadWindow" _ 10013,
-		"BadAddress" _ 10014,
-		"BadCodeModule" _ 10015,
-		"BadAlloc" _ 10016,
-		"BadConnection" _ 10017
+		"NoError"..0,
+		"BadAttribute"..10000,
+		"BadProperty"..10001,
+		"BadPixelFormat"..10002,
+		"BadRendererInfo"..10003,
+		"BadContext"..10004,
+		"BadDrawable"..10005,
+		"BadDisplay"..10006,
+		"BadState"..10007,
+		"BadValue"..10008,
+		"BadMatch"..10009,
+		"BadEnumeration"..10010,
+		"BadOffScreen"..10011,
+		"BadFullScreen"..10012,
+		"BadWindow"..10013,
+		"BadAddress"..10014,
+		"BadCodeModule"..10015,
+		"BadAlloc"..10016,
+		"BadConnection"..10017
 	).javaDocLinks
 
 	IntConstant(
 		"Buffer modes.",
 
-		"MonoscopicBit" _ 0x00000001,
-		"StereoscopicBit" _ 0x00000002,
-		"SingleBufferBit" _ 0x00000004,
-		"DoubleBufferBit" _ 0x00000008,
-		"TripleBufferBit" _ 0x00000010
+		"MonoscopicBit"..0x00000001,
+		"StereoscopicBit"..0x00000002,
+		"SingleBufferBit"..0x00000004,
+		"DoubleBufferBit"..0x00000008,
+		"TripleBufferBit"..0x00000010
 	)
 
 	IntConstant(
 		"Depth and stencil buffer depths.",
 
-		"0Bit" _ 0x00000001,
-		"1Bit" _ 0x00000002,
-		"2Bit" _ 0x00000004,
-		"3Bit" _ 0x00000008,
-		"4Bit" _ 0x00000010,
-		"5Bit" _ 0x00000020,
-		"6Bit" _ 0x00000040,
-		"8Bit" _ 0x00000080,
-		"10Bit" _ 0x00000100,
-		"12Bit" _ 0x00000200,
-		"16Bit" _ 0x00000400,
-		"24Bit" _ 0x00000800,
-		"32Bit" _ 0x00001000,
-		"48Bit" _ 0x00002000,
-		"64Bit" _ 0x00004000,
-		"96Bit" _ 0x00008000,
-		"128Bit" _ 0x00010000
+		"0Bit"..0x00000001,
+		"1Bit"..0x00000002,
+		"2Bit"..0x00000004,
+		"3Bit"..0x00000008,
+		"4Bit"..0x00000010,
+		"5Bit"..0x00000020,
+		"6Bit"..0x00000040,
+		"8Bit"..0x00000080,
+		"10Bit"..0x00000100,
+		"12Bit"..0x00000200,
+		"16Bit"..0x00000400,
+		"24Bit"..0x00000800,
+		"32Bit"..0x00001000,
+		"48Bit"..0x00002000,
+		"64Bit"..0x00004000,
+		"96Bit"..0x00008000,
+		"128Bit"..0x00010000
 	)
 
 	IntConstant(
 		"Color and accumulation buffer formats.",
 
-		"RGB444Bit" _ 0x00000040,
-		"ARGB4444Bit" _ 0x00000080,
-		"RGB444A8Bit" _ 0x00000100,
-		"RGB555Bit" _ 0x00000200,
-		"ARGB1555Bit" _ 0x00000400,
-		"RGB555A8Bit" _ 0x00000800,
-		"RGB565Bit" _ 0x00001000,
-		"RGB565A8Bit" _ 0x00002000,
-		"RGB888Bit" _ 0x00004000,
-		"ARGB8888Bit" _ 0x00008000,
-		"RGB888A8Bit" _ 0x00010000,
-		"RGB101010Bit" _ 0x00020000,
-		"ARGB2101010Bit" _ 0x00040000,
-		"RGB101010_A8Bit" _ 0x00080000,
-		"RGB121212Bit" _ 0x00100000,
-		"ARGB12121212Bit" _ 0x00200000,
-		"RGB161616Bit" _ 0x00400000,
-		"RGBA16161616Bit" _ 0x00800000,
-		"RGBFloat64Bit" _ 0x01000000,
-		"RGBAFloat64Bit" _ 0x02000000,
-		"RGBFloat128Bit" _ 0x04000000,
-		"RGBAFloat128Bit" _ 0x08000000,
-		"RGBFloat256Bit" _ 0x10000000,
-		"RGBAFloat256Bit" _ 0x20000000
+		"RGB444Bit"..0x00000040,
+		"ARGB4444Bit"..0x00000080,
+		"RGB444A8Bit"..0x00000100,
+		"RGB555Bit"..0x00000200,
+		"ARGB1555Bit"..0x00000400,
+		"RGB555A8Bit"..0x00000800,
+		"RGB565Bit"..0x00001000,
+		"RGB565A8Bit"..0x00002000,
+		"RGB888Bit"..0x00004000,
+		"ARGB8888Bit"..0x00008000,
+		"RGB888A8Bit"..0x00010000,
+		"RGB101010Bit"..0x00020000,
+		"ARGB2101010Bit"..0x00040000,
+		"RGB101010_A8Bit"..0x00080000,
+		"RGB121212Bit"..0x00100000,
+		"ARGB12121212Bit"..0x00200000,
+		"RGB161616Bit"..0x00400000,
+		"RGBA16161616Bit"..0x00800000,
+		"RGBFloat64Bit"..0x01000000,
+		"RGBAFloat64Bit"..0x02000000,
+		"RGBFloat128Bit"..0x04000000,
+		"RGBAFloat128Bit"..0x08000000,
+		"RGBFloat256Bit"..0x10000000,
+		"RGBAFloat256Bit"..0x20000000
 	)
 
 	IntConstant(
 		"Sampling modes.",
 
-		"SupersampleBit" _ 0x00000001,
-		"MultisampleBit" _ 0x00000002
+		"SupersampleBit"..0x00000001,
+		"MultisampleBit"..0x00000002
 	)
 
 	// -----------------------------------------------
@@ -283,7 +283,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		"ChoosePixelFormat",
 		"Creates a pixel format object that satisfies the constraints of the specified buffer and renderer attributes.",
 
-		const _ CGLPixelFormatAttribute_p.IN(
+		const..CGLPixelFormatAttribute_p.IN(
 			"attribs",
 			"""
 			a 0 terminated array that contains a list of buffer and renderer attributes. Attributes can be Boolean or integer. If an attribute is integer, you
@@ -292,7 +292,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			""",
 			PixelFormatAttribs
 		),
-		nullable _ Check(1) _ CGLPixelFormatObj_p.OUT(
+		nullable..Check(1)..CGLPixelFormatObj_p.OUT(
 			"pix",
 			"""
 			the memory address of a pixel format object. On return, points to a new pixel format object that contains pixel format information and a list of
@@ -300,7 +300,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			pix is set to $NULL.
 			"""
 		),
-		Check(1) _ GLint_p.OUT(
+		Check(1)..GLint_p.OUT(
 			"npix",
 			"on return, points to the number of virtual screens referenced by pix. If pix is $NULL, the value of {@code npix} is set to 0."
 		)
@@ -323,7 +323,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			"the virtual screen number whose attribute value you want to retrieve. This value must be between 0 and the number of virtual screens minus one."
 		),
 		CGLPixelFormatAttribute.IN("attrib", "the attribute whose value you want to obtain", PixelFormatAttribs),
-		Check(1) _ GLint_p.OUT("value", "on return, points to the value of the attribute")
+		Check(1)..GLint_p.OUT("value", "on return, points to the value of the attribute")
 	)
 
 	void(
@@ -375,7 +375,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			information for all renderers in the system you must call CGLQueryRendererInfo once for each display bit.
 			"""
 		),
-		Check(1) _ CGLRendererInfoObj_p.OUT(
+		Check(1)..CGLRendererInfoObj_p.OUT(
 			"rend",
 			"""
 			the memory address of a renderer information object. On return, points to a renderer information object that describes all renderers that are able
@@ -383,7 +383,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			{@code rend} is set to $NULL. You must call #DestroyRendererInfo() when you no longer need this object.
 			"""
 		),
-		Check(1) _ GLint_p.OUT(
+		Check(1)..GLint_p.OUT(
 			"nrend",
 			"""
 			on return, points to the number of renderers described in the renderer information object. If {@code display_mask} does not specify any displays,
@@ -420,7 +420,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			"""
 		),
 		CGLRendererProperty.IN("prop", "the renderer property whose value you want to obtain", RendererProperties),
-		Check(1) _ GLint_p.OUT("value", "on return, points to the value of the requested property")
+		Check(1)..GLint_p.OUT("value", "on return, points to the value of the requested property")
 	)
 
 	// Context functions
@@ -438,7 +438,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			Pass $NULL to indicate that no sharing is to take place.
 			"""
 		),
-		Check(1) _ CGLContextObj_p.OUT(
+		Check(1)..CGLContextObj_p.OUT(
 			"ctx",
 			"""
 			the memory address of a context object. On return, points to a new context object with the buffers and attributes specified by the {@code pix}
@@ -570,7 +570,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 			maximum number of mipmap levels that can be represented with the given width and height.
 			"""
 		),
-		Check(1) _ CGLPBufferObj_p.OUT("pbuffer", "on return, points to a new pixel buffer object")
+		Check(1)..CGLPBufferObj_p.OUT("pbuffer", "on return, points to a new pixel buffer object")
 	)
 
 	CGLError(
@@ -599,11 +599,11 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		""",
 
 		CGLPBufferObj.IN("obj", "a pointer to the pixel buffer object"),
-		Check(1) _ GLsizei_p.OUT("width", "on return, points to the width, in pixels, of the pixel buffer"),
-		Check(1) _ GLsizei_p.OUT("height", "on return, points to the height, in pixels, of the pixel buffer"),
-		Check(1) _ GLenum_p.OUT("target", "on return, points to a constant that specifies the pixel buffer texture target"),
-		Check(1) _ GLenum_p.OUT("internalFormat", "on return, points to a constant that specifies the internal color format of the pixel buffer"),
-		Check(1) _ GLint_p.OUT("mipmap", "on return, points to the mipmap level of the pixel buffer or 0 if it doesn't use mipmaps")
+		Check(1)..GLsizei_p.OUT("width", "on return, points to the width, in pixels, of the pixel buffer"),
+		Check(1)..GLsizei_p.OUT("height", "on return, points to the height, in pixels, of the pixel buffer"),
+		Check(1)..GLenum_p.OUT("target", "on return, points to a constant that specifies the pixel buffer texture target"),
+		Check(1)..GLenum_p.OUT("internalFormat", "on return, points to a constant that specifies the internal color format of the pixel buffer"),
+		Check(1)..GLint_p.OUT("mipmap", "on return, points to the mipmap level of the pixel buffer or 0 if it doesn't use mipmaps")
 	)
 
 	CGLError(
@@ -714,7 +714,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		GLsizei.IN("width", "the width, in pixels, of the offscreen buffer"),
 		GLsizei.IN("height", "the height, in pixels, of the offscreen buffer"),
 		GLint.IN("rowbytes", "the number of bytes per row of the offscreen buffer, which must be greater than or equal to width times bytes per pixel"),
-		Check("rowbytes * height") _ void_p.IN(
+		Check("rowbytes * height")..void_p.IN(
 			"baseaddr",
 			"a pointer to a block of memory to use as the offscreen buffer. The size of the memory must be at least {@code rowbytes*height} bytes."
 		)
@@ -729,28 +729,28 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		""",
 
 		CGLContextObj.IN("ctx", "a rendering context"),
-		Check(1) _ GLsizei_p.OUT(
+		Check(1)..GLsizei_p.OUT(
 			"width",
 			"""
 			on return, points to the width, in pixels, of the offscreen buffer. If the rendering context is not attached to an offscreen drawable object, the
 			value of width is set to 0.
 			"""
 		),
-		Check(1) _ GLsizei_p.OUT(
+		Check(1)..GLsizei_p.OUT(
 			"height",
 			"""
 			on return, points to the height, in pixels, of the offscreen buffer. If the rendering context is not attached to an offscreen drawable object, the
 			value of height is set to 0.
 			"""
 		),
-		Check(1) _ GLint_p.OUT(
+		Check(1)..GLint_p.OUT(
 			"rowbytes",
 			"""
 			on return, points to the number of bytes per row of the offscreen buffer. If the context is not attached to an offscreen drawable object, the value
 			of rowbytes is set to 0.
 			"""
 		),
-		Check(1) _ voidptr_p.OUT(
+		Check(1)..voidptr_p.OUT(
 			"baseaddr",
 			"""
 			on return, points to the base address of the offscreen buffer. If the context is not attached to an offscreen drawable object, the value of
@@ -860,16 +860,16 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		""",
 
 		CGLContextObj.IN("ctx", "a rendering context"),
-		Check(1) _ CGLPBufferObj_p.OUT("pbuffer", "on return, points to the pixel buffer object attached to the rendering context"),
-		Check(1) _ GLenum_p.OUT(
+		Check(1)..CGLPBufferObj_p.OUT("pbuffer", "on return, points to the pixel buffer object attached to the rendering context"),
+		Check(1)..GLenum_p.OUT(
 			"face",
 			"""
 			on return, points to the cube map face that is set if the pixel buffer texture target type is GL13##GL_TEXTURE_CUBE_MAP; otherwise 0 for all other
 			texture target types.
 			"""
 		),
-		Check(1) _ GLint_p.OUT("level", "on return, points to the current mipmap level for drawing"),
-		Check(1) _ GLint_p.OUT("screen", "on return, points to the current virtual screen number, as set by the last valid call to #SetPBuffer()")
+		Check(1)..GLint_p.OUT("level", "on return, points to the current mipmap level for drawing"),
+		Check(1)..GLint_p.OUT("screen", "on return, points to the current virtual screen number, as set by the last valid call to #SetPBuffer()")
 	)
 
 	CGLError(
@@ -921,7 +921,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 
 		CGLContextObj.IN("ctx", "a rendering context"),
 		CGLContextEnable.IN("pname", "the option to query", ContextOptions),
-		Check(1) _ GLint_p.OUT("enable", "on return, enable is set to true if the option is enabled")
+		Check(1)..GLint_p.OUT("enable", "on return, enable is set to true if the option is enabled")
 	)
 
 	CGLError(
@@ -930,7 +930,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 
 		CGLContextObj.IN("ctx", "a rendering context"),
 		CGLContextParameter.IN("pname", "the parameter whose value you want to set", ContextParameters),
-		SingleValue("param") _ Check(1) _ const _ GLint_p.IN("params", "a pointer to the value to set the parameter to")
+		SingleValue("param")..Check(1)..const..GLint_p.IN("params", "a pointer to the value to set the parameter to")
 	)
 
 	CGLError(
@@ -939,7 +939,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 
 		CGLContextObj.IN("ctx", "a rendering context"),
 		CGLContextParameter.IN("pname", "the parameter whose value you want to retrieve", ContextParameters),
-		Check(1) _ GLint_p.OUT("params", "on return, points to the value of the parameter")
+		Check(1)..GLint_p.OUT("params", "on return, points to the value of the parameter")
 	)
 
 	// Virtual screen functions
@@ -976,7 +976,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		""",
 
 		CGLContextObj.IN("ctx", "a rendering context"),
-		Check(1) _ GLint_p.OUT(
+		Check(1)..GLint_p.OUT(
 			"screen",
 			"""
 			on return, points to the virtual screen associated with the context. The value is always 0 on a single-display system and –1 if the function fails
@@ -999,7 +999,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		"Sets the value of a global option.",
 
 		CGLGlobalOption.IN("pname", "the name of the option whose value you want to set", GlobalOptions),
-		SingleValue("param") _ Check(1) _ const _ GLint_p.IN("params", "the value to set the option to")
+		SingleValue("param")..Check(1)..const..GLint_p.IN("params", "the value to set the option to")
 	)
 
 	CGLError(
@@ -1007,7 +1007,7 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		"Retrieves the value of a global option.",
 
 		CGLGlobalOption.IN("pname", "the name of the option whose value you want to get", GlobalOptions),
-		Check(1) _ GLint_p.OUT("params", "on return, a pointer to the value of the option")
+		Check(1)..GLint_p.OUT("params", "on return, a pointer to the value of the option")
 	)
 
 	/*CGLError(
@@ -1059,13 +1059,13 @@ val CGL = "CGL".nativeClass(OPENGL_PACKAGE, prefix = "CGL", prefixMethod = "CGL"
 		"GetVersion",
 		"Gets the major and minor version numbers of the CGL library.",
 
-		Check(1) _ GLint_p.OUT("majorvers", "on return, points to the major version number of the CGL library"),
-		Check(1) _ GLint_p.OUT("minorvers", "on return, points to the minor version number of the CGL library")
+		Check(1)..GLint_p.OUT("majorvers", "on return, points to the major version number of the CGL library"),
+		Check(1)..GLint_p.OUT("minorvers", "on return, points to the minor version number of the CGL library")
 	)
 
 	// Convert an error code to a string
 
-	(const _ charASCII_p)(
+	(const..charASCII_p)(
 		"ErrorString",
 		"Returns a string that describes the specified result code.",
 

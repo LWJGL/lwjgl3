@@ -23,8 +23,8 @@ val ARB_copy_buffer = "ARBCopyBuffer".nativeClassGL("ARB_copy_buffer") {
 		Accepted by the target parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, GetBufferPointerv, MapBufferRange,
 		FlushMappedBufferRange, GetBufferParameteriv, BindBufferRange, BindBufferBase, and CopyBufferSubData.
 		""",
-		"COPY_READ_BUFFER" _ 0x8F36,
-		"COPY_WRITE_BUFFER" _ 0x8F37
+		"COPY_READ_BUFFER"..0x8F36,
+		"COPY_WRITE_BUFFER"..0x8F37
 	)
 
 	GL31 reuse "CopyBufferSubData"

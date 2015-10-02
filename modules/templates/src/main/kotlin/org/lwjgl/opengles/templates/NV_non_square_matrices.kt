@@ -20,12 +20,12 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 	IntConstant(
 		"Returned by GetActiveAttrib and GetActiveUniform.",
 
-		"FLOAT_MAT2x3_NV" _ 0x8B65,
-		"FLOAT_MAT2x4_NV" _ 0x8B66,
-		"FLOAT_MAT3x2_NV" _ 0x8B67,
-		"FLOAT_MAT3x4_NV" _ 0x8B68,
-		"FLOAT_MAT4x2_NV" _ 0x8B69,
-		"FLOAT_MAT4x3_NV" _ 0x8B6A
+		"FLOAT_MAT2x3_NV"..0x8B65,
+		"FLOAT_MAT2x4_NV"..0x8B66,
+		"FLOAT_MAT3x2_NV"..0x8B67,
+		"FLOAT_MAT3x4_NV"..0x8B68,
+		"FLOAT_MAT4x2_NV"..0x8B69,
+		"FLOAT_MAT4x3_NV"..0x8B6A
 	)
 
 	void(
@@ -33,9 +33,9 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 6 _ GLsizei.IN("count", ""),
+		AutoSize("value") / 6..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -43,9 +43,9 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 6 _ GLsizei.IN("count", ""),
+		AutoSize("value") / 6..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -53,9 +53,9 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 3 _ GLsizei.IN("count", ""),
+		AutoSize("value") shr 3..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -63,9 +63,9 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") shr 3 _ GLsizei.IN("count", ""),
+		AutoSize("value") shr 3..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -73,9 +73,9 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 12 _ GLsizei.IN("count", ""),
+		AutoSize("value") / 12..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 
 	void(
@@ -83,8 +83,8 @@ val NV_non_square_matrices = "NVNonSquareMatrices".nativeClassGLES("NV_non_squar
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") / 12 _ GLsizei.IN("count", ""),
+		AutoSize("value") / 12..GLsizei.IN("count", ""),
 		GLboolean.IN("transpose", ""),
-		const _ GLfloat_p.IN("value", "")
+		const..GLfloat_p.IN("value", "")
 	)
 }

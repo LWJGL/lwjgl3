@@ -22,7 +22,7 @@ val NV_packed_depth_stencil = "NVPackedDepthStencil".nativeClassGL("NV_packed_de
 		and GetTexImage, and by the {@code type} parameter of CopyPixels.
 		""",
 
-		"DEPTH_STENCIL_NV" _ 0x84F9
+		"DEPTH_STENCIL_NV"..0x84F9
 	)
 
 	IntConstant(
@@ -31,6 +31,6 @@ val NV_packed_depth_stencil = "NVPackedDepthStencil".nativeClassGL("NV_packed_de
 		GetTexImage.
 		""",
 
-		"UNSIGNED_INT_24_8_NV" _ 0x84FA
+		"UNSIGNED_INT_24_8_NV"..0x84FA
 	)
 }

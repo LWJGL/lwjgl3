@@ -39,12 +39,12 @@ val EXT_texture_filter_anisotropic = "EXTTextureFilterAnisotropic".nativeClassGL
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv, GetTexParameteriv, TexParameterf, TexParameterfv, TexParameteri, and TexParameteriv.",
 
-		"TEXTURE_MAX_ANISOTROPY_EXT" _ 0x84FE
+		"TEXTURE_MAX_ANISOTROPY_EXT"..0x84FE
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
-		"MAX_TEXTURE_MAX_ANISOTROPY_EXT" _ 0x84FF
+		"MAX_TEXTURE_MAX_ANISOTROPY_EXT"..0x84FF
 	)
 }

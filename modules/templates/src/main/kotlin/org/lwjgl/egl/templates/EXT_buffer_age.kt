@@ -44,6 +44,6 @@ val EXT_buffer_age = "EXTBufferAge".nativeClassEGL("EXT_buffer_age", postfix = E
 	IntConstant(
 		"",
 
-		"BUFFER_AGE_EXT" _ 0x313D
+		"BUFFER_AGE_EXT"..0x313D
 	)
 }

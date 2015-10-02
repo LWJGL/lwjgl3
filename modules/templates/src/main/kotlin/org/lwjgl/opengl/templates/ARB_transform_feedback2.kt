@@ -32,15 +32,15 @@ val ARB_transform_feedback2 = "ARBTransformFeedback2".nativeClassGL("ARB_transfo
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTransformFeedback.",
 
-		"TRANSFORM_FEEDBACK" _ 0x8E22
+		"TRANSFORM_FEEDBACK"..0x8E22
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_PAUSED" _ 0x8E23,
-		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE" _ 0x8E24,
-		"TRANSFORM_FEEDBACK_BINDING" _ 0x8E25
+		"TRANSFORM_FEEDBACK_BUFFER_PAUSED"..0x8E23,
+		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE"..0x8E24,
+		"TRANSFORM_FEEDBACK_BINDING"..0x8E25
 	)
 
 	GL40 reuse "BindTransformFeedback"

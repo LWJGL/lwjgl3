@@ -329,7 +329,7 @@ class NativeClass(
 	}
 
 	/** Adds a new constant. */
-	fun <T: Any> String._(value: T) = Constant(this, value)
+	operator fun <T: Any> String.rangeTo(value: T) = Constant(this, value)
 
 	/** Adds a new constant whose value is an expression. */
 	fun <T: Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
@@ -359,7 +359,7 @@ class NativeClass(
 	fun NativeClass.reuse(functionName: String): NativeClassFunction {
 		val reference = this[functionName]
 
-		val func = Reuse(this.className) _ NativeClassFunction(
+		val func = Reuse(this.className)..NativeClassFunction(
 			returns = reference.returns,
 			simpleName = reference.simpleName,
 			name = reference.name,

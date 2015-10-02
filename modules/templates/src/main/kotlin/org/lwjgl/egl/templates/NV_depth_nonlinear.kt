@@ -30,8 +30,8 @@ val NV_depth_nonlinear = "NVDepthNonlinear".nativeClassEGL("NV_depth_nonlinear",
 	IntConstant(
 		"",
 
-		"DEPTH_ENCODING_NV" _ 0x30E2,
-		"DEPTH_ENCODING_NONE_NV" _ 0,
-		"DEPTH_ENCODING_NONLINEAR_NV" _ 0x30E3
+		"DEPTH_ENCODING_NV"..0x30E2,
+		"DEPTH_ENCODING_NONE_NV"..0,
+		"DEPTH_ENCODING_NONLINEAR_NV"..0x30E3
 	)
 }

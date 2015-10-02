@@ -23,8 +23,8 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 	IntConstant(
 		"Accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_VERTEX_UNITS_ARB" _ 0x86A4,
-		"ACTIVE_VERTEX_UNITS_ARB" _ 0x86A5
+		"MAX_VERTEX_UNITS_ARB"..0x86A4,
+		"ACTIVE_VERTEX_UNITS_ARB"..0x86A5
 	)
 
 	IntConstant(
@@ -33,65 +33,65 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		GetDoublev.
 		""",
 
-		"WEIGHT_SUM_UNITY_ARB" _ 0x86A6,
-		"VERTEX_BLEND_ARB" _ 0x86A7
+		"WEIGHT_SUM_UNITY_ARB"..0x86A6,
+		"VERTEX_BLEND_ARB"..0x86A7
 	)
 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of MatrixMode and by the {@code value} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MODELVIEW0_ARB" _ 0x1700,
-		"MODELVIEW1_ARB" _ 0x850a,
-		"MODELVIEW2_ARB" _ 0x8722,
-		"MODELVIEW3_ARB" _ 0x8723,
-		"MODELVIEW4_ARB" _ 0x8724,
-		"MODELVIEW5_ARB" _ 0x8725,
-		"MODELVIEW6_ARB" _ 0x8726,
-		"MODELVIEW7_ARB" _ 0x8727,
-		"MODELVIEW8_ARB" _ 0x8728,
-		"MODELVIEW9_ARB" _ 0x8729,
-		"MODELVIEW10_ARB" _ 0x872A,
-		"MODELVIEW11_ARB" _ 0x872B,
-		"MODELVIEW12_ARB" _ 0x872C,
-		"MODELVIEW13_ARB" _ 0x872D,
-		"MODELVIEW14_ARB" _ 0x872E,
-		"MODELVIEW15_ARB" _ 0x872F,
-		"MODELVIEW16_ARB" _ 0x8730,
-		"MODELVIEW17_ARB" _ 0x8731,
-		"MODELVIEW18_ARB" _ 0x8732,
-		"MODELVIEW19_ARB" _ 0x8733,
-		"MODELVIEW20_ARB" _ 0x8734,
-		"MODELVIEW21_ARB" _ 0x8735,
-		"MODELVIEW22_ARB" _ 0x8736,
-		"MODELVIEW23_ARB" _ 0x8737,
-		"MODELVIEW24_ARB" _ 0x8738,
-		"MODELVIEW25_ARB" _ 0x8739,
-		"MODELVIEW26_ARB" _ 0x873A,
-		"MODELVIEW27_ARB" _ 0x873B,
-		"MODELVIEW28_ARB" _ 0x873C,
-		"MODELVIEW29_ARB" _ 0x873D,
-		"MODELVIEW30_ARB" _ 0x873E,
-		"MODELVIEW31_ARB" _ 0x873F
+		"MODELVIEW0_ARB"..0x1700,
+		"MODELVIEW1_ARB"..0x850a,
+		"MODELVIEW2_ARB"..0x8722,
+		"MODELVIEW3_ARB"..0x8723,
+		"MODELVIEW4_ARB"..0x8724,
+		"MODELVIEW5_ARB"..0x8725,
+		"MODELVIEW6_ARB"..0x8726,
+		"MODELVIEW7_ARB"..0x8727,
+		"MODELVIEW8_ARB"..0x8728,
+		"MODELVIEW9_ARB"..0x8729,
+		"MODELVIEW10_ARB"..0x872A,
+		"MODELVIEW11_ARB"..0x872B,
+		"MODELVIEW12_ARB"..0x872C,
+		"MODELVIEW13_ARB"..0x872D,
+		"MODELVIEW14_ARB"..0x872E,
+		"MODELVIEW15_ARB"..0x872F,
+		"MODELVIEW16_ARB"..0x8730,
+		"MODELVIEW17_ARB"..0x8731,
+		"MODELVIEW18_ARB"..0x8732,
+		"MODELVIEW19_ARB"..0x8733,
+		"MODELVIEW20_ARB"..0x8734,
+		"MODELVIEW21_ARB"..0x8735,
+		"MODELVIEW22_ARB"..0x8736,
+		"MODELVIEW23_ARB"..0x8737,
+		"MODELVIEW24_ARB"..0x8738,
+		"MODELVIEW25_ARB"..0x8739,
+		"MODELVIEW26_ARB"..0x873A,
+		"MODELVIEW27_ARB"..0x873B,
+		"MODELVIEW28_ARB"..0x873C,
+		"MODELVIEW29_ARB"..0x873D,
+		"MODELVIEW30_ARB"..0x873E,
+		"MODELVIEW31_ARB"..0x873F
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"CURRENT_WEIGHT_ARB" _ 0x86A8
+		"CURRENT_WEIGHT_ARB"..0x86A8
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"WEIGHT_ARRAY_TYPE_ARB" _ 0x86A9,
-		"WEIGHT_ARRAY_STRIDE_ARB" _ 0x86AA,
-		"WEIGHT_ARRAY_SIZE_ARB" _ 0x86AB
+		"WEIGHT_ARRAY_TYPE_ARB"..0x86A9,
+		"WEIGHT_ARRAY_STRIDE_ARB"..0x86AA,
+		"WEIGHT_ARRAY_SIZE_ARB"..0x86AB
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
-		"WEIGHT_ARRAY_POINTER_ARB" _ 0x86AC
+		"WEIGHT_ARRAY_POINTER_ARB"..0x86AC
 	)
 
 	IntConstant(
@@ -100,10 +100,10 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		GetIntegerv, GetFloatv, and GetDoublev.
 		""",
 
-		"WEIGHT_ARRAY_ARB" _ 0x86AD
+		"WEIGHT_ARRAY_ARB"..0x86AD
 	)
 
-	val size = AutoSize("weights") _ GLint.IN("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
+	val size = AutoSize("weights")..GLint.IN("size", "the number of weights to set. Must be a value between 1 and #MAX_VERTEX_UNITS_ARB.")
 
 	void("WeightfvARB", "Sets the current vertex weights.", size, GLfloat_p.IN("weights", "the vertex weights"))
 
@@ -129,9 +129,9 @@ val ARB_vertex_blend = "ARBVertexBlend".nativeClassGL("ARB_vertex_blend", postfi
 		    "GL11#BYTE GL11#UNSIGNED_BYTE GL11#SHORT GL11#UNSIGNED_SHORT GL11#INT GL11#UNSIGNED_INT GL11#FLOAT GL11#DOUBLE"
 		),
 		GLsizei.IN("stride", "the vertex stride in bytes. If specified as zero, then array elements are stored sequentially"),
-		ARRAY_BUFFER _ MultiType(
+		ARRAY_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ void_p.IN("pointer", "the weight data")
+		)..void_p.IN("pointer", "the weight data")
 	)
 
 	void(

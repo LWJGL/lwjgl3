@@ -26,7 +26,7 @@ val stbi_io_callbacks_read = "stbi_io_callbacks.read".callback(
 	"The {@code stbi_io_callbacks.read} callback.",
 	void_p.IN("user", "a pointer to user data"),
 	char_p.IN("data", "the data buffer to fill"),
-	AutoSize("data") _ int.IN("size", "the number of bytes to read"),
+	AutoSize("data")..int.IN("size", "the number of bytes to read"),
 	returnDoc = "the number of bytes actually read",
 	samConstructor = "STBImage"
 ) {
@@ -114,7 +114,7 @@ val stbi_write_func = "stbi_write_func_p".callback(
 	"The {@code stbi_write_func} callback.",
 	void_p.IN("context", "the context passed to the write function"),
 	void_p.IN("data", "the data to write"),
-	AutoSize("data") _ int.IN("size", "the number of bytes in {@code data}"),
+	AutoSize("data")..int.IN("size", "the number of bytes in {@code data}"),
 	samConstructor = "STBImageWrite"
 ) {
 	documentation = "Instances of this interface may be used with the ##STBImageWrite {@code write_type_to_func} functions."

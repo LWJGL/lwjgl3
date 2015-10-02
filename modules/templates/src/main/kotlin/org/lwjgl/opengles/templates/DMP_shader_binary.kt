@@ -18,6 +18,6 @@ val DMP_shader_binary = "DMPShaderBinary".nativeClassGLES("DMP_shader_binary", p
 	IntConstant(
 		"Accepted by the {@code binaryformat} parameter of ShaderBinary.",
 
-		"SHADER_BINARY_DMP" _ 0x9250
+		"SHADER_BINARY_DMP"..0x9250
 	)
 }

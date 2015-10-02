@@ -31,7 +31,7 @@ val WGL_ARB_robustness_application_isolation = "WGLARBRobustnessApplicationIsola
 		WGLARBCreateContext#CreateContextAttribsARB().
 		""",
 
-		"CONTEXT_RESET_ISOLATION_BIT_ARB" _ 0x00000008
+		"CONTEXT_RESET_ISOLATION_BIT_ARB"..0x00000008
 	)
 }
 

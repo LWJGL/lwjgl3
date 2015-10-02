@@ -32,19 +32,19 @@ val ANGLE_framebuffer_multisample = "ANGLEFramebufferMultisample".nativeClassGLE
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
-		"RENDERBUFFER_SAMPLES_ANGLE" _ 0x8CAB
+		"RENDERBUFFER_SAMPLES_ANGLE"..0x8CAB
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE" _ 0x8D56
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_ANGLE"..0x8D56
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLES_ANGLE" _ 0x8D57
+		"MAX_SAMPLES_ANGLE"..0x8D57
 	)
 
 	void(

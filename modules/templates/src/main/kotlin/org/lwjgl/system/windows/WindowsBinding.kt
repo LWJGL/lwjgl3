@@ -13,6 +13,6 @@ val DLL_WARNING =
 		function is not supported in the Windows version we're running."""
 
 val DLL_FUNC = Capabilities(expression = FUNCTION_ADDRESS, override = true)
-val DLL_ADDRESS = virtual _ nullable _ voidptr.IN(FUNCTION_ADDRESS, "the DLL function address") // nullable: the generator emits checkFunctionAddress, no need to check again
+val DLL_ADDRESS = virtual..nullable..voidptr.IN(FUNCTION_ADDRESS, "the DLL function address") // nullable: the generator emits checkFunctionAddress, no need to check again
 
 val GetLastError = Code(nativeAfterCall = "\tsetLastError((jint)GetLastError());")

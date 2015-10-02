@@ -47,13 +47,13 @@ val APPLE_rgb_422 = "APPLERGB422".nativeClassGLES("APPLE_rgb_422", postfix = APP
 		ColorTable, and GetColorTable.
 		""",
 
-		"RGB_422_APPLE" _ 0x8A1F
+		"RGB_422_APPLE"..0x8A1F
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage2D, TexImage3D, CopyTexImage2D, TexStorage2D, and TexStorage3D.",
 
-		"RGB_RAW_422_APPLE" _ 0x8A51
+		"RGB_RAW_422_APPLE"..0x8A51
 	)
 
 	IntConstant(
@@ -63,7 +63,7 @@ val APPLE_rgb_422 = "APPLERGB422".nativeClassGLES("APPLE_rgb_422", postfix = APP
 		ColorTable, and GetColorTable.
 		""",
 
-		"UNSIGNED_SHORT_8_8_APPLE" _ 0x85BA,
-		"UNSIGNED_SHORT_8_8_REV_APPLE" _ 0x85BB
+		"UNSIGNED_SHORT_8_8_APPLE"..0x85BA,
+		"UNSIGNED_SHORT_8_8_REV_APPLE"..0x85BB
 	)
 }

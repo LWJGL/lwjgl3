@@ -23,7 +23,7 @@ val NV_post_sub_buffer = "NVPostSubBuffer".nativeClassEGL("NV_post_sub_buffer", 
 	IntConstant(
 		"",
 
-		"POST_SUB_BUFFER_SUPPORTED_NV" _ 0x30BE
+		"POST_SUB_BUFFER_SUPPORTED_NV"..0x30BE
 	)
 
 	EGLBoolean(

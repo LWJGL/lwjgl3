@@ -21,8 +21,8 @@ val EXT_shadow_samplers = "EXTShadowSamplers".nativeClassGLES("EXT_shadow_sample
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_COMPARE_MODE_EXT" _ 0x884C,
-		"TEXTURE_COMPARE_FUNC_EXT" _ 0x884D
+		"TEXTURE_COMPARE_MODE_EXT"..0x884C,
+		"TEXTURE_COMPARE_FUNC_EXT"..0x884D
 	)
 
 	IntConstant(
@@ -31,12 +31,12 @@ val EXT_shadow_samplers = "EXTShadowSamplers".nativeClassGLES("EXT_shadow_sample
 		TEXTURE_COMPARE_MODE_EXT.
 		""",
 
-		"COMPARE_REF_TO_TEXTURE_EXT" _ 0x884E
+		"COMPARE_REF_TO_TEXTURE_EXT"..0x884E
 	)
 
 	IntConstant(
 		"Returned in {@code type} by glGetActiveUniform.",
 
-		"SAMPLER_2D_SHADOW_EXT" _ 0x8B62
+		"SAMPLER_2D_SHADOW_EXT"..0x8B62
 	)
 }

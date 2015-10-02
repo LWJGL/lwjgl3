@@ -35,20 +35,20 @@ val OVR_multiview = "OVRMultiview".nativeClassGL("OVR_multiview", postfix = OVR)
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR" _ 0x9630,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR" _ 0x9632
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_NUM_VIEWS_OVR"..0x9630,
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_BASE_VIEW_INDEX_OVR"..0x9632
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
-		"MAX_VIEWS_OVR" _ 0x9631
+		"MAX_VIEWS_OVR"..0x9631
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR" _ 0x9633
+		"FRAMEBUFFER_INCOMPLETE_VIEW_TARGETS_OVR"..0x9633
 	)
 
 	val FramebufferTextureLayer = GL30["FramebufferTextureLayer"]

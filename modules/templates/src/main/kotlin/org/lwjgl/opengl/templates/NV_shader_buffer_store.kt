@@ -24,6 +24,6 @@ val NV_shader_buffer_store = "NVShaderBufferStore".nativeClassGL("NV_shader_buff
 	IntConstant(
 		"Accepted by the {@code barriers} parameter of MemoryBarrierNV.",
 
-		"SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV" _ 0x00000010
+		"SHADER_GLOBAL_ACCESS_BARRIER_BIT_NV"..0x00000010
 	)
 }

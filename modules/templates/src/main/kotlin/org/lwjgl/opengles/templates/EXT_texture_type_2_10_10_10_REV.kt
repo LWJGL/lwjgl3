@@ -18,6 +18,6 @@ val EXT_texture_type_2_10_10_10_REV = "EXTTextureType2101010REV".nativeClassGLES
 	IntConstant(
 		"Accepted by the {@code type} parameter of TexImage2D and TexImage3D.",
 
-		"UNSIGNED_INT_2_10_10_10_REV_EXT" _ 0x8368
+		"UNSIGNED_INT_2_10_10_10_REV_EXT"..0x8368
 	)
 }

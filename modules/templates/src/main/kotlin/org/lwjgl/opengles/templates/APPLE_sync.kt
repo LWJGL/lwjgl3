@@ -30,41 +30,41 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
 	IntConstant(
 		"Accepted as the {@code pname} parameter of GetInteger64vAPPLE.",
 
-		"MAX_SERVER_WAIT_TIMEOUT_APPLE" _ 0x9111
+		"MAX_SERVER_WAIT_TIMEOUT_APPLE"..0x9111
 	)
 
 	IntConstant(
 		"Accepted as the {@code pname} parameter of GetSyncivAPPLE.",
 
-		"OBJECT_TYPE_APPLE" _ 0x9112,
-		"SYNC_CONDITION_APPLE" _ 0x9113,
-		"SYNC_STATUS_APPLE" _ 0x9114,
-		"SYNC_FLAGS_APPLE" _ 0x9115
+		"OBJECT_TYPE_APPLE"..0x9112,
+		"SYNC_CONDITION_APPLE"..0x9113,
+		"SYNC_STATUS_APPLE"..0x9114,
+		"SYNC_FLAGS_APPLE"..0x9115
 	)
 
 	IntConstant(
 		"Returned in {@code values} for GetSynciv {@code pname} OBJECT_TYPE_APPLE.",
 
-		"SYNC_FENCE_APPLE" _ 0x9116
+		"SYNC_FENCE_APPLE"..0x9116
 	)
 
 	IntConstant(
 		"Returned in {@code values} for GetSyncivAPPLE {@code pname} SYNC_CONDITION_APPLE.",
 
-		"SYNC_GPU_COMMANDS_COMPLETE_APPLE" _ 0x9117
+		"SYNC_GPU_COMMANDS_COMPLETE_APPLE"..0x9117
 	)
 
 	IntConstant(
 		"Returned in {@code values} for GetSyncivAPPLE {@code pname} SYNC_STATUS_APPLE.",
 
-		"UNSIGNALED_APPLE" _ 0x9118,
-		"SIGNALED_APPLE" _ 0x9119
+		"UNSIGNALED_APPLE"..0x9118,
+		"SIGNALED_APPLE"..0x9119
 	)
 
 	IntConstant(
 		"Accepted in the {@code flags} parameter of ClientWaitSyncAPPLE.",
 
-		"SYNC_FLUSH_COMMANDS_BIT_APPLE" _ 0x00000001
+		"SYNC_FLUSH_COMMANDS_BIT_APPLE"..0x00000001
 	)
 
 	LongConstant(
@@ -76,16 +76,16 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
 	IntConstant(
 		"Returned by ClientWaitSyncAPPLE.",
 
-		"ALREADY_SIGNALED_APPLE" _ 0x911A,
-		"TIMEOUT_EXPIRED_APPLE" _ 0x911B,
-		"CONDITION_SATISFIED_APPLE" _ 0x911C,
-		"WAIT_FAILED_APPLE" _ 0x911D
+		"ALREADY_SIGNALED_APPLE"..0x911A,
+		"TIMEOUT_EXPIRED_APPLE"..0x911B,
+		"CONDITION_SATISFIED_APPLE"..0x911C,
+		"WAIT_FAILED_APPLE"..0x911D
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of LabelObjectEXT and GetObjectLabelEXT.",
 
-		"SYNC_OBJECT_APPLE" _ 0x8A53
+		"SYNC_OBJECT_APPLE"..0x8A53
 	)
 
 	GLsync(
@@ -133,7 +133,7 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
 		"",
 
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint64_p.OUT("params", "")
+		returnValue..Check(1)..GLint64_p.OUT("params", "")
 	)
 
 	void(
@@ -142,8 +142,8 @@ val APPLE_sync = "APPLESync".nativeClassGLES("APPLE_sync", postfix = APPLE) {
 
 		GLsync.IN("sync", ""),
 		GLenum.IN("pname", ""),
-		AutoSize("values") _ GLsizei.IN("bufSize", ""),
-		nullable _ Check(1) _ GLsizei_p.OUT("length", ""),
-		returnValue _ GLint_p.OUT("values", "")
+		AutoSize("values")..GLsizei.IN("bufSize", ""),
+		nullable..Check(1)..GLsizei_p.OUT("length", ""),
+		returnValue..GLint_p.OUT("values", "")
 	)
 }

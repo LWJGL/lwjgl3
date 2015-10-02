@@ -56,21 +56,21 @@ val KHR_blend_equation_advanced = "KHRBlendEquationAdvanced".nativeClassGL("KHR_
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.",
 
-		"MULTIPLY_KHR" _ 0x9294,
-		"SCREEN_KHR" _ 0x9295,
-		"OVERLAY_KHR" _ 0x9296,
-		"DARKEN_KHR" _ 0x9297,
-		"LIGHTEN_KHR" _ 0x9298,
-		"COLORDODGE_KHR" _ 0x9299,
-		"COLORBURN_KHR" _ 0x929A,
-		"HARDLIGHT_KHR" _ 0x929B,
-		"SOFTLIGHT_KHR" _ 0x929C,
-		"DIFFERENCE_KHR" _ 0x929E,
-		"EXCLUSION_KHR" _ 0x92A0,
-		"HSL_HUE_KHR" _ 0x92AD,
-		"HSL_SATURATION_KHR" _ 0x92AE,
-		"HSL_COLOR_KHR" _ 0x92AF,
-		"HSL_LUMINOSITY_KHR" _ 0x92B0
+		"MULTIPLY_KHR"..0x9294,
+		"SCREEN_KHR"..0x9295,
+		"OVERLAY_KHR"..0x9296,
+		"DARKEN_KHR"..0x9297,
+		"LIGHTEN_KHR"..0x9298,
+		"COLORDODGE_KHR"..0x9299,
+		"COLORBURN_KHR"..0x929A,
+		"HARDLIGHT_KHR"..0x929B,
+		"SOFTLIGHT_KHR"..0x929C,
+		"DIFFERENCE_KHR"..0x929E,
+		"EXCLUSION_KHR"..0x92A0,
+		"HSL_HUE_KHR"..0x92AD,
+		"HSL_SATURATION_KHR"..0x92AE,
+		"HSL_COLOR_KHR"..0x92AF,
+		"HSL_LUMINOSITY_KHR"..0x92B0
 	)
 
 	void(
@@ -103,6 +103,6 @@ val KHR_blend_equation_advanced_coherent = "KHRBlendEquationAdvancedCoherent".na
 		GetDoublev and GetInteger64v.
 		""",
 
-		"BLEND_ADVANCED_COHERENT_KHR" _ 0x9285
+		"BLEND_ADVANCED_COHERENT_KHR"..0x9285
 	)
 }

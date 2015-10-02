@@ -19,12 +19,12 @@ val APPLE_texture_format_BGRA8888 = "APPLETextureFormatBGRA8888".nativeClassGLES
 	IntConstant(
 		"Accepted by the {@code format} parameters of TexImage2D and TexSubImage2D.",
 
-		"BGRA_EXT" _ 0x80E1
+		"BGRA_EXT"..0x80E1
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameters of TexStorage2D and TexStorage3D.",
 
-		"BGRA8_EXT" _ 0x93A1
+		"BGRA8_EXT"..0x93A1
 	)
 }

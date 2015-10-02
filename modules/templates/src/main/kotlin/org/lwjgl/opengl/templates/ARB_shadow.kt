@@ -23,8 +23,8 @@ val ARB_shadow = "ARBShadow".nativeClassGL("ARB_shadow", postfix = ARB) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_COMPARE_MODE_ARB" _ 0x884C,
-		"TEXTURE_COMPARE_FUNC_ARB" _ 0x884D
+		"TEXTURE_COMPARE_MODE_ARB"..0x884C,
+		"TEXTURE_COMPARE_FUNC_ARB"..0x884D
 	)
 
 	IntConstant(
@@ -33,6 +33,6 @@ val ARB_shadow = "ARBShadow".nativeClassGL("ARB_shadow", postfix = ARB) {
 		TEXTURE_COMPARE_MODE_ARB.
 		""",
 
-		"COMPARE_R_TO_TEXTURE_ARB" _ 0x884E
+		"COMPARE_R_TO_TEXTURE_ARB"..0x884E
 	)
 }

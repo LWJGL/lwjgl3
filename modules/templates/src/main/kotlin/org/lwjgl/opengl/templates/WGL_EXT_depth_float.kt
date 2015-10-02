@@ -25,6 +25,6 @@ val WGL_EXT_depth_float = "WGLEXTDepthFloat".nativeClassWGL("WGL_EXT_depth_float
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of wglGetPixelFormatAttribivEXT, wglGetPixelFormatAttribfvEXT, and wglChoosePixelFormatExEXT.",
 
-		"DEPTH_FLOAT_EXT" _ 0x2040
+		"DEPTH_FLOAT_EXT"..0x2040
 	)
 }

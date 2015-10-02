@@ -29,13 +29,13 @@ val EXT_read_format_bgra = "EXTReadFormatBGRA".nativeClassGLES("EXT_read_format_
 	IntConstant(
 		"Accepted by the {@code format} parameter of ReadPixels.",
 
-		"BGRA_EXT" _ 0x80E1
+		"BGRA_EXT"..0x80E1
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of ReadPixels.",
 
-		"UNSIGNED_SHORT_4_4_4_4_REV_EXT" _ 0x8365,
-		"UNSIGNED_SHORT_1_5_5_5_REV_EXT" _ 0x8366
+		"UNSIGNED_SHORT_4_4_4_4_REV_EXT"..0x8365,
+		"UNSIGNED_SHORT_1_5_5_5_REV_EXT"..0x8366
 	)
 }

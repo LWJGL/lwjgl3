@@ -25,9 +25,9 @@ val EXT_texture_norm16 = "EXTTextureNorm16".nativeClassGLES("EXT_texture_norm16"
 		TexStorage3DMultisampleOES, TexBufferEXT, TexBufferRangeEXT, TextureViewEXT, RenderbufferStorage and RenderbufferStorageMultisample.
 		""",
 
-		"R16_EXT" _ 0x822A,
-		"RG16_EXT" _ 0x822C,
-		"RGBA16_EXT" _ 0x805B
+		"R16_EXT"..0x822A,
+		"RG16_EXT"..0x822C,
+		"RGBA16_EXT"..0x805B
 	)
 
 	IntConstant(
@@ -36,10 +36,10 @@ val EXT_texture_norm16 = "EXTTextureNorm16".nativeClassGLES("EXT_texture_norm16"
 		TexStorage3DMultisampleOES and TextureViewEXT.
 		""",
 
-		"RGB16_EXT" _ 0x8054,
-		"R16_SNORM_EXT" _ 0x8F98,
-		"RG16_SNORM_EXT" _ 0x8F99,
-		"RGB16_SNORM_EXT" _ 0x8F9A,
-		"RGBA16_SNORM_EXT" _ 0x8F9B
+		"RGB16_EXT"..0x8054,
+		"R16_SNORM_EXT"..0x8F98,
+		"RG16_SNORM_EXT"..0x8F99,
+		"RGB16_SNORM_EXT"..0x8F9A,
+		"RGBA16_SNORM_EXT"..0x8F9B
 	)
 }

@@ -31,15 +31,15 @@ val EXT_map_buffer_range = "EXTMapBufferRange".nativeClassGLES("EXT_map_buffer_r
 	IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferRangeEXT.",
 
-		"MAP_READ_BIT_EXT" _ 0x0001,
-		"MAP_WRITE_BIT_EXT" _ 0x0002,
-		"MAP_INVALIDATE_RANGE_BIT_EXT" _ 0x0004,
-		"MAP_INVALIDATE_BUFFER_BIT_EXT" _ 0x0008,
-		"MAP_FLUSH_EXPLICIT_BIT_EXT" _ 0x0010,
-		"MAP_UNSYNCHRONIZED_BIT_EXT" _ 0x0020
+		"MAP_READ_BIT_EXT"..0x0001,
+		"MAP_WRITE_BIT_EXT"..0x0002,
+		"MAP_INVALIDATE_RANGE_BIT_EXT"..0x0004,
+		"MAP_INVALIDATE_BUFFER_BIT_EXT"..0x0008,
+		"MAP_FLUSH_EXPLICIT_BIT_EXT"..0x0010,
+		"MAP_UNSYNCHRONIZED_BIT_EXT"..0x0020
 	)
 
-	(MapPointer("length") _ void_p)(
+	(MapPointer("length")..void_p)(
 		"MapBufferRangeEXT",
 		"",
 

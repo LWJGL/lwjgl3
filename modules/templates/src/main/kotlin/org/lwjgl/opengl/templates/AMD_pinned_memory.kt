@@ -22,6 +22,6 @@ val AMD_pinned_memory = "AMDPinnedMemory".nativeClassGL("AMD_pinned_memory", pos
 	IntConstant(
 		"",
 
-		"EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD" _ 0x9160
+		"EXTERNAL_VIRTUAL_MEMORY_BUFFER_AMD"..0x9160
 	)
 }

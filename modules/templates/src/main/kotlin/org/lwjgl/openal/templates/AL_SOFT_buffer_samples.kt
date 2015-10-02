@@ -35,75 +35,75 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		Accepted by the {@code internalformat} parameter of alBufferSamplesSOFT (values are shared with standard OpenAL, AL_EXT_FLOAT32, and AL_EXT_MCFORMATS).
 		""",
 
-		"MONO8_SOFT" _ 0x1100,
-		"MONO16_SOFT" _ 0x1101,
-		"MONO32F_SOFT" _ 0x10010,
-		"STEREO8_SOFT" _ 0x1102,
-		"STEREO16_SOFT" _ 0x1103,
-		"STEREO32F_SOFT" _ 0x10011,
-		"QUAD8_SOFT" _ 0x1204,
-		"QUAD16_SOFT" _ 0x1205,
-		"QUAD32F_SOFT" _ 0x1206,
-		"REAR8_SOFT" _ 0x1207,
-		"REAR16_SOFT" _ 0x1208,
-		"REAR32F_SOFT" _ 0x1209,
-		"5POINT1_8_SOFT" _ 0x120A,
-		"5POINT1_16_SOFT" _ 0x120B,
-		"5POINT1_32F_SOFT" _ 0x120C,
-		"6POINT1_8_SOFT" _ 0x120D,
-		"6POINT1_16_SOFT" _ 0x120E,
-		"6POINT1_32F_SOFT" _ 0x120F,
-		"7POINT1_8_SOFT" _ 0x1210,
-		"7POINT1_16_SOFT" _ 0x1211,
-		"7POINT1_32F_SOFT" _ 0x1212
+		"MONO8_SOFT"..0x1100,
+		"MONO16_SOFT"..0x1101,
+		"MONO32F_SOFT"..0x10010,
+		"STEREO8_SOFT"..0x1102,
+		"STEREO16_SOFT"..0x1103,
+		"STEREO32F_SOFT"..0x10011,
+		"QUAD8_SOFT"..0x1204,
+		"QUAD16_SOFT"..0x1205,
+		"QUAD32F_SOFT"..0x1206,
+		"REAR8_SOFT"..0x1207,
+		"REAR16_SOFT"..0x1208,
+		"REAR32F_SOFT"..0x1209,
+		"5POINT1_8_SOFT"..0x120A,
+		"5POINT1_16_SOFT"..0x120B,
+		"5POINT1_32F_SOFT"..0x120C,
+		"6POINT1_8_SOFT"..0x120D,
+		"6POINT1_16_SOFT"..0x120E,
+		"6POINT1_32F_SOFT"..0x120F,
+		"7POINT1_8_SOFT"..0x1210,
+		"7POINT1_16_SOFT"..0x1211,
+		"7POINT1_32F_SOFT"..0x1212
 	).javaDocLinks
 
 	val ChannelsParameter = IntConstant(
 		"Accepted by the {@code channels} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
 
-		"MONO_SOFT" _ 0x1500,
-		"STEREO_SOFT" _ 0x1501,
-		"QUAD_SOFT" _ 0x1502,
-		"REAR_SOFT" _ 0x1503,
-		"5POINT1_SOFT" _ 0x1504,
-		"6POINT1_SOFT" _ 0x1505,
-		"7POINT1_SOFT" _ 0x1506
+		"MONO_SOFT"..0x1500,
+		"STEREO_SOFT"..0x1501,
+		"QUAD_SOFT"..0x1502,
+		"REAR_SOFT"..0x1503,
+		"5POINT1_SOFT"..0x1504,
+		"6POINT1_SOFT"..0x1505,
+		"7POINT1_SOFT"..0x1506
 	).javaDocLinks
 
 	val TypeParameters = IntConstant(
 		"Accepted by the {@code type} parameter of alBufferSamplesSOFT, alBufferSubSamplesSOFT, and alGetBufferSamplesSOFT.",
 
-		"BYTE_SOFT" _ 0x1400,
-		"UNSIGNED_BYTE_SOFT" _ 0x1401,
-		"SHORT_SOFT" _ 0x1402,
-		"UNSIGNED_SHORT_SOFT" _ 0x1403,
-		"INT_SOFT" _ 0x1404,
-		"UNSIGNED_INT_SOFT" _ 0x1405,
-		"FLOAT_SOFT" _ 0x1406,
-		"DOUBLE_SOFT" _ 0x1407,
-		"BYTE3_SOFT" _ 0x1408,
-		"UNSIGNED_BYTE3_SOFT" _ 0x1409
+		"BYTE_SOFT"..0x1400,
+		"UNSIGNED_BYTE_SOFT"..0x1401,
+		"SHORT_SOFT"..0x1402,
+		"UNSIGNED_SHORT_SOFT"..0x1403,
+		"INT_SOFT"..0x1404,
+		"UNSIGNED_INT_SOFT"..0x1405,
+		"FLOAT_SOFT"..0x1406,
+		"DOUBLE_SOFT"..0x1407,
+		"BYTE3_SOFT"..0x1408,
+		"UNSIGNED_BYTE3_SOFT"..0x1409
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetBufferi and alGetBufferiv.",
 
-		"INTERNAL_FORMAT_SOFT" _ 0x2008,
-		"BYTE_LENGTH_SOFT" _ 0x2009,
-		"SAMPLE_LENGTH_SOFT" _ 0x200A
+		"INTERNAL_FORMAT_SOFT"..0x2008,
+		"BYTE_LENGTH_SOFT"..0x2009,
+		"SAMPLE_LENGTH_SOFT"..0x200A
 	)
 
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetBufferf and alGetBufferfv.",
 
-		"SEC_LENGTH_SOFT" _ 0x200B
+		"SEC_LENGTH_SOFT"..0x200B
 	)
 
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv (these are the same as in AL_SOFT_buffer_sub_data).",
 
-		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
-		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
+		"BYTE_RW_OFFSETS_SOFT"..0x1031,
+		"SAMPLE_RW_OFFSETS_SOFT"..0x1032
 	)
 
 	ALvoid(
@@ -129,7 +129,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		ALsizei.IN("samples", "the number of uncompressed sample frames to load"),
 		ALenum.IN("channels", "the channel configuration of the provided data", ChannelsParameter),
 		ALenum.IN("type", "the type of the provided data", TypeParameters),
-		const _ ALCvoid_p.IN("data", "the buffer data")
+		const..ALCvoid_p.IN("data", "the buffer data")
 	)
 
 	ALCboolean(
@@ -162,7 +162,7 @@ val AL_SOFT_buffer_samples = "SOFTBufferSamples".nativeClassAL("SOFT_buffer_samp
 		ALCsizei.IN("samples", "the number of sample frames to modify"),
 		ALenum.IN("channels", "the channel configuration of the provided data", ChannelsParameter),
 		ALenum.IN("type", "the type of the provided data", TypeParameters),
-		const _ ALCvoid_p.IN("data", "the buffer data")
+		const..ALCvoid_p.IN("data", "the buffer data")
 	)
 
 	ALCvoid(

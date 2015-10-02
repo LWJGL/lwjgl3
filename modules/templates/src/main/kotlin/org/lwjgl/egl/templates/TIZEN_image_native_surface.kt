@@ -21,6 +21,6 @@ val TIZEN_image_native_surface = "TIZENImageNativeSurface".nativeClassEGL("TIZEN
 	IntConstant(
 		"",
 
-		"NATIVE_SURFACE_TIZEN" _ 0x32A1
+		"NATIVE_SURFACE_TIZEN"..0x32A1
 	)
 }

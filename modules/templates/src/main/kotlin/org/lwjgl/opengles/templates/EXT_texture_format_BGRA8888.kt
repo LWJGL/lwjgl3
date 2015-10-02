@@ -43,6 +43,6 @@ ALPHA               ALPHA           UNSIGNED_BYTE           1""")}
 	IntConstant(
 		"Accepted by the {@code format} and {@code internalformat} parameters of TexImage2D and the {@code format} parameter of TexSubImage2D.",
 
-		"BGRA_EXT" _ 0x80E1
+		"BGRA_EXT"..0x80E1
 	)
 }

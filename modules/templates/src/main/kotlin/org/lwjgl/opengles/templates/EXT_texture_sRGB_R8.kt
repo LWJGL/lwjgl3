@@ -21,6 +21,6 @@ val EXT_texture_sRGB_R8 = "EXTTextureSRGBR8".nativeClassGLES("EXT_texture_sRGB_R
 	IntConstant(
 		"Accepted by the {@code internalformat} parameters of TexImage2D, TexImage3D, TexStorage2D and TexStorage3D.",
 
-		"SR8_EXT" _ 0x8FBD
+		"SR8_EXT"..0x8FBD
 	)
 }

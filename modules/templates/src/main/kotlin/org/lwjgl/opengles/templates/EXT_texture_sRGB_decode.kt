@@ -37,7 +37,7 @@ val EXT_texture_sRGB_decode = "EXTTextureSRGBDecode".nativeClassGLES("EXT_textur
 		SamplerParameterIiv, SamplerParameterIuiv, GetSamplerParameteriv, GetSamplerParameterfv, GetSamplerParameterIiv, and GetSamplerParameterIuiv.
 		""",
 
-		"TEXTURE_SRGB_DECODE_EXT" _ 0x8A48
+		"TEXTURE_SRGB_DECODE_EXT"..0x8A48
 	)
 
 	IntConstant(
@@ -49,7 +49,7 @@ val EXT_texture_sRGB_decode = "EXTTextureSRGBDecode".nativeClassGLES("EXT_textur
 		and SamplerParameterIuiv.
 		""",
 
-		"DECODE_EXT" _ 0x8A49,
-		"SKIP_DECODE_EXT" _ 0x8A4A
+		"DECODE_EXT"..0x8A49,
+		"SKIP_DECODE_EXT"..0x8A4A
 	)
 }

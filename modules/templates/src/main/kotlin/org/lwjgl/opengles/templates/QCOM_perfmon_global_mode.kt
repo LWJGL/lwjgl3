@@ -23,6 +23,6 @@ val QCOM_perfmon_global_mode = "QCOMPerfmonGlobalMode".nativeClassGLES("QCOM_per
 		GetFloatv.
 		""",
 
-		"PERFMON_GLOBAL_MODE_QCOM" _ 0x8FA0
+		"PERFMON_GLOBAL_MODE_QCOM"..0x8FA0
 	)
 }

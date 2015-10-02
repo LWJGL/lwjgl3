@@ -21,6 +21,6 @@ val ANDROID_framebuffer_target = "ANDROIDFramebufferTarget".nativeClassEGL("ANDR
 	IntConstant(
 		"",
 
-		"FRAMEBUFFER_TARGET_ANDROID" _ 0x3147
+		"FRAMEBUFFER_TARGET_ANDROID"..0x3147
 	)
 }

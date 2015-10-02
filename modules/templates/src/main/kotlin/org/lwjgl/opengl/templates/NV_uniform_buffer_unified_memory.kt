@@ -26,18 +26,18 @@ val NV_uniform_buffer_unified_memory = "NVUniformBufferUnifiedMemory".nativeClas
 	IntConstant(
 		"Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.",
 
-		"UNIFORM_BUFFER_UNIFIED_NV" _ 0x936E
+		"UNIFORM_BUFFER_UNIFIED_NV"..0x936E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.",
 
-		"UNIFORM_BUFFER_ADDRESS_NV" _ 0x936F
+		"UNIFORM_BUFFER_ADDRESS_NV"..0x936F
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_vNV.",
 
-		"UNIFORM_BUFFER_LENGTH_NV" _ 0x9370
+		"UNIFORM_BUFFER_LENGTH_NV"..0x9370
 	)
 }

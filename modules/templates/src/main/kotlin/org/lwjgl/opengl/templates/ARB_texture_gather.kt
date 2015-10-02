@@ -21,8 +21,8 @@ val ARB_texture_gather = "ARBTextureGather".nativeClassGL("ARB_texture_gather", 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB" _ 0x8E5E,
-		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB" _ 0x8E5F,
-		"MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB" _ 0x8F9F
+		"MIN_PROGRAM_TEXTURE_GATHER_OFFSET_ARB"..0x8E5E,
+		"MAX_PROGRAM_TEXTURE_GATHER_OFFSET_ARB"..0x8E5F,
+		"MAX_PROGRAM_TEXTURE_GATHER_COMPONENTS_ARB"..0x8F9F
 	)
 }

@@ -31,15 +31,15 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTransformFeedbackNV.",
 
-		"TRANSFORM_FEEDBACK_NV" _ 0x8E22
+		"TRANSFORM_FEEDBACK_NV"..0x8E22
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV" _ 0x8E23,
-		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV" _ 0x8E24,
-		"TRANSFORM_FEEDBACK_BINDING_NV" _ 0x8E25
+		"TRANSFORM_FEEDBACK_BUFFER_PAUSED_NV"..0x8E23,
+		"TRANSFORM_FEEDBACK_BUFFER_ACTIVE_NV"..0x8E24,
+		"TRANSFORM_FEEDBACK_BINDING_NV"..0x8E25
 	)
 
 	void(
@@ -54,16 +54,16 @@ val NV_transform_feedback2 = "NVTransformFeedback2".nativeClassGL("NV_transform_
 		"DeleteTransformFeedbacksNV",
 		"",
 
-		AutoSize("ids") _ GLsizei.IN("n", ""),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "")
+		AutoSize("ids")..GLsizei.IN("n", ""),
+		SingleValue("id")..const..GLuint_p.IN("ids", "")
 	)
 
 	void(
 		"GenTransformFeedbacksNV",
 		"",
 
-		AutoSize("ids") _ GLsizei.IN("n", ""),
-		Check(1) _ returnValue _ GLuint_p.OUT("ids", "")
+		AutoSize("ids")..GLsizei.IN("n", ""),
+		Check(1)..returnValue..GLuint_p.OUT("ids", "")
 	)
 
 	GLboolean(

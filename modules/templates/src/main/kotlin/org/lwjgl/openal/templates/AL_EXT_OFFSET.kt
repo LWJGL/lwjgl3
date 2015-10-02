@@ -13,8 +13,8 @@ val AL_EXT_OFFSET = "EXTOffset".nativeClassAL("EXT_OFFSET") {
 	IntConstant(
 		"AL_EXT_OFFSET tokens.",
 
-		"SEC_OFFSET" _ 0x1024,
-		"SAMPLE_OFFSET" _ 0x1025,
-		"BYTE_OFFSET" _ 0x1026
+		"SEC_OFFSET"..0x1024,
+		"SAMPLE_OFFSET"..0x1025,
+		"BYTE_OFFSET"..0x1026
 	)
 }

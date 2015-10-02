@@ -33,13 +33,13 @@ val ARB_draw_indirect = "ARBDrawIndirect".nativeClassGL("ARB_draw_indirect") {
 		MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
 		""",
 
-		"DRAW_INDIRECT_BUFFER" _ 0x8F3F
+		"DRAW_INDIRECT_BUFFER"..0x8F3F
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
-		"DRAW_INDIRECT_BUFFER_BINDING" _ 0x8F43
+		"DRAW_INDIRECT_BUFFER_BINDING"..0x8F43
 	)
 
 	GL40 reuse "DrawArraysIndirect"

@@ -29,7 +29,7 @@ val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_te
 		GetMultiTexParameterI{u}ivEXT.
 		""",
 
-		"TEXTURE_REDUCTION_MODE_EXT" _ 0x9366
+		"TEXTURE_REDUCTION_MODE_EXT"..0x9366
 	)
 
 	IntConstant(
@@ -39,7 +39,7 @@ val EXT_texture_filter_minmax = "EXTTextureFilterMinmax".nativeClassGLES("EXT_te
 		TEXTURE_REDUCTION_MODE_EXT.
 		""",
 
-		"WEIGHTED_AVERAGE_EXT" _ 0x9367
+		"WEIGHTED_AVERAGE_EXT"..0x9367
 	)
 
 	void(

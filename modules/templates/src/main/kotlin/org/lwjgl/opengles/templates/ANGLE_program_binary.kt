@@ -20,6 +20,6 @@ val ANGLE_program_binary = "ANGLEProgramBinary".nativeClassGLES("ANGLE_program_b
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ProgramBinaryOES.",
 
-		"PROGRAM_BINARY_ANGLE" _ 0x93A6
+		"PROGRAM_BINARY_ANGLE"..0x93A6
 	)
 }

@@ -78,9 +78,9 @@ val param_value = "a pointer to memory where the appropriate result being querie
 
 // Arguments
 
-val NEWL = AutoSize("event_wait_list") _ cl_uint.IN("num_events_in_wait_list", "the number of events in {@code event_wait_list}")
+val NEWL = AutoSize("event_wait_list")..cl_uint.IN("num_events_in_wait_list", "the number of events in {@code event_wait_list}")
 
-val EWL = nullable _ const _ cl_event_p.IN(
+val EWL = nullable..const..cl_event_p.IN(
 	"event_wait_list",
 	"""
 	a list of events that need to complete before this particular command can be executed. If {@code event_wait_list} is $NULL, then this particular command
@@ -89,7 +89,7 @@ val EWL = nullable _ const _ cl_event_p.IN(
 	"""
 )
 
-val EVENT = Check(1) _ nullable _ cl_event_p.OUT(
+val EVENT = Check(1)..nullable..cl_event_p.OUT(
 	"event",
 	"""
 	Returns an event object that identifies this particular command and can be used to query or queue a wait for this particular command to complete.
@@ -99,17 +99,17 @@ val EVENT = Check(1) _ nullable _ cl_event_p.OUT(
 	"""
 )
 
-val ERROR_RET = Check(1) _ nullable _ cl_int_p.OUT(
+val ERROR_RET = Check(1)..nullable..cl_int_p.OUT(
 	"errcode_ret",
 	"will return an appropriate error code. If $errcode_ret is $NULL, no error code is returned."
 )
 
-val PARAM_VALUE_SIZE = AutoSize("param_value") _ size_t.IN(
+val PARAM_VALUE_SIZE = AutoSize("param_value")..size_t.IN(
 	"param_value_size",
 	"the size in bytes of memory pointed to by {@code param_value}. This size must be &#x2265; size of return type. If {@code param_value} is $NULL, it is ignored."
 )
 
-val PARAM_VALUE_SIZE_RET = Check(1) _ nullable _ size_t_p.OUT(
+val PARAM_VALUE_SIZE_RET = Check(1)..nullable..size_t_p.OUT(
 	"param_value_size_ret",
 	"the actual size in bytes of data being queried by {@code param_value}. If $NULL, it is ignored."
 )
@@ -124,7 +124,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"Error Codes",
 
-		"SUCCESS" _ 0,
+		"SUCCESS"..0,
 		// We use expr here so that they are not converted to hex by the generator.
 		"DEVICE_NOT_FOUND" expr "-1",
 		"DEVICE_NOT_AVAILABLE" expr "-2",
@@ -176,24 +176,24 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"OpenCL Version",
 
-		"VERSION_1_0" _ 1
+		"VERSION_1_0"..1
 	)
 
 	IntConstant(
 		"cl_bool",
 
-		"FALSE" _ 0,
-		"TRUE" _ 1
+		"FALSE"..0,
+		"TRUE"..1
 	)
 
 	val PlatformInfo = IntConstant(
 		"cl_platform_info",
 
-		"PLATFORM_PROFILE" _ 0x0900,
-		"PLATFORM_VERSION" _ 0x0901,
-		"PLATFORM_NAME" _ 0x0902,
-		"PLATFORM_VENDOR" _ 0x0903,
-		"PLATFORM_EXTENSIONS" _ 0x0904
+		"PLATFORM_PROFILE"..0x0900,
+		"PLATFORM_VERSION"..0x0901,
+		"PLATFORM_NAME"..0x0902,
+		"PLATFORM_VENDOR"..0x0903,
+		"PLATFORM_EXTENSIONS"..0x0904
 	).javaDocLinks
 
 	val DeviceTypes = IntConstant(
@@ -203,62 +203,62 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"DEVICE_TYPE_CPU" expr "1 << 1",
 		"DEVICE_TYPE_GPU" expr "1 << 2",
 		"DEVICE_TYPE_ACCELERATOR" expr "1 << 3",
-		"DEVICE_TYPE_ALL" _ 0xFFFFFFFF.i
+		"DEVICE_TYPE_ALL"..0xFFFFFFFF.i
 	).javaDocLinks + " CL12#DEVICE_TYPE_CUSTOM"
 
 	val DeviceInfo = IntConstant(
 		"cl_device_info",
 
-		"DEVICE_TYPE" _ 0x1000,
-		"DEVICE_VENDOR_ID" _ 0x1001,
-		"DEVICE_MAX_COMPUTE_UNITS" _ 0x1002,
-		"DEVICE_MAX_WORK_ITEM_DIMENSIONS" _ 0x1003,
-		"DEVICE_MAX_WORK_GROUP_SIZE" _ 0x1004,
-		"DEVICE_MAX_WORK_ITEM_SIZES" _ 0x1005,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_CHAR" _ 0x1006,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_SHORT" _ 0x1007,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_" _ 0x1008,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_LONG" _ 0x1009,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT" _ 0x100A,
-		"DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE" _ 0x100B,
-		"DEVICE_MAX_CLOCK_FREQUENCY" _ 0x100C,
-		"DEVICE_ADDRESS_BITS" _ 0x100D,
-		"DEVICE_MAX_READ_IMAGE_ARGS" _ 0x100E,
-		"DEVICE_MAX_WRITE_IMAGE_ARGS" _ 0x100F,
-		"DEVICE_MAX_MEM_ALLOC_SIZE" _ 0x1010,
-		"DEVICE_IMAGE2D_MAX_WIDTH" _ 0x1011,
-		"DEVICE_IMAGE2D_MAX_HEIGHT" _ 0x1012,
-		"DEVICE_IMAGE3D_MAX_WIDTH" _ 0x1013,
-		"DEVICE_IMAGE3D_MAX_HEIGHT" _ 0x1014,
-		"DEVICE_IMAGE3D_MAX_DEPTH" _ 0x1015,
-		"DEVICE_IMAGE_SUPPORT" _ 0x1016,
-		"DEVICE_MAX_PARAMETER_SIZE" _ 0x1017,
-		"DEVICE_MAX_SAMPLERS" _ 0x1018,
-		"DEVICE_MEM_BASE_ADDR_ALIGN" _ 0x1019,
-		"DEVICE_MIN_DATA_TYPE_ALIGN_SIZE" _ 0x101A,
-		"DEVICE_SINGLE_FP_CONFIG" _ 0x101B,
-		"DEVICE_GLOBAL_MEM_CACHE_TYPE" _ 0x101C,
-		"DEVICE_GLOBAL_MEM_CACHELINE_SIZE" _ 0x101D,
-		"DEVICE_GLOBAL_MEM_CACHE_SIZE" _ 0x101E,
-		"DEVICE_GLOBAL_MEM_SIZE" _ 0x101F,
-		"DEVICE_MAX_CONSTANT_BUFFER_SIZE" _ 0x1020,
-		"DEVICE_MAX_CONSTANT_ARGS" _ 0x1021,
-		"DEVICE_LOCAL_MEM_TYPE" _ 0x1022,
-		"DEVICE_LOCAL_MEM_SIZE" _ 0x1023,
-		"DEVICE_ERROR_CORRECTION_SUPPORT" _ 0x1024,
-		"DEVICE_PROFILING_TIMER_RESOLUTION" _ 0x1025,
-		"DEVICE_ENDIAN_LITTLE" _ 0x1026,
-		"DEVICE_AVAILABLE" _ 0x1027,
-		"DEVICE_COMPILER_AVAILABLE" _ 0x1028,
-		"DEVICE_EXECUTION_CAPABILITIES" _ 0x1029,
-		"DEVICE_QUEUE_PROPERTIES" _ 0x102A,
-		"DEVICE_NAME" _ 0x102B,
-		"DEVICE_VENDOR" _ 0x102C,
-		"DRIVER_VERSION" _ 0x102D,
-		"DEVICE_PROFILE" _ 0x102E,
-		"DEVICE_VERSION" _ 0x102F,
-		"DEVICE_EXTENSIONS" _ 0x1030,
-		"DEVICE_PLATFORM" _ 0x1031
+		"DEVICE_TYPE"..0x1000,
+		"DEVICE_VENDOR_ID"..0x1001,
+		"DEVICE_MAX_COMPUTE_UNITS"..0x1002,
+		"DEVICE_MAX_WORK_ITEM_DIMENSIONS"..0x1003,
+		"DEVICE_MAX_WORK_GROUP_SIZE"..0x1004,
+		"DEVICE_MAX_WORK_ITEM_SIZES"..0x1005,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_CHAR"..0x1006,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_SHORT"..0x1007,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_"..0x1008,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_LONG"..0x1009,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_FLOAT"..0x100A,
+		"DEVICE_PREFERRED_VECTOR_WIDTH_DOUBLE"..0x100B,
+		"DEVICE_MAX_CLOCK_FREQUENCY"..0x100C,
+		"DEVICE_ADDRESS_BITS"..0x100D,
+		"DEVICE_MAX_READ_IMAGE_ARGS"..0x100E,
+		"DEVICE_MAX_WRITE_IMAGE_ARGS"..0x100F,
+		"DEVICE_MAX_MEM_ALLOC_SIZE"..0x1010,
+		"DEVICE_IMAGE2D_MAX_WIDTH"..0x1011,
+		"DEVICE_IMAGE2D_MAX_HEIGHT"..0x1012,
+		"DEVICE_IMAGE3D_MAX_WIDTH"..0x1013,
+		"DEVICE_IMAGE3D_MAX_HEIGHT"..0x1014,
+		"DEVICE_IMAGE3D_MAX_DEPTH"..0x1015,
+		"DEVICE_IMAGE_SUPPORT"..0x1016,
+		"DEVICE_MAX_PARAMETER_SIZE"..0x1017,
+		"DEVICE_MAX_SAMPLERS"..0x1018,
+		"DEVICE_MEM_BASE_ADDR_ALIGN"..0x1019,
+		"DEVICE_MIN_DATA_TYPE_ALIGN_SIZE"..0x101A,
+		"DEVICE_SINGLE_FP_CONFIG"..0x101B,
+		"DEVICE_GLOBAL_MEM_CACHE_TYPE"..0x101C,
+		"DEVICE_GLOBAL_MEM_CACHELINE_SIZE"..0x101D,
+		"DEVICE_GLOBAL_MEM_CACHE_SIZE"..0x101E,
+		"DEVICE_GLOBAL_MEM_SIZE"..0x101F,
+		"DEVICE_MAX_CONSTANT_BUFFER_SIZE"..0x1020,
+		"DEVICE_MAX_CONSTANT_ARGS"..0x1021,
+		"DEVICE_LOCAL_MEM_TYPE"..0x1022,
+		"DEVICE_LOCAL_MEM_SIZE"..0x1023,
+		"DEVICE_ERROR_CORRECTION_SUPPORT"..0x1024,
+		"DEVICE_PROFILING_TIMER_RESOLUTION"..0x1025,
+		"DEVICE_ENDIAN_LITTLE"..0x1026,
+		"DEVICE_AVAILABLE"..0x1027,
+		"DEVICE_COMPILER_AVAILABLE"..0x1028,
+		"DEVICE_EXECUTION_CAPABILITIES"..0x1029,
+		"DEVICE_QUEUE_PROPERTIES"..0x102A,
+		"DEVICE_NAME"..0x102B,
+		"DEVICE_VENDOR"..0x102C,
+		"DRIVER_VERSION"..0x102D,
+		"DEVICE_PROFILE"..0x102E,
+		"DEVICE_VERSION"..0x102F,
+		"DEVICE_EXTENSIONS"..0x1030,
+		"DEVICE_PLATFORM"..0x1031
 	).javaDocLinks + """ CL11#DEVICE_PREFERRED_VECTOR_WIDTH_HALF CL11#DEVICE_HOST_UNIFIED_MEMORY CL11#DEVICE_NATIVE_VECTOR_WIDTH_CHAR
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_SHORT CL11#DEVICE_NATIVE_VECTOR_WIDTH_INT CL11#DEVICE_NATIVE_VECTOR_WIDTH_LONG
 	CL11#DEVICE_NATIVE_VECTOR_WIDTH_FLOAT CL11#DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE CL11#DEVICE_NATIVE_VECTOR_WIDTH_HALF CL11#DEVICE_OPENCL_C_VERSION"""
@@ -277,16 +277,16 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"cl_device_mem_cache_type",
 
-		"NONE" _ 0x0,
-		"READ_ONLY_CACHE" _ 0x1,
-		"READ_WRITE_CACHE" _ 0x2
+		"NONE"..0x0,
+		"READ_ONLY_CACHE"..0x1,
+		"READ_WRITE_CACHE"..0x2
 	)
 
 	IntConstant(
 		"cl_device_local_mem_type",
 
-		"LOCAL" _ 0x1,
-		"GLOBAL" _ 0x2
+		"LOCAL"..0x1,
+		"GLOBAL"..0x2
 	)
 
 	IntConstant(
@@ -306,15 +306,15 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val ContextInfo = IntConstant(
 		"cl_context_info",
 
-		"CONTEXT_REFERENCE_COUNT" _ 0x1080,
-		"CONTEXT_DEVICES" _ 0x1081,
-		"CONTEXT_PROPERTIES" _ 0x1082
+		"CONTEXT_REFERENCE_COUNT"..0x1080,
+		"CONTEXT_DEVICES"..0x1081,
+		"CONTEXT_PROPERTIES"..0x1082
 	).javaDocLinks + " CL11#CONTEXT_NUM_DEVICES"
 
 	val ContextProperties = IntConstant(
 		"cl_context_info + cl_context_properties",
 
-		"CONTEXT_PLATFORM" _ 0x1084
+		"CONTEXT_PLATFORM"..0x1084
 	).javaDocLinks + """ CL12#CONTEXT_INTEROP_USER_SYNC KHRGLSharing#GL_CONTEXT_KHR KHRGLSharing#EGL_DISPLAY_KHR KHRGLSharing#GLX_DISPLAY_KHR
 	KHRGLSharing#WGL_HDC_KHR KHRGLSharing#CGL_SHAREGROUP_KHR
 	"""
@@ -322,10 +322,10 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val CommandQueueInfo = IntConstant(
 		"cl_command_queue_info",
 
-		"QUEUE_CONTEXT" _ 0x1090,
-		"QUEUE_DEVICE" _ 0x1091,
-		"QUEUE_REFERENCE_COUNT" _ 0x1092,
-		"QUEUE_PROPERTIES" _ 0x1093
+		"QUEUE_CONTEXT"..0x1090,
+		"QUEUE_DEVICE"..0x1091,
+		"QUEUE_REFERENCE_COUNT"..0x1092,
+		"QUEUE_PROPERTIES"..0x1093
 	).javaDocLinks + " CL20#QUEUE_SIZE"
 
 	val MemFlags = IntConstant(
@@ -342,94 +342,94 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	IntConstant(
 		"cl_channel_order",
 
-		"R" _ 0x10B0,
-		"A" _ 0x10B1,
-		"RG" _ 0x10B2,
-		"RA" _ 0x10B3,
-		"RGB" _ 0x10B4,
-		"RGBA" _ 0x10B5,
-		"BGRA" _ 0x10B6,
-		"ARGB" _ 0x10B7,
-		"INTENSITY" _ 0x10B8,
-		"LUMINANCE" _ 0x10B9
+		"R"..0x10B0,
+		"A"..0x10B1,
+		"RG"..0x10B2,
+		"RA"..0x10B3,
+		"RGB"..0x10B4,
+		"RGBA"..0x10B5,
+		"BGRA"..0x10B6,
+		"ARGB"..0x10B7,
+		"INTENSITY"..0x10B8,
+		"LUMINANCE"..0x10B9
 	)
 
 	IntConstant(
 		"cl_channel_type",
 
-		"SNORM_INT8" _ 0x10D0,
-		"SNORM_INT16" _ 0x10D1,
-		"UNORM_INT8" _ 0x10D2,
-		"UNORM_INT16" _ 0x10D3,
-		"UNORM_SHORT_565" _ 0x10D4,
-		"UNORM_SHORT_555" _ 0x10D5,
-		"UNORM_INT_101010" _ 0x10D6,
-		"SIGNED_INT8" _ 0x10D7,
-		"SIGNED_INT16" _ 0x10D8,
-		"SIGNED_INT32" _ 0x10D9,
-		"UNSIGNED_INT8" _ 0x10DA,
-		"UNSIGNED_INT16" _ 0x10DB,
-		"UNSIGNED_INT32" _ 0x10DC,
-		"HALF_FLOAT" _ 0x10DD,
-		"FLOAT" _ 0x10DE
+		"SNORM_INT8"..0x10D0,
+		"SNORM_INT16"..0x10D1,
+		"UNORM_INT8"..0x10D2,
+		"UNORM_INT16"..0x10D3,
+		"UNORM_SHORT_565"..0x10D4,
+		"UNORM_SHORT_555"..0x10D5,
+		"UNORM_INT_101010"..0x10D6,
+		"SIGNED_INT8"..0x10D7,
+		"SIGNED_INT16"..0x10D8,
+		"SIGNED_INT32"..0x10D9,
+		"UNSIGNED_INT8"..0x10DA,
+		"UNSIGNED_INT16"..0x10DB,
+		"UNSIGNED_INT32"..0x10DC,
+		"HALF_FLOAT"..0x10DD,
+		"FLOAT"..0x10DE
 	)
 
 	IntConstant(
 		"cl_mem_object_type",
 
-		"MEM_OBJECT_BUFFER" _ 0x10F0,
-		"MEM_OBJECT_IMAGE2D" _ 0x10F1,
-		"MEM_OBJECT_IMAGE3D" _ 0x10F2
+		"MEM_OBJECT_BUFFER"..0x10F0,
+		"MEM_OBJECT_IMAGE2D"..0x10F1,
+		"MEM_OBJECT_IMAGE3D"..0x10F2
 	)
 
 	val MemInfo = IntConstant(
 		"cl_mem_info",
 
-		"MEM_TYPE" _ 0x1100,
-		"MEM_FLAGS" _ 0x1101,
-		"MEM_SIZE" _ 0x1102,
-		"MEM_HOST_PTR" _ 0x1103,
-		"MEM_MAP_COUNT" _ 0x1104,
-		"MEM_REFERENCE_COUNT" _ 0x1105,
-		"MEM_CONTEXT" _ 0x1106
+		"MEM_TYPE"..0x1100,
+		"MEM_FLAGS"..0x1101,
+		"MEM_SIZE"..0x1102,
+		"MEM_HOST_PTR"..0x1103,
+		"MEM_MAP_COUNT"..0x1104,
+		"MEM_REFERENCE_COUNT"..0x1105,
+		"MEM_CONTEXT"..0x1106
 	).javaDocLinks + " CL11#MEM_ASSOCIATED_MEMOBJECT CL11#MEM_OFFSET"
 
 	val ImageInfo = IntConstant(
 		"cl_image_info",
 
-		"IMAGE_FORMAT" _ 0x1110,
-		"IMAGE_ELEMENT_SIZE" _ 0x1111,
-		"IMAGE_ROW_PITCH" _ 0x1112,
-		"IMAGE_SLICE_PITCH" _ 0x1113,
-		"IMAGE_WIDTH" _ 0x1114,
-		"IMAGE_HEIGHT" _ 0x1115,
-		"IMAGE_DEPTH" _ 0x1116
+		"IMAGE_FORMAT"..0x1110,
+		"IMAGE_ELEMENT_SIZE"..0x1111,
+		"IMAGE_ROW_PITCH"..0x1112,
+		"IMAGE_SLICE_PITCH"..0x1113,
+		"IMAGE_WIDTH"..0x1114,
+		"IMAGE_HEIGHT"..0x1115,
+		"IMAGE_DEPTH"..0x1116
 	).javaDocLinks + " CL12#IMAGE_ARRAY_SIZE CL12#IMAGE_BUFFER CL12#IMAGE_NUM_MIP_LEVELS CL12#IMAGE_NUM_SAMPLES"
 
 	val AddressingModes = IntConstant(
 		"cl_addressing_mode",
 
-		"ADDRESS_NONE" _ 0x1130,
-		"ADDRESS_CLAMP_TO_EDGE" _ 0x1131,
-		"ADDRESS_CLAMP" _ 0x1132,
-		"ADDRESS_REPEAT" _ 0x1133
+		"ADDRESS_NONE"..0x1130,
+		"ADDRESS_CLAMP_TO_EDGE"..0x1131,
+		"ADDRESS_CLAMP"..0x1132,
+		"ADDRESS_REPEAT"..0x1133
 	).javaDocLinks + " CL11#ADDRESS_MIRRORED_REPEAT"
 
 	val FilterModes = IntConstant(
 		"cl_filter_mode",
 
-		"FILTER_NEAREST" _ 0x1140,
-		"FILTER_LINEAR" _ 0x1141
+		"FILTER_NEAREST"..0x1140,
+		"FILTER_LINEAR"..0x1141
 	).javaDocLinks
 
 	val SamplerInfo = IntConstant(
 		"cl_sampler_info",
 
-		"SAMPLER_REFERENCE_COUNT" _ 0x1150,
-		"SAMPLER_CONTEXT" _ 0x1151,
-		"SAMPLER_NORMALIZED_COORDS" _ 0x1152,
-		"SAMPLER_ADDRESSING_MODE" _ 0x1153,
-		"SAMPLER_FILTER_MODE" _ 0x1154
+		"SAMPLER_REFERENCE_COUNT"..0x1150,
+		"SAMPLER_CONTEXT"..0x1151,
+		"SAMPLER_NORMALIZED_COORDS"..0x1152,
+		"SAMPLER_ADDRESSING_MODE"..0x1153,
+		"SAMPLER_FILTER_MODE"..0x1154
 	).javaDocLinks
 
 	val MapFlags = IntConstant(
@@ -442,97 +442,97 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 	val ProgramInfo = IntConstant(
 		"cl_program_info",
 
-		"PROGRAM_REFERENCE_COUNT" _ 0x1160,
-		"PROGRAM_CONTEXT" _ 0x1161,
-		"PROGRAM_NUM_DEVICES" _ 0x1162,
-		"PROGRAM_DEVICES" _ 0x1163,
-		"PROGRAM_SOURCE" _ 0x1164,
-		"PROGRAM_BINARY_SIZES" _ 0x1165,
-		"PROGRAM_BINARIES" _ 0x1166
+		"PROGRAM_REFERENCE_COUNT"..0x1160,
+		"PROGRAM_CONTEXT"..0x1161,
+		"PROGRAM_NUM_DEVICES"..0x1162,
+		"PROGRAM_DEVICES"..0x1163,
+		"PROGRAM_SOURCE"..0x1164,
+		"PROGRAM_BINARY_SIZES"..0x1165,
+		"PROGRAM_BINARIES"..0x1166
 	).javaDocLinks + " CL12#PROGRAM_NUM_KERNELS CL12#PROGRAM_KERNEL_NAMES"
 
 	val ProgramBuildInfo = IntConstant(
 		"cl_program_build_info",
 
-		"PROGRAM_BUILD_STATUS" _ 0x1181,
-		"PROGRAM_BUILD_OPTIONS" _ 0x1182,
-		"PROGRAM_BUILD_LOG" _ 0x1183
+		"PROGRAM_BUILD_STATUS"..0x1181,
+		"PROGRAM_BUILD_OPTIONS"..0x1182,
+		"PROGRAM_BUILD_LOG"..0x1183
 	).javaDocLinks + " CL12#PROGRAM_BINARY_TYPE"
 
 	IntConstant(
 		"cl_build_status",
 
-		"BUILD_SUCCESS" _ 0,
-		"BUILD_NONE" _ -1,
-		"BUILD_ERROR" _ -2,
-		"BUILD_IN_PROGRESS" _ -3
+		"BUILD_SUCCESS"..0,
+		"BUILD_NONE"..-1,
+		"BUILD_ERROR"..-2,
+		"BUILD_IN_PROGRESS"..-3
 	)
 
 	val KernelInfo = IntConstant(
 		"cl_kernel_info",
 
-		"KERNEL_FUNCTION_NAME" _ 0x1190,
-		"KERNEL_NUM_ARGS" _ 0x1191,
-		"KERNEL_REFERENCE_COUNT" _ 0x1192,
-		"KERNEL_CONTEXT" _ 0x1193,
-		"KERNEL_PROGRAM" _ 0x1194
+		"KERNEL_FUNCTION_NAME"..0x1190,
+		"KERNEL_NUM_ARGS"..0x1191,
+		"KERNEL_REFERENCE_COUNT"..0x1192,
+		"KERNEL_CONTEXT"..0x1193,
+		"KERNEL_PROGRAM"..0x1194
 	).javaDocLinks + " CL12#KERNEL_ATTRIBUTES"
 
 	val KernelWorkGroupInfo = IntConstant(
 		"cl_kernel_work_group_info",
 
-		"KERNEL_WORK_GROUP_SIZE" _ 0x11B0,
-		"KERNEL_COMPILE_WORK_GROUP_SIZE" _ 0x11B1,
-		"KERNEL_LOCAL_MEM_SIZE" _ 0x11B2
+		"KERNEL_WORK_GROUP_SIZE"..0x11B0,
+		"KERNEL_COMPILE_WORK_GROUP_SIZE"..0x11B1,
+		"KERNEL_LOCAL_MEM_SIZE"..0x11B2
 	).javaDocLinks + " CL11#KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE CL11#KERNEL_PRIVATE_MEM_SIZE CL12#KERNEL_GLOBAL_WORK_SIZE"
 
 	val EventInfo = IntConstant(
 		"cl_event_info",
 
-		"EVENT_COMMAND_QUEUE" _ 0x11D0,
-		"EVENT_COMMAND_TYPE" _ 0x11D1,
-		"EVENT_REFERENCE_COUNT" _ 0x11D2,
-		"EVENT_COMMAND_EXECUTION_STATUS" _ 0x11D3
+		"EVENT_COMMAND_QUEUE"..0x11D0,
+		"EVENT_COMMAND_TYPE"..0x11D1,
+		"EVENT_REFERENCE_COUNT"..0x11D2,
+		"EVENT_COMMAND_EXECUTION_STATUS"..0x11D3
 	).javaDocLinks + " CL11#EVENT_CONTEXT"
 
 	IntConstant(
 		"cl_command_type",
 
-		"COMMAND_NDRANGE_KERNEL" _ 0x11F0,
-		"COMMAND_TASK" _ 0x11F1,
-		"COMMAND_NATIVE_KERNEL" _ 0x11F2,
-		"COMMAND_READ_BUFFER" _ 0x11F3,
-		"COMMAND_WRITE_BUFFER" _ 0x11F4,
-		"COMMAND_COPY_BUFFER" _ 0x11F5,
-		"COMMAND_READ_IMAGE" _ 0x11F6,
-		"COMMAND_WRITE_IMAGE" _ 0x11F7,
-		"COMMAND_COPY_IMAGE" _ 0x11F8,
-		"COMMAND_COPY_IMAGE_TO_BUFFER" _ 0x11F9,
-		"COMMAND_COPY_BUFFER_TO_IMAGE" _ 0x11FA,
-		"COMMAND_MAP_BUFFER" _ 0x11FB,
-		"COMMAND_MAP_IMAGE" _ 0x11FC,
-		"COMMAND_UNMAP_MEM_OBJECT" _ 0x11FD,
-		"COMMAND_MARKER" _ 0x11FE,
-		"COMMAND_ACQUIRE_GL_OBJECTS" _ 0x11FF,
-		"COMMAND_RELEASE_GL_OBJECTS" _ 0x1200
+		"COMMAND_NDRANGE_KERNEL"..0x11F0,
+		"COMMAND_TASK"..0x11F1,
+		"COMMAND_NATIVE_KERNEL"..0x11F2,
+		"COMMAND_READ_BUFFER"..0x11F3,
+		"COMMAND_WRITE_BUFFER"..0x11F4,
+		"COMMAND_COPY_BUFFER"..0x11F5,
+		"COMMAND_READ_IMAGE"..0x11F6,
+		"COMMAND_WRITE_IMAGE"..0x11F7,
+		"COMMAND_COPY_IMAGE"..0x11F8,
+		"COMMAND_COPY_IMAGE_TO_BUFFER"..0x11F9,
+		"COMMAND_COPY_BUFFER_TO_IMAGE"..0x11FA,
+		"COMMAND_MAP_BUFFER"..0x11FB,
+		"COMMAND_MAP_IMAGE"..0x11FC,
+		"COMMAND_UNMAP_MEM_OBJECT"..0x11FD,
+		"COMMAND_MARKER"..0x11FE,
+		"COMMAND_ACQUIRE_GL_OBJECTS"..0x11FF,
+		"COMMAND_RELEASE_GL_OBJECTS"..0x1200
 	)
 
 	IntConstant(
 		"command execution status",
 
-		"COMPLETE" _ 0x0,
-		"RUNNING" _ 0x1,
-		"SUBMITTED" _ 0x2,
-		"QUEUED" _ 0x3
+		"COMPLETE"..0x0,
+		"RUNNING"..0x1,
+		"SUBMITTED"..0x2,
+		"QUEUED"..0x3
 	)
 
 	val ProfilingInfo = IntConstant(
 		"cl_profiling_info",
 
-		"PROFILING_COMMAND_QUEUED" _ 0x1280,
-		"PROFILING_COMMAND_SUBMIT" _ 0x1281,
-		"PROFILING_COMMAND_START" _ 0x1282,
-		"PROFILING_COMMAND_END" _ 0x1283
+		"PROFILING_COMMAND_QUEUED"..0x1280,
+		"PROFILING_COMMAND_SUBMIT"..0x1281,
+		"PROFILING_COMMAND_START"..0x1282,
+		"PROFILING_COMMAND_END"..0x1283
 	).javaDocLinks
 
 	// ------------------[ OPENCL Platform Layer ]------------------
@@ -541,14 +541,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"GetPlatformIDs",
 		"Obtains the list of available platforms.",
 
-		AutoSize("platforms") _ cl_uint.IN(
+		AutoSize("platforms")..cl_uint.IN(
 			"num_entries",
 			"""
 			the number of {@code cl_platform_id} entries that can be added to {@code platforms}. If {@code platforms} is not $NULL, the {@code num_entries} must
 			be greater than zero.
 			"""
 		),
-		nullable _ cl_platform_id_p.OUT(
+		nullable..cl_platform_id_p.OUT(
 			"platforms",
 			"""
 			returns a list of OpenCL platforms found. The {@code cl_platform_id} values returned in {@code platforms} can be used to identify a specific OpenCL
@@ -556,7 +556,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			specified by {@code num_entries} or the number of OpenCL platforms available.
 			"""
 		),
-		Check(1) _ nullable _ cl_uint_p.OUT(
+		Check(1)..nullable..cl_uint_p.OUT(
 			"num_platforms",
 			"returns the number of OpenCL platforms available. If {@code num_platforms} is $NULL, this argument is ignored."
 		),
@@ -581,7 +581,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_platform_id.IN("platform", "the platform to query"),
 		cl_platform_info.IN("param_name", "the parameter to query", PlatformInfo),
 		PARAM_VALUE_SIZE,
-		nullable _ void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
+		nullable..void_p.OUT("param_value", "the memory location where appropriate values for a given {@code param_name} will be returned"),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -611,14 +611,14 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			DeviceTypes, LinkMode.BITFIELD
 		),
-		AutoSize("devices") _ cl_uint.IN(
+		AutoSize("devices")..cl_uint.IN(
 			"num_entries",
 			"""
 			the number of {@code cl_device_id} entries that can be added to devices. If {@code devices} is not $NULL, the {@code num_entries} must be greater
 			than zero.
 			"""
 		),
-		nullable _ cl_device_id_p.OUT(
+		nullable..cl_device_id_p.OUT(
 			"devices",
 			"""
 			returns a list of OpenCL devices found. The {@code cl_device_id} values returned in {@code devices} can be used to identify a specific OpenCL
@@ -626,7 +626,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			by {@code num_entries} or the number of OpenCL devices whose type matches {@code device_type}.
 			"""
 		),
-		Check(1) _ nullable _ cl_uint_p.OUT(
+		Check(1)..nullable..cl_uint_p.OUT(
 			"num_devices",
 			"returns the number of OpenCL devices available that match {@code device_type}. If {@code num_devices} is $NULL, this argument is ignored."
 		),
@@ -661,7 +661,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		PARAM_VALUE_SIZE,
 		MultiType(
 			PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER
-		) _ nullable _ void_p.OUT("param_value", param_value),
+		)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -687,7 +687,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		command-queues, memory, program and kernel objects and for executing kernels on one or more devices specified in the context.
 		""",
 
-		Check(3) _ const _ cl_context_properties_p.IN(
+		Check(3)..const..cl_context_properties_p.IN(
 			"properties",
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -695,12 +695,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			ContextProperties
 		),
-		AutoSize("devices") _ cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
-		SingleValue("device") _ const _ cl_device_id_p.IN(
+		AutoSize("devices")..cl_uint.IN("num_devices", "the number of devices specified in the {@code devices} argument"),
+		SingleValue("device")..const..cl_device_id_p.IN(
 			"devices",
 			"a list of unique devices returned by #GetDeviceIDs() or sub-devices created by CL12#CreateSubDevices() for a platform"
 		),
-		nullable _ cl_create_context_callback.IN(
+		nullable..cl_create_context_callback.IN(
 			"pfn_notify",
 			"""
 			a callback function that can be registered by the application. This callback function will be used by the OpenCL implementation to report
@@ -710,7 +710,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			If {@code pfn_notify} is $NULL, no callback function is registered.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET,
 
 		returnDoc =
@@ -741,7 +741,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"CreateContextFromType",
 		"Creates a context using devices of the specified type. See #CreateContext() for details.",
 
-		Check(3) _ const _ cl_context_properties_p.IN(
+		Check(3)..const..cl_context_properties_p.IN(
 			"properties",
 			"""
 			a list of context property names and their corresponding values. Each property name is immediately followed by the corresponding desired value. The
@@ -749,8 +749,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		cl_device_type.IN("device_type", "a bit-field that identifies the type of device", DeviceTypes),
-		nullable _ cl_create_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
-		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..cl_create_context_callback.IN("pfn_notify", "a callback function that can be registered by the application"),
+		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 		ERROR_RET
 	)
 
@@ -806,7 +806,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_context.IN("context", "the OpenCL context being queried"),
 		cl_context_info.IN("param_name", "an enumeration constant that specifies the information to query", ContextInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -917,7 +917,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_command_queue.IN("command_queue", "the command-queue being queried"),
 		cl_command_queue_info.IN("param_name", "the information to query", CommandQueueInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -948,8 +948,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			""",
 			MemFlags
 		),
-		AutoSize("host_ptr") _ size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ optional _ void_p.IN(
+		AutoSize("host_ptr")..size_t.IN("size", "the size in bytes of the buffer memory object to be allocated"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..optional..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the buffer data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be
@@ -1018,10 +1018,10 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		size_t.IN("offset", "the offset in bytes in the buffer object to read from"),
-		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being read"),
+		AutoSize("ptr")..size_t.IN("size", "the size in bytes of data being read"),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+		)..void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1089,8 +1089,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		size_t.IN("offset", "the offset in bytes in the buffer object to write to"),
-		AutoSize("ptr") _ size_t.IN("size", "the size in bytes of data being written"),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		AutoSize("ptr")..size_t.IN("size", "the size in bytes of data being written"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..const..void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1174,7 +1174,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(MapPointer("size") _ void_p)(
+	(MapPointer("size")..void_p)(
 		"EnqueueMapBuffer",
 		"""
 		Enqueues a command to map a region of the buffer object given by buffer into the host address space and returns a pointer to this mapped region.
@@ -1259,7 +1259,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify allocation and usage information about the image memory object being created", MemFlags),
-		const _ cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
+		const..cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
 		size_t.IN("image_width", "the width of the image in pixels"),
 		size_t.IN("image_height", "the height of the image in pixels"),
 		size_t.IN(
@@ -1270,7 +1270,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image_width * size of element} in bytes. If {@code image_row_pitch} is not 0, it must be a multiple of the image element size in bytes.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ nullable _ void_p.IN(
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1315,7 +1315,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 
 		cl_context.IN("context", "a valid OpenCL context on which the image object is to be created"),
 		cl_mem_flags.IN("flags", "a bit-field that is used to specify allocation and usage information about the image memory object being created", MemFlags),
-		const _ cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
+		const..cl_image_format_p.IN("image_format", "a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"),
 		size_t.IN("image_width", "the width of the image in pixels"),
 		size_t.IN("image_height", "the height of the image in pixels"),
 		size_t.IN("image_depth", "the depth of the image in pixels. This must be a value &gt; 1."),
@@ -1336,7 +1336,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			the {@code image_row_pitch}.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ nullable _ void_p.IN(
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. The size of the buffer that {@code host_ptr} points to must be &#x2265;
@@ -1401,18 +1401,18 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			CL12#MEM_OBJECT_IMAGE2D_ARRAY
 			"""
 		),
-		AutoSize("image_formats") _ cl_uint.IN(
+		AutoSize("image_formats")..cl_uint.IN(
 			"num_entries",
 			"the number of entries that can be returned in the memory location given by {@code image_formats}"
 		),
-		nullable _ StructBuffer _ cl_image_format_p.OUT(
+		nullable..StructBuffer..cl_image_format_p.OUT(
 			"image_formats",
 			"""
 			a pointer to a memory location where the list of supported image formats are returned. Each entry describes a ##CLImageFormat structure
 			supported by the OpenCL implementation. If {@code image_formats} is $NULL, it is ignored.
 			"""
 		),
-		Check(1) _ nullable _ cl_uint_p.OUT(
+		Check(1)..nullable..cl_uint_p.OUT(
 			"num_image_formats",
 			"""
 			the actual number of supported image formats for a specific context and values specified by {@code flags}. If {@code num_image_formats} is $NULL, it
@@ -1468,7 +1468,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			the buffer that {@code ptr} points to can be used by the application.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"origin",
 			"""
 			defines the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1478,7 +1478,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			defines the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and
@@ -1504,7 +1504,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read from"),
+		)..void_p.OUT("ptr", "the pointer to a buffer in host memory where image data is to be read from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1592,7 +1592,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			completed, the memory pointed to by {@code ptr} can then be reused by the application.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"origin",
 			"""
 			defines the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1602,7 +1602,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			defines the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and
@@ -1626,7 +1626,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			slice pitch is calculated based on the {@code input_row_pitch * height}.
 			"""
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..const..void_p.IN("ptr", "the pointer to a buffer in host memory where image data is to be written to"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -1706,7 +1706,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		cl_mem.IN("src_image", ""),
 		cl_mem.IN("dst_image", ""),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"src_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1716,7 +1716,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			array. If {@code src_image} is a 2D image array object, {@code src_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"dst_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1726,7 +1726,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			index in the 1D image array. If {@code dst_image} is a 2D image array object, {@code dst_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1791,7 +1791,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		),
 		cl_mem.IN("src_image", "a valid image object"),
 		cl_mem.IN("dst_buffer", "a valid buffer object"),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"src_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1801,7 +1801,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			array. If {@code src_image} is a 2D image array object, {@code src_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1879,7 +1879,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_mem.IN("src_buffer", "a valid buffer object"),
 		cl_mem.IN("dst_image", "a valid image object"),
 		size_t.IN("src_offset", "the offset where to begin copying data from {@code src_buffer}"),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"dst_origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1889,7 +1889,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			index in the 1D image array. If {@code dst_image} is a 2D image array object, {@code dst_origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -1946,7 +1946,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		"""
 	)
 
-	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)") _ void_p)(
+	(MapPointer("(int)clGetMemObjectInfoPointer(image, CL_MEM_SIZE)")..void_p)(
 		"EnqueueMapImage",
 		"""
 		Enqueues a command to map a region in the image object given by {@code image} into the host address space and returns a pointer to this mapped region.
@@ -1983,7 +1983,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			"""
 		),
 		cl_map_flags.IN("map_flags", "a bit-field", MapFlags),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the
@@ -1993,7 +1993,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code image} is a 2D image array object, {@code origin[2]} describes the image index in the 2D image array.
 			"""
 		),
-		Check(3) _ const _ size_t_p.IN(
+		Check(3)..const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -2002,8 +2002,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			must be 1. If {@code image} is a 1D image array object, {@code region[2]} must be 1. The values in {@code region} cannot be 0.
 			"""
 		),
-		Check(1) _ size_t_p.OUT("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-$NULL value."),
-		Check(1) _ nullable _ size_t_p.OUT(
+		Check(1)..size_t_p.OUT("image_row_pitch", "the scan-line pitch in bytes for the mapped region. This must be a non-$NULL value."),
+		Check(1)..nullable..size_t_p.OUT(
 			"image_slice_pitch",
 			"""
 			returns the size in bytes of each 2D slice of a 3D image or the size of each 1D or 2D image in a 1D or 2D image array for the mapped region. For a
@@ -2077,7 +2077,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		MultiType(
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_POINTER
-		) _ nullable _ void_p.OUT("param_value", param_value),
+		)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2187,7 +2187,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_LONG,
 			PointerMapping.DATA_POINTER
-		) _ nullable _ void_p.OUT("param_value", param_value),
+		)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2288,7 +2288,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		MultiType(
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_POINTER
-		) _ nullable _ void_p.OUT("param_value", param_value),
+		)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2315,12 +2315,12 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		AutoSize("strings", "lengths") _ cl_uint.IN("count", "the number of elements in the {@code strings} and {@code lengths} arrays"),
-		PointerArray(cl_charUTF8_p, "string", "lengths") _ const _ cl_charUTF8_pp.IN(
+		AutoSize("strings", "lengths")..cl_uint.IN("count", "the number of elements in the {@code strings} and {@code lengths} arrays"),
+		PointerArray(cl_charUTF8_p, "string", "lengths")..const..cl_charUTF8_pp.IN(
 			"strings",
 			"an array of {@code count} pointers to optionally null-terminated character strings that make up the source code"
 		),
-		nullable _ const _ size_t_p.IN(
+		nullable..const..size_t_p.IN(
 			"lengths",
 			"""
 			an array with the number of chars in each string (the string length). If an element in {@code lengths} is zero, its accompanying string is
@@ -2367,19 +2367,19 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		AutoSize("binaries", "device_list", "lengths", "binary_status") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		const _ cl_device_id_p.IN(
+		AutoSize("binaries", "device_list", "lengths", "binary_status")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		const..cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices that are in {@code context}. device_list must be a non-$NULL value. The binaries are loaded for devices specified in
 			this list.
 			"""
 		),
-		const _ size_t_p.IN(
+		const..size_t_p.IN(
 			"lengths",
 			"an array of the size in bytes of the program binaries to be loaded for devices specified by {@code device_list}."
 		),
-		PointerArray(cl_uchar_p, "binary", "lengths") _ const _ cl_uchar_pp.IN(
+		PointerArray(cl_uchar_p, "binary", "lengths")..const..cl_uchar_pp.IN(
 			"binaries",
 			"""
 			an array of pointers to program binaries to be loaded for devices specified by {@code device_list}. For each device given by {@code device_list[i]},
@@ -2387,7 +2387,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			{@code lengths[i]}. {@code lengths[i]} cannot be zero and {@code binaries[i]} cannot be a $NULL pointer.
 			"""
 		),
-		nullable _ cl_int_p.OUT(
+		nullable..cl_int_p.OUT(
 			"binary_status",
 			"""
 			returns whether the program binary for each device specified in device_list was loaded successfully or not. It is an array of {@code num_devices}
@@ -2464,8 +2464,8 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		""",
 
 		cl_program.IN("program", "the program object"),
-		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		SingleValue("device") _ nullable _ const _ cl_device_id_p.IN(
+		AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		SingleValue("device")..nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the program executable is built for all
@@ -2473,11 +2473,11 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			executable is built for devices specified in this list for which a source or binary has been loaded.
 			"""
 		),
-		const _ cl_charASCII_p.IN(
+		const..cl_charASCII_p.IN(
 			"options",
 			"a pointer to a null-terminated string of characters that describes the build options to be used for building the program executable"
 		),
-		nullable _ cl_program_callback.IN(
+		nullable..cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -2489,7 +2489,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 			that the callback function is thread-safe.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -2543,7 +2543,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_program.IN("program", "the program object being queried"),
 		cl_program_info.IN("param_name", "the information to query", ProgramInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2573,7 +2573,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		cl_device_id.IN("device", "the device for which build information is being queried. {@code device} must be a valid device associated with {@code program}."),
 		cl_program_info.IN("param_name", "the information to query", ProgramBuildInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2610,7 +2610,7 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		""",
 
 		cl_program.IN("program", "a program object with a successfully built executable"),
-		const _ cl_charASCII_p.IN("kernel_name", "a function name in the program declared with the {@code __kernel} qualifier"),
+		const..cl_charASCII_p.IN("kernel_name", "a function name in the program declared with the {@code __kernel} qualifier"),
 		ERROR_RET,
 
 		returnDoc =
@@ -2642,15 +2642,15 @@ val CL10 = "CL10".nativeClassCL("CL10") {
 		""",
 
 		cl_program.IN("program", "a program object with a successfully built executable"),
-		AutoSize("kernels") _ cl_uint.IN("num_kernels", "the size of memory pointed to by kernels specified as the number of cl_kernel entries"),
-		nullable _ cl_kernel_p.OUT(
+		AutoSize("kernels")..cl_uint.IN("num_kernels", "the size of memory pointed to by kernels specified as the number of cl_kernel entries"),
+		nullable..cl_kernel_p.OUT(
 			"kernels",
 			"""
 			the buffer where the kernel objects for kernels in {@code program} will be returned. If {@code kernels} is $NULL, it is ignored. If {@code kernels}
 			is not $NULL, {@code num_kernels} must be greater than or equal to the number of kernels in {@code program}.
 			"""
 		),
-		Check(1) _ nullable _ cl_uint_p.OUT(
+		Check(1)..nullable..cl_uint_p.OUT(
 			"num_kernels_ret",
 			"the number of kernels in {@code program}. If {@code num_kernels_ret} is $NULL, it is ignored."
 		),
@@ -2736,7 +2736,7 @@ kernel void image_filter (
 			by {@code clSetKernelArg}, Users may not rely on a kernel object to retain objects specified as argument values to the kernel.
 			"""
 		),
-		AutoSize("arg_value") _ size_t.IN(
+		AutoSize("arg_value")..size_t.IN(
 			"arg_size",
 			"""
 			the size of the argument value. If the argument is a memory object, the size is the size of the buffer or image object type. For arguments declared
@@ -2748,14 +2748,14 @@ kernel void image_filter (
 		// optional generates clSetKernelArg(long kernel, int arg_index, long arg_size)
 		// MultiType generates clSetKernalArg(long kernel, int arg_index, <type>Buffer arg_value)
 		// SingleValue generates clSetKernelArg<xp>(long kernel, int arg_index, <p> arg<x-1>, ...), where x = 1..4
-		optional _ MultiType(
+		optional..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_LONG,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE,
 			PointerMapping.DATA_POINTER
-		) _ SingleValue("arg") _ const _ void_p.IN(
+		)..SingleValue("arg")..const..void_p.IN(
 			"arg_value",
 			"""
 			a pointer to data that should be used as the argument value for argument specified by {@code arg_index}. The argument data pointed to by
@@ -2818,7 +2818,7 @@ kernel void image_filter (
 		cl_kernel.IN("kernel", "the kernel object being queried"),
 		cl_kernel_info.IN("param_name", "the information to query", KernelInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2850,7 +2850,7 @@ kernel void image_filter (
 		),
 		cl_kernel_work_group_info.IN("param_name", "the information to query", KernelWorkGroupInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -2889,21 +2889,21 @@ kernel void image_filter (
 			than or equal to #DEVICE_MAX_WORK_ITEM_DIMENSIONS.
 			"""
 		),
-		Check("work_dim") _ nullable _ const _ size_t_p.IN(
+		Check("work_dim")..nullable..const..size_t_p.IN(
 			"global_work_offset",
 			"""
 			can be used to specify an array of {@code work_dim} unsigned values that describe the offset used to calculate the global ID of a work-item. If
 			{@code global_work_offset} is $NULL, the global IDs start at offset ${code("(0, 0, &hellip; 0)")}.
 			"""
 		),
-		Check("work_dim") _ nullable _ const _ size_t_p.IN(
+		Check("work_dim")..nullable..const..size_t_p.IN(
 			"global_work_size",
 			"""
 			points to an array of {@code work_dim} unsigned values that describe the number of global work-items in {@code work_dim} dimensions that will
 			execute the kernel function. The total number of global work-items is computed as ${code("global_work_size[0] * &hellip; * global_work_size[work_dim – 1]")}.
 			"""
 		),
-		const _ Check("work_dim") _ nullable _ size_t_p.IN(
+		const..Check("work_dim")..nullable..size_t_p.IN(
 			"local_work_size",
 			"""
 			points to an array of {@code work_dim} unsigned values that describe the number of work-items that make up a work-group (also referred to as the
@@ -3027,8 +3027,8 @@ kernel void image_filter (
 			"""
 		),
 		cl_native_kernel.IN("user_func", "a pointer to a host-callable user function"),
-		nullable _ void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
-		AutoSize("args") _ size_t.IN(
+		nullable..void_p.IN("args", "a pointer to the args list that {@code user_func} should be called with"),
+		AutoSize("args")..size_t.IN(
 			"cb_args",
 			"""
 			the size in bytes of the args list that {@code args} points to.
@@ -3039,15 +3039,15 @@ kernel void image_filter (
 			application.
 			"""
 		),
-		AutoSize("mem_list", "args_mem_loc") _ cl_uint.IN("num_mem_objects", "the number of buffer objects that are passed in {@code args}"),
-		SingleValue("memobj") _ nullable _ const _ cl_mem_p.IN(
+		AutoSize("mem_list", "args_mem_loc")..cl_uint.IN("num_mem_objects", "the number of buffer objects that are passed in {@code args}"),
+		SingleValue("memobj")..nullable..const..cl_mem_p.IN(
 			"mem_list",
 			"""
 			a list of valid buffer objects, if {@code num_mem_objects} &gt; 0. The buffer object values specified in {@code mem_list} are memory object handles
 			(cl_mem values) returned by #CreateBuffer() or $NULL.
 			"""
 		),
-		SingleValue("memobj_loc") _ nullable _ const _ void_pp.IN(
+		SingleValue("memobj_loc")..nullable..const..void_pp.IN(
 			"args_mem_loc",
 			"""
 			a pointer to appropriate locations that {@code args} points to where memory object handles (cl_mem values) are stored. Before the user function is
@@ -3096,8 +3096,8 @@ kernel void image_filter (
 		status is #COMPLETE or a negative value. The events specified in {@code event_list} act as synchronization points.
 		""",
 
-		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
-		SingleValue("event") _ const _ cl_event_p.IN("event_list", "the list of events"),
+		AutoSize("event_list")..cl_uint.IN("num_events", "the number of events in {@code event_list}"),
+		SingleValue("event")..const..cl_event_p.IN("event_list", "the list of events"),
 
 		returnDoc =
 		"""
@@ -3126,7 +3126,7 @@ kernel void image_filter (
 		cl_event.IN("event", "the event object being queried"),
 		cl_event_info.IN("param_name", "the information to query", EventInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_POINTER)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -3240,8 +3240,8 @@ kernel void image_filter (
 		"Enqueues a wait for a specific event or a list of events to complete before any future commands queued in the command-queue are executed.",
 
 		cl_command_queue.IN("command_queue", "the command-queue"),
-		AutoSize("event_list") _ cl_uint.IN("num_events", "the number of events in {@code event_list}"),
-		SingleValue("event") _ const _ cl_event_p.IN("event_list", "the list of events"),
+		AutoSize("event_list")..cl_uint.IN("num_events", "the number of events in {@code event_list}"),
+		SingleValue("event")..const..cl_event_p.IN("event_list", "the list of events"),
 
 		returnDoc =
 		"""
@@ -3264,7 +3264,7 @@ kernel void image_filter (
 		cl_event.IN("event", "the event object"),
 		cl_profiling_info.IN("param_name", "the profiling data to query", ProfilingInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_LONG) _ nullable _ void_p.OUT("param_value", param_value),
+		MultiType(PointerMapping.DATA_LONG)..nullable..void_p.OUT("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -3341,7 +3341,7 @@ kernel void image_filter (
 		functions. However, portable applications cannot rely on this behavior.
 		""",
 
-		const _ cl_charASCII_p.IN("funcname", "the extension function name"),
+		const..cl_charASCII_p.IN("funcname", "the extension function name"),
 
 		returnDoc = "the extension function address"
 	)

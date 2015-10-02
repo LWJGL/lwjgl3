@@ -27,7 +27,7 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMultisamplefv.",
 
-		"SAMPLE_POSITION" _ 0x8E50
+		"SAMPLE_POSITION"..0x8E50
 	)
 
 	IntConstant(
@@ -36,66 +36,66 @@ val ARB_texture_multisample = "ARBTextureMultisample".nativeClassGL("ARB_texture
 		GetDoublev.
 		""",
 
-		"SAMPLE_MASK" _ 0x8E51
+		"SAMPLE_MASK"..0x8E51
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v and GetIntegeri_v.",
 
-		"SAMPLE_MASK_VALUE" _ 0x8E52
+		"SAMPLE_MASK_VALUE"..0x8E52
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage2DMultisample.",
 
-		"TEXTURE_2D_MULTISAMPLE" _ 0x9100
+		"TEXTURE_2D_MULTISAMPLE"..0x9100
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage2DMultisample.",
 
-		"PROXY_TEXTURE_2D_MULTISAMPLE" _ 0x9101
+		"PROXY_TEXTURE_2D_MULTISAMPLE"..0x9101
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BindTexture and TexImage3DMultisample.",
 
-		"TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9102
+		"TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9102
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3DMultisample.",
 
-		"PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY" _ 0x9103
+		"PROXY_TEXTURE_2D_MULTISAMPLE_ARRAY"..0x9103
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLE_MASK_WORDS" _ 0x8E59,
-		"MAX_COLOR_TEXTURE_SAMPLES" _ 0x910E,
-		"MAX_DEPTH_TEXTURE_SAMPLES" _ 0x910F,
-		"MAX_INTEGER_SAMPLES" _ 0x9110,
-		"TEXTURE_BINDING_2D_MULTISAMPLE" _ 0x9104,
-		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY" _ 0x9105
+		"MAX_SAMPLE_MASK_WORDS"..0x8E59,
+		"MAX_COLOR_TEXTURE_SAMPLES"..0x910E,
+		"MAX_DEPTH_TEXTURE_SAMPLES"..0x910F,
+		"MAX_INTEGER_SAMPLES"..0x9110,
+		"TEXTURE_BINDING_2D_MULTISAMPLE"..0x9104,
+		"TEXTURE_BINDING_2D_MULTISAMPLE_ARRAY"..0x9105
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_SAMPLES" _ 0x9106,
-		"TEXTURE_FIXED_SAMPLE_LOCATIONS" _ 0x9107
+		"TEXTURE_SAMPLES"..0x9106,
+		"TEXTURE_FIXED_SAMPLE_LOCATIONS"..0x9107
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_2D_MULTISAMPLE" _ 0x9108,
-		"INT_SAMPLER_2D_MULTISAMPLE" _ 0x9109,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE" _ 0x910A,
-		"SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910B,
-		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910C,
-		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY" _ 0x910D
+		"SAMPLER_2D_MULTISAMPLE"..0x9108,
+		"INT_SAMPLER_2D_MULTISAMPLE"..0x9109,
+		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE"..0x910A,
+		"SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910B,
+		"INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910C,
+		"UNSIGNED_INT_SAMPLER_2D_MULTISAMPLE_ARRAY"..0x910D
 	)
 
 	GL32 reuse "TexImage2DMultisample"

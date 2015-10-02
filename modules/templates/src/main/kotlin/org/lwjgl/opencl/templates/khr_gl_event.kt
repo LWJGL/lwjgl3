@@ -25,7 +25,7 @@ val khr_gl_event = dependsOn(Binding.OPENGL) {
 		IntConstant(
 			"Returned by CL10#GetEventInfo() when {@code param_name} is CL10#EVENT_COMMAND_TYPE.",
 
-			"COMMAND_GL_FENCE_SYNC_OBJECT_KHR" _ 0x200D
+			"COMMAND_GL_FENCE_SYNC_OBJECT_KHR"..0x200D
 		)
 
 		cl_event(

@@ -27,7 +27,7 @@ val ANGLE_texture_usage = "ANGLETextureUsage".nativeClassGLES("ANGLE_texture_usa
 		GetTexParameter{if}v.
 		""",
 
-		"TEXTURE_USAGE_ANGLE" _ 0x93A2
+		"TEXTURE_USAGE_ANGLE"..0x93A2
 	)
 
 	IntConstant(
@@ -36,6 +36,6 @@ val ANGLE_texture_usage = "ANGLETextureUsage".nativeClassGLES("ANGLE_texture_usa
 		TEXTURE_USAGE_ANGLE; returned as possible values for {@code data} when GetTexParameter{if}v is queried with a {@code value} of TEXTURE_USAGE_ANGLE.
 		""",
 
-		"FRAMEBUFFER_ATTACHMENT_ANGLE" _ 0x93A3
+		"FRAMEBUFFER_ATTACHMENT_ANGLE"..0x93A3
 	)
 }

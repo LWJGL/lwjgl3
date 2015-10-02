@@ -24,13 +24,13 @@ val WGL_ARB_create_context_robustness = "WGLARBCreateContextRobustness".nativeCl
 		$wglCreateContextAttribsARB.
 		""",
 
-		"CONTEXT_ROBUST_ACCESS_BIT_ARB" _ 0x00000004
+		"CONTEXT_ROBUST_ACCESS_BIT_ARB"..0x00000004
 	)
 
 	IntConstant(
 		"Accepted as an attribute name in the {@code attrib_list} argument to $wglCreateContextAttribsARB.",
 
-		"CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB" _ 0x8256
+		"CONTEXT_RESET_NOTIFICATION_STRATEGY_ARB"..0x8256
 	)
 
 	IntConstant(
@@ -39,7 +39,7 @@ val WGL_ARB_create_context_robustness = "WGLARBCreateContextRobustness".nativeCl
 		$wglCreateContextAttribsARB.
 		""",
 
-		"NO_RESET_NOTIFICATION_ARB" _ 0x8261,
-		"LOSE_CONTEXT_ON_RESET_ARB" _ 0x8252
+		"NO_RESET_NOTIFICATION_ARB"..0x8261,
+		"LOSE_CONTEXT_ON_RESET_ARB"..0x8252
 	)
 }

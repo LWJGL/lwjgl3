@@ -31,17 +31,17 @@ val ARB_viewport_array = "ARBViewportArray".nativeClassGL("ARB_viewport_array") 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_VIEWPORTS" _ 0x825B,
-		"VIEWPORT_SUBPIXEL_BITS" _ 0x825C,
-		"VIEWPORT_BOUNDS_RANGE" _ 0x825D,
-		"LAYER_PROVOKING_VERTEX" _ 0x825E,
-		"VIEWPORT_INDEX_PROVOKING_VERTEX" _ 0x825F
+		"MAX_VIEWPORTS"..0x825B,
+		"VIEWPORT_SUBPIXEL_BITS"..0x825C,
+		"VIEWPORT_BOUNDS_RANGE"..0x825D,
+		"LAYER_PROVOKING_VERTEX"..0x825E,
+		"VIEWPORT_INDEX_PROVOKING_VERTEX"..0x825F
 	)
 
 	IntConstant(
 		"Returned in the {@code data} parameter from a Get query with a {@code pname} of LAYER_PROVOKING_VERTEX or VIEWPORT_INDEX_PROVOKING_VERTEX.",
 
-		"UNDEFINED_VERTEX" _ 0x8260
+		"UNDEFINED_VERTEX"..0x8260
 	)
 
 	GL41 reuse "ViewportArrayv"

@@ -37,7 +37,7 @@ val ARB_framebuffer_sRGB = "ARBFramebufferSRGB".nativeClassGL("ARB_framebuffer_s
 		GetDoublev.
 		""",
 
-		"FRAMEBUFFER_SRGB" _ 0x8DB9
+		"FRAMEBUFFER_SRGB"..0x8DB9
 	)
 }
 
@@ -52,7 +52,7 @@ val GLX_ARB_framebuffer_sRGB = "GLXARBFramebufferSRGB".nativeClassGLX("GLX_ARB_f
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of GLX#ChooseVisual(), and by the {@code attrib} parameter of GLX#GetConfig().",
 
-		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20B2
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB"..0x20B2
 	)
 }
 
@@ -72,6 +72,6 @@ val WGL_ARB_framebuffer_sRGB = "WGLARBFramebufferSRGB".nativeClassWGL("WGL_ARB_f
 		WGLARBPixelFormat#ChoosePixelFormatARB().
 		""",
 
-		"FRAMEBUFFER_SRGB_CAPABLE_ARB" _ 0x20A9
+		"FRAMEBUFFER_SRGB_CAPABLE_ARB"..0x20A9
 	)
 }

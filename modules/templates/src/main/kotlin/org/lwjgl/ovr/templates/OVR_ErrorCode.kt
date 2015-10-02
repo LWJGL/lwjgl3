@@ -12,13 +12,13 @@ import org.lwjgl.ovr.OVR_PACKAGE
 val OVR_ErrorCode = "OVRErrorCode".nativeClass(packageName = OVR_PACKAGE, prefix = "OVR", prefixConstant = "ovr") {
 	documentation = "LibOVR error code declarations."
 
-	IntConstant("This is a general success result.", "Success" _ 0)
+	IntConstant("This is a general success result.", "Success"..0)
 	IntConstant(
 		"""
 		Returned from a call to OVR#Hmd_SubmitFrame(). The call succeeded, but what the app rendered will not be visible on the HMD. Ideally the app should
 		continue calling OVR#Hmd_SubmitFrame(), but not do any rendering. When the result becomes #Success, rendering should continue as usual.
 		""",
-		"Success_NotVisible" _ 1000
+		"Success_NotVisible"..1000
 	)
 	IntConstant("The HMD Firmware is out of date but is acceptable.", "Success_HMDFirmwareMismatch" expr "4100")
 	IntConstant("The Tracker Firmware is out of date but is acceptable.", "Success_TrackerFirmwareMismatch" expr "4101")

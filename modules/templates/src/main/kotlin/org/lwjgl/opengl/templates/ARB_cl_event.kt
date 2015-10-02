@@ -28,13 +28,13 @@ val ARB_cl_event = dependsOn(Binding.OPENCL) {
 		IntConstant(
 			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#OBJECT_TYPE.",
 
-			"SYNC_CL_EVENT_ARB" _ 0x8240
+			"SYNC_CL_EVENT_ARB"..0x8240
 		)
 
 		IntConstant(
 			"Returned in {@code values} for GL32#GetSynciv() {@code pname} GL32#SYNC_CONDITION.",
 
-			"SYNC_CL_EVENT_COMPLETE_ARB" _ 0x8241
+			"SYNC_CL_EVENT_COMPLETE_ARB"..0x8241
 		)
 
 		GLsync(

@@ -28,15 +28,15 @@ val EXT_texture_swizzle = "EXTTextureSwizzle".nativeClassGL("EXT_texture_swizzle
 	IntConstant(
 		"Accepted by the {@code pname} parameters of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_SWIZZLE_R_EXT" _ 0x8E42,
-		"TEXTURE_SWIZZLE_G_EXT" _ 0x8E43,
-		"TEXTURE_SWIZZLE_B_EXT" _ 0x8E44,
-		"TEXTURE_SWIZZLE_A_EXT" _ 0x8E45
+		"TEXTURE_SWIZZLE_R_EXT"..0x8E42,
+		"TEXTURE_SWIZZLE_G_EXT"..0x8E43,
+		"TEXTURE_SWIZZLE_B_EXT"..0x8E44,
+		"TEXTURE_SWIZZLE_A_EXT"..0x8E45
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of TexParameteriv, TexParameterfv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_SWIZZLE_RGBA_EXT" _ 0x8E46
+		"TEXTURE_SWIZZLE_RGBA_EXT"..0x8E46
 	)
 }

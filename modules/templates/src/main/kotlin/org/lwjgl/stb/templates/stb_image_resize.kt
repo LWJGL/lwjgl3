@@ -76,27 +76,27 @@ stbir_resize_uint8_srgb_edgemode(
 
 	IntConstant(
 		"Set this flag if you have no alpha channel, or otherwise provide the index of the alpha channel.",
-		"ALPHA_CHANNEL_NONE" _ -1
+		"ALPHA_CHANNEL_NONE"..-1
 	)
 	IntConstant(
 		"""
 		Set this flag if your texture has premultiplied alpha. Otherwise, stbir will use alpha-weighted resampling (effectively premultiplying, resampling,
 		then unpremultiplying).
 		""",
-		"FLAG_ALPHA_PREMULTIPLIED" _ -1
+		"FLAG_ALPHA_PREMULTIPLIED"..-1
 	)
 	IntConstant(
 		"The specified alpha channel should be handled as gamma-corrected value even when doing sRGB operations.",
-		"FLAG_ALPHA_USES_COLORSPACE" _ -1
+		"FLAG_ALPHA_USES_COLORSPACE"..-1
 	)
 
 	val EdgeWrapModes = IntConstant(
 		"Edge wrap mode.",
 
-		"EDGE_CLAMP" _ 1,
-		"EDGE_REFLECT" _ 2,
-		"EDGE_WRAP" _ 3,
-		"EDGE_ZERO" _ 4
+		"EDGE_CLAMP"..1,
+		"EDGE_REFLECT"..2,
+		"EDGE_WRAP"..3,
+		"EDGE_ZERO"..4
 	).javaDocLinks
 
 	val resize_uint8 = int(
@@ -114,14 +114,14 @@ stbir_resize_uint8_srgb_edgemode(
 		This function uses the default resampling filter defined at compile time. For a different filter, use the medium-complexity API.
 		""",
 
-		Check("input_w * input_h * num_channels") _ const _ unsigned_char_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels")..const..unsigned_char_p.IN("input_pixels", "the source image data"),
 		int.IN("input_w", "the source image width"),
 		int.IN("input_h", "the source image height"),
 		int.IN(
 			"input_stride_in_bytes",
 			"the offset between successive rows of the source image data in memory, in bytes. You can specify 0 to mean packed continuously in memory"
 		),
-		Check("output_w * output_h * num_channels") _ unsigned_char_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_w * output_h * num_channels")..unsigned_char_p.OUT("output_pixels", "returns the scaled image data"),
 		int.IN("output_w", "the resized image width"),
 		int.IN("output_h", "the resized image height"),
 		int.IN(
@@ -137,11 +137,11 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_float",
 		"Float version of #resize_uint8().",
 
-		Check("input_w * input_h * num_channels") _ const _ float_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels")..const..float_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
-		Check("output_w * output_h * num_channels") _ float_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_w * output_h * num_channels")..float_p.OUT("output_pixels", "returns the scaled image data"),
 		resize_uint8["output_w"],
 		resize_uint8["output_h"],
 		resize_uint8["output_stride_in_bytes"],
@@ -205,19 +205,19 @@ stbir_resize_uint8_srgb_edgemode(
 
 	// Medium-complexity API
 
-	IntConstant("Use same filter type that easy-to-use API chooses.", "FILTER_DEFAULT" _ 0)
-	IntConstant("A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.", "FILTER_BOX" _ 1)
-	IntConstant("On upsampling, produces same results as bilinear texture filtering.", "FILTER_TRIANGLE" _ 2)
-	IntConstant("The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.", "FILTER_CUBICBSPLINE" _ 3)
-	IntConstant("An interpolating cubic spline.", "FILTER_CATMULLROM" _ 4)
-	IntConstant("Mitchell-Netrevalli filter with B=1/3, C=1/3.", "FILTER_MITCHELL" _ 5)
+	IntConstant("Use same filter type that easy-to-use API chooses.", "FILTER_DEFAULT"..0)
+	IntConstant("A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.", "FILTER_BOX"..1)
+	IntConstant("On upsampling, produces same results as bilinear texture filtering.", "FILTER_TRIANGLE"..2)
+	IntConstant("The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.", "FILTER_CUBICBSPLINE"..3)
+	IntConstant("An interpolating cubic spline.", "FILTER_CATMULLROM"..4)
+	IntConstant("Mitchell-Netrevalli filter with B=1/3, C=1/3.", "FILTER_MITCHELL"..5)
 	val Filters = "#FILTER_DEFAULT #FILTER_BOX #FILTER_TRIANGLE #FILTER_CUBICBSPLINE #FILTER_CATMULLROM #FILTER_MITCHELL"
 
 	val ColorSpaces = IntConstant(
 		"Colorspace.",
 
-		"COLORSPACE_LINEAR" _ 0,
-		"COLORSPACE_SRGB" _ 1
+		"COLORSPACE_LINEAR"..0,
+		"COLORSPACE_SRGB"..1
 	).javaDocLinks
 
 	val resize_uint8_generic = int(
@@ -238,7 +238,7 @@ stbir_resize_uint8_srgb_edgemode(
 		resize_uint8_srgb_edgemode["edge_wrap_mode"],
 		stbir_filter.IN("filter", "the scale filter", Filters),
 		stbir_colorspace.IN("space", "the image colorspace", ColorSpaces),
-		Expression("0L") _ void_p.IN("alloc_context", "pointer to the allocation context"),
+		Expression("0L")..void_p.IN("alloc_context", "pointer to the allocation context"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -247,11 +247,11 @@ stbir_resize_uint8_srgb_edgemode(
 		"resize_uint16_generic",
 		"Short version of #resize_uint8_generic().",
 
-		Check("input_w * input_h * num_channels") _ const _ stbir_uint16_p.IN("input_pixels", "the source image data"),
+		Check("input_w * input_h * num_channels")..const..stbir_uint16_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],
-		Check("output_w * output_h * num_channels") _ stbir_uint16_p.OUT("output_pixels", "returns the scaled image data"),
+		Check("output_w * output_h * num_channels")..stbir_uint16_p.OUT("output_pixels", "returns the scaled image data"),
 		resize_uint8["output_w"],
 		resize_uint8["output_h"],
 		resize_uint8["output_stride_in_bytes"],
@@ -294,17 +294,17 @@ stbir_resize_uint8_srgb_edgemode(
 	val DataTypes = IntConstant(
 		"Data type.",
 
-		"TYPE_UINT8" _ 0,
-		"TYPE_UINT16" _ 1,
-		"TYPE_UINT32" _ 2,
-		"TYPE_FLOAT" _ 3
+		"TYPE_UINT8"..0,
+		"TYPE_UINT16"..1,
+		"TYPE_UINT32"..2,
+		"TYPE_FLOAT"..3
 	).javaDocLinks
 
 	val resize = int(
 		"resize",
 		"Full-complexity version of #resize_uint8_generic().",
 
-		const _ void_p.IN("input_pixels", "the source image data"),
+		const..void_p.IN("input_pixels", "the source image data"),
 		resize_uint8["input_w"],
 		resize_uint8["input_h"],
 		resize_uint8["input_stride_in_bytes"],

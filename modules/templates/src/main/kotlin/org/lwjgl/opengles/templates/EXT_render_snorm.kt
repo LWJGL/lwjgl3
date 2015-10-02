@@ -22,8 +22,8 @@ val EXT_render_snorm = "EXTRenderSnorm".nativeClassGLES("EXT_render_snorm", post
 	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of RenderbufferStorage and RenderbufferStorageMultisample.",
 
-		"R16_SNORM_EXT" _ 0x8F98,
-		"RG16_SNORM_EXT" _ 0x8F99,
-		"RGBA16_SNORM_EXT" _ 0x8F9B
+		"R16_SNORM_EXT"..0x8F98,
+		"RG16_SNORM_EXT"..0x8F99,
+		"RGBA16_SNORM_EXT"..0x8F9B
 	)
 }

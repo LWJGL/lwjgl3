@@ -29,15 +29,15 @@ val NV_framebuffer_multisample_coverage = "NVFramebufferMultisampleCoverage".nat
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
 
-		"RENDERBUFFER_COVERAGE_SAMPLES_NV" _ 0x8CAB,
-		"RENDERBUFFER_COLOR_SAMPLES_NV" _ 0x8E10
+		"RENDERBUFFER_COVERAGE_SAMPLES_NV"..0x8CAB,
+		"RENDERBUFFER_COLOR_SAMPLES_NV"..0x8E10
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
-		"MAX_MULTISAMPLE_COVERAGE_MODES_NV" _ 0x8E11,
-		"MULTISAMPLE_COVERAGE_MODES_NV" _ 0x8E12
+		"MAX_MULTISAMPLE_COVERAGE_MODES_NV"..0x8E11,
+		"MULTISAMPLE_COVERAGE_MODES_NV"..0x8E12
 	)
 
 	void(

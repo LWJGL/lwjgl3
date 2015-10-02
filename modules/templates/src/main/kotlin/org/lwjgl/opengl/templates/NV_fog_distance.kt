@@ -34,7 +34,7 @@ val NV_fog_distance = "NVFogDistance".nativeClassGL("NV_fog_distance", postfix =
 	IntConstant(
 		"Accepted by the {@code pname} parameters of Fogf, Fogi, Fogfv, Fogiv, GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"FOG_DISTANCE_MODE_NV" _ 0x855A
+		"FOG_DISTANCE_MODE_NV"..0x855A
 	)
 
 	IntConstant(
@@ -43,7 +43,7 @@ val NV_fog_distance = "NVFogDistance".nativeClassGL("NV_fog_distance", postfix =
 		{@code params} may be.
 		""",
 
-		"EYE_RADIAL_NV" _ 0x855B,
-		"EYE_PLANE_ABSOLUTE_NV" _ 0x855C
+		"EYE_RADIAL_NV"..0x855B,
+		"EYE_PLANE_ABSOLUTE_NV"..0x855C
 	)
 }

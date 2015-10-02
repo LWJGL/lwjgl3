@@ -23,7 +23,7 @@ val EXT_platform_x11 = "EXTPlatformX11".nativeClassEGL("EXT_platform_x11", postf
 	IntConstant(
 		"",
 
-		"PLATFORM_X11_EXT" _ 0x31D5,
-		"PLATFORM_X11_SCREEN_EXT" _ 0x31D6
+		"PLATFORM_X11_EXT"..0x31D5,
+		"PLATFORM_X11_SCREEN_EXT"..0x31D6
 	)
 }

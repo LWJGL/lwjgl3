@@ -28,12 +28,12 @@ val ARM_shader_framebuffer_fetch = "ARMShaderFramebufferFetch".nativeClassGLES("
 		Accepted by the {@code cap} parameter of Enable, Disable, and IsEnabled, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.
 		""",
 
-		"FETCH_PER_SAMPLE_ARM" _ 0x8F65
+		"FETCH_PER_SAMPLE_ARM"..0x8F65
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"FRAGMENT_SHADER_FRAMEBUFFER_FETCH_MRT_ARM" _ 0x8F66
+		"FRAGMENT_SHADER_FRAMEBUFFER_FETCH_MRT_ARM"..0x8F66
 	)
 }

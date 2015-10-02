@@ -22,6 +22,6 @@ val amd_device_board_name = "AMDDeviceBoardName".nativeClassCL("amd_device_board
 		Currently, this is only for GPU devices. The returned name is a 128-character value.
 		""",
 
-		"DEVICE_BOARD_NAME_AMD" _ 0x4038
+		"DEVICE_BOARD_NAME_AMD"..0x4038
 	)
 }

@@ -21,6 +21,6 @@ val IMG_program_binary = "IMGProgramBinary".nativeClassGLES("IMG_program_binary"
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ProgramBinaryOES.",
 
-		"SGX_PROGRAM_BINARY_IMG" _ 0x9130
+		"SGX_PROGRAM_BINARY_IMG"..0x9130
 	)
 }

@@ -22,6 +22,6 @@ val NV_fill_rectangle = "NVFillRectangle".nativeClassGLES("NV_fill_rectangle", p
 	IntConstant(
 		"",
 
-		"FILL_RECTANGLE_NV" _ 0x933C
+		"FILL_RECTANGLE_NV"..0x933C
 	)
 }

@@ -35,7 +35,7 @@ val ARB_depth_clamp = "ARBDepthClamp".nativeClassGL("ARB_depth_clamp") {
 		GetDoublev.
 		""",
 
-		"DEPTH_CLAMP" _ 0x864F
+		"DEPTH_CLAMP"..0x864F
 	)
 
 }

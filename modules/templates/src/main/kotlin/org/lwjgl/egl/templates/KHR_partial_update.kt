@@ -32,7 +32,7 @@ val KHR_partial_update = "KHRPartialUpdate".nativeClassEGL("KHR_partial_update",
 	IntConstant(
 		"",
 
-		"BUFFER_AGE_KHR" _ 0x313D
+		"BUFFER_AGE_KHR"..0x313D
 	)
 
 	EGLBoolean(
@@ -41,7 +41,7 @@ val KHR_partial_update = "KHRPartialUpdate".nativeClassEGL("KHR_partial_update",
 
 		EGLDisplay.IN("dpy", ""),
 		EGLSurface.IN("surface", ""),
-		nullable _ EGLint_p.OUT("rects", ""),
-		AutoSize("rects") _ EGLint.IN("n_rects", "")
+		nullable..EGLint_p.OUT("rects", ""),
+		AutoSize("rects")..EGLint.IN("n_rects", "")
 	)
 }

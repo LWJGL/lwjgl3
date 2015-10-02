@@ -27,6 +27,6 @@ val EXT_shader_framebuffer_fetch = "EXTShaderFramebufferFetch".nativeClassGLES("
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT" _ 0x8A52
+		"FRAGMENT_SHADER_DISCARDS_SAMPLES_EXT"..0x8A52
 	)
 }

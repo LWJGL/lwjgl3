@@ -33,7 +33,7 @@ val NV_instanced_arrays = "NVInstancedArrays".nativeClassGLES("NV_instanced_arra
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetVertexAttribfv, and GetVertexAttribiv.",
 
-		"VERTEX_ATTRIB_ARRAY_DIVISOR_NV" _ 0x88FE
+		"VERTEX_ATTRIB_ARRAY_DIVISOR_NV"..0x88FE
 	)
 
 	void(

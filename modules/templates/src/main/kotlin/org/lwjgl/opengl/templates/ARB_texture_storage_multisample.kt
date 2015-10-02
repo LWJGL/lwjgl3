@@ -26,7 +26,7 @@ val ARB_texture_storage_multisample = "ARBTextureStorageMultisample".nativeClass
 	GL43 reuse "TexStorage3DMultisample"
 
 	var src = GL43["TexStorage2DMultisample"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"TextureStorage2DMultisampleEXT",
 		"DSA version of #TexStorage2DMultisample().",
 
@@ -40,7 +40,7 @@ val ARB_texture_storage_multisample = "ARBTextureStorageMultisample".nativeClass
 	)
 
 	src = GL43["TexStorage3DMultisample"]
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"TextureStorage3DMultisampleEXT",
 		"DSA version of #TexStorage3DMultisample().",
 

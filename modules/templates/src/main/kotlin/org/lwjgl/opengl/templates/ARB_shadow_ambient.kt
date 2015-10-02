@@ -22,7 +22,7 @@ val ARB_shadow_ambient = "ARBShadowAmbient".nativeClassGL("ARB_shadow_ambient", 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameterf, TexParameteri, TexParameterfv, TexParameteriv, GetTexParameterfv, and GetTexParameteriv.",
 
-		"TEXTURE_COMPARE_FAIL_VALUE_ARB" _ 0x80BF
+		"TEXTURE_COMPARE_FAIL_VALUE_ARB"..0x80BF
 	)
 
 }

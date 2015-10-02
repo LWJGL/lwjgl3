@@ -23,22 +23,22 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 	IntConstant(
 		"OpenCL Version.",
 
-		"VERSION_1_1" _ 0x1
+		"VERSION_1_1"..0x1
 	)
 
 	IntConstant(
 		"cl_device_info.",
 
-		"DEVICE_PREFERRED_VECTOR_WIDTH_HALF" _ 0x1034,
-		"DEVICE_HOST_UNIFIED_MEMORY" _ 0x1035,
-		"DEVICE_NATIVE_VECTOR_WIDTH_CHAR" _ 0x1036,
-		"DEVICE_NATIVE_VECTOR_WIDTH_SHORT" _ 0x1037,
-		"DEVICE_NATIVE_VECTOR_WIDTH_INT" _ 0x1038,
-		"DEVICE_NATIVE_VECTOR_WIDTH_LONG" _ 0x1039,
-		"DEVICE_NATIVE_VECTOR_WIDTH_FLOAT" _ 0x103A,
-		"DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE" _ 0x103B,
-		"DEVICE_NATIVE_VECTOR_WIDTH_HALF" _ 0x103C,
-		"DEVICE_OPENCL_C_VERSION" _ 0x103D
+		"DEVICE_PREFERRED_VECTOR_WIDTH_HALF"..0x1034,
+		"DEVICE_HOST_UNIFIED_MEMORY"..0x1035,
+		"DEVICE_NATIVE_VECTOR_WIDTH_CHAR"..0x1036,
+		"DEVICE_NATIVE_VECTOR_WIDTH_SHORT"..0x1037,
+		"DEVICE_NATIVE_VECTOR_WIDTH_INT"..0x1038,
+		"DEVICE_NATIVE_VECTOR_WIDTH_LONG"..0x1039,
+		"DEVICE_NATIVE_VECTOR_WIDTH_FLOAT"..0x103A,
+		"DEVICE_NATIVE_VECTOR_WIDTH_DOUBLE"..0x103B,
+		"DEVICE_NATIVE_VECTOR_WIDTH_HALF"..0x103C,
+		"DEVICE_OPENCL_C_VERSION"..0x103D
 	)
 
 	IntConstant(
@@ -50,56 +50,56 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 	IntConstant(
 		"cl_context_info.",
 
-		"CONTEXT_NUM_DEVICES" _ 0x1083
+		"CONTEXT_NUM_DEVICES"..0x1083
 	)
 
 	IntConstant(
 		"cl_channel_order.",
 
-		"Rx" _ 0x10BA,
-		"RGx" _ 0x10BB,
-		"RGBx" _ 0x10BC
+		"Rx"..0x10BA,
+		"RGx"..0x10BB,
+		"RGBx"..0x10BC
 	)
 
 	IntConstant(
 		"cl_mem_info.",
 
-		"MEM_ASSOCIATED_MEMOBJECT" _ 0x1107,
-		"MEM_OFFSET" _ 0x1108
+		"MEM_ASSOCIATED_MEMOBJECT"..0x1107,
+		"MEM_OFFSET"..0x1108
 	)
 
 	IntConstant(
 		"cl_addressing_mode.",
 
-		"ADDRESS_MIRRORED_REPEAT" _ 0x1134
+		"ADDRESS_MIRRORED_REPEAT"..0x1134
 	)
 
 	IntConstant(
 		"cl_kernel_work_group_info.",
 
-		"KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE" _ 0x11B3,
-		"KERNEL_PRIVATE_MEM_SIZE" _ 0x11B4
+		"KERNEL_PREFERRED_WORK_GROUP_SIZE_MULTIPLE"..0x11B3,
+		"KERNEL_PRIVATE_MEM_SIZE"..0x11B4
 	)
 
 	IntConstant(
 		"cl_event_info.",
 
-		"EVENT_CONTEXT" _ 0x11D4
+		"EVENT_CONTEXT"..0x11D4
 	)
 
 	IntConstant(
 		"cl_command_type.",
 
-		"COMMAND_READ_BUFFER_RECT" _ 0x1201,
-		"COMMAND_WRITE_BUFFER_RECT" _ 0x1202,
-		"COMMAND_COPY_BUFFER_RECT" _ 0x1203,
-		"COMMAND_USER" _ 0x1204
+		"COMMAND_READ_BUFFER_RECT"..0x1201,
+		"COMMAND_WRITE_BUFFER_RECT"..0x1202,
+		"COMMAND_COPY_BUFFER_RECT"..0x1203,
+		"COMMAND_USER"..0x1204
 	)
 
 	val BufferCreateType = IntConstant(
 		"cl_buffer_create_type.",
 
-		"BUFFER_CREATE_TYPE_REGION" _ 0x1220
+		"BUFFER_CREATE_TYPE_REGION"..0x1220
 	).javaDocLinks
 
 	cl_mem(
@@ -132,7 +132,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			"the type of buffer object to be created",
 			BufferCreateType
 		),
-		const _ void_p.IN(
+		const..void_p.IN(
 			"buffer_create_info",
 			"""
 			details about the buffer object to be created.
@@ -190,7 +190,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 			It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""
@@ -204,21 +204,21 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		"""
 	)
 
-	val BufferRectBufferOffset = Check(3) _ const _ size_t_p.IN(
+	val BufferRectBufferOffset = Check(3)..const..size_t_p.IN(
 		"buffer_offset",
 		"""
 		the {@code (x, y, z)} offset in the memory region associated with {@code buffer}. For a 2D rectangle region, the z value given by {@code buffer_origin[2]}
 		should be 0. The offset in bytes is computed as ${code("buffer_origin[2] * buffer_slice_pitch + buffer_origin[1] * buffer_row_pitch + buffer_origin[0]")}.
 		"""
 	)
-	val BufferRectHostOffset = Check(3) _ const _ size_t_p.IN(
+	val BufferRectHostOffset = Check(3)..const..size_t_p.IN(
 		"host_offset",
 		"""
 		the {@code (x, y, z)} offset in the memory region pointed to by {@code ptr}. For a 2D rectangle region, the z value given by {@code host_origin[2]}
 		should be 0. The offset in bytes is computed as ${code("host_origin[2] * host_slice_pitch + host_origin[1] * host_row_pitch + host_origin[0]")}.
 		"""
 	)
-	val BufferRectRegion = Check(3) _ const _ size_t_p.IN(
+	val BufferRectRegion = Check(3)..const..size_t_p.IN(
 		"region",
 		"""
 		the (width in bytes, height in rows, depth in slices) of the 2D or 3D rectangle being read or written. For a 2D rectangle copy, the depth value
@@ -300,7 +300,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		BufferRectHostSlicePitch,
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
+		)..void_p.OUT("ptr", "the pointer to buffer in host memory where data is to be read into"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -375,7 +375,7 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		BufferRectBufferSlicePitch,
 		BufferRectHostRowPitch,
 		BufferRectHostSlicePitch,
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE) _ const _ void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE)..const..void_p.IN("ptr", "the pointer to buffer in host memory where data is to be written from"),
 		NEWL,
 		EWL,
 		EVENT,
@@ -430,21 +430,21 @@ val CL11 = "CL11".nativeClassCL("CL11") {
 		),
 		cl_mem.IN("src_buffer", "the source buffer"),
 		cl_mem.IN("dst_buffer", "the destination buffer"),
-		Check(3) _ size_t_p.IN(
+		Check(3)..size_t_p.IN(
 			"src_origin",
 			"""
 			the {@code (x, y, z)} offset in the memory region associated with {@code src_buffer}. For a 2D rectangle region, the z value given by {@code src_origin[2]}
 			should be 0. The offset in bytes is computed as ${code("src_origin[2] * src_slice_pitch + src_origin[1] * src_row_pitch + src_origin[0]")}.
 			"""
 		),
-		Check(3) _ size_t_p.IN(
+		Check(3)..size_t_p.IN(
 			"dst_origin",
 			"""
 			the {@code (x, y, z)} offset in the memory region associated with {@code dst_buffer}. For a 2D rectangle region, the z value given by {@code dst_origin[2]}
 			should be 0. The offset in bytes is computed as ${code("dst_origin[2] * dst_slice_pitch + dst_origin[1] * dst_row_pitch + dst_origin[0]")}.
 			"""
 		),
-		Check(3) _ size_t_p.IN(
+		Check(3)..size_t_p.IN(
 			"region",
 			"""
 			the ({@code width} in bytes, {@code height} in rows, {@code depth} in slices) of the 2D or 3D rectangle being copied. For a 2D rectangle, the depth
@@ -646,7 +646,7 @@ clReleaseMemObject(buf2);
 			implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as the {@code user_data} argument when {@code pfn_notify} is called. {@code user_data} can be $NULL."),
 
 		returnDoc =
 		"""

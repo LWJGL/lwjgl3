@@ -23,9 +23,9 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX(), and by the {@code attrib_list} parameter of #ChooseFBConfigSGIX().",
 
-		"DRAWABLE_TYPE_SGIX" _ 0x8010,
-		"RENDER_TYPE_SGIX" _ 0x8011,
-		"X_RENDERABLE_SGIX" _ 0x8012
+		"DRAWABLE_TYPE_SGIX"..0x8010,
+		"RENDER_TYPE_SGIX"..0x8011,
+		"X_RENDERABLE_SGIX"..0x8012
 	)
 
 	IntConstant(
@@ -35,13 +35,13 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		GLXEXTImportContext#QueryContextInfoEXT().
 		""",
 
-		"FBCONFIG_ID_SGIX" _ 0x8013
+		"FBCONFIG_ID_SGIX"..0x8013
 	)
 
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of #GetFBConfigAttribSGIX().",
 
-		"SCREEN_EXT" _ 0x800C
+		"SCREEN_EXT"..0x800C
 	)
 
 	IntConstant(
@@ -50,8 +50,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		parameter of #ChooseFBConfigSGIX() (following the #DRAWABLE_TYPE_SGIX token).
 		""",
 
-		"WINDOW_BIT_SGIX" _ 0x00000001,
-		"PIXMAP_BIT_SGIX" _ 0x00000002
+		"WINDOW_BIT_SGIX"..0x00000001,
+		"PIXMAP_BIT_SGIX"..0x00000002
 	)
 
 	IntConstant(
@@ -60,15 +60,15 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		parameter of #ChooseFBConfigSGIX() (following the #RENDER_TYPE_SGIX token).
 		""",
 
-		"RGBA_BIT_SGIX" _ 0x00000001,
-		"COLOR_INDEX_BIT_SGIX" _ 0x00000002
+		"RGBA_BIT_SGIX"..0x00000001,
+		"COLOR_INDEX_BIT_SGIX"..0x00000002
 	)
 
 	val RenderTypes = IntConstant(
 		"Accepted by the {@code render_type} parameter of #CreateContextWithConfigSGIX().",
 
-		"RGBA_TYPE_SGIX" _ 0x8014,
-		"COLOR_INDEX_TYPE_SGIX" _ 0x8015
+		"RGBA_TYPE_SGIX"..0x8014,
+		"COLOR_INDEX_TYPE_SGIX"..0x8015
 	).javaDocLinks
 
 	int(
@@ -78,7 +78,7 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 		DISPLAY,
 		GLXFBConfigSGIX.IN("config", "the {@code GLXFBConfigSGIX} being queried"),
 		int.IN("attribute", "the attribute to query"),
-		Check(1) _ int_p.OUT("value", "returns the attribute value")
+		Check(1)..int_p.OUT("value", "returns the attribute value")
 	)
 
 	GLXFBConfigSGIX_p(
@@ -87,8 +87,8 @@ val GLX_SGIX_fbconfig = "GLXSGIXFBConfig".nativeClassGLX("GLX_SGIX_fbconfig", SG
 
 		DISPLAY,
 		int.IN("screen", "the screen number"),
-		nullable _ const _ int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
-		autoSizeResult _ int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
+		nullable..const..int_p.IN("attrib_list", "an optional list of attributes, terminated with org.lwjgl.system.linux.{@code None}"),
+		autoSizeResult..int_p.OUT("nelements", "the number of {@code GLXFBConfigSGIX} returned")
 	)
 
 	GLXPixmap(

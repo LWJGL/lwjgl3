@@ -22,14 +22,14 @@ val WGL_NV_render_depth_texture = "WGLNVRenderDepthTexture".nativeClassWGL("WGL_
 		{@code pfAttribIList} parameters of wglChoosePixelFormatARB.
 		""",
 
-		"BIND_TO_TEXTURE_DEPTH_NV" _ 0x20A3,
-		"BIND_TO_TEXTURE_RECTANGLE_DEPTH_NV" _ 0x20A4
+		"BIND_TO_TEXTURE_DEPTH_NV"..0x20A3,
+		"BIND_TO_TEXTURE_RECTANGLE_DEPTH_NV"..0x20A4
 	)
 
 	IntConstant(
 		"Accepted by the {@code piAttribList} parameter of wglCreatePbufferARB and by the {@code iAttribute} parameter of wglQueryPbufferARB.",
 
-		"DEPTH_TEXTURE_FORMAT_NV" _ 0x20A5
+		"DEPTH_TEXTURE_FORMAT_NV"..0x20A5
 	)
 
 	IntConstant(
@@ -38,13 +38,13 @@ val WGL_NV_render_depth_texture = "WGLNVRenderDepthTexture".nativeClassWGL("WGL_
 		{@code iAttribute} is WGL_DEPTH_TEXTURE_FORMAT_NV.
 		""",
 
-		"TEXTURE_DEPTH_COMPONENT_NV" _ 0x20A6,
-		"NO_TEXTURE_ARB" _ 0x2077
+		"TEXTURE_DEPTH_COMPONENT_NV"..0x20A6,
+		"NO_TEXTURE_ARB"..0x2077
 	)
 
 	IntConstant(
 		"Accepted by the {@code iBuffer} parameter of wglBindTexImageARB.",
 
-		"DEPTH_COMPONENT_NV" _ 0x20A7
+		"DEPTH_COMPONENT_NV"..0x20A7
 	)
 }

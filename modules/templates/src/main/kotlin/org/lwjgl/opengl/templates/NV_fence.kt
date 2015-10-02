@@ -32,30 +32,30 @@ val NV_fence = "NVFence".nativeClassGL("NV_fence", postfix = NV) {
 	IntConstant(
 		"Accepted by the {@code condition} parameter of SetFenceNV.",
 
-		"ALL_COMPLETED_NV" _ 0x84F2
+		"ALL_COMPLETED_NV"..0x84F2
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFenceivNV.",
 
-		"FENCE_STATUS_NV" _ 0x84F3,
-		"FENCE_CONDITION_NV" _ 0x84F4
+		"FENCE_STATUS_NV"..0x84F3,
+		"FENCE_CONDITION_NV"..0x84F4
 	)
 
 	void(
 		"DeleteFencesNV",
 		"",
 
-		AutoSize("fences") _ GLsizei.IN("n", ""),
-		SingleValue("fence") _ const _ GLuint_p.IN("fences", "")
+		AutoSize("fences")..GLsizei.IN("n", ""),
+		SingleValue("fence")..const..GLuint_p.IN("fences", "")
 	)
 
 	void(
 		"GenFencesNV",
 		"",
 
-		AutoSize("fences") _ GLsizei.IN("n", ""),
-		returnValue _ GLuint_p.OUT("fences", "")
+		AutoSize("fences")..GLsizei.IN("n", ""),
+		returnValue..GLuint_p.OUT("fences", "")
 	)
 
 	GLboolean(
@@ -78,7 +78,7 @@ val NV_fence = "NVFence".nativeClassGL("NV_fence", postfix = NV) {
 
 		GLuint.IN("fence", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "")
+		Check(1)..returnValue..GLint_p.OUT("params", "")
 	)
 
 	void(

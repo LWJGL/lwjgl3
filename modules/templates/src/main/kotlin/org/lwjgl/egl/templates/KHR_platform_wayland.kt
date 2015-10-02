@@ -20,6 +20,6 @@ val KHR_platform_wayland = "KHRPlatformWayland".nativeClassEGL("KHR_platform_way
 	IntConstant(
 		"",
 
-		"PLATFORM_WAYLAND_KHR" _ 0x31D8
+		"PLATFORM_WAYLAND_KHR"..0x31D8
 	)
 }

@@ -40,16 +40,16 @@ val ARB_texture_buffer_object = "ARBTextureBufferObject".nativeClassGL("ARB_text
 		GetIntegerv.
 		""",
 
-		"TEXTURE_BUFFER_ARB" _ 0x8C2A
+		"TEXTURE_BUFFER_ARB"..0x8C2A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetDoublev, GetFloatv, and GetIntegerv.",
 
-		"MAX_TEXTURE_BUFFER_SIZE_ARB" _ 0x8C2B,
-		"TEXTURE_BINDING_BUFFER_ARB" _ 0x8C2C,
-		"TEXTURE_BUFFER_DATA_STORE_BINDING_ARB" _ 0x8C2D,
-		"TEXTURE_BUFFER_FORMAT_ARB" _ 0x8C2E
+		"MAX_TEXTURE_BUFFER_SIZE_ARB"..0x8C2B,
+		"TEXTURE_BINDING_BUFFER_ARB"..0x8C2C,
+		"TEXTURE_BUFFER_DATA_STORE_BINDING_ARB"..0x8C2D,
+		"TEXTURE_BUFFER_FORMAT_ARB"..0x8C2E
 	)
 
 	void(

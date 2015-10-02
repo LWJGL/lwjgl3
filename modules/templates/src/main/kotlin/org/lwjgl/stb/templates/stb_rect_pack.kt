@@ -26,9 +26,9 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 	IntConstant(
 		"Packing heuristics",
 
-	    "HEURISTIC_Skyline_default" _ 0,
+	    "HEURISTIC_Skyline_default"..0,
 		"HEURISTIC_Skyline_BL_sortHeight" expr "STBRP_HEURISTIC_Skyline_default",
-		"HEURISTIC_Skyline_BF_sortHeight" _ 1
+		"HEURISTIC_Skyline_BF_sortHeight"..1
 	)
 
 	void(
@@ -50,8 +50,8 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		""",
 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
-		StructBuffer _ stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
-		AutoSize("rects") _ int.IN("num_rects", "the number of structs in {@code rects}")
+		StructBuffer..stbrp_rect_p.INOUT("rects", "an array of ##STBRPRect structs"),
+		AutoSize("rects")..int.IN("num_rects", "the number of structs in {@code rects}")
 	)
 
 	void(
@@ -79,8 +79,8 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		stbrp_context_p.IN("context", "an ##STBRPContext struct"),
 		int.IN("width", "the rectangle width"),
 		int.IN("height", "the rectangle height"),
-		StructBuffer _ stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
-		AutoSize("nodes") _ int.IN("num_nodes", "the number of structs in {@code nodes}")
+		StructBuffer..stbrp_node_p.IN("nodes", "an array of ##STBRPNode structs"),
+		AutoSize("nodes")..int.IN("num_nodes", "the number of structs in {@code nodes}")
 	)
 
 	void(

@@ -34,24 +34,24 @@ val EXT_texture_cube_map_array = "EXTTextureCubeMapArray".nativeClassGLES("EXT_t
 		and CopyTexSubImage3D.
 		""",
 
-		"TEXTURE_CUBE_MAP_ARRAY_EXT" _ 0x9009
+		"TEXTURE_CUBE_MAP_ARRAY_EXT"..0x9009
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv and GetFloatv.",
 
-		"TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT" _ 0x900A
+		"TEXTURE_BINDING_CUBE_MAP_ARRAY_EXT"..0x900A
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform, and by the {@code params} parameter of GetProgramResourceiv when {@code props} is TYPE.",
 
-		"SAMPLER_CUBE_MAP_ARRAY_EXT" _ 0x900C,
-		"SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT" _ 0x900D,
-		"INT_SAMPLER_CUBE_MAP_ARRAY_EXT" _ 0x900E,
-		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_EXT" _ 0x900F,
-		"IMAGE_CUBE_MAP_ARRAY_EXT" _ 0x9054,
-		"INT_IMAGE_CUBE_MAP_ARRAY_EXT" _ 0x905F,
-		"UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT" _ 0x906A
+		"SAMPLER_CUBE_MAP_ARRAY_EXT"..0x900C,
+		"SAMPLER_CUBE_MAP_ARRAY_SHADOW_EXT"..0x900D,
+		"INT_SAMPLER_CUBE_MAP_ARRAY_EXT"..0x900E,
+		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_EXT"..0x900F,
+		"IMAGE_CUBE_MAP_ARRAY_EXT"..0x9054,
+		"INT_IMAGE_CUBE_MAP_ARRAY_EXT"..0x905F,
+		"UNSIGNED_INT_IMAGE_CUBE_MAP_ARRAY_EXT"..0x906A
 	)
 }

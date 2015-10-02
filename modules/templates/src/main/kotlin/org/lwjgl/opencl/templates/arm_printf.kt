@@ -35,7 +35,7 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		If this property is not specified, no callback will be registered and any printf output from a kernel will be discarded.
 		""",
 
-		"PRINTF_CALLBACK_ARM" _ 0x40B0
+		"PRINTF_CALLBACK_ARM"..0x40B0
 	)
 
 	IntConstant(
@@ -52,6 +52,6 @@ val arm_printf = "ARMPrintf".nativeClassCL("arm_printf", ARM) {
 		CL10#GetDeviceInfo().
 		""",
 
-		"PRINTF_BUFFERSIZE_ARM" _ 0x40B1
+		"PRINTF_BUFFERSIZE_ARM"..0x40B1
 	)
 }

@@ -20,6 +20,6 @@ val NV_fill_rectangle = "NVFillRectangle".nativeClassGL("NV_fill_rectangle", pos
 	IntConstant(
 		"Accepted by the {@code mode} parameter of PolygonMode.",
 
-		"FILL_RECTANGLE_NV" _ 0x933C
+		"FILL_RECTANGLE_NV"..0x933C
 	)
 }

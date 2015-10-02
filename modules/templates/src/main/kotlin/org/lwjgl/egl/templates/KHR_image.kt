@@ -21,13 +21,13 @@ val KHR_image = "KHRImage".nativeClassEGL("KHR_image", postfix = KHR) {
 	IntConstant(
 		"",
 
-		"NATIVE_PIXMAP_KHR" _ 0x30B0
+		"NATIVE_PIXMAP_KHR"..0x30B0
 	)
 
 	LongConstant(
 		"",
 
-		"NO_IMAGE_KHR" _ 0L
+		"NO_IMAGE_KHR"..0L
 	)
 
 	KHR_image_base reuse "CreateImageKHR"

@@ -13,8 +13,8 @@ val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourceiv and alGetSourcefv.",
 
-		"BYTE_RW_OFFSETS_SOFT" _ 0x1031,
-		"SAMPLE_RW_OFFSETS_SOFT" _ 0x1032
+		"BYTE_RW_OFFSETS_SOFT"..0x1031,
+		"SAMPLE_RW_OFFSETS_SOFT"..0x1032
 	)
 
 	ALCvoid(
@@ -52,7 +52,7 @@ val AL_SOFT_buffer_sub_data = "SOFTBufferSubData".nativeClassAL("SOFT_buffer_sub
 		""",
 		ALuint.IN("buffer", "ID of the buffer to modify"),
 		ALenum.IN("format", "sample format of the passed data"),
-		const _ ALCvoid_p.IN("data", "existing buffer data to write to"),
+		const..ALCvoid_p.IN("data", "existing buffer data to write to"),
 		ALCsizei.IN("offset", "number of bytes from the start of the original data"),
 		ALCsizei.IN("length", "number of bytes of the original data, to modify")
 	)

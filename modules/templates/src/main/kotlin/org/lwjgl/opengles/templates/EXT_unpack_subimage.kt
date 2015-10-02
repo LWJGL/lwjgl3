@@ -20,8 +20,8 @@ val EXT_unpack_subimage = "EXTUnpackSubimage".nativeClassGLES("EXT_unpack_subima
 	IntConstant(
 		"Accepted by the {@code pname} parameters of PixelStorei, GetIntegerv, and GetFloatv.",
 
-		"UNPACK_ROW_LENGTH_EXT" _ 0x0CF2,
-		"UNPACK_SKIP_ROWS_EXT" _ 0x0CF3,
-		"UNPACK_SKIP_PIXELS_EXT" _ 0x0CF4
+		"UNPACK_ROW_LENGTH_EXT"..0x0CF2,
+		"UNPACK_SKIP_ROWS_EXT"..0x0CF3,
+		"UNPACK_SKIP_PIXELS_EXT"..0x0CF4
 	)
 }

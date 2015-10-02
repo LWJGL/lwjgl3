@@ -18,6 +18,6 @@ val FJ_shader_binary_GCCSO = "FJShaderBinaryGCCSO".nativeClassGLES("FJ_shader_bi
 	IntConstant(
 		"Accepted by the {@code binaryformat} parameter of ShaderBinary.",
 
-		"GCCSO_SHADER_BINARY_FJ" _ 0x9260
+		"GCCSO_SHADER_BINARY_FJ"..0x9260
 	)
 }

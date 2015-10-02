@@ -28,7 +28,7 @@ val IMG_read_format = "IMGReadFormat".nativeClassGLES("IMG_read_format", postfix
 	IntConstant(
 		"Accepted by the {@code format} parameter of ReadPixels.",
 
-		"BGRA_IMG" _ 0x80E1,
-		"UNSIGNED_SHORT_4_4_4_4_REV_IMG" _ 0x8365
+		"BGRA_IMG"..0x80E1,
+		"UNSIGNED_SHORT_4_4_4_4_REV_IMG"..0x8365
 	)
 }

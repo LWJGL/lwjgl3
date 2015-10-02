@@ -21,6 +21,6 @@ val OES_standard_derivatives = "OESStandardDerivatives".nativeClassGLES("OES_sta
 	IntConstant(
 		"Accepted by the {@code target} parameter of Hint and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"FRAGMENT_SHADER_DERIVATIVE_HINT_OES" _ 0x8B8B
+		"FRAGMENT_SHADER_DERIVATIVE_HINT_OES"..0x8B8B
 	)
 }

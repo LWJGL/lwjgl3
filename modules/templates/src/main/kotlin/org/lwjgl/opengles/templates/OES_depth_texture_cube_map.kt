@@ -23,12 +23,12 @@ val OES_depth_texture_cube_map = "OESDepthTextureCubeMap".nativeClassGLES("OES_d
 		of the TEXTURE_CUBE_MAP_ targets.
 		""",
 
-		"DEPTH_STENCIL_OES" _ 0x84F9
+		"DEPTH_STENCIL_OES"..0x84F9
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of TexImage2D, TexSubImage2D when {@code target} is one of the TEXTURE_CUBE_MAP_ targets.",
 
-		"DEPTH24_STENCIL8_OES" _ 0x88F0
+		"DEPTH24_STENCIL8_OES"..0x88F0
 	)
 }

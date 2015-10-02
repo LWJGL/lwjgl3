@@ -27,6 +27,6 @@ val ext_atomic_counters_32 = "EXTAtomicCounters32".nativeClassCL("ext_atomic_cou
 		Max number of atomic counters that can be used by a kernel. The minimum value is 8.
 		""",
 
-		"DEVICE_MAX_ATOMIC_COUNTERS_EXT" _ 0x4032
+		"DEVICE_MAX_ATOMIC_COUNTERS_EXT"..0x4032
 	)
 }

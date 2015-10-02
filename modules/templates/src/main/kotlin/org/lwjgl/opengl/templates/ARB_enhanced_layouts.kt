@@ -28,9 +28,9 @@ val ARB_enhanced_layouts = "ARBEnhancedLayouts".nativeClassGL("ARB_enhanced_layo
 	IntConstant(
 		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
 
-		"LOCATION_COMPONENT" _ 0x934A,
-		"TRANSFORM_FEEDBACK_BUFFER_INDEX" _ 0x934B,
-		"TRANSFORM_FEEDBACK_BUFFER_STRIDE" _ 0x934C
+		"LOCATION_COMPONENT"..0x934A,
+		"TRANSFORM_FEEDBACK_BUFFER_INDEX"..0x934B,
+		"TRANSFORM_FEEDBACK_BUFFER_STRIDE"..0x934C
 	)
 
 }

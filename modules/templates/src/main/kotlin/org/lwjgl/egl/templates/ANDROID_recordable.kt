@@ -21,6 +21,6 @@ val ANDROID_recordable = "ANDROIDRecordable".nativeClassEGL("ANDROID_recordable"
 	IntConstant(
 		"",
 
-		"RECORDABLE_ANDROID" _ 0x3142
+		"RECORDABLE_ANDROID"..0x3142
 	)
 }

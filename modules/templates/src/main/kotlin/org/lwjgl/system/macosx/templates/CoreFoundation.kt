@@ -7,7 +7,7 @@ package org.lwjgl.system.macosx.templates
 import org.lwjgl.generator.*
 import org.lwjgl.system.macosx.*
 
-val ALLOCATOR = nullable _ CFAllocatorRef.IN(
+val ALLOCATOR = nullable..CFAllocatorRef.IN(
 	"allocator",
 	"the allocator to use to allocate memory for the new object. Pass $NULL or {@code kCFAllocatorDefault} to use the current default allocator."
 )
@@ -29,9 +29,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"FALSE" expr "0"
 	)
 
-	macro _ CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
-	macro _ CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
-	macro _ CFAllocatorRef(
+	macro..CFAllocatorRef("kCFAllocatorDefault", "This is a synonym for $NULL, if you'd rather use a named constant.")
+	macro..CFAllocatorRef("kCFAllocatorSystemDefault", "Default system allocator; you rarely need to use this.")
+	macro..CFAllocatorRef(
 		"kCFAllocatorMalloc",
 		"""
 		This allocator uses {@code malloc()}, {@code realloc()}, and {@code free()}. This should not be generally used; stick to #kCFAllocatorDefault()
@@ -39,21 +39,21 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		was obtained as a result of {@code malloc()} type functions.
 		"""
 	)
-	macro _ CFAllocatorRef(
+	macro..CFAllocatorRef(
 		"kCFAllocatorMallocZone",
 		"""
 		This allocator explicitly uses the default malloc zone, returned by {@code malloc_default_zone()}. It should only be used when an object is safe to be
 		allocated in non-scanned memory.
 		"""
 	)
-	macro _ CFAllocatorRef(
+	macro..CFAllocatorRef(
 		"kCFAllocatorNull",
 		"""
 		Null allocator which does nothing and allocates no memory. This allocator is useful as the "bytesDeallocator" in {@code CFData} or "contentsDeallocator"
 		in {@code CFString} where the memory should not be freed.
 		"""
 	)
-	macro _ CFAllocatorRef(
+	macro..CFAllocatorRef(
 		"kCFAllocatorUseContext",
 		"Special allocator argument to CFAllocatorCreate which means \"use the functions given in the context to allocate the allocator itself as well\"."
 	)
@@ -107,20 +107,20 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	IntConstant(
 		"Platform-independent built-in encodings; always available on all platforms.",
 
-		"kCFStringEncodingMacRoman" _ 0,
-		"kCFStringEncodingWindowsLatin1" _ 0x0500,
-		"kCFStringEncodingISOLatin1" _ 0x0201,
-		"kCFStringEncodingNextStepLatin" _ 0x0B01,
-		"kCFStringEncodingASCII" _ 0x0600,
-		"kCFStringEncodingUnicode" _ 0x0100,
-		"kCFStringEncodingUTF8" _ 0x08000100,
-		"kCFStringEncodingNonLossyASCII" _ 0x0BFF,
-		"kCFStringEncodingUTF16" _ 0x0100,
-		"kCFStringEncodingUTF16BE" _ 0x10000100,
-		"kCFStringEncodingUTF16LE" _ 0x14000100,
-		"kCFStringEncodingUTF32" _ 0x0c000100,
-		"kCFStringEncodingUTF32BE" _ 0x18000100,
-		"kCFStringEncodingUTF32LE" _ 0x1c000100
+		"kCFStringEncodingMacRoman"..0,
+		"kCFStringEncodingWindowsLatin1"..0x0500,
+		"kCFStringEncodingISOLatin1"..0x0201,
+		"kCFStringEncodingNextStepLatin"..0x0B01,
+		"kCFStringEncodingASCII"..0x0600,
+		"kCFStringEncodingUnicode"..0x0100,
+		"kCFStringEncodingUTF8"..0x08000100,
+		"kCFStringEncodingNonLossyASCII"..0x0BFF,
+		"kCFStringEncodingUTF16"..0x0100,
+		"kCFStringEncodingUTF16BE"..0x10000100,
+		"kCFStringEncodingUTF16LE"..0x14000100,
+		"kCFStringEncodingUTF32"..0x0c000100,
+		"kCFStringEncodingUTF32BE"..0x18000100,
+		"kCFStringEncodingUTF32LE"..0x1c000100
 	)
 
 	CFStringRef(
@@ -128,7 +128,7 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates an immutable string from a C string.",
 
 		ALLOCATOR,
-		const _ char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		const..char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding.")
 	)
 
@@ -137,9 +137,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 		"Creates a CFString object from an external C string buffer that might serve as the backing store for the object.",
 
 		ALLOCATOR,
-		const _ char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
+		const..char_p.IN("cStr", "the NULL-terminated C string to be used to create the {@code CFString} object. The string must use an 8-bit encoding."),
 		CFStringEncoding.IN("encoding", "the encoding of the characters in the C string. The encoding must specify an 8-bit encoding."),
-		nullable _ CFAllocatorRef.IN(
+		nullable..CFAllocatorRef.IN(
 			"contentsDeallocator",
 			"""
 			the {@code CFAllocator} object to use to deallocate the external string buffer when it is no longer needed. You can pass $NULL or
@@ -155,9 +155,9 @@ val CoreFoundation = "CoreFoundation".nativeClass(MACOSX_PACKAGE) {
 	IntConstant(
 		"URL path styles.",
 
-		"kCFURLPOSIXPathStyle" _ 0,
-		"kCFURLHFSPathStyle" _ 1,
-		"kCFURLWindowsPathStyle" _ 2
+		"kCFURLPOSIXPathStyle"..0,
+		"kCFURLHFSPathStyle"..1,
+		"kCFURLWindowsPathStyle"..2
 	)
 
 	CFURLRef(

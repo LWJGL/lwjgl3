@@ -32,13 +32,13 @@ val KHR_context_flush_control = "KHRContextFlushControl".nativeClassGL("KHR_cont
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v.",
 
-		"CONTEXT_RELEASE_BEHAVIOR" _ 0x82FB
+		"CONTEXT_RELEASE_BEHAVIOR"..0x82FB
 	)
 
 	IntConstant(
 		"Returned in {@code data} by GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v when {@code pname} is #CONTEXT_RELEASE_BEHAVIOR.",
 
-		"CONTEXT_RELEASE_BEHAVIOR_FLUSH" _ 0x82FC
+		"CONTEXT_RELEASE_BEHAVIOR_FLUSH"..0x82FC
 	)
 }
 
@@ -54,7 +54,7 @@ val GLX_ARB_context_flush_control = "GLXARBContextFlushControl".nativeClassGLX("
 	IntConstant(
 		"Accepted as an attribute name in the {@code *attrib_list} argument to GLXARBCreateContext#CreateContextAttribsARB().",
 
-		"CONTEXT_RELEASE_BEHAVIOR_ARB" _ 0x2097
+		"CONTEXT_RELEASE_BEHAVIOR_ARB"..0x2097
 	)
 
 	IntConstant(
@@ -63,8 +63,8 @@ val GLX_ARB_context_flush_control = "GLXARBContextFlushControl".nativeClassGLX("
 		GLXARBCreateContext#CreateContextAttribsARB().
 		""",
 
-		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB" _ 0x0000,
-		"CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB" _ 0x2098
+		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB"..0x0000,
+		"CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB"..0x2098
 	)
 }
 
@@ -80,7 +80,7 @@ val WGL_ARB_context_flush_control = "WGLARBContextFlushControl".nativeClassWGL("
 	IntConstant(
 		"Accepted as an attribute name in the {@code *attrib_list} argument to WGLARBCreateContext#CreateContextAttribsARB().",
 
-		"CONTEXT_RELEASE_BEHAVIOR_ARB" _ 0x2097
+		"CONTEXT_RELEASE_BEHAVIOR_ARB"..0x2097
 	)
 
 	IntConstant(
@@ -89,7 +89,7 @@ val WGL_ARB_context_flush_control = "WGLARBContextFlushControl".nativeClassWGL("
 		WGLARBCreateContext#CreateContextAttribsARB().
 		""",
 
-		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB" _ 0x0000,
-		"CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB" _ 0x2098
+		"CONTEXT_RELEASE_BEHAVIOR_NONE_ARB"..0x0000,
+		"CONTEXT_RELEASE_BEHAVIOR_FLUSH_ARB"..0x2098
 	)
 }

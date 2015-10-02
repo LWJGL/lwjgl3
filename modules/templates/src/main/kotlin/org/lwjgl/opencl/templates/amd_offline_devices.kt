@@ -18,7 +18,7 @@ val amd_offline_devices = "AMDOfflineDevices".nativeClassCL("amd_offline_devices
 		devices, whether online or offline, are reported and can be used to create OpenCL binary images.
 		""",
 
-		"CONTEXT_OFFLINE_DEVICES_AMD" _ 0x403F
+		"CONTEXT_OFFLINE_DEVICES_AMD"..0x403F
 	)
 
 }

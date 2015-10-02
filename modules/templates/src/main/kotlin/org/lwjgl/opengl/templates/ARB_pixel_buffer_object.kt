@@ -62,14 +62,14 @@ val ARB_pixel_buffer_object = "ARBPixelBufferObject".nativeClassGL("ARB_pixel_bu
 		GetBufferPointerv.
 		""",
 
-		"PIXEL_PACK_BUFFER_ARB" _ 0x88EB,
-		"PIXEL_UNPACK_BUFFER_ARB" _ 0x88EC
+		"PIXEL_PACK_BUFFER_ARB"..0x88EB,
+		"PIXEL_UNPACK_BUFFER_ARB"..0x88EC
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"PIXEL_PACK_BUFFER_BINDING_ARB" _ 0x88ED,
-		"PIXEL_UNPACK_BUFFER_BINDING_ARB" _ 0x88EF
+		"PIXEL_PACK_BUFFER_BINDING_ARB"..0x88ED,
+		"PIXEL_UNPACK_BUFFER_BINDING_ARB"..0x88EF
 	)
 }

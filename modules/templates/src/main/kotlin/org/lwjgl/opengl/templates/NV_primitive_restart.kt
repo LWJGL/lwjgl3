@@ -33,13 +33,13 @@ val NV_primitive_restart = "NVPrimitiveRestart".nativeClassGL("NV_primitive_rest
 		parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
 		""",
 
-		"PRIMITIVE_RESTART_NV" _ 0x8558
+		"PRIMITIVE_RESTART_NV"..0x8558
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"PRIMITIVE_RESTART_INDEX_NV" _ 0x8559
+		"PRIMITIVE_RESTART_INDEX_NV"..0x8559
 	)
 
 	void(

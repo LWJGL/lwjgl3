@@ -32,7 +32,7 @@ val NOK_swap_region2 = "NOKSwapRegion2".nativeClassEGL("NOK_swap_region2", postf
 
 		EGLDisplay.IN("dpy", ""),
 		EGLSurface.IN("surface", ""),
-		AutoSize("rects") _ EGLint.IN("numRects", ""),
-		nullable _ const _ EGLint_p.IN("rects", "")
+		AutoSize("rects")..EGLint.IN("numRects", ""),
+		nullable..const..EGLint_p.IN("rects", "")
 	)
 }

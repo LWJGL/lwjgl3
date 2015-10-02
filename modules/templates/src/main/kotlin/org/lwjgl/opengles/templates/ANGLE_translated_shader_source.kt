@@ -24,7 +24,7 @@ val ANGLE_translated_shader_source = "ANGLETranslatedShaderSource".nativeClassGL
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetShaderiv.",
 
-		"TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE" _ 0x93A0
+		"TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE"..0x93A0
 	)
 
 	void(
@@ -32,8 +32,8 @@ val ANGLE_translated_shader_source = "ANGLETranslatedShaderSource".nativeClassGL
 		"",
 
 		GLuint.IN("shader", ""),
-		AutoSize("source") _ GLsizei.IN("bufsize", ""),
-		nullable _ Check(1) _ GLsizei_p.OUT("length", ""),
-		Return("length", "GLES20.glGetShaderi(shader, GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE)") _ GLcharUTF8_p.OUT("source", "")
+		AutoSize("source")..GLsizei.IN("bufsize", ""),
+		nullable..Check(1)..GLsizei_p.OUT("length", ""),
+		Return("length", "GLES20.glGetShaderi(shader, GL_TRANSLATED_SHADER_SOURCE_LENGTH_ANGLE)")..GLcharUTF8_p.OUT("source", "")
 	)
 }

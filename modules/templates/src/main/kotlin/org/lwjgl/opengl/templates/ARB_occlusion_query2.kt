@@ -23,6 +23,6 @@ val ARB_occlusion_query2 = "ARBOcclusionQuery2".nativeClassGL("ARB_occlusion_que
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
-		"ANY_SAMPLES_PASSED" _ 0x8C2F
+		"ANY_SAMPLES_PASSED"..0x8C2F
 	)
 }

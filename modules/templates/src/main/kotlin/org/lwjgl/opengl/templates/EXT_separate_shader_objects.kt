@@ -48,7 +48,7 @@ glActiveProgramEXT(program);""")}
 	IntConstant(
 		"Accepted by {@code type} parameter to GetIntegerv and GetFloatv.",
 
-		"ACTIVE_PROGRAM_EXT" _ 0x8B8D
+		"ACTIVE_PROGRAM_EXT"..0x8B8D
 	)
 
 	void(
@@ -71,6 +71,6 @@ glActiveProgramEXT(program);""")}
 		"",
 
 		GLenum.IN("type", ""),
-		const _ GLcharUTF8_p.IN("string", "")
+		const..GLcharUTF8_p.IN("string", "")
 	)
 }

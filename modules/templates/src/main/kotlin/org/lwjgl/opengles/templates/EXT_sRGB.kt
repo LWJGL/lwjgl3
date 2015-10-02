@@ -37,19 +37,19 @@ val EXT_sRGB = "EXTSRGB".nativeClassGLES("EXT_sRGB", postfix = EXT) {
 		parameter of TexSubImage2D and TexSubImage3DOES.
 		""",
 
-		"SRGB_EXT" _ 0x8C40,
-		"SRGB_ALPHA_EXT" _ 0x8C42
+		"SRGB_EXT"..0x8C40,
+		"SRGB_ALPHA_EXT"..0x8C42
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorage.",
 
-		"SRGB8_ALPHA8_EXT" _ 0x8C43
+		"SRGB8_ALPHA8_EXT"..0x8C43
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT" _ 0x8210
+		"FRAMEBUFFER_ATTACHMENT_COLOR_ENCODING_EXT"..0x8210
 	)
 }

@@ -20,6 +20,6 @@ val NV_shadow_samplers_array = "NVShadowSamplersArray".nativeClassGLES("NV_shado
 	IntConstant(
 		"Returned in {@code type} by glGetActiveUniform.",
 
-		"SAMPLER_2D_ARRAY_SHADOW_NV" _ 0x8DC4
+		"SAMPLER_2D_ARRAY_SHADOW_NV"..0x8DC4
 	)
 }

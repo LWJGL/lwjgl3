@@ -24,14 +24,14 @@ val EXT_device_base = "EXTDeviceBase".nativeClassEGL("EXT_device_base", postfix 
 	IntConstant(
 		"",
 
-		"BAD_DEVICE_EXT" _ 0x322B,
-		"DEVICE_EXT" _ 0x322C
+		"BAD_DEVICE_EXT"..0x322B,
+		"DEVICE_EXT"..0x322C
 	)
 
 	LongConstant(
 		"",
 
-		"NO_DEVICE_EXT" _ 0L
+		"NO_DEVICE_EXT"..0L
 	)
 
 	EXT_device_query reuse "QueryDeviceAttribEXT"

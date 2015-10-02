@@ -60,7 +60,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		and GetFramebufferAttachmentParameterivEXT.
 		""",
 
-		"FRAMEBUFFER_EXT" _ 0x8D40
+		"FRAMEBUFFER_EXT"..0x8D40
 	)
 
 	IntConstant(
@@ -69,40 +69,40 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GetFramebufferAttachmentParameterivEXT.
 		""",
 
-		"RENDERBUFFER_EXT" _ 0x8D41
+		"RENDERBUFFER_EXT"..0x8D41
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageEXT.",
 
-		"STENCIL_INDEX1_EXT" _ 0x8D46,
-		"STENCIL_INDEX4_EXT" _ 0x8D47,
-		"STENCIL_INDEX8_EXT" _ 0x8D48,
-		"STENCIL_INDEX16_EXT" _ 0x8D49
+		"STENCIL_INDEX1_EXT"..0x8D46,
+		"STENCIL_INDEX4_EXT"..0x8D47,
+		"STENCIL_INDEX8_EXT"..0x8D48,
+		"STENCIL_INDEX16_EXT"..0x8D49
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameterivEXT.",
 
-		"RENDERBUFFER_WIDTH_EXT" _ 0x8D42,
-		"RENDERBUFFER_HEIGHT_EXT" _ 0x8D43,
-		"RENDERBUFFER_INTERNAL_FORMAT_EXT" _ 0x8D44,
-		"RENDERBUFFER_RED_SIZE_EXT" _ 0x8D50,
-		"RENDERBUFFER_GREEN_SIZE_EXT" _ 0x8D51,
-		"RENDERBUFFER_BLUE_SIZE_EXT" _ 0x8D52,
-		"RENDERBUFFER_ALPHA_SIZE_EXT" _ 0x8D53,
-		"RENDERBUFFER_DEPTH_SIZE_EXT" _ 0x8D54,
-		"RENDERBUFFER_STENCIL_SIZE_EXT" _ 0x8D55
+		"RENDERBUFFER_WIDTH_EXT"..0x8D42,
+		"RENDERBUFFER_HEIGHT_EXT"..0x8D43,
+		"RENDERBUFFER_INTERNAL_FORMAT_EXT"..0x8D44,
+		"RENDERBUFFER_RED_SIZE_EXT"..0x8D50,
+		"RENDERBUFFER_GREEN_SIZE_EXT"..0x8D51,
+		"RENDERBUFFER_BLUE_SIZE_EXT"..0x8D52,
+		"RENDERBUFFER_ALPHA_SIZE_EXT"..0x8D53,
+		"RENDERBUFFER_DEPTH_SIZE_EXT"..0x8D54,
+		"RENDERBUFFER_STENCIL_SIZE_EXT"..0x8D55
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameterivEXT.",
 
-		"FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT" _ 0x8CD0,
-		"FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT" _ 0x8CD1,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT" _ 0x8CD2,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT" _ 0x8CD3,
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT" _ 0x8CD4
+		"FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE_EXT"..0x8CD0,
+		"FRAMEBUFFER_ATTACHMENT_OBJECT_NAME_EXT"..0x8CD1,
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_LEVEL_EXT"..0x8CD2,
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_CUBE_MAP_FACE_EXT"..0x8CD3,
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_3D_ZOFFSET_EXT"..0x8CD4
 	)
 
 	IntConstant(
@@ -110,52 +110,52 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		Accepted by the {@code attachment} parameter of FramebufferTexture{1D|2D|3D}EXT, FramebufferRenderbufferEXT, and GetFramebufferAttachmentParameterivEXT.
 		""",
 
-		"COLOR_ATTACHMENT0_EXT" _ 0x8CE0,
-		"COLOR_ATTACHMENT1_EXT" _ 0x8CE1,
-		"COLOR_ATTACHMENT2_EXT" _ 0x8CE2,
-		"COLOR_ATTACHMENT3_EXT" _ 0x8CE3,
-		"COLOR_ATTACHMENT4_EXT" _ 0x8CE4,
-		"COLOR_ATTACHMENT5_EXT" _ 0x8CE5,
-		"COLOR_ATTACHMENT6_EXT" _ 0x8CE6,
-		"COLOR_ATTACHMENT7_EXT" _ 0x8CE7,
-		"COLOR_ATTACHMENT8_EXT" _ 0x8CE8,
-		"COLOR_ATTACHMENT9_EXT" _ 0x8CE9,
-		"COLOR_ATTACHMENT10_EXT" _ 0x8CEA,
-		"COLOR_ATTACHMENT11_EXT" _ 0x8CEB,
-		"COLOR_ATTACHMENT12_EXT" _ 0x8CEC,
-		"COLOR_ATTACHMENT13_EXT" _ 0x8CED,
-		"COLOR_ATTACHMENT14_EXT" _ 0x8CEE,
-		"COLOR_ATTACHMENT15_EXT" _ 0x8CEF,
-		"DEPTH_ATTACHMENT_EXT" _ 0x8D00,
-		"STENCIL_ATTACHMENT_EXT" _ 0x8D20
+		"COLOR_ATTACHMENT0_EXT"..0x8CE0,
+		"COLOR_ATTACHMENT1_EXT"..0x8CE1,
+		"COLOR_ATTACHMENT2_EXT"..0x8CE2,
+		"COLOR_ATTACHMENT3_EXT"..0x8CE3,
+		"COLOR_ATTACHMENT4_EXT"..0x8CE4,
+		"COLOR_ATTACHMENT5_EXT"..0x8CE5,
+		"COLOR_ATTACHMENT6_EXT"..0x8CE6,
+		"COLOR_ATTACHMENT7_EXT"..0x8CE7,
+		"COLOR_ATTACHMENT8_EXT"..0x8CE8,
+		"COLOR_ATTACHMENT9_EXT"..0x8CE9,
+		"COLOR_ATTACHMENT10_EXT"..0x8CEA,
+		"COLOR_ATTACHMENT11_EXT"..0x8CEB,
+		"COLOR_ATTACHMENT12_EXT"..0x8CEC,
+		"COLOR_ATTACHMENT13_EXT"..0x8CED,
+		"COLOR_ATTACHMENT14_EXT"..0x8CEE,
+		"COLOR_ATTACHMENT15_EXT"..0x8CEF,
+		"DEPTH_ATTACHMENT_EXT"..0x8D00,
+		"STENCIL_ATTACHMENT_EXT"..0x8D20
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatusEXT().",
 
-		"FRAMEBUFFER_COMPLETE_EXT" _ 0x8CD5,
-		"FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT" _ 0x8CD6,
-		"FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT" _ 0x8CD7,
-		"FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT" _ 0x8CD9,
-		"FRAMEBUFFER_INCOMPLETE_FORMATS_EXT" _ 0x8CDA,
-		"FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT" _ 0x8CDB,
-		"FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT" _ 0x8CDC,
-		"FRAMEBUFFER_UNSUPPORTED_EXT" _ 0x8CDD
+		"FRAMEBUFFER_COMPLETE_EXT"..0x8CD5,
+		"FRAMEBUFFER_INCOMPLETE_ATTACHMENT_EXT"..0x8CD6,
+		"FRAMEBUFFER_INCOMPLETE_MISSING_ATTACHMENT_EXT"..0x8CD7,
+		"FRAMEBUFFER_INCOMPLETE_DIMENSIONS_EXT"..0x8CD9,
+		"FRAMEBUFFER_INCOMPLETE_FORMATS_EXT"..0x8CDA,
+		"FRAMEBUFFER_INCOMPLETE_DRAW_BUFFER_EXT"..0x8CDB,
+		"FRAMEBUFFER_INCOMPLETE_READ_BUFFER_EXT"..0x8CDC,
+		"FRAMEBUFFER_UNSUPPORTED_EXT"..0x8CDD
 	)
 
 	IntConstant(
 		"Accepted by GetIntegerv().",
 
-		"FRAMEBUFFER_BINDING_EXT" _ 0x8CA6,
-		"RENDERBUFFER_BINDING_EXT" _ 0x8CA7,
-		"MAX_COLOR_ATTACHMENTS_EXT" _ 0x8CDF,
-		"MAX_RENDERBUFFER_SIZE_EXT" _ 0x84E8
+		"FRAMEBUFFER_BINDING_EXT"..0x8CA6,
+		"RENDERBUFFER_BINDING_EXT"..0x8CA7,
+		"MAX_COLOR_ATTACHMENTS_EXT"..0x8CDF,
+		"MAX_RENDERBUFFER_SIZE_EXT"..0x84E8
 	)
 
 	IntConstant(
 		"Returned by GetError().",
 
-		"INVALID_FRAMEBUFFER_OPERATION_EXT" _ 0x0506
+		"INVALID_FRAMEBUFFER_OPERATION_EXT"..0x0506
 	)
 
 	GLboolean(
@@ -177,16 +177,16 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"DeleteRenderbuffersEXT",
 		"",
 
-		AutoSize("renderbuffers") _ GLsizei.IN("n", ""),
-		SingleValue("renderbuffer") _ const _ GLuint_p.IN("renderbuffers", "")
+		AutoSize("renderbuffers")..GLsizei.IN("n", ""),
+		SingleValue("renderbuffer")..const..GLuint_p.IN("renderbuffers", "")
 	)
 
 	void(
 		"GenRenderbuffersEXT",
 		"",
 
-		AutoSize("renderbuffers") _ GLsizei.IN("n", ""),
-		returnValue _ GLuint_p.OUT("renderbuffers", "")
+		AutoSize("renderbuffers")..GLsizei.IN("n", ""),
+		returnValue..GLuint_p.OUT("renderbuffers", "")
 	)
 
 	void(
@@ -205,7 +205,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "")
+		Check(1)..returnValue..GLint_p.OUT("params", "")
 	)
 
 	GLboolean(
@@ -227,16 +227,16 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		"DeleteFramebuffersEXT",
 		"",
 
-		AutoSize("framebuffers") _ GLsizei.IN("n", ""),
-		SingleValue("framebuffer") _ const _ GLuint_p.IN("framebuffers", "")
+		AutoSize("framebuffers")..GLsizei.IN("n", ""),
+		SingleValue("framebuffer")..const..GLuint_p.IN("framebuffers", "")
 	)
 
 	void(
 		"GenFramebuffersEXT",
 		"",
 
-		AutoSize("framebuffers") _ GLsizei.IN("n", ""),
-		returnValue _ GLuint_p.OUT("framebuffers", "")
+		AutoSize("framebuffers")..GLsizei.IN("n", ""),
+		returnValue..GLuint_p.OUT("framebuffers", "")
 	)
 
 	GLenum(
@@ -297,7 +297,7 @@ val EXT_framebuffer_object = "EXTFramebufferObject".nativeClassGL("EXT_framebuff
 		GLenum.IN("target", ""),
 		GLenum.IN("attachment", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "")
+		Check(1)..returnValue..GLint_p.OUT("params", "")
 	)
 
 	void(

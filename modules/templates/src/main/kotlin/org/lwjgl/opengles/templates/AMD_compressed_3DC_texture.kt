@@ -48,7 +48,7 @@ val AMD_compressed_3DC_texture = "AMDCompressed3DCTexture".nativeClassGLES("AMD_
 	IntConstant(
 		"Accepted by the {@code internalFormat} parameter of CompressedTexImage2D and CompressedTexImage3DOES.",
 
-		"3DC_X_AMD" _ 0x87F9,
-		"3DC_XY_AMD" _ 0x87FA
+		"3DC_X_AMD"..0x87F9,
+		"3DC_XY_AMD"..0x87FA
 	)
 }

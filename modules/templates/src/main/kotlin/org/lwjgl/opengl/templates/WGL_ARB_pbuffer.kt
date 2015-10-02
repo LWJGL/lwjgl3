@@ -49,7 +49,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		int.IN("pixelFormat", "a non-generic pixel format descriptor index"),
 		int.IN("width", "the pixel width of the rectangular pbuffer"),
 		int.IN("height", "the pixel height of the rectangular pbuffer"),
-		nullTerminated _ nullable _ const _ int_p.IN(
+		nullTerminated..nullable..const..int_p.IN(
 			"attribList",
 			"a 0-terminated list of attributes {type, value} pairs containing integer attribute values"
 		)
@@ -88,7 +88,7 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 
 		HPBUFFERARB.IN("pbuffer", "a pbuffer handle"),
 		int.IN("attribute", "the attribute to query", "#PBUFFER_WIDTH_ARB #PBUFFER_HEIGHT_ARB #PBUFFER_LOST_ARB"),
-		Check(1) _ int_p.IN("value", "the attribute value")
+		Check(1)..int_p.IN("value", "the attribute value")
 	)
 
 	IntConstant(
@@ -97,29 +97,29 @@ val WGL_ARB_pbuffer = "WGLARBPbuffer".nativeClassWGL("WGL_ARB_pbuffer", ARB) {
 		$wglGetPixelFormatAttribiARB.
 		""",
 
-		"DRAW_TO_PBUFFER_ARB" _ 0x202D
+		"DRAW_TO_PBUFFER_ARB"..0x202D
 	)
 
 	IntConstant(
 		"Accepted by the {@code attributes} parameter of $wglGetPixelFormatAttribiARB.",
 
-		"MAX_PBUFFER_PIXELS_ARB" _ 0x202E,
-		"MAX_PBUFFER_WIDTH_ARB" _ 0x202F,
-		"MAX_PBUFFER_HEIGHT_ARB" _ 0x2030
+		"MAX_PBUFFER_PIXELS_ARB"..0x202E,
+		"MAX_PBUFFER_WIDTH_ARB"..0x202F,
+		"MAX_PBUFFER_HEIGHT_ARB"..0x2030
 	)
 
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of #CreatePbufferARB().",
 
-		"PBUFFER_LARGEST_ARB" _ 0x2033
+		"PBUFFER_LARGEST_ARB"..0x2033
 	)
 
 	IntConstant(
 		"Accepted by the {@code attribute} parameter of #QueryPbufferARB().",
 
-		"PBUFFER_WIDTH_ARB" _ 0x2034,
-		"PBUFFER_HEIGHT_ARB" _ 0x2035,
-		"PBUFFER_LOST_ARB" _ 0x2036
+		"PBUFFER_WIDTH_ARB"..0x2034,
+		"PBUFFER_HEIGHT_ARB"..0x2035,
+		"PBUFFER_LOST_ARB"..0x2036
 	)
 
 }

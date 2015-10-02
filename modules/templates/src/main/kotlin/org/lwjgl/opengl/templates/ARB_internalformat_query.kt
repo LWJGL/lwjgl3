@@ -24,7 +24,7 @@ val ARB_internalformat_query = "ARBInternalformatQuery".nativeClassGL("ARB_inter
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ.",
 
-		"NUM_SAMPLE_COUNTS" _ 0x9380
+		"NUM_SAMPLE_COUNTS"..0x9380
 	)
 
 	GL42 reuse "GetInternalformativ"

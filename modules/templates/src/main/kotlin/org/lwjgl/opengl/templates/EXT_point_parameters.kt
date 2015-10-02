@@ -53,10 +53,10 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 	IntConstant(
 		"Accepted by the {@code pname} parameter of glPointParameterfvEXT, and the {@code pname} of glGet.",
 
-		"POINT_SIZE_MIN_EXT" _ 0x8126,
-		"POINT_SIZE_MAX_EXT" _ 0x8127,
-		"POINT_FADE_THRESHOLD_SIZE_EXT" _ 0x8128,
-		"DISTANCE_ATTENUATION_EXT" _ 0x8129
+		"POINT_SIZE_MIN_EXT"..0x8126,
+		"POINT_SIZE_MAX_EXT"..0x8127,
+		"POINT_FADE_THRESHOLD_SIZE_EXT"..0x8128,
+		"DISTANCE_ATTENUATION_EXT"..0x8129
 	)
 
 	void(
@@ -72,6 +72,6 @@ alpha(Pe) = Alpha * factor(Pe)""")}
 		"",
 
 		GLenum.IN("pname", ""),
-		const _ GLfloat_p.IN("params", "")
+		const..GLfloat_p.IN("params", "")
 	)
 }

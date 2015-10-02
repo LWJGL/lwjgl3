@@ -28,6 +28,6 @@ val NV_depth_nonlinear = "NVDepthNonlinear".nativeClassGLES("NV_depth_nonlinear"
 	IntConstant(
 		"Accepted as a valid sized internal format by all functions accepting sized internal formats with a base format of DEPTH_COMPONENT.",
 
-		"DEPTH_COMPONENT16_NONLINEAR_NV" _ 0x8E2C
+		"DEPTH_COMPONENT16_NONLINEAR_NV"..0x8E2C
 	)
 }

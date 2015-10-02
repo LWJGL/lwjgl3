@@ -27,16 +27,16 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 	val properties = IntConstant(
 		"Accepted by the {@code property} parameter of #GetGPUInfoAMD().",
 
-		"GPU_VENDOR_AMD" _ 0x1F00,
-		"GPU_RENDERER_STRING_AMD" _ 0x1F01,
-		"GPU_OPENGL_VERSION_STRING_AMD" _ 0x1F02,
-		"GPU_FASTEST_TARGET_GPUS_AMD" _ 0x21A2,
-		"GPU_RAM_AMD" _ 0x21A3,
-		"GPU_CLOCK_AMD" _ 0x21A4,
-		"GPU_NUM_PIPES_AMD" _ 0x21A5,
-		"GPU_NUM_SIMD_AMD" _ 0x21A6,
-		"GPU_NUM_RB_AMD" _ 0x21A7,
-		"GPU_NUM_SPI_AMD" _ 0x21A8
+		"GPU_VENDOR_AMD"..0x1F00,
+		"GPU_RENDERER_STRING_AMD"..0x1F01,
+		"GPU_OPENGL_VERSION_STRING_AMD"..0x1F02,
+		"GPU_FASTEST_TARGET_GPUS_AMD"..0x21A2,
+		"GPU_RAM_AMD"..0x21A3,
+		"GPU_CLOCK_AMD"..0x21A4,
+		"GPU_NUM_PIPES_AMD"..0x21A5,
+		"GPU_NUM_SIMD_AMD"..0x21A6,
+		"GPU_NUM_RB_AMD"..0x21A7,
+		"GPU_NUM_SPI_AMD"..0x21A8
 	).javaDocLinks
 
 	UINT(
@@ -49,8 +49,8 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		of GPUs. {@code ids} will be tightly packed with no 0 values between valid ids.
 		""",
 
-		AutoSize("ids") _ UINT.IN("maxCount", "the max number of IDs that can be returned"),
-		nullable _ UINT_p.IN("ids", "the array of returned IDs")
+		AutoSize("ids")..UINT.IN("maxCount", "the max number of IDs that can be returned"),
+		nullable..UINT_p.IN("ids", "the array of returned IDs")
 	)
 
 	int(
@@ -72,10 +72,10 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 			"the data type to be returned",
 			"GL11##GL_UNSIGNED_INT GL11##GL_INT GL11##GL_FLOAT GL11##GL_UNSIGNED_BYTE"
 		),
-		AutoSize("data") shr "GLChecks.typeToByteShift(dataType)" _ UINT.IN("size", "the size of the {@code data} buffer"),
+		AutoSize("data") shr "GLChecks.typeToByteShift(dataType)"..UINT.IN("size", "the size of the {@code data} buffer"),
 		MultiType(
 			PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ void_p.IN("data", "the buffer which will be filled with the requested information")
+		)..void_p.IN("data", "the buffer which will be filled with the requested information")
 	)
 
 	UINT(
@@ -107,8 +107,8 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 		""",
 
 		UINT.IN("id", "a valid GPU id"),
-		nullable _ HGLRC.IN("shareContext", "must either be NULL or that of an associated context created with the the same GPU ID as {@code id}"),
-		nullTerminated _ nullable _ const _ int_p.IN("attribList", "a 0-terminated list of attributes for the context")
+		nullable..HGLRC.IN("shareContext", "must either be NULL or that of an associated context created with the the same GPU ID as {@code id}"),
+		nullTerminated..nullable..const..int_p.IN("attribList", "a 0-terminated list of attributes for the context")
 	)
 
 	BOOL(
@@ -127,7 +127,7 @@ val WGL_AMD_gpu_association = "WGLAMDGPUAssociation".nativeClassWGL("WGL_AMD_gpu
 
 	HGLRC("GetCurrentAssociatedContextAMD", "Returns the current associated context in the current thread.")
 
-	DependsOn("GL_EXT_framebuffer_blit") _ VOID(
+	DependsOn("GL_EXT_framebuffer_blit")..VOID(
 		"BlitContextFramebufferAMD",
 		"""
 		Blits data from one context to another. This facilitates high performance data communication between multiple contexts.

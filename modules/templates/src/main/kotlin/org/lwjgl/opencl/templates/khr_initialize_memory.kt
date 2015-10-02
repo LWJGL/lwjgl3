@@ -23,7 +23,7 @@ val khr_initialize_memory = "KHRInitializeMemory".nativeClassCL("khr_initialize_
 		)}
 		""",
 
-		"CONTEXT_MEMORY_INITIALIZE_KHR" _ 0x200E
+		"CONTEXT_MEMORY_INITIALIZE_KHR"..0x200E
 	)
 
 }

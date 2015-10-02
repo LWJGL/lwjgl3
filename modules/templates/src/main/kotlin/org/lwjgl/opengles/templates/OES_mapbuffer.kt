@@ -19,23 +19,23 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
 	IntConstant(
 		"Accepted by the {@code access} parameter of MapBufferOES.",
 
-		"WRITE_ONLY_OES" _ 0x88B9
+		"WRITE_ONLY_OES"..0x88B9
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBufferParameteriv.",
 
-		"BUFFER_ACCESS_OES" _ 0x88BB,
-		"BUFFER_MAPPED_OES" _ 0x88BC
+		"BUFFER_ACCESS_OES"..0x88BB,
+		"BUFFER_MAPPED_OES"..0x88BC
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferPointervOES.",
 
-		"BUFFER_MAP_POINTER_OES" _ 0x88BD
+		"BUFFER_MAP_POINTER_OES"..0x88BD
 	)
 
-	(MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)") _ void_p)(
+	(MapPointer("GLES20.glGetBufferParameteri(target, GLES20.GL_BUFFER_SIZE)")..void_p)(
 		"MapBufferOES",
 		"",
 
@@ -56,6 +56,6 @@ val OES_mapbuffer = "OESMapbuffer".nativeClassGLES("OES_mapbuffer", postfix = OE
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ void_pp.OUT("params", "")
+		returnValue..Check(1)..void_pp.OUT("params", "")
 	)
 }

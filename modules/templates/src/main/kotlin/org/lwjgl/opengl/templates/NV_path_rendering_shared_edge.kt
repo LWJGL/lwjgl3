@@ -25,6 +25,6 @@ val NV_path_rendering_shared_edge = "NVPathRenderingSharedEdge".nativeClassGL("N
 	IntConstant(
 		"Allowed to be added to command tokens in elements of the {@code commands} array parameter of PathCommandsNV and PathSubCommandsNV.",
 
-		"SHARED_EDGE_NV" _ 0xC0
+		"SHARED_EDGE_NV"..0xC0
 	)
 }

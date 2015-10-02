@@ -28,8 +28,8 @@ val EXT_blend_equation_separate = "EXTBlendEquationSeparate".nativeClassGL("EXT_
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"BLEND_EQUATION_RGB_EXT" _ 0x8009,
-		"BLEND_EQUATION_ALPHA_EXT" _ 0x883D
+		"BLEND_EQUATION_RGB_EXT"..0x8009,
+		"BLEND_EQUATION_ALPHA_EXT"..0x883D
 	)
 
 	void(

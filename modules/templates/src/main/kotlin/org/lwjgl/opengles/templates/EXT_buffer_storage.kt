@@ -30,10 +30,10 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
 	IntConstant(
 		"Accepted in the {@code flags} parameter of BufferStorageEXT and NamedBufferStorageEXT.",
 
-		"MAP_PERSISTENT_BIT_EXT" _ 0x0040,
-		"MAP_COHERENT_BIT_EXT" _ 0x0080,
-		"DYNAMIC_STORAGE_BIT_EXT" _ 0x0100,
-		"CLIENT_STORAGE_BIT_EXT" _ 0x0200
+		"MAP_PERSISTENT_BIT_EXT"..0x0040,
+		"MAP_COHERENT_BIT_EXT"..0x0080,
+		"DYNAMIC_STORAGE_BIT_EXT"..0x0100,
+		"CLIENT_STORAGE_BIT_EXT"..0x0200
 	)
 
 	IntConstant(
@@ -41,14 +41,14 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
 		MAP_PERSISTENT_BIT_EXT 0x0040 (as above) MAP_COHERENT_BIT_EXT 0x0080 (as above) Accepted by the {@code pname} parameter of GetBufferParameter{i|i64}v.
 		""",
 
-		"BUFFER_IMMUTABLE_STORAGE_EXT" _ 0x821F,
-		"BUFFER_STORAGE_FLAGS_EXT" _ 0x8220
+		"BUFFER_IMMUTABLE_STORAGE_EXT"..0x821F,
+		"BUFFER_STORAGE_FLAGS_EXT"..0x8220
 	)
 
 	IntConstant(
 		"Accepted by the {@code barriers} parameter of MemoryBarrier.",
 
-		"CLIENT_MAPPED_BUFFER_BARRIER_BIT_EXT" _ 0x00004000
+		"CLIENT_MAPPED_BUFFER_BARRIER_BIT_EXT"..0x00004000
 	)
 
 	void(
@@ -56,12 +56,12 @@ val EXT_buffer_storage = "EXTBufferStorage".nativeClassGLES("EXT_buffer_storage"
 		"",
 
 		GLenum.IN("target", ""),
-		AutoSize("data") _ GLsizeiptr.IN("size", ""),
-		optional _ MultiType(
+		AutoSize("data")..GLsizeiptr.IN("size", ""),
+		optional..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("data", ""),
+		)..const..void_p.IN("data", ""),
 		GLbitfield.IN("flags", "")
 	)
 }

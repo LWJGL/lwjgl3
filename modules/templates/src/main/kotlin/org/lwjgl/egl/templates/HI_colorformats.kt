@@ -18,9 +18,9 @@ val HI_colorformats = "HIColorformats".nativeClassEGL("HI_colorformats", postfix
 	IntConstant(
 		"",
 
-		"COLOR_FORMAT_HI" _ 0x8F70,
-		"COLOR_RGB_HI" _ 0x8F71,
-		"COLOR_RGBA_HI" _ 0x8F72,
-		"COLOR_ARGB_HI" _ 0x8F73
+		"COLOR_FORMAT_HI"..0x8F70,
+		"COLOR_RGB_HI"..0x8F71,
+		"COLOR_RGBA_HI"..0x8F72,
+		"COLOR_ARGB_HI"..0x8F73
 	)
 }

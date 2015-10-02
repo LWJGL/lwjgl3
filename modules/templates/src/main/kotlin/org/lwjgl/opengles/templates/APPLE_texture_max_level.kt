@@ -19,6 +19,6 @@ val APPLE_texture_max_level = "APPLETextureMaxLevel".nativeClassGLES("APPLE_text
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
-		"TEXTURE_MAX_LEVEL_APPLE" _ 0x813D
+		"TEXTURE_MAX_LEVEL_APPLE"..0x813D
 	)
 }

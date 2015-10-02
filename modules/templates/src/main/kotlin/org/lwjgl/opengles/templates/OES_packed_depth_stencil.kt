@@ -37,13 +37,13 @@ val OES_packed_depth_stencil = "OESPackedDepthStencil".nativeClassGLES("OES_pack
 	IntConstant(
 		"Accepted by the {@code format} parameter of TexImage2D and TexSubImage2D and by the {@code internalformat} parameter of TexImage2D.",
 
-		"DEPTH_STENCIL_OES" _ 0x84F9
+		"DEPTH_STENCIL_OES"..0x84F9
 	)
 
 	IntConstant(
 		"Accepted by the {@code type} parameter of TexImage2D and TexSubImage2D.",
 
-		"UNSIGNED_INT_24_8_OES" _ 0x84FA
+		"UNSIGNED_INT_24_8_OES"..0x84FA
 	)
 
 	IntConstant(
@@ -52,6 +52,6 @@ val OES_packed_depth_stencil = "OESPackedDepthStencil".nativeClassGLES("OES_pack
 		{@code pname} is RENDERBUFFER_INTERNAL_FORMAT.
 		""",
 
-		"DEPTH24_STENCIL8_OES" _ 0x88F0
+		"DEPTH24_STENCIL8_OES"..0x88F0
 	)
 }

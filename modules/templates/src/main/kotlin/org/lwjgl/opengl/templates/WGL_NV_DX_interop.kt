@@ -22,9 +22,9 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 	val accessModes = IntConstant(
 		"Accepted by the {@code access} parameters of #DXRegisterObjectNV() and #DXObjectAccessNV().",
 
-		"ACCESS_READ_ONLY_NV" _ 0x0000,
-		"ACCESS_READ_WRITE_NV" _ 0x0001,
-		"ACCESS_WRITE_DISCARD_NV" _ 0x0002
+		"ACCESS_READ_ONLY_NV"..0x0000,
+		"ACCESS_READ_WRITE_NV"..0x0001,
+		"ACCESS_WRITE_DISCARD_NV"..0x0002
 	).javaDocLinks
 
 	val void_p = "void".p
@@ -96,7 +96,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		""",
 
 		HANDLE.IN("device", "the GL/DirectX interop device handle"),
-		AutoSize("objects") _ GLint.IN("count", "the number of objects to lock"),
+		AutoSize("objects")..GLint.IN("count", "the number of objects to lock"),
 		HANDLE_p.IN("objects", "an array of {@code count} interop objects")
 	)
 
@@ -105,7 +105,7 @@ val WGL_NV_DX_interop = "WGLNVDXInterop".nativeClassWGL("WGL_NV_DX_interop", NV)
 		"Return control of an object to DirectX.",
 
 		HANDLE.IN("device", "the GL/DirectX interop device handle"),
-		AutoSize("objects") _ GLint.IN("count", "the number of objects to unlock"),
+		AutoSize("objects")..GLint.IN("count", "the number of objects to unlock"),
 		HANDLE_p.IN("objects", "an array of {@code count} interop objects")
 	)
 }

@@ -22,48 +22,48 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 	IntConstant(
 		"Accepted by the {@code cap} parameter of DisableClientState, EnableClientState, IsEnabled.",
 
-		"VERTEX_ATTRIB_ARRAY_UNIFIED_NV" _ 0x8F1E,
-		"ELEMENT_ARRAY_UNIFIED_NV" _ 0x8F1F
+		"VERTEX_ATTRIB_ARRAY_UNIFIED_NV"..0x8F1E,
+		"ELEMENT_ARRAY_UNIFIED_NV"..0x8F1F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64i_vNV.",
 
-		"VERTEX_ATTRIB_ARRAY_ADDRESS_NV" _ 0x8F20,
-		"TEXTURE_COORD_ARRAY_ADDRESS_NV" _ 0x8F25
+		"VERTEX_ATTRIB_ARRAY_ADDRESS_NV"..0x8F20,
+		"TEXTURE_COORD_ARRAY_ADDRESS_NV"..0x8F25
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of BufferAddressRangeNV and the {@code value} parameter of GetIntegerui64vNV.",
 
-		"VERTEX_ARRAY_ADDRESS_NV" _ 0x8F21,
-		"NORMAL_ARRAY_ADDRESS_NV" _ 0x8F22,
-		"COLOR_ARRAY_ADDRESS_NV" _ 0x8F23,
-		"INDEX_ARRAY_ADDRESS_NV" _ 0x8F24,
-		"EDGE_FLAG_ARRAY_ADDRESS_NV" _ 0x8F26,
-		"SECONDARY_COLOR_ARRAY_ADDRESS_NV" _ 0x8F27,
-		"FOG_COORD_ARRAY_ADDRESS_NV" _ 0x8F28,
-		"ELEMENT_ARRAY_ADDRESS_NV" _ 0x8F29
+		"VERTEX_ARRAY_ADDRESS_NV"..0x8F21,
+		"NORMAL_ARRAY_ADDRESS_NV"..0x8F22,
+		"COLOR_ARRAY_ADDRESS_NV"..0x8F23,
+		"INDEX_ARRAY_ADDRESS_NV"..0x8F24,
+		"EDGE_FLAG_ARRAY_ADDRESS_NV"..0x8F26,
+		"SECONDARY_COLOR_ARRAY_ADDRESS_NV"..0x8F27,
+		"FOG_COORD_ARRAY_ADDRESS_NV"..0x8F28,
+		"ELEMENT_ARRAY_ADDRESS_NV"..0x8F29
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_vNV.",
 
-		"VERTEX_ATTRIB_ARRAY_LENGTH_NV" _ 0x8F2A,
-		"TEXTURE_COORD_ARRAY_LENGTH_NV" _ 0x8F2F
+		"VERTEX_ATTRIB_ARRAY_LENGTH_NV"..0x8F2A,
+		"TEXTURE_COORD_ARRAY_LENGTH_NV"..0x8F2F
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv.",
 
-		"VERTEX_ARRAY_LENGTH_NV" _ 0x8F2B,
-		"NORMAL_ARRAY_LENGTH_NV" _ 0x8F2C,
-		"COLOR_ARRAY_LENGTH_NV" _ 0x8F2D,
-		"INDEX_ARRAY_LENGTH_NV" _ 0x8F2E,
-		"EDGE_FLAG_ARRAY_LENGTH_NV" _ 0x8F30,
-		"SECONDARY_COLOR_ARRAY_LENGTH_NV" _ 0x8F31,
-		"FOG_COORD_ARRAY_LENGTH_NV" _ 0x8F32,
-		"ELEMENT_ARRAY_LENGTH_NV" _ 0x8F33
+		"VERTEX_ARRAY_LENGTH_NV"..0x8F2B,
+		"NORMAL_ARRAY_LENGTH_NV"..0x8F2C,
+		"COLOR_ARRAY_LENGTH_NV"..0x8F2D,
+		"INDEX_ARRAY_LENGTH_NV"..0x8F2E,
+		"EDGE_FLAG_ARRAY_LENGTH_NV"..0x8F30,
+		"SECONDARY_COLOR_ARRAY_LENGTH_NV"..0x8F31,
+		"FOG_COORD_ARRAY_LENGTH_NV"..0x8F32,
+		"ELEMENT_ARRAY_LENGTH_NV"..0x8F33
 	)
 
 	void(
@@ -170,6 +170,6 @@ val NV_vertex_buffer_unified_memory = "NVVertexBufferUnifiedMemory".nativeClassG
 
 		GLenum.IN("value", ""),
 		GLuint.IN("index", ""),
-		Check(1) _ returnValue _ GLuint64EXT_p.OUT("result", "")
+		Check(1)..returnValue..GLuint64EXT_p.OUT("result", "")
 	)
 }

@@ -14,7 +14,7 @@ val khr_gl_msaa_sharing = dependsOn(Binding.OPENGL) {
 		IntConstant(
 			"cl_gl_texture_info",
 
-			"GL_NUM_SAMPLES" _ 0x2012
+			"GL_NUM_SAMPLES"..0x2012
 		)
 	}
 }

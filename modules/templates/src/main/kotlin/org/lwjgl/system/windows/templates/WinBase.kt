@@ -16,8 +16,8 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 
 	IntConstant(
 		"BOOL return values.",
-		"FALSE" _ 0,
-		"TRUE" _ 1
+		"FALSE"..0,
+		"TRUE"..1
 	)
 
 	DWORD(
@@ -42,11 +42,11 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		"""
 	)
 
-	GetLastError _ HMODULE(
+	GetLastError..HMODULE(
 		"GetModuleHandle",
 		"Retrieves a module handle for the specified module. The module must have been loaded by the calling process.",
 
-		nullable _ LPCTSTR.IN(
+		nullable..LPCTSTR.IN(
 			"moduleName",
 			"""
 			the name of the loaded module (either a .dll or .exe file). If the file name extension is omitted, the default library extension .dll is appended.
@@ -59,7 +59,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError _ HMODULE(
+	GetLastError..HMODULE(
 		"LoadLibrary",
 		"Loads the specified module into the address space of the calling process. The specified module may cause other modules to be loaded.",
 
@@ -82,7 +82,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError _ FARPROC(
+	GetLastError..FARPROC(
 		"GetProcAddress",
 		"Retrieves the address of an exported function or variable from the specified dynamic-link library (DLL).",
 
@@ -96,7 +96,7 @@ val WinBase = "WinBase".nativeClass(WINDOWS_PACKAGE) {
 		)
 	)
 
-	GetLastError _ BOOL(
+	GetLastError..BOOL(
 		"FreeLibrary",
 		"""
 		Frees the loaded dynamic-link library (DLL) module and, if necessary, decrements its reference count. When the reference count reaches zero, the module

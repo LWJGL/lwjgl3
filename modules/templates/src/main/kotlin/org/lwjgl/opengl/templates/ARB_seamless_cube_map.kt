@@ -32,6 +32,6 @@ val ARB_seamless_cube_map = "ARBSeamlessCubeMap".nativeClassGL("ARB_seamless_cub
 		GetDoublev.
 		""",
 
-		"TEXTURE_CUBE_MAP_SEAMLESS" _ 0x884F
+		"TEXTURE_CUBE_MAP_SEAMLESS"..0x884F
 	)
 }

@@ -34,7 +34,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		GetDoublev, and by the {@code target} parameter of TexEnvi, TexEnviv, TexEnvf, TexEnvfv, GetTexEnviv, and GetTexEnvfv.
 		""",
 
-		"POINT_SPRITE_NV" _ 0x8861
+		"POINT_SPRITE_NV"..0x8861
 	)
 
 	IntConstant(
@@ -43,7 +43,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		{@code pname} may be.
 		""",
 
-		"COORD_REPLACE_NV" _ 0x8862
+		"COORD_REPLACE_NV"..0x8862
 	)
 
 	IntConstant(
@@ -52,7 +52,7 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		GetFloatv, and GetDoublev.
 		""",
 
-		"POINT_SPRITE_R_MODE_NV" _ 0x8863
+		"POINT_SPRITE_R_MODE_NV"..0x8863
 	)
 
 	void(
@@ -68,6 +68,6 @@ val NV_point_sprite = "NVPointSprite".nativeClassGL("NV_point_sprite", postfix =
 		"",
 
 		GLenum.IN("pname", ""),
-		Check(1) _ const _ GLint_p.IN("params", "")
+		Check(1)..const..GLint_p.IN("params", "")
 	)
 }

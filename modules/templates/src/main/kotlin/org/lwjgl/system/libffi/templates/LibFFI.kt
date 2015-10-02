@@ -57,19 +57,19 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"ABI enumeration.",
 
 		// x86
-		"SYSV" _ 1,
+		"SYSV"..1,
 
 		// Win32
-		"STDCALL" _ 2,
-		"THISCALL" _ 3,
-		"FASTCALL" _ 4,
-		"MS_CDECL" _ 5,
+		"STDCALL"..2,
+		"THISCALL"..3,
+		"FASTCALL"..4,
+		"MS_CDECL"..5,
 
 		// Win64
-		"WIN64" _ 1,
+		"WIN64"..1,
 
 		// Unix
-		"UNIX64" _ 2,
+		"UNIX64"..2,
 
 		"DEFAULT_ABI" expr "FFI_DEFAULT_ABI()"
 	).javaDocLinks
@@ -77,9 +77,9 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	IntConstant(
 		"Status codes.",
 
-		"OK" _ 0,
-		"BAD_TYPEDEF" _ 1,
-		"BAD_ABI" _ 2
+		"OK"..0,
+		"BAD_TYPEDEF"..1,
+		"BAD_ABI"..2
 	)
 	
 	LongConstant(
@@ -118,9 +118,9 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 
 		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
-		AutoSize("atypes") _ unsigned_int.IN("nargs", "the number of arguments"),
+		AutoSize("atypes")..unsigned_int.IN("nargs", "the number of arguments"),
 		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
-		nullable _ ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
+		nullable..ffi_type_pp.IN("atypes", "an array of {@code nargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
 
 		returnDoc =
 		"""
@@ -136,7 +136,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		ffi_cif_p.IN("cif", "the ##FFICIF structure to prepare"),
 		ffi_abi.IN("abi", "the calling convention to use", ABI),
 		unsigned_int.IN("nfixedargs", "the number of fixed (non-variadic) arguments"),
-		AutoSize("atypes") _ unsigned_int.IN("ntotalargs", "the total number of arguments"),
+		AutoSize("atypes")..unsigned_int.IN("ntotalargs", "the total number of arguments"),
 		ffi_type_p.IN("rtype", "points to an ##FFIType that describes the data type, size and alignment of the return value"),
 		ffi_type_pp.IN("atypes", "an array of {@code ntotalargs} pointers to ##FFIType structs that describe the data type, size and alignment of each argument"),
 
@@ -156,22 +156,22 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 			"a ##FFICIF structure. It must be initialized with #prep_cif() or #prep_cif_var() before it is used with {@code ffi_call}."
 		),
 		FFI_FN_TYPE.IN("fn", "the function to call"),
-		nullable _ void_p.IN(
+		nullable..void_p.IN(
 			"rvalue",
 			"""
 			a pointer to storage in which to place the returned value. The storage must be sizeof(ffi_arg) or larger for non-floating point types. For
 			smaller-sized return value types, the ffi_arg or ffi_sarg integral type must be used to hold the return value.
 			"""
 		),
-		nullable _ void_pp.IN("avalue", "an array of pointers from which the argument values are retrieved")
+		nullable..void_pp.IN("avalue", "an array of pointers from which the argument values are retrieved")
 	)
 
 	void_p(
 		"closure_alloc",
 	    "Allocates an ##FFIClosure structure.",
 
-	    autoSizeResult _ size_t.IN("size", "the number of bytes to allocate", "FFIClosure##SIZEOF"),
-	    Check(1) _ void_pp.OUT("code", "a buffer in which to place the returned executable address"),
+	    autoSizeResult..size_t.IN("size", "the number of bytes to allocate", "FFIClosure##SIZEOF"),
+	    Check(1)..void_pp.OUT("code", "a buffer in which to place the returned executable address"),
 
 	    returnDoc = "a pointer to the writable address"
 	)
@@ -190,7 +190,7 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 	    ffi_closure_p.IN("closure", "the address of an ##FFIClosure object; this is the writable address returned by #closure_alloc()."),
 	    ffi_cif_p.IN("cif", "the ##FFICIF describing the function parameters"),
 	    FFI_CLOSURE_FUN.IN("fun", "the function which will be called when the closure is invoked"),
-	    nullable _ voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
+	    nullable..voidptr.IN("user_data", "an arbitrary datum that is passed, uninterpreted, to your closure function"),
 	    voidptr.IN("codeloc", "the executable address returned by #closure_alloc().")
 	)
 }

@@ -39,40 +39,40 @@ val NV_coverage_sample = "NVCoverageSample".nativeClassGLES("NV_coverage_sample"
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageEXT and the {@code format} parameter of ReadPixels.",
 
-		"COVERAGE_COMPONENT_NV" _ 0x8ED0
+		"COVERAGE_COMPONENT_NV"..0x8ED0
 	)
 
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageEXT.",
 
-		"COVERAGE_COMPONENT4_NV" _ 0x8ED1
+		"COVERAGE_COMPONENT4_NV"..0x8ED1
 	)
 
 	IntConstant(
 		"Accepted by the {@code operation} parameter of CoverageOperationNV.",
 
-		"COVERAGE_ALL_FRAGMENTS_NV" _ 0x8ED5,
-		"COVERAGE_EDGE_FRAGMENTS_NV" _ 0x8ED6,
-		"COVERAGE_AUTOMATIC_NV" _ 0x8ED7
+		"COVERAGE_ALL_FRAGMENTS_NV"..0x8ED5,
+		"COVERAGE_EDGE_FRAGMENTS_NV"..0x8ED6,
+		"COVERAGE_AUTOMATIC_NV"..0x8ED7
 	)
 
 	IntConstant(
 		"Accepted by the {@code attachment} parameter of FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.",
 
-		"COVERAGE_ATTACHMENT_NV" _ 0x8ED2
+		"COVERAGE_ATTACHMENT_NV"..0x8ED2
 	)
 
 	IntConstant(
 		"Accepted by the {@code buf} parameter of Clear.",
 
-		"COVERAGE_BUFFER_BIT_NV" _ 0x8000
+		"COVERAGE_BUFFER_BIT_NV"..0x8000
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv.",
 
-		"COVERAGE_BUFFERS_NV" _ 0x8ED3,
-		"COVERAGE_SAMPLES_NV" _ 0x8ED4
+		"COVERAGE_BUFFERS_NV"..0x8ED3,
+		"COVERAGE_SAMPLES_NV"..0x8ED4
 	)
 
 	void(

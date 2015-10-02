@@ -25,15 +25,15 @@ val ANGLE_framebuffer_blit = "ANGLEFramebufferBlit".nativeClassGLES("ANGLE_frame
 		FramebufferRenderbuffer, and GetFramebufferAttachmentParameteriv.
 		""",
 
-		"READ_FRAMEBUFFER_ANGLE" _ 0x8CA8,
-		"DRAW_FRAMEBUFFER_ANGLE" _ 0x8CA9
+		"READ_FRAMEBUFFER_ANGLE"..0x8CA8,
+		"DRAW_FRAMEBUFFER_ANGLE"..0x8CA9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv and GetFloatv.",
 
-		"DRAW_FRAMEBUFFER_BINDING_ANGLE" _ 0x8CA6,
-		"READ_FRAMEBUFFER_BINDING_ANGLE" _ 0x8CAA
+		"DRAW_FRAMEBUFFER_BINDING_ANGLE"..0x8CA6,
+		"READ_FRAMEBUFFER_BINDING_ANGLE"..0x8CAA
 	)
 
 	void(

@@ -17,7 +17,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		LongConstant(
 			"Nil value.",
 
-			"nil" _ 0L
+			"nil"..0L
 		)
 
 
@@ -31,36 +31,36 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 		CharConstant(
 			"Types.",
 
-			"_C_ID" _ '@',
-			"_C_CLASS" _ '#',
-			"_C_SEL" _ ':',
-			"_C_CHR" _ 'c',
-			"_C_UCHR" _ 'C',
-			"_C_SHT" _ 's',
-			"_C_USHT" _ 'S',
-			"_C_INT" _ 'i',
-			"_C_UINT" _ 'I',
-			"_C_LNG" _ 'l',
-			"_C_ULNG" _ 'L',
-			"_C_LNG_LNG" _ 'q',
-			"_C_ULNG_LNG" _ 'Q',
-			"_C_FLT" _ 'f',
-			"_C_DBL" _ 'd',
-			"_C_BFLD" _ 'b',
-			"_C_BOOL" _ 'B',
-			"_C_VOID" _ 'v',
-			"_C_UNDEF" _ '?',
-			"_C_PTR" _ '^',
-			"_C_CHARPTR" _ '*',
-			"_C_ATOM" _ '%',
-			"_C_ARY_B" _ '[',
-			"_C_ARY_E" _ ']',
-			"_C_UNION_B" _ '(',
-			"_C_UNION_E" _ ')',
-			"_C_STRUCT_B" _ '{',
-			"_C_STRUCT_E" _ '}',
-			"_C_VECTOR" _ '!',
-			"_C_CONST" _ 'r'
+			"_C_ID"..'@',
+			"_C_CLASS"..'#',
+			"_C_SEL"..':',
+			"_C_CHR"..'c',
+			"_C_UCHR"..'C',
+			"_C_SHT"..'s',
+			"_C_USHT"..'S',
+			"_C_INT"..'i',
+			"_C_UINT"..'I',
+			"_C_LNG"..'l',
+			"_C_ULNG"..'L',
+			"_C_LNG_LNG"..'q',
+			"_C_ULNG_LNG"..'Q',
+			"_C_FLT"..'f',
+			"_C_DBL"..'d',
+			"_C_BFLD"..'b',
+			"_C_BOOL"..'B',
+			"_C_VOID"..'v',
+			"_C_UNDEF"..'?',
+			"_C_PTR"..'^',
+			"_C_CHARPTR"..'*',
+			"_C_ATOM"..'%',
+			"_C_ARY_B"..'[',
+			"_C_ARY_E"..']',
+			"_C_UNION_B"..'(',
+			"_C_UNION_E"..')',
+			"_C_STRUCT_B"..'{',
+			"_C_STRUCT_E"..'}',
+			"_C_VECTOR"..'!',
+			"_C_CONST"..'r'
 		)
 
 		// Working with Instances
@@ -88,7 +88,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"object_getClass",
 			"Returns the class of an object.",
 
-			nullable _ id.IN("obj", "an Objective-C object"),
+			nullable..id.IN("obj", "an Objective-C object"),
 
 			returnDoc = "the class object of which object is an instance, or Nil if {@code obj} is #nil"
 		)
@@ -97,17 +97,17 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"object_setClass",
 			"Sets the class of an object.",
 
-			nullable _ id.IN("obj", "the object to modify"),
+			nullable..id.IN("obj", "the object to modify"),
 			Class.IN("cls", "a class object"),
 
 			returnDoc = "the previous value of object's class, or Nil if {@code obj} is #nil"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"object_getClassName",
 			"Returns the class name of a given object.",
 
-			nullable _ id.IN("obj", "an Objective-C object"),
+			nullable..id.IN("obj", "an Objective-C object"),
 
 			returnDoc = "the name of the class of which {@code obj} is an instance"
 		)
@@ -137,7 +137,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"object_getIvar",
 			"Reads the value of an instance variable in an object.",
 
-			nullable _ id.IN("obj", "the object containing the instance variable whose value you want to read"),
+			nullable..id.IN("obj", "the object containing the instance variable whose value you want to read"),
 			Ivar.IN("ivar", "the Ivar describing the instance variable whose value you want to read"),
 
 			returnDoc = "the value of the instance variable specified by {@code ivar}, or #nil if {@code obj} is #nil"
@@ -161,7 +161,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Changes the value of an instance variable of a class instance.",
 
 			id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to modify"),
-			const _ charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify"),
+			const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify"),
 			void_p.IN("value", "the new value for the instance variable"),
 
 			returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
@@ -172,7 +172,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Obtains the value of an instance variable of a class instance.",
 
 			id.IN("obj", "a pointer to an instance of a class. Pass the object containing the instance variable whose value you wish to obtain"),
-			const _ charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
+			const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to obtain"),
 			void_pp.OUT("outValue", "on return, contains a pointer to the value of the instance variable"),
 
 			returnDoc = "a pointer to the Ivar data structure that defines the type and name of the instance variable specified by name"
@@ -189,7 +189,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			checks a second time to see whether the class is registered. objc_lookUpClass does not call the class handler callback.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of the class to look up"),
+			const..charUTF8_p.IN("name", "the name of the class to look up"),
 
 			returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
@@ -204,7 +204,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			whether it’s valid or not.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of the class to look up"),
+			const..charUTF8_p.IN("name", "the name of the class to look up"),
 
 			returnDoc = "the Class object for the metaclass of the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
@@ -218,7 +218,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			a second time to see whether the class is registered. This function does not call the class handler callback.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of the class to look up"),
+			const..charUTF8_p.IN("name", "the name of the class to look up"),
 
 			returnDoc = "the Class object for the named class, or #nil if the class is not registered with the Objective-C runtime"
 		)
@@ -233,7 +233,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			This function is used by ZeroLink, where failing to find a class would be a compile-time link error without ZeroLink.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of the class to look up"),
+			const..charUTF8_p.IN("name", "the name of the class to look up"),
 
 			returnDoc = "the Class object for the named class"
 		)
@@ -251,7 +251,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			classes without detecting that the method is implemented first.
 			""",
 
-			nullable _ Class_p.OUT(
+			nullable..Class_p.OUT(
 				"buffer",
 				"""
 				an array of Class values. On output, each Class value points to one class definition, up to either {@code bufferCount} or the total number of
@@ -259,7 +259,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 				any class definitions.
 				"""
 			),
-			AutoSize("buffer") _ int.IN(
+			AutoSize("buffer")..int.IN(
 				"bufferCount",
 				"""
 				the number of pointers for which you have allocated space in buffer. On return, this function fills in only this number of elements. If this number
@@ -274,7 +274,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"objc_copyClassList",
 			"Creates and returns a list of pointers to all registered class definitions.",
 
-			nullable _ autoSizeResult _ unsigned_int_p.OUT(
+			nullable..autoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"an integer pointer used to store the number of classes returned by this function in the list. This parameter may be #nil"
 			),
@@ -284,11 +284,11 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 
 		// Working with Classes
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"class_getName",
 			"Returns the name of a class.",
 
-			nullable _ Class.IN("cls", "a class object"),
+			nullable..Class.IN("cls", "a class object"),
 
 			returnDoc = "the name of the class, or the empty string if cls is Nil"
 		)
@@ -297,7 +297,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_isMetaClass",
 			"Returns a Boolean value that indicates whether a class object is a metaclass.",
 
-			nullable _ Class.IN("cls", "a class object"),
+			nullable..Class.IN("cls", "a class object"),
 
 			returnDoc = "#YES if cls is a metaclass, #NO if cls is a non-meta class, #NO if cls is Nil"
 		)
@@ -306,7 +306,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_getSuperclass",
 			"Returns the superclass of a class.",
 
-			nullable _ Class.IN("cls", "a class object"),
+			nullable..Class.IN("cls", "a class object"),
 
 			returnDoc = "the superclass of the class, or Nil if cls is a root class, or Nil if cls is Nil"
 		)
@@ -352,7 +352,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_getInstanceSize",
 			"Returns the size of instances of a class.",
 
-			nullable _ Class.IN("cls", "a class object"),
+			nullable..Class.IN("cls", "a class object"),
 
 			returnDoc = "the size in bytes of instances of the class {@code cls}, or 0 if {@code cls} is Nil"
 		)
@@ -362,7 +362,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Returns the Ivar for a specified instance variable of a given class.",
 
 			Class.IN("cls", "the class whose instance variable you wish to obtain"),
-			const _ charUTF8_p.IN("name", "the name of the instance variable definition to obtain"),
+			const..charUTF8_p.IN("name", "the name of the instance variable definition to obtain"),
 
 			returnDoc = "a pointer to an Ivar data structure containing information about the instance variable specified by name"
 		)
@@ -372,7 +372,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"Returns the Ivar for a specified class variable of a given class.",
 
 			Class.IN("cls", "the class definition whose class variable you wish to obtain"),
-			const _ charUTF8_p.IN("name", "the name of the class variable definition to obtain"),
+			const..charUTF8_p.IN("name", "the name of the class variable definition to obtain"),
 
 			returnDoc = "a pointer to an Ivar data structure containing information about the class variable specified by name"
 		)
@@ -381,8 +381,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_copyIvarList",
 			"Describes the instance variables declared by a class.",
 
-			nullable _ Class.IN("cls", "the class to inspect"),
-			nullable _ autoSizeResult _ unsigned_int_p.OUT(
+			nullable..Class.IN("cls", "the class to inspect"),
+			nullable..autoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -443,7 +443,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			class do not respond to the selector, the function pointer returned will be part of the runtime's message forwarding machinery.
 			""",
 
-			nullable _ Class.IN("cls", "the class you want to inspect"),
+			nullable..Class.IN("cls", "the class you want to inspect"),
 			SEL.IN("name", "a selector"),
 
 			returnDoc =
@@ -470,8 +470,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_copyMethodList",
 			"Describes the instance methods implemented by a class.",
 
-			nullable _ Class.IN("cls", "the class you want to inspect"),
-			nullable _ autoSizeResult _ unsigned_int_p.OUT(
+			nullable..Class.IN("cls", "the class you want to inspect"),
+			nullable..autoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -503,8 +503,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_copyProtocolList",
 			"Describes the protocols adopted by a class.",
 
-			nullable _ Class.IN("cls", "the class you want to inspect"),
-			nullable _ autoSizeResult _ unsigned_int_p.OUT(
+			nullable..Class.IN("cls", "the class you want to inspect"),
+			nullable..autoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -522,8 +522,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_getProperty",
 			"Returns a property with a given name of a given class.",
 
-			nullable _ Class.IN("cls", "the class you want to inspect"),
-			const _ charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify."),
+			nullable..Class.IN("cls", "the class you want to inspect"),
+			const..charUTF8_p.IN("name", "a C string. Pass the name of the instance variable whose value you wish to modify."),
 
 			returnDoc =
 			"""
@@ -536,8 +536,8 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"class_copyPropertyList",
 			"Describes the properties declared by a class.",
 
-			nullable _ Class.IN("cls", "the class you want to inspect"),
-			nullable _ autoSizeResult _ unsigned_int_p.OUT(
+			nullable..Class.IN("cls", "the class you want to inspect"),
+			nullable..autoSizeResult..unsigned_int_p.OUT(
 				"outCount",
 				"on return, contains the length of the returned array. If {@code outCount} is $NULL, the length is not returned"
 			),
@@ -551,7 +551,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			"""
 		)
 
-		(const _ uint8_tASCII_p)(
+		(const..uint8_tASCII_p)(
 			"class_getIvarLayout",
 			"Returns a description of the Ivar layout for a given class.",
 
@@ -560,7 +560,7 @@ val objc_runtime = dependsOn(Binding.MACOSX_OBJC) {
 			returnDoc = "a description of the Ivar layout for {@code cls}"
 		)
 
-		(const _ uint8_tASCII_p)(
+		(const..uint8_tASCII_p)(
 			"class_getWeakIvarLayout",
 			"Returns a description of the layout of weak Ivars for a given class.",
 
@@ -595,7 +595,7 @@ void myMethodIMP(id self, SEL _cmd)
 				"imp",
 				"a function which is the implementation of the new method. The function must take at least two arguments &ndash; {@code self} and {@code _cmd}."
 			),
-			const _ charUTF8_p.IN(
+			const..charUTF8_p.IN(
 				"types",
 				"""
 				an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
@@ -632,7 +632,7 @@ void myMethodIMP(id self, SEL _cmd)
 				"imp",
 				"the new implementation for the method identified by {@code name} for the class identified by {@code cls}"
 			),
-			const _ charUTF8_p.IN(
+			const..charUTF8_p.IN(
 				"types",
 				"""
 				an array of characters that describe the types of the arguments to the method. For possible values, see <em>Objective-C Runtime Programming Guide
@@ -659,10 +659,10 @@ void myMethodIMP(id self, SEL _cmd)
 			""",
 
 			Class.IN("cls", ""),
-			const _ charUTF8_p.IN("name", ""),
+			const..charUTF8_p.IN("name", ""),
 			size_t.IN("size", ""),
 			uint8_t.IN("alignment", ""),
-			const _ charUTF8_p.IN("types", ""),
+			const..charUTF8_p.IN("types", ""),
 
 			returnDoc =
 			"#YES if the instance variable was added successfully, otherwise #NO (for example, the class already contains an instance variable with that name)"
@@ -683,9 +683,9 @@ void myMethodIMP(id self, SEL _cmd)
 			"Adds a property to a class.",
 
 			Class.IN("cls", "the class to modify"),
-			const _ charUTF8_p.IN("name", "the name of the property"),
-			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
-			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}"),
+			const..charUTF8_p.IN("name", "the name of the property"),
+			StructBuffer..(const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+			AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}"),
 
 			returnDoc = "#YES if the property was added successfully; otherwise #NO (for example, this function returns #NO if the class already has that property)"
 		)
@@ -695,9 +695,9 @@ void myMethodIMP(id self, SEL _cmd)
 			"Replaces a property of a class.",
 
 			Class.IN("cls", "the class to modify"),
-			const _ charUTF8_p.IN("name", "the name of the property"),
-			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
-			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}")
+			const..charUTF8_p.IN("name", "the name of the property"),
+			StructBuffer..(const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+			AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of attributes in {@code attributes}")
 		)
 
 		void(
@@ -705,7 +705,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Sets the Ivar layout for a given class.",
 
 			Class.IN("cls", "the class to modify"),
-			const _ uint8_tASCII_p.IN("layout", "the layout of the Ivars for {@code cls}")
+			const..uint8_tASCII_p.IN("layout", "the layout of the Ivars for {@code cls}")
 		)
 
 		void(
@@ -713,7 +713,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Sets the layout for weak Ivars for a given class.",
 
 			Class.IN("cls", "the class to modify"),
-			const _ uint8_tASCII_p.IN("layout", "the layout of the weak Ivars for {@code cls}")
+			const..uint8_tASCII_p.IN("layout", "the layout of the weak Ivars for {@code cls}")
 		)
 
 		// Instantiating Classes
@@ -738,8 +738,8 @@ void myMethodIMP(id self, SEL _cmd)
 			"objc_constructInstance",
 			"Creates an instance of a class at the specified location.",
 
-			nullable _ Class.IN("cls", "the class that you want to allocate an instance of"),
-			nullable _ void_p.IN(
+			nullable..Class.IN("cls", "the class that you want to allocate an instance of"),
+			nullable..void_p.IN(
 				"bytes",
 				"""
 				the location at which to allocate an instance of the {@code cls} class. {@code bytes} must point to at least ${code("class_getInstanceSize(cls)")}
@@ -781,8 +781,8 @@ void myMethodIMP(id self, SEL _cmd)
 			Instance methods and instance variables should be added to the class itself. Class methods should be added to the metaclass.
 			""",
 
-			nullable _ Class.IN("superclass", "the class to use as the new class's superclass, or Nil to create a new root class"),
-			const _ charUTF8_p.IN("name", "the string to use as the new class's name. The string will be copied."),
+			nullable..Class.IN("superclass", "the class to use as the new class's superclass, or Nil to create a new root class"),
+			const..charUTF8_p.IN("name", "the string to use as the new class's name. The string will be copied."),
 			size_t.IN("extraBytes", "the number of bytes to allocate for indexed ivars at the end of the class and metaclass objects. This should usually be 0."),
 
 			returnDoc = "the new class, or Nil if the class could not be created (for example, the desired name is already in use)"
@@ -830,7 +830,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a function pointer of type IMP"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"method_getTypeEncoding",
 			"Returns a string describing a method's parameter and return types.",
 
@@ -880,8 +880,8 @@ void myMethodIMP(id self, SEL _cmd)
 			""",
 
 			Method.IN("m", "the method to inspect"),
-			Return(null) _ charUTF8_p.OUT("dst", "the reference string to store the description"),
-			AutoSize("dst") _ size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
+			Return(null)..charUTF8_p.OUT("dst", "the reference string to store the description"),
+			AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 
 		void(
@@ -895,8 +895,8 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Method.IN("m", "the method you want to inquire about"),
 			unsigned_int.IN("index", "the index of the parameter you want to inquire about"),
-			Return(null) _ charUTF8_p.OUT("dst", "the reference string to store the description"),
-			AutoSize("dst") _ size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
+			Return(null)..charUTF8_p.OUT("dst", "the reference string to store the description"),
+			AutoSize("dst")..size_t.IN("dst_len", "the maximum number of characters that can be stored in {@code dst}")
 		)
 
 		IMP(
@@ -919,7 +919,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Instance Variables
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"ivar_getName",
 			"Returns the name of an instance variable.",
 
@@ -928,7 +928,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the instance variable's name"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"ivar_getTypeEncoding",
 			"Returns the type string of an instance variable.",
 
@@ -953,7 +953,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Properties
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"property_getName",
 			"Returns the name of a property.",
 
@@ -962,7 +962,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the property's name"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"property_getAttributes",
 			"Returns the attribute string of a property.",
 
@@ -971,12 +971,12 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string containing the property's attributes"
 		)
 
-		(StructBuffer _ objc_property_attribute_t_p)(
+		(StructBuffer..objc_property_attribute_t_p)(
 			"property_copyAttributeList",
 			"Returns an array of property attributes for a given property.",
 
 			objc_property_t.IN("property", "the property whose attributes you want to copy"),
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "the number of attributes returned in the array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of attributes returned in the array"),
 
 			returnDoc = "an array of property attributes. You must free the array with free()."
 		)
@@ -986,7 +986,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns the value of a property attribute given the attribute name.",
 
 			objc_property_t.IN("property", "the property whose value you are interested in"),
-			const _ charUTF8_p.IN("attributeName", "a C string representing the name of the attribute"),
+			const..charUTF8_p.IN("attributeName", "a C string representing the name of the attribute"),
 
 			returnDoc =
 			"""
@@ -1005,7 +1005,7 @@ void myMethodIMP(id self, SEL _cmd)
 			This function acquires the runtime lock.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of a protocol"),
+			const..charUTF8_p.IN("name", "the name of a protocol"),
 
 			returnDoc = "the protocol named {@code name}{, or $NULL if no protocol named name could be found"
 		)
@@ -1014,7 +1014,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"objc_copyProtocolList",
 			"Returns an array of all the protocols known to the runtime.",
 
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of protocols in the returned array"),
 
 			returnDoc =
 			"""
@@ -1052,7 +1052,7 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "#YES if proto is the same as other, otherwise #NO"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"protocol_getName",
 			"Returns a the name of a protocol.",
 
@@ -1079,7 +1079,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"""
 		)
 
-		(StructBuffer _ objc_method_description_p)(
+		(StructBuffer..objc_method_description_p)(
 			"protocol_copyMethodDescriptionList",
 			"""
 			Returns an array of method descriptions of methods meeting a given specification for a given protocol.
@@ -1090,7 +1090,7 @@ void myMethodIMP(id self, SEL _cmd)
 			Protocol_p.IN("p", "a protocol"),
 			BOOL.IN("isRequiredMethod", "a Boolean value that indicates whether returned methods should be required methods (pass #YES to specify required methods)"),
 			BOOL.IN("isInstanceMethod", "a Boolean value that indicates whether returned methods should be instance methods (pass #YES to specify instance methods)"),
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of method description structures in the returned array"),
 
 			returnDoc =
 			"""
@@ -1106,7 +1106,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns the specified property of a given protocol.",
 
 			Protocol_p.IN("proto", "a protocol"),
-			const _ charUTF8_p.IN("name", "the name of a property"),
+			const..charUTF8_p.IN("name", "the name of a property"),
 			BOOL.IN("isRequiredProperty", "a Boolean value that indicates whether {@code name} is a required property"),
 			BOOL.IN("isInstanceProperty", "a Boolean value that indicates whether {@code name} is a instance property"),
 
@@ -1122,7 +1122,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns an array of the properties declared by a protocol.",
 
 			Protocol_p.IN("proto", "a protocol"),
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
 			returnDoc =
 			"""
@@ -1138,7 +1138,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"eturns an array of the protocols adopted by a protocol.",
 
 			Protocol_p.IN("proto", "a protocol"),
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "upon return, contains the number of elements in the returned array"),
 
 			returnDoc =
 			"""
@@ -1159,7 +1159,7 @@ void myMethodIMP(id self, SEL _cmd)
 			There is no dispose method associated with this function.
 			""",
 
-			const _ charUTF8_p.IN("name", "the name of the protocol you want to create"),
+			const..charUTF8_p.IN("name", "the name of the protocol you want to create"),
 
 			returnDoc = "a new protocol instance or #nil if a protocol with the same name as {@code name} already exists"
 		)
@@ -1187,7 +1187,7 @@ void myMethodIMP(id self, SEL _cmd)
 
 			Protocol_p.IN("proto", "the protocol you want to add a method to"),
 			SEL.IN("name", "the name of the method you want to add"),
-			const _ charUTF8_p.IN("types", "a C string representing the signature of the method you want to add"),
+			const..charUTF8_p.IN("types", "a C string representing the signature of the method you want to add"),
 			BOOL.IN(
 				"isRequiredMethod",
 				"""
@@ -1224,9 +1224,9 @@ void myMethodIMP(id self, SEL _cmd)
 			""",
 
 			Protocol_p.IN("proto", "the protocol you want to add a property to"),
-			const _ charUTF8_p.IN("name", "the name of the property you want to add."),
-			StructBuffer _ (const _ objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
-			AutoSize("attributes") _ unsigned_int.IN("attributeCount", "the number of properties in {@code attributes}"),
+			const..charUTF8_p.IN("name", "the name of the property you want to add."),
+			StructBuffer..(const..objc_property_attribute_t_p.IN("attributes", "an array of property attributes")),
+			AutoSize("attributes")..unsigned_int.IN("attributeCount", "the number of properties in {@code attributes}"),
 			BOOL.IN(
 				"isRequiredProperty",
 				"""
@@ -1245,16 +1245,16 @@ void myMethodIMP(id self, SEL _cmd)
 
 		// Working with Libraries
 
-		(const _ charUTF8_pp)(
+		(const..charUTF8_pp)(
 			"objc_copyImageNames",
 			"Returns the names of all the loaded Objective-C frameworks and dynamic libraries.",
 
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
 
 			returnDoc = "an array of C strings representing the names of all the loaded Objective-C frameworks and dynamic libraries"
 		)
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"class_getImageName",
 			"Returns the name of the dynamic library a class originated from.",
 
@@ -1263,19 +1263,19 @@ void myMethodIMP(id self, SEL _cmd)
 			returnDoc = "a C string representing the name of the library containing the {@code cls} class."
 		)
 
-		(const _ charUTF8_pp)(
+		(const..charUTF8_pp)(
 			"objc_copyClassNamesForImage",
 			"Returns the names of all the classes within a specified library or framework.",
 
-			const _ charUTF8_p.IN("image", "the library or framework you are inquiring about"),
-			autoSizeResult _ unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
+			const..charUTF8_p.IN("image", "the library or framework you are inquiring about"),
+			autoSizeResult..unsigned_int_p.OUT("outCount", "the number of names in the returned array"),
 
 			returnDoc = "an array of C strings representing all of the class names within the specified library or framework"
 		)
 
 		// Working with Selectors
 
-		(const _ charUTF8_p)(
+		(const..charUTF8_p)(
 			"sel_getName",
 			"Returns the name of the method specified by a given selector.",
 
@@ -1292,7 +1292,7 @@ void myMethodIMP(id self, SEL _cmd)
 			The implementation of this method is identical to the implementation of #sel_registerName().
 			""",
 
-			const _ charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
+			const..charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
 			returnDoc = "a pointer of type SEL specifying the selector for the named method"
 		)
@@ -1306,7 +1306,7 @@ void myMethodIMP(id self, SEL _cmd)
 			definition. If the method name has already been registered, this function simply returns the selector.
 			""",
 
-			const _ charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
+			const..charUTF8_p.IN("str", "a pointer to a C string. Pass the name of the method you wish to register"),
 
 			returnDoc = "a pointer of type SEL specifying the selector for the named method"
 		)
@@ -1393,7 +1393,7 @@ void myMethodIMP(id self, SEL _cmd)
 			alive long enough for the caller to use it. This function is typically used anywhere a {@code __weak} variable is used in an expression.
 			""",
 
-			nullable _ id_p.IN("location", "the address of the weak pointer"),
+			nullable..id_p.IN("location", "the address of the weak pointer"),
 
 			returnDoc = "the object pointed to by location, or #nil if location is #nil"
 		)
@@ -1417,11 +1417,11 @@ void myMethodIMP(id self, SEL _cmd)
 		val AssociationPolicies = IntConstant(
 			"Policies related to associative references.",
 
-			"OBJC_ASSOCIATION_ASSIGN" _ 0,
-			"OBJC_ASSOCIATION_RETAIN_NONATOMIC" _ 1,
-			"OBJC_ASSOCIATION_COPY_NONATOMIC" _ 3,
-			"OBJC_ASSOCIATION_RETAIN" _ 1401,
-			"OBJC_ASSOCIATION_COPY" _ 1403
+			"OBJC_ASSOCIATION_ASSIGN"..0,
+			"OBJC_ASSOCIATION_RETAIN_NONATOMIC"..1,
+			"OBJC_ASSOCIATION_COPY_NONATOMIC"..3,
+			"OBJC_ASSOCIATION_RETAIN"..1401,
+			"OBJC_ASSOCIATION_COPY"..1403
 		).javaDocLinks
 
 		void(
@@ -1429,7 +1429,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Sets an associated value for a given object using a given key and association policy.",
 
 			id.IN("object", "the source object for the association"),
-			const _ voidptr.IN("key", "the key for the association"),
+			const..voidptr.IN("key", "the key for the association"),
 			id.IN("value", "the value to associate with the key {@code key} for {@code object}. Pass #nil to clear an existing association."),
 			objc_AssociationPolicy.IN("policy", "the policy for the association", AssociationPolicies)
 		)
@@ -1439,7 +1439,7 @@ void myMethodIMP(id self, SEL _cmd)
 			"Returns the value associated with a given object for a given key.",
 
 			id.IN("object", "the source object for the association"),
-			const _ voidptr.IN("key", "the key for the association"),
+			const..voidptr.IN("key", "the key for the association"),
 
 			returnDoc = "the value associated with the key {@code key} for {@code object}."
 		)

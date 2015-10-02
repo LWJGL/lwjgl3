@@ -13,45 +13,45 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 	IntConstant(
 		"General tokens.",
 
-		"INVALID" _ 0xFFFFFFFF.i,
-		"FALSE" _ 0x0,
-		"TRUE" _ 0x1
+		"INVALID"..0xFFFFFFFF.i,
+		"FALSE"..0x0,
+		"TRUE"..0x1
 	)
 
 	val ContextAttributes = IntConstant(
 		"Context creation attributes.",
 
-		"FREQUENCY" _ 0x1007,
-		"REFRESH" _ 0x1008,
-		"SYNC" _ 0x1009
+		"FREQUENCY"..0x1007,
+		"REFRESH"..0x1008,
+		"SYNC"..0x1009
 	).javaDocLinks + " ALC11#MONO_SOURCES ALC11#STEREO_SOURCES"
 
 	IntConstant(
 		"Error conditions.",
 
-		"NO_ERROR" _ 0x0,
-		"INVALID_DEVICE" _ 0xA001,
-		"INVALID_CONTEXT" _ 0xA002,
-		"INVALID_ENUM" _ 0xA003,
-		"INVALID_VALUE" _ 0xA004,
-		"OUT_OF_MEMORY" _ 0xA005
+		"NO_ERROR"..0x0,
+		"INVALID_DEVICE"..0xA001,
+		"INVALID_CONTEXT"..0xA002,
+		"INVALID_ENUM"..0xA003,
+		"INVALID_VALUE"..0xA004,
+		"OUT_OF_MEMORY"..0xA005
 	)
 
 	val StringQueries = IntConstant(
 		"String queries.",
 
-		"DEFAULT_DEVICE_SPECIFIER" _ 0x1004,
-		"DEVICE_SPECIFIER" _ 0x1005,
-		"EXTENSIONS" _ 0x1006
+		"DEFAULT_DEVICE_SPECIFIER"..0x1004,
+		"DEVICE_SPECIFIER"..0x1005,
+		"EXTENSIONS"..0x1006
 	).javaDocLinks + " ALC11#CAPTURE_DEFAULT_DEVICE_SPECIFIER ALC11#CAPTURE_DEVICE_SPECIFIER"
 
 	val IntegerQueries = IntConstant(
 		"Integer queries.",
 
-		"MAJOR_VERSION" _ 0x1000,
-		"MINOR_VERSION" _ 0x1001,
-		"ATTRIBUTES_SIZE" _ 0x1002,
-		"ALL_ATTRIBUTES" _ 0x1003
+		"MAJOR_VERSION"..0x1000,
+		"MINOR_VERSION"..0x1001,
+		"ATTRIBUTES_SIZE"..0x1002,
+		"ALL_ATTRIBUTES"..0x1003
 	).javaDocLinks + " ALC11#CAPTURE_SAMPLES"
 
 	ALCdevice_p(
@@ -63,7 +63,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		device configuration. If NULL is specified, the implementation will provide an implementation specific default.
 		""",
 
-		nullable _ const _ ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
+		nullable..const..ALCcharUTF8_p.IN("deviceSpecifier", "the requested device or device configuration")
 	)
 
 	ALCboolean(
@@ -75,15 +75,15 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		destroyed. Once closed, the {@code deviceHandle} is invalid.
 		""",
 
-		const _ ALCdevice_p.IN("deviceHandle", "the device to close")
+		const..ALCdevice_p.IN("deviceHandle", "the device to close")
 	)
 
 	ALCcontext_p(
 		"CreateContext",
 		"Creates an AL context.",
 
-		const _ ALCdevice_p.IN("deviceHandle", "a valid device"),
-		nullable _ nullTerminated _ const _ ALCint_p.IN(
+		const..ALCdevice_p.IN("deviceHandle", "a valid device"),
+		nullable..nullTerminated..const..ALCint_p.IN(
 			"attrList",
 			"null or a zero terminated list of integer pairs composed of valid ALC attribute tokens and requested values",
 			ContextAttributes
@@ -102,7 +102,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		context. Commands that affect objects shared among contexts (e.g. buffers) have side effects on other contexts.
 		""",
 
-		nullable _ ALCcontext_p.IN("context", "the context to make current")
+		nullable..ALCcontext_p.IN("context", "the context to make current")
 	)
 
 	ALCvoid(
@@ -165,8 +165,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		will convert the name to all upper-case internally (and will express extension names in upper-case).
 		""",
 
-		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALCcharASCII_p.IN("extName", "the extension name")
+		nullable..const..ALCdevice_p.IN("deviceHandle", "the device to query"),
+		const..ALCcharASCII_p.IN("extName", "the extension name")
 	)
 
 	ALCvoidptr(
@@ -181,8 +181,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		if available for one of the available devices.
 		""",
 
-		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALcharASCII_p.IN("funcName", "the function name")
+		nullable..const..ALCdevice_p.IN("deviceHandle", "the device to query"),
+		const..ALcharASCII_p.IN("funcName", "the function name")
 	)
 
 	ALCenum(
@@ -194,8 +194,8 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		legal, but only the tokens defined by the AL core are guaranteed. Availability of extension tokens depends on the ALC extension.
 		""",
 
-		nullable _ const _ ALCdevice_p.IN("deviceHandle", "the device to query"),
-		const _ ALCcharASCII_p.IN("enumName", "the enum name")
+		nullable..const..ALCdevice_p.IN("deviceHandle", "the device to query"),
+		const..ALCcharASCII_p.IN("enumName", "the enum name")
 	)
 
 	ALCenum(
@@ -212,7 +212,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		ALCdevice_p.IN("deviceHandle", "the device to query")
 	)
 
-	(const _ ALCcharUTF8_p)(
+	(const..ALCcharUTF8_p)(
 		"GetString",
 		"""
 		Obtains string value(s) from ALC.
@@ -220,7 +220,7 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		<b>LWJGL note</b>: Use ALC##getStringList() for those tokens that return multiple values.
 		""",
 
-		nullable _ ALCdevice_p.IN("deviceHandle", "the device to query"),
+		nullable..ALCdevice_p.IN("deviceHandle", "the device to query"),
 		ALCenum.IN("token", "the information to query", StringQueries)
 	)
 
@@ -228,10 +228,10 @@ val ALC10 = "ALC10".nativeClassALC("ALC10") {
 		"GetIntegerv",
 		"Obtains integer value(s) from ALC.",
 
-		nullable _ ALCdevice_p.IN("deviceHandle", "the device to query"),
+		nullable..ALCdevice_p.IN("deviceHandle", "the device to query"),
 		ALCenum.IN("token", "the information to query", IntegerQueries),
-		AutoSize("dest") _ ALCsizei.IN("size", "the size of the {@code dest} buffer"),
-		returnValue _ ALCint_p.OUT("dest", "the destination buffer")
+		AutoSize("dest")..ALCsizei.IN("size", "the size of the {@code dest} buffer"),
+		returnValue..ALCint_p.OUT("dest", "the destination buffer")
 	)
 
 }

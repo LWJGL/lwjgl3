@@ -18,7 +18,7 @@ val HI_clientpixmap = "HIClientpixmap".nativeClassEGL("HI_clientpixmap", postfix
 	IntConstant(
 		"",
 
-		"CLIENT_PIXMAP_POINTER_HI" _ 0x8F74
+		"CLIENT_PIXMAP_POINTER_HI"..0x8F74
 	)
 
 	EGLSurface(

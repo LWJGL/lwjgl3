@@ -39,7 +39,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 	    GLuint.IN("format", "the texture format"),
 	    int.IN("width", "the requested texture width"),
 	    int.IN("height", "the requested texture height"),
-		Check(1) _ ovrSwapTextureSet_pp.OUT(
+		Check(1)..ovrSwapTextureSet_pp.OUT(
 		    "outTextureSet",
 		    """
 		    the created ##OVRSwapTextureSet, which will be valid only upon a successful return value. This texture set must be eventually destroyed via
@@ -69,7 +69,7 @@ val OVRGL = "OVRGL".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "ovr_"
 		GLuint.IN("format", "the texture format"),
 		int.IN("width", "the requested texture width"),
 		int.IN("height", "the requested texture height"),
-		Check(1) _ ovrTexture_pp.OUT(
+		Check(1)..ovrTexture_pp.OUT(
 			"outMirrorTexture",
 			"""
 		    the created {@code ovrSwapTexture}, which will be valid upon a successful return value. This texture must be eventually destroyed via

@@ -32,7 +32,7 @@ val ARB_query_buffer_object = "ARBQueryBufferObject".nativeClassGL("ARB_query_bu
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GL15#GetQueryObjecti(), GL15#GetQueryObjectui(), GL33#GetQueryObjecti64() and GL33#GetQueryObjectui64().",
 
-		"QUERY_RESULT_NO_WAIT" _ 0x9194
+		"QUERY_RESULT_NO_WAIT"..0x9194
 	)
 
 	IntConstant(
@@ -43,7 +43,7 @@ val ARB_query_buffer_object = "ARBQueryBufferObject".nativeClassGL("ARB_query_bu
 		GL43#ClearBufferSubData(), and the {@code readtarget} and {@code writetarget} parameters of GL31#CopyBufferSubData().
 		""",
 
-		"QUERY_BUFFER" _ 0x9192
+		"QUERY_BUFFER"..0x9192
 	)
 
 	IntConstant(
@@ -52,13 +52,13 @@ val ARB_query_buffer_object = "ARBQueryBufferObject".nativeClassGL("ARB_query_bu
 		and GL11#GetDouble().
 		""",
 
-		"QUERY_BUFFER_BINDING" _ 0x9193
+		"QUERY_BUFFER_BINDING"..0x9193
 	)
 
 	IntConstant(
 		"Accepted in the {@code barriers} bitfield in GL42#MemoryBarrier().",
 
-		"QUERY_BUFFER_BARRIER_BIT" _ 0x00008000
+		"QUERY_BUFFER_BARRIER_BIT"..0x00008000
 	)
 
 }

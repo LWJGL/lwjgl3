@@ -39,13 +39,13 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	IntConstant(
 		"Aliases for smooth points and lines.",
 
-		"ALIASED_POINT_SIZE_RANGE" _ 0x846D,
-		"ALIASED_LINE_WIDTH_RANGE" _ 0x846E,
+		"ALIASED_POINT_SIZE_RANGE"..0x846D,
+		"ALIASED_LINE_WIDTH_RANGE"..0x846E,
 
-		"SMOOTH_POINT_SIZE_RANGE" _ 0x0B12,
-		"SMOOTH_POINT_SIZE_GRANULARITY" _ 0x0B13,
-		"SMOOTH_LINE_WIDTH_RANGE" _ 0x0B22,
-		"SMOOTH_LINE_WIDTH_GRANULARITY" _ 0x0B23
+		"SMOOTH_POINT_SIZE_RANGE"..0x0B12,
+		"SMOOTH_POINT_SIZE_GRANULARITY"..0x0B13,
+		"SMOOTH_LINE_WIDTH_RANGE"..0x0B22,
+		"SMOOTH_LINE_WIDTH_GRANULARITY"..0x0B23
 	)
 
 	// EXT_texture3D
@@ -53,16 +53,16 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"TEXTURE_BINDING_3D" _ 0x806A
+		"TEXTURE_BINDING_3D"..0x806A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev, and by the {@code pname} parameter of PixelStore.",
 
-		"PACK_SKIP_IMAGES" _ 0x806B,
-		"PACK_IMAGE_HEIGHT" _ 0x806C,
-		"UNPACK_SKIP_IMAGES" _ 0x806D,
-		"UNPACK_IMAGE_HEIGHT" _ 0x806E
+		"PACK_SKIP_IMAGES"..0x806B,
+		"PACK_IMAGE_HEIGHT"..0x806C,
+		"UNPACK_SKIP_IMAGES"..0x806D,
+		"UNPACK_IMAGE_HEIGHT"..0x806E
 	)
 
 	IntConstant(
@@ -72,31 +72,31 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GetTexParameterfv.
 		""",
 
-		"TEXTURE_3D" _ 0x806F
+		"TEXTURE_3D"..0x806F
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, GetTexLevelParameteriv, and GetTexLevelParameterfv.",
 
-		"PROXY_TEXTURE_3D" _ 0x8070
+		"PROXY_TEXTURE_3D"..0x8070
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameteriv and GetTexLevelParameterfv.",
 
-		"TEXTURE_DEPTH" _ 0x8071
+		"TEXTURE_DEPTH"..0x8071
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
-		"TEXTURE_WRAP_R" _ 0x8072
+		"TEXTURE_WRAP_R"..0x8072
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_3D_TEXTURE_SIZE" _ 0x8073
+		"MAX_3D_TEXTURE_SIZE"..0x8073
 	)
 
 	void(
@@ -112,9 +112,9 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLint.IN("border", "the texture border width"),
 		GLenum.IN("format", "the texel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the texel data type", PIXEL_DATA_TYPES),
-		nullable _ MultiType(
+		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ PIXEL_UNPACK_BUFFER _ const _ void_p.IN("pixels", "the texel data")
+		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the texel data")
 	)
 
 	void(
@@ -136,7 +136,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ PIXEL_UNPACK_BUFFER _ const _ void_p.IN("pixels", "the pixel data")
+		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("pixels", "the pixel data")
 	)
 
 	void(
@@ -162,8 +162,8 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	IntConstant(
 		"Accepted by the {@code format} parameter of DrawPixels, GetTexImage, ReadPixels, TexImage1D, and TexImage2D.",
 
-		"BGR" _ 0x80E0,
-		"BGRA" _ 0x80E1
+		"BGR"..0x80E0,
+		"BGRA"..0x80E1
 	)
 
 	// EXT_packed_pixels
@@ -175,18 +175,18 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		SeparableFilter3D, GetSeparableFilter, ColorTable, GetColorTable, TexImage4D, and TexSubImage4D.
 		""",
 
-		"UNSIGNED_BYTE_3_3_2" _ 0x8032,
-		"UNSIGNED_BYTE_2_3_3_REV" _ 0x8362,
-		"UNSIGNED_SHORT_5_6_5" _ 0x8363,
-		"UNSIGNED_SHORT_5_6_5_REV" _ 0x8364,
-		"UNSIGNED_SHORT_4_4_4_4" _ 0x8033,
-		"UNSIGNED_SHORT_4_4_4_4_REV" _ 0x8365,
-		"UNSIGNED_SHORT_5_5_5_1" _ 0x8034,
-		"UNSIGNED_SHORT_1_5_5_5_REV" _ 0x8366,
-		"UNSIGNED_INT_8_8_8_8" _ 0x8035,
-		"UNSIGNED_INT_8_8_8_8_REV" _ 0x8367,
-		"UNSIGNED_INT_10_10_10_2" _ 0x8036,
-		"UNSIGNED_INT_2_10_10_10_REV" _ 0x8368
+		"UNSIGNED_BYTE_3_3_2"..0x8032,
+		"UNSIGNED_BYTE_2_3_3_REV"..0x8362,
+		"UNSIGNED_SHORT_5_6_5"..0x8363,
+		"UNSIGNED_SHORT_5_6_5_REV"..0x8364,
+		"UNSIGNED_SHORT_4_4_4_4"..0x8033,
+		"UNSIGNED_SHORT_4_4_4_4_REV"..0x8365,
+		"UNSIGNED_SHORT_5_5_5_1"..0x8034,
+		"UNSIGNED_SHORT_1_5_5_5_REV"..0x8366,
+		"UNSIGNED_INT_8_8_8_8"..0x8035,
+		"UNSIGNED_INT_8_8_8_8_REV"..0x8367,
+		"UNSIGNED_INT_10_10_10_2"..0x8036,
+		"UNSIGNED_INT_2_10_10_10_REV"..0x8368
 	)
 
 	// EXT_rescale_normal
@@ -197,7 +197,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GetDoublev.
 		""",
 
-		"RESCALE_NORMAL" _ 0x803A
+		"RESCALE_NORMAL"..0x803A
 	)
 
 	// EXT_separate_specular_color
@@ -207,14 +207,14 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		Accepted by the {@code pname} parameter of LightModel*, and also by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.
 		""",
 
-		"LIGHT_MODEL_COLOR_CONTROL" _ 0x81F8
+		"LIGHT_MODEL_COLOR_CONTROL"..0x81F8
 	)
 
 	IntConstant(
 		"Accepted by the {@code param} parameter of LightModel* when {@code pname} is  LIGHT_MODEL_COLOR_CONTROL.",
 
-		"SINGLE_COLOR" _ 0x81F9,
-		"SEPARATE_SPECULAR_COLOR" _ 0x81FA
+		"SINGLE_COLOR"..0x81F9,
+		"SEPARATE_SPECULAR_COLOR"..0x81FA
 	)
 
 	// SGIS_texture_edge_clamp
@@ -225,7 +225,7 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
 		""",
 
-		"CLAMP_TO_EDGE" _ 0x812F
+		"CLAMP_TO_EDGE"..0x812F
 	)
 
 	// SGIS_texture_lod
@@ -233,10 +233,10 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameteri, TexParameterf, TexParameteriv, TexParameterfv, GetTexParameteriv, and GetTexParameterfv.",
 
-		"TEXTURE_MIN_LOD" _ 0x813A,
-		"TEXTURE_MAX_LOD" _ 0x813B,
-		"TEXTURE_BASE_LEVEL" _ 0x813C,
-		"TEXTURE_MAX_LEVEL" _ 0x813D
+		"TEXTURE_MIN_LOD"..0x813A,
+		"TEXTURE_MAX_LOD"..0x813B,
+		"TEXTURE_BASE_LEVEL"..0x813C,
+		"TEXTURE_MAX_LEVEL"..0x813D
 	)
 
 	// EXT_draw_range_elements
@@ -244,8 +244,8 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 	IntConstant(
 		"Recommended maximum amounts of vertex and index data.",
 
-		"MAX_ELEMENTS_VERTICES" _ 0x80E8,
-		"MAX_ELEMENTS_INDICES" _ 0x80E9
+		"MAX_ELEMENTS_VERTICES"..0x80E8,
+		"MAX_ELEMENTS_INDICES"..0x80E9
 	)
 
 	void(
@@ -287,13 +287,13 @@ val GL12 = "GL12".nativeClassGL("GL12") {
 		GLenum.IN("mode", "the kind of primitives to render", PRIMITIVE_TYPES),
 		GLuint.IN("start", "the minimum array index contained in {@code indices}"),
 		GLuint.IN("end", "the maximum array index contained in {@code indices}"),
-		AutoSize("indices") shr "GLChecks.typeToByteShift(type)" _ GLsizei.IN("count", "the number of elements to be rendered"),
-		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT) _ GLenum.IN(
+		AutoSize("indices") shr "GLChecks.typeToByteShift(type)"..GLsizei.IN("count", "the number of elements to be rendered"),
+		AutoType("indices", GL_UNSIGNED_BYTE, GL_UNSIGNED_SHORT, GL_UNSIGNED_INT)..GLenum.IN(
 			"type",
 			"the type of the values in {@code indices}",
 			"GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"
 		),
-		ELEMENT_ARRAY_BUFFER _ const _ void_p.IN("indices", "a pointer to the location where the indices are stored")
+		ELEMENT_ARRAY_BUFFER..const..void_p.IN("indices", "a pointer to the location where the indices are stored")
 	)
 
 }

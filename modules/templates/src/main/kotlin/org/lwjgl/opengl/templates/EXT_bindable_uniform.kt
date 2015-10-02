@@ -27,17 +27,17 @@ val EXT_bindable_uniform = "EXTBindableUniform".nativeClassGL("EXT_bindable_unif
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_VERTEX_BINDABLE_UNIFORMS_EXT" _ 0x8DE2,
-		"MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT" _ 0x8DE3,
-		"MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT" _ 0x8DE4,
-		"MAX_BINDABLE_UNIFORM_SIZE_EXT" _ 0x8DED,
-		"UNIFORM_BUFFER_BINDING_EXT" _ 0x8DEF
+		"MAX_VERTEX_BINDABLE_UNIFORMS_EXT"..0x8DE2,
+		"MAX_FRAGMENT_BINDABLE_UNIFORMS_EXT"..0x8DE3,
+		"MAX_GEOMETRY_BINDABLE_UNIFORMS_EXT"..0x8DE4,
+		"MAX_BINDABLE_UNIFORM_SIZE_EXT"..0x8DED,
+		"UNIFORM_BUFFER_BINDING_EXT"..0x8DEF
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
-		"UNIFORM_BUFFER_EXT" _ 0x8DEE
+		"UNIFORM_BUFFER_EXT"..0x8DEE
 	)
 
 	void(

@@ -41,18 +41,18 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 	IntConstant(
 		"Returned in the {@code type} parameter of GetActiveAttrib.",
 
-		"DOUBLE_VEC2_EXT" _ 0x8FFC,
-		"DOUBLE_VEC3_EXT" _ 0x8FFD,
-		"DOUBLE_VEC4_EXT" _ 0x8FFE,
-		"DOUBLE_MAT2_EXT" _ 0x8F46,
-		"DOUBLE_MAT3_EXT" _ 0x8F47,
-		"DOUBLE_MAT4_EXT" _ 0x8F48,
-		"DOUBLE_MAT2x3_EXT" _ 0x8F49,
-		"DOUBLE_MAT2x4_EXT" _ 0x8F4A,
-		"DOUBLE_MAT3x2_EXT" _ 0x8F4B,
-		"DOUBLE_MAT3x4_EXT" _ 0x8F4C,
-		"DOUBLE_MAT4x2_EXT" _ 0x8F4D,
-		"DOUBLE_MAT4x3_EXT" _ 0x8F4E
+		"DOUBLE_VEC2_EXT"..0x8FFC,
+		"DOUBLE_VEC3_EXT"..0x8FFD,
+		"DOUBLE_VEC4_EXT"..0x8FFE,
+		"DOUBLE_MAT2_EXT"..0x8F46,
+		"DOUBLE_MAT3_EXT"..0x8F47,
+		"DOUBLE_MAT4_EXT"..0x8F48,
+		"DOUBLE_MAT2x3_EXT"..0x8F49,
+		"DOUBLE_MAT2x4_EXT"..0x8F4A,
+		"DOUBLE_MAT3x2_EXT"..0x8F4B,
+		"DOUBLE_MAT3x4_EXT"..0x8F4C,
+		"DOUBLE_MAT4x2_EXT"..0x8F4D,
+		"DOUBLE_MAT4x3_EXT"..0x8F4E
 	)
 
 	void(
@@ -98,7 +98,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		"",
 
 		GLuint.IN("index", ""),
-		const _ GLdouble_p.IN("v", "")
+		const..GLdouble_p.IN("v", "")
 	)
 
 	void(
@@ -106,7 +106,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		"",
 
 		GLuint.IN("index", ""),
-		const _ GLdouble_p.IN("v", "")
+		const..GLdouble_p.IN("v", "")
 	)
 
 	void(
@@ -114,7 +114,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		"",
 
 		GLuint.IN("index", ""),
-		const _ GLdouble_p.IN("v", "")
+		const..GLdouble_p.IN("v", "")
 	)
 
 	void(
@@ -122,7 +122,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		"",
 
 		GLuint.IN("index", ""),
-		const _ GLdouble_p.IN("v", "")
+		const..GLdouble_p.IN("v", "")
 	)
 
 	void(
@@ -131,9 +131,9 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 
 		GLuint.IN("index", ""),
 		GLint.IN("size", ""),
-		AutoType("pointer", BufferType.GL_DOUBLE) _ GLenum.IN("type", ""),
+		AutoType("pointer", BufferType.GL_DOUBLE)..GLenum.IN("type", ""),
 		GLsizei.IN("stride", ""),
-		ARRAY_BUFFER _ const _ void_p.IN("pointer", "")
+		ARRAY_BUFFER..const..void_p.IN("pointer", "")
 	)
 
 	void(
@@ -145,7 +145,7 @@ val EXT_vertex_attrib_64bit = "EXTVertexAttrib64bit".nativeClassGL("EXT_vertex_a
 		GLdouble_p.OUT("params", "")
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ void(
+	DependsOn("GL_EXT_direct_state_access")..void(
 		"VertexArrayVertexAttribLOffsetEXT",
 		"",
 

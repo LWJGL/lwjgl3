@@ -39,15 +39,15 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		BindBufferRangeNV, BindBufferOffsetNV and BindBufferBaseNV.
 		""",
 
-		"TRANSFORM_FEEDBACK_BUFFER_NV" _ 0x8C8E
+		"TRANSFORM_FEEDBACK_BUFFER_NV"..0x8C8E
 	)
 
 	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegerIndexedvEXT and GetBooleanIndexedvEXT.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_START_NV" _ 0x8C84,
-		"TRANSFORM_FEEDBACK_BUFFER_SIZE_NV" _ 0x8C85,
-		"TRANSFORM_FEEDBACK_RECORD_NV" _ 0x8C86
+		"TRANSFORM_FEEDBACK_BUFFER_START_NV"..0x8C84,
+		"TRANSFORM_FEEDBACK_BUFFER_SIZE_NV"..0x8C85,
+		"TRANSFORM_FEEDBACK_RECORD_NV"..0x8C86
 	)
 
 	IntConstant(
@@ -56,21 +56,21 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		GetDoublev, GetIntegerv, and GetFloatv.
 		""",
 
-		"TRANSFORM_FEEDBACK_BUFFER_BINDING_NV" _ 0x8C8F
+		"TRANSFORM_FEEDBACK_BUFFER_BINDING_NV"..0x8C8F
 	)
 
 	IntConstant(
 		"Accepted by the {@code bufferMode} parameter of TransformFeedbackAttribsNV and TransformFeedbackVaryingsNV.",
 
-		"INTERLEAVED_ATTRIBS_NV" _ 0x8C8C,
-		"SEPARATE_ATTRIBS_NV" _ 0x8C8D
+		"INTERLEAVED_ATTRIBS_NV"..0x8C8C,
+		"SEPARATE_ATTRIBS_NV"..0x8C8D
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, and GetQueryiv.",
 
-		"PRIMITIVES_GENERATED_NV" _ 0x8C87,
-		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV" _ 0x8C88
+		"PRIMITIVES_GENERATED_NV"..0x8C87,
+		"TRANSFORM_FEEDBACK_PRIMITIVES_WRITTEN_NV"..0x8C88
 	)
 
 	IntConstant(
@@ -79,44 +79,44 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		GetDoublev.
 		""",
 
-		"RASTERIZER_DISCARD_NV" _ 0x8C89
+		"RASTERIZER_DISCARD_NV"..0x8C89
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_NV" _ 0x8C8A,
-		"MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_NV" _ 0x8C8B,
-		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_NV" _ 0x8C80,
-		"TRANSFORM_FEEDBACK_ATTRIBS_NV" _ 0x8C7E
+		"MAX_TRANSFORM_FEEDBACK_INTERLEAVED_COMPONENTS_NV"..0x8C8A,
+		"MAX_TRANSFORM_FEEDBACK_SEPARATE_ATTRIBS_NV"..0x8C8B,
+		"MAX_TRANSFORM_FEEDBACK_SEPARATE_COMPONENTS_NV"..0x8C80,
+		"TRANSFORM_FEEDBACK_ATTRIBS_NV"..0x8C7E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"ACTIVE_VARYINGS_NV" _ 0x8C81,
-		"ACTIVE_VARYING_MAX_LENGTH_NV" _ 0x8C82,
-		"TRANSFORM_FEEDBACK_VARYINGS_NV" _ 0x8C83
+		"ACTIVE_VARYINGS_NV"..0x8C81,
+		"ACTIVE_VARYING_MAX_LENGTH_NV"..0x8C82,
+		"TRANSFORM_FEEDBACK_VARYINGS_NV"..0x8C83
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, GetFloatv, and GetProgramiv.",
 
-		"TRANSFORM_FEEDBACK_BUFFER_MODE_NV" _ 0x8C7F
+		"TRANSFORM_FEEDBACK_BUFFER_MODE_NV"..0x8C7F
 	)
 
 	IntConstant(
 		"Accepted by the {@code attribs} parameter of TransformFeedbackAttribsNV.",
 
-		"BACK_PRIMARY_COLOR_NV" _ 0x8C77,
-		"BACK_SECONDARY_COLOR_NV" _ 0x8C78,
-		"TEXTURE_COORD_NV" _ 0x8C79,
-		"CLIP_DISTANCE_NV" _ 0x8C7A,
-		"VERTEX_ID_NV" _ 0x8C7B,
-		"PRIMITIVE_ID_NV" _ 0x8C7C,
-		"GENERIC_ATTRIB_NV" _ 0x8C7D,
-		"SECONDARY_COLOR_NV" _ 0x852D,
-		"LAYER_NV" _ 0x8DAA
+		"BACK_PRIMARY_COLOR_NV"..0x8C77,
+		"BACK_SECONDARY_COLOR_NV"..0x8C78,
+		"TEXTURE_COORD_NV"..0x8C79,
+		"CLIP_DISTANCE_NV"..0x8C7A,
+		"VERTEX_ID_NV"..0x8C7B,
+		"PRIMITIVE_ID_NV"..0x8C7C,
+		"GENERIC_ATTRIB_NV"..0x8C7D,
+		"SECONDARY_COLOR_NV"..0x852D,
+		"LAYER_NV"..0x8DAA
 	)
 
 	void(
@@ -135,8 +135,8 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		"TransformFeedbackAttribsNV",
 		"",
 
-		AutoSize("attribs") _ GLsizei.IN("count", ""),
-		const _ GLint_p.IN("attribs", ""),
+		AutoSize("attribs")..GLsizei.IN("count", ""),
+		const..GLint_p.IN("attribs", ""),
 		GLenum.IN("bufferMode", "")
 	)
 
@@ -175,8 +175,8 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		"",
 
 		GLuint.IN("program", ""),
-		AutoSize("locations") _ GLsizei.IN("count", ""),
-		const _ GLint_p.IN("locations", ""),
+		AutoSize("locations")..GLsizei.IN("count", ""),
+		const..GLint_p.IN("locations", ""),
 		GLenum.IN("bufferMode", "")
 	)
 
@@ -185,7 +185,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		"",
 
 		GLuint.IN("program", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	GLint(
@@ -193,7 +193,7 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 		"",
 
 		GLuint.IN("program", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	void(
@@ -202,10 +202,10 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 
 		GLuint.IN("program", ""),
 		GLuint.IN("index", ""),
-		AutoSize("name") _ GLsizei.IN("bufSize", ""),
-		nullable _ Check(1) _ GLsizei_p.OUT("length", ""),
-		Check(1) _ GLsizei_p.OUT("size", ""),
-		Check(1) _ GLenum_p.OUT("type", ""),
+		AutoSize("name")..GLsizei.IN("bufSize", ""),
+		nullable..Check(1)..GLsizei_p.OUT("length", ""),
+		Check(1)..GLsizei_p.OUT("size", ""),
+		Check(1)..GLenum_p.OUT("type", ""),
 		GLcharASCII_p.OUT("name", "")
 	)
 
@@ -215,17 +215,17 @@ val NV_transform_feedback = "NVTransformFeedback".nativeClassGL("NV_transform_fe
 
 		GLuint.IN("program", ""),
 		GLuint.IN("index", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("location", "")
+		returnValue..Check(1)..GLint_p.OUT("location", "")
 	)
 
 	void(
 		"TransformFeedbackStreamAttribsNV",
 		"",
 
-		AutoSize("attribs") _ GLsizei.IN("count", ""),
-		const _ GLint_p.IN("attribs", ""),
-		AutoSize("bufstreams") _ GLsizei.IN("nbuffers", ""),
-		const _ GLint_p.IN("bufstreams", ""),
+		AutoSize("attribs")..GLsizei.IN("count", ""),
+		const..GLint_p.IN("attribs", ""),
+		AutoSize("bufstreams")..GLsizei.IN("nbuffers", ""),
+		const..GLint_p.IN("bufstreams", ""),
 		GLenum.IN("bufferMode", "")
 	)
 }

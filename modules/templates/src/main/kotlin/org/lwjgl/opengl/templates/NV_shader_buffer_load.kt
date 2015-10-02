@@ -84,19 +84,19 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBufferParameterui64vNV, GetNamedBufferParameterui64vNV.",
 
-		"BUFFER_GPU_ADDRESS_NV" _ 0x8F1D
+		"BUFFER_GPU_ADDRESS_NV"..0x8F1D
 	)
 
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"GPU_ADDRESS_NV" _ 0x8F34
+		"GPU_ADDRESS_NV"..0x8F34
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerui64vNV.",
 
-		"MAX_SHADER_BUFFER_ADDRESS_NV" _ 0x8F35
+		"MAX_SHADER_BUFFER_ADDRESS_NV"..0x8F35
 	)
 
 	void(
@@ -149,7 +149,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLuint64EXT_p.OUT("params", "")
+		Check(1)..returnValue..GLuint64EXT_p.OUT("params", "")
 	)
 
 	void(
@@ -158,7 +158,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
 		GLuint.IN("buffer", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ returnValue _ GLuint64EXT_p.OUT("params", "")
+		Check(1)..returnValue..GLuint64EXT_p.OUT("params", "")
 	)
 
 	void(
@@ -166,7 +166,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		"",
 
 		GLenum.IN("value", ""),
-		Check(1) _ returnValue _ GLuint64EXT_p.OUT("result", "")
+		Check(1)..returnValue..GLuint64EXT_p.OUT("result", "")
 	)
 
 	void(
@@ -182,8 +182,8 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 		"",
 
 		GLint.IN("location", ""),
-		AutoSize("value") _ GLsizei.IN("count", ""),
-		const _ GLuint64EXT_p.IN("value", "")
+		AutoSize("value")..GLsizei.IN("count", ""),
+		const..GLuint64EXT_p.IN("value", "")
 	)
 
 	void(
@@ -192,7 +192,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		Check(1) _ returnValue _ GLuint64EXT_p.OUT("params", "")
+		Check(1)..returnValue..GLuint64EXT_p.OUT("params", "")
 	)
 
 	void(
@@ -210,7 +210,7 @@ vec4 *ptrToBufferI = ptrToBuffers[i];
 
 		GLuint.IN("program", ""),
 		GLint.IN("location", ""),
-		AutoSize("value") _ GLsizei.IN("count", ""),
-		const _ GLuint64EXT_p.IN("value", "")
+		AutoSize("value")..GLsizei.IN("count", ""),
+		const..GLuint64EXT_p.IN("value", "")
 	)
 }

@@ -27,9 +27,9 @@ val KHR_cl_event2 = "KHRCLEvent2".nativeClassEGL("KHR_cl_event2", postfix = KHR)
 	IntConstant(
 		"",
 
-		"CL_EVENT_HANDLE_KHR" _ 0x309C,
-		"SYNC_CL_EVENT_KHR" _ 0x30FE,
-		"SYNC_CL_EVENT_COMPLETE_KHR" _ 0x30FF
+		"CL_EVENT_HANDLE_KHR"..0x309C,
+		"SYNC_CL_EVENT_KHR"..0x30FE,
+		"SYNC_CL_EVENT_COMPLETE_KHR"..0x30FF
 	)
 
 	EGLSyncKHR(
@@ -38,6 +38,6 @@ val KHR_cl_event2 = "KHRCLEvent2".nativeClassEGL("KHR_cl_event2", postfix = KHR)
 
 		EGLDisplay.IN("dpy", ""),
 		EGLenum.IN("type", ""),
-		noneTerminated _ const _ EGLAttribKHR_p.IN("attrib_list", "")
+		noneTerminated..const..EGLAttribKHR_p.IN("attrib_list", "")
 	)
 }

@@ -23,7 +23,7 @@ val EXT_polygon_offset_clamp = "EXTPolygonOffsetClamp".nativeClassGL("EXT_polygo
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"POLYGON_OFFSET_CLAMP_EXT" _ 0x8E1B
+		"POLYGON_OFFSET_CLAMP_EXT"..0x8E1B
 	)
 
 	void(

@@ -82,33 +82,33 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and IsEnabled.",
 
-		"DEBUG_OUTPUT" _ 0x92E0,
-		"DEBUG_OUTPUT_SYNCHRONOUS" _ 0x8242
+		"DEBUG_OUTPUT"..0x92E0,
+		"DEBUG_OUTPUT_SYNCHRONOUS"..0x8242
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
-		"CONTEXT_FLAG_DEBUG_BIT" _ 0x00000002
+		"CONTEXT_FLAG_DEBUG_BIT"..0x00000002
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES" _ 0x9145,
-		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH" _ 0x8243,
-		"MAX_DEBUG_GROUP_STACK_DEPTH" _ 0x826C,
-		"DEBUG_GROUP_STACK_DEPTH" _ 0x826D,
-		"MAX_LABEL_LENGTH" _ 0x82E8
+		"MAX_DEBUG_MESSAGE_LENGTH"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES"..0x9144,
+		"DEBUG_LOGGED_MESSAGES"..0x9145,
+		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH"..0x8243,
+		"MAX_DEBUG_GROUP_STACK_DEPTH"..0x826C,
+		"DEBUG_GROUP_STACK_DEPTH"..0x826D,
+		"MAX_LABEL_LENGTH"..0x82E8
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
-		"DEBUG_CALLBACK_FUNCTION" _ 0x8244,
-		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
+		"DEBUG_CALLBACK_FUNCTION"..0x8244,
+		"DEBUG_CALLBACK_USER_PARAM"..0x8245
 	)
 
 	IntConstant(
@@ -117,12 +117,12 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		of GetDebugMessageLog (some commands restrict {@code source} to a subset of these parameters; see the specification body for details).
 		""",
 
-		"DEBUG_SOURCE_API" _ 0x8246,
-		"DEBUG_SOURCE_WINDOW_SYSTEM" _ 0x8247,
-		"DEBUG_SOURCE_SHADER_COMPILER" _ 0x8248,
-		"DEBUG_SOURCE_THIRD_PARTY" _ 0x8249,
-		"DEBUG_SOURCE_APPLICATION" _ 0x824A,
-		"DEBUG_SOURCE_OTHER" _ 0x824B
+		"DEBUG_SOURCE_API"..0x8246,
+		"DEBUG_SOURCE_WINDOW_SYSTEM"..0x8247,
+		"DEBUG_SOURCE_SHADER_COMPILER"..0x8248,
+		"DEBUG_SOURCE_THIRD_PARTY"..0x8249,
+		"DEBUG_SOURCE_APPLICATION"..0x824A,
+		"DEBUG_SOURCE_OTHER"..0x824B
 	)
 
 	IntConstant(
@@ -131,13 +131,13 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_ERROR" _ 0x824C,
-		"DEBUG_TYPE_DEPRECATED_BEHAVIOR" _ 0x824D,
-		"DEBUG_TYPE_UNDEFINED_BEHAVIOR" _ 0x824E,
-		"DEBUG_TYPE_PORTABILITY" _ 0x824F,
-		"DEBUG_TYPE_PERFORMANCE" _ 0x8250,
-		"DEBUG_TYPE_OTHER" _ 0x8251,
-		"DEBUG_TYPE_MARKER" _ 0x8268
+		"DEBUG_TYPE_ERROR"..0x824C,
+		"DEBUG_TYPE_DEPRECATED_BEHAVIOR"..0x824D,
+		"DEBUG_TYPE_UNDEFINED_BEHAVIOR"..0x824E,
+		"DEBUG_TYPE_PORTABILITY"..0x824F,
+		"DEBUG_TYPE_PERFORMANCE"..0x8250,
+		"DEBUG_TYPE_OTHER"..0x8251,
+		"DEBUG_TYPE_MARKER"..0x8268
 	)
 
 	IntConstant(
@@ -145,8 +145,8 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_PUSH_GROUP" _ 0x8269,
-		"DEBUG_TYPE_POP_GROUP" _ 0x826A
+		"DEBUG_TYPE_PUSH_GROUP"..0x8269,
+		"DEBUG_TYPE_POP_GROUP"..0x826A
 	)
 
 	IntConstant(
@@ -155,22 +155,22 @@ val KHR_debug = "KHRDebug".nativeClassGL("KHR_debug") {
 		{@code severities} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SEVERITY_HIGH" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM" _ 0x9147,
-		"DEBUG_SEVERITY_LOW" _ 0x9148,
-		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
+		"DEBUG_SEVERITY_HIGH"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM"..0x9147,
+		"DEBUG_SEVERITY_LOW"..0x9148,
+		"DEBUG_SEVERITY_NOTIFICATION"..0x826B
 	)
 
 	IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
-		"BUFFER" _ 0x82E0,
-		"SHADER" _ 0x82E1,
-		"PROGRAM" _ 0x82E2,
-		"QUERY" _ 0x82E3,
-		"PROGRAM_PIPELINE" _ 0x82E4,
-		"SAMPLER" _ 0x82E6,
-		"DISPLAY_LIST" _ 0x82E7
+		"BUFFER"..0x82E0,
+		"SHADER"..0x82E1,
+		"PROGRAM"..0x82E2,
+		"QUERY"..0x82E3,
+		"PROGRAM_PIPELINE"..0x82E4,
+		"SAMPLER"..0x82E6,
+		"DISPLAY_LIST"..0x82E7
 	)
 
 	GL43 reuse "DebugMessageControl"

@@ -25,15 +25,15 @@ val AMD_stencil_operation_extended = "AMDStencilOperationExtended".nativeClassGL
 	IntConstant(
 		"Accepted by the {@code sfail}, {@code dpfail} and {@code dppass} parameters of StencilOp and StencilOpSeparate.",
 
-		"SET_AMD" _ 0x874A,
-		"REPLACE_VALUE_AMD" _ 0x874B
+		"SET_AMD"..0x874A,
+		"REPLACE_VALUE_AMD"..0x874B
 	)
 
 	IntConstant(
 		"Accepted by the {@code param} parameter of GetIntegerv, GetFloatv, GetBooleanv GetDoublev and GetInteger64v.",
 
-		"STENCIL_OP_VALUE_AMD" _ 0x874C,
-		"STENCIL_BACK_OP_VALUE_AMD" _ 0x874D
+		"STENCIL_OP_VALUE_AMD"..0x874C,
+		"STENCIL_BACK_OP_VALUE_AMD"..0x874D
 	)
 
 	void(

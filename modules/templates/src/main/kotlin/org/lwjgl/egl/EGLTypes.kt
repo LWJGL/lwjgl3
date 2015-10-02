@@ -76,10 +76,10 @@ val EGLNativeFileDescriptorKHR = typedef(int, "EGLNativeFileDescriptorKHR")
 val EGLsizeiANDROID = typedef(khronos_ssize_t, "EGLsizeiANDROID")
 val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 	EGL_PACKAGE, void, "EGLSetBlobFuncANDROID", "",
-	const _ void_p.IN("key", ""),
-	AutoSize("key") _ EGLsizeiANDROID.IN("keySize", ""),
-	const _ void_p.IN("value", ""),
-	AutoSize("value") _ EGLsizeiANDROID.IN("valueSize", ""),
+	const..void_p.IN("key", ""),
+	AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
+	const..void_p.IN("value", ""),
+	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
 	samConstructor = "ANDROIDBlobCache"
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."
@@ -108,10 +108,10 @@ val EGLSetBlobFuncANDROID = "EGLSetBlobFuncANDROID".callback(
 }
 val EGLGetBlobFuncANDROID = "EGLGetBlobFuncANDROID".callback(
 	EGL_PACKAGE, EGLsizeiANDROID, "EGLGetBlobFuncANDROID", "",
-	const _ void_p.IN("key", ""),
-	AutoSize("key") _ EGLsizeiANDROID.IN("keySize", ""),
+	const..void_p.IN("key", ""),
+	AutoSize("key")..EGLsizeiANDROID.IN("keySize", ""),
 	void_p.IN("value", ""),
-	AutoSize("value") _ EGLsizeiANDROID.IN("valueSize", ""),
+	AutoSize("value")..EGLsizeiANDROID.IN("valueSize", ""),
 	samConstructor = "ANDROIDBlobCache"
 ) {
 	documentation = "Instances of this interface may be passed to the ANDROIDBlobCache##eglSetBlobCacheFuncsANDROID() method."

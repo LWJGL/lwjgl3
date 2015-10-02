@@ -18,6 +18,6 @@ val IMG_shader_binary = "IMGShaderBinary".nativeClassGLES("IMG_shader_binary", p
 	IntConstant(
 		"Accepted by the {@code binaryformat} parameter of ShaderBinary.",
 
-		"SGX_BINARY_IMG" _ 0x8C0A
+		"SGX_BINARY_IMG"..0x8C0A
 	)
 }

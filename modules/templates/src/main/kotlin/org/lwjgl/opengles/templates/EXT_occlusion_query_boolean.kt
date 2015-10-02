@@ -23,37 +23,37 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQueryEXT, EndQueryEXT, and GetQueryivEXT.",
 
-		"ANY_SAMPLES_PASSED_EXT" _ 0x8C2F,
-		"ANY_SAMPLES_PASSED_CONSERVATIVE_EXT" _ 0x8D6A
+		"ANY_SAMPLES_PASSED_EXT"..0x8C2F,
+		"ANY_SAMPLES_PASSED_CONSERVATIVE_EXT"..0x8D6A
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryivEXT.",
 
-		"CURRENT_QUERY_EXT" _ 0x8865
+		"CURRENT_QUERY_EXT"..0x8865
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectivEXT and GetQueryObjectuivEXT.",
 
-		"QUERY_RESULT_EXT" _ 0x8866,
-		"QUERY_RESULT_AVAILABLE_EXT" _ 0x8867
+		"QUERY_RESULT_EXT"..0x8866,
+		"QUERY_RESULT_AVAILABLE_EXT"..0x8867
 	)
 
 	void(
 		"GenQueriesEXT",
 		"",
 
-		AutoSize("ids") _ GLsizei.IN("n", ""),
-		returnValue _ GLuint_p.OUT("ids", "")
+		AutoSize("ids")..GLsizei.IN("n", ""),
+		returnValue..GLuint_p.OUT("ids", "")
 	)
 
 	void(
 		"DeleteQueriesEXT",
 		"",
 
-		AutoSize("ids") _ GLsizei.IN("n", ""),
-		SingleValue("id") _ const _ GLuint_p.IN("ids", "")
+		AutoSize("ids")..GLsizei.IN("n", ""),
+		SingleValue("id")..const..GLuint_p.IN("ids", "")
 	)
 
 	GLboolean(
@@ -84,7 +84,7 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "")
+		returnValue..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -93,6 +93,6 @@ val EXT_occlusion_query_boolean = "EXTOcclusionQueryBoolean".nativeClassGLES("EX
 
 		GLuint.IN("id", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("params", "")
+		returnValue..Check(1)..GLuint_p.OUT("params", "")
 	)
 }

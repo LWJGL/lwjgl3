@@ -22,9 +22,9 @@ val IMG_texture_compression_pvrtc = "IMGTextureCompressionPVRTC".nativeClassGLES
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D and the {@code format} parameter of CompressedTexSubImage2D.",
 
-		"COMPRESSED_RGB_PVRTC_4BPPV1_IMG" _ 0x8C00,
-		"COMPRESSED_RGB_PVRTC_2BPPV1_IMG" _ 0x8C01,
-		"COMPRESSED_RGBA_PVRTC_4BPPV1_IMG" _ 0x8C02,
-		"COMPRESSED_RGBA_PVRTC_2BPPV1_IMG" _ 0x8C03
+		"COMPRESSED_RGB_PVRTC_4BPPV1_IMG"..0x8C00,
+		"COMPRESSED_RGB_PVRTC_2BPPV1_IMG"..0x8C01,
+		"COMPRESSED_RGBA_PVRTC_4BPPV1_IMG"..0x8C02,
+		"COMPRESSED_RGBA_PVRTC_2BPPV1_IMG"..0x8C03
 	)
 }

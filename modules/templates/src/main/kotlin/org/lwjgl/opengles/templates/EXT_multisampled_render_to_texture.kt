@@ -35,25 +35,25 @@ val EXT_multisampled_render_to_texture = "EXTMultisampledRenderToTexture".native
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
-		"RENDERBUFFER_SAMPLES_EXT" _ 0x8CAB
+		"RENDERBUFFER_SAMPLES_EXT"..0x8CAB
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT" _ 0x8D56
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_EXT"..0x8D56
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLES_EXT" _ 0x8D57
+		"MAX_SAMPLES_EXT"..0x8D57
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT" _ 0x8D6C
+		"FRAMEBUFFER_ATTACHMENT_TEXTURE_SAMPLES_EXT"..0x8D6C
 	)
 
 	void(

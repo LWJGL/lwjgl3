@@ -13,110 +13,110 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 	IntConstant(
 		"General tokens.",
 
-		"INVALID" _ 0xFFFFFFFF.i,
-		"NONE" _ 0x0,
-		"FALSE" _ 0x0,
-		"TRUE" _ 0x1
+		"INVALID"..0xFFFFFFFF.i,
+		"NONE"..0x0,
+		"FALSE"..0x0,
+		"TRUE"..0x1
 	)
 
 	IntConstant(
 		"Error conditions.",
 
-		"NO_ERROR" _ 0x0,
-		"INVALID_NAME" _ 0xA001,
-		"INVALID_ENUM" _ 0xA002,
-		"INVALID_VALUE" _ 0xA003,
-		"INVALID_OPERATION" _ 0xA004,
-		"OUT_OF_MEMORY" _ 0xA005
+		"NO_ERROR"..0x0,
+		"INVALID_NAME"..0xA001,
+		"INVALID_ENUM"..0xA002,
+		"INVALID_VALUE"..0xA003,
+		"INVALID_OPERATION"..0xA004,
+		"OUT_OF_MEMORY"..0xA005
 	)
 
 	val NumericalQueries = IntConstant(
 		"Numerical queries.",
 
-		"DOPPLER_FACTOR" _ 0xC000,
-		"DISTANCE_MODEL" _ 0xD000
+		"DOPPLER_FACTOR"..0xC000,
+		"DISTANCE_MODEL"..0xD000
 	).javaDocLinks + " AL11#SPEED_OF_SOUND"
 
 	val StringQueries = IntConstant(
 		"String queries.",
 
-		"VENDOR" _ 0xB001,
-		"VERSION" _ 0xB002,
-		"RENDERER" _ 0xB003,
-		"EXTENSIONS" _ 0xB004
+		"VENDOR"..0xB001,
+		"VERSION"..0xB002,
+		"RENDERER"..0xB003,
+		"EXTENSIONS"..0xB004
 	).javaDocLinks
 
 	val DistanceModels = IntConstant(
 		"Distance attenuation models.",
 
-		"INVERSE_DISTANCE" _ 0xD001,
-		"INVERSE_DISTANCE_CLAMPED" _ 0xD002
+		"INVERSE_DISTANCE"..0xD001,
+		"INVERSE_DISTANCE_CLAMPED"..0xD002
 	).javaDocLinks + " AL11#LINEAR_DISTANCE AL11#LINEAR_DISTANCE_CLAMPED AL11#EXPONENT_DISTANCE AL11#EXPONENT_DISTANCE_CLAMPED #NONE"
 
 	IntConstant(
 		"Source types.",
 
-		"SOURCE_ABSOLUTE" _ 0x201,
-		"SOURCE_RELATIVE" _ 0x202
+		"SOURCE_ABSOLUTE"..0x201,
+		"SOURCE_RELATIVE"..0x202
 	)
 
 	val ListenerSourceAttributes = IntConstant(
 		"Listener and Source attributes.",
 
-		"POSITION" _ 0x1004,
-		"VELOCITY" _ 0x1006,
-		"GAIN" _ 0x100A
+		"POSITION"..0x1004,
+		"VELOCITY"..0x1006,
+		"GAIN"..0x100A
 	).javaDocLinks
 
 	var SourceAttributes = IntConstant(
 		"Source attributes.",
 
-		"CONE_INNER_ANGLE" _ 0x1001,
-		"CONE_OUTER_ANGLE" _ 0x1002,
-		"PITCH" _ 0x1003,
-		"DIRECTION" _ 0x1005,
-		"LOOPING" _ 0x1007,
-		"BUFFER" _ 0x1009,
-		"SOURCE_STATE" _ 0x1010,
-		"CONE_OUTER_GAIN" _ 0x1022,
-		"SOURCE_TYPE" _ 0x1027
+		"CONE_INNER_ANGLE"..0x1001,
+		"CONE_OUTER_ANGLE"..0x1002,
+		"PITCH"..0x1003,
+		"DIRECTION"..0x1005,
+		"LOOPING"..0x1007,
+		"BUFFER"..0x1009,
+		"SOURCE_STATE"..0x1010,
+		"CONE_OUTER_GAIN"..0x1022,
+		"SOURCE_TYPE"..0x1027
 	).javaDocLinks
 
 	IntConstant(
 		"Source state.",
 
-		"INITIAL" _ 0x1011,
-		"PLAYING" _ 0x1012,
-		"PAUSED" _ 0x1013,
-		"STOPPED" _ 0x1014
+		"INITIAL"..0x1011,
+		"PLAYING"..0x1012,
+		"PAUSED"..0x1013,
+		"STOPPED"..0x1014
 	)
 
 	val ListenerAttributes = IntConstant(
 		"Listener attributes.",
 
-		"ORIENTATION" _ 0x100F
+		"ORIENTATION"..0x100F
 	).javaDocLinks + " $ListenerSourceAttributes"
 
 	IntConstant(
 		"Queue state.",
 
-		"BUFFERS_QUEUED" _ 0x1015,
-		"BUFFERS_PROCESSED" _ 0x1016
+		"BUFFERS_QUEUED"..0x1015,
+		"BUFFERS_PROCESSED"..0x1016
 	)
 
 	IntConstant(
 		"Gain bounds.",
 
-		"MIN_GAIN" _ 0x100D,
-		"MAX_GAIN" _ 0x100E
+		"MIN_GAIN"..0x100D,
+		"MAX_GAIN"..0x100E
 	)
 
 	val DistanceModelAttributes = IntConstant(
 		"Distance model attributes,",
 
-		"REFERENCE_DISTANCE" _ 0x1020,
-		"ROLLOFF_FACTOR" _ 0x1021,
-		"MAX_DISTANCE" _ 0x1023
+		"REFERENCE_DISTANCE"..0x1020,
+		"ROLLOFF_FACTOR"..0x1021,
+		"MAX_DISTANCE"..0x1023
 	).javaDocLinks
 
 	SourceAttributes += " $ListenerSourceAttributes $DistanceModelAttributes"
@@ -124,27 +124,27 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 	val BufferAttributes = IntConstant(
 		"Buffer attributes,",
 
-		"FREQUENCY" _ 0x2001,
-		"BITS" _ 0x2002,
-		"CHANNELS" _ 0x2003,
-		"SIZE" _ 0x2004
+		"FREQUENCY"..0x2001,
+		"BITS"..0x2002,
+		"CHANNELS"..0x2003,
+		"SIZE"..0x2004
 	).javaDocLinks
 
 	val BufferFormats = IntConstant(
 		"Buffer formats.",
 
-		"FORMAT_MONO8" _ 0x1100,
-		"FORMAT_MONO16" _ 0x1101,
-		"FORMAT_STEREO8" _ 0x1102,
-		"FORMAT_STEREO16" _ 0x1103
+		"FORMAT_MONO8"..0x1100,
+		"FORMAT_MONO16"..0x1101,
+		"FORMAT_STEREO8"..0x1102,
+		"FORMAT_STEREO16"..0x1103
 	).javaDocLinks // TODO: Add vorbis
 
 	IntConstant(
 		"Buffer state.",
 
-		"UNUSED" _ 0x2010,
-		"PENDING" _ 0x2011,
-		"PROCESSED" _ 0x2012
+		"UNUSED"..0x2010,
+		"PENDING"..0x2011,
+		"PROCESSED"..0x2012
 	)
 
 	ALenum(
@@ -216,7 +216,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		"Pointer version of #GetBoolean().",
 
 		ALenum.IN("paramName", "the parameter to query"),
-		Check(1) _ ALboolean_p.OUT("dest", "a buffer that will receive the parameter values")
+		Check(1)..ALboolean_p.OUT("dest", "a buffer that will receive the parameter values")
 	)
 
 	ALvoid(
@@ -224,7 +224,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		"Pointer version of #GetInteger().",
 
 		ALenum.IN("paramName", "the parameter to query"),
-		Check(1) _ ALint_p.IN("dest", "a buffer that will receive the parameter values")
+		Check(1)..ALint_p.IN("dest", "a buffer that will receive the parameter values")
 	)
 
 	ALvoid(
@@ -232,7 +232,7 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		"Pointer version of #GetFloat().",
 
 		ALenum.IN("paramName", "the parameter to query"),
-		Check(1) _ ALfloat_p.IN("dest", "a buffer that will receive the parameter values")
+		Check(1)..ALfloat_p.IN("dest", "a buffer that will receive the parameter values")
 	)
 
 	ALvoid(
@@ -240,10 +240,10 @@ val AL10 = "AL10".nativeClassAL("AL10") {
 		"Pointer version of #GetDouble().",
 
 		ALenum.IN("paramName", "the parameter to query"),
-		Check(1) _ ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
+		Check(1)..ALdouble_p.IN("dest", "a buffer that will receive the parameter values")
 	)
 
-	(const _ ALcharUTF8_p)(
+	(const..ALcharUTF8_p)(
 		"GetString",
 		"Returns the string value of the specified parameter",
 
@@ -365,7 +365,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Pointer version of #Listenerf().",
 
 		ALenum.IN("paramName", "the parameter to modify"),
-		Check(1) _ const _ ALfloat_p.IN("values", "the parameter values")
+		Check(1)..const..ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -373,7 +373,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the float value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -381,7 +381,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the integer value of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -389,9 +389,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns the 3 dimensional values of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1) _ ALfloat_p.OUT("value1", "the first parameter value"),
-		Check(1) _ ALfloat_p.OUT("value2", "the second parameter value"),
-		Check(1) _ ALfloat_p.OUT("value3", "the third parameter value")
+		Check(1)..ALfloat_p.OUT("value1", "the first parameter value"),
+		Check(1)..ALfloat_p.OUT("value2", "the second parameter value"),
+		Check(1)..ALfloat_p.OUT("value3", "the third parameter value")
 	)
 
 	ALvoid(
@@ -399,23 +399,23 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"Returns float values of a listener parameter.",
 
 		ALenum.IN("paramName", "the parameter to query", ListenerAttributes),
-		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
+		Check(1)..ALfloat_p.OUT("values", "the parameter values")
 	)
 
 	ALvoid(
 		"GenSources",
 		"Requests a number of source names.",
 
-		AutoSize("srcNames") _ ALsizei.IN("n", "the number of source names to generated"),
-		returnValue _ ALuint_p.OUT("srcNames", "the buffer that will receive the source names")
+		AutoSize("srcNames")..ALsizei.IN("n", "the number of source names to generated"),
+		returnValue..ALuint_p.OUT("srcNames", "the buffer that will receive the source names")
 	)
 
 	ALvoid(
 		"DeleteSources",
 		"Requests the deletion of a number of sources.",
 
-		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to delete"),
-		SingleValue("source") _ ALuint_p.IN("sources", "the sources to delete")
+		AutoSize("sources")..ALsizei.IN("n", "the number of sources to delete"),
+		SingleValue("source")..ALuint_p.IN("sources", "the sources to delete")
 	)
 
 	ALboolean(
@@ -451,7 +451,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to modify"),
 		ALenum.IN("param", "the parameter to modify"),
-		Check(1) _ const _ ALfloat_p.IN("values", "the parameter values")
+		Check(1)..const..ALfloat_p.IN("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -469,7 +469,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -478,9 +478,9 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1) _ ALfloat_p.OUT("v1", "the first parameter value"),
-		Check(1) _ ALfloat_p.OUT("v2", "the second parameter value"),
-		Check(1) _ ALfloat_p.OUT("v3", "the third parameter value")
+		Check(1)..ALfloat_p.OUT("v1", "the first parameter value"),
+		Check(1)..ALfloat_p.OUT("v2", "the second parameter value"),
+		Check(1)..ALfloat_p.OUT("v3", "the third parameter value")
 	)
 
 	ALvoid(
@@ -489,7 +489,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1) _ ALfloat_p.OUT("values", "the parameter values")
+		Check(1)..ALfloat_p.OUT("values", "the parameter values")
 	)
 
 	ALvoid(
@@ -498,7 +498,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("source", "the source to query"),
 		ALenum.IN("param", "the parameter to query", SourceAttributes),
-		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -512,8 +512,8 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("sourceName", "the target source"),
-		AutoSize("bufferNames") _ ALsizei.IN("numBuffers", "the number of buffers to queue"),
-		SingleValue("bufferName") _ ALuint_p.IN("bufferNames", "the buffer names")
+		AutoSize("bufferNames")..ALsizei.IN("numBuffers", "the number of buffers to queue"),
+		SingleValue("bufferName")..ALuint_p.IN("bufferNames", "the buffer names")
 	)
 
 	ALvoid(
@@ -528,8 +528,8 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		""",
 
 		ALuint.IN("sourceName", "the target source"),
-		AutoSize("bufferNames") _ ALsizei.IN("numEntries", "the number of buffers to unqueue"),
-		returnValue _ ALuint_p.OUT("bufferNames", "the buffer names")
+		AutoSize("bufferNames")..ALsizei.IN("numEntries", "the number of buffers to unqueue"),
+		returnValue..ALuint_p.OUT("bufferNames", "the buffer names")
 	)
 
 	ALvoid(
@@ -591,48 +591,48 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"SourcePlayv",
 		"Pointer version of #SourcePlay().",
 
-		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to play"),
-		const _ ALuint_p.IN("sources", "the sources to play")
+		AutoSize("sources")..ALsizei.IN("n", "the number of sources to play"),
+		const..ALuint_p.IN("sources", "the sources to play")
 	)
 
 	ALvoid(
 		"SourcePausev",
 		"Pointer version of #SourcePause().",
 
-		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to pause"),
-		const _ ALuint_p.IN("sources", "the sources to pause")
+		AutoSize("sources")..ALsizei.IN("n", "the number of sources to pause"),
+		const..ALuint_p.IN("sources", "the sources to pause")
 	)
 
 	ALvoid(
 		"SourceStopv",
 		"Pointer version of #SourceStop().",
 
-		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to stop"),
-		const _ ALuint_p.IN("sources", "the sources to stop")
+		AutoSize("sources")..ALsizei.IN("n", "the number of sources to stop"),
+		const..ALuint_p.IN("sources", "the sources to stop")
 	)
 
 	ALvoid(
 		"SourceRewindv",
 		"Pointer version of #SourceRewind().",
 
-		AutoSize("sources") _ ALsizei.IN("n", "the number of sources to rewind"),
-		const _ ALuint_p.IN("sources", "the sources to rewind")
+		AutoSize("sources")..ALsizei.IN("n", "the number of sources to rewind"),
+		const..ALuint_p.IN("sources", "the sources to rewind")
 	)
 
 	ALvoid(
 		"GenBuffers",
 		"Requests a number of buffer names.",
 
-		AutoSize("bufferNames") _ ALsizei.IN("n", "the number of buffer names to generate"),
-		returnValue _ ALuint_p.OUT("bufferNames", "the buffer that will receive the buffer names")
+		AutoSize("bufferNames")..ALsizei.IN("n", "the number of buffer names to generate"),
+		returnValue..ALuint_p.OUT("bufferNames", "the buffer that will receive the buffer names")
 	)
 
 	ALvoid(
 		"DeleteBuffers",
 		"Requests the deletion of a number of buffers.",
 
-		AutoSize("bufferNames") _ ALsizei.IN("n", "the number of buffers to delete"),
-		SingleValue("bufferName") _ const _ ALuint_p.IN("bufferNames", "the buffers to delete")
+		AutoSize("bufferNames")..ALsizei.IN("n", "the number of buffers to delete"),
+		SingleValue("bufferName")..const..ALuint_p.IN("bufferNames", "the buffers to delete")
 	)
 
 	ALboolean(
@@ -648,7 +648,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		Check(1) _ returnValue _ ALfloat_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALfloat_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -657,7 +657,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 
 		ALuint.IN("bufferName", "the buffer to query"),
 		ALenum.IN("paramName", "the parameter to query", BufferAttributes),
-		Check(1) _ returnValue _ ALint_p.OUT("value", "the parameter value")
+		Check(1)..returnValue..ALint_p.OUT("value", "the parameter value")
 	)
 
 	ALvoid(
@@ -683,8 +683,8 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		ALenum.IN("format", "the data format", BufferFormats),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT
-		) _ const _ ALvoid_p.IN("data", "the sample data"),
-		AutoSize("data") _ ALsizei.IN("size", "the data buffer size, in bytes"),
+		)..const..ALvoid_p.IN("data", "the sample data"),
+		AutoSize("data")..ALsizei.IN("size", "the data buffer size, in bytes"),
 		ALsizei.IN("frequency", "the data frequency")
 	)
 
@@ -692,7 +692,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		"GetEnumValue",
 		"Returns the enumeration value of the specified enum.",
 
-		const _ ALcharASCII_p.IN("enumName", "the enum name")
+		const..ALcharASCII_p.IN("enumName", "the enum name")
 	)
 
 	ALvoidptr(
@@ -707,7 +707,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		OpenAL DLL's as sound drivers.
 		""",
 
-		const _ ALcharASCII_p.IN("funcName", "the function name")
+		const..ALcharASCII_p.IN("funcName", "the function name")
 	)
 
 	ALCboolean(
@@ -719,7 +719,7 @@ f' = f * (SS * DV - DF*vls) / (SS * DV - DF * vss)
 		upper-case internally (and will express extension names in upper-case).
 		""",
 
-		const _ ALcharASCII_p.IN("extName", "the extension name")
+		const..ALcharASCII_p.IN("extName", "the extension name")
 	)
 
 }

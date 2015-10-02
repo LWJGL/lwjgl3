@@ -21,7 +21,7 @@ val APPLE_fixed_alpha_channel_orders = "APPLEFixedAlphaChannelOrders".nativeClas
 	IntConstant(
 		"",
 
-		"1RGB_APPLE" _ 0x10000006,
-		"BGR1_APPLE" _ 0x10000007
+		"1RGB_APPLE"..0x10000006,
+		"BGR1_APPLE"..0x10000007
 	)
 }

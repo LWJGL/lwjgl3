@@ -28,7 +28,7 @@ val ARB_texture_mirror_clamp_to_edge = "ARBTextureMirrorClampToEdge".nativeClass
 		GL12#TEXTURE_WRAP_R.
 		""",
 
-		"MIRROR_CLAMP_TO_EDGE" _ 0x8743
+		"MIRROR_CLAMP_TO_EDGE"..0x8743
 	)
 
 }

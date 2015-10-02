@@ -29,6 +29,6 @@ val ARB_half_float_vertex = "ARBHalfFloatVertex".nativeClassGL("ARB_half_float_v
 		VertexAttribPointer.
 		""",
 
-		"HALF_FLOAT" _ 0x140B
+		"HALF_FLOAT"..0x140B
 	)
 }

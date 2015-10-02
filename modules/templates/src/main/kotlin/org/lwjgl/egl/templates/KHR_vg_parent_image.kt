@@ -21,6 +21,6 @@ val KHR_vg_parent_image = "KHRVGParentImage".nativeClassEGL("KHR_vg_parent_image
 	IntConstant(
 		"",
 
-		"VG_PARENT_IMAGE_KHR" _ 0x30BA
+		"VG_PARENT_IMAGE_KHR"..0x30BA
 	)
 }

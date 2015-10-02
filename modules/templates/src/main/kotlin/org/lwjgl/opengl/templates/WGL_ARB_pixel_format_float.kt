@@ -23,7 +23,7 @@ val WGL_ARB_pixel_format_float = "WGLARBPixelFormatFloat".nativeClassWGL("WGL_AR
 		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().
 		""",
 
-		"TYPE_RGBA_FLOAT_ARB" _ 0x21A0
+		"TYPE_RGBA_FLOAT_ARB"..0x21A0
 	)
 
 }

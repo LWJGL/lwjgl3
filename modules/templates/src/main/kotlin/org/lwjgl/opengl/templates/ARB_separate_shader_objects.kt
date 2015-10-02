@@ -61,30 +61,30 @@ val ARB_separate_shader_objects = "ARBSeparateShaderObjects".nativeClassGL("ARB_
 	IntConstant(
 		"Accepted by {@code stages} parameter to UseProgramStages.",
 
-		"VERTEX_SHADER_BIT" _ 0x00000001,
-		"FRAGMENT_SHADER_BIT" _ 0x00000002,
-		"GEOMETRY_SHADER_BIT" _ 0x00000004,
-		"TESS_CONTROL_SHADER_BIT" _ 0x00000008,
-		"TESS_EVALUATION_SHADER_BIT" _ 0x00000010,
-		"ALL_SHADER_BITS" _ 0xFFFFFFFF.i
+		"VERTEX_SHADER_BIT"..0x00000001,
+		"FRAGMENT_SHADER_BIT"..0x00000002,
+		"GEOMETRY_SHADER_BIT"..0x00000004,
+		"TESS_CONTROL_SHADER_BIT"..0x00000008,
+		"TESS_EVALUATION_SHADER_BIT"..0x00000010,
+		"ALL_SHADER_BITS"..0xFFFFFFFF.i
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ProgramParameteri and GetProgramiv.",
 
-		"PROGRAM_SEPARABLE" _ 0x8258
+		"PROGRAM_SEPARABLE"..0x8258
 	)
 
 	IntConstant(
 		"Accepted by {@code type} parameter to GetProgramPipelineiv.",
 
-		"ACTIVE_PROGRAM" _ 0x8259
+		"ACTIVE_PROGRAM"..0x8259
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"PROGRAM_PIPELINE_BINDING" _ 0x825A
+		"PROGRAM_PIPELINE_BINDING"..0x825A
 	)
 	
 	GL41 reuse "UseProgramStages"

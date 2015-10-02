@@ -38,25 +38,25 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		TexParameteriv.
 		""",
 
-		"TEXTURE_RECTANGLE_ARB" _ 0x84F5
+		"TEXTURE_RECTANGLE_ARB"..0x84F5
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv and GetDoublev.",
 
-		"TEXTURE_BINDING_RECTANGLE_ARB" _ 0x84F6
+		"TEXTURE_BINDING_RECTANGLE_ARB"..0x84F6
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetTexLevelParameteriv, GetTexLevelParameterfv, GetTexParameteriv and TexImage2D.",
 
-		"PROXY_TEXTURE_RECTANGLE_ARB" _ 0x84F7
+		"PROXY_TEXTURE_RECTANGLE_ARB"..0x84F7
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
-		"MAX_RECTANGLE_TEXTURE_SIZE_ARB" _ 0x84F8
+		"MAX_RECTANGLE_TEXTURE_SIZE_ARB"..0x84F8
 	)
 
 	IntConstant(
@@ -65,7 +65,7 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		type sampler2DRect.
 		""",
 
-		"SAMPLER_2D_RECT_ARB" _ 0x8B63
+		"SAMPLER_2D_RECT_ARB"..0x8B63
 	)
 
 	IntConstant(
@@ -74,7 +74,7 @@ val ARB_texture_rectangle = "ARBTextureRectangle".nativeClassGL("ARB_texture_rec
 		sampler2DRectShadow.
 		""",
 
-		"SAMPLER_2D_RECT_SHADOW_ARB" _ 0x8B64
+		"SAMPLER_2D_RECT_SHADOW_ARB"..0x8B64
 	)
 
 }

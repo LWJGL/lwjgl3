@@ -28,7 +28,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	IntConstant(
 		"Implementation-dependent state which constrains the maximum value of stride parameters to vertex array pointer-setting commands.",
 
-		"MAX_VERTEX_ATTRIB_STRIDE" _ 0x82E5
+		"MAX_VERTEX_ATTRIB_STRIDE"..0x82E5
 	)
 
 	IntConstant(
@@ -38,13 +38,13 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		disabled when drawing patches, no matter the value of the enables. A value of TRUE indicates that primitive restart behaves normally for patches.
 		""",
 
-	    "PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED" _ 0x8221
+	    "PRIMITIVE_RESTART_FOR_PATCHES_SUPPORTED"..0x8221
 	)
 
 	IntConstant(
 		"Equivalent to ARBTextureBufferObject#TEXTURE_BUFFER_ARB query, but named more consistently.",
 
-		"TEXTURE_BUFFER_BINDING" _ 0x8C2A
+		"TEXTURE_BUFFER_BINDING"..0x8C2A
 	)
 
 	// ARB_buffer_storage
@@ -52,23 +52,23 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	IntConstant(
 		"Accepted in the {@code flags} parameter of #BufferStorage() and ARBBufferStorage#NamedBufferStorageEXT().",
 
-		"MAP_PERSISTENT_BIT" _ 0x0040,
-		"MAP_COHERENT_BIT" _ 0x0080,
-		"DYNAMIC_STORAGE_BIT" _ 0x0100,
-		"CLIENT_STORAGE_BIT" _ 0x0200
+		"MAP_PERSISTENT_BIT"..0x0040,
+		"MAP_COHERENT_BIT"..0x0080,
+		"DYNAMIC_STORAGE_BIT"..0x0100,
+		"CLIENT_STORAGE_BIT"..0x0200
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of {@code GetBufferParameter&#123;i|i64&#125;v}.",
 
-		"BUFFER_IMMUTABLE_STORAGE" _ 0x821F,
-		"BUFFER_STORAGE_FLAGS" _ 0x8220
+		"BUFFER_IMMUTABLE_STORAGE"..0x821F,
+		"BUFFER_STORAGE_FLAGS"..0x8220
 	)
 
 	IntConstant(
 		"Accepted by the {@code barriers} parameter of GL42#MemoryBarrier().",
 
-		"CLIENT_MAPPED_BUFFER_BARRIER_BIT" _ 0x00004000
+		"CLIENT_MAPPED_BUFFER_BARRIER_BIT"..0x00004000
 	)
 
 	void(
@@ -85,13 +85,13 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		""",
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
-		AutoSize("data") _ GLsizeiptr.IN("size", "the size of the data store in basic machine units"),
-		optional _ MultiType(
+		AutoSize("data")..GLsizeiptr.IN("size", "the size of the data store in basic machine units"),
+		optional..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT,
 			PointerMapping.DATA_DOUBLE
-		) _ const _ void_p.IN(
+		)..const..void_p.IN(
 			"data",
 			"""
 			the address in client memory of the data that should be used to initialize the buffer's data store. If {@code data} is $NULL, the data store of the
@@ -161,7 +161,7 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter for GL42#GetInternalformati() and GL43#GetInternalformati64().",
 
-		"CLEAR_TEXTURE" _ 0x9365
+		"CLEAR_TEXTURE"..0x9365
 	)
 
 	void(
@@ -197,9 +197,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLsizei.IN("depth", "the subregion depth"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		nullable _ MultiType(
+		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ const _ void_p.IN(
+		)..const..void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -226,9 +226,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 		GLint.IN("level", "the texture level to clear"),
 		GLenum.IN("format", "the format of the source data", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the source data", PIXEL_DATA_TYPES),
-		nullable _ MultiType(
+		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT, PointerMapping.DATA_DOUBLE
-		) _ const _ void_p.IN(
+		)..const..void_p.IN(
 			"data",
 			"""
 			an array of between one and four components of texel data that will be used as the source for the constant fill value. If {@code data} is $NULL,
@@ -242,9 +242,9 @@ val GL44 = "GL44".nativeClassGL("GL44") {
 	IntConstant(
 		"Accepted in the {@code props} array of GL43#GetProgramResourceiv().",
 
-		"LOCATION_COMPONENT" _ 0x934A,
-		"TRANSFORM_FEEDBACK_BUFFER_INDEX" _ 0x934B,
-		"TRANSFORM_FEEDBACK_BUFFER_STRIDE" _ 0x934C
+		"LOCATION_COMPONENT"..0x934A,
+		"TRANSFORM_FEEDBACK_BUFFER_INDEX"..0x934B,
+		"TRANSFORM_FEEDBACK_BUFFER_STRIDE"..0x934C
 	)
 
 	// ARB_multi_bind
@@ -269,8 +269,8 @@ for ( i = 0; i < count; i++ ) {
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		GLuint.IN("first", "the first binding"),
-		AutoSize("buffers") _ GLsizei.IN("count", "the number of bindings"),
-		nullable _ const _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
+		AutoSize("buffers")..GLsizei.IN("count", "the number of bindings"),
+		nullable..const..GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects")
 	)
 
 	void(
@@ -299,10 +299,10 @@ for ( i = 0; i < count; i++ ) {
 
 		GLenum.IN("target", "the buffer object target", BUFFER_OBJECT_TARGETS),
 		GLuint.IN("first", "the first binding"),
-		AutoSize("buffers", "offsets", "sizes") _ GLsizei.IN("count", "the number of bindings"),
-		nullable _ const _ GLuint_p.IN("buffers", "an array of names of existing buffers objects"),
-		nullable _ const _ GLintptr_p.IN("offsets", "an array of offsets"),
-		nullable _ const _ GLsizeiptr_p.IN("sizes", "an array of sizes")
+		AutoSize("buffers", "offsets", "sizes")..GLsizei.IN("count", "the number of bindings"),
+		nullable..const..GLuint_p.IN("buffers", "an array of names of existing buffers objects"),
+		nullable..const..GLintptr_p.IN("offsets", "an array of offsets"),
+		nullable..const..GLsizeiptr_p.IN("sizes", "an array of sizes")
 	)
 
 	void(
@@ -344,8 +344,8 @@ for ( i = 0; i < count; i++ ) {
 		""",
 
 		GLuint.IN("first", "the first texture objects"),
-		AutoSize("textures") _ GLsizei.IN("count", "the number of texture objects"),
-		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+		AutoSize("textures")..GLsizei.IN("count", "the number of texture objects"),
+		nullable..const..GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
 	void(
@@ -371,8 +371,8 @@ for ( i = 0; i < count; i++ ) {
 		""",
 
 		GLuint.IN("first", "the first sampler object"),
-		AutoSize("samplers") _ GLsizei.IN("count", "the number of sampler objects"),
-		nullable _ const _ GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
+		AutoSize("samplers")..GLsizei.IN("count", "the number of sampler objects"),
+		nullable..const..GLuint_p.IN("samplers", "an array of zeros or names of existing sampler objects")
 	)
 
 	void(
@@ -409,8 +409,8 @@ for ( i = 0; i < count; i++ ) {
 		""",
 
 		GLuint.IN("first", "the first image unit"),
-		AutoSize("textures") _ GLsizei.IN("count", "the number of image units"),
-		nullable _ const _ GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
+		AutoSize("textures")..GLsizei.IN("count", "the number of image units"),
+		nullable..const..GLuint_p.IN("textures", "an array of zeros or names of existing texture objects")
 	)
 
 	void(
@@ -441,10 +441,10 @@ for ( i = 0; i < count; i++ ) {
 		""",
 
 		GLuint.IN("first", "the first vertex buffer binding point"),
-		AutoSize("buffers", "offsets", "strides") _ GLsizei.IN("count", "the number of vertex buffer binding points"),
-		nullable _ const _ GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects"),
-		nullable _ const _ GLintptr_p.IN("offsets", "an array of offses"),
-		nullable _ const _ GLsizei_p.IN("strides", "an array of stride values")
+		AutoSize("buffers", "offsets", "strides")..GLsizei.IN("count", "the number of vertex buffer binding points"),
+		nullable..const..GLuint_p.IN("buffers", "an array of zeros or names of existing buffers objects"),
+		nullable..const..GLintptr_p.IN("offsets", "an array of offses"),
+		nullable..const..GLsizei_p.IN("strides", "an array of stride values")
 	)
 
 	// ARB_query_buffer_object
@@ -452,7 +452,7 @@ for ( i = 0; i < count; i++ ) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GL15#GetQueryObjecti(), GL15#GetQueryObjectui(), GL33#GetQueryObjecti64() and GL33#GetQueryObjectui64().",
 
-		"QUERY_RESULT_NO_WAIT" _ 0x9194
+		"QUERY_RESULT_NO_WAIT"..0x9194
 	)
 
 	IntConstant(
@@ -463,7 +463,7 @@ for ( i = 0; i < count; i++ ) {
 		GL43#ClearBufferSubData(), and the {@code readtarget} and {@code writetarget} parameters of GL31#CopyBufferSubData().
 		""",
 
-		"QUERY_BUFFER" _ 0x9192
+		"QUERY_BUFFER"..0x9192
 	)
 
 	IntConstant(
@@ -472,13 +472,13 @@ for ( i = 0; i < count; i++ ) {
 		and GL11#GetDouble().
 		""",
 
-		"QUERY_BUFFER_BINDING" _ 0x9193
+		"QUERY_BUFFER_BINDING"..0x9193
 	)
 
 	IntConstant(
 		"Accepted in the {@code barriers} bitfield in GL42#MemoryBarrier().",
 
-		"QUERY_BUFFER_BARRIER_BIT" _ 0x00008000
+		"QUERY_BUFFER_BARRIER_BIT"..0x00008000
 	)
 
 	// ARB_texture_mirror_clamp_to_edge
@@ -490,7 +490,7 @@ for ( i = 0; i < count; i++ ) {
 		GL12#TEXTURE_WRAP_R,
 		""",
 
-		"MIRROR_CLAMP_TO_EDGE" _ 0x8743
+		"MIRROR_CLAMP_TO_EDGE"..0x8743
 	)
 
 }

@@ -33,21 +33,21 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
 	IntConstant(
 		"Accepted by the {@code location} parameter of DrawBuffersIndexedEXT.",
 
-		"COLOR_ATTACHMENT_EXT" _ 0x90F0,
-		"MULTIVIEW_EXT" _ 0x90F1
+		"COLOR_ATTACHMENT_EXT"..0x90F0,
+		"MULTIVIEW_EXT"..0x90F1
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetIntegeri_EXT.",
 
-		"DRAW_BUFFER_EXT" _ 0x0C01,
-		"READ_BUFFER_EXT" _ 0x0C02
+		"DRAW_BUFFER_EXT"..0x0C01,
+		"READ_BUFFER_EXT"..0x0C02
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetInteger.",
 
-		"MAX_MULTIVIEW_BUFFERS_EXT" _ 0x90F2
+		"MAX_MULTIVIEW_BUFFERS_EXT"..0x90F2
 	)
 
 	void(
@@ -62,9 +62,9 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
 		"DrawBuffersIndexedEXT",
 		"",
 
-		AutoSize("location", "indices") _ GLint.IN("n", ""),
-		const _ GLenum_p.IN("location", ""),
-		const _ GLint_p.IN("indices", "")
+		AutoSize("location", "indices")..GLint.IN("n", ""),
+		const..GLenum_p.IN("location", ""),
+		const..GLint_p.IN("indices", "")
 	)
 
 	void(
@@ -73,6 +73,6 @@ val EXT_multiview_draw_buffers = "EXTMultiviewDrawBuffers".nativeClassGLES("EXT_
 
 		GLenum.IN("target", ""),
 		GLuint.IN("index", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("data", "")
+		returnValue..Check(1)..GLint_p.OUT("data", "")
 	)
 }

@@ -28,7 +28,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 		""",
 
 		GLenum.IN("mode", "the primitive mode", PRIMITIVE_TYPES),
-		const _ void_p.IN("indirect", "an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		const..void_p.IN("indirect", "an array of DrawArraysIndirectBindlessCommandNV structures (see the extension spec for more information)"),
 		GLintptr.IN("drawCount", "the byte offset into the buffer object containing the draw count. This offset must be a multiple of 4"),
 		GLsizei.IN("maxDrawCount", "the maximum number of draws that are expected to be stored in the buffer"),
 		GLsizei.IN("stride", "the size of one DrawArraysIndirectBindlessCommandNV structure"),
@@ -46,7 +46,7 @@ val NV_bindless_multi_draw_indirect_count = "NVBindlessMultiDrawIndirectCount".n
 
 		GLenum.IN("mode", "the primitive mode", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the data type of the element indices", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		const _ void_p.IN("indirect", "an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"),
+		const..void_p.IN("indirect", "an array of DrawElementsIndirectBindlessCommandNV structures (see the extension spec for more information)"),
 		GLintptr.IN("drawCount", "the byte offset into the buffer object containing the draw count. This offset must be a multiple of 4"),
 		GLsizei.IN("maxDrawCount", "the maximum number of draws that are expected to be stored in the buffer"),
 		GLsizei.IN("stride", "the size of one DrawElementsIndirectBindlessCommandNV structure"),

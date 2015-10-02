@@ -68,65 +68,65 @@ val NV_blend_equation_advanced = "NVBlendEquationAdvanced".nativeClassGLES("NV_b
 		GetBooleanv, GetIntegerv, GetInteger64v, GetFloatv, and GetDoublev.
 		""",
 
-		"BLEND_PREMULTIPLIED_SRC_NV" _ 0x9280,
-		"BLEND_OVERLAP_NV" _ 0x9281
+		"BLEND_PREMULTIPLIED_SRC_NV"..0x9280,
+		"BLEND_OVERLAP_NV"..0x9281
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of BlendParameteriNV when {@code pname} is BLEND_OVERLAP_NV.",
 
-		"UNCORRELATED_NV" _ 0x9282,
-		"DISJOINT_NV" _ 0x9283,
-		"CONJOINT_NV" _ 0x9284
+		"UNCORRELATED_NV"..0x9282,
+		"DISJOINT_NV"..0x9283,
+		"CONJOINT_NV"..0x9284
 	)
 
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation and BlendEquationi.",
 
-		"SRC_NV" _ 0x9286,
-		"DST_NV" _ 0x9287,
-		"SRC_OVER_NV" _ 0x9288,
-		"DST_OVER_NV" _ 0x9289,
-		"SRC_IN_NV" _ 0x928A,
-		"DST_IN_NV" _ 0x928B,
-		"SRC_OUT_NV" _ 0x928C,
-		"DST_OUT_NV" _ 0x928D,
-		"SRC_ATOP_NV" _ 0x928E,
-		"DST_ATOP_NV" _ 0x928F,
-		"XOR_NV" _ 0x1506,
-		"MULTIPLY_NV" _ 0x9294,
-		"SCREEN_NV" _ 0x9295,
-		"OVERLAY_NV" _ 0x9296,
-		"DARKEN_NV" _ 0x9297,
-		"LIGHTEN_NV" _ 0x9298,
-		"COLORDODGE_NV" _ 0x9299,
-		"COLORBURN_NV" _ 0x929A,
-		"HARDLIGHT_NV" _ 0x929B,
-		"SOFTLIGHT_NV" _ 0x929C,
-		"DIFFERENCE_NV" _ 0x929E,
-		"EXCLUSION_NV" _ 0x92A0,
-		"INVERT_RGB_NV" _ 0x92A3,
-		"LINEARDODGE_NV" _ 0x92A4,
-		"LINEARBURN_NV" _ 0x92A5,
-		"VIVIDLIGHT_NV" _ 0x92A6,
-		"LINEARLIGHT_NV" _ 0x92A7,
-		"PINLIGHT_NV" _ 0x92A8,
-		"HARDMIX_NV" _ 0x92A9,
-		"HSL_HUE_NV" _ 0x92AD,
-		"HSL_SATURATION_NV" _ 0x92AE,
-		"HSL_COLOR_NV" _ 0x92AF,
-		"HSL_LUMINOSITY_NV" _ 0x92B0,
-		"PLUS_NV" _ 0x9291,
-		"PLUS_CLAMPED_NV" _ 0x92B1,
-		"PLUS_CLAMPED_ALPHA_NV" _ 0x92B2,
-		"PLUS_DARKER_NV" _ 0x9292,
-		"MINUS_NV" _ 0x929F,
-		"MINUS_CLAMPED_NV" _ 0x92B3,
-		"CONTRAST_NV" _ 0x92A1,
-		"INVERT_OVG_NV" _ 0x92B4,
-		"RED_NV" _ 0x1903,
-		"GREEN_NV" _ 0x1904,
-		"BLUE_NV" _ 0x1905
+		"SRC_NV"..0x9286,
+		"DST_NV"..0x9287,
+		"SRC_OVER_NV"..0x9288,
+		"DST_OVER_NV"..0x9289,
+		"SRC_IN_NV"..0x928A,
+		"DST_IN_NV"..0x928B,
+		"SRC_OUT_NV"..0x928C,
+		"DST_OUT_NV"..0x928D,
+		"SRC_ATOP_NV"..0x928E,
+		"DST_ATOP_NV"..0x928F,
+		"XOR_NV"..0x1506,
+		"MULTIPLY_NV"..0x9294,
+		"SCREEN_NV"..0x9295,
+		"OVERLAY_NV"..0x9296,
+		"DARKEN_NV"..0x9297,
+		"LIGHTEN_NV"..0x9298,
+		"COLORDODGE_NV"..0x9299,
+		"COLORBURN_NV"..0x929A,
+		"HARDLIGHT_NV"..0x929B,
+		"SOFTLIGHT_NV"..0x929C,
+		"DIFFERENCE_NV"..0x929E,
+		"EXCLUSION_NV"..0x92A0,
+		"INVERT_RGB_NV"..0x92A3,
+		"LINEARDODGE_NV"..0x92A4,
+		"LINEARBURN_NV"..0x92A5,
+		"VIVIDLIGHT_NV"..0x92A6,
+		"LINEARLIGHT_NV"..0x92A7,
+		"PINLIGHT_NV"..0x92A8,
+		"HARDMIX_NV"..0x92A9,
+		"HSL_HUE_NV"..0x92AD,
+		"HSL_SATURATION_NV"..0x92AE,
+		"HSL_COLOR_NV"..0x92AF,
+		"HSL_LUMINOSITY_NV"..0x92B0,
+		"PLUS_NV"..0x9291,
+		"PLUS_CLAMPED_NV"..0x92B1,
+		"PLUS_CLAMPED_ALPHA_NV"..0x92B2,
+		"PLUS_DARKER_NV"..0x9292,
+		"MINUS_NV"..0x929F,
+		"MINUS_CLAMPED_NV"..0x92B3,
+		"CONTRAST_NV"..0x92A1,
+		"INVERT_OVG_NV"..0x92B4,
+		"RED_NV"..0x1903,
+		"GREEN_NV"..0x1904,
+		"BLUE_NV"..0x1905
 	)
 
 	void(
@@ -157,6 +157,6 @@ val NV_blend_equation_advanced_coherent = "NVBlendEquationAdvancedCoherent".nati
 		GetDoublev and GetInteger64v.
 		""",
 
-		"BLEND_ADVANCED_COHERENT_NV" _ 0x9285
+		"BLEND_ADVANCED_COHERENT_NV"..0x9285
 	)
 }

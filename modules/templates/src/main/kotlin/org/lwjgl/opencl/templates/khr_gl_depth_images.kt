@@ -14,13 +14,13 @@ val khr_gl_depth_images = dependsOn(Binding.OPENGL) {
 		IntConstant(
 			"cl_channel_order",
 
-			"DEPTH_STENCIL" _ 0x10BE
+			"DEPTH_STENCIL"..0x10BE
 		)
 
 		IntConstant(
 			"cl_channel_type",
 
-			"UNORM_INT24" _ 0x10DF
+			"UNORM_INT24"..0x10DF
 		)
 	}
 }

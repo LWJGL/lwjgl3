@@ -55,29 +55,29 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 	IntConstant(
 		"Returned by #GetGraphicsResetStatusKHR().",
 
-		"GUILTY_CONTEXT_RESET_KHR" _ 0x8253,
-		"INNOCENT_CONTEXT_RESET_KHR" _ 0x8254,
-		"UNKNOWN_CONTEXT_RESET_KHR" _ 0x8255
+		"GUILTY_CONTEXT_RESET_KHR"..0x8253,
+		"INNOCENT_CONTEXT_RESET_KHR"..0x8254,
+		"UNKNOWN_CONTEXT_RESET_KHR"..0x8255
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"CONTEXT_ROBUST_ACCESS_KHR" _ 0x90F3,
-		"RESET_NOTIFICATION_STRATEGY_KHR" _ 0x8256
+		"CONTEXT_ROBUST_ACCESS_KHR"..0x90F3,
+		"RESET_NOTIFICATION_STRATEGY_KHR"..0x8256
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv and related simple queries when {@code value} is #RESET_NOTIFICATION_STRATEGY_KHR.",
 
-		"LOSE_CONTEXT_ON_RESET_KHR" _ 0x8252,
-		"NO_RESET_NOTIFICATION_KHR" _ 0x8261
+		"LOSE_CONTEXT_ON_RESET_KHR"..0x8252,
+		"NO_RESET_NOTIFICATION_KHR"..0x8261
 	)
 
 	IntConstant(
 		"Returned by GLES20#GetError().",
 
-		"CONTEXT_LOST_KHR" _ 0x0507
+		"CONTEXT_LOST_KHR"..0x0507
 	)
 
 	GLenum(
@@ -130,12 +130,12 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 		GLsizei.IN("height", "the number of pixels to read in the y-dimension"),
 		GLenum.IN("format", "the pixel format"),
 		GLenum.IN("type", "the pixel type"),
-		AutoSize("pixels") _ GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
-		PIXEL_PACK_BUFFER _ MultiType(
+		AutoSize("pixels")..GLsizei.IN("bufSize", "the maximum number of bytes to write into {@code data}"),
+		PIXEL_PACK_BUFFER..MultiType(
 			PointerMapping.DATA_SHORT,
 			PointerMapping.DATA_INT,
 			PointerMapping.DATA_FLOAT
-		) _ void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
+		)..void_p.OUT("pixels", "a buffer in which to place the returned pixel data")
 	)
 
 	void(
@@ -144,8 +144,8 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -154,8 +154,8 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 
 	void(
@@ -164,7 +164,7 @@ val KHR_robustness = "KHRRobustness".nativeClassGLES("KHR_robustness", postfix =
 
 		GLuint.IN("program", "the program object"),
 		GLint.IN("location", "the uniform location"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
-		returnValue _ GLfloat_p.OUT("params", "the buffer in which to place the returned data")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of bytes to write to {@code params}"),
+		returnValue..GLfloat_p.OUT("params", "the buffer in which to place the returned data")
 	)
 }

@@ -23,6 +23,6 @@ val ARM_mali_shader_binary = "ARMMaliShaderBinary".nativeClassGLES("ARM_mali_sha
 	IntConstant(
 		"Accepted by the {@code binaryFormat} parameter of ShaderBinary.",
 
-		"MALI_SHADER_BINARY_ARM" _ 0x8F60
+		"MALI_SHADER_BINARY_ARM"..0x8F60
 	)
 }

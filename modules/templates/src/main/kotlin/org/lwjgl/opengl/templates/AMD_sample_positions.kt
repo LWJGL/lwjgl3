@@ -23,7 +23,7 @@ val AMD_sample_positions = "AMDSamplePositions".nativeClassGL("AMD_sample_positi
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFloatv.",
 
-		"SUBSAMPLE_DISTANCE_AMD" _ 0x883F
+		"SUBSAMPLE_DISTANCE_AMD"..0x883F
 	)
 
 	void(
@@ -32,6 +32,6 @@ val AMD_sample_positions = "AMDSamplePositions".nativeClassGL("AMD_sample_positi
 
 		GLenum.IN("pname", ""),
 		GLuint.IN("index", ""),
-		Check(2) _ const _ GLfloat_p.IN("val", "")
+		Check(2)..const..GLfloat_p.IN("val", "")
 	)
 }

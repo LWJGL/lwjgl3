@@ -26,7 +26,7 @@ val ARB_texture_mirrored_repeat = "ARBTextureMirroredRepeat".nativeClassGL("ARB_
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
 		""",
 
-		"MIRRORED_REPEAT_ARB" _ 0x8370
+		"MIRRORED_REPEAT_ARB"..0x8370
 	)
 
 }

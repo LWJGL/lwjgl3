@@ -13,7 +13,7 @@ val APPLE_command_queue_select_compute_units = "APPLECommandQueueSelectComputeUn
 	IntConstant(
 		"",
 
-		"QUEUE_NUM_COMPUTE_UNITS_APPLE" _ 0x10000014
+		"QUEUE_NUM_COMPUTE_UNITS_APPLE"..0x10000014
 	)
 
 

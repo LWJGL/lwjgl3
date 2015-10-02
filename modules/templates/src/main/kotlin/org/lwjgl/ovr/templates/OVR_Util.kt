@@ -23,29 +23,29 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 		    "With a clipping range that is (0 to w)."
 		)}
 		""",
-		"Projection_None" _ 0x00
+		"Projection_None"..0x00
 	)
-	IntConstant("Enable if using right-handed transformations in your application.", "Projection_RightHanded" _ 0x01)
+	IntConstant("Enable if using right-handed transformations in your application.", "Projection_RightHanded"..0x01)
 	IntConstant(
 		"""
 		After the projection transform is applied, far values stored in the depth buffer will be less than closer depth values. NOTE: Enable only if the
 		application is using a floating-point depth buffer for proper precision.
 		""",
-		"Projection_FarLessThanNear" _ 0x02
+		"Projection_FarLessThanNear"..0x02
 	)
 	IntConstant(
 		"""
 		When this flag is used, the zfar value pushed into #Matrix4f_Projection() will be ignored NOTE: Enable only if #Projection_FarLessThanNear is also
 		enabled where the far clipping plane will be pushed to infinity.
 		""",
-		"Projection_FarClipAtInfinity" _ 0x04
+		"Projection_FarClipAtInfinity"..0x04
 	)
 	IntConstant(
 		"""
 		Enable if the application is rendering with OpenGL and expects a projection matrix with a clipping range of (-w to w). Ignore this flag if your
 		application already handles the conversion from D3D range (0 to w) to OpenGL.
 		""",
-		"Projection_ClipRangeOpenGL" _ 0x08
+		"Projection_ClipRangeOpenGL"..0x08
 	)
 	val ProjectionModifiers = "#Projection_None #Projection_RightHanded #Projection_FarLessThanNear #Projection_FarClipAtInfinity #Projection_ClipRangeOpenGL"
 
@@ -97,14 +97,14 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 	    "Computes offset eye poses based on {@code headPose} returned by ##OVRTrackingState.",
 
 	    ovrPosef.IN("headPose", "indicates the HMD position and orientation to use for the calculation"),
-	    Check(2) _ StructBuffer _ const _ ovrVector3f_p.IN(
+	    Check(2)..StructBuffer..const..ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 	    ),
-		Check(2) _ StructBuffer _ ovrPosef_p.OUT(
+		Check(2)..StructBuffer..ovrPosef_p.OUT(
 			"outEyePoses",
 			"""
 			if {@code outEyePoses} are used for rendering, they should be passed to OVR#_SubmitFrame() in ##OVRLayerEyeFov{@code ::RenderPose} or
@@ -125,14 +125,14 @@ val OVR_Util = "OVRUtil".nativeClass(packageName = OVR_PACKAGE, prefixMethod = "
 
 	    ovrHmd.IN("hmd", "an {@code ovrHmd} previously returned by OVR#_Create()"),
 	    unsigned_int.IN("frameIndex", "the targeted frame index, or 0 to refer to one frame after the last time OVR#_SubmitFrame() was called"),
-	    Check(2) _ StructBuffer _ const _ ovrVector3f_p.IN(
+	    Check(2)..StructBuffer..const..ovrVector3f_p.IN(
 		    "hmdToEyeViewOffset",
 		    """
 		    can be ##OVREyeRenderDesc{@code .HmdToEyeViewOffset} returned from OVR#_GetRenderDesc(). For monoscopic rendering, use a vector that is the
 		    average of the two vectors for both eyes.
 		    """
 	    ),
-	    Check(2) _ StructBuffer _ ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
-	    nullable _ ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
+	    Check(2)..StructBuffer..ovrPosef_p.OUT("outEyePoses", "the predicted eye poses"),
+	    nullable..ovrTrackingState_p.OUT("outHmdTrackingState", "the predicted ##OVRTrackingState. May be $NULL, in which case it is ignored.")
 	)
 }

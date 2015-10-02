@@ -22,14 +22,14 @@ val QCOM_alpha_test = "QCOMAlphaTest".nativeClassGLES("QCOM_alpha_test", postfix
 		GetFloatv.
 		""",
 
-		"ALPHA_TEST_QCOM" _ 0x0BC0
+		"ALPHA_TEST_QCOM"..0x0BC0
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"ALPHA_TEST_FUNC_QCOM" _ 0x0BC1,
-		"ALPHA_TEST_REF_QCOM" _ 0x0BC2
+		"ALPHA_TEST_FUNC_QCOM"..0x0BC1,
+		"ALPHA_TEST_REF_QCOM"..0x0BC2
 	)
 
 	void(

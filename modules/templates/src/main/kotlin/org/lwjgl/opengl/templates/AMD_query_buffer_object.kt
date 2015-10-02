@@ -32,7 +32,7 @@ val AMD_query_buffer_object = "AMDQueryBufferObject".nativeClassGL("AMD_query_bu
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetQueryObjectiv, GetQueryObjectuiv, GetQueryObjecti64v and GetQueryObjectui64v.",
 
-		"QUERY_RESULT_NO_WAIT_AMD" _ 0x9194
+		"QUERY_RESULT_NO_WAIT_AMD"..0x9194
 	)
 
 	IntConstant(
@@ -41,12 +41,12 @@ val AMD_query_buffer_object = "AMDQueryBufferObject".nativeClassGL("AMD_query_bu
 		GetBufferParameteriv and GetBufferPointerv.
 		""",
 
-		"QUERY_BUFFER_AMD" _ 0x9192
+		"QUERY_BUFFER_AMD"..0x9192
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"QUERY_BUFFER_BINDING_AMD" _ 0x9193
+		"QUERY_BUFFER_BINDING_AMD"..0x9193
 	)
 }

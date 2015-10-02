@@ -18,11 +18,11 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 	val Modes = IntConstant(
 		"The {@code mode} argument to #dlopen() contains one of the following.",
 
-		"RTLD_LAZY" _ 0x00001,
-		"RTLD_NOW" _ 0x00002,
-		"RTLD_BINDING_MASK" _ 0x3,
-		"RTLD_NOLOAD" _ 0x00004,
-		"RTLD_DEEPBIND" _ 0x00008
+		"RTLD_LAZY"..0x00001,
+		"RTLD_NOW"..0x00002,
+		"RTLD_BINDING_MASK"..0x3,
+		"RTLD_NOLOAD"..0x00004,
+		"RTLD_DEEPBIND"..0x00008
 	).javaDocLinks + " #RTLD_GLOBAL #RTLD_LOCAL #RTLD_NODELETE"
 
 	IntConstant(
@@ -31,7 +31,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		if the object were linked directly into the program.
 		""",
 
-		"RTLD_GLOBAL" _ 0x00100
+		"RTLD_GLOBAL"..0x00100
 	)
 
 	IntConstant(
@@ -40,13 +40,13 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		to zero.
 		""",
 
-		"RTLD_LOCAL" _ 0
+		"RTLD_LOCAL"..0
 	)
 
 	IntConstant(
 		"Do not delete object when closed.",
 
-		"RTLD_NODELETE" _ 0x01000
+		"RTLD_NODELETE"..0x01000
 	)
 
 	voidptr(
@@ -56,7 +56,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		{@code filename} is $NULL, then the returned handle is for the main program.
 		""",
 
-		nullable _ const _ charASCII_p.IN("filename", "the name of the dynamic library to open, or $NULL"),
+		nullable..const..charASCII_p.IN("filename", "the name of the dynamic library to open, or $NULL"),
 		int.IN("mode", "a bitfield", Modes, LinkMode.BITFIELD)
 	)
 
@@ -77,7 +77,7 @@ val dlfcn = "DynamicLinkLoader".nativeClass(LINUX_PACKAGE) {
 		""",
 
 		voidptr.IN("handle", "the dynamic library handle"),
-		const _ charASCII_p.IN("name", "the symbol name")
+		const..charASCII_p.IN("name", "the symbol name")
 	)
 
 	int(

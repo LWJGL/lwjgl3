@@ -19,31 +19,31 @@ val NV_float_buffer = "NVFloatBuffer".nativeClassGL("NV_float_buffer", postfix =
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage2D and CopyTexImage2D.",
 
-		"FLOAT_R_NV" _ 0x8880,
-		"FLOAT_RG_NV" _ 0x8881,
-		"FLOAT_RGB_NV" _ 0x8882,
-		"FLOAT_RGBA_NV" _ 0x8883,
-		"FLOAT_R16_NV" _ 0x8884,
-		"FLOAT_R32_NV" _ 0x8885,
-		"FLOAT_RG16_NV" _ 0x8886,
-		"FLOAT_RG32_NV" _ 0x8887,
-		"FLOAT_RGB16_NV" _ 0x8888,
-		"FLOAT_RGB32_NV" _ 0x8889,
-		"FLOAT_RGBA16_NV" _ 0x888A,
-		"FLOAT_RGBA32_NV" _ 0x888B
+		"FLOAT_R_NV"..0x8880,
+		"FLOAT_RG_NV"..0x8881,
+		"FLOAT_RGB_NV"..0x8882,
+		"FLOAT_RGBA_NV"..0x8883,
+		"FLOAT_R16_NV"..0x8884,
+		"FLOAT_R32_NV"..0x8885,
+		"FLOAT_RG16_NV"..0x8886,
+		"FLOAT_RG32_NV"..0x8887,
+		"FLOAT_RGB16_NV"..0x8888,
+		"FLOAT_RGB32_NV"..0x8889,
+		"FLOAT_RGBA16_NV"..0x888A,
+		"FLOAT_RGBA32_NV"..0x888B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
-		"TEXTURE_FLOAT_COMPONENTS_NV" _ 0x888C
+		"TEXTURE_FLOAT_COMPONENTS_NV"..0x888C
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"FLOAT_CLEAR_COLOR_VALUE_NV" _ 0x888D,
-		"FLOAT_RGBA_MODE_NV" _ 0x888E
+		"FLOAT_CLEAR_COLOR_VALUE_NV"..0x888D,
+		"FLOAT_RGBA_MODE_NV"..0x888E
 	)
 }
 
@@ -61,11 +61,11 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
 		{@code pfAttribFList} arrays of wglChoosePixelFormatARB.
 		""",
 
-		"FLOAT_COMPONENTS_NV" _ 0x20B0,
-		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_R_NV" _ 0x20B1,
-		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RG_NV" _ 0x20B2,
-		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGB_NV" _ 0x20B3,
-		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGBA_NV" _ 0x20B4
+		"FLOAT_COMPONENTS_NV"..0x20B0,
+		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_R_NV"..0x20B1,
+		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RG_NV"..0x20B2,
+		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGB_NV"..0x20B3,
+		"BIND_TO_TEXTURE_RECTANGLE_FLOAT_RGBA_NV"..0x20B4
 	)
 
 	IntConstant(
@@ -74,10 +74,10 @@ val WGL_NV_float_buffer = "WGLNVFloatBuffer".nativeClassWGL("WGL_NV_float_buffer
 		{@code iAttribute} is TEXTURE_FORMAT_ARB.
 		""",
 
-		"TEXTURE_FLOAT_R_NV" _ 0x20B5,
-		"TEXTURE_FLOAT_RG_NV" _ 0x20B6,
-		"TEXTURE_FLOAT_RGB_NV" _ 0x20B7,
-		"TEXTURE_FLOAT_RGBA_NV" _ 0x20B8
+		"TEXTURE_FLOAT_R_NV"..0x20B5,
+		"TEXTURE_FLOAT_RG_NV"..0x20B6,
+		"TEXTURE_FLOAT_RGB_NV"..0x20B7,
+		"TEXTURE_FLOAT_RGBA_NV"..0x20B8
 	)
 }
 
@@ -92,6 +92,6 @@ val GLX_NV_float_buffer = "GLXNVFloatBuffer".nativeClassWGL("GLX_NV_float_buffer
 	IntConstant(
 		"Accepted in the {@code value} array of glXGetFBConfigAttrib (and glXGetFBConfigAttribSGIX).",
 
-		"FLOAT_COMPONENTS_NV" _ 0x20B0
+		"FLOAT_COMPONENTS_NV"..0x20B0
 	)
 }

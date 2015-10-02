@@ -20,6 +20,6 @@ val TIZEN_image_native_buffer = "TIZENImageNativeBuffer".nativeClassEGL("TIZEN_i
 	IntConstant(
 		"",
 
-		"NATIVE_BUFFER_TIZEN" _ 0x32A0
+		"NATIVE_BUFFER_TIZEN"..0x32A0
 	)
 }

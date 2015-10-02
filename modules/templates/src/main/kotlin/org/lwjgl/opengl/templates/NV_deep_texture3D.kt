@@ -22,7 +22,7 @@ val NV_deep_texture3D = "NVDeepTexture3D".nativeClassGL("NV_deep_texture3D", pos
 		Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.
 		""",
 
-		"MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV" _ 0x90D0,
-		"MAX_DEEP_3D_TEXTURE_DEPTH_NV" _ 0x90D1
+		"MAX_DEEP_3D_TEXTURE_WIDTH_HEIGHT_NV"..0x90D0,
+		"MAX_DEEP_3D_TEXTURE_DEPTH_NV"..0x90D1
 	)
 }

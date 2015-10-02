@@ -35,21 +35,21 @@ val ARB_color_buffer_float = "ARBColorBufferFloat".nativeClassGL("ARB_color_buff
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"RGBA_FLOAT_MODE_ARB" _ 0x8820
+		"RGBA_FLOAT_MODE_ARB"..0x8820
 	)
 
 	val Targets = IntConstant(
 		"Accepted by the {@code target} parameter of ClampColorARB and the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"CLAMP_VERTEX_COLOR_ARB" _ 0x891A,
-		"CLAMP_FRAGMENT_COLOR_ARB" _ 0x891B,
-		"CLAMP_READ_COLOR_ARB" _ 0x891C
+		"CLAMP_VERTEX_COLOR_ARB"..0x891A,
+		"CLAMP_FRAGMENT_COLOR_ARB"..0x891B,
+		"CLAMP_READ_COLOR_ARB"..0x891C
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted by the {@code clamp} parameter of ClampColorARB.",
 
-		"FIXED_ONLY_ARB" _ 0x891D
+		"FIXED_ONLY_ARB"..0x891D
 	)
 
 	void(

@@ -20,15 +20,15 @@ val QCOM_binning_control = "QCOMBinningControl".nativeClassGLES("QCOM_binning_co
 	IntConstant(
 		"Accepted by the {@code target} parameter of Hint.",
 
-		"BINNING_CONTROL_HINT_QCOM" _ 0x8FB0
+		"BINNING_CONTROL_HINT_QCOM"..0x8FB0
 	)
 
 	IntConstant(
 		"Accepted by the {@code hint} parameter of Hint.",
 
-		"CPU_OPTIMIZED_QCOM" _ 0x8FB1,
-		"GPU_OPTIMIZED_QCOM" _ 0x8FB2,
-		"RENDER_DIRECT_TO_FRAMEBUFFER_QCOM" _ 0x8FB3,
-		"DONT_CARE" _ 0x1100
+		"CPU_OPTIMIZED_QCOM"..0x8FB1,
+		"GPU_OPTIMIZED_QCOM"..0x8FB2,
+		"RENDER_DIRECT_TO_FRAMEBUFFER_QCOM"..0x8FB3,
+		"DONT_CARE"..0x1100
 	)
 }

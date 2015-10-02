@@ -18,6 +18,6 @@ val OES_depth32 = "OESDepth32".nativeClassGLES("OES_depth32", postfix = OES) {
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of RenderbufferStorageOES.",
 
-		"DEPTH_COMPONENT32_OES" _ 0x81A7
+		"DEPTH_COMPONENT32_OES"..0x81A7
 	)
 }

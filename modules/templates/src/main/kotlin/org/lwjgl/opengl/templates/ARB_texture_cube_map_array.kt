@@ -33,27 +33,27 @@ val ARB_texture_cube_map_array = "ARBTextureCubeMapArray".nativeClassGL("ARB_tex
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexParameteri, TexParameteriv, TexParameterf, TexParameterfv, BindTexture, and GenerateMipmap.",
 
-		"TEXTURE_CUBE_MAP_ARRAY_ARB" _ 0x9009
+		"TEXTURE_CUBE_MAP_ARRAY_ARB"..0x9009
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv and GetFloatv.",
 
-		"TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB" _ 0x900A
+		"TEXTURE_BINDING_CUBE_MAP_ARRAY_ARB"..0x900A
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of TexImage3D, TexSubImage3D, CompressedTeximage3D, CompressedTexSubImage3D and CopyTexSubImage3D.",
 
-		"PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB" _ 0x900B
+		"PROXY_TEXTURE_CUBE_MAP_ARRAY_ARB"..0x900B
 	)
 
 	IntConstant(
 		"TEXTURE_CUBE_MAP_ARRAY_ARB Returned by the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_CUBE_MAP_ARRAY_ARB" _ 0x900C,
-		"SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB" _ 0x900D,
-		"INT_SAMPLER_CUBE_MAP_ARRAY_ARB" _ 0x900E,
-		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB" _ 0x900F
+		"SAMPLER_CUBE_MAP_ARRAY_ARB"..0x900C,
+		"SAMPLER_CUBE_MAP_ARRAY_SHADOW_ARB"..0x900D,
+		"INT_SAMPLER_CUBE_MAP_ARRAY_ARB"..0x900E,
+		"UNSIGNED_INT_SAMPLER_CUBE_MAP_ARRAY_ARB"..0x900F
 	)
 }

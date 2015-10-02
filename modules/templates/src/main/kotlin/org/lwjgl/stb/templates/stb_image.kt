@@ -97,16 +97,16 @@ stbi_is_hdr(char *filename);""")}
 	IntConstant(
 		"Default component count, used as an argument to {@code req_comp}.",
 
-		"default" _ 0
+		"default"..0
 	)
 
 	IntConstant(
 		"Component count.",
 
-		"grey" _ 1,
-		"grey_alpha" _ 2,
-		"rgb" _ 3,
-		"rgb_alpha" _ 4
+		"grey"..1,
+		"grey_alpha"..2,
+		"rgb"..3,
+		"rgb_alpha"..4
 	)
 
 	stbi_uc_p(
@@ -134,10 +134,10 @@ N=\#comp     components
 		Paletted PNG, BMP, GIF, and PIC images are automatically depalettized.
 		""",
 
-		const _ charASCII_p.IN("filename", "the file name"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..charASCII_p.IN("filename", "the file name"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -145,11 +145,11 @@ N=\#comp     components
 		"load_from_memory",
 		"In-memory version of #load().",
 
-		const _ stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
-		AutoSize("buffer") _ int.IN("len", "the buffer length, in bytes"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
+		AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -165,11 +165,11 @@ N=\#comp     components
 		end).
 		""",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable _ void_p.IN("user", "a pointer to user data"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+		nullable..void_p.IN("user", "a pointer to user data"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -177,10 +177,10 @@ N=\#comp     components
 		"loadf",
 		"Floating-point version of #load().",
 
-		const _ charASCII_p.IN("filename", "the file name"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..charASCII_p.IN("filename", "the file name"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -188,11 +188,11 @@ N=\#comp     components
 		"loadf_from_memory",
 		"Floating-point version of #load_from_memory().",
 
-		const _ stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
-		AutoSize("buffer") _ int.IN("len", "the buffer length, in bytes"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..stbi_uc_p.IN("buffer", "the buffer from which to load the image data"),
+		AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -200,11 +200,11 @@ N=\#comp     components
 		"loadf_from_callbacks",
 		"Floating-point version of #load_from_callbacks().",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable _ void_p.IN("user", "a pointer to user data"),
-		Check(1) _ autoSizeResult _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ autoSizeResult _ int_p.OUT("comp", "outputs number of components in image"),
+		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+		nullable..void_p.IN("user", "a pointer to user data"),
+		Check(1)..autoSizeResult..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..autoSizeResult..int_p.OUT("comp", "outputs number of components in image"),
 		int.IN("req_comp", "0 or 1..4 to force that many components per pixel", "0 1 2 3 4")
 	)
 
@@ -240,7 +240,7 @@ N=\#comp     components
 		"is_hdr",
 		"Checks if the specified file contains an HDR image.",
 
-		const _ charASCII_p.IN("filename", "the file name"),
+		const..charASCII_p.IN("filename", "the file name"),
 
 		returnDoc = "1 if the image is HDR, 0 otherwise"
 	)
@@ -249,19 +249,19 @@ N=\#comp     components
 		"is_hdr_from_memory",
 		"In-memory version of #is_hdr().",
 
-		const _ stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
-		AutoSize("buffer") _ int.IN("len", "the buffer length, in bytes")
+		const..stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
+		AutoSize("buffer")..int.IN("len", "the buffer length, in bytes")
 	)
 
 	int(
 		"is_hdr_from_callbacks",
 		"Callback version of #is_hdr().",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable _ void_p.IN("user", "a pointer to user data")
+		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+		nullable..void_p.IN("user", "a pointer to user data")
 	)
 
-	(const _ charASCII_p)(
+	(const..charASCII_p)(
 		"failure_reason",
 		"Returns a brief reason for failure."
 	)
@@ -277,10 +277,10 @@ N=\#comp     components
 		"info",
 		"Returns image dimensions &amp; components without fully decoding the image.",
 
-		const _ charASCII_p.IN("filename", "the file name"),
-		Check(1) _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ int_p.OUT("comp", "outputs number of components in image"),
+		const..charASCII_p.IN("filename", "the file name"),
+		Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..int_p.OUT("comp", "outputs number of components in image"),
 
 		returnDoc = "1 on success, 0 on failure"
 	)
@@ -289,22 +289,22 @@ N=\#comp     components
 		"info_from_memory",
 		"In-memory version of #info().",
 
-		const _ stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
-		AutoSize("buffer") _ int.IN("len", "the buffer length, in bytes"),
-		Check(1) _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ int_p.OUT("comp", "outputs number of components in image")
+		const..stbi_uc_p.IN("buffer", "the buffer from which to read the image data"),
+		AutoSize("buffer")..int.IN("len", "the buffer length, in bytes"),
+		Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..int_p.OUT("comp", "outputs number of components in image")
 	)
 
 	int(
 		"info_from_callbacks",
 		"Callback version of #info().",
 
-		const _ stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
-		nullable _ void_p.IN("user", "a pointer to user data"),
-		Check(1) _ int_p.OUT("x", "outputs the image width in pixels"),
-		Check(1) _ int_p.OUT("y", "outputs the image height in pixels"),
-		Check(1) _ int_p.OUT("comp", "outputs number of components in image")
+		const..stbi_io_callbacks_p.IN("clbk", "an ##STBIIOCallbacks struct"),
+		nullable..void_p.IN("user", "a pointer to user data"),
+		Check(1)..int_p.OUT("x", "outputs the image width in pixels"),
+		Check(1)..int_p.OUT("y", "outputs the image height in pixels"),
+		Check(1)..int_p.OUT("comp", "outputs number of components in image")
 	)
 
 	void(
@@ -335,20 +335,20 @@ N=\#comp     components
 		"zlib_decode_malloc_guesssize",
 		"ZLIB client - used by PNG, available for other purposes",
 
-		const _ char_p.IN("buffer", ""),
-		AutoSize("buffer") _ int.IN("len", ""),
+		const..char_p.IN("buffer", ""),
+		AutoSize("buffer")..int.IN("len", ""),
 		int.IN("initial_size", ""),
-		autoSizeResult _ int_p.OUT("outlen", "")
+		autoSizeResult..int_p.OUT("outlen", "")
 	)
 
 	char_p(
 		"zlib_decode_malloc_guesssize_headerflag",
 		"ZLIB client - used by PNG, available for other purposes",
 
-		const _ char_p.IN("buffer", ""),
-		AutoSize("buffer") _ int.IN("len", ""),
+		const..char_p.IN("buffer", ""),
+		AutoSize("buffer")..int.IN("len", ""),
 		int.IN("initial_size", ""),
-		autoSizeResult _ int_p.OUT("outlen", ""),
+		autoSizeResult..int_p.OUT("outlen", ""),
 		int.IN("parse_header", "")
 	)
 
@@ -356,9 +356,9 @@ N=\#comp     components
 		"zlib_decode_malloc",
 		"ZLIB client - used by PNG, available for other purposes",
 
-		const _ char_p.IN("buffer", ""),
-		AutoSize("buffer") _ int.IN("len", ""),
-		autoSizeResult _ int_p.OUT("outlen", "")
+		const..char_p.IN("buffer", ""),
+		AutoSize("buffer")..int.IN("len", ""),
+		autoSizeResult..int_p.OUT("outlen", "")
 	)
 
 	int(
@@ -366,18 +366,18 @@ N=\#comp     components
 		"ZLIB client - used by PNG, available for other purposes",
 
 		char_p.OUT("obuffer", ""),
-		AutoSize("obuffer") _ int.IN("olen", ""),
-		const _ char_p.IN("ibuffer", ""),
-		AutoSize("ibuffer") _ int.IN("ilen", "")
+		AutoSize("obuffer")..int.IN("olen", ""),
+		const..char_p.IN("ibuffer", ""),
+		AutoSize("ibuffer")..int.IN("ilen", "")
 	)
 
 	char_p(
 		"zlib_decode_noheader_malloc",
 		"ZLIB client - used by PNG, available for other purposes",
 
-		const _ char_p.IN("buffer", ""),
-		AutoSize("buffer") _ int.IN("len", ""),
-		autoSizeResult _ int_p.OUT("outlen", "")
+		const..char_p.IN("buffer", ""),
+		AutoSize("buffer")..int.IN("len", ""),
+		autoSizeResult..int_p.OUT("outlen", "")
 	)
 
 	int(
@@ -385,8 +385,8 @@ N=\#comp     components
 		"ZLIB client - used by PNG, available for other purposes",
 
 		char_p.OUT("obuffer", ""),
-		AutoSize("obuffer") _ int.IN("olen", ""),
-		const _ char_p.IN("ibuffer", ""),
-		AutoSize("ibuffer") _ int.IN("ilen", "")
+		AutoSize("obuffer")..int.IN("olen", ""),
+		const..char_p.IN("ibuffer", ""),
+		AutoSize("ibuffer")..int.IN("ilen", "")
 	)
 }

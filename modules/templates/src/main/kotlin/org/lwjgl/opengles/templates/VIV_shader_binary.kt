@@ -18,6 +18,6 @@ val VIV_shader_binary = "VIVShaderBinary".nativeClassGLES("VIV_shader_binary", p
 	IntConstant(
 		"Accepted by the {@code binaryformat} parameter of ShaderBinary.",
 
-		"SHADER_BINARY_VIV" _ 0x8FC4
+		"SHADER_BINARY_VIV"..0x8FC4
 	)
 }

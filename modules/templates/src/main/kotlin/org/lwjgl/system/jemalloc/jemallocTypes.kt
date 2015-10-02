@@ -13,7 +13,7 @@ val je_malloc_message_cb = "je_malloc_message_cb".callback(
 	"Will be called by the JEmalloc##je_malloc_usable_size() method.",
 
 	void_p.IN("cbopaque", "the opaque pointer passed to JEmalloc##je_malloc_usable_size()"),
-	nullTerminated _ const _ charASCII_p.IN("s", "the message"),
+	nullTerminated..const..charASCII_p.IN("s", "the message"),
 	samConstructor = "JEmalloc"
 ) {
 	documentation = "Instances of this interface may be passed to the JEmalloc##je_malloc_usable_size() method."

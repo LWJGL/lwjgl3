@@ -27,7 +27,7 @@ val NV_copy_depth_to_color = "NVCopyDepthToColor".nativeClassGL("NV_copy_depth_t
 		Accepted by the {@code type} parameter of CopyPixels.
 		""",
 
-		"DEPTH_STENCIL_TO_RGBA_NV" _ 0x886E,
-		"DEPTH_STENCIL_TO_BGRA_NV" _ 0x886F
+		"DEPTH_STENCIL_TO_RGBA_NV"..0x886E,
+		"DEPTH_STENCIL_TO_BGRA_NV"..0x886F
 	)
 }

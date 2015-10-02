@@ -45,13 +45,13 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 	IntConstant(
 		"No. of supported Shading Language Versions. Accepted by the {@code pname} parameter of GetIntegerv.",
 
-		"NUM_SHADING_LANGUAGE_VERSIONS" _ 0x82E9
+		"NUM_SHADING_LANGUAGE_VERSIONS"..0x82E9
 	)
 
 	IntConstant(
 		"Vertex attrib array has unconverted doubles. Accepted by the {@code pname} parameter of GetVertexAttribiv.",
 
-		"VERTEX_ATTRIB_ARRAY_LONG" _ 0x874E
+		"VERTEX_ATTRIB_ARRAY_LONG"..0x874E
 	)
 
 	// ARB_ES3_compatibility
@@ -59,40 +59,40 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
 
-		"COMPRESSED_RGB8_ETC2" _ 0x9274,
-		"COMPRESSED_SRGB8_ETC2" _ 0x9275,
-		"COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2" _ 0x9276,
-		"COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2" _ 0x9277,
-		"COMPRESSED_RGBA8_ETC2_EAC" _ 0x9278,
-		"COMPRESSED_SRGB8_ALPHA8_ETC2_EAC" _ 0x9279,
-		"COMPRESSED_R11_EAC" _ 0x9270,
-		"COMPRESSED_SIGNED_R11_EAC" _ 0x9271,
-		"COMPRESSED_RG11_EAC" _ 0x9272,
-		"COMPRESSED_SIGNED_RG11_EAC" _ 0x9273
+		"COMPRESSED_RGB8_ETC2"..0x9274,
+		"COMPRESSED_SRGB8_ETC2"..0x9275,
+		"COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2"..0x9276,
+		"COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2"..0x9277,
+		"COMPRESSED_RGBA8_ETC2_EAC"..0x9278,
+		"COMPRESSED_SRGB8_ALPHA8_ETC2_EAC"..0x9279,
+		"COMPRESSED_R11_EAC"..0x9270,
+		"COMPRESSED_SIGNED_R11_EAC"..0x9271,
+		"COMPRESSED_RG11_EAC"..0x9272,
+		"COMPRESSED_SIGNED_RG11_EAC"..0x9273
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of Enable and Disable.",
 
-		"PRIMITIVE_RESTART_FIXED_INDEX" _ 0x8D69
+		"PRIMITIVE_RESTART_FIXED_INDEX"..0x8D69
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of BeginQuery, EndQuery, GetQueryIndexediv and GetQueryiv.",
 
-		"ANY_SAMPLES_PASSED_CONSERVATIVE" _ 0x8D6A
+		"ANY_SAMPLES_PASSED_CONSERVATIVE"..0x8D6A
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of the GetInteger* functions.",
 
-		"MAX_ELEMENT_INDEX" _ 0x8D6B
+		"MAX_ELEMENT_INDEX"..0x8D6B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
 
-		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
+		"TEXTURE_IMMUTABLE_LEVELS"..0x82DF
 	)
 
 	// ARB_clear_buffer_object
@@ -105,9 +105,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLenum.IN("internalformat", "the internal format with which the data will be stored in the buffer object"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		nullable _ MultiType(
+		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("data",
+		)..const..void_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -127,9 +127,9 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 		GLsizeiptr.IN("size", "the size, in basic machine units of the range of the data store to fill"),
 		GLenum.IN("format", "the format of the data in memory addressed by {@code data}", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the type of the data in memory addressed by {@code data}", PIXEL_DATA_TYPES),
-		nullable _ MultiType(
+		nullable..MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ const _ void_p.IN("data",
+		)..const..void_p.IN("data",
 				"""
 		    buffer containing the data to be used as the source of the constant fill value.
 				The elements of data are converted by the GL into the format specified by internalformat,
@@ -144,64 +144,64 @@ val GL43 = "GL43".nativeClassGL("GL43") {
 	IntConstant(
 		"Accepted by the {@code type} parameter of CreateShader and returned in the {@code params} parameter by GetShaderiv.",
 
-		"COMPUTE_SHADER" _ 0x91B9
+		"COMPUTE_SHADER"..0x91B9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_COMPUTE_UNIFORM_BLOCKS" _ 0x91BB,
-		"MAX_COMPUTE_TEXTURE_IMAGE_UNITS" _ 0x91BC,
-		"MAX_COMPUTE_IMAGE_UNIFORMS" _ 0x91BD,
-		"MAX_COMPUTE_SHARED_MEMORY_SIZE" _ 0x8262,
-		"MAX_COMPUTE_UNIFORM_COMPONENTS" _ 0x8263,
-		"MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS" _ 0x8264,
-		"MAX_COMPUTE_ATOMIC_COUNTERS" _ 0x8265,
-		"MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS" _ 0x8266,
-		"MAX_COMPUTE_WORK_GROUP_INVOCATIONS" _ 0x90EB
+		"MAX_COMPUTE_UNIFORM_BLOCKS"..0x91BB,
+		"MAX_COMPUTE_TEXTURE_IMAGE_UNITS"..0x91BC,
+		"MAX_COMPUTE_IMAGE_UNIFORMS"..0x91BD,
+		"MAX_COMPUTE_SHARED_MEMORY_SIZE"..0x8262,
+		"MAX_COMPUTE_UNIFORM_COMPONENTS"..0x8263,
+		"MAX_COMPUTE_ATOMIC_COUNTER_BUFFERS"..0x8264,
+		"MAX_COMPUTE_ATOMIC_COUNTERS"..0x8265,
+		"MAX_COMBINED_COMPUTE_UNIFORM_COMPONENTS"..0x8266,
+		"MAX_COMPUTE_WORK_GROUP_INVOCATIONS"..0x90EB
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetFloati_v, GetDoublei_v and GetInteger64i_v.",
 
-		"MAX_COMPUTE_WORK_GROUP_COUNT" _ 0x91BE,
-		"MAX_COMPUTE_WORK_GROUP_SIZE" _ 0x91BF
+		"MAX_COMPUTE_WORK_GROUP_COUNT"..0x91BE,
+		"MAX_COMPUTE_WORK_GROUP_SIZE"..0x91BF
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramiv.",
 
-		"COMPUTE_WORK_GROUP_SIZE" _ 0x8267
+		"COMPUTE_WORK_GROUP_SIZE"..0x8267
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveUniformBlockiv.",
 
-		"UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER" _ 0x90EC
+		"UNIFORM_BLOCK_REFERENCED_BY_COMPUTE_SHADER"..0x90EC
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetActiveAtomicCounterBufferiv.",
 
-		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER" _ 0x90ED
+		"ATOMIC_COUNTER_BUFFER_REFERENCED_BY_COMPUTE_SHADER"..0x90ED
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
-		"DISPATCH_INDIRECT_BUFFER" _ 0x90EE
+		"DISPATCH_INDIRECT_BUFFER"..0x90EE
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"DISPATCH_INDIRECT_BUFFER_BINDING" _ 0x90EF
+		"DISPATCH_INDIRECT_BUFFER_BINDING"..0x90EF
 	)
 
 	IntConstant(
 		"Accepted by the {@code stages} parameter of UseProgramStages.",
 
-		"COMPUTE_SHADER_BIT" _ 0x00000020
+		"COMPUTE_SHADER_BIT"..0x00000020
 	)
 
 
@@ -235,7 +235,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		""")}
 		""",
 
-		DISPATCH_INDIRECT_BUFFER _ GLintptr.IN(
+		DISPATCH_INDIRECT_BUFFER..GLintptr.IN(
 			"indirect",
 			"""
 			the offset into the buffer object currently bound to the #DISPATCH_INDIRECT_BUFFER buffer target at which the dispatch parameters are
@@ -272,33 +272,33 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 	IntConstant(
 		"Tokens accepted by the {@code target} parameters of Enable, Disable, and  IsEnabled.",
 
-		"DEBUG_OUTPUT" _ 0x92E0,
-		"DEBUG_OUTPUT_SYNCHRONOUS" _ 0x8242
+		"DEBUG_OUTPUT"..0x92E0,
+		"DEBUG_OUTPUT_SYNCHRONOUS"..0x8242
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv when {@code pname} is CONTEXT_FLAGS.",
 
-		"CONTEXT_FLAG_DEBUG_BIT" _ 0x00000002
+		"CONTEXT_FLAG_DEBUG_BIT"..0x00000002
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv,  GetFloatv, GetDoublev and GetInteger64v.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES" _ 0x9145,
-		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH" _ 0x8243,
-		"MAX_DEBUG_GROUP_STACK_DEPTH" _ 0x826C,
-		"DEBUG_GROUP_STACK_DEPTH" _ 0x826D,
-		"MAX_LABEL_LENGTH" _ 0x82E8
+		"MAX_DEBUG_MESSAGE_LENGTH"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES"..0x9144,
+		"DEBUG_LOGGED_MESSAGES"..0x9145,
+		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH"..0x8243,
+		"MAX_DEBUG_GROUP_STACK_DEPTH"..0x826C,
+		"DEBUG_GROUP_STACK_DEPTH"..0x826D,
+		"MAX_LABEL_LENGTH"..0x82E8
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
-		"DEBUG_CALLBACK_FUNCTION" _ 0x8244,
-		"DEBUG_CALLBACK_USER_PARAM" _ 0x8245
+		"DEBUG_CALLBACK_FUNCTION"..0x8244,
+		"DEBUG_CALLBACK_USER_PARAM"..0x8245
 	)
 
 	val DebugSources = IntConstant(
@@ -307,12 +307,12 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SOURCE_API" _ 0x8246,
-		"DEBUG_SOURCE_WINDOW_SYSTEM" _ 0x8247,
-		"DEBUG_SOURCE_SHADER_COMPILER" _ 0x8248,
-		"DEBUG_SOURCE_THIRD_PARTY" _ 0x8249,
-		"DEBUG_SOURCE_APPLICATION" _ 0x824A,
-		"DEBUG_SOURCE_OTHER" _ 0x824B
+		"DEBUG_SOURCE_API"..0x8246,
+		"DEBUG_SOURCE_WINDOW_SYSTEM"..0x8247,
+		"DEBUG_SOURCE_SHADER_COMPILER"..0x8248,
+		"DEBUG_SOURCE_THIRD_PARTY"..0x8249,
+		"DEBUG_SOURCE_APPLICATION"..0x824A,
+		"DEBUG_SOURCE_OTHER"..0x824B
 	).javaDocLinks
 
 	val DebugTypes = IntConstant(
@@ -321,13 +321,13 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_ERROR" _ 0x824C,
-		"DEBUG_TYPE_DEPRECATED_BEHAVIOR" _ 0x824D,
-		"DEBUG_TYPE_UNDEFINED_BEHAVIOR" _ 0x824E,
-		"DEBUG_TYPE_PORTABILITY" _ 0x824F,
-		"DEBUG_TYPE_PERFORMANCE" _ 0x8250,
-		"DEBUG_TYPE_OTHER" _ 0x8251,
-		"DEBUG_TYPE_MARKER" _ 0x8268
+		"DEBUG_TYPE_ERROR"..0x824C,
+		"DEBUG_TYPE_DEPRECATED_BEHAVIOR"..0x824D,
+		"DEBUG_TYPE_UNDEFINED_BEHAVIOR"..0x824E,
+		"DEBUG_TYPE_PORTABILITY"..0x824F,
+		"DEBUG_TYPE_PERFORMANCE"..0x8250,
+		"DEBUG_TYPE_OTHER"..0x8251,
+		"DEBUG_TYPE_MARKER"..0x8268
 	).javaDocLinks
 
 	IntConstant(
@@ -335,8 +335,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		Tokens accepted or provided by the {@code type} parameters of DebugMessageControl and DEBUGPROC, and the {@code types} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_TYPE_PUSH_GROUP" _ 0x8269,
-		"DEBUG_TYPE_POP_GROUP" _ 0x826A
+		"DEBUG_TYPE_PUSH_GROUP"..0x8269,
+		"DEBUG_TYPE_POP_GROUP"..0x826A
 	)
 
 	val DebugSeverities = IntConstant(
@@ -345,22 +345,22 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		{@code severities} parameter of GetDebugMessageLog.
 		""",
 
-		"DEBUG_SEVERITY_HIGH" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM" _ 0x9147,
-		"DEBUG_SEVERITY_LOW" _ 0x9148,
-		"DEBUG_SEVERITY_NOTIFICATION" _ 0x826B
+		"DEBUG_SEVERITY_HIGH"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM"..0x9147,
+		"DEBUG_SEVERITY_LOW"..0x9148,
+		"DEBUG_SEVERITY_NOTIFICATION"..0x826B
 	).javaDocLinks
 
 	val DebugIdentifiers = IntConstant(
 		"Tokens accepted or provided by the {@code identifier} parameters of ObjectLabel and GetObjectLabel.",
 
-		"BUFFER" _ 0x82E0,
-		"SHADER" _ 0x82E1,
-		"PROGRAM" _ 0x82E2,
-		"QUERY" _ 0x82E3,
-		"PROGRAM_PIPELINE" _ 0x82E4,
-		"SAMPLER" _ 0x82E6,
-		"DISPLAY_LIST" _ 0x82E7
+		"BUFFER"..0x82E0,
+		"SHADER"..0x82E1,
+		"PROGRAM"..0x82E2,
+		"QUERY"..0x82E3,
+		"PROGRAM_PIPELINE"..0x82E4,
+		"SAMPLER"..0x82E6,
+		"DISPLAY_LIST"..0x82E7
 	).javaDocLinks
 
 	void(
@@ -400,8 +400,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("source", "the source of debug messages to enable or disable", DebugSources),
 		GLenum.IN("type", "the type of debug messages to enable or disable", DebugTypes),
 		GLenum.IN("severity", "the severity of debug messages to enable or disable", DebugSeverities),
-		AutoSize("ids") _ GLsizei.IN("count", "the length of the array {@code ids}"),
-		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
+		AutoSize("ids")..GLsizei.IN("count", "the length of the array {@code ids}"),
+		SingleValue("id")..nullable..const..GLuint_p.IN("ids", "an array of unsigned integers containing the ids of the messages to enable or disable"),
 		GLboolean.IN("enabled", "whether the selected messages should be enabled or disabled")
 	)
 
@@ -424,8 +424,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GLenum.IN("type", "the type of the debug message insert", DebugTypes),
 		GLuint.IN("id", "the user-supplied identifier of the message to insert", DebugSeverities),
 		GLenum.IN("severity", "the severity of the debug messages to insert"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
-		const _ GLcharUTF8_p.IN("message", "a character array containing the message to insert")
+		AutoSize("message")..GLsizei.IN("length", "the length of the string contained in the character array whose address is given by {@code message}"),
+		const..GLcharUTF8_p.IN("message", "a character array containing the message to insert")
 	)
 
 	void(
@@ -459,8 +459,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		If the #DEBUG_OUTPUT state is disabled then the GL will not call the callback function.
 		""",
 
-		nullable _ GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable _ const _ voidptr.IN(
+		nullable..GLDEBUGPROC.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable..const..voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -494,13 +494,13 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-		AutoSize("messageLog") _ GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
-		Check("count") _ nullable _ GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
-		Check("count") _ nullable _ GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
-		Check("count") _ nullable _ GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
-		Check("count") _ nullable _ GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
-		nullable _ GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
+		AutoSize("messageLog")..GLsizei.IN("bufsize", "the size of the buffer whose address is given by {@code messageLog}"),
+		Check("count")..nullable..GLenum_p.OUT("sources", "an array of variables to receive the sources of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("types", "an array of variables to receive the types of the retrieved messages"),
+		Check("count")..nullable..GLuint_p.OUT("ids", "an array of unsigned integers to receive the ids of the retrieved messages"),
+		Check("count")..nullable..GLenum_p.OUT("severities", "an array of variables to receive the severites of the retrieved messages"),
+		Check("count")..nullable..GLsizei_p.OUT("lengths", "an array of variables to receive the lengths of the received messages"),
+		nullable..GLcharUTF8_p.OUT("messageLog", "an array of characters that will receive the messages")
 	)
 
 	void(
@@ -520,8 +520,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("source", "the source of the debug message", "#DEBUG_SOURCE_APPLICATION #DEBUG_SOURCE_THIRD_PARTY"),
 		GLuint.IN("id", "the identifier of the message"),
-		AutoSize("message") _ GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
-		const _ GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
+		AutoSize("message")..GLsizei.IN("length", "the length of the message to be sent to the debug output stream"),
+		const..GLcharUTF8_p.IN("message", "a string containing the message to be sent to the debug output stream")
 	)
 
 	void(
@@ -547,8 +547,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object to label"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -561,9 +561,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 			DebugIdentifiers + " GL11#VERTEX_ARRAY GL11#TEXTURE GL30#RENDERBUFFER GL30#FRAMEBUFFER GL40#TRANSFORM_FEEDBACK"
 		),
 		GLuint.IN("name", "the name of the object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
-		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "the address of a variable to receive the length of the object label"),
+		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	void(
@@ -571,8 +571,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"Labels a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "a pointer identifying a sync object"),
-		AutoSize("label") _ GLsizei.IN("length", "the length of the label to be used for the object"),
-		const _ GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
+		AutoSize("label")..GLsizei.IN("length", "the length of the label to be used for the object"),
+		const..GLcharUTF8_p.IN("label", "a string containing the label to assign to the object")
 	)
 
 	void(
@@ -580,9 +580,9 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"Retrieves the label of a sync object identified by a pointer.",
 
 		voidptr.IN("ptr", "the name of the sync object whose label to retrieve"),
-		AutoSize("label") _ GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
-		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)") _ GLcharUTF8_p.OUT("label", "a string that will receive the object label")
+		AutoSize("label")..GLsizei.IN("bufSize", "the length of the buffer whose address is in {@code label}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable to receive the length of the object label"),
+		Return("length", "GL11.glGetInteger(GL_MAX_LABEL_LENGTH)")..GLcharUTF8_p.OUT("label", "a string that will receive the object label")
 	)
 
 	// ARB_explicit_uniform_location
@@ -590,7 +590,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, GetDoublev, and GetInteger64v.",
 
-		"MAX_UNIFORM_LOCATIONS" _ 0x826E
+		"MAX_UNIFORM_LOCATIONS"..0x826E
 	)
 
 	// ARB_framebuffer_no_attachments
@@ -601,20 +601,20 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		GetNamedFramebufferParameterivEXT.
 		""",
 
-		"FRAMEBUFFER_DEFAULT_WIDTH" _ 0x9310,
-		"FRAMEBUFFER_DEFAULT_HEIGHT" _ 0x9311,
-		"FRAMEBUFFER_DEFAULT_LAYERS" _ 0x9312,
-		"FRAMEBUFFER_DEFAULT_SAMPLES" _ 0x9313,
-		"FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS" _ 0x9314
+		"FRAMEBUFFER_DEFAULT_WIDTH"..0x9310,
+		"FRAMEBUFFER_DEFAULT_HEIGHT"..0x9311,
+		"FRAMEBUFFER_DEFAULT_LAYERS"..0x9312,
+		"FRAMEBUFFER_DEFAULT_SAMPLES"..0x9313,
+		"FRAMEBUFFER_DEFAULT_FIXED_SAMPLE_LOCATIONS"..0x9314
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"MAX_FRAMEBUFFER_WIDTH" _ 0x9315,
-		"MAX_FRAMEBUFFER_HEIGHT" _ 0x9316,
-		"MAX_FRAMEBUFFER_LAYERS" _ 0x9317,
-		"MAX_FRAMEBUFFER_SAMPLES" _ 0x9318
+		"MAX_FRAMEBUFFER_WIDTH"..0x9315,
+		"MAX_FRAMEBUFFER_HEIGHT"..0x9316,
+		"MAX_FRAMEBUFFER_LAYERS"..0x9317,
+		"MAX_FRAMEBUFFER_SAMPLES"..0x9318
 	)
 
 	void(
@@ -632,7 +632,7 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 
 		GLenum.IN("target", "target of the operation", "GL30#READ_FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#FRAMEBUFFER"),
 		GLenum.IN("pname", "a token indicating the parameter to be retrieved", FramebufferParameters),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
+		Check(1)..returnValue..GLint_p.OUT("params", "a variable to receive the value of the parameter named {@code pname}")
 	)
 
 	// ARB_internalformat_query2
@@ -640,109 +640,109 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetInternalformativ and GetInternalformati64v.",
 
-		"INTERNALFORMAT_SUPPORTED" _ 0x826F,
-		"INTERNALFORMAT_PREFERRED" _ 0x8270,
-		"INTERNALFORMAT_RED_SIZE" _ 0x8271,
-		"INTERNALFORMAT_GREEN_SIZE" _ 0x8272,
-		"INTERNALFORMAT_BLUE_SIZE" _ 0x8273,
-		"INTERNALFORMAT_ALPHA_SIZE" _ 0x8274,
-		"INTERNALFORMAT_DEPTH_SIZE" _ 0x8275,
-		"INTERNALFORMAT_STENCIL_SIZE" _ 0x8276,
-		"INTERNALFORMAT_SHARED_SIZE" _ 0x8277,
-		"INTERNALFORMAT_RED_TYPE" _ 0x8278,
-		"INTERNALFORMAT_GREEN_TYPE" _ 0x8279,
-		"INTERNALFORMAT_BLUE_TYPE" _ 0x827A,
-		"INTERNALFORMAT_ALPHA_TYPE" _ 0x827B,
-		"INTERNALFORMAT_DEPTH_TYPE" _ 0x827C,
-		"INTERNALFORMAT_STENCIL_TYPE" _ 0x827D,
-		"MAX_WIDTH" _ 0x827E,
-		"MAX_HEIGHT" _ 0x827F,
-		"MAX_DEPTH" _ 0x8280,
-		"MAX_LAYERS" _ 0x8281,
-		"MAX_COMBINED_DIMENSIONS" _ 0x8282,
-		"COLOR_COMPONENTS" _ 0x8283,
-		"DEPTH_COMPONENTS" _ 0x8284,
-		"STENCIL_COMPONENTS" _ 0x8285,
-		"COLOR_RENDERABLE" _ 0x8286,
-		"DEPTH_RENDERABLE" _ 0x8287,
-		"STENCIL_RENDERABLE" _ 0x8288,
-		"FRAMEBUFFER_RENDERABLE" _ 0x8289,
-		"FRAMEBUFFER_RENDERABLE_LAYERED" _ 0x828A,
-		"FRAMEBUFFER_BLEND" _ 0x828B,
-		"READ_PIXELS" _ 0x828C,
-		"READ_PIXELS_FORMAT" _ 0x828D,
-		"READ_PIXELS_TYPE" _ 0x828E,
-		"TEXTURE_IMAGE_FORMAT" _ 0x828F,
-		"TEXTURE_IMAGE_TYPE" _ 0x8290,
-		"GET_TEXTURE_IMAGE_FORMAT" _ 0x8291,
-		"GET_TEXTURE_IMAGE_TYPE" _ 0x8292,
-		"MIPMAP" _ 0x8293,
-		"MANUAL_GENERATE_MIPMAP" _ 0x8294,
-		"AUTO_GENERATE_MIPMAP" _ 0x8295,
-		"COLOR_ENCODING" _ 0x8296,
-		"SRGB_READ" _ 0x8297,
-		"SRGB_WRITE" _ 0x8298,
-		"FILTER" _ 0x829A,
-		"VERTEX_TEXTURE" _ 0x829B,
-		"TESS_CONTROL_TEXTURE" _ 0x829C,
-		"TESS_EVALUATION_TEXTURE" _ 0x829D,
-		"GEOMETRY_TEXTURE" _ 0x829E,
-		"FRAGMENT_TEXTURE" _ 0x829F,
-		"COMPUTE_TEXTURE" _ 0x82A0,
-		"TEXTURE_SHADOW" _ 0x82A1,
-		"TEXTURE_GATHER" _ 0x82A2,
-		"TEXTURE_GATHER_SHADOW" _ 0x82A3,
-		"SHADER_IMAGE_LOAD" _ 0x82A4,
-		"SHADER_IMAGE_STORE" _ 0x82A5,
-		"SHADER_IMAGE_ATOMIC" _ 0x82A6,
-		"IMAGE_TEXEL_SIZE" _ 0x82A7,
-		"IMAGE_COMPATIBILITY_CLASS" _ 0x82A8,
-		"IMAGE_PIXEL_FORMAT" _ 0x82A9,
-		"IMAGE_PIXEL_TYPE" _ 0x82AA,
-		"SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST" _ 0x82AC,
-		"SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST" _ 0x82AD,
-		"SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE" _ 0x82AE,
-		"SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE" _ 0x82AF,
-		"TEXTURE_COMPRESSED_BLOCK_WIDTH" _ 0x82B1,
-		"TEXTURE_COMPRESSED_BLOCK_HEIGHT" _ 0x82B2,
-		"TEXTURE_COMPRESSED_BLOCK_SIZE" _ 0x82B3,
-		"CLEAR_BUFFER" _ 0x82B4,
-		"TEXTURE_VIEW" _ 0x82B5,
-		"VIEW_COMPATIBILITY_CLASS" _ 0x82B6
+		"INTERNALFORMAT_SUPPORTED"..0x826F,
+		"INTERNALFORMAT_PREFERRED"..0x8270,
+		"INTERNALFORMAT_RED_SIZE"..0x8271,
+		"INTERNALFORMAT_GREEN_SIZE"..0x8272,
+		"INTERNALFORMAT_BLUE_SIZE"..0x8273,
+		"INTERNALFORMAT_ALPHA_SIZE"..0x8274,
+		"INTERNALFORMAT_DEPTH_SIZE"..0x8275,
+		"INTERNALFORMAT_STENCIL_SIZE"..0x8276,
+		"INTERNALFORMAT_SHARED_SIZE"..0x8277,
+		"INTERNALFORMAT_RED_TYPE"..0x8278,
+		"INTERNALFORMAT_GREEN_TYPE"..0x8279,
+		"INTERNALFORMAT_BLUE_TYPE"..0x827A,
+		"INTERNALFORMAT_ALPHA_TYPE"..0x827B,
+		"INTERNALFORMAT_DEPTH_TYPE"..0x827C,
+		"INTERNALFORMAT_STENCIL_TYPE"..0x827D,
+		"MAX_WIDTH"..0x827E,
+		"MAX_HEIGHT"..0x827F,
+		"MAX_DEPTH"..0x8280,
+		"MAX_LAYERS"..0x8281,
+		"MAX_COMBINED_DIMENSIONS"..0x8282,
+		"COLOR_COMPONENTS"..0x8283,
+		"DEPTH_COMPONENTS"..0x8284,
+		"STENCIL_COMPONENTS"..0x8285,
+		"COLOR_RENDERABLE"..0x8286,
+		"DEPTH_RENDERABLE"..0x8287,
+		"STENCIL_RENDERABLE"..0x8288,
+		"FRAMEBUFFER_RENDERABLE"..0x8289,
+		"FRAMEBUFFER_RENDERABLE_LAYERED"..0x828A,
+		"FRAMEBUFFER_BLEND"..0x828B,
+		"READ_PIXELS"..0x828C,
+		"READ_PIXELS_FORMAT"..0x828D,
+		"READ_PIXELS_TYPE"..0x828E,
+		"TEXTURE_IMAGE_FORMAT"..0x828F,
+		"TEXTURE_IMAGE_TYPE"..0x8290,
+		"GET_TEXTURE_IMAGE_FORMAT"..0x8291,
+		"GET_TEXTURE_IMAGE_TYPE"..0x8292,
+		"MIPMAP"..0x8293,
+		"MANUAL_GENERATE_MIPMAP"..0x8294,
+		"AUTO_GENERATE_MIPMAP"..0x8295,
+		"COLOR_ENCODING"..0x8296,
+		"SRGB_READ"..0x8297,
+		"SRGB_WRITE"..0x8298,
+		"FILTER"..0x829A,
+		"VERTEX_TEXTURE"..0x829B,
+		"TESS_CONTROL_TEXTURE"..0x829C,
+		"TESS_EVALUATION_TEXTURE"..0x829D,
+		"GEOMETRY_TEXTURE"..0x829E,
+		"FRAGMENT_TEXTURE"..0x829F,
+		"COMPUTE_TEXTURE"..0x82A0,
+		"TEXTURE_SHADOW"..0x82A1,
+		"TEXTURE_GATHER"..0x82A2,
+		"TEXTURE_GATHER_SHADOW"..0x82A3,
+		"SHADER_IMAGE_LOAD"..0x82A4,
+		"SHADER_IMAGE_STORE"..0x82A5,
+		"SHADER_IMAGE_ATOMIC"..0x82A6,
+		"IMAGE_TEXEL_SIZE"..0x82A7,
+		"IMAGE_COMPATIBILITY_CLASS"..0x82A8,
+		"IMAGE_PIXEL_FORMAT"..0x82A9,
+		"IMAGE_PIXEL_TYPE"..0x82AA,
+		"SIMULTANEOUS_TEXTURE_AND_DEPTH_TEST"..0x82AC,
+		"SIMULTANEOUS_TEXTURE_AND_STENCIL_TEST"..0x82AD,
+		"SIMULTANEOUS_TEXTURE_AND_DEPTH_WRITE"..0x82AE,
+		"SIMULTANEOUS_TEXTURE_AND_STENCIL_WRITE"..0x82AF,
+		"TEXTURE_COMPRESSED_BLOCK_WIDTH"..0x82B1,
+		"TEXTURE_COMPRESSED_BLOCK_HEIGHT"..0x82B2,
+		"TEXTURE_COMPRESSED_BLOCK_SIZE"..0x82B3,
+		"CLEAR_BUFFER"..0x82B4,
+		"TEXTURE_VIEW"..0x82B5,
+		"VIEW_COMPATIBILITY_CLASS"..0x82B6
 	)
 
 	IntConstant(
 		"Returned as possible responses for various {@code pname} queries to GetInternalformativ and GetInternalformati64v.",
 
-		"FULL_SUPPORT" _ 0x82B7,
-		"CAVEAT_SUPPORT" _ 0x82B8,
-		"IMAGE_CLASS_4_X_32" _ 0x82B9,
-		"IMAGE_CLASS_2_X_32" _ 0x82BA,
-		"IMAGE_CLASS_1_X_32" _ 0x82BB,
-		"IMAGE_CLASS_4_X_16" _ 0x82BC,
-		"IMAGE_CLASS_2_X_16" _ 0x82BD,
-		"IMAGE_CLASS_1_X_16" _ 0x82BE,
-		"IMAGE_CLASS_4_X_8" _ 0x82BF,
-		"IMAGE_CLASS_2_X_8" _ 0x82C0,
-		"IMAGE_CLASS_1_X_8" _ 0x82C1,
-		"IMAGE_CLASS_11_11_10" _ 0x82C2,
-		"IMAGE_CLASS_10_10_10_2" _ 0x82C3,
-		"VIEW_CLASS_128_BITS" _ 0x82C4,
-		"VIEW_CLASS_96_BITS" _ 0x82C5,
-		"VIEW_CLASS_64_BITS" _ 0x82C6,
-		"VIEW_CLASS_48_BITS" _ 0x82C7,
-		"VIEW_CLASS_32_BITS" _ 0x82C8,
-		"VIEW_CLASS_24_BITS" _ 0x82C9,
-		"VIEW_CLASS_16_BITS" _ 0x82CA,
-		"VIEW_CLASS_8_BITS" _ 0x82CB,
-		"VIEW_CLASS_S3TC_DXT1_RGB" _ 0x82CC,
-		"VIEW_CLASS_S3TC_DXT1_RGBA" _ 0x82CD,
-		"VIEW_CLASS_S3TC_DXT3_RGBA" _ 0x82CE,
-		"VIEW_CLASS_S3TC_DXT5_RGBA" _ 0x82CF,
-		"VIEW_CLASS_RGTC1_RED" _ 0x82D0,
-		"VIEW_CLASS_RGTC2_RG" _ 0x82D1,
-		"VIEW_CLASS_BPTC_UNORM" _ 0x82D2,
-		"VIEW_CLASS_BPTC_FLOAT" _ 0x82D3
+		"FULL_SUPPORT"..0x82B7,
+		"CAVEAT_SUPPORT"..0x82B8,
+		"IMAGE_CLASS_4_X_32"..0x82B9,
+		"IMAGE_CLASS_2_X_32"..0x82BA,
+		"IMAGE_CLASS_1_X_32"..0x82BB,
+		"IMAGE_CLASS_4_X_16"..0x82BC,
+		"IMAGE_CLASS_2_X_16"..0x82BD,
+		"IMAGE_CLASS_1_X_16"..0x82BE,
+		"IMAGE_CLASS_4_X_8"..0x82BF,
+		"IMAGE_CLASS_2_X_8"..0x82C0,
+		"IMAGE_CLASS_1_X_8"..0x82C1,
+		"IMAGE_CLASS_11_11_10"..0x82C2,
+		"IMAGE_CLASS_10_10_10_2"..0x82C3,
+		"VIEW_CLASS_128_BITS"..0x82C4,
+		"VIEW_CLASS_96_BITS"..0x82C5,
+		"VIEW_CLASS_64_BITS"..0x82C6,
+		"VIEW_CLASS_48_BITS"..0x82C7,
+		"VIEW_CLASS_32_BITS"..0x82C8,
+		"VIEW_CLASS_24_BITS"..0x82C9,
+		"VIEW_CLASS_16_BITS"..0x82CA,
+		"VIEW_CLASS_8_BITS"..0x82CB,
+		"VIEW_CLASS_S3TC_DXT1_RGB"..0x82CC,
+		"VIEW_CLASS_S3TC_DXT1_RGBA"..0x82CD,
+		"VIEW_CLASS_S3TC_DXT3_RGBA"..0x82CE,
+		"VIEW_CLASS_S3TC_DXT5_RGBA"..0x82CF,
+		"VIEW_CLASS_RGTC1_RED"..0x82D0,
+		"VIEW_CLASS_RGTC2_RG"..0x82D1,
+		"VIEW_CLASS_BPTC_UNORM"..0x82D2,
+		"VIEW_CLASS_BPTC_FLOAT"..0x82D3
 	)
 
 	void(
@@ -759,8 +759,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		),
 		GLenum.IN("internalformat", "the internal format about which to retrieve information"),
 		GLenum.IN("pname", "the type of information to query"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
-		returnValue _ GLint64_p.OUT("params", "a variable into which to write the retrieved information")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values that may be written to params by the function"),
+		returnValue..GLint64_p.OUT("params", "a variable into which to write the retrieved information")
 	)
 
 	// ARB_invalidate_subdata
@@ -808,8 +808,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"Invalidate the content some or all of a framebuffer object's attachments.",
 
 		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
-		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
+		AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
+		SingleValue("attachment")..const..GLenum_p.IN("attachments", "the address of an array identifying the attachments to be invalidated")
 	)
 
 	void(
@@ -817,8 +817,8 @@ glDispatchCompute(cmd->num_groups_x, cmd->num_groups_y, cmd->num_groups_z);
 		"Invalidates the content of a region of some or all of a framebuffer object's attachments.",
 
 		GLenum.IN("target", "the target to which the framebuffer is attached", "GL30#FRAMEBUFFER GL30#DRAW_FRAMEBUFFER GL30#READ_FRAMEBUFFER"),
-		AutoSize("attachments") _ GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
-		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
+		AutoSize("attachments")..GLsizei.IN("numAttachments", "the number of entries in the {@code attachments} array"),
+		SingleValue("attachment")..const..GLenum_p.IN("attachments", "an array identifying the attachments to be invalidated"),
 		GLint.IN("x", "the X offset of the region to be invalidated"),
 		GLint.IN("y", "the Y offset of the region to be invalidated"),
 		GLsizei.IN("width", "the width of the region to be invalidated"),
@@ -856,9 +856,9 @@ for ( i = 0; i < primcount; i++ ) {
 		""",
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
-		Check("primcount * (stride == 0 ? (4 * 4) : stride)") _ MultiType(
+		Check("primcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "an array of structures containing the draw parameters"),
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array of draw parameter structures"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
@@ -894,9 +894,9 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLenum.IN("mode", "what kind of primitives to render", PRIMITIVE_TYPES),
 		GLenum.IN("type", "the type of data in the buffer bound to the GL_ELEMENT_ARRAY_BUFFER binding", "GL11#UNSIGNED_BYTE GL11#UNSIGNED_SHORT GL11#UNSIGNED_INT"),
-		Check("primcount * (stride == 0 ? (5 * 4) : stride)") _ MultiType(
+		Check("primcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing an array of draw parameters"),
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLsizei.IN("primcount", "the number of elements in the array addressed by {@code indirect}"),
 		GLsizei.IN("stride", "the distance in basic machine units between elements of the draw parameter array")
 	)
@@ -909,63 +909,63 @@ for ( i = 0; i < primcount; i++ ) {
 		GetProgramResourceLocation, and GetProgramResourceLocationIndex.
 		""",
 
-		"UNIFORM" _ 0x92E1,
-		"UNIFORM_BLOCK" _ 0x92E2,
-		"PROGRAM_INPUT" _ 0x92E3,
-		"PROGRAM_OUTPUT" _ 0x92E4,
-		"BUFFER_VARIABLE" _ 0x92E5,
-		"SHADER_STORAGE_BLOCK" _ 0x92E6,
-		"VERTEX_SUBROUTINE" _ 0x92E8,
-		"TESS_CONTROL_SUBROUTINE" _ 0x92E9,
-		"TESS_EVALUATION_SUBROUTINE" _ 0x92EA,
-		"GEOMETRY_SUBROUTINE" _ 0x92EB,
-		"FRAGMENT_SUBROUTINE" _ 0x92EC,
-		"COMPUTE_SUBROUTINE" _ 0x92ED,
-		"VERTEX_SUBROUTINE_UNIFORM" _ 0x92EE,
-		"TESS_CONTROL_SUBROUTINE_UNIFORM" _ 0x92EF,
-		"TESS_EVALUATION_SUBROUTINE_UNIFORM" _ 0x92F0,
-		"GEOMETRY_SUBROUTINE_UNIFORM" _ 0x92F1,
-		"FRAGMENT_SUBROUTINE_UNIFORM" _ 0x92F2,
-		"COMPUTE_SUBROUTINE_UNIFORM" _ 0x92F3,
-		"TRANSFORM_FEEDBACK_VARYING" _ 0x92F4
+		"UNIFORM"..0x92E1,
+		"UNIFORM_BLOCK"..0x92E2,
+		"PROGRAM_INPUT"..0x92E3,
+		"PROGRAM_OUTPUT"..0x92E4,
+		"BUFFER_VARIABLE"..0x92E5,
+		"SHADER_STORAGE_BLOCK"..0x92E6,
+		"VERTEX_SUBROUTINE"..0x92E8,
+		"TESS_CONTROL_SUBROUTINE"..0x92E9,
+		"TESS_EVALUATION_SUBROUTINE"..0x92EA,
+		"GEOMETRY_SUBROUTINE"..0x92EB,
+		"FRAGMENT_SUBROUTINE"..0x92EC,
+		"COMPUTE_SUBROUTINE"..0x92ED,
+		"VERTEX_SUBROUTINE_UNIFORM"..0x92EE,
+		"TESS_CONTROL_SUBROUTINE_UNIFORM"..0x92EF,
+		"TESS_EVALUATION_SUBROUTINE_UNIFORM"..0x92F0,
+		"GEOMETRY_SUBROUTINE_UNIFORM"..0x92F1,
+		"FRAGMENT_SUBROUTINE_UNIFORM"..0x92F2,
+		"COMPUTE_SUBROUTINE_UNIFORM"..0x92F3,
+		"TRANSFORM_FEEDBACK_VARYING"..0x92F4
 	).javaDocLinks + " GL42#ATOMIC_COUNTER_BUFFER"
 
 	val ProgramInterfaceParameters = IntConstant(
 		"Accepted by the {@code pname} parameter of GetProgramInterfaceiv.",
 
-		"ACTIVE_RESOURCES" _ 0x92F5,
-		"MAX_NAME_LENGTH" _ 0x92F6,
-		"MAX_NUM_ACTIVE_VARIABLES" _ 0x92F7,
-		"MAX_NUM_COMPATIBLE_SUBROUTINES" _ 0x92F8
+		"ACTIVE_RESOURCES"..0x92F5,
+		"MAX_NAME_LENGTH"..0x92F6,
+		"MAX_NUM_ACTIVE_VARIABLES"..0x92F7,
+		"MAX_NUM_COMPATIBLE_SUBROUTINES"..0x92F8
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted in the {@code props} array of GetProgramResourceiv.",
 
-		"NAME_LENGTH" _ 0x92F9,
-		"TYPE" _ 0x92FA,
-		"ARRAY_SIZE" _ 0x92FB,
-		"OFFSET" _ 0x92FC,
-		"BLOCK_INDEX" _ 0x92FD,
-		"ARRAY_STRIDE" _ 0x92FE,
-		"MATRIX_STRIDE" _ 0x92FF,
-		"IS_ROW_MAJOR" _ 0x9300,
-		"ATOMIC_COUNTER_BUFFER_INDEX" _ 0x9301,
-		"BUFFER_BINDING" _ 0x9302,
-		"BUFFER_DATA_SIZE" _ 0x9303,
-		"NUM_ACTIVE_VARIABLES" _ 0x9304,
-		"ACTIVE_VARIABLES" _ 0x9305,
-		"REFERENCED_BY_VERTEX_SHADER" _ 0x9306,
-		"REFERENCED_BY_TESS_CONTROL_SHADER" _ 0x9307,
-		"REFERENCED_BY_TESS_EVALUATION_SHADER" _ 0x9308,
-		"REFERENCED_BY_GEOMETRY_SHADER" _ 0x9309,
-		"REFERENCED_BY_FRAGMENT_SHADER" _ 0x930A,
-		"REFERENCED_BY_COMPUTE_SHADER" _ 0x930B,
-		"TOP_LEVEL_ARRAY_SIZE" _ 0x930C,
-		"TOP_LEVEL_ARRAY_STRIDE" _ 0x930D,
-		"LOCATION" _ 0x930E,
-		"LOCATION_INDEX" _ 0x930F,
-		"IS_PER_PATCH" _ 0x92E7
+		"NAME_LENGTH"..0x92F9,
+		"TYPE"..0x92FA,
+		"ARRAY_SIZE"..0x92FB,
+		"OFFSET"..0x92FC,
+		"BLOCK_INDEX"..0x92FD,
+		"ARRAY_STRIDE"..0x92FE,
+		"MATRIX_STRIDE"..0x92FF,
+		"IS_ROW_MAJOR"..0x9300,
+		"ATOMIC_COUNTER_BUFFER_INDEX"..0x9301,
+		"BUFFER_BINDING"..0x9302,
+		"BUFFER_DATA_SIZE"..0x9303,
+		"NUM_ACTIVE_VARIABLES"..0x9304,
+		"ACTIVE_VARIABLES"..0x9305,
+		"REFERENCED_BY_VERTEX_SHADER"..0x9306,
+		"REFERENCED_BY_TESS_CONTROL_SHADER"..0x9307,
+		"REFERENCED_BY_TESS_EVALUATION_SHADER"..0x9308,
+		"REFERENCED_BY_GEOMETRY_SHADER"..0x9309,
+		"REFERENCED_BY_FRAGMENT_SHADER"..0x930A,
+		"REFERENCED_BY_COMPUTE_SHADER"..0x930B,
+		"TOP_LEVEL_ARRAY_SIZE"..0x930C,
+		"TOP_LEVEL_ARRAY_STRIDE"..0x930D,
+		"LOCATION"..0x930E,
+		"LOCATION_INDEX"..0x930F,
+		"IS_PER_PATCH"..0x92E7
 	)
 
 	void(
@@ -975,7 +975,7 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("program", "the name of a program object whose interface to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} to query", ProgramInterfaces),
 		GLenum.IN("pname", "the name of the parameter within {@code programInterface} to query", ProgramInterfaceParameters),
-		Check(1) _ returnValue _ GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
+		Check(1)..returnValue..GLint_p.OUT("params", "a variable to retrieve the value of {@code pname} for the program interface")
 	)
 
 	GLuint(
@@ -984,7 +984,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {Wcode name}", ProgramInterfaces),
-		const _ GLcharUTF8_p.IN("name", "the name of the resource to query the index of")
+		const..GLcharUTF8_p.IN("name", "the name of the resource to query the index of")
 	)
 
 	void(
@@ -994,9 +994,9 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the indexed resource", ProgramInterfaces),
 		GLuint.IN("index", "the index of the resource within {@code programInterface} of {@code program}"),
-		AutoSize("name") _ GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
-		Return("length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)") _ GLcharASCII_p.OUT(
+		AutoSize("name")..GLsizei.IN("bufSize", "the size of the character array whose address is given by {@code name}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable which will receive the length of the resource name"),
+		Return("length", "glGetProgramInterfacei(program, programInterface, GL_MAX_NAME_LENGTH)")..GLcharASCII_p.OUT(
 			"name",
 			"a character array into which will be written the name of the resource"
 		)
@@ -1009,11 +1009,11 @@ for ( i = 0; i < primcount; i++ ) {
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}.", ProgramInterfaces),
 		GLuint.IN("index", "the active resource index"),
-		AutoSize("props") _ GLsizei.IN("propCount", "the number of properties in {@code props}"),
-		const _ GLenum_p.IN("props", "an array that will receive the active resource properties"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
-		Check(1) _ nullable _ GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
-		Return("length") _ GLint_p.OUT("params", "an array that will receive the property values")
+		AutoSize("props")..GLsizei.IN("propCount", "the number of properties in {@code props}"),
+		const..GLenum_p.IN("props", "an array that will receive the active resource properties"),
+		AutoSize("params")..GLsizei.IN("bufSize", "the size of the integer array whose address is given by {@code params}"),
+		Check(1)..nullable..GLsizei_p.OUT("length", "a variable which will receive the number of values returned"),
+		Return("length")..GLint_p.OUT("params", "an array that will receive the property values")
 	)
 
 	GLint(
@@ -1022,7 +1022,7 @@ for ( i = 0; i < primcount; i++ ) {
 
 		GLuint.IN("program", "the name of a program object whose resources to query"),
 		GLenum.IN("programInterface", "a token identifying the interface within {@code program} containing the resource named {@code name}"),
-		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
+		const..GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
 
 	GLint(
@@ -1035,7 +1035,7 @@ for ( i = 0; i < primcount; i++ ) {
 			"a token identifying the interface within {@code program} containing the resource named {@code name}.",
 			"#PROGRAM_OUTPUT"
 		),
-		const _ GLcharASCII_p.IN("name", "the name of the resource to query the location of")
+		const..GLcharASCII_p.IN("name", "the name of the resource to query the location of")
 	)
 
 	// ARB_shader_storage_buffer_object
@@ -1043,7 +1043,7 @@ for ( i = 0; i < primcount; i++ ) {
 	IntConstant(
 		"Accepted by the {@code target} parameters of BindBuffer, BufferData, BufferSubData, MapBuffer, UnmapBuffer, GetBufferSubData, and GetBufferPointerv.",
 
-		"SHADER_STORAGE_BUFFER" _ 0x90D2
+		"SHADER_STORAGE_BUFFER"..0x90D2
 	)
 
 	IntConstant(
@@ -1052,41 +1052,41 @@ for ( i = 0; i < primcount; i++ ) {
 		GetFloati_v, GetDoublei_v, and GetInteger64i_v.
 		""",
 
-		"SHADER_STORAGE_BUFFER_BINDING" _ 0x90D3
+		"SHADER_STORAGE_BUFFER_BINDING"..0x90D3
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegeri_v, GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
-		"SHADER_STORAGE_BUFFER_START" _ 0x90D4,
-		"SHADER_STORAGE_BUFFER_SIZE" _ 0x90D5
+		"SHADER_STORAGE_BUFFER_START"..0x90D4,
+		"SHADER_STORAGE_BUFFER_SIZE"..0x90D5
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, GetBooleanv, GetInteger64v, GetFloatv, and GetDoublev.",
 
-		"MAX_VERTEX_SHADER_STORAGE_BLOCKS" _ 0x90D6,
-		"MAX_GEOMETRY_SHADER_STORAGE_BLOCKS" _ 0x90D7,
-		"MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS" _ 0x90D8,
-		"MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS" _ 0x90D9,
-		"MAX_FRAGMENT_SHADER_STORAGE_BLOCKS" _ 0x90DA,
-		"MAX_COMPUTE_SHADER_STORAGE_BLOCKS" _ 0x90DB,
-		"MAX_COMBINED_SHADER_STORAGE_BLOCKS" _ 0x90DC,
-		"MAX_SHADER_STORAGE_BUFFER_BINDINGS" _ 0x90DD,
-		"MAX_SHADER_STORAGE_BLOCK_SIZE" _ 0x90DE,
-		"SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT" _ 0x90DF
+		"MAX_VERTEX_SHADER_STORAGE_BLOCKS"..0x90D6,
+		"MAX_GEOMETRY_SHADER_STORAGE_BLOCKS"..0x90D7,
+		"MAX_TESS_CONTROL_SHADER_STORAGE_BLOCKS"..0x90D8,
+		"MAX_TESS_EVALUATION_SHADER_STORAGE_BLOCKS"..0x90D9,
+		"MAX_FRAGMENT_SHADER_STORAGE_BLOCKS"..0x90DA,
+		"MAX_COMPUTE_SHADER_STORAGE_BLOCKS"..0x90DB,
+		"MAX_COMBINED_SHADER_STORAGE_BLOCKS"..0x90DC,
+		"MAX_SHADER_STORAGE_BUFFER_BINDINGS"..0x90DD,
+		"MAX_SHADER_STORAGE_BLOCK_SIZE"..0x90DE,
+		"SHADER_STORAGE_BUFFER_OFFSET_ALIGNMENT"..0x90DF
 	)
 
 	IntConstant(
 		"Accepted in the {@code barriers} bitfield in glMemoryBarrier.",
 
-		"SHADER_STORAGE_BARRIER_BIT" _ 0x2000
+		"SHADER_STORAGE_BARRIER_BIT"..0x2000
 	)
 
 	IntConstant(
 		"Alias for the existing token MAX_COMBINED_IMAGE_UNITS_AND_FRAGMENT_OUTPUTS.",
 
-		"MAX_COMBINED_SHADER_OUTPUT_RESOURCES" _ 0x8F39
+		"MAX_COMBINED_SHADER_OUTPUT_RESOURCES"..0x8F39
 	)
 
 	void(
@@ -1103,7 +1103,7 @@ for ( i = 0; i < primcount; i++ ) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameter* and GetTexParameter*.",
 
-		"DEPTH_STENCIL_TEXTURE_MODE" _ 0x90EA
+		"DEPTH_STENCIL_TEXTURE_MODE"..0x90EA
 	)
 
 	// ARB_texture_buffer_range
@@ -1111,14 +1111,14 @@ for ( i = 0; i < primcount; i++ ) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_BUFFER_OFFSET" _ 0x919D,
-		"TEXTURE_BUFFER_SIZE" _ 0x919E
+		"TEXTURE_BUFFER_OFFSET"..0x919D,
+		"TEXTURE_BUFFER_SIZE"..0x919E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"TEXTURE_BUFFER_OFFSET_ALIGNMENT" _ 0x919F
+		"TEXTURE_BUFFER_OFFSET_ALIGNMENT"..0x919F
 	)
 
 	void(
@@ -1176,10 +1176,10 @@ for ( i = 0; i < primcount; i++ ) {
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and  GetTexParameteriv.",
 
-		"TEXTURE_VIEW_MIN_LEVEL" _ 0x82DB,
-		"TEXTURE_VIEW_NUM_LEVELS" _ 0x82DC,
-		"TEXTURE_VIEW_MIN_LAYER" _ 0x82DD,
-		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE
+		"TEXTURE_VIEW_MIN_LEVEL"..0x82DB,
+		"TEXTURE_VIEW_NUM_LEVELS"..0x82DC,
+		"TEXTURE_VIEW_MIN_LAYER"..0x82DD,
+		"TEXTURE_VIEW_NUM_LAYERS"..0x82DE
 	)
 
 	void(
@@ -1201,24 +1201,24 @@ for ( i = 0; i < primcount; i++ ) {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetVertexAttrib*v.",
 
-		"VERTEX_ATTRIB_BINDING" _ 0x82D4,
-		"VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D5
+		"VERTEX_ATTRIB_BINDING"..0x82D4,
+		"VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D5
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of GetBooleani_v, GetIntegeri_v, GetFloati_v, GetDoublei_v, and GetInteger64i_v.",
 
-		"VERTEX_BINDING_DIVISOR" _ 0x82D6,
-		"VERTEX_BINDING_OFFSET" _ 0x82D7,
-		"VERTEX_BINDING_STRIDE" _ 0x82D8,
-		"VERTEX_BINDING_BUFFER" _ 0x8F4F
+		"VERTEX_BINDING_DIVISOR"..0x82D6,
+		"VERTEX_BINDING_OFFSET"..0x82D7,
+		"VERTEX_BINDING_STRIDE"..0x82D8,
+		"VERTEX_BINDING_BUFFER"..0x8F4F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetIntegerv, ....",
 
-		"MAX_VERTEX_ATTRIB_RELATIVE_OFFSET" _ 0x82D9,
-		"MAX_VERTEX_ATTRIB_BINDINGS" _ 0x82DA
+		"MAX_VERTEX_ATTRIB_RELATIVE_OFFSET"..0x82D9,
+		"MAX_VERTEX_ATTRIB_BINDINGS"..0x82DA
 	)
 
 	void(

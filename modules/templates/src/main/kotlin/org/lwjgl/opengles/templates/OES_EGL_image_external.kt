@@ -23,24 +23,24 @@ val OES_EGL_image_external = "OESEGLImageExternal".nativeClassGLES("OES_EGL_imag
 	IntConstant(
 		"Accepted as a target in the {@code target} parameter of BindTexture and EGLImageTargetTexture2DOES.",
 
-		"TEXTURE_EXTERNAL_OES" _ 0x8D65
+		"TEXTURE_EXTERNAL_OES"..0x8D65
 	)
 
 	IntConstant(
 		"Returned in the {@code type} parameter of GetActiveUniform.",
 
-		"SAMPLER_EXTERNAL_OES" _ 0x8D66
+		"SAMPLER_EXTERNAL_OES"..0x8D66
 	)
 
 	IntConstant(
 		"Accepted as the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetFixedv.",
 
-		"TEXTURE_BINDING_EXTERNAL_OES" _ 0x8D67
+		"TEXTURE_BINDING_EXTERNAL_OES"..0x8D67
 	)
 
 	IntConstant(
 		"Accepted as {@code value} in GetTexParameter*() queries.",
 
-		"REQUIRED_TEXTURE_IMAGE_UNITS_OES" _ 0x8D68
+		"REQUIRED_TEXTURE_IMAGE_UNITS_OES"..0x8D68
 	)
 }

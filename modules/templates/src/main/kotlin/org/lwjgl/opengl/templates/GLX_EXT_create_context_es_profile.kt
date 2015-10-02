@@ -20,7 +20,7 @@ val GLX_EXT_create_context_es_profile = "GLXEXTCreateContextESProfile".nativeCla
 	IntConstant(
 		"Accepted as a bit in the attribute value for GLXARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
 
-		"CONTEXT_ES_PROFILE_BIT_EXT" _ 0x00000004
+		"CONTEXT_ES_PROFILE_BIT_EXT"..0x00000004
 	)
 }
 
@@ -37,6 +37,6 @@ val GLX_EXT_create_context_es2_profile = "GLXEXTCreateContextES2Profile".nativeC
 	IntConstant(
 		"Accepted as a bit in the attribute value for GLXARBCreateContextProfile#CONTEXT_PROFILE_MASK_ARB in {@code attrib_list}.",
 
-		"CONTEXT_ES2_PROFILE_BIT_EXT" _ 0x00000004
+		"CONTEXT_ES2_PROFILE_BIT_EXT"..0x00000004
 	)
 }

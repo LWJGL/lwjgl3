@@ -22,7 +22,7 @@ val KHR_stream_consumer_gltexture = "KHRStreamConsumerGLTexture".nativeClassEGL(
 	IntConstant(
 		"",
 
-		"CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR" _ 0x321E
+		"CONSUMER_ACQUIRE_TIMEOUT_USEC_KHR"..0x321E
 	)
 
 	EGLBoolean(

@@ -19,31 +19,31 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 	val Types = IntConstant(
 		"Accepted by the {@code type} parameter of alcIsRenderFormatSupportedSOFT.",
 
-		"BYTE_SOFT" _ 0x1400,
-		"UNSIGNED_BYTE_SOFT" _ 0x1401,
-		"SHORT_SOFT" _ 0x1402,
-		"UNSIGNED_SHORT_SOFT" _ 0x1403,
-		"INT_SOFT" _ 0x1404,
-		"UNSIGNED_INT_SOFT" _ 0x1405,
-		"FLOAT_SOFT" _ 0x1406
+		"BYTE_SOFT"..0x1400,
+		"UNSIGNED_BYTE_SOFT"..0x1401,
+		"SHORT_SOFT"..0x1402,
+		"UNSIGNED_SHORT_SOFT"..0x1403,
+		"INT_SOFT"..0x1404,
+		"UNSIGNED_INT_SOFT"..0x1405,
+		"FLOAT_SOFT"..0x1406
 	).javaDocLinks
 
 	val Channels = IntConstant(
 		"Accepted by the {@code channels} parameter of alcIsRenderFormatSupportedSOFT.",
 
-		"MONO_SOFT" _ 0x1500,
-		"STEREO_SOFT" _ 0x1501,
-		"QUAD_SOFT" _ 0x1503,
-		"5POINT1_SOFT" _ 0x1504,
-		"6POINT1_SOFT" _ 0x1505,
-		"7POINT1_SOFT" _ 0x1506
+		"MONO_SOFT"..0x1500,
+		"STEREO_SOFT"..0x1501,
+		"QUAD_SOFT"..0x1503,
+		"5POINT1_SOFT"..0x1504,
+		"6POINT1_SOFT"..0x1505,
+		"7POINT1_SOFT"..0x1506
 	).javaDocLinks
 
 	IntConstant(
 		"Accepted as part of the {@code attrList} parameter of alcCreateContext.",
 
-		"FORMAT_CHANNELS_SOFT" _ 0x1990,
-		"FORMAT_TYPE_SOFT" _ 0x1991
+		"FORMAT_CHANNELS_SOFT"..0x1990,
+		"FORMAT_TYPE_SOFT"..0x1991
 	)
 
 	ALCdevice_p(
@@ -62,7 +62,7 @@ val ALC_SOFT_loopback = "SOFTLoopback".nativeClassALC("SOFT_loopback") {
 		error.
 		""",
 
-		nullable _ const _ ALCcharUTF8_p.IN(
+		nullable..const..ALCcharUTF8_p.IN(
 			"deviceName",
 			"""
 			which device or device driver to use for subsequent rendering. This may be $NULL for an implementation-defined default, otherwise it must be a valid

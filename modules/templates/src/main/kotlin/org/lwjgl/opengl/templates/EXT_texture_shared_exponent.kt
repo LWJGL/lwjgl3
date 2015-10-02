@@ -30,7 +30,7 @@ val EXT_texture_shared_exponent = "EXTTextureSharedExponent".nativeClassGL("EXT_
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
 
-		"RGB9_E5_EXT" _ 0x8C3D
+		"RGB9_E5_EXT"..0x8C3D
 	)
 
 	IntConstant(
@@ -40,12 +40,12 @@ val EXT_texture_shared_exponent = "EXTTextureSharedExponent".nativeClassGL("EXT_
 		GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
 		""",
 
-		"UNSIGNED_INT_5_9_9_9_REV_EXT" _ 0x8C3E
+		"UNSIGNED_INT_5_9_9_9_REV_EXT"..0x8C3E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexLevelParameterfv and GetTexLevelParameteriv.",
 
-		"TEXTURE_SHARED_SIZE_EXT" _ 0x8C3F
+		"TEXTURE_SHARED_SIZE_EXT"..0x8C3F
 	)
 }

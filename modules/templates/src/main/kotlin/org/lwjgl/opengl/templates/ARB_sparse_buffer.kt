@@ -22,13 +22,13 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 	IntConstant(
 		"Accepted as part of the the {@code flags} parameter to GL44#BufferStorage().",
 
-		"SPARSE_STORAGE_BIT_ARB" _ 0x0400
+		"SPARSE_STORAGE_BIT_ARB"..0x0400
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"SPARSE_BUFFER_PAGE_SIZE_ARB" _ 0x82F8
+		"SPARSE_BUFFER_PAGE_SIZE_ARB"..0x82F8
 	)
 
 	void(
@@ -48,7 +48,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		)
 	)
 
-	DependsOn("GL_EXT_direct_state_access") _ ignoreMissing _ void(
+	DependsOn("GL_EXT_direct_state_access")..ignoreMissing..void(
 		"NamedBufferPageCommitmentEXT",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 
@@ -58,7 +58,7 @@ val ARB_sparse_buffer = "ARBSparseBuffer".nativeClassGL("ARB_sparse_buffer", pos
 		GLboolean.IN("commit", "the commit state")
 	)
 
-	DependsOn("GL_ARB_direct_state_access") _ ignoreMissing _ void(
+	DependsOn("GL_ARB_direct_state_access")..ignoreMissing..void(
 		"NamedBufferPageCommitmentARB",
 		"Direct-state-access version of #BufferPageCommitmentARB().",
 

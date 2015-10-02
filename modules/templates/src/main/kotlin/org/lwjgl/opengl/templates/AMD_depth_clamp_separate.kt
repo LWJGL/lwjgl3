@@ -25,7 +25,7 @@ val AMD_depth_clamp_separate = "AMDDepthClampSeparate".nativeClassGL("AMD_depth_
 		GetDoublev.
 		""",
 
-		"DEPTH_CLAMP_NEAR_AMD" _ 0x901E,
-		"DEPTH_CLAMP_FAR_AMD" _ 0x901F
+		"DEPTH_CLAMP_NEAR_AMD"..0x901E,
+		"DEPTH_CLAMP_FAR_AMD"..0x901F
 	)
 }

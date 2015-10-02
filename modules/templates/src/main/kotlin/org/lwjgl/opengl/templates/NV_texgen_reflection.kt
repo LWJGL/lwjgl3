@@ -18,7 +18,7 @@ val NV_texgen_reflection = "NVTexgenReflection".nativeClassGL("NV_texgen_reflect
 	IntConstant(
 		"Accepted by the {@code param} parameter of TexGend, TexGenf, TexGeni when {@code pname} parameter is TEXTURE_GEN_MODE",
 
-		"NORMAL_MAP_NV" _ 0x8511,
-		"REFLECTION_MAP_NV" _ 0x8512
+		"NORMAL_MAP_NV"..0x8511,
+		"REFLECTION_MAP_NV"..0x8512
 	)
 }

@@ -29,16 +29,16 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 	IntConstant(
 		"",
 
-		"BAD_OUTPUT_LAYER_EXT" _ 0x322D,
-		"BAD_OUTPUT_PORT_EXT" _ 0x322E,
-		"SWAP_INTERVAL_EXT" _ 0x322F
+		"BAD_OUTPUT_LAYER_EXT"..0x322D,
+		"BAD_OUTPUT_PORT_EXT"..0x322E,
+		"SWAP_INTERVAL_EXT"..0x322F
 	)
 
 	LongConstant(
 		"",
 
-		"NO_OUTPUT_LAYER_EXT" _ 0L,
-		"NO_OUTPUT_PORT_EXT" _ 0L
+		"NO_OUTPUT_LAYER_EXT"..0L,
+		"NO_OUTPUT_PORT_EXT"..0L
 	)
 
 	EGLBoolean(
@@ -46,10 +46,10 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 		"",
 
 		EGLDisplay.IN("dpy", ""),
-		nullable _ noneTerminated _ const _ EGLAttrib_p.IN("attrib_list", ""),
-		nullable _ EGLOutputLayerEXT_p.OUT("layers", ""),
-		AutoSize("layers") _ EGLint.IN("max_layers", ""),
-		Check(1) _ EGLint_p.OUT("num_layers", "")
+		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", ""),
+		nullable..EGLOutputLayerEXT_p.OUT("layers", ""),
+		AutoSize("layers")..EGLint.IN("max_layers", ""),
+		Check(1)..EGLint_p.OUT("num_layers", "")
 	)
 
 	EGLBoolean(
@@ -57,10 +57,10 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 		"",
 
 		EGLDisplay.IN("dpy", ""),
-		nullable _ noneTerminated _ const _ EGLAttrib_p.IN("attrib_list", ""),
-		nullable _ EGLOutputPortEXT_p.OUT("ports", ""),
-		AutoSize("ports") _ EGLint.IN("max_ports", ""),
-		Check(1) _ EGLint_p.OUT("num_ports", "")
+		nullable..noneTerminated..const..EGLAttrib_p.IN("attrib_list", ""),
+		nullable..EGLOutputPortEXT_p.OUT("ports", ""),
+		AutoSize("ports")..EGLint.IN("max_ports", ""),
+		Check(1)..EGLint_p.OUT("num_ports", "")
 	)
 
 	EGLBoolean(
@@ -80,7 +80,7 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 		EGLDisplay.IN("dpy", ""),
 		EGLOutputLayerEXT.IN("layer", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLAttrib_p.OUT("value", "")
+		Check(1)..EGLAttrib_p.OUT("value", "")
 	)
 
 	charASCII_p(
@@ -109,7 +109,7 @@ val EXT_output_base = "EXTOutputBase".nativeClassEGL("EXT_output_base", postfix 
 		EGLDisplay.IN("dpy", ""),
 		EGLOutputPortEXT.IN("port", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLAttrib_p.OUT("value", "")
+		Check(1)..EGLAttrib_p.OUT("value", "")
 	)
 
 	charASCII_p(

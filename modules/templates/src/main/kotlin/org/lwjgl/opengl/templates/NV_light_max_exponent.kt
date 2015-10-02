@@ -19,7 +19,7 @@ val NV_light_max_exponent = "NVLightMaxExponent".nativeClassGL("NV_light_max_exp
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev",
 
-		"MAX_SHININESS_NV" _ 0x8504,
-		"MAX_SPOT_EXPONENT_NV" _ 0x8505
+		"MAX_SHININESS_NV"..0x8504,
+		"MAX_SPOT_EXPONENT_NV"..0x8505
 	)
 }

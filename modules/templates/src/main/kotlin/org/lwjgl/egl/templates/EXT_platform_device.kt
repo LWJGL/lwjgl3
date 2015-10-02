@@ -26,6 +26,6 @@ val EXT_platform_device = "EXTPlatformDevice".nativeClassEGL("EXT_platform_devic
 	IntConstant(
 		"",
 
-		"PLATFORM_DEVICE_EXT" _ 0x313F
+		"PLATFORM_DEVICE_EXT"..0x313F
 	)
 }

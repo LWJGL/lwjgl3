@@ -32,7 +32,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"OpenCL Version.",
 
-		"VERSION_1_2" _ 1
+		"VERSION_1_2"..1
 	)
 
 	IntConstant(
@@ -51,20 +51,20 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_device_info",
 
-		"DEVICE_DOUBLE_FP_CONFIG" _ 0x1032,
-		"DEVICE_LINKER_AVAILABLE" _ 0x103E,
-		"DEVICE_BUILT_IN_KERNELS" _ 0x103F,
-		"DEVICE_IMAGE_MAX_BUFFER_SIZE" _ 0x1040,
-		"DEVICE_IMAGE_MAX_ARRAY_SIZE" _ 0x1041,
-		"DEVICE_PARENT_DEVICE" _ 0x1042,
+		"DEVICE_DOUBLE_FP_CONFIG"..0x1032,
+		"DEVICE_LINKER_AVAILABLE"..0x103E,
+		"DEVICE_BUILT_IN_KERNELS"..0x103F,
+		"DEVICE_IMAGE_MAX_BUFFER_SIZE"..0x1040,
+		"DEVICE_IMAGE_MAX_ARRAY_SIZE"..0x1041,
+		"DEVICE_PARENT_DEVICE"..0x1042,
 		// TODO: DEVICE_PARTITION_MAX_COMPUTE_UNITS -> https://www.khronos.org/bugzilla/show_bug.cgi?id=580
-		"DEVICE_PARTITION_MAX_SUB_DEVICES" _ 0x1043,
-		"DEVICE_PARTITION_PROPERTIES" _ 0x1044,
-		"DEVICE_PARTITION_AFFINITY_DOMAIN" _ 0x1045,
-		"DEVICE_PARTITION_TYPE" _ 0x1046,
-		"DEVICE_REFERENCE_COUNT" _ 0x1047,
-		"DEVICE_PREFERRED_INTEROP_USER_SYNC" _ 0x1048,
-		"DEVICE_PRINTF_BUFFER_SIZE" _ 0x1049
+		"DEVICE_PARTITION_MAX_SUB_DEVICES"..0x1043,
+		"DEVICE_PARTITION_PROPERTIES"..0x1044,
+		"DEVICE_PARTITION_AFFINITY_DOMAIN"..0x1045,
+		"DEVICE_PARTITION_TYPE"..0x1046,
+		"DEVICE_REFERENCE_COUNT"..0x1047,
+		"DEVICE_PREFERRED_INTEROP_USER_SYNC"..0x1048,
+		"DEVICE_PRINTF_BUFFER_SIZE"..0x1049
 	)
 
 	IntConstant(
@@ -76,13 +76,13 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_context_properties",
 
-		"CONTEXT_INTEROP_USER_SYNC" _ 0x1085
+		"CONTEXT_INTEROP_USER_SYNC"..0x1085
 	)
 
 	IntConstant(
 		"cl_device_partition_property list null-terminator",
 
-		"DEVICE_PARTITION_BY_COUNTS_LIST_END" _ 0x0
+		"DEVICE_PARTITION_BY_COUNTS_LIST_END"..0x0
 	)
 
 	IntConstant(
@@ -92,7 +92,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		remaining compute units are not used.
 		""",
 
-		"DEVICE_PARTITION_EQUALLY" _ 0x1086
+		"DEVICE_PARTITION_EQUALLY"..0x1086
 	).javaDocLinks
 
 	IntConstant(
@@ -105,7 +105,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		The total number of compute units specified may not exceed #DEVICE_PARTITION_MAX_COMPUTE_UNITS.
 		""",
 
-		"DEVICE_PARTITION_BY_COUNTS" _ 0x1087
+		"DEVICE_PARTITION_BY_COUNTS"..0x1087
 	).javaDocLinks
 
 	IntConstant(
@@ -127,7 +127,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		The user may determine what happened by calling CL10#GetDeviceInfo()(#DEVICE_PARTITION_TYPE) on the sub-devices.
 		""",
 
-		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN" _ 0x1088
+		"DEVICE_PARTITION_BY_AFFINITY_DOMAIN"..0x1088
 	).javaDocLinks
 
 	IntConstant(
@@ -159,19 +159,19 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_mem_object_type",
 
-		"MEM_OBJECT_IMAGE2D_ARRAY" _ 0x10F3,
-		"MEM_OBJECT_IMAGE1D" _ 0x10F4,
-		"MEM_OBJECT_IMAGE1D_ARRAY" _ 0x10F5,
-		"MEM_OBJECT_IMAGE1D_BUFFER" _ 0x10F6
+		"MEM_OBJECT_IMAGE2D_ARRAY"..0x10F3,
+		"MEM_OBJECT_IMAGE1D"..0x10F4,
+		"MEM_OBJECT_IMAGE1D_ARRAY"..0x10F5,
+		"MEM_OBJECT_IMAGE1D_BUFFER"..0x10F6
 	)
 
 	IntConstant(
 		"cl_image_info",
 
-		"IMAGE_ARRAY_SIZE" _ 0x1117,
-		"IMAGE_BUFFER" _ 0x1118,
-		"IMAGE_NUM_MIP_LEVELS" _ 0x1119,
-		"IMAGE_NUM_SAMPLES" _ 0x111A
+		"IMAGE_ARRAY_SIZE"..0x1117,
+		"IMAGE_BUFFER"..0x1118,
+		"IMAGE_NUM_MIP_LEVELS"..0x1119,
+		"IMAGE_NUM_SAMPLES"..0x111A
 	)
 
 	IntConstant(
@@ -183,63 +183,63 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_program_info",
 
-		"PROGRAM_NUM_KERNELS" _ 0x1167,
-		"PROGRAM_KERNEL_NAMES" _ 0x1168
+		"PROGRAM_NUM_KERNELS"..0x1167,
+		"PROGRAM_KERNEL_NAMES"..0x1168
 	)
 
 	IntConstant(
 		"cl_program_build_info",
 
-		"PROGRAM_BINARY_TYPE" _ 0x1184
+		"PROGRAM_BINARY_TYPE"..0x1184
 	)
 
 	IntConstant(
 		"cl_program_binary_type",
 
-		"PROGRAM_BINARY_TYPE_NONE" _ 0x0,
-		"PROGRAM_BINARY_TYPE_COMPILED_OBJECT" _ 0x1,
-		"PROGRAM_BINARY_TYPE_LIBRARY" _ 0x2,
-		"PROGRAM_BINARY_TYPE_EXECUTABLE" _ 0x4
+		"PROGRAM_BINARY_TYPE_NONE"..0x0,
+		"PROGRAM_BINARY_TYPE_COMPILED_OBJECT"..0x1,
+		"PROGRAM_BINARY_TYPE_LIBRARY"..0x2,
+		"PROGRAM_BINARY_TYPE_EXECUTABLE"..0x4
 	)
 
 	IntConstant(
 		"cl_kernel_info",
 
-		"KERNEL_ATTRIBUTES" _ 0x1195
+		"KERNEL_ATTRIBUTES"..0x1195
 	)
 
 	val KernelArgInfo = IntConstant(
 		"cl_kernel_arg_info",
 
-		"KERNEL_ARG_ADDRESS_QUALIFIER" _ 0x1196,
-		"KERNEL_ARG_ACCESS_QUALIFIER" _ 0x1197,
-		"KERNEL_ARG_TYPE_NAME" _ 0x1198,
-		"KERNEL_ARG_TYPE_QUALIFIER" _ 0x1999,
-		"KERNEL_ARG_NAME" _ 0x119A
+		"KERNEL_ARG_ADDRESS_QUALIFIER"..0x1196,
+		"KERNEL_ARG_ACCESS_QUALIFIER"..0x1197,
+		"KERNEL_ARG_TYPE_NAME"..0x1198,
+		"KERNEL_ARG_TYPE_QUALIFIER"..0x1999,
+		"KERNEL_ARG_NAME"..0x119A
 	).javaDocLinks
 
 	IntConstant(
 		"cl_kernel_arg_address_qualifier",
 
-		"KERNEL_ARG_ADDRESS_GLOBAL" _ 0x119A,
-		"KERNEL_ARG_ADDRESS_LOCAL" _ 0x119B,
-		"KERNEL_ARG_ADDRESS_CONSTANT" _ 0x119C,
-		"KERNEL_ARG_ADDRESS_PRIVATE" _ 0x119D
+		"KERNEL_ARG_ADDRESS_GLOBAL"..0x119A,
+		"KERNEL_ARG_ADDRESS_LOCAL"..0x119B,
+		"KERNEL_ARG_ADDRESS_CONSTANT"..0x119C,
+		"KERNEL_ARG_ADDRESS_PRIVATE"..0x119D
 	)
 
 	IntConstant(
 		"cl_kernel_arg_access_qualifier",
 
-		"KERNEL_ARG_ACCESS_READ_ONLY" _ 0x11A0,
-		"KERNEL_ARG_ACCESS_WRITE_ONLY" _ 0x11A1,
-		"KERNEL_ARG_ACCESS_READ_WRITE" _ 0x11A2,
-		"KERNEL_ARG_ACCESS_NONE" _ 0x11A3
+		"KERNEL_ARG_ACCESS_READ_ONLY"..0x11A0,
+		"KERNEL_ARG_ACCESS_WRITE_ONLY"..0x11A1,
+		"KERNEL_ARG_ACCESS_READ_WRITE"..0x11A2,
+		"KERNEL_ARG_ACCESS_NONE"..0x11A3
 	)
 
 	IntConstant(
 		"cl_kernel_arg_type_qualifier",
 
-		"CL_KERNEL_ARG_TYPE_NONE" _ 0,
+		"CL_KERNEL_ARG_TYPE_NONE"..0,
 		"CL_KERNEL_ARG_TYPE_CONST" expr "1 << 0",
 		"CL_KERNEL_ARG_TYPE_RESTRICT" expr "1 << 1",
 		"CL_KERNEL_ARG_TYPE_VOLATILE" expr "1 << 2"
@@ -248,16 +248,16 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 	IntConstant(
 		"cl_kernel_work_group_info",
 
-		"KERNEL_GLOBAL_WORK_SIZE" _ 0x11B5
+		"KERNEL_GLOBAL_WORK_SIZE"..0x11B5
 	)
 
 	IntConstant(
 		"cl_command_type",
 
-		"COMMAND_BARRIER" _ 0x1205,
-		"COMMAND_MIGRATE_MEM_OBJECTS" _ 0x1206,
-		"COMMAND_FILL_BUFFER" _ 0x1207,
-		"COMMAND_FILL_IMAGE" _ 0x1208
+		"COMMAND_BARRIER"..0x1205,
+		"COMMAND_MIGRATE_MEM_OBJECTS"..0x1206,
+		"COMMAND_FILL_BUFFER"..0x1207,
+		"COMMAND_FILL_IMAGE"..0x1208
 	)
 
 	voidptr(
@@ -276,7 +276,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_platform_id.IN("platform", "the platform to query"),
-		const _ cl_charASCII_p.IN("funcname", "the extension function name")
+		const..cl_charASCII_p.IN("funcname", "the extension function name")
 	)
 
 	cl_int(
@@ -349,7 +349,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_device_id.IN("in_device", "the device to be partitioned"),
-		nullTerminated _ const _ cl_device_partition_property.IN(
+		nullTerminated..const..cl_device_partition_property.IN(
 			"properties",
 			"""
 			specifies how {@code in_device} is to be partition described by a partition name and its corresponding value. Each partition name is immediately
@@ -357,11 +357,11 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			""",
 			"#DEVICE_PARTITION_EQUALLY #DEVICE_PARTITION_BY_COUNTS #DEVICE_PARTITION_BY_AFFINITY_DOMAIN"
 		),
-		AutoSize("out_devices") _ cl_uint.IN(
+		AutoSize("out_devices")..cl_uint.IN(
 			"num_devices",
 			"the size of memory pointed to by {@code out_devices} specified as the number of {@code cl_device_id} entries."
 		),
-		nullable _ cl_device_id_p.OUT(
+		nullable..cl_device_id_p.OUT(
 			"out_devices",
 			"""
 			the buffer where the OpenCL sub-devices will be returned. If {@code out_devices} is $NULL, this argument is ignored. If {@code out_devices} is not
@@ -369,7 +369,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			partitioning scheme specified in {@code properties}.
 			"""
 		),
-		Check(1) _ nullable _ cl_uint_p.OUT(
+		Check(1)..nullable..cl_uint_p.OUT(
 			"num_devices_ret",
 			"""
 			the number of sub-devices that device may be partitioned into according to the partitioning scheme specified in {@code properties}. If {@code num_devices_ret}
@@ -440,15 +440,15 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			#MEM_HOST_READ_ONLY #MEM_HOST_NO_ACCESS
 			"""
 		),
-		const _ cl_image_format_p.IN(
+		const..cl_image_format_p.IN(
 			"image_format",
 			"a pointer to a ##CLImageFormat structure that describes format properties of the image to be allocated"
 		),
-		const _ cl_image_desc_p.IN(
+		const..cl_image_desc_p.IN(
 			"image_desc",
 			"a pointer to a ##CLImageDesc structure that describes type and dimensions of the image to be allocated"
 		),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ nullable _ void_p.IN(
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..nullable..void_p.IN(
 			"host_ptr",
 			"""
 			a pointer to the image data that may already be allocated by the application. Refer to table below for a description of how large the buffer that
@@ -512,7 +512,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 
 		cl_context.IN("context", "a valid OpenCL context"),
 		cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		SingleValue("device") _ const _ cl_device_id_p.IN(
+		SingleValue("device")..const..cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices that are in {@code context}. {@code device_list} must be a non-$NULL value. The built-in kernels are loaded for
@@ -522,7 +522,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			{@code device_list} must be devices associated with {@code context}.
 			"""
 		),
-		const _ cl_charASCII_p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
+		const..cl_charASCII_p.IN("kernel_names", "a semi-colon separated list of built-in kernel names"),
 		ERROR_RET,
 
 		returnDoc =
@@ -553,27 +553,27 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_program.IN("program", "the program object that is the compilation target"),
-		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		nullable _ const _ cl_device_id_p.IN(
+		AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices associated with {@code program}. If {@code device_list} is a $NULL value, the compile is performed for all devices
 			associated with program. If {@code device_list} is a non-$NULL value, the compile is performed for devices specified in this list.
 			"""
 		),
-		const _ cl_charASCII_p.IN(
+		const..cl_charASCII_p.IN(
 			"options",
 			"a pointer to a null-terminated string of characters that describes the compilation options to be used for building the program executable"
 		),
-		AutoSize("input_headers", "header_include_names") _ cl_uint.IN(
+		AutoSize("input_headers", "header_include_names")..cl_uint.IN(
 			"num_input_headers",
 			"the number of programs that describe headers in the array referenced by {@code input_headers}"
 		),
-		PointerArray(cl_program, "input_header") _ nullable _ const _ cl_program_p.IN(
+		PointerArray(cl_program, "input_header")..nullable..const..cl_program_p.IN(
 			"input_headers",
 			"an array of program embedded headers created with CL10#CreateProgramWithSource()"
 		),
-		PointerArray(cl_charASCII_p, "header_include_name") _ nullable _ const _ cl_charASCII_pp.IN(
+		PointerArray(cl_charASCII_p, "header_include_name")..nullable..const..cl_charASCII_pp.IN(
 			"header_include_names",
 			"""
 			an array that has a one to one correspondence with {@code input_headers}. Each entry in {@code header_include_names} specifies the include name used
@@ -582,7 +582,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			compile option. If multiple entries in {@code header_include_names} refer to the same header name, the first one encountered will be used.
 			"""
 		),
-		nullable _ cl_program_callback.IN(
+		nullable..cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -597,7 +597,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			asynchronously by the OpenCL implementation. It is the application's responsibility to ensure that the callback function is thread-safe.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -645,8 +645,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		""",
 
 		cl_context.IN("context", "a valid OpenCL context"),
-		AutoSize("device_list") _ cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
-		nullable _ const _ cl_device_id_p.IN(
+		AutoSize("device_list")..cl_uint.IN("num_devices", "the number of devices listed in {@code device_list}"),
+		nullable..const..cl_device_id_p.IN(
 			"device_list",
 			"""
 			a pointer to a list of devices that are in {@code context}. If {@code device_list} is a $NULL value, the link is performed for all devices
@@ -654,15 +654,15 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			devices specified in this list for which a compiled object is available.
 			"""
 		),
-		const _ cl_charASCII_p.IN(
+		const..cl_charASCII_p.IN(
 			"options",
 			"a pointer to a null-terminated string of characters that describes the link options to be used for building the program executable"
 		),
-		AutoSize("input_programs") _ cl_uint.IN(
+		AutoSize("input_programs")..cl_uint.IN(
 			"num_input_programs",
 			"the number of programs in array referenced by {@code input_programs}"
 		),
-		SingleValue("input_program") _ nullable _ const _ cl_program_p.IN(
+		SingleValue("input_program")..nullable..const..cl_program_p.IN(
 			"input_programs",
 			"""
 			an array of program objects that are compiled binaries or libraries that are to be linked to create the program executable. For each device in
@@ -680,7 +680,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			)}
 			"""
 		),
-		nullable _ cl_program_callback.IN(
+		nullable..cl_program_callback.IN(
 			"pfn_notify",
 			"""
 			a function pointer to a notification routine. The notification routine is a callback function that an application can register and which will be
@@ -694,7 +694,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			If {@code pfn_notify} is $NULL, {@code clLinkProgram} does not return until the linker has completed.
 			"""
 		),
-		nullable _ voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
+		nullable..voidptr.IN("user_data", "will be passed as an argument when {@code pfn_notify} is called. {@code user_data} can be NULL."),
 
 		returnDoc =
 		"""
@@ -778,7 +778,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 		),
 		cl_kernel_arg_info.IN("param_name", "the argument information to query", KernelArgInfo),
 		PARAM_VALUE_SIZE,
-		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG) _ nullable _ void_p.IN("param_value", param_value),
+		MultiType(PointerMapping.DATA_INT, PointerMapping.DATA_LONG)..nullable..void_p.IN("param_value", param_value),
 		PARAM_VALUE_SIZE_RET,
 
 		returnDoc =
@@ -809,7 +809,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code buffer} must be the same."
 		),
 		cl_mem.IN("buffer", "a valid buffer object"),
-		const _ void_p.IN(
+		const..void_p.IN(
 			"pattern",
 			"""
 			pointer to the data pattern of size {@code pattern_size} in bytes. {@code pattern} will be used to fill a region in buffer starting at {@code offset}
@@ -819,7 +819,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			supported by the OpenCL device. The memory associated with {@code pattern} can be reused or freed after the function returns.
 			"""
 		),
-		AutoSize("pattern") _ size_t.IN("pattern_size", "the pattern size"),
+		AutoSize("pattern")..size_t.IN("pattern_size", "the pattern size"),
 		size_t.IN("offset", "the location in bytes of the region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
 		size_t.IN("size", "the size in bytes of region being filled in {@code buffer} and must be a multiple of {@code pattern_size}"),
 		NEWL,
@@ -864,7 +864,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			"the command-queue in which the fill command will be queued. The OpenCL context associated with {@code command_queue} and {@code image} must be the same."
 		),
 		cl_mem.IN("image", "a valid image object"),
-		const _ void_p.IN(
+		const..void_p.IN(
 			"fill_color",
 			"""
 			the fill color. The fill color is a four component RGBA floating-point color value if the {@code image} channel data type is not an unnormalized
@@ -873,7 +873,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			will be converted to the appropriate image channel format and order associated with {@code image}.
 			"""
 		),
-		const _ size_t_p.IN(
+		const..size_t_p.IN(
 			"origin",
 			"""
 			the {@code (x, y, z)} offset in pixels in the 1D, 2D or 3D image, the {@code (x, y)} offset and the image index in the 2D image array or the {@code (x)}
@@ -883,7 +883,7 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			describes the image index in the 2D image array.
 			"""
 		),
-		const _ size_t_p.IN(
+		const..size_t_p.IN(
 			"region",
 			"""
 			the {@code (width, height, depth)} in pixels of the 1D, 2D or 3D rectangle, the {@code (width, height)} in pixels of the 2D rectangle and the number
@@ -945,8 +945,8 @@ val CL12 = "CL12".nativeClassCL("CL12") {
 			{@code command_queue} or to the host if the #MIGRATE_MEM_OBJECT_HOST has been specified.
 			"""
 		),
-		AutoSize("mem_objects") _ cl_uint.IN("num_mem_objects", "the number of memory objects specified in {@code mem_objects}"),
-		const _ cl_mem_p.IN("mem_objects", "a pointer to a list of memory objects"),
+		AutoSize("mem_objects")..cl_uint.IN("num_mem_objects", "the number of memory objects specified in {@code mem_objects}"),
+		const..cl_mem_p.IN("mem_objects", "a pointer to a list of memory objects"),
 		cl_mem_migration_flags.IN("flags", "a bit-field that is used to specify migration options", MigrationFlags),
 		NEWL,
 		EWL,

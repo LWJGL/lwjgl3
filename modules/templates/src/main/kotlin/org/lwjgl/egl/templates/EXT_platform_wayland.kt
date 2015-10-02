@@ -20,6 +20,6 @@ val EXT_platform_wayland = "EXTPlatformWayland".nativeClassEGL("EXT_platform_way
 	IntConstant(
 		"",
 
-		"PLATFORM_WAYLAND_EXT" _ 0x31D8
+		"PLATFORM_WAYLAND_EXT"..0x31D8
 	)
 }

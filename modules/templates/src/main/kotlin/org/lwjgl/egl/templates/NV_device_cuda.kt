@@ -21,6 +21,6 @@ val NV_device_cuda = "NVDeviceCUDA".nativeClassEGL("NV_device_cuda", postfix = N
 	IntConstant(
 		"",
 
-		"CUDA_DEVICE_NV" _ 0x323A
+		"CUDA_DEVICE_NV"..0x323A
 	)
 }

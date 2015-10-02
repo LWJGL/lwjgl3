@@ -34,8 +34,8 @@ val NV_depth_buffer_float = "NVDepthBufferFloat".nativeClassGL("NV_depth_buffer_
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
 		""",
 
-		"DEPTH_COMPONENT32F_NV" _ 0x8DAB,
-		"DEPTH32F_STENCIL8_NV" _ 0x8DAC
+		"DEPTH_COMPONENT32F_NV"..0x8DAB,
+		"DEPTH32F_STENCIL8_NV"..0x8DAC
 	)
 
 	IntConstant(
@@ -44,13 +44,13 @@ val NV_depth_buffer_float = "NVDepthBufferFloat".nativeClassGL("NV_depth_buffer_
 		GetTexImage.
 		""",
 
-		"FLOAT_32_UNSIGNED_INT_24_8_REV_NV" _ 0x8DAD
+		"FLOAT_32_UNSIGNED_INT_24_8_REV_NV"..0x8DAD
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"DEPTH_BUFFER_FLOAT_MODE_NV" _ 0x8DAF
+		"DEPTH_BUFFER_FLOAT_MODE_NV"..0x8DAF
 	)
 
 	void(

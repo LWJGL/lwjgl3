@@ -22,8 +22,8 @@ val NV_copy_buffer = "NVCopyBuffer".nativeClassGLES("NV_copy_buffer", postfix = 
 		CopyBufferSubDataNV.
 		""",
 
-		"COPY_READ_BUFFER_NV" _ 0x8F36,
-		"COPY_WRITE_BUFFER_NV" _ 0x8F37
+		"COPY_READ_BUFFER_NV"..0x8F36,
+		"COPY_WRITE_BUFFER_NV"..0x8F37
 	)
 
 	void(

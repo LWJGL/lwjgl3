@@ -25,16 +25,16 @@ val EXT_debug_marker = "EXTDebugMarker".nativeClassGL("EXT_debug_marker", postfi
 		"InsertEventMarkerEXT",
 		"",
 
-		AutoSize("marker") _ GLsizei.IN("length", ""),
-		const _ GLcharUTF8_p.IN("marker", "")
+		AutoSize("marker")..GLsizei.IN("length", ""),
+		const..GLcharUTF8_p.IN("marker", "")
 	)
 
 	void(
 		"PushGroupMarkerEXT",
 		"",
 
-		AutoSize("marker") _ GLsizei.IN("length", ""),
-		const _ GLcharUTF8_p.IN("marker", "")
+		AutoSize("marker")..GLsizei.IN("length", ""),
+		const..GLcharUTF8_p.IN("marker", "")
 	)
 
 	void(

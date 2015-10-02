@@ -20,6 +20,6 @@ val ARB_shading_language_100 = "ARBShadingLanguage100".nativeClassGL("ARB_shadin
 	IntConstant(
 		"Accepted by the {@code name} parameter of GetString.",
 
-		"SHADING_LANGUAGE_VERSION_ARB" _ 0x8B8C
+		"SHADING_LANGUAGE_VERSION_ARB"..0x8B8C
 	)
 }

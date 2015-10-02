@@ -13,6 +13,6 @@ val ALC_EXT_disconnect = "EXTDisconnect".nativeClassALC("EXT_disconnect") {
 	IntConstant(
 		"ALC_EXT_disconnect tokens.",
 
-		"CONNECTED " _ 0x313
+		"CONNECTED "..0x313
 	)
 }

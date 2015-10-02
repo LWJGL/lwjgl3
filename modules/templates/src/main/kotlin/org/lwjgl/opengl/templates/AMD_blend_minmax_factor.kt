@@ -27,7 +27,7 @@ val AMD_blend_minmax_factor = "AMDBlendMinmaxFactor".nativeClassGL("AMD_blend_mi
 		BlendEquationSeparate and BlendEquationSeparatei.
 		""",
 
-		"FACTOR_MIN_AMD" _ 0x901C,
-		"FACTOR_MAX_AMD" _ 0x901D
+		"FACTOR_MIN_AMD"..0x901C,
+		"FACTOR_MAX_AMD"..0x901D
 	)
 }

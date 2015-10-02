@@ -20,6 +20,6 @@ val OES_surfaceless_context = "OESSurfacelessContext".nativeClassGLES("OES_surfa
 	IntConstant(
 		"Returned by glCheckFramebufferStatusOES and glCheckFramebufferStatus.",
 
-		"FRAMEBUFFER_UNDEFINED_OES" _ 0x8219
+		"FRAMEBUFFER_UNDEFINED_OES"..0x8219
 	)
 }

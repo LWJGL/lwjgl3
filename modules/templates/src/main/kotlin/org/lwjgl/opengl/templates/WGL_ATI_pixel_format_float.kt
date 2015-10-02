@@ -27,8 +27,8 @@ val WGL_ATI_pixel_format_float = "WGLATIPixelFormatFloat".nativeClassWGL("WGL_AT
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"RGBA_FLOAT_MODE_ATI" _ 0x8820,
-		"COLOR_CLEAR_UNCLAMPED_VALUE_ATI" _ 0x8835
+		"RGBA_FLOAT_MODE_ATI"..0x8820,
+		"COLOR_CLEAR_UNCLAMPED_VALUE_ATI"..0x8835
 	)
 
 	IntConstant(
@@ -37,6 +37,6 @@ val WGL_ATI_pixel_format_float = "WGLATIPixelFormatFloat".nativeClassWGL("WGL_AT
 		{@code piValues} parameter array of wglGetPixelFormatAttribivARB, and the {@code pfValues} parameter array of wglGetPixelFormatAttribfvARB.
 		""",
 
-		"WGL_TYPE_RGBA_FLOAT_ATI" _ 0x21A0
+		"WGL_TYPE_RGBA_FLOAT_ATI"..0x21A0
 	)
 }

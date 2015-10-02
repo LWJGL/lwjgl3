@@ -22,6 +22,6 @@ val OES_compressed_ETC1_RGB8_texture = "OESCompressedETC1RGB8Texture".nativeClas
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of CompressedTexImage2D.",
 
-		"ETC1_RGB8_OES" _ 0x8D64
+		"ETC1_RGB8_OES"..0x8D64
 	)
 }

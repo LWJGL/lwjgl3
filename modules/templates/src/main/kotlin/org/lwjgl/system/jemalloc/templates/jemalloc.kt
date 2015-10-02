@@ -30,7 +30,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 
 	// Error & stats output
 
-	(address _ voidptr_p)(
+	(address..voidptr_p)(
 		"malloc_message",
 	    "Returns the {@code je_malloc_message} variable."
 	)
@@ -44,7 +44,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		of object.
 		""",
 
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate")
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -54,8 +54,8 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 	    {@code num * size}, with the exception that the allocated memory is explicitly initialized to zero bytes.
 	    """,
 
-		autoSizeResult _ size_t.IN("num", "the number of objects to allocate"),
-		autoSizeResult _ size_t.IN("size", "the size of each object, in bytes")
+		autoSizeResult..size_t.IN("num", "the number of objects to allocate"),
+		autoSizeResult..size_t.IN("size", "the size of each object, in bytes")
 	)
 
 	int(
@@ -65,7 +65,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 	    the value pointed to by {@code memptr}. The requested alignment must be a power of 2 at least as large as {@code sizeof(void *)}.
 	    """,
 
-		Check(1) _ void_pp.OUT("memptr", "returns the allocated memory"),
+		Check(1)..void_pp.OUT("memptr", "returns the allocated memory"),
 		size_t.IN("alignment", "the allocation alignment, in bytes"),
 		size_t.IN("size", "the number of bytes to allocate")
 	)
@@ -78,7 +78,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		""",
 
 		size_t.IN("alignment", "the allocation alignment, in bytes"),
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate")
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void_p(
@@ -91,15 +91,15 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		specified size.
 		""",
 
-		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate")
+		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate")
 	)
 
 	void(
 		"free",
 		"Causes the allocated memory referenced by {@code ptr} to be made available for future allocations. If {@code ptr} is $NULL, no action occurs.",
 
-		nullable _ void_p.IN("ptr", "the allocated memory to free")
+		nullable..void_p.IN("ptr", "the allocated memory to free")
 	)
 
 	// Non-standard API
@@ -113,7 +113,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		0, or if request size overflows due to size class and/or alignment constraints.
 		""",
 
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 
@@ -125,8 +125,8 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		alignment constraints.
 		""",
 
-		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
+		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 
@@ -138,7 +138,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		result in failure to resize. Behavior is undefined if {@code size} is 0, or if {@code (size + extra > SIZE_T_MAX)}.
 		""",
 
-		nullable _ void_p.IN("ptr", "the previously allocated memory or $NULL"),
+		nullable..void_p.IN("ptr", "the previously allocated memory or $NULL"),
 		size_t.IN("size", "the number of bytes to allocate"),
 		size_t.IN("extra", "the number of extra bytes to allocate"),
 		flags
@@ -148,7 +148,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		"sallocx",
 		"Returns the real size of the allocation at {@code ptr}.",
 
-		const _ void_p.IN("ptr", "the allocated memory to query"),
+		const..void_p.IN("ptr", "the allocated memory to query"),
 		flags
 	)
 
@@ -177,7 +177,7 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 		and/or alignment constraints.
 		""",
 
-		autoSizeResult _ size_t.IN("size", "the number of bytes to allocate"),
+		autoSizeResult..size_t.IN("size", "the number of bytes to allocate"),
 		flags
 	)
 
@@ -192,11 +192,11 @@ typedef void (APIENTRY *je_malloc_message_cb)(void *, const char *);""")
 	    via {@code newlen}; otherwise pass $NULL and {@code 0}.
 	    """,
 
-		const _ charASCII_p.IN("name", "the namespace location"),
-		nullable _ void_p.OUT("oldp", "returns a value"),
-		nullable _ Check(1) _ size_t_p.OUT("oldlenp", "returns the value length"),
-		nullable _ void_p.IN("newp", "the new value"),
-		AutoSize("newp") _ size_t.IN("newlen", "the new value length")
+		const..charASCII_p.IN("name", "the namespace location"),
+		nullable..void_p.OUT("oldp", "returns a value"),
+		nullable..Check(1)..size_t_p.OUT("oldlenp", "returns the value length"),
+		nullable..void_p.IN("newp", "the new value"),
+		AutoSize("newp")..size_t.IN("newlen", "the new value length")
 	)
 
 	int(
@@ -228,21 +228,21 @@ for (i = 0; i < nbins; i++) {
 }""")}
 	    """,
 
-		const _ charASCII_p.IN("name", "the namespace location"),
+		const..charASCII_p.IN("name", "the namespace location"),
 		size_t_p.IN("mibp", "an array of integers"),
-		AutoSize("mibp") _ Check(1) _ size_t_p.INOUT("miblenp", "the number of components in {@code mibp}")
+		AutoSize("mibp")..Check(1)..size_t_p.INOUT("miblenp", "the number of components in {@code mibp}")
 	)
 
 	int(
 		"mallctlbymib",
 		"Similar to #mallctl(), but uses MIBs instead of names. See #mallctlnametomib() for details.",
 
-		const _ size_t_p.IN("mib", "a MIB"),
-		AutoSize("mib") _ size_t.IN("miblen", "the number of elements in {@code mib}"),
-		nullable _ void_p.OUT("oldp", "returns a value"),
-		nullable _ Check(1) _ size_t_p.OUT("oldlenp", "returns the value length"),
-		nullable _ void_p.IN("newp", "the new value"),
-		AutoSize("newp") _ size_t.IN("newlen", "the new value length")
+		const..size_t_p.IN("mib", "a MIB"),
+		AutoSize("mib")..size_t.IN("miblen", "the number of elements in {@code mib}"),
+		nullable..void_p.OUT("oldp", "returns a value"),
+		nullable..Check(1)..size_t_p.OUT("oldlenp", "returns the value length"),
+		nullable..void_p.IN("newp", "the new value"),
+		AutoSize("newp")..size_t.IN("newlen", "the new value length")
 	)
 
 	void(
@@ -257,9 +257,9 @@ for (i = 0; i < nbins; i++) {
 		prevent some statistics from being completely up to date, since extra locking would be required to merge counters that track thread cache operations.
 		""",
 
-		nullable _ je_malloc_message_cb.IN("write_cb", "the print callback, or $NULL to use {@code malloc_message()}"),
-		nullable _ void_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
-		nullable _ const _ charASCII_p.IN("opts", "an options string")
+		nullable..je_malloc_message_cb.IN("write_cb", "the print callback, or $NULL to use {@code malloc_message()}"),
+		nullable..void_p.IN("je_cbopaque", "an opaque pointer that will be passed to {@code write_cb}"),
+		nullable..const..charASCII_p.IN("opts", "an options string")
 	)
 
 	size_t(
@@ -271,6 +271,6 @@ for (i = 0; i < nbins; i++) {
 	    such behavior is entirely implementation-dependent.
 	    """,
 
-		const _ void_p.IN("ptr", "the allocated memory to query")
+		const..void_p.IN("ptr", "the allocated memory to query")
 	)
 }

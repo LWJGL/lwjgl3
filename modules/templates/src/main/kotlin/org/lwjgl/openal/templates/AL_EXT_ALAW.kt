@@ -13,7 +13,7 @@ val AL_EXT_ALAW = "EXTAlaw".nativeClassAL("EXT_ALAW") {
 	IntConstant(
 		"AL_EXT_ALAW tokens.",
 
-		"FORMAT_MONO_ALAW_EXT" _ 0x10016,
-		"FORMAT_STEREO_ALAW_EXT" _ 0x10017
+		"FORMAT_MONO_ALAW_EXT"..0x10016,
+		"FORMAT_STEREO_ALAW_EXT"..0x10017
 	)
 }

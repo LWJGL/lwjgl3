@@ -43,17 +43,17 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GetColorTable, GetColorTableParameteriv, and GetColorTableParameterfv.
 		""",
 
-		"COLOR_TABLE" _ 0x80D0,
-		"POST_CONVOLUTION_COLOR_TABLE" _ 0x80D1,
-		"POST_COLOR_MATRIX_COLOR_TABLE" _ 0x80D2
+		"COLOR_TABLE"..0x80D0,
+		"POST_CONVOLUTION_COLOR_TABLE"..0x80D1,
+		"POST_COLOR_MATRIX_COLOR_TABLE"..0x80D2
 	).javaDocLinks
 
 	val PROXY_COLOR_TABLE_TARGETS = IntConstant(
 		"Accepted by the {@code target} parameter of ColorTable, GetColorTableParameteriv, and GetColorTableParameterfv.",
 
-		"PROXY_COLOR_TABLE" _ 0x80D3,
-		"PROXY_POST_CONVOLUTION_COLOR_TABLE" _ 0x80D4,
-		"PROXY_POST_COLOR_MATRIX_COLOR_TABLE" _ 0x80D5
+		"PROXY_COLOR_TABLE"..0x80D3,
+		"PROXY_POST_CONVOLUTION_COLOR_TABLE"..0x80D4,
+		"PROXY_POST_COLOR_MATRIX_COLOR_TABLE"..0x80D5
 	).javaDocLinks
 
 	val COLOR_TABLE_PARAMS = IntConstant(
@@ -62,30 +62,30 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GetColorTableParameterfv.
 		""",
 
-		"COLOR_TABLE_SCALE" _ 0x80D6,
-		"COLOR_TABLE_BIAS" _ 0x80D7
+		"COLOR_TABLE_SCALE"..0x80D6,
+		"COLOR_TABLE_BIAS"..0x80D7
 	).javaDocLinks
 
 	val COLOR_TABLE_PROPERTIES = IntConstant(
 		"Accepted by the {@code pname} parameter of GetColorTableParameteriv and GetColorTableParameterfv.",
 
-		"COLOR_TABLE_FORMAT" _ 0x80D8,
-		"COLOR_TABLE_WIDTH" _ 0x80D9,
-		"COLOR_TABLE_RED_SIZE" _ 0x80DA,
-		"COLOR_TABLE_GREEN_SIZE" _ 0x80DB,
-		"COLOR_TABLE_BLUE_SIZE" _ 0x80DC,
-		"COLOR_TABLE_ALPHA_SIZE" _ 0x80DD,
-		"COLOR_TABLE_LUMINANCE_SIZE" _ 0x80DE,
-		"COLOR_TABLE_INTENSITY_SIZE" _ 0x80DF
+		"COLOR_TABLE_FORMAT"..0x80D8,
+		"COLOR_TABLE_WIDTH"..0x80D9,
+		"COLOR_TABLE_RED_SIZE"..0x80DA,
+		"COLOR_TABLE_GREEN_SIZE"..0x80DB,
+		"COLOR_TABLE_BLUE_SIZE"..0x80DC,
+		"COLOR_TABLE_ALPHA_SIZE"..0x80DD,
+		"COLOR_TABLE_LUMINANCE_SIZE"..0x80DE,
+		"COLOR_TABLE_INTENSITY_SIZE"..0x80DF
 	).javaDocLinks
 
 	IntConstant(
 		"ErrorCode",
 
-		"TABLE_TOO_LARGE" _ 0x8031
+		"TABLE_TOO_LARGE"..0x8031
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ColorTable",
 		"Specifies a color lookup table.",
 
@@ -96,10 +96,10 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
 		MultiType(
 			PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT
-		) _ PIXEL_UNPACK_BUFFER _ const _ void_p.IN("table", "the color table data")
+		)..PIXEL_UNPACK_BUFFER..const..void_p.IN("table", "the color table data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"CopyColorTable",
 		"Defines a color table in exactly the manner of #ColorTable(), except that the image data are taken from the framebuffer rather than from client memory.",
 
@@ -110,55 +110,55 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the color table width")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ColorTableParameteriv",
 		"Specifies the scale and bias parameters for a color table.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("pname", "the parameter to set", COLOR_TABLE_PARAMS),
-		Check(4) _ const _ GLint_p.IN("params", "the parameter value")
+		Check(4)..const..GLint_p.IN("params", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ColorTableParameterfv",
 		"Float version of #ColorTableParameteriv().",
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to set"),
-		Check(4) _ const _ GLfloat_p.IN("params", "the parameter value")
+		Check(4)..const..GLfloat_p.IN("params", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetColorTable",
 		"Returns the current contents of a color table.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT) _ PIXEL_PACK_BUFFER _ void_p.OUT("table", "the color table data")
+		MultiType(PointerMapping.DATA_SHORT, PointerMapping.DATA_INT, PointerMapping.DATA_FLOAT)..PIXEL_PACK_BUFFER..void_p.OUT("table", "the color table data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetColorTableParameteriv",
 		"Returns the integer value of the specified color table parameter.",
 
 		GLenum.IN("target", "the color table target", COLOR_TABLE_TARGETS + " $PROXY_COLOR_TABLE_TARGETS"),
 		GLenum.IN("pname", "the parameter to query", COLOR_TABLE_PARAMS + " $COLOR_TABLE_PROPERTIES"),
-		Check(4) _ returnValue _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4)..returnValue..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetColorTableParameterfv",
 		"Float version of #GetColorTableParameteriv().",
 
 		GLenum.IN("target", "the color table target"),
 		GLenum.IN("pname", "the parameter to query"),
-		Check(4) _ returnValue _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		Check(4)..returnValue..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_color_subtable
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ColorSubTable",
 		"Respecifies a portion of an existing color table.",
 
@@ -167,10 +167,10 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("count", "the number of colors in the subregion to respecify"),
 		GLenum.IN("format", "the color data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the color data type", PIXEL_DATA_TYPES),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the color table data")
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "the color table data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"CopyColorSubTable",
 		"Respecifies a portion of an existing color table using image taken from the framebuffer.",
 
@@ -190,7 +190,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		ConvolutionParameterf, ConvolutionParameteriv, ConvolutionParameterfv, GetConvolutionParameteriv, and GetConvolutionParameterfv.
 		""",
 
-		"CONVOLUTION_1D" _ 0x8010
+		"CONVOLUTION_1D"..0x8010
 	)
 
 	IntConstant(
@@ -200,7 +200,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		ConvolutionParameterf, ConvolutionParameteriv, ConvolutionParameterfv, GetConvolutionParameteriv, and GetConvolutionParameterfv.
 		""",
 
-		"CONVOLUTION_2D" _ 0x8011
+		"CONVOLUTION_2D"..0x8011
 	)
 
 	IntConstant(
@@ -210,7 +210,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		ConvolutionParameterf, ConvolutionParameteriv, ConvolutionParameterfv, GetConvolutionParameteriv, and GetConvolutionParameterfv.
 		""",
 
-		"SEPARABLE_2D" _ 0x8012
+		"SEPARABLE_2D"..0x8012
 	)
 
 	IntConstant(
@@ -219,14 +219,14 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GetConvolutionParameteriv, and GetConvolutionParameterfv.
 		""",
 
-		"CONVOLUTION_BORDER_MODE" _ 0x8013
+		"CONVOLUTION_BORDER_MODE"..0x8013
 	)
 
 	val CONVOLUTION_FILTER_PARAMS = IntConstant(
 		"Accepted by the {@code pname} parameter of ConvolutionParameteriv, ConvolutionParameterfv, GetConvolutionParameteriv, and GetConvolutionParameterfv.",
 
-		"CONVOLUTION_FILTER_SCALE" _ 0x8014,
-		"CONVOLUTION_FILTER_BIAS" _ 0x8015
+		"CONVOLUTION_FILTER_SCALE"..0x8014,
+		"CONVOLUTION_FILTER_BIAS"..0x8015
 	).javaDocLinks
 
 	IntConstant(
@@ -235,17 +235,17 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		ConvolutionParameteriv and ConvolutionParameterfv, when the {@code pname} parameter is CONVOLUTION_BORDER_MODE.
 		""",
 
-		"REDUCE" _ 0x8016
+		"REDUCE"..0x8016
 	)
 
 	val CONVOLUTION_FILTER_PROPERTIES = IntConstant(
 		"Accepted by the {@code pname} parameter of GetConvolutionParameteriv and GetConvolutionParameterfv.",
 
-		"CONVOLUTION_FORMAT" _ 0x8017,
-		"CONVOLUTION_WIDTH" _ 0x8018,
-		"CONVOLUTION_HEIGHT" _ 0x8019,
-		"MAX_CONVOLUTION_WIDTH" _ 0x801A,
-		"MAX_CONVOLUTION_HEIGHT" _ 0x801B
+		"CONVOLUTION_FORMAT"..0x8017,
+		"CONVOLUTION_WIDTH"..0x8018,
+		"CONVOLUTION_HEIGHT"..0x8019,
+		"MAX_CONVOLUTION_WIDTH"..0x801A,
+		"MAX_CONVOLUTION_HEIGHT"..0x801B
 	).javaDocLinks
 
 	IntConstant(
@@ -254,17 +254,17 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		and GetDoublev.
 		""",
 
-		"POST_CONVOLUTION_RED_SCALE" _ 0x801C,
-		"POST_CONVOLUTION_GREEN_SCALE" _ 0x801D,
-		"POST_CONVOLUTION_BLUE_SCALE" _ 0x801E,
-		"POST_CONVOLUTION_ALPHA_SCALE" _ 0x801F,
-		"POST_CONVOLUTION_RED_BIAS" _ 0x8020,
-		"POST_CONVOLUTION_GREEN_BIAS" _ 0x8021,
-		"POST_CONVOLUTION_BLUE_BIAS" _ 0x8022,
-		"POST_CONVOLUTION_ALPHA_BIAS" _ 0x8023
+		"POST_CONVOLUTION_RED_SCALE"..0x801C,
+		"POST_CONVOLUTION_GREEN_SCALE"..0x801D,
+		"POST_CONVOLUTION_BLUE_SCALE"..0x801E,
+		"POST_CONVOLUTION_ALPHA_SCALE"..0x801F,
+		"POST_CONVOLUTION_RED_BIAS"..0x8020,
+		"POST_CONVOLUTION_GREEN_BIAS"..0x8021,
+		"POST_CONVOLUTION_BLUE_BIAS"..0x8022,
+		"POST_CONVOLUTION_ALPHA_BIAS"..0x8023
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionFilter1D",
 		"Defines a one-dimensional convolution filter.",
 
@@ -273,10 +273,10 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the filter width"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the filter data")
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "the filter data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionFilter2D",
 		"Defines a two-dimensional convolution filter.",
 
@@ -286,10 +286,10 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "the filter data")
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "the filter data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"CopyConvolutionFilter1D",
 		"""
 		Defines a one-dimensional filter in exactly the manner of #ConvolutionFilter1D(), except that image data are taken from the framebuffer, rather than from
@@ -303,7 +303,7 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("width", "the filter width")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"CopyConvolutionFilter2D",
 		"""
 		Defines a two-dimensional filter in exactly the manner of #ConvolutionFilter1D(), except that image data are taken from the framebuffer, rather than from
@@ -318,17 +318,17 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetConvolutionFilter",
 		"Returns the contents of a convolution filter.",
 
 		GLenum.IN("target", "the convolution target", "ARBImaging#CONVOLUTION_1D ARBImaging#CONVOLUTION_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ void_p.OUT("image", "the filter data")
+		PIXEL_PACK_BUFFER..void_p.OUT("image", "the filter data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"SeparableFilter2D",
 		"Specifies a two-dimensional separable convolution filter.",
 
@@ -338,23 +338,23 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLsizei.IN("height", "the filter height"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("row", "the horizontal filter data"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("column", "the vertical filter data")
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("row", "the horizontal filter data"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("column", "the vertical filter data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetSeparableFilter",
 		"Returns the current contents of a separable convolution filter.",
 
 		GLenum.IN("target", "the filter target", "ARBImaging#SEPARABLE_2D"),
 		GLenum.IN("format", "the filter data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the filter data type", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ void_p.OUT("row", "a buffer in which to return the filter row"),
-		PIXEL_PACK_BUFFER _ void_p.OUT("column", "a buffer in which to return the filter column"),
-		nullable _ void_p.IN("span", "unused")
+		PIXEL_PACK_BUFFER..void_p.OUT("row", "a buffer in which to return the filter row"),
+		PIXEL_PACK_BUFFER..void_p.OUT("column", "a buffer in which to return the filter column"),
+		nullable..void_p.IN("span", "unused")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionParameteri",
 		"Specifies the scale and bias of a convolution filter.",
 
@@ -363,16 +363,16 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLint.IN("param", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionParameteriv",
 		"Pointer version of #ConvolutionParameteri().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		Check(4) _ const _ GLint_p.IN("params", "the parameter value")
+		Check(4)..const..GLint_p.IN("params", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionParameterf",
 		"Float version of #ConvolutionParameteri()",
 
@@ -381,31 +381,31 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GLfloat.IN("param", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ConvolutionParameterfv",
 		"Pointer version of #ConvolutionParameterf().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to set", CONVOLUTION_FILTER_PARAMS + " #CONVOLUTION_BORDER_COLOR"),
-		Check(4) _ const _ GLfloat_p.IN("params", "the parameter value")
+		Check(4)..const..GLfloat_p.IN("params", "the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetConvolutionParameteriv",
 		"Returns the value of a convolution filter parameter.",
 
 		GLenum.IN("target", "the filter target", "#CONVOLUTION_1D #CONVOLUTION_2D #SEPARABLE_2D"),
 		GLenum.IN("pname", "the parameter to query", CONVOLUTION_FILTER_PROPERTIES),
-		returnValue _ Check(4) _ GLint_p.OUT("params", "a buffer in which to return the parameter value")
+		returnValue..Check(4)..GLint_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetConvolutionParameterfv",
 		"Float version of #GetConvolutionParameteriv().",
 
 		GLenum.IN("target", "the filter target"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue _ Check(4) _ GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
+		returnValue..Check(4)..GLfloat_p.OUT("params", "a buffer in which to return the parameter value")
 	)
 
 	// HP_convolution_border_modes
@@ -416,15 +416,15 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		ConvolutionParameteriv and ConvolutionParameterfv, when the {@code pname} parameter is CONVOLUTION_BORDER_MODE.
 		""",
 
-		//"IGNORE_BORDER" _ 0x8150,
-		"CONSTANT_BORDER" _ 0x8151,
-		"REPLICATE_BORDER" _ 0x8153
+		//"IGNORE_BORDER"..0x8150,
+		"CONSTANT_BORDER"..0x8151,
+		"REPLICATE_BORDER"..0x8153
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of ConvolutionParameteriv, ConvolutionParameterfv, GetConvolutionParameteriv, and GetConvolutionParameterfv.",
 
-		"CONVOLUTION_BORDER_COLOR" _ 0x8154
+		"CONVOLUTION_BORDER_COLOR"..0x8154
 	)
 
 	// SGI_color_matrix
@@ -432,22 +432,22 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"COLOR_MATRIX" _ 0x80B1,
-		"COLOR_MATRIX_STACK_DEPTH" _ 0x80B2,
-		"MAX_COLOR_MATRIX_STACK_DEPTH" _ 0x80B3
+		"COLOR_MATRIX"..0x80B1,
+		"COLOR_MATRIX_STACK_DEPTH"..0x80B2,
+		"MAX_COLOR_MATRIX_STACK_DEPTH"..0x80B3
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of PixelTransfer*, and by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"POST_COLOR_MATRIX_RED_SCALE" _ 0x80B4,
-		"POST_COLOR_MATRIX_GREEN_SCALE" _ 0x80B5,
-		"POST_COLOR_MATRIX_BLUE_SCALE" _ 0x80B6,
-		"POST_COLOR_MATRIX_ALPHA_SCALE" _ 0x80B7,
-		"POST_COLOR_MATRIX_RED_BIAS" _ 0x80B8,
-		"POST_COLOR_MATRIX_GREEN_BIAS" _ 0x80B9,
-		"POST_COLOR_MATRIX_BLUE_BIAS" _ 0x80BA,
-		"POST_COLOR_MATRIX_ALPHA_BIAS" _ 0x80BB
+		"POST_COLOR_MATRIX_RED_SCALE"..0x80B4,
+		"POST_COLOR_MATRIX_GREEN_SCALE"..0x80B5,
+		"POST_COLOR_MATRIX_BLUE_SCALE"..0x80B6,
+		"POST_COLOR_MATRIX_ALPHA_SCALE"..0x80B7,
+		"POST_COLOR_MATRIX_RED_BIAS"..0x80B8,
+		"POST_COLOR_MATRIX_GREEN_BIAS"..0x80B9,
+		"POST_COLOR_MATRIX_BLUE_BIAS"..0x80BA,
+		"POST_COLOR_MATRIX_ALPHA_BIAS"..0x80BB
 	)
 
 	// EXT_histogram
@@ -459,26 +459,26 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GetHistogramParameterfv.
 		""",
 
-		"HISTOGRAM" _ 0x8024
+		"HISTOGRAM"..0x8024
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of Histogram, GetHistogramParameteriv, and GetHistogramParameterfv.",
 
-		"PROXY_HISTOGRAM" _ 0x8025
+		"PROXY_HISTOGRAM"..0x8025
 	)
 
 	val HISTOGRAM_PROPERTIES = IntConstant(
 		"Accepted by the {@code pname} parameter of GetHistogramParameteriv and GetHistogramParameterfv.",
 
-		"HISTOGRAM_WIDTH" _ 0x8026,
-		"HISTOGRAM_FORMAT" _ 0x8027,
-		"HISTOGRAM_RED_SIZE" _ 0x8028,
-		"HISTOGRAM_GREEN_SIZE" _ 0x8029,
-		"HISTOGRAM_BLUE_SIZE" _ 0x802A,
-		"HISTOGRAM_ALPHA_SIZE" _ 0x802B,
-		"HISTOGRAM_LUMINANCE_SIZE" _ 0x802C,
-		"HISTOGRAM_SINK" _ 0x802D
+		"HISTOGRAM_WIDTH"..0x8026,
+		"HISTOGRAM_FORMAT"..0x8027,
+		"HISTOGRAM_RED_SIZE"..0x8028,
+		"HISTOGRAM_GREEN_SIZE"..0x8029,
+		"HISTOGRAM_BLUE_SIZE"..0x802A,
+		"HISTOGRAM_ALPHA_SIZE"..0x802B,
+		"HISTOGRAM_LUMINANCE_SIZE"..0x802C,
+		"HISTOGRAM_SINK"..0x802D
 	).javaDocLinks
 
 	IntConstant(
@@ -487,17 +487,17 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		GetDoublev, and by the {@code target} parameter of Minmax, ResetMinmax, GetMinmax, GetMinmaxParameteriv, and GetMinmaxParameterfv.
 		""",
 
-		"MINMAX" _ 0x802E
+		"MINMAX"..0x802E
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetMinmaxParameteriv and GetMinmaxParameterfv.",
 
-		"MINMAX_FORMAT" _ 0x802F,
-		"MINMAX_SINK" _ 0x8030
+		"MINMAX_FORMAT"..0x802F,
+		"MINMAX_SINK"..0x8030
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"Histogram",
 		"Specifies the histogram table.",
 
@@ -512,14 +512,14 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		)
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ResetHistogram",
 		"Resets all counters of all elements of the histogram table to zero.",
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetHistogram",
 		"Returns the current contents of the histogram table.",
 
@@ -530,28 +530,28 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data types", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ void_p.OUT("values", "the pixel data")
+		PIXEL_PACK_BUFFER..void_p.OUT("values", "the pixel data")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetHistogramParameteriv",
 		"Returns the integer values of the specified histogram parameter",
 
 		GLenum.IN("target", "the histogram target", "#HISTOGRAM"),
 		GLenum.IN("pname", "the parameter to query", HISTOGRAM_PROPERTIES),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "a buffer in which to return the parameter values")
+		returnValue..Check(1)..GLint_p.OUT("params", "a buffer in which to return the parameter values")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetHistogramParameterfv",
 		"Float version of #GetHistogramParameteriv().",
 
 		GLenum.IN("target", "the histogram target"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue _ Check(1) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"Minmax",
 		"Specifies the minmax table.",
 
@@ -563,14 +563,14 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		)
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"ResetMinmax",
 		"Resets all minimum and maximum values of {@code target} to to their maximum and minimum representable values, respectively.",
 
 		GLenum.IN("target", "the minmax target", "#MINMAX")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetMinmax",
 		"Returns the current contents of the minmax table.",
 
@@ -584,25 +584,25 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 		),
 		GLenum.IN("format", "the pixel data format", PIXEL_DATA_FORMATS),
 		GLenum.IN("type", "the pixel data type", PIXEL_DATA_TYPES),
-		PIXEL_PACK_BUFFER _ void_p.OUT("values", "a buffer in which to place the minmax values")
+		PIXEL_PACK_BUFFER..void_p.OUT("values", "a buffer in which to place the minmax values")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetMinmaxParameteriv",
 		"Returns the integer value of the specified minmax parameter.",
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue..Check(1)..GLint_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
-	deprecatedGL _ void(
+	deprecatedGL..void(
 		"GetMinmaxParameterfv",
 		"Float version of #GetMinmaxParameteriv().",
 
 		GLenum.IN("target", "the minmax target", "#MINMAX"),
 		GLenum.IN("pname", "the parameter to query"),
-		returnValue _ Check(1) _ GLfloat_p.OUT("params", "a buffer in which to place the returned value")
+		returnValue..Check(1)..GLfloat_p.OUT("params", "a buffer in which to place the returned value")
 	)
 
 	// EXT_blend_color
@@ -610,16 +610,16 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	IntConstant(
 		"Accepted by the {@code sfactor} and {@code dfactor} parameters of BlendFunc.",
 
-		"CONSTANT_COLOR" _ 0x8001,
-		"ONE_MINUS_CONSTANT_COLOR" _ 0x8002,
-		"CONSTANT_ALPHA" _ 0x8003,
-		"ONE_MINUS_CONSTANT_ALPHA" _ 0x8004
+		"CONSTANT_COLOR"..0x8001,
+		"ONE_MINUS_CONSTANT_COLOR"..0x8002,
+		"CONSTANT_ALPHA"..0x8003,
+		"ONE_MINUS_CONSTANT_ALPHA"..0x8004
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"BLEND_COLOR" _ 0x8005
+		"BLEND_COLOR"..0x8005
 	)
 
 	GL14 reuse "BlendColor"
@@ -629,15 +629,15 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation.",
 
-		"FUNC_ADD" _ 0x8006,
-		"MIN" _ 0x8007,
-		"MAX" _ 0x8008
+		"FUNC_ADD"..0x8006,
+		"MIN"..0x8007,
+		"MAX"..0x8008
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"BLEND_EQUATION" _ 0x8009
+		"BLEND_EQUATION"..0x8009
 	)
 
 	// EXT_blend_subtract
@@ -645,8 +645,8 @@ val ARB_imaging = "ARBImaging".nativeClassGL("ARB_imaging") {
 	IntConstant(
 		"Accepted by the {@code mode} parameter of BlendEquation.",
 
-		"FUNC_SUBTRACT" _ 0x800A,
-		"FUNC_REVERSE_SUBTRACT" _ 0x800B
+		"FUNC_SUBTRACT"..0x800A,
+		"FUNC_REVERSE_SUBTRACT"..0x800B
 	)
 
 	GL14 reuse "BlendEquation"

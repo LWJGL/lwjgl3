@@ -22,13 +22,13 @@ val AL_SOFT_source_length = "SOFTSourceLength".nativeClassAL("SOFT_source_length
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourcei and alGetSourceiv (these are the same as in AL_SOFT_buffer_samples).",
 
-		"BYTE_LENGTH_SOFT" _ 0x2009,
-		"SAMPLE_LENGTH_SOFT" _ 0x200A
+		"BYTE_LENGTH_SOFT"..0x2009,
+		"SAMPLE_LENGTH_SOFT"..0x200A
 	)
 
 	IntConstant(
 		"Accepted by the {@code paramName} parameter of alGetSourcef and alGetSourcefv (these are the same as in AL_SOFT_buffer_samples).",
 
-		"SEC_LENGTH_SOFT" _ 0x200B
+		"SEC_LENGTH_SOFT"..0x200B
 	)
 }

@@ -32,19 +32,19 @@ val NV_framebuffer_multisample = "NVFramebufferMultisample".nativeClassGLES("NV_
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
-		"RENDERBUFFER_SAMPLES_NV" _ 0x8CAB
+		"RENDERBUFFER_SAMPLES_NV"..0x8CAB
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV" _ 0x8D56
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_NV"..0x8D56
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLES_NV" _ 0x8D57
+		"MAX_SAMPLES_NV"..0x8D57
 	)
 
 	void(

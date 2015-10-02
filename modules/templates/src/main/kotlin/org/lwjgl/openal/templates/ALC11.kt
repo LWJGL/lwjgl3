@@ -13,24 +13,24 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 	IntConstant(
 		"Context creation attributes.",
 
-		"MONO_SOURCES" _ 0x1010,
-		"STEREO_SOURCES" _ 0x1011
+		"MONO_SOURCES"..0x1010,
+		"STEREO_SOURCES"..0x1011
 	)
 
 	IntConstant(
 		"String queries.",
 
-		"DEFAULT_ALL_DEVICES_SPECIFIER" _ 0x1012,
-		"ALL_DEVICES_SPECIFIER" _ 0x1013,
+		"DEFAULT_ALL_DEVICES_SPECIFIER"..0x1012,
+		"ALL_DEVICES_SPECIFIER"..0x1013,
 
-		"CAPTURE_DEVICE_SPECIFIER" _ 0x310,
-		"CAPTURE_DEFAULT_DEVICE_SPECIFIER" _ 0x311
+		"CAPTURE_DEVICE_SPECIFIER"..0x310,
+		"CAPTURE_DEFAULT_DEVICE_SPECIFIER"..0x311
 	)
 
 	IntConstant(
 		"Integer queries.",
 
-		"CAPTURE_SAMPLES" _ 0x312
+		"CAPTURE_SAMPLES"..0x312
 	)
 
 	ALCdevice_p(
@@ -42,7 +42,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 		will provide an implementation specific default.
 		""",
 
-		nullable _ const _ ALCcharUTF8_p.IN("devicename", "the device or device configuration"),
+		nullable..const..ALCcharUTF8_p.IN("devicename", "the device or device configuration"),
 		ALCuint.IN("frequency", "the audio frequency"),
 		ALCenum.IN("format", "the audio format"),
 		ALCsizei.IN("buffersize", "the number of sample frame to buffer in the AL")
@@ -90,7 +90,7 @@ val ALC11 = "ALC11".nativeClassALC("ALC11") {
 
 		ALCdevice_p.IN("device", "the capture device"),
 		ALCvoid_p.IN("buffer", "the buffer that will receive the samples"),
-		AutoSize("buffer") _ ALCsizei.IN("samples", "the buffer size")
+		AutoSize("buffer")..ALCsizei.IN("samples", "the buffer size")
 	)
 
 }

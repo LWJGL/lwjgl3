@@ -30,7 +30,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 		GetTexParameterIuivEXT, GetSamplerParameteriv, GetSamplerParameterfv, GetSamplerParameterIivEXT, and GetSamplerParameterIuivEXT.
 		""",
 
-		"TEXTURE_BORDER_COLOR_EXT" _ 0x1004
+		"TEXTURE_BORDER_COLOR_EXT"..0x1004
 	)
 
 	IntConstant(
@@ -42,7 +42,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 		or TEXTURE_WRAP_R.
 		""",
 
-		"CLAMP_TO_BORDER_EXT" _ 0x812D
+		"CLAMP_TO_BORDER_EXT"..0x812D
 	)
 
 	void(
@@ -51,7 +51,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ const _ GLint_p.IN("params", "")
+		Check(1)..const..GLint_p.IN("params", "")
 	)
 
 	void(
@@ -60,7 +60,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ const _ GLuint_p.IN("params", "")
+		Check(1)..const..GLuint_p.IN("params", "")
 	)
 
 	void(
@@ -69,7 +69,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "")
+		returnValue..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -78,7 +78,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLenum.IN("target", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("params", "")
+		returnValue..Check(1)..GLuint_p.OUT("params", "")
 	)
 
 	void(
@@ -87,7 +87,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ const _ GLint_p.IN("param", "")
+		Check(1)..const..GLint_p.IN("param", "")
 	)
 
 	void(
@@ -96,7 +96,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		Check(1) _ const _ GLuint_p.IN("param", "")
+		Check(1)..const..GLuint_p.IN("param", "")
 	)
 
 	void(
@@ -105,7 +105,7 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLint_p.OUT("params", "")
+		returnValue..Check(1)..GLint_p.OUT("params", "")
 	)
 
 	void(
@@ -114,6 +114,6 @@ val EXT_texture_border_clamp = "EXTTextureBorderClamp".nativeClassGLES("EXT_text
 
 		GLuint.IN("sampler", ""),
 		GLenum.IN("pname", ""),
-		returnValue _ Check(1) _ GLuint_p.OUT("params", "")
+		returnValue..Check(1)..GLuint_p.OUT("params", "")
 	)
 }

@@ -33,7 +33,7 @@ val OES_primitive_bounding_box = "OESPrimitiveBoundingBox".nativeClassGLES("OES_
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetFloatv, GetIntegerv, and GetInteger64v.",
 
-		"PRIMITIVE_BOUNDING_BOX_OES" _ 0x92BE
+		"PRIMITIVE_BOUNDING_BOX_OES"..0x92BE
 	)
 
 	void(

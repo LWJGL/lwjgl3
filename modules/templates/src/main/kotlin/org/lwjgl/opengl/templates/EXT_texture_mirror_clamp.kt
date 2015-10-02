@@ -26,8 +26,8 @@ val EXT_texture_mirror_clamp = "EXTTextureMirrorClamp".nativeClassGL("EXT_textur
 		when their {@code pname} parameter is TEXTURE_WRAP_S, TEXTURE_WRAP_T, or TEXTURE_WRAP_R.
 		""",
 
-		"MIRROR_CLAMP_EXT" _ 0x8742,
-		"MIRROR_CLAMP_TO_EDGE_EXT" _ 0x8743,
-		"MIRROR_CLAMP_TO_BORDER_EXT" _ 0x8912
+		"MIRROR_CLAMP_EXT"..0x8742,
+		"MIRROR_CLAMP_TO_EDGE_EXT"..0x8743,
+		"MIRROR_CLAMP_TO_BORDER_EXT"..0x8912
 	)
 }

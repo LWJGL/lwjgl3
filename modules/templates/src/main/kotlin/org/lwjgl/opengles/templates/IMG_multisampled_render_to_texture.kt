@@ -33,25 +33,25 @@ val IMG_multisampled_render_to_texture = "IMGMultisampledRenderToTexture".native
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
-		"RENDERBUFFER_SAMPLES_IMG" _ 0x9133
+		"RENDERBUFFER_SAMPLES_IMG"..0x9133
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG" _ 0x9134
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_IMG"..0x9134
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_SAMPLES_IMG" _ 0x9135
+		"MAX_SAMPLES_IMG"..0x9135
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetFramebufferAttachmentParameteriv.",
 
-		"TEXTURE_SAMPLES_IMG" _ 0x9136
+		"TEXTURE_SAMPLES_IMG"..0x9136
 	)
 
 	void(

@@ -23,8 +23,8 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		"LogMessagesToSystemLogAPPLE",
 		"Forwards on all log messages to the Apple System Logger.",
 
-		const _ char_p.IN("errstr", ""),
-		const _ void_p.IN("private_info", ""),
+		const..char_p.IN("errstr", ""),
+		const..void_p.IN("private_info", ""),
 		size_t.IN("cb", ""),
 		void_p.IN("user_data", "")
 	)
@@ -33,8 +33,8 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		"LogMessagesToStdoutAPPLE",
 		"Forwards on all log messages to the standard output stream.",
 
-		const _ char_p.IN("errstr", ""),
-		const _ void_p.IN("private_info", ""),
+		const..char_p.IN("errstr", ""),
+		const..void_p.IN("private_info", ""),
 		size_t.IN("cb", ""),
 		void_p.IN("user_data", "")
 	)
@@ -43,8 +43,8 @@ val APPLE_ContextLoggingFunctions = "APPLEContextLoggingFunctions".nativeClassCL
 		"LogMessagesToStderrAPPLE",
 		"Forwards on all log messages to the standard error stream.",
 
-		const _ char_p.IN("errstr", ""),
-		const _ void_p.IN("private_info", ""),
+		const..char_p.IN("errstr", ""),
+		const..void_p.IN("private_info", ""),
 		size_t.IN("cb", ""),
 		void_p.IN("user_data", "")
 	)

@@ -32,9 +32,9 @@ val EXT_discard_framebuffer = "EXTDiscardFramebuffer".nativeClassGLES("EXT_disca
 	IntConstant(
 		"Accepted in the {@code attachments} parameter of DiscardFramebufferEXT when the default framebuffer is bound to {@code target}.",
 
-		"COLOR_EXT" _ 0x1800,
-		"DEPTH_EXT" _ 0x1801,
-		"STENCIL_EXT" _ 0x1802
+		"COLOR_EXT"..0x1800,
+		"DEPTH_EXT"..0x1801,
+		"STENCIL_EXT"..0x1802
 	)
 
 	void(
@@ -42,7 +42,7 @@ val EXT_discard_framebuffer = "EXTDiscardFramebuffer".nativeClassGLES("EXT_disca
 		"",
 
 		GLenum.IN("target", ""),
-		AutoSize("attachments") _ GLsizei.IN("numAttachments", ""),
-		SingleValue("attachment") _ const _ GLenum_p.IN("attachments", "")
+		AutoSize("attachments")..GLsizei.IN("numAttachments", ""),
+		SingleValue("attachment")..const..GLenum_p.IN("attachments", "")
 	)
 }

@@ -84,23 +84,23 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		DEBUG_OUTPUT_SYNCHRONOUS_ARB is enabled in all contexts.
 		""",
 
-		"DEBUG_OUTPUT_SYNCHRONOUS_ARB" _ 0x8242
+		"DEBUG_OUTPUT_SYNCHRONOUS_ARB"..0x8242
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code value} parameters of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"MAX_DEBUG_MESSAGE_LENGTH_ARB" _ 0x9143,
-		"MAX_DEBUG_LOGGED_MESSAGES_ARB" _ 0x9144,
-		"DEBUG_LOGGED_MESSAGES_ARB" _ 0x9145,
-		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB" _ 0x8243
+		"MAX_DEBUG_MESSAGE_LENGTH_ARB"..0x9143,
+		"MAX_DEBUG_LOGGED_MESSAGES_ARB"..0x9144,
+		"DEBUG_LOGGED_MESSAGES_ARB"..0x9145,
+		"DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB"..0x8243
 	)
 
 	IntConstant(
 		"Tokens accepted by the {@code pname} parameter of GetPointerv.",
 
-		"DEBUG_CALLBACK_FUNCTION_ARB" _ 0x8244,
-		"DEBUG_CALLBACK_USER_PARAM_ARB" _ 0x8245
+		"DEBUG_CALLBACK_FUNCTION_ARB"..0x8244,
+		"DEBUG_CALLBACK_USER_PARAM_ARB"..0x8245
 	)
 
 	val Sources = IntConstant(
@@ -109,12 +109,12 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		parameter of GetDebugMessageLogARB.
 		""",
 
-		"DEBUG_SOURCE_API_ARB" _ 0x8246,
-		"DEBUG_SOURCE_WINDOW_SYSTEM_ARB" _ 0x8247,
-		"DEBUG_SOURCE_SHADER_COMPILER_ARB" _ 0x8248,
-		"DEBUG_SOURCE_THIRD_PARTY_ARB" _ 0x8249,
-		"DEBUG_SOURCE_APPLICATION_ARB" _ 0x824A,
-		"DEBUG_SOURCE_OTHER_ARB" _ 0x824B
+		"DEBUG_SOURCE_API_ARB"..0x8246,
+		"DEBUG_SOURCE_WINDOW_SYSTEM_ARB"..0x8247,
+		"DEBUG_SOURCE_SHADER_COMPILER_ARB"..0x8248,
+		"DEBUG_SOURCE_THIRD_PARTY_ARB"..0x8249,
+		"DEBUG_SOURCE_APPLICATION_ARB"..0x824A,
+		"DEBUG_SOURCE_OTHER_ARB"..0x824B
 	).javaDocLinks
 
 	val Types = IntConstant(
@@ -123,12 +123,12 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		parameter of GetDebugMessageLogARB.
 		""",
 
-		"DEBUG_TYPE_ERROR_ARB" _ 0x824C,
-		"DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB" _ 0x824D,
-		"DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB" _ 0x824E,
-		"DEBUG_TYPE_PORTABILITY_ARB" _ 0x824F,
-		"DEBUG_TYPE_PERFORMANCE_ARB" _ 0x8250,
-		"DEBUG_TYPE_OTHER_ARB" _ 0x8251
+		"DEBUG_TYPE_ERROR_ARB"..0x824C,
+		"DEBUG_TYPE_DEPRECATED_BEHAVIOR_ARB"..0x824D,
+		"DEBUG_TYPE_UNDEFINED_BEHAVIOR_ARB"..0x824E,
+		"DEBUG_TYPE_PORTABILITY_ARB"..0x824F,
+		"DEBUG_TYPE_PERFORMANCE_ARB"..0x8250,
+		"DEBUG_TYPE_OTHER_ARB"..0x8251
 	).javaDocLinks
 
 	val Severities = IntConstant(
@@ -137,9 +137,9 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		the {@code severities} parameter of GetDebugMessageLogARB.
 		""",
 
-		"DEBUG_SEVERITY_HIGH_ARB" _ 0x9146,
-		"DEBUG_SEVERITY_MEDIUM_ARB" _ 0x9147,
-		"DEBUG_SEVERITY_LOW_ARB" _ 0x9148
+		"DEBUG_SEVERITY_HIGH_ARB"..0x9146,
+		"DEBUG_SEVERITY_MEDIUM_ARB"..0x9147,
+		"DEBUG_SEVERITY_LOW_ARB"..0x9148
 	).javaDocLinks
 
 	void(
@@ -169,8 +169,8 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		GLenum.IN("source", "the message source", Sources),
 		GLenum.IN("type", "the message type", Types),
 		GLenum.IN("severity", "the message severity level", Severities),
-		AutoSize("ids") _ GLsizei.IN("count", "the number of message IDs in {@code ids}"),
-		SingleValue("id") _ nullable _ const _ GLuint_p.IN("ids", "the message IDs to enable or disable"),
+		AutoSize("ids")..GLsizei.IN("count", "the number of message IDs in {@code ids}"),
+		SingleValue("id")..nullable..const..GLuint_p.IN("ids", "the message IDs to enable or disable"),
 		GLboolean.IN("enabled", "whether to enable or disable the references subset of messages")
 	)
 
@@ -188,11 +188,11 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		GLenum.IN("type", "the message type", Types),
 		GLuint.IN("id", "the message ID"),
 		GLenum.IN("severity", "the message severity level", Severities),
-		AutoSize("buf") _ GLsizei.IN(
+		AutoSize("buf")..GLsizei.IN(
 			"length",
 			"the number of characters in {@code buf}. If negative, it is implied that {@code buf} contains a null terminated string."
 		),
-		const _ GLcharUTF8_p.IN("buf", "the string representation of the message")
+		const..GLcharUTF8_p.IN("buf", "the string representation of the message")
 	)
 
 	void(
@@ -233,8 +233,8 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		(including its null terminator) of the oldest message in the log through the value of #DEBUG_NEXT_LOGGED_MESSAGE_LENGTH_ARB.
 		""",
 
-		nullable _ GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
-		nullable _ const _ voidptr.IN(
+		nullable..GLDEBUGPROCARB.IN("callback", "a callback function that will be called when a debug message is generated"),
+		nullable..const..voidptr.IN(
 			"userParam",
 			"a user supplied pointer that will be passed on each invocation of {@code callback}"
 		)
@@ -265,12 +265,12 @@ val ARB_debug_output = "ARBDebugOutput".nativeClassGL("ARB_debug_output", postfi
 		""",
 
 		GLuint.IN("count", "the number of debug messages to retrieve from the log"),
-		AutoSize("messageLog") _ GLsizei.IN("bufSize", "the maximum number of characters that can be written in the {@code messageLog} array"),
-		Check("count") _ nullable _ GLenum_p.IN("sources", "a buffer in which to place the returned message sources"),
-		Check("count") _ nullable _ GLenum_p.IN("types", "a buffer in which to place the returned message typesd"),
-		Check("count") _ nullable _ GLuint_p.IN("ids", "a buffer in which to place the returned message IDs"),
-		Check("count") _ nullable _ GLenum_p.IN("severities", "a buffer in which to place the returned message severity levels"),
-		Check("count") _ nullable _ GLsizei_p.IN("lengths", "a buffer in which to place the returned message lengths"),
-		nullable _ GLcharUTF8_p.OUT("messageLog", "a buffer in which to place the returned messages")
+		AutoSize("messageLog")..GLsizei.IN("bufSize", "the maximum number of characters that can be written in the {@code messageLog} array"),
+		Check("count")..nullable..GLenum_p.IN("sources", "a buffer in which to place the returned message sources"),
+		Check("count")..nullable..GLenum_p.IN("types", "a buffer in which to place the returned message typesd"),
+		Check("count")..nullable..GLuint_p.IN("ids", "a buffer in which to place the returned message IDs"),
+		Check("count")..nullable..GLenum_p.IN("severities", "a buffer in which to place the returned message severity levels"),
+		Check("count")..nullable..GLsizei_p.IN("lengths", "a buffer in which to place the returned message lengths"),
+		nullable..GLcharUTF8_p.OUT("messageLog", "a buffer in which to place the returned messages")
 	)
 }

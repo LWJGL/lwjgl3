@@ -81,9 +81,9 @@ color:uint8[4]""")}
 		float.IN("x", "the x offset"),
 		float.IN("y", "the y offset"),
 		charASCII_p.IN("text", "an ASCII string"),
-		nullable _ Check(4) _ unsigned_char_p.IN("color", "the text color, in RGBA (4 bytes)"),
+		nullable..Check(4)..unsigned_char_p.IN("color", "the text color, in RGBA (4 bytes)"),
 		void_p.OUT("vertex_buffer", "a pointer to memory in which to store the vertex data"),
-		AutoSize("vertex_buffer") _ int.IN("vbuf_size", "the {@code vertex_buffer} size, in bytes"),
+		AutoSize("vertex_buffer")..int.IN("vbuf_size", "the {@code vertex_buffer} size, in bytes"),
 
 		returnDoc = "the number of quads"
 	)

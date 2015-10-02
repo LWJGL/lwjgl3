@@ -30,7 +30,7 @@ val ARB_texture_filter_minmax = "ARBTextureFilterMinmax".nativeClassGL("ARB_text
 		GetTextureParameter{i f}v, and GetTextureParameterI{u}iv.
 		""",
 
-		"TEXTURE_REDUCTION_MODE_ARB" _ 0x9366
+		"TEXTURE_REDUCTION_MODE_ARB"..0x9366
 	)
 
 	IntConstant(
@@ -39,6 +39,6 @@ val ARB_texture_filter_minmax = "ARBTextureFilterMinmax".nativeClassGL("ARB_text
 		TextureParameter{i f}{v}, and TextureParameterI{u}iv when {@code pname} is TEXTURE_REDUCTION_MODE_ARB.
 		""",
 
-		"WEIGHTED_AVERAGE_ARB" _ 0x9367
+		"WEIGHTED_AVERAGE_ARB"..0x9367
 	)
 }

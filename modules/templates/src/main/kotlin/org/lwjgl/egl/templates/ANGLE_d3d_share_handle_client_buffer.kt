@@ -20,6 +20,6 @@ val ANGLE_d3d_share_handle_client_buffer = "ANGLED3DShareHandleClientBuffer".nat
 	IntConstant(
 		"",
 
-		"D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE" _ 0x3200
+		"D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE"..0x3200
 	)
 }

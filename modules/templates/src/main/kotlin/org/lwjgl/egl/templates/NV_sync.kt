@@ -26,25 +26,25 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 	IntConstant(
 		"",
 
-		"SYNC_PRIOR_COMMANDS_COMPLETE_NV" _ 0x30E6,
-		"SYNC_STATUS_NV" _ 0x30E7,
-		"SIGNALED_NV" _ 0x30E8,
-		"UNSIGNALED_NV" _ 0x30E9,
-		"SYNC_FLUSH_COMMANDS_BIT_NV" _ 0x0001,
+		"SYNC_PRIOR_COMMANDS_COMPLETE_NV"..0x30E6,
+		"SYNC_STATUS_NV"..0x30E7,
+		"SIGNALED_NV"..0x30E8,
+		"UNSIGNALED_NV"..0x30E9,
+		"SYNC_FLUSH_COMMANDS_BIT_NV"..0x0001,
 
-		"ALREADY_SIGNALED_NV" _ 0x30EA,
-		"TIMEOUT_EXPIRED_NV" _ 0x30EB,
-		"CONDITION_SATISFIED_NV" _ 0x30EC,
-		"SYNC_TYPE_NV" _ 0x30ED,
-		"SYNC_CONDITION_NV" _ 0x30EE,
-		"SYNC_FENCE_NV" _ 0x30EF
+		"ALREADY_SIGNALED_NV"..0x30EA,
+		"TIMEOUT_EXPIRED_NV"..0x30EB,
+		"CONDITION_SATISFIED_NV"..0x30EC,
+		"SYNC_TYPE_NV"..0x30ED,
+		"SYNC_CONDITION_NV"..0x30EE,
+		"SYNC_FENCE_NV"..0x30EF
 	)
 
 	LongConstant(
 		"",
 
 		"FOREVER_NV" expr "0xFFFFFFFFFFFFFFFFL",
-		"NO_SYNC_NV" _ 0L
+		"NO_SYNC_NV"..0L
 	)
 
 	EGLSyncNV(
@@ -53,7 +53,7 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 
 		EGLDisplay.IN("dpy", ""),
 		EGLenum.IN("condition", ""),
-		noneTerminated _ const _ EGLint_p.IN("attrib_list", "")
+		noneTerminated..const..EGLint_p.IN("attrib_list", "")
 	)
 
 	EGLBoolean(
@@ -93,6 +93,6 @@ val NV_sync = "NVSync".nativeClassEGL("NV_sync", postfix = NV) {
 
 		EGLSyncNV.IN("sync", ""),
 		EGLint.IN("attribute", ""),
-		Check(1) _ EGLint_p.OUT("value", "")
+		Check(1)..EGLint_p.OUT("value", "")
 	)
 }

@@ -37,13 +37,13 @@ val EXT_framebuffer_sRGB = "EXTFramebufferSRGB".nativeClassGL("EXT_framebuffer_s
 		GetDoublev.
 		""",
 
-		"FRAMEBUFFER_SRGB_EXT" _ 0x8DB9
+		"FRAMEBUFFER_SRGB_EXT"..0x8DB9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x8DBA
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT"..0x8DBA
 	)
 }
 
@@ -58,7 +58,7 @@ val GLX_EXT_framebuffer_sRGB = "GLXEXTFramebufferSRGB".nativeClassWGL("GLX_EXT_f
 	IntConstant(
 		"Accepted by the {@code attribList} parameter of glXChooseVisual, and by the {@code attrib} parameter of glXGetConfig.",
 
-		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x20B2
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT"..0x20B2
 	)
 }
 
@@ -78,6 +78,6 @@ val WGL_EXT_framebuffer_sRGB = "WGLEXTFramebufferSRGB".nativeClassWGL("WGL_EXT_f
 		{@code pfAttribIList} of wglChoosePixelFormatEXT.
 		""",
 
-		"FRAMEBUFFER_SRGB_CAPABLE_EXT" _ 0x20A9
+		"FRAMEBUFFER_SRGB_CAPABLE_EXT"..0x20A9
 	)
 }

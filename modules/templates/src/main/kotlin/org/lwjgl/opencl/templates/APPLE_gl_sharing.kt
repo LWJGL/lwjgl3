@@ -14,7 +14,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		IntConstant(
 			"Error code returned by #GetGLContextInfoAPPLE() if an invalid {@code platform_gl_ctx} is provided.",
 
-			"INVALID_GL_CONTEXT_APPLE" _ -1000
+			"INVALID_GL_CONTEXT_APPLE"..-1000
 		)
 
 		IntConstant(
@@ -24,7 +24,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		group can now be shared between CL and GL.
 		""",
 
-			"CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE" _ 0x10000000
+			"CONTEXT_PROPERTY_USE_CGL_SHAREGROUP_APPLE"..0x10000000
 		)
 
 		IntConstant(
@@ -33,7 +33,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		corresponding to the virtual screen(s) for the specified CGL context.
 		""",
 
-			"CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE" _ 0x10000003
+			"CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE"..0x10000003
 		)
 
 		IntConstant(
@@ -42,7 +42,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 		virtual screen for the specified CGL context.
 		""",
 
-			"CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE" _ 0x10000002
+			"CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE"..0x10000002
 		)
 
 		cl_int(
@@ -63,7 +63,7 @@ val apple_gl_sharing = dependsOn(Binding.OPENGL) {
 				"#CGL_DEVICES_FOR_SUPPORTED_VIRTUAL_SCREENS_APPLE #CGL_DEVICE_FOR_CURRENT_VIRTUAL_SCREEN_APPLE"
 			),
 			PARAM_VALUE_SIZE,
-			MultiType(PointerMapping.DATA_POINTER) _ nullable _ void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.IN("param_value", param_value),
 			PARAM_VALUE_SIZE_RET
 		)
 

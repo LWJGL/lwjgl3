@@ -29,7 +29,7 @@ val ARB_texture_border_clamp = "ARBTextureBorderClamp".nativeClassGL("ARB_textur
 		and GL11#TexParameterfv(), when their {@code pname} parameter is GL11#TEXTURE_WRAP_S, GL11#TEXTURE_WRAP_T, or GL12#TEXTURE_WRAP_R.
 		""",
 
-		"CLAMP_TO_BORDER_ARB" _ 0x812D
+		"CLAMP_TO_BORDER_ARB"..0x812D
 	)
 
 }

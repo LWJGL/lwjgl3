@@ -25,6 +25,6 @@ val NV_vertex_array_range2 = "NVVertexArrayRange2".nativeClassGL("NV_vertex_arra
 	IntConstant(
 		"Accepted by the {@code cap} parameter of EnableClientState, DisableClientState.",
 
-		"VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV" _ 0x8533
+		"VERTEX_ARRAY_RANGE_WITHOUT_FLUSH_NV"..0x8533
 	)
 }

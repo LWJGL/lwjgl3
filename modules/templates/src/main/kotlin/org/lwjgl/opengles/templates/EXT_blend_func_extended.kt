@@ -34,23 +34,23 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 		{@code dstAlpha} parameters of BlendFuncSeparate and BlendFuncSeparateiEXT.
 		""",
 
-		"SRC1_COLOR_EXT" _ 0x88F9,
-		"SRC1_ALPHA_EXT" _ 0x8589,
-		"ONE_MINUS_SRC1_COLOR_EXT" _ 0x88FA,
-		"ONE_MINUS_SRC1_ALPHA_EXT" _ 0x88FB,
-		"SRC_ALPHA_SATURATE_EXT" _ 0x0308
+		"SRC1_COLOR_EXT"..0x88F9,
+		"SRC1_ALPHA_EXT"..0x8589,
+		"ONE_MINUS_SRC1_COLOR_EXT"..0x88FA,
+		"ONE_MINUS_SRC1_ALPHA_EXT"..0x88FB,
+		"SRC_ALPHA_SATURATE_EXT"..0x0308
 	)
 
 	IntConstant(
 		"Accepted in the {@code props} array of GetProgramResourceiv.",
 
-		"LOCATION_INDEX_EXT" _ 0x930F
+		"LOCATION_INDEX_EXT"..0x930F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_DUAL_SOURCE_DRAW_BUFFERS_EXT" _ 0x88FC
+		"MAX_DUAL_SOURCE_DRAW_BUFFERS_EXT"..0x88FC
 	)
 
 	void(
@@ -60,7 +60,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 		GLuint.IN("program", ""),
 		GLuint.IN("colorNumber", ""),
 		GLuint.IN("index", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	GLint(
@@ -68,7 +68,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 		"",
 
 		GLuint.IN("program", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	void(
@@ -77,7 +77,7 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 
 		GLuint.IN("program", ""),
 		GLuint.IN("colorNumber", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 
 	GLint(
@@ -86,6 +86,6 @@ val EXT_blend_func_extended = "EXTBlendFuncExtended".nativeClassGLES("EXT_blend_
 
 		GLuint.IN("program", ""),
 		GLenum.IN("programInterface", ""),
-		const _ GLcharASCII_p.IN("name", "")
+		const..GLcharASCII_p.IN("name", "")
 	)
 }

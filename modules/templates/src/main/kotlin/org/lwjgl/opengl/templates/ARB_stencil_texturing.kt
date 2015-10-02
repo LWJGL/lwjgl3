@@ -22,7 +22,7 @@ val ARB_stencil_texturing = "ARBStencilTexturing".nativeClassGL("ARB_stencil_tex
 	IntConstant(
 		"Accepted by the {@code pname} parameter of TexParameter and GetTexParameter*.",
 
-		"DEPTH_STENCIL_TEXTURE_MODE" _ 0x90EA
+		"DEPTH_STENCIL_TEXTURE_MODE"..0x90EA
 	)
 
 }

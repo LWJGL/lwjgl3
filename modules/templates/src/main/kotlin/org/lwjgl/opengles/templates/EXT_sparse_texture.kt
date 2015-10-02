@@ -31,42 +31,42 @@ val EXT_sparse_texture = "EXTSparseTexture".nativeClassGLES("EXT_sparse_texture"
 		TexParameterI{u}ivEXT, and GetTexParameterI{u}ivEXT.
 		""",
 
-		"TEXTURE_SPARSE_EXT" _ 0x91A6,
-		"VIRTUAL_PAGE_SIZE_INDEX_EXT" _ 0x91A7
+		"TEXTURE_SPARSE_EXT"..0x91A6,
+		"VIRTUAL_PAGE_SIZE_INDEX_EXT"..0x91A7
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetTexParameter{if}v, GetTexParameterIi{u}vOES, and GetTexParameterIi{u}vEXT.",
 
-		"NUM_SPARSE_LEVELS_EXT" _ 0x91AA
+		"NUM_SPARSE_LEVELS_EXT"..0x91AA
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetInternalformativ.",
 
-		"NUM_VIRTUAL_PAGE_SIZES_EXT" _ 0x91A8,
-		"VIRTUAL_PAGE_SIZE_X_EXT" _ 0x9195,
-		"VIRTUAL_PAGE_SIZE_Y_EXT" _ 0x9196,
-		"VIRTUAL_PAGE_SIZE_Z_EXT" _ 0x9197
+		"NUM_VIRTUAL_PAGE_SIZES_EXT"..0x91A8,
+		"VIRTUAL_PAGE_SIZE_X_EXT"..0x9195,
+		"VIRTUAL_PAGE_SIZE_Y_EXT"..0x9196,
+		"VIRTUAL_PAGE_SIZE_Z_EXT"..0x9197
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter to GetInternalformativ.",
 
-		"TEXTURE_2D" _ 0x0DE1,
-		"TEXTURE_2D_ARRAY" _ 0x8C1A,
-		"TEXTURE_CUBE_MAP" _ 0x8513,
-		"TEXTURE_CUBE_MAP_ARRAY_OES" _ 0x9009,
-		"TEXTURE_3D" _ 0x806F
+		"TEXTURE_2D"..0x0DE1,
+		"TEXTURE_2D_ARRAY"..0x8C1A,
+		"TEXTURE_CUBE_MAP"..0x8513,
+		"TEXTURE_CUBE_MAP_ARRAY_OES"..0x9009,
+		"TEXTURE_3D"..0x806F
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetIntegerv, GetFloatv, GetInteger64v, and GetBooleanv.",
 
-		"MAX_SPARSE_TEXTURE_SIZE_EXT" _ 0x9198,
-		"MAX_SPARSE_3D_TEXTURE_SIZE_EXT" _ 0x9199,
-		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT" _ 0x919A,
-		"SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT" _ 0x91A9
+		"MAX_SPARSE_TEXTURE_SIZE_EXT"..0x9198,
+		"MAX_SPARSE_3D_TEXTURE_SIZE_EXT"..0x9199,
+		"MAX_SPARSE_ARRAY_TEXTURE_LAYERS_EXT"..0x919A,
+		"SPARSE_TEXTURE_FULL_ARRAY_CUBE_MIPMAPS_EXT"..0x91A9
 	)
 
 	void(

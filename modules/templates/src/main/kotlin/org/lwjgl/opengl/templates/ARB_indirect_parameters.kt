@@ -32,13 +32,13 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 		MapBufferRange, FlushMappedBufferRange, GetBufferParameteriv, and CopyBufferSubData.
 		""",
 
-		"PARAMETER_BUFFER_ARB" _ 0x80EE
+		"PARAMETER_BUFFER_ARB"..0x80EE
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
-		"PARAMETER_BUFFER_BINDING_ARB" _ 0x80EF
+		"PARAMETER_BUFFER_BINDING_ARB"..0x80EF
 	)
 
 	var src = GL43["MultiDrawArraysIndirect"]
@@ -52,9 +52,9 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 		""",
 
 		src["mode"],
-		Check("maxdrawcount * (stride == 0 ? (4 * 4) : stride)") _ MultiType(
+		Check("maxdrawcount * (stride == 0 ? (4 * 4) : stride)")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "an array of structures containing the draw parameters"),
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "an array of structures containing the draw parameters"),
 		GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
 		GLsizei.IN("maxdrawcount", "the maximum number of draws"),
 		src["stride"]
@@ -72,9 +72,9 @@ val ARB_indirect_parameters = "ARBIndirectParameters".nativeClassGL("ARB_indirec
 
 		src["mode"],
 		src["type"],
-		Check("maxdrawcount * (stride == 0 ? (5 * 4) : stride)") _ MultiType(
+		Check("maxdrawcount * (stride == 0 ? (5 * 4) : stride)")..MultiType(
 			PointerMapping.DATA_INT
-		) _ DRAW_INDIRECT_BUFFER _ const _ void_p.IN("indirect", "a structure containing an array of draw parameters"),
+		)..DRAW_INDIRECT_BUFFER..const..void_p.IN("indirect", "a structure containing an array of draw parameters"),
 		GLintptr.IN("drawcount", "the offset into the parameter buffer object"),
 		GLsizei.IN("maxdrawcount", "the maximum number of draws"),
 		src["stride"]

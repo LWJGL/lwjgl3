@@ -21,19 +21,19 @@ val APPLE_clip_distance = "APPLEClipDistance".nativeClassGLES("APPLE_clip_distan
 	IntConstant(
 		"ccepted by the {@code pname} parameters of GetBooleanv, GetIntegerv, GetInteger64v, and GetFloatv.",
 
-		"MAX_CLIP_DISTANCES_APPLE" _ 0x0D32
+		"MAX_CLIP_DISTANCES_APPLE"..0x0D32
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of Enable, Disable and IsEnabled.",
 
-		"CLIP_DISTANCE0_APPLE" _ 0x3000,
-		"CLIP_DISTANCE1_APPLE" _ 0x3001,
-		"CLIP_DISTANCE2_APPLE" _ 0x3002,
-		"CLIP_DISTANCE3_APPLE" _ 0x3003,
-		"CLIP_DISTANCE4_APPLE" _ 0x3004,
-		"CLIP_DISTANCE5_APPLE" _ 0x3005,
-		"CLIP_DISTANCE6_APPLE" _ 0x3006,
-		"CLIP_DISTANCE7_APPLE" _ 0x3007
+		"CLIP_DISTANCE0_APPLE"..0x3000,
+		"CLIP_DISTANCE1_APPLE"..0x3001,
+		"CLIP_DISTANCE2_APPLE"..0x3002,
+		"CLIP_DISTANCE3_APPLE"..0x3003,
+		"CLIP_DISTANCE4_APPLE"..0x3004,
+		"CLIP_DISTANCE5_APPLE"..0x3005,
+		"CLIP_DISTANCE6_APPLE"..0x3006,
+		"CLIP_DISTANCE7_APPLE"..0x3007
 	)
 }

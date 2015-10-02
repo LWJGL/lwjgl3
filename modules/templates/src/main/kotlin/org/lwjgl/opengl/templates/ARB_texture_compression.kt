@@ -38,32 +38,32 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, and CopyTexImage2D.",
 
-		"COMPRESSED_ALPHA_ARB" _ 0x84E9,
-		"COMPRESSED_LUMINANCE_ARB" _ 0x84EA,
-		"COMPRESSED_LUMINANCE_ALPHA_ARB" _ 0x84EB,
-		"COMPRESSED_INTENSITY_ARB" _ 0x84EC,
-		"COMPRESSED_RGB_ARB" _ 0x84ED,
-		"COMPRESSED_RGBA_ARB" _ 0x84EE
+		"COMPRESSED_ALPHA_ARB"..0x84E9,
+		"COMPRESSED_LUMINANCE_ARB"..0x84EA,
+		"COMPRESSED_LUMINANCE_ALPHA_ARB"..0x84EB,
+		"COMPRESSED_INTENSITY_ARB"..0x84EC,
+		"COMPRESSED_RGB_ARB"..0x84ED,
+		"COMPRESSED_RGBA_ARB"..0x84EE
 	)
 
 	IntConstant(
 		"Accepted by the {@code target} parameter of Hint and the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
-		"TEXTURE_COMPRESSION_HINT_ARB" _ 0x84EF
+		"TEXTURE_COMPRESSION_HINT_ARB"..0x84EF
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetTexLevelParameter.",
 
-		"TEXTURE_COMPRESSED_IMAGE_SIZE_ARB" _ 0x86A0,
-		"TEXTURE_COMPRESSED_ARB" _ 0x86A1
+		"TEXTURE_COMPRESSED_IMAGE_SIZE_ARB"..0x86A0,
+		"TEXTURE_COMPRESSED_ARB"..0x86A1
 	)
 
 	IntConstant(
 		"Accepted by the {@code value} parameter of GetIntegerv, GetBooleanv, GetFloatv, and GetDoublev.",
 
-		"NUM_COMPRESSED_TEXTURE_FORMATS_ARB" _ 0x86A2,
-		"COMPRESSED_TEXTURE_FORMATS_ARB" _ 0x86A3
+		"NUM_COMPRESSED_TEXTURE_FORMATS_ARB"..0x86A2,
+		"COMPRESSED_TEXTURE_FORMATS_ARB"..0x86A3
 	)
 
 	// KHR_texture_compression_astc_ldr formats are only accepted in CompressedTexImage* functions
@@ -79,9 +79,9 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("width", "the width of the texture image"),
 		GLsizei.IN("height", "the height of the texture image"),
 		GLsizei.IN("depth", "the depth of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		Expression("0")..GLint.IN("border", "must be 0"),
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -93,9 +93,9 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
 		GLsizei.IN("height", "the height of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		Expression("0")..GLint.IN("border", "must be 0"),
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -106,9 +106,9 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		GLenum.IN("internalformat", "the format of the compressed image data", CompressTexImageFormats),
 		GLsizei.IN("width", "the width of the texture image"),
-		Expression("0") _ GLint.IN("border", "must be 0"),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		Expression("0")..GLint.IN("border", "must be 0"),
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -124,8 +124,8 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("height", "the height of the texture subimage"),
 		GLsizei.IN("depth", "the depth of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -139,8 +139,8 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLsizei.IN("width", "the width of the texture subimage"),
 		GLsizei.IN("height", "the height of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -152,8 +152,8 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLint.IN("xoffset", "a texel offset in the x direction within the texture array"),
 		GLsizei.IN("width", "the width of the texture subimage"),
 		GLenum.IN("format", "the format of the compressed image data stored at address {@code data}", CompressTexImageFormats),
-		AutoSize("data") _ GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
-		PIXEL_UNPACK_BUFFER _ const _ void_p.IN("data", "a pointer to the compressed image data")
+		AutoSize("data")..GLsizei.IN("imageSize", "the number of unsigned bytes of image data starting at the address specified by {@code data}"),
+		PIXEL_UNPACK_BUFFER..const..void_p.IN("data", "a pointer to the compressed image data")
 	)
 
 	void(
@@ -164,7 +164,7 @@ val ARB_texture_compression = "ARBTextureCompression".nativeClassGL("ARB_texture
 		GLint.IN("level", "the level-of-detail number. Level 0 is the base image level. Level n is the nth mipmap reduction image."),
 		Check(
 			expression = "GL11.glGetTexLevelParameteri(target, level, GL_TEXTURE_COMPRESSED_IMAGE_SIZE_ARB)", debug = true
-		) _ PIXEL_PACK_BUFFER _ void_p.OUT("pixels", "a buffer in which to return the compressed texture image")
+		)..PIXEL_PACK_BUFFER..void_p.OUT("pixels", "a buffer in which to return the compressed texture image")
 	)
 
 }

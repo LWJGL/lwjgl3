@@ -68,9 +68,9 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ void_p.IN("userParam", "the user-specified value that was passed when calling GLES32##glDebugMessageCallback()"),
+	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling GLES32##glDebugMessageCallback()"),
 	samConstructor = "GLES32"
 ) {
 	documentation = "Instances of this interface may be passed to the GLES32##glDebugMessageCallback() method."
@@ -121,9 +121,9 @@ val GLDEBUGPROCKHR = "GLDEBUGPROCKHR".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ void_p.IN("userParam", "the user-specified value that was passed when calling KHRDebug##glDebugMessageCallbackKHR()"),
+	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling KHRDebug##glDebugMessageCallbackKHR()"),
 	samConstructor = "KHRDebug"
 ) {
 	documentation = "Instances of this interface may be passed to the KHRDebug##glDebugMessageCallbackKHR() method."

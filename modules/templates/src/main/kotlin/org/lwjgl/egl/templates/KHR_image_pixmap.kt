@@ -20,6 +20,6 @@ val KHR_image_pixmap = "KHRImagePixmap".nativeClassEGL("KHR_image_pixmap", postf
 	IntConstant(
 		"",
 
-		"NATIVE_PIXMAP_KHR" _ 0x30B0
+		"NATIVE_PIXMAP_KHR"..0x30B0
 	)
 }

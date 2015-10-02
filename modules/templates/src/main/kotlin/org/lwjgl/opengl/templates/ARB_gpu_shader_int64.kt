@@ -30,14 +30,14 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 	IntConstant(
 		"Returned by the {@code type} parameter of GetActiveAttrib, GetActiveUniform, and GetTransformFeedbackVarying.",
 
-		"INT64_ARB" _ 0x140E,
-		"UNSIGNED_INT64_ARB" _ 0x140F,
-		"INT64_VEC2_ARB" _ 0x8FE9,
-		"INT64_VEC3_ARB" _ 0x8FEA,
-		"INT64_VEC4_ARB" _ 0x8FEB,
-		"UNSIGNED_INT64_VEC2_ARB" _ 0x8FF5,
-		"UNSIGNED_INT64_VEC3_ARB" _ 0x8FF6,
-		"UNSIGNED_INT64_VEC4_ARB" _ 0x8FF7
+		"INT64_ARB"..0x140E,
+		"UNSIGNED_INT64_ARB"..0x140F,
+		"INT64_VEC2_ARB"..0x8FE9,
+		"INT64_VEC3_ARB"..0x8FEA,
+		"INT64_VEC4_ARB"..0x8FEB,
+		"UNSIGNED_INT64_VEC2_ARB"..0x8FF5,
+		"UNSIGNED_INT64_VEC3_ARB"..0x8FF6,
+		"UNSIGNED_INT64_VEC4_ARB"..0x8FF7
 	)
 
 	var args = arrayOf(
@@ -74,8 +74,8 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 			"Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the current program object.",
 
 			args[1],
-			autoSizes[i - 1] _ GLsizei.IN("count", autoSizeDoc),
-			const _ GLint64_p.IN("value", valueDoc)
+			autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
+			const..GLint64_p.IN("value", valueDoc)
 		)
 
 		// ProgramUniform{1,2,3,4}i64ARB
@@ -92,8 +92,8 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 			args[0],
 			args[1],
-			autoSizes[i - 1] _ GLsizei.IN("count", autoSizeDoc),
-			const _ GLint64_p.IN("value", valueDoc)
+			autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
+			const..GLint64_p.IN("value", valueDoc)
 		)
 	}
 
@@ -119,8 +119,8 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 			"Specifies the value of a single $glslType uniform variable or a $glslType uniform variable array for the current program object.",
 
 			args[1],
-			autoSizes[i - 1] _ GLsizei.IN("count", autoSizeDoc),
-			const _ GLuint64_p.IN("value", valueDoc)
+			autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
+			const..GLuint64_p.IN("value", valueDoc)
 		)
 
 		// ProgramUniform{1,2,3,4}ui64ARB
@@ -137,8 +137,8 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 			args[0],
 			args[1],
-			autoSizes[i - 1] _ GLsizei.IN("count", autoSizeDoc),
-			const _ GLuint64_p.IN("value", valueDoc)
+			autoSizes[i - 1]..GLsizei.IN("count", autoSizeDoc),
+			const..GLuint64_p.IN("value", valueDoc)
 		)
 	}
 
@@ -148,7 +148,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		returnValue _ Check(1) _ GLint64_p.OUT("params", "the value of the specified uniform variable")
+		returnValue..Check(1)..GLint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -157,7 +157,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		returnValue _ Check(1) _ GLuint64_p.OUT("params", "the value of the specified uniform variable")
+		returnValue..Check(1)..GLuint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -166,8 +166,8 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-		returnValue _ GLint64_p.OUT("params", "the value of the specified uniform variable")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
+		returnValue..GLint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 
 	void(
@@ -176,7 +176,7 @@ val ARB_gpu_shader_int64 = "ARBGPUShaderInt64".nativeClassGL("ARB_gpu_shader_int
 
 		GLuint.IN("program", "the program object to be queried"),
 		GLint.IN("location", "the location of the uniform variable to be queried"),
-		AutoSize("params") _ GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
-		returnValue _ GLuint64_p.OUT("params", "the value of the specified uniform variable")
+		AutoSize("params")..GLsizei.IN("bufSize", "the maximum number of values to write in {@code params}"),
+		returnValue..GLuint64_p.OUT("params", "the value of the specified uniform variable")
 	)
 }

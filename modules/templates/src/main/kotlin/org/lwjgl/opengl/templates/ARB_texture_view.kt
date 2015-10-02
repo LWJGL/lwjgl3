@@ -37,11 +37,11 @@ val ARB_texture_view = "ARBTextureView".nativeClassGL("ARB_texture_view") {
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetTexParameterfv and GetTexParameteriv.",
 
-		"TEXTURE_VIEW_MIN_LEVEL" _ 0x82DB,
-		"TEXTURE_VIEW_NUM_LEVELS" _ 0x82DC,
-		"TEXTURE_VIEW_MIN_LAYER" _ 0x82DD,
-		"TEXTURE_VIEW_NUM_LAYERS" _ 0x82DE,
-		"TEXTURE_IMMUTABLE_LEVELS" _ 0x82DF
+		"TEXTURE_VIEW_MIN_LEVEL"..0x82DB,
+		"TEXTURE_VIEW_NUM_LEVELS"..0x82DC,
+		"TEXTURE_VIEW_MIN_LAYER"..0x82DD,
+		"TEXTURE_VIEW_NUM_LAYERS"..0x82DE,
+		"TEXTURE_IMMUTABLE_LEVELS"..0x82DF
 	)
 
 	GL43 reuse "TextureView"

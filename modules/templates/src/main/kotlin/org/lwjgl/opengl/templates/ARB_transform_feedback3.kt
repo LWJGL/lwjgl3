@@ -52,8 +52,8 @@ val ARB_transform_feedback3 = "ARBTransformFeedback3".nativeClassGL("ARB_transfo
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"MAX_TRANSFORM_FEEDBACK_BUFFERS" _ 0x8E70,
-		"MAX_VERTEX_STREAMS" _ 0x8E71
+		"MAX_TRANSFORM_FEEDBACK_BUFFERS"..0x8E70,
+		"MAX_VERTEX_STREAMS"..0x8E71
 	)
 
 	GL40 reuse "DrawTransformFeedbackStream"

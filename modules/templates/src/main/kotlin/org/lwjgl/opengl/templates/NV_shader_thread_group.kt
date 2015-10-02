@@ -22,8 +22,8 @@ val NV_shader_thread_group = "NVShaderThreadGroup".nativeClassGL("NV_shader_thre
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"WARP_SIZE_NV" _ 0x9339,
-		"WARPS_PER_SM_NV" _ 0x933A,
-		"SM_COUNT_NV" _ 0x933B
+		"WARP_SIZE_NV"..0x9339,
+		"WARPS_PER_SM_NV"..0x933A,
+		"SM_COUNT_NV"..0x933B
 	)
 }

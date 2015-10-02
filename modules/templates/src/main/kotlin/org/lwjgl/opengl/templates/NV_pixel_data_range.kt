@@ -51,22 +51,22 @@ val NV_pixel_data_range = "NVPixelDataRange".nativeClassGL("NV_pixel_data_range"
 		DisableClientState, and IsEnabled.
 		""",
 
-		"WRITE_PIXEL_DATA_RANGE_NV" _ 0x8878,
-		"READ_PIXEL_DATA_RANGE_NV" _ 0x8879
+		"WRITE_PIXEL_DATA_RANGE_NV"..0x8878,
+		"READ_PIXEL_DATA_RANGE_NV"..0x8879
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"WRITE_PIXEL_DATA_RANGE_LENGTH_NV" _ 0x887A,
-		"READ_PIXEL_DATA_RANGE_LENGTH_NV" _ 0x887B
+		"WRITE_PIXEL_DATA_RANGE_LENGTH_NV"..0x887A,
+		"READ_PIXEL_DATA_RANGE_LENGTH_NV"..0x887B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetPointerv.",
 
-		"WRITE_PIXEL_DATA_RANGE_POINTER_NV" _ 0x887C,
-		"READ_PIXEL_DATA_RANGE_POINTER_NV" _ 0x887D
+		"WRITE_PIXEL_DATA_RANGE_POINTER_NV"..0x887C,
+		"READ_PIXEL_DATA_RANGE_POINTER_NV"..0x887D
 	)
 
 	void(
@@ -74,8 +74,8 @@ val NV_pixel_data_range = "NVPixelDataRange".nativeClassGL("NV_pixel_data_range"
 		"",
 
 		GLenum.IN("target", ""),
-		AutoSize("pointer") _ GLsizei.IN("length", ""),
-		const _ void_p.IN("pointer", "")
+		AutoSize("pointer")..GLsizei.IN("length", ""),
+		const..void_p.IN("pointer", "")
 	)
 
 	void(

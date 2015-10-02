@@ -31,8 +31,8 @@ val ARB_depth_buffer_float = "ARBDepthBufferFloat".nativeClassGL("ARB_depth_buff
 		returned in the {@code data} parameter of GetTexLevelParameter and GetRenderbufferParameterivEXT.
 		""",
 
-		"DEPTH_COMPONENT32F" _ 0x8CAC,
-		"DEPTH32F_STENCIL8" _ 0x8CAD
+		"DEPTH_COMPONENT32F"..0x8CAC,
+		"DEPTH32F_STENCIL8"..0x8CAD
 	)
 
 	IntConstant(
@@ -41,6 +41,6 @@ val ARB_depth_buffer_float = "ARBDepthBufferFloat".nativeClassGL("ARB_depth_buff
 		GetTexImage.
 		""",
 
-		"FLOAT_32_UNSIGNED_INT_24_8_REV" _ 0x8DAD
+		"FLOAT_32_UNSIGNED_INT_24_8_REV"..0x8DAD
 	)
 }

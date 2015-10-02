@@ -34,19 +34,19 @@ val APPLE_framebuffer_multisample = "APPLEFramebufferMultisample".nativeClassGLE
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetRenderbufferParameteriv.",
 
-		"RENDERBUFFER_SAMPLES_APPLE" _ 0x8CAB
+		"RENDERBUFFER_SAMPLES_APPLE"..0x8CAB
 	)
 
 	IntConstant(
 		"Returned by CheckFramebufferStatus.",
 
-		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE" _ 0x8D56
+		"FRAMEBUFFER_INCOMPLETE_MULTISAMPLE_APPLE"..0x8D56
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"MAX_SAMPLES_APPLE" _ 0x8D57
+		"MAX_SAMPLES_APPLE"..0x8D57
 	)
 
 	IntConstant(
@@ -55,15 +55,15 @@ val APPLE_framebuffer_multisample = "APPLEFramebufferMultisample".nativeClassGLE
 		GetFramebufferAttachmentParameteriv.
 		""",
 
-		"READ_FRAMEBUFFER_APPLE" _ 0x8CA8,
-		"DRAW_FRAMEBUFFER_APPLE" _ 0x8CA9
+		"READ_FRAMEBUFFER_APPLE"..0x8CA8,
+		"DRAW_FRAMEBUFFER_APPLE"..0x8CA9
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, and GetFloatv.",
 
-		"DRAW_FRAMEBUFFER_BINDING_APPLE" _ 0x8CA6,
-		"READ_FRAMEBUFFER_BINDING_APPLE" _ 0x8CAA
+		"DRAW_FRAMEBUFFER_BINDING_APPLE"..0x8CA6,
+		"READ_FRAMEBUFFER_BINDING_APPLE"..0x8CAA
 	)
 
 	void(

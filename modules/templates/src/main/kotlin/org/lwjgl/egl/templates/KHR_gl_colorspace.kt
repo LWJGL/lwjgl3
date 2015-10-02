@@ -21,8 +21,8 @@ val KHR_gl_colorspace = "KHRGLColorspace".nativeClassEGL("KHR_gl_colorspace", po
 	IntConstant(
 		"",
 
-		"GL_COLORSPACE_KHR" _ 0x309D,
-		"GL_COLORSPACE_SRGB_KHR" _ 0x3089,
-		"GL_COLORSPACE_LINEAR_KHR" _ 0x308A
+		"GL_COLORSPACE_KHR"..0x309D,
+		"GL_COLORSPACE_SRGB_KHR"..0x3089,
+		"GL_COLORSPACE_LINEAR_KHR"..0x308A
 	)
 }

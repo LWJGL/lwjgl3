@@ -21,6 +21,6 @@ val ANGLE_surface_d3d_texture_2d_share_handle = "ANGLESurfaceD3DTexture2DShareHa
 	IntConstant(
 		"",
 
-		"D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE" _ 0x3200
+		"D3D_TEXTURE_2D_SHARE_HANDLE_ANGLE"..0x3200
 	)
 }

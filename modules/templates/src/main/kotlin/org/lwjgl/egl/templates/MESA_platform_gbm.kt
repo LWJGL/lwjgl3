@@ -21,6 +21,6 @@ val MESA_platform_gbm = "MESAPlatformGBM".nativeClassEGL("MESA_platform_gbm", po
 	IntConstant(
 		"",
 
-		"PLATFORM_GBM_MESA" _ 0x31D7
+		"PLATFORM_GBM_MESA"..0x31D7
 	)
 }

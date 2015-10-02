@@ -22,7 +22,7 @@ val OES_vertex_type_10_10_10_2 = "OESVertexType1010102".nativeClassGLES("OES_ver
 	IntConstant(
 		"Accepted by the {@code type} parameter of VertexAttribPointer.",
 
-		"UNSIGNED_INT_10_10_10_2_OES" _ 0x8DF6,
-		"INT_10_10_10_2_OES" _ 0x8DF7
+		"UNSIGNED_INT_10_10_10_2_OES"..0x8DF6,
+		"INT_10_10_10_2_OES"..0x8DF7
 	)
 }

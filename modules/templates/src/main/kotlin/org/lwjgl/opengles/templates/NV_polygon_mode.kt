@@ -22,22 +22,22 @@ val NV_polygon_mode = "NVPolygonMode".nativeClassGLES("NV_polygon_mode", postfix
 	IntConstant(
 		"Accepted by the {@code pname} parameter to GetIntegerv.",
 
-		"POLYGON_MODE_NV" _ 0x0B40
+		"POLYGON_MODE_NV"..0x0B40
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter to IsEnabled.",
 
-		"POLYGON_OFFSET_POINT_NV" _ 0x2A01,
-		"POLYGON_OFFSET_LINE_NV" _ 0x2A02
+		"POLYGON_OFFSET_POINT_NV"..0x2A01,
+		"POLYGON_OFFSET_LINE_NV"..0x2A02
 	)
 
 	IntConstant(
 		"Returned by GetIntegerv, GetFloatv, and GetInteger64v when {@code pname} is POLYGON_MODE_NV.",
 
-		"POINT_NV" _ 0x1B00,
-		"LINE_NV" _ 0x1B01,
-		"FILL_NV" _ 0x1B02
+		"POINT_NV"..0x1B00,
+		"LINE_NV"..0x1B01,
+		"FILL_NV"..0x1B02
 	)
 
 	void(

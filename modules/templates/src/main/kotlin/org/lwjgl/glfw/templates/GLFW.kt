@@ -23,211 +23,211 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	IntConstant(
 		"The major version number of the GLFW library. This is incremented when the API is changed in non-compatible ways.",
 
-		"VERSION_MAJOR" _ 3
+		"VERSION_MAJOR"..3
 	)
 
 	IntConstant(
 		"The minor version number of the GLFW library. This is incremented when features are added to the API but it remains backward-compatible.",
 
-		"VERSION_MINOR" _ 1
+		"VERSION_MINOR"..1
 	)
 
 	IntConstant(
 		"The revision number of the GLFW library. This is incremented when a bug fix release is made that does not contain any API changes.",
 
-		"VERSION_REVISION" _ 1
+		"VERSION_REVISION"..1
 	)
 
 	IntConstant(
 		"The key or button was released.",
 
-		"RELEASE" _ 0
+		"RELEASE"..0
 	)
 
 	IntConstant(
 		"The key or button was pressed.",
 
-		"PRESS" _ 1
+		"PRESS"..1
 	)
 
 	IntConstant(
 		"The key was held down until it repeated.",
 
-		"REPEAT" _ 2
+		"REPEAT"..2
 	)
 
 	IntConstant(
 		"The unknown key.",
 
-		"KEY_UNKNOWN" _ -1
+		"KEY_UNKNOWN"..-1
 	)
 
 	IntConstant(
 		"Printable keys.",
 
-		"KEY_SPACE" _ 32,
-		"KEY_APOSTROPHE" _ 39,
-		"KEY_COMMA" _ 44,
-		"KEY_MINUS" _ 45,
-		"KEY_PERIOD" _ 46,
-		"KEY_SLASH" _ 47,
-		"KEY_0" _ 48,
-		"KEY_1" _ 49,
-		"KEY_2" _ 50,
-		"KEY_3" _ 51,
-		"KEY_4" _ 52,
-		"KEY_5" _ 53,
-		"KEY_6" _ 54,
-		"KEY_7" _ 55,
-		"KEY_8" _ 56,
-		"KEY_9" _ 57,
-		"KEY_SEMICOLON" _ 59,
-		"KEY_EQUAL" _ 61,
-		"KEY_A" _ 65,
-		"KEY_B" _ 66,
-		"KEY_C" _ 67,
-		"KEY_D" _ 68,
-		"KEY_E" _ 69,
-		"KEY_F" _ 70,
-		"KEY_G" _ 71,
-		"KEY_H" _ 72,
-		"KEY_I" _ 73,
-		"KEY_J" _ 74,
-		"KEY_K" _ 75,
-		"KEY_L" _ 76,
-		"KEY_M" _ 77,
-		"KEY_N" _ 78,
-		"KEY_O" _ 79,
-		"KEY_P" _ 80,
-		"KEY_Q" _ 81,
-		"KEY_R" _ 82,
-		"KEY_S" _ 83,
-		"KEY_T" _ 84,
-		"KEY_U" _ 85,
-		"KEY_V" _ 86,
-		"KEY_W" _ 87,
-		"KEY_X" _ 88,
-		"KEY_Y" _ 89,
-		"KEY_Z" _ 90,
-		"KEY_LEFT_BRACKET" _ 91,
-		"KEY_BACKSLASH" _ 92,
-		"KEY_RIGHT_BRACKET" _ 93,
-		"KEY_GRAVE_ACCENT" _ 96,
-		"KEY_WORLD_1" _ 161,
-		"KEY_WORLD_2" _ 162
+		"KEY_SPACE"..32,
+		"KEY_APOSTROPHE"..39,
+		"KEY_COMMA"..44,
+		"KEY_MINUS"..45,
+		"KEY_PERIOD"..46,
+		"KEY_SLASH"..47,
+		"KEY_0"..48,
+		"KEY_1"..49,
+		"KEY_2"..50,
+		"KEY_3"..51,
+		"KEY_4"..52,
+		"KEY_5"..53,
+		"KEY_6"..54,
+		"KEY_7"..55,
+		"KEY_8"..56,
+		"KEY_9"..57,
+		"KEY_SEMICOLON"..59,
+		"KEY_EQUAL"..61,
+		"KEY_A"..65,
+		"KEY_B"..66,
+		"KEY_C"..67,
+		"KEY_D"..68,
+		"KEY_E"..69,
+		"KEY_F"..70,
+		"KEY_G"..71,
+		"KEY_H"..72,
+		"KEY_I"..73,
+		"KEY_J"..74,
+		"KEY_K"..75,
+		"KEY_L"..76,
+		"KEY_M"..77,
+		"KEY_N"..78,
+		"KEY_O"..79,
+		"KEY_P"..80,
+		"KEY_Q"..81,
+		"KEY_R"..82,
+		"KEY_S"..83,
+		"KEY_T"..84,
+		"KEY_U"..85,
+		"KEY_V"..86,
+		"KEY_W"..87,
+		"KEY_X"..88,
+		"KEY_Y"..89,
+		"KEY_Z"..90,
+		"KEY_LEFT_BRACKET"..91,
+		"KEY_BACKSLASH"..92,
+		"KEY_RIGHT_BRACKET"..93,
+		"KEY_GRAVE_ACCENT"..96,
+		"KEY_WORLD_1"..161,
+		"KEY_WORLD_2"..162
 	)
 
 	IntConstant(
 		"Function keys.",
 
-		"KEY_ESCAPE" _ 256,
-		"KEY_ENTER" _ 257,
-		"KEY_TAB" _ 258,
-		"KEY_BACKSPACE" _ 259,
-		"KEY_INSERT" _ 260,
-		"KEY_DELETE" _ 261,
-		"KEY_RIGHT" _ 262,
-		"KEY_LEFT" _ 263,
-		"KEY_DOWN" _ 264,
-		"KEY_UP" _ 265,
-		"KEY_PAGE_UP" _ 266,
-		"KEY_PAGE_DOWN" _ 267,
-		"KEY_HOME" _ 268,
-		"KEY_END" _ 269,
-		"KEY_CAPS_LOCK" _ 280,
-		"KEY_SCROLL_LOCK" _ 281,
-		"KEY_NUM_LOCK" _ 282,
-		"KEY_PRINT_SCREEN" _ 283,
-		"KEY_PAUSE" _ 284,
-		"KEY_F1" _ 290,
-		"KEY_F2" _ 291,
-		"KEY_F3" _ 292,
-		"KEY_F4" _ 293,
-		"KEY_F5" _ 294,
-		"KEY_F6" _ 295,
-		"KEY_F7" _ 296,
-		"KEY_F8" _ 297,
-		"KEY_F9" _ 298,
-		"KEY_F10" _ 299,
-		"KEY_F11" _ 300,
-		"KEY_F12" _ 301,
-		"KEY_F13" _ 302,
-		"KEY_F14" _ 303,
-		"KEY_F15" _ 304,
-		"KEY_F16" _ 305,
-		"KEY_F17" _ 306,
-		"KEY_F18" _ 307,
-		"KEY_F19" _ 308,
-		"KEY_F20" _ 309,
-		"KEY_F21" _ 310,
-		"KEY_F22" _ 311,
-		"KEY_F23" _ 312,
-		"KEY_F24" _ 313,
-		"KEY_F25" _ 314,
-		"KEY_KP_0" _ 320,
-		"KEY_KP_1" _ 321,
-		"KEY_KP_2" _ 322,
-		"KEY_KP_3" _ 323,
-		"KEY_KP_4" _ 324,
-		"KEY_KP_5" _ 325,
-		"KEY_KP_6" _ 326,
-		"KEY_KP_7" _ 327,
-		"KEY_KP_8" _ 328,
-		"KEY_KP_9" _ 329,
-		"KEY_KP_DECIMAL" _ 330,
-		"KEY_KP_DIVIDE" _ 331,
-		"KEY_KP_MULTIPLY" _ 332,
-		"KEY_KP_SUBTRACT" _ 333,
-		"KEY_KP_ADD" _ 334,
-		"KEY_KP_ENTER" _ 335,
-		"KEY_KP_EQUAL" _ 336,
-		"KEY_LEFT_SHIFT" _ 340,
-		"KEY_LEFT_CONTROL" _ 341,
-		"KEY_LEFT_ALT" _ 342,
-		"KEY_LEFT_SUPER" _ 343,
-		"KEY_RIGHT_SHIFT" _ 344,
-		"KEY_RIGHT_CONTROL" _ 345,
-		"KEY_RIGHT_ALT" _ 346,
-		"KEY_RIGHT_SUPER" _ 347,
-		"KEY_MENU" _ 348,
+		"KEY_ESCAPE"..256,
+		"KEY_ENTER"..257,
+		"KEY_TAB"..258,
+		"KEY_BACKSPACE"..259,
+		"KEY_INSERT"..260,
+		"KEY_DELETE"..261,
+		"KEY_RIGHT"..262,
+		"KEY_LEFT"..263,
+		"KEY_DOWN"..264,
+		"KEY_UP"..265,
+		"KEY_PAGE_UP"..266,
+		"KEY_PAGE_DOWN"..267,
+		"KEY_HOME"..268,
+		"KEY_END"..269,
+		"KEY_CAPS_LOCK"..280,
+		"KEY_SCROLL_LOCK"..281,
+		"KEY_NUM_LOCK"..282,
+		"KEY_PRINT_SCREEN"..283,
+		"KEY_PAUSE"..284,
+		"KEY_F1"..290,
+		"KEY_F2"..291,
+		"KEY_F3"..292,
+		"KEY_F4"..293,
+		"KEY_F5"..294,
+		"KEY_F6"..295,
+		"KEY_F7"..296,
+		"KEY_F8"..297,
+		"KEY_F9"..298,
+		"KEY_F10"..299,
+		"KEY_F11"..300,
+		"KEY_F12"..301,
+		"KEY_F13"..302,
+		"KEY_F14"..303,
+		"KEY_F15"..304,
+		"KEY_F16"..305,
+		"KEY_F17"..306,
+		"KEY_F18"..307,
+		"KEY_F19"..308,
+		"KEY_F20"..309,
+		"KEY_F21"..310,
+		"KEY_F22"..311,
+		"KEY_F23"..312,
+		"KEY_F24"..313,
+		"KEY_F25"..314,
+		"KEY_KP_0"..320,
+		"KEY_KP_1"..321,
+		"KEY_KP_2"..322,
+		"KEY_KP_3"..323,
+		"KEY_KP_4"..324,
+		"KEY_KP_5"..325,
+		"KEY_KP_6"..326,
+		"KEY_KP_7"..327,
+		"KEY_KP_8"..328,
+		"KEY_KP_9"..329,
+		"KEY_KP_DECIMAL"..330,
+		"KEY_KP_DIVIDE"..331,
+		"KEY_KP_MULTIPLY"..332,
+		"KEY_KP_SUBTRACT"..333,
+		"KEY_KP_ADD"..334,
+		"KEY_KP_ENTER"..335,
+		"KEY_KP_EQUAL"..336,
+		"KEY_LEFT_SHIFT"..340,
+		"KEY_LEFT_CONTROL"..341,
+		"KEY_LEFT_ALT"..342,
+		"KEY_LEFT_SUPER"..343,
+		"KEY_RIGHT_SHIFT"..344,
+		"KEY_RIGHT_CONTROL"..345,
+		"KEY_RIGHT_ALT"..346,
+		"KEY_RIGHT_SUPER"..347,
+		"KEY_MENU"..348,
 		"KEY_LAST" expr "GLFW_KEY_MENU"
 	)
 
 	IntConstant(
 		"If this bit is set one or more Shift keys were held down.",
 
-		"MOD_SHIFT" _ 0x0001
+		"MOD_SHIFT"..0x0001
 	)
 
 	IntConstant(
 		"If this bit is set one or more Control keys were held down.",
 
-		"MOD_CONTROL" _ 0x0002
+		"MOD_CONTROL"..0x0002
 	)
 
 	IntConstant(
 		"If this bit is set one or more Alt keys were held down.",
 
-		"MOD_ALT" _ 0x0004
+		"MOD_ALT"..0x0004
 	)
 
 	IntConstant(
 		"If this bit is set one or more Super keys were held down.",
 
-		"MOD_SUPER" _ 0x0008
+		"MOD_SUPER"..0x0008
 	)
 
 	IntConstant(
 		"""Mouse buttons. See <a href="http://www.glfw.org/docs/latest/input.html\#input_mouse_button">mouse button input</a> for how these are used.""",
 
-		"MOUSE_BUTTON_1" _ 0,
-		"MOUSE_BUTTON_2" _ 1,
-		"MOUSE_BUTTON_3" _ 2,
-		"MOUSE_BUTTON_4" _ 3,
-		"MOUSE_BUTTON_5" _ 4,
-		"MOUSE_BUTTON_6" _ 5,
-		"MOUSE_BUTTON_7" _ 6,
-		"MOUSE_BUTTON_8" _ 7,
+		"MOUSE_BUTTON_1"..0,
+		"MOUSE_BUTTON_2"..1,
+		"MOUSE_BUTTON_3"..2,
+		"MOUSE_BUTTON_4"..3,
+		"MOUSE_BUTTON_5"..4,
+		"MOUSE_BUTTON_6"..5,
+		"MOUSE_BUTTON_7"..6,
+		"MOUSE_BUTTON_8"..7,
 		"MOUSE_BUTTON_LAST" expr "GLFW_MOUSE_BUTTON_8",
 		"MOUSE_BUTTON_LEFT" expr "GLFW_MOUSE_BUTTON_1",
 		"MOUSE_BUTTON_RIGHT" expr "GLFW_MOUSE_BUTTON_2",
@@ -237,22 +237,22 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	IntConstant(
 		"""Joysticks. See <a href="http://www.glfw.org/docs/latest/input.html\#joystick">joystick input</a> for how these are used.""",
 
-		"JOYSTICK_1" _ 0,
-		"JOYSTICK_2" _ 1,
-		"JOYSTICK_3" _ 2,
-		"JOYSTICK_4" _ 3,
-		"JOYSTICK_5" _ 4,
-		"JOYSTICK_6" _ 5,
-		"JOYSTICK_7" _ 6,
-		"JOYSTICK_8" _ 7,
-		"JOYSTICK_9" _ 8,
-		"JOYSTICK_10" _ 9,
-		"JOYSTICK_11" _ 10,
-		"JOYSTICK_12" _ 11,
-		"JOYSTICK_13" _ 12,
-		"JOYSTICK_14" _ 13,
-		"JOYSTICK_15" _ 14,
-		"JOYSTICK_16" _ 15,
+		"JOYSTICK_1"..0,
+		"JOYSTICK_2"..1,
+		"JOYSTICK_3"..2,
+		"JOYSTICK_4"..3,
+		"JOYSTICK_5"..4,
+		"JOYSTICK_6"..5,
+		"JOYSTICK_7"..6,
+		"JOYSTICK_8"..7,
+		"JOYSTICK_9"..8,
+		"JOYSTICK_10"..9,
+		"JOYSTICK_11"..10,
+		"JOYSTICK_12"..11,
+		"JOYSTICK_13"..12,
+		"JOYSTICK_14"..13,
+		"JOYSTICK_15"..14,
+		"JOYSTICK_16"..15,
 		"JOYSTICK_LAST" expr "GLFW_JOYSTICK_16"
 	)
 
@@ -263,7 +263,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This occurs if a GLFW function was called that may not be called unless the library is initialized.
 		""",
 
-		"NOT_INITIALIZED" _ 0x00010001
+		"NOT_INITIALIZED"..0x00010001
 	)
 
 	IntConstant(
@@ -274,7 +274,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		thread. One such function is #SwapInterval().
 		""",
 
-		"NO_CURRENT_CONTEXT" _ 0x00010002
+		"NO_CURRENT_CONTEXT"..0x00010002
 	)
 
 	IntConstant(
@@ -284,7 +284,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		One of the arguments to the function was an invalid enum value, for example requesting #RED_BITS with #GetWindowAttrib().
 		""",
 
-		"INVALID_ENUM" _ 0x00010003
+		"INVALID_ENUM"..0x00010003
 	)
 
 	IntConstant(
@@ -296,7 +296,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Requesting a valid but unavailable OpenGL or OpenGL ES version will instead result in a #VERSION_UNAVAILABLE error.
 		""",
 
-		"INVALID_VALUE" _ 0x00010004
+		"INVALID_VALUE"..0x00010004
 	)
 
 	IntConstant(
@@ -306,7 +306,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		A bug in GLFW or the underlying operating system. Report the bug to our <a href="https://github.com/glfw/glfw/issues">issue tracker</a>.
 		""",
 
-		"OUT_OF_MEMORY" _ 0x00010005
+		"OUT_OF_MEMORY"..0x00010005
 	)
 
 	IntConstant(
@@ -322,7 +322,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		driver.
 		""",
 
-		"API_UNAVAILABLE" _ 0x00010006
+		"API_UNAVAILABLE"..0x00010006
 	)
 
 	IntConstant(
@@ -336,7 +336,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		not #INVALID_VALUE, because GLFW cannot know what future versions will exist.
 		""",
 
-		"VERSION_UNAVAILABLE" _ 0x00010007
+		"VERSION_UNAVAILABLE"..0x00010007
 	)
 
 	IntConstant(
@@ -347,7 +347,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		<a href="https://github.com/glfw/glfw/issues">issue tracker</a>.
 		""",
 
-		"PLATFORM_ERROR" _ 0x00010008
+		"PLATFORM_ERROR"..0x00010008
 	)
 
 	IntConstant(
@@ -360,59 +360,59 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		If emitted when querying the clipboard, ignore the error or report it to the user, as appropriate.
 		""",
 
-		"FORMAT_UNAVAILABLE" _ 0x00010009
+		"FORMAT_UNAVAILABLE"..0x00010009
 	)
 
 	val WindowAttributes = IntConstant(
 		"Window attributes.",
 
-		"FOCUSED" _ 0x00020001,
-		"ICONIFIED" _ 0x00020002,
-		"RESIZABLE" _ 0x00020003,
-		"VISIBLE" _ 0x00020004,
-		"DECORATED" _ 0x00020005,
-		"AUTO_ICONIFY" _ 0x00020006,
-		"FLOATING" _ 0x00020007
+		"FOCUSED"..0x00020001,
+		"ICONIFIED"..0x00020002,
+		"RESIZABLE"..0x00020003,
+		"VISIBLE"..0x00020004,
+		"DECORATED"..0x00020005,
+		"AUTO_ICONIFY"..0x00020006,
+		"FLOATING"..0x00020007
 	).javaDocLinks
 
 	IntConstant(
 		"Input options.",
 
-		"CURSOR" _ 0x00033001,
-		"STICKY_KEYS" _ 0x00033002,
-		"STICKY_MOUSE_BUTTONS" _ 0x00033003
+		"CURSOR"..0x00033001,
+		"STICKY_KEYS"..0x00033002,
+		"STICKY_MOUSE_BUTTONS"..0x00033003
 	)
 
 	IntConstant(
 		"Cursor state.",
 
-		"CURSOR_NORMAL" _ 0x00034001,
-		"CURSOR_HIDDEN" _ 0x00034002,
-		"CURSOR_DISABLED" _ 0x00034003
+		"CURSOR_NORMAL"..0x00034001,
+		"CURSOR_HIDDEN"..0x00034002,
+		"CURSOR_DISABLED"..0x00034003
 	)
 
 	val CursorShapes = IntConstant(
 		"""Standard cursor shapes. See <a href="http://www.glfw.org/docs/latest/input.html\#cursor_standard">standard cursor creation</a> for how these are used.""",
 
-		"ARROW_CURSOR" _ 0x00036001,
-		"IBEAM_CURSOR" _ 0x00036002,
-		"CROSSHAIR_CURSOR" _ 0x00036003,
-		"HAND_CURSOR" _ 0x00036004,
-		"HRESIZE_CURSOR" _ 0x00036005,
-		"VRESIZE_CURSOR" _ 0x00036006
+		"ARROW_CURSOR"..0x00036001,
+		"IBEAM_CURSOR"..0x00036002,
+		"CROSSHAIR_CURSOR"..0x00036003,
+		"HAND_CURSOR"..0x00036004,
+		"HRESIZE_CURSOR"..0x00036005,
+		"VRESIZE_CURSOR"..0x00036006
 	).javaDocLinks
 
 	IntConstant(
 		"Monitor events.",
 
-		"CONNECTED" _ 0x00040001,
-		"DISCONNECTED" _ 0x00040002
+		"CONNECTED"..0x00040001,
+		"DISCONNECTED"..0x00040002
 	)
 
 	IntConstant(
 		"Don't care value.",
 
-		"DONT_CARE" _ -1
+		"DONT_CARE"..-1
 	)
 
 	// [ OpenGL ]
@@ -420,67 +420,67 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	val PixelFormatHints = IntConstant(
 		"PixelFormat hints.",
 
-		"RED_BITS" _ 0x00021001,
-		"GREEN_BITS" _ 0x00021002,
-		"BLUE_BITS" _ 0x00021003,
-		"ALPHA_BITS" _ 0x00021004,
-		"DEPTH_BITS" _ 0x00021005,
-		"STENCIL_BITS" _ 0x00021006,
-		"ACCUM_RED_BITS" _ 0x00021007,
-		"ACCUM_GREEN_BITS" _ 0x00021008,
-		"ACCUM_BLUE_BITS" _ 0x00021009,
-		"ACCUM_ALPHA_BITS" _ 0x0002100A,
-		"AUX_BUFFERS" _ 0x0002100B,
-		"STEREO" _ 0x0002100C,
-		"SAMPLES" _ 0x0002100D,
-		"SRGB_CAPABLE" _ 0x0002100E,
-		"REFRESH_RATE" _ 0x0002100F,
-		"DOUBLE_BUFFER" _ 0x00021010
+		"RED_BITS"..0x00021001,
+		"GREEN_BITS"..0x00021002,
+		"BLUE_BITS"..0x00021003,
+		"ALPHA_BITS"..0x00021004,
+		"DEPTH_BITS"..0x00021005,
+		"STENCIL_BITS"..0x00021006,
+		"ACCUM_RED_BITS"..0x00021007,
+		"ACCUM_GREEN_BITS"..0x00021008,
+		"ACCUM_BLUE_BITS"..0x00021009,
+		"ACCUM_ALPHA_BITS"..0x0002100A,
+		"AUX_BUFFERS"..0x0002100B,
+		"STEREO"..0x0002100C,
+		"SAMPLES"..0x0002100D,
+		"SRGB_CAPABLE"..0x0002100E,
+		"REFRESH_RATE"..0x0002100F,
+		"DOUBLE_BUFFER"..0x00021010
 	).javaDocLinks
 
 	val ClientAPIHints = IntConstant(
 		"Client API hints.",
 
-		"CLIENT_API" _ 0x00022001,
-		"CONTEXT_VERSION_MAJOR" _ 0x00022002,
-		"CONTEXT_VERSION_MINOR" _ 0x00022003,
-		"CONTEXT_REVISION" _ 0x00022004,
-		"CONTEXT_ROBUSTNESS" _ 0x00022005,
-		"OPENGL_FORWARD_COMPAT" _ 0x00022006,
-		"OPENGL_DEBUG_CONTEXT" _ 0x00022007,
-		"OPENGL_PROFILE" _ 0x00022008,
-		"CONTEXT_RELEASE_BEHAVIOR" _ 0x00022009
+		"CLIENT_API"..0x00022001,
+		"CONTEXT_VERSION_MAJOR"..0x00022002,
+		"CONTEXT_VERSION_MINOR"..0x00022003,
+		"CONTEXT_REVISION"..0x00022004,
+		"CONTEXT_ROBUSTNESS"..0x00022005,
+		"OPENGL_FORWARD_COMPAT"..0x00022006,
+		"OPENGL_DEBUG_CONTEXT"..0x00022007,
+		"OPENGL_PROFILE"..0x00022008,
+		"CONTEXT_RELEASE_BEHAVIOR"..0x00022009
 	).javaDocLinks
 
 	val ClientAPIValues = IntConstant(
 		"Values for the #CLIENT_API hint.",
 
-		"OPENGL_API" _ 0x00030001,
-		"OPENGL_ES_API" _ 0x00030002
+		"OPENGL_API"..0x00030001,
+		"OPENGL_ES_API"..0x00030002
 	).javaDocLinks
 
 	val ContextRobustnessValues = IntConstant(
 		"Values for the #CONTEXT_ROBUSTNESS hint.",
 
-		"NO_ROBUSTNESS" _ 0,
-		"NO_RESET_NOTIFICATION" _ 0x00031001,
-		"LOSE_CONTEXT_ON_RESET" _ 0x00031002
+		"NO_ROBUSTNESS"..0,
+		"NO_RESET_NOTIFICATION"..0x00031001,
+		"LOSE_CONTEXT_ON_RESET"..0x00031002
 	).javaDocLinks
 
 	val OpenGLProfileValues = IntConstant(
 		"Values for the #OPENGL_PROFILE hint.",
 
-		"OPENGL_ANY_PROFILE" _ 0,
-		"OPENGL_CORE_PROFILE" _ 0x00032001,
-		"OPENGL_COMPAT_PROFILE" _ 0x00032002
+		"OPENGL_ANY_PROFILE"..0,
+		"OPENGL_CORE_PROFILE"..0x00032001,
+		"OPENGL_COMPAT_PROFILE"..0x00032002
 	).javaDocLinks
 
 	val ContextReleaseBehaviorValues = IntConstant(
 		"Values for the #CONTEXT_RELEASE_BEHAVIOR hint.",
 
-		"ANY_RELEASE_BEHAVIOR" _ 0,
-		"RELEASE_BEHAVIOR_FLUSH" _ 0x00035001,
-		"RELEASE_BEHAVIOR_NONE" _ 0x00035002
+		"ANY_RELEASE_BEHAVIOR"..0,
+		"RELEASE_BEHAVIOR_FLUSH"..0x00035001,
+		"RELEASE_BEHAVIOR_NONE"..0x00035002
 	).javaDocLinks
 
 	int(
@@ -500,7 +500,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			<b>Mac OS X</b>: This function will change the current directory of the application to the `Contents/Resources` subdirectory of the application's
 			bundle, if present.
 			""",
-		    """
+			"""
 		    <b>X11</b>: If the {@code LC_CTYPE} category of the current locale is set to {@code "C"} then the environment's locale will be applied to that
 		    category. This is done because character input will not function when {@code LC_CTYPE} is set to {@code "C"}. If another locale was set before this
 		    function was called, it will be left untouched.
@@ -508,8 +508,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-	    returnDoc = "GL11##GL_TRUE if successful, or GL11##GL_FALSE if an error occured.",
-	    since = "GLFW 1.0"
+		returnDoc = "GL11##GL_TRUE if successful, or GL11##GL_FALSE if an error occured.",
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -529,7 +529,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"No window's context may be current on another thread when this function is called."
 		)}
 		""",
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -547,13 +547,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-		nullable _ Check(1) _ int_p.OUT("major", "where to store the major version number, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("minor", "where to store the minor version number, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("rev", "where to store the revision number, or $NULL"),
-	    since = "GLFW 1.0"
+		nullable..Check(1)..int_p.OUT("major", "where to store the major version number, or $NULL"),
+		nullable..Check(1)..int_p.OUT("minor", "where to store the minor version number, or $NULL"),
+		nullable..Check(1)..int_p.OUT("rev", "where to store the revision number, or $NULL"),
+		since = "GLFW 1.0"
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetVersionString",
 		"""
 		Returns the compile-time generated version string of the GLFW library binary. It describes the version, platform, compiler and any platform-specific
@@ -567,11 +567,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"This function always succeeds.",
 			"This function may be called before #Init().",
 			"This function may be called from any thread.",
-		    "The returned string is static and compile-time generated."
+			"The returned string is static and compile-time generated."
 		)}
 		""",
-	    returnDoc = "the GLFW version string",
-	    since = "GLFW 3.0"
+		returnDoc = "the GLFW version string",
+		since = "GLFW 3.0"
 	)
 
 	GLFWerrorfun(
@@ -594,10 +594,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-		nullable _ GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWerrorfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWmonitor_p(
@@ -612,10 +612,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may only be called from the main thread.
 		""",
 
-		autoSizeResult _ int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
+		autoSizeResult..int_p.OUT("count", "where to store the number of monitors in the returned array. This is set to zero if an error occurred."),
 
-	    returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
-	    since = "GLFW 3.0"
+		returnDoc = "an array of monitor handlers, or $NULL if no monitors were found or if an error occured",
+		since = "GLFW 3.0"
 	)
 
 	GLFWmonitor(
@@ -628,8 +628,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		The primary monitor is always first in the array returned by #GetMonitors().
 		""",
 
-	    returnDoc = "the primary monitor, or $NULL if no monitors were found or if an error occured",
-	    since = "GLFW 3.0"
+		returnDoc = "the primary monitor, or $NULL if no monitors were found or if an error occured",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -643,9 +643,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		nullable _ Check(1) _ int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
-	    since = "GLFW 3.0"
+		nullable..Check(1)..int_p.OUT("xpos", "where to store the monitor x-coordinate, or $NULL"),
+		nullable..Check(1)..int_p.OUT("ypos", "where to store the monitor y-coordinate, or $NULL"),
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -662,19 +662,19 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    """
+			"""
 			<b>Windows</b>: The OS calculates the returned physical size from the current resolution and system DPI instead of querying the monitor EDID data.
 		    """
 		)}
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		nullable _ Check(1) _ int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
-	    since = "GLFW 3.0"
+		nullable..Check(1)..int_p.OUT("widthMM", "where to store the width, in millimetres, of the monitor's display area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("heightMM", "where to store the height, in millimetres, of the monitor's display area, or $NULL"),
+		since = "GLFW 3.0"
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetMonitorName",
 		"""
 		Returns a human-readable name, encoded as UTF-8, of the specified monitor. The name typically reflects the make and model of the monitor and is not
@@ -688,8 +688,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-	    returnDoc = "the UTF-8 encoded name of the monitor, or $NULL if an error occured",
-	    since = "GLFW 3.0"
+		returnDoc = "the UTF-8 encoded name of the monitor, or $NULL if an error occured",
+		since = "GLFW 3.0"
 	)
 
 	GLFWmonitorfun(
@@ -701,17 +701,17 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    "<b>X11</b>: This callback is not yet called on monitor configuration changes."
+			"<b>X11</b>: This callback is not yet called on monitor configuration changes."
 		)}
 		""",
 
-		nullable _ GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
+		nullable..GLFWmonitorfun.IN("cbfun", "the new callback, or $NULL to remove the currently set callback"),
 
-	    returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
-	    since = "GLFW 3.0"
+		returnDoc = "the previously set callback, or $NULL if no callback was set or the library had not been initialized",
+		since = "GLFW 3.0"
 	)
 
-	(StructBuffer _ (const _ GLFWvidmode_p))(
+	(StructBuffer..(const..GLFWvidmode_p))(
 		"GetVideoModes",
 		"""
 		Returns an array of all video modes supported by the specified monitor. The returned array is sorted in ascending order, first by color bit depth (the
@@ -724,13 +724,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
-		autoSizeResult _ int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
+		autoSizeResult..int_p.OUT("count", "where to store the number of video modes in the returned array. This is set to zero if an error occurred."),
 
-	    returnDoc = "an array of video modes, or $NULL if an error occured",
-	    since = "GLFW 1.0"
+		returnDoc = "an array of video modes, or $NULL if an error occured",
+		since = "GLFW 1.0"
 	)
 
-	(const _ GLFWvidmode_p)(
+	(const..GLFWvidmode_p)(
 		"GetVideoMode",
 		"""
 		Returns the current video mode of the specified monitor. If you have created a full screen window for that monitor, the return value will depend on
@@ -744,8 +744,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-	    returnDoc = "the current mode of the monitor, or $NULL if an error occurred",
-	    since = "GLFW 3.0"
+		returnDoc = "the current mode of the monitor, or $NULL if an error occurred",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -759,10 +759,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
 		float.IN("gamma", "the desired exponent"),
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
-	(const _ GLFWgammaramp_p)(
+	(const..GLFWgammaramp_p)(
 		"GetGammaRamp",
 		"""
 		Returns the current gamma ramp of the specified monitor.
@@ -775,8 +775,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWmonitor.IN("monitor", "the monitor to query"),
 
-	    returnDoc = "the current gamma ramp, or $NULL if an error occurred",
-	    since = "GLFW 3.0"
+		returnDoc = "the current gamma ramp, or $NULL if an error occurred",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -790,13 +790,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"This function may only be called from the main thread.",
 			"Gamma ramp sizes other than 256 are not supported by all hardware",
 			"<b>Windows</b>: The gamma ramp size must be 256.",
-		    "The specified gamma ramp is copied before this function returns."
+			"The specified gamma ramp is copied before this function returns."
 		)}
 		""",
 
 		GLFWmonitor.IN("monitor", "the monitor whose gamma ramp to set"),
-		const _ GLFWgammaramp_p.IN("ramp", "the gamma ramp to use"),
-	    since = "GLFW 3.0"
+		const..GLFWgammaramp_p.IN("ramp", "the gamma ramp to use"),
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -806,7 +806,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		This function may only be called from the main thread.
 		""",
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -819,39 +819,39 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${table(
 			tr(th("Name"), th("Default value"), th("Supported values")),
 
-		    tr(td("#RESIZABLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#VISIBLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#DECORATED"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#AUTO_ICONIFY"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#FLOATING"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#RESIZABLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#VISIBLE"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#DECORATED"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#AUTO_ICONIFY"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#FLOATING"), td("GL11##GL_TRUE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
 
-		    tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#BLUE_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#ALPHA_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#DEPTH_BITS"), td("24"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#STENCIL_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#ACCUM_RED_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#ACCUM_GREEN_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#ACCUM_BLUE_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#ACCUM_ALPHA_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#AUX_BUFFERS"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#SAMPLES"), td("0"), td("0 to Integer##MAX_VALUE")),
-		    tr(td("#REFRESH_RATE"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#RED_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#GREEN_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#BLUE_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#ALPHA_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#DEPTH_BITS"), td("24"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#STENCIL_BITS"), td("8"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#ACCUM_RED_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#ACCUM_GREEN_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#ACCUM_BLUE_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#ACCUM_ALPHA_BITS"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#AUX_BUFFERS"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#SAMPLES"), td("0"), td("0 to Integer##MAX_VALUE")),
+			tr(td("#REFRESH_RATE"), td("0"), td("0 to Integer##MAX_VALUE")),
 
-		    tr(td("#STEREO"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#SRGB_CAPABLE"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#STEREO"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#SRGB_CAPABLE"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
 
-		    tr(td("#CLIENT_API"), td("#OPENGL_API"), td(ClientAPIValues)),
-		    tr(td("#CONTEXT_VERSION_MAJOR"), td("1"), td("Any valid major version number of the chosen client API")),
-		    tr(td("#CONTEXT_VERSION_MINOR"), td("0"), td("Any valid minor version number of the chosen client API")),
+			tr(td("#CLIENT_API"), td("#OPENGL_API"), td(ClientAPIValues)),
+			tr(td("#CONTEXT_VERSION_MAJOR"), td("1"), td("Any valid major version number of the chosen client API")),
+			tr(td("#CONTEXT_VERSION_MINOR"), td("0"), td("Any valid minor version number of the chosen client API")),
 
-		    tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
-		    tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
+			tr(td("#CONTEXT_ROBUSTNESS"), td("#NO_ROBUSTNESS"), td(ContextRobustnessValues)),
+			tr(td("#CONTEXT_RELEASE_BEHAVIOR"), td("#ANY_RELEASE_BEHAVIOR"), td(ContextReleaseBehaviorValues)),
 
-		    tr(td("#OPENGL_FORWARD_COMPAT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#OPENGL_DEBUG_CONTEXT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
-		    tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
+			tr(td("#OPENGL_FORWARD_COMPAT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#OPENGL_DEBUG_CONTEXT"), td("GL11##GL_FALSE"), td("GL11##GL_TRUE or GL11##GL_FALSE")),
+			tr(td("#OPENGL_PROFILE"), td("#OPENGL_ANY_PROFILE"), td(OpenGLProfileValues))
 		)}
 
 		This function may only be called from the main thread.
@@ -900,20 +900,20 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${ul(
 			"This function may only be called from the main thread.",
 			"This function may not be called from a callback.",
-		    "<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
-		    """
+			"<b>Windows</b>: Window creation will fail if the Microsoft GDI software OpenGL implementation is the only one available.",
+			"""
 		    <b>Windows</b>: If the executable has an icon resource named {@code GLFW_ICON}, it will be set as the icon for the window. If no such icon
 		    is present, the {@code IDI_WINLOGO} icon will be used instead.
 			""",
-		    "<b>Windows</b>: The context to share resources with may not be current on any other thread.",
-		    """
+			"<b>Windows</b>: The context to share resources with may not be current on any other thread.",
+			"""
 		    <b>OS X</b>: The GLFW window has no icon, as it is not a document window, but the dock icon will be the same as the application bundle's
 		    icon. Also, the first time a window is opened the menu bar is populated with common commands like Hide, Quit and About. The (minimal) about dialog
 		    uses information from the application's bundle. For more information on bundles, see the
 		    <a href="https://developer.apple.com/library/mac/documentation/CoreFoundation/Conceptual/CFBundles/">Bundle Programming Guide</a> in the Mac
 		    Developer Library.
 			""",
-		    """
+			"""
 		    <b>OS X</b>: The first time a window is created the menu bar is populated with common commands like Hide, Quit and About. The About entry opens a
 		    minimal about dialog with information from the application's bundle. The menu bar can be disabled with a
 		    <a href="http://www.glfw.org/docs/latest/compile.html\#compile_options_osx">compile-time option</a>.
@@ -924,8 +924,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		    <a href="https://developer.apple.com/library/mac/documentation/GraphicsAnimation/Conceptual/HighResolutionOSX/Explained/Explained.html">High
 		    Resolution Guidelines for OS X</a> in the Mac Developer Library.
 			""",
-		    "<b>X11</b>: There is no mechanism for setting the window icon yet.",
-		    "<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
+			"<b>X11</b>: There is no mechanism for setting the window icon yet.",
+			"<b>X11</b>: Some window managers will not respect the placement of initially hidden windows.",
 			"""
 			<b>X11</b>: Due to the asynchronous nature of X11, it may take a moment for a window to reach its requested state. This means you may not be able
 			to query the final size, position or other attributes directly after window creation.
@@ -935,12 +935,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("width", "the desired width, in screen coordinates, of the window"),
 		int.IN("height", "the desired height, in screen coordinates, of the window"),
-		const _ charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
-		nullable _ GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or $NULL to use windowed mode"),
-		nullable _ GLFWwindow.IN("share", " the window whose context to share resources with, or $NULL to not share resources"),
+		const..charUTF8_p.IN("title", "initial, UTF-8 encoded window title"),
+		nullable..GLFWmonitor.IN("monitor", "the monitor to use for fullscreen mode, or $NULL to use windowed mode"),
+		nullable..GLFWwindow.IN("share", " the window whose context to share resources with, or $NULL to not share resources"),
 
-	    returnDoc = "the handle of the created window, or $NULL if an error occurred",
-	    since ="GLFW 1.0"
+		returnDoc = "the handle of the created window, or $NULL if an error occurred",
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -954,12 +954,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		${ul(
 			"This function may only be called from the main thread.",
 			"This function may not be called from a callback.",
-		    "The context of the specified window must not be current on any other thread when this function is called."
+			"The context of the specified window must not be current on any other thread when this function is called."
 		)}
 		""",
 
 		GLFWwindow.IN("window", "the window to destroy"),
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	int(
@@ -972,8 +972,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to query"),
 
-	    returnDoc = "the value of the close flag",
-	    since = "GLFW 3.0"
+		returnDoc = "the value of the close flag",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1002,9 +1002,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose title to change"),
-		const _ charUTF8_p.IN("title", "the UTF-8 encoded window title"),
+		const..charUTF8_p.IN("title", "the UTF-8 encoded window title"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1018,10 +1018,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window to query"),
-		nullable _ Check(1) _ int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("xpos", "where to store the x-coordinate of the upper-left corner of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("ypos", "where to store the y-coordinate of the upper-left corner of the client area, or $NULL"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1042,7 +1042,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("xpos", "the x-coordinate of the upper-left corner of the client area"),
 		int.IN("ypos", "the y-coordinate of the upper-left corner of the client area"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1057,10 +1057,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose size to retrieve"),
-		nullable _ Check(1) _ int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("width", "where to store the width, in screen coordinates, of the client area, or $NULL"),
+		nullable..Check(1)..int_p.OUT("height", "where to store the height, in screen coordinates, of the client area, or $NULL"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1080,7 +1080,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("width", "the desired width of the specified window"),
 		int.IN("height", "the desired height of the specified window"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1095,15 +1095,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose framebuffer to query"),
-		nullable _ Check(1) _ int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
-		nullable _ Check(1) _ int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
+		nullable..Check(1)..int_p.OUT("width", "where to store the width, in pixels, of the framebuffer, or $NULL"),
+		nullable..Check(1)..int_p.OUT("height", "where to store the height, in pixels, of the framebuffer, or $NULL"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	void(
 		"GetWindowFrameSize",
-	    """
+		"""
 	    Retrieves the size, in screen coordinates, of each edge of the frame of the specified window. This size includes the title bar, if the window has one.
 	    The size of the frame may vary depending on the <a href="http://www.glfw.org/docs/latest/window.html\#window-hints_wnd">window-related hints</a> used to
 	    create it.
@@ -1116,13 +1116,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 	    This function may only be called from the main thread.
 	    """,
 
-	    GLFWwindow.IN("window", "the window whose frame size to query"),
-	    Check(1) _ nullable _ int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
-		Check(1) _ nullable _ int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
-		Check(1) _ nullable _ int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
-		Check(1) _ nullable _ int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
+		GLFWwindow.IN("window", "the window whose frame size to query"),
+		Check(1)..nullable..int_p.OUT("left", "where to store the size, in screen coordinates, of the left edge of the window frame, or $NULL"),
+		Check(1)..nullable..int_p.OUT("top", "where to store the size, in screen coordinates, of the top edge of the window frame, or $NULL"),
+		Check(1)..nullable..int_p.OUT("right", "where to store the size, in screen coordinates, of the right edge of the window frame, or $NULL"),
+		Check(1)..nullable..int_p.OUT("bottom", "where to store the size, in screen coordinates, of the bottom edge of the window frame, or $NULL"),
 
-	    since = "GLFW 3.1"
+		since = "GLFW 3.1"
 	)
 
 	/*void(
@@ -1140,7 +1140,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to set the icons for"),
 	    GLFWimage_p.IN("icons", "an array of ##GLFWimage structs"),
-	    AutoSize("icons") _ int.IN("count", "the number of icons in the array")
+	    AutoSize("icons")..int.IN("count", "the number of icons in the array")
 	)*/
 
 	void(
@@ -1155,7 +1155,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to iconify"),
 
-	    since = "GLFW 2.1"
+		since = "GLFW 2.1"
 	)
 
 	void(
@@ -1170,12 +1170,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to restore"),
 
-	    since = "GLFW 2.1"
+		since = "GLFW 2.1"
 	)
 
 	Code(
 		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
-	) _ void(
+	)..void(
 		"ShowWindow",
 		"""
 		Makes the specified window visible if it was previously hidden. If the window is already visible or is in full screen mode, this function does nothing.
@@ -1185,7 +1185,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to make visible"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1198,7 +1198,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to hide"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWmonitor(
@@ -1211,8 +1211,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window to query"),
 
-	    returnDoc = "the monitor, or $NULL if the window is in windowed mode or an error occurred",
-	    since = "GLFW 3.0"
+		returnDoc = "the monitor, or $NULL if the window is in windowed mode or an error occurred",
+		since = "GLFW 3.0"
 	)
 
 	int(
@@ -1231,8 +1231,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window to query"),
 		int.IN("attrib", "the <a href=\"http://www.glfw.org/docs/latest/window.html\\#window_attribs\">window attribute</a> whose value to return", WindowAttributes),
 
-	    returnDoc = "the value of the attribute, or zero if an error occured",
-	    since = "GLFW 3.0"
+		returnDoc = "the value of the attribute, or zero if an error occured",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1244,9 +1244,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose pointer to set"),
-		nullable _ voidptr.IN("pointer", "the new value"),
+		nullable..voidptr.IN("pointer", "the new value"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	voidptr(
@@ -1259,7 +1259,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window whose pointer to return"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	val CallbackReturnDoc =
@@ -1280,10 +1280,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
  		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWwindowsizefun(
@@ -1296,10 +1296,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowsizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWwindowclosefun(
@@ -1315,15 +1315,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    "<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
+			"<b>Mac OS X:</b> Selecting Quit from the application menu will trigger the close callback for all windows."
 		)}
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowclosefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowclosefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 2.5"
+		since = "GLFW 2.5"
 	)
 
 	GLFWwindowrefreshfun(
@@ -1339,10 +1339,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowrefreshfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowrefreshfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 2.5"
+		since = "GLFW 2.5"
 	)
 
 	GLFWwindowfocusfun(
@@ -1357,10 +1357,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowfocusfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowfocusfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWwindowiconifyfun(
@@ -1372,10 +1372,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWwindowiconifyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWwindowiconifyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWframebuffersizefun(
@@ -1387,15 +1387,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		CALLBACK_WINDOW,
-		nullable _ GLFWframebuffersizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWframebuffersizefun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = CallbackReturnDoc,
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	Code(
 		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
-	) _ void(
+	)..void(
 		"PollEvents",
 		"""
 		Processes all pending events.
@@ -1418,12 +1418,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"This function may not be called from a callback."
 		)}
 		""",
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	Code(
 		javaInit = statement("\t\torg.lwjgl.system.macosx.EventLoop.checkFirstThread();")
-	) _ void(
+	)..void(
 		"WaitEvents",
 		"""
 		Waits until events are queued and processes them.
@@ -1453,7 +1453,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			"On some platforms, certain callbacks may be called outside of a call to one of the event processing functions."
 		)}
 		""",
-	    since = "GLFW 2.5"
+		since = "GLFW 2.5"
 	)
 
 	void(
@@ -1481,8 +1481,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the window to query"),
 		int.IN("mode", "the input mode whose value to return", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
 
-	    returnDoc = "the input mode value",
-	    since = "GLFW 3.0"
+		returnDoc = "the input mode value",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1516,7 +1516,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		int.IN("mode", "the input mode to set", "#CURSOR #STICKY_KEYS #STICKY_MOUSE_BUTTONS"),
 		int.IN("value", "the new value of the specified input mode"),
 
-	    since = "GFLW 3.0"
+		since = "GFLW 3.0"
 	)
 
 	int(
@@ -1536,15 +1536,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    "#KEY_UNKNOWN is not a valid key for this function."
+			"#KEY_UNKNOWN is not a valid key for this function."
 		)}
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
 		int.IN("key", "the desired keyboard key"),
 
-	    returnDoc = "one of #PRESS or #RELEASE",
-	    since = "GLFW 1.0"
+		returnDoc = "one of #PRESS or #RELEASE",
+		since = "GLFW 1.0"
 	)
 
 	int(
@@ -1562,8 +1562,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		GLFWwindow.IN("window", "the desired window"),
 		int.IN("button", "the desired mouse button"),
 
-	    returnDoc = "one of #PRESS or #RELEASE",
-	    since = "GLFW 1.0"
+		returnDoc = "one of #PRESS or #RELEASE",
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1583,10 +1583,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the desired window"),
-		nullable _ Check(1) _ double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
-		nullable _ Check(1) _ double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
+		nullable..Check(1)..double_p.OUT("xpos", "where to store the cursor x-coordinate, relative to the left edge of the client area, or $NULL"),
+		nullable..Check(1)..double_p.OUT("ypos", "where to store the cursor y-coordinate, relative to the to top edge of the client area, or $NULL."),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -1603,7 +1603,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		Notes:
 		${ul(
 			"This function may only be called from the main thread.",
-		    """
+			"""
 		    <b>X11:</b> Due to the asynchronous nature of X11, it may take a moment for the window focus event to arrive. This means you may not be able to set
 		    the cursor position directly after window creation.
 		    """
@@ -1614,12 +1614,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		double.IN("xpos", "the desired x-coordinate, relative to the left edge of the client area"),
 		double.IN("ypos", "the desired y-coordinate, relative to the top edge of the client area"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWcursor(
 		"CreateCursor",
-	    """
+		"""
 		Creates a new custom cursor image that can be set for a window with #SetCursor(). The cursor can be destroyed with #DestroyCursor(). Any remaining
 		cursors are destroyed by #Terminate().
 
@@ -1631,18 +1631,18 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	    Notes:
 	    ${ul(
-		    "This function may only be called from the main thread.",
-	        "This function may not be called from a callback.",
-	        "The specified image data is copied before this function returns."
-	    )}
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback.",
+			"The specified image data is copied before this function returns."
+		)}
 	    """,
 
-	    const _ GLFWimage_p.IN("image", "the desired cursor image"),
-	    int.IN("xhot", "the desired x-coordinate, in pixels, of the cursor hotspot"),
-	    int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
+		const..GLFWimage_p.IN("image", "the desired cursor image"),
+		int.IN("xhot", "the desired x-coordinate, in pixels, of the cursor hotspot"),
+		int.IN("yhot", "the desired y-coordinate, in pixels, of the cursor hotspot"),
 
-	    returnDoc = "the handle of the created cursor, or $NULL if an error occurred",
-	    since = "GLFW 3.1"
+		returnDoc = "the handle of the created cursor, or $NULL if an error occurred",
+		since = "GLFW 3.1"
 	)
 
 	GLFWcursor(
@@ -1666,24 +1666,24 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 	void(
 		"DestroyCursor",
-	    """
+		"""
 	    Destroys a cursor previously created with #CreateCursor(). Any remaining cursors will be destroyed by #Terminate().
 
 		Notes:
 		${ul(
-		    "This function may only be called from the main thread.",
-	        "This function may not be called from a callback."
-	    )}
+			"This function may only be called from the main thread.",
+			"This function may not be called from a callback."
+		)}
 	    """,
 
-	    GLFWcursor.IN("cursor", "the cursor object to destroy"),
+		GLFWcursor.IN("cursor", "the cursor object to destroy"),
 
-	    since = "GLFW 3.1"
+		since = "GLFW 3.1"
 	)
 
 	void(
 		"SetCursor",
-	    """
+		"""
 	    Sets the cursor image to be used when the cursor is over the client area of the specified window. The set cursor will only be visible when the
 	    <a href="http://www.glfw.org/docs/latest/input.html\#cursor_mode">cursor mode</a> of the window is #CURSOR_NORMAL.
 
@@ -1692,10 +1692,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
   	    This function may only be called from the main thread.
 	    """,
 
-	    GLFWwindow.IN("window", "the window to set the system cursor for"),
-	    nullable _ GLFWcursor.IN("cursor", "the cursor to set, or $NULL to switch back to the default arrow cursor"),
+		GLFWwindow.IN("window", "the window to set the system cursor for"),
+		nullable..GLFWcursor.IN("cursor", "the cursor to set, or $NULL to switch back to the default arrow cursor"),
 
-	    since = "GLFW 3.1"
+		since = "GLFW 3.1"
 	)
 
 	GLFWkeyfun(
@@ -1719,10 +1719,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWkeyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWkeyfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWcharfun(
@@ -1741,10 +1741,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcharfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcharfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 2.4"
+		since = "GLFW 2.4"
 	)
 
 	GLFWcharmodsfun(
@@ -1762,10 +1762,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcharmodsfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcharmodsfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 3.1"
+		since = "GLFW 3.1"
 	)
 
 	GLFWmousebuttonfun(
@@ -1781,10 +1781,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWmousebuttonfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWcursorposfun(
@@ -1797,10 +1797,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcursorposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcursorposfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWcursorenterfun(
@@ -1812,10 +1812,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWcursorenterfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWscrollfun(
@@ -1829,15 +1829,15 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window whose callback to set"),
-		nullable _ GLFWscrollfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		nullable..GLFWscrollfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
 		returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 2.1"
+		since = "GLFW 2.1"
 	)
 
 	GLFWdropfun(
 		"SetDropCallback",
-	    """
+		"""
 	    Sets the file drop callback of the specified window, which is called when one or more dragged files are dropped on the window.
 
 	    Because the path array and its strings may have been generated specifically for that event, they are not guaranteed to be valid after the callback has
@@ -1846,11 +1846,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may only be called from the main thread.
 	    """,
 
-	    GLFWwindow.IN("window", "the window whose callback to set"),
-	    nullable _ GLFWdropfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
+		GLFWwindow.IN("window", "the window whose callback to set"),
+		nullable..GLFWdropfun.IN("cbfun", "the new callback or $NULL to remove the currently set callback"),
 
-	    returnDoc = "the previously set callback, or $NULL if no callback was set",
-	    since = "GLFW 3.1"
+		returnDoc = "the previously set callback, or $NULL if no callback was set",
+		since = "GLFW 3.1"
 	)
 
 	int(
@@ -1863,11 +1863,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("joy", "joystick to query"),
 
-	    returnDoc = "GL11##GL_TRUE if the joystick is present, or GL11##GL_FALSE otherwise",
-	    since = "GLFW 3.0"
+		returnDoc = "GL11##GL_TRUE if the joystick is present, or GL11##GL_FALSE otherwise",
+		since = "GLFW 3.0"
 	)
 
-	(const _ float_p)(
+	(const..float_p)(
 		"GetJoystickAxes",
 		"""
 		Returns the values of all axes of the specified joystick. Each element in the array is a value between -1.0 and 1.0.
@@ -1879,13 +1879,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("joy", "the joystick to query"),
-		autoSizeResult _ int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
+		autoSizeResult..int_p.OUT("count", "where to store the number of axis values in the returned array. This is set to zero if an error occurred."),
 
-	    returnDoc = "an array of axis values, or $NULL if the joystick is not present",
-	    since = "GLFW 2.2"
+		returnDoc = "an array of axis values, or $NULL if the joystick is not present",
+		since = "GLFW 2.2"
 	)
 
-	(const _ unsigned_char_p)(
+	(const..unsigned_char_p)(
 		"GetJoystickButtons",
 		"""
 		Returns the state of all buttons of the specified joystick. Each element in the array is either #PRESS or #RELEASE.
@@ -1897,13 +1897,13 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		int.IN("joy", "the joystick to query"),
-		autoSizeResult _ int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
+		autoSizeResult..int_p.OUT("count", "where to store the number of button states in the returned array. This is set to zero if an error occurred."),
 
-	    returnDoc = "an array of button states, or $NULL if the joystick is not present",
-	    since = "GLFW 2.2"
+		returnDoc = "an array of button states, or $NULL if the joystick is not present",
+		since = "GLFW 2.2"
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetJoystickName",
 		"""
 		Returns the name, encoded as UTF-8, of the specified joystick.
@@ -1916,8 +1916,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("joy", "the joystick to query"),
 
-	    returnDoc = "the UTF-8 encoded name of the joystick, or $NULL if the joystick is not present",
-	    since = "GLFW 3.0"
+		returnDoc = "the UTF-8 encoded name of the joystick, or $NULL if the joystick is not present",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -1931,12 +1931,12 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		""",
 
 		GLFWwindow.IN("window", "the window that will own the clipboard contents"),
-		const _ charUTF8_p.IN("string", "a UTF-8 encoded string"),
+		const..charUTF8_p.IN("string", "a UTF-8 encoded string"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
-	(const _ charUTF8_p)(
+	(const..charUTF8_p)(
 		"GetClipboardString",
 		"""
 		Returns the contents of the system clipboard, if it contains or is convertible to a UTF-8 encoded string. If the clipboard is empty or if its contents
@@ -1955,8 +1955,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window that will request the clipboard contents"),
 
-	    returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or $NULL if an error occurred",
-	    since = "GLFW 3.0"
+		returnDoc = "the contents of the clipboard as a UTF-8 encoded string, or $NULL if an error occurred",
+		since = "GLFW 3.0"
 	)
 
 	double(
@@ -1970,8 +1970,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread. Access is not synchronized.
 		""",
 
-	    returnDoc = "the current value, in seconds, or zero if an error occurred",
-	    since = "GLFW 1.0"
+		returnDoc = "the current value, in seconds, or zero if an error occurred",
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -2006,9 +2006,9 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 		""",
 
-		nullable _ GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context"),
+		nullable..GLFWwindow.IN("window", "the window whose context to make current, or $NULL to detach the current context"),
 
-	    since = "GLFW 3.0"
+		since = "GLFW 3.0"
 	)
 
 	GLFWwindow(
@@ -2019,8 +2019,8 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 		""",
 
-	    returnDoc = "the window whose context is current, or $NULL if no window's context is current",
-	    since = "GLFW 3.0"
+		returnDoc = "the window whose context is current, or $NULL if no window's context is current",
+		since = "GLFW 3.0"
 	)
 
 	void(
@@ -2034,7 +2034,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		GLFWwindow.IN("window", "the window whose buffers to swap"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	void(
@@ -2057,7 +2057,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 			This function is not called during window creation, leaving the swap interval set to whatever is the default on that platform. This is done because
 			some swap interval extensions used by GLFW do not allow the swap interval to be reset to zero once it has been set to a non-zero value.
 			""",
-		    """
+			"""
 		    Some GPU drivers do not honor the requested swap interval, either because of a user setting that overrides the application's request or due to bugs
 		    in the driver.
 		    """
@@ -2066,7 +2066,7 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 
 		int.IN("interval", "the minimum number of screen updates to wait for until the buffers are swapped by #SwapBuffers()"),
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	int(
@@ -2083,11 +2083,11 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		This function may be called from any thread.
 		""",
 
-		const _ charASCII_p.IN("extension", "the ASCII encoded name of the extension"),
+		const..charASCII_p.IN("extension", "the ASCII encoded name of the extension"),
 
-	    returnDoc = "GL11##GL_TRUE if the extension is available, or GL11##GL_FALSE otherwise",
+		returnDoc = "GL11##GL_TRUE if the extension is available, or GL11##GL_FALSE otherwise",
 
-	    since = "GLFW 1.0"
+		since = "GLFW 1.0"
 	)
 
 	GLFWglproc(
@@ -2110,10 +2110,10 @@ val GLFW = "GLFW".nativeClass(packageName = GLFW_PACKAGE, prefix = "GLFW", bindi
 		)}
 		""",
 
-		const _ charASCII_p.IN("procname", "the ASCII encoded name of the function"),
+		const..charASCII_p.IN("procname", "the ASCII encoded name of the function"),
 
-	    returnDoc = "the address of the function, or $NULL if an error occured",
-	    since = "GLFW 1.0"
+		returnDoc = "the address of the function, or $NULL if an error occured",
+		since = "GLFW 1.0"
 	)
 
 }

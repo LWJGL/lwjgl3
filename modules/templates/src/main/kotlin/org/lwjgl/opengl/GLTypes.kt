@@ -70,8 +70,8 @@ val GLDEBUGPROCAMD = "GLDEBUGPROCAMD".callback(
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("category", "the message category"),
 	GLenum.IN("severity", "the message severity"),
-	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
 	void_p.IN("userParam", "the user-specified value that was passed when calling AMDDebugOutput##glDebugMessageCallbackAMD()"),
 	samConstructor = "AMDDebugOutput"
 ) {
@@ -123,9 +123,9 @@ val GLDEBUGPROCARB = "GLDEBUGPROCARB".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
+	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	const..void_p.IN("userParam", "the user-specified value that was passed when calling ARBDebugOutput##glDebugMessageCallbackARB()"),
 	samConstructor = "ARBDebugOutput"
 ) {
 	documentation = "Instances of this interface may be passed to the ARBDebugOutput##glDebugMessageCallbackARB() method."
@@ -182,9 +182,9 @@ val GLDEBUGPROC = "GLDEBUGPROC".callback(
 	GLenum.IN("type", "the message type"),
 	GLuint.IN("id", "the message ID"),
 	GLenum.IN("severity", "the message severity"),
-	AutoSize("message") _ GLsizei.IN("length", "the message length, excluding the null-terminator"),
-	const _ GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
-	const _ void_p.IN("userParam",
+	AutoSize("message")..GLsizei.IN("length", "the message length, excluding the null-terminator"),
+	const..GLcharUTF8_p.IN("message", "a pointer to the message string representation"),
+	const..void_p.IN("userParam",
 		"the user-specified value that was passed when calling GL43##glDebugMessageCallback() or KHRDebug##glDebugMessageCallback()"
 	),
 	samConstructor = "GL43,KHRDebug"

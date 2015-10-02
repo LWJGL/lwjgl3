@@ -21,10 +21,10 @@ val EXT_blend_func_separate = "EXTBlendFuncSeparate".nativeClassGL("EXT_blend_fu
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"BLEND_DST_RGB_EXT" _ 0x80C8,
-		"BLEND_SRC_RGB_EXT" _ 0x80C9,
-		"BLEND_DST_ALPHA_EXT" _ 0x80CA,
-		"BLEND_SRC_ALPHA_EXT" _ 0x80CB
+		"BLEND_DST_RGB_EXT"..0x80C8,
+		"BLEND_SRC_RGB_EXT"..0x80C9,
+		"BLEND_DST_ALPHA_EXT"..0x80CA,
+		"BLEND_SRC_ALPHA_EXT"..0x80CB
 	)
 
 	void(

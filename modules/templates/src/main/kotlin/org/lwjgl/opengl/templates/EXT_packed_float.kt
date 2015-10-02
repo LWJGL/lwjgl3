@@ -29,7 +29,7 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 	IntConstant(
 		"Accepted by the {@code internalformat} parameter of TexImage1D, TexImage2D, TexImage3D, CopyTexImage1D, CopyTexImage2D, and RenderbufferStorageEXT.",
 
-		"R11F_G11F_B10F_EXT" _ 0x8C3A
+		"R11F_G11F_B10F_EXT"..0x8C3A
 	)
 
 	IntConstant(
@@ -39,13 +39,13 @@ val EXT_packed_float = "EXTPackedFloat".nativeClassGL("EXT_packed_float", postfi
 		GetSeparableFilter, ColorTable, ColorSubTable, and GetColorTable.
 		""",
 
-		"UNSIGNED_INT_10F_11F_11F_REV_EXT" _ 0x8C3B
+		"UNSIGNED_INT_10F_11F_11F_REV_EXT"..0x8C3B
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameters of GetIntegerv, GetFloatv, and GetDoublev.",
 
-		"RGBA_SIGNED_COMPONENTS_EXT" _ 0x8C3C
+		"RGBA_SIGNED_COMPONENTS_EXT"..0x8C3C
 	)
 }
 
@@ -75,7 +75,7 @@ val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("
 	IntConstant(
 		"Accepted as values of the {@code render_type} arguments in the GLX13#CreateNewContext() and GLX#CreateContext() functions.",
 
-		"RGBA_UNSIGNED_FLOAT_TYPE_EXT" _ 0x20B1
+		"RGBA_UNSIGNED_FLOAT_TYPE_EXT"..0x20B1
 	)
 
 	IntConstant(
@@ -84,7 +84,7 @@ val GLX_EXT_fbconfig_packed_float = "GLXEXTFBConfigPackedFloat".nativeClassGLX("
 		GLX13#ChooseFBConfig() (following the GLX_RENDER_TYPE token).
 		""",
 
-		"RGBA_UNSIGNED_FLOAT_BIT_EXT" _ 0x00000008
+		"RGBA_UNSIGNED_FLOAT_BIT_EXT"..0x00000008
 	)
 
 }
@@ -106,6 +106,6 @@ val WGL_EXT_pixel_format_packed_float = "WGLEXTPixelFormatPackedFloat".nativeCla
 		parameter array of WGLARBPixelFormat#GetPixelFormatAttribiARB().
 		""",
 
-		"TYPE_RGBA_UNSIGNED_FLOAT_EXT" _ 0x20A8
+		"TYPE_RGBA_UNSIGNED_FLOAT_EXT"..0x20A8
 	)
 }

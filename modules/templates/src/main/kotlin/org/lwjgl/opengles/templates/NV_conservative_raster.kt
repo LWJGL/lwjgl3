@@ -28,15 +28,15 @@ val NV_conservative_raster = "NVConservativeRaster".nativeClassGLES("NV_conserva
 	IntConstant(
 		"Accepted by the {@code cap} parameter of Enable, Disable, IsEnabled.",
 
-		"CONSERVATIVE_RASTERIZATION_NV" _ 0x9346
+		"CONSERVATIVE_RASTERIZATION_NV"..0x9346
 	)
 
 	IntConstant(
 		"Accepted by the {@code pname} parameter of GetBooleanv, GetDoublev, GetIntegerv, and GetFloatv.",
 
-		"SUBPIXEL_PRECISION_BIAS_X_BITS_NV" _ 0x9347,
-		"SUBPIXEL_PRECISION_BIAS_Y_BITS_NV" _ 0x9348,
-		"MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV" _ 0x9349
+		"SUBPIXEL_PRECISION_BIAS_X_BITS_NV"..0x9347,
+		"SUBPIXEL_PRECISION_BIAS_Y_BITS_NV"..0x9348,
+		"MAX_SUBPIXEL_PRECISION_BIAS_BITS_NV"..0x9349
 	)
 
 	void(

@@ -17,7 +17,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		share group object handle is specified in {@code properties}.
 		""",
 
-			"INVALID_GL_SHAREGROUP_REFERENCE_KHR" _ -1000
+			"INVALID_GL_SHAREGROUP_REFERENCE_KHR"..-1000
 		)
 
 		val INVALID_GL_SHAREGROUP_REFERENCE_KHR = "#INVALID_GL_SHAREGROUP_REFERENCE_KHR"
@@ -28,7 +28,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		specified OpenGL context.
 		""",
 
-			"DEVICES_FOR_GL_CONTEXT_KHR" _ 0x2007
+			"DEVICES_FOR_GL_CONTEXT_KHR"..0x2007
 		)
 
 		IntConstant(
@@ -37,18 +37,18 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		context.
 		""",
 
-			"CURRENT_DEVICE_FOR_GL_CONTEXT_KHR" _ 0x2006
+			"CURRENT_DEVICE_FOR_GL_CONTEXT_KHR"..0x2006
 		)
 
 
 		IntConstant(
 			"Accepted as an attribute name in the {@code properties} argument of CL10#CreateContext() and CL10#CreateContextFromType().",
 
-			"GL_CONTEXT_KHR" _ 0x2008,
-			"EGL_DISPLAY_KHR" _ 0x2009,
-			"GLX_DISPLAY_KHR" _ 0x200A,
-			"WGL_HDC_KHR" _ 0x200B,
-			"CGL_SHAREGROUP_KHR" _ 0x200C
+			"GL_CONTEXT_KHR"..0x2008,
+			"EGL_DISPLAY_KHR"..0x2009,
+			"GLX_DISPLAY_KHR"..0x200A,
+			"WGL_HDC_KHR"..0x200B,
+			"CGL_SHAREGROUP_KHR"..0x200C
 		)
 
 		cl_int(
@@ -61,7 +61,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 		faster on a command queue corresponding to this device than on command queues corresponding to other devices available to an OpenCL context.
 		""",
 
-			Check(5) _ const _ cl_context_properties_p.IN(
+			Check(5)..const..cl_context_properties_p.IN(
 				"properties",
 				"""
 			points to an attribute list whose format and valid contents are identical to the {code properties} argument of CL10#CreateContext().
@@ -74,7 +74,7 @@ val khr_gl_sharing = dependsOn(Binding.OPENGL) {
 				"#DEVICES_FOR_GL_CONTEXT_KHR #CURRENT_DEVICE_FOR_GL_CONTEXT_KHR"
 			),
 			PARAM_VALUE_SIZE,
-			MultiType(PointerMapping.DATA_POINTER) _ nullable _ void_p.IN("param_value", param_value),
+			MultiType(PointerMapping.DATA_POINTER)..nullable..void_p.IN("param_value", param_value),
 			PARAM_VALUE_SIZE_RET,
 
 			returnDoc =
