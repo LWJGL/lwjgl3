@@ -302,12 +302,14 @@ public enum Configuration {
 	 */
 	public static void setDebugStreamConsumer(final DebugStreamConsumer consumer, final Charset charset) {
 		final ByteArrayOutputStream buffer = new ByteArrayOutputStream() {
+			final int LINE_SEPARATOR_LENGTH = System.getProperty("line.separator").length();
+
 			@Override
 			public void flush() throws IOException {
 				if ( count == 0 )
 					return;
 
-				consumer.accept(new String(buf, 0, count - 1, charset));
+				consumer.accept(new String(buf, 0, count - LINE_SEPARATOR_LENGTH, charset));
 				this.reset();
 			}
 		};
