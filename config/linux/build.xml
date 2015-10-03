@@ -49,6 +49,8 @@ License terms: http://lwjgl.org/license.php
 			<arguments>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
+				<arg value="-I${src.include}/system/xxhash"/>
+				<arg value="-I${src.native}/system/xxhash"/> <!-- xxhash.c is included in the binding -->
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
@@ -59,6 +61,7 @@ License terms: http://lwjgl.org/license.php
 					<include name="${src.generated.native}/system/simd/*.c"/>
 					<exclude name="${src.generated.native}/system/simd/*SSE3.c"/>
 					<include name="${src.generated.native}/system/linux/*.c"/>
+					<include name="${src.generated.native}/system/xxhash/*.c"/>
 				</fileset>
 			</arguments>
 		</compile>

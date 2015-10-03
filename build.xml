@@ -316,6 +316,7 @@ License terms: http://lwjgl.org/license.php
 			<!-- Demos -->
 			<include name="org/lwjgl/demo/util/**"/>
 			<include name="org/lwjgl/demo/windows/**" if:set="platform.windows"/>
+			<include name="org/lwjgl/demo/xxhash/**"/>
 
 			<include name="org/lwjgl/demo/egl/**" if:true="${binding.egl}"/>
 			<include name="org/lwjgl/demo/glfw/**" if:true="${binding.glfw}"/>

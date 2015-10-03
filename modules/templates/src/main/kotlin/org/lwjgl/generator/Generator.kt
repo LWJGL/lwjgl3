@@ -89,6 +89,7 @@ fun main(args: Array<String>) {
 		generate("org.lwjgl.system.macosx")
 		generate("org.lwjgl.system.simd")
 		generate("org.lwjgl.system.windows")
+		generate("org.lwjgl.system.xxhash")
 
 		// Generate utility classes. These are auto-registered during the process above.
 		generate("struct", Generator.structs)
