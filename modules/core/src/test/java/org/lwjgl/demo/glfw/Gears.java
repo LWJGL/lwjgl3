@@ -7,7 +7,7 @@ package org.lwjgl.demo.glfw;
 import org.lwjgl.demo.opengl.AbstractGears;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.glfw.GLFWKeyCallback;
-import org.lwjgl.glfw.GLFWvidmode;
+import org.lwjgl.glfw.GLFWVidMode;
 import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GLUtil;
@@ -80,7 +80,7 @@ public class Gears extends AbstractGears {
 		int HEIGHT = 300;
 
 		long monitor = glfwGetPrimaryMonitor();
-		GLFWvidmode vidmode = glfwGetVideoMode(monitor);
+		GLFWVidMode vidmode = glfwGetVideoMode(monitor);
 
 		long window = fullscreen
 			? glfwCreateWindow(vidmode.getWidth(), vidmode.getHeight(), "GLFW Gears Demo", monitor, this.window)

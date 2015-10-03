@@ -201,7 +201,7 @@ abstract class FontDemo {
 		scrollfun.set(window);
 
 		// Center window
-		GLFWvidmode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
 		glfwSetWindowPos(
 			window,

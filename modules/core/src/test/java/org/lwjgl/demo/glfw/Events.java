@@ -4,7 +4,6 @@
  */
 package org.lwjgl.demo.glfw;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.LWJGLUtil;
 import org.lwjgl.LWJGLUtil.TokenFilter;
 import org.lwjgl.demo.util.ClosureGC;
@@ -85,7 +84,7 @@ public final class Events {
 				);
 				ByteBuffer pixels = (ByteBuffer)stbi_load_from_memory.invoke(null, png, w, h, comp, 0);
 
-				GLFWimage img = GLFWimage.malloc().set(w.get(0), h.get(0), pixels);
+				GLFWImage img = GLFWImage.malloc().set(w.get(0), h.get(0), pixels);
 				long cursor = glfwCreateCursor(img, 0, 8);
 				img.free();
 
