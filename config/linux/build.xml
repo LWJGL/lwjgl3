@@ -21,6 +21,7 @@ License terms: http://lwjgl.org/license.php
 	<property name="warnings" value="-Werror -Wfatal-errors -Wall -Wextra -pedantic -Wno-extended-offsetof"/>
 
 	<property name="src.include.rel" value="../../../${src.include}"/>
+	<property name="src.native.rel" value="../../../${src.native}"/>
 	<macrodef name="compile">
 		<element name="arguments"/>
 		<sequential>
@@ -49,8 +50,8 @@ License terms: http://lwjgl.org/license.php
 			<arguments>
 				<arg value="-I${src.include.rel}/system/jemalloc"/>
 				<arg value="-I${src.include.rel}/system/libffi"/>
-				<arg value="-I${src.include}/system/xxhash"/>
-				<arg value="-I${src.native}/system/xxhash"/> <!-- xxhash.c is included in the binding -->
+				<arg value="-I${src.include.rel}/system/xxhash"/>
+				<arg value="-I${src.native.rel}/system/xxhash"/> <!-- xxhash.c is included in the binding -->
 				<fileset dir=".">
 					<include name="${src.native}/system/*.c"/>
 					<include name="${src.native}/system/libffi/*.c"/>
