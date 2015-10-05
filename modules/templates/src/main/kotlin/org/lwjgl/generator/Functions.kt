@@ -369,7 +369,7 @@ class NativeClassFunction(
 							expression = "PointerBuffer.get($expression, $expression.position())"
 					}
 					if ( autoSize.factor != null )
-						expression += " ${autoSize.factor!!.expressionInv()}"
+						expression += " ${autoSize.factor.expressionInv()}"
 
 					sequenceOf(autoSize.reference, *autoSize.dependent).forEach {
 						prefix = if ( paramMap[it]!! has Nullable ) "if ( $it != null ) " else ""

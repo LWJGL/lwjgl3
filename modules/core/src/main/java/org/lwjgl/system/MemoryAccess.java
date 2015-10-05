@@ -8,6 +8,9 @@ import org.lwjgl.LWJGLUtil;
 
 import java.nio.*;
 
+import static java.lang.Character.*;
+import static org.lwjgl.system.MemoryUtil.*;
+
 /**
  * Provides 3 {@link MemoryAccessor} implementations. The most efficient available will be used by {@link MemoryUtil}.
  * <p/>
@@ -157,6 +160,10 @@ final class MemoryAccess {
 		void memPutDouble(long ptr, double value) { putDouble(ptr, value); }
 
 		void memPutAddress(long ptr, long value) { putAddress(ptr, value); }
+
+		MemoryTextUtil getTextUtil() {
+			return new MemoryTextUtil();
+		}
 
 	}
 
@@ -647,6 +654,98 @@ final class MemoryAccess {
 		@Override
 		void memPutAddress(long ptr, long value) {
 			UNSAFE.putAddress(ptr, value);
+		}
+
+		@Override
+		MemoryTextUtil getTextUtil() {
+			// This implementation uses Unsafe to write directly to the buffer's memory. We can do this because the original code specifies that the target
+			// buffer is assumed to have enough space for the encoded string. This by itself isn't very useful.
+
+			// The benefit comes from extracting the implementation to a separate method that only receives a raw pointer. This enables inlining of the base
+			// method and, in many cases, elimination of the ByteBuffer allocation via escape analysis.
+			return new MemoryTextUtil() {
+				@Override
+				int encodeASCII(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+					return encodeASCII(text, nullTerminated, memAddress(target) + offset);
+				}
+
+				private int encodeASCII(CharSequence text, boolean nullTerminated, long target) {
+					int p = 0, len = text.length();
+
+					for (; p < len; p++ )
+						memPutByte(target + p, (byte)text.charAt(p));
+
+					if ( nullTerminated )
+						memPutByte(target + p++, (byte)0);
+
+					return p;
+				}
+
+				@Override
+				int encodeUTF8(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+					return encodeUTF8(text, nullTerminated, memAddress(target) + offset);
+				}
+
+				private int encodeUTF8(CharSequence text, boolean nullTerminated, long target) {
+					int i = 0, len = text.length(), p = 0;
+
+					char c;
+
+					// ASCII fast path
+					while ( i < len && (c = text.charAt(i)) < 0x80 ) {
+						memPutByte(target + p++, (byte)c);
+						i++;
+					}
+
+					// Slow path
+					while ( i < len ) {
+						c = text.charAt(i++);
+						if ( c < 0x80 ) {
+							memPutByte(target + p++, (byte)c);
+						} else {
+							int cp = c;
+							if ( c < 0x800 ) {
+								memPutByte(target + p++, (byte)(0xC0 | cp >> 6));
+							} else {
+								if ( !isHighSurrogate(c) ) {
+									memPutByte(target + p++, (byte)(0xE0 | cp >> 12));
+								} else {
+									cp = toCodePoint(c, text.charAt(i++));
+
+									memPutByte(target + p++, (byte)(0xF0 | cp >> 18));
+									memPutByte(target + p++, (byte)(0x80 | cp >> 12 & 0x3F));
+								}
+								memPutByte(target + p++, (byte)(0x80 | cp >> 6 & 0x3F));
+							}
+							memPutByte(target + p++, (byte)(0x80 | cp & 0x3F));
+						}
+					}
+
+					if ( nullTerminated )
+						memPutByte(target + p, (byte)0);
+
+					return p;
+				}
+
+				@Override
+				int encodeUTF16(CharSequence text, boolean nullTerminated, ByteBuffer target, int offset) {
+					return encodeUTF16(text, nullTerminated, memAddress(target) + offset);
+				}
+
+				private int encodeUTF16(CharSequence text, boolean nullTerminated, long target) {
+					int p = 0, len = text.length();
+
+					for ( int i = 0; i < len; i++, p += 2 )
+						memPutShort(target + p, (short)text.charAt(i));
+
+					if ( nullTerminated ) {
+						memPutShort(target + p, (short)0);
+						p += 2;
+					}
+
+					return p;
+				}
+			};
 		}
 
 		private static sun.misc.Unsafe getUnsafeInstance() {

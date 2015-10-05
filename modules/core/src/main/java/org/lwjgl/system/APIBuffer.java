@@ -212,15 +212,6 @@ public class APIBuffer {
 
 	// ----
 
-	/** Ensures space for an additional pointer buffer, sets the memory addresses of the specified buffers and returns the address offset. */
-	public int pointerArrayParam(ByteBuffer... buffers) {
-		int buffersAddress = bufferParam(buffers.length << POINTER_SHIFT);
-		for ( int i = 0; i < buffers.length; i++ )
-			pointerParam(buffersAddress, i, memAddress(buffers[i]));
-
-		return buffersAddress;
-	}
-
 	/** Ensures space for an additional pointer buffer, sets the specified memory addresses and returns the address offset. */
 	public int pointerArrayParam(long... pointers) {
 		int buffersAddress = bufferParam(pointers.length << POINTER_SHIFT);
@@ -230,29 +221,12 @@ public class APIBuffer {
 		return buffersAddress;
 	}
 
-	/** Optimized version of {@link #pointerArrayParam(ByteBuffer...)} for a single buffer. */
-	public int pointerArrayParam(ByteBuffer buffer) {
-		return pointerParam(memAddress(buffer));
-	}
-
-	/**
-	 * Ensures space for an additional pointer buffer and integer buffer, sets the memory addresses and remaining bytes of the specified buffers and returns
-	 * the address offset.
-	 */
-	public int pointerArrayParami(ByteBuffer... buffers) {
-		int buffersAddress = pointerArrayParam(buffers);
-
-		int buffersLengths = bufferParam(buffers.length << 2);
+	/** Ensures space for an additional pointer buffer, sets the memory addresses of the specified buffers and returns the address offset. */
+	public int pointerArrayParam(ByteBuffer... buffers) {
+		int buffersAddress = bufferParam(buffers.length << POINTER_SHIFT);
 		for ( int i = 0; i < buffers.length; i++ )
-			intParam(buffersLengths, i, buffers[i].remaining());
+			pointerParam(buffersAddress, i, memAddress(buffers[i]));
 
-		return buffersAddress;
-	}
-
-	/** Optimized version of {@link #pointerArrayParami(ByteBuffer...)} for a single buffer. */
-	public int pointerArrayParami(ByteBuffer buffer) {
-		int buffersAddress = pointerArrayParam(buffer);
-		intParam(buffer.remaining());
 		return buffersAddress;
 	}
 
@@ -270,12 +244,195 @@ public class APIBuffer {
 		return buffersAddress;
 	}
 
-	/** Optimized version of {@link #pointerArrayParamp(ByteBuffer...)} for a single buffer. */
-	public int pointerArrayParamp(ByteBuffer buffer) {
-		int buffersAddress = pointerArrayParam(buffer);
-		pointerParam(buffer.remaining());
+	// ---------------------------------------------------------------------------------------------------------------------
+
+	/**
+	 * ASCII encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the memory address buffer
+	 */
+	public int pointerArrayParamASCII(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeASCII(strings[i], true, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+		}
+
 		return buffersAddress;
 	}
+
+	/**
+	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamASCIIi(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << 2);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeASCII(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			intParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * ASCII encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamASCIIp(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << POINTER_SHIFT);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeASCII(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			pointerParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF8 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the memory address buffer
+	 */
+	public int pointerArrayParamUTF8(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF8(strings[i], true, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamUTF8i(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << 2);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF8(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			intParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF8 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamUTF8p(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << POINTER_SHIFT);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF8(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			pointerParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF16 encodes the specified strings with a null-terminator and ensures space for a buffer filled with the memory addresses of the encoded strings.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the memory address buffer
+	 */
+	public int pointerArrayParamUTF16(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF16(strings[i], true, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are 4-bytes integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamUTF16i(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << 2);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF16(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			intParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	/**
+	 * UTF16 encodes the specified strings and ensures space for two additional buffers filled with the lengths and memory addresses of the encoded strings,
+	 * respectively. The lengths are pointer-sized integers and the memory address buffer starts immediately after the lengths buffer.
+	 *
+	 * <p>The encoded buffers must be later freed with {@link #pointerArrayFree(int, int)}.</p>
+	 *
+	 * @return the offset to the lengths buffer
+	 */
+	public int pointerArrayParamUTF16p(CharSequence... strings) {
+		int buffersAddress = bufferParam(strings.length << POINTER_SHIFT);
+		int lengthsAddress = bufferParam(strings.length << POINTER_SHIFT);
+
+		for ( int i = 0; i < strings.length; i++ ) {
+			ByteBuffer buffer = memEncodeUTF16(strings[i], false, BufferAllocator.MALLOC);
+
+			pointerParam(buffersAddress, i, memAddress(buffer));
+			pointerParam(lengthsAddress, i, buffer.remaining());
+		}
+
+		return buffersAddress;
+	}
+
+	// ---------------------------------------------------------------------------------------------------------------------
 
 	/** Frees {@code length} memory blocks stored in the APIBuffer, starting at the specified {@code offset}. */
 	public void pointerArrayFree(int offset, int length) {
@@ -326,62 +483,6 @@ public class APIBuffer {
 		int offset = bufferParam((value.length() + (nullTerminated ? 1 : 0)) << 1);
 		memEncodeUTF16(value, nullTerminated, buffer, offset);
 		return offset;
-	}
-
-	// ---------------------------------------------------------------------------------------------------------------------
-
-	/** Encodes the specified ASCII strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
-	public static ByteBuffer[] stringArrayASCII(boolean nullTerminated, CharSequence... strings) {
-		ByteBuffer[] buffers = new ByteBuffer[strings.length];
-		for ( int i = 0; i < strings.length; i++ )
-			buffers[i] = stringArrayASCII(nullTerminated, strings[i]);
-		return buffers;
-	}
-
-	/** Optimized version of {@link #stringArrayASCII(boolean, CharSequence...)} for a single string. */
-	public static ByteBuffer stringArrayASCII(boolean nullTerminated, CharSequence string) {
-		int size = string.length() + (nullTerminated ? 1 : 0);
-
-		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
-		memEncodeASCII(string, nullTerminated, buffer);
-
-		return buffer;
-	}
-
-	/** Encodes the specified UTF-8 strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
-	public static ByteBuffer[] stringArrayUTF8(boolean nullTerminated, CharSequence... strings) {
-		ByteBuffer[] buffers = new ByteBuffer[strings.length];
-		for ( int i = 0; i < strings.length; i++ )
-			buffers[i] = stringArrayUTF8(nullTerminated, strings[i]);
-		return buffers;
-	}
-
-	/** Optimized version of {@link #stringArrayUTF8(boolean, CharSequence...)} for a single string. */
-	public static ByteBuffer stringArrayUTF8(boolean nullTerminated, CharSequence string) {
-		int size = memEncodedLengthUTF8(string) + (nullTerminated ? 1 : 0);
-
-		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
-		memEncodeUTF8(string, nullTerminated, buffer);
-
-		return buffer;
-	}
-
-	/** Encodes the specified UTF-16 strings to buffers that must be explicitly freed with {@link #pointerArrayFree}. */
-	public static ByteBuffer[] stringArrayUTF16(boolean nullTerminated, CharSequence... strings) {
-		ByteBuffer[] buffers = new ByteBuffer[strings.length];
-		for ( int i = 0; i < strings.length; i++ )
-			buffers[i] = stringArrayUTF16(nullTerminated, strings[i]);
-		return buffers;
-	}
-
-	/** Optimized version of {@link #stringArrayUTF16(boolean, CharSequence...)} for a single string. */
-	public static ByteBuffer stringArrayUTF16(boolean nullTerminated, CharSequence string) {
-		int size = (string.length() + (nullTerminated ? 1 : 0)) << 1;
-
-		ByteBuffer buffer = memByteBuffer(nmemAlloc(size), size);
-		memEncodeUTF16(string, nullTerminated, buffer);
-
-		return buffer;
 	}
 
 	// ---------------------------------------------------------------------------------------------------------------------

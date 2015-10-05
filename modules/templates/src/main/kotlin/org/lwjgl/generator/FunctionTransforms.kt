@@ -303,14 +303,12 @@ open class PointerArrayTransform(val paramType: String) : FunctionTransform<Para
 		if ( pointerArray.lengthsParam != null )
 			return
 
-		val paramName = (if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName) let {
+		println((if ( paramType.isNotEmpty() ) param.name else pointerArray.singleName) let {
 			if ( pointerArray.elementType is CharSequenceType )
-				"APIBuffer.stringArray${pointerArray.elementType.charMapping.charset}(true, $it)"
+				"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}($it);"
 			else
-				it
-		}
-
-		println("\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam($paramName);")
+				"\t\tint ${param.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam($it);"
+		})
 	}
 
 	override fun generate(qtype: Parameter, code: Code): Code {
@@ -338,7 +336,7 @@ class PointerArrayLengthsTransform(
 	val multi: Boolean
 ) : FunctionTransform<Parameter>, APIBufferFunctionTransform<Parameter>, SkipCheckFunctionTransform {
 	override fun transformDeclaration(param: Parameter, original: String) = null // Remove the parameter
-	override fun transformCall(param: Parameter, original: String) = // Replace with APIBuffer address + offset
+	override fun transformCall(param: Parameter, original: String) = // Replace with APIBuffer address + length(s) offset
 		if ( multi )
 			"$API_BUFFER.address(${arrayParam.name}$POINTER_POSTFIX + (${arrayParam.name}.length << POINTER_SHIFT))"
 		else
@@ -350,13 +348,11 @@ class PointerArrayLengthsTransform(
 		val pointerArray = arrayParam[PointerArray]
 
 		val lengthType = PointerMapping.primitiveMap[param.nativeType.mapping]!![0]
-		val paramName = (if ( multi ) arrayParam.name else pointerArray.singleName) let {
+		println((if ( multi ) arrayParam.name else pointerArray.singleName) let {
 			if ( pointerArray.elementType is CharSequenceType )
-				"APIBuffer.stringArray${pointerArray.elementType.charMapping.charset}(false, $it)"
+				"\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam${pointerArray.elementType.charMapping.charset}$lengthType($it);"
 			else
-				it
-		}
-
-		println("\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam$lengthType($paramName);")
+				"\t\tint ${arrayParam.name}$POINTER_POSTFIX = $API_BUFFER.pointerArrayParam$lengthType($it);"
+		})
 	}
 }
