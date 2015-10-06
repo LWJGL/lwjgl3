@@ -50,13 +50,13 @@ stbir_resize_uint8_srgb_edgemode(
 			Artists should not edit premultiplied-alpha images; artists want non-premultiplied alpha images. Thus, art tools generally output non-premultiplied
 			alpha images.
 			""",
-		    "You will get best results in most cases by converting images to premultiplied alpha before processing them mathematically.",
-		    """
+			"You will get best results in most cases by converting images to premultiplied alpha before processing them mathematically.",
+			"""
 			If you pass the flag #FLAG_ALPHA_PREMULTIPLIED, the resizer does not do anything special for the alpha channel; it is resampled identically to
 			other channels. This produces the correct results for premultiplied-alpha images, but produces less-than-ideal results for non-premultiplied-alpha
 			images.
 		    """,
-		    """
+			"""
 			If you do not pass the flag #FLAG_ALPHA_PREMULTIPLIED, then the resizer weights the contribution of input pixels based on their alpha values, or,
 			equivalently, it multiplies the alpha value into the color channels, resamples, then divides by the resultant alpha value. Input pixels which have
 			{@code alpha=0} do not contribute at all to output pixels unless <b>all</b> of the input pixels affecting that output pixel have {@code alpha=0},
@@ -65,7 +65,7 @@ stbir_resize_uint8_srgb_edgemode(
 			{@code alpha=0} will be 0 in all channels. (For float images, you can manually achieve the same result by adding a tiny epsilon value to the alpha
 			channel of every image, and then subtracting or clamping it at the end.)
 		    """,
-		    """
+			"""
 			You can separately control whether the alpha channel is interpreted as linear or affected by the colorspace. By default it is linear; you almost
 			never want to apply the colorspace. (For example, graphics hardware does not apply sRGB conversion to the alpha channel.)
 		    """
@@ -90,13 +90,13 @@ stbir_resize_uint8_srgb_edgemode(
 		"FLAG_ALPHA_USES_COLORSPACE"..-1
 	)
 
-	val EdgeWrapModes = IntConstant(
+	val EdgeWrapModes = EnumConstant(
 		"Edge wrap mode.",
 
-		"EDGE_CLAMP"..1,
-		"EDGE_REFLECT"..2,
-		"EDGE_WRAP"..3,
-		"EDGE_ZERO"..4
+		"EDGE_CLAMP" enum 1,
+		"EDGE_REFLECT".enum,
+		"EDGE_WRAP".enum,
+		"EDGE_ZERO".enum
 	).javaDocLinks
 
 	val resize_uint8 = int(
@@ -105,8 +105,8 @@ stbir_resize_uint8_srgb_edgemode(
 		Easy-to-use API for resizing images.
 		${ul(
 			"The colorspace is linear.",
-		    "The alpha channel is treated identically to other channels.",
-		    """
+			"The alpha channel is treated identically to other channels.",
+			"""
 		    Memory required grows approximately linearly with input and output size, but with discontinuities at {@code input_w == output_w} and
 		    {@code input_h == output_h}.
 		    """
@@ -130,7 +130,7 @@ stbir_resize_uint8_srgb_edgemode(
 		),
 		int.IN("num_channels", "the number of channels in the image (e.g. RGB=3, RGBA=4)"),
 
-	    returnDoc = "1 on success, 0 on failure"
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	val resize_float = int(
@@ -205,19 +205,22 @@ stbir_resize_uint8_srgb_edgemode(
 
 	// Medium-complexity API
 
-	IntConstant("Use same filter type that easy-to-use API chooses.", "FILTER_DEFAULT"..0)
-	IntConstant("A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.", "FILTER_BOX"..1)
-	IntConstant("On upsampling, produces same results as bilinear texture filtering.", "FILTER_TRIANGLE"..2)
-	IntConstant("The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.", "FILTER_CUBICBSPLINE"..3)
-	IntConstant("An interpolating cubic spline.", "FILTER_CATMULLROM"..4)
-	IntConstant("Mitchell-Netrevalli filter with B=1/3, C=1/3.", "FILTER_MITCHELL"..5)
-	val Filters = "#FILTER_DEFAULT #FILTER_BOX #FILTER_TRIANGLE #FILTER_CUBICBSPLINE #FILTER_CATMULLROM #FILTER_MITCHELL"
+	val Filters = EnumConstant(
+		"Filters.",
 
-	val ColorSpaces = IntConstant(
+		"FILTER_DEFAULT" enum "Use same filter type that easy-to-use API chooses.",
+		"FILTER_BOX" enum "A trapezoid w/1-pixel wide ramps, same result as box for integer scale ratios.",
+		"FILTER_TRIANGLE" enum "On upsampling, produces same results as bilinear texture filtering.",
+		"FILTER_CUBICBSPLINE" enum "The cubic b-spline (aka Mitchell-Netrevalli with B=1,C=0), gaussian-esque.",
+		"FILTER_CATMULLROM" enum "An interpolating cubic spline.",
+		"FILTER_MITCHELL" enum "Mitchell-Netrevalli filter with B=1/3, C=1/3."
+	).javaDocLinks
+
+	val ColorSpaces = EnumConstant(
 		"Colorspace.",
 
-		"COLORSPACE_LINEAR"..0,
-		"COLORSPACE_SRGB"..1
+		"COLORSPACE_LINEAR".enum,
+		"COLORSPACE_SRGB".enum
 	).javaDocLinks
 
 	val resize_uint8_generic = int(
@@ -291,13 +294,13 @@ stbir_resize_uint8_srgb_edgemode(
 
 	// Full-complexity API
 
-	val DataTypes = IntConstant(
+	val DataTypes = EnumConstant(
 		"Data type.",
 
-		"TYPE_UINT8"..0,
-		"TYPE_UINT16"..1,
-		"TYPE_UINT32"..2,
-		"TYPE_FLOAT"..3
+		"TYPE_UINT8".enum,
+		"TYPE_UINT16".enum,
+		"TYPE_UINT32".enum,
+		"TYPE_FLOAT".enum
 	).javaDocLinks
 
 	val resize = int(
@@ -323,7 +326,7 @@ stbir_resize_uint8_srgb_edgemode(
 		resize_uint8_generic["space"],
 		resize_uint8_generic["alloc_context"],
 
-	    returnDoc = "1 on success, 0 on failure"
+		returnDoc = "1 on success, 0 on failure"
 	)
 
 	int(

@@ -23,11 +23,11 @@ ENABLE_WARNINGS()""")
 		xxHash is an extremely fast Hash algorithm, running at RAM speed limits. It also successfully passes all tests from the SMHasher suite.
 		"""
 
-	IntConstant(
+	EnumConstant(
 		"Error codes.",
 
-	    "OK"..0,
-	    "ERROR"..1
+	    "OK".enum,
+	    "ERROR".enum
 	)
 
 	// Simple Hash Functions

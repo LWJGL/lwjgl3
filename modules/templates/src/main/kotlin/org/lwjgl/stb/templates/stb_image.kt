@@ -94,19 +94,14 @@ stbi_is_hdr(char *filename);""")}
 		there's premultiplied data (currently only happens in iPhone images, and only if iPhone convert-to-rgb processing is on).
 		"""
 
-	IntConstant(
-		"Default component count, used as an argument to {@code req_comp}.",
-
-		"default"..0
-	)
-
-	IntConstant(
+	EnumConstant(
 		"Component count.",
 
-		"grey"..1,
-		"grey_alpha"..2,
-		"rgb"..3,
-		"rgb_alpha"..4
+		"default" enum "Default component count, used as an argument to {@code req_comp}.",
+		"grey".enum,
+		"grey_alpha".enum,
+		"rgb".enum,
+		"rgb_alpha".enum
 	)
 
 	stbi_uc_p(

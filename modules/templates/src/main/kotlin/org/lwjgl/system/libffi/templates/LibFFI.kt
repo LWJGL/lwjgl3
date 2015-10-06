@@ -53,33 +53,28 @@ fun LibFFI() = "LibFFI".nativeClass(packageName = FFI_PACKAGE, prefix = "FFI_") 
 		"TYPE_POINTER" expr "14"
 	)
 
-	val ABI = IntConstant(
+	val ABI = EnumConstant(
 		"ABI enumeration.",
 
-		// x86
-		"SYSV"..1,
+		"SYSV" enum 1,
+		"WIN64" enum 1,
 
-		// Win32
-		"STDCALL"..2,
-		"THISCALL"..3,
-		"FASTCALL"..4,
-		"MS_CDECL"..5,
+		"UNIX64" enum 2,
+		"STDCALL" expr "LWJGLUtil.getPlatform() == LWJGLUtil.Platform.WINDOWS ? 0x2 : 0x5",
 
-		// Win64
-		"WIN64"..1,
-
-		// Unix
-		"UNIX64"..2,
+		"THISCALL".enum,
+		"FASTCALL".enum,
+		"MS_CDECL".enum,
 
 		"DEFAULT_ABI" expr "FFI_DEFAULT_ABI()"
 	).javaDocLinks
 
-	IntConstant(
+	EnumConstant(
 		"Status codes.",
 
-		"OK"..0,
-		"BAD_TYPEDEF"..1,
-		"BAD_ABI"..2
+		"OK".enum,
+		"BAD_TYPEDEF".enum,
+		"BAD_ABI".enum
 	)
 	
 	LongConstant(

@@ -349,6 +349,12 @@ class NativeClass(
 	/** Adds a new constant. */
 	operator fun <T : Any> String.rangeTo(value: T) = Constant(this, value)
 
+	/** Adds a new enum constant. */
+	val String.enum: Constant<EnumValue> get() = Constant(this, EnumValue())
+	fun String.enum(documentation: String) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc()))
+	fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
+	fun String.enum(documentation: String, value: Int) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc(), value))
+
 	/** Adds a new constant whose value is an expression. */
 	fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
 

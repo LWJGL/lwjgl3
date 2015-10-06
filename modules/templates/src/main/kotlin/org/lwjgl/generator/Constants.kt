@@ -5,6 +5,7 @@
 package org.lwjgl.generator
 
 import java.io.PrintWriter
+import java.util.*
 import kotlin.reflect.KClass
 
 // Extension properties for numeric literals.
@@ -12,7 +13,7 @@ inline val Int.b: Byte get() = this.toByte()
 inline val Int.s: Short get() = this.toShort()
 inline val Long.i: Int get() = this.toInt()
 
-class ConstantType<T: Any>(
+class ConstantType<T : Any>(
 	type: KClass<T>,
 	val print: (T) -> String
 ) {
@@ -38,10 +39,17 @@ val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
 val StringConstant = ConstantType(String::class) { "\"$it\"" }
 
-open class Constant<T: Any>(val name: String, val value: T?)
-class ConstantExpression<T: Any>(name: String, val expression: String): Constant<T>(name, null)
+data class EnumValue(
+	val documentation: String? = null,
+	val value: Int? = null
+)
 
-class ConstantBlock<T: Any>(
+val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
+
+open class Constant<T : Any>(val name: String, val value: T?)
+class ConstantExpression<T : Any>(name: String, val expression: String) : Constant<T>(name, null)
+
+class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
 	val documentation: String,
@@ -57,7 +65,40 @@ class ConstantBlock<T: Any>(
 	private fun getConstantName(name: String) = if ( noPrefix ) name else "${nativeClass.prefixConstant}$name"
 
 	fun generate(writer: PrintWriter) {
-		writer.generateBlock()
+		if ( constantType === EnumConstant ) {
+			// Increment/update the current enum value while iterating the enum constants.
+			// Constants without documentation are added to the root block.
+			// Constants with documentation go to their own block.
+
+			val rootBlock = ArrayList<Constant<Int>>()
+			val enumBlocks = ArrayList<ConstantBlock<Int>>()
+
+			var value = 0
+			for (c in constants) {
+				if ( c is ConstantExpression ) {
+					rootBlock.add(c as ConstantExpression<Int>)
+					continue
+				}
+
+				val ev = c.value as EnumValue
+				if ( ev.value != null )
+					value = ev.value
+
+				Constant(c.name, value++) let {
+					if ( ev.documentation == null )
+						rootBlock.add(it)
+					else
+						enumBlocks.add(ConstantBlock(nativeClass, IntConstant, ev.documentation, it))
+				}
+			}
+
+			if ( rootBlock.isNotEmpty() )
+				ConstantBlock(nativeClass, IntConstant, this@ConstantBlock.documentation, *rootBlock.toTypedArray()).generate(writer)
+
+			for (b in enumBlocks)
+				b.generate(writer)
+		} else
+			writer.generateBlock()
 	}
 
 	private fun PrintWriter.generateBlock() {
@@ -91,7 +132,7 @@ class ConstantBlock<T: Any>(
 
 	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
 		print("$indent${getConstantName(constant.name)}")
-		for ( i in 0..(alignment - constant.name.length() - 1) )
+		for (i in 0..(alignment - constant.name.length() - 1))
 			print(' ')
 
 		print(" = ")
@@ -105,7 +146,7 @@ class ConstantBlock<T: Any>(
 		val builder = StringBuilder(constants.size() * 32)
 
 		printJavaDocLink(builder, constants[0])
-		for ( i in 1..constants.lastIndex ) {
+		for (i in 1..constants.lastIndex) {
 			builder append " "
 			printJavaDocLink(builder, constants[i])
 		}
@@ -113,7 +154,7 @@ class ConstantBlock<T: Any>(
 		return builder.toString()
 	}
 
-	private fun <T: Any> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
+	private fun <T : Any> printJavaDocLink(builder: StringBuilder, constant: Constant<T>) {
 		builder append nativeClass.className
 		builder append '#'
 		builder append constant.name

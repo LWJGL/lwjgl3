@@ -47,39 +47,39 @@ val stb_vorbis = "STBVorbis".nativeClass(packageName = STB_PACKAGE, prefixMethod
 		code. (But if you don't support seeking, you may just want to go ahead and use pushdata.)
 		"""
 
-	IntConstant(
+	EnumConstant(
 		"Error code.",
 
-		"_no_error"..0,
+		"_no_error".enum,
 
-		"need_more_data"..1, // not a real error
+		"need_more_data".enum, // not a real error
 
-		"invalid_api_mixing"..2, // can't mix API modes
-		"outofmem"..3, // not enough memory
-		"feature_not_supported"..4, // uses floor 0
-		"too_many_channels"..5, // STB_"MAX_CHANNELS".. is too small
-		"file_open_failure"..6, // fopen() failed
-		"seek_without_length"..7, // can't seek in unknown-length file
+		"invalid_api_mixing".enum, // can't mix API modes
+		"outofmem".enum, // not enough memory
+		"feature_not_supported".enum, // uses floor 0
+		"too_many_channels".enum, // STB_"MAX_CHANNELS".. is too small
+		"file_open_failure".enum, // fopen() failed
+		"seek_without_length".enum, // can't seek in unknown-length file
 
-		"unexpected_eof"..10, // file is truncated?
-		"seek_invalid"..11, // seek past EOF
+		"unexpected_eof" enum 10, // file is truncated?
+		"seek_invalid".enum, // seek past EOF
 
 		// decoding errors (corrupt/invalid stream) -- you probably
 		// don't care about the exact details of these
 
 		// vorbis errors:
-		"invalid_setup"..20,
-		"invalid_stream"..21,
+		"invalid_setup" enum 20,
+		"invalid_stream".enum,
 
 		// ogg errors:
-		"missing_capture_pattern"..30,
-		"invalid_stream_structure_version"..31,
-		"continued_packet_flag_invalid"..32,
-		"incorrect_stream_serial_number"..33,
-		"invalid_first_page"..34,
-		"bad_packet_type"..35,
-		"cant_find_last_page"..36,
-		"seek_failed"..37
+		"missing_capture_pattern" enum 30,
+		"invalid_stream_structure_version".enum,
+		"continued_packet_flag_invalid".enum,
+		"incorrect_stream_serial_number".enum,
+		"invalid_first_page".enum,
+		"bad_packet_type".enum,
+		"cant_find_last_page".enum,
+		"seek_failed".enum
 	)
 
 	// FUNCTIONS USEABLE WITH ALL INPUT MODES

@@ -23,12 +23,12 @@ val stb_rect_pack = "STBRectPack".nativeClass(packageName = STB_PACKAGE, prefix 
 		stb_truetype (which is primarily what this is meant to replace).
 		"""
 
-	IntConstant(
+	EnumConstant(
 		"Packing heuristics",
 
-	    "HEURISTIC_Skyline_default"..0,
+	    "HEURISTIC_Skyline_default".enum,
 		"HEURISTIC_Skyline_BL_sortHeight" expr "STBRP_HEURISTIC_Skyline_default",
-		"HEURISTIC_Skyline_BF_sortHeight"..1
+		"HEURISTIC_Skyline_BF_sortHeight".enum
 	)
 
 	void(
