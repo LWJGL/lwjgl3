@@ -269,7 +269,14 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
 	public T get() {
-		return newInstance(address0() + nextGetIndex());
+		int curr = container.position();
+		int next = curr + sizeof();
+		if ( container.limit() < next )
+			throw new BufferUnderflowException();
+
+		T value = newInstance(address0() + curr);
+		container.position(next);
+		return value;
 	}
 
 	/**
@@ -280,7 +287,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.BufferUnderflowException If the buffer's current position is not smaller than its limit
 	 */
 	public SELF get(T value) {
-		memCopy(address0() + nextGetIndex(), value.address(), sizeof());
+		int sizeof = sizeof();
+		memCopy(address0() + nextGetIndex(container, sizeof), value.address(), sizeof);
 		return self();
 	}
 
@@ -297,7 +305,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF put(T value) {
-		memCopy(value.address(), address0() + nextPutIndex(), sizeof());
+		int sizeof = sizeof();
+		memCopy(value.address(), address0() + nextPutIndex(container, sizeof), sizeof);
 		return self();
 	}
 
@@ -314,7 +323,7 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
 	public T get(int index) {
-		return newInstance(address0() + checkIndex(index));
+		return newInstance(address0() + checkIndex(container, index, sizeof()));
 	}
 
 	/**
@@ -327,7 +336,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws IndexOutOfBoundsException If <tt>index</tt> is negative or not smaller than the buffer's limit
 	 */
 	public SELF get(int index, T value) {
-		memCopy(address0() + checkIndex(index), value.address(), sizeof());
+		int sizeof = sizeof();
+		memCopy(address0() + checkIndex(container, index, sizeof), value.address(), sizeof);
 		return self();
 	}
 
@@ -345,7 +355,8 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 	 * @throws java.nio.ReadOnlyBufferException If this buffer is read-only
 	 */
 	public SELF put(int index, T value) {
-		memCopy(value.address(), address0() + checkIndex(index), sizeof());
+		int sizeof = sizeof();
+		memCopy(value.address(), address0() + checkIndex(container, index, sizeof), sizeof);
 		return self();
 	}
 
@@ -562,34 +573,26 @@ public abstract class StructBuffer<T extends Struct, SELF extends StructBuffer<T
 
 	// -----------------------------
 
-	private int nextGetIndex() {
-		return nextGetIndex(1);
-	}
-
-	private int nextGetIndex(int nb) {
+	private static int nextGetIndex(ByteBuffer container, int sizeof) {
 		int curr = container.position();
-		int next = curr + nb * sizeof();
+		int next = curr + sizeof;
 		if ( container.limit() < next )
 			throw new BufferUnderflowException();
 		container.position(next);
 		return curr;
 	}
 
-	private int nextPutIndex() {
-		return nextPutIndex(1);
-	}
-
-	private int nextPutIndex(int nb) {
+	private static int nextPutIndex(ByteBuffer container, int sizeof) {
 		int curr = container.position();
-		int next = curr + nb * sizeof();
+		int next = curr + sizeof;
 		if ( container.limit() < next )
 			throw new BufferOverflowException();
 		container.position(next);
 		return curr;
 	}
 
-	private int checkIndex(int i) {
-		if ( (i < 0) || (container.limit() < i * sizeof()) )
+	private static int checkIndex(ByteBuffer container, int i, int sizeof) {
+		if ( (i < 0) || (container.limit() < i * sizeof) )
 			throw new IndexOutOfBoundsException();
 		return i;
 	}
