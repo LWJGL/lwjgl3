@@ -59,8 +59,10 @@ public final class EGL {
 		if ( libName == null ) {
 			switch ( LWJGLUtil.getPlatform() ) {
 				case WINDOWS:
-				case LINUX:
 					libName = "libEGL";
+					break;
+				case LINUX:
+					libName = "EGL";
 					break;
 				case MACOSX:
 					throw new UnsupportedOperationException("MacOS X does not support EGL");
