@@ -58,14 +58,14 @@ public final class EGL {
 		String libName = Configuration.LIBRARY_NAME_EGL.get();
 		if ( libName == null ) {
 			switch ( LWJGLUtil.getPlatform() ) {
-				case WINDOWS:
-					libName = "libEGL";
-					break;
 				case LINUX:
 					libName = "EGL";
 					break;
 				case MACOSX:
 					throw new UnsupportedOperationException("MacOS X does not support EGL");
+				case WINDOWS:
+					libName = "libEGL";
+					break;
 				default:
 					throw new IllegalStateException();
 			}

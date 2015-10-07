@@ -72,13 +72,13 @@ public final class GLES {
 		String libName;
 		switch ( LWJGLUtil.getPlatform() ) {
 			case LINUX:
-				libName = "libGLESv2";
-				break;
-			case WINDOWS:
 				libName = "GLESv2";
 				break;
 			case MACOSX:
 				throw new UnsupportedOperationException("MacOS X does not support OpenGL ES");
+			case WINDOWS:
+				libName = "libGLESv2";
+				break;
 			default:
 				throw new IllegalStateException();
 		}
