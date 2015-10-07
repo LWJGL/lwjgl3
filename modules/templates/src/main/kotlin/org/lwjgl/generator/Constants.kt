@@ -39,10 +39,15 @@ val FloatConstant = ConstantType(Float::class) { "%sf".format(it) }
 
 val StringConstant = ConstantType(String::class) { "\"$it\"" }
 
-data class EnumValue(
+open class EnumValue(
 	val documentation: String? = null,
 	val value: Int? = null
 )
+
+class EnumValueExpression(
+	documentation: String? = null,
+	val expression: String
+) : EnumValue(documentation, null)
 
 val EnumConstant = ConstantType(EnumValue::class, { "0x%X".format(it) })
 
@@ -53,7 +58,7 @@ class ConstantBlock<T : Any>(
 	val nativeClass: NativeClass,
 	val constantType: ConstantType<T>,
 	val documentation: String,
-	vararg val constants: Constant<T>
+	vararg val constants: Constant<out T>
 ) {
 
 	private var noPrefix = false
@@ -130,7 +135,7 @@ class ConstantBlock<T : Any>(
 		println(";")
 	}
 
-	private fun PrintWriter.printConstant(constant: Constant<T>, indent: String, alignment: Int) {
+	private fun PrintWriter.printConstant(constant: Constant<out T>, indent: String, alignment: Int) {
 		print("$indent${getConstantName(constant.name)}")
 		for (i in 0..(alignment - constant.name.length() - 1))
 			print(' ')

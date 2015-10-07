@@ -340,7 +340,7 @@ class NativeClass(
 
 	// DSL extensions
 
-	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<T>): ConstantBlock<T> {
+	operator fun <T : Any> ConstantType<T>.invoke(documentation: String, vararg constants: Constant<out T>): ConstantBlock<T> {
 		val block = ConstantBlock(this@NativeClass, this, processDocumentation(documentation).toJavaDoc(), *constants)
 		constantBlocks add block
 		return block
@@ -354,6 +354,9 @@ class NativeClass(
 	fun String.enum(documentation: String) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc()))
 	fun String.enum(value: Int) = Constant(this, EnumValue(value = value))
 	fun String.enum(documentation: String, value: Int) = Constant(this, EnumValue(processDocumentation(documentation).toJavaDoc(), value))
+
+	fun String.enumExpr(expression: String) = Constant(this, EnumValueExpression(expression = expression))
+	fun String.enumExpr(documentation: String, expression: String) = Constant(this, EnumValueExpression(processDocumentation(documentation).toJavaDoc(), expression))
 
 	/** Adds a new constant whose value is an expression. */
 	fun <T : Any> String.expr(expression: String) = ConstantExpression<T>(this, expression)
